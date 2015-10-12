@@ -1732,7 +1732,6 @@ Partial Class frm_first
         '
         'OpenFile
         '
-        Me.OpenFile.FileName = "OpenFile"
         '
         'PrintDialog1
         '
