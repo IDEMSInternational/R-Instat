@@ -81,6 +81,9 @@ Minitab (*.mtw)|*.mtw|SPSS/Win (*.sav)|*.sav|Excel 2-5/95/97 (*.xls)|*.xls|All F
                     oda.Fill(dt)
                     con.Close()
 
+
+
+
                     'Populate DataGridView.
                     frm_datasheet.dtViewData.DataSource = dt
                     frm_datasheet.grid.Load(filePath)
