@@ -118,6 +118,31 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSelectionModule.vb" />
+    <Compile Include="dlgDescriptiveStatistics.Designer.vb">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescriptiveStatistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dataselectiontemplate.Designer.vb">
+      <DependentUpon>Dataselectiontemplate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dataselectiontemplate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLineTest.Designer.vb">
+      <DependentUpon>frmLineTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLineTest.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frm_cmd_window.Designer.vb">
       <DependentUpon>frm_cmd_window.vb</DependentUpon>
     </Compile>
@@ -137,6 +162,8 @@
       <DependentUpon>frm_main.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Line.vb" />
+    <Compile Include="LineDelim.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -154,6 +181,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgDescriptiveStatistics.resx">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dataselectiontemplate.resx">
+      <DependentUpon>Dataselectiontemplate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLineTest.resx">
+      <DependentUpon>frmLineTest.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_cmd_window.resx">
       <DependentUpon>frm_cmd_window.vb</DependentUpon>
     </EmbeddedResource>

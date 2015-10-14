@@ -22,3 +22,19 @@ C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\ReoGridDemo.exe
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\unvell.ReoGridEditor.exe
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\unvell.ReoScript.EditorLib.dll
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\instat.exe.config
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.exe
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.xml
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.pdb
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.vbprojResolveAssemblyReference.cache
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.dialogtrial.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.Form1.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frm_cmd_window.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frm_datasheet.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frm_first.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.Resources.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.vbproj.GenerateResource.Cache
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.Form2.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.Dataselection.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.Form3.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frmLineTest.resources
