@@ -58,3 +58,4 @@ C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\RDotNet.Nati
 C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.exe.manifest
 C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.application
 C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.dlgDescriptiveStatistics.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.Form2.resources
