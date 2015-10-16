@@ -8,8 +8,6 @@ Imports unvell.ReoScript
 
 Public Class frm_main
     Dim fileOpen As New rLink
-
-
     Private Sub frm_first_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grid.SetSettings(WorkbookSettings.View_ShowSheetTabControl, True)
         grid.SheetTabControlWidth = 200
