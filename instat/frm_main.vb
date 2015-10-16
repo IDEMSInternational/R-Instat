@@ -3,6 +3,7 @@ Imports System.Data
 Imports System.Data.OleDb
 Imports RDotNet
 Imports unvell.ReoGrid
+Imports unvell.ReoScript
 
 
 Public Class frm_main
@@ -12,6 +13,9 @@ Public Class frm_main
     Private Sub frm_first_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grid.SetSettings(WorkbookSettings.View_ShowSheetTabControl, True)
         grid.SheetTabControlWidth = 200
+        frmScript.MdiParent = Me
+        frmScript.Show()
+        frmScript.editor.Srm = grid.Srm
 
     End Sub
 
@@ -25,5 +29,9 @@ Public Class frm_main
 
     Private Sub mnuFileNew_Click(sender As Object, e As EventArgs) Handles mnuFileNew.Click
         Dim sheet = grid.CreateWorksheet()
+    End Sub
+
+    Private Sub mnuScriptEditor_Click(sender As Object, e As EventArgs) Handles mnuScriptEditor.Click
+        frmScript.Show()
     End Sub
 End Class

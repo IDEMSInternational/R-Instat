@@ -230,6 +230,8 @@ Partial Class frm_main
         Me.SimulationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SpellLengthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TotalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuScriptEditor = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Tool_strip = New System.Windows.Forms.ToolStrip()
@@ -263,7 +265,7 @@ Partial Class frm_main
         '
         'Menu_Strip
         '
-        Me.Menu_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.EditToolStripMenuItem, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.Menu_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.EditToolStripMenuItem, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.ToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.Menu_Strip.Location = New System.Drawing.Point(0, 0)
         Me.Menu_Strip.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.Menu_Strip.Name = "Menu_Strip"
@@ -1524,6 +1526,19 @@ Partial Class frm_main
         Me.TotalsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.TotalsToolStripMenuItem.Text = "Totals..."
         '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuScriptEditor})
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(49, 20)
+        Me.ToolStripMenuItem1.Text = "Script"
+        '
+        'mnuScriptEditor
+        '
+        Me.mnuScriptEditor.Name = "mnuScriptEditor"
+        Me.mnuScriptEditor.Size = New System.Drawing.Size(178, 22)
+        Me.mnuScriptEditor.Text = "Command Window"
+        '
         'WindowToolStripMenuItem
         '
         Me.WindowToolStripMenuItem.Name = "WindowToolStripMenuItem"
@@ -1706,7 +1721,7 @@ Partial Class frm_main
         '
         Me.grid.BackColor = System.Drawing.Color.White
         Me.grid.ColumnHeaderContextMenuStrip = Nothing
-        Me.grid.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grid.Dock = System.Windows.Forms.DockStyle.Left
         Me.grid.LeadHeaderContextMenuStrip = Nothing
         Me.grid.Location = New System.Drawing.Point(0, 49)
         Me.grid.Name = "grid"
@@ -1716,7 +1731,7 @@ Partial Class frm_main
         Me.grid.SheetTabControlNewButtonVisible = True
         Me.grid.SheetTabControlWidth = 60
         Me.grid.SheetTabNewButtonVisible = True
-        Me.grid.Size = New System.Drawing.Size(875, 472)
+        Me.grid.Size = New System.Drawing.Size(800, 472)
         Me.grid.TabIndex = 4
         '
         'frm_main
@@ -1730,6 +1745,7 @@ Partial Class frm_main
         Me.Controls.Add(Me.Tool_strip)
         Me.Controls.Add(Me.Menu_Strip)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.Menu_Strip
         Me.Name = "frm_main"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -1978,4 +1994,6 @@ Partial Class frm_main
     Public WithEvents Menu_Strip As MenuStrip
     Friend WithEvents grid As unvell.ReoGrid.ReoGridControl
     Friend WithEvents tstatus As ToolStripStatusLabel
+    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents mnuScriptEditor As ToolStripMenuItem
 End Class

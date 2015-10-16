@@ -116,6 +116,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\unvell.ReoGrid.dll</HintPath>
     </Reference>
+    <Reference Include="unvell.ReoScript, Version=1.5.0.0, Culture=neutral, PublicKeyToken=85339a558a3a0c58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReoGrid-0.9.0.0-Beta-Build\ReoGrid-0.9.0.0-Beta-Extension\unvell.ReoScript.dll</HintPath>
+    </Reference>
+    <Reference Include="unvell.ReoScript.EditorLib, Version=1.5.0.0, Culture=neutral, PublicKeyToken=85339a558a3a0c58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ReoGrid-0.9.0.0-Beta-Build\ReoGrid-0.9.0.0-Beta-Demo-Binary\ReoGrid-0.9.0.0-Beta-Demo-Binary\unvell.ReoScript.EditorLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -132,18 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dark.vb" />
-    <Compile Include="frm_cmd_window.Designer.vb">
-      <DependentUpon>frm_cmd_window.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frm_cmd_window.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_datasheet.Designer.vb">
-      <DependentUpon>frm_datasheet.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frm_datasheet.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frm_main.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -167,14 +163,14 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="rLink.vb" />
+    <Compile Include="Script Editor.Designer.vb">
+      <DependentUpon>Script Editor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Script Editor.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frm_cmd_window.resx">
-      <DependentUpon>frm_cmd_window.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_datasheet.resx">
-      <DependentUpon>frm_datasheet.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frm_main.resx">
       <DependentUpon>frm_main.vb</DependentUpon>
     </EmbeddedResource>
@@ -183,6 +179,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Script Editor.resx">
+      <DependentUpon>Script Editor.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
