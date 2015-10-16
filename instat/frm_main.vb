@@ -34,4 +34,21 @@ Public Class frm_main
     Private Sub mnuScriptEditor_Click(sender As Object, e As EventArgs) Handles mnuScriptEditor.Click
         frmScript.Show()
     End Sub
+
+    Private Sub CalculationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalculationsToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GraphicsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GraphicsToolStripMenuItem.Click
+
+
+    End Sub
+
+    Private Sub PlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub CurrentWindowCtrlWToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CurrentWindowCtrlWToolStripMenuItem.Click
+
+    End Sub
 End Class

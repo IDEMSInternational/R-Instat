@@ -140,6 +140,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dark.vb" />
+    <Compile Include="dlgDataSelectionTemplate.Designer.vb">
+      <DependentUpon>dlgDataSelectionTemplate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDataSelectionTemplate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgDialogtemplate.Designer.vb">
+      <DependentUpon>dlgDialogtemplate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDialogtemplate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgGraphicsDialogTemplate.Designer.vb">
+      <DependentUpon>dlgGraphicsDialogTemplate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGraphicsDialogTemplate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frm_main.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +189,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgDataSelectionTemplate.resx">
+      <DependentUpon>dlgDataSelectionTemplate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDialogtemplate.resx">
+      <DependentUpon>dlgDialogtemplate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGraphicsDialogTemplate.resx">
+      <DependentUpon>dlgGraphicsDialogTemplate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_main.resx">
       <DependentUpon>frm_main.vb</DependentUpon>
     </EmbeddedResource>
