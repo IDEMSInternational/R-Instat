@@ -27,3 +27,12 @@ C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\RDotNet.NativeLibrary.xml
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frm_main.resources
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frmScript.resources
+C:\Users\MMC 1\Source\Repos\Instat2\instat\bin\Debug\instat.exe.config
+C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.exe
+C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.xml
+C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.pdb
+C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.vbprojResolveAssemblyReference.cache
+C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.frm_main.resources
+C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.Resources.resources
+C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.frmScript.resources
+C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.vbproj.GenerateResource.Cache

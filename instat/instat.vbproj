@@ -180,6 +180,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource1.resx" />
     <EmbeddedResource Include="Script Editor.resx">
       <DependentUpon>Script Editor.vb</DependentUpon>
     </EmbeddedResource>
