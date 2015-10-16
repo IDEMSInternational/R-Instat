@@ -53,7 +53,7 @@ Partial Class frm_main
         Me.SelectAllCtrlsAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FindCtrlFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReplaceCtrlHToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FontCtrlTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditFont = New System.Windows.Forms.ToolStripMenuItem()
         Me.RunWorksheetEditorF7ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewEditTextToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewF8ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -258,6 +258,10 @@ Partial Class frm_main
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.grid = New unvell.ReoGrid.ReoGridControl()
+        Me.DialogTestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GraphicsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DataSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DialogTemplateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_Strip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.stsStrip.SuspendLayout()
@@ -265,7 +269,7 @@ Partial Class frm_main
         '
         'Menu_Strip
         '
-        Me.Menu_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.EditToolStripMenuItem, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.ToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.Menu_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.EditToolStripMenuItem, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.ToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem, Me.DialogTestToolStripMenuItem})
         Me.Menu_Strip.Location = New System.Drawing.Point(0, 0)
         Me.Menu_Strip.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.Menu_Strip.Name = "Menu_Strip"
@@ -388,7 +392,7 @@ Partial Class frm_main
         '
         'EditToolStripMenuItem
         '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UndoCtrlZToolStripMenuItem, Me.CutCtrlXToolStripMenuItem, Me.CopyCtrlCToolStripMenuItem, Me.CopySpecialCtrlYToolStripMenuItem, Me.PasteCtrlVToolStripMenuItem, Me.ClearDelToolStripMenuItem, Me.SelectAllCtrlsAToolStripMenuItem, Me.FindCtrlFToolStripMenuItem, Me.ReplaceCtrlHToolStripMenuItem, Me.FontCtrlTToolStripMenuItem, Me.RunWorksheetEditorF7ToolStripMenuItem, Me.ViewEditTextToolStripMenuItem, Me.ViewEditMacroToolStripMenuItem, Me.CommandLoggingToolStripMenuItem, Me.OutputSpoolingToolStripMenuItem, Me.REcallToolStripMenuItem, Me.FlagsToolStripMenuItem, Me.OPtionsToolStripMenuItem})
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UndoCtrlZToolStripMenuItem, Me.CutCtrlXToolStripMenuItem, Me.CopyCtrlCToolStripMenuItem, Me.CopySpecialCtrlYToolStripMenuItem, Me.PasteCtrlVToolStripMenuItem, Me.ClearDelToolStripMenuItem, Me.SelectAllCtrlsAToolStripMenuItem, Me.FindCtrlFToolStripMenuItem, Me.ReplaceCtrlHToolStripMenuItem, Me.mnuEditFont, Me.RunWorksheetEditorF7ToolStripMenuItem, Me.ViewEditTextToolStripMenuItem, Me.ViewEditMacroToolStripMenuItem, Me.CommandLoggingToolStripMenuItem, Me.OutputSpoolingToolStripMenuItem, Me.REcallToolStripMenuItem, Me.FlagsToolStripMenuItem, Me.OPtionsToolStripMenuItem})
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
         Me.EditToolStripMenuItem.Text = "Edit"
@@ -447,11 +451,11 @@ Partial Class frm_main
         Me.ReplaceCtrlHToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.ReplaceCtrlHToolStripMenuItem.Text = "Replace       Ctrl+H"
         '
-        'FontCtrlTToolStripMenuItem
+        'mnuEditFont
         '
-        Me.FontCtrlTToolStripMenuItem.Name = "FontCtrlTToolStripMenuItem"
-        Me.FontCtrlTToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.FontCtrlTToolStripMenuItem.Text = "Font       Ctrl+T"
+        Me.mnuEditFont.Name = "mnuEditFont"
+        Me.mnuEditFont.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditFont.Text = "Font       Ctrl+T"
         '
         'RunWorksheetEditorF7ToolStripMenuItem
         '
@@ -1734,6 +1738,31 @@ Partial Class frm_main
         Me.grid.Size = New System.Drawing.Size(800, 472)
         Me.grid.TabIndex = 4
         '
+        'DialogTestToolStripMenuItem
+        '
+        Me.DialogTestToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GraphicsToolStripMenuItem1, Me.DataSelectionToolStripMenuItem, Me.DialogTemplateToolStripMenuItem})
+        Me.DialogTestToolStripMenuItem.Name = "DialogTestToolStripMenuItem"
+        Me.DialogTestToolStripMenuItem.Size = New System.Drawing.Size(75, 20)
+        Me.DialogTestToolStripMenuItem.Text = "Dialog test"
+        '
+        'GraphicsToolStripMenuItem1
+        '
+        Me.GraphicsToolStripMenuItem1.Name = "GraphicsToolStripMenuItem1"
+        Me.GraphicsToolStripMenuItem1.Size = New System.Drawing.Size(158, 22)
+        Me.GraphicsToolStripMenuItem1.Text = "graphics "
+        '
+        'DataSelectionToolStripMenuItem
+        '
+        Me.DataSelectionToolStripMenuItem.Name = "DataSelectionToolStripMenuItem"
+        Me.DataSelectionToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
+        Me.DataSelectionToolStripMenuItem.Text = "Data Selection"
+        '
+        'DialogTemplateToolStripMenuItem
+        '
+        Me.DialogTemplateToolStripMenuItem.Name = "DialogTemplateToolStripMenuItem"
+        Me.DialogTemplateToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
+        Me.DialogTemplateToolStripMenuItem.Text = "Dialog template"
+        '
         'frm_main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1817,7 +1846,7 @@ Partial Class frm_main
     Friend WithEvents SelectAllCtrlsAToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FindCtrlFToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReplaceCtrlHToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FontCtrlTToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuEditFont As ToolStripMenuItem
     Friend WithEvents RunWorksheetEditorF7ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewEditTextToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NewF8ToolStripMenuItem As ToolStripMenuItem
@@ -1996,4 +2025,8 @@ Partial Class frm_main
     Friend WithEvents tstatus As ToolStripStatusLabel
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents mnuScriptEditor As ToolStripMenuItem
+    Friend WithEvents DialogTestToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GraphicsToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents DataSelectionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DialogTemplateToolStripMenuItem As ToolStripMenuItem
 End Class

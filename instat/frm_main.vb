@@ -14,7 +14,10 @@ Public Class frm_main
         grid.SetSettings(WorkbookSettings.View_ShowSheetTabControl, True)
         grid.SheetTabControlWidth = 200
         frmScript.MdiParent = Me
-        frmScript.Show()
+        dlgGraphicsDialogTemplate.MdiParent = Me
+        dlgDataSelectionTemplate.MdiParent = Me
+        dlgDialogTemplate.MdiParent = Me
+        'frmScript.Show()
         frmScript.editor.Srm = grid.Srm
 
     End Sub
@@ -63,7 +66,8 @@ Public Class frm_main
 
     End Sub
 
-    Private Sub FontCtrlTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FontCtrlTToolStripMenuItem.Click
-        dlgGraphicsDialogTemplate.ShowDialog()
+    Private Sub FontCtrlTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuEditFont.Click
+        dlgGraphicsDialogTemplate.Show()
+
     End Sub
 End Class
