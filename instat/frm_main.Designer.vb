@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frm_main
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frm_main
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_main))
         Me.Menu_Strip = New System.Windows.Forms.MenuStrip()
@@ -258,6 +258,7 @@ Partial Class frm_main
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.grid = New unvell.ReoGrid.ReoGridControl()
+        Me.rEditor = New unvell.ReoScript.Editor.ReoScriptEditorControl()
         Me.Menu_Strip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.stsStrip.SuspendLayout()
@@ -1731,8 +1732,16 @@ Partial Class frm_main
         Me.grid.SheetTabControlNewButtonVisible = True
         Me.grid.SheetTabControlWidth = 60
         Me.grid.SheetTabNewButtonVisible = True
-        Me.grid.Size = New System.Drawing.Size(800, 472)
+        Me.grid.Size = New System.Drawing.Size(828, 472)
         Me.grid.TabIndex = 4
+        '
+        'rEditor
+        '
+        Me.rEditor.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.rEditor.Location = New System.Drawing.Point(828, 49)
+        Me.rEditor.Name = "rEditor"
+        Me.rEditor.Size = New System.Drawing.Size(47, 472)
+        Me.rEditor.TabIndex = 6
         '
         'frm_main
         '
@@ -1740,6 +1749,7 @@ Partial Class frm_main
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(875, 543)
+        Me.Controls.Add(Me.rEditor)
         Me.Controls.Add(Me.grid)
         Me.Controls.Add(Me.stsStrip)
         Me.Controls.Add(Me.Tool_strip)
@@ -1996,4 +2006,5 @@ Partial Class frm_main
     Friend WithEvents tstatus As ToolStripStatusLabel
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents mnuScriptEditor As ToolStripMenuItem
+    Friend WithEvents rEditor As unvell.ReoScript.Editor.ReoScriptEditorControl
 End Class
