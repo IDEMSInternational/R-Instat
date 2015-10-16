@@ -83,8 +83,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="DynamicInterop, Version=0.7.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicInterop.0.7.4\lib\net40\DynamicInterop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FastColoredTextBox">
       <HintPath>References\FastColoredTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="RDotNet, Version=1.6.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R.NET.Community.1.6.5\lib\net40\RDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RDotNet.NativeLibrary, Version=1.6.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R.NET.Community.1.6.5\lib\net40\RDotNet.NativeLibrary.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ReoGridDemo">
       <HintPath>References\ReoGridDemo.exe</HintPath>
@@ -93,6 +105,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -118,6 +131,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dark.vb" />
     <Compile Include="frm_cmd_window.Designer.vb">
       <DependentUpon>frm_cmd_window.vb</DependentUpon>
     </Compile>
@@ -152,6 +166,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="rLink.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frm_cmd_window.resx">
@@ -183,6 +198,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\Carlosjj-Microsoft-Office-2013-Excel.ico" />
   </ItemGroup>
   <ItemGroup>
