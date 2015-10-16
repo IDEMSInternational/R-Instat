@@ -49,6 +49,21 @@ Public Class frm_main
     End Sub
 
     Private Sub CurrentWindowCtrlWToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CurrentWindowCtrlWToolStripMenuItem.Click
+        dlgDataSelectionTemplate.Show()
+    End Sub
 
+    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
+    End Sub
+
+    Private Sub ColumnStatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColumnStatisticsToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GraphicsToolStripMenuItem1_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub FontCtrlTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FontCtrlTToolStripMenuItem.Click
+        dlgGraphicsDialogTemplate.ShowDialog()
     End Sub
 End Class

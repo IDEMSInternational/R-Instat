@@ -116,7 +116,7 @@ Partial Class dlgGraphicsDialogTemplate
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgGraphicsDialogTemplate"
-        Me.Text = "dlgGraphicsDialogTemplate"
+        Me.Text = "Graphics Dialog Template"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
