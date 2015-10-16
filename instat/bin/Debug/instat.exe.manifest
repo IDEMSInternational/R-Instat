@@ -78,14 +78,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="instat.exe" size="131536">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="instat.exe" size="132048">
       <assemblyIdentity name="instat" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ELURkXd7ekBipqqaAL3+7qd66lWcRDqStKpvV93ICkQ=</dsig:DigestValue>
+        <dsig:DigestValue>jpDylNS6TBe3mQCEAvfLIamXZ2mydkPMHXZHjz9K/s0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
