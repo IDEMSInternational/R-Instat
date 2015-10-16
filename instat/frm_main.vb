@@ -13,9 +13,9 @@ Public Class frm_main
     Private Sub frm_first_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grid.SetSettings(WorkbookSettings.View_ShowSheetTabControl, True)
         grid.SheetTabControlWidth = 200
-        frmScript.MdiParent = Me
-        frmScript.Show()
-        frmScript.editor.Srm = grid.Srm
+        'frmScript.MdiParent = Me
+        'frmScript.Show()
+        rEditor.Srm = grid.Srm
 
     End Sub
 
@@ -32,6 +32,6 @@ Public Class frm_main
     End Sub
 
     Private Sub mnuScriptEditor_Click(sender As Object, e As EventArgs) Handles mnuScriptEditor.Click
-        frmScript.Show()
+        rEditor.Focus()
     End Sub
 End Class
