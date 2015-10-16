@@ -76,7 +76,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
@@ -146,6 +146,12 @@
     <Compile Include="dlgDataSelectionTemplate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDescriptiveStatistics.Designer.vb">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescriptiveStatistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDialogtemplate.Designer.vb">
       <DependentUpon>dlgDialogtemplate.vb</DependentUpon>
     </Compile>
@@ -197,6 +203,9 @@
   <ItemGroup>
     <EmbeddedResource Include="dlgDataSelectionTemplate.resx">
       <DependentUpon>dlgDataSelectionTemplate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescriptiveStatistics.resx">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDialogtemplate.resx">
       <DependentUpon>dlgDialogtemplate.vb</DependentUpon>

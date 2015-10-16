@@ -46,14 +46,18 @@ Public Class frm_main
     End Sub
 
     Private Sub PlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotToolStripMenuItem.Click
+        dlgGraphicsDialogTemplate.Show()
 
     End Sub
 
     Private Sub CurrentWindowCtrlWToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CurrentWindowCtrlWToolStripMenuItem.Click
-        dlgDataSelectionTemplate.Show()
+
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
+        dlgDescriptiveStatistics.Show()
+
+
     End Sub
 
     Private Sub ColumnStatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColumnStatisticsToolStripMenuItem.Click
@@ -65,7 +69,16 @@ Public Class frm_main
     End Sub
 
     Private Sub FontCtrlTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuEditFont.Click
-        dlgGraphicsDialogTemplate.Show()
+        dlgDataSelectionTemplate.Show()
+        dlgDialogTemplate.Show()
+
+
+
+    End Sub
+
+    Private Sub GraphicsToolStripMenuItem1_Click_1(sender As Object, e As EventArgs)
+
+
 
     End Sub
 End Class
