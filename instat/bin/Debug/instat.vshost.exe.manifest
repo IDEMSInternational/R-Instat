@@ -54,6 +54,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DynamicInterop.dll" size="15360">
+      <assemblyIdentity name="DynamicInterop" version="0.7.4.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>aLQQXzJIC46My95awtSE/nGhM5TPBXWgVdTARQyqgJ0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FastColoredTextBox.dll" size="227840">
       <assemblyIdentity name="FastColoredTextBox" version="2.9.1.0" publicKeyToken="06D1F484EBCD09A9" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -66,14 +78,38 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="instat.exe" size="295888">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="instat.exe" size="131536">
       <assemblyIdentity name="instat" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Lmupg6iAW8kyiZmAZtD4mxeUdQCRPGOFuRkhIidHVWc=</dsig:DigestValue>
+        <dsig:DigestValue>ELURkXd7ekBipqqaAL3+7qd66lWcRDqStKpvV93ICkQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RDotNet.dll" size="108032">
+      <assemblyIdentity name="RDotNet" version="1.6.5.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>ZdSLN8caVArGxa+232d3IsSqn7lp4u2dF5Nb1tsQl2s=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RDotNet.NativeLibrary.dll" size="12288">
+      <assemblyIdentity name="RDotNet.NativeLibrary" version="1.6.5.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>p7rGjwDQcP84cOkvWtdNP2eXErDiltWSmslz7C8Ebic=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
