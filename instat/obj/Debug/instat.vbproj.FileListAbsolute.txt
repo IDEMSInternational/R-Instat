@@ -1,6 +1,5 @@
 c:\users\deaspo\documents\visual studio 2015\Projects\Instat+ for windows\instat\bin\Debug\instat.exe.config
 c:\users\deaspo\documents\visual studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.vbprojResolveAssemblyReference.cache
-c:\users\deaspo\documents\visual studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frm_first.resources
 c:\users\deaspo\documents\visual studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.Resources.resources
 c:\users\deaspo\documents\visual studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.vbproj.GenerateResource.Cache
 c:\users\deaspo\documents\visual studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.xml
@@ -22,3 +21,10 @@ C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\ReoGridDemo.exe
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\unvell.ReoGridEditor.exe
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\unvell.ReoScript.EditorLib.dll
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\DynamicInterop.dll
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\RDotNet.dll
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\RDotNet.NativeLibrary.dll
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\DynamicInterop.xml
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\RDotNet.xml
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\RDotNet.NativeLibrary.xml
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frm_main.resources

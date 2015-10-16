@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frm_first
+Partial Class frm_main
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,15 +22,13 @@ Partial Class frm_first
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim CurrentTripStatus As System.Windows.Forms.ToolStripStatusLabel
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_first))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_main))
         Me.Menu_Strip = New System.Windows.Forms.MenuStrip()
         Me.FileStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NewWorksheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenWorksheetCtrlOToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenFromLibraryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CloseWorksheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileNew = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileOpen = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileLibrary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileClose = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ImportExportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportASCIIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -252,33 +250,22 @@ Partial Class frm_first
         Me.SubmitToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.Status_Strip = New System.Windows.Forms.StatusStrip()
-        Me.ServerStripStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.WarningsStripStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.stsStrip = New System.Windows.Forms.StatusStrip()
+        Me.tstatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
-        Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
-        CurrentTripStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.grid = New unvell.ReoGrid.ReoGridControl()
         Me.Menu_Strip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
-        Me.Status_Strip.SuspendLayout()
+        Me.stsStrip.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'CurrentTripStatus
-        '
-        CurrentTripStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
-        CurrentTripStatus.Name = "CurrentTripStatus"
-        CurrentTripStatus.Padding = New System.Windows.Forms.Padding(0, 0, 100, 0)
-        CurrentTripStatus.Size = New System.Drawing.Size(209, 17)
-        CurrentTripStatus.Text = "&Current Worksheet:"
-        CurrentTripStatus.ToolTipText = "Opened worksheet"
         '
         'Menu_Strip
         '
         Me.Menu_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.EditToolStripMenuItem, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.Menu_Strip.Location = New System.Drawing.Point(0, 0)
+        Me.Menu_Strip.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.Menu_Strip.Name = "Menu_Strip"
         Me.Menu_Strip.Size = New System.Drawing.Size(875, 24)
         Me.Menu_Strip.TabIndex = 0
@@ -286,40 +273,34 @@ Partial Class frm_first
         '
         'FileStripMenuItem
         '
-        Me.FileStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.NewWorksheetToolStripMenuItem, Me.OpenWorksheetCtrlOToolStripMenuItem, Me.OpenFromLibraryToolStripMenuItem, Me.CloseWorksheetToolStripMenuItem, Me.ToolStripSeparator4, Me.ImportExportToolStripMenuItem, Me.ToolStripSeparator5, Me.CloseToolStripMenuItem, Me.SaveCtrlSToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.PrintCtrlPToolStripMenuItem, Me.PrintPreviewToolStripMenuItem, Me.ToolStripSeparator6, Me.ExitToolStripMenuItem})
+        Me.FileStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNew, Me.mnuFileOpen, Me.mnuFileLibrary, Me.mnuFileClose, Me.ToolStripSeparator4, Me.ImportExportToolStripMenuItem, Me.ToolStripSeparator5, Me.CloseToolStripMenuItem, Me.SaveCtrlSToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.PrintCtrlPToolStripMenuItem, Me.PrintPreviewToolStripMenuItem, Me.ToolStripSeparator6, Me.ExitToolStripMenuItem})
         Me.FileStripMenuItem.Name = "FileStripMenuItem"
         Me.FileStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileStripMenuItem.Text = "File"
         '
-        'FileToolStripMenuItem
+        'mnuFileNew
         '
-        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.FileToolStripMenuItem.Text = "File"
+        Me.mnuFileNew.Name = "mnuFileNew"
+        Me.mnuFileNew.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileNew.Text = "New Worksheet...    Ctrl+N"
         '
-        'NewWorksheetToolStripMenuItem
+        'mnuFileOpen
         '
-        Me.NewWorksheetToolStripMenuItem.Name = "NewWorksheetToolStripMenuItem"
-        Me.NewWorksheetToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.NewWorksheetToolStripMenuItem.Text = "New Worksheet...    Ctrl+N"
+        Me.mnuFileOpen.Name = "mnuFileOpen"
+        Me.mnuFileOpen.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileOpen.Text = "Open Worksheet...    Ctrl+O"
         '
-        'OpenWorksheetCtrlOToolStripMenuItem
+        'mnuFileLibrary
         '
-        Me.OpenWorksheetCtrlOToolStripMenuItem.Name = "OpenWorksheetCtrlOToolStripMenuItem"
-        Me.OpenWorksheetCtrlOToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.OpenWorksheetCtrlOToolStripMenuItem.Text = "Open Worksheet...    Ctrl+O"
+        Me.mnuFileLibrary.Name = "mnuFileLibrary"
+        Me.mnuFileLibrary.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileLibrary.Text = "Open From Library..."
         '
-        'OpenFromLibraryToolStripMenuItem
+        'mnuFileClose
         '
-        Me.OpenFromLibraryToolStripMenuItem.Name = "OpenFromLibraryToolStripMenuItem"
-        Me.OpenFromLibraryToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.OpenFromLibraryToolStripMenuItem.Text = "Open From Library..."
-        '
-        'CloseWorksheetToolStripMenuItem
-        '
-        Me.CloseWorksheetToolStripMenuItem.Name = "CloseWorksheetToolStripMenuItem"
-        Me.CloseWorksheetToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.CloseWorksheetToolStripMenuItem.Text = "Close Worksheet"
+        Me.mnuFileClose.Name = "mnuFileClose"
+        Me.mnuFileClose.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileClose.Text = "Close Worksheet"
         '
         'ToolStripSeparator4
         '
@@ -1561,7 +1542,7 @@ Partial Class frm_first
         Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolBtn, Me.ImportToolStripButton, Me.SaveToolStripButton, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.DeleteToolStripButton, Me.toolStripSeparator1, Me.EditLastDialogueToolStrip, Me.ShowLast10ToolStripButton, Me.ToolStripSeparator2, Me.SubmitToolStripButton, Me.ToolStripSeparator3, Me.HelpToolStripButton})
         Me.Tool_strip.Location = New System.Drawing.Point(0, 24)
         Me.Tool_strip.Name = "Tool_strip"
-        Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.Tool_strip.Size = New System.Drawing.Size(875, 25)
         Me.Tool_strip.TabIndex = 1
         Me.Tool_strip.Text = "Tool"
@@ -1705,51 +1686,52 @@ Partial Class frm_first
         Me.HelpToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.HelpToolStripButton.Text = "He&lp"
         '
-        'Status_Strip
+        'stsStrip
         '
-        Me.Status_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {CurrentTripStatus, Me.ServerStripStatus, Me.WarningsStripStatus})
-        Me.Status_Strip.Location = New System.Drawing.Point(0, 521)
-        Me.Status_Strip.Name = "Status_Strip"
-        Me.Status_Strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.Status_Strip.Size = New System.Drawing.Size(875, 22)
-        Me.Status_Strip.TabIndex = 2
-        Me.Status_Strip.Text = "Status"
+        Me.stsStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tstatus})
+        Me.stsStrip.Location = New System.Drawing.Point(0, 521)
+        Me.stsStrip.Name = "stsStrip"
+        Me.stsStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.stsStrip.Size = New System.Drawing.Size(875, 22)
+        Me.stsStrip.TabIndex = 2
+        Me.stsStrip.Text = "Status"
         '
-        'ServerStripStatus
+        'tstatus
         '
-        Me.ServerStripStatus.Name = "ServerStripStatus"
-        Me.ServerStripStatus.Padding = New System.Windows.Forms.Padding(0, 0, 400, 0)
-        Me.ServerStripStatus.Size = New System.Drawing.Size(439, 17)
-        Me.ServerStripStatus.Text = "Server"
+        Me.tstatus.Name = "tstatus"
+        Me.tstatus.Size = New System.Drawing.Size(119, 17)
+        Me.tstatus.Text = "No worksheet loaded"
         '
-        'WarningsStripStatus
+        'grid
         '
-        Me.WarningsStripStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.WarningsStripStatus.Name = "WarningsStripStatus"
-        Me.WarningsStripStatus.Padding = New System.Windows.Forms.Padding(0, 0, 100, 0)
-        Me.WarningsStripStatus.Size = New System.Drawing.Size(157, 17)
-        Me.WarningsStripStatus.Text = "&Warnings"
+        Me.grid.BackColor = System.Drawing.Color.White
+        Me.grid.ColumnHeaderContextMenuStrip = Nothing
+        Me.grid.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grid.LeadHeaderContextMenuStrip = Nothing
+        Me.grid.Location = New System.Drawing.Point(0, 49)
+        Me.grid.Name = "grid"
+        Me.grid.RowHeaderContextMenuStrip = Nothing
+        Me.grid.Script = Nothing
+        Me.grid.SheetTabContextMenuStrip = Nothing
+        Me.grid.SheetTabControlNewButtonVisible = True
+        Me.grid.SheetTabControlWidth = 60
+        Me.grid.SheetTabNewButtonVisible = True
+        Me.grid.Size = New System.Drawing.Size(875, 472)
+        Me.grid.TabIndex = 4
         '
-        'OpenFile
-        '
-        '
-        'PrintDialog1
-        '
-        Me.PrintDialog1.UseEXDialog = True
-        '
-        'frm_first
+        'frm_main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(875, 543)
-        Me.Controls.Add(Me.Status_Strip)
+        Me.Controls.Add(Me.grid)
+        Me.Controls.Add(Me.stsStrip)
         Me.Controls.Add(Me.Tool_strip)
         Me.Controls.Add(Me.Menu_Strip)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.Menu_Strip
-        Me.Name = "frm_first"
+        Me.Name = "frm_main"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Instat+ for WIndows"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -1757,14 +1739,13 @@ Partial Class frm_first
         Me.Menu_Strip.PerformLayout()
         Me.Tool_strip.ResumeLayout(False)
         Me.Tool_strip.PerformLayout()
-        Me.Status_Strip.ResumeLayout(False)
-        Me.Status_Strip.PerformLayout()
+        Me.stsStrip.ResumeLayout(False)
+        Me.stsStrip.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents FileStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SubmitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ManageToolStripMenuItem As ToolStripMenuItem
@@ -1791,14 +1772,12 @@ Partial Class frm_first
     Friend WithEvents SubmitToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents HelpToolStripButton As ToolStripButton
-    Friend WithEvents Status_Strip As StatusStrip
-    Friend WithEvents ServerStripStatus As ToolStripStatusLabel
-    Friend WithEvents WarningsStripStatus As ToolStripStatusLabel
+    Friend WithEvents stsStrip As StatusStrip
     Friend WithEvents OpenFile As OpenFileDialog
-    Friend WithEvents NewWorksheetToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OpenWorksheetCtrlOToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OpenFromLibraryToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CloseWorksheetToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuFileNew As ToolStripMenuItem
+    Friend WithEvents mnuFileOpen As ToolStripMenuItem
+    Friend WithEvents mnuFileLibrary As ToolStripMenuItem
+    Friend WithEvents mnuFileClose As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents ImportExportToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportASCIIToolStripMenuItem As ToolStripMenuItem
@@ -1996,7 +1975,7 @@ Partial Class frm_first
     Friend WithEvents TotalsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
-    Friend WithEvents PrintDocument1 As Printing.PrintDocument
-    Friend WithEvents PrintDialog1 As PrintDialog
-    Private WithEvents Menu_Strip As MenuStrip
+    Public WithEvents Menu_Strip As MenuStrip
+    Friend WithEvents grid As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents tstatus As ToolStripStatusLabel
 End Class

@@ -1,38 +1,29 @@
 ﻿Imports System.IO
 Imports System.Data
 Imports System.Data.OleDb
-Imports instat.frm_datasheet
+Imports RDotNet
+Imports unvell.ReoGrid
 
 
-Public Class frm_first
+Public Class frm_main
+    Dim fileOpen As New rLink
+
 
     Private Sub frm_first_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'sets the children forms
-        frm_datasheet.MdiParent = Me
-        frm_datasheet.Show()
-        frm_cmd_window.MdiParent = Me
-        'frm_cmd_window.Show()
+        grid.SetSettings(WorkbookSettings.View_ShowSheetTabControl, True)
+        grid.SheetTabControlWidth = 200
 
     End Sub
 
     Private Sub OpenToolBtn_Click(sender As Object, e As EventArgs) Handles OpenToolBtn.Click
-        OpenFile.Filter = "Instat Worksheets (*.wor)|*.wor|Excel Worksheets (*.xlsx)|*.xlsx|Comma Separated (*.csv)|*.csv|
-Minitab (*.mtw)|*.mtw|SPSS/Win (*.sav)|*.sav|Excel 2-5/95/97 (*.xls)|*.xls|All Files (*.*)|*.*"
-
-        If OpenFile.ShowDialog(Me) = DialogResult.OK Then
-
-
-        End If
-
-
+        fileOpen.open()
     End Sub
 
-    Private Sub openFile_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFile.FileOk
-        Dim filePath As String = OpenFile.FileName
-        Dim extension As String = Path.GetExtension(filePath)
-        'Populate Grid
-        frm_datasheet.grid.Load(filePath)
-        'dataGridView1.DataSource = dt
+    Private Sub mnuFileOpen_Click(sender As Object, e As EventArgs) Handles mnuFileOpen.Click
+        fileOpen.open()
     End Sub
 
+    Private Sub mnuFileNew_Click(sender As Object, e As EventArgs) Handles mnuFileNew.Click
+        Dim sheet = grid.CreateWorksheet()
+    End Sub
 End Class
