@@ -15,6 +15,7 @@ Public Class frm_main
         grid.SheetTabControlWidth = 200
         frmScript.MdiParent = Me
         frmScript.Show()
+        Form1.Show()
         frmScript.editor.Srm = grid.Srm
 
     End Sub
@@ -33,5 +34,13 @@ Public Class frm_main
 
     Private Sub mnuScriptEditor_Click(sender As Object, e As EventArgs) Handles mnuScriptEditor.Click
         frmScript.Show()
+    End Sub
+
+    Private Sub WindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindowToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub grid_Click(sender As Object, e As EventArgs) Handles grid.Click
+
     End Sub
 End Class

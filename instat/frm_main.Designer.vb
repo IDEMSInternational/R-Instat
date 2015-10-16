@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frm_main
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frm_main
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_main))
         Me.Menu_Strip = New System.Windows.Forms.MenuStrip()
@@ -258,6 +258,7 @@ Partial Class frm_main
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.grid = New unvell.ReoGrid.ReoGridControl()
+        Me.JohnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_Strip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.stsStrip.SuspendLayout()
@@ -265,7 +266,7 @@ Partial Class frm_main
         '
         'Menu_Strip
         '
-        Me.Menu_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.EditToolStripMenuItem, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.ToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.Menu_Strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.EditToolStripMenuItem, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.ToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem, Me.JohnToolStripMenuItem})
         Me.Menu_Strip.Location = New System.Drawing.Point(0, 0)
         Me.Menu_Strip.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.Menu_Strip.Name = "Menu_Strip"
@@ -1733,6 +1734,13 @@ Partial Class frm_main
         Me.grid.SheetTabNewButtonVisible = True
         Me.grid.Size = New System.Drawing.Size(800, 472)
         Me.grid.TabIndex = 4
+        Me.grid.Visible = False
+        '
+        'JohnToolStripMenuItem
+        '
+        Me.JohnToolStripMenuItem.Name = "JohnToolStripMenuItem"
+        Me.JohnToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.JohnToolStripMenuItem.Text = "John"
         '
         'frm_main
         '
@@ -1996,4 +2004,5 @@ Partial Class frm_main
     Friend WithEvents tstatus As ToolStripStatusLabel
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents mnuScriptEditor As ToolStripMenuItem
+    Friend WithEvents JohnToolStripMenuItem As ToolStripMenuItem
 End Class

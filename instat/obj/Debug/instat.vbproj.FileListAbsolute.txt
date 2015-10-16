@@ -36,3 +36,5 @@ C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.frm_main.resources
 C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.Resources.resources
 C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.frmScript.resources
 C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.vbproj.GenerateResource.Cache
+C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.Resource1.resources
+C:\Users\MMC 1\Source\Repos\Instat2\instat\obj\Debug\instat.Form1.resources
