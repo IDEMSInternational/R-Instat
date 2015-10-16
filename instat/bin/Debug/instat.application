@@ -7,14 +7,14 @@
     <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="instat.exe.manifest" size="8190">
+    <dependentAssembly dependencyType="install" codebase="instat.exe.manifest" size="10129">
       <assemblyIdentity name="instat.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>kqo+taEuazEMkeL2/06gaIlk/SCTa6TA5Q8zKxRAzyk=</dsig:DigestValue>
+        <dsig:DigestValue>ZHL/RsRCB/JAf672vn5F+6rEI+pcoTgLE9XD2OplyPY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
