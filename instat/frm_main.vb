@@ -14,17 +14,18 @@ Public Class frm_main
         grid.SetSettings(WorkbookSettings.View_ShowSheetTabControl, True)
         grid.SheetTabControlWidth = 200
         'frmScript.MdiParent = Me
-        'frmScript.Show()
-        rEditor.Srm = grid.Srm
+        frmScript.editor.Srm = grid.Srm
+        'grid.CurrentWorksheet.SelectColumns(col:=0, columns:=2)
 
     End Sub
 
     Private Sub OpenToolBtn_Click(sender As Object, e As EventArgs) Handles OpenToolBtn.Click
-        fileOpen.open()
+        fileOpen.dataframe()
     End Sub
 
     Private Sub mnuFileOpen_Click(sender As Object, e As EventArgs) Handles mnuFileOpen.Click
-        fileOpen.open()
+        'fileOpen.open()
+        fileOpen.dataframe()
     End Sub
 
     Private Sub mnuFileNew_Click(sender As Object, e As EventArgs) Handles mnuFileNew.Click
@@ -32,6 +33,11 @@ Public Class frm_main
     End Sub
 
     Private Sub mnuScriptEditor_Click(sender As Object, e As EventArgs) Handles mnuScriptEditor.Click
-        rEditor.Focus()
+        If frmScript.Visible = True Then
+            frmScript.Hide()
+        Else
+            frmScript.Show()
+            frmScript.Dock = Dock.Right
+        End If
     End Sub
 End Class
