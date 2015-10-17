@@ -12,7 +12,7 @@ Public Class frm_main
 
     Private Sub frm_first_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grid.SetSettings(WorkbookSettings.View_ShowSheetTabControl, True)
-        grid.SheetTabControlWidth = 200
+        grid.SheetTabControlWidth = 100
         'frmScript.MdiParent = Me
         frmScript.editor.Srm = grid.Srm
         'grid.CurrentWorksheet.SelectColumns(col:=0, columns:=2)
@@ -39,5 +39,10 @@ Public Class frm_main
             frmScript.Show()
             frmScript.Dock = Dock.Right
         End If
+    End Sub
+
+    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
+        dlgDescriptiveStatistics.Show()
+
     End Sub
 End Class
