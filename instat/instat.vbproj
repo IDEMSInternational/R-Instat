@@ -140,11 +140,41 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dark.vb" />
+    <Compile Include="DataSelectionDialog.Designer.vb">
+      <DependentUpon>DataSelectionDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DataSelectionDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogTemplates.Designer.vb">
+      <DependentUpon>DialogTemplates.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DialogTemplates.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgBoxPlot.Designer.vb">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgBoxPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgDescriptiveStatistics.Designer.vb">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescriptiveStatistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frm_main.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_main.Designer.vb">
       <DependentUpon>frm_main.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphicsDialogTemplate.Designer.vb">
+      <DependentUpon>GraphicsDialogTemplate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicsDialogTemplate.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -171,8 +201,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataSelectionDialog.resx">
+      <DependentUpon>DataSelectionDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogTemplates.resx">
+      <DependentUpon>DialogTemplates.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxPlot.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescriptiveStatistics.resx">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_main.resx">
       <DependentUpon>frm_main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphicsDialogTemplate.resx">
+      <DependentUpon>GraphicsDialogTemplate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
