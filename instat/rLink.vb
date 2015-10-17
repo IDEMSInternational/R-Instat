@@ -63,6 +63,7 @@ Minitab (*.mtw)|*.mtw|SPSS/Win (*.sav)|*.sav|Excel 2-5/95/97 (*.xls)|*.xls|All F
                         For i As Integer = 0 To r_count - 1
                             For k As Integer = 0 To c_count - 1
                                 sheet.ColumnHeaders(k).Text = headers(k)
+                                dlgDescriptiveStatistics.lstAvailableVariable.Items.Add(headers(k))
                                 sheet(row:=i, col:=k) = dataset(i, k)
                             Next
                         Next
