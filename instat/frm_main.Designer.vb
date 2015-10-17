@@ -258,7 +258,6 @@ Partial Class frm_main
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.grid = New unvell.ReoGrid.ReoGridControl()
-        Me.rEditor = New unvell.ReoScript.Editor.ReoScriptEditorControl()
         Me.Menu_Strip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.stsStrip.SuspendLayout()
@@ -270,7 +269,7 @@ Partial Class frm_main
         Me.Menu_Strip.Location = New System.Drawing.Point(0, 0)
         Me.Menu_Strip.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.Menu_Strip.Name = "Menu_Strip"
-        Me.Menu_Strip.Size = New System.Drawing.Size(875, 24)
+        Me.Menu_Strip.Size = New System.Drawing.Size(704, 24)
         Me.Menu_Strip.TabIndex = 0
         Me.Menu_Strip.Text = "Menu_strip"
         '
@@ -1559,7 +1558,7 @@ Partial Class frm_main
         Me.Tool_strip.Location = New System.Drawing.Point(0, 24)
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.Tool_strip.Size = New System.Drawing.Size(875, 25)
+        Me.Tool_strip.Size = New System.Drawing.Size(704, 25)
         Me.Tool_strip.TabIndex = 1
         Me.Tool_strip.Text = "Tool"
         '
@@ -1708,7 +1707,7 @@ Partial Class frm_main
         Me.stsStrip.Location = New System.Drawing.Point(0, 521)
         Me.stsStrip.Name = "stsStrip"
         Me.stsStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.stsStrip.Size = New System.Drawing.Size(875, 22)
+        Me.stsStrip.Size = New System.Drawing.Size(704, 22)
         Me.stsStrip.TabIndex = 2
         Me.stsStrip.Text = "Status"
         '
@@ -1722,7 +1721,7 @@ Partial Class frm_main
         '
         Me.grid.BackColor = System.Drawing.Color.White
         Me.grid.ColumnHeaderContextMenuStrip = Nothing
-        Me.grid.Dock = System.Windows.Forms.DockStyle.Left
+        Me.grid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grid.LeadHeaderContextMenuStrip = Nothing
         Me.grid.Location = New System.Drawing.Point(0, 49)
         Me.grid.Name = "grid"
@@ -1732,24 +1731,15 @@ Partial Class frm_main
         Me.grid.SheetTabControlNewButtonVisible = True
         Me.grid.SheetTabControlWidth = 60
         Me.grid.SheetTabNewButtonVisible = True
-        Me.grid.Size = New System.Drawing.Size(828, 472)
+        Me.grid.Size = New System.Drawing.Size(704, 472)
         Me.grid.TabIndex = 4
-        '
-        'rEditor
-        '
-        Me.rEditor.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.rEditor.Location = New System.Drawing.Point(828, 49)
-        Me.rEditor.Name = "rEditor"
-        Me.rEditor.Size = New System.Drawing.Size(47, 472)
-        Me.rEditor.TabIndex = 6
         '
         'frm_main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(875, 543)
-        Me.Controls.Add(Me.rEditor)
+        Me.ClientSize = New System.Drawing.Size(704, 543)
         Me.Controls.Add(Me.grid)
         Me.Controls.Add(Me.stsStrip)
         Me.Controls.Add(Me.Tool_strip)
@@ -2006,5 +1996,4 @@ Partial Class frm_main
     Friend WithEvents tstatus As ToolStripStatusLabel
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents mnuScriptEditor As ToolStripMenuItem
-    Friend WithEvents rEditor As unvell.ReoScript.Editor.ReoScriptEditorControl
 End Class
