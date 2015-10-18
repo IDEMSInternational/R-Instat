@@ -53,6 +53,7 @@ Partial Class dlgDescriptiveStatistic
         Me.grpgraphics.Size = New System.Drawing.Size(292, 28)
         Me.grpgraphics.TabIndex = 83
         Me.grpgraphics.TabStop = False
+        Me.grpgraphics.UseWaitCursor = True
         '
         'CheckBox17
         '
@@ -63,6 +64,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox17.TabIndex = 61
         Me.CheckBox17.Text = "Cumulative frequency"
         Me.CheckBox17.UseVisualStyleBackColor = True
+        Me.CheckBox17.UseWaitCursor = True
         '
         'CheckBox16
         '
@@ -73,6 +75,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox16.TabIndex = 60
         Me.CheckBox16.Text = "Box Plot"
         Me.CheckBox16.UseVisualStyleBackColor = True
+        Me.CheckBox16.UseWaitCursor = True
         '
         'CheckBox15
         '
@@ -83,6 +86,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox15.TabIndex = 1
         Me.CheckBox15.Text = "Stem and leaf"
         Me.CheckBox15.UseVisualStyleBackColor = True
+        Me.CheckBox15.UseWaitCursor = True
         '
         'CheckBox14
         '
@@ -93,6 +97,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox14.TabIndex = 82
         Me.CheckBox14.Text = "Graphics "
         Me.CheckBox14.UseVisualStyleBackColor = True
+        Me.CheckBox14.UseWaitCursor = True
         '
         'GroupBox2
         '
@@ -108,6 +113,7 @@ Partial Class dlgDescriptiveStatistic
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Tag = "Summary_Statistics "
         Me.GroupBox2.Text = "Additional statstics "
+        Me.GroupBox2.UseWaitCursor = True
         '
         'CheckBox9
         '
@@ -118,6 +124,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox9.TabIndex = 0
         Me.CheckBox9.Text = "Coefficient of variation"
         Me.CheckBox9.UseVisualStyleBackColor = True
+        Me.CheckBox9.UseWaitCursor = True
         '
         'CheckBox10
         '
@@ -128,6 +135,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox10.TabIndex = 0
         Me.CheckBox10.Text = "Sum if Squres "
         Me.CheckBox10.UseVisualStyleBackColor = True
+        Me.CheckBox10.UseWaitCursor = True
         '
         'CheckBox11
         '
@@ -138,6 +146,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox11.TabIndex = 0
         Me.CheckBox11.Text = "Quartiles "
         Me.CheckBox11.UseVisualStyleBackColor = True
+        Me.CheckBox11.UseWaitCursor = True
         '
         'CheckBox12
         '
@@ -148,6 +157,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox12.TabIndex = 0
         Me.CheckBox12.Text = "Median "
         Me.CheckBox12.UseVisualStyleBackColor = True
+        Me.CheckBox12.UseWaitCursor = True
         '
         'CheckBox13
         '
@@ -158,6 +168,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox13.TabIndex = 0
         Me.CheckBox13.Text = "Standard error "
         Me.CheckBox13.UseVisualStyleBackColor = True
+        Me.CheckBox13.UseWaitCursor = True
         '
         'CheckBox7
         '
@@ -168,6 +179,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox7.TabIndex = 79
         Me.CheckBox7.Text = "Additional Statistics "
         Me.CheckBox7.UseVisualStyleBackColor = True
+        Me.CheckBox7.UseWaitCursor = True
         '
         'GroupBox1
         '
@@ -184,6 +196,7 @@ Partial Class dlgDescriptiveStatistic
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Tag = "Summary_Statistics "
         Me.GroupBox1.Text = "Summary Statistics  "
+        Me.GroupBox1.UseWaitCursor = True
         '
         'CheckBox6
         '
@@ -194,6 +207,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox6.TabIndex = 0
         Me.CheckBox6.Text = "Standard Ddeviation"
         Me.CheckBox6.UseVisualStyleBackColor = True
+        Me.CheckBox6.UseWaitCursor = True
         '
         'CheckBox5
         '
@@ -204,6 +218,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox5.TabIndex = 0
         Me.CheckBox5.Text = "Mean"
         Me.CheckBox5.UseVisualStyleBackColor = True
+        Me.CheckBox5.UseWaitCursor = True
         '
         'CheckBox4
         '
@@ -214,6 +229,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox4.TabIndex = 0
         Me.CheckBox4.Text = "Range "
         Me.CheckBox4.UseVisualStyleBackColor = True
+        Me.CheckBox4.UseWaitCursor = True
         '
         'CheckBox3
         '
@@ -224,6 +240,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox3.TabIndex = 0
         Me.CheckBox3.Text = "Maximum"
         Me.CheckBox3.UseVisualStyleBackColor = True
+        Me.CheckBox3.UseWaitCursor = True
         '
         'CheckBox2
         '
@@ -234,6 +251,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox2.TabIndex = 0
         Me.CheckBox2.Text = "Minimum"
         Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.CheckBox2.UseWaitCursor = True
         '
         'CheckBox1
         '
@@ -244,6 +262,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox1.TabIndex = 0
         Me.CheckBox1.Text = "Count"
         Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.CheckBox1.UseWaitCursor = True
         '
         'dlgDescriptiveStatistic
         '
@@ -254,7 +273,11 @@ Partial Class dlgDescriptiveStatistic
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.CheckBox7)
         Me.Controls.Add(Me.GroupBox1)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgDescriptiveStatistic"
+        Me.Text = "Descriptive Statistics "
+        Me.UseWaitCursor = True
         Me.Controls.SetChildIndex(Me.GroupBox1, 0)
         Me.Controls.SetChildIndex(Me.CheckBox7, 0)
         Me.Controls.SetChildIndex(Me.GroupBox2, 0)

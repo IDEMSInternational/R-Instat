@@ -24,6 +24,8 @@
 
         End If
 
+
+
         If CheckBox7.Checked = False Then
             GroupBox2.Visible = False
 
