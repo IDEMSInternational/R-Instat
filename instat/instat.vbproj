@@ -146,6 +146,12 @@
     <Compile Include="dataSelectionDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dialogTemplate.Designer.vb">
+      <DependentUpon>dialogTemplate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dialogTemplate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frm_main.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +189,9 @@
   <ItemGroup>
     <EmbeddedResource Include="dataSelectionDialog.resx">
       <DependentUpon>dataSelectionDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogTemplate.resx">
+      <DependentUpon>dialogTemplate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_main.resx">
       <DependentUpon>frm_main.vb</DependentUpon>
