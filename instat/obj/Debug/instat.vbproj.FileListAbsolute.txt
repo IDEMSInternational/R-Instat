@@ -20,3 +20,11 @@ C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frm_main.resources
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.Resources.resources
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frmScript.resources
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.exe
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.xml
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.pdb
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.vbprojResolveAssemblyReference.cache
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.GraphicsDialogTemplate.resources
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.vbproj.GenerateResource.Cache
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.exe.manifest
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.application
