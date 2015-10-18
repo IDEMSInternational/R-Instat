@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgBoxPlot
-    Inherits instat.GraphicsDialogTemplate
+Partial Class dlgDescriptiveStatistic
+    Inherits instat.dataSelectionDialog
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
