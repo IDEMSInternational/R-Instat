@@ -205,6 +205,12 @@
     <EmbeddedResource Include="dialogTemplate.resx">
       <DependentUpon>dialogTemplate.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxPlot.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescriptiveStatistic.resx">
+      <DependentUpon>dlgDescriptiveStatistic.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_main.resx">
       <DependentUpon>frm_main.vb</DependentUpon>
     </EmbeddedResource>
