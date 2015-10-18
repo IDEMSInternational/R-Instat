@@ -168,7 +168,7 @@ Partial Class dataSelectionDialog
         Me.Controls.Add(Me.lblAvailableVariables)
         Me.Controls.Add(Me.lstAvailableVariable)
         Me.Name = "dataSelectionDialog"
-        Me.Text = "dataSelectionDialog"
+        Me.Text = "Data Selection Template"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
