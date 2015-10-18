@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class DataSelectionDialog
+Partial Class dataSelectionDialog
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -38,40 +38,40 @@ Partial Class DataSelectionDialog
         '
         'cmdOk
         '
-        Me.cmdOk.Location = New System.Drawing.Point(35, 369)
+        Me.cmdOk.Location = New System.Drawing.Point(26, 358)
         Me.cmdOk.Name = "cmdOk"
         Me.cmdOk.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOk.TabIndex = 66
+        Me.cmdOk.TabIndex = 78
         Me.cmdOk.Tag = "Ok "
         Me.cmdOk.Text = "Ok"
         Me.cmdOk.UseVisualStyleBackColor = True
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(196, 369)
+        Me.cmdCancel.Location = New System.Drawing.Point(187, 358)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
-        Me.cmdCancel.TabIndex = 65
+        Me.cmdCancel.TabIndex = 77
         Me.cmdCancel.Tag = "Cancel"
         Me.cmdCancel.Text = "Cancel "
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
         'cmdReset
         '
-        Me.cmdReset.Location = New System.Drawing.Point(115, 369)
+        Me.cmdReset.Location = New System.Drawing.Point(106, 358)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(75, 23)
-        Me.cmdReset.TabIndex = 64
+        Me.cmdReset.TabIndex = 76
         Me.cmdReset.Tag = "Reset"
         Me.cmdReset.Text = "Reset "
         Me.cmdReset.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(277, 369)
+        Me.cmdHelp.Location = New System.Drawing.Point(268, 358)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
-        Me.cmdHelp.TabIndex = 63
+        Me.cmdHelp.TabIndex = 75
         Me.cmdHelp.Tag = "Help"
         Me.cmdHelp.Text = "Help "
         Me.cmdHelp.UseVisualStyleBackColor = True
@@ -79,37 +79,37 @@ Partial Class DataSelectionDialog
         'lblFactorVariable
         '
         Me.lblFactorVariable.AutoSize = True
-        Me.lblFactorVariable.Location = New System.Drawing.Point(290, 17)
+        Me.lblFactorVariable.Location = New System.Drawing.Point(281, 6)
         Me.lblFactorVariable.Name = "lblFactorVariable"
         Me.lblFactorVariable.Size = New System.Drawing.Size(78, 13)
-        Me.lblFactorVariable.TabIndex = 62
+        Me.lblFactorVariable.TabIndex = 74
         Me.lblFactorVariable.Tag = "Factor_Variable"
         Me.lblFactorVariable.Text = "Factor Variable"
         '
         'cboFactoVariable
         '
         Me.cboFactoVariable.FormattingEnabled = True
-        Me.cboFactoVariable.Location = New System.Drawing.Point(287, 37)
+        Me.cboFactoVariable.Location = New System.Drawing.Point(278, 26)
         Me.cboFactoVariable.Name = "cboFactoVariable"
         Me.cboFactoVariable.Size = New System.Drawing.Size(81, 21)
-        Me.cboFactoVariable.TabIndex = 61
+        Me.cboFactoVariable.TabIndex = 73
         '
         'btnRemove
         '
-        Me.btnRemove.Location = New System.Drawing.Point(106, 90)
+        Me.btnRemove.Location = New System.Drawing.Point(97, 79)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(75, 23)
-        Me.btnRemove.TabIndex = 60
+        Me.btnRemove.TabIndex = 72
         Me.btnRemove.Tag = "Remove"
         Me.btnRemove.Text = "Remove "
         Me.btnRemove.UseVisualStyleBackColor = True
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(106, 52)
+        Me.btnAdd.Location = New System.Drawing.Point(97, 41)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
-        Me.btnAdd.TabIndex = 59
+        Me.btnAdd.TabIndex = 71
         Me.btnAdd.Tag = "Add"
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
@@ -117,44 +117,44 @@ Partial Class DataSelectionDialog
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(189, 17)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(180, 6)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
-        Me.lblSelectedVariables.TabIndex = 58
+        Me.lblSelectedVariables.TabIndex = 70
         Me.lblSelectedVariables.Tag = "Selected_Variables"
         Me.lblSelectedVariables.Text = "Selected Variables"
         '
         'lstSelectedVariables
         '
         Me.lstSelectedVariables.FormattingEnabled = True
-        Me.lstSelectedVariables.Location = New System.Drawing.Point(196, 37)
+        Me.lstSelectedVariables.Location = New System.Drawing.Point(187, 26)
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
         Me.lstSelectedVariables.Size = New System.Drawing.Size(84, 95)
-        Me.lstSelectedVariables.TabIndex = 57
+        Me.lstSelectedVariables.TabIndex = 69
         '
         'lblAvailableVariables
         '
         Me.lblAvailableVariables.AutoSize = True
-        Me.lblAvailableVariables.Location = New System.Drawing.Point(9, 17)
+        Me.lblAvailableVariables.Location = New System.Drawing.Point(0, 6)
         Me.lblAvailableVariables.Name = "lblAvailableVariables"
         Me.lblAvailableVariables.Size = New System.Drawing.Size(102, 13)
-        Me.lblAvailableVariables.TabIndex = 56
+        Me.lblAvailableVariables.TabIndex = 68
         Me.lblAvailableVariables.Tag = "Available _Variables "
         Me.lblAvailableVariables.Text = "Available  Variables "
         '
         'lstAvailableVariable
         '
         Me.lstAvailableVariable.FormattingEnabled = True
-        Me.lstAvailableVariable.Location = New System.Drawing.Point(16, 37)
+        Me.lstAvailableVariable.Location = New System.Drawing.Point(7, 26)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
         Me.lstAvailableVariable.Size = New System.Drawing.Size(84, 95)
-        Me.lstAvailableVariable.TabIndex = 55
+        Me.lstAvailableVariable.TabIndex = 67
         '
-        'DataSelectionDialog
+        'dataSelectionDialog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(386, 404)
+        Me.ClientSize = New System.Drawing.Size(373, 390)
         Me.Controls.Add(Me.cmdOk)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdReset)
@@ -167,8 +167,8 @@ Partial Class DataSelectionDialog
         Me.Controls.Add(Me.lstSelectedVariables)
         Me.Controls.Add(Me.lblAvailableVariables)
         Me.Controls.Add(Me.lstAvailableVariable)
-        Me.Name = "DataSelectionDialog"
-        Me.Text = "DataSelectionDialog"
+        Me.Name = "dataSelectionDialog"
+        Me.Text = "dataSelectionDialog"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

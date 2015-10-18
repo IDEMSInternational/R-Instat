@@ -140,22 +140,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dark.vb" />
-    <Compile Include="dataSelectionDialog.Designer.vb">
-      <DependentUpon>dataSelectionDialog.vb</DependentUpon>
+<<<<<<< HEAD
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
-    <Compile Include="dataSelectionDialog.vb">
+    <Compile Include="Form1.vb">
+=======
+    <Compile Include="DataSelectionDialog.Designer.vb">
+      <DependentUpon>DataSelectionDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DataSelectionDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dialogTemplate.Designer.vb">
-      <DependentUpon>dialogTemplate.vb</DependentUpon>
+    <Compile Include="DialogTemplates.Designer.vb">
+      <DependentUpon>DialogTemplates.vb</DependentUpon>
     </Compile>
-    <Compile Include="dialogTemplate.vb">
+    <Compile Include="DialogTemplates.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgBoxPlot.Designer.vb">
       <DependentUpon>dlgBoxPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgBoxPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgDescriptiveStatistics.Designer.vb">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescriptiveStatistics.vb">
+>>>>>>> 773649bbda8630f0487a98d5fdc2b38a3021ecd4
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_main.vb">
@@ -193,14 +206,22 @@
     <Compile Include="frmScripEditor.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="dataSelectionDialog.resx">
-      <DependentUpon>dataSelectionDialog.vb</DependentUpon>
+<<<<<<< HEAD
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+=======
+    <EmbeddedResource Include="DataSelectionDialog.resx">
+      <DependentUpon>DataSelectionDialog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dialogTemplate.resx">
-      <DependentUpon>dialogTemplate.vb</DependentUpon>
+    <EmbeddedResource Include="DialogTemplates.resx">
+      <DependentUpon>DialogTemplates.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxPlot.resx">
       <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescriptiveStatistics.resx">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+>>>>>>> 773649bbda8630f0487a98d5fdc2b38a3021ecd4
     </EmbeddedResource>
     <EmbeddedResource Include="frm_main.resx">
       <DependentUpon>frm_main.vb</DependentUpon>
