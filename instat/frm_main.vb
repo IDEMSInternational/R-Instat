@@ -37,12 +37,11 @@ Public Class frm_main
             frmScript.Hide()
         Else
             frmScript.Show()
-            frmScript.Dock = Dock.Right
         End If
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
-        dlgDescriptiveStatistics.Show()
+        'dlgDescriptiveStatistics.Show()
 
     End Sub
 End Class
