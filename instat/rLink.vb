@@ -107,10 +107,10 @@ Minitab (*.mtw)|*.mtw|SPSS/Win (*.sav)|*.sav|Excel 2-5/95/97 (*.xls)|*.xls|All F
                         'engine.Dispose()
                 End Select
             Else
-                MsgBox("Must have a file name!", vbCritical, "Message from Instat")
+                MsgBox("Must have a file name!", vbInformation, "Message from Instat")
             End If
         Else
-            MsgBox("No File was selected!", vbAbort, "Message From Instat")
+            MsgBox("No File was selected!", vbInformation, "Message From Instat")
         End If
         frm_main.tstatus.Text = Path.GetFileNameWithoutExtension(fOpen.FileName)
     End Sub
