@@ -3,4 +3,8 @@
         Me.Close()
 
     End Sub
+
+    Private Sub GraphicsDialogTemplate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
