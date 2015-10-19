@@ -15,7 +15,7 @@ Public Class frm_main
         grid.SheetTabControlWidth = 100
         'frmScript.MdiParent = Me
         frmScript.editor.Srm = grid.Srm
-        'grid.CurrentWorksheet.SelectColumns(col:=0, columns:=2)
+        'grid.CurrentWorksheet.SelectColumns(col:=0, columns:=1)
 
     End Sub
 
@@ -29,7 +29,7 @@ Public Class frm_main
     End Sub
 
     Private Sub mnuFileNew_Click(sender As Object, e As EventArgs) Handles mnuFileNew.Click
-        Dim sheet = grid.CreateWorksheet()
+
     End Sub
 
     Private Sub mnuScriptEditor_Click(sender As Object, e As EventArgs) Handles mnuScriptEditor.Click
