@@ -39,7 +39,7 @@ Public Class rLink
         engine.Initialize()
         'For importing files into the instat'
         'start the open file dialog
-        fOpen.Filter = "Instat Worksheets (*.wor)|*.wor|Excel Worksheets (*.xlsx)|*.xlsx|Comma Separated (*.csv)|*.csv|
+        fOpen.Filter = "Excel Worksheets (*.xlsx)|*.xlsx|Comma Separated (*.csv)|*.csv|
 Minitab (*.mtw)|*.mtw|SPSS/Win (*.sav)|*.sav|Excel 2-5/95/97 (*.xls)|*.xls|All Files (*.*)|*.*"
         fOpen.Title = "Import"
         If fOpen.ShowDialog() = DialogResult.OK Then
