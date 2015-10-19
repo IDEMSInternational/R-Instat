@@ -12,10 +12,10 @@ Public Class frm_main
 
     Private Sub frm_first_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grid.SetSettings(WorkbookSettings.View_ShowSheetTabControl, True)
-        grid.SheetTabControlWidth = 200
+        grid.SheetTabControlWidth = 100
         'frmScript.MdiParent = Me
         frmScript.editor.Srm = grid.Srm
-        'grid.CurrentWorksheet.SelectColumns(col:=0, columns:=2)
+        'grid.CurrentWorksheet.SelectColumns(col:=0, columns:=1)
 
     End Sub
 
@@ -29,7 +29,7 @@ Public Class frm_main
     End Sub
 
     Private Sub mnuFileNew_Click(sender As Object, e As EventArgs) Handles mnuFileNew.Click
-        Dim sheet = grid.CreateWorksheet()
+
     End Sub
 
     Private Sub mnuScriptEditor_Click(sender As Object, e As EventArgs) Handles mnuScriptEditor.Click
@@ -37,7 +37,11 @@ Public Class frm_main
             frmScript.Hide()
         Else
             frmScript.Show()
-            frmScript.Dock = Dock.Right
         End If
+    End Sub
+
+    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
+        dlgDescriptiveStatistic.Show()
+
     End Sub
 End Class
