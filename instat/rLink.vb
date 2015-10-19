@@ -39,7 +39,7 @@ Public Class rLink
         engine.Initialize()
         'For importing files into the instat'
         'start the open file dialog
-        fOpen.Filter = "Instat Worksheets (*.wor)|*.wor|Excel Worksheets (*.xlsx)|*.xlsx|Comma Separated (*.csv)|*.csv|
+        fOpen.Filter = "Excel Worksheets (*.xlsx)|*.xlsx|Comma Separated (*.csv)|*.csv|
 Minitab (*.mtw)|*.mtw|SPSS/Win (*.sav)|*.sav|Excel 2-5/95/97 (*.xls)|*.xls|All Files (*.*)|*.*"
         fOpen.Title = "Import"
         If fOpen.ShowDialog() = DialogResult.OK Then
@@ -107,10 +107,10 @@ Minitab (*.mtw)|*.mtw|SPSS/Win (*.sav)|*.sav|Excel 2-5/95/97 (*.xls)|*.xls|All F
                         'engine.Dispose()
                 End Select
             Else
-                MsgBox("Must have a file name!", vbCritical, "Message from Instat")
+                MsgBox("Must have a file name!", vbInformation, "Message from Instat")
             End If
         Else
-            MsgBox("No File was selected!", vbAbort, "Message From Instat")
+            MsgBox("No File was selected!", vbInformation, "Message From Instat")
         End If
         frm_main.tstatus.Text = Path.GetFileNameWithoutExtension(fOpen.FileName)
     End Sub
