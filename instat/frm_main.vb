@@ -44,4 +44,8 @@ Public Class frm_main
         dlgDescriptiveStatistic.Show()
 
     End Sub
+
+    Private Sub grid_Click(sender As Object, e As EventArgs) Handles grid.Click
+
+    End Sub
 End Class
