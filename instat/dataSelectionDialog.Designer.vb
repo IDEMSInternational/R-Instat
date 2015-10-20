@@ -38,7 +38,7 @@ Partial Class dataSelectionDialog
         '
         'cmdOk
         '
-        Me.cmdOk.Location = New System.Drawing.Point(26, 358)
+        Me.cmdOk.Location = New System.Drawing.Point(7, 358)
         Me.cmdOk.Name = "cmdOk"
         Me.cmdOk.Size = New System.Drawing.Size(75, 23)
         Me.cmdOk.TabIndex = 78

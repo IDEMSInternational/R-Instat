@@ -124,9 +124,9 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox10.AutoSize = True
         Me.CheckBox10.Location = New System.Drawing.Point(10, 88)
         Me.CheckBox10.Name = "CheckBox10"
-        Me.CheckBox10.Size = New System.Drawing.Size(94, 17)
+        Me.CheckBox10.Size = New System.Drawing.Size(104, 17)
         Me.CheckBox10.TabIndex = 0
-        Me.CheckBox10.Text = "Sum if Squres "
+        Me.CheckBox10.Text = "Sum of Squares "
         Me.CheckBox10.UseVisualStyleBackColor = True
         '
         'CheckBox11
@@ -232,6 +232,7 @@ Partial Class dlgDescriptiveStatistic
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.Size = New System.Drawing.Size(67, 17)
         Me.CheckBox2.TabIndex = 0
+        Me.CheckBox2.Tag = "Minimum"
         Me.CheckBox2.Text = "Minimum"
         Me.CheckBox2.UseVisualStyleBackColor = True
         '

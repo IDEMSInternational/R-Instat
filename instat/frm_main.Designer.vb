@@ -235,29 +235,29 @@ Partial Class frm_main
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Tool_strip = New System.Windows.Forms.ToolStrip()
+        Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.OpenToolBtn = New System.Windows.Forms.ToolStripButton()
+        Me.ImportToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.PrintToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.CutToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.CopyToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.PasteToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.DeleteToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.EditLastDialogueToolStrip = New System.Windows.Forms.ToolStripButton()
+        Me.ShowLast10ToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SubmitToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
         Me.tstatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.grid = New unvell.ReoGrid.ReoGridControl()
-        Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.OpenToolBtn = New System.Windows.Forms.ToolStripButton()
-        Me.ImportToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.PrintToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.CutToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.CopyToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.PasteToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.DeleteToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.EditLastDialogueToolStrip = New System.Windows.Forms.ToolStripButton()
-        Me.ShowLast10ToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.SubmitToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.Menu_Strip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.stsStrip.SuspendLayout()
@@ -1562,59 +1562,6 @@ Partial Class frm_main
         Me.Tool_strip.TabIndex = 1
         Me.Tool_strip.Text = "Tool"
         '
-        'toolStripSeparator
-        '
-        Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
-        '
-        'toolStripSeparator1
-        '
-        Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        Me.toolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
-        '
-        'stsStrip
-        '
-        Me.stsStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tstatus})
-        Me.stsStrip.Location = New System.Drawing.Point(0, 521)
-        Me.stsStrip.Name = "stsStrip"
-        Me.stsStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.stsStrip.Size = New System.Drawing.Size(704, 22)
-        Me.stsStrip.TabIndex = 2
-        Me.stsStrip.Text = "Status"
-        '
-        'tstatus
-        '
-        Me.tstatus.Name = "tstatus"
-        Me.tstatus.Size = New System.Drawing.Size(119, 17)
-        Me.tstatus.Text = "No worksheet loaded"
-        '
-        'grid
-        '
-        Me.grid.BackColor = System.Drawing.Color.White
-        Me.grid.ColumnHeaderContextMenuStrip = Nothing
-        Me.grid.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.grid.LeadHeaderContextMenuStrip = Nothing
-        Me.grid.Location = New System.Drawing.Point(0, 49)
-        Me.grid.Name = "grid"
-        Me.grid.RowHeaderContextMenuStrip = Nothing
-        Me.grid.Script = Nothing
-        Me.grid.SheetTabContextMenuStrip = Nothing
-        Me.grid.SheetTabControlNewButtonVisible = True
-        Me.grid.SheetTabControlWidth = 60
-        Me.grid.SheetTabNewButtonVisible = True
-        Me.grid.Size = New System.Drawing.Size(704, 472)
-        Me.grid.TabIndex = 4
-        '
         'NewToolStripButton
         '
         Me.NewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -1661,6 +1608,11 @@ Partial Class frm_main
         Me.PrintToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.PrintToolStripButton.Text = "&Print"
         '
+        'toolStripSeparator
+        '
+        Me.toolStripSeparator.Name = "toolStripSeparator"
+        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
+        '
         'CutToolStripButton
         '
         Me.CutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -1698,6 +1650,11 @@ Partial Class frm_main
         Me.DeleteToolStripButton.Text = "&Delete"
         Me.DeleteToolStripButton.ToolTipText = "Delete"
         '
+        'toolStripSeparator1
+        '
+        Me.toolStripSeparator1.Name = "toolStripSeparator1"
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
         'EditLastDialogueToolStrip
         '
         Me.EditLastDialogueToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -1716,6 +1673,11 @@ Partial Class frm_main
         Me.ShowLast10ToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.ShowLast10ToolStripButton.Text = "&Show last 10 dialogues"
         '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
         'SubmitToolStripButton
         '
         Me.SubmitToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -1725,6 +1687,11 @@ Partial Class frm_main
         Me.SubmitToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.SubmitToolStripButton.Text = "&Submit to Instat"
         '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
+        '
         'HelpToolStripButton
         '
         Me.HelpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -1733,6 +1700,39 @@ Partial Class frm_main
         Me.HelpToolStripButton.Name = "HelpToolStripButton"
         Me.HelpToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.HelpToolStripButton.Text = "He&lp"
+        '
+        'stsStrip
+        '
+        Me.stsStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tstatus})
+        Me.stsStrip.Location = New System.Drawing.Point(0, 521)
+        Me.stsStrip.Name = "stsStrip"
+        Me.stsStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.stsStrip.Size = New System.Drawing.Size(704, 22)
+        Me.stsStrip.TabIndex = 2
+        Me.stsStrip.Text = "Status"
+        '
+        'tstatus
+        '
+        Me.tstatus.Name = "tstatus"
+        Me.tstatus.Size = New System.Drawing.Size(119, 17)
+        Me.tstatus.Text = "No worksheet loaded"
+        '
+        'grid
+        '
+        Me.grid.BackColor = System.Drawing.Color.White
+        Me.grid.ColumnHeaderContextMenuStrip = Nothing
+        Me.grid.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grid.LeadHeaderContextMenuStrip = Nothing
+        Me.grid.Location = New System.Drawing.Point(0, 49)
+        Me.grid.Name = "grid"
+        Me.grid.RowHeaderContextMenuStrip = Nothing
+        Me.grid.Script = Nothing
+        Me.grid.SheetTabContextMenuStrip = Nothing
+        Me.grid.SheetTabControlNewButtonVisible = True
+        Me.grid.SheetTabControlWidth = 60
+        Me.grid.SheetTabNewButtonVisible = True
+        Me.grid.Size = New System.Drawing.Size(704, 472)
+        Me.grid.TabIndex = 4
         '
         'frm_main
         '
