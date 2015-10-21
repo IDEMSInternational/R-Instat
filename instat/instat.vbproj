@@ -139,42 +139,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dark.vb" />
-    <Compile Include="dataSelectionDialog.Designer.vb">
-      <DependentUpon>dataSelectionDialog.vb</DependentUpon>
+    <Compile Include="frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
-    <Compile Include="dataSelectionDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dialogTemplate.Designer.vb">
-      <DependentUpon>dialogTemplate.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dialogTemplate.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgBoxPlot.Designer.vb">
-      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgBoxPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgDescriptiveStatistic.Designer.vb">
-      <DependentUpon>dlgDescriptiveStatistic.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDescriptiveStatistic.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_main.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_main.Designer.vb">
-      <DependentUpon>frm_main.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GraphicsDialogTemplate.Designer.vb">
-      <DependentUpon>GraphicsDialogTemplate.vb</DependentUpon>
-    </Compile>
-    <Compile Include="GraphicsDialogTemplate.vb">
+    <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -192,39 +160,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="rLink.vb" />
-    <Compile Include="frmScripEditor.Designer.vb">
-      <DependentUpon>frmScripEditor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmScripEditor.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="dataSelectionDialog.resx">
-      <DependentUpon>dataSelectionDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dialogTemplate.resx">
-      <DependentUpon>dialogTemplate.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxPlot.resx">
-      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDescriptiveStatistic.resx">
-      <DependentUpon>dlgDescriptiveStatistic.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_main.resx">
-      <DependentUpon>frm_main.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GraphicsDialogTemplate.resx">
-      <DependentUpon>GraphicsDialogTemplate.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmScripEditor.resx">
-      <DependentUpon>frmScripEditor.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
