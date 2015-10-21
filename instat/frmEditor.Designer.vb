@@ -22,37 +22,37 @@ Partial Class frmEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ReoGridControl1 = New unvell.ReoGrid.ReoGridControl()
+        Me.grid = New unvell.ReoGrid.ReoGridControl()
         Me.SuspendLayout()
         '
-        'ReoGridControl1
+        'grid
         '
-        Me.ReoGridControl1.BackColor = System.Drawing.Color.White
-        Me.ReoGridControl1.ColumnHeaderContextMenuStrip = Nothing
-        Me.ReoGridControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ReoGridControl1.LeadHeaderContextMenuStrip = Nothing
-        Me.ReoGridControl1.Location = New System.Drawing.Point(0, 0)
-        Me.ReoGridControl1.Name = "ReoGridControl1"
-        Me.ReoGridControl1.RowHeaderContextMenuStrip = Nothing
-        Me.ReoGridControl1.Script = Nothing
-        Me.ReoGridControl1.SheetTabContextMenuStrip = Nothing
-        Me.ReoGridControl1.SheetTabControlNewButtonVisible = True
-        Me.ReoGridControl1.SheetTabControlWidth = 60
-        Me.ReoGridControl1.SheetTabNewButtonVisible = True
-        Me.ReoGridControl1.Size = New System.Drawing.Size(284, 261)
-        Me.ReoGridControl1.TabIndex = 0
+        Me.grid.BackColor = System.Drawing.Color.White
+        Me.grid.ColumnHeaderContextMenuStrip = Nothing
+        Me.grid.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grid.LeadHeaderContextMenuStrip = Nothing
+        Me.grid.Location = New System.Drawing.Point(0, 0)
+        Me.grid.Name = "grid"
+        Me.grid.RowHeaderContextMenuStrip = Nothing
+        Me.grid.Script = Nothing
+        Me.grid.SheetTabContextMenuStrip = Nothing
+        Me.grid.SheetTabControlNewButtonVisible = True
+        Me.grid.SheetTabControlWidth = 60
+        Me.grid.SheetTabNewButtonVisible = True
+        Me.grid.Size = New System.Drawing.Size(284, 261)
+        Me.grid.TabIndex = 0
         '
         'frmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
-        Me.Controls.Add(Me.ReoGridControl1)
+        Me.Controls.Add(Me.grid)
         Me.Name = "frmEditor"
         Me.Text = "Editor Window"
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents ReoGridControl1 As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents grid As unvell.ReoGrid.ReoGridControl
 End Class
