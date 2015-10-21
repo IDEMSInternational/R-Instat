@@ -22,7 +22,7 @@ Imports System.Text
 Imports System.Threading.Tasks
 
 
-Public Class clsRInterface
+Public Class RInterface
     ' R interface class. Each instance of the class has its own REngine instance
     Dim clsEngine As REngine
     Dim txtOutput As TextBox
@@ -49,15 +49,14 @@ Public Class clsRInterface
 
     Public Sub LoadData()
 
-        Dim dlgOpen As OpenFileDialog
+        Dim dlgOpen As New OpenFileDialog
         Dim strExtension As String
-        Dim dataset As DataFrame
-        Dim holder As String
+        Dim dfDataset As DataFrame
+        Dim strHolder As String
 
         'For importing files into the instat'
         'start the open file dialog
-        dlgOpen.Filter = "Excel Worksheets (*.xlsx)|*.xlsx|Comma Separated (*.csv)|*.csv|
-Minitab (*.mtw)|*.mtw|SPSS/Win (*.sav)|*.sav|Excel 2-5/95/97 (*.xls)|*.xls|All Files (*.*)|*.*"
+        dlgOpen.Filter = "Comma Separated (*.csv)|*.csv|Excel 2-5/95/97 (*.xls)|*.xls|All Files (*.*)|*.*"
         dlgOpen.Title = "Import"
         If dlgOpen.ShowDialog() = DialogResult.OK Then
             'checks if the file name is not blank'
@@ -66,11 +65,11 @@ Minitab (*.mtw)|*.mtw|SPSS/Win (*.sav)|*.sav|Excel 2-5/95/97 (*.xls)|*.xls|All F
                 strHolder = Replace(dlgOpen.FileName, "\", "/")
                 Select Case strExtension
                     Case ".csv"
-                        dataset = clsEngine.Evaluate("data<-as.data.frame(read.table('" & strHolder & "', header = T, sep = ','))").AsDataFrame
+                        dfDataset = clsEngine.Evaluate("data<-as.data.frame(read.table('" & strHolder & "', header = T, sep = ','))").AsDataFrame
                     Case ".xlsx" 'TODO use odbc link
-                        dataset = clsEngine.Evaluate("require(xlsx);data<-as.data.frame(read.xlsx('" & strHolder & "', sheetName=1))").AsDataFrame
+                        dfDataset = clsEngine.Evaluate("require(xlsx);data<-as.data.frame(read.xlsx('" & strHolder & "', sheetName=1))").AsDataFrame
                     Case ".xls" 'TODO use odbc link
-                        dataset = clsEngine.Evaluate("require(readxl);data<-as.data.frame(read_excel('" & strHolder & "', sheet=1))").AsDataFrame
+                        dfDataset = clsEngine.Evaluate("require(readxl);data<-as.data.frame(read_excel('" & strHolder & "', sheet=1))").AsDataFrame
                 End Select
             Else
                 MsgBox("Must have a file name!", vbInformation, "Message from Instat")
@@ -84,13 +83,13 @@ Minitab (*.mtw)|*.mtw|SPSS/Win (*.sav)|*.sav|Excel 2-5/95/97 (*.xls)|*.xls|All F
     Public Sub RunScript(strScript As String)
 
         txtLog.Text = txtLog.Text & strScript & vbCr
-        txtOutput.Text = txtOutput.Text & "> " & strScript & vbCr & Me.clsEngine.Evaluate(strScript) & vbCr
+        txtOutput.Text = txtOutput.Text & "> " & strScript & vbCr & Me.clsEngine.Evaluate(strScript).ToString() & vbCr
 
     End Sub
 
-    Public Function GetData(strLabel As String) As VariantType
+    Public Function GetData(strLabel As String) As DataFrame
 
-        Return Me.clsEngine.Evaluate(strLabel)
+        Return Me.clsEngine.Evaluate(strLabel).AsDataFrame()
 
     End Function
 
