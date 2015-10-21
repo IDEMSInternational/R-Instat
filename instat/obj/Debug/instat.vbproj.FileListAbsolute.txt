@@ -31,3 +31,7 @@ C:\Users\Fundi\Source\Repos\Instat\instat\obj\Debug\instat.xml
 C:\Users\Fundi\Source\Repos\Instat\instat\obj\Debug\instat.pdb
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frmMain.resources
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frmEditor.resources
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frmCommand.resources
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frmGraphics.resources
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frmLog.resources
+C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frmScript.resources
