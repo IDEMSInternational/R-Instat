@@ -25,3 +25,7 @@ C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.xml
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.pdb
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.vbprojResolveAssemblyReference.cache
+C:\Users\Fundi\Source\Repos\Instat\instat\bin\Debug\instat.exe.config
+C:\Users\Fundi\Source\Repos\Instat\instat\obj\Debug\instat.exe
+C:\Users\Fundi\Source\Repos\Instat\instat\obj\Debug\instat.xml
+C:\Users\Fundi\Source\Repos\Instat\instat\obj\Debug\instat.pdb
