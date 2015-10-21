@@ -139,10 +139,40 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmCommand.Designer.vb">
+      <DependentUpon>frmCommand.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCommand.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditor.Designer.vb">
+      <DependentUpon>frmEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGraphics.Designer.vb">
+      <DependentUpon>frmGraphics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGraphics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLog.Designer.vb">
+      <DependentUpon>frmLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
     <Compile Include="frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmScript.Designer.vb">
+      <DependentUpon>frmScript.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmScript.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -162,6 +192,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmCommand.resx">
+      <DependentUpon>frmCommand.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditor.resx">
+      <DependentUpon>frmEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGraphics.resx">
+      <DependentUpon>frmGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLog.resx">
+      <DependentUpon>frmLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmScript.resx">
+      <DependentUpon>frmScript.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
