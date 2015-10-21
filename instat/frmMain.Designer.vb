@@ -195,10 +195,23 @@ Partial Class frmMain
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
         Me.tstatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Tool_strip = New System.Windows.Forms.ToolStrip()
+        Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.OpenToolBtn = New System.Windows.Forms.ToolStripButton()
+        Me.ImportToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.PrintToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.CutToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.CopyToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.PasteToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.DeleteToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.EditLastDialogueToolStrip = New System.Windows.Forms.ToolStripButton()
+        Me.ShowLast10ToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SubmitToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.mnuBar = New System.Windows.Forms.MenuStrip()
         Me.FileStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileNew = New System.Windows.Forms.ToolStripMenuItem()
@@ -244,19 +257,6 @@ Partial Class frmMain
         Me.NameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormatCtrlDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.OpenToolBtn = New System.Windows.Forms.ToolStripButton()
-        Me.ImportToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.PrintToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.CutToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.CopyToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.PasteToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.DeleteToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.EditLastDialogueToolStrip = New System.Windows.Forms.ToolStripButton()
-        Me.ShowLast10ToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.SubmitToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -960,13 +960,13 @@ Partial Class frmMain
         'ODBCQueryToolStripMenuItem
         '
         Me.ODBCQueryToolStripMenuItem.Name = "ODBCQueryToolStripMenuItem"
-        Me.ODBCQueryToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.ODBCQueryToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ODBCQueryToolStripMenuItem.Text = "ODBC Query"
         '
         'OutputToolStripMenuItem
         '
         Me.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem"
-        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.OutputToolStripMenuItem.Text = "Output..."
         '
         'ToolStripSeparator5
@@ -1260,13 +1260,13 @@ Partial Class frmMain
         'ExportAsToolStripMenuItem
         '
         Me.ExportAsToolStripMenuItem.Name = "ExportAsToolStripMenuItem"
-        Me.ExportAsToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.ExportAsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ExportAsToolStripMenuItem.Text = "Export as..."
         '
         'ImportASCIIToolStripMenuItem
         '
         Me.ImportASCIIToolStripMenuItem.Name = "ImportASCIIToolStripMenuItem"
-        Me.ImportASCIIToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.ImportASCIIToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ImportASCIIToolStripMenuItem.Text = "Import ASCII..."
         '
         'stsStrip
@@ -1296,25 +1296,144 @@ Partial Class frmMain
         Me.Tool_strip.TabIndex = 7
         Me.Tool_strip.Text = "Tool"
         '
+        'NewToolStripButton
+        '
+        Me.NewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.NewToolStripButton.Image = CType(resources.GetObject("NewToolStripButton.Image"), System.Drawing.Image)
+        Me.NewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.NewToolStripButton.Name = "NewToolStripButton"
+        Me.NewToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.NewToolStripButton.Text = "&New"
+        '
+        'OpenToolBtn
+        '
+        Me.OpenToolBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.OpenToolBtn.Image = CType(resources.GetObject("OpenToolBtn.Image"), System.Drawing.Image)
+        Me.OpenToolBtn.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.OpenToolBtn.Name = "OpenToolBtn"
+        Me.OpenToolBtn.Size = New System.Drawing.Size(23, 22)
+        Me.OpenToolBtn.Text = "&Open"
+        '
+        'ImportToolStripButton
+        '
+        Me.ImportToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ImportToolStripButton.Image = Global.instat.My.Resources.Resources.Carlosjj_Microsoft_Office_2013_Excel
+        Me.ImportToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ImportToolStripButton.Name = "ImportToolStripButton"
+        Me.ImportToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.ImportToolStripButton.Text = "&Import"
+        Me.ImportToolStripButton.ToolTipText = "Import from excel"
+        '
+        'SaveToolStripButton
+        '
+        Me.SaveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.SaveToolStripButton.Image = CType(resources.GetObject("SaveToolStripButton.Image"), System.Drawing.Image)
+        Me.SaveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.SaveToolStripButton.Name = "SaveToolStripButton"
+        Me.SaveToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.SaveToolStripButton.Text = "&Save"
+        '
+        'PrintToolStripButton
+        '
+        Me.PrintToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.PrintToolStripButton.Image = CType(resources.GetObject("PrintToolStripButton.Image"), System.Drawing.Image)
+        Me.PrintToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.PrintToolStripButton.Name = "PrintToolStripButton"
+        Me.PrintToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.PrintToolStripButton.Text = "&Print"
+        '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
         Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
+        '
+        'CutToolStripButton
+        '
+        Me.CutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.CutToolStripButton.Image = CType(resources.GetObject("CutToolStripButton.Image"), System.Drawing.Image)
+        Me.CutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.CutToolStripButton.Name = "CutToolStripButton"
+        Me.CutToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.CutToolStripButton.Text = "C&ut"
+        '
+        'CopyToolStripButton
+        '
+        Me.CopyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.CopyToolStripButton.Image = CType(resources.GetObject("CopyToolStripButton.Image"), System.Drawing.Image)
+        Me.CopyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.CopyToolStripButton.Name = "CopyToolStripButton"
+        Me.CopyToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.CopyToolStripButton.Text = "&Copy"
+        '
+        'PasteToolStripButton
+        '
+        Me.PasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.PasteToolStripButton.Image = CType(resources.GetObject("PasteToolStripButton.Image"), System.Drawing.Image)
+        Me.PasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.PasteToolStripButton.Name = "PasteToolStripButton"
+        Me.PasteToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.PasteToolStripButton.Text = "&Paste"
+        '
+        'DeleteToolStripButton
+        '
+        Me.DeleteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.DeleteToolStripButton.Image = Global.instat.My.Resources.Resources.Oxygen_Icons_org_Oxygen_Status_dialog_error
+        Me.DeleteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.DeleteToolStripButton.Name = "DeleteToolStripButton"
+        Me.DeleteToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.DeleteToolStripButton.Text = "&Delete"
+        Me.DeleteToolStripButton.ToolTipText = "Delete"
         '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
         Me.toolStripSeparator1.Size = New System.Drawing.Size(6, 25)
         '
+        'EditLastDialogueToolStrip
+        '
+        Me.EditLastDialogueToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.EditLastDialogueToolStrip.Image = Global.instat.My.Resources.Resources.Paomedia_Small_N_Flat_Window_layout
+        Me.EditLastDialogueToolStrip.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.EditLastDialogueToolStrip.Name = "EditLastDialogueToolStrip"
+        Me.EditLastDialogueToolStrip.Size = New System.Drawing.Size(23, 22)
+        Me.EditLastDialogueToolStrip.Text = "&Edit last dialogue"
+        '
+        'ShowLast10ToolStripButton
+        '
+        Me.ShowLast10ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ShowLast10ToolStripButton.Image = Global.instat.My.Resources.Resources.Oxygen_Icons_org_Oxygen_Actions_window_duplicate
+        Me.ShowLast10ToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ShowLast10ToolStripButton.Name = "ShowLast10ToolStripButton"
+        Me.ShowLast10ToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.ShowLast10ToolStripButton.Text = "&Show last 10 dialogues"
+        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
         '
+        'SubmitToolStripButton
+        '
+        Me.SubmitToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.SubmitToolStripButton.Image = Global.instat.My.Resources.Resources.Alecive_Flatwoken_Apps_Run
+        Me.SubmitToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.SubmitToolStripButton.Name = "SubmitToolStripButton"
+        Me.SubmitToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.SubmitToolStripButton.Text = "&Submit to Instat"
+        '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
         Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
+        '
+        'HelpToolStripButton
+        '
+        Me.HelpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.HelpToolStripButton.Image = CType(resources.GetObject("HelpToolStripButton.Image"), System.Drawing.Image)
+        Me.HelpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.HelpToolStripButton.Name = "HelpToolStripButton"
+        Me.HelpToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.HelpToolStripButton.Text = "He&lp"
         '
         'mnuBar
         '
@@ -1598,125 +1717,6 @@ Partial Class frmMain
         Me.AlignmentToolStripMenuItem.Name = "AlignmentToolStripMenuItem"
         Me.AlignmentToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.AlignmentToolStripMenuItem.Text = "Alignment..."
-        '
-        'NewToolStripButton
-        '
-        Me.NewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.NewToolStripButton.Image = CType(resources.GetObject("NewToolStripButton.Image"), System.Drawing.Image)
-        Me.NewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.NewToolStripButton.Name = "NewToolStripButton"
-        Me.NewToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.NewToolStripButton.Text = "&New"
-        '
-        'OpenToolBtn
-        '
-        Me.OpenToolBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.OpenToolBtn.Image = CType(resources.GetObject("OpenToolBtn.Image"), System.Drawing.Image)
-        Me.OpenToolBtn.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.OpenToolBtn.Name = "OpenToolBtn"
-        Me.OpenToolBtn.Size = New System.Drawing.Size(23, 22)
-        Me.OpenToolBtn.Text = "&Open"
-        '
-        'ImportToolStripButton
-        '
-        Me.ImportToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ImportToolStripButton.Image = Global.instat.My.Resources.Resources.Carlosjj_Microsoft_Office_2013_Excel
-        Me.ImportToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ImportToolStripButton.Name = "ImportToolStripButton"
-        Me.ImportToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.ImportToolStripButton.Text = "&Import"
-        Me.ImportToolStripButton.ToolTipText = "Import from excel"
-        '
-        'SaveToolStripButton
-        '
-        Me.SaveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.SaveToolStripButton.Image = CType(resources.GetObject("SaveToolStripButton.Image"), System.Drawing.Image)
-        Me.SaveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.SaveToolStripButton.Name = "SaveToolStripButton"
-        Me.SaveToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.SaveToolStripButton.Text = "&Save"
-        '
-        'PrintToolStripButton
-        '
-        Me.PrintToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.PrintToolStripButton.Image = CType(resources.GetObject("PrintToolStripButton.Image"), System.Drawing.Image)
-        Me.PrintToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.PrintToolStripButton.Name = "PrintToolStripButton"
-        Me.PrintToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.PrintToolStripButton.Text = "&Print"
-        '
-        'CutToolStripButton
-        '
-        Me.CutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.CutToolStripButton.Image = CType(resources.GetObject("CutToolStripButton.Image"), System.Drawing.Image)
-        Me.CutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.CutToolStripButton.Name = "CutToolStripButton"
-        Me.CutToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.CutToolStripButton.Text = "C&ut"
-        '
-        'CopyToolStripButton
-        '
-        Me.CopyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.CopyToolStripButton.Image = CType(resources.GetObject("CopyToolStripButton.Image"), System.Drawing.Image)
-        Me.CopyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.CopyToolStripButton.Name = "CopyToolStripButton"
-        Me.CopyToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.CopyToolStripButton.Text = "&Copy"
-        '
-        'PasteToolStripButton
-        '
-        Me.PasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.PasteToolStripButton.Image = CType(resources.GetObject("PasteToolStripButton.Image"), System.Drawing.Image)
-        Me.PasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.PasteToolStripButton.Name = "PasteToolStripButton"
-        Me.PasteToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.PasteToolStripButton.Text = "&Paste"
-        '
-        'DeleteToolStripButton
-        '
-        Me.DeleteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.DeleteToolStripButton.Image = Global.instat.My.Resources.Resources.Oxygen_Icons_org_Oxygen_Status_dialog_error
-        Me.DeleteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.DeleteToolStripButton.Name = "DeleteToolStripButton"
-        Me.DeleteToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.DeleteToolStripButton.Text = "&Delete"
-        Me.DeleteToolStripButton.ToolTipText = "Delete"
-        '
-        'EditLastDialogueToolStrip
-        '
-        Me.EditLastDialogueToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.EditLastDialogueToolStrip.Image = Global.instat.My.Resources.Resources.Paomedia_Small_N_Flat_Window_layout
-        Me.EditLastDialogueToolStrip.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.EditLastDialogueToolStrip.Name = "EditLastDialogueToolStrip"
-        Me.EditLastDialogueToolStrip.Size = New System.Drawing.Size(23, 22)
-        Me.EditLastDialogueToolStrip.Text = "&Edit last dialogue"
-        '
-        'ShowLast10ToolStripButton
-        '
-        Me.ShowLast10ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ShowLast10ToolStripButton.Image = Global.instat.My.Resources.Resources.Oxygen_Icons_org_Oxygen_Actions_window_duplicate
-        Me.ShowLast10ToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ShowLast10ToolStripButton.Name = "ShowLast10ToolStripButton"
-        Me.ShowLast10ToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.ShowLast10ToolStripButton.Text = "&Show last 10 dialogues"
-        '
-        'SubmitToolStripButton
-        '
-        Me.SubmitToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.SubmitToolStripButton.Image = Global.instat.My.Resources.Resources.Alecive_Flatwoken_Apps_Run
-        Me.SubmitToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.SubmitToolStripButton.Name = "SubmitToolStripButton"
-        Me.SubmitToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.SubmitToolStripButton.Text = "&Submit to Instat"
-        '
-        'HelpToolStripButton
-        '
-        Me.HelpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.HelpToolStripButton.Image = CType(resources.GetObject("HelpToolStripButton.Image"), System.Drawing.Image)
-        Me.HelpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.HelpToolStripButton.Name = "HelpToolStripButton"
-        Me.HelpToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.HelpToolStripButton.Text = "He&lp"
         '
         'frmMain
         '
