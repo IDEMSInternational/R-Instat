@@ -17,14 +17,7 @@ C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\DynamicInterop.xml
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\RDotNet.xml
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\bin\Debug\RDotNet.NativeLibrary.xml
-C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.dataSelectionDialog.resources
-C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.dialogTemplate.resources
-C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.dlgBoxPlot.resources
-C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.dlgDescriptiveStatistic.resources
-C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frm_main.resources
-C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.GraphicsDialogTemplate.resources
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.Resources.resources
-C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.frmScript.resources
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.vbproj.GenerateResource.Cache
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.exe.manifest
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.application
