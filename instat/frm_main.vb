@@ -1,38 +1,51 @@
 ﻿Imports System.IO
 Imports System.Data
 Imports System.Data.OleDb
-Imports instat.frm_datasheet
+Imports RDotNet
+Imports unvell.ReoGrid
+Imports unvell.ReoScript
 
 
-Public Class frm_first
+Public Class frm_main
+    Dim fileOpen As New rLink
+
 
     Private Sub frm_first_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'sets the children forms
-        frm_datasheet.MdiParent = Me
-        frm_datasheet.Show()
-        frm_cmd_window.MdiParent = Me
-        'frm_cmd_window.Show()
+        grid.SetSettings(WorkbookSettings.View_ShowSheetTabControl, True)
+        grid.SheetTabControlWidth = 100
+        'frmScript.MdiParent = Me
+        frmScript.editor.Srm = grid.Srm
+        'grid.CurrentWorksheet.SelectColumns(col:=0, columns:=1)
 
     End Sub
 
     Private Sub OpenToolBtn_Click(sender As Object, e As EventArgs) Handles OpenToolBtn.Click
-        OpenFile.Filter = "Instat Worksheets (*.wor)|*.wor|Excel Worksheets (*.xlsx)|*.xlsx|Comma Separated (*.csv)|*.csv|
-Minitab (*.mtw)|*.mtw|SPSS/Win (*.sav)|*.sav|Excel 2-5/95/97 (*.xls)|*.xls|All Files (*.*)|*.*"
+        fileOpen.dataframe()
+    End Sub
 
-        If OpenFile.ShowDialog(Me) = DialogResult.OK Then
+    Private Sub mnuFileOpen_Click(sender As Object, e As EventArgs) Handles mnuFileOpen.Click
+        'fileOpen.open()
+        fileOpen.dataframe()
+    End Sub
 
+    Private Sub mnuFileNew_Click(sender As Object, e As EventArgs) Handles mnuFileNew.Click
 
+    End Sub
+
+    Private Sub mnuScriptEditor_Click(sender As Object, e As EventArgs) Handles mnuScriptEditor.Click
+        If frmScript.Visible = True Then
+            frmScript.Hide()
+        Else
+            frmScript.Show()
         End If
+    End Sub
 
+    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
+        dlgDescriptiveStatistic.Show()
 
     End Sub
 
-    Private Sub openFile_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFile.FileOk
-        Dim filePath As String = OpenFile.FileName
-        Dim extension As String = Path.GetExtension(filePath)
-        'Populate Grid
-        frm_datasheet.grid.Load(filePath)
-        'dataGridView1.DataSource = dt
-    End Sub
+    Private Sub grid_Click(sender As Object, e As EventArgs) Handles grid.Click
 
+    End Sub
 End Class
