@@ -18,4 +18,8 @@
         clsRInterface.LoadData()
         frmEditor.grid.CurrentWorksheet.SetCellData("A1", clsRInterface.GetData("data"))
     End Sub
+
+    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
+        dlgDescriptiveStatistics.Show()
+    End Sub
 End Class
