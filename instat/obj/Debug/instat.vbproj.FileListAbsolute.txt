@@ -39,3 +39,38 @@ C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.dlgTabstrial.resources
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.ucrButtons.resources
 C:\Users\deaspo\Documents\Visual Studio 2015\Projects\Instat+ for windows\instat\obj\Debug\instat.ucrDataSelection.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\instat.exe.config
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.exe
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.xml
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.pdb
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\instat.exe.manifest
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\instat.application
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\instat.exe
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\instat.pdb
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\instat.xml
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\Antlr3.Runtime.dll
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\DynamicInterop.dll
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\FastColoredTextBox.dll
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\RDotNet.dll
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\RDotNet.NativeLibrary.dll
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\ReoGridDemo.exe
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\unvell.ReoGrid.dll
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\unvell.ReoGridEditor.exe
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\DynamicInterop.xml
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\RDotNet.xml
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\RDotNet.NativeLibrary.xml
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.vbprojResolveAssemblyReference.cache
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.dlgDescriptiveStatistics.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.dlgTabstrial.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frmCommand.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frmEditor.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frmGraphics.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frmLog.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frmMain.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frmScript.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.Resources.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.ucrButtons.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.ucrDataSelection.resources
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.vbproj.GenerateResource.Cache
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.exe.manifest
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.application
