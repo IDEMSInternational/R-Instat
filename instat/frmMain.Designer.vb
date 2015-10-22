@@ -140,45 +140,45 @@ Partial Class frmMain
         Me.ExtremesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WorksheetInformationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LockUnlockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ODBCQueryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OutputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileIEODBC = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileIEOutput = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SaveCtrlSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SaveAsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PrintCtrlPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PrintPreviewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuFileClose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileSave = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileSaveAs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFilePrint = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFilePrintPreview = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UndoCtrlZToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CutCtrlXToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CopyCtrlCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CopySpecialCtrlYToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PasteCtrlVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ClearDelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SelectAllCtrlsAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FindCtrlFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReplaceCtrlHToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FontCtrlTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RunWorksheetEditorF7ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ViewEditTextToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFIleExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditUndo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditCut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditCopySpecial = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditClear = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditFind = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditReplace = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditFont = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditRunWSEditor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditViewEditText = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewF8ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFromLibraryToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ViewEditMacroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditViewEditMacro = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CommandLoggingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditCommandLogging = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartF9ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StopShiftF9ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewLogFileCtrlF9ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OutputSpoolingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditOutputSpooling = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.REcallToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditRecall = New System.Windows.Forms.ToolStripMenuItem()
         Me.LastCommandShiftF11ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LastDialogF11ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestartServerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -189,9 +189,9 @@ Partial Class frmMain
         Me.PresentationModeShiftF6ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayFactorLevelsAsOrdinalsShiftF7ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OPtionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExportAsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileIEExport = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
-        Me.ImportASCIIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFIleIEASCII = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
         Me.tstatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Tool_strip = New System.Windows.Forms.ToolStrip()
@@ -214,12 +214,12 @@ Partial Class frmMain
         Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.mnuBar = New System.Windows.Forms.MenuStrip()
         Me.FileStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileNew = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileOpen = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileLibrary = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileClose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileNewWorksheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileOpenWorksheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileCloseWorksheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ImportExportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileIE = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubmitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CurrentWindowCtrlWToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CurrentLineCtrlLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -957,143 +957,143 @@ Partial Class frmMain
         Me.LockUnlockToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.LockUnlockToolStripMenuItem.Text = "Lock/Unlock..."
         '
-        'ODBCQueryToolStripMenuItem
+        'mnuFileIEODBC
         '
-        Me.ODBCQueryToolStripMenuItem.Name = "ODBCQueryToolStripMenuItem"
-        Me.ODBCQueryToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
-        Me.ODBCQueryToolStripMenuItem.Text = "ODBC Query"
+        Me.mnuFileIEODBC.Name = "mnuFileIEODBC"
+        Me.mnuFileIEODBC.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFileIEODBC.Text = "ODBC Query"
         '
-        'OutputToolStripMenuItem
+        'mnuFileIEOutput
         '
-        Me.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem"
-        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
-        Me.OutputToolStripMenuItem.Text = "Output..."
+        Me.mnuFileIEOutput.Name = "mnuFileIEOutput"
+        Me.mnuFileIEOutput.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFileIEOutput.Text = "Output..."
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
         Me.ToolStripSeparator5.Size = New System.Drawing.Size(216, 6)
         '
-        'CloseToolStripMenuItem
+        'MnuFileClose
         '
-        Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
-        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.CloseToolStripMenuItem.Text = "Close"
+        Me.MnuFileClose.Name = "MnuFileClose"
+        Me.MnuFileClose.Size = New System.Drawing.Size(219, 22)
+        Me.MnuFileClose.Text = "Close"
         '
-        'SaveCtrlSToolStripMenuItem
+        'mnuFileSave
         '
-        Me.SaveCtrlSToolStripMenuItem.Name = "SaveCtrlSToolStripMenuItem"
-        Me.SaveCtrlSToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.SaveCtrlSToolStripMenuItem.Text = "Save       Ctrl+S"
+        Me.mnuFileSave.Name = "mnuFileSave"
+        Me.mnuFileSave.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileSave.Text = "Save       Ctrl+S"
         '
-        'SaveAsToolStripMenuItem
+        'mnuFileSaveAs
         '
-        Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
-        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.SaveAsToolStripMenuItem.Text = "Save As"
+        Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
+        Me.mnuFileSaveAs.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileSaveAs.Text = "Save As"
         '
-        'PrintCtrlPToolStripMenuItem
+        'mnuFilePrint
         '
-        Me.PrintCtrlPToolStripMenuItem.Name = "PrintCtrlPToolStripMenuItem"
-        Me.PrintCtrlPToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.PrintCtrlPToolStripMenuItem.Text = "Print...    Ctrl+P"
+        Me.mnuFilePrint.Name = "mnuFilePrint"
+        Me.mnuFilePrint.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFilePrint.Text = "Print...    Ctrl+P"
         '
-        'PrintPreviewToolStripMenuItem
+        'mnuFilePrintPreview
         '
-        Me.PrintPreviewToolStripMenuItem.Name = "PrintPreviewToolStripMenuItem"
-        Me.PrintPreviewToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.PrintPreviewToolStripMenuItem.Text = "Print Preview"
+        Me.mnuFilePrintPreview.Name = "mnuFilePrintPreview"
+        Me.mnuFilePrintPreview.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFilePrintPreview.Text = "Print Preview"
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
         Me.ToolStripSeparator6.Size = New System.Drawing.Size(216, 6)
         '
-        'ExitToolStripMenuItem
+        'mnuFIleExit
         '
-        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.ExitToolStripMenuItem.Text = "Exit"
+        Me.mnuFIleExit.Name = "mnuFIleExit"
+        Me.mnuFIleExit.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFIleExit.Text = "Exit"
         '
-        'EditToolStripMenuItem
+        'mnuEdit
         '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UndoCtrlZToolStripMenuItem, Me.CutCtrlXToolStripMenuItem, Me.CopyCtrlCToolStripMenuItem, Me.CopySpecialCtrlYToolStripMenuItem, Me.PasteCtrlVToolStripMenuItem, Me.ClearDelToolStripMenuItem, Me.SelectAllCtrlsAToolStripMenuItem, Me.FindCtrlFToolStripMenuItem, Me.ReplaceCtrlHToolStripMenuItem, Me.FontCtrlTToolStripMenuItem, Me.RunWorksheetEditorF7ToolStripMenuItem, Me.ViewEditTextToolStripMenuItem, Me.ViewEditMacroToolStripMenuItem, Me.CommandLoggingToolStripMenuItem, Me.OutputSpoolingToolStripMenuItem, Me.REcallToolStripMenuItem, Me.FlagsToolStripMenuItem, Me.OPtionsToolStripMenuItem})
-        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
-        Me.EditToolStripMenuItem.Text = "Edit"
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditUndo, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuEditClear, Me.mnuEditSelectAll, Me.mnuEditFind, Me.mnuEditReplace, Me.mnuEditFont, Me.mnuEditRunWSEditor, Me.mnuEditViewEditText, Me.mnuEditViewEditMacro, Me.mnuEditCommandLogging, Me.mnuEditOutputSpooling, Me.mnuEditRecall, Me.FlagsToolStripMenuItem, Me.OPtionsToolStripMenuItem})
+        Me.mnuEdit.Name = "mnuEdit"
+        Me.mnuEdit.Size = New System.Drawing.Size(39, 20)
+        Me.mnuEdit.Text = "Edit"
         '
-        'UndoCtrlZToolStripMenuItem
+        'mnuEditUndo
         '
-        Me.UndoCtrlZToolStripMenuItem.Name = "UndoCtrlZToolStripMenuItem"
-        Me.UndoCtrlZToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.UndoCtrlZToolStripMenuItem.Text = "Undo       Ctrl+Z"
+        Me.mnuEditUndo.Name = "mnuEditUndo"
+        Me.mnuEditUndo.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditUndo.Text = "Undo       Ctrl+Z"
         '
-        'CutCtrlXToolStripMenuItem
+        'mnuEditCut
         '
-        Me.CutCtrlXToolStripMenuItem.Name = "CutCtrlXToolStripMenuItem"
-        Me.CutCtrlXToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.CutCtrlXToolStripMenuItem.Text = "Cut       Ctrl+X"
+        Me.mnuEditCut.Name = "mnuEditCut"
+        Me.mnuEditCut.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditCut.Text = "Cut       Ctrl+X"
         '
-        'CopyCtrlCToolStripMenuItem
+        'mnuEditCopy
         '
-        Me.CopyCtrlCToolStripMenuItem.Name = "CopyCtrlCToolStripMenuItem"
-        Me.CopyCtrlCToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.CopyCtrlCToolStripMenuItem.Text = "Copy       Ctrl+C"
+        Me.mnuEditCopy.Name = "mnuEditCopy"
+        Me.mnuEditCopy.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditCopy.Text = "Copy       Ctrl+C"
         '
-        'CopySpecialCtrlYToolStripMenuItem
+        'mnuEditCopySpecial
         '
-        Me.CopySpecialCtrlYToolStripMenuItem.Name = "CopySpecialCtrlYToolStripMenuItem"
-        Me.CopySpecialCtrlYToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.CopySpecialCtrlYToolStripMenuItem.Text = "Copy Special       Ctrl+Y"
+        Me.mnuEditCopySpecial.Name = "mnuEditCopySpecial"
+        Me.mnuEditCopySpecial.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditCopySpecial.Text = "Copy Special       Ctrl+Y"
         '
-        'PasteCtrlVToolStripMenuItem
+        'mnuEditPaste
         '
-        Me.PasteCtrlVToolStripMenuItem.Name = "PasteCtrlVToolStripMenuItem"
-        Me.PasteCtrlVToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.PasteCtrlVToolStripMenuItem.Text = "Paste       Ctrl+V"
+        Me.mnuEditPaste.Name = "mnuEditPaste"
+        Me.mnuEditPaste.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditPaste.Text = "Paste       Ctrl+V"
         '
-        'ClearDelToolStripMenuItem
+        'mnuEditClear
         '
-        Me.ClearDelToolStripMenuItem.Name = "ClearDelToolStripMenuItem"
-        Me.ClearDelToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.ClearDelToolStripMenuItem.Text = "Clear       Del"
+        Me.mnuEditClear.Name = "mnuEditClear"
+        Me.mnuEditClear.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditClear.Text = "Clear       Del"
         '
-        'SelectAllCtrlsAToolStripMenuItem
+        'mnuEditSelectAll
         '
-        Me.SelectAllCtrlsAToolStripMenuItem.Name = "SelectAllCtrlsAToolStripMenuItem"
-        Me.SelectAllCtrlsAToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.SelectAllCtrlsAToolStripMenuItem.Text = "Select All       Ctrls+A"
+        Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
+        Me.mnuEditSelectAll.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditSelectAll.Text = "Select All       Ctrls+A"
         '
-        'FindCtrlFToolStripMenuItem
+        'mnuEditFind
         '
-        Me.FindCtrlFToolStripMenuItem.Name = "FindCtrlFToolStripMenuItem"
-        Me.FindCtrlFToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.FindCtrlFToolStripMenuItem.Text = "Find       Ctrl+F"
+        Me.mnuEditFind.Name = "mnuEditFind"
+        Me.mnuEditFind.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditFind.Text = "Find       Ctrl+F"
         '
-        'ReplaceCtrlHToolStripMenuItem
+        'mnuEditReplace
         '
-        Me.ReplaceCtrlHToolStripMenuItem.Name = "ReplaceCtrlHToolStripMenuItem"
-        Me.ReplaceCtrlHToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.ReplaceCtrlHToolStripMenuItem.Text = "Replace       Ctrl+H"
+        Me.mnuEditReplace.Name = "mnuEditReplace"
+        Me.mnuEditReplace.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditReplace.Text = "Replace       Ctrl+H"
         '
-        'FontCtrlTToolStripMenuItem
+        'mnuEditFont
         '
-        Me.FontCtrlTToolStripMenuItem.Name = "FontCtrlTToolStripMenuItem"
-        Me.FontCtrlTToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.FontCtrlTToolStripMenuItem.Text = "Font       Ctrl+T"
+        Me.mnuEditFont.Name = "mnuEditFont"
+        Me.mnuEditFont.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditFont.Text = "Font       Ctrl+T"
         '
-        'RunWorksheetEditorF7ToolStripMenuItem
+        'mnuEditRunWSEditor
         '
-        Me.RunWorksheetEditorF7ToolStripMenuItem.Name = "RunWorksheetEditorF7ToolStripMenuItem"
-        Me.RunWorksheetEditorF7ToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.RunWorksheetEditorF7ToolStripMenuItem.Text = "Run Worksheet Editor       F7"
+        Me.mnuEditRunWSEditor.Name = "mnuEditRunWSEditor"
+        Me.mnuEditRunWSEditor.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditRunWSEditor.Text = "Run Worksheet Editor       F7"
         '
-        'ViewEditTextToolStripMenuItem
+        'mnuEditViewEditText
         '
-        Me.ViewEditTextToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewF8ToolStripMenuItem, Me.OpenToolStripMenuItem, Me.OpenFromLibraryToolStripMenuItem1, Me.SelectionToolStripMenuItem})
-        Me.ViewEditTextToolStripMenuItem.Name = "ViewEditTextToolStripMenuItem"
-        Me.ViewEditTextToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.ViewEditTextToolStripMenuItem.Text = "View/Edit Text"
+        Me.mnuEditViewEditText.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewF8ToolStripMenuItem, Me.OpenToolStripMenuItem, Me.OpenFromLibraryToolStripMenuItem1, Me.SelectionToolStripMenuItem})
+        Me.mnuEditViewEditText.Name = "mnuEditViewEditText"
+        Me.mnuEditViewEditText.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditViewEditText.Text = "View/Edit Text"
         '
         'NewF8ToolStripMenuItem
         '
@@ -1119,31 +1119,31 @@ Partial Class frmMain
         Me.SelectionToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
         Me.SelectionToolStripMenuItem.Text = "Selection"
         '
-        'ViewEditMacroToolStripMenuItem
+        'mnuEditViewEditMacro
         '
-        Me.ViewEditMacroToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.OpenToolStripMenuItem1})
-        Me.ViewEditMacroToolStripMenuItem.Name = "ViewEditMacroToolStripMenuItem"
-        Me.ViewEditMacroToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.ViewEditMacroToolStripMenuItem.Text = "View/Edit Macro"
+        Me.mnuEditViewEditMacro.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.OpenToolStripMenuItem1})
+        Me.mnuEditViewEditMacro.Name = "mnuEditViewEditMacro"
+        Me.mnuEditViewEditMacro.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditViewEditMacro.Text = "View/Edit Macro"
         '
         'NewToolStripMenuItem
         '
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.NewToolStripMenuItem.Text = "New"
         '
         'OpenToolStripMenuItem1
         '
         Me.OpenToolStripMenuItem1.Name = "OpenToolStripMenuItem1"
-        Me.OpenToolStripMenuItem1.Size = New System.Drawing.Size(112, 22)
+        Me.OpenToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.OpenToolStripMenuItem1.Text = "Open..."
         '
-        'CommandLoggingToolStripMenuItem
+        'mnuEditCommandLogging
         '
-        Me.CommandLoggingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartF9ToolStripMenuItem, Me.StopShiftF9ToolStripMenuItem, Me.ViewLogFileCtrlF9ToolStripMenuItem})
-        Me.CommandLoggingToolStripMenuItem.Name = "CommandLoggingToolStripMenuItem"
-        Me.CommandLoggingToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.CommandLoggingToolStripMenuItem.Text = "Command Logging"
+        Me.mnuEditCommandLogging.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartF9ToolStripMenuItem, Me.StopShiftF9ToolStripMenuItem, Me.ViewLogFileCtrlF9ToolStripMenuItem})
+        Me.mnuEditCommandLogging.Name = "mnuEditCommandLogging"
+        Me.mnuEditCommandLogging.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditCommandLogging.Text = "Command Logging"
         '
         'StartF9ToolStripMenuItem
         '
@@ -1163,12 +1163,12 @@ Partial Class frmMain
         Me.ViewLogFileCtrlF9ToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
         Me.ViewLogFileCtrlF9ToolStripMenuItem.Text = "View Log File       Ctrl+F9"
         '
-        'OutputSpoolingToolStripMenuItem
+        'mnuEditOutputSpooling
         '
-        Me.OutputSpoolingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartToolStripMenuItem, Me.StopToolStripMenuItem, Me.ViewToolStripMenuItem})
-        Me.OutputSpoolingToolStripMenuItem.Name = "OutputSpoolingToolStripMenuItem"
-        Me.OutputSpoolingToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.OutputSpoolingToolStripMenuItem.Text = "Output Spooling"
+        Me.mnuEditOutputSpooling.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartToolStripMenuItem, Me.StopToolStripMenuItem, Me.ViewToolStripMenuItem})
+        Me.mnuEditOutputSpooling.Name = "mnuEditOutputSpooling"
+        Me.mnuEditOutputSpooling.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditOutputSpooling.Text = "Output Spooling"
         '
         'StartToolStripMenuItem
         '
@@ -1188,12 +1188,12 @@ Partial Class frmMain
         Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.ViewToolStripMenuItem.Text = "View Spool File"
         '
-        'REcallToolStripMenuItem
+        'mnuEditRecall
         '
-        Me.REcallToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LastCommandShiftF11ToolStripMenuItem, Me.LastDialogF11ToolStripMenuItem, Me.RestartServerToolStripMenuItem, Me.Last10DialoguesToolStripMenuItem})
-        Me.REcallToolStripMenuItem.Name = "REcallToolStripMenuItem"
-        Me.REcallToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.REcallToolStripMenuItem.Text = "Recall"
+        Me.mnuEditRecall.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LastCommandShiftF11ToolStripMenuItem, Me.LastDialogF11ToolStripMenuItem, Me.RestartServerToolStripMenuItem, Me.Last10DialoguesToolStripMenuItem})
+        Me.mnuEditRecall.Name = "mnuEditRecall"
+        Me.mnuEditRecall.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditRecall.Text = "Recall"
         '
         'LastCommandShiftF11ToolStripMenuItem
         '
@@ -1257,17 +1257,17 @@ Partial Class frmMain
         Me.OPtionsToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.OPtionsToolStripMenuItem.Text = "OPtions..."
         '
-        'ExportAsToolStripMenuItem
+        'mnuFileIEExport
         '
-        Me.ExportAsToolStripMenuItem.Name = "ExportAsToolStripMenuItem"
-        Me.ExportAsToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
-        Me.ExportAsToolStripMenuItem.Text = "Export as..."
+        Me.mnuFileIEExport.Name = "mnuFileIEExport"
+        Me.mnuFileIEExport.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFileIEExport.Text = "Export as..."
         '
-        'ImportASCIIToolStripMenuItem
+        'mnuFIleIEASCII
         '
-        Me.ImportASCIIToolStripMenuItem.Name = "ImportASCIIToolStripMenuItem"
-        Me.ImportASCIIToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
-        Me.ImportASCIIToolStripMenuItem.Text = "Import ASCII..."
+        Me.mnuFIleIEASCII.Name = "mnuFIleIEASCII"
+        Me.mnuFIleIEASCII.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFIleIEASCII.Text = "Import ASCII..."
         '
         'stsStrip
         '
@@ -1438,7 +1438,7 @@ Partial Class frmMain
         'mnuBar
         '
         Me.mnuBar.AllowMerge = False
-        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.EditToolStripMenuItem, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.ToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.ToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.MdiWindowListItem = Me.WindowToolStripMenuItem
@@ -1449,46 +1449,49 @@ Partial Class frmMain
         '
         'FileStripMenuItem
         '
-        Me.FileStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNew, Me.mnuFileOpen, Me.mnuFileLibrary, Me.mnuFileClose, Me.ToolStripSeparator4, Me.ImportExportToolStripMenuItem, Me.ToolStripSeparator5, Me.CloseToolStripMenuItem, Me.SaveCtrlSToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.PrintCtrlPToolStripMenuItem, Me.PrintPreviewToolStripMenuItem, Me.ToolStripSeparator6, Me.ExitToolStripMenuItem})
+        Me.FileStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewWorksheet, Me.mnuFileOpenWorksheet, Me.mnuFileOpenFromLibrary, Me.mnuFileCloseWorksheet, Me.ToolStripSeparator4, Me.mnuFileIE, Me.ToolStripSeparator5, Me.MnuFileClose, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.ToolStripSeparator6, Me.mnuFIleExit})
         Me.FileStripMenuItem.Name = "FileStripMenuItem"
         Me.FileStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileStripMenuItem.Tag = "File "
         Me.FileStripMenuItem.Text = "File"
         '
-        'mnuFileNew
+        'mnuFileNewWorksheet
         '
-        Me.mnuFileNew.Name = "mnuFileNew"
-        Me.mnuFileNew.Size = New System.Drawing.Size(219, 22)
-        Me.mnuFileNew.Text = "New Worksheet...    Ctrl+N"
+        Me.mnuFileNewWorksheet.Name = "mnuFileNewWorksheet"
+        Me.mnuFileNewWorksheet.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileNewWorksheet.Tag = "New_Worksheet"
+        Me.mnuFileNewWorksheet.Text = "New Worksheet...    Ctrl+N"
         '
-        'mnuFileOpen
+        'mnuFileOpenWorksheet
         '
-        Me.mnuFileOpen.Name = "mnuFileOpen"
-        Me.mnuFileOpen.Size = New System.Drawing.Size(219, 22)
-        Me.mnuFileOpen.Text = "Open Worksheet...    Ctrl+O"
+        Me.mnuFileOpenWorksheet.Name = "mnuFileOpenWorksheet"
+        Me.mnuFileOpenWorksheet.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileOpenWorksheet.Tag = "Open_Worksheet"
+        Me.mnuFileOpenWorksheet.Text = "Open Worksheet...    Ctrl+O"
         '
-        'mnuFileLibrary
+        'mnuFileOpenFromLibrary
         '
-        Me.mnuFileLibrary.Name = "mnuFileLibrary"
-        Me.mnuFileLibrary.Size = New System.Drawing.Size(219, 22)
-        Me.mnuFileLibrary.Text = "Open From Library..."
+        Me.mnuFileOpenFromLibrary.Name = "mnuFileOpenFromLibrary"
+        Me.mnuFileOpenFromLibrary.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileOpenFromLibrary.Text = "Open From Library..."
         '
-        'mnuFileClose
+        'mnuFileCloseWorksheet
         '
-        Me.mnuFileClose.Name = "mnuFileClose"
-        Me.mnuFileClose.Size = New System.Drawing.Size(219, 22)
-        Me.mnuFileClose.Text = "Close Worksheet"
+        Me.mnuFileCloseWorksheet.Name = "mnuFileCloseWorksheet"
+        Me.mnuFileCloseWorksheet.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileCloseWorksheet.Text = "Close Worksheet"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(216, 6)
         '
-        'ImportExportToolStripMenuItem
+        'mnuFileIE
         '
-        Me.ImportExportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportASCIIToolStripMenuItem, Me.ODBCQueryToolStripMenuItem, Me.ExportAsToolStripMenuItem, Me.OutputToolStripMenuItem})
-        Me.ImportExportToolStripMenuItem.Name = "ImportExportToolStripMenuItem"
-        Me.ImportExportToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.ImportExportToolStripMenuItem.Text = "Import/Export"
+        Me.mnuFileIE.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFIleIEASCII, Me.mnuFileIEODBC, Me.mnuFileIEExport, Me.mnuFileIEOutput})
+        Me.mnuFileIE.Name = "mnuFileIE"
+        Me.mnuFileIE.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileIE.Text = "Import/Export"
         '
         'SubmitToolStripMenuItem
         '
@@ -1857,45 +1860,45 @@ Partial Class frmMain
     Friend WithEvents ExtremesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents WorksheetInformationToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LockUnlockToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ODBCQueryToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OutputToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuFileIEODBC As ToolStripMenuItem
+    Friend WithEvents mnuFileIEOutput As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
-    Friend WithEvents CloseToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SaveCtrlSToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SaveAsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PrintCtrlPToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PrintPreviewToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MnuFileClose As ToolStripMenuItem
+    Friend WithEvents mnuFileSave As ToolStripMenuItem
+    Friend WithEvents mnuFileSaveAs As ToolStripMenuItem
+    Friend WithEvents mnuFilePrint As ToolStripMenuItem
+    Friend WithEvents mnuFilePrintPreview As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
-    Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents UndoCtrlZToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CutCtrlXToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CopyCtrlCToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CopySpecialCtrlYToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PasteCtrlVToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ClearDelToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SelectAllCtrlsAToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FindCtrlFToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ReplaceCtrlHToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FontCtrlTToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RunWorksheetEditorF7ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewEditTextToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuFIleExit As ToolStripMenuItem
+    Friend WithEvents mnuEdit As ToolStripMenuItem
+    Friend WithEvents mnuEditUndo As ToolStripMenuItem
+    Friend WithEvents mnuEditCut As ToolStripMenuItem
+    Friend WithEvents mnuEditCopy As ToolStripMenuItem
+    Friend WithEvents mnuEditCopySpecial As ToolStripMenuItem
+    Friend WithEvents mnuEditPaste As ToolStripMenuItem
+    Friend WithEvents mnuEditClear As ToolStripMenuItem
+    Friend WithEvents mnuEditSelectAll As ToolStripMenuItem
+    Friend WithEvents mnuEditFind As ToolStripMenuItem
+    Friend WithEvents mnuEditReplace As ToolStripMenuItem
+    Friend WithEvents mnuEditFont As ToolStripMenuItem
+    Friend WithEvents mnuEditRunWSEditor As ToolStripMenuItem
+    Friend WithEvents mnuEditViewEditText As ToolStripMenuItem
     Friend WithEvents NewF8ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenFromLibraryToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents SelectionToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewEditMacroToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuEditViewEditMacro As ToolStripMenuItem
     Friend WithEvents NewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents CommandLoggingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuEditCommandLogging As ToolStripMenuItem
     Friend WithEvents StartF9ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StopShiftF9ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewLogFileCtrlF9ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OutputSpoolingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuEditOutputSpooling As ToolStripMenuItem
     Friend WithEvents StartToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StopToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents REcallToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuEditRecall As ToolStripMenuItem
     Friend WithEvents LastCommandShiftF11ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LastDialogF11ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RestartServerToolStripMenuItem As ToolStripMenuItem
@@ -1906,9 +1909,9 @@ Partial Class frmMain
     Friend WithEvents PresentationModeShiftF6ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DisplayFactorLevelsAsOrdinalsShiftF7ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OPtionsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ExportAsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuFileIEExport As ToolStripMenuItem
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
-    Friend WithEvents ImportASCIIToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuFIleIEASCII As ToolStripMenuItem
     Friend WithEvents stsStrip As StatusStrip
     Friend WithEvents tstatus As ToolStripStatusLabel
     Private WithEvents Tool_strip As ToolStrip
@@ -1931,12 +1934,12 @@ Partial Class frmMain
     Friend WithEvents HelpToolStripButton As ToolStripButton
     Private WithEvents mnuBar As MenuStrip
     Friend WithEvents FileStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuFileNew As ToolStripMenuItem
-    Friend WithEvents mnuFileOpen As ToolStripMenuItem
-    Friend WithEvents mnuFileLibrary As ToolStripMenuItem
-    Friend WithEvents mnuFileClose As ToolStripMenuItem
+    Friend WithEvents mnuFileNewWorksheet As ToolStripMenuItem
+    Friend WithEvents mnuFileOpenWorksheet As ToolStripMenuItem
+    Friend WithEvents mnuFileOpenFromLibrary As ToolStripMenuItem
+    Friend WithEvents mnuFileCloseWorksheet As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
-    Friend WithEvents ImportExportToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuFileIE As ToolStripMenuItem
     Friend WithEvents SubmitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CurrentWindowCtrlWToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CurrentLineCtrlLToolStripMenuItem As ToolStripMenuItem
