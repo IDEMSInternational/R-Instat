@@ -960,13 +960,13 @@ Partial Class frmMain
         'ODBCQueryToolStripMenuItem
         '
         Me.ODBCQueryToolStripMenuItem.Name = "ODBCQueryToolStripMenuItem"
-        Me.ODBCQueryToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ODBCQueryToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.ODBCQueryToolStripMenuItem.Text = "ODBC Query"
         '
         'OutputToolStripMenuItem
         '
         Me.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem"
-        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.OutputToolStripMenuItem.Text = "Output..."
         '
         'ToolStripSeparator5
@@ -1260,13 +1260,13 @@ Partial Class frmMain
         'ExportAsToolStripMenuItem
         '
         Me.ExportAsToolStripMenuItem.Name = "ExportAsToolStripMenuItem"
-        Me.ExportAsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExportAsToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.ExportAsToolStripMenuItem.Text = "Export as..."
         '
         'ImportASCIIToolStripMenuItem
         '
         Me.ImportASCIIToolStripMenuItem.Name = "ImportASCIIToolStripMenuItem"
-        Me.ImportASCIIToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportASCIIToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.ImportASCIIToolStripMenuItem.Text = "Import ASCII..."
         '
         'stsStrip
@@ -1275,7 +1275,7 @@ Partial Class frmMain
         Me.stsStrip.Location = New System.Drawing.Point(0, 239)
         Me.stsStrip.Name = "stsStrip"
         Me.stsStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.stsStrip.Size = New System.Drawing.Size(616, 22)
+        Me.stsStrip.Size = New System.Drawing.Size(769, 22)
         Me.stsStrip.TabIndex = 8
         Me.stsStrip.Text = "Status"
         '
@@ -1292,7 +1292,7 @@ Partial Class frmMain
         Me.Tool_strip.Location = New System.Drawing.Point(0, 24)
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.Tool_strip.Size = New System.Drawing.Size(616, 25)
+        Me.Tool_strip.Size = New System.Drawing.Size(769, 25)
         Me.Tool_strip.TabIndex = 7
         Me.Tool_strip.Text = "Tool"
         '
@@ -1443,7 +1443,7 @@ Partial Class frmMain
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.mnuBar.Name = "mnuBar"
-        Me.mnuBar.Size = New System.Drawing.Size(616, 24)
+        Me.mnuBar.Size = New System.Drawing.Size(769, 24)
         Me.mnuBar.TabIndex = 6
         Me.mnuBar.Text = "Menu_strip"
         '
@@ -1722,7 +1722,7 @@ Partial Class frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(616, 261)
+        Me.ClientSize = New System.Drawing.Size(769, 261)
         Me.Controls.Add(Me.stsStrip)
         Me.Controls.Add(Me.Tool_strip)
         Me.Controls.Add(Me.mnuBar)
