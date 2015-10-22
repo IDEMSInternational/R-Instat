@@ -116,14 +116,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\unvell.ReoGrid.dll</HintPath>
     </Reference>
-    <Reference Include="unvell.ReoScript, Version=1.5.0.0, Culture=neutral, PublicKeyToken=85339a558a3a0c58, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\ReoGrid-0.9.0.0-Beta-Build\ReoGrid-0.9.0.0-Beta-Extension\unvell.ReoScript.dll</HintPath>
-    </Reference>
-    <Reference Include="unvell.ReoScript.EditorLib, Version=1.5.0.0, Culture=neutral, PublicKeyToken=85339a558a3a0c58, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\ReoGrid-0.9.0.0-Beta-Build\ReoGrid-0.9.0.0-Beta-Demo-Binary\ReoGrid-0.9.0.0-Beta-Demo-Binary\unvell.ReoScript.EditorLib.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />

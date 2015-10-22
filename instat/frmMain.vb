@@ -21,8 +21,8 @@ Public Class frmMain
         clsRInterface.LoadData()
         Dim dataset As DataFrame = clsRInterface.GetData("data")
         'frmEditor.grid.CurrentWorksheet.SetCellData("A1", clsRInterface.GetData("data"))
-        'frmEditor.grid.CurrentWorksheet.Rows = dataset.RowCount
-        'frmEditor.grid.CurrentWorksheet.Columns = dataset.ColumnCount
+        frmEditor.grid.CurrentWorksheet.Rows = dataset.RowCount
+        frmEditor.grid.CurrentWorksheet.Columns = dataset.ColumnCount
         For i As Integer = 0 To dataset.RowCount - 1
             For k As Integer = 0 To dataset.ColumnCount - 1
                 frmEditor.grid.CurrentWorksheet.ColumnHeaders(k).Text = dataset.ColumnNames(k)
@@ -31,11 +31,7 @@ Public Class frmMain
         Next
     End Sub
 
-    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
-        dlgDescriptiveStatistics.Show()
-    End Sub
-
-    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
+    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatsSummaryDescribe.Click
         dlgDescriptiveStatistics.Show()
     End Sub
 End Class
