@@ -61,7 +61,6 @@ C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\RDotNet.xml
 C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\bin\Debug\RDotNet.NativeLibrary.xml
 C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.vbprojResolveAssemblyReference.cache
 C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.dlgDescriptiveStatistics.resources
-C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.dlgTabstrial.resources
 C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frmCommand.resources
 C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frmEditor.resources
 C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.frmGraphics.resources
@@ -74,3 +73,4 @@ C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.ucrDa
 C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.vbproj.GenerateResource.Cache
 C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.exe.manifest
 C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.application
+C:\Users\Fundi\Documents\GitHubVisualStudio\Instat\instat\obj\Debug\instat.dlgDescriptiveTabsvb.resources
