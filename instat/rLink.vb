@@ -92,5 +92,4 @@ Public Class RInterface
         Return Me.clsEngine.Evaluate(strLabel).AsDataFrame()
 
     End Function
-
 End Class
