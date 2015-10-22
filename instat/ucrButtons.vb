@@ -4,4 +4,8 @@
         Dim ActiveWindow As Form = Form.ActiveForm
         ActiveWindow.Close()
     End Sub
+
+    Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+
+    End Sub
 End Class
