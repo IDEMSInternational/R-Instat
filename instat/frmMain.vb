@@ -34,4 +34,8 @@ Public Class frmMain
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
         dlgDescriptiveStatistics.Show()
     End Sub
+
+    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
+        dlgDescriptiveStatistics.Show()
+    End Sub
 End Class
