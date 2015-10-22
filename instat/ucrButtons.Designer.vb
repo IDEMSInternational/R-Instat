@@ -40,7 +40,7 @@ Partial Class ucrButtons
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(181, 3)
+        Me.cmdCancel.Location = New System.Drawing.Point(163, 4)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 81
@@ -50,7 +50,7 @@ Partial Class ucrButtons
         '
         'cmdReset
         '
-        Me.cmdReset.Location = New System.Drawing.Point(100, 3)
+        Me.cmdReset.Location = New System.Drawing.Point(82, 4)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(75, 23)
         Me.cmdReset.TabIndex = 80
@@ -60,7 +60,7 @@ Partial Class ucrButtons
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(262, 3)
+        Me.cmdHelp.Location = New System.Drawing.Point(244, 4)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
         Me.cmdHelp.TabIndex = 79
@@ -77,7 +77,7 @@ Partial Class ucrButtons
         Me.Controls.Add(Me.cmdReset)
         Me.Controls.Add(Me.cmdHelp)
         Me.Name = "ucrButtons"
-        Me.Size = New System.Drawing.Size(347, 30)
+        Me.Size = New System.Drawing.Size(333, 32)
         Me.ResumeLayout(False)
 
     End Sub

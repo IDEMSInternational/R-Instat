@@ -1,10 +1,10 @@
 ﻿Imports RDotNet
 Public Class frmMain
-    Dim clsRInterface As New RInterface
+    Public clsRInterface As New RInterface
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
         frmCommand.MdiParent = Me
-        frmGraphics.MdiParent = Me
+        'frmGraphics.MdiParent = Me
         frmLog.MdiParent = Me
         frmScript.MdiParent = Me
         Me.LayoutMdi(MdiLayout.ArrangeIcons)
@@ -14,10 +14,12 @@ Public Class frmMain
         frmEditor.Dock = DockStyle.Fill
         frmCommand.Show()
         frmEditor.Show()
+        clsRInterface.SetLog(frmLog.txtLog)
+        clsRInterface.SetOutput(frmCommand.txtCommand)
 
     End Sub
 
-    Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportASCIIToolStripMenuItem.Click
+    Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
         clsRInterface.LoadData()
         Dim dataset As DataFrame = clsRInterface.GetData("data")
         'frmEditor.grid.CurrentWorksheet.SetCellData("A1", clsRInterface.GetData("data"))
@@ -31,7 +33,21 @@ Public Class frmMain
         Next
     End Sub
 
+
+
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
         dlgDescriptiveStatistics.Show()
+    End Sub
+
+    Private Sub mnuFileOpenWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileOpenWorksheet.Click
+
+    End Sub
+
+    Private Sub CutCtrlXToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuEditCut.Click
+
+    End Sub
+
+    Private Sub mnuBar_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles mnuBar.ItemClicked
+
     End Sub
 End Class

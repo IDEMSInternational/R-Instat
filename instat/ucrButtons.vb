@@ -5,7 +5,13 @@
         ActiveWindow.Close()
     End Sub
 
-    Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+    Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
 
     End Sub
+
+    Public Event ClickOk(sender As Object, e As EventArgs)
+    Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+        RaiseEvent ClickOk(sender, e)
+    End Sub
+
 End Class
