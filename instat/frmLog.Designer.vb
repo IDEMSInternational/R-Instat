@@ -22,16 +22,31 @@ Partial Class frmLog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.txtLog = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
+        '
+        'txtLog
+        '
+        Me.txtLog.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtLog.Location = New System.Drawing.Point(0, 0)
+        Me.txtLog.Multiline = True
+        Me.txtLog.Name = "txtLog"
+        Me.txtLog.ReadOnly = True
+        Me.txtLog.Size = New System.Drawing.Size(284, 261)
+        Me.txtLog.TabIndex = 0
         '
         'frmLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.txtLog)
         Me.Name = "frmLog"
         Me.Text = "Log Window"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
+
+    Friend WithEvents txtLog As TextBox
 End Class
