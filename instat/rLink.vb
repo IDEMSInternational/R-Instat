@@ -82,8 +82,9 @@ Public Class RInterface
 
     Public Sub RunScript(strScript As String)
 
-        txtLog.Text = txtLog.Text & strScript & vbCr
-        txtOutput.Text = txtOutput.Text & "> " & strScript & vbCr & Me.clsEngine.Evaluate(strScript).ToString() & vbCr
+        Dim temp
+        txtLog.Text = txtLog.Text & strScript & vbCrLf
+        txtOutput.Text = txtOutput.Text & "> " & strScript & vbCrLf & String.Join(",", clsEngine.Evaluate(strScript).AsCharacter) & vbCrLf
 
     End Sub
 
