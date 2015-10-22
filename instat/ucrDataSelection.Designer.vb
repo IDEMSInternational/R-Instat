@@ -105,6 +105,7 @@ Partial Class ucrDataSelection
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
         Me.lstAvailableVariable.Size = New System.Drawing.Size(84, 95)
         Me.lstAvailableVariable.TabIndex = 75
+        Me.lstAvailableVariable.Tag = ""
         '
         'ucrDataSelection
         '
