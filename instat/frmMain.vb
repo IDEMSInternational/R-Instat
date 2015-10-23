@@ -1,4 +1,5 @@
 ﻿Imports RDotNet
+Imports System.IO
 Public Class frmMain
     Public clsRInterface As New RInterface
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -20,17 +21,31 @@ Public Class frmMain
     End Sub
 
     Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
-        clsRInterface.LoadData()
-        Dim dataset As DataFrame = clsRInterface.GetData("data")
-        'frmEditor.grid.CurrentWorksheet.SetCellData("A1", clsRInterface.GetData("data"))
-        frmEditor.grid.CurrentWorksheet.Rows = dataset.RowCount
-        frmEditor.grid.CurrentWorksheet.Columns = dataset.ColumnCount
-        For i As Integer = 0 To dataset.RowCount - 1
-            For k As Integer = 0 To dataset.ColumnCount - 1
-                frmEditor.grid.CurrentWorksheet.ColumnHeaders(k).Text = dataset.ColumnNames(k)
-                frmEditor.grid.CurrentWorksheet(row:=i, col:=k) = dataset(i, k)
-            Next
-        Next
+
+        Dim dlgOpen As New OpenFileDialog
+        Dim strExtension As String
+        Dim strHolder As String
+        Dim dataset As DataFrame
+
+        'For importing files into the instat'
+        'start the open file dialog
+        dlgOpen.Filter = "Comma Separated (*.csv)|*.csv|Excel 2-5/95/97 (*.xls)|*.xls|All Files (*.*)|*.*"
+        dlgOpen.Title = "Import"
+        If dlgOpen.ShowDialog() = DialogResult.OK Then
+            'checks if the file name is not blank'
+            If dlgOpen.FileName <> "" Then
+                strExtension = Path.GetExtension(dlgOpen.FileName)
+                strHolder = Replace(dlgOpen.FileName, "\", "/")
+                clsRInterface.LoadData(strExtension, strHolder)
+            Else
+                MsgBox("Must have a file name!", vbInformation, "Message from Instat")
+            End If
+        Else
+            MsgBox("No File was selected!", vbInformation, "Message From Instat")
+        End If
+
+        dataset = clsRInterface.GetData("data")
+        frmEditor.UpdateSheet(dataset)
     End Sub
 
 
