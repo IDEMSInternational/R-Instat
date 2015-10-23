@@ -65,4 +65,8 @@ Public Class frmMain
     Private Sub mnuBar_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles mnuBar.ItemClicked
 
     End Sub
+
+    Private Sub CalculationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalculationsToolStripMenuItem.Click
+        dlgCalculator.Show()
+    End Sub
 End Class

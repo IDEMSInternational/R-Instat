@@ -960,13 +960,13 @@ Partial Class frmMain
         'mnuFileIEODBC
         '
         Me.mnuFileIEODBC.Name = "mnuFileIEODBC"
-        Me.mnuFileIEODBC.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFileIEODBC.Size = New System.Drawing.Size(150, 22)
         Me.mnuFileIEODBC.Text = "ODBC Query"
         '
         'mnuFileIEOutput
         '
         Me.mnuFileIEOutput.Name = "mnuFileIEOutput"
-        Me.mnuFileIEOutput.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFileIEOutput.Size = New System.Drawing.Size(150, 22)
         Me.mnuFileIEOutput.Text = "Output..."
         '
         'ToolStripSeparator5
@@ -1129,13 +1129,13 @@ Partial Class frmMain
         'NewToolStripMenuItem
         '
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
         Me.NewToolStripMenuItem.Text = "New"
         '
         'OpenToolStripMenuItem1
         '
         Me.OpenToolStripMenuItem1.Name = "OpenToolStripMenuItem1"
-        Me.OpenToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.OpenToolStripMenuItem1.Size = New System.Drawing.Size(112, 22)
         Me.OpenToolStripMenuItem1.Text = "Open..."
         '
         'mnuEditCommandLogging
@@ -1260,13 +1260,13 @@ Partial Class frmMain
         'mnuFileIEExport
         '
         Me.mnuFileIEExport.Name = "mnuFileIEExport"
-        Me.mnuFileIEExport.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFileIEExport.Size = New System.Drawing.Size(150, 22)
         Me.mnuFileIEExport.Text = "Export as..."
         '
         'mnuFIleIEASCII
         '
         Me.mnuFIleIEASCII.Name = "mnuFIleIEASCII"
-        Me.mnuFIleIEASCII.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFIleIEASCII.Size = New System.Drawing.Size(150, 22)
         Me.mnuFIleIEASCII.Text = "Import ASCII..."
         '
         'stsStrip
