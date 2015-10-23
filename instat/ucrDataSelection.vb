@@ -16,7 +16,6 @@
 Imports RDotNet
 
 Public Class ucrDataSelection
-    Dim clsRInterface As New RInterface
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If (lstAvailableVariable.SelectedItem <> "") Then
@@ -41,7 +40,7 @@ Public Class ucrDataSelection
         Dim dataset As DataFrame
         Dim i As Integer
 
-        dataset = clsRInterface.GetData("data")
+        dataset = frmMain.clsRInterface.GetData("data")
         For i = 0 To dataset.ColumnCount - 1
             lstAvailableVariable.Items.Add(dataset.ColumnNames(i))
         Next
