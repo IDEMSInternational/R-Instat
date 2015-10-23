@@ -1,6 +1,7 @@
 ﻿Imports RDotNet
 Public Class frmEditor
     Public Sub UpdateSheet(DataSet As DataFrame)
+        Me.grid.CurrentWorksheet.Reset()
         Me.grid.CurrentWorksheet.Rows = DataSet.RowCount
         Me.grid.CurrentWorksheet.Columns = DataSet.ColumnCount
         For i As Integer = 0 To DataSet.RowCount - 1
