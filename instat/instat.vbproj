@@ -137,6 +137,18 @@
     <Compile Include="dlgDescriptiveStatistics.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBoxPlot1.Designer.vb">
+      <DependentUpon>frmBoxPlot1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBoxPlot1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmCommand.Designer.vb">
       <DependentUpon>frmCommand.vb</DependentUpon>
     </Compile>
@@ -183,6 +195,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="rLink.vb" />
+    <Compile Include="ucrAvailableData.Designer.vb">
+      <DependentUpon>ucrAvailableData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrAvailableData.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrButtons.designer.vb">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </Compile>
@@ -199,6 +217,12 @@
   <ItemGroup>
     <EmbeddedResource Include="dlgDescriptiveStatistics.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBoxPlot1.resx">
+      <DependentUpon>frmBoxPlot1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>
@@ -220,6 +244,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrAvailableData.resx">
+      <DependentUpon>ucrAvailableData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
