@@ -22,11 +22,12 @@ Imports System.Text
 Imports System.Threading.Tasks
 
 
+
 Public Class RInterface
     ' R interface class. Each instance of the class has its own REngine instance
     Dim clsEngine As REngine
-    Dim txtOutput As TextBox
-    Dim txtLog As TextBox
+    Dim txtOutput As New TextBox
+    Dim txtLog As New TextBox
 
     Public Sub New()
 
@@ -82,7 +83,6 @@ Public Class RInterface
 
     Public Sub RunScript(strScript As String)
 
-        Dim temp
         txtLog.Text = txtLog.Text & strScript & vbCrLf
         txtOutput.Text = txtOutput.Text & "> " & strScript & vbCrLf & String.Join(",", clsEngine.Evaluate(strScript).AsCharacter) & vbCrLf
 
@@ -93,4 +93,11 @@ Public Class RInterface
         Return Me.clsEngine.Evaluate(strLabel).AsDataFrame()
 
     End Function
+
+    Public Function GetVariables(strLabel As String) As CharacterVector
+
+        Return Me.clsEngine.Evaluate(strLabel).AsCharacter
+
+    End Function
+
 End Class
