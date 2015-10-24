@@ -16,8 +16,6 @@
 Imports RDotNet
 
 Public Class ucrDataSelection
-    Dim clsRInterface As New RInterface
-
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If (lstAvailableVariable.SelectedItem <> "") Then
             lstSelectedVariables.Items.Add(lstAvailableVariable.SelectedItem)
@@ -38,12 +36,16 @@ Public Class ucrDataSelection
     End Sub
 
     Private Sub ucrDataSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim dataset As DataFrame
+        Dim cvDataset As CharacterVector
+        Dim aDataset As Array
         Dim i As Integer
 
-        dataset = clsRInterface.GetData("data")
-        For i = 0 To dataset.ColumnCount - 1
-            lstAvailableVariable.Items.Add(dataset.ColumnNames(i))
+        cvDataset = frmMain.clsRInterface.GetVariables("colnames(data)")
+        aDataset = cvDataset.ToArray
+        For i = 0 To aDataset.GetLength(0) - 1
+            lstAvailableVariable.Items.Add(aDataset(i))
         Next
+
     End Sub
+
 End Class
