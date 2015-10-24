@@ -257,6 +257,7 @@ Partial Class frmMain
         Me.NameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormatCtrlDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSriptLog = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -813,7 +814,7 @@ Partial Class frmMain
         '
         'ToolStripMenuItem1
         '
-        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuScriptEditor})
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuScriptEditor, Me.mnuSriptLog})
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(49, 20)
         Me.ToolStripMenuItem1.Text = "Script"
@@ -960,13 +961,13 @@ Partial Class frmMain
         'mnuFileIEODBC
         '
         Me.mnuFileIEODBC.Name = "mnuFileIEODBC"
-        Me.mnuFileIEODBC.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFileIEODBC.Size = New System.Drawing.Size(150, 22)
         Me.mnuFileIEODBC.Text = "ODBC Query"
         '
         'mnuFileIEOutput
         '
         Me.mnuFileIEOutput.Name = "mnuFileIEOutput"
-        Me.mnuFileIEOutput.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFileIEOutput.Size = New System.Drawing.Size(150, 22)
         Me.mnuFileIEOutput.Text = "Output..."
         '
         'ToolStripSeparator5
@@ -1129,13 +1130,13 @@ Partial Class frmMain
         'NewToolStripMenuItem
         '
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
         Me.NewToolStripMenuItem.Text = "New"
         '
         'OpenToolStripMenuItem1
         '
         Me.OpenToolStripMenuItem1.Name = "OpenToolStripMenuItem1"
-        Me.OpenToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.OpenToolStripMenuItem1.Size = New System.Drawing.Size(112, 22)
         Me.OpenToolStripMenuItem1.Text = "Open..."
         '
         'mnuEditCommandLogging
@@ -1260,19 +1261,19 @@ Partial Class frmMain
         'mnuFileIEExport
         '
         Me.mnuFileIEExport.Name = "mnuFileIEExport"
-        Me.mnuFileIEExport.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFileIEExport.Size = New System.Drawing.Size(150, 22)
         Me.mnuFileIEExport.Text = "Export as..."
         '
         'mnuFIleIEASCII
         '
         Me.mnuFIleIEASCII.Name = "mnuFIleIEASCII"
-        Me.mnuFIleIEASCII.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFIleIEASCII.Size = New System.Drawing.Size(150, 22)
         Me.mnuFIleIEASCII.Text = "Import ASCII..."
         '
         'stsStrip
         '
         Me.stsStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tstatus})
-        Me.stsStrip.Location = New System.Drawing.Point(0, 239)
+        Me.stsStrip.Location = New System.Drawing.Point(0, 310)
         Me.stsStrip.Name = "stsStrip"
         Me.stsStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.stsStrip.Size = New System.Drawing.Size(769, 22)
@@ -1721,11 +1722,17 @@ Partial Class frmMain
         Me.AlignmentToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.AlignmentToolStripMenuItem.Text = "Alignment..."
         '
+        'mnuSriptLog
+        '
+        Me.mnuSriptLog.Name = "mnuSriptLog"
+        Me.mnuSriptLog.Size = New System.Drawing.Size(178, 22)
+        Me.mnuSriptLog.Text = "Log Window"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(769, 261)
+        Me.ClientSize = New System.Drawing.Size(769, 332)
         Me.Controls.Add(Me.stsStrip)
         Me.Controls.Add(Me.Tool_strip)
         Me.Controls.Add(Me.mnuBar)
@@ -1977,4 +1984,5 @@ Partial Class frmMain
     Friend WithEvents NameToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FormatCtrlDToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AlignmentToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuSriptLog As ToolStripMenuItem
 End Class

@@ -1,6 +1,8 @@
 ﻿Imports RDotNet
 Public Class frmMain
+
     Public clsRInterface As New RInterface
+
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
         frmCommand.MdiParent = Me
@@ -49,5 +51,13 @@ Public Class frmMain
 
     Private Sub mnuBar_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles mnuBar.ItemClicked
 
+    End Sub
+
+    Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
+        dlgSort.Show()
+    End Sub
+
+    Private Sub mnuSriptLog_Click(sender As Object, e As EventArgs) Handles mnuSriptLog.Click
+        frmLog.Show()
     End Sub
 End Class

@@ -40,4 +40,8 @@
             grpgraphics.Visible = False
         End If
     End Sub
+
+    Private Sub UcrDataSelection1_Load(sender As Object, e As EventArgs) Handles UcrDataSelection1.Load
+
+    End Sub
 End Class
