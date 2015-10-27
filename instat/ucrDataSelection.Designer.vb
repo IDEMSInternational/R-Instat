@@ -85,7 +85,9 @@ Partial Class ucrDataSelection
         Me.lstSelectedVariables.FormattingEnabled = True
         Me.lstSelectedVariables.Location = New System.Drawing.Point(189, 23)
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
+        Me.lstSelectedVariables.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.lstSelectedVariables.Size = New System.Drawing.Size(84, 95)
+        Me.lstSelectedVariables.Sorted = True
         Me.lstSelectedVariables.TabIndex = 77
         '
         'lblAvailableVariables
@@ -103,7 +105,9 @@ Partial Class ucrDataSelection
         Me.lstAvailableVariable.FormattingEnabled = True
         Me.lstAvailableVariable.Location = New System.Drawing.Point(9, 23)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
+        Me.lstAvailableVariable.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.lstAvailableVariable.Size = New System.Drawing.Size(84, 95)
+        Me.lstAvailableVariable.Sorted = True
         Me.lstAvailableVariable.TabIndex = 75
         Me.lstAvailableVariable.Tag = ""
         '

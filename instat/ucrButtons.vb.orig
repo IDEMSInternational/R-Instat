@@ -1,0 +1,23 @@
+﻿Public Class ucrButtons
+    Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
+        'Gets the current active window 
+        Dim ActiveWindow As Form = Form.ActiveForm
+        ActiveWindow.Close()
+    End Sub
+
+<<<<<<< HEAD
+    Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+
+    End Sub
+=======
+    Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
+
+    End Sub
+
+    Public Event ClickOk(sender As Object, e As EventArgs)
+    Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+        RaiseEvent ClickOk(sender, e)
+    End Sub
+
+>>>>>>> fc7d2ad16c0b14b0ee665556fbe4760291b8db3e
+End Class

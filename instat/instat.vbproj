@@ -137,6 +137,12 @@
     <Compile Include="dlgDescriptiveStatistics.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRegularSequence.Designer.vb">
+      <DependentUpon>dlgRegularSequence.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRegularSequence.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmCommand.Designer.vb">
       <DependentUpon>frmCommand.vb</DependentUpon>
     </Compile>
@@ -183,6 +189,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="rLink.vb" />
+    <Compile Include="rSyntax.vb" />
     <Compile Include="ucrButtons.designer.vb">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </Compile>
@@ -199,6 +206,9 @@
   <ItemGroup>
     <EmbeddedResource Include="dlgDescriptiveStatistics.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegularSequence.resx">
+      <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>

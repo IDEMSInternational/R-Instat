@@ -39,17 +39,17 @@ Partial Class frmEditor
         Me.grid.SheetTabControlNewButtonVisible = True
         Me.grid.SheetTabControlWidth = 60
         Me.grid.SheetTabNewButtonVisible = True
-        Me.grid.Size = New System.Drawing.Size(410, 261)
+        Me.grid.Size = New System.Drawing.Size(534, 261)
         Me.grid.TabIndex = 0
         '
         'frmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(410, 261)
+        Me.ClientSize = New System.Drawing.Size(534, 261)
         Me.Controls.Add(Me.grid)
         Me.Name = "frmEditor"
-        Me.Text = "Editor Window"
+        Me.Text = "Data View"
         Me.ResumeLayout(False)
 
     End Sub
