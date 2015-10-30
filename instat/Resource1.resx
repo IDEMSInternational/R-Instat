@@ -117,11 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Available_Variables" xml:space="preserve">
+    <value>Available  Variables</value>
+  </data>
+  <data name="Box_Plot" xml:space="preserve">
+    <value>Box Plot</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Choose_Statistics" xml:space="preserve">
+    <value>Choose Statistics</value>
+  </data>
   <data name="Climatic" xml:space="preserve">
     <value>Climatic</value>
   </data>
+  <data name="Command_and_Output_Window" xml:space="preserve">
+    <value>Command and Output Window</value>
+  </data>
+  <data name="Cumulative_Frequency" xml:space="preserve">
+    <value>Cumulative Frequency</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="Factor_Variable" xml:space="preserve">
+    <value>Factor Variable</value>
   </data>
   <data name="File" xml:space="preserve">
     <value>File </value>
@@ -135,11 +159,29 @@
   <data name="Manage" xml:space="preserve">
     <value>Manage</value>
   </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
   <data name="Script" xml:space="preserve">
     <value>Script</value>
   </data>
+  <data name="Script_Window" xml:space="preserve">
+    <value>Script Window</value>
+  </data>
+  <data name="Selected_Variables" xml:space="preserve">
+    <value>Selected Variables</value>
+  </data>
   <data name="Statistics" xml:space="preserve">
     <value>Statistics</value>
+  </data>
+  <data name="Stem_And_Leaf" xml:space="preserve">
+    <value>Stem And Leaf</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>

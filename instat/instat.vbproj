@@ -78,6 +78,10 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
+    <MultilingualFallbackLanguage>en-US</MultilingualFallbackLanguage>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -173,7 +177,6 @@
     <Compile Include="frmScript.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -213,22 +216,43 @@
     <EmbeddedResource Include="dlgDescriptiveStatistics.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescriptiveStatistics.sw-KE.resx">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSort.resx">
+      <DependentUpon>dlgSort.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSort.sw-KE.resx">
       <DependentUpon>dlgSort.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCommand.sw-KE.resx">
+      <DependentUpon>frmCommand.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditor.resx">
+      <DependentUpon>frmEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditor.sw-KE.resx">
       <DependentUpon>frmEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLog.resx">
       <DependentUpon>frmLog.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLog.sw-KE.resx">
+      <DependentUpon>frmLog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.sw-KE.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmScript.resx">
+      <DependentUpon>frmScript.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmScript.sw-KE.resx">
       <DependentUpon>frmScript.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -237,15 +261,23 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.sw-KE.resx" />
     <EmbeddedResource Include="Resource1.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resource1.sw-KE.resx" />
     <EmbeddedResource Include="ucrButtons.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrButtons.sw-KE.resx">
+      <DependentUpon>ucrButtons.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.resx">
+      <DependentUpon>ucrDataSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataSelection.sw-KE.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -289,7 +321,14 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\instat.sw-KE.xlf" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />
+  <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">
+    <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

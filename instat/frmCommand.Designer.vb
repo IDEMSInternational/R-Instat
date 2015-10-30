@@ -41,6 +41,7 @@ Partial Class frmCommand
         Me.ClientSize = New System.Drawing.Size(368, 261)
         Me.Controls.Add(Me.txtCommand)
         Me.Name = "frmCommand"
+        Me.Tag = "Command_and_Output_Window"
         Me.Text = "Command and Output Window"
         Me.ResumeLayout(False)
         Me.PerformLayout()
