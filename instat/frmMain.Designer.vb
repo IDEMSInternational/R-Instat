@@ -116,6 +116,7 @@ Partial Class frmMain
         Me.TotalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptEditor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSriptLog = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
@@ -257,7 +258,8 @@ Partial Class frmMain
         Me.NameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormatCtrlDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuSriptLog = New System.Windows.Forms.ToolStripMenuItem()
+        Me.KiswahiliToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.KiswahiliToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -465,6 +467,7 @@ Partial Class frmMain
         Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotToolStripMenuItem, Me.BoxplotToolStripMenuItem, Me.HistogramToolStripMenuItem, Me.ProbabilityPlotToolStripMenuItem, Me.DotplotToolStripMenuItem, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem})
         Me.GraphicsToolStripMenuItem.Name = "GraphicsToolStripMenuItem"
         Me.GraphicsToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
+        Me.GraphicsToolStripMenuItem.Tag = "Graphics"
         Me.GraphicsToolStripMenuItem.Text = "Graphics"
         '
         'PlotToolStripMenuItem
@@ -538,6 +541,7 @@ Partial Class frmMain
         Me.StatisticsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SummaryToolStripMenuItem, Me.TablesToolStripMenuItem, Me.ToolStripSeparator8, Me.SimpleModelsToolStripMenuItem, Me.AnalysisOfVarianceToolStripMenuItem, Me.RegressionToolStripMenuItem, Me.ToolStripSeparator12, Me.NonParametricToolStripMenuItem, Me.ToolStripSeparator13, Me.TimeSeriesToolStripMenuItem, Me.SurvivalToolStripMenuItem, Me.ToolStripSeparator14, Me.ProbabilityDistributionsToolStripMenuItem, Me.SampleSizeToolStripMenuItem})
         Me.StatisticsToolStripMenuItem.Name = "StatisticsToolStripMenuItem"
         Me.StatisticsToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
+        Me.StatisticsToolStripMenuItem.Tag = "Statistics"
         Me.StatisticsToolStripMenuItem.Text = "Statistics"
         '
         'SummaryToolStripMenuItem
@@ -817,6 +821,7 @@ Partial Class frmMain
         Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuScriptEditor, Me.mnuSriptLog})
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(49, 20)
+        Me.ToolStripMenuItem1.Tag = "Script"
         Me.ToolStripMenuItem1.Text = "Script"
         '
         'mnuScriptEditor
@@ -825,16 +830,24 @@ Partial Class frmMain
         Me.mnuScriptEditor.Size = New System.Drawing.Size(178, 22)
         Me.mnuScriptEditor.Text = "Command Window"
         '
+        'mnuSriptLog
+        '
+        Me.mnuSriptLog.Name = "mnuSriptLog"
+        Me.mnuSriptLog.Size = New System.Drawing.Size(178, 22)
+        Me.mnuSriptLog.Text = "Log Window"
+        '
         'WindowToolStripMenuItem
         '
         Me.WindowToolStripMenuItem.Name = "WindowToolStripMenuItem"
         Me.WindowToolStripMenuItem.Size = New System.Drawing.Size(63, 20)
+        Me.WindowToolStripMenuItem.Tag = "Window"
         Me.WindowToolStripMenuItem.Text = "Window"
         '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpToolStripMenuItem.Tag = "Help"
         Me.HelpToolStripMenuItem.Text = "Help"
         '
         'ToolStripSeparator16
@@ -853,6 +866,7 @@ Partial Class frmMain
         Me.ClimaticToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManageToolStripMenuItem1, Me.DisplayDailyToolStripMenuItem, Me.SummaryToolStripMenuItem2, Me.EventsToolStripMenuItem, Me.ToolStripSeparator16, Me.ExamineToolStripMenuItem, Me.ProcessToolStripMenuItem, Me.ToolStripSeparator17, Me.EvaporationToolStripMenuItem, Me.CropToolStripMenuItem, Me.HeatSumToolStripMenuItem, Me.MarkovModellingToolStripMenuItem})
         Me.ClimaticToolStripMenuItem.Name = "ClimaticToolStripMenuItem"
         Me.ClimaticToolStripMenuItem.Size = New System.Drawing.Size(63, 20)
+        Me.ClimaticToolStripMenuItem.Tag = "Climatic"
         Me.ClimaticToolStripMenuItem.Text = "Climatic"
         '
         'ManageToolStripMenuItem1
@@ -1439,7 +1453,7 @@ Partial Class frmMain
         'mnuBar
         '
         Me.mnuBar.AllowMerge = False
-        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.ToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.ToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.KiswahiliToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.MdiWindowListItem = Me.WindowToolStripMenuItem
@@ -1499,6 +1513,7 @@ Partial Class frmMain
         Me.SubmitToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CurrentWindowCtrlWToolStripMenuItem, Me.CurrentLineCtrlLToolStripMenuItem, Me.SelectionCtrlMToolStripMenuItem, Me.RunMacroToolStripMenuItem, Me.InterruptMacroF12ToolStripMenuItem, Me.AddMacroToMenuToolStripMenuItem, Me.ModifyMacroInMenuToolStripMenuItem, Me.RemoveMacroFromMenuToolStripMenuItem})
         Me.SubmitToolStripMenuItem.Name = "SubmitToolStripMenuItem"
         Me.SubmitToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
+        Me.SubmitToolStripMenuItem.Tag = "Submit"
         Me.SubmitToolStripMenuItem.Text = "Submit"
         '
         'CurrentWindowCtrlWToolStripMenuItem
@@ -1554,6 +1569,7 @@ Partial Class frmMain
         Me.ManageToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalculationsToolStripMenuItem, Me.DataToolStripMenuItem, Me.ManipulateToolStripMenuItem, Me.ReshapeToolStripMenuItem, Me.ColumnPropertiesToolStripMenuItem, Me.ResizeWorksheetToolStripMenuItem, Me.WorksheetInformationToolStripMenuItem})
         Me.ManageToolStripMenuItem.Name = "ManageToolStripMenuItem"
         Me.ManageToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
+        Me.ManageToolStripMenuItem.Tag = "Manage"
         Me.ManageToolStripMenuItem.Text = "Manage"
         '
         'CalculationsToolStripMenuItem
@@ -1722,11 +1738,18 @@ Partial Class frmMain
         Me.AlignmentToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.AlignmentToolStripMenuItem.Text = "Alignment..."
         '
-        'mnuSriptLog
+        'KiswahiliToolStripMenuItem
         '
-        Me.mnuSriptLog.Name = "mnuSriptLog"
-        Me.mnuSriptLog.Size = New System.Drawing.Size(178, 22)
-        Me.mnuSriptLog.Text = "Log Window"
+        Me.KiswahiliToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KiswahiliToolStripMenuItem1})
+        Me.KiswahiliToolStripMenuItem.Name = "KiswahiliToolStripMenuItem"
+        Me.KiswahiliToolStripMenuItem.Size = New System.Drawing.Size(71, 20)
+        Me.KiswahiliToolStripMenuItem.Text = "Language"
+        '
+        'KiswahiliToolStripMenuItem1
+        '
+        Me.KiswahiliToolStripMenuItem1.Name = "KiswahiliToolStripMenuItem1"
+        Me.KiswahiliToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.KiswahiliToolStripMenuItem1.Text = "Kiswahili"
         '
         'frmMain
         '
@@ -1985,4 +2008,6 @@ Partial Class frmMain
     Friend WithEvents FormatCtrlDToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AlignmentToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuSriptLog As ToolStripMenuItem
+    Friend WithEvents KiswahiliToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents KiswahiliToolStripMenuItem1 As ToolStripMenuItem
 End Class
