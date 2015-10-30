@@ -25,7 +25,7 @@ Namespace My.Resources
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
-    Friend Class Resource1
+    Public Class Resource1
         
         Private Shared resourceMan As Global.System.Resources.ResourceManager
         
@@ -40,7 +40,7 @@ Namespace My.Resources
         '''  Returns the cached ResourceManager instance used by this class.
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Friend Shared ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
+        Public Shared ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
             Get
                 If Object.ReferenceEquals(resourceMan, Nothing) Then
                     Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("instat.Resource1", GetType(Resource1).Assembly)
@@ -55,7 +55,7 @@ Namespace My.Resources
         '''  resource lookups using this strongly typed resource class.
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Friend Shared Property Culture() As Global.System.Globalization.CultureInfo
+        Public Shared Property Culture() As Global.System.Globalization.CultureInfo
             Get
                 Return resourceCulture
             End Get
@@ -65,27 +65,99 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Add.
+        '''</summary>
+        Public Shared ReadOnly Property Add() As String
+            Get
+                Return ResourceManager.GetString("Add", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Available  Variables.
+        '''</summary>
+        Public Shared ReadOnly Property Available_Variables() As String
+            Get
+                Return ResourceManager.GetString("Available_Variables", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Box Plot.
+        '''</summary>
+        Public Shared ReadOnly Property Box_Plot() As String
+            Get
+                Return ResourceManager.GetString("Box_Plot", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Cancel.
+        '''</summary>
+        Public Shared ReadOnly Property Cancel() As String
+            Get
+                Return ResourceManager.GetString("Cancel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Choose Statistics.
+        '''</summary>
+        Public Shared ReadOnly Property Choose_Statistics() As String
+            Get
+                Return ResourceManager.GetString("Choose_Statistics", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Climatic.
         '''</summary>
-        Friend Shared ReadOnly Property Climatic() As String
+        Public Shared ReadOnly Property Climatic() As String
             Get
                 Return ResourceManager.GetString("Climatic", resourceCulture)
             End Get
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Command and Output Window.
+        '''</summary>
+        Public Shared ReadOnly Property Command_and_Output_Window() As String
+            Get
+                Return ResourceManager.GetString("Command_and_Output_Window", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Cumulative Frequency.
+        '''</summary>
+        Public Shared ReadOnly Property Cumulative_Frequency() As String
+            Get
+                Return ResourceManager.GetString("Cumulative_Frequency", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Edit.
         '''</summary>
-        Friend Shared ReadOnly Property Edit() As String
+        Public Shared ReadOnly Property Edit() As String
             Get
                 Return ResourceManager.GetString("Edit", resourceCulture)
             End Get
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Factor Variable.
+        '''</summary>
+        Public Shared ReadOnly Property Factor_Variable() As String
+            Get
+                Return ResourceManager.GetString("Factor_Variable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to File .
         '''</summary>
-        Friend Shared ReadOnly Property File() As String
+        Public Shared ReadOnly Property File() As String
             Get
                 Return ResourceManager.GetString("File", resourceCulture)
             End Get
@@ -94,7 +166,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Graphics.
         '''</summary>
-        Friend Shared ReadOnly Property Graphics() As String
+        Public Shared ReadOnly Property Graphics() As String
             Get
                 Return ResourceManager.GetString("Graphics", resourceCulture)
             End Get
@@ -103,7 +175,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Help.
         '''</summary>
-        Friend Shared ReadOnly Property Help() As String
+        Public Shared ReadOnly Property Help() As String
             Get
                 Return ResourceManager.GetString("Help", resourceCulture)
             End Get
@@ -112,34 +184,88 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Manage.
         '''</summary>
-        Friend Shared ReadOnly Property Manage() As String
+        Public Shared ReadOnly Property Manage() As String
             Get
                 Return ResourceManager.GetString("Manage", resourceCulture)
             End Get
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Ok.
+        '''</summary>
+        Public Shared ReadOnly Property Ok() As String
+            Get
+                Return ResourceManager.GetString("Ok", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Remove.
+        '''</summary>
+        Public Shared ReadOnly Property Remove() As String
+            Get
+                Return ResourceManager.GetString("Remove", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Reset.
+        '''</summary>
+        Public Shared ReadOnly Property Reset() As String
+            Get
+                Return ResourceManager.GetString("Reset", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Script.
         '''</summary>
-        Friend Shared ReadOnly Property Script() As String
+        Public Shared ReadOnly Property Script() As String
             Get
                 Return ResourceManager.GetString("Script", resourceCulture)
             End Get
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Script Window.
+        '''</summary>
+        Public Shared ReadOnly Property Script_Window() As String
+            Get
+                Return ResourceManager.GetString("Script_Window", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Selected Variables.
+        '''</summary>
+        Public Shared ReadOnly Property Selected_Variables() As String
+            Get
+                Return ResourceManager.GetString("Selected_Variables", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Statistics.
         '''</summary>
-        Friend Shared ReadOnly Property Statistics() As String
+        Public Shared ReadOnly Property Statistics() As String
             Get
                 Return ResourceManager.GetString("Statistics", resourceCulture)
             End Get
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Stem And Leaf.
+        '''</summary>
+        Public Shared ReadOnly Property Stem_And_Leaf() As String
+            Get
+                Return ResourceManager.GetString("Stem_And_Leaf", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Submit.
         '''</summary>
-        Friend Shared ReadOnly Property Submit() As String
+        Public Shared ReadOnly Property Submit() As String
             Get
                 Return ResourceManager.GetString("Submit", resourceCulture)
             End Get
@@ -148,7 +274,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Window.
         '''</summary>
-        Friend Shared ReadOnly Property Window() As String
+        Public Shared ReadOnly Property Window() As String
             Get
                 Return ResourceManager.GetString("Window", resourceCulture)
             End Get
