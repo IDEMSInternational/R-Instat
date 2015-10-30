@@ -189,7 +189,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Resource1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
     <Compile Include="rLink.vb" />
+    <Compile Include="Translations.vb" />
     <Compile Include="ucrButtons.designer.vb">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </Compile>
@@ -230,6 +236,11 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource1.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
