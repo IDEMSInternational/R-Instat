@@ -90,22 +90,53 @@
           <source>..\Resources\Alecive-Flatwoken-Apps-Run.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
           <target state="needs-review-translation">..\Resources\Alecive-Flatwoken-Apps-Run.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
         </trans-unit>
-      </group>
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/RESOURCE1.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/RESOURCE1.RESX" datatype="resx">
+        <trans-unit id="Add" translate="yes" xml:space="preserve">
+          <source>Add</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ongeza</target>
+        </trans-unit>
+        <trans-unit id="Available_Variables" translate="yes" xml:space="preserve">
+          <source>Available  Variables</source>
+          <target state="new">Available  Variables</target>
+        </trans-unit>
+        <trans-unit id="Box_Plot" translate="yes" xml:space="preserve">
+          <source>Box Plot</source>
+          <target state="new">Box Plot</target>
+        </trans-unit>
+        <trans-unit id="Cancel" translate="yes" xml:space="preserve">
+          <source>Cancel</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Katisha</target>
+        </trans-unit>
+        <trans-unit id="Choose_Statistics" translate="yes" xml:space="preserve">
+          <source>Choose Statistics</source>
+          <target state="new">Choose Statistics</target>
+        </trans-unit>
         <trans-unit id="Climatic" translate="yes" xml:space="preserve">
           <source>Climatic</source>
           <target state="new">Climatic</target>
         </trans-unit>
+        <trans-unit id="Close" translate="yes" xml:space="preserve">
+          <source>Close</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Funga</target>
+        </trans-unit>
+        <trans-unit id="Close_Worksheet" translate="yes" xml:space="preserve">
+          <source>Close Worksheet</source>
+          <target state="new">Close Worksheet</target>
+        </trans-unit>
+        <trans-unit id="Command_and_Output_Window" translate="yes" xml:space="preserve">
+          <source>Command and Output Window</source>
+          <target state="new">Command and Output Window</target>
+        </trans-unit>
+        <trans-unit id="Cumulative_Frequency" translate="yes" xml:space="preserve">
+          <source>Cumulative Frequency</source>
+          <target state="new">Cumulative Frequency</target>
+        </trans-unit>
         <trans-unit id="Edit" translate="yes" xml:space="preserve">
           <source>Edit</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Hariri</target>
+        </trans-unit>
+        <trans-unit id="Factor_Variable" translate="yes" xml:space="preserve">
+          <source>Factor Variable</source>
+          <target state="new">Factor Variable</target>
         </trans-unit>
         <trans-unit id="File" translate="yes" xml:space="preserve">
           <source>File </source>
@@ -119,45 +150,37 @@
           <source>Help</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Msaada</target>
         </trans-unit>
+        <trans-unit id="Import_Export" translate="yes" xml:space="preserve">
+          <source>Import/Export</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hamisha/Leta</target>
+        </trans-unit>
         <trans-unit id="Manage" translate="yes" xml:space="preserve">
           <source>Manage</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Simamia</target>
         </trans-unit>
-        <trans-unit id="Script" translate="yes" xml:space="preserve">
-          <source>Script</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hati</target>
-        </trans-unit>
-        <trans-unit id="Statistics" translate="yes" xml:space="preserve">
-          <source>Statistics</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hesabu</target>
-        </trans-unit>
-        <trans-unit id="Submit" translate="yes" xml:space="preserve">
-          <source>Submit</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Wasilisha</target>
-        </trans-unit>
-        <trans-unit id="Window" translate="yes" xml:space="preserve">
-          <source>Window</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Dirisha</target>
-        </trans-unit>
-        <trans-unit id="Add" translate="yes" xml:space="preserve">
-          <source>Add</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ongeza</target>
-        </trans-unit>
-        <trans-unit id="Available_Variables" translate="yes" xml:space="preserve">
-          <source>Available  Variables</source>
-          <target state="new">Available  Variables</target>
-        </trans-unit>
-        <trans-unit id="Cancel" translate="yes" xml:space="preserve">
-          <source>Cancel</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Katisha</target>
-        </trans-unit>
-        <trans-unit id="Factor_Variable" translate="yes" xml:space="preserve">
-          <source>Factor Variable</source>
-          <target state="new">Factor Variable</target>
+        <trans-unit id="New_Worksheet" translate="yes" xml:space="preserve">
+          <source>New Worksheet</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Lahakazi mpya</target>
         </trans-unit>
         <trans-unit id="Ok" translate="yes" xml:space="preserve">
           <source>Ok</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Sawa</target>
+        </trans-unit>
+        <trans-unit id="Open_From_Library" translate="yes" xml:space="preserve">
+          <source>Open From Library</source>
+          <target state="new">Open From Library</target>
+        </trans-unit>
+        <trans-unit id="Open_Worksheet" translate="yes" xml:space="preserve">
+          <source>Open Worksheet</source>
+          <target state="new">Open Worksheet</target>
+        </trans-unit>
+        <trans-unit id="Print" translate="yes" xml:space="preserve">
+          <source>Print</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Chapisha</target>
+        </trans-unit>
+        <trans-unit id="Print_Preview" translate="yes" xml:space="preserve">
+          <source>Print Preview</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kihakiki Uchapishaji</target>
         </trans-unit>
         <trans-unit id="Remove" translate="yes" xml:space="preserve">
           <source>Remove</source>
@@ -167,33 +190,45 @@
           <source>Reset</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Weka upya</target>
         </trans-unit>
-        <trans-unit id="Selected_Variables" translate="yes" xml:space="preserve">
-          <source>Selected Variables</source>
-          <target state="new">Selected Variables</target>
+        <trans-unit id="Save" translate="yes" xml:space="preserve">
+          <source>Save</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hifadhi</target>
         </trans-unit>
-        <trans-unit id="Box_Plot" translate="yes" xml:space="preserve">
-          <source>Box Plot</source>
-          <target state="new">Box Plot</target>
+        <trans-unit id="Save_As" translate="yes" xml:space="preserve">
+          <source>Save As</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hifadha Kama</target>
         </trans-unit>
-        <trans-unit id="Choose_Statistics" translate="yes" xml:space="preserve">
-          <source>Choose Statistics</source>
-          <target state="new">Choose Statistics</target>
-        </trans-unit>
-        <trans-unit id="Command_and_Output_Window" translate="yes" xml:space="preserve">
-          <source>Command and Output Window</source>
-          <target state="new">Command and Output Window</target>
-        </trans-unit>
-        <trans-unit id="Cumulative_Frequency" translate="yes" xml:space="preserve">
-          <source>Cumulative Frequency</source>
-          <target state="new">Cumulative Frequency</target>
+        <trans-unit id="Script" translate="yes" xml:space="preserve">
+          <source>Script</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hati</target>
         </trans-unit>
         <trans-unit id="Script_Window" translate="yes" xml:space="preserve">
           <source>Script Window</source>
           <target state="new">Script Window</target>
         </trans-unit>
+        <trans-unit id="Selected_Variables" translate="yes" xml:space="preserve">
+          <source>Selected Variables</source>
+          <target state="new">Selected Variables</target>
+        </trans-unit>
+        <trans-unit id="Statistics" translate="yes" xml:space="preserve">
+          <source>Statistics</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hesabu</target>
+        </trans-unit>
         <trans-unit id="Stem_And_Leaf" translate="yes" xml:space="preserve">
           <source>Stem And Leaf</source>
           <target state="new">Stem And Leaf</target>
+        </trans-unit>
+        <trans-unit id="Submit" translate="yes" xml:space="preserve">
+          <source>Submit</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Wasilisha</target>
+        </trans-unit>
+        <trans-unit id="Undo" translate="yes" xml:space="preserve">
+          <source>Undo</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Tendua</target>
+        </trans-unit>
+        <trans-unit id="Window" translate="yes" xml:space="preserve">
+          <source>Window</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Dirisha</target>
         </trans-unit>
       </group>
     </body>
