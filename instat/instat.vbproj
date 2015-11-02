@@ -131,12 +131,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dlgDescriptiveStatistics.Designer.vb">
-      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDescriptiveStatistics.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgRegularSequence.Designer.vb">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </Compile>
@@ -202,11 +196,14 @@
     <Compile Include="ucrDataSelection.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSelected.Designer.vb">
+      <DependentUpon>ucrSelected.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelected.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="dlgDescriptiveStatistics.resx">
-      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </EmbeddedResource>
@@ -236,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelected.resx">
+      <DependentUpon>ucrSelected.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

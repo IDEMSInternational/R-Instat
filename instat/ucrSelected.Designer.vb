@@ -1,0 +1,64 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class ucrSelected
+    Inherits System.Windows.Forms.UserControl
+
+    'UserControl overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.lblSelectedVariables = New System.Windows.Forms.Label()
+        Me.lstSelectedVariables = New System.Windows.Forms.ListBox()
+        Me.SuspendLayout()
+        '
+        'lblSelectedVariables
+        '
+        Me.lblSelectedVariables.AutoSize = True
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(3, 0)
+        Me.lblSelectedVariables.Name = "lblSelectedVariables"
+        Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
+        Me.lblSelectedVariables.TabIndex = 80
+        Me.lblSelectedVariables.Tag = "Selected_Variables"
+        Me.lblSelectedVariables.Text = "Selected Variables"
+        '
+        'lstSelectedVariables
+        '
+        Me.lstSelectedVariables.FormattingEnabled = True
+        Me.lstSelectedVariables.Location = New System.Drawing.Point(3, 16)
+        Me.lstSelectedVariables.Name = "lstSelectedVariables"
+        Me.lstSelectedVariables.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.lstSelectedVariables.Size = New System.Drawing.Size(84, 95)
+        Me.lstSelectedVariables.Sorted = True
+        Me.lstSelectedVariables.TabIndex = 79
+        '
+        'ucrSelected
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblSelectedVariables)
+        Me.Controls.Add(Me.lstSelectedVariables)
+        Me.Name = "ucrSelected"
+        Me.Size = New System.Drawing.Size(91, 115)
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+
+    Friend WithEvents lblSelectedVariables As Label
+    Friend WithEvents lstSelectedVariables As ListBox
+End Class

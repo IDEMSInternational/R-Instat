@@ -1,4 +1,4 @@
-﻿' CLIMSOFT - Stats System
+﻿' Stats System
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -17,6 +17,7 @@ Public Class dlgRegularSequence
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grpSequence2.Hide()
         grpRepeatSingle.Hide()
+        UcrButtons1.Enabled = False
     End Sub
 
     Private Sub UcrButtons1_ClickOk(sender As Object, e As EventArgs) Handles UcrButtons1.ClickOk
@@ -49,5 +50,15 @@ Public Class dlgRegularSequence
         grpRepeatSingle.Hide()
         grpSequence2.Hide()
         grpSequence.Visible = True
+    End Sub
+
+    Private Sub txtColName_Validating(sender As Object, e As EventArgs) Handles txtColName.Validating
+        If txtColName.Text = String.Empty Then
+            'UcrButtons1.Enabled = False
+            errorProvider.SetError(txtColName, "Please Enter the name for the column")
+        End If
+    End Sub
+    Private Sub txtColName_Validated(sender As Object, e As EventArgs) Handles txtColName.Validated
+        UcrButtons1.Enabled = True
     End Sub
 End Class

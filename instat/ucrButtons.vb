@@ -14,4 +14,7 @@
         RaiseEvent ClickOk(sender, e)
     End Sub
 
+    Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
