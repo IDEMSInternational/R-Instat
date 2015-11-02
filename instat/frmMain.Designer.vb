@@ -993,30 +993,35 @@ Partial Class frmMain
         '
         Me.MnuFileClose.Name = "MnuFileClose"
         Me.MnuFileClose.Size = New System.Drawing.Size(219, 22)
+        Me.MnuFileClose.Tag = "Close"
         Me.MnuFileClose.Text = "Close"
         '
         'mnuFileSave
         '
         Me.mnuFileSave.Name = "mnuFileSave"
         Me.mnuFileSave.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileSave.Tag = "Save"
         Me.mnuFileSave.Text = "Save       Ctrl+S"
         '
         'mnuFileSaveAs
         '
         Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
         Me.mnuFileSaveAs.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileSaveAs.Tag = "Save_As"
         Me.mnuFileSaveAs.Text = "Save As"
         '
         'mnuFilePrint
         '
         Me.mnuFilePrint.Name = "mnuFilePrint"
         Me.mnuFilePrint.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFilePrint.Tag = "Print"
         Me.mnuFilePrint.Text = "Print...    Ctrl+P"
         '
         'mnuFilePrintPreview
         '
         Me.mnuFilePrintPreview.Name = "mnuFilePrintPreview"
         Me.mnuFilePrintPreview.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFilePrintPreview.Tag = "Print_Preview"
         Me.mnuFilePrintPreview.Text = "Print Preview"
         '
         'ToolStripSeparator6
@@ -1028,6 +1033,7 @@ Partial Class frmMain
         '
         Me.mnuFIleExit.Name = "mnuFIleExit"
         Me.mnuFIleExit.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFIleExit.Tag = "Exit"
         Me.mnuFIleExit.Text = "Exit"
         '
         'mnuEdit
@@ -1041,66 +1047,77 @@ Partial Class frmMain
         '
         Me.mnuEditUndo.Name = "mnuEditUndo"
         Me.mnuEditUndo.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditUndo.Tag = "Undo"
         Me.mnuEditUndo.Text = "Undo       Ctrl+Z"
         '
         'mnuEditCut
         '
         Me.mnuEditCut.Name = "mnuEditCut"
         Me.mnuEditCut.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditCut.Tag = "Cut"
         Me.mnuEditCut.Text = "Cut       Ctrl+X"
         '
         'mnuEditCopy
         '
         Me.mnuEditCopy.Name = "mnuEditCopy"
         Me.mnuEditCopy.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditCopy.Tag = "Copy"
         Me.mnuEditCopy.Text = "Copy       Ctrl+C"
         '
         'mnuEditCopySpecial
         '
         Me.mnuEditCopySpecial.Name = "mnuEditCopySpecial"
         Me.mnuEditCopySpecial.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditCopySpecial.Tag = "Copy_Special"
         Me.mnuEditCopySpecial.Text = "Copy Special       Ctrl+Y"
         '
         'mnuEditPaste
         '
         Me.mnuEditPaste.Name = "mnuEditPaste"
         Me.mnuEditPaste.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditPaste.Tag = "Paste"
         Me.mnuEditPaste.Text = "Paste       Ctrl+V"
         '
         'mnuEditClear
         '
         Me.mnuEditClear.Name = "mnuEditClear"
         Me.mnuEditClear.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditClear.Tag = "Clear"
         Me.mnuEditClear.Text = "Clear       Del"
         '
         'mnuEditSelectAll
         '
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
         Me.mnuEditSelectAll.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditSelectAll.Tag = "Select_All"
         Me.mnuEditSelectAll.Text = "Select All       Ctrls+A"
         '
         'mnuEditFind
         '
         Me.mnuEditFind.Name = "mnuEditFind"
         Me.mnuEditFind.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditFind.Tag = "Find"
         Me.mnuEditFind.Text = "Find       Ctrl+F"
         '
         'mnuEditReplace
         '
         Me.mnuEditReplace.Name = "mnuEditReplace"
         Me.mnuEditReplace.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditReplace.Tag = "Replace"
         Me.mnuEditReplace.Text = "Replace       Ctrl+H"
         '
         'mnuEditFont
         '
         Me.mnuEditFont.Name = "mnuEditFont"
         Me.mnuEditFont.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditFont.Tag = "Font"
         Me.mnuEditFont.Text = "Font       Ctrl+T"
         '
         'mnuEditRunWSEditor
         '
         Me.mnuEditRunWSEditor.Name = "mnuEditRunWSEditor"
         Me.mnuEditRunWSEditor.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditRunWSEditor.Tag = "Run_Worksheet_Sheet"
         Me.mnuEditRunWSEditor.Text = "Run Worksheet Editor       F7"
         '
         'mnuEditViewEditText
@@ -1108,6 +1125,7 @@ Partial Class frmMain
         Me.mnuEditViewEditText.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewF8ToolStripMenuItem, Me.OpenToolStripMenuItem, Me.OpenFromLibraryToolStripMenuItem1, Me.SelectionToolStripMenuItem})
         Me.mnuEditViewEditText.Name = "mnuEditViewEditText"
         Me.mnuEditViewEditText.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditViewEditText.Tag = "View_Edit_Text"
         Me.mnuEditViewEditText.Text = "View/Edit Text"
         '
         'NewF8ToolStripMenuItem
@@ -1139,6 +1157,7 @@ Partial Class frmMain
         Me.mnuEditViewEditMacro.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.OpenToolStripMenuItem1})
         Me.mnuEditViewEditMacro.Name = "mnuEditViewEditMacro"
         Me.mnuEditViewEditMacro.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditViewEditMacro.Tag = "View_Edit_Macro"
         Me.mnuEditViewEditMacro.Text = "View/Edit Macro"
         '
         'NewToolStripMenuItem
@@ -1158,6 +1177,7 @@ Partial Class frmMain
         Me.mnuEditCommandLogging.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartF9ToolStripMenuItem, Me.StopShiftF9ToolStripMenuItem, Me.ViewLogFileCtrlF9ToolStripMenuItem})
         Me.mnuEditCommandLogging.Name = "mnuEditCommandLogging"
         Me.mnuEditCommandLogging.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditCommandLogging.Tag = "Command_Logging"
         Me.mnuEditCommandLogging.Text = "Command Logging"
         '
         'StartF9ToolStripMenuItem
@@ -1467,7 +1487,7 @@ Partial Class frmMain
         Me.FileStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewWorksheet, Me.mnuFileOpenWorksheet, Me.mnuFileOpenFromLibrary, Me.mnuFileCloseWorksheet, Me.ToolStripSeparator4, Me.mnuFileIE, Me.ToolStripSeparator5, Me.MnuFileClose, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.ToolStripSeparator6, Me.mnuFIleExit})
         Me.FileStripMenuItem.Name = "FileStripMenuItem"
         Me.FileStripMenuItem.Size = New System.Drawing.Size(37, 20)
-        Me.FileStripMenuItem.Tag = "File "
+        Me.FileStripMenuItem.Tag = "File"
         Me.FileStripMenuItem.Text = "File"
         '
         'mnuFileNewWorksheet
@@ -1488,12 +1508,14 @@ Partial Class frmMain
         '
         Me.mnuFileOpenFromLibrary.Name = "mnuFileOpenFromLibrary"
         Me.mnuFileOpenFromLibrary.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileOpenFromLibrary.Tag = "Open_From_Library"
         Me.mnuFileOpenFromLibrary.Text = "Open From Library..."
         '
         'mnuFileCloseWorksheet
         '
         Me.mnuFileCloseWorksheet.Name = "mnuFileCloseWorksheet"
         Me.mnuFileCloseWorksheet.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileCloseWorksheet.Tag = "Close_Worksheet"
         Me.mnuFileCloseWorksheet.Text = "Close Worksheet"
         '
         'ToolStripSeparator4
@@ -1506,6 +1528,7 @@ Partial Class frmMain
         Me.mnuFileIE.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFIleIEASCII, Me.mnuFileIEODBC, Me.mnuFileIEExport, Me.mnuFileIEOutput})
         Me.mnuFileIE.Name = "mnuFileIE"
         Me.mnuFileIE.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileIE.Tag = "Import_Export"
         Me.mnuFileIE.Text = "Import/Export"
         '
         'SubmitToolStripMenuItem
@@ -1748,7 +1771,7 @@ Partial Class frmMain
         'KiswahiliToolStripMenuItem1
         '
         Me.KiswahiliToolStripMenuItem1.Name = "KiswahiliToolStripMenuItem1"
-        Me.KiswahiliToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.KiswahiliToolStripMenuItem1.Size = New System.Drawing.Size(120, 22)
         Me.KiswahiliToolStripMenuItem1.Text = "Kiswahili"
         '
         'frmMain

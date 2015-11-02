@@ -66,7 +66,7 @@
 
     ' translateMenu and translateSubMenu should not be neccessary if we can improve translateEach to accept any iterable
     Public Shared Sub translateSubMenu(subMenuControl As ToolStripItemCollection)
-        Dim item As ToolStripMenuItem
+        Dim item
         Dim originalTag As String
         Dim translatedString As String
 
@@ -81,5 +81,4 @@
             End If
         Next item
     End Sub
-
 End Class
