@@ -20,19 +20,16 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub UcrButtons1_ClickOk(sender As Object, e As EventArgs) Handles UcrButtons1.ClickOk
-        Dim inputStrings() As String
-        Dim lstOfStrings As New List(Of String)
-        Dim strScript As String
+        Dim lstOfStrings
         If rdSequence.Checked = True Then
-            inputStrings = {txtFrom.Text, txtTo.Text, txtSteps.Text}
-            lstOfStrings = New List(Of String)(inputStrings)
+            lstOfStrings = New List(Of String)({txtFrom.Text, txtTo.Text, txtSteps.Text})
             frmMain.clsRSyntax.manage(lstOfStrings, "Data", "Regular Sequence", "regular")
         ElseIf rdSIngleValue.Checked = True
-            strScript = "seq(from = " & Convert.ToInt32(txtValue.Text) & ", to = " & Convert.ToInt32(txtValue.Text) & ", length.out = " & Convert.ToInt32(txtRepeatTimes.Text) & ")"
-            frmMain.clsRInterface.RunScript(strScript)
+            lstOfStrings = New List(Of String)({txtValue.Text, txtRepeatTimes.Text})
+            frmMain.clsRSyntax.manage(lstOfStrings, "Data", "Regular Sequence", "repeated")
         ElseIf rdDates.Checked = True
-            strScript = "capture.output(seq(from = as.Date('" & Format(datePicker1.Value, "yyyy/MM/dd") & "'), to = as.Date('" & Format(datePicker2.Value, "yyyy/MM/dd") & "'), by = '" & cboBy.SelectedItem.ToString() & "'))"
-            frmMain.clsRInterface.RunScript(strScript)
+            lstOfStrings = New List(Of Object)({datePicker1.Value, datePicker2.Value, cboBy.SelectedItem.ToString()})
+            frmMain.clsRSyntax.manage(lstOfStrings, "Data", "Regular Sequence", "date")
         End If
     End Sub
 

@@ -1,6 +1,6 @@
 ﻿Public Class RSyntax
     Dim strScript As String
-    Public Sub manage(lstOfString As List(Of String), submenu As String, subsubmenu As String, type As String)
+    Public Sub manage(lstOfString As Object, submenu As String, subsubmenu As String, type As String)
         Select Case submenu
             Case "Calculations"
 
@@ -12,9 +12,11 @@
                                 strScript = "capture.output(seq(from = " & Convert.ToInt32(lstOfString(0)) & ", to = " & Convert.ToInt32(lstOfString(1)) & ", by = " & Convert.ToInt32(lstOfString(2)) & "))"
                                 frmMain.clsRInterface.RunScript(strScript)
                             Case "repeated"
-
+                                strScript = "capture.output(seq(from = " & Convert.ToInt32(lstOfString(0)) & ", to = " & Convert.ToInt32(lstOfString(0)) & ", length.out = " & Convert.ToInt32(lstOfString(1)) & "))"
+                                frmMain.clsRInterface.RunScript(strScript)
                             Case "date"
-
+                                strScript = "capture.output(seq(from = as.Date('" & Format(lstOfString(0), "yyyy/MM/dd") & "'), to = as.Date('" & Format(lstOfString(1), "yyyy/MM/dd") & "'), by = '" & lstOfString(2) & "'))"
+                                frmMain.clsRInterface.RunScript(strScript)
                         End Select
                     Case "Duplicate"
 
