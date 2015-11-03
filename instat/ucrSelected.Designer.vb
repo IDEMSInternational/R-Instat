@@ -29,7 +29,7 @@ Partial Class ucrSelected
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(3, 0)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(3, 5)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
         Me.lblSelectedVariables.TabIndex = 80
@@ -39,10 +39,10 @@ Partial Class ucrSelected
         'lstSelectedVariables
         '
         Me.lstSelectedVariables.FormattingEnabled = True
-        Me.lstSelectedVariables.Location = New System.Drawing.Point(3, 16)
+        Me.lstSelectedVariables.Location = New System.Drawing.Point(3, 21)
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
         Me.lstSelectedVariables.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstSelectedVariables.Size = New System.Drawing.Size(84, 95)
+        Me.lstSelectedVariables.Size = New System.Drawing.Size(95, 95)
         Me.lstSelectedVariables.Sorted = True
         Me.lstSelectedVariables.TabIndex = 79
         '
@@ -53,7 +53,7 @@ Partial Class ucrSelected
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.lstSelectedVariables)
         Me.Name = "ucrSelected"
-        Me.Size = New System.Drawing.Size(91, 115)
+        Me.Size = New System.Drawing.Size(102, 121)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

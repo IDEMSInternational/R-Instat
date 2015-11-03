@@ -26,6 +26,8 @@ Partial Class ucrDataSelection
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.lblAvailableVariables = New System.Windows.Forms.Label()
         Me.lstAvailableVariable = New System.Windows.Forms.ListBox()
+        Me.lblSelectedVariables = New System.Windows.Forms.Label()
+        Me.lstSelectedVariable = New System.Windows.Forms.ListBox()
         Me.SuspendLayout()
         '
         'btnRemove
@@ -69,16 +71,39 @@ Partial Class ucrDataSelection
         Me.lstAvailableVariable.TabIndex = 75
         Me.lstAvailableVariable.Tag = ""
         '
+        'lblSelectedVariables
+        '
+        Me.lblSelectedVariables.AutoSize = True
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(172, 3)
+        Me.lblSelectedVariables.Name = "lblSelectedVariables"
+        Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
+        Me.lblSelectedVariables.TabIndex = 81
+        Me.lblSelectedVariables.Tag = "Selected_Variables"
+        Me.lblSelectedVariables.Text = "Selected Variables"
+        '
+        'lstSelectedVariable
+        '
+        Me.lstSelectedVariable.FormattingEnabled = True
+        Me.lstSelectedVariable.Location = New System.Drawing.Point(180, 23)
+        Me.lstSelectedVariable.Name = "lstSelectedVariable"
+        Me.lstSelectedVariable.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.lstSelectedVariable.Size = New System.Drawing.Size(87, 95)
+        Me.lstSelectedVariable.Sorted = True
+        Me.lstSelectedVariable.TabIndex = 82
+        Me.lstSelectedVariable.Tag = ""
+        '
         'ucrDataSelection
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lstSelectedVariable)
+        Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.btnRemove)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.lblAvailableVariables)
         Me.Controls.Add(Me.lstAvailableVariable)
         Me.Name = "ucrDataSelection"
-        Me.Size = New System.Drawing.Size(181, 122)
+        Me.Size = New System.Drawing.Size(274, 125)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -87,4 +112,6 @@ Partial Class ucrDataSelection
     Friend WithEvents btnAdd As Button
     Friend WithEvents lblAvailableVariables As Label
     Friend WithEvents lstAvailableVariable As ListBox
+    Friend WithEvents lblSelectedVariables As Label
+    Friend WithEvents lstSelectedVariable As ListBox
 End Class

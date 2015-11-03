@@ -34,14 +34,14 @@ Partial Class frmCommand
         Me.txtCommand.Multiline = True
         Me.txtCommand.Name = "txtCommand"
         Me.txtCommand.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCommand.Size = New System.Drawing.Size(485, 254)
+        Me.txtCommand.Size = New System.Drawing.Size(654, 254)
         Me.txtCommand.TabIndex = 0
         '
         'frmCommand
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(485, 254)
+        Me.ClientSize = New System.Drawing.Size(654, 254)
         Me.Controls.Add(Me.txtCommand)
         Me.Name = "frmCommand"
         Me.Text = "Output Window"

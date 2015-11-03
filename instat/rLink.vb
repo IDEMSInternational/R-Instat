@@ -1,4 +1,4 @@
-﻿' CLIMSOFT - Climate Database Management System
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -24,6 +24,7 @@ Imports System.Threading.Tasks
 
 Public Class RInterface
     ' R interface class. Each instance of the class has its own REngine instance
+    Dim climateObjectPath As String = "C:\ClimateObject\R" ' Location of ClimateObject library
     Dim clsEngine As REngine
     Dim txtOutput As TextBox
     Dim txtLog As TextBox
@@ -32,6 +33,12 @@ Public Class RInterface
 
         Me.clsEngine = REngine.GetInstance()
         Me.clsEngine.Initialize()
+
+    End Sub
+    Public Sub climateObject()
+        Me.clsEngine.Evaluate("setwd(" & climateObjectPath & ")")
+        Me.clsEngine.Evaluate("source(" & Chr(34) & "Sourcingscript.R" & Chr(34) & ")")
+        Me.clsEngine.Evaluate("data_obj<-climate$new(data_tables=list(data=data))")
 
     End Sub
 

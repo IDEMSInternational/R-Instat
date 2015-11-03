@@ -58,4 +58,8 @@ Public Class ucrDataSelection
     Private Sub lstAvailableVariable_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstAvailableVariable.SelectedIndexChanged
 
     End Sub
+
+    Private Sub lstAvailableVariable_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lstAvailableVariable.MouseDoubleClick
+
+    End Sub
 End Class

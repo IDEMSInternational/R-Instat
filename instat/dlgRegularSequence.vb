@@ -1,4 +1,4 @@
-﻿' Stats System
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class dlgRegularSequence
+    Public clsRSyntax As New RSyntax
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grpSequence2.Hide()
         grpRepeatSingle.Hide()
@@ -24,13 +25,13 @@ Public Class dlgRegularSequence
         Dim lstOfStrings
         If rdSequence.Checked = True Then
             lstOfStrings = New List(Of String)({txtFrom.Text, txtTo.Text, txtSteps.Text})
-            frmMain.clsRSyntax.manage(lstOfStrings, "Data", "Regular Sequence", "regular")
+            clsRSyntax.manage(lstOfStrings, "regular")
         ElseIf rdSIngleValue.Checked = True
             lstOfStrings = New List(Of String)({txtValue.Text, txtRepeatTimes.Text})
-            frmMain.clsRSyntax.manage(lstOfStrings, "Data", "Regular Sequence", "repeated")
+            clsRSyntax.manage(lstOfStrings, "repeated")
         ElseIf rdDates.Checked = True
             lstOfStrings = New List(Of Object)({datePicker1.Value, datePicker2.Value, cboBy.SelectedItem.ToString()})
-            frmMain.clsRSyntax.manage(lstOfStrings, "Data", "Regular Sequence", "date")
+            clsRSyntax.manage(lstOfStrings, "date")
         End If
     End Sub
 

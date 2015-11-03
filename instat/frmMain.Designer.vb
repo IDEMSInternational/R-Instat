@@ -114,9 +114,6 @@ Partial Class frmMain
         Me.SimulationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SpellLengthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TotalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuScriptEditor = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuScripTOutput = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
@@ -812,25 +809,6 @@ Partial Class frmMain
         Me.TotalsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.TotalsToolStripMenuItem.Text = "Totals..."
         '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuScriptEditor, Me.mnuScripTOutput})
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(49, 20)
-        Me.ToolStripMenuItem1.Text = "Script"
-        '
-        'mnuScriptEditor
-        '
-        Me.mnuScriptEditor.Name = "mnuScriptEditor"
-        Me.mnuScriptEditor.Size = New System.Drawing.Size(242, 22)
-        Me.mnuScriptEditor.Text = "Command and Output Window"
-        '
-        'mnuScripTOutput
-        '
-        Me.mnuScripTOutput.Name = "mnuScripTOutput"
-        Me.mnuScripTOutput.Size = New System.Drawing.Size(242, 22)
-        Me.mnuScripTOutput.Text = "Log Window"
-        '
         'WindowToolStripMenuItem
         '
         Me.WindowToolStripMenuItem.Name = "WindowToolStripMenuItem"
@@ -1445,7 +1423,7 @@ Partial Class frmMain
         'mnuBar
         '
         Me.mnuBar.AllowMerge = False
-        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.ToolStripMenuItem1, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.MdiWindowListItem = Me.WindowToolStripMenuItem
@@ -1846,8 +1824,6 @@ Partial Class frmMain
     Friend WithEvents SimulationsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SpellLengthToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TotalsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents mnuScriptEditor As ToolStripMenuItem
     Friend WithEvents WindowToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenFile As OpenFileDialog
@@ -1989,5 +1965,4 @@ Partial Class frmMain
     Friend WithEvents NameToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FormatCtrlDToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AlignmentToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuScripTOutput As ToolStripMenuItem
 End Class

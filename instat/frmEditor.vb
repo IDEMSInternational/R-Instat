@@ -12,4 +12,14 @@ Public Class frmEditor
         Next
         Me.Refresh()
     End Sub
+    Public Sub NewSheet()
+        Dim sheet = grid.CreateWorksheet()
+        'Add/Insert worksheet
+        grid.Worksheets.Add(sheet)
+        grid.CurrentWorksheet = sheet
+    End Sub
+
+    Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        grid.SheetTabControlWidth = 300
+    End Sub
 End Class
