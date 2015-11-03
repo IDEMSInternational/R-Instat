@@ -487,4 +487,10 @@
   <data name="Windrose" xml:space="preserve">
     <value>Windrose</value>
   </data>
+  <data name="Data_View" xml:space="preserve">
+    <value>Data View</value>
+  </data>
+  <data name="Output_Window" xml:space="preserve">
+    <value>Output Window</value>
+  </data>
 </root>

@@ -37,6 +37,7 @@ Public Class frmMain
         frmEditor.Show()
         clsRInterface.SetLog(frmLog.txtLog)
         clsRInterface.SetOutput(frmCommand.txtCommand)
+        tstatus.Text = frmEditor.grid.CurrentWorksheet.Name
 
     End Sub
 
@@ -54,7 +55,39 @@ Public Class frmMain
         Next
     End Sub
 
+    Public Sub FillData(strDataName)
+        Dim bFoundWorksheet As Boolean = False
+        Dim tempWorkSheet
+        Dim dfDataset As DataFrame
 
+        dfDataset = clsRInterface.GetData(strDataName)
+        'frmEditor.grid.CurrentWorksheet.SetCellData("A1", clsRInterface.GetData("data"))
+        For Each tempWorkSheet In frmEditor.grid.Worksheets
+            If tempWorkSheet.Name = strDataName Then
+                tempWorkSheet.Rows = dfDataset.RowCount
+                tempWorkSheet.Columns = dfDataset.ColumnCount
+                For i As Integer = 0 To dfDataset.RowCount - 1
+                    For k As Integer = 0 To dfDataset.ColumnCount - 1
+                        tempWorkSheet.ColumnHeaders(k).Text = dfDataset.ColumnNames(k)
+                        tempWorkSheet(row:=i, col:=k) = dfDataset(i, k)
+                    Next
+                Next
+                bFoundWorksheet = True
+            End If
+        Next
+        If Not bFoundWorksheet Then
+            tempWorkSheet = frmEditor.grid.Worksheets.Create(strDataName)
+            tempWorkSheet.Rows = dfDataset.RowCount
+            tempWorkSheet.Columns = dfDataset.ColumnCount
+            For i As Integer = 0 To dfDataset.RowCount - 1
+                For k As Integer = 0 To dfDataset.ColumnCount - 1
+                    tempWorkSheet.ColumnHeaders(k).Text = dfDataset.ColumnNames(k)
+                    tempWorkSheet(row:=i, col:=k) = dfDataset(i, k)
+                Next
+            Next
+            frmEditor.grid.Worksheets.Add(tempWorkSheet)
+        End If
+    End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
         dlgDescriptiveStatistics.Show()
@@ -131,5 +164,13 @@ Public Class frmMain
         Else
             frmLog.Visible = True
         End If
+    End Sub
+
+    Private Sub StartOfTheRainsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartOfTheRainsToolStripMenuItem.Click
+        dlgStartofRains.Show()
+    End Sub
+
+    Private Sub tstatus_Click(sender As Object, e As EventArgs) Handles tstatus.Click
+
     End Sub
 End Class
