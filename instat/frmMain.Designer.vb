@@ -721,6 +721,7 @@ Partial Class frmMain
         '
         Me.WaterBalanceToolStripMenuItem.Name = "WaterBalanceToolStripMenuItem"
         Me.WaterBalanceToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.WaterBalanceToolStripMenuItem.Tag = "Water_Balance"
         Me.WaterBalanceToolStripMenuItem.Text = "Water Balance..."
         '
         'ExamineToolStripMenuItem
@@ -874,6 +875,7 @@ Partial Class frmMain
         '
         Me.SpellsToolStripMenuItem.Name = "SpellsToolStripMenuItem"
         Me.SpellsToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.SpellsToolStripMenuItem.Tag = "Spells"
         Me.SpellsToolStripMenuItem.Text = "Spells..."
         '
         'ClimaticToolStripMenuItem
@@ -967,12 +969,14 @@ Partial Class frmMain
         '
         Me.StartOfTheRainsToolStripMenuItem.Name = "StartOfTheRainsToolStripMenuItem"
         Me.StartOfTheRainsToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.StartOfTheRainsToolStripMenuItem.Tag = "Start_of_the_Rains"
         Me.StartOfTheRainsToolStripMenuItem.Text = "Start of the Rains..."
         '
         'ExtremesToolStripMenuItem
         '
         Me.ExtremesToolStripMenuItem.Name = "ExtremesToolStripMenuItem"
         Me.ExtremesToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.ExtremesToolStripMenuItem.Tag = "Extremes"
         Me.ExtremesToolStripMenuItem.Text = "Extremes..."
         '
         'WorksheetInformationToolStripMenuItem

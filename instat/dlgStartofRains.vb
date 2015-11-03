@@ -1,4 +1,6 @@
-﻿Public Class dlgStartofRains
+﻿
+Imports instat.Translations
+Public Class dlgStartofRains
     Private Sub ucrBase_clickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strScript As String
         strScript = "climate_obj$add_start_rain(data_list=list()"
@@ -25,6 +27,7 @@
 
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles Me.Load
         UpdateVisible()
+        autoTranslate(Me)
     End Sub
 
     Private Sub UpdateVisible()

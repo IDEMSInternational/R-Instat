@@ -817,11 +817,59 @@
         </trans-unit>
         <trans-unit id="Data_View" translate="yes" xml:space="preserve">
           <source>Data View</source>
-          <target state="new">Data View</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Affichage des données</target>
         </trans-unit>
         <trans-unit id="Output_Window" translate="yes" xml:space="preserve">
           <source>Output Window</source>
-          <target state="new">Output Window</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Fenêtre Sortie</target>
+        </trans-unit>
+        <trans-unit id="Dry_Spell" translate="yes" xml:space="preserve">
+          <source>Dry Spell</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Période de sécheresse</target>
+        </trans-unit>
+        <trans-unit id="Earliest_day" translate="yes" xml:space="preserve">
+          <source>Earliest day</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Premier jour</target>
+        </trans-unit>
+        <trans-unit id="Length_of_Dry_Spell" translate="yes" xml:space="preserve">
+          <source>Length of Dry Spell</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Longueur de la période de sécheresse</target>
+        </trans-unit>
+        <trans-unit id="Not_Yet_Implemented" translate="yes" xml:space="preserve">
+          <source>Not Yet Implemented</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Pas encore mis en œuvre</target>
+        </trans-unit>
+        <trans-unit id="Number_of_Rain_Days" translate="yes" xml:space="preserve">
+          <source>Number of Rain Days</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nombre de jours de pluie</target>
+        </trans-unit>
+        <trans-unit id="Threashold" translate="yes" xml:space="preserve">
+          <source>Threashold</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Threashold</target>
+        </trans-unit>
+        <trans-unit id="Total_Rain" translate="yes" xml:space="preserve">
+          <source>Total Rain</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Pluie totale</target>
+        </trans-unit>
+        <trans-unit id="Within" translate="yes" xml:space="preserve">
+          <source>Within</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Au sein de</target>
+        </trans-unit>
+        <trans-unit id="Extremes" translate="yes" xml:space="preserve">
+          <source>Extremes</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Extrêmes</target>
+        </trans-unit>
+        <trans-unit id="Spells" translate="yes" xml:space="preserve">
+          <source>Spells</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Sorts</target>
+        </trans-unit>
+        <trans-unit id="Start_of_the_Rains" translate="yes" xml:space="preserve">
+          <source>Start of the Rains</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Début de la saison des pluies</target>
+        </trans-unit>
+        <trans-unit id="Water_Balance" translate="yes" xml:space="preserve">
+          <source>Water Balance</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Bilan hydrique</target>
         </trans-unit>
       </group>
     </body>
