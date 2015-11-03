@@ -493,4 +493,40 @@
   <data name="Output_Window" xml:space="preserve">
     <value>Output Window</value>
   </data>
+  <data name="Dry_Spell" xml:space="preserve">
+    <value>Dry Spell</value>
+  </data>
+  <data name="Earliest_day" xml:space="preserve">
+    <value>Earliest day</value>
+  </data>
+  <data name="Extremes" xml:space="preserve">
+    <value>Extremes</value>
+  </data>
+  <data name="Length_of_Dry_Spell" xml:space="preserve">
+    <value>Length of Dry Spell</value>
+  </data>
+  <data name="Not_Yet_Implemented" xml:space="preserve">
+    <value>Not Yet Implemented</value>
+  </data>
+  <data name="Number_of_Rain_Days" xml:space="preserve">
+    <value>Number of Rain Days</value>
+  </data>
+  <data name="Spells" xml:space="preserve">
+    <value>Spells</value>
+  </data>
+  <data name="Start_of_the_Rains" xml:space="preserve">
+    <value>Start of the Rains</value>
+  </data>
+  <data name="Threashold" xml:space="preserve">
+    <value>Threashold</value>
+  </data>
+  <data name="Total_Rain" xml:space="preserve">
+    <value>Total Rain</value>
+  </data>
+  <data name="Water_Balance" xml:space="preserve">
+    <value>Water Balance</value>
+  </data>
+  <data name="Within" xml:space="preserve">
+    <value>Within</value>
+  </data>
 </root>

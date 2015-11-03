@@ -147,7 +147,9 @@
     <Compile Include="dlgSort.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgStartofRains.Designer.vb" />
+    <Compile Include="dlgStartofRains.designer.vb">
+      <DependentUpon>dlgStartofRains.vb</DependentUpon>
+    </Compile>
     <Compile Include="dlgStartofRains.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -234,7 +236,9 @@
     <EmbeddedResource Include="dlgStartofRains.fr-FR.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgStartofRains.resx" />
+    <EmbeddedResource Include="dlgStartofRains.resx">
+      <DependentUpon>dlgStartofRains.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgStartofRains.sw-KE.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
     </EmbeddedResource>
