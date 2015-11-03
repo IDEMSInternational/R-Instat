@@ -315,6 +315,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Data View.
+        '''</summary>
+        Friend ReadOnly Property Data_View() As String
+            Get
+                Return ResourceManager.GetString("Data_View", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Describe.
         '''</summary>
         Friend ReadOnly Property Describe() As String
@@ -680,6 +689,15 @@ Namespace My.Resources
         Friend ReadOnly Property Output_Spooling() As String
             Get
                 Return ResourceManager.GetString("Output_Spooling", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Output Window.
+        '''</summary>
+        Friend ReadOnly Property Output_Window() As String
+            Get
+                Return ResourceManager.GetString("Output_Window", resourceCulture)
             End Get
         End Property
         

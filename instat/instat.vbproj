@@ -147,6 +147,10 @@
     <Compile Include="dlgSort.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgStartofRains.Designer.vb" />
+    <Compile Include="dlgStartofRains.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmCommand.Designer.vb">
       <DependentUpon>frmCommand.vb</DependentUpon>
     </Compile>
@@ -226,6 +230,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSort.sw-KE.resx">
       <DependentUpon>dlgSort.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStartofRains.fr-FR.resx">
+      <DependentUpon>dlgStartofRains.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStartofRains.resx" />
+    <EmbeddedResource Include="dlgStartofRains.sw-KE.resx">
+      <DependentUpon>dlgStartofRains.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.fr-FR.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>

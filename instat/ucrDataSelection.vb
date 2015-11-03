@@ -36,16 +36,30 @@ Public Class ucrDataSelection
     End Sub
 
     Private Sub ucrDataSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim cvDataset As CharacterVector
-        Dim aDataset As Array
+        Dim dataset As DataFrame
         Dim i As Integer
-
-        cvDataset = frmMain.clsRInterface.GetVariables("colnames(data)")
-        aDataset = cvDataset.ToArray
-        For i = 0 To aDataset.GetLength(0) - 1
-            lstAvailableVariable.Items.Add(aDataset(i))
+        dataset = frmMain.clsRInterface.GetData("data")
+        For i = 0 To dataset.ColumnCount - 1
+            lstAvailableVariable.Items.Add(dataset.ColumnNames(i))
         Next
 
     End Sub
 
+    Private Sub lstAvailableVariable_MouseDoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.MouseDoubleClick
+        If (lstAvailableVariable.SelectedItem <> "") Then
+            lstSelectedVariables.Items.Add(lstAvailableVariable.SelectedItem)
+            lstAvailableVariable.Items.Remove(lstAvailableVariable.SelectedItem)
+        Else
+            MsgBox("Please select a column", vbInformation, "Message from Instat")
+        End If
+    End Sub
+
+    Private Sub lstSelectedVariables_MouseDoubleClick(sender As Object, e As EventArgs) Handles lstSelectedVariables.MouseDoubleClick
+        If (lstSelectedVariables.SelectedItem <> "") Then
+            lstAvailableVariable.Items.Add(lstSelectedVariables.SelectedItem)
+            lstSelectedVariables.Items.Remove(lstSelectedVariables.SelectedItem)
+        Else
+            MsgBox("Please select a column", vbInformation, "Message from Instat")
+        End If
+    End Sub
 End Class

@@ -14,6 +14,10 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports RDotNet
+Imports System.IO
+Imports System.Globalization
+Imports System.Threading
+Imports instat.Translations
 Public Class frmEditor
     Public Sub UpdateSheet(DataSet As DataFrame)
         Me.grid.CurrentWorksheet.Reset()
@@ -27,9 +31,13 @@ Public Class frmEditor
                 Me.grid.CurrentWorksheet(row:=i, col:=k) = DataSet(i, k)
             Next
         Next
+
     End Sub
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grid.SheetTabControlWidth = 300
+        grid.CurrentWorksheet.Resize(1, 1)
+        grid.CurrentWorksheet.Name = "Data View"
+        autoTranslate(Me)
     End Sub
     Public Sub NewSheet()
         Dim sheet = grid.CreateWorksheet()
