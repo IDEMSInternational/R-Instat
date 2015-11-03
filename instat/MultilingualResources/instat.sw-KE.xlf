@@ -169,7 +169,7 @@
         </trans-unit>
         <trans-unit id="Open_From_Library" translate="yes" xml:space="preserve">
           <source>Open From Library</source>
-          <target state="new">Open From Library</target>
+          <target state="translated">Fungua Kutoka Maktaba</target>
         </trans-unit>
         <trans-unit id="Open_Worksheet" translate="yes" xml:space="preserve">
           <source>Open Worksheet</source>
