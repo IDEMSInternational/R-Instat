@@ -1,4 +1,5 @@
-﻿Public Class dlgDescriptiveStatistics
+﻿Imports instat.Translations
+Public Class dlgDescriptiveStatistics
 
     Private Sub UcrButtons1_clickOk(sender As Object, e As EventArgs) Handles UcrButtons1.ClickOk
         Dim strScript As String
@@ -29,6 +30,8 @@
 
     Private Sub dlgDescriptiveStatistics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grpgraphics.Visible = False
+        autoTranslate(Me)
+
 
     End Sub
 
