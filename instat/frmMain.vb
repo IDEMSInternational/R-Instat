@@ -109,4 +109,12 @@ Public Class frmMain
     Private Sub mnuFileNewWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileNewWorksheet.Click
         frmEditor.NewSheet()
     End Sub
+
+    Private Sub LogWindowMenu_Click(sender As Object, e As EventArgs) Handles LogWindowMenu.Click
+        If frmLog.Visible = True Then
+            frmLog.Visible = False
+        Else
+            frmLog.Visible = True
+        End If
+    End Sub
 End Class
