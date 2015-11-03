@@ -1,4 +1,8 @@
 ﻿Imports RDotNet
+Imports System.Globalization
+Imports System.Threading
+Imports instat.Translations
+
 Public Class frmMain
 
     Public clsRInterface As New RInterface
@@ -59,5 +63,46 @@ Public Class frmMain
 
     Private Sub mnuSriptLog_Click(sender As Object, e As EventArgs) Handles mnuSriptLog.Click
         frmLog.Show()
+    End Sub
+
+    Private Sub KiswahiliToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KiswahiliToolStripMenuItem.Click
+    End Sub
+
+    Private Sub KiswahiliToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles KiswahiliToolStripMenuItem1.Click
+        Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
+        Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindroseToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbabilityPlotToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub ProbabilityDistributionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbabilityDistributionsToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub FrenchToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrenchToolStripMenuItem.Click
+        Thread.CurrentThread.CurrentCulture = New CultureInfo("fr-FR")
+        Thread.CurrentThread.CurrentUICulture = New CultureInfo("fr-FR")
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub EnglishToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnglishToolStripMenuItem.Click
+        Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
+        Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub RowStatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RowStatisticsToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub mnuEditViewEditText_Click(sender As Object, e As EventArgs) Handles mnuEditViewEditText.Click
+
     End Sub
 End Class

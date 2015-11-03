@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Paomedia-Small-N-Flat-Window-layout" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Paomedia-Small-N-Flat-Window-layout.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Oxygen-Icons.org-Oxygen-Actions-window-duplicate" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Oxygen-Icons.org-Oxygen-Actions-window-duplicate.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Carlosjj-Microsoft-Office-2013-Excel" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Carlosjj-Microsoft-Office-2013-Excel.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Oxygen-Icons.org-Oxygen-Status-dialog-error" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Oxygen-Icons.org-Oxygen-Status-dialog-error.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Alecive-Flatwoken-Apps-Run" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Alecive-Flatwoken-Apps-Run.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ongeza</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Katisha</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Funga</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Hariri</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Jalada</value>
+  </data>
+  <data name="Graphics" xml:space="preserve">
+    <value>Michoro</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Msaada</value>
+  </data>
+  <data name="Import_Export" xml:space="preserve">
+    <value>Hamisha/Leta</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Simamia</value>
+  </data>
+  <data name="New_Worksheet" xml:space="preserve">
+    <value>Lahakazi mpya</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Sawa</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Chapisha</value>
+  </data>
+  <data name="Print_Preview" xml:space="preserve">
+    <value>Kihakiki Uchapishaji</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Ondoa</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Weka upya</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Hifadhi</value>
+  </data>
+  <data name="Save_As" xml:space="preserve">
+    <value>Hifadha Kama</value>
+  </data>
+  <data name="Script" xml:space="preserve">
+    <value>Hati</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Hesabu</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Wasilisha</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Tendua</value>
+  </data>
+  <data name="Window" xml:space="preserve">
+    <value>Dirisha</value>
+  </data>
+</root>

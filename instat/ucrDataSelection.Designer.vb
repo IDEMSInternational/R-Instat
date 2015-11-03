@@ -95,7 +95,7 @@ Partial Class ucrDataSelection
         Me.lblAvailableVariables.Name = "lblAvailableVariables"
         Me.lblAvailableVariables.Size = New System.Drawing.Size(102, 13)
         Me.lblAvailableVariables.TabIndex = 76
-        Me.lblAvailableVariables.Tag = "Available _Variables "
+        Me.lblAvailableVariables.Tag = "Available_Variables "
         Me.lblAvailableVariables.Text = "Available  Variables "
         '
         'lstAvailableVariable
