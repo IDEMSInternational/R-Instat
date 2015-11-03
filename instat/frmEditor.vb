@@ -2,12 +2,12 @@
 Public Class frmEditor
     Public Sub UpdateSheet()
         Dim dataset As DataFrame = frmMain.clsRInterface.GetData("data")
-        Me.grid.CurrentWorksheet.Rows = DataSet.RowCount
-        Me.grid.CurrentWorksheet.Columns = DataSet.ColumnCount
-        For i As Integer = 0 To DataSet.RowCount - 1
-            For k As Integer = 0 To DataSet.ColumnCount - 1
-                Me.grid.CurrentWorksheet.ColumnHeaders(k).Text = DataSet.ColumnNames(k)
-                Me.grid.CurrentWorksheet(row:=i, col:=k) = DataSet(i, k)
+        Me.grid.CurrentWorksheet.Rows = dataset.RowCount
+        Me.grid.CurrentWorksheet.Columns = dataset.ColumnCount
+        For i As Integer = 0 To dataset.RowCount - 1
+            For k As Integer = 0 To dataset.ColumnCount - 1
+                Me.grid.CurrentWorksheet.ColumnHeaders(k).Text = dataset.ColumnNames(k)
+                Me.grid.CurrentWorksheet(row:=i, col:=k) = dataset(i, k)
             Next
         Next
         Me.Refresh()
@@ -19,7 +19,4 @@ Public Class frmEditor
         grid.CurrentWorksheet = sheet
     End Sub
 
-    Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        grid.SheetTabControlWidth = 300
-    End Sub
 End Class

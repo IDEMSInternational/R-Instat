@@ -17,7 +17,9 @@
 Imports RDotNet
 Imports System.IO
 Public Class frmMain
+
     Public clsRInterface As New RInterface
+
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
         frmCommand.MdiParent = Me
