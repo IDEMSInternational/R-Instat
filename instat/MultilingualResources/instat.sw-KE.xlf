@@ -233,15 +233,15 @@
         </trans-unit>
         <trans-unit id="Exit_" translate="yes" xml:space="preserve">
           <source>Exit</source>
-          <target state="new">Exit</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Toka:</target>
         </trans-unit>
         <trans-unit id="Clear" translate="yes" xml:space="preserve">
           <source>Clear</source>
-          <target state="new">Clear</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ondoa</target>
         </trans-unit>
         <trans-unit id="Copy" translate="yes" xml:space="preserve">
           <source>Copy</source>
-          <target state="new">Copy</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Nakili</target>
         </trans-unit>
         <trans-unit id="Copy_Special" translate="yes" xml:space="preserve">
           <source>Copy Special</source>
@@ -249,23 +249,23 @@
         </trans-unit>
         <trans-unit id="Cut" translate="yes" xml:space="preserve">
           <source>Cut</source>
-          <target state="new">Cut</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kata</target>
         </trans-unit>
         <trans-unit id="Find" translate="yes" xml:space="preserve">
           <source>Find</source>
-          <target state="new">Find</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Tafuta</target>
         </trans-unit>
         <trans-unit id="Paste" translate="yes" xml:space="preserve">
           <source>Paste</source>
-          <target state="new">Paste</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Bandika</target>
         </trans-unit>
         <trans-unit id="Replace" translate="yes" xml:space="preserve">
           <source>Replace</source>
-          <target state="new">Replace</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Badilisha</target>
         </trans-unit>
         <trans-unit id="Select_All" translate="yes" xml:space="preserve">
           <source>Select All</source>
-          <target state="new">Select All</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Teua Yote</target>
         </trans-unit>
         <trans-unit id="Export_as" translate="yes" xml:space="preserve">
           <source>Export_as</source>
@@ -277,7 +277,7 @@
         </trans-unit>
         <trans-unit id="Language" translate="yes" xml:space="preserve">
           <source>Language</source>
-          <target state="new">Language</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Lugha</target>
         </trans-unit>
         <trans-unit id="ODBC_Query" translate="yes" xml:space="preserve">
           <source>ODBC Query</source>
@@ -285,15 +285,15 @@
         </trans-unit>
         <trans-unit id="Open" translate="yes" xml:space="preserve">
           <source>Open</source>
-          <target state="new">Open</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Fungua</target>
         </trans-unit>
         <trans-unit id="Output" translate="yes" xml:space="preserve">
           <source>Output</source>
-          <target state="new">Output</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Towe</target>
         </trans-unit>
         <trans-unit id="Selection" translate="yes" xml:space="preserve">
           <source>Selection</source>
-          <target state="new">Selection</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Uteuzi</target>
         </trans-unit>
         <trans-unit id="Analysis_of_Variance" translate="yes" xml:space="preserve">
           <source>Analysis of Variance</source>
@@ -305,7 +305,7 @@
         </trans-unit>
         <trans-unit id="Calculations" translate="yes" xml:space="preserve">
           <source>Calculations</source>
-          <target state="new">Calculations</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ukokotozi</target>
         </trans-unit>
         <trans-unit id="Check_Duplicates" translate="yes" xml:space="preserve">
           <source>Check Duplicates</source>
@@ -321,7 +321,7 @@
         </trans-unit>
         <trans-unit id="Column_Properties" translate="yes" xml:space="preserve">
           <source>Column Properties</source>
-          <target state="new">Column Properties</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Sifa za Safuwima...</target>
         </trans-unit>
         <trans-unit id="Column_Statistics" translate="yes" xml:space="preserve">
           <source>Column Statistics</source>
@@ -329,7 +329,7 @@
         </trans-unit>
         <trans-unit id="Data" translate="yes" xml:space="preserve">
           <source>Data</source>
-          <target state="new">Data</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Data</target>
         </trans-unit>
         <trans-unit id="Describe" translate="yes" xml:space="preserve">
           <source>Describe</source>
@@ -337,7 +337,7 @@
         </trans-unit>
         <trans-unit id="Display" translate="yes" xml:space="preserve">
           <source>Display</source>
-          <target state="new">Display</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Onyesha</target>
         </trans-unit>
         <trans-unit id="Diversity" translate="yes" xml:space="preserve">
           <source>Diversity</source>
@@ -353,11 +353,11 @@
         </trans-unit>
         <trans-unit id="English" translate="yes" xml:space="preserve">
           <source>English</source>
-          <target state="new">English</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kiingereza</target>
         </trans-unit>
         <trans-unit id="Enter" translate="yes" xml:space="preserve">
           <source>Enter</source>
-          <target state="new">Enter</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Enter</target>
         </trans-unit>
         <trans-unit id="Freequency_Chart" translate="yes" xml:space="preserve">
           <source>Freequency Chart</source>
@@ -365,15 +365,15 @@
         </trans-unit>
         <trans-unit id="French" translate="yes" xml:space="preserve">
           <source>French</source>
-          <target state="new">French</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kifaransa</target>
         </trans-unit>
         <trans-unit id="Group" translate="yes" xml:space="preserve">
           <source>Group</source>
-          <target state="new">Group</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kikundi</target>
         </trans-unit>
         <trans-unit id="Histogram" translate="yes" xml:space="preserve">
           <source>Histogram</source>
-          <target state="new">Histogram</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Histogramu</target>
         </trans-unit>
         <trans-unit id="Load_Graph" translate="yes" xml:space="preserve">
           <source>Load Graph</source>
@@ -389,7 +389,7 @@
         </trans-unit>
         <trans-unit id="Plot" translate="yes" xml:space="preserve">
           <source>Plot</source>
-          <target state="new">Plot</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ploti</target>
         </trans-unit>
         <trans-unit id="Probability_Distribution" translate="yes" xml:space="preserve">
           <source>Probability Distribution</source>
@@ -413,7 +413,7 @@
         </trans-unit>
         <trans-unit id="Reshape" translate="yes" xml:space="preserve">
           <source>Reshape</source>
-          <target state="new">Reshape</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Unda upya</target>
         </trans-unit>
         <trans-unit id="Resize_Worksheet" translate="yes" xml:space="preserve">
           <source>Resize Worksheet</source>
@@ -421,7 +421,7 @@
         </trans-unit>
         <trans-unit id="Sample_Size" translate="yes" xml:space="preserve">
           <source>Sample Size</source>
-          <target state="new">Sample Size</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ukubwa sampuli</target>
         </trans-unit>
         <trans-unit id="ScatterPlot" translate="yes" xml:space="preserve">
           <source>ScatterPlot...</source>
@@ -433,7 +433,7 @@
         </trans-unit>
         <trans-unit id="Summary" translate="yes" xml:space="preserve">
           <source>Summary</source>
-          <target state="new">Summary</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Muhtasari</target>
         </trans-unit>
         <trans-unit id="Summary_Chart" translate="yes" xml:space="preserve">
           <source>Summary Chart</source>
@@ -445,7 +445,7 @@
         </trans-unit>
         <trans-unit id="Tables" translate="yes" xml:space="preserve">
           <source>Tables</source>
-          <target state="new">Tables</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Majedwali</target>
         </trans-unit>
         <trans-unit id="Time_Series" translate="yes" xml:space="preserve">
           <source>Time Series</source>
@@ -457,7 +457,7 @@
         </trans-unit>
         <trans-unit id="Expand" translate="yes" xml:space="preserve">
           <source>Expand</source>
-          <target state="new">Expand</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Finyuza</target>
         </trans-unit>
         <trans-unit id="Indicator_Variables" translate="yes" xml:space="preserve">
           <source>Indicator Variables</source>
@@ -481,7 +481,7 @@
         </trans-unit>
         <trans-unit id="Select_" translate="yes" xml:space="preserve">
           <source>Select</source>
-          <target state="new">Select</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Teua</target>
         </trans-unit>
         <trans-unit id="Select_and_Stack" translate="yes" xml:space="preserve">
           <source>Select and Stack</source>
@@ -489,15 +489,15 @@
         </trans-unit>
         <trans-unit id="Sort" translate="yes" xml:space="preserve">
           <source>Sort</source>
-          <target state="new">Sort</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">angua</target>
         </trans-unit>
         <trans-unit id="Stack" translate="yes" xml:space="preserve">
           <source>Stack</source>
-          <target state="new">Stack</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Mpororo</target>
         </trans-unit>
         <trans-unit id="Transform" translate="yes" xml:space="preserve">
           <source>Transform</source>
-          <target state="new">Transform</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Geuhamisha...</target>
         </trans-unit>
         <trans-unit id="Unstack" translate="yes" xml:space="preserve">
           <source>Unstack</source>
@@ -505,7 +505,7 @@
         </trans-unit>
         <trans-unit id="Clear1" translate="yes" xml:space="preserve">
           <source>Clear Del</source>
-          <target state="new">Clear Del</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ondoa uteuzi	Del</target>
         </trans-unit>
         <trans-unit id="Command_Logging" translate="yes" xml:space="preserve">
           <source>Command Logging</source>
@@ -517,7 +517,7 @@
         </trans-unit>
         <trans-unit id="Find1" translate="yes" xml:space="preserve">
           <source>Find Ctrl+F</source>
-          <target state="new">Find Ctrl+F</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Tafuta...	Ctrl+F</target>
         </trans-unit>
         <trans-unit id="Flags" translate="yes" xml:space="preserve">
           <source>Flags</source>
@@ -529,7 +529,7 @@
         </trans-unit>
         <trans-unit id="Options" translate="yes" xml:space="preserve">
           <source>Options</source>
-          <target state="new">Options</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">chaguo</target>
         </trans-unit>
         <trans-unit id="Output_Spooling" translate="yes" xml:space="preserve">
           <source>Output Spooling</source>
@@ -537,15 +537,15 @@
         </trans-unit>
         <trans-unit id="Paste1" translate="yes" xml:space="preserve">
           <source>Paste Ctrl+V</source>
-          <target state="new">Paste Ctrl+V</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Bandika	Ctrl+V</target>
         </trans-unit>
         <trans-unit id="Recall" translate="yes" xml:space="preserve">
           <source>Recall</source>
-          <target state="new">Recall</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Itisha</target>
         </trans-unit>
         <trans-unit id="Replace1" translate="yes" xml:space="preserve">
           <source>Replace Ctrl+H</source>
-          <target state="new">Replace Ctrl+H</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Badilisha...	Ctrl+H</target>
         </trans-unit>
         <trans-unit id="Run_Worksheet_Editor" translate="yes" xml:space="preserve">
           <source>Run Worksheet Editor F7</source>

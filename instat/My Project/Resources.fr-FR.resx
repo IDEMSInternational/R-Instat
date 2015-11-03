@@ -27,4 +27,358 @@
   <data name="Alecive-Flatwoken-Apps-Run" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Alecive-Flatwoken-Apps-Run.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="Available_Variables" xml:space="preserve">
+    <value>Variables disponibles</value>
+  </data>
+  <data name="Box_Plot" xml:space="preserve">
+    <value>Diagramme à surfaces</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Choose_Statistics" xml:space="preserve">
+    <value>Sélectionnez statistiques</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="Climatic" xml:space="preserve">
+    <value>Climatiques</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="Close_Worksheet" xml:space="preserve">
+    <value>Fermer la feuille de calcul</value>
+  </data>
+  <data name="Command_and_Output_Window" xml:space="preserve">
+    <value>Commande et fenêtre sortie</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copier</value>
+  </data>
+  <data name="Copy_Special" xml:space="preserve">
+    <value>Copier spécial</value>
+  </data>
+  <data name="Cumulative_Frequency" xml:space="preserve">
+    <value>Fréquence cumulée</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Couper</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edition</value>
+  </data>
+  <data name="Exit_" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="Factor_Variable" xml:space="preserve">
+    <value>Facteur Variable</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Fichier </value>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="Graphics" xml:space="preserve">
+    <value>Graphiques</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Aide</value>
+  </data>
+  <data name="Import_Export" xml:space="preserve">
+    <value>Importer/Exporter</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Gérer</value>
+  </data>
+  <data name="New_Worksheet" xml:space="preserve">
+    <value>Nouvelle feuille de calcul... CTRL + N</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Open_From_Library" xml:space="preserve">
+    <value>Ouvert de la bibliothèque</value>
+  </data>
+  <data name="Open_Worksheet" xml:space="preserve">
+    <value>Feuille de calcul ouverte</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Coller</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Impression</value>
+  </data>
+  <data name="Print_Preview" xml:space="preserve">
+    <value>Aperçu avant impression</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>Remplacer</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>réinitialiser</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Save_As" xml:space="preserve">
+    <value>Enregistrer sous</value>
+  </data>
+  <data name="Script" xml:space="preserve">
+    <value>Script</value>
+  </data>
+  <data name="Script_Window" xml:space="preserve">
+    <value>Fenêtre script</value>
+  </data>
+  <data name="Selected_Variables" xml:space="preserve">
+    <value>Variables sélectionnées</value>
+  </data>
+  <data name="Select_All" xml:space="preserve">
+    <value>Sélectionner tout</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
+  <data name="Stem_And_Leaf" xml:space="preserve">
+    <value>Tige et feuilles</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Rétablir</value>
+  </data>
+  <data name="Window" xml:space="preserve">
+    <value>Fenêtre</value>
+  </data>
+  <data name="Export_as" xml:space="preserve">
+    <value>Export_as</value>
+  </data>
+  <data name="Import_ASCII" xml:space="preserve">
+    <value>Import ASCII</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="ODBC_Query" xml:space="preserve">
+    <value>Requête ODBC</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Sortie</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Sélection</value>
+  </data>
+  <data name="Analysis_of_Variance" xml:space="preserve">
+    <value>Analyse de la Variance</value>
+  </data>
+  <data name="Boxplot" xml:space="preserve">
+    <value>Surfaces</value>
+  </data>
+  <data name="Calculations" xml:space="preserve">
+    <value>Calculs</value>
+  </data>
+  <data name="Check_Duplicates" xml:space="preserve">
+    <value>Vérifier les doublons</value>
+  </data>
+  <data name="Circular_Statisctics" xml:space="preserve">
+    <value>CircularStatisctics</value>
+  </data>
+  <data name="Clear_Remove" xml:space="preserve">
+    <value>Clear(Remove)</value>
+  </data>
+  <data name="Column_Properties" xml:space="preserve">
+    <value>Propriétés de colonne</value>
+  </data>
+  <data name="Column_Statistics" xml:space="preserve">
+    <value>Statistiques de colonnes</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Describe" xml:space="preserve">
+    <value>Décrire</value>
+  </data>
+  <data name="Display" xml:space="preserve">
+    <value>Affichage</value>
+  </data>
+  <data name="Diversity" xml:space="preserve">
+    <value>Diversité</value>
+  </data>
+  <data name="Dotplot" xml:space="preserve">
+    <value>Dotplot</value>
+  </data>
+  <data name="Duplicate_copy_columns" xml:space="preserve">
+    <value>Duplicata (copie de colonnes)</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Anglais</value>
+  </data>
+  <data name="Enter" xml:space="preserve">
+    <value>Entrée</value>
+  </data>
+  <data name="Freequency_Chart" xml:space="preserve">
+    <value>Graphique Freequeency</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Groupe</value>
+  </data>
+  <data name="Histogram" xml:space="preserve">
+    <value>Histogramme</value>
+  </data>
+  <data name="Load_Graph" xml:space="preserve">
+    <value>Graphique de charge</value>
+  </data>
+  <data name="Manipulate" xml:space="preserve">
+    <value>Manipuler les</value>
+  </data>
+  <data name="Non_Parametric" xml:space="preserve">
+    <value>Non paramétrique</value>
+  </data>
+  <data name="Plot" xml:space="preserve">
+    <value>Tracer</value>
+  </data>
+  <data name="Probability_Distribution" xml:space="preserve">
+    <value>Distribution de probabilité</value>
+  </data>
+  <data name="Probability_Plot" xml:space="preserve">
+    <value>Graphique de probabilité</value>
+  </data>
+  <data name="Random_Samples" xml:space="preserve">
+    <value>Échantillons aléatoires</value>
+  </data>
+  <data name="Regression" xml:space="preserve">
+    <value>Régression</value>
+  </data>
+  <data name="Regular_Sequence" xml:space="preserve">
+    <value>Séquence régulière</value>
+  </data>
+  <data name="Reshape" xml:space="preserve">
+    <value>Remodeler</value>
+  </data>
+  <data name="Resize_Worksheet" xml:space="preserve">
+    <value>Redimensionner la feuille de calcul</value>
+  </data>
+  <data name="Sample_Size" xml:space="preserve">
+    <value>Taille d'échantillon</value>
+  </data>
+  <data name="ScatterPlot" xml:space="preserve">
+    <value>Nuage de points...</value>
+  </data>
+  <data name="Simple_Models" xml:space="preserve">
+    <value>Modèles simples</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Résumé</value>
+  </data>
+  <data name="Summary_Chart" xml:space="preserve">
+    <value>Tableau récapitulatif</value>
+  </data>
+  <data name="Survival" xml:space="preserve">
+    <value>Survie</value>
+  </data>
+  <data name="Tables" xml:space="preserve">
+    <value>Tables</value>
+  </data>
+  <data name="Time_Series" xml:space="preserve">
+    <value>Série chronologique</value>
+  </data>
+  <data name="Windrose" xml:space="preserve">
+    <value>Rose des vents</value>
+  </data>
+  <data name="Expand" xml:space="preserve">
+    <value>Développer</value>
+  </data>
+  <data name="Indicator_Variables" xml:space="preserve">
+    <value>Variables indicatrices</value>
+  </data>
+  <data name="Interractions" xml:space="preserve">
+    <value>Interractions</value>
+  </data>
+  <data name="Polynomials" xml:space="preserve">
+    <value>Polynômes</value>
+  </data>
+  <data name="Recode" xml:space="preserve">
+    <value>Recode</value>
+  </data>
+  <data name="Row_Statistics" xml:space="preserve">
+    <value>Row_Statistics</value>
+  </data>
+  <data name="Select_" xml:space="preserve">
+    <value>Sélectionner</value>
+  </data>
+  <data name="Select_and_Stack" xml:space="preserve">
+    <value>Sélectionnez et pile</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Tri</value>
+  </data>
+  <data name="Stack" xml:space="preserve">
+    <value>Pile</value>
+  </data>
+  <data name="Transform" xml:space="preserve">
+    <value>Transformer</value>
+  </data>
+  <data name="Unstack" xml:space="preserve">
+    <value>Désempilement</value>
+  </data>
+  <data name="Clear1" xml:space="preserve">
+    <value>Claire Del</value>
+  </data>
+  <data name="Command_Logging" xml:space="preserve">
+    <value>Journalisation des commandes</value>
+  </data>
+  <data name="Copy_Special1" xml:space="preserve">
+    <value>Copie spéciale Ctrl + Y</value>
+  </data>
+  <data name="Find1" xml:space="preserve">
+    <value>Trouver Ctrl + F</value>
+  </data>
+  <data name="Flags" xml:space="preserve">
+    <value>Indicateurs</value>
+  </data>
+  <data name="Font" xml:space="preserve">
+    <value>Police Ctrl + T</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="Output_Spooling" xml:space="preserve">
+    <value>File d'attente de sortie</value>
+  </data>
+  <data name="Paste1" xml:space="preserve">
+    <value>Coller Ctrl + V</value>
+  </data>
+  <data name="Recall" xml:space="preserve">
+    <value>Rappeler</value>
+  </data>
+  <data name="Replace1" xml:space="preserve">
+    <value>Remplacer Ctrl + H</value>
+  </data>
+  <data name="Run_Worksheet_Editor" xml:space="preserve">
+    <value>Exécutez l'éditeur de feuille de calcul F7</value>
+  </data>
+  <data name="Select_All1" xml:space="preserve">
+    <value>Sélectionnez toutes les baguettes + A </value>
+  </data>
+  <data name="View_Edit_Macro" xml:space="preserve">
+    <value>Afficher/modifier Macro</value>
+  </data>
+  <data name="View_Edit_Text" xml:space="preserve">
+    <value>Afficher/modifier texte</value>
+  </data>
 </root>
