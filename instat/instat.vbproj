@@ -193,6 +193,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="rLink.vb" />
+    <Compile Include="rSyntax.vb" />
     <Compile Include="Translations.vb" />
     <Compile Include="ucrButtons.designer.vb">
       <DependentUpon>ucrButtons.vb</DependentUpon>
