@@ -26,6 +26,7 @@ Public Class ucrButtons
     End Sub
 
     Public Event ClickOk(sender As Object, e As EventArgs)
+
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
         RaiseEvent ClickOk(sender, e)
     End Sub

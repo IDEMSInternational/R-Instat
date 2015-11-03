@@ -15,8 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports RDotNet
 Public Class ucrDataSelection
-    Dim ucr As ucrSelected
-    Dim lstSelectedVariables As ListBox = ucr.lstSelectedVariables
+    Dim clsRInterface As New RInterface
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If (lstAvailableVariable.SelectedItem <> "") Then
@@ -30,8 +29,8 @@ Public Class ucrDataSelection
 
     Private Sub btnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click
         If (lstSelectedVariables.SelectedItem <> "") Then
-            lstAvailableVariable.Items.Add(lstSelectedVariables.SelectedItems)
-            lstSelectedVariables.Items.Remove(lstSelectedVariables.SelectedItems)
+            lstAvailableVariable.Items.Add(lstSelectedVariables.SelectedItem)
+            lstSelectedVariables.Items.Remove(lstSelectedVariables.SelectedItem)
         Else
             MsgBox("No item was selected", vbInformation, "Selection message")
         End If
@@ -44,6 +43,7 @@ Public Class ucrDataSelection
         For i = 0 To dataset.ColumnCount - 1
             lstAvailableVariable.Items.Add(dataset.ColumnNames(i))
         Next
+
     End Sub
 
     Private Sub lstAvailableVariable_MouseDoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.MouseDoubleClick
