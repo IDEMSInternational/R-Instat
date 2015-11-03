@@ -187,6 +187,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="My Project\Resources.sw-KE.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.sw-KE.resx</DependentUpon>
+    </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -208,6 +213,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgDescriptiveStatistics.ar.resx">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDescriptiveStatistics.fr-FR.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
     </EmbeddedResource>
@@ -216,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDescriptiveStatistics.sw-KE.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSort.ar.resx">
+      <DependentUpon>dlgSort.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSort.fr-FR.resx">
       <DependentUpon>dlgSort.vb</DependentUpon>
@@ -226,6 +237,9 @@
     <EmbeddedResource Include="dlgSort.sw-KE.resx">
       <DependentUpon>dlgSort.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCommand.ar.resx">
+      <DependentUpon>frmCommand.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.fr-FR.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>
     </EmbeddedResource>
@@ -234,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.sw-KE.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditor.ar.resx">
+      <DependentUpon>frmEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditor.fr-FR.resx">
       <DependentUpon>frmEditor.vb</DependentUpon>
@@ -244,6 +261,9 @@
     <EmbeddedResource Include="frmEditor.sw-KE.resx">
       <DependentUpon>frmEditor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLog.ar.resx">
+      <DependentUpon>frmLog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLog.fr-FR.resx">
       <DependentUpon>frmLog.vb</DependentUpon>
     </EmbeddedResource>
@@ -252,6 +272,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLog.sw-KE.resx">
       <DependentUpon>frmLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.ar.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.fr-FR.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
@@ -262,6 +285,9 @@
     <EmbeddedResource Include="frmMain.sw-KE.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmScript.ar.resx">
+      <DependentUpon>frmScript.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmScript.fr-FR.resx">
       <DependentUpon>frmScript.vb</DependentUpon>
     </EmbeddedResource>
@@ -271,14 +297,22 @@
     <EmbeddedResource Include="frmScript.sw-KE.resx">
       <DependentUpon>frmScript.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.ar.resx" />
     <EmbeddedResource Include="My Project\Resources.fr-FR.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="My Project\Resources.sw-KE.resx" />
+    <EmbeddedResource Include="My Project\Resources.sw-KE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.sw-KE.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrButtons.ar.resx">
+      <DependentUpon>ucrButtons.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
@@ -287,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.sw-KE.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataSelection.ar.resx">
+      <DependentUpon>ucrDataSelection.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.fr-FR.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
@@ -339,6 +376,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <XliffResource Include="MultilingualResources\instat.ar.xlf" />
     <XliffResource Include="MultilingualResources\instat.fr-FR.xlf" />
     <XliffResource Include="MultilingualResources\instat.sw-KE.xlf" />
   </ItemGroup>

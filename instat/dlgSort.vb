@@ -1,5 +1,9 @@
 ﻿
 Imports RDotNet
+Imports System.Globalization
+Imports System.Threading
+Imports instat.Translations
+
 Public Class dlgSort
     Private Sub UcrButtons1_clickOk(sender As Object, e As EventArgs) Handles UcrButtons1.ClickOk
         Dim strScript As String
@@ -31,6 +35,10 @@ Public Class dlgSort
     End Sub
 
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub UcrDataSelection1_Load(sender As Object, e As EventArgs) Handles UcrDataSelection1.Load
 
     End Sub
 End Class

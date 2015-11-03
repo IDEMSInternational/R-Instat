@@ -803,10 +803,6 @@
           <source>Run Worksheet Editor F7</source>
           <target state="new">Run Worksheet Editor F7</target>
         </trans-unit>
-        <trans-unit id="Select_All1" translate="yes" xml:space="preserve">
-          <source>Select All ctrls+A </source>
-          <target state="new">Select All ctrls+A </target>
-        </trans-unit>
         <trans-unit id="View_Edit_Macro" translate="yes" xml:space="preserve">
           <source>View/Edit Macro</source>
           <target state="new">View/Edit Macro</target>

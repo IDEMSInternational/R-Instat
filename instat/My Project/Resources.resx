@@ -442,9 +442,6 @@
   <data name="Select_" xml:space="preserve">
     <value>Select</value>
   </data>
-  <data name="Select_All1" xml:space="preserve">
-    <value>Select All ctrls+A </value>
-  </data>
   <data name="Select_and_Stack" xml:space="preserve">
     <value>Select and Stack</value>
   </data>

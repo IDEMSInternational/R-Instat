@@ -33,8 +33,17 @@
   <data name="Cancel" xml:space="preserve">
     <value>Katisha</value>
   </data>
+  <data name="Choose_Statistics" xml:space="preserve">
+    <value>Chagua Hesabu</value>
+  </data>
+  <data name="Climatic" xml:space="preserve">
+    <value>Hewa</value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>Funga</value>
+  </data>
+  <data name="Close_Worksheet" xml:space="preserve">
+    <value>Funga Karatasi</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Hariri</value>
@@ -59,6 +68,12 @@
   </data>
   <data name="Ok" xml:space="preserve">
     <value>Sawa</value>
+  </data>
+  <data name="Open_From_Library" xml:space="preserve">
+    <value>Fungua Kutoka Maktaba</value>
+  </data>
+  <data name="Open_Worksheet" xml:space="preserve">
+    <value>Fungua Lahakazi</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Chapisha</value>
@@ -92,5 +107,11 @@
   </data>
   <data name="Window" xml:space="preserve">
     <value>Dirisha</value>
+  </data>
+  <data name="Exit_" xml:space="preserve">
+    <value>Toka</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Lugha</value>
   </data>
 </root>
