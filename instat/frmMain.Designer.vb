@@ -115,6 +115,7 @@ Partial Class frmMain
         Me.SpellLengthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TotalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LogWindowMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
@@ -259,7 +260,6 @@ Partial Class frmMain
         Me.KiswahiliToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FrenchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LogWindowMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -851,6 +851,12 @@ Partial Class frmMain
         Me.WindowToolStripMenuItem.Size = New System.Drawing.Size(63, 20)
         Me.WindowToolStripMenuItem.Tag = "Window"
         Me.WindowToolStripMenuItem.Text = "Window"
+        '
+        'LogWindowMenu
+        '
+        Me.LogWindowMenu.Name = "LogWindowMenu"
+        Me.LogWindowMenu.Size = New System.Drawing.Size(141, 22)
+        Me.LogWindowMenu.Text = "Log Window"
         '
         'HelpToolStripMenuItem
         '
@@ -1834,12 +1840,6 @@ Partial Class frmMain
         Me.FrenchToolStripMenuItem.Size = New System.Drawing.Size(120, 22)
         Me.FrenchToolStripMenuItem.Tag = "French"
         Me.FrenchToolStripMenuItem.Text = "French"
-        '
-        'LogWindowMenu
-        '
-        Me.LogWindowMenu.Name = "LogWindowMenu"
-        Me.LogWindowMenu.Size = New System.Drawing.Size(152, 22)
-        Me.LogWindowMenu.Text = "Log Window"
         '
         'frmMain
         '

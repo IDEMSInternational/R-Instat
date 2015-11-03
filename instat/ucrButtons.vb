@@ -1,4 +1,7 @@
-﻿Public Class ucrButtons
+﻿
+
+
+Public Class ucrButtons
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         'Gets the current active window 
         Dim ActiveWindow As Form = Form.ActiveForm
@@ -15,4 +18,7 @@
         RaiseEvent ClickOk(sender, e)
     End Sub
 
+    Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
