@@ -159,8 +159,9 @@
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Simamia</target>
         </trans-unit>
         <trans-unit id="New_Worksheet" translate="yes" xml:space="preserve">
-          <source>New Worksheet</source>
+          <source>New Worksheet... CTRL+N</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Lahakazi mpya</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Ok" translate="yes" xml:space="preserve">
           <source>Ok</source>
@@ -229,6 +230,338 @@
         <trans-unit id="Window" translate="yes" xml:space="preserve">
           <source>Window</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Dirisha</target>
+        </trans-unit>
+        <trans-unit id="Exit_" translate="yes" xml:space="preserve">
+          <source>Exit</source>
+          <target state="new">Exit</target>
+        </trans-unit>
+        <trans-unit id="Clear" translate="yes" xml:space="preserve">
+          <source>Clear</source>
+          <target state="new">Clear</target>
+        </trans-unit>
+        <trans-unit id="Copy" translate="yes" xml:space="preserve">
+          <source>Copy</source>
+          <target state="new">Copy</target>
+        </trans-unit>
+        <trans-unit id="Copy_Special" translate="yes" xml:space="preserve">
+          <source>Copy Special</source>
+          <target state="new">Copy Special</target>
+        </trans-unit>
+        <trans-unit id="Cut" translate="yes" xml:space="preserve">
+          <source>Cut</source>
+          <target state="new">Cut</target>
+        </trans-unit>
+        <trans-unit id="Find" translate="yes" xml:space="preserve">
+          <source>Find</source>
+          <target state="new">Find</target>
+        </trans-unit>
+        <trans-unit id="Paste" translate="yes" xml:space="preserve">
+          <source>Paste</source>
+          <target state="new">Paste</target>
+        </trans-unit>
+        <trans-unit id="Replace" translate="yes" xml:space="preserve">
+          <source>Replace</source>
+          <target state="new">Replace</target>
+        </trans-unit>
+        <trans-unit id="Select_All" translate="yes" xml:space="preserve">
+          <source>Select All</source>
+          <target state="new">Select All</target>
+        </trans-unit>
+        <trans-unit id="Export_as" translate="yes" xml:space="preserve">
+          <source>Export_as</source>
+          <target state="new">Export_as</target>
+        </trans-unit>
+        <trans-unit id="Import_ASCII" translate="yes" xml:space="preserve">
+          <source>Import ASCII</source>
+          <target state="new">Import ASCII</target>
+        </trans-unit>
+        <trans-unit id="Language" translate="yes" xml:space="preserve">
+          <source>Language</source>
+          <target state="new">Language</target>
+        </trans-unit>
+        <trans-unit id="ODBC_Query" translate="yes" xml:space="preserve">
+          <source>ODBC Query</source>
+          <target state="new">ODBC Query</target>
+        </trans-unit>
+        <trans-unit id="Open" translate="yes" xml:space="preserve">
+          <source>Open</source>
+          <target state="new">Open</target>
+        </trans-unit>
+        <trans-unit id="Output" translate="yes" xml:space="preserve">
+          <source>Output</source>
+          <target state="new">Output</target>
+        </trans-unit>
+        <trans-unit id="Selection" translate="yes" xml:space="preserve">
+          <source>Selection</source>
+          <target state="new">Selection</target>
+        </trans-unit>
+        <trans-unit id="Analysis_of_Variance" translate="yes" xml:space="preserve">
+          <source>Analysis of Variance</source>
+          <target state="new">Analysis of Variance</target>
+        </trans-unit>
+        <trans-unit id="Boxplot" translate="yes" xml:space="preserve">
+          <source>Boxplot</source>
+          <target state="new">Boxplot</target>
+        </trans-unit>
+        <trans-unit id="Calculations" translate="yes" xml:space="preserve">
+          <source>Calculations</source>
+          <target state="new">Calculations</target>
+        </trans-unit>
+        <trans-unit id="Check_Duplicates" translate="yes" xml:space="preserve">
+          <source>Check Duplicates</source>
+          <target state="new">Check Duplicates</target>
+        </trans-unit>
+        <trans-unit id="Circular_Statisctics" translate="yes" xml:space="preserve">
+          <source>CircularStatisctics</source>
+          <target state="new">CircularStatisctics</target>
+        </trans-unit>
+        <trans-unit id="Clear_Remove" translate="yes" xml:space="preserve">
+          <source>Clear(Remove)</source>
+          <target state="new">Clear(Remove)</target>
+        </trans-unit>
+        <trans-unit id="Column_Properties" translate="yes" xml:space="preserve">
+          <source>Column Properties</source>
+          <target state="new">Column Properties</target>
+        </trans-unit>
+        <trans-unit id="Column_Statistics" translate="yes" xml:space="preserve">
+          <source>Column Statistics</source>
+          <target state="new">Column Statistics</target>
+        </trans-unit>
+        <trans-unit id="Data" translate="yes" xml:space="preserve">
+          <source>Data</source>
+          <target state="new">Data</target>
+        </trans-unit>
+        <trans-unit id="Describe" translate="yes" xml:space="preserve">
+          <source>Describe</source>
+          <target state="new">Describe</target>
+        </trans-unit>
+        <trans-unit id="Display" translate="yes" xml:space="preserve">
+          <source>Display</source>
+          <target state="new">Display</target>
+        </trans-unit>
+        <trans-unit id="Diversity" translate="yes" xml:space="preserve">
+          <source>Diversity</source>
+          <target state="new">Diversity</target>
+        </trans-unit>
+        <trans-unit id="Dotplot" translate="yes" xml:space="preserve">
+          <source>Dotplot</source>
+          <target state="new">Dotplot</target>
+        </trans-unit>
+        <trans-unit id="Duplicate_copy_columns" translate="yes" xml:space="preserve">
+          <source>Duplicate(copy columns)</source>
+          <target state="new">Duplicate(copy columns)</target>
+        </trans-unit>
+        <trans-unit id="English" translate="yes" xml:space="preserve">
+          <source>English</source>
+          <target state="new">English</target>
+        </trans-unit>
+        <trans-unit id="Enter" translate="yes" xml:space="preserve">
+          <source>Enter</source>
+          <target state="new">Enter</target>
+        </trans-unit>
+        <trans-unit id="Freequency_Chart" translate="yes" xml:space="preserve">
+          <source>Freequency Chart</source>
+          <target state="new">Freequency Chart</target>
+        </trans-unit>
+        <trans-unit id="French" translate="yes" xml:space="preserve">
+          <source>French</source>
+          <target state="new">French</target>
+        </trans-unit>
+        <trans-unit id="Group" translate="yes" xml:space="preserve">
+          <source>Group</source>
+          <target state="new">Group</target>
+        </trans-unit>
+        <trans-unit id="Histogram" translate="yes" xml:space="preserve">
+          <source>Histogram</source>
+          <target state="new">Histogram</target>
+        </trans-unit>
+        <trans-unit id="Load_Graph" translate="yes" xml:space="preserve">
+          <source>Load Graph</source>
+          <target state="new">Load Graph</target>
+        </trans-unit>
+        <trans-unit id="Manipulate" translate="yes" xml:space="preserve">
+          <source>Manipulate</source>
+          <target state="new">Manipulate</target>
+        </trans-unit>
+        <trans-unit id="Non_Parametric" translate="yes" xml:space="preserve">
+          <source>Non-Parametric</source>
+          <target state="new">Non-Parametric</target>
+        </trans-unit>
+        <trans-unit id="Plot" translate="yes" xml:space="preserve">
+          <source>Plot</source>
+          <target state="new">Plot</target>
+        </trans-unit>
+        <trans-unit id="Probability_Distribution" translate="yes" xml:space="preserve">
+          <source>Probability Distribution</source>
+          <target state="new">Probability Distribution</target>
+        </trans-unit>
+        <trans-unit id="Probability_Plot" translate="yes" xml:space="preserve">
+          <source>Probability Plot</source>
+          <target state="new">Probability Plot</target>
+        </trans-unit>
+        <trans-unit id="Random_Samples" translate="yes" xml:space="preserve">
+          <source>Random Samples</source>
+          <target state="new">Random Samples</target>
+        </trans-unit>
+        <trans-unit id="Regression" translate="yes" xml:space="preserve">
+          <source>Regression</source>
+          <target state="new">Regression</target>
+        </trans-unit>
+        <trans-unit id="Regular_Sequence" translate="yes" xml:space="preserve">
+          <source>Regular Sequence</source>
+          <target state="new">Regular Sequence</target>
+        </trans-unit>
+        <trans-unit id="Reshape" translate="yes" xml:space="preserve">
+          <source>Reshape</source>
+          <target state="new">Reshape</target>
+        </trans-unit>
+        <trans-unit id="Resize_Worksheet" translate="yes" xml:space="preserve">
+          <source>Resize Worksheet</source>
+          <target state="new">Resize Worksheet</target>
+        </trans-unit>
+        <trans-unit id="Sample_Size" translate="yes" xml:space="preserve">
+          <source>Sample Size</source>
+          <target state="new">Sample Size</target>
+        </trans-unit>
+        <trans-unit id="ScatterPlot" translate="yes" xml:space="preserve">
+          <source>ScatterPlot...</source>
+          <target state="new">ScatterPlot...</target>
+        </trans-unit>
+        <trans-unit id="Simple_Models" translate="yes" xml:space="preserve">
+          <source>Simple Models</source>
+          <target state="new">Simple Models</target>
+        </trans-unit>
+        <trans-unit id="Summary" translate="yes" xml:space="preserve">
+          <source>Summary</source>
+          <target state="new">Summary</target>
+        </trans-unit>
+        <trans-unit id="Summary_Chart" translate="yes" xml:space="preserve">
+          <source>Summary Chart</source>
+          <target state="new">Summary Chart</target>
+        </trans-unit>
+        <trans-unit id="Survival" translate="yes" xml:space="preserve">
+          <source>Survival</source>
+          <target state="new">Survival</target>
+        </trans-unit>
+        <trans-unit id="Tables" translate="yes" xml:space="preserve">
+          <source>Tables</source>
+          <target state="new">Tables</target>
+        </trans-unit>
+        <trans-unit id="Time_Series" translate="yes" xml:space="preserve">
+          <source>Time Series</source>
+          <target state="new">Time Series</target>
+        </trans-unit>
+        <trans-unit id="Windrose" translate="yes" xml:space="preserve">
+          <source>Windrose</source>
+          <target state="new">Windrose</target>
+        </trans-unit>
+        <trans-unit id="Expand" translate="yes" xml:space="preserve">
+          <source>Expand</source>
+          <target state="new">Expand</target>
+        </trans-unit>
+        <trans-unit id="Indicator_Variables" translate="yes" xml:space="preserve">
+          <source>Indicator Variables</source>
+          <target state="new">Indicator Variables</target>
+        </trans-unit>
+        <trans-unit id="Interractions" translate="yes" xml:space="preserve">
+          <source>Interractions</source>
+          <target state="new">Interractions</target>
+        </trans-unit>
+        <trans-unit id="Polynomials" translate="yes" xml:space="preserve">
+          <source>Polynomials</source>
+          <target state="new">Polynomials</target>
+        </trans-unit>
+        <trans-unit id="Recode" translate="yes" xml:space="preserve">
+          <source>Recode</source>
+          <target state="new">Recode</target>
+        </trans-unit>
+        <trans-unit id="Row_Statistics" translate="yes" xml:space="preserve">
+          <source>Row_Statistics</source>
+          <target state="new">Row_Statistics</target>
+        </trans-unit>
+        <trans-unit id="Select_" translate="yes" xml:space="preserve">
+          <source>Select</source>
+          <target state="new">Select</target>
+        </trans-unit>
+        <trans-unit id="Select_and_Stack" translate="yes" xml:space="preserve">
+          <source>Select and Stack</source>
+          <target state="new">Select and Stack</target>
+        </trans-unit>
+        <trans-unit id="Sort" translate="yes" xml:space="preserve">
+          <source>Sort</source>
+          <target state="new">Sort</target>
+        </trans-unit>
+        <trans-unit id="Stack" translate="yes" xml:space="preserve">
+          <source>Stack</source>
+          <target state="new">Stack</target>
+        </trans-unit>
+        <trans-unit id="Transform" translate="yes" xml:space="preserve">
+          <source>Transform</source>
+          <target state="new">Transform</target>
+        </trans-unit>
+        <trans-unit id="Unstack" translate="yes" xml:space="preserve">
+          <source>Unstack</source>
+          <target state="new">Unstack</target>
+        </trans-unit>
+        <trans-unit id="Clear1" translate="yes" xml:space="preserve">
+          <source>Clear Del</source>
+          <target state="new">Clear Del</target>
+        </trans-unit>
+        <trans-unit id="Command_Logging" translate="yes" xml:space="preserve">
+          <source>Command Logging</source>
+          <target state="new">Command Logging</target>
+        </trans-unit>
+        <trans-unit id="Copy_Special1" translate="yes" xml:space="preserve">
+          <source>Copy Special Ctrl+Y</source>
+          <target state="new">Copy Special Ctrl+Y</target>
+        </trans-unit>
+        <trans-unit id="Find1" translate="yes" xml:space="preserve">
+          <source>Find Ctrl+F</source>
+          <target state="new">Find Ctrl+F</target>
+        </trans-unit>
+        <trans-unit id="Flags" translate="yes" xml:space="preserve">
+          <source>Flags</source>
+          <target state="new">Flags</target>
+        </trans-unit>
+        <trans-unit id="Font" translate="yes" xml:space="preserve">
+          <source>Font Ctrl+T</source>
+          <target state="new">Font Ctrl+T</target>
+        </trans-unit>
+        <trans-unit id="Options" translate="yes" xml:space="preserve">
+          <source>Options</source>
+          <target state="new">Options</target>
+        </trans-unit>
+        <trans-unit id="Output_Spooling" translate="yes" xml:space="preserve">
+          <source>Output Spooling</source>
+          <target state="new">Output Spooling</target>
+        </trans-unit>
+        <trans-unit id="Paste1" translate="yes" xml:space="preserve">
+          <source>Paste Ctrl+V</source>
+          <target state="new">Paste Ctrl+V</target>
+        </trans-unit>
+        <trans-unit id="Recall" translate="yes" xml:space="preserve">
+          <source>Recall</source>
+          <target state="new">Recall</target>
+        </trans-unit>
+        <trans-unit id="Replace1" translate="yes" xml:space="preserve">
+          <source>Replace Ctrl+H</source>
+          <target state="new">Replace Ctrl+H</target>
+        </trans-unit>
+        <trans-unit id="Run_Worksheet_Editor" translate="yes" xml:space="preserve">
+          <source>Run Worksheet Editor F7</source>
+          <target state="new">Run Worksheet Editor F7</target>
+        </trans-unit>
+        <trans-unit id="Select_All1" translate="yes" xml:space="preserve">
+          <source>Select All ctrls+A </source>
+          <target state="new">Select All ctrls+A </target>
+        </trans-unit>
+        <trans-unit id="View_Edit_Macro" translate="yes" xml:space="preserve">
+          <source>View/Edit Macro</source>
+          <target state="new">View/Edit Macro</target>
+        </trans-unit>
+        <trans-unit id="View_Edit_Text" translate="yes" xml:space="preserve">
+          <source>View/Edit Text</source>
+          <target state="new">View/Edit Text</target>
         </trans-unit>
       </group>
     </body>

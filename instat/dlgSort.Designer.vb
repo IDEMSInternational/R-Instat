@@ -35,7 +35,7 @@ Partial Class dlgSort
         '
         'UcrButtons1
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(12, 213)
+        Me.UcrButtons1.Location = New System.Drawing.Point(12, 185)
         Me.UcrButtons1.Name = "UcrButtons1"
         Me.UcrButtons1.Size = New System.Drawing.Size(327, 35)
         Me.UcrButtons1.TabIndex = 0
