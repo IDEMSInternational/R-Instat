@@ -61,7 +61,7 @@ Public Class frmMain
         dlgSort.Show()
     End Sub
 
-    Private Sub mnuSriptLog_Click(sender As Object, e As EventArgs) Handles mnuSriptLog.Click
+    Private Sub mnuSriptLog_Click(sender As Object, e As EventArgs)
         frmLog.Show()
     End Sub
 
@@ -104,5 +104,9 @@ Public Class frmMain
 
     Private Sub mnuEditViewEditText_Click(sender As Object, e As EventArgs) Handles mnuEditViewEditText.Click
 
+    End Sub
+
+    Private Sub mnuFileNewWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileNewWorksheet.Click
+        frmEditor.NewSheet()
     End Sub
 End Class
