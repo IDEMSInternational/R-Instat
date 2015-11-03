@@ -1,4 +1,5 @@
-﻿Public Class frmEditor
+﻿Imports RDotNet
+Public Class frmEditor
     Public Sub UpdateSheet()
         Dim dataset As DataFrame = frmMain.clsRInterface.GetData("data")
         Me.grid.CurrentWorksheet.Rows = dataset.RowCount
