@@ -149,10 +149,13 @@
     <Compile Include="frmEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLog.Designer.vb">
-      <DependentUpon>frmLog.vb</DependentUpon>
+    <Compile Include="dlgDescriptiveStatistics.Designer.vb">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmLog.vb">
+    <Compile Include="dlgDescriptiveStatistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_main.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.vb">
@@ -216,8 +219,8 @@
     <EmbeddedResource Include="frmLog.resx">
       <DependentUpon>frmLog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.vb</DependentUpon>
+    <EmbeddedResource Include="frm_main.resx">
+      <DependentUpon>frm_main.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmScript.resx">
       <DependentUpon>frmScript.vb</DependentUpon>
