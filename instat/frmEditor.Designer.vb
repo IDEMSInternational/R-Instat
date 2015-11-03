@@ -49,7 +49,7 @@ Partial Class frmEditor
         Me.ClientSize = New System.Drawing.Size(410, 261)
         Me.Controls.Add(Me.grid)
         Me.Name = "frmEditor"
-        Me.Text = "Editor Window"
+        Me.Text = "Data View"
         Me.ResumeLayout(False)
 
     End Sub
