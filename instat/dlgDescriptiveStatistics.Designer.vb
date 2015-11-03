@@ -79,7 +79,7 @@ Partial Class dlgDescriptiveStatistics
         Me.chkBoxPlot.Name = "chkBoxPlot"
         Me.chkBoxPlot.Size = New System.Drawing.Size(65, 17)
         Me.chkBoxPlot.TabIndex = 60
-        Me.chkBoxPlot.Tag = "BoxPlot"
+        Me.chkBoxPlot.Tag = "Box_Plot"
         Me.chkBoxPlot.Text = "Box Plot"
         Me.chkBoxPlot.UseVisualStyleBackColor = True
         '

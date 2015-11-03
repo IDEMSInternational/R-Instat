@@ -30,6 +30,7 @@ Partial Class frmScript
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
         Me.Name = "frmScript"
+        Me.Tag = "Script_Window"
         Me.Text = "Script Window"
         Me.ResumeLayout(False)
 
