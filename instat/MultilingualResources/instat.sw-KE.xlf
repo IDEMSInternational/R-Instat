@@ -571,6 +571,54 @@
           <source>Output Window</source>
           <target state="new">Output Window</target>
         </trans-unit>
+        <trans-unit id="Dry_Spell" translate="yes" xml:space="preserve">
+          <source>Dry Spell</source>
+          <target state="new">Dry Spell</target>
+        </trans-unit>
+        <trans-unit id="Earliest_day" translate="yes" xml:space="preserve">
+          <source>Earliest day</source>
+          <target state="new">Earliest day</target>
+        </trans-unit>
+        <trans-unit id="Length_of_Dry_Spell" translate="yes" xml:space="preserve">
+          <source>Length of Dry Spell</source>
+          <target state="new">Length of Dry Spell</target>
+        </trans-unit>
+        <trans-unit id="Not_Yet_Implemented" translate="yes" xml:space="preserve">
+          <source>Not Yet Implemented</source>
+          <target state="new">Not Yet Implemented</target>
+        </trans-unit>
+        <trans-unit id="Number_of_Rain_Days" translate="yes" xml:space="preserve">
+          <source>Number of Rain Days</source>
+          <target state="new">Number of Rain Days</target>
+        </trans-unit>
+        <trans-unit id="Threashold" translate="yes" xml:space="preserve">
+          <source>Threashold</source>
+          <target state="new">Threashold</target>
+        </trans-unit>
+        <trans-unit id="Total_Rain" translate="yes" xml:space="preserve">
+          <source>Total Rain</source>
+          <target state="new">Total Rain</target>
+        </trans-unit>
+        <trans-unit id="Within" translate="yes" xml:space="preserve">
+          <source>Within</source>
+          <target state="new">Within</target>
+        </trans-unit>
+        <trans-unit id="Extremes" translate="yes" xml:space="preserve">
+          <source>Extremes</source>
+          <target state="new">Extremes</target>
+        </trans-unit>
+        <trans-unit id="Spells" translate="yes" xml:space="preserve">
+          <source>Spells</source>
+          <target state="new">Spells</target>
+        </trans-unit>
+        <trans-unit id="Start_of_the_Rains" translate="yes" xml:space="preserve">
+          <source>Start of the Rains</source>
+          <target state="new">Start of the Rains</target>
+        </trans-unit>
+        <trans-unit id="Water_Balance" translate="yes" xml:space="preserve">
+          <source>Water Balance</source>
+          <target state="new">Water Balance</target>
+        </trans-unit>
       </group>
     </body>
   </file>

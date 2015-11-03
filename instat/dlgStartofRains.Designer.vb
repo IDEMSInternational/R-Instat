@@ -168,9 +168,9 @@ Partial Class dlgStartofRains
         Me.lblDays.AutoSize = True
         Me.lblDays.Location = New System.Drawing.Point(329, 193)
         Me.lblDays.Name = "lblDays"
-        Me.lblDays.Size = New System.Drawing.Size(39, 13)
+        Me.lblDays.Size = New System.Drawing.Size(13, 13)
         Me.lblDays.TabIndex = 15
-        Me.lblDays.Text = "Label1"
+        Me.lblDays.Text = "2"
         '
         'lblColumnName
         '
