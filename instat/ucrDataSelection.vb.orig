@@ -14,9 +14,15 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports RDotNet
+<<<<<<< HEAD
+Public Class ucrDataSelection
+
+=======
+
 Public Class ucrDataSelection
 
 
+>>>>>>> 15d08ed9d4d9926762ed0d891d4c122cf58450fe
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If (lstAvailableVariable.SelectedItem <> "") Then
             lstSelectedVariables.Items.Add(lstAvailableVariable.SelectedItem)
@@ -36,6 +42,7 @@ Public Class ucrDataSelection
         End If
     End Sub
 
+<<<<<<< HEAD
     Private Sub ucrDataSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim dataset As DataFrame
         Dim i As Integer
@@ -62,5 +69,17 @@ Public Class ucrDataSelection
     Private Sub lstAvailableVariable_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lstAvailableVariable.MouseDoubleClick
 
     End Sub
+=======
+    Private Sub ucrDataSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim dataset As DataFrame
+        Dim i As Integer
 
+        dataset = frmMain.clsRInterface.GetData("data")
+        For i = 0 To dataset.ColumnCount - 1
+            lstAvailableVariable.Items.Add(dataset.ColumnNames(i))
+        Next
+
+    End Sub
+
+>>>>>>> 15d08ed9d4d9926762ed0d891d4c122cf58450fe
 End Class
