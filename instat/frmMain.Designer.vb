@@ -259,6 +259,7 @@ Partial Class frmMain
         Me.KiswahiliToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FrenchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LogWindowMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -845,6 +846,7 @@ Partial Class frmMain
         '
         'WindowToolStripMenuItem
         '
+        Me.WindowToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LogWindowMenu})
         Me.WindowToolStripMenuItem.Name = "WindowToolStripMenuItem"
         Me.WindowToolStripMenuItem.Size = New System.Drawing.Size(63, 20)
         Me.WindowToolStripMenuItem.Tag = "Window"
@@ -1833,6 +1835,12 @@ Partial Class frmMain
         Me.FrenchToolStripMenuItem.Tag = "French"
         Me.FrenchToolStripMenuItem.Text = "French"
         '
+        'LogWindowMenu
+        '
+        Me.LogWindowMenu.Name = "LogWindowMenu"
+        Me.LogWindowMenu.Size = New System.Drawing.Size(152, 22)
+        Me.LogWindowMenu.Text = "Log Window"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1843,7 +1851,9 @@ Partial Class frmMain
         Me.Controls.Add(Me.mnuBar)
         Me.IsMdiContainer = True
         Me.Name = "frmMain"
+        Me.ShowIcon = False
         Me.Text = "Stats Package"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
         Me.Tool_strip.ResumeLayout(False)
@@ -2091,4 +2101,5 @@ Partial Class frmMain
     Friend WithEvents KiswahiliToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents EnglishToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FrenchToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LogWindowMenu As ToolStripMenuItem
 End Class
