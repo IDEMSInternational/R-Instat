@@ -89,7 +89,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Available  Variables.
+        '''  Looks up a localized string similar to Available Variables.
         '''</summary>
         Friend ReadOnly Property Available_Variables() As String
             Get

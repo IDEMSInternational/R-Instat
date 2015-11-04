@@ -171,6 +171,12 @@
     <Compile Include="dlgBoxPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTrialOne.Designer.vb">
+      <DependentUpon>dlgTrialOne.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTrialOne.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmCommand.Designer.vb">
       <DependentUpon>frmCommand.vb</DependentUpon>
     </Compile>
@@ -286,6 +292,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxPlot.sw-KE.resx">
       <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTrialOne.fr-FR.resx">
+      <DependentUpon>dlgTrialOne.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTrialOne.resx">
+      <DependentUpon>dlgTrialOne.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTrialOne.sw-KE.resx">
+      <DependentUpon>dlgTrialOne.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.fr-FR.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>

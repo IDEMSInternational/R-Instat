@@ -123,12 +123,14 @@ Partial Class dlgDescriptiveStatistics
         Me.Controls.Add(Me.grpgraphics)
         Me.Controls.Add(Me.chkGraphics)
         Me.Controls.Add(Me.UcrDataSelection1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDescriptiveStatistics"
         Me.ShowIcon = False
         Me.Tag = "Descriptive_Statistics"
         Me.Text = "Descriptive Statistics"
+        Me.TopMost = True
         Me.grpgraphics.ResumeLayout(False)
         Me.grpgraphics.PerformLayout()
         Me.ResumeLayout(False)

@@ -348,8 +348,9 @@
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Ajouter</target>
         </trans-unit>
         <trans-unit id="Available_Variables" translate="yes" xml:space="preserve">
-          <source>Available  Variables</source>
+          <source>Available Variables</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Variables disponibles</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Box_Plot" translate="yes" xml:space="preserve">
           <source>Box Plot</source>
@@ -441,7 +442,7 @@
         </trans-unit>
         <trans-unit id="Ok" translate="yes" xml:space="preserve">
           <source>Ok</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">OK</target>
+          <target state="translated">D'accord</target>
         </trans-unit>
         <trans-unit id="Open_From_Library" translate="yes" xml:space="preserve">
           <source>Open From Library</source>
@@ -925,6 +926,14 @@
     </header>
     <body>
       <group id="INSTAT/DLGBOXPLOT.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGTRIALONE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGTRIALONE.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>

@@ -1,5 +1,4 @@
-﻿
-
+﻿Imports instat.Translations
 
 Public Class ucrButtons
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
@@ -19,6 +18,10 @@ Public Class ucrButtons
     End Sub
 
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        translateEach(Controls)
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
 
     End Sub
 End Class

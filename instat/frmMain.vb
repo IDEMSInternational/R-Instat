@@ -104,7 +104,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
-        dlgSort.Show()
+        dlgSort.ShowDialog()
     End Sub
 
     Private Sub mnuSriptLog_Click(sender As Object, e As EventArgs)
@@ -182,5 +182,9 @@ Public Class frmMain
 
     Private Sub mnuBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuBoxPlot.Click
         dlgBoxPlot.Show()
+    End Sub
+
+    Private Sub TestDialogToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        dlgTrialOne.ShowDialog()
     End Sub
 End Class

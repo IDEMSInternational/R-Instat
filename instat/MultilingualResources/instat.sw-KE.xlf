@@ -95,8 +95,8 @@
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Ongeza</target>
         </trans-unit>
         <trans-unit id="Available_Variables" translate="yes" xml:space="preserve">
-          <source>Available  Variables</source>
-          <target state="new">Available  Variables</target>
+          <source>Available Variables</source>
+          <target state="new">Available Variables</target>
         </trans-unit>
         <trans-unit id="Box_Plot" translate="yes" xml:space="preserve">
           <source>Box Plot</source>
@@ -112,7 +112,7 @@
         </trans-unit>
         <trans-unit id="Climatic" translate="yes" xml:space="preserve">
           <source>Climatic</source>
-          <target state="new">Climatic</target>
+          <target state="translated">Hewa</target>
         </trans-unit>
         <trans-unit id="Close" translate="yes" xml:space="preserve">
           <source>Close</source>
@@ -926,6 +926,14 @@
     </header>
     <body>
       <group id="INSTAT/DLGBOXPLOT.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGTRIALONE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGTRIALONE.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>
