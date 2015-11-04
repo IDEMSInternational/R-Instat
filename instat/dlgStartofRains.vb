@@ -29,6 +29,7 @@ Public Class dlgStartofRains
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles Me.Load
         UpdateVisible()
         autoTranslate(Me)
+
     End Sub
 
     Private Sub UpdateVisible()

@@ -92,7 +92,7 @@ Public Class RInterface
         If bReturnOutput Then
             'strCapturedScript = "capture.output(" & strScript & ")"
             'txtOutput.Text = txtOutput.Text & String.Join(vbCrLf, clsEngine.Evaluate(strCapturedScript).AsCharacter) & vbCrLf
-            txtOutput.Text = txtOutput.Text & vbCrLf & "> " & String.Join(vbCrLf, clsEngine.Evaluate(strScript).AsCharacter) & vbCrLf
+            txtOutput.Text = txtOutput.Text & "> " & String.Join(",", clsEngine.Evaluate(strScript).AsCharacter) & vbCrLf
         Else
             clsEngine.Evaluate(strScript)
         End If

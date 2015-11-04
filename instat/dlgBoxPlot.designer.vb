@@ -32,7 +32,6 @@ Partial Class dlgBoxPlot
         Me.UcrDataSelection1.Name = "UcrDataSelection1"
         Me.UcrDataSelection1.Size = New System.Drawing.Size(297, 122)
         Me.UcrDataSelection1.TabIndex = 1
-        Me.UcrDataSelection1.UseWaitCursor = True
         '
         'UcrButtons1
         '
@@ -40,7 +39,6 @@ Partial Class dlgBoxPlot
         Me.UcrButtons1.Name = "UcrButtons1"
         Me.UcrButtons1.Size = New System.Drawing.Size(337, 32)
         Me.UcrButtons1.TabIndex = 0
-        Me.UcrButtons1.UseWaitCursor = True
         '
         'dlgBoxPlot
         '
@@ -54,7 +52,6 @@ Partial Class dlgBoxPlot
         Me.Name = "dlgBoxPlot"
         Me.ShowIcon = False
         Me.Text = "Boxplot"
-        Me.UseWaitCursor = True
         Me.ResumeLayout(False)
 
     End Sub

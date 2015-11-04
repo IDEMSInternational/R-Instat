@@ -26,6 +26,7 @@ Partial Class ucrButtons
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdReset = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.cmdPaste = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cmdOk
@@ -45,7 +46,7 @@ Partial Class ucrButtons
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 81
         Me.cmdCancel.Tag = "Cancel"
-        Me.cmdCancel.Text = "Cancel "
+        Me.cmdCancel.Text = "Close"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
         'cmdReset
@@ -68,16 +69,26 @@ Partial Class ucrButtons
         Me.cmdHelp.Text = "Help "
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
+        'cmdPaste
+        '
+        Me.cmdPaste.Location = New System.Drawing.Point(326, 4)
+        Me.cmdPaste.Name = "cmdPaste"
+        Me.cmdPaste.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPaste.TabIndex = 83
+        Me.cmdPaste.Text = "Paste Script"
+        Me.cmdPaste.UseVisualStyleBackColor = True
+        '
         'ucrButtons
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdPaste)
         Me.Controls.Add(Me.cmdOk)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdReset)
         Me.Controls.Add(Me.cmdHelp)
         Me.Name = "ucrButtons"
-        Me.Size = New System.Drawing.Size(324, 32)
+        Me.Size = New System.Drawing.Size(410, 32)
         Me.ResumeLayout(False)
 
     End Sub
@@ -86,4 +97,5 @@ Partial Class ucrButtons
     Friend WithEvents cmdCancel As Button
     Friend WithEvents cmdReset As Button
     Friend WithEvents cmdHelp As Button
+    Friend WithEvents cmdPaste As Button
 End Class
