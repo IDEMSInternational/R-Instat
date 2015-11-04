@@ -110,14 +110,14 @@ Partial Class dlgDescriptiveStatistics
         Me.UcrButtons1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.UcrButtons1.Location = New System.Drawing.Point(0, 195)
         Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(371, 30)
+        Me.UcrButtons1.Size = New System.Drawing.Size(407, 30)
         Me.UcrButtons1.TabIndex = 91
         '
         'dlgDescriptiveStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(371, 225)
+        Me.ClientSize = New System.Drawing.Size(407, 225)
         Me.Controls.Add(Me.UcrButtons1)
         Me.Controls.Add(Me.btnStatistics)
         Me.Controls.Add(Me.grpgraphics)
