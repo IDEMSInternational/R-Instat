@@ -225,6 +225,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Column Name.
+        '''</summary>
+        Friend ReadOnly Property Column_Name() As String
+            Get
+                Return ResourceManager.GetString("Column_Name", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Column Properties.
         '''</summary>
         Friend ReadOnly Property Column_Properties() As String
@@ -324,6 +333,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Days.
+        '''</summary>
+        Friend ReadOnly Property Days() As String
+            Get
+                Return ResourceManager.GetString("Days", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Describe.
         '''</summary>
         Friend ReadOnly Property Describe() As String
@@ -365,6 +383,15 @@ Namespace My.Resources
         Friend ReadOnly Property Dry_Spell() As String
             Get
                 Return ResourceManager.GetString("Dry_Spell", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Dry Spell.
+        '''</summary>
+        Friend ReadOnly Property Dry_Spell1() As String
+            Get
+                Return ResourceManager.GetString("Dry_Spell1", resourceCulture)
             End Get
         End Property
         
@@ -1115,6 +1142,15 @@ Namespace My.Resources
         Friend ReadOnly Property Stack() As String
             Get
                 Return ResourceManager.GetString("Stack", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Start of Rain.
+        '''</summary>
+        Friend ReadOnly Property Start_of_Rain() As String
+            Get
+                Return ResourceManager.GetString("Start_of_Rain", resourceCulture)
             End Get
         End Property
         

@@ -19,6 +19,7 @@ Public Class dlgStartofRains
         frmMain.clsRInterface.RunScript(strScript, False)
         frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
         frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
+        Me.Hide()
     End Sub
 
     Private Sub chkDrySpell_CheckedChanged(sender As Object, e As EventArgs) Handles chkDrySpell.CheckedChanged
@@ -38,4 +39,11 @@ Public Class dlgStartofRains
         nudWithin.Visible = chkDrySpell.Checked
     End Sub
 
+    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
+
+    End Sub
+
+    Private Sub lblColumnName_Click(sender As Object, e As EventArgs) Handles lblColumnName.Click
+
+    End Sub
 End Class

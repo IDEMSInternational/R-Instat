@@ -871,6 +871,22 @@
           <source>Water Balance</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Bilan hydrique</target>
         </trans-unit>
+        <trans-unit id="Column_Name" translate="yes" xml:space="preserve">
+          <source>Column Name</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Nom de la colonne</target>
+        </trans-unit>
+        <trans-unit id="Days" translate="yes" xml:space="preserve">
+          <source>Days</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">jours</target>
+        </trans-unit>
+        <trans-unit id="Start_of_Rain" translate="yes" xml:space="preserve">
+          <source>Start of Rain</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Début de pluie</target>
+        </trans-unit>
+        <trans-unit id="Dry_Spell1" translate="yes" xml:space="preserve">
+          <source>Dry Spell</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Période de sécheresse</target>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -880,6 +896,35 @@
     </header>
     <body>
       <group id="INSTAT/DLGSTARTOFRAINS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGREGULARSEQUENCE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGREGULARSEQUENCE.RESX" datatype="resx">
+        <trans-unit id="errorProvider.TrayLocation" translate="yes" extype="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" extradata="metadata" xml:space="preserve">
+          <source>17, 17</source>
+          <target state="needs-review-translation">17, 17</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGCALCULATOR.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCALCULATOR.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGBOXPLOT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGBOXPLOT.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>
