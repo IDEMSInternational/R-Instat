@@ -183,4 +183,12 @@ Public Class frmMain
     Private Sub mnuBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuBoxPlot.Click
         dlgBoxPlot.Show()
     End Sub
+
+    Private Sub EndOfTheRainsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EndOfTheRainsToolStripMenuItem.Click
+        dlgEndofRains.Show()
+    End Sub
+
+    Private Sub InventoryPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryPlotToolStripMenuItem.Click
+        dlgInventoryPlot.Show()
+    End Sub
 End Class

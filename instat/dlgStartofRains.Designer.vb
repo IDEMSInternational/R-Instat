@@ -213,9 +213,9 @@ Partial Class dlgStartofRains
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(3, 263)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 266)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(422, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(330, 32)
         Me.ucrBase.TabIndex = 0
         '
         'dlgStartofRains

@@ -98,6 +98,10 @@
       <HintPath>..\packages\R.NET.Community.1.6.5\lib\net40\RDotNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RDotNet.FSharp, Version=0.1.2.0, Culture=neutral, PublicKeyToken=5f72f6e23c6920d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\RDotNet.FSharp.0.1.2.1\lib\net40\RDotNet.FSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="RDotNet.NativeLibrary, Version=1.6.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.Community.1.6.5\lib\net40\RDotNet.NativeLibrary.dll</HintPath>
       <Private>True</Private>
@@ -145,6 +149,18 @@
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDescriptiveStatistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgEndofRains.Designer.vb">
+      <DependentUpon>dlgEndofRains.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgEndofRains.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgInventoryPlot.Designer.vb">
+      <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgInventoryPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRegularSequence.designer.vb">
@@ -250,6 +266,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDescriptiveStatistics.sw-KE.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEndofRains.resx">
+      <DependentUpon>dlgEndofRains.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInventoryPlot.resx">
+      <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.fr-FR.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
