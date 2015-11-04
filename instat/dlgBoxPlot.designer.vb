@@ -24,6 +24,8 @@ Partial Class dlgBoxPlot
     Private Sub InitializeComponent()
         Me.UcrDataSelection1 = New instat.ucrDataSelection()
         Me.UcrButtons1 = New instat.ucrButtons()
+        Me.lblTittle = New System.Windows.Forms.Label()
+        Me.txtTittle = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'UcrDataSelection1
@@ -36,17 +38,38 @@ Partial Class dlgBoxPlot
         '
         'UcrButtons1
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(12, 151)
+        Me.UcrButtons1.Location = New System.Drawing.Point(21, 257)
         Me.UcrButtons1.Name = "UcrButtons1"
         Me.UcrButtons1.Size = New System.Drawing.Size(337, 32)
         Me.UcrButtons1.TabIndex = 0
         Me.UcrButtons1.UseWaitCursor = True
         '
+        'lblTittle
+        '
+        Me.lblTittle.AutoSize = True
+        Me.lblTittle.Location = New System.Drawing.Point(39, 206)
+        Me.lblTittle.Name = "lblTittle"
+        Me.lblTittle.Size = New System.Drawing.Size(30, 13)
+        Me.lblTittle.TabIndex = 2
+        Me.lblTittle.Tag = "Tittle"
+        Me.lblTittle.Text = "Tittle"
+        Me.lblTittle.UseWaitCursor = True
+        '
+        'txtTittle
+        '
+        Me.txtTittle.Location = New System.Drawing.Point(101, 199)
+        Me.txtTittle.Name = "txtTittle"
+        Me.txtTittle.Size = New System.Drawing.Size(208, 20)
+        Me.txtTittle.TabIndex = 3
+        Me.txtTittle.UseWaitCursor = True
+        '
         'dlgBoxPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(334, 180)
+        Me.ClientSize = New System.Drawing.Size(409, 301)
+        Me.Controls.Add(Me.txtTittle)
+        Me.Controls.Add(Me.lblTittle)
         Me.Controls.Add(Me.UcrDataSelection1)
         Me.Controls.Add(Me.UcrButtons1)
         Me.MaximizeBox = False
@@ -54,11 +77,15 @@ Partial Class dlgBoxPlot
         Me.Name = "dlgBoxPlot"
         Me.ShowIcon = False
         Me.Text = "Boxplot"
+        Me.TopMost = True
         Me.UseWaitCursor = True
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents UcrButtons1 As ucrButtons
     Friend WithEvents UcrDataSelection1 As ucrDataSelection
+    Friend WithEvents lblTittle As Label
+    Friend WithEvents txtTittle As TextBox
 End Class
