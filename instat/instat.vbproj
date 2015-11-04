@@ -135,10 +135,22 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dlgCalculator.designer.vb">
+      <DependentUpon>dlgCalculator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCalculator.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescriptiveStatistics.Designer.vb">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDescriptiveStatistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRegularSequence.designer.vb">
+      <DependentUpon>dlgRegularSequence.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRegularSequence.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSort.Designer.vb">
@@ -151,6 +163,12 @@
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgStartofRains.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgBoxPlot.designer.vb">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgBoxPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmCommand.Designer.vb">
@@ -215,6 +233,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgCalculator.fr-FR.resx">
+      <DependentUpon>dlgCalculator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCalculator.resx">
+      <DependentUpon>dlgCalculator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCalculator.sw-KE.resx">
+      <DependentUpon>dlgCalculator.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDescriptiveStatistics.fr-FR.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
     </EmbeddedResource>
@@ -223,6 +250,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDescriptiveStatistics.sw-KE.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegularSequence.fr-FR.resx">
+      <DependentUpon>dlgRegularSequence.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegularSequence.resx">
+      <DependentUpon>dlgRegularSequence.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegularSequence.sw-KE.resx">
+      <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSort.fr-FR.resx">
       <DependentUpon>dlgSort.vb</DependentUpon>
@@ -241,6 +277,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgStartofRains.sw-KE.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxPlot.fr-FR.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxPlot.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxPlot.sw-KE.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.fr-FR.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>

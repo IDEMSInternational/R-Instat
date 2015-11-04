@@ -44,7 +44,6 @@ Public Class frmMain
     Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
         clsRInterface.LoadData()
         Dim dataset As DataFrame = clsRInterface.GetData("data")
-        'frmEditor.grid.CurrentWorksheet.SetCellData("A1", clsRInterface.GetData("data"))
         frmEditor.grid.CurrentWorksheet.Rows = dataset.RowCount
         frmEditor.grid.CurrentWorksheet.Columns = dataset.ColumnCount
         For i As Integer = 0 To dataset.RowCount - 1
@@ -61,7 +60,6 @@ Public Class frmMain
         Dim dfDataset As DataFrame
 
         dfDataset = clsRInterface.GetData(strDataName)
-        'frmEditor.grid.CurrentWorksheet.SetCellData("A1", clsRInterface.GetData("data"))
         For Each tempWorkSheet In frmEditor.grid.Worksheets
             If tempWorkSheet.Name = strDataName Then
                 tempWorkSheet.Rows = dfDataset.RowCount
@@ -172,5 +170,17 @@ Public Class frmMain
 
     Private Sub tstatus_Click(sender As Object, e As EventArgs) Handles tstatus.Click
 
+    End Sub
+
+    Private Sub RegularSequenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegularSequenceToolStripMenuItem.Click
+        dlgRegularSequence.Show()
+    End Sub
+
+    Private Sub mnuCalculations_Click(sender As Object, e As EventArgs) Handles mnuCalculations.Click
+        dlgCalculator.Show()
+    End Sub
+
+    Private Sub mnuBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuBoxPlot.Click
+        dlgBoxPlot.Show()
     End Sub
 End Class

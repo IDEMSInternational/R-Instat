@@ -204,4 +204,19 @@
   <data name="Replace1" xml:space="preserve">
     <value>Badilisha...	Ctrl+H</value>
   </data>
+  <data name="Data_View" xml:space="preserve">
+    <value>Mwoneko Data...</value>
+  </data>
+  <data name="Not_Yet_Implemented" xml:space="preserve">
+    <value>Haijatekelezwa</value>
+  </data>
+  <data name="Within" xml:space="preserve">
+    <value>Ndani ya:</value>
+  </data>
+  <data name="Column_Name" xml:space="preserve">
+    <value>Jina la Safuwima</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Siku</value>
+  </data>
 </root>

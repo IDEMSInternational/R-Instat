@@ -565,7 +565,7 @@
         </trans-unit>
         <trans-unit id="Data_View" translate="yes" xml:space="preserve">
           <source>Data View</source>
-          <target state="new">Data View</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Mwoneko Data...</target>
         </trans-unit>
         <trans-unit id="Output_Window" translate="yes" xml:space="preserve">
           <source>Output Window</source>
@@ -585,7 +585,7 @@
         </trans-unit>
         <trans-unit id="Not_Yet_Implemented" translate="yes" xml:space="preserve">
           <source>Not Yet Implemented</source>
-          <target state="new">Not Yet Implemented</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Haijatekelezwa</target>
         </trans-unit>
         <trans-unit id="Number_of_Rain_Days" translate="yes" xml:space="preserve">
           <source>Number of Rain Days</source>
@@ -601,7 +601,7 @@
         </trans-unit>
         <trans-unit id="Within" translate="yes" xml:space="preserve">
           <source>Within</source>
-          <target state="new">Within</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ndani ya:</target>
         </trans-unit>
         <trans-unit id="Extremes" translate="yes" xml:space="preserve">
           <source>Extremes</source>
@@ -618,6 +618,22 @@
         <trans-unit id="Water_Balance" translate="yes" xml:space="preserve">
           <source>Water Balance</source>
           <target state="new">Water Balance</target>
+        </trans-unit>
+        <trans-unit id="Column_Name" translate="yes" xml:space="preserve">
+          <source>Column Name</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Jina la Safuwima</target>
+        </trans-unit>
+        <trans-unit id="Days" translate="yes" xml:space="preserve">
+          <source>Days</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Siku</target>
+        </trans-unit>
+        <trans-unit id="Start_of_Rain" translate="yes" xml:space="preserve">
+          <source>Start of Rain</source>
+          <target state="new">Start of Rain</target>
+        </trans-unit>
+        <trans-unit id="Dry_Spell1" translate="yes" xml:space="preserve">
+          <source>Dry Spell</source>
+          <target state="new">Dry Spell</target>
         </trans-unit>
       </group>
     </body>
@@ -881,6 +897,35 @@
     </header>
     <body>
       <group id="INSTAT/DLGSTARTOFRAINS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGREGULARSEQUENCE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGREGULARSEQUENCE.RESX" datatype="resx">
+        <trans-unit id="errorProvider.TrayLocation" translate="yes" extype="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" extradata="metadata" xml:space="preserve">
+          <source>17, 17</source>
+          <target state="needs-review-translation">17, 17</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGCALCULATOR.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCALCULATOR.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGBOXPLOT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGBOXPLOT.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>

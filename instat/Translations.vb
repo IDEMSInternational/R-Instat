@@ -17,7 +17,7 @@
             ElseIf (TypeOf formControl Is MenuStrip) Then
                 ' Translate all MenuItems inside the MenuStrip
                 translateMenu(formControl)
-            ElseIf (TypeOf formControl Is TextBox OrElse TypeOf formControl Is Button OrElse TypeOf formControl Is Label) Then
+            ElseIf (TypeOf formControl Is TextBox OrElse TypeOf formControl Is Button OrElse TypeOf formControl Is Label OrElse TypeOf formControl Is checkbox) Then
                 originalTag = formControl.Tag
                 If (originalTag IsNot Nothing) Then
                     translatedString = My.Resources.ResourceManager.GetObject(originalTag)
