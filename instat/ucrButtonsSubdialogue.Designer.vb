@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ucrBaseSubdialogue
+Partial Class ucrButtonsSubdialogue
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
@@ -57,14 +57,14 @@ Partial Class ucrBaseSubdialogue
         Me.cmdCancel.Text = "Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
-        'ucrBaseSubdialogue
+        'ucrButtonsSubdialogue
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdReturn)
-        Me.Name = "ucrBaseSubdialogue"
+        Me.Name = "ucrButtonsSubdialogue"
         Me.Size = New System.Drawing.Size(253, 44)
         Me.ResumeLayout(False)
 

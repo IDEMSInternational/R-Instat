@@ -149,6 +149,12 @@
     <Compile Include="dlgPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmCommand.Designer.vb">
       <DependentUpon>frmCommand.vb</DependentUpon>
     </Compile>
@@ -195,10 +201,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="rLink.vb" />
-    <Compile Include="ucrBaseSubdialogue.Designer.vb">
-      <DependentUpon>ucrBaseSubdialogue.vb</DependentUpon>
+    <Compile Include="ucrButtonsSubdialogue.Designer.vb">
+      <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrBaseSubdialogue.vb">
+    <Compile Include="ucrButtonsSubdialogue.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrButtons.designer.vb">
@@ -224,6 +230,9 @@
     <EmbeddedResource Include="dlgPlot.resx">
       <DependentUpon>dlgPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>
     </EmbeddedResource>
@@ -245,8 +254,8 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrBaseSubdialogue.resx">
-      <DependentUpon>ucrBaseSubdialogue.vb</DependentUpon>
+    <EmbeddedResource Include="ucrButtonsSubdialogue.resx">
+      <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
