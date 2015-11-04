@@ -30,7 +30,7 @@ Partial Class ucrButtons
         '
         'cmdOk
         '
-        Me.cmdOk.Location = New System.Drawing.Point(1, 3)
+        Me.cmdOk.Location = New System.Drawing.Point(3, 4)
         Me.cmdOk.Name = "cmdOk"
         Me.cmdOk.Size = New System.Drawing.Size(75, 23)
         Me.cmdOk.TabIndex = 82
@@ -77,7 +77,7 @@ Partial Class ucrButtons
         Me.Controls.Add(Me.cmdReset)
         Me.Controls.Add(Me.cmdHelp)
         Me.Name = "ucrButtons"
-        Me.Size = New System.Drawing.Size(333, 32)
+        Me.Size = New System.Drawing.Size(324, 32)
         Me.ResumeLayout(False)
 
     End Sub

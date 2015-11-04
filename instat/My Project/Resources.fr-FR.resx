@@ -423,4 +423,16 @@
   <data name="Water_Balance" xml:space="preserve">
     <value>Bilan hydrique</value>
   </data>
+  <data name="Column_Name" xml:space="preserve">
+    <value>Nom de la colonne</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>jours</value>
+  </data>
+  <data name="Start_of_Rain" xml:space="preserve">
+    <value>Début de pluie</value>
+  </data>
+  <data name="Dry_Spell1" xml:space="preserve">
+    <value>Période de sécheresse</value>
+  </data>
 </root>

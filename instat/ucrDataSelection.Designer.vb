@@ -22,8 +22,6 @@ Partial Class ucrDataSelection
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblFactorVariable = New System.Windows.Forms.Label()
-        Me.cboFactoVariable = New System.Windows.Forms.ComboBox()
         Me.btnRemove = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
@@ -31,24 +29,6 @@ Partial Class ucrDataSelection
         Me.lblAvailableVariables = New System.Windows.Forms.Label()
         Me.lstAvailableVariable = New System.Windows.Forms.ListBox()
         Me.SuspendLayout()
-        '
-        'lblFactorVariable
-        '
-        Me.lblFactorVariable.AutoSize = True
-        Me.lblFactorVariable.Location = New System.Drawing.Point(283, 3)
-        Me.lblFactorVariable.Name = "lblFactorVariable"
-        Me.lblFactorVariable.Size = New System.Drawing.Size(78, 13)
-        Me.lblFactorVariable.TabIndex = 82
-        Me.lblFactorVariable.Tag = "Factor_Variable"
-        Me.lblFactorVariable.Text = "Factor Variable"
-        '
-        'cboFactoVariable
-        '
-        Me.cboFactoVariable.FormattingEnabled = True
-        Me.cboFactoVariable.Location = New System.Drawing.Point(280, 23)
-        Me.cboFactoVariable.Name = "cboFactoVariable"
-        Me.cboFactoVariable.Size = New System.Drawing.Size(81, 21)
-        Me.cboFactoVariable.TabIndex = 81
         '
         'btnRemove
         '
@@ -85,7 +65,9 @@ Partial Class ucrDataSelection
         Me.lstSelectedVariables.FormattingEnabled = True
         Me.lstSelectedVariables.Location = New System.Drawing.Point(189, 23)
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
+        Me.lstSelectedVariables.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
         Me.lstSelectedVariables.Size = New System.Drawing.Size(84, 95)
+        Me.lstSelectedVariables.Sorted = True
         Me.lstSelectedVariables.TabIndex = 77
         '
         'lblAvailableVariables
@@ -103,7 +85,9 @@ Partial Class ucrDataSelection
         Me.lstAvailableVariable.FormattingEnabled = True
         Me.lstAvailableVariable.Location = New System.Drawing.Point(9, 23)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
+        Me.lstAvailableVariable.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
         Me.lstAvailableVariable.Size = New System.Drawing.Size(84, 95)
+        Me.lstAvailableVariable.Sorted = True
         Me.lstAvailableVariable.TabIndex = 75
         Me.lstAvailableVariable.Tag = ""
         '
@@ -111,8 +95,6 @@ Partial Class ucrDataSelection
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblFactorVariable)
-        Me.Controls.Add(Me.cboFactoVariable)
         Me.Controls.Add(Me.btnRemove)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.lblSelectedVariables)
@@ -120,14 +102,11 @@ Partial Class ucrDataSelection
         Me.Controls.Add(Me.lblAvailableVariables)
         Me.Controls.Add(Me.lstAvailableVariable)
         Me.Name = "ucrDataSelection"
-        Me.Size = New System.Drawing.Size(366, 122)
+        Me.Size = New System.Drawing.Size(285, 122)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents lblFactorVariable As Label
-    Friend WithEvents cboFactoVariable As ComboBox
     Friend WithEvents btnRemove As Button
     Friend WithEvents btnAdd As Button
     Friend WithEvents lblSelectedVariables As Label

@@ -58,7 +58,7 @@ Partial Class frmMain
         Me.ResizeWorksheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GraphicsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PlotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BoxplotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuBoxPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.HistogramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProbabilityPlotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DotplotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -229,7 +229,7 @@ Partial Class frmMain
         Me.ModifyMacroInMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RemoveMacroFromMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CalculationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCalculations = New System.Windows.Forms.ToolStripMenuItem()
         Me.DataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegularSequenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -469,7 +469,7 @@ Partial Class frmMain
         '
         'GraphicsToolStripMenuItem
         '
-        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotToolStripMenuItem, Me.BoxplotToolStripMenuItem, Me.HistogramToolStripMenuItem, Me.ProbabilityPlotToolStripMenuItem, Me.DotplotToolStripMenuItem, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem})
+        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotToolStripMenuItem, Me.mnuBoxPlot, Me.HistogramToolStripMenuItem, Me.ProbabilityPlotToolStripMenuItem, Me.DotplotToolStripMenuItem, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem})
         Me.GraphicsToolStripMenuItem.Name = "GraphicsToolStripMenuItem"
         Me.GraphicsToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.GraphicsToolStripMenuItem.Tag = "Graphics"
@@ -482,12 +482,12 @@ Partial Class frmMain
         Me.PlotToolStripMenuItem.Tag = "Plot"
         Me.PlotToolStripMenuItem.Text = "Plot..."
         '
-        'BoxplotToolStripMenuItem
+        'mnuBoxPlot
         '
-        Me.BoxplotToolStripMenuItem.Name = "BoxplotToolStripMenuItem"
-        Me.BoxplotToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.BoxplotToolStripMenuItem.Tag = "Boxplot"
-        Me.BoxplotToolStripMenuItem.Text = "Boxplot.."
+        Me.mnuBoxPlot.Name = "mnuBoxPlot"
+        Me.mnuBoxPlot.Size = New System.Drawing.Size(170, 22)
+        Me.mnuBoxPlot.Tag = "Boxplot"
+        Me.mnuBoxPlot.Text = "Boxplot.."
         '
         'HistogramToolStripMenuItem
         '
@@ -1622,18 +1622,18 @@ Partial Class frmMain
         '
         'ManageToolStripMenuItem
         '
-        Me.ManageToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CalculationsToolStripMenuItem, Me.DataToolStripMenuItem, Me.ManipulateToolStripMenuItem, Me.ReshapeToolStripMenuItem, Me.ColumnPropertiesToolStripMenuItem, Me.ResizeWorksheetToolStripMenuItem, Me.WorksheetInformationToolStripMenuItem})
+        Me.ManageToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCalculations, Me.DataToolStripMenuItem, Me.ManipulateToolStripMenuItem, Me.ReshapeToolStripMenuItem, Me.ColumnPropertiesToolStripMenuItem, Me.ResizeWorksheetToolStripMenuItem, Me.WorksheetInformationToolStripMenuItem})
         Me.ManageToolStripMenuItem.Name = "ManageToolStripMenuItem"
         Me.ManageToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.ManageToolStripMenuItem.Tag = "Manage"
         Me.ManageToolStripMenuItem.Text = "Manage"
         '
-        'CalculationsToolStripMenuItem
+        'mnuCalculations
         '
-        Me.CalculationsToolStripMenuItem.Name = "CalculationsToolStripMenuItem"
-        Me.CalculationsToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
-        Me.CalculationsToolStripMenuItem.Tag = "Calculations"
-        Me.CalculationsToolStripMenuItem.Text = "Calculations..."
+        Me.mnuCalculations.Name = "mnuCalculations"
+        Me.mnuCalculations.Size = New System.Drawing.Size(205, 22)
+        Me.mnuCalculations.Tag = "Calculations"
+        Me.mnuCalculations.Text = "Calculations..."
         '
         'DataToolStripMenuItem
         '
@@ -1904,7 +1904,7 @@ Partial Class frmMain
     Friend WithEvents ResizeWorksheetToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GraphicsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PlotToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BoxplotToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuBoxPlot As ToolStripMenuItem
     Friend WithEvents HistogramToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ProbabilityPlotToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DotplotToolStripMenuItem As ToolStripMenuItem
@@ -2074,7 +2074,7 @@ Partial Class frmMain
     Friend WithEvents ModifyMacroInMenuToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RemoveMacroFromMenuToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ManageToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CalculationsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuCalculations As ToolStripMenuItem
     Friend WithEvents DataToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RegularSequenceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EnterToolStripMenuItem As ToolStripMenuItem

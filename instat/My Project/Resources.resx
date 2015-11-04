@@ -493,7 +493,16 @@
   <data name="Output_Window" xml:space="preserve">
     <value>Output Window</value>
   </data>
+  <data name="Column_Name" xml:space="preserve">
+    <value>Column Name</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Days</value>
+  </data>
   <data name="Dry_Spell" xml:space="preserve">
+    <value>Dry Spell</value>
+  </data>
+  <data name="Dry_Spell1" xml:space="preserve">
     <value>Dry Spell</value>
   </data>
   <data name="Earliest_day" xml:space="preserve">
@@ -513,6 +522,9 @@
   </data>
   <data name="Spells" xml:space="preserve">
     <value>Spells</value>
+  </data>
+  <data name="Start_of_Rain" xml:space="preserve">
+    <value>Start of Rain</value>
   </data>
   <data name="Start_of_the_Rains" xml:space="preserve">
     <value>Start of the Rains</value>
