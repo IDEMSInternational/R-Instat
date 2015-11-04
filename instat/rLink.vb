@@ -27,6 +27,14 @@ Public Class RInterface
     Dim clsEngine As REngine
     Dim txtOutput As TextBox
     Dim txtLog As TextBox
+    Dim climateObjectPath As String
+
+    Public Sub climateObject()
+        climateObjectPath = "D:\\RProject\\ClimateObject\\R"
+        Me.clsEngine.Evaluate("setwd(" & climateObjectPath & ")")
+        Me.clsEngine.Evaluate("Source(" & climateObjectPath & " SourcingScript.R" & ")")
+        Me.clsEngine.Evaluate("data_obj<-climate$New(data_tables=list(data=data))")
+    End Sub
 
     Public Sub New()
 
@@ -83,8 +91,14 @@ Public Class RInterface
     Public Sub RunScript(strScript As String)
 
         Dim temp
+
         txtLog.Text = txtLog.Text & strScript & vbCrLf
-        txtOutput.Text = txtOutput.Text & "> " & strScript & vbCrLf & String.Join(",", clsEngine.Evaluate(strScript).AsCharacter) & vbCrLf
+        temp = clsEngine.Evaluate(strScript)
+        If temp.Equals(clsEngine.NilValue) Then
+            txtOutput.Text = txtOutput.Text & "> " & strScript & vbCrLf & vbCrLf
+        Else
+            txtOutput.Text = txtOutput.Text & "> " & strScript & vbCrLf & String.Join(",", temp) & vbCrLf
+        End If
 
     End Sub
 

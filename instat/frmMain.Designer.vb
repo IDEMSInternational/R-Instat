@@ -57,7 +57,7 @@ Partial Class frmMain
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.ResizeWorksheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GraphicsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PlotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.BoxplotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HistogramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProbabilityPlotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -257,6 +257,7 @@ Partial Class frmMain
         Me.NameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormatCtrlDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EndOfTheRainsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -461,16 +462,16 @@ Partial Class frmMain
         '
         'GraphicsToolStripMenuItem
         '
-        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotToolStripMenuItem, Me.BoxplotToolStripMenuItem, Me.HistogramToolStripMenuItem, Me.ProbabilityPlotToolStripMenuItem, Me.DotplotToolStripMenuItem, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem})
+        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuGraphicsPlot, Me.BoxplotToolStripMenuItem, Me.HistogramToolStripMenuItem, Me.ProbabilityPlotToolStripMenuItem, Me.DotplotToolStripMenuItem, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem})
         Me.GraphicsToolStripMenuItem.Name = "GraphicsToolStripMenuItem"
         Me.GraphicsToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.GraphicsToolStripMenuItem.Text = "Graphics"
         '
-        'PlotToolStripMenuItem
+        'mnuGraphicsPlot
         '
-        Me.PlotToolStripMenuItem.Name = "PlotToolStripMenuItem"
-        Me.PlotToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.PlotToolStripMenuItem.Text = "Plot..."
+        Me.mnuGraphicsPlot.Name = "mnuGraphicsPlot"
+        Me.mnuGraphicsPlot.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsPlot.Text = "Plot..."
         '
         'BoxplotToolStripMenuItem
         '
@@ -928,7 +929,7 @@ Partial Class frmMain
         '
         'EventsToolStripMenuItem
         '
-        Me.EventsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartOfTheRainsToolStripMenuItem, Me.ExtremesToolStripMenuItem, Me.SpellsToolStripMenuItem, Me.WaterBalanceToolStripMenuItem})
+        Me.EventsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartOfTheRainsToolStripMenuItem, Me.ExtremesToolStripMenuItem, Me.SpellsToolStripMenuItem, Me.WaterBalanceToolStripMenuItem, Me.EndOfTheRainsToolStripMenuItem})
         Me.EventsToolStripMenuItem.Name = "EventsToolStripMenuItem"
         Me.EventsToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.EventsToolStripMenuItem.Text = "Events"
@@ -960,13 +961,13 @@ Partial Class frmMain
         'mnuFileIEODBC
         '
         Me.mnuFileIEODBC.Name = "mnuFileIEODBC"
-        Me.mnuFileIEODBC.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFileIEODBC.Size = New System.Drawing.Size(150, 22)
         Me.mnuFileIEODBC.Text = "ODBC Query"
         '
         'mnuFileIEOutput
         '
         Me.mnuFileIEOutput.Name = "mnuFileIEOutput"
-        Me.mnuFileIEOutput.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFileIEOutput.Size = New System.Drawing.Size(150, 22)
         Me.mnuFileIEOutput.Text = "Output..."
         '
         'ToolStripSeparator5
@@ -1129,13 +1130,13 @@ Partial Class frmMain
         'NewToolStripMenuItem
         '
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
         Me.NewToolStripMenuItem.Text = "New"
         '
         'OpenToolStripMenuItem1
         '
         Me.OpenToolStripMenuItem1.Name = "OpenToolStripMenuItem1"
-        Me.OpenToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.OpenToolStripMenuItem1.Size = New System.Drawing.Size(112, 22)
         Me.OpenToolStripMenuItem1.Text = "Open..."
         '
         'mnuEditCommandLogging
@@ -1260,13 +1261,13 @@ Partial Class frmMain
         'mnuFileIEExport
         '
         Me.mnuFileIEExport.Name = "mnuFileIEExport"
-        Me.mnuFileIEExport.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFileIEExport.Size = New System.Drawing.Size(150, 22)
         Me.mnuFileIEExport.Text = "Export as..."
         '
         'mnuFIleIEASCII
         '
         Me.mnuFIleIEASCII.Name = "mnuFIleIEASCII"
-        Me.mnuFIleIEASCII.Size = New System.Drawing.Size(152, 22)
+        Me.mnuFIleIEASCII.Size = New System.Drawing.Size(150, 22)
         Me.mnuFIleIEASCII.Text = "Import ASCII..."
         '
         'stsStrip
@@ -1721,6 +1722,12 @@ Partial Class frmMain
         Me.AlignmentToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.AlignmentToolStripMenuItem.Text = "Alignment..."
         '
+        'EndOfTheRainsToolStripMenuItem
+        '
+        Me.EndOfTheRainsToolStripMenuItem.Name = "EndOfTheRainsToolStripMenuItem"
+        Me.EndOfTheRainsToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.EndOfTheRainsToolStripMenuItem.Text = "End of the Rains..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1777,7 +1784,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
     Friend WithEvents ResizeWorksheetToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GraphicsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PlotToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsPlot As ToolStripMenuItem
     Friend WithEvents BoxplotToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HistogramToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ProbabilityPlotToolStripMenuItem As ToolStripMenuItem
@@ -1977,4 +1984,5 @@ Partial Class frmMain
     Friend WithEvents NameToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FormatCtrlDToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AlignmentToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EndOfTheRainsToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -50,4 +50,12 @@ Public Class frmMain
     Private Sub mnuBar_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles mnuBar.ItemClicked
 
     End Sub
+
+    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsPlot.Click
+        dlgPlot.Show()
+    End Sub
+
+    Private Sub EndOfTheRainsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EndOfTheRainsToolStripMenuItem.Click
+        dlgEndOfRains.Show()
+    End Sub
 End Class

@@ -38,12 +38,12 @@ Public Class ucrDataSelection
     End Sub
 
     Private Sub ucrDataSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim dataset As DataFrame
-        Dim i As Integer
+        'Dim dataset As DataFrame
+        'Dim i As Integer
 
-        dataset = clsRInterface.GetData("data")
-        For i = 0 To dataset.ColumnCount - 1
-            lstAvailableVariable.Items.Add(dataset.ColumnNames(i))
-        Next
+        'dataset = clsRInterface.GetData("data")
+        'For i = 0 To dataset.ColumnCount - 1
+        '    lstAvailableVariable.Items.Add(dataset.ColumnNames(i))
+        'Next
     End Sub
 End Class
