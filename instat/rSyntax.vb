@@ -22,11 +22,11 @@ Public Class RSyntax
     End Sub
 
     Public Sub AddParameter(strParameterName As String, strParameterValue As String)
-        strScript = strParameterName & "=" & strParameterValue
+
     End Sub
 
     Public Sub RemoveParameter(strParameterName As String, strParameterValue As String)
-        strScript = strParameterName & "=" & strParameterValue
+
     End Sub
 
     Public Function GetScript() As String
