@@ -1,4 +1,4 @@
-﻿' Instat-R
+﻿' Instat+R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -14,39 +14,23 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 Public Class RSyntax
     Dim strScript As String
-    Public Sub manage(lstOfString As Object, type As String)
-        Select Case type
-            Case "regular"
-                strScript = "capture.output(seq(from = " & Convert.ToInt32(lstOfString(0)) & ", to = " & Convert.ToInt32(lstOfString(1)) & ", by = " & Convert.ToInt32(lstOfString(2)) & "))"
-                frmMain.clsRInterface.RunScript(strScript)
-            Case "repeated"
-                strScript = "capture.output(seq(from = " & Convert.ToInt32(lstOfString(0)) & ", to = " & Convert.ToInt32(lstOfString(0)) & ", length.out = " & Convert.ToInt32(lstOfString(1)) & "))"
-                frmMain.clsRInterface.RunScript(strScript)
-            Case "date"
-                strScript = "capture.output(seq(from = as.Date('" & Format(lstOfString(0), "yyyy/MM/dd") & "'), to = as.Date('" & Format(lstOfString(1), "yyyy/MM/dd") & "'), by = '" & lstOfString(2) & "'))"
-                frmMain.clsRInterface.RunScript(strScript)
-        End Select
-
+    Public Sub SetFunction(strFunctionName As String)
+        strScript = strFunctionName
     End Sub
 
-    Public Sub graphics(strString As String, submenu As String)
-
-
-
+    Public Sub AddParameter(strParameterName As String, strParameterValue As String)
+        strScript = strParameterName & "=" & strParameterValue
     End Sub
 
-    Public Sub statistcs(strString As String, submenu As String)
-
-
-
+    Public Sub RemoveParameter(strParameterName As String, strParameterValue As String)
+        strScript = strParameterName & "=" & strParameterValue
     End Sub
 
-    Public Sub climatic(strString As String, submenu As String)
-
-
-
-    End Sub
+    Public Function GetScript() As String
+        Return MsgBox("Empty")
+    End Function
 
 End Class

@@ -242,7 +242,7 @@ Partial Class dlgRegularSequence
         Me.grpSequence2.Controls.Add(Me.Label4)
         Me.grpSequence2.Controls.Add(Me.Label5)
         Me.grpSequence2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequence2.Location = New System.Drawing.Point(8, 56)
+        Me.grpSequence2.Location = New System.Drawing.Point(213, 47)
         Me.grpSequence2.Name = "grpSequence2"
         Me.grpSequence2.Size = New System.Drawing.Size(180, 95)
         Me.grpSequence2.TabIndex = 10
@@ -314,14 +314,14 @@ Partial Class dlgRegularSequence
         '
         Me.UcrButtons1.Location = New System.Drawing.Point(12, 157)
         Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(333, 32)
+        Me.UcrButtons1.Size = New System.Drawing.Size(403, 32)
         Me.UcrButtons1.TabIndex = 5
         '
         'dlgRegularSequence
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(350, 186)
+        Me.ClientSize = New System.Drawing.Size(427, 186)
         Me.Controls.Add(Me.grpSequence2)
         Me.Controls.Add(Me.grpSequence)
         Me.Controls.Add(Me.grpRepeatSingle)
