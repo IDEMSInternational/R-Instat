@@ -1,4 +1,4 @@
-﻿' CLIMSOFT - Climate Database Management System
+﻿' Instat+R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -86,26 +86,16 @@ Public Class RInterface
 
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Boolean = True)
 
-        Dim strCapturedScript
+        'Dim strCapturedScript
         txtLog.Text = txtLog.Text & strScript & vbCrLf
         txtOutput.Text = txtOutput.Text & "> " & strScript & vbCrLf
         If bReturnOutput Then
-            strCapturedScript = "capture.output(" & strScript & ")"
-            txtOutput.Text = txtOutput.Text & String.Join(vbCrLf, clsEngine.Evaluate(strCapturedScript).AsCharacter) & vbCrLf
+            'strCapturedScript = "capture.output(" & strScript & ")"
+            'txtOutput.Text = txtOutput.Text & String.Join(vbCrLf, clsEngine.Evaluate(strCapturedScript).AsCharacter) & vbCrLf
+            txtOutput.Text = txtOutput.Text & vbCrLf & "> " & String.Join(vbCrLf, clsEngine.Evaluate(strScript).AsCharacter) & vbCrLf
         Else
             clsEngine.Evaluate(strScript)
         End If
-
-        'txtOutput.Text = txtOutput.Text & "> " & strScript & vbCrLf & String.Join(",", clsEngine.Evaluate(strScript).AsCharacter) & vbCrLf
-        'clsEngine.Evaluate(strScript)
-
-        'Try
-        '    For Each s As String In System.IO.File.ReadAllLines("C:\Users\toshiba\Dropbox\Climate object\ClimateObject\lm.txt")
-        '        txtOutput.AppendText(s + vbNewLine)
-        '    Next
-        'Catch ex As Exception
-        '    MessageBox.Show(ex.Message)
-        'End Try
     End Sub
 
     Public Function GetData(strLabel As String) As DataFrame

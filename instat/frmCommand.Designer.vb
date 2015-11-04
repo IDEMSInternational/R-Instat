@@ -31,6 +31,7 @@ Partial Class frmCommand
         Me.txtCommand.Location = New System.Drawing.Point(0, 0)
         Me.txtCommand.Multiline = True
         Me.txtCommand.Name = "txtCommand"
+        Me.txtCommand.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtCommand.Size = New System.Drawing.Size(631, 261)
         Me.txtCommand.TabIndex = 0
         '
@@ -41,6 +42,7 @@ Partial Class frmCommand
         Me.ClientSize = New System.Drawing.Size(631, 261)
         Me.Controls.Add(Me.txtCommand)
         Me.Name = "frmCommand"
+        Me.ShowIcon = False
         Me.Tag = "Output_Window"
         Me.Text = "Output Window"
         Me.ResumeLayout(False)

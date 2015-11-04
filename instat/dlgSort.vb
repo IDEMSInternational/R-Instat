@@ -20,7 +20,7 @@ Public Class dlgSort
                 strScript = strScript & Chr(34) & temp.ToString & Chr(34)
             Next
             strScript = strScript & "]),]"
-            frmMain.clsRInterface.RunScript(strScript)
+            frmMain.clsRInterface.RunScript(strScript, False)
         End If
         newdata = frmMain.clsRInterface.GetData("data")
         frmEditor.UpdateSheet(newdata)

@@ -170,6 +170,7 @@ Partial Class dlgStartofRains
         Me.lblDays.Name = "lblDays"
         Me.lblDays.Size = New System.Drawing.Size(13, 13)
         Me.lblDays.TabIndex = 15
+        Me.lblDays.Tag = "Days"
         Me.lblDays.Text = "2"
         '
         'lblColumnName
@@ -179,6 +180,7 @@ Partial Class dlgStartofRains
         Me.lblColumnName.Name = "lblColumnName"
         Me.lblColumnName.Size = New System.Drawing.Size(39, 13)
         Me.lblColumnName.TabIndex = 16
+        Me.lblColumnName.Tag = "Column_Name"
         Me.lblColumnName.Text = "Label1"
         '
         'txtColumnName
@@ -220,7 +222,7 @@ Partial Class dlgStartofRains
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(402, 307)
+        Me.ClientSize = New System.Drawing.Size(349, 294)
         Me.Controls.Add(Me.nudThreshold)
         Me.Controls.Add(Me.nudEarliest)
         Me.Controls.Add(Me.txtColumnName)
@@ -242,7 +244,8 @@ Partial Class dlgStartofRains
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgStartofRains"
-        Me.Text = "dlgStartofRains"
+        Me.ShowIcon = False
+        Me.Text = "Start of Rains"
         CType(Me.nudNumberofRainDays, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudTotalRain, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudWithin, System.ComponentModel.ISupportInitialize).EndInit()
