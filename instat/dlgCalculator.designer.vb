@@ -318,7 +318,7 @@ Partial Class dlgCalculator
         '
         Me.ucrBase.Location = New System.Drawing.Point(16, 282)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(333, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(404, 32)
         Me.ucrBase.TabIndex = 0
         '
         'dlgCalculator

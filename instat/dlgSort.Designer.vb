@@ -28,7 +28,7 @@ Partial Class dlgSort
         '
         'UcrDataSelection1
         '
-        Me.UcrDataSelection1.Location = New System.Drawing.Point(1, 1)
+        Me.UcrDataSelection1.Location = New System.Drawing.Point(46, 1)
         Me.UcrDataSelection1.Name = "UcrDataSelection1"
         Me.UcrDataSelection1.Size = New System.Drawing.Size(313, 122)
         Me.UcrDataSelection1.TabIndex = 1
@@ -37,14 +37,14 @@ Partial Class dlgSort
         '
         Me.UcrButtons1.Location = New System.Drawing.Point(1, 129)
         Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(327, 35)
+        Me.UcrButtons1.Size = New System.Drawing.Size(402, 35)
         Me.UcrButtons1.TabIndex = 0
         '
         'dlgSort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(336, 165)
+        Me.ClientSize = New System.Drawing.Size(406, 165)
         Me.Controls.Add(Me.UcrDataSelection1)
         Me.Controls.Add(Me.UcrButtons1)
         Me.MaximizeBox = False
