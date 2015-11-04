@@ -22,6 +22,7 @@
             Next
             strScript = strScript & ")])"
             frmMain.clsRInterface.RunScript(strScript)
+            Me.Hide()
         End If
 
     End Sub
