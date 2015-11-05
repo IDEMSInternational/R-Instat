@@ -1,8 +1,10 @@
 ﻿Imports RDotNet
+Imports instat.Translations
 Public Class ucrSelector
     'Public CurrentReceiver As ucrReceiver
 
     Private Sub ucrDataSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        translateEach(Controls)
         Dim cvdataset As CharacterVector
         Dim adataset As Array
         Dim i As Integer
