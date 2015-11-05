@@ -269,7 +269,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgBoxPlot.hi.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxPlot.zh-CN.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCalculator.fr-FR.resx">
+      <DependentUpon>dlgCalculator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCalculator.hi.resx">
       <DependentUpon>dlgCalculator.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCalculator.resx">
@@ -278,7 +287,13 @@
     <EmbeddedResource Include="dlgCalculator.sw-KE.resx">
       <DependentUpon>dlgCalculator.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCalculator.zh-CN.resx">
+      <DependentUpon>dlgCalculator.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDescriptiveStatistics.fr-FR.resx">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescriptiveStatistics.hi.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDescriptiveStatistics.resx">
@@ -287,7 +302,13 @@
     <EmbeddedResource Include="dlgDescriptiveStatistics.sw-KE.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescriptiveStatistics.zh-CN.resx">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgEndofRains.fr-FR.resx">
+      <DependentUpon>dlgEndofRains.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEndofRains.hi.resx">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEndofRains.resx">
@@ -296,7 +317,13 @@
     <EmbeddedResource Include="dlgEndofRains.sw-KE.resx">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgEndofRains.zh-CN.resx">
+      <DependentUpon>dlgEndofRains.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.fr-FR.resx">
+      <DependentUpon>dlgRegularSequence.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegularSequence.hi.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.resx">
@@ -305,7 +332,13 @@
     <EmbeddedResource Include="dlgRegularSequence.sw-KE.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegularSequence.zh-CN.resx">
+      <DependentUpon>dlgRegularSequence.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSort.fr-FR.resx">
+      <DependentUpon>dlgSort.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSort.hi.resx">
       <DependentUpon>dlgSort.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSort.resx">
@@ -314,7 +347,13 @@
     <EmbeddedResource Include="dlgSort.sw-KE.resx">
       <DependentUpon>dlgSort.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgSort.zh-CN.resx">
+      <DependentUpon>dlgSort.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgStartofRains.fr-FR.resx">
+      <DependentUpon>dlgStartofRains.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStartofRains.hi.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgStartofRains.resx">
@@ -332,7 +371,13 @@
     <EmbeddedResource Include="dlgBoxPlot.sw-KE.resx">
       <DependentUpon>dlgBoxPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgStartofRains.zh-CN.resx">
+      <DependentUpon>dlgStartofRains.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.fr-FR.resx">
+      <DependentUpon>frmCommand.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCommand.hi.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.resx">
@@ -341,7 +386,13 @@
     <EmbeddedResource Include="frmCommand.sw-KE.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCommand.zh-CN.resx">
+      <DependentUpon>frmCommand.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditor.fr-FR.resx">
+      <DependentUpon>frmEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditor.hi.resx">
       <DependentUpon>frmEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditor.resx">
@@ -350,7 +401,13 @@
     <EmbeddedResource Include="frmEditor.sw-KE.resx">
       <DependentUpon>frmEditor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmEditor.zh-CN.resx">
+      <DependentUpon>frmEditor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLog.fr-FR.resx">
+      <DependentUpon>frmLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLog.hi.resx">
       <DependentUpon>frmLog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLog.resx">
@@ -359,7 +416,13 @@
     <EmbeddedResource Include="frmLog.sw-KE.resx">
       <DependentUpon>frmLog.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLog.zh-CN.resx">
+      <DependentUpon>frmLog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.fr-FR.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.hi.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
@@ -368,7 +431,13 @@
     <EmbeddedResource Include="frmMain.sw-KE.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.zh-CN.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmScript.fr-FR.resx">
+      <DependentUpon>frmScript.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmScript.hi.resx">
       <DependentUpon>frmScript.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmScript.resx">
@@ -377,7 +446,11 @@
     <EmbeddedResource Include="frmScript.sw-KE.resx">
       <DependentUpon>frmScript.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmScript.zh-CN.resx">
+      <DependentUpon>frmScript.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.fr-FR.resx" />
+    <EmbeddedResource Include="My Project\Resources.hi.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -385,7 +458,11 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.sw-KE.resx" />
+    <EmbeddedResource Include="My Project\Resources.zh-CN.resx" />
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
+      <DependentUpon>ucrButtons.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrButtons.hi.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.resx">
@@ -394,7 +471,13 @@
     <EmbeddedResource Include="ucrButtons.sw-KE.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrButtons.zh-CN.resx">
+      <DependentUpon>ucrButtons.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrButtonsSubdialogue.fr-FR.resx">
+      <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrButtonsSubdialogue.hi.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtonsSubdialogue.resx">
@@ -403,7 +486,13 @@
     <EmbeddedResource Include="ucrButtonsSubdialogue.sw-KE.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrButtonsSubdialogue.zh-CN.resx">
+      <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.fr-FR.resx">
+      <DependentUpon>ucrDataSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataSelection.hi.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.resx">
@@ -412,7 +501,13 @@
     <EmbeddedResource Include="ucrDataSelection.sw-KE.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataSelection.zh-CN.resx">
+      <DependentUpon>ucrDataSelection.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiver.fr-FR.resx">
+      <DependentUpon>ucrReceiver.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiver.hi.resx">
       <DependentUpon>ucrReceiver.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiver.resx">
@@ -421,7 +516,13 @@
     <EmbeddedResource Include="ucrReceiver.sw-KE.resx">
       <DependentUpon>ucrReceiver.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiver.zh-CN.resx">
+      <DependentUpon>ucrReceiver.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverMultiple.fr-FR.resx">
+      <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverMultiple.hi.resx">
       <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverMultiple.resx">
@@ -430,7 +531,13 @@
     <EmbeddedResource Include="ucrReceiverMultiple.sw-KE.resx">
       <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverMultiple.zh-CN.resx">
+      <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverSingle.fr-FR.resx">
+      <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverSingle.hi.resx">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverSingle.resx">
@@ -439,13 +546,22 @@
     <EmbeddedResource Include="ucrReceiverSingle.sw-KE.resx">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverSingle.zh-CN.resx">
+      <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrSelector.fr-FR.resx">
+      <DependentUpon>ucrSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelector.hi.resx">
       <DependentUpon>ucrSelector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelector.resx">
       <DependentUpon>ucrSelector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelector.sw-KE.resx">
+      <DependentUpon>ucrSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelector.zh-CN.resx">
       <DependentUpon>ucrSelector.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -491,7 +607,9 @@
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\instat.fr-FR.xlf" />
+    <XliffResource Include="MultilingualResources\instat.hi.xlf" />
     <XliffResource Include="MultilingualResources\instat.sw-KE.xlf" />
+    <XliffResource Include="MultilingualResources\instat.zh-CN.xlf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />

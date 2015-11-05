@@ -1,54 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGSORT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/UCRSELECTOR.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="INSTAT/DLGSORT.RESX" datatype="resx" />
+      <group id="INSTAT/UCRSELECTOR.RESX" datatype="resx" />
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/FRMLOG.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/UCRRECEIVERSINGLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="INSTAT/FRMLOG.RESX" datatype="resx" />
+      <group id="INSTAT/UCRRECEIVERSINGLE.RESX" datatype="resx" />
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/FRMSCRIPT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/UCRRECEIVERMULTIPLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="INSTAT/FRMSCRIPT.RESX" datatype="resx" />
+      <group id="INSTAT/UCRRECEIVERMULTIPLE.RESX" datatype="resx" />
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/FRMCOMMAND.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/UCRRECEIVER.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="INSTAT/FRMCOMMAND.RESX" datatype="resx" />
+      <group id="INSTAT/UCRRECEIVER.RESX" datatype="resx" />
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/FRMEDITOR.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/FRMEDITOR.RESX" datatype="resx" />
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/UCRBUTTONS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/UCRBUTTONS.RESX" datatype="resx" />
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/UCRDATASELECTION.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/UCRDATASELECTION.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
@@ -56,7 +40,55 @@
       <group id="INSTAT/UCRDATASELECTION.RESX" datatype="resx" />
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGDESCRIPTIVESTATISTICS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/UCRBUTTONSSUBDIALOGUE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/UCRBUTTONSSUBDIALOGUE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/FRMLOG.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/FRMLOG.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/FRMEDITOR.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/FRMEDITOR.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/FRMCOMMAND.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/FRMCOMMAND.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/DLGSTARTOFRAINS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSTARTOFRAINS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/DLGENDOFRAINS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGENDOFRAINS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/DLGDESCRIPTIVESTATISTICS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
@@ -64,7 +96,52 @@
       <group id="INSTAT/DLGDESCRIPTIVESTATISTICS.RESX" datatype="resx" />
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/MY PROJECT/RESOURCES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/DLGCALCULATOR.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCALCULATOR.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/DLGSORT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSORT.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/DLGREGULARSEQUENCE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGREGULARSEQUENCE.RESX" datatype="resx">
+        <trans-unit id="errorProvider.TrayLocation" translate="yes" extype="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" extradata="metadata" xml:space="preserve">
+          <source>17, 17</source>
+          <target state="needs-review-translation">17, 17</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/DLGBOXPLOT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGBOXPLOT.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/UCRBUTTONS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/UCRBUTTONS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/MY PROJECT/RESOURCES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
@@ -92,236 +169,220 @@
         </trans-unit>
         <trans-unit id="Add" translate="yes" xml:space="preserve">
           <source>Add</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ongeza</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">添加</target>
         </trans-unit>
         <trans-unit id="Available_Variables" translate="yes" xml:space="preserve">
           <source>Available  Variables</source>
-          <target state="new">Available  Variables</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">可用变量</target>
         </trans-unit>
         <trans-unit id="Box_Plot" translate="yes" xml:space="preserve">
           <source>Box Plot</source>
-          <target state="new">Box Plot</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">盒须图</target>
         </trans-unit>
         <trans-unit id="Cancel" translate="yes" xml:space="preserve">
           <source>Cancel</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Katisha</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">取消</target>
         </trans-unit>
         <trans-unit id="Choose_Statistics" translate="yes" xml:space="preserve">
           <source>Choose Statistics</source>
-          <target state="new">Choose Statistics</target>
-        </trans-unit>
-        <trans-unit id="Climatic" translate="yes" xml:space="preserve">
-          <source>Climatic</source>
-          <target state="new">Climatic</target>
-        </trans-unit>
-        <trans-unit id="Close" translate="yes" xml:space="preserve">
-          <source>Close</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Funga</target>
-        </trans-unit>
-        <trans-unit id="Close_Worksheet" translate="yes" xml:space="preserve">
-          <source>Close Worksheet</source>
-          <target state="new">Close Worksheet</target>
-        </trans-unit>
-        <trans-unit id="Command_and_Output_Window" translate="yes" xml:space="preserve">
-          <source>Command and Output Window</source>
-          <target state="new">Command and Output Window</target>
-        </trans-unit>
-        <trans-unit id="Cumulative_Frequency" translate="yes" xml:space="preserve">
-          <source>Cumulative Frequency</source>
-          <target state="new">Cumulative Frequency</target>
-        </trans-unit>
-        <trans-unit id="Edit" translate="yes" xml:space="preserve">
-          <source>Edit</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hariri</target>
-        </trans-unit>
-        <trans-unit id="Factor_Variable" translate="yes" xml:space="preserve">
-          <source>Factor Variable</source>
-          <target state="new">Factor Variable</target>
-        </trans-unit>
-        <trans-unit id="File" translate="yes" xml:space="preserve">
-          <source>File </source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Jalada</target>
-        </trans-unit>
-        <trans-unit id="Graphics" translate="yes" xml:space="preserve">
-          <source>Graphics</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Michoro</target>
-        </trans-unit>
-        <trans-unit id="Help" translate="yes" xml:space="preserve">
-          <source>Help</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Msaada</target>
-        </trans-unit>
-        <trans-unit id="Import_Export" translate="yes" xml:space="preserve">
-          <source>Import/Export</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hamisha/Leta</target>
-        </trans-unit>
-        <trans-unit id="Manage" translate="yes" xml:space="preserve">
-          <source>Manage</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Simamia</target>
-        </trans-unit>
-        <trans-unit id="New_Worksheet" translate="yes" xml:space="preserve">
-          <source>New Worksheet... CTRL+N</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Lahakazi mpya</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
-        <trans-unit id="Ok" translate="yes" xml:space="preserve">
-          <source>Ok</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Sawa</target>
-        </trans-unit>
-        <trans-unit id="Open_From_Library" translate="yes" xml:space="preserve">
-          <source>Open From Library</source>
-          <target state="new">Open From Library</target>
-        </trans-unit>
-        <trans-unit id="Open_Worksheet" translate="yes" xml:space="preserve">
-          <source>Open Worksheet</source>
-          <target state="new">Open Worksheet</target>
-        </trans-unit>
-        <trans-unit id="Print" translate="yes" xml:space="preserve">
-          <source>Print</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Chapisha</target>
-        </trans-unit>
-        <trans-unit id="Print_Preview" translate="yes" xml:space="preserve">
-          <source>Print Preview</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kihakiki Uchapishaji</target>
-        </trans-unit>
-        <trans-unit id="Remove" translate="yes" xml:space="preserve">
-          <source>Remove</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ondoa</target>
-        </trans-unit>
-        <trans-unit id="Reset" translate="yes" xml:space="preserve">
-          <source>Reset</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Weka upya</target>
-        </trans-unit>
-        <trans-unit id="Save" translate="yes" xml:space="preserve">
-          <source>Save</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hifadhi</target>
-        </trans-unit>
-        <trans-unit id="Save_As" translate="yes" xml:space="preserve">
-          <source>Save As</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hifadha Kama</target>
-        </trans-unit>
-        <trans-unit id="Script" translate="yes" xml:space="preserve">
-          <source>Script</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hati</target>
-        </trans-unit>
-        <trans-unit id="Script_Window" translate="yes" xml:space="preserve">
-          <source>Script Window</source>
-          <target state="new">Script Window</target>
-        </trans-unit>
-        <trans-unit id="Selected_Variables" translate="yes" xml:space="preserve">
-          <source>Selected Variables</source>
-          <target state="new">Selected Variables</target>
-        </trans-unit>
-        <trans-unit id="Statistics" translate="yes" xml:space="preserve">
-          <source>Statistics</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hesabu</target>
-        </trans-unit>
-        <trans-unit id="Stem_And_Leaf" translate="yes" xml:space="preserve">
-          <source>Stem And Leaf...</source>
-          <target state="new">Stem And Leaf...</target>
-        </trans-unit>
-        <trans-unit id="Submit" translate="yes" xml:space="preserve">
-          <source>Submit</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Wasilisha</target>
-        </trans-unit>
-        <trans-unit id="Undo" translate="yes" xml:space="preserve">
-          <source>Undo</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Tendua</target>
-        </trans-unit>
-        <trans-unit id="Window" translate="yes" xml:space="preserve">
-          <source>Window</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Dirisha</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">选择统计</target>
         </trans-unit>
         <trans-unit id="Clear" translate="yes" xml:space="preserve">
           <source>Clear</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ondoa</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">清除</target>
+        </trans-unit>
+        <trans-unit id="Climatic" translate="yes" xml:space="preserve">
+          <source>Climatic</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">气候</target>
+        </trans-unit>
+        <trans-unit id="Close" translate="yes" xml:space="preserve">
+          <source>Close</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">关闭</target>
+        </trans-unit>
+        <trans-unit id="Close_Worksheet" translate="yes" xml:space="preserve">
+          <source>Close Worksheet</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">关闭工作表</target>
+        </trans-unit>
+        <trans-unit id="Command_and_Output_Window" translate="yes" xml:space="preserve">
+          <source>Command and Output Window</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">命令和输出窗口</target>
         </trans-unit>
         <trans-unit id="Copy" translate="yes" xml:space="preserve">
           <source>Copy</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Nakili</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">复制</target>
         </trans-unit>
         <trans-unit id="Copy_Special" translate="yes" xml:space="preserve">
           <source>Copy Special</source>
-          <target state="new">Copy Special</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">复制特别</target>
+        </trans-unit>
+        <trans-unit id="Cumulative_Frequency" translate="yes" xml:space="preserve">
+          <source>Cumulative Frequency</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">累积频率</target>
         </trans-unit>
         <trans-unit id="Cut" translate="yes" xml:space="preserve">
           <source>Cut</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kata</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">剪切</target>
+        </trans-unit>
+        <trans-unit id="Edit" translate="yes" xml:space="preserve">
+          <source>Edit</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">编辑</target>
+        </trans-unit>
+        <trans-unit id="Factor_Variable" translate="yes" xml:space="preserve">
+          <source>Factor Variable</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">因子变量</target>
+        </trans-unit>
+        <trans-unit id="File" translate="yes" xml:space="preserve">
+          <source>File </source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">文件</target>
         </trans-unit>
         <trans-unit id="Find" translate="yes" xml:space="preserve">
           <source>Find</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Tafuta</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">查找</target>
+        </trans-unit>
+        <trans-unit id="Graphics" translate="yes" xml:space="preserve">
+          <source>Graphics</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">图形</target>
+        </trans-unit>
+        <trans-unit id="Help" translate="yes" xml:space="preserve">
+          <source>Help</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">帮助</target>
+        </trans-unit>
+        <trans-unit id="Import_Export" translate="yes" xml:space="preserve">
+          <source>Import/Export</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">导入/导出</target>
+        </trans-unit>
+        <trans-unit id="Manage" translate="yes" xml:space="preserve">
+          <source>Manage</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">管理</target>
+        </trans-unit>
+        <trans-unit id="New_Worksheet" translate="yes" xml:space="preserve">
+          <source>New Worksheet... CTRL+N</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">新工作表...CTRL + N</target>
+        </trans-unit>
+        <trans-unit id="Ok" translate="yes" xml:space="preserve">
+          <source>Ok</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">确定</target>
+        </trans-unit>
+        <trans-unit id="Open_From_Library" translate="yes" xml:space="preserve">
+          <source>Open From Library</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">从图书馆开放</target>
+        </trans-unit>
+        <trans-unit id="Open_Worksheet" translate="yes" xml:space="preserve">
+          <source>Open Worksheet</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">打开的工作表</target>
         </trans-unit>
         <trans-unit id="Paste" translate="yes" xml:space="preserve">
           <source>Paste</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Bandika</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">粘贴</target>
+        </trans-unit>
+        <trans-unit id="Print" translate="yes" xml:space="preserve">
+          <source>Print</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">PRINT</target>
+        </trans-unit>
+        <trans-unit id="Print_Preview" translate="yes" xml:space="preserve">
+          <source>Print Preview</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">打印预览</target>
+        </trans-unit>
+        <trans-unit id="Remove" translate="yes" xml:space="preserve">
+          <source>Remove</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">删除</target>
         </trans-unit>
         <trans-unit id="Replace" translate="yes" xml:space="preserve">
           <source>Replace</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Badilisha</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">替换</target>
+        </trans-unit>
+        <trans-unit id="Reset" translate="yes" xml:space="preserve">
+          <source>Reset</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">重置</target>
+        </trans-unit>
+        <trans-unit id="Save" translate="yes" xml:space="preserve">
+          <source>Save</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">保存</target>
+        </trans-unit>
+        <trans-unit id="Save_As" translate="yes" xml:space="preserve">
+          <source>Save As</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">另存为</target>
+        </trans-unit>
+        <trans-unit id="Script" translate="yes" xml:space="preserve">
+          <source>Script</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">上下标</target>
+        </trans-unit>
+        <trans-unit id="Script_Window" translate="yes" xml:space="preserve">
+          <source>Script Window</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">脚本窗口</target>
+        </trans-unit>
+        <trans-unit id="Selected_Variables" translate="yes" xml:space="preserve">
+          <source>Selected Variables</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">所选变量</target>
         </trans-unit>
         <trans-unit id="Select_All" translate="yes" xml:space="preserve">
           <source>Select All</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Teua Yote</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">全选</target>
         </trans-unit>
-        <trans-unit id="Export_as" translate="yes" xml:space="preserve">
-          <source>Export_as</source>
-          <target state="new">Export_as</target>
+        <trans-unit id="Statistics" translate="yes" xml:space="preserve">
+          <source>Statistics</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">統計資料</target>
         </trans-unit>
-        <trans-unit id="Import_ASCII" translate="yes" xml:space="preserve">
-          <source>Import ASCII</source>
-          <target state="new">Import ASCII</target>
+        <trans-unit id="Stem_And_Leaf" translate="yes" xml:space="preserve">
+          <source>Stem And Leaf...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">茎和叶</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="Language" translate="yes" xml:space="preserve">
-          <source>Language</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Lugha</target>
+        <trans-unit id="Submit" translate="yes" xml:space="preserve">
+          <source>Submit</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">提交</target>
         </trans-unit>
-        <trans-unit id="ODBC_Query" translate="yes" xml:space="preserve">
-          <source>ODBC Query</source>
-          <target state="new">ODBC Query</target>
+        <trans-unit id="Undo" translate="yes" xml:space="preserve">
+          <source>Undo</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">撤消</target>
         </trans-unit>
-        <trans-unit id="Open" translate="yes" xml:space="preserve">
-          <source>Open</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Fungua</target>
-        </trans-unit>
-        <trans-unit id="Output" translate="yes" xml:space="preserve">
-          <source>Output</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Towe</target>
-        </trans-unit>
-        <trans-unit id="Selection" translate="yes" xml:space="preserve">
-          <source>Selection</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Uteuzi</target>
+        <trans-unit id="Window" translate="yes" xml:space="preserve">
+          <source>Window</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">窗口</target>
         </trans-unit>
         <trans-unit id="Analysis_of_Variance" translate="yes" xml:space="preserve">
           <source>Analysis of Variance</source>
-          <target state="new">Analysis of Variance</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">方差分析</target>
         </trans-unit>
         <trans-unit id="Boxplot" translate="yes" xml:space="preserve">
           <source>Boxplot</source>
-          <target state="new">Boxplot</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">箱线图</target>
         </trans-unit>
         <trans-unit id="Calculations" translate="yes" xml:space="preserve">
           <source>Calculations</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ukokotozi</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">计算</target>
         </trans-unit>
         <trans-unit id="Check_Duplicates" translate="yes" xml:space="preserve">
           <source>Check Duplicates</source>
-          <target state="new">Check Duplicates</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">检查重复项</target>
         </trans-unit>
         <trans-unit id="Circular_Statisctics" translate="yes" xml:space="preserve">
           <source>CircularStatisctics</source>
-          <target state="new">CircularStatisctics</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">CircularStatisctics</target>
+        </trans-unit>
+        <trans-unit id="Clear1" translate="yes" xml:space="preserve">
+          <source>Clear Del</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">明确德尔</target>
         </trans-unit>
         <trans-unit id="Clear_Remove" translate="yes" xml:space="preserve">
           <source>Clear(Remove)</source>
-          <target state="new">Clear(Remove)</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Clear(Remove)</target>
         </trans-unit>
         <trans-unit id="Column_Properties" translate="yes" xml:space="preserve">
           <source>Column Properties</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Sifa za Safuwima...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">列属性</target>
         </trans-unit>
         <trans-unit id="Column_Statistics" translate="yes" xml:space="preserve">
           <source>Column Statistics</source>
-          <target state="new">Column Statistics</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">列统计信息</target>
+        </trans-unit>
+        <trans-unit id="Command_Logging" translate="yes" xml:space="preserve">
+          <source>Command Logging</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">命令日志记录</target>
+        </trans-unit>
+        <trans-unit id="Copy_Special1" translate="yes" xml:space="preserve">
+          <source>Copy Special Ctrl+Y</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">复制特殊 Ctrl + Y</target>
         </trans-unit>
         <trans-unit id="Data" translate="yes" xml:space="preserve">
           <source>Data</source>
@@ -329,458 +390,495 @@
         </trans-unit>
         <trans-unit id="Describe" translate="yes" xml:space="preserve">
           <source>Describe</source>
-          <target state="new">Describe</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">描述</target>
         </trans-unit>
         <trans-unit id="Display" translate="yes" xml:space="preserve">
           <source>Display...</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Onyesha</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">显示器</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Diversity" translate="yes" xml:space="preserve">
           <source>Diversity</source>
-          <target state="new">Diversity</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">多样性</target>
         </trans-unit>
         <trans-unit id="Dotplot" translate="yes" xml:space="preserve">
           <source>Dotplot...</source>
-          <target state="new">Dotplot...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Dotplot</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Duplicate_copy_columns" translate="yes" xml:space="preserve">
           <source>Duplicate(copy columns)...</source>
-          <target state="new">Duplicate(copy columns)...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">复制 (复制列)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="English" translate="yes" xml:space="preserve">
           <source>English</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kiingereza</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">英语</target>
         </trans-unit>
         <trans-unit id="Enter" translate="yes" xml:space="preserve">
           <source>Enter...</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Enter</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
+        <trans-unit id="Expand" translate="yes" xml:space="preserve">
+          <source>Expand...</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">展开</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Export_as" translate="yes" xml:space="preserve">
+          <source>Export_as</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Export_as</target>
+        </trans-unit>
+        <trans-unit id="Flags" translate="yes" xml:space="preserve">
+          <source>Flags</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">标志</target>
+        </trans-unit>
+        <trans-unit id="Font" translate="yes" xml:space="preserve">
+          <source>Font Ctrl+T</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">字体 Ctrl + T</target>
+        </trans-unit>
         <trans-unit id="French" translate="yes" xml:space="preserve">
           <source>French</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kifaransa</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">法语</target>
         </trans-unit>
         <trans-unit id="Group" translate="yes" xml:space="preserve">
           <source>Group</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kikundi</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">组</target>
         </trans-unit>
         <trans-unit id="Histogram" translate="yes" xml:space="preserve">
           <source>Histogram</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Histogramu</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">直方图</target>
         </trans-unit>
-        <trans-unit id="Load_Graph" translate="yes" xml:space="preserve">
-          <source>Load Graph</source>
-          <target state="new">Load Graph</target>
-        </trans-unit>
-        <trans-unit id="Manipulate" translate="yes" xml:space="preserve">
-          <source>Manipulate</source>
-          <target state="new">Manipulate</target>
-        </trans-unit>
-        <trans-unit id="Non_Parametric" translate="yes" xml:space="preserve">
-          <source>Non-Parametric</source>
-          <target state="new">Non-Parametric</target>
-        </trans-unit>
-        <trans-unit id="Plot" translate="yes" xml:space="preserve">
-          <source>Plot</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ploti</target>
-        </trans-unit>
-        <trans-unit id="Probability_Distribution" translate="yes" xml:space="preserve">
-          <source>Probability Distribution...</source>
-          <target state="new">Probability Distribution...</target>
-        </trans-unit>
-        <trans-unit id="Probability_Plot" translate="yes" xml:space="preserve">
-          <source>Probability Plot</source>
-          <target state="new">Probability Plot</target>
-        </trans-unit>
-        <trans-unit id="Random_Samples" translate="yes" xml:space="preserve">
-          <source>Random Samples...</source>
-          <target state="new">Random Samples...</target>
-        </trans-unit>
-        <trans-unit id="Regression" translate="yes" xml:space="preserve">
-          <source>Regression</source>
-          <target state="new">Regression</target>
-        </trans-unit>
-        <trans-unit id="Regular_Sequence" translate="yes" xml:space="preserve">
-          <source>Regular Sequence...</source>
-          <target state="new">Regular Sequence...</target>
-        </trans-unit>
-        <trans-unit id="Reshape" translate="yes" xml:space="preserve">
-          <source>Reshape</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Unda upya</target>
-        </trans-unit>
-        <trans-unit id="Resize_Worksheet" translate="yes" xml:space="preserve">
-          <source>Resize Worksheet</source>
-          <target state="new">Resize Worksheet</target>
-        </trans-unit>
-        <trans-unit id="Sample_Size" translate="yes" xml:space="preserve">
-          <source>Sample Size</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ukubwa sampuli</target>
-        </trans-unit>
-        <trans-unit id="ScatterPlot" translate="yes" xml:space="preserve">
-          <source>ScatterPlot...</source>
-          <target state="new">ScatterPlot...</target>
-        </trans-unit>
-        <trans-unit id="Simple_Models" translate="yes" xml:space="preserve">
-          <source>Simple Models</source>
-          <target state="new">Simple Models</target>
-        </trans-unit>
-        <trans-unit id="Summary" translate="yes" xml:space="preserve">
-          <source>Summary</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Muhtasari</target>
-        </trans-unit>
-        <trans-unit id="Summary_Chart" translate="yes" xml:space="preserve">
-          <source>Summary Chart</source>
-          <target state="new">Summary Chart</target>
-        </trans-unit>
-        <trans-unit id="Survival" translate="yes" xml:space="preserve">
-          <source>Survival</source>
-          <target state="new">Survival</target>
-        </trans-unit>
-        <trans-unit id="Tables" translate="yes" xml:space="preserve">
-          <source>Tables</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Majedwali</target>
-        </trans-unit>
-        <trans-unit id="Time_Series" translate="yes" xml:space="preserve">
-          <source>Time Series</source>
-          <target state="new">Time Series</target>
-        </trans-unit>
-        <trans-unit id="Windrose" translate="yes" xml:space="preserve">
-          <source>Windrose...</source>
-          <target state="new">Windrose...</target>
-        </trans-unit>
-        <trans-unit id="Expand" translate="yes" xml:space="preserve">
-          <source>Expand...</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Finyuza</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        <trans-unit id="Import_ASCII" translate="yes" xml:space="preserve">
+          <source>Import ASCII</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">导入 ASCII</target>
         </trans-unit>
         <trans-unit id="Indicator_Variables" translate="yes" xml:space="preserve">
           <source>Indicator Variables...</source>
-          <target state="new">Indicator Variables...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">指示符变量</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Interractions" translate="yes" xml:space="preserve">
           <source>Interractions...</source>
-          <target state="new">Interractions...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Interractions</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Language" translate="yes" xml:space="preserve">
+          <source>Language</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">语言</target>
+        </trans-unit>
+        <trans-unit id="Load_Graph" translate="yes" xml:space="preserve">
+          <source>Load Graph</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">负荷图</target>
+        </trans-unit>
+        <trans-unit id="Manipulate" translate="yes" xml:space="preserve">
+          <source>Manipulate</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">操作</target>
+        </trans-unit>
+        <trans-unit id="Non_Parametric" translate="yes" xml:space="preserve">
+          <source>Non-Parametric</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">非参数</target>
+        </trans-unit>
+        <trans-unit id="ODBC_Query" translate="yes" xml:space="preserve">
+          <source>ODBC Query</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">ODBC 查询</target>
+        </trans-unit>
+        <trans-unit id="Open" translate="yes" xml:space="preserve">
+          <source>Open</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">正在营业</target>
+        </trans-unit>
+        <trans-unit id="Options" translate="yes" xml:space="preserve">
+          <source>Options...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">选项。。。</target>
+        </trans-unit>
+        <trans-unit id="Output" translate="yes" xml:space="preserve">
+          <source>Output</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">输出</target>
+        </trans-unit>
+        <trans-unit id="Output_Spooling" translate="yes" xml:space="preserve">
+          <source>Output Spooling</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">后台打印输出</target>
+        </trans-unit>
+        <trans-unit id="Paste1" translate="yes" xml:space="preserve">
+          <source>Paste Ctrl+V</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Ctrl + V 粘贴</target>
+        </trans-unit>
+        <trans-unit id="Plot" translate="yes" xml:space="preserve">
+          <source>Plot</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">绘图</target>
         </trans-unit>
         <trans-unit id="Polynomials" translate="yes" xml:space="preserve">
           <source>Polynomials...</source>
-          <target state="new">Polynomials...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">多项式</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Probability_Distribution" translate="yes" xml:space="preserve">
+          <source>Probability Distribution...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">概率分布</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Probability_Plot" translate="yes" xml:space="preserve">
+          <source>Probability Plot</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">概率图</target>
+        </trans-unit>
+        <trans-unit id="Random_Samples" translate="yes" xml:space="preserve">
+          <source>Random Samples...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">随机样本</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Recall" translate="yes" xml:space="preserve">
+          <source>Recall</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">撤回</target>
         </trans-unit>
         <trans-unit id="Recode" translate="yes" xml:space="preserve">
           <source>Recode</source>
-          <target state="new">Recode</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">重新编码</target>
+        </trans-unit>
+        <trans-unit id="Regression" translate="yes" xml:space="preserve">
+          <source>Regression</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">回归测试</target>
+        </trans-unit>
+        <trans-unit id="Regular_Sequence" translate="yes" xml:space="preserve">
+          <source>Regular Sequence...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">定期序列</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Replace1" translate="yes" xml:space="preserve">
+          <source>Replace Ctrl+H</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">替换 Ctrl + H</target>
+        </trans-unit>
+        <trans-unit id="Reshape" translate="yes" xml:space="preserve">
+          <source>Reshape</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">修整多边形</target>
+        </trans-unit>
+        <trans-unit id="Resize_Worksheet" translate="yes" xml:space="preserve">
+          <source>Resize Worksheet</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">调整工作表的大小</target>
         </trans-unit>
         <trans-unit id="Row_Statistics" translate="yes" xml:space="preserve">
           <source>Row Statistics...</source>
-          <target state="new">Row Statistics...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Row_Statistics</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Run_Worksheet_Editor" translate="yes" xml:space="preserve">
+          <source>Run Worksheet Editor F7</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">运行工作表编辑器 F7</target>
+        </trans-unit>
+        <trans-unit id="Sample_Size" translate="yes" xml:space="preserve">
+          <source>Sample Size</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">大小示例</target>
+        </trans-unit>
+        <trans-unit id="ScatterPlot" translate="yes" xml:space="preserve">
+          <source>ScatterPlot...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">散点图...</target>
+        </trans-unit>
+        <trans-unit id="Selection" translate="yes" xml:space="preserve">
+          <source>Selection</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">选定内容</target>
+        </trans-unit>
+        <trans-unit id="Select_All1" translate="yes" xml:space="preserve">
+          <source>Select All ctrls+A </source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">选择所有的 ctrls + A</target>
         </trans-unit>
         <trans-unit id="Select_and_Stack" translate="yes" xml:space="preserve">
           <source>Select and Stack...</source>
-          <target state="new">Select and Stack...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">选择和堆栈</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Simple_Models" translate="yes" xml:space="preserve">
+          <source>Simple Models</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">简单的模型</target>
         </trans-unit>
         <trans-unit id="Sort" translate="yes" xml:space="preserve">
           <source>Sort</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">angua</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">SORT</target>
         </trans-unit>
         <trans-unit id="Stack" translate="yes" xml:space="preserve">
           <source>Stack...</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Mpororo</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">堆叠</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Summary" translate="yes" xml:space="preserve">
+          <source>Summary</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">摘要</target>
+        </trans-unit>
+        <trans-unit id="Summary_Chart" translate="yes" xml:space="preserve">
+          <source>Summary Chart</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">摘要图表</target>
+        </trans-unit>
+        <trans-unit id="Survival" translate="yes" xml:space="preserve">
+          <source>Survival</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">生存</target>
+        </trans-unit>
+        <trans-unit id="Tables" translate="yes" xml:space="preserve">
+          <source>Tables</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">表</target>
+        </trans-unit>
+        <trans-unit id="Time_Series" translate="yes" xml:space="preserve">
+          <source>Time Series</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">时序</target>
         </trans-unit>
         <trans-unit id="Transform" translate="yes" xml:space="preserve">
           <source>Transform...</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Geuhamisha...</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">转换</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Unstack" translate="yes" xml:space="preserve">
           <source>Unstack...</source>
-          <target state="new">Unstack...</target>
-        </trans-unit>
-        <trans-unit id="Clear1" translate="yes" xml:space="preserve">
-          <source>Clear Del</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ondoa uteuzi	Del</target>
-        </trans-unit>
-        <trans-unit id="Command_Logging" translate="yes" xml:space="preserve">
-          <source>Command Logging</source>
-          <target state="new">Command Logging</target>
-        </trans-unit>
-        <trans-unit id="Copy_Special1" translate="yes" xml:space="preserve">
-          <source>Copy Special Ctrl+Y</source>
-          <target state="new">Copy Special Ctrl+Y</target>
-        </trans-unit>
-        <trans-unit id="Flags" translate="yes" xml:space="preserve">
-          <source>Flags</source>
-          <target state="new">Flags</target>
-        </trans-unit>
-        <trans-unit id="Font" translate="yes" xml:space="preserve">
-          <source>Font Ctrl+T</source>
-          <target state="new">Font Ctrl+T</target>
-        </trans-unit>
-        <trans-unit id="Options" translate="yes" xml:space="preserve">
-          <source>Options...</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">chaguo</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">取消堆叠</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
-        <trans-unit id="Output_Spooling" translate="yes" xml:space="preserve">
-          <source>Output Spooling</source>
-          <target state="new">Output Spooling</target>
-        </trans-unit>
-        <trans-unit id="Paste1" translate="yes" xml:space="preserve">
-          <source>Paste Ctrl+V</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Bandika	Ctrl+V</target>
-        </trans-unit>
-        <trans-unit id="Recall" translate="yes" xml:space="preserve">
-          <source>Recall</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Itisha</target>
-        </trans-unit>
-        <trans-unit id="Replace1" translate="yes" xml:space="preserve">
-          <source>Replace Ctrl+H</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Badilisha...	Ctrl+H</target>
-        </trans-unit>
-        <trans-unit id="Run_Worksheet_Editor" translate="yes" xml:space="preserve">
-          <source>Run Worksheet Editor F7</source>
-          <target state="new">Run Worksheet Editor F7</target>
-        </trans-unit>
-        <trans-unit id="Select_All1" translate="yes" xml:space="preserve">
-          <source>Select All ctrls+A </source>
-          <target state="new">Select All ctrls+A </target>
         </trans-unit>
         <trans-unit id="View_Edit_Macro" translate="yes" xml:space="preserve">
           <source>View/Edit Macro</source>
-          <target state="new">View/Edit Macro</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">查看/编辑宏</target>
         </trans-unit>
         <trans-unit id="View_Edit_Text" translate="yes" xml:space="preserve">
           <source>View/Edit Text</source>
-          <target state="new">View/Edit Text</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">查看/编辑文本</target>
+        </trans-unit>
+        <trans-unit id="Windrose" translate="yes" xml:space="preserve">
+          <source>Windrose...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Windrose</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Data_View" translate="yes" xml:space="preserve">
           <source>Data View</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Mwoneko Data...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">数据视图</target>
         </trans-unit>
         <trans-unit id="Output_Window" translate="yes" xml:space="preserve">
           <source>Output Window</source>
-          <target state="new">Output Window</target>
-        </trans-unit>
-        <trans-unit id="Dry_Spell" translate="yes" xml:space="preserve">
-          <source>Dry Spell</source>
-          <target state="new">Dry Spell</target>
-        </trans-unit>
-        <trans-unit id="Earliest_day" translate="yes" xml:space="preserve">
-          <source>Earliest day</source>
-          <target state="new">Earliest day</target>
-        </trans-unit>
-        <trans-unit id="Length_of_Dry_Spell" translate="yes" xml:space="preserve">
-          <source>Length of Dry Spell</source>
-          <target state="new">Length of Dry Spell</target>
-        </trans-unit>
-        <trans-unit id="Not_Yet_Implemented" translate="yes" xml:space="preserve">
-          <source>Not Yet Implemented</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Haijatekelezwa</target>
-        </trans-unit>
-        <trans-unit id="Number_of_Rain_Days" translate="yes" xml:space="preserve">
-          <source>Number of Rain Days</source>
-          <target state="new">Number of Rain Days</target>
-        </trans-unit>
-        <trans-unit id="Threashold" translate="yes" xml:space="preserve">
-          <source>Threashold</source>
-          <target state="new">Threashold</target>
-        </trans-unit>
-        <trans-unit id="Total_Rain" translate="yes" xml:space="preserve">
-          <source>Total Rain</source>
-          <target state="new">Total Rain</target>
-        </trans-unit>
-        <trans-unit id="Within" translate="yes" xml:space="preserve">
-          <source>Within</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ndani ya:</target>
-        </trans-unit>
-        <trans-unit id="Extremes" translate="yes" xml:space="preserve">
-          <source>Extremes</source>
-          <target state="new">Extremes</target>
-        </trans-unit>
-        <trans-unit id="Spells" translate="yes" xml:space="preserve">
-          <source>Spells</source>
-          <target state="new">Spells</target>
-        </trans-unit>
-        <trans-unit id="Start_of_the_Rains" translate="yes" xml:space="preserve">
-          <source>Start of the Rains...</source>
-          <target state="new">Start of the Rains...</target>
-        </trans-unit>
-        <trans-unit id="Water_Balance" translate="yes" xml:space="preserve">
-          <source>Water Balance</source>
-          <target state="new">Water Balance</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">输出窗口</target>
         </trans-unit>
         <trans-unit id="Column_Name" translate="yes" xml:space="preserve">
           <source>Column Name</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Jina la Safuwima</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">列名</target>
         </trans-unit>
         <trans-unit id="Days" translate="yes" xml:space="preserve">
           <source>Days</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Siku</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">天</target>
         </trans-unit>
-        <trans-unit id="Start_of_Rain" translate="yes" xml:space="preserve">
-          <source>Start of Rain...</source>
-          <target state="new">Start of Rain...</target>
+        <trans-unit id="Dry_Spell" translate="yes" xml:space="preserve">
+          <source>Dry Spell</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">干旱</target>
         </trans-unit>
         <trans-unit id="Dry_Spell1" translate="yes" xml:space="preserve">
           <source>Dry Spell</source>
-          <target state="new">Dry Spell</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">干旱</target>
+        </trans-unit>
+        <trans-unit id="Earliest_day" translate="yes" xml:space="preserve">
+          <source>Earliest day</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">早一天</target>
+        </trans-unit>
+        <trans-unit id="Extremes" translate="yes" xml:space="preserve">
+          <source>Extremes</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">极端</target>
+        </trans-unit>
+        <trans-unit id="Length_of_Dry_Spell" translate="yes" xml:space="preserve">
+          <source>Length of Dry Spell</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">干旱期的长度</target>
+        </trans-unit>
+        <trans-unit id="Not_Yet_Implemented" translate="yes" xml:space="preserve">
+          <source>Not Yet Implemented</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">尚未实施</target>
+        </trans-unit>
+        <trans-unit id="Number_of_Rain_Days" translate="yes" xml:space="preserve">
+          <source>Number of Rain Days</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">雨日数</target>
+        </trans-unit>
+        <trans-unit id="Spells" translate="yes" xml:space="preserve">
+          <source>Spells</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">法术</target>
+        </trans-unit>
+        <trans-unit id="Start_of_Rain" translate="yes" xml:space="preserve">
+          <source>Start of Rain...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">雨的开始</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Start_of_the_Rains" translate="yes" xml:space="preserve">
+          <source>Start of the Rains...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">把降雨的开始</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Threashold" translate="yes" xml:space="preserve">
+          <source>Threashold</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">阈值</target>
+        </trans-unit>
+        <trans-unit id="Total_Rain" translate="yes" xml:space="preserve">
+          <source>Total Rain</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">总的雨</target>
+        </trans-unit>
+        <trans-unit id="Water_Balance" translate="yes" xml:space="preserve">
+          <source>Water Balance</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">水平衡</target>
+        </trans-unit>
+        <trans-unit id="Within" translate="yes" xml:space="preserve">
+          <source>Within</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">在两者之间</target>
         </trans-unit>
         <trans-unit id="To_Script" translate="yes" xml:space="preserve">
           <source>To Script</source>
-          <target state="new">To Script</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">向脚本</target>
         </trans-unit>
         <trans-unit id="Current_Window" translate="yes" xml:space="preserve">
           <source>Current Window       Ctrl+W</source>
-          <target state="new">Current Window       Ctrl+W</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">当前窗口 Ctrl + W</target>
         </trans-unit>
         <trans-unit id="Chinese" translate="yes" xml:space="preserve">
           <source>Chinese</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kichina</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">中文</target>
         </trans-unit>
         <trans-unit id="German" translate="yes" xml:space="preserve">
           <source>German</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ujerumani</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">德语</target>
         </trans-unit>
         <trans-unit id="Kiswahili" translate="yes" xml:space="preserve">
           <source>Kiswahili</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kiswahili</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">斯瓦希里语</target>
         </trans-unit>
         <trans-unit id="Hindi" translate="yes" xml:space="preserve">
           <source>Hindi</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kihindi</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">印地语</target>
         </trans-unit>
         <trans-unit id="Counts_Totals" translate="yes" xml:space="preserve">
           <source>Counts Totals</source>
-          <target state="new">Counts Totals</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">计数汇总</target>
         </trans-unit>
         <trans-unit id="Interpolate_Daily" translate="yes" xml:space="preserve">
           <source>Interpolate Daily...</source>
-          <target state="new">Interpolate Daily...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">内插每日......</target>
         </trans-unit>
         <trans-unit id="Model_Amounts" translate="yes" xml:space="preserve">
           <source>Model Amounts...</source>
-          <target state="new">Model Amounts...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">模型量......</target>
         </trans-unit>
         <trans-unit id="Model_Probabilities" translate="yes" xml:space="preserve">
           <source>Model Probabilities...</source>
-          <target state="new">Model Probabilities...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">概率模型...</target>
         </trans-unit>
         <trans-unit id="Prepare" translate="yes" xml:space="preserve">
           <source>Prepare...</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Tayarisha</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">准备......</target>
         </trans-unit>
         <trans-unit id="Simulations" translate="yes" xml:space="preserve">
           <source>Simulations</source>
-          <target state="new">Simulations</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">模拟</target>
         </trans-unit>
         <trans-unit id="Spell_Length" translate="yes" xml:space="preserve">
           <source>Spell Length...</source>
-          <target state="new">Spell Length...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">法术长度...</target>
         </trans-unit>
         <trans-unit id="Totals" translate="yes" xml:space="preserve">
           <source>Totals...</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Jumla</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">总计...</target>
         </trans-unit>
         <trans-unit id="Exit" translate="yes" xml:space="preserve">
           <source>Exit</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Toka:</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">退出</target>
         </trans-unit>
         <trans-unit id="Format" translate="yes" xml:space="preserve">
           <source>Format... CTRL+D</source>
-          <target state="new">Format... CTRL+D</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">格式...按 CTRL + D</target>
         </trans-unit>
         <trans-unit id="Alignment" translate="yes" xml:space="preserve">
           <source>Alignment...</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Mpangilio:</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">对齐方式......</target>
         </trans-unit>
         <trans-unit id="Factor" translate="yes" xml:space="preserve">
           <source>Factor...</source>
-          <target state="new">Factor...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">因素......</target>
         </trans-unit>
         <trans-unit id="Lock_Unlock" translate="yes" xml:space="preserve">
           <source>Lock/Unlock</source>
-          <target state="new">Lock/Unlock</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">锁定/解锁</target>
         </trans-unit>
         <trans-unit id="Name" translate="yes" xml:space="preserve">
           <source>Name...</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Jina:</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">名称...</target>
         </trans-unit>
         <trans-unit id="Select" translate="yes" xml:space="preserve">
           <source>Select...</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Teua</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">选择(E)...</target>
         </trans-unit>
         <trans-unit id="Frequency_Chart" translate="yes" xml:space="preserve">
           <source>Freequency Chart...</source>
-          <target state="new">Freequency Chart...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Freequency 图表...</target>
         </trans-unit>
         <trans-unit id="Add_Macro_to_Menu" translate="yes" xml:space="preserve">
           <source>Add Macro to to Menu...</source>
-          <target state="new">Add Macro to to Menu...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">将宏添加到菜单...</target>
         </trans-unit>
         <trans-unit id="Current_Line" translate="yes" xml:space="preserve">
           <source>Current Line Ctrl+L</source>
-          <target state="new">Current Line Ctrl+L</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">当前行 Ctrl + L</target>
         </trans-unit>
         <trans-unit id="Display_Daily" translate="yes" xml:space="preserve">
           <source>Display_Daily...</source>
-          <target state="new">Display_Daily...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Display_Daily...</target>
         </trans-unit>
         <trans-unit id="Events" translate="yes" xml:space="preserve">
           <source>Events...</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Matukio</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">事件......</target>
         </trans-unit>
         <trans-unit id="Interrupt_Macro" translate="yes" xml:space="preserve">
           <source>Interrupt Macro F12</source>
-          <target state="new">Interrupt Macro F12</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">打断宏 F12</target>
         </trans-unit>
         <trans-unit id="Modify_Macro_in_Menu" translate="yes" xml:space="preserve">
           <source>Modify Macro in Menu...</source>
-          <target state="new">Modify Macro in Menu...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">修改菜单中的宏...</target>
         </trans-unit>
         <trans-unit id="Remove_Macro_from_Menu" translate="yes" xml:space="preserve">
           <source>Remove Macro from Menu...</source>
-          <target state="new">Remove Macro from Menu...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">从菜单中删除宏......</target>
         </trans-unit>
         <trans-unit id="Run_Macro" translate="yes" xml:space="preserve">
           <source>Run Macro</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Endesha Makro...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">运行宏</target>
         </trans-unit>
         <trans-unit id="Worksheet_Information" translate="yes" xml:space="preserve">
           <source>Worksheet Information</source>
-          <target state="new">Worksheet Information</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">工作表信息</target>
         </trans-unit>
         <trans-unit id="Crop" translate="yes" xml:space="preserve">
           <source>Crop</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Puna</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">裁剪</target>
         </trans-unit>
         <trans-unit id="Evaporation" translate="yes" xml:space="preserve">
           <source>Evaporation</source>
-          <target state="new">Evaporation</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">蒸发</target>
         </trans-unit>
         <trans-unit id="Heat_Sum" translate="yes" xml:space="preserve">
           <source>Heat Sum...</source>
-          <target state="new">Heat Sum...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">积热......</target>
         </trans-unit>
         <trans-unit id="Log_Window" translate="yes" xml:space="preserve">
           <source>Log Window</source>
-          <target state="new">Log Window</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">日志窗口</target>
         </trans-unit>
         <trans-unit id="Markov_Modelling" translate="yes" xml:space="preserve">
           <source>Markov Modelling</source>
-          <target state="new">Markov Modelling</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">马尔科夫模型</target>
         </trans-unit>
         <trans-unit id="Process" translate="yes" xml:space="preserve">
           <source>Process</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Mchakato</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">process</target>
         </trans-unit>
         <trans-unit id="Examine" translate="yes" xml:space="preserve">
           <source>Examine</source>
-          <target state="new">Examine</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">检查</target>
         </trans-unit>
       </group>
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/FRMMAIN.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/FRMSCRIPT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/FRMSCRIPT.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="zh-CN" original="INSTAT/FRMMAIN.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
@@ -1029,94 +1127,8 @@
         <trans-unit id="$this.TrayHeight" translate="yes" extype="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata" xml:space="preserve">
           <source>25</source>
           <target state="needs-review-translation">25</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
       </group>
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGSTARTOFRAINS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/DLGSTARTOFRAINS.RESX" datatype="resx" />
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGREGULARSEQUENCE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/DLGREGULARSEQUENCE.RESX" datatype="resx">
-        <trans-unit id="errorProvider.TrayLocation" translate="yes" extype="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" extradata="metadata" xml:space="preserve">
-          <source>17, 17</source>
-          <target state="needs-review-translation">17, 17</target>
-        </trans-unit>
-      </group>
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGCALCULATOR.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/DLGCALCULATOR.RESX" datatype="resx" />
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGBOXPLOT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/DLGBOXPLOT.RESX" datatype="resx" />
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGENDOFRAINS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/DLGENDOFRAINS.RESX" datatype="resx" />
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/UCRBUTTONSSUBDIALOGUE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/UCRBUTTONSSUBDIALOGUE.RESX" datatype="resx" />
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/UCRSELECTOR.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/UCRSELECTOR.RESX" datatype="resx" />
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/UCRRECEIVER.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/UCRRECEIVER.RESX" datatype="resx" />
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/UCRRECEIVERMULTIPLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/UCRRECEIVERMULTIPLE.RESX" datatype="resx" />
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/UCRRECEIVERSINGLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/UCRRECEIVERSINGLE.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>

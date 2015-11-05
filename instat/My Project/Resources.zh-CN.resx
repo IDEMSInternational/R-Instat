@@ -28,513 +28,513 @@
     <value>..\Resources\Alecive-Flatwoken-Apps-Run.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>Ajouter</value>
+    <value>添加</value>
   </data>
   <data name="Available_Variables" xml:space="preserve">
-    <value>Variables disponibles</value>
+    <value>可用变量</value>
   </data>
   <data name="Box_Plot" xml:space="preserve">
-    <value>Diagramme à surfaces</value>
+    <value>盒须图</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Annuler</value>
+    <value>取消</value>
   </data>
   <data name="Choose_Statistics" xml:space="preserve">
-    <value>Sélectionnez statistiques</value>
+    <value>选择统计</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>Effacer</value>
+    <value>清除</value>
   </data>
   <data name="Climatic" xml:space="preserve">
-    <value>Climatiques</value>
+    <value>气候</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Fermer</value>
+    <value>关闭</value>
   </data>
   <data name="Close_Worksheet" xml:space="preserve">
-    <value>Fermer la feuille de calcul</value>
+    <value>关闭工作表</value>
   </data>
   <data name="Command_and_Output_Window" xml:space="preserve">
-    <value>Commande et fenêtre sortie</value>
+    <value>命令和输出窗口</value>
   </data>
   <data name="Copy" xml:space="preserve">
-    <value>Copier</value>
+    <value>复制</value>
   </data>
   <data name="Copy_Special" xml:space="preserve">
-    <value>Copier spécial</value>
+    <value>复制特别</value>
   </data>
   <data name="Cumulative_Frequency" xml:space="preserve">
-    <value>Fréquence cumulée</value>
+    <value>累积频率</value>
   </data>
   <data name="Cut" xml:space="preserve">
-    <value>Couper</value>
+    <value>剪切</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Modif</value>
+    <value>编辑</value>
   </data>
   <data name="Factor_Variable" xml:space="preserve">
-    <value>Facteur Variable</value>
+    <value>因子变量</value>
   </data>
   <data name="File" xml:space="preserve">
-    <value>Fichier </value>
+    <value>文件</value>
   </data>
   <data name="Find" xml:space="preserve">
-    <value>Rechercher</value>
+    <value>查找</value>
   </data>
   <data name="Graphics" xml:space="preserve">
-    <value>Graphiques</value>
+    <value>图形</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>Aide</value>
+    <value>帮助</value>
   </data>
   <data name="Import_Export" xml:space="preserve">
-    <value>Importer/Exporter</value>
+    <value>导入/导出</value>
   </data>
   <data name="Manage" xml:space="preserve">
-    <value>Gérer</value>
+    <value>管理</value>
   </data>
   <data name="New_Worksheet" xml:space="preserve">
-    <value>Nouvelle feuille de calcul... CTRL + N</value>
+    <value>新工作表...CTRL + N</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>Bien</value>
+    <value>确定</value>
   </data>
   <data name="Open_From_Library" xml:space="preserve">
-    <value>Ouvert de la bibliothèque</value>
+    <value>从图书馆开放</value>
   </data>
   <data name="Open_Worksheet" xml:space="preserve">
-    <value>Feuille de calcul ouverte</value>
+    <value>打开的工作表</value>
   </data>
   <data name="Paste" xml:space="preserve">
-    <value>Coller</value>
+    <value>粘贴</value>
   </data>
   <data name="Print" xml:space="preserve">
-    <value>Impression</value>
+    <value>PRINT</value>
   </data>
   <data name="Print_Preview" xml:space="preserve">
-    <value>Aperçu avant impression</value>
+    <value>打印预览</value>
   </data>
   <data name="Remove" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>删除</value>
   </data>
   <data name="Replace" xml:space="preserve">
-    <value>Remplacer</value>
+    <value>替换</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>réinitialiser</value>
+    <value>重置</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Enregistrer</value>
+    <value>保存</value>
   </data>
   <data name="Save_As" xml:space="preserve">
-    <value>Enregistrer sous</value>
+    <value>另存为</value>
   </data>
   <data name="Script" xml:space="preserve">
-    <value>Scénario</value>
+    <value>上下标</value>
   </data>
   <data name="Script_Window" xml:space="preserve">
-    <value>Fenêtre script</value>
+    <value>脚本窗口</value>
   </data>
   <data name="Selected_Variables" xml:space="preserve">
-    <value>Variables sélectionnées</value>
+    <value>所选变量</value>
   </data>
   <data name="Select_All" xml:space="preserve">
-    <value>Sélectionner tout</value>
+    <value>全选</value>
   </data>
   <data name="Statistics" xml:space="preserve">
-    <value>Statistiques</value>
+    <value>統計資料</value>
   </data>
   <data name="Stem_And_Leaf" xml:space="preserve">
-    <value>Tige et feuilles</value>
+    <value>茎和叶</value>
   </data>
   <data name="Submit" xml:space="preserve">
-    <value>Envoyer</value>
+    <value>提交</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Rétablir</value>
+    <value>撤消</value>
   </data>
   <data name="Window" xml:space="preserve">
-    <value>Fenêtre</value>
-  </data>
-  <data name="Export_as" xml:space="preserve">
-    <value>Export_as</value>
-  </data>
-  <data name="Import_ASCII" xml:space="preserve">
-    <value>Import ASCII</value>
-  </data>
-  <data name="Language" xml:space="preserve">
-    <value>Langue</value>
-  </data>
-  <data name="ODBC_Query" xml:space="preserve">
-    <value>Requête ODBC</value>
-  </data>
-  <data name="Open" xml:space="preserve">
-    <value>Ouvrir</value>
-  </data>
-  <data name="Output" xml:space="preserve">
-    <value>Sortie</value>
-  </data>
-  <data name="Selection" xml:space="preserve">
-    <value>Sélection</value>
+    <value>窗口</value>
   </data>
   <data name="Analysis_of_Variance" xml:space="preserve">
-    <value>Analyse de la Variance</value>
+    <value>方差分析</value>
   </data>
   <data name="Boxplot" xml:space="preserve">
-    <value>Surfaces</value>
+    <value>箱线图</value>
   </data>
   <data name="Calculations" xml:space="preserve">
-    <value>Calculs</value>
+    <value>计算</value>
   </data>
   <data name="Check_Duplicates" xml:space="preserve">
-    <value>Vérifier les doublons</value>
+    <value>检查重复项</value>
   </data>
   <data name="Circular_Statisctics" xml:space="preserve">
     <value>CircularStatisctics</value>
+  </data>
+  <data name="Clear1" xml:space="preserve">
+    <value>明确德尔</value>
   </data>
   <data name="Clear_Remove" xml:space="preserve">
     <value>Clear(Remove)</value>
   </data>
   <data name="Column_Properties" xml:space="preserve">
-    <value>Propriétés de colonne</value>
+    <value>列属性</value>
   </data>
   <data name="Column_Statistics" xml:space="preserve">
-    <value>Statistiques de colonnes</value>
+    <value>列统计信息</value>
+  </data>
+  <data name="Command_Logging" xml:space="preserve">
+    <value>命令日志记录</value>
+  </data>
+  <data name="Copy_Special1" xml:space="preserve">
+    <value>复制特殊 Ctrl + Y</value>
   </data>
   <data name="Data" xml:space="preserve">
     <value>Data</value>
   </data>
   <data name="Describe" xml:space="preserve">
-    <value>Décrire</value>
+    <value>描述</value>
   </data>
   <data name="Display" xml:space="preserve">
-    <value>Affichage</value>
+    <value>显示器</value>
   </data>
   <data name="Diversity" xml:space="preserve">
-    <value>Diversité</value>
+    <value>多样性</value>
   </data>
   <data name="Dotplot" xml:space="preserve">
     <value>Dotplot</value>
   </data>
   <data name="Duplicate_copy_columns" xml:space="preserve">
-    <value>Duplicata (copie de colonnes)</value>
+    <value>复制 (复制列)</value>
   </data>
   <data name="English" xml:space="preserve">
-    <value>Anglais</value>
+    <value>英语</value>
   </data>
   <data name="Enter" xml:space="preserve">
-    <value>Entrée</value>
-  </data>
-  <data name="French" xml:space="preserve">
-    <value>Français</value>
-  </data>
-  <data name="Group" xml:space="preserve">
-    <value>Groupe</value>
-  </data>
-  <data name="Histogram" xml:space="preserve">
-    <value>Histogramme</value>
-  </data>
-  <data name="Load_Graph" xml:space="preserve">
-    <value>Graphique de charge</value>
-  </data>
-  <data name="Manipulate" xml:space="preserve">
-    <value>Manipuler les</value>
-  </data>
-  <data name="Non_Parametric" xml:space="preserve">
-    <value>Non paramétrique</value>
-  </data>
-  <data name="Plot" xml:space="preserve">
-    <value>Tracer</value>
-  </data>
-  <data name="Probability_Distribution" xml:space="preserve">
-    <value>Distribution de probabilité</value>
-  </data>
-  <data name="Probability_Plot" xml:space="preserve">
-    <value>Graphique de probabilité</value>
-  </data>
-  <data name="Random_Samples" xml:space="preserve">
-    <value>Échantillons aléatoires</value>
-  </data>
-  <data name="Regression" xml:space="preserve">
-    <value>Régression</value>
-  </data>
-  <data name="Regular_Sequence" xml:space="preserve">
-    <value>Séquence régulière</value>
-  </data>
-  <data name="Reshape" xml:space="preserve">
-    <value>Remodeler</value>
-  </data>
-  <data name="Resize_Worksheet" xml:space="preserve">
-    <value>Redimensionner la feuille de calcul</value>
-  </data>
-  <data name="Sample_Size" xml:space="preserve">
-    <value>Taille d'échantillon</value>
-  </data>
-  <data name="ScatterPlot" xml:space="preserve">
-    <value>Nuage de points...</value>
-  </data>
-  <data name="Simple_Models" xml:space="preserve">
-    <value>Modèles simples</value>
-  </data>
-  <data name="Summary" xml:space="preserve">
-    <value>Résumé</value>
-  </data>
-  <data name="Summary_Chart" xml:space="preserve">
-    <value>Tableau récapitulatif</value>
-  </data>
-  <data name="Survival" xml:space="preserve">
-    <value>Survie</value>
-  </data>
-  <data name="Tables" xml:space="preserve">
-    <value>Tables</value>
-  </data>
-  <data name="Time_Series" xml:space="preserve">
-    <value>Série chronologique</value>
-  </data>
-  <data name="Windrose" xml:space="preserve">
-    <value>Rose des vents</value>
+    <value>Enter</value>
   </data>
   <data name="Expand" xml:space="preserve">
-    <value>Développer</value>
+    <value>展开</value>
+  </data>
+  <data name="Export_as" xml:space="preserve">
+    <value>Export_as</value>
+  </data>
+  <data name="Flags" xml:space="preserve">
+    <value>标志</value>
+  </data>
+  <data name="Font" xml:space="preserve">
+    <value>字体 Ctrl + T</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>法语</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>组</value>
+  </data>
+  <data name="Histogram" xml:space="preserve">
+    <value>直方图</value>
+  </data>
+  <data name="Import_ASCII" xml:space="preserve">
+    <value>导入 ASCII</value>
   </data>
   <data name="Indicator_Variables" xml:space="preserve">
-    <value>Variables indicatrices</value>
+    <value>指示符变量</value>
   </data>
   <data name="Interractions" xml:space="preserve">
     <value>Interractions</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Load_Graph" xml:space="preserve">
+    <value>负荷图</value>
+  </data>
+  <data name="Manipulate" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Non_Parametric" xml:space="preserve">
+    <value>非参数</value>
+  </data>
+  <data name="ODBC_Query" xml:space="preserve">
+    <value>ODBC 查询</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>正在营业</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>选项。。。</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>输出</value>
+  </data>
+  <data name="Output_Spooling" xml:space="preserve">
+    <value>后台打印输出</value>
+  </data>
+  <data name="Paste1" xml:space="preserve">
+    <value>Ctrl + V 粘贴</value>
+  </data>
+  <data name="Plot" xml:space="preserve">
+    <value>绘图</value>
+  </data>
   <data name="Polynomials" xml:space="preserve">
-    <value>Polynômes</value>
+    <value>多项式</value>
+  </data>
+  <data name="Probability_Distribution" xml:space="preserve">
+    <value>概率分布</value>
+  </data>
+  <data name="Probability_Plot" xml:space="preserve">
+    <value>概率图</value>
+  </data>
+  <data name="Random_Samples" xml:space="preserve">
+    <value>随机样本</value>
+  </data>
+  <data name="Recall" xml:space="preserve">
+    <value>撤回</value>
   </data>
   <data name="Recode" xml:space="preserve">
-    <value>Recode</value>
+    <value>重新编码</value>
+  </data>
+  <data name="Regression" xml:space="preserve">
+    <value>回归测试</value>
+  </data>
+  <data name="Regular_Sequence" xml:space="preserve">
+    <value>定期序列</value>
+  </data>
+  <data name="Replace1" xml:space="preserve">
+    <value>替换 Ctrl + H</value>
+  </data>
+  <data name="Reshape" xml:space="preserve">
+    <value>修整多边形</value>
+  </data>
+  <data name="Resize_Worksheet" xml:space="preserve">
+    <value>调整工作表的大小</value>
   </data>
   <data name="Row_Statistics" xml:space="preserve">
     <value>Row_Statistics</value>
   </data>
-  <data name="Select_and_Stack" xml:space="preserve">
-    <value>Sélectionnez et pile</value>
-  </data>
-  <data name="Sort" xml:space="preserve">
-    <value>Tri</value>
-  </data>
-  <data name="Stack" xml:space="preserve">
-    <value>Pile</value>
-  </data>
-  <data name="Transform" xml:space="preserve">
-    <value>Transformer</value>
-  </data>
-  <data name="Unstack" xml:space="preserve">
-    <value>Désempilement</value>
-  </data>
-  <data name="Clear1" xml:space="preserve">
-    <value>Claire Del</value>
-  </data>
-  <data name="Command_Logging" xml:space="preserve">
-    <value>Journalisation des commandes</value>
-  </data>
-  <data name="Copy_Special1" xml:space="preserve">
-    <value>Copie spéciale Ctrl + Y</value>
-  </data>
-  <data name="Flags" xml:space="preserve">
-    <value>Indicateurs</value>
-  </data>
-  <data name="Font" xml:space="preserve">
-    <value>Police Ctrl + T</value>
-  </data>
-  <data name="Options" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="Output_Spooling" xml:space="preserve">
-    <value>File d'attente de sortie</value>
-  </data>
-  <data name="Paste1" xml:space="preserve">
-    <value>Coller Ctrl + V</value>
-  </data>
-  <data name="Recall" xml:space="preserve">
-    <value>Rappeler</value>
-  </data>
-  <data name="Replace1" xml:space="preserve">
-    <value>Remplacer Ctrl + H</value>
-  </data>
   <data name="Run_Worksheet_Editor" xml:space="preserve">
-    <value>Exécutez l'éditeur de feuille de calcul F7</value>
+    <value>运行工作表编辑器 F7</value>
+  </data>
+  <data name="Sample_Size" xml:space="preserve">
+    <value>大小示例</value>
+  </data>
+  <data name="ScatterPlot" xml:space="preserve">
+    <value>散点图...</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>选定内容</value>
   </data>
   <data name="Select_All1" xml:space="preserve">
-    <value>Sélectionnez toutes les baguettes + A </value>
+    <value>选择所有的 ctrls + A</value>
+  </data>
+  <data name="Select_and_Stack" xml:space="preserve">
+    <value>选择和堆栈</value>
+  </data>
+  <data name="Simple_Models" xml:space="preserve">
+    <value>简单的模型</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>SORT</value>
+  </data>
+  <data name="Stack" xml:space="preserve">
+    <value>堆叠</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>摘要</value>
+  </data>
+  <data name="Summary_Chart" xml:space="preserve">
+    <value>摘要图表</value>
+  </data>
+  <data name="Survival" xml:space="preserve">
+    <value>生存</value>
+  </data>
+  <data name="Tables" xml:space="preserve">
+    <value>表</value>
+  </data>
+  <data name="Time_Series" xml:space="preserve">
+    <value>时序</value>
+  </data>
+  <data name="Transform" xml:space="preserve">
+    <value>转换</value>
+  </data>
+  <data name="Unstack" xml:space="preserve">
+    <value>取消堆叠</value>
   </data>
   <data name="View_Edit_Macro" xml:space="preserve">
-    <value>Afficher/modifier Macro</value>
+    <value>查看/编辑宏</value>
   </data>
   <data name="View_Edit_Text" xml:space="preserve">
-    <value>Afficher/modifier texte</value>
+    <value>查看/编辑文本</value>
+  </data>
+  <data name="Windrose" xml:space="preserve">
+    <value>Windrose</value>
   </data>
   <data name="Data_View" xml:space="preserve">
-    <value>Affichage des données</value>
+    <value>数据视图</value>
   </data>
   <data name="Output_Window" xml:space="preserve">
-    <value>Fenêtre Sortie</value>
-  </data>
-  <data name="Dry_Spell" xml:space="preserve">
-    <value>Période de sécheresse</value>
-  </data>
-  <data name="Earliest_day" xml:space="preserve">
-    <value>Premier jour</value>
-  </data>
-  <data name="Length_of_Dry_Spell" xml:space="preserve">
-    <value>Longueur de la période de sécheresse</value>
-  </data>
-  <data name="Not_Yet_Implemented" xml:space="preserve">
-    <value>Pas encore mis en œuvre</value>
-  </data>
-  <data name="Number_of_Rain_Days" xml:space="preserve">
-    <value>Nombre de jours de pluie</value>
-  </data>
-  <data name="Threashold" xml:space="preserve">
-    <value>Threashold</value>
-  </data>
-  <data name="Total_Rain" xml:space="preserve">
-    <value>Pluie totale</value>
-  </data>
-  <data name="Within" xml:space="preserve">
-    <value>Au sein de</value>
-  </data>
-  <data name="Extremes" xml:space="preserve">
-    <value>Extrêmes</value>
-  </data>
-  <data name="Spells" xml:space="preserve">
-    <value>Sorts</value>
-  </data>
-  <data name="Start_of_the_Rains" xml:space="preserve">
-    <value>Début de la saison des pluies</value>
-  </data>
-  <data name="Water_Balance" xml:space="preserve">
-    <value>Bilan hydrique</value>
+    <value>输出窗口</value>
   </data>
   <data name="Column_Name" xml:space="preserve">
-    <value>Nom de la colonne</value>
+    <value>列名</value>
   </data>
   <data name="Days" xml:space="preserve">
-    <value>jours</value>
+    <value>天</value>
   </data>
-  <data name="Start_of_Rain" xml:space="preserve">
-    <value>Début de pluie</value>
+  <data name="Dry_Spell" xml:space="preserve">
+    <value>干旱</value>
   </data>
   <data name="Dry_Spell1" xml:space="preserve">
-    <value>Période de sécheresse</value>
+    <value>干旱</value>
+  </data>
+  <data name="Earliest_day" xml:space="preserve">
+    <value>早一天</value>
+  </data>
+  <data name="Extremes" xml:space="preserve">
+    <value>极端</value>
+  </data>
+  <data name="Length_of_Dry_Spell" xml:space="preserve">
+    <value>干旱期的长度</value>
+  </data>
+  <data name="Not_Yet_Implemented" xml:space="preserve">
+    <value>尚未实施</value>
+  </data>
+  <data name="Number_of_Rain_Days" xml:space="preserve">
+    <value>雨日数</value>
+  </data>
+  <data name="Spells" xml:space="preserve">
+    <value>法术</value>
+  </data>
+  <data name="Start_of_Rain" xml:space="preserve">
+    <value>雨的开始</value>
+  </data>
+  <data name="Start_of_the_Rains" xml:space="preserve">
+    <value>把降雨的开始</value>
+  </data>
+  <data name="Threashold" xml:space="preserve">
+    <value>阈值</value>
+  </data>
+  <data name="Total_Rain" xml:space="preserve">
+    <value>总的雨</value>
+  </data>
+  <data name="Water_Balance" xml:space="preserve">
+    <value>水平衡</value>
+  </data>
+  <data name="Within" xml:space="preserve">
+    <value>在两者之间</value>
   </data>
   <data name="To_Script" xml:space="preserve">
-    <value>Au Script</value>
+    <value>向脚本</value>
   </data>
   <data name="Current_Window" xml:space="preserve">
-    <value>Cours fenêtre Ctrl + W</value>
+    <value>当前窗口 Ctrl + W</value>
   </data>
   <data name="Chinese" xml:space="preserve">
-    <value>Chinois</value>
+    <value>中文</value>
   </data>
   <data name="German" xml:space="preserve">
-    <value>Allemand</value>
+    <value>德语</value>
   </data>
   <data name="Kiswahili" xml:space="preserve">
-    <value>Swahili</value>
+    <value>斯瓦希里语</value>
   </data>
   <data name="Hindi" xml:space="preserve">
-    <value>Hindi</value>
+    <value>印地语</value>
   </data>
   <data name="Counts_Totals" xml:space="preserve">
-    <value>Dénombrements totaux</value>
+    <value>计数汇总</value>
   </data>
   <data name="Interpolate_Daily" xml:space="preserve">
-    <value>Interpoler tous les jours...</value>
+    <value>内插每日......</value>
   </data>
   <data name="Model_Amounts" xml:space="preserve">
-    <value>Montants de modèle...</value>
+    <value>模型量......</value>
   </data>
   <data name="Model_Probabilities" xml:space="preserve">
-    <value>Probabilités de modèle...</value>
+    <value>概率模型...</value>
   </data>
   <data name="Prepare" xml:space="preserve">
-    <value>Se préparer...</value>
+    <value>准备......</value>
   </data>
   <data name="Simulations" xml:space="preserve">
-    <value>Simulations</value>
+    <value>模拟</value>
   </data>
   <data name="Spell_Length" xml:space="preserve">
-    <value>Longueur de sort...</value>
+    <value>法术长度...</value>
   </data>
   <data name="Totals" xml:space="preserve">
-    <value>Totaux...</value>
+    <value>总计...</value>
   </data>
   <data name="Exit" xml:space="preserve">
-    <value>Quitter</value>
+    <value>退出</value>
   </data>
   <data name="Format" xml:space="preserve">
-    <value>Format de... CTRL + D</value>
+    <value>格式...按 CTRL + D</value>
   </data>
   <data name="Alignment" xml:space="preserve">
-    <value>Position...</value>
+    <value>对齐方式......</value>
   </data>
   <data name="Factor" xml:space="preserve">
-    <value>Facteur de...</value>
+    <value>因素......</value>
   </data>
   <data name="Lock_Unlock" xml:space="preserve">
-    <value>Verrouiller/déverrouiller</value>
+    <value>锁定/解锁</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Nom...</value>
+    <value>名称...</value>
   </data>
   <data name="Select" xml:space="preserve">
-    <value>Sélectionnez...</value>
+    <value>选择(E)...</value>
   </data>
   <data name="Frequency_Chart" xml:space="preserve">
-    <value>Freequeency graphique...</value>
+    <value>Freequency 图表...</value>
   </data>
   <data name="Add_Macro_to_Menu" xml:space="preserve">
-    <value>Ajouter Macro au Menu...</value>
+    <value>将宏添加到菜单...</value>
   </data>
   <data name="Current_Line" xml:space="preserve">
-    <value>Ligne actuelle Ctrl + L</value>
+    <value>当前行 Ctrl + L</value>
   </data>
   <data name="Display_Daily" xml:space="preserve">
     <value>Display_Daily...</value>
   </data>
   <data name="Events" xml:space="preserve">
-    <value>Événements...</value>
+    <value>事件......</value>
   </data>
   <data name="Interrupt_Macro" xml:space="preserve">
-    <value>Interrompre la Macro F12</value>
+    <value>打断宏 F12</value>
   </data>
   <data name="Modify_Macro_in_Menu" xml:space="preserve">
-    <value>Modifier la Macro dans le Menu...</value>
+    <value>修改菜单中的宏...</value>
   </data>
   <data name="Remove_Macro_from_Menu" xml:space="preserve">
-    <value>Supprimer la Macro du Menu...</value>
+    <value>从菜单中删除宏......</value>
   </data>
   <data name="Run_Macro" xml:space="preserve">
-    <value>Exécuter la macro</value>
+    <value>运行宏</value>
   </data>
   <data name="Worksheet_Information" xml:space="preserve">
-    <value>Information de feuille de calcul</value>
+    <value>工作表信息</value>
   </data>
   <data name="Crop" xml:space="preserve">
-    <value>Rogner</value>
+    <value>裁剪</value>
   </data>
   <data name="Evaporation" xml:space="preserve">
-    <value>Évaporation</value>
+    <value>蒸发</value>
   </data>
   <data name="Heat_Sum" xml:space="preserve">
-    <value>Somme de la chaleur...</value>
+    <value>积热......</value>
   </data>
   <data name="Log_Window" xml:space="preserve">
-    <value>Fenêtre de log</value>
+    <value>日志窗口</value>
   </data>
   <data name="Markov_Modelling" xml:space="preserve">
-    <value>Modélisation de Markov</value>
+    <value>马尔科夫模型</value>
   </data>
   <data name="Process" xml:space="preserve">
-    <value>Processus</value>
+    <value>process</value>
   </data>
   <data name="Examine" xml:space="preserve">
-    <value>Examiner</value>
+    <value>检查</value>
   </data>
 </root>

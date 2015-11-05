@@ -311,7 +311,7 @@
           <target state="needs-review-translation">122, 95</target>
         </trans-unit>
         <trans-unit id="$this.TrayHeight" translate="yes" extype="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata" xml:space="preserve">
-          <source>40</source>
+          <source>25</source>
           <target state="needs-review-translation">25</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
@@ -402,11 +402,7 @@
         </trans-unit>
         <trans-unit id="Edit" translate="yes" xml:space="preserve">
           <source>Edit</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Edition</target>
-        </trans-unit>
-        <trans-unit id="Exit_" translate="yes" xml:space="preserve">
-          <source>Exit</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Quitter</target>
+          <target state="translated">Modif</target>
         </trans-unit>
         <trans-unit id="Factor_Variable" translate="yes" xml:space="preserve">
           <source>Factor Variable</source>
@@ -442,7 +438,7 @@
         </trans-unit>
         <trans-unit id="Ok" translate="yes" xml:space="preserve">
           <source>Ok</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">OK</target>
+          <target state="translated">Bien</target>
         </trans-unit>
         <trans-unit id="Open_From_Library" translate="yes" xml:space="preserve">
           <source>Open From Library</source>
@@ -486,7 +482,7 @@
         </trans-unit>
         <trans-unit id="Script" translate="yes" xml:space="preserve">
           <source>Script</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Script</target>
+          <target state="translated">Scénario</target>
         </trans-unit>
         <trans-unit id="Script_Window" translate="yes" xml:space="preserve">
           <source>Script Window</source>
@@ -505,8 +501,9 @@
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Statistiques</target>
         </trans-unit>
         <trans-unit id="Stem_And_Leaf" translate="yes" xml:space="preserve">
-          <source>Stem And Leaf</source>
+          <source>Stem And Leaf...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Tige et feuilles</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Submit" translate="yes" xml:space="preserve">
           <source>Submit</source>
@@ -589,32 +586,32 @@
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Décrire</target>
         </trans-unit>
         <trans-unit id="Display" translate="yes" xml:space="preserve">
-          <source>Display</source>
+          <source>Display...</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Affichage</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Diversity" translate="yes" xml:space="preserve">
           <source>Diversity</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Diversité</target>
         </trans-unit>
         <trans-unit id="Dotplot" translate="yes" xml:space="preserve">
-          <source>Dotplot</source>
+          <source>Dotplot...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Dotplot</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Duplicate_copy_columns" translate="yes" xml:space="preserve">
-          <source>Duplicate(copy columns)</source>
+          <source>Duplicate(copy columns)...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Duplicata (copie de colonnes)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="English" translate="yes" xml:space="preserve">
           <source>English</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Anglais</target>
         </trans-unit>
         <trans-unit id="Enter" translate="yes" xml:space="preserve">
-          <source>Enter</source>
+          <source>Enter...</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Entrée</target>
-        </trans-unit>
-        <trans-unit id="Freequency_Chart" translate="yes" xml:space="preserve">
-          <source>Freequency Chart</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Graphique Freequeency</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="French" translate="yes" xml:space="preserve">
           <source>French</source>
@@ -645,24 +642,27 @@
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Tracer</target>
         </trans-unit>
         <trans-unit id="Probability_Distribution" translate="yes" xml:space="preserve">
-          <source>Probability Distribution</source>
+          <source>Probability Distribution...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Distribution de probabilité</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Probability_Plot" translate="yes" xml:space="preserve">
           <source>Probability Plot</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Graphique de probabilité</target>
         </trans-unit>
         <trans-unit id="Random_Samples" translate="yes" xml:space="preserve">
-          <source>Random Samples</source>
+          <source>Random Samples...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Échantillons aléatoires</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Regression" translate="yes" xml:space="preserve">
           <source>Regression</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Régression</target>
         </trans-unit>
         <trans-unit id="Regular_Sequence" translate="yes" xml:space="preserve">
-          <source>Regular Sequence</source>
+          <source>Regular Sequence...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Séquence régulière</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Reshape" translate="yes" xml:space="preserve">
           <source>Reshape</source>
@@ -705,56 +705,62 @@
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Série chronologique</target>
         </trans-unit>
         <trans-unit id="Windrose" translate="yes" xml:space="preserve">
-          <source>Windrose</source>
+          <source>Windrose...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Rose des vents</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Expand" translate="yes" xml:space="preserve">
-          <source>Expand</source>
+          <source>Expand...</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Développer</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Indicator_Variables" translate="yes" xml:space="preserve">
-          <source>Indicator Variables</source>
+          <source>Indicator Variables...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Variables indicatrices</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Interractions" translate="yes" xml:space="preserve">
-          <source>Interractions</source>
+          <source>Interractions...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Interractions</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Polynomials" translate="yes" xml:space="preserve">
-          <source>Polynomials</source>
+          <source>Polynomials...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Polynômes</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Recode" translate="yes" xml:space="preserve">
           <source>Recode</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Recode</target>
         </trans-unit>
         <trans-unit id="Row_Statistics" translate="yes" xml:space="preserve">
-          <source>Row_Statistics</source>
+          <source>Row Statistics...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Row_Statistics</target>
-        </trans-unit>
-        <trans-unit id="Select_" translate="yes" xml:space="preserve">
-          <source>Select</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Sélectionner</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Select_and_Stack" translate="yes" xml:space="preserve">
-          <source>Select and Stack</source>
+          <source>Select and Stack...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Sélectionnez et pile</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Sort" translate="yes" xml:space="preserve">
           <source>Sort</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Tri</target>
         </trans-unit>
         <trans-unit id="Stack" translate="yes" xml:space="preserve">
-          <source>Stack</source>
+          <source>Stack...</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Pile</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Transform" translate="yes" xml:space="preserve">
-          <source>Transform</source>
+          <source>Transform...</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Transformer</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Unstack" translate="yes" xml:space="preserve">
-          <source>Unstack</source>
+          <source>Unstack...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Désempilement</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Clear1" translate="yes" xml:space="preserve">
           <source>Clear Del</source>
@@ -768,10 +774,6 @@
           <source>Copy Special Ctrl+Y</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Copie spéciale Ctrl + Y</target>
         </trans-unit>
-        <trans-unit id="Find1" translate="yes" xml:space="preserve">
-          <source>Find Ctrl+F</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">Trouver Ctrl + F</target>
-        </trans-unit>
         <trans-unit id="Flags" translate="yes" xml:space="preserve">
           <source>Flags</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Indicateurs</target>
@@ -781,8 +783,9 @@
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Police Ctrl + T</target>
         </trans-unit>
         <trans-unit id="Options" translate="yes" xml:space="preserve">
-          <source>Options</source>
+          <source>Options...</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Options</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Output_Spooling" translate="yes" xml:space="preserve">
           <source>Output Spooling</source>
@@ -865,8 +868,9 @@
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Sorts</target>
         </trans-unit>
         <trans-unit id="Start_of_the_Rains" translate="yes" xml:space="preserve">
-          <source>Start of the Rains</source>
+          <source>Start of the Rains...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Début de la saison des pluies</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Water_Balance" translate="yes" xml:space="preserve">
           <source>Water Balance</source>
@@ -881,8 +885,9 @@
           <target state="needs-review-translation" state-qualifier="tm-suggestion">jours</target>
         </trans-unit>
         <trans-unit id="Start_of_Rain" translate="yes" xml:space="preserve">
-          <source>Start of Rain</source>
+          <source>Start of Rain...</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Début de pluie</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Dry_Spell1" translate="yes" xml:space="preserve">
           <source>Dry Spell</source>
@@ -891,6 +896,154 @@
         <trans-unit id="To_Script" translate="yes" xml:space="preserve">
           <source>To Script</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Au Script</target>
+        </trans-unit>
+        <trans-unit id="Current_Window" translate="yes" xml:space="preserve">
+          <source>Current Window       Ctrl+W</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Cours fenêtre Ctrl + W</target>
+        </trans-unit>
+        <trans-unit id="Chinese" translate="yes" xml:space="preserve">
+          <source>Chinese</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Chinois</target>
+        </trans-unit>
+        <trans-unit id="German" translate="yes" xml:space="preserve">
+          <source>German</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Allemand</target>
+        </trans-unit>
+        <trans-unit id="Kiswahili" translate="yes" xml:space="preserve">
+          <source>Kiswahili</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Swahili</target>
+        </trans-unit>
+        <trans-unit id="Hindi" translate="yes" xml:space="preserve">
+          <source>Hindi</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hindi</target>
+        </trans-unit>
+        <trans-unit id="Counts_Totals" translate="yes" xml:space="preserve">
+          <source>Counts Totals</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Dénombrements totaux</target>
+        </trans-unit>
+        <trans-unit id="Interpolate_Daily" translate="yes" xml:space="preserve">
+          <source>Interpolate Daily...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Interpoler tous les jours...</target>
+        </trans-unit>
+        <trans-unit id="Model_Amounts" translate="yes" xml:space="preserve">
+          <source>Model Amounts...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Montants de modèle...</target>
+        </trans-unit>
+        <trans-unit id="Model_Probabilities" translate="yes" xml:space="preserve">
+          <source>Model Probabilities...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Probabilités de modèle...</target>
+        </trans-unit>
+        <trans-unit id="Prepare" translate="yes" xml:space="preserve">
+          <source>Prepare...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Se préparer...</target>
+        </trans-unit>
+        <trans-unit id="Simulations" translate="yes" xml:space="preserve">
+          <source>Simulations</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Simulations</target>
+        </trans-unit>
+        <trans-unit id="Spell_Length" translate="yes" xml:space="preserve">
+          <source>Spell Length...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Longueur de sort...</target>
+        </trans-unit>
+        <trans-unit id="Totals" translate="yes" xml:space="preserve">
+          <source>Totals...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Totaux...</target>
+        </trans-unit>
+        <trans-unit id="Exit" translate="yes" xml:space="preserve">
+          <source>Exit</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Quitter</target>
+        </trans-unit>
+        <trans-unit id="Format" translate="yes" xml:space="preserve">
+          <source>Format... CTRL+D</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Format de... CTRL + D</target>
+        </trans-unit>
+        <trans-unit id="Alignment" translate="yes" xml:space="preserve">
+          <source>Alignment...</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Position...</target>
+        </trans-unit>
+        <trans-unit id="Factor" translate="yes" xml:space="preserve">
+          <source>Factor...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Facteur de...</target>
+        </trans-unit>
+        <trans-unit id="Lock_Unlock" translate="yes" xml:space="preserve">
+          <source>Lock/Unlock</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Verrouiller/déverrouiller</target>
+        </trans-unit>
+        <trans-unit id="Name" translate="yes" xml:space="preserve">
+          <source>Name...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nom...</target>
+        </trans-unit>
+        <trans-unit id="Select" translate="yes" xml:space="preserve">
+          <source>Select...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Sélectionnez...</target>
+        </trans-unit>
+        <trans-unit id="Frequency_Chart" translate="yes" xml:space="preserve">
+          <source>Freequency Chart...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Freequeency graphique...</target>
+        </trans-unit>
+        <trans-unit id="Add_Macro_to_Menu" translate="yes" xml:space="preserve">
+          <source>Add Macro to to Menu...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Ajouter Macro au Menu...</target>
+        </trans-unit>
+        <trans-unit id="Current_Line" translate="yes" xml:space="preserve">
+          <source>Current Line Ctrl+L</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Ligne actuelle Ctrl + L</target>
+        </trans-unit>
+        <trans-unit id="Display_Daily" translate="yes" xml:space="preserve">
+          <source>Display_Daily...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Display_Daily...</target>
+        </trans-unit>
+        <trans-unit id="Events" translate="yes" xml:space="preserve">
+          <source>Events...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Événements...</target>
+        </trans-unit>
+        <trans-unit id="Interrupt_Macro" translate="yes" xml:space="preserve">
+          <source>Interrupt Macro F12</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Interrompre la Macro F12</target>
+        </trans-unit>
+        <trans-unit id="Modify_Macro_in_Menu" translate="yes" xml:space="preserve">
+          <source>Modify Macro in Menu...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Modifier la Macro dans le Menu...</target>
+        </trans-unit>
+        <trans-unit id="Remove_Macro_from_Menu" translate="yes" xml:space="preserve">
+          <source>Remove Macro from Menu...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Supprimer la Macro du Menu...</target>
+        </trans-unit>
+        <trans-unit id="Run_Macro" translate="yes" xml:space="preserve">
+          <source>Run Macro</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Exécuter la macro</target>
+        </trans-unit>
+        <trans-unit id="Worksheet_Information" translate="yes" xml:space="preserve">
+          <source>Worksheet Information</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Information de feuille de calcul</target>
+        </trans-unit>
+        <trans-unit id="Crop" translate="yes" xml:space="preserve">
+          <source>Crop</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Rogner</target>
+        </trans-unit>
+        <trans-unit id="Evaporation" translate="yes" xml:space="preserve">
+          <source>Evaporation</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Évaporation</target>
+        </trans-unit>
+        <trans-unit id="Heat_Sum" translate="yes" xml:space="preserve">
+          <source>Heat Sum...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Somme de la chaleur...</target>
+        </trans-unit>
+        <trans-unit id="Log_Window" translate="yes" xml:space="preserve">
+          <source>Log Window</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Fenêtre de log</target>
+        </trans-unit>
+        <trans-unit id="Markov_Modelling" translate="yes" xml:space="preserve">
+          <source>Markov Modelling</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Modélisation de Markov</target>
+        </trans-unit>
+        <trans-unit id="Process" translate="yes" xml:space="preserve">
+          <source>Process</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Processus</target>
+        </trans-unit>
+        <trans-unit id="Examine" translate="yes" xml:space="preserve">
+          <source>Examine</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Examiner</target>
         </trans-unit>
       </group>
     </body>

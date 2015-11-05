@@ -178,7 +178,7 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="Exit_" xml:space="preserve">
+  <data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="Factor_Variable" xml:space="preserve">
@@ -254,7 +254,7 @@
     <value>Statistics</value>
   </data>
   <data name="Stem_And_Leaf" xml:space="preserve">
-    <value>Stem And Leaf</value>
+    <value>Stem And Leaf...</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
@@ -305,31 +305,31 @@
     <value>Describe</value>
   </data>
   <data name="Display" xml:space="preserve">
-    <value>Display</value>
+    <value>Display...</value>
   </data>
   <data name="Diversity" xml:space="preserve">
     <value>Diversity</value>
   </data>
   <data name="Dotplot" xml:space="preserve">
-    <value>Dotplot</value>
+    <value>Dotplot...</value>
   </data>
   <data name="Duplicate_copy_columns" xml:space="preserve">
-    <value>Duplicate(copy columns)</value>
+    <value>Duplicate(copy columns)...</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
   <data name="Enter" xml:space="preserve">
-    <value>Enter</value>
+    <value>Enter...</value>
   </data>
   <data name="Expand" xml:space="preserve">
-    <value>Expand</value>
+    <value>Expand...</value>
   </data>
   <data name="Export_as" xml:space="preserve">
     <value>Export_as</value>
   </data>
-  <data name="Find1" xml:space="preserve">
-    <value>Find Ctrl+F</value>
+  <data name="Format" xml:space="preserve">
+    <value>Format... CTRL+D</value>
   </data>
   <data name="Flags" xml:space="preserve">
     <value>Flags</value>
@@ -337,8 +337,8 @@
   <data name="Font" xml:space="preserve">
     <value>Font Ctrl+T</value>
   </data>
-  <data name="Freequency_Chart" xml:space="preserve">
-    <value>Freequency Chart</value>
+  <data name="Frequency_Chart" xml:space="preserve">
+    <value>Freequency Chart...</value>
   </data>
   <data name="French" xml:space="preserve">
     <value>French</value>
@@ -353,10 +353,10 @@
     <value>Import ASCII</value>
   </data>
   <data name="Indicator_Variables" xml:space="preserve">
-    <value>Indicator Variables</value>
+    <value>Indicator Variables...</value>
   </data>
   <data name="Interractions" xml:space="preserve">
-    <value>Interractions</value>
+    <value>Interractions...</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -377,7 +377,7 @@
     <value>Open</value>
   </data>
   <data name="Options" xml:space="preserve">
-    <value>Options</value>
+    <value>Options...</value>
   </data>
   <data name="Output" xml:space="preserve">
     <value>Output</value>
@@ -392,16 +392,16 @@
     <value>Plot</value>
   </data>
   <data name="Polynomials" xml:space="preserve">
-    <value>Polynomials</value>
+    <value>Polynomials...</value>
   </data>
   <data name="Probability_Distribution" xml:space="preserve">
-    <value>Probability Distribution</value>
+    <value>Probability Distribution...</value>
   </data>
   <data name="Probability_Plot" xml:space="preserve">
     <value>Probability Plot</value>
   </data>
   <data name="Random_Samples" xml:space="preserve">
-    <value>Random Samples</value>
+    <value>Random Samples...</value>
   </data>
   <data name="Recall" xml:space="preserve">
     <value>Recall</value>
@@ -413,7 +413,7 @@
     <value>Regression</value>
   </data>
   <data name="Regular_Sequence" xml:space="preserve">
-    <value>Regular Sequence</value>
+    <value>Regular Sequence...</value>
   </data>
   <data name="Replace1" xml:space="preserve">
     <value>Replace Ctrl+H</value>
@@ -425,7 +425,7 @@
     <value>Resize Worksheet</value>
   </data>
   <data name="Row_Statistics" xml:space="preserve">
-    <value>Row_Statistics</value>
+    <value>Row Statistics...</value>
   </data>
   <data name="Run_Worksheet_Editor" xml:space="preserve">
     <value>Run Worksheet Editor F7</value>
@@ -439,14 +439,14 @@
   <data name="Selection" xml:space="preserve">
     <value>Selection</value>
   </data>
-  <data name="Select_" xml:space="preserve">
-    <value>Select</value>
+  <data name="Select" xml:space="preserve">
+    <value>Select...</value>
   </data>
   <data name="Select_All1" xml:space="preserve">
     <value>Select All ctrls+A </value>
   </data>
   <data name="Select_and_Stack" xml:space="preserve">
-    <value>Select and Stack</value>
+    <value>Select and Stack...</value>
   </data>
   <data name="Simple_Models" xml:space="preserve">
     <value>Simple Models</value>
@@ -455,7 +455,7 @@
     <value>Sort</value>
   </data>
   <data name="Stack" xml:space="preserve">
-    <value>Stack</value>
+    <value>Stack...</value>
   </data>
   <data name="Summary" xml:space="preserve">
     <value>Summary</value>
@@ -473,10 +473,10 @@
     <value>Time Series</value>
   </data>
   <data name="Transform" xml:space="preserve">
-    <value>Transform</value>
+    <value>Transform...</value>
   </data>
   <data name="Unstack" xml:space="preserve">
-    <value>Unstack</value>
+    <value>Unstack...</value>
   </data>
   <data name="View_Edit_Macro" xml:space="preserve">
     <value>View/Edit Macro</value>
@@ -485,7 +485,7 @@
     <value>View/Edit Text</value>
   </data>
   <data name="Windrose" xml:space="preserve">
-    <value>Windrose</value>
+    <value>Windrose...</value>
   </data>
   <data name="Data_View" xml:space="preserve">
     <value>Data View</value>
@@ -524,10 +524,10 @@
     <value>Spells</value>
   </data>
   <data name="Start_of_Rain" xml:space="preserve">
-    <value>Start of Rain</value>
+    <value>Start of Rain...</value>
   </data>
   <data name="Start_of_the_Rains" xml:space="preserve">
-    <value>Start of the Rains</value>
+    <value>Start of the Rains...</value>
   </data>
   <data name="Threashold" xml:space="preserve">
     <value>Threashold</value>
@@ -543,5 +543,104 @@
   </data>
   <data name="To_Script" xml:space="preserve">
     <value>To Script</value>
+  </data>
+  <data name="Current_Window" xml:space="preserve">
+    <value>Current Window       Ctrl+W</value>
+  </data>
+  <data name="Chinese" xml:space="preserve">
+    <value>Chinese</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="Hindi" xml:space="preserve">
+    <value>Hindi</value>
+  </data>
+  <data name="Kiswahili" xml:space="preserve">
+    <value>Kiswahili</value>
+  </data>
+  <data name="Add_Macro_to_Menu" xml:space="preserve">
+    <value>Add Macro to to Menu...</value>
+  </data>
+  <data name="Alignment" xml:space="preserve">
+    <value>Alignment...</value>
+  </data>
+  <data name="Counts_Totals" xml:space="preserve">
+    <value>Counts Totals</value>
+  </data>
+  <data name="Current_Line" xml:space="preserve">
+    <value>Current Line Ctrl+L</value>
+  </data>
+  <data name="Display_Daily" xml:space="preserve">
+    <value>Display_Daily...</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Events...</value>
+  </data>
+  <data name="Factor" xml:space="preserve">
+    <value>Factor...</value>
+  </data>
+  <data name="Interpolate_Daily" xml:space="preserve">
+    <value>Interpolate Daily...</value>
+  </data>
+  <data name="Interrupt_Macro" xml:space="preserve">
+    <value>Interrupt Macro F12</value>
+  </data>
+  <data name="Lock_Unlock" xml:space="preserve">
+    <value>Lock/Unlock</value>
+  </data>
+  <data name="Model_Amounts" xml:space="preserve">
+    <value>Model Amounts...</value>
+  </data>
+  <data name="Model_Probabilities" xml:space="preserve">
+    <value>Model Probabilities...</value>
+  </data>
+  <data name="Modify_Macro_in_Menu" xml:space="preserve">
+    <value>Modify Macro in Menu...</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name...</value>
+  </data>
+  <data name="Prepare" xml:space="preserve">
+    <value>Prepare...</value>
+  </data>
+  <data name="Remove_Macro_from_Menu" xml:space="preserve">
+    <value>Remove Macro from Menu...</value>
+  </data>
+  <data name="Run_Macro" xml:space="preserve">
+    <value>Run Macro</value>
+  </data>
+  <data name="Simulations" xml:space="preserve">
+    <value>Simulations</value>
+  </data>
+  <data name="Spell_Length" xml:space="preserve">
+    <value>Spell Length...</value>
+  </data>
+  <data name="Totals" xml:space="preserve">
+    <value>Totals...</value>
+  </data>
+  <data name="Worksheet_Information" xml:space="preserve">
+    <value>Worksheet Information</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Crop</value>
+  </data>
+  <data name="Evaporation" xml:space="preserve">
+    <value>Evaporation</value>
+  </data>
+  <data name="Heat_Sum" xml:space="preserve">
+    <value>Heat Sum...</value>
+  </data>
+  <data name="Log_Window" xml:space="preserve">
+    <value>Log Window</value>
+  </data>
+  <data name="Markov_Modelling" xml:space="preserve">
+    <value>Markov Modelling</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>Process</value>
+  </data>
+  <data name="Examine" xml:space="preserve">
+    <value>Examine</value>
   </data>
 </root>

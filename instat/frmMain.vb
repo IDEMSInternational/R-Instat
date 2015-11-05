@@ -187,4 +187,25 @@ Public Class frmMain
     Private Sub mnuEndofRains_Click(sender As Object, e As EventArgs) Handles mnuEndofRains.Click
         dlgEndofRains.ShowDialog()
     End Sub
+
+    Private Sub HindiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HindiToolStripMenuItem.Click
+        Thread.CurrentThread.CurrentCulture = New CultureInfo("hi")
+        Thread.CurrentThread.CurrentUICulture = New CultureInfo("hi")
+        autoTranslate(Me)
+    End Sub
+
+
+    Private Sub ChineseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChineseToolStripMenuItem.Click
+        Thread.CurrentThread.CurrentCulture = New CultureInfo("zh-CN")
+        Thread.CurrentThread.CurrentUICulture = New CultureInfo("zh-CN")
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub ProcessToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProcessToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub CropToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CropToolStripMenuItem.Click
+
+    End Sub
 End Class

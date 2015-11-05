@@ -93,9 +93,6 @@
   <data name="Window" xml:space="preserve">
     <value>Dirisha</value>
   </data>
-  <data name="Exit_" xml:space="preserve">
-    <value>Toka:</value>
-  </data>
   <data name="Clear" xml:space="preserve">
     <value>Ondoa</value>
   </data>
@@ -174,9 +171,6 @@
   <data name="Expand" xml:space="preserve">
     <value>Finyuza</value>
   </data>
-  <data name="Select_" xml:space="preserve">
-    <value>Teua</value>
-  </data>
   <data name="Sort" xml:space="preserve">
     <value>angua</value>
   </data>
@@ -188,9 +182,6 @@
   </data>
   <data name="Clear1" xml:space="preserve">
     <value>Ondoa uteuzi	Del</value>
-  </data>
-  <data name="Find1" xml:space="preserve">
-    <value>Tafuta...	Ctrl+F</value>
   </data>
   <data name="Options" xml:space="preserve">
     <value>chaguo</value>
@@ -218,5 +209,47 @@
   </data>
   <data name="Days" xml:space="preserve">
     <value>Siku</value>
+  </data>
+  <data name="Chinese" xml:space="preserve">
+    <value>Kichina</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>Ujerumani</value>
+  </data>
+  <data name="Kiswahili" xml:space="preserve">
+    <value>Kiswahili</value>
+  </data>
+  <data name="Hindi" xml:space="preserve">
+    <value>Kihindi</value>
+  </data>
+  <data name="Prepare" xml:space="preserve">
+    <value>Tayarisha</value>
+  </data>
+  <data name="Totals" xml:space="preserve">
+    <value>Jumla</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Toka:</value>
+  </data>
+  <data name="Alignment" xml:space="preserve">
+    <value>Mpangilio:</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Jina:</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Teua</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Matukio</value>
+  </data>
+  <data name="Run_Macro" xml:space="preserve">
+    <value>Endesha Makro...</value>
+  </data>
+  <data name="Crop" xml:space="preserve">
+    <value>Puna</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>Mchakato</value>
   </data>
 </root>
