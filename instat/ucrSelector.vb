@@ -15,14 +15,14 @@ Public Class ucrSelector
 
     End Sub
 
-    'Public Sub SetCurrentReciever(conReceiver As ucrReceiver)
-    'CurrentReceiver = conReceiver
-    'If (TypeOf conReceiver Is ucrReceiverSingle) Then
-    '    lstAvailableVariable.SelectionMode = SelectionMode.MultiExtended
-    'ElseIf (TypeOf conReceiver Is ucrReceiverMultiple) Then
-    '    lstAvailableVariable.SelectionMode = SelectionMode.One
-    'End If
-    'End Sub
+    Public Sub SetCurrentReciever(conReceiver As ucrReceiver)
+        'CurrentReceiver = conReceiver
+        'If (TypeOf conReceiver Is ucrReceiverSingle) Then
+        '    lstAvailableVariable.SelectionMode = SelectionMode.MultiExtended
+        'ElseIf (TypeOf conReceiver Is ucrReceiverMultiple) Then
+        '    lstAvailableVariable.SelectionMode = SelectionMode.One
+        'End If
+    End Sub
 
     'Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
     '    If (lstAvailableVariable.SelectedItem <> "") Then
