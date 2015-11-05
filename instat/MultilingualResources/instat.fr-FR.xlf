@@ -892,6 +892,10 @@
           <source>To Script</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Au Script</target>
         </trans-unit>
+        <trans-unit id="Title" translate="yes" xml:space="preserve">
+          <source>Title</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Intitulé</target>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -978,6 +982,14 @@
     </header>
     <body>
       <group id="INSTAT/UCRRECEIVERSINGLE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGPLOT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGPLOT.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>

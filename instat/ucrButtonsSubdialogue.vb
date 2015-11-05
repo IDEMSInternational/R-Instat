@@ -7,4 +7,8 @@
         RaiseEvent ClickReturn(sender, e)
         Me.ParentForm.Close()
     End Sub
+
+    Private Sub ucrButtonsSubdialogue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

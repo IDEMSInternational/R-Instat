@@ -187,4 +187,8 @@ Public Class frmMain
     Private Sub mnuEndofRains_Click(sender As Object, e As EventArgs) Handles mnuEndofRains.Click
         dlgEndofRains.ShowDialog()
     End Sub
+
+    Private Sub PlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlotToolStripMenuItem.Click
+        dlgPlot.ShowDialog()
+    End Sub
 End Class

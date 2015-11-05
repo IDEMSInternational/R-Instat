@@ -438,4 +438,7 @@
   <data name="To_Script" xml:space="preserve">
     <value>Au Script</value>
   </data>
+  <data name="Title" xml:space="preserve">
+    <value>Intitulé</value>
+  </data>
 </root>
