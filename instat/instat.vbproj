@@ -153,6 +153,24 @@
     <Compile Include="dlgEndofRains.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExtremeEvents.Designer.vb">
+      <DependentUpon>dlgExtremeEvents.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExtremeEvents.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgInventoryPlot.designer.vb">
+      <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgInventoryPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgMultipleRegression.Designer.vb">
+      <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMultipleRegression.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRegularSequence.designer.vb">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </Compile>
@@ -175,6 +193,12 @@
       <DependentUpon>dlgBoxPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgBoxPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgWaterBalance.Designer.vb">
+      <DependentUpon>dlgWaterBalance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgWaterBalance.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmCommand.Designer.vb">
@@ -295,6 +319,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEndofRains.sw-KE.resx">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInventoryPlot.fr-FR.resx">
+      <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInventoryPlot.resx">
+      <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInventoryPlot.sw-KE.resx">
+      <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.fr-FR.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>

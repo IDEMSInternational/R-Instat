@@ -137,6 +137,7 @@ Partial Class frmMain
         Me.EventsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartOfTheRainsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExtremesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEndofRains = New System.Windows.Forms.ToolStripMenuItem()
         Me.WorksheetInformationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LockUnlockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileIEODBC = New System.Windows.Forms.ToolStripMenuItem()
@@ -260,7 +261,7 @@ Partial Class frmMain
         Me.KiswahiliToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FrenchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuEndofRains = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsInventory = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -470,7 +471,7 @@ Partial Class frmMain
         '
         'GraphicsToolStripMenuItem
         '
-        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotToolStripMenuItem, Me.mnuBoxPlot, Me.HistogramToolStripMenuItem, Me.ProbabilityPlotToolStripMenuItem, Me.DotplotToolStripMenuItem, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem})
+        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotToolStripMenuItem, Me.mnuBoxPlot, Me.HistogramToolStripMenuItem, Me.ProbabilityPlotToolStripMenuItem, Me.DotplotToolStripMenuItem, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem, Me.mnuGraphicsInventory})
         Me.GraphicsToolStripMenuItem.Name = "GraphicsToolStripMenuItem"
         Me.GraphicsToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.GraphicsToolStripMenuItem.Tag = "Graphics"
@@ -979,6 +980,12 @@ Partial Class frmMain
         Me.ExtremesToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
         Me.ExtremesToolStripMenuItem.Tag = "Extremes"
         Me.ExtremesToolStripMenuItem.Text = "Extremes..."
+        '
+        'mnuEndofRains
+        '
+        Me.mnuEndofRains.Name = "mnuEndofRains"
+        Me.mnuEndofRains.Size = New System.Drawing.Size(172, 22)
+        Me.mnuEndofRains.Text = "End of the Rains"
         '
         'WorksheetInformationToolStripMenuItem
         '
@@ -1846,11 +1853,11 @@ Partial Class frmMain
         Me.FrenchToolStripMenuItem.Tag = "French"
         Me.FrenchToolStripMenuItem.Text = "French"
         '
-        'mnuEndofRains
+        'mnuGraphicsInventory
         '
-        Me.mnuEndofRains.Name = "mnuEndofRains"
-        Me.mnuEndofRains.Size = New System.Drawing.Size(172, 22)
-        Me.mnuEndofRains.Text = "End of the Rains"
+        Me.mnuGraphicsInventory.Name = "mnuGraphicsInventory"
+        Me.mnuGraphicsInventory.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsInventory.Text = "Inventory Plot"
         '
         'frmMain
         '
@@ -2114,4 +2121,5 @@ Partial Class frmMain
     Friend WithEvents FrenchToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LogWindowMenu As ToolStripMenuItem
     Friend WithEvents mnuEndofRains As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsInventory As ToolStripMenuItem
 End Class
