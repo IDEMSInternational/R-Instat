@@ -14,15 +14,13 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class dlgRegularSequence
-    Public clsRSyntax As New RSyntax
-    Public lstOfStrings As New List(Of String)
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grpSequence2.Hide()
         grpRepeatSingle.Hide()
     End Sub
 
     Private Sub UcrButtons1_ClickOk(sender As Object, e As EventArgs) Handles UcrButtons1.ClickOk
-        UcrButtons1.clsRsyntax.GetScript()
+        frmMain.clsRInterface.RunScript(UcrButtons1.clsRsyntax.GetScript())
     End Sub
 
     Private Sub rdSIngleValue_Click(sender As Object, e As EventArgs) Handles rdSIngleValue.Click
@@ -47,30 +45,15 @@ Public Class dlgRegularSequence
         UcrButtons1.clsRsyntax.SetFunction("seq")
     End Sub
 
-    Private Sub txtFrom_Validating(sender As Object, e As EventArgs) Handles txtFrom.Validating
-        If IsNumeric(txtFrom.Text) Then
-            UcrButtons1.clsRsyntax.AddParameter("from", txtFrom.Text)
-        Else
-            MsgBox("Please Enter a number!", vbCritical, "Message for Instat+")
-            txtFrom.Focus()
-        End If
+    Private Sub txtFrom_TextChanged(sender As Object, e As EventArgs) Handles txtFrom.TextChanged
+        UcrButtons1.clsRsyntax.AddParameter("from", txtFrom.Text)
     End Sub
 
-    Private Sub txtTo_Validating(sender As Object, e As EventArgs) Handles txtTo.Validating
-        If IsNumeric(txtTo.Text) Then
-            UcrButtons1.clsRsyntax.AddParameter("to", txtFrom.Text)
-        Else
-            MsgBox("Please Enter a number!", vbCritical, "Message for Instat+")
-            txtTo.Focus()
-        End If
+    Private Sub txtTo_TextChanged(sender As Object, e As EventArgs) Handles txtTo.TextChanged
+        UcrButtons1.clsRsyntax.AddParameter("to", txtTo.Text)
     End Sub
 
-    Private Sub txtSteps_Validating(sender As Object, e As EventArgs) Handles txtSteps.Validating
-        If IsNumeric(txtSteps.Text) Then
-            UcrButtons1.clsRsyntax.AddParameter("by", txtFrom.Text)
-        Else
-            MsgBox("Please Enter a number!", vbCritical, "Message for Instat+")
-            txtSteps.Focus()
-        End If
+    Private Sub txtSteps_TextChanged(sender As Object, e As EventArgs) Handles txtSteps.TextChanged
+        UcrButtons1.clsRsyntax.AddParameter("by", txtSteps.Text)
     End Sub
 End Class
