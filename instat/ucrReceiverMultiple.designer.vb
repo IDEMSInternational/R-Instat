@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrReceiverMultiple
     Inherits instat.ucrReceiver
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class ucrReceiverMultiple
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lstSelectedVariables = New System.Windows.Forms.ListBox()
@@ -26,7 +26,7 @@ Partial Class ucrReceiverMultiple
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(6, 3)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(3, 3)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
         Me.lblSelectedVariables.TabIndex = 80
@@ -36,7 +36,7 @@ Partial Class ucrReceiverMultiple
         'lstSelectedVariables
         '
         Me.lstSelectedVariables.FormattingEnabled = True
-        Me.lstSelectedVariables.Location = New System.Drawing.Point(13, 23)
+        Me.lstSelectedVariables.Location = New System.Drawing.Point(6, 19)
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
         Me.lstSelectedVariables.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.lstSelectedVariables.Size = New System.Drawing.Size(84, 95)
@@ -49,12 +49,12 @@ Partial Class ucrReceiverMultiple
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.lstSelectedVariables)
         Me.Name = "ucrReceiverMultiple"
-        Me.Size = New System.Drawing.Size(106, 126)
+        Me.Size = New System.Drawing.Size(98, 118)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents lblSelectedVariables As Label
-    Friend WithEvents lstSelectedVariables As ListBox
+    Public WithEvents lstSelectedVariables As ListBox
 End Class
