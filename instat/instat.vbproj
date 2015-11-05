@@ -165,6 +165,12 @@
     <Compile Include="dlgInventoryPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMultipleRegression.Designer.vb">
+      <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMultipleRegression.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRegularSequence.designer.vb">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </Compile>
