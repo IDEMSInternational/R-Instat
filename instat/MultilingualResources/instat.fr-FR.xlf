@@ -888,6 +888,10 @@
           <source>Dry Spell</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Période de sécheresse</target>
         </trans-unit>
+        <trans-unit id="To_Script" translate="yes" xml:space="preserve">
+          <source>To Script</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Au Script</target>
+        </trans-unit>
       </group>
     </body>
   </file>

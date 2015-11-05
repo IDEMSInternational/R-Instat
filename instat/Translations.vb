@@ -14,10 +14,17 @@
             If (TypeOf formControl Is Panel) Then
                 ' Recursively translate all controls inside the panel
                 translateEach(formControl.Controls)
+
             ElseIf (TypeOf formControl Is MenuStrip) Then
                 ' Translate all MenuItems inside the MenuStrip
                 translateMenu(formControl)
-            ElseIf (TypeOf formControl Is TextBox OrElse TypeOf formControl Is Button OrElse TypeOf formControl Is Label OrElse TypeOf formControl Is checkbox) Then
+
+
+            ElseIf (TypeOf formControl Is UserControl) Then
+                ' Translate all controls in a usercontrol
+                translateEach(formControl.Controls)
+
+            ElseIf (TypeOf formControl Is TextBox OrElse TypeOf formControl Is Button OrElse TypeOf formControl Is Label OrElse TypeOf formControl Is CheckBox) Then
                 originalTag = formControl.Tag
                 If (originalTag IsNot Nothing) Then
                     translatedString = My.Resources.ResourceManager.GetObject(originalTag)
@@ -66,7 +73,7 @@
 
     ' translateMenu and translateSubMenu should not be neccessary if we can improve translateEach to accept any iterable
     Public Shared Sub translateSubMenu(subMenuControl As ToolStripItemCollection)
-        Dim item
+        Dim item 'As ToolStripItem
         Dim originalTag As String
         Dim translatedString As String
 
