@@ -75,7 +75,7 @@ Partial Class ucrButtons
         Me.cmdPaste.Name = "cmdPaste"
         Me.cmdPaste.Size = New System.Drawing.Size(75, 23)
         Me.cmdPaste.TabIndex = 83
-        Me.cmdPaste.Text = "Paste Script"
+        Me.cmdPaste.Text = "To Script"
         Me.cmdPaste.UseVisualStyleBackColor = True
         '
         'ucrButtons

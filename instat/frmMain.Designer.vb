@@ -260,6 +260,7 @@ Partial Class frmMain
         Me.KiswahiliToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FrenchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEndofRains = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -960,7 +961,7 @@ Partial Class frmMain
         '
         'EventsToolStripMenuItem
         '
-        Me.EventsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartOfTheRainsToolStripMenuItem, Me.ExtremesToolStripMenuItem, Me.SpellsToolStripMenuItem, Me.WaterBalanceToolStripMenuItem})
+        Me.EventsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartOfTheRainsToolStripMenuItem, Me.ExtremesToolStripMenuItem, Me.SpellsToolStripMenuItem, Me.WaterBalanceToolStripMenuItem, Me.mnuEndofRains})
         Me.EventsToolStripMenuItem.Name = "EventsToolStripMenuItem"
         Me.EventsToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.EventsToolStripMenuItem.Text = "Events"
@@ -1845,6 +1846,12 @@ Partial Class frmMain
         Me.FrenchToolStripMenuItem.Tag = "French"
         Me.FrenchToolStripMenuItem.Text = "French"
         '
+        'mnuEndofRains
+        '
+        Me.mnuEndofRains.Name = "mnuEndofRains"
+        Me.mnuEndofRains.Size = New System.Drawing.Size(172, 22)
+        Me.mnuEndofRains.Text = "End of the Rains"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2106,4 +2113,5 @@ Partial Class frmMain
     Friend WithEvents EnglishToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FrenchToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LogWindowMenu As ToolStripMenuItem
+    Friend WithEvents mnuEndofRains As ToolStripMenuItem
 End Class

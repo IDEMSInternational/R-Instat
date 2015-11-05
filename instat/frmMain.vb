@@ -88,7 +88,7 @@ Public Class frmMain
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
-        dlgDescriptiveStatistics.Show()
+        dlgDescriptiveStatistics.ShowDialog()
     End Sub
 
     Private Sub mnuFileOpenWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileOpenWorksheet.Click
@@ -104,7 +104,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
-        dlgSort.Show()
+        dlgSort.ShowDialog()
     End Sub
 
     Private Sub mnuSriptLog_Click(sender As Object, e As EventArgs)
@@ -165,7 +165,7 @@ Public Class frmMain
     End Sub
 
     Private Sub StartOfTheRainsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartOfTheRainsToolStripMenuItem.Click
-        dlgStartofRains.Show()
+        dlgStartofRains.ShowDialog()
     End Sub
 
     Private Sub tstatus_Click(sender As Object, e As EventArgs) Handles tstatus.Click
@@ -173,14 +173,18 @@ Public Class frmMain
     End Sub
 
     Private Sub RegularSequenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegularSequenceToolStripMenuItem.Click
-        dlgRegularSequence.Show()
+        dlgRegularSequence.ShowDialog()
     End Sub
 
     Private Sub mnuCalculations_Click(sender As Object, e As EventArgs) Handles mnuCalculations.Click
-        dlgCalculator.Show()
+        dlgCalculator.ShowDialog()
     End Sub
 
     Private Sub mnuBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuBoxPlot.Click
-        dlgBoxPlot.Show()
+        dlgBoxPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuEndofRains_Click(sender As Object, e As EventArgs) Handles mnuEndofRains.Click
+        dlgEndofRains.ShowDialog()
     End Sub
 End Class
