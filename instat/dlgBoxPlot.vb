@@ -1,4 +1,6 @@
 ﻿Public Class dlgBoxPlot
+
+
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -8,6 +10,7 @@
         Dim strScript As String
         Dim temp
         Dim bFirst As Boolean
+        Dim plottitle As String = txtTittle.Text
 
         bFirst = True
         If UcrDataSelection1.lstSelectedVariables.Items.Count > 0 Then
@@ -20,7 +23,7 @@
                 End If
                 strScript = strScript & "'" & temp.ToString & "'"
             Next
-            strScript = strScript & ")])"
+            strScript = strScript & ")], main='" & txtTittle.Text & ")"
             frmMain.clsRInterface.RunScript(strScript)
             Me.Hide()
         End If
