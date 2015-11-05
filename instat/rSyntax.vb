@@ -24,17 +24,18 @@ Public Class RSyntax
     End Sub
 
     Public Sub AddParameter(strParameterName As String, strParameterValue As String)
-        Dim boundA As Integer = strParameter.GetUpperBound(0)
-        Dim boundB As Integer = strParameter.GetUpperBound(1)
-        If strParameter.Length < 1 Then
-            strParameter = {strParameterName, strParameterValue}
-        Else
-            For i As Integer = 0 To boundA
-                For j As Integer = 0 To boundB
-                    strParameter = {strParameterName, strParameterValue}
-                Next
-            Next
-        End If
+        strParameter = {strParameterName, strParameterValue}
+        'Dim boundA As Integer = strParameter.GetUpperBound(0)
+        'Dim boundB As Integer = strParameter.GetUpperBound(1)
+        'If strParameter.Length < 1 Then
+        '    strParameter = {strParameterName, strParameterValue}
+        '    'Else
+        '    '    For i As Integer = 0 To boundA
+        '    '        For j As Integer = 0 To boundB
+        '    '            strParameter = {strParameterName, strParameterValue}
+        '    '        Next
+        '    '    Next
+        'End If
     End Sub
 
     Public Sub RemoveParameter(strParameterName As String, strParameterValue As String)
@@ -42,9 +43,7 @@ Public Class RSyntax
     End Sub
 
     Public Function GetScript() As String
-        Dim strScript As String
-        strScript = strFunction & "(" & strParameter.ToString
-        Return MsgBox("Empty")
+        Return MsgBox("WIP")
     End Function
 
 End Class
