@@ -147,6 +147,12 @@
     <Compile Include="dlgDescriptiveStatistics.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgEndofRains.designer.vb">
+      <DependentUpon>dlgEndofRains.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgEndofRains.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRegularSequence.designer.vb">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </Compile>
@@ -225,10 +231,40 @@
     <Compile Include="ucrButtons.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrButtonsSubdialogue.designer.vb">
+      <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrButtonsSubdialogue.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrDataSelection.designer.vb">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrDataSelection.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrReceiver.designer.vb">
+      <DependentUpon>ucrReceiver.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReceiver.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrReceiverMultiple.designer.vb">
+      <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReceiverMultiple.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrReceiverSingle.designer.vb">
+      <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReceiverSingle.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrSelector.designer.vb">
+      <DependentUpon>ucrSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelector.vb">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -250,6 +286,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDescriptiveStatistics.sw-KE.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEndofRains.fr-FR.resx">
+      <DependentUpon>dlgEndofRains.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEndofRains.resx">
+      <DependentUpon>dlgEndofRains.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEndofRains.sw-KE.resx">
+      <DependentUpon>dlgEndofRains.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.fr-FR.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
@@ -349,6 +394,15 @@
     <EmbeddedResource Include="ucrButtons.sw-KE.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrButtonsSubdialogue.fr-FR.resx">
+      <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrButtonsSubdialogue.resx">
+      <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrButtonsSubdialogue.sw-KE.resx">
+      <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.fr-FR.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
     </EmbeddedResource>
@@ -357,6 +411,42 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.sw-KE.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiver.fr-FR.resx">
+      <DependentUpon>ucrReceiver.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiver.resx">
+      <DependentUpon>ucrReceiver.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiver.sw-KE.resx">
+      <DependentUpon>ucrReceiver.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverMultiple.fr-FR.resx">
+      <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverMultiple.resx">
+      <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverMultiple.sw-KE.resx">
+      <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverSingle.fr-FR.resx">
+      <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverSingle.resx">
+      <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverSingle.sw-KE.resx">
+      <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelector.fr-FR.resx">
+      <DependentUpon>ucrSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelector.resx">
+      <DependentUpon>ucrSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelector.sw-KE.resx">
+      <DependentUpon>ucrSelector.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
