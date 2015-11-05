@@ -1245,6 +1245,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to To Script.
+        '''</summary>
+        Friend ReadOnly Property To_Script() As String
+            Get
+                Return ResourceManager.GetString("To_Script", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Total Rain.
         '''</summary>
         Friend ReadOnly Property Total_Rain() As String
