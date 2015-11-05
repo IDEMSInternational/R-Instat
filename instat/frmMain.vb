@@ -187,4 +187,8 @@ Public Class frmMain
     Private Sub mnuEndofRains_Click(sender As Object, e As EventArgs) Handles mnuEndofRains.Click
         dlgEndofRains.ShowDialog()
     End Sub
+
+    Private Sub mnuGraphicsInventory_Click(sender As Object, e As EventArgs) Handles mnuGraphicsInventory.Click
+        dlgInventoryPlot.ShowDialog()
+    End Sub
 End Class

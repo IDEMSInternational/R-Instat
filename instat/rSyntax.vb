@@ -16,13 +16,25 @@
 
 
 Public Class RSyntax
-    Dim strScript As String
+    Dim strFunction As String
+    Dim strParameter As String()
+
     Public Sub SetFunction(strFunctionName As String)
-        strScript = strFunctionName
+        strFunction = strFunctionName
     End Sub
 
     Public Sub AddParameter(strParameterName As String, strParameterValue As String)
-
+        Dim boundA As Integer = strParameter.GetUpperBound(0)
+        Dim boundB As Integer = strParameter.GetUpperBound(1)
+        If strParameter.Length < 1 Then
+            strParameter = {strParameterName, strParameterValue}
+        Else
+            For i As Integer = 0 To boundA
+                For j As Integer = 0 To boundB
+                    strParameter = {strParameterName, strParameterValue}
+                Next
+            Next
+        End If
     End Sub
 
     Public Sub RemoveParameter(strParameterName As String, strParameterValue As String)
@@ -30,6 +42,8 @@ Public Class RSyntax
     End Sub
 
     Public Function GetScript() As String
+        Dim strScript As String
+        strScript = strFunction & "(" & strParameter.ToString
         Return MsgBox("Empty")
     End Function
 
