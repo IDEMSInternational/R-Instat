@@ -45,7 +45,7 @@ Partial Class ucrButtons
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 81
-        Me.cmdCancel.Tag = "Cancel"
+        Me.cmdCancel.Tag = "Close"
         Me.cmdCancel.Text = "Close"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
@@ -75,6 +75,7 @@ Partial Class ucrButtons
         Me.cmdPaste.Name = "cmdPaste"
         Me.cmdPaste.Size = New System.Drawing.Size(75, 23)
         Me.cmdPaste.TabIndex = 83
+        Me.cmdPaste.Tag = "To_Script"
         Me.cmdPaste.Text = "To Script"
         Me.cmdPaste.UseVisualStyleBackColor = True
         '

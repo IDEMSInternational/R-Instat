@@ -1,4 +1,4 @@
-﻿
+﻿Imports instat.Translations
 Public Class ucrButtons
     Public clsRsyntax As New RSyntax
 
@@ -29,5 +29,9 @@ Public Class ucrButtons
                 Next
             End If
         Next
+    End Sub
+
+    Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        translateEach(Controls)
     End Sub
 End Class
