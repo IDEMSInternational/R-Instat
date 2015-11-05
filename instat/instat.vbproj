@@ -243,6 +243,24 @@
     <Compile Include="ucrDataSelection.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrReceiver.designer.vb">
+      <DependentUpon>ucrReceiver.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReceiver.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrReceiverMultiple.designer.vb">
+      <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReceiverMultiple.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrReceiverSingle.designer.vb">
+      <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReceiverSingle.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrSelector.designer.vb">
       <DependentUpon>ucrSelector.vb</DependentUpon>
     </Compile>
@@ -393,6 +411,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.sw-KE.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiver.fr-FR.resx">
+      <DependentUpon>ucrReceiver.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiver.resx">
+      <DependentUpon>ucrReceiver.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiver.sw-KE.resx">
+      <DependentUpon>ucrReceiver.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverMultiple.fr-FR.resx">
+      <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverMultiple.resx">
+      <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverMultiple.sw-KE.resx">
+      <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverSingle.fr-FR.resx">
+      <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverSingle.resx">
+      <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverSingle.sw-KE.resx">
+      <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelector.fr-FR.resx">
       <DependentUpon>ucrSelector.vb</DependentUpon>
