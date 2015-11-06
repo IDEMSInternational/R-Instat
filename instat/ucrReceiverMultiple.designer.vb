@@ -19,24 +19,13 @@ Partial Class ucrReceiverMultiple
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lstSelectedVariables = New System.Windows.Forms.ListBox()
         Me.SuspendLayout()
-        '
-        'lblSelectedVariables
-        '
-        Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(3, 3)
-        Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
-        Me.lblSelectedVariables.TabIndex = 80
-        Me.lblSelectedVariables.Tag = "Selected_Variables"
-        Me.lblSelectedVariables.Text = "Selected Variables"
         '
         'lstSelectedVariables
         '
         Me.lstSelectedVariables.FormattingEnabled = True
-        Me.lstSelectedVariables.Location = New System.Drawing.Point(6, 19)
+        Me.lstSelectedVariables.Location = New System.Drawing.Point(3, 3)
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
         Me.lstSelectedVariables.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.lstSelectedVariables.Size = New System.Drawing.Size(84, 95)
@@ -46,15 +35,11 @@ Partial Class ucrReceiverMultiple
         'ucrReceiverMultiple
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.lstSelectedVariables)
         Me.Name = "ucrReceiverMultiple"
-        Me.Size = New System.Drawing.Size(98, 118)
+        Me.Size = New System.Drawing.Size(91, 101)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents lblSelectedVariables As Label
     Public WithEvents lstSelectedVariables As ListBox
 End Class
