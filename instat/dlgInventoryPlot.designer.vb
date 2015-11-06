@@ -103,7 +103,7 @@ Partial Class dlgInventoryPlot
         '
         'txtWetColour
         '
-        Me.txtWetColour.Location = New System.Drawing.Point(109, 87)
+        Me.txtWetColour.Location = New System.Drawing.Point(119, 87)
         Me.txtWetColour.Name = "txtWetColour"
         Me.txtWetColour.Size = New System.Drawing.Size(100, 20)
         Me.txtWetColour.TabIndex = 7
@@ -164,6 +164,9 @@ Partial Class dlgInventoryPlot
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtYlabel)
         Me.Controls.Add(Me.txtPlotName)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgInventoryPlot"
         Me.Text = "dlgInventoryPlot"
         Me.ResumeLayout(False)
