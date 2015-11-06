@@ -22,31 +22,51 @@ Partial Class dlgMultipleRegression
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.UcrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
+        Me.UcrButtons1 = New instat.ucrButtons()
         Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
-        Me.UcrSelector1 = New instat.ucrSelector()
+        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
+        '
+        'UcrSelectorAddRemove1
+        '
+        Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(22, 12)
+        Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
+        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(185, 131)
+        Me.UcrSelectorAddRemove1.TabIndex = 3
+        '
+        'UcrButtons1
+        '
+        Me.UcrButtons1.Location = New System.Drawing.Point(12, 226)
+        Me.UcrButtons1.Name = "UcrButtons1"
+        Me.UcrButtons1.Size = New System.Drawing.Size(410, 32)
+        Me.UcrButtons1.TabIndex = 2
         '
         'UcrReceiverMultiple1
         '
-        Me.UcrReceiverMultiple1.Location = New System.Drawing.Point(199, 12)
+        Me.UcrReceiverMultiple1.Location = New System.Drawing.Point(239, 55)
         Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
         Me.UcrReceiverMultiple1.Size = New System.Drawing.Size(98, 118)
         Me.UcrReceiverMultiple1.TabIndex = 0
         '
-        'UcrSelector1
+        'UcrReceiverSingle1
         '
-        Me.UcrSelector1.Location = New System.Drawing.Point(12, 12)
-        Me.UcrSelector1.Name = "UcrSelector1"
-        Me.UcrSelector1.Size = New System.Drawing.Size(181, 123)
-        Me.UcrSelector1.TabIndex = 1
+        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(239, 22)
+        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
+        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(106, 26)
+        Me.UcrReceiverSingle1.TabIndex = 4
         '
         'dlgMultipleRegression
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(300, 142)
-        Me.Controls.Add(Me.UcrSelector1)
+        Me.ClientSize = New System.Drawing.Size(441, 274)
+        Me.Controls.Add(Me.UcrReceiverSingle1)
+        Me.Controls.Add(Me.UcrSelectorAddRemove1)
+        Me.Controls.Add(Me.UcrButtons1)
         Me.Controls.Add(Me.UcrReceiverMultiple1)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgMultipleRegression"
         Me.Text = "dlgMultipleRegression"
         Me.ResumeLayout(False)
@@ -54,5 +74,7 @@ Partial Class dlgMultipleRegression
     End Sub
 
     Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
-    Friend WithEvents UcrSelector1 As ucrSelector
+    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents UcrSelectorAddRemove1 As ucrSelectorAddRemove
+    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
 End Class
