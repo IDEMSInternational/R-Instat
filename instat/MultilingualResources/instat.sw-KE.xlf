@@ -639,6 +639,14 @@
           <source>To Script</source>
           <target state="new">To Script</target>
         </trans-unit>
+        <trans-unit id="Ascending" translate="yes" xml:space="preserve">
+          <source>Ascending</source>
+          <target state="new">Ascending</target>
+        </trans-unit>
+        <trans-unit id="Descending" translate="yes" xml:space="preserve">
+          <source>Descending</source>
+          <target state="new">Descending</target>
+        </trans-unit>
       </group>
     </body>
   </file>
