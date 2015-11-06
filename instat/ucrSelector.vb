@@ -1,6 +1,6 @@
 ﻿Imports RDotNet
 Public Class ucrSelector
-    Public CurrentReceiver As ucrReceiver
+    Public CurrentReceiver As ucrReceiverMultiple
 
     Private Sub ucrDataSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim cvdataset As CharacterVector
@@ -24,15 +24,15 @@ Public Class ucrSelector
         End If
     End Sub
 
-    'Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-    '    If (lstAvailableVariable.SelectedItem <> "") Then
-    '        CurrentReceiver.AddSelected(lstAvailableVariable.SelectedItems)
-    '        lstAvailableVariable.Items.Remove(lstAvailableVariable.SelectedItem)
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        If (lstAvailableVariable.SelectedItem <> "") Then
+            CurrentReceiver.AddSelected()
+            lstAvailableVariable.Items.Remove(lstAvailableVariable.SelectedItem)
 
-    '    Else
-    '        MsgBox("No item was selected", vbInformation, "Selection message")
-    '    End If
-    'End Sub
+        Else
+            MsgBox("No item was selected", vbInformation, "Selection message")
+        End If
+    End Sub
 
     'Private Sub btnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click
     '    If (lstSelectedVariables.SelectedItem <> "") Then
