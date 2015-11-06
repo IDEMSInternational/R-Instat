@@ -22,8 +22,37 @@ Partial Class dlgMultipleRegression
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container
+        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
+        Me.UcrSelector1 = New instat.ucrSelector()
+        Me.SuspendLayout()
+        '
+        'UcrReceiverMultiple1
+        '
+        Me.UcrReceiverMultiple1.Location = New System.Drawing.Point(199, 12)
+        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
+        Me.UcrReceiverMultiple1.Size = New System.Drawing.Size(98, 118)
+        Me.UcrReceiverMultiple1.TabIndex = 0
+        '
+        'UcrSelector1
+        '
+        Me.UcrSelector1.Location = New System.Drawing.Point(12, 12)
+        Me.UcrSelector1.Name = "UcrSelector1"
+        Me.UcrSelector1.Size = New System.Drawing.Size(181, 123)
+        Me.UcrSelector1.TabIndex = 1
+        '
+        'dlgMultipleRegression
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(300, 142)
+        Me.Controls.Add(Me.UcrSelector1)
+        Me.Controls.Add(Me.UcrReceiverMultiple1)
+        Me.Name = "dlgMultipleRegression"
         Me.Text = "dlgMultipleRegression"
+        Me.ResumeLayout(False)
+
     End Sub
+
+    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
+    Friend WithEvents UcrSelector1 As ucrSelector
 End Class

@@ -329,6 +329,15 @@
     <EmbeddedResource Include="dlgInventoryPlot.sw-KE.resx">
       <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgMultipleRegression.fr-FR.resx">
+      <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMultipleRegression.resx">
+      <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMultipleRegression.sw-KE.resx">
+      <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.fr-FR.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </EmbeddedResource>
