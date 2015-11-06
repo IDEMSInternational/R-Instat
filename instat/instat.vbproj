@@ -297,14 +297,24 @@
     <Compile Include="ucrDataSelection.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrReceiver.Designer.vb">
+      <DependentUpon>ucrReceiver.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReceiver.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrReceiverMultiple.designer.vb">
       <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrReceiverMultiple.vb" />
+    <Compile Include="ucrReceiverMultiple.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrReceiverSingle.designer.vb">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrReceiverSingle.vb" />
+    <Compile Include="ucrReceiverSingle.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrSelector.designer.vb">
       <DependentUpon>ucrSelector.vb</DependentUpon>
     </Compile>
