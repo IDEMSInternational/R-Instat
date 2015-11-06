@@ -26,6 +26,7 @@ Partial Class ucrReceiverSingle
         '
         Me.txtReceiverSingle.Location = New System.Drawing.Point(3, 3)
         Me.txtReceiverSingle.Name = "txtReceiverSingle"
+        Me.txtReceiverSingle.ReadOnly = True
         Me.txtReceiverSingle.Size = New System.Drawing.Size(100, 20)
         Me.txtReceiverSingle.TabIndex = 0
         '
