@@ -24,8 +24,6 @@ Partial Class ucrSelector
     Private Sub InitializeComponent()
         Me.lblAvailableVariables = New System.Windows.Forms.Label()
         Me.lstAvailableVariable = New System.Windows.Forms.ListBox()
-        Me.btnRemove = New System.Windows.Forms.Button()
-        Me.btnAdd = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblAvailableVariables
@@ -41,7 +39,6 @@ Partial Class ucrSelector
         'lstAvailableVariable
         '
         Me.lstAvailableVariable.FormattingEnabled = True
-        Me.lstAvailableVariable.Items.AddRange(New Object() {"David", "Polycarp", "Stephen"})
         Me.lstAvailableVariable.Location = New System.Drawing.Point(12, 22)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
         Me.lstAvailableVariable.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
@@ -50,42 +47,18 @@ Partial Class ucrSelector
         Me.lstAvailableVariable.TabIndex = 81
         Me.lstAvailableVariable.Tag = ""
         '
-        'btnRemove
-        '
-        Me.btnRemove.Location = New System.Drawing.Point(102, 66)
-        Me.btnRemove.Name = "btnRemove"
-        Me.btnRemove.Size = New System.Drawing.Size(75, 23)
-        Me.btnRemove.TabIndex = 90
-        Me.btnRemove.Tag = "Remove"
-        Me.btnRemove.Text = "Remove "
-        Me.btnRemove.UseVisualStyleBackColor = True
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Location = New System.Drawing.Point(102, 37)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
-        Me.btnAdd.TabIndex = 89
-        Me.btnAdd.Tag = "Add"
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = True
-        '
         'ucrSelector
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.btnRemove)
-        Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.lblAvailableVariables)
         Me.Controls.Add(Me.lstAvailableVariable)
         Me.Name = "ucrSelector"
-        Me.Size = New System.Drawing.Size(181, 123)
+        Me.Size = New System.Drawing.Size(105, 122)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents lblAvailableVariables As Label
     Public WithEvents lstAvailableVariable As ListBox
-    Friend WithEvents btnRemove As Button
-    Friend WithEvents btnAdd As Button
 End Class
