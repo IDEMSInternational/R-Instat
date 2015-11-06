@@ -84,17 +84,18 @@ Public Class RInterface
 
     End Sub
 
-    Public Sub RunScript(strScript As String, Optional bReturnOutput As Boolean = True)
+    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0)
 
-        'Dim strCapturedScript
+        Dim strCapturedScript
         txtLog.Text = txtLog.Text & strScript & vbCrLf
         txtOutput.Text = txtOutput.Text & "> " & strScript & vbCrLf
-        If bReturnOutput Then
-            'strCapturedScript = "capture.output(" & strScript & ")"
-            'txtOutput.Text = txtOutput.Text & String.Join(vbCrLf, clsEngine.Evaluate(strCapturedScript).AsCharacter) & vbCrLf
-            txtOutput.Text = txtOutput.Text & "> " & String.Join(",", clsEngine.Evaluate(strScript).AsCharacter) & vbCrLf
-        Else
+        If bReturnOutput = 0 Then
             clsEngine.Evaluate(strScript)
+        ElseIf bReturnOutput = 1 Then
+            txtOutput.Text = txtOutput.Text & String.Join(vbCrLf, clsEngine.Evaluate(strScript).AsCharacter) & vbCrLf
+        Else
+            strCapturedScript = "capture.output(" & strScript & ")"
+            txtOutput.Text = txtOutput.Text & "> " & String.Join(",", clsEngine.Evaluate(strCapturedScript).AsCharacter) & vbCrLf
         End If
     End Sub
 
@@ -114,7 +115,7 @@ Public Class RInterface
     Public Sub climateObject()
         If Not climateObjectExists Then
             Me.clsEngine.Evaluate("setwd('" & climateObjectPath & "')")
-            Me.clsEngine.Evaluate("source(" & Chr(34) & "Sourcingscript.R" & Chr(34) & ")")
+            Me.clsEngine.Evaluate("source(" & Chr(34) & "SourcingScript.R" & Chr(34) & ")")
             Me.clsEngine.Evaluate("climate_obj<-climate$new(data_tables=list(data=data))")
             climateObjectExists = True
         End If

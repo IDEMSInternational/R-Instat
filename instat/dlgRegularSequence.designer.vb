@@ -48,7 +48,7 @@ Partial Class dlgRegularSequence
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.errorProvider = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.UcrBase = New instat.ucrButtons()
         Me.grpSequenceType.SuspendLayout()
         Me.grpSequence.SuspendLayout()
         Me.grpRepeatSingle.SuspendLayout()
@@ -116,7 +116,7 @@ Partial Class dlgRegularSequence
         Me.grpSequence.Controls.Add(Me.txtTo)
         Me.grpSequence.Controls.Add(Me.txtSteps)
         Me.grpSequence.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequence.Location = New System.Drawing.Point(12, 46)
+        Me.grpSequence.Location = New System.Drawing.Point(15, 38)
         Me.grpSequence.Name = "grpSequence"
         Me.grpSequence.Size = New System.Drawing.Size(180, 96)
         Me.grpSequence.TabIndex = 0
@@ -185,7 +185,7 @@ Partial Class dlgRegularSequence
         Me.grpRepeatSingle.Controls.Add(Me.txtRepeatTimes)
         Me.grpRepeatSingle.Controls.Add(Me.txtValue)
         Me.grpRepeatSingle.Controls.Add(Me.lblValue)
-        Me.grpRepeatSingle.Location = New System.Drawing.Point(15, 42)
+        Me.grpRepeatSingle.Location = New System.Drawing.Point(136, 36)
         Me.grpRepeatSingle.Name = "grpRepeatSingle"
         Me.grpRepeatSingle.Size = New System.Drawing.Size(179, 100)
         Me.grpRepeatSingle.TabIndex = 9
@@ -242,7 +242,7 @@ Partial Class dlgRegularSequence
         Me.grpSequence2.Controls.Add(Me.Label4)
         Me.grpSequence2.Controls.Add(Me.Label5)
         Me.grpSequence2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequence2.Location = New System.Drawing.Point(213, 47)
+        Me.grpSequence2.Location = New System.Drawing.Point(207, 47)
         Me.grpSequence2.Name = "grpSequence2"
         Me.grpSequence2.Size = New System.Drawing.Size(180, 95)
         Me.grpSequence2.TabIndex = 10
@@ -310,12 +310,12 @@ Partial Class dlgRegularSequence
         '
         Me.errorProvider.ContainerControl = Me
         '
-        'UcrButtons1
+        'UcrBase
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(12, 157)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(403, 32)
-        Me.UcrButtons1.TabIndex = 5
+        Me.UcrBase.Location = New System.Drawing.Point(12, 157)
+        Me.UcrBase.Name = "UcrBase"
+        Me.UcrBase.Size = New System.Drawing.Size(403, 32)
+        Me.UcrBase.TabIndex = 5
         '
         'dlgRegularSequence
         '
@@ -325,7 +325,7 @@ Partial Class dlgRegularSequence
         Me.Controls.Add(Me.grpSequence2)
         Me.Controls.Add(Me.grpSequence)
         Me.Controls.Add(Me.grpRepeatSingle)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.Controls.Add(Me.UcrBase)
         Me.Controls.Add(Me.grpSequenceType)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -356,7 +356,7 @@ Partial Class dlgRegularSequence
     Friend WithEvents txtFrom As TextBox
     Friend WithEvents txtTo As TextBox
     Friend WithEvents txtSteps As TextBox
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents UcrBase As ucrButtons
     Friend WithEvents grpRepeatSingle As GroupBox
     Friend WithEvents lblTimes3 As Label
     Friend WithEvents lblRepeated As Label
