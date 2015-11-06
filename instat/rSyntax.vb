@@ -17,14 +17,14 @@
 
 Public Class RSyntax
     Dim strFunction As String
-    Dim strParameter As String()
+    Dim strParameter As String(,)
 
     Public Sub SetFunction(strFunctionName As String)
         strFunction = strFunctionName
     End Sub
 
     Public Sub AddParameter(strParameterName As String, strParameterValue As String)
-        strParameter = {strParameterName, strParameterValue}
+        'strParameter = {strParameterName, strParameterValue}
         'Dim boundA As Integer = strParameter.GetUpperBound(0)
         'Dim boundB As Integer = strParameter.GetUpperBound(1)
         'If strParameter.Length < 1 Then
@@ -43,7 +43,9 @@ Public Class RSyntax
     End Sub
 
     Public Function GetScript() As String
-        Return MsgBox("WIP")
+        Dim strScript As String
+        strScript = strFunction & "(" & strParameter(0, 0) & "=" & strParameter(1, 1)
+        Return strScript
     End Function
 
 End Class
