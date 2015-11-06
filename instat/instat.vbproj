@@ -321,6 +321,12 @@
     <Compile Include="ucrSelector.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSelectorAddRemove.designer.vb">
+      <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorAddRemove.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlgCalculator.fr-FR.resx">
@@ -546,6 +552,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelector.sw-KE.resx">
       <DependentUpon>ucrSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorAddRemove.fr-FR.resx">
+      <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorAddRemove.resx">
+      <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorAddRemove.sw-KE.resx">
+      <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
