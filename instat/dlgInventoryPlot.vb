@@ -16,9 +16,6 @@ Public Class dlgInventoryPlot
         Me.Hide()
     End Sub
 
-    'Private Sub chkDrySpell_CheckedChanged(sender As Object, e As EventArgs) Handles chkDrySpell.CheckedChanged
-    '    UpdateVisible()
-    'End Sub
 
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles Me.Load
         'UpdateVisible()
@@ -32,10 +29,6 @@ Public Class dlgInventoryPlot
         'nudDryLength.Visible = chkDrySpell.Checked
         'nudWithin.Visible = chkDrySpell.Checked
     End Sub
-
-    'Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
-
-    'End Sub
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 

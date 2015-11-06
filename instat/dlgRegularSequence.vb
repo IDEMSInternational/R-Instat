@@ -17,6 +17,7 @@ Public Class dlgRegularSequence
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grpSequence2.Hide()
         grpRepeatSingle.Hide()
+        UcrButtons1.clsRsyntax.SetFunction("seq")
     End Sub
 
     Private Sub UcrButtons1_ClickOk(sender As Object, e As EventArgs) Handles UcrButtons1.ClickOk
