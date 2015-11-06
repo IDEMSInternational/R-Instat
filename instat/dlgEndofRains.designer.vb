@@ -167,6 +167,9 @@ Partial Class dlgEndofRains
         Me.Controls.Add(Me.lblEarliest)
         Me.Controls.Add(Me.lblDataList)
         Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgEndofRains"
         Me.Text = "dlgEndofRains"
         CType(Me.nudCapacityMax, System.ComponentModel.ISupportInitialize).EndInit()

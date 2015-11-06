@@ -320,6 +320,15 @@
     <EmbeddedResource Include="dlgEndofRains.sw-KE.resx">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExtremeEvents.fr-FR.resx">
+      <DependentUpon>dlgExtremeEvents.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExtremeEvents.resx">
+      <DependentUpon>dlgExtremeEvents.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExtremeEvents.sw-KE.resx">
+      <DependentUpon>dlgExtremeEvents.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgInventoryPlot.fr-FR.resx">
       <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -373,6 +382,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxPlot.sw-KE.resx">
       <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWaterBalance.fr-FR.resx">
+      <DependentUpon>dlgWaterBalance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWaterBalance.resx">
+      <DependentUpon>dlgWaterBalance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWaterBalance.sw-KE.resx">
+      <DependentUpon>dlgWaterBalance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.fr-FR.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>
