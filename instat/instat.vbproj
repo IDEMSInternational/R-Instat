@@ -171,6 +171,12 @@
     <Compile Include="dlgMultipleRegression.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPlot.designer.vb">
+      <DependentUpon>dlgPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRegularSequence.designer.vb">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </Compile>
@@ -346,6 +352,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMultipleRegression.sw-KE.resx">
       <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPlot.fr-FR.resx">
+      <DependentUpon>dlgPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPlot.resx">
+      <DependentUpon>dlgPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPlot.sw-KE.resx">
+      <DependentUpon>dlgPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.fr-FR.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>

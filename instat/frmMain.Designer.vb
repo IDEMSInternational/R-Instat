@@ -57,7 +57,7 @@ Partial Class frmMain
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.ResizeWorksheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GraphicsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PlotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuBoxPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.HistogramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProbabilityPlotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -471,18 +471,18 @@ Partial Class frmMain
         '
         'GraphicsToolStripMenuItem
         '
-        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotToolStripMenuItem, Me.mnuBoxPlot, Me.HistogramToolStripMenuItem, Me.ProbabilityPlotToolStripMenuItem, Me.DotplotToolStripMenuItem, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem, Me.mnuGraphicsInventory})
+        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuGraphicsPlot, Me.mnuBoxPlot, Me.HistogramToolStripMenuItem, Me.ProbabilityPlotToolStripMenuItem, Me.DotplotToolStripMenuItem, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem, Me.mnuGraphicsInventory})
         Me.GraphicsToolStripMenuItem.Name = "GraphicsToolStripMenuItem"
         Me.GraphicsToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.GraphicsToolStripMenuItem.Tag = "Graphics"
         Me.GraphicsToolStripMenuItem.Text = "Graphics"
         '
-        'PlotToolStripMenuItem
+        'mnuGraphicsPlot
         '
-        Me.PlotToolStripMenuItem.Name = "PlotToolStripMenuItem"
-        Me.PlotToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.PlotToolStripMenuItem.Tag = "Plot"
-        Me.PlotToolStripMenuItem.Text = "Plot..."
+        Me.mnuGraphicsPlot.Name = "mnuGraphicsPlot"
+        Me.mnuGraphicsPlot.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsPlot.Tag = "Plot"
+        Me.mnuGraphicsPlot.Text = "Plot..."
         '
         'mnuBoxPlot
         '
@@ -1917,7 +1917,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
     Friend WithEvents ResizeWorksheetToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GraphicsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PlotToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsPlot As ToolStripMenuItem
     Friend WithEvents mnuBoxPlot As ToolStripMenuItem
     Friend WithEvents HistogramToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ProbabilityPlotToolStripMenuItem As ToolStripMenuItem
