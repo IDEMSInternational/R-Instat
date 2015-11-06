@@ -23,7 +23,7 @@
                 End If
                 strScript = strScript & "'" & temp.ToString & "'"
             Next
-            strScript = strScript & ")], main='" & txtTittle.Text & ")"
+            strScript = strScript & ")], main='" & txtTittle.Text & "')"
             frmMain.clsRInterface.RunScript(strScript)
             Me.Hide()
         End If
