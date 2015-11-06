@@ -195,4 +195,8 @@ Public Class frmMain
     Private Sub mnuStatisticsRegressionMultiple_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionMultiple.Click
         dlgMultipleRegression.ShowDialog()
     End Sub
+
+    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsPlot.Click
+        dlgPlot.ShowDialog()
+    End Sub
 End Class
