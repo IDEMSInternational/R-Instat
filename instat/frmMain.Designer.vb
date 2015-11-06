@@ -44,7 +44,7 @@ Partial Class frmMain
         Me.RegressionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SimpleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SimpleWithGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MultipleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStatisticsRegressionMultiple = New System.Windows.Forms.ToolStripMenuItem()
         Me.GeneralLinearModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.CorrelationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -68,6 +68,7 @@ Partial Class frmMain
         Me.ScatterplotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StemAndLeafToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoadGraphToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsInventory = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatisticsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -261,7 +262,6 @@ Partial Class frmMain
         Me.KiswahiliToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FrenchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuGraphicsInventory = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -376,7 +376,7 @@ Partial Class frmMain
         '
         'RegressionToolStripMenuItem
         '
-        Me.RegressionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SimpleToolStripMenuItem, Me.SimpleWithGroupsToolStripMenuItem, Me.MultipleToolStripMenuItem, Me.GeneralLinearModelToolStripMenuItem, Me.ToolStripSeparator11, Me.CorrelationToolStripMenuItem, Me.LogLinearModelsToolStripMenuItem})
+        Me.RegressionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SimpleToolStripMenuItem, Me.SimpleWithGroupsToolStripMenuItem, Me.mnuStatisticsRegressionMultiple, Me.GeneralLinearModelToolStripMenuItem, Me.ToolStripSeparator11, Me.CorrelationToolStripMenuItem, Me.LogLinearModelsToolStripMenuItem})
         Me.RegressionToolStripMenuItem.Name = "RegressionToolStripMenuItem"
         Me.RegressionToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
         Me.RegressionToolStripMenuItem.Tag = "Regression"
@@ -394,11 +394,11 @@ Partial Class frmMain
         Me.SimpleWithGroupsToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.SimpleWithGroupsToolStripMenuItem.Text = "Simple with groups..."
         '
-        'MultipleToolStripMenuItem
+        'mnuStatisticsRegressionMultiple
         '
-        Me.MultipleToolStripMenuItem.Name = "MultipleToolStripMenuItem"
-        Me.MultipleToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
-        Me.MultipleToolStripMenuItem.Text = "Multiple..."
+        Me.mnuStatisticsRegressionMultiple.Name = "mnuStatisticsRegressionMultiple"
+        Me.mnuStatisticsRegressionMultiple.Size = New System.Drawing.Size(195, 22)
+        Me.mnuStatisticsRegressionMultiple.Text = "Multiple..."
         '
         'GeneralLinearModelToolStripMenuItem
         '
@@ -553,6 +553,12 @@ Partial Class frmMain
         Me.LoadGraphToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.LoadGraphToolStripMenuItem.Tag = "Load_Graph"
         Me.LoadGraphToolStripMenuItem.Text = "Load Graph..."
+        '
+        'mnuGraphicsInventory
+        '
+        Me.mnuGraphicsInventory.Name = "mnuGraphicsInventory"
+        Me.mnuGraphicsInventory.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsInventory.Text = "Inventory Plot"
         '
         'StatisticsToolStripMenuItem
         '
@@ -1853,12 +1859,6 @@ Partial Class frmMain
         Me.FrenchToolStripMenuItem.Tag = "French"
         Me.FrenchToolStripMenuItem.Text = "French"
         '
-        'mnuGraphicsInventory
-        '
-        Me.mnuGraphicsInventory.Name = "mnuGraphicsInventory"
-        Me.mnuGraphicsInventory.Size = New System.Drawing.Size(170, 22)
-        Me.mnuGraphicsInventory.Text = "Inventory Plot"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1904,7 +1904,7 @@ Partial Class frmMain
     Friend WithEvents RegressionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SimpleToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SimpleWithGroupsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents MultipleToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuStatisticsRegressionMultiple As ToolStripMenuItem
     Friend WithEvents GeneralLinearModelToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
     Friend WithEvents CorrelationToolStripMenuItem As ToolStripMenuItem
