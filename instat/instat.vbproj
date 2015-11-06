@@ -135,6 +135,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dlgAnovaOneWay.Designer.vb">
+      <DependentUpon>dlgAnovaOneWay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAnovaOneWay.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCalculator.designer.vb">
       <DependentUpon>dlgCalculator.vb</DependentUpon>
     </Compile>
@@ -147,6 +153,12 @@
     <Compile Include="dlgDescriptiveStatistics.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDisplayDaily.Designer.vb">
+      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDisplayDaily.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgEndofRains.designer.vb">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>
     </Compile>
@@ -157,6 +169,12 @@
       <DependentUpon>dlgExtremeEvents.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgExtremeEvents.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgHistogram.Designer.vb">
+      <DependentUpon>dlgHistogram.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgHistogram.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgInventoryPlot.designer.vb">
@@ -187,6 +205,12 @@
       <DependentUpon>dlgSort.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgSort.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSpells.Designer.vb">
+      <DependentUpon>dlgSpells.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSpells.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgStartofRains.designer.vb">

@@ -17,11 +17,11 @@ Public Class dlgRegularSequence
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grpSequence2.Hide()
         grpRepeatSingle.Hide()
-        UcrButtons1.clsRsyntax.SetFunction("seq")
+        UcrBase.clsRsyntax.SetFunction("seq")
     End Sub
 
-    Private Sub UcrButtons1_ClickOk(sender As Object, e As EventArgs) Handles UcrButtons1.ClickOk
-        frmMain.clsRInterface.RunScript(UcrButtons1.clsRsyntax.GetScript())
+    Private Sub UcrButtons1_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
+        frmMain.clsRInterface.RunScript(UcrBase.clsRsyntax.GetScript(), 1)
     End Sub
 
     Private Sub rdSIngleValue_Click(sender As Object, e As EventArgs) Handles rdSIngleValue.Click
@@ -42,19 +42,35 @@ Public Class dlgRegularSequence
         grpSequence.Visible = True
     End Sub
 
-    Private Sub UcrButtons1_Load(sender As Object, e As EventArgs)
-        UcrButtons1.clsRsyntax.SetFunction("seq")
-    End Sub
-
     Private Sub txtFrom_TextChanged(sender As Object, e As EventArgs) Handles txtFrom.TextChanged
-        UcrButtons1.clsRsyntax.AddParameter("from", txtFrom.Text)
+        UcrBase.clsRsyntax.AddParameter("from", txtFrom.Text)
     End Sub
 
     Private Sub txtTo_TextChanged(sender As Object, e As EventArgs) Handles txtTo.TextChanged
-        UcrButtons1.clsRsyntax.AddParameter("to", txtTo.Text)
+        UcrBase.clsRsyntax.AddParameter("to", txtTo.Text)
     End Sub
 
     Private Sub txtSteps_TextChanged(sender As Object, e As EventArgs) Handles txtSteps.TextChanged
-        UcrButtons1.clsRsyntax.AddParameter("by", txtSteps.Text)
+        UcrBase.clsRsyntax.AddParameter("by", txtSteps.Text)
+    End Sub
+
+    Private Sub datePicker1_ValueChanged(sender As Object, e As EventArgs) Handles datePicker1.ValueChanged
+        UcrBase.clsRsyntax.AddParameter("from", Format(datePicker1.Value, "yyyy/MM/dd"))
+    End Sub
+
+    Private Sub datePicker2_ValueChanged(sender As Object, e As EventArgs) Handles datePicker2.ValueChanged
+        UcrBase.clsRsyntax.AddParameter("to", Format(datePicker2.Value, "yyyy/MM/dd"))
+    End Sub
+
+    Private Sub cboBy_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboBy.SelectedIndexChanged
+        UcrBase.clsRsyntax.AddParameter("by", cboBy.SelectedItem.ToString())
+    End Sub
+
+    Private Sub txtValue_TextChanged(sender As Object, e As EventArgs) Handles txtValue.TextChanged
+        UcrBase.clsRsyntax.AddParameter("from", Format(datePicker2.Value, "yyyy/MM/dd"))
+    End Sub
+
+    Private Sub txtRepeatTimes_TextChanged(sender As Object, e As EventArgs) Handles txtRepeatTimes.TextChanged
+        UcrBase.clsRsyntax.AddParameter("length.out", txtRepeatTimes.Text)
     End Sub
 End Class
