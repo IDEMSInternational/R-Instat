@@ -199,4 +199,8 @@ Public Class frmMain
     Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsPlot.Click
         dlgPlot.ShowDialog()
     End Sub
+
+    Private Sub mnuFileCloseWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileCloseWorksheet.Click
+
+    End Sub
 End Class

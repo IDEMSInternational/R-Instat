@@ -20,5 +20,4 @@
             lstSelectedVariables.Items.Remove(objItem)
         Next
     End Sub
-
 End Class
