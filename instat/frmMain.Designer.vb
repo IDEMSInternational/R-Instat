@@ -59,7 +59,7 @@ Partial Class frmMain
         Me.GraphicsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuGraphicsPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuBoxPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HistogramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsHistogram = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProbabilityPlotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DotplotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindroseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -471,7 +471,7 @@ Partial Class frmMain
         '
         'GraphicsToolStripMenuItem
         '
-        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuGraphicsPlot, Me.mnuBoxPlot, Me.HistogramToolStripMenuItem, Me.ProbabilityPlotToolStripMenuItem, Me.DotplotToolStripMenuItem, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem, Me.mnuGraphicsInventory})
+        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuGraphicsPlot, Me.mnuBoxPlot, Me.mnuGraphicsHistogram, Me.ProbabilityPlotToolStripMenuItem, Me.DotplotToolStripMenuItem, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem, Me.mnuGraphicsInventory})
         Me.GraphicsToolStripMenuItem.Name = "GraphicsToolStripMenuItem"
         Me.GraphicsToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.GraphicsToolStripMenuItem.Tag = "Graphics"
@@ -491,12 +491,12 @@ Partial Class frmMain
         Me.mnuBoxPlot.Tag = "Boxplot"
         Me.mnuBoxPlot.Text = "Boxplot.."
         '
-        'HistogramToolStripMenuItem
+        'mnuGraphicsHistogram
         '
-        Me.HistogramToolStripMenuItem.Name = "HistogramToolStripMenuItem"
-        Me.HistogramToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.HistogramToolStripMenuItem.Tag = "Histogram"
-        Me.HistogramToolStripMenuItem.Text = "Histogram..."
+        Me.mnuGraphicsHistogram.Name = "mnuGraphicsHistogram"
+        Me.mnuGraphicsHistogram.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsHistogram.Tag = "Histogram"
+        Me.mnuGraphicsHistogram.Text = "Histogram..."
         '
         'ProbabilityPlotToolStripMenuItem
         '
@@ -1919,7 +1919,7 @@ Partial Class frmMain
     Friend WithEvents GraphicsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuGraphicsPlot As ToolStripMenuItem
     Friend WithEvents mnuBoxPlot As ToolStripMenuItem
-    Friend WithEvents HistogramToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsHistogram As ToolStripMenuItem
     Friend WithEvents ProbabilityPlotToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DotplotToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents WindroseToolStripMenuItem As ToolStripMenuItem

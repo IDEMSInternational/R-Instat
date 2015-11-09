@@ -4,18 +4,18 @@ Public Class ucrSelector
     Public CurrentReceiver As ucrReceiver
 
     Private Sub ucrDataSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        translateEach(Controls)
-        Dim cvdataset As CharacterVector
-        Dim adataset As Array
+        Dim cvDataset As CharacterVector
+        Dim aDataset As Array
         Dim i As Integer
 
         translateEach(Controls)
-        cvdataset = frmMain.clsRInterface.GetVariables("colnames(data)")
-        adataset = cvdataset.ToArray
-        For i = 0 To adataset.GetLength(0) - 1
-            lstAvailableVariable.Items.Add(adataset(i))
+        cvDataset = frmMain.clsRInterface.GetVariables("colnames(data)")
+        aDataset = cvDataset.ToArray
+        For i = 0 To aDataset.GetLength(0) - 1
+            If Not lstAvailableVariable.Items.Contains(aDataset(i)) Then
+                lstAvailableVariable.Items.Add(aDataset(i))
+            End If
         Next
-
     End Sub
 
     Public Sub SetCurrentReciever(conReceiver As ucrReceiver)

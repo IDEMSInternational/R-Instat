@@ -14,10 +14,14 @@
         Dim objItem As Object
         Dim tempObjects(lstSelectedVariables.SelectedItems.Count - 1) As Object
 
-        lstSelectedVariables.SelectedItems.CopyTo(tempObjects, 0)
-        For Each objItem In tempObjects
-            Selector.lstAvailableVariable.Items.Add(objItem)
-            lstSelectedVariables.Items.Remove(objItem)
-        Next
+        If lstSelectedVariables.SelectedItems.Count > 0 Then
+            lstSelectedVariables.SelectedItems.CopyTo(tempObjects, 0)
+            For Each objItem In tempObjects
+                Selector.lstAvailableVariable.Items.Add(objItem)
+                lstSelectedVariables.Items.Remove(objItem)
+            Next
+        Else
+            MsgBox("There is nothing to remove", vbInformation, "Selection message")
+        End If
     End Sub
 End Class
