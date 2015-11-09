@@ -89,6 +89,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Ascending.
+        '''</summary>
+        Friend ReadOnly Property Ascending() As String
+            Get
+                Return ResourceManager.GetString("Ascending", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Available  Variables.
         '''</summary>
         Friend ReadOnly Property Available_Variables() As String
@@ -338,6 +347,15 @@ Namespace My.Resources
         Friend ReadOnly Property Days() As String
             Get
                 Return ResourceManager.GetString("Days", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Descending.
+        '''</summary>
+        Friend ReadOnly Property Descending() As String
+            Get
+                Return ResourceManager.GetString("Descending", resourceCulture)
             End Get
         End Property
         

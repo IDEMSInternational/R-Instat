@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports RDotNet
+Imports instat.Translations
 
 Public Class ucrDataSelection
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -37,6 +38,7 @@ Public Class ucrDataSelection
 
     Private Sub ucrDataSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         loadColumns()
+        translateEach(Controls)
     End Sub
 
     Public Sub loadColumns()
