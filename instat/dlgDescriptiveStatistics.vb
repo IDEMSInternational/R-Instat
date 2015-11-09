@@ -29,7 +29,6 @@
 
     Private Sub dlgDescriptiveStatistics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grpgraphics.Visible = False
-
     End Sub
 
     Private Sub chkGraphics_CheckedChanged(sender As Object, e As EventArgs) Handles chkGraphics.CheckedChanged
@@ -39,5 +38,9 @@
         If chkGraphics.Checked = False Then
             grpgraphics.Visible = False
         End If
+    End Sub
+
+    Private Sub UcrDataSelection1_Load(sender As Object, e As EventArgs) Handles UcrDataSelection1.Load
+
     End Sub
 End Class
