@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Paomedia-Small-N-Flat-Window-layout" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Paomedia-Small-N-Flat-Window-layout.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Oxygen-Icons.org-Oxygen-Actions-window-duplicate" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Oxygen-Icons.org-Oxygen-Actions-window-duplicate.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Carlosjj-Microsoft-Office-2013-Excel" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Carlosjj-Microsoft-Office-2013-Excel.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Oxygen-Icons.org-Oxygen-Status-dialog-error" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Oxygen-Icons.org-Oxygen-Status-dialog-error.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Alecive-Flatwoken-Apps-Run" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Alecive-Flatwoken-Apps-Run.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ongeza</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Katisha</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Funga</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Hariri</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Jalada</value>
+  </data>
+  <data name="Graphics" xml:space="preserve">
+    <value>Michoro</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Msaada</value>
+  </data>
+  <data name="Import_Export" xml:space="preserve">
+    <value>Hamisha/Leta</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Simamia</value>
+  </data>
+  <data name="New_Worksheet" xml:space="preserve">
+    <value>Lahakazi mpya</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Sawa</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Chapisha</value>
+  </data>
+  <data name="Print_Preview" xml:space="preserve">
+    <value>Kihakiki Uchapishaji</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Ondoa</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Weka upya</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Hifadhi</value>
+  </data>
+  <data name="Save_As" xml:space="preserve">
+    <value>Hifadha Kama</value>
+  </data>
+  <data name="Script" xml:space="preserve">
+    <value>Hati</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Hesabu</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Wasilisha</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Tendua</value>
+  </data>
+  <data name="Window" xml:space="preserve">
+    <value>Dirisha</value>
+  </data>
+  <data name="Exit_" xml:space="preserve">
+    <value>Toka:</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Ondoa</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Nakili</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Kata</value>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Tafuta</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Bandika</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>Badilisha</value>
+  </data>
+  <data name="Select_All" xml:space="preserve">
+    <value>Teua Yote</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Lugha</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Fungua</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Towe</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Uteuzi</value>
+  </data>
+  <data name="Calculations" xml:space="preserve">
+    <value>Ukokotozi</value>
+  </data>
+  <data name="Column_Properties" xml:space="preserve">
+    <value>Sifa za Safuwima...</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Display" xml:space="preserve">
+    <value>Onyesha</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Kiingereza</value>
+  </data>
+  <data name="Enter" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>Kifaransa</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Kikundi</value>
+  </data>
+  <data name="Histogram" xml:space="preserve">
+    <value>Histogramu</value>
+  </data>
+  <data name="Plot" xml:space="preserve">
+    <value>Ploti</value>
+  </data>
+  <data name="Reshape" xml:space="preserve">
+    <value>Unda upya</value>
+  </data>
+  <data name="Sample_Size" xml:space="preserve">
+    <value>Ukubwa sampuli</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Muhtasari</value>
+  </data>
+  <data name="Tables" xml:space="preserve">
+    <value>Majedwali</value>
+  </data>
+  <data name="Expand" xml:space="preserve">
+    <value>Finyuza</value>
+  </data>
+  <data name="Select_" xml:space="preserve">
+    <value>Teua</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>angua</value>
+  </data>
+  <data name="Stack" xml:space="preserve">
+    <value>Mpororo</value>
+  </data>
+  <data name="Transform" xml:space="preserve">
+    <value>Geuhamisha...</value>
+  </data>
+  <data name="Clear1" xml:space="preserve">
+    <value>Ondoa uteuzi	Del</value>
+  </data>
+  <data name="Find1" xml:space="preserve">
+    <value>Tafuta...	Ctrl+F</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>chaguo</value>
+  </data>
+  <data name="Paste1" xml:space="preserve">
+    <value>Bandika	Ctrl+V</value>
+  </data>
+  <data name="Recall" xml:space="preserve">
+    <value>Itisha</value>
+  </data>
+  <data name="Replace1" xml:space="preserve">
+    <value>Badilisha...	Ctrl+H</value>
+  </data>
+  <data name="Data_View" xml:space="preserve">
+    <value>Mwoneko Data...</value>
+  </data>
+  <data name="Not_Yet_Implemented" xml:space="preserve">
+    <value>Haijatekelezwa</value>
+  </data>
+  <data name="Within" xml:space="preserve">
+    <value>Ndani ya:</value>
+  </data>
+  <data name="Column_Name" xml:space="preserve">
+    <value>Jina la Safuwima</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Siku</value>
+  </data>
+</root>

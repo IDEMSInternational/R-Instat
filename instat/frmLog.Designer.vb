@@ -42,6 +42,7 @@ Partial Class frmLog
         Me.ClientSize = New System.Drawing.Size(284, 261)
         Me.Controls.Add(Me.txtLog)
         Me.Name = "frmLog"
+        Me.ShowIcon = False
         Me.Text = "Log Window"
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -35,9 +35,9 @@ Partial Class dlgDescriptiveStatistics
         '
         'UcrDataSelection1
         '
-        Me.UcrDataSelection1.Location = New System.Drawing.Point(2, 3)
+        Me.UcrDataSelection1.Location = New System.Drawing.Point(27, 5)
         Me.UcrDataSelection1.Name = "UcrDataSelection1"
-        Me.UcrDataSelection1.Size = New System.Drawing.Size(366, 122)
+        Me.UcrDataSelection1.Size = New System.Drawing.Size(332, 122)
         Me.UcrDataSelection1.TabIndex = 0
         '
         'btnStatistics
@@ -79,7 +79,7 @@ Partial Class dlgDescriptiveStatistics
         Me.chkBoxPlot.Name = "chkBoxPlot"
         Me.chkBoxPlot.Size = New System.Drawing.Size(65, 17)
         Me.chkBoxPlot.TabIndex = 60
-        Me.chkBoxPlot.Tag = "BoxPlot"
+        Me.chkBoxPlot.Tag = "Box_Plot"
         Me.chkBoxPlot.Text = "Box Plot"
         Me.chkBoxPlot.UseVisualStyleBackColor = True
         '
@@ -108,16 +108,16 @@ Partial Class dlgDescriptiveStatistics
         'UcrButtons1
         '
         Me.UcrButtons1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.UcrButtons1.Location = New System.Drawing.Point(0, 218)
+        Me.UcrButtons1.Location = New System.Drawing.Point(0, 195)
         Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(372, 30)
+        Me.UcrButtons1.Size = New System.Drawing.Size(407, 30)
         Me.UcrButtons1.TabIndex = 91
         '
         'dlgDescriptiveStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(372, 248)
+        Me.ClientSize = New System.Drawing.Size(407, 225)
         Me.Controls.Add(Me.UcrButtons1)
         Me.Controls.Add(Me.btnStatistics)
         Me.Controls.Add(Me.grpgraphics)
@@ -126,6 +126,7 @@ Partial Class dlgDescriptiveStatistics
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDescriptiveStatistics"
+        Me.ShowIcon = False
         Me.Tag = "Descriptive_Statistics"
         Me.Text = "Descriptive Statistics"
         Me.grpgraphics.ResumeLayout(False)

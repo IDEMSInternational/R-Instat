@@ -1,4 +1,4 @@
-﻿' CLIMSOFT - Climate Database Management System
+﻿' Instat+R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -22,11 +22,15 @@ Imports System.Text
 Imports System.Threading.Tasks
 
 
+
+
 Public Class RInterface
     ' R interface class. Each instance of the class has its own REngine instance
+    Dim climateObjectPath As String = "C:\\ClimateObject\\R"
     Dim clsEngine As REngine
-    Dim txtOutput As TextBox
-    Dim txtLog As TextBox
+    Dim txtOutput As New TextBox
+    Dim txtLog As New TextBox
+    Dim climateObjectExists As Boolean = False
 
     Public Sub New()
 
@@ -80,17 +84,41 @@ Public Class RInterface
 
     End Sub
 
-    Public Sub RunScript(strScript As String)
+    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0)
 
-        Dim temp
+        Dim strCapturedScript
         txtLog.Text = txtLog.Text & strScript & vbCrLf
-        txtOutput.Text = txtOutput.Text & "> " & strScript & vbCrLf & String.Join(",", clsEngine.Evaluate(strScript).AsCharacter) & vbCrLf
-
+        txtOutput.Text = txtOutput.Text & "> " & strScript & vbCrLf
+        If bReturnOutput = 0 Then
+            clsEngine.Evaluate(strScript)
+        ElseIf bReturnOutput = 1 Then
+            txtOutput.Text = txtOutput.Text & String.Join(vbCrLf, clsEngine.Evaluate(strScript).AsCharacter) & vbCrLf
+        Else
+            strCapturedScript = "capture.output(" & strScript & ")"
+            txtOutput.Text = txtOutput.Text & "> " & String.Join(",", clsEngine.Evaluate(strCapturedScript).AsCharacter) & vbCrLf
+        End If
     End Sub
 
     Public Function GetData(strLabel As String) As DataFrame
 
-        Return Me.clsEngine.Evaluate(strLabel).AsDataFrame()
+        Me.clsEngine.Evaluate("temp<-" & strLabel).AsDataFrame()
+        Return Me.clsEngine.GetSymbol("temp").AsDataFrame()
 
     End Function
+
+    Public Function GetVariables(strLabel As String) As CharacterVector
+
+        Return Me.clsEngine.Evaluate(strLabel).AsCharacter
+
+    End Function
+
+    Public Sub climateObject()
+        If Not climateObjectExists Then
+            Me.clsEngine.Evaluate("setwd('" & climateObjectPath & "')")
+            Me.clsEngine.Evaluate("source(" & Chr(34) & "SourcingScript.R" & Chr(34) & ")")
+            Me.clsEngine.Evaluate("climate_obj<-climate$new(data_tables=list(data=data))")
+            climateObjectExists = True
+        End If
+    End Sub
+
 End Class

@@ -1,4 +1,4 @@
-﻿' CLIMSOFT - Climate Database Management System
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -14,10 +14,9 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports RDotNet
+Imports instat.Translations
 
 Public Class ucrDataSelection
-    Dim clsRInterface As New RInterface
-
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If (lstAvailableVariable.SelectedItem <> "") Then
             lstSelectedVariables.Items.Add(lstAvailableVariable.SelectedItem)
@@ -38,12 +37,34 @@ Public Class ucrDataSelection
     End Sub
 
     Private Sub ucrDataSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        loadColumns()
+        translateEach(Controls)
+    End Sub
+
+    Public Sub loadColumns()
         Dim dataset As DataFrame
         Dim i As Integer
-
-        dataset = clsRInterface.GetData("data")
+        dataset = frmMain.clsRInterface.GetData("data")
         For i = 0 To dataset.ColumnCount - 1
             lstAvailableVariable.Items.Add(dataset.ColumnNames(i))
         Next
+    End Sub
+
+    Private Sub lstAvailableVariable_MouseDoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.MouseDoubleClick
+        If (lstAvailableVariable.SelectedItem <> "") Then
+            lstSelectedVariables.Items.Add(lstAvailableVariable.SelectedItem)
+            lstAvailableVariable.Items.Remove(lstAvailableVariable.SelectedItem)
+        Else
+            MsgBox("Please select a column", vbInformation, "Message from Instat")
+        End If
+    End Sub
+
+    Private Sub lstSelectedVariables_MouseDoubleClick(sender As Object, e As EventArgs) Handles lstSelectedVariables.MouseDoubleClick
+        If (lstSelectedVariables.SelectedItem <> "") Then
+            lstAvailableVariable.Items.Add(lstSelectedVariables.SelectedItem)
+            lstSelectedVariables.Items.Remove(lstSelectedVariables.SelectedItem)
+        Else
+            MsgBox("Please select a column", vbInformation, "Message from Instat")
+        End If
     End Sub
 End Class
