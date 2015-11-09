@@ -171,12 +171,6 @@
     <Compile Include="dlgExtremeEvents.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgHistogram.Designer.vb">
-      <DependentUpon>dlgHistogram.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgHistogram.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgInventoryPlot.designer.vb">
       <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
     </Compile>
