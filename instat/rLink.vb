@@ -26,7 +26,7 @@ Imports System.Threading.Tasks
 
 Public Class RInterface
     ' R interface class. Each instance of the class has its own REngine instance
-    Dim climateObjectPath As String = "C:\\ClimateObject\\R"
+    Dim climateObjectPath As String = "C:\\Users\\Kogo\\Dropbox\\Climate object\\ClimateObject\\R"
     Dim clsEngine As REngine
     Dim txtOutput As New TextBox
     Dim txtLog As New TextBox
