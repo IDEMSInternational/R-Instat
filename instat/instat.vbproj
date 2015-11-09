@@ -171,6 +171,12 @@
     <Compile Include="dlgExtremeEvents.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgHistogram.designer.vb">
+      <DependentUpon>dlgHistogram.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgHistogram.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgInventoryPlot.designer.vb">
       <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
     </Compile>
@@ -358,6 +364,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExtremeEvents.sw-KE.resx">
       <DependentUpon>dlgExtremeEvents.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHistogram.fr-FR.resx">
+      <DependentUpon>dlgHistogram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHistogram.resx">
+      <DependentUpon>dlgHistogram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHistogram.sw-KE.resx">
+      <DependentUpon>dlgHistogram.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInventoryPlot.fr-FR.resx">
       <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
