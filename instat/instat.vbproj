@@ -428,13 +428,7 @@
     <EmbeddedResource Include="dlgStartofRains.sw-KE.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxPlot.fr-FR.resx">
-      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxPlot.resx">
-      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxPlot.sw-KE.resx">
       <DependentUpon>dlgBoxPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWaterBalance.fr-FR.resx">
