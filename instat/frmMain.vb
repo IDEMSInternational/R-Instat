@@ -203,4 +203,8 @@ Public Class frmMain
     Private Sub mnuFileCloseWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileCloseWorksheet.Click
 
     End Sub
+
+    Private Sub mnuGraphicsHistogram_Click(sender As Object, e As EventArgs) Handles mnuGraphicsHistogram.Click
+        dlgHistogram.ShowDialog()
+    End Sub
 End Class
