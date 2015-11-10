@@ -125,7 +125,7 @@ Public Class frmMain
     End Sub
 
     Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbabilityPlotToolStripMenuItem.Click
-
+        dlgProbabilityPlot.ShowDialog()
     End Sub
 
     Private Sub ProbabilityDistributionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbabilityDistributionsToolStripMenuItem.Click
