@@ -275,71 +275,71 @@ Partial Class frmMain
         'NormalToolStripMenuItem
         '
         Me.NormalToolStripMenuItem.Name = "NormalToolStripMenuItem"
-        Me.NormalToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.NormalToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.NormalToolStripMenuItem.Text = "Normal, One Sample..."
         '
         'OnToolStripMenuItem
         '
         Me.OnToolStripMenuItem.Name = "OnToolStripMenuItem"
-        Me.OnToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.OnToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.OnToolStripMenuItem.Text = "Proportion, One Sample..."
         '
         'PoissonOneSampleToolStripMenuItem
         '
         Me.PoissonOneSampleToolStripMenuItem.Name = "PoissonOneSampleToolStripMenuItem"
-        Me.PoissonOneSampleToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.PoissonOneSampleToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.PoissonOneSampleToolStripMenuItem.Text = "Poisson, One Sample..."
         '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(212, 6)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(213, 6)
         '
         'NormalTwoSampleToolStripMenuItem
         '
         Me.NormalTwoSampleToolStripMenuItem.Name = "NormalTwoSampleToolStripMenuItem"
-        Me.NormalTwoSampleToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.NormalTwoSampleToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.NormalTwoSampleToolStripMenuItem.Text = "Normal, Two Samples..."
         '
         'ProportionTwoSampleToolStripMenuItem
         '
         Me.ProportionTwoSampleToolStripMenuItem.Name = "ProportionTwoSampleToolStripMenuItem"
-        Me.ProportionTwoSampleToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.ProportionTwoSampleToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.ProportionTwoSampleToolStripMenuItem.Text = "Proportion, Two Samples..."
         '
         'PoissonTwoSampleToolStripMenuItem
         '
         Me.PoissonTwoSampleToolStripMenuItem.Name = "PoissonTwoSampleToolStripMenuItem"
-        Me.PoissonTwoSampleToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.PoissonTwoSampleToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.PoissonTwoSampleToolStripMenuItem.Text = "Poisson, Two Samples..."
         '
         'ToolStripSeparator10
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(212, 6)
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(213, 6)
         '
         'GammaToolStripMenuItem
         '
         Me.GammaToolStripMenuItem.Name = "GammaToolStripMenuItem"
-        Me.GammaToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.GammaToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.GammaToolStripMenuItem.Text = "Gamma..."
         '
         'ExtremaToolStripMenuItem
         '
         Me.ExtremaToolStripMenuItem.Name = "ExtremaToolStripMenuItem"
-        Me.ExtremaToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.ExtremaToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.ExtremaToolStripMenuItem.Text = "Extrema.."
         '
         'ChisquareTestToolStripMenuItem
         '
         Me.ChisquareTestToolStripMenuItem.Name = "ChisquareTestToolStripMenuItem"
-        Me.ChisquareTestToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.ChisquareTestToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.ChisquareTestToolStripMenuItem.Text = "Chi-square Test..."
         '
         'GoodnessOfFitToolStripMenuItem
         '
         Me.GoodnessOfFitToolStripMenuItem.Name = "GoodnessOfFitToolStripMenuItem"
-        Me.GoodnessOfFitToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.GoodnessOfFitToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.GoodnessOfFitToolStripMenuItem.Text = "Goodness of Fit..."
         '
         'AnalysisOfVarianceToolStripMenuItem
@@ -442,19 +442,19 @@ Partial Class frmMain
         'OneAndTwoSamplesToolStripMenuItem
         '
         Me.OneAndTwoSamplesToolStripMenuItem.Name = "OneAndTwoSamplesToolStripMenuItem"
-        Me.OneAndTwoSamplesToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.OneAndTwoSamplesToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.OneAndTwoSamplesToolStripMenuItem.Text = "One and Two Samples..."
         '
         'OneWayANOVAToolStripMenuItem
         '
         Me.OneWayANOVAToolStripMenuItem.Name = "OneWayANOVAToolStripMenuItem"
-        Me.OneWayANOVAToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.OneWayANOVAToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.OneWayANOVAToolStripMenuItem.Text = "One-Way (ANOVA)"
         '
         'TwoWayANOVAToolStripMenuItem
         '
         Me.TwoWayANOVAToolStripMenuItem.Name = "TwoWayANOVAToolStripMenuItem"
-        Me.TwoWayANOVAToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.TwoWayANOVAToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.TwoWayANOVAToolStripMenuItem.Text = "Two-Way (ANOVA)..."
         '
         'ToolStripSeparator8
@@ -1710,49 +1710,49 @@ Partial Class frmMain
         'TransformToolStripMenuItem
         '
         Me.TransformToolStripMenuItem.Name = "TransformToolStripMenuItem"
-        Me.TransformToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.TransformToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.TransformToolStripMenuItem.Tag = "Transform"
         Me.TransformToolStripMenuItem.Text = "Transform..."
         '
         'RecodeToolStripMenuItem
         '
         Me.RecodeToolStripMenuItem.Name = "RecodeToolStripMenuItem"
-        Me.RecodeToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.RecodeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.RecodeToolStripMenuItem.Tag = "Recode"
         Me.RecodeToolStripMenuItem.Text = "Recode..."
         '
         'SortToolStripMenuItem
         '
         Me.SortToolStripMenuItem.Name = "SortToolStripMenuItem"
-        Me.SortToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SortToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SortToolStripMenuItem.Tag = "Sort"
         Me.SortToolStripMenuItem.Text = "Sort..."
         '
         'RowStatisticsToolStripMenuItem
         '
         Me.RowStatisticsToolStripMenuItem.Name = "RowStatisticsToolStripMenuItem"
-        Me.RowStatisticsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.RowStatisticsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.RowStatisticsToolStripMenuItem.Tag = "Row_Statistics"
         Me.RowStatisticsToolStripMenuItem.Text = "Row Statistics..."
         '
         'InteractionsToolStripMenuItem
         '
         Me.InteractionsToolStripMenuItem.Name = "InteractionsToolStripMenuItem"
-        Me.InteractionsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.InteractionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.InteractionsToolStripMenuItem.Tag = "Interactions"
         Me.InteractionsToolStripMenuItem.Text = "Interactions..."
         '
         'IndicatorVariablesToolStripMenuItem
         '
         Me.IndicatorVariablesToolStripMenuItem.Name = "IndicatorVariablesToolStripMenuItem"
-        Me.IndicatorVariablesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.IndicatorVariablesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.IndicatorVariablesToolStripMenuItem.Tag = "Indicator_Variables"
         Me.IndicatorVariablesToolStripMenuItem.Text = "Indicator Variables..."
         '
         'PolynomialsToolStripMenuItem
         '
         Me.PolynomialsToolStripMenuItem.Name = "PolynomialsToolStripMenuItem"
-        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PolynomialsToolStripMenuItem.Tag = "Polynomials"
         Me.PolynomialsToolStripMenuItem.Text = "Polynomials..."
         '

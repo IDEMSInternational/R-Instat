@@ -1,6 +1,4 @@
 ﻿Public Class dlgBoxPlot
-
-
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("boxplot")
         UcrReceiverSingle1.Selector = UcrAddRemove
@@ -20,6 +18,12 @@
 
     Private Sub txtTitle_TextChanged(sender As Object, e As EventArgs) Handles txtTittle.TextChanged
         ucrBase.clsRsyntax.AddParameter("main", Chr(34) & txtTittle.Text & Chr(34))
+    End Sub
+    Private Sub txtXLabel_TextChanged(sender As Object, e As EventArgs) Handles txtXLabel.TextChanged
+        ucrBase.clsRsyntax.AddParameter("xlab", Chr(34) & txtXLabel.Text & Chr(34))
+    End Sub
+    Private Sub txtYLabel_TextChanged(sender As Object, e As EventArgs) Handles txtYLabel.TextChanged
+        ucrBase.clsRsyntax.AddParameter("ylab", Chr(34) & txtYLabel.Text & Chr(34))
     End Sub
 
     Private Sub UcrAddRemove_Load(sender As Object, e As EventArgs) Handles UcrAddRemove.Load
