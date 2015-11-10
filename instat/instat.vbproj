@@ -159,6 +159,12 @@
     <Compile Include="dlgDisplayDaily.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDotPlot.Designer.vb">
+      <DependentUpon>dlgDotPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDotPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgEndofRains.designer.vb">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>
     </Compile>
@@ -346,6 +352,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDescriptiveStatistics.sw-KE.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDotPlot.fr-FR.resx">
+      <DependentUpon>dlgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDotPlot.resx">
+      <DependentUpon>dlgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDotPlot.sw-KE.resx">
+      <DependentUpon>dlgDotPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEndofRains.fr-FR.resx">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>

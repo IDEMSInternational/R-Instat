@@ -207,4 +207,8 @@ Public Class frmMain
     Private Sub mnuGraphicsHistogram_Click(sender As Object, e As EventArgs) Handles mnuGraphicsHistogram.Click
         dlgHistogram.ShowDialog()
     End Sub
+
+    Private Sub DotplotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DotplotToolStripMenuItem.Click
+        dlgDotPlot.ShowDialog()
+    End Sub
 End Class
