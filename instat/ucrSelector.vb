@@ -38,4 +38,8 @@ Public Class ucrSelector
     Public Sub Remove()
         CurrentReceiver.RemoveSelected()
     End Sub
+
+    Private Sub lblAvailableVariables_Click(sender As Object, e As EventArgs) Handles lblAvailableVariables.Click
+
+    End Sub
 End Class
