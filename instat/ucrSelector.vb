@@ -30,6 +30,7 @@ Public Class ucrSelector
     Public Sub Add()
         If (lstAvailableVariable.SelectedItems.Count > 0) Then
             CurrentReceiver.AddSelected()
+            CurrentReceiver.EnterReceiver()
         Else
             MsgBox("No item was selected", vbInformation, "Selection message")
         End If
