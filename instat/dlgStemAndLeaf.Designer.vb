@@ -56,6 +56,9 @@ Partial Class dlgStemAndLeaf
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.UcrReceiverSingle1)
         Me.Controls.Add(Me.UcrAddRemove)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgStemAndLeaf"
         Me.Tag = "StemandLeaf"
         Me.Text = "Stem and Leaf"
