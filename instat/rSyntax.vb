@@ -17,6 +17,7 @@
 
 Public Class RSyntax
     Dim strFunction As String
+    Public iCallType As Integer = 0
     Dim strParameter(1, 0) As String
 
     Public Sub SetFunction(strFunctionName As String)

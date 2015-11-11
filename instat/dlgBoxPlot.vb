@@ -1,42 +1,32 @@
 ﻿Public Class dlgBoxPlot
-
-
-    Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-
+    Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrBase.clsRsyntax.SetFunction("boxplot")
+        UcrReceiverSingle1.Selector = UcrAddRemove
     End Sub
 
-    Private Sub UcrButtons1_ClickOk(sender As Object, e As EventArgs) Handles UcrButtons1.ClickOk
-        Dim strScript As String
-        Dim temp
-        Dim bFirst As Boolean
-        Dim plottitle As String = txtTittle.Text
-
-        bFirst = True
-        If UcrDataSelection1.lstSelectedVariables.Items.Count > 0 Then
-            strScript = "boxplot(data[c("
-            For Each temp In UcrDataSelection1.lstSelectedVariables.Items
-                If bFirst Then
-                    bFirst = False
-                Else
-                    strScript = strScript & ","
-                End If
-                strScript = strScript & "'" & temp.ToString & "'"
-            Next
-            strScript = strScript & ")], main='" & txtTittle.Text & "')"
-            frmMain.clsRInterface.RunScript(strScript)
-            Me.Hide()
-        End If
-
+    Private Sub UcrReceiverSingle1_Enter(sender As Object, e As EventArgs) Handles UcrReceiverSingle1.Enter
+        UcrReceiverSingle1.SetMeAsReceiver()
     End Sub
 
-    Private Sub UcrButtons1_Load(sender As Object, e As EventArgs) Handles UcrButtons1.Load
-
-
+    Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        frmMain.clsRInterface.RunScript(ucrBase.clsRsyntax.GetScript(), 0)
     End Sub
 
-    Private Sub UcrDataSelection1_Load(sender As Object, e As EventArgs) Handles UcrDataSelection1.Load
+    Private Sub ucrreceiversingle1_leave(sender As Object, e As EventArgs) Handles UcrReceiverSingle1.Leave
+        ucrBase.clsRsyntax.AddParameter("x", "data$" & UcrReceiverSingle1.txtReceiverSingle.Text & "")
+    End Sub
+
+    Private Sub txtTitle_TextChanged(sender As Object, e As EventArgs) Handles txtTittle.TextChanged
+        ucrBase.clsRsyntax.AddParameter("main", Chr(34) & txtTittle.Text & Chr(34))
+    End Sub
+    Private Sub txtXLabel_TextChanged(sender As Object, e As EventArgs) Handles txtXLabel.TextChanged
+        ucrBase.clsRsyntax.AddParameter("xlab", Chr(34) & txtXLabel.Text & Chr(34))
+    End Sub
+    Private Sub txtYLabel_TextChanged(sender As Object, e As EventArgs) Handles txtYLabel.TextChanged
+        ucrBase.clsRsyntax.AddParameter("ylab", Chr(34) & txtYLabel.Text & Chr(34))
+    End Sub
+
+    Private Sub UcrAddRemove_Load(sender As Object, e As EventArgs) Handles UcrAddRemove.Load
 
     End Sub
 End Class
-
