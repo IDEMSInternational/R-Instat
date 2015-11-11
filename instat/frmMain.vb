@@ -124,8 +124,8 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbabilityPlotToolStripMenuItem.Click
-
+    Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsProbabilityPlot.Click
+        dlgProbabilityPlot.ShowDialog()
     End Sub
 
     Private Sub ProbabilityDistributionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbabilityDistributionsToolStripMenuItem.Click
@@ -206,5 +206,61 @@ Public Class frmMain
 
     Private Sub mnuGraphicsHistogram_Click(sender As Object, e As EventArgs) Handles mnuGraphicsHistogram.Click
         dlgHistogram.ShowDialog()
+    End Sub
+
+    Private Sub StemAndLeafToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StemAndLeafToolStripMenuItem.Click
+        dlgStemAndLeaf.ShowDialog()
+    End Sub
+
+    Private Sub mnuGraphisDotPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphisDotPlot.Click
+        dlgDotPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsGraphicsClipBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsClipBoxPlot.Click
+        dlgCliBoxplot.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsGraphicsCliplot_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsCliplot.Click
+        dlgCliPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsGraphicsMissingValues_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsMissingValues.Click
+        dlgMissingValuesplot.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsGraphicsHistogram_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsHistogram.Click
+        dlgHistogramMethod.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsGraphicsCumExceedance_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsCumExceedance.Click
+        dlgCumulativeExceedance.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsGraphicsBoxplot_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsBoxplot.Click
+        dlgBoxplotMethod.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsGraphicsInventory_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsInventory.Click
+        dlgInventoryMethod.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsGraphicsAnnualRainfall_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsAnnualRainfall.Click
+        dlgAnnualRaintotal.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsGraphicsTimeseries_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsTimeseries.Click
+        dlgTimeseriesPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsGraphicsWindrose_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsWindrose.Click
+        dlgWindrosePlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsGraphicsMultipleLines_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsMultipleLines.Click
+        dlgLines.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsGraphicsRainCount_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsRainCount.Click
+        dlgYearRaincount.ShowDialog()
     End Sub
 End Class
