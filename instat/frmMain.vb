@@ -207,4 +207,8 @@ Public Class frmMain
     Private Sub mnuGraphicsHistogram_Click(sender As Object, e As EventArgs) Handles mnuGraphicsHistogram.Click
         dlgHistogram.ShowDialog()
     End Sub
+
+    Private Sub StemAndLeafToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StemAndLeafToolStripMenuItem.Click
+        dlgStemAndLeaf.ShowDialog()
+    End Sub
 End Class
