@@ -10,7 +10,7 @@ Public Class frmMetaData
         gridMetaData.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         gridMetaData.SheetTabNewButtonVisible = False
         gridMetaData.SheetTabControlNewButtonVisible = False
-        gridMetaData.CurrentWorksheet.Resize(3, 3)
+        gridMetaData.CurrentWorksheet.Resize(2, 2)
         autoTranslate(Me)
     End Sub
     Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
