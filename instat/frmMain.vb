@@ -341,12 +341,11 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuManageWorksheetMetadat_Click(sender As Object, e As EventArgs) Handles mnuManageWorksheetMetadat.Click
+    Private Sub mnuManageWorksheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageWorksheetMetadata.Click
         If frmMetaData.Visible = True Then
             frmMetaData.Visible = False
         Else
             frmMetaData.Visible = True
         End If
     End Sub
-End Class
 End Class
