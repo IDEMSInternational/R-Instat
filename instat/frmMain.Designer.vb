@@ -60,8 +60,8 @@ Partial Class frmMain
         Me.mnuGraphicsPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuBoxPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuGraphicsHistogram = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ProbabilityPlotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DotplotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsProbabilityPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphisDotPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindroseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FrequencyChartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SummaryChartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -262,6 +262,20 @@ Partial Class frmMain
         Me.KiswahiliToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FrenchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClimateMethodsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GraphicsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateMethodsGraphicsClipBoxPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateMethodsGraphicsCliplot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateMethodsGraphicsMissingValues = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateMethodsGraphicsHistogram = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateMethodsGraphicsCumExceedance = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateMethodsGraphicsBoxplot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateMethodsGraphicsInventory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateMethodsGraphicsAnnualRainfall = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateMethodsGraphicsRainCount = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateMethodsGraphicsTimeseries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateMethodsGraphicsWindrose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateMethodsGraphicsMultipleLines = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -471,7 +485,7 @@ Partial Class frmMain
         '
         'GraphicsToolStripMenuItem
         '
-        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuGraphicsPlot, Me.mnuBoxPlot, Me.mnuGraphicsHistogram, Me.ProbabilityPlotToolStripMenuItem, Me.DotplotToolStripMenuItem, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem, Me.mnuGraphicsInventory})
+        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuGraphicsPlot, Me.mnuBoxPlot, Me.mnuGraphicsHistogram, Me.mnuGraphicsProbabilityPlot, Me.mnuGraphisDotPlot, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.ScatterplotToolStripMenuItem, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem, Me.mnuGraphicsInventory})
         Me.GraphicsToolStripMenuItem.Name = "GraphicsToolStripMenuItem"
         Me.GraphicsToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.GraphicsToolStripMenuItem.Tag = "Graphics"
@@ -498,19 +512,19 @@ Partial Class frmMain
         Me.mnuGraphicsHistogram.Tag = "Histogram"
         Me.mnuGraphicsHistogram.Text = "Histogram..."
         '
-        'ProbabilityPlotToolStripMenuItem
+        'mnuGraphicsProbabilityPlot
         '
-        Me.ProbabilityPlotToolStripMenuItem.Name = "ProbabilityPlotToolStripMenuItem"
-        Me.ProbabilityPlotToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.ProbabilityPlotToolStripMenuItem.Tag = "Probability_Plot"
-        Me.ProbabilityPlotToolStripMenuItem.Text = "Probability Plot..."
+        Me.mnuGraphicsProbabilityPlot.Name = "mnuGraphicsProbabilityPlot"
+        Me.mnuGraphicsProbabilityPlot.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsProbabilityPlot.Tag = "Probability_Plot"
+        Me.mnuGraphicsProbabilityPlot.Text = "Probability Plot..."
         '
-        'DotplotToolStripMenuItem
+        'mnuGraphisDotPlot
         '
-        Me.DotplotToolStripMenuItem.Name = "DotplotToolStripMenuItem"
-        Me.DotplotToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.DotplotToolStripMenuItem.Tag = "Dotplot"
-        Me.DotplotToolStripMenuItem.Text = "Dotplot..."
+        Me.mnuGraphisDotPlot.Name = "mnuGraphisDotPlot"
+        Me.mnuGraphisDotPlot.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphisDotPlot.Tag = "Dotplot"
+        Me.mnuGraphisDotPlot.Text = "Dotplot..."
         '
         'WindroseToolStripMenuItem
         '
@@ -1520,7 +1534,7 @@ Partial Class frmMain
         'mnuBar
         '
         Me.mnuBar.AllowMerge = False
-        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.WindowToolStripMenuItem, Me.KiswahiliToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.WindowToolStripMenuItem, Me.KiswahiliToolStripMenuItem, Me.HelpToolStripMenuItem, Me.ClimateMethodsToolStripMenuItem})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.MdiWindowListItem = Me.WindowToolStripMenuItem
@@ -1859,6 +1873,92 @@ Partial Class frmMain
         Me.FrenchToolStripMenuItem.Tag = "French"
         Me.FrenchToolStripMenuItem.Text = "French"
         '
+        'ClimateMethodsToolStripMenuItem
+        '
+        Me.ClimateMethodsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GraphicsToolStripMenuItem1})
+        Me.ClimateMethodsToolStripMenuItem.Name = "ClimateMethodsToolStripMenuItem"
+        Me.ClimateMethodsToolStripMenuItem.Size = New System.Drawing.Size(110, 20)
+        Me.ClimateMethodsToolStripMenuItem.Text = "Climate Methods"
+        '
+        'GraphicsToolStripMenuItem1
+        '
+        Me.GraphicsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimateMethodsGraphicsClipBoxPlot, Me.mnuClimateMethodsGraphicsCliplot, Me.mnuClimateMethodsGraphicsMissingValues, Me.mnuClimateMethodsGraphicsHistogram, Me.mnuClimateMethodsGraphicsCumExceedance, Me.mnuClimateMethodsGraphicsBoxplot, Me.mnuClimateMethodsGraphicsInventory, Me.mnuClimateMethodsGraphicsAnnualRainfall, Me.mnuClimateMethodsGraphicsRainCount, Me.mnuClimateMethodsGraphicsTimeseries, Me.mnuClimateMethodsGraphicsWindrose, Me.mnuClimateMethodsGraphicsMultipleLines})
+        Me.GraphicsToolStripMenuItem1.Name = "GraphicsToolStripMenuItem1"
+        Me.GraphicsToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.GraphicsToolStripMenuItem1.Text = "Graphics"
+        '
+        'mnuClimateMethodsGraphicsClipBoxPlot
+        '
+        Me.mnuClimateMethodsGraphicsClipBoxPlot.Name = "mnuClimateMethodsGraphicsClipBoxPlot"
+        Me.mnuClimateMethodsGraphicsClipBoxPlot.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimateMethodsGraphicsClipBoxPlot.Text = "Cliboxplot"
+        '
+        'mnuClimateMethodsGraphicsCliplot
+        '
+        Me.mnuClimateMethodsGraphicsCliplot.Name = "mnuClimateMethodsGraphicsCliplot"
+        Me.mnuClimateMethodsGraphicsCliplot.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimateMethodsGraphicsCliplot.Text = "Cliplot"
+        '
+        'mnuClimateMethodsGraphicsMissingValues
+        '
+        Me.mnuClimateMethodsGraphicsMissingValues.Name = "mnuClimateMethodsGraphicsMissingValues"
+        Me.mnuClimateMethodsGraphicsMissingValues.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimateMethodsGraphicsMissingValues.Text = "Missing values"
+        '
+        'mnuClimateMethodsGraphicsHistogram
+        '
+        Me.mnuClimateMethodsGraphicsHistogram.Name = "mnuClimateMethodsGraphicsHistogram"
+        Me.mnuClimateMethodsGraphicsHistogram.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimateMethodsGraphicsHistogram.Text = "Histogram"
+        '
+        'mnuClimateMethodsGraphicsCumExceedance
+        '
+        Me.mnuClimateMethodsGraphicsCumExceedance.Name = "mnuClimateMethodsGraphicsCumExceedance"
+        Me.mnuClimateMethodsGraphicsCumExceedance.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimateMethodsGraphicsCumExceedance.Text = "Cummulative Exceedance"
+        '
+        'mnuClimateMethodsGraphicsBoxplot
+        '
+        Me.mnuClimateMethodsGraphicsBoxplot.Name = "mnuClimateMethodsGraphicsBoxplot"
+        Me.mnuClimateMethodsGraphicsBoxplot.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimateMethodsGraphicsBoxplot.Text = "Boxplot"
+        '
+        'mnuClimateMethodsGraphicsInventory
+        '
+        Me.mnuClimateMethodsGraphicsInventory.Name = "mnuClimateMethodsGraphicsInventory"
+        Me.mnuClimateMethodsGraphicsInventory.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimateMethodsGraphicsInventory.Text = "Inventory"
+        '
+        'mnuClimateMethodsGraphicsAnnualRainfall
+        '
+        Me.mnuClimateMethodsGraphicsAnnualRainfall.Name = "mnuClimateMethodsGraphicsAnnualRainfall"
+        Me.mnuClimateMethodsGraphicsAnnualRainfall.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimateMethodsGraphicsAnnualRainfall.Text = "Annual rainfall"
+        '
+        'mnuClimateMethodsGraphicsRainCount
+        '
+        Me.mnuClimateMethodsGraphicsRainCount.Name = "mnuClimateMethodsGraphicsRainCount"
+        Me.mnuClimateMethodsGraphicsRainCount.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimateMethodsGraphicsRainCount.Text = "Rain count"
+        '
+        'mnuClimateMethodsGraphicsTimeseries
+        '
+        Me.mnuClimateMethodsGraphicsTimeseries.Name = "mnuClimateMethodsGraphicsTimeseries"
+        Me.mnuClimateMethodsGraphicsTimeseries.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimateMethodsGraphicsTimeseries.Text = "Timeseries"
+        '
+        'mnuClimateMethodsGraphicsWindrose
+        '
+        Me.mnuClimateMethodsGraphicsWindrose.Name = "mnuClimateMethodsGraphicsWindrose"
+        Me.mnuClimateMethodsGraphicsWindrose.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimateMethodsGraphicsWindrose.Text = "Windrose"
+        '
+        'mnuClimateMethodsGraphicsMultipleLines
+        '
+        Me.mnuClimateMethodsGraphicsMultipleLines.Name = "mnuClimateMethodsGraphicsMultipleLines"
+        Me.mnuClimateMethodsGraphicsMultipleLines.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimateMethodsGraphicsMultipleLines.Text = "Multple lines"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1920,8 +2020,8 @@ Partial Class frmMain
     Friend WithEvents mnuGraphicsPlot As ToolStripMenuItem
     Friend WithEvents mnuBoxPlot As ToolStripMenuItem
     Friend WithEvents mnuGraphicsHistogram As ToolStripMenuItem
-    Friend WithEvents ProbabilityPlotToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DotplotToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsProbabilityPlot As ToolStripMenuItem
+    Friend WithEvents mnuGraphisDotPlot As ToolStripMenuItem
     Friend WithEvents WindroseToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FrequencyChartToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SummaryChartToolStripMenuItem As ToolStripMenuItem
@@ -2122,4 +2222,18 @@ Partial Class frmMain
     Friend WithEvents LogWindowMenu As ToolStripMenuItem
     Friend WithEvents mnuEndofRains As ToolStripMenuItem
     Friend WithEvents mnuGraphicsInventory As ToolStripMenuItem
+    Friend WithEvents ClimateMethodsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GraphicsToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents mnuClimateMethodsGraphicsClipBoxPlot As ToolStripMenuItem
+    Friend WithEvents mnuClimateMethodsGraphicsCliplot As ToolStripMenuItem
+    Friend WithEvents mnuClimateMethodsGraphicsMissingValues As ToolStripMenuItem
+    Friend WithEvents mnuClimateMethodsGraphicsHistogram As ToolStripMenuItem
+    Friend WithEvents mnuClimateMethodsGraphicsCumExceedance As ToolStripMenuItem
+    Friend WithEvents mnuClimateMethodsGraphicsBoxplot As ToolStripMenuItem
+    Friend WithEvents mnuClimateMethodsGraphicsInventory As ToolStripMenuItem
+    Friend WithEvents mnuClimateMethodsGraphicsAnnualRainfall As ToolStripMenuItem
+    Friend WithEvents mnuClimateMethodsGraphicsRainCount As ToolStripMenuItem
+    Friend WithEvents mnuClimateMethodsGraphicsTimeseries As ToolStripMenuItem
+    Friend WithEvents mnuClimateMethodsGraphicsWindrose As ToolStripMenuItem
+    Friend WithEvents mnuClimateMethodsGraphicsMultipleLines As ToolStripMenuItem
 End Class
