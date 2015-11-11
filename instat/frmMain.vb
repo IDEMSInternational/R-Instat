@@ -124,8 +124,8 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbabilityPlotToolStripMenuItem.Click
-
+    Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsProbabilityPlot.Click
+        dlgProbabilityPlot.ShowDialog()
     End Sub
 
     Private Sub ProbabilityDistributionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbabilityDistributionsToolStripMenuItem.Click
@@ -210,5 +210,9 @@ Public Class frmMain
 
     Private Sub StemAndLeafToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StemAndLeafToolStripMenuItem.Click
         dlgStemAndLeaf.ShowDialog()
+    End Sub
+
+    Private Sub mnuGraphisDotPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphisDotPlot.Click
+        dlgDotPlot.ShowDialog()
     End Sub
 End Class
