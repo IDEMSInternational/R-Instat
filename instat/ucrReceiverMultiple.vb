@@ -24,4 +24,15 @@
             MsgBox("There is nothing to remove", vbInformation, "Selection message")
         End If
     End Sub
+
+    Public Event LeftList(sender As Object, e As EventArgs)
+
+    Public Overrides Sub EnterReceiver()
+        lstSelectedVariables.Focus()
+    End Sub
+
+    Private Sub lstSelectedVariables_Leave(sender As Object, e As EventArgs) Handles lstSelectedVariables.Leave
+        RaiseEvent LeftList(sender, e)
+    End Sub
+
 End Class
