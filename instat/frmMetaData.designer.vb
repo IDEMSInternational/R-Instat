@@ -41,13 +41,13 @@ Partial Class frmMetaData
         Me.gridMetaData.SheetTabControlNewButtonVisible = False
         Me.gridMetaData.SheetTabControlWidth = 100
         Me.gridMetaData.SheetTabNewButtonVisible = False
-        Me.gridMetaData.Size = New System.Drawing.Size(268, 155)
+        Me.gridMetaData.Size = New System.Drawing.Size(268, 105)
         Me.gridMetaData.TabIndex = 1
         Me.gridMetaData.Text = "Meta Data"
         '
         'txtMetadata
         '
-        Me.txtMetadata.Location = New System.Drawing.Point(293, 31)
+        Me.txtMetadata.Location = New System.Drawing.Point(282, 12)
         Me.txtMetadata.Multiline = True
         Me.txtMetadata.Name = "txtMetadata"
         Me.txtMetadata.ReadOnly = True
@@ -58,7 +58,7 @@ Partial Class frmMetaData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(543, 167)
+        Me.ClientSize = New System.Drawing.Size(500, 117)
         Me.Controls.Add(Me.txtMetadata)
         Me.Controls.Add(Me.gridMetaData)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -69,7 +69,7 @@ Partial Class frmMetaData
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Worksheet Metadata"
         Me.ResumeLayout(False)
         Me.PerformLayout()
