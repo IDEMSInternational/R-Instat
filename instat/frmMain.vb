@@ -35,7 +35,7 @@ Public Class frmMain
         frmEditor.Show()
         clsRInterface.SetLog(frmLog.txtLog)
         clsRInterface.SetOutput(frmCommand.txtCommand)
-        tstatus.Text = frmEditor.grid.CurrentWorksheet.Name
+        tstatus.Text = frmEditor.gridColumns.CurrentWorksheet.Name
 
     End Sub
 
@@ -64,7 +64,7 @@ Public Class frmMain
         Dim dfDataset As DataFrame
 
         dfDataset = clsRInterface.GetData(strDataName)
-        For Each tempWorkSheet In frmEditor.grid.Worksheets
+        For Each tempWorkSheet In frmEditor.gridColumns.Worksheets
             If tempWorkSheet.Name = strDataName Then
                 tempWorkSheet.Rows = dfDataset.RowCount
                 tempWorkSheet.Columns = dfDataset.ColumnCount
@@ -78,7 +78,7 @@ Public Class frmMain
             End If
         Next
         If Not bFoundWorksheet Then
-            tempWorkSheet = frmEditor.grid.Worksheets.Create(strDataName)
+            tempWorkSheet = frmEditor.gridColumns.Worksheets.Create(strDataName)
             tempWorkSheet.Rows = dfDataset.RowCount
             tempWorkSheet.Columns = dfDataset.ColumnCount
             For i As Integer = 0 To dfDataset.RowCount - 1
@@ -87,7 +87,7 @@ Public Class frmMain
                     tempWorkSheet(row:=i, col:=k) = dfDataset(i, k)
                 Next
             Next
-            frmEditor.grid.Worksheets.Add(tempWorkSheet)
+            frmEditor.gridColumns.Worksheets.Add(tempWorkSheet)
         End If
     End Sub
 
