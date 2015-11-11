@@ -345,6 +345,12 @@
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmMetaData.designer.vb">
+      <DependentUpon>frmMetaData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMetaData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmScript.Designer.vb">
       <DependentUpon>frmScript.vb</DependentUpon>
     </Compile>
@@ -700,6 +706,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.sw-KE.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMetaData.fr-FR.resx">
+      <DependentUpon>frmMetaData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMetaData.resx">
+      <DependentUpon>frmMetaData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMetaData.sw-KE.resx">
+      <DependentUpon>frmMetaData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmScript.fr-FR.resx">
       <DependentUpon>frmScript.vb</DependentUpon>
