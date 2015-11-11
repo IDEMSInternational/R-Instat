@@ -225,6 +225,12 @@
     <Compile Include="dlgBoxPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgStemAndLeaf.Designer.vb">
+      <DependentUpon>dlgStemAndLeaf.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgStemAndLeaf.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgWaterBalance.Designer.vb">
       <DependentUpon>dlgWaterBalance.vb</DependentUpon>
     </Compile>
@@ -430,6 +436,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxPlot.resx">
       <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStemAndLeaf.fr-FR.resx">
+      <DependentUpon>dlgStemAndLeaf.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStemAndLeaf.resx">
+      <DependentUpon>dlgStemAndLeaf.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStemAndLeaf.sw-KE.resx">
+      <DependentUpon>dlgStemAndLeaf.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWaterBalance.fr-FR.resx">
       <DependentUpon>dlgWaterBalance.vb</DependentUpon>
