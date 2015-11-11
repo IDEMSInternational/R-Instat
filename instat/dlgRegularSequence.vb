@@ -13,15 +13,14 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat.Translations
 Public Class dlgRegularSequence
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grpSequence2.Hide()
         grpRepeatSingle.Hide()
         UcrBase.clsRsyntax.SetFunction("seq")
-    End Sub
-
-    Private Sub UcrButtons1_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
-        frmMain.clsRInterface.RunScript(UcrBase.clsRsyntax.GetScript(), 1)
+        UcrBase.clsRsyntax.iCallType = 2
+        autoTranslate(Me)
     End Sub
 
     Private Sub rdSIngleValue_Click(sender As Object, e As EventArgs) Handles rdSIngleValue.Click
@@ -42,7 +41,7 @@ Public Class dlgRegularSequence
         grpSequence.Visible = True
     End Sub
 
-    Private Sub txtFrom_TextChanged(sender As Object, e As EventArgs) Handles txtFrom.TextChanged
+    Private Sub txtFrom_Leave(sender As Object, e As EventArgs) Handles txtFrom.Leave
         UcrBase.clsRsyntax.AddParameter("from", txtFrom.Text)
     End Sub
 
