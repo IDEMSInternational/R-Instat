@@ -86,16 +86,23 @@ Public Class RInterface
 
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0)
 
-        Dim strCapturedScript
+        Dim strCapturedScript As String
+        Dim temp As RDotNet.SymbolicExpression
+        Dim strTemp As String
         txtLog.Text = txtLog.Text & strScript & vbCrLf
         txtOutput.Text = txtOutput.Text & "> " & strScript & vbCrLf
         If bReturnOutput = 0 Then
             clsEngine.Evaluate(strScript)
         ElseIf bReturnOutput = 1 Then
-            txtOutput.Text = txtOutput.Text & String.Join(vbCrLf, clsEngine.Evaluate(strScript).AsCharacter) & vbCrLf
+            temp = clsEngine.Evaluate(strScript)
+            strTemp = String.Join(vbCrLf, temp.AsCharacter())
+            txtOutput.Text = txtOutput.Text & strTemp & vbCrLf
         Else
             strCapturedScript = "capture.output(" & strScript & ")"
-            txtOutput.Text = txtOutput.Text & "> " & String.Join(",", clsEngine.Evaluate(strCapturedScript).AsCharacter) & vbCrLf
+            'strCapturedScript = strScript
+            temp = clsEngine.Evaluate(strCapturedScript)
+            strTemp = String.Join(vbCrLf, temp.AsCharacter())
+            txtOutput.Text = txtOutput.Text & "> " & strTemp & vbCrLf
         End If
     End Sub
 
