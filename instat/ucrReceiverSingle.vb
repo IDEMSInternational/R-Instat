@@ -29,5 +29,17 @@
             MsgBox("There is nothing to remove", vbInformation, "Selection message")
         End If
     End Sub
+
+    Public Event LeftText(sender As Object, e As EventArgs)
+
+    Private Sub txtReceiverSingle_TextChanged(sender As Object, e As EventArgs) Handles txtReceiverSingle.Leave
+        RaiseEvent LeftText(sender, e)
+    End Sub
+
+    Public Overrides Sub EnterReceiver()
+        txtReceiverSingle.Focus()
+        txtReceiverSingle.SelectionStart = txtReceiverSingle.SelectionLength
+    End Sub
+
 End Class
 
