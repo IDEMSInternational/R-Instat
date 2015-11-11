@@ -143,13 +143,13 @@ Partial Class frmMain
         Me.LockUnlockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileIEODBC = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileIEOutput = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tlSeparatorFile2 = New System.Windows.Forms.ToolStripSeparator()
         Me.MnuFileClose = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFilePrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFilePrintPreview = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tlSeparatorFile3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFIleExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEdit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditUndo = New System.Windows.Forms.ToolStripMenuItem()
@@ -214,13 +214,13 @@ Partial Class frmMain
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.mnuBar = New System.Windows.Forms.MenuStrip()
-        Me.FileStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileNewWorksheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOpenWorksheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileCloseWorksheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuFileIE = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuFileImportExport = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubmitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CurrentWindowCtrlWToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CurrentLineCtrlLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -1022,67 +1022,77 @@ Partial Class frmMain
         '
         'mnuFileIEODBC
         '
+        Me.mnuFileIEODBC.CheckOnClick = True
         Me.mnuFileIEODBC.Name = "mnuFileIEODBC"
-        Me.mnuFileIEODBC.Size = New System.Drawing.Size(150, 22)
+        Me.mnuFileIEODBC.Size = New System.Drawing.Size(141, 22)
         Me.mnuFileIEODBC.Tag = "ODBC_Query"
         Me.mnuFileIEODBC.Text = "ODBC Query"
         '
         'mnuFileIEOutput
         '
+        Me.mnuFileIEOutput.CheckOnClick = True
         Me.mnuFileIEOutput.Name = "mnuFileIEOutput"
-        Me.mnuFileIEOutput.Size = New System.Drawing.Size(150, 22)
+        Me.mnuFileIEOutput.Size = New System.Drawing.Size(141, 22)
         Me.mnuFileIEOutput.Tag = "Output"
         Me.mnuFileIEOutput.Text = "Output..."
         '
-        'ToolStripSeparator5
+        'tlSeparatorFile2
         '
-        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(216, 6)
+        Me.tlSeparatorFile2.Name = "tlSeparatorFile2"
+        Me.tlSeparatorFile2.Size = New System.Drawing.Size(202, 6)
         '
         'MnuFileClose
         '
+        Me.MnuFileClose.CheckOnClick = True
         Me.MnuFileClose.Name = "MnuFileClose"
-        Me.MnuFileClose.Size = New System.Drawing.Size(219, 22)
+        Me.MnuFileClose.Size = New System.Drawing.Size(205, 22)
         Me.MnuFileClose.Tag = "Close"
         Me.MnuFileClose.Text = "Close"
         '
         'mnuFileSave
         '
+        Me.mnuFileSave.CheckOnClick = True
         Me.mnuFileSave.Name = "mnuFileSave"
-        Me.mnuFileSave.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
+        Me.mnuFileSave.Size = New System.Drawing.Size(205, 22)
         Me.mnuFileSave.Tag = "Save"
-        Me.mnuFileSave.Text = "Save       Ctrl+S"
+        Me.mnuFileSave.Text = "Save"
         '
         'mnuFileSaveAs
         '
+        Me.mnuFileSaveAs.CheckOnClick = True
         Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
-        Me.mnuFileSaveAs.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileSaveAs.Size = New System.Drawing.Size(205, 22)
         Me.mnuFileSaveAs.Tag = "Save_As"
         Me.mnuFileSaveAs.Text = "Save As"
         '
         'mnuFilePrint
         '
+        Me.mnuFilePrint.CheckOnClick = True
         Me.mnuFilePrint.Name = "mnuFilePrint"
-        Me.mnuFilePrint.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFilePrint.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
+        Me.mnuFilePrint.Size = New System.Drawing.Size(205, 22)
         Me.mnuFilePrint.Tag = "Print"
-        Me.mnuFilePrint.Text = "Print...    Ctrl+P"
+        Me.mnuFilePrint.Text = "Print"
         '
         'mnuFilePrintPreview
         '
+        Me.mnuFilePrintPreview.CheckOnClick = True
         Me.mnuFilePrintPreview.Name = "mnuFilePrintPreview"
-        Me.mnuFilePrintPreview.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFilePrintPreview.Size = New System.Drawing.Size(205, 22)
         Me.mnuFilePrintPreview.Tag = "Print_Preview"
         Me.mnuFilePrintPreview.Text = "Print Preview"
         '
-        'ToolStripSeparator6
+        'tlSeparatorFile3
         '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(216, 6)
+        Me.tlSeparatorFile3.Name = "tlSeparatorFile3"
+        Me.tlSeparatorFile3.Size = New System.Drawing.Size(202, 6)
         '
         'mnuFIleExit
         '
+        Me.mnuFIleExit.CheckOnClick = True
         Me.mnuFIleExit.Name = "mnuFIleExit"
-        Me.mnuFIleExit.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFIleExit.Size = New System.Drawing.Size(205, 22)
         Me.mnuFIleExit.Tag = "Exit_"
         Me.mnuFIleExit.Text = "Exit"
         '
@@ -1353,17 +1363,19 @@ Partial Class frmMain
         '
         'mnuFileIEExport
         '
+        Me.mnuFileIEExport.CheckOnClick = True
         Me.mnuFileIEExport.Name = "mnuFileIEExport"
-        Me.mnuFileIEExport.Size = New System.Drawing.Size(150, 22)
+        Me.mnuFileIEExport.Size = New System.Drawing.Size(141, 22)
         Me.mnuFileIEExport.Tag = "Export_as"
         Me.mnuFileIEExport.Text = "Export as..."
         '
         'mnuFIleIEASCII
         '
+        Me.mnuFIleIEASCII.CheckOnClick = True
         Me.mnuFIleIEASCII.Name = "mnuFIleIEASCII"
-        Me.mnuFIleIEASCII.Size = New System.Drawing.Size(150, 22)
+        Me.mnuFIleIEASCII.Size = New System.Drawing.Size(141, 22)
         Me.mnuFIleIEASCII.Tag = "Import_ASCII"
-        Me.mnuFIleIEASCII.Text = "Import ASCII..."
+        Me.mnuFIleIEASCII.Text = "Import ASCII"
         '
         'stsStrip
         '
@@ -1534,63 +1546,70 @@ Partial Class frmMain
         'mnuBar
         '
         Me.mnuBar.AllowMerge = False
-        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileStripMenuItem, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.WindowToolStripMenuItem, Me.KiswahiliToolStripMenuItem, Me.HelpToolStripMenuItem, Me.ClimateMethodsToolStripMenuItem})
+        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.WindowToolStripMenuItem, Me.KiswahiliToolStripMenuItem, Me.HelpToolStripMenuItem, Me.ClimateMethodsToolStripMenuItem})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.mnuBar.Name = "mnuBar"
+        Me.mnuBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.mnuBar.Size = New System.Drawing.Size(769, 24)
         Me.mnuBar.TabIndex = 6
         Me.mnuBar.Text = "Menu_strip"
         '
-        'FileStripMenuItem
+        'mnuFile
         '
-        Me.FileStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewWorksheet, Me.mnuFileOpenWorksheet, Me.mnuFileOpenFromLibrary, Me.mnuFileCloseWorksheet, Me.ToolStripSeparator4, Me.mnuFileIE, Me.ToolStripSeparator5, Me.MnuFileClose, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.ToolStripSeparator6, Me.mnuFIleExit})
-        Me.FileStripMenuItem.Name = "FileStripMenuItem"
-        Me.FileStripMenuItem.Size = New System.Drawing.Size(37, 20)
-        Me.FileStripMenuItem.Tag = "File"
-        Me.FileStripMenuItem.Text = "File"
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewWorksheet, Me.mnuFileOpenWorksheet, Me.mnuFileOpenFromLibrary, Me.mnuFileCloseWorksheet, Me.tlSeparatorFile, Me.mnuFileImportExport, Me.tlSeparatorFile2, Me.MnuFileClose, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFIleExit})
+        Me.mnuFile.Name = "mnuFile"
+        Me.mnuFile.Size = New System.Drawing.Size(37, 20)
+        Me.mnuFile.Tag = "File"
+        Me.mnuFile.Text = "File"
         '
         'mnuFileNewWorksheet
         '
+        Me.mnuFileNewWorksheet.CheckOnClick = True
         Me.mnuFileNewWorksheet.Name = "mnuFileNewWorksheet"
-        Me.mnuFileNewWorksheet.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileNewWorksheet.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
+        Me.mnuFileNewWorksheet.Size = New System.Drawing.Size(205, 22)
         Me.mnuFileNewWorksheet.Tag = "New_Worksheet"
-        Me.mnuFileNewWorksheet.Text = "New Worksheet...    Ctrl+N"
+        Me.mnuFileNewWorksheet.Text = "New Worksheet"
         '
         'mnuFileOpenWorksheet
         '
+        Me.mnuFileOpenWorksheet.CheckOnClick = True
         Me.mnuFileOpenWorksheet.Name = "mnuFileOpenWorksheet"
-        Me.mnuFileOpenWorksheet.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileOpenWorksheet.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+        Me.mnuFileOpenWorksheet.Size = New System.Drawing.Size(205, 22)
         Me.mnuFileOpenWorksheet.Tag = "Open_Worksheet"
-        Me.mnuFileOpenWorksheet.Text = "Open Worksheet...    Ctrl+O"
+        Me.mnuFileOpenWorksheet.Text = "Open Worksheet"
         '
         'mnuFileOpenFromLibrary
         '
+        Me.mnuFileOpenFromLibrary.CheckOnClick = True
         Me.mnuFileOpenFromLibrary.Name = "mnuFileOpenFromLibrary"
-        Me.mnuFileOpenFromLibrary.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileOpenFromLibrary.Size = New System.Drawing.Size(205, 22)
         Me.mnuFileOpenFromLibrary.Tag = "Open_From_Library"
-        Me.mnuFileOpenFromLibrary.Text = "Open From Library..."
+        Me.mnuFileOpenFromLibrary.Text = "Open From Library"
         '
         'mnuFileCloseWorksheet
         '
+        Me.mnuFileCloseWorksheet.CheckOnClick = True
         Me.mnuFileCloseWorksheet.Name = "mnuFileCloseWorksheet"
-        Me.mnuFileCloseWorksheet.Size = New System.Drawing.Size(219, 22)
+        Me.mnuFileCloseWorksheet.Size = New System.Drawing.Size(205, 22)
         Me.mnuFileCloseWorksheet.Tag = "Close_Worksheet"
         Me.mnuFileCloseWorksheet.Text = "Close Worksheet"
         '
-        'ToolStripSeparator4
+        'tlSeparatorFile
         '
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(216, 6)
+        Me.tlSeparatorFile.Name = "tlSeparatorFile"
+        Me.tlSeparatorFile.Size = New System.Drawing.Size(202, 6)
         '
-        'mnuFileIE
+        'mnuFileImportExport
         '
-        Me.mnuFileIE.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFIleIEASCII, Me.mnuFileIEODBC, Me.mnuFileIEExport, Me.mnuFileIEOutput})
-        Me.mnuFileIE.Name = "mnuFileIE"
-        Me.mnuFileIE.Size = New System.Drawing.Size(219, 22)
-        Me.mnuFileIE.Tag = "Import_Export"
-        Me.mnuFileIE.Text = "Import/Export"
+        Me.mnuFileImportExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFIleIEASCII, Me.mnuFileIEODBC, Me.mnuFileIEExport, Me.mnuFileIEOutput})
+        Me.mnuFileImportExport.Name = "mnuFileImportExport"
+        Me.mnuFileImportExport.Size = New System.Drawing.Size(205, 22)
+        Me.mnuFileImportExport.Tag = "Import_Export"
+        Me.mnuFileImportExport.Text = "Import/Export"
         '
         'SubmitToolStripMenuItem
         '
@@ -1884,7 +1903,7 @@ Partial Class frmMain
         '
         Me.GraphicsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimateMethodsGraphicsClipBoxPlot, Me.mnuClimateMethodsGraphicsCliplot, Me.mnuClimateMethodsGraphicsMissingValues, Me.mnuClimateMethodsGraphicsHistogram, Me.mnuClimateMethodsGraphicsCumExceedance, Me.mnuClimateMethodsGraphicsBoxplot, Me.mnuClimateMethodsGraphicsInventory, Me.mnuClimateMethodsGraphicsAnnualRainfall, Me.mnuClimateMethodsGraphicsRainCount, Me.mnuClimateMethodsGraphicsTimeseries, Me.mnuClimateMethodsGraphicsWindrose, Me.mnuClimateMethodsGraphicsMultipleLines})
         Me.GraphicsToolStripMenuItem1.Name = "GraphicsToolStripMenuItem1"
-        Me.GraphicsToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.GraphicsToolStripMenuItem1.Size = New System.Drawing.Size(120, 22)
         Me.GraphicsToolStripMenuItem1.Text = "Graphics"
         '
         'mnuClimateMethodsGraphicsClipBoxPlot
@@ -2100,13 +2119,13 @@ Partial Class frmMain
     Friend WithEvents LockUnlockToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuFileIEODBC As ToolStripMenuItem
     Friend WithEvents mnuFileIEOutput As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents tlSeparatorFile2 As ToolStripSeparator
     Friend WithEvents MnuFileClose As ToolStripMenuItem
     Friend WithEvents mnuFileSave As ToolStripMenuItem
     Friend WithEvents mnuFileSaveAs As ToolStripMenuItem
     Friend WithEvents mnuFilePrint As ToolStripMenuItem
     Friend WithEvents mnuFilePrintPreview As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
+    Friend WithEvents tlSeparatorFile3 As ToolStripSeparator
     Friend WithEvents mnuFIleExit As ToolStripMenuItem
     Friend WithEvents mnuEdit As ToolStripMenuItem
     Friend WithEvents mnuEditUndo As ToolStripMenuItem
@@ -2171,13 +2190,13 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents HelpToolStripButton As ToolStripButton
     Private WithEvents mnuBar As MenuStrip
-    Friend WithEvents FileStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuFile As ToolStripMenuItem
     Friend WithEvents mnuFileNewWorksheet As ToolStripMenuItem
     Friend WithEvents mnuFileOpenWorksheet As ToolStripMenuItem
     Friend WithEvents mnuFileOpenFromLibrary As ToolStripMenuItem
     Friend WithEvents mnuFileCloseWorksheet As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
-    Friend WithEvents mnuFileIE As ToolStripMenuItem
+    Friend WithEvents tlSeparatorFile As ToolStripSeparator
+    Friend WithEvents mnuFileImportExport As ToolStripMenuItem
     Friend WithEvents SubmitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CurrentWindowCtrlWToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CurrentLineCtrlLToolStripMenuItem As ToolStripMenuItem
