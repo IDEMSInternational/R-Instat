@@ -139,7 +139,7 @@ Partial Class frmMain
         Me.StartOfTheRainsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExtremesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEndofRains = New System.Windows.Forms.ToolStripMenuItem()
-        Me.WorksheetInformationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageWorksheetInformation = New System.Windows.Forms.ToolStripMenuItem()
         Me.LockUnlockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileIEODBC = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileIEOutput = New System.Windows.Forms.ToolStripMenuItem()
@@ -258,6 +258,9 @@ Partial Class frmMain
         Me.NameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormatCtrlDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageScriptWindow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageLogWindow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageWorksheetMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.KiswahiliToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.KiswahiliToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -1007,12 +1010,12 @@ Partial Class frmMain
         Me.mnuEndofRains.Size = New System.Drawing.Size(172, 22)
         Me.mnuEndofRains.Text = "End of the Rains"
         '
-        'WorksheetInformationToolStripMenuItem
+        'mnuManageWorksheetInformation
         '
-        Me.WorksheetInformationToolStripMenuItem.Name = "WorksheetInformationToolStripMenuItem"
-        Me.WorksheetInformationToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
-        Me.WorksheetInformationToolStripMenuItem.Tag = "Worksheet_Information"
-        Me.WorksheetInformationToolStripMenuItem.Text = "Worksheet Information..."
+        Me.mnuManageWorksheetInformation.Name = "mnuManageWorksheetInformation"
+        Me.mnuManageWorksheetInformation.Size = New System.Drawing.Size(205, 22)
+        Me.mnuManageWorksheetInformation.Tag = "Worksheet_Information"
+        Me.mnuManageWorksheetInformation.Text = "Worksheet Information..."
         '
         'LockUnlockToolStripMenuItem
         '
@@ -1256,14 +1259,14 @@ Partial Class frmMain
         '
         Me.mnuEditMacroNew.CheckOnClick = True
         Me.mnuEditMacroNew.Name = "mnuEditMacroNew"
-        Me.mnuEditMacroNew.Size = New System.Drawing.Size(152, 22)
+        Me.mnuEditMacroNew.Size = New System.Drawing.Size(112, 22)
         Me.mnuEditMacroNew.Text = "New"
         '
         'mnuEditMacroOpen
         '
         Me.mnuEditMacroOpen.CheckOnClick = True
         Me.mnuEditMacroOpen.Name = "mnuEditMacroOpen"
-        Me.mnuEditMacroOpen.Size = New System.Drawing.Size(152, 22)
+        Me.mnuEditMacroOpen.Size = New System.Drawing.Size(112, 22)
         Me.mnuEditMacroOpen.Text = "Open..."
         '
         'mnuEditCommandLogging
@@ -1720,7 +1723,7 @@ Partial Class frmMain
         '
         'ManageToolStripMenuItem
         '
-        Me.ManageToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCalculations, Me.DataToolStripMenuItem, Me.ManipulateToolStripMenuItem, Me.ReshapeToolStripMenuItem, Me.ColumnPropertiesToolStripMenuItem, Me.ResizeWorksheetToolStripMenuItem, Me.WorksheetInformationToolStripMenuItem})
+        Me.ManageToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCalculations, Me.DataToolStripMenuItem, Me.ManipulateToolStripMenuItem, Me.ReshapeToolStripMenuItem, Me.ColumnPropertiesToolStripMenuItem, Me.mnuManageScriptWindow, Me.mnuManageLogWindow, Me.ResizeWorksheetToolStripMenuItem, Me.mnuManageWorksheetInformation, Me.mnuManageWorksheetMetadata})
         Me.ManageToolStripMenuItem.Name = "ManageToolStripMenuItem"
         Me.ManageToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.ManageToolStripMenuItem.Tag = "Manage"
@@ -1914,6 +1917,24 @@ Partial Class frmMain
         Me.AlignmentToolStripMenuItem.Name = "AlignmentToolStripMenuItem"
         Me.AlignmentToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.AlignmentToolStripMenuItem.Text = "Alignment..."
+        '
+        'mnuManageScriptWindow
+        '
+        Me.mnuManageScriptWindow.Name = "mnuManageScriptWindow"
+        Me.mnuManageScriptWindow.Size = New System.Drawing.Size(205, 22)
+        Me.mnuManageScriptWindow.Text = "Script Window"
+        '
+        'mnuManageLogWindow
+        '
+        Me.mnuManageLogWindow.Name = "mnuManageLogWindow"
+        Me.mnuManageLogWindow.Size = New System.Drawing.Size(205, 22)
+        Me.mnuManageLogWindow.Text = "Log Window"
+        '
+        'mnuManageWorksheetMetadata
+        '
+        Me.mnuManageWorksheetMetadata.Name = "mnuManageWorksheetMetadata"
+        Me.mnuManageWorksheetMetadata.Size = New System.Drawing.Size(205, 22)
+        Me.mnuManageWorksheetMetadata.Text = "Worksheet Metadata"
         '
         'KiswahiliToolStripMenuItem
         '
@@ -2166,7 +2187,7 @@ Partial Class frmMain
     Friend WithEvents EventsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StartOfTheRainsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExtremesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents WorksheetInformationToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuManageWorksheetInformation As ToolStripMenuItem
     Friend WithEvents LockUnlockToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuFileIEODBC As ToolStripMenuItem
     Friend WithEvents mnuFileIEOutput As ToolStripMenuItem
@@ -2306,4 +2327,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimateMethodsGraphicsTimeseries As ToolStripMenuItem
     Friend WithEvents mnuClimateMethodsGraphicsWindrose As ToolStripMenuItem
     Friend WithEvents mnuClimateMethodsGraphicsMultipleLines As ToolStripMenuItem
+    Friend WithEvents mnuManageScriptWindow As ToolStripMenuItem
+    Friend WithEvents mnuManageLogWindow As ToolStripMenuItem
+    Friend WithEvents mnuManageWorksheetMetadata As ToolStripMenuItem
 End Class
