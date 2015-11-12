@@ -72,10 +72,10 @@ Partial Class dlgDotPlot
         Me.lblVariableToPlot.AutoSize = True
         Me.lblVariableToPlot.Location = New System.Drawing.Point(211, 13)
         Me.lblVariableToPlot.Name = "lblVariableToPlot"
-        Me.lblVariableToPlot.Size = New System.Drawing.Size(39, 13)
+        Me.lblVariableToPlot.Size = New System.Drawing.Size(78, 13)
         Me.lblVariableToPlot.TabIndex = 5
         Me.lblVariableToPlot.Tag = "Variable_to_Plot"
-        Me.lblVariableToPlot.Text = "Label1"
+        Me.lblVariableToPlot.Text = "Variable to Plot"
         '
         'dlgDotPlot
         '
@@ -94,6 +94,7 @@ Partial Class dlgDotPlot
         Me.Name = "dlgDotPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Dot_Plot"
+        Me.Text = "Dox Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
