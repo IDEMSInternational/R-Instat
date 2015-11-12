@@ -267,6 +267,12 @@
     <Compile Include="dlgEndofRains.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportforPICSA.designer.vb">
+      <DependentUpon>dlgExportforPICSA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportforPICSA.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExtremeEvents.Designer.vb">
       <DependentUpon>dlgExtremeEvents.vb</DependentUpon>
     </Compile>
@@ -691,6 +697,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEndofRains.sw-KE.resx">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportforPICSA.fr-FR.resx">
+      <DependentUpon>dlgExportforPICSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportforPICSA.resx">
+      <DependentUpon>dlgExportforPICSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportforPICSA.sw-KE.resx">
+      <DependentUpon>dlgExportforPICSA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExtremeEvents.fr-FR.resx">
       <DependentUpon>dlgExtremeEvents.vb</DependentUpon>
