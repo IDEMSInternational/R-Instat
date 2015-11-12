@@ -42,13 +42,13 @@ Partial Class dlgRegularSequence
         Me.lblValue = New System.Windows.Forms.Label()
         Me.grpSequence2 = New System.Windows.Forms.GroupBox()
         Me.cboBy = New System.Windows.Forms.ComboBox()
-        Me.datePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.datePicker2 = New System.Windows.Forms.DateTimePicker()
+        Me.dtSelectorA = New System.Windows.Forms.DateTimePicker()
+        Me.dtSelectorB = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.errorProvider = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.UcrBase = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpSequenceType.SuspendLayout()
         Me.grpSequence.SuspendLayout()
         Me.grpRepeatSingle.SuspendLayout()
@@ -63,9 +63,9 @@ Partial Class dlgRegularSequence
         Me.grpSequenceType.Controls.Add(Me.rdSequence)
         Me.grpSequenceType.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.grpSequenceType.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequenceType.Location = New System.Drawing.Point(12, 3)
+        Me.grpSequenceType.Location = New System.Drawing.Point(238, 15)
         Me.grpSequenceType.Name = "grpSequenceType"
-        Me.grpSequenceType.Size = New System.Drawing.Size(244, 33)
+        Me.grpSequenceType.Size = New System.Drawing.Size(115, 122)
         Me.grpSequenceType.TabIndex = 0
         Me.grpSequenceType.TabStop = False
         '
@@ -74,7 +74,7 @@ Partial Class dlgRegularSequence
         Me.rdDates.AutoSize = True
         Me.rdDates.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.rdDates.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdDates.Location = New System.Drawing.Point(175, 9)
+        Me.rdDates.Location = New System.Drawing.Point(0, 98)
         Me.rdDates.Name = "rdDates"
         Me.rdDates.Size = New System.Drawing.Size(59, 18)
         Me.rdDates.TabIndex = 2
@@ -86,7 +86,7 @@ Partial Class dlgRegularSequence
         Me.rdSIngleValue.AutoSize = True
         Me.rdSIngleValue.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.rdSIngleValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdSIngleValue.Location = New System.Drawing.Point(82, 9)
+        Me.rdSIngleValue.Location = New System.Drawing.Point(0, 59)
         Me.rdSIngleValue.Name = "rdSIngleValue"
         Me.rdSIngleValue.Size = New System.Drawing.Size(89, 18)
         Me.rdSIngleValue.TabIndex = 1
@@ -116,7 +116,7 @@ Partial Class dlgRegularSequence
         Me.grpSequence.Controls.Add(Me.txtTo)
         Me.grpSequence.Controls.Add(Me.txtSteps)
         Me.grpSequence.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequence.Location = New System.Drawing.Point(15, 38)
+        Me.grpSequence.Location = New System.Drawing.Point(12, 7)
         Me.grpSequence.Name = "grpSequence"
         Me.grpSequence.Size = New System.Drawing.Size(180, 96)
         Me.grpSequence.TabIndex = 0
@@ -185,7 +185,7 @@ Partial Class dlgRegularSequence
         Me.grpRepeatSingle.Controls.Add(Me.txtRepeatTimes)
         Me.grpRepeatSingle.Controls.Add(Me.txtValue)
         Me.grpRepeatSingle.Controls.Add(Me.lblValue)
-        Me.grpRepeatSingle.Location = New System.Drawing.Point(136, 36)
+        Me.grpRepeatSingle.Location = New System.Drawing.Point(10, 24)
         Me.grpRepeatSingle.Name = "grpRepeatSingle"
         Me.grpRepeatSingle.Size = New System.Drawing.Size(179, 100)
         Me.grpRepeatSingle.TabIndex = 9
@@ -236,13 +236,13 @@ Partial Class dlgRegularSequence
         'grpSequence2
         '
         Me.grpSequence2.Controls.Add(Me.cboBy)
-        Me.grpSequence2.Controls.Add(Me.datePicker1)
-        Me.grpSequence2.Controls.Add(Me.datePicker2)
+        Me.grpSequence2.Controls.Add(Me.dtSelectorA)
+        Me.grpSequence2.Controls.Add(Me.dtSelectorB)
         Me.grpSequence2.Controls.Add(Me.Label2)
         Me.grpSequence2.Controls.Add(Me.Label4)
         Me.grpSequence2.Controls.Add(Me.Label5)
         Me.grpSequence2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequence2.Location = New System.Drawing.Point(207, 47)
+        Me.grpSequence2.Location = New System.Drawing.Point(9, 22)
         Me.grpSequence2.Name = "grpSequence2"
         Me.grpSequence2.Size = New System.Drawing.Size(180, 95)
         Me.grpSequence2.TabIndex = 10
@@ -259,22 +259,22 @@ Partial Class dlgRegularSequence
         Me.cboBy.Size = New System.Drawing.Size(62, 21)
         Me.cboBy.TabIndex = 12
         '
-        'datePicker1
+        'dtSelectorA
         '
-        Me.datePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePicker1.Location = New System.Drawing.Point(78, 20)
-        Me.datePicker1.Name = "datePicker1"
-        Me.datePicker1.Size = New System.Drawing.Size(84, 20)
-        Me.datePicker1.TabIndex = 10
+        Me.dtSelectorA.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtSelectorA.Location = New System.Drawing.Point(78, 20)
+        Me.dtSelectorA.Name = "dtSelectorA"
+        Me.dtSelectorA.Size = New System.Drawing.Size(84, 20)
+        Me.dtSelectorA.TabIndex = 10
         '
-        'datePicker2
+        'dtSelectorB
         '
-        Me.datePicker2.CustomFormat = "dd/mm/yyyy"
-        Me.datePicker2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePicker2.Location = New System.Drawing.Point(78, 46)
-        Me.datePicker2.Name = "datePicker2"
-        Me.datePicker2.Size = New System.Drawing.Size(84, 20)
-        Me.datePicker2.TabIndex = 11
+        Me.dtSelectorB.CustomFormat = "dd/mm/yyyy"
+        Me.dtSelectorB.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtSelectorB.Location = New System.Drawing.Point(78, 46)
+        Me.dtSelectorB.Name = "dtSelectorB"
+        Me.dtSelectorB.Size = New System.Drawing.Size(84, 20)
+        Me.dtSelectorB.TabIndex = 11
         '
         'Label2
         '
@@ -310,22 +310,22 @@ Partial Class dlgRegularSequence
         '
         Me.errorProvider.ContainerControl = Me
         '
-        'UcrBase
+        'ucrBase
         '
-        Me.UcrBase.Location = New System.Drawing.Point(12, 157)
-        Me.UcrBase.Name = "UcrBase"
-        Me.UcrBase.Size = New System.Drawing.Size(403, 32)
-        Me.UcrBase.TabIndex = 5
+        Me.ucrBase.Location = New System.Drawing.Point(6, 153)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 32)
+        Me.ucrBase.TabIndex = 5
         '
         'dlgRegularSequence
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 186)
+        Me.ClientSize = New System.Drawing.Size(412, 186)
+        Me.Controls.Add(Me.grpRepeatSingle)
         Me.Controls.Add(Me.grpSequence2)
         Me.Controls.Add(Me.grpSequence)
-        Me.Controls.Add(Me.grpRepeatSingle)
-        Me.Controls.Add(Me.UcrBase)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpSequenceType)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -356,7 +356,7 @@ Partial Class dlgRegularSequence
     Friend WithEvents txtFrom As TextBox
     Friend WithEvents txtTo As TextBox
     Friend WithEvents txtSteps As TextBox
-    Friend WithEvents UcrBase As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grpRepeatSingle As GroupBox
     Friend WithEvents lblTimes3 As Label
     Friend WithEvents lblRepeated As Label
@@ -364,8 +364,8 @@ Partial Class dlgRegularSequence
     Friend WithEvents txtValue As TextBox
     Friend WithEvents lblValue As Label
     Friend WithEvents grpSequence2 As GroupBox
-    Friend WithEvents datePicker1 As DateTimePicker
-    Friend WithEvents datePicker2 As DateTimePicker
+    Friend WithEvents dtSelectorA As DateTimePicker
+    Friend WithEvents dtSelectorB As DateTimePicker
     Friend WithEvents Label2 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
