@@ -135,6 +135,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dlgAddStartRain.designer.vb">
+      <DependentUpon>dlgAddStartRain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAddStartRain.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgAnnualRaintotal.designer.vb">
       <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
     </Compile>
@@ -437,6 +443,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgAddStartRain.fr-FR.resx">
+      <DependentUpon>dlgAddStartRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAddStartRain.resx">
+      <DependentUpon>dlgAddStartRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAddStartRain.sw-KE.resx">
+      <DependentUpon>dlgAddStartRain.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgAnnualRaintotal.fr-FR.resx">
       <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
     </EmbeddedResource>
