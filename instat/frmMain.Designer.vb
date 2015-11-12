@@ -139,7 +139,7 @@ Partial Class frmMain
         Me.StartOfTheRainsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExtremesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEndofRains = New System.Windows.Forms.ToolStripMenuItem()
-        Me.WorksheetInformationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageWorksheetInformation = New System.Windows.Forms.ToolStripMenuItem()
         Me.LockUnlockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileIEODBC = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileIEOutput = New System.Windows.Forms.ToolStripMenuItem()
@@ -164,32 +164,32 @@ Partial Class frmMain
         Me.mnuEditFont = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditRunWSEditor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditViewEditText = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NewF8ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenFromLibraryToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditViewEditTextNew = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditViewEditTextOpen = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditViewEditTextOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditViewEditTextSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditViewEditMacro = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditMacroNew = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditMacroOpen = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCommandLogging = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StartF9ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StopShiftF9ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ViewLogFileCtrlF9ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditCommandStart = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditCommandStop = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditCommandViewLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditOutputSpooling = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditOutputSpoolingStart = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditOutputSpoolingStop = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditOutputSpoolingView = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditRecall = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LastCommandShiftF11ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LastDialogF11ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RestartServerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Last10DialoguesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditRecallLastCommand = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditRecallLastDialog = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditRecallRestartServer = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditRecallLast10Dialogues = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FlagsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DisableWarningsF6ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PresentationModeShiftF6ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DisplayFactorLevelsAsOrdinalsShiftF7ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OPtionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditFlags = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditFlagsDisableWarnings = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditFlagsPresentationMode = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditFlagsDisplayFactorLevelsAsOrdinals = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileIEExport = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.mnuFIleIEASCII = New System.Windows.Forms.ToolStripMenuItem()
@@ -258,6 +258,9 @@ Partial Class frmMain
         Me.NameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormatCtrlDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageScriptWindow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageLogWindow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageWorksheetMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.KiswahiliToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.KiswahiliToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -276,6 +279,29 @@ Partial Class frmMain
         Me.mnuClimateMethodsGraphicsTimeseries = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsGraphicsWindrose = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsGraphicsMultipleLines = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DataManipulationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StartOfRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EndOfRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangeFormatDayMonthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportCPTToTabularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DayMonthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayDailyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayDOYOfYearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayRainRunningTotalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplaySpellLengthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportForPICSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExtremeEventsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MissingDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MissingDataTableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MonthlySummariesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OutputForCDTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AdditionalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OutputForCPTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RainsStatisticsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1007,12 +1033,12 @@ Partial Class frmMain
         Me.mnuEndofRains.Size = New System.Drawing.Size(172, 22)
         Me.mnuEndofRains.Text = "End of the Rains"
         '
-        'WorksheetInformationToolStripMenuItem
+        'mnuManageWorksheetInformation
         '
-        Me.WorksheetInformationToolStripMenuItem.Name = "WorksheetInformationToolStripMenuItem"
-        Me.WorksheetInformationToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
-        Me.WorksheetInformationToolStripMenuItem.Tag = "Worksheet_Information"
-        Me.WorksheetInformationToolStripMenuItem.Text = "Worksheet Information..."
+        Me.mnuManageWorksheetInformation.Name = "mnuManageWorksheetInformation"
+        Me.mnuManageWorksheetInformation.Size = New System.Drawing.Size(205, 22)
+        Me.mnuManageWorksheetInformation.Tag = "Worksheet_Information"
+        Me.mnuManageWorksheetInformation.Text = "Worksheet Information..."
         '
         'LockUnlockToolStripMenuItem
         '
@@ -1098,7 +1124,7 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditUndo, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuEditClear, Me.mnuEditSelectAll, Me.mnuEditFind, Me.mnuEditReplace, Me.mnuEditFont, Me.mnuEditRunWSEditor, Me.mnuEditViewEditText, Me.mnuEditViewEditMacro, Me.mnuEditCommandLogging, Me.mnuEditOutputSpooling, Me.mnuEditRecall, Me.FlagsToolStripMenuItem, Me.OPtionsToolStripMenuItem})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditUndo, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuEditClear, Me.mnuEditSelectAll, Me.mnuEditFind, Me.mnuEditReplace, Me.mnuEditFont, Me.mnuEditRunWSEditor, Me.mnuEditViewEditText, Me.mnuEditViewEditMacro, Me.mnuEditCommandLogging, Me.mnuEditOutputSpooling, Me.mnuEditRecall, Me.mnuEditFlags, Me.mnuEditOptions})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(39, 20)
         Me.mnuEdit.Tag = "Edit"
@@ -1106,221 +1132,265 @@ Partial Class frmMain
         '
         'mnuEditUndo
         '
+        Me.mnuEditUndo.CheckOnClick = True
         Me.mnuEditUndo.Name = "mnuEditUndo"
-        Me.mnuEditUndo.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
+        Me.mnuEditUndo.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditUndo.Tag = "Undo"
-        Me.mnuEditUndo.Text = "Undo       Ctrl+Z"
+        Me.mnuEditUndo.Text = "Undo"
         '
         'mnuEditCut
         '
+        Me.mnuEditCut.CheckOnClick = True
         Me.mnuEditCut.Name = "mnuEditCut"
-        Me.mnuEditCut.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditCut.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
+        Me.mnuEditCut.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditCut.Tag = "Cut"
-        Me.mnuEditCut.Text = "Cut       Ctrl+X"
+        Me.mnuEditCut.Text = "Cut"
         '
         'mnuEditCopy
         '
+        Me.mnuEditCopy.CheckOnClick = True
         Me.mnuEditCopy.Name = "mnuEditCopy"
-        Me.mnuEditCopy.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
+        Me.mnuEditCopy.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditCopy.Tag = "Copy"
-        Me.mnuEditCopy.Text = "Copy       Ctrl+C"
+        Me.mnuEditCopy.Text = "Copy"
         '
         'mnuEditCopySpecial
         '
+        Me.mnuEditCopySpecial.CheckOnClick = True
         Me.mnuEditCopySpecial.Name = "mnuEditCopySpecial"
-        Me.mnuEditCopySpecial.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditCopySpecial.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
+        Me.mnuEditCopySpecial.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditCopySpecial.Tag = "Copy_Special"
-        Me.mnuEditCopySpecial.Text = "Copy Special       Ctrl+Y"
+        Me.mnuEditCopySpecial.Text = "Copy Special"
         '
         'mnuEditPaste
         '
         Me.mnuEditPaste.Name = "mnuEditPaste"
-        Me.mnuEditPaste.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
+        Me.mnuEditPaste.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditPaste.Tag = "Paste"
-        Me.mnuEditPaste.Text = "Paste       Ctrl+V"
+        Me.mnuEditPaste.Text = "Paste"
         '
         'mnuEditClear
         '
         Me.mnuEditClear.Name = "mnuEditClear"
-        Me.mnuEditClear.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditClear.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditClear.Tag = "Clear"
         Me.mnuEditClear.Text = "Clear       Del"
         '
         'mnuEditSelectAll
         '
+        Me.mnuEditSelectAll.CheckOnClick = True
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
-        Me.mnuEditSelectAll.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
+        Me.mnuEditSelectAll.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditSelectAll.Tag = "Select_All"
-        Me.mnuEditSelectAll.Text = "Select All       Ctrls+A"
+        Me.mnuEditSelectAll.Text = "Select All "
         '
         'mnuEditFind
         '
+        Me.mnuEditFind.CheckOnClick = True
         Me.mnuEditFind.Name = "mnuEditFind"
-        Me.mnuEditFind.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditFind.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
+        Me.mnuEditFind.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditFind.Tag = "Find"
-        Me.mnuEditFind.Text = "Find       Ctrl+F"
+        Me.mnuEditFind.Text = "Find"
         '
         'mnuEditReplace
         '
+        Me.mnuEditReplace.CheckOnClick = True
         Me.mnuEditReplace.Name = "mnuEditReplace"
-        Me.mnuEditReplace.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditReplace.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.H), System.Windows.Forms.Keys)
+        Me.mnuEditReplace.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditReplace.Tag = "Replace"
-        Me.mnuEditReplace.Text = "Replace       Ctrl+H"
+        Me.mnuEditReplace.Text = "Replace"
         '
         'mnuEditFont
         '
+        Me.mnuEditFont.CheckOnClick = True
         Me.mnuEditFont.Name = "mnuEditFont"
-        Me.mnuEditFont.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditFont.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
+        Me.mnuEditFont.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditFont.Tag = "Font"
-        Me.mnuEditFont.Text = "Font       Ctrl+T"
+        Me.mnuEditFont.Text = "Font"
         '
         'mnuEditRunWSEditor
         '
+        Me.mnuEditRunWSEditor.CheckOnClick = True
         Me.mnuEditRunWSEditor.Name = "mnuEditRunWSEditor"
-        Me.mnuEditRunWSEditor.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditRunWSEditor.ShortcutKeys = System.Windows.Forms.Keys.F7
+        Me.mnuEditRunWSEditor.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditRunWSEditor.Tag = "Run_Worksheet_Editor"
-        Me.mnuEditRunWSEditor.Text = "Run Worksheet Editor       F7"
+        Me.mnuEditRunWSEditor.Text = "Run Worksheet Editor"
         '
         'mnuEditViewEditText
         '
-        Me.mnuEditViewEditText.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewF8ToolStripMenuItem, Me.OpenToolStripMenuItem, Me.OpenFromLibraryToolStripMenuItem1, Me.SelectionToolStripMenuItem})
+        Me.mnuEditViewEditText.CheckOnClick = True
+        Me.mnuEditViewEditText.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditViewEditTextNew, Me.mnuEditViewEditTextOpen, Me.mnuEditViewEditTextOpenFromLibrary, Me.mnuEditViewEditTextSelection})
         Me.mnuEditViewEditText.Name = "mnuEditViewEditText"
-        Me.mnuEditViewEditText.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditViewEditText.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditViewEditText.Tag = "View_Edit_Text"
         Me.mnuEditViewEditText.Text = "View/Edit Text"
         '
-        'NewF8ToolStripMenuItem
+        'mnuEditViewEditTextNew
         '
-        Me.NewF8ToolStripMenuItem.Name = "NewF8ToolStripMenuItem"
-        Me.NewF8ToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
-        Me.NewF8ToolStripMenuItem.Tag = "New"
-        Me.NewF8ToolStripMenuItem.Text = "New    F8"
+        Me.mnuEditViewEditTextNew.CheckOnClick = True
+        Me.mnuEditViewEditTextNew.Name = "mnuEditViewEditTextNew"
+        Me.mnuEditViewEditTextNew.ShortcutKeys = System.Windows.Forms.Keys.F8
+        Me.mnuEditViewEditTextNew.Size = New System.Drawing.Size(173, 22)
+        Me.mnuEditViewEditTextNew.Tag = "New"
+        Me.mnuEditViewEditTextNew.Text = "New"
         '
-        'OpenToolStripMenuItem
+        'mnuEditViewEditTextOpen
         '
-        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
-        Me.OpenToolStripMenuItem.Tag = "Open"
-        Me.OpenToolStripMenuItem.Text = "Open...    Shift+F8"
+        Me.mnuEditViewEditTextOpen.CheckOnClick = True
+        Me.mnuEditViewEditTextOpen.Name = "mnuEditViewEditTextOpen"
+        Me.mnuEditViewEditTextOpen.ShortcutKeys = CType((System.Windows.Forms.Keys.Shift Or System.Windows.Forms.Keys.F8), System.Windows.Forms.Keys)
+        Me.mnuEditViewEditTextOpen.Size = New System.Drawing.Size(173, 22)
+        Me.mnuEditViewEditTextOpen.Tag = "Open"
+        Me.mnuEditViewEditTextOpen.Text = "Open"
         '
-        'OpenFromLibraryToolStripMenuItem1
+        'mnuEditViewEditTextOpenFromLibrary
         '
-        Me.OpenFromLibraryToolStripMenuItem1.Name = "OpenFromLibraryToolStripMenuItem1"
-        Me.OpenFromLibraryToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
-        Me.OpenFromLibraryToolStripMenuItem1.Tag = "Open_From_Library"
-        Me.OpenFromLibraryToolStripMenuItem1.Text = "Open From Library..."
+        Me.mnuEditViewEditTextOpenFromLibrary.CheckOnClick = True
+        Me.mnuEditViewEditTextOpenFromLibrary.Name = "mnuEditViewEditTextOpenFromLibrary"
+        Me.mnuEditViewEditTextOpenFromLibrary.Size = New System.Drawing.Size(173, 22)
+        Me.mnuEditViewEditTextOpenFromLibrary.Tag = "Open_From_Library"
+        Me.mnuEditViewEditTextOpenFromLibrary.Text = "Open From Library"
         '
-        'SelectionToolStripMenuItem
+        'mnuEditViewEditTextSelection
         '
-        Me.SelectionToolStripMenuItem.Name = "SelectionToolStripMenuItem"
-        Me.SelectionToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
-        Me.SelectionToolStripMenuItem.Tag = "Selection"
-        Me.SelectionToolStripMenuItem.Text = "Selection"
+        Me.mnuEditViewEditTextSelection.CheckOnClick = True
+        Me.mnuEditViewEditTextSelection.Name = "mnuEditViewEditTextSelection"
+        Me.mnuEditViewEditTextSelection.Size = New System.Drawing.Size(173, 22)
+        Me.mnuEditViewEditTextSelection.Tag = "Selection"
+        Me.mnuEditViewEditTextSelection.Text = "Selection"
         '
         'mnuEditViewEditMacro
         '
-        Me.mnuEditViewEditMacro.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.OpenToolStripMenuItem1})
+        Me.mnuEditViewEditMacro.CheckOnClick = True
+        Me.mnuEditViewEditMacro.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditMacroNew, Me.mnuEditMacroOpen})
         Me.mnuEditViewEditMacro.Name = "mnuEditViewEditMacro"
-        Me.mnuEditViewEditMacro.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditViewEditMacro.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditViewEditMacro.Tag = "View_Edit_Macro"
         Me.mnuEditViewEditMacro.Text = "View/Edit Macro"
         '
-        'NewToolStripMenuItem
+        'mnuEditMacroNew
         '
-        Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
-        Me.NewToolStripMenuItem.Text = "New"
+        Me.mnuEditMacroNew.CheckOnClick = True
+        Me.mnuEditMacroNew.Name = "mnuEditMacroNew"
+        Me.mnuEditMacroNew.Size = New System.Drawing.Size(112, 22)
+        Me.mnuEditMacroNew.Text = "New"
         '
-        'OpenToolStripMenuItem1
+        'mnuEditMacroOpen
         '
-        Me.OpenToolStripMenuItem1.Name = "OpenToolStripMenuItem1"
-        Me.OpenToolStripMenuItem1.Size = New System.Drawing.Size(112, 22)
-        Me.OpenToolStripMenuItem1.Text = "Open..."
+        Me.mnuEditMacroOpen.CheckOnClick = True
+        Me.mnuEditMacroOpen.Name = "mnuEditMacroOpen"
+        Me.mnuEditMacroOpen.Size = New System.Drawing.Size(112, 22)
+        Me.mnuEditMacroOpen.Text = "Open..."
         '
         'mnuEditCommandLogging
         '
-        Me.mnuEditCommandLogging.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartF9ToolStripMenuItem, Me.StopShiftF9ToolStripMenuItem, Me.ViewLogFileCtrlF9ToolStripMenuItem})
+        Me.mnuEditCommandLogging.CheckOnClick = True
+        Me.mnuEditCommandLogging.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditCommandStart, Me.mnuEditCommandStop, Me.mnuEditCommandViewLogFile})
         Me.mnuEditCommandLogging.Name = "mnuEditCommandLogging"
-        Me.mnuEditCommandLogging.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditCommandLogging.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditCommandLogging.Tag = "Command_Logging"
         Me.mnuEditCommandLogging.Text = "Command Logging"
         '
-        'StartF9ToolStripMenuItem
+        'mnuEditCommandStart
         '
-        Me.StartF9ToolStripMenuItem.Name = "StartF9ToolStripMenuItem"
-        Me.StartF9ToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
-        Me.StartF9ToolStripMenuItem.Text = "Start...    F9"
+        Me.mnuEditCommandStart.CheckOnClick = True
+        Me.mnuEditCommandStart.Name = "mnuEditCommandStart"
+        Me.mnuEditCommandStart.ShortcutKeys = System.Windows.Forms.Keys.F9
+        Me.mnuEditCommandStart.Size = New System.Drawing.Size(189, 22)
+        Me.mnuEditCommandStart.Text = "Start"
         '
-        'StopShiftF9ToolStripMenuItem
+        'mnuEditCommandStop
         '
-        Me.StopShiftF9ToolStripMenuItem.Name = "StopShiftF9ToolStripMenuItem"
-        Me.StopShiftF9ToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
-        Me.StopShiftF9ToolStripMenuItem.Text = "Stop       Shift+F9"
+        Me.mnuEditCommandStop.Name = "mnuEditCommandStop"
+        Me.mnuEditCommandStop.ShortcutKeys = CType((System.Windows.Forms.Keys.Shift Or System.Windows.Forms.Keys.F9), System.Windows.Forms.Keys)
+        Me.mnuEditCommandStop.Size = New System.Drawing.Size(189, 22)
+        Me.mnuEditCommandStop.Text = "Stop"
         '
-        'ViewLogFileCtrlF9ToolStripMenuItem
+        'mnuEditCommandViewLogFile
         '
-        Me.ViewLogFileCtrlF9ToolStripMenuItem.Name = "ViewLogFileCtrlF9ToolStripMenuItem"
-        Me.ViewLogFileCtrlF9ToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
-        Me.ViewLogFileCtrlF9ToolStripMenuItem.Text = "View Log File       Ctrl+F9"
+        Me.mnuEditCommandViewLogFile.CheckOnClick = True
+        Me.mnuEditCommandViewLogFile.Name = "mnuEditCommandViewLogFile"
+        Me.mnuEditCommandViewLogFile.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F9), System.Windows.Forms.Keys)
+        Me.mnuEditCommandViewLogFile.Size = New System.Drawing.Size(189, 22)
+        Me.mnuEditCommandViewLogFile.Text = "View Log File"
         '
         'mnuEditOutputSpooling
         '
-        Me.mnuEditOutputSpooling.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartToolStripMenuItem, Me.StopToolStripMenuItem, Me.ViewToolStripMenuItem})
+        Me.mnuEditOutputSpooling.CheckOnClick = True
+        Me.mnuEditOutputSpooling.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditOutputSpoolingStart, Me.mnuEditOutputSpoolingStop, Me.mnuEditOutputSpoolingView})
         Me.mnuEditOutputSpooling.Name = "mnuEditOutputSpooling"
-        Me.mnuEditOutputSpooling.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditOutputSpooling.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditOutputSpooling.Tag = "Output_Spooling"
         Me.mnuEditOutputSpooling.Text = "Output Spooling"
         '
-        'StartToolStripMenuItem
+        'mnuEditOutputSpoolingStart
         '
-        Me.StartToolStripMenuItem.Name = "StartToolStripMenuItem"
-        Me.StartToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
-        Me.StartToolStripMenuItem.Text = "Start..."
+        Me.mnuEditOutputSpoolingStart.CheckOnClick = True
+        Me.mnuEditOutputSpoolingStart.Name = "mnuEditOutputSpoolingStart"
+        Me.mnuEditOutputSpoolingStart.Size = New System.Drawing.Size(153, 22)
+        Me.mnuEditOutputSpoolingStart.Text = "Start"
         '
-        'StopToolStripMenuItem
+        'mnuEditOutputSpoolingStop
         '
-        Me.StopToolStripMenuItem.Name = "StopToolStripMenuItem"
-        Me.StopToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
-        Me.StopToolStripMenuItem.Text = "Stop"
+        Me.mnuEditOutputSpoolingStop.Name = "mnuEditOutputSpoolingStop"
+        Me.mnuEditOutputSpoolingStop.Size = New System.Drawing.Size(153, 22)
+        Me.mnuEditOutputSpoolingStop.Text = "Stop"
         '
-        'ViewToolStripMenuItem
+        'mnuEditOutputSpoolingView
         '
-        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
-        Me.ViewToolStripMenuItem.Text = "View Spool File"
+        Me.mnuEditOutputSpoolingView.Name = "mnuEditOutputSpoolingView"
+        Me.mnuEditOutputSpoolingView.Size = New System.Drawing.Size(153, 22)
+        Me.mnuEditOutputSpoolingView.Text = "View Spool File"
         '
         'mnuEditRecall
         '
-        Me.mnuEditRecall.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LastCommandShiftF11ToolStripMenuItem, Me.LastDialogF11ToolStripMenuItem, Me.RestartServerToolStripMenuItem, Me.Last10DialoguesToolStripMenuItem})
+        Me.mnuEditRecall.CheckOnClick = True
+        Me.mnuEditRecall.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditRecallLastCommand, Me.mnuEditRecallLastDialog, Me.mnuEditRecallRestartServer, Me.mnuEditRecallLast10Dialogues})
         Me.mnuEditRecall.Name = "mnuEditRecall"
-        Me.mnuEditRecall.Size = New System.Drawing.Size(221, 22)
+        Me.mnuEditRecall.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditRecall.Tag = "Recall"
         Me.mnuEditRecall.Text = "Recall"
         '
-        'LastCommandShiftF11ToolStripMenuItem
+        'mnuEditRecallLastCommand
         '
-        Me.LastCommandShiftF11ToolStripMenuItem.Name = "LastCommandShiftF11ToolStripMenuItem"
-        Me.LastCommandShiftF11ToolStripMenuItem.Size = New System.Drawing.Size(226, 22)
-        Me.LastCommandShiftF11ToolStripMenuItem.Text = "Last Command       Shift+F11"
+        Me.mnuEditRecallLastCommand.CheckOnClick = True
+        Me.mnuEditRecallLastCommand.Name = "mnuEditRecallLastCommand"
+        Me.mnuEditRecallLastCommand.ShortcutKeys = CType((System.Windows.Forms.Keys.Shift Or System.Windows.Forms.Keys.F11), System.Windows.Forms.Keys)
+        Me.mnuEditRecallLastCommand.Size = New System.Drawing.Size(212, 22)
+        Me.mnuEditRecallLastCommand.Text = "Last Command"
         '
-        'LastDialogF11ToolStripMenuItem
+        'mnuEditRecallLastDialog
         '
-        Me.LastDialogF11ToolStripMenuItem.Name = "LastDialogF11ToolStripMenuItem"
-        Me.LastDialogF11ToolStripMenuItem.Size = New System.Drawing.Size(226, 22)
-        Me.LastDialogF11ToolStripMenuItem.Text = "Last Dialog       F11"
+        Me.mnuEditRecallLastDialog.CheckOnClick = True
+        Me.mnuEditRecallLastDialog.Name = "mnuEditRecallLastDialog"
+        Me.mnuEditRecallLastDialog.ShortcutKeys = System.Windows.Forms.Keys.F11
+        Me.mnuEditRecallLastDialog.Size = New System.Drawing.Size(212, 22)
+        Me.mnuEditRecallLastDialog.Text = "Last Dialog"
         '
-        'RestartServerToolStripMenuItem
+        'mnuEditRecallRestartServer
         '
-        Me.RestartServerToolStripMenuItem.Name = "RestartServerToolStripMenuItem"
-        Me.RestartServerToolStripMenuItem.Size = New System.Drawing.Size(226, 22)
-        Me.RestartServerToolStripMenuItem.Text = "Restart Server"
+        Me.mnuEditRecallRestartServer.CheckOnClick = True
+        Me.mnuEditRecallRestartServer.Name = "mnuEditRecallRestartServer"
+        Me.mnuEditRecallRestartServer.Size = New System.Drawing.Size(212, 22)
+        Me.mnuEditRecallRestartServer.Text = "Restart Server"
         '
-        'Last10DialoguesToolStripMenuItem
+        'mnuEditRecallLast10Dialogues
         '
-        Me.Last10DialoguesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClearListToolStripMenuItem})
-        Me.Last10DialoguesToolStripMenuItem.Name = "Last10DialoguesToolStripMenuItem"
-        Me.Last10DialoguesToolStripMenuItem.Size = New System.Drawing.Size(226, 22)
-        Me.Last10DialoguesToolStripMenuItem.Text = "Last 10 Dialogues"
+        Me.mnuEditRecallLast10Dialogues.CheckOnClick = True
+        Me.mnuEditRecallLast10Dialogues.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClearListToolStripMenuItem})
+        Me.mnuEditRecallLast10Dialogues.Name = "mnuEditRecallLast10Dialogues"
+        Me.mnuEditRecallLast10Dialogues.Size = New System.Drawing.Size(212, 22)
+        Me.mnuEditRecallLast10Dialogues.Text = "Last 10 Dialogues"
         '
         'ClearListToolStripMenuItem
         '
@@ -1328,38 +1398,45 @@ Partial Class frmMain
         Me.ClearListToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
         Me.ClearListToolStripMenuItem.Text = "Clear List"
         '
-        'FlagsToolStripMenuItem
+        'mnuEditFlags
         '
-        Me.FlagsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DisableWarningsF6ToolStripMenuItem, Me.PresentationModeShiftF6ToolStripMenuItem, Me.DisplayFactorLevelsAsOrdinalsShiftF7ToolStripMenuItem})
-        Me.FlagsToolStripMenuItem.Name = "FlagsToolStripMenuItem"
-        Me.FlagsToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.FlagsToolStripMenuItem.Tag = "Flags"
-        Me.FlagsToolStripMenuItem.Text = "Flags"
+        Me.mnuEditFlags.CheckOnClick = True
+        Me.mnuEditFlags.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFlagsDisableWarnings, Me.mnuEditFlagsPresentationMode, Me.mnuEditFlagsDisplayFactorLevelsAsOrdinals})
+        Me.mnuEditFlags.Name = "mnuEditFlags"
+        Me.mnuEditFlags.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditFlags.Tag = "Flags"
+        Me.mnuEditFlags.Text = "Flags"
         '
-        'DisableWarningsF6ToolStripMenuItem
+        'mnuEditFlagsDisableWarnings
         '
-        Me.DisableWarningsF6ToolStripMenuItem.Name = "DisableWarningsF6ToolStripMenuItem"
-        Me.DisableWarningsF6ToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-        Me.DisableWarningsF6ToolStripMenuItem.Text = "Disable Warnings       F6"
+        Me.mnuEditFlagsDisableWarnings.Name = "mnuEditFlagsDisableWarnings"
+        Me.mnuEditFlagsDisableWarnings.ShortcutKeys = System.Windows.Forms.Keys.F6
+        Me.mnuEditFlagsDisableWarnings.Size = New System.Drawing.Size(295, 22)
+        Me.mnuEditFlagsDisableWarnings.Text = "Disable Warnings"
         '
-        'PresentationModeShiftF6ToolStripMenuItem
+        'mnuEditFlagsPresentationMode
         '
-        Me.PresentationModeShiftF6ToolStripMenuItem.Name = "PresentationModeShiftF6ToolStripMenuItem"
-        Me.PresentationModeShiftF6ToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-        Me.PresentationModeShiftF6ToolStripMenuItem.Text = "Presentation Mode       Shift+F6"
+        Me.mnuEditFlagsPresentationMode.CheckOnClick = True
+        Me.mnuEditFlagsPresentationMode.Name = "mnuEditFlagsPresentationMode"
+        Me.mnuEditFlagsPresentationMode.ShortcutKeys = CType((System.Windows.Forms.Keys.Shift Or System.Windows.Forms.Keys.F6), System.Windows.Forms.Keys)
+        Me.mnuEditFlagsPresentationMode.Size = New System.Drawing.Size(295, 22)
+        Me.mnuEditFlagsPresentationMode.Text = "Presentation Mode"
         '
-        'DisplayFactorLevelsAsOrdinalsShiftF7ToolStripMenuItem
+        'mnuEditFlagsDisplayFactorLevelsAsOrdinals
         '
-        Me.DisplayFactorLevelsAsOrdinalsShiftF7ToolStripMenuItem.Name = "DisplayFactorLevelsAsOrdinalsShiftF7ToolStripMenuItem"
-        Me.DisplayFactorLevelsAsOrdinalsShiftF7ToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-        Me.DisplayFactorLevelsAsOrdinalsShiftF7ToolStripMenuItem.Text = "Display Factor Levels as Ordinals       Shift+F7"
+        Me.mnuEditFlagsDisplayFactorLevelsAsOrdinals.CheckOnClick = True
+        Me.mnuEditFlagsDisplayFactorLevelsAsOrdinals.Name = "mnuEditFlagsDisplayFactorLevelsAsOrdinals"
+        Me.mnuEditFlagsDisplayFactorLevelsAsOrdinals.ShortcutKeys = CType((System.Windows.Forms.Keys.Shift Or System.Windows.Forms.Keys.F7), System.Windows.Forms.Keys)
+        Me.mnuEditFlagsDisplayFactorLevelsAsOrdinals.Size = New System.Drawing.Size(295, 22)
+        Me.mnuEditFlagsDisplayFactorLevelsAsOrdinals.Text = "Display Factor Levels as Ordinals"
         '
-        'OPtionsToolStripMenuItem
+        'mnuEditOptions
         '
-        Me.OPtionsToolStripMenuItem.Name = "OPtionsToolStripMenuItem"
-        Me.OPtionsToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
-        Me.OPtionsToolStripMenuItem.Tag = "Options"
-        Me.OPtionsToolStripMenuItem.Text = "Options..."
+        Me.mnuEditOptions.CheckOnClick = True
+        Me.mnuEditOptions.Name = "mnuEditOptions"
+        Me.mnuEditOptions.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditOptions.Tag = "Options"
+        Me.mnuEditOptions.Text = "Options..."
         '
         'mnuFileIEExport
         '
@@ -1669,7 +1746,7 @@ Partial Class frmMain
         '
         'ManageToolStripMenuItem
         '
-        Me.ManageToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCalculations, Me.DataToolStripMenuItem, Me.ManipulateToolStripMenuItem, Me.ReshapeToolStripMenuItem, Me.ColumnPropertiesToolStripMenuItem, Me.ResizeWorksheetToolStripMenuItem, Me.WorksheetInformationToolStripMenuItem})
+        Me.ManageToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCalculations, Me.DataToolStripMenuItem, Me.ManipulateToolStripMenuItem, Me.ReshapeToolStripMenuItem, Me.ColumnPropertiesToolStripMenuItem, Me.mnuManageScriptWindow, Me.mnuManageLogWindow, Me.ResizeWorksheetToolStripMenuItem, Me.mnuManageWorksheetInformation, Me.mnuManageWorksheetMetadata})
         Me.ManageToolStripMenuItem.Name = "ManageToolStripMenuItem"
         Me.ManageToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.ManageToolStripMenuItem.Tag = "Manage"
@@ -1864,6 +1941,24 @@ Partial Class frmMain
         Me.AlignmentToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.AlignmentToolStripMenuItem.Text = "Alignment..."
         '
+        'mnuManageScriptWindow
+        '
+        Me.mnuManageScriptWindow.Name = "mnuManageScriptWindow"
+        Me.mnuManageScriptWindow.Size = New System.Drawing.Size(205, 22)
+        Me.mnuManageScriptWindow.Text = "Script Window"
+        '
+        'mnuManageLogWindow
+        '
+        Me.mnuManageLogWindow.Name = "mnuManageLogWindow"
+        Me.mnuManageLogWindow.Size = New System.Drawing.Size(205, 22)
+        Me.mnuManageLogWindow.Text = "Log Window"
+        '
+        'mnuManageWorksheetMetadata
+        '
+        Me.mnuManageWorksheetMetadata.Name = "mnuManageWorksheetMetadata"
+        Me.mnuManageWorksheetMetadata.Size = New System.Drawing.Size(205, 22)
+        Me.mnuManageWorksheetMetadata.Text = "Worksheet Metadata"
+        '
         'KiswahiliToolStripMenuItem
         '
         Me.KiswahiliToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KiswahiliToolStripMenuItem1, Me.EnglishToolStripMenuItem, Me.FrenchToolStripMenuItem})
@@ -1894,7 +1989,7 @@ Partial Class frmMain
         '
         'ClimateMethodsToolStripMenuItem
         '
-        Me.ClimateMethodsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GraphicsToolStripMenuItem1})
+        Me.ClimateMethodsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DataManipulationToolStripMenuItem, Me.GraphicsToolStripMenuItem1, Me.ModelToolStripMenuItem, Me.AdditionalToolStripMenuItem})
         Me.ClimateMethodsToolStripMenuItem.Name = "ClimateMethodsToolStripMenuItem"
         Me.ClimateMethodsToolStripMenuItem.Size = New System.Drawing.Size(110, 20)
         Me.ClimateMethodsToolStripMenuItem.Text = "Climate Methods"
@@ -1903,7 +1998,7 @@ Partial Class frmMain
         '
         Me.GraphicsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimateMethodsGraphicsClipBoxPlot, Me.mnuClimateMethodsGraphicsCliplot, Me.mnuClimateMethodsGraphicsMissingValues, Me.mnuClimateMethodsGraphicsHistogram, Me.mnuClimateMethodsGraphicsCumExceedance, Me.mnuClimateMethodsGraphicsBoxplot, Me.mnuClimateMethodsGraphicsInventory, Me.mnuClimateMethodsGraphicsAnnualRainfall, Me.mnuClimateMethodsGraphicsRainCount, Me.mnuClimateMethodsGraphicsTimeseries, Me.mnuClimateMethodsGraphicsWindrose, Me.mnuClimateMethodsGraphicsMultipleLines})
         Me.GraphicsToolStripMenuItem1.Name = "GraphicsToolStripMenuItem1"
-        Me.GraphicsToolStripMenuItem1.Size = New System.Drawing.Size(120, 22)
+        Me.GraphicsToolStripMenuItem1.Size = New System.Drawing.Size(172, 22)
         Me.GraphicsToolStripMenuItem1.Text = "Graphics"
         '
         'mnuClimateMethodsGraphicsClipBoxPlot
@@ -1977,6 +2072,146 @@ Partial Class frmMain
         Me.mnuClimateMethodsGraphicsMultipleLines.Name = "mnuClimateMethodsGraphicsMultipleLines"
         Me.mnuClimateMethodsGraphicsMultipleLines.Size = New System.Drawing.Size(210, 22)
         Me.mnuClimateMethodsGraphicsMultipleLines.Text = "Multple lines"
+        '
+        'DataManipulationToolStripMenuItem
+        '
+        Me.DataManipulationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartOfRainToolStripMenuItem, Me.EndOfRainToolStripMenuItem, Me.ChangeFormatDayMonthToolStripMenuItem, Me.ExportCPTToTabularToolStripMenuItem, Me.DayMonthToolStripMenuItem, Me.DisplayDailyToolStripMenuItem1, Me.DisplayDOYOfYearToolStripMenuItem, Me.DisplayRainRunningTotalToolStripMenuItem, Me.DisplaySpellLengthToolStripMenuItem, Me.ExportForPICSAToolStripMenuItem, Me.ExtremeEventsToolStripMenuItem, Me.MissingDataToolStripMenuItem, Me.MissingDataTableToolStripMenuItem, Me.MonthlySummariesToolStripMenuItem, Me.OutputForCDTToolStripMenuItem})
+        Me.DataManipulationToolStripMenuItem.Name = "DataManipulationToolStripMenuItem"
+        Me.DataManipulationToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.DataManipulationToolStripMenuItem.Text = "Data Manipulation"
+        '
+        'StartOfRainToolStripMenuItem
+        '
+        Me.StartOfRainToolStripMenuItem.Name = "StartOfRainToolStripMenuItem"
+        Me.StartOfRainToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.StartOfRainToolStripMenuItem.Text = "Start of Rain"
+        '
+        'EndOfRainToolStripMenuItem
+        '
+        Me.EndOfRainToolStripMenuItem.Name = "EndOfRainToolStripMenuItem"
+        Me.EndOfRainToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.EndOfRainToolStripMenuItem.Text = "End of Rain"
+        '
+        'ChangeFormatDayMonthToolStripMenuItem
+        '
+        Me.ChangeFormatDayMonthToolStripMenuItem.Name = "ChangeFormatDayMonthToolStripMenuItem"
+        Me.ChangeFormatDayMonthToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.ChangeFormatDayMonthToolStripMenuItem.Text = "Change Format Day Month"
+        '
+        'ExportCPTToTabularToolStripMenuItem
+        '
+        Me.ExportCPTToTabularToolStripMenuItem.Name = "ExportCPTToTabularToolStripMenuItem"
+        Me.ExportCPTToTabularToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.ExportCPTToTabularToolStripMenuItem.Text = "Export CPT to Tabular"
+        '
+        'DayMonthToolStripMenuItem
+        '
+        Me.DayMonthToolStripMenuItem.Name = "DayMonthToolStripMenuItem"
+        Me.DayMonthToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.DayMonthToolStripMenuItem.Text = "Day Month"
+        '
+        'DisplayDailyToolStripMenuItem1
+        '
+        Me.DisplayDailyToolStripMenuItem1.Name = "DisplayDailyToolStripMenuItem1"
+        Me.DisplayDailyToolStripMenuItem1.Size = New System.Drawing.Size(218, 22)
+        Me.DisplayDailyToolStripMenuItem1.Text = "Display Daily"
+        '
+        'DisplayDOYOfYearToolStripMenuItem
+        '
+        Me.DisplayDOYOfYearToolStripMenuItem.Name = "DisplayDOYOfYearToolStripMenuItem"
+        Me.DisplayDOYOfYearToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.DisplayDOYOfYearToolStripMenuItem.Text = "Display DOY of Year"
+        '
+        'DisplayRainRunningTotalToolStripMenuItem
+        '
+        Me.DisplayRainRunningTotalToolStripMenuItem.Name = "DisplayRainRunningTotalToolStripMenuItem"
+        Me.DisplayRainRunningTotalToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.DisplayRainRunningTotalToolStripMenuItem.Text = "Display Rain Running Total"
+        '
+        'DisplaySpellLengthToolStripMenuItem
+        '
+        Me.DisplaySpellLengthToolStripMenuItem.Name = "DisplaySpellLengthToolStripMenuItem"
+        Me.DisplaySpellLengthToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.DisplaySpellLengthToolStripMenuItem.Text = "Display Spell Length"
+        '
+        'ExportForPICSAToolStripMenuItem
+        '
+        Me.ExportForPICSAToolStripMenuItem.Name = "ExportForPICSAToolStripMenuItem"
+        Me.ExportForPICSAToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.ExportForPICSAToolStripMenuItem.Text = "Export for PICSA"
+        '
+        'ExtremeEventsToolStripMenuItem
+        '
+        Me.ExtremeEventsToolStripMenuItem.Name = "ExtremeEventsToolStripMenuItem"
+        Me.ExtremeEventsToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.ExtremeEventsToolStripMenuItem.Text = "Extreme Events"
+        '
+        'MissingDataToolStripMenuItem
+        '
+        Me.MissingDataToolStripMenuItem.Name = "MissingDataToolStripMenuItem"
+        Me.MissingDataToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.MissingDataToolStripMenuItem.Text = "Missing Data"
+        '
+        'MissingDataTableToolStripMenuItem
+        '
+        Me.MissingDataTableToolStripMenuItem.Name = "MissingDataTableToolStripMenuItem"
+        Me.MissingDataTableToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.MissingDataTableToolStripMenuItem.Text = "Missing Data Table"
+        '
+        'MonthlySummariesToolStripMenuItem
+        '
+        Me.MonthlySummariesToolStripMenuItem.Name = "MonthlySummariesToolStripMenuItem"
+        Me.MonthlySummariesToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.MonthlySummariesToolStripMenuItem.Text = "Monthly Summaries"
+        '
+        'OutputForCDTToolStripMenuItem
+        '
+        Me.OutputForCDTToolStripMenuItem.Name = "OutputForCDTToolStripMenuItem"
+        Me.OutputForCDTToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.OutputForCDTToolStripMenuItem.Text = "Output for CDT"
+        '
+        'ModelToolStripMenuItem
+        '
+        Me.ModelToolStripMenuItem.Name = "ModelToolStripMenuItem"
+        Me.ModelToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.ModelToolStripMenuItem.Text = "Model"
+        '
+        'AdditionalToolStripMenuItem
+        '
+        Me.AdditionalToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OutputForCPTToolStripMenuItem, Me.RainsStatisticsToolStripMenuItem, Me.SeasonalSummaryToolStripMenuItem, Me.SeasonalSummaryRainToolStripMenuItem, Me.WaterBalanceToolStripMenuItem1})
+        Me.AdditionalToolStripMenuItem.Name = "AdditionalToolStripMenuItem"
+        Me.AdditionalToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.AdditionalToolStripMenuItem.Text = "Additional..."
+        '
+        'OutputForCPTToolStripMenuItem
+        '
+        Me.OutputForCPTToolStripMenuItem.Name = "OutputForCPTToolStripMenuItem"
+        Me.OutputForCPTToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.OutputForCPTToolStripMenuItem.Text = "Output for CPT"
+        '
+        'RainsStatisticsToolStripMenuItem
+        '
+        Me.RainsStatisticsToolStripMenuItem.Name = "RainsStatisticsToolStripMenuItem"
+        Me.RainsStatisticsToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.RainsStatisticsToolStripMenuItem.Text = "Rains Statistics"
+        '
+        'SeasonalSummaryToolStripMenuItem
+        '
+        Me.SeasonalSummaryToolStripMenuItem.Name = "SeasonalSummaryToolStripMenuItem"
+        Me.SeasonalSummaryToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.SeasonalSummaryToolStripMenuItem.Text = "Seasonal Summary"
+        '
+        'SeasonalSummaryRainToolStripMenuItem
+        '
+        Me.SeasonalSummaryRainToolStripMenuItem.Name = "SeasonalSummaryRainToolStripMenuItem"
+        Me.SeasonalSummaryRainToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.SeasonalSummaryRainToolStripMenuItem.Text = "Seasonal Summary Rain"
+        '
+        'WaterBalanceToolStripMenuItem1
+        '
+        Me.WaterBalanceToolStripMenuItem1.Name = "WaterBalanceToolStripMenuItem1"
+        Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
+        Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
         '
         'frmMain
         '
@@ -2115,7 +2350,7 @@ Partial Class frmMain
     Friend WithEvents EventsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StartOfTheRainsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExtremesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents WorksheetInformationToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuManageWorksheetInformation As ToolStripMenuItem
     Friend WithEvents LockUnlockToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuFileIEODBC As ToolStripMenuItem
     Friend WithEvents mnuFileIEOutput As ToolStripMenuItem
@@ -2140,32 +2375,32 @@ Partial Class frmMain
     Friend WithEvents mnuEditFont As ToolStripMenuItem
     Friend WithEvents mnuEditRunWSEditor As ToolStripMenuItem
     Friend WithEvents mnuEditViewEditText As ToolStripMenuItem
-    Friend WithEvents NewF8ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OpenFromLibraryToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents SelectionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuEditViewEditTextNew As ToolStripMenuItem
+    Friend WithEvents mnuEditViewEditTextOpen As ToolStripMenuItem
+    Friend WithEvents mnuEditViewEditTextOpenFromLibrary As ToolStripMenuItem
+    Friend WithEvents mnuEditViewEditTextSelection As ToolStripMenuItem
     Friend WithEvents mnuEditViewEditMacro As ToolStripMenuItem
-    Friend WithEvents NewToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OpenToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents mnuEditMacroNew As ToolStripMenuItem
+    Friend WithEvents mnuEditMacroOpen As ToolStripMenuItem
     Friend WithEvents mnuEditCommandLogging As ToolStripMenuItem
-    Friend WithEvents StartF9ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents StopShiftF9ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewLogFileCtrlF9ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuEditCommandStart As ToolStripMenuItem
+    Friend WithEvents mnuEditCommandStop As ToolStripMenuItem
+    Friend WithEvents mnuEditCommandViewLogFile As ToolStripMenuItem
     Friend WithEvents mnuEditOutputSpooling As ToolStripMenuItem
-    Friend WithEvents StartToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents StopToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuEditOutputSpoolingStart As ToolStripMenuItem
+    Friend WithEvents mnuEditOutputSpoolingStop As ToolStripMenuItem
+    Friend WithEvents mnuEditOutputSpoolingView As ToolStripMenuItem
     Friend WithEvents mnuEditRecall As ToolStripMenuItem
-    Friend WithEvents LastCommandShiftF11ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents LastDialogF11ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RestartServerToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Last10DialoguesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuEditRecallLastCommand As ToolStripMenuItem
+    Friend WithEvents mnuEditRecallLastDialog As ToolStripMenuItem
+    Friend WithEvents mnuEditRecallRestartServer As ToolStripMenuItem
+    Friend WithEvents mnuEditRecallLast10Dialogues As ToolStripMenuItem
     Friend WithEvents ClearListToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FlagsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DisableWarningsF6ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PresentationModeShiftF6ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DisplayFactorLevelsAsOrdinalsShiftF7ToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OPtionsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuEditFlags As ToolStripMenuItem
+    Friend WithEvents mnuEditFlagsDisableWarnings As ToolStripMenuItem
+    Friend WithEvents mnuEditFlagsPresentationMode As ToolStripMenuItem
+    Friend WithEvents mnuEditFlagsDisplayFactorLevelsAsOrdinals As ToolStripMenuItem
+    Friend WithEvents mnuEditOptions As ToolStripMenuItem
     Friend WithEvents mnuFileIEExport As ToolStripMenuItem
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents mnuFIleIEASCII As ToolStripMenuItem
@@ -2255,4 +2490,30 @@ Partial Class frmMain
     Friend WithEvents mnuClimateMethodsGraphicsTimeseries As ToolStripMenuItem
     Friend WithEvents mnuClimateMethodsGraphicsWindrose As ToolStripMenuItem
     Friend WithEvents mnuClimateMethodsGraphicsMultipleLines As ToolStripMenuItem
+    Friend WithEvents mnuManageScriptWindow As ToolStripMenuItem
+    Friend WithEvents mnuManageLogWindow As ToolStripMenuItem
+    Friend WithEvents mnuManageWorksheetMetadata As ToolStripMenuItem
+    Friend WithEvents DataManipulationToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StartOfRainToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EndOfRainToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChangeFormatDayMonthToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExportCPTToTabularToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DayMonthToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DisplayDailyToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents DisplayDOYOfYearToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DisplayRainRunningTotalToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DisplaySpellLengthToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExportForPICSAToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExtremeEventsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MissingDataToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MissingDataTableToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MonthlySummariesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OutputForCDTToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ModelToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AdditionalToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OutputForCPTToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RainsStatisticsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SeasonalSummaryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SeasonalSummaryRainToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents WaterBalanceToolStripMenuItem1 As ToolStripMenuItem
 End Class

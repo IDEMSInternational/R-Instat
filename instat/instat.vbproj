@@ -345,10 +345,22 @@
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmMetaData.designer.vb">
+      <DependentUpon>frmMetaData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMetaData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmScript.Designer.vb">
       <DependentUpon>frmScript.vb</DependentUpon>
     </Compile>
     <Compile Include="frmScript.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVariables.designer.vb">
+      <DependentUpon>frmVariables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmVariables.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -701,6 +713,15 @@
     <EmbeddedResource Include="frmMain.sw-KE.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMetaData.fr-FR.resx">
+      <DependentUpon>frmMetaData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMetaData.resx">
+      <DependentUpon>frmMetaData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMetaData.sw-KE.resx">
+      <DependentUpon>frmMetaData.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmScript.fr-FR.resx">
       <DependentUpon>frmScript.vb</DependentUpon>
     </EmbeddedResource>
@@ -709,6 +730,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmScript.sw-KE.resx">
       <DependentUpon>frmScript.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVariables.fr-FR.resx">
+      <DependentUpon>frmVariables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVariables.resx">
+      <DependentUpon>frmVariables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVariables.sw-KE.resx">
+      <DependentUpon>frmVariables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.fr-FR.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">

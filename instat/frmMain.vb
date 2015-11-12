@@ -25,33 +25,37 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
         frmCommand.MdiParent = Me
-        'frmGraphics.MdiParent = Me
         frmLog.MdiParent = Me
         frmScript.MdiParent = Me
         Me.LayoutMdi(MdiLayout.ArrangeIcons)
         frmCommand.Dock = DockStyle.Right
-        'frmCommand.Dock = DockStyle.Fill
         frmEditor.Dock = DockStyle.Left
         frmEditor.Dock = DockStyle.Fill
         frmCommand.Show()
         frmEditor.Show()
         clsRInterface.SetLog(frmLog.txtLog)
         clsRInterface.SetOutput(frmCommand.txtCommand)
-        tstatus.Text = frmEditor.grid.CurrentWorksheet.Name
+        tstatus.Text = frmEditor.gridColumns.CurrentWorksheet.Name
 
     End Sub
 
     Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
+        'clsRInterface.LoadData()
+        'Dim dataset As DataFrame = clsRInterface.GetData("data")
+        'frmEditor.grid.CurrentWorksheet.Rows = dataset.RowCount
+        'frmEditor.grid.CurrentWorksheet.Columns = dataset.ColumnCount
+        'For i As Integer = 0 To dataset.RowCount - 1
+        '    For k As Integer = 0 To dataset.ColumnCount - 1
+        '        frmEditor.grid.CurrentWorksheet.ColumnHeaders(k).Text = dataset.ColumnNames(k)
+        '        frmEditor.grid.CurrentWorksheet(row:=i, col:=k) = dataset(i, k)
+        '    Next
+        'Next
         clsRInterface.LoadData()
-        Dim dataset As DataFrame = clsRInterface.GetData("data")
-        frmEditor.grid.CurrentWorksheet.Rows = dataset.RowCount
-        frmEditor.grid.CurrentWorksheet.Columns = dataset.ColumnCount
-        For i As Integer = 0 To dataset.RowCount - 1
-            For k As Integer = 0 To dataset.ColumnCount - 1
-                frmEditor.grid.CurrentWorksheet.ColumnHeaders(k).Text = dataset.ColumnNames(k)
-                frmEditor.grid.CurrentWorksheet(row:=i, col:=k) = dataset(i, k)
-            Next
-        Next
+        clsRInterface.InstatObject()
+        Dim holder As Tuple(Of DataFrame, DataFrame, DataFrame) = clsRInterface.getInstatObject("data")
+        FillSheet(holder.Item1)
+        FillMetaData(holder.Item2)
+        FillVariables(holder.Item3)
     End Sub
 
     Public Sub FillData(strDataName)
@@ -60,7 +64,7 @@ Public Class frmMain
         Dim dfDataset As DataFrame
 
         dfDataset = clsRInterface.GetData(strDataName)
-        For Each tempWorkSheet In frmEditor.grid.Worksheets
+        For Each tempWorkSheet In frmEditor.gridColumns.Worksheets
             If tempWorkSheet.Name = strDataName Then
                 tempWorkSheet.Rows = dfDataset.RowCount
                 tempWorkSheet.Columns = dfDataset.ColumnCount
@@ -74,7 +78,7 @@ Public Class frmMain
             End If
         Next
         If Not bFoundWorksheet Then
-            tempWorkSheet = frmEditor.grid.Worksheets.Create(strDataName)
+            tempWorkSheet = frmEditor.gridColumns.Worksheets.Create(strDataName)
             tempWorkSheet.Rows = dfDataset.RowCount
             tempWorkSheet.Columns = dfDataset.ColumnCount
             For i As Integer = 0 To dfDataset.RowCount - 1
@@ -83,7 +87,7 @@ Public Class frmMain
                     tempWorkSheet(row:=i, col:=k) = dfDataset(i, k)
                 Next
             Next
-            frmEditor.grid.Worksheets.Add(tempWorkSheet)
+            frmEditor.gridColumns.Worksheets.Add(tempWorkSheet)
         End If
     End Sub
 
@@ -262,5 +266,86 @@ Public Class frmMain
 
     Private Sub mnuClimateMethodsGraphicsRainCount_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsRainCount.Click
         dlgYearRaincount.ShowDialog()
+    End Sub
+    Public Sub FillSheet(df)
+        frmEditor.gridColumns.CurrentWorksheet.Rows = df.RowCount
+        frmEditor.gridColumns.CurrentWorksheet.Columns = df.ColumnCount
+        For i As Integer = 0 To df.RowCount - 1
+            For k As Integer = 0 To df.ColumnCount - 1
+                frmEditor.gridColumns.CurrentWorksheet.ColumnHeaders(k).Text = df.ColumnNames(k)
+                frmEditor.gridColumns.CurrentWorksheet(row:=i, col:=k) = df(i, k)
+            Next
+        Next
+    End Sub
+    Public Sub FillMetaData(df)
+        'Dim temp As RDotNet.SymbolicExpression
+        'Dim temp_str As String
+        'For i As Integer = 0 To df.RowCount - 1
+        '    For k As Integer = 0 To df.ColumnCount - 1
+        '        temp_str = df(i, k)
+        '        frmMetaData.txtMetadata.Text = temp_str
+        '        'frmMetaData.txtMetadata.Text = String.Format("{0}", df(i, k))
+        '    Next
+        'Next
+
+        frmMetaData.gridMetaData.CurrentWorksheet.Rows = df.RowCount
+        frmMetaData.gridMetaData.CurrentWorksheet.Columns = df.ColumnCount
+        For i As Integer = 0 To df.RowCount - 1
+            For k As Integer = 0 To df.ColumnCount - 1
+                frmMetaData.gridMetaData.CurrentWorksheet.ColumnHeaders(k).Text = df.ColumnNames(k)
+                frmMetaData.gridMetaData.CurrentWorksheet(row:=i, col:=k) = df(i, k)
+            Next
+        Next
+    End Sub
+
+    Public Sub FillVariables(df)
+        frmVariables.gridVariables.CurrentWorksheet.Rows = df.RowCount
+        frmVariables.gridVariables.CurrentWorksheet.Columns = df.ColumnCount
+        For i As Integer = 0 To df.RowCount - 1
+            For k As Integer = 0 To df.ColumnCount - 1
+                frmVariables.gridVariables.CurrentWorksheet.ColumnHeaders(k).Text = df.ColumnNames(k)
+                frmVariables.gridVariables.CurrentWorksheet(row:=i, col:=k) = df(i, k)
+            Next
+        Next
+    End Sub
+
+    Private Sub mnuWindowMetadata_Click(sender As Object, e As EventArgs)
+        frmMetaData.Show()
+    End Sub
+
+    Private Sub mnuWindowVariables_Click(sender As Object, e As EventArgs)
+        frmVariables.Show()
+    End Sub
+
+    Private Sub mnuManageWorksheetInformation_Click(sender As Object, e As EventArgs) Handles mnuManageWorksheetInformation.Click
+        If frmVariables.Visible = True Then
+            frmVariables.Visible = False
+        Else
+            frmVariables.Visible = True
+        End If
+    End Sub
+
+    Private Sub mnuManageLogWindow_Click(sender As Object, e As EventArgs) Handles mnuManageLogWindow.Click
+        If frmLog.Visible = True Then
+            frmLog.Visible = False
+        Else
+            frmLog.Visible = True
+        End If
+    End Sub
+
+    Private Sub mnuManageScriptWindow_Click(sender As Object, e As EventArgs) Handles mnuManageScriptWindow.Click
+        If frmScript.Visible = True Then
+            frmScript.Visible = False
+        Else
+            frmScript.Visible = True
+        End If
+    End Sub
+
+    Private Sub mnuManageWorksheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageWorksheetMetadata.Click
+        If frmMetaData.Visible = True Then
+            frmMetaData.Visible = False
+        Else
+            frmMetaData.Visible = True
+        End If
     End Sub
 End Class
