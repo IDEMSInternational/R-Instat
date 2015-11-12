@@ -1308,4 +1308,20 @@
       <group id="INSTAT/DLGMONTHLYSUMMARIES.RESX" datatype="resx" />
     </body>
   </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGOUTPUTFORCDT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGOUTPUTFORCDT.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGOUTPUTFORCPT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGOUTPUTFORCPT.RESX" datatype="resx" />
+    </body>
+  </file>
 </xliff>
