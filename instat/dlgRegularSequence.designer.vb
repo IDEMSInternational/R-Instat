@@ -331,6 +331,7 @@ Partial Class dlgRegularSequence
         Me.MinimizeBox = False
         Me.Name = "dlgRegularSequence"
         Me.ShowIcon = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Entry of regular sequence"
         Me.grpSequenceType.ResumeLayout(False)
         Me.grpSequenceType.PerformLayout()
