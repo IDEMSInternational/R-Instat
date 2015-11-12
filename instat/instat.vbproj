@@ -213,6 +213,12 @@
     <Compile Include="dlgCumulativeExceedance.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDayMonth.designer.vb">
+      <DependentUpon>dlgDayMonth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDayMonth.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescriptiveStatistics.Designer.vb">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
     </Compile>
@@ -580,6 +586,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeExceedance.sw-KE.resx">
       <DependentUpon>dlgCumulativeExceedance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDayMonth.fr-FR.resx">
+      <DependentUpon>dlgDayMonth.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDayMonth.resx">
+      <DependentUpon>dlgDayMonth.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDayMonth.sw-KE.resx">
+      <DependentUpon>dlgDayMonth.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDescriptiveStatistics.fr-FR.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
