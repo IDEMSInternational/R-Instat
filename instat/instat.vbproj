@@ -345,6 +345,18 @@
     <Compile Include="dlgMultipleRegression.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOutputforCDT.designer.vb">
+      <DependentUpon>dlgOutputforCDT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOutputforCDT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOutputforCPT.designer.vb">
+      <DependentUpon>dlgOutputforCPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOutputforCPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgPlot.designer.vb">
       <DependentUpon>dlgPlot.vb</DependentUpon>
     </Compile>
@@ -838,6 +850,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMultipleRegression.sw-KE.resx">
       <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOutputforCDT.fr-FR.resx">
+      <DependentUpon>dlgOutputforCDT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOutputforCDT.resx">
+      <DependentUpon>dlgOutputforCDT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOutputforCDT.sw-KE.resx">
+      <DependentUpon>dlgOutputforCDT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOutputforCPT.fr-FR.resx">
+      <DependentUpon>dlgOutputforCPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOutputforCPT.resx">
+      <DependentUpon>dlgOutputforCPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOutputforCPT.sw-KE.resx">
+      <DependentUpon>dlgOutputforCPT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPlot.fr-FR.resx">
       <DependentUpon>dlgPlot.vb</DependentUpon>
