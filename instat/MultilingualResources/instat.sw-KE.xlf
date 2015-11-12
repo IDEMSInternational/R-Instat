@@ -1285,4 +1285,12 @@
       <group id="INSTAT/DLGISNALISTVB.RESX" datatype="resx" />
     </body>
   </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGMISSINGDATA.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGMISSINGDATA.RESX" datatype="resx" />
+    </body>
+  </file>
 </xliff>
