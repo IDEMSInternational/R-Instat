@@ -28,12 +28,7 @@ Public Class dlgProbabilityPlot
         autoTranslate(Me)
 
     End Sub
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
 
-
-
-
-    End Sub
 
     Private Sub rdoNormal_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNormal.CheckedChanged
         If rdoNormal.Checked = True Then
@@ -66,14 +61,6 @@ Public Class dlgProbabilityPlot
         End If
     End Sub
 
-    Private Sub ucrAddRemove_Load(sender As Object, e As EventArgs) Handles ucrAddRemove.Load
-
-    End Sub
-
-    Private Sub txtTitle_TextChanged(sender As Object, e As EventArgs) Handles txtTitle.TextChanged
-
-    End Sub
-
     Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
         ucrBase.clsRsyntax.AddParameter("main", Chr(34) & txtTitle.Text & Chr(34))
     End Sub
@@ -81,6 +68,8 @@ Public Class dlgProbabilityPlot
     Private Sub UcrReceiverSingle1_Leave(sender As Object, e As EventArgs) Handles UcrReceiverSingle1.LeftText
         ucrBase.clsRsyntax.AddParameter("y", "data$" & UcrReceiverSingle1.txtReceiverSingle.Text & "")
     End Sub
+
+
 End Class
 
 
