@@ -42,7 +42,8 @@ Partial Class dlgBoxplotMethod
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgBoxplotMethod"
-        Me.Text = "dlgBoxplotMethod"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Boxplot Method"
         Me.ResumeLayout(False)
 
     End Sub
