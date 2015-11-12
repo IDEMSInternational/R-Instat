@@ -77,8 +77,11 @@ Partial Class dlgHistogram
         Me.Controls.Add(Me.UcrBase)
         Me.Controls.Add(Me.ucrSingleReceiver)
         Me.Controls.Add(Me.UcrAddRemove)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgHistogram"
-        Me.Text = "dlgHistogram"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Histogram"
+        Me.Text = "Histogram Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
