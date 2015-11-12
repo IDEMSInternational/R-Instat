@@ -195,6 +195,12 @@
     <Compile Include="dlgCliPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCPTtoTabularData.designer.vb">
+      <DependentUpon>dlgCPTtoTabularData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCPTtoTabularData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCumulativeExceedance.designer.vb">
       <DependentUpon>dlgCumulativeExceedance.vb</DependentUpon>
     </Compile>
@@ -541,6 +547,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliPlot.sw-KE.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCPTtoTabularData.fr-FR.resx">
+      <DependentUpon>dlgCPTtoTabularData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCPTtoTabularData.resx">
+      <DependentUpon>dlgCPTtoTabularData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCPTtoTabularData.sw-KE.resx">
+      <DependentUpon>dlgCPTtoTabularData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeExceedance.fr-FR.resx">
       <DependentUpon>dlgCumulativeExceedance.vb</DependentUpon>
