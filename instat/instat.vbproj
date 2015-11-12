@@ -231,6 +231,12 @@
     <Compile Include="dlgDisplayDaily.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDisplayDailyDataRain.designer.vb">
+      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDisplayDailyDataRain.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDotPlot.designer.vb">
       <DependentUpon>dlgDotPlot.vb</DependentUpon>
     </Compile>
@@ -613,6 +619,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayDaily.sw-KE.resx">
       <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplayDailyDataRain.fr-FR.resx">
+      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplayDailyDataRain.resx">
+      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplayDailyDataRain.sw-KE.resx">
+      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDotPlot.fr-FR.resx">
       <DependentUpon>dlgDotPlot.vb</DependentUpon>
