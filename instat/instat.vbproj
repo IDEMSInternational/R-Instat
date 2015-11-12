@@ -297,6 +297,12 @@
     <Compile Include="dlgStemAndLeaf.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgThreeSummaries.Designer.vb">
+      <DependentUpon>dlgThreeSummaries.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgThreeSummaries.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTimeseriesPlot.designer.vb">
       <DependentUpon>dlgTimeseriesPlot.vb</DependentUpon>
     </Compile>

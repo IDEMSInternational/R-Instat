@@ -302,6 +302,7 @@ Partial Class frmMain
         Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClmateMethodThreeSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1996,7 +1997,7 @@ Partial Class frmMain
         '
         'GraphicsToolStripMenuItem1
         '
-        Me.GraphicsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimateMethodsGraphicsClipBoxPlot, Me.mnuClimateMethodsGraphicsCliplot, Me.mnuClimateMethodsGraphicsMissingValues, Me.mnuClimateMethodsGraphicsHistogram, Me.mnuClimateMethodsGraphicsCumExceedance, Me.mnuClimateMethodsGraphicsBoxplot, Me.mnuClimateMethodsGraphicsInventory, Me.mnuClimateMethodsGraphicsAnnualRainfall, Me.mnuClimateMethodsGraphicsRainCount, Me.mnuClimateMethodsGraphicsTimeseries, Me.mnuClimateMethodsGraphicsWindrose, Me.mnuClimateMethodsGraphicsMultipleLines})
+        Me.GraphicsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimateMethodsGraphicsClipBoxPlot, Me.mnuClimateMethodsGraphicsCliplot, Me.mnuClimateMethodsGraphicsMissingValues, Me.mnuClimateMethodsGraphicsHistogram, Me.mnuClimateMethodsGraphicsCumExceedance, Me.mnuClimateMethodsGraphicsBoxplot, Me.mnuClimateMethodsGraphicsInventory, Me.mnuClimateMethodsGraphicsAnnualRainfall, Me.mnuClimateMethodsGraphicsRainCount, Me.mnuClimateMethodsGraphicsTimeseries, Me.mnuClimateMethodsGraphicsWindrose, Me.mnuClimateMethodsGraphicsMultipleLines, Me.mnuClmateMethodThreeSummaries})
         Me.GraphicsToolStripMenuItem1.Name = "GraphicsToolStripMenuItem1"
         Me.GraphicsToolStripMenuItem1.Size = New System.Drawing.Size(172, 22)
         Me.GraphicsToolStripMenuItem1.Text = "Graphics"
@@ -2212,6 +2213,12 @@ Partial Class frmMain
         Me.WaterBalanceToolStripMenuItem1.Name = "WaterBalanceToolStripMenuItem1"
         Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
         Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
+        '
+        'mnuClmateMethodThreeSummaries
+        '
+        Me.mnuClmateMethodThreeSummaries.Name = "mnuClmateMethodThreeSummaries"
+        Me.mnuClmateMethodThreeSummaries.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClmateMethodThreeSummaries.Text = "Three Summaries"
         '
         'frmMain
         '
@@ -2516,4 +2523,5 @@ Partial Class frmMain
     Friend WithEvents SeasonalSummaryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SeasonalSummaryRainToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents WaterBalanceToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents mnuClmateMethodThreeSummaries As ToolStripMenuItem
 End Class
