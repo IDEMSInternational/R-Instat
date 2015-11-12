@@ -1,5 +1,5 @@
 ﻿Imports instat.Translations
-Public Class ucrReceiver
+Public MustInherit Class ucrReceiver
     Public Selector As ucrSelector
 
     Public Overridable Sub AddSelected()
@@ -17,4 +17,7 @@ Public Class ucrReceiver
     Private Sub ucrReceiver_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         translateEach(Controls)
     End Sub
+
+    Public MustOverride Sub EnterReceiver()
+
 End Class
