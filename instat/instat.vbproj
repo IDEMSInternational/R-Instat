@@ -333,6 +333,12 @@
     <Compile Include="dlgMissingValuesplot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMonthlySummaries.designer.vb">
+      <DependentUpon>dlgMonthlySummaries.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMonthlySummaries.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgMultipleRegression.Designer.vb">
       <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
     </Compile>
@@ -814,6 +820,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMissingValuesplot.sw-KE.resx">
       <DependentUpon>dlgMissingValuesplot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMonthlySummaries.fr-FR.resx">
+      <DependentUpon>dlgMonthlySummaries.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMonthlySummaries.resx">
+      <DependentUpon>dlgMonthlySummaries.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMonthlySummaries.sw-KE.resx">
+      <DependentUpon>dlgMonthlySummaries.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMultipleRegression.fr-FR.resx">
       <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
