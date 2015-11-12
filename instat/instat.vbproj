@@ -141,6 +141,12 @@
     <Compile Include="dlgAddStartRain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgAdvanceOptions.designer.vb">
+      <DependentUpon>dlgAdvanceOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAdvanceOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgAnnualRaintotal.designer.vb">
       <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
     </Compile>
@@ -451,6 +457,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddStartRain.sw-KE.resx">
       <DependentUpon>dlgAddStartRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAdvanceOptions.fr-FR.resx">
+      <DependentUpon>dlgAdvanceOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAdvanceOptions.resx">
+      <DependentUpon>dlgAdvanceOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAdvanceOptions.sw-KE.resx">
+      <DependentUpon>dlgAdvanceOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAnnualRaintotal.fr-FR.resx">
       <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
