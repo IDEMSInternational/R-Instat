@@ -33,7 +33,7 @@ Public Class frmVariables
         gridVariables.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         gridVariables.SheetTabNewButtonVisible = False
         gridVariables.SheetTabControlNewButtonVisible = False
-        gridVariables.CurrentWorksheet.Resize(2, 2)
+        gridVariables.CurrentWorksheet.Resize(5, 5)
         autoTranslate(Me)
     End Sub
 End Class
