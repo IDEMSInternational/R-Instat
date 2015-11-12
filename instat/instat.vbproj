@@ -369,10 +369,28 @@
     <Compile Include="dlgProbabilityPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRainStats.designer.vb">
+      <DependentUpon>dlgRainStats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRainStats.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRegularSequence.designer.vb">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRegularSequence.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSeasonalSummary.designer.vb">
+      <DependentUpon>dlgSeasonalSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSeasonalSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSeasonalSummaryRain.designer.vb">
+      <DependentUpon>dlgSeasonalSummaryRain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSeasonalSummaryRain.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSort.Designer.vb">
@@ -887,6 +905,15 @@
     <EmbeddedResource Include="dlgProbabilityPlot.sw-KE.resx">
       <DependentUpon>dlgProbabilityPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRainStats.fr-FR.resx">
+      <DependentUpon>dlgRainStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRainStats.resx">
+      <DependentUpon>dlgRainStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRainStats.sw-KE.resx">
+      <DependentUpon>dlgRainStats.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.fr-FR.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </EmbeddedResource>
@@ -895,6 +922,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.sw-KE.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalSummary.fr-FR.resx">
+      <DependentUpon>dlgSeasonalSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalSummary.resx">
+      <DependentUpon>dlgSeasonalSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalSummary.sw-KE.resx">
+      <DependentUpon>dlgSeasonalSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalSummaryRain.fr-FR.resx">
+      <DependentUpon>dlgSeasonalSummaryRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalSummaryRain.resx">
+      <DependentUpon>dlgSeasonalSummaryRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalSummaryRain.sw-KE.resx">
+      <DependentUpon>dlgSeasonalSummaryRain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSort.fr-FR.resx">
       <DependentUpon>dlgSort.vb</DependentUpon>
