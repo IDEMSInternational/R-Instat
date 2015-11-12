@@ -177,6 +177,12 @@
     <Compile Include="dlgCalculator.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgChangeFormatDayMonth.designer.vb">
+      <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgChangeFormatDayMonth.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCliBoxplot.designer.vb">
       <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
     </Compile>
@@ -508,6 +514,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCalculator.sw-KE.resx">
       <DependentUpon>dlgCalculator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgChangeFormatDayMonth.fr-FR.resx">
+      <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgChangeFormatDayMonth.resx">
+      <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgChangeFormatDayMonth.sw-KE.resx">
+      <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliBoxplot.fr-FR.resx">
       <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
