@@ -605,6 +605,15 @@
     <EmbeddedResource Include="dlgDescriptiveStatistics.sw-KE.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplayDaily.fr-FR.resx">
+      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplayDaily.resx">
+      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplayDaily.sw-KE.resx">
+      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDotPlot.fr-FR.resx">
       <DependentUpon>dlgDotPlot.vb</DependentUpon>
     </EmbeddedResource>
