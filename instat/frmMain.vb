@@ -348,4 +348,8 @@ Public Class frmMain
             frmMetaData.Visible = True
         End If
     End Sub
+
+    Private Sub mnuClmateMethodThreeSummaries_Click(sender As Object, e As EventArgs) Handles mnuClmateMethodThreeSummaries.Click
+        dlgThreeSummaries.ShowDialog()
+    End Sub
 End Class
