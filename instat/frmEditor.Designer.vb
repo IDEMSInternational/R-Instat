@@ -22,32 +22,32 @@ Partial Class frmEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.grid = New unvell.ReoGrid.ReoGridControl()
+        Me.gridColumns = New unvell.ReoGrid.ReoGridControl()
         Me.SuspendLayout()
         '
-        'grid
+        'gridColumns
         '
-        Me.grid.BackColor = System.Drawing.Color.White
-        Me.grid.ColumnHeaderContextMenuStrip = Nothing
-        Me.grid.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.grid.LeadHeaderContextMenuStrip = Nothing
-        Me.grid.Location = New System.Drawing.Point(0, 0)
-        Me.grid.Name = "grid"
-        Me.grid.RowHeaderContextMenuStrip = Nothing
-        Me.grid.Script = Nothing
-        Me.grid.SheetTabContextMenuStrip = Nothing
-        Me.grid.SheetTabControlNewButtonVisible = True
-        Me.grid.SheetTabControlWidth = 60
-        Me.grid.SheetTabNewButtonVisible = True
-        Me.grid.Size = New System.Drawing.Size(410, 261)
-        Me.grid.TabIndex = 0
+        Me.gridColumns.BackColor = System.Drawing.Color.White
+        Me.gridColumns.ColumnHeaderContextMenuStrip = Nothing
+        Me.gridColumns.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gridColumns.LeadHeaderContextMenuStrip = Nothing
+        Me.gridColumns.Location = New System.Drawing.Point(0, 0)
+        Me.gridColumns.Name = "gridColumns"
+        Me.gridColumns.RowHeaderContextMenuStrip = Nothing
+        Me.gridColumns.Script = Nothing
+        Me.gridColumns.SheetTabContextMenuStrip = Nothing
+        Me.gridColumns.SheetTabControlNewButtonVisible = True
+        Me.gridColumns.SheetTabControlWidth = 60
+        Me.gridColumns.SheetTabNewButtonVisible = True
+        Me.gridColumns.Size = New System.Drawing.Size(410, 261)
+        Me.gridColumns.TabIndex = 0
         '
         'frmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(410, 261)
-        Me.Controls.Add(Me.grid)
+        Me.Controls.Add(Me.gridColumns)
         Me.Name = "frmEditor"
         Me.ShowIcon = False
         Me.Tag = "Data_View"
@@ -56,5 +56,5 @@ Partial Class frmEditor
 
     End Sub
 
-    Friend WithEvents grid As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents gridColumns As unvell.ReoGrid.ReoGridControl
 End Class
