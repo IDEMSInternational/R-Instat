@@ -87,6 +87,7 @@ Partial Class dlgSort
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.UcrDataSelection1)
         Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSort"
