@@ -315,6 +315,12 @@
     <Compile Include="dlgLines.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMissingData.designer.vb">
+      <DependentUpon>dlgMissingData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMissingData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgMissingValuesplot.designer.vb">
       <DependentUpon>dlgMissingValuesplot.vb</DependentUpon>
     </Compile>
@@ -775,6 +781,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgLines.sw-KE.resx">
       <DependentUpon>dlgLines.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMissingData.fr-FR.resx">
+      <DependentUpon>dlgMissingData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMissingData.resx">
+      <DependentUpon>dlgMissingData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMissingData.sw-KE.resx">
+      <DependentUpon>dlgMissingData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMissingValuesplot.fr-FR.resx">
       <DependentUpon>dlgMissingValuesplot.vb</DependentUpon>
