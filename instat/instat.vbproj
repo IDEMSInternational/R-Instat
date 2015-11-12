@@ -249,6 +249,12 @@
     <Compile Include="dlgDisplayRainRunningTotal.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDisplaySpellLength.designer.vb">
+      <DependentUpon>dlgDisplaySpellLength.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDisplaySpellLength.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDotPlot.designer.vb">
       <DependentUpon>dlgDotPlot.vb</DependentUpon>
     </Compile>
@@ -658,6 +664,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayRainRunningTotal.sw-KE.resx">
       <DependentUpon>dlgDisplayRainRunningTotal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplaySpellLength.fr-FR.resx">
+      <DependentUpon>dlgDisplaySpellLength.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplaySpellLength.resx">
+      <DependentUpon>dlgDisplaySpellLength.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplaySpellLength.sw-KE.resx">
+      <DependentUpon>dlgDisplaySpellLength.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDotPlot.fr-FR.resx">
       <DependentUpon>dlgDotPlot.vb</DependentUpon>
