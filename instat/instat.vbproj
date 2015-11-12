@@ -303,6 +303,12 @@
     <Compile Include="dlgInventoryPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgIsNAListvb.designer.vb">
+      <DependentUpon>dlgIsNAListvb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgIsNAListvb.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgLines.designer.vb">
       <DependentUpon>dlgLines.vb</DependentUpon>
     </Compile>
@@ -751,6 +757,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInventoryPlot.sw-KE.resx">
       <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgIsNAListvb.fr-FR.resx">
+      <DependentUpon>dlgIsNAListvb.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgIsNAListvb.resx">
+      <DependentUpon>dlgIsNAListvb.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgIsNAListvb.sw-KE.resx">
+      <DependentUpon>dlgIsNAListvb.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgLines.fr-FR.resx">
       <DependentUpon>dlgLines.vb</DependentUpon>
