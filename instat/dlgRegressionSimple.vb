@@ -18,6 +18,18 @@ Imports instat.Translations
 
 Public Class dlgRegressionSimple
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
+        grpLackFit.Enabled = False
+        grpLackFit.Visible = False
         autoTranslate(Me)
+    End Sub
+
+    Private Sub chkLackFit_CheckedChanged(sender As Object, e As EventArgs) Handles chkLackFit.CheckedChanged
+        If chkLackFit.Checked = True Then
+            grpLackFit.Enabled = True
+            grpLackFit.Visible = True
+        Else
+            grpLackFit.Enabled = False
+            grpLackFit.Visible = False
+        End If
     End Sub
 End Class
