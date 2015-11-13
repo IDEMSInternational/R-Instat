@@ -638,6 +638,15 @@
     <EmbeddedResource Include="dlgAnnualRaintotal.sw-KE.resx">
       <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgAnovaOneWay.fr-FR.resx">
+      <DependentUpon>dlgAnovaOneWay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAnovaOneWay.resx">
+      <DependentUpon>dlgAnovaOneWay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAnovaOneWay.sw-KE.resx">
+      <DependentUpon>dlgAnovaOneWay.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxplotCountVariable.fr-FR.resx">
       <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
     </EmbeddedResource>
