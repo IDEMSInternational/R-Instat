@@ -381,6 +381,12 @@
     <Compile Include="dlgRainStats.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRegressionSimple.Designer.vb">
+      <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRegressionSimple.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRegularSequence.designer.vb">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </Compile>
@@ -928,6 +934,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRainStats.sw-KE.resx">
       <DependentUpon>dlgRainStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegressionSimple.fr-FR.resx">
+      <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegressionSimple.resx">
+      <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegressionSimple.sw-KE.resx">
+      <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.fr-FR.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
