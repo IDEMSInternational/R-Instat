@@ -1468,16 +1468,17 @@
           <target state="needs-review-translation">9, 179</target>
         </trans-unit>
         <trans-unit id="chkLackFit.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
-          <source>78, 17</source>
+          <source>73, 17</source>
           <target state="needs-review-translation">78, 17</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="chkLackFit.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
           <source>10</source>
           <target state="needs-review-translation">10</target>
         </trans-unit>
         <trans-unit id="chkLackFit.Text" translate="yes" xml:space="preserve">
-          <source>Lack Of Fit</source>
-          <target state="new">Lack Of Fit</target>
+          <source>Lack of fit</source>
+          <target state="new">Lack of fit</target>
         </trans-unit>
         <trans-unit id="chkAnovaTable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
           <source>True</source>
@@ -1704,8 +1705,9 @@
           <target state="needs-review-translation">3, 3, 3, 3</target>
         </trans-unit>
         <trans-unit id="tbPlot.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
-          <source>464, 235</source>
+          <source>416, 274</source>
           <target state="needs-review-translation">464, 235</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="tbPlot.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
           <source>1</source>
@@ -1720,8 +1722,9 @@
           <target state="needs-review-translation">4, 22</target>
         </trans-unit>
         <trans-unit id="tbSave.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
-          <source>464, 235</source>
+          <source>416, 274</source>
           <target state="needs-review-translation">464, 235</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="tbSave.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
           <source>2</source>

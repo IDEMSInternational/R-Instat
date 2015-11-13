@@ -410,4 +410,8 @@ Public Class frmMain
     Private Sub mnuGraphicsScatterplot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsScatterplot.Click
         dlgScatterPlot.ShowDialog()
     End Sub
+
+    Private Sub mnuStatsRegressionSimple_Click(sender As Object, e As EventArgs) Handles mnuStatsRegressionSimple.Click
+        dlgRegressionSimple.ShowDialog()
+    End Sub
 End Class
