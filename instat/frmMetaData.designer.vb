@@ -41,13 +41,13 @@ Partial Class frmMetaData
         Me.gridMetaData.SheetTabControlNewButtonVisible = False
         Me.gridMetaData.SheetTabControlWidth = 100
         Me.gridMetaData.SheetTabNewButtonVisible = False
-        Me.gridMetaData.Size = New System.Drawing.Size(268, 105)
+        Me.gridMetaData.Size = New System.Drawing.Size(322, 105)
         Me.gridMetaData.TabIndex = 1
         Me.gridMetaData.Text = "Meta Data"
         '
         'txtMetadata
         '
-        Me.txtMetadata.Location = New System.Drawing.Point(282, 12)
+        Me.txtMetadata.Location = New System.Drawing.Point(213, 11)
         Me.txtMetadata.Multiline = True
         Me.txtMetadata.Name = "txtMetadata"
         Me.txtMetadata.ReadOnly = True
@@ -58,9 +58,9 @@ Partial Class frmMetaData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(500, 117)
-        Me.Controls.Add(Me.txtMetadata)
+        Me.ClientSize = New System.Drawing.Size(334, 117)
         Me.Controls.Add(Me.gridMetaData)
+        Me.Controls.Add(Me.txtMetadata)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpButton = True
         Me.MaximizeBox = False
