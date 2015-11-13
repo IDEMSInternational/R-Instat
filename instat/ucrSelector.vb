@@ -39,4 +39,8 @@ Public Class ucrSelector
     Public Sub Remove()
         CurrentReceiver.RemoveSelected()
     End Sub
+
+    Private Sub lstAvailableVariable_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstAvailableVariable.SelectedIndexChanged
+
+    End Sub
 End Class
