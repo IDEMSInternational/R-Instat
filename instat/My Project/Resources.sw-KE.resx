@@ -219,4 +219,10 @@
   <data name="Days" xml:space="preserve">
     <value>Siku</value>
   </data>
+  <data name="Ascending" xml:space="preserve">
+    <value>Kuchaguza A-Z</value>
+  </data>
+  <data name="Descending" xml:space="preserve">
+    <value>Kuchangua Z-A</value>
+  </data>
 </root>

@@ -89,6 +89,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Anova One Way.
+        '''</summary>
+        Friend ReadOnly Property Anova_One_Way() As String
+            Get
+                Return ResourceManager.GetString("Anova_One_Way", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Ascending.
         '''</summary>
         Friend ReadOnly Property Ascending() As String

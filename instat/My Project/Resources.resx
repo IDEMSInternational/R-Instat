@@ -550,4 +550,7 @@
   <data name="Descending" xml:space="preserve">
     <value>Descending</value>
   </data>
+  <data name="Anova_One_Way" xml:space="preserve">
+    <value>Anova One Way</value>
+  </data>
 </root>
