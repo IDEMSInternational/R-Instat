@@ -243,13 +243,13 @@
     <value>9, 179</value>
   </data>
   <data name="chkLackFit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 17</value>
+    <value>73, 17</value>
   </data>
   <data name="chkLackFit.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="chkLackFit.Text" xml:space="preserve">
-    <value>Lack Of Fit</value>
+    <value>Lack of fit</value>
   </data>
   <data name="&gt;&gt;chkLackFit.Name" xml:space="preserve">
     <value>chkLackFit</value>
@@ -565,7 +565,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>464, 235</value>
+    <value>416, 274</value>
   </data>
   <data name="tbPlot.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -589,7 +589,7 @@
     <value>4, 22</value>
   </data>
   <data name="tbSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>464, 235</value>
+    <value>416, 274</value>
   </data>
   <data name="tbSave.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
