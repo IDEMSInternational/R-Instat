@@ -18,18 +18,38 @@ Imports instat.Translations
 
 Public Class dlgRegressionSimple
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ucrBase.clsRsyntax.SetFunction("summary(lm")
+        ucrBase.clsRsyntax.iCallType = 2
+        ucrReceiverSingleA.Selector = ucrAddRemove
+        ucrReceiverSingleA.SetMeAsReceiver()
         grpLackFit.Enabled = False
-        grpLackFit.Visible = False
         autoTranslate(Me)
     End Sub
 
     Private Sub chkLackFit_CheckedChanged(sender As Object, e As EventArgs) Handles chkLackFit.CheckedChanged
         If chkLackFit.Checked = True Then
             grpLackFit.Enabled = True
-            grpLackFit.Visible = True
         Else
             grpLackFit.Enabled = False
-            grpLackFit.Visible = False
         End If
     End Sub
+
+    Private Sub ucrReceiverSingleA_MouseHover(sender As Object, e As EventArgs) Handles ucrReceiverSingleA.MouseHover
+        ucrReceiverSingleA.Selector = ucrAddRemove
+        ucrReceiverSingleA.SetMeAsReceiver()
+    End Sub
+
+    Private Sub ucrReceiverSingleB_Enter(sender As Object, e As EventArgs) Handles ucrReceiverSingleB.Enter
+        ucrReceiverSingleB.Selector = ucrAddRemove
+        ucrReceiverSingleB.SetMeAsReceiver()
+    End Sub
+
+    Private Sub ucrReceiverSingleA_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingleA.Leave
+        ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverSingleA.txtReceiverSingle.Text & "")
+    End Sub
+
+    Private Sub ucrReceiverSingleB_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingleB.Leave
+        ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverSingleB.txtReceiverSingle.Text & "")
+    End Sub
+
 End Class
