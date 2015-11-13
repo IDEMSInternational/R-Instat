@@ -25,24 +25,24 @@ Partial Class dlgRegressionSimple
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRegressionSimple))
         Me.tbctrlSimple = New System.Windows.Forms.TabControl()
         Me.tbRegress = New System.Windows.Forms.TabPage()
+        Me.grpLackFit = New System.Windows.Forms.GroupBox()
+        Me.txtdf = New System.Windows.Forms.TextBox()
+        Me.txtResidualMsg = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblResidualMsg = New System.Windows.Forms.Label()
+        Me.chkLackFit = New System.Windows.Forms.CheckBox()
+        Me.chkAnovaTable = New System.Windows.Forms.CheckBox()
+        Me.chkShowPlots = New System.Windows.Forms.CheckBox()
+        Me.chkSiginificance = New System.Windows.Forms.CheckBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.lblConfidence = New System.Windows.Forms.Label()
+        Me.lblExplanatoryVariable = New System.Windows.Forms.Label()
+        Me.lblResponseVariable = New System.Windows.Forms.Label()
+        Me.ucrReceiverSingleB = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSingleA = New instat.ucrReceiverSingle()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.tbPlot = New System.Windows.Forms.TabPage()
         Me.tbSave = New System.Windows.Forms.TabPage()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrReceiverSingleA = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSingleB = New instat.ucrReceiverSingle()
-        Me.lblResponseVariable = New System.Windows.Forms.Label()
-        Me.lblExplanatoryVariable = New System.Windows.Forms.Label()
-        Me.lblConfidence = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.chkSiginificance = New System.Windows.Forms.CheckBox()
-        Me.chkShowPlots = New System.Windows.Forms.CheckBox()
-        Me.chkAnovaTable = New System.Windows.Forms.CheckBox()
-        Me.chkLackFit = New System.Windows.Forms.CheckBox()
-        Me.grpLackFit = New System.Windows.Forms.GroupBox()
-        Me.lblResidualMsg = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtResidualMsg = New System.Windows.Forms.TextBox()
-        Me.txtdf = New System.Windows.Forms.TextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.tbctrlSimple.SuspendLayout()
         Me.tbRegress.SuspendLayout()
@@ -76,6 +76,105 @@ Partial Class dlgRegressionSimple
         Me.tbRegress.Name = "tbRegress"
         Me.tbRegress.UseVisualStyleBackColor = True
         '
+        'grpLackFit
+        '
+        Me.grpLackFit.Controls.Add(Me.txtdf)
+        Me.grpLackFit.Controls.Add(Me.txtResidualMsg)
+        Me.grpLackFit.Controls.Add(Me.Label1)
+        Me.grpLackFit.Controls.Add(Me.lblResidualMsg)
+        resources.ApplyResources(Me.grpLackFit, "grpLackFit")
+        Me.grpLackFit.Name = "grpLackFit"
+        Me.grpLackFit.TabStop = False
+        '
+        'txtdf
+        '
+        resources.ApplyResources(Me.txtdf, "txtdf")
+        Me.txtdf.Name = "txtdf"
+        '
+        'txtResidualMsg
+        '
+        resources.ApplyResources(Me.txtResidualMsg, "txtResidualMsg")
+        Me.txtResidualMsg.Name = "txtResidualMsg"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
+        'lblResidualMsg
+        '
+        resources.ApplyResources(Me.lblResidualMsg, "lblResidualMsg")
+        Me.lblResidualMsg.Name = "lblResidualMsg"
+        Me.lblResidualMsg.Tag = "Residual_Msg"
+        '
+        'chkLackFit
+        '
+        resources.ApplyResources(Me.chkLackFit, "chkLackFit")
+        Me.chkLackFit.Name = "chkLackFit"
+        Me.chkLackFit.Tag = "Lack_Of_Fit"
+        Me.chkLackFit.UseVisualStyleBackColor = True
+        '
+        'chkAnovaTable
+        '
+        resources.ApplyResources(Me.chkAnovaTable, "chkAnovaTable")
+        Me.chkAnovaTable.Name = "chkAnovaTable"
+        Me.chkAnovaTable.Tag = "Show_Anova_Table"
+        Me.chkAnovaTable.UseVisualStyleBackColor = True
+        '
+        'chkShowPlots
+        '
+        resources.ApplyResources(Me.chkShowPlots, "chkShowPlots")
+        Me.chkShowPlots.Name = "chkShowPlots"
+        Me.chkShowPlots.Tag = "Show_Plot"
+        Me.chkShowPlots.UseVisualStyleBackColor = True
+        '
+        'chkSiginificance
+        '
+        resources.ApplyResources(Me.chkSiginificance, "chkSiginificance")
+        Me.chkSiginificance.Name = "chkSiginificance"
+        Me.chkSiginificance.Tag = "Significance_Test"
+        Me.chkSiginificance.UseVisualStyleBackColor = True
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {resources.GetString("ComboBox1.Items"), resources.GetString("ComboBox1.Items1"), resources.GetString("ComboBox1.Items2"), resources.GetString("ComboBox1.Items3"), resources.GetString("ComboBox1.Items4"), resources.GetString("ComboBox1.Items5")})
+        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
+        Me.ComboBox1.Name = "ComboBox1"
+        '
+        'lblConfidence
+        '
+        resources.ApplyResources(Me.lblConfidence, "lblConfidence")
+        Me.lblConfidence.Name = "lblConfidence"
+        Me.lblConfidence.Tag = "Confidence_Limits"
+        '
+        'lblExplanatoryVariable
+        '
+        resources.ApplyResources(Me.lblExplanatoryVariable, "lblExplanatoryVariable")
+        Me.lblExplanatoryVariable.Name = "lblExplanatoryVariable"
+        Me.lblExplanatoryVariable.Tag = "Explanatory_Variable"
+        '
+        'lblResponseVariable
+        '
+        resources.ApplyResources(Me.lblResponseVariable, "lblResponseVariable")
+        Me.lblResponseVariable.Name = "lblResponseVariable"
+        Me.lblResponseVariable.Tag = "Response_Variable"
+        '
+        'ucrReceiverSingleB
+        '
+        resources.ApplyResources(Me.ucrReceiverSingleB, "ucrReceiverSingleB")
+        Me.ucrReceiverSingleB.Name = "ucrReceiverSingleB"
+        '
+        'ucrReceiverSingleA
+        '
+        resources.ApplyResources(Me.ucrReceiverSingleA, "ucrReceiverSingleA")
+        Me.ucrReceiverSingleA.Name = "ucrReceiverSingleA"
+        '
+        'ucrAddRemove
+        '
+        resources.ApplyResources(Me.ucrAddRemove, "ucrAddRemove")
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        '
         'tbPlot
         '
         resources.ApplyResources(Me.tbPlot, "tbPlot")
@@ -87,105 +186,6 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.tbSave, "tbSave")
         Me.tbSave.Name = "tbSave"
         Me.tbSave.UseVisualStyleBackColor = True
-        '
-        'ucrAddRemove
-        '
-        resources.ApplyResources(Me.ucrAddRemove, "ucrAddRemove")
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        '
-        'ucrReceiverSingleA
-        '
-        resources.ApplyResources(Me.ucrReceiverSingleA, "ucrReceiverSingleA")
-        Me.ucrReceiverSingleA.Name = "ucrReceiverSingleA"
-        '
-        'ucrReceiverSingleB
-        '
-        resources.ApplyResources(Me.ucrReceiverSingleB, "ucrReceiverSingleB")
-        Me.ucrReceiverSingleB.Name = "ucrReceiverSingleB"
-        '
-        'lblResponseVariable
-        '
-        resources.ApplyResources(Me.lblResponseVariable, "lblResponseVariable")
-        Me.lblResponseVariable.Name = "lblResponseVariable"
-        Me.lblResponseVariable.Tag = "Response_Variable"
-        '
-        'lblExplanatoryVariable
-        '
-        resources.ApplyResources(Me.lblExplanatoryVariable, "lblExplanatoryVariable")
-        Me.lblExplanatoryVariable.Name = "lblExplanatoryVariable"
-        Me.lblExplanatoryVariable.Tag = "Explanatory_Variable"
-        '
-        'lblConfidence
-        '
-        resources.ApplyResources(Me.lblConfidence, "lblConfidence")
-        Me.lblConfidence.Name = "lblConfidence"
-        Me.lblConfidence.Tag = "Confidence_Limits"
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {resources.GetString("ComboBox1.Items"), resources.GetString("ComboBox1.Items1"), resources.GetString("ComboBox1.Items2"), resources.GetString("ComboBox1.Items3"), resources.GetString("ComboBox1.Items4"), resources.GetString("ComboBox1.Items5")})
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
-        Me.ComboBox1.Name = "ComboBox1"
-        '
-        'chkSiginificance
-        '
-        resources.ApplyResources(Me.chkSiginificance, "chkSiginificance")
-        Me.chkSiginificance.Name = "chkSiginificance"
-        Me.chkSiginificance.Tag = "Significance_Test"
-        Me.chkSiginificance.UseVisualStyleBackColor = True
-        '
-        'chkShowPlots
-        '
-        resources.ApplyResources(Me.chkShowPlots, "chkShowPlots")
-        Me.chkShowPlots.Name = "chkShowPlots"
-        Me.chkShowPlots.Tag = "Show_Plot"
-        Me.chkShowPlots.UseVisualStyleBackColor = True
-        '
-        'chkAnovaTable
-        '
-        resources.ApplyResources(Me.chkAnovaTable, "chkAnovaTable")
-        Me.chkAnovaTable.Name = "chkAnovaTable"
-        Me.chkAnovaTable.Tag = "Show_Anova_Table"
-        Me.chkAnovaTable.UseVisualStyleBackColor = True
-        '
-        'chkLackFit
-        '
-        resources.ApplyResources(Me.chkLackFit, "chkLackFit")
-        Me.chkLackFit.Name = "chkLackFit"
-        Me.chkLackFit.Tag = "Lack_Of_Fit"
-        Me.chkLackFit.UseVisualStyleBackColor = True
-        '
-        'grpLackFit
-        '
-        Me.grpLackFit.Controls.Add(Me.txtdf)
-        Me.grpLackFit.Controls.Add(Me.txtResidualMsg)
-        Me.grpLackFit.Controls.Add(Me.Label1)
-        Me.grpLackFit.Controls.Add(Me.lblResidualMsg)
-        resources.ApplyResources(Me.grpLackFit, "grpLackFit")
-        Me.grpLackFit.Name = "grpLackFit"
-        Me.grpLackFit.TabStop = False
-        '
-        'lblResidualMsg
-        '
-        resources.ApplyResources(Me.lblResidualMsg, "lblResidualMsg")
-        Me.lblResidualMsg.Name = "lblResidualMsg"
-        Me.lblResidualMsg.Tag = "Residual_Msg"
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
-        'txtResidualMsg
-        '
-        resources.ApplyResources(Me.txtResidualMsg, "txtResidualMsg")
-        Me.txtResidualMsg.Name = "txtResidualMsg"
-        '
-        'txtdf
-        '
-        resources.ApplyResources(Me.txtdf, "txtdf")
-        Me.txtdf.Name = "txtdf"
         '
         'ucrBase
         '

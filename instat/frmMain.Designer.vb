@@ -42,7 +42,7 @@ Partial Class frmMain
         Me.GeneralToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.BivariateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegressionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SimpleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStatsRegressionSimple = New System.Windows.Forms.ToolStripMenuItem()
         Me.SimpleWithGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStatisticsRegressionMultiple = New System.Windows.Forms.ToolStripMenuItem()
         Me.GeneralLinearModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -239,6 +239,14 @@ Partial Class frmMain
         Me.RandomSamplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearRemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ManipulateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TransformToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RecodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SortToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageManipulateRowStat = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InteractionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IndicatorVariablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PolynomialsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReshapeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StacksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UnstackToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -295,14 +303,6 @@ Partial Class frmMain
         Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ManipulateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TransformToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RecodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SortToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageManipulateRowStat = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InteractionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IndicatorVariablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PolynomialsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -417,17 +417,17 @@ Partial Class frmMain
         '
         'RegressionToolStripMenuItem
         '
-        Me.RegressionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SimpleToolStripMenuItem, Me.SimpleWithGroupsToolStripMenuItem, Me.mnuStatisticsRegressionMultiple, Me.GeneralLinearModelToolStripMenuItem, Me.ToolStripSeparator11, Me.CorrelationToolStripMenuItem, Me.LogLinearModelsToolStripMenuItem})
+        Me.RegressionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatsRegressionSimple, Me.SimpleWithGroupsToolStripMenuItem, Me.mnuStatisticsRegressionMultiple, Me.GeneralLinearModelToolStripMenuItem, Me.ToolStripSeparator11, Me.CorrelationToolStripMenuItem, Me.LogLinearModelsToolStripMenuItem})
         Me.RegressionToolStripMenuItem.Name = "RegressionToolStripMenuItem"
         Me.RegressionToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
         Me.RegressionToolStripMenuItem.Tag = "Regression"
         Me.RegressionToolStripMenuItem.Text = "Regression"
         '
-        'SimpleToolStripMenuItem
+        'mnuStatsRegressionSimple
         '
-        Me.SimpleToolStripMenuItem.Name = "SimpleToolStripMenuItem"
-        Me.SimpleToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
-        Me.SimpleToolStripMenuItem.Text = "Simple..."
+        Me.mnuStatsRegressionSimple.Name = "mnuStatsRegressionSimple"
+        Me.mnuStatsRegressionSimple.Size = New System.Drawing.Size(195, 22)
+        Me.mnuStatsRegressionSimple.Text = "Simple"
         '
         'SimpleWithGroupsToolStripMenuItem
         '
@@ -1810,6 +1810,63 @@ Partial Class frmMain
         Me.ClearRemoveToolStripMenuItem.Tag = "Clear_Remove"
         Me.ClearRemoveToolStripMenuItem.Text = "Clear (Remove)..."
         '
+        'ManipulateToolStripMenuItem
+        '
+        Me.ManipulateToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TransformToolStripMenuItem, Me.RecodeToolStripMenuItem, Me.SortToolStripMenuItem, Me.mnuManageManipulateRowStat, Me.InteractionsToolStripMenuItem, Me.IndicatorVariablesToolStripMenuItem, Me.PolynomialsToolStripMenuItem})
+        Me.ManipulateToolStripMenuItem.Name = "ManipulateToolStripMenuItem"
+        Me.ManipulateToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
+        Me.ManipulateToolStripMenuItem.Tag = "Manipulate"
+        Me.ManipulateToolStripMenuItem.Text = "Manipulate"
+        '
+        'TransformToolStripMenuItem
+        '
+        Me.TransformToolStripMenuItem.Name = "TransformToolStripMenuItem"
+        Me.TransformToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.TransformToolStripMenuItem.Tag = "Transform"
+        Me.TransformToolStripMenuItem.Text = "Transform..."
+        '
+        'RecodeToolStripMenuItem
+        '
+        Me.RecodeToolStripMenuItem.Name = "RecodeToolStripMenuItem"
+        Me.RecodeToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.RecodeToolStripMenuItem.Tag = "Recode"
+        Me.RecodeToolStripMenuItem.Text = "Recode..."
+        '
+        'SortToolStripMenuItem
+        '
+        Me.SortToolStripMenuItem.Name = "SortToolStripMenuItem"
+        Me.SortToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SortToolStripMenuItem.Tag = "Sort"
+        Me.SortToolStripMenuItem.Text = "Sort..."
+        '
+        'mnuManageManipulateRowStat
+        '
+        Me.mnuManageManipulateRowStat.Name = "mnuManageManipulateRowStat"
+        Me.mnuManageManipulateRowStat.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageManipulateRowStat.Tag = "Row_Statistics"
+        Me.mnuManageManipulateRowStat.Text = "Row Statistics..."
+        '
+        'InteractionsToolStripMenuItem
+        '
+        Me.InteractionsToolStripMenuItem.Name = "InteractionsToolStripMenuItem"
+        Me.InteractionsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.InteractionsToolStripMenuItem.Tag = "Interactions"
+        Me.InteractionsToolStripMenuItem.Text = "Interactions..."
+        '
+        'IndicatorVariablesToolStripMenuItem
+        '
+        Me.IndicatorVariablesToolStripMenuItem.Name = "IndicatorVariablesToolStripMenuItem"
+        Me.IndicatorVariablesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.IndicatorVariablesToolStripMenuItem.Tag = "Indicator_Variables"
+        Me.IndicatorVariablesToolStripMenuItem.Text = "Indicator Variables..."
+        '
+        'PolynomialsToolStripMenuItem
+        '
+        Me.PolynomialsToolStripMenuItem.Name = "PolynomialsToolStripMenuItem"
+        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.PolynomialsToolStripMenuItem.Tag = "Polynomials"
+        Me.PolynomialsToolStripMenuItem.Text = "Polynomials..."
+        '
         'ReshapeToolStripMenuItem
         '
         Me.ReshapeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StacksToolStripMenuItem, Me.UnstackToolStripMenuItem, Me.SelectToolStripMenuItem, Me.SelectSndStackToolStripMenuItem, Me.ExpandToolStripMenuItem})
@@ -2163,63 +2220,6 @@ Partial Class frmMain
         Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
         Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
         '
-        'ManipulateToolStripMenuItem
-        '
-        Me.ManipulateToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TransformToolStripMenuItem, Me.RecodeToolStripMenuItem, Me.SortToolStripMenuItem, Me.mnuManageManipulateRowStat, Me.InteractionsToolStripMenuItem, Me.IndicatorVariablesToolStripMenuItem, Me.PolynomialsToolStripMenuItem})
-        Me.ManipulateToolStripMenuItem.Name = "ManipulateToolStripMenuItem"
-        Me.ManipulateToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
-        Me.ManipulateToolStripMenuItem.Tag = "Manipulate"
-        Me.ManipulateToolStripMenuItem.Text = "Manipulate"
-        '
-        'TransformToolStripMenuItem
-        '
-        Me.TransformToolStripMenuItem.Name = "TransformToolStripMenuItem"
-        Me.TransformToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.TransformToolStripMenuItem.Tag = "Transform"
-        Me.TransformToolStripMenuItem.Text = "Transform..."
-        '
-        'RecodeToolStripMenuItem
-        '
-        Me.RecodeToolStripMenuItem.Name = "RecodeToolStripMenuItem"
-        Me.RecodeToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.RecodeToolStripMenuItem.Tag = "Recode"
-        Me.RecodeToolStripMenuItem.Text = "Recode..."
-        '
-        'SortToolStripMenuItem
-        '
-        Me.SortToolStripMenuItem.Name = "SortToolStripMenuItem"
-        Me.SortToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.SortToolStripMenuItem.Tag = "Sort"
-        Me.SortToolStripMenuItem.Text = "Sort..."
-        '
-        'mnuManageManipulateRowStat
-        '
-        Me.mnuManageManipulateRowStat.Name = "mnuManageManipulateRowStat"
-        Me.mnuManageManipulateRowStat.Size = New System.Drawing.Size(179, 22)
-        Me.mnuManageManipulateRowStat.Tag = "Row_Statistics"
-        Me.mnuManageManipulateRowStat.Text = "Row Statistics..."
-        '
-        'InteractionsToolStripMenuItem
-        '
-        Me.InteractionsToolStripMenuItem.Name = "InteractionsToolStripMenuItem"
-        Me.InteractionsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.InteractionsToolStripMenuItem.Tag = "Interactions"
-        Me.InteractionsToolStripMenuItem.Text = "Interactions..."
-        '
-        'IndicatorVariablesToolStripMenuItem
-        '
-        Me.IndicatorVariablesToolStripMenuItem.Name = "IndicatorVariablesToolStripMenuItem"
-        Me.IndicatorVariablesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.IndicatorVariablesToolStripMenuItem.Tag = "Indicator_Variables"
-        Me.IndicatorVariablesToolStripMenuItem.Text = "Indicator Variables..."
-        '
-        'PolynomialsToolStripMenuItem
-        '
-        Me.PolynomialsToolStripMenuItem.Name = "PolynomialsToolStripMenuItem"
-        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.PolynomialsToolStripMenuItem.Tag = "Polynomials"
-        Me.PolynomialsToolStripMenuItem.Text = "Polynomials..."
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2263,7 +2263,7 @@ Partial Class frmMain
     Friend WithEvents GeneralToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents BivariateToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RegressionToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SimpleToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuStatsRegressionSimple As ToolStripMenuItem
     Friend WithEvents SimpleWithGroupsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuStatisticsRegressionMultiple As ToolStripMenuItem
     Friend WithEvents GeneralLinearModelToolStripMenuItem As ToolStripMenuItem
