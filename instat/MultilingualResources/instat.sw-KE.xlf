@@ -641,11 +641,15 @@
         </trans-unit>
         <trans-unit id="Ascending" translate="yes" xml:space="preserve">
           <source>Ascending</source>
-          <target state="new">Ascending</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kuchaguza A-Z</target>
         </trans-unit>
         <trans-unit id="Descending" translate="yes" xml:space="preserve">
           <source>Descending</source>
-          <target state="new">Descending</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kuchangua Z-A</target>
+        </trans-unit>
+        <trans-unit id="Anova_One_Way" translate="yes" xml:space="preserve">
+          <source>Anova One Way</source>
+          <target state="new">Anova One Way</target>
         </trans-unit>
       </group>
     </body>
@@ -1355,6 +1359,14 @@
     </header>
     <body>
       <group id="INSTAT/DLGENDRAIN.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGANOVAONEWAY.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGANOVAONEWAY.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>
