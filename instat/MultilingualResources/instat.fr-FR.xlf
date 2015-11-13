@@ -894,15 +894,11 @@
         </trans-unit>
         <trans-unit id="Ascending" translate="yes" xml:space="preserve">
           <source>Ascending</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Croissant</target>
+          <target state="new">Ascending</target>
         </trans-unit>
         <trans-unit id="Descending" translate="yes" xml:space="preserve">
           <source>Descending</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Décroissant</target>
-        </trans-unit>
-        <trans-unit id="Anova_One_Way" translate="yes" xml:space="preserve">
-          <source>Anova One Way</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">ANOVA One Way</target>
+          <target state="new">Descending</target>
         </trans-unit>
       </group>
     </body>
@@ -1360,12 +1356,418 @@
       <group id="INSTAT/DLGENDRAIN.RESX" datatype="resx" />
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGANOVAONEWAY.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGREGRESSIONSIMPLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="INSTAT/DLGANOVAONEWAY.RESX" datatype="resx" />
+      <group id="INSTAT/DLGREGRESSIONSIMPLE.RESX" datatype="resx">
+        <trans-unit id="$this.AutoScaleDimensions" translate="yes" xml:space="preserve" extype="System.Drawing.SizeF, System.Drawing">
+          <source>6, 13</source>
+          <target state="needs-review-translation">6, 13</target>
+        </trans-unit>
+        <trans-unit id="$this.ClientSize" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>424, 343</source>
+          <target state="needs-review-translation">284, 261</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="$this.StartPosition" translate="yes" xml:space="preserve" extype="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+          <source>CenterScreen</source>
+          <target state="needs-review-translation">CenterScreen</target>
+        </trans-unit>
+        <trans-unit id="$this.Text" translate="yes" xml:space="preserve">
+          <source>Simple Regression</source>
+          <target state="new">Simple Regression</target>
+        </trans-unit>
+        <trans-unit id="$this.Localizable" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="txtdf.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>118, 43</source>
+          <target state="needs-review-translation">118, 43</target>
+        </trans-unit>
+        <trans-unit id="txtdf.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>58, 20</source>
+          <target state="needs-review-translation">58, 20</target>
+        </trans-unit>
+        <trans-unit id="txtdf.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>12</source>
+          <target state="needs-review-translation">12</target>
+        </trans-unit>
+        <trans-unit id="txtResidualMsg.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>118, 11</source>
+          <target state="needs-review-translation">118, 11</target>
+        </trans-unit>
+        <trans-unit id="txtResidualMsg.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>149, 20</source>
+          <target state="needs-review-translation">149, 20</target>
+        </trans-unit>
+        <trans-unit id="txtResidualMsg.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>2</source>
+          <target state="needs-review-translation">2</target>
+        </trans-unit>
+        <trans-unit id="Label1.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="Label1.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>7, 43</source>
+          <target state="needs-review-translation">7, 43</target>
+        </trans-unit>
+        <trans-unit id="Label1.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>100, 13</source>
+          <target state="needs-review-translation">100, 13</target>
+        </trans-unit>
+        <trans-unit id="Label1.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>1</source>
+          <target state="needs-review-translation">1</target>
+        </trans-unit>
+        <trans-unit id="Label1.Text" translate="yes" xml:space="preserve">
+          <source>Degrees of freedom</source>
+          <target state="new">Degrees of freedom</target>
+        </trans-unit>
+        <trans-unit id="lblResidualMsg.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="lblResidualMsg.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>7, 11</source>
+          <target state="needs-review-translation">7, 11</target>
+        </trans-unit>
+        <trans-unit id="lblResidualMsg.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>94, 13</source>
+          <target state="needs-review-translation">94, 13</target>
+        </trans-unit>
+        <trans-unit id="lblResidualMsg.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>0</source>
+          <target state="needs-review-translation">0</target>
+        </trans-unit>
+        <trans-unit id="lblResidualMsg.Text" translate="yes" xml:space="preserve">
+          <source>Residual Message</source>
+          <target state="new">Residual Message</target>
+        </trans-unit>
+        <trans-unit id="grpLackFit.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>111, 179</source>
+          <target state="needs-review-translation">111, 179</target>
+        </trans-unit>
+        <trans-unit id="grpLackFit.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>280, 76</source>
+          <target state="needs-review-translation">280, 76</target>
+        </trans-unit>
+        <trans-unit id="grpLackFit.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>11</source>
+          <target state="needs-review-translation">11</target>
+        </trans-unit>
+        <trans-unit id="chkLackFit.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="chkLackFit.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>9, 179</source>
+          <target state="needs-review-translation">9, 179</target>
+        </trans-unit>
+        <trans-unit id="chkLackFit.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>78, 17</source>
+          <target state="needs-review-translation">78, 17</target>
+        </trans-unit>
+        <trans-unit id="chkLackFit.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>10</source>
+          <target state="needs-review-translation">10</target>
+        </trans-unit>
+        <trans-unit id="chkLackFit.Text" translate="yes" xml:space="preserve">
+          <source>Lack Of Fit</source>
+          <target state="new">Lack Of Fit</target>
+        </trans-unit>
+        <trans-unit id="chkAnovaTable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="chkAnovaTable.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>243, 141</source>
+          <target state="needs-review-translation">243, 141</target>
+        </trans-unit>
+        <trans-unit id="chkAnovaTable.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>117, 17</source>
+          <target state="needs-review-translation">117, 17</target>
+        </trans-unit>
+        <trans-unit id="chkAnovaTable.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>9</source>
+          <target state="needs-review-translation">9</target>
+        </trans-unit>
+        <trans-unit id="chkAnovaTable.Text" translate="yes" xml:space="preserve">
+          <source>Show Anova Table</source>
+          <target state="new">Show Anova Table</target>
+        </trans-unit>
+        <trans-unit id="chkShowPlots.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="chkShowPlots.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>144, 141</source>
+          <target state="needs-review-translation">144, 141</target>
+        </trans-unit>
+        <trans-unit id="chkShowPlots.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>74, 17</source>
+          <target state="needs-review-translation">74, 17</target>
+        </trans-unit>
+        <trans-unit id="chkShowPlots.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>8</source>
+          <target state="needs-review-translation">8</target>
+        </trans-unit>
+        <trans-unit id="chkShowPlots.Text" translate="yes" xml:space="preserve">
+          <source>Show Plot</source>
+          <target state="new">Show Plot</target>
+        </trans-unit>
+        <trans-unit id="chkSiginificance.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="chkSiginificance.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>9, 141</source>
+          <target state="needs-review-translation">9, 141</target>
+        </trans-unit>
+        <trans-unit id="chkSiginificance.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>108, 17</source>
+          <target state="needs-review-translation">108, 17</target>
+        </trans-unit>
+        <trans-unit id="chkSiginificance.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>7</source>
+          <target state="needs-review-translation">7</target>
+        </trans-unit>
+        <trans-unit id="chkSiginificance.Text" translate="yes" xml:space="preserve">
+          <source>Significance Test</source>
+          <target state="new">Significance Test</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Items" translate="yes" xml:space="preserve">
+          <source></source>
+          <target state="new"></target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Items1" translate="yes" xml:space="preserve">
+          <source>99.99</source>
+          <target state="new">99.99</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Items2" translate="yes" xml:space="preserve">
+          <source>99</source>
+          <target state="new">99</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Items3" translate="yes" xml:space="preserve">
+          <source>95</source>
+          <target state="new">95</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Items4" translate="yes" xml:space="preserve">
+          <source>90</source>
+          <target state="new">90</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Items5" translate="yes" xml:space="preserve">
+          <source>80</source>
+          <target state="new">80</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>302, 103</source>
+          <target state="needs-review-translation">302, 103</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>42, 21</source>
+          <target state="needs-review-translation">42, 21</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>6</source>
+          <target state="needs-review-translation">6</target>
+        </trans-unit>
+        <trans-unit id="lblConfidence.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="lblConfidence.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>191, 111</source>
+          <target state="needs-review-translation">191, 111</target>
+        </trans-unit>
+        <trans-unit id="lblConfidence.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>90, 13</source>
+          <target state="needs-review-translation">90, 13</target>
+        </trans-unit>
+        <trans-unit id="lblConfidence.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>5</source>
+          <target state="needs-review-translation">5</target>
+        </trans-unit>
+        <trans-unit id="lblConfidence.Text" translate="yes" xml:space="preserve">
+          <source>Confidence Limits</source>
+          <target state="new">Confidence Limits</target>
+        </trans-unit>
+        <trans-unit id="lblExplanatoryVariable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="lblExplanatoryVariable.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+          <source>NoControl</source>
+          <target state="needs-review-translation">NoControl</target>
+        </trans-unit>
+        <trans-unit id="lblExplanatoryVariable.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>191, 69</source>
+          <target state="needs-review-translation">191, 69</target>
+        </trans-unit>
+        <trans-unit id="lblExplanatoryVariable.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>103, 13</source>
+          <target state="needs-review-translation">103, 13</target>
+        </trans-unit>
+        <trans-unit id="lblExplanatoryVariable.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>4</source>
+          <target state="needs-review-translation">4</target>
+        </trans-unit>
+        <trans-unit id="lblExplanatoryVariable.Text" translate="yes" xml:space="preserve">
+          <source>Explanatory Variable</source>
+          <target state="new">Explanatory Variable</target>
+        </trans-unit>
+        <trans-unit id="lblResponseVariable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="lblResponseVariable.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>191, 37</source>
+          <target state="needs-review-translation">191, 37</target>
+        </trans-unit>
+        <trans-unit id="lblResponseVariable.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>96, 13</source>
+          <target state="needs-review-translation">96, 13</target>
+        </trans-unit>
+        <trans-unit id="lblResponseVariable.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>3</source>
+          <target state="needs-review-translation">3</target>
+        </trans-unit>
+        <trans-unit id="lblResponseVariable.Text" translate="yes" xml:space="preserve">
+          <source>Response Variable</source>
+          <target state="new">Response Variable</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverSingleB.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>302, 56</source>
+          <target state="needs-review-translation">302, 56</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverSingleB.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>106, 26</source>
+          <target state="needs-review-translation">106, 26</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverSingleB.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>2</source>
+          <target state="needs-review-translation">2</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverSingleA.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>302, 24</source>
+          <target state="needs-review-translation">302, 24</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverSingleA.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>106, 26</source>
+          <target state="needs-review-translation">106, 26</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverSingleA.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>1</source>
+          <target state="needs-review-translation">1</target>
+        </trans-unit>
+        <trans-unit id="ucrAddRemove.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>3, 6</source>
+          <target state="needs-review-translation">3, 6</target>
+        </trans-unit>
+        <trans-unit id="ucrAddRemove.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>182, 118</source>
+          <target state="needs-review-translation">182, 118</target>
+        </trans-unit>
+        <trans-unit id="ucrAddRemove.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>0</source>
+          <target state="needs-review-translation">0</target>
+        </trans-unit>
+        <trans-unit id="tbRegress.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>4, 22</source>
+          <target state="needs-review-translation">4, 22</target>
+        </trans-unit>
+        <trans-unit id="tbRegress.Padding" translate="yes" xml:space="preserve" extype="System.Windows.Forms.Padding, System.Windows.Forms">
+          <source>3, 3, 3, 3</source>
+          <target state="needs-review-translation">3, 3, 3, 3</target>
+        </trans-unit>
+        <trans-unit id="tbRegress.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>416, 274</source>
+          <target state="needs-review-translation">416, 274</target>
+        </trans-unit>
+        <trans-unit id="tbRegress.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>0</source>
+          <target state="needs-review-translation">0</target>
+        </trans-unit>
+        <trans-unit id="tbRegress.Text" translate="yes" xml:space="preserve">
+          <source>Regress</source>
+          <target state="new">Regress</target>
+        </trans-unit>
+        <trans-unit id="tbPlot.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>4, 22</source>
+          <target state="needs-review-translation">4, 22</target>
+        </trans-unit>
+        <trans-unit id="tbPlot.Padding" translate="yes" xml:space="preserve" extype="System.Windows.Forms.Padding, System.Windows.Forms">
+          <source>3, 3, 3, 3</source>
+          <target state="needs-review-translation">3, 3, 3, 3</target>
+        </trans-unit>
+        <trans-unit id="tbPlot.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>464, 235</source>
+          <target state="needs-review-translation">464, 235</target>
+        </trans-unit>
+        <trans-unit id="tbPlot.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>1</source>
+          <target state="needs-review-translation">1</target>
+        </trans-unit>
+        <trans-unit id="tbPlot.Text" translate="yes" xml:space="preserve">
+          <source>Plot</source>
+          <target state="new">Plot</target>
+        </trans-unit>
+        <trans-unit id="tbSave.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>4, 22</source>
+          <target state="needs-review-translation">4, 22</target>
+        </trans-unit>
+        <trans-unit id="tbSave.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>464, 235</source>
+          <target state="needs-review-translation">464, 235</target>
+        </trans-unit>
+        <trans-unit id="tbSave.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>2</source>
+          <target state="needs-review-translation">2</target>
+        </trans-unit>
+        <trans-unit id="tbSave.Text" translate="yes" xml:space="preserve">
+          <source>Save</source>
+          <target state="new">Save</target>
+        </trans-unit>
+        <trans-unit id="tbctrlSimple.Dock" translate="yes" xml:space="preserve" extype="System.Windows.Forms.DockStyle, System.Windows.Forms">
+          <source>Top</source>
+          <target state="needs-review-translation">Top</target>
+        </trans-unit>
+        <trans-unit id="tbctrlSimple.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>0, 0</source>
+          <target state="needs-review-translation">0, 0</target>
+        </trans-unit>
+        <trans-unit id="tbctrlSimple.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>424, 300</source>
+          <target state="needs-review-translation">424, 300</target>
+        </trans-unit>
+        <trans-unit id="tbctrlSimple.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>0</source>
+          <target state="needs-review-translation">0</target>
+        </trans-unit>
+        <trans-unit id="ucrBase.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>7, 307</source>
+          <target state="needs-review-translation">7, 307</target>
+        </trans-unit>
+        <trans-unit id="ucrBase.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>410, 32</source>
+          <target state="needs-review-translation">410, 32</target>
+        </trans-unit>
+        <trans-unit id="ucrBase.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>1</source>
+          <target state="needs-review-translation">1</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGONEWAYANOVE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGONEWAYANOVE.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>
