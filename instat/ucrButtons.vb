@@ -14,7 +14,9 @@ Public Class ucrButtons
     Public Event ClickReset(sender As Object, e As EventArgs)
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
-        If clsRsyntax.iCallType >= 0 Then
+        If clsRsyntax.iFunctionType <> "Statistics" Then
+            frmMain.clsRInterface.RunScript(clsRsyntax.writeScript(), clsRsyntax.iCallType)
+        Else
             frmMain.clsRInterface.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType)
         End If
         RaiseEvent ClickOk(sender, e)

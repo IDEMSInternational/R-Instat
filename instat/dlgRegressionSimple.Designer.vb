@@ -25,6 +25,7 @@ Partial Class dlgRegressionSimple
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRegressionSimple))
         Me.tbctrlSimple = New System.Windows.Forms.TabControl()
         Me.tbRegress = New System.Windows.Forms.TabPage()
+        Me.ucrReceiverSingleB = New instat.ucrReceiverSingle()
         Me.grpLackFit = New System.Windows.Forms.GroupBox()
         Me.txtdf = New System.Windows.Forms.TextBox()
         Me.txtResidualMsg = New System.Windows.Forms.TextBox()
@@ -38,7 +39,6 @@ Partial Class dlgRegressionSimple
         Me.lblConfidence = New System.Windows.Forms.Label()
         Me.lblExplanatoryVariable = New System.Windows.Forms.Label()
         Me.lblResponseVariable = New System.Windows.Forms.Label()
-        Me.ucrReceiverSingleB = New instat.ucrReceiverSingle()
         Me.ucrReceiverSingleA = New instat.ucrReceiverSingle()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.tbPlot = New System.Windows.Forms.TabPage()
@@ -60,6 +60,7 @@ Partial Class dlgRegressionSimple
         '
         'tbRegress
         '
+        Me.tbRegress.Controls.Add(Me.ucrReceiverSingleB)
         Me.tbRegress.Controls.Add(Me.grpLackFit)
         Me.tbRegress.Controls.Add(Me.chkLackFit)
         Me.tbRegress.Controls.Add(Me.chkAnovaTable)
@@ -69,12 +70,16 @@ Partial Class dlgRegressionSimple
         Me.tbRegress.Controls.Add(Me.lblConfidence)
         Me.tbRegress.Controls.Add(Me.lblExplanatoryVariable)
         Me.tbRegress.Controls.Add(Me.lblResponseVariable)
-        Me.tbRegress.Controls.Add(Me.ucrReceiverSingleB)
         Me.tbRegress.Controls.Add(Me.ucrReceiverSingleA)
         Me.tbRegress.Controls.Add(Me.ucrAddRemove)
         resources.ApplyResources(Me.tbRegress, "tbRegress")
         Me.tbRegress.Name = "tbRegress"
         Me.tbRegress.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverSingleB
+        '
+        resources.ApplyResources(Me.ucrReceiverSingleB, "ucrReceiverSingleB")
+        Me.ucrReceiverSingleB.Name = "ucrReceiverSingleB"
         '
         'grpLackFit
         '
@@ -160,11 +165,6 @@ Partial Class dlgRegressionSimple
         Me.lblResponseVariable.Name = "lblResponseVariable"
         Me.lblResponseVariable.Tag = "Response_Variable"
         '
-        'ucrReceiverSingleB
-        '
-        resources.ApplyResources(Me.ucrReceiverSingleB, "ucrReceiverSingleB")
-        Me.ucrReceiverSingleB.Name = "ucrReceiverSingleB"
-        '
         'ucrReceiverSingleA
         '
         resources.ApplyResources(Me.ucrReceiverSingleA, "ucrReceiverSingleA")
@@ -228,10 +228,10 @@ Partial Class dlgRegressionSimple
     Friend WithEvents lblConfidence As Label
     Friend WithEvents lblExplanatoryVariable As Label
     Friend WithEvents lblResponseVariable As Label
-    Friend WithEvents ucrReceiverSingleB As ucrReceiverSingle
     Friend WithEvents ucrReceiverSingleA As ucrReceiverSingle
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents tbPlot As TabPage
     Friend WithEvents tbSave As TabPage
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrReceiverSingleB As ucrReceiverSingle
 End Class
