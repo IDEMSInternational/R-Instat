@@ -142,10 +142,11 @@ Partial Class dlgPlot
         Me.Controls.Add(Me.lblAvailable)
         Me.Controls.Add(Me.lstBoxAvailable)
         Me.Controls.Add(Me.UcrButtons1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgPlot"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()

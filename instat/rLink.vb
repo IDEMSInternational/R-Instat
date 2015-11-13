@@ -67,6 +67,7 @@ Public Class RInterface
                     Case ".xls" 'TODO use odbc link
                         dfDataset = clsEngine.Evaluate("require(readxl);data<-as.data.frame(read_excel('" & strHolder & "', sheet=1))").AsDataFrame
                 End Select
+                txtOutput.Text = txtOutput.Text & "Loaded > " & strHolder & vbCrLf
             Else
                 MsgBox("Must have a file name!", vbInformation, "Message from Instat")
             End If

@@ -95,27 +95,12 @@ Public Class frmMain
         dlgDescriptiveStatistics.ShowDialog()
     End Sub
 
-    Private Sub mnuFileOpenWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileOpenWorksheet.Click
-
-    End Sub
-
-    Private Sub CutCtrlXToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuEditCut.Click
-
-    End Sub
-
-    Private Sub mnuBar_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles mnuBar.ItemClicked
-
-    End Sub
-
     Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
         dlgSort.ShowDialog()
     End Sub
 
     Private Sub mnuSriptLog_Click(sender As Object, e As EventArgs)
-        frmLog.Show()
-    End Sub
-
-    Private Sub KiswahiliToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KiswahiliToolStripMenuItem.Click
+        frmLog.ShowDialog()
     End Sub
 
     Private Sub KiswahiliToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles KiswahiliToolStripMenuItem1.Click
@@ -124,16 +109,8 @@ Public Class frmMain
         autoTranslate(Me)
     End Sub
 
-    Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindroseToolStripMenuItem.Click
-
-    End Sub
-
     Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsProbabilityPlot.Click
         dlgProbabilityPlot.ShowDialog()
-    End Sub
-
-    Private Sub ProbabilityDistributionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbabilityDistributionsToolStripMenuItem.Click
-
     End Sub
 
     Private Sub FrenchToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrenchToolStripMenuItem.Click
@@ -146,14 +123,6 @@ Public Class frmMain
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
         Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
         autoTranslate(Me)
-    End Sub
-
-    Private Sub RowStatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RowStatisticsToolStripMenuItem.Click
-
-    End Sub
-
-    Private Sub mnuEditViewEditText_Click(sender As Object, e As EventArgs) Handles mnuEditViewEditText.Click
-
     End Sub
 
     Private Sub mnuFileNewWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileNewWorksheet.Click
@@ -170,10 +139,6 @@ Public Class frmMain
 
     Private Sub StartOfTheRainsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartOfTheRainsToolStripMenuItem.Click
         dlgStartofRains.ShowDialog()
-    End Sub
-
-    Private Sub tstatus_Click(sender As Object, e As EventArgs) Handles tstatus.Click
-
     End Sub
 
     Private Sub RegularSequenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegularSequenceToolStripMenuItem.Click
@@ -202,10 +167,6 @@ Public Class frmMain
 
     Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsPlot.Click
         dlgPlot.ShowDialog()
-    End Sub
-
-    Private Sub mnuFileCloseWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileCloseWorksheet.Click
-
     End Sub
 
     Private Sub mnuGraphicsHistogram_Click(sender As Object, e As EventArgs) Handles mnuGraphicsHistogram.Click
@@ -310,11 +271,11 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuWindowMetadata_Click(sender As Object, e As EventArgs)
-        frmMetaData.Show()
+        frmMetaData.ShowDialog()
     End Sub
 
     Private Sub mnuWindowVariables_Click(sender As Object, e As EventArgs)
-        frmVariables.Show()
+        frmVariables.ShowDialog()
     End Sub
 
     Private Sub mnuManageWorksheetInformation_Click(sender As Object, e As EventArgs) Handles mnuManageWorksheetInformation.Click
@@ -348,4 +309,86 @@ Public Class frmMain
             frmMetaData.Visible = True
         End If
     End Sub
+
+    Private Sub mnuClmateMethodThreeSummaries_Click(sender As Object, e As EventArgs) Handles mnuClmateMethodThreeSummaries.Click
+        dlgThreeSummaries.ShowDialog()
+    End Sub
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Private Sub StartOfRainToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartOfRainToolStripMenuItem.Click
+        dlgAddStartRain.ShowDialog()
+    End Sub
+
+    Private Sub EndOfRainToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EndOfRainToolStripMenuItem.Click
+        dlgEndRain.ShowDialog()
+    End Sub
+
+    Private Sub ChangeFormatDayMonthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeFormatDayMonthToolStripMenuItem.Click
+        dlgChangeFormatDayMonth.ShowDialog()
+    End Sub
+
+    Private Sub ExportCPTToTabularToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportCPTToTabularToolStripMenuItem.Click
+        dlgCPTtoTabularData.ShowDialog()
+    End Sub
+
+    Private Sub DayMonthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DayMonthToolStripMenuItem.Click
+        dlgDayMonth.ShowDialog()
+
+    End Sub
+
+    Private Sub DisplayDailyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DisplayDailyToolStripMenuItem1.Click
+        dlgDisplayDaily.ShowDialog()
+    End Sub
+
+    Private Sub DisplayDOYOfYearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayDOYOfYearToolStripMenuItem.Click
+        dlgDisplayDOYofYear.ShowDialog()
+    End Sub
+
+    Private Sub DisplayRainRunningTotalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayRainRunningTotalToolStripMenuItem.Click
+        dlgDisplayRainRunningTotal.ShowDialog()
+    End Sub
+
+    Private Sub DisplaySpellLengthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplaySpellLengthToolStripMenuItem.Click
+        dlgDisplaySpellLength.ShowDialog()
+    End Sub
+
+    Private Sub ExportForPICSAToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportForPICSAToolStripMenuItem.Click
+        dlgExportforPICSA.ShowDialog()
+    End Sub
+
+    Private Sub ExtremeEventsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExtremeEventsToolStripMenuItem.Click
+        dlgExtremeEvents.ShowDialog()
+    End Sub
+
+    Private Sub MissingDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MissingDataToolStripMenuItem.Click
+        dlgMissingData.ShowDialog()
+    End Sub
+
+    Private Sub MissingDataTableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MissingDataTableToolStripMenuItem.Click
+        dlgMissingDataTable.ShowDialog()
+    End Sub
+
+    Private Sub MonthlySummariesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlySummariesToolStripMenuItem.Click
+        dlgMonthlySummaries.ShowDialog()
+    End Sub
+
+    Private Sub OutputForCDTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputForCDTToolStripMenuItem.Click
+        dlgOutputforCDT.ShowDialog()
+    End Sub
+
+    Private Sub OutputForCPTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputForCPTToolStripMenuItem.Click
+        dlgOutputforCPT.ShowDialog()
+    End Sub
+
+    Private Sub RainsStatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RainsStatisticsToolStripMenuItem.Click
+        dlgRainStats.ShowDialog()
+    End Sub
+
+    Private Sub SeasonalSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SeasonalSummaryToolStripMenuItem.Click
+        dlgSeasonalSummary.ShowDialog()
+    End Sub
+
+    Private Sub SeasonalSummaryRainToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SeasonalSummaryRainToolStripMenuItem.Click
+        dlgSeasonalSummaryRain.ShowDialog()
+    End Sub
+
 End Class
