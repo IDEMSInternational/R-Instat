@@ -19,7 +19,7 @@ Public Class dlgHistogram
     Private Sub dlgHistogram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UcrBase.clsRsyntax.SetFunction("hist")
         UcrBase.clsRsyntax.iCallType = 0
-        ucrSingleReceiver.Selector = UcrAddRemove
+        ucrSingleReceiver.Selector = ucrAddRemove
         ucrSingleReceiver.SetMeAsReceiver()
         autoTranslate(Me)
     End Sub
