@@ -267,6 +267,12 @@
     <Compile Include="dlgEndofRains.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgEndRain.designer.vb">
+      <DependentUpon>dlgEndRain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgEndRain.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExportforPICSA.designer.vb">
       <DependentUpon>dlgExportforPICSA.vb</DependentUpon>
     </Compile>
@@ -751,6 +757,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEndofRains.sw-KE.resx">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEndRain.fr-FR.resx">
+      <DependentUpon>dlgEndRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEndRain.resx">
+      <DependentUpon>dlgEndRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEndRain.sw-KE.resx">
+      <DependentUpon>dlgEndRain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportforPICSA.fr-FR.resx">
       <DependentUpon>dlgExportforPICSA.vb</DependentUpon>
