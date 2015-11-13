@@ -52,4 +52,7 @@ Public Class dlgRegressionSimple
         ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverSingleB.txtReceiverSingle.Text & "")
     End Sub
 
+    Private Sub tbRegress_Click(sender As Object, e As EventArgs) Handles tbRegress.Click
+
+    End Sub
 End Class

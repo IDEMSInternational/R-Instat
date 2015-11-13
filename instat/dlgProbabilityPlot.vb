@@ -21,7 +21,6 @@ Public Class dlgProbabilityPlot
     Private Sub dlgProbabilityPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UcrReceiverSingle1.Selector = ucrAddRemove
         UcrReceiverSingle1.SetMeAsReceiver()
-        ucrBase.clsRsyntax.SetFunction("qqnorm")
         ucrBase.clsRsyntax.iCallType = 0
         rdoNormal.Checked = True
         txtTitle.Visible = False
@@ -29,9 +28,10 @@ Public Class dlgProbabilityPlot
 
     End Sub
 
-
     Private Sub rdoNormal_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNormal.CheckedChanged
         If rdoNormal.Checked = True Then
+            ucrBase.clsRsyntax.SetFunction("qqnorm")
+            ucrBase.clsRsyntax.AddParameter("y", "data$" & UcrReceiverSingle1.txtReceiverSingle.Text & ")")
             txtTitle.Text = "Normal Probability Plot of " & UcrReceiverSingle1.txtReceiverSingle.Text & ""
         End If
 
@@ -39,6 +39,7 @@ Public Class dlgProbabilityPlot
 
     Private Sub rdoGamma_CheckedChanged(sender As Object, e As EventArgs) Handles rdoGamma.CheckedChanged
         If rdoGamma.Checked = True Then
+            ucrBase.clsRsyntax.SetFunction("pgamma")
             txtTitle.Text = "Gamma Probability Plot"
         End If
     End Sub
@@ -51,6 +52,8 @@ Public Class dlgProbabilityPlot
 
     Private Sub rdoEmperical_CheckedChanged(sender As Object, e As EventArgs) Handles rdoEmperical.CheckedChanged
         If rdoEmperical.Checked = True Then
+            ucrBase.clsRsyntax.SetFunction("plot(ecdf")
+            ucrBase.clsRsyntax.AddParameter("x", "data$" & UcrReceiverSingle1.txtReceiverSingle.Text & ")")
             txtTitle.Text = "Emperical Probability Plot"
         End If
     End Sub
@@ -66,7 +69,7 @@ Public Class dlgProbabilityPlot
     End Sub
 
     Private Sub UcrReceiverSingle1_Leave(sender As Object, e As EventArgs) Handles UcrReceiverSingle1.LeftText
-        ucrBase.clsRsyntax.AddParameter("y", "data$" & UcrReceiverSingle1.txtReceiverSingle.Text & "")
+
     End Sub
 
 
