@@ -356,9 +356,11 @@ Partial Class dlgCalculator
         Me.Controls.Add(Me.lblAvailableVariables)
         Me.Controls.Add(Me.lstAvailableVariable)
         Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgCalculator"
         Me.ShowIcon = False
-        Me.Text = "frmCalculator"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Calculator"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

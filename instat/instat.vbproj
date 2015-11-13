@@ -195,6 +195,12 @@
     <Compile Include="dlgCliPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgColumnStats.Designer.vb">
+      <DependentUpon>dlgColumnStats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgColumnStats.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCPTtoTabularData.designer.vb">
       <DependentUpon>dlgCPTtoTabularData.vb</DependentUpon>
     </Compile>
@@ -351,6 +357,12 @@
     <Compile Include="dlgMultipleRegression.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOneWayAnove.Designer.vb">
+      <DependentUpon>dlgOneWayAnove.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneWayAnove.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOutputforCDT.designer.vb">
       <DependentUpon>dlgOutputforCDT.vb</DependentUpon>
     </Compile>
@@ -381,10 +393,28 @@
     <Compile Include="dlgRainStats.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRegressionSimple.Designer.vb">
+      <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRegressionSimple.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRegularSequence.designer.vb">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRegularSequence.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRowStats.Designer.vb">
+      <DependentUpon>dlgRowStats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRowStats.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgScatterPlot.Designer.vb">
+      <DependentUpon>dlgScatterPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgScatterPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSeasonalSummary.designer.vb">
@@ -439,6 +469,12 @@
       <DependentUpon>dlgTimeseriesPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTimeseriesPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTwoWayAnova.Designer.vb">
+      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTwoWayAnova.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgWaterBalance.Designer.vb">
@@ -884,6 +920,15 @@
     <EmbeddedResource Include="dlgMultipleRegression.sw-KE.resx">
       <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayAnove.fr-FR.resx">
+      <DependentUpon>dlgOneWayAnove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayAnove.resx">
+      <DependentUpon>dlgOneWayAnove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayAnove.sw-KE.resx">
+      <DependentUpon>dlgOneWayAnove.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOutputforCDT.fr-FR.resx">
       <DependentUpon>dlgOutputforCDT.vb</DependentUpon>
     </EmbeddedResource>
@@ -928,6 +973,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRainStats.sw-KE.resx">
       <DependentUpon>dlgRainStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegressionSimple.fr-FR.resx">
+      <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegressionSimple.resx">
+      <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegressionSimple.sw-KE.resx">
+      <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.fr-FR.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
