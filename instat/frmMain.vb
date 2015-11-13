@@ -391,4 +391,7 @@ Public Class frmMain
         dlgSeasonalSummaryRain.ShowDialog()
     End Sub
 
+    Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OnewayToolStripMenuItem.Click
+        dlgAnovaOneWay.ShowDialog()
+    End Sub
 End Class
