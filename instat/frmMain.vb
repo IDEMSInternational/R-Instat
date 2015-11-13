@@ -95,7 +95,7 @@ Public Class frmMain
         dlgDescriptiveStatistics.ShowDialog()
     End Sub
 
-    Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
+    Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgSort.ShowDialog()
     End Sub
 
@@ -391,4 +391,23 @@ Public Class frmMain
         dlgSeasonalSummaryRain.ShowDialog()
     End Sub
 
+    Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) Handles mnuStatsNonParametricOneWayAnova.Click
+        dlgOneWayAnova.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatsNonParametricTwoWayAnova_Click(sender As Object, e As EventArgs)
+        dlgTwoWayAnova.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatsSummaryColumnStat_Click(sender As Object, e As EventArgs) Handles mnuStatsSummaryColumnStat.Click
+        dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageManipulateRowStat_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRowStat.Click
+        dlgRowStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuGraphicsScatterplot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsScatterplot.Click
+        dlgScatterPlot.ShowDialog()
+    End Sub
 End Class
