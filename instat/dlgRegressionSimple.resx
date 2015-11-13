@@ -118,13 +118,34 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrReceiverSingleB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>302, 56</value>
+  </data>
+  <data name="ucrReceiverSingleB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrReceiverSingleB.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSingleB.Name" xml:space="preserve">
+    <value>ucrReceiverSingleB</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSingleB.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSingleB.Parent" xml:space="preserve">
+    <value>tbRegress</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverSingleB.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="txtdf.Location" type="System.Drawing.Point, System.Drawing">
     <value>118, 43</value>
   </data>
   <data name="txtdf.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 20</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="txtdf.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
@@ -164,6 +185,10 @@
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 43</value>
   </data>
@@ -190,6 +215,9 @@
   </data>
   <data name="lblResidualMsg.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblResidualMsg.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblResidualMsg.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 11</value>
@@ -234,10 +262,13 @@
     <value>tbRegress</value>
   </data>
   <data name="&gt;&gt;grpLackFit.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="chkLackFit.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="chkLackFit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="chkLackFit.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 179</value>
@@ -261,10 +292,13 @@
     <value>tbRegress</value>
   </data>
   <data name="&gt;&gt;chkLackFit.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="chkAnovaTable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="chkAnovaTable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="chkAnovaTable.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 141</value>
@@ -288,10 +322,13 @@
     <value>tbRegress</value>
   </data>
   <data name="&gt;&gt;chkAnovaTable.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="chkShowPlots.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="chkShowPlots.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="chkShowPlots.Location" type="System.Drawing.Point, System.Drawing">
     <value>144, 141</value>
@@ -315,10 +352,13 @@
     <value>tbRegress</value>
   </data>
   <data name="&gt;&gt;chkShowPlots.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="chkSiginificance.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="chkSiginificance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="chkSiginificance.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 141</value>
@@ -342,7 +382,7 @@
     <value>tbRegress</value>
   </data>
   <data name="&gt;&gt;chkSiginificance.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ComboBox1.Items" xml:space="preserve">
     <value />
@@ -381,10 +421,13 @@
     <value>tbRegress</value>
   </data>
   <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblConfidence.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblConfidence.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblConfidence.Location" type="System.Drawing.Point, System.Drawing">
     <value>191, 111</value>
@@ -408,12 +451,11 @@
     <value>tbRegress</value>
   </data>
   <data name="&gt;&gt;lblConfidence.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblExplanatoryVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblExplanatoryVariable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -439,10 +481,13 @@
     <value>tbRegress</value>
   </data>
   <data name="&gt;&gt;lblExplanatoryVariable.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="lblResponseVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblResponseVariable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblResponseVariable.Location" type="System.Drawing.Point, System.Drawing">
     <value>191, 37</value>
@@ -466,27 +511,6 @@
     <value>tbRegress</value>
   </data>
   <data name="&gt;&gt;lblResponseVariable.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="ucrReceiverSingleB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 56</value>
-  </data>
-  <data name="ucrReceiverSingleB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 26</value>
-  </data>
-  <data name="ucrReceiverSingleB.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSingleB.Name" xml:space="preserve">
-    <value>ucrReceiverSingleB</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSingleB.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSingleB.Parent" xml:space="preserve">
-    <value>tbRegress</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverSingleB.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="ucrReceiverSingleA.Location" type="System.Drawing.Point, System.Drawing">

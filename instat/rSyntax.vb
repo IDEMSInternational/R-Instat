@@ -17,6 +17,7 @@
 
 Public Class RSyntax
     Dim strFunction As String
+    Public iFunctionType As String = "Statistics"
     Public iCallType As Integer = 0
     Dim strParameter(1, 0) As String
     Public strScript As String
@@ -65,13 +66,16 @@ Public Class RSyntax
     End Function
 
     Public Function writeScript() As String
+        strScript = strFunction & "("
         For i = 0 To strParameter.GetUpperBound(1)
-            If i > 0 Then
-                strScript = strScript & ","
+            If i = 1 Then
+                strScript = strScript & "~"
+            ElseIf i > 2
+                strScript = strScript & "+"
             End If
-            strScript = strScript & strParameter(0, 1) & "$" & strParameter(1, i)
+            strScript = strScript & strParameter(0, i)
         Next
-        strScript = strScript & ")"
+        strScript = strScript & ",data = data_temp))"
         Return strScript
     End Function
 

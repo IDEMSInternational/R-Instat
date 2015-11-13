@@ -20,6 +20,7 @@ Public Class dlgRegressionSimple
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
         ucrBase.clsRsyntax.SetFunction("summary(lm")
         ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iFunctionType = "Stats"
         ucrReceiverSingleA.Selector = ucrAddRemove
         ucrReceiverSingleA.SetMeAsReceiver()
         grpLackFit.Enabled = False
@@ -34,22 +35,17 @@ Public Class dlgRegressionSimple
         End If
     End Sub
 
-    Private Sub ucrReceiverSingleA_MouseHover(sender As Object, e As EventArgs) Handles ucrReceiverSingleA.MouseHover
-        ucrReceiverSingleA.Selector = ucrAddRemove
-        ucrReceiverSingleA.SetMeAsReceiver()
-    End Sub
-
     Private Sub ucrReceiverSingleB_Enter(sender As Object, e As EventArgs) Handles ucrReceiverSingleB.Enter
         ucrReceiverSingleB.Selector = ucrAddRemove
         ucrReceiverSingleB.SetMeAsReceiver()
     End Sub
 
     Private Sub ucrReceiverSingleA_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingleA.Leave
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverSingleA.txtReceiverSingle.Text & "")
+        ucrBase.clsRsyntax.AddParameter(ucrReceiverSingleA.txtReceiverSingle.Text, "")
     End Sub
 
     Private Sub ucrReceiverSingleB_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingleB.Leave
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverSingleB.txtReceiverSingle.Text & "")
+        ucrBase.clsRsyntax.AddParameter(ucrReceiverSingleB.txtReceiverSingle.Text, "")
     End Sub
 
 End Class

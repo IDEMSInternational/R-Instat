@@ -591,6 +591,12 @@
     <Compile Include="ucrReceiverSingle.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrReciverSingleB.Designer.vb">
+      <DependentUpon>ucrReciverSingleB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReciverSingleB.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrSelector.designer.vb">
       <DependentUpon>ucrSelector.vb</DependentUpon>
     </Compile>
