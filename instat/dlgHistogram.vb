@@ -34,4 +34,6 @@ Public Class dlgHistogram
     Private Sub txtHistogramTitle_TextChanged(sender As Object, e As EventArgs) Handles txtHistogramTitle.TextChanged
         UcrBase.clsRsyntax.AddParameter("main", Chr(34) & txtHistogramTitle.Text & Chr(34))
     End Sub
+
+
 End Class
