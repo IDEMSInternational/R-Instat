@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgAnnualRaintotal
+Partial Class dlgEndRain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -27,23 +27,23 @@ Partial Class dlgAnnualRaintotal
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 218)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 247)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 0
         '
-        'dlgAnnualRaintotal
+        'dlgEndRain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(431, 262)
+        Me.ClientSize = New System.Drawing.Size(431, 281)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgAnnualRaintotal"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Annual Rain total"
+        Me.Name = "dlgEndRain"
+        Me.Tag = "End_Rain"
+        Me.Text = "dlgEndRain"
         Me.ResumeLayout(False)
 
     End Sub

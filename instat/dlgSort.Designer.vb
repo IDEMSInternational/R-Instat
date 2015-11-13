@@ -22,27 +22,20 @@ Partial Class dlgSort
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.UcrDataSelection1 = New instat.ucrDataSelection()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.rdoDescending = New System.Windows.Forms.RadioButton()
         Me.rdoAscending = New System.Windows.Forms.RadioButton()
+        Me.UcrDataSelection1 = New instat.ucrDataSelection()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'UcrDataSelection1
+        'ucrBase
         '
-        Me.UcrDataSelection1.Location = New System.Drawing.Point(1, 1)
-        Me.UcrDataSelection1.Name = "UcrDataSelection1"
-        Me.UcrDataSelection1.Size = New System.Drawing.Size(278, 122)
-        Me.UcrDataSelection1.TabIndex = 1
-        '
-        'UcrButtons1
-        '
-        Me.UcrButtons1.Location = New System.Drawing.Point(1, 129)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(402, 35)
-        Me.UcrButtons1.TabIndex = 0
+        Me.ucrBase.Location = New System.Drawing.Point(1, 129)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(402, 35)
+        Me.ucrBase.TabIndex = 0
         '
         'GroupBox1
         '
@@ -79,6 +72,13 @@ Partial Class dlgSort
         Me.rdoAscending.Text = "Ascending"
         Me.rdoAscending.UseVisualStyleBackColor = True
         '
+        'UcrDataSelection1
+        '
+        Me.UcrDataSelection1.Location = New System.Drawing.Point(1, 1)
+        Me.UcrDataSelection1.Name = "UcrDataSelection1"
+        Me.UcrDataSelection1.Size = New System.Drawing.Size(278, 122)
+        Me.UcrDataSelection1.TabIndex = 1
+        '
         'dlgSort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -86,11 +86,13 @@ Partial Class dlgSort
         Me.ClientSize = New System.Drawing.Size(408, 162)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.UcrDataSelection1)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSort"
         Me.ShowIcon = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Sort"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -98,9 +100,9 @@ Partial Class dlgSort
 
     End Sub
 
-    Friend WithEvents UcrButtons1 As ucrButtons
-    Friend WithEvents UcrDataSelection1 As ucrDataSelection
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents rdoDescending As RadioButton
     Friend WithEvents rdoAscending As RadioButton
+    Friend WithEvents UcrDataSelection1 As ucrDataSelection
 End Class
