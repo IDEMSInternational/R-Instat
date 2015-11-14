@@ -438,13 +438,4 @@
   <data name="To_Script" xml:space="preserve">
     <value>Au Script</value>
   </data>
-  <data name="Ascending" xml:space="preserve">
-    <value>Croissant</value>
-  </data>
-  <data name="Descending" xml:space="preserve">
-    <value>Décroissant</value>
-  </data>
-  <data name="Anova_One_Way" xml:space="preserve">
-    <value>ANOVA One Way</value>
-  </data>
 </root>

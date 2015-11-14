@@ -242,7 +242,7 @@ Partial Class frmMain
         Me.ManipulateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransformToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RecodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SortToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataSort = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageManipulateRowStat = New System.Windows.Forms.ToolStripMenuItem()
         Me.InteractionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IndicatorVariablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -1812,7 +1812,7 @@ Partial Class frmMain
         '
         'ManipulateToolStripMenuItem
         '
-        Me.ManipulateToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TransformToolStripMenuItem, Me.RecodeToolStripMenuItem, Me.SortToolStripMenuItem, Me.mnuManageManipulateRowStat, Me.InteractionsToolStripMenuItem, Me.IndicatorVariablesToolStripMenuItem, Me.PolynomialsToolStripMenuItem})
+        Me.ManipulateToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TransformToolStripMenuItem, Me.RecodeToolStripMenuItem, Me.mnuManageDataSort, Me.mnuManageManipulateRowStat, Me.InteractionsToolStripMenuItem, Me.IndicatorVariablesToolStripMenuItem, Me.PolynomialsToolStripMenuItem})
         Me.ManipulateToolStripMenuItem.Name = "ManipulateToolStripMenuItem"
         Me.ManipulateToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.ManipulateToolStripMenuItem.Tag = "Manipulate"
@@ -1832,12 +1832,12 @@ Partial Class frmMain
         Me.RecodeToolStripMenuItem.Tag = "Recode"
         Me.RecodeToolStripMenuItem.Text = "Recode..."
         '
-        'SortToolStripMenuItem
+        'mnuManageDataSort
         '
-        Me.SortToolStripMenuItem.Name = "SortToolStripMenuItem"
-        Me.SortToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.SortToolStripMenuItem.Tag = "Sort"
-        Me.SortToolStripMenuItem.Text = "Sort..."
+        Me.mnuManageDataSort.Name = "mnuManageDataSort"
+        Me.mnuManageDataSort.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageDataSort.Tag = "Sort"
+        Me.mnuManageDataSort.Text = "Sort"
         '
         'mnuManageManipulateRowStat
         '
@@ -2519,7 +2519,7 @@ Partial Class frmMain
     Friend WithEvents ManipulateToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TransformToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RecodeToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuManageDataSort As ToolStripMenuItem
     Friend WithEvents mnuManageManipulateRowStat As ToolStripMenuItem
     Friend WithEvents InteractionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents IndicatorVariablesToolStripMenuItem As ToolStripMenuItem

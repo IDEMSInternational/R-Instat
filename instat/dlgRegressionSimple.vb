@@ -20,7 +20,7 @@ Public Class dlgRegressionSimple
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
         ucrBase.clsRsyntax.SetFunction("summary(lm")
         ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.clsRsyntax.iFunctionType = "Stats"
+        ucrBase.clsRsyntax.iFunctionType = 1
         ucrReceiverSingleA.Selector = ucrAddRemove
         ucrReceiverSingleA.SetMeAsReceiver()
         grpLackFit.Enabled = False

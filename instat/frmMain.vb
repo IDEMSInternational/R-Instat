@@ -414,4 +414,8 @@ Public Class frmMain
     Private Sub mnuStatsRegressionSimple_Click(sender As Object, e As EventArgs) Handles mnuStatsRegressionSimple.Click
         dlgRegressionSimple.ShowDialog()
     End Sub
+
+    Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
+        dlgSort.ShowDialog()
+    End Sub
 End Class
