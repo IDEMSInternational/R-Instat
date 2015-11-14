@@ -46,6 +46,7 @@ Public Class RInterface
 
     Public Sub LoadData()
         'Preparing the cleaning process
+        'removed the open file dialog
     End Sub
 
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0)
