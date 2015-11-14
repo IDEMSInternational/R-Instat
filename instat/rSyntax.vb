@@ -17,7 +17,7 @@
 
 Public Class RSyntax
     Dim strFunction As String
-    Public iFunctionType As String = "Statistics"
+    Public iFunctionType As Integer = 0
     Public iCallType As Integer = 0
     Dim strParameter(1, 0) As String
     Public strScript As String
@@ -79,4 +79,15 @@ Public Class RSyntax
         Return strScript
     End Function
 
+    Public Function orderScript() As String
+        strScript = strFunction & "("
+        For i = 0 To strParameter.GetUpperBound(1)
+            If i > 0 Then
+                strScript = strScript & ","
+            End If
+            strScript = strScript & strParameter(1, i) & "=" & strParameter(0, i)
+        Next
+        strScript = strScript & ")"
+        Return strScript
+    End Function
 End Class
