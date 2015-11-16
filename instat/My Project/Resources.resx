@@ -553,4 +553,19 @@
   <data name="Anova_One_Way" xml:space="preserve">
     <value>Anova One Way</value>
   </data>
+  <data name="Earilest_Day" xml:space="preserve">
+    <value>Earilest Day</value>
+  </data>
+  <data name="End_of_Rain" xml:space="preserve">
+    <value>End of Rain</value>
+  </data>
+  <data name="End_of_Rains" xml:space="preserve">
+    <value>End of Rains</value>
+  </data>
+  <data name="Evaporation" xml:space="preserve">
+    <value>Evaporation</value>
+  </data>
+  <data name="Maximum_Capacity" xml:space="preserve">
+    <value>Maximum Capacity</value>
+  </data>
 </root>
