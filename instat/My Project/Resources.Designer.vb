@@ -984,6 +984,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Required Time Format.
+        '''</summary>
+        Friend ReadOnly Property Required_Time_Format() As String
+            Get
+                Return ResourceManager.GetString("Required_Time_Format", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Reset.
         '''</summary>
         Friend ReadOnly Property Reset() As String
@@ -1259,6 +1268,15 @@ Namespace My.Resources
         Friend ReadOnly Property Threashold() As String
             Get
                 Return ResourceManager.GetString("Threashold", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Time Period.
+        '''</summary>
+        Friend ReadOnly Property Time_Period() As String
+            Get
+                Return ResourceManager.GetString("Time_Period", resourceCulture)
             End Get
         End Property
         
