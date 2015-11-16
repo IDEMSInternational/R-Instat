@@ -72,7 +72,9 @@ Public Class dlgProbabilityPlot
 
     End Sub
 
+    Private Sub UcrReceiverSingle1_Load(sender As Object, e As EventArgs) Handles UcrReceiverSingle1.Load
 
+    End Sub
 End Class
 
 

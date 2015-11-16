@@ -26,13 +26,13 @@ Partial Class dlgRowStats
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
         Me.grpStatistcsRequired = New System.Windows.Forms.GroupBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
         Me.CheckBox6 = New System.Windows.Forms.CheckBox()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.chkCount = New System.Windows.Forms.CheckBox()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpStatistcsRequired.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -68,7 +68,7 @@ Partial Class dlgRowStats
         Me.grpStatistcsRequired.Controls.Add(Me.CheckBox4)
         Me.grpStatistcsRequired.Controls.Add(Me.CheckBox3)
         Me.grpStatistcsRequired.Controls.Add(Me.CheckBox2)
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox1)
+        Me.grpStatistcsRequired.Controls.Add(Me.chkCount)
         Me.grpStatistcsRequired.Location = New System.Drawing.Point(283, 13)
         Me.grpStatistcsRequired.Name = "grpStatistcsRequired"
         Me.grpStatistcsRequired.Size = New System.Drawing.Size(110, 155)
@@ -76,56 +76,6 @@ Partial Class dlgRowStats
         Me.grpStatistcsRequired.TabStop = False
         Me.grpStatistcsRequired.Tag = "Statistcs_Required"
         Me.grpStatistcsRequired.Text = "StatistcsRequired"
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(7, 20)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(57, 17)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "Count "
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(7, 43)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(53, 17)
-        Me.CheckBox2.TabIndex = 0
-        Me.CheckBox2.Text = "Mean"
-        Me.CheckBox2.UseVisualStyleBackColor = True
-        '
-        'CheckBox3
-        '
-        Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Location = New System.Drawing.Point(7, 66)
-        Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(67, 17)
-        Me.CheckBox3.TabIndex = 0
-        Me.CheckBox3.Text = "Minimum"
-        Me.CheckBox3.UseVisualStyleBackColor = True
-        '
-        'CheckBox4
-        '
-        Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Location = New System.Drawing.Point(7, 89)
-        Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(73, 17)
-        Me.CheckBox4.TabIndex = 0
-        Me.CheckBox4.Text = "Maximum "
-        Me.CheckBox4.UseVisualStyleBackColor = True
-        '
-        'CheckBox5
-        '
-        Me.CheckBox5.AutoSize = True
-        Me.CheckBox5.Location = New System.Drawing.Point(7, 112)
-        Me.CheckBox5.Name = "CheckBox5"
-        Me.CheckBox5.Size = New System.Drawing.Size(62, 17)
-        Me.CheckBox5.TabIndex = 0
-        Me.CheckBox5.Text = "St. Dev"
-        Me.CheckBox5.UseVisualStyleBackColor = True
         '
         'CheckBox6
         '
@@ -137,19 +87,70 @@ Partial Class dlgRowStats
         Me.CheckBox6.Text = "Sum"
         Me.CheckBox6.UseVisualStyleBackColor = True
         '
-        'UcrButtons1
+        'CheckBox5
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(3, 174)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(410, 32)
-        Me.UcrButtons1.TabIndex = 4
+        Me.CheckBox5.AutoSize = True
+        Me.CheckBox5.Location = New System.Drawing.Point(7, 112)
+        Me.CheckBox5.Name = "CheckBox5"
+        Me.CheckBox5.Size = New System.Drawing.Size(62, 17)
+        Me.CheckBox5.TabIndex = 0
+        Me.CheckBox5.Text = "St. Dev"
+        Me.CheckBox5.UseVisualStyleBackColor = True
+        '
+        'CheckBox4
+        '
+        Me.CheckBox4.AutoSize = True
+        Me.CheckBox4.Location = New System.Drawing.Point(7, 89)
+        Me.CheckBox4.Name = "CheckBox4"
+        Me.CheckBox4.Size = New System.Drawing.Size(73, 17)
+        Me.CheckBox4.TabIndex = 0
+        Me.CheckBox4.Text = "Maximum "
+        Me.CheckBox4.UseVisualStyleBackColor = True
+        '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Location = New System.Drawing.Point(7, 66)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(67, 17)
+        Me.CheckBox3.TabIndex = 0
+        Me.CheckBox3.Text = "Minimum"
+        Me.CheckBox3.UseVisualStyleBackColor = True
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(7, 43)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(53, 17)
+        Me.CheckBox2.TabIndex = 0
+        Me.CheckBox2.Text = "Mean"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'chkCount
+        '
+        Me.chkCount.AutoSize = True
+        Me.chkCount.Location = New System.Drawing.Point(7, 20)
+        Me.chkCount.Name = "chkCount"
+        Me.chkCount.Size = New System.Drawing.Size(57, 17)
+        Me.chkCount.TabIndex = 0
+        Me.chkCount.Tag = "Count"
+        Me.chkCount.Text = "Count "
+        Me.chkCount.UseVisualStyleBackColor = True
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(3, 168)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.TabIndex = 4
         '
         'dlgRowStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(409, 212)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpStatistcsRequired)
         Me.Controls.Add(Me.ucrReceiverMultiple)
         Me.Controls.Add(Me.lblSelectedVariable)
@@ -176,6 +177,6 @@ Partial Class dlgRowStats
     Friend WithEvents CheckBox4 As CheckBox
     Friend WithEvents CheckBox3 As CheckBox
     Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents chkCount As CheckBox
+    Friend WithEvents ucrBase As ucrButtons
 End Class
