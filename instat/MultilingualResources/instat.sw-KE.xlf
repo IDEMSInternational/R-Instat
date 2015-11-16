@@ -651,6 +651,22 @@
           <source>Anova One Way</source>
           <target state="new">Anova One Way</target>
         </trans-unit>
+        <trans-unit id="Month_Format" translate="yes" xml:space="preserve">
+          <source>Month Format</source>
+          <target state="new">Month Format</target>
+        </trans-unit>
+        <trans-unit id="Option" translate="yes" xml:space="preserve">
+          <source>Option</source>
+          <target state="new">Option</target>
+        </trans-unit>
+        <trans-unit id="Period" translate="yes" xml:space="preserve">
+          <source>Period</source>
+          <target state="new">Period</target>
+        </trans-unit>
+        <trans-unit id="Required_Format" translate="yes" xml:space="preserve">
+          <source>Required Format</source>
+          <target state="new">Required Format</target>
+        </trans-unit>
       </group>
     </body>
   </file>
