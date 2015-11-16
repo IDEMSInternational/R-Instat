@@ -641,15 +641,39 @@
         </trans-unit>
         <trans-unit id="Ascending" translate="yes" xml:space="preserve">
           <source>Ascending</source>
-          <target state="new">Ascending</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kuchaguza A-Z</target>
         </trans-unit>
         <trans-unit id="Descending" translate="yes" xml:space="preserve">
           <source>Descending</source>
-          <target state="new">Descending</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kuchangua Z-A</target>
         </trans-unit>
         <trans-unit id="Anova_One_Way" translate="yes" xml:space="preserve">
           <source>Anova One Way</source>
           <target state="new">Anova One Way</target>
+        </trans-unit>
+        <trans-unit id="Domain" translate="yes" xml:space="preserve">
+          <source>Domain</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kikoa</target>
+        </trans-unit>
+        <trans-unit id="Max_Lat" translate="yes" xml:space="preserve">
+          <source>Max Lat</source>
+          <target state="new">Max Lat</target>
+        </trans-unit>
+        <trans-unit id="Max_Lon" translate="yes" xml:space="preserve">
+          <source>Max Lon</source>
+          <target state="new">Max Lon</target>
+        </trans-unit>
+        <trans-unit id="Min_Lat" translate="yes" xml:space="preserve">
+          <source>Min Lat</source>
+          <target state="new">Min Lat</target>
+        </trans-unit>
+        <trans-unit id="Min_Lon" translate="yes" xml:space="preserve">
+          <source>Min Lon</source>
+          <target state="new">Min Lon</target>
+        </trans-unit>
+        <trans-unit id="West_East" translate="yes" xml:space="preserve">
+          <source>West-East</source>
+          <target state="new">West-East</target>
         </trans-unit>
       </group>
     </body>
@@ -1547,7 +1571,7 @@
         </trans-unit>
         <trans-unit id="ComboBox1.Items" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion"></target>
         </trans-unit>
         <trans-unit id="ComboBox1.Items1" translate="yes" xml:space="preserve">
           <source>99.99</source>
@@ -1708,7 +1732,7 @@
         </trans-unit>
         <trans-unit id="tbPlot.Text" translate="yes" xml:space="preserve">
           <source>Plot</source>
-          <target state="new">Plot</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ploti</target>
         </trans-unit>
         <trans-unit id="tbSave.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
           <source>4, 22</source>
@@ -1725,7 +1749,7 @@
         </trans-unit>
         <trans-unit id="tbSave.Text" translate="yes" xml:space="preserve">
           <source>Save</source>
-          <target state="new">Save</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hifadhi</target>
         </trans-unit>
         <trans-unit id="tbctrlSimple.Dock" translate="yes" xml:space="preserve" extype="System.Windows.Forms.DockStyle, System.Windows.Forms">
           <source>Top</source>

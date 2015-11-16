@@ -11,5 +11,15 @@ Public Class dlgCPTtoTabularData
 
     End Sub
 
+    Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles nudMinLat.ValueChanged
 
+    End Sub
+
+    Private Sub NumericUpDown4_ValueChanged(sender As Object, e As EventArgs) Handles nudMaxLat.ValueChanged
+
+    End Sub
+
+    Private Sub NumericUpDown3_ValueChanged(sender As Object, e As EventArgs) Handles nudMinLon.ValueChanged
+
+    End Sub
 End Class
