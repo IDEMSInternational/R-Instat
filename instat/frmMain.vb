@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports RDotNet
+Imports System.IO
 Imports System.Globalization
 Imports System.Threading
 Imports instat.Translations
@@ -21,6 +22,7 @@ Imports instat.Translations
 Public Class frmMain
 
     Public clsRInterface As New RInterface
+    Public clsButton As New ucrButtons
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
@@ -33,29 +35,23 @@ Public Class frmMain
         frmEditor.Dock = DockStyle.Fill
         frmCommand.Show()
         frmEditor.Show()
+        'Setting the
         clsRInterface.SetLog(frmLog.txtLog)
         clsRInterface.SetOutput(frmCommand.txtCommand)
+        clsRInterface.FillDataObjectData(frmEditor.gridColumns)
+        clsRInterface.FillDataObjectMetadata(frmMetaData.gridMetaData)
+        clsRInterface.FillDataObjectVariables(frmVariables.gridVariables)
         tstatus.Text = frmEditor.gridColumns.CurrentWorksheet.Name
 
     End Sub
 
     Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
-        'clsRInterface.LoadData()
-        'Dim dataset As DataFrame = clsRInterface.GetData("data")
-        'frmEditor.grid.CurrentWorksheet.Rows = dataset.RowCount
-        'frmEditor.grid.CurrentWorksheet.Columns = dataset.ColumnCount
-        'For i As Integer = 0 To dataset.RowCount - 1
-        '    For k As Integer = 0 To dataset.ColumnCount - 1
-        '        frmEditor.grid.CurrentWorksheet.ColumnHeaders(k).Text = dataset.ColumnNames(k)
-        '        frmEditor.grid.CurrentWorksheet(row:=i, col:=k) = dataset(i, k)
-        '    Next
-        'Next
-        clsRInterface.LoadData()
-        clsRInterface.InstatObject()
-        Dim holder As Tuple(Of DataFrame, DataFrame, DataFrame) = clsRInterface.getInstatObject("data")
-        FillSheet(holder.Item1)
-        FillMetaData(holder.Item2)
-        FillVariables(holder.Item3)
+        Dim pair As KeyValuePair(Of String, String) = openDialog()
+        clsButton.clsRsyntax.SetFunction("read.csv")
+        clsButton.clsRsyntax.AddParameter("file", pair.Value)
+        clsRInterface.LoadData(pair.Key, clsButton.clsRsyntax.GetScript())
+        clsRInterface.FillDataObjectData(frmEditor.gridColumns)
+
     End Sub
 
     Public Sub FillData(strDataName)
@@ -228,47 +224,6 @@ Public Class frmMain
     Private Sub mnuClimateMethodsGraphicsRainCount_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsRainCount.Click
         dlgYearRaincount.ShowDialog()
     End Sub
-    Public Sub FillSheet(df)
-        frmEditor.gridColumns.CurrentWorksheet.Rows = df.RowCount
-        frmEditor.gridColumns.CurrentWorksheet.Columns = df.ColumnCount
-        For i As Integer = 0 To df.RowCount - 1
-            For k As Integer = 0 To df.ColumnCount - 1
-                frmEditor.gridColumns.CurrentWorksheet.ColumnHeaders(k).Text = df.ColumnNames(k)
-                frmEditor.gridColumns.CurrentWorksheet(row:=i, col:=k) = df(i, k)
-            Next
-        Next
-    End Sub
-    Public Sub FillMetaData(df)
-        'Dim temp As RDotNet.SymbolicExpression
-        'Dim temp_str As String
-        'For i As Integer = 0 To df.RowCount - 1
-        '    For k As Integer = 0 To df.ColumnCount - 1
-        '        temp_str = df(i, k)
-        '        frmMetaData.txtMetadata.Text = temp_str
-        '        'frmMetaData.txtMetadata.Text = String.Format("{0}", df(i, k))
-        '    Next
-        'Next
-
-        frmMetaData.gridMetaData.CurrentWorksheet.Rows = df.RowCount
-        frmMetaData.gridMetaData.CurrentWorksheet.Columns = df.ColumnCount
-        For i As Integer = 0 To df.RowCount - 1
-            For k As Integer = 0 To df.ColumnCount - 1
-                frmMetaData.gridMetaData.CurrentWorksheet.ColumnHeaders(k).Text = df.ColumnNames(k)
-                frmMetaData.gridMetaData.CurrentWorksheet(row:=i, col:=k) = df(i, k)
-            Next
-        Next
-    End Sub
-
-    Public Sub FillVariables(df)
-        frmVariables.gridVariables.CurrentWorksheet.Rows = df.RowCount
-        frmVariables.gridVariables.CurrentWorksheet.Columns = df.ColumnCount
-        For i As Integer = 0 To df.RowCount - 1
-            For k As Integer = 0 To df.ColumnCount - 1
-                frmVariables.gridVariables.CurrentWorksheet.ColumnHeaders(k).Text = df.ColumnNames(k)
-                frmVariables.gridVariables.CurrentWorksheet(row:=i, col:=k) = df(i, k)
-            Next
-        Next
-    End Sub
 
     Private Sub mnuWindowMetadata_Click(sender As Object, e As EventArgs)
         frmMetaData.ShowDialog()
@@ -313,7 +268,7 @@ Public Class frmMain
     Private Sub mnuClmateMethodThreeSummaries_Click(sender As Object, e As EventArgs) Handles mnuClmateMethodThreeSummaries.Click
         dlgThreeSummaries.ShowDialog()
     End Sub
-    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
     Private Sub StartOfRainToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartOfRainToolStripMenuItem.Click
         dlgAddStartRain.ShowDialog()
     End Sub
@@ -418,4 +373,20 @@ Public Class frmMain
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
         dlgSort.ShowDialog()
     End Sub
+    Public Function openDialog() As KeyValuePair(Of String, String)
+        Dim dlgOpen As New OpenFileDialog
+        Dim strFilePath, strFileName As String
+        dlgOpen.Filter = "Comma Separated (*.csv)|*.csv"
+        dlgOpen.Title = "Import a .csv file into"
+        If dlgOpen.ShowDialog() = DialogResult.OK Then
+            'checks if the file name is not blank'
+            If dlgOpen.FileName <> "" Then
+                strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
+                strFilePath = Replace(dlgOpen.FileName, "\", "/")
+                Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
+            End If
+        Else
+            MsgBox("No File was selected!", vbInformation, "Message From Instat")
+        End If
+    End Function
 End Class
