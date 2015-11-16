@@ -553,4 +553,22 @@
   <data name="Anova_One_Way" xml:space="preserve">
     <value>Anova One Way</value>
   </data>
+  <data name="Domain" xml:space="preserve">
+    <value>Domain</value>
+  </data>
+  <data name="Max_Lat" xml:space="preserve">
+    <value>Max Lat</value>
+  </data>
+  <data name="Max_Lon" xml:space="preserve">
+    <value>Max Lon</value>
+  </data>
+  <data name="Min_Lat" xml:space="preserve">
+    <value>Min Lat</value>
+  </data>
+  <data name="Min_Lon" xml:space="preserve">
+    <value>Min Lon</value>
+  </data>
+  <data name="West_East" xml:space="preserve">
+    <value>West-East</value>
+  </data>
 </root>

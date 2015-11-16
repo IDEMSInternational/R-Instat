@@ -396,6 +396,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Domain.
+        '''</summary>
+        Friend ReadOnly Property Domain() As String
+            Get
+                Return ResourceManager.GetString("Domain", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Dotplot.
         '''</summary>
         Friend ReadOnly Property Dotplot() As String
@@ -689,6 +698,42 @@ Namespace My.Resources
         Friend ReadOnly Property Manipulate() As String
             Get
                 Return ResourceManager.GetString("Manipulate", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Max Lat.
+        '''</summary>
+        Friend ReadOnly Property Max_Lat() As String
+            Get
+                Return ResourceManager.GetString("Max_Lat", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Max Lon.
+        '''</summary>
+        Friend ReadOnly Property Max_Lon() As String
+            Get
+                Return ResourceManager.GetString("Max_Lon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Min Lat.
+        '''</summary>
+        Friend ReadOnly Property Min_Lat() As String
+            Get
+                Return ResourceManager.GetString("Min_Lat", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Min Lon.
+        '''</summary>
+        Friend ReadOnly Property Min_Lon() As String
+            Get
+                Return ResourceManager.GetString("Min_Lon", resourceCulture)
             End Get
         End Property
         
@@ -1340,6 +1385,15 @@ Namespace My.Resources
         Friend ReadOnly Property Water_Balance() As String
             Get
                 Return ResourceManager.GetString("Water_Balance", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to West-East.
+        '''</summary>
+        Friend ReadOnly Property West_East() As String
+            Get
+                Return ResourceManager.GetString("West_East", resourceCulture)
             End Get
         End Property
         
