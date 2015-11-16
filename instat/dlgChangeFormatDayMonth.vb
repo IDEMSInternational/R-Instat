@@ -9,4 +9,8 @@ Public Class dlgChangeFormatDayMonth
     Private Sub dlgChangeFormatDayMonth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+    Private Sub lblRequiredFormat_Click(sender As Object, e As EventArgs) Handles lblRequiredFormat.Click
+
+    End Sub
 End Class

@@ -553,4 +553,16 @@
   <data name="Anova_One_Way" xml:space="preserve">
     <value>Anova One Way</value>
   </data>
+  <data name="Month_Format" xml:space="preserve">
+    <value>Month Format</value>
+  </data>
+  <data name="Option" xml:space="preserve">
+    <value>Option</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="Required_Format" xml:space="preserve">
+    <value>Required Format</value>
+  </data>
 </root>

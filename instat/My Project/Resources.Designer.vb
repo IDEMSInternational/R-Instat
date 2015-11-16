@@ -61,6 +61,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Option.
+        '''</summary>
+        Friend ReadOnly Property _Option() As String
+            Get
+                Return ResourceManager.GetString("Option", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Add.
         '''</summary>
         Friend ReadOnly Property Add() As String
@@ -693,6 +702,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Month Format.
+        '''</summary>
+        Friend ReadOnly Property Month_Format() As String
+            Get
+                Return ResourceManager.GetString("Month_Format", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to New Worksheet... CTRL+N.
         '''</summary>
         Friend ReadOnly Property New_Worksheet() As String
@@ -858,6 +876,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Period.
+        '''</summary>
+        Friend ReadOnly Property Period() As String
+            Get
+                Return ResourceManager.GetString("Period", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Plot.
         '''</summary>
         Friend ReadOnly Property Plot() As String
@@ -980,6 +1007,15 @@ Namespace My.Resources
         Friend ReadOnly Property Replace1() As String
             Get
                 Return ResourceManager.GetString("Replace1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Required Format.
+        '''</summary>
+        Friend ReadOnly Property Required_Format() As String
+            Get
+                Return ResourceManager.GetString("Required_Format", resourceCulture)
             End Get
         End Property
         
