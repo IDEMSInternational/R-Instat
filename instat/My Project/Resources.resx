@@ -553,4 +553,10 @@
   <data name="Anova_One_Way" xml:space="preserve">
     <value>Anova One Way</value>
   </data>
+  <data name="Required_Time_Format" xml:space="preserve">
+    <value>Required Time Format</value>
+  </data>
+  <data name="Time_Period" xml:space="preserve">
+    <value>Time Period</value>
+  </data>
 </root>

@@ -904,6 +904,14 @@
           <source>Anova One Way</source>
           <target state="new">Anova One Way</target>
         </trans-unit>
+        <trans-unit id="Required_Time_Format" translate="yes" xml:space="preserve">
+          <source>Required Time Format</source>
+          <target state="new">Required Time Format</target>
+        </trans-unit>
+        <trans-unit id="Time_Period" translate="yes" xml:space="preserve">
+          <source>Time Period</source>
+          <target state="new">Time Period</target>
+        </trans-unit>
       </group>
     </body>
   </file>
