@@ -418,4 +418,8 @@ Public Class frmMain
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
         dlgSort.ShowDialog()
     End Sub
+
+    Private Sub OneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneSampleToolStripMenuItem.Click
+        dlgOneSample.ShowDialog()
+    End Sub
 End Class
