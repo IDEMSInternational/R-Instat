@@ -9,7 +9,7 @@ Public Class ucrSelector
         Dim i As Integer
 
         translateEach(Controls)
-        cvdataset = frmMain.clsRInterface.GetVariables("colnames(data)")
+        cvdataset = frmMain.clsRInterface.GetVariables("colnames(data_temp)")
         adataset = cvdataset.ToArray
         For i = 0 To adataset.GetLength(0) - 1
             If Not lstAvailableVariable.Items.Contains(adataset(i)) Then
