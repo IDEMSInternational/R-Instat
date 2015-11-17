@@ -432,6 +432,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Earilest Day.
+        '''</summary>
+        Friend ReadOnly Property Earilest_Day() As String
+            Get
+                Return ResourceManager.GetString("Earilest_Day", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Earliest day.
         '''</summary>
         Friend ReadOnly Property Earliest_day() As String
@@ -450,6 +459,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to End of Rain.
+        '''</summary>
+        Friend ReadOnly Property End_of_Rain() As String
+            Get
+                Return ResourceManager.GetString("End_of_Rain", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to End of Rains.
+        '''</summary>
+        Friend ReadOnly Property End_of_Rains() As String
+            Get
+                Return ResourceManager.GetString("End_of_Rains", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to English.
         '''</summary>
         Friend ReadOnly Property English() As String
@@ -464,6 +491,15 @@ Namespace My.Resources
         Friend ReadOnly Property Enter() As String
             Get
                 Return ResourceManager.GetString("Enter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Evaporation.
+        '''</summary>
+        Friend ReadOnly Property Evaporation() As String
+            Get
+                Return ResourceManager.GetString("Evaporation", resourceCulture)
             End Get
         End Property
         
@@ -689,6 +725,15 @@ Namespace My.Resources
         Friend ReadOnly Property Manipulate() As String
             Get
                 Return ResourceManager.GetString("Manipulate", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Maximum Capacity.
+        '''</summary>
+        Friend ReadOnly Property Maximum_Capacity() As String
+            Get
+                Return ResourceManager.GetString("Maximum_Capacity", resourceCulture)
             End Get
         End Property
         
