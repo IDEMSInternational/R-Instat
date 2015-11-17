@@ -22,7 +22,6 @@ Partial Class dlgRowStats
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpStatistcsRequired = New System.Windows.Forms.GroupBox()
         Me.CheckBox6 = New System.Windows.Forms.CheckBox()
         Me.CheckBox5 = New System.Windows.Forms.CheckBox()
@@ -30,18 +29,12 @@ Partial Class dlgRowStats
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.chkCount = New System.Windows.Forms.CheckBox()
-        Me.UcrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
+        Me.UcrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpStatistcsRequired.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(1, 173)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
-        Me.ucrBase.TabIndex = 6
         '
         'grpStatistcsRequired
         '
@@ -120,13 +113,6 @@ Partial Class dlgRowStats
         Me.chkCount.Text = "Count "
         Me.chkCount.UseVisualStyleBackColor = True
         '
-        'UcrSelectorAddRemove1
-        '
-        Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(1, 9)
-        Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
-        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(182, 118)
-        Me.UcrSelectorAddRemove1.TabIndex = 7
-        '
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
@@ -142,6 +128,20 @@ Partial Class dlgRowStats
         Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
         Me.UcrReceiverMultiple1.Size = New System.Drawing.Size(91, 142)
         Me.UcrReceiverMultiple1.TabIndex = 13
+        '
+        'UcrSelectorAddRemove1
+        '
+        Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(1, 9)
+        Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
+        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(182, 118)
+        Me.UcrSelectorAddRemove1.TabIndex = 7
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(1, 173)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.TabIndex = 6
         '
         'dlgRowStats
         '
