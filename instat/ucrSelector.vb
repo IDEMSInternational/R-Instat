@@ -4,18 +4,18 @@ Public Class ucrSelector
     Public CurrentReceiver As ucrReceiver
 
     Private Sub ucrdataselection_load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim cvdataset As CharacterVector
-        Dim adataset As Array
-        Dim i As Integer
+        'Dim cvdataset As CharacterVector
+        'Dim adataset As Array
+        'Dim i As Integer
 
-        translateEach(Controls)
-        cvdataset = frmMain.clsRInterface.GetVariables("colnames(data)")
-        adataset = cvdataset.ToArray
-        For i = 0 To adataset.GetLength(0) - 1
-            If Not lstAvailableVariable.Items.Contains(adataset(i)) Then
-                lstAvailableVariable.Items.Add(adataset(i))
-            End If
-        Next
+        'translateEach(Controls)
+        'cvdataset = frmMain.clsRInterface.GetVariables("colnames(data)")
+        'adataset = cvdataset.ToArray
+        'For i = 0 To adataset.GetLength(0) - 1
+        '    If Not lstAvailableVariable.Items.Contains(adataset(i)) Then
+        '        lstAvailableVariable.Items.Add(adataset(i))
+        '    End If
+        'Next
     End Sub
 
     Public Sub SetCurrentReciever(conReceiver As ucrReceiver)
@@ -38,5 +38,9 @@ Public Class ucrSelector
 
     Public Sub Remove()
         CurrentReceiver.RemoveSelected()
+    End Sub
+
+    Private Sub lstAvailableVariable_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstAvailableVariable.SelectedIndexChanged
+
     End Sub
 End Class
