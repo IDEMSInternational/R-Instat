@@ -39,14 +39,14 @@ Partial Class dlgRecode
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RangeStart, Me.RangeEnd, Me.NewValue})
-        Me.DataGridView1.Location = New System.Drawing.Point(273, 25)
+        Me.DataGridView1.Location = New System.Drawing.Point(264, 10)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(312, 157)
+        Me.DataGridView1.Size = New System.Drawing.Size(335, 157)
         Me.DataGridView1.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 196)
+        Me.ucrBase.Location = New System.Drawing.Point(92, 190)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 1
@@ -89,7 +89,7 @@ Partial Class dlgRecode
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(176, 12)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(169, 12)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
         Me.lblSelectedVariables.TabIndex = 17
@@ -113,7 +113,7 @@ Partial Class dlgRecode
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(600, 230)
+        Me.ClientSize = New System.Drawing.Size(606, 230)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.UcrReceiverMultiple1)
         Me.Controls.Add(Me.UcrSelectorAddRemove1)
