@@ -641,15 +641,51 @@
         </trans-unit>
         <trans-unit id="Ascending" translate="yes" xml:space="preserve">
           <source>Ascending</source>
-          <target state="new">Ascending</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kuchaguza A-Z</target>
         </trans-unit>
         <trans-unit id="Descending" translate="yes" xml:space="preserve">
           <source>Descending</source>
-          <target state="new">Descending</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kuchangua Z-A</target>
         </trans-unit>
         <trans-unit id="Anova_One_Way" translate="yes" xml:space="preserve">
           <source>Anova One Way</source>
           <target state="new">Anova One Way</target>
+        </trans-unit>
+        <trans-unit id="Day_Display" translate="yes" xml:space="preserve">
+          <source>Day Display</source>
+          <target state="new">Day Display</target>
+        </trans-unit>
+        <trans-unit id="Decimal_Places" translate="yes" xml:space="preserve">
+          <source>Decimal Places</source>
+          <target state="new">Decimal Places</target>
+        </trans-unit>
+        <trans-unit id="Month_Abbreviation" translate="yes" xml:space="preserve">
+          <source>Month Abbreviation</source>
+          <target state="new">Month Abbreviation</target>
+        </trans-unit>
+        <trans-unit id="Month_Summaries" translate="yes" xml:space="preserve">
+          <source>Month Summaries</source>
+          <target state="new">Month Summaries</target>
+        </trans-unit>
+        <trans-unit id="Print_Tables" translate="yes" xml:space="preserve">
+          <source>Print Tables</source>
+          <target state="new">Print Tables</target>
+        </trans-unit>
+        <trans-unit id="Remove_NA" translate="yes" xml:space="preserve">
+          <source>Remove NA</source>
+          <target state="new">Remove NA</target>
+        </trans-unit>
+        <trans-unit id="Summary_Names" translate="yes" xml:space="preserve">
+          <source>Summary Names</source>
+          <target state="new">Summary Names</target>
+        </trans-unit>
+        <trans-unit id="Threshold" translate="yes" xml:space="preserve">
+          <source>Threshold</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Kizingiti</target>
+        </trans-unit>
+        <trans-unit id="Variable" translate="yes" xml:space="preserve">
+          <source>Variable</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Tofauti</target>
         </trans-unit>
       </group>
     </body>
@@ -1547,7 +1583,7 @@
         </trans-unit>
         <trans-unit id="ComboBox1.Items" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion"></target>
         </trans-unit>
         <trans-unit id="ComboBox1.Items1" translate="yes" xml:space="preserve">
           <source>99.99</source>
@@ -1708,7 +1744,7 @@
         </trans-unit>
         <trans-unit id="tbPlot.Text" translate="yes" xml:space="preserve">
           <source>Plot</source>
-          <target state="new">Plot</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Ploti</target>
         </trans-unit>
         <trans-unit id="tbSave.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
           <source>4, 22</source>
@@ -1725,7 +1761,7 @@
         </trans-unit>
         <trans-unit id="tbSave.Text" translate="yes" xml:space="preserve">
           <source>Save</source>
-          <target state="new">Save</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Hifadhi</target>
         </trans-unit>
         <trans-unit id="tbctrlSimple.Dock" translate="yes" xml:space="preserve" extype="System.Windows.Forms.DockStyle, System.Windows.Forms">
           <source>Top</source>

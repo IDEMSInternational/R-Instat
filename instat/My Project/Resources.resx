@@ -553,4 +553,31 @@
   <data name="Anova_One_Way" xml:space="preserve">
     <value>Anova One Way</value>
   </data>
+  <data name="Day_Display" xml:space="preserve">
+    <value>Day Display</value>
+  </data>
+  <data name="Decimal_Places" xml:space="preserve">
+    <value>Decimal Places</value>
+  </data>
+  <data name="Month_Abbreviation" xml:space="preserve">
+    <value>Month Abbreviation</value>
+  </data>
+  <data name="Month_Summaries" xml:space="preserve">
+    <value>Month Summaries</value>
+  </data>
+  <data name="Print_Tables" xml:space="preserve">
+    <value>Print Tables</value>
+  </data>
+  <data name="Remove_NA" xml:space="preserve">
+    <value>Remove NA</value>
+  </data>
+  <data name="Summary_Names" xml:space="preserve">
+    <value>Summary Names</value>
+  </data>
+  <data name="Threshold" xml:space="preserve">
+    <value>Threshold</value>
+  </data>
+  <data name="Variable" xml:space="preserve">
+    <value>Variable</value>
+  </data>
 </root>

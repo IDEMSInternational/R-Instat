@@ -894,15 +894,51 @@
         </trans-unit>
         <trans-unit id="Ascending" translate="yes" xml:space="preserve">
           <source>Ascending</source>
-          <target state="new">Ascending</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Croissant</target>
         </trans-unit>
         <trans-unit id="Descending" translate="yes" xml:space="preserve">
           <source>Descending</source>
-          <target state="new">Descending</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Décroissant</target>
         </trans-unit>
         <trans-unit id="Anova_One_Way" translate="yes" xml:space="preserve">
           <source>Anova One Way</source>
-          <target state="new">Anova One Way</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">ANOVA One Way</target>
+        </trans-unit>
+        <trans-unit id="Day_Display" translate="yes" xml:space="preserve">
+          <source>Day Display</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Affichage de jour</target>
+        </trans-unit>
+        <trans-unit id="Decimal_Places" translate="yes" xml:space="preserve">
+          <source>Decimal Places</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Nombre de décimales </target>
+        </trans-unit>
+        <trans-unit id="Month_Abbreviation" translate="yes" xml:space="preserve">
+          <source>Month Abbreviation</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Abréviation du mois</target>
+        </trans-unit>
+        <trans-unit id="Month_Summaries" translate="yes" xml:space="preserve">
+          <source>Month Summaries</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Résumés du mois</target>
+        </trans-unit>
+        <trans-unit id="Print_Tables" translate="yes" xml:space="preserve">
+          <source>Print Tables</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Imprimer les Tables</target>
+        </trans-unit>
+        <trans-unit id="Remove_NA" translate="yes" xml:space="preserve">
+          <source>Remove NA</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Enlever NA</target>
+        </trans-unit>
+        <trans-unit id="Summary_Names" translate="yes" xml:space="preserve">
+          <source>Summary Names</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Noms de Sommaire</target>
+        </trans-unit>
+        <trans-unit id="Threshold" translate="yes" xml:space="preserve">
+          <source>Threshold</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Seuil</target>
+        </trans-unit>
+        <trans-unit id="Variable" translate="yes" xml:space="preserve">
+          <source>Variable</source>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Variable</target>
         </trans-unit>
       </group>
     </body>
@@ -1381,7 +1417,7 @@
         </trans-unit>
         <trans-unit id="$this.Text" translate="yes" xml:space="preserve">
           <source>Simple Regression</source>
-          <target state="new">Simple Regression</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Régression simple</target>
         </trans-unit>
         <trans-unit id="$this.Localizable" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata">
           <source>True</source>
@@ -1429,7 +1465,7 @@
         </trans-unit>
         <trans-unit id="Label1.Text" translate="yes" xml:space="preserve">
           <source>Degrees of freedom</source>
-          <target state="new">Degrees of freedom</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Degrés de liberté</target>
         </trans-unit>
         <trans-unit id="lblResidualMsg.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
           <source>True</source>
@@ -1449,7 +1485,7 @@
         </trans-unit>
         <trans-unit id="lblResidualMsg.Text" translate="yes" xml:space="preserve">
           <source>Residual Message</source>
-          <target state="new">Residual Message</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Message résiduel</target>
         </trans-unit>
         <trans-unit id="grpLackFit.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
           <source>111, 179</source>
@@ -1482,7 +1518,7 @@
         </trans-unit>
         <trans-unit id="chkLackFit.Text" translate="yes" xml:space="preserve">
           <source>Lack of fit</source>
-          <target state="new">Lack of fit</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Manque d'ajustement</target>
         </trans-unit>
         <trans-unit id="chkAnovaTable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
           <source>True</source>
@@ -1502,7 +1538,7 @@
         </trans-unit>
         <trans-unit id="chkAnovaTable.Text" translate="yes" xml:space="preserve">
           <source>Show Anova Table</source>
-          <target state="new">Show Anova Table</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Afficher la Table de l'Anova</target>
         </trans-unit>
         <trans-unit id="chkShowPlots.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
           <source>True</source>
@@ -1522,7 +1558,7 @@
         </trans-unit>
         <trans-unit id="chkShowPlots.Text" translate="yes" xml:space="preserve">
           <source>Show Plot</source>
-          <target state="new">Show Plot</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Voir la parcelle</target>
         </trans-unit>
         <trans-unit id="chkSiginificance.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
           <source>True</source>
@@ -1542,31 +1578,31 @@
         </trans-unit>
         <trans-unit id="chkSiginificance.Text" translate="yes" xml:space="preserve">
           <source>Significance Test</source>
-          <target state="new">Significance Test</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Test de signification</target>
         </trans-unit>
         <trans-unit id="ComboBox1.Items" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion"></target>
         </trans-unit>
         <trans-unit id="ComboBox1.Items1" translate="yes" xml:space="preserve">
           <source>99.99</source>
-          <target state="new">99.99</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">99.99</target>
         </trans-unit>
         <trans-unit id="ComboBox1.Items2" translate="yes" xml:space="preserve">
           <source>99</source>
-          <target state="new">99</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">99</target>
         </trans-unit>
         <trans-unit id="ComboBox1.Items3" translate="yes" xml:space="preserve">
           <source>95</source>
-          <target state="new">95</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">95</target>
         </trans-unit>
         <trans-unit id="ComboBox1.Items4" translate="yes" xml:space="preserve">
           <source>90</source>
-          <target state="new">90</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">90</target>
         </trans-unit>
         <trans-unit id="ComboBox1.Items5" translate="yes" xml:space="preserve">
           <source>80</source>
-          <target state="new">80</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">80</target>
         </trans-unit>
         <trans-unit id="ComboBox1.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
           <source>302, 103</source>
@@ -1598,7 +1634,7 @@
         </trans-unit>
         <trans-unit id="lblConfidence.Text" translate="yes" xml:space="preserve">
           <source>Confidence Limits</source>
-          <target state="new">Confidence Limits</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Limites de confiance</target>
         </trans-unit>
         <trans-unit id="lblExplanatoryVariable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
           <source>True</source>
@@ -1622,7 +1658,7 @@
         </trans-unit>
         <trans-unit id="lblExplanatoryVariable.Text" translate="yes" xml:space="preserve">
           <source>Explanatory Variable</source>
-          <target state="new">Explanatory Variable</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Variable explicative</target>
         </trans-unit>
         <trans-unit id="lblResponseVariable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
           <source>True</source>
@@ -1642,7 +1678,7 @@
         </trans-unit>
         <trans-unit id="lblResponseVariable.Text" translate="yes" xml:space="preserve">
           <source>Response Variable</source>
-          <target state="new">Response Variable</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Variable de réponse</target>
         </trans-unit>
         <trans-unit id="ucrReceiverSingleA.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
           <source>302, 24</source>
@@ -1686,7 +1722,7 @@
         </trans-unit>
         <trans-unit id="tbRegress.Text" translate="yes" xml:space="preserve">
           <source>Regress</source>
-          <target state="new">Regress</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Regress</target>
         </trans-unit>
         <trans-unit id="tbPlot.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
           <source>4, 22</source>
@@ -1707,7 +1743,7 @@
         </trans-unit>
         <trans-unit id="tbPlot.Text" translate="yes" xml:space="preserve">
           <source>Plot</source>
-          <target state="new">Plot</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Tracer</target>
         </trans-unit>
         <trans-unit id="tbSave.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
           <source>4, 22</source>
@@ -1724,7 +1760,7 @@
         </trans-unit>
         <trans-unit id="tbSave.Text" translate="yes" xml:space="preserve">
           <source>Save</source>
-          <target state="new">Save</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Enregistrer</target>
         </trans-unit>
         <trans-unit id="tbctrlSimple.Dock" translate="yes" xml:space="preserve" extype="System.Windows.Forms.DockStyle, System.Windows.Forms">
           <source>Top</source>
