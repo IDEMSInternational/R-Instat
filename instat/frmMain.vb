@@ -426,4 +426,8 @@ Public Class frmMain
     Private Sub NormalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NormalToolStripMenuItem.Click
 
     End Sub
+
+    Private Sub CorrelationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationToolStripMenuItem.Click
+        dlgCorrelations.ShowDialog()
+    End Sub
 End Class

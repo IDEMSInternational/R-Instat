@@ -507,6 +507,12 @@
     <Compile Include="dlgYearRaincount.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCorrelations.Designer.vb">
+      <DependentUpon>dlgCorrelations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCorrelations.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmCommand.Designer.vb">
       <DependentUpon>frmCommand.vb</DependentUpon>
     </Compile>
@@ -1120,6 +1126,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgYearRaincount.sw-KE.resx">
       <DependentUpon>dlgYearRaincount.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCorrelations.fr-FR.resx">
+      <DependentUpon>dlgCorrelations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCorrelations.resx">
+      <DependentUpon>dlgCorrelations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCorrelations.sw-KE.resx">
+      <DependentUpon>dlgCorrelations.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCommand.fr-FR.resx">
       <DependentUpon>frmCommand.vb</DependentUpon>

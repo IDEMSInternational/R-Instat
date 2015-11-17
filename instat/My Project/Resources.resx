@@ -553,4 +553,7 @@
   <data name="Anova_One_Way" xml:space="preserve">
     <value>Anova One Way</value>
   </data>
+  <data name="Correlations" xml:space="preserve">
+    <value>Correlations</value>
+  </data>
 </root>

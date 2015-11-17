@@ -315,6 +315,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Correlations.
+        '''</summary>
+        Friend ReadOnly Property Correlations() As String
+            Get
+                Return ResourceManager.GetString("Correlations", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Cumulative Frequency.
         '''</summary>
         Friend ReadOnly Property Cumulative_Frequency() As String

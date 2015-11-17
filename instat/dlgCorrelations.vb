@@ -1,4 +1,4 @@
-﻿' Instat-R
+﻿'Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -13,23 +13,23 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 
-Public Class dlgRandomSample
-    Private Sub dlgRandomSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("rnorm")
+Public Class dlgCorrelations
+    Private Sub ucrAddRemove_Load(sender As Object, e As EventArgs) Handles ucrAddRemove.Load
+        ucrBase.clsRsyntax.SetFunction("cor")
         ucrBase.clsRsyntax.iCallType = 2
+        ucrReceiverMultiple.Selector = ucrAddRemove
+        ucrReceiverMultiple.SetMeAsReceiver()
         autoTranslate(Me)
-        UcrReceiverSingle.Selector = UcrAddRemove
-        UcrReceiverSingle.SetMeAsReceiver()
-
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles lblParameters.Click
-
-    End Sub
-
-    Private Sub lblDistributionType_Click(sender As Object, e As EventArgs) Handles lblDistributionType.Click
+    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.LeftList
+        If ucrReceiverMultiple.lstSelectedVariables.Items.Count = 2 Then
+            ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverMultiple.lstSelectedVariables.Items.Item(0) & "")
+            ucrBase.clsRsyntax.AddParameter("y", "data$" & ucrReceiverMultiple.lstSelectedVariables.Items.Item(1) & "")
+        End If
 
     End Sub
 End Class
