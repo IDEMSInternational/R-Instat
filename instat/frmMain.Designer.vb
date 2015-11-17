@@ -50,6 +50,7 @@ Partial Class frmMain
         Me.CorrelationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogLinearModelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SimpleModelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OneSampleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NonParametricToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OneAndTwoSamplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStatsNonParametricOneWayAnova = New System.Windows.Forms.ToolStripMenuItem()
@@ -303,7 +304,6 @@ Partial Class frmMain
         Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OneSampleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -472,6 +472,12 @@ Partial Class frmMain
         Me.SimpleModelsToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
         Me.SimpleModelsToolStripMenuItem.Tag = "Simple_Models"
         Me.SimpleModelsToolStripMenuItem.Text = "Simple Models"
+        '
+        'OneSampleToolStripMenuItem
+        '
+        Me.OneSampleToolStripMenuItem.Name = "OneSampleToolStripMenuItem"
+        Me.OneSampleToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.OneSampleToolStripMenuItem.Text = "One Sample..."
         '
         'NonParametricToolStripMenuItem
         '
@@ -2220,12 +2226,6 @@ Partial Class frmMain
         Me.WaterBalanceToolStripMenuItem1.Name = "WaterBalanceToolStripMenuItem1"
         Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
         Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
-        '
-        'OneSampleToolStripMenuItem
-        '
-        Me.OneSampleToolStripMenuItem.Name = "OneSampleToolStripMenuItem"
-        Me.OneSampleToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
-        Me.OneSampleToolStripMenuItem.Text = "One Sample..."
         '
         'frmMain
         '
