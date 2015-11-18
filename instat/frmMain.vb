@@ -420,10 +420,14 @@ Public Class frmMain
     End Sub
 
     Private Sub OneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneSampleToolStripMenuItem.Click
-        dlgOneSample.ShowDialog()
+        'dlgOneSample.ShowDialog()
     End Sub
 
     Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyToolStripMenuItem.Click
-        dlgFreqTables.ShowDialog()
+        'dlgFreqTables.ShowDialog()
     End Sub
-End Class
+
+    Private Sub Tool_strip_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles Tool_strip.ItemClicked
+
+    End Sub
+End Class'
