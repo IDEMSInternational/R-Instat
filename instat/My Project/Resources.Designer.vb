@@ -594,6 +594,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Four.
+        '''</summary>
+        Friend ReadOnly Property Four() As String
+            Get
+                Return ResourceManager.GetString("Four", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Freequency Chart.
         '''</summary>
         Friend ReadOnly Property Freequency_Chart() As String
@@ -788,6 +797,15 @@ Namespace My.Resources
         Friend ReadOnly Property Ok() As String
             Get
                 Return ResourceManager.GetString("Ok", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to One.
+        '''</summary>
+        Friend ReadOnly Property One() As String
+            Get
+                Return ResourceManager.GetString("One", resourceCulture)
             End Get
         End Property
         
@@ -1308,6 +1326,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Three.
+        '''</summary>
+        Friend ReadOnly Property Three() As String
+            Get
+                Return ResourceManager.GetString("Three", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Time Series.
         '''</summary>
         Friend ReadOnly Property Time_Series() As String
@@ -1340,6 +1367,15 @@ Namespace My.Resources
         Friend ReadOnly Property Transform() As String
             Get
                 Return ResourceManager.GetString("Transform", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Two.
+        '''</summary>
+        Friend ReadOnly Property Two() As String
+            Get
+                Return ResourceManager.GetString("Two", resourceCulture)
             End Get
         End Property
         
