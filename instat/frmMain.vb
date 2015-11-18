@@ -38,9 +38,6 @@ Public Class frmMain
         'Setting the
         clsRInterface.SetLog(frmLog.txtLog)
         clsRInterface.SetOutput(frmCommand.txtCommand)
-        clsRInterface.FillDataObjectData(frmEditor.gridColumns)
-        clsRInterface.FillDataObjectMetadata(frmMetaData.gridMetaData)
-        clsRInterface.FillDataObjectVariables(frmVariables.gridVariables)
         tstatus.Text = frmEditor.gridColumns.CurrentWorksheet.Name
 
     End Sub
@@ -50,7 +47,10 @@ Public Class frmMain
         clsButton.clsRsyntax.SetFunction("read.csv")
         clsButton.clsRsyntax.AddParameter("file", pair.Value)
         clsRInterface.LoadData(pair.Key, clsButton.clsRsyntax.GetScript())
+        clsRInterface.FillDataObjectVariables(frmVariables.gridVariables)
+        clsRInterface.FillDataObjectMetadata(frmMetaData.gridMetaData)
         clsRInterface.FillDataObjectData(frmEditor.gridColumns)
+
 
     End Sub
 
@@ -226,11 +226,11 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuWindowMetadata_Click(sender As Object, e As EventArgs)
-        frmMetaData.ShowDialog()
+        frmMetaData.Show()
     End Sub
 
     Private Sub mnuWindowVariables_Click(sender As Object, e As EventArgs)
-        frmVariables.ShowDialog()
+        frmVariables.Show()
     End Sub
 
     Private Sub mnuManageWorksheetInformation_Click(sender As Object, e As EventArgs) Handles mnuManageWorksheetInformation.Click

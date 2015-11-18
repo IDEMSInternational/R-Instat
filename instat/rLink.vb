@@ -22,7 +22,7 @@ Public Class RInterface
     Dim strClimateObjectPath As String = "C:\\ClimateObject\\R"
     Dim strClimateObject As String = "ClimateObject"
     Dim strInstatObjectPath As String = "C:\\InstatObject\\R" 'path to the Instat object
-    Dim strInstatDataObject As String = "InstatDataObject"
+    Public strInstatDataObject As String = "InstatDataObject"
     Dim clsEngine As REngine
     Dim txtOutput As New TextBox
     Dim txtLog As New TextBox
@@ -63,18 +63,29 @@ Public Class RInterface
 
     Public Sub FillDataObjectData(grdData As ReoGridControl)
         Dim dfTemp As DataFrame
-        'todo insert loop
+        Dim dfList As GenericVector
+        Dim i As Integer
         If bInstatObjectExists Then
-            dfTemp = GetData(strInstatDataObject & "$get_data_list()[[1]]").AsDataFrame
-            FIllData(dfTemp, grdData)
+            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_data_list()").AsList
+            For i = 0 To dfList.Count - 1
+                dfTemp = dfList(i).AsDataFrame()
+                FIllData(dfTemp, grdData)
+            Next
+
         End If
+
     End Sub
 
     Public Sub FillDataObjectVariables(grdData As ReoGridControl)
-        Dim dfTemp As RDotNet.GenericVector
-        'todo insert loop
+        Dim dfList As GenericVector
+        Dim dfTemp As DataFrame
+        Dim i As Integer
         If bInstatObjectExists Then
-            dfTemp = GetData(strInstatDataObject & "$get_variable_info()").AsList()
+            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variable_info()").AsList
+            For i = 0 To dfList.Count - 1
+                dfTemp = dfList(i).AsDataFrame()
+                FillData(dfTemp, grdData)
+            Next
 
         End If
     End Sub
@@ -84,7 +95,7 @@ Public Class RInterface
         'todo insert loop
         If bInstatObjectExists Then
             dfTemp = GetData(strInstatDataObject & "$get_meta_data()").AsDataFrame()
-
+            FIllData(dfTemp, grdData)
         End If
     End Sub
 
@@ -131,6 +142,12 @@ Public Class RInterface
 
     End Function
 
+    Public Function GetVar(strLabel As String) As CharacterVector
+
+        Return Me.clsEngine.Evaluate(strLabel).AsCharacter
+
+    End Function
+
     Public Sub climateObject() 'creates an instance of the climate object
         If Not bClimateObjectExists Then
             RunScript("setwd('" & strClimateObjectPath & "')")
@@ -156,7 +173,7 @@ Public Class RInterface
 
         End If
     End Sub
-    Public Sub FIllData(dfTemp As DataFrame, grdData As ReoGridControl)
+    Public Sub FillData(dfTemp As DataFrame, grdData As ReoGridControl)
         Dim bFoundWorksheet As Boolean = False
         Dim tempWorkSheet
 
