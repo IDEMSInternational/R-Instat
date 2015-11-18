@@ -1,14 +1,14 @@
 ﻿Imports instat.Translations
 Public Class dlgWaterBalance
 
-    Private Sub UcrButtons1_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
+    Private Sub dlgWaterBalance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction("climate_obj$display_water_balance()")
         ucrBase.clsRsyntax.iCallType = 1
         frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
         frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
         Me.Hide()
-
     End Sub
 
     Private Sub txtColunmName_Leave(sender As Object, e As EventArgs) Handles txtColumnName.Leave
@@ -39,6 +39,7 @@ Public Class dlgWaterBalance
         End If
     End Sub
 
+    Private Sub ucrButtons_clickOk(sender As Object, e As EventArgs)
 
-
+    End Sub
 End Class
