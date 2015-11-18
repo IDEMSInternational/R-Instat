@@ -27,8 +27,9 @@ Public Class dlgHistogram
     Private Sub ucrReceiverSingle_Enter(sender As Object, e As EventArgs) Handles ucrSingleReceiver.Enter
         ucrSingleReceiver.SetMeAsReceiver()
     End Sub
+
     Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrSingleReceiver.Leave
-        UcrBase.clsRsyntax.AddParameter("x", "data$" & ucrSingleReceiver.txtReceiverSingle.Text & "")
+        UcrBase.clsRsyntax.AddParameter("x", ucrSingleReceiver.GetVariables())
     End Sub
 
     Private Sub txtHistogramTitle_TextChanged(sender As Object, e As EventArgs) Handles txtHistogramTitle.TextChanged
