@@ -23,7 +23,7 @@ Partial Class ucrSelector
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblAvailableVariables = New System.Windows.Forms.Label()
-        Me.lstAvailableVariable = New System.Windows.Forms.ListBox()
+        Me.lstAvailableVariable = New System.Windows.Forms.ListView()
         Me.SuspendLayout()
         '
         'lblAvailableVariables
@@ -38,27 +38,29 @@ Partial Class ucrSelector
         '
         'lstAvailableVariable
         '
-        Me.lstAvailableVariable.FormattingEnabled = True
-        Me.lstAvailableVariable.Location = New System.Drawing.Point(12, 22)
+        Me.lstAvailableVariable.Activation = System.Windows.Forms.ItemActivation.TwoClick
+        Me.lstAvailableVariable.GridLines = True
+        Me.lstAvailableVariable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lstAvailableVariable.Location = New System.Drawing.Point(8, 18)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
-        Me.lstAvailableVariable.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstAvailableVariable.Size = New System.Drawing.Size(84, 95)
-        Me.lstAvailableVariable.Sorted = True
-        Me.lstAvailableVariable.TabIndex = 81
-        Me.lstAvailableVariable.Tag = ""
+        Me.lstAvailableVariable.Size = New System.Drawing.Size(113, 104)
+        Me.lstAvailableVariable.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.lstAvailableVariable.TabIndex = 83
+        Me.lstAvailableVariable.UseCompatibleStateImageBehavior = False
+        Me.lstAvailableVariable.View = System.Windows.Forms.View.Details
         '
         'ucrSelector
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblAvailableVariables)
         Me.Controls.Add(Me.lstAvailableVariable)
+        Me.Controls.Add(Me.lblAvailableVariables)
         Me.Name = "ucrSelector"
-        Me.Size = New System.Drawing.Size(105, 122)
+        Me.Size = New System.Drawing.Size(124, 127)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents lblAvailableVariables As Label
-    Public WithEvents lstAvailableVariable As ListBox
+    Friend WithEvents lstAvailableVariable As ListView
 End Class
