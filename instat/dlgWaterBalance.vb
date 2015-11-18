@@ -13,12 +13,12 @@ Public Class dlgWaterBalance
 
     Private Sub txtColunmName_Leave(sender As Object, e As EventArgs) Handles txtColumnName.Leave
         ucrBase.clsRsyntax.AddParameter("col_name", Chr(34) & txtColumnName.Text & Chr(34))
-        ucrBase.clsRsyntax.AddParameter("evaporation", Chr(34) & txtColumnName.Text & Chr(34))
-        ucrBase.clsRsyntax.AddParameter("decimal_places", Chr(34) & txtColumnName.Text & Chr(34))
-        ucrBase.clsRsyntax.AddParameter("day_display", Chr(34) & txtColumnName.Text & Chr(34))
-        ucrBase.clsRsyntax.AddParameter("capacity_max", Chr(34) & txtColumnName.Text & Chr(34))
+        ucrBase.clsRsyntax.AddParameter("evaporation", nudEvaporation.Value)
+        ucrBase.clsRsyntax.AddParameter("decimal_places", nudDecimalPlace.Value)
+        ucrBase.clsRsyntax.AddParameter("day_display", txtColumnName.Text)
+        ucrBase.clsRsyntax.AddParameter("capacity_max", nudMaximumCapacity.Value)
         If chkPrintTable.Checked Then
-            ucrBase.clsRsyntax.AddParameter("print_tables", Chr(34) & txtColumnName.Text & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("print_tables", chkPrintTable.Checked.ToString.ToUpper())
 
         End If
     End Sub
