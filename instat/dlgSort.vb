@@ -30,13 +30,13 @@ Public Class dlgSort
     End Sub
 
     Private Sub ucrMultiple_Leave(sender As Object, e As EventArgs) Handles ucrMultiple.Leave
-        Dim objItem As Object
-        Dim temp_obj As ListBox.ObjectCollection = ucrMultiple.lstSelectedVariables.Items
-        If ucrMultiple.lstSelectedVariables.Items.Count > 0 Then
-            For Each objItem In temp_obj
-                ucrBase.clsRsyntax.AddParameter("data_temp$" & objItem & "", "x")
-            Next
-        End If
+        'Dim objItem As Object
+        ''Dim temp_obj As ListBox.ObjectCollection = ucrMultiple.lstSelectedVariables.Items
+        'If ucrMultiple.lstSelectedVariables.Items.Count > 0 Then
+        '    For Each objItem In temp_obj
+        '        ucrBase.clsRsyntax.AddParameter("data_temp$" & objItem & "", "x")
+        '    Next
+        'End If
     End Sub
 
     Private Sub rdoAscending_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged
