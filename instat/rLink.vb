@@ -45,7 +45,35 @@ Public Class RInterface
     End Sub
 
     Public Sub LoadData()
-        'Preparing the cleaning process
+        Dim dlgOpen As New OpenFileDialog
+        Dim strExtension As String
+        Dim dfDataset As DataFrame
+        Dim strHolder As String
+
+        'For importing files into the instat'
+        'start the open file dialog
+        dlgOpen.Filter = "Comma Separated (*.csv)|*.csv|Excel 2-5/95/97 (*.xls)|*.xls|All Files (*.*)|*.*"
+        dlgOpen.Title = "Import"
+        If dlgOpen.ShowDialog() = DialogResult.OK Then
+            'checks if the file name is not blank'
+            If dlgOpen.FileName <> "" Then
+                strExtension = Path.GetExtension(dlgOpen.FileName)
+                strHolder = Replace(dlgOpen.FileName, "\", "/")
+                Select Case strExtension
+                    Case ".csv"
+                        dfDataset = clsEngine.Evaluate("data<-as.data.frame(read.table('" & strHolder & "', header = T, sep = ','))").AsDataFrame
+                    Case ".xlsx" 'TODO use odbc link
+                        dfDataset = clsEngine.Evaluate("require(xlsx);data<-as.data.frame(read.xlsx('" & strHolder & "', sheetName=1))").AsDataFrame
+                    Case ".xls" 'TODO use odbc link
+                        dfDataset = clsEngine.Evaluate("require(readxl);data<-as.data.frame(read_excel('" & strHolder & "', sheet=1))").AsDataFrame
+                End Select
+                txtOutput.Text = txtOutput.Text & "Loaded > " & strHolder & vbCrLf
+            Else
+                MsgBox("Must have a file name!", vbInformation, "Message from Instat")
+            End If
+        Else
+            MsgBox("No File was selected!", vbInformation, "Message From Instat")
+        End If
     End Sub
 
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0)
