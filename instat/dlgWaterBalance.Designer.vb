@@ -22,7 +22,6 @@ Partial Class dlgWaterBalance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrButtons1 = New instat.ucrButtons()
         Me.nudEvaporation = New System.Windows.Forms.NumericUpDown()
         Me.nudMaximumCapacity = New System.Windows.Forms.NumericUpDown()
         Me.nudDecimalPlace = New System.Windows.Forms.NumericUpDown()
@@ -34,17 +33,12 @@ Partial Class dlgWaterBalance
         Me.lblMaximumCapacity = New System.Windows.Forms.Label()
         Me.lblColumnName = New System.Windows.Forms.Label()
         Me.chkPrintTable = New System.Windows.Forms.CheckBox()
+        Me.chkMonthAbbreviations = New System.Windows.Forms.CheckBox()
+        Me.ucrBase = New instat.ucrButtons()
         CType(Me.nudEvaporation, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMaximumCapacity, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudDecimalPlace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'UcrButtons1
-        '
-        Me.UcrButtons1.Location = New System.Drawing.Point(55, 245)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(410, 32)
-        Me.UcrButtons1.TabIndex = 0
         '
         'nudEvaporation
         '
@@ -89,17 +83,17 @@ Partial Class dlgWaterBalance
         'lblDisplayDayName
         '
         Me.lblDisplayDayName.AutoSize = True
-        Me.lblDisplayDayName.Location = New System.Drawing.Point(52, 55)
+        Me.lblDisplayDayName.Location = New System.Drawing.Point(38, 51)
         Me.lblDisplayDayName.Name = "lblDisplayDayName"
         Me.lblDisplayDayName.Size = New System.Drawing.Size(39, 13)
         Me.lblDisplayDayName.TabIndex = 7
-        Me.lblDisplayDayName.Tag = "Display_Day_Name"
+        Me.lblDisplayDayName.Tag = "Day_Name"
         Me.lblDisplayDayName.Text = "Label1"
         '
         'lblDecimalPlace
         '
         Me.lblDecimalPlace.AutoSize = True
-        Me.lblDecimalPlace.Location = New System.Drawing.Point(101, 137)
+        Me.lblDecimalPlace.Location = New System.Drawing.Point(52, 137)
         Me.lblDecimalPlace.Name = "lblDecimalPlace"
         Me.lblDecimalPlace.Size = New System.Drawing.Size(39, 13)
         Me.lblDecimalPlace.TabIndex = 10
@@ -109,7 +103,7 @@ Partial Class dlgWaterBalance
         'lblEvaporation
         '
         Me.lblEvaporation.AutoSize = True
-        Me.lblEvaporation.Location = New System.Drawing.Point(101, 112)
+        Me.lblEvaporation.Location = New System.Drawing.Point(52, 111)
         Me.lblEvaporation.Name = "lblEvaporation"
         Me.lblEvaporation.Size = New System.Drawing.Size(39, 13)
         Me.lblEvaporation.TabIndex = 11
@@ -119,7 +113,7 @@ Partial Class dlgWaterBalance
         'lblMaximumCapacity
         '
         Me.lblMaximumCapacity.AutoSize = True
-        Me.lblMaximumCapacity.Location = New System.Drawing.Point(101, 86)
+        Me.lblMaximumCapacity.Location = New System.Drawing.Point(52, 85)
         Me.lblMaximumCapacity.Name = "lblMaximumCapacity"
         Me.lblMaximumCapacity.Size = New System.Drawing.Size(39, 13)
         Me.lblMaximumCapacity.TabIndex = 12
@@ -129,7 +123,7 @@ Partial Class dlgWaterBalance
         'lblColumnName
         '
         Me.lblColumnName.AutoSize = True
-        Me.lblColumnName.Location = New System.Drawing.Point(52, 15)
+        Me.lblColumnName.Location = New System.Drawing.Point(38, 15)
         Me.lblColumnName.Name = "lblColumnName"
         Me.lblColumnName.Size = New System.Drawing.Size(39, 13)
         Me.lblColumnName.TabIndex = 13
@@ -147,11 +141,30 @@ Partial Class dlgWaterBalance
         Me.chkPrintTable.Text = "CheckBox1"
         Me.chkPrintTable.UseVisualStyleBackColor = True
         '
+        'chkMonthAbbreviations
+        '
+        Me.chkMonthAbbreviations.AutoSize = True
+        Me.chkMonthAbbreviations.Location = New System.Drawing.Point(113, 194)
+        Me.chkMonthAbbreviations.Name = "chkMonthAbbreviations"
+        Me.chkMonthAbbreviations.Size = New System.Drawing.Size(81, 17)
+        Me.chkMonthAbbreviations.TabIndex = 15
+        Me.chkMonthAbbreviations.Tag = "Month_Abbreviations"
+        Me.chkMonthAbbreviations.Text = "CheckBox1"
+        Me.chkMonthAbbreviations.UseVisualStyleBackColor = True
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(55, 245)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.TabIndex = 0
+        '
         'dlgWaterBalance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(464, 277)
+        Me.Controls.Add(Me.chkMonthAbbreviations)
         Me.Controls.Add(Me.chkPrintTable)
         Me.Controls.Add(Me.lblColumnName)
         Me.Controls.Add(Me.lblMaximumCapacity)
@@ -163,7 +176,7 @@ Partial Class dlgWaterBalance
         Me.Controls.Add(Me.nudDecimalPlace)
         Me.Controls.Add(Me.nudMaximumCapacity)
         Me.Controls.Add(Me.nudEvaporation)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Name = "dlgWaterBalance"
         Me.Tag = "Water_Balance"
@@ -176,7 +189,7 @@ Partial Class dlgWaterBalance
 
     End Sub
 
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents nudEvaporation As NumericUpDown
     Friend WithEvents nudMaximumCapacity As NumericUpDown
     Friend WithEvents nudDecimalPlace As NumericUpDown
@@ -188,4 +201,5 @@ Partial Class dlgWaterBalance
     Friend WithEvents lblMaximumCapacity As Label
     Friend WithEvents lblColumnName As Label
     Friend WithEvents chkPrintTable As CheckBox
+    Friend WithEvents chkMonthAbbreviations As CheckBox
 End Class
