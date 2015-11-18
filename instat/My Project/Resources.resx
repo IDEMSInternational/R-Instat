@@ -568,4 +568,16 @@
   <data name="Maximum_Capacity" xml:space="preserve">
     <value>Maximum Capacity</value>
   </data>
+  <data name="Four" xml:space="preserve">
+    <value>Four</value>
+  </data>
+  <data name="One" xml:space="preserve">
+    <value>One</value>
+  </data>
+  <data name="Three" xml:space="preserve">
+    <value>Three</value>
+  </data>
+  <data name="Two" xml:space="preserve">
+    <value>Two</value>
+  </data>
 </root>

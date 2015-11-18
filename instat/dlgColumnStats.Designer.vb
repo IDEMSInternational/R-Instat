@@ -24,10 +24,9 @@ Partial Class dlgColumnStats
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.CheckBox7 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.lblSelectedVariables = New System.Windows.Forms.Label()
+        Me.UcrReceiverMultiple = New instat.ucrReceiverMultiple()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.grpStatistcsRequired = New System.Windows.Forms.GroupBox()
         Me.CheckBox9 = New System.Windows.Forms.CheckBox()
         Me.CheckBox8 = New System.Windows.Forms.CheckBox()
@@ -37,25 +36,26 @@ Partial Class dlgColumnStats
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.chkCount = New System.Windows.Forms.CheckBox()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
-        Me.lblSelectedVariables = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.CheckBox7 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.CheckBox11 = New System.Windows.Forms.CheckBox()
         Me.CheckBox10 = New System.Windows.Forms.CheckBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.CheckBox12 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox17 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox13 = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.CheckBox16 = New System.Windows.Forms.CheckBox()
         Me.CheckBox15 = New System.Windows.Forms.CheckBox()
         Me.CheckBox14 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox17 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox13 = New System.Windows.Forms.CheckBox()
+        Me.ucrBase = New instat.ucrButtons()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.grpStatistcsRequired.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -74,7 +74,7 @@ Partial Class dlgColumnStats
         'TabPage1
         '
         Me.TabPage1.Controls.Add(Me.lblSelectedVariables)
-        Me.TabPage1.Controls.Add(Me.UcrReceiverMultiple1)
+        Me.TabPage1.Controls.Add(Me.UcrReceiverMultiple)
         Me.TabPage1.Controls.Add(Me.ucrAddRemove)
         Me.TabPage1.Controls.Add(Me.grpStatistcsRequired)
         Me.TabPage1.Controls.Add(Me.GroupBox1)
@@ -86,47 +86,28 @@ Partial Class dlgColumnStats
         Me.TabPage1.Text = "General"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'TabPage2
+        'lblSelectedVariables
         '
-        Me.TabPage2.Controls.Add(Me.CheckBox11)
-        Me.TabPage2.Controls.Add(Me.CheckBox10)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(439, 204)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Save"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.lblSelectedVariables.AutoSize = True
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(177, 6)
+        Me.lblSelectedVariables.Name = "lblSelectedVariables"
+        Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
+        Me.lblSelectedVariables.TabIndex = 12
+        Me.lblSelectedVariables.Text = "Selected Variables"
         '
-        'GroupBox1
+        'UcrReceiverMultiple
         '
-        Me.GroupBox1.Controls.Add(Me.CheckBox7)
-        Me.GroupBox1.Controls.Add(Me.CheckBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(6, 125)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(262, 66)
-        Me.GroupBox1.TabIndex = 8
-        Me.GroupBox1.TabStop = False
+        Me.UcrReceiverMultiple.Location = New System.Drawing.Point(177, 19)
+        Me.UcrReceiverMultiple.Name = "UcrReceiverMultiple"
+        Me.UcrReceiverMultiple.Size = New System.Drawing.Size(91, 101)
+        Me.UcrReceiverMultiple.TabIndex = 11
         '
-        'CheckBox7
+        'ucrAddRemove
         '
-        Me.CheckBox7.AutoSize = True
-        Me.CheckBox7.Location = New System.Drawing.Point(7, 43)
-        Me.CheckBox7.Name = "CheckBox7"
-        Me.CheckBox7.Size = New System.Drawing.Size(74, 17)
-        Me.CheckBox7.TabIndex = 1
-        Me.CheckBox7.Text = "By Factor "
-        Me.CheckBox7.UseVisualStyleBackColor = True
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(7, 12)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(74, 17)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "For Factor"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.ucrAddRemove.Location = New System.Drawing.Point(3, 6)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(182, 118)
+        Me.ucrAddRemove.TabIndex = 10
         '
         'grpStatistcsRequired
         '
@@ -227,35 +208,47 @@ Partial Class dlgColumnStats
         Me.chkCount.Text = "Count "
         Me.chkCount.UseVisualStyleBackColor = True
         '
-        'ucrBase
+        'GroupBox1
         '
-        Me.ucrBase.Location = New System.Drawing.Point(14, 235)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
-        Me.ucrBase.TabIndex = 2
+        Me.GroupBox1.Controls.Add(Me.CheckBox7)
+        Me.GroupBox1.Controls.Add(Me.CheckBox1)
+        Me.GroupBox1.Location = New System.Drawing.Point(6, 125)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(262, 66)
+        Me.GroupBox1.TabIndex = 8
+        Me.GroupBox1.TabStop = False
         '
-        'ucrAddRemove
+        'CheckBox7
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(3, 6)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(182, 118)
-        Me.ucrAddRemove.TabIndex = 10
+        Me.CheckBox7.AutoSize = True
+        Me.CheckBox7.Location = New System.Drawing.Point(7, 43)
+        Me.CheckBox7.Name = "CheckBox7"
+        Me.CheckBox7.Size = New System.Drawing.Size(74, 17)
+        Me.CheckBox7.TabIndex = 1
+        Me.CheckBox7.Text = "By Factor "
+        Me.CheckBox7.UseVisualStyleBackColor = True
         '
-        'UcrReceiverMultiple1
+        'CheckBox1
         '
-        Me.UcrReceiverMultiple1.Location = New System.Drawing.Point(177, 19)
-        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
-        Me.UcrReceiverMultiple1.Size = New System.Drawing.Size(91, 101)
-        Me.UcrReceiverMultiple1.TabIndex = 11
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(7, 12)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(74, 17)
+        Me.CheckBox1.TabIndex = 0
+        Me.CheckBox1.Text = "For Factor"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
-        'lblSelectedVariables
+        'TabPage2
         '
-        Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(177, 6)
-        Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
-        Me.lblSelectedVariables.TabIndex = 12
-        Me.lblSelectedVariables.Text = "Selected Variables"
+        Me.TabPage2.Controls.Add(Me.CheckBox11)
+        Me.TabPage2.Controls.Add(Me.CheckBox10)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(439, 204)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Save"
+        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'CheckBox11
         '
@@ -298,26 +291,6 @@ Partial Class dlgColumnStats
         Me.CheckBox12.TabIndex = 2
         Me.CheckBox12.Text = "Restrict data values "
         Me.CheckBox12.UseVisualStyleBackColor = True
-        '
-        'CheckBox17
-        '
-        Me.CheckBox17.AutoSize = True
-        Me.CheckBox17.Location = New System.Drawing.Point(6, 57)
-        Me.CheckBox17.Name = "CheckBox17"
-        Me.CheckBox17.Size = New System.Drawing.Size(211, 17)
-        Me.CheckBox17.TabIndex = 0
-        Me.CheckBox17.Text = "Set summary to missing  if they are over"
-        Me.CheckBox17.UseVisualStyleBackColor = True
-        '
-        'CheckBox13
-        '
-        Me.CheckBox13.AutoSize = True
-        Me.CheckBox13.Location = New System.Drawing.Point(5, 14)
-        Me.CheckBox13.Name = "CheckBox13"
-        Me.CheckBox13.Size = New System.Drawing.Size(131, 17)
-        Me.CheckBox13.TabIndex = 0
-        Me.CheckBox13.Text = "Ignore missing Values "
-        Me.CheckBox13.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -362,6 +335,33 @@ Partial Class dlgColumnStats
         Me.CheckBox14.Text = "*"
         Me.CheckBox14.UseVisualStyleBackColor = True
         '
+        'CheckBox17
+        '
+        Me.CheckBox17.AutoSize = True
+        Me.CheckBox17.Location = New System.Drawing.Point(6, 57)
+        Me.CheckBox17.Name = "CheckBox17"
+        Me.CheckBox17.Size = New System.Drawing.Size(211, 17)
+        Me.CheckBox17.TabIndex = 0
+        Me.CheckBox17.Text = "Set summary to missing  if they are over"
+        Me.CheckBox17.UseVisualStyleBackColor = True
+        '
+        'CheckBox13
+        '
+        Me.CheckBox13.AutoSize = True
+        Me.CheckBox13.Location = New System.Drawing.Point(5, 14)
+        Me.CheckBox13.Name = "CheckBox13"
+        Me.CheckBox13.Size = New System.Drawing.Size(131, 17)
+        Me.CheckBox13.TabIndex = 0
+        Me.CheckBox13.Text = "Ignore missing Values "
+        Me.CheckBox13.UseVisualStyleBackColor = True
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(14, 235)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.TabIndex = 2
+        '
         'dlgColumnStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -375,12 +375,12 @@ Partial Class dlgColumnStats
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.grpStatistcsRequired.ResumeLayout(False)
         Me.grpStatistcsRequired.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -406,7 +406,7 @@ Partial Class dlgColumnStats
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents lblSelectedVariables As Label
-    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
+    Friend WithEvents UcrReceiverMultiple As ucrReceiverMultiple
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents CheckBox11 As CheckBox
     Friend WithEvents CheckBox10 As CheckBox
