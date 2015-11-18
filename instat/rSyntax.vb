@@ -17,8 +17,11 @@
 
 Public Class RSyntax
     Dim strFunction As String
+    Public iFunctionType As Integer = 0
     Public iCallType As Integer = 0
     Dim strParameter(1, 0) As String
+    Public strScript As String
+    Public i As Integer
 
     Public Sub SetFunction(strFunctionName As String)
         strFunction = strFunctionName
@@ -51,8 +54,6 @@ Public Class RSyntax
     End Sub
 
     Public Function GetScript() As String
-        Dim strScript As String
-        Dim i As Integer
         strScript = strFunction & "("
         For i = 0 To strParameter.GetUpperBound(1)
             If i > 0 Then
@@ -64,4 +65,29 @@ Public Class RSyntax
         Return strScript
     End Function
 
+    Public Function writeScript() As String
+        strScript = strFunction & "("
+        For i = 0 To strParameter.GetUpperBound(1)
+            If i = 1 Then
+                strScript = strScript & "~"
+            ElseIf i > 2
+                strScript = strScript & "+"
+            End If
+            strScript = strScript & strParameter(0, i)
+        Next
+        strScript = strScript & ",data = data_temp))"
+        Return strScript
+    End Function
+
+    Public Function orderScript() As String
+        strScript = strFunction & "("
+        For i = 0 To strParameter.GetUpperBound(1)
+            If i > 0 Then
+                strScript = strScript & ","
+            End If
+            strScript = strScript & strParameter(1, i) & "=" & strParameter(0, i)
+        Next
+        strScript = strScript & ")"
+        Return strScript
+    End Function
 End Class

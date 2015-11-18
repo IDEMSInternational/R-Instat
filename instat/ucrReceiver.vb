@@ -1,5 +1,6 @@
 ﻿Imports instat.Translations
-Public MustInherit Class ucrReceiver
+'Public MustInherit Class ucrReceiver
+Public Class ucrReceiver
     Public Selector As ucrSelector
 
     Public Overridable Sub AddSelected()
@@ -10,6 +11,10 @@ Public MustInherit Class ucrReceiver
 
     End Sub
 
+    Public Overridable Function GetVariables() As String
+
+    End Function
+
     Public Sub SetMeAsReceiver()
         Selector.SetCurrentReciever(Me)
     End Sub
@@ -18,6 +23,5 @@ Public MustInherit Class ucrReceiver
         translateEach(Controls)
     End Sub
 
-    Public MustOverride Sub EnterReceiver()
 
 End Class
