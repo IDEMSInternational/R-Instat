@@ -423,6 +423,10 @@ Public Class frmMain
         dlgAnovaOneWay.ShowDialog()
     End Sub
 
+    Private Sub BivariateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BivariateToolStripMenuItem.Click
+        dlgBivariateANOVA
+    End Sub
+
     'Private Sub OneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneSampleToolStripMenuItem.Click
     '    dlgOneSample.ShowDialog()
     'End Sub
