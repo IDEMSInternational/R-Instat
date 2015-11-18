@@ -21,23 +21,31 @@ Public Class dlgAnovaOneWay
     End Sub
 
     Private Sub dlgAnovaOneWay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("One Way Anova")
+        ucrBase.clsRsyntax.SetFunction(" aov ")
         ucrBase.clsRsyntax.iCallType = 2
-        UcrSingleReceiver1.Selector = UcrAddRemove
-        UcrSingleReceiver1.SetMeAsReceiver()
-        UcrSingleReceiver2.Selector = UcrAddRemove
-        UcrSingleReceiver2.SetMeAsReceiver()
+        ucrSingleReceiver1.Selector = ucrAddRemove
+        ucrSingleReceiver1.SetMeAsReceiver()
+        ucrSingleReceiver2.Selector = ucrAddRemove
+        ucrSingleReceiver2.SetMeAsReceiver()
         autoTranslate(Me)
     End Sub
-
-    Private Sub ucrReceiverSingle1_Leave(sender As Object, e As EventArgs) Handles UcrSingleReceiver1.Leave
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & UcrSingleReceiver1.txtReceiverSingle.Text & "")
-    End Sub
-    Private Sub ucrReceiverSingle2_Leave(sender As Object, e As EventArgs) Handles UcrSingleReceiver2.Leave
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & UcrSingleReceiver2.txtReceiverSingle.Text & "")
+    Private Sub ucrSingleReceiver1_Enter(sender As Object, e As EventArgs) Handles ucrSingleReceiver1.Enter
+        ucrSingleReceiver1.Selector = ucrAddRemove
+        ucrSingleReceiver1.SetMeAsReceiver()
     End Sub
 
-    Private Sub UcrSingleReceiver1_Load(sender As Object, e As EventArgs) Handles UcrSingleReceiver1.Load
 
+    Private Sub ucrSingleReceiver2_Enter(sender As Object, e As EventArgs) Handles ucrSingleReceiver2.Enter
+        ucrSingleReceiver2.Selector = ucrAddRemove
+        ucrSingleReceiver2.SetMeAsReceiver()
     End Sub
+
+    Private Sub ucrSingleReceiver1_Leave(sender As Object, e As EventArgs) Handles ucrSingleReceiver1.Leave
+        ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrSingleReceiver1.txtReceiverSingle.Text & "")
+    End Sub
+    Private Sub ucrSingleReceiver2_Leave(sender As Object, e As EventArgs) Handles ucrSingleReceiver2.Leave
+        ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrSingleReceiver2.txtReceiverSingle.Text & "")
+    End Sub
+
+
 End Class
