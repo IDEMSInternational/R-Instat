@@ -22,7 +22,6 @@ Partial Class dlgRowStats
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpStatistcsRequired = New System.Windows.Forms.GroupBox()
         Me.CheckBox6 = New System.Windows.Forms.CheckBox()
         Me.CheckBox5 = New System.Windows.Forms.CheckBox()
@@ -30,18 +29,14 @@ Partial Class dlgRowStats
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.chkCount = New System.Windows.Forms.CheckBox()
-        Me.UcrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
+        Me.UcrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox7 = New System.Windows.Forms.CheckBox()
         Me.grpStatistcsRequired.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(1, 173)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
-        Me.ucrBase.TabIndex = 6
         '
         'grpStatistcsRequired
         '
@@ -120,13 +115,6 @@ Partial Class dlgRowStats
         Me.chkCount.Text = "Count "
         Me.chkCount.UseVisualStyleBackColor = True
         '
-        'UcrSelectorAddRemove1
-        '
-        Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(1, 9)
-        Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
-        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(182, 118)
-        Me.UcrSelectorAddRemove1.TabIndex = 7
-        '
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
@@ -143,11 +131,47 @@ Partial Class dlgRowStats
         Me.UcrReceiverMultiple1.Size = New System.Drawing.Size(91, 142)
         Me.UcrReceiverMultiple1.TabIndex = 13
         '
+        'UcrSelectorAddRemove1
+        '
+        Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(1, 9)
+        Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
+        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(182, 118)
+        Me.UcrSelectorAddRemove1.TabIndex = 7
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(1, 169)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.TabIndex = 6
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(13, 124)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(122, 17)
+        Me.CheckBox1.TabIndex = 15
+        Me.CheckBox1.Text = "Restrict Data values"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'CheckBox7
+        '
+        Me.CheckBox7.AutoSize = True
+        Me.CheckBox7.Location = New System.Drawing.Point(13, 150)
+        Me.CheckBox7.Name = "CheckBox7"
+        Me.CheckBox7.Size = New System.Drawing.Size(65, 17)
+        Me.CheckBox7.TabIndex = 16
+        Me.CheckBox7.Text = "Weights"
+        Me.CheckBox7.UseVisualStyleBackColor = True
+        '
         'dlgRowStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 209)
+        Me.ClientSize = New System.Drawing.Size(405, 201)
+        Me.Controls.Add(Me.CheckBox7)
+        Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.UcrReceiverMultiple1)
         Me.Controls.Add(Me.UcrSelectorAddRemove1)
@@ -174,4 +198,6 @@ Partial Class dlgRowStats
     Friend WithEvents UcrSelectorAddRemove1 As ucrSelectorAddRemove
     Friend WithEvents lblSelectedVariables As Label
     Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents CheckBox7 As CheckBox
 End Class

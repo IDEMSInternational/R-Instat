@@ -1,7 +1,7 @@
 ﻿
 ' Instat-R
 ' Copyright (C) 2015
-'
+
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
 ' the Free Software Foundation, either version 3 of the License, or
@@ -11,7 +11,7 @@
 ' but WITHOUT ANY WARRANTY; without even the implied warranty of
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
-'
+
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -61,51 +61,7 @@ Public Class dlgSort
         End If
     End Sub
 
-    'Private Sub UcrButtons1_clickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-    '    Dim strScript As String
-    '    Dim temp
-    '    Dim bFirst As Boolean
-    '    Dim newdata As DataFrame
-    '    bFirst = True
+    Private Sub chkWriteBack_CheckedChanged(sender As Object, e As EventArgs) Handles chkWriteBack.CheckedChanged
 
-
-    '    If rdoAscending.Checked = True Then
-    '        If UcrDataSelection1.lstSelectedVariables.Items.Count > 0 Then
-    '            strScript = "data<-data[order(data["
-    '            For Each temp In UcrDataSelection1.lstSelectedVariables.Items
-    '                If bFirst Then
-    '                    bFirst = False
-    '                Else
-    '                    strScript = strScript & "], Data["
-    '                End If
-    '                strScript = strScript & Chr(34) & temp.ToString & Chr(34)
-    '            Next
-    '            strScript = strScript & "]),]"
-    '            frmMain.clsRInterface.RunScript(strScript, False)
-    '        End If
-    '        newdata = frmMain.clsRInterface.GetData("data")
-    '        frmEditor.UpdateSheet(newdata)
-    '    End If
-
-
-    '    If rdoDescending.Checked = True Then
-    '        If UcrDataSelection1.lstSelectedVariables.Items.Count > 0 Then
-    '            strScript = "data<-data[order(data["
-    '            For Each temp In UcrDataSelection1.lstSelectedVariables.Items
-    '                If bFirst Then
-    '                    bFirst = False
-    '                Else
-    '                    strScript = strScript & "],data["
-    '                End If
-    '                strScript = strScript & Chr(34) & temp.ToString & Chr(34)
-    '            Next
-    '            strScript = strScript & "],decreasing= True),]"
-    '            frmMain.clsRInterface.RunScript(strScript, False)
-    '        End If
-    '        newdata = frmMain.clsRInterface.GetData("data")
-    '        frmEditor.UpdateSheet(newdata)
-    '    End If
-    '    Me.Close()
-    'End Sub
-
+    End Sub
 End Class
