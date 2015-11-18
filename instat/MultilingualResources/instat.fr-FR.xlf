@@ -2060,4 +2060,25 @@
       <group id="INSTAT/DLGANOVAONEWAY.RESX" datatype="resx" />
     </body>
   </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGONESAMPLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGONESAMPLE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/UCRRECIVERSINGLEB.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/UCRRECIVERSINGLEB.RESX" datatype="resx">
+        <trans-unit id="$this.Locked" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
 </xliff>

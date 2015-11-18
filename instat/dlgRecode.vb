@@ -16,14 +16,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgRowStats
-    Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+Public Class dlgRecode
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
-
-    End Sub
-
-    Private Sub UcrReceiverMultiple1_Leave(sender As Object, e As EventArgs) Handles UcrReceiverMultiple1.LeftList
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & UcrReceiverMultiple1.lstSelectedVariables.SelectedItem & "")
     End Sub
 End Class
