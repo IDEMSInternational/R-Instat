@@ -21,9 +21,6 @@
   <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Régression simple</value>
-  </data>
   <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -57,9 +54,6 @@
   <data name="Label1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Degrés de liberté</value>
-  </data>
   <data name="lblResidualMsg.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -71,9 +65,6 @@
   </data>
   <data name="lblResidualMsg.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="lblResidualMsg.Text" xml:space="preserve">
-    <value>Message résiduel</value>
   </data>
   <data name="grpLackFit.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>111, 179</value>
@@ -96,9 +87,6 @@
   <data name="chkLackFit.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="chkLackFit.Text" xml:space="preserve">
-    <value>Manque d'ajustement</value>
-  </data>
   <data name="chkAnovaTable.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -110,9 +98,6 @@
   </data>
   <data name="chkAnovaTable.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>9</value>
-  </data>
-  <data name="chkAnovaTable.Text" xml:space="preserve">
-    <value>Afficher la Table de l'Anova</value>
   </data>
   <data name="chkShowPlots.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -126,9 +111,6 @@
   <data name="chkShowPlots.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="chkShowPlots.Text" xml:space="preserve">
-    <value>Voir la parcelle</value>
-  </data>
   <data name="chkSiginificance.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -140,27 +122,6 @@
   </data>
   <data name="chkSiginificance.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>7</value>
-  </data>
-  <data name="chkSiginificance.Text" xml:space="preserve">
-    <value>Test de signification</value>
-  </data>
-  <data name="ComboBox1.Items" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="ComboBox1.Items1" xml:space="preserve">
-    <value>99.99</value>
-  </data>
-  <data name="ComboBox1.Items2" xml:space="preserve">
-    <value>99</value>
-  </data>
-  <data name="ComboBox1.Items3" xml:space="preserve">
-    <value>95</value>
-  </data>
-  <data name="ComboBox1.Items4" xml:space="preserve">
-    <value>90</value>
-  </data>
-  <data name="ComboBox1.Items5" xml:space="preserve">
-    <value>80</value>
   </data>
   <data name="ComboBox1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>302, 103</value>
@@ -183,9 +144,6 @@
   <data name="lblConfidence.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="lblConfidence.Text" xml:space="preserve">
-    <value>Limites de confiance</value>
-  </data>
   <data name="lblExplanatoryVariable.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -201,9 +159,6 @@
   <data name="lblExplanatoryVariable.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="lblExplanatoryVariable.Text" xml:space="preserve">
-    <value>Variable explicative</value>
-  </data>
   <data name="lblResponseVariable.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -215,9 +170,6 @@
   </data>
   <data name="lblResponseVariable.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="lblResponseVariable.Text" xml:space="preserve">
-    <value>Variable de réponse</value>
   </data>
   <data name="ucrReceiverSingleA.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>302, 24</value>
@@ -249,9 +201,6 @@
   <data name="tbRegress.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="tbRegress.Text" xml:space="preserve">
-    <value>Regress</value>
-  </data>
   <data name="tbPlot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -264,9 +213,6 @@
   <data name="tbPlot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="tbPlot.Text" xml:space="preserve">
-    <value>Tracer</value>
-  </data>
   <data name="tbSave.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -275,9 +221,6 @@
   </data>
   <data name="tbSave.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="tbSave.Text" xml:space="preserve">
-    <value>Enregistrer</value>
   </data>
   <data name="tbctrlSimple.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>

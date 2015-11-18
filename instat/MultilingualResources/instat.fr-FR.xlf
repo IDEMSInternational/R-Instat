@@ -1146,6 +1146,42 @@
           <source>Anova One Way</source>
           <target state="new">Anova One Way</target>
         </trans-unit>
+        <trans-unit id="Earilest_Day" translate="yes" xml:space="preserve">
+          <source>Earilest Day</source>
+          <target state="new">Earilest Day</target>
+        </trans-unit>
+        <trans-unit id="End_of_Rain" translate="yes" xml:space="preserve">
+          <source>End of Rain</source>
+          <target state="new">End of Rain</target>
+        </trans-unit>
+        <trans-unit id="End_of_Rains" translate="yes" xml:space="preserve">
+          <source>End of Rains</source>
+          <target state="new">End of Rains</target>
+        </trans-unit>
+        <trans-unit id="Evaporation" translate="yes" xml:space="preserve">
+          <source>Evaporation</source>
+          <target state="new">Evaporation</target>
+        </trans-unit>
+        <trans-unit id="Maximum_Capacity" translate="yes" xml:space="preserve">
+          <source>Maximum Capacity</source>
+          <target state="new">Maximum Capacity</target>
+        </trans-unit>
+        <trans-unit id="Four" translate="yes" xml:space="preserve">
+          <source>Four</source>
+          <target state="new">Four</target>
+        </trans-unit>
+        <trans-unit id="One" translate="yes" xml:space="preserve">
+          <source>One</source>
+          <target state="new">One</target>
+        </trans-unit>
+        <trans-unit id="Three" translate="yes" xml:space="preserve">
+          <source>Three</source>
+          <target state="new">Three</target>
+        </trans-unit>
+        <trans-unit id="Two" translate="yes" xml:space="preserve">
+          <source>Two</source>
+          <target state="new">Two</target>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -2058,27 +2094,6 @@
     </header>
     <body>
       <group id="INSTAT/DLGANOVAONEWAY.RESX" datatype="resx" />
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGONESAMPLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/DLGONESAMPLE.RESX" datatype="resx" />
-    </body>
-  </file>
-  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/UCRRECIVERSINGLEB.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/UCRRECIVERSINGLEB.RESX" datatype="resx">
-        <trans-unit id="$this.Locked" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata">
-          <source>True</source>
-          <target state="needs-review-translation">True</target>
-        </trans-unit>
-      </group>
     </body>
   </file>
 </xliff>
