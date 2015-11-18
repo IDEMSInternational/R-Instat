@@ -1,3 +1,3 @@
-﻿Public Class dlgOneWayAnova
+﻿Public Class dlgNPOneWay
 
 End Class

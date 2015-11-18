@@ -391,9 +391,9 @@ Public Class frmMain
         dlgSeasonalSummaryRain.ShowDialog()
     End Sub
 
-    Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) Handles mnuStatsNonParametricOneWayAnova.Click
-        dlgOneWayAnova.ShowDialog()
-    End Sub
+    'Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) Handles mnuStatsNonParametricOneWayAnova.Click
+    '    dlgOneWayAnova.ShowDialog()
+    'End Sub
 
     Private Sub mnuStatsNonParametricTwoWayAnova_Click(sender As Object, e As EventArgs)
         dlgTwoWayAnova.ShowDialog()
