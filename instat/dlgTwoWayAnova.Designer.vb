@@ -22,43 +22,43 @@ Partial Class dlgTwoWayAnova
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.UcrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
-        Me.UcrReciverSingleB1 = New instat.ucrReceiverSingleB()
-        Me.UcrReciverSingleB2 = New instat.ucrReceiverSingleB()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrSingleReceiver1 = New instat.ucrReceiverSingle()
+        Me.ucrSingleReceiver2 = New instat.ucrReceiverSingleB()
+        Me.ucrSingleReceiver3 = New instat.ucrReceiverSingleB()
         Me.UcrButtons1 = New instat.ucrButtons()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'UcrSelectorAddRemove1
+        'ucrAddRemove
         '
-        Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(-1, -1)
-        Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
-        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(182, 118)
-        Me.UcrSelectorAddRemove1.TabIndex = 0
+        Me.ucrAddRemove.Location = New System.Drawing.Point(-1, -1)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(182, 118)
+        Me.ucrAddRemove.TabIndex = 0
         '
-        'UcrReceiverSingle1
+        'ucrSingleReceiver1
         '
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(206, 24)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReceiverSingle1.TabIndex = 1
+        Me.ucrSingleReceiver1.Location = New System.Drawing.Point(206, 24)
+        Me.ucrSingleReceiver1.Name = "ucrSingleReceiver1"
+        Me.ucrSingleReceiver1.Size = New System.Drawing.Size(106, 26)
+        Me.ucrSingleReceiver1.TabIndex = 1
         '
-        'UcrReciverSingleB1
+        'ucrSingleReceiver2
         '
-        Me.UcrReciverSingleB1.Location = New System.Drawing.Point(206, 72)
-        Me.UcrReciverSingleB1.Name = "UcrReciverSingleB1"
-        Me.UcrReciverSingleB1.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReciverSingleB1.TabIndex = 2
+        Me.ucrSingleReceiver2.Location = New System.Drawing.Point(206, 72)
+        Me.ucrSingleReceiver2.Name = "ucrSingleReceiver2"
+        Me.ucrSingleReceiver2.Size = New System.Drawing.Size(106, 26)
+        Me.ucrSingleReceiver2.TabIndex = 2
         '
-        'UcrReciverSingleB2
+        'ucrSingleReceiver3
         '
-        Me.UcrReciverSingleB2.Location = New System.Drawing.Point(206, 120)
-        Me.UcrReciverSingleB2.Name = "UcrReciverSingleB2"
-        Me.UcrReciverSingleB2.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReciverSingleB2.TabIndex = 3
+        Me.ucrSingleReceiver3.Location = New System.Drawing.Point(206, 120)
+        Me.ucrSingleReceiver3.Name = "ucrSingleReceiver3"
+        Me.ucrSingleReceiver3.Size = New System.Drawing.Size(106, 26)
+        Me.ucrSingleReceiver3.TabIndex = 3
         '
         'UcrButtons1
         '
@@ -103,21 +103,21 @@ Partial Class dlgTwoWayAnova
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.UcrButtons1)
-        Me.Controls.Add(Me.UcrReciverSingleB2)
-        Me.Controls.Add(Me.UcrReciverSingleB1)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
-        Me.Controls.Add(Me.UcrSelectorAddRemove1)
+        Me.Controls.Add(Me.ucrSingleReceiver3)
+        Me.Controls.Add(Me.ucrSingleReceiver2)
+        Me.Controls.Add(Me.ucrSingleReceiver1)
+        Me.Controls.Add(Me.ucrAddRemove)
         Me.Name = "dlgTwoWayAnova"
-        Me.Text = "dlgTwoWayAnova"
+        Me.Text = "Non-parametric Two Way Anova"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents UcrSelectorAddRemove1 As ucrSelectorAddRemove
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
-    Friend WithEvents UcrReciverSingleB1 As ucrReceiverSingleB
-    Friend WithEvents UcrReciverSingleB2 As ucrReceiverSingleB
+    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrSingleReceiver1 As ucrReceiverSingle
+    Friend WithEvents ucrSingleReceiver2 As ucrReceiverSingleB
+    Friend WithEvents ucrSingleReceiver3 As ucrReceiverSingleB
     Friend WithEvents UcrButtons1 As ucrButtons
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label

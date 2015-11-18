@@ -26,13 +26,13 @@ Partial Class dlgAnovaOneWay
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.lblYVariate = New System.Windows.Forms.Label()
         Me.lblFactor = New System.Windows.Forms.Label()
-        Me.ucrSingleReceiver1 = New instat.ucrReceiverSingle()
-        Me.ucrSingleReceiver2 = New instat.ucrReceiverSingleB()
         Me.grpPlots = New System.Windows.Forms.GroupBox()
-        Me.rdoNone = New System.Windows.Forms.RadioButton()
-        Me.rdoMeans = New System.Windows.Forms.RadioButton()
-        Me.rdoResiduals = New System.Windows.Forms.RadioButton()
         Me.rdoANOVA = New System.Windows.Forms.RadioButton()
+        Me.rdoResiduals = New System.Windows.Forms.RadioButton()
+        Me.rdoMeans = New System.Windows.Forms.RadioButton()
+        Me.rdoNone = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverSingleA = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSingleB = New instat.ucrReceiverSingleB()
         Me.grpPlots.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -70,20 +70,6 @@ Partial Class dlgAnovaOneWay
         Me.lblFactor.Tag = "Factor"
         Me.lblFactor.Text = "Factor"
         '
-        'ucrSingleReceiver1
-        '
-        Me.ucrSingleReceiver1.Location = New System.Drawing.Point(257, 36)
-        Me.ucrSingleReceiver1.Name = "ucrSingleReceiver1"
-        Me.ucrSingleReceiver1.Size = New System.Drawing.Size(106, 26)
-        Me.ucrSingleReceiver1.TabIndex = 6
-        '
-        'ucrSingleReceiver2
-        '
-        Me.ucrSingleReceiver2.Location = New System.Drawing.Point(260, 85)
-        Me.ucrSingleReceiver2.Name = "ucrSingleReceiver2"
-        Me.ucrSingleReceiver2.Size = New System.Drawing.Size(106, 26)
-        Me.ucrSingleReceiver2.TabIndex = 7
-        '
         'grpPlots
         '
         Me.grpPlots.Controls.Add(Me.rdoANOVA)
@@ -98,29 +84,17 @@ Partial Class dlgAnovaOneWay
         Me.grpPlots.Tag = "Plots"
         Me.grpPlots.Text = "Plots"
         '
-        'rdoNone
+        'rdoANOVA
         '
-        Me.rdoNone.AutoSize = True
-        Me.rdoNone.Location = New System.Drawing.Point(7, 20)
-        Me.rdoNone.Name = "rdoNone"
-        Me.rdoNone.Size = New System.Drawing.Size(51, 17)
-        Me.rdoNone.TabIndex = 0
-        Me.rdoNone.TabStop = True
-        Me.rdoNone.Tag = "None"
-        Me.rdoNone.Text = "None"
-        Me.rdoNone.UseVisualStyleBackColor = True
-        '
-        'rdoMeans
-        '
-        Me.rdoMeans.AutoSize = True
-        Me.rdoMeans.Location = New System.Drawing.Point(7, 44)
-        Me.rdoMeans.Name = "rdoMeans"
-        Me.rdoMeans.Size = New System.Drawing.Size(57, 17)
-        Me.rdoMeans.TabIndex = 1
-        Me.rdoMeans.TabStop = True
-        Me.rdoMeans.Tag = "Means"
-        Me.rdoMeans.Text = "Means"
-        Me.rdoMeans.UseVisualStyleBackColor = True
+        Me.rdoANOVA.AutoSize = True
+        Me.rdoANOVA.Location = New System.Drawing.Point(111, 44)
+        Me.rdoANOVA.Name = "rdoANOVA"
+        Me.rdoANOVA.Size = New System.Drawing.Size(62, 17)
+        Me.rdoANOVA.TabIndex = 3
+        Me.rdoANOVA.TabStop = True
+        Me.rdoANOVA.Tag = "ANOVA"
+        Me.rdoANOVA.Text = "ANOVA"
+        Me.rdoANOVA.UseVisualStyleBackColor = True
         '
         'rdoResiduals
         '
@@ -134,26 +108,52 @@ Partial Class dlgAnovaOneWay
         Me.rdoResiduals.Text = "Residuals"
         Me.rdoResiduals.UseVisualStyleBackColor = True
         '
-        'rdoANOVA
+        'rdoMeans
         '
-        Me.rdoANOVA.AutoSize = True
-        Me.rdoANOVA.Location = New System.Drawing.Point(111, 44)
-        Me.rdoANOVA.Name = "rdoANOVA"
-        Me.rdoANOVA.Size = New System.Drawing.Size(62, 17)
-        Me.rdoANOVA.TabIndex = 3
-        Me.rdoANOVA.TabStop = True
-        Me.rdoANOVA.Tag = "ANOVA"
-        Me.rdoANOVA.Text = "ANOVA"
-        Me.rdoANOVA.UseVisualStyleBackColor = True
+        Me.rdoMeans.AutoSize = True
+        Me.rdoMeans.Location = New System.Drawing.Point(7, 44)
+        Me.rdoMeans.Name = "rdoMeans"
+        Me.rdoMeans.Size = New System.Drawing.Size(57, 17)
+        Me.rdoMeans.TabIndex = 1
+        Me.rdoMeans.TabStop = True
+        Me.rdoMeans.Tag = "Means"
+        Me.rdoMeans.Text = "Means"
+        Me.rdoMeans.UseVisualStyleBackColor = True
+        '
+        'rdoNone
+        '
+        Me.rdoNone.AutoSize = True
+        Me.rdoNone.Location = New System.Drawing.Point(7, 20)
+        Me.rdoNone.Name = "rdoNone"
+        Me.rdoNone.Size = New System.Drawing.Size(51, 17)
+        Me.rdoNone.TabIndex = 0
+        Me.rdoNone.TabStop = True
+        Me.rdoNone.Tag = "None"
+        Me.rdoNone.Text = "None"
+        Me.rdoNone.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverSingleA
+        '
+        Me.ucrReceiverSingleA.Location = New System.Drawing.Point(257, 36)
+        Me.ucrReceiverSingleA.Name = "ucrReceiverSingleA"
+        Me.ucrReceiverSingleA.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverSingleA.TabIndex = 9
+        '
+        'ucrReceiverSingleB
+        '
+        Me.ucrReceiverSingleB.Location = New System.Drawing.Point(260, 85)
+        Me.ucrReceiverSingleB.Name = "ucrReceiverSingleB"
+        Me.ucrReceiverSingleB.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverSingleB.TabIndex = 10
         '
         'dlgAnovaOneWay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(414, 261)
+        Me.Controls.Add(Me.ucrReceiverSingleB)
+        Me.Controls.Add(Me.ucrReceiverSingleA)
         Me.Controls.Add(Me.grpPlots)
-        Me.Controls.Add(Me.ucrSingleReceiver2)
-        Me.Controls.Add(Me.ucrSingleReceiver1)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblYVariate)
         Me.Controls.Add(Me.ucrBase)
@@ -176,11 +176,11 @@ Partial Class dlgAnovaOneWay
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblYVariate As Label
     Friend WithEvents lblFactor As Label
-    Friend WithEvents ucrSingleReceiver1 As ucrReceiverSingle
-    Friend WithEvents ucrSingleReceiver2 As ucrReceiverSingleB
     Friend WithEvents grpPlots As GroupBox
     Friend WithEvents rdoANOVA As RadioButton
     Friend WithEvents rdoResiduals As RadioButton
     Friend WithEvents rdoMeans As RadioButton
     Friend WithEvents rdoNone As RadioButton
+    Friend WithEvents ucrReceiverSingleA As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSingleB As ucrReceiverSingleB
 End Class
