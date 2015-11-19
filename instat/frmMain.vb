@@ -397,4 +397,8 @@ Public Class frmMain
     Private Sub mnuEditReplace_Click(sender As Object, e As EventArgs) Handles mnuEditReplace.Click
         dlgReplace.ShowDialog()
     End Sub
+
+    Private Sub StatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatisticsToolStripMenuItem.Click
+
+    End Sub
 End Class
