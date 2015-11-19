@@ -29,8 +29,9 @@ Public Class dlgDotPlot
         ucrBase.clsRsyntax.AddParameter("main", Chr(34) & txtTitle.Text & Chr(34))
     End Sub
 
-    Private Sub UcrReceiverSingle1_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingle.LeftText
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverSingle.txtReceiverSingle.Text & "")
+    Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingle.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverSingle.GetVariables())
     End Sub
+
 
 End Class
