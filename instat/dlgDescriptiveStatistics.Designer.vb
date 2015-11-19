@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgDescriptiveStatistics
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgDescriptiveStatistics
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.UcrDataSelection1 = New instat.ucrDataSelection()
         Me.btnStatistics = New System.Windows.Forms.Button()
@@ -30,7 +30,6 @@ Partial Class dlgDescriptiveStatistics
         Me.chkStemAndLeaf = New System.Windows.Forms.CheckBox()
         Me.chkGraphics = New System.Windows.Forms.CheckBox()
         Me.UcrButtons1 = New instat.ucrButtons()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.grpgraphics.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -114,21 +113,11 @@ Partial Class dlgDescriptiveStatistics
         Me.UcrButtons1.Size = New System.Drawing.Size(407, 30)
         Me.UcrButtons1.TabIndex = 91
         '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"One", "Two", "Three ", "Four"})
-        Me.ComboBox1.Location = New System.Drawing.Point(247, 133)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox1.TabIndex = 92
-        '
         'dlgDescriptiveStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(407, 225)
-        Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.UcrButtons1)
         Me.Controls.Add(Me.btnStatistics)
         Me.Controls.Add(Me.grpgraphics)
@@ -155,5 +144,4 @@ Partial Class dlgDescriptiveStatistics
     Friend WithEvents chkStemAndLeaf As CheckBox
     Friend WithEvents chkGraphics As CheckBox
     Friend WithEvents UcrButtons1 As ucrButtons
-    Friend WithEvents ComboBox1 As ComboBox
 End Class
