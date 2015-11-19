@@ -86,7 +86,27 @@ Public Class RInterface
                 dfTemp = dfList(i).AsDataFrame()
                 FillData(dfTemp, grdData)
             Next
+        End If
+    End Sub
 
+    Public Sub FillListView(lstView As ListView)
+        Dim dfList As GenericVector
+        Dim dfTemp As DataFrame
+        Dim i As Integer
+        Dim grps As New ListViewGroup
+        If bInstatObjectExists Then
+            lstView.Columns.Add("Available Data", width:=100)
+            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variable_info()").AsList
+            For i = 0 To dfList.Count - 1
+                grps = New ListViewGroup(dfList.Names(i), HorizontalAlignment.Left)
+                If Not lstView.Groups.Contains(grps) Then
+                    lstView.Groups.Add(grps)
+                End If
+                dfTemp = dfList(i).AsDataFrame()
+                For j = 0 To dfTemp.RowCount - 1
+                    lstView.Items.Add(dfTemp(j, 0)).Group = lstView.Groups(i)
+                Next
+            Next
         End If
     End Sub
 
@@ -131,6 +151,7 @@ Public Class RInterface
     End Sub
 
     Public Function GetData(strLabel As String) As DataFrame
+
         Me.clsEngine.Evaluate("temp<-" & strLabel).AsDataFrame()
         Return Me.clsEngine.GetSymbol("temp").AsDataFrame()
 
@@ -144,7 +165,12 @@ Public Class RInterface
 
     Public Function GetVar(strLabel As String) As CharacterVector
 
-        Return Me.clsEngine.Evaluate(strLabel).AsCharacter
+        Try
+            Return Me.clsEngine.Evaluate(strLabel).AsCharacter()
+        Catch
+            MsgBox(strLabel)
+            Return Nothing
+        End Try
 
     End Function
 
@@ -173,6 +199,7 @@ Public Class RInterface
 
         End If
     End Sub
+
     Public Sub FillData(dfTemp As DataFrame, grdData As ReoGridControl)
         Dim bFoundWorksheet As Boolean = False
         Dim tempWorkSheet
