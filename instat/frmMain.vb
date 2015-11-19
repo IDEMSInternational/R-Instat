@@ -391,10 +391,14 @@ Public Class frmMain
     End Function
 
     Private Sub mnuEditFont_Click(sender As Object, e As EventArgs) Handles mnuEditFont.Click
-        'dlgFont.ShowDialog()
+
     End Sub
 
     Private Sub mnuEditReplace_Click(sender As Object, e As EventArgs) Handles mnuEditReplace.Click
         dlgReplace.ShowDialog()
     End Sub
+
+
+
+
 End Class
