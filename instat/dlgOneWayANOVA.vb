@@ -21,7 +21,7 @@ Public Class dlgAnovaOneWay
     End Sub
 
     Private Sub dlgAnovaOneWay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("One Way Anova")
+        ucrBase.clsRsyntax.SetFunction("aov")
         ucrBase.clsRsyntax.iCallType = 2
         UcrSingleReceiver1.Selector = UcrAddRemove
         UcrSingleReceiver1.SetMeAsReceiver()
@@ -37,7 +37,5 @@ Public Class dlgAnovaOneWay
         ucrBase.clsRsyntax.AddParameter("x", "data$" & UcrSingleReceiver2.txtReceiverSingle.Text & "")
     End Sub
 
-    Private Sub UcrSingleReceiver1_Load(sender As Object, e As EventArgs) Handles UcrSingleReceiver1.Load
 
-    End Sub
 End Class

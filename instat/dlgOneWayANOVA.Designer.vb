@@ -22,11 +22,31 @@ Partial Class dlgAnovaOneWay
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         Me.UcrSingleReceiver2 = New instat.ucrReceiverSingle()
         Me.UcrSingleReceiver1 = New instat.ucrReceiverSingle()
         Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
         Me.SuspendLayout()
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(252, 23)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(49, 13)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "Y variate"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(252, 75)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(37, 13)
+        Me.Label2.TabIndex = 5
+        Me.Label2.Text = "Factor"
         '
         'ucrBase
         '
@@ -51,9 +71,9 @@ Partial Class dlgAnovaOneWay
         '
         'UcrAddRemove
         '
-        Me.UcrAddRemove.Location = New System.Drawing.Point(3, 12)
+        Me.UcrAddRemove.Location = New System.Drawing.Point(12, 12)
         Me.UcrAddRemove.Name = "UcrAddRemove"
-        Me.UcrAddRemove.Size = New System.Drawing.Size(186, 129)
+        Me.UcrAddRemove.Size = New System.Drawing.Size(209, 129)
         Me.UcrAddRemove.TabIndex = 0
         '
         'dlgAnovaOneWay
@@ -61,6 +81,8 @@ Partial Class dlgAnovaOneWay
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(414, 261)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.UcrSingleReceiver2)
         Me.Controls.Add(Me.UcrSingleReceiver1)
@@ -71,8 +93,9 @@ Partial Class dlgAnovaOneWay
         Me.Name = "dlgAnovaOneWay"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Anova_One_Way"
-        Me.Text = "Anova One Way"
+        Me.Text = "Non-Parametric One Way ANOVA"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -80,4 +103,6 @@ Partial Class dlgAnovaOneWay
     Friend WithEvents UcrSingleReceiver1 As ucrReceiverSingle
     Friend WithEvents UcrSingleReceiver2 As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
 End Class
