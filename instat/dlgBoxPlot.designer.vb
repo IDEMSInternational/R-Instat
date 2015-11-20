@@ -22,8 +22,8 @@ Partial Class dlgBoxPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblTittle = New System.Windows.Forms.Label()
-        Me.txtTittle = New System.Windows.Forms.TextBox()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
@@ -33,22 +33,22 @@ Partial Class dlgBoxPlot
         Me.txtXLabel = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
-        'lblTittle
+        'lblTitle
         '
-        Me.lblTittle.AutoSize = True
-        Me.lblTittle.Location = New System.Drawing.Point(35, 200)
-        Me.lblTittle.Name = "lblTittle"
-        Me.lblTittle.Size = New System.Drawing.Size(30, 13)
-        Me.lblTittle.TabIndex = 2
-        Me.lblTittle.Tag = "Tittle"
-        Me.lblTittle.Text = "Tittle"
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Location = New System.Drawing.Point(35, 200)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
+        Me.lblTitle.TabIndex = 2
+        Me.lblTitle.Tag = "Title"
+        Me.lblTitle.Text = "Title"
         '
-        'txtTittle
+        'txtTitle
         '
-        Me.txtTittle.Location = New System.Drawing.Point(165, 193)
-        Me.txtTittle.Name = "txtTittle"
-        Me.txtTittle.Size = New System.Drawing.Size(208, 20)
-        Me.txtTittle.TabIndex = 3
+        Me.txtTitle.Location = New System.Drawing.Point(165, 193)
+        Me.txtTitle.Name = "txtTitle"
+        Me.txtTitle.Size = New System.Drawing.Size(208, 20)
+        Me.txtTitle.TabIndex = 3
         '
         'UcrAddRemove
         '
@@ -117,8 +117,8 @@ Partial Class dlgBoxPlot
         Me.Controls.Add(Me.UcrReceiverSingle1)
         Me.Controls.Add(Me.UcrAddRemove)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.txtTittle)
-        Me.Controls.Add(Me.lblTittle)
+        Me.Controls.Add(Me.txtTitle)
+        Me.Controls.Add(Me.lblTitle)
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -130,8 +130,8 @@ Partial Class dlgBoxPlot
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lblTittle As Label
-    Friend WithEvents txtTittle As TextBox
+    Friend WithEvents lblTitle As Label
+    Friend WithEvents txtTitle As TextBox
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents UcrAddRemove As ucrSelectorAddRemove
     Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
