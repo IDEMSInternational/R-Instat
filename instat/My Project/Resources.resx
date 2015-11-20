@@ -580,4 +580,172 @@
   <data name="Two" xml:space="preserve">
     <value>Two</value>
   </data>
+  <data name="Analysis" xml:space="preserve">
+    <value>Analysis</value>
+  </data>
+  <data name="By_Factor" xml:space="preserve">
+    <value>By Factor</value>
+  </data>
+  <data name="Columns_to_Sort" xml:space="preserve">
+    <value>Columns to Sort</value>
+  </data>
+  <data name="Confidence_Limits" xml:space="preserve">
+    <value>Confidence Limits</value>
+  </data>
+  <data name="Continuity_Correction" xml:space="preserve">
+    <value>Continuity Correction</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="Data_Column" xml:space="preserve">
+    <value>Data Column</value>
+  </data>
+  <data name="Dates" xml:space="preserve">
+    <value>Dates</value>
+  </data>
+  <data name="Degrees_of_freedom" xml:space="preserve">
+    <value>Degrees of freedom</value>
+  </data>
+  <data name="Display_Margins" xml:space="preserve">
+    <value>Display Margins</value>
+  </data>
+  <data name="Display_Plot" xml:space="preserve">
+    <value>Display Plot</value>
+  </data>
+  <data name="Display_P_Values" xml:space="preserve">
+    <value>Display p-Values</value>
+  </data>
+  <data name="Distributions" xml:space="preserve">
+    <value>Distributions</value>
+  </data>
+  <data name="Empirical" xml:space="preserve">
+    <value>Empirical</value>
+  </data>
+  <data name="Exponential" xml:space="preserve">
+    <value>Exponential</value>
+  </data>
+  <data name="Extreme_Values" xml:space="preserve">
+    <value>Extreme Values</value>
+  </data>
+  <data name="For_Factor" xml:space="preserve">
+    <value>For Factor</value>
+  </data>
+  <data name="Gamma" xml:space="preserve">
+    <value>Gamma</value>
+  </data>
+  <data name="Lack_of_fit" xml:space="preserve">
+    <value>Lack of fit</value>
+  </data>
+  <data name="Layout_of_data" xml:space="preserve">
+    <value>Layout of data</value>
+  </data>
+  <data name="Make_Result_as_a_factor" xml:space="preserve">
+    <value>Make Result as a factor</value>
+  </data>
+  <data name="Mean" xml:space="preserve">
+    <value>Mean</value>
+  </data>
+  <data name="Median" xml:space="preserve">
+    <value>Median</value>
+  </data>
+  <data name="Minimum" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="Missing" xml:space="preserve">
+    <value>Missing</value>
+  </data>
+  <data name="Models" xml:space="preserve">
+    <value>Models</value>
+  </data>
+  <data name="New_value" xml:space="preserve">
+    <value>New Value</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Order_Type" xml:space="preserve">
+    <value>Order Type</value>
+  </data>
+  <data name="Parameter" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
+  <data name="Percentages_of_overall_total" xml:space="preserve">
+    <value>Percentages of overall total</value>
+  </data>
+  <data name="Percentage_of_factor" xml:space="preserve">
+    <value>Percentage of factor</value>
+  </data>
+  <data name="Plot_title" xml:space="preserve">
+    <value>Plot title</value>
+  </data>
+  <data name="Range_End" xml:space="preserve">
+    <value>Range End</value>
+  </data>
+  <data name="Range_Start" xml:space="preserve">
+    <value>Range Start</value>
+  </data>
+  <data name="Repeated" xml:space="preserve">
+    <value>Repeated</value>
+  </data>
+  <data name="Repeat_Single_Value" xml:space="preserve">
+    <value>Repeat Single Value</value>
+  </data>
+  <data name="Residuals" xml:space="preserve">
+    <value>Residuals</value>
+  </data>
+  <data name="Residual_Message" xml:space="preserve">
+    <value>Residual Message</value>
+  </data>
+  <data name="Save_values" xml:space="preserve">
+    <value>Save values</value>
+  </data>
+  <data name="Sequences" xml:space="preserve">
+    <value>Sequences</value>
+  </data>
+  <data name="Sequence_Definition" xml:space="preserve">
+    <value>Sequence Definition</value>
+  </data>
+  <data name="Show_Anova_Table" xml:space="preserve">
+    <value>Show Anova Table</value>
+  </data>
+  <data name="Show_Plot" xml:space="preserve">
+    <value>Show Plot</value>
+  </data>
+  <data name="Significance_Test" xml:space="preserve">
+    <value>Significance Test</value>
+  </data>
+  <data name="Single_Value" xml:space="preserve">
+    <value>Single Value</value>
+  </data>
+  <data name="St_Dev" xml:space="preserve">
+    <value>St.Dev</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="time" xml:space="preserve">
+    <value>time(s)</value>
+  </data>
+  <data name="Variable_to_Plot" xml:space="preserve">
+    <value>Variable to Plot</value>
+  </data>
+  <data name="Weights" xml:space="preserve">
+    <value>Weights</value>
+  </data>
+  <data name="With_a_Label" xml:space="preserve">
+    <value>With a Label</value>
+  </data>
+  <data name="Write_back_to_the_data" xml:space="preserve">
+    <value>Write back to the data</value>
+  </data>
+  <data name="Y_Variables" xml:space="preserve">
+    <value>Y Variables</value>
+  </data>
+  <data name="Y_variate" xml:space="preserve">
+    <value>Y variate</value>
+  </data>
 </root>
