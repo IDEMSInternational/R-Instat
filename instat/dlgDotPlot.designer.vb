@@ -24,16 +24,15 @@ Partial Class dlgDotPlot
     Private Sub InitializeComponent()
         Me.lblPlotTitle = New System.Windows.Forms.Label()
         Me.txtTitle = New System.Windows.Forms.TextBox()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
         Me.lblVariableToPlot = New System.Windows.Forms.Label()
+        Me.ucrAddRemove1 = New instat.ucrSelectorAddRemove()
+        Me.crReciverSingle = New instat.ucrReciverSingleB()
         Me.SuspendLayout()
         '
         'lblPlotTitle
         '
         Me.lblPlotTitle.AutoSize = True
-        Me.lblPlotTitle.Location = New System.Drawing.Point(25, 141)
+        Me.lblPlotTitle.Location = New System.Drawing.Point(12, 202)
         Me.lblPlotTitle.Name = "lblPlotTitle"
         Me.lblPlotTitle.Size = New System.Drawing.Size(51, 13)
         Me.lblPlotTitle.TabIndex = 1
@@ -41,53 +40,45 @@ Partial Class dlgDotPlot
         '
         'txtTitle
         '
-        Me.txtTitle.Location = New System.Drawing.Point(82, 141)
+        Me.txtTitle.Location = New System.Drawing.Point(82, 195)
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.Size = New System.Drawing.Size(273, 20)
         Me.txtTitle.TabIndex = 2
         '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 185)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(2, 12)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(186, 129)
-        Me.ucrAddRemove.TabIndex = 3
-        '
-        'ucrReceiverSingle
-        '
-        Me.ucrReceiverSingle.Location = New System.Drawing.Point(211, 38)
-        Me.ucrReceiverSingle.Name = "ucrReceiverSingle"
-        Me.ucrReceiverSingle.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverSingle.TabIndex = 4
-        '
         'lblVariableToPlot
         '
         Me.lblVariableToPlot.AutoSize = True
-        Me.lblVariableToPlot.Location = New System.Drawing.Point(211, 13)
+        Me.lblVariableToPlot.Location = New System.Drawing.Point(250, 9)
         Me.lblVariableToPlot.Name = "lblVariableToPlot"
         Me.lblVariableToPlot.Size = New System.Drawing.Size(78, 13)
         Me.lblVariableToPlot.TabIndex = 5
         Me.lblVariableToPlot.Tag = "Variable_to_Plot"
         Me.lblVariableToPlot.Text = "Variable to Plot"
         '
+        'ucrAddRemove1
+        '
+        Me.ucrAddRemove1.Location = New System.Drawing.Point(0, 26)
+        Me.ucrAddRemove1.Name = "ucrAddRemove1"
+        Me.ucrAddRemove1.Size = New System.Drawing.Size(203, 127)
+        Me.ucrAddRemove1.TabIndex = 6
+        '
+        'crReciverSingle
+        '
+        Me.crReciverSingle.Location = New System.Drawing.Point(253, 26)
+        Me.crReciverSingle.Name = "crReciverSingle"
+        Me.crReciverSingle.Size = New System.Drawing.Size(106, 26)
+        Me.crReciverSingle.TabIndex = 7
+        '
         'dlgDotPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 226)
+        Me.ClientSize = New System.Drawing.Size(405, 250)
+        Me.Controls.Add(Me.crReciverSingle)
+        Me.Controls.Add(Me.ucrAddRemove1)
         Me.Controls.Add(Me.lblVariableToPlot)
-        Me.Controls.Add(Me.ucrReceiverSingle)
-        Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.txtTitle)
         Me.Controls.Add(Me.lblPlotTitle)
-        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -106,4 +97,6 @@ Partial Class dlgDotPlot
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
     Friend WithEvents lblVariableToPlot As Label
+    Friend WithEvents ucrAddRemove1 As ucrSelectorAddRemove
+    Friend WithEvents crReciverSingle As ucrReciverSingleB
 End Class

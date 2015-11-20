@@ -183,6 +183,12 @@
     <Compile Include="dlgChangeFormatDayMonth.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgChisquare.Designer.vb">
+      <DependentUpon>dlgChisquare.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgChisquare.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCliBoxplot.designer.vb">
       <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
     </Compile>
@@ -682,6 +688,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgChangeFormatDayMonth.sw-KE.resx">
       <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgChisquare.fr-FR.resx">
+      <DependentUpon>dlgChisquare.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgChisquare.resx">
+      <DependentUpon>dlgChisquare.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgChisquare.sw-KE.resx">
+      <DependentUpon>dlgChisquare.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliBoxplot.fr-FR.resx">
       <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
@@ -1227,6 +1242,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

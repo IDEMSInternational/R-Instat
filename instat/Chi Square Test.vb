@@ -33,9 +33,7 @@ Public Class dlgChiSquareTest
 
     End Sub
 
-    Private Sub cboLayoutOfData_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboLayoutOfData.SelectedIndexChanged
 
-    End Sub
 
     Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
 
