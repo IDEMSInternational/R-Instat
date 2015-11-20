@@ -23,19 +23,24 @@ Public Class dlgAnovaOneWay
     Private Sub dlgAnovaOneWay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("aov")
         ucrBase.clsRsyntax.iCallType = 2
-        UcrSingleReceiver1.Selector = UcrAddRemove
-        UcrSingleReceiver1.SetMeAsReceiver()
-        UcrSingleReceiver2.Selector = UcrAddRemove
-        UcrSingleReceiver2.SetMeAsReceiver()
+        ucrSingleReceiver1.Selector = UcrAddRemove
+        ucrSingleReceiver1.SetMeAsReceiver()
+        ucrSingleReceiver2.Selector = UcrAddRemove
+        ucrSingleReceiver2.SetMeAsReceiver()
         autoTranslate(Me)
     End Sub
 
-    Private Sub ucrReceiverSingle1_Leave(sender As Object, e As EventArgs) Handles UcrSingleReceiver1.Leave
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & UcrSingleReceiver1.txtReceiverSingle.Text & "")
-    End Sub
-    Private Sub ucrReceiverSingle2_Leave(sender As Object, e As EventArgs) Handles UcrSingleReceiver2.Leave
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & UcrSingleReceiver2.txtReceiverSingle.Text & "")
+    Private Sub ucrSingleReceiver2_Enter(sender As Object, e As EventArgs) Handles ucrSingleReceiver1.Enter
+        ucrSingleReceiver2.Selector = UcrAddRemove
+        ucrSingleReceiver2.SetMeAsReceiver()
     End Sub
 
 
+    Private Sub UcrSingleReceiver2_Leave(sender As Object, e As EventArgs) Handles ucrSingleReceiver2.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrSingleReceiver2.GetVariables())
+    End Sub
+
+    Private Sub UcrSingleReceiver1_Leave(sender As Object, e As EventArgs) Handles ucrSingleReceiver1.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrSingleReceiver1.GetVariables())
+    End Sub
 End Class

@@ -25,8 +25,8 @@ Partial Class dlgAnovaOneWay
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
-        Me.UcrSingleReceiver2 = New instat.ucrReceiverSingle()
-        Me.UcrSingleReceiver1 = New instat.ucrReceiverSingle()
+        Me.ucrSingleReceiver2 = New instat.ucrReceiverSingle()
+        Me.ucrSingleReceiver1 = New instat.ucrReceiverSingle()
         Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
         Me.SuspendLayout()
         '
@@ -55,19 +55,19 @@ Partial Class dlgAnovaOneWay
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 3
         '
-        'UcrSingleReceiver2
+        'ucrSingleReceiver2
         '
-        Me.UcrSingleReceiver2.Location = New System.Drawing.Point(244, 35)
-        Me.UcrSingleReceiver2.Name = "UcrSingleReceiver2"
-        Me.UcrSingleReceiver2.Size = New System.Drawing.Size(106, 26)
-        Me.UcrSingleReceiver2.TabIndex = 2
+        Me.ucrSingleReceiver2.Location = New System.Drawing.Point(244, 91)
+        Me.ucrSingleReceiver2.Name = "ucrSingleReceiver2"
+        Me.ucrSingleReceiver2.Size = New System.Drawing.Size(106, 26)
+        Me.ucrSingleReceiver2.TabIndex = 2
         '
-        'UcrSingleReceiver1
+        'ucrSingleReceiver1
         '
-        Me.UcrSingleReceiver1.Location = New System.Drawing.Point(244, 86)
-        Me.UcrSingleReceiver1.Name = "UcrSingleReceiver1"
-        Me.UcrSingleReceiver1.Size = New System.Drawing.Size(106, 26)
-        Me.UcrSingleReceiver1.TabIndex = 1
+        Me.ucrSingleReceiver1.Location = New System.Drawing.Point(244, 39)
+        Me.ucrSingleReceiver1.Name = "ucrSingleReceiver1"
+        Me.ucrSingleReceiver1.Size = New System.Drawing.Size(106, 26)
+        Me.ucrSingleReceiver1.TabIndex = 1
         '
         'UcrAddRemove
         '
@@ -84,8 +84,8 @@ Partial Class dlgAnovaOneWay
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.UcrSingleReceiver2)
-        Me.Controls.Add(Me.UcrSingleReceiver1)
+        Me.Controls.Add(Me.ucrSingleReceiver2)
+        Me.Controls.Add(Me.ucrSingleReceiver1)
         Me.Controls.Add(Me.UcrAddRemove)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -100,8 +100,8 @@ Partial Class dlgAnovaOneWay
     End Sub
 
     Friend WithEvents UcrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents UcrSingleReceiver1 As ucrReceiverSingle
-    Friend WithEvents UcrSingleReceiver2 As ucrReceiverSingle
+    Friend WithEvents ucrSingleReceiver1 As ucrReceiverSingle
+    Friend WithEvents ucrSingleReceiver2 As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
