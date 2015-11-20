@@ -42,7 +42,9 @@ Public Class dlgFreqTables
         End If
     End Sub
 
-    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.LeftList
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverMultiple.lstSelectedVariables.SelectedItem & "")
+    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.Leave
+        'ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverMultiple.lstSelectedVariables.SelectedItem & "")
+        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverMultiple.GetVariables())
     End Sub
+
 End Class

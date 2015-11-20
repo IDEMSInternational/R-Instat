@@ -395,6 +395,10 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuEditReplace_Click(sender As Object, e As EventArgs) Handles mnuEditReplace.Click
-        dlgReplace.ShowDialog()
+        'dlgReplace.ShowDialog()
+    End Sub
+
+    Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyToolStripMenuItem.Click
+        dlgFreqTables.ShowDialog()
     End Sub
 End Class

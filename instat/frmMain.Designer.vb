@@ -235,6 +235,8 @@ Partial Class frmMain
         Me.RandomSamplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearRemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteRowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FactorToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManipulateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransformToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RecodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -298,8 +300,6 @@ Partial Class frmMain
         Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FactorToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DeleteRowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -319,35 +319,35 @@ Partial Class frmMain
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(213, 6)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(163, 6)
         '
         'ToolStripSeparator10
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(213, 6)
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(163, 6)
         '
         'GammaToolStripMenuItem
         '
         Me.GammaToolStripMenuItem.Name = "GammaToolStripMenuItem"
-        Me.GammaToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.GammaToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.GammaToolStripMenuItem.Text = "Gamma..."
         '
         'ExtremaToolStripMenuItem
         '
         Me.ExtremaToolStripMenuItem.Name = "ExtremaToolStripMenuItem"
-        Me.ExtremaToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.ExtremaToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.ExtremaToolStripMenuItem.Text = "Extrema.."
         '
         'ChisquareTestToolStripMenuItem
         '
         Me.ChisquareTestToolStripMenuItem.Name = "ChisquareTestToolStripMenuItem"
-        Me.ChisquareTestToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.ChisquareTestToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.ChisquareTestToolStripMenuItem.Text = "Chi-square Test..."
         '
         'GoodnessOfFitToolStripMenuItem
         '
         Me.GoodnessOfFitToolStripMenuItem.Name = "GoodnessOfFitToolStripMenuItem"
-        Me.GoodnessOfFitToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.GoodnessOfFitToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.GoodnessOfFitToolStripMenuItem.Text = "Goodness of Fit..."
         '
         'AnalysisOfVarianceToolStripMenuItem
@@ -442,7 +442,7 @@ Partial Class frmMain
         'OneSampleToolStripMenuItem
         '
         Me.OneSampleToolStripMenuItem.Name = "OneSampleToolStripMenuItem"
-        Me.OneSampleToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
+        Me.OneSampleToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.OneSampleToolStripMenuItem.Text = "One Sample..."
         '
         'NonParametricToolStripMenuItem
@@ -1783,6 +1783,18 @@ Partial Class frmMain
         Me.ClearRemoveToolStripMenuItem.Tag = "Clear_Remove"
         Me.ClearRemoveToolStripMenuItem.Text = "Delete columns"
         '
+        'DeleteRowsToolStripMenuItem
+        '
+        Me.DeleteRowsToolStripMenuItem.Name = "DeleteRowsToolStripMenuItem"
+        Me.DeleteRowsToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.DeleteRowsToolStripMenuItem.Text = "Delete rows"
+        '
+        'FactorToolStripMenuItem1
+        '
+        Me.FactorToolStripMenuItem1.Name = "FactorToolStripMenuItem1"
+        Me.FactorToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
+        Me.FactorToolStripMenuItem1.Text = "Factor"
+        '
         'ManipulateToolStripMenuItem
         '
         Me.ManipulateToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TransformToolStripMenuItem, Me.RecodeToolStripMenuItem, Me.mnuManageDataSort, Me.mnuManageManipulateRowStat, Me.InteractionsToolStripMenuItem, Me.IndicatorVariablesToolStripMenuItem})
@@ -2185,18 +2197,6 @@ Partial Class frmMain
         Me.WaterBalanceToolStripMenuItem1.Name = "WaterBalanceToolStripMenuItem1"
         Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
         Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
-        '
-        'FactorToolStripMenuItem1
-        '
-        Me.FactorToolStripMenuItem1.Name = "FactorToolStripMenuItem1"
-        Me.FactorToolStripMenuItem1.Size = New System.Drawing.Size(205, 22)
-        Me.FactorToolStripMenuItem1.Text = "Factor"
-        '
-        'DeleteRowsToolStripMenuItem
-        '
-        Me.DeleteRowsToolStripMenuItem.Name = "DeleteRowsToolStripMenuItem"
-        Me.DeleteRowsToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.DeleteRowsToolStripMenuItem.Text = "Delete rows"
         '
         'frmMain
         '
