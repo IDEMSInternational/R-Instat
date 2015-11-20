@@ -580,4 +580,25 @@
   <data name="Two" xml:space="preserve">
     <value>Two</value>
   </data>
+  <data name="Analysis" xml:space="preserve">
+    <value>Analysis</value>
+  </data>
+  <data name="Data_Column" xml:space="preserve">
+    <value>Data Column</value>
+  </data>
+  <data name="Graphs" xml:space="preserve">
+    <value>Graphs</value>
+  </data>
+  <data name="Models" xml:space="preserve">
+    <value>Models</value>
+  </data>
+  <data name="Parameter" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
+  <data name="Significance_test" xml:space="preserve">
+    <value>Significance test</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
 </root>

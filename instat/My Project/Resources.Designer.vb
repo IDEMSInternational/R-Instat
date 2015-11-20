@@ -80,6 +80,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Analysis.
+        '''</summary>
+        Friend ReadOnly Property Analysis() As String
+            Get
+                Return ResourceManager.GetString("Analysis", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Analysis of Variance.
         '''</summary>
         Friend ReadOnly Property Analysis_of_Variance() As String
@@ -338,6 +347,15 @@ Namespace My.Resources
         Friend ReadOnly Property Data() As String
             Get
                 Return ResourceManager.GetString("Data", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Data Column.
+        '''</summary>
+        Friend ReadOnly Property Data_Column() As String
+            Get
+                Return ResourceManager.GetString("Data_Column", resourceCulture)
             End Get
         End Property
         
@@ -630,6 +648,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Graphs.
+        '''</summary>
+        Friend ReadOnly Property Graphs() As String
+            Get
+                Return ResourceManager.GetString("Graphs", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Group.
         '''</summary>
         Friend ReadOnly Property Group() As String
@@ -743,6 +770,15 @@ Namespace My.Resources
         Friend ReadOnly Property Maximum_Capacity() As String
             Get
                 Return ResourceManager.GetString("Maximum_Capacity", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Models.
+        '''</summary>
+        Friend ReadOnly Property Models() As String
+            Get
+                Return ResourceManager.GetString("Models", resourceCulture)
             End Get
         End Property
         
@@ -899,6 +935,15 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("Paomedia-Small-N-Flat-Window-layout", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Parameter.
+        '''</summary>
+        Friend ReadOnly Property Parameter() As String
+            Get
+                Return ResourceManager.GetString("Parameter", resourceCulture)
             End Get
         End Property
         
@@ -1200,6 +1245,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Significance test.
+        '''</summary>
+        Friend ReadOnly Property Significance_test() As String
+            Get
+                Return ResourceManager.GetString("Significance_test", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Simple Models.
         '''</summary>
         Friend ReadOnly Property Simple_Models() As String
@@ -1394,6 +1448,15 @@ Namespace My.Resources
         Friend ReadOnly Property Unstack() As String
             Get
                 Return ResourceManager.GetString("Unstack", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Value.
+        '''</summary>
+        Friend ReadOnly Property Value() As String
+            Get
+                Return ResourceManager.GetString("Value", resourceCulture)
             End Get
         End Property
         
