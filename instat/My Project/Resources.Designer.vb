@@ -1443,6 +1443,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Title.
+        '''</summary>
+        Friend ReadOnly Property Title() As String
+            Get
+                Return ResourceManager.GetString("Title", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to To Script.
         '''</summary>
         Friend ReadOnly Property To_Script() As String
@@ -1583,6 +1592,24 @@ Namespace My.Resources
         Friend ReadOnly Property Within() As String
             Get
                 Return ResourceManager.GetString("Within", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to X variable.
+        '''</summary>
+        Friend ReadOnly Property X_variable() As String
+            Get
+                Return ResourceManager.GetString("X_variable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Y variables.
+        '''</summary>
+        Friend ReadOnly Property Y_variables() As String
+            Get
+                Return ResourceManager.GetString("Y_variables", resourceCulture)
             End Get
         End Property
     End Module
