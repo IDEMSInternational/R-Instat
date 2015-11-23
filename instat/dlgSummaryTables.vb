@@ -15,15 +15,16 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 
-Public Class dlgFreqTables
-    Private Sub dlgFreqTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class dlgSummaryTables
+    Private Sub dlgSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cboWeights.Visible = False
-        cboPercentFactor.Visible = False
-        ucrBase.clsRsyntax.SetFunction("frequency")
+        ucrBase.clsRsyntax.SetFunction("summary")
         ucrBase.clsRsyntax.iCallType = 2
         autoTranslate(Me)
-        ucrReceiverMultiple.Selector = ucrAddRemove
-        ucrReceiverMultiple.SetMeAsReceiver()
+        ucrReceiverMultiple1.Selector = ucrAddRemove
+        ucrReceiverMultiple2.Selector = ucrAddRemove
+        ucrReceiverMultiple1.SetMeAsReceiver()
+        ucrReceiverMultiple2.SetMeAsReceiver()
     End Sub
 
     Private Sub chkWeights_CheckedChanged(sender As Object, e As EventArgs) Handles chkWeights.CheckedChanged
@@ -34,17 +35,12 @@ Public Class dlgFreqTables
         End If
     End Sub
 
-    Private Sub rdoPercentFactor_CheckedChanged(sender As Object, e As EventArgs) Handles rdoPercentFactor.CheckedChanged
-        If rdoPercentFactor.Checked = True Then
-            cboPercentFactor.Visible = True
-        Else
-            cboPercentFactor.Visible = False
-        End If
+    Private Sub ucrReceiverMultiple1_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple1.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverMultiple1.GetVariables())
     End Sub
 
-    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.Leave
-        'ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverMultiple.lstSelectedVariables.SelectedItem & "")
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverMultiple.GetVariables())
+    Private Sub ucrReceiverMultiple2_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple2.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverMultiple2.GetVariables())
     End Sub
 
 End Class
