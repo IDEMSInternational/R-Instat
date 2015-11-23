@@ -391,10 +391,18 @@ Public Class frmMain
     End Function
 
     Private Sub mnuEditFont_Click(sender As Object, e As EventArgs) Handles mnuEditFont.Click
-        'dlgFont.ShowDialog()
+
     End Sub
 
     Private Sub mnuEditReplace_Click(sender As Object, e As EventArgs) Handles mnuEditReplace.Click
-        dlgReplace.ShowDialog()
+
+    End Sub
+
+    Private Sub mnuEditFind_Click(sender As Object, e As EventArgs) Handles mnuEditFind.Click
+
+    End Sub
+
+    Private Sub ChisquareTestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChisquareTestToolStripMenuItem.Click
+        dlgChisquare.ShowDialog()
     End Sub
 End Class

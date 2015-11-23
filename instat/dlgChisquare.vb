@@ -13,18 +13,19 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
-Public Class dlgStemAndLeaf
-    Private Sub dlgStemAndLeaf_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("stem")
-        ucrBase.clsRsyntax.iCallType = 2
-        UcrReceiverSingle.Selector = UcrAddRemove
-        UcrReceiverSingle.SetMeAsReceiver()
-        autoTranslate(Me)
+Public Class dlgChisquare
+    Private Sub dlgChisquare_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrBase.clsRsyntax.SetFunction("chisq")
+        ucrBase.clsRsyntax.iCallType = 0
+        ucrReceiverMultiple.Selector = ucrAddRemove
+
+
     End Sub
-    Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles UcrReceiverSingle.Leave
-        ucrBase.clsRsyntax.AddParameter("x", UcrReceiverSingle.GetVariables())
+    Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverMultiple.GetVariables())
     End Sub
+
+
 
 End Class
