@@ -21,4 +21,5 @@ Public Class dlgHistogramMethod
         ucrBase.clsRsyntax.SetFunction("climate_obj$histogram")
         ucrBase.clsRsyntax.iCallType = 0
     End Sub
+
 End Class
