@@ -178,7 +178,7 @@ Partial Class dlgOneSample
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(1, 12)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(206, 118)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(206, 131)
         Me.ucrAddRemove.TabIndex = 8
         '
         'ucrBase

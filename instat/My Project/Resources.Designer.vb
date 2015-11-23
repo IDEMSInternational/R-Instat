@@ -252,6 +252,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Column factors.
+        '''</summary>
+        Friend ReadOnly Property Column_factors() As String
+            Get
+                Return ResourceManager.GetString("Column_factors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Column Name.
         '''</summary>
         Friend ReadOnly Property Column_Name() As String
@@ -374,6 +383,15 @@ Namespace My.Resources
         Friend ReadOnly Property Days() As String
             Get
                 Return ResourceManager.GetString("Days", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Decimals.
+        '''</summary>
+        Friend ReadOnly Property Decimals() As String
+            Get
+                Return ResourceManager.GetString("Decimals", resourceCulture)
             End Get
         End Property
         
@@ -774,11 +792,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Means.
+        '''</summary>
+        Friend ReadOnly Property Means() As String
+            Get
+                Return ResourceManager.GetString("Means", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Models.
         '''</summary>
         Friend ReadOnly Property Models() As String
             Get
                 Return ResourceManager.GetString("Models", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to More.
+        '''</summary>
+        Friend ReadOnly Property More() As String
+            Get
+                Return ResourceManager.GetString("More", resourceCulture)
             End Get
         End Property
         
@@ -1353,6 +1389,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Summary statistics.
+        '''</summary>
+        Friend ReadOnly Property Summary_statistics() As String
+            Get
+                Return ResourceManager.GetString("Summary_statistics", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Survival.
         '''</summary>
         Friend ReadOnly Property Survival() As String
@@ -1416,6 +1461,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Totals.
+        '''</summary>
+        Friend ReadOnly Property Totals() As String
+            Get
+                Return ResourceManager.GetString("Totals", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Transform.
         '''</summary>
         Friend ReadOnly Property Transform() As String
@@ -1430,6 +1484,15 @@ Namespace My.Resources
         Friend ReadOnly Property Two() As String
             Get
                 Return ResourceManager.GetString("Two", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Two ways table.
+        '''</summary>
+        Friend ReadOnly Property Two_ways_table() As String
+            Get
+                Return ResourceManager.GetString("Two_ways_table", resourceCulture)
             End Get
         End Property
         
@@ -1484,6 +1547,15 @@ Namespace My.Resources
         Friend ReadOnly Property Water_Balance() As String
             Get
                 Return ResourceManager.GetString("Water_Balance", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Weights.
+        '''</summary>
+        Friend ReadOnly Property Weights() As String
+            Get
+                Return ResourceManager.GetString("Weights", resourceCulture)
             End Get
         End Property
         

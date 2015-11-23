@@ -405,4 +405,8 @@ Public Class frmMain
     Private Sub OneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneSampleToolStripMenuItem.Click
         dlgOneSample.ShowDialog()
     End Sub
+
+    Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SummaryToolStripMenuItem1.Click
+        dlgSummaryTables.ShowDialog()
+    End Sub
 End Class

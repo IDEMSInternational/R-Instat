@@ -601,4 +601,28 @@
   <data name="Value" xml:space="preserve">
     <value>Value</value>
   </data>
+  <data name="Column_factors" xml:space="preserve">
+    <value>Column factors</value>
+  </data>
+  <data name="Decimals" xml:space="preserve">
+    <value>Decimals</value>
+  </data>
+  <data name="Means" xml:space="preserve">
+    <value>Means</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="Summary_statistics" xml:space="preserve">
+    <value>Summary statistics</value>
+  </data>
+  <data name="Totals" xml:space="preserve">
+    <value>Totals</value>
+  </data>
+  <data name="Two_ways_table" xml:space="preserve">
+    <value>Two ways table</value>
+  </data>
+  <data name="Weights" xml:space="preserve">
+    <value>Weights</value>
+  </data>
 </root>
