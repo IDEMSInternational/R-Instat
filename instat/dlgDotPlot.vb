@@ -21,17 +21,15 @@ Public Class dlgDotPlot
         ucrBase.clsRsyntax.SetFunction("dotchart")
         ucrBase.clsRsyntax.iCallType = 0
         autoTranslate(Me)
-        ucrReceiverSingle.Selector = ucrAddRemove
-        ucrReceiverSingle.SetMeAsReceiver()
+        ucrReceiverMultiple.Selector = ucrAddRemove
+        ucrReceiverMultiple.SetMeAsReceiver()
     End Sub
 
     Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
         ucrBase.clsRsyntax.AddParameter("main", Chr(34) & txtTitle.Text & Chr(34))
     End Sub
 
-    Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingle.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverSingle.GetVariables())
+    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverMultiple.GetVariables())
     End Sub
-
-
 End Class

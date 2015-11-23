@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgDotPlot
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,13 +20,13 @@ Partial Class dlgDotPlot
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblPlotTitle = New System.Windows.Forms.Label()
         Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.lblVariableToPlot = New System.Windows.Forms.Label()
         Me.ucrAddRemove1 = New instat.ucrSelectorAddRemove()
-        Me.crReciverSingle = New instat.ucrReciverSingleB()
+        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
         '
         'lblPlotTitle
@@ -50,10 +50,10 @@ Partial Class dlgDotPlot
         Me.lblVariableToPlot.AutoSize = True
         Me.lblVariableToPlot.Location = New System.Drawing.Point(250, 9)
         Me.lblVariableToPlot.Name = "lblVariableToPlot"
-        Me.lblVariableToPlot.Size = New System.Drawing.Size(78, 13)
+        Me.lblVariableToPlot.Size = New System.Drawing.Size(83, 13)
         Me.lblVariableToPlot.TabIndex = 5
         Me.lblVariableToPlot.Tag = "Variable_to_Plot"
-        Me.lblVariableToPlot.Text = "Variable to Plot"
+        Me.lblVariableToPlot.Text = "Variables to Plot"
         '
         'ucrAddRemove1
         '
@@ -62,19 +62,19 @@ Partial Class dlgDotPlot
         Me.ucrAddRemove1.Size = New System.Drawing.Size(203, 127)
         Me.ucrAddRemove1.TabIndex = 6
         '
-        'crReciverSingle
+        'ucrReceiverMultiple
         '
-        Me.crReciverSingle.Location = New System.Drawing.Point(253, 26)
-        Me.crReciverSingle.Name = "crReciverSingle"
-        Me.crReciverSingle.Size = New System.Drawing.Size(106, 26)
-        Me.crReciverSingle.TabIndex = 7
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(253, 26)
+        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
+        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(121, 128)
+        Me.ucrReceiverMultiple.TabIndex = 7
         '
         'dlgDotPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 250)
-        Me.Controls.Add(Me.crReciverSingle)
+        Me.ClientSize = New System.Drawing.Size(421, 292)
+        Me.Controls.Add(Me.ucrReceiverMultiple)
         Me.Controls.Add(Me.ucrAddRemove1)
         Me.Controls.Add(Me.lblVariableToPlot)
         Me.Controls.Add(Me.txtTitle)
@@ -98,5 +98,5 @@ Partial Class dlgDotPlot
     Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
     Friend WithEvents lblVariableToPlot As Label
     Friend WithEvents ucrAddRemove1 As ucrSelectorAddRemove
-    Friend WithEvents crReciverSingle As ucrReciverSingleB
+    Friend WithEvents ucrReceiverMultiple As ucrReceiverMultiple
 End Class
