@@ -25,7 +25,7 @@ Public Class dlgCorrelations
         autoTranslate(Me)
     End Sub
 
-    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.LeftList
+    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.Leave
         If ucrReceiverMultiple.lstSelectedVariables.Items.Count = 2 Then
             ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverMultiple.lstSelectedVariables.Items.Item(0) & "")
             ucrBase.clsRsyntax.AddParameter("y", "data$" & ucrReceiverMultiple.lstSelectedVariables.Items.Item(1) & "")
