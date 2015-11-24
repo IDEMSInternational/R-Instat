@@ -22,36 +22,21 @@ Partial Class dlgPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtX = New System.Windows.Forms.TextBox()
-        Me.txtY = New System.Windows.Forms.TextBox()
         Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.lblTitle = New System.Windows.Forms.Label()
-        Me.cmdRemove = New System.Windows.Forms.Button()
-        Me.cmdAdd = New System.Windows.Forms.Button()
-        Me.lblX = New System.Windows.Forms.Label()
-        Me.lblY = New System.Windows.Forms.Label()
+        Me.lblXvariable = New System.Windows.Forms.Label()
+        Me.lblYvariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
-        Me.lstBoxAvailable = New System.Windows.Forms.ListBox()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.ucrReceiverY = New instat.ucrReceiverSingle()
+        Me.ucrReceiverX = New instat.ucrReceiverSingle()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.SuspendLayout()
-        '
-        'txtX
-        '
-        Me.txtX.Location = New System.Drawing.Point(285, 168)
-        Me.txtX.Name = "txtX"
-        Me.txtX.Size = New System.Drawing.Size(100, 20)
-        Me.txtX.TabIndex = 24
-        '
-        'txtY
-        '
-        Me.txtY.Location = New System.Drawing.Point(285, 58)
-        Me.txtY.Name = "txtY"
-        Me.txtY.Size = New System.Drawing.Size(100, 20)
-        Me.txtY.TabIndex = 23
         '
         'txtTitle
         '
-        Me.txtTitle.Location = New System.Drawing.Point(30, 255)
+        Me.txtTitle.Location = New System.Drawing.Point(15, 158)
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.Size = New System.Drawing.Size(326, 20)
         Me.txtTitle.TabIndex = 22
@@ -59,89 +44,83 @@ Partial Class dlgPlot
         'lblTitle
         '
         Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(27, 239)
+        Me.lblTitle.Location = New System.Drawing.Point(12, 142)
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(27, 13)
         Me.lblTitle.TabIndex = 21
         Me.lblTitle.Tag = "Title"
         Me.lblTitle.Text = "Title"
         '
-        'cmdRemove
+        'lblXvariable
         '
-        Me.cmdRemove.Location = New System.Drawing.Point(153, 166)
-        Me.cmdRemove.Name = "cmdRemove"
-        Me.cmdRemove.Size = New System.Drawing.Size(92, 23)
-        Me.cmdRemove.TabIndex = 20
-        Me.cmdRemove.Text = "X variable"
-        Me.cmdRemove.UseVisualStyleBackColor = True
+        Me.lblXvariable.AutoSize = True
+        Me.lblXvariable.Location = New System.Drawing.Point(222, 60)
+        Me.lblXvariable.Name = "lblXvariable"
+        Me.lblXvariable.Size = New System.Drawing.Size(64, 13)
+        Me.lblXvariable.TabIndex = 18
+        Me.lblXvariable.Tag = "X_variable"
+        Me.lblXvariable.Text = "X  - Variable"
         '
-        'cmdAdd
+        'lblYvariable
         '
-        Me.cmdAdd.Location = New System.Drawing.Point(153, 55)
-        Me.cmdAdd.Name = "cmdAdd"
-        Me.cmdAdd.Size = New System.Drawing.Size(92, 23)
-        Me.cmdAdd.TabIndex = 19
-        Me.cmdAdd.Text = "Y variable"
-        Me.cmdAdd.UseVisualStyleBackColor = True
-        '
-        'lblX
-        '
-        Me.lblX.AutoSize = True
-        Me.lblX.Location = New System.Drawing.Point(282, 152)
-        Me.lblX.Name = "lblX"
-        Me.lblX.Size = New System.Drawing.Size(64, 13)
-        Me.lblX.TabIndex = 18
-        Me.lblX.Text = "X  - Variable"
-        '
-        'lblY
-        '
-        Me.lblY.AutoSize = True
-        Me.lblY.Location = New System.Drawing.Point(282, 31)
-        Me.lblY.Name = "lblY"
-        Me.lblY.Size = New System.Drawing.Size(72, 13)
-        Me.lblY.TabIndex = 17
-        Me.lblY.Text = "Y - Variable(s)"
+        Me.lblYvariable.AutoSize = True
+        Me.lblYvariable.Location = New System.Drawing.Point(222, 15)
+        Me.lblYvariable.Name = "lblYvariable"
+        Me.lblYvariable.Size = New System.Drawing.Size(72, 13)
+        Me.lblYvariable.TabIndex = 17
+        Me.lblYvariable.Tag = "Y_variables "
+        Me.lblYvariable.Text = "Y - Variable(s)"
         '
         'lblAvailable
         '
         Me.lblAvailable.AutoSize = True
         Me.lblAvailable.Location = New System.Drawing.Point(27, 15)
         Me.lblAvailable.Name = "lblAvailable"
-        Me.lblAvailable.Size = New System.Drawing.Size(96, 13)
+        Me.lblAvailable.Size = New System.Drawing.Size(0, 13)
         Me.lblAvailable.TabIndex = 16
-        Me.lblAvailable.Text = "Available Variables"
         '
-        'lstBoxAvailable
+        'ucrReceiverY
         '
-        Me.lstBoxAvailable.FormattingEnabled = True
-        Me.lstBoxAvailable.Location = New System.Drawing.Point(30, 31)
-        Me.lstBoxAvailable.Name = "lstBoxAvailable"
-        Me.lstBoxAvailable.Size = New System.Drawing.Size(117, 173)
-        Me.lstBoxAvailable.TabIndex = 15
+        Me.ucrReceiverY.Location = New System.Drawing.Point(225, 31)
+        Me.ucrReceiverY.Name = "ucrReceiverY"
+        Me.ucrReceiverY.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverY.TabIndex = 26
         '
-        'UcrButtons1
+        'ucrReceiverX
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(34, 297)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(322, 32)
-        Me.UcrButtons1.TabIndex = 14
+        Me.ucrReceiverX.Location = New System.Drawing.Point(225, 76)
+        Me.ucrReceiverX.Name = "ucrReceiverX"
+        Me.ucrReceiverX.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverX.TabIndex = 25
+        '
+        'ucrAddRemove
+        '
+        Me.ucrAddRemove.Location = New System.Drawing.Point(2, 12)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
+        Me.ucrAddRemove.TabIndex = 23
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 184)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(322, 32)
+        Me.ucrBase.TabIndex = 14
         '
         'dlgPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(401, 344)
-        Me.Controls.Add(Me.txtX)
-        Me.Controls.Add(Me.txtY)
+        Me.ClientSize = New System.Drawing.Size(348, 229)
+        Me.Controls.Add(Me.ucrReceiverY)
+        Me.Controls.Add(Me.ucrReceiverX)
+        Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.txtTitle)
         Me.Controls.Add(Me.lblTitle)
-        Me.Controls.Add(Me.cmdRemove)
-        Me.Controls.Add(Me.cmdAdd)
-        Me.Controls.Add(Me.lblX)
-        Me.Controls.Add(Me.lblY)
+        Me.Controls.Add(Me.lblXvariable)
+        Me.Controls.Add(Me.lblYvariable)
         Me.Controls.Add(Me.lblAvailable)
-        Me.Controls.Add(Me.lstBoxAvailable)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -152,16 +131,14 @@ Partial Class dlgPlot
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents txtX As TextBox
-    Friend WithEvents txtY As TextBox
     Friend WithEvents txtTitle As TextBox
     Friend WithEvents lblTitle As Label
-    Friend WithEvents cmdRemove As Button
-    Friend WithEvents cmdAdd As Button
-    Friend WithEvents lblX As Label
-    Friend WithEvents lblY As Label
+    Friend WithEvents lblXvariable As Label
+    Friend WithEvents lblYvariable As Label
     Friend WithEvents lblAvailable As Label
-    Friend WithEvents lstBoxAvailable As ListBox
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrReceiverX As ucrReceiverSingle
+    Friend WithEvents ucrReceiverY As ucrReceiverSingle
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 End Class
