@@ -594,10 +594,6 @@
           <source>Available  Variables</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">Variables disponibles</target>
         </trans-unit>
-        <trans-unit id="Box_Plot" translate="yes" xml:space="preserve">
-          <source>Box Plot</source>
-          <target state="needs-review-translation" state-qualifier="tm-suggestion">Diagramme à surfaces</target>
-        </trans-unit>
         <trans-unit id="Cancel" translate="yes" xml:space="preserve">
           <source>Cancel</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Annuler</target>
@@ -1181,6 +1177,46 @@
         <trans-unit id="Two" translate="yes" xml:space="preserve">
           <source>Two</source>
           <target state="new">Two</target>
+        </trans-unit>
+        <trans-unit id="Continuity__Correction" translate="yes" xml:space="preserve">
+          <source>Continuity Correction</source>
+          <target state="new">Continuity Correction</target>
+        </trans-unit>
+        <trans-unit id="Layout_of_data" translate="yes" xml:space="preserve">
+          <source>Layout of data</source>
+          <target state="new">Layout of data</target>
+        </trans-unit>
+        <trans-unit id="Make_Result_as_a_factor" translate="yes" xml:space="preserve">
+          <source>Make Result as a factor</source>
+          <target state="new">Make Result as a factor</target>
+        </trans-unit>
+        <trans-unit id="New_Value" translate="yes" xml:space="preserve">
+          <source>New Value</source>
+          <target state="new">New Value</target>
+        </trans-unit>
+        <trans-unit id="Range_End" translate="yes" xml:space="preserve">
+          <source>Range End</source>
+          <target state="new">Range End</target>
+        </trans-unit>
+        <trans-unit id="Range_Start" translate="yes" xml:space="preserve">
+          <source>Range Start</source>
+          <target state="new">Range Start</target>
+        </trans-unit>
+        <trans-unit id="Save_values" translate="yes" xml:space="preserve">
+          <source>Save values</source>
+          <target state="new">Save values</target>
+        </trans-unit>
+        <trans-unit id="String1" translate="yes" xml:space="preserve">
+          <source>New</source>
+          <target state="new">New</target>
+        </trans-unit>
+        <trans-unit id="With_a_Label" translate="yes" xml:space="preserve">
+          <source>With a Label</source>
+          <target state="new">With a Label</target>
+        </trans-unit>
+        <trans-unit id="Write_back_to_the_data" translate="yes" xml:space="preserve">
+          <source>Write back to the data</source>
+          <target state="new">Write back to the data</target>
         </trans-unit>
       </group>
     </body>
