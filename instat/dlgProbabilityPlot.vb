@@ -20,9 +20,8 @@ Public Class dlgProbabilityPlot
     Private Sub dlgProbabilityPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UcrReceiverSingle.Selector = ucrAddRemove
         UcrReceiverSingle.SetMeAsReceiver()
-        ucrBase.clsRsyntax.SetFunction("qqnorm")
         ucrBase.clsRsyntax.iCallType = 0
-        rdoNormal.Checked = True
+        ' rdoNormal.Checked = True
         txtTitle.Visible = False
         autoTranslate(Me)
 
@@ -30,7 +29,7 @@ Public Class dlgProbabilityPlot
 
     Private Sub rdoNormal_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNormal.CheckedChanged
         If rdoNormal.Checked = True Then
-            txtTitle.Text = "Normal Probability Plot of " & UcrReceiverSingle.txtReceiverSingle.Text & ""
+            ucrBase.clsRsyntax.SetFunction("qqnorm")
         End If
 
     End Sub
@@ -49,8 +48,9 @@ Public Class dlgProbabilityPlot
 
     Private Sub rdoEmperical_CheckedChanged(sender As Object, e As EventArgs) Handles rdoEmperical.CheckedChanged
         If rdoEmperical.Checked = True Then
-            txtTitle.Text = "Emperical Probability Plot"
+            ucrBase.clsRsyntax.SetFunction("ecdf")
         End If
+
     End Sub
 
     Private Sub rdoExponential_CheckedChanged(sender As Object, e As EventArgs) Handles rdoExponential.CheckedChanged
@@ -64,7 +64,19 @@ Public Class dlgProbabilityPlot
     End Sub
 
     Private Sub UcrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles UcrReceiverSingle.Leave
-        ucrBase.clsRsyntax.AddParameter("y", UcrReceiverSingle.GetVariables())
+        If rdoEmperical.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("x", UcrReceiverSingle.GetVariables())
+        ElseIf rdoNormal.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("y", UcrReceiverSingle.GetVariables())
+        ElseIf rdoGamma.Checked = True Then
+        ElseIf rdoExponential.Checked = True Then
+        Else
+        End If
+
+    End Sub
+
+    Private Sub UcrReceiverSingle_Load(sender As Object, e As EventArgs) Handles UcrReceiverSingle.Load
+
     End Sub
 End Class
 

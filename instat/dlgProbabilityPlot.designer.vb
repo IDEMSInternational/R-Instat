@@ -28,11 +28,11 @@ Partial Class dlgProbabilityPlot
         Me.rdoEmperical = New System.Windows.Forms.RadioButton()
         Me.rdoGamma = New System.Windows.Forms.RadioButton()
         Me.rdoNormal = New System.Windows.Forms.RadioButton()
-        Me.ucrBase = New instat.ucrButtons()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.UcrReceiverSingle = New instat.ucrReceiverSingle()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.txtTitle = New System.Windows.Forms.TextBox()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpDistributions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -111,13 +111,6 @@ Partial Class dlgProbabilityPlot
         Me.rdoNormal.Text = "Normal"
         Me.rdoNormal.UseVisualStyleBackColor = True
         '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(-1, 157)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
-        Me.ucrBase.TabIndex = 0
-        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -126,6 +119,13 @@ Partial Class dlgProbabilityPlot
         Me.Label2.Size = New System.Drawing.Size(78, 13)
         Me.Label2.TabIndex = 8
         Me.Label2.Text = "Variable to Plot"
+        '
+        'txtTitle
+        '
+        Me.txtTitle.Location = New System.Drawing.Point(302, 5)
+        Me.txtTitle.Name = "txtTitle"
+        Me.txtTitle.Size = New System.Drawing.Size(100, 20)
+        Me.txtTitle.TabIndex = 9
         '
         'UcrReceiverSingle
         '
@@ -141,12 +141,12 @@ Partial Class dlgProbabilityPlot
         Me.ucrAddRemove.Size = New System.Drawing.Size(202, 154)
         Me.ucrAddRemove.TabIndex = 6
         '
-        'txtTitle
+        'ucrBase
         '
-        Me.txtTitle.Location = New System.Drawing.Point(302, 5)
-        Me.txtTitle.Name = "txtTitle"
-        Me.txtTitle.Size = New System.Drawing.Size(100, 20)
-        Me.txtTitle.TabIndex = 9
+        Me.ucrBase.Location = New System.Drawing.Point(-1, 157)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgProbabilityPlot
         '

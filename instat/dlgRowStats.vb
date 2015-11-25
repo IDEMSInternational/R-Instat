@@ -18,12 +18,18 @@
 Imports instat.Translations
 Public Class dlgRowStats
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrReceiverMultiple.Selector = ucrSelectorAddRemove
+        ucrReceiverMultiple.SetMeAsReceiver()
         autoTranslate(Me)
-
-
     End Sub
 
-    'Private Sub UcrReceiverMultiple1_Leave(sender As Object, e As EventArgs) Handles UcrReceiverMultiple1.LeftList
-    '    ucrBase.clsRsyntax.AddParameter("x", "data$" & UcrReceiverMultiple1.lstSelectedVariables.SelectedItem & "")
-    'End Sub
+    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.Leave
+        Dim objItem As Object
+        Dim temp_obj As ListBox.ObjectCollection = ucrReceiverMultiple.lstSelectedVariables.Items
+        If ucrReceiverMultiple.lstSelectedVariables.Items.Count > 0 Then
+            For Each objItem In temp_obj
+                ucrBase.clsRsyntax.AddParameter("data$" & objItem & "", "x")
+            Next
+        End If
+    End Sub
 End Class
