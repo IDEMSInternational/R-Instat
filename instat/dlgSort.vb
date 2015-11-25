@@ -30,13 +30,13 @@ Public Class dlgSort
     End Sub
 
     Private Sub ucrMultiple_Leave(sender As Object, e As EventArgs) Handles ucrMultiple.Leave
-        'Dim objItem As Object
-        ''Dim temp_obj As ListBox.ObjectCollection = ucrMultiple.lstSelectedVariables.Items
-        'If ucrMultiple.lstSelectedVariables.Items.Count > 0 Then
-        '    For Each objItem In temp_obj
-        '        ucrBase.clsRsyntax.AddParameter("data_temp$" & objItem & "", "x")
-        '    Next
-        'End If
+        Dim objItem As Object
+        Dim temp_obj As ListBox.ObjectCollection = ucrMultiple.lstSelectedVariables.Items
+        If ucrMultiple.lstSelectedVariables.Items.Count > 0 Then
+            For Each objItem In temp_obj
+                ucrBase.clsRsyntax.AddParameter("data$" & objItem & "", "x")
+            Next
+        End If
     End Sub
 
     Private Sub rdoAscending_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged
@@ -53,15 +53,11 @@ Public Class dlgSort
 
     Private Sub chkWriteBack_CheckStateChanged(sender As Object, e As EventArgs) Handles chkWriteBack.CheckStateChanged
         If chkWriteBack.Checked = True Then
-            ucrBase.clsRsyntax.SetFunction("data_temp<-data_temp[order")
-            newdata = frmMain.clsRInterface.GetData("data_temp")
+            ucrBase.clsRsyntax.SetFunction("data<-data[order")
+            newdata = frmMain.clsRInterface.GetData("data")
             frmEditor.UpdateSheet(newdata)
         Else
             ucrBase.clsRsyntax.SetFunction("order")
         End If
-    End Sub
-
-    Private Sub chkWriteBack_CheckedChanged(sender As Object, e As EventArgs) Handles chkWriteBack.CheckedChanged
-
     End Sub
 End Class
