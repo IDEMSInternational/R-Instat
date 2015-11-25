@@ -381,6 +381,12 @@
     <Compile Include="dlgMultipleRegression.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOneSample.Designer.vb">
+      <DependentUpon>dlgOneSample.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneSample.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneWayAnove.Designer.vb">
       <DependentUpon>dlgOneWayAnove.vb</DependentUpon>
     </Compile>
@@ -1006,6 +1012,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMultipleRegression.sw-KE.resx">
       <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneSample.fr-FR.resx">
+      <DependentUpon>dlgOneSample.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneSample.resx">
+      <DependentUpon>dlgOneSample.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneSample.sw-KE.resx">
+      <DependentUpon>dlgOneSample.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayAnove.fr-FR.resx">
       <DependentUpon>dlgOneWayAnove.vb</DependentUpon>
