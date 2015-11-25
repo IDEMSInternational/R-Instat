@@ -24,14 +24,14 @@ Partial Class dlgFreqTables
     Private Sub InitializeComponent()
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
+        Me.cboPercentFactor = New System.Windows.Forms.ComboBox()
+        Me.rdoPercentFactor = New System.Windows.Forms.RadioButton()
+        Me.rdoPercentOverallTotal = New System.Windows.Forms.RadioButton()
+        Me.rdoCounts = New System.Windows.Forms.RadioButton()
         Me.chkWeights = New System.Windows.Forms.CheckBox()
         Me.cboWeights = New System.Windows.Forms.ComboBox()
         Me.grpDisplayMargins = New System.Windows.Forms.GroupBox()
-        Me.rdoCounts = New System.Windows.Forms.RadioButton()
-        Me.rdoPercentOverallTotal = New System.Windows.Forms.RadioButton()
-        Me.rdoPercentFactor = New System.Windows.Forms.RadioButton()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
-        Me.cboPercentFactor = New System.Windows.Forms.ComboBox()
         Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -41,7 +41,7 @@ Partial Class dlgFreqTables
         'lblFactors
         '
         Me.lblFactors.AutoSize = True
-        Me.lblFactors.Location = New System.Drawing.Point(21, 14)
+        Me.lblFactors.Location = New System.Drawing.Point(9, 12)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(42, 13)
         Me.lblFactors.TabIndex = 2
@@ -61,6 +61,49 @@ Partial Class dlgFreqTables
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Tag = "Display"
         Me.grpDisplay.Text = "Display"
+        '
+        'cboPercentFactor
+        '
+        Me.cboPercentFactor.FormattingEnabled = True
+        Me.cboPercentFactor.Location = New System.Drawing.Point(140, 95)
+        Me.cboPercentFactor.Name = "cboPercentFactor"
+        Me.cboPercentFactor.Size = New System.Drawing.Size(80, 21)
+        Me.cboPercentFactor.TabIndex = 3
+        '
+        'rdoPercentFactor
+        '
+        Me.rdoPercentFactor.AutoSize = True
+        Me.rdoPercentFactor.Location = New System.Drawing.Point(12, 99)
+        Me.rdoPercentFactor.Name = "rdoPercentFactor"
+        Me.rdoPercentFactor.Size = New System.Drawing.Size(122, 17)
+        Me.rdoPercentFactor.TabIndex = 2
+        Me.rdoPercentFactor.TabStop = True
+        Me.rdoPercentFactor.Tag = "Percentage_of_Factor"
+        Me.rdoPercentFactor.Text = "Percentage of factor"
+        Me.rdoPercentFactor.UseVisualStyleBackColor = True
+        '
+        'rdoPercentOverallTotal
+        '
+        Me.rdoPercentOverallTotal.AutoSize = True
+        Me.rdoPercentOverallTotal.Location = New System.Drawing.Point(12, 67)
+        Me.rdoPercentOverallTotal.Name = "rdoPercentOverallTotal"
+        Me.rdoPercentOverallTotal.Size = New System.Drawing.Size(154, 17)
+        Me.rdoPercentOverallTotal.TabIndex = 1
+        Me.rdoPercentOverallTotal.TabStop = True
+        Me.rdoPercentOverallTotal.Text = "Percentages of overall total"
+        Me.rdoPercentOverallTotal.UseVisualStyleBackColor = True
+        '
+        'rdoCounts
+        '
+        Me.rdoCounts.AutoSize = True
+        Me.rdoCounts.Location = New System.Drawing.Point(12, 33)
+        Me.rdoCounts.Name = "rdoCounts"
+        Me.rdoCounts.Size = New System.Drawing.Size(58, 17)
+        Me.rdoCounts.TabIndex = 0
+        Me.rdoCounts.TabStop = True
+        Me.rdoCounts.Tag = "Counts"
+        Me.rdoCounts.Text = "Counts"
+        Me.rdoCounts.UseVisualStyleBackColor = True
         '
         'chkWeights
         '
@@ -91,71 +134,28 @@ Partial Class dlgFreqTables
         Me.grpDisplayMargins.Tag = "Display_Margins"
         Me.grpDisplayMargins.Text = "Display Margins"
         '
-        'rdoCounts
-        '
-        Me.rdoCounts.AutoSize = True
-        Me.rdoCounts.Location = New System.Drawing.Point(12, 33)
-        Me.rdoCounts.Name = "rdoCounts"
-        Me.rdoCounts.Size = New System.Drawing.Size(58, 17)
-        Me.rdoCounts.TabIndex = 0
-        Me.rdoCounts.TabStop = True
-        Me.rdoCounts.Tag = "Counts"
-        Me.rdoCounts.Text = "Counts"
-        Me.rdoCounts.UseVisualStyleBackColor = True
-        '
-        'rdoPercentOverallTotal
-        '
-        Me.rdoPercentOverallTotal.AutoSize = True
-        Me.rdoPercentOverallTotal.Location = New System.Drawing.Point(12, 67)
-        Me.rdoPercentOverallTotal.Name = "rdoPercentOverallTotal"
-        Me.rdoPercentOverallTotal.Size = New System.Drawing.Size(154, 17)
-        Me.rdoPercentOverallTotal.TabIndex = 1
-        Me.rdoPercentOverallTotal.TabStop = True
-        Me.rdoPercentOverallTotal.Text = "Percentages of overall total"
-        Me.rdoPercentOverallTotal.UseVisualStyleBackColor = True
-        '
-        'rdoPercentFactor
-        '
-        Me.rdoPercentFactor.AutoSize = True
-        Me.rdoPercentFactor.Location = New System.Drawing.Point(12, 99)
-        Me.rdoPercentFactor.Name = "rdoPercentFactor"
-        Me.rdoPercentFactor.Size = New System.Drawing.Size(122, 17)
-        Me.rdoPercentFactor.TabIndex = 2
-        Me.rdoPercentFactor.TabStop = True
-        Me.rdoPercentFactor.Tag = "Percentage_of_Factor"
-        Me.rdoPercentFactor.Text = "Percentage of factor"
-        Me.rdoPercentFactor.UseVisualStyleBackColor = True
-        '
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(191, 30)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(205, 30)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
         Me.lblSelectedVariables.TabIndex = 8
         Me.lblSelectedVariables.Tag = "Selected_Variable"
         Me.lblSelectedVariables.Text = "Selected Variables"
         '
-        'cboPercentFactor
-        '
-        Me.cboPercentFactor.FormattingEnabled = True
-        Me.cboPercentFactor.Location = New System.Drawing.Point(140, 95)
-        Me.cboPercentFactor.Name = "cboPercentFactor"
-        Me.cboPercentFactor.Size = New System.Drawing.Size(80, 21)
-        Me.cboPercentFactor.TabIndex = 3
-        '
         'ucrReceiverMultiple
         '
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(191, 47)
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(208, 45)
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
         Me.ucrReceiverMultiple.Size = New System.Drawing.Size(91, 101)
         Me.ucrReceiverMultiple.TabIndex = 3
         '
         'ucrAddRemove
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(12, 30)
+        Me.ucrAddRemove.Location = New System.Drawing.Point(-2, 28)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(182, 118)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(204, 118)
         Me.ucrAddRemove.TabIndex = 1
         '
         'ucrBase
