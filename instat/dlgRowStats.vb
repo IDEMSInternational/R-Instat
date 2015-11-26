@@ -18,9 +18,9 @@
 Imports instat.Translations
 Public Class dlgRowStats
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrReceiverMultiple.Selector = ucrSelectorAddRemove
+        ucrReceiverMultiple.SetMeAsReceiver()
         autoTranslate(Me)
-
-
     End Sub
 
     'Private Sub UcrReceiverMultiple1_Leave(sender As Object, e As EventArgs) Handles UcrReceiverMultiple1.LeftList
