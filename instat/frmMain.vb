@@ -399,10 +399,30 @@ Public Class frmMain
     End Sub
 
     Private Sub OneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneSampleToolStripMenuItem.Click
-        dlgOneSample.ShowDialog()
+        'dlgOneSample.ShowDialog()
     End Sub
 
     Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyToolStripMenuItem.Click
         dlgFreqTables.ShowDialog()
+    End Sub
+
+    Private Sub StacksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StacksToolStripMenuItem.Click
+        dlgStack.ShowDialog()
+    End Sub
+
+    Private Sub UnstackToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnstackToolStripMenuItem.Click
+        dlgUnstack.ShowDialog()
+    End Sub
+
+    Private Sub EnterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnterToolStripMenuItem.Click
+        dlgChangeType.ShowDialog()
+    End Sub
+
+    Private Sub ChisquareTestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChisquareTestToolStripMenuItem.Click
+        dlgChiSquareTest.ShowDialog()
+    End Sub
+
+    Private Sub DisplayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayToolStripMenuItem.Click
+        dlgDisplayData.ShowDialog()
     End Sub
 End Class
