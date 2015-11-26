@@ -413,4 +413,16 @@ Public Class frmMain
     Private Sub UnstackToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnstackToolStripMenuItem.Click
         dlgUnstack.ShowDialog()
     End Sub
+
+    Private Sub EnterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnterToolStripMenuItem.Click
+        dlgChangeType.ShowDialog()
+    End Sub
+
+    Private Sub ChisquareTestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChisquareTestToolStripMenuItem.Click
+        dlgChiSquareTest.ShowDialog()
+    End Sub
+
+    Private Sub DisplayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayToolStripMenuItem.Click
+        dlgDisplayData.ShowDialog()
+    End Sub
 End Class
