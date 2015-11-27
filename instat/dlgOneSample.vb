@@ -24,7 +24,7 @@ Public Class dlgOneSample
         lblValue.Visible = False
 
         ucrBase.clsRsyntax.SetFunction("t.test")
-        ucrBase.clsRsyntax.SetFunction("prop.test")
+        'ucrBase.clsRsyntax.SetFunction("prop.test")
         ucrBase.clsRsyntax.iCallType = 2
         autoTranslate(Me)
         ucrReceiverSingle.Selector = ucrAddRemove
