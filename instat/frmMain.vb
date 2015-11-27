@@ -405,4 +405,8 @@ Public Class frmMain
     Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyToolStripMenuItem.Click
         dlgFreqTables.ShowDialog()
     End Sub
+
+    Private Sub GammaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GammaToolStripMenuItem.Click
+        dlgGammaDistr.ShowDialog()
+    End Sub
 End Class
