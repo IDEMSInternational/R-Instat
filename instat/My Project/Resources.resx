@@ -607,4 +607,37 @@
   <data name="Write_back_to_the_data" xml:space="preserve">
     <value>Write back to the data</value>
   </data>
+  <data name="and_" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="between" xml:space="preserve">
+    <value>between</value>
+  </data>
+  <data name="Estimation_methods" xml:space="preserve">
+    <value>Estimation methods</value>
+  </data>
+  <data name="Fit_a_Gamma_distribution" xml:space="preserve">
+    <value>Fit a Gamma distribution</value>
+  </data>
+  <data name="Maximum_likelihood" xml:space="preserve">
+    <value>Maximum likelihood</value>
+  </data>
+  <data name="Method_of_moments" xml:space="preserve">
+    <value>Method of moments</value>
+  </data>
+  <data name="Multiple_columns" xml:space="preserve">
+    <value>Multiple columns</value>
+  </data>
+  <data name="Restrict_data_values" xml:space="preserve">
+    <value>Restrict data values</value>
+  </data>
+  <data name="Save_estimates_in" xml:space="preserve">
+    <value>Save estimates in</value>
+  </data>
+  <data name="Selected_column" xml:space="preserve">
+    <value>Selected column</value>
+  </data>
+  <data name="Single_column" xml:space="preserve">
+    <value>Single column</value>
+  </data>
 </root>
