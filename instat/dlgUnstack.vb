@@ -1,5 +1,4 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -13,18 +12,23 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
-Public Class dlgStemAndLeaf
-    Private Sub dlgStemAndLeaf_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("stem")
-        ucrBase.clsRsyntax.iCallType = 2
-        UcrReceiverSingle1.Selector = UcrAddRemove
-        UcrReceiverSingle1.SetMeAsReceiver()
-        autoTranslate(Me)
-    End Sub
-    Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles UcrReceiverSingle1.Leave
-        ucrBase.clsRsyntax.AddParameter("x", UcrReceiverSingle1.GetVariables())
-    End Sub
+Public Class dlgUnstack
 
+
+    Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrBase.clsRsyntax.SetFunction("unstack")
+        ucrBase.clsRsyntax.iCallType = 1
+        UcrReceiverUnstack.Selector = ucrAddRemove
+        UcrReceiverUnstack.SetMeAsReceiver()
+
+        autoTranslate(Me)
+
+    End Sub
+    Private Sub ucrReceiverUnstack_Enter(sender As Object, e As EventArgs) Handles UcrReceiverUnstack.Enter
+        UcrReceiverUnstack.SetMeAsReceiver()
+    End Sub
+    Private Sub ucrReceiverUnstack_Leave(sender As Object, e As EventArgs) Handles UcrReceiverUnstack.Leave
+        ucrBase.clsRsyntax.AddParameter("x", UcrReceiverUnstack.GetVariables())
+    End Sub
 End Class
