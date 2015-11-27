@@ -1,5 +1,4 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -13,18 +12,21 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
-Public Class dlgStemAndLeaf
-    Private Sub dlgStemAndLeaf_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("stem")
-        ucrBase.clsRsyntax.iCallType = 2
-        UcrReceiverSingle1.Selector = UcrAddRemove
-        UcrReceiverSingle1.SetMeAsReceiver()
+Public Class dlgDisplayData
+
+
+    Private Sub dlgDisplayData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrBase.clsRsyntax.SetFunction("view")
+        ucrBase.clsRsyntax.iCallType = 1
+        ucrReceiverDisplay.Selector = ucrAddRemove
+        ucrReceiverDisplay.SetMeAsReceiver()
         autoTranslate(Me)
     End Sub
-    Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles UcrReceiverSingle1.Leave
-        ucrBase.clsRsyntax.AddParameter("x", UcrReceiverSingle1.GetVariables())
+    Private Sub ucrReceiverDisplay_Enter(sender As Object, e As EventArgs) Handles ucrReceiverDisplay.Enter
+        ucrReceiverDisplay.SetMeAsReceiver()
     End Sub
-
+    Private Sub ucrReceiverDisplay_Leave(sender As Object, e As EventArgs) Handles ucrReceiverDisplay.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverDisplay.GetVariables())
+    End Sub
 End Class
