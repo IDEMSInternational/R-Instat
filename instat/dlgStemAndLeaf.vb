@@ -24,7 +24,7 @@ Public Class dlgStemAndLeaf
         autoTranslate(Me)
     End Sub
     Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles UcrReceiverSingle1.Leave
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & UcrReceiverSingle1.txtReceiverSingle.Text & "")
+        ucrBase.clsRsyntax.AddParameter("x", UcrReceiverSingle1.GetVariables())
     End Sub
 
 End Class
