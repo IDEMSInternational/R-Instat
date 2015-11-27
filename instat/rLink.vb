@@ -140,7 +140,7 @@ Public Class RInterface
                 strCapturedScript = "capture.output(" & strScript & ")"
                 temp = clsEngine.Evaluate(strCapturedScript)
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
-                strOutput = strOutput & "> " & strTemp & vbCrLf
+                strOutput = strOutput & strTemp & vbCrLf
             End If
             If bOutput Then
                 txtOutput.Text = txtOutput.Text & strOutput
