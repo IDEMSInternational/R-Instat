@@ -38,4 +38,9 @@ Public Class dlgDescriptiveStatistics
     Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingle.Leave
         ucrBase.clsRsyntax.AddParameter("object", ucrReceiverSingle.GetVariables())
     End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+        'this is a chang i icnnnnn
+        MsgBox("this is test branch1")
+    End Sub
 End Class

@@ -32,6 +32,7 @@ Partial Class dlgDescriptiveStatistics
         Me.ucrSelectorAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
         Me.lblSelectedColumn = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.grpgraphics.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -132,11 +133,21 @@ Partial Class dlgDescriptiveStatistics
         Me.lblSelectedColumn.Tag = "Selected_Column"
         Me.lblSelectedColumn.Text = "Selected Column"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(267, 97)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(39, 13)
+        Me.Label1.TabIndex = 95
+        Me.Label1.Text = "Label1"
+        '
         'dlgDescriptiveStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(407, 225)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblSelectedColumn)
         Me.Controls.Add(Me.ucrReceiverSingle)
         Me.Controls.Add(Me.ucrSelectorAddRemove)
@@ -166,4 +177,5 @@ Partial Class dlgDescriptiveStatistics
     Friend WithEvents ucrSelectorAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
     Friend WithEvents lblSelectedColumn As Label
+    Friend WithEvents Label1 As Label
 End Class
