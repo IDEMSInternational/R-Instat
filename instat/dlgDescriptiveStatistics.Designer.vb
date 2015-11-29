@@ -22,23 +22,18 @@ Partial Class dlgDescriptiveStatistics
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.UcrDataSelection1 = New instat.ucrDataSelection()
         Me.btnStatistics = New System.Windows.Forms.Button()
         Me.grpgraphics = New System.Windows.Forms.GroupBox()
         Me.chkCumulativeFrequency = New System.Windows.Forms.CheckBox()
         Me.chkBoxPlot = New System.Windows.Forms.CheckBox()
         Me.chkStemAndLeaf = New System.Windows.Forms.CheckBox()
         Me.chkGraphics = New System.Windows.Forms.CheckBox()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
+        Me.lblSelectedColumn = New System.Windows.Forms.Label()
         Me.grpgraphics.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'UcrDataSelection1
-        '
-        Me.UcrDataSelection1.Location = New System.Drawing.Point(27, 5)
-        Me.UcrDataSelection1.Name = "UcrDataSelection1"
-        Me.UcrDataSelection1.Size = New System.Drawing.Size(332, 122)
-        Me.UcrDataSelection1.TabIndex = 0
         '
         'btnStatistics
         '
@@ -105,24 +100,50 @@ Partial Class dlgDescriptiveStatistics
         Me.chkGraphics.Text = "Graphics "
         Me.chkGraphics.UseVisualStyleBackColor = True
         '
-        'UcrButtons1
+        'ucrBase
         '
-        Me.UcrButtons1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.UcrButtons1.Location = New System.Drawing.Point(0, 195)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(407, 30)
-        Me.UcrButtons1.TabIndex = 91
+        Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.ucrBase.Location = New System.Drawing.Point(0, 195)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(407, 30)
+        Me.ucrBase.TabIndex = 91
+        '
+        'ucrSelectorAddRemove
+        '
+        Me.ucrSelectorAddRemove.Location = New System.Drawing.Point(7, 0)
+        Me.ucrSelectorAddRemove.Name = "ucrSelectorAddRemove"
+        Me.ucrSelectorAddRemove.Size = New System.Drawing.Size(203, 127)
+        Me.ucrSelectorAddRemove.TabIndex = 92
+        '
+        'ucrReceiverSingle
+        '
+        Me.ucrReceiverSingle.Location = New System.Drawing.Point(216, 32)
+        Me.ucrReceiverSingle.Name = "ucrReceiverSingle"
+        Me.ucrReceiverSingle.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverSingle.TabIndex = 93
+        '
+        'lblSelectedColumn
+        '
+        Me.lblSelectedColumn.AutoSize = True
+        Me.lblSelectedColumn.Location = New System.Drawing.Point(216, 9)
+        Me.lblSelectedColumn.Name = "lblSelectedColumn"
+        Me.lblSelectedColumn.Size = New System.Drawing.Size(87, 13)
+        Me.lblSelectedColumn.TabIndex = 94
+        Me.lblSelectedColumn.Tag = "Selected_Column"
+        Me.lblSelectedColumn.Text = "Selected Column"
         '
         'dlgDescriptiveStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(407, 225)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.Controls.Add(Me.lblSelectedColumn)
+        Me.Controls.Add(Me.ucrReceiverSingle)
+        Me.Controls.Add(Me.ucrSelectorAddRemove)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.btnStatistics)
         Me.Controls.Add(Me.grpgraphics)
         Me.Controls.Add(Me.chkGraphics)
-        Me.Controls.Add(Me.UcrDataSelection1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDescriptiveStatistics"
@@ -135,13 +156,14 @@ Partial Class dlgDescriptiveStatistics
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents UcrDataSelection1 As ucrDataSelection
     Friend WithEvents btnStatistics As Button
     Friend WithEvents grpgraphics As GroupBox
     Friend WithEvents chkCumulativeFrequency As CheckBox
     Friend WithEvents chkBoxPlot As CheckBox
     Friend WithEvents chkStemAndLeaf As CheckBox
     Friend WithEvents chkGraphics As CheckBox
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSelectorAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
+    Friend WithEvents lblSelectedColumn As Label
 End Class

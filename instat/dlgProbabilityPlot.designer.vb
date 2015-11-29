@@ -33,6 +33,7 @@ Partial Class dlgProbabilityPlot
         Me.UcrReceiverSingle = New instat.ucrReceiverSingle()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.txtTitle = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.grpDistributions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -148,11 +149,21 @@ Partial Class dlgProbabilityPlot
         Me.txtTitle.Size = New System.Drawing.Size(100, 20)
         Me.txtTitle.TabIndex = 9
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(137, 132)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(39, 13)
+        Me.Label1.TabIndex = 10
+        Me.Label1.Text = "Label1"
+        '
         'dlgProbabilityPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(402, 186)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtTitle)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.UcrReceiverSingle)
@@ -182,4 +193,5 @@ Partial Class dlgProbabilityPlot
     Friend WithEvents UcrReceiverSingle As ucrReceiverSingle
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents txtTitle As TextBox
+    Friend WithEvents Label1 As Label
 End Class
