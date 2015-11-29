@@ -18,6 +18,7 @@
 Imports instat.Translations
 Public Class dlgRowStats
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrBase.clsRsyntax.SetFunction("trial")
         autoTranslate(Me)
 
 
