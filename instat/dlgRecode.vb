@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgRecode
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrReceiverMultiple.SetMeAsReceiver()
-        ucrReceiverMultiple.Selector = ucrSelectorAddRemove
+        ucrRecodeReceiver.SetMeAsReceiver()
+        ucrRecodeReceiver.Selector = ucrRecodeSelector
     End Sub
 End Class

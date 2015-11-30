@@ -30,8 +30,8 @@ Partial Class dlgRecode
         Me.chkMakeResultFactor = New System.Windows.Forms.CheckBox()
         Me.chkWithaLabel = New System.Windows.Forms.CheckBox()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
-        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
-        Me.ucrSelectorAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrRecodeReceiver = New instat.ucrReceiverMultiple()
+        Me.ucrRecodeSelector = New instat.ucrSelectorAddRemove()
         CType(Me.dgvRecode, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -97,19 +97,19 @@ Partial Class dlgRecode
         Me.lblSelectedVariables.TabIndex = 17
         Me.lblSelectedVariables.Text = "Selected Variables"
         '
-        'ucrReceiverMultiple
+        'ucrRecodeReceiver
         '
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(189, 25)
-        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
-        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(124, 142)
-        Me.ucrReceiverMultiple.TabIndex = 16
+        Me.ucrRecodeReceiver.Location = New System.Drawing.Point(189, 25)
+        Me.ucrRecodeReceiver.Name = "ucrRecodeReceiver"
+        Me.ucrRecodeReceiver.Size = New System.Drawing.Size(124, 142)
+        Me.ucrRecodeReceiver.TabIndex = 16
         '
-        'ucrSelectorAddRemove
+        'ucrRecodeSelector
         '
-        Me.ucrSelectorAddRemove.Location = New System.Drawing.Point(1, 12)
-        Me.ucrSelectorAddRemove.Name = "ucrSelectorAddRemove"
-        Me.ucrSelectorAddRemove.Size = New System.Drawing.Size(197, 155)
-        Me.ucrSelectorAddRemove.TabIndex = 15
+        Me.ucrRecodeSelector.Location = New System.Drawing.Point(1, 12)
+        Me.ucrRecodeSelector.Name = "ucrRecodeSelector"
+        Me.ucrRecodeSelector.Size = New System.Drawing.Size(197, 155)
+        Me.ucrRecodeSelector.TabIndex = 15
         '
         'dlgRecode
         '
@@ -117,8 +117,8 @@ Partial Class dlgRecode
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(646, 256)
         Me.Controls.Add(Me.lblSelectedVariables)
-        Me.Controls.Add(Me.ucrReceiverMultiple)
-        Me.Controls.Add(Me.ucrSelectorAddRemove)
+        Me.Controls.Add(Me.ucrRecodeReceiver)
+        Me.Controls.Add(Me.ucrRecodeSelector)
         Me.Controls.Add(Me.chkWithaLabel)
         Me.Controls.Add(Me.chkMakeResultFactor)
         Me.Controls.Add(Me.ucrBase)
@@ -141,6 +141,6 @@ Partial Class dlgRecode
     Friend WithEvents chkMakeResultFactor As CheckBox
     Friend WithEvents chkWithaLabel As CheckBox
     Friend WithEvents lblSelectedVariables As Label
-    Friend WithEvents ucrReceiverMultiple As ucrReceiverMultiple
-    Friend WithEvents ucrSelectorAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrRecodeReceiver As ucrReceiverMultiple
+    Friend WithEvents ucrRecodeSelector As ucrSelectorAddRemove
 End Class
