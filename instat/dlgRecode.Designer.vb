@@ -39,7 +39,7 @@ Partial Class dlgRecode
         '
         Me.dgvRecode.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvRecode.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RangeStart, Me.RangeEnd, Me.NewValue})
-        Me.dgvRecode.Location = New System.Drawing.Point(320, 10)
+        Me.dgvRecode.Location = New System.Drawing.Point(318, 10)
         Me.dgvRecode.Name = "dgvRecode"
         Me.dgvRecode.Size = New System.Drawing.Size(303, 157)
         Me.dgvRecode.TabIndex = 0
