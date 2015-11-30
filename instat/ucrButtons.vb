@@ -22,6 +22,8 @@ Public Class ucrButtons
             frmMain.clsRInterface.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType)
         End If
         RaiseEvent ClickOk(sender, e)
+
+        Me.ParentForm.Hide()
     End Sub
     Public Sub EmptyTxt()
         Dim Ctrl As Control
