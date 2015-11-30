@@ -51,6 +51,7 @@ Partial Class dlgColumnStats
         Me.CheckBox17 = New System.Windows.Forms.CheckBox()
         Me.CheckBox13 = New System.Windows.Forms.CheckBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.grpStatistcsRequired.SuspendLayout()
@@ -73,6 +74,7 @@ Partial Class dlgColumnStats
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.Button1)
         Me.TabPage1.Controls.Add(Me.lblSelectedVariables)
         Me.TabPage1.Controls.Add(Me.UcrReceiverMultiple)
         Me.TabPage1.Controls.Add(Me.ucrAddRemove)
@@ -362,6 +364,15 @@ Partial Class dlgColumnStats
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 2
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(266, 150)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 13
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'dlgColumnStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -418,4 +429,5 @@ Partial Class dlgColumnStats
     Friend WithEvents CheckBox14 As CheckBox
     Friend WithEvents CheckBox17 As CheckBox
     Friend WithEvents CheckBox13 As CheckBox
+    Friend WithEvents Button1 As Button
 End Class
