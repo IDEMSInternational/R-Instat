@@ -26,7 +26,7 @@ Public Class dlgChiSquareTest
     End Sub
 
 
-    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverChiSquare.Leave
+    Private Sub ucrReceiverChiSquare_Leave(sender As Object, e As EventArgs) Handles ucrReceiverChiSquare.Leave
         ucrBase.clsRsyntax.AddParameter("x", ucrReceiverChiSquare.GetVariables())
     End Sub
 
