@@ -361,25 +361,25 @@ Partial Class frmMain
         'OnewayToolStripMenuItem
         '
         Me.OnewayToolStripMenuItem.Name = "OnewayToolStripMenuItem"
-        Me.OnewayToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+        Me.OnewayToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.OnewayToolStripMenuItem.Text = "One-way..."
         '
         'OrthogonalToolStripMenuItem
         '
         Me.OrthogonalToolStripMenuItem.Name = "OrthogonalToolStripMenuItem"
-        Me.OrthogonalToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+        Me.OrthogonalToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.OrthogonalToolStripMenuItem.Text = "Orthogonal..."
         '
         'GeneralToolStripMenuItem1
         '
         Me.GeneralToolStripMenuItem1.Name = "GeneralToolStripMenuItem1"
-        Me.GeneralToolStripMenuItem1.Size = New System.Drawing.Size(144, 22)
+        Me.GeneralToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.GeneralToolStripMenuItem1.Text = "General..."
         '
         'BivariateToolStripMenuItem
         '
         Me.BivariateToolStripMenuItem.Name = "BivariateToolStripMenuItem"
-        Me.BivariateToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+        Me.BivariateToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.BivariateToolStripMenuItem.Text = "Bivariate..."
         '
         'RegressionToolStripMenuItem
