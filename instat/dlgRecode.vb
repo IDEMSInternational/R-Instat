@@ -17,7 +17,9 @@
 
 Imports instat.Translations
 Public Class dlgRecode
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
+    Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+        ucrRecodeReceiver.SetMeAsReceiver()
+        ucrRecodeReceiver.Selector = ucrRecodeSelector
     End Sub
 End Class
