@@ -409,4 +409,8 @@ Public Class frmMain
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SummaryToolStripMenuItem1.Click
         dlgSummaryTables.ShowDialog()
     End Sub
+
+    Private Sub GammaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GammaToolStripMenuItem.Click
+        dlgGammaDistr.ShowDialog()
+    End Sub
 End Class
