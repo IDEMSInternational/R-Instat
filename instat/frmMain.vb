@@ -413,4 +413,20 @@ Public Class frmMain
     Private Sub GammaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GammaToolStripMenuItem.Click
         dlgGammaDistr.ShowDialog()
     End Sub
+
+    Private Sub DuplicatecopyColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicatecopyColumnsToolStripMenuItem.Click
+        dlgDuplicateColumns.ShowDialog()
+    End Sub
+
+    Private Sub TransformToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransformToolStripMenuItem.Click
+        dlgTransform.ShowDialog()
+    End Sub
+
+    Private Sub InteractionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InteractionsToolStripMenuItem.Click
+        dlgIndicatorVariable.ShowDialog()
+    End Sub
+
+    Private Sub PolynomialsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PolynomialsToolStripMenuItem.Click
+        dlgPolynomials.ShowDialog()
+    End Sub
 End Class
