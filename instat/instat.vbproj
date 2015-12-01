@@ -153,10 +153,10 @@
     <Compile Include="dlgAnnualRaintotal.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgAnovaOneWay.Designer.vb">
-      <DependentUpon>dlgAnovaOneWay.vb</DependentUpon>
+    <Compile Include="dlgBivariateANOVA.Designer.vb">
+      <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgAnovaOneWay.vb">
+    <Compile Include="dlgBivariateANOVA.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgBoxplotCountVariable.designer.vb">
@@ -187,6 +187,12 @@
       <DependentUpon>dlgChangeType.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgChangeType.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgChiSquareTest.designer.vb">
+      <DependentUpon>dlgChiSquareTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgChiSquareTest.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCliBoxplot.designer.vb">
@@ -303,6 +309,12 @@
     <Compile Include="dlgExtremeEvents.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExtremes.Designer.vb">
+      <DependentUpon>dlgExtremes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExtremes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFind.Designer.vb">
       <DependentUpon>dlgFind.vb</DependentUpon>
     </Compile>
@@ -313,6 +325,12 @@
       <DependentUpon>dlgFreqTables.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgFreqTables.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgGammaDistr.designer.vb">
+      <DependentUpon>dlgGammaDistr.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGammaDistr.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgHistogram.designer.vb">
@@ -379,6 +397,12 @@
       <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgMultipleRegression.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgNon-ParametricANOVA.Designer.vb">
+      <DependentUpon>dlgNon-ParametricANOVA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgNon-ParametricANOVA.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOneSample.Designer.vb">
@@ -489,6 +513,12 @@
     <Compile Include="dlgSpells.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgStack.Designer.vb">
+      <DependentUpon>dlgStack.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgStack.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgStartofRains.designer.vb">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
     </Compile>
@@ -505,6 +535,12 @@
       <DependentUpon>dlgStemAndLeaf.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgStemAndLeaf.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSummaryTables.designer.vb">
+      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSummaryTables.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgThreeSummaries.Designer.vb">
@@ -680,14 +716,14 @@
     <EmbeddedResource Include="dlgAnnualRaintotal.sw-KE.resx">
       <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgAnovaOneWay.fr-FR.resx">
-      <DependentUpon>dlgAnovaOneWay.vb</DependentUpon>
+    <EmbeddedResource Include="dlgBivariateANOVA.fr-FR.resx">
+      <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgAnovaOneWay.resx">
-      <DependentUpon>dlgAnovaOneWay.vb</DependentUpon>
+    <EmbeddedResource Include="dlgBivariateANOVA.resx">
+      <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgAnovaOneWay.sw-KE.resx">
-      <DependentUpon>dlgAnovaOneWay.vb</DependentUpon>
+    <EmbeddedResource Include="dlgBivariateANOVA.sw-KE.resx">
+      <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxplotCountVariable.fr-FR.resx">
       <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
@@ -733,6 +769,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgChangeType.sw-KE.resx">
       <DependentUpon>dlgChangeType.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgChiSquareTest.fr-FR.resx">
+      <DependentUpon>dlgChiSquareTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgChiSquareTest.resx">
+      <DependentUpon>dlgChiSquareTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgChiSquareTest.sw-KE.resx">
+      <DependentUpon>dlgChiSquareTest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliBoxplot.fr-FR.resx">
       <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
@@ -896,6 +941,15 @@
     <EmbeddedResource Include="dlgExtremeEvents.sw-KE.resx">
       <DependentUpon>dlgExtremeEvents.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExtremes.fr-FR.resx">
+      <DependentUpon>dlgExtremes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExtremes.resx">
+      <DependentUpon>dlgExtremes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExtremes.sw-KE.resx">
+      <DependentUpon>dlgExtremes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgFind.fr-FR.resx">
       <DependentUpon>dlgFind.vb</DependentUpon>
     </EmbeddedResource>
@@ -913,6 +967,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFreqTables.sw-KE.resx">
       <DependentUpon>dlgFreqTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGammaDistr.fr-FR.resx">
+      <DependentUpon>dlgGammaDistr.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGammaDistr.resx">
+      <DependentUpon>dlgGammaDistr.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGammaDistr.sw-KE.resx">
+      <DependentUpon>dlgGammaDistr.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHistogram.fr-FR.resx">
       <DependentUpon>dlgHistogram.vb</DependentUpon>
@@ -1012,6 +1075,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMultipleRegression.sw-KE.resx">
       <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNon-ParametricANOVA.fr-FR.resx">
+      <DependentUpon>dlgNon-ParametricANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNon-ParametricANOVA.resx">
+      <DependentUpon>dlgNon-ParametricANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNon-ParametricANOVA.sw-KE.resx">
+      <DependentUpon>dlgNon-ParametricANOVA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneSample.fr-FR.resx">
       <DependentUpon>dlgOneSample.vb</DependentUpon>
@@ -1148,6 +1220,15 @@
     <EmbeddedResource Include="dlgSort.sw-KE.resx">
       <DependentUpon>dlgSort.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgStack.fr-FR.resx">
+      <DependentUpon>dlgStack.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStack.resx">
+      <DependentUpon>dlgStack.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStack.sw-KE.resx">
+      <DependentUpon>dlgStack.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgStartofRains.fr-FR.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
     </EmbeddedResource>
@@ -1168,6 +1249,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgStemAndLeaf.sw-KE.resx">
       <DependentUpon>dlgStemAndLeaf.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryTables.fr-FR.resx">
+      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryTables.resx">
+      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryTables.sw-KE.resx">
+      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTimeseriesPlot.fr-FR.resx">
       <DependentUpon>dlgTimeseriesPlot.vb</DependentUpon>
@@ -1268,7 +1358,9 @@
     <EmbeddedResource Include="frmVariables.sw-KE.resx">
       <DependentUpon>frmVariables.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="My Project\Resources.fr-FR.resx" />
+    <EmbeddedResource Include="My Project\Resources.fr-FR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
