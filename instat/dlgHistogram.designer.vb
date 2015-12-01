@@ -22,26 +22,26 @@ Partial Class dlgHistogram
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.UcrSingleReceiver = New instat.ucrReceiverSingle()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrSingleReceiver = New instat.ucrReceiverSingle()
         Me.UcrBase = New instat.ucrButtons()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.txtHistogramTitle = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
-        'UcrAddRemove
+        'ucrAddRemove
         '
-        Me.UcrAddRemove.Location = New System.Drawing.Point(12, 12)
-        Me.UcrAddRemove.Name = "UcrAddRemove"
-        Me.UcrAddRemove.Size = New System.Drawing.Size(186, 129)
-        Me.UcrAddRemove.TabIndex = 1
+        Me.ucrAddRemove.Location = New System.Drawing.Point(12, 12)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(186, 129)
+        Me.ucrAddRemove.TabIndex = 1
         '
-        'UcrSingleReceiver
+        'ucrSingleReceiver
         '
-        Me.UcrSingleReceiver.Location = New System.Drawing.Point(204, 33)
-        Me.UcrSingleReceiver.Name = "UcrSingleReceiver"
-        Me.UcrSingleReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.UcrSingleReceiver.TabIndex = 2
+        Me.ucrSingleReceiver.Location = New System.Drawing.Point(204, 33)
+        Me.ucrSingleReceiver.Name = "ucrSingleReceiver"
+        Me.ucrSingleReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrSingleReceiver.TabIndex = 2
         '
         'UcrBase
         '
@@ -75,16 +75,19 @@ Partial Class dlgHistogram
         Me.Controls.Add(Me.txtHistogramTitle)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.UcrBase)
-        Me.Controls.Add(Me.UcrSingleReceiver)
-        Me.Controls.Add(Me.UcrAddRemove)
+        Me.Controls.Add(Me.ucrSingleReceiver)
+        Me.Controls.Add(Me.ucrAddRemove)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgHistogram"
-        Me.Text = "dlgHistogram"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Histogram"
+        Me.Text = "Histogram Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents UcrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents UcrSingleReceiver As ucrReceiverSingle
+    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrSingleReceiver As ucrReceiverSingle
     Friend WithEvents UcrBase As ucrButtons
     Friend WithEvents lblTitle As Label
     Friend WithEvents txtHistogramTitle As TextBox

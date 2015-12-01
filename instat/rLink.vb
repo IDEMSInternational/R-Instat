@@ -15,64 +15,107 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
-Imports System.IO
-Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Text
-Imports System.Threading.Tasks
+Imports unvell.ReoGrid
 
 Public Class RInterface
     ' R interface class. Each instance of the class has its own REngine instance
-    Dim climateObjectPath As String = "C:\\ClimateObject\\R"
-    Dim InstatObjectPath As String = "C:\\InstatObject\\R" 'path to the Instat object
+    Dim strClimateObjectPath As String = "C:\\ClimateObject\\R"
+    Dim strClimateObject As String = "ClimateObject"
+    Dim strInstatObjectPath As String = "C:\\InstatObject\\R" 'path to the Instat object
+    Public strInstatDataObject As String = "InstatDataObject"
     Dim clsEngine As REngine
     Dim txtOutput As New TextBox
     Dim txtLog As New TextBox
-    Dim climateObjectExists As Boolean = False
-    Dim InstatObjectExist As Boolean = False
+    Public bLog As Boolean = False
+    Public bOutput As Boolean = False
+    Public bClimateObjectExists As Boolean = False
+    Public bInstatObjectExists As Boolean = False
+    Public bClimsoftLinkExists As Boolean = False
 
-    Public Sub New()
+    Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
         Me.clsEngine = REngine.GetInstance()
         Me.clsEngine.Initialize()
+        'Sets up R 
+        RSetup(bWithInstatObj, bWithClimsoft)
     End Sub
 
     Public Sub SetOutput(tempOutput As TextBox)
         txtOutput = tempOutput
+        bOutput = True
     End Sub
 
     Public Sub SetLog(tempLog As TextBox)
         txtLog = tempLog
+        bLog = True
     End Sub
 
-    Public Sub LoadData()
-        Dim dlgOpen As New OpenFileDialog
-        Dim strExtension As String
-        Dim dfDataset As DataFrame
-        Dim strHolder As String
+    Public Sub LoadData(strDataName As String, strScript As String)
+        RSetup(True, True)
+        RunScript(strInstatDataObject & "<-instat_obj$new()")
+        RunScript(strDataName & "<-" & strScript)
+        If bInstatObjectExists Then
+            RunScript(strInstatDataObject & "$import_data(data_tables=list(" & strDataName & "=" & strDataName & "))")
+        End If
+        If bClimateObjectExists Then
+            RunScript(strClimateObject & "$import_data(data_tables=list(" & strDataName & "=" & strDataName & "))")
+        End If
+    End Sub
 
-        'For importing files into the instat'
-        'start the open file dialog
-        dlgOpen.Filter = "Comma Separated (*.csv)|*.csv|Excel 2-5/95/97 (*.xls)|*.xls|All Files (*.*)|*.*"
-        dlgOpen.Title = "Import"
-        If dlgOpen.ShowDialog() = DialogResult.OK Then
-            'checks if the file name is not blank'
-            If dlgOpen.FileName <> "" Then
-                strExtension = Path.GetExtension(dlgOpen.FileName)
-                strHolder = Replace(dlgOpen.FileName, "\", "/")
-                Select Case strExtension
-                    Case ".csv"
-                        dfDataset = clsEngine.Evaluate("data<-as.data.frame(read.table('" & strHolder & "', header = T, sep = ','))").AsDataFrame
-                    Case ".xlsx" 'TODO use odbc link
-                        dfDataset = clsEngine.Evaluate("require(xlsx);data<-as.data.frame(read.xlsx('" & strHolder & "', sheetName=1))").AsDataFrame
-                    Case ".xls" 'TODO use odbc link
-                        dfDataset = clsEngine.Evaluate("require(readxl);data<-as.data.frame(read_excel('" & strHolder & "', sheet=1))").AsDataFrame
-                End Select
-                txtOutput.Text = txtOutput.Text & "Loaded > " & strHolder & vbCrLf
-            Else
-                MsgBox("Must have a file name!", vbInformation, "Message from Instat")
-            End If
-        Else
-            MsgBox("No File was selected!", vbInformation, "Message From Instat")
+    Public Sub FillDataObjectData(grdData As ReoGridControl)
+        Dim dfTemp As DataFrame
+        Dim dfList As GenericVector
+        Dim i As Integer
+        If bInstatObjectExists Then
+            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_data_list()").AsList
+            For i = 0 To dfList.Count - 1
+                dfTemp = dfList(i).AsDataFrame()
+                FillData(dfTemp, grdData)
+            Next
+
+        End If
+
+    End Sub
+
+    Public Sub FillDataObjectVariables(grdData As ReoGridControl)
+        Dim dfList As GenericVector
+        Dim dfTemp As DataFrame
+        Dim i As Integer
+        If bInstatObjectExists Then
+            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variable_info()").AsList
+            For i = 0 To dfList.Count - 1
+                dfTemp = dfList(i).AsDataFrame()
+                FillData(dfTemp, grdData)
+            Next
+        End If
+    End Sub
+
+    Public Sub FillListView(lstView As ListView)
+        Dim dfList As GenericVector
+        Dim dfTemp As DataFrame
+        Dim i As Integer
+        Dim grps As New ListViewGroup
+        If bInstatObjectExists Then
+            lstView.Columns.Add("Available Data", width:=100)
+            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variable_info()").AsList
+            For i = 0 To dfList.Count - 1
+                grps = New ListViewGroup(dfList.Names(i), HorizontalAlignment.Left)
+                If Not lstView.Groups.Contains(grps) Then
+                    lstView.Groups.Add(grps)
+                End If
+                dfTemp = dfList(i).AsDataFrame()
+                For j = 0 To dfTemp.RowCount - 1
+                    lstView.Items.Add(dfTemp(j, 0)).Group = lstView.Groups(i)
+                Next
+            Next
+        End If
+    End Sub
+
+    Public Sub FillDataObjectMetadata(grdData As ReoGridControl)
+        Dim dfTemp As DataFrame
+        'todo insert loop
+        If bInstatObjectExists Then
+            dfTemp = GetData(strInstatDataObject & "$get_meta_data()").AsDataFrame()
+            FillData(dfTemp, grdData)
         End If
     End Sub
 
@@ -80,23 +123,35 @@ Public Class RInterface
         Dim strCapturedScript As String
         Dim temp As RDotNet.SymbolicExpression
         Dim strTemp As String
-        txtLog.Text = txtLog.Text & strScript & vbCrLf
-        txtOutput.Text = txtOutput.Text & "> " & strScript & vbCrLf
-        If bReturnOutput = 0 Then
-            clsEngine.Evaluate(strScript)
-        ElseIf bReturnOutput = 1 Then
-            temp = clsEngine.Evaluate(strScript)
-            strTemp = String.Join(vbCrLf, temp.AsCharacter())
-            txtOutput.Text = txtOutput.Text & strTemp & vbCrLf
-        Else
-            strCapturedScript = "capture.output(" & strScript & ")"
-            temp = clsEngine.Evaluate(strCapturedScript)
-            strTemp = String.Join(vbCrLf, temp.AsCharacter())
-            txtOutput.Text = txtOutput.Text & "> " & strTemp & vbCrLf
-        End If
+        Dim strOutput As String
+        strOutput = ""
+        Try
+            If bLog Then
+                txtLog.Text = txtLog.Text & strScript & vbCrLf
+            End If
+            strOutput = "> " & strScript & vbCrLf
+            If bReturnOutput = 0 Then
+                clsEngine.Evaluate(strScript)
+            ElseIf bReturnOutput = 1 Then
+                temp = clsEngine.Evaluate(strScript)
+                strTemp = String.Join(vbCrLf, temp.AsCharacter())
+                strOutput = strOutput & strTemp & vbCrLf
+            Else
+                strCapturedScript = "capture.output(" & strScript & ")"
+                temp = clsEngine.Evaluate(strCapturedScript)
+                strTemp = String.Join(vbCrLf, temp.AsCharacter())
+                strOutput = strOutput & strTemp & vbCrLf
+            End If
+            If bOutput Then
+                txtOutput.Text = txtOutput.Text & strOutput
+            End If
+        Catch
+            MsgBox(strOutput)
+        End Try
     End Sub
 
     Public Function GetData(strLabel As String) As DataFrame
+
         Me.clsEngine.Evaluate("temp<-" & strLabel).AsDataFrame()
         Return Me.clsEngine.GetSymbol("temp").AsDataFrame()
 
@@ -108,37 +163,71 @@ Public Class RInterface
 
     End Function
 
+    Public Function GetVar(strLabel As String) As CharacterVector
+
+        Try
+            Return Me.clsEngine.Evaluate(strLabel).AsCharacter()
+        Catch
+            MsgBox(strLabel)
+            Return Nothing
+        End Try
+
+    End Function
+
     Public Sub climateObject() 'creates an instance of the climate object
-        If Not climateObjectExists Then
-            Me.clsEngine.Evaluate("setwd('" & climateObjectPath & "')")
-            Me.clsEngine.Evaluate("source(" & Chr(34) & "SourcingScript.R" & Chr(34) & ")")
-            Me.clsEngine.Evaluate("climate_obj<-climate$new(data_tables=list(data=data))")
-            climateObjectExists = True
+        If Not bClimateObjectExists Then
+            RunScript("setwd('" & strClimateObjectPath & "')")
+            RunScript("source(" & Chr(34) & "SourcingScript.R" & Chr(34) & ")")
+            MsgBox("Need to fix the code here to get data from the data object")
+            RunScript("ClimateObject<-climate$new(data_tables=list(data=data))")
+            bClimateObjectExists = True
         End If
     End Sub
 
-    Public Sub InstatObject() 'creates an instance of the instat object
-        If Not InstatObjectExist Then
-            clsEngine.Evaluate("setwd('" & InstatObjectPath & "')")
-            clsEngine.Evaluate("source(" & Chr(34) & "data_object.R" & Chr(34) & ")")
-            clsEngine.Evaluate("source(" & Chr(34) & "instat_object.R" & Chr(34) & ")")
-            'clsEngine.Evaluate("data_instat_obj<-instat_obj$new(data_tables=list(curr_data_obj=data))")
-            InstatObjectExist = True
+    Public Sub RSetup(bWithInstatObj As Boolean, bWithClimsoft As Boolean) 'creates an instance of the instat object
+        'run script to load libraries
+        If bWithInstatObj And Not bInstatObjectExists Then
+            RunScript("setwd('" & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
+            RunScript("source(" & Chr(34) & "data_object.R" & Chr(34) & ")")
+            RunScript("source(" & Chr(34) & "instat_object.R" & Chr(34) & ")")
+            RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
+            'RunScript(strInstatDataObject & "<-data_obj$new()")
+            RunScript(strInstatDataObject & "<-instat_obj$new()")
+            bInstatObjectExists = True
+        End If
+        If bWithClimsoft And Not bClimsoftLinkExists Then
+
         End If
     End Sub
-    'Creation of the Instat object.
-    Public Function getInstatObject(strLabel As String) As Tuple(Of DataFrame, DataFrame, DataFrame)
-        Dim temp_data, temp_metadata, temp_variables As DataFrame
-        clsEngine.Evaluate("temp_data<-" & strLabel).AsDataFrame()
-        clsEngine.Evaluate("data_instat_obj<-instat_obj$new(data_tables=list(curr_data_obj=temp_data))")
-        temp_data = clsEngine.Evaluate("data_temp<-data_instat_obj$data_objects$curr_data_obj$data").AsDataFrame()
-        clsEngine.Evaluate("data_variables<-data_instat_obj$data_objects$curr_data_obj$meta_data$columns").AsDataFrame()
-        clsEngine.Evaluate("library(plyr);data_variables$Type<-sapply(temp_data,class)").AsDataFrame()
-        temp_variables = clsEngine.Evaluate("data_variables").AsDataFrame()
-        clsEngine.Evaluate("meta_data_edit<-data_instat_obj$data_objects$curr_data_obj$meta_data[-which(names(data_instat_obj$data_objects$curr_data_obj$meta_data)=='columns')]")
-        clsEngine.Evaluate("x<-data.frame(meta_data_item = names(meta_data_edit))").AsDataFrame
-        clsEngine.Evaluate("x$meta_data_value = meta_data_edit")
-        temp_metadata = clsEngine.Evaluate("x").AsDataFrame()
-        Return New Tuple(Of DataFrame, DataFrame, DataFrame)(temp_data, temp_metadata, temp_variables)
-    End Function
+
+    Public Sub FillData(dfTemp As DataFrame, grdData As ReoGridControl)
+        Dim bFoundWorksheet As Boolean = False
+        Dim tempWorkSheet
+
+        For Each tempWorkSheet In grdData.Worksheets
+            If tempWorkSheet.Name = grdData.CurrentWorksheet.Name Then
+                tempWorkSheet.Rows = dfTemp.RowCount
+                tempWorkSheet.Columns = dfTemp.ColumnCount
+                For i As Integer = 0 To dfTemp.RowCount - 1
+                    For k As Integer = 0 To dfTemp.ColumnCount - 1
+                        tempWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
+                        tempWorkSheet(row:=i, col:=k) = dfTemp(i, k)
+                    Next
+                Next
+                bFoundWorksheet = True
+            End If
+        Next
+        If Not bFoundWorksheet Then
+            tempWorkSheet = grdData.Worksheets.Create(grdData.CurrentWorksheet.Name)
+            tempWorkSheet.Rows = dfTemp.RowCount
+            tempWorkSheet.Columns = dfTemp.ColumnCount
+            For i As Integer = 0 To dfTemp.RowCount - 1
+                For k As Integer = 0 To dfTemp.ColumnCount - 1
+                    tempWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
+                    tempWorkSheet(row:=i, col:=k) = dfTemp(i, k)
+                Next
+            Next
+            grdData.Worksheets.Add(tempWorkSheet)
+        End If
+    End Sub
 End Class

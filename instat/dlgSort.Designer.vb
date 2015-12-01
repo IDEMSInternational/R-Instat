@@ -22,38 +22,34 @@ Partial Class dlgSort
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.UcrDataSelection1 = New instat.ucrDataSelection()
-        Me.UcrButtons1 = New instat.ucrButtons()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.grpOrderType = New System.Windows.Forms.GroupBox()
         Me.rdoDescending = New System.Windows.Forms.RadioButton()
         Me.rdoAscending = New System.Windows.Forms.RadioButton()
-        Me.GroupBox1.SuspendLayout()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrMultiple = New instat.ucrReceiverMultiple()
+        Me.lblColumnsToSort = New System.Windows.Forms.Label()
+        Me.chkWriteBack = New System.Windows.Forms.CheckBox()
+        Me.grpOrderType.SuspendLayout()
         Me.SuspendLayout()
         '
-        'UcrDataSelection1
+        'ucrBase
         '
-        Me.UcrDataSelection1.Location = New System.Drawing.Point(1, 1)
-        Me.UcrDataSelection1.Name = "UcrDataSelection1"
-        Me.UcrDataSelection1.Size = New System.Drawing.Size(278, 122)
-        Me.UcrDataSelection1.TabIndex = 1
+        Me.ucrBase.Location = New System.Drawing.Point(1, 155)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(402, 35)
+        Me.ucrBase.TabIndex = 0
         '
-        'UcrButtons1
+        'grpOrderType
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(1, 129)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(402, 35)
-        Me.UcrButtons1.TabIndex = 0
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.rdoDescending)
-        Me.GroupBox1.Controls.Add(Me.rdoAscending)
-        Me.GroupBox1.Location = New System.Drawing.Point(294, 7)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(102, 116)
-        Me.GroupBox1.TabIndex = 2
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Order"
+        Me.grpOrderType.Controls.Add(Me.rdoDescending)
+        Me.grpOrderType.Controls.Add(Me.rdoAscending)
+        Me.grpOrderType.Location = New System.Drawing.Point(284, 12)
+        Me.grpOrderType.Name = "grpOrderType"
+        Me.grpOrderType.Size = New System.Drawing.Size(102, 116)
+        Me.grpOrderType.TabIndex = 2
+        Me.grpOrderType.TabStop = False
+        Me.grpOrderType.Text = "Order Type"
         '
         'rdoDescending
         '
@@ -79,28 +75,71 @@ Partial Class dlgSort
         Me.rdoAscending.Text = "Ascending"
         Me.rdoAscending.UseVisualStyleBackColor = True
         '
+        'ucrAddRemove
+        '
+        Me.ucrAddRemove.Location = New System.Drawing.Point(1, 7)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(180, 118)
+        Me.ucrAddRemove.TabIndex = 3
+        '
+        'ucrMultiple
+        '
+        Me.ucrMultiple.Location = New System.Drawing.Point(187, 22)
+        Me.ucrMultiple.Name = "ucrMultiple"
+        Me.ucrMultiple.Size = New System.Drawing.Size(91, 101)
+        Me.ucrMultiple.TabIndex = 4
+        '
+        'lblColumnsToSort
+        '
+        Me.lblColumnsToSort.AutoSize = True
+        Me.lblColumnsToSort.Location = New System.Drawing.Point(187, 7)
+        Me.lblColumnsToSort.Name = "lblColumnsToSort"
+        Me.lblColumnsToSort.Size = New System.Drawing.Size(85, 13)
+        Me.lblColumnsToSort.TabIndex = 5
+        Me.lblColumnsToSort.Tag = "Columns_To_Sort"
+        Me.lblColumnsToSort.Text = "Columns To Sort"
+        '
+        'chkWriteBack
+        '
+        Me.chkWriteBack.AutoSize = True
+        Me.chkWriteBack.Location = New System.Drawing.Point(13, 132)
+        Me.chkWriteBack.Name = "chkWriteBack"
+        Me.chkWriteBack.Size = New System.Drawing.Size(134, 17)
+        Me.chkWriteBack.TabIndex = 6
+        Me.chkWriteBack.Text = "Write back to the Data"
+        Me.chkWriteBack.UseVisualStyleBackColor = True
+        '
         'dlgSort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(408, 162)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.UcrDataSelection1)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.ClientSize = New System.Drawing.Size(406, 191)
+        Me.Controls.Add(Me.chkWriteBack)
+        Me.Controls.Add(Me.lblColumnsToSort)
+        Me.Controls.Add(Me.ucrMultiple)
+        Me.Controls.Add(Me.ucrAddRemove)
+        Me.Controls.Add(Me.grpOrderType)
+        Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSort"
         Me.ShowIcon = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Sort"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.grpOrderType.ResumeLayout(False)
+        Me.grpOrderType.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents UcrButtons1 As ucrButtons
-    Friend WithEvents UcrDataSelection1 As ucrDataSelection
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents grpOrderType As GroupBox
     Friend WithEvents rdoDescending As RadioButton
     Friend WithEvents rdoAscending As RadioButton
+    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrMultiple As ucrReceiverMultiple
+    Friend WithEvents lblColumnsToSort As Label
+    Friend WithEvents chkWriteBack As CheckBox
 End Class

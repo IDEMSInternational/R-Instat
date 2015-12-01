@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports RDotNet
+Imports System.IO
 Imports System.Globalization
 Imports System.Threading
 Imports instat.Translations
@@ -21,6 +22,7 @@ Imports instat.Translations
 Public Class frmMain
 
     Public clsRInterface As New RInterface
+    Public clsButton As New ucrButtons
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
@@ -33,6 +35,7 @@ Public Class frmMain
         frmEditor.Dock = DockStyle.Fill
         frmCommand.Show()
         frmEditor.Show()
+        'Setting the
         clsRInterface.SetLog(frmLog.txtLog)
         clsRInterface.SetOutput(frmCommand.txtCommand)
         tstatus.Text = frmEditor.gridColumns.CurrentWorksheet.Name
@@ -40,22 +43,15 @@ Public Class frmMain
     End Sub
 
     Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
-        'clsRInterface.LoadData()
-        'Dim dataset As DataFrame = clsRInterface.GetData("data")
-        'frmEditor.grid.CurrentWorksheet.Rows = dataset.RowCount
-        'frmEditor.grid.CurrentWorksheet.Columns = dataset.ColumnCount
-        'For i As Integer = 0 To dataset.RowCount - 1
-        '    For k As Integer = 0 To dataset.ColumnCount - 1
-        '        frmEditor.grid.CurrentWorksheet.ColumnHeaders(k).Text = dataset.ColumnNames(k)
-        '        frmEditor.grid.CurrentWorksheet(row:=i, col:=k) = dataset(i, k)
-        '    Next
-        'Next
-        clsRInterface.LoadData()
-        clsRInterface.InstatObject()
-        Dim holder As Tuple(Of DataFrame, DataFrame, DataFrame) = clsRInterface.getInstatObject("data")
-        FillSheet(holder.Item1)
-        FillMetaData(holder.Item2)
-        FillVariables(holder.Item3)
+        Dim pair As KeyValuePair(Of String, String) = openDialog()
+        clsButton.clsRsyntax.SetFunction("read.csv")
+        clsButton.clsRsyntax.AddParameter("file", pair.Value)
+        clsRInterface.LoadData(pair.Key, clsButton.clsRsyntax.GetScript())
+        clsRInterface.FillDataObjectVariables(frmVariables.gridVariables)
+        clsRInterface.FillDataObjectMetadata(frmMetaData.gridMetaData)
+        clsRInterface.FillDataObjectData(frmEditor.gridColumns)
+
+
     End Sub
 
     Public Sub FillData(strDataName)
@@ -95,27 +91,12 @@ Public Class frmMain
         dlgDescriptiveStatistics.ShowDialog()
     End Sub
 
-    Private Sub mnuFileOpenWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileOpenWorksheet.Click
-
-    End Sub
-
-    Private Sub CutCtrlXToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuEditCut.Click
-
-    End Sub
-
-    Private Sub mnuBar_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles mnuBar.ItemClicked
-
-    End Sub
-
-    Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
+    Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgSort.ShowDialog()
     End Sub
 
     Private Sub mnuSriptLog_Click(sender As Object, e As EventArgs)
-        frmLog.Show()
-    End Sub
-
-    Private Sub KiswahiliToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KiswahiliToolStripMenuItem.Click
+        frmLog.ShowDialog()
     End Sub
 
     Private Sub KiswahiliToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles KiswahiliToolStripMenuItem1.Click
@@ -124,16 +105,8 @@ Public Class frmMain
         autoTranslate(Me)
     End Sub
 
-    Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindroseToolStripMenuItem.Click
-
-    End Sub
-
     Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsProbabilityPlot.Click
         dlgProbabilityPlot.ShowDialog()
-    End Sub
-
-    Private Sub ProbabilityDistributionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbabilityDistributionsToolStripMenuItem.Click
-
     End Sub
 
     Private Sub FrenchToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrenchToolStripMenuItem.Click
@@ -146,14 +119,6 @@ Public Class frmMain
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
         Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
         autoTranslate(Me)
-    End Sub
-
-    Private Sub RowStatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RowStatisticsToolStripMenuItem.Click
-
-    End Sub
-
-    Private Sub mnuEditViewEditText_Click(sender As Object, e As EventArgs) Handles mnuEditViewEditText.Click
-
     End Sub
 
     Private Sub mnuFileNewWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileNewWorksheet.Click
@@ -170,10 +135,6 @@ Public Class frmMain
 
     Private Sub StartOfTheRainsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartOfTheRainsToolStripMenuItem.Click
         dlgStartofRains.ShowDialog()
-    End Sub
-
-    Private Sub tstatus_Click(sender As Object, e As EventArgs) Handles tstatus.Click
-
     End Sub
 
     Private Sub RegularSequenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegularSequenceToolStripMenuItem.Click
@@ -202,10 +163,6 @@ Public Class frmMain
 
     Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsPlot.Click
         dlgPlot.ShowDialog()
-    End Sub
-
-    Private Sub mnuFileCloseWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileCloseWorksheet.Click
-
     End Sub
 
     Private Sub mnuGraphicsHistogram_Click(sender As Object, e As EventArgs) Handles mnuGraphicsHistogram.Click
@@ -267,47 +224,6 @@ Public Class frmMain
     Private Sub mnuClimateMethodsGraphicsRainCount_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsGraphicsRainCount.Click
         dlgYearRaincount.ShowDialog()
     End Sub
-    Public Sub FillSheet(df)
-        frmEditor.gridColumns.CurrentWorksheet.Rows = df.RowCount
-        frmEditor.gridColumns.CurrentWorksheet.Columns = df.ColumnCount
-        For i As Integer = 0 To df.RowCount - 1
-            For k As Integer = 0 To df.ColumnCount - 1
-                frmEditor.gridColumns.CurrentWorksheet.ColumnHeaders(k).Text = df.ColumnNames(k)
-                frmEditor.gridColumns.CurrentWorksheet(row:=i, col:=k) = df(i, k)
-            Next
-        Next
-    End Sub
-    Public Sub FillMetaData(df)
-        'Dim temp As RDotNet.SymbolicExpression
-        'Dim temp_str As String
-        'For i As Integer = 0 To df.RowCount - 1
-        '    For k As Integer = 0 To df.ColumnCount - 1
-        '        temp_str = df(i, k)
-        '        frmMetaData.txtMetadata.Text = temp_str
-        '        'frmMetaData.txtMetadata.Text = String.Format("{0}", df(i, k))
-        '    Next
-        'Next
-
-        frmMetaData.gridMetaData.CurrentWorksheet.Rows = df.RowCount
-        frmMetaData.gridMetaData.CurrentWorksheet.Columns = df.ColumnCount
-        For i As Integer = 0 To df.RowCount - 1
-            For k As Integer = 0 To df.ColumnCount - 1
-                frmMetaData.gridMetaData.CurrentWorksheet.ColumnHeaders(k).Text = df.ColumnNames(k)
-                frmMetaData.gridMetaData.CurrentWorksheet(row:=i, col:=k) = df(i, k)
-            Next
-        Next
-    End Sub
-
-    Public Sub FillVariables(df)
-        frmVariables.gridVariables.CurrentWorksheet.Rows = df.RowCount
-        frmVariables.gridVariables.CurrentWorksheet.Columns = df.ColumnCount
-        For i As Integer = 0 To df.RowCount - 1
-            For k As Integer = 0 To df.ColumnCount - 1
-                frmVariables.gridVariables.CurrentWorksheet.ColumnHeaders(k).Text = df.ColumnNames(k)
-                frmVariables.gridVariables.CurrentWorksheet(row:=i, col:=k) = df(i, k)
-            Next
-        Next
-    End Sub
 
     Private Sub mnuWindowMetadata_Click(sender As Object, e As EventArgs)
         frmMetaData.Show()
@@ -347,5 +263,154 @@ Public Class frmMain
         Else
             frmMetaData.Visible = True
         End If
+    End Sub
+
+    Private Sub mnuClmateMethodThreeSummaries_Click(sender As Object, e As EventArgs) Handles mnuClmateMethodThreeSummaries.Click
+        dlgThreeSummaries.ShowDialog()
+    End Sub
+
+    Private Sub StartOfRainToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartOfRainToolStripMenuItem.Click
+        dlgAddStartRain.ShowDialog()
+    End Sub
+
+    Private Sub EndOfRainToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EndOfRainToolStripMenuItem.Click
+        dlgEndRain.ShowDialog()
+    End Sub
+
+    Private Sub ChangeFormatDayMonthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeFormatDayMonthToolStripMenuItem.Click
+        dlgChangeFormatDayMonth.ShowDialog()
+    End Sub
+
+    Private Sub ExportCPTToTabularToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportCPTToTabularToolStripMenuItem.Click
+        dlgCPTtoTabularData.ShowDialog()
+    End Sub
+
+    Private Sub DayMonthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DayMonthToolStripMenuItem.Click
+        dlgDayMonth.ShowDialog()
+
+    End Sub
+
+    Private Sub DisplayDailyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DisplayDailyToolStripMenuItem1.Click
+        dlgDisplayDaily.ShowDialog()
+    End Sub
+
+    Private Sub DisplayDOYOfYearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayDOYOfYearToolStripMenuItem.Click
+        dlgDisplayDOYofYear.ShowDialog()
+    End Sub
+
+    Private Sub DisplayRainRunningTotalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayRainRunningTotalToolStripMenuItem.Click
+        dlgDisplayRainRunningTotal.ShowDialog()
+    End Sub
+
+    Private Sub DisplaySpellLengthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplaySpellLengthToolStripMenuItem.Click
+        dlgDisplaySpellLength.ShowDialog()
+    End Sub
+
+    Private Sub ExportForPICSAToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportForPICSAToolStripMenuItem.Click
+        dlgExportforPICSA.ShowDialog()
+    End Sub
+
+    Private Sub ExtremeEventsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExtremeEventsToolStripMenuItem.Click
+        dlgExtremeEvents.ShowDialog()
+    End Sub
+
+    Private Sub MissingDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MissingDataToolStripMenuItem.Click
+        dlgMissingData.ShowDialog()
+    End Sub
+
+    Private Sub MissingDataTableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MissingDataTableToolStripMenuItem.Click
+        dlgMissingDataTable.ShowDialog()
+    End Sub
+
+    Private Sub MonthlySummariesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlySummariesToolStripMenuItem.Click
+        dlgMonthlySummaries.ShowDialog()
+    End Sub
+
+    Private Sub OutputForCDTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputForCDTToolStripMenuItem.Click
+        dlgOutputforCDT.ShowDialog()
+    End Sub
+
+    Private Sub OutputForCPTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputForCPTToolStripMenuItem.Click
+        dlgOutputforCPT.ShowDialog()
+    End Sub
+
+    Private Sub RainsStatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RainsStatisticsToolStripMenuItem.Click
+        dlgRainStats.ShowDialog()
+    End Sub
+
+    Private Sub SeasonalSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SeasonalSummaryToolStripMenuItem.Click
+        dlgSeasonalSummary.ShowDialog()
+    End Sub
+
+    Private Sub SeasonalSummaryRainToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SeasonalSummaryRainToolStripMenuItem.Click
+        dlgSeasonalSummaryRain.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) Handles mnuStatsNonParametricOneWayAnova.Click
+        dlgOneWayAnova.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatsNonParametricTwoWayAnova_Click(sender As Object, e As EventArgs)
+        dlgTwoWayAnova.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatsSummaryColumnStat_Click(sender As Object, e As EventArgs) Handles mnuStatsSummaryColumnStat.Click
+        dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageManipulateRowStat_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRowStat.Click
+        dlgRowStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuGraphicsScatterplot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsScatterplot.Click
+        dlgScatterPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatsRegressionSimple_Click(sender As Object, e As EventArgs) Handles mnuStatsRegressionSimple.Click
+        dlgRegressionSimple.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
+        dlgSort.ShowDialog()
+    End Sub
+    Public Function openDialog() As KeyValuePair(Of String, String)
+        Dim dlgOpen As New OpenFileDialog
+        Dim strFilePath, strFileName As String
+        dlgOpen.Filter = "Comma Separated (*.csv)|*.csv"
+        dlgOpen.Title = "Import a .csv file into"
+        If dlgOpen.ShowDialog() = DialogResult.OK Then
+            'checks if the file name is not blank'
+            If dlgOpen.FileName <> "" Then
+                strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
+                strFilePath = Replace(dlgOpen.FileName, "\", "/")
+                Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
+            End If
+        Else
+            MsgBox("No File was selected!", vbInformation, "Message From Instat")
+        End If
+    End Function
+
+    Private Sub mnuEditFont_Click(sender As Object, e As EventArgs) Handles mnuEditFont.Click
+        'dlgFont.ShowDialog()
+    End Sub
+
+    Private Sub mnuEditReplace_Click(sender As Object, e As EventArgs) Handles mnuEditReplace.Click
+        dlgReplace.ShowDialog()
+    End Sub
+
+    Private Sub OneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneSampleToolStripMenuItem.Click
+        dlgOneSample.ShowDialog()
+    End Sub
+
+    Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyToolStripMenuItem.Click
+        dlgFreqTables.ShowDialog()
+    End Sub
+
+    Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SummaryToolStripMenuItem1.Click
+        dlgSummaryTables.ShowDialog()
+    End Sub
+
+    Private Sub GammaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GammaToolStripMenuItem.Click
+        dlgGammaDistr.ShowDialog()
     End Sub
 End Class

@@ -25,7 +25,7 @@ Partial Class ucrSelectorAddRemove
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(103, 38)
+        Me.btnAdd.Location = New System.Drawing.Point(124, 33)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 83
@@ -35,7 +35,7 @@ Partial Class ucrSelectorAddRemove
         '
         'btnRemove
         '
-        Me.btnRemove.Location = New System.Drawing.Point(102, 77)
+        Me.btnRemove.Location = New System.Drawing.Point(123, 72)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(75, 23)
         Me.btnRemove.TabIndex = 84
@@ -49,8 +49,7 @@ Partial Class ucrSelectorAddRemove
         Me.Controls.Add(Me.btnRemove)
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "ucrSelectorAddRemove"
-        Me.Size = New System.Drawing.Size(186, 129)
-        Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
+        Me.Size = New System.Drawing.Size(203, 127)
         Me.Controls.SetChildIndex(Me.btnAdd, 0)
         Me.Controls.SetChildIndex(Me.btnRemove, 0)
         Me.ResumeLayout(False)

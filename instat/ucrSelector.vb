@@ -4,33 +4,24 @@ Public Class ucrSelector
     Public CurrentReceiver As ucrReceiver
 
     Private Sub ucrdataselection_load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim cvdataset As CharacterVector
-        Dim adataset As Array
-        Dim i As Integer
-
-        translateEach(Controls)
-        cvdataset = frmMain.clsRInterface.GetVariables("colnames(data)")
-        adataset = cvdataset.ToArray
-        For i = 0 To adataset.GetLength(0) - 1
-            If Not lstAvailableVariable.Items.Contains(adataset(i)) Then
-                lstAvailableVariable.Items.Add(adataset(i))
-            End If
-        Next
+        frmMain.clsRInterface.FillListView(lstAvailableVariable)
     End Sub
 
     Public Sub SetCurrentReciever(conReceiver As ucrReceiver)
         CurrentReceiver = conReceiver
         If (TypeOf CurrentReceiver Is ucrReceiverSingle) Then
-            lstAvailableVariable.SelectionMode = SelectionMode.One
+            'lstAvailableVariable.SelectionMode = SelectionMode.One
+            lstAvailableVariable.MultiSelect = False
         ElseIf (TypeOf CurrentReceiver Is ucrReceiverMultiple) Then
-            lstAvailableVariable.SelectionMode = SelectionMode.MultiExtended
+            'lstAvailableVariable.SelectionMode = SelectionMode.MultiExtended
+            lstAvailableVariable.MultiSelect = True
         End If
     End Sub
-
+    'lstAvailableVariable.SelectedItems.Count > 0
     Public Sub Add()
         If (lstAvailableVariable.SelectedItems.Count > 0) Then
             CurrentReceiver.AddSelected()
-            CurrentReceiver.EnterReceiver()
+            CurrentReceiver.Focus()
         Else
             MsgBox("No item was selected", vbInformation, "Selection message")
         End If

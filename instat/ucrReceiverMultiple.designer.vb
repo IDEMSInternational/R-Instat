@@ -25,21 +25,22 @@ Partial Class ucrReceiverMultiple
         'lstSelectedVariables
         '
         Me.lstSelectedVariables.FormattingEnabled = True
-        Me.lstSelectedVariables.Location = New System.Drawing.Point(3, 3)
+        Me.lstSelectedVariables.Location = New System.Drawing.Point(3, 5)
+        Me.lstSelectedVariables.MultiColumn = True
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
-        Me.lstSelectedVariables.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstSelectedVariables.Size = New System.Drawing.Size(84, 95)
+        Me.lstSelectedVariables.Size = New System.Drawing.Size(115, 121)
         Me.lstSelectedVariables.Sorted = True
-        Me.lstSelectedVariables.TabIndex = 79
+        Me.lstSelectedVariables.TabIndex = 0
         '
         'ucrReceiverMultiple
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.Controls.Add(Me.lstSelectedVariables)
         Me.Name = "ucrReceiverMultiple"
-        Me.Size = New System.Drawing.Size(91, 101)
+        Me.Size = New System.Drawing.Size(121, 128)
         Me.ResumeLayout(False)
 
     End Sub
-    Public WithEvents lstSelectedVariables As ListBox
+
+    Friend WithEvents lstSelectedVariables As ListBox
 End Class

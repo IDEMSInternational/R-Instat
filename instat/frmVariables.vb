@@ -31,9 +31,9 @@ Public Class frmVariables
         gridVariables.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
         gridVariables.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, False)
         gridVariables.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
-        gridVariables.SheetTabNewButtonVisible = False
-        gridVariables.SheetTabControlNewButtonVisible = False
-        gridVariables.CurrentWorksheet.Resize(2, 2)
+        'gridVariables.SheetTabNewButtonVisible = False
+        'gridVariables.SheetTabControlNewButtonVisible = False
+        gridVariables.CurrentWorksheet.Resize(5, 5)
         autoTranslate(Me)
     End Sub
 End Class

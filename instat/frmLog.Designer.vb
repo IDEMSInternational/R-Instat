@@ -32,6 +32,7 @@ Partial Class frmLog
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
+        Me.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtLog.Size = New System.Drawing.Size(284, 261)
         Me.txtLog.TabIndex = 0
         '
