@@ -30,7 +30,7 @@ Partial Class dlgProbabilityPlot
         Me.rdoNormal = New System.Windows.Forms.RadioButton()
         Me.ucrBase = New instat.ucrButtons()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
+        Me.UcrReceiverSingle = New instat.ucrReceiverSingle()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.grpDistributions.SuspendLayout()
@@ -127,18 +127,18 @@ Partial Class dlgProbabilityPlot
         Me.Label2.TabIndex = 8
         Me.Label2.Text = "Variable to Plot"
         '
-        'UcrReceiverSingle1
+        'UcrReceiverSingle
         '
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(216, 29)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReceiverSingle1.TabIndex = 7
+        Me.UcrReceiverSingle.Location = New System.Drawing.Point(216, 29)
+        Me.UcrReceiverSingle.Name = "UcrReceiverSingle"
+        Me.UcrReceiverSingle.Size = New System.Drawing.Size(106, 26)
+        Me.UcrReceiverSingle.TabIndex = 7
         '
         'ucrAddRemove
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(7, 3)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(186, 129)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(202, 154)
         Me.ucrAddRemove.TabIndex = 6
         '
         'txtTitle
@@ -155,10 +155,11 @@ Partial Class dlgProbabilityPlot
         Me.ClientSize = New System.Drawing.Size(402, 186)
         Me.Controls.Add(Me.txtTitle)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
+        Me.Controls.Add(Me.UcrReceiverSingle)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.grpDistributions)
         Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgProbabilityPlot"
@@ -178,7 +179,7 @@ Partial Class dlgProbabilityPlot
     Friend WithEvents rdoGamma As RadioButton
     Friend WithEvents rdoNormal As RadioButton
     Friend WithEvents Label2 As Label
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
+    Friend WithEvents UcrReceiverSingle As ucrReceiverSingle
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents txtTitle As TextBox
 End Class
