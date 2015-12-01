@@ -22,33 +22,33 @@ Partial Class dlgBoxPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblTittle = New System.Windows.Forms.Label()
-        Me.txtTittle = New System.Windows.Forms.TextBox()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
+        Me.ucrReceiveBoxplotVariable = New instat.ucrReceiverSingle()
         Me.lblYlab = New System.Windows.Forms.Label()
         Me.lblXLabel = New System.Windows.Forms.Label()
         Me.txtYLabel = New System.Windows.Forms.TextBox()
         Me.txtXLabel = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
-        'lblTittle
+        'lblTitle
         '
-        Me.lblTittle.AutoSize = True
-        Me.lblTittle.Location = New System.Drawing.Point(35, 200)
-        Me.lblTittle.Name = "lblTittle"
-        Me.lblTittle.Size = New System.Drawing.Size(30, 13)
-        Me.lblTittle.TabIndex = 2
-        Me.lblTittle.Tag = "Tittle"
-        Me.lblTittle.Text = "Tittle"
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Location = New System.Drawing.Point(35, 200)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(30, 13)
+        Me.lblTitle.TabIndex = 2
+        Me.lblTitle.Tag = "Title"
+        Me.lblTitle.Text = "Title"
         '
-        'txtTittle
+        'txtTitle
         '
-        Me.txtTittle.Location = New System.Drawing.Point(165, 193)
-        Me.txtTittle.Name = "txtTittle"
-        Me.txtTittle.Size = New System.Drawing.Size(208, 20)
-        Me.txtTittle.TabIndex = 3
+        Me.txtTitle.Location = New System.Drawing.Point(165, 193)
+        Me.txtTitle.Name = "txtTitle"
+        Me.txtTitle.Size = New System.Drawing.Size(208, 20)
+        Me.txtTitle.TabIndex = 3
         '
         'UcrAddRemove
         '
@@ -64,12 +64,12 @@ Partial Class dlgBoxPlot
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 4
         '
-        'UcrReceiverSingle1
+        'ucrReceiveBoxplotVariable
         '
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(267, 31)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReceiverSingle1.TabIndex = 7
+        Me.ucrReceiveBoxplotVariable.Location = New System.Drawing.Point(267, 31)
+        Me.ucrReceiveBoxplotVariable.Name = "ucrReceiveBoxplotVariable"
+        Me.ucrReceiveBoxplotVariable.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiveBoxplotVariable.TabIndex = 7
         '
         'lblYlab
         '
@@ -114,11 +114,11 @@ Partial Class dlgBoxPlot
         Me.Controls.Add(Me.txtYLabel)
         Me.Controls.Add(Me.lblXLabel)
         Me.Controls.Add(Me.lblYlab)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
+        Me.Controls.Add(Me.ucrReceiveBoxplotVariable)
         Me.Controls.Add(Me.UcrAddRemove)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.txtTittle)
-        Me.Controls.Add(Me.lblTittle)
+        Me.Controls.Add(Me.txtTitle)
+        Me.Controls.Add(Me.lblTitle)
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -130,11 +130,11 @@ Partial Class dlgBoxPlot
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lblTittle As Label
-    Friend WithEvents txtTittle As TextBox
+    Friend WithEvents lblTitle As Label
+    Friend WithEvents txtTitle As TextBox
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents UcrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
+    Friend WithEvents ucrReceiveBoxplotVariable As ucrReceiverSingle
     Friend WithEvents lblYlab As Label
     Friend WithEvents lblXLabel As Label
     Friend WithEvents txtYLabel As TextBox

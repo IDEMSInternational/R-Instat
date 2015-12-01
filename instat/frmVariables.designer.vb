@@ -39,7 +39,7 @@ Partial Class frmVariables
         Me.gridVariables.SheetTabControlNewButtonVisible = False
         Me.gridVariables.SheetTabControlWidth = 100
         Me.gridVariables.SheetTabNewButtonVisible = False
-        Me.gridVariables.Size = New System.Drawing.Size(268, 138)
+        Me.gridVariables.Size = New System.Drawing.Size(340, 138)
         Me.gridVariables.TabIndex = 2
         Me.gridVariables.Text = "Variables"
         '
@@ -47,12 +47,12 @@ Partial Class frmVariables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(178, 138)
+        Me.ClientSize = New System.Drawing.Size(344, 138)
         Me.Controls.Add(Me.gridVariables)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmVariables"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "frmVariables"
+        Me.Text = "Worksheet Information"
         Me.ResumeLayout(False)
 
     End Sub

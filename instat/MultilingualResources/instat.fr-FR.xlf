@@ -315,6 +315,248 @@
           <target state="needs-review-translation">25</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
+        <trans-unit id="$this.Icon" translate="yes" xml:space="preserve" extype="System.Drawing.Icon, System.Drawing">
+          <source>
+        AAABAAQAEBAQAAEABAAoAQAARgAAACAgEAABAAQA6AIAAG4BAAAgIAAAAQAIAKgIAABWBAAAMDAAAAEA
+        CACoDgAA/gwAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAACA
+        AAAAgIAAgAAAAIAAgACAgAAAgICAAMDAwAAAAP8AAP8AAAD//wD/AAAA/wD/AP//AAD///8Ad3d3d3d3
+        d3f8zMzMzMzMx/zMvMvLzLzH/My8y8vMvMf8vLzLu8y8x/zMvMvLzLzH/Mu7zLzLu8f8zMzMzMzMx/y7
+        vLzLy7vH/MvMvLvMy8f8y8y7u8u7x/zLzLvLy8zH/Lu8vMvLu8f8zMzMzMzMx/zMzMzMzMzH////////
+        //8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAKAAAACAAAABAAAAAAQAEAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAACA
+        gACAAAAAgACAAICAAACAgIAAwMDAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP///wAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAId3d3d3
+        d3d3d3d3d3dwAACPRERERETExMTExMTEcAAAj0RERERERExMTExMTHAAAI9EREREy8TDtDu0uzRwAACP
+        REREREtMS0y8vEy8cAAAj0RERMTLxMvEtLQ7NHAAAI9ERERES7NLTLy8vMxwAACPRETExMvLy8S0tDu0
+        cAAAj0RERExLS0tMTEzMzHAAAI9ExMTEy7PLxMTExMxwAACPRERMTExMTExMzMzMcAAAj8TExMTExMTE
+        xMTMzHAAAI9E/E9PT/5O/O/878xwAACPxPTPz8TPz8T0/PzMcAAAj0z8T09O/k/M//z8zHAAAI/E9M/P
+        z8TPxMz8/MxwAACPTPxP/k7/z8z/7PzMcAAAj8T0xMTExM/8zMz/zHAAAI9M/ExMTMzPzMzM/MxwAACP
+        xMTExMTEzMzMzMzMcAAAj0xMTEzMzMzMzMzMzHAAAI/ExMTExMzMzMzMzMxwAACPTExMzMzMzMzMzMzM
+        cAAAj/////////////////AAAIiIiIiIiIiIiIiIiIiIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///////////////8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AA
+        AAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AA
+        AAPAAAADwAAAA8AAAAPAAAAD////////////////KAAAACAAAABAAAAAAQAIAAAAAAAABAAAAAAAAAAA
+        AAAAAQAAAAEAAAAAAAAAAIAAAIAAAACAgACAAAAAgACAAICAAADAwMAAwNzAAPDKpgAAAD4AAABdAAAA
+        fAAAAJsAAAC6AAAA2QAAAPAAJCT/AEhI/wBsbP8AkJD/ALS0/wAAFD4AAB5dAAAofAAAMpsAADy6AABG
+        2QAAVfAAJG3/AEiF/wBsnf8AkLX/ALTN/wAAKj4AAD9dAABUfAAAaZsAAH66AACT2QAAqvAAJLb/AEjC
+        /wBszv8AkNr/ALTm/wAAPj4AAF1dAAB8fAAAm5sAALq6AADZ2QAA8PAAJP//AEj//wBs//8AkP//ALT/
+        /wAAPioAAF0/AAB8VAAAm2kAALp+AADZkwAA8KoAJP+2AEj/wgBs/84AkP/aALT/5gAAPhQAAF0eAAB8
+        KAAAmzIAALo8AADZRgAA8FUAJP9tAEj/hQBs/50AkP+1ALT/zQAAPgAAAF0AAAB8AAAAmwAAALoAAADZ
+        AAAA8AAAJP8kAEj/SABs/2wAkP+QALT/tAAUPgAAHl0AACh8AAAymwAAPLoAAEbZAABV8AAAbf8kAIX/
+        SACd/2wAtf+QAM3/tAAqPgAAP10AAFR8AABpmwAAfroAAJPZAACq8AAAtv8kAML/SADO/2wA2v+QAOb/
+        tAA+PgAAXV0AAHx8AACbmwAAuroAANnZAADw8AAA//8kAP//SAD//2wA//+QAP//tAA+KgAAXT8AAHxU
+        AACbaQAAun4AANmTAADwqgAA/7YkAP/CSAD/zmwA/9qQAP/mtAA+FAAAXR4AAHwoAACbMgAAujwAANlG
+        AADwVQAA/20kAP+FSAD/nWwA/7WQAP/NtAA+AAAAXQAAAHwAAACbAAAAugAAANkAAADwAAAA/yQkAP9I
+        SAD/bGwA/5CQAP+0tAA+ABQAXQAeAHwAKACbADIAugA8ANkARgDwAFUA/yRtAP9IhQD/bJ0A/5C1AP+0
+        zQA+ACoAXQA/AHwAVACbAGkAugB+ANkAkwDwAKoA/yS2AP9IwgD/bM4A/5DaAP+05gA+AD4AXQBdAHwA
+        fACbAJsAugC6ANkA2QDwAPAA/yT/AP9I/wD/bP8A/5D/AP+0/wAqAD4APwBdAFQAfABpAJsAfgC6AJMA
+        2QCqAPAAtiT/AMJI/wDObP8A2pD/AOa0/wAAAAAAHgBdACgAfAAyAJsAPAC6AEYA2QBVAPAAbST/AIVI
+        /wCdbP8AtZD/AM20/wAGBgYAEhISAB8fHwAsLCwAOTk5AEVFRQBSUlIAX19fAGxsbAB4eHgAhYWFAJKS
+        kgCfn58Aq6urALi4uADFxcUA0tLSAN7e3gDr6+sA+Pj4APD7/wCkoKAAgICAAAAA/wAA/wAAAP//AP8A
+        AAD/AP8A//8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/j4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4AAAAAAAH/5iY
+        mJiXl5eXlpaWlpWVlZWUlJSUk5OTk/gAAAAAAAf/mJiYl5eXl5aWlpaVlZWVlJSUlJOTk5OT+AAAAAAA
+        B/+YmJeXl5eWlpY5lZWVRTmURTk5kzk5RZL4AAAAAAAH/5iXl5eXlpaWljmVlZU5lJQ5kzmTk5M5kvgA
+        AAAAAAf/l5eXl5aWlpaVOZWVlDmUlDmTOZNFOUWS+AAAAAAAB/+Xl5eWlpaWlZU5OTmUOZSTOZM5kzmS
+        kpL4AAAAAAAH/5eXlpaWlpWVlTmUOZQ5k5M5kzmSRTk5kfgAAAAAAAf/l5aWlpaVlZWVOZQ5lDmTk5OT
+        kpKSkpGR+AAAAAAAB/+WlpaWlZWVlZQ5OTmTOZOTk5KSkpKRkZH4AAAAAAAH/5aWlpWVlZWUlJSUk5OT
+        k5OSkpKSkZGRkfgAAAAAAAf/lpaVlZWVlJSUlJOTk5OTkpKSkpGRkZGQ+AAAAAAAB/+Wlf+Vlf+U/5T/
+        //+T//+S////kf//kJD4AAAAAAAH/5WV/5WU/5T/k5OT/5P/kpL/kf+R/5CQkPgAAAAAAAf/lZX/lJT/
+        lP+T////kv+Skv///5H/kJCQ+AAAAAAAB/+Vlf+UlP+T/5P/k5KS/5KRkZH/kP+QkI/4AAAAAAAH/5WU
+        /5SU//+Tk////5L/kZH///+Q/5CPj/gAAAAAAAf/lJT/lJOTk5OTkpKSkv//kZGQkJD//4+P+AAAAAAA
+        B/+UlP+Tk5OTk5KSkpKR/5GRkJCQkP+Pj4/4AAAAAAAH/5SUk5OTk5OSkpKSkZGRkZCQkJCPj4+PjvgA
+        AAAAAAf/lJOTk5OTkpKSkpGRkZGQkJCQj4+Pj46O+AAAAAAAB/+Tk5OTk5KSkpKRkZGRkJCQkI+Pj4+O
+        jo74AAAAAAAH/5OTk5OSkpKSkZGRkZCQkJCPj4+Pjo6OjvgAAAAAAAf/////////////////////////
+        /////////wAAAAAABwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAA////////////////wAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AA
+        AAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AA
+        AAPAAAADwAAAA8AAAAP///////////////8oAAAAMAAAAGAAAAABAAgAAAAAAAAJAAAAAAAAAAAAAAAB
+        AAAAAQAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwADA3MAA8MikAAQEBAAICAgADAwMABER
+        EQAWFhYAHBwcACIiIgApKSkAVVVVAE1NTQBCQkIAOTk5AIGBgQAAAIEAAIEAAACBgQCBAAAAgQCBAIGB
+        AAAAADMAAABmAAAAmQAAAMwAADMAAAAzMwAAM2YAADOZAAAzzAAAM/8AAGYAAABmMwAAZmYAAGaZAABm
+        zAAAZv8AAJkAAACZMwAAmWYAAJmZAACZzAAAmf8AAMwAAADMMwAAzGYAAMyZAADMzAAAzP8AAP9mAAD/
+        mQAA/8wAMwAAADMAMwAzAGYAMwCZADMAzAAzAP8AMzMAADMzMwAzM2YAMzOZADMzzAAzM/8AM2YAADNm
+        MwAzZmYAM2aZADNmzAAzZv8AM5kAADOZMwAzmWYAM5mZADOZzAAzmf8AM8wAADPMMwAzzGYAM8yZADPM
+        zAAzzP8AM/8zADP/ZgAz/5kAM//MADP//wBmAAAAZgAzAGYAZgBmAJkAZgDMAGYA/wBmMwAAZjMzAGYz
+        ZgBmM5kAZjPMAGYz/wBmZgAAZmYzAGZmZgBmZpkAZmbMAGaZAABmmTMAZplmAGaZmQBmmcwAZpn/AGbM
+        AABmzDMAZsyZAGbMzABmzP8AZv8AAGb/MwBm/5kAZv/MAMwA/wD/AMwAmZkAAJkzmQCZAJkAmQDMAJkA
+        AACZMzMAmQBmAJkzzACZAP8AmWYAAJlmMwCZM2YAmWaZAJlmzACZM/8AmZkzAJmZZgCZmZkAmZnMAJmZ
+        /wCZzAAAmcwzAGbMZgCZzJkAmczMAJnM/wCZ/wAAmf8zAJnMZgCZ/5kAmf/MAJn//wDMAAAAmQAzAMwA
+        ZgDMAJkAzADMAJkzAADMMzMAzDNmAMwzmQDMM8wAzDP/AMxmAADMZjMAmWZmAMxmmQDMZswAmWb/AMyZ
+        AADMmTMAzJlmAMyZmQDMmcwAzJn/AMzMAADMzDMAzMxmAMzMmQDMzMwAzMz/AMz/AADM/zMAmf9mAMz/
+        mQDM/8wAzP//AMwAMwD/AGYA/wCZAMwzAAD/MzMA/zNmAP8zmQD/M8wA/zP/AP9mAAD/ZjMAzGZmAP9m
+        mQD/ZswAzGb/AP+ZAAD/mTMA/5lmAP+ZmQD/mcwA/5n/AP/MAAD/zDMA/8xmAP/MmQD/zMwA/8z/AP//
+        MwDM/2YA//+ZAP//zABmZv8AZv9mAGb//wD/ZmYA/2b/AP//ZgDBwcEAX19fAHd3dwCGhoYAlpaWAMvL
+        ywCysrIA19fXAN3d3QDj4+MA6urqAPHx8QD4+PgA8Pv/AKSgoACAgIAAAAD/AAD/AAAA//8A/wAAAP8A
+        /wD//wAA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH+Pj4
+        +Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+PgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XGxcbFxsXGxcbFxsXG
+        xcbFxsXGxcbFxvgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bFxsXGxcbFxsXGxcbFxsXGxcbFxsXGxfgA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XGxcbFxsXGxcXFxcXFxcXFxcXFxcXFxfgAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAH/8bFxsXGxcbF+8bFxjD7/Cn7+8X7+zDFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XG
+        xcbFxsXF+8XFxvvFxfvF+8XFxfvFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bFxsXGxcbF+8XFxvvF
+        xfv8+8XF+8XFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XGxcbFxsXF+/spxvvFxfvF+8X7xcXFxfgA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bFxsXGxcbF+8X7xvvF/PvF+/ww+/vFxfgAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAH/8XGxcbFxsXG+8X7xvvFxcXFxcXFxcXFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bF
+        xsXGxcbF+/spxvvGxcb8xsXG/MbFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XGxcXFxcXFxcXFxcXF
+        xcXFxcXFxcXFxvgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bFxcXGxcXFxsXFxcbFxcXGxcXFxsXFxfgA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XG/8XF/8b/xf///sX+/8X+///F/v/FxvgAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAH/8bF/8bF/8X/xcbF/8X/xcb//P/G/8bFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XG
+        /8XG/8X/xcX/xcb/xcX+///F/8XFxvgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bF/8bF/8X/xf/FxsX/
+        xcbFxv/G/8bFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XG/8XF///+xf7//8X/xsX///7F/8XFxvgA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bF/8bFxsXGxcbFxsX//8bFxsXG///FxfgAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAH/8XG/8XFxcXFxcXFxcX/xcXFxcXF/8XFxvgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bF
+        xsXGxcbFxsXGxcbFxsXGxcbFxsXGxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XGxcbFxsXGxcbFxsXG
+        xcbFxsXGxcbFxvgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bFxsXGxcbFxsXGxcbFxsXGxcbFxsXGxfgA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAH//////////////////////////////////8AAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///////wAA////////AAD///////8AAP//
+        /////wAA////////AAD///////8AAP///////wAA////////AAD///////8AAP///////wAA////////
+        AAD/wAAAA/8AAP/AAAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/AAAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/A
+        AAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/AAAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/AAAAD/wAA/8AAAAP/
+        AAD/wAAAA/8AAP/AAAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/AAAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/A
+        AAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/AAAAD/wAA////////AAD///////8AAP///////wAA////////
+        AAD///////8AAP///////wAA////////AAD///////8AAP///////wAA////////AAD///////8AAA==
+</source>
+          <target state="needs-review-translation">
+        AAABAAQAEBAQAAEABAAoAQAARgAAACAgEAABAAQA6AIAAG4BAAAgIAAAAQAIAKgIAABWBAAAMDAAAAEA
+        CACoDgAA/gwAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAACA
+        AAAAgIAAgAAAAIAAgACAgAAAgICAAMDAwAAAAP8AAP8AAAD//wD/AAAA/wD/AP//AAD///8Ad3d3d3d3
+        d3f8zMzMzMzMx/zMvMvLzLzH/My8y8vMvMf8vLzLu8y8x/zMvMvLzLzH/Mu7zLzLu8f8zMzMzMzMx/y7
+        vLzLy7vH/MvMvLvMy8f8y8y7u8u7x/zLzLvLy8zH/Lu8vMvLu8f8zMzMzMzMx/zMzMzMzMzH////////
+        //8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAKAAAACAAAABAAAAAAQAEAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAACA
+        gACAAAAAgACAAICAAACAgIAAwMDAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP///wAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAId3d3d3
+        d3d3d3d3d3dwAACPRERERETExMTExMTEcAAAj0RERERERExMTExMTHAAAI9EREREy8TDtDu0uzRwAACP
+        REREREtMS0y8vEy8cAAAj0RERMTLxMvEtLQ7NHAAAI9ERERES7NLTLy8vMxwAACPRETExMvLy8S0tDu0
+        cAAAj0RERExLS0tMTEzMzHAAAI9ExMTEy7PLxMTExMxwAACPRERMTExMTExMzMzMcAAAj8TExMTExMTE
+        xMTMzHAAAI9E/E9PT/5O/O/878xwAACPxPTPz8TPz8T0/PzMcAAAj0z8T09O/k/M//z8zHAAAI/E9M/P
+        z8TPxMz8/MxwAACPTPxP/k7/z8z/7PzMcAAAj8T0xMTExM/8zMz/zHAAAI9M/ExMTMzPzMzM/MxwAACP
+        xMTExMTEzMzMzMzMcAAAj0xMTEzMzMzMzMzMzHAAAI/ExMTExMzMzMzMzMxwAACPTExMzMzMzMzMzMzM
+        cAAAj/////////////////AAAIiIiIiIiIiIiIiIiIiIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///////////////8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AA
+        AAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AA
+        AAPAAAADwAAAA8AAAAPAAAAD////////////////KAAAACAAAABAAAAAAQAIAAAAAAAABAAAAAAAAAAA
+        AAAAAQAAAAEAAAAAAAAAAIAAAIAAAACAgACAAAAAgACAAICAAADAwMAAwNzAAPDKpgAAAD4AAABdAAAA
+        fAAAAJsAAAC6AAAA2QAAAPAAJCT/AEhI/wBsbP8AkJD/ALS0/wAAFD4AAB5dAAAofAAAMpsAADy6AABG
+        2QAAVfAAJG3/AEiF/wBsnf8AkLX/ALTN/wAAKj4AAD9dAABUfAAAaZsAAH66AACT2QAAqvAAJLb/AEjC
+        /wBszv8AkNr/ALTm/wAAPj4AAF1dAAB8fAAAm5sAALq6AADZ2QAA8PAAJP//AEj//wBs//8AkP//ALT/
+        /wAAPioAAF0/AAB8VAAAm2kAALp+AADZkwAA8KoAJP+2AEj/wgBs/84AkP/aALT/5gAAPhQAAF0eAAB8
+        KAAAmzIAALo8AADZRgAA8FUAJP9tAEj/hQBs/50AkP+1ALT/zQAAPgAAAF0AAAB8AAAAmwAAALoAAADZ
+        AAAA8AAAJP8kAEj/SABs/2wAkP+QALT/tAAUPgAAHl0AACh8AAAymwAAPLoAAEbZAABV8AAAbf8kAIX/
+        SACd/2wAtf+QAM3/tAAqPgAAP10AAFR8AABpmwAAfroAAJPZAACq8AAAtv8kAML/SADO/2wA2v+QAOb/
+        tAA+PgAAXV0AAHx8AACbmwAAuroAANnZAADw8AAA//8kAP//SAD//2wA//+QAP//tAA+KgAAXT8AAHxU
+        AACbaQAAun4AANmTAADwqgAA/7YkAP/CSAD/zmwA/9qQAP/mtAA+FAAAXR4AAHwoAACbMgAAujwAANlG
+        AADwVQAA/20kAP+FSAD/nWwA/7WQAP/NtAA+AAAAXQAAAHwAAACbAAAAugAAANkAAADwAAAA/yQkAP9I
+        SAD/bGwA/5CQAP+0tAA+ABQAXQAeAHwAKACbADIAugA8ANkARgDwAFUA/yRtAP9IhQD/bJ0A/5C1AP+0
+        zQA+ACoAXQA/AHwAVACbAGkAugB+ANkAkwDwAKoA/yS2AP9IwgD/bM4A/5DaAP+05gA+AD4AXQBdAHwA
+        fACbAJsAugC6ANkA2QDwAPAA/yT/AP9I/wD/bP8A/5D/AP+0/wAqAD4APwBdAFQAfABpAJsAfgC6AJMA
+        2QCqAPAAtiT/AMJI/wDObP8A2pD/AOa0/wAAAAAAHgBdACgAfAAyAJsAPAC6AEYA2QBVAPAAbST/AIVI
+        /wCdbP8AtZD/AM20/wAGBgYAEhISAB8fHwAsLCwAOTk5AEVFRQBSUlIAX19fAGxsbAB4eHgAhYWFAJKS
+        kgCfn58Aq6urALi4uADFxcUA0tLSAN7e3gDr6+sA+Pj4APD7/wCkoKAAgICAAAAA/wAA/wAAAP//AP8A
+        AAD/AP8A//8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/j4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4AAAAAAAH/5iY
+        mJiXl5eXlpaWlpWVlZWUlJSUk5OTk/gAAAAAAAf/mJiYl5eXl5aWlpaVlZWVlJSUlJOTk5OT+AAAAAAA
+        B/+YmJeXl5eWlpY5lZWVRTmURTk5kzk5RZL4AAAAAAAH/5iXl5eXlpaWljmVlZU5lJQ5kzmTk5M5kvgA
+        AAAAAAf/l5eXl5aWlpaVOZWVlDmUlDmTOZNFOUWS+AAAAAAAB/+Xl5eWlpaWlZU5OTmUOZSTOZM5kzmS
+        kpL4AAAAAAAH/5eXlpaWlpWVlTmUOZQ5k5M5kzmSRTk5kfgAAAAAAAf/l5aWlpaVlZWVOZQ5lDmTk5OT
+        kpKSkpGR+AAAAAAAB/+WlpaWlZWVlZQ5OTmTOZOTk5KSkpKRkZH4AAAAAAAH/5aWlpWVlZWUlJSUk5OT
+        k5OSkpKSkZGRkfgAAAAAAAf/lpaVlZWVlJSUlJOTk5OTkpKSkpGRkZGQ+AAAAAAAB/+Wlf+Vlf+U/5T/
+        //+T//+S////kf//kJD4AAAAAAAH/5WV/5WU/5T/k5OT/5P/kpL/kf+R/5CQkPgAAAAAAAf/lZX/lJT/
+        lP+T////kv+Skv///5H/kJCQ+AAAAAAAB/+Vlf+UlP+T/5P/k5KS/5KRkZH/kP+QkI/4AAAAAAAH/5WU
+        /5SU//+Tk////5L/kZH///+Q/5CPj/gAAAAAAAf/lJT/lJOTk5OTkpKSkv//kZGQkJD//4+P+AAAAAAA
+        B/+UlP+Tk5OTk5KSkpKR/5GRkJCQkP+Pj4/4AAAAAAAH/5SUk5OTk5OSkpKSkZGRkZCQkJCPj4+PjvgA
+        AAAAAAf/lJOTk5OTkpKSkpGRkZGQkJCQj4+Pj46O+AAAAAAAB/+Tk5OTk5KSkpKRkZGRkJCQkI+Pj4+O
+        jo74AAAAAAAH/5OTk5OSkpKSkZGRkZCQkJCPj4+Pjo6OjvgAAAAAAAf/////////////////////////
+        /////////wAAAAAABwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAA////////////////wAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AA
+        AAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AA
+        AAPAAAADwAAAA8AAAAP///////////////8oAAAAMAAAAGAAAAABAAgAAAAAAAAJAAAAAAAAAAAAAAAB
+        AAAAAQAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDAwADA3MAA8MikAAQEBAAICAgADAwMABER
+        EQAWFhYAHBwcACIiIgApKSkAVVVVAE1NTQBCQkIAOTk5AIGBgQAAAIEAAIEAAACBgQCBAAAAgQCBAIGB
+        AAAAADMAAABmAAAAmQAAAMwAADMAAAAzMwAAM2YAADOZAAAzzAAAM/8AAGYAAABmMwAAZmYAAGaZAABm
+        zAAAZv8AAJkAAACZMwAAmWYAAJmZAACZzAAAmf8AAMwAAADMMwAAzGYAAMyZAADMzAAAzP8AAP9mAAD/
+        mQAA/8wAMwAAADMAMwAzAGYAMwCZADMAzAAzAP8AMzMAADMzMwAzM2YAMzOZADMzzAAzM/8AM2YAADNm
+        MwAzZmYAM2aZADNmzAAzZv8AM5kAADOZMwAzmWYAM5mZADOZzAAzmf8AM8wAADPMMwAzzGYAM8yZADPM
+        zAAzzP8AM/8zADP/ZgAz/5kAM//MADP//wBmAAAAZgAzAGYAZgBmAJkAZgDMAGYA/wBmMwAAZjMzAGYz
+        ZgBmM5kAZjPMAGYz/wBmZgAAZmYzAGZmZgBmZpkAZmbMAGaZAABmmTMAZplmAGaZmQBmmcwAZpn/AGbM
+        AABmzDMAZsyZAGbMzABmzP8AZv8AAGb/MwBm/5kAZv/MAMwA/wD/AMwAmZkAAJkzmQCZAJkAmQDMAJkA
+        AACZMzMAmQBmAJkzzACZAP8AmWYAAJlmMwCZM2YAmWaZAJlmzACZM/8AmZkzAJmZZgCZmZkAmZnMAJmZ
+        /wCZzAAAmcwzAGbMZgCZzJkAmczMAJnM/wCZ/wAAmf8zAJnMZgCZ/5kAmf/MAJn//wDMAAAAmQAzAMwA
+        ZgDMAJkAzADMAJkzAADMMzMAzDNmAMwzmQDMM8wAzDP/AMxmAADMZjMAmWZmAMxmmQDMZswAmWb/AMyZ
+        AADMmTMAzJlmAMyZmQDMmcwAzJn/AMzMAADMzDMAzMxmAMzMmQDMzMwAzMz/AMz/AADM/zMAmf9mAMz/
+        mQDM/8wAzP//AMwAMwD/AGYA/wCZAMwzAAD/MzMA/zNmAP8zmQD/M8wA/zP/AP9mAAD/ZjMAzGZmAP9m
+        mQD/ZswAzGb/AP+ZAAD/mTMA/5lmAP+ZmQD/mcwA/5n/AP/MAAD/zDMA/8xmAP/MmQD/zMwA/8z/AP//
+        MwDM/2YA//+ZAP//zABmZv8AZv9mAGb//wD/ZmYA/2b/AP//ZgDBwcEAX19fAHd3dwCGhoYAlpaWAMvL
+        ywCysrIA19fXAN3d3QDj4+MA6urqAPHx8QD4+PgA8Pv/AKSgoACAgIAAAAD/AAD/AAAA//8A/wAAAP8A
+        /wD//wAA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH+Pj4
+        +Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+PgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XGxcbFxsXGxcbFxsXG
+        xcbFxsXGxcbFxvgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bFxsXGxcbFxsXGxcbFxsXGxcbFxsXGxfgA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XGxcbFxsXGxcXFxcXFxcXFxcXFxcXFxfgAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAH/8bFxsXGxcbF+8bFxjD7/Cn7+8X7+zDFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XG
+        xcbFxsXF+8XFxvvFxfvF+8XFxfvFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bFxsXGxcbF+8XFxvvF
+        xfv8+8XF+8XFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XGxcbFxsXF+/spxvvFxfvF+8X7xcXFxfgA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bFxsXGxcbF+8X7xvvF/PvF+/ww+/vFxfgAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAH/8XGxcbFxsXG+8X7xvvFxcXFxcXFxcXFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bF
+        xsXGxcbF+/spxvvGxcb8xsXG/MbFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XGxcXFxcXFxcXFxcXF
+        xcXFxcXFxcXFxvgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bFxcXGxcXFxsXFxcbFxcXGxcXFxsXFxfgA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XG/8XF/8b/xf///sX+/8X+///F/v/FxvgAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAH/8bF/8bF/8X/xcbF/8X/xcb//P/G/8bFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XG
+        /8XG/8X/xcX/xcb/xcX+///F/8XFxvgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bF/8bF/8X/xf/FxsX/
+        xcbFxv/G/8bFxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XG/8XF///+xf7//8X/xsX///7F/8XFxvgA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bF/8bFxsXGxcbFxsX//8bFxsXG///FxfgAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAH/8XG/8XFxcXFxcXFxcX/xcXFxcXF/8XFxvgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bF
+        xsXGxcbFxsXGxcbFxsXGxcbFxsXGxfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8XGxcbFxsXGxcbFxsXG
+        xcbFxsXGxcbFxvgAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/8bFxsXGxcbFxsXGxcbFxsXGxcbFxsXGxfgA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAH//////////////////////////////////8AAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///////wAA////////AAD///////8AAP//
+        /////wAA////////AAD///////8AAP///////wAA////////AAD///////8AAP///////wAA////////
+        AAD/wAAAA/8AAP/AAAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/AAAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/A
+        AAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/AAAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/AAAAD/wAA/8AAAAP/
+        AAD/wAAAA/8AAP/AAAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/AAAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/A
+        AAAD/wAA/8AAAAP/AAD/wAAAA/8AAP/AAAAD/wAA////////AAD///////8AAP///////wAA////////
+        AAD///////8AAP///////wAA////////AAD///////8AAP///////wAA////////AAD///////8AAA==
+</target>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -900,6 +1142,46 @@
           <source>Descending</source>
           <target state="new">Descending</target>
         </trans-unit>
+        <trans-unit id="Anova_One_Way" translate="yes" xml:space="preserve">
+          <source>Anova One Way</source>
+          <target state="new">Anova One Way</target>
+        </trans-unit>
+        <trans-unit id="Earilest_Day" translate="yes" xml:space="preserve">
+          <source>Earilest Day</source>
+          <target state="new">Earilest Day</target>
+        </trans-unit>
+        <trans-unit id="End_of_Rain" translate="yes" xml:space="preserve">
+          <source>End of Rain</source>
+          <target state="new">End of Rain</target>
+        </trans-unit>
+        <trans-unit id="End_of_Rains" translate="yes" xml:space="preserve">
+          <source>End of Rains</source>
+          <target state="new">End of Rains</target>
+        </trans-unit>
+        <trans-unit id="Evaporation" translate="yes" xml:space="preserve">
+          <source>Evaporation</source>
+          <target state="new">Evaporation</target>
+        </trans-unit>
+        <trans-unit id="Maximum_Capacity" translate="yes" xml:space="preserve">
+          <source>Maximum Capacity</source>
+          <target state="new">Maximum Capacity</target>
+        </trans-unit>
+        <trans-unit id="Four" translate="yes" xml:space="preserve">
+          <source>Four</source>
+          <target state="new">Four</target>
+        </trans-unit>
+        <trans-unit id="One" translate="yes" xml:space="preserve">
+          <source>One</source>
+          <target state="new">One</target>
+        </trans-unit>
+        <trans-unit id="Three" translate="yes" xml:space="preserve">
+          <source>Three</source>
+          <target state="new">Three</target>
+        </trans-unit>
+        <trans-unit id="Two" translate="yes" xml:space="preserve">
+          <source>Two</source>
+          <target state="new">Two</target>
+        </trans-unit>
       </group>
     </body>
   </file>
@@ -1170,6 +1452,648 @@
     </header>
     <body>
       <group id="INSTAT/FRMVARIABLES.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGADDSTARTRAIN.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGADDSTARTRAIN.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGADVANCEOPTIONS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGADVANCEOPTIONS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGBOXPLOTCOUNTVARIABLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGBOXPLOTCOUNTVARIABLE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGCHANGEFORMATDAYMONTH.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCHANGEFORMATDAYMONTH.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGCPTTOTABULARDATA.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCPTTOTABULARDATA.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGCREATECLIMATEOBJECT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCREATECLIMATEOBJECT.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGDAYMONTH.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGDAYMONTH.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGDISPLAYDAILY.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGDISPLAYDAILY.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGDISPLAYDAILYDATARAIN.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGDISPLAYDAILYDATARAIN.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGDISPLAYDOYOFYEAR.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGDISPLAYDOYOFYEAR.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGDISPLAYRAINRUNNINGTOTAL.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGDISPLAYRAINRUNNINGTOTAL.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGDISPLAYSPELLLENGTH.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGDISPLAYSPELLLENGTH.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGEXPORTFORPICSA.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGEXPORTFORPICSA.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGISNALISTVB.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGISNALISTVB.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGMISSINGDATA.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGMISSINGDATA.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGMISSINGDATATABLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGMISSINGDATATABLE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGMONTHLYSUMMARIES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGMONTHLYSUMMARIES.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGOUTPUTFORCDT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGOUTPUTFORCDT.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGOUTPUTFORCPT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGOUTPUTFORCPT.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGRAINSTATS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGRAINSTATS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGSEASONALSUMMARY.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSEASONALSUMMARY.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGSEASONALSUMMARYRAIN.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSEASONALSUMMARYRAIN.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGENDRAIN.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGENDRAIN.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGREGRESSIONSIMPLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGREGRESSIONSIMPLE.RESX" datatype="resx">
+        <trans-unit id="$this.AutoScaleDimensions" translate="yes" xml:space="preserve" extype="System.Drawing.SizeF, System.Drawing">
+          <source>6, 13</source>
+          <target state="needs-review-translation">6, 13</target>
+        </trans-unit>
+        <trans-unit id="$this.ClientSize" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>424, 343</source>
+          <target state="needs-review-translation">284, 261</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="$this.StartPosition" translate="yes" xml:space="preserve" extype="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+          <source>CenterScreen</source>
+          <target state="needs-review-translation">CenterScreen</target>
+        </trans-unit>
+        <trans-unit id="$this.Text" translate="yes" xml:space="preserve">
+          <source>Simple Regression</source>
+          <target state="new">Simple Regression</target>
+        </trans-unit>
+        <trans-unit id="$this.Localizable" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="txtdf.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>118, 43</source>
+          <target state="needs-review-translation">118, 43</target>
+        </trans-unit>
+        <trans-unit id="txtdf.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>58, 20</source>
+          <target state="needs-review-translation">58, 20</target>
+        </trans-unit>
+        <trans-unit id="txtdf.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>12</source>
+          <target state="needs-review-translation">12</target>
+        </trans-unit>
+        <trans-unit id="txtResidualMsg.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>118, 11</source>
+          <target state="needs-review-translation">118, 11</target>
+        </trans-unit>
+        <trans-unit id="txtResidualMsg.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>149, 20</source>
+          <target state="needs-review-translation">149, 20</target>
+        </trans-unit>
+        <trans-unit id="txtResidualMsg.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>2</source>
+          <target state="needs-review-translation">2</target>
+        </trans-unit>
+        <trans-unit id="Label1.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="Label1.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>7, 43</source>
+          <target state="needs-review-translation">7, 43</target>
+        </trans-unit>
+        <trans-unit id="Label1.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>100, 13</source>
+          <target state="needs-review-translation">100, 13</target>
+        </trans-unit>
+        <trans-unit id="Label1.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>1</source>
+          <target state="needs-review-translation">1</target>
+        </trans-unit>
+        <trans-unit id="Label1.Text" translate="yes" xml:space="preserve">
+          <source>Degrees of freedom</source>
+          <target state="new">Degrees of freedom</target>
+        </trans-unit>
+        <trans-unit id="lblResidualMsg.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="lblResidualMsg.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>7, 11</source>
+          <target state="needs-review-translation">7, 11</target>
+        </trans-unit>
+        <trans-unit id="lblResidualMsg.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>94, 13</source>
+          <target state="needs-review-translation">94, 13</target>
+        </trans-unit>
+        <trans-unit id="lblResidualMsg.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>0</source>
+          <target state="needs-review-translation">0</target>
+        </trans-unit>
+        <trans-unit id="lblResidualMsg.Text" translate="yes" xml:space="preserve">
+          <source>Residual Message</source>
+          <target state="new">Residual Message</target>
+        </trans-unit>
+        <trans-unit id="grpLackFit.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>111, 179</source>
+          <target state="needs-review-translation">111, 179</target>
+        </trans-unit>
+        <trans-unit id="grpLackFit.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>280, 76</source>
+          <target state="needs-review-translation">280, 76</target>
+        </trans-unit>
+        <trans-unit id="grpLackFit.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>11</source>
+          <target state="needs-review-translation">11</target>
+        </trans-unit>
+        <trans-unit id="chkLackFit.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="chkLackFit.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>9, 179</source>
+          <target state="needs-review-translation">9, 179</target>
+        </trans-unit>
+        <trans-unit id="chkLackFit.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>73, 17</source>
+          <target state="needs-review-translation">78, 17</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="chkLackFit.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>10</source>
+          <target state="needs-review-translation">10</target>
+        </trans-unit>
+        <trans-unit id="chkLackFit.Text" translate="yes" xml:space="preserve">
+          <source>Lack of fit</source>
+          <target state="new">Lack of fit</target>
+        </trans-unit>
+        <trans-unit id="chkAnovaTable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="chkAnovaTable.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>243, 141</source>
+          <target state="needs-review-translation">243, 141</target>
+        </trans-unit>
+        <trans-unit id="chkAnovaTable.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>117, 17</source>
+          <target state="needs-review-translation">117, 17</target>
+        </trans-unit>
+        <trans-unit id="chkAnovaTable.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>9</source>
+          <target state="needs-review-translation">9</target>
+        </trans-unit>
+        <trans-unit id="chkAnovaTable.Text" translate="yes" xml:space="preserve">
+          <source>Show Anova Table</source>
+          <target state="new">Show Anova Table</target>
+        </trans-unit>
+        <trans-unit id="chkShowPlots.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="chkShowPlots.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>144, 141</source>
+          <target state="needs-review-translation">144, 141</target>
+        </trans-unit>
+        <trans-unit id="chkShowPlots.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>74, 17</source>
+          <target state="needs-review-translation">74, 17</target>
+        </trans-unit>
+        <trans-unit id="chkShowPlots.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>8</source>
+          <target state="needs-review-translation">8</target>
+        </trans-unit>
+        <trans-unit id="chkShowPlots.Text" translate="yes" xml:space="preserve">
+          <source>Show Plot</source>
+          <target state="new">Show Plot</target>
+        </trans-unit>
+        <trans-unit id="chkSiginificance.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="chkSiginificance.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>9, 141</source>
+          <target state="needs-review-translation">9, 141</target>
+        </trans-unit>
+        <trans-unit id="chkSiginificance.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>108, 17</source>
+          <target state="needs-review-translation">108, 17</target>
+        </trans-unit>
+        <trans-unit id="chkSiginificance.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>7</source>
+          <target state="needs-review-translation">7</target>
+        </trans-unit>
+        <trans-unit id="chkSiginificance.Text" translate="yes" xml:space="preserve">
+          <source>Significance Test</source>
+          <target state="new">Significance Test</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Items" translate="yes" xml:space="preserve">
+          <source></source>
+          <target state="new"></target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Items1" translate="yes" xml:space="preserve">
+          <source>99.99</source>
+          <target state="new">99.99</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Items2" translate="yes" xml:space="preserve">
+          <source>99</source>
+          <target state="new">99</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Items3" translate="yes" xml:space="preserve">
+          <source>95</source>
+          <target state="new">95</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Items4" translate="yes" xml:space="preserve">
+          <source>90</source>
+          <target state="new">90</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Items5" translate="yes" xml:space="preserve">
+          <source>80</source>
+          <target state="new">80</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>302, 103</source>
+          <target state="needs-review-translation">302, 103</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>42, 21</source>
+          <target state="needs-review-translation">42, 21</target>
+        </trans-unit>
+        <trans-unit id="ComboBox1.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>6</source>
+          <target state="needs-review-translation">6</target>
+        </trans-unit>
+        <trans-unit id="lblConfidence.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="lblConfidence.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>191, 111</source>
+          <target state="needs-review-translation">191, 111</target>
+        </trans-unit>
+        <trans-unit id="lblConfidence.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>90, 13</source>
+          <target state="needs-review-translation">90, 13</target>
+        </trans-unit>
+        <trans-unit id="lblConfidence.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>5</source>
+          <target state="needs-review-translation">5</target>
+        </trans-unit>
+        <trans-unit id="lblConfidence.Text" translate="yes" xml:space="preserve">
+          <source>Confidence Limits</source>
+          <target state="new">Confidence Limits</target>
+        </trans-unit>
+        <trans-unit id="lblExplanatoryVariable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="lblExplanatoryVariable.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+          <source>NoControl</source>
+          <target state="needs-review-translation">NoControl</target>
+        </trans-unit>
+        <trans-unit id="lblExplanatoryVariable.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>191, 69</source>
+          <target state="needs-review-translation">191, 69</target>
+        </trans-unit>
+        <trans-unit id="lblExplanatoryVariable.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>103, 13</source>
+          <target state="needs-review-translation">103, 13</target>
+        </trans-unit>
+        <trans-unit id="lblExplanatoryVariable.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>4</source>
+          <target state="needs-review-translation">4</target>
+        </trans-unit>
+        <trans-unit id="lblExplanatoryVariable.Text" translate="yes" xml:space="preserve">
+          <source>Explanatory Variable</source>
+          <target state="new">Explanatory Variable</target>
+        </trans-unit>
+        <trans-unit id="lblResponseVariable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="lblResponseVariable.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>191, 37</source>
+          <target state="needs-review-translation">191, 37</target>
+        </trans-unit>
+        <trans-unit id="lblResponseVariable.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>96, 13</source>
+          <target state="needs-review-translation">96, 13</target>
+        </trans-unit>
+        <trans-unit id="lblResponseVariable.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>3</source>
+          <target state="needs-review-translation">3</target>
+        </trans-unit>
+        <trans-unit id="lblResponseVariable.Text" translate="yes" xml:space="preserve">
+          <source>Response Variable</source>
+          <target state="new">Response Variable</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverSingleA.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>302, 24</source>
+          <target state="needs-review-translation">302, 24</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverSingleA.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>106, 26</source>
+          <target state="needs-review-translation">106, 26</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverSingleA.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>1</source>
+          <target state="needs-review-translation">1</target>
+        </trans-unit>
+        <trans-unit id="ucrAddRemove.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>3, 6</source>
+          <target state="needs-review-translation">3, 6</target>
+        </trans-unit>
+        <trans-unit id="ucrAddRemove.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>182, 118</source>
+          <target state="needs-review-translation">182, 118</target>
+        </trans-unit>
+        <trans-unit id="ucrAddRemove.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>0</source>
+          <target state="needs-review-translation">0</target>
+        </trans-unit>
+        <trans-unit id="tbRegress.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>4, 22</source>
+          <target state="needs-review-translation">4, 22</target>
+        </trans-unit>
+        <trans-unit id="tbRegress.Padding" translate="yes" xml:space="preserve" extype="System.Windows.Forms.Padding, System.Windows.Forms">
+          <source>3, 3, 3, 3</source>
+          <target state="needs-review-translation">3, 3, 3, 3</target>
+        </trans-unit>
+        <trans-unit id="tbRegress.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>416, 274</source>
+          <target state="needs-review-translation">416, 274</target>
+        </trans-unit>
+        <trans-unit id="tbRegress.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>0</source>
+          <target state="needs-review-translation">0</target>
+        </trans-unit>
+        <trans-unit id="tbRegress.Text" translate="yes" xml:space="preserve">
+          <source>Regress</source>
+          <target state="new">Regress</target>
+        </trans-unit>
+        <trans-unit id="tbPlot.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>4, 22</source>
+          <target state="needs-review-translation">4, 22</target>
+        </trans-unit>
+        <trans-unit id="tbPlot.Padding" translate="yes" xml:space="preserve" extype="System.Windows.Forms.Padding, System.Windows.Forms">
+          <source>3, 3, 3, 3</source>
+          <target state="needs-review-translation">3, 3, 3, 3</target>
+        </trans-unit>
+        <trans-unit id="tbPlot.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>416, 274</source>
+          <target state="needs-review-translation">464, 235</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="tbPlot.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>1</source>
+          <target state="needs-review-translation">1</target>
+        </trans-unit>
+        <trans-unit id="tbPlot.Text" translate="yes" xml:space="preserve">
+          <source>Plot</source>
+          <target state="new">Plot</target>
+        </trans-unit>
+        <trans-unit id="tbSave.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>4, 22</source>
+          <target state="needs-review-translation">4, 22</target>
+        </trans-unit>
+        <trans-unit id="tbSave.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>416, 274</source>
+          <target state="needs-review-translation">464, 235</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="tbSave.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>2</source>
+          <target state="needs-review-translation">2</target>
+        </trans-unit>
+        <trans-unit id="tbSave.Text" translate="yes" xml:space="preserve">
+          <source>Save</source>
+          <target state="new">Save</target>
+        </trans-unit>
+        <trans-unit id="tbctrlSimple.Dock" translate="yes" xml:space="preserve" extype="System.Windows.Forms.DockStyle, System.Windows.Forms">
+          <source>Top</source>
+          <target state="needs-review-translation">Top</target>
+        </trans-unit>
+        <trans-unit id="tbctrlSimple.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>0, 0</source>
+          <target state="needs-review-translation">0, 0</target>
+        </trans-unit>
+        <trans-unit id="tbctrlSimple.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>424, 300</source>
+          <target state="needs-review-translation">424, 300</target>
+        </trans-unit>
+        <trans-unit id="tbctrlSimple.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>0</source>
+          <target state="needs-review-translation">0</target>
+        </trans-unit>
+        <trans-unit id="ucrBase.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>7, 307</source>
+          <target state="needs-review-translation">7, 307</target>
+        </trans-unit>
+        <trans-unit id="ucrBase.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>410, 32</source>
+          <target state="needs-review-translation">410, 32</target>
+        </trans-unit>
+        <trans-unit id="ucrBase.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>1</source>
+          <target state="needs-review-translation">1</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverSingleB.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>302, 56</source>
+          <target state="needs-review-translation">302, 56</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverSingleB.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>106, 26</source>
+          <target state="needs-review-translation">106, 26</target>
+        </trans-unit>
+        <trans-unit id="ucrReceiverSingleB.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>13</source>
+          <target state="needs-review-translation">12</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="Label1.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+          <source>NoControl</source>
+          <target state="needs-review-translation">NoControl</target>
+        </trans-unit>
+        <trans-unit id="lblResidualMsg.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+          <source>NoControl</source>
+          <target state="needs-review-translation">NoControl</target>
+        </trans-unit>
+        <trans-unit id="chkLackFit.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+          <source>NoControl</source>
+          <target state="needs-review-translation">NoControl</target>
+        </trans-unit>
+        <trans-unit id="chkAnovaTable.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+          <source>NoControl</source>
+          <target state="needs-review-translation">NoControl</target>
+        </trans-unit>
+        <trans-unit id="chkShowPlots.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+          <source>NoControl</source>
+          <target state="needs-review-translation">NoControl</target>
+        </trans-unit>
+        <trans-unit id="chkSiginificance.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+          <source>NoControl</source>
+          <target state="needs-review-translation">NoControl</target>
+        </trans-unit>
+        <trans-unit id="lblConfidence.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+          <source>NoControl</source>
+          <target state="needs-review-translation">NoControl</target>
+        </trans-unit>
+        <trans-unit id="lblResponseVariable.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+          <source>NoControl</source>
+          <target state="needs-review-translation">NoControl</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGONEWAYANOVE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGONEWAYANOVE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGANOVAONEWAY.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGANOVAONEWAY.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>

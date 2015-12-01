@@ -42,7 +42,8 @@ Partial Class dlgAnnualRaintotal
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgAnnualRaintotal"
-        Me.Text = "dlgAnnualRaintotal"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Annual Rain total"
         Me.ResumeLayout(False)
 
     End Sub
