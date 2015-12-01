@@ -28,7 +28,7 @@ Public Class RSyntax
     End Sub
 
     Public Sub AddParameter(strParameterName As String, strParameterValue As String)
-        Dim iBound, i, j As Integer
+        Dim iBound, i As Integer
         Dim bNew As Boolean = True
         If strParameter(0, 0) Is Nothing Then
             strParameter(0, 0) = strParameterName

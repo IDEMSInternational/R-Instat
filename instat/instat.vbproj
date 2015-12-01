@@ -153,12 +153,6 @@
     <Compile Include="dlgAnnualRaintotal.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgAnovaOneWay.Designer.vb">
-      <DependentUpon>dlgAnovaOneWay.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgAnovaOneWay.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgBoxplotCountVariable.designer.vb">
       <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
     </Compile>
@@ -679,15 +673,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAnnualRaintotal.sw-KE.resx">
       <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgAnovaOneWay.fr-FR.resx">
-      <DependentUpon>dlgAnovaOneWay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgAnovaOneWay.resx">
-      <DependentUpon>dlgAnovaOneWay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgAnovaOneWay.sw-KE.resx">
-      <DependentUpon>dlgAnovaOneWay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxplotCountVariable.fr-FR.resx">
       <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
