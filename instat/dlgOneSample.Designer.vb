@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgOneSample
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgOneSample
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpAnalysis = New System.Windows.Forms.GroupBox()
         Me.lblValue = New System.Windows.Forms.Label()
@@ -31,12 +31,12 @@ Partial Class dlgOneSample
         Me.lblModels = New System.Windows.Forms.Label()
         Me.cboModels = New System.Windows.Forms.ComboBox()
         Me.lblDataColumn = New System.Windows.Forms.Label()
-        Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpGraphs = New System.Windows.Forms.GroupBox()
         Me.lblGraphs = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpAnalysis.SuspendLayout()
         Me.grpGraphs.SuspendLayout()
         Me.SuspendLayout()
@@ -55,6 +55,7 @@ Partial Class dlgOneSample
         Me.grpAnalysis.Size = New System.Drawing.Size(220, 202)
         Me.grpAnalysis.TabIndex = 3
         Me.grpAnalysis.TabStop = False
+        Me.grpAnalysis.Tag = "Analysis"
         Me.grpAnalysis.Text = "Analysis"
         '
         'lblValue
@@ -83,7 +84,7 @@ Partial Class dlgOneSample
         Me.chkSignificanceTest.Name = "chkSignificanceTest"
         Me.chkSignificanceTest.Size = New System.Drawing.Size(108, 17)
         Me.chkSignificanceTest.TabIndex = 4
-        Me.chkSignificanceTest.Tag = "Significance _test"
+        Me.chkSignificanceTest.Tag = "Significance_test"
         Me.chkSignificanceTest.Text = "Significance Test"
         Me.chkSignificanceTest.UseVisualStyleBackColor = True
         '
@@ -94,7 +95,7 @@ Partial Class dlgOneSample
         Me.lblParameters.Name = "lblParameters"
         Me.lblParameters.Size = New System.Drawing.Size(55, 13)
         Me.lblParameters.TabIndex = 3
-        Me.lblParameters.Tag = "Parameters"
+        Me.lblParameters.Tag = "Parameter"
         Me.lblParameters.Text = "Parameter"
         '
         'cboParameters
@@ -129,33 +130,12 @@ Partial Class dlgOneSample
         'lblDataColumn
         '
         Me.lblDataColumn.AutoSize = True
-        Me.lblDataColumn.Location = New System.Drawing.Point(191, 22)
+        Me.lblDataColumn.Location = New System.Drawing.Point(213, 19)
         Me.lblDataColumn.Name = "lblDataColumn"
         Me.lblDataColumn.Size = New System.Drawing.Size(68, 13)
         Me.lblDataColumn.TabIndex = 4
         Me.lblDataColumn.Tag = "Data_Column"
         Me.lblDataColumn.Text = "Data Column"
-        '
-        'ucrReceiverSingle
-        '
-        Me.ucrReceiverSingle.Location = New System.Drawing.Point(191, 38)
-        Me.ucrReceiverSingle.Name = "ucrReceiverSingle"
-        Me.ucrReceiverSingle.Size = New System.Drawing.Size(106, 28)
-        Me.ucrReceiverSingle.TabIndex = 2
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(3, 12)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(182, 118)
-        Me.ucrAddRemove.TabIndex = 1
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(53, 306)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
-        Me.ucrBase.TabIndex = 0
         '
         'grpGraphs
         '
@@ -187,18 +167,39 @@ Partial Class dlgOneSample
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
+        'ucrReceiverSingle
+        '
+        Me.ucrReceiverSingle.Location = New System.Drawing.Point(203, 35)
+        Me.ucrReceiverSingle.Name = "ucrReceiverSingle"
+        Me.ucrReceiverSingle.Size = New System.Drawing.Size(91, 26)
+        Me.ucrReceiverSingle.TabIndex = 9
+        '
+        'ucrAddRemove
+        '
+        Me.ucrAddRemove.Location = New System.Drawing.Point(1, 12)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(206, 131)
+        Me.ucrAddRemove.TabIndex = 8
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(43, 296)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.TabIndex = 7
+        '
         'dlgOneSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(526, 350)
+        Me.ClientSize = New System.Drawing.Size(526, 336)
+        Me.Controls.Add(Me.ucrReceiverSingle)
+        Me.Controls.Add(Me.ucrAddRemove)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.grpGraphs)
         Me.Controls.Add(Me.lblDataColumn)
         Me.Controls.Add(Me.grpAnalysis)
-        Me.Controls.Add(Me.ucrReceiverSingle)
-        Me.Controls.Add(Me.ucrAddRemove)
-        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -215,9 +216,6 @@ Partial Class dlgOneSample
 
     End Sub
 
-    Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
     Friend WithEvents grpAnalysis As GroupBox
     Friend WithEvents lblParameters As Label
     Friend WithEvents cboParameters As ComboBox
@@ -230,4 +228,7 @@ Partial Class dlgOneSample
     Friend WithEvents grpGraphs As GroupBox
     Friend WithEvents lblGraphs As Label
     Friend WithEvents cmdOptions As Button
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
 End Class

@@ -23,5 +23,7 @@ Public Class ucrReceiver
         translateEach(Controls)
     End Sub
 
-
+    Private Sub ucrReceiver_Enter(sender As Object, e As EventArgs) Handles Me.Enter
+        SetMeAsReceiver()
+    End Sub
 End Class

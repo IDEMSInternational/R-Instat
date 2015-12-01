@@ -139,8 +139,8 @@
   <data name="Available_Variables" xml:space="preserve">
     <value>Available  Variables</value>
   </data>
-  <data name="Box_Plot" xml:space="preserve">
-    <value>Box Plot</value>
+  <data name="Continuity__Correction" xml:space="preserve">
+    <value>Continuity Correction</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -579,5 +579,32 @@
   </data>
   <data name="Two" xml:space="preserve">
     <value>Two</value>
+  </data>
+  <data name="Layout_of_data" xml:space="preserve">
+    <value>Layout of data</value>
+  </data>
+  <data name="Make_Result_as_a_factor" xml:space="preserve">
+    <value>Make Result as a factor</value>
+  </data>
+  <data name="New_Value" xml:space="preserve">
+    <value>New Value</value>
+  </data>
+  <data name="Range_End" xml:space="preserve">
+    <value>Range End</value>
+  </data>
+  <data name="Range_Start" xml:space="preserve">
+    <value>Range Start</value>
+  </data>
+  <data name="Save_values" xml:space="preserve">
+    <value>Save values</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="With_a_Label" xml:space="preserve">
+    <value>With a Label</value>
+  </data>
+  <data name="Write_back_to_the_data" xml:space="preserve">
+    <value>Write back to the data</value>
   </data>
 </root>

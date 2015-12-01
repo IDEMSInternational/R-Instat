@@ -1,7 +1,6 @@
-﻿
-' Instat-R
+﻿' Instat-R
 ' Copyright (C) 2015
-'
+
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
 ' the Free Software Foundation, either version 3 of the License, or
@@ -19,8 +18,8 @@ Imports instat.Translations
 
 Public Class dlgProbabilityPlot
     Private Sub dlgProbabilityPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        UcrReceiverSingle1.Selector = ucrAddRemove
-        UcrReceiverSingle1.SetMeAsReceiver()
+        UcrReceiverSingle.Selector = ucrAddRemove
+        UcrReceiverSingle.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("qqnorm")
         ucrBase.clsRsyntax.iCallType = 0
         rdoNormal.Checked = True
@@ -29,10 +28,9 @@ Public Class dlgProbabilityPlot
 
     End Sub
 
-
     Private Sub rdoNormal_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNormal.CheckedChanged
         If rdoNormal.Checked = True Then
-            txtTitle.Text = "Normal Probability Plot of " & UcrReceiverSingle1.txtReceiverSingle.Text & ""
+            txtTitle.Text = "Normal Probability Plot of " & UcrReceiverSingle.txtReceiverSingle.Text & ""
         End If
 
     End Sub
@@ -65,11 +63,9 @@ Public Class dlgProbabilityPlot
         ucrBase.clsRsyntax.AddParameter("main", Chr(34) & txtTitle.Text & Chr(34))
     End Sub
 
-    Private Sub UcrReceiverSingle1_Leave(sender As Object, e As EventArgs) Handles UcrReceiverSingle1.LeftText
-        ucrBase.clsRsyntax.AddParameter("y", "data$" & UcrReceiverSingle1.txtReceiverSingle.Text & "")
+    Private Sub UcrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles UcrReceiverSingle.Leave
+        ucrBase.clsRsyntax.AddParameter("y", UcrReceiverSingle.GetVariables())
     End Sub
-
-
 End Class
 
 
