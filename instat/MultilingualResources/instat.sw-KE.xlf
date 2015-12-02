@@ -98,10 +98,6 @@
           <source>Available  Variables</source>
           <target state="new">Available  Variables</target>
         </trans-unit>
-        <trans-unit id="Box_Plot" translate="yes" xml:space="preserve">
-          <source>Box Plot</source>
-          <target state="new">Box Plot</target>
-        </trans-unit>
         <trans-unit id="Cancel" translate="yes" xml:space="preserve">
           <source>Cancel</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Katisha</target>
@@ -686,6 +682,46 @@
         <trans-unit id="Two" translate="yes" xml:space="preserve">
           <source>Two</source>
           <target state="new">Two</target>
+        </trans-unit>
+        <trans-unit id="Continuity__Correction" translate="yes" xml:space="preserve">
+          <source>Continuity Correction</source>
+          <target state="new">Continuity Correction</target>
+        </trans-unit>
+        <trans-unit id="Layout_of_data" translate="yes" xml:space="preserve">
+          <source>Layout of data</source>
+          <target state="new">Layout of data</target>
+        </trans-unit>
+        <trans-unit id="Make_Result_as_a_factor" translate="yes" xml:space="preserve">
+          <source>Make Result as a factor</source>
+          <target state="new">Make Result as a factor</target>
+        </trans-unit>
+        <trans-unit id="New_Value" translate="yes" xml:space="preserve">
+          <source>New Value</source>
+          <target state="new">New Value</target>
+        </trans-unit>
+        <trans-unit id="Range_End" translate="yes" xml:space="preserve">
+          <source>Range End</source>
+          <target state="new">Range End</target>
+        </trans-unit>
+        <trans-unit id="Range_Start" translate="yes" xml:space="preserve">
+          <source>Range Start</source>
+          <target state="new">Range Start</target>
+        </trans-unit>
+        <trans-unit id="Save_values" translate="yes" xml:space="preserve">
+          <source>Save values</source>
+          <target state="new">Save values</target>
+        </trans-unit>
+        <trans-unit id="String1" translate="yes" xml:space="preserve">
+          <source>New</source>
+          <target state="new">New</target>
+        </trans-unit>
+        <trans-unit id="With_a_Label" translate="yes" xml:space="preserve">
+          <source>With a Label</source>
+          <target state="new">With a Label</target>
+        </trans-unit>
+        <trans-unit id="Write_back_to_the_data" translate="yes" xml:space="preserve">
+          <source>Write back to the data</source>
+          <target state="new">Write back to the data</target>
         </trans-unit>
       </group>
     </body>
@@ -2089,12 +2125,89 @@
       <group id="INSTAT/DLGONEWAYANOVE.RESX" datatype="resx" />
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGANOVAONEWAY.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGCORRELATIONS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="INSTAT/DLGANOVAONEWAY.RESX" datatype="resx" />
+      <group id="INSTAT/DLGCORRELATIONS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGCHANGETYPE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCHANGETYPE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGFREQTABLES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGFREQTABLES.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGFIND.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGFIND.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGREPLACE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGREPLACE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGRECODE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGRECODE.RESX" datatype="resx">
+        <trans-unit id="RangeStart.UserAddedColumn" translate="yes" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata" xml:space="preserve">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="RangeEnd.UserAddedColumn" translate="yes" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata" xml:space="preserve">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="NewValue.UserAddedColumn" translate="yes" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata" xml:space="preserve">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGRANDOMSAMPLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGRANDOMSAMPLE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGONESAMPLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGONESAMPLE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGDUPLICATECOLUMNS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGDUPLICATECOLUMNS.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>
