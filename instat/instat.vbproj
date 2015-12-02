@@ -273,12 +273,6 @@
     <Compile Include="dlgDotPlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDuplicateColumns.Designer.vb">
-      <DependentUpon>dlgDuplicateColumns.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDuplicateColumns.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgEndofRains.designer.vb">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>
     </Compile>
@@ -850,15 +844,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDotPlot.sw-KE.resx">
       <DependentUpon>dlgDotPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDuplicateColumns.fr-FR.resx">
-      <DependentUpon>dlgDuplicateColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDuplicateColumns.resx">
-      <DependentUpon>dlgDuplicateColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDuplicateColumns.sw-KE.resx">
-      <DependentUpon>dlgDuplicateColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEndofRains.fr-FR.resx">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>
