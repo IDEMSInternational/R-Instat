@@ -16,8 +16,8 @@
 Imports instat.Translations
 Public Class dlgChiSquareTest
     Private Sub ChiSquareTest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrReceiverMultiple.Selector = ucrAddRemove
-        ucrReceiverMultiple.SetMeAsReceiver()
+        ucrReceiverChiSquare.Selector = ucrAddRemove
+        ucrReceiverChiSquare.SetMeAsReceiver()
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetFunction("chisq.test")
         autoTranslate(Me)
@@ -26,18 +26,8 @@ Public Class dlgChiSquareTest
     End Sub
 
 
-    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.LeftList
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverMultiple.lstSelectedVariables.Text & "")
-    End Sub
-    Private Sub UcrReceiverMultiple1_Load(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.Load
-
+    Private Sub ucrReceiverChiSquare_Leave(sender As Object, e As EventArgs) Handles ucrReceiverChiSquare.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverChiSquare.GetVariables())
     End Sub
 
-    Private Sub cboLayoutOfData_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboLayoutOfData.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
-
-    End Sub
 End Class
