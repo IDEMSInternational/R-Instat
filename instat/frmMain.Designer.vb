@@ -244,6 +244,7 @@ Partial Class frmMain
         Me.mnuManageManipulateRowStat = New System.Windows.Forms.ToolStripMenuItem()
         Me.InteractionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IndicatorVariablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PolynomialsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReshapeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StacksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UnstackToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -300,7 +301,6 @@ Partial Class frmMain
         Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PolynomialsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1846,6 +1846,12 @@ Partial Class frmMain
         Me.IndicatorVariablesToolStripMenuItem.Tag = "Indicator_Variables"
         Me.IndicatorVariablesToolStripMenuItem.Text = "Indicator Variables..."
         '
+        'PolynomialsToolStripMenuItem
+        '
+        Me.PolynomialsToolStripMenuItem.Name = "PolynomialsToolStripMenuItem"
+        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PolynomialsToolStripMenuItem.Text = "Polynomials"
+        '
         'ReshapeToolStripMenuItem
         '
         Me.ReshapeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StacksToolStripMenuItem, Me.UnstackToolStripMenuItem, Me.SelectToolStripMenuItem, Me.SelectSndStackToolStripMenuItem, Me.ExpandToolStripMenuItem})
@@ -2198,12 +2204,6 @@ Partial Class frmMain
         Me.WaterBalanceToolStripMenuItem1.Name = "WaterBalanceToolStripMenuItem1"
         Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
         Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
-        '
-        'PolynomialsToolStripMenuItem
-        '
-        Me.PolynomialsToolStripMenuItem.Name = "PolynomialsToolStripMenuItem"
-        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.PolynomialsToolStripMenuItem.Text = "Polynomials"
         '
         'frmMain
         '

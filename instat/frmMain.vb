@@ -465,4 +465,12 @@ Public Class frmMain
     Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearRemoveToolStripMenuItem.Click
 
     End Sub
+
+    Private Sub StatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatisticsToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub SimpleWithGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SimpleWithGroupsToolStripMenuItem.Click
+        dlgSimplewithGroups.ShowDialog()
+    End Sub
 End Class
