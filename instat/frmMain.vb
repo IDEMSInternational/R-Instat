@@ -413,4 +413,56 @@ Public Class frmMain
     Private Sub GammaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GammaToolStripMenuItem.Click
         dlgGammaDistr.ShowDialog()
     End Sub
+
+    Private Sub DuplicatecopyColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicatecopyColumnsToolStripMenuItem.Click
+        dlgDuplicateColumns.ShowDialog()
+    End Sub
+
+    Private Sub TransformToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransformToolStripMenuItem.Click
+        dlgTransform.ShowDialog()
+    End Sub
+
+    Private Sub InteractionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InteractionsToolStripMenuItem.Click
+        dlgIndicatorVariable.ShowDialog()
+    End Sub
+
+    Private Sub PolynomialsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PolynomialsToolStripMenuItem.Click
+        dlgPolynomials.ShowDialog()
+    End Sub
+
+    Private Sub ExtremaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExtremaToolStripMenuItem.Click
+        dlgExtremes.ShowDialog()
+    End Sub
+
+    Private Sub StacksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StacksToolStripMenuItem.Click
+        dlgStack.ShowDialog()
+    End Sub
+
+    Private Sub UnstackToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnstackToolStripMenuItem.Click
+        dlgUnstack.ShowDialog()
+    End Sub
+
+    Private Sub ChisquareTestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChisquareTestToolStripMenuItem.Click
+        dlgChiSquareTest.ShowDialog()
+    End Sub
+
+    Private Sub RecodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecodeToolStripMenuItem.Click
+        dlgRecode.ShowDialog()
+    End Sub
+
+    Private Sub EnterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnterToolStripMenuItem.Click
+        dlgChangeType.ShowDialog()
+    End Sub
+
+    Private Sub RandomSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RandomSamplesToolStripMenuItem.Click
+        dlgRandomSample.ShowDialog()
+    End Sub
+
+    Private Sub DisplayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearRemoveToolStripMenuItem.Click
+
+    End Sub
 End Class
