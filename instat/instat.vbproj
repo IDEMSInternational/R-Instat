@@ -327,6 +327,12 @@
     <Compile Include="dlgHistogramMethod.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgIndicatorVariable.Designer.vb">
+      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgIndicatorVariable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgInventoryMethod.designer.vb">
       <DependentUpon>dlgInventoryMethod.vb</DependentUpon>
     </Compile>
@@ -931,6 +937,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHistogramMethod.sw-KE.resx">
       <DependentUpon>dlgHistogramMethod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgIndicatorVariable.fr-FR.resx">
+      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgIndicatorVariable.resx">
+      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgIndicatorVariable.sw-KE.resx">
+      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInventoryMethod.fr-FR.resx">
       <DependentUpon>dlgInventoryMethod.vb</DependentUpon>
