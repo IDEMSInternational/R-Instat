@@ -273,6 +273,12 @@
     <Compile Include="dlgDotPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDuplicateColumns.Designer.vb">
+      <DependentUpon>dlgDuplicateColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDuplicateColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgEndofRains.designer.vb">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>
     </Compile>
@@ -319,6 +325,12 @@
       <DependentUpon>dlgHistogramMethod.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgHistogramMethod.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgIndicatorVariable.Designer.vb">
+      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgIndicatorVariable.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgInventoryMethod.designer.vb">
@@ -845,6 +857,15 @@
     <EmbeddedResource Include="dlgDotPlot.sw-KE.resx">
       <DependentUpon>dlgDotPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDuplicateColumns.fr-FR.resx">
+      <DependentUpon>dlgDuplicateColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDuplicateColumns.resx">
+      <DependentUpon>dlgDuplicateColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDuplicateColumns.sw-KE.resx">
+      <DependentUpon>dlgDuplicateColumns.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgEndofRains.fr-FR.resx">
       <DependentUpon>dlgEndofRains.vb</DependentUpon>
     </EmbeddedResource>
@@ -916,6 +937,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHistogramMethod.sw-KE.resx">
       <DependentUpon>dlgHistogramMethod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgIndicatorVariable.fr-FR.resx">
+      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgIndicatorVariable.resx">
+      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgIndicatorVariable.sw-KE.resx">
+      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInventoryMethod.fr-FR.resx">
       <DependentUpon>dlgInventoryMethod.vb</DependentUpon>
