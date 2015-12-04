@@ -607,4 +607,22 @@
   <data name="Write_back_to_the_data" xml:space="preserve">
     <value>Write back to the data</value>
   </data>
+  <data name="Data_to_be_averaged" xml:space="preserve">
+    <value>Data to be averaged</value>
+  </data>
+  <data name="Display_residuals" xml:space="preserve">
+    <value>Display residuals</value>
+  </data>
+  <data name="Lag" xml:space="preserve">
+    <value>Lag</value>
+  </data>
+  <data name="Moving_Averages" xml:space="preserve">
+    <value>Moving Averages</value>
+  </data>
+  <data name="Save_residuals" xml:space="preserve">
+    <value>Save residuals</value>
+  </data>
+  <data name="Save_results_in" xml:space="preserve">
+    <value>Save results in</value>
+  </data>
 </root>
