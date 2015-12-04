@@ -607,4 +607,19 @@
   <data name="Write_back_to_the_data" xml:space="preserve">
     <value>Write back to the data</value>
   </data>
+  <data name="Data_to_be_fitted" xml:space="preserve">
+    <value>Data to be fitted</value>
+  </data>
+  <data name="Distributions" xml:space="preserve">
+    <value>Distributions</value>
+  </data>
+  <data name="Fit_an_Extreme_distribution" xml:space="preserve">
+    <value>Fit an Extreme distribution</value>
+  </data>
+  <data name="GEV" xml:space="preserve">
+    <value>GEV</value>
+  </data>
+  <data name="Gumbel" xml:space="preserve">
+    <value>Gumbel</value>
+  </data>
 </root>
