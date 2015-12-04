@@ -25,6 +25,12 @@ Public Class ucrButtons
 
         Me.ParentForm.Hide()
     End Sub
+
+    Public Sub OKEnabled(bEnabled As Boolean)
+        cmdOk.Enabled = bEnabled
+        cmdPaste.Enabled = bEnabled
+    End Sub
+
     Public Sub EmptyTxt()
         Dim Ctrl As Control
         For Each Ctrl In Me.ParentForm.Controls
@@ -43,4 +49,9 @@ Public Class ucrButtons
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         translateEach(Controls)
     End Sub
+
+    Private Sub cmdPaste_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click
+        frmScript.txtScript.Text = frmScript.txtScript.Text & vbCrLf & clsRsyntax.GetScript()
+    End Sub
+
 End Class
