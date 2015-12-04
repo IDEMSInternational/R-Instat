@@ -22,29 +22,31 @@ Public Class dlgNon_ParametricANOVA
         ucrReceiverYVariate.Selector = ucrAddRemove
         ucrReceiverYVariate.SetMeAsReceiver()
         autoTranslate(Me)
-    End Sub
-
-    Private Sub ucrReceiverFactor_Enter(sender As Object, e As EventArgs) Handles ucrReceiverFactor.Enter
         ucrReceiverFactor.Selector = ucrAddRemove
-        ucrReceiverFactor.SetMeAsReceiver()
-
     End Sub
 
     Private Sub ucrReceiverYVariate_Leave(sender As Object, e As EventArgs) Handles ucrReceiverYVariate.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverYVariate.GetVariables())
+        FillFormular()
 
     End Sub
 
     Private Sub ucrReceiverFactor_Leave(sender As Object, e As EventArgs) Handles ucrReceiverFactor.Leave
-        ucrBase.clsRsyntax.AddParameter("y", ucrReceiverFactor.GetVariables())
+        FillFormular()
 
     End Sub
+    Private Sub FillFormular()
+        Dim strYVariate As String
+        Dim strFactor As String
 
-    Private Sub ucrReceiverFactor_Load(sender As Object, e As EventArgs)
+        strYVariate = ucrReceiverYVariate.GetVariables()
+        strFactor = ucrReceiverFactor.GetVariables()
+        If ((Not IsNothing(strYVariate)) Or ((Not IsNothing(strFactor)))) Then
+            ucrBase.clsRsyntax.AddParameter("formula", strYVariate & "~" & strFactor)
+            'ucrBase.OKEnabled(True) 
+        Else
+            'ucrBase.OKEnabled(False)
 
+        End If
     End Sub
 
-    Private Sub ucrReceiverFactor_Load_1(sender As Object, e As EventArgs) Handles ucrReceiverFactor.Load
-
-    End Sub
 End Class
