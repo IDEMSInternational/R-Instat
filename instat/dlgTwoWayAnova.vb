@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class dlgTwoWayAnova
     Private Sub dlgTwoWayAnova_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction(" aov(x~y*z ")
+        ucrBase.clsRsyntax.SetFunction("aov")
         ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverCounts.Selector = ucrAddRemove
         ucrReceiverCounts.SetMeAsReceiver()
@@ -26,22 +26,32 @@ Public Class dlgTwoWayAnova
         ucrReceiverColumnFactor.Selector = ucrAddRemove
     End Sub
 
-
-
     Private Sub ucrReceiverCounts_Leave(sender As Object, e As EventArgs) Handles ucrReceiverCounts.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverCounts.GetVariables())
-
+        FillFormula()
     End Sub
 
     Private Sub ucrReceiverRowFactor_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRowFactor.Leave
-        ucrBase.clsRsyntax.AddParameter("y", ucrReceiverRowFactor.GetVariables())
-
+        FillFormula()
     End Sub
 
     Private Sub ucrReceiverColumnFactor_Leave(sender As Object, e As EventArgs) Handles ucrReceiverColumnFactor.Leave
-        ucrBase.clsRsyntax.AddParameter("z", ucrReceiverColumnFactor.GetVariables())
-
+        FillFormula()
     End Sub
 
+    Private Sub FillFormula()
+        Dim strCounts As String
+        Dim strRowFactor As String
+        Dim strColumnFactor As String
+
+        strCounts = ucrReceiverCounts.GetVariables()
+        strRowFactor = ucrReceiverRowFactor.GetVariables()
+        strColumnFactor = ucrReceiverColumnFactor.GetVariables()
+        If ((Not IsNothing(strCounts)) Or ((Not IsNothing(strRowFactor)) Or ((Not IsNothing(strColumnFactor)) Then
+            ucrBase.clsRsyntax.AddParameter("formula", strCounts & "~" & strRowFactor & "*" & strColumnFactor)
+            'ucrBase.OKEnabled(True) ToDo there needs to be a OKEnabled command in ucrButtons which enables and disables the 'OK' and 'to Script' buttons
+        Else
+            'ucrBase.OKEnabled(False)
+        End If
+    End Sub
 
 End Class
