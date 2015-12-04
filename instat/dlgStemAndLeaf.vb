@@ -19,12 +19,15 @@ Public Class dlgStemAndLeaf
     Private Sub dlgStemAndLeaf_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("stem")
         ucrBase.clsRsyntax.iCallType = 2
-        UcrReceiverSingle1.Selector = UcrAddRemove
-        UcrReceiverSingle1.SetMeAsReceiver()
+        ucrReceiverStemAndLeaf.Selector = UcrAddRemove
+        ucrReceiverStemAndLeaf.SetMeAsReceiver()
         autoTranslate(Me)
     End Sub
-    Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles UcrReceiverSingle1.Leave
-        ucrBase.clsRsyntax.AddParameter("x", "data$" & UcrReceiverSingle1.txtReceiverSingle.Text & "")
+    Private Sub ucrReceiverStemAndLeaf_Enter(sender As Object, e As EventArgs) Handles ucrReceiverStemAndLeaf.Enter
+        ucrReceiverStemAndLeaf.SetMeAsReceiver()
+    End Sub
+    Private Sub ucrReceiverStemAndLeaf_Leave(sender As Object, e As EventArgs) Handles ucrReceiverStemAndLeaf.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverStemAndLeaf.GetVariables())
     End Sub
 
 End Class
