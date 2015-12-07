@@ -52,28 +52,28 @@ Partial Class dlgBivariateANOVA
         '
         'ucrReceiver1stResponseVariable
         '
-        Me.ucrReceiver1stResponseVariable.Location = New System.Drawing.Point(256, 29)
+        Me.ucrReceiver1stResponseVariable.Location = New System.Drawing.Point(253, 29)
         Me.ucrReceiver1stResponseVariable.Name = "ucrReceiver1stResponseVariable"
         Me.ucrReceiver1stResponseVariable.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiver1stResponseVariable.TabIndex = 2
         '
         'ucrReceiver2ndResponseVariable
         '
-        Me.ucrReceiver2ndResponseVariable.Location = New System.Drawing.Point(256, 71)
+        Me.ucrReceiver2ndResponseVariable.Location = New System.Drawing.Point(253, 71)
         Me.ucrReceiver2ndResponseVariable.Name = "ucrReceiver2ndResponseVariable"
         Me.ucrReceiver2ndResponseVariable.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiver2ndResponseVariable.TabIndex = 3
         '
         'ucrReceiverTreatmentFactor
         '
-        Me.ucrReceiverTreatmentFactor.Location = New System.Drawing.Point(256, 116)
+        Me.ucrReceiverTreatmentFactor.Location = New System.Drawing.Point(253, 116)
         Me.ucrReceiverTreatmentFactor.Name = "ucrReceiverTreatmentFactor"
         Me.ucrReceiverTreatmentFactor.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverTreatmentFactor.TabIndex = 4
         '
         'ucrReceiverBlockingFactor
         '
-        Me.ucrReceiverBlockingFactor.Location = New System.Drawing.Point(256, 163)
+        Me.ucrReceiverBlockingFactor.Location = New System.Drawing.Point(254, 163)
         Me.ucrReceiverBlockingFactor.Name = "ucrReceiverBlockingFactor"
         Me.ucrReceiverBlockingFactor.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverBlockingFactor.TabIndex = 5
@@ -81,7 +81,7 @@ Partial Class dlgBivariateANOVA
         'chkContrasts
         '
         Me.chkContrasts.AutoSize = True
-        Me.chkContrasts.Location = New System.Drawing.Point(12, 216)
+        Me.chkContrasts.Location = New System.Drawing.Point(22, 216)
         Me.chkContrasts.Name = "chkContrasts"
         Me.chkContrasts.Size = New System.Drawing.Size(70, 17)
         Me.chkContrasts.TabIndex = 6
@@ -92,7 +92,7 @@ Partial Class dlgBivariateANOVA
         'chkSaveResults
         '
         Me.chkSaveResults.AutoSize = True
-        Me.chkSaveResults.Location = New System.Drawing.Point(12, 258)
+        Me.chkSaveResults.Location = New System.Drawing.Point(22, 258)
         Me.chkSaveResults.Name = "chkSaveResults"
         Me.chkSaveResults.Size = New System.Drawing.Size(84, 17)
         Me.chkSaveResults.TabIndex = 7
@@ -103,7 +103,7 @@ Partial Class dlgBivariateANOVA
         'lbl1stRespVar
         '
         Me.lbl1stRespVar.AutoSize = True
-        Me.lbl1stRespVar.Location = New System.Drawing.Point(262, 16)
+        Me.lbl1stRespVar.Location = New System.Drawing.Point(259, 16)
         Me.lbl1stRespVar.Name = "lbl1stRespVar"
         Me.lbl1stRespVar.Size = New System.Drawing.Size(112, 13)
         Me.lbl1stRespVar.TabIndex = 8
@@ -113,7 +113,7 @@ Partial Class dlgBivariateANOVA
         'lbl2ndRespVar
         '
         Me.lbl2ndRespVar.AutoSize = True
-        Me.lbl2ndRespVar.Location = New System.Drawing.Point(263, 59)
+        Me.lbl2ndRespVar.Location = New System.Drawing.Point(259, 59)
         Me.lbl2ndRespVar.Name = "lbl2ndRespVar"
         Me.lbl2ndRespVar.Size = New System.Drawing.Size(116, 13)
         Me.lbl2ndRespVar.TabIndex = 9
@@ -123,7 +123,7 @@ Partial Class dlgBivariateANOVA
         'lblTreatmentFactor
         '
         Me.lblTreatmentFactor.AutoSize = True
-        Me.lblTreatmentFactor.Location = New System.Drawing.Point(262, 104)
+        Me.lblTreatmentFactor.Location = New System.Drawing.Point(259, 104)
         Me.lblTreatmentFactor.Name = "lblTreatmentFactor"
         Me.lblTreatmentFactor.Size = New System.Drawing.Size(85, 13)
         Me.lblTreatmentFactor.TabIndex = 10
@@ -133,7 +133,7 @@ Partial Class dlgBivariateANOVA
         'lblBlockingFactor
         '
         Me.lblBlockingFactor.AutoSize = True
-        Me.lblBlockingFactor.Location = New System.Drawing.Point(263, 151)
+        Me.lblBlockingFactor.Location = New System.Drawing.Point(260, 151)
         Me.lblBlockingFactor.Name = "lblBlockingFactor"
         Me.lblBlockingFactor.Size = New System.Drawing.Size(78, 13)
         Me.lblBlockingFactor.TabIndex = 11
