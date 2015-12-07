@@ -465,4 +465,15 @@ Public Class frmMain
     Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearRemoveToolStripMenuItem.Click
 
     End Sub
+
+    Private Sub FactorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles FactorToolStripMenuItem1.Click
+
+    End Sub
+
+    Private Sub AlignmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlignmentToolStripMenuItem.Click
+    End Sub
+
+    Private Sub LockUnlockToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LockUnlockToolStripMenuItem.Click
+        dlgLockUnclock.ShowDialog()
+    End Sub
 End Class
