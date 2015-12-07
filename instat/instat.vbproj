@@ -417,6 +417,12 @@
     <Compile Include="dlgMultipleRegression.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgNon-ParametricANOVA.Designer.vb">
+      <DependentUpon>dlgNon-ParametricANOVA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgNon-ParametricANOVA.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneSample.Designer.vb">
       <DependentUpon>dlgOneSample.vb</DependentUpon>
     </Compile>
@@ -1132,6 +1138,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMultipleRegression.sw-KE.resx">
       <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNon-ParametricANOVA.fr-FR.resx">
+      <DependentUpon>dlgNon-ParametricANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNon-ParametricANOVA.resx">
+      <DependentUpon>dlgNon-ParametricANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNon-ParametricANOVA.sw-KE.resx">
+      <DependentUpon>dlgNon-ParametricANOVA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneSample.fr-FR.resx">
       <DependentUpon>dlgOneSample.vb</DependentUpon>
