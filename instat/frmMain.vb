@@ -463,6 +463,53 @@ Public Class frmMain
     End Sub
 
     Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearRemoveToolStripMenuItem.Click
+        dlgDeleteColumns.ShowDialog()
+    End Sub
 
+    Private Sub DeleteRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteRowsToolStripMenuItem.Click
+        dlgDeleteRows.ShowDialog()
+    End Sub
+
+    Private Sub FactorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles FactorToolStripMenuItem1.Click
+        dlgfactor.ShowDialog()
+    End Sub
+
+    Private Sub IndicatorVariablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IndicatorVariablesToolStripMenuItem.Click
+        dlgIndicatorVariable.ShowDialog()
+    End Sub
+
+    Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectToolStripMenuItem.Click
+        dlgSelect.ShowDialog()
+    End Sub
+
+    Private Sub SelectSndStackToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectSndStackToolStripMenuItem.Click
+        dlgSelectAndStuck.ShowDialog()
+    End Sub
+
+    Private Sub ExpandToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExpandToolStripMenuItem.Click
+        dlgExpand.ShowDialog()
+    End Sub
+
+    Private Sub FactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FactorToolStripMenuItem.Click
+        dlgfactor.ShowDialog()
+    End Sub
+
+    Private Sub NameToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NameToolStripMenuItem.Click
+        dlgName.ShowDialog()
+    End Sub
+
+    Private Sub BivariateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BivariateToolStripMenuItem.Click
+        dlgBivariateANOVA.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuStatsNonParametricTwoWayAnova.Click
+        dlgTwoWayAnova.ShowDialog()
+    End Sub
+
+    Private Sub ProbabilityDistributionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbabilityDistributionsToolStripMenuItem.Click
+    End Sub
+
+    Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OnewayToolStripMenuItem.Click
+        dlgOneWayAnova.ShowDialog()
     End Sub
 End Class
