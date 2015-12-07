@@ -46,11 +46,11 @@ Public Class dlgTwoWayAnova
         strCounts = ucrReceiverCounts.GetVariables()
         strRowFactor = ucrReceiverRowFactor.GetVariables()
         strColumnFactor = ucrReceiverColumnFactor.GetVariables()
-        If ((Not IsNothing(strCounts)) Or ((Not IsNothing(strRowFactor)) Or ((Not IsNothing(strColumnFactor)) Then
+        If (Not IsNothing(strCounts)) Or (Not IsNothing(strRowFactor)) Or (Not IsNothing(strColumnFactor)) Then
             ucrBase.clsRsyntax.AddParameter("formula", strCounts & "~" & strRowFactor & "*" & strColumnFactor)
-            'ucrBase.OKEnabled(True) ToDo there needs to be a OKEnabled command in ucrButtons which enables and disables the 'OK' and 'to Script' buttons
+            ucrBase.OKEnabled(True)
         Else
-            'ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
