@@ -23,7 +23,7 @@ Partial Class dlgStemAndLeaf
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStemAndLeaf = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
@@ -34,12 +34,12 @@ Partial Class dlgStemAndLeaf
         Me.UcrAddRemove.Size = New System.Drawing.Size(186, 129)
         Me.UcrAddRemove.TabIndex = 0
         '
-        'UcrReceiverSingle1
+        'ucrReceiverStemAndLeaf
         '
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(245, 40)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReceiverSingle1.TabIndex = 1
+        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(245, 40)
+        Me.ucrReceiverStemAndLeaf.Name = "ucrReceiverStemAndLeaf"
+        Me.ucrReceiverStemAndLeaf.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverStemAndLeaf.TabIndex = 1
         '
         'ucrBase
         '
@@ -54,7 +54,7 @@ Partial Class dlgStemAndLeaf
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(443, 260)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
+        Me.Controls.Add(Me.ucrReceiverStemAndLeaf)
         Me.Controls.Add(Me.UcrAddRemove)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -67,6 +67,6 @@ Partial Class dlgStemAndLeaf
     End Sub
 
     Friend WithEvents UcrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
+    Friend WithEvents ucrReceiverStemAndLeaf As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
 End Class
