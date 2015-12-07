@@ -42,9 +42,9 @@ Public Class dlgNon_ParametricANOVA
         strFactor = ucrReceiverFactor.GetVariables()
         If ((Not IsNothing(strYVariate)) Or ((Not IsNothing(strFactor)))) Then
             ucrBase.clsRsyntax.AddParameter("formula", strYVariate & "~" & strFactor)
-            'ucrBase.OKEnabled(True) 
+            ucrBase.OKEnabled(True)
         Else
-            'ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(False)
 
         End If
     End Sub
