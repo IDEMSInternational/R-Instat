@@ -526,7 +526,16 @@ Public Class frmMain
         dlgBivariateANOVA.ShowDialog()
     End Sub
 
-    Private Sub SimpleWithGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SimpleWithGroupsToolStripMenuItem.Click
-
+    Private Sub GeneralLinearModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneralLinearModelToolStripMenuItem.Click
+        dlgGeneralisedLinearModels.ShowDialog()
     End Sub
+
+    Private Sub CorrelationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationToolStripMenuItem.Click
+        dlgCorrelations.ShowDialog()
+    End Sub
+
+    Private Sub LogLinearModelsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogLinearModelsToolStripMenuItem.Click
+        dlglogLinearModels.ShowDialog()
+    End Sub
+
 End Class
