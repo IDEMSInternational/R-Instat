@@ -21,7 +21,7 @@ Public Class RInterface
     ' R interface class. Each instance of the class has its own REngine instance
     Dim strClimateObjectPath As String = "C:\\ClimateObject\\R"
     Dim strClimateObject As String = "ClimateObject"
-    Dim strInstatObjectPath As String = "C:\\InstatObject\\R" 'path to the Instat object
+    Dim strInstatObjectPath As String = "static/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
     Dim clsEngine As REngine
     Dim txtOutput As New TextBox
