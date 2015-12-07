@@ -465,4 +465,8 @@ Public Class frmMain
     Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearRemoveToolStripMenuItem.Click
 
     End Sub
+
+    Private Sub OneAndTwoSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneAndTwoSamplesToolStripMenuItem.Click
+        dlgNon_ParametricOneandTwoSampletests.ShowDialog()
+    End Sub
 End Class
