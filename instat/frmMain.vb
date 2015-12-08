@@ -463,6 +463,90 @@ Public Class frmMain
     End Sub
 
     Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearRemoveToolStripMenuItem.Click
+        dlgDeleteColumns.ShowDialog()
+    End Sub
 
+    Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectToolStripMenuItem.Click
+        dlgSelect.ShowDialog()
+    End Sub
+
+    Private Sub SelectSndStackToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectSndStackToolStripMenuItem.Click
+        dlgSelectAndStuck.ShowDialog()
+    End Sub
+
+    Private Sub ExpandToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExpandToolStripMenuItem.Click
+        dlgExpand.ShowDialog()
+    End Sub
+
+    Private Sub FactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FactorToolStripMenuItem.Click
+        dlgfactor.ShowDialog()
+    End Sub
+
+    Private Sub NameToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NameToolStripMenuItem.Click
+        dlgName.ShowDialog()
+    End Sub
+
+    Private Sub FormatCtrlDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormatCtrlDToolStripMenuItem.Click
+        dlgFormat.ShowDialog()
+    End Sub
+
+    Private Sub AlignmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlignmentToolStripMenuItem.Click
+        dlgAlignment.ShowDialog()
+    End Sub
+
+    Private Sub IndicatorVariablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IndicatorVariablesToolStripMenuItem.Click
+        dlgIndicatorVariable.ShowDialog()
+    End Sub
+
+    Private Sub FactorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles FactorToolStripMenuItem1.Click
+        dlgfactor.ShowDialog()
+    End Sub
+
+    Private Sub DeleteRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteRowsToolStripMenuItem.Click
+        dlgDeleteRows.ShowDialog()
+    End Sub
+
+    Private Sub OrthogonalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OrthogonalToolStripMenuItem.Click
+        dlgOrthogonal.ShowDialog()
+    End Sub
+
+    Private Sub GeneralToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles GeneralToolStripMenuItem1.Click
+        dlgGeneral.ShowDialog()
+    End Sub
+
+    Private Sub BivariateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BivariateToolStripMenuItem.Click
+        dlgBivariateANOVA.ShowDialog()
+    End Sub
+
+    Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OnewayToolStripMenuItem.Click
+        dlgOneWayAnova.ShowDialog()
+    End Sub
+
+    Private Sub SimpleWithGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SimpleWithGroupsToolStripMenuItem.Click
+        dlgSimpleWithGroups.ShowDialog()
+    End Sub
+
+    Private Sub GeneralLinearModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneralLinearModelToolStripMenuItem.Click
+        dlgGeneralisedLinearModels.ShowDialog()
+    End Sub
+
+    Private Sub CorrelationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationToolStripMenuItem.Click
+        dlgCorrelations.ShowDialog()
+    End Sub
+
+    Private Sub LogLinearModelsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogLinearModelsToolStripMenuItem.Click
+        dlglogLinearModels.ShowDialog()
+    End Sub
+
+    Private Sub OneAndTwoSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneAndTwoSamplesToolStripMenuItem.Click
+        dlgNon_ParemetricOneandTwoSampleTests.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuStatsNonParametricTwoWayAnova.Click
+        dlgTwoWayAnova.ShowDialog()
+    End Sub
+
+    Private Sub CorrelationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationsToolStripMenuItem.Click
+        dlgCorrelations.ShowDialog()
     End Sub
 End Class
