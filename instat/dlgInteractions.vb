@@ -38,14 +38,11 @@ Imports instat.Translations
 
 Public Class dlgInteractions
     ''' <summary>
-    ''' Handles the KeyUp event of the dlgInteractions control.
+    ''' Handles the Load event of the dlgInteractions control.
     ''' </summary>
     ''' <param name="sender">The source of the event.</param>
     ''' <param name="e">The <see cref="KeyEventArgs"/> instance containing the event data.</param>
-    ''' <code>
-    ''' autoTranslate(me) handles the multilingual capabilities for the dialogue.
-    ''' </code>
-    Private Sub dlgInteractions_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
+    Private Sub dlgInteractions_Load(sender As Object, e As KeyEventArgs) Handles Me.Load
         autoTranslate(Me)
     End Sub
 
