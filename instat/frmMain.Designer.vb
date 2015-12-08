@@ -26,7 +26,6 @@ Partial Class frmMain
         Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
         Me.PoissonOneSampleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.GammaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExtremaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChisquareTestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -88,7 +87,6 @@ Partial Class frmMain
         Me.KaplanMeirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogRankToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ProbabilityDistributionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SampleSizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExamineToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -244,6 +242,7 @@ Partial Class frmMain
         Me.mnuManageManipulateRowStat = New System.Windows.Forms.ToolStripMenuItem()
         Me.InteractionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IndicatorVariablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PolynomialsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReshapeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StacksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UnstackToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -300,7 +299,7 @@ Partial Class frmMain
         Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PolynomialsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProbabilityDistributionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -309,53 +308,48 @@ Partial Class frmMain
         'ToolStripSeparator12
         '
         Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
-        Me.ToolStripSeparator12.Size = New System.Drawing.Size(207, 6)
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(176, 6)
         '
         'PoissonOneSampleToolStripMenuItem
         '
         Me.PoissonOneSampleToolStripMenuItem.Name = "PoissonOneSampleToolStripMenuItem"
-        Me.PoissonOneSampleToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.PoissonOneSampleToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.PoissonOneSampleToolStripMenuItem.Text = "Two samples"
         '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(163, 6)
-        '
-        'ToolStripSeparator10
-        '
-        Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(163, 6)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(198, 6)
         '
         'GammaToolStripMenuItem
         '
         Me.GammaToolStripMenuItem.Name = "GammaToolStripMenuItem"
-        Me.GammaToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.GammaToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.GammaToolStripMenuItem.Text = "Gamma..."
         '
         'ExtremaToolStripMenuItem
         '
         Me.ExtremaToolStripMenuItem.Name = "ExtremaToolStripMenuItem"
-        Me.ExtremaToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.ExtremaToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.ExtremaToolStripMenuItem.Text = "Extrema.."
         '
         'ChisquareTestToolStripMenuItem
         '
         Me.ChisquareTestToolStripMenuItem.Name = "ChisquareTestToolStripMenuItem"
-        Me.ChisquareTestToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.ChisquareTestToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.ChisquareTestToolStripMenuItem.Text = "Chi-square Test..."
         '
         'GoodnessOfFitToolStripMenuItem
         '
         Me.GoodnessOfFitToolStripMenuItem.Name = "GoodnessOfFitToolStripMenuItem"
-        Me.GoodnessOfFitToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.GoodnessOfFitToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.GoodnessOfFitToolStripMenuItem.Text = "Goodness of Fit..."
         '
         'AnalysisOfVarianceToolStripMenuItem
         '
         Me.AnalysisOfVarianceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OnewayToolStripMenuItem, Me.OrthogonalToolStripMenuItem, Me.GeneralToolStripMenuItem1, Me.BivariateToolStripMenuItem})
         Me.AnalysisOfVarianceToolStripMenuItem.Name = "AnalysisOfVarianceToolStripMenuItem"
-        Me.AnalysisOfVarianceToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.AnalysisOfVarianceToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.AnalysisOfVarianceToolStripMenuItem.Tag = "Analysis_of_Variance"
         Me.AnalysisOfVarianceToolStripMenuItem.Text = "Analysis of Variance"
         '
@@ -387,7 +381,7 @@ Partial Class frmMain
         '
         Me.RegressionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatsRegressionSimple, Me.SimpleWithGroupsToolStripMenuItem, Me.mnuStatisticsRegressionMultiple, Me.GeneralLinearModelToolStripMenuItem, Me.ToolStripSeparator11, Me.CorrelationToolStripMenuItem, Me.LogLinearModelsToolStripMenuItem})
         Me.RegressionToolStripMenuItem.Name = "RegressionToolStripMenuItem"
-        Me.RegressionToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.RegressionToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.RegressionToolStripMenuItem.Tag = "Regression"
         Me.RegressionToolStripMenuItem.Text = "Regression"
         '
@@ -434,23 +428,23 @@ Partial Class frmMain
         '
         'SimpleModelsToolStripMenuItem
         '
-        Me.SimpleModelsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OneSampleToolStripMenuItem, Me.PoissonOneSampleToolStripMenuItem, Me.ToolStripSeparator9, Me.ToolStripSeparator10, Me.GammaToolStripMenuItem, Me.ExtremaToolStripMenuItem, Me.ChisquareTestToolStripMenuItem, Me.GoodnessOfFitToolStripMenuItem})
+        Me.SimpleModelsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OneSampleToolStripMenuItem, Me.PoissonOneSampleToolStripMenuItem, Me.ToolStripSeparator9, Me.GammaToolStripMenuItem, Me.ExtremaToolStripMenuItem, Me.ChisquareTestToolStripMenuItem, Me.GoodnessOfFitToolStripMenuItem, Me.ProbabilityDistributionsToolStripMenuItem})
         Me.SimpleModelsToolStripMenuItem.Name = "SimpleModelsToolStripMenuItem"
-        Me.SimpleModelsToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.SimpleModelsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.SimpleModelsToolStripMenuItem.Tag = "Simple_Models"
         Me.SimpleModelsToolStripMenuItem.Text = "Simple Models"
         '
         'OneSampleToolStripMenuItem
         '
         Me.OneSampleToolStripMenuItem.Name = "OneSampleToolStripMenuItem"
-        Me.OneSampleToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.OneSampleToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.OneSampleToolStripMenuItem.Text = "One Sample..."
         '
         'NonParametricToolStripMenuItem
         '
         Me.NonParametricToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OneAndTwoSamplesToolStripMenuItem, Me.mnuStatsNonParametricOneWayAnova, Me.mnuStatsNonParametricTwoWayAnova})
         Me.NonParametricToolStripMenuItem.Name = "NonParametricToolStripMenuItem"
-        Me.NonParametricToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.NonParametricToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.NonParametricToolStripMenuItem.Tag = "Non_Parametric"
         Me.NonParametricToolStripMenuItem.Text = "Non-Parametric"
         '
@@ -475,7 +469,7 @@ Partial Class frmMain
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(207, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(176, 6)
         '
         'ResizeWorksheetToolStripMenuItem
         '
@@ -577,7 +571,7 @@ Partial Class frmMain
         '
         'StatisticsToolStripMenuItem
         '
-        Me.StatisticsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SummaryToolStripMenuItem, Me.TablesToolStripMenuItem, Me.ToolStripSeparator8, Me.SimpleModelsToolStripMenuItem, Me.AnalysisOfVarianceToolStripMenuItem, Me.RegressionToolStripMenuItem, Me.ToolStripSeparator12, Me.NonParametricToolStripMenuItem, Me.ToolStripSeparator13, Me.TimeSeriesToolStripMenuItem, Me.SurvivalToolStripMenuItem, Me.ToolStripSeparator14, Me.ProbabilityDistributionsToolStripMenuItem, Me.SampleSizeToolStripMenuItem})
+        Me.StatisticsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SummaryToolStripMenuItem, Me.TablesToolStripMenuItem, Me.ToolStripSeparator8, Me.SimpleModelsToolStripMenuItem, Me.AnalysisOfVarianceToolStripMenuItem, Me.RegressionToolStripMenuItem, Me.ToolStripSeparator12, Me.NonParametricToolStripMenuItem, Me.ToolStripSeparator13, Me.TimeSeriesToolStripMenuItem, Me.SurvivalToolStripMenuItem, Me.ToolStripSeparator14, Me.SampleSizeToolStripMenuItem})
         Me.StatisticsToolStripMenuItem.Name = "StatisticsToolStripMenuItem"
         Me.StatisticsToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.StatisticsToolStripMenuItem.Tag = "Statistics"
@@ -587,7 +581,7 @@ Partial Class frmMain
         '
         Me.SummaryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DescribeToolStripMenuItem, Me.mnuStatsSummaryColumnStat, Me.CheckDuplicatesToolStripMenuItem, Me.GroupToolStripMenuItem, Me.ToolStripSeparator7, Me.DiversityToolStripMenuItem, Me.CircularStatisticsToolStripMenuItem})
         Me.SummaryToolStripMenuItem.Name = "SummaryToolStripMenuItem"
-        Me.SummaryToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.SummaryToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.SummaryToolStripMenuItem.Tag = "Summary"
         Me.SummaryToolStripMenuItem.Text = "Summary"
         '
@@ -642,7 +636,7 @@ Partial Class frmMain
         '
         Me.TablesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FrequencyToolStripMenuItem, Me.SummaryToolStripMenuItem1, Me.GeneralToolStripMenuItem, Me.MultipleResponseToolStripMenuItem, Me.LoadTableToolStripMenuItem})
         Me.TablesToolStripMenuItem.Name = "TablesToolStripMenuItem"
-        Me.TablesToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.TablesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.TablesToolStripMenuItem.Tag = "Tables"
         Me.TablesToolStripMenuItem.Text = "Tables"
         '
@@ -679,13 +673,13 @@ Partial Class frmMain
         'ToolStripSeparator13
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(207, 6)
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(176, 6)
         '
         'TimeSeriesToolStripMenuItem
         '
         Me.TimeSeriesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MovingAveragesToolStripMenuItem, Me.CorrelationsToolStripMenuItem})
         Me.TimeSeriesToolStripMenuItem.Name = "TimeSeriesToolStripMenuItem"
-        Me.TimeSeriesToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.TimeSeriesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.TimeSeriesToolStripMenuItem.Tag = "Time_Series"
         Me.TimeSeriesToolStripMenuItem.Text = "Time Series"
         '
@@ -705,7 +699,7 @@ Partial Class frmMain
         '
         Me.SurvivalToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KaplanMeirToolStripMenuItem, Me.LogRankToolStripMenuItem})
         Me.SurvivalToolStripMenuItem.Name = "SurvivalToolStripMenuItem"
-        Me.SurvivalToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.SurvivalToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.SurvivalToolStripMenuItem.Tag = "Survival"
         Me.SurvivalToolStripMenuItem.Text = "Survival"
         '
@@ -724,19 +718,12 @@ Partial Class frmMain
         'ToolStripSeparator14
         '
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
-        Me.ToolStripSeparator14.Size = New System.Drawing.Size(207, 6)
-        '
-        'ProbabilityDistributionsToolStripMenuItem
-        '
-        Me.ProbabilityDistributionsToolStripMenuItem.Name = "ProbabilityDistributionsToolStripMenuItem"
-        Me.ProbabilityDistributionsToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
-        Me.ProbabilityDistributionsToolStripMenuItem.Tag = "Probability_Distributions"
-        Me.ProbabilityDistributionsToolStripMenuItem.Text = "Probability Distributions..."
+        Me.ToolStripSeparator14.Size = New System.Drawing.Size(176, 6)
         '
         'SampleSizeToolStripMenuItem
         '
         Me.SampleSizeToolStripMenuItem.Name = "SampleSizeToolStripMenuItem"
-        Me.SampleSizeToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.SampleSizeToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.SampleSizeToolStripMenuItem.Tag = "Sample_Size"
         Me.SampleSizeToolStripMenuItem.Text = "Sample Size..."
         '
@@ -1846,6 +1833,12 @@ Partial Class frmMain
         Me.IndicatorVariablesToolStripMenuItem.Tag = "Indicator_Variables"
         Me.IndicatorVariablesToolStripMenuItem.Text = "Indicator Variables..."
         '
+        'PolynomialsToolStripMenuItem
+        '
+        Me.PolynomialsToolStripMenuItem.Name = "PolynomialsToolStripMenuItem"
+        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PolynomialsToolStripMenuItem.Text = "Polynomials"
+        '
         'ReshapeToolStripMenuItem
         '
         Me.ReshapeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StacksToolStripMenuItem, Me.UnstackToolStripMenuItem, Me.SelectToolStripMenuItem, Me.SelectSndStackToolStripMenuItem, Me.ExpandToolStripMenuItem})
@@ -2199,11 +2192,11 @@ Partial Class frmMain
         Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
         Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
         '
-        'PolynomialsToolStripMenuItem
+        'ProbabilityDistributionsToolStripMenuItem
         '
-        Me.PolynomialsToolStripMenuItem.Name = "PolynomialsToolStripMenuItem"
-        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.PolynomialsToolStripMenuItem.Text = "Polynomials"
+        Me.ProbabilityDistributionsToolStripMenuItem.Name = "ProbabilityDistributionsToolStripMenuItem"
+        Me.ProbabilityDistributionsToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.ProbabilityDistributionsToolStripMenuItem.Text = "Probability Distributions"
         '
         'frmMain
         '
@@ -2232,7 +2225,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator12 As ToolStripSeparator
     Friend WithEvents PoissonOneSampleToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
-    Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
     Friend WithEvents GammaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExtremaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ChisquareTestToolStripMenuItem As ToolStripMenuItem
@@ -2292,7 +2284,6 @@ Partial Class frmMain
     Friend WithEvents KaplanMeirToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LogRankToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator14 As ToolStripSeparator
-    Friend WithEvents ProbabilityDistributionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SampleSizeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents WaterBalanceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExamineToolStripMenuItem As ToolStripMenuItem
@@ -2507,4 +2498,5 @@ Partial Class frmMain
     Friend WithEvents DeleteRowsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FactorToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents PolynomialsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ProbabilityDistributionsToolStripMenuItem As ToolStripMenuItem
 End Class
