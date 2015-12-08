@@ -38,8 +38,11 @@ Partial Class dlgNewWorksheet
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(428, 303)
         Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgNewWorksheet"
-        Me.Text = "dlgNewWorksheet"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "New_Worksheet"
+        Me.Text = "New Worksheet"
         Me.ResumeLayout(False)
 
     End Sub
