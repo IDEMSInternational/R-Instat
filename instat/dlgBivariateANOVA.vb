@@ -41,7 +41,7 @@ Public Class dlgBivariateANOVA
 
     End Sub
 
-    Private Sub ucrReceiverBlockingFactor_Load(sender As Object, e As EventArgs) Handles ucrReceiverBlockingFactor.Load
+    Private Sub ucrReceiverBlockingFactor_Load(sender As Object, e As EventArgs) Handles ucrReceiverBlockingFactor.Leave
         FillFormula()
     End Sub
     Private Sub FillFormula()
