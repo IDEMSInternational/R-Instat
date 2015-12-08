@@ -23,25 +23,26 @@ Partial Class dlgHistogram
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrSingleReceiver = New instat.ucrReceiverSingle()
+        Me.ucrXReceiver = New instat.ucrReceiverSingle()
         Me.UcrBase = New instat.ucrButtons()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.txtHistogramTitle = New System.Windows.Forms.TextBox()
+        Me.lblVariabletoPlot = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrAddRemove
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(12, 12)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(186, 129)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(211, 129)
         Me.ucrAddRemove.TabIndex = 1
         '
-        'ucrSingleReceiver
+        'ucrXReceiver
         '
-        Me.ucrSingleReceiver.Location = New System.Drawing.Point(204, 33)
-        Me.ucrSingleReceiver.Name = "ucrSingleReceiver"
-        Me.ucrSingleReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrSingleReceiver.TabIndex = 2
+        Me.ucrXReceiver.Location = New System.Drawing.Point(229, 33)
+        Me.ucrXReceiver.Name = "ucrXReceiver"
+        Me.ucrXReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrXReceiver.TabIndex = 2
         '
         'UcrBase
         '
@@ -53,7 +54,7 @@ Partial Class dlgHistogram
         'lblTitle
         '
         Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(205, 66)
+        Me.lblTitle.Location = New System.Drawing.Point(230, 66)
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(107, 13)
         Me.lblTitle.TabIndex = 4
@@ -62,20 +63,31 @@ Partial Class dlgHistogram
         '
         'txtHistogramTitle
         '
-        Me.txtHistogramTitle.Location = New System.Drawing.Point(208, 82)
+        Me.txtHistogramTitle.Location = New System.Drawing.Point(233, 82)
         Me.txtHistogramTitle.Name = "txtHistogramTitle"
         Me.txtHistogramTitle.Size = New System.Drawing.Size(100, 20)
         Me.txtHistogramTitle.TabIndex = 5
+        '
+        'lblVariabletoPlot
+        '
+        Me.lblVariabletoPlot.AutoSize = True
+        Me.lblVariabletoPlot.Location = New System.Drawing.Point(233, 14)
+        Me.lblVariabletoPlot.Name = "lblVariabletoPlot"
+        Me.lblVariabletoPlot.Size = New System.Drawing.Size(78, 13)
+        Me.lblVariabletoPlot.TabIndex = 6
+        Me.lblVariabletoPlot.Tag = "Variable_to_Plot"
+        Me.lblVariabletoPlot.Text = "Variable to Plot"
         '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(422, 188)
+        Me.Controls.Add(Me.lblVariabletoPlot)
         Me.Controls.Add(Me.txtHistogramTitle)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.UcrBase)
-        Me.Controls.Add(Me.ucrSingleReceiver)
+        Me.Controls.Add(Me.ucrXReceiver)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgHistogram"
@@ -87,8 +99,9 @@ Partial Class dlgHistogram
 
     End Sub
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents ucrSingleReceiver As ucrReceiverSingle
+    Friend WithEvents ucrXReceiver As ucrReceiverSingle
     Friend WithEvents UcrBase As ucrButtons
     Friend WithEvents lblTitle As Label
     Friend WithEvents txtHistogramTitle As TextBox
+    Friend WithEvents lblVariabletoPlot As Label
 End Class
