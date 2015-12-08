@@ -1,5 +1,4 @@
-﻿
-' Instat-R
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -14,10 +13,18 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
-Public Class dlgIndicatorVariable
-    Private Sub dlgIndicatorVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+Public Class dlgMovingAverage
+    Private Sub dlgMovingAverage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrBase.clsRsyntax.SetFunction("ma")
+        ucrBase.clsRsyntax.iCallType = 1
         autoTranslate(Me)
+        ucrReceiverDataToAverage.Selector = ucrAddRemove
+        ucrReceiverDataToAverage.SetMeAsReceiver()
+    End Sub
+
+    Private Sub ucrReceiverDataToAverage_Leave(sender As Object, e As EventArgs) Handles ucrReceiverDataToAverage.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverDataToAverage.GetVariables())
     End Sub
 End Class

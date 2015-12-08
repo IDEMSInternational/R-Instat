@@ -1,5 +1,4 @@
-﻿
-' Instat-R
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -16,8 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgIndicatorVariable
-    Private Sub dlgIndicatorVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class dlgSimpleWithGroups
+    Private Sub dlgSimpleWithGroups_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 End Class
