@@ -16,8 +16,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgIndicatorVariable
-    Private Sub dlgIndicatorVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class dlgNon_ParemetricOneandTwoSampleTests
+    Private Sub dlgNon_ParemetricOneandTwoSampleTests_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 End Class
