@@ -23,14 +23,14 @@ Partial Class dlgChangeType
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
-        Me.ucrSelectorAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrChangetypeReceiver = New instat.ucrReceiverSingle()
+        Me.ucrChangeTypeSelector = New instat.ucrSelectorAddRemove()
         Me.lblVariable = New System.Windows.Forms.Label()
         Me.grpColumnType = New System.Windows.Forms.GroupBox()
-        Me.rdoVariate = New System.Windows.Forms.RadioButton()
-        Me.rdoText = New System.Windows.Forms.RadioButton()
-        Me.rdoFactor = New System.Windows.Forms.RadioButton()
         Me.rdoUnitsVector = New System.Windows.Forms.RadioButton()
+        Me.rdoFactor = New System.Windows.Forms.RadioButton()
+        Me.rdoText = New System.Windows.Forms.RadioButton()
+        Me.rdoVariate = New System.Windows.Forms.RadioButton()
         Me.chkReadTextAsDateValues = New System.Windows.Forms.CheckBox()
         Me.btnDateFormat = New System.Windows.Forms.Button()
         Me.lblReadTextAsDateValues = New System.Windows.Forms.Label()
@@ -44,24 +44,24 @@ Partial Class dlgChangeType
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrReceiverSingle
+        'ucrChangetypeReceiver
         '
-        Me.ucrReceiverSingle.Location = New System.Drawing.Point(200, 34)
-        Me.ucrReceiverSingle.Name = "ucrReceiverSingle"
-        Me.ucrReceiverSingle.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverSingle.TabIndex = 1
+        Me.ucrChangetypeReceiver.Location = New System.Drawing.Point(227, 34)
+        Me.ucrChangetypeReceiver.Name = "ucrChangetypeReceiver"
+        Me.ucrChangetypeReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrChangetypeReceiver.TabIndex = 1
         '
-        'ucrSelectorAddRemove
+        'ucrChangeTypeSelector
         '
-        Me.ucrSelectorAddRemove.Location = New System.Drawing.Point(12, 12)
-        Me.ucrSelectorAddRemove.Name = "ucrSelectorAddRemove"
-        Me.ucrSelectorAddRemove.Size = New System.Drawing.Size(182, 118)
-        Me.ucrSelectorAddRemove.TabIndex = 2
+        Me.ucrChangeTypeSelector.Location = New System.Drawing.Point(12, 12)
+        Me.ucrChangeTypeSelector.Name = "ucrChangeTypeSelector"
+        Me.ucrChangeTypeSelector.Size = New System.Drawing.Size(209, 136)
+        Me.ucrChangeTypeSelector.TabIndex = 2
         '
         'lblVariable
         '
         Me.lblVariable.AutoSize = True
-        Me.lblVariable.Location = New System.Drawing.Point(234, 18)
+        Me.lblVariable.Location = New System.Drawing.Point(261, 18)
         Me.lblVariable.Name = "lblVariable"
         Me.lblVariable.Size = New System.Drawing.Size(45, 13)
         Me.lblVariable.TabIndex = 3
@@ -74,7 +74,7 @@ Partial Class dlgChangeType
         Me.grpColumnType.Controls.Add(Me.rdoFactor)
         Me.grpColumnType.Controls.Add(Me.rdoText)
         Me.grpColumnType.Controls.Add(Me.rdoVariate)
-        Me.grpColumnType.Location = New System.Drawing.Point(200, 66)
+        Me.grpColumnType.Location = New System.Drawing.Point(217, 66)
         Me.grpColumnType.Name = "grpColumnType"
         Me.grpColumnType.Size = New System.Drawing.Size(200, 119)
         Me.grpColumnType.TabIndex = 4
@@ -82,29 +82,17 @@ Partial Class dlgChangeType
         Me.grpColumnType.Tag = "Column_Type"
         Me.grpColumnType.Text = "Column type"
         '
-        'rdoVariate
+        'rdoUnitsVector
         '
-        Me.rdoVariate.AutoSize = True
-        Me.rdoVariate.Location = New System.Drawing.Point(6, 19)
-        Me.rdoVariate.Name = "rdoVariate"
-        Me.rdoVariate.Size = New System.Drawing.Size(58, 17)
-        Me.rdoVariate.TabIndex = 0
-        Me.rdoVariate.TabStop = True
-        Me.rdoVariate.Tag = "Variate"
-        Me.rdoVariate.Text = "Variate"
-        Me.rdoVariate.UseVisualStyleBackColor = True
-        '
-        'rdoText
-        '
-        Me.rdoText.AutoSize = True
-        Me.rdoText.Location = New System.Drawing.Point(6, 42)
-        Me.rdoText.Name = "rdoText"
-        Me.rdoText.Size = New System.Drawing.Size(46, 17)
-        Me.rdoText.TabIndex = 0
-        Me.rdoText.TabStop = True
-        Me.rdoText.Tag = "Text"
-        Me.rdoText.Text = "Text"
-        Me.rdoText.UseVisualStyleBackColor = True
+        Me.rdoUnitsVector.AutoSize = True
+        Me.rdoUnitsVector.Location = New System.Drawing.Point(6, 88)
+        Me.rdoUnitsVector.Name = "rdoUnitsVector"
+        Me.rdoUnitsVector.Size = New System.Drawing.Size(83, 17)
+        Me.rdoUnitsVector.TabIndex = 0
+        Me.rdoUnitsVector.TabStop = True
+        Me.rdoUnitsVector.Tag = "Units_Vector"
+        Me.rdoUnitsVector.Text = "Units Vector"
+        Me.rdoUnitsVector.UseVisualStyleBackColor = True
         '
         'rdoFactor
         '
@@ -118,17 +106,29 @@ Partial Class dlgChangeType
         Me.rdoFactor.Text = "Factor"
         Me.rdoFactor.UseVisualStyleBackColor = True
         '
-        'rdoUnitsVector
+        'rdoText
         '
-        Me.rdoUnitsVector.AutoSize = True
-        Me.rdoUnitsVector.Location = New System.Drawing.Point(6, 88)
-        Me.rdoUnitsVector.Name = "rdoUnitsVector"
-        Me.rdoUnitsVector.Size = New System.Drawing.Size(83, 17)
-        Me.rdoUnitsVector.TabIndex = 0
-        Me.rdoUnitsVector.TabStop = True
-        Me.rdoUnitsVector.Tag = "Units_Vector"
-        Me.rdoUnitsVector.Text = "Units Vector"
-        Me.rdoUnitsVector.UseVisualStyleBackColor = True
+        Me.rdoText.AutoSize = True
+        Me.rdoText.Location = New System.Drawing.Point(6, 42)
+        Me.rdoText.Name = "rdoText"
+        Me.rdoText.Size = New System.Drawing.Size(46, 17)
+        Me.rdoText.TabIndex = 0
+        Me.rdoText.TabStop = True
+        Me.rdoText.Tag = "Text"
+        Me.rdoText.Text = "Text"
+        Me.rdoText.UseVisualStyleBackColor = True
+        '
+        'rdoVariate
+        '
+        Me.rdoVariate.AutoSize = True
+        Me.rdoVariate.Location = New System.Drawing.Point(6, 19)
+        Me.rdoVariate.Name = "rdoVariate"
+        Me.rdoVariate.Size = New System.Drawing.Size(58, 17)
+        Me.rdoVariate.TabIndex = 0
+        Me.rdoVariate.TabStop = True
+        Me.rdoVariate.Tag = "Variate"
+        Me.rdoVariate.Text = "Variate"
+        Me.rdoVariate.UseVisualStyleBackColor = True
         '
         'chkReadTextAsDateValues
         '
@@ -169,8 +169,8 @@ Partial Class dlgChangeType
         Me.Controls.Add(Me.chkReadTextAsDateValues)
         Me.Controls.Add(Me.grpColumnType)
         Me.Controls.Add(Me.lblVariable)
-        Me.Controls.Add(Me.ucrSelectorAddRemove)
-        Me.Controls.Add(Me.ucrReceiverSingle)
+        Me.Controls.Add(Me.ucrChangeTypeSelector)
+        Me.Controls.Add(Me.ucrChangetypeReceiver)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgChangeType"
@@ -185,8 +185,8 @@ Partial Class dlgChangeType
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
-    Friend WithEvents ucrSelectorAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrChangetypeReceiver As ucrReceiverSingle
+    Friend WithEvents ucrChangeTypeSelector As ucrSelectorAddRemove
     Friend WithEvents lblVariable As Label
     Friend WithEvents grpColumnType As GroupBox
     Friend WithEvents rdoUnitsVector As RadioButton
