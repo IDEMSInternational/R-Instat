@@ -465,4 +465,8 @@ Public Class frmMain
     Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearRemoveToolStripMenuItem.Click
 
     End Sub
+
+    Private Sub mnuEditOutputSpoolingStart_Click(sender As Object, e As EventArgs) Handles mnuEditOutputSpoolingStart.Click
+        dlgStartSpoolingOutPutToFile.ShowDialog()
+    End Sub
 End Class
