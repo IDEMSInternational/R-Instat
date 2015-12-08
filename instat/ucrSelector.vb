@@ -30,4 +30,9 @@ Public Class ucrSelector
     Public Sub Remove()
         CurrentReceiver.RemoveSelected()
     End Sub
+
+    Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.DoubleClick
+        CurrentReceiver.AddSelected()
+        CurrentReceiver.Focus()
+    End Sub
 End Class
