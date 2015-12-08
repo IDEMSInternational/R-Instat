@@ -32,7 +32,6 @@ Public Class ucrSelector
     End Sub
 
     Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.DoubleClick
-        CurrentReceiver.AddSelected()
-        CurrentReceiver.Focus()
+        Add()
     End Sub
 End Class
