@@ -1,33 +1,27 @@
-﻿Public Class dlgDescriptiveStatistics
+﻿' Instat-R
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License k
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-    Private Sub UcrButtons1_clickOk(sender As Object, e As EventArgs) Handles UcrButtons1.ClickOk
-        Dim strScript As String
-        Dim temp
-        Dim bFirst As Boolean
-
-        bFirst = True
-        If UcrDataSelection1.lstSelectedVariables.Items.Count > 0 Then
-            strScript = "summary(data[c("
-            For Each temp In UcrDataSelection1.lstSelectedVariables.Items
-                If bFirst Then
-                    bFirst = False
-                Else
-                    strScript = strScript & ","
-                End If
-                strScript = strScript & Chr(34) & temp.ToString & Chr(34)
-            Next
-            strScript = strScript & ")])"
-            frmMain.clsRInterface.RunScript(strScript)
-        End If
-
-    End Sub
-
-    Private Sub UcrButtons1_Load(sender As Object, e As EventArgs) Handles UcrButtons1.Load
-
-
-    End Sub
-
+Imports instat.Translations
+Public Class dlgDescriptiveStatistics
     Private Sub dlgDescriptiveStatistics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrObjectReceiver.Selector = ucrDataSelector
+        ucrObjectReceiver.SetMeAsReceiver()
+        ucrBase.clsRsyntax.SetFunction("summary")
+        ucrBase.clsRsyntax.iCallType = 2
+        autoTranslate(Me)
         grpgraphics.Visible = False
     End Sub
 
@@ -40,7 +34,11 @@
         End If
     End Sub
 
-    Private Sub UcrDataSelection1_Load(sender As Object, e As EventArgs) Handles UcrDataSelection1.Load
-
+    Private Sub ucrObjectReceiver_Leave(sender As Object, e As EventArgs) Handles ucrObjectReceiver.Leave
+        ucrBase.clsRsyntax.AddParameter("object", ucrObjectReceiver.GetVariables())
     End Sub
 End Class
+
+
+
+
