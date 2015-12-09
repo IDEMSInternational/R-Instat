@@ -23,28 +23,92 @@ Partial Class dlgFormat
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lstRequiredFormat = New System.Windows.Forms.ListBox()
+        Me.lblRequiredFormat = New System.Windows.Forms.Label()
+        Me.ucrMultiple = New instat.ucrReceiverMultiple()
+        Me.lblSelectedColumns = New System.Windows.Forms.Label()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(4, 231)
+        Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.ucrBase.Location = New System.Drawing.Point(0, 159)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(438, 32)
         Me.ucrBase.TabIndex = 0
+        '
+        'lstRequiredFormat
+        '
+        Me.lstRequiredFormat.FormattingEnabled = True
+        Me.lstRequiredFormat.Items.AddRange(New Object() {"""0"".000E+", "0.0", "0.00", "0.000", "0.0000", "1 sig fig", "2 sig figs", "3 sig figs", "4 sig figs", "Day of year", "Fixed", "General Date", "General Number", "Long Date", "Medium Date", "Percentage", "Scientific", "Short Date", "Standard", "True/False", "Yes/No"})
+        Me.lstRequiredFormat.Location = New System.Drawing.Point(334, 22)
+        Me.lstRequiredFormat.Name = "lstRequiredFormat"
+        Me.lstRequiredFormat.ScrollAlwaysVisible = True
+        Me.lstRequiredFormat.Size = New System.Drawing.Size(97, 121)
+        Me.lstRequiredFormat.Sorted = True
+        Me.lstRequiredFormat.TabIndex = 1
+        '
+        'lblRequiredFormat
+        '
+        Me.lblRequiredFormat.AutoSize = True
+        Me.lblRequiredFormat.Location = New System.Drawing.Point(329, 4)
+        Me.lblRequiredFormat.Name = "lblRequiredFormat"
+        Me.lblRequiredFormat.Size = New System.Drawing.Size(85, 13)
+        Me.lblRequiredFormat.TabIndex = 2
+        Me.lblRequiredFormat.Tag = "Required_Format"
+        Me.lblRequiredFormat.Text = "Required Format"
+        '
+        'ucrMultiple
+        '
+        Me.ucrMultiple.Location = New System.Drawing.Point(208, 19)
+        Me.ucrMultiple.Name = "ucrMultiple"
+        Me.ucrMultiple.Size = New System.Drawing.Size(121, 131)
+        Me.ucrMultiple.TabIndex = 3
+        '
+        'lblSelectedColumns
+        '
+        Me.lblSelectedColumns.AutoSize = True
+        Me.lblSelectedColumns.Location = New System.Drawing.Point(205, 3)
+        Me.lblSelectedColumns.Name = "lblSelectedColumns"
+        Me.lblSelectedColumns.Size = New System.Drawing.Size(124, 13)
+        Me.lblSelectedColumns.TabIndex = 4
+        Me.lblSelectedColumns.Tag = "Selected_Columns"
+        Me.lblSelectedColumns.Text = "Columns to be formatted "
+        '
+        'ucrAddRemove
+        '
+        Me.ucrAddRemove.Dock = System.Windows.Forms.DockStyle.Left
+        Me.ucrAddRemove.Location = New System.Drawing.Point(0, 0)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(205, 159)
+        Me.ucrAddRemove.TabIndex = 5
         '
         'dlgFormat
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(406, 261)
+        Me.ClientSize = New System.Drawing.Size(438, 191)
+        Me.Controls.Add(Me.ucrAddRemove)
+        Me.Controls.Add(Me.lblSelectedColumns)
+        Me.Controls.Add(Me.ucrMultiple)
+        Me.Controls.Add(Me.lblRequiredFormat)
+        Me.Controls.Add(Me.lstRequiredFormat)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgFormat"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "dlgFormat"
+        Me.Tag = "Format_Data"
+        Me.Text = "Format Data"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents lstRequiredFormat As ListBox
+    Friend WithEvents lblRequiredFormat As Label
+    Friend WithEvents ucrMultiple As ucrReceiverMultiple
+    Friend WithEvents lblSelectedColumns As Label
+    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
 End Class
