@@ -14,7 +14,7 @@
 Imports instat.Translations
 
 Public Class dlgInteractions
-    Private Sub dlgInteractions_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
+    Private Sub dlgInteractions_Load(sender As Object, e As KeyEventArgs) Handles Me.Load
         autoTranslate(Me)
         defaultSettings()
     End Sub
