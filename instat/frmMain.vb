@@ -347,7 +347,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) Handles mnuStatsNonParametricOneWayAnova.Click
-        dlgOneWayAnova.ShowDialog()
+        'dlgOneWayAnova.ShowDialog()
     End Sub
 
     Private Sub mnuStatsNonParametricTwoWayAnova_Click(sender As Object, e As EventArgs)
@@ -519,7 +519,7 @@ Public Class frmMain
     End Sub
 
     Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OnewayToolStripMenuItem.Click
-        dlgOneWayAnova.ShowDialog()
+        'dlgOneWayAnova.ShowDialog()
     End Sub
 
     Private Sub SimpleWithGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SimpleWithGroupsToolStripMenuItem.Click
@@ -664,5 +664,31 @@ Public Class frmMain
 
     Private Sub PoissonOneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PoissonOneSampleToolStripMenuItem.Click
         dlgTwoSamples.ShowDialog()
+    End Sub
+
+    Private Sub mnuFIleExit_Click(sender As Object, e As EventArgs) Handles mnuFIleExit.Click
+        Me.Close()
+    End Sub
+
+    Private Sub mnuFileOpenWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileOpenWorksheet.Click
+        OpenFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
+        SaveFileDialog1.ShowDialog()
+    End Sub
+
+    Private Sub mnuFileCloseWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileCloseWorksheet.Click
+
+    End Sub
+
+    Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
+        Dim pair As KeyValuePair(Of String, String) = openDialog()
+        clsButton.clsRsyntax.SetFunction("read.csv")
+        clsButton.clsRsyntax.AddParameter("file", pair.Value)
+        clsRInterface.LoadData(pair.Key, clsButton.clsRsyntax.GetScript())
+        clsRInterface.FillDataObjectVariables(frmVariables.gridVariables)
+        clsRInterface.FillDataObjectMetadata(frmMetaData.gridMetaData)
+        clsRInterface.FillDataObjectData(frmEditor.gridColumns)
     End Sub
 End Class
