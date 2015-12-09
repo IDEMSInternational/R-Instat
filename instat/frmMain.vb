@@ -459,7 +459,7 @@ Public Class frmMain
     End Sub
 
     Private Sub DisplayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayToolStripMenuItem.Click
-
+        dlgDisplay.ShowDialog()
     End Sub
 
     Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearRemoveToolStripMenuItem.Click
@@ -548,5 +548,121 @@ Public Class frmMain
 
     Private Sub CorrelationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationsToolStripMenuItem.Click
         dlgCorrelations.ShowDialog()
+    End Sub
+
+    Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles NewWorksheetToolStripMenuItem1.Click
+        dlgNewWorksheet.ShowDialog()
+    End Sub
+
+    Private Sub ImportDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportDailyDataToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub MakeFactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MakeFactorToolStripMenuItem.Click
+        dlgMakeFactor.ShowDialog()
+    End Sub
+
+    Private Sub ShiftDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShiftDailyDataToolStripMenuItem.Click
+        dlgShiftDailyData.ShowDialog()
+    End Sub
+
+    Private Sub UnstackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnstackDailyDataToolStripMenuItem.Click
+        dlgUnstackDailyData.ShowDialog()
+    End Sub
+
+    Private Sub StackDailyDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StackDailyDataToolStripMenuItem.Click
+        dlgStackDailyData.ShowDialog()
+    End Sub
+
+    Private Sub InterpolateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InterpolateToolStripMenuItem.Click
+        dlgInterpolate.ShowDialog()
+    End Sub
+
+    Private Sub OptionsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem1.Click
+        dlgOptions.ShowDialog()
+    End Sub
+
+    Private Sub DisplayDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayDailyToolStripMenuItem.Click
+        dlgDisplayDaily.ShowDialog()
+    End Sub
+
+    Private Sub SummaryToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles SummaryToolStripMenuItem2.Click
+        dlgSummary.ShowDialog()
+    End Sub
+
+    Private Sub ExtremesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExtremesToolStripMenuItem.Click
+        dlgExtremes.ShowDialog()
+    End Sub
+
+    Private Sub SpellsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SpellsToolStripMenuItem.Click
+        dlgSpells.ShowDialog()
+    End Sub
+
+    Private Sub WaterBalanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WaterBalanceToolStripMenuItem.Click
+        dlgWaterBalance.ShowDialog()
+    End Sub
+
+    Private Sub ExamineToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExamineToolStripMenuItem.Click
+        dlgExamine.ShowDialog()
+    End Sub
+
+    Private Sub ProcessToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProcessToolStripMenuItem.Click
+        dlgProcess.ShowDialog()
+    End Sub
+
+    Private Sub SiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SiteToolStripMenuItem.Click
+        dlgSite.ShowDialog()
+    End Sub
+
+    Private Sub PenmanToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PenmanToolStripMenuItem.Click
+        dlgPenman.ShowDialog()
+    End Sub
+
+    Private Sub CropCoefficientsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CropCoefficientsToolStripMenuItem.Click
+        dlgCropCoefficients.ShowDialog()
+    End Sub
+
+    Private Sub WaterSatisfactionIndexToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WaterSatisfactionIndexToolStripMenuItem.Click
+        dlgWaterSatisfactionIndex.ShowDialog()
+    End Sub
+
+    Private Sub HeatSumToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HeatSumToolStripMenuItem.Click
+        dlgHeatSum.ShowDialog()
+    End Sub
+
+    Private Sub CountsTotalsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CountsTotalsToolStripMenuItem.Click
+        dlgCountsTotals.ShowDialog()
+    End Sub
+
+    Private Sub PrepareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrepareToolStripMenuItem.Click
+        dlgPrepare.ShowDialog()
+    End Sub
+
+    Private Sub ModelProbabilitiesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModelProbabilitiesToolStripMenuItem.Click
+        dlgModelProbabilities.ShowDialog()
+    End Sub
+
+    Private Sub ModelAmountsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModelAmountsToolStripMenuItem.Click
+        dlgModelAmounts.ShowDialog()
+    End Sub
+
+    Private Sub InterpolateDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InterpolateDailyToolStripMenuItem.Click
+        dlgInterpolateDaily.ShowDialog()
+    End Sub
+
+    Private Sub SimulationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SimulationsToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub SpellLengthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SpellLengthToolStripMenuItem.Click
+        dlgSpellLength.ShowDialog()
+    End Sub
+
+    Private Sub TotalsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TotalsToolStripMenuItem.Click
+        dlgTotals.ShowDialog()
+    End Sub
+
+    Private Sub PoissonOneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PoissonOneSampleToolStripMenuItem.Click
+        dlgTwoSamples.ShowDialog()
     End Sub
 End Class
