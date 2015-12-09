@@ -24,17 +24,18 @@ Public Class dlgTwoWayAnova
         autoTranslate(Me)
         ucrReceiverRowFactor.Selector = ucrAddRemove
         ucrReceiverColumnFactor.Selector = ucrAddRemove
+        ucrBase.OKEnabled(False)
     End Sub
 
-    Private Sub ucrReceiverCounts_Leave(sender As Object, e As EventArgs) Handles ucrReceiverCounts.Leave
+    Private Sub ucrReceiverCounts_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiverCounts.ValueChanged
         FillFormula()
     End Sub
 
-    Private Sub ucrReceiverRowFactor_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRowFactor.Leave
+    Private Sub ucrReceiverRowFactor_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiverRowFactor.ValueChanged
         FillFormula()
     End Sub
 
-    Private Sub ucrReceiverColumnFactor_Leave(sender As Object, e As EventArgs) Handles ucrReceiverColumnFactor.Leave
+    Private Sub ucrReceiverColumnFactor_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiverColumnFactor.ValueChanged
         FillFormula()
     End Sub
 
@@ -46,7 +47,7 @@ Public Class dlgTwoWayAnova
         strCounts = ucrReceiverCounts.GetVariables()
         strRowFactor = ucrReceiverRowFactor.GetVariables()
         strColumnFactor = ucrReceiverColumnFactor.GetVariables()
-        If (Not IsNothing(strCounts)) Or (Not IsNothing(strRowFactor)) Or (Not IsNothing(strColumnFactor)) Then
+        If ((Not (strCounts = "")) And (Not (strRowFactor = "")) And (Not (strColumnFactor = ""))) Then
             ucrBase.clsRsyntax.AddParameter("formula", strCounts & "~" & strRowFactor & "*" & strColumnFactor)
             ucrBase.OKEnabled(True)
         Else
