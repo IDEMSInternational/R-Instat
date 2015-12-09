@@ -12,22 +12,13 @@
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
 Imports instat.Translations
-''' <summary>
-''' Polynomials Dialogue
-''' </summary>
-
 
 Public Class dlgPolynomials
-    ''' <summary>
-    ''' autoTranslate(me) translates the text into other languages.
-    ''' </summary>
     Private Sub dlgPolynomials_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        defaultSettings()
     End Sub
 
-    ''' <summary>
-    ''' Checked change event toggles on/off the checkbox for weights being enabled.
-    ''' </summary>
     Private Sub rdoOrthogonal_CheckedChanged(sender As Object, e As EventArgs) Handles rdoOrthogonal.CheckedChanged
         If rdoOrthogonal.Checked = True Then
             chkWeights.Enabled = True
@@ -35,10 +26,7 @@ Public Class dlgPolynomials
             chkWeights.Enabled = False
         End If
     End Sub
-    ''' <summary>
-    ''' Defaults the settings for resetting the form.
-    ''' When this routine is called, it restores the form controls to their original unmodified set up
-    ''' </summary>
+
     Private Sub defaultSettings()
         rdoSimple.Checked = True
         nmdOrder.Value = 2
@@ -47,10 +35,6 @@ Public Class dlgPolynomials
 
     End Sub
 
-    ''' <summary>
-    ''' The ClickReset event resets the form to its original setup by calling the routine defaultSettings.
-    ''' Happens when the reset button is pressed
-    ''' </summary>
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         defaultSettings()
     End Sub
