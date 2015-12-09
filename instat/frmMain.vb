@@ -347,7 +347,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) Handles mnuStatsNonParametricOneWayAnova.Click
-        dlgOneWayAnova.ShowDialog()
+        'dlgOneWayAnova.ShowDialog()
     End Sub
 
     Private Sub mnuStatsNonParametricTwoWayAnova_Click(sender As Object, e As EventArgs)
@@ -519,7 +519,7 @@ Public Class frmMain
     End Sub
 
     Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OnewayToolStripMenuItem.Click
-        dlgOneWayAnova.ShowDialog()
+        'dlgOneWayAnova.ShowDialog()
     End Sub
 
     Private Sub SimpleWithGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SimpleWithGroupsToolStripMenuItem.Click
