@@ -32,5 +32,9 @@
         End If
     End Function
 
+    Private Sub txtReceiverSingle_TextChanged(sender As Object, e As EventArgs) Handles txtReceiverSingle.TextChanged
+        OnValueChanged(sender, e)
+    End Sub
+
 End Class
 

@@ -30,4 +30,8 @@ Public Class ucrSelector
     Public Sub Remove()
         CurrentReceiver.RemoveSelected()
     End Sub
+
+    Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.DoubleClick
+        Add()
+    End Sub
 End Class

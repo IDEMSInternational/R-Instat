@@ -21,6 +21,7 @@ Public Class dlgHistogram
         UcrBase.clsRsyntax.iCallType = 0
         ucrXReceiver.Selector = ucrAddRemove
         ucrXReceiver.SetMeAsReceiver()
+        UcrBase.OKEnabled(False)
         autoTranslate(Me)
     End Sub
 
@@ -28,8 +29,13 @@ Public Class dlgHistogram
         ucrXReceiver.SetMeAsReceiver()
     End Sub
 
-    Private Sub ucrXReceiver_Leave(sender As Object, e As EventArgs) Handles ucrXReceiver.Leave
-        UcrBase.clsRsyntax.AddParameter("x", ucrXReceiver.GetVariables())
+    Private Sub ucrXReceiver_ValueChanged(sender As Object, e As EventArgs) Handles ucrXReceiver.ValueChanged
+        If Not (ucrXReceiver.txtReceiverSingle.Text = "") Then
+            UcrBase.clsRsyntax.AddParameter("x", ucrXReceiver.GetVariables())
+            UcrBase.OKEnabled(True)
+        Else
+            UcrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub txtHistogramTitle_TextChanged(sender As Object, e As EventArgs) Handles txtHistogramTitle.TextChanged
