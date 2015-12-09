@@ -26,4 +26,11 @@ Public Class ucrReceiver
     Private Sub ucrReceiver_Enter(sender As Object, e As EventArgs) Handles Me.Enter
         SetMeAsReceiver()
     End Sub
+
+    Public Event ValueChanged(ByVal sender As Object, ByVal e As EventArgs)
+
+    Public Sub OnValueChanged(ByVal sender As Object, ByVal e As EventArgs)
+        RaiseEvent ValueChanged(sender, e)
+    End Sub
+
 End Class
