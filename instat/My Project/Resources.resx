@@ -625,4 +625,64 @@
   <data name="Save_results_in" xml:space="preserve">
     <value>Save results in</value>
   </data>
+  <data name="1st_Group" xml:space="preserve">
+    <value>1st Group</value>
+  </data>
+  <data name="2nd_Group" xml:space="preserve">
+    <value>2nd Group</value>
+  </data>
+  <data name="Censoring_Column" xml:space="preserve">
+    <value>Censoring Column</value>
+  </data>
+  <data name="Censoring_Columns" xml:space="preserve">
+    <value>Censoring Columns</value>
+  </data>
+  <data name="Confidence_Level" xml:space="preserve">
+    <value>Confidence Level</value>
+  </data>
+  <data name="Data_Column" xml:space="preserve">
+    <value>Data Column</value>
+  </data>
+  <data name="Data_Columns" xml:space="preserve">
+    <value>Data Columns</value>
+  </data>
+  <data name="Details_of_Calculations" xml:space="preserve">
+    <value>Details of Calculations</value>
+  </data>
+  <data name="Display_Options" xml:space="preserve">
+    <value>Display Options</value>
+  </data>
+  <data name="Exploratory_Plot" xml:space="preserve">
+    <value>Exploratory Plot</value>
+  </data>
+  <data name="Greenwood_Confidence_Interval" xml:space="preserve">
+    <value>Greenwood Confidence Interval</value>
+  </data>
+  <data name="Kaplan_Meier" xml:space="preserve">
+    <value>Kaplan Meier</value>
+  </data>
+  <data name="Kaplan_Meier_Plot" xml:space="preserve">
+    <value>Kaplan Meier Plot</value>
+  </data>
+  <data name="Log_log_plot" xml:space="preserve">
+    <value>Log log plot</value>
+  </data>
+  <data name="Log_Rank" xml:space="preserve">
+    <value>Log Rank</value>
+  </data>
+  <data name="Relative_Risk_of_Event" xml:space="preserve">
+    <value>Relative Risk of Event</value>
+  </data>
+  <data name="Remove_columns_after_plot" xml:space="preserve">
+    <value>Remove columns after plot</value>
+  </data>
+  <data name="Survivor_Function" xml:space="preserve">
+    <value>Survivor Function</value>
+  </data>
+  <data name="Survivor_Function_Plot" xml:space="preserve">
+    <value>Survivor Function Plot</value>
+  </data>
+  <data name="Wilcoxon_Test" xml:space="preserve">
+    <value>Wilcoxon Test</value>
+  </data>
 </root>
