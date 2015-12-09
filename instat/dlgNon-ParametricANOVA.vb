@@ -23,15 +23,16 @@ Public Class dlgNon_ParametricANOVA
         ucrReceiverYVariate.SetMeAsReceiver()
         autoTranslate(Me)
         ucrReceiverFactor.Selector = ucrAddRemove
+        ucrBase.OKEnabled(False)
 
     End Sub
 
-    Private Sub ucrReceiverYVariate_Leave(sender As Object, e As EventArgs) Handles ucrReceiverYVariate.Leave
+    Private Sub ucrReceiverYVariate_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiverYVariate.ValueChanged
         FillFormula()
 
     End Sub
 
-    Private Sub ucrReceiverFactor_Load(sender As Object, e As EventArgs) Handles ucrReceiverFactor.Load
+    Private Sub ucrReceiverFactor_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.ValueChanged
         FillFormula()
     End Sub
     Private Sub FillFormula()
@@ -39,7 +40,7 @@ Public Class dlgNon_ParametricANOVA
         Dim strFactor As String
         strYVariate = ucrReceiverYVariate.GetVariables()
         strFactor = ucrReceiverFactor.GetVariables()
-        If ((Not IsNothing(strYVariate)) Or (Not IsNothing(strFactor))) Then
+        If ((Not (strYVariate = "")) And (Not (strFactor = ""))) Then
             ucrBase.clsRsyntax.AddParameter("formula", strYVariate & "~" & strFactor)
             ucrBase.OKEnabled(True)
         Else
