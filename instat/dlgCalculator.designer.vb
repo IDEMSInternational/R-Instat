@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgCalculator
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,10 +20,8 @@ Partial Class dlgCalculator
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblAvailableVariables = New System.Windows.Forms.Label()
-        Me.lstAvailableVariable = New System.Windows.Forms.ListBox()
         Me.txtCalcLine = New System.Windows.Forms.TextBox()
         Me.btn1 = New System.Windows.Forms.Button()
         Me.btn0 = New System.Windows.Forms.Button()
@@ -53,26 +51,6 @@ Partial Class dlgCalculator
         Me.btnExp = New System.Windows.Forms.Button()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'lblAvailableVariables
-        '
-        Me.lblAvailableVariables.AutoSize = True
-        Me.lblAvailableVariables.Location = New System.Drawing.Point(326, 58)
-        Me.lblAvailableVariables.Name = "lblAvailableVariables"
-        Me.lblAvailableVariables.Size = New System.Drawing.Size(102, 13)
-        Me.lblAvailableVariables.TabIndex = 78
-        Me.lblAvailableVariables.Tag = "Available _Variables "
-        Me.lblAvailableVariables.Text = "Available  Variables "
-        '
-        'lstAvailableVariable
-        '
-        Me.lstAvailableVariable.FormattingEnabled = True
-        Me.lstAvailableVariable.HorizontalScrollbar = True
-        Me.lstAvailableVariable.Location = New System.Drawing.Point(335, 76)
-        Me.lstAvailableVariable.Name = "lstAvailableVariable"
-        Me.lstAvailableVariable.Size = New System.Drawing.Size(84, 160)
-        Me.lstAvailableVariable.TabIndex = 77
-        Me.lstAvailableVariable.Tag = ""
         '
         'txtCalcLine
         '
@@ -316,7 +294,7 @@ Partial Class dlgCalculator
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(16, 282)
+        Me.ucrBase.Location = New System.Drawing.Point(16, 281)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(404, 32)
         Me.ucrBase.TabIndex = 0
@@ -325,7 +303,7 @@ Partial Class dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(430, 320)
+        Me.ClientSize = New System.Drawing.Size(449, 320)
         Me.Controls.Add(Me.btnLog10)
         Me.Controls.Add(Me.btnSqrt)
         Me.Controls.Add(Me.btnExp)
@@ -353,8 +331,6 @@ Partial Class dlgCalculator
         Me.Controls.Add(Me.btn0)
         Me.Controls.Add(Me.btn1)
         Me.Controls.Add(Me.txtCalcLine)
-        Me.Controls.Add(Me.lblAvailableVariables)
-        Me.Controls.Add(Me.lstAvailableVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgCalculator"
@@ -367,8 +343,6 @@ Partial Class dlgCalculator
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblAvailableVariables As Label
-    Friend WithEvents lstAvailableVariable As ListBox
     Friend WithEvents txtCalcLine As TextBox
     Friend WithEvents btn1 As Button
     Friend WithEvents btn0 As Button

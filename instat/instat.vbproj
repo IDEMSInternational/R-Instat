@@ -579,12 +579,6 @@
     <Compile Include="dlgOneSample.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgOneWayAnove.Designer.vb">
-      <DependentUpon>dlgOneWayAnove.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgOneWayAnove.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgOptions.Designer.vb">
       <DependentUpon>dlgOptions.vb</DependentUpon>
     </Compile>
@@ -1630,15 +1624,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneSample.sw-KE.resx">
       <DependentUpon>dlgOneSample.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgOneWayAnove.fr-FR.resx">
-      <DependentUpon>dlgOneWayAnove.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgOneWayAnove.resx">
-      <DependentUpon>dlgOneWayAnove.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgOneWayAnove.sw-KE.resx">
-      <DependentUpon>dlgOneWayAnove.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOptions.fr-FR.resx">
       <DependentUpon>dlgOptions.vb</DependentUpon>
