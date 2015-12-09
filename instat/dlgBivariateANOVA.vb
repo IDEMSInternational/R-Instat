@@ -25,23 +25,24 @@ Public Class dlgBivariateANOVA
         ucrReceiver2ndResponseVariable.Selector = ucrAddRemove
         ucrReceiverTreatmentFactor.Selector = ucrAddRemove
         ucrReceiverBlockingFactor.Selector = ucrAddRemove
+        ucrBase.OKEnabled(False)
     End Sub
 
-    Private Sub ucrReceiver1stResponseVariable_Leave(sender As Object, e As EventArgs) Handles ucrReceiver1stResponseVariable.Leave
+    Private Sub ucrReceiver1stResponseVariable_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiver1stResponseVariable.ValueChanged
         FillFormula()
 
     End Sub
 
-    Private Sub ucrReceiver2ndResponseVariable_Leave(sender As Object, e As EventArgs) Handles ucrReceiver2ndResponseVariable.Leave
+    Private Sub ucrReceiver2ndResponseVariable_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiver2ndResponseVariable.ValueChanged
         FillFormula()
     End Sub
 
-    Private Sub ucrReceiverTreatmentFactor_Leave(sender As Object, e As EventArgs) Handles ucrReceiverTreatmentFactor.Leave
+    Private Sub ucrReceiverTreatmentFactor_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiverTreatmentFactor.ValueChanged
         FillFormula()
 
     End Sub
 
-    Private Sub ucrReceiverBlockingFactor_Load(sender As Object, e As EventArgs) Handles ucrReceiverBlockingFactor.Load
+    Private Sub ucrReceiverBlockingFactor_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiverBlockingFactor.ValueChanged
         FillFormula()
     End Sub
     Private Sub FillFormula()
@@ -53,7 +54,7 @@ Public Class dlgBivariateANOVA
         str2ndResponseVariable = ucrReceiver2ndResponseVariable.GetVariables()
         strTreatmentFactor = ucrReceiverBlockingFactor.GetVariables()
         strBlockingFactor = ucrReceiverBlockingFactor.GetVariables()
-        If ((Not IsNothing(str1stResponseVariable)) Or (Not IsNothing(str2ndResponseVariable)) Or (Not IsNothing(strTreatmentFactor)) Or (Not IsNothing(strBlockingFactor))) Then
+        If ((Not IsNothing(str1stResponseVariable)) And (Not IsNothing(str2ndResponseVariable)) And (Not IsNothing(strTreatmentFactor)) And (Not IsNothing(strBlockingFactor))) Then
             'ucrBase.clsRsyntax.AddParameter("formula", cbind(str1stResponseVariable,str2ndResponseVariable) & "~" & strTreatmentFactor & "*" & strBlockingFactor)
             ucrBase.OKEnabled(True)
         Else
