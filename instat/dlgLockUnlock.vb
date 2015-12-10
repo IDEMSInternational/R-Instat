@@ -18,5 +18,15 @@ Imports instat.Translations
 Public Class dlgLockUnlock
     Private Sub dlgLockUnlock_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        defaultSettings()
+    End Sub
+    Private Sub defaultSettings()
+        rdoLock.Checked = True
+        ucrMultiple.lstSelectedVariables.Items.Clear()
+        chkReservefree.Checked = False
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        defaultSettings()
     End Sub
 End Class
