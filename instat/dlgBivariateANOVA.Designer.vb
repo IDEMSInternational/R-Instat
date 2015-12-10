@@ -103,7 +103,7 @@ Partial Class dlgBivariateANOVA
         'lbl1stRespVar
         '
         Me.lbl1stRespVar.AutoSize = True
-        Me.lbl1stRespVar.Location = New System.Drawing.Point(277, 13)
+        Me.lbl1stRespVar.Location = New System.Drawing.Point(286, 18)
         Me.lbl1stRespVar.Name = "lbl1stRespVar"
         Me.lbl1stRespVar.Size = New System.Drawing.Size(112, 13)
         Me.lbl1stRespVar.TabIndex = 8
@@ -133,7 +133,7 @@ Partial Class dlgBivariateANOVA
         'lblBlockingFactor
         '
         Me.lblBlockingFactor.AutoSize = True
-        Me.lblBlockingFactor.Location = New System.Drawing.Point(282, 152)
+        Me.lblBlockingFactor.Location = New System.Drawing.Point(288, 152)
         Me.lblBlockingFactor.Name = "lblBlockingFactor"
         Me.lblBlockingFactor.Size = New System.Drawing.Size(78, 13)
         Me.lblBlockingFactor.TabIndex = 11
