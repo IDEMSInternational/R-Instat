@@ -15,16 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgChangeType
-    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles grpColumnType.Enter
-        autoTranslate(Me)
-
-    End Sub
-
-    Private Sub chkReadTextAsDateValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkReadTextAsDateValues.CheckedChanged
-
-    End Sub
-
     Private Sub dlgChangeType_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        autoTranslate(Me)
+        ucrChangetypeReceiver.Selector = ucrChangeTypeSelector
+        ucrChangetypeReceiver.SetMeAsReceiver()
     End Sub
 End Class
