@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgOneWayAnova
+Partial Class dlgOptions
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,16 +22,30 @@ Partial Class dlgOneWayAnova
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'dlgOneWayAnova
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 324)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.TabIndex = 0
+        '
+        'dlgOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
-        Me.Name = "dlgOneWayAnova"
-        Me.Text = "dlgOneWayAnove"
+        Me.ClientSize = New System.Drawing.Size(425, 361)
+        Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Name = "dlgOptions"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Options"
+        Me.Text = "Options"
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents ucrBase As ucrButtons
 End Class
