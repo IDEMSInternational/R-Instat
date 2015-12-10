@@ -22,61 +22,19 @@ Partial Class dlgBivariateANOVA
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrReceiver1stResponseVariable = New instat.ucrReceiverSingle()
-        Me.ucrReceiver2ndResponseVariable = New instat.ucrReceiverSingle()
-        Me.ucrReceiverTreatmentFactor = New instat.ucrReceiverSingle()
-        Me.ucrReceiverBlockingFactor = New instat.ucrReceiverSingle()
         Me.chkContrasts = New System.Windows.Forms.CheckBox()
         Me.chkSaveResults = New System.Windows.Forms.CheckBox()
         Me.lbl1stRespVar = New System.Windows.Forms.Label()
         Me.lbl2ndRespVar = New System.Windows.Forms.Label()
         Me.lblTreatmentFactor = New System.Windows.Forms.Label()
         Me.lblBlockingFactor = New System.Windows.Forms.Label()
+        Me.ucrReceiverBlockingFactor = New instat.ucrReceiverSingle()
+        Me.ucrReceiverTreatmentFactor = New instat.ucrReceiverSingle()
+        Me.ucrReceiver2ndResponseVariable = New instat.ucrReceiverSingle()
+        Me.ucrReceiver1stResponseVariable = New instat.ucrReceiverSingle()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 297)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(12, 38)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
-        Me.ucrAddRemove.TabIndex = 1
-        '
-        'ucrReceiver1stResponseVariable
-        '
-        Me.ucrReceiver1stResponseVariable.Location = New System.Drawing.Point(280, 29)
-        Me.ucrReceiver1stResponseVariable.Name = "ucrReceiver1stResponseVariable"
-        Me.ucrReceiver1stResponseVariable.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiver1stResponseVariable.TabIndex = 2
-        '
-        'ucrReceiver2ndResponseVariable
-        '
-        Me.ucrReceiver2ndResponseVariable.Location = New System.Drawing.Point(283, 74)
-        Me.ucrReceiver2ndResponseVariable.Name = "ucrReceiver2ndResponseVariable"
-        Me.ucrReceiver2ndResponseVariable.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiver2ndResponseVariable.TabIndex = 3
-        '
-        'ucrReceiverTreatmentFactor
-        '
-        Me.ucrReceiverTreatmentFactor.Location = New System.Drawing.Point(283, 119)
-        Me.ucrReceiverTreatmentFactor.Name = "ucrReceiverTreatmentFactor"
-        Me.ucrReceiverTreatmentFactor.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverTreatmentFactor.TabIndex = 4
-        '
-        'ucrReceiverBlockingFactor
-        '
-        Me.ucrReceiverBlockingFactor.Location = New System.Drawing.Point(282, 163)
-        Me.ucrReceiverBlockingFactor.Name = "ucrReceiverBlockingFactor"
-        Me.ucrReceiverBlockingFactor.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverBlockingFactor.TabIndex = 5
         '
         'chkContrasts
         '
@@ -103,7 +61,7 @@ Partial Class dlgBivariateANOVA
         'lbl1stRespVar
         '
         Me.lbl1stRespVar.AutoSize = True
-        Me.lbl1stRespVar.Location = New System.Drawing.Point(286, 18)
+        Me.lbl1stRespVar.Location = New System.Drawing.Point(271, 36)
         Me.lbl1stRespVar.Name = "lbl1stRespVar"
         Me.lbl1stRespVar.Size = New System.Drawing.Size(112, 13)
         Me.lbl1stRespVar.TabIndex = 8
@@ -113,7 +71,7 @@ Partial Class dlgBivariateANOVA
         'lbl2ndRespVar
         '
         Me.lbl2ndRespVar.AutoSize = True
-        Me.lbl2ndRespVar.Location = New System.Drawing.Point(289, 62)
+        Me.lbl2ndRespVar.Location = New System.Drawing.Point(271, 80)
         Me.lbl2ndRespVar.Name = "lbl2ndRespVar"
         Me.lbl2ndRespVar.Size = New System.Drawing.Size(116, 13)
         Me.lbl2ndRespVar.TabIndex = 9
@@ -123,7 +81,7 @@ Partial Class dlgBivariateANOVA
         'lblTreatmentFactor
         '
         Me.lblTreatmentFactor.AutoSize = True
-        Me.lblTreatmentFactor.Location = New System.Drawing.Point(289, 107)
+        Me.lblTreatmentFactor.Location = New System.Drawing.Point(271, 125)
         Me.lblTreatmentFactor.Name = "lblTreatmentFactor"
         Me.lblTreatmentFactor.Size = New System.Drawing.Size(85, 13)
         Me.lblTreatmentFactor.TabIndex = 10
@@ -133,12 +91,54 @@ Partial Class dlgBivariateANOVA
         'lblBlockingFactor
         '
         Me.lblBlockingFactor.AutoSize = True
-        Me.lblBlockingFactor.Location = New System.Drawing.Point(288, 152)
+        Me.lblBlockingFactor.Location = New System.Drawing.Point(271, 170)
         Me.lblBlockingFactor.Name = "lblBlockingFactor"
         Me.lblBlockingFactor.Size = New System.Drawing.Size(78, 13)
         Me.lblBlockingFactor.TabIndex = 11
         Me.lblBlockingFactor.Tag = "Blocking_factor"
         Me.lblBlockingFactor.Text = "Blocking factor"
+        '
+        'ucrReceiverBlockingFactor
+        '
+        Me.ucrReceiverBlockingFactor.Location = New System.Drawing.Point(271, 181)
+        Me.ucrReceiverBlockingFactor.Name = "ucrReceiverBlockingFactor"
+        Me.ucrReceiverBlockingFactor.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverBlockingFactor.TabIndex = 5
+        '
+        'ucrReceiverTreatmentFactor
+        '
+        Me.ucrReceiverTreatmentFactor.Location = New System.Drawing.Point(271, 137)
+        Me.ucrReceiverTreatmentFactor.Name = "ucrReceiverTreatmentFactor"
+        Me.ucrReceiverTreatmentFactor.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverTreatmentFactor.TabIndex = 4
+        '
+        'ucrReceiver2ndResponseVariable
+        '
+        Me.ucrReceiver2ndResponseVariable.Location = New System.Drawing.Point(271, 92)
+        Me.ucrReceiver2ndResponseVariable.Name = "ucrReceiver2ndResponseVariable"
+        Me.ucrReceiver2ndResponseVariable.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiver2ndResponseVariable.TabIndex = 3
+        '
+        'ucrReceiver1stResponseVariable
+        '
+        Me.ucrReceiver1stResponseVariable.Location = New System.Drawing.Point(271, 47)
+        Me.ucrReceiver1stResponseVariable.Name = "ucrReceiver1stResponseVariable"
+        Me.ucrReceiver1stResponseVariable.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiver1stResponseVariable.TabIndex = 2
+        '
+        'ucrAddRemove
+        '
+        Me.ucrAddRemove.Location = New System.Drawing.Point(12, 38)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
+        Me.ucrAddRemove.TabIndex = 1
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(0, 297)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgBivariateANOVA
         '
