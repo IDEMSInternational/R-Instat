@@ -122,7 +122,18 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileNewWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileNewWorksheet.Click
-        frmEditor.NewSheet()
+        Dim rowNum As String = InputBox("Number of rows", "Rows for the new worksheet", " ", -1, -1)
+        Dim colNum As String = InputBox("Number of columns", "Columns for the new worksheet", " ", -1, -1)
+        If rowNum = " " Or colNum = " " Then
+            MessageBox.Show("You must enter a valid value")
+            Exit Sub
+        ElseIf IsNumeric(rowNum) AndAlso IsNumeric(colNum)
+            frmEditor.NewSheet(rowNum, colNum)
+        ElseIf rowNum = "" Or colNum = ""
+            Exit Sub
+        End If
+
+
     End Sub
 
     Private Sub LogWindowMenu_Click(sender As Object, e As EventArgs) Handles LogWindowMenu.Click

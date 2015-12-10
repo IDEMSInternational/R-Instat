@@ -39,8 +39,10 @@ Public Class frmEditor
         gridColumns.CurrentWorksheet.Name = "Data View"
         autoTranslate(Me)
     End Sub
-    Public Sub NewSheet()
+    Public Sub NewSheet(rowNum As Integer, colNum As Integer)
         Dim sheet = gridColumns.CreateWorksheet()
+        sheet.RowCount = rowNum
+        sheet.ColumnCount = colNum
         'Add/Insert worksheet
         gridColumns.Worksheets.Add(sheet)
         gridColumns.CurrentWorksheet = sheet
