@@ -19,22 +19,26 @@ Public Class dlgHistogram
     Private Sub dlgHistogram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UcrBase.clsRsyntax.SetFunction("hist")
         UcrBase.clsRsyntax.iCallType = 0
-        ucrSingleReceiver.Selector = ucrAddRemove
-        ucrSingleReceiver.SetMeAsReceiver()
+        ucrXReceiver.Selector = ucrAddRemove
+        ucrXReceiver.SetMeAsReceiver()
+        UcrBase.OKEnabled(False)
         autoTranslate(Me)
     End Sub
 
-    Private Sub ucrReceiverSingle_Enter(sender As Object, e As EventArgs) Handles ucrSingleReceiver.Enter
-        ucrSingleReceiver.SetMeAsReceiver()
+    Private Sub ucrReceiverSingle_Enter(sender As Object, e As EventArgs) Handles ucrXReceiver.Enter
+        ucrXReceiver.SetMeAsReceiver()
     End Sub
 
-    Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrSingleReceiver.Leave
-        UcrBase.clsRsyntax.AddParameter("x", ucrSingleReceiver.GetVariables())
+    Private Sub ucrXReceiver_ValueChanged(sender As Object, e As EventArgs) Handles ucrXReceiver.ValueChanged
+        If Not (ucrXReceiver.txtReceiverSingle.Text = "") Then
+            UcrBase.clsRsyntax.AddParameter("x", ucrXReceiver.GetVariables())
+            UcrBase.OKEnabled(True)
+        Else
+            UcrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub txtHistogramTitle_TextChanged(sender As Object, e As EventArgs) Handles txtHistogramTitle.TextChanged
         UcrBase.clsRsyntax.AddParameter("main", Chr(34) & txtHistogramTitle.Text & Chr(34))
     End Sub
-
-
 End Class
