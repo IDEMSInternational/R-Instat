@@ -55,7 +55,7 @@ Public Class dlgBivariateANOVA
         strTreatmentFactor = ucrReceiverBlockingFactor.GetVariables()
         strBlockingFactor = ucrReceiverBlockingFactor.GetVariables()
         If ((Not (str1stResponseVariable = "")) And (Not (str2ndResponseVariable = "")) And (Not (strTreatmentFactor = "")) And (Not (strBlockingFactor = ""))) Then
-            'ucrBase.clsRsyntax.AddParameter("formula", cbind(str1stResponseVariable, str2ndResponseVariable) & "~" & strTreatmentFactor & "*" & strBlockingFactor)
+            'ucrBase.clsRsyntax.AddParameter("formula", cbind(str1stResponseVariable, str2ndResponseVariable) & "~" & strTreatmentFactor & "*" & strBlockingFactor) #researching on the cbind
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
