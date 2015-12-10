@@ -3,14 +3,7 @@ Public Class dlgCalculator
     Dim dataset As DataFrame
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim i As Integer
-
-        dataset = frmMain.clsRInterface.GetData("data")
-        For i = 0 To dataset.ColumnCount - 1
-            lstAvailableVariable.Items.Add(dataset.ColumnNames(i))
-        Next
-
-        txtNewColumnName.Text = "Column_" & (dataset.ColumnCount + 1).ToString
+        ucrBase.OKEnabled(False)
         btnBackSpace.Enabled = True
         txtCalcLine.Select()
     End Sub
@@ -95,10 +88,10 @@ Public Class dlgCalculator
         AddText("/")
     End Sub
 
-    Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.DoubleClick
-        If lstAvailableVariable.SelectedItem <> "" Then
-            AddText("data[[""" & lstAvailableVariable.SelectedItem & """]]")
-        End If
+    Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs)
+        'If lstAvailableVariable.SelectedItem <> "" Then
+        '    AddText("data[[""" & lstAvailableVariable.SelectedItem & """]]")
+        'End If
     End Sub
 
     Private Sub btnPower_Click(sender As Object, e As EventArgs) Handles btnPower.Click
@@ -154,5 +147,9 @@ Public Class dlgCalculator
 
     Private Sub btnExp_Click(sender As Object, e As EventArgs) Handles btnExp.Click
         AddText("exp()", 1, True)
+    End Sub
+
+    Private Sub txtNewColumnName_TextChanged(sender As Object, e As EventArgs) Handles txtNewColumnName.TextChanged
+
     End Sub
 End Class
