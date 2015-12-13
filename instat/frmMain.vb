@@ -373,11 +373,11 @@ Public Class frmMain
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
         dlgSort.ShowDialog()
     End Sub
-    Public Function openDialog() As KeyValuePair(Of String, String)
+    Public Function openDialog(Optional fType As String = "Comma Separated (*.csv)|*.csv") As KeyValuePair(Of String, String)
         Dim dlgOpen As New OpenFileDialog
         Dim strFilePath, strFileName As String
-        dlgOpen.Filter = "Comma Separated (*.csv)|*.csv"
-        dlgOpen.Title = "Import a .csv file into"
+        dlgOpen.Filter = fType
+        dlgOpen.Title = "Import a file into"
         If dlgOpen.ShowDialog() = DialogResult.OK Then
             'checks if the file name is not blank'
             If dlgOpen.FileName <> "" Then
@@ -671,7 +671,13 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileOpenWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileOpenWorksheet.Click
-        OpenFile.ShowDialog()
+        Dim pair As KeyValuePair(Of String, String) = openDialog("Old Instat files (*.wor)|*.wor")
+        clsButton.clsRsyntax.SetFunction("read.csv")
+        clsButton.clsRsyntax.AddParameter("file", pair.Value)
+        clsRInterface.LoadData(pair.Key, clsButton.clsRsyntax.GetScript())
+        clsRInterface.FillDataObjectVariables(frmVariables.gridVariables)
+        clsRInterface.FillDataObjectMetadata(frmMetaData.gridMetaData)
+        clsRInterface.FillDataObjectData(frmEditor.gridColumns)
     End Sub
 
     Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
