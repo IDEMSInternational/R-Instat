@@ -18,5 +18,19 @@ Imports instat.Translations
 Public Class dlgFormat
     Private Sub dlgFormat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        ucrMultiple.Selector = ucrAddRemove
+        ucrMultiple.SetMeAsReceiver()
+        ucrBase.OKEnabled(False)
+        defaultSettings()
+    End Sub
+
+    Private Sub defaultSettings()
+        ucrAddRemove.lstAvailableVariable.ResetText()
+        ucrMultiple.lstSelectedVariables.Items.Clear()
+        lstRequiredFormat.ResetText()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        defaultSettings()
     End Sub
 End Class
