@@ -4,6 +4,7 @@ Public Class ucrSelector
     Public CurrentReceiver As ucrReceiver
 
     Private Sub ucrdataselection_load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lstAvailableVariable.Clear()
         frmMain.clsRInterface.FillListView(lstAvailableVariable)
     End Sub
 
