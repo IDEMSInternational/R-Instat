@@ -21,6 +21,7 @@ Public Class dlgBoxPlot
         ucrReceiveBoxplotVariable.Selector = UcrAddRemove
         ucrReceiveBoxplotVariable.SetMeAsReceiver()
         autoTranslate(Me)
+        ucrBase.OKEnabled(False)
     End Sub
 
     Private Sub ucrReceiveBoxplotVariable_Enter(sender As Object, e As EventArgs) Handles ucrReceiveBoxplotVariable.Enter
@@ -28,9 +29,13 @@ Public Class dlgBoxPlot
     End Sub
 
 
-    Private Sub ucrReceiveBoxplotVariable_leave(sender As Object, e As EventArgs) Handles ucrReceiveBoxplotVariable.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiveBoxplotVariable.GetVariables())
-
+    Private Sub ucrReceiveBoxplotVariable_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiveBoxplotVariable.ValueChanged
+        If Not (ucrReceiveBoxplotVariable.txtReceiverSingle.Text = "") Then
+            ucrBase.clsRsyntax.AddParameter("x", ucrReceiveBoxplotVariable.GetVariables())
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
@@ -44,4 +49,5 @@ Public Class dlgBoxPlot
     Private Sub txtXLabel_Leave(sender As Object, e As EventArgs) Handles txtXLabel.Leave
         ucrBase.clsRsyntax.AddParameter("xlab", Chr(34) & txtXLabel.Text & Chr(34))
     End Sub
+
 End Class
