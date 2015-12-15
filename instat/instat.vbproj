@@ -219,10 +219,10 @@
     <Compile Include="dlgColumnStats.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgCorrelations.designer.vb">
-      <DependentUpon>dlgCorrelations.vb</DependentUpon>
+    <Compile Include="dlgCorrelation.designer.vb">
+      <DependentUpon>dlgCorrelation.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgCorrelations.vb">
+    <Compile Include="dlgCorrelation.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCountsTotals.Designer.vb">
@@ -819,10 +819,10 @@
     <Compile Include="dlgTwoSamples.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgTwoWayAnova.Designer.vb">
-      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    <Compile Include="dlgNPTwoWayAnova.Designer.vb">
+      <DependentUpon>dlgNPTwoWayAnova.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgTwoWayAnova.vb">
+    <Compile Include="dlgNPTwoWayAnova.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgUnstack.Designer.vb">
@@ -1088,14 +1088,14 @@
     <EmbeddedResource Include="dlgCliPlot.sw-KE.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCorrelations.fr-FR.resx">
-      <DependentUpon>dlgCorrelations.vb</DependentUpon>
+    <EmbeddedResource Include="dlgCorrelation.fr-FR.resx">
+      <DependentUpon>dlgCorrelation.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCorrelations.resx">
-      <DependentUpon>dlgCorrelations.vb</DependentUpon>
+    <EmbeddedResource Include="dlgCorrelation.resx">
+      <DependentUpon>dlgCorrelation.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCorrelations.sw-KE.resx">
-      <DependentUpon>dlgCorrelations.vb</DependentUpon>
+    <EmbeddedResource Include="dlgCorrelation.sw-KE.resx">
+      <DependentUpon>dlgCorrelation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCountsTotals.fr-FR.resx">
       <DependentUpon>dlgCountsTotals.vb</DependentUpon>
@@ -1152,6 +1152,9 @@
       <DependentUpon>dlgDayMonth.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteColumns.fr-FR.resx">
+      <DependentUpon>dlgDeleteColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteColumns.resx">
       <DependentUpon>dlgDeleteColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteColumns.sw-KE.resx">
@@ -1769,6 +1772,15 @@
     <EmbeddedResource Include="dlgReplace.sw-KE.resx">
       <DependentUpon>dlgReplace.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRowStats.fr-FR.resx">
+      <DependentUpon>dlgRowStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRowStats.resx">
+      <DependentUpon>dlgRowStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRowStats.sw-KE.resx">
+      <DependentUpon>dlgRowStats.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalSummary.fr-FR.resx">
       <DependentUpon>dlgSeasonalSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -1942,6 +1954,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoSamples.sw-KE.resx">
       <DependentUpon>dlgTwoSamples.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNPTwoWayAnova.fr-FR.resx">
+      <DependentUpon>dlgNPTwoWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNPTwoWayAnova.resx">
+      <DependentUpon>dlgNPTwoWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNPTwoWayAnova.sw-KE.resx">
+      <DependentUpon>dlgNPTwoWayAnova.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnstack.fr-FR.resx">
       <DependentUpon>dlgUnstack.vb</DependentUpon>
