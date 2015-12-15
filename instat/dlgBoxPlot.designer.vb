@@ -22,34 +22,17 @@ Partial Class dlgBoxPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiveBoxplotVariable = New instat.ucrReceiverSingle()
-        Me.lblYlab = New System.Windows.Forms.Label()
-        Me.lblXLabel = New System.Windows.Forms.Label()
-        Me.txtYLabel = New System.Windows.Forms.TextBox()
-        Me.txtXLabel = New System.Windows.Forms.TextBox()
         Me.lblDataToPlot = New System.Windows.Forms.Label()
+        Me.chkByFactors = New System.Windows.Forms.CheckBox()
+        Me.cboByFactors = New System.Windows.Forms.ComboBox()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.chkVariableWidth = New System.Windows.Forms.CheckBox()
+        Me.chkHorizontalBoxplot = New System.Windows.Forms.CheckBox()
+        Me.chkNotchedBoxplot = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
-        '
-        'lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(12, 179)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
-        Me.lblTitle.TabIndex = 2
-        Me.lblTitle.Tag = "Title"
-        Me.lblTitle.Text = "Title"
-        '
-        'txtTitle
-        '
-        Me.txtTitle.Location = New System.Drawing.Point(61, 172)
-        Me.txtTitle.Name = "txtTitle"
-        Me.txtTitle.Size = New System.Drawing.Size(208, 20)
-        Me.txtTitle.TabIndex = 3
         '
         'UcrAddRemove
         '
@@ -60,7 +43,7 @@ Partial Class dlgBoxPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 212)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 256)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 4
@@ -72,40 +55,6 @@ Partial Class dlgBoxPlot
         Me.ucrReceiveBoxplotVariable.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiveBoxplotVariable.TabIndex = 7
         '
-        'lblYlab
-        '
-        Me.lblYlab.AutoSize = True
-        Me.lblYlab.Location = New System.Drawing.Point(12, 143)
-        Me.lblYlab.Name = "lblYlab"
-        Me.lblYlab.Size = New System.Drawing.Size(43, 13)
-        Me.lblYlab.TabIndex = 8
-        Me.lblYlab.Tag = "YLabel"
-        Me.lblYlab.Text = "Y Label"
-        '
-        'lblXLabel
-        '
-        Me.lblXLabel.AutoSize = True
-        Me.lblXLabel.Location = New System.Drawing.Point(180, 143)
-        Me.lblXLabel.Name = "lblXLabel"
-        Me.lblXLabel.Size = New System.Drawing.Size(43, 13)
-        Me.lblXLabel.TabIndex = 9
-        Me.lblXLabel.Tag = "XLabel"
-        Me.lblXLabel.Text = "X Label"
-        '
-        'txtYLabel
-        '
-        Me.txtYLabel.Location = New System.Drawing.Point(61, 140)
-        Me.txtYLabel.Name = "txtYLabel"
-        Me.txtYLabel.Size = New System.Drawing.Size(100, 20)
-        Me.txtYLabel.TabIndex = 10
-        '
-        'txtXLabel
-        '
-        Me.txtXLabel.Location = New System.Drawing.Point(243, 143)
-        Me.txtXLabel.Name = "txtXLabel"
-        Me.txtXLabel.Size = New System.Drawing.Size(100, 20)
-        Me.txtXLabel.TabIndex = 10
-        '
         'lblDataToPlot
         '
         Me.lblDataToPlot.AutoSize = True
@@ -116,21 +65,83 @@ Partial Class dlgBoxPlot
         Me.lblDataToPlot.Tag = "Data_to_be_plotted"
         Me.lblDataToPlot.Text = "Data to be plotted"
         '
+        'chkByFactors
+        '
+        Me.chkByFactors.AutoSize = True
+        Me.chkByFactors.Location = New System.Drawing.Point(22, 141)
+        Me.chkByFactors.Name = "chkByFactors"
+        Me.chkByFactors.Size = New System.Drawing.Size(79, 17)
+        Me.chkByFactors.TabIndex = 12
+        Me.chkByFactors.Tag = "By_factors"
+        Me.chkByFactors.Text = "By factor(s)"
+        Me.chkByFactors.UseVisualStyleBackColor = True
+        '
+        'cboByFactors
+        '
+        Me.cboByFactors.FormattingEnabled = True
+        Me.cboByFactors.Location = New System.Drawing.Point(107, 139)
+        Me.cboByFactors.Name = "cboByFactors"
+        Me.cboByFactors.Size = New System.Drawing.Size(116, 21)
+        Me.cboByFactors.TabIndex = 13
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.Location = New System.Drawing.Point(333, 218)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.TabIndex = 14
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'chkVariableWidth
+        '
+        Me.chkVariableWidth.AutoSize = True
+        Me.chkVariableWidth.Location = New System.Drawing.Point(22, 185)
+        Me.chkVariableWidth.Name = "chkVariableWidth"
+        Me.chkVariableWidth.Size = New System.Drawing.Size(92, 17)
+        Me.chkVariableWidth.TabIndex = 15
+        Me.chkVariableWidth.Tag = "Variable_width"
+        Me.chkVariableWidth.Text = "Variable width"
+        Me.chkVariableWidth.UseVisualStyleBackColor = True
+        '
+        'chkHorizontalBoxplot
+        '
+        Me.chkHorizontalBoxplot.AutoSize = True
+        Me.chkHorizontalBoxplot.Location = New System.Drawing.Point(22, 224)
+        Me.chkHorizontalBoxplot.Name = "chkHorizontalBoxplot"
+        Me.chkHorizontalBoxplot.Size = New System.Drawing.Size(110, 17)
+        Me.chkHorizontalBoxplot.TabIndex = 16
+        Me.chkHorizontalBoxplot.Tag = "Horizontal_boxplot"
+        Me.chkHorizontalBoxplot.Text = "Horizontal boxplot"
+        Me.chkHorizontalBoxplot.UseVisualStyleBackColor = True
+        '
+        'chkNotchedBoxplot
+        '
+        Me.chkNotchedBoxplot.AutoSize = True
+        Me.chkNotchedBoxplot.Location = New System.Drawing.Point(166, 185)
+        Me.chkNotchedBoxplot.Name = "chkNotchedBoxplot"
+        Me.chkNotchedBoxplot.Size = New System.Drawing.Size(104, 17)
+        Me.chkNotchedBoxplot.TabIndex = 17
+        Me.chkNotchedBoxplot.Tag = "Notched_boxplot"
+        Me.chkNotchedBoxplot.Text = "Notched boxplot"
+        Me.chkNotchedBoxplot.UseVisualStyleBackColor = True
+        '
         'dlgBoxPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(426, 249)
+        Me.ClientSize = New System.Drawing.Size(434, 300)
+        Me.Controls.Add(Me.chkNotchedBoxplot)
+        Me.Controls.Add(Me.chkHorizontalBoxplot)
+        Me.Controls.Add(Me.chkVariableWidth)
+        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.cboByFactors)
+        Me.Controls.Add(Me.chkByFactors)
         Me.Controls.Add(Me.lblDataToPlot)
-        Me.Controls.Add(Me.txtXLabel)
-        Me.Controls.Add(Me.txtYLabel)
-        Me.Controls.Add(Me.lblXLabel)
-        Me.Controls.Add(Me.lblYlab)
         Me.Controls.Add(Me.ucrReceiveBoxplotVariable)
         Me.Controls.Add(Me.UcrAddRemove)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.txtTitle)
-        Me.Controls.Add(Me.lblTitle)
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -142,14 +153,14 @@ Partial Class dlgBoxPlot
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lblTitle As Label
-    Friend WithEvents txtTitle As TextBox
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents UcrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrReceiveBoxplotVariable As ucrReceiverSingle
-    Friend WithEvents lblYlab As Label
-    Friend WithEvents lblXLabel As Label
-    Friend WithEvents txtYLabel As TextBox
-    Friend WithEvents txtXLabel As TextBox
     Friend WithEvents lblDataToPlot As Label
+    Friend WithEvents chkByFactors As CheckBox
+    Friend WithEvents cboByFactors As ComboBox
+    Friend WithEvents cmdOptions As Button
+    Friend WithEvents chkVariableWidth As CheckBox
+    Friend WithEvents chkHorizontalBoxplot As CheckBox
+    Friend WithEvents chkNotchedBoxplot As CheckBox
 End Class

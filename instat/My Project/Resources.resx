@@ -625,7 +625,22 @@
   <data name="Save_results_in" xml:space="preserve">
     <value>Save results in</value>
   </data>
+  <data name="By_factors" xml:space="preserve">
+    <value>By_factor(s)</value>
+  </data>
   <data name="Data_to_be_plotted" xml:space="preserve">
     <value>Data to be plotted</value>
+  </data>
+  <data name="Horizontal_boxplot" xml:space="preserve">
+    <value>Horizontal boxplot</value>
+  </data>
+  <data name="Notched_boxplot" xml:space="preserve">
+    <value>Notched boxplot</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="Variable_width" xml:space="preserve">
+    <value>Variable width</value>
   </data>
 </root>
