@@ -31,42 +31,43 @@ Partial Class dlgBoxPlot
         Me.lblXLabel = New System.Windows.Forms.Label()
         Me.txtYLabel = New System.Windows.Forms.TextBox()
         Me.txtXLabel = New System.Windows.Forms.TextBox()
+        Me.lblDataToPlot = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblTitle
         '
         Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(35, 200)
+        Me.lblTitle.Location = New System.Drawing.Point(12, 179)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(30, 13)
+        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
         Me.lblTitle.TabIndex = 2
         Me.lblTitle.Tag = "Title"
         Me.lblTitle.Text = "Title"
         '
         'txtTitle
         '
-        Me.txtTitle.Location = New System.Drawing.Point(165, 193)
+        Me.txtTitle.Location = New System.Drawing.Point(61, 172)
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.Size = New System.Drawing.Size(208, 20)
         Me.txtTitle.TabIndex = 3
         '
         'UcrAddRemove
         '
-        Me.UcrAddRemove.Location = New System.Drawing.Point(26, 5)
+        Me.UcrAddRemove.Location = New System.Drawing.Point(12, 5)
         Me.UcrAddRemove.Name = "UcrAddRemove"
-        Me.UcrAddRemove.Size = New System.Drawing.Size(186, 129)
+        Me.UcrAddRemove.Size = New System.Drawing.Size(211, 129)
         Me.UcrAddRemove.TabIndex = 6
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 219)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 212)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 4
         '
         'ucrReceiveBoxplotVariable
         '
-        Me.ucrReceiveBoxplotVariable.Location = New System.Drawing.Point(267, 31)
+        Me.ucrReceiveBoxplotVariable.Location = New System.Drawing.Point(237, 42)
         Me.ucrReceiveBoxplotVariable.Name = "ucrReceiveBoxplotVariable"
         Me.ucrReceiveBoxplotVariable.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiveBoxplotVariable.TabIndex = 7
@@ -74,7 +75,7 @@ Partial Class dlgBoxPlot
         'lblYlab
         '
         Me.lblYlab.AutoSize = True
-        Me.lblYlab.Location = New System.Drawing.Point(26, 148)
+        Me.lblYlab.Location = New System.Drawing.Point(12, 143)
         Me.lblYlab.Name = "lblYlab"
         Me.lblYlab.Size = New System.Drawing.Size(43, 13)
         Me.lblYlab.TabIndex = 8
@@ -84,7 +85,7 @@ Partial Class dlgBoxPlot
         'lblXLabel
         '
         Me.lblXLabel.AutoSize = True
-        Me.lblXLabel.Location = New System.Drawing.Point(219, 144)
+        Me.lblXLabel.Location = New System.Drawing.Point(180, 143)
         Me.lblXLabel.Name = "lblXLabel"
         Me.lblXLabel.Size = New System.Drawing.Size(43, 13)
         Me.lblXLabel.TabIndex = 9
@@ -93,23 +94,34 @@ Partial Class dlgBoxPlot
         '
         'txtYLabel
         '
-        Me.txtYLabel.Location = New System.Drawing.Point(96, 141)
+        Me.txtYLabel.Location = New System.Drawing.Point(61, 140)
         Me.txtYLabel.Name = "txtYLabel"
         Me.txtYLabel.Size = New System.Drawing.Size(100, 20)
         Me.txtYLabel.TabIndex = 10
         '
         'txtXLabel
         '
-        Me.txtXLabel.Location = New System.Drawing.Point(273, 141)
+        Me.txtXLabel.Location = New System.Drawing.Point(243, 143)
         Me.txtXLabel.Name = "txtXLabel"
         Me.txtXLabel.Size = New System.Drawing.Size(100, 20)
         Me.txtXLabel.TabIndex = 10
+        '
+        'lblDataToPlot
+        '
+        Me.lblDataToPlot.AutoSize = True
+        Me.lblDataToPlot.Location = New System.Drawing.Point(240, 26)
+        Me.lblDataToPlot.Name = "lblDataToPlot"
+        Me.lblDataToPlot.Size = New System.Drawing.Size(92, 13)
+        Me.lblDataToPlot.TabIndex = 11
+        Me.lblDataToPlot.Tag = "Data_to_be_plotted"
+        Me.lblDataToPlot.Text = "Data to be plotted"
         '
         'dlgBoxPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(465, 269)
+        Me.ClientSize = New System.Drawing.Size(426, 249)
+        Me.Controls.Add(Me.lblDataToPlot)
         Me.Controls.Add(Me.txtXLabel)
         Me.Controls.Add(Me.txtYLabel)
         Me.Controls.Add(Me.lblXLabel)
@@ -139,4 +151,5 @@ Partial Class dlgBoxPlot
     Friend WithEvents lblXLabel As Label
     Friend WithEvents txtYLabel As TextBox
     Friend WithEvents txtXLabel As TextBox
+    Friend WithEvents lblDataToPlot As Label
 End Class
