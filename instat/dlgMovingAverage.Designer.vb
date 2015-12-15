@@ -92,6 +92,7 @@ Partial Class dlgMovingAverage
         Me.chkPlot.Name = "chkPlot"
         Me.chkPlot.Size = New System.Drawing.Size(44, 17)
         Me.chkPlot.TabIndex = 8
+        Me.chkPlot.Tag = "Plot"
         Me.chkPlot.Text = "Plot"
         Me.chkPlot.UseVisualStyleBackColor = True
         '
@@ -116,7 +117,7 @@ Partial Class dlgMovingAverage
         '
         Me.ucrReceiverDataToAverage.Location = New System.Drawing.Point(236, 38)
         Me.ucrReceiverDataToAverage.Name = "ucrReceiverDataToAverage"
-        Me.ucrReceiverDataToAverage.Size = New System.Drawing.Size(102, 26)
+        Me.ucrReceiverDataToAverage.Size = New System.Drawing.Size(108, 26)
         Me.ucrReceiverDataToAverage.TabIndex = 2
         '
         'ucrBase

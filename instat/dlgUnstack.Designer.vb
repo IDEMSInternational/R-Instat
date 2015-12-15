@@ -23,7 +23,7 @@ Partial Class dlgUnstack
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.UcrReceiverUnstack = New instat.ucrReceiverSingle()
+        Me.ucrReceiverUnstack = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.chkRowsDefinedBy = New System.Windows.Forms.CheckBox()
         Me.chkCarryFurtherColumns = New System.Windows.Forms.CheckBox()
@@ -41,12 +41,12 @@ Partial Class dlgUnstack
         Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
         Me.ucrAddRemove.TabIndex = 0
         '
-        'UcrReceiverUnstack
+        'ucrReceiverUnstack
         '
-        Me.UcrReceiverUnstack.Location = New System.Drawing.Point(245, 22)
-        Me.UcrReceiverUnstack.Name = "UcrReceiverUnstack"
-        Me.UcrReceiverUnstack.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReceiverUnstack.TabIndex = 1
+        Me.ucrReceiverUnstack.Location = New System.Drawing.Point(245, 22)
+        Me.ucrReceiverUnstack.Name = "ucrReceiverUnstack"
+        Me.ucrReceiverUnstack.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverUnstack.TabIndex = 1
         '
         'ucrBase
         '
@@ -73,7 +73,7 @@ Partial Class dlgUnstack
         Me.chkCarryFurtherColumns.Name = "chkCarryFurtherColumns"
         Me.chkCarryFurtherColumns.Size = New System.Drawing.Size(125, 17)
         Me.chkCarryFurtherColumns.TabIndex = 3
-        Me.chkCarryFurtherColumns.Tag = "Carry_Further_Columns"
+        Me.chkCarryFurtherColumns.Tag = "Carry_further_columns"
         Me.chkCarryFurtherColumns.Text = "Carry further columns"
         Me.chkCarryFurtherColumns.UseVisualStyleBackColor = True
         '
@@ -134,7 +134,7 @@ Partial Class dlgUnstack
         Me.Controls.Add(Me.chkCarryFurtherColumns)
         Me.Controls.Add(Me.chkRowsDefinedBy)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.UcrReceiverUnstack)
+        Me.Controls.Add(Me.ucrReceiverUnstack)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgUnstack"
@@ -147,7 +147,7 @@ Partial Class dlgUnstack
     End Sub
 
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents UcrReceiverUnstack As ucrReceiverSingle
+    Friend WithEvents ucrReceiverUnstack As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents chkRowsDefinedBy As CheckBox
     Friend WithEvents chkCarryFurtherColumns As CheckBox

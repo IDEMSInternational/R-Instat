@@ -37,7 +37,7 @@ Partial Class dlgNon_ParametricANOVA
         Me.lblYVariate.Name = "lblYVariate"
         Me.lblYVariate.Size = New System.Drawing.Size(49, 13)
         Me.lblYVariate.TabIndex = 4
-        Me.lblYVariate.Tag = "Y_Variate"
+        Me.lblYVariate.Tag = "Y_variate"
         Me.lblYVariate.Text = "Y variate"
         '
         'lblFactor
@@ -92,7 +92,7 @@ Partial Class dlgNon_ParametricANOVA
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgNon_ParametricANOVA"
         Me.Tag = "Non_Parametric_One_Way_ANOVA"
-        Me.Text = "dlgNon-ParametricANOVA"
+        Me.Text = "Non-Parametric One-Way ANOVA"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

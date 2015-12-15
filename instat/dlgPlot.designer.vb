@@ -25,7 +25,7 @@ Partial Class dlgPlot
         Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.lblXvariable = New System.Windows.Forms.Label()
-        Me.lblYvariable = New System.Windows.Forms.Label()
+        Me.lblYVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
@@ -61,15 +61,15 @@ Partial Class dlgPlot
         Me.lblXvariable.Tag = "X_variable"
         Me.lblXvariable.Text = "X  - Variable"
         '
-        'lblYvariable
+        'lblYVariable
         '
-        Me.lblYvariable.AutoSize = True
-        Me.lblYvariable.Location = New System.Drawing.Point(222, 15)
-        Me.lblYvariable.Name = "lblYvariable"
-        Me.lblYvariable.Size = New System.Drawing.Size(72, 13)
-        Me.lblYvariable.TabIndex = 17
-        Me.lblYvariable.Tag = "Y_variables "
-        Me.lblYvariable.Text = "Y - Variable(s)"
+        Me.lblYVariable.AutoSize = True
+        Me.lblYVariable.Location = New System.Drawing.Point(222, 15)
+        Me.lblYVariable.Name = "lblYVariable"
+        Me.lblYVariable.Size = New System.Drawing.Size(72, 13)
+        Me.lblYVariable.TabIndex = 17
+        Me.lblYVariable.Tag = "Y_variable_s_ "
+        Me.lblYVariable.Text = "Y - Variable(s)"
         '
         'lblAvailable
         '
@@ -118,7 +118,7 @@ Partial Class dlgPlot
         Me.Controls.Add(Me.txtTitle)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.lblXvariable)
-        Me.Controls.Add(Me.lblYvariable)
+        Me.Controls.Add(Me.lblYVariable)
         Me.Controls.Add(Me.lblAvailable)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -134,7 +134,7 @@ Partial Class dlgPlot
     Friend WithEvents txtTitle As TextBox
     Friend WithEvents lblTitle As Label
     Friend WithEvents lblXvariable As Label
-    Friend WithEvents lblYvariable As Label
+    Friend WithEvents lblYVariable As Label
     Friend WithEvents lblAvailable As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove

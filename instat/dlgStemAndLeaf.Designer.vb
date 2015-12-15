@@ -31,7 +31,7 @@ Partial Class dlgStemAndLeaf
         '
         Me.UcrAddRemove.Location = New System.Drawing.Point(2, 12)
         Me.UcrAddRemove.Name = "UcrAddRemove"
-        Me.UcrAddRemove.Size = New System.Drawing.Size(186, 129)
+        Me.UcrAddRemove.Size = New System.Drawing.Size(215, 129)
         Me.UcrAddRemove.TabIndex = 0
         '
         'ucrReceiverStemAndLeaf
@@ -60,7 +60,7 @@ Partial Class dlgStemAndLeaf
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgStemAndLeaf"
-        Me.Tag = "StemandLeaf"
+        Me.Tag = "Stem_and_Leaf"
         Me.Text = "Stem and Leaf"
         Me.ResumeLayout(False)
 

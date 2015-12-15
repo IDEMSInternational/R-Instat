@@ -23,6 +23,17 @@ Partial Class dlgTransform
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpCalculatedTransformations = New System.Windows.Forms.GroupBox()
+        Me.grpOtherTransformations = New System.Windows.Forms.GroupBox()
+        Me.grpLag = New System.Windows.Forms.GroupBox()
+        Me.lblRows = New System.Windows.Forms.Label()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.grpTransformationsOther = New System.Windows.Forms.GroupBox()
+        Me.rdoDifference = New System.Windows.Forms.RadioButton()
+        Me.rdoLag = New System.Windows.Forms.RadioButton()
+        Me.rdoStandardise = New System.Windows.Forms.RadioButton()
+        Me.rdoNormalScore = New System.Windows.Forms.RadioButton()
+        Me.rdoSort = New System.Windows.Forms.RadioButton()
+        Me.rdoRank = New System.Windows.Forms.RadioButton()
         Me.grpPercentageTransformations = New System.Windows.Forms.GroupBox()
         Me.lbl01Adjustment = New System.Windows.Forms.Label()
         Me.rdoProbit = New System.Windows.Forms.RadioButton()
@@ -48,7 +59,7 @@ Partial Class dlgTransform
         Me.rdoLogBase10 = New System.Windows.Forms.RadioButton()
         Me.rdoNaturalLog = New System.Windows.Forms.RadioButton()
         Me.rdoSquareRoot = New System.Windows.Forms.RadioButton()
-        Me.grpTypeofdata = New System.Windows.Forms.GroupBox()
+        Me.grpTypeOfData = New System.Windows.Forms.GroupBox()
         Me.rdoProportion = New System.Windows.Forms.RadioButton()
         Me.rdoPercentage = New System.Windows.Forms.RadioButton()
         Me.rdoCircular = New System.Windows.Forms.RadioButton()
@@ -61,46 +72,165 @@ Partial Class dlgTransform
         Me.txtInto = New System.Windows.Forms.TextBox()
         Me.btnPreview = New System.Windows.Forms.Button()
         Me.cmbPreview = New System.Windows.Forms.ComboBox()
-        Me.grpOtherTransformations = New System.Windows.Forms.GroupBox()
-        Me.grpLag = New System.Windows.Forms.GroupBox()
-        Me.lblRows = New System.Windows.Forms.Label()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
-        Me.grpTransformationsOther = New System.Windows.Forms.GroupBox()
-        Me.rdoDifference = New System.Windows.Forms.RadioButton()
-        Me.rdoLag = New System.Windows.Forms.RadioButton()
-        Me.rdoStandardise = New System.Windows.Forms.RadioButton()
-        Me.rdoNormalScore = New System.Windows.Forms.RadioButton()
-        Me.rdoSort = New System.Windows.Forms.RadioButton()
-        Me.rdoRank = New System.Windows.Forms.RadioButton()
-        Me.UcrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
+        Me.ucrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
+        Me.ucrReceiverSingle1 = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpCalculatedTransformations.SuspendLayout()
-        Me.grpPercentageTransformations.SuspendLayout()
-        Me.grpCircularTransformations.SuspendLayout()
-        Me.grpNonNegativeTransformations.SuspendLayout()
-        Me.grpTypeofdata.SuspendLayout()
-        Me.grpTransformationType.SuspendLayout()
         Me.grpOtherTransformations.SuspendLayout()
         Me.grpLag.SuspendLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTransformationsOther.SuspendLayout()
+        Me.grpPercentageTransformations.SuspendLayout()
+        Me.grpCircularTransformations.SuspendLayout()
+        Me.grpNonNegativeTransformations.SuspendLayout()
+        Me.grpTypeOfData.SuspendLayout()
+        Me.grpTransformationType.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpCalculatedTransformations
         '
+        Me.grpCalculatedTransformations.Controls.Add(Me.grpOtherTransformations)
         Me.grpCalculatedTransformations.Controls.Add(Me.grpPercentageTransformations)
         Me.grpCalculatedTransformations.Controls.Add(Me.chkInverse)
         Me.grpCalculatedTransformations.Controls.Add(Me.grpCircularTransformations)
         Me.grpCalculatedTransformations.Controls.Add(Me.grpNonNegativeTransformations)
-        Me.grpCalculatedTransformations.Controls.Add(Me.grpTypeofdata)
-        Me.grpCalculatedTransformations.Location = New System.Drawing.Point(18, 149)
+        Me.grpCalculatedTransformations.Controls.Add(Me.grpTypeOfData)
+        Me.grpCalculatedTransformations.Location = New System.Drawing.Point(18, 147)
         Me.grpCalculatedTransformations.Name = "grpCalculatedTransformations"
         Me.grpCalculatedTransformations.Size = New System.Drawing.Size(292, 187)
         Me.grpCalculatedTransformations.TabIndex = 3
         Me.grpCalculatedTransformations.TabStop = False
         Me.grpCalculatedTransformations.Tag = "Calculated_Transformations"
         Me.grpCalculatedTransformations.Text = "Calculated Transformations"
+        '
+        'grpOtherTransformations
+        '
+        Me.grpOtherTransformations.Controls.Add(Me.grpLag)
+        Me.grpOtherTransformations.Controls.Add(Me.grpTransformationsOther)
+        Me.grpOtherTransformations.Location = New System.Drawing.Point(268, 19)
+        Me.grpOtherTransformations.Name = "grpOtherTransformations"
+        Me.grpOtherTransformations.Size = New System.Drawing.Size(271, 187)
+        Me.grpOtherTransformations.TabIndex = 10
+        Me.grpOtherTransformations.TabStop = False
+        Me.grpOtherTransformations.Tag = "Other_Transformations"
+        Me.grpOtherTransformations.Text = "Other Transformations"
+        '
+        'grpLag
+        '
+        Me.grpLag.Controls.Add(Me.lblRows)
+        Me.grpLag.Controls.Add(Me.NumericUpDown1)
+        Me.grpLag.Location = New System.Drawing.Point(135, 97)
+        Me.grpLag.Name = "grpLag"
+        Me.grpLag.Size = New System.Drawing.Size(104, 41)
+        Me.grpLag.TabIndex = 12
+        Me.grpLag.TabStop = False
+        Me.grpLag.Tag = "Lag"
+        Me.grpLag.Text = "Lag"
+        '
+        'lblRows
+        '
+        Me.lblRows.AutoSize = True
+        Me.lblRows.Location = New System.Drawing.Point(67, 23)
+        Me.lblRows.Name = "lblRows"
+        Me.lblRows.Size = New System.Drawing.Size(35, 13)
+        Me.lblRows.TabIndex = 1
+        Me.lblRows.Tag = "rows"
+        Me.lblRows.Text = "row(s)"
+        '
+        'NumericUpDown1
+        '
+        Me.NumericUpDown1.AllowDrop = True
+        Me.NumericUpDown1.Location = New System.Drawing.Point(29, 17)
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Size = New System.Drawing.Size(31, 20)
+        Me.NumericUpDown1.TabIndex = 0
+        Me.NumericUpDown1.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'grpTransformationsOther
+        '
+        Me.grpTransformationsOther.Controls.Add(Me.rdoDifference)
+        Me.grpTransformationsOther.Controls.Add(Me.rdoLag)
+        Me.grpTransformationsOther.Controls.Add(Me.rdoStandardise)
+        Me.grpTransformationsOther.Controls.Add(Me.rdoNormalScore)
+        Me.grpTransformationsOther.Controls.Add(Me.rdoSort)
+        Me.grpTransformationsOther.Controls.Add(Me.rdoRank)
+        Me.grpTransformationsOther.Location = New System.Drawing.Point(6, 19)
+        Me.grpTransformationsOther.Name = "grpTransformationsOther"
+        Me.grpTransformationsOther.Size = New System.Drawing.Size(114, 141)
+        Me.grpTransformationsOther.TabIndex = 1
+        Me.grpTransformationsOther.TabStop = False
+        '
+        'rdoDifference
+        '
+        Me.rdoDifference.AutoSize = True
+        Me.rdoDifference.Location = New System.Drawing.Point(6, 120)
+        Me.rdoDifference.Name = "rdoDifference"
+        Me.rdoDifference.Size = New System.Drawing.Size(74, 17)
+        Me.rdoDifference.TabIndex = 5
+        Me.rdoDifference.TabStop = True
+        Me.rdoDifference.Tag = "Difference"
+        Me.rdoDifference.Text = "Difference"
+        Me.rdoDifference.UseVisualStyleBackColor = True
+        '
+        'rdoLag
+        '
+        Me.rdoLag.AutoSize = True
+        Me.rdoLag.Location = New System.Drawing.Point(6, 98)
+        Me.rdoLag.Name = "rdoLag"
+        Me.rdoLag.Size = New System.Drawing.Size(43, 17)
+        Me.rdoLag.TabIndex = 4
+        Me.rdoLag.TabStop = True
+        Me.rdoLag.Tag = "Lag"
+        Me.rdoLag.Text = "Lag"
+        Me.rdoLag.UseVisualStyleBackColor = True
+        '
+        'rdoStandardise
+        '
+        Me.rdoStandardise.AutoSize = True
+        Me.rdoStandardise.Location = New System.Drawing.Point(6, 76)
+        Me.rdoStandardise.Name = "rdoStandardise"
+        Me.rdoStandardise.Size = New System.Drawing.Size(81, 17)
+        Me.rdoStandardise.TabIndex = 3
+        Me.rdoStandardise.TabStop = True
+        Me.rdoStandardise.Tag = "Standardise"
+        Me.rdoStandardise.Text = "Standardise"
+        Me.rdoStandardise.UseVisualStyleBackColor = True
+        '
+        'rdoNormalScore
+        '
+        Me.rdoNormalScore.AutoSize = True
+        Me.rdoNormalScore.Location = New System.Drawing.Point(6, 54)
+        Me.rdoNormalScore.Name = "rdoNormalScore"
+        Me.rdoNormalScore.Size = New System.Drawing.Size(89, 17)
+        Me.rdoNormalScore.TabIndex = 2
+        Me.rdoNormalScore.TabStop = True
+        Me.rdoNormalScore.Tag = "Normal_Score"
+        Me.rdoNormalScore.Text = "Normal Score"
+        Me.rdoNormalScore.UseVisualStyleBackColor = True
+        '
+        'rdoSort
+        '
+        Me.rdoSort.AutoSize = True
+        Me.rdoSort.Location = New System.Drawing.Point(6, 32)
+        Me.rdoSort.Name = "rdoSort"
+        Me.rdoSort.Size = New System.Drawing.Size(44, 17)
+        Me.rdoSort.TabIndex = 1
+        Me.rdoSort.TabStop = True
+        Me.rdoSort.Tag = "Sort"
+        Me.rdoSort.Text = "Sort"
+        Me.rdoSort.UseVisualStyleBackColor = True
+        '
+        'rdoRank
+        '
+        Me.rdoRank.AutoSize = True
+        Me.rdoRank.Location = New System.Drawing.Point(6, 10)
+        Me.rdoRank.Name = "rdoRank"
+        Me.rdoRank.Size = New System.Drawing.Size(51, 17)
+        Me.rdoRank.TabIndex = 0
+        Me.rdoRank.TabStop = True
+        Me.rdoRank.Tag = "Rank"
+        Me.rdoRank.Text = "Rank"
+        Me.rdoRank.UseVisualStyleBackColor = True
         '
         'grpPercentageTransformations
         '
@@ -119,7 +249,7 @@ Partial Class dlgTransform
         'lbl01Adjustment
         '
         Me.lbl01Adjustment.AutoSize = True
-        Me.lbl01Adjustment.Location = New System.Drawing.Point(116, 32)
+        Me.lbl01Adjustment.Location = New System.Drawing.Point(112, 33)
         Me.lbl01Adjustment.Name = "lbl01Adjustment"
         Me.lbl01Adjustment.Size = New System.Drawing.Size(98, 13)
         Me.lbl01Adjustment.TabIndex = 10
@@ -377,19 +507,19 @@ Partial Class dlgTransform
         Me.rdoSquareRoot.Text = "Square root"
         Me.rdoSquareRoot.UseVisualStyleBackColor = True
         '
-        'grpTypeofdata
+        'grpTypeOfData
         '
-        Me.grpTypeofdata.Controls.Add(Me.rdoProportion)
-        Me.grpTypeofdata.Controls.Add(Me.rdoPercentage)
-        Me.grpTypeofdata.Controls.Add(Me.rdoCircular)
-        Me.grpTypeofdata.Controls.Add(Me.rdoNonNegative)
-        Me.grpTypeofdata.Location = New System.Drawing.Point(5, 16)
-        Me.grpTypeofdata.Name = "grpTypeofdata"
-        Me.grpTypeofdata.Size = New System.Drawing.Size(260, 59)
-        Me.grpTypeofdata.TabIndex = 0
-        Me.grpTypeofdata.TabStop = False
-        Me.grpTypeofdata.Tag = "Type_of_data"
-        Me.grpTypeofdata.Text = "Type of data"
+        Me.grpTypeOfData.Controls.Add(Me.rdoProportion)
+        Me.grpTypeOfData.Controls.Add(Me.rdoPercentage)
+        Me.grpTypeOfData.Controls.Add(Me.rdoCircular)
+        Me.grpTypeOfData.Controls.Add(Me.rdoNonNegative)
+        Me.grpTypeOfData.Location = New System.Drawing.Point(5, 16)
+        Me.grpTypeOfData.Name = "grpTypeOfData"
+        Me.grpTypeOfData.Size = New System.Drawing.Size(260, 59)
+        Me.grpTypeOfData.TabIndex = 0
+        Me.grpTypeOfData.TabStop = False
+        Me.grpTypeOfData.Tag = "Type_of_data"
+        Me.grpTypeOfData.Text = "Type of data"
         '
         'rdoProportion
         '
@@ -406,7 +536,7 @@ Partial Class dlgTransform
         'rdoPercentage
         '
         Me.rdoPercentage.AutoSize = True
-        Me.rdoPercentage.Location = New System.Drawing.Point(128, 19)
+        Me.rdoPercentage.Location = New System.Drawing.Point(128, 16)
         Me.rdoPercentage.Name = "rdoPercentage"
         Me.rdoPercentage.Size = New System.Drawing.Size(80, 17)
         Me.rdoPercentage.TabIndex = 2
@@ -430,7 +560,7 @@ Partial Class dlgTransform
         'rdoNonNegative
         '
         Me.rdoNonNegative.AutoSize = True
-        Me.rdoNonNegative.Location = New System.Drawing.Point(7, 19)
+        Me.rdoNonNegative.Location = New System.Drawing.Point(7, 17)
         Me.rdoNonNegative.Name = "rdoNonNegative"
         Me.rdoNonNegative.Size = New System.Drawing.Size(91, 17)
         Me.rdoNonNegative.TabIndex = 0
@@ -476,7 +606,7 @@ Partial Class dlgTransform
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(251, 29)
+        Me.lblFrom.Location = New System.Drawing.Point(251, 36)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(30, 13)
         Me.lblFrom.TabIndex = 5
@@ -502,7 +632,7 @@ Partial Class dlgTransform
         '
         'btnPreview
         '
-        Me.btnPreview.Location = New System.Drawing.Point(15, 342)
+        Me.btnPreview.Location = New System.Drawing.Point(15, 352)
         Me.btnPreview.Name = "btnPreview"
         Me.btnPreview.Size = New System.Drawing.Size(75, 23)
         Me.btnPreview.TabIndex = 8
@@ -513,157 +643,28 @@ Partial Class dlgTransform
         'cmbPreview
         '
         Me.cmbPreview.FormattingEnabled = True
-        Me.cmbPreview.Location = New System.Drawing.Point(108, 342)
+        Me.cmbPreview.Location = New System.Drawing.Point(108, 350)
         Me.cmbPreview.Name = "cmbPreview"
         Me.cmbPreview.Size = New System.Drawing.Size(280, 21)
         Me.cmbPreview.TabIndex = 9
         '
-        'grpOtherTransformations
+        'ucrSelectorAddRemove1
         '
-        Me.grpOtherTransformations.Controls.Add(Me.grpLag)
-        Me.grpOtherTransformations.Controls.Add(Me.grpTransformationsOther)
-        Me.grpOtherTransformations.Location = New System.Drawing.Point(15, 152)
-        Me.grpOtherTransformations.Name = "grpOtherTransformations"
-        Me.grpOtherTransformations.Size = New System.Drawing.Size(271, 187)
-        Me.grpOtherTransformations.TabIndex = 10
-        Me.grpOtherTransformations.TabStop = False
-        Me.grpOtherTransformations.Tag = "Other_Transformations"
-        Me.grpOtherTransformations.Text = "Other Transformations"
+        Me.ucrSelectorAddRemove1.Location = New System.Drawing.Point(12, 19)
+        Me.ucrSelectorAddRemove1.Name = "ucrSelectorAddRemove1"
+        Me.ucrSelectorAddRemove1.Size = New System.Drawing.Size(203, 127)
+        Me.ucrSelectorAddRemove1.TabIndex = 2
         '
-        'grpLag
+        'ucrReceiverSingle1
         '
-        Me.grpLag.Controls.Add(Me.lblRows)
-        Me.grpLag.Controls.Add(Me.NumericUpDown1)
-        Me.grpLag.Location = New System.Drawing.Point(135, 97)
-        Me.grpLag.Name = "grpLag"
-        Me.grpLag.Size = New System.Drawing.Size(104, 41)
-        Me.grpLag.TabIndex = 12
-        Me.grpLag.TabStop = False
-        Me.grpLag.Tag = "Lag"
-        Me.grpLag.Text = "Lag"
-        '
-        'lblRows
-        '
-        Me.lblRows.AutoSize = True
-        Me.lblRows.Location = New System.Drawing.Point(67, 23)
-        Me.lblRows.Name = "lblRows"
-        Me.lblRows.Size = New System.Drawing.Size(35, 13)
-        Me.lblRows.TabIndex = 1
-        Me.lblRows.Tag = "rows"
-        Me.lblRows.Text = "row(s)"
-        '
-        'NumericUpDown1
-        '
-        Me.NumericUpDown1.AllowDrop = True
-        Me.NumericUpDown1.Location = New System.Drawing.Point(29, 17)
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(31, 20)
-        Me.NumericUpDown1.TabIndex = 0
-        Me.NumericUpDown1.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'grpTransformationsOther
-        '
-        Me.grpTransformationsOther.Controls.Add(Me.rdoDifference)
-        Me.grpTransformationsOther.Controls.Add(Me.rdoLag)
-        Me.grpTransformationsOther.Controls.Add(Me.rdoStandardise)
-        Me.grpTransformationsOther.Controls.Add(Me.rdoNormalScore)
-        Me.grpTransformationsOther.Controls.Add(Me.rdoSort)
-        Me.grpTransformationsOther.Controls.Add(Me.rdoRank)
-        Me.grpTransformationsOther.Location = New System.Drawing.Point(6, 19)
-        Me.grpTransformationsOther.Name = "grpTransformationsOther"
-        Me.grpTransformationsOther.Size = New System.Drawing.Size(114, 141)
-        Me.grpTransformationsOther.TabIndex = 1
-        Me.grpTransformationsOther.TabStop = False
-        '
-        'rdoDifference
-        '
-        Me.rdoDifference.AutoSize = True
-        Me.rdoDifference.Location = New System.Drawing.Point(6, 120)
-        Me.rdoDifference.Name = "rdoDifference"
-        Me.rdoDifference.Size = New System.Drawing.Size(74, 17)
-        Me.rdoDifference.TabIndex = 5
-        Me.rdoDifference.TabStop = True
-        Me.rdoDifference.Tag = "Difference"
-        Me.rdoDifference.Text = "Difference"
-        Me.rdoDifference.UseVisualStyleBackColor = True
-        '
-        'rdoLag
-        '
-        Me.rdoLag.AutoSize = True
-        Me.rdoLag.Location = New System.Drawing.Point(6, 98)
-        Me.rdoLag.Name = "rdoLag"
-        Me.rdoLag.Size = New System.Drawing.Size(43, 17)
-        Me.rdoLag.TabIndex = 4
-        Me.rdoLag.TabStop = True
-        Me.rdoLag.Tag = "Lag"
-        Me.rdoLag.Text = "Lag"
-        Me.rdoLag.UseVisualStyleBackColor = True
-        '
-        'rdoStandardise
-        '
-        Me.rdoStandardise.AutoSize = True
-        Me.rdoStandardise.Location = New System.Drawing.Point(6, 76)
-        Me.rdoStandardise.Name = "rdoStandardise"
-        Me.rdoStandardise.Size = New System.Drawing.Size(81, 17)
-        Me.rdoStandardise.TabIndex = 3
-        Me.rdoStandardise.TabStop = True
-        Me.rdoStandardise.Tag = "Standardise"
-        Me.rdoStandardise.Text = "Standardise"
-        Me.rdoStandardise.UseVisualStyleBackColor = True
-        '
-        'rdoNormalScore
-        '
-        Me.rdoNormalScore.AutoSize = True
-        Me.rdoNormalScore.Location = New System.Drawing.Point(6, 54)
-        Me.rdoNormalScore.Name = "rdoNormalScore"
-        Me.rdoNormalScore.Size = New System.Drawing.Size(89, 17)
-        Me.rdoNormalScore.TabIndex = 2
-        Me.rdoNormalScore.TabStop = True
-        Me.rdoNormalScore.Tag = "Normal_Score"
-        Me.rdoNormalScore.Text = "Normal Score"
-        Me.rdoNormalScore.UseVisualStyleBackColor = True
-        '
-        'rdoSort
-        '
-        Me.rdoSort.AutoSize = True
-        Me.rdoSort.Location = New System.Drawing.Point(6, 32)
-        Me.rdoSort.Name = "rdoSort"
-        Me.rdoSort.Size = New System.Drawing.Size(44, 17)
-        Me.rdoSort.TabIndex = 1
-        Me.rdoSort.TabStop = True
-        Me.rdoSort.Tag = "Sort"
-        Me.rdoSort.Text = "Sort"
-        Me.rdoSort.UseVisualStyleBackColor = True
-        '
-        'rdoRank
-        '
-        Me.rdoRank.AutoSize = True
-        Me.rdoRank.Location = New System.Drawing.Point(6, 10)
-        Me.rdoRank.Name = "rdoRank"
-        Me.rdoRank.Size = New System.Drawing.Size(51, 17)
-        Me.rdoRank.TabIndex = 0
-        Me.rdoRank.TabStop = True
-        Me.rdoRank.Tag = "Rank"
-        Me.rdoRank.Text = "Rank"
-        Me.rdoRank.UseVisualStyleBackColor = True
-        '
-        'UcrSelectorAddRemove1
-        '
-        Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(12, 19)
-        Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
-        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(203, 127)
-        Me.UcrSelectorAddRemove1.TabIndex = 2
-        '
-        'UcrReceiverSingle1
-        '
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(287, 29)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReceiverSingle1.TabIndex = 1
+        Me.ucrReceiverSingle1.Location = New System.Drawing.Point(287, 29)
+        Me.ucrReceiverSingle1.Name = "ucrReceiverSingle1"
+        Me.ucrReceiverSingle1.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverSingle1.TabIndex = 1
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(1, 369)
+        Me.ucrBase.Location = New System.Drawing.Point(1, 391)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 0
@@ -672,8 +673,7 @@ Partial Class dlgTransform
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 398)
-        Me.Controls.Add(Me.grpOtherTransformations)
+        Me.ClientSize = New System.Drawing.Size(405, 428)
         Me.Controls.Add(Me.cmbPreview)
         Me.Controls.Add(Me.btnPreview)
         Me.Controls.Add(Me.txtInto)
@@ -681,8 +681,8 @@ Partial Class dlgTransform
         Me.Controls.Add(Me.lblFrom)
         Me.Controls.Add(Me.grpTransformationType)
         Me.Controls.Add(Me.grpCalculatedTransformations)
-        Me.Controls.Add(Me.UcrSelectorAddRemove1)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
+        Me.Controls.Add(Me.ucrSelectorAddRemove1)
+        Me.Controls.Add(Me.ucrReceiverSingle1)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgTransform"
@@ -691,37 +691,37 @@ Partial Class dlgTransform
         Me.Text = "Transform"
         Me.grpCalculatedTransformations.ResumeLayout(False)
         Me.grpCalculatedTransformations.PerformLayout()
-        Me.grpPercentageTransformations.ResumeLayout(False)
-        Me.grpPercentageTransformations.PerformLayout()
-        Me.grpCircularTransformations.ResumeLayout(False)
-        Me.grpCircularTransformations.PerformLayout()
-        Me.grpNonNegativeTransformations.ResumeLayout(False)
-        Me.grpNonNegativeTransformations.PerformLayout()
-        Me.grpTypeofdata.ResumeLayout(False)
-        Me.grpTypeofdata.PerformLayout()
-        Me.grpTransformationType.ResumeLayout(False)
-        Me.grpTransformationType.PerformLayout()
         Me.grpOtherTransformations.ResumeLayout(False)
         Me.grpLag.ResumeLayout(False)
         Me.grpLag.PerformLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpTransformationsOther.ResumeLayout(False)
         Me.grpTransformationsOther.PerformLayout()
+        Me.grpPercentageTransformations.ResumeLayout(False)
+        Me.grpPercentageTransformations.PerformLayout()
+        Me.grpCircularTransformations.ResumeLayout(False)
+        Me.grpCircularTransformations.PerformLayout()
+        Me.grpNonNegativeTransformations.ResumeLayout(False)
+        Me.grpNonNegativeTransformations.PerformLayout()
+        Me.grpTypeOfData.ResumeLayout(False)
+        Me.grpTypeOfData.PerformLayout()
+        Me.grpTransformationType.ResumeLayout(False)
+        Me.grpTransformationType.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
-    Friend WithEvents UcrSelectorAddRemove1 As ucrSelectorAddRemove
+    Friend WithEvents ucrReceiverSingle1 As ucrReceiverSingle
+    Friend WithEvents ucrSelectorAddRemove1 As ucrSelectorAddRemove
     Friend WithEvents grpCalculatedTransformations As GroupBox
     Friend WithEvents grpNonNegativeTransformations As GroupBox
     Friend WithEvents rdoPower As RadioButton
     Friend WithEvents rdoLogBase10 As RadioButton
     Friend WithEvents rdoNaturalLog As RadioButton
     Friend WithEvents rdoSquareRoot As RadioButton
-    Friend WithEvents grpTypeofdata As GroupBox
+    Friend WithEvents grpTypeOfData As GroupBox
     Friend WithEvents rdoProportion As RadioButton
     Friend WithEvents rdoPercentage As RadioButton
     Friend WithEvents rdoCircular As RadioButton

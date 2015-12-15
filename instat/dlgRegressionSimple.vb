@@ -48,4 +48,5 @@ Public Class dlgRegressionSimple
         ucrBase.clsRsyntax.AddParameter(ucrReceiverSingleB.txtReceiverSingle.Text, "")
     End Sub
 
+
 End Class

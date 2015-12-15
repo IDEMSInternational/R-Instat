@@ -95,11 +95,11 @@ Partial Class dlgDuplicateColumns
         Me.rdoLabelL.AutoSize = True
         Me.rdoLabelL.Location = New System.Drawing.Point(262, 19)
         Me.rdoLabelL.Name = "rdoLabelL"
-        Me.rdoLabelL.Size = New System.Drawing.Size(61, 17)
+        Me.rdoLabelL.Size = New System.Drawing.Size(64, 17)
         Me.rdoLabelL.TabIndex = 2
         Me.rdoLabelL.TabStop = True
         Me.rdoLabelL.Tag = "Label_L"
-        Me.rdoLabelL.Text = "Type (L"
+        Me.rdoLabelL.Text = "Type (L)"
         Me.rdoLabelL.UseVisualStyleBackColor = True
         '
         'rdoColumnsX

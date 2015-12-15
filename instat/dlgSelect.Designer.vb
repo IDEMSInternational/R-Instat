@@ -24,22 +24,22 @@ Partial Class dlgSelect
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpSelectCriteria = New System.Windows.Forms.GroupBox()
-        Me.rdoSelectbyfactor = New System.Windows.Forms.RadioButton()
-        Me.rdoSelectbycondition = New System.Windows.Forms.RadioButton()
+        Me.rdoSelectByFactor = New System.Windows.Forms.RadioButton()
+        Me.rdoSelectByCondition = New System.Windows.Forms.RadioButton()
         Me.txtInto = New System.Windows.Forms.TextBox()
         Me.lblInto = New System.Windows.Forms.Label()
-        Me.UcrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
-        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
+        Me.ucrReceiverMultiple1 = New instat.ucrReceiverMultiple()
         Me.chkTranspose = New System.Windows.Forms.CheckBox()
         Me.chkAppend = New System.Windows.Forms.CheckBox()
         Me.grpCondition = New System.Windows.Forms.GroupBox()
         Me.chkShowCalculator = New System.Windows.Forms.CheckBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.grpFactor = New System.Windows.Forms.GroupBox()
-        Me.txtFactorLevels = New System.Windows.Forms.TextBox()
-        Me.lblFactorLevels = New System.Windows.Forms.Label()
-        Me.lblFactor = New System.Windows.Forms.Label()
         Me.cmbFactors = New System.Windows.Forms.ComboBox()
+        Me.lblFactor = New System.Windows.Forms.Label()
+        Me.lblFactorLevels = New System.Windows.Forms.Label()
+        Me.txtFactorLevels = New System.Windows.Forms.TextBox()
+        Me.grpFactor = New System.Windows.Forms.GroupBox()
         Me.grpSelectCriteria.SuspendLayout()
         Me.grpCondition.SuspendLayout()
         Me.grpFactor.SuspendLayout()
@@ -54,37 +54,37 @@ Partial Class dlgSelect
         '
         'grpSelectCriteria
         '
-        Me.grpSelectCriteria.Controls.Add(Me.rdoSelectbyfactor)
-        Me.grpSelectCriteria.Controls.Add(Me.rdoSelectbycondition)
+        Me.grpSelectCriteria.Controls.Add(Me.rdoSelectByFactor)
+        Me.grpSelectCriteria.Controls.Add(Me.rdoSelectByCondition)
         Me.grpSelectCriteria.Location = New System.Drawing.Point(12, 2)
         Me.grpSelectCriteria.Name = "grpSelectCriteria"
         Me.grpSelectCriteria.Size = New System.Drawing.Size(406, 32)
         Me.grpSelectCriteria.TabIndex = 5
         Me.grpSelectCriteria.TabStop = False
         '
-        'rdoSelectbyfactor
+        'rdoSelectByFactor
         '
-        Me.rdoSelectbyfactor.AutoSize = True
-        Me.rdoSelectbyfactor.Location = New System.Drawing.Point(249, 11)
-        Me.rdoSelectbyfactor.Name = "rdoSelectbyfactor"
-        Me.rdoSelectbyfactor.Size = New System.Drawing.Size(133, 17)
-        Me.rdoSelectbyfactor.TabIndex = 1
-        Me.rdoSelectbyfactor.TabStop = True
-        Me.rdoSelectbyfactor.Tag = "Select_by_factor_values"
-        Me.rdoSelectbyfactor.Text = "Select by factor values"
-        Me.rdoSelectbyfactor.UseVisualStyleBackColor = True
+        Me.rdoSelectByFactor.AutoSize = True
+        Me.rdoSelectByFactor.Location = New System.Drawing.Point(249, 11)
+        Me.rdoSelectByFactor.Name = "rdoSelectByFactor"
+        Me.rdoSelectByFactor.Size = New System.Drawing.Size(133, 17)
+        Me.rdoSelectByFactor.TabIndex = 1
+        Me.rdoSelectByFactor.TabStop = True
+        Me.rdoSelectByFactor.Tag = "Select_by_factor_values"
+        Me.rdoSelectByFactor.Text = "Select by factor values"
+        Me.rdoSelectByFactor.UseVisualStyleBackColor = True
         '
-        'rdoSelectbycondition
+        'rdoSelectByCondition
         '
-        Me.rdoSelectbycondition.AutoSize = True
-        Me.rdoSelectbycondition.Location = New System.Drawing.Point(6, 11)
-        Me.rdoSelectbycondition.Name = "rdoSelectbycondition"
-        Me.rdoSelectbycondition.Size = New System.Drawing.Size(115, 17)
-        Me.rdoSelectbycondition.TabIndex = 0
-        Me.rdoSelectbycondition.TabStop = True
-        Me.rdoSelectbycondition.Tag = "Select_by_condition"
-        Me.rdoSelectbycondition.Text = "Select by condition"
-        Me.rdoSelectbycondition.UseVisualStyleBackColor = True
+        Me.rdoSelectByCondition.AutoSize = True
+        Me.rdoSelectByCondition.Location = New System.Drawing.Point(6, 11)
+        Me.rdoSelectByCondition.Name = "rdoSelectByCondition"
+        Me.rdoSelectByCondition.Size = New System.Drawing.Size(115, 17)
+        Me.rdoSelectByCondition.TabIndex = 0
+        Me.rdoSelectByCondition.TabStop = True
+        Me.rdoSelectByCondition.Tag = "Select_by_condition"
+        Me.rdoSelectByCondition.Text = "Select by condition"
+        Me.rdoSelectByCondition.UseVisualStyleBackColor = True
         '
         'txtInto
         '
@@ -103,19 +103,19 @@ Partial Class dlgSelect
         Me.lblInto.Tag = "Into"
         Me.lblInto.Text = "Into"
         '
-        'UcrSelectorAddRemove1
+        'ucrSelectorAddRemove1
         '
-        Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(1, 40)
-        Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
-        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(203, 127)
-        Me.UcrSelectorAddRemove1.TabIndex = 10
+        Me.ucrSelectorAddRemove1.Location = New System.Drawing.Point(1, 40)
+        Me.ucrSelectorAddRemove1.Name = "ucrSelectorAddRemove1"
+        Me.ucrSelectorAddRemove1.Size = New System.Drawing.Size(203, 127)
+        Me.ucrSelectorAddRemove1.TabIndex = 10
         '
-        'UcrReceiverMultiple1
+        'ucrReceiverMultiple1
         '
-        Me.UcrReceiverMultiple1.Location = New System.Drawing.Point(200, 40)
-        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
-        Me.UcrReceiverMultiple1.Size = New System.Drawing.Size(121, 128)
-        Me.UcrReceiverMultiple1.TabIndex = 11
+        Me.ucrReceiverMultiple1.Location = New System.Drawing.Point(203, 40)
+        Me.ucrReceiverMultiple1.Name = "ucrReceiverMultiple1"
+        Me.ucrReceiverMultiple1.Size = New System.Drawing.Size(121, 128)
+        Me.ucrReceiverMultiple1.TabIndex = 11
         '
         'chkTranspose
         '
@@ -170,6 +170,41 @@ Partial Class dlgSelect
         Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
         Me.ComboBox1.TabIndex = 0
         '
+        'cmbFactors
+        '
+        Me.cmbFactors.FormattingEnabled = True
+        Me.cmbFactors.Location = New System.Drawing.Point(49, 20)
+        Me.cmbFactors.Name = "cmbFactors"
+        Me.cmbFactors.Size = New System.Drawing.Size(85, 21)
+        Me.cmbFactors.TabIndex = 0
+        '
+        'lblFactor
+        '
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.Location = New System.Drawing.Point(6, 23)
+        Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
+        Me.lblFactor.TabIndex = 2
+        Me.lblFactor.Tag = "Factor"
+        Me.lblFactor.Text = "Factor"
+        '
+        'lblFactorLevels
+        '
+        Me.lblFactorLevels.AutoSize = True
+        Me.lblFactorLevels.Location = New System.Drawing.Point(173, 15)
+        Me.lblFactorLevels.Name = "lblFactorLevels"
+        Me.lblFactorLevels.Size = New System.Drawing.Size(43, 26)
+        Me.lblFactorLevels.TabIndex = 3
+        Me.lblFactorLevels.Tag = "Factor_Levels"
+        Me.lblFactorLevels.Text = "Factor  " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Levels"
+        '
+        'txtFactorLevels
+        '
+        Me.txtFactorLevels.Location = New System.Drawing.Point(224, 19)
+        Me.txtFactorLevels.Name = "txtFactorLevels"
+        Me.txtFactorLevels.Size = New System.Drawing.Size(100, 20)
+        Me.txtFactorLevels.TabIndex = 4
+        '
         'grpFactor
         '
         Me.grpFactor.Controls.Add(Me.txtFactorLevels)
@@ -184,41 +219,6 @@ Partial Class dlgSelect
         Me.grpFactor.Tag = "Factor_Values_for_Selection"
         Me.grpFactor.Text = "Factor Values for Selection"
         '
-        'txtFactorLevels
-        '
-        Me.txtFactorLevels.Location = New System.Drawing.Point(224, 19)
-        Me.txtFactorLevels.Name = "txtFactorLevels"
-        Me.txtFactorLevels.Size = New System.Drawing.Size(100, 20)
-        Me.txtFactorLevels.TabIndex = 4
-        '
-        'lblFactorLevels
-        '
-        Me.lblFactorLevels.AutoSize = True
-        Me.lblFactorLevels.Location = New System.Drawing.Point(173, 15)
-        Me.lblFactorLevels.Name = "lblFactorLevels"
-        Me.lblFactorLevels.Size = New System.Drawing.Size(43, 26)
-        Me.lblFactorLevels.TabIndex = 3
-        Me.lblFactorLevels.Tag = "Factor_Levels"
-        Me.lblFactorLevels.Text = "Factor  " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Levels"
-        '
-        'lblFactor
-        '
-        Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(6, 23)
-        Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
-        Me.lblFactor.TabIndex = 2
-        Me.lblFactor.Tag = "Factor"
-        Me.lblFactor.Text = "Factor"
-        '
-        'cmbFactors
-        '
-        Me.cmbFactors.FormattingEnabled = True
-        Me.cmbFactors.Location = New System.Drawing.Point(49, 20)
-        Me.cmbFactors.Name = "cmbFactors"
-        Me.cmbFactors.Size = New System.Drawing.Size(85, 21)
-        Me.cmbFactors.TabIndex = 0
-        '
         'dlgSelect
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -228,8 +228,8 @@ Partial Class dlgSelect
         Me.Controls.Add(Me.grpCondition)
         Me.Controls.Add(Me.chkAppend)
         Me.Controls.Add(Me.chkTranspose)
-        Me.Controls.Add(Me.UcrReceiverMultiple1)
-        Me.Controls.Add(Me.UcrSelectorAddRemove1)
+        Me.Controls.Add(Me.ucrReceiverMultiple1)
+        Me.Controls.Add(Me.ucrSelectorAddRemove1)
         Me.Controls.Add(Me.txtInto)
         Me.Controls.Add(Me.lblInto)
         Me.Controls.Add(Me.grpSelectCriteria)
@@ -254,20 +254,20 @@ Partial Class dlgSelect
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grpSelectCriteria As GroupBox
-    Friend WithEvents rdoSelectbyfactor As RadioButton
-    Friend WithEvents rdoSelectbycondition As RadioButton
+    Friend WithEvents rdoSelectByFactor As RadioButton
+    Friend WithEvents rdoSelectByCondition As RadioButton
     Friend WithEvents txtInto As TextBox
     Friend WithEvents lblInto As Label
-    Friend WithEvents UcrSelectorAddRemove1 As ucrSelectorAddRemove
-    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
+    Friend WithEvents ucrSelectorAddRemove1 As ucrSelectorAddRemove
+    Friend WithEvents ucrReceiverMultiple1 As ucrReceiverMultiple
     Friend WithEvents chkTranspose As CheckBox
     Friend WithEvents chkAppend As CheckBox
     Friend WithEvents grpCondition As GroupBox
-    Friend WithEvents grpFactor As GroupBox
-    Friend WithEvents txtFactorLevels As TextBox
-    Friend WithEvents lblFactorLevels As Label
-    Friend WithEvents lblFactor As Label
-    Friend WithEvents cmbFactors As ComboBox
     Friend WithEvents chkShowCalculator As CheckBox
     Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbFactors As ComboBox
+    Friend WithEvents lblFactor As Label
+    Friend WithEvents lblFactorLevels As Label
+    Friend WithEvents txtFactorLevels As TextBox
+    Friend WithEvents grpFactor As GroupBox
 End Class

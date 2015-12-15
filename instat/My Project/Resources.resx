@@ -425,7 +425,7 @@
     <value>Resize Worksheet</value>
   </data>
   <data name="Row_Statistics" xml:space="preserve">
-    <value>Row_Statistics</value>
+    <value>Row Statistics</value>
   </data>
   <data name="Run_Worksheet_Editor" xml:space="preserve">
     <value>Run Worksheet Editor F7</value>
@@ -624,5 +624,590 @@
   </data>
   <data name="Save_results_in" xml:space="preserve">
     <value>Save results in</value>
+  </data>
+  <data name="Calculator" xml:space="preserve">
+    <value>Calculator</value>
+  </data>
+  <data name="Bivariate_ANOVA" xml:space="preserve">
+    <value>Bivariate ANOVA</value>
+  </data>
+  <data name="Blocking_factor" xml:space="preserve">
+    <value>Blocking factor</value>
+  </data>
+  <data name="Centre" xml:space="preserve">
+    <value>Centre</value>
+  </data>
+  <data name="Column_width" xml:space="preserve">
+    <value>Column width</value>
+  </data>
+  <data name="Contrasts" xml:space="preserve">
+    <value>Contrasts</value>
+  </data>
+  <data name="Format_current_or_selected_columns" xml:space="preserve">
+    <value>Format current or selected columns</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="Response_variable" xml:space="preserve">
+    <value>Response variable</value>
+  </data>
+  <data name="Response_variable1" xml:space="preserve">
+    <value>1st Response variable</value>
+  </data>
+  <data name="Response_variable2" xml:space="preserve">
+    <value>2nd Response variable</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="Save_results" xml:space="preserve">
+    <value>Save results</value>
+  </data>
+  <data name="Treatment_factor" xml:space="preserve">
+    <value>Treatment factor</value>
+  </data>
+  <data name="X_label" xml:space="preserve">
+    <value>X label</value>
+  </data>
+  <data name="Y_label" xml:space="preserve">
+    <value>Y label</value>
+  </data>
+  <data name="Adjustment" xml:space="preserve">
+    <value>Adjustment</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Analysis" xml:space="preserve">
+    <value>Analysis</value>
+  </data>
+  <data name="and_" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="Angular" xml:space="preserve">
+    <value>Angular</value>
+  </data>
+  <data name="Another_worksheet" xml:space="preserve">
+    <value>Another worksheet</value>
+  </data>
+  <data name="Append" xml:space="preserve">
+    <value>Append</value>
+  </data>
+  <data name="between" xml:space="preserve">
+    <value>between</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="Calculated_Transformations" xml:space="preserve">
+    <value>Calculated Transformations</value>
+  </data>
+  <data name="Carry" xml:space="preserve">
+    <value>Carry</value>
+  </data>
+  <data name="Carry_further_columns" xml:space="preserve">
+    <value>Carry further columns</value>
+  </data>
+  <data name="centered" xml:space="preserve">
+    <value>centered</value>
+  </data>
+  <data name="Change_Type" xml:space="preserve">
+    <value>Change Type</value>
+  </data>
+  <data name="Chisquare_Test" xml:space="preserve">
+    <value>Chisquare Test</value>
+  </data>
+  <data name="Circular" xml:space="preserve">
+    <value>Circular</value>
+  </data>
+  <data name="Column" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="Columns" xml:space="preserve">
+    <value>Columns(X)</value>
+  </data>
+  <data name="Columns_to_be_formatted" xml:space="preserve">
+    <value>Columns to be formatted</value>
+  </data>
+  <data name="Columns_to_delete" xml:space="preserve">
+    <value>Columns to delete</value>
+  </data>
+  <data name="Columns_To_Sort" xml:space="preserve">
+    <value>Columns To Sort</value>
+  </data>
+  <data name="Column_factor" xml:space="preserve">
+    <value>Column factor</value>
+  </data>
+  <data name="Column_factors" xml:space="preserve">
+    <value>Column factors</value>
+  </data>
+  <data name="Column_to_be_split" xml:space="preserve">
+    <value>Column to be split</value>
+  </data>
+  <data name="Combine_factors_into_a_new_factor" xml:space="preserve">
+    <value>Combine factors into a new factor</value>
+  </data>
+  <data name="Common_Transformations" xml:space="preserve">
+    <value>Common Transformations</value>
+  </data>
+  <data name="Condtion_for_selection" xml:space="preserve">
+    <value>Condtion for selection</value>
+  </data>
+  <data name="Confidence_Limits" xml:space="preserve">
+    <value>Confidence Limits</value>
+  </data>
+  <data name="Copy_Columns_from" xml:space="preserve">
+    <value>Copy Columns from</value>
+  </data>
+  <data name="Correlation" xml:space="preserve">
+    <value>Correlation</value>
+  </data>
+  <data name="Create_Interaction_variable" xml:space="preserve">
+    <value>Create Interaction variable</value>
+  </data>
+  <data name="Current_worksheet" xml:space="preserve">
+    <value>Current worksheet</value>
+  </data>
+  <data name="Data_Column" xml:space="preserve">
+    <value>Data Column</value>
+  </data>
+  <data name="Data_to_be_fitted" xml:space="preserve">
+    <value>Data to be fitted</value>
+  </data>
+  <data name="Dates" xml:space="preserve">
+    <value>Dates</value>
+  </data>
+  <data name="Date_Format" xml:space="preserve">
+    <value>Date Format</value>
+  </data>
+  <data name="Decimals" xml:space="preserve">
+    <value>Decimals</value>
+  </data>
+  <data name="Delete_Columns" xml:space="preserve">
+    <value>Delete Columns</value>
+  </data>
+  <data name="Difference" xml:space="preserve">
+    <value>Difference</value>
+  </data>
+  <data name="Display_Margins" xml:space="preserve">
+    <value>Display_Margins</value>
+  </data>
+  <data name="Display_plot" xml:space="preserve">
+    <value>Display plot</value>
+  </data>
+  <data name="Display_P_values" xml:space="preserve">
+    <value>Display P-values</value>
+  </data>
+  <data name="Distributions" xml:space="preserve">
+    <value>Distributions</value>
+  </data>
+  <data name="Distribution_Type" xml:space="preserve">
+    <value>Distribution Type</value>
+  </data>
+  <data name="Duplicate_copy_paste_columns" xml:space="preserve">
+    <value>Duplacate(copy/paste) columns</value>
+  </data>
+  <data name="Empirical" xml:space="preserve">
+    <value>Empirical</value>
+  </data>
+  <data name="Entry_of_regular_sequence" xml:space="preserve">
+    <value>Entry of regular sequence</value>
+  </data>
+  <data name="Estimation_methods" xml:space="preserve">
+    <value>Estimation methods</value>
+  </data>
+  <data name="Explanatory_Variable" xml:space="preserve">
+    <value>Explanatory Variable</value>
+  </data>
+  <data name="Exponential" xml:space="preserve">
+    <value>Exponential</value>
+  </data>
+  <data name="Extreme_Value" xml:space="preserve">
+    <value>Extreme Value</value>
+  </data>
+  <data name="Factor" xml:space="preserve">
+    <value>Factor</value>
+  </data>
+  <data name="Factors" xml:space="preserve">
+    <value>Factors</value>
+  </data>
+  <data name="Factor_Values_for_Selection" xml:space="preserve">
+    <value>Factor Values for Selection</value>
+  </data>
+  <data name="Find_next" xml:space="preserve">
+    <value>Find_next</value>
+  </data>
+  <data name="Find_what" xml:space="preserve">
+    <value>Find what</value>
+  </data>
+  <data name="Find_whole_word_only" xml:space="preserve">
+    <value>Find whole word only</value>
+  </data>
+  <data name="First" xml:space="preserve">
+    <value>First</value>
+  </data>
+  <data name="Fit_an_Extreme_distribution" xml:space="preserve">
+    <value>Fit an Extreme distribution</value>
+  </data>
+  <data name="Fit_a_Gamma_Distribution" xml:space="preserve">
+    <value>Fit a Gamma Distrbution</value>
+  </data>
+  <data name="Format_Data" xml:space="preserve">
+    <value>Format Data</value>
+  </data>
+  <data name="Frequency_Tables" xml:space="preserve">
+    <value>Frequency_Tables</value>
+  </data>
+  <data name="Gamma" xml:space="preserve">
+    <value>Gamma</value>
+  </data>
+  <data name="Generate_polynomial_terms" xml:space="preserve">
+    <value>Generate polynomial terms</value>
+  </data>
+  <data name="Generate_Random_Sample" xml:space="preserve">
+    <value>Generate Random Sample</value>
+  </data>
+  <data name="GEV" xml:space="preserve">
+    <value>GEV</value>
+  </data>
+  <data name="Graphs" xml:space="preserve">
+    <value>Graphs</value>
+  </data>
+  <data name="Gumbel" xml:space="preserve">
+    <value>Gumbel</value>
+  </data>
+  <data name="Histogram_Plot" xml:space="preserve">
+    <value>Histogram Plot</value>
+  </data>
+  <data name="Interactions" xml:space="preserve">
+    <value>Interactions</value>
+  </data>
+  <data name="Into" xml:space="preserve">
+    <value>Into</value>
+  </data>
+  <data name="Inverse" xml:space="preserve">
+    <value>Inverse</value>
+  </data>
+  <data name="Lack_of_fit" xml:space="preserve">
+    <value>Lack  of fit</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>Last</value>
+  </data>
+  <data name="Level_Number" xml:space="preserve">
+    <value>Level Number</value>
+  </data>
+  <data name="Lock" xml:space="preserve">
+    <value>Lock</value>
+  </data>
+  <data name="Lock_and_Unlock" xml:space="preserve">
+    <value>Lock and Unlock</value>
+  </data>
+  <data name="Logit" xml:space="preserve">
+    <value>Logit</value>
+  </data>
+  <data name="Make_Result_a_factor" xml:space="preserve">
+    <value>Make Result a factor</value>
+  </data>
+  <data name="Match_case" xml:space="preserve">
+    <value>Match case</value>
+  </data>
+  <data name="Maximum" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="Maximum_Likelihood" xml:space="preserve">
+    <value>Maximum Likelihood</value>
+  </data>
+  <data name="Mean" xml:space="preserve">
+    <value>Mean</value>
+  </data>
+  <data name="Means" xml:space="preserve">
+    <value>Means</value>
+  </data>
+  <data name="Method_of_moments" xml:space="preserve">
+    <value>Method of moments</value>
+  </data>
+  <data name="Minimum" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="Models" xml:space="preserve">
+    <value>Models</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value> More</value>
+  </data>
+  <data name="Multiple_column" xml:space="preserve">
+    <value>Multiple column</value>
+  </data>
+  <data name="Multiple_columns" xml:space="preserve">
+    <value>Multiple columns</value>
+  </data>
+  <data name="Names_for_data_columns" xml:space="preserve">
+    <value>Names for data columns</value>
+  </data>
+  <data name="New_Column_Name" xml:space="preserve">
+    <value>New Column Name:</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Non_Negative" xml:space="preserve">
+    <value>Non Negative</value>
+  </data>
+  <data name="Non_Parametric_Two_Way_ANOVA" xml:space="preserve">
+    <value>Non-Parametric Two Way ANOVA</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Normal_Score" xml:space="preserve">
+    <value>Normal Score</value>
+  </data>
+  <data name="Number_of_Samples" xml:space="preserve">
+    <value>Number of Samples</value>
+  </data>
+  <data name="Omit_value" xml:space="preserve">
+    <value>Omit value</value>
+  </data>
+  <data name="One_sample" xml:space="preserve">
+    <value>One sample</value>
+  </data>
+  <data name="Only_use_existing_factor_level_combinations" xml:space="preserve">
+    <value>Only use existing factor level combinations</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="Order_Type" xml:space="preserve">
+    <value>Order Type</value>
+  </data>
+  <data name="orthogonal" xml:space="preserve">
+    <value>orthogonal</value>
+  </data>
+  <data name="Other_Transformations" xml:space="preserve">
+    <value>Other Transformations</value>
+  </data>
+  <data name="Parameter" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
+  <data name="Parameters" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="Paste_into" xml:space="preserve">
+    <value>Paste into</value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>Percentage</value>
+  </data>
+  <data name="Percentages_of_overall_total" xml:space="preserve">
+    <value>Percentages of overall total</value>
+  </data>
+  <data name="Percentage_of_factor" xml:space="preserve">
+    <value>Percentage of factor</value>
+  </data>
+  <data name="Plot_Title" xml:space="preserve">
+    <value>Plot Title</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Probit" xml:space="preserve">
+    <value>Probit</value>
+  </data>
+  <data name="Proportion" xml:space="preserve">
+    <value>Proportion</value>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="Read_text_as_date_values" xml:space="preserve">
+    <value>Read texts as date values</value>
+  </data>
+  <data name="Repeated" xml:space="preserve">
+    <value>Repeated</value>
+  </data>
+  <data name="Repeated_Single_Value" xml:space="preserve">
+    <value>Repeated Single Value</value>
+  </data>
+  <data name="Repeat_columns" xml:space="preserve">
+    <value>Repeat columns</value>
+  </data>
+  <data name="Required_Format" xml:space="preserve">
+    <value>Required Format</value>
+  </data>
+  <data name="Reserve_free_space" xml:space="preserve">
+    <value>Reserve free space</value>
+  </data>
+  <data name="Restrict_data_values" xml:space="preserve">
+    <value>Restrict data values</value>
+  </data>
+  <data name="Rows_defined_by" xml:space="preserve">
+    <value>Rows defined by</value>
+  </data>
+  <data name="Rows_to_delete" xml:space="preserve">
+    <value>Rows to delete</value>
+  </data>
+  <data name="Row_factor" xml:space="preserve">
+    <value>Row factor</value>
+  </data>
+  <data name="Row_Num" xml:space="preserve">
+    <value>Row Number</value>
+  </data>
+  <data name="Row_Stats" xml:space="preserve">
+    <value>Row Statistics</value>
+  </data>
+  <data name="Sample_from_data_column" xml:space="preserve">
+    <value>Sample from data column</value>
+  </data>
+  <data name="Sample_Type" xml:space="preserve">
+    <value>Sample Type</value>
+  </data>
+  <data name="Sampling" xml:space="preserve">
+    <value>Sampling</value>
+  </data>
+  <data name="Save_estimates_in" xml:space="preserve">
+    <value>Save estimates in</value>
+  </data>
+  <data name="Search_to_end_only" xml:space="preserve">
+    <value>Search to end only</value>
+  </data>
+  <data name="Selected_column" xml:space="preserve">
+    <value>Selected column</value>
+  </data>
+  <data name="Selected_Variable" xml:space="preserve">
+    <value>Selected Variable</value>
+  </data>
+  <data name="Select_And_Stuck" xml:space="preserve">
+    <value>Select And Stuck</value>
+  </data>
+  <data name="Select_by_condition" xml:space="preserve">
+    <value>Select by condition</value>
+  </data>
+  <data name="Select_by_factor_values" xml:space="preserve">
+    <value>Select by factor values</value>
+  </data>
+  <data name="Sequences" xml:space="preserve">
+    <value>Sequences</value>
+  </data>
+  <data name="Sequence_Definition" xml:space="preserve">
+    <value>Sequence Definition</value>
+  </data>
+  <data name="Show_calculator" xml:space="preserve">
+    <value>Show calculator</value>
+  </data>
+  <data name="Show_Plot" xml:space="preserve">
+    <value>Show Plot</value>
+  </data>
+  <data name="Significance_Test" xml:space="preserve">
+    <value>Significance Test</value>
+  </data>
+  <data name="simple" xml:space="preserve">
+    <value>simple</value>
+  </data>
+  <data name="Simple_Regression" xml:space="preserve">
+    <value>Simple Regression</value>
+  </data>
+  <data name="Single_column" xml:space="preserve">
+    <value>Single column</value>
+  </data>
+  <data name="Single_value" xml:space="preserve">
+    <value>Single value</value>
+  </data>
+  <data name="Stack_data_into" xml:space="preserve">
+    <value>Stack data into</value>
+  </data>
+  <data name="Stack_join_columns" xml:space="preserve">
+    <value>Stack(join) columns</value>
+  </data>
+  <data name="Standardise" xml:space="preserve">
+    <value>Standardise</value>
+  </data>
+  <data name="Statistcs_Required" xml:space="preserve">
+    <value>Statistcs Required</value>
+  </data>
+  <data name="St_Dev" xml:space="preserve">
+    <value>Standard Deviation</value>
+  </data>
+  <data name="Subset" xml:space="preserve">
+    <value>Subset</value>
+  </data>
+  <data name="Summary_statistics" xml:space="preserve">
+    <value>Summary statistics</value>
+  </data>
+  <data name="Summary_Tables" xml:space="preserve">
+    <value>Summary Tables</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Title_of_the_Histogram" xml:space="preserve">
+    <value>Title of the Histogram</value>
+  </data>
+  <data name="Totals" xml:space="preserve">
+    <value>Totals</value>
+  </data>
+  <data name="Transpose" xml:space="preserve">
+    <value>Transpose</value>
+  </data>
+  <data name="Two_ways_table_s_" xml:space="preserve">
+    <value>Two ways table(s)</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Type_" xml:space="preserve">
+    <value>Type(L)</value>
+  </data>
+  <data name="Type_of_data" xml:space="preserve">
+    <value>Type of data</value>
+  </data>
+  <data name="Units_Vector" xml:space="preserve">
+    <value>Units Vector</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="Unstack_split_columns" xml:space="preserve">
+    <value>Unstack(split) columns</value>
+  </data>
+  <data name="Using_levels_of" xml:space="preserve">
+    <value>Using levels of</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="Variables_to_be_stack" xml:space="preserve">
+    <value>Variables to be stack</value>
+  </data>
+  <data name="Variable_to_Plot" xml:space="preserve">
+    <value>Variable to Plot</value>
+  </data>
+  <data name="Variate" xml:space="preserve">
+    <value>Variate</value>
+  </data>
+  <data name="Variates" xml:space="preserve">
+    <value>Variates</value>
+  </data>
+  <data name="Weights" xml:space="preserve">
+    <value>Weights</value>
+  </data>
+  <data name="With_an_X_Variable" xml:space="preserve">
+    <value>With an X variable</value>
+  </data>
+  <data name="With_Label" xml:space="preserve">
+    <value>With Label</value>
+  </data>
+  <data name="X_variable" xml:space="preserve">
+    <value>X variable</value>
+  </data>
+  <data name="Y_variable_s_" xml:space="preserve">
+    <value>Y variable(s)</value>
+  </data>
+  <data name="Y_variate" xml:space="preserve">
+    <value>Y variate</value>
   </data>
 </root>

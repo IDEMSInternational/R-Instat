@@ -31,9 +31,9 @@ Partial Class dlgInteractions
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.cmdAdd = New System.Windows.Forms.Button()
         Me.lstAvailableColumns = New System.Windows.Forms.ListBox()
-        Me.txtTobeSavedFactors = New System.Windows.Forms.TextBox()
+        Me.txtToBeSavedFactors = New System.Windows.Forms.TextBox()
         Me.chkWithLabel = New System.Windows.Forms.CheckBox()
-        Me.chkUseExitingFactorLevelCombinations = New System.Windows.Forms.CheckBox()
+        Me.chkUseExistingFactorLevelCombinations = New System.Windows.Forms.CheckBox()
         Me.cboAvailableLabels = New System.Windows.Forms.ComboBox()
         Me.lblToImplement = New System.Windows.Forms.Label()
         Me.SuspendLayout()
@@ -130,14 +130,14 @@ Partial Class dlgInteractions
         Me.lstAvailableColumns.Sorted = True
         Me.lstAvailableColumns.TabIndex = 21
         '
-        'txtTobeSavedFactors
+        'txtToBeSavedFactors
         '
-        Me.txtTobeSavedFactors.Location = New System.Drawing.Point(244, 36)
-        Me.txtTobeSavedFactors.Multiline = True
-        Me.txtTobeSavedFactors.Name = "txtTobeSavedFactors"
-        Me.txtTobeSavedFactors.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtTobeSavedFactors.Size = New System.Drawing.Size(106, 43)
-        Me.txtTobeSavedFactors.TabIndex = 20
+        Me.txtToBeSavedFactors.Location = New System.Drawing.Point(244, 36)
+        Me.txtToBeSavedFactors.Multiline = True
+        Me.txtToBeSavedFactors.Name = "txtToBeSavedFactors"
+        Me.txtToBeSavedFactors.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtToBeSavedFactors.Size = New System.Drawing.Size(106, 43)
+        Me.txtToBeSavedFactors.TabIndex = 20
         '
         'chkWithLabel
         '
@@ -147,20 +147,21 @@ Partial Class dlgInteractions
         Me.chkWithLabel.Name = "chkWithLabel"
         Me.chkWithLabel.Size = New System.Drawing.Size(77, 17)
         Me.chkWithLabel.TabIndex = 23
+        Me.chkWithLabel.Tag = "With_Label"
         Me.chkWithLabel.Text = "With Label"
         Me.chkWithLabel.UseVisualStyleBackColor = True
         '
-        'chkUseExitingFactorLevelCombinations
+        'chkUseExistingFactorLevelCombinations
         '
-        Me.chkUseExitingFactorLevelCombinations.AutoSize = True
-        Me.chkUseExitingFactorLevelCombinations.Enabled = False
-        Me.chkUseExitingFactorLevelCombinations.Location = New System.Drawing.Point(37, 267)
-        Me.chkUseExitingFactorLevelCombinations.Name = "chkUseExitingFactorLevelCombinations"
-        Me.chkUseExitingFactorLevelCombinations.Size = New System.Drawing.Size(225, 17)
-        Me.chkUseExitingFactorLevelCombinations.TabIndex = 24
-        Me.chkUseExitingFactorLevelCombinations.Tag = "Only_use_existing_factor_level_combinations"
-        Me.chkUseExitingFactorLevelCombinations.Text = "Only use existing factor level combinations"
-        Me.chkUseExitingFactorLevelCombinations.UseVisualStyleBackColor = True
+        Me.chkUseExistingFactorLevelCombinations.AutoSize = True
+        Me.chkUseExistingFactorLevelCombinations.Enabled = False
+        Me.chkUseExistingFactorLevelCombinations.Location = New System.Drawing.Point(37, 267)
+        Me.chkUseExistingFactorLevelCombinations.Name = "chkUseExistingFactorLevelCombinations"
+        Me.chkUseExistingFactorLevelCombinations.Size = New System.Drawing.Size(225, 17)
+        Me.chkUseExistingFactorLevelCombinations.TabIndex = 24
+        Me.chkUseExistingFactorLevelCombinations.Tag = "Only_use_existing_factor_level_combinations"
+        Me.chkUseExistingFactorLevelCombinations.Text = "Only use existing factor level combinations"
+        Me.chkUseExistingFactorLevelCombinations.UseVisualStyleBackColor = True
         '
         'cboAvailableLabels
         '
@@ -188,11 +189,11 @@ Partial Class dlgInteractions
         Me.ClientSize = New System.Drawing.Size(404, 332)
         Me.Controls.Add(Me.lblToImplement)
         Me.Controls.Add(Me.cboAvailableLabels)
-        Me.Controls.Add(Me.chkUseExitingFactorLevelCombinations)
+        Me.Controls.Add(Me.chkUseExistingFactorLevelCombinations)
         Me.Controls.Add(Me.chkWithLabel)
         Me.Controls.Add(Me.cmdAdd)
         Me.Controls.Add(Me.lstAvailableColumns)
-        Me.Controls.Add(Me.txtTobeSavedFactors)
+        Me.Controls.Add(Me.txtToBeSavedFactors)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.rdoCombineToNewFactor)
@@ -203,6 +204,7 @@ Partial Class dlgInteractions
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgInteractions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Interactions"
         Me.Text = "Interactions"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -218,9 +220,9 @@ Partial Class dlgInteractions
     Friend WithEvents btnAdd As Button
     Friend WithEvents cmdAdd As Button
     Friend WithEvents lstAvailableColumns As ListBox
-    Friend WithEvents txtTobeSavedFactors As TextBox
+    Friend WithEvents txtToBeSavedFactors As TextBox
     Friend WithEvents chkWithLabel As CheckBox
-    Friend WithEvents chkUseExitingFactorLevelCombinations As CheckBox
+    Friend WithEvents chkUseExistingFactorLevelCombinations As CheckBox
     Friend WithEvents cboAvailableLabels As ComboBox
     Friend WithEvents lblToImplement As Label
 End Class

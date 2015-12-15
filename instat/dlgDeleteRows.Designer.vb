@@ -48,7 +48,7 @@ Partial Class dlgDeleteRows
         '
         Me.ucrReceiverDeleteRows.Location = New System.Drawing.Point(232, 33)
         Me.ucrReceiverDeleteRows.Name = "ucrReceiverDeleteRows"
-        Me.ucrReceiverDeleteRows.Size = New System.Drawing.Size(121, 106)
+        Me.ucrReceiverDeleteRows.Size = New System.Drawing.Size(121, 138)
         Me.ucrReceiverDeleteRows.TabIndex = 2
         '
         'lstRowsToDelete
@@ -72,11 +72,11 @@ Partial Class dlgDeleteRows
         'lblColumnsFromWhichToDeleteTheseRows
         '
         Me.lblColumnsFromWhichToDeleteTheseRows.AutoSize = True
-        Me.lblColumnsFromWhichToDeleteTheseRows.Location = New System.Drawing.Point(229, 12)
+        Me.lblColumnsFromWhichToDeleteTheseRows.Location = New System.Drawing.Point(240, 17)
         Me.lblColumnsFromWhichToDeleteTheseRows.Name = "lblColumnsFromWhichToDeleteTheseRows"
-        Me.lblColumnsFromWhichToDeleteTheseRows.Size = New System.Drawing.Size(39, 13)
+        Me.lblColumnsFromWhichToDeleteTheseRows.Size = New System.Drawing.Size(38, 13)
         Me.lblColumnsFromWhichToDeleteTheseRows.TabIndex = 5
-        Me.lblColumnsFromWhichToDeleteTheseRows.Text = "Label2"
+        Me.lblColumnsFromWhichToDeleteTheseRows.Text = "label 1"
         '
         'dlgDeleteRows
         '

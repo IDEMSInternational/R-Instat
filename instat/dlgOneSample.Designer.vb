@@ -50,7 +50,7 @@ Partial Class dlgOneSample
         Me.grpAnalysis.Controls.Add(Me.cboParameters)
         Me.grpAnalysis.Controls.Add(Me.lblModels)
         Me.grpAnalysis.Controls.Add(Me.cboModels)
-        Me.grpAnalysis.Location = New System.Drawing.Point(303, 19)
+        Me.grpAnalysis.Location = New System.Drawing.Point(314, 19)
         Me.grpAnalysis.Name = "grpAnalysis"
         Me.grpAnalysis.Size = New System.Drawing.Size(220, 202)
         Me.grpAnalysis.TabIndex = 3
@@ -171,7 +171,7 @@ Partial Class dlgOneSample
         '
         Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(203, 35)
         Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
-        Me.ucrReceiverDataColumn.Size = New System.Drawing.Size(91, 26)
+        Me.ucrReceiverDataColumn.Size = New System.Drawing.Size(105, 26)
         Me.ucrReceiverDataColumn.TabIndex = 9
         '
         'ucrAddRemove
@@ -192,7 +192,7 @@ Partial Class dlgOneSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(526, 336)
+        Me.ClientSize = New System.Drawing.Size(546, 336)
         Me.Controls.Add(Me.ucrReceiverDataColumn)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)

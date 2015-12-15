@@ -28,7 +28,7 @@ Partial Class dlgLockUnlock
         Me.lblSelectedColumns = New System.Windows.Forms.Label()
         Me.rdoLock = New System.Windows.Forms.RadioButton()
         Me.rdoUnlock = New System.Windows.Forms.RadioButton()
-        Me.chkReservefree = New System.Windows.Forms.CheckBox()
+        Me.chkReserveFree = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -36,7 +36,7 @@ Partial Class dlgLockUnlock
         Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ucrBase.Location = New System.Drawing.Point(0, 161)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(443, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(463, 32)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove
@@ -48,7 +48,7 @@ Partial Class dlgLockUnlock
         '
         'ucrMultiple
         '
-        Me.ucrMultiple.Location = New System.Drawing.Point(203, 23)
+        Me.ucrMultiple.Location = New System.Drawing.Point(208, 23)
         Me.ucrMultiple.Name = "ucrMultiple"
         Me.ucrMultiple.Size = New System.Drawing.Size(121, 134)
         Me.ucrMultiple.TabIndex = 2
@@ -56,7 +56,7 @@ Partial Class dlgLockUnlock
         'lblSelectedColumns
         '
         Me.lblSelectedColumns.AutoSize = True
-        Me.lblSelectedColumns.Location = New System.Drawing.Point(200, 9)
+        Me.lblSelectedColumns.Location = New System.Drawing.Point(207, 12)
         Me.lblSelectedColumns.Name = "lblSelectedColumns"
         Me.lblSelectedColumns.Size = New System.Drawing.Size(95, 13)
         Me.lblSelectedColumns.TabIndex = 3
@@ -66,7 +66,7 @@ Partial Class dlgLockUnlock
         'rdoLock
         '
         Me.rdoLock.AutoSize = True
-        Me.rdoLock.Location = New System.Drawing.Point(326, 26)
+        Me.rdoLock.Location = New System.Drawing.Point(338, 26)
         Me.rdoLock.Name = "rdoLock"
         Me.rdoLock.Size = New System.Drawing.Size(49, 17)
         Me.rdoLock.TabIndex = 4
@@ -78,7 +78,7 @@ Partial Class dlgLockUnlock
         'rdoUnlock
         '
         Me.rdoUnlock.AutoSize = True
-        Me.rdoUnlock.Location = New System.Drawing.Point(326, 58)
+        Me.rdoUnlock.Location = New System.Drawing.Point(338, 58)
         Me.rdoUnlock.Name = "rdoUnlock"
         Me.rdoUnlock.Size = New System.Drawing.Size(59, 17)
         Me.rdoUnlock.TabIndex = 5
@@ -87,22 +87,23 @@ Partial Class dlgLockUnlock
         Me.rdoUnlock.Text = "Unlock"
         Me.rdoUnlock.UseVisualStyleBackColor = True
         '
-        'chkReservefree
+        'chkReserveFree
         '
-        Me.chkReservefree.AutoSize = True
-        Me.chkReservefree.Location = New System.Drawing.Point(326, 93)
-        Me.chkReservefree.Name = "chkReservefree"
-        Me.chkReservefree.Size = New System.Drawing.Size(119, 17)
-        Me.chkReservefree.TabIndex = 6
-        Me.chkReservefree.Text = "Reserve free space"
-        Me.chkReservefree.UseVisualStyleBackColor = True
+        Me.chkReserveFree.AutoSize = True
+        Me.chkReserveFree.Location = New System.Drawing.Point(338, 93)
+        Me.chkReserveFree.Name = "chkReserveFree"
+        Me.chkReserveFree.Size = New System.Drawing.Size(119, 17)
+        Me.chkReserveFree.TabIndex = 6
+        Me.chkReserveFree.Tag = "Reserve_free_space"
+        Me.chkReserveFree.Text = "Reserve free space"
+        Me.chkReserveFree.UseVisualStyleBackColor = True
         '
         'dlgLockUnlock
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(443, 193)
-        Me.Controls.Add(Me.chkReservefree)
+        Me.ClientSize = New System.Drawing.Size(463, 193)
+        Me.Controls.Add(Me.chkReserveFree)
         Me.Controls.Add(Me.rdoUnlock)
         Me.Controls.Add(Me.rdoLock)
         Me.Controls.Add(Me.lblSelectedColumns)
@@ -125,5 +126,5 @@ Partial Class dlgLockUnlock
     Friend WithEvents lblSelectedColumns As Label
     Friend WithEvents rdoLock As RadioButton
     Friend WithEvents rdoUnlock As RadioButton
-    Friend WithEvents chkReservefree As CheckBox
+    Friend WithEvents chkReserveFree As CheckBox
 End Class

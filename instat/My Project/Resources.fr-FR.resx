@@ -33,9 +33,6 @@
   <data name="Available_Variables" xml:space="preserve">
     <value>Variables disponibles</value>
   </data>
-  <data name="Box_Plot" xml:space="preserve">
-    <value>Diagramme à surfaces</value>
-  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
   </data>

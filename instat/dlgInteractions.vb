@@ -30,15 +30,15 @@ Public Class dlgInteractions
     Private Sub chkWithLabel_CheckedChanged(sender As Object, e As EventArgs) Handles chkWithLabel.CheckedChanged
         If chkWithLabel.Enabled = True Then
             cboAvailableLabels.Enabled = True
-            chkUseExitingFactorLevelCombinations.Enabled = True
+            chkUseExistingFactorLevelCombinations.Enabled = True
         ElseIf chkWithLabel.Enabled = False
             cboAvailableLabels.Enabled = False
-            chkUseExitingFactorLevelCombinations.Enabled = False
+            chkUseExistingFactorLevelCombinations.Enabled = False
         End If
     End Sub
     Private Sub defaultSettings()
         txtSelectedFactors.Text = ""
-        txtTobeSavedFactors.Text = ""
+        txtToBeSavedFactors.Text = ""
         rdoCreateInteractionVariavle.Checked = True
     End Sub
 

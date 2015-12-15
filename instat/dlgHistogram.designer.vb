@@ -58,7 +58,7 @@ Partial Class dlgHistogram
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(107, 13)
         Me.lblTitle.TabIndex = 4
-        Me.lblTitle.Tag = "Title"
+        Me.lblTitle.Tag = "Title_of_the_Histogram"
         Me.lblTitle.Text = "Title of the Histogram"
         '
         'txtHistogramTitle
@@ -92,7 +92,7 @@ Partial Class dlgHistogram
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgHistogram"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Histogram"
+        Me.Tag = "Histogram_Plot"
         Me.Text = "Histogram Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -32,7 +32,7 @@ Partial Class dlgGammaDistr
         Me.grpEstimationMethods = New System.Windows.Forms.GroupBox()
         Me.cboMethodofMoments = New System.Windows.Forms.ComboBox()
         Me.cboMaximumLikelihood = New System.Windows.Forms.ComboBox()
-        Me.lblSaveEstimates = New System.Windows.Forms.Label()
+        Me.lblSaveEstimatesIn = New System.Windows.Forms.Label()
         Me.chkMethodofMoments = New System.Windows.Forms.CheckBox()
         Me.chkMaximumLikelihood = New System.Windows.Forms.CheckBox()
         Me.chkRestrictValues = New System.Windows.Forms.CheckBox()
@@ -114,7 +114,7 @@ Partial Class dlgGammaDistr
         '
         Me.grpEstimationMethods.Controls.Add(Me.cboMethodofMoments)
         Me.grpEstimationMethods.Controls.Add(Me.cboMaximumLikelihood)
-        Me.grpEstimationMethods.Controls.Add(Me.lblSaveEstimates)
+        Me.grpEstimationMethods.Controls.Add(Me.lblSaveEstimatesIn)
         Me.grpEstimationMethods.Controls.Add(Me.chkMethodofMoments)
         Me.grpEstimationMethods.Controls.Add(Me.chkMaximumLikelihood)
         Me.grpEstimationMethods.Location = New System.Drawing.Point(18, 177)
@@ -141,15 +141,15 @@ Partial Class dlgGammaDistr
         Me.cboMaximumLikelihood.Size = New System.Drawing.Size(84, 21)
         Me.cboMaximumLikelihood.TabIndex = 3
         '
-        'lblSaveEstimates
+        'lblSaveEstimatesIn
         '
-        Me.lblSaveEstimates.AutoSize = True
-        Me.lblSaveEstimates.Location = New System.Drawing.Point(144, 16)
-        Me.lblSaveEstimates.Name = "lblSaveEstimates"
-        Me.lblSaveEstimates.Size = New System.Drawing.Size(90, 13)
-        Me.lblSaveEstimates.TabIndex = 2
-        Me.lblSaveEstimates.Tag = "Save_estimates_in"
-        Me.lblSaveEstimates.Text = "Save estimates in"
+        Me.lblSaveEstimatesIn.AutoSize = True
+        Me.lblSaveEstimatesIn.Location = New System.Drawing.Point(144, 16)
+        Me.lblSaveEstimatesIn.Name = "lblSaveEstimatesIn"
+        Me.lblSaveEstimatesIn.Size = New System.Drawing.Size(90, 13)
+        Me.lblSaveEstimatesIn.TabIndex = 2
+        Me.lblSaveEstimatesIn.Tag = "Save_estimates_in"
+        Me.lblSaveEstimatesIn.Text = "Save estimates in"
         '
         'chkMethodofMoments
         '
@@ -169,7 +169,7 @@ Partial Class dlgGammaDistr
         Me.chkMaximumLikelihood.Name = "chkMaximumLikelihood"
         Me.chkMaximumLikelihood.Size = New System.Drawing.Size(117, 17)
         Me.chkMaximumLikelihood.TabIndex = 0
-        Me.chkMaximumLikelihood.Tag = "Maximum_likelihood_"
+        Me.chkMaximumLikelihood.Tag = "Maximum_likelihood"
         Me.chkMaximumLikelihood.Text = "Maximum likelihood"
         Me.chkMaximumLikelihood.UseVisualStyleBackColor = True
         '
@@ -268,7 +268,7 @@ Partial Class dlgGammaDistr
     Friend WithEvents rdoMultipleColumns As RadioButton
     Friend WithEvents rdoSingleColumn As RadioButton
     Friend WithEvents grpEstimationMethods As GroupBox
-    Friend WithEvents lblSaveEstimates As Label
+    Friend WithEvents lblSaveEstimatesIn As Label
     Friend WithEvents chkMethodofMoments As CheckBox
     Friend WithEvents chkMaximumLikelihood As CheckBox
     Friend WithEvents cboMethodofMoments As ComboBox

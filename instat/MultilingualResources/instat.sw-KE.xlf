@@ -98,10 +98,6 @@
           <source>Available  Variables</source>
           <target state="new">Available  Variables</target>
         </trans-unit>
-        <trans-unit id="Box_Plot" translate="yes" xml:space="preserve">
-          <source>Box Plot</source>
-          <target state="new">Box Plot</target>
-        </trans-unit>
         <trans-unit id="Cancel" translate="yes" xml:space="preserve">
           <source>Cancel</source>
           <target state="needs-review-translation" state-qualifier="tm-suggestion">Katisha</target>
@@ -476,8 +472,8 @@
           <target state="new">Recode</target>
         </trans-unit>
         <trans-unit id="Row_Statistics" translate="yes" xml:space="preserve">
-          <source>Row_Statistics</source>
-          <target state="new">Row_Statistics</target>
+          <source>Row Statistics</source>
+          <target state="new">Row Statistics</target>
         </trans-unit>
         <trans-unit id="Select_" translate="yes" xml:space="preserve">
           <source>Select</source>
@@ -686,6 +682,850 @@
         <trans-unit id="Two" translate="yes" xml:space="preserve">
           <source>Two</source>
           <target state="new">Two</target>
+        </trans-unit>
+        <trans-unit id="Continuity__Correction" translate="yes" xml:space="preserve">
+          <source>Continuity Correction</source>
+          <target state="new">Continuity Correction</target>
+        </trans-unit>
+        <trans-unit id="Layout_of_data" translate="yes" xml:space="preserve">
+          <source>Layout of data</source>
+          <target state="new">Layout of data</target>
+        </trans-unit>
+        <trans-unit id="Make_Result_as_a_factor" translate="yes" xml:space="preserve">
+          <source>Make Result as a factor</source>
+          <target state="new">Make Result as a factor</target>
+        </trans-unit>
+        <trans-unit id="New_Value" translate="yes" xml:space="preserve">
+          <source>New Value</source>
+          <target state="new">New Value</target>
+        </trans-unit>
+        <trans-unit id="Range_End" translate="yes" xml:space="preserve">
+          <source>Range End</source>
+          <target state="new">Range End</target>
+        </trans-unit>
+        <trans-unit id="Range_Start" translate="yes" xml:space="preserve">
+          <source>Range Start</source>
+          <target state="new">Range Start</target>
+        </trans-unit>
+        <trans-unit id="Save_values" translate="yes" xml:space="preserve">
+          <source>Save values</source>
+          <target state="new">Save values</target>
+        </trans-unit>
+        <trans-unit id="String1" translate="yes" xml:space="preserve">
+          <source>New</source>
+          <target state="new">New</target>
+        </trans-unit>
+        <trans-unit id="With_a_Label" translate="yes" xml:space="preserve">
+          <source>With a Label</source>
+          <target state="new">With a Label</target>
+        </trans-unit>
+        <trans-unit id="Write_back_to_the_data" translate="yes" xml:space="preserve">
+          <source>Write back to the data</source>
+          <target state="new">Write back to the data</target>
+        </trans-unit>
+        <trans-unit id="Data_to_be_averaged" translate="yes" xml:space="preserve">
+          <source>Data to be averaged</source>
+          <target state="new">Data to be averaged</target>
+        </trans-unit>
+        <trans-unit id="Display_residuals" translate="yes" xml:space="preserve">
+          <source>Display residuals</source>
+          <target state="new">Display residuals</target>
+        </trans-unit>
+        <trans-unit id="Lag" translate="yes" xml:space="preserve">
+          <source>Lag</source>
+          <target state="new">Lag</target>
+        </trans-unit>
+        <trans-unit id="Moving_Averages" translate="yes" xml:space="preserve">
+          <source>Moving Averages</source>
+          <target state="new">Moving Averages</target>
+        </trans-unit>
+        <trans-unit id="Save_residuals" translate="yes" xml:space="preserve">
+          <source>Save residuals</source>
+          <target state="new">Save residuals</target>
+        </trans-unit>
+        <trans-unit id="Save_results_in" translate="yes" xml:space="preserve">
+          <source>Save results in</source>
+          <target state="new">Save results in</target>
+        </trans-unit>
+        <trans-unit id="Bivariate_ANOVA" translate="yes" xml:space="preserve">
+          <source>Bivariate ANOVA</source>
+          <target state="new">Bivariate ANOVA</target>
+        </trans-unit>
+        <trans-unit id="Blocking_factor" translate="yes" xml:space="preserve">
+          <source>Blocking factor</source>
+          <target state="new">Blocking factor</target>
+        </trans-unit>
+        <trans-unit id="Centre" translate="yes" xml:space="preserve">
+          <source>Centre</source>
+          <target state="new">Centre</target>
+        </trans-unit>
+        <trans-unit id="Column_width" translate="yes" xml:space="preserve">
+          <source>Column width</source>
+          <target state="new">Column width</target>
+        </trans-unit>
+        <trans-unit id="Contrasts" translate="yes" xml:space="preserve">
+          <source>Contrasts</source>
+          <target state="new">Contrasts</target>
+        </trans-unit>
+        <trans-unit id="Format_current_or_selected_columns" translate="yes" xml:space="preserve">
+          <source>Format current or selected columns</source>
+          <target state="new">Format current or selected columns</target>
+        </trans-unit>
+        <trans-unit id="General" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <target state="new">General</target>
+        </trans-unit>
+        <trans-unit id="Left" translate="yes" xml:space="preserve">
+          <source>Left</source>
+          <target state="new">Left</target>
+        </trans-unit>
+        <trans-unit id="Response_variable" translate="yes" xml:space="preserve">
+          <source>Response variable</source>
+          <target state="new">Response variable</target>
+        </trans-unit>
+        <trans-unit id="Response_variable1" translate="yes" xml:space="preserve">
+          <source>1st Response variable</source>
+          <target state="new">1st Response variable</target>
+        </trans-unit>
+        <trans-unit id="Response_variable2" translate="yes" xml:space="preserve">
+          <source>2nd Response variable</source>
+          <target state="new">2nd Response variable</target>
+        </trans-unit>
+        <trans-unit id="Right" translate="yes" xml:space="preserve">
+          <source>Right</source>
+          <target state="new">Right</target>
+        </trans-unit>
+        <trans-unit id="Save_results" translate="yes" xml:space="preserve">
+          <source>Save results</source>
+          <target state="new">Save results</target>
+        </trans-unit>
+        <trans-unit id="Treatment_factor" translate="yes" xml:space="preserve">
+          <source>Treatment factor</source>
+          <target state="new">Treatment factor</target>
+        </trans-unit>
+        <trans-unit id="X_label" translate="yes" xml:space="preserve">
+          <source>X label</source>
+          <target state="new">X label</target>
+        </trans-unit>
+        <trans-unit id="Y_label" translate="yes" xml:space="preserve">
+          <source>Y label</source>
+          <target state="new">Y label</target>
+        </trans-unit>
+        <trans-unit id="Calculator" translate="yes" xml:space="preserve">
+          <source>Calculator</source>
+          <target state="new">Calculator</target>
+        </trans-unit>
+        <trans-unit id="Change_Type" translate="yes" xml:space="preserve">
+          <source>Change Type</source>
+          <target state="new">Change Type</target>
+        </trans-unit>
+        <trans-unit id="Date_Format" translate="yes" xml:space="preserve">
+          <source>Date Format</source>
+          <target state="new">Date Format</target>
+        </trans-unit>
+        <trans-unit id="Factor" translate="yes" xml:space="preserve">
+          <source>Factor</source>
+          <target state="new">Factor</target>
+        </trans-unit>
+        <trans-unit id="New_Column_Name" translate="yes" xml:space="preserve">
+          <source>New Column Name:</source>
+          <target state="new">New Column Name:</target>
+        </trans-unit>
+        <trans-unit id="Read_text_as_date_values" translate="yes" xml:space="preserve">
+          <source>Read texts as date values</source>
+          <target state="new">Read texts as date values</target>
+        </trans-unit>
+        <trans-unit id="Row_Num" translate="yes" xml:space="preserve">
+          <source>Row Number</source>
+          <target state="new">Row Number</target>
+        </trans-unit>
+        <trans-unit id="Text" translate="yes" xml:space="preserve">
+          <source>Text</source>
+          <target state="new">Text</target>
+        </trans-unit>
+        <trans-unit id="Units_Vector" translate="yes" xml:space="preserve">
+          <source>Units Vector</source>
+          <target state="new">Units Vector</target>
+        </trans-unit>
+        <trans-unit id="Variate" translate="yes" xml:space="preserve">
+          <source>Variate</source>
+          <target state="new">Variate</target>
+        </trans-unit>
+        <trans-unit id="Chisquare_Test" translate="yes" xml:space="preserve">
+          <source>Chisquare Test</source>
+          <target state="new">Chisquare Test</target>
+        </trans-unit>
+        <trans-unit id="Correlation" translate="yes" xml:space="preserve">
+          <source>Correlation</source>
+          <target state="new">Correlation</target>
+        </trans-unit>
+        <trans-unit id="Display_plot" translate="yes" xml:space="preserve">
+          <source>Display plot</source>
+          <target state="new">Display plot</target>
+        </trans-unit>
+        <trans-unit id="Display_P_values" translate="yes" xml:space="preserve">
+          <source>Display P-values</source>
+          <target state="new">Display P-values</target>
+        </trans-unit>
+        <trans-unit id="Columns_to_delete" translate="yes" xml:space="preserve">
+          <source>Columns to delete</source>
+          <target state="new">Columns to delete</target>
+        </trans-unit>
+        <trans-unit id="Delete_Columns" translate="yes" xml:space="preserve">
+          <source>Delete Columns</source>
+          <target state="new">Delete Columns</target>
+        </trans-unit>
+        <trans-unit id="Subset" translate="yes" xml:space="preserve">
+          <source>Subset</source>
+          <target state="new">Subset</target>
+        </trans-unit>
+        <trans-unit id="Another_worksheet" translate="yes" xml:space="preserve">
+          <source>Another worksheet</source>
+          <target state="new">Another worksheet</target>
+        </trans-unit>
+        <trans-unit id="Browse" translate="yes" xml:space="preserve">
+          <source>Browse</source>
+          <target state="new">Browse</target>
+        </trans-unit>
+        <trans-unit id="Column" translate="yes" xml:space="preserve">
+          <source>Column</source>
+          <target state="new">Column</target>
+        </trans-unit>
+        <trans-unit id="Columns" translate="yes" xml:space="preserve">
+          <source>Columns(X)</source>
+          <target state="new">Columns(X)</target>
+        </trans-unit>
+        <trans-unit id="Copy_Columns_from" translate="yes" xml:space="preserve">
+          <source>Copy Columns from</source>
+          <target state="new">Copy Columns from</target>
+        </trans-unit>
+        <trans-unit id="Current_worksheet" translate="yes" xml:space="preserve">
+          <source>Current worksheet</source>
+          <target state="new">Current worksheet</target>
+        </trans-unit>
+        <trans-unit id="Duplicate_copy_paste_columns" translate="yes" xml:space="preserve">
+          <source>Duplacate(copy/paste) columns</source>
+          <target state="new">Duplacate(copy/paste) columns</target>
+        </trans-unit>
+        <trans-unit id="Paste_into" translate="yes" xml:space="preserve">
+          <source>Paste into</source>
+          <target state="new">Paste into</target>
+        </trans-unit>
+        <trans-unit id="Plot_Title" translate="yes" xml:space="preserve">
+          <source>Plot Title</source>
+          <target state="new">Plot Title</target>
+        </trans-unit>
+        <trans-unit id="Rows_to_delete" translate="yes" xml:space="preserve">
+          <source>Rows to delete</source>
+          <target state="new">Rows to delete</target>
+        </trans-unit>
+        <trans-unit id="Transpose" translate="yes" xml:space="preserve">
+          <source>Transpose</source>
+          <target state="new">Transpose</target>
+        </trans-unit>
+        <trans-unit id="Type" translate="yes" xml:space="preserve">
+          <source>Type</source>
+          <target state="new">Type</target>
+        </trans-unit>
+        <trans-unit id="Type_" translate="yes" xml:space="preserve">
+          <source>Type(L)</source>
+          <target state="new">Type(L)</target>
+        </trans-unit>
+        <trans-unit id="Type_of_data" translate="yes" xml:space="preserve">
+          <source>Type of data</source>
+          <target state="new">Type of data</target>
+        </trans-unit>
+        <trans-unit id="Analysis" translate="yes" xml:space="preserve">
+          <source>Analysis</source>
+          <target state="new">Analysis</target>
+        </trans-unit>
+        <trans-unit id="and_" translate="yes" xml:space="preserve">
+          <source>and</source>
+          <target state="new">and</target>
+        </trans-unit>
+        <trans-unit id="between" translate="yes" xml:space="preserve">
+          <source>between</source>
+          <target state="new">between</target>
+        </trans-unit>
+        <trans-unit id="centered" translate="yes" xml:space="preserve">
+          <source>centered</source>
+          <target state="new">centered</target>
+        </trans-unit>
+        <trans-unit id="Columns_to_be_formatted" translate="yes" xml:space="preserve">
+          <source>Columns to be formatted</source>
+          <target state="new">Columns to be formatted</target>
+        </trans-unit>
+        <trans-unit id="Combine_factors_into_a_new_factor" translate="yes" xml:space="preserve">
+          <source>Combine factors into a new factor</source>
+          <target state="new">Combine factors into a new factor</target>
+        </trans-unit>
+        <trans-unit id="Create_Interaction_variable" translate="yes" xml:space="preserve">
+          <source>Create Interaction variable</source>
+          <target state="new">Create Interaction variable</target>
+        </trans-unit>
+        <trans-unit id="Data_Column" translate="yes" xml:space="preserve">
+          <source>Data Column</source>
+          <target state="new">Data Column</target>
+        </trans-unit>
+        <trans-unit id="Data_to_be_fitted" translate="yes" xml:space="preserve">
+          <source>Data to be fitted</source>
+          <target state="new">Data to be fitted</target>
+        </trans-unit>
+        <trans-unit id="Display_Margins" translate="yes" xml:space="preserve">
+          <source>Display_Margins</source>
+          <target state="new">Display_Margins</target>
+        </trans-unit>
+        <trans-unit id="Distributions" translate="yes" xml:space="preserve">
+          <source>Distributions</source>
+          <target state="new">Distributions</target>
+        </trans-unit>
+        <trans-unit id="Empirical" translate="yes" xml:space="preserve">
+          <source>Empirical</source>
+          <target state="new">Empirical</target>
+        </trans-unit>
+        <trans-unit id="Estimation_methods" translate="yes" xml:space="preserve">
+          <source>Estimation methods</source>
+          <target state="new">Estimation methods</target>
+        </trans-unit>
+        <trans-unit id="Exponential" translate="yes" xml:space="preserve">
+          <source>Exponential</source>
+          <target state="new">Exponential</target>
+        </trans-unit>
+        <trans-unit id="Extreme_Value" translate="yes" xml:space="preserve">
+          <source>Extreme Value</source>
+          <target state="new">Extreme Value</target>
+        </trans-unit>
+        <trans-unit id="Factors" translate="yes" xml:space="preserve">
+          <source>Factors</source>
+          <target state="new">Factors</target>
+        </trans-unit>
+        <trans-unit id="Find_next" translate="yes" xml:space="preserve">
+          <source>Find_next</source>
+          <target state="new">Find_next</target>
+        </trans-unit>
+        <trans-unit id="Find_what" translate="yes" xml:space="preserve">
+          <source>Find what</source>
+          <target state="new">Find what</target>
+        </trans-unit>
+        <trans-unit id="Find_whole_word_only" translate="yes" xml:space="preserve">
+          <source>Find whole word only</source>
+          <target state="new">Find whole word only</target>
+        </trans-unit>
+        <trans-unit id="First" translate="yes" xml:space="preserve">
+          <source>First</source>
+          <target state="new">First</target>
+        </trans-unit>
+        <trans-unit id="Fit_an_Extreme_distribution" translate="yes" xml:space="preserve">
+          <source>Fit an Extreme distribution</source>
+          <target state="new">Fit an Extreme distribution</target>
+        </trans-unit>
+        <trans-unit id="Fit_a_Gamma_Distribution" translate="yes" xml:space="preserve">
+          <source>Fit a Gamma Distrbution</source>
+          <target state="new">Fit a Gamma Distrbution</target>
+        </trans-unit>
+        <trans-unit id="Format_Data" translate="yes" xml:space="preserve">
+          <source>Format Data</source>
+          <target state="new">Format Data</target>
+        </trans-unit>
+        <trans-unit id="Frequency_Tables" translate="yes" xml:space="preserve">
+          <source>Frequency_Tables</source>
+          <target state="new">Frequency_Tables</target>
+        </trans-unit>
+        <trans-unit id="Gamma" translate="yes" xml:space="preserve">
+          <source>Gamma</source>
+          <target state="new">Gamma</target>
+        </trans-unit>
+        <trans-unit id="Generate_polynomial_terms" translate="yes" xml:space="preserve">
+          <source>Generate polynomial terms</source>
+          <target state="new">Generate polynomial terms</target>
+        </trans-unit>
+        <trans-unit id="GEV" translate="yes" xml:space="preserve">
+          <source>GEV</source>
+          <target state="new">GEV</target>
+        </trans-unit>
+        <trans-unit id="Graphs" translate="yes" xml:space="preserve">
+          <source>Graphs</source>
+          <target state="new">Graphs</target>
+        </trans-unit>
+        <trans-unit id="Gumbel" translate="yes" xml:space="preserve">
+          <source>Gumbel</source>
+          <target state="new">Gumbel</target>
+        </trans-unit>
+        <trans-unit id="Histogram_Plot" translate="yes" xml:space="preserve">
+          <source>Histogram Plot</source>
+          <target state="new">Histogram Plot</target>
+        </trans-unit>
+        <trans-unit id="Interactions" translate="yes" xml:space="preserve">
+          <source>Interactions</source>
+          <target state="new">Interactions</target>
+        </trans-unit>
+        <trans-unit id="Into" translate="yes" xml:space="preserve">
+          <source>Into</source>
+          <target state="new">Into</target>
+        </trans-unit>
+        <trans-unit id="Last" translate="yes" xml:space="preserve">
+          <source>Last</source>
+          <target state="new">Last</target>
+        </trans-unit>
+        <trans-unit id="Level_Number" translate="yes" xml:space="preserve">
+          <source>Level Number</source>
+          <target state="new">Level Number</target>
+        </trans-unit>
+        <trans-unit id="Lock" translate="yes" xml:space="preserve">
+          <source>Lock</source>
+          <target state="new">Lock</target>
+        </trans-unit>
+        <trans-unit id="Lock_and_Unlock" translate="yes" xml:space="preserve">
+          <source>Lock and Unlock</source>
+          <target state="new">Lock and Unlock</target>
+        </trans-unit>
+        <trans-unit id="Match_case" translate="yes" xml:space="preserve">
+          <source>Match case</source>
+          <target state="new">Match case</target>
+        </trans-unit>
+        <trans-unit id="Maximum_Likelihood" translate="yes" xml:space="preserve">
+          <source>Maximum Likelihood</source>
+          <target state="new">Maximum Likelihood</target>
+        </trans-unit>
+        <trans-unit id="Method_of_moments" translate="yes" xml:space="preserve">
+          <source>Method of moments</source>
+          <target state="new">Method of moments</target>
+        </trans-unit>
+        <trans-unit id="Models" translate="yes" xml:space="preserve">
+          <source>Models</source>
+          <target state="new">Models</target>
+        </trans-unit>
+        <trans-unit id="Multiple_column" translate="yes" xml:space="preserve">
+          <source>Multiple column</source>
+          <target state="new">Multiple column</target>
+        </trans-unit>
+        <trans-unit id="Multiple_columns" translate="yes" xml:space="preserve">
+          <source>Multiple columns</source>
+          <target state="new">Multiple columns</target>
+        </trans-unit>
+        <trans-unit id="Names_for_data_columns" translate="yes" xml:space="preserve">
+          <source>Names for data columns</source>
+          <target state="new">Names for data columns</target>
+        </trans-unit>
+        <trans-unit id="None" translate="yes" xml:space="preserve">
+          <source>None</source>
+          <target state="new">None</target>
+        </trans-unit>
+        <trans-unit id="Normal" translate="yes" xml:space="preserve">
+          <source>Normal</source>
+          <target state="new">Normal</target>
+        </trans-unit>
+        <trans-unit id="One_sample" translate="yes" xml:space="preserve">
+          <source>One sample</source>
+          <target state="new">One sample</target>
+        </trans-unit>
+        <trans-unit id="Only_use_existing_factor_level_combinations" translate="yes" xml:space="preserve">
+          <source>Only use existing factor level combinations</source>
+          <target state="new">Only use existing factor level combinations</target>
+        </trans-unit>
+        <trans-unit id="Order" translate="yes" xml:space="preserve">
+          <source>Order</source>
+          <target state="new">Order</target>
+        </trans-unit>
+        <trans-unit id="orthogonal" translate="yes" xml:space="preserve">
+          <source>orthogonal</source>
+          <target state="new">orthogonal</target>
+        </trans-unit>
+        <trans-unit id="Parameter" translate="yes" xml:space="preserve">
+          <source>Parameter</source>
+          <target state="new">Parameter</target>
+        </trans-unit>
+        <trans-unit id="Percentages_of_overall_total" translate="yes" xml:space="preserve">
+          <source>Percentages of overall total</source>
+          <target state="new">Percentages of overall total</target>
+        </trans-unit>
+        <trans-unit id="Percentage_of_factor" translate="yes" xml:space="preserve">
+          <source>Percentage of factor</source>
+          <target state="new">Percentage of factor</target>
+        </trans-unit>
+        <trans-unit id="Required_Format" translate="yes" xml:space="preserve">
+          <source>Required Format</source>
+          <target state="new">Required Format</target>
+        </trans-unit>
+        <trans-unit id="Reserve_free_space" translate="yes" xml:space="preserve">
+          <source>Reserve free space</source>
+          <target state="new">Reserve free space</target>
+        </trans-unit>
+        <trans-unit id="Restrict_data_values" translate="yes" xml:space="preserve">
+          <source>Restrict data values</source>
+          <target state="new">Restrict data values</target>
+        </trans-unit>
+        <trans-unit id="Save_estimates_in" translate="yes" xml:space="preserve">
+          <source>Save estimates in</source>
+          <target state="new">Save estimates in</target>
+        </trans-unit>
+        <trans-unit id="Search_to_end_only" translate="yes" xml:space="preserve">
+          <source>Search to end only</source>
+          <target state="new">Search to end only</target>
+        </trans-unit>
+        <trans-unit id="Selected_column" translate="yes" xml:space="preserve">
+          <source>Selected column</source>
+          <target state="new">Selected column</target>
+        </trans-unit>
+        <trans-unit id="Significance_Test" translate="yes" xml:space="preserve">
+          <source>Significance Test</source>
+          <target state="new">Significance Test</target>
+        </trans-unit>
+        <trans-unit id="simple" translate="yes" xml:space="preserve">
+          <source>simple</source>
+          <target state="new">simple</target>
+        </trans-unit>
+        <trans-unit id="Single_column" translate="yes" xml:space="preserve">
+          <source>Single column</source>
+          <target state="new">Single column</target>
+        </trans-unit>
+        <trans-unit id="Title_of_the_Histogram" translate="yes" xml:space="preserve">
+          <source>Title of the Histogram</source>
+          <target state="new">Title of the Histogram</target>
+        </trans-unit>
+        <trans-unit id="Unlock" translate="yes" xml:space="preserve">
+          <source>Unlock</source>
+          <target state="new">Unlock</target>
+        </trans-unit>
+        <trans-unit id="Value" translate="yes" xml:space="preserve">
+          <source>Value</source>
+          <target state="new">Value</target>
+        </trans-unit>
+        <trans-unit id="Variable_to_Plot" translate="yes" xml:space="preserve">
+          <source>Variable to Plot</source>
+          <target state="new">Variable to Plot</target>
+        </trans-unit>
+        <trans-unit id="Weights" translate="yes" xml:space="preserve">
+          <source>Weights</source>
+          <target state="new">Weights</target>
+        </trans-unit>
+        <trans-unit id="With_an_X_Variable" translate="yes" xml:space="preserve">
+          <source>With an X variable</source>
+          <target state="new">With an X variable</target>
+        </trans-unit>
+        <trans-unit id="With_Label" translate="yes" xml:space="preserve">
+          <source>With Label</source>
+          <target state="new">With Label</target>
+        </trans-unit>
+        <trans-unit id="X_variable" translate="yes" xml:space="preserve">
+          <source>X variable</source>
+          <target state="new">X variable</target>
+        </trans-unit>
+        <trans-unit id="Y_variable_s_" translate="yes" xml:space="preserve">
+          <source>Y variable(s)</source>
+          <target state="new">Y variable(s)</target>
+        </trans-unit>
+        <trans-unit id="Y_variate" translate="yes" xml:space="preserve">
+          <source>Y variate</source>
+          <target state="new">Y variate</target>
+        </trans-unit>
+        <trans-unit id="Confidence_Limits" translate="yes" xml:space="preserve">
+          <source>Confidence Limits</source>
+          <target state="new">Confidence Limits</target>
+        </trans-unit>
+        <trans-unit id="Dates" translate="yes" xml:space="preserve">
+          <source>Dates</source>
+          <target state="new">Dates</target>
+        </trans-unit>
+        <trans-unit id="Distribution_Type" translate="yes" xml:space="preserve">
+          <source>Distribution Type</source>
+          <target state="new">Distribution Type</target>
+        </trans-unit>
+        <trans-unit id="Entry_of_regular_sequence" translate="yes" xml:space="preserve">
+          <source>Entry of regular sequence</source>
+          <target state="new">Entry of regular sequence</target>
+        </trans-unit>
+        <trans-unit id="Explanatory_Variable" translate="yes" xml:space="preserve">
+          <source>Explanatory Variable</source>
+          <target state="new">Explanatory Variable</target>
+        </trans-unit>
+        <trans-unit id="Generate_Random_Sample" translate="yes" xml:space="preserve">
+          <source>Generate Random Sample</source>
+          <target state="new">Generate Random Sample</target>
+        </trans-unit>
+        <trans-unit id="Lack_of_fit" translate="yes" xml:space="preserve">
+          <source>Lack  of fit</source>
+          <target state="new">Lack  of fit</target>
+        </trans-unit>
+        <trans-unit id="Make_Result_a_factor" translate="yes" xml:space="preserve">
+          <source>Make Result a factor</source>
+          <target state="new">Make Result a factor</target>
+        </trans-unit>
+        <trans-unit id="Number_of_Samples" translate="yes" xml:space="preserve">
+          <source>Number of Samples</source>
+          <target state="new">Number of Samples</target>
+        </trans-unit>
+        <trans-unit id="Parameters" translate="yes" xml:space="preserve">
+          <source>Parameters</source>
+          <target state="new">Parameters</target>
+        </trans-unit>
+        <trans-unit id="Repeated" translate="yes" xml:space="preserve">
+          <source>Repeated</source>
+          <target state="new">Repeated</target>
+        </trans-unit>
+        <trans-unit id="Repeated_Single_Value" translate="yes" xml:space="preserve">
+          <source>Repeated Single Value</source>
+          <target state="new">Repeated Single Value</target>
+        </trans-unit>
+        <trans-unit id="Sample_from_data_column" translate="yes" xml:space="preserve">
+          <source>Sample from data column</source>
+          <target state="new">Sample from data column</target>
+        </trans-unit>
+        <trans-unit id="Sample_Type" translate="yes" xml:space="preserve">
+          <source>Sample Type</source>
+          <target state="new">Sample Type</target>
+        </trans-unit>
+        <trans-unit id="Sampling" translate="yes" xml:space="preserve">
+          <source>Sampling</source>
+          <target state="new">Sampling</target>
+        </trans-unit>
+        <trans-unit id="Selected_Variable" translate="yes" xml:space="preserve">
+          <source>Selected Variable</source>
+          <target state="new">Selected Variable</target>
+        </trans-unit>
+        <trans-unit id="Sequences" translate="yes" xml:space="preserve">
+          <source>Sequences</source>
+          <target state="new">Sequences</target>
+        </trans-unit>
+        <trans-unit id="Sequence_Definition" translate="yes" xml:space="preserve">
+          <source>Sequence Definition</source>
+          <target state="new">Sequence Definition</target>
+        </trans-unit>
+        <trans-unit id="Show_Plot" translate="yes" xml:space="preserve">
+          <source>Show Plot</source>
+          <target state="new">Show Plot</target>
+        </trans-unit>
+        <trans-unit id="Simple_Regression" translate="yes" xml:space="preserve">
+          <source>Simple Regression</source>
+          <target state="new">Simple Regression</target>
+        </trans-unit>
+        <trans-unit id="Single_value" translate="yes" xml:space="preserve">
+          <source>Single value</source>
+          <target state="new">Single value</target>
+        </trans-unit>
+        <trans-unit id="St_Dev" translate="yes" xml:space="preserve">
+          <source>Standard Deviation</source>
+          <target state="new">Standard Deviation</target>
+        </trans-unit>
+        <trans-unit id="All" translate="yes" xml:space="preserve">
+          <source>All</source>
+          <target state="new">All</target>
+        </trans-unit>
+        <trans-unit id="Append" translate="yes" xml:space="preserve">
+          <source>Append</source>
+          <target state="new">Append</target>
+        </trans-unit>
+        <trans-unit id="Carry" translate="yes" xml:space="preserve">
+          <source>Carry</source>
+          <target state="new">Carry</target>
+        </trans-unit>
+        <trans-unit id="Columns_To_Sort" translate="yes" xml:space="preserve">
+          <source>Columns To Sort</source>
+          <target state="new">Columns To Sort</target>
+        </trans-unit>
+        <trans-unit id="Column_factors" translate="yes" xml:space="preserve">
+          <source>Column factors</source>
+          <target state="new">Column factors</target>
+        </trans-unit>
+        <trans-unit id="Condtion_for_selection" translate="yes" xml:space="preserve">
+          <source>Condtion for selection</source>
+          <target state="new">Condtion for selection</target>
+        </trans-unit>
+        <trans-unit id="Decimals" translate="yes" xml:space="preserve">
+          <source>Decimals</source>
+          <target state="new">Decimals</target>
+        </trans-unit>
+        <trans-unit id="Factor_Values_for_Selection" translate="yes" xml:space="preserve">
+          <source>Factor Values for Selection</source>
+          <target state="new">Factor Values for Selection</target>
+        </trans-unit>
+        <trans-unit id="Maximum" translate="yes" xml:space="preserve">
+          <source>Maximum</source>
+          <target state="new">Maximum</target>
+        </trans-unit>
+        <trans-unit id="Mean" translate="yes" xml:space="preserve">
+          <source>Mean</source>
+          <target state="new">Mean</target>
+        </trans-unit>
+        <trans-unit id="Means" translate="yes" xml:space="preserve">
+          <source>Means</source>
+          <target state="new">Means</target>
+        </trans-unit>
+        <trans-unit id="Minimum" translate="yes" xml:space="preserve">
+          <source>Minimum</source>
+          <target state="new">Minimum</target>
+        </trans-unit>
+        <trans-unit id="More" translate="yes" xml:space="preserve">
+          <source> More</source>
+          <target state="new"> More</target>
+        </trans-unit>
+        <trans-unit id="Omit_value" translate="yes" xml:space="preserve">
+          <source>Omit value</source>
+          <target state="new">Omit value</target>
+        </trans-unit>
+        <trans-unit id="Order_Type" translate="yes" xml:space="preserve">
+          <source>Order Type</source>
+          <target state="new">Order Type</target>
+        </trans-unit>
+        <trans-unit id="Repeat_columns" translate="yes" xml:space="preserve">
+          <source>Repeat columns</source>
+          <target state="new">Repeat columns</target>
+        </trans-unit>
+        <trans-unit id="Row_Stats" translate="yes" xml:space="preserve">
+          <source>Row Statistics</source>
+          <target state="new">Row Statistics</target>
+        </trans-unit>
+        <trans-unit id="Select_And_Stuck" translate="yes" xml:space="preserve">
+          <source>Select And Stuck</source>
+          <target state="new">Select And Stuck</target>
+        </trans-unit>
+        <trans-unit id="Select_by_condition" translate="yes" xml:space="preserve">
+          <source>Select by condition</source>
+          <target state="new">Select by condition</target>
+        </trans-unit>
+        <trans-unit id="Select_by_factor_values" translate="yes" xml:space="preserve">
+          <source>Select by factor values</source>
+          <target state="new">Select by factor values</target>
+        </trans-unit>
+        <trans-unit id="Show_calculator" translate="yes" xml:space="preserve">
+          <source>Show calculator</source>
+          <target state="new">Show calculator</target>
+        </trans-unit>
+        <trans-unit id="Stack_data_into" translate="yes" xml:space="preserve">
+          <source>Stack data into</source>
+          <target state="new">Stack data into</target>
+        </trans-unit>
+        <trans-unit id="Stack_join_columns" translate="yes" xml:space="preserve">
+          <source>Stack(join) columns</source>
+          <target state="new">Stack(join) columns</target>
+        </trans-unit>
+        <trans-unit id="Statistcs_Required" translate="yes" xml:space="preserve">
+          <source>Statistcs Required</source>
+          <target state="new">Statistcs Required</target>
+        </trans-unit>
+        <trans-unit id="Summary_statistics" translate="yes" xml:space="preserve">
+          <source>Summary statistics</source>
+          <target state="new">Summary statistics</target>
+        </trans-unit>
+        <trans-unit id="Summary_Tables" translate="yes" xml:space="preserve">
+          <source>Summary Tables</source>
+          <target state="new">Summary Tables</target>
+        </trans-unit>
+        <trans-unit id="Totals" translate="yes" xml:space="preserve">
+          <source>Totals</source>
+          <target state="new">Totals</target>
+        </trans-unit>
+        <trans-unit id="Two_ways_table_s_" translate="yes" xml:space="preserve">
+          <source>Two ways table(s)</source>
+          <target state="new">Two ways table(s)</target>
+        </trans-unit>
+        <trans-unit id="Variables_to_be_stack" translate="yes" xml:space="preserve">
+          <source>Variables to be stack</source>
+          <target state="new">Variables to be stack</target>
+        </trans-unit>
+        <trans-unit id="Variates" translate="yes" xml:space="preserve">
+          <source>Variates</source>
+          <target state="new">Variates</target>
+        </trans-unit>
+        <trans-unit id="Adjustment" translate="yes" xml:space="preserve">
+          <source>Adjustment</source>
+          <target state="new">Adjustment</target>
+        </trans-unit>
+        <trans-unit id="Angular" translate="yes" xml:space="preserve">
+          <source>Angular</source>
+          <target state="new">Angular</target>
+        </trans-unit>
+        <trans-unit id="Calculated_Transformations" translate="yes" xml:space="preserve">
+          <source>Calculated Transformations</source>
+          <target state="new">Calculated Transformations</target>
+        </trans-unit>
+        <trans-unit id="Carry_further_columns" translate="yes" xml:space="preserve">
+          <source>Carry further columns</source>
+          <target state="new">Carry further columns</target>
+        </trans-unit>
+        <trans-unit id="Circular" translate="yes" xml:space="preserve">
+          <source>Circular</source>
+          <target state="new">Circular</target>
+        </trans-unit>
+        <trans-unit id="Column_factor" translate="yes" xml:space="preserve">
+          <source>Column factor</source>
+          <target state="new">Column factor</target>
+        </trans-unit>
+        <trans-unit id="Column_to_be_split" translate="yes" xml:space="preserve">
+          <source>Column to be split</source>
+          <target state="new">Column to be split</target>
+        </trans-unit>
+        <trans-unit id="Common_Transformations" translate="yes" xml:space="preserve">
+          <source>Common Transformations</source>
+          <target state="new">Common Transformations</target>
+        </trans-unit>
+        <trans-unit id="Difference" translate="yes" xml:space="preserve">
+          <source>Difference</source>
+          <target state="new">Difference</target>
+        </trans-unit>
+        <trans-unit id="Inverse" translate="yes" xml:space="preserve">
+          <source>Inverse</source>
+          <target state="new">Inverse</target>
+        </trans-unit>
+        <trans-unit id="Logit" translate="yes" xml:space="preserve">
+          <source>Logit</source>
+          <target state="new">Logit</target>
+        </trans-unit>
+        <trans-unit id="Non_Negative" translate="yes" xml:space="preserve">
+          <source>Non Negative</source>
+          <target state="new">Non Negative</target>
+        </trans-unit>
+        <trans-unit id="Non_Parametric_Two_Way_ANOVA" translate="yes" xml:space="preserve">
+          <source>Non-Parametric Two Way ANOVA</source>
+          <target state="new">Non-Parametric Two Way ANOVA</target>
+        </trans-unit>
+        <trans-unit id="Normal_Score" translate="yes" xml:space="preserve">
+          <source>Normal Score</source>
+          <target state="new">Normal Score</target>
+        </trans-unit>
+        <trans-unit id="Other_Transformations" translate="yes" xml:space="preserve">
+          <source>Other Transformations</source>
+          <target state="new">Other Transformations</target>
+        </trans-unit>
+        <trans-unit id="Percentage" translate="yes" xml:space="preserve">
+          <source>Percentage</source>
+          <target state="new">Percentage</target>
+        </trans-unit>
+        <trans-unit id="Preview" translate="yes" xml:space="preserve">
+          <source>Preview</source>
+          <target state="new">Preview</target>
+        </trans-unit>
+        <trans-unit id="Probit" translate="yes" xml:space="preserve">
+          <source>Probit</source>
+          <target state="new">Probit</target>
+        </trans-unit>
+        <trans-unit id="Proportion" translate="yes" xml:space="preserve">
+          <source>Proportion</source>
+          <target state="new">Proportion</target>
+        </trans-unit>
+        <trans-unit id="Rank" translate="yes" xml:space="preserve">
+          <source>Rank</source>
+          <target state="new">Rank</target>
+        </trans-unit>
+        <trans-unit id="Rows_defined_by" translate="yes" xml:space="preserve">
+          <source>Rows defined by</source>
+          <target state="new">Rows defined by</target>
+        </trans-unit>
+        <trans-unit id="Row_factor" translate="yes" xml:space="preserve">
+          <source>Row factor</source>
+          <target state="new">Row factor</target>
+        </trans-unit>
+        <trans-unit id="Standardise" translate="yes" xml:space="preserve">
+          <source>Standardise</source>
+          <target state="new">Standardise</target>
+        </trans-unit>
+        <trans-unit id="Unstack_split_columns" translate="yes" xml:space="preserve">
+          <source>Unstack(split) columns</source>
+          <target state="new">Unstack(split) columns</target>
+        </trans-unit>
+        <trans-unit id="Using_levels_of" translate="yes" xml:space="preserve">
+          <source>Using levels of</source>
+          <target state="new">Using levels of</target>
         </trans-unit>
       </group>
     </body>
@@ -941,7 +1781,7 @@
           <target state="needs-review-translation">25</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="$this.Icon" translate="yes" xml:space="preserve" extype="System.Drawing.Icon, System.Drawing">
+        <trans-unit id="$this.Icon" translate="yes" extype="System.Drawing.Icon, System.Drawing" xml:space="preserve">
           <source>
         AAABAAQAEBAQAAEABAAoAQAARgAAACAgEAABAAQA6AIAAG4BAAAgIAAAAQAIAKgIAABWBAAAMDAAAAEA
         CACoDgAA/gwAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAACA
@@ -1300,7 +2140,12 @@
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="INSTAT/DLGPLOT.RESX" datatype="resx" />
+      <group id="INSTAT/DLGPLOT.RESX" datatype="resx">
+        <trans-unit id="BackgroundWorker1.TrayLocation" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" extradata="metadata">
+          <source>17, 17</source>
+          <target state="needs-review-translation">17, 17</target>
+        </trans-unit>
+      </group>
     </body>
   </file>
   <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/UCRSELECTORADDREMOVE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
@@ -1645,16 +2490,16 @@
     </header>
     <body>
       <group id="INSTAT/DLGREGRESSIONSIMPLE.RESX" datatype="resx">
-        <trans-unit id="$this.AutoScaleDimensions" translate="yes" xml:space="preserve" extype="System.Drawing.SizeF, System.Drawing">
+        <trans-unit id="$this.AutoScaleDimensions" translate="yes" extype="System.Drawing.SizeF, System.Drawing" xml:space="preserve">
           <source>6, 13</source>
           <target state="needs-review-translation">6, 13</target>
         </trans-unit>
-        <trans-unit id="$this.ClientSize" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
-          <source>424, 343</source>
+        <trans-unit id="$this.ClientSize" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
+          <source>458, 343</source>
           <target state="needs-review-translation">284, 261</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="$this.StartPosition" translate="yes" xml:space="preserve" extype="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+        <trans-unit id="$this.StartPosition" translate="yes" extype="System.Windows.Forms.FormStartPosition, System.Windows.Forms" xml:space="preserve">
           <source>CenterScreen</source>
           <target state="needs-review-translation">CenterScreen</target>
         </trans-unit>
@@ -1662,67 +2507,47 @@
           <source>Simple Regression</source>
           <target state="new">Simple Regression</target>
         </trans-unit>
-        <trans-unit id="$this.Localizable" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata">
+        <trans-unit id="$this.Localizable" translate="yes" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata" xml:space="preserve">
           <source>True</source>
           <target state="needs-review-translation">True</target>
         </trans-unit>
-        <trans-unit id="txtdf.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="txtdf.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>118, 43</source>
           <target state="needs-review-translation">118, 43</target>
         </trans-unit>
-        <trans-unit id="txtdf.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="txtdf.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>58, 20</source>
           <target state="needs-review-translation">58, 20</target>
         </trans-unit>
-        <trans-unit id="txtdf.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="txtdf.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>12</source>
           <target state="needs-review-translation">12</target>
         </trans-unit>
-        <trans-unit id="txtResidualMsg.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="txtResidualMsg.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>118, 11</source>
           <target state="needs-review-translation">118, 11</target>
         </trans-unit>
-        <trans-unit id="txtResidualMsg.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="txtResidualMsg.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>149, 20</source>
           <target state="needs-review-translation">149, 20</target>
         </trans-unit>
-        <trans-unit id="txtResidualMsg.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="txtResidualMsg.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>2</source>
           <target state="needs-review-translation">2</target>
         </trans-unit>
-        <trans-unit id="Label1.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+        <trans-unit id="lblResidualMsg.AutoSize" translate="yes" extype="System.Boolean, mscorlib" xml:space="preserve">
           <source>True</source>
           <target state="needs-review-translation">True</target>
         </trans-unit>
-        <trans-unit id="Label1.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
-          <source>7, 43</source>
-          <target state="needs-review-translation">7, 43</target>
-        </trans-unit>
-        <trans-unit id="Label1.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
-          <source>100, 13</source>
-          <target state="needs-review-translation">100, 13</target>
-        </trans-unit>
-        <trans-unit id="Label1.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
-          <source>1</source>
-          <target state="needs-review-translation">1</target>
-        </trans-unit>
-        <trans-unit id="Label1.Text" translate="yes" xml:space="preserve">
-          <source>Degrees of freedom</source>
-          <target state="new">Degrees of freedom</target>
-        </trans-unit>
-        <trans-unit id="lblResidualMsg.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
-          <source>True</source>
-          <target state="needs-review-translation">True</target>
-        </trans-unit>
-        <trans-unit id="lblResidualMsg.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="lblResidualMsg.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>7, 11</source>
           <target state="needs-review-translation">7, 11</target>
         </trans-unit>
-        <trans-unit id="lblResidualMsg.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="lblResidualMsg.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>94, 13</source>
           <target state="needs-review-translation">94, 13</target>
         </trans-unit>
-        <trans-unit id="lblResidualMsg.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="lblResidualMsg.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>0</source>
           <target state="needs-review-translation">0</target>
         </trans-unit>
@@ -1730,32 +2555,32 @@
           <source>Residual Message</source>
           <target state="new">Residual Message</target>
         </trans-unit>
-        <trans-unit id="grpLackFit.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="grpLackFit.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>111, 179</source>
           <target state="needs-review-translation">111, 179</target>
         </trans-unit>
-        <trans-unit id="grpLackFit.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="grpLackFit.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>280, 76</source>
           <target state="needs-review-translation">280, 76</target>
         </trans-unit>
-        <trans-unit id="grpLackFit.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="grpLackFit.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>11</source>
           <target state="needs-review-translation">11</target>
         </trans-unit>
-        <trans-unit id="chkLackFit.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+        <trans-unit id="chkLackFit.AutoSize" translate="yes" extype="System.Boolean, mscorlib" xml:space="preserve">
           <source>True</source>
           <target state="needs-review-translation">True</target>
         </trans-unit>
-        <trans-unit id="chkLackFit.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="chkLackFit.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>9, 179</source>
           <target state="needs-review-translation">9, 179</target>
         </trans-unit>
-        <trans-unit id="chkLackFit.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="chkLackFit.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>73, 17</source>
           <target state="needs-review-translation">78, 17</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="chkLackFit.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="chkLackFit.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>10</source>
           <target state="needs-review-translation">10</target>
         </trans-unit>
@@ -1763,39 +2588,40 @@
           <source>Lack of fit</source>
           <target state="new">Lack of fit</target>
         </trans-unit>
-        <trans-unit id="chkAnovaTable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+        <trans-unit id="chkAnovaTable.AutoSize" translate="yes" extype="System.Boolean, mscorlib" xml:space="preserve">
           <source>True</source>
           <target state="needs-review-translation">True</target>
         </trans-unit>
-        <trans-unit id="chkAnovaTable.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="chkAnovaTable.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>243, 141</source>
           <target state="needs-review-translation">243, 141</target>
         </trans-unit>
-        <trans-unit id="chkAnovaTable.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
-          <source>117, 17</source>
+        <trans-unit id="chkAnovaTable.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
+          <source>123, 17</source>
           <target state="needs-review-translation">117, 17</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="chkAnovaTable.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="chkAnovaTable.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>9</source>
           <target state="needs-review-translation">9</target>
         </trans-unit>
         <trans-unit id="chkAnovaTable.Text" translate="yes" xml:space="preserve">
-          <source>Show Anova Table</source>
-          <target state="new">Show Anova Table</target>
+          <source>Show ANOVA Table</source>
+          <target state="new">Show ANOVA Table</target>
         </trans-unit>
-        <trans-unit id="chkShowPlots.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+        <trans-unit id="chkShowPlots.AutoSize" translate="yes" extype="System.Boolean, mscorlib" xml:space="preserve">
           <source>True</source>
           <target state="needs-review-translation">True</target>
         </trans-unit>
-        <trans-unit id="chkShowPlots.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="chkShowPlots.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>144, 141</source>
           <target state="needs-review-translation">144, 141</target>
         </trans-unit>
-        <trans-unit id="chkShowPlots.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="chkShowPlots.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>74, 17</source>
           <target state="needs-review-translation">74, 17</target>
         </trans-unit>
-        <trans-unit id="chkShowPlots.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="chkShowPlots.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>8</source>
           <target state="needs-review-translation">8</target>
         </trans-unit>
@@ -1803,19 +2629,19 @@
           <source>Show Plot</source>
           <target state="new">Show Plot</target>
         </trans-unit>
-        <trans-unit id="chkSiginificance.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+        <trans-unit id="chkSiginificance.AutoSize" translate="yes" extype="System.Boolean, mscorlib" xml:space="preserve">
           <source>True</source>
           <target state="needs-review-translation">True</target>
         </trans-unit>
-        <trans-unit id="chkSiginificance.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="chkSiginificance.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>9, 141</source>
           <target state="needs-review-translation">9, 141</target>
         </trans-unit>
-        <trans-unit id="chkSiginificance.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="chkSiginificance.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>108, 17</source>
           <target state="needs-review-translation">108, 17</target>
         </trans-unit>
-        <trans-unit id="chkSiginificance.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="chkSiginificance.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>7</source>
           <target state="needs-review-translation">7</target>
         </trans-unit>
@@ -1847,31 +2673,33 @@
           <source>80</source>
           <target state="new">80</target>
         </trans-unit>
-        <trans-unit id="ComboBox1.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
-          <source>302, 103</source>
+        <trans-unit id="ComboBox1.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
+          <source>315, 105</source>
           <target state="needs-review-translation">302, 103</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="ComboBox1.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="ComboBox1.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>42, 21</source>
           <target state="needs-review-translation">42, 21</target>
         </trans-unit>
-        <trans-unit id="ComboBox1.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="ComboBox1.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>6</source>
           <target state="needs-review-translation">6</target>
         </trans-unit>
-        <trans-unit id="lblConfidence.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+        <trans-unit id="lblConfidence.AutoSize" translate="yes" extype="System.Boolean, mscorlib" xml:space="preserve">
           <source>True</source>
           <target state="needs-review-translation">True</target>
         </trans-unit>
-        <trans-unit id="lblConfidence.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
-          <source>191, 111</source>
+        <trans-unit id="lblConfidence.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
+          <source>214, 111</source>
           <target state="needs-review-translation">191, 111</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="lblConfidence.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="lblConfidence.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>90, 13</source>
           <target state="needs-review-translation">90, 13</target>
         </trans-unit>
-        <trans-unit id="lblConfidence.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="lblConfidence.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>5</source>
           <target state="needs-review-translation">5</target>
         </trans-unit>
@@ -1879,23 +2707,24 @@
           <source>Confidence Limits</source>
           <target state="new">Confidence Limits</target>
         </trans-unit>
-        <trans-unit id="lblExplanatoryVariable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+        <trans-unit id="lblExplanatoryVariable.AutoSize" translate="yes" extype="System.Boolean, mscorlib" xml:space="preserve">
           <source>True</source>
           <target state="needs-review-translation">True</target>
         </trans-unit>
-        <trans-unit id="lblExplanatoryVariable.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <trans-unit id="lblExplanatoryVariable.ImeMode" translate="yes" extype="System.Windows.Forms.ImeMode, System.Windows.Forms" xml:space="preserve">
           <source>NoControl</source>
           <target state="needs-review-translation">NoControl</target>
         </trans-unit>
-        <trans-unit id="lblExplanatoryVariable.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
-          <source>191, 69</source>
+        <trans-unit id="lblExplanatoryVariable.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
+          <source>218, 64</source>
           <target state="needs-review-translation">191, 69</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="lblExplanatoryVariable.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="lblExplanatoryVariable.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>103, 13</source>
           <target state="needs-review-translation">103, 13</target>
         </trans-unit>
-        <trans-unit id="lblExplanatoryVariable.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="lblExplanatoryVariable.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>4</source>
           <target state="needs-review-translation">4</target>
         </trans-unit>
@@ -1903,19 +2732,20 @@
           <source>Explanatory Variable</source>
           <target state="new">Explanatory Variable</target>
         </trans-unit>
-        <trans-unit id="lblResponseVariable.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+        <trans-unit id="lblResponseVariable.AutoSize" translate="yes" extype="System.Boolean, mscorlib" xml:space="preserve">
           <source>True</source>
           <target state="needs-review-translation">True</target>
         </trans-unit>
-        <trans-unit id="lblResponseVariable.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
-          <source>191, 37</source>
+        <trans-unit id="lblResponseVariable.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
+          <source>223, 33</source>
           <target state="needs-review-translation">191, 37</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="lblResponseVariable.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="lblResponseVariable.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>96, 13</source>
           <target state="needs-review-translation">96, 13</target>
         </trans-unit>
-        <trans-unit id="lblResponseVariable.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="lblResponseVariable.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>3</source>
           <target state="needs-review-translation">3</target>
         </trans-unit>
@@ -1923,43 +2753,46 @@
           <source>Response Variable</source>
           <target state="new">Response Variable</target>
         </trans-unit>
-        <trans-unit id="ucrReceiverSingleA.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
-          <source>302, 24</source>
+        <trans-unit id="ucrReceiverSingleA.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
+          <source>331, 24</source>
           <target state="needs-review-translation">302, 24</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="ucrReceiverSingleA.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="ucrReceiverSingleA.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>106, 26</source>
           <target state="needs-review-translation">106, 26</target>
         </trans-unit>
-        <trans-unit id="ucrReceiverSingleA.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="ucrReceiverSingleA.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>1</source>
           <target state="needs-review-translation">1</target>
         </trans-unit>
-        <trans-unit id="ucrAddRemove.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="ucrAddRemove.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>3, 6</source>
           <target state="needs-review-translation">3, 6</target>
         </trans-unit>
-        <trans-unit id="ucrAddRemove.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
-          <source>182, 118</source>
+        <trans-unit id="ucrAddRemove.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
+          <source>209, 129</source>
           <target state="needs-review-translation">182, 118</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="ucrAddRemove.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="ucrAddRemove.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>0</source>
           <target state="needs-review-translation">0</target>
         </trans-unit>
-        <trans-unit id="tbRegress.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="tbRegress.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>4, 22</source>
           <target state="needs-review-translation">4, 22</target>
         </trans-unit>
-        <trans-unit id="tbRegress.Padding" translate="yes" xml:space="preserve" extype="System.Windows.Forms.Padding, System.Windows.Forms">
+        <trans-unit id="tbRegress.Padding" translate="yes" extype="System.Windows.Forms.Padding, System.Windows.Forms" xml:space="preserve">
           <source>3, 3, 3, 3</source>
           <target state="needs-review-translation">3, 3, 3, 3</target>
         </trans-unit>
-        <trans-unit id="tbRegress.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
-          <source>416, 274</source>
+        <trans-unit id="tbRegress.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
+          <source>450, 274</source>
           <target state="needs-review-translation">416, 274</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="tbRegress.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="tbRegress.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>0</source>
           <target state="needs-review-translation">0</target>
         </trans-unit>
@@ -1967,20 +2800,20 @@
           <source>Regress</source>
           <target state="new">Regress</target>
         </trans-unit>
-        <trans-unit id="tbPlot.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="tbPlot.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>4, 22</source>
           <target state="needs-review-translation">4, 22</target>
         </trans-unit>
-        <trans-unit id="tbPlot.Padding" translate="yes" xml:space="preserve" extype="System.Windows.Forms.Padding, System.Windows.Forms">
+        <trans-unit id="tbPlot.Padding" translate="yes" extype="System.Windows.Forms.Padding, System.Windows.Forms" xml:space="preserve">
           <source>3, 3, 3, 3</source>
           <target state="needs-review-translation">3, 3, 3, 3</target>
         </trans-unit>
-        <trans-unit id="tbPlot.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
-          <source>416, 274</source>
+        <trans-unit id="tbPlot.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
+          <source>450, 274</source>
           <target state="needs-review-translation">464, 235</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="tbPlot.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="tbPlot.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>1</source>
           <target state="needs-review-translation">1</target>
         </trans-unit>
@@ -1988,16 +2821,16 @@
           <source>Plot</source>
           <target state="new">Plot</target>
         </trans-unit>
-        <trans-unit id="tbSave.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="tbSave.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>4, 22</source>
           <target state="needs-review-translation">4, 22</target>
         </trans-unit>
-        <trans-unit id="tbSave.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
-          <source>416, 274</source>
+        <trans-unit id="tbSave.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
+          <source>450, 274</source>
           <target state="needs-review-translation">464, 235</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="tbSave.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="tbSave.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>2</source>
           <target state="needs-review-translation">2</target>
         </trans-unit>
@@ -2005,96 +2838,635 @@
           <source>Save</source>
           <target state="new">Save</target>
         </trans-unit>
-        <trans-unit id="tbctrlSimple.Dock" translate="yes" xml:space="preserve" extype="System.Windows.Forms.DockStyle, System.Windows.Forms">
+        <trans-unit id="tbctrlSimple.Dock" translate="yes" extype="System.Windows.Forms.DockStyle, System.Windows.Forms" xml:space="preserve">
           <source>Top</source>
           <target state="needs-review-translation">Top</target>
         </trans-unit>
-        <trans-unit id="tbctrlSimple.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="tbctrlSimple.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>0, 0</source>
           <target state="needs-review-translation">0, 0</target>
         </trans-unit>
-        <trans-unit id="tbctrlSimple.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
-          <source>424, 300</source>
+        <trans-unit id="tbctrlSimple.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
+          <source>458, 300</source>
           <target state="needs-review-translation">424, 300</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="tbctrlSimple.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="tbctrlSimple.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>0</source>
           <target state="needs-review-translation">0</target>
         </trans-unit>
-        <trans-unit id="ucrBase.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+        <trans-unit id="ucrBase.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
           <source>7, 307</source>
           <target state="needs-review-translation">7, 307</target>
         </trans-unit>
-        <trans-unit id="ucrBase.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="ucrBase.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>410, 32</source>
           <target state="needs-review-translation">410, 32</target>
         </trans-unit>
-        <trans-unit id="ucrBase.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="ucrBase.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>1</source>
           <target state="needs-review-translation">1</target>
         </trans-unit>
-        <trans-unit id="ucrReceiverSingleB.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
-          <source>302, 56</source>
+        <trans-unit id="ucrReceiverSingleB.Location" translate="yes" extype="System.Drawing.Point, System.Drawing" xml:space="preserve">
+          <source>332, 56</source>
           <target state="needs-review-translation">302, 56</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="ucrReceiverSingleB.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+        <trans-unit id="ucrReceiverSingleB.Size" translate="yes" extype="System.Drawing.Size, System.Drawing" xml:space="preserve">
           <source>106, 26</source>
           <target state="needs-review-translation">106, 26</target>
         </trans-unit>
-        <trans-unit id="ucrReceiverSingleB.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+        <trans-unit id="ucrReceiverSingleB.TabIndex" translate="yes" extype="System.Int32, mscorlib" xml:space="preserve">
           <source>13</source>
           <target state="needs-review-translation">12</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="Label1.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <trans-unit id="lblResidualMsg.ImeMode" translate="yes" extype="System.Windows.Forms.ImeMode, System.Windows.Forms" xml:space="preserve">
           <source>NoControl</source>
           <target state="needs-review-translation">NoControl</target>
         </trans-unit>
-        <trans-unit id="lblResidualMsg.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <trans-unit id="chkLackFit.ImeMode" translate="yes" extype="System.Windows.Forms.ImeMode, System.Windows.Forms" xml:space="preserve">
           <source>NoControl</source>
           <target state="needs-review-translation">NoControl</target>
         </trans-unit>
-        <trans-unit id="chkLackFit.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <trans-unit id="chkAnovaTable.ImeMode" translate="yes" extype="System.Windows.Forms.ImeMode, System.Windows.Forms" xml:space="preserve">
           <source>NoControl</source>
           <target state="needs-review-translation">NoControl</target>
         </trans-unit>
-        <trans-unit id="chkAnovaTable.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <trans-unit id="chkShowPlots.ImeMode" translate="yes" extype="System.Windows.Forms.ImeMode, System.Windows.Forms" xml:space="preserve">
           <source>NoControl</source>
           <target state="needs-review-translation">NoControl</target>
         </trans-unit>
-        <trans-unit id="chkShowPlots.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <trans-unit id="chkSiginificance.ImeMode" translate="yes" extype="System.Windows.Forms.ImeMode, System.Windows.Forms" xml:space="preserve">
           <source>NoControl</source>
           <target state="needs-review-translation">NoControl</target>
         </trans-unit>
-        <trans-unit id="chkSiginificance.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <trans-unit id="lblConfidence.ImeMode" translate="yes" extype="System.Windows.Forms.ImeMode, System.Windows.Forms" xml:space="preserve">
           <source>NoControl</source>
           <target state="needs-review-translation">NoControl</target>
         </trans-unit>
-        <trans-unit id="lblConfidence.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <trans-unit id="lblResponseVariable.ImeMode" translate="yes" extype="System.Windows.Forms.ImeMode, System.Windows.Forms" xml:space="preserve">
           <source>NoControl</source>
           <target state="needs-review-translation">NoControl</target>
         </trans-unit>
-        <trans-unit id="lblResponseVariable.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
+        <trans-unit id="lblDF.AutoSize" translate="yes" xml:space="preserve" extype="System.Boolean, mscorlib">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="lblDF.ImeMode" translate="yes" xml:space="preserve" extype="System.Windows.Forms.ImeMode, System.Windows.Forms">
           <source>NoControl</source>
           <target state="needs-review-translation">NoControl</target>
+        </trans-unit>
+        <trans-unit id="lblDF.Location" translate="yes" xml:space="preserve" extype="System.Drawing.Point, System.Drawing">
+          <source>7, 43</source>
+          <target state="needs-review-translation">7, 43</target>
+        </trans-unit>
+        <trans-unit id="lblDF.Size" translate="yes" xml:space="preserve" extype="System.Drawing.Size, System.Drawing">
+          <source>100, 13</source>
+          <target state="needs-review-translation">100, 13</target>
+        </trans-unit>
+        <trans-unit id="lblDF.TabIndex" translate="yes" xml:space="preserve" extype="System.Int32, mscorlib">
+          <source>1</source>
+          <target state="needs-review-translation">1</target>
+        </trans-unit>
+        <trans-unit id="lblDF.Text" translate="yes" xml:space="preserve">
+          <source>Degrees of freedom</source>
+          <target state="new">Degrees of freedom</target>
         </trans-unit>
       </group>
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGONEWAYANOVE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGFREQTABLES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="INSTAT/DLGONEWAYANOVE.RESX" datatype="resx" />
+      <group id="INSTAT/DLGFREQTABLES.RESX" datatype="resx" />
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGANOVAONEWAY.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGFORMAT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="INSTAT/DLGANOVAONEWAY.RESX" datatype="resx" />
+      <group id="INSTAT/DLGFORMAT.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGFIND.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGFIND.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGFACTOR.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGFACTOR.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGEXTREMESCLIMATIC.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGEXTREMESCLIMATIC.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGEXTREMES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGEXTREMES.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGEXPAND.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGEXPAND.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGEXAMINE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGEXAMINE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGDUPLICATECOLUMNS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGDUPLICATECOLUMNS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGDISPLAY.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGDISPLAY.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGDELETEROWS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGDELETEROWS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGCOUNTSTOTALS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCOUNTSTOTALS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGCHISQUARETEST.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCHISQUARETEST.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGBIVARIATEANOVA.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGBIVARIATEANOVA.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGONESAMPLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGONESAMPLE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGNON-PAREMETRICONEANDTWOSAMPLETESTS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGNON-PAREMETRICONEANDTWOSAMPLETESTS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGNON-PARAMETRICANOVA.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGNON-PARAMETRICANOVA.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGSITE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSITE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGSIMPLEWITHGROUPS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSIMPLEWITHGROUPS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGSHIFTDAILYDATA.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSHIFTDAILYDATA.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGSELECTANDSTUCK.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSELECTANDSTUCK.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGSELECT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSELECT.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGREPLACE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGREPLACE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGRECODE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGRECODE.RESX" datatype="resx">
+        <trans-unit id="RangeStart.UserAddedColumn" translate="yes" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata" xml:space="preserve">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="RangeEnd.UserAddedColumn" translate="yes" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata" xml:space="preserve">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+        <trans-unit id="NewValue.UserAddedColumn" translate="yes" extype="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" extradata="metadata" xml:space="preserve">
+          <source>True</source>
+          <target state="needs-review-translation">True</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGRANDOMSAMPLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGRANDOMSAMPLE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGPROCESS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGPROCESS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGMODELPROBABILITIES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGMODELPROBABILITIES.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGMODELAMOUNTS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGMODELAMOUNTS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGINTERPOLATEDAILY.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGINTERPOLATEDAILY.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGINTERPOLATE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGINTERPOLATE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGINTERACTIONS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGINTERACTIONS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGINDICATORVARIABLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGINDICATORVARIABLE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGHEATSUM.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGHEATSUM.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGGENERALISEDLINEARMODELS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGGENERALISEDLINEARMODELS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGGENERAL.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGGENERAL.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGGAMMADISTR.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGGAMMADISTR.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGWATERSATISFACTIONINDEX.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGWATERSATISFACTIONINDEX.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGUNSTACKDAILYDATA.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGUNSTACKDAILYDATA.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGUNSTACK.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGUNSTACK.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGTWOSAMPLES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGTWOSAMPLES.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGTRANSFORM.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGTRANSFORM.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGTOTALS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGTOTALS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGSUMMARYTABLES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSUMMARYTABLES.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGSUMMARY.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSUMMARY.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGSTACKDAILYDATA.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSTACKDAILYDATA.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGSTACK.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSTACK.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGSPELLLENGTH.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGSPELLLENGTH.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGPREPARE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGPREPARE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGPOLYNOMIALS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGPOLYNOMIALS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGPENMAN.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGPENMAN.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGORTHOGONAL.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGORTHOGONAL.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGOPTIONS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGOPTIONS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGMAKEFACTOR.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGMAKEFACTOR.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGLOGLINEARMODELS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGLOGLINEARMODELS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGLOCKUNLOCK.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGLOCKUNLOCK.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGALIGNMENT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGALIGNMENT.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGMOVINGAVERAGE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGMOVINGAVERAGE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGCHANGETYPE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCHANGETYPE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGCROPCOEFFICIENTS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCROPCOEFFICIENTS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGNAME.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGNAME.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGNEWWORKSHEET.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGNEWWORKSHEET.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGCORRELATION.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCORRELATION.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGDELETECOLUMNS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGDELETECOLUMNS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGROWSTATS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGROWSTATS.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGNPTWOWAYANOVA.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGNPTWOWAYANOVA.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>

@@ -23,7 +23,7 @@ Public Class dlgLockUnlock
     Private Sub defaultSettings()
         rdoLock.Checked = True
         ucrMultiple.lstSelectedVariables.Items.Clear()
-        chkReservefree.Checked = False
+        chkReserveFree.Checked = False
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

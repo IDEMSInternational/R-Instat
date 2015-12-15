@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgTwoWayAnova
+Partial Class dlgNPTwoWayAnova
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -97,7 +97,7 @@ Partial Class dlgTwoWayAnova
         Me.lblColumnFactor.Tag = "Column_factor"
         Me.lblColumnFactor.Text = "Column factor"
         '
-        'dlgTwoWayAnova
+        'dlgNPTwoWayAnova
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -110,8 +110,9 @@ Partial Class dlgTwoWayAnova
         Me.Controls.Add(Me.ucrReceiverCounts)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
-        Me.Name = "dlgTwoWayAnova"
-        Me.Text = "Non Two Way ANOVA"
+        Me.Name = "dlgNPTwoWayAnova"
+        Me.Tag = "Non_Parametric_Two_Way_ANOVA"
+        Me.Text = "Non-Parametric Two Way ANOVA"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

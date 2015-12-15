@@ -29,7 +29,7 @@ Partial Class dlgRegressionSimple
         Me.grpLackFit = New System.Windows.Forms.GroupBox()
         Me.txtdf = New System.Windows.Forms.TextBox()
         Me.txtResidualMsg = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblDF = New System.Windows.Forms.Label()
         Me.lblResidualMsg = New System.Windows.Forms.Label()
         Me.chkLackFit = New System.Windows.Forms.CheckBox()
         Me.chkAnovaTable = New System.Windows.Forms.CheckBox()
@@ -85,7 +85,7 @@ Partial Class dlgRegressionSimple
         '
         Me.grpLackFit.Controls.Add(Me.txtdf)
         Me.grpLackFit.Controls.Add(Me.txtResidualMsg)
-        Me.grpLackFit.Controls.Add(Me.Label1)
+        Me.grpLackFit.Controls.Add(Me.lblDF)
         Me.grpLackFit.Controls.Add(Me.lblResidualMsg)
         resources.ApplyResources(Me.grpLackFit, "grpLackFit")
         Me.grpLackFit.Name = "grpLackFit"
@@ -101,10 +101,10 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.txtResidualMsg, "txtResidualMsg")
         Me.txtResidualMsg.Name = "txtResidualMsg"
         '
-        'Label1
+        'lblDF
         '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
+        resources.ApplyResources(Me.lblDF, "lblDF")
+        Me.lblDF.Name = "lblDF"
         '
         'lblResidualMsg
         '
@@ -116,14 +116,14 @@ Partial Class dlgRegressionSimple
         '
         resources.ApplyResources(Me.chkLackFit, "chkLackFit")
         Me.chkLackFit.Name = "chkLackFit"
-        Me.chkLackFit.Tag = "Lack_Of_Fit"
+        Me.chkLackFit.Tag = "Lack_of_fit"
         Me.chkLackFit.UseVisualStyleBackColor = True
         '
         'chkAnovaTable
         '
         resources.ApplyResources(Me.chkAnovaTable, "chkAnovaTable")
         Me.chkAnovaTable.Name = "chkAnovaTable"
-        Me.chkAnovaTable.Tag = "Show_Anova_Table"
+        Me.chkAnovaTable.Tag = "Show_ANOVA_Table"
         Me.chkAnovaTable.UseVisualStyleBackColor = True
         '
         'chkShowPlots
@@ -218,7 +218,7 @@ Partial Class dlgRegressionSimple
     Friend WithEvents grpLackFit As GroupBox
     Friend WithEvents txtdf As TextBox
     Friend WithEvents txtResidualMsg As TextBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblDF As Label
     Friend WithEvents lblResidualMsg As Label
     Friend WithEvents chkLackFit As CheckBox
     Friend WithEvents chkAnovaTable As CheckBox

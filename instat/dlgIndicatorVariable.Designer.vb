@@ -30,7 +30,7 @@ Partial Class dlgIndicatorVariable
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.cboInto = New System.Windows.Forms.ComboBox()
         Me.lblInto = New System.Windows.Forms.Label()
-        Me.chkXvariable = New System.Windows.Forms.CheckBox()
+        Me.chkXVariable = New System.Windows.Forms.CheckBox()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grpLevelToBeOmitted.SuspendLayout()
         Me.SuspendLayout()
@@ -122,16 +122,16 @@ Partial Class dlgIndicatorVariable
         Me.lblInto.Tag = "Into"
         Me.lblInto.Text = "Into"
         '
-        'chkXvariable
+        'chkXVariable
         '
-        Me.chkXvariable.AutoSize = True
-        Me.chkXvariable.Location = New System.Drawing.Point(18, 108)
-        Me.chkXvariable.Name = "chkXvariable"
-        Me.chkXvariable.Size = New System.Drawing.Size(114, 17)
-        Me.chkXvariable.TabIndex = 4
-        Me.chkXvariable.Tag = "Withan_X_Variable"
-        Me.chkXvariable.Text = "With an X Variable"
-        Me.chkXvariable.UseVisualStyleBackColor = True
+        Me.chkXVariable.AutoSize = True
+        Me.chkXVariable.Location = New System.Drawing.Point(18, 108)
+        Me.chkXVariable.Name = "chkXVariable"
+        Me.chkXVariable.Size = New System.Drawing.Size(114, 17)
+        Me.chkXVariable.TabIndex = 4
+        Me.chkXVariable.Tag = "With_an_X_Variable"
+        Me.chkXVariable.Text = "With an X Variable"
+        Me.chkXVariable.UseVisualStyleBackColor = True
         '
         'lblInfo
         '
@@ -148,7 +148,7 @@ Partial Class dlgIndicatorVariable
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(410, 296)
         Me.Controls.Add(Me.lblInfo)
-        Me.Controls.Add(Me.chkXvariable)
+        Me.Controls.Add(Me.chkXVariable)
         Me.Controls.Add(Me.lblInto)
         Me.Controls.Add(Me.cboInto)
         Me.Controls.Add(Me.grpLevelToBeOmitted)
@@ -172,6 +172,6 @@ Partial Class dlgIndicatorVariable
     Friend WithEvents rdoNone As RadioButton
     Friend WithEvents cboInto As ComboBox
     Friend WithEvents lblInto As Label
-    Friend WithEvents chkXvariable As CheckBox
+    Friend WithEvents chkXVariable As CheckBox
     Friend WithEvents lblInfo As Label
 End Class

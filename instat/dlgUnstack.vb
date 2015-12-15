@@ -19,17 +19,17 @@ Public Class dlgUnstack
     Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("unstack")
         ucrBase.clsRsyntax.iCallType = 1
-        UcrReceiverUnstack.Selector = ucrAddRemove
-        UcrReceiverUnstack.SetMeAsReceiver()
+        ucrReceiverUnstack.Selector = ucrAddRemove
+        ucrReceiverUnstack.SetMeAsReceiver()
 
         autoTranslate(Me)
 
     End Sub
-    Private Sub ucrReceiverUnstack_Enter(sender As Object, e As EventArgs) Handles UcrReceiverUnstack.Enter
-        UcrReceiverUnstack.SetMeAsReceiver()
+    Private Sub ucrReceiverUnstack_Enter(sender As Object, e As EventArgs) Handles ucrReceiverUnstack.Enter
+        ucrReceiverUnstack.SetMeAsReceiver()
     End Sub
-    Private Sub ucrReceiverUnstack_Leave(sender As Object, e As EventArgs) Handles UcrReceiverUnstack.Leave
-        ucrBase.clsRsyntax.AddParameter("x", UcrReceiverUnstack.GetVariables())
+    Private Sub ucrReceiverUnstack_Leave(sender As Object, e As EventArgs) Handles ucrReceiverUnstack.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverUnstack.GetVariables())
     End Sub
 
 

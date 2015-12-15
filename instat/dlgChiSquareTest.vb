@@ -30,4 +30,5 @@ Public Class dlgChiSquareTest
         ucrBase.clsRsyntax.AddParameter("x", ucrReceiverChiSquare.GetVariables())
     End Sub
 
+
 End Class

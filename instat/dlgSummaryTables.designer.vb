@@ -48,36 +48,36 @@ Partial Class dlgSummaryTables
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 295)
+        Me.ucrBase.Location = New System.Drawing.Point(23, 357)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(2, 3)
+        Me.ucrAddRemove.Location = New System.Drawing.Point(2, 7)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(207, 127)
         Me.ucrAddRemove.TabIndex = 1
         '
         'ucrReceiverFactor
         '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(205, 19)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(217, 19)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(91, 101)
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(128, 136)
         Me.ucrReceiverFactor.TabIndex = 2
         '
         'ucrReceiverVariate
         '
-        Me.ucrReceiverVariate.Location = New System.Drawing.Point(305, 19)
+        Me.ucrReceiverVariate.Location = New System.Drawing.Point(368, 19)
         Me.ucrReceiverVariate.Name = "ucrReceiverVariate"
-        Me.ucrReceiverVariate.Size = New System.Drawing.Size(91, 101)
+        Me.ucrReceiverVariate.Size = New System.Drawing.Size(125, 136)
         Me.ucrReceiverVariate.TabIndex = 3
         '
         'lblFactors
         '
         Me.lblFactors.AutoSize = True
-        Me.lblFactors.Location = New System.Drawing.Point(202, 3)
+        Me.lblFactors.Location = New System.Drawing.Point(223, 3)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(42, 13)
         Me.lblFactors.TabIndex = 4
@@ -87,7 +87,7 @@ Partial Class dlgSummaryTables
         'lblVariates
         '
         Me.lblVariates.AutoSize = True
-        Me.lblVariates.Location = New System.Drawing.Point(302, 3)
+        Me.lblVariates.Location = New System.Drawing.Point(374, 8)
         Me.lblVariates.Name = "lblVariates"
         Me.lblVariates.Size = New System.Drawing.Size(45, 13)
         Me.lblVariates.TabIndex = 5
@@ -101,12 +101,12 @@ Partial Class dlgSummaryTables
         Me.grpTwoways.Controls.Add(Me.lblColumnFactors)
         Me.grpTwoways.Controls.Add(Me.TextBox1)
         Me.grpTwoways.Controls.Add(Me.chkDisplayMargins)
-        Me.grpTwoways.Location = New System.Drawing.Point(12, 166)
+        Me.grpTwoways.Location = New System.Drawing.Point(12, 210)
         Me.grpTwoways.Name = "grpTwoways"
         Me.grpTwoways.Size = New System.Drawing.Size(207, 100)
         Me.grpTwoways.TabIndex = 6
         Me.grpTwoways.TabStop = False
-        Me.grpTwoways.Tag = "Two_ways_table(s)"
+        Me.grpTwoways.Tag = "Two_ways_table_s_"
         Me.grpTwoways.Text = "Two way table(s)"
         '
         'lblDecimals
@@ -161,7 +161,7 @@ Partial Class dlgSummaryTables
         Me.grpSummaryStat.Controls.Add(Me.cmdMore)
         Me.grpSummaryStat.Controls.Add(Me.chkMeans)
         Me.grpSummaryStat.Controls.Add(Me.chkTotals)
-        Me.grpSummaryStat.Location = New System.Drawing.Point(234, 166)
+        Me.grpSummaryStat.Location = New System.Drawing.Point(253, 222)
         Me.grpSummaryStat.Name = "grpSummaryStat"
         Me.grpSummaryStat.Size = New System.Drawing.Size(151, 100)
         Me.grpSummaryStat.TabIndex = 7
@@ -204,7 +204,7 @@ Partial Class dlgSummaryTables
         'cboWeights
         '
         Me.cboWeights.FormattingEnabled = True
-        Me.cboWeights.Location = New System.Drawing.Point(205, 134)
+        Me.cboWeights.Location = New System.Drawing.Point(205, 163)
         Me.cboWeights.Name = "cboWeights"
         Me.cboWeights.Size = New System.Drawing.Size(83, 21)
         Me.cboWeights.TabIndex = 9
@@ -212,7 +212,7 @@ Partial Class dlgSummaryTables
         'chkWeights
         '
         Me.chkWeights.AutoSize = True
-        Me.chkWeights.Location = New System.Drawing.Point(118, 136)
+        Me.chkWeights.Location = New System.Drawing.Point(118, 167)
         Me.chkWeights.Name = "chkWeights"
         Me.chkWeights.Size = New System.Drawing.Size(65, 17)
         Me.chkWeights.TabIndex = 8
@@ -223,7 +223,7 @@ Partial Class dlgSummaryTables
         'chkTobeImplementedLater
         '
         Me.chkTobeImplementedLater.AutoSize = True
-        Me.chkTobeImplementedLater.Location = New System.Drawing.Point(12, 272)
+        Me.chkTobeImplementedLater.Location = New System.Drawing.Point(14, 323)
         Me.chkTobeImplementedLater.Name = "chkTobeImplementedLater"
         Me.chkTobeImplementedLater.Size = New System.Drawing.Size(139, 17)
         Me.chkTobeImplementedLater.TabIndex = 10
@@ -234,7 +234,7 @@ Partial Class dlgSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(408, 332)
+        Me.ClientSize = New System.Drawing.Size(512, 388)
         Me.Controls.Add(Me.chkTobeImplementedLater)
         Me.Controls.Add(Me.cboWeights)
         Me.Controls.Add(Me.chkWeights)

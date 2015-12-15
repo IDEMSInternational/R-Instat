@@ -17,24 +17,26 @@ Imports instat.Translations
 Public Class dlgSelect
     Private Sub dlgSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        rdoSelectbycondition.Checked = True
+        rdoSelectByCondition.Checked = True
         grpCondition.Visible = True
         grpFactor.Visible = False
     End Sub
 
-    Private Sub rdoSelectbycondition_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSelectbycondition.CheckedChanged
-        If rdoSelectbycondition.Checked = True Then
+    Private Sub rdoSelectbycondition_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSelectByCondition.CheckedChanged
+        If rdoSelectByCondition.Checked = True Then
             grpCondition.Visible = True
         Else
             grpCondition.Visible = False
         End If
     End Sub
 
-    Private Sub rdoSelectbyfactor_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSelectbyfactor.CheckedChanged
-        If rdoSelectbyfactor.Checked = True Then
+    Private Sub rdoSelectbyfactor_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSelectByFactor.CheckedChanged
+        If rdoSelectByFactor.Checked = True Then
             grpFactor.Visible = True
         Else
             grpFactor.Visible = False
         End If
     End Sub
+
+
 End Class

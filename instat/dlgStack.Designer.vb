@@ -25,7 +25,7 @@ Partial Class dlgStack
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverStack = New instat.ucrReceiverMultiple()
-        Me.lblVariablesToBestack = New System.Windows.Forms.Label()
+        Me.lblVariablesToBeStack = New System.Windows.Forms.Label()
         Me.txtStackDataInto = New System.Windows.Forms.TextBox()
         Me.chkRepeatColumns = New System.Windows.Forms.CheckBox()
         Me.chkFactor = New System.Windows.Forms.CheckBox()
@@ -51,18 +51,18 @@ Partial Class dlgStack
         '
         Me.ucrReceiverStack.Location = New System.Drawing.Point(241, 37)
         Me.ucrReceiverStack.Name = "ucrReceiverStack"
-        Me.ucrReceiverStack.Size = New System.Drawing.Size(121, 114)
+        Me.ucrReceiverStack.Size = New System.Drawing.Size(121, 130)
         Me.ucrReceiverStack.TabIndex = 2
         '
-        'lblVariablesToBestack
+        'lblVariablesToBeStack
         '
-        Me.lblVariablesToBestack.AutoSize = True
-        Me.lblVariablesToBestack.Location = New System.Drawing.Point(249, 9)
-        Me.lblVariablesToBestack.Name = "lblVariablesToBestack"
-        Me.lblVariablesToBestack.Size = New System.Drawing.Size(106, 13)
-        Me.lblVariablesToBestack.TabIndex = 3
-        Me.lblVariablesToBestack.Tag = "Variables_to_be_stack"
-        Me.lblVariablesToBestack.Text = "Variables to be stack"
+        Me.lblVariablesToBeStack.AutoSize = True
+        Me.lblVariablesToBeStack.Location = New System.Drawing.Point(249, 14)
+        Me.lblVariablesToBeStack.Name = "lblVariablesToBeStack"
+        Me.lblVariablesToBeStack.Size = New System.Drawing.Size(106, 13)
+        Me.lblVariablesToBeStack.TabIndex = 3
+        Me.lblVariablesToBeStack.Tag = "Variables_to_be_stack"
+        Me.lblVariablesToBeStack.Text = "Variables to be stack"
         '
         'txtStackDataInto
         '
@@ -85,7 +85,7 @@ Partial Class dlgStack
         'chkFactor
         '
         Me.chkFactor.AutoSize = True
-        Me.chkFactor.Location = New System.Drawing.Point(241, 174)
+        Me.chkFactor.Location = New System.Drawing.Point(241, 184)
         Me.chkFactor.Name = "chkFactor"
         Me.chkFactor.Size = New System.Drawing.Size(56, 17)
         Me.chkFactor.TabIndex = 5
@@ -124,7 +124,7 @@ Partial Class dlgStack
         Me.Controls.Add(Me.chkRepeatColumns)
         Me.Controls.Add(Me.txtStackDataInto)
         Me.Controls.Add(Me.lblStackDataInto)
-        Me.Controls.Add(Me.lblVariablesToBestack)
+        Me.Controls.Add(Me.lblVariablesToBeStack)
         Me.Controls.Add(Me.ucrReceiverStack)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
@@ -141,7 +141,7 @@ Partial Class dlgStack
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrReceiverStack As ucrReceiverMultiple
-    Friend WithEvents lblVariablesToBestack As Label
+    Friend WithEvents lblVariablesToBeStack As Label
     Friend WithEvents txtStackDataInto As TextBox
     Friend WithEvents chkRepeatColumns As CheckBox
     Friend WithEvents chkFactor As CheckBox

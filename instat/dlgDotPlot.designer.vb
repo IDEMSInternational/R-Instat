@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgDotPlot
+Partial Class dlgDotplot
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -33,15 +33,16 @@ Partial Class dlgDotPlot
         'lblPlotTitle
         '
         Me.lblPlotTitle.AutoSize = True
-        Me.lblPlotTitle.Location = New System.Drawing.Point(25, 141)
+        Me.lblPlotTitle.Location = New System.Drawing.Point(25, 150)
         Me.lblPlotTitle.Name = "lblPlotTitle"
         Me.lblPlotTitle.Size = New System.Drawing.Size(51, 13)
         Me.lblPlotTitle.TabIndex = 1
+        Me.lblPlotTitle.Tag = "Plot_Title"
         Me.lblPlotTitle.Text = "Plot Title "
         '
         'txtTitle
         '
-        Me.txtTitle.Location = New System.Drawing.Point(82, 141)
+        Me.txtTitle.Location = New System.Drawing.Point(82, 147)
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.Size = New System.Drawing.Size(273, 20)
         Me.txtTitle.TabIndex = 2
@@ -57,7 +58,7 @@ Partial Class dlgDotPlot
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(2, 12)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(186, 129)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 129)
         Me.ucrAddRemove.TabIndex = 3
         '
         'ucrReceiverSingle
@@ -77,7 +78,7 @@ Partial Class dlgDotPlot
         Me.lblVariableToPlot.Tag = "Variable_to_Plot"
         Me.lblVariableToPlot.Text = "Variable to Plot"
         '
-        'dlgDotPlot
+        'dlgDotplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -91,9 +92,9 @@ Partial Class dlgDotPlot
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgDotPlot"
+        Me.Name = "dlgDotplot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Dot_Plot"
+        Me.Tag = "Dotplot"
         Me.Text = "Dox Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()

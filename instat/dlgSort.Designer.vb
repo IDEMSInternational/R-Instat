@@ -35,7 +35,7 @@ Partial Class dlgSort
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(1, 155)
+        Me.ucrBase.Location = New System.Drawing.Point(19, 169)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(402, 35)
         Me.ucrBase.TabIndex = 0
@@ -44,11 +44,12 @@ Partial Class dlgSort
         '
         Me.grpOrderType.Controls.Add(Me.rdoDescending)
         Me.grpOrderType.Controls.Add(Me.rdoAscending)
-        Me.grpOrderType.Location = New System.Drawing.Point(284, 12)
+        Me.grpOrderType.Location = New System.Drawing.Point(342, 21)
         Me.grpOrderType.Name = "grpOrderType"
         Me.grpOrderType.Size = New System.Drawing.Size(102, 116)
         Me.grpOrderType.TabIndex = 2
         Me.grpOrderType.TabStop = False
+        Me.grpOrderType.Tag = "Order_Type"
         Me.grpOrderType.Text = "Order Type"
         '
         'rdoDescending
@@ -77,22 +78,22 @@ Partial Class dlgSort
         '
         'ucrAddRemove
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(1, 7)
+        Me.ucrAddRemove.Location = New System.Drawing.Point(2, 7)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(180, 118)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(202, 130)
         Me.ucrAddRemove.TabIndex = 3
         '
         'ucrMultiple
         '
-        Me.ucrMultiple.Location = New System.Drawing.Point(187, 22)
+        Me.ucrMultiple.Location = New System.Drawing.Point(212, 22)
         Me.ucrMultiple.Name = "ucrMultiple"
-        Me.ucrMultiple.Size = New System.Drawing.Size(91, 101)
+        Me.ucrMultiple.Size = New System.Drawing.Size(124, 141)
         Me.ucrMultiple.TabIndex = 4
         '
         'lblColumnsToSort
         '
         Me.lblColumnsToSort.AutoSize = True
-        Me.lblColumnsToSort.Location = New System.Drawing.Point(187, 7)
+        Me.lblColumnsToSort.Location = New System.Drawing.Point(217, 11)
         Me.lblColumnsToSort.Name = "lblColumnsToSort"
         Me.lblColumnsToSort.Size = New System.Drawing.Size(85, 13)
         Me.lblColumnsToSort.TabIndex = 5
@@ -102,10 +103,11 @@ Partial Class dlgSort
         'chkWriteBack
         '
         Me.chkWriteBack.AutoSize = True
-        Me.chkWriteBack.Location = New System.Drawing.Point(13, 132)
+        Me.chkWriteBack.Location = New System.Drawing.Point(7, 144)
         Me.chkWriteBack.Name = "chkWriteBack"
         Me.chkWriteBack.Size = New System.Drawing.Size(134, 17)
         Me.chkWriteBack.TabIndex = 6
+        Me.chkWriteBack.Tag = "Write_back_to_the_data"
         Me.chkWriteBack.Text = "Write back to the Data"
         Me.chkWriteBack.UseVisualStyleBackColor = True
         '
@@ -113,7 +115,7 @@ Partial Class dlgSort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(406, 191)
+        Me.ClientSize = New System.Drawing.Size(461, 206)
         Me.Controls.Add(Me.chkWriteBack)
         Me.Controls.Add(Me.lblColumnsToSort)
         Me.Controls.Add(Me.ucrMultiple)
@@ -126,6 +128,7 @@ Partial Class dlgSort
         Me.Name = "dlgSort"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Sort"
         Me.Text = "Sort"
         Me.grpOrderType.ResumeLayout(False)
         Me.grpOrderType.PerformLayout()

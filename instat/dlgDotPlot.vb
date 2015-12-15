@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 
-Public Class dlgDotPlot
+Public Class dlgDotplot
     Private Sub dlgDotPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("dotchart")
         ucrBase.clsRsyntax.iCallType = 0

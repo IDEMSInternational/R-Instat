@@ -32,7 +32,7 @@ Partial Class dlgMultipleRegression
         '
         Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(22, 12)
         Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
-        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(185, 131)
+        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(211, 131)
         Me.UcrSelectorAddRemove1.TabIndex = 3
         '
         'UcrButtons1
@@ -46,7 +46,7 @@ Partial Class dlgMultipleRegression
         '
         Me.UcrReceiverMultiple1.Location = New System.Drawing.Point(239, 55)
         Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
-        Me.UcrReceiverMultiple1.Size = New System.Drawing.Size(98, 118)
+        Me.UcrReceiverMultiple1.Size = New System.Drawing.Size(123, 135)
         Me.UcrReceiverMultiple1.TabIndex = 0
         '
         'UcrReceiverSingle1

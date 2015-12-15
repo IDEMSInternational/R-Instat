@@ -91,4 +91,7 @@ Public Class dlgDuplicateColumns
         End If
     End Sub
 
+    Private Sub rdoLabelL_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLabelL.CheckedChanged
+
+    End Sub
 End Class

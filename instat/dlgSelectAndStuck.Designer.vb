@@ -26,43 +26,43 @@ Partial Class dlgSelectAndStuck
         Me.ucrAddRemove1 = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverSelectAndStuck = New instat.ucrReceiverMultiple()
         Me.grpAppend = New System.Windows.Forms.GroupBox()
+        Me.txtLast = New System.Windows.Forms.TextBox()
+        Me.txtFirst = New System.Windows.Forms.TextBox()
+        Me.rdoAll = New System.Windows.Forms.RadioButton()
+        Me.rdoLast = New System.Windows.Forms.RadioButton()
+        Me.rdoFirst = New System.Windows.Forms.RadioButton()
         Me.grpConditionForSelection = New System.Windows.Forms.GroupBox()
         Me.cboConditionForSelection = New System.Windows.Forms.ComboBox()
         Me.chkShowCalculator = New System.Windows.Forms.CheckBox()
-        Me.rdoFirst = New System.Windows.Forms.RadioButton()
-        Me.rdoLast = New System.Windows.Forms.RadioButton()
-        Me.rdoAll = New System.Windows.Forms.RadioButton()
         Me.cboInto = New System.Windows.Forms.ComboBox()
         Me.lblInto = New System.Windows.Forms.Label()
         Me.cboCarry = New System.Windows.Forms.ComboBox()
         Me.cboCarryInto = New System.Windows.Forms.ComboBox()
         Me.lblCarry = New System.Windows.Forms.Label()
         Me.lblCarryInto = New System.Windows.Forms.Label()
-        Me.txtFirst = New System.Windows.Forms.TextBox()
-        Me.txtLast = New System.Windows.Forms.TextBox()
         Me.grpAppend.SuspendLayout()
         Me.grpConditionForSelection.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 272)
+        Me.ucrBase.Location = New System.Drawing.Point(20, 303)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(478, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(404, 32)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove1
         '
         Me.ucrAddRemove1.Location = New System.Drawing.Point(10, 12)
         Me.ucrAddRemove1.Name = "ucrAddRemove1"
-        Me.ucrAddRemove1.Size = New System.Drawing.Size(203, 109)
+        Me.ucrAddRemove1.Size = New System.Drawing.Size(203, 126)
         Me.ucrAddRemove1.TabIndex = 1
         '
         'ucrReceiverSelectAndStuck
         '
         Me.ucrReceiverSelectAndStuck.Location = New System.Drawing.Point(219, 12)
         Me.ucrReceiverSelectAndStuck.Name = "ucrReceiverSelectAndStuck"
-        Me.ucrReceiverSelectAndStuck.Size = New System.Drawing.Size(121, 109)
+        Me.ucrReceiverSelectAndStuck.Size = New System.Drawing.Size(121, 135)
         Me.ucrReceiverSelectAndStuck.TabIndex = 2
         '
         'grpAppend
@@ -72,7 +72,7 @@ Partial Class dlgSelectAndStuck
         Me.grpAppend.Controls.Add(Me.rdoAll)
         Me.grpAppend.Controls.Add(Me.rdoLast)
         Me.grpAppend.Controls.Add(Me.rdoFirst)
-        Me.grpAppend.Location = New System.Drawing.Point(24, 127)
+        Me.grpAppend.Location = New System.Drawing.Point(24, 152)
         Me.grpAppend.Name = "grpAppend"
         Me.grpAppend.Size = New System.Drawing.Size(113, 88)
         Me.grpAppend.TabIndex = 3
@@ -80,11 +80,61 @@ Partial Class dlgSelectAndStuck
         Me.grpAppend.Tag = "Append"
         Me.grpAppend.Text = "Append"
         '
+        'txtLast
+        '
+        Me.txtLast.Location = New System.Drawing.Point(66, 40)
+        Me.txtLast.Name = "txtLast"
+        Me.txtLast.Size = New System.Drawing.Size(18, 20)
+        Me.txtLast.TabIndex = 7
+        '
+        'txtFirst
+        '
+        Me.txtFirst.Location = New System.Drawing.Point(66, 17)
+        Me.txtFirst.Name = "txtFirst"
+        Me.txtFirst.Size = New System.Drawing.Size(18, 20)
+        Me.txtFirst.TabIndex = 7
+        '
+        'rdoAll
+        '
+        Me.rdoAll.AutoSize = True
+        Me.rdoAll.Location = New System.Drawing.Point(6, 65)
+        Me.rdoAll.Name = "rdoAll"
+        Me.rdoAll.Size = New System.Drawing.Size(36, 17)
+        Me.rdoAll.TabIndex = 0
+        Me.rdoAll.TabStop = True
+        Me.rdoAll.Tag = "All"
+        Me.rdoAll.Text = "All"
+        Me.rdoAll.UseVisualStyleBackColor = True
+        '
+        'rdoLast
+        '
+        Me.rdoLast.AutoSize = True
+        Me.rdoLast.Location = New System.Drawing.Point(6, 43)
+        Me.rdoLast.Name = "rdoLast"
+        Me.rdoLast.Size = New System.Drawing.Size(45, 17)
+        Me.rdoLast.TabIndex = 0
+        Me.rdoLast.TabStop = True
+        Me.rdoLast.Tag = "Last"
+        Me.rdoLast.Text = "Last"
+        Me.rdoLast.UseVisualStyleBackColor = True
+        '
+        'rdoFirst
+        '
+        Me.rdoFirst.AutoSize = True
+        Me.rdoFirst.Location = New System.Drawing.Point(7, 20)
+        Me.rdoFirst.Name = "rdoFirst"
+        Me.rdoFirst.Size = New System.Drawing.Size(44, 17)
+        Me.rdoFirst.TabIndex = 0
+        Me.rdoFirst.TabStop = True
+        Me.rdoFirst.Tag = "First"
+        Me.rdoFirst.Text = "First"
+        Me.rdoFirst.UseVisualStyleBackColor = True
+        '
         'grpConditionForSelection
         '
         Me.grpConditionForSelection.Controls.Add(Me.cboConditionForSelection)
         Me.grpConditionForSelection.Controls.Add(Me.chkShowCalculator)
-        Me.grpConditionForSelection.Location = New System.Drawing.Point(24, 221)
+        Me.grpConditionForSelection.Location = New System.Drawing.Point(24, 245)
         Me.grpConditionForSelection.Name = "grpConditionForSelection"
         Me.grpConditionForSelection.Size = New System.Drawing.Size(384, 45)
         Me.grpConditionForSelection.TabIndex = 4
@@ -111,42 +161,6 @@ Partial Class dlgSelectAndStuck
         Me.chkShowCalculator.Text = "Show calculator"
         Me.chkShowCalculator.UseVisualStyleBackColor = True
         '
-        'rdoFirst
-        '
-        Me.rdoFirst.AutoSize = True
-        Me.rdoFirst.Location = New System.Drawing.Point(7, 20)
-        Me.rdoFirst.Name = "rdoFirst"
-        Me.rdoFirst.Size = New System.Drawing.Size(44, 17)
-        Me.rdoFirst.TabIndex = 0
-        Me.rdoFirst.TabStop = True
-        Me.rdoFirst.Tag = "First"
-        Me.rdoFirst.Text = "First"
-        Me.rdoFirst.UseVisualStyleBackColor = True
-        '
-        'rdoLast
-        '
-        Me.rdoLast.AutoSize = True
-        Me.rdoLast.Location = New System.Drawing.Point(6, 43)
-        Me.rdoLast.Name = "rdoLast"
-        Me.rdoLast.Size = New System.Drawing.Size(45, 17)
-        Me.rdoLast.TabIndex = 0
-        Me.rdoLast.TabStop = True
-        Me.rdoLast.Tag = "Last"
-        Me.rdoLast.Text = "Last"
-        Me.rdoLast.UseVisualStyleBackColor = True
-        '
-        'rdoAll
-        '
-        Me.rdoAll.AutoSize = True
-        Me.rdoAll.Location = New System.Drawing.Point(6, 65)
-        Me.rdoAll.Name = "rdoAll"
-        Me.rdoAll.Size = New System.Drawing.Size(36, 17)
-        Me.rdoAll.TabIndex = 0
-        Me.rdoAll.TabStop = True
-        Me.rdoAll.Tag = "All"
-        Me.rdoAll.Text = "All"
-        Me.rdoAll.UseVisualStyleBackColor = True
-        '
         'cboInto
         '
         Me.cboInto.FormattingEnabled = True
@@ -168,7 +182,7 @@ Partial Class dlgSelectAndStuck
         'cboCarry
         '
         Me.cboCarry.FormattingEnabled = True
-        Me.cboCarry.Location = New System.Drawing.Point(173, 157)
+        Me.cboCarry.Location = New System.Drawing.Point(173, 167)
         Me.cboCarry.Name = "cboCarry"
         Me.cboCarry.Size = New System.Drawing.Size(121, 21)
         Me.cboCarry.TabIndex = 5
@@ -184,7 +198,7 @@ Partial Class dlgSelectAndStuck
         'lblCarry
         '
         Me.lblCarry.AutoSize = True
-        Me.lblCarry.Location = New System.Drawing.Point(174, 127)
+        Me.lblCarry.Location = New System.Drawing.Point(174, 146)
         Me.lblCarry.Name = "lblCarry"
         Me.lblCarry.Size = New System.Drawing.Size(31, 13)
         Me.lblCarry.TabIndex = 6
@@ -194,32 +208,18 @@ Partial Class dlgSelectAndStuck
         'lblCarryInto
         '
         Me.lblCarryInto.AutoSize = True
-        Me.lblCarryInto.Location = New System.Drawing.Point(357, 127)
+        Me.lblCarryInto.Location = New System.Drawing.Point(357, 134)
         Me.lblCarryInto.Name = "lblCarryInto"
         Me.lblCarryInto.Size = New System.Drawing.Size(25, 13)
         Me.lblCarryInto.TabIndex = 6
         Me.lblCarryInto.Tag = "Into"
         Me.lblCarryInto.Text = "Into"
         '
-        'txtFirst
-        '
-        Me.txtFirst.Location = New System.Drawing.Point(66, 17)
-        Me.txtFirst.Name = "txtFirst"
-        Me.txtFirst.Size = New System.Drawing.Size(18, 20)
-        Me.txtFirst.TabIndex = 7
-        '
-        'txtLast
-        '
-        Me.txtLast.Location = New System.Drawing.Point(66, 40)
-        Me.txtLast.Name = "txtLast"
-        Me.txtLast.Size = New System.Drawing.Size(18, 20)
-        Me.txtLast.TabIndex = 7
-        '
         'dlgSelectAndStuck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(500, 316)
+        Me.ClientSize = New System.Drawing.Size(500, 345)
         Me.Controls.Add(Me.lblCarryInto)
         Me.Controls.Add(Me.lblCarry)
         Me.Controls.Add(Me.lblInto)

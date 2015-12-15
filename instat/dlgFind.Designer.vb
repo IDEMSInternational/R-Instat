@@ -78,10 +78,10 @@ Partial Class dlgFind
         Me.chkMatchCase.AutoSize = True
         Me.chkMatchCase.Location = New System.Drawing.Point(13, 123)
         Me.chkMatchCase.Name = "chkMatchCase"
-        Me.chkMatchCase.Size = New System.Drawing.Size(83, 17)
+        Me.chkMatchCase.Size = New System.Drawing.Size(82, 17)
         Me.chkMatchCase.TabIndex = 4
         Me.chkMatchCase.Tag = "Match_case"
-        Me.chkMatchCase.Text = "Match Case"
+        Me.chkMatchCase.Text = "Match case"
         Me.chkMatchCase.UseVisualStyleBackColor = True
         '
         'chkFindWholeWordOnly

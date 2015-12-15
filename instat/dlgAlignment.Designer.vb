@@ -116,6 +116,7 @@ Partial Class dlgAlignment
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgAlignment"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Format_current_or_selected_columns"
         Me.Text = "Format current or selected columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()

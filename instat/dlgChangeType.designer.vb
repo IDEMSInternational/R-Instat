@@ -53,7 +53,7 @@ Partial Class dlgChangeType
         '
         'ucrChangeTypeSelector
         '
-        Me.ucrChangeTypeSelector.Location = New System.Drawing.Point(12, 12)
+        Me.ucrChangeTypeSelector.Location = New System.Drawing.Point(5, 12)
         Me.ucrChangeTypeSelector.Name = "ucrChangeTypeSelector"
         Me.ucrChangeTypeSelector.Size = New System.Drawing.Size(209, 136)
         Me.ucrChangeTypeSelector.TabIndex = 2
