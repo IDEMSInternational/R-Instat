@@ -18,24 +18,23 @@ Public Class dlgBoxPlot
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("boxplot")
         ucrBase.clsRsyntax.iCallType = 0
-        ucrReceiveBoxplotVariable.Selector = UcrAddRemove
-        ucrReceiveBoxplotVariable.SetMeAsReceiver()
+        ucrReceiverDataToPlot.Selector = UcrAddRemove
+        ucrReceiverDataToPlot.SetMeAsReceiver()
         autoTranslate(Me)
         ucrBase.OKEnabled(False)
     End Sub
 
-    Private Sub ucrReceiveBoxplotVariable_Enter(sender As Object, e As EventArgs) Handles ucrReceiveBoxplotVariable.Enter
-        ucrReceiveBoxplotVariable.SetMeAsReceiver()
+    Private Sub ucrReceiveBoxplotVariable_Enter(sender As Object, e As EventArgs)
+        ucrReceiverDataToPlot.SetMeAsReceiver()
     End Sub
 
 
-    Private Sub ucrReceiveBoxplotVariable_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiveBoxplotVariable.ValueChanged
-        If Not (ucrReceiveBoxplotVariable.txtReceiverSingle.Text = "") Then
-            ucrBase.clsRsyntax.AddParameter("x", ucrReceiveBoxplotVariable.GetVariables())
+    Private Sub ucrReceiveBoxplotVariable_ValueChanged(sender As Object, e As EventArgs)
+        If Not (ucrReceiverDataToPlot.lstSelectedVariables.SelectedItem = "") Then
+            ucrBase.clsRsyntax.AddParameter("x", ucrReceiverDataToPlot.GetVariables())
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
-
 End Class
