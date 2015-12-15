@@ -38,16 +38,4 @@ Public Class dlgBoxPlot
         End If
     End Sub
 
-    Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
-        ucrBase.clsRsyntax.AddParameter("main", Chr(34) & txtTitle.Text & Chr(34))
-    End Sub
-
-    Private Sub txtYLabel_Leave(sender As Object, e As EventArgs) Handles txtYLabel.Leave
-        ucrBase.clsRsyntax.AddParameter("ylab", Chr(34) & txtYLabel.Text & Chr(34))
-    End Sub
-
-    Private Sub txtXLabel_Leave(sender As Object, e As EventArgs) Handles txtXLabel.Leave
-        ucrBase.clsRsyntax.AddParameter("xlab", Chr(34) & txtXLabel.Text & Chr(34))
-    End Sub
-
 End Class
