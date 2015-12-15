@@ -920,6 +920,12 @@
     </Compile>
     <Compile Include="rLink.vb" />
     <Compile Include="rSyntax.vb" />
+    <Compile Include="sdgBoxplot.Designer.vb">
+      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgBoxplot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Translations.vb" />
     <Compile Include="ucrButtons.designer.vb">
       <DependentUpon>ucrButtons.vb</DependentUpon>
@@ -2068,6 +2074,15 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.sw-KE.resx" />
+    <EmbeddedResource Include="sdgBoxplot.fr-FR.resx">
+      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgBoxplot.resx">
+      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgBoxplot.sw-KE.resx">
+      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
