@@ -579,6 +579,12 @@
     <Compile Include="dlgOneSample.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOneWayAnova.Designer.vb">
+      <DependentUpon>dlgOneWayAnova.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneWayAnova.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOptions.Designer.vb">
       <DependentUpon>dlgOptions.vb</DependentUpon>
     </Compile>
@@ -920,6 +926,12 @@
     </Compile>
     <Compile Include="rLink.vb" />
     <Compile Include="rSyntax.vb" />
+    <Compile Include="sdgBoxplot.Designer.vb">
+      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgBoxplot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Translations.vb" />
     <Compile Include="ucrButtons.designer.vb">
       <DependentUpon>ucrButtons.vb</DependentUpon>
@@ -1625,6 +1637,15 @@
     <EmbeddedResource Include="dlgOneSample.sw-KE.resx">
       <DependentUpon>dlgOneSample.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayAnova.fr-FR.resx">
+      <DependentUpon>dlgOneWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayAnova.resx">
+      <DependentUpon>dlgOneWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayAnova.sw-KE.resx">
+      <DependentUpon>dlgOneWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOptions.fr-FR.resx">
       <DependentUpon>dlgOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -2068,6 +2089,15 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.sw-KE.resx" />
+    <EmbeddedResource Include="sdgBoxplot.fr-FR.resx">
+      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgBoxplot.resx">
+      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgBoxplot.sw-KE.resx">
+      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
