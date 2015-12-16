@@ -670,4 +670,16 @@
   <data name="Variate" xml:space="preserve">
     <value>Variate</value>
   </data>
+  <data name="Chi_Square_Test" xml:space="preserve">
+    <value>Chi-Square Test</value>
+  </data>
+  <data name="Continuity_correction" xml:space="preserve">
+    <value>Continuity correction</value>
+  </data>
+  <data name="Data_Columns" xml:space="preserve">
+    <value>Data Columns</value>
+  </data>
+  <data name="String3" xml:space="preserve">
+    <value />
+  </data>
 </root>
