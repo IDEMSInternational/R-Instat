@@ -23,7 +23,7 @@ Partial Class dlgChangeType
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChangetypeReceiver = New instat.ucrReceiverSingle()
+        Me.ucrChangeTypeReceiver = New instat.ucrReceiverSingle()
         Me.ucrChangeTypeSelector = New instat.ucrSelectorAddRemove()
         Me.lblVariable = New System.Windows.Forms.Label()
         Me.grpColumnType = New System.Windows.Forms.GroupBox()
@@ -44,12 +44,12 @@ Partial Class dlgChangeType
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrChangetypeReceiver
+        'ucrChangeTypeReceiver
         '
-        Me.ucrChangetypeReceiver.Location = New System.Drawing.Point(227, 34)
-        Me.ucrChangetypeReceiver.Name = "ucrChangetypeReceiver"
-        Me.ucrChangetypeReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrChangetypeReceiver.TabIndex = 1
+        Me.ucrChangeTypeReceiver.Location = New System.Drawing.Point(227, 34)
+        Me.ucrChangeTypeReceiver.Name = "ucrChangeTypeReceiver"
+        Me.ucrChangeTypeReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrChangeTypeReceiver.TabIndex = 1
         '
         'ucrChangeTypeSelector
         '
@@ -170,7 +170,7 @@ Partial Class dlgChangeType
         Me.Controls.Add(Me.grpColumnType)
         Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrChangeTypeSelector)
-        Me.Controls.Add(Me.ucrChangetypeReceiver)
+        Me.Controls.Add(Me.ucrChangeTypeReceiver)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgChangeType"
@@ -185,7 +185,7 @@ Partial Class dlgChangeType
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrChangetypeReceiver As ucrReceiverSingle
+    Friend WithEvents ucrChangeTypeReceiver As ucrReceiverSingle
     Friend WithEvents ucrChangeTypeSelector As ucrSelectorAddRemove
     Friend WithEvents lblVariable As Label
     Friend WithEvents grpColumnType As GroupBox
