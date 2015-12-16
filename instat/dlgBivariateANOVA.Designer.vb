@@ -65,7 +65,7 @@ Partial Class dlgBivariateANOVA
         Me.lbl1stRespVar.Name = "lbl1stRespVar"
         Me.lbl1stRespVar.Size = New System.Drawing.Size(112, 13)
         Me.lbl1stRespVar.TabIndex = 8
-        Me.lbl1stRespVar.Tag = "Response_variable"
+        Me.lbl1stRespVar.Tag = "Response_variable1"
         Me.lbl1stRespVar.Text = "1st Response variable"
         '
         'lbl2ndRespVar
@@ -75,7 +75,7 @@ Partial Class dlgBivariateANOVA
         Me.lbl2ndRespVar.Name = "lbl2ndRespVar"
         Me.lbl2ndRespVar.Size = New System.Drawing.Size(116, 13)
         Me.lbl2ndRespVar.TabIndex = 9
-        Me.lbl2ndRespVar.Tag = "Response_variable"
+        Me.lbl2ndRespVar.Tag = "Response_variable2"
         Me.lbl2ndRespVar.Text = "2nd Response variable"
         '
         'lblTreatmentFactor
@@ -159,6 +159,7 @@ Partial Class dlgBivariateANOVA
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgBivariateANOVA"
+        Me.Tag = "Bivariate_ANOVA"
         Me.Text = "Bivariate ANOVA"
         Me.ResumeLayout(False)
         Me.PerformLayout()
