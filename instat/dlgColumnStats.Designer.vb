@@ -25,20 +25,20 @@ Partial Class dlgColumnStats
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
-        Me.UcrReceiverMultiple = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.grpStatistcsRequired = New System.Windows.Forms.GroupBox()
-        Me.CheckBox9 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox8 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox6 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.chkMedian = New System.Windows.Forms.CheckBox()
+        Me.chkMissing = New System.Windows.Forms.CheckBox()
+        Me.chkSum = New System.Windows.Forms.CheckBox()
+        Me.chkStDev = New System.Windows.Forms.CheckBox()
+        Me.chkMaximum = New System.Windows.Forms.CheckBox()
+        Me.chkMinimum = New System.Windows.Forms.CheckBox()
+        Me.chkMean = New System.Windows.Forms.CheckBox()
         Me.chkCount = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.CheckBox7 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.chkByFactor = New System.Windows.Forms.CheckBox()
+        Me.chkForFactor = New System.Windows.Forms.CheckBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.CheckBox11 = New System.Windows.Forms.CheckBox()
         Me.CheckBox10 = New System.Windows.Forms.CheckBox()
@@ -74,7 +74,7 @@ Partial Class dlgColumnStats
         'TabPage1
         '
         Me.TabPage1.Controls.Add(Me.lblSelectedVariables)
-        Me.TabPage1.Controls.Add(Me.UcrReceiverMultiple)
+        Me.TabPage1.Controls.Add(Me.ucrReceiverMultiple)
         Me.TabPage1.Controls.Add(Me.ucrAddRemove)
         Me.TabPage1.Controls.Add(Me.grpStatistcsRequired)
         Me.TabPage1.Controls.Add(Me.GroupBox1)
@@ -93,14 +93,15 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
         Me.lblSelectedVariables.TabIndex = 12
+        Me.lblSelectedVariables.Tag = "Selected_Variables"
         Me.lblSelectedVariables.Text = "Selected Variables"
         '
-        'UcrReceiverMultiple
+        'ucrReceiverMultiple
         '
-        Me.UcrReceiverMultiple.Location = New System.Drawing.Point(177, 19)
-        Me.UcrReceiverMultiple.Name = "UcrReceiverMultiple"
-        Me.UcrReceiverMultiple.Size = New System.Drawing.Size(91, 101)
-        Me.UcrReceiverMultiple.TabIndex = 11
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(177, 19)
+        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
+        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(91, 101)
+        Me.ucrReceiverMultiple.TabIndex = 11
         '
         'ucrAddRemove
         '
@@ -111,13 +112,13 @@ Partial Class dlgColumnStats
         '
         'grpStatistcsRequired
         '
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox9)
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox8)
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox6)
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox5)
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox4)
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox3)
-        Me.grpStatistcsRequired.Controls.Add(Me.CheckBox2)
+        Me.grpStatistcsRequired.Controls.Add(Me.chkMedian)
+        Me.grpStatistcsRequired.Controls.Add(Me.chkMissing)
+        Me.grpStatistcsRequired.Controls.Add(Me.chkSum)
+        Me.grpStatistcsRequired.Controls.Add(Me.chkStDev)
+        Me.grpStatistcsRequired.Controls.Add(Me.chkMaximum)
+        Me.grpStatistcsRequired.Controls.Add(Me.chkMinimum)
+        Me.grpStatistcsRequired.Controls.Add(Me.chkMean)
         Me.grpStatistcsRequired.Controls.Add(Me.chkCount)
         Me.grpStatistcsRequired.Location = New System.Drawing.Point(278, 7)
         Me.grpStatistcsRequired.Name = "grpStatistcsRequired"
@@ -125,77 +126,84 @@ Partial Class dlgColumnStats
         Me.grpStatistcsRequired.TabIndex = 9
         Me.grpStatistcsRequired.TabStop = False
         Me.grpStatistcsRequired.Tag = "Statistcs_Required"
-        Me.grpStatistcsRequired.Text = "StatistcsRequired"
+        Me.grpStatistcsRequired.Text = "Statistcs Required"
         '
-        'CheckBox9
+        'chkMedian
         '
-        Me.CheckBox9.AutoSize = True
-        Me.CheckBox9.Location = New System.Drawing.Point(87, 43)
-        Me.CheckBox9.Name = "CheckBox9"
-        Me.CheckBox9.Size = New System.Drawing.Size(61, 17)
-        Me.CheckBox9.TabIndex = 0
-        Me.CheckBox9.Text = "Median"
-        Me.CheckBox9.UseVisualStyleBackColor = True
+        Me.chkMedian.AutoSize = True
+        Me.chkMedian.Location = New System.Drawing.Point(87, 43)
+        Me.chkMedian.Name = "chkMedian"
+        Me.chkMedian.Size = New System.Drawing.Size(61, 17)
+        Me.chkMedian.TabIndex = 0
+        Me.chkMedian.Tag = "Median"
+        Me.chkMedian.Text = "Median"
+        Me.chkMedian.UseVisualStyleBackColor = True
         '
-        'CheckBox8
+        'chkMissing
         '
-        Me.CheckBox8.AutoSize = True
-        Me.CheckBox8.Location = New System.Drawing.Point(87, 20)
-        Me.CheckBox8.Name = "CheckBox8"
-        Me.CheckBox8.Size = New System.Drawing.Size(64, 17)
-        Me.CheckBox8.TabIndex = 0
-        Me.CheckBox8.Text = "Missing "
-        Me.CheckBox8.UseVisualStyleBackColor = True
+        Me.chkMissing.AutoSize = True
+        Me.chkMissing.Location = New System.Drawing.Point(87, 20)
+        Me.chkMissing.Name = "chkMissing"
+        Me.chkMissing.Size = New System.Drawing.Size(64, 17)
+        Me.chkMissing.TabIndex = 0
+        Me.chkMissing.Tag = "Missing"
+        Me.chkMissing.Text = "Missing "
+        Me.chkMissing.UseVisualStyleBackColor = True
         '
-        'CheckBox6
+        'chkSum
         '
-        Me.CheckBox6.AutoSize = True
-        Me.CheckBox6.Location = New System.Drawing.Point(87, 89)
-        Me.CheckBox6.Name = "CheckBox6"
-        Me.CheckBox6.Size = New System.Drawing.Size(47, 17)
-        Me.CheckBox6.TabIndex = 0
-        Me.CheckBox6.Text = "Sum"
-        Me.CheckBox6.UseVisualStyleBackColor = True
+        Me.chkSum.AutoSize = True
+        Me.chkSum.Location = New System.Drawing.Point(87, 89)
+        Me.chkSum.Name = "chkSum"
+        Me.chkSum.Size = New System.Drawing.Size(47, 17)
+        Me.chkSum.TabIndex = 0
+        Me.chkSum.Tag = "Sum"
+        Me.chkSum.Text = "Sum"
+        Me.chkSum.UseVisualStyleBackColor = True
         '
-        'CheckBox5
+        'chkStDev
         '
-        Me.CheckBox5.AutoSize = True
-        Me.CheckBox5.Location = New System.Drawing.Point(87, 66)
-        Me.CheckBox5.Name = "CheckBox5"
-        Me.CheckBox5.Size = New System.Drawing.Size(62, 17)
-        Me.CheckBox5.TabIndex = 0
-        Me.CheckBox5.Text = "St. Dev"
-        Me.CheckBox5.UseVisualStyleBackColor = True
+        Me.chkStDev.AutoSize = True
+        Me.chkStDev.Location = New System.Drawing.Point(87, 66)
+        Me.chkStDev.Name = "chkStDev"
+        Me.chkStDev.Size = New System.Drawing.Size(62, 17)
+        Me.chkStDev.TabIndex = 0
+        Me.chkStDev.Tag = "St_dev"
+        Me.chkStDev.Text = "St. Dev"
+        Me.chkStDev.UseVisualStyleBackColor = True
         '
-        'CheckBox4
+        'chkMaximum
         '
-        Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Location = New System.Drawing.Point(7, 89)
-        Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(73, 17)
-        Me.CheckBox4.TabIndex = 0
-        Me.CheckBox4.Text = "Maximum "
-        Me.CheckBox4.UseVisualStyleBackColor = True
+        Me.chkMaximum.AutoSize = True
+        Me.chkMaximum.Location = New System.Drawing.Point(7, 89)
+        Me.chkMaximum.Name = "chkMaximum"
+        Me.chkMaximum.Size = New System.Drawing.Size(73, 17)
+        Me.chkMaximum.TabIndex = 0
+        Me.chkMaximum.Tag = "Maximum"
+        Me.chkMaximum.Text = "Maximum "
+        Me.chkMaximum.UseVisualStyleBackColor = True
         '
-        'CheckBox3
+        'chkMinimum
         '
-        Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Location = New System.Drawing.Point(7, 66)
-        Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(67, 17)
-        Me.CheckBox3.TabIndex = 0
-        Me.CheckBox3.Text = "Minimum"
-        Me.CheckBox3.UseVisualStyleBackColor = True
+        Me.chkMinimum.AutoSize = True
+        Me.chkMinimum.Location = New System.Drawing.Point(7, 66)
+        Me.chkMinimum.Name = "chkMinimum"
+        Me.chkMinimum.Size = New System.Drawing.Size(67, 17)
+        Me.chkMinimum.TabIndex = 0
+        Me.chkMinimum.Tag = "Minimum"
+        Me.chkMinimum.Text = "Minimum"
+        Me.chkMinimum.UseVisualStyleBackColor = True
         '
-        'CheckBox2
+        'chkMean
         '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(7, 43)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(53, 17)
-        Me.CheckBox2.TabIndex = 0
-        Me.CheckBox2.Text = "Mean"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.chkMean.AutoSize = True
+        Me.chkMean.Location = New System.Drawing.Point(7, 43)
+        Me.chkMean.Name = "chkMean"
+        Me.chkMean.Size = New System.Drawing.Size(53, 17)
+        Me.chkMean.TabIndex = 0
+        Me.chkMean.Tag = "Mean"
+        Me.chkMean.Text = "Mean"
+        Me.chkMean.UseVisualStyleBackColor = True
         '
         'chkCount
         '
@@ -210,33 +218,35 @@ Partial Class dlgColumnStats
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.CheckBox7)
-        Me.GroupBox1.Controls.Add(Me.CheckBox1)
+        Me.GroupBox1.Controls.Add(Me.chkByFactor)
+        Me.GroupBox1.Controls.Add(Me.chkForFactor)
         Me.GroupBox1.Location = New System.Drawing.Point(6, 125)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(262, 66)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         '
-        'CheckBox7
+        'chkByFactor
         '
-        Me.CheckBox7.AutoSize = True
-        Me.CheckBox7.Location = New System.Drawing.Point(7, 43)
-        Me.CheckBox7.Name = "CheckBox7"
-        Me.CheckBox7.Size = New System.Drawing.Size(74, 17)
-        Me.CheckBox7.TabIndex = 1
-        Me.CheckBox7.Text = "By Factor "
-        Me.CheckBox7.UseVisualStyleBackColor = True
+        Me.chkByFactor.AutoSize = True
+        Me.chkByFactor.Location = New System.Drawing.Point(7, 43)
+        Me.chkByFactor.Name = "chkByFactor"
+        Me.chkByFactor.Size = New System.Drawing.Size(74, 17)
+        Me.chkByFactor.TabIndex = 1
+        Me.chkByFactor.Tag = "By_Factor"
+        Me.chkByFactor.Text = "By Factor "
+        Me.chkByFactor.UseVisualStyleBackColor = True
         '
-        'CheckBox1
+        'chkForFactor
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(7, 12)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(74, 17)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "For Factor"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.chkForFactor.AutoSize = True
+        Me.chkForFactor.Location = New System.Drawing.Point(7, 12)
+        Me.chkForFactor.Name = "chkForFactor"
+        Me.chkForFactor.Size = New System.Drawing.Size(74, 17)
+        Me.chkForFactor.TabIndex = 0
+        Me.chkForFactor.Tag = "For_Factor"
+        Me.chkForFactor.Text = "For Factor"
+        Me.chkForFactor.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
@@ -357,7 +367,7 @@ Partial Class dlgColumnStats
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(14, 235)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 239)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 2
@@ -366,12 +376,13 @@ Partial Class dlgColumnStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(447, 266)
+        Me.ClientSize = New System.Drawing.Size(447, 272)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgColumnStats"
-        Me.Text = "dlgColumnStats"
+        Me.Tag = "Column_Statistics"
+        Me.Text = "Column Stats"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
@@ -393,20 +404,20 @@ Partial Class dlgColumnStats
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents grpStatistcsRequired As GroupBox
-    Friend WithEvents CheckBox9 As CheckBox
-    Friend WithEvents CheckBox8 As CheckBox
-    Friend WithEvents CheckBox6 As CheckBox
-    Friend WithEvents CheckBox5 As CheckBox
-    Friend WithEvents CheckBox4 As CheckBox
-    Friend WithEvents CheckBox3 As CheckBox
-    Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents chkMedian As CheckBox
+    Friend WithEvents chkMissing As CheckBox
+    Friend WithEvents chkSum As CheckBox
+    Friend WithEvents chkStDev As CheckBox
+    Friend WithEvents chkMaximum As CheckBox
+    Friend WithEvents chkMinimum As CheckBox
+    Friend WithEvents chkMean As CheckBox
     Friend WithEvents chkCount As CheckBox
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents CheckBox7 As CheckBox
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents chkByFactor As CheckBox
+    Friend WithEvents chkForFactor As CheckBox
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents lblSelectedVariables As Label
-    Friend WithEvents UcrReceiverMultiple As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverMultiple As ucrReceiverMultiple
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents CheckBox11 As CheckBox
     Friend WithEvents CheckBox10 As CheckBox
