@@ -246,7 +246,7 @@ Partial Class dlgCalculator
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColumnName.TabIndex = 100
-        Me.lblNewColumnName.Tag = "Available _Variables "
+        Me.lblNewColumnName.Tag = "New_Column_Name"
         Me.lblNewColumnName.Text = "New Column Name:"
         '
         'txtNewColumnName
@@ -336,6 +336,7 @@ Partial Class dlgCalculator
         Me.Name = "dlgCalculator"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Calculator"
         Me.Text = "Calculator"
         Me.ResumeLayout(False)
         Me.PerformLayout()
