@@ -643,4 +643,7 @@
   <data name="Variable_width" xml:space="preserve">
     <value>Variable width</value>
   </data>
+  <data name="Calculator" xml:space="preserve">
+    <value>Calculator</value>
+  </data>
 </root>
