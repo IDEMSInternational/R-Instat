@@ -646,4 +646,28 @@
   <data name="Calculator" xml:space="preserve">
     <value>Calculator</value>
   </data>
+  <data name="Column_Type" xml:space="preserve">
+    <value>Column Type</value>
+  </data>
+  <data name="Date_Format" xml:space="preserve">
+    <value>Date Format</value>
+  </data>
+  <data name="Factor" xml:space="preserve">
+    <value>Factor</value>
+  </data>
+  <data name="Read_text_as_date_values" xml:space="preserve">
+    <value>Read text as date values</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Units_Vector" xml:space="preserve">
+    <value>Units Vector</value>
+  </data>
+  <data name="Variable" xml:space="preserve">
+    <value>Variable</value>
+  </data>
+  <data name="Variate" xml:space="preserve">
+    <value>Variate</value>
+  </data>
 </root>
