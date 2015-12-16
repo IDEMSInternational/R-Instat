@@ -706,4 +706,13 @@
   <data name="Sum" xml:space="preserve">
     <value>Sum</value>
   </data>
+  <data name="Correlation" xml:space="preserve">
+    <value>Correlation</value>
+  </data>
+  <data name="Correlations" xml:space="preserve">
+    <value>Correlations</value>
+  </data>
+  <data name="Display_Plot" xml:space="preserve">
+    <value>Display Plot</value>
+  </data>
 </root>
