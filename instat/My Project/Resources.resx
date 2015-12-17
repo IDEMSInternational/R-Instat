@@ -742,4 +742,37 @@
   <data name="Variable_to_Plot" xml:space="preserve">
     <value>Variable to Plot</value>
   </data>
+  <data name="Another_worksheet" xml:space="preserve">
+    <value>Another worksheet</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="Columns_X_" xml:space="preserve">
+    <value>Columns (X)</value>
+  </data>
+  <data name="Copy_Columns_from" xml:space="preserve">
+    <value>Copy Columns from</value>
+  </data>
+  <data name="Current_worksheet" xml:space="preserve">
+    <value>Current worksheet</value>
+  </data>
+  <data name="Duplicate_copy_paste_columns" xml:space="preserve">
+    <value>Duplicate(copy/paste) columns</value>
+  </data>
+  <data name="Paste_Into" xml:space="preserve">
+    <value>Paste Into</value>
+  </data>
+  <data name="Transpose" xml:space="preserve">
+    <value>Transpose</value>
+  </data>
+  <data name="Type_L_" xml:space="preserve">
+    <value>Type (L)</value>
+  </data>
+  <data name="Type_of_data" xml:space="preserve">
+    <value>Type of data</value>
+  </data>
+  <data name="Worksheet_name" xml:space="preserve">
+    <value>Worksheet name</value>
+  </data>
 </root>
