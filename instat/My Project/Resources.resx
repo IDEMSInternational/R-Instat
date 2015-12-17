@@ -425,7 +425,7 @@
     <value>Resize Worksheet</value>
   </data>
   <data name="Row_Statistics" xml:space="preserve">
-    <value>Row_Statistics</value>
+    <value>Row Statistics</value>
   </data>
   <data name="Run_Worksheet_Editor" xml:space="preserve">
     <value>Run Worksheet Editor F7</value>
@@ -642,5 +642,23 @@
   </data>
   <data name="Variable_width" xml:space="preserve">
     <value>Variable width</value>
+  </data>
+  <data name="Blocking_factor" xml:space="preserve">
+    <value>Blocking factor</value>
+  </data>
+  <data name="Contrasts" xml:space="preserve">
+    <value>Contrasts</value>
+  </data>
+  <data name="Response_variable1" xml:space="preserve">
+    <value>1st Response variable</value>
+  </data>
+  <data name="Response_variable2" xml:space="preserve">
+    <value>2nd Response variable</value>
+  </data>
+  <data name="Save_results" xml:space="preserve">
+    <value>Save results</value>
+  </data>
+  <data name="Treatment_factor" xml:space="preserve">
+    <value>Treatment factor</value>
   </data>
 </root>
