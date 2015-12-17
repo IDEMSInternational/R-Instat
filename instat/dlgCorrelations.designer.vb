@@ -59,14 +59,14 @@ Partial Class dlgCorrelations
         '
         Me.ucrReceiverMultiple.Location = New System.Drawing.Point(232, 36)
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
-        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(114, 101)
+        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(130, 130)
         Me.ucrReceiverMultiple.TabIndex = 1
         '
         'ucrAddRemove
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(6, 19)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(182, 118)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(209, 136)
         Me.ucrAddRemove.TabIndex = 0
         '
         'ucrBase
@@ -107,6 +107,7 @@ Partial Class dlgCorrelations
         Me.Controls.Add(Me.chkDisplayPValues)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpData)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgCorrelations"
         Me.Tag = "Correlations"
         Me.Text = "Correlations"
