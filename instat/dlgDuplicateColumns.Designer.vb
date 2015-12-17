@@ -26,7 +26,7 @@ Partial Class dlgDuplicateColumns
         Me.rdoAnotherWorkSheet = New System.Windows.Forms.RadioButton()
         Me.rdoCurrentWorksheet = New System.Windows.Forms.RadioButton()
         Me.grpDataType = New System.Windows.Forms.GroupBox()
-        Me.rdoLabelL = New System.Windows.Forms.RadioButton()
+        Me.rdoTypeL = New System.Windows.Forms.RadioButton()
         Me.rdoColumnsX = New System.Windows.Forms.RadioButton()
         Me.lblPasteto = New System.Windows.Forms.Label()
         Me.lstPasteInto = New System.Windows.Forms.ListBox()
@@ -73,13 +73,13 @@ Partial Class dlgDuplicateColumns
         Me.rdoCurrentWorksheet.Size = New System.Drawing.Size(111, 17)
         Me.rdoCurrentWorksheet.TabIndex = 0
         Me.rdoCurrentWorksheet.TabStop = True
-        Me.rdoCurrentWorksheet.Tag = "Current_Worksheet"
+        Me.rdoCurrentWorksheet.Tag = "Current_worksheet"
         Me.rdoCurrentWorksheet.Text = "Current worksheet"
         Me.rdoCurrentWorksheet.UseVisualStyleBackColor = True
         '
         'grpDataType
         '
-        Me.grpDataType.Controls.Add(Me.rdoLabelL)
+        Me.grpDataType.Controls.Add(Me.rdoTypeL)
         Me.grpDataType.Controls.Add(Me.rdoColumnsX)
         Me.grpDataType.Enabled = False
         Me.grpDataType.Location = New System.Drawing.Point(6, 57)
@@ -90,17 +90,17 @@ Partial Class dlgDuplicateColumns
         Me.grpDataType.Tag = "Type_of_data"
         Me.grpDataType.Text = "Type of data"
         '
-        'rdoLabelL
+        'rdoTypeL
         '
-        Me.rdoLabelL.AutoSize = True
-        Me.rdoLabelL.Location = New System.Drawing.Point(262, 19)
-        Me.rdoLabelL.Name = "rdoLabelL"
-        Me.rdoLabelL.Size = New System.Drawing.Size(61, 17)
-        Me.rdoLabelL.TabIndex = 2
-        Me.rdoLabelL.TabStop = True
-        Me.rdoLabelL.Tag = "Label_L"
-        Me.rdoLabelL.Text = "Type (L"
-        Me.rdoLabelL.UseVisualStyleBackColor = True
+        Me.rdoTypeL.AutoSize = True
+        Me.rdoTypeL.Location = New System.Drawing.Point(262, 19)
+        Me.rdoTypeL.Name = "rdoTypeL"
+        Me.rdoTypeL.Size = New System.Drawing.Size(64, 17)
+        Me.rdoTypeL.TabIndex = 2
+        Me.rdoTypeL.TabStop = True
+        Me.rdoTypeL.Tag = "Type_L_"
+        Me.rdoTypeL.Text = "Type (L)"
+        Me.rdoTypeL.UseVisualStyleBackColor = True
         '
         'rdoColumnsX
         '
@@ -111,7 +111,7 @@ Partial Class dlgDuplicateColumns
         Me.rdoColumnsX.Size = New System.Drawing.Size(81, 17)
         Me.rdoColumnsX.TabIndex = 0
         Me.rdoColumnsX.TabStop = True
-        Me.rdoColumnsX.Tag = "Columns_X"
+        Me.rdoColumnsX.Tag = "Columns_X_"
         Me.rdoColumnsX.Text = "Columns (X)"
         Me.rdoColumnsX.UseVisualStyleBackColor = True
         '
@@ -172,7 +172,7 @@ Partial Class dlgDuplicateColumns
         Me.grpWorksheetName.Size = New System.Drawing.Size(399, 46)
         Me.grpWorksheetName.TabIndex = 18
         Me.grpWorksheetName.TabStop = False
-        Me.grpWorksheetName.Tag = "Worksheet_Name"
+        Me.grpWorksheetName.Tag = "Worksheet_name"
         Me.grpWorksheetName.Text = "Worksheet name"
         '
         'ucrAddremove
@@ -224,7 +224,7 @@ Partial Class dlgDuplicateColumns
     Friend WithEvents rdoAnotherWorkSheet As RadioButton
     Friend WithEvents rdoCurrentWorksheet As RadioButton
     Friend WithEvents grpDataType As GroupBox
-    Friend WithEvents rdoLabelL As RadioButton
+    Friend WithEvents rdoTypeL As RadioButton
     Friend WithEvents rdoColumnsX As RadioButton
     Friend WithEvents lblPasteto As Label
     Friend WithEvents lstPasteInto As ListBox

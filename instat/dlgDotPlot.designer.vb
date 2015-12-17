@@ -37,6 +37,7 @@ Partial Class dlgDotPlot
         Me.lblPlotTitle.Name = "lblPlotTitle"
         Me.lblPlotTitle.Size = New System.Drawing.Size(51, 13)
         Me.lblPlotTitle.TabIndex = 1
+        Me.lblPlotTitle.Tag = "Plot_Title"
         Me.lblPlotTitle.Text = "Plot Title "
         '
         'txtTitle
@@ -94,7 +95,7 @@ Partial Class dlgDotPlot
         Me.Name = "dlgDotPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Dot_Plot"
-        Me.Text = "Dox Plot"
+        Me.Text = "Dot Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
