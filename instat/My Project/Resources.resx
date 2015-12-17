@@ -626,7 +626,7 @@
     <value>Save results in</value>
   </data>
   <data name="By_factors" xml:space="preserve">
-    <value>By_factor(s)</value>
+    <value>By factor(s)</value>
   </data>
   <data name="Data_to_be_plotted" xml:space="preserve">
     <value>Data to be plotted</value>
@@ -733,7 +733,13 @@
   <data name="Descriptive_Statistics" xml:space="preserve">
     <value>Descriptive Statistics</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value>Cumulative frequency</value>
+  <data name="Dot_Plot" xml:space="preserve">
+    <value>Dot Plot</value>
+  </data>
+  <data name="Plot_Title" xml:space="preserve">
+    <value>Plot Title</value>
+  </data>
+  <data name="Variable_to_Plot" xml:space="preserve">
+    <value>Variable to Plot</value>
   </data>
 </root>
