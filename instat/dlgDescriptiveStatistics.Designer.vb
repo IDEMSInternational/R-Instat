@@ -63,7 +63,7 @@ Partial Class dlgDescriptiveStatistics
         Me.chkCumulativeFrequency.Name = "chkCumulativeFrequency"
         Me.chkCumulativeFrequency.Size = New System.Drawing.Size(128, 17)
         Me.chkCumulativeFrequency.TabIndex = 61
-        Me.chkCumulativeFrequency.Tag = "Cumulative_Frequency"
+        Me.chkCumulativeFrequency.Tag = "Cumulative_frequency"
         Me.chkCumulativeFrequency.Text = "Cumulative frequency"
         Me.chkCumulativeFrequency.UseVisualStyleBackColor = True
         '
@@ -85,7 +85,7 @@ Partial Class dlgDescriptiveStatistics
         Me.chkStemAndLeaf.Name = "chkStemAndLeaf"
         Me.chkStemAndLeaf.Size = New System.Drawing.Size(91, 17)
         Me.chkStemAndLeaf.TabIndex = 1
-        Me.chkStemAndLeaf.Tag = "Stem_And_Leaf"
+        Me.chkStemAndLeaf.Tag = "Stem_and_leaf"
         Me.chkStemAndLeaf.Text = "Stem and leaf"
         Me.chkStemAndLeaf.UseVisualStyleBackColor = True
         '
