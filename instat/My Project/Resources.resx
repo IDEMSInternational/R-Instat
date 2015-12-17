@@ -727,4 +727,13 @@
   <data name="Rows_to_delete" xml:space="preserve">
     <value>Rows to delete</value>
   </data>
+  <data name="Box_Plot" xml:space="preserve">
+    <value>Box Plot</value>
+  </data>
+  <data name="Descriptive_Statistics" xml:space="preserve">
+    <value>Descriptive Statistics</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Cumulative frequency</value>
+  </data>
 </root>
