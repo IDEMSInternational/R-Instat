@@ -721,4 +721,10 @@
   <data name="Subset" xml:space="preserve">
     <value>Subset</value>
   </data>
+  <data name="Delete_rows" xml:space="preserve">
+    <value>Delete rows</value>
+  </data>
+  <data name="Rows_to_delete" xml:space="preserve">
+    <value>Rows to delete</value>
+  </data>
 </root>
