@@ -715,4 +715,10 @@
   <data name="Display_Plot" xml:space="preserve">
     <value>Display Plot</value>
   </data>
+  <data name="Delete_Columns" xml:space="preserve">
+    <value>Delete Columns</value>
+  </data>
+  <data name="Subset" xml:space="preserve">
+    <value>Subset</value>
+  </data>
 </root>
