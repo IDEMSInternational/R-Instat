@@ -17,7 +17,7 @@ Imports instat.Translations
 Public Class dlgChangeType
     Private Sub dlgChangeType_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrChangetypeReceiver.Selector = ucrChangeTypeSelector
-        ucrChangetypeReceiver.SetMeAsReceiver()
+        ucrChangeTypeReceiver.Selector = ucrChangeTypeSelector
+        ucrChangeTypeReceiver.SetMeAsReceiver()
     End Sub
 End Class

@@ -598,8 +598,8 @@
   <data name="Save_values" xml:space="preserve">
     <value>Save values</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value>New</value>
+  <data name="Mean" xml:space="preserve">
+    <value>Mean</value>
   </data>
   <data name="With_a_Label" xml:space="preserve">
     <value>With a Label</value>
@@ -637,10 +637,94 @@
   <data name="Notched_boxplot" xml:space="preserve">
     <value>Notched boxplot</value>
   </data>
-  <data name="String2" xml:space="preserve">
-    <value>Options</value>
+  <data name="Count" xml:space="preserve">
+    <value>Count</value>
   </data>
   <data name="Variable_width" xml:space="preserve">
     <value>Variable width</value>
+  </data>
+  <data name="Calculator" xml:space="preserve">
+    <value>Calculator</value>
+  </data>
+  <data name="Column_Type" xml:space="preserve">
+    <value>Column Type</value>
+  </data>
+  <data name="Date_Format" xml:space="preserve">
+    <value>Date Format</value>
+  </data>
+  <data name="Factor" xml:space="preserve">
+    <value>Factor</value>
+  </data>
+  <data name="Read_text_as_date_values" xml:space="preserve">
+    <value>Read text as date values</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Units_Vector" xml:space="preserve">
+    <value>Units Vector</value>
+  </data>
+  <data name="Variable" xml:space="preserve">
+    <value>Variable</value>
+  </data>
+  <data name="Variate" xml:space="preserve">
+    <value>Variate</value>
+  </data>
+  <data name="Chi_Square_Test" xml:space="preserve">
+    <value>Chi-Square Test</value>
+  </data>
+  <data name="Continuity_correction" xml:space="preserve">
+    <value>Continuity correction</value>
+  </data>
+  <data name="Data_Columns" xml:space="preserve">
+    <value>Data Columns</value>
+  </data>
+  <data name="Statistcs_Required" xml:space="preserve">
+    <value>Statistcs Required</value>
+  </data>
+  <data name="By_Factor" xml:space="preserve">
+    <value>By Factor</value>
+  </data>
+  <data name="For_Factor" xml:space="preserve">
+    <value>For Factor</value>
+  </data>
+  <data name="Maximum" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="Median" xml:space="preserve">
+    <value>Median</value>
+  </data>
+  <data name="Minimum" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="Missing" xml:space="preserve">
+    <value>Missing</value>
+  </data>
+  <data name="St_dev" xml:space="preserve">
+    <value>Standard deviation</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="Correlation" xml:space="preserve">
+    <value>Correlation</value>
+  </data>
+  <data name="Correlations" xml:space="preserve">
+    <value>Correlations</value>
+  </data>
+  <data name="Display_Plot" xml:space="preserve">
+    <value>Display Plot</value>
+  </data>
+  <data name="Delete_Columns" xml:space="preserve">
+    <value>Delete Columns</value>
+  </data>
+  <data name="Subset" xml:space="preserve">
+    <value>Subset</value>
+  </data>
+  <data name="Delete_rows" xml:space="preserve">
+    <value>Delete rows</value>
+  </data>
+  <data name="Rows_to_delete" xml:space="preserve">
+    <value>Rows to delete</value>
   </data>
 </root>
