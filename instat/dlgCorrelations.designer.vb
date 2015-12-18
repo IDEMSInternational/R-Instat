@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgCorrelations
+Partial Class dlgCorrelation
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -39,7 +39,7 @@ Partial Class dlgCorrelations
         Me.grpData.Controls.Add(Me.ucrAddRemove)
         Me.grpData.Location = New System.Drawing.Point(17, 15)
         Me.grpData.Name = "grpData"
-        Me.grpData.Size = New System.Drawing.Size(395, 172)
+        Me.grpData.Size = New System.Drawing.Size(401, 181)
         Me.grpData.TabIndex = 0
         Me.grpData.TabStop = False
         Me.grpData.Tag = "Data"
@@ -48,7 +48,7 @@ Partial Class dlgCorrelations
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(236, 22)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(236, 19)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
         Me.lblSelectedVariables.TabIndex = 2
@@ -59,14 +59,14 @@ Partial Class dlgCorrelations
         '
         Me.ucrReceiverMultiple.Location = New System.Drawing.Point(232, 36)
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
-        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(114, 101)
+        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(123, 136)
         Me.ucrReceiverMultiple.TabIndex = 1
         '
         'ucrAddRemove
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(6, 19)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(182, 118)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(220, 147)
         Me.ucrAddRemove.TabIndex = 0
         '
         'ucrBase
@@ -98,7 +98,7 @@ Partial Class dlgCorrelations
         Me.chkDisplayPlot.Text = "Display Plot"
         Me.chkDisplayPlot.UseVisualStyleBackColor = True
         '
-        'dlgCorrelations
+        'dlgCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -107,9 +107,10 @@ Partial Class dlgCorrelations
         Me.Controls.Add(Me.chkDisplayPValues)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpData)
-        Me.Name = "dlgCorrelations"
-        Me.Tag = "Correlations"
-        Me.Text = "Correlations"
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Name = "dlgCorrelation"
+        Me.Tag = "Correlation"
+        Me.Text = "Correlation"
         Me.grpData.ResumeLayout(False)
         Me.grpData.PerformLayout()
         Me.ResumeLayout(False)
