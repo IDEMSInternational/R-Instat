@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 
-Public Class dlgCorrelations
+Public Class dlgCorrelation
     Private Sub ucrAddRemove_Load(sender As Object, e As EventArgs) Handles ucrAddRemove.Load
         ucrBase.clsRsyntax.SetFunction("cor")
         ucrBase.clsRsyntax.iCallType = 2
