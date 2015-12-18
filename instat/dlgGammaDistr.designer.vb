@@ -30,10 +30,10 @@ Partial Class dlgGammaDistr
         Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.lblSelectedColumn = New System.Windows.Forms.Label()
         Me.grpEstimationMethods = New System.Windows.Forms.GroupBox()
-        Me.cboMethodofMoments = New System.Windows.Forms.ComboBox()
+        Me.cboMethodOfMoments = New System.Windows.Forms.ComboBox()
         Me.cboMaximumLikelihood = New System.Windows.Forms.ComboBox()
         Me.lblSaveEstimates = New System.Windows.Forms.Label()
-        Me.chkMethodofMoments = New System.Windows.Forms.CheckBox()
+        Me.chkMethodOfMoments = New System.Windows.Forms.CheckBox()
         Me.chkMaximumLikelihood = New System.Windows.Forms.CheckBox()
         Me.chkRestrictValues = New System.Windows.Forms.CheckBox()
         Me.lblBetween = New System.Windows.Forms.Label()
@@ -112,10 +112,10 @@ Partial Class dlgGammaDistr
         '
         'grpEstimationMethods
         '
-        Me.grpEstimationMethods.Controls.Add(Me.cboMethodofMoments)
+        Me.grpEstimationMethods.Controls.Add(Me.cboMethodOfMoments)
         Me.grpEstimationMethods.Controls.Add(Me.cboMaximumLikelihood)
         Me.grpEstimationMethods.Controls.Add(Me.lblSaveEstimates)
-        Me.grpEstimationMethods.Controls.Add(Me.chkMethodofMoments)
+        Me.grpEstimationMethods.Controls.Add(Me.chkMethodOfMoments)
         Me.grpEstimationMethods.Controls.Add(Me.chkMaximumLikelihood)
         Me.grpEstimationMethods.Location = New System.Drawing.Point(18, 177)
         Me.grpEstimationMethods.Name = "grpEstimationMethods"
@@ -125,13 +125,13 @@ Partial Class dlgGammaDistr
         Me.grpEstimationMethods.Tag = "Estimation_methods"
         Me.grpEstimationMethods.Text = "Estimation methods"
         '
-        'cboMethodofMoments
+        'cboMethodOfMoments
         '
-        Me.cboMethodofMoments.FormattingEnabled = True
-        Me.cboMethodofMoments.Location = New System.Drawing.Point(147, 65)
-        Me.cboMethodofMoments.Name = "cboMethodofMoments"
-        Me.cboMethodofMoments.Size = New System.Drawing.Size(84, 21)
-        Me.cboMethodofMoments.TabIndex = 4
+        Me.cboMethodOfMoments.FormattingEnabled = True
+        Me.cboMethodOfMoments.Location = New System.Drawing.Point(147, 65)
+        Me.cboMethodOfMoments.Name = "cboMethodOfMoments"
+        Me.cboMethodOfMoments.Size = New System.Drawing.Size(84, 21)
+        Me.cboMethodOfMoments.TabIndex = 4
         '
         'cboMaximumLikelihood
         '
@@ -151,16 +151,16 @@ Partial Class dlgGammaDistr
         Me.lblSaveEstimates.Tag = "Save_estimates_in"
         Me.lblSaveEstimates.Text = "Save estimates in"
         '
-        'chkMethodofMoments
+        'chkMethodOfMoments
         '
-        Me.chkMethodofMoments.AutoSize = True
-        Me.chkMethodofMoments.Location = New System.Drawing.Point(6, 65)
-        Me.chkMethodofMoments.Name = "chkMethodofMoments"
-        Me.chkMethodofMoments.Size = New System.Drawing.Size(119, 17)
-        Me.chkMethodofMoments.TabIndex = 1
-        Me.chkMethodofMoments.Tag = "Method_of_moments"
-        Me.chkMethodofMoments.Text = "Method of moments"
-        Me.chkMethodofMoments.UseVisualStyleBackColor = True
+        Me.chkMethodOfMoments.AutoSize = True
+        Me.chkMethodOfMoments.Location = New System.Drawing.Point(6, 65)
+        Me.chkMethodOfMoments.Name = "chkMethodOfMoments"
+        Me.chkMethodOfMoments.Size = New System.Drawing.Size(119, 17)
+        Me.chkMethodOfMoments.TabIndex = 1
+        Me.chkMethodOfMoments.Tag = "Method_of_moments"
+        Me.chkMethodOfMoments.Text = "Method of moments"
+        Me.chkMethodOfMoments.UseVisualStyleBackColor = True
         '
         'chkMaximumLikelihood
         '
@@ -269,9 +269,9 @@ Partial Class dlgGammaDistr
     Friend WithEvents rdoSingleColumn As RadioButton
     Friend WithEvents grpEstimationMethods As GroupBox
     Friend WithEvents lblSaveEstimates As Label
-    Friend WithEvents chkMethodofMoments As CheckBox
+    Friend WithEvents chkMethodOfMoments As CheckBox
     Friend WithEvents chkMaximumLikelihood As CheckBox
-    Friend WithEvents cboMethodofMoments As ComboBox
+    Friend WithEvents cboMethodOfMoments As ComboBox
     Friend WithEvents cboMaximumLikelihood As ComboBox
     Friend WithEvents chkRestrictValues As CheckBox
     Friend WithEvents lblBetween As Label
