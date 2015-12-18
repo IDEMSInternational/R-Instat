@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgBoxPlot
+Partial Class dlgBoxplot
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,9 +22,9 @@ Partial Class dlgBoxPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblYvarToPlot = New System.Windows.Forms.Label()
+        Me.lblYVarToPlot = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.chkVariableWidth = New System.Windows.Forms.CheckBox()
         Me.chkHorizontalBoxplot = New System.Windows.Forms.CheckBox()
@@ -34,12 +34,12 @@ Partial Class dlgBoxPlot
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'UcrAddRemove
+        'ucrAddRemove
         '
-        Me.UcrAddRemove.Location = New System.Drawing.Point(3, 9)
-        Me.UcrAddRemove.Name = "UcrAddRemove"
-        Me.UcrAddRemove.Size = New System.Drawing.Size(211, 129)
-        Me.UcrAddRemove.TabIndex = 6
+        Me.ucrAddRemove.Location = New System.Drawing.Point(3, 9)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(211, 129)
+        Me.ucrAddRemove.TabIndex = 6
         '
         'ucrBase
         '
@@ -48,15 +48,15 @@ Partial Class dlgBoxPlot
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 4
         '
-        'lblYvarToPlot
+        'lblYVarToPlot
         '
-        Me.lblYvarToPlot.AutoSize = True
-        Me.lblYvarToPlot.Location = New System.Drawing.Point(238, 9)
-        Me.lblYvarToPlot.Name = "lblYvarToPlot"
-        Me.lblYvarToPlot.Size = New System.Drawing.Size(91, 13)
-        Me.lblYvarToPlot.TabIndex = 11
-        Me.lblYvarToPlot.Tag = "Y_variables_to_plot"
-        Me.lblYvarToPlot.Text = "Y variables to plot"
+        Me.lblYVarToPlot.AutoSize = True
+        Me.lblYVarToPlot.Location = New System.Drawing.Point(238, 9)
+        Me.lblYVarToPlot.Name = "lblYVarToPlot"
+        Me.lblYVarToPlot.Size = New System.Drawing.Size(91, 13)
+        Me.lblYVarToPlot.TabIndex = 11
+        Me.lblYVarToPlot.Tag = "Y_variables_to_plot"
+        Me.lblYVarToPlot.Text = "Y variables to plot"
         '
         'cmdOptions
         '
@@ -122,9 +122,10 @@ Partial Class dlgBoxPlot
         Me.lblByFactors.Name = "lblByFactors"
         Me.lblByFactors.Size = New System.Drawing.Size(60, 13)
         Me.lblByFactors.TabIndex = 20
+        Me.lblByFactors.Tag = "By_factor_s_"
         Me.lblByFactors.Text = "By factor(s)"
         '
-        'dlgBoxPlot
+        'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -136,14 +137,15 @@ Partial Class dlgBoxPlot
         Me.Controls.Add(Me.chkHorizontalBoxplot)
         Me.Controls.Add(Me.chkVariableWidth)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.lblYvarToPlot)
-        Me.Controls.Add(Me.UcrAddRemove)
+        Me.Controls.Add(Me.lblYVarToPlot)
+        Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgBoxPlot"
+        Me.Name = "dlgBoxplot"
         Me.ShowIcon = False
+        Me.Tag = "Boxplot"
         Me.Text = "Boxplot"
         Me.TopMost = True
         Me.ResumeLayout(False)
@@ -151,8 +153,8 @@ Partial Class dlgBoxPlot
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents UcrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents lblYvarToPlot As Label
+    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents lblYVarToPlot As Label
     Friend WithEvents cmdOptions As Button
     Friend WithEvents chkVariableWidth As CheckBox
     Friend WithEvents chkHorizontalBoxplot As CheckBox
