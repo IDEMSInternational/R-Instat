@@ -14,11 +14,11 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class dlgBoxPlot
+Public Class dlgBoxplot
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("boxplot")
         ucrBase.clsRsyntax.iCallType = 0
-        ucrReceiverDataToPlot.Selector = UcrAddRemove
+        ucrReceiverDataToPlot.Selector = ucrAddRemove
         ucrReceiverDataToPlot.SetMeAsReceiver()
         autoTranslate(Me)
         ucrBase.OKEnabled(False)

@@ -87,7 +87,7 @@ Partial Class dlgChiSquareTest
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(16, 13)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(182, 118)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(202, 135)
         Me.ucrAddRemove.TabIndex = 7
         '
         'ucrBase
@@ -101,7 +101,7 @@ Partial Class dlgChiSquareTest
         '
         Me.ucrReceiverChiSquare.Location = New System.Drawing.Point(224, 30)
         Me.ucrReceiverChiSquare.Name = "ucrReceiverChiSquare"
-        Me.ucrReceiverChiSquare.Size = New System.Drawing.Size(91, 101)
+        Me.ucrReceiverChiSquare.Size = New System.Drawing.Size(122, 132)
         Me.ucrReceiverChiSquare.TabIndex = 2
         '
         'dlgChiSquareTest
@@ -122,6 +122,7 @@ Partial Class dlgChiSquareTest
         Me.MinimizeBox = False
         Me.Name = "dlgChiSquareTest"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Chi_square_Test"
         Me.Text = "Chi-Square Test"
         Me.ResumeLayout(False)
         Me.PerformLayout()
