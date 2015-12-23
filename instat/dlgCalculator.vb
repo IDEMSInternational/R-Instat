@@ -4,7 +4,7 @@ Public Class dlgCalculator
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.OKEnabled(False)
-        btnBackSpace.Enabled = True
+        cmdBackSpace.Enabled = True
         txtCalcLine.Select()
     End Sub
 
@@ -24,67 +24,67 @@ Public Class dlgCalculator
         txtCalcLine.Select()
     End Sub
 
-    Private Sub btn0_Click(sender As Object, e As EventArgs) Handles btn0.Click
+    Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
         AddText("0")
     End Sub
 
-    Private Sub btn1_Click(sender As Object, e As EventArgs) Handles btn1.Click
+    Private Sub cmd1_Click(sender As Object, e As EventArgs) Handles cmd1.Click
         AddText("1")
     End Sub
 
-    Private Sub btn2_Click(sender As Object, e As EventArgs) Handles btn2.Click
+    Private Sub cmd2_Click(sender As Object, e As EventArgs) Handles cmd2.Click
         AddText("2")
     End Sub
 
-    Private Sub btn3_Click(sender As Object, e As EventArgs) Handles btn3.Click
+    Private Sub cmd3_Click(sender As Object, e As EventArgs) Handles cmd3.Click
         AddText("3")
     End Sub
 
-    Private Sub btn4_Click(sender As Object, e As EventArgs) Handles btn4.Click
+    Private Sub cmd4_Click(sender As Object, e As EventArgs) Handles cmd4.Click
         AddText("4")
     End Sub
 
-    Private Sub btn5_Click(sender As Object, e As EventArgs) Handles btn5.Click
+    Private Sub cmd5_Click(sender As Object, e As EventArgs) Handles cmd5.Click
         AddText("5")
     End Sub
 
-    Private Sub btn6_Click(sender As Object, e As EventArgs) Handles btn6.Click
+    Private Sub cmd6_Click(sender As Object, e As EventArgs) Handles cmd6.Click
         AddText("6")
     End Sub
 
-    Private Sub btn7_Click(sender As Object, e As EventArgs) Handles btn7.Click
+    Private Sub cmd7_Click(sender As Object, e As EventArgs) Handles cmd7.Click
         AddText("7")
     End Sub
 
-    Private Sub btn8_Click(sender As Object, e As EventArgs) Handles btn8.Click
+    Private Sub cmd8_Click(sender As Object, e As EventArgs) Handles cmd8.Click
         AddText("8")
     End Sub
 
-    Private Sub btn9_Click(sender As Object, e As EventArgs) Handles btn9.Click
+    Private Sub cmd9_Click(sender As Object, e As EventArgs) Handles btn9.Click
         AddText("9")
     End Sub
 
-    Private Sub btnDot_Click(sender As Object, e As EventArgs) Handles btnDot.Click
+    Private Sub cmdDot_Click(sender As Object, e As EventArgs) Handles cmdDot.Click
         AddText(".")
     End Sub
 
-    Private Sub btnPi_Click(sender As Object, e As EventArgs) Handles btnPi.Click
+    Private Sub cmdPi_Click(sender As Object, e As EventArgs) Handles cmdPi.Click
         AddText("pi")
     End Sub
 
-    Private Sub btnPlus_Click(sender As Object, e As EventArgs) Handles btnPlus.Click
+    Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
         AddText("+")
     End Sub
 
-    Private Sub btnMinus_Click(sender As Object, e As EventArgs) Handles btnMinus.Click
+    Private Sub cmdMinus_Click(sender As Object, e As EventArgs) Handles cmdMinus.Click
         AddText("-")
     End Sub
 
-    Private Sub btnMultiply_Click(sender As Object, e As EventArgs) Handles btnMultiply.Click
+    Private Sub cmdMultiply_Click(sender As Object, e As EventArgs) Handles cmdMultiply.Click
         AddText("*")
     End Sub
 
-    Private Sub btnDivide_Click(sender As Object, e As EventArgs) Handles btnDivide.Click
+    Private Sub cmdDivide_Click(sender As Object, e As EventArgs) Handles cmdDivide.Click
         AddText("/")
     End Sub
 
@@ -94,15 +94,15 @@ Public Class dlgCalculator
         'End If
     End Sub
 
-    Private Sub btnPower_Click(sender As Object, e As EventArgs) Handles btnPower.Click
+    Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
         AddText("^")
     End Sub
 
-    Private Sub btnOpenBracket_Click(sender As Object, e As EventArgs) Handles btnOpenBracket.Click
+    Private Sub cmdOpenBracket_Click(sender As Object, e As EventArgs) Handles cmdOpenBracket.Click
         AddText("(")
     End Sub
 
-    Private Sub btnCloseBracket_Click(sender As Object, e As EventArgs) Handles btnCloseBracket.Click
+    Private Sub cmdCloseBracket_Click(sender As Object, e As EventArgs) Handles cmdCloseBracket.Click
         Dim intCursorPosition As Integer
 
         intCursorPosition = txtCalcLine.SelectionStart
@@ -111,11 +111,11 @@ Public Class dlgCalculator
         txtCalcLine.Focus()
     End Sub
 
-    Private Sub btnRowNumbers_Click(sender As Object, e As EventArgs) Handles btnRowNumbers.Click
+    Private Sub cmdRowNumbers_Click(sender As Object, e As EventArgs) Handles cmdRowNumbers.Click
         AddText("(1:nrow(data))")
     End Sub
 
-    Private Sub UcrButtons1_clickOK(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+    Private Sub ucrBase_clickOK(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strScript As String
         strScript = ("data[[" & Chr(34) & txtNewColumnName.Text & Chr(34) & "]]" & " <- " & txtCalcLine.Text).ToString
         frmMain.clsRInterface.RunScript(strScript)
@@ -123,7 +123,7 @@ Public Class dlgCalculator
         frmEditor.UpdateSheet(dataset)
     End Sub
 
-    Private Sub btnBackSpace_Click(sender As Object, e As EventArgs) Handles btnBackSpace.Click
+    Private Sub cmdBackSpace_Click(sender As Object, e As EventArgs) Handles cmdBackSpace.Click
         If txtCalcLine.Text.Length > 0 Then
             txtCalcLine.Text = txtCalcLine.Text.Remove(txtCalcLine.Text.Length - 1)
         End If
@@ -131,21 +131,21 @@ Public Class dlgCalculator
 
     Private Sub txtCalcLine_TextChanged(sender As Object, e As EventArgs) Handles txtCalcLine.TextChanged
         If txtCalcLine.Text.Length = 0 Then
-            btnBackSpace.Enabled = False
+            cmdBackSpace.Enabled = False
         Else
-            btnBackSpace.Enabled = True
+            cmdBackSpace.Enabled = True
         End If
     End Sub
 
-    Private Sub btnSqrt_Click(sender As Object, e As EventArgs) Handles btnSqrt.Click
+    Private Sub cmdSqrt_Click(sender As Object, e As EventArgs) Handles cmdSqrt.Click
         AddText("sqrt()", 1, True)
     End Sub
 
-    Private Sub btnLog10_Click(sender As Object, e As EventArgs) Handles btnLog10.Click
+    Private Sub cmdLog10_Click(sender As Object, e As EventArgs) Handles cmdLog10.Click
         AddText("log10()", 1, True)
     End Sub
 
-    Private Sub btnExp_Click(sender As Object, e As EventArgs) Handles btnExp.Click
+    Private Sub cmdExp_Click(sender As Object, e As EventArgs) Handles cmdExp.Click
         AddText("exp()", 1, True)
     End Sub
 
