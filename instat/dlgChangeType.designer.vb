@@ -32,7 +32,7 @@ Partial Class dlgChangeType
         Me.rdoText = New System.Windows.Forms.RadioButton()
         Me.rdoVariate = New System.Windows.Forms.RadioButton()
         Me.chkReadTextAsDateValues = New System.Windows.Forms.CheckBox()
-        Me.btnDateFormat = New System.Windows.Forms.Button()
+        Me.cmdDateFormat = New System.Windows.Forms.Button()
         Me.lblReadTextAsDateValues = New System.Windows.Forms.Label()
         Me.grpColumnType.SuspendLayout()
         Me.SuspendLayout()
@@ -139,15 +139,15 @@ Partial Class dlgChangeType
         Me.chkReadTextAsDateValues.Tag = ""
         Me.chkReadTextAsDateValues.UseVisualStyleBackColor = True
         '
-        'btnDateFormat
+        'cmdDateFormat
         '
-        Me.btnDateFormat.Location = New System.Drawing.Point(314, 212)
-        Me.btnDateFormat.Name = "btnDateFormat"
-        Me.btnDateFormat.Size = New System.Drawing.Size(86, 23)
-        Me.btnDateFormat.TabIndex = 5
-        Me.btnDateFormat.Tag = "Date_Format"
-        Me.btnDateFormat.Text = "Date Format"
-        Me.btnDateFormat.UseVisualStyleBackColor = True
+        Me.cmdDateFormat.Location = New System.Drawing.Point(314, 212)
+        Me.cmdDateFormat.Name = "cmdDateFormat"
+        Me.cmdDateFormat.Size = New System.Drawing.Size(86, 23)
+        Me.cmdDateFormat.TabIndex = 5
+        Me.cmdDateFormat.Tag = "Date_Format"
+        Me.cmdDateFormat.Text = "Date Format"
+        Me.cmdDateFormat.UseVisualStyleBackColor = True
         '
         'lblReadTextAsDateValues
         '
@@ -165,7 +165,7 @@ Partial Class dlgChangeType
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 302)
         Me.Controls.Add(Me.lblReadTextAsDateValues)
-        Me.Controls.Add(Me.btnDateFormat)
+        Me.Controls.Add(Me.cmdDateFormat)
         Me.Controls.Add(Me.chkReadTextAsDateValues)
         Me.Controls.Add(Me.grpColumnType)
         Me.Controls.Add(Me.lblVariable)
@@ -194,6 +194,6 @@ Partial Class dlgChangeType
     Friend WithEvents rdoText As RadioButton
     Friend WithEvents rdoVariate As RadioButton
     Friend WithEvents chkReadTextAsDateValues As CheckBox
-    Friend WithEvents btnDateFormat As Button
+    Friend WithEvents cmdDateFormat As Button
     Friend WithEvents lblReadTextAsDateValues As Label
 End Class
