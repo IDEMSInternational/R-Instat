@@ -25,7 +25,7 @@ Partial Class dlgInteractions
         Me.txtSelectedFactors = New System.Windows.Forms.TextBox()
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.lblSaveInto = New System.Windows.Forms.Label()
-        Me.rdoCreateInteractionVariavle = New System.Windows.Forms.RadioButton()
+        Me.rdoCreateInteractionVariable = New System.Windows.Forms.RadioButton()
         Me.rdoCombineToNewFactor = New System.Windows.Forms.RadioButton()
         Me.ucrBase = New instat.ucrButtons()
         Me.btnAdd = New System.Windows.Forms.Button()
@@ -67,18 +67,18 @@ Partial Class dlgInteractions
         Me.lblSaveInto.Tag = "Save_into"
         Me.lblSaveInto.Text = "Save into"
         '
-        'rdoCreateInteractionVariavle
+        'rdoCreateInteractionVariable
         '
-        Me.rdoCreateInteractionVariavle.AutoSize = True
-        Me.rdoCreateInteractionVariavle.Checked = True
-        Me.rdoCreateInteractionVariavle.Location = New System.Drawing.Point(12, 198)
-        Me.rdoCreateInteractionVariavle.Name = "rdoCreateInteractionVariavle"
-        Me.rdoCreateInteractionVariavle.Size = New System.Drawing.Size(149, 17)
-        Me.rdoCreateInteractionVariavle.TabIndex = 15
-        Me.rdoCreateInteractionVariavle.TabStop = True
-        Me.rdoCreateInteractionVariavle.Tag = "Create_Interaction_variable"
-        Me.rdoCreateInteractionVariavle.Text = "Create Interaction variable"
-        Me.rdoCreateInteractionVariavle.UseVisualStyleBackColor = True
+        Me.rdoCreateInteractionVariable.AutoSize = True
+        Me.rdoCreateInteractionVariable.Checked = True
+        Me.rdoCreateInteractionVariable.Location = New System.Drawing.Point(12, 198)
+        Me.rdoCreateInteractionVariable.Name = "rdoCreateInteractionVariable"
+        Me.rdoCreateInteractionVariable.Size = New System.Drawing.Size(149, 17)
+        Me.rdoCreateInteractionVariable.TabIndex = 15
+        Me.rdoCreateInteractionVariable.TabStop = True
+        Me.rdoCreateInteractionVariable.Tag = "Create_Interaction_variable"
+        Me.rdoCreateInteractionVariable.Text = "Create Interaction variable"
+        Me.rdoCreateInteractionVariable.UseVisualStyleBackColor = True
         '
         'rdoCombineToNewFactor
         '
@@ -196,13 +196,14 @@ Partial Class dlgInteractions
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.rdoCombineToNewFactor)
-        Me.Controls.Add(Me.rdoCreateInteractionVariavle)
+        Me.Controls.Add(Me.rdoCreateInteractionVariable)
         Me.Controls.Add(Me.lblSaveInto)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.txtSelectedFactors)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgInteractions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Interactions"
         Me.Text = "Interactions"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -212,7 +213,7 @@ Partial Class dlgInteractions
     Friend WithEvents txtSelectedFactors As TextBox
     Friend WithEvents lblFactors As Label
     Friend WithEvents lblSaveInto As Label
-    Friend WithEvents rdoCreateInteractionVariavle As RadioButton
+    Friend WithEvents rdoCreateInteractionVariable As RadioButton
     Friend WithEvents rdoCombineToNewFactor As RadioButton
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents btnAdd As Button
