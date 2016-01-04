@@ -22,9 +22,9 @@ Partial Class dlgFind
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnFindNext = New System.Windows.Forms.Button()
-        Me.btnReplace = New System.Windows.Forms.Button()
-        Me.btnClose = New System.Windows.Forms.Button()
+        Me.cmdFindNext = New System.Windows.Forms.Button()
+        Me.cmdReplace = New System.Windows.Forms.Button()
+        Me.cmdClose = New System.Windows.Forms.Button()
         Me.chkSearchToEndOnly = New System.Windows.Forms.CheckBox()
         Me.chkMatchCase = New System.Windows.Forms.CheckBox()
         Me.chkFindWholeWordOnly = New System.Windows.Forms.CheckBox()
@@ -32,35 +32,35 @@ Partial Class dlgFind
         Me.txtFindWhat = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
-        'btnFindNext
+        'cmdFindNext
         '
-        Me.btnFindNext.Location = New System.Drawing.Point(268, 39)
-        Me.btnFindNext.Name = "btnFindNext"
-        Me.btnFindNext.Size = New System.Drawing.Size(75, 23)
-        Me.btnFindNext.TabIndex = 0
-        Me.btnFindNext.Tag = "Find_next"
-        Me.btnFindNext.Text = "Find next"
-        Me.btnFindNext.UseVisualStyleBackColor = True
+        Me.cmdFindNext.Location = New System.Drawing.Point(268, 39)
+        Me.cmdFindNext.Name = "cmdFindNext"
+        Me.cmdFindNext.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFindNext.TabIndex = 0
+        Me.cmdFindNext.Tag = "Find_next"
+        Me.cmdFindNext.Text = "Find next"
+        Me.cmdFindNext.UseVisualStyleBackColor = True
         '
-        'btnReplace
+        'cmdReplace
         '
-        Me.btnReplace.Location = New System.Drawing.Point(268, 68)
-        Me.btnReplace.Name = "btnReplace"
-        Me.btnReplace.Size = New System.Drawing.Size(75, 23)
-        Me.btnReplace.TabIndex = 1
-        Me.btnReplace.Tag = "Replace"
-        Me.btnReplace.Text = "Replace"
-        Me.btnReplace.UseVisualStyleBackColor = True
+        Me.cmdReplace.Location = New System.Drawing.Point(268, 68)
+        Me.cmdReplace.Name = "cmdReplace"
+        Me.cmdReplace.Size = New System.Drawing.Size(75, 23)
+        Me.cmdReplace.TabIndex = 1
+        Me.cmdReplace.Tag = "Replace"
+        Me.cmdReplace.Text = "Replace"
+        Me.cmdReplace.UseVisualStyleBackColor = True
         '
-        'btnClose
+        'cmdClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(268, 140)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnClose.TabIndex = 2
-        Me.btnClose.Tag = "Close"
-        Me.btnClose.Text = "Close"
-        Me.btnClose.UseVisualStyleBackColor = True
+        Me.cmdClose.Location = New System.Drawing.Point(268, 140)
+        Me.cmdClose.Name = "cmdClose"
+        Me.cmdClose.Size = New System.Drawing.Size(75, 23)
+        Me.cmdClose.TabIndex = 2
+        Me.cmdClose.Tag = "Close"
+        Me.cmdClose.Text = "Close"
+        Me.cmdClose.UseVisualStyleBackColor = True
         '
         'chkSearchToEndOnly
         '
@@ -122,9 +122,9 @@ Partial Class dlgFind
         Me.Controls.Add(Me.chkFindWholeWordOnly)
         Me.Controls.Add(Me.chkMatchCase)
         Me.Controls.Add(Me.chkSearchToEndOnly)
-        Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.btnReplace)
-        Me.Controls.Add(Me.btnFindNext)
+        Me.Controls.Add(Me.cmdClose)
+        Me.Controls.Add(Me.cmdReplace)
+        Me.Controls.Add(Me.cmdFindNext)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgFind"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -135,9 +135,9 @@ Partial Class dlgFind
 
     End Sub
 
-    Friend WithEvents btnFindNext As Button
-    Friend WithEvents btnReplace As Button
-    Friend WithEvents btnClose As Button
+    Friend WithEvents cmdFindNext As Button
+    Friend WithEvents cmdReplace As Button
+    Friend WithEvents cmdClose As Button
     Friend WithEvents chkSearchToEndOnly As CheckBox
     Friend WithEvents chkMatchCase As CheckBox
     Friend WithEvents chkFindWholeWordOnly As CheckBox
