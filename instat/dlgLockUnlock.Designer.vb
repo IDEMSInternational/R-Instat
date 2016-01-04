@@ -94,6 +94,7 @@ Partial Class dlgLockUnlock
         Me.chkReservefree.Name = "chkReservefree"
         Me.chkReservefree.Size = New System.Drawing.Size(119, 17)
         Me.chkReservefree.TabIndex = 6
+        Me.chkReservefree.Tag = "Researve_free_space"
         Me.chkReservefree.Text = "Reserve free space"
         Me.chkReservefree.UseVisualStyleBackColor = True
         '
