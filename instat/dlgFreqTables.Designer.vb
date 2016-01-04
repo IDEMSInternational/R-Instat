@@ -54,7 +54,7 @@ Partial Class dlgFreqTables
         Me.grpDisplay.Controls.Add(Me.rdoPercentFactor)
         Me.grpDisplay.Controls.Add(Me.rdoPercentOverallTotal)
         Me.grpDisplay.Controls.Add(Me.rdoCounts)
-        Me.grpDisplay.Location = New System.Drawing.Point(12, 163)
+        Me.grpDisplay.Location = New System.Drawing.Point(12, 183)
         Me.grpDisplay.Name = "grpDisplay"
         Me.grpDisplay.Size = New System.Drawing.Size(226, 117)
         Me.grpDisplay.TabIndex = 4
@@ -78,7 +78,7 @@ Partial Class dlgFreqTables
         Me.rdoPercentFactor.Size = New System.Drawing.Size(122, 17)
         Me.rdoPercentFactor.TabIndex = 2
         Me.rdoPercentFactor.TabStop = True
-        Me.rdoPercentFactor.Tag = "Percentage_of_Factor"
+        Me.rdoPercentFactor.Tag = "Percentage_of_factor"
         Me.rdoPercentFactor.Text = "Percentage of factor"
         Me.rdoPercentFactor.UseVisualStyleBackColor = True
         '
@@ -90,6 +90,7 @@ Partial Class dlgFreqTables
         Me.rdoPercentOverallTotal.Size = New System.Drawing.Size(154, 17)
         Me.rdoPercentOverallTotal.TabIndex = 1
         Me.rdoPercentOverallTotal.TabStop = True
+        Me.rdoPercentOverallTotal.Tag = "Percentages_of_overall_total"
         Me.rdoPercentOverallTotal.Text = "Percentages of overall total"
         Me.rdoPercentOverallTotal.UseVisualStyleBackColor = True
         '
@@ -108,7 +109,7 @@ Partial Class dlgFreqTables
         'chkWeights
         '
         Me.chkWeights.AutoSize = True
-        Me.chkWeights.Location = New System.Drawing.Point(305, 47)
+        Me.chkWeights.Location = New System.Drawing.Point(340, 47)
         Me.chkWeights.Name = "chkWeights"
         Me.chkWeights.Size = New System.Drawing.Size(65, 17)
         Me.chkWeights.TabIndex = 5
@@ -119,14 +120,14 @@ Partial Class dlgFreqTables
         'cboWeights
         '
         Me.cboWeights.FormattingEnabled = True
-        Me.cboWeights.Location = New System.Drawing.Point(384, 45)
+        Me.cboWeights.Location = New System.Drawing.Point(413, 45)
         Me.cboWeights.Name = "cboWeights"
         Me.cboWeights.Size = New System.Drawing.Size(83, 21)
         Me.cboWeights.TabIndex = 6
         '
         'grpDisplayMargins
         '
-        Me.grpDisplayMargins.Location = New System.Drawing.Point(244, 163)
+        Me.grpDisplayMargins.Location = New System.Drawing.Point(244, 187)
         Me.grpDisplayMargins.Name = "grpDisplayMargins"
         Me.grpDisplayMargins.Size = New System.Drawing.Size(200, 117)
         Me.grpDisplayMargins.TabIndex = 7
@@ -137,7 +138,7 @@ Partial Class dlgFreqTables
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(205, 30)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(212, 30)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
         Me.lblSelectedVariables.TabIndex = 8
@@ -146,21 +147,21 @@ Partial Class dlgFreqTables
         '
         'ucrReceiverMultiple
         '
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(208, 45)
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(205, 45)
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
-        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(91, 101)
+        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(127, 136)
         Me.ucrReceiverMultiple.TabIndex = 3
         '
         'ucrAddRemove
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(-2, 28)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(204, 118)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(204, 132)
         Me.ucrAddRemove.TabIndex = 1
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(34, 298)
+        Me.ucrBase.Location = New System.Drawing.Point(34, 307)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 0
@@ -169,7 +170,7 @@ Partial Class dlgFreqTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(479, 342)
+        Me.ClientSize = New System.Drawing.Size(510, 342)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.grpDisplayMargins)
         Me.Controls.Add(Me.cboWeights)
