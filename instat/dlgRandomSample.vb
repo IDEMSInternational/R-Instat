@@ -22,14 +22,141 @@ Public Class dlgRandomSample
         autoTranslate(Me)
         UcrReceiverSingle.Selector = UcrAddRemove
         UcrReceiverSingle.SetMeAsReceiver()
+        ucrBase.OKEnabled(False)
 
+        cboDistributionType.SelectedItem = "Normal"
+        cboSampleType.SelectedItem = "Probability Distribution"
+
+        txtMean.Visible = True
+        lblMean.Visible = True
+        txtStDev.Visible = True
+        lblStDev.Visible = True
+
+        lblEXMean.Visible = False
+        txtExMean.Visible = False
+
+        txtProp.Visible = False
+        lblProp.Visible = False
+
+        lblMode.Visible = False
+        txtMode.Visible = False
+        lblSacle.Visible = False
+        txtScale.Visible = False
+
+        lblWMean.Visible = False
+        txtWmean.Visible = False
+
+        txtShape.Visible = False
+        lblShape.Visible = False
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles lblParameters.Click
+    Private Sub cboDistributionType_TextChanged(sender As Object, e As EventArgs) Handles cboDistributionType.TextChanged
+        If cboDistributionType.Text = "Geometric" Then
+            txtProp.Visible = True
+            lblProp.Visible = True
 
-    End Sub
+            txtMean.Visible = False
+            lblMean.Visible = False
+            txtStDev.Visible = False
+            lblStDev.Visible = False
 
-    Private Sub lblDistributionType_Click(sender As Object, e As EventArgs) Handles lblDistributionType.Click
+            lblEXMean.Visible = False
+            txtExMean.Visible = False
 
+            lblMode.Visible = False
+            txtMode.Visible = False
+            lblSacle.Visible = False
+            txtScale.Visible = False
+
+        ElseIf cboDistributionType.Text = "Exponential" Then
+            txtProp.Visible = False
+            lblProp.Visible = False
+
+            txtMean.Visible = True
+            lblMean.Visible = True
+            txtStDev.Visible = False
+            lblStDev.Visible = False
+
+            lblEXMean.Visible = False
+            txtExMean.Visible = False
+
+            lblMode.Visible = False
+            txtMode.Visible = False
+            lblSacle.Visible = False
+            txtScale.Visible = False
+        ElseIf cboDistributionType.Text = "Normal" Then
+            txtMean.Visible = True
+            lblMean.Visible = True
+            txtStDev.Visible = True
+            lblStDev.Visible = True
+
+            lblEXMean.Visible = False
+            txtExMean.Visible = False
+
+            txtProp.Visible = False
+            lblProp.Visible = False
+
+            lblMode.Visible = False
+            txtMode.Visible = False
+            lblSacle.Visible = False
+            txtScale.Visible = False
+
+        ElseIf cboDistributionType.Text = "Extreme Value" Then
+            txtProp.Visible = False
+            lblProp.Visible = False
+
+            txtMean.Visible = False
+            lblMean.Visible = False
+            txtStDev.Visible = False
+            lblStDev.Visible = False
+
+            lblEXMean.Visible = False
+            txtExMean.Visible = False
+
+            lblMode.Visible = True
+            txtMode.Visible = True
+            lblSacle.Visible = True
+            txtScale.Visible = True
+
+        ElseIf cboDistributionType.Text = "Weibull" Then
+
+            lblWMean.Visible = True
+            txtWmean.Visible = True
+
+            txtShape.Visible = True
+            lblShape.Visible = True
+
+            txtProp.Visible = False
+            lblProp.Visible = False
+
+            txtMean.Visible = False
+            lblMean.Visible = False
+            txtStDev.Visible = False
+            lblStDev.Visible = False
+
+            lblEXMean.Visible = False
+            txtExMean.Visible = False
+
+            lblMode.Visible = False
+            txtMode.Visible = False
+            lblSacle.Visible = False
+            txtScale.Visible = False
+        Else
+            txtProp.Visible = False
+            lblProp.Visible = False
+
+            txtMean.Visible = False
+            lblMean.Visible = False
+            txtStDev.Visible = False
+            lblStDev.Visible = False
+
+            lblEXMean.Visible = False
+            txtExMean.Visible = False
+
+            lblMode.Visible = False
+            txtMode.Visible = False
+            lblSacle.Visible = False
+            txtScale.Visible = False
+        End If
     End Sub
 End Class

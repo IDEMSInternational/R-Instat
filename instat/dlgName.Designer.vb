@@ -91,6 +91,7 @@ Partial Class dlgName
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgName"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Names_for_the_data_column"
         Me.Text = "Names for data columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()

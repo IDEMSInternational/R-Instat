@@ -14,26 +14,19 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-
 Public Class dlgOneSample
-    Private Sub cboModels_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboModels.SelectedIndexChanged
-    End Sub
-
     Private Sub dlgOneSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrReceiverDataColumn.Selector = ucrAddRemove
+        ucrReceiverDataColumn.SetMeAsReceiver()
+
         txtValue.Visible = False
         lblValue.Visible = False
-
         ucrBase.clsRsyntax.SetFunction("t.test")
-        'ucrBase.clsRsyntax.SetFunction("prop.test")
+        cboModels.Text = "Normal"
+        cboParameters.Text = "Mean(t-interval)"
         ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.OKEnabled(False)
         autoTranslate(Me)
-        ucrReceiverSingle.Selector = ucrAddRemove
-        ucrReceiverSingle.SetMeAsReceiver()
-
-    End Sub
-
-    Private Sub cboParameters_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboParameters.SelectedIndexChanged
-
     End Sub
 
     Private Sub chkSignificanceTest_CheckedChanged(sender As Object, e As EventArgs) Handles chkSignificanceTest.CheckedChanged
@@ -46,7 +39,23 @@ Public Class dlgOneSample
         End If
     End Sub
 
-    Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingle.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverSingle.GetVariables())
+    Private Sub cboModels_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboModels.SelectedIndexChanged
+        If cboModels.SelectedItem = cboModels.Items(1).ToString() Then
+            ucrBase.clsRsyntax.SetFunction("prop.test")
+        Else
+            ucrBase.clsRsyntax.SetFunction("t.test")
+        End If
     End Sub
+
+    Private Sub ucrReceiverDataColumn_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiverDataColumn.ValueChanged
+        If Not (ucrReceiverDataColumn.txtReceiverSingle.Text = "") Then
+            ucrBase.clsRsyntax.AddParameter("x", ucrReceiverDataColumn.GetVariables())
+            ucrBase.clsRsyntax.AddParameter("n", frmEditor.gridColumns.CurrentWorksheet.RowCount)
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+
 End Class

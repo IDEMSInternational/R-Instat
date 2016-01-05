@@ -39,7 +39,7 @@ Public Class dlgInteractions
     Private Sub defaultSettings()
         txtSelectedFactors.Text = ""
         txtTobeSavedFactors.Text = ""
-        rdoCreateInteractionVariavle.Checked = True
+        rdoCreateInteractionVariable.Checked = True
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

@@ -23,32 +23,32 @@ Partial Class dlgCalculator
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.txtCalcLine = New System.Windows.Forms.TextBox()
-        Me.btn1 = New System.Windows.Forms.Button()
-        Me.btn0 = New System.Windows.Forms.Button()
-        Me.btn2 = New System.Windows.Forms.Button()
-        Me.btn3 = New System.Windows.Forms.Button()
-        Me.btn4 = New System.Windows.Forms.Button()
-        Me.btn5 = New System.Windows.Forms.Button()
-        Me.btn6 = New System.Windows.Forms.Button()
-        Me.btn7 = New System.Windows.Forms.Button()
-        Me.btn8 = New System.Windows.Forms.Button()
+        Me.cmd1 = New System.Windows.Forms.Button()
+        Me.cmd0 = New System.Windows.Forms.Button()
+        Me.cmd2 = New System.Windows.Forms.Button()
+        Me.cmd3 = New System.Windows.Forms.Button()
+        Me.cmd4 = New System.Windows.Forms.Button()
+        Me.cmd5 = New System.Windows.Forms.Button()
+        Me.cmd6 = New System.Windows.Forms.Button()
+        Me.cmd7 = New System.Windows.Forms.Button()
+        Me.cmd8 = New System.Windows.Forms.Button()
         Me.btn9 = New System.Windows.Forms.Button()
-        Me.btnDot = New System.Windows.Forms.Button()
-        Me.btnPi = New System.Windows.Forms.Button()
-        Me.btnDivide = New System.Windows.Forms.Button()
-        Me.btnPlus = New System.Windows.Forms.Button()
-        Me.btnMinus = New System.Windows.Forms.Button()
-        Me.btnMultiply = New System.Windows.Forms.Button()
-        Me.btnRowNumbers = New System.Windows.Forms.Button()
-        Me.btnPower = New System.Windows.Forms.Button()
-        Me.btnOpenBracket = New System.Windows.Forms.Button()
-        Me.btnCloseBracket = New System.Windows.Forms.Button()
+        Me.cmdDot = New System.Windows.Forms.Button()
+        Me.cmdPi = New System.Windows.Forms.Button()
+        Me.cmdDivide = New System.Windows.Forms.Button()
+        Me.cmdPlus = New System.Windows.Forms.Button()
+        Me.cmdMinus = New System.Windows.Forms.Button()
+        Me.cmdMultiply = New System.Windows.Forms.Button()
+        Me.cmdRowNumbers = New System.Windows.Forms.Button()
+        Me.cmdPower = New System.Windows.Forms.Button()
+        Me.cmdOpenBracket = New System.Windows.Forms.Button()
+        Me.cmdCloseBracket = New System.Windows.Forms.Button()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.txtNewColumnName = New System.Windows.Forms.TextBox()
-        Me.btnBackSpace = New System.Windows.Forms.Button()
-        Me.btnLog10 = New System.Windows.Forms.Button()
-        Me.btnSqrt = New System.Windows.Forms.Button()
-        Me.btnExp = New System.Windows.Forms.Button()
+        Me.cmdBackSpace = New System.Windows.Forms.Button()
+        Me.cmdLog10 = New System.Windows.Forms.Button()
+        Me.cmdSqrt = New System.Windows.Forms.Button()
+        Me.cmdExp = New System.Windows.Forms.Button()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
@@ -59,86 +59,86 @@ Partial Class dlgCalculator
         Me.txtCalcLine.Size = New System.Drawing.Size(404, 20)
         Me.txtCalcLine.TabIndex = 79
         '
-        'btn1
+        'cmd1
         '
-        Me.btn1.Location = New System.Drawing.Point(29, 150)
-        Me.btn1.Name = "btn1"
-        Me.btn1.Size = New System.Drawing.Size(40, 40)
-        Me.btn1.TabIndex = 80
-        Me.btn1.Text = "1"
-        Me.btn1.UseVisualStyleBackColor = True
+        Me.cmd1.Location = New System.Drawing.Point(29, 150)
+        Me.cmd1.Name = "cmd1"
+        Me.cmd1.Size = New System.Drawing.Size(40, 40)
+        Me.cmd1.TabIndex = 80
+        Me.cmd1.Text = "1"
+        Me.cmd1.UseVisualStyleBackColor = True
         '
-        'btn0
+        'cmd0
         '
-        Me.btn0.Location = New System.Drawing.Point(29, 196)
-        Me.btn0.Name = "btn0"
-        Me.btn0.Size = New System.Drawing.Size(40, 40)
-        Me.btn0.TabIndex = 81
-        Me.btn0.Text = "0"
-        Me.btn0.UseVisualStyleBackColor = True
+        Me.cmd0.Location = New System.Drawing.Point(29, 196)
+        Me.cmd0.Name = "cmd0"
+        Me.cmd0.Size = New System.Drawing.Size(40, 40)
+        Me.cmd0.TabIndex = 81
+        Me.cmd0.Text = "0"
+        Me.cmd0.UseVisualStyleBackColor = True
         '
-        'btn2
+        'cmd2
         '
-        Me.btn2.Location = New System.Drawing.Point(75, 150)
-        Me.btn2.Name = "btn2"
-        Me.btn2.Size = New System.Drawing.Size(40, 40)
-        Me.btn2.TabIndex = 82
-        Me.btn2.Text = "2"
-        Me.btn2.UseVisualStyleBackColor = True
+        Me.cmd2.Location = New System.Drawing.Point(75, 150)
+        Me.cmd2.Name = "cmd2"
+        Me.cmd2.Size = New System.Drawing.Size(40, 40)
+        Me.cmd2.TabIndex = 82
+        Me.cmd2.Text = "2"
+        Me.cmd2.UseVisualStyleBackColor = True
         '
-        'btn3
+        'cmd3
         '
-        Me.btn3.Location = New System.Drawing.Point(121, 150)
-        Me.btn3.Name = "btn3"
-        Me.btn3.Size = New System.Drawing.Size(40, 40)
-        Me.btn3.TabIndex = 83
-        Me.btn3.Text = "3"
-        Me.btn3.UseVisualStyleBackColor = True
+        Me.cmd3.Location = New System.Drawing.Point(121, 150)
+        Me.cmd3.Name = "cmd3"
+        Me.cmd3.Size = New System.Drawing.Size(40, 40)
+        Me.cmd3.TabIndex = 83
+        Me.cmd3.Text = "3"
+        Me.cmd3.UseVisualStyleBackColor = True
         '
-        'btn4
+        'cmd4
         '
-        Me.btn4.Location = New System.Drawing.Point(29, 104)
-        Me.btn4.Name = "btn4"
-        Me.btn4.Size = New System.Drawing.Size(40, 40)
-        Me.btn4.TabIndex = 84
-        Me.btn4.Text = "4"
-        Me.btn4.UseVisualStyleBackColor = True
+        Me.cmd4.Location = New System.Drawing.Point(29, 104)
+        Me.cmd4.Name = "cmd4"
+        Me.cmd4.Size = New System.Drawing.Size(40, 40)
+        Me.cmd4.TabIndex = 84
+        Me.cmd4.Text = "4"
+        Me.cmd4.UseVisualStyleBackColor = True
         '
-        'btn5
+        'cmd5
         '
-        Me.btn5.Location = New System.Drawing.Point(75, 104)
-        Me.btn5.Name = "btn5"
-        Me.btn5.Size = New System.Drawing.Size(40, 40)
-        Me.btn5.TabIndex = 85
-        Me.btn5.Text = "5"
-        Me.btn5.UseVisualStyleBackColor = True
+        Me.cmd5.Location = New System.Drawing.Point(75, 104)
+        Me.cmd5.Name = "cmd5"
+        Me.cmd5.Size = New System.Drawing.Size(40, 40)
+        Me.cmd5.TabIndex = 85
+        Me.cmd5.Text = "5"
+        Me.cmd5.UseVisualStyleBackColor = True
         '
-        'btn6
+        'cmd6
         '
-        Me.btn6.Location = New System.Drawing.Point(121, 104)
-        Me.btn6.Name = "btn6"
-        Me.btn6.Size = New System.Drawing.Size(40, 40)
-        Me.btn6.TabIndex = 86
-        Me.btn6.Text = "6"
-        Me.btn6.UseVisualStyleBackColor = True
+        Me.cmd6.Location = New System.Drawing.Point(121, 104)
+        Me.cmd6.Name = "cmd6"
+        Me.cmd6.Size = New System.Drawing.Size(40, 40)
+        Me.cmd6.TabIndex = 86
+        Me.cmd6.Text = "6"
+        Me.cmd6.UseVisualStyleBackColor = True
         '
-        'btn7
+        'cmd7
         '
-        Me.btn7.Location = New System.Drawing.Point(29, 58)
-        Me.btn7.Name = "btn7"
-        Me.btn7.Size = New System.Drawing.Size(40, 40)
-        Me.btn7.TabIndex = 87
-        Me.btn7.Text = "7"
-        Me.btn7.UseVisualStyleBackColor = True
+        Me.cmd7.Location = New System.Drawing.Point(29, 58)
+        Me.cmd7.Name = "cmd7"
+        Me.cmd7.Size = New System.Drawing.Size(40, 40)
+        Me.cmd7.TabIndex = 87
+        Me.cmd7.Text = "7"
+        Me.cmd7.UseVisualStyleBackColor = True
         '
-        'btn8
+        'cmd8
         '
-        Me.btn8.Location = New System.Drawing.Point(75, 58)
-        Me.btn8.Name = "btn8"
-        Me.btn8.Size = New System.Drawing.Size(40, 40)
-        Me.btn8.TabIndex = 88
-        Me.btn8.Text = "8"
-        Me.btn8.UseVisualStyleBackColor = True
+        Me.cmd8.Location = New System.Drawing.Point(75, 58)
+        Me.cmd8.Name = "cmd8"
+        Me.cmd8.Size = New System.Drawing.Size(40, 40)
+        Me.cmd8.TabIndex = 88
+        Me.cmd8.Text = "8"
+        Me.cmd8.UseVisualStyleBackColor = True
         '
         'btn9
         '
@@ -149,95 +149,95 @@ Partial Class dlgCalculator
         Me.btn9.Text = "9"
         Me.btn9.UseVisualStyleBackColor = True
         '
-        'btnDot
+        'cmdDot
         '
-        Me.btnDot.Location = New System.Drawing.Point(75, 196)
-        Me.btnDot.Name = "btnDot"
-        Me.btnDot.Size = New System.Drawing.Size(40, 40)
-        Me.btnDot.TabIndex = 90
-        Me.btnDot.Text = "."
-        Me.btnDot.UseVisualStyleBackColor = True
+        Me.cmdDot.Location = New System.Drawing.Point(75, 196)
+        Me.cmdDot.Name = "cmdDot"
+        Me.cmdDot.Size = New System.Drawing.Size(40, 40)
+        Me.cmdDot.TabIndex = 90
+        Me.cmdDot.Text = "."
+        Me.cmdDot.UseVisualStyleBackColor = True
         '
-        'btnPi
+        'cmdPi
         '
-        Me.btnPi.Location = New System.Drawing.Point(121, 196)
-        Me.btnPi.Name = "btnPi"
-        Me.btnPi.Size = New System.Drawing.Size(40, 40)
-        Me.btnPi.TabIndex = 91
-        Me.btnPi.Text = "Pi"
-        Me.btnPi.UseVisualStyleBackColor = True
+        Me.cmdPi.Location = New System.Drawing.Point(121, 196)
+        Me.cmdPi.Name = "cmdPi"
+        Me.cmdPi.Size = New System.Drawing.Size(40, 40)
+        Me.cmdPi.TabIndex = 91
+        Me.cmdPi.Text = "Pi"
+        Me.cmdPi.UseVisualStyleBackColor = True
         '
-        'btnDivide
+        'cmdDivide
         '
-        Me.btnDivide.Location = New System.Drawing.Point(167, 196)
-        Me.btnDivide.Name = "btnDivide"
-        Me.btnDivide.Size = New System.Drawing.Size(40, 40)
-        Me.btnDivide.TabIndex = 95
-        Me.btnDivide.Text = "/"
-        Me.btnDivide.UseVisualStyleBackColor = True
+        Me.cmdDivide.Location = New System.Drawing.Point(167, 196)
+        Me.cmdDivide.Name = "cmdDivide"
+        Me.cmdDivide.Size = New System.Drawing.Size(40, 40)
+        Me.cmdDivide.TabIndex = 95
+        Me.cmdDivide.Text = "/"
+        Me.cmdDivide.UseVisualStyleBackColor = True
         '
-        'btnPlus
+        'cmdPlus
         '
-        Me.btnPlus.Location = New System.Drawing.Point(167, 58)
-        Me.btnPlus.Name = "btnPlus"
-        Me.btnPlus.Size = New System.Drawing.Size(40, 40)
-        Me.btnPlus.TabIndex = 94
-        Me.btnPlus.Text = "+"
-        Me.btnPlus.UseVisualStyleBackColor = True
+        Me.cmdPlus.Location = New System.Drawing.Point(167, 58)
+        Me.cmdPlus.Name = "cmdPlus"
+        Me.cmdPlus.Size = New System.Drawing.Size(40, 40)
+        Me.cmdPlus.TabIndex = 94
+        Me.cmdPlus.Text = "+"
+        Me.cmdPlus.UseVisualStyleBackColor = True
         '
-        'btnMinus
+        'cmdMinus
         '
-        Me.btnMinus.Location = New System.Drawing.Point(167, 104)
-        Me.btnMinus.Name = "btnMinus"
-        Me.btnMinus.Size = New System.Drawing.Size(40, 40)
-        Me.btnMinus.TabIndex = 93
-        Me.btnMinus.Text = "-"
-        Me.btnMinus.UseVisualStyleBackColor = True
+        Me.cmdMinus.Location = New System.Drawing.Point(167, 104)
+        Me.cmdMinus.Name = "cmdMinus"
+        Me.cmdMinus.Size = New System.Drawing.Size(40, 40)
+        Me.cmdMinus.TabIndex = 93
+        Me.cmdMinus.Text = "-"
+        Me.cmdMinus.UseVisualStyleBackColor = True
         '
-        'btnMultiply
+        'cmdMultiply
         '
-        Me.btnMultiply.Location = New System.Drawing.Point(167, 150)
-        Me.btnMultiply.Name = "btnMultiply"
-        Me.btnMultiply.Size = New System.Drawing.Size(40, 40)
-        Me.btnMultiply.TabIndex = 92
-        Me.btnMultiply.Text = "*"
-        Me.btnMultiply.UseVisualStyleBackColor = True
+        Me.cmdMultiply.Location = New System.Drawing.Point(167, 150)
+        Me.cmdMultiply.Name = "cmdMultiply"
+        Me.cmdMultiply.Size = New System.Drawing.Size(40, 40)
+        Me.cmdMultiply.TabIndex = 92
+        Me.cmdMultiply.Text = "*"
+        Me.cmdMultiply.UseVisualStyleBackColor = True
         '
-        'btnRowNumbers
+        'cmdRowNumbers
         '
-        Me.btnRowNumbers.Location = New System.Drawing.Point(213, 196)
-        Me.btnRowNumbers.Name = "btnRowNumbers"
-        Me.btnRowNumbers.Size = New System.Drawing.Size(40, 40)
-        Me.btnRowNumbers.TabIndex = 99
-        Me.btnRowNumbers.Text = "Row Num"
-        Me.btnRowNumbers.UseVisualStyleBackColor = True
+        Me.cmdRowNumbers.Location = New System.Drawing.Point(213, 196)
+        Me.cmdRowNumbers.Name = "cmdRowNumbers"
+        Me.cmdRowNumbers.Size = New System.Drawing.Size(40, 40)
+        Me.cmdRowNumbers.TabIndex = 99
+        Me.cmdRowNumbers.Text = "Row Num"
+        Me.cmdRowNumbers.UseVisualStyleBackColor = True
         '
-        'btnPower
+        'cmdPower
         '
-        Me.btnPower.Location = New System.Drawing.Point(213, 58)
-        Me.btnPower.Name = "btnPower"
-        Me.btnPower.Size = New System.Drawing.Size(40, 40)
-        Me.btnPower.TabIndex = 98
-        Me.btnPower.Text = "^"
-        Me.btnPower.UseVisualStyleBackColor = True
+        Me.cmdPower.Location = New System.Drawing.Point(213, 58)
+        Me.cmdPower.Name = "cmdPower"
+        Me.cmdPower.Size = New System.Drawing.Size(40, 40)
+        Me.cmdPower.TabIndex = 98
+        Me.cmdPower.Text = "^"
+        Me.cmdPower.UseVisualStyleBackColor = True
         '
-        'btnOpenBracket
+        'cmdOpenBracket
         '
-        Me.btnOpenBracket.Location = New System.Drawing.Point(213, 104)
-        Me.btnOpenBracket.Name = "btnOpenBracket"
-        Me.btnOpenBracket.Size = New System.Drawing.Size(40, 40)
-        Me.btnOpenBracket.TabIndex = 97
-        Me.btnOpenBracket.Text = "("
-        Me.btnOpenBracket.UseVisualStyleBackColor = True
+        Me.cmdOpenBracket.Location = New System.Drawing.Point(213, 104)
+        Me.cmdOpenBracket.Name = "cmdOpenBracket"
+        Me.cmdOpenBracket.Size = New System.Drawing.Size(40, 40)
+        Me.cmdOpenBracket.TabIndex = 97
+        Me.cmdOpenBracket.Text = "("
+        Me.cmdOpenBracket.UseVisualStyleBackColor = True
         '
-        'btnCloseBracket
+        'cmdCloseBracket
         '
-        Me.btnCloseBracket.Location = New System.Drawing.Point(213, 150)
-        Me.btnCloseBracket.Name = "btnCloseBracket"
-        Me.btnCloseBracket.Size = New System.Drawing.Size(40, 40)
-        Me.btnCloseBracket.TabIndex = 96
-        Me.btnCloseBracket.Text = ")"
-        Me.btnCloseBracket.UseVisualStyleBackColor = True
+        Me.cmdCloseBracket.Location = New System.Drawing.Point(213, 150)
+        Me.cmdCloseBracket.Name = "cmdCloseBracket"
+        Me.cmdCloseBracket.Size = New System.Drawing.Size(40, 40)
+        Me.cmdCloseBracket.TabIndex = 96
+        Me.cmdCloseBracket.Text = ")"
+        Me.cmdCloseBracket.UseVisualStyleBackColor = True
         '
         'lblNewColumnName
         '
@@ -246,7 +246,7 @@ Partial Class dlgCalculator
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColumnName.TabIndex = 100
-        Me.lblNewColumnName.Tag = "Available _Variables "
+        Me.lblNewColumnName.Tag = "New_Column_Name"
         Me.lblNewColumnName.Text = "New Column Name:"
         '
         'txtNewColumnName
@@ -256,41 +256,41 @@ Partial Class dlgCalculator
         Me.txtNewColumnName.Size = New System.Drawing.Size(120, 20)
         Me.txtNewColumnName.TabIndex = 101
         '
-        'btnBackSpace
+        'cmdBackSpace
         '
-        Me.btnBackSpace.Location = New System.Drawing.Point(259, 58)
-        Me.btnBackSpace.Name = "btnBackSpace"
-        Me.btnBackSpace.Size = New System.Drawing.Size(61, 40)
-        Me.btnBackSpace.TabIndex = 102
-        Me.btnBackSpace.Text = "<"
-        Me.btnBackSpace.UseVisualStyleBackColor = True
+        Me.cmdBackSpace.Location = New System.Drawing.Point(259, 58)
+        Me.cmdBackSpace.Name = "cmdBackSpace"
+        Me.cmdBackSpace.Size = New System.Drawing.Size(61, 40)
+        Me.cmdBackSpace.TabIndex = 102
+        Me.cmdBackSpace.Text = "<"
+        Me.cmdBackSpace.UseVisualStyleBackColor = True
         '
-        'btnLog10
+        'cmdLog10
         '
-        Me.btnLog10.Location = New System.Drawing.Point(259, 196)
-        Me.btnLog10.Name = "btnLog10"
-        Me.btnLog10.Size = New System.Drawing.Size(61, 40)
-        Me.btnLog10.TabIndex = 105
-        Me.btnLog10.Text = "log10"
-        Me.btnLog10.UseVisualStyleBackColor = True
+        Me.cmdLog10.Location = New System.Drawing.Point(259, 196)
+        Me.cmdLog10.Name = "cmdLog10"
+        Me.cmdLog10.Size = New System.Drawing.Size(61, 40)
+        Me.cmdLog10.TabIndex = 105
+        Me.cmdLog10.Text = "log10"
+        Me.cmdLog10.UseVisualStyleBackColor = True
         '
-        'btnSqrt
+        'cmdSqrt
         '
-        Me.btnSqrt.Location = New System.Drawing.Point(259, 104)
-        Me.btnSqrt.Name = "btnSqrt"
-        Me.btnSqrt.Size = New System.Drawing.Size(61, 40)
-        Me.btnSqrt.TabIndex = 104
-        Me.btnSqrt.Text = "sqrt"
-        Me.btnSqrt.UseVisualStyleBackColor = True
+        Me.cmdSqrt.Location = New System.Drawing.Point(259, 104)
+        Me.cmdSqrt.Name = "cmdSqrt"
+        Me.cmdSqrt.Size = New System.Drawing.Size(61, 40)
+        Me.cmdSqrt.TabIndex = 104
+        Me.cmdSqrt.Text = "sqrt"
+        Me.cmdSqrt.UseVisualStyleBackColor = True
         '
-        'btnExp
+        'cmdExp
         '
-        Me.btnExp.Location = New System.Drawing.Point(259, 150)
-        Me.btnExp.Name = "btnExp"
-        Me.btnExp.Size = New System.Drawing.Size(61, 40)
-        Me.btnExp.TabIndex = 103
-        Me.btnExp.Text = "exp"
-        Me.btnExp.UseVisualStyleBackColor = True
+        Me.cmdExp.Location = New System.Drawing.Point(259, 150)
+        Me.cmdExp.Name = "cmdExp"
+        Me.cmdExp.Size = New System.Drawing.Size(61, 40)
+        Me.cmdExp.TabIndex = 103
+        Me.cmdExp.Text = "exp"
+        Me.cmdExp.UseVisualStyleBackColor = True
         '
         'ucrBase
         '
@@ -304,38 +304,39 @@ Partial Class dlgCalculator
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(449, 320)
-        Me.Controls.Add(Me.btnLog10)
-        Me.Controls.Add(Me.btnSqrt)
-        Me.Controls.Add(Me.btnExp)
-        Me.Controls.Add(Me.btnBackSpace)
+        Me.Controls.Add(Me.cmdLog10)
+        Me.Controls.Add(Me.cmdSqrt)
+        Me.Controls.Add(Me.cmdExp)
+        Me.Controls.Add(Me.cmdBackSpace)
         Me.Controls.Add(Me.txtNewColumnName)
         Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.btnRowNumbers)
-        Me.Controls.Add(Me.btnPower)
-        Me.Controls.Add(Me.btnOpenBracket)
-        Me.Controls.Add(Me.btnCloseBracket)
-        Me.Controls.Add(Me.btnDivide)
-        Me.Controls.Add(Me.btnPlus)
-        Me.Controls.Add(Me.btnMinus)
-        Me.Controls.Add(Me.btnMultiply)
-        Me.Controls.Add(Me.btnPi)
-        Me.Controls.Add(Me.btnDot)
+        Me.Controls.Add(Me.cmdRowNumbers)
+        Me.Controls.Add(Me.cmdPower)
+        Me.Controls.Add(Me.cmdOpenBracket)
+        Me.Controls.Add(Me.cmdCloseBracket)
+        Me.Controls.Add(Me.cmdDivide)
+        Me.Controls.Add(Me.cmdPlus)
+        Me.Controls.Add(Me.cmdMinus)
+        Me.Controls.Add(Me.cmdMultiply)
+        Me.Controls.Add(Me.cmdPi)
+        Me.Controls.Add(Me.cmdDot)
         Me.Controls.Add(Me.btn9)
-        Me.Controls.Add(Me.btn8)
-        Me.Controls.Add(Me.btn7)
-        Me.Controls.Add(Me.btn6)
-        Me.Controls.Add(Me.btn5)
-        Me.Controls.Add(Me.btn4)
-        Me.Controls.Add(Me.btn3)
-        Me.Controls.Add(Me.btn2)
-        Me.Controls.Add(Me.btn0)
-        Me.Controls.Add(Me.btn1)
+        Me.Controls.Add(Me.cmd8)
+        Me.Controls.Add(Me.cmd7)
+        Me.Controls.Add(Me.cmd6)
+        Me.Controls.Add(Me.cmd5)
+        Me.Controls.Add(Me.cmd4)
+        Me.Controls.Add(Me.cmd3)
+        Me.Controls.Add(Me.cmd2)
+        Me.Controls.Add(Me.cmd0)
+        Me.Controls.Add(Me.cmd1)
         Me.Controls.Add(Me.txtCalcLine)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgCalculator"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Calculator"
         Me.Text = "Calculator"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -344,30 +345,30 @@ Partial Class dlgCalculator
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents txtCalcLine As TextBox
-    Friend WithEvents btn1 As Button
-    Friend WithEvents btn0 As Button
-    Friend WithEvents btn2 As Button
-    Friend WithEvents btn3 As Button
-    Friend WithEvents btn4 As Button
-    Friend WithEvents btn5 As Button
-    Friend WithEvents btn6 As Button
-    Friend WithEvents btn7 As Button
-    Friend WithEvents btn8 As Button
+    Friend WithEvents cmd1 As Button
+    Friend WithEvents cmd0 As Button
+    Friend WithEvents cmd2 As Button
+    Friend WithEvents cmd3 As Button
+    Friend WithEvents cmd4 As Button
+    Friend WithEvents cmd5 As Button
+    Friend WithEvents cmd6 As Button
+    Friend WithEvents cmd7 As Button
+    Friend WithEvents cmd8 As Button
     Friend WithEvents btn9 As Button
-    Friend WithEvents btnDot As Button
-    Friend WithEvents btnPi As Button
-    Friend WithEvents btnDivide As Button
-    Friend WithEvents btnPlus As Button
-    Friend WithEvents btnMinus As Button
-    Friend WithEvents btnMultiply As Button
-    Friend WithEvents btnRowNumbers As Button
-    Friend WithEvents btnPower As Button
-    Friend WithEvents btnOpenBracket As Button
-    Friend WithEvents btnCloseBracket As Button
+    Friend WithEvents cmdDot As Button
+    Friend WithEvents cmdPi As Button
+    Friend WithEvents cmdDivide As Button
+    Friend WithEvents cmdPlus As Button
+    Friend WithEvents cmdMinus As Button
+    Friend WithEvents cmdMultiply As Button
+    Friend WithEvents cmdRowNumbers As Button
+    Friend WithEvents cmdPower As Button
+    Friend WithEvents cmdOpenBracket As Button
+    Friend WithEvents cmdCloseBracket As Button
     Friend WithEvents lblNewColumnName As Label
     Friend WithEvents txtNewColumnName As TextBox
-    Friend WithEvents btnBackSpace As Button
-    Friend WithEvents btnLog10 As Button
-    Friend WithEvents btnSqrt As Button
-    Friend WithEvents btnExp As Button
+    Friend WithEvents cmdBackSpace As Button
+    Friend WithEvents cmdLog10 As Button
+    Friend WithEvents cmdSqrt As Button
+    Friend WithEvents cmdExp As Button
 End Class

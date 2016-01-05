@@ -58,7 +58,7 @@ Partial Class dlgAlignment
         Me.lblColumnWidth.Name = "lblColumnWidth"
         Me.lblColumnWidth.Size = New System.Drawing.Size(70, 13)
         Me.lblColumnWidth.TabIndex = 4
-        Me.lblColumnWidth.Tag = "Column_Width"
+        Me.lblColumnWidth.Tag = "Column_width"
         Me.lblColumnWidth.Text = "Column width"
         '
         'txtColumnWidth
@@ -91,6 +91,7 @@ Partial Class dlgAlignment
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
         Me.ucrAddRemove.TabIndex = 2
+        Me.ucrAddRemove.Tag = "Format_current_or_selected_columns"
         '
         'ucrBase
         '
@@ -116,6 +117,7 @@ Partial Class dlgAlignment
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgAlignment"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Format_current_or_selected_columns"
         Me.Text = "Format current or selected columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()

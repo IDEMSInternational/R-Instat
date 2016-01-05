@@ -32,7 +32,7 @@ Partial Class dlgDuplicateColumns
         Me.lstPasteInto = New System.Windows.Forms.ListBox()
         Me.chkTranspose = New System.Windows.Forms.CheckBox()
         Me.txtWorksheetName = New System.Windows.Forms.TextBox()
-        Me.btnBrowse = New System.Windows.Forms.Button()
+        Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.grpWorksheetName = New System.Windows.Forms.GroupBox()
         Me.ucrAddremove = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -95,11 +95,11 @@ Partial Class dlgDuplicateColumns
         Me.rdoLabelL.AutoSize = True
         Me.rdoLabelL.Location = New System.Drawing.Point(262, 19)
         Me.rdoLabelL.Name = "rdoLabelL"
-        Me.rdoLabelL.Size = New System.Drawing.Size(61, 17)
+        Me.rdoLabelL.Size = New System.Drawing.Size(64, 17)
         Me.rdoLabelL.TabIndex = 2
         Me.rdoLabelL.TabStop = True
-        Me.rdoLabelL.Tag = "Label_L"
-        Me.rdoLabelL.Text = "Type (L"
+        Me.rdoLabelL.Tag = "Label_L_"
+        Me.rdoLabelL.Text = "Type (L)"
         Me.rdoLabelL.UseVisualStyleBackColor = True
         '
         'rdoColumnsX
@@ -152,27 +152,27 @@ Partial Class dlgDuplicateColumns
         Me.txtWorksheetName.Size = New System.Drawing.Size(207, 20)
         Me.txtWorksheetName.TabIndex = 8
         '
-        'btnBrowse
+        'cmdBrowse
         '
-        Me.btnBrowse.Location = New System.Drawing.Point(318, 16)
-        Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(75, 23)
-        Me.btnBrowse.TabIndex = 9
-        Me.btnBrowse.Tag = "Browse"
-        Me.btnBrowse.Text = "Browse"
-        Me.btnBrowse.UseVisualStyleBackColor = True
+        Me.cmdBrowse.Location = New System.Drawing.Point(318, 16)
+        Me.cmdBrowse.Name = "cmdBrowse"
+        Me.cmdBrowse.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBrowse.TabIndex = 9
+        Me.cmdBrowse.Tag = "Browse"
+        Me.cmdBrowse.Text = "Browse"
+        Me.cmdBrowse.UseVisualStyleBackColor = True
         '
         'grpWorksheetName
         '
         Me.grpWorksheetName.Controls.Add(Me.txtWorksheetName)
-        Me.grpWorksheetName.Controls.Add(Me.btnBrowse)
+        Me.grpWorksheetName.Controls.Add(Me.cmdBrowse)
         Me.grpWorksheetName.Enabled = False
         Me.grpWorksheetName.Location = New System.Drawing.Point(6, 267)
         Me.grpWorksheetName.Name = "grpWorksheetName"
         Me.grpWorksheetName.Size = New System.Drawing.Size(399, 46)
         Me.grpWorksheetName.TabIndex = 18
         Me.grpWorksheetName.TabStop = False
-        Me.grpWorksheetName.Tag = "Worksheet_Name"
+        Me.grpWorksheetName.Tag = "Worksheet_name"
         Me.grpWorksheetName.Text = "Worksheet name"
         '
         'ucrAddremove
@@ -230,7 +230,7 @@ Partial Class dlgDuplicateColumns
     Friend WithEvents lstPasteInto As ListBox
     Friend WithEvents chkTranspose As CheckBox
     Friend WithEvents txtWorksheetName As TextBox
-    Friend WithEvents btnBrowse As Button
+    Friend WithEvents cmdBrowse As Button
     Friend WithEvents grpWorksheetName As GroupBox
     Friend WithEvents ucrAddremove As ucrSelectorAddRemove
     Friend WithEvents ucrBase As ucrButtons
