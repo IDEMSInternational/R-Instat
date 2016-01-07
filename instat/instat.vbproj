@@ -219,10 +219,10 @@
     <Compile Include="dlgColumnStats.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgCorrelations.designer.vb">
-      <DependentUpon>dlgCorrelations.vb</DependentUpon>
+    <Compile Include="dlgCorrelation.designer.vb">
+      <DependentUpon>dlgCorrelation.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgCorrelations.vb">
+    <Compile Include="dlgCorrelation.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCountsTotals.Designer.vb">
@@ -1022,6 +1022,12 @@
     <EmbeddedResource Include="dlgBivariateANOVA.sw-KE.resx">
       <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxPlot.fr-FR.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxPlot.sw-KE.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxplotCountVariable.fr-FR.resx">
       <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
     </EmbeddedResource>
@@ -1094,14 +1100,14 @@
     <EmbeddedResource Include="dlgCliPlot.sw-KE.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCorrelations.fr-FR.resx">
-      <DependentUpon>dlgCorrelations.vb</DependentUpon>
+    <EmbeddedResource Include="dlgCorrelation.fr-FR.resx">
+      <DependentUpon>dlgCorrelation.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCorrelations.resx">
-      <DependentUpon>dlgCorrelations.vb</DependentUpon>
+    <EmbeddedResource Include="dlgCorrelation.resx">
+      <DependentUpon>dlgCorrelation.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCorrelations.sw-KE.resx">
-      <DependentUpon>dlgCorrelations.vb</DependentUpon>
+    <EmbeddedResource Include="dlgCorrelation.sw-KE.resx">
+      <DependentUpon>dlgCorrelation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCountsTotals.fr-FR.resx">
       <DependentUpon>dlgCountsTotals.vb</DependentUpon>

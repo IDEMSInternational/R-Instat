@@ -531,7 +531,7 @@ Public Class frmMain
     End Sub
 
     Private Sub CorrelationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationToolStripMenuItem.Click
-        dlgCorrelations.ShowDialog()
+        dlgCorrelation.ShowDialog()
     End Sub
 
     Private Sub LogLinearModelsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogLinearModelsToolStripMenuItem.Click
@@ -547,7 +547,7 @@ Public Class frmMain
     End Sub
 
     Private Sub CorrelationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationsToolStripMenuItem.Click
-        dlgCorrelations.ShowDialog()
+        dlgCorrelation.ShowDialog()
     End Sub
 
     Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles NewWorksheetToolStripMenuItem1.Click
