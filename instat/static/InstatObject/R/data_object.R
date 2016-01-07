@@ -24,7 +24,7 @@ data_obj$methods(initialize = function(data = data.frame(), data_name = "",
   .self$set_changes(list())
   .self$set_data(data, messages)
   .self$set_variable_metadata(variable_metadata)
-  .self$update_variable_metadata(data, messages)
+  .self$update_variable_metadata()
   .self$set_meta(meta_data)
 
   # If no name for the data.frame has been given in the list we create a default one.
@@ -88,13 +88,20 @@ data_obj$methods(set_changes = function(new_changes) {
 }
 )
 
-data_obj$methods(update_variable_metadata = function(new_data, messages=TRUE) {
-  if( is.data.frame(new_data) ) {
-    if (nrow(variable_metadata)==0){
-      variable_metadata <<- data.frame(Name=colnames(new_data), DisplayDecimal=sapply(new_data, function(x) if(is.numeric(x)) if(min(x, na.rm = T)>100) 0 else 2 else NA))
-    } 
-    .self$append_to_changes(list(Set_property, "variable_metadata"))
+data_obj$methods(update_variable_metadata = function() {
+  
+  if(length(colnames(data)) !=  length(rownames(variable_metadata)) || !all(colnames(data)==rownames(variable_metadata))) {
+    if(all(colnames(data) %in% rownames(variable_metadata))) {
+      variable_metadata <<- variable_metadata[colnames(data),]
+    }
+    else {
+      for(col in colnames(data)[!colnames(data) %in% rownames(variable_metadata)]) {
+        variable_metadata[col, name_label] <<- col
+        variable_metadata[col, display_decimal_label] <<- if(is.numeric(data[[col]])) if(min(data[[col]], na.rm = T)>100) 0 else if(min(data[[col]], na.rm = T)>10) 1 else 2 else NA
+      }
+    }
   }
+  .self$append_to_changes(list(Set_property, "variable_metadata"))
 }
 )
 
@@ -103,8 +110,14 @@ data_obj$methods(get_data = function() {
 }
 )
 
-data_obj$methods(get_variable_metadata = function() {
-  return(variable_metadata)
+data_obj$methods(get_variable_metadata = function(include_all = TRUE) {
+  .self$update_variable_metadata()
+  if(!include_all) return(variable_metadata)
+  else {
+    out = variable_metadata
+    out[[data_type_label]] = sapply(data, class)
+    return(out)
+  }
 }
 )
 
@@ -112,6 +125,7 @@ data_obj$methods(get_meta_data = function() {
   return((meta_data))
 }
 )
+
 
 data_obj$methods(append_column_to_data = function(column_data, col_name = "", replace = FALSE) {
   
@@ -309,3 +323,9 @@ data_name_label="data_name"
 is_calculated_label="is_calculated"
 decimal_places_label="decimal_places"
 columns_label="columns"
+
+#variable_metadata labels
+display_decimal_label="DisplayDecimal"
+name_label="Name"
+is_factor_label="IsFactor"
+data_type_label="DataType"
