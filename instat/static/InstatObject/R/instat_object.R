@@ -78,7 +78,6 @@ instat_obj$methods(import_data = function(data_tables = list(), data_tables_vari
     new_data_objects = list()
     
     for ( i in (1:length(data_tables)) ) {
-      
       new_data = data_obj$new(data=data_tables[[i]], data_name = names(data_tables)[[i]],
                               variable_metadata = data_tables_variable_metadata[[i]],
                               meta_data = data_tables_meta_data[[i]], 
