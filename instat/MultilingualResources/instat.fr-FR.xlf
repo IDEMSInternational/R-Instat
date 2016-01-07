@@ -315,7 +315,7 @@
           <target state="needs-review-translation">25</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
-        <trans-unit id="$this.Icon" translate="yes" xml:space="preserve" extype="System.Drawing.Icon, System.Drawing">
+        <trans-unit id="$this.Icon" translate="yes" xml:space="preserve" extype="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
           <source>
         AAABAAQAEBAQAAEABAAoAQAARgAAACAgEAABAAQA6AIAAG4BAAAgIAAAAQAIAKgIAABWBAAAMDAAAAEA
         CACoDgAA/gwAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAACA
@@ -2226,14 +2226,6 @@
       </group>
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGCORRELATIONS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/DLGCORRELATIONS.RESX" datatype="resx" />
-    </body>
-  </file>
   <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGONESAMPLE.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
@@ -2704,6 +2696,14 @@
     </header>
     <body>
       <group id="INSTAT/DLGRANDOMSAMPLE.RESX" datatype="resx" />
+    </body>
+  </file>
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="INSTAT/DLGCORRELATION.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="INSTAT/DLGCORRELATION.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>
