@@ -939,6 +939,12 @@
     <Compile Include="ucrButtonsSubdialogue.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrDataFrame.Designer.vb">
+      <DependentUpon>ucrDataFrame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDataFrame.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrDataSelection.designer.vb">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
     </Compile>
@@ -2106,6 +2112,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtonsSubdialogue.sw-KE.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrame.fr-FR.resx">
+      <DependentUpon>ucrDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrame.resx">
+      <DependentUpon>ucrDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrame.sw-KE.resx">
+      <DependentUpon>ucrDataFrame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.fr-FR.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
