@@ -12,7 +12,7 @@ Public Class ucrReceiver
     End Sub
 
     Public Overridable Function GetVariables() As String
-
+        Return ""
     End Function
 
     Public Sub SetMeAsReceiver()
