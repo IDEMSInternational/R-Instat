@@ -110,6 +110,20 @@ Public Class RInterface
         End If
     End Sub
 
+    Public Sub FillComboDataFrames(cboDataFrames As ComboBox)
+        Dim lstAvailableDataFrames As GenericVector
+        Dim i As Integer
+
+        If bInstatObjectExists Then
+            lstAvailableDataFrames = clsEngine.Evaluate(strInstatDataObject & "$get_data_names()").AsList
+            cboDataFrames.Items.Clear()
+            For i = 0 To lstAvailableDataFrames.Length - 1
+                cboDataFrames.Items.Add(lstAvailableDataFrames.AsCharacter(i))
+            Next
+        End If
+        cboDataFrames.Text = frmEditor.gridColumns.CurrentWorksheet.Name
+    End Sub
+
     Public Sub FillDataObjectMetadata(grdData As ReoGridControl)
         Dim dfTemp As DataFrame
         'todo insert loop

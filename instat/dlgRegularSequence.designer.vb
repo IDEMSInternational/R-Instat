@@ -22,7 +22,6 @@ Partial Class dlgRegularSequence
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.grpSequenceType = New System.Windows.Forms.GroupBox()
         Me.rdDates = New System.Windows.Forms.RadioButton()
         Me.rdSIngleValue = New System.Windows.Forms.RadioButton()
@@ -47,13 +46,14 @@ Partial Class dlgRegularSequence
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.errorProvider = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.lblNewColName = New System.Windows.Forms.Label()
+        Me.txtNewColName = New System.Windows.Forms.TextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.UcrDataFrame1 = New instat.ucrDataFrame()
         Me.grpSequenceType.SuspendLayout()
         Me.grpSequence.SuspendLayout()
         Me.grpRepeatSingle.SuspendLayout()
         Me.grpSequence2.SuspendLayout()
-        CType(Me.errorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'grpSequenceType
@@ -63,7 +63,7 @@ Partial Class dlgRegularSequence
         Me.grpSequenceType.Controls.Add(Me.rdSequence)
         Me.grpSequenceType.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.grpSequenceType.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequenceType.Location = New System.Drawing.Point(238, 15)
+        Me.grpSequenceType.Location = New System.Drawing.Point(238, 90)
         Me.grpSequenceType.Name = "grpSequenceType"
         Me.grpSequenceType.Size = New System.Drawing.Size(115, 122)
         Me.grpSequenceType.TabIndex = 0
@@ -116,7 +116,7 @@ Partial Class dlgRegularSequence
         Me.grpSequence.Controls.Add(Me.txtTo)
         Me.grpSequence.Controls.Add(Me.txtSteps)
         Me.grpSequence.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequence.Location = New System.Drawing.Point(12, 7)
+        Me.grpSequence.Location = New System.Drawing.Point(12, 82)
         Me.grpSequence.Name = "grpSequence"
         Me.grpSequence.Size = New System.Drawing.Size(180, 96)
         Me.grpSequence.TabIndex = 0
@@ -185,7 +185,7 @@ Partial Class dlgRegularSequence
         Me.grpRepeatSingle.Controls.Add(Me.txtRepeatTimes)
         Me.grpRepeatSingle.Controls.Add(Me.txtValue)
         Me.grpRepeatSingle.Controls.Add(Me.lblValue)
-        Me.grpRepeatSingle.Location = New System.Drawing.Point(10, 24)
+        Me.grpRepeatSingle.Location = New System.Drawing.Point(10, 99)
         Me.grpRepeatSingle.Name = "grpRepeatSingle"
         Me.grpRepeatSingle.Size = New System.Drawing.Size(179, 100)
         Me.grpRepeatSingle.TabIndex = 9
@@ -242,7 +242,7 @@ Partial Class dlgRegularSequence
         Me.grpSequence2.Controls.Add(Me.Label4)
         Me.grpSequence2.Controls.Add(Me.Label5)
         Me.grpSequence2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequence2.Location = New System.Drawing.Point(9, 22)
+        Me.grpSequence2.Location = New System.Drawing.Point(9, 97)
         Me.grpSequence2.Name = "grpSequence2"
         Me.grpSequence2.Size = New System.Drawing.Size(180, 95)
         Me.grpSequence2.TabIndex = 10
@@ -306,22 +306,44 @@ Partial Class dlgRegularSequence
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "From"
         '
-        'errorProvider
+        'lblNewColName
         '
-        Me.errorProvider.ContainerControl = Me
+        Me.lblNewColName.AutoSize = True
+        Me.lblNewColName.Location = New System.Drawing.Point(12, 233)
+        Me.lblNewColName.Name = "lblNewColName"
+        Me.lblNewColName.Size = New System.Drawing.Size(101, 13)
+        Me.lblNewColName.TabIndex = 13
+        Me.lblNewColName.Text = "New Column Name:"
+        '
+        'txtNewColName
+        '
+        Me.txtNewColName.Location = New System.Drawing.Point(119, 230)
+        Me.txtNewColName.Name = "txtNewColName"
+        Me.txtNewColName.Size = New System.Drawing.Size(234, 20)
+        Me.txtNewColName.TabIndex = 14
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(6, 153)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 266)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 32)
         Me.ucrBase.TabIndex = 5
+        '
+        'UcrDataFrame1
+        '
+        Me.UcrDataFrame1.Location = New System.Drawing.Point(7, 12)
+        Me.UcrDataFrame1.Name = "UcrDataFrame1"
+        Me.UcrDataFrame1.Size = New System.Drawing.Size(150, 63)
+        Me.UcrDataFrame1.TabIndex = 15
         '
         'dlgRegularSequence
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 186)
+        Me.ClientSize = New System.Drawing.Size(412, 305)
+        Me.Controls.Add(Me.UcrDataFrame1)
+        Me.Controls.Add(Me.txtNewColName)
+        Me.Controls.Add(Me.lblNewColName)
         Me.Controls.Add(Me.grpRepeatSingle)
         Me.Controls.Add(Me.grpSequence2)
         Me.Controls.Add(Me.grpSequence)
@@ -341,8 +363,8 @@ Partial Class dlgRegularSequence
         Me.grpRepeatSingle.PerformLayout()
         Me.grpSequence2.ResumeLayout(False)
         Me.grpSequence2.PerformLayout()
-        CType(Me.errorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -370,6 +392,8 @@ Partial Class dlgRegularSequence
     Friend WithEvents Label2 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents errorProvider As ErrorProvider
     Friend WithEvents cboBy As ComboBox
+    Friend WithEvents lblNewColName As Label
+    Friend WithEvents txtNewColName As TextBox
+    Friend WithEvents UcrDataFrame1 As ucrDataFrame
 End Class
