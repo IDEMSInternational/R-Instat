@@ -59,10 +59,10 @@ Public Class RSyntax
     End Sub
 
     Public Function GetScript() As String
+        strScript = strFunction & "("
         If strAssignTo IsNot Nothing Then
-            strScript = strAssignTo & "<-"
+            strScript = strAssignTo & "<-" & strScript
         End If
-        strScript = strScript & strFunction & "("
         For i = 0 To strParameter.GetUpperBound(1)
             If i > 0 Then
                 strScript = strScript & ","
@@ -74,10 +74,10 @@ Public Class RSyntax
     End Function
 
     Public Function writeScript() As String
+        strScript = strFunction & "("
         If strAssignTo IsNot Nothing Then
-            strScript = strAssignTo & "<-"
+            strScript = strAssignTo & "<-" & strScript
         End If
-        strScript = strScript & strFunction & "("
         For i = 0 To strParameter.GetUpperBound(1)
             If i = 1 Then
                 strScript = strScript & "~"
@@ -91,10 +91,10 @@ Public Class RSyntax
     End Function
 
     Public Function orderScript() As String
+        strScript = strFunction & "("
         If strAssignTo IsNot Nothing Then
-            strScript = strAssignTo & "<-"
+            strScript = strAssignTo & "<-" & strScript
         End If
-        strScript = strScript & strFunction & "("
         For i = 0 To strParameter.GetUpperBound(1)
             If i > 0 Then
                 strScript = strScript & ","
