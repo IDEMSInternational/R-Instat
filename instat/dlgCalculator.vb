@@ -120,7 +120,7 @@ Public Class dlgCalculator
         strScript = ("data[[" & Chr(34) & txtNewColumnName.Text & Chr(34) & "]]" & " <- " & txtCalcLine.Text).ToString
         frmMain.clsRInterface.RunScript(strScript)
         dataset = frmMain.clsRInterface.GetData("data")
-        frmEditor.UpdateSheet(dataset)
+        'frmEditor.UpdateSheet(dataset)
     End Sub
 
     Private Sub cmdBackSpace_Click(sender As Object, e As EventArgs) Handles cmdBackSpace.Click
