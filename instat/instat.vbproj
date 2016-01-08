@@ -873,6 +873,12 @@
     <Compile Include="frmEditor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFileNew.Designer.vb">
+      <DependentUpon>dlgFileNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFileNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmLog.Designer.vb">
       <DependentUpon>frmLog.vb</DependentUpon>
     </Compile>
@@ -2032,6 +2038,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditor.sw-KE.resx">
       <DependentUpon>frmEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFileNew.fr-FR.resx">
+      <DependentUpon>dlgFileNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFileNew.resx">
+      <DependentUpon>dlgFileNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFileNew.sw-KE.resx">
+      <DependentUpon>dlgFileNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLog.fr-FR.resx">
       <DependentUpon>frmLog.vb</DependentUpon>

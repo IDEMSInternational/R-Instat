@@ -127,7 +127,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileNewWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileNewWorksheet.Click
-        'frmEditor.NewSheet()
+        dlgFileNew.ShowDialog()
     End Sub
 
     Private Sub LogWindowMenu_Click(sender As Object, e As EventArgs) Handles LogWindowMenu.Click
