@@ -35,9 +35,14 @@ Public Class frmMain
         frmEditor.Dock = DockStyle.Fill
         frmCommand.Show()
         frmEditor.Show()
-        'Setting the
+        'Setting the properties of R Interface
         clsRInterface.SetLog(frmLog.txtLog)
         clsRInterface.SetOutput(frmCommand.txtCommand)
+        clsRInterface.clsEngine = REngine.GetInstance()
+        clsRInterface.clsEngine.Initialize()
+        'Sets up R source files
+        clsRInterface.RSetup()
+
         tstatus.Text = frmEditor.gridColumns.CurrentWorksheet.Name
 
     End Sub
@@ -122,7 +127,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileNewWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileNewWorksheet.Click
-        frmEditor.NewSheet()
+        'frmEditor.NewSheet()
     End Sub
 
     Private Sub LogWindowMenu_Click(sender As Object, e As EventArgs) Handles LogWindowMenu.Click
