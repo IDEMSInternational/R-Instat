@@ -134,3 +134,8 @@ instat_obj$methods(get_meta_data = function() {
   return(retlist)
 } 
 )
+
+instat_obj$methods(get_data_names = function() { 
+  return(names(.self$data_objects))
+} 
+)
