@@ -19,29 +19,30 @@ Imports System.Globalization
 Imports System.Threading
 Imports instat.Translations
 Public Class frmEditor
-    Public Sub UpdateSheet(DataSet As DataFrame)
-        Me.gridColumns.CurrentWorksheet.Reset()
-        Me.gridColumns.CurrentWorksheet.Rows = DataSet.RowCount
-        Me.gridColumns.CurrentWorksheet.Columns = DataSet.ColumnCount
+    Public Sub UpdateSheet(DataSet As DataFrame, strName As String)
+        Dim tempSheet = gridColumns.GetWorksheetByName(strName)
+        tempSheet.Reset()
+        tempSheet.Rows = DataSet.RowCount
+        tempSheet.Columns = DataSet.ColumnCount
         For k As Integer = 0 To DataSet.ColumnCount - 1
-            Me.gridColumns.CurrentWorksheet.ColumnHeaders(k).Text = DataSet.ColumnNames(k)
+            tempSheet.ColumnHeaders(k).Text = DataSet.ColumnNames(k)
         Next
         For i As Integer = 0 To DataSet.RowCount - 1
             For k As Integer = 0 To DataSet.ColumnCount - 1
-                Me.gridColumns.CurrentWorksheet(row:=i, col:=k) = DataSet(i, k)
+                tempSheet(row:=i, col:=k) = DataSet(i, k)
             Next
         Next
 
     End Sub
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         gridColumns.SheetTabControlWidth = 300
-        gridColumns.CurrentWorksheet.Resize(1, 1)
-        gridColumns.CurrentWorksheet.Name = "Data View"
+        gridColumns.CurrentWorksheet.Resize(0, 0)
+        'gridColumns.CurrentWorksheet.Name = "Data View"
         autoTranslate(Me)
     End Sub
-    Public Sub NewSheet()
-        Dim sheet = gridColumns.CreateWorksheet()
-        'Add/Insert worksheet
+    Public Sub NewSheet(strName As String)
+        Dim sheet = gridColumns.CreateWorksheet(strName)
+
         gridColumns.Worksheets.Add(sheet)
         gridColumns.CurrentWorksheet = sheet
     End Sub
