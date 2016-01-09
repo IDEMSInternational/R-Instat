@@ -23,10 +23,10 @@ Public Class dlgExtremes
         lblAnd.Visible = False
         txtAnd.Visible = False
         chkMaximumLikelihood.Checked = False
-        chkMethodofMoments.Checked = False
+        chkMethodOfMoments.Checked = False
         cboMaximumLikelihood.Visible = True
 
-        cboMethodofMoments.Visible = False
+        cboMethodOfMoments.Visible = False
         chkProbabilityPlot.Checked = False
 
         ucrBase.clsRsyntax.SetFunction("gev.fit")
@@ -56,11 +56,11 @@ Public Class dlgExtremes
         End If
     End Sub
 
-    Private Sub chkMethodofMoments_CheckedChanged(sender As Object, e As EventArgs) Handles chkMethodofMoments.CheckedChanged
-        If chkMethodofMoments.Checked = True Then
-            cboMethodofMoments.Visible = True
+    Private Sub chkMethodofMoments_CheckedChanged(sender As Object, e As EventArgs) Handles chkMethodOfMoments.CheckedChanged
+        If chkMethodOfMoments.Checked = True Then
+            cboMethodOfMoments.Visible = True
         Else
-            cboMethodofMoments.Visible = False
+            cboMethodOfMoments.Visible = False
         End If
     End Sub
 

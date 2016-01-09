@@ -22,9 +22,14 @@ Public Class RSyntax
     Dim strParameter(1, 0) As String
     Public strScript As String
     Public i As Integer
+    Public strAssignTo As String
 
     Public Sub SetFunction(strFunctionName As String)
         strFunction = strFunctionName
+    End Sub
+
+    Public Sub SetAssignTo(strAssignToName As String)
+        strAssignTo = strAssignToName
     End Sub
 
     Public Sub AddParameter(strParameterName As String, strParameterValue As String)
@@ -55,6 +60,9 @@ Public Class RSyntax
 
     Public Function GetScript() As String
         strScript = strFunction & "("
+        If strAssignTo IsNot Nothing Then
+            strScript = strAssignTo & "<-" & strScript
+        End If
         For i = 0 To strParameter.GetUpperBound(1)
             If i > 0 Then
                 strScript = strScript & ","
@@ -67,10 +75,13 @@ Public Class RSyntax
 
     Public Function writeScript() As String
         strScript = strFunction & "("
+        If strAssignTo IsNot Nothing Then
+            strScript = strAssignTo & "<-" & strScript
+        End If
         For i = 0 To strParameter.GetUpperBound(1)
             If i = 1 Then
                 strScript = strScript & "~"
-            ElseIf i > 2
+            ElseIf i > 2 Then
                 strScript = strScript & "+"
             End If
             strScript = strScript & strParameter(0, i)
@@ -81,6 +92,9 @@ Public Class RSyntax
 
     Public Function orderScript() As String
         strScript = strFunction & "("
+        If strAssignTo IsNot Nothing Then
+            strScript = strAssignTo & "<-" & strScript
+        End If
         For i = 0 To strParameter.GetUpperBound(1)
             If i > 0 Then
                 strScript = strScript & ","
