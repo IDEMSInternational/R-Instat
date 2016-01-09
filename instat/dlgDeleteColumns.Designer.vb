@@ -43,7 +43,7 @@ Partial Class dlgDeleteColumns
         '
         Me.ucrReceiverDeleteColumns.Location = New System.Drawing.Point(225, 35)
         Me.ucrReceiverDeleteColumns.Name = "ucrReceiverDeleteColumns"
-        Me.ucrReceiverDeleteColumns.Size = New System.Drawing.Size(121, 104)
+        Me.ucrReceiverDeleteColumns.Size = New System.Drawing.Size(122, 136)
         Me.ucrReceiverDeleteColumns.TabIndex = 1
         '
         'lblColumnsToDelete
@@ -82,7 +82,7 @@ Partial Class dlgDeleteColumns
         '
         'txtSelect
         '
-        Me.txtSelect.Location = New System.Drawing.Point(260, 187)
+        Me.txtSelect.Location = New System.Drawing.Point(260, 197)
         Me.txtSelect.Name = "txtSelect"
         Me.txtSelect.Size = New System.Drawing.Size(100, 20)
         Me.txtSelect.TabIndex = 4
@@ -90,7 +90,7 @@ Partial Class dlgDeleteColumns
         'lblSelect
         '
         Me.lblSelect.AutoSize = True
-        Me.lblSelect.Location = New System.Drawing.Point(257, 159)
+        Me.lblSelect.Location = New System.Drawing.Point(257, 174)
         Me.lblSelect.Name = "lblSelect"
         Me.lblSelect.Size = New System.Drawing.Size(37, 13)
         Me.lblSelect.TabIndex = 2

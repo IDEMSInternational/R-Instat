@@ -19,16 +19,16 @@ Imports instat.Translations
 Public Class dlgColumnStats
     Private Sub dlgColumnStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        UcrReceiverMultiple.Selector = ucrAddRemove
-        UcrReceiverMultiple.SetMeAsReceiver()
+        ucrReceiverMultiple.Selector = ucrAddRemove
+        ucrReceiverMultiple.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("colStats")
         ucrBase.clsRsyntax.iCallType = 2
     End Sub
 
-    Private Sub UcrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles UcrReceiverMultiple.Leave
+    Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.Leave
         Dim objItem As Object
-        Dim temp_obj As ListBox.ObjectCollection = UcrReceiverMultiple.lstSelectedVariables.Items
-        If UcrReceiverMultiple.lstSelectedVariables.Items.Count > 0 Then
+        Dim temp_obj As ListBox.ObjectCollection = ucrReceiverMultiple.lstSelectedVariables.Items
+        If ucrReceiverMultiple.lstSelectedVariables.Items.Count > 0 Then
             For Each objItem In temp_obj
                 ucrBase.clsRsyntax.AddParameter("data_temp$" & objItem & "", "x")
             Next

@@ -19,7 +19,8 @@ Public Class dlgRegularSequence
         grpSequence2.Hide()
         grpRepeatSingle.Hide()
         ucrBase.clsRsyntax.SetFunction("seq")
-        ucrBase.clsRsyntax.iCallType = 1
+        ucrBase.clsRsyntax.iCallType = 0
+        'ucrBase.clsRsyntax.SetAssignTo("x")
         autoTranslate(Me)
     End Sub
 

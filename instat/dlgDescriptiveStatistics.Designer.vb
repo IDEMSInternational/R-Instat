@@ -22,7 +22,7 @@ Partial Class dlgDescriptiveStatistics
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.btnStatistics = New System.Windows.Forms.Button()
+        Me.cmdStatistics = New System.Windows.Forms.Button()
         Me.grpgraphics = New System.Windows.Forms.GroupBox()
         Me.chkCumulativeFrequency = New System.Windows.Forms.CheckBox()
         Me.chkBoxPlot = New System.Windows.Forms.CheckBox()
@@ -35,15 +35,15 @@ Partial Class dlgDescriptiveStatistics
         Me.grpgraphics.SuspendLayout()
         Me.SuspendLayout()
         '
-        'btnStatistics
+        'cmdStatistics
         '
-        Me.btnStatistics.Location = New System.Drawing.Point(7, 133)
-        Me.btnStatistics.Name = "btnStatistics"
-        Me.btnStatistics.Size = New System.Drawing.Size(104, 23)
-        Me.btnStatistics.TabIndex = 90
-        Me.btnStatistics.Tag = "Choose_Statistics"
-        Me.btnStatistics.Text = "Choose Statistics "
-        Me.btnStatistics.UseVisualStyleBackColor = True
+        Me.cmdStatistics.Location = New System.Drawing.Point(7, 133)
+        Me.cmdStatistics.Name = "cmdStatistics"
+        Me.cmdStatistics.Size = New System.Drawing.Size(104, 23)
+        Me.cmdStatistics.TabIndex = 90
+        Me.cmdStatistics.Tag = "Choose_Statistics"
+        Me.cmdStatistics.Text = "Choose Statistics "
+        Me.cmdStatistics.UseVisualStyleBackColor = True
         '
         'grpgraphics
         '
@@ -59,18 +59,18 @@ Partial Class dlgDescriptiveStatistics
         'chkCumulativeFrequency
         '
         Me.chkCumulativeFrequency.AutoSize = True
-        Me.chkCumulativeFrequency.Location = New System.Drawing.Point(157, 5)
+        Me.chkCumulativeFrequency.Location = New System.Drawing.Point(189, 5)
         Me.chkCumulativeFrequency.Name = "chkCumulativeFrequency"
         Me.chkCumulativeFrequency.Size = New System.Drawing.Size(128, 17)
         Me.chkCumulativeFrequency.TabIndex = 61
-        Me.chkCumulativeFrequency.Tag = "Cumulative_Frequency"
+        Me.chkCumulativeFrequency.Tag = "Cumulative_frequency"
         Me.chkCumulativeFrequency.Text = "Cumulative frequency"
         Me.chkCumulativeFrequency.UseVisualStyleBackColor = True
         '
         'chkBoxPlot
         '
         Me.chkBoxPlot.AutoSize = True
-        Me.chkBoxPlot.Location = New System.Drawing.Point(96, 6)
+        Me.chkBoxPlot.Location = New System.Drawing.Point(112, 6)
         Me.chkBoxPlot.Name = "chkBoxPlot"
         Me.chkBoxPlot.Size = New System.Drawing.Size(65, 17)
         Me.chkBoxPlot.TabIndex = 60
@@ -85,7 +85,7 @@ Partial Class dlgDescriptiveStatistics
         Me.chkStemAndLeaf.Name = "chkStemAndLeaf"
         Me.chkStemAndLeaf.Size = New System.Drawing.Size(91, 17)
         Me.chkStemAndLeaf.TabIndex = 1
-        Me.chkStemAndLeaf.Tag = "Stem_And_Leaf"
+        Me.chkStemAndLeaf.Tag = "Stem_and_Leaf"
         Me.chkStemAndLeaf.Text = "Stem and leaf"
         Me.chkStemAndLeaf.UseVisualStyleBackColor = True
         '
@@ -141,7 +141,7 @@ Partial Class dlgDescriptiveStatistics
         Me.Controls.Add(Me.ucrObjectReceiver)
         Me.Controls.Add(Me.ucrDataSelector)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.btnStatistics)
+        Me.Controls.Add(Me.cmdStatistics)
         Me.Controls.Add(Me.grpgraphics)
         Me.Controls.Add(Me.chkGraphics)
         Me.MaximizeBox = False
@@ -156,7 +156,7 @@ Partial Class dlgDescriptiveStatistics
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents btnStatistics As Button
+    Friend WithEvents cmdStatistics As Button
     Friend WithEvents grpgraphics As GroupBox
     Friend WithEvents chkCumulativeFrequency As CheckBox
     Friend WithEvents chkBoxPlot As CheckBox
