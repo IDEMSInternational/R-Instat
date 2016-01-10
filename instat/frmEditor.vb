@@ -36,7 +36,7 @@ Public Class frmEditor
     End Sub
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         gridColumns.SheetTabControlWidth = 300
-        gridColumns.CurrentWorksheet.Resize(0, 0)
+        gridColumns.CurrentWorksheet.Resize(1, 1)
         'gridColumns.CurrentWorksheet.Name = "Data View"
         autoTranslate(Me)
     End Sub
