@@ -49,7 +49,7 @@ Public Class frmMain
     End Sub
 
     Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
-        Dim pair As KeyValuePair(Of String, String) = openDialog()
+        Dim pair As KeyValuePair(Of String, String) = OpenDialog()
         clsButton.clsRsyntax.SetFunction("read.csv")
         clsButton.clsRsyntax.AddParameter("file", pair.Value)
         clsRInterface.LoadData(pair.Key, clsButton.clsRsyntax.GetScript())
@@ -379,7 +379,7 @@ Public Class frmMain
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
         dlgSort.ShowDialog()
     End Sub
-    Public Function openDialog() As KeyValuePair(Of String, String)
+    Public Function OpenDialog() As KeyValuePair(Of String, String)
         Dim dlgOpen As New OpenFileDialog
         Dim strFilePath, strFileName As String
         dlgOpen.Filter = "Comma Separated (*.csv)|*.csv"
@@ -682,14 +682,14 @@ Public Class frmMain
 
     Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
         Dim kvpFile As KeyValuePair(Of String, String)
-        kvpFile = saveDialog()
+        kvpFile = SaveDialog()
         clsButton.clsRsyntax.SetFunction("saveRDS")
         clsButton.clsRsyntax.AddParameter("object", "InstatDataObject")
         clsButton.clsRsyntax.AddParameter("file", kvpFile.Value)
         clsRInterface.RunScript(clsButton.clsRsyntax.GetScript())
     End Sub
 
-    Public Function saveDialog() As KeyValuePair(Of String, String)
+    Public Function SaveDialog() As KeyValuePair(Of String, String)
         Dim dlgOpen As New SaveFileDialog
         Dim strFilePath, strFileName As String
         dlgOpen.Filter = "RDS (*.RDS)|*.RDS"
@@ -712,7 +712,7 @@ Public Class frmMain
 
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
         Dim kvpFile As KeyValuePair(Of String, String)
-        kvpFile = openDialog()
+        kvpFile = OpenDialog()
         clsButton.clsRsyntax.SetFunction("read.csv")
         clsButton.clsRsyntax.AddParameter("file", kvpFile.Value)
         clsRInterface.LoadData(kvpFile.Key, clsButton.clsRsyntax.GetScript())
