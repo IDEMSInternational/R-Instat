@@ -23,8 +23,6 @@ Imports System.ComponentModel
 Public Class frmMain
 
     Public clsRInterface As New RInterface
-    ' TODO clsButtons needs to be deleted
-    Public clsButton As New ucrButtons
     Public clsGrids As New clsGridLink
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -54,43 +52,14 @@ Public Class frmMain
 
     Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
         Dim pair As KeyValuePair(Of String, String) = OpenDialog()
-        clsButton.clsRsyntax.SetFunction("read.csv")
-        clsButton.clsRsyntax.AddParameter("file", pair.Value)
-        clsRInterface.LoadData(pair.Key, clsButton.clsRsyntax.GetScript())
-        clsGrids.UpdateGrids()
-    End Sub
-
-    Public Sub FillData(strDataName)
-        Dim bFoundWorksheet As Boolean = False
-        Dim tempWorkSheet
-        Dim dfDataset As DataFrame
-
-        dfDataset = clsRInterface.GetData(strDataName)
-        For Each tempWorkSheet In frmEditor.grdData.Worksheets
-            If tempWorkSheet.Name = strDataName Then
-                tempWorkSheet.Rows = dfDataset.RowCount
-                tempWorkSheet.Columns = dfDataset.ColumnCount
-                For i As Integer = 0 To dfDataset.RowCount - 1
-                    For k As Integer = 0 To dfDataset.ColumnCount - 1
-                        tempWorkSheet.ColumnHeaders(k).Text = dfDataset.ColumnNames(k)
-                        tempWorkSheet(row:=i, col:=k) = dfDataset(i, k)
-                    Next
-                Next
-                bFoundWorksheet = True
-            End If
-        Next
-        If Not bFoundWorksheet Then
-            tempWorkSheet = frmEditor.grdData.Worksheets.Create(strDataName)
-            tempWorkSheet.Rows = dfDataset.RowCount
-            tempWorkSheet.Columns = dfDataset.ColumnCount
-            For i As Integer = 0 To dfDataset.RowCount - 1
-                For k As Integer = 0 To dfDataset.ColumnCount - 1
-                    tempWorkSheet.ColumnHeaders(k).Text = dfDataset.ColumnNames(k)
-                    tempWorkSheet(row:=i, col:=k) = dfDataset(i, k)
-                Next
-            Next
-            frmEditor.grdData.Worksheets.Add(tempWorkSheet)
+        Dim clsRsyntax As New RSyntax
+        If Not IsNothing(pair.Key) Then
+            clsRsyntax.SetFunction("read.csv")
+            clsRsyntax.AddParameter("file", pair.Value)
+            clsRInterface.LoadData(pair.Key, clsRsyntax.GetScript())
+            clsGrids.UpdateGrids()
         End If
+
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
@@ -392,7 +361,6 @@ Public Class frmMain
                 Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
             End If
         Else
-            MsgBox("No File was selected!", vbInformation, "Message From Instat")
         End If
     End Function
 
@@ -682,11 +650,13 @@ Public Class frmMain
 
     Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
         Dim kvpFile As KeyValuePair(Of String, String)
+        Dim clsRsyntax As New RSyntax
+
         kvpFile = SaveDialog()
-        clsButton.clsRsyntax.SetFunction("saveRDS")
-        clsButton.clsRsyntax.AddParameter("object", "InstatDataObject")
-        clsButton.clsRsyntax.AddParameter("file", kvpFile.Value)
-        clsRInterface.RunScript(clsButton.clsRsyntax.GetScript())
+        clsRsyntax.SetFunction("saveRDS")
+        clsRsyntax.AddParameter("object", "InstatDataObject")
+        clsRsyntax.AddParameter("file", kvpFile.Value)
+        clsRInterface.RunScript(clsRsyntax.GetScript())
     End Sub
 
     Public Function SaveDialog() As KeyValuePair(Of String, String)
@@ -712,10 +682,12 @@ Public Class frmMain
 
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
         Dim kvpFile As KeyValuePair(Of String, String)
+        Dim clsRsyntax As New RSyntax
+
         kvpFile = OpenDialog()
-        clsButton.clsRsyntax.SetFunction("read.csv")
-        clsButton.clsRsyntax.AddParameter("file", kvpFile.Value)
-        clsRInterface.LoadData(kvpFile.Key, clsButton.clsRsyntax.GetScript())
+        clsRsyntax.SetFunction("read.csv")
+        clsRsyntax.AddParameter("file", kvpFile.Value)
+        clsRInterface.LoadData(kvpFile.Key, clsRsyntax.GetScript())
         clsGrids.UpdateGrids()
     End Sub
 
