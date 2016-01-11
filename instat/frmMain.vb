@@ -18,6 +18,7 @@ Imports System.IO
 Imports System.Globalization
 Imports System.Threading
 Imports instat.Translations
+Imports System.ComponentModel
 
 Public Class frmMain
 
@@ -48,7 +49,7 @@ Public Class frmMain
     End Sub
 
     Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
-        Dim pair As KeyValuePair(Of String, String) = openDialog()
+        Dim pair As KeyValuePair(Of String, String) = OpenDialog()
         clsButton.clsRsyntax.SetFunction("read.csv")
         clsButton.clsRsyntax.AddParameter("file", pair.Value)
         clsRInterface.LoadData(pair.Key, clsButton.clsRsyntax.GetScript())
@@ -127,7 +128,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileNewWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileNewWorksheet.Click
-        'frmEditor.NewSheet()
+        dlgFileNew.ShowDialog()
     End Sub
 
     Private Sub LogWindowMenu_Click(sender As Object, e As EventArgs) Handles LogWindowMenu.Click
@@ -151,7 +152,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuBoxPlot.Click
-        dlgBoxPlot.ShowDialog()
+        dlgBoxplot.ShowDialog()
     End Sub
 
     Private Sub mnuEndofRains_Click(sender As Object, e As EventArgs) Handles mnuEndofRains.Click
@@ -378,7 +379,7 @@ Public Class frmMain
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
         dlgSort.ShowDialog()
     End Sub
-    Public Function openDialog() As KeyValuePair(Of String, String)
+    Public Function OpenDialog() As KeyValuePair(Of String, String)
         Dim dlgOpen As New OpenFileDialog
         Dim strFilePath, strFileName As String
         dlgOpen.Filter = "Comma Separated (*.csv)|*.csv"
@@ -680,20 +681,44 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
-        SaveFileDialog1.ShowDialog()
+        Dim kvpFile As KeyValuePair(Of String, String)
+        kvpFile = SaveDialog()
+        clsButton.clsRsyntax.SetFunction("saveRDS")
+        clsButton.clsRsyntax.AddParameter("object", "InstatDataObject")
+        clsButton.clsRsyntax.AddParameter("file", kvpFile.Value)
+        clsRInterface.RunScript(clsButton.clsRsyntax.GetScript())
     End Sub
+
+    Public Function SaveDialog() As KeyValuePair(Of String, String)
+        Dim dlgOpen As New SaveFileDialog
+        Dim strFilePath, strFileName As String
+        dlgOpen.Filter = "RDS (*.RDS)|*.RDS"
+        dlgOpen.Title = "Save workbook as RDS file"
+        If dlgOpen.ShowDialog() = DialogResult.OK Then
+            'checks if the file name is not blank'
+            If dlgOpen.FileName <> "" Then
+                strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
+                strFilePath = Replace(dlgOpen.FileName, "\", "/")
+                Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
+            End If
+        Else
+            MsgBox("No File was selected!", vbInformation, "Message From Instat")
+        End If
+    End Function
 
     Private Sub mnuFileCloseWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileCloseWorksheet.Click
 
     End Sub
 
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
-        Dim pair As KeyValuePair(Of String, String) = openDialog()
+        Dim kvpFile As KeyValuePair(Of String, String)
+        kvpFile = OpenDialog()
         clsButton.clsRsyntax.SetFunction("read.csv")
-        clsButton.clsRsyntax.AddParameter("file", pair.Value)
-        clsRInterface.LoadData(pair.Key, clsButton.clsRsyntax.GetScript())
+        clsButton.clsRsyntax.AddParameter("file", kvpFile.Value)
+        clsRInterface.LoadData(kvpFile.Key, clsButton.clsRsyntax.GetScript())
         clsRInterface.FillDataObjectVariables(frmVariables.gridVariables)
         clsRInterface.FillDataObjectMetadata(frmMetaData.gridMetaData)
         clsRInterface.FillDataObjectData(frmEditor.gridColumns)
     End Sub
+
 End Class
