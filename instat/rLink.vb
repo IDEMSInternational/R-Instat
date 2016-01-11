@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
-Imports unvell.ReoGrid
 
 Public Class RInterface
     ' R interface class. Each instance of the class has its own REngine instance
@@ -45,65 +44,6 @@ Public Class RInterface
         bLog = True
     End Sub
 
-    Public Sub LoadData(strDataName As String, strScript As String)
-        RunScript(strDataName & "<-" & strScript)
-        If Not bInstatObjectExists Then
-            RunScript(strInstatDataObject & "<-instat_obj$new()")
-            bInstatObjectExists = True
-        End If
-        RunScript(strInstatDataObject & "$import_data(data_tables=list(" & strDataName & "=" & strDataName & "))")
-
-    End Sub
-
-    Public Sub FillDataObjectData(grdData As ReoGridControl)
-        Dim dfTemp As DataFrame
-        Dim dfList As GenericVector
-        Dim i As Integer
-        If bInstatObjectExists Then
-            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_data_list()").AsList
-            For i = 0 To dfList.Count - 1
-                dfTemp = dfList(i).AsDataFrame()
-                FillData(dfTemp, dfList.Names(i), grdData)
-            Next
-
-        End If
-
-    End Sub
-
-    Public Sub FillDataObjectVariables(grdData As ReoGridControl)
-        Dim dfList As GenericVector
-        Dim dfTemp As DataFrame
-        Dim i As Integer
-        If bInstatObjectExists Then
-            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variable_info()").AsList
-            For i = 0 To dfList.Count - 1
-                dfTemp = dfList(i).AsDataFrame()
-                FillData(dfTemp, dfList.Names(i), grdData)
-            Next
-        End If
-    End Sub
-
-    Public Sub FillListView(lstView As ListView)
-        Dim dfList As GenericVector
-        Dim dfTemp As DataFrame
-        Dim i As Integer
-        Dim grps As New ListViewGroup
-        If bInstatObjectExists Then
-            lstView.Columns.Add("Available Data", width:=100)
-            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variable_info()").AsList
-            For i = 0 To dfList.Count - 1
-                grps = New ListViewGroup(dfList.Names(i), HorizontalAlignment.Left)
-                If Not lstView.Groups.Contains(grps) Then
-                    lstView.Groups.Add(grps)
-                End If
-                dfTemp = dfList(i).AsDataFrame()
-                For j = 0 To dfTemp.RowCount - 1
-                    lstView.Items.Add(dfTemp(j, 0)).Group = lstView.Groups(i)
-                Next
-            Next
-        End If
-    End Sub
-
     Public Sub FillComboDataFrames(cboDataFrames As ComboBox)
         Dim lstAvailableDataFrames As GenericVector
         Dim i As Integer
@@ -115,15 +55,7 @@ Public Class RInterface
                 cboDataFrames.Items.Add(lstAvailableDataFrames.AsCharacter(i))
             Next
         End If
-        cboDataFrames.Text = frmEditor.gridColumns.CurrentWorksheet.Name
-    End Sub
-
-    Public Sub FillDataObjectMetadata(grdData As ReoGridControl)
-        Dim dfTemp As DataFrame
-        If bInstatObjectExists Then
-            dfTemp = GetData(strInstatDataObject & "$get_meta_data()").AsDataFrame()
-            FillData(dfTemp, "meta_data", grdData)
-        End If
+        cboDataFrames.Text = frmEditor.grdData.CurrentWorksheet.Name
     End Sub
 
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0)
@@ -199,32 +131,4 @@ Public Class RInterface
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
     End Sub
 
-    Public Sub FillData(dfTemp As DataFrame, strName As String, grdData As ReoGridControl)
-        Dim bFoundWorksheet As Boolean = False
-        Dim tempWorkSheet
-        Dim fillWorkSheet
-
-        For Each tempWorkSheet In grdData.Worksheets
-            If tempWorkSheet.Name = strName Then
-                fillWorkSheet = grdData.GetWorksheetByName(strName)
-                bFoundWorksheet = True
-            End If
-        Next
-
-        If Not bFoundWorksheet Then
-            fillWorkSheet = grdData.CreateWorksheet(strName)
-            grdData.AddWorksheet(fillWorkSheet)
-        End If
-
-        fillWorkSheet.Reset()
-        fillWorkSheet.Rows = dfTemp.RowCount
-        fillWorkSheet.Columns = dfTemp.ColumnCount
-        For i As Integer = 0 To dfTemp.RowCount - 1
-            For j As Integer = 0 To dfTemp.ColumnCount - 1
-                fillWorkSheet.ColumnHeaders(j).Text = dfTemp.ColumnNames(j)
-                fillWorkSheet(row:=i, col:=j) = dfTemp(i, j)
-            Next
-        Next
-        grdData.CurrentWorksheet = fillWorkSheet
-    End Sub
 End Class

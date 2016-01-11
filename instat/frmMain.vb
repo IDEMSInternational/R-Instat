@@ -23,7 +23,9 @@ Imports System.ComponentModel
 Public Class frmMain
 
     Public clsRInterface As New RInterface
+    ' TODO clsButtons needs to be deleted
     Public clsButton As New ucrButtons
+    Public clsGrids As New clsGridLink
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
@@ -36,6 +38,7 @@ Public Class frmMain
         frmEditor.Dock = DockStyle.Fill
         frmCommand.Show()
         frmEditor.Show()
+
         'Setting the properties of R Interface
         clsRInterface.SetLog(frmLog.txtLog)
         clsRInterface.SetOutput(frmCommand.txtCommand)
@@ -44,7 +47,8 @@ Public Class frmMain
         'Sets up R source files
         clsRInterface.RSetup()
 
-        tstatus.Text = frmEditor.gridColumns.CurrentWorksheet.Name
+        ' TODO tstatus shouldn't be set here in this way
+        tstatus.Text = frmEditor.grdData.CurrentWorksheet.Name
 
     End Sub
 
@@ -53,9 +57,9 @@ Public Class frmMain
         clsButton.clsRsyntax.SetFunction("read.csv")
         clsButton.clsRsyntax.AddParameter("file", pair.Value)
         clsRInterface.LoadData(pair.Key, clsButton.clsRsyntax.GetScript())
-        clsRInterface.FillDataObjectVariables(frmVariables.gridVariables)
-        clsRInterface.FillDataObjectMetadata(frmMetaData.gridMetaData)
-        clsRInterface.FillDataObjectData(frmEditor.gridColumns)
+        clsRInterface.FillDataObjectVariables(frmVariables.grdVariables)
+        clsRInterface.FillDataObjectMetadata(frmMetaData.grdMetaData)
+        clsRInterface.FillDataObjectData(frmEditor.grdData)
 
 
     End Sub
@@ -66,7 +70,7 @@ Public Class frmMain
         Dim dfDataset As DataFrame
 
         dfDataset = clsRInterface.GetData(strDataName)
-        For Each tempWorkSheet In frmEditor.gridColumns.Worksheets
+        For Each tempWorkSheet In frmEditor.grdData.Worksheets
             If tempWorkSheet.Name = strDataName Then
                 tempWorkSheet.Rows = dfDataset.RowCount
                 tempWorkSheet.Columns = dfDataset.ColumnCount
@@ -80,7 +84,7 @@ Public Class frmMain
             End If
         Next
         If Not bFoundWorksheet Then
-            tempWorkSheet = frmEditor.gridColumns.Worksheets.Create(strDataName)
+            tempWorkSheet = frmEditor.grdData.Worksheets.Create(strDataName)
             tempWorkSheet.Rows = dfDataset.RowCount
             tempWorkSheet.Columns = dfDataset.ColumnCount
             For i As Integer = 0 To dfDataset.RowCount - 1
@@ -89,7 +93,7 @@ Public Class frmMain
                     tempWorkSheet(row:=i, col:=k) = dfDataset(i, k)
                 Next
             Next
-            frmEditor.gridColumns.Worksheets.Add(tempWorkSheet)
+            frmEditor.grdData.Worksheets.Add(tempWorkSheet)
         End If
     End Sub
 
@@ -716,9 +720,9 @@ Public Class frmMain
         clsButton.clsRsyntax.SetFunction("read.csv")
         clsButton.clsRsyntax.AddParameter("file", kvpFile.Value)
         clsRInterface.LoadData(kvpFile.Key, clsButton.clsRsyntax.GetScript())
-        clsRInterface.FillDataObjectVariables(frmVariables.gridVariables)
-        clsRInterface.FillDataObjectMetadata(frmMetaData.gridMetaData)
-        clsRInterface.FillDataObjectData(frmEditor.gridColumns)
+        clsRInterface.FillDataObjectVariables(frmVariables.grdVariables)
+        clsRInterface.FillDataObjectMetadata(frmMetaData.grdMetaData)
+        clsRInterface.FillDataObjectData(frmEditor.grdData)
     End Sub
 
 End Class
