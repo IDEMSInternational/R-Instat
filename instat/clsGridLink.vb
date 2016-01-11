@@ -20,9 +20,9 @@ Public Class clsGridLink
     Public grdData As ReoGridControl
     Public grdMetadata As ReoGridControl
     Public grdVariablesMetadata As ReoGridControl
-    Public bGrdDataExisits As Boolean = False
-    Public bGrdMetadataExisits As Boolean = False
-    Public bGrdVariablesMetadataExisits As Boolean = False
+    Public bGrdDataExists As Boolean = False
+    Public bGrdMetadataExists As Boolean = False
+    Public bGrdVariablesMetadataExists As Boolean = False
     Public bGrdDataChanged As Boolean = False
     Public bGrdMetadataChanged As Boolean = False
     Public bGrdVariablesMetadataChanged As Boolean = False
@@ -31,8 +31,11 @@ Public Class clsGridLink
         Dim bRDataChanged As Boolean
         Dim bRMetadataChanged As Boolean
         Dim bRVariablesMetadataChanged As Boolean
+        Dim bFoundName As Boolean
         Dim lstDataNames As GenericVector
         Dim i As Integer
+        Dim j As Integer
+        Dim k As Integer
         Dim dfTemp As DataFrame
         Dim strDataName As String
         Dim shtTemp As Worksheet
@@ -41,53 +44,67 @@ Public Class clsGridLink
         bRMetadataChanged = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_metadata_changed()").AsLogical(0)
         bRVariablesMetadataChanged = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_variables_metadata_changed()").AsLogical(0)
 
-        If (bGrdDataExisits And (bGrdDataChanged Or bRDataChanged)) Or (bGrdVariablesMetadataExisits And (bGrdVariablesMetadataChanged Or bRVariablesMetadataChanged)) Then
-            lstDataNames = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data_names()")
+        If (bGrdDataExists And (bGrdDataChanged Or bRDataChanged)) Or (bGrdVariablesMetadataExists And (bGrdVariablesMetadataChanged Or bRVariablesMetadataChanged)) Then
+            lstDataNames = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data_names()").AsList
             For i = 0 To lstDataNames.Length - 1
-                strDataName = lstDataNames(i).ToString
-                If (bGrdDataExisits And frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data_changed(" & strDataName & ")").AsLogical(0)) Then
-                    dfTemp = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data_frames(" & strDataName & ")").AsDataFrame
+                strDataName = lstDataNames.AsCharacter(i)
+                If (bGrdDataExists And frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data_changed(obj_name = " & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
+                    dfTemp = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data(" & Chr(34) & strDataName & Chr(34) & ")").AsDataFrame
                     FillSheet(dfTemp, strDataName, grdData)
-                    frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$set_data_changed(" & strDataName & ", FALSE)")
+                    frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$set_data_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
                 End If
-                If (bGrdVariablesMetadataExisits And frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_variables_metadata_changed(" & strDataName & ")").AsLogical(0)) Then
-                    dfTemp = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data_frames(" & strDataName & ")").AsDataFrame
-                    FillSheet(dfTemp, strDataName, grdData)
-                    frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$set_variables_metadata_changed(" & strDataName & ", FALSE)")
+                If (bGrdVariablesMetadataExists And frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
+                    dfTemp = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_variables_metadata(" & Chr(34) & strDataName & Chr(34) & ")").AsDataFrame
+                    FillSheet(dfTemp, strDataName, grdVariablesMetadata)
+                    frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$set_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
                 End If
 
             Next
             'delete old sheets
-            If bGrdDataExisits Then
+            'TODO look at this code to improve it (simplify)
+            If bGrdDataExists Then
+                k = 0
                 For i = 0 To grdData.Worksheets.Count - 1
                     ' look up convert genericvector to string list to avoid this loop
+                    bFoundName = False
                     For j = 0 To lstDataNames.Length - 1
-                        If Not lstDataNames(j).ToString = grdData.Worksheets(i).Name Then
-                            shtTemp = grdData.Worksheets(j)
-                            grdData.Worksheets.Remove(shtTemp)
+                        strDataName = lstDataNames.AsCharacter(j)
+                        If strDataName = grdData.Worksheets(i - k).Name Then
+                            bFoundName = True
+                            Exit For
                         End If
                     Next
+                    If Not bFoundName Then
+                        shtTemp = grdData.Worksheets(i - k)
+                        grdData.Worksheets.Remove(shtTemp)
+                        k = k + 1
+                    End If
                 Next
             End If
 
-            If bGrdVariablesMetadataExisits Then
+            If bGrdVariablesMetadataExists Then
+                k = 0
                 For i = 0 To grdVariablesMetadata.Worksheets.Count - 1
                     ' look up convert genericvector to string list to avoid this loop
+                    bFoundName = False
                     For j = 0 To lstDataNames.Length - 1
-                        If Not lstDataNames(j).ToString = grdVariablesMetadata.Worksheets(i).Name Then
-                            shtTemp = grdVariablesMetadata.Worksheets(j)
-                            grdVariablesMetadata.Worksheets.Remove(shtTemp)
+                        strDataName = lstDataNames.AsCharacter(j)
+                        If strDataName = grdVariablesMetadata.Worksheets(i - k).Name Then
+                            bFoundName = True
+                            Exit For
                         End If
                     Next
+                    If Not bFoundName Then
+                        shtTemp = grdVariablesMetadata.Worksheets(i - k)
+                        grdVariablesMetadata.Worksheets.Remove(shtTemp)
+                        k = k + 1
+                    End If
                 Next
             End If
-
-
-
         End If
 
-        If bGrdMetadataExisits And (bGrdMetadataChanged Or bRMetadataChanged) Then
-            dfTemp = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "get_combined_metadata()").AsDataFrame
+        If bGrdMetadataExists And (bGrdMetadataChanged Or bRMetadataChanged) Then
+            dfTemp = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_combined_metadata()").AsDataFrame
             FillSheet(dfTemp, "metadata", grdMetadata)
         End If
 
@@ -95,21 +112,21 @@ Public Class clsGridLink
 
     Public Sub SetData(grdTemp As ReoGridControl)
         grdData = grdTemp
-        bGrdDataExisits = True
+        bGrdDataExists = True
         bGrdDataChanged = True
         UpdateGrids()
     End Sub
 
     Public Sub SetMetadata(grdTemp As ReoGridControl)
         grdMetadata = grdTemp
-        bGrdMetadataExisits = True
+        bGrdMetadataExists = True
         bGrdMetadataChanged = True
         UpdateGrids()
     End Sub
 
     Public Sub SetVariablesMetadata(grdTemp As ReoGridControl)
         grdVariablesMetadata = grdTemp
-        bGrdVariablesMetadataExisits = True
+        bGrdVariablesMetadataExists = True
         bGrdVariablesMetadataChanged = True
         UpdateGrids()
     End Sub
@@ -142,74 +159,6 @@ Public Class clsGridLink
         Next
         grdCurr.CurrentWorksheet = fillWorkSheet
     End Sub
-
-    Public Sub LoadData(strDataName As String, strScript As String)
-        RunScript(strDataName & " < -" & strScript)
-        If Not bInstatObjectExists Then
-            RunScript(strInstatDataObject & " < -instat_obj$New() Then")
-            bInstatObjectExists = True
-        End If
-        RunScript(strInstatDataObject & "$import_data(data_tables=list(" & strDataName & "=" & strDataName & "))")
-
-    End Sub
-
-    Public Sub FillDataObjectData(grdData As ReoGridControl)
-        Dim dfTemp As DataFrame
-        Dim dfList As GenericVector
-        Dim i As Integer
-        If bInstatObjectExists Then
-            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_data_list()").AsList
-            For i = 0 To dfList.Count - 1
-                dfTemp = dfList(i).AsDataFrame()
-                FillData(dfTemp, dfList.Names(i), grdData)
-            Next
-
-        End If
-
-    End Sub
-
-    Public Sub FillDataObjectVariables(grdData As ReoGridControl)
-        Dim dfList As GenericVector
-        Dim dfTemp As DataFrame
-        Dim i As Integer
-        If bInstatObjectExists Then
-            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variable_info()").AsList
-            For i = 0 To dfList.Count - 1
-                dfTemp = dfList(i).AsDataFrame()
-                FillData(dfTemp, dfList.Names(i), grdData)
-            Next
-        End If
-    End Sub
-
-    Public Sub FillListView(lstView As ListView)
-        Dim dfList As GenericVector
-        Dim dfTemp As DataFrame
-        Dim i As Integer
-        Dim grps As New ListViewGroup
-        If bInstatObjectExists Then
-            lstView.Columns.Add("Available Data", width:=100)
-            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variable_info()").AsList
-            For i = 0 To dfList.Count - 1
-                grps = New ListViewGroup(dfList.Names(i), HorizontalAlignment.Left)
-                If Not lstView.Groups.Contains(grps) Then
-                    lstView.Groups.Add(grps)
-                End If
-                dfTemp = dfList(i).AsDataFrame()
-                For j = 0 To dfTemp.RowCount - 1
-                    lstView.Items.Add(dfTemp(j, 0)).Group = lstView.Groups(i)
-                Next
-            Next
-        End If
-    End Sub
-
-    Public Sub FillDataObjectMetadata(grdData As ReoGridControl)
-        Dim dfTemp As DataFrame
-        If bInstatObjectExists Then
-            dfTemp = GetData(strInstatDataObject & "$get_metadata()").AsDataFrame()
-            FillData(dfTemp, "metadata", grdData)
-        End If
-    End Sub
-
 
 
 End Class
