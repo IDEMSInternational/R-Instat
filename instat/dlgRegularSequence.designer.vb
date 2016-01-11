@@ -48,24 +48,33 @@ Partial Class dlgRegularSequence
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lblNewColName = New System.Windows.Forms.Label()
         Me.txtNewColName = New System.Windows.Forms.TextBox()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.grpFindFrom = New System.Windows.Forms.GroupBox()
+        Me.rdoTop = New System.Windows.Forms.RadioButton()
+        Me.rdoRow = New System.Windows.Forms.RadioButton()
+        Me.rdoAppend = New System.Windows.Forms.RadioButton()
+        Me.lblInto = New System.Windows.Forms.Label()
+        Me.cboInto = New System.Windows.Forms.ComboBox()
         Me.UcrDataFrame1 = New instat.ucrDataFrame()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.txtOvertype = New System.Windows.Forms.TextBox()
+        Me.lblOvertype = New System.Windows.Forms.Label()
         Me.grpSequenceType.SuspendLayout()
         Me.grpSequence.SuspendLayout()
         Me.grpRepeatSingle.SuspendLayout()
         Me.grpSequence2.SuspendLayout()
+        Me.grpFindFrom.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpSequenceType
         '
         Me.grpSequenceType.Controls.Add(Me.rdDates)
-        Me.grpSequenceType.Controls.Add(Me.rdSIngleValue)
         Me.grpSequenceType.Controls.Add(Me.rdSequence)
+        Me.grpSequenceType.Controls.Add(Me.rdSIngleValue)
         Me.grpSequenceType.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.grpSequenceType.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequenceType.Location = New System.Drawing.Point(238, 90)
+        Me.grpSequenceType.Location = New System.Drawing.Point(21, 20)
         Me.grpSequenceType.Name = "grpSequenceType"
-        Me.grpSequenceType.Size = New System.Drawing.Size(115, 122)
+        Me.grpSequenceType.Size = New System.Drawing.Size(278, 30)
         Me.grpSequenceType.TabIndex = 0
         Me.grpSequenceType.TabStop = False
         '
@@ -74,7 +83,7 @@ Partial Class dlgRegularSequence
         Me.rdDates.AutoSize = True
         Me.rdDates.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.rdDates.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdDates.Location = New System.Drawing.Point(0, 98)
+        Me.rdDates.Location = New System.Drawing.Point(192, 12)
         Me.rdDates.Name = "rdDates"
         Me.rdDates.Size = New System.Drawing.Size(59, 18)
         Me.rdDates.TabIndex = 2
@@ -86,7 +95,7 @@ Partial Class dlgRegularSequence
         Me.rdSIngleValue.AutoSize = True
         Me.rdSIngleValue.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.rdSIngleValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdSIngleValue.Location = New System.Drawing.Point(0, 59)
+        Me.rdSIngleValue.Location = New System.Drawing.Point(97, 12)
         Me.rdSIngleValue.Name = "rdSIngleValue"
         Me.rdSIngleValue.Size = New System.Drawing.Size(89, 18)
         Me.rdSIngleValue.TabIndex = 1
@@ -99,7 +108,7 @@ Partial Class dlgRegularSequence
         Me.rdSequence.Checked = True
         Me.rdSequence.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.rdSequence.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdSequence.Location = New System.Drawing.Point(0, 10)
+        Me.rdSequence.Location = New System.Drawing.Point(6, 12)
         Me.rdSequence.Name = "rdSequence"
         Me.rdSequence.Size = New System.Drawing.Size(85, 18)
         Me.rdSequence.TabIndex = 0
@@ -322,6 +331,82 @@ Partial Class dlgRegularSequence
         Me.txtNewColName.Size = New System.Drawing.Size(234, 20)
         Me.txtNewColName.TabIndex = 14
         '
+        'grpFindFrom
+        '
+        Me.grpFindFrom.Controls.Add(Me.lblOvertype)
+        Me.grpFindFrom.Controls.Add(Me.txtOvertype)
+        Me.grpFindFrom.Controls.Add(Me.rdoAppend)
+        Me.grpFindFrom.Controls.Add(Me.rdoRow)
+        Me.grpFindFrom.Controls.Add(Me.rdoTop)
+        Me.grpFindFrom.Location = New System.Drawing.Point(198, 124)
+        Me.grpFindFrom.Name = "grpFindFrom"
+        Me.grpFindFrom.Size = New System.Drawing.Size(183, 100)
+        Me.grpFindFrom.TabIndex = 16
+        Me.grpFindFrom.TabStop = False
+        Me.grpFindFrom.Tag = "Find_from"
+        Me.grpFindFrom.Text = "Find from"
+        '
+        'rdoTop
+        '
+        Me.rdoTop.AutoSize = True
+        Me.rdoTop.Location = New System.Drawing.Point(16, 14)
+        Me.rdoTop.Name = "rdoTop"
+        Me.rdoTop.Size = New System.Drawing.Size(44, 17)
+        Me.rdoTop.TabIndex = 0
+        Me.rdoTop.TabStop = True
+        Me.rdoTop.Tag = "Top"
+        Me.rdoTop.Text = "Top"
+        Me.rdoTop.UseVisualStyleBackColor = True
+        '
+        'rdoRow
+        '
+        Me.rdoRow.AutoSize = True
+        Me.rdoRow.Location = New System.Drawing.Point(16, 37)
+        Me.rdoRow.Name = "rdoRow"
+        Me.rdoRow.Size = New System.Drawing.Size(47, 17)
+        Me.rdoRow.TabIndex = 0
+        Me.rdoRow.TabStop = True
+        Me.rdoRow.Tag = "Row"
+        Me.rdoRow.Text = "Row"
+        Me.rdoRow.UseVisualStyleBackColor = True
+        '
+        'rdoAppend
+        '
+        Me.rdoAppend.AutoSize = True
+        Me.rdoAppend.Location = New System.Drawing.Point(16, 62)
+        Me.rdoAppend.Name = "rdoAppend"
+        Me.rdoAppend.Size = New System.Drawing.Size(62, 17)
+        Me.rdoAppend.TabIndex = 0
+        Me.rdoAppend.TabStop = True
+        Me.rdoAppend.Tag = "Append"
+        Me.rdoAppend.Text = "Append"
+        Me.rdoAppend.UseVisualStyleBackColor = True
+        '
+        'lblInto
+        '
+        Me.lblInto.AutoSize = True
+        Me.lblInto.Location = New System.Drawing.Point(307, 9)
+        Me.lblInto.Name = "lblInto"
+        Me.lblInto.Size = New System.Drawing.Size(25, 13)
+        Me.lblInto.TabIndex = 17
+        Me.lblInto.Tag = "Into"
+        Me.lblInto.Text = "Into"
+        '
+        'cboInto
+        '
+        Me.cboInto.FormattingEnabled = True
+        Me.cboInto.Location = New System.Drawing.Point(310, 29)
+        Me.cboInto.Name = "cboInto"
+        Me.cboInto.Size = New System.Drawing.Size(43, 21)
+        Me.cboInto.TabIndex = 18
+        '
+        'UcrDataFrame1
+        '
+        Me.UcrDataFrame1.Location = New System.Drawing.Point(198, 63)
+        Me.UcrDataFrame1.Name = "UcrDataFrame1"
+        Me.UcrDataFrame1.Size = New System.Drawing.Size(150, 55)
+        Me.UcrDataFrame1.TabIndex = 15
+        '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(7, 266)
@@ -329,18 +414,31 @@ Partial Class dlgRegularSequence
         Me.ucrBase.Size = New System.Drawing.Size(405, 32)
         Me.ucrBase.TabIndex = 5
         '
-        'UcrDataFrame1
+        'txtOvertype
         '
-        Me.UcrDataFrame1.Location = New System.Drawing.Point(7, 12)
-        Me.UcrDataFrame1.Name = "UcrDataFrame1"
-        Me.UcrDataFrame1.Size = New System.Drawing.Size(150, 63)
-        Me.UcrDataFrame1.TabIndex = 15
+        Me.txtOvertype.Location = New System.Drawing.Point(69, 34)
+        Me.txtOvertype.Name = "txtOvertype"
+        Me.txtOvertype.Size = New System.Drawing.Size(31, 20)
+        Me.txtOvertype.TabIndex = 1
+        '
+        'lblOvertype
+        '
+        Me.lblOvertype.AutoSize = True
+        Me.lblOvertype.Location = New System.Drawing.Point(109, 41)
+        Me.lblOvertype.Name = "lblOvertype"
+        Me.lblOvertype.Size = New System.Drawing.Size(56, 13)
+        Me.lblOvertype.TabIndex = 2
+        Me.lblOvertype.Tag = "Overtype"
+        Me.lblOvertype.Text = "(Overtype)"
         '
         'dlgRegularSequence
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(412, 305)
+        Me.Controls.Add(Me.cboInto)
+        Me.Controls.Add(Me.lblInto)
+        Me.Controls.Add(Me.grpFindFrom)
         Me.Controls.Add(Me.UcrDataFrame1)
         Me.Controls.Add(Me.txtNewColName)
         Me.Controls.Add(Me.lblNewColName)
@@ -363,6 +461,8 @@ Partial Class dlgRegularSequence
         Me.grpRepeatSingle.PerformLayout()
         Me.grpSequence2.ResumeLayout(False)
         Me.grpSequence2.PerformLayout()
+        Me.grpFindFrom.ResumeLayout(False)
+        Me.grpFindFrom.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -396,4 +496,12 @@ Partial Class dlgRegularSequence
     Friend WithEvents lblNewColName As Label
     Friend WithEvents txtNewColName As TextBox
     Friend WithEvents UcrDataFrame1 As ucrDataFrame
+    Friend WithEvents grpFindFrom As GroupBox
+    Friend WithEvents rdoRow As RadioButton
+    Friend WithEvents rdoTop As RadioButton
+    Friend WithEvents rdoAppend As RadioButton
+    Friend WithEvents lblInto As Label
+    Friend WithEvents cboInto As ComboBox
+    Friend WithEvents lblOvertype As Label
+    Friend WithEvents txtOvertype As TextBox
 End Class
