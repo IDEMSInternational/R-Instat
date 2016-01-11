@@ -16,18 +16,22 @@
 Imports instat.Translations
 Public Class frmMetaData
     Private Sub frmMetaData_Load(sender As Object, e As EventArgs) Handles Me.Load
+        frmMain.clsGrids.SetMetadata(grdMetaData)
         loadForm()
     End Sub
 
+    ' TODO this needs tidying up
     Private Sub loadForm()
-        gridMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
-        gridMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, False)
-        gridMetaData.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
-        gridMetaData.SheetTabNewButtonVisible = False
-        gridMetaData.SheetTabControlNewButtonVisible = False
-        gridMetaData.CurrentWorksheet.Resize(2, 2)
+        grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
+        grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, False)
+        grdMetaData.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
+        grdMetaData.SheetTabNewButtonVisible = False
+        grdMetaData.SheetTabControlNewButtonVisible = False
+        grdMetaData.CurrentWorksheet.Resize(2, 2)
         autoTranslate(Me)
     End Sub
+
+    'TODO interesting code here - should be discussed and possibly used elsewhere
     Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
         MyBase.OnFormClosing(e)
         If Not e.Cancel AndAlso e.CloseReason = CloseReason.UserClosing Then
