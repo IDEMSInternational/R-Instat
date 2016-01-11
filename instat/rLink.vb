@@ -131,4 +131,35 @@ Public Class RInterface
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
     End Sub
 
+    Public Sub LoadData(strDataName As String, strScript As String)
+        RunScript(strDataName & " <- " & strScript)
+        If Not bInstatObjectExists Then
+            RunScript(strInstatDataObject & " <- instat_obj$new()")
+            bInstatObjectExists = True
+        End If
+        RunScript(strInstatDataObject & "$import_data(data_tables=list(" & strDataName & "=" & strDataName & "))")
+
+    End Sub
+
+    Public Sub FillListView(lstView As ListView)
+        Dim dfList As GenericVector
+        Dim dfTemp As DataFrame
+        Dim i As Integer
+        Dim grps As New ListViewGroup
+        If bInstatObjectExists Then
+            lstView.Columns.Add("Available Data", width:=100)
+            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variables_metadata()").AsList
+            For i = 0 To dfList.Count - 1
+                grps = New ListViewGroup(dfList.Names(i), HorizontalAlignment.Left)
+                If Not lstView.Groups.Contains(grps) Then
+                    lstView.Groups.Add(grps)
+                End If
+                dfTemp = dfList(i).AsDataFrame()
+                For j = 0 To dfTemp.RowCount - 1
+                    lstView.Items.Add(dfTemp(j, 0)).Group = lstView.Groups(i)
+                Next
+            Next
+        End If
+    End Sub
+
 End Class

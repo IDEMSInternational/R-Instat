@@ -133,11 +133,11 @@ instat_obj$methods(get_variables_metadata = function(data_name) {
   }
   return(retlist)
   }
-  else return(data_objects[[data_name]]$get_variables_data())
+  else return(data_objects[[data_name]]$get_variables_metadata())
 } 
 )
 
-instat_obj$methods(get_metadata = function() { 
+instat_obj$methods(get_combined_metadata = function() { 
   retlist <- data.frame()
   for ( i in (1:length(data_objects)) ) {
     templist=data_objects[[i]]$get_metadata()
@@ -154,15 +154,15 @@ instat_obj$methods(get_data_names = function() {
 } 
 )
 
-instat_obj$methods(get_data_changed = function(data_obj) { 
-  if(missing(data_obj)) {
+instat_obj$methods(get_data_changed = function(obj_name) {
+  if(missing(obj_name)) {
     for(curr_obj in data_objects) {
       if(curr_obj$data_changed) return(TRUE)
     }
     return(FALSE)
   }
   else {
-    return(data_objects[[data_obj]]$data_changed)
+    return(data_objects[[obj_name]]$data_changed)
   }
 } 
 )
@@ -190,5 +190,26 @@ instat_obj$methods(get_metadata_changed = function(data_obj) {
   else {
     return(data_objects[[data_obj]]$metadata_changed)
   }
+} 
+)
+
+instat_obj$methods(set_data_changed = function(obj_name, new_val) {
+  if(missing(obj_name)) stop("obj_name required")
+    
+  data_objects[[obj_name]]$set_data_changed(new_val)
+} 
+)
+
+instat_obj$methods(set_variables_metadata_changed = function(obj_name, new_val) {
+  if(missing(obj_name)) stop("obj_name required")
+  
+  data_objects[[obj_name]]$set_variables_metadata_changed(new_val)
+} 
+)
+
+instat_obj$methods(set_metadata_changed = function(obj_name, new_val) {
+  if(missing(obj_name)) stop("obj_name required")
+  
+  data_objects[[obj_name]]$set_metadata_changed(new_val)
 } 
 )

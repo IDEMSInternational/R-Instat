@@ -57,11 +57,7 @@ Public Class frmMain
         clsButton.clsRsyntax.SetFunction("read.csv")
         clsButton.clsRsyntax.AddParameter("file", pair.Value)
         clsRInterface.LoadData(pair.Key, clsButton.clsRsyntax.GetScript())
-        clsRInterface.FillDataObjectVariables(frmVariables.grdVariables)
-        clsRInterface.FillDataObjectMetadata(frmMetaData.grdMetaData)
-        clsRInterface.FillDataObjectData(frmEditor.grdData)
-
-
+        clsGrids.UpdateGrids()
     End Sub
 
     Public Sub FillData(strDataName)
@@ -720,9 +716,7 @@ Public Class frmMain
         clsButton.clsRsyntax.SetFunction("read.csv")
         clsButton.clsRsyntax.AddParameter("file", kvpFile.Value)
         clsRInterface.LoadData(kvpFile.Key, clsButton.clsRsyntax.GetScript())
-        clsRInterface.FillDataObjectVariables(frmVariables.grdVariables)
-        clsRInterface.FillDataObjectMetadata(frmMetaData.grdMetaData)
-        clsRInterface.FillDataObjectData(frmEditor.grdData)
+        clsGrids.UpdateGrids()
     End Sub
 
 End Class
