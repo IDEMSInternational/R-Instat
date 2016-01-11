@@ -23,7 +23,7 @@ Public Class RInterface
     Dim strClimateObject As String = "ClimateObject"
     Dim strInstatObjectPath As String = "static/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
-    Dim clsEngine As REngine
+    Public clsEngine As REngine
     Dim txtOutput As New TextBox
     Dim txtLog As New TextBox
     Public bLog As Boolean = False
@@ -33,10 +33,6 @@ Public Class RInterface
     Public bClimsoftLinkExists As Boolean = False
 
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
-        Me.clsEngine = REngine.GetInstance()
-        Me.clsEngine.Initialize()
-        'Sets up R 
-        RSetup(bWithInstatObj, bWithClimsoft)
     End Sub
 
     Public Sub SetOutput(tempOutput As TextBox)
@@ -50,15 +46,13 @@ Public Class RInterface
     End Sub
 
     Public Sub LoadData(strDataName As String, strScript As String)
-        RSetup(True, True)
-        RunScript(strInstatDataObject & "<-instat_obj$new()")
         RunScript(strDataName & "<-" & strScript)
-        If bInstatObjectExists Then
-            RunScript(strInstatDataObject & "$import_data(data_tables=list(" & strDataName & "=" & strDataName & "))")
+        If Not bInstatObjectExists Then
+            RunScript(strInstatDataObject & "<-instat_obj$new()")
+            bInstatObjectExists = True
         End If
-        If bClimateObjectExists Then
-            RunScript(strClimateObject & "$import_data(data_tables=list(" & strDataName & "=" & strDataName & "))")
-        End If
+        RunScript(strInstatDataObject & "$import_data(data_tables=list(" & strDataName & "=" & strDataName & "))")
+
     End Sub
 
     Public Sub FillDataObjectData(grdData As ReoGridControl)
@@ -69,7 +63,7 @@ Public Class RInterface
             dfList = clsEngine.Evaluate(strInstatDataObject & "$get_data_list()").AsList
             For i = 0 To dfList.Count - 1
                 dfTemp = dfList(i).AsDataFrame()
-                FillData(dfTemp, grdData)
+                FillData(dfTemp, dfList.Names(i), grdData)
             Next
 
         End If
@@ -84,7 +78,7 @@ Public Class RInterface
             dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variable_info()").AsList
             For i = 0 To dfList.Count - 1
                 dfTemp = dfList(i).AsDataFrame()
-                FillData(dfTemp, grdData)
+                FillData(dfTemp, dfList.Names(i), grdData)
             Next
         End If
     End Sub
@@ -110,12 +104,25 @@ Public Class RInterface
         End If
     End Sub
 
+    Public Sub FillComboDataFrames(cboDataFrames As ComboBox)
+        Dim lstAvailableDataFrames As GenericVector
+        Dim i As Integer
+
+        If bInstatObjectExists Then
+            lstAvailableDataFrames = clsEngine.Evaluate(strInstatDataObject & "$get_data_names()").AsList
+            cboDataFrames.Items.Clear()
+            For i = 0 To lstAvailableDataFrames.Length - 1
+                cboDataFrames.Items.Add(lstAvailableDataFrames.AsCharacter(i))
+            Next
+        End If
+        cboDataFrames.Text = frmEditor.gridColumns.CurrentWorksheet.Name
+    End Sub
+
     Public Sub FillDataObjectMetadata(grdData As ReoGridControl)
         Dim dfTemp As DataFrame
-        'todo insert loop
         If bInstatObjectExists Then
             dfTemp = GetData(strInstatDataObject & "$get_meta_data()").AsDataFrame()
-            FillData(dfTemp, grdData)
+            FillData(dfTemp, "meta_data", grdData)
         End If
     End Sub
 
@@ -184,50 +191,40 @@ Public Class RInterface
         End If
     End Sub
 
-    Public Sub RSetup(bWithInstatObj As Boolean, bWithClimsoft As Boolean) 'creates an instance of the instat object
+    Public Sub RSetup()
         'run script to load libraries
-        If bWithInstatObj And Not bInstatObjectExists Then
-            RunScript("setwd('" & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
-            RunScript("source(" & Chr(34) & "data_object.R" & Chr(34) & ")")
-            RunScript("source(" & Chr(34) & "instat_object.R" & Chr(34) & ")")
-            RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
-            'RunScript(strInstatDataObject & "<-data_obj$new()")
-            RunScript(strInstatDataObject & "<-instat_obj$new()")
-            bInstatObjectExists = True
-        End If
-        If bWithClimsoft And Not bClimsoftLinkExists Then
-
-        End If
+        RunScript("setwd('" & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
+        RunScript("source(" & Chr(34) & "data_object.R" & Chr(34) & ")")
+        RunScript("source(" & Chr(34) & "instat_object.R" & Chr(34) & ")")
+        RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
     End Sub
 
-    Public Sub FillData(dfTemp As DataFrame, grdData As ReoGridControl)
+    Public Sub FillData(dfTemp As DataFrame, strName As String, grdData As ReoGridControl)
         Dim bFoundWorksheet As Boolean = False
         Dim tempWorkSheet
+        Dim fillWorkSheet
 
         For Each tempWorkSheet In grdData.Worksheets
-            If tempWorkSheet.Name = grdData.CurrentWorksheet.Name Then
-                tempWorkSheet.Rows = dfTemp.RowCount
-                tempWorkSheet.Columns = dfTemp.ColumnCount
-                For i As Integer = 0 To dfTemp.RowCount - 1
-                    For k As Integer = 0 To dfTemp.ColumnCount - 1
-                        tempWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
-                        tempWorkSheet(row:=i, col:=k) = dfTemp(i, k)
-                    Next
-                Next
+            If tempWorkSheet.Name = strName Then
+                fillWorkSheet = grdData.GetWorksheetByName(strName)
                 bFoundWorksheet = True
             End If
         Next
+
         If Not bFoundWorksheet Then
-            tempWorkSheet = grdData.Worksheets.Create(grdData.CurrentWorksheet.Name)
-            tempWorkSheet.Rows = dfTemp.RowCount
-            tempWorkSheet.Columns = dfTemp.ColumnCount
-            For i As Integer = 0 To dfTemp.RowCount - 1
-                For k As Integer = 0 To dfTemp.ColumnCount - 1
-                    tempWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
-                    tempWorkSheet(row:=i, col:=k) = dfTemp(i, k)
-                Next
-            Next
-            grdData.Worksheets.Add(tempWorkSheet)
+            fillWorkSheet = grdData.CreateWorksheet(strName)
+            grdData.AddWorksheet(fillWorkSheet)
         End If
+
+        fillWorkSheet.Reset()
+        fillWorkSheet.Rows = dfTemp.RowCount
+        fillWorkSheet.Columns = dfTemp.ColumnCount
+        For i As Integer = 0 To dfTemp.RowCount - 1
+            For j As Integer = 0 To dfTemp.ColumnCount - 1
+                fillWorkSheet.ColumnHeaders(j).Text = dfTemp.ColumnNames(j)
+                fillWorkSheet(row:=i, col:=j) = dfTemp(i, j)
+            Next
+        Next
+        grdData.CurrentWorksheet = fillWorkSheet
     End Sub
 End Class
