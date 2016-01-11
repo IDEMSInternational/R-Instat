@@ -28,7 +28,7 @@ Partial Class dlgRecode
         Me.NewValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ucrBase = New instat.ucrButtons()
         Me.chkMakeResultFactor = New System.Windows.Forms.CheckBox()
-        Me.chkWithaLabel = New System.Windows.Forms.CheckBox()
+        Me.chkWithALabel = New System.Windows.Forms.CheckBox()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.ucrRecodeRececeiver = New instat.ucrReceiverMultiple()
         Me.ucrRecodeSelector = New instat.ucrSelectorAddRemove()
@@ -39,10 +39,11 @@ Partial Class dlgRecode
         '
         Me.dgvRecode.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvRecode.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RangeStart, Me.RangeEnd, Me.NewValue})
-        Me.dgvRecode.Location = New System.Drawing.Point(320, 12)
+        Me.dgvRecode.Location = New System.Drawing.Point(343, 12)
         Me.dgvRecode.Name = "dgvRecode"
         Me.dgvRecode.Size = New System.Drawing.Size(330, 157)
         Me.dgvRecode.TabIndex = 0
+        Me.dgvRecode.Tag = "Recode"
         '
         'RangeStart
         '
@@ -77,21 +78,21 @@ Partial Class dlgRecode
         Me.chkMakeResultFactor.Text = "Make Result a factor"
         Me.chkMakeResultFactor.UseVisualStyleBackColor = True
         '
-        'chkWithaLabel
+        'chkWithALabel
         '
-        Me.chkWithaLabel.AutoSize = True
-        Me.chkWithaLabel.Location = New System.Drawing.Point(140, 173)
-        Me.chkWithaLabel.Name = "chkWithaLabel"
-        Me.chkWithaLabel.Size = New System.Drawing.Size(86, 17)
-        Me.chkWithaLabel.TabIndex = 2
-        Me.chkWithaLabel.Tag = "With_a_Label"
-        Me.chkWithaLabel.Text = "With a Label"
-        Me.chkWithaLabel.UseVisualStyleBackColor = True
+        Me.chkWithALabel.AutoSize = True
+        Me.chkWithALabel.Location = New System.Drawing.Point(140, 173)
+        Me.chkWithALabel.Name = "chkWithALabel"
+        Me.chkWithALabel.Size = New System.Drawing.Size(86, 17)
+        Me.chkWithALabel.TabIndex = 2
+        Me.chkWithALabel.Tag = "With_a_Label"
+        Me.chkWithALabel.Text = "With a Label"
+        Me.chkWithALabel.UseVisualStyleBackColor = True
         '
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(172, 3)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(213, 3)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
         Me.lblSelectedVariables.TabIndex = 17
@@ -99,34 +100,35 @@ Partial Class dlgRecode
         '
         'ucrRecodeRececeiver
         '
-        Me.ucrRecodeRececeiver.Location = New System.Drawing.Point(192, 16)
+        Me.ucrRecodeRececeiver.Location = New System.Drawing.Point(208, 22)
         Me.ucrRecodeRececeiver.Name = "ucrRecodeRececeiver"
-        Me.ucrRecodeRececeiver.Size = New System.Drawing.Size(130, 142)
+        Me.ucrRecodeRececeiver.Size = New System.Drawing.Size(129, 131)
         Me.ucrRecodeRececeiver.TabIndex = 16
         '
         'ucrRecodeSelector
         '
         Me.ucrRecodeSelector.Location = New System.Drawing.Point(-5, 2)
         Me.ucrRecodeSelector.Name = "ucrRecodeSelector"
-        Me.ucrRecodeSelector.Size = New System.Drawing.Size(198, 136)
+        Me.ucrRecodeSelector.Size = New System.Drawing.Size(207, 136)
         Me.ucrRecodeSelector.TabIndex = 15
         '
         'dlgRecode
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(651, 240)
+        Me.ClientSize = New System.Drawing.Size(673, 240)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.ucrRecodeRececeiver)
         Me.Controls.Add(Me.ucrRecodeSelector)
-        Me.Controls.Add(Me.chkWithaLabel)
+        Me.Controls.Add(Me.chkWithALabel)
         Me.Controls.Add(Me.chkMakeResultFactor)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.dgvRecode)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgRecode"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "dlgRecode"
+        Me.Tag = "Recode"
+        Me.Text = "Recode"
         CType(Me.dgvRecode, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -139,7 +141,7 @@ Partial Class dlgRecode
     Friend WithEvents NewValue As DataGridViewTextBoxColumn
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents chkMakeResultFactor As CheckBox
-    Friend WithEvents chkWithaLabel As CheckBox
+    Friend WithEvents chkWithALabel As CheckBox
     Friend WithEvents lblSelectedVariables As Label
     Friend WithEvents ucrRecodeRececeiver As ucrReceiverMultiple
     Friend WithEvents ucrRecodeSelector As ucrSelectorAddRemove
