@@ -154,7 +154,7 @@ data_obj$methods(get_variables_metadata = function(include_all = TRUE) {
 )
 
 data_obj$methods(get_metadata = function() {
-  return((metadata))
+  return(metadata)
 }
 )
 

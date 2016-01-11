@@ -51,7 +51,7 @@ Public Class frmMain
     End Sub
 
     Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
-        Dim pair As KeyValuePair(Of String, String) = OpenDialog()
+        Dim pair As KeyValuePair(Of String, String) = ImportDialog()
         Dim clsRsyntax As New RSyntax
         If Not IsNothing(pair.Key) Then
             clsRsyntax.SetFunction("read.csv")
@@ -348,11 +348,27 @@ Public Class frmMain
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
         dlgSort.ShowDialog()
     End Sub
-    Public Function OpenDialog() As KeyValuePair(Of String, String)
+    Public Function ImportDialog() As KeyValuePair(Of String, String)
         Dim dlgOpen As New OpenFileDialog
         Dim strFilePath, strFileName As String
         dlgOpen.Filter = "Comma Separated (*.csv)|*.csv"
         dlgOpen.Title = "Import a .csv file into"
+        If dlgOpen.ShowDialog() = DialogResult.OK Then
+            'checks if the file name is not blank'
+            If dlgOpen.FileName <> "" Then
+                strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
+                strFilePath = Replace(dlgOpen.FileName, "\", "/")
+                Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
+            End If
+        Else
+        End If
+    End Function
+
+    Public Function OpenWorkbookDialog() As KeyValuePair(Of String, String)
+        Dim dlgOpen As New OpenFileDialog
+        Dim strFilePath, strFileName As String
+        dlgOpen.Filter = "RDS R-file (*.RDS)|*.RDS"
+        dlgOpen.Title = "Open an RDS R-file"
         If dlgOpen.ShowDialog() = DialogResult.OK Then
             'checks if the file name is not blank'
             If dlgOpen.FileName <> "" Then
@@ -644,8 +660,17 @@ Public Class frmMain
         Me.Close()
     End Sub
 
-    Private Sub mnuFileOpenWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileOpenWorksheet.Click
-        OpenFile.ShowDialog()
+    Private Sub mnuFileOpenWorkbook_Click(sender As Object, e As EventArgs) Handles mnuFileOpenWorkbook.Click
+        Dim kvpFile As KeyValuePair(Of String, String)
+        Dim clsRsyntax As New RSyntax
+
+        kvpFile = OpenWorkbookDialog()
+
+        clsRsyntax.SetAssignTo(clsRInterface.strInstatDataObject)
+        clsRsyntax.SetFunction("readRDS")
+        clsRsyntax.AddParameter("file", kvpFile.Value)
+        clsGrids.UpdateGrids()
+
     End Sub
 
     Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
@@ -653,10 +678,12 @@ Public Class frmMain
         Dim clsRsyntax As New RSyntax
 
         kvpFile = SaveDialog()
-        clsRsyntax.SetFunction("saveRDS")
-        clsRsyntax.AddParameter("object", "InstatDataObject")
-        clsRsyntax.AddParameter("file", kvpFile.Value)
-        clsRInterface.RunScript(clsRsyntax.GetScript())
+        If Not IsNothing(kvpFile.Key) Then
+            clsRsyntax.SetFunction("saveRDS")
+            clsRsyntax.AddParameter("object", clsRInterface.strInstatDataObject)
+            clsRsyntax.AddParameter("file", kvpFile.Value)
+            clsRInterface.RunScript(clsRsyntax.GetScript())
+        End If
     End Sub
 
     Public Function SaveDialog() As KeyValuePair(Of String, String)
@@ -671,8 +698,6 @@ Public Class frmMain
                 strFilePath = Replace(dlgOpen.FileName, "\", "/")
                 Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
             End If
-        Else
-            MsgBox("No File was selected!", vbInformation, "Message From Instat")
         End If
     End Function
 
@@ -681,14 +706,15 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
-        Dim kvpFile As KeyValuePair(Of String, String)
-        Dim clsRsyntax As New RSyntax
+        'TODO decide what Open From Library does and edit below
+        'Dim kvpFile As KeyValuePair(Of String, String)
+        'Dim clsRsyntax As New RSyntax
 
-        kvpFile = OpenDialog()
-        clsRsyntax.SetFunction("read.csv")
-        clsRsyntax.AddParameter("file", kvpFile.Value)
-        clsRInterface.LoadData(kvpFile.Key, clsRsyntax.GetScript())
-        clsGrids.UpdateGrids()
+        'kvpFile = ImportDialog()
+        'clsRsyntax.SetFunction("read.csv")
+        'clsRsyntax.AddParameter("file", kvpFile.Value)
+        'clsRInterface.LoadData(kvpFile.Key, clsRsyntax.GetScript())
+        'clsGrids.UpdateGrids()
     End Sub
 
 End Class
