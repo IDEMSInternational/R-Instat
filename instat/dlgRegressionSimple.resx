@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrReceiverSingleB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 56</value>
+    <value>339, 56</value>
   </data>
   <data name="ucrReceiverSingleB.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 26</value>
@@ -182,35 +182,35 @@
   <data name="&gt;&gt;txtResidualMsg.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblDF.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblDF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblDF.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 43</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblDF.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 13</value>
   </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblDF.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
+  <data name="lblDF.Text" xml:space="preserve">
     <value>Degrees of freedom</value>
   </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
+  <data name="&gt;&gt;lblDF.Name" xml:space="preserve">
+    <value>lblDF</value>
   </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblDF.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblDF.Parent" xml:space="preserve">
     <value>grpLackFit</value>
   </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblDF.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="lblResidualMsg.AutoSize" type="System.Boolean, mscorlib">
@@ -294,34 +294,34 @@
   <data name="&gt;&gt;chkLackFit.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="chkAnovaTable.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkANOVATable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="chkAnovaTable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="chkANOVATable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="chkAnovaTable.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="chkANOVATable.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 141</value>
   </data>
-  <data name="chkAnovaTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 17</value>
+  <data name="chkANOVATable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 17</value>
   </data>
-  <data name="chkAnovaTable.TabIndex" type="System.Int32, mscorlib">
+  <data name="chkANOVATable.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="chkAnovaTable.Text" xml:space="preserve">
-    <value>Show Anova Table</value>
+  <data name="chkANOVATable.Text" xml:space="preserve">
+    <value>Show ANOVA Table</value>
   </data>
-  <data name="&gt;&gt;chkAnovaTable.Name" xml:space="preserve">
-    <value>chkAnovaTable</value>
+  <data name="&gt;&gt;chkANOVATable.Name" xml:space="preserve">
+    <value>chkANOVATable</value>
   </data>
-  <data name="&gt;&gt;chkAnovaTable.Type" xml:space="preserve">
+  <data name="&gt;&gt;chkANOVATable.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;chkAnovaTable.Parent" xml:space="preserve">
+  <data name="&gt;&gt;chkANOVATable.Parent" xml:space="preserve">
     <value>tbRegress</value>
   </data>
-  <data name="&gt;&gt;chkAnovaTable.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;chkANOVATable.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="chkShowPlots.AutoSize" type="System.Boolean, mscorlib">
@@ -331,7 +331,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkShowPlots.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 141</value>
+    <value>144, 147</value>
   </data>
   <data name="chkShowPlots.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 17</value>
@@ -361,7 +361,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkSiginificance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 141</value>
+    <value>9, 147</value>
   </data>
   <data name="chkSiginificance.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 17</value>
@@ -384,43 +384,43 @@
   <data name="&gt;&gt;chkSiginificance.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="ComboBox1.Items" xml:space="preserve">
+  <data name="cboConfidenceLimits.Items" xml:space="preserve">
     <value />
   </data>
-  <data name="ComboBox1.Items1" xml:space="preserve">
+  <data name="cboConfidenceLimits.Items1" xml:space="preserve">
     <value>99.99</value>
   </data>
-  <data name="ComboBox1.Items2" xml:space="preserve">
+  <data name="cboConfidenceLimits.Items2" xml:space="preserve">
     <value>99</value>
   </data>
-  <data name="ComboBox1.Items3" xml:space="preserve">
+  <data name="cboConfidenceLimits.Items3" xml:space="preserve">
     <value>95</value>
   </data>
-  <data name="ComboBox1.Items4" xml:space="preserve">
+  <data name="cboConfidenceLimits.Items4" xml:space="preserve">
     <value>90</value>
   </data>
-  <data name="ComboBox1.Items5" xml:space="preserve">
+  <data name="cboConfidenceLimits.Items5" xml:space="preserve">
     <value>80</value>
   </data>
-  <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 103</value>
+  <data name="cboConfidenceLimits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>342, 103</value>
   </data>
-  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboConfidenceLimits.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 21</value>
   </data>
-  <data name="ComboBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboConfidenceLimits.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
-    <value>ComboBox1</value>
+  <data name="&gt;&gt;cboConfidenceLimits.Name" xml:space="preserve">
+    <value>cboConfidenceLimits</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboConfidenceLimits.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboConfidenceLimits.Parent" xml:space="preserve">
     <value>tbRegress</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboConfidenceLimits.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="lblConfidence.AutoSize" type="System.Boolean, mscorlib">
@@ -430,7 +430,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblConfidence.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 111</value>
+    <value>231, 111</value>
   </data>
   <data name="lblConfidence.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 13</value>
@@ -460,7 +460,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblExplanatoryVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 69</value>
+    <value>228, 69</value>
   </data>
   <data name="lblExplanatoryVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
@@ -490,7 +490,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblResponseVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 37</value>
+    <value>228, 37</value>
   </data>
   <data name="lblResponseVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 13</value>
@@ -514,7 +514,7 @@
     <value>9</value>
   </data>
   <data name="ucrReceiverSingleA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 24</value>
+    <value>339, 24</value>
   </data>
   <data name="ucrReceiverSingleA.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 26</value>
@@ -538,7 +538,7 @@
     <value>3, 6</value>
   </data>
   <data name="ucrAddRemove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 118</value>
+    <value>209, 135</value>
   </data>
   <data name="ucrAddRemove.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -562,7 +562,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbRegress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 274</value>
+    <value>454, 274</value>
   </data>
   <data name="tbRegress.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -589,7 +589,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 274</value>
+    <value>454, 274</value>
   </data>
   <data name="tbPlot.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -613,7 +613,7 @@
     <value>4, 22</value>
   </data>
   <data name="tbSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 274</value>
+    <value>454, 274</value>
   </data>
   <data name="tbSave.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -640,7 +640,7 @@
     <value>0, 0</value>
   </data>
   <data name="tbctrlSimple.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 300</value>
+    <value>462, 300</value>
   </data>
   <data name="tbctrlSimple.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -685,7 +685,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>424, 343</value>
+    <value>462, 363</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
