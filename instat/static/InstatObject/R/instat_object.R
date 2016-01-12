@@ -193,7 +193,7 @@ instat_obj$methods(get_metadata_changed = function(data_obj) {
 } 
 )
 
-instat_obj$methods(set_data_changed = function(obj_name = "", new_val) {
+instat_obj$methods(set_data_frames_changed = function(obj_name = "", new_val) {
   if(obj_name == "") {
     for(curr_obj in data_objects) {
       curr_obj$set_data_changed(new_val)
