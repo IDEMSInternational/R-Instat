@@ -783,6 +783,12 @@
     <Compile Include="dlgSummary.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSummaryChart.Designer.vb">
+      <DependentUpon>dlgSummaryChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSummaryChart.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSummaryTables.designer.vb">
       <DependentUpon>dlgSummaryTables.vb</DependentUpon>
     </Compile>
@@ -1921,6 +1927,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummary.sw-KE.resx">
       <DependentUpon>dlgSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryChart.fr-FR.resx">
+      <DependentUpon>dlgSummaryChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryChart.resx">
+      <DependentUpon>dlgSummaryChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryChart.sw-KE.resx">
+      <DependentUpon>dlgSummaryChart.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryTables.fr-FR.resx">
       <DependentUpon>dlgSummaryTables.vb</DependentUpon>

@@ -45,6 +45,7 @@ Partial Class frmMain
         Me.LogLinearModelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SimpleModelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OneSampleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProbabilityDistributionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NonParametricToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OneAndTwoSamplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStatsNonParametricOneWayAnova = New System.Windows.Forms.ToolStripMenuItem()
@@ -299,7 +300,6 @@ Partial Class frmMain
         Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ProbabilityDistributionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -439,6 +439,12 @@ Partial Class frmMain
         Me.OneSampleToolStripMenuItem.Name = "OneSampleToolStripMenuItem"
         Me.OneSampleToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.OneSampleToolStripMenuItem.Text = "One Sample..."
+        '
+        'ProbabilityDistributionsToolStripMenuItem
+        '
+        Me.ProbabilityDistributionsToolStripMenuItem.Name = "ProbabilityDistributionsToolStripMenuItem"
+        Me.ProbabilityDistributionsToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.ProbabilityDistributionsToolStripMenuItem.Text = "Probability Distributions"
         '
         'NonParametricToolStripMenuItem
         '
@@ -2191,12 +2197,6 @@ Partial Class frmMain
         Me.WaterBalanceToolStripMenuItem1.Name = "WaterBalanceToolStripMenuItem1"
         Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
         Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
-        '
-        'ProbabilityDistributionsToolStripMenuItem
-        '
-        Me.ProbabilityDistributionsToolStripMenuItem.Name = "ProbabilityDistributionsToolStripMenuItem"
-        Me.ProbabilityDistributionsToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.ProbabilityDistributionsToolStripMenuItem.Text = "Probability Distributions"
         '
         'frmMain
         '
