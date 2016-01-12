@@ -665,11 +665,20 @@ Public Class frmMain
         Dim clsRsyntax As New RSyntax
 
         kvpFile = OpenWorkbookDialog()
+        If Not IsNothing(kvpFile.Key) Then
+            clsRsyntax.SetAssignTo(clsRInterface.strInstatDataObject)
+            clsRsyntax.SetFunction("readRDS")
+            clsRsyntax.AddParameter("file", kvpFile.Value)
+            If Not clsRInterface.bInstatObjectExists Then
+                clsRInterface.RunScript(clsRsyntax.GetScript())
+                clsRInterface.bInstatObjectExists = True
+                clsRInterface.clsEngine.Evaluate(clsRInterface.strInstatDataObject & "$set_data_changed(new_val = TRUE)")
+                clsRInterface.clsEngine.Evaluate(clsRInterface.strInstatDataObject & "$set_metadata_changed(new_val = TRUE)")
+                clsRInterface.clsEngine.Evaluate(clsRInterface.strInstatDataObject & "$set_variables_metadata_changed(new_val = TRUE)")
+            End If
+            clsGrids.UpdateGrids()
+        End If
 
-        clsRsyntax.SetAssignTo(clsRInterface.strInstatDataObject)
-        clsRsyntax.SetFunction("readRDS")
-        clsRsyntax.AddParameter("file", kvpFile.Value)
-        clsGrids.UpdateGrids()
 
     End Sub
 
