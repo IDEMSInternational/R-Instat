@@ -661,4 +661,25 @@
   <data name="Treatment_factor" xml:space="preserve">
     <value>Treatment factor</value>
   </data>
+  <data name="Attach_to_Existing_Label_Column" xml:space="preserve">
+    <value>Attach to Existing Label Column</value>
+  </data>
+  <data name="Attach_to_New_Label_Column" xml:space="preserve">
+    <value>Attach to New Label Column</value>
+  </data>
+  <data name="Copy_Results_into_a_New_Column" xml:space="preserve">
+    <value>Copy Results into a New Column</value>
+  </data>
+  <data name="Detach_Label_Column" xml:space="preserve">
+    <value>Detach Label Column</value>
+  </data>
+  <data name="Make_Factor_an_Ordinary_Variable" xml:space="preserve">
+    <value>Make Factor an Ordinary Variable</value>
+  </data>
+  <data name="Seed" xml:space="preserve">
+    <value>Seed</value>
+  </data>
+  <data name="Selected_Column" xml:space="preserve">
+    <value>Selected Column</value>
+  </data>
 </root>
