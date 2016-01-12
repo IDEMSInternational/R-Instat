@@ -682,4 +682,19 @@
   <data name="Selected_Column" xml:space="preserve">
     <value>Selected Column</value>
   </data>
+  <data name="Display_Letter_Values" xml:space="preserve">
+    <value>Display Letter Values</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Weight</value>
+  </data>
+  <data name="X_Axis_Variable" xml:space="preserve">
+    <value>X Axis Variable</value>
+  </data>
+  <data name="Y_Axis_Variable" xml:space="preserve">
+    <value>Y Axis Variable</value>
+  </data>
 </root>
