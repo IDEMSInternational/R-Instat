@@ -193,23 +193,36 @@ instat_obj$methods(get_metadata_changed = function(data_obj) {
 } 
 )
 
-instat_obj$methods(set_data_changed = function(obj_name, new_val) {
-  if(missing(obj_name)) stop("obj_name required")
-    
-  data_objects[[obj_name]]$set_data_changed(new_val)
+instat_obj$methods(set_data_frames_changed = function(obj_name = "", new_val) {
+  if(obj_name == "") {
+    for(curr_obj in data_objects) {
+      curr_obj$set_data_changed(new_val)
+    }
+  }
+  
+  else data_objects[[obj_name]]$set_data_changed(new_val)
+  
 } 
 )
 
-instat_obj$methods(set_variables_metadata_changed = function(obj_name, new_val) {
-  if(missing(obj_name)) stop("obj_name required")
+instat_obj$methods(set_variables_metadata_changed = function(obj_name = "", new_val) {
+  if(obj_name == "") {
+    for(curr_obj in data_objects) {
+      curr_obj$set_variables_metadata_changed(new_val)
+    }
+  }
   
-  data_objects[[obj_name]]$set_variables_metadata_changed(new_val)
+  else data_objects[[obj_name]]$set_variables_metadata_changed(new_val)
 } 
 )
 
-instat_obj$methods(set_metadata_changed = function(obj_name, new_val) {
-  if(missing(obj_name)) stop("obj_name required")
+instat_obj$methods(set_metadata_changed = function(obj_name = "", new_val) {
+  if(obj_name == "") {
+    for(curr_obj in data_objects) {
+      curr_obj$set_metadata_changed(new_val)
+    }
+  }
   
-  data_objects[[obj_name]]$set_metadata_changed(new_val)
+  else data_objects[[obj_name]]$set_metadata_changed(new_val)
 } 
 )
