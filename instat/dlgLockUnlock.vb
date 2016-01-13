@@ -22,7 +22,7 @@ Public Class dlgLockUnlock
     End Sub
     Private Sub defaultSettings()
         rdoLock.Checked = True
-        ucrMultiple.lstSelectedVariables.Items.Clear()
+        ucrReceiverLockUnlock.lstSelectedVariables.Items.Clear()
         chkReservefree.Checked = False
     End Sub
 
