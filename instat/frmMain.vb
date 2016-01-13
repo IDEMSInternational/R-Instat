@@ -22,7 +22,7 @@ Imports System.ComponentModel
 
 Public Class frmMain
 
-    Public clsRInterface As New RInterface
+    Public clsRInterface As New RLink
     Public clsGrids As New clsGridLink
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load

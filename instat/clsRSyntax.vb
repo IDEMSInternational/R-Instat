@@ -16,7 +16,7 @@
 
 
 Public Class RSyntax
-    Dim strFunction As String
+    Public clsBaseFunction As New RFunction
     Public iFunctionType As Integer = 0
     Public iCallType As Integer = 0
     Dim strParameter(1, 0) As String
@@ -24,52 +24,48 @@ Public Class RSyntax
     Public i As Integer
     Public strAssignTo As String
 
-    Public Sub SetFunction(strFunctionName As String)
-        strFunction = strFunctionName
-    End Sub
-
-    Public Sub SetAssignTo(strAssignToName As String)
-        strAssignTo = strAssignToName
-    End Sub
-
-    Public Sub AddParameter(strParameterName As String, strParameterValue As String)
-        Dim iBound, i As Integer
-        Dim bNew As Boolean = True
-        If strParameter(0, 0) Is Nothing Then
-            strParameter(0, 0) = strParameterName
-            strParameter(1, 0) = strParameterValue
-        Else
-            iBound = strParameter.GetUpperBound(1)
-            For i = 0 To iBound
-                If strParameter(0, i) = strParameterName Then
-                    strParameter(1, i) = strParameterValue
-                    bNew = False
-                End If
-            Next
-            If bNew Then
-                ReDim Preserve strParameter(1, iBound + 1)
-                strParameter(0, iBound + 1) = strParameterName
-                strParameter(1, iBound + 1) = strParameterValue
-            End If
+    Public Sub SetFunction(strFunctionName As String, Optional ByRef clsFunction As RFunction = Nothing)
+        If clsFunction Is Nothing Then
+            clsFunction = clsBaseFunction
         End If
+        clsFunction.SetRCommand(strFunctionName)
     End Sub
 
-    Public Sub RemoveParameter(strParameterName As String, strParameterValue As String)
-
-    End Sub
-
-    Public Function GetScript() As String
-        strScript = strFunction & "("
-        If strAssignTo IsNot Nothing Then
-            strScript = strAssignTo & "<-" & strScript
+    Public Sub SetAssignTo(strAssignToName As String, Optional ByRef clsFunction As RFunction = Nothing)
+        If clsFunction Is Nothing Then
+            clsFunction = clsBaseFunction
         End If
-        For i = 0 To strParameter.GetUpperBound(1)
-            If i > 0 Then
-                strScript = strScript & ","
-            End If
-            strScript = strScript & strParameter(0, i) & "=" & strParameter(1, i)
-        Next
-        strScript = strScript & ")"
+        clsFunction.SetAssignTo(strAssignToName)
+    End Sub
+
+    Public Sub AddParameter(strParameterName As String, strParameterValue As String, Optional ByRef clsFunction As RFunction = Nothing)
+        Dim clsParam As New RParameter
+
+        If clsFunction Is Nothing Then
+            clsFunction = clsBaseFunction
+        End If
+        clsParam.SetArgumentName(strParameterName)
+        clsParam.SetArgumentValue(strParameterValue)
+        clsFunction.AddParameter(clsParam)
+    End Sub
+
+    Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)
+        Dim clsParam As New RParameter
+
+        If clsFunction Is Nothing Then
+            clsFunction = clsBaseFunction
+        End If
+        clsFunction.RemoveParameterByName(strParameterName)
+    End Sub
+
+    Public Function GetScript(Optional ByRef clsFunction As RFunction = Nothing) As String
+        Dim strScript As String = ""
+
+        If IsNothing(clsFunction) Then
+            clsFunction = clsBaseFunction
+        End If
+
+        strScript = clsFunction.ToScript(strScript)
         Return strScript
     End Function
 
