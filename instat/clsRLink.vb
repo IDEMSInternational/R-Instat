@@ -131,14 +131,17 @@ Public Class RLink
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
     End Sub
 
-    Public Sub LoadData(strDataName As String, strScript As String)
-        RunScript(strDataName & " <- " & strScript)
+    Public Sub LoadData(strDataName As String, strFile As String)
+        Dim clsRSyntax As New RSyntax
         If Not bInstatObjectExists Then
             RunScript(strInstatDataObject & " <- instat_obj$new()")
             bInstatObjectExists = True
         End If
-        RunScript(strInstatDataObject & "$import_data(data_tables=list(" & strDataName & "=" & strDataName & "))")
-
+        clsRSyntax.SetFunction("read.csv")
+        clsRSyntax.AddParameter("file", strFile)
+        clsRSyntax.SetAssignTo(strDataName, strTempDataframe:=strDataName)
+        RunScript(clsRSyntax.GetScript())
+        frmMain.clsGrids.UpdateGrids()
     End Sub
 
     Public Sub FillListView(lstView As ListView)

@@ -17,9 +17,9 @@
 
 Public Class RSyntax
     Public clsBaseFunction As New RFunction
-    Public iFunctionType As Integer = 0
+    'TODO remove iFunctionType
+    Public iFunctionType As Integer
     Public iCallType As Integer = 0
-    Dim strParameter(1, 0) As String
     Public strScript As String
     Public i As Integer
     Public strAssignTo As String
@@ -31,21 +31,26 @@ Public Class RSyntax
         clsFunction.SetRCommand(strFunctionName)
     End Sub
 
-    Public Sub SetAssignTo(strAssignToName As String, Optional ByRef clsFunction As RFunction = Nothing)
+    Public Sub SetAssignTo(strAssignToName As String, Optional ByRef clsFunction As RFunction = Nothing, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "")
         If clsFunction Is Nothing Then
             clsFunction = clsBaseFunction
         End If
-        clsFunction.SetAssignTo(strAssignToName)
+        clsFunction.SetAssignTo(strAssignToName, strTempDataframe, strTempColumn, strTempModel)
     End Sub
 
-    Public Sub AddParameter(strParameterName As String, strParameterValue As String, Optional ByRef clsFunction As RFunction = Nothing)
+    Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunction As RFunction = Nothing, Optional ByRef clsFunction As RFunction = Nothing)
         Dim clsParam As New RParameter
 
         If clsFunction Is Nothing Then
             clsFunction = clsBaseFunction
         End If
         clsParam.SetArgumentName(strParameterName)
-        clsParam.SetArgumentValue(strParameterValue)
+        If Not strParameterName = "" Then
+            clsParam.SetArgumentValue(strParameterValue)
+        End If
+        If Not clsRFunction Is Nothing Then
+            clsParam.SetArgumentFunction(clsRFunction)
+        End If
         clsFunction.AddParameter(clsParam)
     End Sub
 
@@ -58,46 +63,22 @@ Public Class RSyntax
         clsFunction.RemoveParameterByName(strParameterName)
     End Sub
 
-    Public Function GetScript(Optional ByRef clsFunction As RFunction = Nothing) As String
-        Dim strScript As String = ""
+    Public Function GetScript(Optional ByRef clsFunction As RFunction = Nothing, Optional bExcludeAssignedFunctionOutput As Boolean = True) As String
+
+        Dim strTemp As String
 
         If IsNothing(clsFunction) Then
             clsFunction = clsBaseFunction
         End If
 
-        strScript = clsFunction.ToScript(strScript)
-        Return strScript
+        strScript = ""
+        strTemp = clsFunction.ToScript(strScript)
+        If bExcludeAssignedFunctionOutput And clsFunction.bIsAssigned Then
+            Return strScript
+        Else
+            Return strScript & strTemp
+        End If
+
     End Function
 
-    Public Function writeScript() As String
-        strScript = strFunction & "("
-        If strAssignTo IsNot Nothing Then
-            strScript = strAssignTo & "<-" & strScript
-        End If
-        For i = 0 To strParameter.GetUpperBound(1)
-            If i = 1 Then
-                strScript = strScript & "~"
-            ElseIf i > 2 Then
-                strScript = strScript & "+"
-            End If
-            strScript = strScript & strParameter(0, i)
-        Next
-        strScript = strScript & ",data = data_temp))"
-        Return strScript
-    End Function
-
-    Public Function orderScript() As String
-        strScript = strFunction & "("
-        If strAssignTo IsNot Nothing Then
-            strScript = strAssignTo & "<-" & strScript
-        End If
-        For i = 0 To strParameter.GetUpperBound(1)
-            If i > 0 Then
-                strScript = strScript & ","
-            End If
-            strScript = strScript & strParameter(1, i) & "=" & strParameter(0, i)
-        Next
-        strScript = strScript & ")"
-        Return strScript
-    End Function
 End Class

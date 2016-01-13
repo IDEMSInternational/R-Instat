@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class RFunction
-    Public clsParameters As List(Of RParameter)
+    Public clsParameters As New List(Of RParameter)
     Public strRCommand As String
     Public strAssignTo As String
     Public strAssignToDataFrame As String
@@ -29,8 +29,16 @@ Public Class RFunction
         bIsAssigned = False
     End Sub
 
-    Public Sub SetAssignTo(strTemp As String)
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "")
         strAssignTo = strTemp
+        If Not strTempDataframe = "" Then
+            strAssignToDataFrame = strTempDataframe
+            If Not strTempColumn = "" Then
+                strAssignToColumn = strTempColumn
+            End If
+        ElseIf Not strTempModel = "" Then
+                strAssignToModel = strTempModel
+        End If
         bToBeAssigned = True
         bIsAssigned = False
     End Sub
@@ -45,25 +53,41 @@ Public Class RFunction
             If i > 0 Then
                 strTemp = strTemp & ","
             End If
-            strTemp = clsParameters(i).ToScript(strScript)
+            strTemp = strTemp & clsParameters(i).ToScript(strScript)
         Next
         strTemp = strTemp & ")"
-        If bIsAssigned Then
+        If bToBeAssigned Then
             strScript = strScript & strAssignTo & " <- " & strTemp & vbCrLf
-            If strAssignToDataFrame Then
+            If Not strAssignToDataFrame = "" Then
+                If Not strAssignToColumn = "" Then
+                    strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$add_column_to_data(obj_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ", col_name = " & Chr(34) & strAssignToColumn & Chr(34) & ", col_data = " & strAssignTo & ")" & vbCrLf
+                    strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_column_from_data(obj_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ", col_name = " & Chr(34) & strAssignToColumn & Chr(34) & ")"
+                    bIsAssigned = True
+                    bToBeAssigned = False
+                Else
+                    strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$import_data(data_tables = list(" & strAssignToDataFrame & "=" & strAssignTo & "))" & vbCrLf
+                    strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_data(obj_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ")"
+                    bIsAssigned = True
+                    bToBeAssigned = False
+                End If
+            ElseIf Not strAssignToModel = "" Then
+                strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$add_model(model_name = " & Chr(34) & strAssignToModel & Chr(34) & ", model = " & strAssignTo & ")" & vbCrLf
+                strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_model( model_name = " & Chr(34) & strAssignToModel & Chr(34) & ")"
+                bIsAssigned = True
+                bToBeAssigned = False
             End If
-
-        End If
-        Return strAssignTo
+            Return strAssignTo
         Else
-        Return strTemp
+            Return strTemp
         End If
     End Function
 
     Public Sub AddParameter(clsParam As RParameter)
-        Dim i As Integer
+        Dim i As Integer = -1
+        If Not clsParameters Is Nothing Then
+            i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(clsParam.strArgumentName))
+        End If
 
-        i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(clsParam.strArgumentName))
         If i = -1 Then
             clsParameters.Add(clsParam)
         Else
@@ -79,11 +103,11 @@ Public Class RFunction
 
     Public Sub RemoveParameterByName(strArgName)
         Dim clsParam
-
-        clsParam = clsParameters.Find(Function(x) x.strArgumentName = strArgName)
-        clsParameters.Remove(clsParam)
+        If Not clsParameters Is Nothing Then
+            clsParam = clsParameters.Find(Function(x) x.strArgumentName = strArgName)
+            clsParameters.Remove(clsParam)
+        End If
         bIsAssigned = False
-
     End Sub
 
 End Class
