@@ -54,7 +54,7 @@ Public Class dlgSort
     Private Sub chkWriteBack_CheckStateChanged(sender As Object, e As EventArgs) Handles chkWriteBack.CheckStateChanged
         If chkWriteBack.Checked = True Then
             ucrBase.clsRsyntax.SetFunction("data_temp<-data_temp[order")
-            newdata = frmMain.clsRInterface.GetData("data_temp")
+            newdata = frmMain.clsRLink.GetData("data_temp")
             'frmEditor.UpdateSheet(newdata)
         Else
             ucrBase.clsRsyntax.SetFunction("order")

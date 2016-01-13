@@ -26,7 +26,7 @@
 
     Public Overrides Function GetVariables() As String
         If bSelected Then
-            Return frmMain.clsRInterface.strInstatDataObject & "$data_objects$" & objSelected.Group.ToString() & "$data$" & objSelected.Text
+            Return frmMain.clsRLink.strInstatDataObject & "$data_objects$" & objSelected.Group.ToString() & "$data$" & objSelected.Text
         Else
             Return ""
         End If
