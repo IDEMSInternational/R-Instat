@@ -339,6 +339,24 @@ data_obj$methods(add_defaults_meta = function(user) {
   }
 )
 
+data_obj$methods(remove_row_in_data = function(row_num) {
+  
+  # Column name must be character
+  if( ! is.numeric(row_num) ) {
+    stop("Row number must be of type: numeric")
+  }
+  
+  else if (row_num > nrow(data)) {
+    stop(paste0(" Row: '", row_num, " does not exist in the data."))
+  }
+  
+  else {
+    data <<- data[-row_num,]
+    .self$append_to_changes(list(Removed_row, row_num))
+  }
+}
+)
+
 #Labels for strings which will be added to logs
 Set_property="Set"
 Added_col="Added column"
@@ -349,6 +367,7 @@ Removed_col="Removed column"
 Added_metadata="Added metadata"
 Converted_col_="Converted column"
 Replaced_value="Replaced value"
+Removed_row="Removed row"
 
 #meta data labels
 data_name_label="data_name"
