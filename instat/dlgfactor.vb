@@ -15,9 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgfactor
-    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNumberOfLevels.CheckedChanged, rdoGenerateNewLabelColumn.CheckedChanged, rdoAttchToNewLabelColumn.CheckedChanged, rdoAttachToExistingLabelColumn.CheckedChanged
-        autoTranslate(Me)
+    Private Sub dlgFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("as.factor")
         ucrBase.clsRsyntax.iCallType = 0
+        autoTranslate(Me)
     End Sub
 End Class
