@@ -745,4 +745,124 @@
   <data name="Weights" xml:space="preserve">
     <value>Weights</value>
   </data>
+  <data name="Append" xml:space="preserve">
+    <value>Append</value>
+  </data>
+  <data name="Attach_to_a_new_label_column" xml:space="preserve">
+    <value>Attach to a new label column</value>
+  </data>
+  <data name="Attach_to_existing_label_column1" xml:space="preserve">
+    <value>Attach to existing label column</value>
+  </data>
+  <data name="Copy_result_into_a_new_column" xml:space="preserve">
+    <value>Copy result into a new column</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="Data_column" xml:space="preserve">
+    <value>Data column</value>
+  </data>
+  <data name="Expand1" xml:space="preserve">
+    <value>Expand</value>
+  </data>
+  <data name="Factor" xml:space="preserve">
+    <value>Factor</value>
+  </data>
+  <data name="Find_from" xml:space="preserve">
+    <value>Find from</value>
+  </data>
+  <data name="First" xml:space="preserve">
+    <value>First</value>
+  </data>
+  <data name="Generate_new_label_column_from_data" xml:space="preserve">
+    <value>Generate new label column from data</value>
+  </data>
+  <data name="Indicator_variable" xml:space="preserve">
+    <value>Indicator variable</value>
+  </data>
+  <data name="Into" xml:space="preserve">
+    <value>Into</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>Last</value>
+  </data>
+  <data name="Level_number" xml:space="preserve">
+    <value>Level number</value>
+  </data>
+  <data name="Level_to_be_omitted" xml:space="preserve">
+    <value>Level to be omitted</value>
+  </data>
+  <data name="Lock" xml:space="preserve">
+    <value>Lock</value>
+  </data>
+  <data name="Lock_and_unlock" xml:space="preserve">
+    <value>Lock and unlock</value>
+  </data>
+  <data name="Make_variable_into_a_factor" xml:space="preserve">
+    <value>Make variable into a factor</value>
+  </data>
+  <data name="Matching_column" xml:space="preserve">
+    <value>Matching column</value>
+  </data>
+  <data name="Maximum1" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="Mean1" xml:space="preserve">
+    <value>Mean</value>
+  </data>
+  <data name="Minimum1" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Number_of_levels" xml:space="preserve">
+    <value>Number of levels</value>
+  </data>
+  <data name="Overtype" xml:space="preserve">
+    <value>(Overtype)</value>
+  </data>
+  <data name="REQUIRES_FACTOR_SELECTORS" xml:space="preserve">
+    <value>REQUIRES FACTOR SELECTORS</value>
+  </data>
+  <data name="Reserve_free_space" xml:space="preserve">
+    <value>Reserve free space</value>
+  </data>
+  <data name="Restrict_data_values" xml:space="preserve">
+    <value>Restrict data values</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>Row</value>
+  </data>
+  <data name="Row_statistics1" xml:space="preserve">
+    <value>Row statistics</value>
+  </data>
+  <data name="Selected_variables1" xml:space="preserve">
+    <value>Selected variables</value>
+  </data>
+  <data name="Selected_variables2" xml:space="preserve">
+    <value>Selected variables</value>
+  </data>
+  <data name="Standard_deviation" xml:space="preserve">
+    <value>St. Dev</value>
+  </data>
+  <data name="Statistcs_required" xml:space="preserve">
+    <value>Statistcs required</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="Weights1" xml:space="preserve">
+    <value>Weights</value>
+  </data>
+  <data name="With_column" xml:space="preserve">
+    <value>With column</value>
+  </data>
+  <data name="With_X_Variable" xml:space="preserve">
+    <value>With X Variable</value>
+  </data>
 </root>
