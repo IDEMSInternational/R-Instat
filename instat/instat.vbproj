@@ -135,6 +135,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsRFunction.vb" />
     <Compile Include="dlgAddStartRain.designer.vb">
       <DependentUpon>dlgAddStartRain.vb</DependentUpon>
     </Compile>
@@ -925,8 +926,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="rLink.vb" />
-    <Compile Include="rSyntax.vb" />
+    <Compile Include="clsRLink.vb" />
+    <Compile Include="clsRParameter.vb" />
+    <Compile Include="clsRSyntax.vb" />
     <Compile Include="sdgBoxplot.Designer.vb">
       <DependentUpon>sdgBoxplot.vb</DependentUpon>
     </Compile>
