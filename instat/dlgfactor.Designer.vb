@@ -20,168 +20,166 @@ Partial Class dlgfactor
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrFactorDataSelector = New instat.ucrSelectorAddRemove()
-        Me.lblSelectedColumn = New System.Windows.Forms.Label()
-        Me.ucrFactorSingleReceiver = New instat.ucrReceiverSingle()
-        Me.grpFactor = New System.Windows.Forms.GroupBox()
-        Me.cboAttachtoExistingLabelColumn = New System.Windows.Forms.ComboBox()
-        Me.rdoMakeFactorOrdinaryVariable = New System.Windows.Forms.RadioButton()
-        Me.rdoAttachtoNewLabelColumn = New System.Windows.Forms.RadioButton()
-        Me.rdoAttachtoExistingLabelColumn = New System.Windows.Forms.RadioButton()
-        Me.rdoDetachLabelColumn = New System.Windows.Forms.RadioButton()
-        Me.chkCopyResultsintoaNewColumn = New System.Windows.Forms.CheckBox()
-        Me.grpFactor.SuspendLayout()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
+        Me.lblDataColumn = New System.Windows.Forms.Label()
+        Me.grpMakeVariableIntoFactor = New System.Windows.Forms.GroupBox()
+        Me.rdoNumberOfLevels = New System.Windows.Forms.RadioButton()
+        Me.rdoAttachToExistingLabelColumn = New System.Windows.Forms.RadioButton()
+        Me.rdoAttchToNewLabelColumn = New System.Windows.Forms.RadioButton()
+        Me.chkCopyResultIntoNewColumn = New System.Windows.Forms.CheckBox()
+        Me.txtNumberOfLevels = New System.Windows.Forms.TextBox()
+        Me.rdoGenerateNewLabelColumn = New System.Windows.Forms.RadioButton()
+        Me.grpMakeVariableIntoFactor.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(-1, 294)
+        Me.ucrBase.Location = New System.Drawing.Point(2, 284)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrFactorDataSelector
+        'ucrAddRemove
         '
-        Me.ucrFactorDataSelector.Location = New System.Drawing.Point(-2, 12)
-        Me.ucrFactorDataSelector.Name = "ucrFactorDataSelector"
-        Me.ucrFactorDataSelector.Size = New System.Drawing.Size(203, 127)
-        Me.ucrFactorDataSelector.TabIndex = 1
+        Me.ucrAddRemove.Location = New System.Drawing.Point(12, 12)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
+        Me.ucrAddRemove.TabIndex = 1
         '
-        'lblSelectedColumn
+        'ucrReceiverFactor
         '
-        Me.lblSelectedColumn.AutoSize = True
-        Me.lblSelectedColumn.Location = New System.Drawing.Point(221, 30)
-        Me.lblSelectedColumn.Name = "lblSelectedColumn"
-        Me.lblSelectedColumn.Size = New System.Drawing.Size(87, 13)
-        Me.lblSelectedColumn.TabIndex = 2
-        Me.lblSelectedColumn.Tag = "Selected_Column"
-        Me.lblSelectedColumn.Text = "Selected Column"
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(244, 36)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverFactor.TabIndex = 2
         '
-        'ucrFactorSingleReceiver
+        'lblDataColumn
         '
-        Me.ucrFactorSingleReceiver.Location = New System.Drawing.Point(216, 46)
-        Me.ucrFactorSingleReceiver.Name = "ucrFactorSingleReceiver"
-        Me.ucrFactorSingleReceiver.Size = New System.Drawing.Size(130, 26)
-        Me.ucrFactorSingleReceiver.TabIndex = 3
+        Me.lblDataColumn.AutoSize = True
+        Me.lblDataColumn.Location = New System.Drawing.Point(244, 12)
+        Me.lblDataColumn.Name = "lblDataColumn"
+        Me.lblDataColumn.Size = New System.Drawing.Size(67, 13)
+        Me.lblDataColumn.TabIndex = 3
+        Me.lblDataColumn.Tag = "Data_column"
+        Me.lblDataColumn.Text = "Data column"
         '
-        'grpFactor
+        'grpMakeVariableIntoFactor
         '
-        Me.grpFactor.Controls.Add(Me.cboAttachtoExistingLabelColumn)
-        Me.grpFactor.Controls.Add(Me.rdoMakeFactorOrdinaryVariable)
-        Me.grpFactor.Controls.Add(Me.rdoAttachtoNewLabelColumn)
-        Me.grpFactor.Controls.Add(Me.rdoAttachtoExistingLabelColumn)
-        Me.grpFactor.Controls.Add(Me.rdoDetachLabelColumn)
-        Me.grpFactor.Location = New System.Drawing.Point(13, 146)
-        Me.grpFactor.Name = "grpFactor"
-        Me.grpFactor.Size = New System.Drawing.Size(231, 115)
-        Me.grpFactor.TabIndex = 4
-        Me.grpFactor.TabStop = False
-        Me.grpFactor.Tag = "Change_An_Existing_Factor"
-        Me.grpFactor.Text = "Change An Existing Factor"
+        Me.grpMakeVariableIntoFactor.Controls.Add(Me.txtNumberOfLevels)
+        Me.grpMakeVariableIntoFactor.Controls.Add(Me.rdoGenerateNewLabelColumn)
+        Me.grpMakeVariableIntoFactor.Controls.Add(Me.rdoAttchToNewLabelColumn)
+        Me.grpMakeVariableIntoFactor.Controls.Add(Me.rdoAttachToExistingLabelColumn)
+        Me.grpMakeVariableIntoFactor.Controls.Add(Me.rdoNumberOfLevels)
+        Me.grpMakeVariableIntoFactor.Location = New System.Drawing.Point(12, 145)
+        Me.grpMakeVariableIntoFactor.Name = "grpMakeVariableIntoFactor"
+        Me.grpMakeVariableIntoFactor.Size = New System.Drawing.Size(323, 110)
+        Me.grpMakeVariableIntoFactor.TabIndex = 4
+        Me.grpMakeVariableIntoFactor.TabStop = False
+        Me.grpMakeVariableIntoFactor.Tag = "Make_variable_into _a_factor"
+        Me.grpMakeVariableIntoFactor.Text = "Make variable into a factor"
         '
-        'cboAttachtoExistingLabelColumn
+        'rdoNumberOfLevels
         '
-        Me.cboAttachtoExistingLabelColumn.FormattingEnabled = True
-        Me.cboAttachtoExistingLabelColumn.Items.AddRange(New Object() {"L1", "L2", "L3", "L4"})
-        Me.cboAttachtoExistingLabelColumn.Location = New System.Drawing.Point(178, 43)
-        Me.cboAttachtoExistingLabelColumn.Name = "cboAttachtoExistingLabelColumn"
-        Me.cboAttachtoExistingLabelColumn.Size = New System.Drawing.Size(50, 21)
-        Me.cboAttachtoExistingLabelColumn.TabIndex = 1
+        Me.rdoNumberOfLevels.AutoSize = True
+        Me.rdoNumberOfLevels.Location = New System.Drawing.Point(6, 19)
+        Me.rdoNumberOfLevels.Name = "rdoNumberOfLevels"
+        Me.rdoNumberOfLevels.Size = New System.Drawing.Size(104, 17)
+        Me.rdoNumberOfLevels.TabIndex = 0
+        Me.rdoNumberOfLevels.TabStop = True
+        Me.rdoNumberOfLevels.Tag = "Number_of_levels"
+        Me.rdoNumberOfLevels.Text = "Number of levels"
+        Me.rdoNumberOfLevels.UseVisualStyleBackColor = True
         '
-        'rdoMakeFactorOrdinaryVariable
+        'rdoAttachToExistingLabelColumn
         '
-        Me.rdoMakeFactorOrdinaryVariable.AutoSize = True
-        Me.rdoMakeFactorOrdinaryVariable.Location = New System.Drawing.Point(6, 89)
-        Me.rdoMakeFactorOrdinaryVariable.Name = "rdoMakeFactorOrdinaryVariable"
-        Me.rdoMakeFactorOrdinaryVariable.Size = New System.Drawing.Size(183, 17)
-        Me.rdoMakeFactorOrdinaryVariable.TabIndex = 0
-        Me.rdoMakeFactorOrdinaryVariable.TabStop = True
-        Me.rdoMakeFactorOrdinaryVariable.Tag = "Make_Factor_an_Ordinary_Variable"
-        Me.rdoMakeFactorOrdinaryVariable.Text = "Make Factor an Ordinary Variable"
-        Me.rdoMakeFactorOrdinaryVariable.UseVisualStyleBackColor = True
+        Me.rdoAttachToExistingLabelColumn.AutoSize = True
+        Me.rdoAttachToExistingLabelColumn.Location = New System.Drawing.Point(6, 42)
+        Me.rdoAttachToExistingLabelColumn.Name = "rdoAttachToExistingLabelColumn"
+        Me.rdoAttachToExistingLabelColumn.Size = New System.Drawing.Size(168, 17)
+        Me.rdoAttachToExistingLabelColumn.TabIndex = 0
+        Me.rdoAttachToExistingLabelColumn.TabStop = True
+        Me.rdoAttachToExistingLabelColumn.Tag = "Attach_to_existing_label_column"
+        Me.rdoAttachToExistingLabelColumn.Text = "Attach to existing label column"
+        Me.rdoAttachToExistingLabelColumn.UseVisualStyleBackColor = True
         '
-        'rdoAttachtoNewLabelColumn
+        'rdoAttchToNewLabelColumn
         '
-        Me.rdoAttachtoNewLabelColumn.AutoSize = True
-        Me.rdoAttachtoNewLabelColumn.Location = New System.Drawing.Point(6, 66)
-        Me.rdoAttachtoNewLabelColumn.Name = "rdoAttachtoNewLabelColumn"
-        Me.rdoAttachtoNewLabelColumn.Size = New System.Drawing.Size(160, 17)
-        Me.rdoAttachtoNewLabelColumn.TabIndex = 0
-        Me.rdoAttachtoNewLabelColumn.TabStop = True
-        Me.rdoAttachtoNewLabelColumn.Tag = "Attach_to_New_Label_Column"
-        Me.rdoAttachtoNewLabelColumn.Text = "Attach to New Label Column"
-        Me.rdoAttachtoNewLabelColumn.UseVisualStyleBackColor = True
+        Me.rdoAttchToNewLabelColumn.AutoSize = True
+        Me.rdoAttchToNewLabelColumn.Location = New System.Drawing.Point(6, 65)
+        Me.rdoAttchToNewLabelColumn.Name = "rdoAttchToNewLabelColumn"
+        Me.rdoAttchToNewLabelColumn.Size = New System.Drawing.Size(162, 17)
+        Me.rdoAttchToNewLabelColumn.TabIndex = 0
+        Me.rdoAttchToNewLabelColumn.TabStop = True
+        Me.rdoAttchToNewLabelColumn.Tag = "Attach_to_a_new_label_column"
+        Me.rdoAttchToNewLabelColumn.Text = "Attach to a new label column"
+        Me.rdoAttchToNewLabelColumn.UseVisualStyleBackColor = True
         '
-        'rdoAttachtoExistingLabelColumn
+        'chkCopyResultIntoNewColumn
         '
-        Me.rdoAttachtoExistingLabelColumn.AutoSize = True
-        Me.rdoAttachtoExistingLabelColumn.Location = New System.Drawing.Point(6, 43)
-        Me.rdoAttachtoExistingLabelColumn.Name = "rdoAttachtoExistingLabelColumn"
-        Me.rdoAttachtoExistingLabelColumn.Size = New System.Drawing.Size(174, 17)
-        Me.rdoAttachtoExistingLabelColumn.TabIndex = 0
-        Me.rdoAttachtoExistingLabelColumn.TabStop = True
-        Me.rdoAttachtoExistingLabelColumn.Tag = "Attach_to_Existing_Label_Column"
-        Me.rdoAttachtoExistingLabelColumn.Text = "Attach to Existing Label Column"
-        Me.rdoAttachtoExistingLabelColumn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoAttachtoExistingLabelColumn.UseVisualStyleBackColor = True
+        Me.chkCopyResultIntoNewColumn.AutoSize = True
+        Me.chkCopyResultIntoNewColumn.Location = New System.Drawing.Point(12, 261)
+        Me.chkCopyResultIntoNewColumn.Name = "chkCopyResultIntoNewColumn"
+        Me.chkCopyResultIntoNewColumn.Size = New System.Drawing.Size(167, 17)
+        Me.chkCopyResultIntoNewColumn.TabIndex = 5
+        Me.chkCopyResultIntoNewColumn.Tag = "Copy_result_into_a_new_column"
+        Me.chkCopyResultIntoNewColumn.Text = "Copy result into a new column"
+        Me.chkCopyResultIntoNewColumn.UseVisualStyleBackColor = True
         '
-        'rdoDetachLabelColumn
+        'txtNumberOfLevels
         '
-        Me.rdoDetachLabelColumn.AutoSize = True
-        Me.rdoDetachLabelColumn.Location = New System.Drawing.Point(7, 20)
-        Me.rdoDetachLabelColumn.Name = "rdoDetachLabelColumn"
-        Me.rdoDetachLabelColumn.Size = New System.Drawing.Size(127, 17)
-        Me.rdoDetachLabelColumn.TabIndex = 0
-        Me.rdoDetachLabelColumn.TabStop = True
-        Me.rdoDetachLabelColumn.Tag = "Detach_Label_Column"
-        Me.rdoDetachLabelColumn.Text = "Detach Label Column"
-        Me.rdoDetachLabelColumn.UseVisualStyleBackColor = True
+        Me.txtNumberOfLevels.Location = New System.Drawing.Point(116, 19)
+        Me.txtNumberOfLevels.Name = "txtNumberOfLevels"
+        Me.txtNumberOfLevels.Size = New System.Drawing.Size(100, 20)
+        Me.txtNumberOfLevels.TabIndex = 1
         '
-        'chkCopyResultsintoaNewColumn
+        'rdoGenerateNewLabelColumn
         '
-        Me.chkCopyResultsintoaNewColumn.AutoSize = True
-        Me.chkCopyResultsintoaNewColumn.Location = New System.Drawing.Point(13, 268)
-        Me.chkCopyResultsintoaNewColumn.Name = "chkCopyResultsintoaNewColumn"
-        Me.chkCopyResultsintoaNewColumn.Size = New System.Drawing.Size(180, 17)
-        Me.chkCopyResultsintoaNewColumn.TabIndex = 5
-        Me.chkCopyResultsintoaNewColumn.Tag = "Copy_Results_into_a_New_Column"
-        Me.chkCopyResultsintoaNewColumn.Text = "Copy Results into a New Column"
-        Me.chkCopyResultsintoaNewColumn.UseVisualStyleBackColor = True
+        Me.rdoGenerateNewLabelColumn.AutoSize = True
+        Me.rdoGenerateNewLabelColumn.Location = New System.Drawing.Point(6, 87)
+        Me.rdoGenerateNewLabelColumn.Name = "rdoGenerateNewLabelColumn"
+        Me.rdoGenerateNewLabelColumn.Size = New System.Drawing.Size(201, 17)
+        Me.rdoGenerateNewLabelColumn.TabIndex = 0
+        Me.rdoGenerateNewLabelColumn.TabStop = True
+        Me.rdoGenerateNewLabelColumn.Tag = "Generate_new_label_column_from_data"
+        Me.rdoGenerateNewLabelColumn.Text = "Generate new label column from data"
+        Me.rdoGenerateNewLabelColumn.UseVisualStyleBackColor = True
         '
         'dlgfactor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(401, 329)
-        Me.Controls.Add(Me.chkCopyResultsintoaNewColumn)
-        Me.Controls.Add(Me.grpFactor)
-        Me.Controls.Add(Me.ucrFactorSingleReceiver)
-        Me.Controls.Add(Me.lblSelectedColumn)
-        Me.Controls.Add(Me.ucrFactorDataSelector)
+        Me.ClientSize = New System.Drawing.Size(424, 328)
+        Me.Controls.Add(Me.chkCopyResultIntoNewColumn)
+        Me.Controls.Add(Me.grpMakeVariableIntoFactor)
+        Me.Controls.Add(Me.lblDataColumn)
+        Me.Controls.Add(Me.ucrReceiverFactor)
+        Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgfactor"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Factor"
         Me.Text = "Factor"
-        Me.grpFactor.ResumeLayout(False)
-        Me.grpFactor.PerformLayout()
+        Me.grpMakeVariableIntoFactor.ResumeLayout(False)
+        Me.grpMakeVariableIntoFactor.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrFactorDataSelector As ucrSelectorAddRemove
-    Friend WithEvents lblSelectedColumn As Label
-    Friend WithEvents ucrFactorSingleReceiver As ucrReceiverSingle
-    Friend WithEvents grpFactor As GroupBox
-    Friend WithEvents cboAttachtoExistingLabelColumn As ComboBox
-    Friend WithEvents rdoMakeFactorOrdinaryVariable As RadioButton
-    Friend WithEvents rdoAttachtoNewLabelColumn As RadioButton
-    Friend WithEvents rdoAttachtoExistingLabelColumn As RadioButton
-    Friend WithEvents rdoDetachLabelColumn As RadioButton
-    Friend WithEvents chkCopyResultsintoaNewColumn As CheckBox
+    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
+    Friend WithEvents lblDataColumn As Label
+    Friend WithEvents grpMakeVariableIntoFactor As GroupBox
+    Friend WithEvents rdoNumberOfLevels As RadioButton
+    Friend WithEvents txtNumberOfLevels As TextBox
+    Friend WithEvents rdoGenerateNewLabelColumn As RadioButton
+    Friend WithEvents rdoAttchToNewLabelColumn As RadioButton
+    Friend WithEvents rdoAttachToExistingLabelColumn As RadioButton
+    Friend WithEvents chkCopyResultIntoNewColumn As CheckBox
 End Class

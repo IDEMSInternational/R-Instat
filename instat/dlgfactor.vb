@@ -1,5 +1,4 @@
-﻿
-' Instat-R
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -14,17 +13,11 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
 Public Class dlgfactor
-    Private Sub dlgfactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNumberOfLevels.CheckedChanged, rdoGenerateNewLabelColumn.CheckedChanged, rdoAttchToNewLabelColumn.CheckedChanged, rdoAttachToExistingLabelColumn.CheckedChanged
         autoTranslate(Me)
-        ucrFactorSingleReceiver.SetMeAsReceiver()
-        ucrFactorSingleReceiver.Selector = ucrFactorDataSelector
-        ucrBase.OKEnabled(False)
-    End Sub
-
-    Private Sub ucrFactorSingleReceiver_Enter(sender As Object, e As EventArgs) Handles ucrFactorSingleReceiver.Enter
-        ucrFactorSingleReceiver.SetMeAsReceiver()
+        ucrBase.clsRsyntax.SetFunction("as.factor")
+        ucrBase.clsRsyntax.iCallType = 0
     End Sub
 End Class
