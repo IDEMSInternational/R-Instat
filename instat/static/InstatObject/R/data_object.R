@@ -159,65 +159,34 @@ data_obj$methods(get_metadata = function() {
 )
 
 
-data_obj$methods(append_column_to_data = function(column_data, col_name = "", replace = FALSE) {
+data_obj$methods(add_column_to_data = function(col_name = "", col_data) {
   
   # Column name must be character
   if( ! is.character(col_name) ) stop("Column name must be of type: character")
   
-  # Column data length must match number of rows of data.
-  if ( !( length(column_data) == nrow(data) ) ) {
-    stop(paste("Number of rows in new column does not match the number of rows in the data set.
-               There must be", nrow(data), "entries in the new column."))
-  }
+  col_data = rep(col_data, length.out = nrow(data))
   
-  
-  column_data <- unlist(column_data)
-  # If no name given, generate a default column name.
-  if (col_name == "") {
-    col_name = paste0("column_",sprintf("%02d", length(names(data))+1))
-  }
+  col_data <- unlist(column_data)
   
   if(col_name %in% names(data)) {
-    message(paste("A column named", col_name, "already exists."))
-    if(replace) {
-      message("The variable will be replaced in the data")
-      data[[col_name]] <<- column_data
-      .self$append_to_changes(list(Replaced_col, col_name))
-    }
-    else message("The column will not be replaced. Specify replace = TRUE to replace this column.")
-  }
-  
-  else {
-    data[[col_name]] <<- column_data
-    .self$append_to_changes(list(Added_col, col_name))
-  }
-}
-)
-
-data_obj$methods(replace_column_in_data = function(col_name = "", column_data) {
-  
-  # Column name must be character
-  if( ! is.character(col_name) ) {
-    stop("Column name must be of type: character")
-  }
-  
-  else if (!(col_name %in% names(data))) {
-    stop(paste0("Cannot replace column: ",col_name,". Column was not found in the data."))
-  }
-  
-  # Column data length must match number of rows of data.
-  else if ( !( length(column_data) == nrow(data) ) )
-    stop(paste("Number of rows in new column does not match the number of rows in the data set.
-               There must be", nrow(data), "entries in the new column."))
-  
-  else {
-    data[[col_name]] <<- column_data
+    message(paste("A column named", col_name, "already exists. The column will be replaced in the data"))
     .self$append_to_changes(list(Replaced_col, col_name))
-    #      is_data_split<<-FALSE
   }
+  
+  else .self$append_to_changes(list(Added_col, col_name))
+  
+  data[[col_name]] <<- col_data
 }
 )
 
+data_obj$methods(get_column_from_data = function(col_name) {
+  if(missing(col_name)) stop("no col_name to return")
+  if(!col_name %in% names(data)) stop(paste(col_name, "not found in data"))
+  
+  return(data[[col_name]])
+}
+)
+  
 data_obj$methods(rename_column_in_data = function(curr_col_name = "", new_col_name="") {
   
   # Column name must be character
@@ -338,6 +307,13 @@ data_obj$methods(add_defaults_meta = function(user) {
   append_to_metadata(is_calculated_label,FALSE)
   }
 )
+
+data_obj$methods(add_column_to_data = function(col_name  ="", col_data) {
+  col_data = rep(col_data, length.out = nrow(data))
+  
+}
+)
+
 
 #Labels for strings which will be added to logs
 Set_property="Set"

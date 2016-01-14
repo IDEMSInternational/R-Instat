@@ -22,7 +22,7 @@ Imports System.ComponentModel
 
 Public Class frmMain
 
-    Public clsRInterface As New RInterface
+    Public clsRLink As New RLink
     Public clsGrids As New clsGridLink
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -38,12 +38,12 @@ Public Class frmMain
         frmEditor.Show()
 
         'Setting the properties of R Interface
-        clsRInterface.SetLog(frmLog.txtLog)
-        clsRInterface.SetOutput(frmCommand.txtCommand)
-        clsRInterface.clsEngine = REngine.GetInstance()
-        clsRInterface.clsEngine.Initialize()
+        clsRLink.SetLog(frmLog.txtLog)
+        clsRLink.SetOutput(frmCommand.txtCommand)
+        clsRLink.clsEngine = REngine.GetInstance()
+        clsRLink.clsEngine.Initialize()
         'Sets up R source files
-        clsRInterface.RSetup()
+        clsRLink.RSetup()
 
         ' TODO tstatus shouldn't be set here in this way
         tstatus.Text = frmEditor.grdData.CurrentWorksheet.Name
@@ -52,12 +52,8 @@ Public Class frmMain
 
     Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
         Dim pair As KeyValuePair(Of String, String) = ImportDialog()
-        Dim clsRsyntax As New RSyntax
         If Not IsNothing(pair.Key) Then
-            clsRsyntax.SetFunction("read.csv")
-            clsRsyntax.AddParameter("file", pair.Value)
-            clsRInterface.LoadData(pair.Key, clsRsyntax.GetScript())
-            clsGrids.UpdateGrids()
+            clsRLink.LoadData(pair.Key, pair.Value)
         End If
 
     End Sub
@@ -360,8 +356,8 @@ Public Class frmMain
                 strFilePath = Replace(dlgOpen.FileName, "\", "/")
                 Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
             End If
-        Else
         End If
+        Return New KeyValuePair(Of String, String)("", "")
     End Function
 
     Public Function OpenWorkbookDialog() As KeyValuePair(Of String, String)
@@ -376,8 +372,8 @@ Public Class frmMain
                 strFilePath = Replace(dlgOpen.FileName, "\", "/")
                 Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
             End If
-        Else
         End If
+        Return New KeyValuePair(Of String, String)("", "")
     End Function
 
     Private Sub mnuEditFont_Click(sender As Object, e As EventArgs) Handles mnuEditFont.Click
@@ -666,15 +662,15 @@ Public Class frmMain
 
         kvpFile = OpenWorkbookDialog()
         If Not IsNothing(kvpFile.Key) Then
-            clsRsyntax.SetAssignTo(clsRInterface.strInstatDataObject)
+            clsRsyntax.SetAssignTo(clsRLink.strInstatDataObject)
             clsRsyntax.SetFunction("readRDS")
             clsRsyntax.AddParameter("file", kvpFile.Value)
-            If Not clsRInterface.bInstatObjectExists Then
-                clsRInterface.RunScript(clsRsyntax.GetScript())
-                clsRInterface.bInstatObjectExists = True
-                clsRInterface.clsEngine.Evaluate(clsRInterface.strInstatDataObject & "$set_data_frames_changed(new_val = TRUE)")
-                clsRInterface.clsEngine.Evaluate(clsRInterface.strInstatDataObject & "$set_metadata_changed(new_val = TRUE)")
-                clsRInterface.clsEngine.Evaluate(clsRInterface.strInstatDataObject & "$set_variables_metadata_changed(new_val = TRUE)")
+            If Not clsRLink.bInstatObjectExists Then
+                clsRLink.RunScript(clsRsyntax.GetScript())
+                clsRLink.bInstatObjectExists = True
+                clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_data_frames_changed(new_val = TRUE)")
+                clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = TRUE)")
+                clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_variables_metadata_changed(new_val = TRUE)")
             End If
             clsGrids.UpdateGrids()
         End If
@@ -689,9 +685,9 @@ Public Class frmMain
         kvpFile = SaveDialog()
         If Not IsNothing(kvpFile.Key) Then
             clsRsyntax.SetFunction("saveRDS")
-            clsRsyntax.AddParameter("object", clsRInterface.strInstatDataObject)
+            clsRsyntax.AddParameter("object", clsRLink.strInstatDataObject)
             clsRsyntax.AddParameter("file", kvpFile.Value)
-            clsRInterface.RunScript(clsRsyntax.GetScript())
+            clsRLink.RunScript(clsRsyntax.GetScript())
         End If
     End Sub
 
@@ -708,6 +704,7 @@ Public Class frmMain
                 Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
             End If
         End If
+        Return New KeyValuePair(Of String, String)("", "")
     End Function
 
     Private Sub mnuFileCloseWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileCloseWorksheet.Click

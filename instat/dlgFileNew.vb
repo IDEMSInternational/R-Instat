@@ -35,7 +35,7 @@ Public Class dlgFileNew
     End Sub
 
     Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.clsRInterface.LoadData(txtName.Text, "data.frame(matrix(NA, nrow = " & txtRows.Text & ", ncol = " & txtColumns.Text & "))")
+        frmMain.clsRLink.LoadData(txtName.Text, "data.frame(matrix(NA, nrow = " & txtRows.Text & ", ncol = " & txtColumns.Text & "))")
         frmMain.clsGrids.UpdateGrids()
     End Sub
 End Class
