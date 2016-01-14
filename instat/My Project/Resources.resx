@@ -661,4 +661,88 @@
   <data name="Treatment_factor" xml:space="preserve">
     <value>Treatment factor</value>
   </data>
+  <data name="Attach_to_Existing_Label_Column" xml:space="preserve">
+    <value>Attach to Existing Label Column</value>
+  </data>
+  <data name="Attach_to_New_Label_Column" xml:space="preserve">
+    <value>Attach to New Label Column</value>
+  </data>
+  <data name="Copy_Results_into_a_New_Column" xml:space="preserve">
+    <value>Copy Results into a New Column</value>
+  </data>
+  <data name="Detach_Label_Column" xml:space="preserve">
+    <value>Detach Label Column</value>
+  </data>
+  <data name="Make_Factor_an_Ordinary_Variable" xml:space="preserve">
+    <value>Make Factor an Ordinary Variable</value>
+  </data>
+  <data name="Seed" xml:space="preserve">
+    <value>Seed</value>
+  </data>
+  <data name="Selected_Column" xml:space="preserve">
+    <value>Selected Column</value>
+  </data>
+  <data name="Display_Letter_Values" xml:space="preserve">
+    <value>Display Letter Values</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Weight</value>
+  </data>
+  <data name="X_Axis_Variable" xml:space="preserve">
+    <value>X Axis Variable</value>
+  </data>
+  <data name="Y_Axis_Variable" xml:space="preserve">
+    <value>Y Axis Variable</value>
+  </data>
+  <data name="Cases" xml:space="preserve">
+    <value>% Cases</value>
+  </data>
+  <data name="Category_Factor" xml:space="preserve">
+    <value>Category Factor</value>
+  </data>
+  <data name="Chart_Type" xml:space="preserve">
+    <value>Chart Type</value>
+  </data>
+  <data name="Cluster_By" xml:space="preserve">
+    <value>Cluster By</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Maximum" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="Mean" xml:space="preserve">
+    <value>Mean</value>
+  </data>
+  <data name="Median" xml:space="preserve">
+    <value>Median</value>
+  </data>
+  <data name="Minimum" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="Number_of_Cases" xml:space="preserve">
+    <value>Number of Cases</value>
+  </data>
+  <data name="Std_Deviation" xml:space="preserve">
+    <value>Std Deviation</value>
+  </data>
+  <data name="Summary_Statistics" xml:space="preserve">
+    <value>Summary Statistics</value>
+  </data>
+  <data name="Summary_Variable" xml:space="preserve">
+    <value>Summary Variable</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Weights" xml:space="preserve">
+    <value>Weights</value>
+  </data>
 </root>
