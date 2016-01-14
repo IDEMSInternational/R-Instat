@@ -118,8 +118,8 @@ Public Class dlgCalculator
     Private Sub ucrBase_clickOK(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strScript As String
         strScript = ("data[[" & Chr(34) & txtNewColumnName.Text & Chr(34) & "]]" & " <- " & txtCalcLine.Text).ToString
-        frmMain.clsRInterface.RunScript(strScript)
-        dataset = frmMain.clsRInterface.GetData("data")
+        frmMain.clsRLink.RunScript(strScript)
+        dataset = frmMain.clsRLink.GetData("data")
         'frmEditor.UpdateSheet(dataset)
     End Sub
 
