@@ -40,6 +40,8 @@ Public Class clsGridLink
         Dim strDataName As String
         Dim shtTemp As Worksheet
 
+        If Not frmMain.clsRLink.bInstatObjectExists Then Exit Sub
+
         bRDataChanged = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_changed()").AsLogical(0)
         bRMetadataChanged = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_metadata_changed()").AsLogical(0)
         bRVariablesMetadataChanged = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata_changed()").AsLogical(0)
@@ -133,17 +135,19 @@ Public Class clsGridLink
 
     Public Sub FillSheet(dfTemp As DataFrame, strName As String, grdCurr As ReoGridControl)
         Dim bFoundWorksheet As Boolean = False
-        Dim tempWorkSheet
-        Dim fillWorkSheet
+        Dim tempWorkSheet As Worksheet
+        Dim fillWorkSheet As Worksheet
 
         For Each tempWorkSheet In grdCurr.Worksheets
             If tempWorkSheet.Name = strName Then
-                fillWorkSheet = grdCurr.GetWorksheetByName(strName)
                 bFoundWorksheet = True
+                Exit For
             End If
         Next
 
-        If Not bFoundWorksheet Then
+        If bFoundWorksheet Then
+            fillWorkSheet = grdCurr.GetWorksheetByName(strName)
+        Else
             fillWorkSheet = grdCurr.CreateWorksheet(strName)
             grdCurr.AddWorksheet(fillWorkSheet)
         End If

@@ -356,8 +356,8 @@ Public Class frmMain
                 strFilePath = Replace(dlgOpen.FileName, "\", "/")
                 Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
             End If
-        Else
         End If
+        Return New KeyValuePair(Of String, String)("", "")
     End Function
 
     Public Function OpenWorkbookDialog() As KeyValuePair(Of String, String)
@@ -372,8 +372,8 @@ Public Class frmMain
                 strFilePath = Replace(dlgOpen.FileName, "\", "/")
                 Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
             End If
-        Else
         End If
+        Return New KeyValuePair(Of String, String)("", "")
     End Function
 
     Private Sub mnuEditFont_Click(sender As Object, e As EventArgs) Handles mnuEditFont.Click
@@ -704,6 +704,7 @@ Public Class frmMain
                 Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
             End If
         End If
+        Return New KeyValuePair(Of String, String)("", "")
     End Function
 
     Private Sub mnuFileCloseWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileCloseWorksheet.Click
