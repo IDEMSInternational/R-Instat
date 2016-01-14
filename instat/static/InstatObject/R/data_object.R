@@ -314,17 +314,31 @@ data_obj$methods(add_column_to_data = function(col_name  ="", col_data) {
 }
 )
 
+data_obj$methods(remove_row_in_data = function(row_num) {
+
+  if (   row_num != as.integer(row_num) || row_num < 1 || row_num >  nrow(data) ) {
+    stop( paste("index must be an integer between 1 and", nrow(data), ".") )
+  }
+  else if (row_num > nrow(data)) {
+      stop(paste0(" Row: '", row_num, " does not exist in the data."))
+    }
+  else {
+    data <<- data[-row_num,]
+    .self$append_to_changes(list(Removed_row, row_num))
+    }
+}
+)
 
 #Labels for strings which will be added to logs
 Set_property="Set"
 Added_col="Added column"
-Added_col_label="Added variable"
 Replaced_col="Replaced column"
 Renamed_col="Renamed column"
 Removed_col="Removed column"
 Added_metadata="Added metadata"
 Converted_col_="Converted column"
 Replaced_value="Replaced value"
+Removed_row="Removed row"
 
 #meta data labels
 data_name_label="data_name"
