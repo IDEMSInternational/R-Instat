@@ -960,6 +960,12 @@
     <Compile Include="ucrDataSelection.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrNewColumnName.Designer.vb">
+      <DependentUpon>ucrNewColumnName.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrNewColumnName.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrReceiver.Designer.vb">
       <DependentUpon>ucrReceiver.vb</DependentUpon>
     </Compile>
@@ -2148,6 +2154,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.sw-KE.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrNewColumnName.fr-FR.resx">
+      <DependentUpon>ucrNewColumnName.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrNewColumnName.resx">
+      <DependentUpon>ucrNewColumnName.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrNewColumnName.sw-KE.resx">
+      <DependentUpon>ucrNewColumnName.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverMultiple.fr-FR.resx">
       <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
