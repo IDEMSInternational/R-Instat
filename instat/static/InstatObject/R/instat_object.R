@@ -267,3 +267,35 @@ instat_obj$methods(get_model = function(model_name) {
   models[[model_name]]
 }
 )
+
+instat_obj$methods(replace_value_in_data = function(obj_name, column_name, row_number, new_val) {
+  if(!is.character(obj_name)) stop("obj_name must be of type character")
+  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  
+  data_objects[[obj_name]]$replace_value_in_data(column_name, row_number, new_val)
+} 
+)
+
+instat_obj$methods(rename_column_in_data = function(obj_name, column_name, new_val) {
+    if(!is.character(obj_name)) stop("obj_name must be of type character")
+    if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+    
+    data_objects[[obj_name]]$rename_column_in_data(column_name, new_val)
+  } 
+  )
+
+instat_obj$methods(remove_column_in_data = function(obj_name, column_name) {
+  if(!is.character(obj_name)) stop("obj_name must be of type character")
+  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  
+  data_objects[[obj_name]]$remove_column_in_data(column_name)
+} 
+)
+
+instat_obj$methods(remove_row_in_data = function(obj_name, row_num) {
+  if(!is.character(obj_name)) stop("obj_name must be of type character")
+  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  
+  data_objects[[obj_name]]$remove_row_in_data(row_num)
+} 
+)
