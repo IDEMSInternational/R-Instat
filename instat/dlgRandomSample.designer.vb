@@ -38,10 +38,13 @@ Partial Class dlgRandomSample
         Me.lblDistributionType = New System.Windows.Forms.Label()
         Me.cboDistributionType = New System.Windows.Forms.ComboBox()
         Me.grpSampleDataColumn = New System.Windows.Forms.GroupBox()
+        Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.UcrReceiverSingle = New instat.ucrReceiverSingle()
         Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblSelectedVariable = New System.Windows.Forms.Label()
+        Me.chkPlot = New System.Windows.Forms.CheckBox()
+        Me.lblSeed = New System.Windows.Forms.Label()
+        Me.txtSeed = New System.Windows.Forms.TextBox()
         Me.grpSampling.SuspendLayout()
         Me.grpProbabilityDistribution.SuspendLayout()
         Me.grpSampleDataColumn.SuspendLayout()
@@ -65,14 +68,14 @@ Partial Class dlgRandomSample
         '
         'txtSampleSize
         '
-        Me.txtSampleSize.Location = New System.Drawing.Point(86, 99)
+        Me.txtSampleSize.Location = New System.Drawing.Point(109, 99)
         Me.txtSampleSize.Name = "txtSampleSize"
         Me.txtSampleSize.Size = New System.Drawing.Size(100, 20)
         Me.txtSampleSize.TabIndex = 5
         '
         'txtNumberofSamples
         '
-        Me.txtNumberofSamples.Location = New System.Drawing.Point(86, 74)
+        Me.txtNumberofSamples.Location = New System.Drawing.Point(110, 74)
         Me.txtNumberofSamples.Name = "txtNumberofSamples"
         Me.txtNumberofSamples.Size = New System.Drawing.Size(100, 20)
         Me.txtNumberofSamples.TabIndex = 4
@@ -125,9 +128,9 @@ Partial Class dlgRandomSample
         Me.grpProbabilityDistribution.Controls.Add(Me.lblParameters)
         Me.grpProbabilityDistribution.Controls.Add(Me.lblDistributionType)
         Me.grpProbabilityDistribution.Controls.Add(Me.cboDistributionType)
-        Me.grpProbabilityDistribution.Location = New System.Drawing.Point(252, 20)
+        Me.grpProbabilityDistribution.Location = New System.Drawing.Point(8, 188)
         Me.grpProbabilityDistribution.Name = "grpProbabilityDistribution"
-        Me.grpProbabilityDistribution.Size = New System.Drawing.Size(244, 164)
+        Me.grpProbabilityDistribution.Size = New System.Drawing.Size(236, 151)
         Me.grpProbabilityDistribution.TabIndex = 2
         Me.grpProbabilityDistribution.TabStop = False
         Me.grpProbabilityDistribution.Tag = "Probability_Distribution"
@@ -135,14 +138,14 @@ Partial Class dlgRandomSample
         '
         'txtStDev
         '
-        Me.txtStDev.Location = New System.Drawing.Point(128, 136)
+        Me.txtStDev.Location = New System.Drawing.Point(128, 121)
         Me.txtStDev.Name = "txtStDev"
         Me.txtStDev.Size = New System.Drawing.Size(100, 20)
         Me.txtStDev.TabIndex = 6
         '
         'txtMean
         '
-        Me.txtMean.Location = New System.Drawing.Point(128, 98)
+        Me.txtMean.Location = New System.Drawing.Point(128, 95)
         Me.txtMean.Name = "txtMean"
         Me.txtMean.Size = New System.Drawing.Size(100, 20)
         Me.txtMean.TabIndex = 5
@@ -150,7 +153,7 @@ Partial Class dlgRandomSample
         'lblStDev
         '
         Me.lblStDev.AutoSize = True
-        Me.lblStDev.Location = New System.Drawing.Point(40, 139)
+        Me.lblStDev.Location = New System.Drawing.Point(40, 124)
         Me.lblStDev.Name = "lblStDev"
         Me.lblStDev.Size = New System.Drawing.Size(43, 13)
         Me.lblStDev.TabIndex = 4
@@ -160,7 +163,7 @@ Partial Class dlgRandomSample
         'lblMean
         '
         Me.lblMean.AutoSize = True
-        Me.lblMean.Location = New System.Drawing.Point(40, 105)
+        Me.lblMean.Location = New System.Drawing.Point(40, 102)
         Me.lblMean.Name = "lblMean"
         Me.lblMean.Size = New System.Drawing.Size(34, 13)
         Me.lblMean.TabIndex = 3
@@ -170,7 +173,7 @@ Partial Class dlgRandomSample
         'lblParameters
         '
         Me.lblParameters.AutoSize = True
-        Me.lblParameters.Location = New System.Drawing.Point(40, 64)
+        Me.lblParameters.Location = New System.Drawing.Point(40, 58)
         Me.lblParameters.Name = "lblParameters"
         Me.lblParameters.Size = New System.Drawing.Size(60, 13)
         Me.lblParameters.TabIndex = 2
@@ -180,7 +183,7 @@ Partial Class dlgRandomSample
         'lblDistributionType
         '
         Me.lblDistributionType.AutoSize = True
-        Me.lblDistributionType.Location = New System.Drawing.Point(40, 33)
+        Me.lblDistributionType.Location = New System.Drawing.Point(34, 33)
         Me.lblDistributionType.Name = "lblDistributionType"
         Me.lblDistributionType.Size = New System.Drawing.Size(86, 13)
         Me.lblDistributionType.TabIndex = 1
@@ -191,9 +194,9 @@ Partial Class dlgRandomSample
         '
         Me.cboDistributionType.FormattingEnabled = True
         Me.cboDistributionType.Items.AddRange(New Object() {"Normal", "Geometric", "Exponential", "Extreme Value", "Weibull", "Uniform", "Bernoulli", "Binomial", "Poisson", "Beta", "Chi- Square", "F", "Gamma", "Hypergeometric", "Log-normal", "Multinomial", "Negative Binomial", "Student's t"})
-        Me.cboDistributionType.Location = New System.Drawing.Point(132, 30)
+        Me.cboDistributionType.Location = New System.Drawing.Point(126, 30)
         Me.cboDistributionType.Name = "cboDistributionType"
-        Me.cboDistributionType.Size = New System.Drawing.Size(96, 21)
+        Me.cboDistributionType.Size = New System.Drawing.Size(102, 21)
         Me.cboDistributionType.TabIndex = 0
         '
         'grpSampleDataColumn
@@ -201,17 +204,27 @@ Partial Class dlgRandomSample
         Me.grpSampleDataColumn.Controls.Add(Me.lblSelectedVariable)
         Me.grpSampleDataColumn.Controls.Add(Me.UcrReceiverSingle)
         Me.grpSampleDataColumn.Controls.Add(Me.UcrAddRemove)
-        Me.grpSampleDataColumn.Location = New System.Drawing.Point(541, 12)
+        Me.grpSampleDataColumn.Location = New System.Drawing.Point(250, 12)
         Me.grpSampleDataColumn.Name = "grpSampleDataColumn"
-        Me.grpSampleDataColumn.Size = New System.Drawing.Size(338, 172)
+        Me.grpSampleDataColumn.Size = New System.Drawing.Size(333, 172)
         Me.grpSampleDataColumn.TabIndex = 3
         Me.grpSampleDataColumn.TabStop = False
         Me.grpSampleDataColumn.Tag = "Sample_from_data_column"
         Me.grpSampleDataColumn.Text = "Sample from data column"
         '
+        'lblSelectedVariable
+        '
+        Me.lblSelectedVariable.AutoSize = True
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(223, 33)
+        Me.lblSelectedVariable.Name = "lblSelectedVariable"
+        Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
+        Me.lblSelectedVariable.TabIndex = 2
+        Me.lblSelectedVariable.Tag = "Selected_Variable"
+        Me.lblSelectedVariable.Text = "Selected Variable"
+        '
         'UcrReceiverSingle
         '
-        Me.UcrReceiverSingle.Location = New System.Drawing.Point(226, 64)
+        Me.UcrReceiverSingle.Location = New System.Drawing.Point(226, 56)
         Me.UcrReceiverSingle.Name = "UcrReceiverSingle"
         Me.UcrReceiverSingle.Size = New System.Drawing.Size(106, 26)
         Me.UcrReceiverSingle.TabIndex = 1
@@ -220,31 +233,52 @@ Partial Class dlgRandomSample
         '
         Me.UcrAddRemove.Location = New System.Drawing.Point(8, 30)
         Me.UcrAddRemove.Name = "UcrAddRemove"
-        Me.UcrAddRemove.Size = New System.Drawing.Size(182, 118)
+        Me.UcrAddRemove.Size = New System.Drawing.Size(201, 136)
         Me.UcrAddRemove.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(21, 371)
+        Me.ucrBase.Location = New System.Drawing.Point(38, 346)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 32)
         Me.ucrBase.TabIndex = 0
         '
-        'lblSelectedVariable
+        'chkPlot
         '
-        Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(223, 41)
-        Me.lblSelectedVariable.Name = "lblSelectedVariable"
-        Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
-        Me.lblSelectedVariable.TabIndex = 2
-        Me.lblSelectedVariable.Tag = "Selected_Variable"
-        Me.lblSelectedVariable.Text = "Selected Variable"
+        Me.chkPlot.AutoSize = True
+        Me.chkPlot.Location = New System.Drawing.Point(254, 196)
+        Me.chkPlot.Name = "chkPlot"
+        Me.chkPlot.Size = New System.Drawing.Size(44, 17)
+        Me.chkPlot.TabIndex = 4
+        Me.chkPlot.Tag = "Plot"
+        Me.chkPlot.Text = "Plot"
+        Me.chkPlot.UseVisualStyleBackColor = True
+        '
+        'lblSeed
+        '
+        Me.lblSeed.AutoSize = True
+        Me.lblSeed.Location = New System.Drawing.Point(323, 198)
+        Me.lblSeed.Name = "lblSeed"
+        Me.lblSeed.Size = New System.Drawing.Size(32, 13)
+        Me.lblSeed.TabIndex = 5
+        Me.lblSeed.Tag = "Seed"
+        Me.lblSeed.Text = "Seed"
+        '
+        'txtSeed
+        '
+        Me.txtSeed.Location = New System.Drawing.Point(362, 196)
+        Me.txtSeed.Name = "txtSeed"
+        Me.txtSeed.Size = New System.Drawing.Size(47, 20)
+        Me.txtSeed.TabIndex = 6
         '
         'dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(907, 463)
+        Me.ClientSize = New System.Drawing.Size(589, 379)
+        Me.Controls.Add(Me.txtSeed)
+        Me.Controls.Add(Me.lblSeed)
+        Me.Controls.Add(Me.chkPlot)
         Me.Controls.Add(Me.grpSampleDataColumn)
         Me.Controls.Add(Me.grpProbabilityDistribution)
         Me.Controls.Add(Me.grpSampling)
@@ -262,6 +296,7 @@ Partial Class dlgRandomSample
         Me.grpSampleDataColumn.ResumeLayout(False)
         Me.grpSampleDataColumn.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -285,4 +320,7 @@ Partial Class dlgRandomSample
     Friend WithEvents UcrAddRemove As ucrSelectorAddRemove
     Friend WithEvents UcrReceiverSingle As ucrReceiverSingle
     Friend WithEvents lblSelectedVariable As Label
+    Friend WithEvents chkPlot As CheckBox
+    Friend WithEvents lblSeed As Label
+    Friend WithEvents txtSeed As TextBox
 End Class
