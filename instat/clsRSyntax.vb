@@ -17,8 +17,6 @@
 
 Public Class RSyntax
     Public clsBaseFunction As New RFunction
-    'TODO remove iFunctionType
-    Public iFunctionType As Integer
     Public iCallType As Integer = 0
     Public strScript As String
     Public i As Integer
@@ -71,7 +69,6 @@ Public Class RSyntax
             clsFunction = clsBaseFunction
         End If
 
-        strScript = ""
         strTemp = clsFunction.ToScript(strScript)
         If bExcludeAssignedFunctionOutput And clsFunction.bIsAssigned Then
             Return strScript

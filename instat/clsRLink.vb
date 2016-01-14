@@ -68,7 +68,7 @@ Public Class RLink
             If bLog Then
                 txtLog.Text = txtLog.Text & strScript & vbCrLf
             End If
-            strOutput = "> " & strScript & vbCrLf
+            strOutput = strScript & vbCrLf
             If bReturnOutput = 0 Then
                 clsEngine.Evaluate(strScript)
             ElseIf bReturnOutput = 1 Then

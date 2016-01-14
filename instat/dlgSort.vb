@@ -25,7 +25,6 @@ Public Class dlgSort
         ucrMultiple.Selector = ucrAddRemove
         ucrMultiple.SetMeAsReceiver()
         ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.clsRsyntax.iFunctionType = 2
         autoTranslate(Me)
     End Sub
 
