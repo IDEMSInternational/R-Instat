@@ -271,4 +271,26 @@
         AAD///////8AAP///////wAA////////AAD///////8AAP///////wAA////////AAD///////8AAA==
 </value>
   </data>
+  <metadata name="fontToolStrip.TrayLocation" xml:space="preserve" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>747, 95</value>
+  </metadata>
+  <data name="enlargeFontToolStripButton.Image" xml:space="preserve" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADgSURBVDhPYxiCQLj+P5RFAAip5zEIqnlCeRAA0gzD+IE9
+        C4OQ2gsGYfVtUAGgZj+gRjSME4BsFla7BDTgP4OQihZUlAQgrDYBrBFkgLBaC1SUSADRGA1mg7wgpP4D
+        KMYH5hMFhNXnwDWADAK7AmogQSCkKg1UfJJBUN0djIXVYiEGAMODKACKOmG1nUDchsDqj8CGCGpYQlXh
+        AsCoA9mE7l9wjIC9gYhSrEBYPQOIm6A8BJCX54AaAHSFmgdUFA0Iqx8BOv8VGAurf4CKAm3X1AZrhIhf
+        gxqSApUdFICBAQAc0zxmegMg0AAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="fontSmallerToolStripButton.Image" xml:space="preserve" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACmSURBVDhPYxhJQNjvPwYmGQjXAzVCMdmAKM1CKnwMQuob
+        oDwygKBaONCAHwyCGpZQEVKAPQvQgBQGYfU5QEMWQQVJAIJqnmCbQVhY/T/QO1pQGSKBkPosBlEtCTAW
+        Vr/HIKw2ASpDBADZKqT+CqjxGhhD2EBXqEpDVeAB8vIcQA0bGPi0hKAiQNcANYIMALsCGDZ4gbD6B4hi
+        IA0DCDGoIYMPMDAAAF5eK9YxFnPxAAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

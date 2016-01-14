@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="OpenFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>538, 56</value>
+    <value>229, 93</value>
   </metadata>
   <metadata name="SaveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>638, 56</value>
+    <value>318, 101</value>
   </metadata>
   <metadata name="FolderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>775, 56</value>
+    <value>436, 103</value>
   </metadata>
   <metadata name="stsStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>946, 56</value>
+    <value>713, 97</value>
   </metadata>
   <metadata name="Tool_strip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 95</value>
@@ -252,8 +252,30 @@
   <metadata name="mnuBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>122, 95</value>
   </metadata>
+  <metadata name="fontToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>584, 103</value>
+  </metadata>
+  <data name="enlargeFontToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADfSURBVDhPYxiCQLj+P5RFAAip5zEIqnlCeRAA0gzD+IE9
+        C1DzCwZh9W1QAaBmP6BGNIwTgGwWVr0ENOA/g5CKFlSUBCCsOgGsEWSAsFoLVJRIANEYDWaDvCCk/gMo
+        xgfmEwWE1efANYAMArsCaiBBIKQqDVR8kkFQ3R2MhdViIQYAw4MoAIo6YbWdQNyGwOqPwIYIalhCVeEC
+        wKgD2YTuX3CMgL2BiFKsQFg9A4iboDwEkJfngBoAdIWaB1QUDQirHwE6/xUYC6t/gIoCbdfUBmuEiF+D
+        GpIClR0UgIEBABHoPGFViJb4AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="fontSmallerToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAClSURBVDhPYxhJQNjvPwYmGQjXAzVCMdmAKM1CKnwMguob
+        oDwygKBaOIOQ+g8GQQ1LqAgpwJ4FaEAKg7D6HKArFkEFSQCCap5gm0FYWP0/0DtaUBkigZD6LAZRLQkw
+        Fla/xyCsOgEqQwQA2Sqk/gqo8RoYQ9hAV6hKQ1XgAfLyHOCQ59MSgooAXQPUCDIA7Apg2OAFwuofIIqB
+        NAwgxKCGDD7AwAAAVjYr0HaMS/kAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>40</value>
+    <value>85</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

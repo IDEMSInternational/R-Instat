@@ -2195,6 +2195,18 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="Resources\bold.png" />
+    <None Include="Resources\italic.png" />
+    <None Include="Resources\underlinee.png" />
+    <None Include="Resources\strikethrough.png" />
+    <None Include="Resources\textwrap.png" />
+    <None Include="Resources\AlignTableCellMiddleLeftJustHS.PNG" />
+    <None Include="Resources\AlignTableCellMiddleCenterHS.png" />
+    <None Include="Resources\AlignTableCellMiddleRightHS.png" />
+    <None Include="Resources\PageWidthHS.png" />
+    <None Include="Resources\AlignLayoutTop.png" />
+    <None Include="Resources\AlignLayoutMiddle.png" />
+    <None Include="Resources\AlignLayoutBottom.png" />
     <Content Include="static\InstatObject\R\data_object.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

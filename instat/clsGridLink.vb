@@ -39,73 +39,75 @@ Public Class clsGridLink
         Dim dfTemp As DataFrame
         Dim strDataName As String
         Dim shtTemp As Worksheet
+        If frmMain.clsRInterface.bInstatObjectExists Then
 
-        bRDataChanged = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data_changed()").AsLogical(0)
-        bRMetadataChanged = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_metadata_changed()").AsLogical(0)
-        bRVariablesMetadataChanged = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_variables_metadata_changed()").AsLogical(0)
+            bRDataChanged = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data_changed()").AsLogical(0)
+            bRMetadataChanged = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_metadata_changed()").AsLogical(0)
+            bRVariablesMetadataChanged = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_variables_metadata_changed()").AsLogical(0)
 
-        If (bGrdDataExists And (bGrdDataChanged Or bRDataChanged)) Or (bGrdVariablesMetadataExists And (bGrdVariablesMetadataChanged Or bRVariablesMetadataChanged)) Then
-            lstDataNames = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data_names()").AsList
-            For i = 0 To lstDataNames.Length - 1
-                strDataName = lstDataNames.AsCharacter(i)
-                If (bGrdDataExists And frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data_changed(obj_name = " & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
-                    dfTemp = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data(" & Chr(34) & strDataName & Chr(34) & ")").AsDataFrame
-                    FillSheet(dfTemp, strDataName, grdData)
-                    frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$set_data_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
-                End If
-                If (bGrdVariablesMetadataExists And frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
-                    dfTemp = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_variables_metadata(" & Chr(34) & strDataName & Chr(34) & ")").AsDataFrame
-                    FillSheet(dfTemp, strDataName, grdVariablesMetadata)
-                    frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$set_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
-                End If
+            If (bGrdDataExists And (bGrdDataChanged Or bRDataChanged)) Or (bGrdVariablesMetadataExists And (bGrdVariablesMetadataChanged Or bRVariablesMetadataChanged)) Then
+                lstDataNames = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data_names()").AsList
+                For i = 0 To lstDataNames.Length - 1
+                    strDataName = lstDataNames.AsCharacter(i)
+                    If (bGrdDataExists And frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data_changed(obj_name = " & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
+                        dfTemp = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_data(" & Chr(34) & strDataName & Chr(34) & ")").AsDataFrame
+                        FillSheet(dfTemp, strDataName, grdData)
+                        'frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$set_data_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
+                    End If
+                    If (bGrdVariablesMetadataExists And frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
+                        dfTemp = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_variables_metadata(" & Chr(34) & strDataName & Chr(34) & ")").AsDataFrame
+                        FillSheet(dfTemp, strDataName, grdVariablesMetadata)
+                        frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$set_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
+                    End If
 
-            Next
-            'delete old sheets
-            'TODO look at this code to improve it (simplify)
-            If bGrdDataExists Then
-                k = 0
-                For i = 0 To grdData.Worksheets.Count - 1
-                    ' look up convert genericvector to string list to avoid this loop
-                    bFoundName = False
-                    For j = 0 To lstDataNames.Length - 1
-                        strDataName = lstDataNames.AsCharacter(j)
-                        If strDataName = grdData.Worksheets(i - k).Name Then
-                            bFoundName = True
-                            Exit For
+                Next
+                'delete old sheets
+                'TODO look at this code to improve it (simplify)
+                If bGrdDataExists Then
+                    k = 0
+                    For i = 0 To grdData.Worksheets.Count - 1
+                        ' look up convert genericvector to string list to avoid this loop
+                        bFoundName = False
+                        For j = 0 To lstDataNames.Length - 1
+                            strDataName = lstDataNames.AsCharacter(j)
+                            If strDataName = grdData.Worksheets(i - k).Name Then
+                                bFoundName = True
+                                Exit For
+                            End If
+                        Next
+                        If Not bFoundName Then
+                            shtTemp = grdData.Worksheets(i - k)
+                            grdData.Worksheets.Remove(shtTemp)
+                            k = k + 1
                         End If
                     Next
-                    If Not bFoundName Then
-                        shtTemp = grdData.Worksheets(i - k)
-                        grdData.Worksheets.Remove(shtTemp)
-                        k = k + 1
-                    End If
-                Next
-            End If
+                End If
 
-            If bGrdVariablesMetadataExists Then
-                k = 0
-                For i = 0 To grdVariablesMetadata.Worksheets.Count - 1
-                    ' look up convert genericvector to string list to avoid this loop
-                    bFoundName = False
-                    For j = 0 To lstDataNames.Length - 1
-                        strDataName = lstDataNames.AsCharacter(j)
-                        If strDataName = grdVariablesMetadata.Worksheets(i - k).Name Then
-                            bFoundName = True
-                            Exit For
+                If bGrdVariablesMetadataExists Then
+                    k = 0
+                    For i = 0 To grdVariablesMetadata.Worksheets.Count - 1
+                        ' look up convert genericvector to string list to avoid this loop
+                        bFoundName = False
+                        For j = 0 To lstDataNames.Length - 1
+                            strDataName = lstDataNames.AsCharacter(j)
+                            If strDataName = grdVariablesMetadata.Worksheets(i - k).Name Then
+                                bFoundName = True
+                                Exit For
+                            End If
+                        Next
+                        If Not bFoundName Then
+                            shtTemp = grdVariablesMetadata.Worksheets(i - k)
+                            grdVariablesMetadata.Worksheets.Remove(shtTemp)
+                            k = k + 1
                         End If
                     Next
-                    If Not bFoundName Then
-                        shtTemp = grdVariablesMetadata.Worksheets(i - k)
-                        grdVariablesMetadata.Worksheets.Remove(shtTemp)
-                        k = k + 1
-                    End If
-                Next
+                End If
             End If
-        End If
 
-        If bGrdMetadataExists And (bGrdMetadataChanged Or bRMetadataChanged) Then
-            dfTemp = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_combined_metadata()").AsDataFrame
-            FillSheet(dfTemp, "metadata", grdMetadata)
+            If bGrdMetadataExists And (bGrdMetadataChanged Or bRMetadataChanged) Then
+                dfTemp = frmMain.clsRInterface.clsEngine.Evaluate(frmMain.clsRInterface.strInstatDataObject & "$get_combined_metadata()").AsDataFrame
+                FillSheet(dfTemp, "metadata", grdMetadata)
+            End If
         End If
 
     End Sub
