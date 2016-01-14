@@ -53,19 +53,19 @@ Partial Class dlgIndicatorVariable
         Me.grpLevelToBeOmitted.Size = New System.Drawing.Size(123, 112)
         Me.grpLevelToBeOmitted.TabIndex = 1
         Me.grpLevelToBeOmitted.TabStop = False
-        Me.grpLevelToBeOmitted.Tag = "Level_To_Be_Omitted"
-        Me.grpLevelToBeOmitted.Text = "Level To Be Omitted"
+        Me.grpLevelToBeOmitted.Tag = "Level_to_be_omitted"
+        Me.grpLevelToBeOmitted.Text = "Level to be omitted"
         '
         'rdoLevelNumber
         '
         Me.rdoLevelNumber.AutoSize = True
         Me.rdoLevelNumber.Location = New System.Drawing.Point(6, 88)
         Me.rdoLevelNumber.Name = "rdoLevelNumber"
-        Me.rdoLevelNumber.Size = New System.Drawing.Size(91, 17)
+        Me.rdoLevelNumber.Size = New System.Drawing.Size(89, 17)
         Me.rdoLevelNumber.TabIndex = 0
         Me.rdoLevelNumber.TabStop = True
-        Me.rdoLevelNumber.Tag = "Level_Number"
-        Me.rdoLevelNumber.Text = "Level Number"
+        Me.rdoLevelNumber.Tag = "Level_number"
+        Me.rdoLevelNumber.Text = "Level number"
         Me.rdoLevelNumber.UseVisualStyleBackColor = True
         '
         'rdoLast
@@ -140,6 +140,7 @@ Partial Class dlgIndicatorVariable
         Me.lblInfo.Name = "lblInfo"
         Me.lblInfo.Size = New System.Drawing.Size(176, 13)
         Me.lblInfo.TabIndex = 5
+        Me.lblInfo.Tag = "REQUIRES_FACTOR_SELECTORS"
         Me.lblInfo.Text = "REQUIRES FACTOR SELECTORS"
         '
         'dlgIndicatorVariable
@@ -156,7 +157,8 @@ Partial Class dlgIndicatorVariable
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgIndicatorVariable"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "dlgIndicatorVariable"
+        Me.Tag = "Indicator_variable"
+        Me.Text = "Indicator variable"
         Me.grpLevelToBeOmitted.ResumeLayout(False)
         Me.grpLevelToBeOmitted.PerformLayout()
         Me.ResumeLayout(False)
