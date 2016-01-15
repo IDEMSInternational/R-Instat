@@ -104,14 +104,14 @@ Partial Class dlgPlot
         '
         Me.ucrBase.Location = New System.Drawing.Point(3, 190)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 27
         '
         'dlgPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 229)
+        Me.ClientSize = New System.Drawing.Size(421, 246)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverY)
         Me.Controls.Add(Me.ucrReceiverX)

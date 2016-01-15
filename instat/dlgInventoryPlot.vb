@@ -9,8 +9,8 @@ Public Class dlgInventoryPlot
         strScript = strScript & ", na.rm=" & chkSort.Checked.ToString().ToUpper
         strScript = strScript & ", main_title=" & Chr(34) & txtPlotName.Text & Chr(34)
         strScript = strScript & ")"
-        frmMain.clsRInterface.climateObject()
-        frmMain.clsRInterface.RunScript(strScript, False)
+        frmMain.clsRLink.climateObject()
+        frmMain.clsRLink.RunScript(strScript, False)
         'frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
         'frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
         Me.Hide()
