@@ -3,7 +3,7 @@
 
 instat_obj <- setRefClass("instat_obj", 
                        fields = list(data_objects = "list", 
-                                     metadata = "list")
+                                     metadata = "list", models = "list")
 )
 
 # INITIALIZE method
@@ -21,6 +21,7 @@ instat_obj$methods(initialize = function(data_tables = list(), instat_obj_metada
 {
   
   .self$set_meta(instat_obj_metadata)
+  .self$set_models(list())
 
   if (missing(data_tables) || length(data_tables) == 0) {
     data_objects <<- list()
@@ -100,6 +101,14 @@ instat_obj$methods(set_meta = function(new_meta) {
 }
 )
 
+instat_obj$methods(set_models = function(new_models) {
+  if( ! is.list(new_models) ) {
+    stop("new_models must be of type: list")
+  }
+  models <<- new_models
+}
+)
+
 instat_obj$methods(append_data_objects = function(name, obj) {
   if( !class(name) == "character") {
     stop("name must be a character")
@@ -112,16 +121,16 @@ instat_obj$methods(append_data_objects = function(name, obj) {
   data_objects[[name]] <<- obj
 }
 )
-#retlist <- list()
-instat_obj$methods(get_data = function(data_name) { 
-  if(missing(data_name)) {
+
+instat_obj$methods(get_data = function(obj_name) { 
+  if(missing(obj_name)) {
     retlist <- list()
     for ( i in (1:length(data_objects)) ) {
       retlist[[names(data_objects)[[i]]]] = data_objects[[i]]$get_data()
     }
     return(retlist)
   }
-  else return(data_objects[[data_name]]$get_data())
+  else return(data_objects[[obj_name]]$get_data())
   } 
 )
 
@@ -224,5 +233,69 @@ instat_obj$methods(set_metadata_changed = function(obj_name = "", new_val) {
   }
   
   else data_objects[[obj_name]]$set_metadata_changed(new_val)
+} 
+)
+
+instat_obj$methods(add_column_to_data = function(obj_name, col_name, col_data) {
+  if(missing(obj_name)) stop("obj_name is required")
+  if(!obj_name %in% names(data_objects)) stop(paste(obj_name, "not found"))
+  
+  data_objects[[obj_name]]$add_column_to_data(col_name, col_data)
+}
+)
+
+instat_obj$methods(get_column_from_data = function(obj_name, col_name) {
+  if(missing(obj_name)) stop("obj_name is required")
+  if(!obj_name %in% names(data_objects)) stop(paste(obj_name, "not found"))
+  
+  data_objects[[obj_name]]$get_column_from_data(col_name)
+}
+)
+
+instat_obj$methods(add_model = function(model, model_name = paste("model",length(models)+1)) {
+  if(missing(model)) stop("model is required")
+  if(model_name %in% names(models)) message(paste("A model called", model_name, "already exists. It will be replaced."))
+  
+  models[[model_name]] <<- model
+}
+)
+
+instat_obj$methods(get_model = function(model_name) {
+  if(missing(model_name)) stop("model_name is required")
+  if(!is.character(name)) stop("name must be a character")
+  if(!name %in% names(models)) stop(name, "not found in models")
+  models[[model_name]]
+}
+)
+
+instat_obj$methods(replace_value_in_data = function(obj_name, column_name, row_number, new_val) {
+  if(!is.character(obj_name)) stop("obj_name must be of type character")
+  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  
+  data_objects[[obj_name]]$replace_value_in_data(column_name, row_number, new_val)
+} 
+)
+
+instat_obj$methods(rename_column_in_data = function(obj_name, column_name, new_val) {
+    if(!is.character(obj_name)) stop("obj_name must be of type character")
+    if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+    
+    data_objects[[obj_name]]$rename_column_in_data(column_name, new_val)
+  } 
+  )
+
+instat_obj$methods(remove_column_in_data = function(obj_name, column_name) {
+  if(!is.character(obj_name)) stop("obj_name must be of type character")
+  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  
+  data_objects[[obj_name]]$remove_column_in_data(column_name)
+} 
+)
+
+instat_obj$methods(remove_row_in_data = function(obj_name, row_num) {
+  if(!is.character(obj_name)) stop("obj_name must be of type character")
+  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  
+  data_objects[[obj_name]]$remove_row_in_data(row_num)
 } 
 )

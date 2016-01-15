@@ -2,7 +2,7 @@
 Public Class dlgCreateClimateObject
 
     Private Sub UcrButtons1_clickOk(sender As Object, e As EventArgs) Handles UcrButtons1.ClickOk
-        frmMain.clsRInterface.climateObject()
+        frmMain.clsRLink.climateObject()
         Me.Hide()
     End Sub
 
