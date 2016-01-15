@@ -22,8 +22,12 @@ Partial Class frmEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.grdData = New unvell.ReoGrid.ReoGridControl()
         Me.lblNoData = New System.Windows.Forms.Label()
+        Me.leadHeaderContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.resetAllPageBreaksToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.leadHeaderContextMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'grdData
@@ -31,7 +35,7 @@ Partial Class frmEditor
         Me.grdData.BackColor = System.Drawing.Color.White
         Me.grdData.ColumnHeaderContextMenuStrip = Nothing
         Me.grdData.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.grdData.LeadHeaderContextMenuStrip = Nothing
+        Me.grdData.LeadHeaderContextMenuStrip = Me.leadHeaderContextMenuStrip
         Me.grdData.Location = New System.Drawing.Point(0, 0)
         Me.grdData.Name = "grdData"
         Me.grdData.RowHeaderContextMenuStrip = Nothing
@@ -54,6 +58,18 @@ Partial Class frmEditor
         Me.lblNoData.Tag = "no_data_loaded"
         Me.lblNoData.Text = "No Data Loaded"
         '
+        'leadHeaderContextMenuStrip
+        '
+        Me.leadHeaderContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.resetAllPageBreaksToolStripMenuItem1})
+        Me.leadHeaderContextMenuStrip.Name = "leadHeaderContextMenuStrip"
+        Me.leadHeaderContextMenuStrip.Size = New System.Drawing.Size(186, 48)
+        '
+        'resetAllPageBreaksToolStripMenuItem1
+        '
+        Me.resetAllPageBreaksToolStripMenuItem1.Name = "resetAllPageBreaksToolStripMenuItem1"
+        Me.resetAllPageBreaksToolStripMenuItem1.Size = New System.Drawing.Size(185, 22)
+        Me.resetAllPageBreaksToolStripMenuItem1.Text = "Reset All Page Breaks"
+        '
         'frmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -65,6 +81,7 @@ Partial Class frmEditor
         Me.ShowIcon = False
         Me.Tag = "Data_View"
         Me.Text = "Data View"
+        Me.leadHeaderContextMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -72,4 +89,6 @@ Partial Class frmEditor
 
     Public WithEvents grdData As unvell.ReoGrid.ReoGridControl
     Friend WithEvents lblNoData As Label
+    Private WithEvents leadHeaderContextMenuStrip As ContextMenuStrip
+    Private WithEvents resetAllPageBreaksToolStripMenuItem1 As ToolStripMenuItem
 End Class
