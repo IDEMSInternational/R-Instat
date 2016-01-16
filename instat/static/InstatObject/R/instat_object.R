@@ -299,3 +299,11 @@ instat_obj$methods(remove_row_in_data = function(obj_name, row_num) {
   data_objects[[obj_name]]$remove_row_in_data(row_num)
 } 
 )
+
+instat_obj$methods(insert_column_in_data = function(obj_name, col_name = "", col_data , col_number) {
+  if(!is.character(obj_name)) stop("obj_name must be of type character")
+  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  
+  data_objects[[obj_name]]$insert_column_in_data(col_name = "", col_data , col_number)
+} 
+)
