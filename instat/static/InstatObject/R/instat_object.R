@@ -299,3 +299,26 @@ instat_obj$methods(remove_row_in_data = function(obj_name, row_num) {
   data_objects[[obj_name]]$remove_row_in_data(row_num)
 } 
 )
+
+instat_obj$methods(get_next_default_column_name = function(obj_name, prefix) {
+  if(missing(obj_name)) {
+    out = list()
+    for(curr_obj in data_objects) {
+      out[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_next_default_column_name(prefix)
+    }
+    return(out)
+  }
+  if(!is.character(obj_name)) stop("obj_name must be of type character")
+  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  
+  return(data_objects[[obj_name]]$get_next_default_column_name(prefix))
+} 
+)
+
+instat_obj$methods(get_column_names = function(obj_name) {
+  if(missing(obj_name)) stop("obj_name must be given")
+  if(!is.character(obj_name)) stop("obj_name must be of type character")
+  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  return(names(data_objects[[obj_name]]$data))
+}
+)

@@ -23,9 +23,9 @@ Partial Class dlgRegularSequence
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpSequenceType = New System.Windows.Forms.GroupBox()
-        Me.rdDates = New System.Windows.Forms.RadioButton()
-        Me.rdSIngleValue = New System.Windows.Forms.RadioButton()
-        Me.rdSequence = New System.Windows.Forms.RadioButton()
+        Me.rdoDates = New System.Windows.Forms.RadioButton()
+        Me.rdoSingleValue = New System.Windows.Forms.RadioButton()
+        Me.rdoSequence = New System.Windows.Forms.RadioButton()
         Me.grpSequence = New System.Windows.Forms.GroupBox()
         Me.lblSteps = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
@@ -46,10 +46,9 @@ Partial Class dlgRegularSequence
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.lblNewColName = New System.Windows.Forms.Label()
-        Me.txtNewColName = New System.Windows.Forms.TextBox()
+        Me.ucrColName = New instat.ucrNewColumnName()
+        Me.ucrSelectDataFrame = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
-        Me.UcrDataFrame1 = New instat.ucrDataFrame()
         Me.grpSequenceType.SuspendLayout()
         Me.grpSequence.SuspendLayout()
         Me.grpRepeatSingle.SuspendLayout()
@@ -58,9 +57,9 @@ Partial Class dlgRegularSequence
         '
         'grpSequenceType
         '
-        Me.grpSequenceType.Controls.Add(Me.rdDates)
-        Me.grpSequenceType.Controls.Add(Me.rdSIngleValue)
-        Me.grpSequenceType.Controls.Add(Me.rdSequence)
+        Me.grpSequenceType.Controls.Add(Me.rdoDates)
+        Me.grpSequenceType.Controls.Add(Me.rdoSingleValue)
+        Me.grpSequenceType.Controls.Add(Me.rdoSequence)
         Me.grpSequenceType.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.grpSequenceType.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSequenceType.Location = New System.Drawing.Point(238, 90)
@@ -69,43 +68,43 @@ Partial Class dlgRegularSequence
         Me.grpSequenceType.TabIndex = 0
         Me.grpSequenceType.TabStop = False
         '
-        'rdDates
+        'rdoDates
         '
-        Me.rdDates.AutoSize = True
-        Me.rdDates.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.rdDates.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdDates.Location = New System.Drawing.Point(0, 98)
-        Me.rdDates.Name = "rdDates"
-        Me.rdDates.Size = New System.Drawing.Size(59, 18)
-        Me.rdDates.TabIndex = 2
-        Me.rdDates.Text = "Dates"
-        Me.rdDates.UseVisualStyleBackColor = True
+        Me.rdoDates.AutoSize = True
+        Me.rdoDates.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.rdoDates.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rdoDates.Location = New System.Drawing.Point(0, 98)
+        Me.rdoDates.Name = "rdoDates"
+        Me.rdoDates.Size = New System.Drawing.Size(59, 18)
+        Me.rdoDates.TabIndex = 2
+        Me.rdoDates.Text = "Dates"
+        Me.rdoDates.UseVisualStyleBackColor = True
         '
-        'rdSIngleValue
+        'rdoSingleValue
         '
-        Me.rdSIngleValue.AutoSize = True
-        Me.rdSIngleValue.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.rdSIngleValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdSIngleValue.Location = New System.Drawing.Point(0, 59)
-        Me.rdSIngleValue.Name = "rdSIngleValue"
-        Me.rdSIngleValue.Size = New System.Drawing.Size(89, 18)
-        Me.rdSIngleValue.TabIndex = 1
-        Me.rdSIngleValue.Text = "Single value"
-        Me.rdSIngleValue.UseVisualStyleBackColor = True
+        Me.rdoSingleValue.AutoSize = True
+        Me.rdoSingleValue.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.rdoSingleValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rdoSingleValue.Location = New System.Drawing.Point(0, 59)
+        Me.rdoSingleValue.Name = "rdoSingleValue"
+        Me.rdoSingleValue.Size = New System.Drawing.Size(89, 18)
+        Me.rdoSingleValue.TabIndex = 1
+        Me.rdoSingleValue.Text = "Single value"
+        Me.rdoSingleValue.UseVisualStyleBackColor = True
         '
-        'rdSequence
+        'rdoSequence
         '
-        Me.rdSequence.AutoSize = True
-        Me.rdSequence.Checked = True
-        Me.rdSequence.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.rdSequence.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdSequence.Location = New System.Drawing.Point(0, 10)
-        Me.rdSequence.Name = "rdSequence"
-        Me.rdSequence.Size = New System.Drawing.Size(85, 18)
-        Me.rdSequence.TabIndex = 0
-        Me.rdSequence.TabStop = True
-        Me.rdSequence.Text = "Sequences"
-        Me.rdSequence.UseVisualStyleBackColor = True
+        Me.rdoSequence.AutoSize = True
+        Me.rdoSequence.Checked = True
+        Me.rdoSequence.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.rdoSequence.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rdoSequence.Location = New System.Drawing.Point(0, 10)
+        Me.rdoSequence.Name = "rdoSequence"
+        Me.rdoSequence.Size = New System.Drawing.Size(85, 18)
+        Me.rdoSequence.TabIndex = 0
+        Me.rdoSequence.TabStop = True
+        Me.rdoSequence.Text = "Sequences"
+        Me.rdoSequence.UseVisualStyleBackColor = True
         '
         'grpSequence
         '
@@ -306,44 +305,34 @@ Partial Class dlgRegularSequence
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "From"
         '
-        'lblNewColName
+        'ucrColName
         '
-        Me.lblNewColName.AutoSize = True
-        Me.lblNewColName.Location = New System.Drawing.Point(12, 233)
-        Me.lblNewColName.Name = "lblNewColName"
-        Me.lblNewColName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColName.TabIndex = 13
-        Me.lblNewColName.Text = "New Column Name:"
+        Me.ucrColName.Location = New System.Drawing.Point(9, 225)
+        Me.ucrColName.Name = "ucrColName"
+        Me.ucrColName.Size = New System.Drawing.Size(367, 35)
+        Me.ucrColName.TabIndex = 16
         '
-        'txtNewColName
+        'ucrSelectDataFrame
         '
-        Me.txtNewColName.Location = New System.Drawing.Point(119, 230)
-        Me.txtNewColName.Name = "txtNewColName"
-        Me.txtNewColName.Size = New System.Drawing.Size(234, 20)
-        Me.txtNewColName.TabIndex = 14
+        Me.ucrSelectDataFrame.Location = New System.Drawing.Point(7, 12)
+        Me.ucrSelectDataFrame.Name = "ucrSelectDataFrame"
+        Me.ucrSelectDataFrame.Size = New System.Drawing.Size(150, 63)
+        Me.ucrSelectDataFrame.TabIndex = 15
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(7, 266)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 55)
         Me.ucrBase.TabIndex = 5
-        '
-        'UcrDataFrame1
-        '
-        Me.UcrDataFrame1.Location = New System.Drawing.Point(7, 12)
-        Me.UcrDataFrame1.Name = "UcrDataFrame1"
-        Me.UcrDataFrame1.Size = New System.Drawing.Size(150, 63)
-        Me.UcrDataFrame1.TabIndex = 15
         '
         'dlgRegularSequence
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 305)
-        Me.Controls.Add(Me.UcrDataFrame1)
-        Me.Controls.Add(Me.txtNewColName)
-        Me.Controls.Add(Me.lblNewColName)
+        Me.ClientSize = New System.Drawing.Size(412, 324)
+        Me.Controls.Add(Me.ucrColName)
+        Me.Controls.Add(Me.ucrSelectDataFrame)
         Me.Controls.Add(Me.grpRepeatSingle)
         Me.Controls.Add(Me.grpSequence2)
         Me.Controls.Add(Me.grpSequence)
@@ -364,15 +353,14 @@ Partial Class dlgRegularSequence
         Me.grpSequence2.ResumeLayout(False)
         Me.grpSequence2.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents grpSequenceType As GroupBox
-    Friend WithEvents rdSequence As RadioButton
+    Friend WithEvents rdoSequence As RadioButton
     Friend WithEvents grpSequence As GroupBox
-    Friend WithEvents rdSIngleValue As RadioButton
-    Friend WithEvents rdDates As RadioButton
+    Friend WithEvents rdoSingleValue As RadioButton
+    Friend WithEvents rdoDates As RadioButton
     Friend WithEvents lblSteps As Label
     Friend WithEvents lblTo As Label
     Friend WithEvents lblFrom As Label
@@ -393,7 +381,6 @@ Partial Class dlgRegularSequence
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents cboBy As ComboBox
-    Friend WithEvents lblNewColName As Label
-    Friend WithEvents txtNewColName As TextBox
-    Friend WithEvents UcrDataFrame1 As ucrDataFrame
+    Friend WithEvents ucrSelectDataFrame As ucrDataFrame
+    Friend WithEvents ucrColName As ucrNewColumnName
 End Class
