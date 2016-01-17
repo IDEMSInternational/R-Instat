@@ -322,3 +322,11 @@ instat_obj$methods(get_column_names = function(obj_name) {
   return(names(data_objects[[obj_name]]$data))
 }
 )
+
+instat_obj$methods(insert_column_in_data = function(obj_name, col_name = "", col_data = c(), col_number) {
+  if(!is.character(obj_name)) stop("obj_name must be of type character")
+  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  
+  data_objects[[obj_name]]$insert_column_in_data(col_name = col_name, col_data = col_data, col_number = col_number)
+}
+)

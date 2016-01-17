@@ -348,6 +348,28 @@ data_obj$methods(get_next_default_column_name = function(prefix) {
 } 
 )
 
+data_obj$methods(insert_column_in_data = function(col_name = "", col_data =c(), col_number) {
+  if (col_number <= 0) stop("You cannot put a column into the position less or equal to zero.")
+  if (col_number %% 1 != 0) stop("col_number value should be an integer.")
+  if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
+
+    
+  if(length(col_data)==0){
+      col_data <- rep(NA, nrow(data))
+      warning(paste("You are inserting an empty column to", get_metadata(data_name_label)))
+  }
+
+  data[, col_name] <<- col_data
+  if(col_number==1){
+      data <<- cbind(data[ncol(data)], data[(col_number):ncol(data)-1])
+    }
+  else{
+      data <<- cbind(data[1:(col_number -1)],data[ncol(data)], data[(col_number+1):ncol(data)-1])
+    }
+  
+    .self$append_to_changes(list(Inserted_Col, col_number))
+}
+)
 
 #Labels for strings which will be added to logs
 Set_property="Set"
@@ -359,6 +381,7 @@ Added_metadata="Added metadata"
 Converted_col_="Converted column"
 Replaced_value="Replaced value"
 Removed_row="Removed row"
+Inserted_Col = "Inserted column"
 
 #meta data labels
 data_name_label="data_name"
