@@ -153,8 +153,12 @@ data_obj$methods(get_variables_metadata = function(include_all = TRUE) {
 }
 )
 
-data_obj$methods(get_metadata = function() {
-  return(metadata)
+data_obj$methods(get_metadata = function(label) {
+  if(missing(label)) return(metadata)
+  else {
+    if(label %in% names(metadata)) return(metadata[[label]])
+    else return("")
+  }
 }
 )
 
@@ -164,9 +168,7 @@ data_obj$methods(add_column_to_data = function(col_name = "", col_data) {
   # Column name must be character
   if( ! is.character(col_name) ) stop("Column name must be of type: character")
   
-  col_data = rep(col_data, length.out = nrow(data))
-  
-  col_data <- unlist(column_data)
+  col_data <- unlist(col_data)
   
   if(col_name %in% names(data)) {
     message(paste("A column named", col_name, "already exists. The column will be replaced in the data"))
@@ -176,6 +178,8 @@ data_obj$methods(add_column_to_data = function(col_name = "", col_data) {
   else .self$append_to_changes(list(Added_col, col_name))
   
   data[[col_name]] <<- col_data
+  .self$set_data_changed(TRUE)
+  .self$set_variables_metadata_changed(TRUE)
 }
 )
 
@@ -209,7 +213,9 @@ data_obj$methods(rename_column_in_data = function(curr_col_name = "", new_col_na
     }
     names(data)[names(data) == curr_col_name] <<- new_col_name
     .self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
-    }
+    .self$set_data_changed(TRUE)
+    .self$set_variables_metadata_changed(TRUE)
+  }
 }
 )
 
@@ -228,6 +234,8 @@ data_obj$methods(remove_column_in_data = function(col_name = "") {
     data[[ col_name ]] <<- NULL 
     .self$append_to_changes(list(Removed_col, col_name))
   }
+  .self$set_data_changed(TRUE)
+  .self$set_variables_metadata_changed(TRUE)
 }
 )
 
@@ -258,7 +266,8 @@ data_obj$methods(replace_value_in_data = function(col_name = "", index, new_valu
   old_value = data[[col_name]][[index]]
   data[[col_name]][[index]] <<- new_value
   .self$append_to_changes(list(Replaced_value, col_name, index, old_value, new_value))
-  
+  .self$set_data_changed(TRUE)
+  .self$set_variables_metadata_changed(TRUE)
 }
 )
 
@@ -308,12 +317,6 @@ data_obj$methods(add_defaults_meta = function(user) {
   }
 )
 
-data_obj$methods(add_column_to_data = function(col_name  ="", col_data) {
-  col_data = rep(col_data, length.out = nrow(data))
-  
-}
-)
-
 data_obj$methods(remove_row_in_data = function(row_num) {
 
   if (   row_num != as.integer(row_num) || row_num < 1 || row_num >  nrow(data) ) {
@@ -325,9 +328,26 @@ data_obj$methods(remove_row_in_data = function(row_num) {
   else {
     data <<- data[-row_num,]
     .self$append_to_changes(list(Removed_row, row_num))
-    }
+  }
+  .self$set_data_changed(TRUE)
 }
 )
+
+data_obj$methods(get_next_default_column_name = function(prefix) {
+  if(!is.character(prefix)) stop("prefix must be of type character")
+  col_exists = TRUE
+  i = 1
+  while(col_exists) {
+    if(!paste0(prefix,i) %in% names(data)) {
+      col_exists = FALSE
+      out = paste0(prefix,i)
+    }
+    i = i + 1
+  }
+  out
+} 
+)
+
 
 #Labels for strings which will be added to logs
 Set_property="Set"
