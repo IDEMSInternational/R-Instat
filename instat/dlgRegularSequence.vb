@@ -19,24 +19,24 @@ Public Class dlgRegularSequence
         grpSequence2.Hide()
         grpRepeatSingle.Hide()
         ucrBase.clsRsyntax.SetFunction("seq")
-        ucrBase.clsRsyntax.iCallType = 0
-        'ucrBase.clsRsyntax.SetAssignTo("x")
         autoTranslate(Me)
+        ucrSelectDataFrame.SetColumnList(ucrColName)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrColName.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrColName.cboColumnName.Text)
     End Sub
 
-    Private Sub rdSIngleValue_Click(sender As Object, e As EventArgs) Handles rdSIngleValue.Click
+    Private Sub rdoSingleValue_Click(sender As Object, e As EventArgs) Handles rdoSingleValue.Click
         grpSequence.Hide()
         grpSequence2.Hide()
         grpRepeatSingle.Visible = True
     End Sub
 
-    Private Sub rdDates_Click(sender As Object, e As EventArgs) Handles rdDates.Click
+    Private Sub rdDates_Click(sender As Object, e As EventArgs) Handles rdoDates.Click
         grpSequence.Hide()
         grpRepeatSingle.Hide()
         grpSequence2.Visible = True
     End Sub
 
-    Private Sub rdSequence_Click(sender As Object, e As EventArgs) Handles rdSequence.Click
+    Private Sub rdSequence_Click(sender As Object, e As EventArgs) Handles rdoSequence.Click
         grpRepeatSingle.Hide()
         grpSequence2.Hide()
         grpSequence.Visible = True
@@ -75,5 +75,13 @@ Public Class dlgRegularSequence
 
     Private Sub txtRepeatTimes_TextChanged(sender As Object, e As EventArgs) Handles txtRepeatTimes.Leave
         ucrBase.clsRsyntax.AddParameter("length.out", txtRepeatTimes.Text)
+    End Sub
+
+    Private Sub ucrSelectDataFrame_LostFocus(sender As Object, e As EventArgs) Handles ucrSelectDataFrame.LostFocus
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrColName.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrColName.cboColumnName.Text)
+    End Sub
+
+    Private Sub ucrColName_LostFocus(sender As Object, e As EventArgs) Handles ucrColName.LostFocus
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrColName.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrColName.cboColumnName.Text)
     End Sub
 End Class
