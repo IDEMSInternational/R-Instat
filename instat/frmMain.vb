@@ -723,4 +723,8 @@ Public Class frmMain
         'clsGrids.UpdateGrids()
     End Sub
 
+    Private Sub SummaryChartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryChartToolStripMenuItem.Click
+        dlgSummaryChart.ShowDialog()
+
+    End Sub
 End Class
