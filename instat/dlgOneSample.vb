@@ -50,7 +50,7 @@ Public Class dlgOneSample
     Private Sub ucrReceiverDataColumn_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiverDataColumn.ValueChanged
         If Not (ucrReceiverDataColumn.txtReceiverSingle.Text = "") Then
             ucrBase.clsRsyntax.AddParameter("x", ucrReceiverDataColumn.GetVariables())
-            ucrBase.clsRsyntax.AddParameter("n", frmEditor.gridColumns.CurrentWorksheet.RowCount)
+            ucrBase.clsRsyntax.AddParameter("n", frmEditor.grdData.CurrentWorksheet.RowCount)
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)

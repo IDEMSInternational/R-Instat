@@ -29,13 +29,13 @@ Partial Class dlgRegressionSimple
         Me.grpLackFit = New System.Windows.Forms.GroupBox()
         Me.txtdf = New System.Windows.Forms.TextBox()
         Me.txtResidualMsg = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblDF = New System.Windows.Forms.Label()
         Me.lblResidualMsg = New System.Windows.Forms.Label()
         Me.chkLackFit = New System.Windows.Forms.CheckBox()
-        Me.chkAnovaTable = New System.Windows.Forms.CheckBox()
+        Me.chkANOVATable = New System.Windows.Forms.CheckBox()
         Me.chkShowPlots = New System.Windows.Forms.CheckBox()
         Me.chkSiginificance = New System.Windows.Forms.CheckBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cboConfidenceLimits = New System.Windows.Forms.ComboBox()
         Me.lblConfidence = New System.Windows.Forms.Label()
         Me.lblExplanatoryVariable = New System.Windows.Forms.Label()
         Me.lblResponseVariable = New System.Windows.Forms.Label()
@@ -63,10 +63,10 @@ Partial Class dlgRegressionSimple
         Me.tbRegress.Controls.Add(Me.ucrReceiverSingleB)
         Me.tbRegress.Controls.Add(Me.grpLackFit)
         Me.tbRegress.Controls.Add(Me.chkLackFit)
-        Me.tbRegress.Controls.Add(Me.chkAnovaTable)
+        Me.tbRegress.Controls.Add(Me.chkANOVATable)
         Me.tbRegress.Controls.Add(Me.chkShowPlots)
         Me.tbRegress.Controls.Add(Me.chkSiginificance)
-        Me.tbRegress.Controls.Add(Me.ComboBox1)
+        Me.tbRegress.Controls.Add(Me.cboConfidenceLimits)
         Me.tbRegress.Controls.Add(Me.lblConfidence)
         Me.tbRegress.Controls.Add(Me.lblExplanatoryVariable)
         Me.tbRegress.Controls.Add(Me.lblResponseVariable)
@@ -85,7 +85,7 @@ Partial Class dlgRegressionSimple
         '
         Me.grpLackFit.Controls.Add(Me.txtdf)
         Me.grpLackFit.Controls.Add(Me.txtResidualMsg)
-        Me.grpLackFit.Controls.Add(Me.Label1)
+        Me.grpLackFit.Controls.Add(Me.lblDF)
         Me.grpLackFit.Controls.Add(Me.lblResidualMsg)
         resources.ApplyResources(Me.grpLackFit, "grpLackFit")
         Me.grpLackFit.Name = "grpLackFit"
@@ -101,10 +101,11 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.txtResidualMsg, "txtResidualMsg")
         Me.txtResidualMsg.Name = "txtResidualMsg"
         '
-        'Label1
+        'lblDF
         '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
+        resources.ApplyResources(Me.lblDF, "lblDF")
+        Me.lblDF.Name = "lblDF"
+        Me.lblDF.Tag = "Degrees_of_freedom"
         '
         'lblResidualMsg
         '
@@ -116,15 +117,15 @@ Partial Class dlgRegressionSimple
         '
         resources.ApplyResources(Me.chkLackFit, "chkLackFit")
         Me.chkLackFit.Name = "chkLackFit"
-        Me.chkLackFit.Tag = "Lack_Of_Fit"
+        Me.chkLackFit.Tag = "Lack_of_Fit"
         Me.chkLackFit.UseVisualStyleBackColor = True
         '
-        'chkAnovaTable
+        'chkANOVATable
         '
-        resources.ApplyResources(Me.chkAnovaTable, "chkAnovaTable")
-        Me.chkAnovaTable.Name = "chkAnovaTable"
-        Me.chkAnovaTable.Tag = "Show_Anova_Table"
-        Me.chkAnovaTable.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.chkANOVATable, "chkANOVATable")
+        Me.chkANOVATable.Name = "chkANOVATable"
+        Me.chkANOVATable.Tag = "Show_Anova_Table"
+        Me.chkANOVATable.UseVisualStyleBackColor = True
         '
         'chkShowPlots
         '
@@ -140,12 +141,12 @@ Partial Class dlgRegressionSimple
         Me.chkSiginificance.Tag = "Significance_Test"
         Me.chkSiginificance.UseVisualStyleBackColor = True
         '
-        'ComboBox1
+        'cboConfidenceLimits
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {resources.GetString("ComboBox1.Items"), resources.GetString("ComboBox1.Items1"), resources.GetString("ComboBox1.Items2"), resources.GetString("ComboBox1.Items3"), resources.GetString("ComboBox1.Items4"), resources.GetString("ComboBox1.Items5")})
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
-        Me.ComboBox1.Name = "ComboBox1"
+        Me.cboConfidenceLimits.FormattingEnabled = True
+        Me.cboConfidenceLimits.Items.AddRange(New Object() {resources.GetString("cboConfidenceLimits.Items"), resources.GetString("cboConfidenceLimits.Items1"), resources.GetString("cboConfidenceLimits.Items2"), resources.GetString("cboConfidenceLimits.Items3"), resources.GetString("cboConfidenceLimits.Items4"), resources.GetString("cboConfidenceLimits.Items5")})
+        resources.ApplyResources(Me.cboConfidenceLimits, "cboConfidenceLimits")
+        Me.cboConfidenceLimits.Name = "cboConfidenceLimits"
         '
         'lblConfidence
         '
@@ -218,13 +219,13 @@ Partial Class dlgRegressionSimple
     Friend WithEvents grpLackFit As GroupBox
     Friend WithEvents txtdf As TextBox
     Friend WithEvents txtResidualMsg As TextBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblDF As Label
     Friend WithEvents lblResidualMsg As Label
     Friend WithEvents chkLackFit As CheckBox
-    Friend WithEvents chkAnovaTable As CheckBox
+    Friend WithEvents chkANOVATable As CheckBox
     Friend WithEvents chkShowPlots As CheckBox
     Friend WithEvents chkSiginificance As CheckBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cboConfidenceLimits As ComboBox
     Friend WithEvents lblConfidence As Label
     Friend WithEvents lblExplanatoryVariable As Label
     Friend WithEvents lblResponseVariable As Label

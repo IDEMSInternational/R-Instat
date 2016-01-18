@@ -25,15 +25,16 @@ Public Class frmVariables
 
     Private Sub frmVariables_Load(sender As Object, e As EventArgs) Handles Me.Load
         loadForm()
+        frmMain.clsGrids.SetVariablesMetadata(grdVariables)
     End Sub
 
     Private Sub loadForm()
-        gridVariables.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
-        gridVariables.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, False)
-        gridVariables.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
+        grdVariables.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
+        grdVariables.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, False)
+        grdVariables.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         'gridVariables.SheetTabNewButtonVisible = False
         'gridVariables.SheetTabControlNewButtonVisible = False
-        gridVariables.CurrentWorksheet.Resize(5, 5)
+        grdVariables.CurrentWorksheet.Resize(5, 5)
         autoTranslate(Me)
     End Sub
 End Class
