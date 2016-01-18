@@ -865,4 +865,28 @@
   <data name="With_X_Variable" xml:space="preserve">
     <value>With X Variable</value>
   </data>
+  <data name="Columns_to_be_stack" xml:space="preserve">
+    <value>Columns to be stack</value>
+  </data>
+  <data name="Existing_worksheet" xml:space="preserve">
+    <value>Existing worksheet</value>
+  </data>
+  <data name="Factor_into" xml:space="preserve">
+    <value>Factor into</value>
+  </data>
+  <data name="New_worksheet1" xml:space="preserve">
+    <value>New worksheet</value>
+  </data>
+  <data name="Omit_value" xml:space="preserve">
+    <value>Omit value</value>
+  </data>
+  <data name="Output_options" xml:space="preserve">
+    <value>Output options</value>
+  </data>
+  <data name="Sheet_name" xml:space="preserve">
+    <value>Sheet name</value>
+  </data>
+  <data name="Stack_data_into" xml:space="preserve">
+    <value>Stack data into</value>
+  </data>
 </root>
