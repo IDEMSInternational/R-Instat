@@ -1003,6 +1003,12 @@
     <Compile Include="ucrSelectorAddRemove.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSelectorByDataFrame.Designer.vb">
+      <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorByDataFrame.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlgAddStartRain.fr-FR.resx">
@@ -2048,6 +2054,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditor.fr-FR.resx">
       <DependentUpon>frmEditor.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditor.resx">
       <DependentUpon>frmEditor.vb</DependentUpon>
@@ -2215,6 +2222,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorAddRemove.sw-KE.resx">
       <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrame.fr-FR.resx">
+      <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrame.resx">
+      <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrame.sw-KE.resx">
+      <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
