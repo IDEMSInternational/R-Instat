@@ -1009,6 +1009,12 @@
     <Compile Include="ucrSelectorByDataFrame.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSelectorByDataFrameAddRemove.Designer.vb">
+      <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorByDataFrameAddRemove.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlgAddStartRain.fr-FR.resx">
@@ -2231,6 +2237,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorByDataFrame.sw-KE.resx">
       <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.fr-FR.resx">
+      <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.resx">
+      <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.sw-KE.resx">
+      <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
