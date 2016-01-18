@@ -92,7 +92,7 @@ Public Class frmMain
         autoTranslate(Me)
     End Sub
 
-    Private Sub mnuFileNewWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileNewWorksheet.Click
+    Private Sub mnuFileNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuFileNewDataFrame.Click
         dlgFileNew.ShowDialog()
     End Sub
 
@@ -656,7 +656,7 @@ Public Class frmMain
         Me.Close()
     End Sub
 
-    Private Sub mnuFileOpenWorkbook_Click(sender As Object, e As EventArgs) Handles mnuFileOpenWorkbook.Click
+    Private Sub mnuFileOpenFromFile_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromFile.Click
         Dim kvpFile As KeyValuePair(Of String, String)
         Dim clsRsyntax As New RSyntax
 
@@ -707,7 +707,7 @@ Public Class frmMain
         Return New KeyValuePair(Of String, String)("", "")
     End Function
 
-    Private Sub mnuFileCloseWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileCloseWorksheet.Click
+    Private Sub mnuFileClose_Click(sender As Object, e As EventArgs) Handles mnuFileClose.Click
 
     End Sub
 
