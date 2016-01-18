@@ -367,7 +367,37 @@ data_obj$methods(insert_column_in_data = function(col_name = "", col_data =c(), 
       data <<- cbind(data[1:(col_number -1)],data[ncol(data)], data[(col_number+1):ncol(data)-1])
     }
   
-    .self$append_to_changes(list(Inserted_Col, col_number))
+    .self$append_to_changes(list(Inserted_col, col_number))
+}
+)
+
+data_obj$methods(move_column_in_data = function(col_name = "", col_number) {
+  if (col_number <= 0) stop("You cannot move a column into the position less or equal to zero.")
+  if (col_number %% 1 != 0) stop("col_number value should be an integer.")
+  if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
+  
+  if(!(col_name %in% names(data))){
+    stop(col_name, " is not a column in", get_metadata(data_name_label))
+  }
+  
+  dat1 <<- as.data.frame(data[,c(col_name)])
+  names(dat1) <<- col_name
+  
+  names(data)[names(data) == col_name] <<- "to_delete"
+  
+  if(col_number==1){
+    data <<- cbind(dat1, data)
+  }
+  else if(col_number == ncol(data)){
+    data <<- cbind(data,dat1)
+  }
+  else{
+    data <<- cbind(data[1:(col_number)], dat1, data[(col_number+1):ncol(data)])
+  }
+  
+  data[,"to_delete"]<<- NULL
+  
+  .self$append_to_changes(list(Move_col, col_name))
 }
 )
 
@@ -381,8 +411,8 @@ Added_metadata="Added metadata"
 Converted_col_="Converted column"
 Replaced_value="Replaced value"
 Removed_row="Removed row"
-Inserted_Col = "Inserted column"
-
+Inserted_col = "Inserted column"
+Move_col = "Moved column"
 #meta data labels
 data_name_label="data_name"
 is_calculated_label="is_calculated"
