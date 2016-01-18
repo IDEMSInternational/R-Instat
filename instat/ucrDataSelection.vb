@@ -44,7 +44,7 @@ Public Class ucrDataSelection
     Public Sub loadColumns()
         Dim dataset As DataFrame
         Dim i As Integer
-        dataset = frmMain.clsRInterface.GetData("data")
+        dataset = frmMain.clsRLink.GetData("data")
         For i = 0 To dataset.ColumnCount - 1
             lstAvailableVariable.Items.Add(dataset.ColumnNames(i))
         Next

@@ -24,7 +24,7 @@ Partial Class dlgLockUnlock
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrMultiple = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverLockUnlock = New instat.ucrReceiverMultiple()
         Me.lblSelectedColumns = New System.Windows.Forms.Label()
         Me.rdoLock = New System.Windows.Forms.RadioButton()
         Me.rdoUnlock = New System.Windows.Forms.RadioButton()
@@ -46,12 +46,12 @@ Partial Class dlgLockUnlock
         Me.ucrAddRemove.Size = New System.Drawing.Size(203, 155)
         Me.ucrAddRemove.TabIndex = 1
         '
-        'ucrMultiple
+        'ucrReceiverLockUnlock
         '
-        Me.ucrMultiple.Location = New System.Drawing.Point(203, 23)
-        Me.ucrMultiple.Name = "ucrMultiple"
-        Me.ucrMultiple.Size = New System.Drawing.Size(121, 134)
-        Me.ucrMultiple.TabIndex = 2
+        Me.ucrReceiverLockUnlock.Location = New System.Drawing.Point(203, 23)
+        Me.ucrReceiverLockUnlock.Name = "ucrReceiverLockUnlock"
+        Me.ucrReceiverLockUnlock.Size = New System.Drawing.Size(121, 134)
+        Me.ucrReceiverLockUnlock.TabIndex = 2
         '
         'lblSelectedColumns
         '
@@ -60,7 +60,7 @@ Partial Class dlgLockUnlock
         Me.lblSelectedColumns.Name = "lblSelectedColumns"
         Me.lblSelectedColumns.Size = New System.Drawing.Size(95, 13)
         Me.lblSelectedColumns.TabIndex = 3
-        Me.lblSelectedColumns.Tag = "Selected_Variables"
+        Me.lblSelectedColumns.Tag = "Selected_variables"
         Me.lblSelectedColumns.Text = "Selected Variables"
         '
         'rdoLock
@@ -94,7 +94,7 @@ Partial Class dlgLockUnlock
         Me.chkReservefree.Name = "chkReservefree"
         Me.chkReservefree.Size = New System.Drawing.Size(119, 17)
         Me.chkReservefree.TabIndex = 6
-        Me.chkReservefree.Tag = "Researve_free_space"
+        Me.chkReservefree.Tag = "Reserve_free_space"
         Me.chkReservefree.Text = "Reserve free space"
         Me.chkReservefree.UseVisualStyleBackColor = True
         '
@@ -107,14 +107,14 @@ Partial Class dlgLockUnlock
         Me.Controls.Add(Me.rdoUnlock)
         Me.Controls.Add(Me.rdoLock)
         Me.Controls.Add(Me.lblSelectedColumns)
-        Me.Controls.Add(Me.ucrMultiple)
+        Me.Controls.Add(Me.ucrReceiverLockUnlock)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgLockUnlock"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Lock_and_Unlock"
-        Me.Text = "Lock and Unlock"
+        Me.Tag = "Lock_and_unlock"
+        Me.Text = "Lock and unlock"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -122,7 +122,7 @@ Partial Class dlgLockUnlock
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents ucrMultiple As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverLockUnlock As ucrReceiverMultiple
     Friend WithEvents lblSelectedColumns As Label
     Friend WithEvents rdoLock As RadioButton
     Friend WithEvents rdoUnlock As RadioButton

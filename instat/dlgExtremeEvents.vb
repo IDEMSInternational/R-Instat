@@ -16,10 +16,11 @@ Public Class dlgExtremeEvents
             strScript = strScript & ", threshold_value=" & nudThreshold.Value.ToString()
         End If
         strScript = strScript & ",replace=True)"
-        frmMain.clsRInterface.climateObject()
-        frmMain.clsRInterface.RunScript(strScript, False)
-        frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
-        frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
+        frmMain.clsRLink.climateObject()
+        frmMain.clsRLink.RunScript(strScript, False)
+        'TODO fix this to update grids instead of calling FillData which no longer exists
+        '        frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
+        '        frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
         Me.Hide()
     End Sub
 

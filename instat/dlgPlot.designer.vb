@@ -24,14 +24,14 @@ Partial Class dlgPlot
     Private Sub InitializeComponent()
         Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.lblTitle = New System.Windows.Forms.Label()
-        Me.lblXvariable = New System.Windows.Forms.Label()
-        Me.lblYvariable = New System.Windows.Forms.Label()
+        Me.lblXVariable = New System.Windows.Forms.Label()
+        Me.lblYVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'txtTitle
@@ -51,25 +51,25 @@ Partial Class dlgPlot
         Me.lblTitle.Tag = "Title"
         Me.lblTitle.Text = "Title"
         '
-        'lblXvariable
+        'lblXVariable
         '
-        Me.lblXvariable.AutoSize = True
-        Me.lblXvariable.Location = New System.Drawing.Point(222, 60)
-        Me.lblXvariable.Name = "lblXvariable"
-        Me.lblXvariable.Size = New System.Drawing.Size(64, 13)
-        Me.lblXvariable.TabIndex = 18
-        Me.lblXvariable.Tag = "X_variable"
-        Me.lblXvariable.Text = "X  - Variable"
+        Me.lblXVariable.AutoSize = True
+        Me.lblXVariable.Location = New System.Drawing.Point(222, 60)
+        Me.lblXVariable.Name = "lblXVariable"
+        Me.lblXVariable.Size = New System.Drawing.Size(64, 13)
+        Me.lblXVariable.TabIndex = 18
+        Me.lblXVariable.Tag = "X_Variable"
+        Me.lblXVariable.Text = "X  - Variable"
         '
-        'lblYvariable
+        'lblYVariable
         '
-        Me.lblYvariable.AutoSize = True
-        Me.lblYvariable.Location = New System.Drawing.Point(222, 15)
-        Me.lblYvariable.Name = "lblYvariable"
-        Me.lblYvariable.Size = New System.Drawing.Size(72, 13)
-        Me.lblYvariable.TabIndex = 17
-        Me.lblYvariable.Tag = "Y_variables "
-        Me.lblYvariable.Text = "Y - Variable(s)"
+        Me.lblYVariable.AutoSize = True
+        Me.lblYVariable.Location = New System.Drawing.Point(222, 15)
+        Me.lblYVariable.Name = "lblYVariable"
+        Me.lblYVariable.Size = New System.Drawing.Size(72, 13)
+        Me.lblYVariable.TabIndex = 17
+        Me.lblYVariable.Tag = "Y_Variable"
+        Me.lblYVariable.Text = "Y - Variable(s)"
         '
         'lblAvailable
         '
@@ -102,30 +102,31 @@ Partial Class dlgPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 184)
+        Me.ucrBase.Location = New System.Drawing.Point(3, 190)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(322, 32)
-        Me.ucrBase.TabIndex = 14
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 27
         '
         'dlgPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(348, 229)
+        Me.ClientSize = New System.Drawing.Size(421, 246)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverY)
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.txtTitle)
         Me.Controls.Add(Me.lblTitle)
-        Me.Controls.Add(Me.lblXvariable)
-        Me.Controls.Add(Me.lblYvariable)
+        Me.Controls.Add(Me.lblXVariable)
+        Me.Controls.Add(Me.lblYVariable)
         Me.Controls.Add(Me.lblAvailable)
-        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Plot"
         Me.Text = "Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -133,12 +134,12 @@ Partial Class dlgPlot
     End Sub
     Friend WithEvents txtTitle As TextBox
     Friend WithEvents lblTitle As Label
-    Friend WithEvents lblXvariable As Label
-    Friend WithEvents lblYvariable As Label
+    Friend WithEvents lblXVariable As Label
+    Friend WithEvents lblYVariable As Label
     Friend WithEvents lblAvailable As Label
-    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents ucrReceiverY As ucrReceiverSingle
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents ucrBase As ucrButtons
 End Class

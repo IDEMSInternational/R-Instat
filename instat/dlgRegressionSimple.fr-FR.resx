@@ -42,18 +42,6 @@
   <data name="txtResidualMsg.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="Label1.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
-    <value>7, 43</value>
-  </data>
-  <data name="Label1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
-  </data>
-  <data name="Label1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="lblResidualMsg.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -87,18 +75,6 @@
   <data name="chkLackFit.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="chkAnovaTable.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="chkAnovaTable.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
-    <value>243, 141</value>
-  </data>
-  <data name="chkAnovaTable.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
-    <value>117, 17</value>
-  </data>
-  <data name="chkAnovaTable.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
   <data name="chkShowPlots.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -122,15 +98,6 @@
   </data>
   <data name="chkSiginificance.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>7</value>
-  </data>
-  <data name="ComboBox1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
-    <value>302, 103</value>
-  </data>
-  <data name="ComboBox1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
-    <value>42, 21</value>
-  </data>
-  <data name="ComboBox1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
-    <value>6</value>
   </data>
   <data name="lblConfidence.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -252,16 +219,10 @@
   <data name="ucrReceiverSingleB.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="Label1.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="lblResidualMsg.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="chkLackFit.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="chkAnovaTable.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="chkShowPlots.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -275,5 +236,44 @@
   </data>
   <data name="lblResponseVariable.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="lblDF.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDF.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDF.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 43</value>
+  </data>
+  <data name="lblDF.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
+  </data>
+  <data name="lblDF.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chkANOVATable.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkANOVATable.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkANOVATable.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>243, 141</value>
+  </data>
+  <data name="chkANOVATable.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>123, 17</value>
+  </data>
+  <data name="chkANOVATable.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="cboConfidenceLimits.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>342, 103</value>
+  </data>
+  <data name="cboConfidenceLimits.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>42, 21</value>
+  </data>
+  <data name="cboConfidenceLimits.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
 </root>

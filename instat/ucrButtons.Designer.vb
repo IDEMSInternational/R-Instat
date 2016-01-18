@@ -27,11 +27,13 @@ Partial Class ucrButtons
         Me.cmdReset = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdPaste = New System.Windows.Forms.Button()
+        Me.chkComment = New System.Windows.Forms.CheckBox()
+        Me.txtComment = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'cmdOk
         '
-        Me.cmdOk.Location = New System.Drawing.Point(3, 4)
+        Me.cmdOk.Location = New System.Drawing.Point(3, 26)
         Me.cmdOk.Name = "cmdOk"
         Me.cmdOk.Size = New System.Drawing.Size(75, 23)
         Me.cmdOk.TabIndex = 82
@@ -41,7 +43,7 @@ Partial Class ucrButtons
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(163, 4)
+        Me.cmdCancel.Location = New System.Drawing.Point(163, 26)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 81
@@ -51,7 +53,7 @@ Partial Class ucrButtons
         '
         'cmdReset
         '
-        Me.cmdReset.Location = New System.Drawing.Point(82, 4)
+        Me.cmdReset.Location = New System.Drawing.Point(82, 26)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(75, 23)
         Me.cmdReset.TabIndex = 80
@@ -61,7 +63,7 @@ Partial Class ucrButtons
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(244, 4)
+        Me.cmdHelp.Location = New System.Drawing.Point(244, 26)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
         Me.cmdHelp.TabIndex = 79
@@ -71,7 +73,7 @@ Partial Class ucrButtons
         '
         'cmdPaste
         '
-        Me.cmdPaste.Location = New System.Drawing.Point(326, 4)
+        Me.cmdPaste.Location = New System.Drawing.Point(326, 26)
         Me.cmdPaste.Name = "cmdPaste"
         Me.cmdPaste.Size = New System.Drawing.Size(75, 23)
         Me.cmdPaste.TabIndex = 83
@@ -79,18 +81,39 @@ Partial Class ucrButtons
         Me.cmdPaste.Text = "To Script"
         Me.cmdPaste.UseVisualStyleBackColor = True
         '
+        'chkComment
+        '
+        Me.chkComment.AutoSize = True
+        Me.chkComment.Location = New System.Drawing.Point(3, 3)
+        Me.chkComment.Name = "chkComment"
+        Me.chkComment.Size = New System.Drawing.Size(73, 17)
+        Me.chkComment.TabIndex = 84
+        Me.chkComment.Tag = "comment:"
+        Me.chkComment.Text = "Comment:"
+        Me.chkComment.UseVisualStyleBackColor = True
+        '
+        'txtComment
+        '
+        Me.txtComment.Location = New System.Drawing.Point(82, 1)
+        Me.txtComment.Name = "txtComment"
+        Me.txtComment.Size = New System.Drawing.Size(319, 20)
+        Me.txtComment.TabIndex = 85
+        '
         'ucrButtons
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.txtComment)
+        Me.Controls.Add(Me.chkComment)
         Me.Controls.Add(Me.cmdPaste)
         Me.Controls.Add(Me.cmdOk)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdReset)
         Me.Controls.Add(Me.cmdHelp)
         Me.Name = "ucrButtons"
-        Me.Size = New System.Drawing.Size(410, 32)
+        Me.Size = New System.Drawing.Size(410, 53)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -99,4 +122,6 @@ Partial Class ucrButtons
     Friend WithEvents cmdReset As Button
     Friend WithEvents cmdHelp As Button
     Friend WithEvents cmdPaste As Button
+    Friend WithEvents chkComment As CheckBox
+    Friend WithEvents txtComment As TextBox
 End Class

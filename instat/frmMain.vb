@@ -22,8 +22,8 @@ Imports System.ComponentModel
 
 Public Class frmMain
 
-    Public clsRInterface As New RInterface
-    Public clsButton As New ucrButtons
+    Public clsRLink As New RLink
+    Public clsGrids As New clsGridLink
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
@@ -36,61 +36,26 @@ Public Class frmMain
         frmEditor.Dock = DockStyle.Fill
         frmCommand.Show()
         frmEditor.Show()
-        'Setting the properties of R Interface
-        clsRInterface.SetLog(frmLog.txtLog)
-        clsRInterface.SetOutput(frmCommand.txtCommand)
-        clsRInterface.clsEngine = REngine.GetInstance()
-        clsRInterface.clsEngine.Initialize()
-        'Sets up R source files
-        clsRInterface.RSetup()
 
-        tstatus.Text = frmEditor.gridColumns.CurrentWorksheet.Name
+        'Setting the properties of R Interface
+        clsRLink.SetLog(frmLog.txtLog)
+        clsRLink.SetOutput(frmCommand.txtCommand)
+        clsRLink.clsEngine = REngine.GetInstance()
+        clsRLink.clsEngine.Initialize()
+        'Sets up R source files
+        clsRLink.RSetup()
+
+        ' TODO tstatus shouldn't be set here in this way
+        tstatus.Text = frmEditor.grdData.CurrentWorksheet.Name
 
     End Sub
 
     Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
-        Dim pair As KeyValuePair(Of String, String) = OpenDialog()
-        clsButton.clsRsyntax.SetFunction("read.csv")
-        clsButton.clsRsyntax.AddParameter("file", pair.Value)
-        clsRInterface.LoadData(pair.Key, clsButton.clsRsyntax.GetScript())
-        clsRInterface.FillDataObjectVariables(frmVariables.gridVariables)
-        clsRInterface.FillDataObjectMetadata(frmMetaData.gridMetaData)
-        clsRInterface.FillDataObjectData(frmEditor.gridColumns)
-
-
-    End Sub
-
-    Public Sub FillData(strDataName)
-        Dim bFoundWorksheet As Boolean = False
-        Dim tempWorkSheet
-        Dim dfDataset As DataFrame
-
-        dfDataset = clsRInterface.GetData(strDataName)
-        For Each tempWorkSheet In frmEditor.gridColumns.Worksheets
-            If tempWorkSheet.Name = strDataName Then
-                tempWorkSheet.Rows = dfDataset.RowCount
-                tempWorkSheet.Columns = dfDataset.ColumnCount
-                For i As Integer = 0 To dfDataset.RowCount - 1
-                    For k As Integer = 0 To dfDataset.ColumnCount - 1
-                        tempWorkSheet.ColumnHeaders(k).Text = dfDataset.ColumnNames(k)
-                        tempWorkSheet(row:=i, col:=k) = dfDataset(i, k)
-                    Next
-                Next
-                bFoundWorksheet = True
-            End If
-        Next
-        If Not bFoundWorksheet Then
-            tempWorkSheet = frmEditor.gridColumns.Worksheets.Create(strDataName)
-            tempWorkSheet.Rows = dfDataset.RowCount
-            tempWorkSheet.Columns = dfDataset.ColumnCount
-            For i As Integer = 0 To dfDataset.RowCount - 1
-                For k As Integer = 0 To dfDataset.ColumnCount - 1
-                    tempWorkSheet.ColumnHeaders(k).Text = dfDataset.ColumnNames(k)
-                    tempWorkSheet(row:=i, col:=k) = dfDataset(i, k)
-                Next
-            Next
-            frmEditor.gridColumns.Worksheets.Add(tempWorkSheet)
+        Dim pair As KeyValuePair(Of String, String) = ImportDialog()
+        If Not IsNothing(pair.Key) Then
+            clsRLink.LoadData(pair.Key, pair.Value)
         End If
+
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
@@ -379,7 +344,7 @@ Public Class frmMain
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
         dlgSort.ShowDialog()
     End Sub
-    Public Function OpenDialog() As KeyValuePair(Of String, String)
+    Public Function ImportDialog() As KeyValuePair(Of String, String)
         Dim dlgOpen As New OpenFileDialog
         Dim strFilePath, strFileName As String
         dlgOpen.Filter = "Comma Separated (*.csv)|*.csv"
@@ -391,9 +356,24 @@ Public Class frmMain
                 strFilePath = Replace(dlgOpen.FileName, "\", "/")
                 Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
             End If
-        Else
-            MsgBox("No File was selected!", vbInformation, "Message From Instat")
         End If
+        Return New KeyValuePair(Of String, String)("", "")
+    End Function
+
+    Public Function OpenWorkbookDialog() As KeyValuePair(Of String, String)
+        Dim dlgOpen As New OpenFileDialog
+        Dim strFilePath, strFileName As String
+        dlgOpen.Filter = "RDS R-file (*.RDS)|*.RDS"
+        dlgOpen.Title = "Open an RDS R-file"
+        If dlgOpen.ShowDialog() = DialogResult.OK Then
+            'checks if the file name is not blank'
+            If dlgOpen.FileName <> "" Then
+                strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
+                strFilePath = Replace(dlgOpen.FileName, "\", "/")
+                Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
+            End If
+        End If
+        Return New KeyValuePair(Of String, String)("", "")
     End Function
 
     Private Sub mnuEditFont_Click(sender As Object, e As EventArgs) Handles mnuEditFont.Click
@@ -676,17 +656,39 @@ Public Class frmMain
         Me.Close()
     End Sub
 
-    Private Sub mnuFileOpenWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileOpenWorksheet.Click
-        OpenFile.ShowDialog()
+    Private Sub mnuFileOpenWorkbook_Click(sender As Object, e As EventArgs) Handles mnuFileOpenWorkbook.Click
+        Dim kvpFile As KeyValuePair(Of String, String)
+        Dim clsRsyntax As New RSyntax
+
+        kvpFile = OpenWorkbookDialog()
+        If Not IsNothing(kvpFile.Key) Then
+            clsRsyntax.SetAssignTo(clsRLink.strInstatDataObject)
+            clsRsyntax.SetFunction("readRDS")
+            clsRsyntax.AddParameter("file", kvpFile.Value)
+            If Not clsRLink.bInstatObjectExists Then
+                clsRLink.RunScript(clsRsyntax.GetScript())
+                clsRLink.bInstatObjectExists = True
+                clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_data_frames_changed(new_val = TRUE)")
+                clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = TRUE)")
+                clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_variables_metadata_changed(new_val = TRUE)")
+            End If
+            clsGrids.UpdateGrids()
+        End If
+
+
     End Sub
 
     Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
         Dim kvpFile As KeyValuePair(Of String, String)
+        Dim clsRsyntax As New RSyntax
+
         kvpFile = SaveDialog()
-        clsButton.clsRsyntax.SetFunction("saveRDS")
-        clsButton.clsRsyntax.AddParameter("object", "InstatDataObject")
-        clsButton.clsRsyntax.AddParameter("file", kvpFile.Value)
-        clsRInterface.RunScript(clsButton.clsRsyntax.GetScript())
+        If Not IsNothing(kvpFile.Key) Then
+            clsRsyntax.SetFunction("saveRDS")
+            clsRsyntax.AddParameter("object", clsRLink.strInstatDataObject)
+            clsRsyntax.AddParameter("file", kvpFile.Value)
+            clsRLink.RunScript(clsRsyntax.GetScript())
+        End If
     End Sub
 
     Public Function SaveDialog() As KeyValuePair(Of String, String)
@@ -701,9 +703,8 @@ Public Class frmMain
                 strFilePath = Replace(dlgOpen.FileName, "\", "/")
                 Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
             End If
-        Else
-            MsgBox("No File was selected!", vbInformation, "Message From Instat")
         End If
+        Return New KeyValuePair(Of String, String)("", "")
     End Function
 
     Private Sub mnuFileCloseWorksheet_Click(sender As Object, e As EventArgs) Handles mnuFileCloseWorksheet.Click
@@ -711,14 +712,15 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
-        Dim kvpFile As KeyValuePair(Of String, String)
-        kvpFile = OpenDialog()
-        clsButton.clsRsyntax.SetFunction("read.csv")
-        clsButton.clsRsyntax.AddParameter("file", kvpFile.Value)
-        clsRInterface.LoadData(kvpFile.Key, clsButton.clsRsyntax.GetScript())
-        clsRInterface.FillDataObjectVariables(frmVariables.gridVariables)
-        clsRInterface.FillDataObjectMetadata(frmMetaData.gridMetaData)
-        clsRInterface.FillDataObjectData(frmEditor.gridColumns)
+        'TODO decide what Open From Library does and edit below
+        'Dim kvpFile As KeyValuePair(Of String, String)
+        'Dim clsRsyntax As New RSyntax
+
+        'kvpFile = ImportDialog()
+        'clsRsyntax.SetFunction("read.csv")
+        'clsRsyntax.AddParameter("file", kvpFile.Value)
+        'clsRInterface.LoadData(kvpFile.Key, clsRsyntax.GetScript())
+        'clsGrids.UpdateGrids()
     End Sub
 
 End Class
