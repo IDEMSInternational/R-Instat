@@ -44,7 +44,7 @@ Public Class RLink
         bLog = True
     End Sub
 
-    Public Sub FillComboDataFrames(cboDataFrames As ComboBox)
+    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox)
         Dim lstAvailableDataFrames As GenericVector
         Dim i As Integer
 
@@ -57,6 +57,28 @@ Public Class RLink
         End If
         cboDataFrames.Text = frmEditor.grdData.CurrentWorksheet.Name
     End Sub
+
+    Public Sub FillComboColumnNames(ByRef cboColumns As ComboBox, strDataFrame As String)
+        Dim lstColumns As GenericVector
+        Dim i As Integer
+
+        If bInstatObjectExists Then
+            lstColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(" & Chr(34) & strDataFrame & Chr(34) & ")").AsList
+            cboColumns.Items.Clear()
+            For i = 0 To lstColumns.Length - 1
+                cboColumns.Items.Add(lstColumns.AsCharacter(i))
+            Next
+        End If
+    End Sub
+
+    Public Function GetDefaultNames(strPrefix As String)
+        Dim lstNextDefaults As GenericVector = Nothing
+
+        If bInstatObjectExists Then
+            lstNextDefaults = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_column_name(prefix = " & Chr(34) & strPrefix & Chr(34) & ")").AsList
+        End If
+        Return lstNextDefaults
+    End Function
 
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0)
         Dim strCapturedScript As String
@@ -87,6 +109,7 @@ Public Class RLink
         Catch
             MsgBox(strOutput)
         End Try
+        frmMain.clsGrids.UpdateGrids()
     End Sub
 
     Public Function GetData(strLabel As String) As DataFrame

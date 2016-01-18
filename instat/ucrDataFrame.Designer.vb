@@ -50,6 +50,7 @@ Partial Class ucrDataFrame
         Me.Controls.Add(Me.lblSelectDataFrame)
         Me.Controls.Add(Me.cboAvailableDataFrames)
         Me.Name = "ucrDataFrame"
+        Me.Size = New System.Drawing.Size(150, 57)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
