@@ -17,18 +17,8 @@ Public Class dlgStack
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("stack")
         ucrBase.clsRsyntax.iCallType = 1
-        ucrReceiverStack.Selector = ucrAddRemove
-        ucrReceiverStack.SetMeAsReceiver()
+        ucrReceiverColumnsToBeStack.Selector = ucrAddRemove
+        ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         autoTranslate(Me)
     End Sub
-    Private Sub ucrReceiverStack_Enter(sender As Object, e As EventArgs) Handles ucrReceiverStack.Enter
-        ucrReceiverStack.SetMeAsReceiver()
-    End Sub
-    Private Sub ucrReceiverStack_Leave(sender As Object, e As EventArgs) Handles ucrReceiverStack.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverStack.GetVariables())
-    End Sub
-
-
-
-
 End Class
