@@ -202,7 +202,7 @@
   <data name="Manage" xml:space="preserve">
     <value>Manage</value>
   </data>
-  <data name="New_Worksheet" xml:space="preserve">
+  <data name="New_Worksheet..." xml:space="preserve">
     <value>New Worksheet... CTRL+N</value>
   </data>
   <data name="Ok" xml:space="preserve">
@@ -874,7 +874,7 @@
   <data name="Factor_into" xml:space="preserve">
     <value>Factor into</value>
   </data>
-  <data name="New_worksheet1" xml:space="preserve">
+  <data name="New_worksheet" xml:space="preserve">
     <value>New worksheet</value>
   </data>
   <data name="Omit_value" xml:space="preserve">
