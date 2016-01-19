@@ -30,12 +30,14 @@ Public Class frmMain
         frmCommand.MdiParent = Me
         frmLog.MdiParent = Me
         frmScript.MdiParent = Me
+        frmVariables.MdiParent = Me
+        frmMetaData.MdiParent = Me
         Me.LayoutMdi(MdiLayout.ArrangeIcons)
         frmCommand.Dock = DockStyle.Right
         frmEditor.Dock = DockStyle.Left
         frmEditor.Dock = DockStyle.Fill
         frmCommand.Show()
-        frmEditor.Show()
+        'frmEditor.Show()
 
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
@@ -55,7 +57,7 @@ Public Class frmMain
         If Not IsNothing(pair.Key) Then
             clsRLink.LoadData(pair.Key, pair.Value)
         End If
-
+        frmEditor.Show()
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
@@ -674,7 +676,7 @@ Public Class frmMain
             End If
             clsGrids.UpdateGrids()
         End If
-
+        frmEditor.Show()
 
     End Sub
 
@@ -722,5 +724,4 @@ Public Class frmMain
         'clsRInterface.LoadData(kvpFile.Key, clsRsyntax.GetScript())
         'clsGrids.UpdateGrids()
     End Sub
-
 End Class
