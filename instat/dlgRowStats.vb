@@ -14,16 +14,13 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
 Public Class dlgRowStats
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
-
     End Sub
 
-    'Private Sub UcrReceiverMultiple1_Leave(sender As Object, e As EventArgs) Handles UcrReceiverMultiple1.LeftList
-    '    ucrBase.clsRsyntax.AddParameter("x", "data$" & UcrReceiverMultiple1.lstSelectedVariables.SelectedItem & "")
-    'End Sub
+    Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles ucrDataFrame.Load
+
+    End Sub
 End Class
