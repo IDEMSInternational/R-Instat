@@ -724,4 +724,16 @@ Public Class frmMain
         'clsRInterface.LoadData(kvpFile.Key, clsRsyntax.GetScript())
         'clsGrids.UpdateGrids()
     End Sub
+
+    Private Sub mnuManageDataSubset_Click(sender As Object, e As EventArgs) Handles mnuManageDataSubset.Click
+        dlgSubset.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageReshapeSubset_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeSubset.Click
+        dlgSubset.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageDataMerge_Click(sender As Object, e As EventArgs) Handles mnuManageDataMerge.Click
+        dlgMerge.ShowDialog()
+    End Sub
 End Class
