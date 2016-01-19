@@ -14,25 +14,29 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgUnstack
-
-
     Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("unstack")
         ucrBase.clsRsyntax.iCallType = 1
-        UcrReceiverUnstack.Selector = ucrAddRemove
-        UcrReceiverUnstack.SetMeAsReceiver()
+        ucrReceiverColumns.Selector = ucrSelectorByDataFrameAddRemove
+        ucrReceiverFactors.Selector = ucrSelectorByDataFrameAddRemove
+        ucrReceiverFactors.SetMeAsReceiver()
 
         autoTranslate(Me)
-
-    End Sub
-    Private Sub ucrReceiverUnstack_Enter(sender As Object, e As EventArgs) Handles UcrReceiverUnstack.Enter
-        UcrReceiverUnstack.SetMeAsReceiver()
-    End Sub
-    Private Sub ucrReceiverUnstack_Leave(sender As Object, e As EventArgs) Handles UcrReceiverUnstack.Leave
-        ucrBase.clsRsyntax.AddParameter("x", UcrReceiverUnstack.GetVariables())
+        lblSheetName.Visible = False
+        txtSheetName.Visible = False
     End Sub
 
+    Private Sub rdoNewWorksheet_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNewWorksheet.CheckedChanged
+        If rdoNewWorksheet.Checked = True Then
+            lblSheetName.Visible = True
+            txtSheetName.Visible = True
+        Else
+            lblSheetName.Visible = False
+            txtSheetName.Visible = False
+        End If
+    End Sub
 
-
-
+    Private Sub ucrReceiverColumns_Enter(sender As Object, e As EventArgs) Handles ucrReceiverColumns.Enter
+        ucrReceiverColumns.SetMeAsReceiver()
+    End Sub
 End Class

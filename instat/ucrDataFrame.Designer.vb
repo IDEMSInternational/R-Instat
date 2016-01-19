@@ -29,7 +29,7 @@ Partial Class ucrDataFrame
         'cboAvailableDataFrames
         '
         Me.cboAvailableDataFrames.FormattingEnabled = True
-        Me.cboAvailableDataFrames.Location = New System.Drawing.Point(14, 29)
+        Me.cboAvailableDataFrames.Location = New System.Drawing.Point(3, 16)
         Me.cboAvailableDataFrames.Name = "cboAvailableDataFrames"
         Me.cboAvailableDataFrames.Size = New System.Drawing.Size(121, 21)
         Me.cboAvailableDataFrames.TabIndex = 0
@@ -37,7 +37,7 @@ Partial Class ucrDataFrame
         'lblSelectDataFrame
         '
         Me.lblSelectDataFrame.AutoSize = True
-        Me.lblSelectDataFrame.Location = New System.Drawing.Point(11, 9)
+        Me.lblSelectDataFrame.Location = New System.Drawing.Point(3, 0)
         Me.lblSelectDataFrame.Name = "lblSelectDataFrame"
         Me.lblSelectDataFrame.Size = New System.Drawing.Size(98, 13)
         Me.lblSelectDataFrame.TabIndex = 1
@@ -50,7 +50,7 @@ Partial Class ucrDataFrame
         Me.Controls.Add(Me.lblSelectDataFrame)
         Me.Controls.Add(Me.cboAvailableDataFrames)
         Me.Name = "ucrDataFrame"
-        Me.Size = New System.Drawing.Size(150, 57)
+        Me.Size = New System.Drawing.Size(127, 41)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

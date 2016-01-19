@@ -4,7 +4,10 @@ Public Class ucrSelector
     Public CurrentReceiver As ucrReceiver
 
     Private Sub ucrdataselection_load(sender As Object, e As EventArgs) Handles MyBase.Load
-        lstAvailableVariable.Clear()
+        LoadList()
+    End Sub
+
+    Public Overridable Sub LoadList()
         frmMain.clsRLink.FillListView(lstAvailableVariable)
     End Sub
 
@@ -35,4 +38,5 @@ Public Class ucrSelector
     Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.DoubleClick
         Add()
     End Sub
+
 End Class
