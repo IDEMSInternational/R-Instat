@@ -202,9 +202,6 @@
   <data name="Manage" xml:space="preserve">
     <value>Manage</value>
   </data>
-  <data name="New_Worksheet..." xml:space="preserve">
-    <value>New Worksheet... CTRL+N</value>
-  </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
@@ -888,5 +885,14 @@
   </data>
   <data name="Stack_data_into" xml:space="preserve">
     <value>Stack data into</value>
+  </data>
+  <data name="Exponential" xml:space="preserve">
+    <value>Exponential</value>
+  </data>
+  <data name="Geometric" xml:space="preserve">
+    <value>Geometric</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Normal</value>
   </data>
 </root>
