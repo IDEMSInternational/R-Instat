@@ -153,8 +153,12 @@ data_obj$methods(get_variables_metadata = function(include_all = TRUE) {
 }
 )
 
-data_obj$methods(get_metadata = function() {
-  return(metadata)
+data_obj$methods(get_metadata = function(label) {
+  if(missing(label)) return(metadata)
+  else {
+    if(label %in% names(metadata)) return(metadata[[label]])
+    else return("")
+  }
 }
 )
 
@@ -164,9 +168,7 @@ data_obj$methods(add_column_to_data = function(col_name = "", col_data) {
   # Column name must be character
   if( ! is.character(col_name) ) stop("Column name must be of type: character")
   
-  col_data = rep(col_data, length.out = nrow(data))
-  
-  col_data <- unlist(column_data)
+  col_data <- unlist(col_data)
   
   if(col_name %in% names(data)) {
     message(paste("A column named", col_name, "already exists. The column will be replaced in the data"))
@@ -176,6 +178,8 @@ data_obj$methods(add_column_to_data = function(col_name = "", col_data) {
   else .self$append_to_changes(list(Added_col, col_name))
   
   data[[col_name]] <<- col_data
+  .self$set_data_changed(TRUE)
+  .self$set_variables_metadata_changed(TRUE)
 }
 )
 
@@ -209,7 +213,9 @@ data_obj$methods(rename_column_in_data = function(curr_col_name = "", new_col_na
     }
     names(data)[names(data) == curr_col_name] <<- new_col_name
     .self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
-    }
+    .self$set_data_changed(TRUE)
+    .self$set_variables_metadata_changed(TRUE)
+  }
 }
 )
 
@@ -228,6 +234,8 @@ data_obj$methods(remove_column_in_data = function(col_name = "") {
     data[[ col_name ]] <<- NULL 
     .self$append_to_changes(list(Removed_col, col_name))
   }
+  .self$set_data_changed(TRUE)
+  .self$set_variables_metadata_changed(TRUE)
 }
 )
 
@@ -258,7 +266,8 @@ data_obj$methods(replace_value_in_data = function(col_name = "", index, new_valu
   old_value = data[[col_name]][[index]]
   data[[col_name]][[index]] <<- new_value
   .self$append_to_changes(list(Replaced_value, col_name, index, old_value, new_value))
-  
+  .self$set_data_changed(TRUE)
+  .self$set_variables_metadata_changed(TRUE)
 }
 )
 
@@ -308,12 +317,6 @@ data_obj$methods(add_defaults_meta = function(user) {
   }
 )
 
-data_obj$methods(add_column_to_data = function(col_name  ="", col_data) {
-  col_data = rep(col_data, length.out = nrow(data))
-  
-}
-)
-
 data_obj$methods(remove_row_in_data = function(row_num) {
 
   if (   row_num != as.integer(row_num) || row_num < 1 || row_num >  nrow(data) ) {
@@ -325,7 +328,76 @@ data_obj$methods(remove_row_in_data = function(row_num) {
   else {
     data <<- data[-row_num,]
     .self$append_to_changes(list(Removed_row, row_num))
+  }
+  .self$set_data_changed(TRUE)
+}
+)
+
+data_obj$methods(get_next_default_column_name = function(prefix) {
+  if(!is.character(prefix)) stop("prefix must be of type character")
+  col_exists = TRUE
+  i = 1
+  while(col_exists) {
+    if(!paste0(prefix,i) %in% names(data)) {
+      col_exists = FALSE
+      out = paste0(prefix,i)
     }
+    i = i + 1
+  }
+  out
+} 
+)
+
+data_obj$methods(insert_column_in_data = function(col_name = "", col_data =c(), col_number) {
+  if (col_number <= 0) stop("You cannot put a column into the position less or equal to zero.")
+  if (col_number %% 1 != 0) stop("col_number value should be an integer.")
+  if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
+
+    
+  if(length(col_data)==0){
+      col_data <- rep(NA, nrow(data))
+      warning(paste("You are inserting an empty column to", get_metadata(data_name_label)))
+  }
+
+  data[, col_name] <<- col_data
+  if(col_number==1){
+      data <<- cbind(data[ncol(data)], data[(col_number):ncol(data)-1])
+    }
+  else{
+      data <<- cbind(data[1:(col_number -1)],data[ncol(data)], data[(col_number+1):ncol(data)-1])
+    }
+  
+    .self$append_to_changes(list(Inserted_col, col_number))
+}
+)
+
+data_obj$methods(move_column_in_data = function(col_name = "", col_number) {
+  if (col_number <= 0) stop("You cannot move a column into the position less or equal to zero.")
+  if (col_number %% 1 != 0) stop("col_number value should be an integer.")
+  if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
+  
+  if(!(col_name %in% names(data))){
+    stop(col_name, " is not a column in", get_metadata(data_name_label))
+  }
+  
+  dat1 <<- as.data.frame(data[,c(col_name)])
+  names(dat1) <<- col_name
+  
+  names(data)[names(data) == col_name] <<- "to_delete"
+  
+  if(col_number==1){
+    data <<- cbind(dat1, data)
+  }
+  else if(col_number == ncol(data)){
+    data <<- cbind(data,dat1)
+  }
+  else{
+    data <<- cbind(data[1:(col_number)], dat1, data[(col_number+1):ncol(data)])
+  }
+  
+  data[,"to_delete"]<<- NULL
+  
+  .self$append_to_changes(list(Move_col, col_name))
 }
 )
 
@@ -339,7 +411,8 @@ Added_metadata="Added metadata"
 Converted_col_="Converted column"
 Replaced_value="Replaced value"
 Removed_row="Removed row"
-
+Inserted_col = "Inserted column"
+Move_col = "Moved column"
 #meta data labels
 data_name_label="data_name"
 is_calculated_label="is_calculated"
