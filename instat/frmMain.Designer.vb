@@ -215,6 +215,7 @@ Partial Class frmMain
         Me.mnuFileClose = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileImportExport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubmitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CurrentWindowCtrlWToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CurrentLineCtrlLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -299,16 +300,37 @@ Partial Class frmMain
         Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.fontToolStrip = New System.Windows.Forms.ToolStrip()
+        Me.fontSizeToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.enlargeFontToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.fontSmallerToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.boldToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.italicToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.underlineToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.strikethroughToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.textWrapToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.textAlignLeftToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.textAlignCenterToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.textAlignRightToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.distributedIndentToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.textAlignTopToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.textAlignMiddleToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.textAlignBottomToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
+        Me.zoomToolStripDropDownButton = New System.Windows.Forms.ToolStripComboBox()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
+        Me.fontToolStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStripSeparator12
         '
         Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
-        Me.ToolStripSeparator12.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(175, 6)
         '
         'PoissonOneSampleToolStripMenuItem
         '
@@ -349,7 +371,7 @@ Partial Class frmMain
         '
         Me.AnalysisOfVarianceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OnewayToolStripMenuItem, Me.OrthogonalToolStripMenuItem, Me.GeneralToolStripMenuItem1, Me.BivariateToolStripMenuItem})
         Me.AnalysisOfVarianceToolStripMenuItem.Name = "AnalysisOfVarianceToolStripMenuItem"
-        Me.AnalysisOfVarianceToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.AnalysisOfVarianceToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.AnalysisOfVarianceToolStripMenuItem.Tag = "Analysis_of_Variance"
         Me.AnalysisOfVarianceToolStripMenuItem.Text = "Analysis of Variance"
         '
@@ -381,7 +403,7 @@ Partial Class frmMain
         '
         Me.RegressionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatsRegressionSimple, Me.SimpleWithGroupsToolStripMenuItem, Me.mnuStatisticsRegressionMultiple, Me.GeneralLinearModelToolStripMenuItem, Me.ToolStripSeparator11, Me.CorrelationToolStripMenuItem, Me.LogLinearModelsToolStripMenuItem})
         Me.RegressionToolStripMenuItem.Name = "RegressionToolStripMenuItem"
-        Me.RegressionToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.RegressionToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.RegressionToolStripMenuItem.Tag = "Regression"
         Me.RegressionToolStripMenuItem.Text = "Regression"
         '
@@ -430,7 +452,7 @@ Partial Class frmMain
         '
         Me.SimpleModelsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OneSampleToolStripMenuItem, Me.PoissonOneSampleToolStripMenuItem, Me.ToolStripSeparator9, Me.GammaToolStripMenuItem, Me.ExtremaToolStripMenuItem, Me.ChisquareTestToolStripMenuItem, Me.GoodnessOfFitToolStripMenuItem, Me.ProbabilityDistributionsToolStripMenuItem})
         Me.SimpleModelsToolStripMenuItem.Name = "SimpleModelsToolStripMenuItem"
-        Me.SimpleModelsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SimpleModelsToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.SimpleModelsToolStripMenuItem.Tag = "Simple_Models"
         Me.SimpleModelsToolStripMenuItem.Text = "Simple Models"
         '
@@ -450,32 +472,32 @@ Partial Class frmMain
         '
         Me.NonParametricToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OneAndTwoSamplesToolStripMenuItem, Me.mnuStatsNonParametricOneWayAnova, Me.mnuStatsNonParametricTwoWayAnova})
         Me.NonParametricToolStripMenuItem.Name = "NonParametricToolStripMenuItem"
-        Me.NonParametricToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.NonParametricToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.NonParametricToolStripMenuItem.Tag = "Non_Parametric"
         Me.NonParametricToolStripMenuItem.Text = "Non-Parametric"
         '
         'OneAndTwoSamplesToolStripMenuItem
         '
         Me.OneAndTwoSamplesToolStripMenuItem.Name = "OneAndTwoSamplesToolStripMenuItem"
-        Me.OneAndTwoSamplesToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.OneAndTwoSamplesToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
         Me.OneAndTwoSamplesToolStripMenuItem.Text = "One and Two Samples..."
         '
         'mnuStatsNonParametricOneWayAnova
         '
         Me.mnuStatsNonParametricOneWayAnova.Name = "mnuStatsNonParametricOneWayAnova"
-        Me.mnuStatsNonParametricOneWayAnova.Size = New System.Drawing.Size(201, 22)
+        Me.mnuStatsNonParametricOneWayAnova.Size = New System.Drawing.Size(200, 22)
         Me.mnuStatsNonParametricOneWayAnova.Text = "One-Way (ANOVA)"
         '
         'mnuStatsNonParametricTwoWayAnova
         '
         Me.mnuStatsNonParametricTwoWayAnova.Name = "mnuStatsNonParametricTwoWayAnova"
-        Me.mnuStatsNonParametricTwoWayAnova.Size = New System.Drawing.Size(201, 22)
+        Me.mnuStatsNonParametricTwoWayAnova.Size = New System.Drawing.Size(200, 22)
         Me.mnuStatsNonParametricTwoWayAnova.Text = "Two-Way (ANOVA)..."
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(175, 6)
         '
         'ResizeWorksheetToolStripMenuItem
         '
@@ -587,7 +609,7 @@ Partial Class frmMain
         '
         Me.SummaryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DescribeToolStripMenuItem, Me.mnuStatsSummaryColumnStat, Me.CheckDuplicatesToolStripMenuItem, Me.GroupToolStripMenuItem, Me.ToolStripSeparator7, Me.DiversityToolStripMenuItem, Me.CircularStatisticsToolStripMenuItem})
         Me.SummaryToolStripMenuItem.Name = "SummaryToolStripMenuItem"
-        Me.SummaryToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SummaryToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.SummaryToolStripMenuItem.Tag = "Summary"
         Me.SummaryToolStripMenuItem.Text = "Summary"
         '
@@ -642,7 +664,7 @@ Partial Class frmMain
         '
         Me.TablesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FrequencyToolStripMenuItem, Me.SummaryToolStripMenuItem1, Me.GeneralToolStripMenuItem, Me.MultipleResponseToolStripMenuItem, Me.LoadTableToolStripMenuItem})
         Me.TablesToolStripMenuItem.Name = "TablesToolStripMenuItem"
-        Me.TablesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.TablesToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.TablesToolStripMenuItem.Tag = "Tables"
         Me.TablesToolStripMenuItem.Text = "Tables"
         '
@@ -679,13 +701,13 @@ Partial Class frmMain
         'ToolStripSeparator13
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(175, 6)
         '
         'TimeSeriesToolStripMenuItem
         '
         Me.TimeSeriesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MovingAveragesToolStripMenuItem, Me.CorrelationsToolStripMenuItem})
         Me.TimeSeriesToolStripMenuItem.Name = "TimeSeriesToolStripMenuItem"
-        Me.TimeSeriesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.TimeSeriesToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.TimeSeriesToolStripMenuItem.Tag = "Time_Series"
         Me.TimeSeriesToolStripMenuItem.Text = "Time Series"
         '
@@ -705,7 +727,7 @@ Partial Class frmMain
         '
         Me.SurvivalToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KaplanMeirToolStripMenuItem, Me.LogRankToolStripMenuItem})
         Me.SurvivalToolStripMenuItem.Name = "SurvivalToolStripMenuItem"
-        Me.SurvivalToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SurvivalToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.SurvivalToolStripMenuItem.Tag = "Survival"
         Me.SurvivalToolStripMenuItem.Text = "Survival"
         '
@@ -724,12 +746,12 @@ Partial Class frmMain
         'ToolStripSeparator14
         '
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
-        Me.ToolStripSeparator14.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator14.Size = New System.Drawing.Size(175, 6)
         '
         'SampleSizeToolStripMenuItem
         '
         Me.SampleSizeToolStripMenuItem.Name = "SampleSizeToolStripMenuItem"
-        Me.SampleSizeToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SampleSizeToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.SampleSizeToolStripMenuItem.Tag = "Sample_Size"
         Me.SampleSizeToolStripMenuItem.Text = "Sample Size..."
         '
@@ -1644,6 +1666,13 @@ Partial Class frmMain
         Me.mnuFileImportExport.Tag = "Import_Export"
         Me.mnuFileImportExport.Text = "Import/Export"
         '
+        'mnuFileOptions
+        '
+        Me.mnuFileOptions.Name = "mnuFileOptions"
+        Me.mnuFileOptions.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileOptions.Tag = "Options"
+        Me.mnuFileOptions.Text = "Options"
+        '
         'SubmitToolStripMenuItem
         '
         Me.SubmitToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CurrentWindowCtrlWToolStripMenuItem, Me.CurrentLineCtrlLToolStripMenuItem, Me.SelectionCtrlMToolStripMenuItem, Me.RunMacroToolStripMenuItem, Me.InterruptMacroF12ToolStripMenuItem, Me.AddMacroToMenuToolStripMenuItem, Me.ModifyMacroInMenuToolStripMenuItem, Me.RemoveMacroFromMenuToolStripMenuItem})
@@ -1788,49 +1817,49 @@ Partial Class frmMain
         'TransformToolStripMenuItem
         '
         Me.TransformToolStripMenuItem.Name = "TransformToolStripMenuItem"
-        Me.TransformToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TransformToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.TransformToolStripMenuItem.Tag = "Transform"
         Me.TransformToolStripMenuItem.Text = "Transform..."
         '
         'RecodeToolStripMenuItem
         '
         Me.RecodeToolStripMenuItem.Name = "RecodeToolStripMenuItem"
-        Me.RecodeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RecodeToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.RecodeToolStripMenuItem.Tag = "Recode"
         Me.RecodeToolStripMenuItem.Text = "Recode..."
         '
         'mnuManageDataSort
         '
         Me.mnuManageDataSort.Name = "mnuManageDataSort"
-        Me.mnuManageDataSort.Size = New System.Drawing.Size(180, 22)
+        Me.mnuManageDataSort.Size = New System.Drawing.Size(179, 22)
         Me.mnuManageDataSort.Tag = "Sort"
         Me.mnuManageDataSort.Text = "Sort"
         '
         'mnuManageManipulateRowStat
         '
         Me.mnuManageManipulateRowStat.Name = "mnuManageManipulateRowStat"
-        Me.mnuManageManipulateRowStat.Size = New System.Drawing.Size(180, 22)
+        Me.mnuManageManipulateRowStat.Size = New System.Drawing.Size(179, 22)
         Me.mnuManageManipulateRowStat.Tag = "Row_Statistics"
         Me.mnuManageManipulateRowStat.Text = "Row Statistics..."
         '
         'InteractionsToolStripMenuItem
         '
         Me.InteractionsToolStripMenuItem.Name = "InteractionsToolStripMenuItem"
-        Me.InteractionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.InteractionsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.InteractionsToolStripMenuItem.Tag = "Interactions"
         Me.InteractionsToolStripMenuItem.Text = "Interactions..."
         '
         'IndicatorVariablesToolStripMenuItem
         '
         Me.IndicatorVariablesToolStripMenuItem.Name = "IndicatorVariablesToolStripMenuItem"
-        Me.IndicatorVariablesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.IndicatorVariablesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.IndicatorVariablesToolStripMenuItem.Tag = "Indicator_Variables"
         Me.IndicatorVariablesToolStripMenuItem.Text = "Indicator Variables..."
         '
         'PolynomialsToolStripMenuItem
         '
         Me.PolynomialsToolStripMenuItem.Name = "PolynomialsToolStripMenuItem"
-        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.PolynomialsToolStripMenuItem.Text = "Polynomials"
         '
         'ReshapeToolStripMenuItem
@@ -2186,18 +2215,196 @@ Partial Class frmMain
         Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
         Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
         '
-        'mnuFileOptions
+        'fontToolStrip
         '
-        Me.mnuFileOptions.Name = "mnuFileOptions"
-        Me.mnuFileOptions.Size = New System.Drawing.Size(204, 22)
-        Me.mnuFileOptions.Tag = "Options"
-        Me.mnuFileOptions.Text = "Options"
+        Me.fontToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.fontToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.fontSizeToolStripComboBox, Me.enlargeFontToolStripButton, Me.fontSmallerToolStripButton, Me.boldToolStripButton, Me.italicToolStripButton, Me.underlineToolStripButton, Me.strikethroughToolStripButton, Me.ToolStripSeparator4, Me.textWrapToolStripButton, Me.ToolStripSeparator5, Me.textAlignLeftToolStripButton, Me.textAlignCenterToolStripButton, Me.textAlignRightToolStripButton, Me.distributedIndentToolStripButton, Me.ToolStripSeparator6, Me.textAlignTopToolStripButton, Me.textAlignMiddleToolStripButton, Me.textAlignBottomToolStripButton, Me.ToolStripSeparator10, Me.zoomToolStripDropDownButton})
+        Me.fontToolStrip.Location = New System.Drawing.Point(0, 49)
+        Me.fontToolStrip.Name = "fontToolStrip"
+        Me.fontToolStrip.Size = New System.Drawing.Size(769, 25)
+        Me.fontToolStrip.TabIndex = 10
+        Me.fontToolStrip.Text = "toolStrip2"
+        '
+        'fontSizeToolStripComboBox
+        '
+        Me.fontSizeToolStripComboBox.AutoSize = False
+        Me.fontSizeToolStripComboBox.Name = "fontSizeToolStripComboBox"
+        Me.fontSizeToolStripComboBox.Size = New System.Drawing.Size(60, 23)
+        Me.fontSizeToolStripComboBox.Text = "8"
+        Me.fontSizeToolStripComboBox.ToolTipText = "Change font size"
+        '
+        'enlargeFontToolStripButton
+        '
+        Me.enlargeFontToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.enlargeFontToolStripButton.Image = Global.instat.My.Resources.Resources.font_larger
+        Me.enlargeFontToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.enlargeFontToolStripButton.Name = "enlargeFontToolStripButton"
+        Me.enlargeFontToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.enlargeFontToolStripButton.Text = "Make text larger"
+        '
+        'fontSmallerToolStripButton
+        '
+        Me.fontSmallerToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.fontSmallerToolStripButton.Image = Global.instat.My.Resources.Resources.font_smaller
+        Me.fontSmallerToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.fontSmallerToolStripButton.Name = "fontSmallerToolStripButton"
+        Me.fontSmallerToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.fontSmallerToolStripButton.Text = "Make text smaller"
+        '
+        'boldToolStripButton
+        '
+        Me.boldToolStripButton.CheckOnClick = True
+        Me.boldToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.boldToolStripButton.Image = Global.instat.My.Resources.Resources.bold
+        Me.boldToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.boldToolStripButton.Margin = New System.Windows.Forms.Padding(2, 1, 0, 2)
+        Me.boldToolStripButton.Name = "boldToolStripButton"
+        Me.boldToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.boldToolStripButton.Text = "Bold"
+        '
+        'italicToolStripButton
+        '
+        Me.italicToolStripButton.CheckOnClick = True
+        Me.italicToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.italicToolStripButton.Image = Global.instat.My.Resources.Resources.italic
+        Me.italicToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.italicToolStripButton.Name = "italicToolStripButton"
+        Me.italicToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.italicToolStripButton.Text = "Italic"
+        '
+        'underlineToolStripButton
+        '
+        Me.underlineToolStripButton.CheckOnClick = True
+        Me.underlineToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.underlineToolStripButton.Image = Global.instat.My.Resources.Resources.underlinee
+        Me.underlineToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.underlineToolStripButton.Name = "underlineToolStripButton"
+        Me.underlineToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.underlineToolStripButton.Text = "Underline"
+        '
+        'strikethroughToolStripButton
+        '
+        Me.strikethroughToolStripButton.CheckOnClick = True
+        Me.strikethroughToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.strikethroughToolStripButton.Image = Global.instat.My.Resources.Resources.strikethrough
+        Me.strikethroughToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.strikethroughToolStripButton.Name = "strikethroughToolStripButton"
+        Me.strikethroughToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.strikethroughToolStripButton.Text = "Strikethrough"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
+        'textWrapToolStripButton
+        '
+        Me.textWrapToolStripButton.CheckOnClick = True
+        Me.textWrapToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.textWrapToolStripButton.Image = Global.instat.My.Resources.Resources.textwrap
+        Me.textWrapToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.textWrapToolStripButton.Name = "textWrapToolStripButton"
+        Me.textWrapToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.textWrapToolStripButton.Text = "Text Wrap"
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 25)
+        '
+        'textAlignLeftToolStripButton
+        '
+        Me.textAlignLeftToolStripButton.CheckOnClick = True
+        Me.textAlignLeftToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.textAlignLeftToolStripButton.Image = Global.instat.My.Resources.Resources.AlignTableCellMiddleLeftJustHS
+        Me.textAlignLeftToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.textAlignLeftToolStripButton.Name = "textAlignLeftToolStripButton"
+        Me.textAlignLeftToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.textAlignLeftToolStripButton.Text = "Text Left Align"
+        '
+        'textAlignCenterToolStripButton
+        '
+        Me.textAlignCenterToolStripButton.CheckOnClick = True
+        Me.textAlignCenterToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.textAlignCenterToolStripButton.Image = Global.instat.My.Resources.Resources.AlignTableCellMiddleCenterHS
+        Me.textAlignCenterToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.textAlignCenterToolStripButton.Name = "textAlignCenterToolStripButton"
+        Me.textAlignCenterToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.textAlignCenterToolStripButton.Text = "Text Center Align"
+        '
+        'textAlignRightToolStripButton
+        '
+        Me.textAlignRightToolStripButton.CheckOnClick = True
+        Me.textAlignRightToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.textAlignRightToolStripButton.Image = Global.instat.My.Resources.Resources.AlignTableCellMiddleRightHS
+        Me.textAlignRightToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.textAlignRightToolStripButton.Name = "textAlignRightToolStripButton"
+        Me.textAlignRightToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.textAlignRightToolStripButton.Text = "Text Right Align"
+        '
+        'distributedIndentToolStripButton
+        '
+        Me.distributedIndentToolStripButton.CheckOnClick = True
+        Me.distributedIndentToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.distributedIndentToolStripButton.Image = Global.instat.My.Resources.Resources.PageWidthHS
+        Me.distributedIndentToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.distributedIndentToolStripButton.Name = "distributedIndentToolStripButton"
+        Me.distributedIndentToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.distributedIndentToolStripButton.Text = "Text Distributed Indent"
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
+        '
+        'textAlignTopToolStripButton
+        '
+        Me.textAlignTopToolStripButton.CheckOnClick = True
+        Me.textAlignTopToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.textAlignTopToolStripButton.Image = Global.instat.My.Resources.Resources.AlignLayoutTop
+        Me.textAlignTopToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.textAlignTopToolStripButton.Name = "textAlignTopToolStripButton"
+        Me.textAlignTopToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.textAlignTopToolStripButton.Text = "Text Top Align"
+        '
+        'textAlignMiddleToolStripButton
+        '
+        Me.textAlignMiddleToolStripButton.CheckOnClick = True
+        Me.textAlignMiddleToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.textAlignMiddleToolStripButton.Image = Global.instat.My.Resources.Resources.AlignLayoutMiddle
+        Me.textAlignMiddleToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.textAlignMiddleToolStripButton.Name = "textAlignMiddleToolStripButton"
+        Me.textAlignMiddleToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.textAlignMiddleToolStripButton.Text = "Text Middle Align"
+        '
+        'textAlignBottomToolStripButton
+        '
+        Me.textAlignBottomToolStripButton.CheckOnClick = True
+        Me.textAlignBottomToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.textAlignBottomToolStripButton.Image = Global.instat.My.Resources.Resources.AlignLayoutBottom
+        Me.textAlignBottomToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.textAlignBottomToolStripButton.Name = "textAlignBottomToolStripButton"
+        Me.textAlignBottomToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.textAlignBottomToolStripButton.Text = "Text Bottom Align"
+        '
+        'ToolStripSeparator10
+        '
+        Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(6, 25)
+        '
+        'zoomToolStripDropDownButton
+        '
+        Me.zoomToolStripDropDownButton.AutoSize = False
+        Me.zoomToolStripDropDownButton.Items.AddRange(New Object() {"10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%", "110%", "120%", "130%", "140%", "150%", "160%", "170%", "180%", "190%", "200%", "250%", "400%"})
+        Me.zoomToolStripDropDownButton.Name = "zoomToolStripDropDownButton"
+        Me.zoomToolStripDropDownButton.Size = New System.Drawing.Size(60, 23)
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(769, 332)
+        Me.Controls.Add(Me.fontToolStrip)
         Me.Controls.Add(Me.stsStrip)
         Me.Controls.Add(Me.Tool_strip)
         Me.Controls.Add(Me.mnuBar)
@@ -2212,6 +2419,8 @@ Partial Class frmMain
         Me.Tool_strip.PerformLayout()
         Me.mnuBar.ResumeLayout(False)
         Me.mnuBar.PerformLayout()
+        Me.fontToolStrip.ResumeLayout(False)
+        Me.fontToolStrip.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2494,4 +2703,25 @@ Partial Class frmMain
     Friend WithEvents PolynomialsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ProbabilityDistributionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuFileOptions As ToolStripMenuItem
+    Private WithEvents fontToolStrip As ToolStrip
+    Private WithEvents fontSizeToolStripComboBox As ToolStripComboBox
+    Private WithEvents enlargeFontToolStripButton As ToolStripButton
+    Private WithEvents fontSmallerToolStripButton As ToolStripButton
+    Private WithEvents boldToolStripButton As ToolStripButton
+    Private WithEvents italicToolStripButton As ToolStripButton
+    Private WithEvents underlineToolStripButton As ToolStripButton
+    Private WithEvents strikethroughToolStripButton As ToolStripButton
+    Private WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Private WithEvents textWrapToolStripButton As ToolStripButton
+    Private WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Private WithEvents textAlignLeftToolStripButton As ToolStripButton
+    Private WithEvents textAlignCenterToolStripButton As ToolStripButton
+    Private WithEvents textAlignRightToolStripButton As ToolStripButton
+    Private WithEvents distributedIndentToolStripButton As ToolStripButton
+    Private WithEvents ToolStripSeparator6 As ToolStripSeparator
+    Private WithEvents textAlignTopToolStripButton As ToolStripButton
+    Private WithEvents textAlignMiddleToolStripButton As ToolStripButton
+    Private WithEvents textAlignBottomToolStripButton As ToolStripButton
+    Private WithEvents ToolStripSeparator10 As ToolStripSeparator
+    Private WithEvents zoomToolStripDropDownButton As ToolStripComboBox
 End Class
