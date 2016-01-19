@@ -30,6 +30,8 @@ Public Class frmMain
         frmCommand.MdiParent = Me
         frmLog.MdiParent = Me
         frmScript.MdiParent = Me
+        frmVariables.MdiParent = Me
+        frmMetaData.MdiParent = Me
         Me.LayoutMdi(MdiLayout.ArrangeIcons)
         frmCommand.Dock = DockStyle.Right
         frmEditor.Dock = DockStyle.Left
@@ -722,5 +724,4 @@ Public Class frmMain
         'clsRInterface.LoadData(kvpFile.Key, clsRsyntax.GetScript())
         'clsGrids.UpdateGrids()
     End Sub
-
 End Class

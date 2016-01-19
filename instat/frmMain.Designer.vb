@@ -308,7 +308,7 @@ Partial Class frmMain
         'ToolStripSeparator12
         '
         Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
-        Me.ToolStripSeparator12.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(175, 6)
         '
         'PoissonOneSampleToolStripMenuItem
         '
@@ -349,7 +349,7 @@ Partial Class frmMain
         '
         Me.AnalysisOfVarianceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OnewayToolStripMenuItem, Me.OrthogonalToolStripMenuItem, Me.GeneralToolStripMenuItem1, Me.BivariateToolStripMenuItem})
         Me.AnalysisOfVarianceToolStripMenuItem.Name = "AnalysisOfVarianceToolStripMenuItem"
-        Me.AnalysisOfVarianceToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.AnalysisOfVarianceToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.AnalysisOfVarianceToolStripMenuItem.Tag = "Analysis_of_Variance"
         Me.AnalysisOfVarianceToolStripMenuItem.Text = "Analysis of Variance"
         '
@@ -381,7 +381,7 @@ Partial Class frmMain
         '
         Me.RegressionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatsRegressionSimple, Me.SimpleWithGroupsToolStripMenuItem, Me.mnuStatisticsRegressionMultiple, Me.GeneralLinearModelToolStripMenuItem, Me.ToolStripSeparator11, Me.CorrelationToolStripMenuItem, Me.LogLinearModelsToolStripMenuItem})
         Me.RegressionToolStripMenuItem.Name = "RegressionToolStripMenuItem"
-        Me.RegressionToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.RegressionToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.RegressionToolStripMenuItem.Tag = "Regression"
         Me.RegressionToolStripMenuItem.Text = "Regression"
         '
@@ -430,7 +430,7 @@ Partial Class frmMain
         '
         Me.SimpleModelsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OneSampleToolStripMenuItem, Me.PoissonOneSampleToolStripMenuItem, Me.ToolStripSeparator9, Me.GammaToolStripMenuItem, Me.ExtremaToolStripMenuItem, Me.ChisquareTestToolStripMenuItem, Me.GoodnessOfFitToolStripMenuItem, Me.ProbabilityDistributionsToolStripMenuItem})
         Me.SimpleModelsToolStripMenuItem.Name = "SimpleModelsToolStripMenuItem"
-        Me.SimpleModelsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SimpleModelsToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.SimpleModelsToolStripMenuItem.Tag = "Simple_Models"
         Me.SimpleModelsToolStripMenuItem.Text = "Simple Models"
         '
@@ -450,32 +450,32 @@ Partial Class frmMain
         '
         Me.NonParametricToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OneAndTwoSamplesToolStripMenuItem, Me.mnuStatsNonParametricOneWayAnova, Me.mnuStatsNonParametricTwoWayAnova})
         Me.NonParametricToolStripMenuItem.Name = "NonParametricToolStripMenuItem"
-        Me.NonParametricToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.NonParametricToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.NonParametricToolStripMenuItem.Tag = "Non_Parametric"
         Me.NonParametricToolStripMenuItem.Text = "Non-Parametric"
         '
         'OneAndTwoSamplesToolStripMenuItem
         '
         Me.OneAndTwoSamplesToolStripMenuItem.Name = "OneAndTwoSamplesToolStripMenuItem"
-        Me.OneAndTwoSamplesToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.OneAndTwoSamplesToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
         Me.OneAndTwoSamplesToolStripMenuItem.Text = "One and Two Samples..."
         '
         'mnuStatsNonParametricOneWayAnova
         '
         Me.mnuStatsNonParametricOneWayAnova.Name = "mnuStatsNonParametricOneWayAnova"
-        Me.mnuStatsNonParametricOneWayAnova.Size = New System.Drawing.Size(201, 22)
+        Me.mnuStatsNonParametricOneWayAnova.Size = New System.Drawing.Size(200, 22)
         Me.mnuStatsNonParametricOneWayAnova.Text = "One-Way (ANOVA)"
         '
         'mnuStatsNonParametricTwoWayAnova
         '
         Me.mnuStatsNonParametricTwoWayAnova.Name = "mnuStatsNonParametricTwoWayAnova"
-        Me.mnuStatsNonParametricTwoWayAnova.Size = New System.Drawing.Size(201, 22)
+        Me.mnuStatsNonParametricTwoWayAnova.Size = New System.Drawing.Size(200, 22)
         Me.mnuStatsNonParametricTwoWayAnova.Text = "Two-Way (ANOVA)..."
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(175, 6)
         '
         'ResizeWorksheetToolStripMenuItem
         '
@@ -587,7 +587,7 @@ Partial Class frmMain
         '
         Me.SummaryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DescribeToolStripMenuItem, Me.mnuStatsSummaryColumnStat, Me.CheckDuplicatesToolStripMenuItem, Me.GroupToolStripMenuItem, Me.ToolStripSeparator7, Me.DiversityToolStripMenuItem, Me.CircularStatisticsToolStripMenuItem})
         Me.SummaryToolStripMenuItem.Name = "SummaryToolStripMenuItem"
-        Me.SummaryToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SummaryToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.SummaryToolStripMenuItem.Tag = "Summary"
         Me.SummaryToolStripMenuItem.Text = "Summary"
         '
@@ -642,7 +642,7 @@ Partial Class frmMain
         '
         Me.TablesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FrequencyToolStripMenuItem, Me.SummaryToolStripMenuItem1, Me.GeneralToolStripMenuItem, Me.MultipleResponseToolStripMenuItem, Me.LoadTableToolStripMenuItem})
         Me.TablesToolStripMenuItem.Name = "TablesToolStripMenuItem"
-        Me.TablesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.TablesToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.TablesToolStripMenuItem.Tag = "Tables"
         Me.TablesToolStripMenuItem.Text = "Tables"
         '
@@ -679,13 +679,13 @@ Partial Class frmMain
         'ToolStripSeparator13
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(175, 6)
         '
         'TimeSeriesToolStripMenuItem
         '
         Me.TimeSeriesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MovingAveragesToolStripMenuItem, Me.CorrelationsToolStripMenuItem})
         Me.TimeSeriesToolStripMenuItem.Name = "TimeSeriesToolStripMenuItem"
-        Me.TimeSeriesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.TimeSeriesToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.TimeSeriesToolStripMenuItem.Tag = "Time_Series"
         Me.TimeSeriesToolStripMenuItem.Text = "Time Series"
         '
@@ -705,7 +705,7 @@ Partial Class frmMain
         '
         Me.SurvivalToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KaplanMeirToolStripMenuItem, Me.LogRankToolStripMenuItem})
         Me.SurvivalToolStripMenuItem.Name = "SurvivalToolStripMenuItem"
-        Me.SurvivalToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SurvivalToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.SurvivalToolStripMenuItem.Tag = "Survival"
         Me.SurvivalToolStripMenuItem.Text = "Survival"
         '
@@ -724,12 +724,12 @@ Partial Class frmMain
         'ToolStripSeparator14
         '
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
-        Me.ToolStripSeparator14.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator14.Size = New System.Drawing.Size(175, 6)
         '
         'SampleSizeToolStripMenuItem
         '
         Me.SampleSizeToolStripMenuItem.Name = "SampleSizeToolStripMenuItem"
-        Me.SampleSizeToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SampleSizeToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.SampleSizeToolStripMenuItem.Tag = "Sample_Size"
         Me.SampleSizeToolStripMenuItem.Text = "Sample Size..."
         '
@@ -1004,9 +1004,9 @@ Partial Class frmMain
         'mnuManageWorksheetInformation
         '
         Me.mnuManageWorksheetInformation.Name = "mnuManageWorksheetInformation"
-        Me.mnuManageWorksheetInformation.Size = New System.Drawing.Size(205, 22)
+        Me.mnuManageWorksheetInformation.Size = New System.Drawing.Size(220, 22)
         Me.mnuManageWorksheetInformation.Tag = "Worksheet_Information"
-        Me.mnuManageWorksheetInformation.Text = "Worksheet Information..."
+        Me.mnuManageWorksheetInformation.Text = "Variable (coulmn) Metadata"
         '
         'LockUnlockToolStripMenuItem
         '
@@ -1790,49 +1790,49 @@ Partial Class frmMain
         'TransformToolStripMenuItem
         '
         Me.TransformToolStripMenuItem.Name = "TransformToolStripMenuItem"
-        Me.TransformToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TransformToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.TransformToolStripMenuItem.Tag = "Transform"
         Me.TransformToolStripMenuItem.Text = "Transform..."
         '
         'RecodeToolStripMenuItem
         '
         Me.RecodeToolStripMenuItem.Name = "RecodeToolStripMenuItem"
-        Me.RecodeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RecodeToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.RecodeToolStripMenuItem.Tag = "Recode"
         Me.RecodeToolStripMenuItem.Text = "Recode..."
         '
         'mnuManageDataSort
         '
         Me.mnuManageDataSort.Name = "mnuManageDataSort"
-        Me.mnuManageDataSort.Size = New System.Drawing.Size(180, 22)
+        Me.mnuManageDataSort.Size = New System.Drawing.Size(179, 22)
         Me.mnuManageDataSort.Tag = "Sort"
         Me.mnuManageDataSort.Text = "Sort"
         '
         'mnuManageManipulateRowStat
         '
         Me.mnuManageManipulateRowStat.Name = "mnuManageManipulateRowStat"
-        Me.mnuManageManipulateRowStat.Size = New System.Drawing.Size(180, 22)
+        Me.mnuManageManipulateRowStat.Size = New System.Drawing.Size(179, 22)
         Me.mnuManageManipulateRowStat.Tag = "Row_Statistics"
         Me.mnuManageManipulateRowStat.Text = "Row Statistics..."
         '
         'InteractionsToolStripMenuItem
         '
         Me.InteractionsToolStripMenuItem.Name = "InteractionsToolStripMenuItem"
-        Me.InteractionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.InteractionsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.InteractionsToolStripMenuItem.Tag = "Interactions"
         Me.InteractionsToolStripMenuItem.Text = "Interactions..."
         '
         'IndicatorVariablesToolStripMenuItem
         '
         Me.IndicatorVariablesToolStripMenuItem.Name = "IndicatorVariablesToolStripMenuItem"
-        Me.IndicatorVariablesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.IndicatorVariablesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.IndicatorVariablesToolStripMenuItem.Tag = "Indicator_Variables"
         Me.IndicatorVariablesToolStripMenuItem.Text = "Indicator Variables..."
         '
         'PolynomialsToolStripMenuItem
         '
         Me.PolynomialsToolStripMenuItem.Name = "PolynomialsToolStripMenuItem"
-        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.PolynomialsToolStripMenuItem.Text = "Polynomials"
         '
         'ReshapeToolStripMenuItem
@@ -1926,7 +1926,7 @@ Partial Class frmMain
         '
         Me.mnuManageWorksheetMetadata.Name = "mnuManageWorksheetMetadata"
         Me.mnuManageWorksheetMetadata.Size = New System.Drawing.Size(205, 22)
-        Me.mnuManageWorksheetMetadata.Text = "Worksheet Metadata"
+        Me.mnuManageWorksheetMetadata.Text = "Data frame Metadata"
         '
         'KiswahiliToolStripMenuItem
         '

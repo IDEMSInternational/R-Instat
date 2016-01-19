@@ -28,12 +28,11 @@ Partial Class frmMetaData
         '
         'grdMetaData
         '
-        Me.grdMetaData.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.grdMetaData.BackColor = System.Drawing.Color.White
         Me.grdMetaData.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdMetaData.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdMetaData.LeadHeaderContextMenuStrip = Nothing
-        Me.grdMetaData.Location = New System.Drawing.Point(8, 6)
+        Me.grdMetaData.Location = New System.Drawing.Point(0, 0)
         Me.grdMetaData.Name = "grdMetaData"
         Me.grdMetaData.RowHeaderContextMenuStrip = Nothing
         Me.grdMetaData.Script = Nothing
@@ -41,7 +40,7 @@ Partial Class frmMetaData
         Me.grdMetaData.SheetTabControlNewButtonVisible = False
         Me.grdMetaData.SheetTabControlWidth = 100
         Me.grdMetaData.SheetTabNewButtonVisible = False
-        Me.grdMetaData.Size = New System.Drawing.Size(322, 105)
+        Me.grdMetaData.Size = New System.Drawing.Size(228, 201)
         Me.grdMetaData.TabIndex = 1
         Me.grdMetaData.Text = "Meta Data"
         '
@@ -58,19 +57,15 @@ Partial Class frmMetaData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(334, 117)
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ClientSize = New System.Drawing.Size(228, 201)
         Me.Controls.Add(Me.grdMetaData)
         Me.Controls.Add(Me.txtMetadata)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpButton = True
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
         Me.Name = "frmMetaData"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Worksheet Metadata"
+        Me.Text = "Data frame Metadata"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
