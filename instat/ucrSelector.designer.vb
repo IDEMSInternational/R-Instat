@@ -44,7 +44,6 @@ Partial Class ucrSelector
         Me.lstAvailableVariable.Location = New System.Drawing.Point(8, 18)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
         Me.lstAvailableVariable.Size = New System.Drawing.Size(113, 104)
-        Me.lstAvailableVariable.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.lstAvailableVariable.TabIndex = 83
         Me.lstAvailableVariable.UseCompatibleStateImageBehavior = False
         Me.lstAvailableVariable.View = System.Windows.Forms.View.Details
