@@ -215,6 +215,7 @@ Partial Class frmMain
         Me.mnuFileClose = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileImportExport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubmitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CurrentWindowCtrlWToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CurrentLineCtrlLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -299,7 +300,6 @@ Partial Class frmMain
         Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -872,7 +872,7 @@ Partial Class frmMain
         'LogWindowMenu
         '
         Me.LogWindowMenu.Name = "LogWindowMenu"
-        Me.LogWindowMenu.Size = New System.Drawing.Size(141, 22)
+        Me.LogWindowMenu.Size = New System.Drawing.Size(152, 22)
         Me.LogWindowMenu.Text = "Log Window"
         '
         'HelpToolStripMenuItem
@@ -1037,7 +1037,6 @@ Partial Class frmMain
         '
         'mnuFileSave
         '
-        Me.mnuFileSave.CheckOnClick = True
         Me.mnuFileSave.Name = "mnuFileSave"
         Me.mnuFileSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
         Me.mnuFileSave.Size = New System.Drawing.Size(204, 22)
@@ -1046,7 +1045,6 @@ Partial Class frmMain
         '
         'mnuFileSaveAs
         '
-        Me.mnuFileSaveAs.CheckOnClick = True
         Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
         Me.mnuFileSaveAs.Size = New System.Drawing.Size(204, 22)
         Me.mnuFileSaveAs.Tag = "Save_As"
@@ -1054,7 +1052,6 @@ Partial Class frmMain
         '
         'mnuFilePrint
         '
-        Me.mnuFilePrint.CheckOnClick = True
         Me.mnuFilePrint.Name = "mnuFilePrint"
         Me.mnuFilePrint.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
         Me.mnuFilePrint.Size = New System.Drawing.Size(204, 22)
@@ -1063,7 +1060,6 @@ Partial Class frmMain
         '
         'mnuFilePrintPreview
         '
-        Me.mnuFilePrintPreview.CheckOnClick = True
         Me.mnuFilePrintPreview.Name = "mnuFilePrintPreview"
         Me.mnuFilePrintPreview.Size = New System.Drawing.Size(204, 22)
         Me.mnuFilePrintPreview.Tag = "Print_Preview"
@@ -1076,7 +1072,6 @@ Partial Class frmMain
         '
         'mnuFIleExit
         '
-        Me.mnuFIleExit.CheckOnClick = True
         Me.mnuFIleExit.Name = "mnuFIleExit"
         Me.mnuFIleExit.Size = New System.Drawing.Size(204, 22)
         Me.mnuFIleExit.Tag = "Exit_"
@@ -1644,6 +1639,13 @@ Partial Class frmMain
         Me.mnuFileImportExport.Tag = "Import_Export"
         Me.mnuFileImportExport.Text = "Import/Export"
         '
+        'mnuFileOptions
+        '
+        Me.mnuFileOptions.Name = "mnuFileOptions"
+        Me.mnuFileOptions.Size = New System.Drawing.Size(204, 22)
+        Me.mnuFileOptions.Tag = "Options"
+        Me.mnuFileOptions.Text = "Options"
+        '
         'SubmitToolStripMenuItem
         '
         Me.SubmitToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CurrentWindowCtrlWToolStripMenuItem, Me.CurrentLineCtrlLToolStripMenuItem, Me.SelectionCtrlMToolStripMenuItem, Me.RunMacroToolStripMenuItem, Me.InterruptMacroF12ToolStripMenuItem, Me.AddMacroToMenuToolStripMenuItem, Me.ModifyMacroInMenuToolStripMenuItem, Me.RemoveMacroFromMenuToolStripMenuItem})
@@ -2185,13 +2187,6 @@ Partial Class frmMain
         Me.WaterBalanceToolStripMenuItem1.Name = "WaterBalanceToolStripMenuItem1"
         Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
         Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
-        '
-        'mnuFileOptions
-        '
-        Me.mnuFileOptions.Name = "mnuFileOptions"
-        Me.mnuFileOptions.Size = New System.Drawing.Size(204, 22)
-        Me.mnuFileOptions.Tag = "Options"
-        Me.mnuFileOptions.Text = "Options"
         '
         'frmMain
         '
