@@ -22,138 +22,179 @@ Partial Class dlgUnstack
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.UcrReceiverUnstack = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.chkRowsDefinedBy = New System.Windows.Forms.CheckBox()
-        Me.chkCarryFurtherColumns = New System.Windows.Forms.CheckBox()
-        Me.lblColumnToBeSplit = New System.Windows.Forms.Label()
-        Me.lblInto = New System.Windows.Forms.Label()
-        Me.lblUsingLevelsOf = New System.Windows.Forms.Label()
-        Me.txtInto = New System.Windows.Forms.TextBox()
-        Me.txtUsingLevelsOf = New System.Windows.Forms.TextBox()
+        Me.ucrDataFrame = New instat.ucrDataFrame()
+        Me.ucrSelectorByDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
+        Me.lblFactorstoUnstackBy = New System.Windows.Forms.Label()
+        Me.lblColumnstoUnstack = New System.Windows.Forms.Label()
+        Me.chkUseFactoLabels = New System.Windows.Forms.CheckBox()
+        Me.grpOutputOptions = New System.Windows.Forms.GroupBox()
+        Me.txtSheetName = New System.Windows.Forms.TextBox()
+        Me.lblSheetName = New System.Windows.Forms.Label()
+        Me.rdoNewWorksheet = New System.Windows.Forms.RadioButton()
+        Me.rdoExistingWorksheet = New System.Windows.Forms.RadioButton()
+        Me.grpOutputOptions.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(0, 0)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
-        Me.ucrAddRemove.TabIndex = 0
-        '
-        'UcrReceiverUnstack
-        '
-        Me.UcrReceiverUnstack.Location = New System.Drawing.Point(245, 22)
-        Me.UcrReceiverUnstack.Name = "UcrReceiverUnstack"
-        Me.UcrReceiverUnstack.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReceiverUnstack.TabIndex = 1
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 246)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 355)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 2
         '
-        'chkRowsDefinedBy
+        'ucrDataFrame
         '
-        Me.chkRowsDefinedBy.AutoSize = True
-        Me.chkRowsDefinedBy.Location = New System.Drawing.Point(12, 157)
-        Me.chkRowsDefinedBy.Name = "chkRowsDefinedBy"
-        Me.chkRowsDefinedBy.Size = New System.Drawing.Size(105, 17)
-        Me.chkRowsDefinedBy.TabIndex = 3
-        Me.chkRowsDefinedBy.Tag = "Rows_defined_by"
-        Me.chkRowsDefinedBy.Text = "Rows defined by"
-        Me.chkRowsDefinedBy.UseVisualStyleBackColor = True
+        Me.ucrDataFrame.Location = New System.Drawing.Point(7, 11)
+        Me.ucrDataFrame.Name = "ucrDataFrame"
+        Me.ucrDataFrame.Size = New System.Drawing.Size(127, 41)
+        Me.ucrDataFrame.TabIndex = 6
         '
-        'chkCarryFurtherColumns
+        'ucrSelectorByDataFrameAddRemove
         '
-        Me.chkCarryFurtherColumns.AutoSize = True
-        Me.chkCarryFurtherColumns.Location = New System.Drawing.Point(12, 203)
-        Me.chkCarryFurtherColumns.Name = "chkCarryFurtherColumns"
-        Me.chkCarryFurtherColumns.Size = New System.Drawing.Size(125, 17)
-        Me.chkCarryFurtherColumns.TabIndex = 3
-        Me.chkCarryFurtherColumns.Tag = "Carry_Further_Columns"
-        Me.chkCarryFurtherColumns.Text = "Carry further columns"
-        Me.chkCarryFurtherColumns.UseVisualStyleBackColor = True
+        Me.ucrSelectorByDataFrameAddRemove.Location = New System.Drawing.Point(7, 49)
+        Me.ucrSelectorByDataFrameAddRemove.Name = "ucrSelectorByDataFrameAddRemove"
+        Me.ucrSelectorByDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorByDataFrameAddRemove.TabIndex = 7
         '
-        'lblColumnToBeSplit
+        'ucrReceiverFactors
         '
-        Me.lblColumnToBeSplit.AutoSize = True
-        Me.lblColumnToBeSplit.Location = New System.Drawing.Point(254, 0)
-        Me.lblColumnToBeSplit.Name = "lblColumnToBeSplit"
-        Me.lblColumnToBeSplit.Size = New System.Drawing.Size(90, 13)
-        Me.lblColumnToBeSplit.TabIndex = 4
-        Me.lblColumnToBeSplit.Tag = "Column_to_be_split"
-        Me.lblColumnToBeSplit.Text = "Column to be split"
+        Me.ucrReceiverFactors.Location = New System.Drawing.Point(245, 65)
+        Me.ucrReceiverFactors.Name = "ucrReceiverFactors"
+        Me.ucrReceiverFactors.Size = New System.Drawing.Size(121, 128)
+        Me.ucrReceiverFactors.TabIndex = 8
         '
-        'lblInto
+        'ucrReceiverColumns
         '
-        Me.lblInto.AutoSize = True
-        Me.lblInto.Location = New System.Drawing.Point(251, 74)
-        Me.lblInto.Name = "lblInto"
-        Me.lblInto.Size = New System.Drawing.Size(25, 13)
-        Me.lblInto.TabIndex = 4
-        Me.lblInto.Tag = "Into"
-        Me.lblInto.Text = "Into"
+        Me.ucrReceiverColumns.Location = New System.Drawing.Point(387, 65)
+        Me.ucrReceiverColumns.Name = "ucrReceiverColumns"
+        Me.ucrReceiverColumns.Size = New System.Drawing.Size(121, 128)
+        Me.ucrReceiverColumns.TabIndex = 8
         '
-        'lblUsingLevelsOf
+        'lblFactorstoUnstackBy
         '
-        Me.lblUsingLevelsOf.AutoSize = True
-        Me.lblUsingLevelsOf.Location = New System.Drawing.Point(251, 161)
-        Me.lblUsingLevelsOf.Name = "lblUsingLevelsOf"
-        Me.lblUsingLevelsOf.Size = New System.Drawing.Size(76, 13)
-        Me.lblUsingLevelsOf.TabIndex = 4
-        Me.lblUsingLevelsOf.Tag = "Using_levels_of"
-        Me.lblUsingLevelsOf.Text = "Using levels of"
+        Me.lblFactorstoUnstackBy.AutoSize = True
+        Me.lblFactorstoUnstackBy.Location = New System.Drawing.Point(245, 38)
+        Me.lblFactorstoUnstackBy.Name = "lblFactorstoUnstackBy"
+        Me.lblFactorstoUnstackBy.Size = New System.Drawing.Size(121, 13)
+        Me.lblFactorstoUnstackBy.TabIndex = 9
+        Me.lblFactorstoUnstackBy.Tag = "Factor(s)_to_Unstrack_By"
+        Me.lblFactorstoUnstackBy.Text = "Factor(s) to Unstrack By"
         '
-        'txtInto
+        'lblColumnstoUnstack
         '
-        Me.txtInto.Location = New System.Drawing.Point(245, 106)
-        Me.txtInto.Name = "txtInto"
-        Me.txtInto.Size = New System.Drawing.Size(100, 20)
-        Me.txtInto.TabIndex = 5
+        Me.lblColumnstoUnstack.AutoSize = True
+        Me.lblColumnstoUnstack.Location = New System.Drawing.Point(384, 39)
+        Me.lblColumnstoUnstack.Name = "lblColumnstoUnstack"
+        Me.lblColumnstoUnstack.Size = New System.Drawing.Size(102, 13)
+        Me.lblColumnstoUnstack.TabIndex = 9
+        Me.lblColumnstoUnstack.Tag = "Columns_to_Unstack"
+        Me.lblColumnstoUnstack.Text = "Columns to Unstack"
         '
-        'txtUsingLevelsOf
+        'chkUseFactoLabels
         '
-        Me.txtUsingLevelsOf.Location = New System.Drawing.Point(245, 200)
-        Me.txtUsingLevelsOf.Name = "txtUsingLevelsOf"
-        Me.txtUsingLevelsOf.Size = New System.Drawing.Size(100, 20)
-        Me.txtUsingLevelsOf.TabIndex = 5
+        Me.chkUseFactoLabels.AutoSize = True
+        Me.chkUseFactoLabels.Location = New System.Drawing.Point(13, 225)
+        Me.chkUseFactoLabels.Name = "chkUseFactoLabels"
+        Me.chkUseFactoLabels.Size = New System.Drawing.Size(193, 17)
+        Me.chkUseFactoLabels.TabIndex = 10
+        Me.chkUseFactoLabels.Tag = "Use_Factor_labels_in_Column_Names"
+        Me.chkUseFactoLabels.Text = "Use Factor labels in Column Names"
+        Me.chkUseFactoLabels.UseVisualStyleBackColor = True
+        '
+        'grpOutputOptions
+        '
+        Me.grpOutputOptions.Controls.Add(Me.txtSheetName)
+        Me.grpOutputOptions.Controls.Add(Me.lblSheetName)
+        Me.grpOutputOptions.Controls.Add(Me.rdoNewWorksheet)
+        Me.grpOutputOptions.Controls.Add(Me.rdoExistingWorksheet)
+        Me.grpOutputOptions.Location = New System.Drawing.Point(22, 249)
+        Me.grpOutputOptions.Name = "grpOutputOptions"
+        Me.grpOutputOptions.Size = New System.Drawing.Size(199, 100)
+        Me.grpOutputOptions.TabIndex = 11
+        Me.grpOutputOptions.TabStop = False
+        Me.grpOutputOptions.Tag = "Output_Options"
+        Me.grpOutputOptions.Text = "Output Options"
+        '
+        'txtSheetName
+        '
+        Me.txtSheetName.Location = New System.Drawing.Point(95, 66)
+        Me.txtSheetName.Name = "txtSheetName"
+        Me.txtSheetName.Size = New System.Drawing.Size(100, 20)
+        Me.txtSheetName.TabIndex = 2
+        '
+        'lblSheetName
+        '
+        Me.lblSheetName.AutoSize = True
+        Me.lblSheetName.Location = New System.Drawing.Point(31, 67)
+        Me.lblSheetName.Name = "lblSheetName"
+        Me.lblSheetName.Size = New System.Drawing.Size(66, 13)
+        Me.lblSheetName.TabIndex = 1
+        Me.lblSheetName.Tag = "Sheet_Name"
+        Me.lblSheetName.Text = "Sheet Name"
+        '
+        'rdoNewWorksheet
+        '
+        Me.rdoNewWorksheet.AutoSize = True
+        Me.rdoNewWorksheet.Location = New System.Drawing.Point(7, 43)
+        Me.rdoNewWorksheet.Name = "rdoNewWorksheet"
+        Me.rdoNewWorksheet.Size = New System.Drawing.Size(102, 17)
+        Me.rdoNewWorksheet.TabIndex = 0
+        Me.rdoNewWorksheet.TabStop = True
+        Me.rdoNewWorksheet.Tag = "New_Worksheet"
+        Me.rdoNewWorksheet.Text = "New Worksheet"
+        Me.rdoNewWorksheet.UseVisualStyleBackColor = True
+        '
+        'rdoExistingWorksheet
+        '
+        Me.rdoExistingWorksheet.AutoSize = True
+        Me.rdoExistingWorksheet.Location = New System.Drawing.Point(7, 20)
+        Me.rdoExistingWorksheet.Name = "rdoExistingWorksheet"
+        Me.rdoExistingWorksheet.Size = New System.Drawing.Size(116, 17)
+        Me.rdoExistingWorksheet.TabIndex = 0
+        Me.rdoExistingWorksheet.TabStop = True
+        Me.rdoExistingWorksheet.Tag = "Existing_Worksheet"
+        Me.rdoExistingWorksheet.Text = "Existing Worksheet"
+        Me.rdoExistingWorksheet.UseVisualStyleBackColor = True
         '
         'dlgUnstack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 290)
-        Me.Controls.Add(Me.txtUsingLevelsOf)
-        Me.Controls.Add(Me.txtInto)
-        Me.Controls.Add(Me.lblUsingLevelsOf)
-        Me.Controls.Add(Me.lblInto)
-        Me.Controls.Add(Me.lblColumnToBeSplit)
-        Me.Controls.Add(Me.chkCarryFurtherColumns)
-        Me.Controls.Add(Me.chkRowsDefinedBy)
+        Me.ClientSize = New System.Drawing.Size(515, 408)
+        Me.Controls.Add(Me.grpOutputOptions)
+        Me.Controls.Add(Me.chkUseFactoLabels)
+        Me.Controls.Add(Me.lblColumnstoUnstack)
+        Me.Controls.Add(Me.lblFactorstoUnstackBy)
+        Me.Controls.Add(Me.ucrReceiverColumns)
+        Me.Controls.Add(Me.ucrReceiverFactors)
+        Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemove)
+        Me.Controls.Add(Me.ucrDataFrame)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.UcrReceiverUnstack)
-        Me.Controls.Add(Me.ucrAddRemove)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgUnstack"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Unstack_split_columns"
         Me.Text = "Unstack(Split) columns"
+        Me.grpOutputOptions.ResumeLayout(False)
+        Me.grpOutputOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents UcrReceiverUnstack As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents chkRowsDefinedBy As CheckBox
-    Friend WithEvents chkCarryFurtherColumns As CheckBox
-    Friend WithEvents lblColumnToBeSplit As Label
-    Friend WithEvents lblInto As Label
-    Friend WithEvents lblUsingLevelsOf As Label
-    Friend WithEvents txtInto As TextBox
-    Friend WithEvents txtUsingLevelsOf As TextBox
+    Friend WithEvents ucrDataFrame As ucrDataFrame
+    Friend WithEvents ucrSelectorByDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverFactors As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverColumns As ucrReceiverMultiple
+    Friend WithEvents lblFactorstoUnstackBy As Label
+    Friend WithEvents lblColumnstoUnstack As Label
+    Friend WithEvents chkUseFactoLabels As CheckBox
+    Friend WithEvents grpOutputOptions As GroupBox
+    Friend WithEvents txtSheetName As TextBox
+    Friend WithEvents lblSheetName As Label
+    Friend WithEvents rdoNewWorksheet As RadioButton
+    Friend WithEvents rdoExistingWorksheet As RadioButton
 End Class
