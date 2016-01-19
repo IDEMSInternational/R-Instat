@@ -1533,6 +1533,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Probability.
+        '''</summary>
+        Friend ReadOnly Property Probability() As String
+            Get
+                Return ResourceManager.GetString("Probability", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Probability Distribution.
         '''</summary>
         Friend ReadOnly Property Probability_Distribution() As String
