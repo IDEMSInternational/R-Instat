@@ -33,15 +33,15 @@ Partial Class dlgFileNew
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 225)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 170)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 61)
         Me.ucrBase.TabIndex = 0
         '
         'lblRows
         '
         Me.lblRows.AutoSize = True
-        Me.lblRows.Location = New System.Drawing.Point(69, 47)
+        Me.lblRows.Location = New System.Drawing.Point(37, 35)
         Me.lblRows.Name = "lblRows"
         Me.lblRows.Size = New System.Drawing.Size(37, 13)
         Me.lblRows.TabIndex = 1
@@ -49,14 +49,14 @@ Partial Class dlgFileNew
         '
         'txtRows
         '
-        Me.txtRows.Location = New System.Drawing.Point(111, 44)
+        Me.txtRows.Location = New System.Drawing.Point(137, 35)
         Me.txtRows.Name = "txtRows"
         Me.txtRows.Size = New System.Drawing.Size(39, 20)
         Me.txtRows.TabIndex = 2
         '
         'txtColumns
         '
-        Me.txtColumns.Location = New System.Drawing.Point(111, 79)
+        Me.txtColumns.Location = New System.Drawing.Point(137, 75)
         Me.txtColumns.Name = "txtColumns"
         Me.txtColumns.Size = New System.Drawing.Size(39, 20)
         Me.txtColumns.TabIndex = 4
@@ -64,7 +64,7 @@ Partial Class dlgFileNew
         'lblColumns
         '
         Me.lblColumns.AutoSize = True
-        Me.lblColumns.Location = New System.Drawing.Point(56, 82)
+        Me.lblColumns.Location = New System.Drawing.Point(37, 78)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(50, 13)
         Me.lblColumns.TabIndex = 3
@@ -72,7 +72,7 @@ Partial Class dlgFileNew
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(111, 149)
+        Me.txtName.Location = New System.Drawing.Point(137, 119)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(139, 20)
         Me.txtName.TabIndex = 5
@@ -80,7 +80,7 @@ Partial Class dlgFileNew
         'lblName
         '
         Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(12, 152)
+        Me.lblName.Location = New System.Drawing.Point(37, 122)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(94, 13)
         Me.lblName.TabIndex = 6
@@ -90,7 +90,7 @@ Partial Class dlgFileNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 262)
+        Me.ClientSize = New System.Drawing.Size(423, 229)
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.txtColumns)
@@ -100,7 +100,8 @@ Partial Class dlgFileNew
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgFileNew"
-        Me.Text = "dlgNew"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "New file"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
