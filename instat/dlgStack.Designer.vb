@@ -22,7 +22,6 @@ Partial Class dlgStack
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverColumnsToBeStack = New instat.ucrReceiverMultiple()
         Me.lblColumnsToBestack = New System.Windows.Forms.Label()
         Me.txtStackDataInto = New System.Windows.Forms.TextBox()
@@ -39,19 +38,13 @@ Partial Class dlgStack
         Me.rdoExistingWorksheet = New System.Windows.Forms.RadioButton()
         Me.txtSheetName = New System.Windows.Forms.TextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpOutputOptions.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(15, 73)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
-        Me.ucrAddRemove.TabIndex = 1
-        '
         'ucrReceiverColumnsToBeStack
         '
-        Me.ucrReceiverColumnsToBeStack.Location = New System.Drawing.Point(261, 89)
+        Me.ucrReceiverColumnsToBeStack.Location = New System.Drawing.Point(261, 68)
         Me.ucrReceiverColumnsToBeStack.Name = "ucrReceiverColumnsToBeStack"
         Me.ucrReceiverColumnsToBeStack.Size = New System.Drawing.Size(121, 111)
         Me.ucrReceiverColumnsToBeStack.TabIndex = 2
@@ -59,7 +52,7 @@ Partial Class dlgStack
         'lblColumnsToBestack
         '
         Me.lblColumnsToBestack.AutoSize = True
-        Me.lblColumnsToBestack.Location = New System.Drawing.Point(258, 73)
+        Me.lblColumnsToBestack.Location = New System.Drawing.Point(258, 52)
         Me.lblColumnsToBestack.Name = "lblColumnsToBestack"
         Me.lblColumnsToBestack.Size = New System.Drawing.Size(103, 13)
         Me.lblColumnsToBestack.TabIndex = 3
@@ -198,11 +191,19 @@ Partial Class dlgStack
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 11
         '
+        'ucrDataFrameAddRemove
+        '
+        Me.ucrDataFrameAddRemove.Location = New System.Drawing.Point(10, 52)
+        Me.ucrDataFrameAddRemove.Name = "ucrDataFrameAddRemove"
+        Me.ucrDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
+        Me.ucrDataFrameAddRemove.TabIndex = 12
+        '
         'dlgStack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(450, 480)
+        Me.Controls.Add(Me.ucrDataFrameAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpOutputOptions)
         Me.Controls.Add(Me.lblFactorInto)
@@ -215,7 +216,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.lblStackDataInto)
         Me.Controls.Add(Me.lblColumnsToBestack)
         Me.Controls.Add(Me.ucrReceiverColumnsToBeStack)
-        Me.Controls.Add(Me.ucrAddRemove)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgStack"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -227,7 +227,6 @@ Partial Class dlgStack
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrReceiverColumnsToBeStack As ucrReceiverMultiple
     Friend WithEvents lblColumnsToBestack As Label
     Friend WithEvents txtStackDataInto As TextBox
@@ -244,4 +243,5 @@ Partial Class dlgStack
     Friend WithEvents rdoExistingWorksheet As RadioButton
     Friend WithEvents txtSheetName As TextBox
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
 End Class
