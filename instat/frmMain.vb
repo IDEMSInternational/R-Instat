@@ -37,7 +37,7 @@ Public Class frmMain
         frmEditor.Dock = DockStyle.Left
         frmEditor.Dock = DockStyle.Fill
         frmCommand.Show()
-        frmEditor.Show()
+        'frmEditor.Show()
 
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
@@ -57,7 +57,7 @@ Public Class frmMain
         If Not IsNothing(pair.Key) Then
             clsRLink.LoadData(pair.Key, pair.Value)
         End If
-
+        frmEditor.Show()
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
@@ -676,7 +676,7 @@ Public Class frmMain
             End If
             clsGrids.UpdateGrids()
         End If
-
+        frmEditor.Show()
 
     End Sub
 

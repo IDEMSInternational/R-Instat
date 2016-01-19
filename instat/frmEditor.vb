@@ -23,4 +23,14 @@ Public Class frmEditor
         frmMain.clsGrids.SetData(grdData)
         autoTranslate(Me)
     End Sub
+    ''' <summary>
+    ''' Hides the form when it is closed and not exiting it.
+    ''' </summary>
+    Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
+        MyBase.OnFormClosing(e)
+        If Not e.Cancel AndAlso e.CloseReason = CloseReason.UserClosing Then
+            e.Cancel = True
+            Me.Hide()
+        End If
+    End Sub
 End Class
