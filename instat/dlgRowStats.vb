@@ -19,4 +19,8 @@ Public Class dlgRowStats
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
+
+    Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles ucrDataFrame.Load
+
+    End Sub
 End Class
