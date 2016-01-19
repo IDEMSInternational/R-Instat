@@ -44,7 +44,7 @@ Public Class RLink
         bLog = True
     End Sub
 
-    Public Sub FillComboDataFrames(cboDataFrames As ComboBox)
+    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox)
         Dim lstAvailableDataFrames As GenericVector
         Dim i As Integer
 
@@ -57,6 +57,39 @@ Public Class RLink
         End If
         cboDataFrames.Text = frmEditor.grdData.CurrentWorksheet.Name
     End Sub
+
+    Public Sub FillColumnNames(strDataFrame As String, Optional ByRef cboColumns As ComboBox = Nothing, Optional ByRef lstColumns As ListView = Nothing)
+        Dim lstCurrColumns As GenericVector
+        Dim i As Integer
+
+        If bInstatObjectExists Then
+            lstCurrColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(" & Chr(34) & strDataFrame & Chr(34) & ")").AsList
+            If cboColumns IsNot Nothing Then
+                cboColumns.Items.Clear()
+                For i = 0 To lstCurrColumns.Length - 1
+                    cboColumns.Items.Add(lstCurrColumns.AsCharacter(i))
+                Next
+            ElseIf lstColumns IsNot Nothing Then
+                lstColumns.Items.Clear()
+                If lstColumns.Columns.Count = 0 Then
+                    lstColumns.Columns.Add("Available Data")
+                End If
+                For i = 0 To lstCurrColumns.Length - 1
+                    lstColumns.Items.Add(lstCurrColumns.AsCharacter(i))
+                Next
+                lstColumns.Columns(0).Width = -2
+            End If
+        End If
+    End Sub
+
+    Public Function GetDefaultNames(strPrefix As String)
+        Dim lstNextDefaults As GenericVector = Nothing
+
+        If bInstatObjectExists Then
+            lstNextDefaults = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_column_name(prefix = " & Chr(34) & strPrefix & Chr(34) & ")").AsList
+        End If
+        Return lstNextDefaults
+    End Function
 
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0)
         Dim strCapturedScript As String
@@ -87,6 +120,7 @@ Public Class RLink
         Catch
             MsgBox(strOutput)
         End Try
+        frmMain.clsGrids.UpdateGrids()
     End Sub
 
     Public Function GetData(strLabel As String) As DataFrame
@@ -150,7 +184,7 @@ Public Class RLink
         Dim i As Integer
         Dim grps As New ListViewGroup
         If bInstatObjectExists Then
-            lstView.Columns.Add("Available Data", width:=100)
+            lstView.Columns.Add("Available Data")
             dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variables_metadata()").AsList
             For i = 0 To dfList.Count - 1
                 grps = New ListViewGroup(dfList.Names(i), HorizontalAlignment.Left)
@@ -162,6 +196,7 @@ Public Class RLink
                     lstView.Items.Add(dfTemp(j, 0)).Group = lstView.Groups(i)
                 Next
             Next
+            lstView.Columns(0).Width = -2
         End If
     End Sub
 
