@@ -17,7 +17,7 @@ Public Class dlgStack
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("stack")
         ucrBase.clsRsyntax.iCallType = 1
-        ucrReceiverColumnsToBeStack.Selector = ucrAddRemove
+        ucrReceiverColumnsToBeStack.Selector = ucrDataFrameAddRemove
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         autoTranslate(Me)
     End Sub
