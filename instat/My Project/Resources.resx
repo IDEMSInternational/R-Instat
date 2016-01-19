@@ -865,4 +865,34 @@
   <data name="With_X_Variable" xml:space="preserve">
     <value>With X Variable</value>
   </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>Calculate</value>
+  </data>
+  <data name="Columns_to_Unstack" xml:space="preserve">
+    <value>Columns to Unstack</value>
+  </data>
+  <data name="Existing_Worksheet" xml:space="preserve">
+    <value>Existing Worksheet</value>
+  </data>
+  <data name="Factor_to_Unstrack_By" xml:space="preserve">
+    <value>Factor(s) to Unstrack By</value>
+  </data>
+  <data name="New_Data_Frame" xml:space="preserve">
+    <value>New Data Frame</value>
+  </data>
+  <data name="New_Worksheet1" xml:space="preserve">
+    <value>New Worksheet</value>
+  </data>
+  <data name="Open_From_File" xml:space="preserve">
+    <value>Open From File</value>
+  </data>
+  <data name="Output_Options" xml:space="preserve">
+    <value>Output Options</value>
+  </data>
+  <data name="Sheet_Name" xml:space="preserve">
+    <value>Sheet Name</value>
+  </data>
+  <data name="Use_Factor_labels_in_Column_Names" xml:space="preserve">
+    <value>Use Factor labels in Column Names</value>
+  </data>
 </root>
