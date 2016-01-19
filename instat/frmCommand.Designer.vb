@@ -22,33 +22,31 @@ Partial Class frmCommand
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtCommand = New System.Windows.Forms.TextBox()
+        Me.txtcommand = New System.Windows.Forms.RichTextBox()
         Me.SuspendLayout()
         '
-        'txtCommand
+        'txtcommand
         '
-        Me.txtCommand.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtCommand.Location = New System.Drawing.Point(0, 0)
-        Me.txtCommand.Multiline = True
-        Me.txtCommand.Name = "txtCommand"
-        Me.txtCommand.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCommand.Size = New System.Drawing.Size(631, 261)
-        Me.txtCommand.TabIndex = 0
+        Me.txtcommand.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtcommand.Location = New System.Drawing.Point(0, 0)
+        Me.txtcommand.Name = "txtcommand"
+        Me.txtcommand.Size = New System.Drawing.Size(631, 261)
+        Me.txtcommand.TabIndex = 0
+        Me.txtcommand.Text = ""
         '
         'frmCommand
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(631, 261)
-        Me.Controls.Add(Me.txtCommand)
+        Me.Controls.Add(Me.txtcommand)
         Me.Name = "frmCommand"
         Me.ShowIcon = False
         Me.Tag = "Output_Window"
         Me.Text = "Output Window"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents txtCommand As TextBox
+    Friend WithEvents txtcommand As RichTextBox
 End Class
