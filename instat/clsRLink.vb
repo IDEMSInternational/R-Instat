@@ -23,7 +23,7 @@ Public Class RLink
     Dim strInstatObjectPath As String = "static/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
     Public clsEngine As REngine
-    Dim txtOutput As New TextBox
+    Dim txtOutput As New RichTextBox
     Dim txtLog As New TextBox
     Public bLog As Boolean = False
     Public bOutput As Boolean = False
@@ -34,7 +34,7 @@ Public Class RLink
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
     End Sub
 
-    Public Sub SetOutput(tempOutput As TextBox)
+    Public Sub SetOutput(tempOutput As RichTextBox)
         txtOutput = tempOutput
         bOutput = True
     End Sub
