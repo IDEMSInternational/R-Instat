@@ -35,6 +35,7 @@ Partial Class frmLog
         Me.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtLog.Size = New System.Drawing.Size(284, 261)
         Me.txtLog.TabIndex = 0
+        Me.txtLog.TabStop = False
         '
         'frmLog
         '
