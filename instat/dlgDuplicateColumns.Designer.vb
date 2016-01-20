@@ -186,16 +186,16 @@ Partial Class dlgDuplicateColumns
         'ucrBase
         '
         Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ucrBase.Location = New System.Drawing.Point(0, 329)
+        Me.ucrBase.Location = New System.Drawing.Point(0, 319)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(413, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(413, 51)
         Me.ucrBase.TabIndex = 11
         '
         'dlgDuplicateColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 361)
+        Me.ClientSize = New System.Drawing.Size(413, 370)
         Me.Controls.Add(Me.grpCopyFrom)
         Me.Controls.Add(Me.grpDataType)
         Me.Controls.Add(Me.lblPasteto)
