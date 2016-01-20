@@ -22,18 +22,23 @@ Public Class ucrDataFrame
         frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames)
     End Sub
 
+
+
     Public Sub SetColumnList(ColumnList As ucrNewColumnName)
         CurrentColumnList = ColumnList
         UpdateColumnList()
     End Sub
 
+    Public Event DataFrameChanged(sender As Object, e As EventArgs)
+
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged
         UpdateColumnList()
+        RaiseEvent DataFrameChanged(sender, e)
     End Sub
 
     Public Sub UpdateColumnList()
         If CurrentColumnList IsNot Nothing Then
-            frmMain.clsRLink.FillComboColumnNames(CurrentColumnList.cboColumnName, cboAvailableDataFrames.SelectedItem)
+            frmMain.clsRLink.FillColumnNames(cboAvailableDataFrames.SelectedItem, cboColumns:=CurrentColumnList.cboColumnName)
             CurrentColumnList.SetDefaultName(cboAvailableDataFrames.Text)
         End If
     End Sub

@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class frmVariables
+    Public context As New frmEditor
     Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
         MyBase.OnFormClosing(e)
         If Not e.Cancel AndAlso e.CloseReason = CloseReason.UserClosing Then
@@ -29,12 +30,13 @@ Public Class frmVariables
     End Sub
 
     Private Sub loadForm()
-        grdVariables.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
-        grdVariables.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, False)
         grdVariables.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         'gridVariables.SheetTabNewButtonVisible = False
         'gridVariables.SheetTabControlNewButtonVisible = False
-        grdVariables.CurrentWorksheet.Resize(5, 5)
+        'grdVariables.CurrentWorksheet.Resize(5, 5)
+        grdVariables.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
+        grdVariables.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip
+        grdVariables.ContextMenuStrip = context.grdData.ContextMenuStrip
         autoTranslate(Me)
     End Sub
 End Class
