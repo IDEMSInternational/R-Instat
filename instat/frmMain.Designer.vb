@@ -138,9 +138,6 @@ Partial Class frmMain
         Me.ExtremesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEndofRains = New System.Windows.Forms.ToolStripMenuItem()
         Me.LockUnlockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileIEODBC = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileIEOutput = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tlSeparatorFile2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFilePrint = New System.Windows.Forms.ToolStripMenuItem()
@@ -186,9 +183,7 @@ Partial Class frmMain
         Me.mnuEditFlagsPresentationMode = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditFlagsDisplayFactorLevelsAsOrdinals = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileIEExport = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
-        Me.mnuFIleIEASCII = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
         Me.tstatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Tool_strip = New System.Windows.Forms.ToolStrip()
@@ -216,7 +211,6 @@ Partial Class frmMain
         Me.mnuFileOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileClose = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuFileImportExport = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubmitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CurrentWindowCtrlWToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -1036,27 +1030,6 @@ Partial Class frmMain
         Me.LockUnlockToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.LockUnlockToolStripMenuItem.Text = "Lock/Unlock..."
         '
-        'mnuFileIEODBC
-        '
-        Me.mnuFileIEODBC.CheckOnClick = True
-        Me.mnuFileIEODBC.Name = "mnuFileIEODBC"
-        Me.mnuFileIEODBC.Size = New System.Drawing.Size(141, 22)
-        Me.mnuFileIEODBC.Tag = "ODBC_Query"
-        Me.mnuFileIEODBC.Text = "ODBC Query"
-        '
-        'mnuFileIEOutput
-        '
-        Me.mnuFileIEOutput.CheckOnClick = True
-        Me.mnuFileIEOutput.Name = "mnuFileIEOutput"
-        Me.mnuFileIEOutput.Size = New System.Drawing.Size(141, 22)
-        Me.mnuFileIEOutput.Tag = "Output"
-        Me.mnuFileIEOutput.Text = "Output..."
-        '
-        'tlSeparatorFile2
-        '
-        Me.tlSeparatorFile2.Name = "tlSeparatorFile2"
-        Me.tlSeparatorFile2.Size = New System.Drawing.Size(201, 6)
-        '
         'mnuFileSave
         '
         Me.mnuFileSave.Name = "mnuFileSave"
@@ -1415,22 +1388,6 @@ Partial Class frmMain
         Me.mnuEditOptions.Tag = "Options"
         Me.mnuEditOptions.Text = "Options..."
         '
-        'mnuFileIEExport
-        '
-        Me.mnuFileIEExport.CheckOnClick = True
-        Me.mnuFileIEExport.Name = "mnuFileIEExport"
-        Me.mnuFileIEExport.Size = New System.Drawing.Size(141, 22)
-        Me.mnuFileIEExport.Tag = "Export_as"
-        Me.mnuFileIEExport.Text = "Export as..."
-        '
-        'mnuFIleIEASCII
-        '
-        Me.mnuFIleIEASCII.CheckOnClick = True
-        Me.mnuFIleIEASCII.Name = "mnuFIleIEASCII"
-        Me.mnuFIleIEASCII.Size = New System.Drawing.Size(141, 22)
-        Me.mnuFIleIEASCII.Tag = "Import_ASCII"
-        Me.mnuFIleIEASCII.Text = "Import ASCII"
-        '
         'stsStrip
         '
         Me.stsStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tstatus})
@@ -1612,7 +1569,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.mnuFileClose, Me.tlSeparatorFile, Me.mnuFileImportExport, Me.tlSeparatorFile2, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileOptions, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.mnuFileClose, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileOptions, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(37, 20)
         Me.mnuFile.Tag = "File"
@@ -1652,14 +1609,6 @@ Partial Class frmMain
         '
         Me.tlSeparatorFile.Name = "tlSeparatorFile"
         Me.tlSeparatorFile.Size = New System.Drawing.Size(201, 6)
-        '
-        'mnuFileImportExport
-        '
-        Me.mnuFileImportExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFIleIEASCII, Me.mnuFileIEODBC, Me.mnuFileIEExport, Me.mnuFileIEOutput})
-        Me.mnuFileImportExport.Name = "mnuFileImportExport"
-        Me.mnuFileImportExport.Size = New System.Drawing.Size(204, 22)
-        Me.mnuFileImportExport.Tag = "Import_Export"
-        Me.mnuFileImportExport.Text = "Import/Export"
         '
         'mnuFileOptions
         '
@@ -2397,9 +2346,6 @@ Partial Class frmMain
     Friend WithEvents StartOfTheRainsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExtremesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LockUnlockToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuFileIEODBC As ToolStripMenuItem
-    Friend WithEvents mnuFileIEOutput As ToolStripMenuItem
-    Friend WithEvents tlSeparatorFile2 As ToolStripSeparator
     Friend WithEvents mnuFileSave As ToolStripMenuItem
     Friend WithEvents mnuFileSaveAs As ToolStripMenuItem
     Friend WithEvents mnuFilePrint As ToolStripMenuItem
@@ -2445,9 +2391,7 @@ Partial Class frmMain
     Friend WithEvents mnuEditFlagsPresentationMode As ToolStripMenuItem
     Friend WithEvents mnuEditFlagsDisplayFactorLevelsAsOrdinals As ToolStripMenuItem
     Friend WithEvents mnuEditOptions As ToolStripMenuItem
-    Friend WithEvents mnuFileIEExport As ToolStripMenuItem
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
-    Friend WithEvents mnuFIleIEASCII As ToolStripMenuItem
     Friend WithEvents stsStrip As StatusStrip
     Friend WithEvents tstatus As ToolStripStatusLabel
     Private WithEvents Tool_strip As ToolStrip
@@ -2475,7 +2419,6 @@ Partial Class frmMain
     Friend WithEvents mnuFileOpenFromLibrary As ToolStripMenuItem
     Friend WithEvents mnuFileClose As ToolStripMenuItem
     Friend WithEvents tlSeparatorFile As ToolStripSeparator
-    Friend WithEvents mnuFileImportExport As ToolStripMenuItem
     Friend WithEvents SubmitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CurrentWindowCtrlWToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CurrentLineCtrlLToolStripMenuItem As ToolStripMenuItem
