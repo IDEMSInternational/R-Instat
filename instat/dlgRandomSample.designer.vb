@@ -238,9 +238,9 @@ Partial Class dlgRandomSample
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(38, 346)
+        Me.ucrBase.Location = New System.Drawing.Point(85, 345)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 55)
         Me.ucrBase.TabIndex = 0
         '
         'chkPlot
@@ -275,7 +275,7 @@ Partial Class dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(589, 379)
+        Me.ClientSize = New System.Drawing.Size(589, 405)
         Me.Controls.Add(Me.txtSeed)
         Me.Controls.Add(Me.lblSeed)
         Me.Controls.Add(Me.chkPlot)
