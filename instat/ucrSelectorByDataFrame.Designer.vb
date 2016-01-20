@@ -1,8 +1,8 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmCommand
-    Inherits System.Windows.Forms.Form
+Partial Class ucrSelectorByDataFrame
+    Inherits instat.ucrSelector
 
-    'Form overrides dispose to clean up the component list.
+    'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -22,31 +22,28 @@ Partial Class frmCommand
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtcommand = New System.Windows.Forms.RichTextBox()
+        Me.ucrAvailableDataFrames = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
-        'txtcommand
+        'ucrAvailableDataFrames
         '
-        Me.txtcommand.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtcommand.Location = New System.Drawing.Point(0, 0)
-        Me.txtcommand.Name = "txtcommand"
-        Me.txtcommand.Size = New System.Drawing.Size(631, 261)
-        Me.txtcommand.TabIndex = 0
-        Me.txtcommand.Text = ""
+        Me.ucrAvailableDataFrames.Location = New System.Drawing.Point(2, 128)
+        Me.ucrAvailableDataFrames.Name = "ucrAvailableDataFrames"
+        Me.ucrAvailableDataFrames.Size = New System.Drawing.Size(127, 41)
+        Me.ucrAvailableDataFrames.TabIndex = 84
         '
-        'frmCommand
+        'ucrSelectorByDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(631, 261)
-        Me.Controls.Add(Me.txtcommand)
-        Me.Name = "frmCommand"
-        Me.ShowIcon = False
-        Me.Tag = "Output_Window"
-        Me.Text = "Output Window"
+        Me.Controls.Add(Me.ucrAvailableDataFrames)
+        Me.Name = "ucrSelectorByDataFrame"
+        Me.Size = New System.Drawing.Size(133, 179)
+        Me.Controls.SetChildIndex(Me.ucrAvailableDataFrames, 0)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents txtcommand As RichTextBox
+    Friend WithEvents ucrAvailableDataFrames As ucrDataFrame
 End Class

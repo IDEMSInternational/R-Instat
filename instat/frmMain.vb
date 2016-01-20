@@ -30,12 +30,14 @@ Public Class frmMain
         frmCommand.MdiParent = Me
         frmLog.MdiParent = Me
         frmScript.MdiParent = Me
+        frmVariables.MdiParent = Me
+        frmMetaData.MdiParent = Me
         Me.LayoutMdi(MdiLayout.ArrangeIcons)
         frmCommand.Dock = DockStyle.Right
         frmEditor.Dock = DockStyle.Left
         frmEditor.Dock = DockStyle.Fill
         frmCommand.Show()
-        frmEditor.Show()
+        'frmEditor.Show()
 
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
@@ -55,19 +57,11 @@ Public Class frmMain
         If Not IsNothing(pair.Key) Then
             clsRLink.LoadData(pair.Key, pair.Value)
         End If
-
+        frmEditor.Show()
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
         dlgDescriptiveStatistics.ShowDialog()
-    End Sub
-
-    Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgSort.ShowDialog()
-    End Sub
-
-    Private Sub mnuSriptLog_Click(sender As Object, e As EventArgs)
-        frmLog.ShowDialog()
     End Sub
 
     Private Sub KiswahiliToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles KiswahiliToolStripMenuItem1.Click
@@ -94,14 +88,6 @@ Public Class frmMain
 
     Private Sub mnuFileNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuFileNewDataFrame.Click
         dlgFileNew.ShowDialog()
-    End Sub
-
-    Private Sub LogWindowMenu_Click(sender As Object, e As EventArgs) Handles LogWindowMenu.Click
-        If frmLog.Visible = True Then
-            frmLog.Visible = False
-        Else
-            frmLog.Visible = True
-        End If
     End Sub
 
     Private Sub StartOfTheRainsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartOfTheRainsToolStripMenuItem.Click
@@ -196,46 +182,6 @@ Public Class frmMain
         dlgYearRaincount.ShowDialog()
     End Sub
 
-    Private Sub mnuWindowMetadata_Click(sender As Object, e As EventArgs)
-        frmMetaData.Show()
-    End Sub
-
-    Private Sub mnuWindowVariables_Click(sender As Object, e As EventArgs)
-        frmVariables.Show()
-    End Sub
-
-    Private Sub mnuManageWorksheetInformation_Click(sender As Object, e As EventArgs) Handles mnuManageWorksheetInformation.Click
-        If frmVariables.Visible = True Then
-            frmVariables.Visible = False
-        Else
-            frmVariables.Visible = True
-        End If
-    End Sub
-
-    Private Sub mnuManageLogWindow_Click(sender As Object, e As EventArgs) Handles mnuManageLogWindow.Click
-        If frmLog.Visible = True Then
-            frmLog.Visible = False
-        Else
-            frmLog.Visible = True
-        End If
-    End Sub
-
-    Private Sub mnuManageScriptWindow_Click(sender As Object, e As EventArgs) Handles mnuManageScriptWindow.Click
-        If frmScript.Visible = True Then
-            frmScript.Visible = False
-        Else
-            frmScript.Visible = True
-        End If
-    End Sub
-
-    Private Sub mnuManageWorksheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageWorksheetMetadata.Click
-        If frmMetaData.Visible = True Then
-            frmMetaData.Visible = False
-        Else
-            frmMetaData.Visible = True
-        End If
-    End Sub
-
     Private Sub mnuClmateMethodThreeSummaries_Click(sender As Object, e As EventArgs) Handles mnuClmateMethodThreeSummaries.Click
         dlgThreeSummaries.ShowDialog()
     End Sub
@@ -319,10 +265,6 @@ Public Class frmMain
 
     Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) Handles mnuStatsNonParametricOneWayAnova.Click
         'dlgOneWayAnova.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatsNonParametricTwoWayAnova_Click(sender As Object, e As EventArgs)
-        dlgTwoWayAnova.ShowDialog()
     End Sub
 
     Private Sub mnuStatsSummaryColumnStat_Click(sender As Object, e As EventArgs) Handles mnuStatsSummaryColumnStat.Click
@@ -674,7 +616,7 @@ Public Class frmMain
             End If
             clsGrids.UpdateGrids()
         End If
-
+        frmEditor.Show()
 
     End Sub
 
@@ -707,10 +649,6 @@ Public Class frmMain
         Return New KeyValuePair(Of String, String)("", "")
     End Function
 
-    Private Sub mnuFileClose_Click(sender As Object, e As EventArgs) Handles mnuFileClose.Click
-
-    End Sub
-
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
         'TODO decide what Open From Library does and edit below
         'Dim kvpFile As KeyValuePair(Of String, String)
@@ -723,4 +661,51 @@ Public Class frmMain
         'clsGrids.UpdateGrids()
     End Sub
 
+    Private Sub mnuManageDataSubset_Click(sender As Object, e As EventArgs) Handles mnuManageSubset.Click
+        dlgSubset.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageReshapeSubset_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeSubset.Click
+        dlgSubset.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageDataMerge_Click(sender As Object, e As EventArgs) Handles mnuManageDataMerge.Click
+        dlgMerge.ShowDialog()
+    End Sub
+
+    Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuWindowVariable.Click
+        If frmVariables.Visible = True Then
+            frmVariables.Visible = False
+        Else
+            frmVariables.Visible = True
+        End If
+    End Sub
+
+    Private Sub mnuWindowDataFrame_Click(sender As Object, e As EventArgs) Handles mnuWindowDataFrame.Click
+        If frmMetaData.Visible = True Then
+            frmMetaData.Visible = False
+        Else
+            frmMetaData.Visible = True
+        End If
+    End Sub
+
+    Private Sub LogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogToolStripMenuItem.Click
+        If frmLog.Visible = True Then
+            frmLog.Visible = False
+        Else
+            frmLog.Visible = True
+        End If
+    End Sub
+
+    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScriptToolStripMenuItem.Click
+        If frmScript.Visible = True Then
+            frmScript.Visible = False
+        Else
+            frmScript.Visible = True
+        End If
+    End Sub
+
+    Private Sub SubsetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SubsetToolStripMenuItem.Click
+        dlgSubset.ShowDialog()
+    End Sub
 End Class

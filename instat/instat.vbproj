@@ -503,6 +503,12 @@
     <Compile Include="dlgMakeFactor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMerge.Designer.vb">
+      <DependentUpon>dlgMerge.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMerge.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgMissingData.designer.vb">
       <DependentUpon>dlgMissingData.vb</DependentUpon>
     </Compile>
@@ -779,6 +785,12 @@
     <Compile Include="dlgStemAndLeaf.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSubset.Designer.vb">
+      <DependentUpon>dlgSubset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSubset.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSummary.Designer.vb">
       <DependentUpon>dlgSummary.vb</DependentUpon>
     </Compile>
@@ -967,6 +979,12 @@
     <Compile Include="ucrDistributions.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrDistributionsWithParameters.Designer.vb">
+      <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDistributionsWithParameters.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrNewColumnName.Designer.vb">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
     </Compile>
@@ -1001,6 +1019,18 @@
       <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrSelectorAddRemove.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrSelectorByDataFrame.Designer.vb">
+      <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorByDataFrame.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrSelectorByDataFrameAddRemove.Designer.vb">
+      <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorByDataFrameAddRemove.vb">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -2048,6 +2078,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditor.fr-FR.resx">
       <DependentUpon>frmEditor.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditor.resx">
       <DependentUpon>frmEditor.vb</DependentUpon>
@@ -2171,6 +2202,15 @@
     <EmbeddedResource Include="ucrDistributions.sw-KE.resx">
       <DependentUpon>ucrDistributions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrDistributionsWithParameters.fr-FR.resx">
+      <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDistributionsWithParameters.resx">
+      <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDistributionsWithParameters.sw-KE.resx">
+      <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrNewColumnName.fr-FR.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
     </EmbeddedResource>
@@ -2215,6 +2255,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorAddRemove.sw-KE.resx">
       <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrame.fr-FR.resx">
+      <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrame.resx">
+      <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrame.sw-KE.resx">
+      <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.fr-FR.resx">
+      <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.resx">
+      <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.sw-KE.resx">
+      <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

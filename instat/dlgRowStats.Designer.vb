@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRowStats
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgRowStats
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpStatistcsRequired = New System.Windows.Forms.GroupBox()
         Me.chkSum = New System.Windows.Forms.CheckBox()
@@ -31,10 +31,10 @@ Partial Class dlgRowStats
         Me.chkCount = New System.Windows.Forms.CheckBox()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.ucrReceiverRowStatistics = New instat.ucrReceiverMultiple()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.chkRestrictData_Values = New System.Windows.Forms.CheckBox()
         Me.chkWeights = New System.Windows.Forms.CheckBox()
+        Me.ucrDataFrame = New instat.ucrSelectorByDataFrame()
         Me.grpStatistcsRequired.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -46,7 +46,7 @@ Partial Class dlgRowStats
         Me.grpStatistcsRequired.Controls.Add(Me.chkMinimum)
         Me.grpStatistcsRequired.Controls.Add(Me.chkMean)
         Me.grpStatistcsRequired.Controls.Add(Me.chkCount)
-        Me.grpStatistcsRequired.Location = New System.Drawing.Point(276, 12)
+        Me.grpStatistcsRequired.Location = New System.Drawing.Point(313, 12)
         Me.grpStatistcsRequired.Name = "grpStatistcsRequired"
         Me.grpStatistcsRequired.Size = New System.Drawing.Size(110, 155)
         Me.grpStatistcsRequired.TabIndex = 5
@@ -123,7 +123,7 @@ Partial Class dlgRowStats
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(175, 9)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(202, 9)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(94, 13)
         Me.lblSelectedVariables.TabIndex = 14
@@ -132,29 +132,22 @@ Partial Class dlgRowStats
         '
         'ucrReceiverRowStatistics
         '
-        Me.ucrReceiverRowStatistics.Location = New System.Drawing.Point(175, 22)
+        Me.ucrReceiverRowStatistics.Location = New System.Drawing.Point(178, 25)
         Me.ucrReceiverRowStatistics.Name = "ucrReceiverRowStatistics"
-        Me.ucrReceiverRowStatistics.Size = New System.Drawing.Size(91, 142)
+        Me.ucrReceiverRowStatistics.Size = New System.Drawing.Size(101, 142)
         Me.ucrReceiverRowStatistics.TabIndex = 13
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(1, 9)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(182, 118)
-        Me.ucrAddRemove.TabIndex = 7
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(1, 169)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 243)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 60)
         Me.ucrBase.TabIndex = 6
         '
         'chkRestrictData_Values
         '
         Me.chkRestrictData_Values.AutoSize = True
-        Me.chkRestrictData_Values.Location = New System.Drawing.Point(13, 124)
+        Me.chkRestrictData_Values.Location = New System.Drawing.Point(13, 197)
         Me.chkRestrictData_Values.Name = "chkRestrictData_Values"
         Me.chkRestrictData_Values.Size = New System.Drawing.Size(120, 17)
         Me.chkRestrictData_Values.TabIndex = 15
@@ -165,7 +158,7 @@ Partial Class dlgRowStats
         'chkWeights
         '
         Me.chkWeights.AutoSize = True
-        Me.chkWeights.Location = New System.Drawing.Point(13, 150)
+        Me.chkWeights.Location = New System.Drawing.Point(13, 220)
         Me.chkWeights.Name = "chkWeights"
         Me.chkWeights.Size = New System.Drawing.Size(65, 17)
         Me.chkWeights.TabIndex = 16
@@ -173,16 +166,23 @@ Partial Class dlgRowStats
         Me.chkWeights.Text = "Weights"
         Me.chkWeights.UseVisualStyleBackColor = True
         '
+        'ucrDataFrame
+        '
+        Me.ucrDataFrame.Location = New System.Drawing.Point(12, 12)
+        Me.ucrDataFrame.Name = "ucrDataFrame"
+        Me.ucrDataFrame.Size = New System.Drawing.Size(133, 179)
+        Me.ucrDataFrame.TabIndex = 17
+        '
         'dlgRowStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 201)
+        Me.ClientSize = New System.Drawing.Size(462, 309)
+        Me.Controls.Add(Me.ucrDataFrame)
         Me.Controls.Add(Me.chkWeights)
         Me.Controls.Add(Me.chkRestrictData_Values)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.ucrReceiverRowStatistics)
-        Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpStatistcsRequired)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -205,9 +205,9 @@ Partial Class dlgRowStats
     Friend WithEvents chkMinimum As CheckBox
     Friend WithEvents chkMean As CheckBox
     Friend WithEvents chkCount As CheckBox
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents lblSelectedVariables As Label
     Friend WithEvents ucrReceiverRowStatistics As ucrReceiverMultiple
     Friend WithEvents chkRestrictData_Values As CheckBox
     Friend WithEvents chkWeights As CheckBox
+    Friend WithEvents ucrDataFrame As ucrSelectorByDataFrame
 End Class

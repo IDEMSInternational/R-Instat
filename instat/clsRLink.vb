@@ -23,7 +23,7 @@ Public Class RLink
     Dim strInstatObjectPath As String = "static/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
     Public clsEngine As REngine
-    Dim txtOutput As New TextBox
+    Dim txtOutput As New RichTextBox
     Dim txtLog As New TextBox
     Public bLog As Boolean = False
     Public bOutput As Boolean = False
@@ -34,7 +34,7 @@ Public Class RLink
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
     End Sub
 
-    Public Sub SetOutput(tempOutput As TextBox)
+    Public Sub SetOutput(tempOutput As RichTextBox)
         txtOutput = tempOutput
         bOutput = True
     End Sub
@@ -58,16 +58,27 @@ Public Class RLink
         cboDataFrames.Text = frmEditor.grdData.CurrentWorksheet.Name
     End Sub
 
-    Public Sub FillComboColumnNames(ByRef cboColumns As ComboBox, strDataFrame As String)
-        Dim lstColumns As GenericVector
+    Public Sub FillColumnNames(strDataFrame As String, Optional ByRef cboColumns As ComboBox = Nothing, Optional ByRef lstColumns As ListView = Nothing)
+        Dim lstCurrColumns As GenericVector
         Dim i As Integer
 
         If bInstatObjectExists Then
-            lstColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(" & Chr(34) & strDataFrame & Chr(34) & ")").AsList
-            cboColumns.Items.Clear()
-            For i = 0 To lstColumns.Length - 1
-                cboColumns.Items.Add(lstColumns.AsCharacter(i))
-            Next
+            lstCurrColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(" & Chr(34) & strDataFrame & Chr(34) & ")").AsList
+            If cboColumns IsNot Nothing Then
+                cboColumns.Items.Clear()
+                For i = 0 To lstCurrColumns.Length - 1
+                    cboColumns.Items.Add(lstCurrColumns.AsCharacter(i))
+                Next
+            ElseIf lstColumns IsNot Nothing Then
+                lstColumns.Items.Clear()
+                If lstColumns.Columns.Count = 0 Then
+                    lstColumns.Columns.Add("Available Data")
+                End If
+                For i = 0 To lstCurrColumns.Length - 1
+                    lstColumns.Items.Add(lstCurrColumns.AsCharacter(i))
+                Next
+                lstColumns.Columns(0).Width = -2
+            End If
         End If
     End Sub
 
@@ -173,7 +184,7 @@ Public Class RLink
         Dim i As Integer
         Dim grps As New ListViewGroup
         If bInstatObjectExists Then
-            lstView.Columns.Add("Available Data", width:=100)
+            lstView.Columns.Add("Available Data")
             dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variables_metadata()").AsList
             For i = 0 To dfList.Count - 1
                 grps = New ListViewGroup(dfList.Names(i), HorizontalAlignment.Left)
@@ -185,6 +196,7 @@ Public Class RLink
                     lstView.Items.Add(dfTemp(j, 0)).Group = lstView.Groups(i)
                 Next
             Next
+            lstView.Columns(0).Width = -2
         End If
     End Sub
 
