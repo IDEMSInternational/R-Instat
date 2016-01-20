@@ -14,9 +14,12 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+
 Public Class frmMetaData
+    Public context As New frmEditor
     Private Sub frmMetaData_Load(sender As Object, e As EventArgs) Handles Me.Load
         frmMain.clsGrids.SetMetadata(grdMetaData)
+        Me.SizeGripStyle = SizeGripStyle.Auto
         loadForm()
     End Sub
 
@@ -28,6 +31,9 @@ Public Class frmMetaData
         grdMetaData.SheetTabNewButtonVisible = False
         grdMetaData.SheetTabControlNewButtonVisible = False
         grdMetaData.CurrentWorksheet.Resize(2, 2)
+        grdMetaData.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
+        grdMetaData.ContextMenuStrip = context.grdData.ContextMenuStrip
+        grdMetaData.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip
         autoTranslate(Me)
     End Sub
 
