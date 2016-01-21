@@ -62,9 +62,9 @@ Partial Class dlgRecode
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(92, 203)
+        Me.ucrBase.Location = New System.Drawing.Point(140, 207)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 1
         '
         'chkMakeResultFactor
@@ -116,7 +116,7 @@ Partial Class dlgRecode
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(673, 240)
+        Me.ClientSize = New System.Drawing.Size(673, 261)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.ucrRecodeRececeiver)
         Me.Controls.Add(Me.ucrRecodeSelector)
