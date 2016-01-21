@@ -663,16 +663,16 @@ Partial Class dlgTransform
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(1, 369)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 371)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 60)
         Me.ucrBase.TabIndex = 0
         '
         'dlgTransform
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 398)
+        Me.ClientSize = New System.Drawing.Size(430, 428)
         Me.Controls.Add(Me.grpOtherTransformations)
         Me.Controls.Add(Me.cmbPreview)
         Me.Controls.Add(Me.btnPreview)
