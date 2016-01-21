@@ -38,9 +38,9 @@ Partial Class dlgfactor
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(-1, 294)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 291)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrFactorDataSelector
@@ -155,7 +155,7 @@ Partial Class dlgfactor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(401, 329)
+        Me.ClientSize = New System.Drawing.Size(428, 353)
         Me.Controls.Add(Me.chkCopyResultsintoaNewColumn)
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.ucrFactorSingleReceiver)
