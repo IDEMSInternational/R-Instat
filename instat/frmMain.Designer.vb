@@ -254,10 +254,15 @@ Partial Class frmMain
         Me.NameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormatCtrlDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.KiswahiliToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.KiswahiliToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EnglishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FrenchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DataFrameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InsertToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DataFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RenameSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReorderSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethods = New System.Windows.Forms.ToolStripMenuItem()
         Me.DataManipulationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartOfRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -296,15 +301,6 @@ Partial Class frmMain
         Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DataFrameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InsertToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DisplayToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DataFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DeleteSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RenameSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReorderSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1557,7 +1553,7 @@ Partial Class frmMain
         'mnuBar
         '
         Me.mnuBar.AllowMerge = False
-        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.WindowToolStripMenuItem, Me.KiswahiliToolStripMenuItem, Me.HelpToolStripMenuItem, Me.mnuClimateMethods})
+        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem, Me.mnuClimateMethods})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.MdiWindowListItem = Me.WindowToolStripMenuItem
@@ -1899,33 +1895,61 @@ Partial Class frmMain
         Me.AlignmentToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.AlignmentToolStripMenuItem.Text = "Alignment..."
         '
-        'KiswahiliToolStripMenuItem
+        'DataFrameToolStripMenuItem
         '
-        Me.KiswahiliToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KiswahiliToolStripMenuItem1, Me.EnglishToolStripMenuItem, Me.FrenchToolStripMenuItem})
-        Me.KiswahiliToolStripMenuItem.Name = "KiswahiliToolStripMenuItem"
-        Me.KiswahiliToolStripMenuItem.Size = New System.Drawing.Size(71, 20)
-        Me.KiswahiliToolStripMenuItem.Tag = "Language"
-        Me.KiswahiliToolStripMenuItem.Text = "Language"
+        Me.DataFrameToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OrderToolStripMenuItem, Me.InsertToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.DisplayToolStripMenuItem1})
+        Me.DataFrameToolStripMenuItem.Name = "DataFrameToolStripMenuItem"
+        Me.DataFrameToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.DataFrameToolStripMenuItem.Text = "Data Frame"
         '
-        'KiswahiliToolStripMenuItem1
+        'OrderToolStripMenuItem
         '
-        Me.KiswahiliToolStripMenuItem1.Name = "KiswahiliToolStripMenuItem1"
-        Me.KiswahiliToolStripMenuItem1.Size = New System.Drawing.Size(120, 22)
-        Me.KiswahiliToolStripMenuItem1.Text = "Kiswahili"
+        Me.OrderToolStripMenuItem.Name = "OrderToolStripMenuItem"
+        Me.OrderToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
+        Me.OrderToolStripMenuItem.Text = "Order"
         '
-        'EnglishToolStripMenuItem
+        'InsertToolStripMenuItem
         '
-        Me.EnglishToolStripMenuItem.Name = "EnglishToolStripMenuItem"
-        Me.EnglishToolStripMenuItem.Size = New System.Drawing.Size(120, 22)
-        Me.EnglishToolStripMenuItem.Tag = "English"
-        Me.EnglishToolStripMenuItem.Text = "English"
+        Me.InsertToolStripMenuItem.Name = "InsertToolStripMenuItem"
+        Me.InsertToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
+        Me.InsertToolStripMenuItem.Text = "Insert"
         '
-        'FrenchToolStripMenuItem
+        'DeleteToolStripMenuItem
         '
-        Me.FrenchToolStripMenuItem.Name = "FrenchToolStripMenuItem"
-        Me.FrenchToolStripMenuItem.Size = New System.Drawing.Size(120, 22)
-        Me.FrenchToolStripMenuItem.Tag = "French"
-        Me.FrenchToolStripMenuItem.Text = "French"
+        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
+        Me.DeleteToolStripMenuItem.Text = "Delete"
+        '
+        'DisplayToolStripMenuItem1
+        '
+        Me.DisplayToolStripMenuItem1.Name = "DisplayToolStripMenuItem1"
+        Me.DisplayToolStripMenuItem1.Size = New System.Drawing.Size(112, 22)
+        Me.DisplayToolStripMenuItem1.Text = "Display"
+        '
+        'DataFileToolStripMenuItem
+        '
+        Me.DataFileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteSheetToolStripMenuItem, Me.RenameSheetToolStripMenuItem, Me.ReorderSheetToolStripMenuItem})
+        Me.DataFileToolStripMenuItem.Name = "DataFileToolStripMenuItem"
+        Me.DataFileToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.DataFileToolStripMenuItem.Text = "Data File"
+        '
+        'DeleteSheetToolStripMenuItem
+        '
+        Me.DeleteSheetToolStripMenuItem.Name = "DeleteSheetToolStripMenuItem"
+        Me.DeleteSheetToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.DeleteSheetToolStripMenuItem.Text = "Delete Sheet "
+        '
+        'RenameSheetToolStripMenuItem
+        '
+        Me.RenameSheetToolStripMenuItem.Name = "RenameSheetToolStripMenuItem"
+        Me.RenameSheetToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.RenameSheetToolStripMenuItem.Text = "Rename Sheet"
+        '
+        'ReorderSheetToolStripMenuItem
+        '
+        Me.ReorderSheetToolStripMenuItem.Name = "ReorderSheetToolStripMenuItem"
+        Me.ReorderSheetToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.ReorderSheetToolStripMenuItem.Text = "Reorder Sheet"
         '
         'mnuClimateMethods
         '
@@ -2158,62 +2182,6 @@ Partial Class frmMain
         Me.WaterBalanceToolStripMenuItem1.Name = "WaterBalanceToolStripMenuItem1"
         Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
         Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
-        '
-        'DataFrameToolStripMenuItem
-        '
-        Me.DataFrameToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OrderToolStripMenuItem, Me.InsertToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.DisplayToolStripMenuItem1})
-        Me.DataFrameToolStripMenuItem.Name = "DataFrameToolStripMenuItem"
-        Me.DataFrameToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-        Me.DataFrameToolStripMenuItem.Text = "Data Frame"
-        '
-        'OrderToolStripMenuItem
-        '
-        Me.OrderToolStripMenuItem.Name = "OrderToolStripMenuItem"
-        Me.OrderToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.OrderToolStripMenuItem.Text = "Order"
-        '
-        'InsertToolStripMenuItem
-        '
-        Me.InsertToolStripMenuItem.Name = "InsertToolStripMenuItem"
-        Me.InsertToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.InsertToolStripMenuItem.Text = "Insert"
-        '
-        'DeleteToolStripMenuItem
-        '
-        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
-        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.DeleteToolStripMenuItem.Text = "Delete"
-        '
-        'DisplayToolStripMenuItem1
-        '
-        Me.DisplayToolStripMenuItem1.Name = "DisplayToolStripMenuItem1"
-        Me.DisplayToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
-        Me.DisplayToolStripMenuItem1.Text = "Display"
-        '
-        'DataFileToolStripMenuItem
-        '
-        Me.DataFileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteSheetToolStripMenuItem, Me.RenameSheetToolStripMenuItem, Me.ReorderSheetToolStripMenuItem})
-        Me.DataFileToolStripMenuItem.Name = "DataFileToolStripMenuItem"
-        Me.DataFileToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-        Me.DataFileToolStripMenuItem.Text = "Data File"
-        '
-        'DeleteSheetToolStripMenuItem
-        '
-        Me.DeleteSheetToolStripMenuItem.Name = "DeleteSheetToolStripMenuItem"
-        Me.DeleteSheetToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.DeleteSheetToolStripMenuItem.Text = "Delete Sheet "
-        '
-        'RenameSheetToolStripMenuItem
-        '
-        Me.RenameSheetToolStripMenuItem.Name = "RenameSheetToolStripMenuItem"
-        Me.RenameSheetToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.RenameSheetToolStripMenuItem.Text = "Rename Sheet"
-        '
-        'ReorderSheetToolStripMenuItem
-        '
-        Me.ReorderSheetToolStripMenuItem.Name = "ReorderSheetToolStripMenuItem"
-        Me.ReorderSheetToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ReorderSheetToolStripMenuItem.Text = "Reorder Sheet"
         '
         'frmMain
         '
@@ -2448,10 +2416,6 @@ Partial Class frmMain
     Friend WithEvents NameToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FormatCtrlDToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AlignmentToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents KiswahiliToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents KiswahiliToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents EnglishToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FrenchToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuEndofRains As ToolStripMenuItem
     Friend WithEvents mnuGraphicsInventory As ToolStripMenuItem
     Friend WithEvents mnuClimateMethods As ToolStripMenuItem
