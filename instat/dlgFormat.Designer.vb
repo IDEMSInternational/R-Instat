@@ -27,7 +27,7 @@ Partial Class dlgFormat
         Me.ucrMultiple = New instat.ucrReceiverMultiple()
         Me.lblSelectedColumns = New System.Windows.Forms.Label()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.UcrBase = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'lstRequiredFormat
@@ -76,19 +76,19 @@ Partial Class dlgFormat
         Me.ucrAddRemove.Size = New System.Drawing.Size(205, 214)
         Me.ucrAddRemove.TabIndex = 5
         '
-        'UcrBase
+        'ucrBase
         '
-        Me.UcrBase.Location = New System.Drawing.Point(13, 156)
-        Me.UcrBase.Name = "UcrBase"
-        Me.UcrBase.Size = New System.Drawing.Size(410, 53)
-        Me.UcrBase.TabIndex = 6
+        Me.ucrBase.Location = New System.Drawing.Point(13, 156)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 6
         '
         'dlgFormat
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(435, 214)
-        Me.Controls.Add(Me.UcrBase)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.lblSelectedColumns)
         Me.Controls.Add(Me.ucrMultiple)
@@ -108,5 +108,5 @@ Partial Class dlgFormat
     Friend WithEvents ucrMultiple As ucrReceiverMultiple
     Friend WithEvents lblSelectedColumns As Label
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents UcrBase As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
 End Class
