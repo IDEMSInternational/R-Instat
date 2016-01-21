@@ -6,4 +6,7 @@ Public Class dlgBoxplotMethod
         ucrBase.clsRsyntax.iCallType = 0
     End Sub
 
+    Private Sub dlgBoxplotMethod_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
