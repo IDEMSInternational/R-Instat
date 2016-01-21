@@ -64,7 +64,7 @@ Public Class frmMain
         dlgDescriptiveStatistics.ShowDialog()
     End Sub
 
-    Private Sub KiswahiliToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles KiswahiliToolStripMenuItem1.Click
+    Private Sub KiswahiliToolStripMenuItem1_Click(sender As Object, e As EventArgs)
         Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
         Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
         autoTranslate(Me)
@@ -74,13 +74,13 @@ Public Class frmMain
         dlgProbabilityPlot.ShowDialog()
     End Sub
 
-    Private Sub FrenchToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrenchToolStripMenuItem.Click
+    Private Sub FrenchToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Thread.CurrentThread.CurrentCulture = New CultureInfo("fr-FR")
         Thread.CurrentThread.CurrentUICulture = New CultureInfo("fr-FR")
         autoTranslate(Me)
     End Sub
 
-    Private Sub EnglishToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnglishToolStripMenuItem.Click
+    Private Sub EnglishToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
         Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
         autoTranslate(Me)
