@@ -115,7 +115,7 @@ Partial Class dlgProbabilityPlot
         '
         Me.ucrBase.Location = New System.Drawing.Point(-1, 157)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
         Me.ucrBase.TabIndex = 0
         '
         'lblVariableToPlot
@@ -153,7 +153,7 @@ Partial Class dlgProbabilityPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(402, 186)
+        Me.ClientSize = New System.Drawing.Size(402, 212)
         Me.Controls.Add(Me.txtTitle)
         Me.Controls.Add(Me.lblVariableToPlot)
         Me.Controls.Add(Me.ucrReceiverPlotVariable)
