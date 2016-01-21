@@ -72,16 +72,16 @@ Partial Class dlgName
         'ucrBase
         '
         Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ucrBase.Location = New System.Drawing.Point(0, 150)
+        Me.ucrBase.Location = New System.Drawing.Point(0, 178)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(447, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(450, 59)
         Me.ucrBase.TabIndex = 5
         '
         'dlgName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(447, 182)
+        Me.ClientSize = New System.Drawing.Size(450, 237)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.txtName)
