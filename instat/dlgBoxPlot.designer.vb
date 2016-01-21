@@ -45,7 +45,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrBase.Location = New System.Drawing.Point(3, 282)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 51)
         Me.ucrBase.TabIndex = 4
         '
         'lblYVarToPlot
@@ -129,7 +129,7 @@ Partial Class dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(409, 320)
+        Me.ClientSize = New System.Drawing.Size(409, 345)
         Me.Controls.Add(Me.lblByFactors)
         Me.Controls.Add(Me.UcrReceiverSingle1)
         Me.Controls.Add(Me.ucrReceiverDataToPlot)

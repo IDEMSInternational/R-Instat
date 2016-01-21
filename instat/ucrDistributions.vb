@@ -17,28 +17,62 @@
 Imports instat.Translations
 
 Public Class ucrDistributions
-    Public lstDistributions As New List(Of Distribution)
+    Public lstAllDistributions As New List(Of Distribution)
+    Public lstRequiredDistributions As New List(Of Distribution)
+    Public strRequiredDistributions As String = "All"
     Public clsCurrDistribution As New Distribution
     Public bDistributionsSet As Boolean = False
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not bDistributionsSet Then
-            SetDistributions()
+            CreateDistributions()
         End If
-        SetDistributionNames()
+        SetRequiredDistributions()
     End Sub
 
-    Public Sub SetDistributionNames()
+    Public Sub SetRequiredDistributions()
         Dim lstDistributionNames As New List(Of String)
-        For Each Dist In lstDistributions
-            lstDistributionNames.Add(translate(Dist.strNameTag))
+        For Each Dist In lstAllDistributions
+            Select Case strRequiredDistributions
+                Case "All"
+                    lstDistributionNames.Add(translate(Dist.strNameTag))
+                    lstRequiredDistributions.Add(Dist)
+                Case "RFunctions"
+                    If Not Dist.strRFunctionName = "" Then
+                        lstDistributionNames.Add(translate(Dist.strNameTag))
+                        lstRequiredDistributions.Add(Dist)
+                    End If
+                Case "PFunctions"
+                    If Not Dist.strPFunctionName = "" Then
+                        lstDistributionNames.Add(translate(Dist.strNameTag))
+                        lstRequiredDistributions.Add(Dist)
+                    End If
+                Case "QFunctions"
+                    If Not Dist.strQFunctionName = "" Then
+                        lstDistributionNames.Add(translate(Dist.strNameTag))
+                        lstRequiredDistributions.Add(Dist)
+                    End If
+                Case "DFunctions"
+                    If Not Dist.strDFunctionName = "" Then
+                        lstDistributionNames.Add(translate(Dist.strNameTag))
+                        lstRequiredDistributions.Add(Dist)
+                    End If
+                Case "GLMFunctions"
+                    If Not Dist.strGLMFunctionName = "" Then
+                        lstDistributionNames.Add(translate(Dist.strNameTag))
+                        lstRequiredDistributions.Add(Dist)
+                    End If
+            End Select
         Next
-        cboDistributions.Items.Clear()
-        cboDistributions.Items.AddRange(lstDistributionNames.ToArray)
-        cboDistributions.SelectedIndex = 0
+
+        If Not lstDistributionNames.Count = 0 Then
+            cboDistributions.Items.Clear()
+            cboDistributions.Items.AddRange(lstDistributionNames.ToArray)
+            cboDistributions.SelectedIndex = 0
+        End If
     End Sub
 
-    Public Sub SetDistributions()
+    Public Sub CreateDistributions()
         Dim clsNormalDist As New Distribution
         Dim clsExponentialDist As New Distribution
         Dim clsGeometricDist As New Distribution
@@ -50,9 +84,9 @@ Public Class ucrDistributions
         clsNormalDist.strQFunctionName = "qnorm"
         clsNormalDist.strDFunctionName = "dnorm"
         clsNormalDist.strGLMFunctionName = "gausian"
-        clsNormalDist.AddParameter("mean", "mean", 0)
-        clsNormalDist.AddParameter("sd", "standard deviation", 1)
-        lstDistributions.Add(clsNormalDist)
+        clsNormalDist.AddParameter("mean", "Mean", 0)
+        clsNormalDist.AddParameter("sd", "Standard_deviation", 1)
+        lstAllDistributions.Add(clsNormalDist)
 
         ' Exponential Distribution
         clsExponentialDist.strNameTag = "Exponential"
@@ -60,8 +94,8 @@ Public Class ucrDistributions
         clsExponentialDist.strPFunctionName = "pexp"
         clsExponentialDist.strQFunctionName = "qexp"
         clsExponentialDist.strDFunctionName = "dexp"
-        clsExponentialDist.AddParameter("mean", "mean", 1)
-        lstDistributions.Add(clsExponentialDist)
+        clsExponentialDist.AddParameter("mean", "Mean", 1)
+        lstAllDistributions.Add(clsExponentialDist)
 
         ' Geometric Distribution
         clsGeometricDist.strNameTag = "Geometric"
@@ -69,13 +103,14 @@ Public Class ucrDistributions
         clsGeometricDist.strPFunctionName = "pgeom"
         clsGeometricDist.strQFunctionName = "qgeom"
         clsGeometricDist.strDFunctionName = "dgeom"
-        clsGeometricDist.AddParameter("prob", "probability")
-        lstDistributions.Add(clsGeometricDist)
+        clsGeometricDist.AddParameter("prob", "Probability")
+        lstAllDistributions.Add(clsGeometricDist)
 
         bDistributionsSet = True
     End Sub
-
+    Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
-        clsCurrDistribution = lstDistributions(cboDistributions.SelectedIndex)
+        clsCurrDistribution = lstRequiredDistributions(cboDistributions.SelectedIndex)
+        RaiseEvent cboDistributionsIndexChanged(sender, e)
     End Sub
 End Class

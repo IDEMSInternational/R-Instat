@@ -37,7 +37,7 @@ Partial Class dlgExpand
         '
         Me.ucrBase.Location = New System.Drawing.Point(13, 227)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 57)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove
@@ -49,7 +49,7 @@ Partial Class dlgExpand
         '
         'ucrReceiverExpand
         '
-        Me.ucrReceiverExpand.Location = New System.Drawing.Point(252, 45)
+        Me.ucrReceiverExpand.Location = New System.Drawing.Point(243, 28)
         Me.ucrReceiverExpand.Name = "ucrReceiverExpand"
         Me.ucrReceiverExpand.Size = New System.Drawing.Size(121, 94)
         Me.ucrReceiverExpand.TabIndex = 2
@@ -118,7 +118,7 @@ Partial Class dlgExpand
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(431, 268)
+        Me.ClientSize = New System.Drawing.Size(431, 289)
         Me.Controls.Add(Me.rdoMatchingValues)
         Me.Controls.Add(Me.rdoMatchingColumn)
         Me.Controls.Add(Me.cboWithColumn)
