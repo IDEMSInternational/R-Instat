@@ -142,12 +142,20 @@ data_obj$methods(get_data = function() {
 }
 )
 
-data_obj$methods(get_variables_metadata = function(include_all = TRUE) {
+data_obj$methods(get_variables_metadata = function(include_all = TRUE, data_type = "all") {
   .self$update_variables_metadata()
   if(!include_all) return(variables_metadata)
   else {
     out = variables_metadata
     out[[data_type_label]] = sapply(data, class)
+    if(data_type != "all") {
+      if(data_type == "numeric") {
+        out = out[out[[data_type_label]] %in% c("numeric", "integer") , ]
+      }
+      else {
+      out = out[out[[data_type_label]]==data_type, ]
+      }
+    }
     return(out)
   }
 }
