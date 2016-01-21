@@ -22,21 +22,13 @@ Partial Class dlgFormat
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
         Me.lstRequiredFormat = New System.Windows.Forms.ListBox()
         Me.lblRequiredFormat = New System.Windows.Forms.Label()
         Me.ucrMultiple = New instat.ucrReceiverMultiple()
         Me.lblSelectedColumns = New System.Windows.Forms.Label()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.UcrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ucrBase.Location = New System.Drawing.Point(0, 159)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(438, 32)
-        Me.ucrBase.TabIndex = 0
         '
         'lstRequiredFormat
         '
@@ -61,7 +53,7 @@ Partial Class dlgFormat
         '
         'ucrMultiple
         '
-        Me.ucrMultiple.Location = New System.Drawing.Point(208, 19)
+        Me.ucrMultiple.Location = New System.Drawing.Point(211, 19)
         Me.ucrMultiple.Name = "ucrMultiple"
         Me.ucrMultiple.Size = New System.Drawing.Size(121, 131)
         Me.ucrMultiple.TabIndex = 3
@@ -81,20 +73,27 @@ Partial Class dlgFormat
         Me.ucrAddRemove.Dock = System.Windows.Forms.DockStyle.Left
         Me.ucrAddRemove.Location = New System.Drawing.Point(0, 0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(205, 159)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(205, 214)
         Me.ucrAddRemove.TabIndex = 5
+        '
+        'UcrBase
+        '
+        Me.UcrBase.Location = New System.Drawing.Point(13, 156)
+        Me.UcrBase.Name = "UcrBase"
+        Me.UcrBase.Size = New System.Drawing.Size(410, 53)
+        Me.UcrBase.TabIndex = 6
         '
         'dlgFormat
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(438, 191)
+        Me.ClientSize = New System.Drawing.Size(435, 214)
+        Me.Controls.Add(Me.UcrBase)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.lblSelectedColumns)
         Me.Controls.Add(Me.ucrMultiple)
         Me.Controls.Add(Me.lblRequiredFormat)
         Me.Controls.Add(Me.lstRequiredFormat)
-        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgFormat"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -104,11 +103,10 @@ Partial Class dlgFormat
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lstRequiredFormat As ListBox
     Friend WithEvents lblRequiredFormat As Label
     Friend WithEvents ucrMultiple As ucrReceiverMultiple
     Friend WithEvents lblSelectedColumns As Label
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents UcrBase As ucrButtons
 End Class
