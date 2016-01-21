@@ -169,16 +169,16 @@ Partial Class dlgPolynomials
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 217)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 221)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(403, 53)
         Me.ucrBase.TabIndex = 11
         '
         'dlgPolynomials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 261)
+        Me.ClientSize = New System.Drawing.Size(427, 278)
         Me.Controls.Add(Me.chkWeights)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrAddRemove)
