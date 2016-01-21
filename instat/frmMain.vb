@@ -52,7 +52,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFIleIEASCII.Click
+    Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Dim pair As KeyValuePair(Of String, String) = ImportDialog()
         If Not IsNothing(pair.Key) Then
             clsRLink.LoadData(pair.Key, pair.Value)
@@ -599,24 +599,33 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileOpenFromFile_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromFile.Click
-        Dim kvpFile As KeyValuePair(Of String, String)
-        Dim clsRsyntax As New RSyntax
 
-        kvpFile = OpenWorkbookDialog()
-        If Not IsNothing(kvpFile.Key) Then
-            clsRsyntax.SetAssignTo(clsRLink.strInstatDataObject)
-            clsRsyntax.SetFunction("readRDS")
-            clsRsyntax.AddParameter("file", kvpFile.Value)
-            If Not clsRLink.bInstatObjectExists Then
-                clsRLink.RunScript(clsRsyntax.GetScript())
-                clsRLink.bInstatObjectExists = True
-                clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_data_frames_changed(new_val = TRUE)")
-                clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = TRUE)")
-                clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_variables_metadata_changed(new_val = TRUE)")
-            End If
-            clsGrids.UpdateGrids()
+        Dim pair As KeyValuePair(Of String, String) = ImportDialog()
+        If Not IsNothing(pair.Key) Then
+            clsRLink.LoadData(pair.Key, pair.Value)
         End If
         frmEditor.Show()
+
+
+
+        'Dim kvpFile As KeyValuePair(Of String, String)
+        'Dim clsRsyntax As New RSyntax
+
+        'kvpFile = OpenWorkbookDialog()
+        'If Not IsNothing(kvpFile.Key) Then
+        '    clsRsyntax.SetAssignTo(clsRLink.strInstatDataObject)
+        '    clsRsyntax.SetFunction("readRDS")
+        '    clsRsyntax.AddParameter("file", kvpFile.Value)
+        '    If Not clsRLink.bInstatObjectExists Then
+        '        clsRLink.RunScript(clsRsyntax.GetScript())
+        '        clsRLink.bInstatObjectExists = True
+        '        clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_data_frames_changed(new_val = TRUE)")
+        '        clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = TRUE)")
+        '        clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_variables_metadata_changed(new_val = TRUE)")
+        '    End If
+        '    clsGrids.UpdateGrids()
+        'End If
+        'frmEditor.Show()
 
     End Sub
 
@@ -707,5 +716,9 @@ Public Class frmMain
 
     Private Sub SubsetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SubsetToolStripMenuItem.Click
         dlgSubset.ShowDialog()
+    End Sub
+
+    Private Sub mnuFileOptions_Click(sender As Object, e As EventArgs) Handles mnuFileOptions.Click
+        dlgOptions.ShowDialog()
     End Sub
 End Class
