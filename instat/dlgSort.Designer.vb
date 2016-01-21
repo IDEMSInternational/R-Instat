@@ -35,9 +35,9 @@ Partial Class dlgSort
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(1, 155)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 155)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(402, 35)
+        Me.ucrBase.Size = New System.Drawing.Size(402, 56)
         Me.ucrBase.TabIndex = 0
         '
         'grpOrderType
@@ -113,7 +113,7 @@ Partial Class dlgSort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(406, 191)
+        Me.ClientSize = New System.Drawing.Size(427, 211)
         Me.Controls.Add(Me.chkWriteBack)
         Me.Controls.Add(Me.lblColumnsToSort)
         Me.Controls.Add(Me.ucrMultiple)
