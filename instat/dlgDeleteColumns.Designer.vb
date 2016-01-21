@@ -58,9 +58,9 @@ Partial Class dlgDeleteColumns
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 266)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 259)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 3
         '
         'txtSubset
@@ -101,7 +101,7 @@ Partial Class dlgDeleteColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 310)
+        Me.ClientSize = New System.Drawing.Size(425, 318)
         Me.Controls.Add(Me.txtSelect)
         Me.Controls.Add(Me.txtSubset)
         Me.Controls.Add(Me.ucrBase)
