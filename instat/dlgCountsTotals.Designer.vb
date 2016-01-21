@@ -27,7 +27,7 @@ Partial Class dlgCountsTotals
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 240)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 231)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -36,7 +36,7 @@ Partial Class dlgCountsTotals
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 296)
+        Me.ClientSize = New System.Drawing.Size(438, 296)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgCountsTotals"
