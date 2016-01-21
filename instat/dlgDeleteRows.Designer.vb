@@ -32,9 +32,9 @@ Partial Class dlgDeleteRows
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 245)
+        Me.ucrBase.Location = New System.Drawing.Point(15, 244)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(440, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(404, 55)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove
@@ -74,15 +74,15 @@ Partial Class dlgDeleteRows
         Me.lblColumnsFromWhichToDeleteTheseRows.AutoSize = True
         Me.lblColumnsFromWhichToDeleteTheseRows.Location = New System.Drawing.Point(229, 12)
         Me.lblColumnsFromWhichToDeleteTheseRows.Name = "lblColumnsFromWhichToDeleteTheseRows"
-        Me.lblColumnsFromWhichToDeleteTheseRows.Size = New System.Drawing.Size(39, 13)
+        Me.lblColumnsFromWhichToDeleteTheseRows.Size = New System.Drawing.Size(50, 13)
         Me.lblColumnsFromWhichToDeleteTheseRows.TabIndex = 5
-        Me.lblColumnsFromWhichToDeleteTheseRows.Text = "Label2"
+        Me.lblColumnsFromWhichToDeleteTheseRows.Text = "Variables"
         '
         'dlgDeleteRows
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(439, 289)
+        Me.ClientSize = New System.Drawing.Size(432, 303)
         Me.Controls.Add(Me.lblColumnsFromWhichToDeleteTheseRows)
         Me.Controls.Add(Me.lblRowsToDelete)
         Me.Controls.Add(Me.lstRowsToDelete)
