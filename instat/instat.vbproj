@@ -503,6 +503,12 @@
     <Compile Include="dlgMakeFactor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMerge.Designer.vb">
+      <DependentUpon>dlgMerge.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMerge.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgMissingData.designer.vb">
       <DependentUpon>dlgMissingData.vb</DependentUpon>
     </Compile>
@@ -777,6 +783,12 @@
       <DependentUpon>dlgStemAndLeaf.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgStemAndLeaf.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSubset.Designer.vb">
+      <DependentUpon>dlgSubset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSubset.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSummary.Designer.vb">
