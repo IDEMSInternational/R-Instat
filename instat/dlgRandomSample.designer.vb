@@ -29,24 +29,16 @@ Partial Class dlgRandomSample
         Me.lblNumberofSamples = New System.Windows.Forms.Label()
         Me.cboSampleType = New System.Windows.Forms.ComboBox()
         Me.lblSampleType = New System.Windows.Forms.Label()
-        Me.grpProbabilityDistribution = New System.Windows.Forms.GroupBox()
-        Me.txtStDev = New System.Windows.Forms.TextBox()
-        Me.txtMean = New System.Windows.Forms.TextBox()
-        Me.lblStDev = New System.Windows.Forms.Label()
-        Me.lblMean = New System.Windows.Forms.Label()
-        Me.lblParameters = New System.Windows.Forms.Label()
-        Me.lblDistributionType = New System.Windows.Forms.Label()
-        Me.cboDistributionType = New System.Windows.Forms.ComboBox()
         Me.grpSampleDataColumn = New System.Windows.Forms.GroupBox()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
-        Me.UcrReceiverSingle = New instat.ucrReceiverSingle()
-        Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
         Me.chkPlot = New System.Windows.Forms.CheckBox()
         Me.lblSeed = New System.Windows.Forms.Label()
         Me.txtSeed = New System.Windows.Forms.TextBox()
+        Me.ucrDistributionsWithParameters1 = New instat.ucrDistributionsWithParameters()
+        Me.ucrReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSelector = New instat.ucrSelectorAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpSampling.SuspendLayout()
-        Me.grpProbabilityDistribution.SuspendLayout()
         Me.grpSampleDataColumn.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -119,91 +111,11 @@ Partial Class dlgRandomSample
         Me.lblSampleType.Tag = "Sample_Type"
         Me.lblSampleType.Text = "Sample Type"
         '
-        'grpProbabilityDistribution
-        '
-        Me.grpProbabilityDistribution.Controls.Add(Me.txtStDev)
-        Me.grpProbabilityDistribution.Controls.Add(Me.txtMean)
-        Me.grpProbabilityDistribution.Controls.Add(Me.lblStDev)
-        Me.grpProbabilityDistribution.Controls.Add(Me.lblMean)
-        Me.grpProbabilityDistribution.Controls.Add(Me.lblParameters)
-        Me.grpProbabilityDistribution.Controls.Add(Me.lblDistributionType)
-        Me.grpProbabilityDistribution.Controls.Add(Me.cboDistributionType)
-        Me.grpProbabilityDistribution.Location = New System.Drawing.Point(8, 188)
-        Me.grpProbabilityDistribution.Name = "grpProbabilityDistribution"
-        Me.grpProbabilityDistribution.Size = New System.Drawing.Size(236, 151)
-        Me.grpProbabilityDistribution.TabIndex = 2
-        Me.grpProbabilityDistribution.TabStop = False
-        Me.grpProbabilityDistribution.Tag = "Probability_Distribution"
-        Me.grpProbabilityDistribution.Text = "Probability Distribution"
-        '
-        'txtStDev
-        '
-        Me.txtStDev.Location = New System.Drawing.Point(128, 121)
-        Me.txtStDev.Name = "txtStDev"
-        Me.txtStDev.Size = New System.Drawing.Size(100, 20)
-        Me.txtStDev.TabIndex = 6
-        '
-        'txtMean
-        '
-        Me.txtMean.Location = New System.Drawing.Point(128, 95)
-        Me.txtMean.Name = "txtMean"
-        Me.txtMean.Size = New System.Drawing.Size(100, 20)
-        Me.txtMean.TabIndex = 5
-        '
-        'lblStDev
-        '
-        Me.lblStDev.AutoSize = True
-        Me.lblStDev.Location = New System.Drawing.Point(40, 124)
-        Me.lblStDev.Name = "lblStDev"
-        Me.lblStDev.Size = New System.Drawing.Size(43, 13)
-        Me.lblStDev.TabIndex = 4
-        Me.lblStDev.Tag = "St.Dev."
-        Me.lblStDev.Text = "St.Dev."
-        '
-        'lblMean
-        '
-        Me.lblMean.AutoSize = True
-        Me.lblMean.Location = New System.Drawing.Point(40, 102)
-        Me.lblMean.Name = "lblMean"
-        Me.lblMean.Size = New System.Drawing.Size(34, 13)
-        Me.lblMean.TabIndex = 3
-        Me.lblMean.Tag = "Mean"
-        Me.lblMean.Text = "Mean"
-        '
-        'lblParameters
-        '
-        Me.lblParameters.AutoSize = True
-        Me.lblParameters.Location = New System.Drawing.Point(40, 58)
-        Me.lblParameters.Name = "lblParameters"
-        Me.lblParameters.Size = New System.Drawing.Size(60, 13)
-        Me.lblParameters.TabIndex = 2
-        Me.lblParameters.Tag = "Parameters"
-        Me.lblParameters.Text = "Parameters"
-        '
-        'lblDistributionType
-        '
-        Me.lblDistributionType.AutoSize = True
-        Me.lblDistributionType.Location = New System.Drawing.Point(34, 33)
-        Me.lblDistributionType.Name = "lblDistributionType"
-        Me.lblDistributionType.Size = New System.Drawing.Size(86, 13)
-        Me.lblDistributionType.TabIndex = 1
-        Me.lblDistributionType.Tag = "Distribution_Type"
-        Me.lblDistributionType.Text = "Distribution Type"
-        '
-        'cboDistributionType
-        '
-        Me.cboDistributionType.FormattingEnabled = True
-        Me.cboDistributionType.Items.AddRange(New Object() {"Normal", "Geometric", "Exponential", "Extreme Value", "Weibull", "Uniform", "Bernoulli", "Binomial", "Poisson", "Beta", "Chi- Square", "F", "Gamma", "Hypergeometric", "Log-normal", "Multinomial", "Negative Binomial", "Student's t"})
-        Me.cboDistributionType.Location = New System.Drawing.Point(126, 30)
-        Me.cboDistributionType.Name = "cboDistributionType"
-        Me.cboDistributionType.Size = New System.Drawing.Size(102, 21)
-        Me.cboDistributionType.TabIndex = 0
-        '
         'grpSampleDataColumn
         '
         Me.grpSampleDataColumn.Controls.Add(Me.lblSelectedVariable)
-        Me.grpSampleDataColumn.Controls.Add(Me.UcrReceiverSingle)
-        Me.grpSampleDataColumn.Controls.Add(Me.UcrAddRemove)
+        Me.grpSampleDataColumn.Controls.Add(Me.ucrReceiver)
+        Me.grpSampleDataColumn.Controls.Add(Me.ucrSelector)
         Me.grpSampleDataColumn.Location = New System.Drawing.Point(250, 12)
         Me.grpSampleDataColumn.Name = "grpSampleDataColumn"
         Me.grpSampleDataColumn.Size = New System.Drawing.Size(333, 172)
@@ -221,27 +133,6 @@ Partial Class dlgRandomSample
         Me.lblSelectedVariable.TabIndex = 2
         Me.lblSelectedVariable.Tag = "Selected_Variable"
         Me.lblSelectedVariable.Text = "Selected Variable"
-        '
-        'UcrReceiverSingle
-        '
-        Me.UcrReceiverSingle.Location = New System.Drawing.Point(226, 56)
-        Me.UcrReceiverSingle.Name = "UcrReceiverSingle"
-        Me.UcrReceiverSingle.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReceiverSingle.TabIndex = 1
-        '
-        'UcrAddRemove
-        '
-        Me.UcrAddRemove.Location = New System.Drawing.Point(8, 30)
-        Me.UcrAddRemove.Name = "UcrAddRemove"
-        Me.UcrAddRemove.Size = New System.Drawing.Size(201, 136)
-        Me.UcrAddRemove.TabIndex = 0
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(85, 345)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 55)
-        Me.ucrBase.TabIndex = 0
         '
         'chkPlot
         '
@@ -271,16 +162,44 @@ Partial Class dlgRandomSample
         Me.txtSeed.Size = New System.Drawing.Size(47, 20)
         Me.txtSeed.TabIndex = 6
         '
+        'ucrDistributionsWithParameters1
+        '
+        Me.ucrDistributionsWithParameters1.Location = New System.Drawing.Point(12, 190)
+        Me.ucrDistributionsWithParameters1.Name = "ucrDistributionsWithParameters1"
+        Me.ucrDistributionsWithParameters1.Size = New System.Drawing.Size(221, 156)
+        Me.ucrDistributionsWithParameters1.TabIndex = 7
+        '
+        'ucrReceiver
+        '
+        Me.ucrReceiver.Location = New System.Drawing.Point(226, 56)
+        Me.ucrReceiver.Name = "ucrReceiver"
+        Me.ucrReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiver.TabIndex = 1
+        '
+        'ucrSelector
+        '
+        Me.ucrSelector.Location = New System.Drawing.Point(8, 30)
+        Me.ucrSelector.Name = "ucrSelector"
+        Me.ucrSelector.Size = New System.Drawing.Size(201, 136)
+        Me.ucrSelector.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(85, 345)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 55)
+        Me.ucrBase.TabIndex = 0
+        '
         'dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(589, 405)
+        Me.Controls.Add(Me.ucrDistributionsWithParameters1)
         Me.Controls.Add(Me.txtSeed)
         Me.Controls.Add(Me.lblSeed)
         Me.Controls.Add(Me.chkPlot)
         Me.Controls.Add(Me.grpSampleDataColumn)
-        Me.Controls.Add(Me.grpProbabilityDistribution)
         Me.Controls.Add(Me.grpSampling)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -291,8 +210,6 @@ Partial Class dlgRandomSample
         Me.Text = "Generate Random Sample"
         Me.grpSampling.ResumeLayout(False)
         Me.grpSampling.PerformLayout()
-        Me.grpProbabilityDistribution.ResumeLayout(False)
-        Me.grpProbabilityDistribution.PerformLayout()
         Me.grpSampleDataColumn.ResumeLayout(False)
         Me.grpSampleDataColumn.PerformLayout()
         Me.ResumeLayout(False)
@@ -308,19 +225,12 @@ Partial Class dlgRandomSample
     Friend WithEvents lblNumberofSamples As Label
     Friend WithEvents cboSampleType As ComboBox
     Friend WithEvents lblSampleType As Label
-    Friend WithEvents grpProbabilityDistribution As GroupBox
-    Friend WithEvents lblParameters As Label
-    Friend WithEvents lblDistributionType As Label
-    Friend WithEvents cboDistributionType As ComboBox
-    Friend WithEvents txtStDev As TextBox
-    Friend WithEvents txtMean As TextBox
-    Friend WithEvents lblStDev As Label
-    Friend WithEvents lblMean As Label
     Friend WithEvents grpSampleDataColumn As GroupBox
-    Friend WithEvents UcrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents UcrReceiverSingle As ucrReceiverSingle
+    Friend WithEvents ucrSelector As ucrSelectorAddRemove
+    Friend WithEvents ucrReceiver As ucrReceiverSingle
     Friend WithEvents lblSelectedVariable As Label
     Friend WithEvents chkPlot As CheckBox
     Friend WithEvents lblSeed As Label
     Friend WithEvents txtSeed As TextBox
+    Friend WithEvents ucrDistributionsWithParameters1 As ucrDistributionsWithParameters
 End Class
