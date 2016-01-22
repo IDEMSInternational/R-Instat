@@ -27,16 +27,16 @@ Partial Class dlgGeneral
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 293)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 278)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 51)
         Me.ucrBase.TabIndex = 0
         '
         'dlgGeneral
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 324)
+        Me.ClientSize = New System.Drawing.Size(428, 332)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgGeneral"
