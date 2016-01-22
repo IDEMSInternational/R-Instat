@@ -25,6 +25,8 @@ Partial Class dlgColumnStats
         Me.tabColumnStatistics = New System.Windows.Forms.TabControl()
         Me.tabGeneral = New System.Windows.Forms.TabPage()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
+        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.grpStatistcsRequired = New System.Windows.Forms.GroupBox()
         Me.chkMedian = New System.Windows.Forms.CheckBox()
         Me.chkMissing = New System.Windows.Forms.CheckBox()
@@ -48,8 +50,6 @@ Partial Class dlgColumnStats
         Me.chkMissingData = New System.Windows.Forms.CheckBox()
         Me.chkSetSummaryToMissingIfOver = New System.Windows.Forms.CheckBox()
         Me.chkIgnoreMissingValues = New System.Windows.Forms.CheckBox()
-        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.tabColumnStatistics.SuspendLayout()
         Me.tabGeneral.SuspendLayout()
@@ -97,6 +97,20 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables.TabIndex = 12
         Me.lblSelectedVariables.Tag = "Selected_Variables"
         Me.lblSelectedVariables.Text = "Selected Variables"
+        '
+        'ucrReceiverMultiple
+        '
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(225, 22)
+        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
+        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(134, 135)
+        Me.ucrReceiverMultiple.TabIndex = 11
+        '
+        'ucrAddRemove
+        '
+        Me.ucrAddRemove.Location = New System.Drawing.Point(0, 19)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(208, 140)
+        Me.ucrAddRemove.TabIndex = 10
         '
         'grpStatistcsRequired
         '
@@ -360,32 +374,18 @@ Partial Class dlgColumnStats
         Me.chkIgnoreMissingValues.Text = "Ignore missing Values "
         Me.chkIgnoreMissingValues.UseVisualStyleBackColor = True
         '
-        'ucrReceiverMultiple
-        '
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(225, 22)
-        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
-        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(134, 135)
-        Me.ucrReceiverMultiple.TabIndex = 11
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(0, 19)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(208, 140)
-        Me.ucrAddRemove.TabIndex = 10
-        '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(60, 287)
+        Me.ucrBase.Location = New System.Drawing.Point(72, 279)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 2
         '
         'dlgColumnStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(567, 319)
+        Me.ClientSize = New System.Drawing.Size(557, 332)
         Me.Controls.Add(Me.tabColumnStatistics)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow

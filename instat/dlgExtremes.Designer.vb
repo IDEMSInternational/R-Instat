@@ -49,7 +49,7 @@ Partial Class dlgExtremes
         '
         Me.ucrBase.Location = New System.Drawing.Point(21, 261)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 51)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove
@@ -235,7 +235,7 @@ Partial Class dlgExtremes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(450, 298)
+        Me.ClientSize = New System.Drawing.Size(447, 315)
         Me.Controls.Add(Me.chkProbabilityPlot)
         Me.Controls.Add(Me.txtAnd)
         Me.Controls.Add(Me.lblAnd)

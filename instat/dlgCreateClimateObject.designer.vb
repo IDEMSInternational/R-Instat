@@ -22,31 +22,32 @@ Partial Class dlgCreateClimateObject
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'UcrButtons1
+        'ucrBase
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(12, 174)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(410, 32)
-        Me.UcrButtons1.TabIndex = 0
+        Me.ucrBase.Location = New System.Drawing.Point(12, 291)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgCreateClimateObject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(433, 211)
-        Me.Controls.Add(Me.UcrButtons1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.ClientSize = New System.Drawing.Size(433, 359)
+        Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCreateClimateObject"
-        Me.Tag = "Create_Climate_Object"
-        Me.Text = "dlgCreateClimateObject"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Create_climate_object"
+        Me.Text = "Create climate object"
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
 End Class

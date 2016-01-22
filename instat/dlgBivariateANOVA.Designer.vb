@@ -137,14 +137,14 @@ Partial Class dlgBivariateANOVA
         '
         Me.ucrBase.Location = New System.Drawing.Point(0, 297)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
         Me.ucrBase.TabIndex = 0
         '
         'dlgBivariateANOVA
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(411, 331)
+        Me.ClientSize = New System.Drawing.Size(405, 351)
         Me.Controls.Add(Me.lblBlockingFactor)
         Me.Controls.Add(Me.lblTreatmentFactor)
         Me.Controls.Add(Me.lbl2ndRespVar)
