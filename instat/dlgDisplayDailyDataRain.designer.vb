@@ -27,23 +27,24 @@ Partial Class dlgDisplayDailyDataRain
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(20, 228)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 239)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 62)
         Me.ucrBase.TabIndex = 0
         '
         'dlgDisplayDailyDataRain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(442, 262)
+        Me.ClientSize = New System.Drawing.Size(442, 313)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDisplayDailyDataRain"
-        Me.Tag = "Display_Daily_Data_Rain"
-        Me.Text = "dlgDisplayDailyDataRain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Display_daily_data_rain"
+        Me.Text = "Display daily data rain"
         Me.ResumeLayout(False)
 
     End Sub
