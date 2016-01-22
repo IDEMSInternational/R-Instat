@@ -183,16 +183,16 @@ Partial Class dlgOneSample
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(43, 296)
+        Me.ucrBase.Location = New System.Drawing.Point(73, 285)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 53)
         Me.ucrBase.TabIndex = 7
         '
         'dlgOneSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(551, 336)
+        Me.ClientSize = New System.Drawing.Size(551, 339)
         Me.Controls.Add(Me.ucrReceiverDataColumn)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
