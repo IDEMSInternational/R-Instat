@@ -50,7 +50,7 @@ Partial Class dlgSummaryTables
         '
         Me.ucrBase.Location = New System.Drawing.Point(2, 295)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(407, 55)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove
@@ -234,7 +234,7 @@ Partial Class dlgSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(408, 332)
+        Me.ClientSize = New System.Drawing.Size(408, 350)
         Me.Controls.Add(Me.chkTobeImplementedLater)
         Me.Controls.Add(Me.cboWeights)
         Me.Controls.Add(Me.chkWeights)
