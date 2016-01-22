@@ -28,10 +28,10 @@ Partial Class dlgDescriptiveStatistics
         Me.chkBoxPlot = New System.Windows.Forms.CheckBox()
         Me.chkStemAndLeaf = New System.Windows.Forms.CheckBox()
         Me.chkGraphics = New System.Windows.Forms.CheckBox()
-        Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataSelector = New instat.ucrSelectorAddRemove()
         Me.ucrObjectReceiver = New instat.ucrReceiverSingle()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpgraphics.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -100,14 +100,6 @@ Partial Class dlgDescriptiveStatistics
         Me.chkGraphics.Text = "Graphics "
         Me.chkGraphics.UseVisualStyleBackColor = True
         '
-        'ucrBase
-        '
-        Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ucrBase.Location = New System.Drawing.Point(0, 195)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(407, 30)
-        Me.ucrBase.TabIndex = 91
-        '
         'ucrDataSelector
         '
         Me.ucrDataSelector.Location = New System.Drawing.Point(3, 1)
@@ -132,15 +124,22 @@ Partial Class dlgDescriptiveStatistics
         Me.lblSelectedVariable.Tag = "Selected_Variable"
         Me.lblSelectedVariable.Text = "Selected Variable"
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 198)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 95
+        '
         'dlgDescriptiveStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(407, 225)
+        Me.ClientSize = New System.Drawing.Size(429, 252)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrObjectReceiver)
         Me.Controls.Add(Me.ucrDataSelector)
-        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdStatistics)
         Me.Controls.Add(Me.grpgraphics)
         Me.Controls.Add(Me.chkGraphics)
@@ -162,8 +161,8 @@ Partial Class dlgDescriptiveStatistics
     Friend WithEvents chkBoxPlot As CheckBox
     Friend WithEvents chkStemAndLeaf As CheckBox
     Friend WithEvents chkGraphics As CheckBox
-    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrDataSelector As ucrSelectorAddRemove
     Friend WithEvents ucrObjectReceiver As ucrReceiverSingle
     Friend WithEvents lblSelectedVariable As Label
+    Friend WithEvents ucrBase As ucrButtons
 End Class
