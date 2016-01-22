@@ -27,23 +27,24 @@ Partial Class dlgDisplayDaily
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 230)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 230)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 67)
         Me.ucrBase.TabIndex = 0
         '
         'dlgDisplayDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 262)
+        Me.ClientSize = New System.Drawing.Size(441, 309)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDisplayDaily"
-        Me.Tag = "Display_Daily"
-        Me.Text = "dlgDisplayDaily"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Display_daily"
+        Me.Text = "Display daily"
         Me.ResumeLayout(False)
 
     End Sub
