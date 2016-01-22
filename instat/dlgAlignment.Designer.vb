@@ -95,17 +95,17 @@ Partial Class dlgAlignment
         '
         'ucrBase
         '
-        Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ucrBase.Location = New System.Drawing.Point(0, 130)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 138)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(424, 32)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 8
         '
         'dlgAlignment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 162)
+        Me.ClientSize = New System.Drawing.Size(431, 195)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblSelectedColumns)
         Me.Controls.Add(Me.ucrMultiple)
         Me.Controls.Add(Me.txtColumnWidth)
@@ -113,7 +113,6 @@ Partial Class dlgAlignment
         Me.Controls.Add(Me.lblAlignment)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.lstAlignment)
-        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgAlignment"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -123,8 +122,6 @@ Partial Class dlgAlignment
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lstAlignment As ListBox
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents lblAlignment As Label
@@ -132,4 +129,5 @@ Partial Class dlgAlignment
     Friend WithEvents txtColumnWidth As TextBox
     Friend WithEvents ucrMultiple As ucrReceiverMultiple
     Friend WithEvents lblSelectedColumns As Label
+    Friend WithEvents ucrBase As ucrButtons
 End Class

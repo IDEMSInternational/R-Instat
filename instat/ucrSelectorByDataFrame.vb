@@ -1,7 +1,7 @@
 ﻿Public Class ucrSelectorByDataFrame
     Private Sub ucrSelectorByDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     End Sub
-    Public Overrides Sub LoadList()
+    Public Overrides Sub LoadList(Optional strDataType As String = "all")
         frmMain.clsRLink.FillColumnNames(ucrAvailableDataFrames.cboAvailableDataFrames.Text, lstColumns:=lstAvailableVariable)
     End Sub
 
