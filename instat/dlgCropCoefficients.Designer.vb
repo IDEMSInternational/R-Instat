@@ -27,22 +27,22 @@ Partial Class dlgCropCoefficients
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 220)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 230)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 65)
         Me.ucrBase.TabIndex = 0
         '
         'dlgCropCoefficients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 251)
+        Me.ClientSize = New System.Drawing.Size(424, 307)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgCropCoefficients"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Crop_Coefficients"
-        Me.Text = "Crop Coefficients"
+        Me.Tag = "Crop_coefficients"
+        Me.Text = "Crop coefficients"
         Me.ResumeLayout(False)
 
     End Sub

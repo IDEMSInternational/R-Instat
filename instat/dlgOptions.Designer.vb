@@ -22,22 +22,17 @@ Partial Class dlgOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
         Me.tbcOptions = New System.Windows.Forms.TabControl()
         Me.tbpLanguageSettings = New System.Windows.Forms.TabPage()
-        Me.rdoKiswahili = New System.Windows.Forms.RadioButton()
-        Me.rdoFrench = New System.Windows.Forms.RadioButton()
         Me.rdoEnglish = New System.Windows.Forms.RadioButton()
+        Me.rdoFrench = New System.Windows.Forms.RadioButton()
+        Me.rdoKiswahili = New System.Windows.Forms.RadioButton()
+        Me.cmdOk = New System.Windows.Forms.Button()
+        Me.cmdApply = New System.Windows.Forms.Button()
+        Me.cmdCancel = New System.Windows.Forms.Button()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguageSettings.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 278)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 59)
-        Me.ucrBase.TabIndex = 0
         '
         'tbcOptions
         '
@@ -62,17 +57,17 @@ Partial Class dlgOptions
         Me.tbpLanguageSettings.Text = "Language Settings"
         Me.tbpLanguageSettings.UseVisualStyleBackColor = True
         '
-        'rdoKiswahili
+        'rdoEnglish
         '
-        Me.rdoKiswahili.AutoSize = True
-        Me.rdoKiswahili.Location = New System.Drawing.Point(20, 19)
-        Me.rdoKiswahili.Name = "rdoKiswahili"
-        Me.rdoKiswahili.Size = New System.Drawing.Size(65, 17)
-        Me.rdoKiswahili.TabIndex = 0
-        Me.rdoKiswahili.TabStop = True
-        Me.rdoKiswahili.Tag = "Kiswahili"
-        Me.rdoKiswahili.Text = "Kiswahili"
-        Me.rdoKiswahili.UseVisualStyleBackColor = True
+        Me.rdoEnglish.AutoSize = True
+        Me.rdoEnglish.Location = New System.Drawing.Point(20, 65)
+        Me.rdoEnglish.Name = "rdoEnglish"
+        Me.rdoEnglish.Size = New System.Drawing.Size(59, 17)
+        Me.rdoEnglish.TabIndex = 0
+        Me.rdoEnglish.TabStop = True
+        Me.rdoEnglish.Tag = "English"
+        Me.rdoEnglish.Text = "English"
+        Me.rdoEnglish.UseVisualStyleBackColor = True
         '
         'rdoFrench
         '
@@ -86,25 +81,57 @@ Partial Class dlgOptions
         Me.rdoFrench.Text = "French"
         Me.rdoFrench.UseVisualStyleBackColor = True
         '
-        'rdoEnglish
+        'rdoKiswahili
         '
-        Me.rdoEnglish.AutoSize = True
-        Me.rdoEnglish.Location = New System.Drawing.Point(20, 65)
-        Me.rdoEnglish.Name = "rdoEnglish"
-        Me.rdoEnglish.Size = New System.Drawing.Size(59, 17)
-        Me.rdoEnglish.TabIndex = 0
-        Me.rdoEnglish.TabStop = True
-        Me.rdoEnglish.Tag = "English"
-        Me.rdoEnglish.Text = "English"
-        Me.rdoEnglish.UseVisualStyleBackColor = True
+        Me.rdoKiswahili.AutoSize = True
+        Me.rdoKiswahili.Location = New System.Drawing.Point(20, 19)
+        Me.rdoKiswahili.Name = "rdoKiswahili"
+        Me.rdoKiswahili.Size = New System.Drawing.Size(65, 17)
+        Me.rdoKiswahili.TabIndex = 0
+        Me.rdoKiswahili.TabStop = True
+        Me.rdoKiswahili.Tag = "Kiswahili"
+        Me.rdoKiswahili.Text = "Kiswahili"
+        Me.rdoKiswahili.UseVisualStyleBackColor = True
+        '
+        'cmdOk
+        '
+        Me.cmdOk.Location = New System.Drawing.Point(17, 279)
+        Me.cmdOk.Name = "cmdOk"
+        Me.cmdOk.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOk.TabIndex = 2
+        Me.cmdOk.Tag = "Ok"
+        Me.cmdOk.Text = "&Ok"
+        Me.cmdOk.UseVisualStyleBackColor = True
+        '
+        'cmdApply
+        '
+        Me.cmdApply.Location = New System.Drawing.Point(98, 279)
+        Me.cmdApply.Name = "cmdApply"
+        Me.cmdApply.Size = New System.Drawing.Size(75, 23)
+        Me.cmdApply.TabIndex = 2
+        Me.cmdApply.Tag = "Apply"
+        Me.cmdApply.Text = "&Apply"
+        Me.cmdApply.UseVisualStyleBackColor = True
+        '
+        'cmdCancel
+        '
+        Me.cmdCancel.Location = New System.Drawing.Point(179, 279)
+        Me.cmdCancel.Name = "cmdCancel"
+        Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
+        Me.cmdCancel.TabIndex = 2
+        Me.cmdCancel.Tag = "Cancel"
+        Me.cmdCancel.Text = "&Cancel"
+        Me.cmdCancel.UseVisualStyleBackColor = True
         '
         'dlgOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(425, 330)
+        Me.Controls.Add(Me.cmdCancel)
+        Me.Controls.Add(Me.cmdApply)
+        Me.Controls.Add(Me.cmdOk)
         Me.Controls.Add(Me.tbcOptions)
-        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgOptions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -116,11 +143,12 @@ Partial Class dlgOptions
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents tbcOptions As TabControl
     Friend WithEvents tbpLanguageSettings As TabPage
     Friend WithEvents rdoEnglish As RadioButton
     Friend WithEvents rdoFrench As RadioButton
     Friend WithEvents rdoKiswahili As RadioButton
+    Friend WithEvents cmdOk As Button
+    Friend WithEvents cmdApply As Button
+    Friend WithEvents cmdCancel As Button
 End Class

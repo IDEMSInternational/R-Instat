@@ -27,23 +27,24 @@ Partial Class dlgBoxplotMethod
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 218)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 274)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 57)
         Me.ucrBase.TabIndex = 0
         '
         'dlgBoxplotMethod
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 262)
+        Me.ClientSize = New System.Drawing.Size(441, 343)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgBoxplotMethod"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Boxplot Method"
+        Me.Tag = "Boxplot_method"
+        Me.Text = "Boxplot method"
         Me.ResumeLayout(False)
 
     End Sub
