@@ -19,6 +19,8 @@ Imports System.Threading
 Imports instat.Translations
 
 Public Class dlgOptions
+    Public StrComment As String
+
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -30,6 +32,8 @@ Public Class dlgOptions
     End Sub
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+        StrComment = txtComment.Text
+
         If rdoEnglish.Checked = True Then
             Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
             Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
