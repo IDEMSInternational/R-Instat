@@ -33,8 +33,14 @@ Public Class dlgOptions
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
         StrComment = txtComment.Text
+        If Not (rdoEnglish.Checked And rdoFrench.Checked And rdoFrench.Checked) Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+            autoTranslate(frmMain)
+            autoTranslate(Me)
+            Me.Close()
 
-        If rdoEnglish.Checked = True Then
+        ElseIf rdoEnglish.Checked = True Then
             Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
             Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
             autoTranslate(frmMain)
@@ -53,8 +59,6 @@ Public Class dlgOptions
             rdoFrench.Checked = False
             rdoKiswahili.Checked = False
             Me.Close()
-
-            'End If
         Else
             Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
             Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
@@ -68,7 +72,15 @@ Public Class dlgOptions
     End Sub
 
     Private Sub cmdApply_Click(sender As Object, e As EventArgs) Handles cmdApply.Click
-        If rdoEnglish.Checked = True Then
+        StrComment = txtComment.Text
+
+        If Not (rdoEnglish.Checked And rdoFrench.Checked And rdoFrench.Checked) Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+            autoTranslate(frmMain)
+            autoTranslate(Me)
+
+        ElseIf rdoEnglish.Checked = True Then
             Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
             Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
             autoTranslate(frmMain)
