@@ -31,12 +31,12 @@ Partial Class dlgRandomSample
         Me.lblSampleType = New System.Windows.Forms.Label()
         Me.grpSampleDataColumn = New System.Windows.Forms.GroupBox()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
+        Me.ucrReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSelector = New instat.ucrSelectorAddRemove()
         Me.chkPlot = New System.Windows.Forms.CheckBox()
         Me.lblSeed = New System.Windows.Forms.Label()
         Me.txtSeed = New System.Windows.Forms.TextBox()
-        Me.ucrDistributionsWithParameters1 = New instat.ucrDistributionsWithParameters()
-        Me.ucrReceiver = New instat.ucrReceiverSingle()
-        Me.ucrSelector = New instat.ucrSelectorAddRemove()
+        Me.ucrDistWithParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpSampling.SuspendLayout()
         Me.grpSampleDataColumn.SuspendLayout()
@@ -134,6 +134,20 @@ Partial Class dlgRandomSample
         Me.lblSelectedVariable.Tag = "Selected_Variable"
         Me.lblSelectedVariable.Text = "Selected Variable"
         '
+        'ucrReceiver
+        '
+        Me.ucrReceiver.Location = New System.Drawing.Point(226, 56)
+        Me.ucrReceiver.Name = "ucrReceiver"
+        Me.ucrReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiver.TabIndex = 1
+        '
+        'ucrSelector
+        '
+        Me.ucrSelector.Location = New System.Drawing.Point(8, 30)
+        Me.ucrSelector.Name = "ucrSelector"
+        Me.ucrSelector.Size = New System.Drawing.Size(201, 136)
+        Me.ucrSelector.TabIndex = 0
+        '
         'chkPlot
         '
         Me.chkPlot.AutoSize = True
@@ -162,26 +176,12 @@ Partial Class dlgRandomSample
         Me.txtSeed.Size = New System.Drawing.Size(47, 20)
         Me.txtSeed.TabIndex = 6
         '
-        'ucrDistributionsWithParameters1
+        'ucrDistWithParameters
         '
-        Me.ucrDistributionsWithParameters1.Location = New System.Drawing.Point(12, 190)
-        Me.ucrDistributionsWithParameters1.Name = "ucrDistributionsWithParameters1"
-        Me.ucrDistributionsWithParameters1.Size = New System.Drawing.Size(221, 156)
-        Me.ucrDistributionsWithParameters1.TabIndex = 7
-        '
-        'ucrReceiver
-        '
-        Me.ucrReceiver.Location = New System.Drawing.Point(226, 56)
-        Me.ucrReceiver.Name = "ucrReceiver"
-        Me.ucrReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiver.TabIndex = 1
-        '
-        'ucrSelector
-        '
-        Me.ucrSelector.Location = New System.Drawing.Point(8, 30)
-        Me.ucrSelector.Name = "ucrSelector"
-        Me.ucrSelector.Size = New System.Drawing.Size(201, 136)
-        Me.ucrSelector.TabIndex = 0
+        Me.ucrDistWithParameters.Location = New System.Drawing.Point(12, 190)
+        Me.ucrDistWithParameters.Name = "ucrDistWithParameters"
+        Me.ucrDistWithParameters.Size = New System.Drawing.Size(221, 156)
+        Me.ucrDistWithParameters.TabIndex = 7
         '
         'ucrBase
         '
@@ -195,7 +195,7 @@ Partial Class dlgRandomSample
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(589, 405)
-        Me.Controls.Add(Me.ucrDistributionsWithParameters1)
+        Me.Controls.Add(Me.ucrDistWithParameters)
         Me.Controls.Add(Me.txtSeed)
         Me.Controls.Add(Me.lblSeed)
         Me.Controls.Add(Me.chkPlot)
@@ -232,5 +232,5 @@ Partial Class dlgRandomSample
     Friend WithEvents chkPlot As CheckBox
     Friend WithEvents lblSeed As Label
     Friend WithEvents txtSeed As TextBox
-    Friend WithEvents ucrDistributionsWithParameters1 As ucrDistributionsWithParameters
+    Friend WithEvents ucrDistWithParameters As ucrDistributionsWithParameters
 End Class
