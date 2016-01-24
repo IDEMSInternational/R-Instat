@@ -98,7 +98,7 @@ Partial Class ucrDistributionsWithParameters
         Me.Controls.Add(Me.lblParameter1)
         Me.Controls.Add(Me.lblDistributionParameters)
         Me.Name = "ucrDistributionsWithParameters"
-        Me.Size = New System.Drawing.Size(225, 165)
+        Me.Size = New System.Drawing.Size(221, 156)
         Me.Controls.SetChildIndex(Me.lblDistributionParameters, 0)
         Me.Controls.SetChildIndex(Me.lblParameter1, 0)
         Me.Controls.SetChildIndex(Me.lblParameter2, 0)

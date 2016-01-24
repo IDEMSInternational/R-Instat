@@ -23,7 +23,7 @@ Public Class RLink
     Dim strInstatObjectPath As String = "static/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
     Public clsEngine As REngine
-    Dim txtOutput As New TextBox
+    Dim txtOutput As New RichTextBox
     Dim txtLog As New TextBox
     Public bLog As Boolean = False
     Public bOutput As Boolean = False
@@ -34,7 +34,7 @@ Public Class RLink
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
     End Sub
 
-    Public Sub SetOutput(tempOutput As TextBox)
+    Public Sub SetOutput(tempOutput As RichTextBox)
         txtOutput = tempOutput
         bOutput = True
     End Sub
@@ -165,11 +165,15 @@ Public Class RLink
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
     End Sub
 
+    Public Sub CreateNewInstatObject()
+        RunScript(strInstatDataObject & " <- instat_obj$new()")
+        bInstatObjectExists = True
+    End Sub
+
     Public Sub LoadData(strDataName As String, strFile As String)
         Dim clsRSyntax As New RSyntax
         If Not bInstatObjectExists Then
-            RunScript(strInstatDataObject & " <- instat_obj$new()")
-            bInstatObjectExists = True
+            CreateNewInstatObject()
         End If
         clsRSyntax.SetFunction("read.csv")
         clsRSyntax.AddParameter("file", strFile)
@@ -178,14 +182,15 @@ Public Class RLink
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
-    Public Sub FillListView(lstView As ListView)
+    Public Sub FillListView(lstView As ListView, Optional strDataType As String = "All")
         Dim dfList As GenericVector
         Dim dfTemp As DataFrame
         Dim i As Integer
         Dim grps As New ListViewGroup
         If bInstatObjectExists Then
+            lstView.Clear()
             lstView.Columns.Add("Available Data")
-            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variables_metadata()").AsList
+            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variables_metadata(data_type = " & Chr(34) & strDataType & Chr(34) & ")").AsList
             For i = 0 To dfList.Count - 1
                 grps = New ListViewGroup(dfList.Names(i), HorizontalAlignment.Left)
                 If Not lstView.Groups.Contains(grps) Then

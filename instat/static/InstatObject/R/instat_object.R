@@ -134,15 +134,15 @@ instat_obj$methods(get_data = function(obj_name) {
   } 
 )
 
-instat_obj$methods(get_variables_metadata = function(data_name) { 
+instat_obj$methods(get_variables_metadata = function(data_name, data_type = "all") { 
   if(missing(data_name)) {
     retlist <- list()
   for ( i in (1:length(data_objects)) ) {
-    retlist[[names(data_objects)[[i]]]] = data_objects[[i]]$get_variables_metadata()
+    retlist[[names(data_objects)[[i]]]] = data_objects[[i]]$get_variables_metadata(data_type = data_type)
   }
   return(retlist)
   }
-  else return(data_objects[[data_name]]$get_variables_metadata())
+  else return(data_objects[[data_name]]$get_variables_metadata(data_type = data_type))
 } 
 )
 
@@ -331,10 +331,18 @@ instat_obj$methods(insert_column_in_data = function(obj_name, col_name = "", col
 }
 )
 
-instat_obj$methods(move_column_in_data = function(obj_name, col_name = "", col_number) {
+instat_obj$methods(move_column_in_data = function(obj_name, col_name = "", col_number){
   if(!is.character(obj_name)) stop("obj_name must be of type character")
   if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
   
   data_objects[[obj_name]]$move_column_in_data(col_name = col_name, col_number = col_number)
+}
+)
+
+instat_obj$methods(insert_row_in_data = function(obj_name, row_num, row_data = c()) {
+  if(!is.character(obj_name)) stop("obj_name must be of type character")
+  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  
+  data_objects[[obj_name]]$insert_row_in_data(row_num = row_num, row_data = row_data)
 }
 )

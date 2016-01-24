@@ -71,9 +71,9 @@ Partial Class dlgCorrelation
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(3, 297)
+        Me.ucrBase.Location = New System.Drawing.Point(17, 291)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(409, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(409, 57)
         Me.ucrBase.TabIndex = 1
         '
         'chkDisplayPValues
@@ -102,7 +102,7 @@ Partial Class dlgCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(442, 341)
+        Me.ClientSize = New System.Drawing.Size(438, 344)
         Me.Controls.Add(Me.chkDisplayPlot)
         Me.Controls.Add(Me.chkDisplayPValues)
         Me.Controls.Add(Me.ucrBase)

@@ -39,9 +39,9 @@ Partial Class dlgChangeType
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 267)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 267)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrChangetypeReceiver
@@ -132,7 +132,7 @@ Partial Class dlgChangeType
         '
         'chkReadTextAsDateValues
         '
-        Me.chkReadTextAsDateValues.Location = New System.Drawing.Point(148, 218)
+        Me.chkReadTextAsDateValues.Location = New System.Drawing.Point(148, 212)
         Me.chkReadTextAsDateValues.Name = "chkReadTextAsDateValues"
         Me.chkReadTextAsDateValues.Size = New System.Drawing.Size(16, 23)
         Me.chkReadTextAsDateValues.TabIndex = 0
@@ -152,7 +152,7 @@ Partial Class dlgChangeType
         'lblReadTextAsDateValues
         '
         Me.lblReadTextAsDateValues.AutoSize = True
-        Me.lblReadTextAsDateValues.Location = New System.Drawing.Point(170, 222)
+        Me.lblReadTextAsDateValues.Location = New System.Drawing.Point(170, 217)
         Me.lblReadTextAsDateValues.Name = "lblReadTextAsDateValues"
         Me.lblReadTextAsDateValues.Size = New System.Drawing.Size(125, 13)
         Me.lblReadTextAsDateValues.TabIndex = 6
@@ -163,7 +163,7 @@ Partial Class dlgChangeType
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 302)
+        Me.ClientSize = New System.Drawing.Size(423, 326)
         Me.Controls.Add(Me.lblReadTextAsDateValues)
         Me.Controls.Add(Me.cmdDateFormat)
         Me.Controls.Add(Me.chkReadTextAsDateValues)
