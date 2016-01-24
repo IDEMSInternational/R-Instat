@@ -142,12 +142,20 @@ data_obj$methods(get_data = function() {
 }
 )
 
-data_obj$methods(get_variables_metadata = function(include_all = TRUE) {
+data_obj$methods(get_variables_metadata = function(include_all = TRUE, data_type = "all") {
   .self$update_variables_metadata()
   if(!include_all) return(variables_metadata)
   else {
     out = variables_metadata
     out[[data_type_label]] = sapply(data, class)
+    if(data_type != "all") {
+      if(data_type == "numeric") {
+        out = out[out[[data_type_label]] %in% c("numeric", "integer") , ]
+      }
+      else {
+      out = out[out[[data_type_label]]==data_type, ]
+      }
+    }
     return(out)
   }
 }
@@ -380,8 +388,8 @@ data_obj$methods(move_column_in_data = function(col_name = "", col_number) {
     stop(col_name, " is not a column in", get_metadata(data_name_label))
   }
   
-  dat1 <<- as.data.frame(data[,c(col_name)])
-  names(dat1) <<- col_name
+  dat1 <- as.data.frame(data[,c(col_name)])
+  names(dat1) <- col_name
   
   names(data)[names(data) == col_name] <<- "to_delete"
   
@@ -401,6 +409,35 @@ data_obj$methods(move_column_in_data = function(col_name = "", col_number) {
 }
 )
 
+data_obj$methods(insert_row_in_data = function(row_num, row_data = c()) {
+  
+  if (row_num != as.integer(row_num) || row_num < 1 || row_num >  nrow(data)+1 ) {
+    stop( paste("index must be an integer between 1 and", nrow(data)+1, ".") )
+  }
+  if (length(row_data)==0){
+    row_data <- rep(NA,ncol(data))
+    warning("You are inserting an empty row to data")
+  }
+  if(length(row_data)>0 && length(row_data)!=ncol(data)){
+    stop("The dimension of Row data is different from that of the data")
+  }
+  
+  if(row_num==1){
+    data <<- rbind(row_data, data)
+  }
+  
+  else if (row_num == (nrow(data)+1)){
+    data <<- rbind(data,row_data)
+  }
+  else {
+    data <<- rbind(data[1:(row_num-1),],row_data,data[(row_num):nrow(data),])
+    
+  }
+  .self$append_to_changes(list(Inserted_row, row_num))
+  .self$set_data_changed(TRUE)
+}
+)
+
 #Labels for strings which will be added to logs
 Set_property="Set"
 Added_col="Added column"
@@ -413,6 +450,8 @@ Replaced_value="Replaced value"
 Removed_row="Removed row"
 Inserted_col = "Inserted column"
 Move_col = "Moved column"
+Inserted_row = "Inserted row"
+
 #meta data labels
 data_name_label="data_name"
 is_calculated_label="is_calculated"

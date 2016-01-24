@@ -34,9 +34,9 @@ Partial Class dlgTwoWayAnova
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 237)
+        Me.ucrBase.Location = New System.Drawing.Point(2, 225)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove
@@ -101,7 +101,7 @@ Partial Class dlgTwoWayAnova
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 270)
+        Me.ClientSize = New System.Drawing.Size(412, 282)
         Me.Controls.Add(Me.lblColumnFactor)
         Me.Controls.Add(Me.lblRowFactor)
         Me.Controls.Add(Me.lblCounts)

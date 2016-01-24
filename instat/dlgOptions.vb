@@ -14,9 +14,87 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Globalization
+Imports System.Threading
 Imports instat.Translations
+
 Public Class dlgOptions
+    Public StrComment As String
+
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+    End Sub
+    Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
+        rdoEnglish.Checked = False
+        rdoFrench.Checked = False
+        rdoKiswahili.Checked = False
+        Me.Close()
+    End Sub
+
+    Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+        StrComment = txtComment.Text
+        If Not (rdoEnglish.Checked And rdoFrench.Checked And rdoFrench.Checked) Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+            autoTranslate(frmMain)
+            autoTranslate(Me)
+            Me.Close()
+
+        ElseIf rdoEnglish.Checked = True Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+            autoTranslate(frmMain)
+            autoTranslate(Me)
+            rdoEnglish.Checked = False
+            rdoFrench.Checked = False
+            rdoKiswahili.Checked = False
+            Me.Close()
+
+        ElseIf rdoFrench.Checked = True Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("fr-FR")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("fr-FR")
+            autoTranslate(frmMain)
+            autoTranslate(Me)
+            rdoEnglish.Checked = False
+            rdoFrench.Checked = False
+            rdoKiswahili.Checked = False
+            Me.Close()
+        Else
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
+            autoTranslate(frmMain)
+            autoTranslate(Me)
+            rdoEnglish.Checked = False
+            rdoFrench.Checked = False
+            rdoKiswahili.Checked = False
+            Me.Close()
+        End If
+    End Sub
+
+    Private Sub cmdApply_Click(sender As Object, e As EventArgs) Handles cmdApply.Click
+        StrComment = txtComment.Text
+
+        If Not (rdoEnglish.Checked And rdoFrench.Checked And rdoFrench.Checked) Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+            autoTranslate(frmMain)
+            autoTranslate(Me)
+
+        ElseIf rdoEnglish.Checked = True Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+            autoTranslate(frmMain)
+            autoTranslate(Me)
+        ElseIf rdoFrench.Checked = True Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("fr-FR")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("fr-FR")
+            autoTranslate(frmMain)
+            autoTranslate(Me)
+        Else
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
+            autoTranslate(frmMain)
+            autoTranslate(Me)
+        End If
     End Sub
 End Class

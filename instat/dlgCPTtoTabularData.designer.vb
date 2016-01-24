@@ -27,23 +27,24 @@ Partial Class dlgCPTtoTabularData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 228)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 291)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 65)
         Me.ucrBase.TabIndex = 0
         '
         'dlgCPTtoTabularData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 262)
+        Me.ClientSize = New System.Drawing.Size(432, 368)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCPTtoTabularData"
-        Me.Tag = "CPT_to_Tabular_Data"
-        Me.Text = "dlgCPTtoTabularData"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "CPT_to_tabular_data"
+        Me.Text = "CPT to tabular data"
         Me.ResumeLayout(False)
 
     End Sub
