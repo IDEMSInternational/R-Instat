@@ -45,5 +45,6 @@ Public Class dlgFileNew
 
     Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         frmMain.clsGrids.UpdateGrids()
+        frmEditor.Show()
     End Sub
 End Class
