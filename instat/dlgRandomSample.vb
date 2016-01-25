@@ -20,8 +20,6 @@ Public Class dlgRandomSample
         ucrBase.clsRsyntax.SetFunction("rnorm")
         ucrBase.clsRsyntax.iCallType = 2
         autoTranslate(Me)
-        ucrReceiver.Selector = ucrSelector
-        ucrReceiver.SetMeAsReceiver()
         ucrBase.OKEnabled(False)
 
     End Sub
