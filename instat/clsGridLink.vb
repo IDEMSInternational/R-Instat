@@ -17,9 +17,9 @@ Imports RDotNet
 Imports unvell.ReoGrid
 
 Public Class clsGridLink
-    Public grdData As ReoGridControl
-    Public grdMetadata As ReoGridControl
-    Public grdVariablesMetadata As ReoGridControl
+    Public grdData As New ReoGridControl
+    Public grdMetadata As New ReoGridControl
+    Public grdVariablesMetadata As New ReoGridControl
     Public bGrdDataExists As Boolean = False
     Public bGrdMetadataExists As Boolean = False
     Public bGrdVariablesMetadataExists As Boolean = False
@@ -110,6 +110,15 @@ Public Class clsGridLink
             FillSheet(dfTemp, "metadata", grdMetadata)
         End If
 
+        If grdData.Worksheets.Count = 0 Then
+            grdData.Visible = False
+            grdVariablesMetadata.Visible = False
+            grdMetadata.Visible = False
+        Else
+            grdData.Visible = True
+            grdVariablesMetadata.Visible = True
+            grdMetadata.Visible = True
+        End If
     End Sub
 
     Public Sub SetData(grdTemp As ReoGridControl)
