@@ -16,26 +16,35 @@
 Imports instat.Translations
 
 Public Class dlgFileNew
+    Public clsMatrix As New RFunction
+
     Private Sub dlgFileNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        'ucrBase.clsRsyntax.SetFunction("data.frame(matrix")
-        'ucrBase.clsRsyntax.SetAssignTo(txtName.Text)
+        txtRows.Text = 10
+        txtColumns.Text = 2
+        ucrBase.clsRsyntax.SetFunction("matrix", clsMatrix)
+        ucrBase.clsRsyntax.AddParameter("data", "NA", clsRFunction:=clsMatrix)
+        ucrBase.clsRsyntax.AddParameter("nrow", txtRows.Text, clsRFunction:=clsMatrix)
+        ucrBase.clsRsyntax.AddParameter("ncol", txtColumns.Text, clsRFunction:=clsMatrix)
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsMatrix)
+        ucrBase.clsRsyntax.SetFunction("data.frame")
+        ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
     End Sub
 
     Private Sub txtColumns_Leave(sender As Object, e As EventArgs) Handles txtColumns.Leave
-        '        ucrBase.clsRsyntax.AddParameter("ncol", txtColumns.Text)
+        ucrBase.clsRsyntax.AddParameter("ncol", txtColumns.Text, clsRFunction:=clsMatrix)
     End Sub
 
     Private Sub txtName_Leave(sender As Object, e As EventArgs) Handles txtName.Leave
-        '        ucrBase.clsRsyntax.SetAssignTo(txtName.Text)
+        ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
     End Sub
 
     Private Sub txtRows_Leave(sender As Object, e As EventArgs) Handles txtRows.Leave
-        '        ucrBase.clsRsyntax.AddParameter("nrow", txtRows.Text)
+        ucrBase.clsRsyntax.AddParameter("nrow", txtRows.Text, clsRFunction:=clsMatrix)
     End Sub
 
     Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.clsRLink.LoadData(txtName.Text, "data.frame(matrix(NA, nrow = " & txtRows.Text & ", ncol = " & txtColumns.Text & "))")
         frmMain.clsGrids.UpdateGrids()
+        frmEditor.Show()
     End Sub
 End Class

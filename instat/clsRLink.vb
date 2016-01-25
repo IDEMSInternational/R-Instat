@@ -165,11 +165,15 @@ Public Class RLink
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
     End Sub
 
+    Public Sub CreateNewInstatObject()
+        RunScript(strInstatDataObject & " <- instat_obj$new()")
+        bInstatObjectExists = True
+    End Sub
+
     Public Sub LoadData(strDataName As String, strFile As String)
         Dim clsRSyntax As New RSyntax
         If Not bInstatObjectExists Then
-            RunScript(strInstatDataObject & " <- instat_obj$new()")
-            bInstatObjectExists = True
+            CreateNewInstatObject()
         End If
         clsRSyntax.SetFunction("read.csv")
         clsRSyntax.AddParameter("file", strFile)

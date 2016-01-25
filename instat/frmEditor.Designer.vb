@@ -44,7 +44,6 @@ Partial Class frmEditor
         Me.removeColPageBreakToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem32 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblNoData = New System.Windows.Forms.Label()
         Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.cutRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.copyRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -75,10 +74,19 @@ Partial Class frmEditor
         Me.removeRowPageBreakToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem33 = New System.Windows.Forms.ToolStripSeparator()
         Me.rowPropertiesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblNoData = New System.Windows.Forms.Label()
+        Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.insertSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.deleteSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.movecopySheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.hideSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.leadHeaderContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
+        Me.statusColumnMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'grdData
@@ -92,9 +100,9 @@ Partial Class frmEditor
         Me.grdData.Name = "grdData"
         Me.grdData.RowHeaderContextMenuStrip = Me.rowContextMenuStrip
         Me.grdData.Script = Nothing
-        Me.grdData.SheetTabContextMenuStrip = Nothing
+        Me.grdData.SheetTabContextMenuStrip = Me.statusColumnMenu
         Me.grdData.SheetTabControlNewButtonVisible = True
-        Me.grdData.SheetTabControlWidth = 60
+        Me.grdData.SheetTabControlWidth = 200
         Me.grdData.SheetTabNewButtonVisible = True
         Me.grdData.Size = New System.Drawing.Size(410, 261)
         Me.grdData.TabIndex = 0
@@ -213,17 +221,6 @@ Partial Class frmEditor
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(192, 22)
         Me.ToolStripMenuItem1.Text = "Properties..."
-        '
-        'lblNoData
-        '
-        Me.lblNoData.AutoSize = True
-        Me.lblNoData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNoData.Location = New System.Drawing.Point(122, 105)
-        Me.lblNoData.Name = "lblNoData"
-        Me.lblNoData.Size = New System.Drawing.Size(211, 31)
-        Me.lblNoData.TabIndex = 1
-        Me.lblNoData.Tag = "no_data_loaded"
-        Me.lblNoData.Text = "No Data Loaded"
         '
         'cellContextMenuStrip
         '
@@ -399,6 +396,59 @@ Partial Class frmEditor
         Me.rowPropertiesToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.rowPropertiesToolStripMenuItem.Text = "Properties..."
         '
+        'lblNoData
+        '
+        Me.lblNoData.AutoSize = True
+        Me.lblNoData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNoData.Location = New System.Drawing.Point(122, 105)
+        Me.lblNoData.Name = "lblNoData"
+        Me.lblNoData.Size = New System.Drawing.Size(211, 31)
+        Me.lblNoData.TabIndex = 1
+        Me.lblNoData.Tag = "no_data_loaded"
+        Me.lblNoData.Text = "No Data Loaded"
+        '
+        'statusColumnMenu
+        '
+        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteSheet, Me.movecopySheet, Me.renameSheet, Me.hideSheet, Me.unhideSheet})
+        Me.statusColumnMenu.Name = "statusColumnMenu"
+        Me.statusColumnMenu.Size = New System.Drawing.Size(150, 136)
+        '
+        'insertSheet
+        '
+        Me.insertSheet.Name = "insertSheet"
+        Me.insertSheet.Size = New System.Drawing.Size(149, 22)
+        Me.insertSheet.Text = "Insert"
+        '
+        'deleteSheet
+        '
+        Me.deleteSheet.Name = "deleteSheet"
+        Me.deleteSheet.Size = New System.Drawing.Size(149, 22)
+        Me.deleteSheet.Text = "Delete"
+        '
+        'movecopySheet
+        '
+        Me.movecopySheet.Name = "movecopySheet"
+        Me.movecopySheet.Size = New System.Drawing.Size(149, 22)
+        Me.movecopySheet.Text = "Move or Copy"
+        '
+        'renameSheet
+        '
+        Me.renameSheet.Name = "renameSheet"
+        Me.renameSheet.Size = New System.Drawing.Size(149, 22)
+        Me.renameSheet.Text = "Rename"
+        '
+        'hideSheet
+        '
+        Me.hideSheet.Name = "hideSheet"
+        Me.hideSheet.Size = New System.Drawing.Size(149, 22)
+        Me.hideSheet.Text = "Hide"
+        '
+        'unhideSheet
+        '
+        Me.unhideSheet.Name = "unhideSheet"
+        Me.unhideSheet.Size = New System.Drawing.Size(149, 22)
+        Me.unhideSheet.Text = "Unhide"
+        '
         'frmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -414,6 +464,7 @@ Partial Class frmEditor
         Me.cellContextMenuStrip.ResumeLayout(False)
         Me.leadHeaderContextMenuStrip.ResumeLayout(False)
         Me.rowContextMenuStrip.ResumeLayout(False)
+        Me.statusColumnMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -471,4 +522,11 @@ Partial Class frmEditor
     Private WithEvents removeRowPageBreakToolStripMenuItem As ToolStripMenuItem
     Private WithEvents toolStripMenuItem33 As ToolStripSeparator
     Private WithEvents rowPropertiesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents statusColumnMenu As ContextMenuStrip
+    Friend WithEvents insertSheet As ToolStripMenuItem
+    Friend WithEvents deleteSheet As ToolStripMenuItem
+    Friend WithEvents movecopySheet As ToolStripMenuItem
+    Friend WithEvents renameSheet As ToolStripMenuItem
+    Friend WithEvents hideSheet As ToolStripMenuItem
+    Friend WithEvents unhideSheet As ToolStripMenuItem
 End Class
