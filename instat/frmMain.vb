@@ -32,10 +32,9 @@ Public Class frmMain
         frmScript.MdiParent = Me
         frmVariables.MdiParent = Me
         frmMetaData.MdiParent = Me
-        Me.LayoutMdi(MdiLayout.ArrangeIcons)
-        frmCommand.Dock = DockStyle.Right
-        frmEditor.Dock = DockStyle.Left
-        frmEditor.Dock = DockStyle.Fill
+        'frmCommand.Dock = DockStyle.Right
+        'frmEditor.Dock = DockStyle.Left
+        'frmEditor.Dock = DockStyle.Fill
         frmCommand.Show()
         'frmEditor.Show()
 
@@ -304,15 +303,16 @@ Public Class frmMain
 
     Public Function OpenWorkbookDialog() As KeyValuePair(Of String, String)
         Dim dlgOpen As New OpenFileDialog
-        Dim strFilePath, strFileName As String
-        dlgOpen.Filter = "RDS R-file (*.RDS)|*.RDS"
-        dlgOpen.Title = "Open an RDS R-file"
+        Dim strFilePath, strFileName, strFileExt As String
+        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|All Data files (*.csv,*.RDS)|*.csv;*.RDS"
+        dlgOpen.Title = "Open a Data file"
         If dlgOpen.ShowDialog() = DialogResult.OK Then
             'checks if the file name is not blank'
             If dlgOpen.FileName <> "" Then
-                strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
+                'strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
+                strFileExt = Path.GetExtension(dlgOpen.FileName)
                 strFilePath = Replace(dlgOpen.FileName, "\", "/")
-                Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
+                Return New KeyValuePair(Of String, String)(strFileExt, Chr(34) & strFilePath & Chr(34))
             End If
         End If
         Return New KeyValuePair(Of String, String)("", "")
@@ -600,32 +600,37 @@ Public Class frmMain
 
     Private Sub mnuFileOpenFromFile_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromFile.Click
 
-        Dim pair As KeyValuePair(Of String, String) = ImportDialog()
-        If Not IsNothing(pair.Key) Then
-            clsRLink.LoadData(pair.Key, pair.Value)
-        End If
-        frmEditor.Show()
-
-
-
-        'Dim kvpFile As KeyValuePair(Of String, String)
-        'Dim clsRsyntax As New RSyntax
-
-        'kvpFile = OpenWorkbookDialog()
-        'If Not IsNothing(kvpFile.Key) Then
-        '    clsRsyntax.SetAssignTo(clsRLink.strInstatDataObject)
-        '    clsRsyntax.SetFunction("readRDS")
-        '    clsRsyntax.AddParameter("file", kvpFile.Value)
-        '    If Not clsRLink.bInstatObjectExists Then
-        '        clsRLink.RunScript(clsRsyntax.GetScript())
-        '        clsRLink.bInstatObjectExists = True
-        '        clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_data_frames_changed(new_val = TRUE)")
-        '        clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = TRUE)")
-        '        clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_variables_metadata_changed(new_val = TRUE)")
-        '    End If
-        '    clsGrids.UpdateGrids()
+        'Dim pair As KeyValuePair(Of String, String) = ImportDialog()
+        'If Not IsNothing(pair.Key) Then
+        '    clsRLink.LoadData(pair.Key, pair.Value)
         'End If
         'frmEditor.Show()
+
+
+
+        Dim kvpFile As KeyValuePair(Of String, String)
+        Dim clsRsyntax As New RSyntax
+
+        kvpFile = OpenWorkbookDialog()
+        If Not IsNothing(kvpFile.Key) Then
+            If kvpFile.Key = ".RDS" Then
+                clsRsyntax.SetAssignTo(clsRLink.strInstatDataObject)
+                clsRsyntax.SetFunction("readRDS")
+                clsRsyntax.AddParameter("file", kvpFile.Value)
+                If Not clsRLink.bInstatObjectExists Then
+                    clsRLink.RunScript(clsRsyntax.GetScript())
+                    clsRLink.bInstatObjectExists = True
+                    clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_data_frames_changed(new_val = TRUE)")
+                    clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = TRUE)")
+                    clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_variables_metadata_changed(new_val = TRUE)")
+                End If
+                clsGrids.UpdateGrids()
+            ElseIf kvpFile.Key = ".csv" Then
+                clsRLink.LoadData(kvpFile.Key, kvpFile.Value)
+            End If
+            frmEditor.Show()
+        End If
+
 
     End Sub
 
@@ -720,5 +725,29 @@ Public Class frmMain
 
     Private Sub mnuFileOptions_Click(sender As Object, e As EventArgs) Handles mnuFileOptions.Click
         dlgOptions.ShowDialog()
+    End Sub
+
+    Private Sub mnuWindowsCascading_Click(sender As Object, e As EventArgs) Handles mnuWindowsCascading.Click
+        Me.LayoutMdi(MdiLayout.Cascade)
+    End Sub
+
+    Private Sub mnuWindowsStacked_Click(sender As Object, e As EventArgs) Handles mnuWindowsStacked.Click
+        Me.LayoutMdi(MdiLayout.TileVertical)
+    End Sub
+
+    Private Sub mnuWindowsSideBySide_Click(sender As Object, e As EventArgs) Handles mnuWindowsSideBySide.Click
+        Me.LayoutMdi(MdiLayout.TileHorizontal)
+    End Sub
+
+    Private Sub mnuWindowsArrangedIcons_Click(sender As Object, e As EventArgs) Handles mnuWindowsArrangedIcons.Click
+        Me.LayoutMdi(MdiLayout.ArrangeIcons)
+    End Sub
+
+    Private Sub mnuWindowsEditor_Click(sender As Object, e As EventArgs) Handles mnuWindowsEditor.Click
+        If frmEditor.Visible = True Then
+            frmEditor.Visible = False
+        Else
+            frmEditor.Visible = True
+        End If
     End Sub
 End Class

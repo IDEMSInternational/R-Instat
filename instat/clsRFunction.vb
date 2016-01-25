@@ -57,6 +57,9 @@ Public Class RFunction
         Next
         strTemp = strTemp & ")"
         If bToBeAssigned Then
+            If Not frmMain.clsRLink.bInstatObjectExists Then
+                frmMain.clsRLink.CreateNewInstatObject()
+            End If
             strScript = strScript & strAssignTo & " <- " & strTemp & vbCrLf
             If Not strAssignToDataFrame = "" Then
                 If Not strAssignToColumn = "" Then
