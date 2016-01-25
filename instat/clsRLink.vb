@@ -170,15 +170,26 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub LoadData(strDataName As String, strFile As String)
+    Public Sub LoadData(strDataName As String, strFile As String, strFileExt As String)
         Dim clsRSyntax As New RSyntax
-        If Not bInstatObjectExists Then
-            CreateNewInstatObject()
-        End If
-        clsRSyntax.SetFunction("read.csv")
-        clsRSyntax.AddParameter("file", strFile)
-        clsRSyntax.SetAssignTo(strDataName, strTempDataframe:=strDataName)
-        RunScript(clsRSyntax.GetScript())
+        Select Case strFileExt
+            Case ".RDS"
+                If Not bInstatObjectExists Then
+                    clsRSyntax.SetAssignTo(frmMain.clsRLink.strInstatDataObject)
+                    clsRSyntax.SetFunction("readRDS")
+                    clsRSyntax.AddParameter("file", Chr(34) & strFile & Chr(34))
+                    RunScript(clsRSyntax.GetScript())
+                    frmMain.clsRLink.bInstatObjectExists = True
+                End If
+            Case ".csv"
+                If Not bInstatObjectExists Then
+                    CreateNewInstatObject()
+                End If
+                clsRSyntax.SetFunction("read.csv")
+                clsRSyntax.AddParameter("file", Chr(34) & strFile & Chr(34))
+                clsRSyntax.SetAssignTo(strDataName, strTempDataframe:=strDataName)
+                RunScript(clsRSyntax.GetScript())
+        End Select
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
