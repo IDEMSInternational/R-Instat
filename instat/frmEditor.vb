@@ -21,6 +21,7 @@ Imports instat.Translations
 Public Class frmEditor
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsGrids.SetData(grdData)
+        grdData.Visible = False
         autoTranslate(Me)
     End Sub
     ''' <summary>
