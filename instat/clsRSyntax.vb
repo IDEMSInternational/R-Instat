@@ -36,20 +36,20 @@ Public Class RSyntax
         clsFunction.SetAssignTo(strAssignToName, strTempDataframe, strTempColumn, strTempModel)
     End Sub
 
-    Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunction As RFunction = Nothing, Optional ByRef clsFunction As RFunction = Nothing)
+    Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional ByRef clsRFunction As RFunction = Nothing)
         Dim clsParam As New RParameter
 
-        If clsFunction Is Nothing Then
-            clsFunction = clsBaseFunction
+        If clsRFunction Is Nothing Then
+            clsRFunction = clsBaseFunction
         End If
         clsParam.SetArgumentName(strParameterName)
         If Not strParameterName = "" Then
             clsParam.SetArgumentValue(strParameterValue)
         End If
-        If Not clsRFunction Is Nothing Then
-            clsParam.SetArgumentFunction(clsRFunction)
+        If Not clsRFunctionParameter Is Nothing Then
+            clsParam.SetArgumentFunction(clsRFunctionParameter)
         End If
-        clsFunction.AddParameter(clsParam)
+        clsRFunction.AddParameter(clsParam)
     End Sub
 
     Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)

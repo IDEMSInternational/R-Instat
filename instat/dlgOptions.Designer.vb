@@ -27,16 +27,21 @@ Partial Class dlgOptions
         Me.rdoEnglish = New System.Windows.Forms.RadioButton()
         Me.rdoFrench = New System.Windows.Forms.RadioButton()
         Me.rdoKiswahili = New System.Windows.Forms.RadioButton()
+        Me.tbpComments = New System.Windows.Forms.TabPage()
+        Me.txtComment = New System.Windows.Forms.TextBox()
+        Me.lblComment = New System.Windows.Forms.Label()
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguageSettings.SuspendLayout()
+        Me.tbpComments.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbcOptions
         '
         Me.tbcOptions.Controls.Add(Me.tbpLanguageSettings)
+        Me.tbcOptions.Controls.Add(Me.tbpComments)
         Me.tbcOptions.Location = New System.Drawing.Point(13, 13)
         Me.tbcOptions.Name = "tbcOptions"
         Me.tbcOptions.SelectedIndex = 0
@@ -93,6 +98,36 @@ Partial Class dlgOptions
         Me.rdoKiswahili.Text = "Kiswahili"
         Me.rdoKiswahili.UseVisualStyleBackColor = True
         '
+        'tbpComments
+        '
+        Me.tbpComments.Controls.Add(Me.txtComment)
+        Me.tbpComments.Controls.Add(Me.lblComment)
+        Me.tbpComments.Location = New System.Drawing.Point(4, 22)
+        Me.tbpComments.Name = "tbpComments"
+        Me.tbpComments.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpComments.Size = New System.Drawing.Size(392, 233)
+        Me.tbpComments.TabIndex = 1
+        Me.tbpComments.Tag = "Comments"
+        Me.tbpComments.Text = "Comments"
+        Me.tbpComments.UseVisualStyleBackColor = True
+        '
+        'txtComment
+        '
+        Me.txtComment.Location = New System.Drawing.Point(110, 20)
+        Me.txtComment.Name = "txtComment"
+        Me.txtComment.Size = New System.Drawing.Size(276, 20)
+        Me.txtComment.TabIndex = 1
+        '
+        'lblComment
+        '
+        Me.lblComment.AutoSize = True
+        Me.lblComment.Location = New System.Drawing.Point(7, 20)
+        Me.lblComment.Name = "lblComment"
+        Me.lblComment.Size = New System.Drawing.Size(51, 13)
+        Me.lblComment.TabIndex = 0
+        Me.lblComment.Tag = "Comment"
+        Me.lblComment.Text = "Comment"
+        '
         'cmdOk
         '
         Me.cmdOk.Location = New System.Drawing.Point(17, 279)
@@ -140,6 +175,8 @@ Partial Class dlgOptions
         Me.tbcOptions.ResumeLayout(False)
         Me.tbpLanguageSettings.ResumeLayout(False)
         Me.tbpLanguageSettings.PerformLayout()
+        Me.tbpComments.ResumeLayout(False)
+        Me.tbpComments.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -151,4 +188,7 @@ Partial Class dlgOptions
     Friend WithEvents cmdOk As Button
     Friend WithEvents cmdApply As Button
     Friend WithEvents cmdCancel As Button
+    Friend WithEvents tbpComments As TabPage
+    Friend WithEvents txtComment As TextBox
+    Friend WithEvents lblComment As Label
 End Class
