@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgRegularSequence
+    Dim bIsExtended As Boolean = False
+
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grpSequence2.Hide()
         grpRepeatSingle.Hide()
@@ -30,12 +32,12 @@ Public Class dlgRegularSequence
         grpRepeatSingle.Visible = True
     End Sub
 
-    Private Sub rdDates_Click(sender As Object, e As EventArgs) Handles rdoDates.Click
+
+    Private Sub rdoDates_Click(sender As Object, e As EventArgs) Handles rdoDates.Click
         grpSequence.Hide()
         grpRepeatSingle.Hide()
         grpSequence2.Visible = True
     End Sub
-
     Private Sub rdSequence_Click(sender As Object, e As EventArgs) Handles rdoSequence.Click
         grpRepeatSingle.Hide()
         grpSequence2.Hide()
@@ -83,5 +85,23 @@ Public Class dlgRegularSequence
 
     Private Sub ucrColName_LostFocus(sender As Object, e As EventArgs) Handles ucrColName.LostFocus
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrColName.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrColName.cboColumnName.Text)
+    End Sub
+
+
+
+    Private Sub cmdShowHide_Click(sender As Object, e As EventArgs) Handles cmdShowHide.Click
+        If bIsExtended Then
+            Me.Width -= 151
+        Else
+            Me.Width += 151
+        End If
+    End Sub
+
+    Private Sub txtOverwrite_TextChanged(sender As Object, e As EventArgs) Handles txtOverwrite.TextChanged
+
+    End Sub
+
+    Private Sub lblValue_Click(sender As Object, e As EventArgs) Handles lblValue.Click
+
     End Sub
 End Class
