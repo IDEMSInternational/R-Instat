@@ -346,3 +346,11 @@ instat_obj$methods(insert_row_in_data = function(obj_name, row_num, row_data = c
   data_objects[[obj_name]]$insert_row_in_data(row_num = row_num, row_data = row_data)
 }
 )
+
+instat_obj$methods(length_of_data = function(obj_name) {
+  if(!is.character(obj_name)) stop("obj_name must be of type character")
+  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  
+  data_objects[[obj_name]]$length_of_data()
+}
+)
