@@ -32,10 +32,9 @@ Public Class frmMain
         frmScript.MdiParent = Me
         frmVariables.MdiParent = Me
         frmMetaData.MdiParent = Me
-        Me.LayoutMdi(MdiLayout.ArrangeIcons)
-        frmCommand.Dock = DockStyle.Right
-        frmEditor.Dock = DockStyle.Left
-        frmEditor.Dock = DockStyle.Fill
+        'frmCommand.Dock = DockStyle.Right
+        'frmEditor.Dock = DockStyle.Left
+        'frmEditor.Dock = DockStyle.Fill
         frmCommand.Show()
         'frmEditor.Show()
 
@@ -726,5 +725,29 @@ Public Class frmMain
 
     Private Sub mnuFileOptions_Click(sender As Object, e As EventArgs) Handles mnuFileOptions.Click
         dlgOptions.ShowDialog()
+    End Sub
+
+    Private Sub mnuWindowsCascading_Click(sender As Object, e As EventArgs) Handles mnuWindowsCascading.Click
+        Me.LayoutMdi(MdiLayout.Cascade)
+    End Sub
+
+    Private Sub mnuWindowsStacked_Click(sender As Object, e As EventArgs) Handles mnuWindowsStacked.Click
+        Me.LayoutMdi(MdiLayout.TileVertical)
+    End Sub
+
+    Private Sub mnuWindowsSideBySide_Click(sender As Object, e As EventArgs) Handles mnuWindowsSideBySide.Click
+        Me.LayoutMdi(MdiLayout.TileHorizontal)
+    End Sub
+
+    Private Sub mnuWindowsArrangedIcons_Click(sender As Object, e As EventArgs) Handles mnuWindowsArrangedIcons.Click
+        Me.LayoutMdi(MdiLayout.ArrangeIcons)
+    End Sub
+
+    Private Sub mnuWindowsEditor_Click(sender As Object, e As EventArgs) Handles mnuWindowsEditor.Click
+        If frmEditor.Visible = True Then
+            frmEditor.Visible = False
+        Else
+            frmEditor.Visible = True
+        End If
     End Sub
 End Class
