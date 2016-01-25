@@ -32,11 +32,13 @@ Public Class frmMain
         frmScript.MdiParent = Me
         frmVariables.MdiParent = Me
         frmMetaData.MdiParent = Me
+        ' TODO get these to be in correct position without changing dockstyle
+        '      so that it doesn't mess with cascade etc.
         'frmCommand.Dock = DockStyle.Right
         'frmEditor.Dock = DockStyle.Left
-        'frmEditor.Dock = DockStyle.Fill
+
         frmCommand.Show()
-        'frmEditor.Show()
+        frmEditor.Show()
 
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
@@ -49,14 +51,6 @@ Public Class frmMain
         ' TODO tstatus shouldn't be set here in this way
         tstatus.Text = frmEditor.grdData.CurrentWorksheet.Name
 
-    End Sub
-
-    Private Sub ImportASCIIToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        Dim pair As KeyValuePair(Of String, String) = ImportDialog()
-        If Not IsNothing(pair.Key) Then
-            clsRLink.LoadData(pair.Key, pair.Value)
-        End If
-        frmEditor.Show()
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
@@ -285,17 +279,18 @@ Public Class frmMain
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
         dlgSort.ShowDialog()
     End Sub
-    Public Function ImportDialog() As KeyValuePair(Of String, String)
+
+    Public Function OpenFromFileDialog() As KeyValuePair(Of String, String)
         Dim dlgOpen As New OpenFileDialog
         Dim strFilePath, strFileName As String
-        dlgOpen.Filter = "Comma Separated (*.csv)|*.csv"
-        dlgOpen.Title = "Import a .csv file into"
+        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|All Data files (*.csv,*.RDS)|*.csv;*.RDS"
+        dlgOpen.Title = "Open Data from file"
         If dlgOpen.ShowDialog() = DialogResult.OK Then
             'checks if the file name is not blank'
             If dlgOpen.FileName <> "" Then
                 strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
                 strFilePath = Replace(dlgOpen.FileName, "\", "/")
-                Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
+                Return New KeyValuePair(Of String, String)(strFileName, strFilePath)
             End If
         End If
         Return New KeyValuePair(Of String, String)("", "")
@@ -600,36 +595,37 @@ Public Class frmMain
 
     Private Sub mnuFileOpenFromFile_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromFile.Click
 
-        'Dim pair As KeyValuePair(Of String, String) = ImportDialog()
-        'If Not IsNothing(pair.Key) Then
-        '    clsRLink.LoadData(pair.Key, pair.Value)
-        'End If
-        'frmEditor.Show()
+        Dim pair As KeyValuePair(Of String, String)
+        Dim strFileExt As String
 
-
-
-        Dim kvpFile As KeyValuePair(Of String, String)
-        Dim clsRsyntax As New RSyntax
-
-        kvpFile = OpenWorkbookDialog()
-        If Not IsNothing(kvpFile.Key) Then
-            If kvpFile.Key = ".RDS" Then
-                clsRsyntax.SetAssignTo(clsRLink.strInstatDataObject)
-                clsRsyntax.SetFunction("readRDS")
-                clsRsyntax.AddParameter("file", kvpFile.Value)
-                If Not clsRLink.bInstatObjectExists Then
-                    clsRLink.RunScript(clsRsyntax.GetScript())
-                    clsRLink.bInstatObjectExists = True
-                    clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_data_frames_changed(new_val = TRUE)")
-                    clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = TRUE)")
-                    clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_variables_metadata_changed(new_val = TRUE)")
-                End If
-                clsGrids.UpdateGrids()
-            ElseIf kvpFile.Key = ".csv" Then
-                clsRLink.LoadData(kvpFile.Key, kvpFile.Value)
-            End If
-            frmEditor.Show()
+        pair = OpenFromFileDialog()
+        strFileExt = Path.GetExtension(pair.Value)
+        If Not IsNothing(pair.Key) Then
+            clsRLink.LoadData(pair.Key, pair.Value, strFileExt)
         End If
+        clsRLink.LoadData(pair.Key, pair.Value, strFileExt)
+
+        'Dim kvpFile As KeyValuePair(Of String, String)
+        'Dim clsRsyntax As New RSyntax
+
+        'kvpFile = OpenWorkbookDialog()
+        'If Not IsNothing(kvpFile.Key) Then
+        '    If kvpFile.Key = ".RDS" Then
+        '        clsRsyntax.SetAssignTo(clsRLink.strInstatDataObject)
+        '        clsRsyntax.SetFunction("readRDS")
+        '        clsRsyntax.AddParameter("file", kvpFile.Value)
+        '        If Not clsRLink.bInstatObjectExists Then
+        '            clsRLink.RunScript(clsRsyntax.GetScript())
+        '            clsRLink.bInstatObjectExists = True
+        '            clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_data_frames_changed(new_val = TRUE)")
+        '            clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = TRUE)")
+        '            clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_variables_metadata_changed(new_val = TRUE)")
+        '        End If
+        '        clsGrids.UpdateGrids()
+        '    ElseIf kvpFile.Key = ".csv" Then
+        '    End If
+        '    frmEditor.Show()
+        'End If
 
 
     End Sub
