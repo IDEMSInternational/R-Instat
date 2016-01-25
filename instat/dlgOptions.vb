@@ -19,6 +19,8 @@ Imports System.Threading
 Imports instat.Translations
 
 Public Class dlgOptions
+    Public StrComment As String
+
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -30,7 +32,15 @@ Public Class dlgOptions
     End Sub
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
-        If rdoEnglish.Checked = True Then
+        StrComment = txtComment.Text
+        If Not (rdoEnglish.Checked And rdoFrench.Checked And rdoFrench.Checked) Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+            autoTranslate(frmMain)
+            autoTranslate(Me)
+            Me.Close()
+
+        ElseIf rdoEnglish.Checked = True Then
             Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
             Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
             autoTranslate(frmMain)
@@ -49,8 +59,6 @@ Public Class dlgOptions
             rdoFrench.Checked = False
             rdoKiswahili.Checked = False
             Me.Close()
-
-            'End If
         Else
             Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
             Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
@@ -64,7 +72,15 @@ Public Class dlgOptions
     End Sub
 
     Private Sub cmdApply_Click(sender As Object, e As EventArgs) Handles cmdApply.Click
-        If rdoEnglish.Checked = True Then
+        StrComment = txtComment.Text
+
+        If Not (rdoEnglish.Checked And rdoFrench.Checked And rdoFrench.Checked) Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+            autoTranslate(frmMain)
+            autoTranslate(Me)
+
+        ElseIf rdoEnglish.Checked = True Then
             Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
             Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
             autoTranslate(frmMain)
