@@ -14,14 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class dlgBoxplotMethod
-    Private Sub dlgBoxplotMethod_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class dlgMerge
+    Private Sub ucrDataFrameAddRemove_Load(sender As Object, e As EventArgs) Handles ucrDataFrameAddRemove.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("climate_obj$boxplot")
-        ucrBase.clsRsyntax.iCallType = 0
     End Sub
-
-
-
-
 End Class

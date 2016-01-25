@@ -29,14 +29,14 @@ Partial Class dlgOrthogonal
         '
         Me.ucrBase.Location = New System.Drawing.Point(6, 225)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 49)
         Me.ucrBase.TabIndex = 0
         '
         'dlgOrthogonal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 261)
+        Me.ClientSize = New System.Drawing.Size(415, 281)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgOrthogonal"

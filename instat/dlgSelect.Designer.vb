@@ -49,7 +49,7 @@ Partial Class dlgSelect
         '
         Me.ucrBase.Location = New System.Drawing.Point(12, 229)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 0
         '
         'grpSelectCriteria
@@ -223,7 +223,7 @@ Partial Class dlgSelect
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(430, 261)
+        Me.ClientSize = New System.Drawing.Size(429, 286)
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCondition)
         Me.Controls.Add(Me.chkAppend)

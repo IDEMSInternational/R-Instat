@@ -296,14 +296,14 @@ Partial Class dlgCalculator
         '
         Me.ucrBase.Location = New System.Drawing.Point(16, 281)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(404, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(404, 50)
         Me.ucrBase.TabIndex = 0
         '
         'dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(449, 320)
+        Me.ClientSize = New System.Drawing.Size(438, 337)
         Me.Controls.Add(Me.cmdLog10)
         Me.Controls.Add(Me.cmdSqrt)
         Me.Controls.Add(Me.cmdExp)
