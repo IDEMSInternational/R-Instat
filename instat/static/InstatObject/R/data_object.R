@@ -356,7 +356,7 @@ data_obj$methods(get_next_default_column_name = function(prefix) {
 } 
 )
 
-data_obj$methods(insert_column_in_data = function(col_name = "", col_data =c(), col_number) {
+data_obj$methods(insert_column_in_data = function( col_name = "", col_data =c(), col_number) {
   if (col_number <= 0) stop("You cannot put a column into the position less or equal to zero.")
   if (col_number %% 1 != 0) stop("col_number value should be an integer.")
   if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
@@ -365,6 +365,10 @@ data_obj$methods(insert_column_in_data = function(col_name = "", col_data =c(), 
   if(length(col_data)==0){
       col_data <- rep(NA, nrow(data))
       warning(paste("You are inserting an empty column to", get_metadata(data_name_label)))
+  }
+  
+  if(missing(col_name)){
+    col_name <- .self$get_next_default_column_name("X")
   }
 
   data[, col_name] <<- col_data
@@ -376,6 +380,7 @@ data_obj$methods(insert_column_in_data = function(col_name = "", col_data =c(), 
     }
   
     .self$append_to_changes(list(Inserted_col, col_number))
+    .self$data_changed = TRUE
 }
 )
 
