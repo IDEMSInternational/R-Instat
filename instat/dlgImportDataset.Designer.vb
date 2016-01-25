@@ -25,7 +25,7 @@ Partial Class dlgImportDataset
         Me.lblInputFile = New System.Windows.Forms.Label()
         Me.lblDataFrame = New System.Windows.Forms.Label()
         Me.lblName = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblEncoding = New System.Windows.Forms.Label()
         Me.lblHeading = New System.Windows.Forms.Label()
         Me.lblRowNames = New System.Windows.Forms.Label()
         Me.lblSeparator = New System.Windows.Forms.Label()
@@ -80,15 +80,15 @@ Partial Class dlgImportDataset
         Me.lblName.Tag = "Name"
         Me.lblName.Text = "Name"
         '
-        'Label4
+        'lblEncoding
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(12, 65)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(52, 13)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Tag = "Encoding"
-        Me.Label4.Text = "Encoding"
+        Me.lblEncoding.AutoSize = True
+        Me.lblEncoding.Location = New System.Drawing.Point(12, 65)
+        Me.lblEncoding.Name = "lblEncoding"
+        Me.lblEncoding.Size = New System.Drawing.Size(52, 13)
+        Me.lblEncoding.TabIndex = 3
+        Me.lblEncoding.Tag = "Encoding"
+        Me.lblEncoding.Text = "Encoding"
         '
         'lblHeading
         '
@@ -325,7 +325,7 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.lblSeparator)
         Me.Controls.Add(Me.lblRowNames)
         Me.Controls.Add(Me.lblHeading)
-        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.lblEncoding)
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.lblDataFrame)
         Me.Controls.Add(Me.lblInputFile)
@@ -342,7 +342,7 @@ Partial Class dlgImportDataset
     Friend WithEvents lblInputFile As Label
     Friend WithEvents lblDataFrame As Label
     Friend WithEvents lblName As Label
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblEncoding As Label
     Friend WithEvents lblHeading As Label
     Friend WithEvents lblRowNames As Label
     Friend WithEvents lblSeparator As Label
