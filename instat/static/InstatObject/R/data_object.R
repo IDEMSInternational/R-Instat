@@ -438,6 +438,11 @@ data_obj$methods(insert_row_in_data = function(row_num, row_data = c()) {
 }
 )
 
+data_obj$methods(length_of_data = function() {
+  return(nrow(data))
+}
+)
+
 #Labels for strings which will be added to logs
 Set_property="Set"
 Added_col="Added column"
