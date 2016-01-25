@@ -34,7 +34,7 @@ Partial Class dlgRegularSequence
         Me.txtTo = New System.Windows.Forms.TextBox()
         Me.txtSteps = New System.Windows.Forms.TextBox()
         Me.grpRepeatSingle = New System.Windows.Forms.GroupBox()
-        Me.lblTimes3 = New System.Windows.Forms.Label()
+        Me.lblTimes = New System.Windows.Forms.Label()
         Me.lblRepeated = New System.Windows.Forms.Label()
         Me.txtRepeatTimes = New System.Windows.Forms.TextBox()
         Me.txtValue = New System.Windows.Forms.TextBox()
@@ -43,9 +43,9 @@ Partial Class dlgRegularSequence
         Me.cboBy = New System.Windows.Forms.ComboBox()
         Me.dtSelectorA = New System.Windows.Forms.DateTimePicker()
         Me.dtSelectorB = New System.Windows.Forms.DateTimePicker()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblBy = New System.Windows.Forms.Label()
+        Me.lblToDate = New System.Windows.Forms.Label()
+        Me.lblFromDate = New System.Windows.Forms.Label()
         Me.ucrColName = New instat.ucrNewColumnName()
         Me.ucrSelectDataFrame = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
@@ -128,12 +128,12 @@ Partial Class dlgRegularSequence
         Me.grpSequence.Controls.Add(Me.txtTo)
         Me.grpSequence.Controls.Add(Me.txtSteps)
         Me.grpSequence.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequence.Location = New System.Drawing.Point(14, 89)
+        Me.grpSequence.Location = New System.Drawing.Point(13, 19)
         Me.grpSequence.Name = "grpSequence"
         Me.grpSequence.Size = New System.Drawing.Size(180, 96)
         Me.grpSequence.TabIndex = 0
         Me.grpSequence.TabStop = False
-        Me.grpSequence.Text = "Sequence Definition"
+        Me.grpSequence.Text = "`"
         Me.grpSequence.UseCompatibleTextRendering = True
         '
         'lblSteps
@@ -192,26 +192,26 @@ Partial Class dlgRegularSequence
         '
         'grpRepeatSingle
         '
-        Me.grpRepeatSingle.Controls.Add(Me.lblTimes3)
+        Me.grpRepeatSingle.Controls.Add(Me.lblTimes)
         Me.grpRepeatSingle.Controls.Add(Me.lblRepeated)
         Me.grpRepeatSingle.Controls.Add(Me.txtRepeatTimes)
         Me.grpRepeatSingle.Controls.Add(Me.txtValue)
         Me.grpRepeatSingle.Controls.Add(Me.lblValue)
-        Me.grpRepeatSingle.Location = New System.Drawing.Point(12, 106)
+        Me.grpRepeatSingle.Location = New System.Drawing.Point(2, 102)
         Me.grpRepeatSingle.Name = "grpRepeatSingle"
         Me.grpRepeatSingle.Size = New System.Drawing.Size(179, 100)
         Me.grpRepeatSingle.TabIndex = 9
         Me.grpRepeatSingle.TabStop = False
         Me.grpRepeatSingle.Text = "Repeat Single Value"
         '
-        'lblTimes3
+        'lblTimes
         '
-        Me.lblTimes3.AutoSize = True
-        Me.lblTimes3.Location = New System.Drawing.Point(130, 59)
-        Me.lblTimes3.Name = "lblTimes3"
-        Me.lblTimes3.Size = New System.Drawing.Size(37, 13)
-        Me.lblTimes3.TabIndex = 2
-        Me.lblTimes3.Text = "time(s)"
+        Me.lblTimes.AutoSize = True
+        Me.lblTimes.Location = New System.Drawing.Point(129, 59)
+        Me.lblTimes.Name = "lblTimes"
+        Me.lblTimes.Size = New System.Drawing.Size(37, 13)
+        Me.lblTimes.TabIndex = 2
+        Me.lblTimes.Text = "time(s)"
         '
         'lblRepeated
         '
@@ -220,6 +220,7 @@ Partial Class dlgRegularSequence
         Me.lblRepeated.Name = "lblRepeated"
         Me.lblRepeated.Size = New System.Drawing.Size(54, 13)
         Me.lblRepeated.TabIndex = 1
+        Me.lblRepeated.Tag = "Repeated"
         Me.lblRepeated.Text = "Repeated"
         '
         'txtRepeatTimes
@@ -243,6 +244,7 @@ Partial Class dlgRegularSequence
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(34, 13)
         Me.lblValue.TabIndex = 0
+        Me.lblValue.Tag = "Value"
         Me.lblValue.Text = "Value"
         '
         'grpSequence2
@@ -250,11 +252,12 @@ Partial Class dlgRegularSequence
         Me.grpSequence2.Controls.Add(Me.cboBy)
         Me.grpSequence2.Controls.Add(Me.dtSelectorA)
         Me.grpSequence2.Controls.Add(Me.dtSelectorB)
-        Me.grpSequence2.Controls.Add(Me.Label2)
-        Me.grpSequence2.Controls.Add(Me.Label4)
-        Me.grpSequence2.Controls.Add(Me.Label5)
+        Me.grpSequence2.Controls.Add(Me.lblBy)
+        Me.grpSequence2.Controls.Add(Me.lblToDate)
+        Me.grpSequence2.Controls.Add(Me.lblFromDate)
+        Me.grpSequence2.Controls.Add(Me.grpSequence)
         Me.grpSequence2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequence2.Location = New System.Drawing.Point(11, 104)
+        Me.grpSequence2.Location = New System.Drawing.Point(2, 83)
         Me.grpSequence2.Name = "grpSequence2"
         Me.grpSequence2.Size = New System.Drawing.Size(180, 95)
         Me.grpSequence2.TabIndex = 10
@@ -288,35 +291,36 @@ Partial Class dlgRegularSequence
         Me.dtSelectorB.Size = New System.Drawing.Size(84, 20)
         Me.dtSelectorB.TabIndex = 11
         '
-        'Label2
+        'lblBy
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(10, 74)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(19, 13)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "By"
+        Me.lblBy.AutoSize = True
+        Me.lblBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBy.Location = New System.Drawing.Point(10, 74)
+        Me.lblBy.Name = "lblBy"
+        Me.lblBy.Size = New System.Drawing.Size(19, 13)
+        Me.lblBy.TabIndex = 2
+        Me.lblBy.Tag = "By"
+        Me.lblBy.Text = "By"
         '
-        'Label4
+        'lblToDate
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(6, 43)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(20, 13)
-        Me.Label4.TabIndex = 1
-        Me.Label4.Text = "To"
+        Me.lblToDate.AutoSize = True
+        Me.lblToDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblToDate.Location = New System.Drawing.Point(6, 43)
+        Me.lblToDate.Name = "lblToDate"
+        Me.lblToDate.Size = New System.Drawing.Size(20, 13)
+        Me.lblToDate.TabIndex = 1
+        Me.lblToDate.Text = "To"
         '
-        'Label5
+        'lblFromDate
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(6, 19)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(30, 13)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "From"
+        Me.lblFromDate.AutoSize = True
+        Me.lblFromDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFromDate.Location = New System.Drawing.Point(6, 19)
+        Me.lblFromDate.Name = "lblFromDate"
+        Me.lblFromDate.Size = New System.Drawing.Size(30, 13)
+        Me.lblFromDate.TabIndex = 0
+        Me.lblFromDate.Text = "From"
         '
         'ucrColName
         '
@@ -472,13 +476,12 @@ Partial Class dlgRegularSequence
         Me.Controls.Add(Me.cmdShowHide)
         Me.Controls.Add(Me.lblLength)
         Me.Controls.Add(Me.lblPreview)
+        Me.Controls.Add(Me.grpRepeatSingle)
         Me.Controls.Add(Me.txtLength)
         Me.Controls.Add(Me.lstPreview)
         Me.Controls.Add(Me.ucrColName)
         Me.Controls.Add(Me.ucrSelectDataFrame)
-        Me.Controls.Add(Me.grpRepeatSingle)
         Me.Controls.Add(Me.grpSequence2)
-        Me.Controls.Add(Me.grpSequence)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpSequenceType)
         Me.MaximizeBox = False
@@ -515,7 +518,7 @@ Partial Class dlgRegularSequence
     Friend WithEvents txtSteps As TextBox
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grpRepeatSingle As GroupBox
-    Friend WithEvents lblTimes3 As Label
+    Friend WithEvents lblTimes As Label
     Friend WithEvents lblRepeated As Label
     Friend WithEvents txtRepeatTimes As TextBox
     Friend WithEvents txtValue As TextBox
@@ -523,9 +526,9 @@ Partial Class dlgRegularSequence
     Friend WithEvents grpSequence2 As GroupBox
     Friend WithEvents dtSelectorA As DateTimePicker
     Friend WithEvents dtSelectorB As DateTimePicker
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents lblBy As Label
+    Friend WithEvents lblToDate As Label
+    Friend WithEvents lblFromDate As Label
     Friend WithEvents cboBy As ComboBox
     Friend WithEvents ucrSelectDataFrame As ucrDataFrame
     Friend WithEvents ucrColName As ucrNewColumnName

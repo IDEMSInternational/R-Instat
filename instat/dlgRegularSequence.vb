@@ -96,4 +96,12 @@ Public Class dlgRegularSequence
             Me.Width += 151
         End If
     End Sub
+
+    Private Sub txtOverwrite_TextChanged(sender As Object, e As EventArgs) Handles txtOverwrite.TextChanged
+
+    End Sub
+
+    Private Sub lblValue_Click(sender As Object, e As EventArgs) Handles lblValue.Click
+
+    End Sub
 End Class
