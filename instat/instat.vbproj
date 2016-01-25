@@ -437,6 +437,12 @@
     <Compile Include="dlgHistogramMethod.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportDataset.Designer.vb">
+      <DependentUpon>dlgImportDataset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportDataset.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgIndicatorVariable.Designer.vb">
       <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
     </Compile>
@@ -1478,6 +1484,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHistogramMethod.sw-KE.resx">
       <DependentUpon>dlgHistogramMethod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportDataset.fr-FR.resx">
+      <DependentUpon>dlgImportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportDataset.resx">
+      <DependentUpon>dlgImportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportDataset.sw-KE.resx">
+      <DependentUpon>dlgImportDataset.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgIndicatorVariable.fr-FR.resx">
       <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
