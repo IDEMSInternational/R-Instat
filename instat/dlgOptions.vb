@@ -40,6 +40,7 @@ Public Class dlgOptions
                 rdoKiswahili.Checked = True
         End Select
         cmdApply.Enabled = False
+        cmdOk.Enabled = False
 
     End Sub
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
@@ -70,26 +71,57 @@ Public Class dlgOptions
             Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
             strCurrLanguage = "swa"
         End If
-
-        autoTranslate(frmMain)
+        cmdApply.Enabled = False
+        cmdOk.Enabled = False
         autoTranslate(Me)
 
+        If frmMain.Visible Then
+            autoTranslate(frmMain)
+        End If
+
+        If frmCommand.Visible Then
+            autoTranslate(frmCommand)
+        End If
+
+        If frmEditor.Visible Then
+            autoTranslate(frmEditor)
+        End If
+
+        If frmLog.Visible Then
+            autoTranslate(frmLog)
+        End If
+
+        If frmMetaData.Visible Then
+            autoTranslate(frmMetaData)
+        End If
+
+        If frmScript.Visible Then
+            autoTranslate(frmScript)
+        End If
+
+        If frmVariables.Visible Then
+            autoTranslate(frmVariables)
+        End If
     End Sub
 
     Private Sub rdoKiswahili_CheckedChanged(sender As Object, e As EventArgs) Handles rdoKiswahili.CheckedChanged
         cmdApply.Enabled = True
+        cmdOk.Enabled = True
     End Sub
 
     Private Sub rdoFrench_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFrench.CheckedChanged
         cmdApply.Enabled = True
+        cmdOk.Enabled = True
     End Sub
 
     Private Sub rdoEnglish_CheckedChanged(sender As Object, e As EventArgs) Handles rdoEnglish.CheckedChanged
         cmdApply.Enabled = True
+        cmdOk.Enabled = True
     End Sub
 
     Private Sub txtComment_TextChanged(sender As Object, e As EventArgs) Handles txtComment.TextChanged
         cmdApply.Enabled = True
+        cmdOk.Enabled = True
     End Sub
 
 End Class

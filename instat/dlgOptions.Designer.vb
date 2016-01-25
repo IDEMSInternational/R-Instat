@@ -161,7 +161,7 @@ Partial Class dlgOptions
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(271, 278)
+        Me.cmdHelp.Location = New System.Drawing.Point(261, 280)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
         Me.cmdHelp.TabIndex = 3
