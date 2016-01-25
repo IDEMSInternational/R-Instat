@@ -354,3 +354,19 @@ instat_obj$methods(length_of_data = function(obj_name) {
   data_objects[[obj_name]]$length_of_data()
 }
 )
+
+instat_obj$methods(get_next_default_object_name = function(prefix) {
+  if(!is.character(prefix)) stop("prefix must be of type character")
+  object_exists = TRUE
+  i = 1
+  while(object_exists) {
+    if(!paste0(prefix,i) %in% names(data_objects)) {
+      object_exists = FALSE
+      out = paste0(prefix,i)
+    }
+    i = i + 1
+  }
+  out
+} 
+)
+
