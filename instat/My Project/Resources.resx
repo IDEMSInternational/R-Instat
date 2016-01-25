@@ -895,4 +895,7 @@
   <data name="Normal" xml:space="preserve">
     <value>Normal</value>
   </data>
+  <data name="Probability" xml:space="preserve">
+    <value>Probability</value>
+  </data>
 </root>

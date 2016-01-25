@@ -51,14 +51,14 @@ Partial Class dlgDotPlot
         '
         Me.ucrBase.Location = New System.Drawing.Point(2, 185)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(2, 12)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(186, 129)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 129)
         Me.ucrAddRemove.TabIndex = 3
         '
         'ucrReceiverSingle
@@ -82,7 +82,7 @@ Partial Class dlgDotPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 226)
+        Me.ClientSize = New System.Drawing.Size(405, 241)
         Me.Controls.Add(Me.lblVariableToPlot)
         Me.Controls.Add(Me.ucrReceiverSingle)
         Me.Controls.Add(Me.ucrAddRemove)

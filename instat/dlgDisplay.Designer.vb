@@ -35,21 +35,21 @@ Partial Class dlgDisplay
         Me.chkDataOptions = New System.Windows.Forms.CheckBox()
         Me.chkLayoutOptions = New System.Windows.Forms.CheckBox()
         Me.grpDataOptions = New System.Windows.Forms.GroupBox()
-        Me.chkDisplayasColumns = New System.Windows.Forms.CheckBox()
-        Me.chkDisplaySerially = New System.Windows.Forms.CheckBox()
-        Me.chkDisplayFactorswithLabels = New System.Windows.Forms.CheckBox()
-        Me.chkNoOfDecimalPlaces = New System.Windows.Forms.CheckBox()
-        Me.chkNoofSigFigures = New System.Windows.Forms.CheckBox()
-        Me.txtNoofSigFigures = New System.Windows.Forms.TextBox()
-        Me.txtDecimalPlaces = New System.Windows.Forms.TextBox()
+        Me.lblLines = New System.Windows.Forms.Label()
         Me.lblSeparatedby = New System.Windows.Forms.Label()
         Me.txtSeparator = New System.Windows.Forms.TextBox()
-        Me.lblLines = New System.Windows.Forms.Label()
+        Me.txtDecimalPlaces = New System.Windows.Forms.TextBox()
+        Me.txtNoofSigFigures = New System.Windows.Forms.TextBox()
+        Me.chkNoofSigFigures = New System.Windows.Forms.CheckBox()
+        Me.chkNoOfDecimalPlaces = New System.Windows.Forms.CheckBox()
+        Me.chkDisplayFactorswithLabels = New System.Windows.Forms.CheckBox()
+        Me.chkDisplaySerially = New System.Windows.Forms.CheckBox()
+        Me.chkDisplayasColumns = New System.Windows.Forms.CheckBox()
         Me.grpLayoutOptions = New System.Windows.Forms.GroupBox()
+        Me.txtLineWidth = New System.Windows.Forms.TextBox()
+        Me.lbtLineWidth = New System.Windows.Forms.Label()
         Me.txtFieldWidth = New System.Windows.Forms.TextBox()
         Me.lblFieldWidth = New System.Windows.Forms.Label()
-        Me.lbtLineWidth = New System.Windows.Forms.Label()
-        Me.txtLineWidth = New System.Windows.Forms.TextBox()
         Me.chkDisplaySpecifiedRows = New System.Windows.Forms.CheckBox()
         Me.grpDataOptions.SuspendLayout()
         Me.grpLayoutOptions.SuspendLayout()
@@ -57,9 +57,9 @@ Partial Class dlgDisplay
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(27, 310)
+        Me.ucrBase.Location = New System.Drawing.Point(51, 310)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 0
         '
         'ucrDisplayDataSelector
@@ -185,74 +185,15 @@ Partial Class dlgDisplay
         Me.grpDataOptions.Tag = "DataIOptions"
         Me.grpDataOptions.Text = "Data Options"
         '
-        'chkDisplayasColumns
+        'lblLines
         '
-        Me.chkDisplayasColumns.AutoSize = True
-        Me.chkDisplayasColumns.Location = New System.Drawing.Point(6, 19)
-        Me.chkDisplayasColumns.Name = "chkDisplayasColumns"
-        Me.chkDisplayasColumns.Size = New System.Drawing.Size(117, 17)
-        Me.chkDisplayasColumns.TabIndex = 7
-        Me.chkDisplayasColumns.Tag = "Display_as_Columns"
-        Me.chkDisplayasColumns.Text = "Display as Columns"
-        Me.chkDisplayasColumns.UseVisualStyleBackColor = True
-        '
-        'chkDisplaySerially
-        '
-        Me.chkDisplaySerially.AutoSize = True
-        Me.chkDisplaySerially.Location = New System.Drawing.Point(6, 42)
-        Me.chkDisplaySerially.Name = "chkDisplaySerially"
-        Me.chkDisplaySerially.Size = New System.Drawing.Size(96, 17)
-        Me.chkDisplaySerially.TabIndex = 7
-        Me.chkDisplaySerially.Tag = "Display_Serially"
-        Me.chkDisplaySerially.Text = "Display Serially"
-        Me.chkDisplaySerially.UseVisualStyleBackColor = True
-        '
-        'chkDisplayFactorswithLabels
-        '
-        Me.chkDisplayFactorswithLabels.AutoSize = True
-        Me.chkDisplayFactorswithLabels.Location = New System.Drawing.Point(6, 81)
-        Me.chkDisplayFactorswithLabels.Name = "chkDisplayFactorswithLabels"
-        Me.chkDisplayFactorswithLabels.Size = New System.Drawing.Size(154, 17)
-        Me.chkDisplayFactorswithLabels.TabIndex = 7
-        Me.chkDisplayFactorswithLabels.Tag = "Display_Factors_with_Labels"
-        Me.chkDisplayFactorswithLabels.Text = "Display Factors with Labels"
-        Me.chkDisplayFactorswithLabels.UseVisualStyleBackColor = True
-        '
-        'chkNoOfDecimalPlaces
-        '
-        Me.chkNoOfDecimalPlaces.AutoSize = True
-        Me.chkNoOfDecimalPlaces.Location = New System.Drawing.Point(6, 104)
-        Me.chkNoOfDecimalPlaces.Name = "chkNoOfDecimalPlaces"
-        Me.chkNoOfDecimalPlaces.Size = New System.Drawing.Size(130, 17)
-        Me.chkNoOfDecimalPlaces.TabIndex = 7
-        Me.chkNoOfDecimalPlaces.Tag = "No_Of_Decimal_Places"
-        Me.chkNoOfDecimalPlaces.Text = "No Of Decimal Places"
-        Me.chkNoOfDecimalPlaces.UseVisualStyleBackColor = True
-        '
-        'chkNoofSigFigures
-        '
-        Me.chkNoofSigFigures.AutoSize = True
-        Me.chkNoofSigFigures.Location = New System.Drawing.Point(6, 127)
-        Me.chkNoofSigFigures.Name = "chkNoofSigFigures"
-        Me.chkNoofSigFigures.Size = New System.Drawing.Size(113, 17)
-        Me.chkNoofSigFigures.TabIndex = 7
-        Me.chkNoofSigFigures.Tag = "No._of_Sig._Figures"
-        Me.chkNoofSigFigures.Text = "No. of Sig. Figures"
-        Me.chkNoofSigFigures.UseVisualStyleBackColor = True
-        '
-        'txtNoofSigFigures
-        '
-        Me.txtNoofSigFigures.Location = New System.Drawing.Point(143, 122)
-        Me.txtNoofSigFigures.Name = "txtNoofSigFigures"
-        Me.txtNoofSigFigures.Size = New System.Drawing.Size(34, 20)
-        Me.txtNoofSigFigures.TabIndex = 8
-        '
-        'txtDecimalPlaces
-        '
-        Me.txtDecimalPlaces.Location = New System.Drawing.Point(143, 96)
-        Me.txtDecimalPlaces.Name = "txtDecimalPlaces"
-        Me.txtDecimalPlaces.Size = New System.Drawing.Size(34, 20)
-        Me.txtDecimalPlaces.TabIndex = 9
+        Me.lblLines.AutoSize = True
+        Me.lblLines.Location = New System.Drawing.Point(139, 64)
+        Me.lblLines.Name = "lblLines"
+        Me.lblLines.Size = New System.Drawing.Size(32, 13)
+        Me.lblLines.TabIndex = 11
+        Me.lblLines.Tag = "Lines"
+        Me.lblLines.Text = "Lines"
         '
         'lblSeparatedby
         '
@@ -271,15 +212,74 @@ Partial Class dlgDisplay
         Me.txtSeparator.Size = New System.Drawing.Size(34, 20)
         Me.txtSeparator.TabIndex = 9
         '
-        'lblLines
+        'txtDecimalPlaces
         '
-        Me.lblLines.AutoSize = True
-        Me.lblLines.Location = New System.Drawing.Point(139, 64)
-        Me.lblLines.Name = "lblLines"
-        Me.lblLines.Size = New System.Drawing.Size(32, 13)
-        Me.lblLines.TabIndex = 11
-        Me.lblLines.Tag = "Lines"
-        Me.lblLines.Text = "Lines"
+        Me.txtDecimalPlaces.Location = New System.Drawing.Point(143, 96)
+        Me.txtDecimalPlaces.Name = "txtDecimalPlaces"
+        Me.txtDecimalPlaces.Size = New System.Drawing.Size(34, 20)
+        Me.txtDecimalPlaces.TabIndex = 9
+        '
+        'txtNoofSigFigures
+        '
+        Me.txtNoofSigFigures.Location = New System.Drawing.Point(143, 122)
+        Me.txtNoofSigFigures.Name = "txtNoofSigFigures"
+        Me.txtNoofSigFigures.Size = New System.Drawing.Size(34, 20)
+        Me.txtNoofSigFigures.TabIndex = 8
+        '
+        'chkNoofSigFigures
+        '
+        Me.chkNoofSigFigures.AutoSize = True
+        Me.chkNoofSigFigures.Location = New System.Drawing.Point(6, 127)
+        Me.chkNoofSigFigures.Name = "chkNoofSigFigures"
+        Me.chkNoofSigFigures.Size = New System.Drawing.Size(113, 17)
+        Me.chkNoofSigFigures.TabIndex = 7
+        Me.chkNoofSigFigures.Tag = "No._of_Sig._Figures"
+        Me.chkNoofSigFigures.Text = "No. of Sig. Figures"
+        Me.chkNoofSigFigures.UseVisualStyleBackColor = True
+        '
+        'chkNoOfDecimalPlaces
+        '
+        Me.chkNoOfDecimalPlaces.AutoSize = True
+        Me.chkNoOfDecimalPlaces.Location = New System.Drawing.Point(6, 104)
+        Me.chkNoOfDecimalPlaces.Name = "chkNoOfDecimalPlaces"
+        Me.chkNoOfDecimalPlaces.Size = New System.Drawing.Size(130, 17)
+        Me.chkNoOfDecimalPlaces.TabIndex = 7
+        Me.chkNoOfDecimalPlaces.Tag = "No_Of_Decimal_Places"
+        Me.chkNoOfDecimalPlaces.Text = "No Of Decimal Places"
+        Me.chkNoOfDecimalPlaces.UseVisualStyleBackColor = True
+        '
+        'chkDisplayFactorswithLabels
+        '
+        Me.chkDisplayFactorswithLabels.AutoSize = True
+        Me.chkDisplayFactorswithLabels.Location = New System.Drawing.Point(6, 81)
+        Me.chkDisplayFactorswithLabels.Name = "chkDisplayFactorswithLabels"
+        Me.chkDisplayFactorswithLabels.Size = New System.Drawing.Size(154, 17)
+        Me.chkDisplayFactorswithLabels.TabIndex = 7
+        Me.chkDisplayFactorswithLabels.Tag = "Display_Factors_with_Labels"
+        Me.chkDisplayFactorswithLabels.Text = "Display Factors with Labels"
+        Me.chkDisplayFactorswithLabels.UseVisualStyleBackColor = True
+        '
+        'chkDisplaySerially
+        '
+        Me.chkDisplaySerially.AutoSize = True
+        Me.chkDisplaySerially.Location = New System.Drawing.Point(6, 42)
+        Me.chkDisplaySerially.Name = "chkDisplaySerially"
+        Me.chkDisplaySerially.Size = New System.Drawing.Size(96, 17)
+        Me.chkDisplaySerially.TabIndex = 7
+        Me.chkDisplaySerially.Tag = "Display_Serially"
+        Me.chkDisplaySerially.Text = "Display Serially"
+        Me.chkDisplaySerially.UseVisualStyleBackColor = True
+        '
+        'chkDisplayasColumns
+        '
+        Me.chkDisplayasColumns.AutoSize = True
+        Me.chkDisplayasColumns.Location = New System.Drawing.Point(6, 19)
+        Me.chkDisplayasColumns.Name = "chkDisplayasColumns"
+        Me.chkDisplayasColumns.Size = New System.Drawing.Size(117, 17)
+        Me.chkDisplayasColumns.TabIndex = 7
+        Me.chkDisplayasColumns.Tag = "Display_as_Columns"
+        Me.chkDisplayasColumns.Text = "Display as Columns"
+        Me.chkDisplayasColumns.UseVisualStyleBackColor = True
         '
         'grpLayoutOptions
         '
@@ -294,6 +294,23 @@ Partial Class dlgDisplay
         Me.grpLayoutOptions.TabStop = False
         Me.grpLayoutOptions.Tag = "Layout_Options"
         Me.grpLayoutOptions.Text = "Layout Options"
+        '
+        'txtLineWidth
+        '
+        Me.txtLineWidth.Location = New System.Drawing.Point(81, 49)
+        Me.txtLineWidth.Name = "txtLineWidth"
+        Me.txtLineWidth.Size = New System.Drawing.Size(55, 20)
+        Me.txtLineWidth.TabIndex = 9
+        '
+        'lbtLineWidth
+        '
+        Me.lbtLineWidth.AutoSize = True
+        Me.lbtLineWidth.Location = New System.Drawing.Point(11, 51)
+        Me.lbtLineWidth.Name = "lbtLineWidth"
+        Me.lbtLineWidth.Size = New System.Drawing.Size(58, 13)
+        Me.lbtLineWidth.TabIndex = 10
+        Me.lbtLineWidth.Tag = "Line_Width"
+        Me.lbtLineWidth.Text = "Line Width"
         '
         'txtFieldWidth
         '
@@ -312,23 +329,6 @@ Partial Class dlgDisplay
         Me.lblFieldWidth.Tag = "Field_Width"
         Me.lblFieldWidth.Text = "Field Width"
         '
-        'lbtLineWidth
-        '
-        Me.lbtLineWidth.AutoSize = True
-        Me.lbtLineWidth.Location = New System.Drawing.Point(11, 51)
-        Me.lbtLineWidth.Name = "lbtLineWidth"
-        Me.lbtLineWidth.Size = New System.Drawing.Size(58, 13)
-        Me.lbtLineWidth.TabIndex = 10
-        Me.lbtLineWidth.Tag = "Line_Width"
-        Me.lbtLineWidth.Text = "Line Width"
-        '
-        'txtLineWidth
-        '
-        Me.txtLineWidth.Location = New System.Drawing.Point(81, 49)
-        Me.txtLineWidth.Name = "txtLineWidth"
-        Me.txtLineWidth.Size = New System.Drawing.Size(55, 20)
-        Me.txtLineWidth.TabIndex = 9
-        '
         'chkDisplaySpecifiedRows
         '
         Me.chkDisplaySpecifiedRows.AutoSize = True
@@ -344,7 +344,7 @@ Partial Class dlgDisplay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(507, 345)
+        Me.ClientSize = New System.Drawing.Size(507, 370)
         Me.Controls.Add(Me.grpLayoutOptions)
         Me.Controls.Add(Me.grpDataOptions)
         Me.Controls.Add(Me.chkLayoutOptions)

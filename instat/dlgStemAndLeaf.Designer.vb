@@ -45,14 +45,14 @@ Partial Class dlgStemAndLeaf
         '
         Me.ucrBase.Location = New System.Drawing.Point(12, 216)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 2
         '
         'dlgStemAndLeaf
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(443, 260)
+        Me.ClientSize = New System.Drawing.Size(443, 280)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverStemAndLeaf)
         Me.Controls.Add(Me.UcrAddRemove)

@@ -27,11 +27,13 @@ Public Class Distribution
         strNameTag = strTemp
     End Sub
 
-    Public Sub AddParameter(strArgumentName As String, strNameTag As String, Optional DefaultValue As Decimal = Nothing)
+    Public Sub AddParameter(strArgumentName As String, strNameTag As String, Optional DefaultValue As Decimal = 9999)
         Dim NewParameter As New DistributionParameter
         NewParameter.strArgumentName = strArgumentName
         NewParameter.strNameTag = strNameTag
-        NewParameter.dcmDefaultValue = DefaultValue
+        If Not DefaultValue = 9999 Then
+            NewParameter.SetDefaultValue(DefaultValue)
+        End If
         clsParameters.Add(NewParameter)
     End Sub
 End Class
@@ -40,5 +42,10 @@ Public Class DistributionParameter
     Public strArgumentName As String
     Public strNameTag As String
     Public dcmDefaultValue As Decimal
+    Public bHasDefault As Boolean = False
 
+    Public Sub SetDefaultValue(Val As Decimal)
+        dcmDefaultValue = Val
+        bHasDefault = True
+    End Sub
 End Class
