@@ -296,23 +296,6 @@ Public Class frmMain
         Return New KeyValuePair(Of String, String)("", "")
     End Function
 
-    Public Function OpenWorkbookDialog() As KeyValuePair(Of String, String)
-        Dim dlgOpen As New OpenFileDialog
-        Dim strFilePath, strFileName, strFileExt As String
-        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|All Data files (*.csv,*.RDS)|*.csv;*.RDS"
-        dlgOpen.Title = "Open a Data file"
-        If dlgOpen.ShowDialog() = DialogResult.OK Then
-            'checks if the file name is not blank'
-            If dlgOpen.FileName <> "" Then
-                'strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
-                strFileExt = Path.GetExtension(dlgOpen.FileName)
-                strFilePath = Replace(dlgOpen.FileName, "\", "/")
-                Return New KeyValuePair(Of String, String)(strFileExt, Chr(34) & strFilePath & Chr(34))
-            End If
-        End If
-        Return New KeyValuePair(Of String, String)("", "")
-    End Function
-
     Private Sub mnuEditFont_Click(sender As Object, e As EventArgs) Handles mnuEditFont.Click
         'dlgFont.ShowDialog()
     End Sub
@@ -745,5 +728,13 @@ Public Class frmMain
         Else
             frmEditor.Visible = True
         End If
+    End Sub
+
+    Private Sub mnuEditUndo_Click(sender As Object, e As EventArgs) Handles mnuEditUndo.Click
+        frmEditor.grdData.Undo()
+    End Sub
+
+    Private Sub mnuEditRedo_Click(sender As Object, e As EventArgs) Handles mnuEditRedo.Click
+        frmEditor.grdData.Redo()
     End Sub
 End Class

@@ -76,6 +76,13 @@ Public Class ucrDistributions
         Dim clsNormalDist As New Distribution
         Dim clsExponentialDist As New Distribution
         Dim clsGeometricDist As New Distribution
+        Dim clsExtremeValueDist As New Distribution
+        Dim clsWeibullDist As New Distribution
+        Dim clsUniformDist As New Distribution
+        Dim clsBernouliDist As New Distribution
+        Dim clsBinomialDist As New Distribution
+        Dim clsPoissonDist As New Distribution
+        Dim clsAutogressiveDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -106,11 +113,83 @@ Public Class ucrDistributions
         clsGeometricDist.AddParameter("prob", "Probability")
         lstAllDistributions.Add(clsGeometricDist)
 
+        ' Extreme Value Distribution
+        clsExtremeValueDist.strNameTag = "Extreme_Value"
+        clsGeometricDist.strRFunctionName = ""
+        clsGeometricDist.strPFunctionName = ""
+        clsGeometricDist.strQFunctionName = ""
+        clsGeometricDist.strDFunctionName = ""
+        clsExtremeValueDist.AddParameter("mode", "Mode")
+        clsExtremeValueDist.AddParameter("scale", "Scale")
+        lstAllDistributions.Add(clsExtremeValueDist)
+
+        ' Weibull Distribution
+        clsWeibullDist.strNameTag = "Weibull"
+        clsWeibullDist.strRFunctionName = ""
+        clsWeibullDist.strPFunctionName = ""
+        clsWeibullDist.strQFunctionName = ""
+        clsWeibullDist.strDFunctionName = ""
+        clsWeibullDist.AddParameter("mean", "Mean")
+        clsWeibullDist.AddParameter("shape", "Shape")
+        lstAllDistributions.Add(clsWeibullDist)
+
+        'Uniform Distribution
+        clsUniformDist.strNameTag = ""
+        clsUniformDist.strRFunctionName = ""
+        clsUniformDist.strPFunctionName = ""
+        clsUniformDist.strQFunctionName = ""
+        clsUniformDist.strDFunctionName = ""
+        clsUniformDist.AddParameter("a", "a")
+        clsUniformDist.AddParameter("b", "b")
+        lstAllDistributions.Add(clsUniformDist)
+
+
+        'bernouli Distribution
+        clsBernouliDist.strNameTag = ""
+        clsBernouliDist.strRFunctionName = ""
+        clsBernouliDist.strPFunctionName = ""
+        clsBernouliDist.strQFunctionName = ""
+        clsBernouliDist.strDFunctionName = ""
+        clsBernouliDist.AddParameter("prob", "Probability")
+        lstAllDistributions.Add(clsBernouliDist)
+
+        'Binomial Distribution
+        clsBinomialDist.strNameTag = ""
+        clsBinomialDist.strRFunctionName = ""
+        clsBinomialDist.strPFunctionName = ""
+        clsBinomialDist.strQFunctionName = ""
+        clsBinomialDist.strDFunctionName = ""
+        clsBinomialDist.AddParameter("number", "Number")
+        clsBinomialDist.AddParameter("prob", "Probability")
+        lstAllDistributions.Add(clsBinomialDist)
+
+        'poisson Distribution
+        clsPoissonDist.strNameTag = ""
+        clsPoissonDist.strRFunctionName = ""
+        clsPoissonDist.strPFunctionName = ""
+        clsPoissonDist.strQFunctionName = ""
+        clsPoissonDist.strDFunctionName = ""
+        clsPoissonDist.AddParameter("mean", "Mean")
+        lstAllDistributions.Add(clsPoissonDist)
+
+        'Autogressive Distribution
+        clsAutogressiveDist.strNameTag = ""
+        clsAutogressiveDist.strRFunctionName = ""
+        clsAutogressiveDist.strPFunctionName = ""
+        clsAutogressiveDist.strQFunctionName = ""
+        clsAutogressiveDist.strDFunctionName = ""
+        clsAutogressiveDist.AddParameter("mean", "Mean")
+        clsAutogressiveDist.AddParameter("st.", "St. Dev")
+        lstAllDistributions.Add(clsAutogressiveDist)
         bDistributionsSet = True
     End Sub
     Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
         clsCurrDistribution = lstRequiredDistributions(cboDistributions.SelectedIndex)
         RaiseEvent cboDistributionsIndexChanged(sender, e)
+    End Sub
+
+    Private Sub lblDistributionType_Click(sender As Object, e As EventArgs) Handles lblDistributionType.Click
+
     End Sub
 End Class
