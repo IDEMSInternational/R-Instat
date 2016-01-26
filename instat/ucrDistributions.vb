@@ -23,7 +23,7 @@ Public Class ucrDistributions
     Public strRequiredDistributions As String = "All"
     Public clsCurrDistribution As New Distribution
     Public bDistributionsSet As Boolean = False
-    Public clsRSyntax As New RSyntax
+    Public ucrBaseButtons As ucrButtons
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not bDistributionsSet Then
@@ -179,20 +179,20 @@ Public Class ucrDistributions
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
         clsCurrDistribution = lstRequiredDistributions(cboDistributions.SelectedIndex)
         If strRequiredDistributions <> "All" Then
-            clsRSyntax.ClearParameters()
+            ucrBaseButtons.clsRSyntax.ClearParameters()
             Select Case strRequiredDistributions
                 Case "RFunctions"
-                    clsRSyntax.SetFunction(clsCurrDistribution.strRFunctionName)
+                    ucrBaseButtons.clsRsyntax.SetFunction(clsCurrDistribution.strRFunctionName)
                 Case "PFunctions"
-                    clsRSyntax.SetFunction(clsCurrDistribution.strPFunctionName)
+                    ucrBaseButtons.clsRsyntax.SetFunction(clsCurrDistribution.strPFunctionName)
                 Case "DFunctions"
-                    clsRSyntax.SetFunction(clsCurrDistribution.strDFunctionName)
+                    ucrBaseButtons.clsRsyntax.SetFunction(clsCurrDistribution.strDFunctionName)
                 Case "QFunctions"
-                    clsRSyntax.SetFunction(clsCurrDistribution.strQFunctionName)
+                    ucrBaseButtons.clsRsyntax.SetFunction(clsCurrDistribution.strQFunctionName)
             End Select
             For Each clsCurrParameter In clsCurrDistribution.clsParameters
                 If clsCurrParameter.bHasDefault Then
-                    clsRSyntax.AddParameter(clsCurrParameter.strArgumentName, clsCurrParameter.dcmDefaultValue)
+                    ucrBaseButtons.clsRsyntax.AddParameter(clsCurrParameter.strArgumentName, clsCurrParameter.dcmDefaultValue)
                 End If
             Next
         End If
