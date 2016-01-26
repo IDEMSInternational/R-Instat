@@ -115,6 +115,12 @@ Partial Class frmMain
         Me.mnuWindowDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuWindowsEditor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WindowsLayoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuWindowsCascading = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuWindowsStacked = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuWindowsSideBySide = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuWindowsArrangedIcons = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
@@ -301,12 +307,7 @@ Partial Class frmMain
         Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.WindowsLayoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuWindowsCascading = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuWindowsStacked = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuWindowsSideBySide = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuWindowsArrangedIcons = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuWindowsEditor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditRedo = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -900,6 +901,43 @@ Partial Class frmMain
         Me.ScriptToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
         Me.ScriptToolStripMenuItem.Text = "Script"
         '
+        'mnuWindowsEditor
+        '
+        Me.mnuWindowsEditor.Name = "mnuWindowsEditor"
+        Me.mnuWindowsEditor.Size = New System.Drawing.Size(220, 22)
+        Me.mnuWindowsEditor.Text = "Editor"
+        '
+        'WindowsLayoutToolStripMenuItem
+        '
+        Me.WindowsLayoutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuWindowsCascading, Me.mnuWindowsStacked, Me.mnuWindowsSideBySide, Me.mnuWindowsArrangedIcons})
+        Me.WindowsLayoutToolStripMenuItem.Name = "WindowsLayoutToolStripMenuItem"
+        Me.WindowsLayoutToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
+        Me.WindowsLayoutToolStripMenuItem.Text = "Windows Layout"
+        '
+        'mnuWindowsCascading
+        '
+        Me.mnuWindowsCascading.Name = "mnuWindowsCascading"
+        Me.mnuWindowsCascading.Size = New System.Drawing.Size(173, 22)
+        Me.mnuWindowsCascading.Text = "Cascading"
+        '
+        'mnuWindowsStacked
+        '
+        Me.mnuWindowsStacked.Name = "mnuWindowsStacked"
+        Me.mnuWindowsStacked.Size = New System.Drawing.Size(173, 22)
+        Me.mnuWindowsStacked.Text = "Tiled Vertically"
+        '
+        'mnuWindowsSideBySide
+        '
+        Me.mnuWindowsSideBySide.Name = "mnuWindowsSideBySide"
+        Me.mnuWindowsSideBySide.Size = New System.Drawing.Size(173, 22)
+        Me.mnuWindowsSideBySide.Text = "Tiled Horizanotally"
+        '
+        'mnuWindowsArrangedIcons
+        '
+        Me.mnuWindowsArrangedIcons.Name = "mnuWindowsArrangedIcons"
+        Me.mnuWindowsArrangedIcons.Size = New System.Drawing.Size(173, 22)
+        Me.mnuWindowsArrangedIcons.Text = "Arranged as Icons"
+        '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
@@ -1076,7 +1114,7 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditUndo, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuEditClear, Me.mnuEditSelectAll, Me.mnuEditFind, Me.mnuEditReplace, Me.mnuEditFont, Me.mnuEditRunWSEditor, Me.mnuEditViewEditText, Me.mnuEditViewEditMacro, Me.mnuEditCommandLogging, Me.mnuEditOutputSpooling, Me.mnuEditRecall, Me.mnuEditFlags, Me.mnuEditOptions})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditUndo, Me.mnuEditRedo, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuEditClear, Me.mnuEditSelectAll, Me.mnuEditFind, Me.mnuEditReplace, Me.mnuEditFont, Me.mnuEditRunWSEditor, Me.mnuEditViewEditText, Me.mnuEditViewEditMacro, Me.mnuEditCommandLogging, Me.mnuEditOutputSpooling, Me.mnuEditRecall, Me.mnuEditFlags, Me.mnuEditOptions})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(39, 20)
         Me.mnuEdit.Tag = "Edit"
@@ -2189,42 +2227,12 @@ Partial Class frmMain
         Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
         Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
         '
-        'WindowsLayoutToolStripMenuItem
+        'mnuEditRedo
         '
-        Me.WindowsLayoutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuWindowsCascading, Me.mnuWindowsStacked, Me.mnuWindowsSideBySide, Me.mnuWindowsArrangedIcons})
-        Me.WindowsLayoutToolStripMenuItem.Name = "WindowsLayoutToolStripMenuItem"
-        Me.WindowsLayoutToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
-        Me.WindowsLayoutToolStripMenuItem.Text = "Windows Layout"
-        '
-        'mnuWindowsCascading
-        '
-        Me.mnuWindowsCascading.Name = "mnuWindowsCascading"
-        Me.mnuWindowsCascading.Size = New System.Drawing.Size(173, 22)
-        Me.mnuWindowsCascading.Text = "Cascading"
-        '
-        'mnuWindowsStacked
-        '
-        Me.mnuWindowsStacked.Name = "mnuWindowsStacked"
-        Me.mnuWindowsStacked.Size = New System.Drawing.Size(173, 22)
-        Me.mnuWindowsStacked.Text = "Tiled Vertically"
-        '
-        'mnuWindowsSideBySide
-        '
-        Me.mnuWindowsSideBySide.Name = "mnuWindowsSideBySide"
-        Me.mnuWindowsSideBySide.Size = New System.Drawing.Size(173, 22)
-        Me.mnuWindowsSideBySide.Text = "Tiled Horizanotally"
-        '
-        'mnuWindowsArrangedIcons
-        '
-        Me.mnuWindowsArrangedIcons.Name = "mnuWindowsArrangedIcons"
-        Me.mnuWindowsArrangedIcons.Size = New System.Drawing.Size(173, 22)
-        Me.mnuWindowsArrangedIcons.Text = "Arranged as Icons"
-        '
-        'mnuWindowsEditor
-        '
-        Me.mnuWindowsEditor.Name = "mnuWindowsEditor"
-        Me.mnuWindowsEditor.Size = New System.Drawing.Size(220, 22)
-        Me.mnuWindowsEditor.Text = "Editor"
+        Me.mnuEditRedo.Name = "mnuEditRedo"
+        Me.mnuEditRedo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
+        Me.mnuEditRedo.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditRedo.Text = "Redo"
         '
         'frmMain
         '
@@ -2534,4 +2542,5 @@ Partial Class frmMain
     Friend WithEvents mnuWindowsSideBySide As ToolStripMenuItem
     Friend WithEvents mnuWindowsArrangedIcons As ToolStripMenuItem
     Friend WithEvents mnuWindowsEditor As ToolStripMenuItem
+    Friend WithEvents mnuEditRedo As ToolStripMenuItem
 End Class
