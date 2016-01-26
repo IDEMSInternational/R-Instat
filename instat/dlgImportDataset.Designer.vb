@@ -45,9 +45,8 @@ Partial Class dlgImportDataset
         Me.rdoNo = New System.Windows.Forms.RadioButton()
         Me.txtInputFile = New System.Windows.Forms.TextBox()
         Me.txtDataFrame = New System.Windows.Forms.TextBox()
-        Me.cmdImport = New System.Windows.Forms.Button()
-        Me.cmdCancel = New System.Windows.Forms.Button()
         Me.chlStringsAsFactors = New System.Windows.Forms.CheckBox()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'lblInputFile
@@ -163,16 +162,16 @@ Partial Class dlgImportDataset
         '
         Me.txtName.Location = New System.Drawing.Point(15, 25)
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(100, 20)
+        Me.txtName.Size = New System.Drawing.Size(202, 20)
         Me.txtName.TabIndex = 11
         '
         'cboEncoding
         '
         Me.cboEncoding.FormattingEnabled = True
         Me.cboEncoding.Items.AddRange(New Object() {"Automatic"})
-        Me.cboEncoding.Location = New System.Drawing.Point(67, 62)
+        Me.cboEncoding.Location = New System.Drawing.Point(81, 57)
         Me.cboEncoding.Name = "cboEncoding"
-        Me.cboEncoding.Size = New System.Drawing.Size(121, 21)
+        Me.cboEncoding.Size = New System.Drawing.Size(136, 21)
         Me.cboEncoding.TabIndex = 12
         '
         'cboRowNames
@@ -267,26 +266,6 @@ Partial Class dlgImportDataset
         Me.txtDataFrame.Size = New System.Drawing.Size(422, 178)
         Me.txtDataFrame.TabIndex = 23
         '
-        'cmdImport
-        '
-        Me.cmdImport.Location = New System.Drawing.Point(484, 453)
-        Me.cmdImport.Name = "cmdImport"
-        Me.cmdImport.Size = New System.Drawing.Size(75, 23)
-        Me.cmdImport.TabIndex = 24
-        Me.cmdImport.Tag = "Import"
-        Me.cmdImport.Text = "Import"
-        Me.cmdImport.UseVisualStyleBackColor = True
-        '
-        'cmdCancel
-        '
-        Me.cmdCancel.Location = New System.Drawing.Point(596, 453)
-        Me.cmdCancel.Name = "cmdCancel"
-        Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
-        Me.cmdCancel.TabIndex = 25
-        Me.cmdCancel.Tag = "Cancel"
-        Me.cmdCancel.Text = "Cancel"
-        Me.cmdCancel.UseVisualStyleBackColor = True
-        '
         'chlStringsAsFactors
         '
         Me.chlStringsAsFactors.AutoSize = True
@@ -298,14 +277,20 @@ Partial Class dlgImportDataset
         Me.chlStringsAsFactors.Text = "Strings as factors"
         Me.chlStringsAsFactors.UseVisualStyleBackColor = True
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(277, 445)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 27
+        '
         'dlgImportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(696, 483)
+        Me.ClientSize = New System.Drawing.Size(696, 501)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.chlStringsAsFactors)
-        Me.Controls.Add(Me.cmdCancel)
-        Me.Controls.Add(Me.cmdImport)
         Me.Controls.Add(Me.txtDataFrame)
         Me.Controls.Add(Me.txtInputFile)
         Me.Controls.Add(Me.rdoNo)
@@ -362,7 +347,6 @@ Partial Class dlgImportDataset
     Friend WithEvents rdoNo As RadioButton
     Friend WithEvents txtInputFile As TextBox
     Friend WithEvents txtDataFrame As TextBox
-    Friend WithEvents cmdImport As Button
-    Friend WithEvents cmdCancel As Button
     Friend WithEvents chlStringsAsFactors As CheckBox
+    Friend WithEvents ucrBase As ucrButtons
 End Class
