@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports instat.RSyntax
 
 Public Class ucrDistributions
     Public lstAllDistributions As New List(Of Distribution)
@@ -22,6 +23,7 @@ Public Class ucrDistributions
     Public strRequiredDistributions As String = "All"
     Public clsCurrDistribution As New Distribution
     Public bDistributionsSet As Boolean = False
+    Public clsRSyntax As New RSyntax
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not bDistributionsSet Then
@@ -176,6 +178,25 @@ Public Class ucrDistributions
     Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
         clsCurrDistribution = lstRequiredDistributions(cboDistributions.SelectedIndex)
+        If strRequiredDistributions <> "All" Then
+            clsRSyntax.ClearParameters()
+            Select Case strRequiredDistributions
+                Case "RFunctions"
+                    clsRSyntax.SetFunction(clsCurrDistribution.strRFunctionName)
+                Case "PFunctions"
+                    clsRSyntax.SetFunction(clsCurrDistribution.strPFunctionName)
+                Case "DFunctions"
+                    clsRSyntax.SetFunction(clsCurrDistribution.strDFunctionName)
+                Case "QFunctions"
+                    clsRSyntax.SetFunction(clsCurrDistribution.strQFunctionName)
+            End Select
+            For Each clsCurrParameter In clsCurrDistribution.clsParameters
+                If clsCurrParameter.bHasDefault Then
+                    clsRSyntax.AddParameter(clsCurrParameter.strArgumentName, clsCurrParameter.dcmDefaultValue)
+                End If
+            Next
+        End If
+
         RaiseEvent cboDistributionsIndexChanged(sender, e)
     End Sub
 End Class
