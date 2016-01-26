@@ -323,11 +323,11 @@ instat_obj$methods(get_column_names = function(obj_name) {
 }
 )
 
-instat_obj$methods(insert_column_in_data = function(obj_name, col_name = "", col_data = c(), col_number) {
+instat_obj$methods(insert_column_in_data = function(obj_name, col_name, col_data = c(), col_number) {
   if(!is.character(obj_name)) stop("obj_name must be of type character")
   if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
   
-  data_objects[[obj_name]]$insert_column_in_data(col_name = col_name, col_data = col_data, col_number = col_number)
+  data_objects[[obj_name]]$insert_column_in_data(col_name, col_data = col_data, col_number = col_number)
 }
 )
 
@@ -354,3 +354,19 @@ instat_obj$methods(length_of_data = function(obj_name) {
   data_objects[[obj_name]]$length_of_data()
 }
 )
+
+instat_obj$methods(get_next_default_object_name = function(prefix) {
+  if(!is.character(prefix)) stop("prefix must be of type character")
+  object_exists = TRUE
+  i = 1
+  while(object_exists) {
+    if(!paste0(prefix,i) %in% names(data_objects)) {
+      object_exists = FALSE
+      out = paste0(prefix,i)
+    }
+    i = i + 1
+  }
+  out
+} 
+)
+
