@@ -934,4 +934,31 @@
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="Bernouli" xml:space="preserve">
+    <value>Bernouli</value>
+  </data>
+  <data name="Binomial" xml:space="preserve">
+    <value>Binomial</value>
+  </data>
+  <data name="Exponential1" xml:space="preserve">
+    <value>Exponential</value>
+  </data>
+  <data name="Extreme_Value" xml:space="preserve">
+    <value>Extreme Value</value>
+  </data>
+  <data name="Geometric1" xml:space="preserve">
+    <value>Geometric</value>
+  </data>
+  <data name="Normal1" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Poisson" xml:space="preserve">
+    <value>Poisson</value>
+  </data>
+  <data name="Uniform" xml:space="preserve">
+    <value>Uniform</value>
+  </data>
+  <data name="Weibull" xml:space="preserve">
+    <value>Weibull</value>
+  </data>
 </root>
