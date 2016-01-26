@@ -32,13 +32,10 @@ Public Class frmMain
         frmScript.MdiParent = Me
         frmVariables.MdiParent = Me
         frmMetaData.MdiParent = Me
-        ' TODO get these to be in correct position without changing dockstyle
-        '      so that it doesn't mess with cascade etc.
-        'frmCommand.Dock = DockStyle.Right
-        'frmEditor.Dock = DockStyle.Left
 
         frmCommand.Show()
         frmEditor.Show()
+        Me.LayoutMdi(MdiLayout.TileVertical)
 
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
@@ -291,23 +288,6 @@ Public Class frmMain
                 strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
                 strFilePath = Replace(dlgOpen.FileName, "\", "/")
                 Return New KeyValuePair(Of String, String)(strFileName, strFilePath)
-            End If
-        End If
-        Return New KeyValuePair(Of String, String)("", "")
-    End Function
-
-    Public Function OpenWorkbookDialog() As KeyValuePair(Of String, String)
-        Dim dlgOpen As New OpenFileDialog
-        Dim strFilePath, strFileName, strFileExt As String
-        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|All Data files (*.csv,*.RDS)|*.csv;*.RDS"
-        dlgOpen.Title = "Open a Data file"
-        If dlgOpen.ShowDialog() = DialogResult.OK Then
-            'checks if the file name is not blank'
-            If dlgOpen.FileName <> "" Then
-                'strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
-                strFileExt = Path.GetExtension(dlgOpen.FileName)
-                strFilePath = Replace(dlgOpen.FileName, "\", "/")
-                Return New KeyValuePair(Of String, String)(strFileExt, Chr(34) & strFilePath & Chr(34))
             End If
         End If
         Return New KeyValuePair(Of String, String)("", "")
@@ -599,11 +579,21 @@ Public Class frmMain
         Dim strFileExt As String
 
         pair = OpenFromFileDialog()
-        strFileExt = Path.GetExtension(pair.Value)
+        'pair.key is the File Name
+        'pair.value is the File Path
+
+        ' TODO Probably remove LoadData sub in clsRLink once all opening is done through dialogs
         If Not IsNothing(pair.Key) Then
-            clsRLink.LoadData(pair.Key, pair.Value, strFileExt)
+            strFileExt = Path.GetExtension(pair.Value)
+            Select Case strFileExt
+                Case ".RDS"
+                    'TODO create dialog to do this
+                    clsRLink.LoadData(pair.Key, pair.Value, strFileExt)
+                Case ".csv"
+                    dlgImportDataset.SetName(pair.Key)
+                    dlgImportDataset.ShowDialog()
+            End Select
         End If
-        clsRLink.LoadData(pair.Key, pair.Value, strFileExt)
 
         'Dim kvpFile As KeyValuePair(Of String, String)
         'Dim clsRsyntax As New RSyntax
@@ -745,5 +735,13 @@ Public Class frmMain
         Else
             frmEditor.Visible = True
         End If
+    End Sub
+
+    Private Sub mnuEditUndo_Click(sender As Object, e As EventArgs) Handles mnuEditUndo.Click
+        frmEditor.grdData.Undo()
+    End Sub
+
+    Private Sub mnuEditRedo_Click(sender As Object, e As EventArgs) Handles mnuEditRedo.Click
+        frmEditor.grdData.Redo()
     End Sub
 End Class
