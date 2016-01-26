@@ -729,4 +729,12 @@ Public Class frmMain
             frmEditor.Visible = True
         End If
     End Sub
+
+    Private Sub mnuEditUndo_Click(sender As Object, e As EventArgs) Handles mnuEditUndo.Click
+        frmEditor.grdData.Undo()
+    End Sub
+
+    Private Sub mnuEditRedo_Click(sender As Object, e As EventArgs) Handles mnuEditRedo.Click
+        frmEditor.grdData.Redo()
+    End Sub
 End Class
