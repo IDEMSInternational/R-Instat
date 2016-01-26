@@ -18,6 +18,13 @@ Public Class dlgRegularSequence
     Dim bIsExtended As Boolean = False
 
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txtRepeatValues.Text = 1
+        txtLength.Text = 100
+        txtRepeatSequenceDate.Text = 1
+        txtRepeatValuesDate.Text = 1
+        txtRepeatSequence.Text = 1
+        txtRepeatTimes.Text = 1
+        txtSteps.Text = 1
         cmdRefreshPreview.Hide()
         grpSequence2.Hide()
         grpRepeatSingle.Hide()
@@ -41,8 +48,6 @@ Public Class dlgRegularSequence
         grpSequence2.Hide()
         grpSequence.Visible = True
     End Sub
-
-
     Private Sub txtFrom_Leave(sender As Object, e As EventArgs) Handles txtFrom.Leave
         ucrBase.clsRsyntax.AddParameter("from", txtFrom.Text)
     End Sub
