@@ -82,7 +82,6 @@ Public Class ucrDistributions
         Dim clsBernouliDist As New Distribution
         Dim clsBinomialDist As New Distribution
         Dim clsPoissonDist As New Distribution
-        Dim clsAutogressiveDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -110,77 +109,68 @@ Public Class ucrDistributions
         clsGeometricDist.strPFunctionName = "pgeom"
         clsGeometricDist.strQFunctionName = "qgeom"
         clsGeometricDist.strDFunctionName = "dgeom"
-        clsGeometricDist.AddParameter("prob", "Probability")
+        clsGeometricDist.AddParameter("prob", "Probability", 1)
         lstAllDistributions.Add(clsGeometricDist)
 
         ' Extreme Value Distribution
         clsExtremeValueDist.strNameTag = "Extreme_Value"
-        clsGeometricDist.strRFunctionName = ""
-        clsGeometricDist.strPFunctionName = ""
-        clsGeometricDist.strQFunctionName = ""
-        clsGeometricDist.strDFunctionName = ""
+        clsExtremeValueDist.strRFunctionName = "rgev"
+        clsExtremeValueDist.strPFunctionName = "pgev"
+        clsExtremeValueDist.strQFunctionName = "qgev"
+        clsExtremeValueDist.strDFunctionName = "dgev"
         clsExtremeValueDist.AddParameter("mode", "Mode")
         clsExtremeValueDist.AddParameter("scale", "Scale")
         lstAllDistributions.Add(clsExtremeValueDist)
 
         ' Weibull Distribution
         clsWeibullDist.strNameTag = "Weibull"
-        clsWeibullDist.strRFunctionName = ""
-        clsWeibullDist.strPFunctionName = ""
-        clsWeibullDist.strQFunctionName = ""
-        clsWeibullDist.strDFunctionName = ""
-        clsWeibullDist.AddParameter("mean", "Mean")
-        clsWeibullDist.AddParameter("shape", "Shape")
+        clsWeibullDist.strRFunctionName = "rweibull"
+        clsWeibullDist.strPFunctionName = "pweibull"
+        clsWeibullDist.strQFunctionName = "qweibull"
+        clsWeibullDist.strDFunctionName = "dweibull"
+        clsWeibullDist.AddParameter("shape", "shape")
+        clsWeibullDist.AddParameter("scale", "scale", 1)
         lstAllDistributions.Add(clsWeibullDist)
 
         'Uniform Distribution
-        clsUniformDist.strNameTag = ""
-        clsUniformDist.strRFunctionName = ""
-        clsUniformDist.strPFunctionName = ""
-        clsUniformDist.strQFunctionName = ""
-        clsUniformDist.strDFunctionName = ""
-        clsUniformDist.AddParameter("a", "a")
-        clsUniformDist.AddParameter("b", "b")
+        clsUniformDist.strNameTag = "Uniform"
+        clsUniformDist.strRFunctionName = "runif"
+        clsUniformDist.strPFunctionName = "punif"
+        clsUniformDist.strQFunctionName = "qunif"
+        clsUniformDist.strDFunctionName = "dunif"
+        clsUniformDist.AddParameter("a", "a", 0)
+        clsUniformDist.AddParameter("b", "b", 1)
         lstAllDistributions.Add(clsUniformDist)
 
 
-        'bernouli Distribution
-        clsBernouliDist.strNameTag = ""
-        clsBernouliDist.strRFunctionName = ""
-        clsBernouliDist.strPFunctionName = ""
-        clsBernouliDist.strQFunctionName = ""
-        clsBernouliDist.strDFunctionName = ""
-        clsBernouliDist.AddParameter("prob", "Probability")
+        'Bernouli Distribution
+        clsBernouliDist.strNameTag = "Bernouli"
+        clsBernouliDist.strRFunctionName = "rbern"
+        clsBernouliDist.strPFunctionName = "pbern"
+        clsBernouliDist.strQFunctionName = "qbern"
+        clsBernouliDist.strDFunctionName = "dbern"
+        clsBernouliDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsBernouliDist)
 
         'Binomial Distribution
-        clsBinomialDist.strNameTag = ""
-        clsBinomialDist.strRFunctionName = ""
-        clsBinomialDist.strPFunctionName = ""
-        clsBinomialDist.strQFunctionName = ""
-        clsBinomialDist.strDFunctionName = ""
-        clsBinomialDist.AddParameter("number", "Number")
-        clsBinomialDist.AddParameter("prob", "Probability")
+        clsBinomialDist.strNameTag = "Binomial"
+        clsBinomialDist.strRFunctionName = "rbinom"
+        clsBinomialDist.strPFunctionName = "pbinom"
+        clsBinomialDist.strQFunctionName = "qbinom"
+        clsBinomialDist.strDFunctionName = "dbinom"
+        clsBinomialDist.AddParameter("number", "Number", 1)
+        clsBinomialDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsBinomialDist)
 
         'poisson Distribution
-        clsPoissonDist.strNameTag = ""
-        clsPoissonDist.strRFunctionName = ""
-        clsPoissonDist.strPFunctionName = ""
-        clsPoissonDist.strQFunctionName = ""
-        clsPoissonDist.strDFunctionName = ""
-        clsPoissonDist.AddParameter("mean", "Mean")
+        clsPoissonDist.strNameTag = "Poisson"
+        clsPoissonDist.strRFunctionName = "rpois"
+        clsPoissonDist.strPFunctionName = "ppois"
+        clsPoissonDist.strQFunctionName = "qpois"
+        clsPoissonDist.strDFunctionName = "dpois"
+        clsPoissonDist.AddParameter("mean", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
 
-        'Autogressive Distribution
-        clsAutogressiveDist.strNameTag = ""
-        clsAutogressiveDist.strRFunctionName = ""
-        clsAutogressiveDist.strPFunctionName = ""
-        clsAutogressiveDist.strQFunctionName = ""
-        clsAutogressiveDist.strDFunctionName = ""
-        clsAutogressiveDist.AddParameter("mean", "Mean")
-        clsAutogressiveDist.AddParameter("st.", "St. Dev")
-        lstAllDistributions.Add(clsAutogressiveDist)
         bDistributionsSet = True
     End Sub
     Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
