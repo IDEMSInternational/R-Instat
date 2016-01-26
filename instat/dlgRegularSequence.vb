@@ -18,6 +18,7 @@ Public Class dlgRegularSequence
     Dim bIsExtended As Boolean = False
 
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        cmdRefreshPreview.Hide()
         grpSequence2.Hide()
         grpRepeatSingle.Hide()
         ucrBase.clsRsyntax.SetFunction("seq")
@@ -25,24 +26,22 @@ Public Class dlgRegularSequence
         ucrSelectDataFrame.SetColumnList(ucrColName)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrColName.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrColName.cboColumnName.Text)
     End Sub
-
-    Private Sub rdoSingleValue_Click(sender As Object, e As EventArgs) Handles rdoSingleValue.Click
-        grpSequence.Hide()
-        grpSequence2.Hide()
-        grpRepeatSingle.Visible = True
-    End Sub
-
-
     Private Sub rdoDates_Click(sender As Object, e As EventArgs) Handles rdoDates.Click
         grpSequence.Hide()
         grpRepeatSingle.Hide()
         grpSequence2.Visible = True
     End Sub
-    Private Sub rdSequence_Click(sender As Object, e As EventArgs) Handles rdoSequence.Click
+    Private Sub rdoSingleValue_Click(sender As Object, e As EventArgs) Handles rdoSingleValue.Click
+        grpSequence.Hide()
+        grpSequence2.Hide()
+        grpRepeatSingle.Visible = True
+    End Sub
+    Private Sub rdoSequence_Click(sender As Object, e As EventArgs) Handles rdoSequence.Click
         grpRepeatSingle.Hide()
         grpSequence2.Hide()
         grpSequence.Visible = True
     End Sub
+
 
     Private Sub txtFrom_Leave(sender As Object, e As EventArgs) Handles txtFrom.Leave
         ucrBase.clsRsyntax.AddParameter("from", txtFrom.Text)
@@ -92,16 +91,15 @@ Public Class dlgRegularSequence
     Private Sub cmdShowHide_Click(sender As Object, e As EventArgs) Handles cmdShowHide.Click
         If bIsExtended Then
             Me.Width -= 151
+            bIsExtended = False
+            cmdRefreshPreview.Visible = False
         Else
             Me.Width += 151
+            bIsExtended = True
+            cmdRefreshPreview.Visible = True
         End If
-    End Sub
-
-    Private Sub txtOverwrite_TextChanged(sender As Object, e As EventArgs) Handles txtOverwrite.TextChanged
 
     End Sub
 
-    Private Sub lblValue_Click(sender As Object, e As EventArgs) Handles lblValue.Click
 
-    End Sub
 End Class
