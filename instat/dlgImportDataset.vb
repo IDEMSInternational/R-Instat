@@ -29,19 +29,24 @@ Public Class dlgImportDataset
         ucrBase.clsRsyntax.AddParameter("sep", "Comma")
 
         cboDecimal.Text = "Period"
-        ucrBase.clsRsyntax.AddParameter("dec", "Period")
+        ucrBase.clsRsyntax.AddParameter("dec", Chr(34) & "." & Chr(34))
 
         cboQuote.Text = "Double quote"
-        ucrBase.clsRsyntax.AddParameter("quote", "\" & Chr(34))
+        ucrBase.clsRsyntax.AddParameter("quote", Chr(34) & "\" & Chr(34) & Chr(34))
 
         cboComment.Text = "None"
         ucrBase.clsRsyntax.AddParameter("comment.Char", "None")
 
-        ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
-
         txtNAStrings.Text = "NA"
         ucrBase.clsRsyntax.AddParameter("na.strings", "NA")
 
+    End Sub
+
+    Public Sub SetName(strName As String)
+        strName = Replace(strName, " ", "")
+        strName = Replace(strName, "-", "")
+        txtName.Text = strName
+        ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
     End Sub
 
     Private Sub txtName_Leave(sender As Object, e As EventArgs) Handles txtName.Leave
@@ -56,6 +61,7 @@ Public Class dlgImportDataset
 
     Private Sub cboRowNames_Leave(sender As Object, e As EventArgs) Handles cboRowNames.Leave
         If cboRowNames.Text <> "Automatic" Then
+
             ucrBase.clsRsyntax.AddParameter("row.names", cboRowNames.Text)
         End If
     End Sub
@@ -65,7 +71,12 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub cboDecimal_Leave(sender As Object, e As EventArgs) Handles cboDecimal.Leave
-        ucrBase.clsRsyntax.AddParameter("dec", cboDecimal.Text)
+        Select Case cboDecimal.Text
+            Case "Period"
+                ucrBase.clsRsyntax.AddParameter("dec", Chr(34) & "." & Chr(34))
+            Case "Comma"
+                ucrBase.clsRsyntax.AddParameter("dec", Chr(34) & "," & Chr(34))
+        End Select
     End Sub
 
     Private Sub cboQuote_Leave(sender As Object, e As EventArgs) Handles cboQuote.Leave
