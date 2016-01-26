@@ -128,8 +128,8 @@ Public Class ucrDistributions
         clsWeibullDist.strPFunctionName = "pweibull"
         clsWeibullDist.strQFunctionName = "qweibull"
         clsWeibullDist.strDFunctionName = "dweibull"
-        clsWeibullDist.AddParameter("shape", "shape")
-        clsWeibullDist.AddParameter("scale", "scale", 1)
+        clsWeibullDist.AddParameter("shape", "Shape")
+        clsWeibullDist.AddParameter("scale", "Scale", 1)
         lstAllDistributions.Add(clsWeibullDist)
 
         'Uniform Distribution
@@ -177,9 +177,5 @@ Public Class ucrDistributions
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
         clsCurrDistribution = lstRequiredDistributions(cboDistributions.SelectedIndex)
         RaiseEvent cboDistributionsIndexChanged(sender, e)
-    End Sub
-
-    Private Sub lblDistributionType_Click(sender As Object, e As EventArgs) Handles lblDistributionType.Click
-
     End Sub
 End Class
