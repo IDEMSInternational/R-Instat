@@ -66,9 +66,7 @@ Public Class RSyntax
             clsFunction = clsBaseFunction
         End If
 
-        For Each clsCurrParam In clsFunction.clsParameters
-            clsFunction.RemoveParameterByName(clsCurrParam.strArgumentName)
-        Next
+        clsFunction.ClearParameters()
     End Sub
 
     Public Function GetScript(Optional ByRef clsFunction As RFunction = Nothing, Optional bExcludeAssignedFunctionOutput As Boolean = True) As String
