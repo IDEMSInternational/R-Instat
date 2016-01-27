@@ -16,13 +16,10 @@
 Imports instat.Translations
 
 Public Class dlgRandomSample
+    Public clsRSyntax As New RSyntax
     Private Sub dlgRandomSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("rnorm")
-        ucrBase.clsRsyntax.iCallType = 2
         autoTranslate(Me)
-        ucrReceiver.Selector = ucrSelector
-        ucrReceiver.SetMeAsReceiver()
         ucrBase.OKEnabled(False)
-
+        ucrDistWithParameters.ucrBaseButtons = ucrBase
     End Sub
 End Class
