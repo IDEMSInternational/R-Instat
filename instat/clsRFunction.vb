@@ -113,4 +113,8 @@ Public Class RFunction
         bIsAssigned = False
     End Sub
 
+    Public Sub ClearParameters()
+        clsParameters.Clear()
+        bIsAssigned = False
+    End Sub
 End Class

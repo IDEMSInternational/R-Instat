@@ -202,6 +202,9 @@ data_obj$methods(get_column_from_data = function(col_name) {
 data_obj$methods(rename_column_in_data = function(curr_col_name = "", new_col_name="") {
   
   # Column name must be character
+  if (new_col_name %in% names(data)){
+    stop(paste0(new_col_name," exist in the data."))
+  }
   if( ! is.character(curr_col_name) ) {
     stop("Current column name must be of type: character")
   }
@@ -342,17 +345,7 @@ data_obj$methods(remove_row_in_data = function(row_num) {
 )
 
 data_obj$methods(get_next_default_column_name = function(prefix) {
-  if(!is.character(prefix)) stop("prefix must be of type character")
-  col_exists = TRUE
-  i = 1
-  while(col_exists) {
-    if(!paste0(prefix,i) %in% names(data)) {
-      col_exists = FALSE
-      out = paste0(prefix,i)
-    }
-    i = i + 1
-  }
-  out
+  next_default_item(prefix = prefix, existing_names = names(data))
 } 
 )
 
@@ -447,6 +440,20 @@ data_obj$methods(length_of_data = function() {
   return(nrow(data))
 }
 )
+
+next_default_item = function(prefix, existing_names) {
+  if(!is.character(prefix)) stop("prefix must be of type character")
+  item_name_exists = TRUE
+  i = 1
+  while(item_name_exists) {
+    out = paste0(prefix,i)
+    if(!out %in% existing_names) {
+      item_name_exists = FALSE
+    }
+    i = i + 1
+  }
+  return(out)
+} 
 
 #Labels for strings which will be added to logs
 Set_property="Set"
