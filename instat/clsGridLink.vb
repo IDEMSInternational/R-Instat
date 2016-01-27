@@ -17,9 +17,9 @@ Imports RDotNet
 Imports unvell.ReoGrid
 
 Public Class clsGridLink
-    Public grdData As ReoGridControl
-    Public grdMetadata As ReoGridControl
-    Public grdVariablesMetadata As ReoGridControl
+    Public grdData As New ReoGridControl
+    Public grdMetadata As New ReoGridControl
+    Public grdVariablesMetadata As New ReoGridControl
     Public bGrdDataExists As Boolean = False
     Public bGrdMetadataExists As Boolean = False
     Public bGrdVariablesMetadataExists As Boolean = False
@@ -50,7 +50,7 @@ Public Class clsGridLink
             lstDataNames = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_names()").AsList
             For i = 0 To lstDataNames.Length - 1
                 strDataName = lstDataNames.AsCharacter(i)
-                If (bGrdDataExists And frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_changed(obj_name = " & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
+                If (bGrdDataExists And frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_changed(data_name = " & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
                     dfTemp = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data(" & Chr(34) & strDataName & Chr(34) & ")").AsDataFrame
                     FillSheet(dfTemp, strDataName, grdData)
                     frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_data_frames_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
@@ -110,6 +110,15 @@ Public Class clsGridLink
             FillSheet(dfTemp, "metadata", grdMetadata)
         End If
 
+        If grdData.Worksheets.Count = 0 Then
+            grdData.Visible = False
+            grdVariablesMetadata.Visible = False
+            grdMetadata.Visible = False
+        Else
+            grdData.Visible = True
+            grdVariablesMetadata.Visible = True
+            grdMetadata.Visible = True
+        End If
     End Sub
 
     Public Sub SetData(grdTemp As ReoGridControl)
