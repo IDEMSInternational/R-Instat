@@ -76,14 +76,14 @@ Public Class ucrDistributionsWithParameters
     End Sub
 
     Private Sub txtParameter1_Leave(sender As Object, e As EventArgs) Handles txtParameter1.Leave
-        MyBase.clsRSyntax.AddParameter(lstCurrArguments(0), txtParameter1.Text)
+        ucrBaseButtons.clsRsyntax.AddParameter(lstCurrArguments(0), txtParameter1.Text)
     End Sub
 
     Private Sub txtParameter2_Leave(sender As Object, e As EventArgs) Handles txtParameter2.Leave
-        MyBase.clsRSyntax.AddParameter(lstCurrArguments(1), txtParameter2.Text)
+        ucrBaseButtons.clsRsyntax.AddParameter(lstCurrArguments(1), txtParameter2.Text)
     End Sub
 
     Private Sub txtParameter3_Leave(sender As Object, e As EventArgs) Handles txtParameter3.Leave
-        MyBase.clsRSyntax.AddParameter(lstCurrArguments(2), txtParameter3.Text)
+        ucrBaseButtons.clsRsyntax.AddParameter(lstCurrArguments(2), txtParameter3.Text)
     End Sub
 End Class
