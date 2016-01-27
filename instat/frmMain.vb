@@ -590,7 +590,12 @@ Public Class frmMain
                     'TODO create dialog to do this
                     clsRLink.LoadData(pair.Key, pair.Value, strFileExt)
                 Case ".csv"
+                    'TODO where should this go?
+                    If Not clsRLink.bInstatObjectExists Then
+                        clsRLink.CreateNewInstatObject()
+                    End If
                     dlgImportDataset.SetName(pair.Key)
+                    dlgImportDataset.SetFilePath(pair.Value)
                     dlgImportDataset.ShowDialog()
             End Select
         End If
