@@ -29,6 +29,8 @@ Partial Class ucrDistributionsWithParameters
         Me.txtParameter1 = New System.Windows.Forms.TextBox()
         Me.txtParameter2 = New System.Windows.Forms.TextBox()
         Me.txtParameter3 = New System.Windows.Forms.TextBox()
+        Me.txtParameter4 = New System.Windows.Forms.TextBox()
+        Me.lblParameter4 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblDistributionParameters
@@ -86,10 +88,27 @@ Partial Class ucrDistributionsWithParameters
         Me.txtParameter3.Size = New System.Drawing.Size(100, 20)
         Me.txtParameter3.TabIndex = 8
         '
+        'txtParameter4
+        '
+        Me.txtParameter4.Location = New System.Drawing.Point(95, 158)
+        Me.txtParameter4.Name = "txtParameter4"
+        Me.txtParameter4.Size = New System.Drawing.Size(100, 20)
+        Me.txtParameter4.TabIndex = 10
+        '
+        'lblParameter4
+        '
+        Me.lblParameter4.AutoSize = True
+        Me.lblParameter4.Location = New System.Drawing.Point(9, 165)
+        Me.lblParameter4.Name = "lblParameter4"
+        Me.lblParameter4.Size = New System.Drawing.Size(0, 13)
+        Me.lblParameter4.TabIndex = 9
+        '
         'ucrDistributionsWithParameters
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.txtParameter4)
+        Me.Controls.Add(Me.lblParameter4)
         Me.Controls.Add(Me.txtParameter3)
         Me.Controls.Add(Me.txtParameter2)
         Me.Controls.Add(Me.txtParameter1)
@@ -98,7 +117,7 @@ Partial Class ucrDistributionsWithParameters
         Me.Controls.Add(Me.lblParameter1)
         Me.Controls.Add(Me.lblDistributionParameters)
         Me.Name = "ucrDistributionsWithParameters"
-        Me.Size = New System.Drawing.Size(221, 156)
+        Me.Size = New System.Drawing.Size(221, 194)
         Me.Controls.SetChildIndex(Me.lblDistributionParameters, 0)
         Me.Controls.SetChildIndex(Me.lblParameter1, 0)
         Me.Controls.SetChildIndex(Me.lblParameter2, 0)
@@ -106,6 +125,8 @@ Partial Class ucrDistributionsWithParameters
         Me.Controls.SetChildIndex(Me.txtParameter1, 0)
         Me.Controls.SetChildIndex(Me.txtParameter2, 0)
         Me.Controls.SetChildIndex(Me.txtParameter3, 0)
+        Me.Controls.SetChildIndex(Me.lblParameter4, 0)
+        Me.Controls.SetChildIndex(Me.txtParameter4, 0)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -118,4 +139,6 @@ Partial Class ucrDistributionsWithParameters
     Friend WithEvents txtParameter1 As TextBox
     Friend WithEvents txtParameter2 As TextBox
     Friend WithEvents txtParameter3 As TextBox
+    Friend WithEvents txtParameter4 As TextBox
+    Friend WithEvents lblParameter4 As Label
 End Class
