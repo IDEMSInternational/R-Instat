@@ -61,6 +61,14 @@ Public Class RSyntax
         clsFunction.RemoveParameterByName(strParameterName)
     End Sub
 
+    Public Sub ClearParameters(Optional ByRef clsFunction As RFunction = Nothing)
+        If clsFunction Is Nothing Then
+            clsFunction = clsBaseFunction
+        End If
+
+        clsFunction.ClearParameters()
+    End Sub
+
     Public Function GetScript(Optional ByRef clsFunction As RFunction = Nothing, Optional bExcludeAssignedFunctionOutput As Boolean = True) As String
 
         Dim strTemp As String
