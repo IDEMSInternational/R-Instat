@@ -16,17 +16,16 @@
 Imports instat.Translations
 
 Public Class dlgImportDataset
-    Public strFilePath As String
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("read.csv")
         autoTranslate(Me)
         cboEncoding.Text = "Automatic"
-        rdoYes.Checked = True
+        rdoHeadingsYes.Checked = True
         cboRowNames.Text = "Automatic"
 
         cboSeparator.Text = "Comma"
-        ucrBase.clsRsyntax.AddParameter("sep", "Comma")
+        ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "," & Chr(34))
 
         cboDecimal.Text = "Period"
         ucrBase.clsRsyntax.AddParameter("dec", Chr(34) & "." & Chr(34))
@@ -35,7 +34,7 @@ Public Class dlgImportDataset
         ucrBase.clsRsyntax.AddParameter("quote", Chr(34) & "\" & Chr(34) & Chr(34))
 
         cboComment.Text = "None"
-        ucrBase.clsRsyntax.AddParameter("comment.Char", "None")
+        ucrBase.clsRsyntax.AddParameter("comment.char", Chr(34) & Chr(34))
 
         txtNAStrings.Text = "NA"
         ucrBase.clsRsyntax.AddParameter("na.strings", "NA")
@@ -49,8 +48,12 @@ Public Class dlgImportDataset
         ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
     End Sub
 
+    Public Sub SetFilePath(strFilePath As String)
+        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+    End Sub
+
     Private Sub txtName_Leave(sender As Object, e As EventArgs) Handles txtName.Leave
-        ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
+        SetName(txtName.Text)
     End Sub
 
     Private Sub cboEncoding_Leave(sender As Object, e As EventArgs) Handles cboEncoding.Leave
@@ -61,13 +64,24 @@ Public Class dlgImportDataset
 
     Private Sub cboRowNames_Leave(sender As Object, e As EventArgs) Handles cboRowNames.Leave
         If cboRowNames.Text <> "Automatic" Then
-
-            ucrBase.clsRsyntax.AddParameter("row.names", cboRowNames.Text)
+            Select Case cboRowNames.Text
+                Case "Use first column"
+                    ucrBase.clsRsyntax.AddParameter("row.names", 1)
+                Case "Use numbers"
+                    ucrBase.clsRsyntax.AddParameter("row.names", "NULL")
+            End Select
         End If
     End Sub
 
     Private Sub cboSeparator_Leave(sender As Object, e As EventArgs) Handles cboSeparator.Leave
-        ucrBase.clsRsyntax.AddParameter("sep", cboSeparator.Text)
+        Select Case cboSeparator.Text
+            Case "Whitespace"
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "" & Chr(34))
+            Case "Comma"
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "," & Chr(34))
+            Case "Semicolon"
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ";" & Chr(34))
+        End Select
     End Sub
 
     Private Sub cboDecimal_Leave(sender As Object, e As EventArgs) Handles cboDecimal.Leave
@@ -80,15 +94,31 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub cboQuote_Leave(sender As Object, e As EventArgs) Handles cboQuote.Leave
-        ucrBase.clsRsyntax.AddParameter("quote", cboQuote.Text)
+        If cboQuote.Text <> "None" Then
+            Select Case cboQuote.Text
+                Case "Double quote (" & Chr(34) & ")"
+                    ucrBase.clsRsyntax.AddParameter("quote", Chr(34) & "\" & Chr(34) & Chr(34))
+                Case "Single quote (" & Chr(39) & ")"
+                    ucrBase.clsRsyntax.AddParameter("quote", Chr(34) & "\" & Chr(39) & Chr(34))
+            End Select
+        End If
     End Sub
 
     Private Sub cboComment_Leave(sender As Object, e As EventArgs) Handles cboComment.Leave
-        ucrBase.clsRsyntax.AddParameter("comment.Char", cboComment.Text)
+        If cboComment.Text = "None" Then
+            ucrBase.clsRsyntax.AddParameter("comment.char", Chr(34) & Chr(34))
+        Else
+            ucrBase.clsRsyntax.AddParameter("comment.char", Chr(34) & cboComment.Text & Chr(34))
+        End If
+
     End Sub
 
     Private Sub txtNAStrings_Leave(sender As Object, e As EventArgs) Handles txtNAStrings.Leave
-        ucrBase.clsRsyntax.AddParameter("na.strings", txtNAStrings.Text)
+        If txtNAStrings.Text = "NA" Then
+            ucrBase.clsRsyntax.AddParameter("na.strings", txtNAStrings.Text)
+        Else
+            ucrBase.clsRsyntax.AddParameter("na.strings", Chr(34) & txtNAStrings.Text & Chr(34))
+        End If
     End Sub
 
 End Class
