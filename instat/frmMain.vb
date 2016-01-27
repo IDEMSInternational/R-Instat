@@ -32,7 +32,10 @@ Public Class frmMain
         frmScript.MdiParent = Me
         frmVariables.MdiParent = Me
         frmMetaData.MdiParent = Me
-
+        frmMetaData.Show()
+        frmVariables.Show()
+        frmLog.Show()
+        frmScript.Show()
         frmCommand.Show()
         frmEditor.Show()
         Me.LayoutMdi(MdiLayout.TileVertical)
