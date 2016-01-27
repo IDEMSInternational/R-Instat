@@ -19,7 +19,17 @@ Public Class dlgRandomSample
     Public clsRSyntax As New RSyntax
     Private Sub dlgRandomSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.OKEnabled(False)
-        ucrDistWithParameters.ucrBaseButtons = ucrBase
+        'ucrBase.OKEnabled(False)
+        ucrDistWithParameters.SetRDistributions()
+        ucrNewColumnNameSelector.strPrefix = "Rand"
+        ucrDataFrameSelector.SetColumnList(ucrNewColumnNameSelector)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrDataFrameSelector.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+
+        ucrBase.clsRsyntax.clsBaseFunction = ucrDistWithParameters.clsCurrRFunction
+        ucrDistWithParameters.AddParameter("n", ucrDataFrameSelector.strDataFrameLength)
+    End Sub
+
+    Private Sub ucrDataFrameSelector_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameSelector.Leave
+        ucrDistWithParameters.AddParameter("n", ucrDataFrameSelector.strDataFrameLength)
     End Sub
 End Class
