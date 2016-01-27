@@ -189,6 +189,8 @@ Public Class ucrDistributions
                     ucrBaseButtons.clsRsyntax.SetFunction(clsCurrDistribution.strDFunctionName)
                 Case "QFunctions"
                     ucrBaseButtons.clsRsyntax.SetFunction(clsCurrDistribution.strQFunctionName)
+                Case "GLMFunctions"
+                    ucrBaseButtons.clsRsyntax.SetFunction(clsCurrDistribution.strGLMFunctionName)
             End Select
             For Each clsCurrParameter In clsCurrDistribution.clsParameters
                 If clsCurrParameter.bHasDefault Then
@@ -196,7 +198,6 @@ Public Class ucrDistributions
                 End If
             Next
         End If
-
         RaiseEvent cboDistributionsIndexChanged(sender, e)
     End Sub
 End Class
