@@ -59,11 +59,14 @@ Public Class ucrDistributionsWithParameters
 
         If clsCurrDistribution IsNot Nothing Then
             lstCurrArguments.Clear()
+            clsRSyntax.ClearParameters(clsCurrRFunction)
+            IncludeFunctionParameter()
             For i = 0 To clsCurrDistribution.clsParameters.Count - 1
                 lstParameterLabels(i).Text = translate(clsCurrDistribution.clsParameters(i).strNameTag)
                 lstCurrArguments.Add(clsCurrDistribution.clsParameters(i).strArgumentName)
                 If clsCurrDistribution.clsParameters(i).bHasDefault Then
                     lstParameterTextBoxes(i).Text = clsCurrDistribution.clsParameters(i).dcmDefaultValue
+                    clsRSyntax.AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).dcmDefaultValue, clsRFunction:=clsCurrRFunction)
                 Else
                     lstParameterTextBoxes(i).Clear()
                 End If
@@ -76,14 +79,14 @@ Public Class ucrDistributionsWithParameters
     End Sub
 
     Private Sub txtParameter1_Leave(sender As Object, e As EventArgs) Handles txtParameter1.Leave
-        ucrBaseButtons.clsRsyntax.AddParameter(lstCurrArguments(0), txtParameter1.Text)
+        clsRSyntax.AddParameter(lstCurrArguments(0), txtParameter1.Text, clsRFunction:=clsCurrRFunction)
     End Sub
 
     Private Sub txtParameter2_Leave(sender As Object, e As EventArgs) Handles txtParameter2.Leave
-        ucrBaseButtons.clsRsyntax.AddParameter(lstCurrArguments(1), txtParameter2.Text)
+        clsRSyntax.AddParameter(lstCurrArguments(1), txtParameter2.Text, clsRFunction:=clsCurrRFunction)
     End Sub
 
     Private Sub txtParameter3_Leave(sender As Object, e As EventArgs) Handles txtParameter3.Leave
-        ucrBaseButtons.clsRsyntax.AddParameter(lstCurrArguments(2), txtParameter3.Text)
+        clsRSyntax.AddParameter(lstCurrArguments(2), txtParameter3.Text, clsRFunction:=clsCurrRFunction)
     End Sub
 End Class
