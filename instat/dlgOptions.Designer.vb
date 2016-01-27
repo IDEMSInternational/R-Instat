@@ -33,6 +33,7 @@ Partial Class dlgOptions
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguageSettings.SuspendLayout()
         Me.tbpComments.SuspendLayout()
@@ -158,11 +159,22 @@ Partial Class dlgOptions
         Me.cmdCancel.Text = "&Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
+        'cmdHelp
+        '
+        Me.cmdHelp.Location = New System.Drawing.Point(261, 280)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
+        Me.cmdHelp.TabIndex = 3
+        Me.cmdHelp.Tag = "Help"
+        Me.cmdHelp.Text = "&Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
         'dlgOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(425, 330)
+        Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdApply)
         Me.Controls.Add(Me.cmdOk)
@@ -191,4 +203,5 @@ Partial Class dlgOptions
     Friend WithEvents tbpComments As TabPage
     Friend WithEvents txtComment As TextBox
     Friend WithEvents lblComment As Label
+    Friend WithEvents cmdHelp As Button
 End Class
