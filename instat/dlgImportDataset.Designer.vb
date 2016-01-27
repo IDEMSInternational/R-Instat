@@ -41,8 +41,8 @@ Partial Class dlgImportDataset
         Me.cboQuote = New System.Windows.Forms.ComboBox()
         Me.cboComment = New System.Windows.Forms.ComboBox()
         Me.txtNAStrings = New System.Windows.Forms.TextBox()
-        Me.rdoYes = New System.Windows.Forms.RadioButton()
-        Me.rdoNo = New System.Windows.Forms.RadioButton()
+        Me.rdoHeadingsYes = New System.Windows.Forms.RadioButton()
+        Me.rdoHeadingsNo = New System.Windows.Forms.RadioButton()
         Me.txtInputFile = New System.Windows.Forms.TextBox()
         Me.txtDataFrame = New System.Windows.Forms.TextBox()
         Me.chlStringsAsFactors = New System.Windows.Forms.CheckBox()
@@ -186,7 +186,7 @@ Partial Class dlgImportDataset
         'cboSeparator
         '
         Me.cboSeparator.FormattingEnabled = True
-        Me.cboSeparator.Items.AddRange(New Object() {"Comma", "Whitespace", "Semicolon", "Tab"})
+        Me.cboSeparator.Items.AddRange(New Object() {"Comma", "Whitespace", "Semicolon"})
         Me.cboSeparator.Location = New System.Drawing.Point(81, 192)
         Me.cboSeparator.Name = "cboSeparator"
         Me.cboSeparator.Size = New System.Drawing.Size(136, 21)
@@ -226,29 +226,29 @@ Partial Class dlgImportDataset
         Me.txtNAStrings.Size = New System.Drawing.Size(100, 20)
         Me.txtNAStrings.TabIndex = 19
         '
-        'rdoYes
+        'rdoHeadingsYes
         '
-        Me.rdoYes.AutoSize = True
-        Me.rdoYes.Location = New System.Drawing.Point(72, 105)
-        Me.rdoYes.Name = "rdoYes"
-        Me.rdoYes.Size = New System.Drawing.Size(43, 17)
-        Me.rdoYes.TabIndex = 20
-        Me.rdoYes.TabStop = True
-        Me.rdoYes.Tag = "Yes"
-        Me.rdoYes.Text = "Yes"
-        Me.rdoYes.UseVisualStyleBackColor = True
+        Me.rdoHeadingsYes.AutoSize = True
+        Me.rdoHeadingsYes.Location = New System.Drawing.Point(72, 105)
+        Me.rdoHeadingsYes.Name = "rdoHeadingsYes"
+        Me.rdoHeadingsYes.Size = New System.Drawing.Size(43, 17)
+        Me.rdoHeadingsYes.TabIndex = 20
+        Me.rdoHeadingsYes.TabStop = True
+        Me.rdoHeadingsYes.Tag = "Yes"
+        Me.rdoHeadingsYes.Text = "Yes"
+        Me.rdoHeadingsYes.UseVisualStyleBackColor = True
         '
-        'rdoNo
+        'rdoHeadingsNo
         '
-        Me.rdoNo.AutoSize = True
-        Me.rdoNo.Location = New System.Drawing.Point(137, 105)
-        Me.rdoNo.Name = "rdoNo"
-        Me.rdoNo.Size = New System.Drawing.Size(39, 17)
-        Me.rdoNo.TabIndex = 21
-        Me.rdoNo.TabStop = True
-        Me.rdoNo.Tag = "No"
-        Me.rdoNo.Text = "No"
-        Me.rdoNo.UseVisualStyleBackColor = True
+        Me.rdoHeadingsNo.AutoSize = True
+        Me.rdoHeadingsNo.Location = New System.Drawing.Point(137, 105)
+        Me.rdoHeadingsNo.Name = "rdoHeadingsNo"
+        Me.rdoHeadingsNo.Size = New System.Drawing.Size(39, 17)
+        Me.rdoHeadingsNo.TabIndex = 21
+        Me.rdoHeadingsNo.TabStop = True
+        Me.rdoHeadingsNo.Tag = "No"
+        Me.rdoHeadingsNo.Text = "No"
+        Me.rdoHeadingsNo.UseVisualStyleBackColor = True
         '
         'txtInputFile
         '
@@ -293,8 +293,8 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.chlStringsAsFactors)
         Me.Controls.Add(Me.txtDataFrame)
         Me.Controls.Add(Me.txtInputFile)
-        Me.Controls.Add(Me.rdoNo)
-        Me.Controls.Add(Me.rdoYes)
+        Me.Controls.Add(Me.rdoHeadingsNo)
+        Me.Controls.Add(Me.rdoHeadingsYes)
         Me.Controls.Add(Me.txtNAStrings)
         Me.Controls.Add(Me.cboComment)
         Me.Controls.Add(Me.cboQuote)
@@ -343,8 +343,8 @@ Partial Class dlgImportDataset
     Friend WithEvents cboQuote As ComboBox
     Friend WithEvents cboComment As ComboBox
     Friend WithEvents txtNAStrings As TextBox
-    Friend WithEvents rdoYes As RadioButton
-    Friend WithEvents rdoNo As RadioButton
+    Friend WithEvents rdoHeadingsYes As RadioButton
+    Friend WithEvents rdoHeadingsNo As RadioButton
     Friend WithEvents txtInputFile As TextBox
     Friend WithEvents txtDataFrame As TextBox
     Friend WithEvents chlStringsAsFactors As CheckBox
