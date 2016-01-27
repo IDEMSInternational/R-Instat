@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports instat.RSyntax
 
 Public Class ucrDistributions
     Public lstAllDistributions As New List(Of Distribution)
@@ -22,6 +23,7 @@ Public Class ucrDistributions
     Public strRequiredDistributions As String = "All"
     Public clsCurrDistribution As New Distribution
     Public bDistributionsSet As Boolean = False
+    Public ucrBaseButtons As ucrButtons
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not bDistributionsSet Then
@@ -128,8 +130,8 @@ Public Class ucrDistributions
         clsWeibullDist.strPFunctionName = "pweibull"
         clsWeibullDist.strQFunctionName = "qweibull"
         clsWeibullDist.strDFunctionName = "dweibull"
-        clsWeibullDist.AddParameter("shape", "shape")
-        clsWeibullDist.AddParameter("scale", "scale", 1)
+        clsWeibullDist.AddParameter("shape", "Shape")
+        clsWeibullDist.AddParameter("scale", "Scale", 1)
         lstAllDistributions.Add(clsWeibullDist)
 
         'Uniform Distribution
@@ -176,10 +178,26 @@ Public Class ucrDistributions
     Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
         clsCurrDistribution = lstRequiredDistributions(cboDistributions.SelectedIndex)
+        If strRequiredDistributions <> "All" Then
+            ucrBaseButtons.clsRSyntax.ClearParameters()
+            Select Case strRequiredDistributions
+                Case "RFunctions"
+                    ucrBaseButtons.clsRsyntax.SetFunction(clsCurrDistribution.strRFunctionName)
+                Case "PFunctions"
+                    ucrBaseButtons.clsRsyntax.SetFunction(clsCurrDistribution.strPFunctionName)
+                Case "DFunctions"
+                    ucrBaseButtons.clsRsyntax.SetFunction(clsCurrDistribution.strDFunctionName)
+                Case "QFunctions"
+                    ucrBaseButtons.clsRsyntax.SetFunction(clsCurrDistribution.strQFunctionName)
+                Case "GLMFunctions"
+                    ucrBaseButtons.clsRsyntax.SetFunction(clsCurrDistribution.strGLMFunctionName)
+            End Select
+            For Each clsCurrParameter In clsCurrDistribution.clsParameters
+                If clsCurrParameter.bHasDefault Then
+                    ucrBaseButtons.clsRsyntax.AddParameter(clsCurrParameter.strArgumentName, clsCurrParameter.dcmDefaultValue)
+                End If
+            Next
+        End If
         RaiseEvent cboDistributionsIndexChanged(sender, e)
-    End Sub
-
-    Private Sub lblDistributionType_Click(sender As Object, e As EventArgs) Handles lblDistributionType.Click
-
     End Sub
 End Class
