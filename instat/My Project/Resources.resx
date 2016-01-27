@@ -961,4 +961,22 @@
   <data name="Weibull" xml:space="preserve">
     <value>Weibull</value>
   </data>
+  <data name="a" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="b" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Scale</value>
+  </data>
+  <data name="Shape" xml:space="preserve">
+    <value>Shape</value>
+  </data>
 </root>
