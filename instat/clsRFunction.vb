@@ -63,13 +63,13 @@ Public Class RFunction
             strScript = strScript & strAssignTo & " <- " & strTemp & vbCrLf
             If Not strAssignToDataFrame = "" Then
                 If Not strAssignToColumn = "" Then
-                    strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$add_column_to_data(obj_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ", col_name = " & Chr(34) & strAssignToColumn & Chr(34) & ", col_data = " & strAssignTo & ")" & vbCrLf
-                    strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_column_from_data(obj_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ", col_name = " & Chr(34) & strAssignToColumn & Chr(34) & ")"
+                    strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$add_column_to_data(data_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ", col_name = " & Chr(34) & strAssignToColumn & Chr(34) & ", col_data = " & strAssignTo & ")" & vbCrLf
+                    strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_column_from_data(data_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ", col_name = " & Chr(34) & strAssignToColumn & Chr(34) & ")"
                     bIsAssigned = True
                     bToBeAssigned = False
                 Else
                     strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$import_data(data_tables = list(" & strAssignToDataFrame & "=" & strAssignTo & "))" & vbCrLf
-                    strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_data(obj_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ")"
+                    strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_data(data_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ")"
                     bIsAssigned = True
                     bToBeAssigned = False
                 End If

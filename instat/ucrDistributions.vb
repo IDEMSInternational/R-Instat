@@ -127,7 +127,7 @@ Public Class ucrDistributions
         clsGeometricDist.strPFunctionName = "pgeom"
         clsGeometricDist.strQFunctionName = "qgeom"
         clsGeometricDist.strDFunctionName = "dgeom"
-        clsGeometricDist.AddParameter("prob", "Probability", 1)
+        clsGeometricDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsGeometricDist)
 
         ' Extreme Value Distribution
