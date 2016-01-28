@@ -28,12 +28,12 @@ Partial Class dlgRowStats
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.ucrNewColumnName = New instat.ucrNewColumnName()
         Me.grpStatistic = New System.Windows.Forms.GroupBox()
-        Me.rdoSum = New System.Windows.Forms.RadioButton()
-        Me.rdoStandardDeviation = New System.Windows.Forms.RadioButton()
-        Me.rdoMean = New System.Windows.Forms.RadioButton()
-        Me.rdoCount = New System.Windows.Forms.RadioButton()
-        Me.rdoMaximum = New System.Windows.Forms.RadioButton()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
+        Me.rdoMaximum = New System.Windows.Forms.RadioButton()
+        Me.rdoCount = New System.Windows.Forms.RadioButton()
+        Me.rdoMean = New System.Windows.Forms.RadioButton()
+        Me.rdoStandardDeviation = New System.Windows.Forms.RadioButton()
+        Me.rdoSum = New System.Windows.Forms.RadioButton()
         Me.grpStatistic.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -91,53 +91,17 @@ Partial Class dlgRowStats
         Me.grpStatistic.Tag = "Statistic"
         Me.grpStatistic.Text = "Statistic"
         '
-        'rdoSum
+        'rdoMinimum
         '
-        Me.rdoSum.AutoSize = True
-        Me.rdoSum.Location = New System.Drawing.Point(260, 19)
-        Me.rdoSum.Name = "rdoSum"
-        Me.rdoSum.Size = New System.Drawing.Size(46, 17)
-        Me.rdoSum.TabIndex = 0
-        Me.rdoSum.TabStop = True
-        Me.rdoSum.Tag = "Sum"
-        Me.rdoSum.Text = "Sum"
-        Me.rdoSum.UseVisualStyleBackColor = True
-        '
-        'rdoStandardDeviation
-        '
-        Me.rdoStandardDeviation.AutoSize = True
-        Me.rdoStandardDeviation.Location = New System.Drawing.Point(6, 42)
-        Me.rdoStandardDeviation.Name = "rdoStandardDeviation"
-        Me.rdoStandardDeviation.Size = New System.Drawing.Size(114, 17)
-        Me.rdoStandardDeviation.TabIndex = 0
-        Me.rdoStandardDeviation.TabStop = True
-        Me.rdoStandardDeviation.Tag = "Standard_deviation"
-        Me.rdoStandardDeviation.Text = "Standard deviation"
-        Me.rdoStandardDeviation.UseVisualStyleBackColor = True
-        '
-        'rdoMean
-        '
-        Me.rdoMean.AutoSize = True
-        Me.rdoMean.Location = New System.Drawing.Point(6, 19)
-        Me.rdoMean.Name = "rdoMean"
-        Me.rdoMean.Size = New System.Drawing.Size(52, 17)
-        Me.rdoMean.TabIndex = 0
-        Me.rdoMean.TabStop = True
-        Me.rdoMean.Tag = "Mean"
-        Me.rdoMean.Text = "Mean"
-        Me.rdoMean.UseVisualStyleBackColor = True
-        '
-        'rdoCount
-        '
-        Me.rdoCount.AutoSize = True
-        Me.rdoCount.Location = New System.Drawing.Point(260, 42)
-        Me.rdoCount.Name = "rdoCount"
-        Me.rdoCount.Size = New System.Drawing.Size(53, 17)
-        Me.rdoCount.TabIndex = 0
-        Me.rdoCount.TabStop = True
-        Me.rdoCount.Tag = "Count"
-        Me.rdoCount.Text = "Count"
-        Me.rdoCount.UseVisualStyleBackColor = True
+        Me.rdoMinimum.AutoSize = True
+        Me.rdoMinimum.Location = New System.Drawing.Point(154, 19)
+        Me.rdoMinimum.Name = "rdoMinimum"
+        Me.rdoMinimum.Size = New System.Drawing.Size(66, 17)
+        Me.rdoMinimum.TabIndex = 0
+        Me.rdoMinimum.TabStop = True
+        Me.rdoMinimum.Tag = "Minimum"
+        Me.rdoMinimum.Text = "Minimum"
+        Me.rdoMinimum.UseVisualStyleBackColor = True
         '
         'rdoMaximum
         '
@@ -151,17 +115,53 @@ Partial Class dlgRowStats
         Me.rdoMaximum.Text = "Maximum"
         Me.rdoMaximum.UseVisualStyleBackColor = True
         '
-        'rdoMinimum
+        'rdoCount
         '
-        Me.rdoMinimum.AutoSize = True
-        Me.rdoMinimum.Location = New System.Drawing.Point(154, 19)
-        Me.rdoMinimum.Name = "rdoMinimum"
-        Me.rdoMinimum.Size = New System.Drawing.Size(66, 17)
-        Me.rdoMinimum.TabIndex = 0
-        Me.rdoMinimum.TabStop = True
-        Me.rdoMinimum.Tag = "Minimum"
-        Me.rdoMinimum.Text = "Minimum"
-        Me.rdoMinimum.UseVisualStyleBackColor = True
+        Me.rdoCount.AutoSize = True
+        Me.rdoCount.Location = New System.Drawing.Point(260, 42)
+        Me.rdoCount.Name = "rdoCount"
+        Me.rdoCount.Size = New System.Drawing.Size(53, 17)
+        Me.rdoCount.TabIndex = 0
+        Me.rdoCount.TabStop = True
+        Me.rdoCount.Tag = "Count"
+        Me.rdoCount.Text = "Count"
+        Me.rdoCount.UseVisualStyleBackColor = True
+        '
+        'rdoMean
+        '
+        Me.rdoMean.AutoSize = True
+        Me.rdoMean.Location = New System.Drawing.Point(6, 19)
+        Me.rdoMean.Name = "rdoMean"
+        Me.rdoMean.Size = New System.Drawing.Size(52, 17)
+        Me.rdoMean.TabIndex = 0
+        Me.rdoMean.TabStop = True
+        Me.rdoMean.Tag = "Mean"
+        Me.rdoMean.Text = "Mean"
+        Me.rdoMean.UseVisualStyleBackColor = True
+        '
+        'rdoStandardDeviation
+        '
+        Me.rdoStandardDeviation.AutoSize = True
+        Me.rdoStandardDeviation.Location = New System.Drawing.Point(6, 42)
+        Me.rdoStandardDeviation.Name = "rdoStandardDeviation"
+        Me.rdoStandardDeviation.Size = New System.Drawing.Size(114, 17)
+        Me.rdoStandardDeviation.TabIndex = 0
+        Me.rdoStandardDeviation.TabStop = True
+        Me.rdoStandardDeviation.Tag = "Standard_deviation"
+        Me.rdoStandardDeviation.Text = "Standard deviation"
+        Me.rdoStandardDeviation.UseVisualStyleBackColor = True
+        '
+        'rdoSum
+        '
+        Me.rdoSum.AutoSize = True
+        Me.rdoSum.Location = New System.Drawing.Point(260, 19)
+        Me.rdoSum.Name = "rdoSum"
+        Me.rdoSum.Size = New System.Drawing.Size(46, 17)
+        Me.rdoSum.TabIndex = 0
+        Me.rdoSum.TabStop = True
+        Me.rdoSum.Tag = "Sum"
+        Me.rdoSum.Text = "Sum"
+        Me.rdoSum.UseVisualStyleBackColor = True
         '
         'dlgRowStats
         '
