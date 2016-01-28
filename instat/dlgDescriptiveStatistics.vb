@@ -35,7 +35,7 @@ Public Class dlgDescriptiveStatistics
     End Sub
 
     Private Sub ucrObjectReceiver_Leave(sender As Object, e As EventArgs) Handles ucrObjectReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("object", ucrObjectReceiver.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("object", clsRFunctionParameter:=ucrObjectReceiver.GetVariables())
     End Sub
 End Class
 

@@ -38,11 +38,16 @@ Public Class ucrReceiverSingle
         End If
     End Sub
 
-    Public Overrides Function GetVariables() As String
+    Public Overrides Function GetVariables() As RFunction
+        Dim clsGetVariablesFunc As New RFunction
         If bSelected Then
-            Return frmMain.clsRLink.strInstatDataObject & "$get_column_from_data(obj_name = " & Chr(34) & objSelected.Group.ToString() & Chr(34) & ", col_name = " & Chr(34) & objSelected.Text & Chr(34) & ")"
+            clsRSyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_column_from_data", clsFunction:=clsGetVariablesFunc)
+            clsRSyntax.AddParameter("data_name", Chr(34) & objSelected.Group.ToString() & Chr(34), clsRFunction:=clsGetVariablesFunc)
+            clsRSyntax.AddParameter("col_name", Chr(34) & objSelected.Text & Chr(34), clsRFunction:=clsGetVariablesFunc)
+            clsRSyntax.SetAssignTo(objSelected.Text, clsFunction:=clsGetVariablesFunc)
+            Return clsGetVariablesFunc
         Else
-            Return ""
+            Return clsGetVariablesFunc
         End If
     End Function
 

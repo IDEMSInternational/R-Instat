@@ -25,6 +25,6 @@ Public Class dlgMovingAverage
     End Sub
 
     Private Sub ucrReceiverDataToAverage_Leave(sender As Object, e As EventArgs) Handles ucrReceiverDataToAverage.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverDataToAverage.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverDataToAverage.GetVariables())
     End Sub
 End Class
