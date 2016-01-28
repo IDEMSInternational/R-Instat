@@ -22,31 +22,18 @@ Partial Class dlgStack
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrReceiverColumnsToBeStack = New instat.ucrReceiverMultiple()
         Me.lblColumnsToBestack = New System.Windows.Forms.Label()
         Me.txtStackDataInto = New System.Windows.Forms.TextBox()
-        Me.chkOmitValue = New System.Windows.Forms.CheckBox()
         Me.lblStackDataInto = New System.Windows.Forms.Label()
-        Me.ucrReceiverIdVariable = New instat.ucrReceiverSingle()
-        Me.lblIdVariable = New System.Windows.Forms.Label()
         Me.lblFactorInto = New System.Windows.Forms.Label()
         Me.txtFactorInto = New System.Windows.Forms.TextBox()
-        Me.grpOutputOptions = New System.Windows.Forms.GroupBox()
-        Me.rdoNewWorksheet = New System.Windows.Forms.RadioButton()
-        Me.lblSheetName = New System.Windows.Forms.Label()
-        Me.rdoExistingWorksheet = New System.Windows.Forms.RadioButton()
-        Me.txtSheetName = New System.Windows.Forms.TextBox()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.chkIDVariables = New System.Windows.Forms.CheckBox()
+        Me.ucrNewColumnName = New instat.ucrNewColumnName()
+        Me.ucrIDVariablesReceiver = New instat.ucrReceiverMultiple()
         Me.ucrDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.grpOutputOptions.SuspendLayout()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverColumnsToBeStack = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
-        '
-        'ucrReceiverColumnsToBeStack
-        '
-        Me.ucrReceiverColumnsToBeStack.Location = New System.Drawing.Point(261, 28)
-        Me.ucrReceiverColumnsToBeStack.Name = "ucrReceiverColumnsToBeStack"
-        Me.ucrReceiverColumnsToBeStack.Size = New System.Drawing.Size(121, 111)
-        Me.ucrReceiverColumnsToBeStack.TabIndex = 2
         '
         'lblColumnsToBestack
         '
@@ -66,17 +53,6 @@ Partial Class dlgStack
         Me.txtStackDataInto.TabIndex = 4
         Me.txtStackDataInto.Tag = ""
         '
-        'chkOmitValue
-        '
-        Me.chkOmitValue.AutoSize = True
-        Me.chkOmitValue.Location = New System.Drawing.Point(28, 246)
-        Me.chkOmitValue.Name = "chkOmitValue"
-        Me.chkOmitValue.Size = New System.Drawing.Size(76, 17)
-        Me.chkOmitValue.TabIndex = 5
-        Me.chkOmitValue.Tag = "Omit_value"
-        Me.chkOmitValue.Text = "Omit value"
-        Me.chkOmitValue.UseVisualStyleBackColor = True
-        '
         'lblStackDataInto
         '
         Me.lblStackDataInto.AutoSize = True
@@ -86,23 +62,6 @@ Partial Class dlgStack
         Me.lblStackDataInto.TabIndex = 3
         Me.lblStackDataInto.Tag = "Stack_data_into"
         Me.lblStackDataInto.Text = "Stack data into"
-        '
-        'ucrReceiverIdVariable
-        '
-        Me.ucrReceiverIdVariable.Location = New System.Drawing.Point(244, 191)
-        Me.ucrReceiverIdVariable.Name = "ucrReceiverIdVariable"
-        Me.ucrReceiverIdVariable.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverIdVariable.TabIndex = 7
-        '
-        'lblIdVariable
-        '
-        Me.lblIdVariable.AutoSize = True
-        Me.lblIdVariable.Location = New System.Drawing.Point(241, 175)
-        Me.lblIdVariable.Name = "lblIdVariable"
-        Me.lblIdVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblIdVariable.TabIndex = 8
-        Me.lblIdVariable.Tag = "ID_variable"
-        Me.lblIdVariable.Text = "ID variable"
         '
         'lblFactorInto
         '
@@ -121,67 +80,30 @@ Partial Class dlgStack
         Me.txtFactorInto.Size = New System.Drawing.Size(100, 20)
         Me.txtFactorInto.TabIndex = 4
         '
-        'grpOutputOptions
+        'chkIDVariables
         '
-        Me.grpOutputOptions.Controls.Add(Me.rdoNewWorksheet)
-        Me.grpOutputOptions.Controls.Add(Me.lblSheetName)
-        Me.grpOutputOptions.Controls.Add(Me.rdoExistingWorksheet)
-        Me.grpOutputOptions.Controls.Add(Me.txtSheetName)
-        Me.grpOutputOptions.Location = New System.Drawing.Point(15, 269)
-        Me.grpOutputOptions.Name = "grpOutputOptions"
-        Me.grpOutputOptions.Size = New System.Drawing.Size(200, 100)
-        Me.grpOutputOptions.TabIndex = 10
-        Me.grpOutputOptions.TabStop = False
-        Me.grpOutputOptions.Tag = "Output_options"
-        Me.grpOutputOptions.Text = "Output Options"
+        Me.chkIDVariables.AutoSize = True
+        Me.chkIDVariables.Location = New System.Drawing.Point(264, 167)
+        Me.chkIDVariables.Name = "chkIDVariables"
+        Me.chkIDVariables.Size = New System.Drawing.Size(83, 17)
+        Me.chkIDVariables.TabIndex = 13
+        Me.chkIDVariables.Tag = "ID_Variables"
+        Me.chkIDVariables.Text = "ID Variables"
+        Me.chkIDVariables.UseVisualStyleBackColor = True
         '
-        'rdoNewWorksheet
+        'ucrNewColumnName
         '
-        Me.rdoNewWorksheet.AutoSize = True
-        Me.rdoNewWorksheet.Location = New System.Drawing.Point(9, 43)
-        Me.rdoNewWorksheet.Name = "rdoNewWorksheet"
-        Me.rdoNewWorksheet.Size = New System.Drawing.Size(99, 17)
-        Me.rdoNewWorksheet.TabIndex = 0
-        Me.rdoNewWorksheet.TabStop = True
-        Me.rdoNewWorksheet.Tag = "New_worksheet"
-        Me.rdoNewWorksheet.Text = "New worksheet"
-        Me.rdoNewWorksheet.UseVisualStyleBackColor = True
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(17, 322)
+        Me.ucrNewColumnName.Name = "ucrNewColumnName"
+        Me.ucrNewColumnName.Size = New System.Drawing.Size(367, 35)
+        Me.ucrNewColumnName.TabIndex = 15
         '
-        'lblSheetName
+        'ucrIDVariablesReceiver
         '
-        Me.lblSheetName.AutoSize = True
-        Me.lblSheetName.Location = New System.Drawing.Point(6, 66)
-        Me.lblSheetName.Name = "lblSheetName"
-        Me.lblSheetName.Size = New System.Drawing.Size(64, 13)
-        Me.lblSheetName.TabIndex = 9
-        Me.lblSheetName.Tag = "Sheet_name"
-        Me.lblSheetName.Text = "Sheet name"
-        '
-        'rdoExistingWorksheet
-        '
-        Me.rdoExistingWorksheet.AutoSize = True
-        Me.rdoExistingWorksheet.Location = New System.Drawing.Point(9, 19)
-        Me.rdoExistingWorksheet.Name = "rdoExistingWorksheet"
-        Me.rdoExistingWorksheet.Size = New System.Drawing.Size(113, 17)
-        Me.rdoExistingWorksheet.TabIndex = 0
-        Me.rdoExistingWorksheet.TabStop = True
-        Me.rdoExistingWorksheet.Tag = "Existing_worksheet"
-        Me.rdoExistingWorksheet.Text = "Existing worksheet"
-        Me.rdoExistingWorksheet.UseVisualStyleBackColor = True
-        '
-        'txtSheetName
-        '
-        Me.txtSheetName.Location = New System.Drawing.Point(84, 66)
-        Me.txtSheetName.Name = "txtSheetName"
-        Me.txtSheetName.Size = New System.Drawing.Size(100, 20)
-        Me.txtSheetName.TabIndex = 4
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(15, 374)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 11
+        Me.ucrIDVariablesReceiver.Location = New System.Drawing.Point(264, 191)
+        Me.ucrIDVariablesReceiver.Name = "ucrIDVariablesReceiver"
+        Me.ucrIDVariablesReceiver.Size = New System.Drawing.Size(121, 128)
+        Me.ucrIDVariablesReceiver.TabIndex = 14
         '
         'ucrDataFrameAddRemove
         '
@@ -190,18 +112,31 @@ Partial Class dlgStack
         Me.ucrDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
         Me.ucrDataFrameAddRemove.TabIndex = 12
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(15, 374)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 11
+        '
+        'ucrReceiverColumnsToBeStack
+        '
+        Me.ucrReceiverColumnsToBeStack.Location = New System.Drawing.Point(264, 28)
+        Me.ucrReceiverColumnsToBeStack.Name = "ucrReceiverColumnsToBeStack"
+        Me.ucrReceiverColumnsToBeStack.Size = New System.Drawing.Size(121, 132)
+        Me.ucrReceiverColumnsToBeStack.TabIndex = 2
+        '
         'dlgStack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(450, 439)
+        Me.ClientSize = New System.Drawing.Size(421, 429)
+        Me.Controls.Add(Me.ucrNewColumnName)
+        Me.Controls.Add(Me.ucrIDVariablesReceiver)
+        Me.Controls.Add(Me.chkIDVariables)
         Me.Controls.Add(Me.ucrDataFrameAddRemove)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.grpOutputOptions)
         Me.Controls.Add(Me.lblFactorInto)
-        Me.Controls.Add(Me.lblIdVariable)
-        Me.Controls.Add(Me.ucrReceiverIdVariable)
-        Me.Controls.Add(Me.chkOmitValue)
         Me.Controls.Add(Me.txtFactorInto)
         Me.Controls.Add(Me.txtStackDataInto)
         Me.Controls.Add(Me.lblStackDataInto)
@@ -212,8 +147,6 @@ Partial Class dlgStack
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Stack_join_columns"
         Me.Text = "Stack (Join) columns"
-        Me.grpOutputOptions.ResumeLayout(False)
-        Me.grpOutputOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -221,17 +154,12 @@ Partial Class dlgStack
     Friend WithEvents ucrReceiverColumnsToBeStack As ucrReceiverMultiple
     Friend WithEvents lblColumnsToBestack As Label
     Friend WithEvents txtStackDataInto As TextBox
-    Friend WithEvents chkOmitValue As CheckBox
     Friend WithEvents lblStackDataInto As Label
-    Friend WithEvents ucrReceiverIdVariable As ucrReceiverSingle
-    Friend WithEvents lblIdVariable As Label
     Friend WithEvents lblFactorInto As Label
     Friend WithEvents txtFactorInto As TextBox
-    Friend WithEvents grpOutputOptions As GroupBox
-    Friend WithEvents rdoNewWorksheet As RadioButton
-    Friend WithEvents lblSheetName As Label
-    Friend WithEvents rdoExistingWorksheet As RadioButton
-    Friend WithEvents txtSheetName As TextBox
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents chkIDVariables As CheckBox
+    Friend WithEvents ucrIDVariablesReceiver As ucrReceiverMultiple
+    Friend WithEvents ucrNewColumnName As ucrNewColumnName
 End Class
