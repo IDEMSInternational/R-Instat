@@ -27,12 +27,14 @@ Partial Class dlgRandomSample
         Me.txtSeed = New System.Windows.Forms.TextBox()
         Me.ucrDistWithParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrDataFrameSelector = New instat.ucrDataFrame()
+        Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
         Me.SuspendLayout()
         '
         'chkPlot
         '
         Me.chkPlot.AutoSize = True
-        Me.chkPlot.Location = New System.Drawing.Point(245, 8)
+        Me.chkPlot.Location = New System.Drawing.Point(190, 268)
         Me.chkPlot.Name = "chkPlot"
         Me.chkPlot.Size = New System.Drawing.Size(44, 17)
         Me.chkPlot.TabIndex = 4
@@ -43,7 +45,7 @@ Partial Class dlgRandomSample
         'lblSeed
         '
         Me.lblSeed.AutoSize = True
-        Me.lblSeed.Location = New System.Drawing.Point(314, 10)
+        Me.lblSeed.Location = New System.Drawing.Point(276, 269)
         Me.lblSeed.Name = "lblSeed"
         Me.lblSeed.Size = New System.Drawing.Size(32, 13)
         Me.lblSeed.TabIndex = 5
@@ -52,30 +54,46 @@ Partial Class dlgRandomSample
         '
         'txtSeed
         '
-        Me.txtSeed.Location = New System.Drawing.Point(353, 8)
+        Me.txtSeed.Location = New System.Drawing.Point(315, 262)
         Me.txtSeed.Name = "txtSeed"
         Me.txtSeed.Size = New System.Drawing.Size(47, 20)
         Me.txtSeed.TabIndex = 6
         '
         'ucrDistWithParameters
         '
-        Me.ucrDistWithParameters.Location = New System.Drawing.Point(-1, -2)
+        Me.ucrDistWithParameters.Location = New System.Drawing.Point(6, 45)
         Me.ucrDistWithParameters.Name = "ucrDistWithParameters"
         Me.ucrDistWithParameters.Size = New System.Drawing.Size(221, 156)
         Me.ucrDistWithParameters.TabIndex = 7
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 163)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 286)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 55)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrDataFrameSelector
+        '
+        Me.ucrDataFrameSelector.Location = New System.Drawing.Point(3, 2)
+        Me.ucrDataFrameSelector.Name = "ucrDataFrameSelector"
+        Me.ucrDataFrameSelector.Size = New System.Drawing.Size(127, 41)
+        Me.ucrDataFrameSelector.TabIndex = 8
+        '
+        'ucrNewColumnNameSelector
+        '
+        Me.ucrNewColumnNameSelector.Location = New System.Drawing.Point(3, 226)
+        Me.ucrNewColumnNameSelector.Name = "ucrNewColumnNameSelector"
+        Me.ucrNewColumnNameSelector.Size = New System.Drawing.Size(376, 35)
+        Me.ucrNewColumnNameSelector.TabIndex = 9
         '
         'dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 213)
+        Me.ClientSize = New System.Drawing.Size(418, 342)
+        Me.Controls.Add(Me.ucrNewColumnNameSelector)
+        Me.Controls.Add(Me.ucrDataFrameSelector)
         Me.Controls.Add(Me.ucrDistWithParameters)
         Me.Controls.Add(Me.txtSeed)
         Me.Controls.Add(Me.lblSeed)
@@ -97,4 +115,6 @@ Partial Class dlgRandomSample
     Friend WithEvents lblSeed As Label
     Friend WithEvents txtSeed As TextBox
     Friend WithEvents ucrDistWithParameters As ucrDistributionsWithParameters
+    Friend WithEvents ucrDataFrameSelector As ucrDataFrame
+    Friend WithEvents ucrNewColumnNameSelector As ucrNewColumnName
 End Class
