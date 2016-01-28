@@ -122,15 +122,15 @@ instat_obj$methods(append_data_objects = function(name, obj) {
 }
 )
 
-instat_obj$methods(get_data = function(obj_name) { 
-  if(missing(obj_name)) {
+instat_obj$methods(get_data = function(data_name) { 
+  if(missing(data_name)) {
     retlist <- list()
     for ( i in (1:length(data_objects)) ) {
       retlist[[names(data_objects)[[i]]]] = data_objects[[i]]$get_data()
     }
     return(retlist)
   }
-  else return(data_objects[[obj_name]]$get_data())
+  else return(data_objects[[data_name]]$get_data())
   } 
 )
 
@@ -163,15 +163,15 @@ instat_obj$methods(get_data_names = function() {
 } 
 )
 
-instat_obj$methods(get_data_changed = function(obj_name) {
-  if(missing(obj_name)) {
+instat_obj$methods(get_data_changed = function(data_name) {
+  if(missing(data_name)) {
     for(curr_obj in data_objects) {
       if(curr_obj$data_changed) return(TRUE)
     }
     return(FALSE)
   }
   else {
-    return(data_objects[[obj_name]]$data_changed)
+    return(data_objects[[data_name]]$data_changed)
   }
 } 
 )
@@ -202,53 +202,53 @@ instat_obj$methods(get_metadata_changed = function(data_obj) {
 } 
 )
 
-instat_obj$methods(set_data_frames_changed = function(obj_name = "", new_val) {
-  if(obj_name == "") {
+instat_obj$methods(set_data_frames_changed = function(data_name = "", new_val) {
+  if(data_name == "") {
     for(curr_obj in data_objects) {
       curr_obj$set_data_changed(new_val)
     }
   }
   
-  else data_objects[[obj_name]]$set_data_changed(new_val)
+  else data_objects[[data_name]]$set_data_changed(new_val)
   
 } 
 )
 
-instat_obj$methods(set_variables_metadata_changed = function(obj_name = "", new_val) {
-  if(obj_name == "") {
+instat_obj$methods(set_variables_metadata_changed = function(data_name = "", new_val) {
+  if(data_name == "") {
     for(curr_obj in data_objects) {
       curr_obj$set_variables_metadata_changed(new_val)
     }
   }
   
-  else data_objects[[obj_name]]$set_variables_metadata_changed(new_val)
+  else data_objects[[data_name]]$set_variables_metadata_changed(new_val)
 } 
 )
 
-instat_obj$methods(set_metadata_changed = function(obj_name = "", new_val) {
-  if(obj_name == "") {
+instat_obj$methods(set_metadata_changed = function(data_name = "", new_val) {
+  if(data_name == "") {
     for(curr_obj in data_objects) {
       curr_obj$set_metadata_changed(new_val)
     }
   }
   
-  else data_objects[[obj_name]]$set_metadata_changed(new_val)
+  else data_objects[[data_name]]$set_metadata_changed(new_val)
 } 
 )
 
-instat_obj$methods(add_column_to_data = function(obj_name, col_name, col_data) {
-  if(missing(obj_name)) stop("obj_name is required")
-  if(!obj_name %in% names(data_objects)) stop(paste(obj_name, "not found"))
+instat_obj$methods(add_column_to_data = function(data_name, col_name, col_data) {
+  if(missing(data_name)) stop("data_name is required")
+  if(!data_name %in% names(data_objects)) stop(paste(data_name, "not found"))
   
-  data_objects[[obj_name]]$add_column_to_data(col_name, col_data)
+  data_objects[[data_name]]$add_column_to_data(col_name, col_data)
 }
 )
 
-instat_obj$methods(get_column_from_data = function(obj_name, col_name) {
-  if(missing(obj_name)) stop("obj_name is required")
-  if(!obj_name %in% names(data_objects)) stop(paste(obj_name, "not found"))
+instat_obj$methods(get_column_from_data = function(data_name, col_name) {
+  if(missing(data_name)) stop("data_name is required")
+  if(!data_name %in% names(data_objects)) stop(paste(data_name, "not found"))
   
-  data_objects[[obj_name]]$get_column_from_data(col_name)
+  data_objects[[data_name]]$get_column_from_data(col_name)
 }
 )
 
@@ -268,105 +268,95 @@ instat_obj$methods(get_model = function(model_name) {
 }
 )
 
-instat_obj$methods(replace_value_in_data = function(obj_name, column_name, row_number, new_val) {
-  if(!is.character(obj_name)) stop("obj_name must be of type character")
-  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+instat_obj$methods(replace_value_in_data = function(data_name, column_name, row_number, new_val) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[obj_name]]$replace_value_in_data(column_name, row_number, new_val)
+  data_objects[[data_name]]$replace_value_in_data(column_name, row_number, new_val)
 } 
 )
 
-instat_obj$methods(rename_column_in_data = function(obj_name, column_name, new_val) {
-    if(!is.character(obj_name)) stop("obj_name must be of type character")
-    if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+instat_obj$methods(rename_column_in_data = function(data_name, column_name, new_val) {
+    if(!is.character(data_name)) stop("data_name must be of type character")
+    if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
     
-    data_objects[[obj_name]]$rename_column_in_data(column_name, new_val)
+    data_objects[[data_name]]$rename_column_in_data(column_name, new_val)
   } 
   )
 
-instat_obj$methods(remove_column_in_data = function(obj_name, column_name) {
-  if(!is.character(obj_name)) stop("obj_name must be of type character")
-  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+instat_obj$methods(remove_column_in_data = function(data_name, column_name) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[obj_name]]$remove_column_in_data(column_name)
+  data_objects[[data_name]]$remove_column_in_data(column_name)
 } 
 )
 
-instat_obj$methods(remove_row_in_data = function(obj_name, row_num) {
-  if(!is.character(obj_name)) stop("obj_name must be of type character")
-  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+instat_obj$methods(remove_row_in_data = function(data_name, row_num) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[obj_name]]$remove_row_in_data(row_num)
+  data_objects[[data_name]]$remove_row_in_data(row_num)
 } 
 )
 
-instat_obj$methods(get_next_default_column_name = function(obj_name, prefix) {
-  if(missing(obj_name)) {
+instat_obj$methods(get_next_default_column_name = function(data_name, prefix) {
+  if(missing(data_name)) {
     out = list()
     for(curr_obj in data_objects) {
       out[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_next_default_column_name(prefix)
     }
     return(out)
   }
-  if(!is.character(obj_name)) stop("obj_name must be of type character")
-  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  return(data_objects[[obj_name]]$get_next_default_column_name(prefix))
+  return(data_objects[[data_name]]$get_next_default_column_name(prefix))
 } 
 )
 
-instat_obj$methods(get_column_names = function(obj_name) {
-  if(missing(obj_name)) stop("obj_name must be given")
-  if(!is.character(obj_name)) stop("obj_name must be of type character")
-  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
-  return(names(data_objects[[obj_name]]$data))
+instat_obj$methods(get_column_names = function(data_name) {
+  if(missing(data_name)) stop("data_name must be given")
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  return(names(data_objects[[data_name]]$data))
 }
 )
 
-instat_obj$methods(insert_column_in_data = function(obj_name, col_name, col_data = c(), col_number) {
-  if(!is.character(obj_name)) stop("obj_name must be of type character")
-  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+instat_obj$methods(insert_column_in_data = function(data_name, col_name, col_data = c(), col_number) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[obj_name]]$insert_column_in_data(col_name, col_data = col_data, col_number = col_number)
+  data_objects[[data_name]]$insert_column_in_data(col_name = col_name, col_data = col_data, col_number = col_number)
 }
 )
 
-instat_obj$methods(move_column_in_data = function(obj_name, col_name = "", col_number){
-  if(!is.character(obj_name)) stop("obj_name must be of type character")
-  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+instat_obj$methods(move_column_in_data = function(data_name, col_name = "", col_number){
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[obj_name]]$move_column_in_data(col_name = col_name, col_number = col_number)
+  data_objects[[data_name]]$move_column_in_data(col_name = col_name, col_number = col_number)
 }
 )
 
-instat_obj$methods(insert_row_in_data = function(obj_name, row_num, row_data = c()) {
-  if(!is.character(obj_name)) stop("obj_name must be of type character")
-  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+instat_obj$methods(insert_row_in_data = function(data_name, row_num, row_data = c()) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[obj_name]]$insert_row_in_data(row_num = row_num, row_data = row_data)
+  data_objects[[data_name]]$insert_row_in_data(row_num = row_num, row_data = row_data)
 }
 )
 
-instat_obj$methods(length_of_data = function(obj_name) {
-  if(!is.character(obj_name)) stop("obj_name must be of type character")
-  if(!obj_name %in% names(data_objects)) stop(paste("dataframe: ", obj_name, " not found"))
+instat_obj$methods(length_of_data = function(data_name) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[obj_name]]$length_of_data()
+  data_objects[[data_name]]$length_of_data()
 }
 )
 
-instat_obj$methods(get_next_default_object_name = function(prefix) {
-  if(!is.character(prefix)) stop("prefix must be of type character")
-  object_exists = TRUE
-  i = 1
-  while(object_exists) {
-    if(!paste0(prefix,i) %in% names(data_objects)) {
-      object_exists = FALSE
-      out = paste0(prefix,i)
-    }
-    i = i + 1
-  }
-  out
+instat_obj$methods(get_next_default_dataframe_name = function(prefix) {
+  next_default_item(prefix = prefix, existing_names = names(data_objects))
 } 
 )
 
