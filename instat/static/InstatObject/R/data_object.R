@@ -418,10 +418,10 @@ data_obj$methods(move_column_in_data = function(col_name = "", col_number) {
 
 data_obj$methods(insert_row_in_data = function(start_pos = (nrow(data)+1), row_data = c(), number_rows = 1) {
   
-  if (start_pos != as.integer(start_pos) || start_pos < 1 || start_pos >  nrow(data)+1 ) {
+  if (start_pos != as.integer(start_pos) || start_pos < 1 || start_pos >  nrow(data) + 1 ) {
     stop( paste("index must be an integer between 1 and", nrow(data)+1, ".") )
   }
-  if (length(row_data)==0){
+  if (length(row_data) == 0){
     row_data <- rep(NA,ncol(data))
     warning("You are inserting an empty row to data")
   }
