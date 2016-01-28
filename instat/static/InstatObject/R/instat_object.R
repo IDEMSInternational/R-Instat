@@ -284,19 +284,27 @@ instat_obj$methods(rename_column_in_data = function(data_name, column_name, new_
   } 
   )
 
-instat_obj$methods(remove_column_in_data = function(data_name, column_name) {
+instat_obj$methods(remove_columns_in_data_from_start_position = function(data_name, start_pos, col_numbers) {
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[data_name]]$remove_column_in_data(column_name)
+  data_objects[[data_name]]$remove_columns_in_data_from_start_position(start_pos = start_pos, col_numbers = col_numbers)
 } 
 )
 
-instat_obj$methods(remove_row_in_data = function(data_name, row_num) {
+instat_obj$methods(remove_column_in_data = function(data_name, cols) {
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[data_name]]$remove_row_in_data(row_num)
+  data_objects[[data_name]]$remove_column_in_data(cols = cols)
+} 
+)
+
+instat_obj$methods(remove_rows_in_data = function(data_name, start_pos, num_rows) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$remove_rows_in_data(start_pos  = start_pos, num_rows = num_rows)
 } 
 )
 
@@ -323,11 +331,11 @@ instat_obj$methods(get_column_names = function(data_name) {
 }
 )
 
-instat_obj$methods(insert_column_in_data = function(data_name, col_name, col_data = c(), col_number) {
+instat_obj$methods(insert_column_in_data = function(data_name, col_data =c(), start_pos, number_cols) {
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[data_name]]$insert_column_in_data(col_name = col_name, col_data = col_data, col_number = col_number)
+  data_objects[[data_name]]$insert_column_in_data(col_data = col_data, start_pos = start_pos, number_cols = number_cols )
 }
 )
 
@@ -339,11 +347,11 @@ instat_obj$methods(move_column_in_data = function(data_name, col_name = "", col_
 }
 )
 
-instat_obj$methods(insert_row_in_data = function(data_name, row_num, row_data = c()) {
+instat_obj$methods(insert_row_in_data = function(data_name, start_pos, row_data = c(), number_rows) {
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[data_name]]$insert_row_in_data(row_num = row_num, row_data = row_data)
+  data_objects[[data_name]]$insert_row_in_data(start_pos  = start_pos, row_data = row_data, number_rows = number_rows)
 }
 )
 
