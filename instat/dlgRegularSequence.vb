@@ -18,71 +18,84 @@ Public Class dlgRegularSequence
     Dim bIsExtended As Boolean = False
 
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtRepeatValues.Text = 1
-        txtLength.Text = 100
-        txtRepeatSequenceDate.Text = 1
-        txtRepeatValuesDate.Text = 1
-        txtRepeatSequence.Text = 1
-        txtRepeatTimes.Text = 1
-        txtSteps.Text = 1
-        cmdRefreshPreview.Hide()
-        grpSequence2.Hide()
-        grpRepeatSingle.Hide()
         ucrBase.clsRsyntax.SetFunction("seq")
         autoTranslate(Me)
+        frmMain.clsRLink.SetOutput(txtGetPreview)
+        dtpSelectorA.Visible = False
+        dtpSelectorB.Visible = False
         ucrSelectDataFrame.SetColumnList(ucrColName)
+
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrColName.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrColName.cboColumnName.Text)
     End Sub
     Private Sub rdoDates_Click(sender As Object, e As EventArgs) Handles rdoDates.Click
-        grpSequence.Hide()
-        grpRepeatSingle.Hide()
-        grpSequence2.Visible = True
+        chkDefineAsFactor.Visible = False
+        dtpSelectorA.Visible = True
+        dtpSelectorB.Visible = True
     End Sub
-    Private Sub rdoSingleValue_Click(sender As Object, e As EventArgs) Handles rdoSingleValue.Click
-        grpSequence.Hide()
-        grpSequence2.Hide()
-        grpRepeatSingle.Visible = True
-    End Sub
-    Private Sub rdoSequence_Click(sender As Object, e As EventArgs) Handles rdoSequence.Click
-        grpRepeatSingle.Hide()
-        grpSequence2.Hide()
-        grpSequence.Visible = True
-    End Sub
+
+
     Private Sub txtFrom_Leave(sender As Object, e As EventArgs) Handles txtFrom.Leave
-        ucrBase.clsRsyntax.AddParameter("from", txtFrom.Text)
+
+        If IsNumeric(txtFrom.Text) = True Or txtFrom.Text = "" Then
+            ucrBase.clsRsyntax.AddParameter("from", txtFrom.Text)
+
+        ElseIf IsNumeric(txtFrom.Text) = False Then
+            MsgBox("Enter numeric value", vbOKOnly)
+            txtFrom.Focus()
+
+        End If
+
+
+
+    End Sub
+    Private Sub txtRepeatValues_Leave(sender As Object, e As EventArgs) Handles txtRepeatValues.Leave
+
+        If IsNumeric(txtRepeatValues.Text) = True Or txtRepeatValues.Text = "" Then
+            ucrBase.clsRsyntax.AddParameter("from", txtRepeatValues.Text)
+
+        ElseIf IsNumeric(txtRepeatValues.Text) = False Then
+            MsgBox("Enter numeric value", vbOKOnly)
+            txtRepeatValues.Focus()
+
+        End If
+
+
+
+    End Sub
+    Private Sub txtTo_Leave(sender As Object, e As EventArgs) Handles txtTo.Leave
+        If IsNumeric(txtFrom.Text) = True Or txtTo.Text = "" Then
+            ucrBase.clsRsyntax.AddParameter("from", txtTo.Text)
+
+        ElseIf IsNumeric(txtTo.Text) = False Then
+            MsgBox("Enter numeric value", vbOKOnly)
+            txtTo.Focus()
+
+        End If
+
     End Sub
 
-    Private Sub txtTo_TextChanged(sender As Object, e As EventArgs) Handles txtTo.Leave
-        ucrBase.clsRsyntax.AddParameter("to", txtTo.Text)
+    Private Sub rdoNumeric_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNumeric.Click
+        If rdoNumeric.Checked = True Then
+            dtpSelectorA.Visible = False
+            dtpSelectorB.Visible = False
+            chkDefineAsFactor.Visible = True
+
+        End If
     End Sub
 
-    Private Sub txtSteps_TextChanged(sender As Object, e As EventArgs) Handles txtSteps.Leave
-        ucrBase.clsRsyntax.AddParameter("by", txtSteps.Text)
-    End Sub
 
-    Private Sub dtSelectorA_Leave(sender As Object, e As EventArgs) Handles dtSelectorA.Leave
-        ucrBase.clsRsyntax.AddParameter("from", "as.Date('" & Format(dtSelectorA.Value, "yyyy/MM/dd") & "')")
+    Private Sub dtpSelectorA_Leave(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("from", "as.Date('" & Format(dtpSelectorA.Value, "yyyy/MM/dd") & "')")
     End Sub
-
-    Private Sub dtSelectorB_Leave(sender As Object, e As EventArgs) Handles dtSelectorB.Leave
-        ucrBase.clsRsyntax.AddParameter("to", "as.Date('" & Format(dtSelectorB.Value, "yyyy/MM/dd") & "')")
+    Private Sub dtpSelectorB_Leave(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("to", "as.Date('" & Format(dtpSelectorB.Value, "yyyy/MM/dd") & "')")
     End Sub
-
-    Private Sub cboBy_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboBy.Leave
-        ucrBase.clsRsyntax.AddParameter("by", "'" & cboBy.SelectedItem.ToString() & "'")
+    Private Sub cboInStepsOf_SelectedIndexChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("by", "'" & cboInStepsOf.SelectedItem.ToString() & "'")
     End Sub
-
-    Private Sub txtValue_TextChanged(sender As Object, e As EventArgs) Handles txtValue.Leave
-        Dim funct() As String = {"from", "to"}
-        For Each Val As String In funct
-            ucrBase.clsRsyntax.AddParameter(Val, txtValue.Text)
-        Next
+    Private Sub txtRepeatValues_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("length.out", txtRepeatValues.Text)
     End Sub
-
-    Private Sub txtRepeatTimes_TextChanged(sender As Object, e As EventArgs) Handles txtRepeatTimes.Leave
-        ucrBase.clsRsyntax.AddParameter("length.out", txtRepeatTimes.Text)
-    End Sub
-
     Private Sub ucrSelectDataFrame_LostFocus(sender As Object, e As EventArgs) Handles ucrSelectDataFrame.LostFocus
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrColName.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrColName.cboColumnName.Text)
     End Sub
@@ -92,19 +105,13 @@ Public Class dlgRegularSequence
     End Sub
 
 
-
-    Private Sub cmdShowHide_Click(sender As Object, e As EventArgs) Handles cmdShowHide.Click
-        If bIsExtended Then
-            Me.Width -= 151
-            bIsExtended = False
-            cmdRefreshPreview.Visible = False
-        Else
-            Me.Width += 151
-            bIsExtended = True
-            cmdRefreshPreview.Visible = True
-        End If
-
+    Private Sub cboInStepsOf_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("by", cboInStepsOf.Text)
     End Sub
 
+    Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click
+        frmMain.clsRLink.RunScript(ucrBase.clsRsyntax.GetScript(), ucrBase.clsRsyntax.iCallType)
+        txtGetPreview.Refresh()
+    End Sub
 
 End Class
