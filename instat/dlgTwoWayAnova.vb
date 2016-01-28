@@ -44,9 +44,9 @@ Public Class dlgTwoWayAnova
         Dim strRowFactor As String
         Dim strColumnFactor As String
 
-        strCounts = ucrReceiverCounts.GetVariables()
-        strRowFactor = ucrReceiverRowFactor.GetVariables()
-        strColumnFactor = ucrReceiverColumnFactor.GetVariables()
+        'strCounts = ucrReceiverCounts.GetVariables()
+        'strRowFactor = ucrReceiverRowFactor.GetVariables()
+        'strColumnFactor = ucrReceiverColumnFactor.GetVariables()
         If ((Not (strCounts = "")) And (Not (strRowFactor = "")) And (Not (strColumnFactor = ""))) Then
             ucrBase.clsRsyntax.AddParameter("formula", strCounts & "~" & strRowFactor & "*" & strColumnFactor)
             ucrBase.OKEnabled(True)

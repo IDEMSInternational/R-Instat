@@ -43,8 +43,10 @@ Public Class ucrReceiverMultiple
         End If
     End Sub
 
-    Public Overrides Function GetVariables() As String
-        Return "To do"
+    Public Overrides Function GetVariables() As RFunction
+        'TODO sort this out
+        Dim clsGetVariablesFunc As New RFunction
+        Return clsGetVariablesFunc
     End Function
 
 End Class

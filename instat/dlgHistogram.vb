@@ -31,7 +31,7 @@ Public Class dlgHistogram
 
     Private Sub ucrXReceiver_ValueChanged(sender As Object, e As EventArgs) Handles ucrXReceiver.ValueChanged
         If Not (ucrXReceiver.txtReceiverSingle.Text = "") Then
-            ucrBase.clsRsyntax.AddParameter("x", ucrXReceiver.GetVariables())
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrXReceiver.GetVariables())
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)

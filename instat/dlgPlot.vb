@@ -32,11 +32,11 @@ Public Class dlgPlot
     End Sub
 
     Private Sub ucrReceiverY_Leave(sender As Object, e As EventArgs) Handles ucrReceiverY.Leave
-        ucrBase.clsRsyntax.AddParameter("y", ucrReceiverY.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("y", clsRFunctionParameter:=ucrReceiverY.GetVariables())
     End Sub
 
     Private Sub ucrReceiverX_Leave(sender As Object, e As EventArgs) Handles ucrReceiverX.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverX.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverX.GetVariables())
     End Sub
 
 End Class
