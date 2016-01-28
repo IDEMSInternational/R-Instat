@@ -20,6 +20,7 @@ Imports System.Threading
 Imports instat.Translations
 Public Class frmEditor
     Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
+    Public strf As String
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsGrids.SetData(grdData)
         grdData.Visible = False
@@ -37,15 +38,15 @@ Public Class frmEditor
     End Sub
 
     Private Sub insertCol_Click(sender As Object, e As EventArgs) Handles insertColToolStripMenuItem.Click
-        grdData.DoAction(New unvell.ReoGrid.Actions.InsertColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
-        'Dim strF As String
-        'strF = frmMain.clsRLink.strInstatDataObject & "$insert_column_in_data(" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & "," & Chr(34) & "ff" & Chr(34) & ",c()," & grdData.CurrentWorksheet.SelectionRange.Col & ")"
-        'frmMain.clsRLink.clsEngine.Evaluate(strF)
-        'frmMain.clsGrids.UpdateGrids()
+        'grdData.DoAction(New unvell.ReoGrid.Actions.InsertColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
+        strf = frmMain.clsRLink.strInstatDataObject & "$insert_column_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_data = " & "c(), col_number = " & grdData.CurrentWorksheet.SelectionRange.col + 1 & ")"
+        frmMain.clsRLink.RunScript(strf)
     End Sub
 
     Private Sub deleteColumnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles deleteColumnToolStripMenuItem.Click
-        grdData.DoAction(New unvell.ReoGrid.Actions.RemoveColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
+        'grdData.DoAction(New unvell.ReoGrid.Actions.RemoveColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
+        strf = frmMain.clsRLink.strInstatDataObject & "$remove_column_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", column_name = " & Chr(34) & grdData.CurrentWorksheet.GetColumnHeader(grdData.CurrentWorksheet.SelectionRange.Col).Text & Chr(34) & ")"
+        frmMain.clsRLink.RunScript(strf)
     End Sub
 
     Private Sub resetToDefaultWidthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles resetToDefaultWidthToolStripMenuItem.Click
@@ -198,5 +199,9 @@ Public Class frmEditor
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
         grdData.RemoveWorksheet(grdData.GetWorksheetIndex(grdData.CurrentWorksheet))
+    End Sub
+
+    Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
+        dlgcolrowname.ShowDialog()
     End Sub
 End Class
