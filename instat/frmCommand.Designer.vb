@@ -30,6 +30,7 @@ Partial Class frmCommand
         Me.txtcommand.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtcommand.Location = New System.Drawing.Point(0, 0)
         Me.txtcommand.Name = "txtcommand"
+        Me.txtcommand.ReadOnly = True
         Me.txtcommand.Size = New System.Drawing.Size(631, 261)
         Me.txtcommand.TabIndex = 0
         Me.txtcommand.Text = ""
