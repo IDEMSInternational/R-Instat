@@ -41,10 +41,10 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub ucrfactortoUnstackReceiver_Leave(sender As Object, e As EventArgs) Handles ucrfactortoUnstackReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("", ucrfactortoUnstackReceiver.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("", ucrfactortoUnstackReceiver.GetVariableNames())
     End Sub
 
     Private Sub ucrColumntoUnstackReceiver_Leave(sender As Object, e As EventArgs) Handles ucrColumntoUnstackReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("", ucrColumntoUnstackReceiver.GetVariables)
+        ucrBase.clsRsyntax.AddParameter("", ucrColumntoUnstackReceiver.GetVariableNames())
     End Sub
 End Class
