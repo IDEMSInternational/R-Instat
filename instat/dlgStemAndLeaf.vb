@@ -27,7 +27,7 @@ Public Class dlgStemAndLeaf
         ucrReceiverStemAndLeaf.SetMeAsReceiver()
     End Sub
     Private Sub ucrReceiverStemAndLeaf_Leave(sender As Object, e As EventArgs) Handles ucrReceiverStemAndLeaf.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverStemAndLeaf.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverStemAndLeaf.GetVariables())
     End Sub
 
 End Class

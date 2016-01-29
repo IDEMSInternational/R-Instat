@@ -28,7 +28,7 @@ Partial Class ucrReceiverMultiple
         Me.lstSelectedVariables.Location = New System.Drawing.Point(3, 5)
         Me.lstSelectedVariables.MultiColumn = True
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
-        Me.lstSelectedVariables.Size = New System.Drawing.Size(115, 121)
+        Me.lstSelectedVariables.Size = New System.Drawing.Size(113, 95)
         Me.lstSelectedVariables.Sorted = True
         Me.lstSelectedVariables.TabIndex = 0
         '
