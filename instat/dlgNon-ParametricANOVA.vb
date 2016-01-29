@@ -37,10 +37,10 @@ Public Class dlgNon_ParametricANOVA
         FillFormula()
     End Sub
     Private Sub FillFormula()
-        Dim strYVariate As String
-        Dim strFactor As String
-        strYVariate = ucrReceiverYVariate.GetVariables()
-        strFactor = ucrReceiverFactor.GetVariables()
+        Dim strYVariate As String = ""
+        Dim strFactor As String = ""
+        'strYVariate = ucrReceiverYVariate.GetVariables()
+        'strFactor = ucrReceiverFactor.GetVariables()
         If ((Not (strYVariate = "")) And (Not (strFactor = ""))) Then
             ucrBase.clsRsyntax.AddParameter("formula", strYVariate & "~" & strFactor)
             ucrBase.OKEnabled(True)
