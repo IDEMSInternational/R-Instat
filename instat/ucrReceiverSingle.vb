@@ -38,13 +38,27 @@ Public Class ucrReceiverSingle
         End If
     End Sub
 
-    Public Overrides Function GetVariables() As String
+    Public Overrides Function GetVariables() As RFunction
+        'return columns (in data frame) in both cases
+        'call GetVariableNames
+        Dim clsGetVariablesFunc As New RFunction
         If bSelected Then
-            Return frmMain.clsRLink.strInstatDataObject & "$get_column_from_data(obj_name = " & Chr(34) & objSelected.Group.ToString() & Chr(34) & ", col_name = " & Chr(34) & objSelected.Text & Chr(34) & ")"
+            clsRSyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data", clsFunction:=clsGetVariablesFunc)
+            clsRSyntax.AddParameter("data_name", Chr(34) & objSelected.Group.ToString() & Chr(34), clsRFunction:=clsGetVariablesFunc)
+            clsRSyntax.AddParameter("col_name", GetVariableNames(), clsRFunction:=clsGetVariablesFunc)
+            'TODO make this an option set in Options menu
+            clsRSyntax.SetAssignTo(MakeValidRString(objSelected.Text), clsFunction:=clsGetVariablesFunc)
+            Return clsGetVariablesFunc
         Else
-            Return ""
+            Return clsGetVariablesFunc
         End If
     End Function
+
+    Public Overrides Function GetVariableNames() As String
+        Return Chr(34) & objSelected.Text & Chr(34)
+        'in multiple return c( 'column names' )
+    End Function
+
 
     Private Sub txtReceiverSingle_TextChanged(sender As Object, e As EventArgs) Handles txtReceiverSingle.TextChanged
         OnValueChanged(sender, e)

@@ -64,7 +64,7 @@ Public Class dlgProbabilityPlot
     End Sub
 
     Private Sub UcrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrReceiverPlotVariable.Leave
-        ucrBase.clsRsyntax.AddParameter("y", ucrReceiverPlotVariable.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("y", clsRFunctionParameter:=ucrReceiverPlotVariable.GetVariables())
     End Sub
 End Class
 
