@@ -148,7 +148,9 @@ Public Class frmEditor
     End Sub
 
     Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
-        grdData.DoAction(New unvell.ReoGrid.Actions.RemoveRowsAction(grdData.CurrentWorksheet.SelectionRange.Row, grdData.CurrentWorksheet.SelectionRange.Rows))
+        'grdData.DoAction(New unvell.ReoGrid.Actions.RemoveRowsAction(grdData.CurrentWorksheet.SelectionRange.Row, grdData.CurrentWorksheet.SelectionRange.Rows))
+        strf = frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", start_pos = " & grdData.CurrentWorksheet.SelectionRange.Col + 1 & ",num_rows =" & grdData.CurrentWorksheet.SelectionRange.Cols & ")"
+        frmMain.clsRLink.RunScript(strf)
     End Sub
 
     Private Sub resetToDefaultHeightToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles resetToDefaultHeightToolStripMenuItem.Click

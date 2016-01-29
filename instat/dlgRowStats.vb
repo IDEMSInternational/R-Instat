@@ -26,7 +26,7 @@ Public Class dlgRowStats
     End Sub
 
     Private Sub ucrReceiverRowStatistics_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRowStatistics.Leave
-        ucrBase.clsRsyntax.AddParameter("X", ucrReceiverRowStatistics.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("X", ucrReceiverRowStatistics.GetVariableNames())
 
     End Sub
 
