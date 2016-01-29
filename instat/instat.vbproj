@@ -707,6 +707,12 @@
     <Compile Include="dlgRowStats.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSaveAs.Designer.vb">
+      <DependentUpon>dlgSaveAs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSaveAs.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgScatterPlot.Designer.vb">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
     </Compile>
@@ -1883,6 +1889,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReplace.sw-KE.resx">
       <DependentUpon>dlgReplace.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSaveAs.fr-FR.resx">
+      <DependentUpon>dlgSaveAs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSaveAs.resx">
+      <DependentUpon>dlgSaveAs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSaveAs.sw-KE.resx">
+      <DependentUpon>dlgSaveAs.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalSummary.fr-FR.resx">
       <DependentUpon>dlgSeasonalSummary.vb</DependentUpon>

@@ -22,8 +22,4 @@
         End If
 
     End Sub
-
-    Private Sub dlgcolrowname_Load(sender As Object, e As EventArgs) Handles Me.Load
-        txtcolrowname.Text = frmEditor.grdData.CurrentWorksheet.GetColumnHeader(frmEditor.grdData.CurrentWorksheet.SelectionRange.Col).Text
-    End Sub
 End Class
