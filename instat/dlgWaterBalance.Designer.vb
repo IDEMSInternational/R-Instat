@@ -22,7 +22,7 @@ Partial Class dlgWaterBalance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         Me.nudEvaporation = New System.Windows.Forms.NumericUpDown()
         Me.nudMaximumCapacity = New System.Windows.Forms.NumericUpDown()
         Me.nudDecimalPlace = New System.Windows.Forms.NumericUpDown()
@@ -39,12 +39,12 @@ Partial Class dlgWaterBalance
         CType(Me.nudDecimalPlace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'UcrButtons1
+        'ucrBase
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(55, 245)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(410, 32)
-        Me.UcrButtons1.TabIndex = 0
+        Me.ucrBase.Location = New System.Drawing.Point(33, 217)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 60)
+        Me.ucrBase.TabIndex = 0
         '
         'nudEvaporation
         '
@@ -163,7 +163,7 @@ Partial Class dlgWaterBalance
         Me.Controls.Add(Me.nudDecimalPlace)
         Me.Controls.Add(Me.nudMaximumCapacity)
         Me.Controls.Add(Me.nudEvaporation)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Name = "dlgWaterBalance"
         Me.Tag = "Water_Balance"
@@ -176,7 +176,7 @@ Partial Class dlgWaterBalance
 
     End Sub
 
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents nudEvaporation As NumericUpDown
     Friend WithEvents nudMaximumCapacity As NumericUpDown
     Friend WithEvents nudDecimalPlace As NumericUpDown
