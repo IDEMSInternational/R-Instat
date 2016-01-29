@@ -27,9 +27,9 @@ Partial Class dlgThreeSummaries
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 292)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 269)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 55)
         Me.ucrBase.TabIndex = 0
         '
         'dlgThreeSummaries
