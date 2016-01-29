@@ -22,29 +22,30 @@ Partial Class sdgBoxplot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
+        Me.ucrButtonsSubdialog = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
-        'UcrButtonsSubdialogue1
+        'ucrButtonsSubdialog
         '
-        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(13, 218)
-        Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
-        Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(253, 44)
-        Me.UcrButtonsSubdialogue1.TabIndex = 0
+        Me.ucrButtonsSubdialog.Location = New System.Drawing.Point(13, 218)
+        Me.ucrButtonsSubdialog.Name = "ucrButtonsSubdialog"
+        Me.ucrButtonsSubdialog.Size = New System.Drawing.Size(253, 44)
+        Me.ucrButtonsSubdialog.TabIndex = 0
         '
         'sdgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
-        Me.Controls.Add(Me.UcrButtonsSubdialogue1)
+        Me.Controls.Add(Me.ucrButtonsSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgBoxplot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Boxplot"
         Me.Text = "Boxplot"
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
+    Friend WithEvents ucrButtonsSubdialog As ucrButtonsSubdialogue
 End Class
