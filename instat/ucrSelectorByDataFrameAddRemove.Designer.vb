@@ -28,7 +28,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(149, 39)
+        Me.btnAdd.Location = New System.Drawing.Point(149, 95)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 85
@@ -38,7 +38,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         'btnRemove
         '
-        Me.btnRemove.Location = New System.Drawing.Point(149, 81)
+        Me.btnRemove.Location = New System.Drawing.Point(149, 136)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(75, 23)
         Me.btnRemove.TabIndex = 86
@@ -54,6 +54,8 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "ucrSelectorByDataFrameAddRemove"
         Me.Size = New System.Drawing.Size(242, 179)
+        Me.Controls.SetChildIndex(Me.lblVariables, 0)
+        Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
         Me.Controls.SetChildIndex(Me.btnAdd, 0)
         Me.Controls.SetChildIndex(Me.btnRemove, 0)
         Me.ResumeLayout(False)
