@@ -1,6 +1,6 @@
 ﻿Imports instat.Translations
 Public Class dlgWaterBalance
-    Private Sub ucrButtons_clickOk(sender As Object, e As EventArgs) Handles UcrButtons1.ClickOk
+    Private Sub ucrButtons_clickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strScript As String
         strScript = "climate_obj$display_water_balance(data_list=list()"
         strScript = strScript & ", capacity_max=" & nudMaximumCapacity.ToString()
