@@ -27,9 +27,9 @@ Partial Class dlgYearRaincount
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(29, 218)
+        Me.ucrBase.Location = New System.Drawing.Point(29, 207)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 57)
         Me.ucrBase.TabIndex = 0
         '
         'dlgYearRaincount
