@@ -45,7 +45,7 @@ Public Class frmEditor
 
     Private Sub deleteColumnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles deleteColumnToolStripMenuItem.Click
         'grdData.DoAction(New unvell.ReoGrid.Actions.RemoveColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
-        strf = frmMain.clsRLink.strInstatDataObject & "$remove_column_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", column_name = " & Chr(34) & grdData.CurrentWorksheet.GetColumnHeader(grdData.CurrentWorksheet.SelectionRange.Col).Text & Chr(34) & ")"
+        strf = frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data_from_start_position(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", start_pos = " & grdData.CurrentWorksheet.SelectionRange.Col + 1 & ",col_numbers =" & grdData.CurrentWorksheet.SelectionRange.Cols & ")"
         frmMain.clsRLink.RunScript(strf)
     End Sub
 
