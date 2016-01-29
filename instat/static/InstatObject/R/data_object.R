@@ -223,6 +223,8 @@ data_obj$methods(rename_column_in_data = function(curr_col_name = "", new_col_na
                      renamed."))
     }
     names(data)[names(data) == curr_col_name] <<- new_col_name
+    rownames(variables_metadata)[rownames(variables_metadata) == curr_col_name] <<- new_col_name
+    variables_metadata[rownames(variables_metadata) == new_col_name, 1] <<- new_col_name
     .self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
     .self$set_data_changed(TRUE)
     .self$set_variables_metadata_changed(TRUE)
