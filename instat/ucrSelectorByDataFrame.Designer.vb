@@ -25,9 +25,17 @@ Partial Class ucrSelectorByDataFrame
         Me.ucrAvailableDataFrames = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
+        'lblAvailableVariables
+        '
+        Me.lblVariables.Location = New System.Drawing.Point(3, 52)
+        '
+        'lstAvailableVariable
+        '
+        Me.lstAvailableVariable.Location = New System.Drawing.Point(3, 72)
+        '
         'ucrAvailableDataFrames
         '
-        Me.ucrAvailableDataFrames.Location = New System.Drawing.Point(2, 128)
+        Me.ucrAvailableDataFrames.Location = New System.Drawing.Point(3, 3)
         Me.ucrAvailableDataFrames.Name = "ucrAvailableDataFrames"
         Me.ucrAvailableDataFrames.Size = New System.Drawing.Size(127, 41)
         Me.ucrAvailableDataFrames.TabIndex = 84
@@ -39,6 +47,8 @@ Partial Class ucrSelectorByDataFrame
         Me.Controls.Add(Me.ucrAvailableDataFrames)
         Me.Name = "ucrSelectorByDataFrame"
         Me.Size = New System.Drawing.Size(133, 179)
+        Me.Controls.SetChildIndex(Me.lblVariables, 0)
+        Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
         Me.Controls.SetChildIndex(Me.ucrAvailableDataFrames, 0)
         Me.ResumeLayout(False)
         Me.PerformLayout()

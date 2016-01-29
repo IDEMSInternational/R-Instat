@@ -66,7 +66,7 @@ Public Class dlgGammaDistr
     End Sub
 
     Private Sub ucrReceiverColumn_leave(sender As Object, e As EventArgs) Handles ucrReceiverColumn.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverColumn.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverColumn.GetVariables())
     End Sub
 
     Private Sub ucrReceiverColumn_Load(sender As Object, e As EventArgs)

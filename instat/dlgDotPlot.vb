@@ -30,7 +30,7 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingle.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverSingle.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverSingle.GetVariables())
     End Sub
 
 
