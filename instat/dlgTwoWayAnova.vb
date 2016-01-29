@@ -40,9 +40,9 @@ Public Class dlgTwoWayAnova
     End Sub
 
     Private Sub FillFormula()
-        Dim strCounts As String
-        Dim strRowFactor As String
-        Dim strColumnFactor As String
+        Dim strCounts As String = ""
+        Dim strRowFactor As String = ""
+        Dim strColumnFactor As String = ""
 
         'strCounts = ucrReceiverCounts.GetVariables()
         'strRowFactor = ucrReceiverRowFactor.GetVariables()
