@@ -41,10 +41,10 @@ Public Class dlgStack
     End Sub
 
     Private Sub ucrReceiverColumnsToBeStack_Leave(sender As Object, e As EventArgs) Handles ucrReceiverColumnsToBeStack.Leave
-        ucrBase.clsRsyntax.AddParameter("id.var", ucrReceiverColumnsToBeStack.GetVariables)
+        ucrBase.clsRsyntax.AddParameter("id.var", ucrReceiverColumnsToBeStack.GetVariableNames())
     End Sub
     Private Sub ucrIDVariablesReceiver_Leave(sender As Object, e As EventArgs) Handles ucrIDVariablesReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("", ucrIDVariablesReceiver.GetVariables)
+        ucrBase.clsRsyntax.AddParameter("", ucrIDVariablesReceiver.GetVariableNames())
     End Sub
 
     Private Sub ucrReceiverColumnsToBeStack_Load(sender As Object, e As EventArgs)
