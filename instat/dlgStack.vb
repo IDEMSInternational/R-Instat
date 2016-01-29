@@ -22,8 +22,15 @@ Public Class dlgStack
         ucrReceiverColumnsToBeStack.Selector = ucrDataFrameAddRemove
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         ucrIDVariablesReceiver.Selector = ucrDataFrameAddRemove
+
         txtFactorInto.Text = "Variable"
+        ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtFactorInto.Text & Chr(34))
+
         txtStackDataInto.Text = "Value"
+        ucrBase.clsRsyntax.AddParameter("value.name", Chr(34) & txtStackDataInto.Text & Chr(34))
+
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrDataFrameAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
+
         autoTranslate(Me)
     End Sub
 
@@ -41,13 +48,17 @@ Public Class dlgStack
     End Sub
 
     Private Sub ucrReceiverColumnsToBeStack_Leave(sender As Object, e As EventArgs) Handles ucrReceiverColumnsToBeStack.Leave
-        ucrBase.clsRsyntax.AddParameter("id.var", ucrReceiverColumnsToBeStack.GetVariableNames())
+        ucrBase.clsRsyntax.AddParameter("measure.vars", ucrReceiverColumnsToBeStack.GetVariableNames())
     End Sub
     Private Sub ucrIDVariablesReceiver_Leave(sender As Object, e As EventArgs) Handles ucrIDVariablesReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("", ucrIDVariablesReceiver.GetVariableNames())
+        ucrBase.clsRsyntax.AddParameter("id.vars", ucrIDVariablesReceiver.GetVariableNames())
     End Sub
 
-    Private Sub ucrReceiverColumnsToBeStack_Load(sender As Object, e As EventArgs)
+    Private Sub txtFactorInto_Leave(sender As Object, e As EventArgs) Handles txtFactorInto.Leave
+        ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtFactorInto.Text & Chr(34))
+    End Sub
 
+    Private Sub txtStackDataInto_Leave(sender As Object, e As EventArgs) Handles txtStackDataInto.Leave
+        ucrBase.clsRsyntax.AddParameter("value.name", Chr(34) & txtStackDataInto.Text & Chr(34))
     End Sub
 End Class

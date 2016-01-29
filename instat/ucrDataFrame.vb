@@ -19,9 +19,11 @@ Imports RDotNet
 Public Class ucrDataFrame
     Public CurrentColumnList As ucrNewColumnName
     Public strDataFrameLength As String
+    Public clsCurrDataFrame As RFunction
+    Public clsRSyntax As New RSyntax
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames)
+        UpdateColumnList()
     End Sub
 
     Public Sub SetColumnList(ColumnList As ucrNewColumnName)
@@ -34,13 +36,16 @@ Public Class ucrDataFrame
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged
         UpdateColumnList()
         RaiseEvent DataFrameChanged(sender, e)
-        strDataFrameLength = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$length_of_data(" & Chr(34) & cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter(0).ToString
     End Sub
 
     Public Sub UpdateColumnList()
         If CurrentColumnList IsNot Nothing Then
             frmMain.clsRLink.FillColumnNames(cboAvailableDataFrames.SelectedItem, cboColumns:=CurrentColumnList.cboColumnName)
             CurrentColumnList.SetDefaultName(cboAvailableDataFrames.Text)
+            strDataFrameLength = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$length_of_data(" & Chr(34) & cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter(0).ToString
+            clsRSyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_data", clsFunction:=clsCurrDataFrame)
+            clsRSyntax.AddParameter("data_name", cboAvailableDataFrames.SelectedItem, clsRFunction:=clsCurrDataFrame)
+            clsRSyntax.SetAssignTo(cboAvailableDataFrames.SelectedItem & "_temp", clsFunction:=clsCurrDataFrame)
         End If
     End Sub
 End Class
