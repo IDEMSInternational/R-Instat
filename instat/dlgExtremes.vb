@@ -65,6 +65,6 @@ Public Class dlgExtremes
     End Sub
 
     Private Sub ucrReceiverDataToFit_Leave(sender As Object, e As EventArgs) Handles ucrReceiverDataToFit.Leave
-        ucrBase.clsRsyntax.AddParameter("xdat", ucrReceiverDataToFit.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("xdat", clsRFunctionParameter:=ucrReceiverDataToFit.GetVariables())
     End Sub
 End Class
