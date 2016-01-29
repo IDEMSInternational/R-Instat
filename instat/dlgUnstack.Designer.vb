@@ -25,22 +25,18 @@ Partial Class dlgUnstack
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFrame = New instat.ucrDataFrame()
         Me.ucrSelectorByDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
         Me.lblFactorstoUnstackBy = New System.Windows.Forms.Label()
         Me.lblColumnstoUnstack = New System.Windows.Forms.Label()
         Me.chkUseFactoLabels = New System.Windows.Forms.CheckBox()
-        Me.grpOutputOptions = New System.Windows.Forms.GroupBox()
-        Me.txtSheetName = New System.Windows.Forms.TextBox()
-        Me.lblSheetName = New System.Windows.Forms.Label()
-        Me.rdoNewWorksheet = New System.Windows.Forms.RadioButton()
-        Me.rdoExistingWorksheet = New System.Windows.Forms.RadioButton()
-        Me.grpOutputOptions.SuspendLayout()
+        Me.ucrfactortoUnstackReceiver = New instat.ucrReceiverSingle()
+        Me.ucrColumntoUnstackReceiver = New instat.ucrReceiverSingle()
+        Me.chkIDColumn = New System.Windows.Forms.CheckBox()
+        Me.ucrIDColumnReceiver = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(7, 355)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 275)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 2
@@ -59,39 +55,25 @@ Partial Class dlgUnstack
         Me.ucrSelectorByDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorByDataFrameAddRemove.TabIndex = 7
         '
-        'ucrReceiverFactors
-        '
-        Me.ucrReceiverFactors.Location = New System.Drawing.Point(245, 65)
-        Me.ucrReceiverFactors.Name = "ucrReceiverFactors"
-        Me.ucrReceiverFactors.Size = New System.Drawing.Size(121, 128)
-        Me.ucrReceiverFactors.TabIndex = 8
-        '
-        'ucrReceiverColumns
-        '
-        Me.ucrReceiverColumns.Location = New System.Drawing.Point(387, 65)
-        Me.ucrReceiverColumns.Name = "ucrReceiverColumns"
-        Me.ucrReceiverColumns.Size = New System.Drawing.Size(121, 128)
-        Me.ucrReceiverColumns.TabIndex = 8
-        '
         'lblFactorstoUnstackBy
         '
         Me.lblFactorstoUnstackBy.AutoSize = True
-        Me.lblFactorstoUnstackBy.Location = New System.Drawing.Point(245, 38)
+        Me.lblFactorstoUnstackBy.Location = New System.Drawing.Point(258, 16)
         Me.lblFactorstoUnstackBy.Name = "lblFactorstoUnstackBy"
-        Me.lblFactorstoUnstackBy.Size = New System.Drawing.Size(121, 13)
+        Me.lblFactorstoUnstackBy.Size = New System.Drawing.Size(118, 13)
         Me.lblFactorstoUnstackBy.TabIndex = 9
-        Me.lblFactorstoUnstackBy.Tag = "Factor(s)_to_Unstrack_By"
-        Me.lblFactorstoUnstackBy.Text = "Factor(s) to Unstrack By"
+        Me.lblFactorstoUnstackBy.Tag = "Factors_to_Unstack_By"
+        Me.lblFactorstoUnstackBy.Text = "Factor(s) to Unstack By"
         '
         'lblColumnstoUnstack
         '
         Me.lblColumnstoUnstack.AutoSize = True
-        Me.lblColumnstoUnstack.Location = New System.Drawing.Point(384, 39)
+        Me.lblColumnstoUnstack.Location = New System.Drawing.Point(255, 69)
         Me.lblColumnstoUnstack.Name = "lblColumnstoUnstack"
-        Me.lblColumnstoUnstack.Size = New System.Drawing.Size(102, 13)
+        Me.lblColumnstoUnstack.Size = New System.Drawing.Size(97, 13)
         Me.lblColumnstoUnstack.TabIndex = 9
-        Me.lblColumnstoUnstack.Tag = "Columns_to_Unstack"
-        Me.lblColumnstoUnstack.Text = "Columns to Unstack"
+        Me.lblColumnstoUnstack.Tag = "Column_to_Unstack"
+        Me.lblColumnstoUnstack.Text = "Column to Unstack"
         '
         'chkUseFactoLabels
         '
@@ -104,72 +86,50 @@ Partial Class dlgUnstack
         Me.chkUseFactoLabels.Text = "Use Factor labels in Column Names"
         Me.chkUseFactoLabels.UseVisualStyleBackColor = True
         '
-        'grpOutputOptions
+        'ucrfactortoUnstackReceiver
         '
-        Me.grpOutputOptions.Controls.Add(Me.txtSheetName)
-        Me.grpOutputOptions.Controls.Add(Me.lblSheetName)
-        Me.grpOutputOptions.Controls.Add(Me.rdoNewWorksheet)
-        Me.grpOutputOptions.Controls.Add(Me.rdoExistingWorksheet)
-        Me.grpOutputOptions.Location = New System.Drawing.Point(22, 249)
-        Me.grpOutputOptions.Name = "grpOutputOptions"
-        Me.grpOutputOptions.Size = New System.Drawing.Size(199, 100)
-        Me.grpOutputOptions.TabIndex = 11
-        Me.grpOutputOptions.TabStop = False
-        Me.grpOutputOptions.Tag = "Output_Options"
-        Me.grpOutputOptions.Text = "Output Options"
+        Me.ucrfactortoUnstackReceiver.Location = New System.Drawing.Point(256, 40)
+        Me.ucrfactortoUnstackReceiver.Name = "ucrfactortoUnstackReceiver"
+        Me.ucrfactortoUnstackReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrfactortoUnstackReceiver.TabIndex = 12
         '
-        'txtSheetName
+        'ucrColumntoUnstackReceiver
         '
-        Me.txtSheetName.Location = New System.Drawing.Point(95, 66)
-        Me.txtSheetName.Name = "txtSheetName"
-        Me.txtSheetName.Size = New System.Drawing.Size(100, 20)
-        Me.txtSheetName.TabIndex = 2
+        Me.ucrColumntoUnstackReceiver.Location = New System.Drawing.Point(258, 95)
+        Me.ucrColumntoUnstackReceiver.Name = "ucrColumntoUnstackReceiver"
+        Me.ucrColumntoUnstackReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrColumntoUnstackReceiver.TabIndex = 12
         '
-        'lblSheetName
+        'chkIDColumn
         '
-        Me.lblSheetName.AutoSize = True
-        Me.lblSheetName.Location = New System.Drawing.Point(31, 67)
-        Me.lblSheetName.Name = "lblSheetName"
-        Me.lblSheetName.Size = New System.Drawing.Size(66, 13)
-        Me.lblSheetName.TabIndex = 1
-        Me.lblSheetName.Tag = "Sheet_Name"
-        Me.lblSheetName.Text = "Sheet Name"
+        Me.chkIDColumn.AutoSize = True
+        Me.chkIDColumn.Location = New System.Drawing.Point(257, 126)
+        Me.chkIDColumn.Name = "chkIDColumn"
+        Me.chkIDColumn.Size = New System.Drawing.Size(75, 17)
+        Me.chkIDColumn.TabIndex = 13
+        Me.chkIDColumn.Tag = "ID_Column"
+        Me.chkIDColumn.Text = "ID Column"
+        Me.chkIDColumn.UseVisualStyleBackColor = True
         '
-        'rdoNewWorksheet
+        'ucrIDColumnReceiver
         '
-        Me.rdoNewWorksheet.AutoSize = True
-        Me.rdoNewWorksheet.Location = New System.Drawing.Point(7, 43)
-        Me.rdoNewWorksheet.Name = "rdoNewWorksheet"
-        Me.rdoNewWorksheet.Size = New System.Drawing.Size(102, 17)
-        Me.rdoNewWorksheet.TabIndex = 0
-        Me.rdoNewWorksheet.TabStop = True
-        Me.rdoNewWorksheet.Tag = "New_Worksheet"
-        Me.rdoNewWorksheet.Text = "New Worksheet"
-        Me.rdoNewWorksheet.UseVisualStyleBackColor = True
-        '
-        'rdoExistingWorksheet
-        '
-        Me.rdoExistingWorksheet.AutoSize = True
-        Me.rdoExistingWorksheet.Location = New System.Drawing.Point(7, 20)
-        Me.rdoExistingWorksheet.Name = "rdoExistingWorksheet"
-        Me.rdoExistingWorksheet.Size = New System.Drawing.Size(116, 17)
-        Me.rdoExistingWorksheet.TabIndex = 0
-        Me.rdoExistingWorksheet.TabStop = True
-        Me.rdoExistingWorksheet.Tag = "Existing_Worksheet"
-        Me.rdoExistingWorksheet.Text = "Existing Worksheet"
-        Me.rdoExistingWorksheet.UseVisualStyleBackColor = True
+        Me.ucrIDColumnReceiver.Location = New System.Drawing.Point(249, 145)
+        Me.ucrIDColumnReceiver.Name = "ucrIDColumnReceiver"
+        Me.ucrIDColumnReceiver.Size = New System.Drawing.Size(121, 128)
+        Me.ucrIDColumnReceiver.TabIndex = 14
         '
         'dlgUnstack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(515, 408)
-        Me.Controls.Add(Me.grpOutputOptions)
+        Me.ClientSize = New System.Drawing.Size(420, 331)
+        Me.Controls.Add(Me.ucrIDColumnReceiver)
+        Me.Controls.Add(Me.chkIDColumn)
+        Me.Controls.Add(Me.ucrColumntoUnstackReceiver)
+        Me.Controls.Add(Me.ucrfactortoUnstackReceiver)
         Me.Controls.Add(Me.chkUseFactoLabels)
         Me.Controls.Add(Me.lblColumnstoUnstack)
         Me.Controls.Add(Me.lblFactorstoUnstackBy)
-        Me.Controls.Add(Me.ucrReceiverColumns)
-        Me.Controls.Add(Me.ucrReceiverFactors)
         Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemove)
         Me.Controls.Add(Me.ucrDataFrame)
         Me.Controls.Add(Me.ucrBase)
@@ -178,8 +138,6 @@ Partial Class dlgUnstack
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Unstack_split_columns"
         Me.Text = "Unstack(Split) columns"
-        Me.grpOutputOptions.ResumeLayout(False)
-        Me.grpOutputOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -187,14 +145,11 @@ Partial Class dlgUnstack
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrDataFrame As ucrDataFrame
     Friend WithEvents ucrSelectorByDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverFactors As ucrReceiverMultiple
-    Friend WithEvents ucrReceiverColumns As ucrReceiverMultiple
     Friend WithEvents lblFactorstoUnstackBy As Label
     Friend WithEvents lblColumnstoUnstack As Label
     Friend WithEvents chkUseFactoLabels As CheckBox
-    Friend WithEvents grpOutputOptions As GroupBox
-    Friend WithEvents txtSheetName As TextBox
-    Friend WithEvents lblSheetName As Label
-    Friend WithEvents rdoNewWorksheet As RadioButton
-    Friend WithEvents rdoExistingWorksheet As RadioButton
+    Friend WithEvents ucrfactortoUnstackReceiver As ucrReceiverSingle
+    Friend WithEvents ucrColumntoUnstackReceiver As ucrReceiverSingle
+    Friend WithEvents chkIDColumn As CheckBox
+    Friend WithEvents ucrIDColumnReceiver As ucrReceiverMultiple
 End Class
