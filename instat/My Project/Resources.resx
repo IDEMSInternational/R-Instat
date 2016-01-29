@@ -979,4 +979,61 @@
   <data name="Shape" xml:space="preserve">
     <value>Shape</value>
   </data>
+  <data name="Colour_rainbow" xml:space="preserve">
+    <value>Colour rainbow</value>
+  </data>
+  <data name="Cumulative_exceedance" xml:space="preserve">
+    <value>Cumulative exceedance</value>
+  </data>
+  <data name="Day_Month" xml:space="preserve">
+    <value>Day Month</value>
+  </data>
+  <data name="Display_daily" xml:space="preserve">
+    <value>Display daily</value>
+  </data>
+  <data name="Display_daily_data_rain" xml:space="preserve">
+    <value>Display daily data rain</value>
+  </data>
+  <data name="Display_DOY_of_Year" xml:space="preserve">
+    <value>Display DOY of Year</value>
+  </data>
+  <data name="Grid_square" xml:space="preserve">
+    <value>Grid square</value>
+  </data>
+  <data name="Interested_variable" xml:space="preserve">
+    <value>Interested variable</value>
+  </data>
+  <data name="legend_bty" xml:space="preserve">
+    <value>legend bty</value>
+  </data>
+  <data name="Legend_label" xml:space="preserve">
+    <value>Legend label</value>
+  </data>
+  <data name="Legend_position" xml:space="preserve">
+    <value>Legend position</value>
+  </data>
+  <data name="Line_width" xml:space="preserve">
+    <value>Line width</value>
+  </data>
+  <data name="Percents" xml:space="preserve">
+    <value>Percents</value>
+  </data>
+  <data name="Plot_character" xml:space="preserve">
+    <value>Plot character</value>
+  </data>
+  <data name="Plot_window" xml:space="preserve">
+    <value>Plot window</value>
+  </data>
+  <data name="Station_name" xml:space="preserve">
+    <value>Station name</value>
+  </data>
+  <data name="Statistic" xml:space="preserve">
+    <value>Statistic</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="Y_label" xml:space="preserve">
+    <value>Y label</value>
+  </data>
 </root>
