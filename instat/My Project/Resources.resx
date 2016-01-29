@@ -898,4 +898,142 @@
   <data name="Probability" xml:space="preserve">
     <value>Probability</value>
   </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Data_Frame" xml:space="preserve">
+    <value>Data Frame</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Encoding</value>
+  </data>
+  <data name="Heading" xml:space="preserve">
+    <value>Heading</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Input_File" xml:space="preserve">
+    <value>Input File</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Quote" xml:space="preserve">
+    <value>Quote</value>
+  </data>
+  <data name="Row_names" xml:space="preserve">
+    <value>Row names</value>
+  </data>
+  <data name="Separator" xml:space="preserve">
+    <value>Separator</value>
+  </data>
+  <data name="Strings_as_factors" xml:space="preserve">
+    <value>Strings as factors</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Bernouli" xml:space="preserve">
+    <value>Bernouli</value>
+  </data>
+  <data name="Binomial" xml:space="preserve">
+    <value>Binomial</value>
+  </data>
+  <data name="Exponential1" xml:space="preserve">
+    <value>Exponential</value>
+  </data>
+  <data name="Extreme_Value" xml:space="preserve">
+    <value>Extreme Value</value>
+  </data>
+  <data name="Geometric1" xml:space="preserve">
+    <value>Geometric</value>
+  </data>
+  <data name="Normal1" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Poisson" xml:space="preserve">
+    <value>Poisson</value>
+  </data>
+  <data name="Uniform" xml:space="preserve">
+    <value>Uniform</value>
+  </data>
+  <data name="Weibull" xml:space="preserve">
+    <value>Weibull</value>
+  </data>
+  <data name="a" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="b" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Scale</value>
+  </data>
+  <data name="Shape" xml:space="preserve">
+    <value>Shape</value>
+  </data>
+  <data name="Colour_rainbow" xml:space="preserve">
+    <value>Colour rainbow</value>
+  </data>
+  <data name="Cumulative_exceedance" xml:space="preserve">
+    <value>Cumulative exceedance</value>
+  </data>
+  <data name="Day_Month" xml:space="preserve">
+    <value>Day Month</value>
+  </data>
+  <data name="Display_daily" xml:space="preserve">
+    <value>Display daily</value>
+  </data>
+  <data name="Display_daily_data_rain" xml:space="preserve">
+    <value>Display daily data rain</value>
+  </data>
+  <data name="Display_DOY_of_Year" xml:space="preserve">
+    <value>Display DOY of Year</value>
+  </data>
+  <data name="Grid_square" xml:space="preserve">
+    <value>Grid square</value>
+  </data>
+  <data name="Interested_variable" xml:space="preserve">
+    <value>Interested variable</value>
+  </data>
+  <data name="legend_bty" xml:space="preserve">
+    <value>legend bty</value>
+  </data>
+  <data name="Legend_label" xml:space="preserve">
+    <value>Legend label</value>
+  </data>
+  <data name="Legend_position" xml:space="preserve">
+    <value>Legend position</value>
+  </data>
+  <data name="Line_width" xml:space="preserve">
+    <value>Line width</value>
+  </data>
+  <data name="Percents" xml:space="preserve">
+    <value>Percents</value>
+  </data>
+  <data name="Plot_character" xml:space="preserve">
+    <value>Plot character</value>
+  </data>
+  <data name="Plot_window" xml:space="preserve">
+    <value>Plot window</value>
+  </data>
+  <data name="Station_name" xml:space="preserve">
+    <value>Station name</value>
+  </data>
+  <data name="Statistic" xml:space="preserve">
+    <value>Statistic</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="Y_label" xml:space="preserve">
+    <value>Y label</value>
+  </data>
 </root>

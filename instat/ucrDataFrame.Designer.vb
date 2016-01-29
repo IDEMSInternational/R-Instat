@@ -23,7 +23,7 @@ Partial Class ucrDataFrame
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.cboAvailableDataFrames = New System.Windows.Forms.ComboBox()
-        Me.lblSelectDataFrame = New System.Windows.Forms.Label()
+        Me.lblDataFrame = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cboAvailableDataFrames
@@ -34,20 +34,21 @@ Partial Class ucrDataFrame
         Me.cboAvailableDataFrames.Size = New System.Drawing.Size(121, 21)
         Me.cboAvailableDataFrames.TabIndex = 0
         '
-        'lblSelectDataFrame
+        'lblDataFrame
         '
-        Me.lblSelectDataFrame.AutoSize = True
-        Me.lblSelectDataFrame.Location = New System.Drawing.Point(3, 0)
-        Me.lblSelectDataFrame.Name = "lblSelectDataFrame"
-        Me.lblSelectDataFrame.Size = New System.Drawing.Size(98, 13)
-        Me.lblSelectDataFrame.TabIndex = 1
-        Me.lblSelectDataFrame.Text = "Select Data Frame:"
+        Me.lblDataFrame.AutoSize = True
+        Me.lblDataFrame.Location = New System.Drawing.Point(3, 0)
+        Me.lblDataFrame.Name = "lblDataFrame"
+        Me.lblDataFrame.Size = New System.Drawing.Size(65, 13)
+        Me.lblDataFrame.TabIndex = 1
+        Me.lblDataFrame.Tag = "Data_Frame:"
+        Me.lblDataFrame.Text = "Data Frame:"
         '
         'ucrDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblSelectDataFrame)
+        Me.Controls.Add(Me.lblDataFrame)
         Me.Controls.Add(Me.cboAvailableDataFrames)
         Me.Name = "ucrDataFrame"
         Me.Size = New System.Drawing.Size(127, 41)
@@ -57,5 +58,5 @@ Partial Class ucrDataFrame
     End Sub
 
     Friend WithEvents cboAvailableDataFrames As ComboBox
-    Friend WithEvents lblSelectDataFrame As Label
+    Friend WithEvents lblDataFrame As Label
 End Class
