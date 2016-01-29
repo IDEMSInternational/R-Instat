@@ -191,17 +191,21 @@ data_obj$methods(add_column_to_data = function(col_name = "", col_data) {
 }
 )
 
-data_obj$methods(get_column_from_data = function(col_name) {
-  if(missing(col_name)) stop("no col_name to return")
-  if(!col_name %in% names(data)) stop(paste(col_name, "not found in data"))
+data_obj$methods(get_columns_from_data = function(col_names) {
+  if(missing(col_names)) stop("no col_names to return")
+  if(!all(sapply(col_names, function(x) x %in% names(data)))) stop("Not all column names were found in data")
   
-  return(data[[col_name]])
+  if(length(col_names)==1) return (data[[col_names]])
+  else return(data[col_names])
 }
 )
   
 data_obj$methods(rename_column_in_data = function(curr_col_name = "", new_col_name="") {
   
   # Column name must be character
+  if (new_col_name %in% names(data)){
+    stop(paste0(new_col_name," exist in the data."))
+  }
   if( ! is.character(curr_col_name) ) {
     stop("Current column name must be of type: character")
   }
@@ -220,6 +224,8 @@ data_obj$methods(rename_column_in_data = function(curr_col_name = "", new_col_na
                      renamed."))
     }
     names(data)[names(data) == curr_col_name] <<- new_col_name
+    rownames(variables_metadata)[rownames(variables_metadata) == curr_col_name] <<- new_col_name
+    variables_metadata[rownames(variables_metadata) == new_col_name, 1] <<- new_col_name
     .self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
     .self$set_data_changed(TRUE)
     .self$set_variables_metadata_changed(TRUE)
@@ -227,24 +233,36 @@ data_obj$methods(rename_column_in_data = function(curr_col_name = "", new_col_na
 }
 )
 
-data_obj$methods(remove_column_in_data = function(col_name = "") {
-  
-  # Column name must be character
-  if( ! is.character(col_name) ) {
-    stop("Column name must be of type: character")
+data_obj$methods(remove_columns_in_data_from_start_position = function(start_pos, col_numbers = 1 ) {
+  if (start_pos <= 0) stop("You cannot remove a column into the position less or equal to zero.")
+  if (start_pos %% 1 != 0) stop("start_pos value should be an integer.")
+  if (length(names(data)) < start_pos) stop("The start_pos argument exceeds the number of columns in the data.")
+  col_names = names(data)[start_pos:(start_pos+col_numbers-1)]
+  .self$remove_columns_in_data(col_names)
+}
+)
+
+data_obj$methods(remove_columns_in_data = function(cols=c()) {
+  for(col_name in cols){
+    # Column name must be character
+    if( ! is.character(col_name) ) {
+      stop("Column name must be of type: character")
+    }
+    
+    else if (!(col_name %in% names(data))) {
+      stop(paste0("Column :'", col_name, " was not found in the data."))
+    }
+    
+    else {
+      data[[ col_name ]] <<- NULL 
+      # .self$append_to_changes(list(Removed_col, col_name))
+    }
   }
-  
-  else if (!(col_name %in% names(data))) {
-    stop(paste0("Column :'", col_name, " was not found in the data."))
-  }
-  
-  else {
-    data[[ col_name ]] <<- NULL 
-    .self$append_to_changes(list(Removed_col, col_name))
-  }
+  .self$append_to_changes(list(Removed_col, cols))
   .self$set_data_changed(TRUE)
   .self$set_variables_metadata_changed(TRUE)
 }
+
 )
 
 data_obj$methods(replace_value_in_data = function(col_name = "", index, new_value = "") {
@@ -325,57 +343,49 @@ data_obj$methods(add_defaults_meta = function(user) {
   }
 )
 
-data_obj$methods(remove_row_in_data = function(row_num) {
-
-  if (   row_num != as.integer(row_num) || row_num < 1 || row_num >  nrow(data) ) {
+data_obj$methods(remove_rows_in_data = function(start_pos, num_rows = 1) {
+  if (   start_pos != as.integer(start_pos) || start_pos < 1 || start_pos >  nrow(data) ) {
     stop( paste("index must be an integer between 1 and", nrow(data), ".") )
   }
-  else if (row_num > nrow(data)) {
-      stop(paste0(" Row: '", row_num, " does not exist in the data."))
+  else if (start_pos > nrow(data)) {
+      stop(paste0(" Row: '", start_pos, " does not exist in the data."))
     }
   else {
-    data <<- data[-row_num,]
-    .self$append_to_changes(list(Removed_row, row_num))
+    end_pos <- start_pos + num_rows - 1
+    data <<- data[-(start_pos:end_pos),]
+    .self$append_to_changes(list(Removed_row, start_pos))
   }
   .self$set_data_changed(TRUE)
 }
 )
 
 data_obj$methods(get_next_default_column_name = function(prefix) {
-  if(!is.character(prefix)) stop("prefix must be of type character")
-  col_exists = TRUE
-  i = 1
-  while(col_exists) {
-    if(!paste0(prefix,i) %in% names(data)) {
-      col_exists = FALSE
-      out = paste0(prefix,i)
-    }
-    i = i + 1
-  }
-  out
+  next_default_item(prefix = prefix, existing_names = names(data))
 } 
 )
 
-data_obj$methods(insert_column_in_data = function(col_name = "", col_data =c(), col_number) {
-  if (col_number <= 0) stop("You cannot put a column into the position less or equal to zero.")
-  if (col_number %% 1 != 0) stop("col_number value should be an integer.")
-  if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
-
-    
+data_obj$methods(insert_column_in_data = function(col_data =c(), start_pos = length(names(data)), number_cols = 1) {
+  if (start_pos <= 0) stop("You cannot put a column into the position less or equal to zero.")
+  if (start_pos %% 1 != 0) stop("start_pos value should be an integer.")
+  if (length(names(data)) < start_pos) stop("The start_pos argument exceeds the number of columns in the data.")
+  
   if(length(col_data)==0){
       col_data <- rep(NA, nrow(data))
-      warning(paste("You are inserting an empty column to", get_metadata(data_name_label)))
+      warning(paste("You are inserting empty column(s) to", get_metadata(data_name_label)))
   }
-
-  data[, col_name] <<- col_data
-  if(col_number==1){
-      data <<- cbind(data[ncol(data)], data[(col_number):ncol(data)-1])
+  for(j in 1:number_cols){
+    col_name <- .self$get_next_default_column_name("X")
+    assign(col_name, col_data)
+    data[, col_name] <<- col_data
+  }
+  if(start_pos==1){
+      data <<- cbind(data[(ncol(data)-number_cols+1): ncol(data)], data[(start_pos):(ncol(data)-number_cols)])
     }
   else{
-      data <<- cbind(data[1:(col_number -1)],data[ncol(data)], data[(col_number+1):ncol(data)-1])
+      data <<- cbind(data[1:(start_pos -1)],data[(ncol(data)-number_cols+1):ncol(data)], data[(start_pos+number_cols):ncol(data)-number_cols])
     }
-  
-    .self$append_to_changes(list(Inserted_col, col_number))
+    .self$append_to_changes(list(Inserted_col, start_pos))
+    .self$data_changed = TRUE
 }
 )
 
@@ -409,34 +419,54 @@ data_obj$methods(move_column_in_data = function(col_name = "", col_number) {
 }
 )
 
-data_obj$methods(insert_row_in_data = function(row_num, row_data = c()) {
+data_obj$methods(insert_row_in_data = function(start_pos = (nrow(data)+1), row_data = c(), number_rows = 1) {
   
-  if (row_num != as.integer(row_num) || row_num < 1 || row_num >  nrow(data)+1 ) {
+  if (start_pos != as.integer(start_pos) || start_pos < 1 || start_pos >  nrow(data) + 1 ) {
     stop( paste("index must be an integer between 1 and", nrow(data)+1, ".") )
   }
-  if (length(row_data)==0){
+  if (length(row_data) == 0){
     row_data <- rep(NA,ncol(data))
     warning("You are inserting an empty row to data")
   }
   if(length(row_data)>0 && length(row_data)!=ncol(data)){
     stop("The dimension of Row data is different from that of the data")
   }
-  
-  if(row_num==1){
-    data <<- rbind(row_data, data)
-  }
-  
-  else if (row_num == (nrow(data)+1)){
-    data <<- rbind(data,row_data)
-  }
-  else {
-    data <<- rbind(data[1:(row_num-1),],row_data,data[(row_num):nrow(data),])
+  for(j in 1:number_rows){ 
+    if(start_pos==1){
+      data <<- rbind(row_data, data)
+    }
     
+    else if (start_pos == (nrow(data)+1)){
+      data <<- rbind(data,row_data)
+    }
+    else {
+      data <<- rbind(data[1:(start_pos-1),],row_data,data[(start_pos):nrow(data),])
+      
+    }
   }
-  .self$append_to_changes(list(Inserted_row, row_num))
+  .self$append_to_changes(list(Inserted_row, start_pos))
   .self$set_data_changed(TRUE)
 }
 )
+
+data_obj$methods(length_of_data = function() {
+  return(nrow(data))
+}
+)
+
+next_default_item = function(prefix, existing_names) {
+  if(!is.character(prefix)) stop("prefix must be of type character")
+  item_name_exists = TRUE
+  i = 1
+  while(item_name_exists) {
+    out = paste0(prefix,i)
+    if(!out %in% existing_names) {
+      item_name_exists = FALSE
+    }
+    i = i + 1
+  }
+  return(out)
+} 
 
 #Labels for strings which will be added to logs
 Set_property="Set"
