@@ -21,13 +21,29 @@ Public Class ucrNewColumnName
     Public lstNextDefaultNames As GenericVector
     Public strCurrDataFrame As String
     Public strPrefix As String = "Val"
+    Public ucrDataFrameSelector As ucrDataFrame
 
     Private Sub ucrNewColumnName_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetNextDefaults()
+    End Sub
+
+    Public Sub SetDataFrameSelector(ucrNewSelector)
+        ucrDataFrameSelector = ucrNewSelector
+    End Sub
+
+    Public Sub SetPrefix(strNewPrefix As String)
+        strPrefix = strNewPrefix
+        GetNextDefaults()
+        SetDefaultName(ucrDataFrameSelector.cboAvailableDataFrames.Text)
+    End Sub
+
+    Public Sub GetNextDefaults()
         lstNextDefaultNames = frmMain.clsRLink.GetDefaultNames(strPrefix)
     End Sub
 
     Public Sub SetDefaultName(strDataFrame As String)
         Dim i As Integer
+
         For i = 0 To lstNextDefaultNames.Length - 1
             If lstNextDefaultNames.Names(i) = strDataFrame Then
                 cboColumnName.Text = lstNextDefaultNames.AsCharacter(i)

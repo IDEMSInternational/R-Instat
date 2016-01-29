@@ -31,10 +31,10 @@ Partial Class ucrDistributions
         Me.lblDistributionType.AutoSize = True
         Me.lblDistributionType.Location = New System.Drawing.Point(3, 16)
         Me.lblDistributionType.Name = "lblDistributionType"
-        Me.lblDistributionType.Size = New System.Drawing.Size(89, 13)
+        Me.lblDistributionType.Size = New System.Drawing.Size(62, 13)
         Me.lblDistributionType.TabIndex = 0
-        Me.lblDistributionType.Tag = "distribution_type:"
-        Me.lblDistributionType.Text = "Distribution Type:"
+        Me.lblDistributionType.Tag = "distribution:"
+        Me.lblDistributionType.Text = "Distribution:"
         '
         'cboDistributions
         '
