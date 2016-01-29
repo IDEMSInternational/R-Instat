@@ -36,11 +36,11 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub ucrReceiverFactor_Leave(sender As Object, e As EventArgs) Handles ucrReceiverFactor.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverFactor.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverFactor.GetVariables())
     End Sub
 
     Private Sub ucrReceiverVariate_Leave(sender As Object, e As EventArgs) Handles ucrReceiverVariate.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverVariate.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariate.GetVariables())
     End Sub
 
 End Class
