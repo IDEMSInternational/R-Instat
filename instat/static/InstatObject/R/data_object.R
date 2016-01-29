@@ -191,11 +191,12 @@ data_obj$methods(add_column_to_data = function(col_name = "", col_data) {
 }
 )
 
-data_obj$methods(get_column_from_data = function(col_name) {
-  if(missing(col_name)) stop("no col_name to return")
-  if(!col_name %in% names(data)) stop(paste(col_name, "not found in data"))
+data_obj$methods(get_columns_from_data = function(col_names) {
+  if(missing(col_names)) stop("no col_names to return")
+  if(!all(sapply(col_names, function(x) x %in% names(data)))) stop("Not all column names were found in data")
   
-  return(data[[col_name]])
+  if(length(col_names)==1) return (data[[col_names]])
+  else return(data[col_names])
 }
 )
   
@@ -223,6 +224,8 @@ data_obj$methods(rename_column_in_data = function(curr_col_name = "", new_col_na
                      renamed."))
     }
     names(data)[names(data) == curr_col_name] <<- new_col_name
+    rownames(variables_metadata)[rownames(variables_metadata) == curr_col_name] <<- new_col_name
+    variables_metadata[rownames(variables_metadata) == new_col_name, 1] <<- new_col_name
     .self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
     .self$set_data_changed(TRUE)
     .self$set_variables_metadata_changed(TRUE)
