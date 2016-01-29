@@ -22,19 +22,19 @@ Partial Class ucrSelector
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblAvailableVariables = New System.Windows.Forms.Label()
+        Me.lblVariables = New System.Windows.Forms.Label()
         Me.lstAvailableVariable = New System.Windows.Forms.ListView()
         Me.SuspendLayout()
         '
-        'lblAvailableVariables
+        'lblVariables
         '
-        Me.lblAvailableVariables.AutoSize = True
-        Me.lblAvailableVariables.Location = New System.Drawing.Point(5, 2)
-        Me.lblAvailableVariables.Name = "lblAvailableVariables"
-        Me.lblAvailableVariables.Size = New System.Drawing.Size(102, 13)
-        Me.lblAvailableVariables.TabIndex = 82
-        Me.lblAvailableVariables.Tag = "Available_Variables "
-        Me.lblAvailableVariables.Text = "Available  Variables "
+        Me.lblVariables.AutoSize = True
+        Me.lblVariables.Location = New System.Drawing.Point(5, 2)
+        Me.lblVariables.Name = "lblVariables"
+        Me.lblVariables.Size = New System.Drawing.Size(53, 13)
+        Me.lblVariables.TabIndex = 82
+        Me.lblVariables.Tag = "Variables:"
+        Me.lblVariables.Text = "Variables:"
         '
         'lstAvailableVariable
         '
@@ -53,13 +53,14 @@ Partial Class ucrSelector
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lstAvailableVariable)
-        Me.Controls.Add(Me.lblAvailableVariables)
+        Me.Controls.Add(Me.lblVariables)
         Me.Name = "ucrSelector"
         Me.Size = New System.Drawing.Size(124, 127)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lblAvailableVariables As Label
-    Friend WithEvents lstAvailableVariable As ListView
+
+    Protected Friend WithEvents lblVariables As Label
+    Protected Friend WithEvents lstAvailableVariable As ListView
 End Class
