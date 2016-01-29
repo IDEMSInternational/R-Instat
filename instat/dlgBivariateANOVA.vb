@@ -46,10 +46,10 @@ Public Class dlgBivariateANOVA
         FillFormula()
     End Sub
     Private Sub FillFormula()
-        Dim str1stResponseVariable As String
-        Dim str2ndResponseVariable As String
-        Dim strTreatmentFactor As String
-        Dim strBlockingFactor As String
+        Dim str1stResponseVariable As String = ""
+        Dim str2ndResponseVariable As String = ""
+        Dim strTreatmentFactor As String = ""
+        Dim strBlockingFactor As String = ""
         'str1stResponseVariable = ucrReceiver1stResponseVariable.GetVariables()
         'str2ndResponseVariable = ucrReceiver2ndResponseVariable.GetVariables()
         'strTreatmentFactor = ucrReceiverBlockingFactor.GetVariables()

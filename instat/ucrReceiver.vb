@@ -33,6 +33,11 @@ Public Class ucrReceiver
         Return clsGetVariablesFunc
     End Function
 
+    Public Overridable Function GetVariableNames() As String
+        Dim strVarNames As String = ""
+        Return strVarNames
+    End Function
+
     Public Sub SetMeAsReceiver()
         Selector.SetCurrentReceiver(Me)
     End Sub
@@ -58,4 +63,11 @@ Public Class ucrReceiver
         End If
     End Sub
 
+    Public Function MakeValidRString(strTemp As String) As String
+        Dim InvalidStrings() As String = {" ", "-"}
+        For Each strInvalid In InvalidStrings
+            strTemp = Replace(strTemp, strInvalid, "")
+        Next
+        Return strTemp
+    End Function
 End Class
