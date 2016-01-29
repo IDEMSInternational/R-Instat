@@ -142,7 +142,9 @@ Public Class frmEditor
     End Sub
 
     Private Sub insertRowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles insertRowToolStripMenuItem.Click
-        grdData.DoAction(New unvell.ReoGrid.Actions.InsertRowsAction(grdData.CurrentWorksheet.SelectionRange.Row, grdData.CurrentWorksheet.SelectionRange.Rows))
+        'grdData.DoAction(New unvell.ReoGrid.Actions.InsertRowsAction(grdData.CurrentWorksheet.SelectionRange.Row, grdData.CurrentWorksheet.SelectionRange.Rows))
+        strf = frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",row_data = " & "c(), start_pos = " & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",number_rows =" & grdData.CurrentWorksheet.SelectionRange.Rows & ")"
+        frmMain.clsRLink.RunScript(strf)
     End Sub
 
     Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
