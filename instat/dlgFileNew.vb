@@ -20,8 +20,14 @@ Public Class dlgFileNew
 
     Private Sub dlgFileNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        'TODO What should these defaults be?
+        '     Defaults should be stored in Options dialog 
         txtRows.Text = 10
         txtColumns.Text = 2
+        'TODO add this line back in with correct method name when Steve has written method
+        'frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_next_default_object_name(" & Chr(34) & "Sheet" & Chr(34) & ")")
+        'TODO remove line below when above is fixed
+        txtName.Text = "Sheet1"
         ucrBase.clsRsyntax.SetFunction("matrix", clsMatrix)
         ucrBase.clsRsyntax.AddParameter("data", "NA", clsRFunction:=clsMatrix)
         ucrBase.clsRsyntax.AddParameter("nrow", txtRows.Text, clsRFunction:=clsMatrix)
@@ -43,7 +49,4 @@ Public Class dlgFileNew
         ucrBase.clsRsyntax.AddParameter("nrow", txtRows.Text, clsRFunction:=clsMatrix)
     End Sub
 
-    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.clsGrids.UpdateGrids()
-    End Sub
 End Class
