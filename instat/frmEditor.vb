@@ -39,7 +39,7 @@ Public Class frmEditor
 
     Private Sub insertCol_Click(sender As Object, e As EventArgs) Handles insertColToolStripMenuItem.Click
         'grdData.DoAction(New unvell.ReoGrid.Actions.InsertColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
-        strf = frmMain.clsRLink.strInstatDataObject & "$insert_column_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_data = " & "c(), col_number = " & grdData.CurrentWorksheet.SelectionRange.col + 1 & ")"
+        strf = frmMain.clsRLink.strInstatDataObject & "$insert_column_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_data = " & "c(), start_pos = " & grdData.CurrentWorksheet.SelectionRange.Col + 1 & ",number_cols =" & grdData.CurrentWorksheet.SelectionRange.Cols & ")"
         frmMain.clsRLink.RunScript(strf)
     End Sub
 
