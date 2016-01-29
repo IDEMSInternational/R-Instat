@@ -12,31 +12,39 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgUnstack
     Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("unstack")
         ucrBase.clsRsyntax.iCallType = 1
-        ucrReceiverColumns.Selector = ucrSelectorByDataFrameAddRemove
-        ucrReceiverFactors.Selector = ucrSelectorByDataFrameAddRemove
-        ucrReceiverFactors.SetMeAsReceiver()
+        ucrfactortoUnstackReceiver.SetMeAsReceiver()
+        ucrIDColumnReceiver.Selector = ucrSelectorByDataFrameAddRemove
+        ucrfactortoUnstackReceiver.Selector = ucrSelectorByDataFrameAddRemove
+        ucrIDColumnReceiver.SetMeAsReceiver()
 
         autoTranslate(Me)
-        lblSheetName.Visible = False
-        txtSheetName.Visible = False
+        ucrIDColumnReceiver.Visible = False
+        chkIDColumn.Checked = False
     End Sub
 
-    Private Sub rdoNewWorksheet_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNewWorksheet.CheckedChanged
-        If rdoNewWorksheet.Checked = True Then
-            lblSheetName.Visible = True
-            txtSheetName.Visible = True
+    Private Sub ucrReceiverColumns_Enter(sender As Object, e As EventArgs)
+        ucrIDColumnReceiver.SetMeAsReceiver()
+    End Sub
+
+    Private Sub chkIDColumn_CheckedChanged(sender As Object, e As EventArgs) Handles chkIDColumn.CheckedChanged
+        If chkIDColumn.Checked = True Then
+            ucrIDColumnReceiver.Visible = True
         Else
-            lblSheetName.Visible = False
-            txtSheetName.Visible = False
+            ucrIDColumnReceiver.Visible = False
         End If
     End Sub
 
-    Private Sub ucrReceiverColumns_Enter(sender As Object, e As EventArgs) Handles ucrReceiverColumns.Enter
-        ucrReceiverColumns.SetMeAsReceiver()
+    Private Sub ucrfactortoUnstackReceiver_Leave(sender As Object, e As EventArgs) Handles ucrfactortoUnstackReceiver.Leave
+        ucrBase.clsRsyntax.AddParameter("", ucrfactortoUnstackReceiver.GetVariableNames())
+    End Sub
+
+    Private Sub ucrColumntoUnstackReceiver_Leave(sender As Object, e As EventArgs) Handles ucrColumntoUnstackReceiver.Leave
+        ucrBase.clsRsyntax.AddParameter("", ucrColumntoUnstackReceiver.GetVariableNames())
     End Sub
 End Class

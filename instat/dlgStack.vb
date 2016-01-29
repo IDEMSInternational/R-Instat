@@ -12,13 +12,42 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgStack
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("stack")
+        ucrBase.clsRsyntax.SetFunction("melt")
+        ucrIDVariablesReceiver.Visible = False
         ucrBase.clsRsyntax.iCallType = 1
         ucrReceiverColumnsToBeStack.Selector = ucrDataFrameAddRemove
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+        ucrIDVariablesReceiver.Selector = ucrDataFrameAddRemove
+        txtFactorInto.Text = "Variable"
+        txtStackDataInto.Text = "Value"
         autoTranslate(Me)
+    End Sub
+
+    Private Sub chkIDVariables_CheckedChanged(sender As Object, e As EventArgs) Handles chkIDVariables.CheckedChanged
+        If chkIDVariables.Checked = True Then
+            ucrIDVariablesReceiver.Visible = True
+        Else
+            ucrIDVariablesReceiver.Visible = False
+        End If
+    End Sub
+
+
+    Private Sub ucrIDVariablesReceiver_Enter(sender As Object, e As EventArgs) Handles ucrIDVariablesReceiver.Enter
+        ucrIDVariablesReceiver.SetMeAsReceiver()
+    End Sub
+
+    Private Sub ucrReceiverColumnsToBeStack_Leave(sender As Object, e As EventArgs) Handles ucrReceiverColumnsToBeStack.Leave
+        ucrBase.clsRsyntax.AddParameter("id.var", ucrReceiverColumnsToBeStack.GetVariableNames())
+    End Sub
+    Private Sub ucrIDVariablesReceiver_Leave(sender As Object, e As EventArgs) Handles ucrIDVariablesReceiver.Leave
+        ucrBase.clsRsyntax.AddParameter("", ucrIDVariablesReceiver.GetVariableNames())
+    End Sub
+
+    Private Sub ucrReceiverColumnsToBeStack_Load(sender As Object, e As EventArgs)
+
     End Sub
 End Class

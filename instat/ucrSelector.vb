@@ -24,7 +24,6 @@ Public Class ucrSelector
     End Sub
 
     Public Overridable Sub LoadList(Optional strDataType As String = "all")
-        'TODO should this be run? Or do we assume SetCurrentReceiver has been done by now.
         frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType)
     End Sub
 
