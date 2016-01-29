@@ -605,12 +605,6 @@
     <Compile Include="dlgOneSample.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgOneWayAnova.Designer.vb">
-      <DependentUpon>dlgOneWayAnova.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgOneWayAnova.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgOptions.Designer.vb">
       <DependentUpon>dlgOptions.vb</DependentUpon>
     </Compile>
@@ -711,12 +705,6 @@
       <DependentUpon>dlgRowStats.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRowStats.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgSaveAs.Designer.vb">
-      <DependentUpon>dlgSaveAs.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgSaveAs.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgScatterPlot.Designer.vb">
@@ -972,12 +960,6 @@
     <Compile Include="clsRLink.vb" />
     <Compile Include="clsRParameter.vb" />
     <Compile Include="clsRSyntax.vb" />
-    <Compile Include="SaveAs.Designer.vb">
-      <DependentUpon>SaveAs.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SaveAs.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgBoxplot.Designer.vb">
       <DependentUpon>sdgBoxplot.vb</DependentUpon>
     </Compile>
@@ -1758,15 +1740,6 @@
     <EmbeddedResource Include="dlgOneSample.sw-KE.resx">
       <DependentUpon>dlgOneSample.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgOneWayAnova.fr-FR.resx">
-      <DependentUpon>dlgOneWayAnova.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgOneWayAnova.resx">
-      <DependentUpon>dlgOneWayAnova.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgOneWayAnova.sw-KE.resx">
-      <DependentUpon>dlgOneWayAnova.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgOptions.fr-FR.resx">
       <DependentUpon>dlgOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -1910,15 +1883,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReplace.sw-KE.resx">
       <DependentUpon>dlgReplace.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgSaveAs.fr-FR.resx">
-      <DependentUpon>dlgSaveAs.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgSaveAs.resx">
-      <DependentUpon>dlgSaveAs.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgSaveAs.sw-KE.resx">
-      <DependentUpon>dlgSaveAs.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalSummary.fr-FR.resx">
       <DependentUpon>dlgSeasonalSummary.vb</DependentUpon>
@@ -2229,15 +2193,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.sw-KE.resx" />
-    <EmbeddedResource Include="SaveAs.fr-FR.resx">
-      <DependentUpon>SaveAs.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SaveAs.resx">
-      <DependentUpon>SaveAs.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SaveAs.sw-KE.resx">
-      <DependentUpon>SaveAs.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgBoxplot.fr-FR.resx">
       <DependentUpon>sdgBoxplot.vb</DependentUpon>
     </EmbeddedResource>
