@@ -27,9 +27,9 @@ Partial Class dlgSite
         '
         'UcrButtons1
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(12, 334)
+        Me.UcrButtons1.Location = New System.Drawing.Point(12, 305)
         Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(410, 32)
+        Me.UcrButtons1.Size = New System.Drawing.Size(410, 61)
         Me.UcrButtons1.TabIndex = 0
         '
         'dlgSite
