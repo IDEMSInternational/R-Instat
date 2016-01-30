@@ -15,10 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-'Public MustInherit Class ucrReceiver
 Public Class ucrReceiver
     Public Selector As ucrSelector
     Public strDataType As String = "all"
+    Public clsRSyntax As New RSyntax
 
     Public Overridable Sub AddSelected()
 
@@ -28,8 +28,14 @@ Public Class ucrReceiver
 
     End Sub
 
-    Public Overridable Function GetVariables() As String
-        Return ""
+    Public Overridable Function GetVariables() As RFunction
+        Dim clsGetVariablesFunc As New RFunction
+        Return clsGetVariablesFunc
+    End Function
+
+    Public Overridable Function GetVariableNames() As String
+        Dim strVarNames As String = ""
+        Return strVarNames
     End Function
 
     Public Sub SetMeAsReceiver()
@@ -50,4 +56,18 @@ Public Class ucrReceiver
         RaiseEvent ValueChanged(sender, e)
     End Sub
 
+    Public Sub SetDataType(strTemp As String)
+        strDataType = strTemp
+        If Selector IsNot Nothing Then
+            Selector.LoadList()
+        End If
+    End Sub
+
+    Public Function MakeValidRString(strTemp As String) As String
+        Dim InvalidStrings() As String = {" ", "-"}
+        For Each strInvalid In InvalidStrings
+            strTemp = Replace(strTemp, strInvalid, "")
+        Next
+        Return strTemp
+    End Function
 End Class

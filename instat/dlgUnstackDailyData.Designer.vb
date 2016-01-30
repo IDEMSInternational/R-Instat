@@ -27,16 +27,16 @@ Partial Class dlgUnstackDailyData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 229)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 202)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 59)
         Me.ucrBase.TabIndex = 0
         '
         'dlgUnstackDailyData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(406, 263)
+        Me.ClientSize = New System.Drawing.Size(426, 262)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgUnstackDailyData"

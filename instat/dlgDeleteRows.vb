@@ -12,7 +12,7 @@ Public Class dlgDeleteRows
         ucrReceiverDeleteRows.SetMeAsReceiver()
     End Sub
     Private Sub ucrReceiverDeleteColumns_Leave(sender As Object, e As EventArgs) Handles ucrReceiverDeleteRows.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverDeleteRows.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverDeleteRows.GetVariables())
     End Sub
     Private Sub lstRowsToDelete_Leave(sender As Object, e As EventArgs) Handles lstRowsToDelete.Leave
         ucrBase.clsRsyntax.AddParameter("select", Chr(34) & lstRowsToDelete.Text & Chr(34))

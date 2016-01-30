@@ -28,9 +28,9 @@ Partial Class dlgTimeseriesPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 228)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 205)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 55)
         Me.ucrBase.TabIndex = 0
         '
         'Label1
