@@ -25,11 +25,11 @@ Partial Class dlgUnstack
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFrame = New instat.ucrDataFrame()
         Me.ucrSelectorByDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.lblFactorstoUnstackBy = New System.Windows.Forms.Label()
-        Me.lblColumnstoUnstack = New System.Windows.Forms.Label()
+        Me.lblFactorToUnstackBy = New System.Windows.Forms.Label()
+        Me.lblColumnToUnstack = New System.Windows.Forms.Label()
         Me.chkUseFactoLabels = New System.Windows.Forms.CheckBox()
-        Me.ucrfactortoUnstackReceiver = New instat.ucrReceiverSingle()
-        Me.ucrColumntoUnstackReceiver = New instat.ucrReceiverSingle()
+        Me.ucrFactorToUnstackReceiver = New instat.ucrReceiverSingle()
+        Me.ucrColumnToUnstackReceiver = New instat.ucrReceiverSingle()
         Me.chkIDColumn = New System.Windows.Forms.CheckBox()
         Me.ucrIDColumnReceiver = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
@@ -55,30 +55,30 @@ Partial Class dlgUnstack
         Me.ucrSelectorByDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorByDataFrameAddRemove.TabIndex = 7
         '
-        'lblFactorstoUnstackBy
+        'lblFactorToUnstackBy
         '
-        Me.lblFactorstoUnstackBy.AutoSize = True
-        Me.lblFactorstoUnstackBy.Location = New System.Drawing.Point(258, 16)
-        Me.lblFactorstoUnstackBy.Name = "lblFactorstoUnstackBy"
-        Me.lblFactorstoUnstackBy.Size = New System.Drawing.Size(118, 13)
-        Me.lblFactorstoUnstackBy.TabIndex = 9
-        Me.lblFactorstoUnstackBy.Tag = "Factors_to_Unstack_By"
-        Me.lblFactorstoUnstackBy.Text = "Factor(s) to Unstack By"
+        Me.lblFactorToUnstackBy.AutoSize = True
+        Me.lblFactorToUnstackBy.Location = New System.Drawing.Point(258, 16)
+        Me.lblFactorToUnstackBy.Name = "lblFactorToUnstackBy"
+        Me.lblFactorToUnstackBy.Size = New System.Drawing.Size(118, 13)
+        Me.lblFactorToUnstackBy.TabIndex = 9
+        Me.lblFactorToUnstackBy.Tag = "Factors_to_Unstack_By"
+        Me.lblFactorToUnstackBy.Text = "Factor(s) to Unstack By"
         '
-        'lblColumnstoUnstack
+        'lblColumnToUnstack
         '
-        Me.lblColumnstoUnstack.AutoSize = True
-        Me.lblColumnstoUnstack.Location = New System.Drawing.Point(255, 69)
-        Me.lblColumnstoUnstack.Name = "lblColumnstoUnstack"
-        Me.lblColumnstoUnstack.Size = New System.Drawing.Size(97, 13)
-        Me.lblColumnstoUnstack.TabIndex = 9
-        Me.lblColumnstoUnstack.Tag = "Column_to_Unstack"
-        Me.lblColumnstoUnstack.Text = "Column to Unstack"
+        Me.lblColumnToUnstack.AutoSize = True
+        Me.lblColumnToUnstack.Location = New System.Drawing.Point(255, 69)
+        Me.lblColumnToUnstack.Name = "lblColumnToUnstack"
+        Me.lblColumnToUnstack.Size = New System.Drawing.Size(97, 13)
+        Me.lblColumnToUnstack.TabIndex = 9
+        Me.lblColumnToUnstack.Tag = "Column_to_Unstack"
+        Me.lblColumnToUnstack.Text = "Column to Unstack"
         '
         'chkUseFactoLabels
         '
         Me.chkUseFactoLabels.AutoSize = True
-        Me.chkUseFactoLabels.Location = New System.Drawing.Point(13, 225)
+        Me.chkUseFactoLabels.Location = New System.Drawing.Point(13, 242)
         Me.chkUseFactoLabels.Name = "chkUseFactoLabels"
         Me.chkUseFactoLabels.Size = New System.Drawing.Size(193, 17)
         Me.chkUseFactoLabels.TabIndex = 10
@@ -86,19 +86,19 @@ Partial Class dlgUnstack
         Me.chkUseFactoLabels.Text = "Use Factor labels in Column Names"
         Me.chkUseFactoLabels.UseVisualStyleBackColor = True
         '
-        'ucrfactortoUnstackReceiver
+        'ucrFactorToUnstackReceiver
         '
-        Me.ucrfactortoUnstackReceiver.Location = New System.Drawing.Point(256, 40)
-        Me.ucrfactortoUnstackReceiver.Name = "ucrfactortoUnstackReceiver"
-        Me.ucrfactortoUnstackReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrfactortoUnstackReceiver.TabIndex = 12
+        Me.ucrFactorToUnstackReceiver.Location = New System.Drawing.Point(256, 40)
+        Me.ucrFactorToUnstackReceiver.Name = "ucrFactorToUnstackReceiver"
+        Me.ucrFactorToUnstackReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrFactorToUnstackReceiver.TabIndex = 12
         '
-        'ucrColumntoUnstackReceiver
+        'ucrColumnToUnstackReceiver
         '
-        Me.ucrColumntoUnstackReceiver.Location = New System.Drawing.Point(258, 95)
-        Me.ucrColumntoUnstackReceiver.Name = "ucrColumntoUnstackReceiver"
-        Me.ucrColumntoUnstackReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrColumntoUnstackReceiver.TabIndex = 12
+        Me.ucrColumnToUnstackReceiver.Location = New System.Drawing.Point(258, 95)
+        Me.ucrColumnToUnstackReceiver.Name = "ucrColumnToUnstackReceiver"
+        Me.ucrColumnToUnstackReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrColumnToUnstackReceiver.TabIndex = 12
         '
         'chkIDColumn
         '
@@ -125,11 +125,11 @@ Partial Class dlgUnstack
         Me.ClientSize = New System.Drawing.Size(420, 331)
         Me.Controls.Add(Me.ucrIDColumnReceiver)
         Me.Controls.Add(Me.chkIDColumn)
-        Me.Controls.Add(Me.ucrColumntoUnstackReceiver)
-        Me.Controls.Add(Me.ucrfactortoUnstackReceiver)
+        Me.Controls.Add(Me.ucrColumnToUnstackReceiver)
+        Me.Controls.Add(Me.ucrFactorToUnstackReceiver)
         Me.Controls.Add(Me.chkUseFactoLabels)
-        Me.Controls.Add(Me.lblColumnstoUnstack)
-        Me.Controls.Add(Me.lblFactorstoUnstackBy)
+        Me.Controls.Add(Me.lblColumnToUnstack)
+        Me.Controls.Add(Me.lblFactorToUnstackBy)
         Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemove)
         Me.Controls.Add(Me.ucrDataFrame)
         Me.Controls.Add(Me.ucrBase)
@@ -145,11 +145,11 @@ Partial Class dlgUnstack
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrDataFrame As ucrDataFrame
     Friend WithEvents ucrSelectorByDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents lblFactorstoUnstackBy As Label
-    Friend WithEvents lblColumnstoUnstack As Label
+    Friend WithEvents lblFactorToUnstackBy As Label
+    Friend WithEvents lblColumnToUnstack As Label
     Friend WithEvents chkUseFactoLabels As CheckBox
-    Friend WithEvents ucrfactortoUnstackReceiver As ucrReceiverSingle
-    Friend WithEvents ucrColumntoUnstackReceiver As ucrReceiverSingle
+    Friend WithEvents ucrFactorToUnstackReceiver As ucrReceiverSingle
+    Friend WithEvents ucrColumnToUnstackReceiver As ucrReceiverSingle
     Friend WithEvents chkIDColumn As CheckBox
     Friend WithEvents ucrIDColumnReceiver As ucrReceiverMultiple
 End Class

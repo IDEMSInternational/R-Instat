@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgStack
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgStack
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblColumnsToBestack = New System.Windows.Forms.Label()
         Me.txtStackDataInto = New System.Windows.Forms.TextBox()
@@ -28,7 +28,6 @@ Partial Class dlgStack
         Me.lblFactorInto = New System.Windows.Forms.Label()
         Me.txtFactorInto = New System.Windows.Forms.TextBox()
         Me.chkIDVariables = New System.Windows.Forms.CheckBox()
-        Me.ucrNewColumnName = New instat.ucrNewColumnName()
         Me.ucrIDVariablesReceiver = New instat.ucrReceiverMultiple()
         Me.ucrDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -91,13 +90,6 @@ Partial Class dlgStack
         Me.chkIDVariables.Text = "ID Variables"
         Me.chkIDVariables.UseVisualStyleBackColor = True
         '
-        'ucrNewColumnName
-        '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(17, 322)
-        Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        Me.ucrNewColumnName.Size = New System.Drawing.Size(367, 35)
-        Me.ucrNewColumnName.TabIndex = 15
-        '
         'ucrIDVariablesReceiver
         '
         Me.ucrIDVariablesReceiver.Location = New System.Drawing.Point(264, 191)
@@ -131,7 +123,6 @@ Partial Class dlgStack
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 429)
-        Me.Controls.Add(Me.ucrNewColumnName)
         Me.Controls.Add(Me.ucrIDVariablesReceiver)
         Me.Controls.Add(Me.chkIDVariables)
         Me.Controls.Add(Me.ucrDataFrameAddRemove)
@@ -161,5 +152,4 @@ Partial Class dlgStack
     Friend WithEvents ucrDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
     Friend WithEvents chkIDVariables As CheckBox
     Friend WithEvents ucrIDVariablesReceiver As ucrReceiverMultiple
-    Friend WithEvents ucrNewColumnName As ucrNewColumnName
 End Class

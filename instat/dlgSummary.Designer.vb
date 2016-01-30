@@ -20,18 +20,30 @@ Partial Class dlgSummary
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 234)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.ClientSize = New System.Drawing.Size(438, 289)
+        Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgSummary"
         Me.Text = "dlgSummary"
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents ucrBase As ucrButtons
 End Class
