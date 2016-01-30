@@ -28,7 +28,7 @@ Public Class dlgRandomSample
 
         ' Setting link between DataFrameSelector and NewColumnNameSelector
         ' TODO tidy these links up
-        ucrDataFrameSelector.SetColumnList(ucrNewColumnNameSelector)
+        'ucrDataFrameSelector.SetColumnList(ucrNewColumnNameSelector)
         ucrNewColumnNameSelector.SetDataFrameSelector(ucrDataFrameSelector)
         ucrNewColumnNameSelector.SetPrefix("Rand")
 

@@ -30,11 +30,12 @@ Public Class dlgBoxplot
 
 
     Private Sub ucrReceiveBoxplotVariable_ValueChanged(sender As Object, e As EventArgs)
-        If Not (ucrReceiverDataToPlot.lstSelectedVariables.SelectedItem = "") Then
-            ucrBase.clsRsyntax.AddParameter("x", ucrReceiverDataToPlot.GetVariables())
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        'TODO fix this
+        'If Not (ucrReceiverDataToPlot.lstSelectedVariables.SelectedItem = "") Then
+        '    ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverDataToPlot.GetVariables())
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
     End Sub
 End Class

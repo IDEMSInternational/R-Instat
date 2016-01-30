@@ -28,7 +28,7 @@ Public Class dlgDeleteColumns
         ucrReceiverDeleteColumns.SetMeAsReceiver()
     End Sub
     Private Sub ucrReceiverDeleteColumns_Leave(sender As Object, e As EventArgs) Handles ucrReceiverDeleteColumns.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverDeleteColumns.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverDeleteColumns.GetVariables())
     End Sub
     Private Sub txtSubset_Leave(sender As Object, e As EventArgs) Handles txtSubset.Leave
         ucrBase.clsRsyntax.AddParameter("subset", Chr(34) & txtSubset.Text & Chr(34))
