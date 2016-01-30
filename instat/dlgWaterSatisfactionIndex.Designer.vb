@@ -27,9 +27,9 @@ Partial Class dlgWaterSatisfactionIndex
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 249)
+        Me.ucrBase.Location = New System.Drawing.Point(-1, 228)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 59)
         Me.ucrBase.TabIndex = 0
         '
         'dlgWaterSatisfactionIndex

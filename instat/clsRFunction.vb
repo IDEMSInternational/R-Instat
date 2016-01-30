@@ -69,7 +69,7 @@ Public Class RFunction
                     bToBeAssigned = False
                 Else
                     strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$import_data(data_tables = list(" & strAssignToDataFrame & "=" & strAssignTo & "))" & vbCrLf
-                    strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_data(data_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ")"
+                    strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_data_frame(data_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ")"
                     bIsAssigned = True
                     bToBeAssigned = False
                 End If
