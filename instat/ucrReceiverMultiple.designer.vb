@@ -19,18 +19,16 @@ Partial Class ucrReceiverMultiple
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lstSelectedVariables = New System.Windows.Forms.ListBox()
+        Me.lstSelectedVariables = New System.Windows.Forms.ListView()
         Me.SuspendLayout()
         '
         'lstSelectedVariables
         '
-        Me.lstSelectedVariables.FormattingEnabled = True
         Me.lstSelectedVariables.Location = New System.Drawing.Point(3, 5)
-        Me.lstSelectedVariables.MultiColumn = True
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
         Me.lstSelectedVariables.Size = New System.Drawing.Size(113, 95)
-        Me.lstSelectedVariables.Sorted = True
-        Me.lstSelectedVariables.TabIndex = 0
+        Me.lstSelectedVariables.TabIndex = 1
+        Me.lstSelectedVariables.UseCompatibleStateImageBehavior = False
         '
         'ucrReceiverMultiple
         '
@@ -41,6 +39,5 @@ Partial Class ucrReceiverMultiple
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents lstSelectedVariables As ListBox
+    Friend WithEvents lstSelectedVariables As ListView
 End Class
