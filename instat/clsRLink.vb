@@ -82,7 +82,7 @@ Public Class RLink
         End If
     End Sub
 
-    Public Function GetDefaultNames(strPrefix As String)
+    Public Function GetDefaultColumnNames(strPrefix As String)
         Dim lstNextDefaults As GenericVector = Nothing
 
         If bInstatObjectExists Then

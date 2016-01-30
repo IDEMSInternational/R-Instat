@@ -31,14 +31,18 @@ Public Class ucrReceiverMultiple
     End Sub
 
     Public Overrides Sub RemoveSelected()
-        Dim objItem As Object
+        Dim objItem As ListViewItem
         Dim tempObjects(lstSelectedVariables.SelectedItems.Count - 1) As Object
+        Dim i As Integer
 
         If lstSelectedVariables.SelectedItems.Count > 0 Then
             lstSelectedVariables.SelectedItems.CopyTo(tempObjects, 0)
             For Each objItem In tempObjects
                 lstSelectedVariables.Items.Remove(objItem)
-                'to do                objSelected.Remove()
+                i = objSelected.FindIndex(Function(x) x.Text.Equals(objItem.Text))
+                If i <> -1 Then
+                    objSelected.RemoveAt(i)
+                End If
             Next
         End If
     End Sub
@@ -66,7 +70,7 @@ Public Class ucrReceiverMultiple
         Dim strTemp As String = ""
         Dim i As Integer
         If objSelected.Count = 1 Then
-            strTemp = objSelected(0).Text
+            strTemp = Chr(34) & objSelected(0).Text & Chr(34)
         ElseIf objSelected.Count > 1 Then
             strTemp = "c" & "("
             For i = 0 To objSelected.Count - 1

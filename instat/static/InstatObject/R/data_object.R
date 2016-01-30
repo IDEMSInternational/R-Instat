@@ -137,7 +137,7 @@ data_obj$methods(update_variables_metadata = function() {
 }
 )
 
-data_obj$methods(get_data = function() {
+data_obj$methods(get_data_frame = function() {
   return(data)
 }
 )
