@@ -4,4 +4,5 @@ library(lubridate)
 library(plyr)
 library(rtf)
 library(ggplot2)
-library(reshape)
+# TODO do we need reshape? It causes conflicts with reshape2 but this can be avoided if reshape is really needed
+#library(reshape)
