@@ -122,7 +122,7 @@ instat_obj$methods(append_data_objects = function(name, obj) {
 }
 )
 
-instat_obj$methods(get_data = function(data_name) { 
+instat_obj$methods(get_data_frame = function(data_name) { 
   if(missing(data_name)) {
     retlist <- list()
     for ( i in (1:length(data_objects)) ) {
@@ -130,7 +130,7 @@ instat_obj$methods(get_data = function(data_name) {
     }
     return(retlist)
   }
-  else return(data_objects[[data_name]]$get_data())
+  else return(data_objects[[data_name]]$get_data_frame())
   } 
 )
 

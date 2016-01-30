@@ -17,35 +17,27 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class ucrDataFrame
-    Public CurrentColumnList As ucrNewColumnName
     Public strDataFrameLength As String
     Public clsCurrDataFrame As RFunction
     Public clsRSyntax As New RSyntax
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        UpdateColumnList()
-    End Sub
-
-    Public Sub SetColumnList(ColumnList As ucrNewColumnName)
-        CurrentColumnList = ColumnList
-        UpdateColumnList()
+        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames)
+        SetDataFrameProperties()
     End Sub
 
     Public Event DataFrameChanged(sender As Object, e As EventArgs)
 
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged
-        UpdateColumnList()
+        SetDataFrameProperties()
         RaiseEvent DataFrameChanged(sender, e)
     End Sub
 
-    Public Sub UpdateColumnList()
-        If CurrentColumnList IsNot Nothing Then
-            frmMain.clsRLink.FillColumnNames(cboAvailableDataFrames.SelectedItem, cboColumns:=CurrentColumnList.cboColumnName)
-            CurrentColumnList.SetDefaultName(cboAvailableDataFrames.Text)
-            strDataFrameLength = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$length_of_data(" & Chr(34) & cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter(0).ToString
-            clsRSyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_data", clsFunction:=clsCurrDataFrame)
-            clsRSyntax.AddParameter("data_name", cboAvailableDataFrames.SelectedItem, clsRFunction:=clsCurrDataFrame)
-            clsRSyntax.SetAssignTo(cboAvailableDataFrames.SelectedItem & "_temp", clsFunction:=clsCurrDataFrame)
-        End If
+    Public Sub SetDataFrameProperties()
+        strDataFrameLength = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$length_of_data(" & Chr(34) & cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter(0).ToString
+        clsRSyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_data_frame", clsFunction:=clsCurrDataFrame)
+        clsRSyntax.AddParameter("data_name", Chr(34) & cboAvailableDataFrames.SelectedItem & Chr(34), clsRFunction:=clsCurrDataFrame)
+        clsRSyntax.SetAssignTo(cboAvailableDataFrames.SelectedItem & "_temp", clsFunction:=clsCurrDataFrame)
     End Sub
+
 End Class

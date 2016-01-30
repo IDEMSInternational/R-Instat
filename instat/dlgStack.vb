@@ -16,12 +16,14 @@
 Imports instat.Translations
 Public Class dlgStack
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("melt")
+        'Set receiver/selector options
         ucrIDVariablesReceiver.Visible = False
-        ucrBase.clsRsyntax.iCallType = 1
         ucrReceiverColumnsToBeStack.Selector = ucrDataFrameAddRemove
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         ucrIDVariablesReceiver.Selector = ucrDataFrameAddRemove
+
+        'Set function parameters/settings
+        ucrBase.clsRsyntax.SetFunction("melt")
 
         txtFactorInto.Text = "Variable"
         ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtFactorInto.Text & Chr(34))
@@ -31,17 +33,18 @@ Public Class dlgStack
 
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrDataFrameAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
 
+        ucrBase.clsRsyntax.SetAssignTo("Samrain_stacked", strTempDataframe:="Samrain_stacked")
         autoTranslate(Me)
     End Sub
 
     Private Sub chkIDVariables_CheckedChanged(sender As Object, e As EventArgs) Handles chkIDVariables.CheckedChanged
         If chkIDVariables.Checked = True Then
             ucrIDVariablesReceiver.Visible = True
+            ucrIDVariablesReceiver.Focus()
         Else
             ucrIDVariablesReceiver.Visible = False
         End If
     End Sub
-
 
     Private Sub ucrIDVariablesReceiver_Enter(sender As Object, e As EventArgs) Handles ucrIDVariablesReceiver.Enter
         ucrIDVariablesReceiver.SetMeAsReceiver()
