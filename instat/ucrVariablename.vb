@@ -17,14 +17,43 @@ Imports instat.Translations
 Public Class ucrVariableName
     Dim firstChar As Char
     Dim CurrChar As Char
+    Dim myColName As String
     Dim bAcceptableString As Boolean
+    Dim lstResevedWords As New List(Of String)
 
     Private Sub txtValidation_Leave(sender As Object, e As EventArgs) Handles txtValidation.Leave
+        lstResevedWords.Add("if")
+        lstResevedWords.Add("else")
+        lstResevedWords.Add("repeat")
+        lstResevedWords.Add("while")
+        lstResevedWords.Add("function")
+        lstResevedWords.Add("for")
+        lstResevedWords.Add("in")
+        lstResevedWords.Add("next")
+        lstResevedWords.Add("break")
+        lstResevedWords.Add("true")
+        lstResevedWords.Add("false")
+        lstResevedWords.Add("null")
+        lstResevedWords.Add("NAN")
+        lstResevedWords.Add("Inf")
+        lstResevedWords.Add("NA")
+        lstResevedWords.Add("NA integer")
+        lstResevedWords.Add("NA real")
+        lstResevedWords.Add("NA complex")
+        lstResevedWords.Add("NA character")
+
+        myColName = txtValidation.Text
         bAcceptableString = True
         If txtValidation.Text = "" Then
             Exit Sub
         End If
 
+        For i = 0 To lstResevedWords.Count - 1
+            If myColName.Contains(lstResevedWords.Item(i)) Then
+                MsgBox(lstResevedWords.Item(i) & "is a reseved keyword", vbOKOnly)
+                txtValidation.Focus()
+            End If
+        Next
 
         firstChar = txtValidation.Text(0)
         If Not Char.IsLetter(firstChar) Then
