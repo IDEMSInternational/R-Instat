@@ -18,6 +18,17 @@ Public Class ucrVariableName
     Dim firstChar As Char
     Dim CurrChar As Char
     Dim bAcceptableString As Boolean
+    Public bUserTyped As Boolean
+    Dim strReservedWords() As String = ({"if", "else", "repeat", "while", "function", "for", "in", "next", "break", "TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_"})
+
+    Private Sub ucrVariableName_Load(sender As Object, e As EventArgs) Handles Me.Load
+        bUserTyped = False
+    End Sub
+
+    'TODO this has a bug if using for setting default values in textbox if user does not use keyboard
+    Private Sub txtValidation_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtValidation.KeyPress
+        bUserTyped = True
+    End Sub
 
     Private Sub txtValidation_Leave(sender As Object, e As EventArgs) Handles txtValidation.Leave
         bAcceptableString = True
@@ -25,7 +36,10 @@ Public Class ucrVariableName
             Exit Sub
         End If
 
-
+        If strReservedWords.Contains(txtValidation.Text) Then
+            MsgBox(Chr(34) & txtValidation.Text & Chr(34) & " is a reserved word in R and cannot be used.", vbOKOnly)
+            txtValidation.Focus()
+        End If
         firstChar = txtValidation.Text(0)
         If Not Char.IsLetter(firstChar) Then
             If firstChar <> "." Then
@@ -35,7 +49,7 @@ Public Class ucrVariableName
             Else
                 If txtValidation.Text.Length > 1 Then
                     If Char.IsNumber(txtValidation.Text(1)) Then
-                        MsgBox("This name cannot start with an underscore followed by a number", vbOKOnly)
+                        MsgBox("This name cannot start with a dot followed by a number", vbOKOnly)
                         txtValidation.Focus()
                         Exit Sub
                     End If
@@ -60,13 +74,5 @@ Public Class ucrVariableName
                 Exit For
             End If
         Next
-    End Sub
-
-    Private Sub lblColumnName_Click(sender As Object, e As EventArgs) Handles lblColumnName.Click
-
-    End Sub
-
-    Private Sub ucrVariableName_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
     End Sub
 End Class

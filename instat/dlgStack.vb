@@ -33,7 +33,9 @@ Public Class dlgStack
 
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrDataFrameAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
 
-        ucrBase.clsRsyntax.SetAssignTo("Samrain_stacked", strTempDataframe:="Samrain_stacked")
+        ucrNewDataFrameName.txtValidation.Text = ucrDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked"
+        ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.txtValidation.Text, strTempDataframe:=ucrNewDataFrameName.txtValidation.Text)
+
         autoTranslate(Me)
     End Sub
 
@@ -63,5 +65,15 @@ Public Class dlgStack
 
     Private Sub txtStackDataInto_Leave(sender As Object, e As EventArgs) Handles txtStackDataInto.Leave
         ucrBase.clsRsyntax.AddParameter("value.name", Chr(34) & txtStackDataInto.Text & Chr(34))
+    End Sub
+
+    Private Sub ucrNewDataFrameName_Leave(sender As Object, e As EventArgs) Handles ucrNewDataFrameName.Leave
+        ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.txtValidation.Text, strTempDataframe:=ucrNewDataFrameName.txtValidation.Text)
+    End Sub
+
+    Private Sub ucrDataFrameAddRemove_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrDataFrameAddRemove.DataFrameChanged
+        If Not ucrNewDataFrameName.bUserTyped Then
+            ucrNewDataFrameName.txtValidation.Text = ucrDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked"
+        End If
     End Sub
 End Class

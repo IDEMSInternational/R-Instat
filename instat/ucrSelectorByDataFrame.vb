@@ -18,8 +18,10 @@ Public Class ucrSelectorByDataFrame
     Private Sub ucrSelectorByDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadList()
     End Sub
+    Public Event DataFrameChanged(sender As Object, e As EventArgs)
     Private Sub ucrAvailableDataFrames_Load(sender As Object, e As EventArgs) Handles ucrAvailableDataFrames.DataFrameChanged
         LoadList()
+        RaiseEvent DataFrameChanged(sender, e)
     End Sub
 
     Public Overrides Sub LoadList(Optional strDataType As String = "all")
