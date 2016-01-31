@@ -19,7 +19,7 @@ Public Class dlgStemAndLeaf
     Private Sub dlgStemAndLeaf_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("stem")
         ucrBase.clsRsyntax.iCallType = 2
-        ucrReceiverStemAndLeaf.Selector = UcrAddRemove
+        ucrReceiverStemAndLeaf.Selector = ucrAddRemove
         ucrReceiverStemAndLeaf.SetMeAsReceiver()
         autoTranslate(Me)
     End Sub
