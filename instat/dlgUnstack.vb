@@ -18,9 +18,9 @@ Public Class dlgUnstack
     Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("unstack")
         ucrBase.clsRsyntax.iCallType = 1
-        ucrfactortoUnstackReceiver.SetMeAsReceiver()
+        ucrFactorToUnstackReceiver.SetMeAsReceiver()
         ucrIDColumnReceiver.Selector = ucrSelectorByDataFrameAddRemove
-        ucrfactortoUnstackReceiver.Selector = ucrSelectorByDataFrameAddRemove
+        ucrFactorToUnstackReceiver.Selector = ucrSelectorByDataFrameAddRemove
         ucrIDColumnReceiver.SetMeAsReceiver()
 
         autoTranslate(Me)
@@ -40,11 +40,11 @@ Public Class dlgUnstack
         End If
     End Sub
 
-    Private Sub ucrfactortoUnstackReceiver_Leave(sender As Object, e As EventArgs) Handles ucrfactortoUnstackReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("", ucrfactortoUnstackReceiver.GetVariables())
+    Private Sub ucrfactortoUnstackReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorToUnstackReceiver.Leave
+        ucrBase.clsRsyntax.AddParameter("", ucrFactorToUnstackReceiver.GetVariableNames())
     End Sub
 
-    Private Sub ucrColumntoUnstackReceiver_Leave(sender As Object, e As EventArgs) Handles ucrColumntoUnstackReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("", ucrColumntoUnstackReceiver.GetVariables)
+    Private Sub ucrColumntoUnstackReceiver_Leave(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.Leave
+        ucrBase.clsRsyntax.AddParameter("", ucrColumnToUnstackReceiver.GetVariableNames())
     End Sub
 End Class
