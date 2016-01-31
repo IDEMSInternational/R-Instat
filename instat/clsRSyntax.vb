@@ -43,7 +43,7 @@ Public Class RSyntax
             clsRFunction = clsBaseFunction
         End If
         clsParam.SetArgumentName(strParameterName)
-        If Not strParameterName = "" Then
+        If Not strParameterValue = "" Then
             clsParam.SetArgumentValue(strParameterValue)
         End If
         If Not clsRFunctionParameter Is Nothing Then
