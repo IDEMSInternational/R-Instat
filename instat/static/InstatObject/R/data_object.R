@@ -137,7 +137,7 @@ data_obj$methods(update_variables_metadata = function() {
 }
 )
 
-data_obj$methods(get_data = function() {
+data_obj$methods(get_data_frame = function() {
   return(data)
 }
 )
@@ -385,7 +385,8 @@ data_obj$methods(insert_column_in_data = function(col_data =c(), start_pos = len
       data <<- cbind(data[1:(start_pos -1)],data[(ncol(data)-number_cols+1):ncol(data)], data[(start_pos+number_cols):ncol(data)-number_cols])
     }
     .self$append_to_changes(list(Inserted_col, start_pos))
-    .self$data_changed = TRUE
+    .self$set_data_changed(TRUE)
+    .self$set_variables_metadata_changed(TRUE)
 }
 )
 

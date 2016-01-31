@@ -14,33 +14,31 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Imports RDotNet
 
 Public Class ucrDataFrame
-    Public CurrentColumnList As ucrNewColumnName
-    Public strDataFrameLength As String
+    Public iDataFrameLength As Integer
+    Public clsCurrDataFrame As New RFunction
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames)
-    End Sub
-
-    Public Sub SetColumnList(ColumnList As ucrNewColumnName)
-        CurrentColumnList = ColumnList
-        UpdateColumnList()
+        SetDataFrameProperties()
     End Sub
 
     Public Event DataFrameChanged(sender As Object, e As EventArgs)
 
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged
-        UpdateColumnList()
+        SetDataFrameProperties()
         RaiseEvent DataFrameChanged(sender, e)
-        strDataFrameLength = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$length_of_data(" & Chr(34) & cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter(0).ToString
     End Sub
 
-    Public Sub UpdateColumnList()
-        If CurrentColumnList IsNot Nothing Then
-            frmMain.clsRLink.FillColumnNames(cboAvailableDataFrames.SelectedItem, cboColumns:=CurrentColumnList.cboColumnName)
-            CurrentColumnList.SetDefaultName(cboAvailableDataFrames.Text)
-        End If
+    Public Sub SetDataFrameProperties()
+        Dim clsParam As New RParameter
+        iDataFrameLength = frmMain.clsRLink.GetDataFrameLength(cboAvailableDataFrames.Text)
+        clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsParam.SetArgumentName("data_name")
+        clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsCurrDataFrame.AddParameter(clsParam)
+        clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.SelectedItem & "_temp")
     End Sub
+
 End Class

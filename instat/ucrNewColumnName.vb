@@ -21,33 +21,58 @@ Public Class ucrNewColumnName
     Public lstNextDefaultNames As GenericVector
     Public strCurrDataFrame As String
     Public strPrefix As String = "Val"
-    Public ucrDataFrameSelector As ucrDataFrame
+    Public bDataFrameSelectorSet = False
+    Public WithEvents ucrDataFrameSelector As ucrDataFrame
+    Public bUseDefault As Boolean = True
+    Public strCurrNewColumnText As String
 
     Private Sub ucrNewColumnName_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        bUseDefault = True
         GetNextDefaults()
+        If ucrDataFrameSelector IsNot Nothing Then
+            frmMain.clsRLink.FillColumnNames(ucrDataFrameSelector.cboAvailableDataFrames.Text, cboColumns:=cboColumnName)
+            SetDefaultName()
+        End If
     End Sub
 
-    Public Sub SetDataFrameSelector(ucrNewSelector)
+    Public Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
         ucrDataFrameSelector = ucrNewSelector
+        bDataFrameSelectorSet = True
+        GetNextDefaults()
+        SetDefaultName()
+        frmMain.clsRLink.FillColumnNames(ucrDataFrameSelector.cboAvailableDataFrames.Text, cboColumns:=cboColumnName)
     End Sub
 
     Public Sub SetPrefix(strNewPrefix As String)
         strPrefix = strNewPrefix
         GetNextDefaults()
-        SetDefaultName(ucrDataFrameSelector.cboAvailableDataFrames.Text)
+        SetDefaultName()
     End Sub
 
     Public Sub GetNextDefaults()
-        lstNextDefaultNames = frmMain.clsRLink.GetDefaultNames(strPrefix)
+        lstNextDefaultNames = frmMain.clsRLink.GetDefaultColumnNames(strPrefix)
     End Sub
 
-    Public Sub SetDefaultName(strDataFrame As String)
+    Public Sub SetDefaultName()
         Dim i As Integer
-
-        For i = 0 To lstNextDefaultNames.Length - 1
-            If lstNextDefaultNames.Names(i) = strDataFrame Then
-                cboColumnName.Text = lstNextDefaultNames.AsCharacter(i)
+        If bUseDefault Then
+            If bDataFrameSelectorSet Then
+                For i = 0 To lstNextDefaultNames.Length - 1
+                    If lstNextDefaultNames.Names(i) = ucrDataFrameSelector.cboAvailableDataFrames.Text Then
+                        cboColumnName.Text = lstNextDefaultNames.AsCharacter(i)
+                    End If
+                Next
             End If
-        Next
+        End If
+    End Sub
+
+    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrDataFrameSelector.DataFrameChanged
+        frmMain.clsRLink.FillColumnNames(ucrDataFrameSelector.cboAvailableDataFrames.Text, cboColumns:=cboColumnName)
+        SetDefaultName()
+    End Sub
+
+    'NOTE: This could be a bug if the user edits the text without a key press e.g. paste using mouse
+    Private Sub cboColumnName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboColumnName.KeyPress
+        bUseDefault = False
     End Sub
 End Class
