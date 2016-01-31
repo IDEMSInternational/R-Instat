@@ -213,16 +213,16 @@ Partial Class dlgStartofRains
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(3, 263)
+        Me.ucrBase.Location = New System.Drawing.Point(14, 275)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(425, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(409, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgStartofRains
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(440, 294)
+        Me.ClientSize = New System.Drawing.Size(449, 328)
         Me.Controls.Add(Me.nudThreshold)
         Me.Controls.Add(Me.nudEarliest)
         Me.Controls.Add(Me.txtColumnName)
