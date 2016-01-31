@@ -28,6 +28,8 @@ Partial Class dlgStack
         Me.lblFactorInto = New System.Windows.Forms.Label()
         Me.txtFactorInto = New System.Windows.Forms.TextBox()
         Me.chkIDVariables = New System.Windows.Forms.CheckBox()
+        Me.lblNewDataFrameName = New System.Windows.Forms.Label()
+        Me.ucrNewDataFrameName = New instat.ucrVariableName()
         Me.ucrIDVariablesReceiver = New instat.ucrReceiverMultiple()
         Me.ucrDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -90,6 +92,23 @@ Partial Class dlgStack
         Me.chkIDVariables.Text = "ID Variables"
         Me.chkIDVariables.UseVisualStyleBackColor = True
         '
+        'lblNewDataFrameName
+        '
+        Me.lblNewDataFrameName.AutoSize = True
+        Me.lblNewDataFrameName.Location = New System.Drawing.Point(25, 335)
+        Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
+        Me.lblNewDataFrameName.Size = New System.Drawing.Size(121, 13)
+        Me.lblNewDataFrameName.TabIndex = 16
+        Me.lblNewDataFrameName.Tag = "New_Data_Frame_Name:"
+        Me.lblNewDataFrameName.Text = "New Data Frame Name:"
+        '
+        'ucrNewDataFrameName
+        '
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(147, 329)
+        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(149, 23)
+        Me.ucrNewDataFrameName.TabIndex = 15
+        '
         'ucrIDVariablesReceiver
         '
         Me.ucrIDVariablesReceiver.Location = New System.Drawing.Point(264, 191)
@@ -123,6 +142,8 @@ Partial Class dlgStack
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 429)
+        Me.Controls.Add(Me.lblNewDataFrameName)
+        Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.ucrIDVariablesReceiver)
         Me.Controls.Add(Me.chkIDVariables)
         Me.Controls.Add(Me.ucrDataFrameAddRemove)
@@ -152,4 +173,6 @@ Partial Class dlgStack
     Friend WithEvents ucrDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
     Friend WithEvents chkIDVariables As CheckBox
     Friend WithEvents ucrIDVariablesReceiver As ucrReceiverMultiple
+    Friend WithEvents ucrNewDataFrameName As ucrVariableName
+    Friend WithEvents lblNewDataFrameName As Label
 End Class

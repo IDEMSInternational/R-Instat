@@ -31,7 +31,7 @@ Partial Class ucrReceiverMultiple
         Me.lstSelectedVariables.Size = New System.Drawing.Size(113, 95)
         Me.lstSelectedVariables.TabIndex = 1
         Me.lstSelectedVariables.UseCompatibleStateImageBehavior = False
-        Me.lstSelectedVariables.View = System.Windows.Forms.View.Details
+        Me.lstSelectedVariables.View = System.Windows.Forms.View.List
         '
         'ucrReceiverMultiple
         '
