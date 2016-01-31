@@ -268,11 +268,11 @@ instat_obj$methods(get_model = function(model_name) {
 }
 )
 
-instat_obj$methods(replace_value_in_data = function(data_name, column_name, row_number, new_val) {
+instat_obj$methods(replace_value_in_data = function(data_name, col_name, index, new_value) {
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[data_name]]$replace_value_in_data(column_name, row_number, new_val)
+  data_objects[[data_name]]$replace_value_in_data(col_name, index, new_value)
 } 
 )
 
