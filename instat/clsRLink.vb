@@ -63,23 +63,26 @@ Public Class RLink
         Dim i As Integer
 
         If bInstatObjectExists Then
-            lstCurrColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(" & Chr(34) & strDataFrame & Chr(34) & ")").AsList
-            If cboColumns IsNot Nothing Then
-                cboColumns.Items.Clear()
-                For i = 0 To lstCurrColumns.Length - 1
-                    cboColumns.Items.Add(lstCurrColumns.AsCharacter(i))
-                Next
-            ElseIf lstColumns IsNot Nothing Then
-                lstColumns.Items.Clear()
-                If lstColumns.Columns.Count = 0 Then
-                    lstColumns.Columns.Add("Available Data")
+            If clsEngine IsNot Nothing Then
+                lstCurrColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(" & Chr(34) & strDataFrame & Chr(34) & ")").AsList
+                If cboColumns IsNot Nothing Then
+                    cboColumns.Items.Clear()
+                    For i = 0 To lstCurrColumns.Length - 1
+                        cboColumns.Items.Add(lstCurrColumns.AsCharacter(i))
+                    Next
+                ElseIf lstColumns IsNot Nothing Then
+                    lstColumns.Items.Clear()
+                    If lstColumns.Columns.Count = 0 Then
+                        lstColumns.Columns.Add("Available Data")
+                    End If
+                    For i = 0 To lstCurrColumns.Length - 1
+                        lstColumns.Items.Add(lstCurrColumns.AsCharacter(i))
+                    Next
+                    lstColumns.Columns(0).Width = -2
                 End If
-                For i = 0 To lstCurrColumns.Length - 1
-                    lstColumns.Items.Add(lstCurrColumns.AsCharacter(i))
-                Next
-                lstColumns.Columns(0).Width = -2
             End If
         End If
+
     End Sub
 
     Public Function GetDefaultColumnNames(strPrefix As String)
@@ -216,4 +219,11 @@ Public Class RLink
         End If
     End Sub
 
+    Public Function GetDataFrameLength(strDataFrameName As String) As Integer
+        Dim intLength As Integer
+        If clsEngine IsNot Nothing Then
+            intLength = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$length_of_data(" & Chr(34) & strDataFrameName & Chr(34) & ")").AsInteger(0)
+        End If
+        Return intLength
+    End Function
 End Class
