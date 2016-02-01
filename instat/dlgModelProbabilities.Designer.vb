@@ -27,9 +27,9 @@ Partial Class dlgModelProbabilities
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(-1, 244)
+        Me.ucrBase.Location = New System.Drawing.Point(-1, 222)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
         Me.ucrBase.TabIndex = 0
         '
         'dlgModelProbabilities
