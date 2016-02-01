@@ -24,11 +24,11 @@ Public Class dlgRandomSample
         ' Setting distribution type and base function as distribution function
         ucrDistWithParameters.SetRDistributions()
         ucrBase.clsRsyntax.clsBaseFunction = ucrDistWithParameters.clsCurrRFunction
-        ucrDistWithParameters.AddParameter("n", ucrDataFrameSelector.strDataFrameLength)
+        ucrDistWithParameters.AddParameter("n", ucrDataFrameSelector.iDataFrameLength)
 
         ' Setting link between DataFrameSelector and NewColumnNameSelector
         ' TODO tidy these links up
-        ucrDataFrameSelector.SetColumnList(ucrNewColumnNameSelector)
+        'ucrDataFrameSelector.SetColumnList(ucrNewColumnNameSelector)
         ucrNewColumnNameSelector.SetDataFrameSelector(ucrDataFrameSelector)
         ucrNewColumnNameSelector.SetPrefix("Rand")
 
@@ -38,7 +38,7 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub ucrDataFrameSelector_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameSelector.Leave
-        ucrDistWithParameters.AddParameter("n", ucrDataFrameSelector.strDataFrameLength)
+        ucrDistWithParameters.AddParameter("n", ucrDataFrameSelector.iDataFrameLength)
     End Sub
 
     Private Sub ucrNewColumnNameSelector_Leave(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelector.Leave

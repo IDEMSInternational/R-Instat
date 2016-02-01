@@ -59,12 +59,12 @@ Partial Class dlgTransform
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblInto = New System.Windows.Forms.Label()
         Me.txtInto = New System.Windows.Forms.TextBox()
-        Me.btnPreview = New System.Windows.Forms.Button()
-        Me.cmbPreview = New System.Windows.Forms.ComboBox()
+        Me.cmdPreview = New System.Windows.Forms.Button()
+        Me.cboPreview = New System.Windows.Forms.ComboBox()
         Me.grpOtherTransformations = New System.Windows.Forms.GroupBox()
         Me.grpLag = New System.Windows.Forms.GroupBox()
         Me.lblRows = New System.Windows.Forms.Label()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.nudLag = New System.Windows.Forms.NumericUpDown()
         Me.grpTransformationsOther = New System.Windows.Forms.GroupBox()
         Me.rdoDifference = New System.Windows.Forms.RadioButton()
         Me.rdoLag = New System.Windows.Forms.RadioButton()
@@ -72,8 +72,8 @@ Partial Class dlgTransform
         Me.rdoNormalScore = New System.Windows.Forms.RadioButton()
         Me.rdoSort = New System.Windows.Forms.RadioButton()
         Me.rdoRank = New System.Windows.Forms.RadioButton()
-        Me.UcrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrReceiverFrom = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpCalculatedTransformations.SuspendLayout()
         Me.grpPercentageTransformations.SuspendLayout()
@@ -83,7 +83,7 @@ Partial Class dlgTransform
         Me.grpTransformationType.SuspendLayout()
         Me.grpOtherTransformations.SuspendLayout()
         Me.grpLag.SuspendLayout()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudLag, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTransformationsOther.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -500,23 +500,23 @@ Partial Class dlgTransform
         Me.txtInto.Size = New System.Drawing.Size(105, 20)
         Me.txtInto.TabIndex = 7
         '
-        'btnPreview
+        'cmdPreview
         '
-        Me.btnPreview.Location = New System.Drawing.Point(15, 342)
-        Me.btnPreview.Name = "btnPreview"
-        Me.btnPreview.Size = New System.Drawing.Size(75, 23)
-        Me.btnPreview.TabIndex = 8
-        Me.btnPreview.Tag = "Preview"
-        Me.btnPreview.Text = "Preview"
-        Me.btnPreview.UseVisualStyleBackColor = True
+        Me.cmdPreview.Location = New System.Drawing.Point(15, 342)
+        Me.cmdPreview.Name = "cmdPreview"
+        Me.cmdPreview.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPreview.TabIndex = 8
+        Me.cmdPreview.Tag = "Preview"
+        Me.cmdPreview.Text = "Preview"
+        Me.cmdPreview.UseVisualStyleBackColor = True
         '
-        'cmbPreview
+        'cboPreview
         '
-        Me.cmbPreview.FormattingEnabled = True
-        Me.cmbPreview.Location = New System.Drawing.Point(108, 342)
-        Me.cmbPreview.Name = "cmbPreview"
-        Me.cmbPreview.Size = New System.Drawing.Size(280, 21)
-        Me.cmbPreview.TabIndex = 9
+        Me.cboPreview.FormattingEnabled = True
+        Me.cboPreview.Location = New System.Drawing.Point(108, 342)
+        Me.cboPreview.Name = "cboPreview"
+        Me.cboPreview.Size = New System.Drawing.Size(280, 21)
+        Me.cboPreview.TabIndex = 9
         '
         'grpOtherTransformations
         '
@@ -533,7 +533,7 @@ Partial Class dlgTransform
         'grpLag
         '
         Me.grpLag.Controls.Add(Me.lblRows)
-        Me.grpLag.Controls.Add(Me.NumericUpDown1)
+        Me.grpLag.Controls.Add(Me.nudLag)
         Me.grpLag.Location = New System.Drawing.Point(135, 97)
         Me.grpLag.Name = "grpLag"
         Me.grpLag.Size = New System.Drawing.Size(104, 41)
@@ -552,14 +552,14 @@ Partial Class dlgTransform
         Me.lblRows.Tag = "rows"
         Me.lblRows.Text = "row(s)"
         '
-        'NumericUpDown1
+        'nudLag
         '
-        Me.NumericUpDown1.AllowDrop = True
-        Me.NumericUpDown1.Location = New System.Drawing.Point(29, 17)
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(31, 20)
-        Me.NumericUpDown1.TabIndex = 0
-        Me.NumericUpDown1.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudLag.AllowDrop = True
+        Me.nudLag.Location = New System.Drawing.Point(29, 17)
+        Me.nudLag.Name = "nudLag"
+        Me.nudLag.Size = New System.Drawing.Size(31, 20)
+        Me.nudLag.TabIndex = 0
+        Me.nudLag.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'grpTransformationsOther
         '
@@ -647,19 +647,19 @@ Partial Class dlgTransform
         Me.rdoRank.Text = "Rank"
         Me.rdoRank.UseVisualStyleBackColor = True
         '
-        'UcrSelectorAddRemove1
+        'ucrAddRemove
         '
-        Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(12, 19)
-        Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
-        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(203, 127)
-        Me.UcrSelectorAddRemove1.TabIndex = 2
+        Me.ucrAddRemove.Location = New System.Drawing.Point(12, 19)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
+        Me.ucrAddRemove.TabIndex = 2
         '
-        'UcrReceiverSingle1
+        'ucrReceiverFrom
         '
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(287, 29)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReceiverSingle1.TabIndex = 1
+        Me.ucrReceiverFrom.Location = New System.Drawing.Point(287, 29)
+        Me.ucrReceiverFrom.Name = "ucrReceiverFrom"
+        Me.ucrReceiverFrom.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverFrom.TabIndex = 1
         '
         'ucrBase
         '
@@ -674,15 +674,15 @@ Partial Class dlgTransform
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(430, 428)
         Me.Controls.Add(Me.grpOtherTransformations)
-        Me.Controls.Add(Me.cmbPreview)
-        Me.Controls.Add(Me.btnPreview)
+        Me.Controls.Add(Me.cboPreview)
+        Me.Controls.Add(Me.cmdPreview)
         Me.Controls.Add(Me.txtInto)
         Me.Controls.Add(Me.lblInto)
         Me.Controls.Add(Me.lblFrom)
         Me.Controls.Add(Me.grpTransformationType)
         Me.Controls.Add(Me.grpCalculatedTransformations)
-        Me.Controls.Add(Me.UcrSelectorAddRemove1)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
+        Me.Controls.Add(Me.ucrAddRemove)
+        Me.Controls.Add(Me.ucrReceiverFrom)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgTransform"
@@ -704,7 +704,7 @@ Partial Class dlgTransform
         Me.grpOtherTransformations.ResumeLayout(False)
         Me.grpLag.ResumeLayout(False)
         Me.grpLag.PerformLayout()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudLag, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpTransformationsOther.ResumeLayout(False)
         Me.grpTransformationsOther.PerformLayout()
         Me.ResumeLayout(False)
@@ -713,8 +713,8 @@ Partial Class dlgTransform
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
-    Friend WithEvents UcrSelectorAddRemove1 As ucrSelectorAddRemove
+    Friend WithEvents ucrReceiverFrom As ucrReceiverSingle
+    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents grpCalculatedTransformations As GroupBox
     Friend WithEvents grpNonNegativeTransformations As GroupBox
     Friend WithEvents rdoPower As RadioButton
@@ -737,8 +737,8 @@ Partial Class dlgTransform
     Friend WithEvents txtInto As TextBox
     Friend WithEvents lblPowerValue As Label
     Friend WithEvents txtPowerValue As TextBox
-    Friend WithEvents btnPreview As Button
-    Friend WithEvents cmbPreview As ComboBox
+    Friend WithEvents cmdPreview As Button
+    Friend WithEvents cboPreview As ComboBox
     Friend WithEvents grpOtherTransformations As GroupBox
     Friend WithEvents grpTransformationsOther As GroupBox
     Friend WithEvents rdoStandardise As RadioButton
@@ -749,7 +749,7 @@ Partial Class dlgTransform
     Friend WithEvents rdoLag As RadioButton
     Friend WithEvents grpLag As GroupBox
     Friend WithEvents lblRows As Label
-    Friend WithEvents NumericUpDown1 As NumericUpDown
+    Friend WithEvents nudLag As NumericUpDown
     Friend WithEvents lblConstant As Label
     Friend WithEvents grpCircularTransformations As GroupBox
     Friend WithEvents cmbCycleLength As ComboBox

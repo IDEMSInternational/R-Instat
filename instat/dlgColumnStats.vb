@@ -27,7 +27,9 @@ Public Class dlgColumnStats
 
     Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.Leave
         Dim objItem As Object
-        Dim temp_obj As ListBox.ObjectCollection = ucrReceiverMultiple.lstSelectedVariables.Items
+        'TODO fix this
+        Dim temp_obj As New Object
+        'Dim temp_obj As ListBox.ObjectCollection = ucrReceiverMultiple.lstSelectedVariables.Items
         If ucrReceiverMultiple.lstSelectedVariables.Items.Count > 0 Then
             For Each objItem In temp_obj
                 ucrBase.clsRsyntax.AddParameter("data_temp$" & objItem & "", "x")
