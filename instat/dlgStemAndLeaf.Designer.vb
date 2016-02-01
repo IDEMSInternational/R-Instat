@@ -22,21 +22,22 @@ Partial Class dlgStemAndLeaf
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverStemAndLeaf = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'UcrAddRemove
+        'ucrAddRemove
         '
-        Me.UcrAddRemove.Location = New System.Drawing.Point(2, 12)
-        Me.UcrAddRemove.Name = "UcrAddRemove"
-        Me.UcrAddRemove.Size = New System.Drawing.Size(186, 129)
-        Me.UcrAddRemove.TabIndex = 0
+        Me.ucrAddRemove.Location = New System.Drawing.Point(2, 12)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(213, 129)
+        Me.ucrAddRemove.TabIndex = 0
         '
         'ucrReceiverStemAndLeaf
         '
-        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(245, 40)
+        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(245, 49)
         Me.ucrReceiverStemAndLeaf.Name = "ucrReceiverStemAndLeaf"
         Me.ucrReceiverStemAndLeaf.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverStemAndLeaf.TabIndex = 1
@@ -48,25 +49,38 @@ Partial Class dlgStemAndLeaf
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 2
         '
+        'lblSelectedVariable
+        '
+        Me.lblSelectedVariable.AutoSize = True
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(252, 34)
+        Me.lblSelectedVariable.Name = "lblSelectedVariable"
+        Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
+        Me.lblSelectedVariable.TabIndex = 3
+        Me.lblSelectedVariable.Tag = "Selected_Variable"
+        Me.lblSelectedVariable.Text = "Selected Variable"
+        '
         'dlgStemAndLeaf
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(443, 280)
+        Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverStemAndLeaf)
-        Me.Controls.Add(Me.UcrAddRemove)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Controls.Add(Me.ucrAddRemove)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgStemAndLeaf"
-        Me.Tag = "StemandLeaf"
+        Me.Tag = "Stem_and_Leaf"
         Me.Text = "Stem and Leaf"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents UcrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrReceiverStemAndLeaf As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents lblSelectedVariable As Label
 End Class

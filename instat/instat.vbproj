@@ -707,6 +707,12 @@
     <Compile Include="dlgRowStats.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSaveAs.Designer.vb">
+      <DependentUpon>dlgSaveAs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSaveAs.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgScatterPlot.Designer.vb">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
     </Compile>
@@ -1049,6 +1055,12 @@
       <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrSelectorByDataFrameAddRemove.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrVariablename.designer.vb">
+      <DependentUpon>ucrVariablename.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrVariablename.vb">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -1884,6 +1896,15 @@
     <EmbeddedResource Include="dlgReplace.sw-KE.resx">
       <DependentUpon>dlgReplace.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgSaveAs.fr-FR.resx">
+      <DependentUpon>dlgSaveAs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSaveAs.resx">
+      <DependentUpon>dlgSaveAs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSaveAs.sw-KE.resx">
+      <DependentUpon>dlgSaveAs.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalSummary.fr-FR.resx">
       <DependentUpon>dlgSeasonalSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2318,6 +2339,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.sw-KE.resx">
       <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrVariablename.fr-FR.resx">
+      <DependentUpon>ucrVariablename.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrVariablename.resx">
+      <DependentUpon>ucrVariablename.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrVariablename.sw-KE.resx">
+      <DependentUpon>ucrVariablename.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
