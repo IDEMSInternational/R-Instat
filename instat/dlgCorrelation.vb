@@ -27,8 +27,9 @@ Public Class dlgCorrelation
 
     Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.Leave
         If ucrReceiverMultiple.lstSelectedVariables.Items.Count = 2 Then
-            ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverMultiple.lstSelectedVariables.Items.Item(0) & "")
-            ucrBase.clsRsyntax.AddParameter("y", "data$" & ucrReceiverMultiple.lstSelectedVariables.Items.Item(1) & "")
+            'TODO fix this
+            'ucrBase.clsRsyntax.AddParameter("x", "data$" & ucrReceiverMultiple.lstSelectedVariables.Items.Item(0) & "")
+            'ucrBase.clsRsyntax.AddParameter("y", "data$" & ucrReceiverMultiple.lstSelectedVariables.Items.Item(1) & "")
         End If
 
     End Sub
