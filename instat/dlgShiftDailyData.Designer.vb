@@ -22,22 +22,22 @@ Partial Class dlgShiftDailyData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'UcrButtons1
+        'ucrBase
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(12, 362)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(410, 32)
-        Me.UcrButtons1.TabIndex = 0
+        Me.ucrBase.Location = New System.Drawing.Point(2, 270)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 55)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgShiftDailyData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 406)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.ClientSize = New System.Drawing.Size(424, 328)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgShiftDailyData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -47,5 +47,5 @@ Partial Class dlgShiftDailyData
 
     End Sub
 
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
 End Class
