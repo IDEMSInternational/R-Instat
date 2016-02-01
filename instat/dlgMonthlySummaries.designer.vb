@@ -27,9 +27,9 @@ Partial Class dlgMonthlySummaries
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(31, 229)
+        Me.ucrBase.Location = New System.Drawing.Point(23, 206)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
         Me.ucrBase.TabIndex = 0
         '
         'dlgMonthlySummaries

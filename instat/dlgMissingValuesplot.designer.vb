@@ -27,9 +27,9 @@ Partial Class dlgMissingValuesplot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 218)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 204)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 57)
         Me.ucrBase.TabIndex = 0
         '
         'dlgMissingValuesplot
@@ -39,7 +39,7 @@ Partial Class dlgMissingValuesplot
         Me.ClientSize = New System.Drawing.Size(430, 262)
         Me.Controls.Add(Me.ucrBase)
         Me.Name = "dlgMissingValuesplot"
-        Me.Text = "dlgMissingValuesplot"
+        Me.Text = "Missing Values Plot"
         Me.ResumeLayout(False)
 
     End Sub

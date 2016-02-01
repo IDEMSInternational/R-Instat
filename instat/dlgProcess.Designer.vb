@@ -27,9 +27,9 @@ Partial Class dlgProcess
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(-3, 255)
+        Me.ucrBase.Location = New System.Drawing.Point(-3, 235)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgProcess
