@@ -56,4 +56,10 @@ Public Class ucrSelector
         Add()
     End Sub
 
+    Private Sub lstAvailableVariable_KeyPress(sender As Object, e As KeyPressEventArgs) Handles lstAvailableVariable.KeyPress
+        If e.KeyChar = vbCr Then
+            Add()
+        End If
+    End Sub
+
 End Class
