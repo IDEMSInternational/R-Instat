@@ -36,7 +36,7 @@ Partial Class ucrButtons
         Me.cmdOk.Location = New System.Drawing.Point(3, 26)
         Me.cmdOk.Name = "cmdOk"
         Me.cmdOk.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOk.TabIndex = 82
+        Me.cmdOk.TabIndex = 2
         Me.cmdOk.Tag = "Ok "
         Me.cmdOk.Text = "Ok"
         Me.cmdOk.UseVisualStyleBackColor = True
@@ -46,7 +46,7 @@ Partial Class ucrButtons
         Me.cmdCancel.Location = New System.Drawing.Point(163, 26)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
-        Me.cmdCancel.TabIndex = 81
+        Me.cmdCancel.TabIndex = 4
         Me.cmdCancel.Tag = "Close"
         Me.cmdCancel.Text = "Close"
         Me.cmdCancel.UseVisualStyleBackColor = True
@@ -56,7 +56,7 @@ Partial Class ucrButtons
         Me.cmdReset.Location = New System.Drawing.Point(82, 26)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(75, 23)
-        Me.cmdReset.TabIndex = 80
+        Me.cmdReset.TabIndex = 3
         Me.cmdReset.Tag = "Reset"
         Me.cmdReset.Text = "Reset "
         Me.cmdReset.UseVisualStyleBackColor = True
@@ -66,7 +66,7 @@ Partial Class ucrButtons
         Me.cmdHelp.Location = New System.Drawing.Point(244, 26)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
-        Me.cmdHelp.TabIndex = 79
+        Me.cmdHelp.TabIndex = 5
         Me.cmdHelp.Tag = "Help"
         Me.cmdHelp.Text = "Help "
         Me.cmdHelp.UseVisualStyleBackColor = True
@@ -76,7 +76,7 @@ Partial Class ucrButtons
         Me.cmdPaste.Location = New System.Drawing.Point(326, 26)
         Me.cmdPaste.Name = "cmdPaste"
         Me.cmdPaste.Size = New System.Drawing.Size(75, 23)
-        Me.cmdPaste.TabIndex = 83
+        Me.cmdPaste.TabIndex = 6
         Me.cmdPaste.Tag = "To_Script"
         Me.cmdPaste.Text = "To Script"
         Me.cmdPaste.UseVisualStyleBackColor = True
@@ -87,7 +87,7 @@ Partial Class ucrButtons
         Me.chkComment.Location = New System.Drawing.Point(3, 3)
         Me.chkComment.Name = "chkComment"
         Me.chkComment.Size = New System.Drawing.Size(73, 17)
-        Me.chkComment.TabIndex = 84
+        Me.chkComment.TabIndex = 0
         Me.chkComment.Tag = "comment:"
         Me.chkComment.Text = "Comment:"
         Me.chkComment.UseVisualStyleBackColor = True
@@ -97,7 +97,7 @@ Partial Class ucrButtons
         Me.txtComment.Location = New System.Drawing.Point(82, 1)
         Me.txtComment.Name = "txtComment"
         Me.txtComment.Size = New System.Drawing.Size(319, 20)
-        Me.txtComment.TabIndex = 85
+        Me.txtComment.TabIndex = 1
         '
         'ucrButtons
         '
