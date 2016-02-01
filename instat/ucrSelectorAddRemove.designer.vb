@@ -23,6 +23,9 @@ Partial Class ucrSelectorAddRemove
         Me.btnRemove = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
+        'lstAvailableVariable
+        '
+        '
         'btnAdd
         '
         Me.btnAdd.Location = New System.Drawing.Point(124, 33)
@@ -50,6 +53,8 @@ Partial Class ucrSelectorAddRemove
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "ucrSelectorAddRemove"
         Me.Size = New System.Drawing.Size(203, 127)
+        Me.Controls.SetChildIndex(Me.lblVariables, 0)
+        Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
         Me.Controls.SetChildIndex(Me.btnAdd, 0)
         Me.Controls.SetChildIndex(Me.btnRemove, 0)
         Me.ResumeLayout(False)
