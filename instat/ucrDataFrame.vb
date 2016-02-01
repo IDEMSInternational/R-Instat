@@ -14,12 +14,10 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Imports RDotNet
 
 Public Class ucrDataFrame
-    Public strDataFrameLength As String
-    Public clsCurrDataFrame As RFunction
-    Public clsRSyntax As New RSyntax
+    Public iDataFrameLength As Integer
+    Public clsCurrDataFrame As New RFunction
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames)
@@ -34,10 +32,13 @@ Public Class ucrDataFrame
     End Sub
 
     Public Sub SetDataFrameProperties()
-        strDataFrameLength = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$length_of_data(" & Chr(34) & cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter(0).ToString
-        clsRSyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_data_frame", clsFunction:=clsCurrDataFrame)
-        clsRSyntax.AddParameter("data_name", Chr(34) & cboAvailableDataFrames.SelectedItem & Chr(34), clsRFunction:=clsCurrDataFrame)
-        clsRSyntax.SetAssignTo(cboAvailableDataFrames.SelectedItem & "_temp", clsFunction:=clsCurrDataFrame)
+        Dim clsParam As New RParameter
+        iDataFrameLength = frmMain.clsRLink.GetDataFrameLength(cboAvailableDataFrames.Text)
+        clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsParam.SetArgumentName("data_name")
+        clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsCurrDataFrame.AddParameter(clsParam)
+        clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.SelectedItem & "_temp")
     End Sub
 
 End Class

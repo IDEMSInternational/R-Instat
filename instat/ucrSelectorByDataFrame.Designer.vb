@@ -25,7 +25,7 @@ Partial Class ucrSelectorByDataFrame
         Me.ucrAvailableDataFrames = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
-        'lblAvailableVariables
+        'lblVariables
         '
         Me.lblVariables.Location = New System.Drawing.Point(3, 52)
         '
@@ -55,5 +55,5 @@ Partial Class ucrSelectorByDataFrame
 
     End Sub
 
-    Friend WithEvents ucrAvailableDataFrames As ucrDataFrame
+    Public WithEvents ucrAvailableDataFrames As ucrDataFrame
 End Class

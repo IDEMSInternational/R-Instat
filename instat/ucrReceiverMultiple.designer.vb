@@ -24,11 +24,14 @@ Partial Class ucrReceiverMultiple
         '
         'lstSelectedVariables
         '
+        Me.lstSelectedVariables.Activation = System.Windows.Forms.ItemActivation.TwoClick
+        Me.lstSelectedVariables.GridLines = True
         Me.lstSelectedVariables.Location = New System.Drawing.Point(3, 5)
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
         Me.lstSelectedVariables.Size = New System.Drawing.Size(113, 95)
         Me.lstSelectedVariables.TabIndex = 1
         Me.lstSelectedVariables.UseCompatibleStateImageBehavior = False
+        Me.lstSelectedVariables.View = System.Windows.Forms.View.List
         '
         'ucrReceiverMultiple
         '
