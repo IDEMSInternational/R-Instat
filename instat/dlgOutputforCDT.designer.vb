@@ -32,9 +32,9 @@ Partial Class dlgOutputforCDT
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(24, 229)
+        Me.ucrBase.Location = New System.Drawing.Point(24, 209)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'Label1
