@@ -96,4 +96,22 @@ Public Class ucrReceiverMultiple
 
         Return strDataFrames
     End Function
+
+    Public Overrides Sub SetColor()
+        lstSelectedVariables.BackColor = Color.Aqua
+    End Sub
+
+    Public Overrides Sub RemoveColor()
+        lstSelectedVariables.BackColor = Color.White
+    End Sub
+
+    Private Sub lstSelectedVariables_KeyPress(sender As Object, e As KeyPressEventArgs) Handles lstSelectedVariables.KeyPress
+        If e.KeyChar = vbCr Then
+            RemoveSelected()
+        End If
+    End Sub
+
+    Private Sub lstSelectedVariables_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstSelectedVariables.SelectedIndexChanged
+
+    End Sub
 End Class
