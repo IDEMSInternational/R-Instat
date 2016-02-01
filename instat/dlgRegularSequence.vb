@@ -23,7 +23,7 @@ Public Class dlgRegularSequence
         frmMain.clsRLink.SetOutput(txtGetPreview)
         dtpSelectorA.Visible = False
         dtpSelectorB.Visible = False
-        ucrSelectDataFrame.SetColumnList(ucrColName)
+        'ucrSelectDataFrame.SetColumnList(ucrColName)
 
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrColName.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrColName.cboColumnName.Text)
     End Sub
