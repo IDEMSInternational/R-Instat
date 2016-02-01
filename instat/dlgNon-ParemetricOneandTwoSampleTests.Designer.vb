@@ -27,9 +27,9 @@ Partial Class dlgNon_ParemetricOneandTwoSampleTests
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 227)
+        Me.ucrBase.Location = New System.Drawing.Point(2, 201)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 0
         '
         'dlgNon_ParemetricOneandTwoSampleTests
