@@ -27,9 +27,9 @@ Partial Class dlgStackDailyData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(-2, 307)
+        Me.ucrBase.Location = New System.Drawing.Point(4, 296)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 57)
         Me.ucrBase.TabIndex = 0
         '
         'dlgStackDailyData
