@@ -52,9 +52,9 @@ Partial Class dlgNon_ParametricANOVA
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 172)
+        Me.ucrBase.Location = New System.Drawing.Point(0, 151)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 3
         '
         'ucrReceiverFactor
@@ -82,7 +82,7 @@ Partial Class dlgNon_ParametricANOVA
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 204)
+        Me.ClientSize = New System.Drawing.Size(412, 202)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblYVariate)
         Me.Controls.Add(Me.ucrBase)
