@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgStack
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgStack
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblColumnsToBestack = New System.Windows.Forms.Label()
         Me.txtStackDataInto = New System.Windows.Forms.TextBox()
@@ -28,7 +28,8 @@ Partial Class dlgStack
         Me.lblFactorInto = New System.Windows.Forms.Label()
         Me.txtFactorInto = New System.Windows.Forms.TextBox()
         Me.chkIDVariables = New System.Windows.Forms.CheckBox()
-        Me.ucrNewColumnName = New instat.ucrNewColumnName()
+        Me.lblNewDataFrameName = New System.Windows.Forms.Label()
+        Me.ucrNewDataFrameName = New instat.ucrVariableName()
         Me.ucrIDVariablesReceiver = New instat.ucrReceiverMultiple()
         Me.ucrDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -91,12 +92,22 @@ Partial Class dlgStack
         Me.chkIDVariables.Text = "ID Variables"
         Me.chkIDVariables.UseVisualStyleBackColor = True
         '
-        'ucrNewColumnName
+        'lblNewDataFrameName
         '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(17, 322)
-        Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        Me.ucrNewColumnName.Size = New System.Drawing.Size(367, 35)
-        Me.ucrNewColumnName.TabIndex = 15
+        Me.lblNewDataFrameName.AutoSize = True
+        Me.lblNewDataFrameName.Location = New System.Drawing.Point(25, 335)
+        Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
+        Me.lblNewDataFrameName.Size = New System.Drawing.Size(121, 13)
+        Me.lblNewDataFrameName.TabIndex = 16
+        Me.lblNewDataFrameName.Tag = "New_Data_Frame_Name:"
+        Me.lblNewDataFrameName.Text = "New Data Frame Name:"
+        '
+        'ucrNewDataFrameName
+        '
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(147, 329)
+        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(149, 23)
+        Me.ucrNewDataFrameName.TabIndex = 15
         '
         'ucrIDVariablesReceiver
         '
@@ -131,7 +142,8 @@ Partial Class dlgStack
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 429)
-        Me.Controls.Add(Me.ucrNewColumnName)
+        Me.Controls.Add(Me.lblNewDataFrameName)
+        Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.ucrIDVariablesReceiver)
         Me.Controls.Add(Me.chkIDVariables)
         Me.Controls.Add(Me.ucrDataFrameAddRemove)
@@ -161,5 +173,6 @@ Partial Class dlgStack
     Friend WithEvents ucrDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
     Friend WithEvents chkIDVariables As CheckBox
     Friend WithEvents ucrIDVariablesReceiver As ucrReceiverMultiple
-    Friend WithEvents ucrNewColumnName As ucrNewColumnName
+    Friend WithEvents ucrNewDataFrameName As ucrVariableName
+    Friend WithEvents lblNewDataFrameName As Label
 End Class
