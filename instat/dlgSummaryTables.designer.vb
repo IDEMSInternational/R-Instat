@@ -32,7 +32,7 @@ Partial Class dlgSummaryTables
         Me.lblDecimals = New System.Windows.Forms.Label()
         Me.nudDecimals = New System.Windows.Forms.NumericUpDown()
         Me.lblColumnFactors = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtColumnFactors = New System.Windows.Forms.TextBox()
         Me.chkDisplayMargins = New System.Windows.Forms.CheckBox()
         Me.grpSummaryStat = New System.Windows.Forms.GroupBox()
         Me.cmdMore = New System.Windows.Forms.Button()
@@ -99,7 +99,7 @@ Partial Class dlgSummaryTables
         Me.grpTwoways.Controls.Add(Me.lblDecimals)
         Me.grpTwoways.Controls.Add(Me.nudDecimals)
         Me.grpTwoways.Controls.Add(Me.lblColumnFactors)
-        Me.grpTwoways.Controls.Add(Me.TextBox1)
+        Me.grpTwoways.Controls.Add(Me.txtColumnFactors)
         Me.grpTwoways.Controls.Add(Me.chkDisplayMargins)
         Me.grpTwoways.Location = New System.Drawing.Point(12, 166)
         Me.grpTwoways.Name = "grpTwoways"
@@ -138,12 +138,12 @@ Partial Class dlgSummaryTables
         Me.lblColumnFactors.Tag = "Column_factors"
         Me.lblColumnFactors.Text = "Column factors"
         '
-        'TextBox1
+        'txtColumnFactors
         '
-        Me.TextBox1.Location = New System.Drawing.Point(95, 42)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(29, 20)
-        Me.TextBox1.TabIndex = 1
+        Me.txtColumnFactors.Location = New System.Drawing.Point(95, 42)
+        Me.txtColumnFactors.Name = "txtColumnFactors"
+        Me.txtColumnFactors.Size = New System.Drawing.Size(29, 20)
+        Me.txtColumnFactors.TabIndex = 1
         '
         'chkDisplayMargins
         '
@@ -278,6 +278,6 @@ Partial Class dlgSummaryTables
     Friend WithEvents lblDecimals As Label
     Friend WithEvents nudDecimals As NumericUpDown
     Friend WithEvents lblColumnFactors As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtColumnFactors As TextBox
     Friend WithEvents chkDisplayMargins As CheckBox
 End Class
