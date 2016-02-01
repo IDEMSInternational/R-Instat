@@ -26,12 +26,24 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.btnRemove = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
+        'ucrAvailableDataFrames
+        '
+        Me.ucrAvailableDataFrames.TabIndex = 0
+        '
+        'lblVariables
+        '
+        Me.lblVariables.TabIndex = 1
+        '
+        'lstAvailableVariable
+        '
+        Me.lstAvailableVariable.TabIndex = 2
+        '
         'btnAdd
         '
         Me.btnAdd.Location = New System.Drawing.Point(149, 95)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
-        Me.btnAdd.TabIndex = 85
+        Me.btnAdd.TabIndex = 3
         Me.btnAdd.Tag = "add"
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
@@ -41,7 +53,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.btnRemove.Location = New System.Drawing.Point(149, 136)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(75, 23)
-        Me.btnRemove.TabIndex = 86
+        Me.btnRemove.TabIndex = 4
         Me.btnRemove.Tag = "remove"
         Me.btnRemove.Text = "Remove"
         Me.btnRemove.UseVisualStyleBackColor = True
@@ -54,6 +66,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "ucrSelectorByDataFrameAddRemove"
         Me.Size = New System.Drawing.Size(242, 179)
+        Me.Controls.SetChildIndex(Me.ucrAvailableDataFrames, 0)
         Me.Controls.SetChildIndex(Me.lblVariables, 0)
         Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
         Me.Controls.SetChildIndex(Me.btnAdd, 0)
