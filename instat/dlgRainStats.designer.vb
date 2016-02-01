@@ -43,9 +43,9 @@ Partial Class dlgRainStats
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 264)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 239)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 57)
         Me.ucrBase.TabIndex = 0
         '
         'Label1

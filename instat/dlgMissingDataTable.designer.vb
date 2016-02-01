@@ -27,9 +27,9 @@ Partial Class dlgMissingDataTable
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(41, 227)
+        Me.ucrBase.Location = New System.Drawing.Point(41, 200)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 59)
         Me.ucrBase.TabIndex = 0
         '
         'dlgMissingDataTable
