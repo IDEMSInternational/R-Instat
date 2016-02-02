@@ -43,13 +43,10 @@ Public Class dlgStack
         If chkIDVariables.Checked = True Then
             ucrIDVariablesReceiver.Visible = True
             ucrIDVariablesReceiver.Focus()
+            ucrIDVariablesReceiver.SetMeAsReceiver()
         Else
             ucrIDVariablesReceiver.Visible = False
         End If
-    End Sub
-
-    Private Sub ucrIDVariablesReceiver_Enter(sender As Object, e As EventArgs) Handles ucrIDVariablesReceiver.Enter
-        ucrIDVariablesReceiver.SetMeAsReceiver()
     End Sub
 
     Private Sub ucrReceiverColumnsToBeStack_Leave(sender As Object, e As EventArgs) Handles ucrReceiverColumnsToBeStack.Leave
@@ -74,6 +71,14 @@ Public Class dlgStack
     Private Sub ucrDataFrameAddRemove_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrDataFrameAddRemove.DataFrameChanged
         If Not ucrNewDataFrameName.bUserTyped Then
             ucrNewDataFrameName.txtValidation.Text = ucrDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked"
+        End If
+    End Sub
+
+    Private Sub chkIDVariables_KeyPress(sender As Object, e As KeyPressEventArgs) Handles chkIDVariables.KeyPress
+        If chkIDVariables.Checked = True And e.KeyChar = vbCr Then
+            chkIDVariables.Checked = False
+        Else
+            chkIDVariables.Checked = True
         End If
     End Sub
 End Class
