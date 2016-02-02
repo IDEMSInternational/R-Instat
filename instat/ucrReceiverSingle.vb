@@ -64,5 +64,13 @@ Public Class ucrReceiverSingle
         OnValueChanged(sender, e)
     End Sub
 
+    Public Overrides Sub SetColor()
+        txtReceiverSingle.BackColor = Color.Aqua
+    End Sub
+
+    Public Overrides Sub RemoveColor()
+        txtReceiverSingle.BackColor = Color.White
+    End Sub
+
 End Class
 
