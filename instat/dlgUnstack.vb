@@ -15,26 +15,26 @@
 
 Imports instat.Translations
 Public Class dlgUnstack
-    Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("unstack")
-        ucrBase.clsRsyntax.iCallType = 1
-        ucrFactorToUnstackReceiver.SetMeAsReceiver()
-        ucrIDColumnReceiver.Selector = ucrSelectorByDataFrameAddRemove
-        ucrFactorToUnstackReceiver.Selector = ucrSelectorByDataFrameAddRemove
-        ucrIDColumnReceiver.SetMeAsReceiver()
-
+    Private Sub unstackDefaultSettings()
         autoTranslate(Me)
         ucrIDColumnReceiver.Visible = False
         chkIDColumn.Checked = False
     End Sub
-
-    Private Sub ucrReceiverColumns_Enter(sender As Object, e As EventArgs)
-        ucrIDColumnReceiver.SetMeAsReceiver()
+    Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        unstackDefaultSettings()
+        ucrBase.clsRsyntax.SetFunction("dcast")
+        ucrIDColumnReceiver.Selector = ucrSelectorByDataFrameAddRemove
+        ucrFactorToUnstackReceiver.Selector = ucrSelectorByDataFrameAddRemove
+        ucrFactorToUnstackReceiver.SetMeAsReceiver()
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        unstackDefaultSettings()
+    End Sub
     Private Sub chkIDColumn_CheckedChanged(sender As Object, e As EventArgs) Handles chkIDColumn.CheckedChanged
         If chkIDColumn.Checked = True Then
             ucrIDColumnReceiver.Visible = True
+            ucrIDColumnReceiver.SetMeAsReceiver()
         Else
             ucrIDColumnReceiver.Visible = False
         End If
@@ -46,5 +46,33 @@ Public Class dlgUnstack
 
     Private Sub ucrColumntoUnstackReceiver_Leave(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.Leave
         ucrBase.clsRsyntax.AddParameter("", ucrColumnToUnstackReceiver.GetVariableNames())
+    End Sub
+    Private Sub ucrIDColumnReceiver_Leave(sender As Object, e As EventArgs) Handles ucrIDColumnReceiver.Leave
+        ucrBase.clsRsyntax.AddParameter("", ucrIDColumnReceiver.GetVariableNames())
+    End Sub
+
+    Private Sub ucrColumnToUnstackReceiver_Enter(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.Enter
+        ucrColumnToUnstackReceiver.SetMeAsReceiver()
+    End Sub
+    Private Sub ucrIDColumnReceiver_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrIDColumnReceiver.KeyPress
+        If e.KeyChar = vbCr Then
+            ucrIDColumnReceiver.RemoveSelected()
+        End If
+    End Sub
+
+    Private Sub ucrFactorToUnstackReceiver_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrFactorToUnstackReceiver.KeyPress
+        If e.KeyChar = vbCr Then
+            ucrFactorToUnstackReceiver.RemoveSelected()
+        End If
+    End Sub
+    Private Sub ucrColumnToUnstackReceiver_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrColumnToUnstackReceiver.KeyPress
+        If e.KeyChar = vbCr Then
+            ucrColumnToUnstackReceiver.RemoveSelected()
+        End If
+    End Sub
+    Private Sub ucrSelectorByDataFrameAddRemove_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrSelectorByDataFrameAddRemove.KeyPress
+        If e.KeyChar = vbCr Then
+            ucrSelectorByDataFrameAddRemove.Add()
+        End If
     End Sub
 End Class
