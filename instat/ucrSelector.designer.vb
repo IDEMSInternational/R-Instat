@@ -41,6 +41,7 @@ Partial Class ucrSelector
         Me.lstAvailableVariable.Activation = System.Windows.Forms.ItemActivation.TwoClick
         Me.lstAvailableVariable.GridLines = True
         Me.lstAvailableVariable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lstAvailableVariable.HideSelection = False
         Me.lstAvailableVariable.Location = New System.Drawing.Point(8, 18)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
         Me.lstAvailableVariable.Size = New System.Drawing.Size(113, 104)

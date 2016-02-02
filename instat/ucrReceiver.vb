@@ -28,6 +28,10 @@ Public Class ucrReceiver
 
     End Sub
 
+    Public Overridable Sub Clear()
+
+    End Sub
+
     Public Overridable Sub SetColor()
 
     End Sub

@@ -47,6 +47,12 @@ Public Class ucrReceiverMultiple
         End If
     End Sub
 
+    Public Overrides Sub Clear()
+
+        lstSelectedVariables.SelectedItems.Clear()
+
+    End Sub
+
     Public Overrides Function GetVariables() As RFunction
         'TODO sort this out
         Dim clsGetVariablesFunc As New RFunction

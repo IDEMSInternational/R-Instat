@@ -196,9 +196,6 @@ Public Class frmEditor
         End Try
     End Sub
 
-    Private Sub resetAllPageBreaksToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles resetAllPageBreaksToolStripMenuItem1.Click
-
-    End Sub
 
     Private Sub insertSheet_Click(sender As Object, e As EventArgs) Handles insertSheet.Click
         grdData.InsertWorksheet(grdData.GetWorksheetIndex(grdData.CurrentWorksheet), grdData.CreateWorksheet())
@@ -209,7 +206,8 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
-        dlgcolrowname.ShowDialog()
+        'dlgName.setWorksheet(grdData.CurrentWorksheet.Name, (grdData.CurrentWorksheet.ColumnHeaders(grdData.CurrentWorksheet.SelectionRange.Col)).[Text])
+        dlgName.ShowDialog()
     End Sub
 
     Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged, Me.Load, grdData.WorksheetInserted
