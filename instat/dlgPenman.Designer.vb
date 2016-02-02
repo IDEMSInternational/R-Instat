@@ -27,9 +27,9 @@ Partial Class dlgPenman
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 311)
+        Me.ucrBase.Location = New System.Drawing.Point(1, 299)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 61)
         Me.ucrBase.TabIndex = 0
         '
         'dlgPenman
