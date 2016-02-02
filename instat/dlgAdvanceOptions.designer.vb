@@ -35,7 +35,7 @@ Partial Class dlgAdvanceOptions
         Me.txtDataTablesVariables = New System.Windows.Forms.TextBox()
         Me.lblDataTablesVariables = New System.Windows.Forms.Label()
         Me.lblDataTablesMetaData = New System.Windows.Forms.Label()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
         'chkMessages
@@ -160,19 +160,18 @@ Partial Class dlgAdvanceOptions
         Me.lblDataTablesMetaData.Tag = "Data_Tables_Meta_Data"
         Me.lblDataTablesMetaData.Text = "Label2"
         '
-        'ucrBase
+        'UcrButtonsSubdialogue1
         '
-        Me.ucrBase.Location = New System.Drawing.Point(32, 211)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 15
+        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(114, 219)
+        Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
+        Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(253, 44)
+        Me.UcrButtonsSubdialogue1.TabIndex = 3
         '
         'dlgAdvanceOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(470, 262)
-        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblDataTablesMetaData)
         Me.Controls.Add(Me.lblDataTablesVariables)
         Me.Controls.Add(Me.txtDataTablesVariables)
@@ -183,12 +182,12 @@ Partial Class dlgAdvanceOptions
         Me.Controls.Add(Me.TextBox4)
         Me.Controls.Add(Me.txtImportedFrom)
         Me.Controls.Add(Me.txtDataTimePeriods)
+        Me.Controls.Add(Me.UcrButtonsSubdialogue1)
         Me.Controls.Add(Me.chkCreate)
         Me.Controls.Add(Me.chkConvert)
         Me.Controls.Add(Me.chkMessages)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgAdvanceOptions"
-        Me.Text = "Advance Options"
+        Me.Text = "dlgAdvanceOptions"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -197,6 +196,7 @@ Partial Class dlgAdvanceOptions
     Friend WithEvents chkMessages As CheckBox
     Friend WithEvents chkConvert As CheckBox
     Friend WithEvents chkCreate As CheckBox
+    Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
     Friend WithEvents txtDataTimePeriods As TextBox
     Friend WithEvents txtImportedFrom As TextBox
     Friend WithEvents TextBox4 As TextBox
@@ -207,5 +207,4 @@ Partial Class dlgAdvanceOptions
     Friend WithEvents txtDataTablesVariables As TextBox
     Friend WithEvents lblDataTablesVariables As Label
     Friend WithEvents lblDataTablesMetaData As Label
-    Friend WithEvents ucrBase As ucrButtons
 End Class
