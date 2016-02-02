@@ -17,6 +17,7 @@
 Public Class ucrReceiverSingle
     Dim objSelected As New ListViewItem
     Dim bSelected As Boolean = False
+
     Public Overrides Sub AddSelected()
         Dim objItem As Object
         Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As Object
@@ -31,6 +32,14 @@ Public Class ucrReceiverSingle
     End Sub
 
     Public Overrides Sub RemoveSelected()
+
+        If txtReceiverSingle.Text <> "" Then
+            bSelected = False
+            txtReceiverSingle.Text = Nothing
+        End If
+    End Sub
+
+    Public Overrides Sub Clear()
 
         If txtReceiverSingle.Text <> "" Then
             bSelected = False
