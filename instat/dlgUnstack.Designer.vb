@@ -128,7 +128,7 @@ Partial Class dlgUnstack
         Me.Name = "dlgUnstack"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Unstack_split_columns"
-        Me.Text = "Unstack(Split) columns"
+        Me.Text = "Unstack(dcast) columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

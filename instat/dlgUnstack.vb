@@ -45,7 +45,7 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub ucrColumntoUnstackReceiver_Leave(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("", ucrColumnToUnstackReceiver.GetVariableNames())
+        ucrBase.clsRsyntax.AddParameter("value.var", ucrColumnToUnstackReceiver.GetVariableNames())
     End Sub
     Private Sub ucrIDColumnReceiver_Leave(sender As Object, e As EventArgs) Handles ucrIDColumnReceiver.Leave
         ucrBase.clsRsyntax.AddParameter("", ucrIDColumnReceiver.GetVariableNames())
