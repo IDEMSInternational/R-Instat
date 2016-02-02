@@ -27,9 +27,9 @@ Partial Class dlgCliBoxplot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 218)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 206)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
         Me.ucrBase.TabIndex = 0
         '
         'dlgCliBoxplot
@@ -38,8 +38,9 @@ Partial Class dlgCliBoxplot
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(442, 262)
         Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgCliBoxplot"
-        Me.Text = "dlgCliBoxplot"
+        Me.Text = "CliBoxplot"
         Me.ResumeLayout(False)
 
     End Sub
