@@ -27,9 +27,9 @@ Partial Class dlgModelAmounts
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(-2, 226)
+        Me.ucrBase.Location = New System.Drawing.Point(-2, 203)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 55)
         Me.ucrBase.TabIndex = 0
         '
         'dlgModelAmounts

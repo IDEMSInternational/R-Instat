@@ -121,9 +121,9 @@ Partial Class dlgMovingAverage
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 186)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 202)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 49)
         Me.ucrBase.TabIndex = 1
         '
         'ucrAddRemove
@@ -138,7 +138,7 @@ Partial Class dlgMovingAverage
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.ClientSize = New System.Drawing.Size(427, 221)
+        Me.ClientSize = New System.Drawing.Size(427, 253)
         Me.Controls.Add(Me.txtLag)
         Me.Controls.Add(Me.lblLag)
         Me.Controls.Add(Me.chkPlot)

@@ -27,9 +27,9 @@ Partial Class dlgIsNAList
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(23, 228)
+        Me.ucrBase.Location = New System.Drawing.Point(23, 203)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 57)
         Me.ucrBase.TabIndex = 0
         '
         'dlgIsNAList
@@ -38,12 +38,12 @@ Partial Class dlgIsNAList
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(463, 262)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgIsNAList"
         Me.Tag = "Is_NA_List"
-        Me.Text = "dlgIsNAList"
+        Me.Text = "Is NA List"
         Me.ResumeLayout(False)
 
     End Sub
