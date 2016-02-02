@@ -27,9 +27,9 @@ Partial Class dlgDisplayRainRunningTotal
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 230)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 206)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 0
         '
         'dlgDisplayRainRunningTotal
@@ -38,9 +38,10 @@ Partial Class dlgDisplayRainRunningTotal
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(437, 262)
         Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgDisplayRainRunningTotal"
         Me.Tag = "Display_Rain_Running_Total"
-        Me.Text = "dlgDisplayRainRunningTotal"
+        Me.Text = "Display Rain Running Total"
         Me.ResumeLayout(False)
 
     End Sub
