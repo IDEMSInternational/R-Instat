@@ -27,9 +27,9 @@ Partial Class dlgDisplayDOYofYear
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(21, 227)
+        Me.ucrBase.Location = New System.Drawing.Point(21, 204)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 55)
         Me.ucrBase.TabIndex = 0
         '
         'dlgDisplayDOYofYear
@@ -38,9 +38,10 @@ Partial Class dlgDisplayDOYofYear
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(443, 262)
         Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgDisplayDOYofYear"
         Me.Tag = "Display_DOY_of_Year"
-        Me.Text = "dlgDisplayDoyofYear"
+        Me.Text = "Display DOY of Year"
         Me.ResumeLayout(False)
 
     End Sub
