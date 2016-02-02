@@ -38,7 +38,7 @@ Partial Class ucrReceiverMultiple
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.Controls.Add(Me.lstSelectedVariables)
         Me.Name = "ucrReceiverMultiple"
-        Me.Size = New System.Drawing.Size(121, 128)
+        Me.Size = New System.Drawing.Size(121, 104)
         Me.ResumeLayout(False)
 
     End Sub
