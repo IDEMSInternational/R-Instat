@@ -27,9 +27,9 @@ Partial Class dlgDisplaySpellLength
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 227)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 208)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 51)
         Me.ucrBase.TabIndex = 0
         '
         'dlgDisplaySpellLength
@@ -38,11 +38,12 @@ Partial Class dlgDisplaySpellLength
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(431, 262)
         Me.Controls.Add(Me.ucrBase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDisplaySpellLength"
         Me.Tag = "Display_Spell_Length"
-        Me.Text = "dlgDisplaySpellLength"
+        Me.Text = "Display Spell Length"
         Me.ResumeLayout(False)
 
     End Sub
