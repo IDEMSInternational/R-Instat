@@ -27,9 +27,9 @@ Partial Class dlgSeasonalSummary
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(26, 230)
+        Me.ucrBase.Location = New System.Drawing.Point(26, 204)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 0
         '
         'dlgSeasonalSummary
