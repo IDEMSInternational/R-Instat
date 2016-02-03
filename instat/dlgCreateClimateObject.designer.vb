@@ -23,6 +23,7 @@ Partial Class dlgCreateClimateObject
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
+        Me.UcrDataFrame = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -32,22 +33,31 @@ Partial Class dlgCreateClimateObject
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 0
         '
+        'UcrDataFrame
+        '
+        Me.UcrDataFrame.Location = New System.Drawing.Point(12, 23)
+        Me.UcrDataFrame.Name = "UcrDataFrame"
+        Me.UcrDataFrame.Size = New System.Drawing.Size(127, 41)
+        Me.UcrDataFrame.TabIndex = 1
+        '
         'dlgCreateClimateObject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(433, 359)
+        Me.Controls.Add(Me.UcrDataFrame)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCreateClimateObject"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Create_climate_object"
-        Me.Text = "Create climate object"
+        Me.Tag = "Import_into_climate_object"
+        Me.Text = "Import into climate object"
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents UcrDataFrame As ucrDataFrame
 End Class

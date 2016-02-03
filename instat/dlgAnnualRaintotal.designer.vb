@@ -27,9 +27,9 @@ Partial Class dlgAnnualRaintotal
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 218)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 207)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
         Me.ucrBase.TabIndex = 0
         '
         'dlgAnnualRaintotal
@@ -38,7 +38,7 @@ Partial Class dlgAnnualRaintotal
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(431, 262)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgAnnualRaintotal"

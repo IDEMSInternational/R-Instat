@@ -27,9 +27,9 @@ Partial Class dlgExtremesClimatic
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 330)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 319)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 0
         '
         'dlgExtremesClimatic
