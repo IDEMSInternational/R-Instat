@@ -964,9 +964,6 @@
   <data name="a" xml:space="preserve">
     <value>a</value>
   </data>
-  <data name="b" xml:space="preserve">
-    <value>b</value>
-  </data>
   <data name="Mode" xml:space="preserve">
     <value>Mode</value>
   </data>
@@ -1035,5 +1032,47 @@
   </data>
   <data name="Y_label" xml:space="preserve">
     <value>Y label</value>
+  </data>
+  <data name="Convert_to" xml:space="preserve">
+    <value>Convert to</value>
+  </data>
+  <data name="Data_file" xml:space="preserve">
+    <value>Data file</value>
+  </data>
+  <data name="Delete_sheet" xml:space="preserve">
+    <value>Delete sheet</value>
+  </data>
+  <data name="Indicator_variales" xml:space="preserve">
+    <value>Indicator variables</value>
+  </data>
+  <data name="Interaction" xml:space="preserve">
+    <value>Interaction</value>
+  </data>
+  <data name="Label" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="Reference_levels" xml:space="preserve">
+    <value>Reference levels</value>
+  </data>
+  <data name="Reorder_levels" xml:space="preserve">
+    <value>Reorder levels</value>
+  </data>
+  <data name="Stack_Melt" xml:space="preserve">
+    <value>Stack/Melt</value>
+  </data>
+  <data name="Unstack_Decast" xml:space="preserve">
+    <value>Unstack/Decast</value>
+  </data>
+  <data name="Unused_levels" xml:space="preserve">
+    <value>Unused levels</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
   </data>
 </root>
