@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgExtremeEvents
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgExtremeEvents
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.txtColumNameExtremeEvent = New System.Windows.Forms.TextBox()
         Me.txtColumnNameEventDay = New System.Windows.Forms.TextBox()
@@ -235,16 +235,16 @@ Partial Class dlgExtremeEvents
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(61, 362)
+        Me.ucrBase.Location = New System.Drawing.Point(52, 384)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
         Me.ucrBase.TabIndex = 4
         '
         'dlgExtremeEvents
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(536, 415)
+        Me.ClientSize = New System.Drawing.Size(536, 450)
         Me.Controls.Add(Me.chkThresholdValue)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.lblEndDay)
@@ -265,12 +265,12 @@ Partial Class dlgExtremeEvents
         Me.Controls.Add(Me.lblColumnNameExtremeEvent)
         Me.Controls.Add(Me.txtColumnNameEventDay)
         Me.Controls.Add(Me.txtColumNameExtremeEvent)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExtremeEvents"
         Me.Tag = "Extreme_Events"
-        Me.Text = "Extreme Events"
+        Me.Text = "dlgExtremeEvents"
         CType(Me.nudTotalDays, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).EndInit()
