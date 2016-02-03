@@ -747,4 +747,8 @@ Public Class frmMain
     Private Sub mnuEditRedo_Click(sender As Object, e As EventArgs) Handles mnuEditRedo.Click
         frmEditor.grdData.Redo()
     End Sub
+
+    Private Sub SummaryStatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryStatisticsToolStripMenuItem.Click
+        dlgSummaryStatistic.ShowDialog()
+    End Sub
 End Class

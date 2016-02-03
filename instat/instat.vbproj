@@ -821,6 +821,12 @@
     <Compile Include="dlgSummary.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSummaryStatistics.Designer.vb">
+      <DependentUpon>dlgSummaryStatistics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSummaryStatistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSummaryTables.designer.vb">
       <DependentUpon>dlgSummaryTables.vb</DependentUpon>
     </Compile>
@@ -2042,6 +2048,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummary.sw-KE.resx">
       <DependentUpon>dlgSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryStatistics.fr-FR.resx">
+      <DependentUpon>dlgSummaryStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryStatistics.resx">
+      <DependentUpon>dlgSummaryStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryStatistics.sw-KE.resx">
+      <DependentUpon>dlgSummaryStatistics.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryTables.fr-FR.resx">
       <DependentUpon>dlgSummaryTables.vb</DependentUpon>
