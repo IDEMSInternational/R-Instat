@@ -40,12 +40,30 @@ Public Class ucrSelector
             lstAvailableVariable.MultiSelect = True
         End If
     End Sub
-    'lstAvailableVariable.SelectedItems.Count > 0
+
     Public Sub Add()
         If (lstAvailableVariable.SelectedItems.Count > 0) Then
             CurrentReceiver.AddSelected()
             CurrentReceiver.Focus()
         End If
+    End Sub
+
+    Public Sub AddVariable(strDataFrameName As String, strVariableName As String)
+        Dim lviTemp As New ListViewItem
+        Dim j As Integer
+        lstAvailableVariable.SelectedItems.Clear()
+        lstAvailableVariable.FullRowSelect = True
+        lstAvailableVariable.HideSelection = False
+        CurrentReceiver.Clear()
+        For Each lviTemp In lstAvailableVariable.Items
+            If lviTemp.Name = strVariableName Then
+                If lviTemp.Group.Name = strDataFrameName Then
+                    lviTemp.Selected = True
+                    lstAvailableVariable.Select()
+                End If
+            End If
+        Next
+        Add()
     End Sub
 
     Public Sub Remove()

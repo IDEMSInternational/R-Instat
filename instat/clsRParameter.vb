@@ -35,10 +35,15 @@ Public Class RParameter
     End Sub
 
     Public Function ToScript(ByRef strScript As String) As String
-        If bIsFunction Then
-            Return strArgumentName & "=" & clsArgumentFunction.ToScript(strScript)
-        Else
-            Return strArgumentName & "=" & strArgumentValue
+        Dim strRet As String = ""
+        If strArgumentName <> "" Then
+            strRet = strArgumentName & "="
         End If
+        If bIsFunction Then
+            strRet = strRet & clsArgumentFunction.ToScript(strScript)
+        Else
+            strRet = strRet & strArgumentValue
+        End If
+        Return strRet
     End Function
 End Class
