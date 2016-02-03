@@ -16,14 +16,33 @@
 Imports instat.Translations
 Public Class dlgCreateClimateObject
 
-    Private Sub ucrBase_clickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.clsRLink.climateObject()
-        Me.Hide()
-    End Sub
+    Dim newdataframe As String = UcrDataFrame.Text
 
     Private Sub dlgCreateClimateObject_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.iCalltype = -1
+        frmMain.clsRLink.CreateNewClimateObject()
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$import_data")
+    End Sub
+
+    Private Sub SetDataFrameParam()
+
+        Dim clsTempFunction As New RFunction
+        Dim clsTempParameter As New RParameter
+
+        clsTempFunction.SetRCommand("list")
+        clsTempParameter.SetArgumentName(UcrDataFrame.cboAvailableDataFrames.Text)
+        clsTempParameter.SetArgumentFunction(UcrDataFrame.clsCurrDataFrame)
+        clsTempFunction.AddParameter(clsTempParameter)
+        ucrBase.clsRsyntax.AddParameter("data_tables", clsRFunctionParameter:=clsTempFunction)
+
+    End Sub
+
+    Private Sub UcrDataFrame_Load(sender As Object, e As EventArgs) Handles UcrDataFrame.Load
+        SetDataFrameParam()
+    End Sub
+
+    Private Sub UcrDataFrame_Leave(sender As Object, e As EventArgs) Handles UcrDataFrame.Leave
+        SetDataFrameParam()
     End Sub
 
 End Class
