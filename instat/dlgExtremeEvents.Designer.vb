@@ -41,7 +41,7 @@ Partial Class dlgExtremeEvents
         Me.lblEndDay = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.chkThresholdValue = New System.Windows.Forms.CheckBox()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         CType(Me.nudTotalDays, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -233,12 +233,12 @@ Partial Class dlgExtremeEvents
         Me.chkThresholdValue.Text = "CheckBox1"
         Me.chkThresholdValue.UseVisualStyleBackColor = True
         '
-        'UcrButtons1
+        'ucrBase
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(125, 384)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(410, 32)
-        Me.UcrButtons1.TabIndex = 4
+        Me.ucrBase.Location = New System.Drawing.Point(61, 362)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 4
         '
         'dlgExtremeEvents
         '
@@ -260,17 +260,17 @@ Partial Class dlgExtremeEvents
         Me.Controls.Add(Me.nudThreshold)
         Me.Controls.Add(Me.NumericUpDown7)
         Me.Controls.Add(Me.nudTotalDays)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblColumNameEventDay)
         Me.Controls.Add(Me.lblColumnNameExtremeEvent)
         Me.Controls.Add(Me.txtColumnNameEventDay)
         Me.Controls.Add(Me.txtColumNameExtremeEvent)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExtremeEvents"
         Me.Tag = "Extreme_Events"
-        Me.Text = "dlgExtremeEvents"
+        Me.Text = "Extreme Events"
         CType(Me.nudTotalDays, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).EndInit()
@@ -285,7 +285,7 @@ Partial Class dlgExtremeEvents
     Friend WithEvents txtColumnNameEventDay As TextBox
     Friend WithEvents lblColumnNameExtremeEvent As Label
     Friend WithEvents lblColumNameEventDay As Label
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents chkRemoveNA As CheckBox
     Friend WithEvents chkExtremeMax As CheckBox
     Friend WithEvents chkExtremeMin As CheckBox

@@ -32,14 +32,14 @@ Partial Class dlgName
         '
         'ucrAddRemove
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(4, 12)
+        Me.ucrAddRemove.Location = New System.Drawing.Point(4, 5)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
         Me.ucrAddRemove.TabIndex = 0
         '
         'ucrSingle
         '
-        Me.ucrSingle.Location = New System.Drawing.Point(213, 12)
+        Me.ucrSingle.Location = New System.Drawing.Point(283, 23)
         Me.ucrSingle.Name = "ucrSingle"
         Me.ucrSingle.Size = New System.Drawing.Size(106, 26)
         Me.ucrSingle.TabIndex = 1
@@ -47,14 +47,14 @@ Partial Class dlgName
         'ucrMultiple
         '
         Me.ucrMultiple.Enabled = False
-        Me.ucrMultiple.Location = New System.Drawing.Point(213, 14)
+        Me.ucrMultiple.Location = New System.Drawing.Point(277, 23)
         Me.ucrMultiple.Name = "ucrMultiple"
-        Me.ucrMultiple.Size = New System.Drawing.Size(121, 128)
+        Me.ucrMultiple.Size = New System.Drawing.Size(121, 84)
         Me.ucrMultiple.TabIndex = 2
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(340, 36)
+        Me.txtName.Location = New System.Drawing.Point(293, 132)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(100, 20)
         Me.txtName.TabIndex = 3
@@ -62,7 +62,7 @@ Partial Class dlgName
         'lblName
         '
         Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(341, 12)
+        Me.lblName.Location = New System.Drawing.Point(236, 135)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(35, 13)
         Me.lblName.TabIndex = 4
@@ -72,16 +72,16 @@ Partial Class dlgName
         'ucrBase
         '
         Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ucrBase.Location = New System.Drawing.Point(0, 178)
+        Me.ucrBase.Location = New System.Drawing.Point(0, 176)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(450, 59)
+        Me.ucrBase.Size = New System.Drawing.Size(407, 59)
         Me.ucrBase.TabIndex = 5
         '
         'dlgName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(450, 237)
+        Me.ClientSize = New System.Drawing.Size(407, 235)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.txtName)
