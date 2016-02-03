@@ -22,22 +22,22 @@ Partial Class dlgHeatSum
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrButtons = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'ucrButtons
+        'ucrBase
         '
-        Me.ucrButtons.Location = New System.Drawing.Point(3, 265)
-        Me.ucrButtons.Name = "ucrButtons"
-        Me.ucrButtons.Size = New System.Drawing.Size(410, 32)
-        Me.ucrButtons.TabIndex = 0
+        Me.ucrBase.Location = New System.Drawing.Point(3, 243)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgHeatSum
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(409, 300)
-        Me.Controls.Add(Me.ucrButtons)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgHeatSum"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -47,5 +47,5 @@ Partial Class dlgHeatSum
 
     End Sub
 
-    Friend WithEvents ucrButtons As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
 End Class
