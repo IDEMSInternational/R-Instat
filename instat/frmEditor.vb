@@ -18,8 +18,11 @@ Imports System.IO
 Imports System.Globalization
 Imports System.Threading
 Imports instat.Translations
+Imports unvell.ReoGrid.Events
+
 Public Class frmEditor
     Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
+    Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Public strf As String
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsGrids.SetData(grdData)
@@ -193,9 +196,6 @@ Public Class frmEditor
         End Try
     End Sub
 
-    Private Sub resetAllPageBreaksToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles resetAllPageBreaksToolStripMenuItem1.Click
-
-    End Sub
 
     Private Sub insertSheet_Click(sender As Object, e As EventArgs) Handles insertSheet.Click
         grdData.InsertWorksheet(grdData.GetWorksheetIndex(grdData.CurrentWorksheet), grdData.CreateWorksheet())
@@ -206,6 +206,16 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
-        dlgcolrowname.ShowDialog()
+        'dlgName.setWorksheet(grdData.CurrentWorksheet.Name, (grdData.CurrentWorksheet.ColumnHeaders(grdData.CurrentWorksheet.SelectionRange.Col)).[Text])
+        dlgName.ShowDialog()
+    End Sub
+
+    Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged, Me.Load, grdData.WorksheetInserted
+        grdCurrSheet = grdData.CurrentWorksheet
+    End Sub
+
+    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
+        strf = frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_name = " & Chr(34) & grdData.CurrentWorksheet.GetColumnHeader(grdData.CurrentWorksheet.SelectionRange.Col).Text & Chr(34) & ",index=" & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",new_value=" & Chr(34) & e.NewData & Chr(34) & ")"
+        frmMain.clsRLink.clsEngine.Evaluate(strf)
     End Sub
 End Class
