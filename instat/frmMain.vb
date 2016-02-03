@@ -361,8 +361,8 @@ Public Class frmMain
         dlgRandomSample.ShowDialog()
     End Sub
 
-    Private Sub DisplayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataView.Click
-        dlgDisplay.ShowDialog()
+    Private Sub ViewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataView.Click
+        dlgView.ShowDialog()
     End Sub
 
     Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs)
