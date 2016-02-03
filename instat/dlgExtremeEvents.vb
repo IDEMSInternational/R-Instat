@@ -1,7 +1,7 @@
 ﻿
 Imports instat.Translations
 Public Class dlgExtremeEvents
-    Private Sub ucrBase_clickOk(sender As Object, e As EventArgs) Handles UcrButtons1.ClickOk
+    Private Sub ucrBase_clickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strScript As String
         strScript = "climate_obj$extreme_events(data_list=list()"
         strScript = strScript & ", start_day=" & nudStartDay.Value.ToString()
@@ -38,7 +38,7 @@ Public Class dlgExtremeEvents
         lblThreshold.Visible = chkThresholdValue.Checked
     End Sub
 
-    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles UcrButtons1.Load
+    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
 
     End Sub
 
