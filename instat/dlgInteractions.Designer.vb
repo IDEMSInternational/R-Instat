@@ -95,9 +95,9 @@ Partial Class dlgInteractions
         'ucrBase
         '
         Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ucrBase.Location = New System.Drawing.Point(0, 300)
+        Me.ucrBase.Location = New System.Drawing.Point(0, 304)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(404, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(404, 50)
         Me.ucrBase.TabIndex = 17
         '
         'btnAdd
@@ -185,7 +185,7 @@ Partial Class dlgInteractions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(404, 332)
+        Me.ClientSize = New System.Drawing.Size(404, 354)
         Me.Controls.Add(Me.lblToImplement)
         Me.Controls.Add(Me.cboAvailableLabels)
         Me.Controls.Add(Me.chkUseExitingFactorLevelCombinations)

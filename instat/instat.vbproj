@@ -1896,6 +1896,15 @@
     <EmbeddedResource Include="dlgReplace.sw-KE.resx">
       <DependentUpon>dlgReplace.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRowStats.fr-FR.resx">
+      <DependentUpon>dlgRowStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRowStats.resx">
+      <DependentUpon>dlgRowStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRowStats.sw-KE.resx">
+      <DependentUpon>dlgRowStats.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSaveAs.fr-FR.resx">
       <DependentUpon>dlgSaveAs.vb</DependentUpon>
     </EmbeddedResource>
