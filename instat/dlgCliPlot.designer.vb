@@ -66,9 +66,9 @@ Partial Class dlgCliPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(82, 344)
+        Me.ucrBase.Location = New System.Drawing.Point(82, 323)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
         'Label1
@@ -439,7 +439,7 @@ Partial Class dlgCliPlot
         Me.Controls.Add(Me.chkByfactor)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCliPlot"

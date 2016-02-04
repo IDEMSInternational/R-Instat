@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgExtremeEvents
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgExtremeEvents
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.txtColumNameExtremeEvent = New System.Windows.Forms.TextBox()
         Me.txtColumnNameEventDay = New System.Windows.Forms.TextBox()
@@ -41,7 +41,7 @@ Partial Class dlgExtremeEvents
         Me.lblEndDay = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.chkThresholdValue = New System.Windows.Forms.CheckBox()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         CType(Me.nudTotalDays, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -233,18 +233,18 @@ Partial Class dlgExtremeEvents
         Me.chkThresholdValue.Text = "CheckBox1"
         Me.chkThresholdValue.UseVisualStyleBackColor = True
         '
-        'UcrButtons1
+        'ucrBase
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(125, 384)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(410, 32)
-        Me.UcrButtons1.TabIndex = 4
+        Me.ucrBase.Location = New System.Drawing.Point(52, 384)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
+        Me.ucrBase.TabIndex = 4
         '
         'dlgExtremeEvents
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(536, 415)
+        Me.ClientSize = New System.Drawing.Size(536, 450)
         Me.Controls.Add(Me.chkThresholdValue)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.lblEndDay)
@@ -260,7 +260,7 @@ Partial Class dlgExtremeEvents
         Me.Controls.Add(Me.nudThreshold)
         Me.Controls.Add(Me.NumericUpDown7)
         Me.Controls.Add(Me.nudTotalDays)
-        Me.Controls.Add(Me.UcrButtons1)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblColumNameEventDay)
         Me.Controls.Add(Me.lblColumnNameExtremeEvent)
         Me.Controls.Add(Me.txtColumnNameEventDay)
@@ -285,7 +285,7 @@ Partial Class dlgExtremeEvents
     Friend WithEvents txtColumnNameEventDay As TextBox
     Friend WithEvents lblColumnNameExtremeEvent As Label
     Friend WithEvents lblColumNameEventDay As Label
-    Friend WithEvents UcrButtons1 As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents chkRemoveNA As CheckBox
     Friend WithEvents chkExtremeMax As CheckBox
     Friend WithEvents chkExtremeMin As CheckBox
