@@ -23,7 +23,6 @@ Partial Class dlgRowStats
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverRowStatistics = New instat.ucrReceiverMultiple()
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.ucrNewColumnName = New instat.ucrNewColumnName()
@@ -34,34 +33,28 @@ Partial Class dlgRowStats
         Me.rdoMean = New System.Windows.Forms.RadioButton()
         Me.rdoStandardDeviation = New System.Windows.Forms.RadioButton()
         Me.rdoSum = New System.Windows.Forms.RadioButton()
+        Me.ucrSelectorDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpStatistic.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 297)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 309)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 60)
         Me.ucrBase.TabIndex = 6
         '
-        'ucrSelectorDataFrame
-        '
-        Me.ucrSelectorDataFrame.Location = New System.Drawing.Point(12, 12)
-        Me.ucrSelectorDataFrame.Name = "ucrSelectorDataFrame"
-        Me.ucrSelectorDataFrame.Size = New System.Drawing.Size(242, 166)
-        Me.ucrSelectorDataFrame.TabIndex = 17
-        '
         'ucrReceiverRowStatistics
         '
-        Me.ucrReceiverRowStatistics.Location = New System.Drawing.Point(273, 28)
+        Me.ucrReceiverRowStatistics.Location = New System.Drawing.Point(272, 85)
         Me.ucrReceiverRowStatistics.Name = "ucrReceiverRowStatistics"
-        Me.ucrReceiverRowStatistics.Size = New System.Drawing.Size(121, 128)
+        Me.ucrReceiverRowStatistics.Size = New System.Drawing.Size(121, 106)
         Me.ucrReceiverRowStatistics.TabIndex = 18
         '
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(270, 12)
+        Me.lblSelected.Location = New System.Drawing.Point(269, 69)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
         Me.lblSelected.TabIndex = 19
@@ -70,7 +63,7 @@ Partial Class dlgRowStats
         '
         'ucrNewColumnName
         '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(13, 256)
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(12, 268)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
         Me.ucrNewColumnName.Size = New System.Drawing.Size(367, 35)
         Me.ucrNewColumnName.TabIndex = 20
@@ -83,7 +76,7 @@ Partial Class dlgRowStats
         Me.grpStatistic.Controls.Add(Me.rdoMean)
         Me.grpStatistic.Controls.Add(Me.rdoStandardDeviation)
         Me.grpStatistic.Controls.Add(Me.rdoSum)
-        Me.grpStatistic.Location = New System.Drawing.Point(13, 185)
+        Me.grpStatistic.Location = New System.Drawing.Point(12, 197)
         Me.grpStatistic.Name = "grpStatistic"
         Me.grpStatistic.Size = New System.Drawing.Size(381, 65)
         Me.grpStatistic.TabIndex = 21
@@ -163,16 +156,23 @@ Partial Class dlgRowStats
         Me.rdoSum.Text = "Sum"
         Me.rdoSum.UseVisualStyleBackColor = True
         '
+        'ucrSelectorDataFrame
+        '
+        Me.ucrSelectorDataFrame.Location = New System.Drawing.Point(12, 12)
+        Me.ucrSelectorDataFrame.Name = "ucrSelectorDataFrame"
+        Me.ucrSelectorDataFrame.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorDataFrame.TabIndex = 22
+        '
         'dlgRowStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(462, 368)
+        Me.ClientSize = New System.Drawing.Size(462, 377)
+        Me.Controls.Add(Me.ucrSelectorDataFrame)
         Me.Controls.Add(Me.grpStatistic)
         Me.Controls.Add(Me.ucrNewColumnName)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrReceiverRowStatistics)
-        Me.Controls.Add(Me.ucrSelectorDataFrame)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgRowStats"
@@ -187,7 +187,6 @@ Partial Class dlgRowStats
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSelectorDataFrame As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRowStatistics As ucrReceiverMultiple
     Friend WithEvents lblSelected As Label
     Friend WithEvents ucrNewColumnName As ucrNewColumnName
@@ -198,4 +197,5 @@ Partial Class dlgRowStats
     Friend WithEvents rdoMean As RadioButton
     Friend WithEvents rdoStandardDeviation As RadioButton
     Friend WithEvents rdoSum As RadioButton
+    Friend WithEvents ucrSelectorDataFrame As ucrSelectorByDataFrameAddRemove
 End Class
