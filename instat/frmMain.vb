@@ -92,7 +92,7 @@ Public Class frmMain
         dlgCalculator.ShowDialog()
     End Sub
 
-    Private Sub mnuBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuBoxPlot.Click
+    Private Sub mnuGraphicsBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBoxPlot.Click
         dlgBoxplot.ShowDialog()
     End Sub
 
@@ -116,7 +116,7 @@ Public Class frmMain
         dlgHistogram.ShowDialog()
     End Sub
 
-    Private Sub StemAndLeafToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StemAndLeafToolStripMenuItem.Click
+    Private Sub StemAndLeafToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsStemAndLeaf.Click
         dlgStemAndLeaf.ShowDialog()
     End Sub
 
