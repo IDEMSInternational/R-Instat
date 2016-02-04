@@ -13,12 +13,16 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
-Public Class dlgHistogramMethod
-    Private Sub dlgHistogramMethod_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class dlgView
+    Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("climate_obj$histogram")
-        ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.clsRsyntax.SetFunction("view")
+        ucrReceiverView.Selector = ucrSelectorDataFrame
+        ucrReceiverView.SetMeAsReceiver()
+
+    End Sub
+    Private Sub ucrReceiverView_Leave(sender As Object, e As EventArgs) Handles ucrReceiverView.Leave
+        ucrBase.clsRsyntax.AddParameter("X", ucrReceiverView.GetVariableNames())
     End Sub
 End Class
