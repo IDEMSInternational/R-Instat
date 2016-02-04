@@ -42,9 +42,9 @@ Partial Class dlgBoxplotCountVariable
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 234)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 244)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 55)
         Me.ucrBase.TabIndex = 0
         '
         'chkVarwidth
@@ -171,7 +171,7 @@ Partial Class dlgBoxplotCountVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(441, 262)
+        Me.ClientSize = New System.Drawing.Size(441, 297)
         Me.Controls.Add(Me.txtWhiskerColour)
         Me.Controls.Add(Me.txtVariableLabel)
         Me.Controls.Add(Me.txtTitle)
@@ -187,7 +187,7 @@ Partial Class dlgBoxplotCountVariable
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.chkVarwidth)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgBoxplotCountVariable"

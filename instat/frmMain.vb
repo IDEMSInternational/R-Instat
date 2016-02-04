@@ -84,7 +84,7 @@ Public Class frmMain
         dlgStartofRains.ShowDialog()
     End Sub
 
-    Private Sub RegularSequenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegularSequenceToolStripMenuItem.Click
+    Private Sub RegularSequenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataRegularSequence.Click
         dlgRegularSequence.ShowDialog()
     End Sub
 
@@ -273,7 +273,7 @@ Public Class frmMain
         dlgRegressionSimple.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
+    Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateSort.Click
         dlgSort.ShowDialog()
     End Sub
 
@@ -317,19 +317,19 @@ Public Class frmMain
         dlgGammaDistr.ShowDialog()
     End Sub
 
-    Private Sub DuplicatecopyColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicatecopyColumnsToolStripMenuItem.Click
+    Private Sub DuplicatecopyColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
-    Private Sub TransformToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransformToolStripMenuItem.Click
+    Private Sub TransformToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTransform.Click
         dlgTransform.ShowDialog()
     End Sub
 
-    Private Sub InteractionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InteractionsToolStripMenuItem.Click
+    Private Sub InteractionsToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgIndicatorVariable.ShowDialog()
     End Sub
 
-    Private Sub PolynomialsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PolynomialsToolStripMenuItem.Click
+    Private Sub PolynomialsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageManipulatePolynomials.Click
         dlgPolynomials.ShowDialog()
     End Sub
 
@@ -337,11 +337,11 @@ Public Class frmMain
         dlgExtremes.ShowDialog()
     End Sub
 
-    Private Sub StacksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StacksToolStripMenuItem.Click
+    Private Sub StacksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeStack.Click
         dlgStack.ShowDialog()
     End Sub
 
-    Private Sub UnstackToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnstackToolStripMenuItem.Click
+    Private Sub UnstackToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeUnstack.Click
         dlgUnstack.ShowDialog()
     End Sub
 
@@ -349,63 +349,61 @@ Public Class frmMain
         dlgChiSquareTest.ShowDialog()
     End Sub
 
-    Private Sub RecodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecodeToolStripMenuItem.Click
+    Private Sub RecodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRecode.Click
         dlgRecode.ShowDialog()
     End Sub
 
-    Private Sub EnterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnterToolStripMenuItem.Click
+    Private Sub EnterToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgChangeType.ShowDialog()
     End Sub
 
-    Private Sub RandomSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RandomSamplesToolStripMenuItem.Click
+    Private Sub RandomSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataRandomSamples.Click
         dlgRandomSample.ShowDialog()
     End Sub
 
-    Private Sub DisplayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayToolStripMenuItem.Click
-        dlgDisplay.ShowDialog()
+    Private Sub ViewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataView.Click
+        'dlgView.ShowDialog()
     End Sub
 
-    Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearRemoveToolStripMenuItem.Click
+    Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgDeleteColumns.ShowDialog()
     End Sub
 
-    Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectToolStripMenuItem.Click
+    Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeSelect.Click
         dlgSelect.ShowDialog()
     End Sub
 
-    Private Sub SelectSndStackToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectSndStackToolStripMenuItem.Click
+    Private Sub SelectSndStackToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgSelectAndStuck.ShowDialog()
     End Sub
 
-    Private Sub ExpandToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExpandToolStripMenuItem.Click
+    Private Sub ExpandToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgExpand.ShowDialog()
     End Sub
 
-    Private Sub FactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FactorToolStripMenuItem.Click
+    Private Sub FactorToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgfactor.ShowDialog()
     End Sub
 
-    Private Sub NameToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NameToolStripMenuItem.Click
+    Private Sub NameToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgName.ShowDialog()
     End Sub
 
-    Private Sub FormatCtrlDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormatCtrlDToolStripMenuItem.Click
+    Private Sub FormatCtrlDToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgFormat.ShowDialog()
     End Sub
 
-    Private Sub AlignmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlignmentToolStripMenuItem.Click
+    Private Sub AlignmentToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgAlignment.ShowDialog()
     End Sub
 
-    Private Sub IndicatorVariablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IndicatorVariablesToolStripMenuItem.Click
-        dlgIndicatorVariable.ShowDialog()
-    End Sub
 
-    Private Sub FactorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles FactorToolStripMenuItem1.Click
+
+    Private Sub FactorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuManageFactor.Click
         dlgfactor.ShowDialog()
     End Sub
 
-    Private Sub DeleteRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteRowsToolStripMenuItem.Click
+    Private Sub DeleteRowsToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgDeleteRows.ShowDialog()
     End Sub
 
@@ -558,7 +556,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SpellLengthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SpellLengthToolStripMenuItem.Click
-        dlgSpellLength.ShowDialog()
+        'dlgSpellLength.ShowDialog()
     End Sub
 
     Private Sub TotalsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TotalsToolStripMenuItem.Click
@@ -666,15 +664,15 @@ Public Class frmMain
         'clsGrids.UpdateGrids()
     End Sub
 
-    Private Sub mnuManageDataSubset_Click(sender As Object, e As EventArgs) Handles mnuManageSubset.Click
+    Private Sub mnuManageDataSubset_Click(sender As Object, e As EventArgs)
         dlgSubset.ShowDialog()
     End Sub
 
-    Private Sub mnuManageReshapeSubset_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeSubset.Click
+    Private Sub mnuManageReshapeSubset_Click(sender As Object, e As EventArgs) Handles mnuManageReshape.Click
         dlgSubset.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataMerge_Click(sender As Object, e As EventArgs) Handles mnuManageDataMerge.Click
+    Private Sub mnuManageDataMerge_Click(sender As Object, e As EventArgs) Handles mnuManageDataName.Click
         dlgMerge.ShowDialog()
     End Sub
 
@@ -710,7 +708,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub SubsetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SubsetToolStripMenuItem.Click
+    Private Sub SubsetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeMerge.Click
         dlgSubset.ShowDialog()
     End Sub
 
