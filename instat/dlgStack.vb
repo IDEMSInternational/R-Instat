@@ -15,41 +15,42 @@
 
 Imports instat.Translations
 Public Class dlgStack
-    Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Set receiver/selector options
-        ucrIDVariablesReceiver.Visible = False
-        ucrReceiverColumnsToBeStack.Selector = ucrDataFrameAddRemove
+    Private Sub stackDefaultSettings()
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+        ucrIDVariablesReceiver.Visible = False
+        txtStackDataInto.Text = "Value"
+        txtFactorInto.Text = "Variable"
+        autoTranslate(Me)
+
+    End Sub
+    Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        stackDefaultSettings()
+
+        'Set receiver/selector options
+        ucrReceiverColumnsToBeStack.Selector = ucrDataFrameAddRemove
         ucrIDVariablesReceiver.Selector = ucrDataFrameAddRemove
 
         'Set function parameters/settings
         ucrBase.clsRsyntax.SetFunction("melt")
-
-        txtFactorInto.Text = "Variable"
         ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtFactorInto.Text & Chr(34))
 
-        txtStackDataInto.Text = "Value"
-        ucrBase.clsRsyntax.AddParameter("value.name", Chr(34) & txtStackDataInto.Text & Chr(34))
 
+        ucrBase.clsRsyntax.AddParameter("value.name", Chr(34) & txtStackDataInto.Text & Chr(34))
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrDataFrameAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
 
         ucrNewDataFrameName.txtValidation.Text = ucrDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked"
         ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.txtValidation.Text, strTempDataframe:=ucrNewDataFrameName.txtValidation.Text)
 
-        autoTranslate(Me)
     End Sub
 
     Private Sub chkIDVariables_CheckedChanged(sender As Object, e As EventArgs) Handles chkIDVariables.CheckedChanged
         If chkIDVariables.Checked = True Then
             ucrIDVariablesReceiver.Visible = True
             ucrIDVariablesReceiver.Focus()
+            ucrIDVariablesReceiver.SetMeAsReceiver()
         Else
             ucrIDVariablesReceiver.Visible = False
         End If
-    End Sub
-
-    Private Sub ucrIDVariablesReceiver_Enter(sender As Object, e As EventArgs) Handles ucrIDVariablesReceiver.Enter
-        ucrIDVariablesReceiver.SetMeAsReceiver()
     End Sub
 
     Private Sub ucrReceiverColumnsToBeStack_Leave(sender As Object, e As EventArgs) Handles ucrReceiverColumnsToBeStack.Leave
@@ -75,5 +76,17 @@ Public Class dlgStack
         If Not ucrNewDataFrameName.bUserTyped Then
             ucrNewDataFrameName.txtValidation.Text = ucrDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked"
         End If
+    End Sub
+
+    Private Sub chkIDVariables_KeyPress(sender As Object, e As KeyPressEventArgs) Handles chkIDVariables.KeyPress
+        If chkIDVariables.Checked = True And e.KeyChar = vbCr Then
+            chkIDVariables.Checked = False
+        Else
+            chkIDVariables.Checked = True
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        stackDefaultSettings()
     End Sub
 End Class
