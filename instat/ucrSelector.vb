@@ -50,7 +50,7 @@ Public Class ucrSelector
 
     Public Sub AddVariable(strDataFrameName As String, strVariableName As String)
         Dim lviTemp As New ListViewItem
-        Dim j As Integer
+
         lstAvailableVariable.SelectedItems.Clear()
         lstAvailableVariable.FullRowSelect = True
         lstAvailableVariable.HideSelection = False
