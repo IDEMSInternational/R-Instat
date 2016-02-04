@@ -15,7 +15,7 @@ Public Class dlgStartofRains
         End If
         strScript = strScript & ", col_name=" & Chr(34) & txtColumnName.Text & Chr(34)
         strScript = strScript & ",replace=TRUE)"
-        frmMain.clsRLink.climateObject()
+
         frmMain.clsRLink.RunScript(strScript, False)
         'TODO fix this to update grids instead of calling FillData which no longer exists
         '        frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
