@@ -869,6 +869,12 @@
     <Compile Include="dlgUnstackDailyData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgView.Designer.vb">
+      <DependentUpon>dlgView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgWaterBalance.Designer.vb">
       <DependentUpon>dlgWaterBalance.vb</DependentUpon>
     </Compile>
@@ -2090,6 +2096,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnstackDailyData.sw-KE.resx">
       <DependentUpon>dlgUnstackDailyData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgView.fr-FR.resx">
+      <DependentUpon>dlgView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgView.resx">
+      <DependentUpon>dlgView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgView.sw-KE.resx">
+      <DependentUpon>dlgView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWaterBalance.fr-FR.resx">
       <DependentUpon>dlgWaterBalance.vb</DependentUpon>
