@@ -362,7 +362,7 @@ Public Class frmMain
     End Sub
 
     Private Sub ViewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataView.Click
-        dlgView.ShowDialog()
+        'dlgView.ShowDialog()
     End Sub
 
     Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -556,7 +556,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SpellLengthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SpellLengthToolStripMenuItem.Click
-        dlgSpellLength.ShowDialog()
+        'dlgSpellLength.ShowDialog()
     End Sub
 
     Private Sub TotalsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TotalsToolStripMenuItem.Click
