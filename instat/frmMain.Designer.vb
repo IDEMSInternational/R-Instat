@@ -585,28 +585,28 @@ Partial Class frmMain
         'mnuGraphicsGraphcsOptionsLayers
         '
         Me.mnuGraphicsGraphcsOptionsLayers.Name = "mnuGraphicsGraphcsOptionsLayers"
-        Me.mnuGraphicsGraphcsOptionsLayers.Size = New System.Drawing.Size(116, 22)
+        Me.mnuGraphicsGraphcsOptionsLayers.Size = New System.Drawing.Size(152, 22)
         Me.mnuGraphicsGraphcsOptionsLayers.Tag = "Layers"
         Me.mnuGraphicsGraphcsOptionsLayers.Text = "Layers"
         '
         'mnuGraphicsGraphcsOptionsAxes
         '
         Me.mnuGraphicsGraphcsOptionsAxes.Name = "mnuGraphicsGraphcsOptionsAxes"
-        Me.mnuGraphicsGraphcsOptionsAxes.Size = New System.Drawing.Size(116, 22)
+        Me.mnuGraphicsGraphcsOptionsAxes.Size = New System.Drawing.Size(152, 22)
         Me.mnuGraphicsGraphcsOptionsAxes.Tag = "Axes"
         Me.mnuGraphicsGraphcsOptionsAxes.Text = "Axes"
         '
         'mnuGraphicsGraphcsOptionsThemes
         '
         Me.mnuGraphicsGraphcsOptionsThemes.Name = "mnuGraphicsGraphcsOptionsThemes"
-        Me.mnuGraphicsGraphcsOptionsThemes.Size = New System.Drawing.Size(116, 22)
+        Me.mnuGraphicsGraphcsOptionsThemes.Size = New System.Drawing.Size(152, 22)
         Me.mnuGraphicsGraphcsOptionsThemes.Tag = "Themes"
         Me.mnuGraphicsGraphcsOptionsThemes.Text = "Themes"
         '
         'mnuGraphicsGraphcsOptionsFacets
         '
         Me.mnuGraphicsGraphcsOptionsFacets.Name = "mnuGraphicsGraphcsOptionsFacets"
-        Me.mnuGraphicsGraphcsOptionsFacets.Size = New System.Drawing.Size(116, 22)
+        Me.mnuGraphicsGraphcsOptionsFacets.Size = New System.Drawing.Size(152, 22)
         Me.mnuGraphicsGraphcsOptionsFacets.Tag = "Facets"
         Me.mnuGraphicsGraphcsOptionsFacets.Text = "Facets"
         '
@@ -1130,7 +1130,7 @@ Partial Class frmMain
         '
         Me.mnuFIleExit.Name = "mnuFIleExit"
         Me.mnuFIleExit.Size = New System.Drawing.Size(204, 22)
-        Me.mnuFIleExit.Tag = "Exit_"
+        Me.mnuFIleExit.Tag = "Exit"
         Me.mnuFIleExit.Text = "Exit"
         '
         'mnuEdit
@@ -1155,6 +1155,7 @@ Partial Class frmMain
         Me.mnuEditRedo.Name = "mnuEditRedo"
         Me.mnuEditRedo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
         Me.mnuEditRedo.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditRedo.Tag = "Redo"
         Me.mnuEditRedo.Text = "Redo"
         '
         'mnuEditCut
