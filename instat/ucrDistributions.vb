@@ -197,9 +197,8 @@ Public Class ucrDistributions
         clsVonnMises.strPFunctionName = "pvonmises"
         clsVonnMises.strQFunctionName = "qvonmises"
         clsVonnMises.strDFunctionName = "dvonmises"
-        clsVonnMises.strGLMFunctionName = "gvonmises"
-        clsVonnMises.AddParameter("mean", "Mean")
-        clsVonnMises.AddParameter("kappa", "Kappa")
+        clsVonnMises.AddParameter("mean", "Mean", "pi")
+        clsVonnMises.AddParameter("kappa", "Kappa", 0)
         lstAllDistributions.Add(clsVonnMises)
 
         bDistributionsSet = True
