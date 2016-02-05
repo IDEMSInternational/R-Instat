@@ -1126,4 +1126,13 @@
   <data name="View_data" xml:space="preserve">
     <value>View data</value>
   </data>
+  <data name="Kappa" xml:space="preserve">
+    <value>Kappa</value>
+  </data>
+  <data name="vonmises" xml:space="preserve">
+    <value>vonmises</value>
+  </data>
+  <data name="von_mises" xml:space="preserve">
+    <value>von mises</value>
+  </data>
 </root>
