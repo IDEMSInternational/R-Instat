@@ -23,7 +23,7 @@ Partial Class dlgView
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrSelectorDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.UcrBase = New instat.ucrButtons()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.grpSelectedRows = New System.Windows.Forms.GroupBox()
@@ -41,12 +41,12 @@ Partial Class dlgView
         Me.ucrSelectorDataFrame.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorDataFrame.TabIndex = 0
         '
-        'UcrBase
+        'ucrBase
         '
-        Me.UcrBase.Location = New System.Drawing.Point(13, 269)
-        Me.UcrBase.Name = "UcrBase"
-        Me.UcrBase.Size = New System.Drawing.Size(401, 53)
-        Me.UcrBase.TabIndex = 1
+        Me.ucrBase.Location = New System.Drawing.Point(13, 269)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(401, 53)
+        Me.ucrBase.TabIndex = 1
         '
         'ucrReceiverView
         '
@@ -125,7 +125,7 @@ Partial Class dlgView
         Me.Controls.Add(Me.grpSelectedRows)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrReceiverView)
-        Me.Controls.Add(Me.UcrBase)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorDataFrame)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgView"
@@ -140,7 +140,7 @@ Partial Class dlgView
     End Sub
 
     Friend WithEvents ucrSelectorDataFrame As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents UcrBase As ucrButtons
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverView As ucrReceiverMultiple
     Friend WithEvents lblSelected As Label
     Friend WithEvents grpSelectedRows As GroupBox
