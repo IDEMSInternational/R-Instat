@@ -689,6 +689,12 @@
     <Compile Include="dlgRegularSequence.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReorder.Designer.vb">
+      <DependentUpon>dlgReorder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReorder.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgReplace.Designer.vb">
       <DependentUpon>dlgReplace.vb</DependentUpon>
     </Compile>
@@ -1871,6 +1877,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.sw-KE.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorder.fr-FR.resx">
+      <DependentUpon>dlgReorder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorder.resx">
+      <DependentUpon>dlgReorder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorder.sw-KE.resx">
+      <DependentUpon>dlgReorder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReplace.fr-FR.resx">
       <DependentUpon>dlgReplace.vb</DependentUpon>
