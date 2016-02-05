@@ -192,7 +192,7 @@ Public Class ucrDistributions
 
 
         ' von mises distribution
-        clsVonnMises.strNameTag = "vonmises"
+        clsVonnMises.strNameTag = "von_mises"
         clsVonnMises.strRFunctionName = "rvonmises"
         clsVonnMises.strPFunctionName = "pvonmises"
         clsVonnMises.strQFunctionName = "qvonmises"
