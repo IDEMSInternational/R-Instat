@@ -719,6 +719,12 @@
     <Compile Include="dlgRegularSequence.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRemoveUnusedLabels.Designer.vb">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRemoveUnusedLabels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgReorder.Designer.vb">
       <DependentUpon>dlgReorder.vb</DependentUpon>
     </Compile>
@@ -1958,6 +1964,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.sw-KE.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRemoveUnusedLabels.fr-FR.resx">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRemoveUnusedLabels.resx">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRemoveUnusedLabels.sw-KE.resx">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorder.fr-FR.resx">
       <DependentUpon>dlgReorder.vb</DependentUpon>
