@@ -1287,6 +1287,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Kappa.
+        '''</summary>
+        Friend ReadOnly Property Kappa() As String
+            Get
+                Return ResourceManager.GetString("Kappa", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Label.
         '''</summary>
         Friend ReadOnly Property Label() As String
@@ -2942,6 +2951,24 @@ Namespace My.Resources
         Friend ReadOnly Property View_Edit_Text() As String
             Get
                 Return ResourceManager.GetString("View_Edit_Text", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to von mises.
+        '''</summary>
+        Friend ReadOnly Property von_mises() As String
+            Get
+                Return ResourceManager.GetString("von_mises", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to vonmises.
+        '''</summary>
+        Friend ReadOnly Property vonmises() As String
+            Get
+                Return ResourceManager.GetString("vonmises", resourceCulture)
             End Get
         End Property
         
