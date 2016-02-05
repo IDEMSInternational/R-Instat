@@ -17,28 +17,28 @@ Imports instat.Translations
 Public Class dlgView
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        UcrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverView.Selector = ucrSelectorDataFrame
         ucrReceiverView.SetMeAsReceiver()
     End Sub
     Private Sub ucrReceiverView_Leave(sender As Object, e As EventArgs) Handles ucrReceiverView.Leave
-        UcrBase.clsRsyntax.AddParameter("X", ucrReceiverView.GetVariableNames())
+        ucrBase.clsRsyntax.AddParameter("X", ucrReceiverView.GetVariableNames())
 
     End Sub
 
     Private Sub txtTop_leave(sender As Object, e As EventArgs) Handles txtTop.Leave
-        UcrBase.clsRsyntax.AddParameter("n", txtTop.Text)
+        ucrBase.clsRsyntax.AddParameter("n", txtTop.Text)
     End Sub
 
     Private Sub txtBottom_leave(sender As Object, e As EventArgs) Handles txtBottom.Leave
-        UcrBase.clsRsyntax.AddParameter("n", txtBottom.Text)
+        ucrBase.clsRsyntax.AddParameter("n", txtBottom.Text)
     End Sub
 
     Private Sub rdoTop_click(sender As Object, e As EventArgs) Handles rdoTop.Click
-        UcrBase.clsRsyntax.SetFunction("head")
+        ucrBase.clsRsyntax.SetFunction("head")
     End Sub
 
     Private Sub rdoBottom_click(sender As Object, e As EventArgs) Handles rdoBottom.Click
-        UcrBase.clsRsyntax.SetFunction("tail")
+        ucrBase.clsRsyntax.SetFunction("tail")
     End Sub
 End Class
