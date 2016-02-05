@@ -233,10 +233,22 @@
     <Compile Include="dlgColumnStats.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgControlOptions.Designer.vb">
+      <DependentUpon>dlgControlOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgControlOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCorrelation.designer.vb">
       <DependentUpon>dlgCorrelation.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCorrelation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCounts.Designer.vb">
+      <DependentUpon>dlgCounts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCounts.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCountsTotals.Designer.vb">
@@ -491,6 +503,12 @@
     <Compile Include="dlgIsNAListvb.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgLabels.Designer.vb">
+      <DependentUpon>dlgLabels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgLabels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgLines.designer.vb">
       <DependentUpon>dlgLines.vb</DependentUpon>
     </Compile>
@@ -689,6 +707,12 @@
     <Compile Include="dlgRegularSequence.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReorder.Designer.vb">
+      <DependentUpon>dlgReorder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReorder.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgReplace.Designer.vb">
       <DependentUpon>dlgReplace.vb</DependentUpon>
     </Compile>
@@ -867,6 +891,12 @@
       <DependentUpon>dlgUnstackDailyData.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgUnstackDailyData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgView.Designer.vb">
+      <DependentUpon>dlgView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgView.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgWaterBalance.Designer.vb">
@@ -1200,6 +1230,15 @@
     <EmbeddedResource Include="dlgColumnRows.sw-KE.resx">
       <DependentUpon>dlgColumnRows.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgControlOptions.fr-FR.resx">
+      <DependentUpon>dlgControlOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgControlOptions.resx">
+      <DependentUpon>dlgControlOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgControlOptions.sw-KE.resx">
+      <DependentUpon>dlgControlOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCorrelation.fr-FR.resx">
       <DependentUpon>dlgCorrelation.vb</DependentUpon>
     </EmbeddedResource>
@@ -1208,6 +1247,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorrelation.sw-KE.resx">
       <DependentUpon>dlgCorrelation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCounts.fr-FR.resx">
+      <DependentUpon>dlgCounts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCounts.resx">
+      <DependentUpon>dlgCounts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCounts.sw-KE.resx">
+      <DependentUpon>dlgCounts.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCountsTotals.fr-FR.resx">
       <DependentUpon>dlgCountsTotals.vb</DependentUpon>
@@ -1584,6 +1632,15 @@
     <EmbeddedResource Include="dlgIsNAListvb.sw-KE.resx">
       <DependentUpon>dlgIsNAListvb.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgLabels.fr-FR.resx">
+      <DependentUpon>dlgLabels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgLabels.resx">
+      <DependentUpon>dlgLabels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgLabels.sw-KE.resx">
+      <DependentUpon>dlgLabels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgLines.fr-FR.resx">
       <DependentUpon>dlgLines.vb</DependentUpon>
     </EmbeddedResource>
@@ -1872,6 +1929,15 @@
     <EmbeddedResource Include="dlgRegularSequence.sw-KE.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorder.fr-FR.resx">
+      <DependentUpon>dlgReorder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorder.resx">
+      <DependentUpon>dlgReorder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorder.sw-KE.resx">
+      <DependentUpon>dlgReorder.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgReplace.fr-FR.resx">
       <DependentUpon>dlgReplace.vb</DependentUpon>
     </EmbeddedResource>
@@ -2090,6 +2156,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnstackDailyData.sw-KE.resx">
       <DependentUpon>dlgUnstackDailyData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgView.fr-FR.resx">
+      <DependentUpon>dlgView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgView.resx">
+      <DependentUpon>dlgView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgView.sw-KE.resx">
+      <DependentUpon>dlgView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWaterBalance.fr-FR.resx">
       <DependentUpon>dlgWaterBalance.vb</DependentUpon>
