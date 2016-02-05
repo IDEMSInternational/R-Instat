@@ -701,6 +701,12 @@
     <Compile Include="dlgRandomSample.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRank.Designer.vb">
+      <DependentUpon>dlgRank.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRank.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRecode.Designer.vb">
       <DependentUpon>dlgRecode.vb</DependentUpon>
     </Compile>
@@ -1943,6 +1949,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSample.sw-KE.resx">
       <DependentUpon>dlgRandomSample.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRank.fr-FR.resx">
+      <DependentUpon>dlgRank.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRank.resx">
+      <DependentUpon>dlgRank.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRank.sw-KE.resx">
+      <DependentUpon>dlgRank.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRecode.fr-FR.resx">
       <DependentUpon>dlgRecode.vb</DependentUpon>
