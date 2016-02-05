@@ -2955,6 +2955,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to von mises.
+        '''</summary>
+        Friend ReadOnly Property von_mises() As String
+            Get
+                Return ResourceManager.GetString("von_mises", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to vonmises.
         '''</summary>
         Friend ReadOnly Property vonmises() As String

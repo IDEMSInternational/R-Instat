@@ -1132,4 +1132,7 @@
   <data name="vonmises" xml:space="preserve">
     <value>vonmises</value>
   </data>
+  <data name="von_mises" xml:space="preserve">
+    <value>von mises</value>
+  </data>
 </root>
