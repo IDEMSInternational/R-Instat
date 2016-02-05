@@ -245,6 +245,12 @@
     <Compile Include="dlgConvertColumnsToFactors.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgConvertTo.Designer.vb">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgConvertTo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCorrelation.designer.vb">
       <DependentUpon>dlgCorrelation.vb</DependentUpon>
     </Compile>
@@ -1259,6 +1265,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgConvertColumnsToFactors.sw-KE.resx">
       <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConvertTo.fr-FR.resx">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConvertTo.resx">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConvertTo.sw-KE.resx">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorrelation.fr-FR.resx">
       <DependentUpon>dlgCorrelation.vb</DependentUpon>
