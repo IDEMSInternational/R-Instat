@@ -239,6 +239,12 @@
     <Compile Include="dlgCorrelation.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCounts.Designer.vb">
+      <DependentUpon>dlgCounts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCounts.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCountsTotals.Designer.vb">
       <DependentUpon>dlgCountsTotals.vb</DependentUpon>
     </Compile>
@@ -1208,6 +1214,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorrelation.sw-KE.resx">
       <DependentUpon>dlgCorrelation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCounts.fr-FR.resx">
+      <DependentUpon>dlgCounts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCounts.resx">
+      <DependentUpon>dlgCounts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCounts.sw-KE.resx">
+      <DependentUpon>dlgCounts.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCountsTotals.fr-FR.resx">
       <DependentUpon>dlgCountsTotals.vb</DependentUpon>
