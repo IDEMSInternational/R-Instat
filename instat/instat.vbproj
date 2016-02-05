@@ -245,6 +245,12 @@
     <Compile Include="dlgConvertColumnsToFactors.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgConvertTo.Designer.vb">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgConvertTo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCorrelation.designer.vb">
       <DependentUpon>dlgCorrelation.vb</DependentUpon>
     </Compile>
@@ -695,6 +701,12 @@
     <Compile Include="dlgRandomSample.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRank.Designer.vb">
+      <DependentUpon>dlgRank.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRank.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRecode.Designer.vb">
       <DependentUpon>dlgRecode.vb</DependentUpon>
     </Compile>
@@ -717,6 +729,12 @@
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRegularSequence.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRemoveUnusedLabels.Designer.vb">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRemoveUnusedLabels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReorder.Designer.vb">
@@ -1259,6 +1277,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgConvertColumnsToFactors.sw-KE.resx">
       <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConvertTo.fr-FR.resx">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConvertTo.resx">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConvertTo.sw-KE.resx">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorrelation.fr-FR.resx">
       <DependentUpon>dlgCorrelation.vb</DependentUpon>
@@ -1923,6 +1950,15 @@
     <EmbeddedResource Include="dlgRandomSample.sw-KE.resx">
       <DependentUpon>dlgRandomSample.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRank.fr-FR.resx">
+      <DependentUpon>dlgRank.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRank.resx">
+      <DependentUpon>dlgRank.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRank.sw-KE.resx">
+      <DependentUpon>dlgRank.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRecode.fr-FR.resx">
       <DependentUpon>dlgRecode.vb</DependentUpon>
     </EmbeddedResource>
@@ -1958,6 +1994,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.sw-KE.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRemoveUnusedLabels.fr-FR.resx">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRemoveUnusedLabels.resx">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRemoveUnusedLabels.sw-KE.resx">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorder.fr-FR.resx">
       <DependentUpon>dlgReorder.vb</DependentUpon>
