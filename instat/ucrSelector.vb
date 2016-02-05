@@ -66,6 +66,7 @@ Public Class ucrSelector
     End Sub
     Public Sub ShowOptionsDialog()
         'code for dislaying dialog goes here
+        sdgRestrict.ShowDialog()
     End Sub
     Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.DoubleClick
         Add()
