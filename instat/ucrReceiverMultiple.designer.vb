@@ -31,14 +31,14 @@ Partial Class ucrReceiverMultiple
         Me.lstSelectedVariables.Size = New System.Drawing.Size(113, 95)
         Me.lstSelectedVariables.TabIndex = 1
         Me.lstSelectedVariables.UseCompatibleStateImageBehavior = False
-        Me.lstSelectedVariables.View = System.Windows.Forms.View.Details
+        Me.lstSelectedVariables.View = System.Windows.Forms.View.List
         '
         'ucrReceiverMultiple
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.Controls.Add(Me.lstSelectedVariables)
         Me.Name = "ucrReceiverMultiple"
-        Me.Size = New System.Drawing.Size(121, 128)
+        Me.Size = New System.Drawing.Size(121, 104)
         Me.ResumeLayout(False)
 
     End Sub

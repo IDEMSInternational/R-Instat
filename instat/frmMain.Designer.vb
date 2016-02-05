@@ -51,19 +51,18 @@ Partial Class frmMain
         Me.mnuStatsNonParametricOneWayAnova = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStatsNonParametricTwoWayAnova = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ResizeWorksheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GraphicsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphics = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuGraphicsPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuBoxPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsBoxPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuGraphicsHistogram = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuGraphicsProbabilityPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuGraphisDotPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.WindroseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FrequencyChartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SummaryChartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsWindrose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsFrequencyChart = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsSummaryChart = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuGraphicsScatterplot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StemAndLeafToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LoadGraphToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsStemAndLeaf = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsLoadGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuGraphicsInventory = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatisticsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -143,7 +142,6 @@ Partial Class frmMain
         Me.StartOfTheRainsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExtremesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEndofRains = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LockUnlockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFilePrint = New System.Windows.Forms.ToolStripMenuItem()
@@ -152,6 +150,7 @@ Partial Class frmMain
         Me.mnuFIleExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEdit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditUndo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditRedo = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCut = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCopySpecial = New System.Windows.Forms.ToolStripMenuItem()
@@ -227,48 +226,44 @@ Partial Class frmMain
         Me.AddMacroToMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ModifyMacroInMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RemoveMacroFromMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ManageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManage = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCalculations = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RegularSequenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EnterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DuplicatecopyColumnsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RandomSamplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DisplayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ClearRemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DeleteRowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageSubset = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataMerge = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FactorToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ManipulateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TransformToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RecodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataSort = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataRegularSequence = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataRandomSamples = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataView = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataName = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageFactor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageFactorconvertTo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuMangeFactorLabel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageFactorReorderLevels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageFactorRecode = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageFactorReferenceLevels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageFactorInteraction = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageFactorUnusedLevels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageFactorIndicatorVariables = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageManipulate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTransform = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageManipulateRecode = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageManipulateSort = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageManipulateRowStat = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InteractionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IndicatorVariablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PolynomialsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageReshapeSubset = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StacksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UnstackToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SelectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SelectSndStackToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExpandToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SubsetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ColumnPropertiesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FactorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FormatCtrlDToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AlignmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DataFrameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OrderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InsertToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DisplayToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DataFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DeleteSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RenameSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReorderSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageManipulatePolynomials = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataFrame = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataFrameOrder = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataFrameInsert = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataFrameDelete = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataFrameDisplay = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataFrameProtectLockUnlock = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataFrameHideShow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageReshape = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageRechapeStack = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageRechapeUnstack = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageRechapeSelect = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageRechapeMerge = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataFileDeleteSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataFileRenameSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataFileReorderSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethods = New System.Windows.Forms.ToolStripMenuItem()
         Me.DataManipulationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartOfRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -307,7 +302,11 @@ Partial Class frmMain
         Me.SeasonalSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SeasonalSummaryRainToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaterBalanceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuEditRedo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsGraphicsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsGraphicsOptionsLayers = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsGraphicsOptionsAxes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsGraphicsOptionsThemes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuGraphicsGraphicsOptionsFacets = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -316,7 +315,7 @@ Partial Class frmMain
         'ToolStripSeparator12
         '
         Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
-        Me.ToolStripSeparator12.Size = New System.Drawing.Size(175, 6)
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(176, 6)
         '
         'PoissonOneSampleToolStripMenuItem
         '
@@ -357,7 +356,7 @@ Partial Class frmMain
         '
         Me.AnalysisOfVarianceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OnewayToolStripMenuItem, Me.OrthogonalToolStripMenuItem, Me.GeneralToolStripMenuItem1, Me.BivariateToolStripMenuItem})
         Me.AnalysisOfVarianceToolStripMenuItem.Name = "AnalysisOfVarianceToolStripMenuItem"
-        Me.AnalysisOfVarianceToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.AnalysisOfVarianceToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.AnalysisOfVarianceToolStripMenuItem.Tag = "Analysis_of_Variance"
         Me.AnalysisOfVarianceToolStripMenuItem.Text = "Analysis of Variance"
         '
@@ -389,7 +388,7 @@ Partial Class frmMain
         '
         Me.RegressionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatsRegressionSimple, Me.SimpleWithGroupsToolStripMenuItem, Me.mnuStatisticsRegressionMultiple, Me.GeneralLinearModelToolStripMenuItem, Me.ToolStripSeparator11, Me.CorrelationToolStripMenuItem, Me.LogLinearModelsToolStripMenuItem})
         Me.RegressionToolStripMenuItem.Name = "RegressionToolStripMenuItem"
-        Me.RegressionToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.RegressionToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.RegressionToolStripMenuItem.Tag = "Regression"
         Me.RegressionToolStripMenuItem.Text = "Regression"
         '
@@ -438,7 +437,7 @@ Partial Class frmMain
         '
         Me.SimpleModelsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OneSampleToolStripMenuItem, Me.PoissonOneSampleToolStripMenuItem, Me.ToolStripSeparator9, Me.GammaToolStripMenuItem, Me.ExtremaToolStripMenuItem, Me.ChisquareTestToolStripMenuItem, Me.GoodnessOfFitToolStripMenuItem, Me.ProbabilityDistributionsToolStripMenuItem})
         Me.SimpleModelsToolStripMenuItem.Name = "SimpleModelsToolStripMenuItem"
-        Me.SimpleModelsToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.SimpleModelsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.SimpleModelsToolStripMenuItem.Tag = "Simple_Models"
         Me.SimpleModelsToolStripMenuItem.Text = "Simple Models"
         '
@@ -458,47 +457,40 @@ Partial Class frmMain
         '
         Me.NonParametricToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OneAndTwoSamplesToolStripMenuItem, Me.mnuStatsNonParametricOneWayAnova, Me.mnuStatsNonParametricTwoWayAnova})
         Me.NonParametricToolStripMenuItem.Name = "NonParametricToolStripMenuItem"
-        Me.NonParametricToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.NonParametricToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.NonParametricToolStripMenuItem.Tag = "Non_Parametric"
         Me.NonParametricToolStripMenuItem.Text = "Non-Parametric"
         '
         'OneAndTwoSamplesToolStripMenuItem
         '
         Me.OneAndTwoSamplesToolStripMenuItem.Name = "OneAndTwoSamplesToolStripMenuItem"
-        Me.OneAndTwoSamplesToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.OneAndTwoSamplesToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.OneAndTwoSamplesToolStripMenuItem.Text = "One and Two Samples..."
         '
         'mnuStatsNonParametricOneWayAnova
         '
         Me.mnuStatsNonParametricOneWayAnova.Name = "mnuStatsNonParametricOneWayAnova"
-        Me.mnuStatsNonParametricOneWayAnova.Size = New System.Drawing.Size(200, 22)
+        Me.mnuStatsNonParametricOneWayAnova.Size = New System.Drawing.Size(201, 22)
         Me.mnuStatsNonParametricOneWayAnova.Text = "One-Way (ANOVA)"
         '
         'mnuStatsNonParametricTwoWayAnova
         '
         Me.mnuStatsNonParametricTwoWayAnova.Name = "mnuStatsNonParametricTwoWayAnova"
-        Me.mnuStatsNonParametricTwoWayAnova.Size = New System.Drawing.Size(200, 22)
+        Me.mnuStatsNonParametricTwoWayAnova.Size = New System.Drawing.Size(201, 22)
         Me.mnuStatsNonParametricTwoWayAnova.Text = "Two-Way (ANOVA)..."
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(175, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(176, 6)
         '
-        'ResizeWorksheetToolStripMenuItem
+        'mnuGraphics
         '
-        Me.ResizeWorksheetToolStripMenuItem.Name = "ResizeWorksheetToolStripMenuItem"
-        Me.ResizeWorksheetToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-        Me.ResizeWorksheetToolStripMenuItem.Tag = "Resize_Worksheet"
-        Me.ResizeWorksheetToolStripMenuItem.Text = "Resize Worksheet..."
-        '
-        'GraphicsToolStripMenuItem
-        '
-        Me.GraphicsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuGraphicsPlot, Me.mnuBoxPlot, Me.mnuGraphicsHistogram, Me.mnuGraphicsProbabilityPlot, Me.mnuGraphisDotPlot, Me.WindroseToolStripMenuItem, Me.FrequencyChartToolStripMenuItem, Me.SummaryChartToolStripMenuItem, Me.mnuGraphicsScatterplot, Me.StemAndLeafToolStripMenuItem, Me.LoadGraphToolStripMenuItem, Me.mnuGraphicsInventory})
-        Me.GraphicsToolStripMenuItem.Name = "GraphicsToolStripMenuItem"
-        Me.GraphicsToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
-        Me.GraphicsToolStripMenuItem.Tag = "Graphics"
-        Me.GraphicsToolStripMenuItem.Text = "Graphics"
+        Me.mnuGraphics.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuGraphicsPlot, Me.mnuGraphicsBoxPlot, Me.mnuGraphicsHistogram, Me.mnuGraphicsProbabilityPlot, Me.mnuGraphisDotPlot, Me.mnuGraphicsWindrose, Me.mnuGraphicsFrequencyChart, Me.mnuGraphicsSummaryChart, Me.mnuGraphicsScatterplot, Me.mnuGraphicsStemAndLeaf, Me.mnuGraphicsLoadGraph, Me.mnuGraphicsInventory, Me.mnuGraphicsGraphicsOptions})
+        Me.mnuGraphics.Name = "mnuGraphics"
+        Me.mnuGraphics.Size = New System.Drawing.Size(65, 20)
+        Me.mnuGraphics.Tag = "Graphics"
+        Me.mnuGraphics.Text = "Graphics"
         '
         'mnuGraphicsPlot
         '
@@ -507,12 +499,12 @@ Partial Class frmMain
         Me.mnuGraphicsPlot.Tag = "Plot"
         Me.mnuGraphicsPlot.Text = "Plot..."
         '
-        'mnuBoxPlot
+        'mnuGraphicsBoxPlot
         '
-        Me.mnuBoxPlot.Name = "mnuBoxPlot"
-        Me.mnuBoxPlot.Size = New System.Drawing.Size(170, 22)
-        Me.mnuBoxPlot.Tag = "Boxplot"
-        Me.mnuBoxPlot.Text = "Boxplot.."
+        Me.mnuGraphicsBoxPlot.Name = "mnuGraphicsBoxPlot"
+        Me.mnuGraphicsBoxPlot.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsBoxPlot.Tag = "Boxplot"
+        Me.mnuGraphicsBoxPlot.Text = "Boxplot.."
         '
         'mnuGraphicsHistogram
         '
@@ -535,26 +527,26 @@ Partial Class frmMain
         Me.mnuGraphisDotPlot.Tag = "Dotplot"
         Me.mnuGraphisDotPlot.Text = "Dotplot..."
         '
-        'WindroseToolStripMenuItem
+        'mnuGraphicsWindrose
         '
-        Me.WindroseToolStripMenuItem.Name = "WindroseToolStripMenuItem"
-        Me.WindroseToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.WindroseToolStripMenuItem.Tag = "Windrose"
-        Me.WindroseToolStripMenuItem.Text = "Windrose..."
+        Me.mnuGraphicsWindrose.Name = "mnuGraphicsWindrose"
+        Me.mnuGraphicsWindrose.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsWindrose.Tag = "Windrose"
+        Me.mnuGraphicsWindrose.Text = "Windrose..."
         '
-        'FrequencyChartToolStripMenuItem
+        'mnuGraphicsFrequencyChart
         '
-        Me.FrequencyChartToolStripMenuItem.Name = "FrequencyChartToolStripMenuItem"
-        Me.FrequencyChartToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.FrequencyChartToolStripMenuItem.Tag = "Frequency_Chart"
-        Me.FrequencyChartToolStripMenuItem.Text = "Frequency Chart..."
+        Me.mnuGraphicsFrequencyChart.Name = "mnuGraphicsFrequencyChart"
+        Me.mnuGraphicsFrequencyChart.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsFrequencyChart.Tag = "Frequency_Chart"
+        Me.mnuGraphicsFrequencyChart.Text = "Frequency Chart..."
         '
-        'SummaryChartToolStripMenuItem
+        'mnuGraphicsSummaryChart
         '
-        Me.SummaryChartToolStripMenuItem.Name = "SummaryChartToolStripMenuItem"
-        Me.SummaryChartToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.SummaryChartToolStripMenuItem.Tag = "Summary_Chart"
-        Me.SummaryChartToolStripMenuItem.Text = "Summary Chart..."
+        Me.mnuGraphicsSummaryChart.Name = "mnuGraphicsSummaryChart"
+        Me.mnuGraphicsSummaryChart.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsSummaryChart.Tag = "Summary_Chart"
+        Me.mnuGraphicsSummaryChart.Text = "Summary Chart..."
         '
         'mnuGraphicsScatterplot
         '
@@ -563,19 +555,19 @@ Partial Class frmMain
         Me.mnuGraphicsScatterplot.Tag = "Scatterplot"
         Me.mnuGraphicsScatterplot.Text = "Scatterplot..."
         '
-        'StemAndLeafToolStripMenuItem
+        'mnuGraphicsStemAndLeaf
         '
-        Me.StemAndLeafToolStripMenuItem.Name = "StemAndLeafToolStripMenuItem"
-        Me.StemAndLeafToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.StemAndLeafToolStripMenuItem.Tag = "Stem_and_Leaf"
-        Me.StemAndLeafToolStripMenuItem.Text = "Stem and Leaf..."
+        Me.mnuGraphicsStemAndLeaf.Name = "mnuGraphicsStemAndLeaf"
+        Me.mnuGraphicsStemAndLeaf.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsStemAndLeaf.Tag = "Stem_and_Leaf"
+        Me.mnuGraphicsStemAndLeaf.Text = "Stem and Leaf..."
         '
-        'LoadGraphToolStripMenuItem
+        'mnuGraphicsLoadGraph
         '
-        Me.LoadGraphToolStripMenuItem.Name = "LoadGraphToolStripMenuItem"
-        Me.LoadGraphToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.LoadGraphToolStripMenuItem.Tag = "Load_Graph"
-        Me.LoadGraphToolStripMenuItem.Text = "Load Graph..."
+        Me.mnuGraphicsLoadGraph.Name = "mnuGraphicsLoadGraph"
+        Me.mnuGraphicsLoadGraph.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsLoadGraph.Tag = "Load_Graph"
+        Me.mnuGraphicsLoadGraph.Text = "Load Graph..."
         '
         'mnuGraphicsInventory
         '
@@ -595,7 +587,7 @@ Partial Class frmMain
         '
         Me.SummaryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DescribeToolStripMenuItem, Me.mnuStatsSummaryColumnStat, Me.CheckDuplicatesToolStripMenuItem, Me.GroupToolStripMenuItem, Me.ToolStripSeparator7, Me.DiversityToolStripMenuItem, Me.CircularStatisticsToolStripMenuItem})
         Me.SummaryToolStripMenuItem.Name = "SummaryToolStripMenuItem"
-        Me.SummaryToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.SummaryToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.SummaryToolStripMenuItem.Tag = "Summary"
         Me.SummaryToolStripMenuItem.Text = "Summary"
         '
@@ -650,7 +642,7 @@ Partial Class frmMain
         '
         Me.TablesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FrequencyToolStripMenuItem, Me.SummaryToolStripMenuItem1, Me.GeneralToolStripMenuItem, Me.MultipleResponseToolStripMenuItem, Me.LoadTableToolStripMenuItem})
         Me.TablesToolStripMenuItem.Name = "TablesToolStripMenuItem"
-        Me.TablesToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.TablesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.TablesToolStripMenuItem.Tag = "Tables"
         Me.TablesToolStripMenuItem.Text = "Tables"
         '
@@ -687,13 +679,13 @@ Partial Class frmMain
         'ToolStripSeparator13
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(175, 6)
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(176, 6)
         '
         'TimeSeriesToolStripMenuItem
         '
         Me.TimeSeriesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MovingAveragesToolStripMenuItem, Me.CorrelationsToolStripMenuItem})
         Me.TimeSeriesToolStripMenuItem.Name = "TimeSeriesToolStripMenuItem"
-        Me.TimeSeriesToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.TimeSeriesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.TimeSeriesToolStripMenuItem.Tag = "Time_Series"
         Me.TimeSeriesToolStripMenuItem.Text = "Time Series"
         '
@@ -713,7 +705,7 @@ Partial Class frmMain
         '
         Me.SurvivalToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KaplanMeirToolStripMenuItem, Me.LogRankToolStripMenuItem})
         Me.SurvivalToolStripMenuItem.Name = "SurvivalToolStripMenuItem"
-        Me.SurvivalToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.SurvivalToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.SurvivalToolStripMenuItem.Tag = "Survival"
         Me.SurvivalToolStripMenuItem.Text = "Survival"
         '
@@ -732,12 +724,12 @@ Partial Class frmMain
         'ToolStripSeparator14
         '
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
-        Me.ToolStripSeparator14.Size = New System.Drawing.Size(175, 6)
+        Me.ToolStripSeparator14.Size = New System.Drawing.Size(176, 6)
         '
         'SampleSizeToolStripMenuItem
         '
         Me.SampleSizeToolStripMenuItem.Name = "SampleSizeToolStripMenuItem"
-        Me.SampleSizeToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.SampleSizeToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.SampleSizeToolStripMenuItem.Tag = "Sample_Size"
         Me.SampleSizeToolStripMenuItem.Text = "Sample Size..."
         '
@@ -880,38 +872,38 @@ Partial Class frmMain
         'mnuWindowVariable
         '
         Me.mnuWindowVariable.Name = "mnuWindowVariable"
-        Me.mnuWindowVariable.Size = New System.Drawing.Size(220, 22)
+        Me.mnuWindowVariable.Size = New System.Drawing.Size(221, 22)
         Me.mnuWindowVariable.Text = "Variable (column) Metadata"
         '
         'mnuWindowDataFrame
         '
         Me.mnuWindowDataFrame.Name = "mnuWindowDataFrame"
-        Me.mnuWindowDataFrame.Size = New System.Drawing.Size(220, 22)
+        Me.mnuWindowDataFrame.Size = New System.Drawing.Size(221, 22)
         Me.mnuWindowDataFrame.Text = "Data frame Metadata"
         '
         'LogToolStripMenuItem
         '
         Me.LogToolStripMenuItem.Name = "LogToolStripMenuItem"
-        Me.LogToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
+        Me.LogToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.LogToolStripMenuItem.Text = "Log"
         '
         'ScriptToolStripMenuItem
         '
         Me.ScriptToolStripMenuItem.Name = "ScriptToolStripMenuItem"
-        Me.ScriptToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
+        Me.ScriptToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.ScriptToolStripMenuItem.Text = "Script"
         '
         'mnuWindowsEditor
         '
         Me.mnuWindowsEditor.Name = "mnuWindowsEditor"
-        Me.mnuWindowsEditor.Size = New System.Drawing.Size(220, 22)
+        Me.mnuWindowsEditor.Size = New System.Drawing.Size(221, 22)
         Me.mnuWindowsEditor.Text = "Editor"
         '
         'WindowsLayoutToolStripMenuItem
         '
         Me.WindowsLayoutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuWindowsCascading, Me.mnuWindowsStacked, Me.mnuWindowsSideBySide, Me.mnuWindowsArrangedIcons})
         Me.WindowsLayoutToolStripMenuItem.Name = "WindowsLayoutToolStripMenuItem"
-        Me.WindowsLayoutToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
+        Me.WindowsLayoutToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.WindowsLayoutToolStripMenuItem.Text = "Windows Layout"
         '
         'mnuWindowsCascading
@@ -1064,12 +1056,6 @@ Partial Class frmMain
         Me.mnuEndofRains.Size = New System.Drawing.Size(172, 22)
         Me.mnuEndofRains.Text = "End of the Rains"
         '
-        'LockUnlockToolStripMenuItem
-        '
-        Me.LockUnlockToolStripMenuItem.Name = "LockUnlockToolStripMenuItem"
-        Me.LockUnlockToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
-        Me.LockUnlockToolStripMenuItem.Text = "Lock/Unlock..."
-        '
         'mnuFileSave
         '
         Me.mnuFileSave.Name = "mnuFileSave"
@@ -1128,6 +1114,13 @@ Partial Class frmMain
         Me.mnuEditUndo.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditUndo.Tag = "Undo"
         Me.mnuEditUndo.Text = "Undo"
+        '
+        'mnuEditRedo
+        '
+        Me.mnuEditRedo.Name = "mnuEditRedo"
+        Me.mnuEditRedo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
+        Me.mnuEditRedo.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditRedo.Text = "Redo"
         '
         'mnuEditCut
         '
@@ -1597,7 +1590,7 @@ Partial Class frmMain
         'mnuBar
         '
         Me.mnuBar.AllowMerge = False
-        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.ManageToolStripMenuItem, Me.GraphicsToolStripMenuItem, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem, Me.mnuClimateMethods})
+        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.SubmitToolStripMenuItem, Me.mnuManage, Me.mnuGraphics, Me.StatisticsToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem, Me.mnuClimateMethods})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.MdiWindowListItem = Me.WindowToolStripMenuItem
@@ -1713,287 +1706,278 @@ Partial Class frmMain
         Me.RemoveMacroFromMenuToolStripMenuItem.Size = New System.Drawing.Size(226, 22)
         Me.RemoveMacroFromMenuToolStripMenuItem.Text = "Remove Macro from Menu..."
         '
-        'ManageToolStripMenuItem
+        'mnuManage
         '
-        Me.ManageToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCalculations, Me.DataToolStripMenuItem, Me.FactorToolStripMenuItem1, Me.ManipulateToolStripMenuItem, Me.mnuManageReshapeSubset, Me.ColumnPropertiesToolStripMenuItem, Me.ResizeWorksheetToolStripMenuItem, Me.DataFrameToolStripMenuItem, Me.DataFileToolStripMenuItem})
-        Me.ManageToolStripMenuItem.Name = "ManageToolStripMenuItem"
-        Me.ManageToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
-        Me.ManageToolStripMenuItem.Tag = "Manage"
-        Me.ManageToolStripMenuItem.Text = "Manage"
+        Me.mnuManage.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCalculations, Me.mnuManageData, Me.mnuManageFactor, Me.mnuManageManipulate, Me.mnuManageDataFrame, Me.mnuManageReshape, Me.mnuManageDataFile})
+        Me.mnuManage.Name = "mnuManage"
+        Me.mnuManage.Size = New System.Drawing.Size(62, 20)
+        Me.mnuManage.Tag = "Manage"
+        Me.mnuManage.Text = "Manage"
         '
         'mnuCalculations
         '
         Me.mnuCalculations.Name = "mnuCalculations"
-        Me.mnuCalculations.Size = New System.Drawing.Size(174, 22)
+        Me.mnuCalculations.Size = New System.Drawing.Size(148, 22)
         Me.mnuCalculations.Tag = "Calculations"
         Me.mnuCalculations.Text = "Calculations..."
         '
-        'DataToolStripMenuItem
+        'mnuManageData
         '
-        Me.DataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RegularSequenceToolStripMenuItem, Me.EnterToolStripMenuItem, Me.DuplicatecopyColumnsToolStripMenuItem, Me.RandomSamplesToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.ClearRemoveToolStripMenuItem, Me.DeleteRowsToolStripMenuItem, Me.mnuManageSubset, Me.mnuManageDataMerge})
-        Me.DataToolStripMenuItem.Name = "DataToolStripMenuItem"
-        Me.DataToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-        Me.DataToolStripMenuItem.Tag = "Data"
-        Me.DataToolStripMenuItem.Text = "Data"
+        Me.mnuManageData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataRegularSequence, Me.mnuManageDataRandomSamples, Me.mnuManageDataView, Me.mnuManageDataName})
+        Me.mnuManageData.Name = "mnuManageData"
+        Me.mnuManageData.Size = New System.Drawing.Size(148, 22)
+        Me.mnuManageData.Tag = "Data"
+        Me.mnuManageData.Text = "Data"
         '
-        'RegularSequenceToolStripMenuItem
+        'mnuManageDataRegularSequence
         '
-        Me.RegularSequenceToolStripMenuItem.Name = "RegularSequenceToolStripMenuItem"
-        Me.RegularSequenceToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.RegularSequenceToolStripMenuItem.Tag = "Worksheet_Information"
-        Me.RegularSequenceToolStripMenuItem.Text = "Regular Sequence..."
+        Me.mnuManageDataRegularSequence.Name = "mnuManageDataRegularSequence"
+        Me.mnuManageDataRegularSequence.Size = New System.Drawing.Size(177, 22)
+        Me.mnuManageDataRegularSequence.Tag = "Worksheet_Information"
+        Me.mnuManageDataRegularSequence.Text = "Regular Sequence..."
         '
-        'EnterToolStripMenuItem
+        'mnuManageDataRandomSamples
         '
-        Me.EnterToolStripMenuItem.Name = "EnterToolStripMenuItem"
-        Me.EnterToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.EnterToolStripMenuItem.Tag = "Enter"
-        Me.EnterToolStripMenuItem.Text = "Change type..."
+        Me.mnuManageDataRandomSamples.Name = "mnuManageDataRandomSamples"
+        Me.mnuManageDataRandomSamples.Size = New System.Drawing.Size(177, 22)
+        Me.mnuManageDataRandomSamples.Tag = "Random_Samples"
+        Me.mnuManageDataRandomSamples.Text = "Random Samples..."
         '
-        'DuplicatecopyColumnsToolStripMenuItem
+        'mnuManageDataView
         '
-        Me.DuplicatecopyColumnsToolStripMenuItem.Name = "DuplicatecopyColumnsToolStripMenuItem"
-        Me.DuplicatecopyColumnsToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.DuplicatecopyColumnsToolStripMenuItem.Tag = "Duplicate_copy_columns"
-        Me.DuplicatecopyColumnsToolStripMenuItem.Text = "Duplicate (copy columns)..."
+        Me.mnuManageDataView.Name = "mnuManageDataView"
+        Me.mnuManageDataView.Size = New System.Drawing.Size(177, 22)
+        Me.mnuManageDataView.Tag = "View"
+        Me.mnuManageDataView.Text = "View"
         '
-        'RandomSamplesToolStripMenuItem
+        'mnuManageDataName
         '
-        Me.RandomSamplesToolStripMenuItem.Name = "RandomSamplesToolStripMenuItem"
-        Me.RandomSamplesToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.RandomSamplesToolStripMenuItem.Tag = "Random_Samples"
-        Me.RandomSamplesToolStripMenuItem.Text = "Random Samples..."
+        Me.mnuManageDataName.Name = "mnuManageDataName"
+        Me.mnuManageDataName.Size = New System.Drawing.Size(177, 22)
+        Me.mnuManageDataName.Tag = "Name"
+        Me.mnuManageDataName.Text = "Name"
         '
-        'DisplayToolStripMenuItem
+        'mnuManageFactor
         '
-        Me.DisplayToolStripMenuItem.Name = "DisplayToolStripMenuItem"
-        Me.DisplayToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.DisplayToolStripMenuItem.Tag = "Display"
-        Me.DisplayToolStripMenuItem.Text = "Display..."
+        Me.mnuManageFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageFactorconvertTo, Me.mnuMangeFactorLabel, Me.mnuManageFactorReorderLevels, Me.mnuManageFactorRecode, Me.mnuManageFactorReferenceLevels, Me.mnuManageFactorInteraction, Me.mnuManageFactorUnusedLevels, Me.mnuManageFactorIndicatorVariables})
+        Me.mnuManageFactor.Name = "mnuManageFactor"
+        Me.mnuManageFactor.Size = New System.Drawing.Size(148, 22)
+        Me.mnuManageFactor.Tag = "Factor"
+        Me.mnuManageFactor.Text = "Factor"
         '
-        'ClearRemoveToolStripMenuItem
+        'mnuManageFactorconvertTo
         '
-        Me.ClearRemoveToolStripMenuItem.Name = "ClearRemoveToolStripMenuItem"
-        Me.ClearRemoveToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.ClearRemoveToolStripMenuItem.Tag = "Clear_Remove"
-        Me.ClearRemoveToolStripMenuItem.Text = "Delete columns"
+        Me.mnuManageFactorconvertTo.Name = "mnuManageFactorconvertTo"
+        Me.mnuManageFactorconvertTo.Size = New System.Drawing.Size(170, 22)
+        Me.mnuManageFactorconvertTo.Tag = "Convert_to"
+        Me.mnuManageFactorconvertTo.Text = "Convert to"
         '
-        'DeleteRowsToolStripMenuItem
+        'mnuMangeFactorLabel
         '
-        Me.DeleteRowsToolStripMenuItem.Name = "DeleteRowsToolStripMenuItem"
-        Me.DeleteRowsToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
-        Me.DeleteRowsToolStripMenuItem.Text = "Delete rows"
+        Me.mnuMangeFactorLabel.Name = "mnuMangeFactorLabel"
+        Me.mnuMangeFactorLabel.Size = New System.Drawing.Size(170, 22)
+        Me.mnuMangeFactorLabel.Tag = "Label"
+        Me.mnuMangeFactorLabel.Text = "Label"
         '
-        'mnuManageSubset
+        'mnuManageFactorReorderLevels
         '
-        Me.mnuManageSubset.Name = "mnuManageSubset"
-        Me.mnuManageSubset.Size = New System.Drawing.Size(219, 22)
-        Me.mnuManageSubset.Text = "Subset"
+        Me.mnuManageFactorReorderLevels.Name = "mnuManageFactorReorderLevels"
+        Me.mnuManageFactorReorderLevels.Size = New System.Drawing.Size(170, 22)
+        Me.mnuManageFactorReorderLevels.Tag = "Reorder_levels"
+        Me.mnuManageFactorReorderLevels.Text = "Reorder levels"
         '
-        'mnuManageDataMerge
+        'mnuManageFactorRecode
         '
-        Me.mnuManageDataMerge.Name = "mnuManageDataMerge"
-        Me.mnuManageDataMerge.Size = New System.Drawing.Size(219, 22)
-        Me.mnuManageDataMerge.Text = "Data Merge"
+        Me.mnuManageFactorRecode.Name = "mnuManageFactorRecode"
+        Me.mnuManageFactorRecode.Size = New System.Drawing.Size(170, 22)
+        Me.mnuManageFactorRecode.Tag = "Recode"
+        Me.mnuManageFactorRecode.Text = "Recode"
         '
-        'FactorToolStripMenuItem1
+        'mnuManageFactorReferenceLevels
         '
-        Me.FactorToolStripMenuItem1.Name = "FactorToolStripMenuItem1"
-        Me.FactorToolStripMenuItem1.Size = New System.Drawing.Size(174, 22)
-        Me.FactorToolStripMenuItem1.Text = "Factor"
+        Me.mnuManageFactorReferenceLevels.Name = "mnuManageFactorReferenceLevels"
+        Me.mnuManageFactorReferenceLevels.Size = New System.Drawing.Size(170, 22)
+        Me.mnuManageFactorReferenceLevels.Tag = "Reference_levels"
+        Me.mnuManageFactorReferenceLevels.Text = "Reference levels"
         '
-        'ManipulateToolStripMenuItem
+        'mnuManageFactorInteraction
         '
-        Me.ManipulateToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TransformToolStripMenuItem, Me.RecodeToolStripMenuItem, Me.mnuManageDataSort, Me.mnuManageManipulateRowStat, Me.InteractionsToolStripMenuItem, Me.IndicatorVariablesToolStripMenuItem, Me.PolynomialsToolStripMenuItem})
-        Me.ManipulateToolStripMenuItem.Name = "ManipulateToolStripMenuItem"
-        Me.ManipulateToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-        Me.ManipulateToolStripMenuItem.Tag = "Manipulate"
-        Me.ManipulateToolStripMenuItem.Text = "Manipulate"
+        Me.mnuManageFactorInteraction.Name = "mnuManageFactorInteraction"
+        Me.mnuManageFactorInteraction.Size = New System.Drawing.Size(170, 22)
+        Me.mnuManageFactorInteraction.Tag = "Interaction"
+        Me.mnuManageFactorInteraction.Text = "Interaction"
         '
-        'TransformToolStripMenuItem
+        'mnuManageFactorUnusedLevels
         '
-        Me.TransformToolStripMenuItem.Name = "TransformToolStripMenuItem"
-        Me.TransformToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.TransformToolStripMenuItem.Tag = "Transform"
-        Me.TransformToolStripMenuItem.Text = "Transform..."
+        Me.mnuManageFactorUnusedLevels.Name = "mnuManageFactorUnusedLevels"
+        Me.mnuManageFactorUnusedLevels.Size = New System.Drawing.Size(170, 22)
+        Me.mnuManageFactorUnusedLevels.Tag = "Unused_levels"
+        Me.mnuManageFactorUnusedLevels.Text = "Unused levels"
         '
-        'RecodeToolStripMenuItem
+        'mnuManageFactorIndicatorVariables
         '
-        Me.RecodeToolStripMenuItem.Name = "RecodeToolStripMenuItem"
-        Me.RecodeToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.RecodeToolStripMenuItem.Tag = "Recode"
-        Me.RecodeToolStripMenuItem.Text = "Recode..."
+        Me.mnuManageFactorIndicatorVariables.Name = "mnuManageFactorIndicatorVariables"
+        Me.mnuManageFactorIndicatorVariables.Size = New System.Drawing.Size(170, 22)
+        Me.mnuManageFactorIndicatorVariables.Tag = "Indicator_variables"
+        Me.mnuManageFactorIndicatorVariables.Text = "Indicator variables"
         '
-        'mnuManageDataSort
+        'mnuManageManipulate
         '
-        Me.mnuManageDataSort.Name = "mnuManageDataSort"
-        Me.mnuManageDataSort.Size = New System.Drawing.Size(179, 22)
-        Me.mnuManageDataSort.Tag = "Sort"
-        Me.mnuManageDataSort.Text = "Sort"
+        Me.mnuManageManipulate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTransform, Me.mnuManageManipulateRecode, Me.mnuManageManipulateSort, Me.mnuManageManipulateRowStat, Me.mnuManageManipulatePolynomials})
+        Me.mnuManageManipulate.Name = "mnuManageManipulate"
+        Me.mnuManageManipulate.Size = New System.Drawing.Size(148, 22)
+        Me.mnuManageManipulate.Tag = "Manipulate"
+        Me.mnuManageManipulate.Text = "Manipulate"
+        '
+        'mnuTransform
+        '
+        Me.mnuTransform.Name = "mnuTransform"
+        Me.mnuTransform.Size = New System.Drawing.Size(155, 22)
+        Me.mnuTransform.Tag = "Transform"
+        Me.mnuTransform.Text = "Transform..."
+        '
+        'mnuManageManipulateRecode
+        '
+        Me.mnuManageManipulateRecode.Name = "mnuManageManipulateRecode"
+        Me.mnuManageManipulateRecode.Size = New System.Drawing.Size(155, 22)
+        Me.mnuManageManipulateRecode.Tag = "Recode"
+        Me.mnuManageManipulateRecode.Text = "Recode..."
+        '
+        'mnuManageManipulateSort
+        '
+        Me.mnuManageManipulateSort.Name = "mnuManageManipulateSort"
+        Me.mnuManageManipulateSort.Size = New System.Drawing.Size(155, 22)
+        Me.mnuManageManipulateSort.Tag = "Sort"
+        Me.mnuManageManipulateSort.Text = "Sort"
         '
         'mnuManageManipulateRowStat
         '
         Me.mnuManageManipulateRowStat.Name = "mnuManageManipulateRowStat"
-        Me.mnuManageManipulateRowStat.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageManipulateRowStat.Size = New System.Drawing.Size(155, 22)
         Me.mnuManageManipulateRowStat.Tag = "Row_Statistics"
         Me.mnuManageManipulateRowStat.Text = "Row Statistics..."
         '
-        'InteractionsToolStripMenuItem
+        'mnuManageManipulatePolynomials
         '
-        Me.InteractionsToolStripMenuItem.Name = "InteractionsToolStripMenuItem"
-        Me.InteractionsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.InteractionsToolStripMenuItem.Tag = "Interactions"
-        Me.InteractionsToolStripMenuItem.Text = "Interactions..."
+        Me.mnuManageManipulatePolynomials.Name = "mnuManageManipulatePolynomials"
+        Me.mnuManageManipulatePolynomials.Size = New System.Drawing.Size(155, 22)
+        Me.mnuManageManipulatePolynomials.Tag = "Polynomials"
+        Me.mnuManageManipulatePolynomials.Text = "Polynomials"
         '
-        'IndicatorVariablesToolStripMenuItem
+        'mnuManageDataFrame
         '
-        Me.IndicatorVariablesToolStripMenuItem.Name = "IndicatorVariablesToolStripMenuItem"
-        Me.IndicatorVariablesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.IndicatorVariablesToolStripMenuItem.Tag = "Indicator_Variables"
-        Me.IndicatorVariablesToolStripMenuItem.Text = "Indicator Variables..."
+        Me.mnuManageDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataFrameOrder, Me.mnuManageDataFrameInsert, Me.mnuManageDataFrameDelete, Me.mnuManageDataFrameDisplay, Me.mnuManageDataFrameProtectLockUnlock, Me.mnuManageDataFrameHideShow})
+        Me.mnuManageDataFrame.Name = "mnuManageDataFrame"
+        Me.mnuManageDataFrame.Size = New System.Drawing.Size(148, 22)
+        Me.mnuManageDataFrame.Tag = "Data_Frame"
+        Me.mnuManageDataFrame.Text = "Data Frame"
         '
-        'PolynomialsToolStripMenuItem
+        'mnuManageDataFrameOrder
         '
-        Me.PolynomialsToolStripMenuItem.Name = "PolynomialsToolStripMenuItem"
-        Me.PolynomialsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.PolynomialsToolStripMenuItem.Text = "Polynomials"
+        Me.mnuManageDataFrameOrder.Name = "mnuManageDataFrameOrder"
+        Me.mnuManageDataFrameOrder.Size = New System.Drawing.Size(183, 22)
+        Me.mnuManageDataFrameOrder.Tag = "Order"
+        Me.mnuManageDataFrameOrder.Text = "Order"
         '
-        'mnuManageReshapeSubset
+        'mnuManageDataFrameInsert
         '
-        Me.mnuManageReshapeSubset.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StacksToolStripMenuItem, Me.UnstackToolStripMenuItem, Me.SelectToolStripMenuItem, Me.SelectSndStackToolStripMenuItem, Me.ExpandToolStripMenuItem, Me.SubsetToolStripMenuItem})
-        Me.mnuManageReshapeSubset.Name = "mnuManageReshapeSubset"
-        Me.mnuManageReshapeSubset.Size = New System.Drawing.Size(174, 22)
-        Me.mnuManageReshapeSubset.Tag = "Reshape"
-        Me.mnuManageReshapeSubset.Text = "Reshape"
+        Me.mnuManageDataFrameInsert.Name = "mnuManageDataFrameInsert"
+        Me.mnuManageDataFrameInsert.Size = New System.Drawing.Size(183, 22)
+        Me.mnuManageDataFrameInsert.Tag = "Insert"
+        Me.mnuManageDataFrameInsert.Text = "Insert"
         '
-        'StacksToolStripMenuItem
+        'mnuManageDataFrameDelete
         '
-        Me.StacksToolStripMenuItem.Name = "StacksToolStripMenuItem"
-        Me.StacksToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.StacksToolStripMenuItem.Tag = "Stack"
-        Me.StacksToolStripMenuItem.Text = "Stack..."
+        Me.mnuManageDataFrameDelete.Name = "mnuManageDataFrameDelete"
+        Me.mnuManageDataFrameDelete.Size = New System.Drawing.Size(183, 22)
+        Me.mnuManageDataFrameDelete.Tag = "Delete"
+        Me.mnuManageDataFrameDelete.Text = "Delete"
         '
-        'UnstackToolStripMenuItem
+        'mnuManageDataFrameDisplay
         '
-        Me.UnstackToolStripMenuItem.Name = "UnstackToolStripMenuItem"
-        Me.UnstackToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.UnstackToolStripMenuItem.Tag = "Unstack"
-        Me.UnstackToolStripMenuItem.Text = "Unstack..."
+        Me.mnuManageDataFrameDisplay.Name = "mnuManageDataFrameDisplay"
+        Me.mnuManageDataFrameDisplay.Size = New System.Drawing.Size(183, 22)
+        Me.mnuManageDataFrameDisplay.Tag = "Display"
+        Me.mnuManageDataFrameDisplay.Text = "Display"
         '
-        'SelectToolStripMenuItem
+        'mnuManageDataFrameProtectLockUnlock
         '
-        Me.SelectToolStripMenuItem.Name = "SelectToolStripMenuItem"
-        Me.SelectToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.SelectToolStripMenuItem.Tag = "Select_"
-        Me.SelectToolStripMenuItem.Text = "Select..."
+        Me.mnuManageDataFrameProtectLockUnlock.Name = "mnuManageDataFrameProtectLockUnlock"
+        Me.mnuManageDataFrameProtectLockUnlock.Size = New System.Drawing.Size(183, 22)
+        Me.mnuManageDataFrameProtectLockUnlock.Tag = "Protect_Lock_Unlock"
+        Me.mnuManageDataFrameProtectLockUnlock.Text = "Protect(Lock/Unlock"
         '
-        'SelectSndStackToolStripMenuItem
+        'mnuManageDataFrameHideShow
         '
-        Me.SelectSndStackToolStripMenuItem.Name = "SelectSndStackToolStripMenuItem"
-        Me.SelectSndStackToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.SelectSndStackToolStripMenuItem.Tag = "Select_and_stack"
-        Me.SelectSndStackToolStripMenuItem.Text = "Select and stack..."
+        Me.mnuManageDataFrameHideShow.Name = "mnuManageDataFrameHideShow"
+        Me.mnuManageDataFrameHideShow.Size = New System.Drawing.Size(183, 22)
+        Me.mnuManageDataFrameHideShow.Tag = "Hide_Show"
+        Me.mnuManageDataFrameHideShow.Text = "Hide/Show"
         '
-        'ExpandToolStripMenuItem
+        'mnuManageReshape
         '
-        Me.ExpandToolStripMenuItem.Name = "ExpandToolStripMenuItem"
-        Me.ExpandToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.ExpandToolStripMenuItem.Tag = "Expand"
-        Me.ExpandToolStripMenuItem.Text = "Expand..."
+        Me.mnuManageReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageRechapeStack, Me.mnuManageRechapeUnstack, Me.mnuManageRechapeSelect, Me.mnuManageRechapeMerge})
+        Me.mnuManageReshape.Name = "mnuManageReshape"
+        Me.mnuManageReshape.Size = New System.Drawing.Size(148, 22)
+        Me.mnuManageReshape.Tag = "Reshape"
+        Me.mnuManageReshape.Text = "Reshape"
         '
-        'SubsetToolStripMenuItem
+        'mnuManageRechapeStack
         '
-        Me.SubsetToolStripMenuItem.Name = "SubsetToolStripMenuItem"
-        Me.SubsetToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.SubsetToolStripMenuItem.Text = "Subset"
+        Me.mnuManageRechapeStack.Name = "mnuManageRechapeStack"
+        Me.mnuManageRechapeStack.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageRechapeStack.Tag = "Stack_Melt"
+        Me.mnuManageRechapeStack.Text = "Stack(Melt)"
         '
-        'ColumnPropertiesToolStripMenuItem
+        'mnuManageRechapeUnstack
         '
-        Me.ColumnPropertiesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FactorToolStripMenuItem, Me.NameToolStripMenuItem, Me.FormatCtrlDToolStripMenuItem, Me.AlignmentToolStripMenuItem, Me.LockUnlockToolStripMenuItem})
-        Me.ColumnPropertiesToolStripMenuItem.Name = "ColumnPropertiesToolStripMenuItem"
-        Me.ColumnPropertiesToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-        Me.ColumnPropertiesToolStripMenuItem.Tag = "Column_Properties"
-        Me.ColumnPropertiesToolStripMenuItem.Text = "Column Properties"
+        Me.mnuManageRechapeUnstack.Name = "mnuManageRechapeUnstack"
+        Me.mnuManageRechapeUnstack.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageRechapeUnstack.Tag = "Unstack_Dcast"
+        Me.mnuManageRechapeUnstack.Text = "unstack(Dcast)"
         '
-        'FactorToolStripMenuItem
+        'mnuManageRechapeSelect
         '
-        Me.FactorToolStripMenuItem.Name = "FactorToolStripMenuItem"
-        Me.FactorToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
-        Me.FactorToolStripMenuItem.Text = "Factor..."
+        Me.mnuManageRechapeSelect.Name = "mnuManageRechapeSelect"
+        Me.mnuManageRechapeSelect.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageRechapeSelect.Tag = "Select"
+        Me.mnuManageRechapeSelect.Text = "Select..."
         '
-        'NameToolStripMenuItem
+        'mnuManageRechapeMerge
         '
-        Me.NameToolStripMenuItem.Name = "NameToolStripMenuItem"
-        Me.NameToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
-        Me.NameToolStripMenuItem.Text = "Name..."
+        Me.mnuManageRechapeMerge.Name = "mnuManageRechapeMerge"
+        Me.mnuManageRechapeMerge.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageRechapeMerge.Tag = "Merge"
+        Me.mnuManageRechapeMerge.Text = "Merge"
         '
-        'FormatCtrlDToolStripMenuItem
+        'mnuManageDataFile
         '
-        Me.FormatCtrlDToolStripMenuItem.Name = "FormatCtrlDToolStripMenuItem"
-        Me.FormatCtrlDToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
-        Me.FormatCtrlDToolStripMenuItem.Text = "Format...    Ctrl+D"
+        Me.mnuManageDataFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataFileDeleteSheet, Me.mnuManageDataFileRenameSheet, Me.mnuManageDataFileReorderSheet})
+        Me.mnuManageDataFile.Name = "mnuManageDataFile"
+        Me.mnuManageDataFile.Size = New System.Drawing.Size(148, 22)
+        Me.mnuManageDataFile.Tag = "Data_file"
+        Me.mnuManageDataFile.Text = "Data File"
         '
-        'AlignmentToolStripMenuItem
+        'mnuManageDataFileDeleteSheet
         '
-        Me.AlignmentToolStripMenuItem.Name = "AlignmentToolStripMenuItem"
-        Me.AlignmentToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
-        Me.AlignmentToolStripMenuItem.Text = "Alignment..."
+        Me.mnuManageDataFileDeleteSheet.Name = "mnuManageDataFileDeleteSheet"
+        Me.mnuManageDataFileDeleteSheet.Size = New System.Drawing.Size(157, 22)
+        Me.mnuManageDataFileDeleteSheet.Tag = "Delete_sheet"
+        Me.mnuManageDataFileDeleteSheet.Text = "Delete Sheet "
         '
-        'DataFrameToolStripMenuItem
+        'mnuManageDataFileRenameSheet
         '
-        Me.DataFrameToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OrderToolStripMenuItem, Me.InsertToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.DisplayToolStripMenuItem1})
-        Me.DataFrameToolStripMenuItem.Name = "DataFrameToolStripMenuItem"
-        Me.DataFrameToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-        Me.DataFrameToolStripMenuItem.Text = "Data Frame"
+        Me.mnuManageDataFileRenameSheet.Name = "mnuManageDataFileRenameSheet"
+        Me.mnuManageDataFileRenameSheet.Size = New System.Drawing.Size(157, 22)
+        Me.mnuManageDataFileRenameSheet.Tag = "ReName_sheet"
+        Me.mnuManageDataFileRenameSheet.Text = "(Re)name Sheet"
         '
-        'OrderToolStripMenuItem
+        'mnuManageDataFileReorderSheet
         '
-        Me.OrderToolStripMenuItem.Name = "OrderToolStripMenuItem"
-        Me.OrderToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
-        Me.OrderToolStripMenuItem.Text = "Order"
-        '
-        'InsertToolStripMenuItem
-        '
-        Me.InsertToolStripMenuItem.Name = "InsertToolStripMenuItem"
-        Me.InsertToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
-        Me.InsertToolStripMenuItem.Text = "Insert"
-        '
-        'DeleteToolStripMenuItem
-        '
-        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
-        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
-        Me.DeleteToolStripMenuItem.Text = "Delete"
-        '
-        'DisplayToolStripMenuItem1
-        '
-        Me.DisplayToolStripMenuItem1.Name = "DisplayToolStripMenuItem1"
-        Me.DisplayToolStripMenuItem1.Size = New System.Drawing.Size(112, 22)
-        Me.DisplayToolStripMenuItem1.Text = "Display"
-        '
-        'DataFileToolStripMenuItem
-        '
-        Me.DataFileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteSheetToolStripMenuItem, Me.RenameSheetToolStripMenuItem, Me.ReorderSheetToolStripMenuItem})
-        Me.DataFileToolStripMenuItem.Name = "DataFileToolStripMenuItem"
-        Me.DataFileToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-        Me.DataFileToolStripMenuItem.Text = "Data File"
-        '
-        'DeleteSheetToolStripMenuItem
-        '
-        Me.DeleteSheetToolStripMenuItem.Name = "DeleteSheetToolStripMenuItem"
-        Me.DeleteSheetToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
-        Me.DeleteSheetToolStripMenuItem.Text = "Delete Sheet "
-        '
-        'RenameSheetToolStripMenuItem
-        '
-        Me.RenameSheetToolStripMenuItem.Name = "RenameSheetToolStripMenuItem"
-        Me.RenameSheetToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
-        Me.RenameSheetToolStripMenuItem.Text = "Rename Sheet"
-        '
-        'ReorderSheetToolStripMenuItem
-        '
-        Me.ReorderSheetToolStripMenuItem.Name = "ReorderSheetToolStripMenuItem"
-        Me.ReorderSheetToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
-        Me.ReorderSheetToolStripMenuItem.Text = "Reorder Sheet"
+        Me.mnuManageDataFileReorderSheet.Name = "mnuManageDataFileReorderSheet"
+        Me.mnuManageDataFileReorderSheet.Size = New System.Drawing.Size(157, 22)
+        Me.mnuManageDataFileReorderSheet.Tag = "Reorder_sheet"
+        Me.mnuManageDataFileReorderSheet.Text = "Reorder Sheet"
         '
         'mnuClimateMethods
         '
@@ -2227,12 +2211,41 @@ Partial Class frmMain
         Me.WaterBalanceToolStripMenuItem1.Size = New System.Drawing.Size(200, 22)
         Me.WaterBalanceToolStripMenuItem1.Text = "Water Balance"
         '
-        'mnuEditRedo
+        'mnuGraphicsGraphicsOptions
         '
-        Me.mnuEditRedo.Name = "mnuEditRedo"
-        Me.mnuEditRedo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
-        Me.mnuEditRedo.Size = New System.Drawing.Size(207, 22)
-        Me.mnuEditRedo.Text = "Redo"
+        Me.mnuGraphicsGraphicsOptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuGraphicsGraphicsOptionsLayers, Me.mnuGraphicsGraphicsOptionsAxes, Me.mnuGraphicsGraphicsOptionsThemes, Me.mnuGraphicsGraphicsOptionsFacets})
+        Me.mnuGraphicsGraphicsOptions.Name = "mnuGraphicsGraphicsOptions"
+        Me.mnuGraphicsGraphicsOptions.Size = New System.Drawing.Size(170, 22)
+        Me.mnuGraphicsGraphicsOptions.Tag = "Graphics_options"
+        Me.mnuGraphicsGraphicsOptions.Text = "Graphics options"
+        '
+        'mnuGraphicsGraphicsOptionsLayers
+        '
+        Me.mnuGraphicsGraphicsOptionsLayers.Name = "mnuGraphicsGraphicsOptionsLayers"
+        Me.mnuGraphicsGraphicsOptionsLayers.Size = New System.Drawing.Size(152, 22)
+        Me.mnuGraphicsGraphicsOptionsLayers.Tag = "Layers"
+        Me.mnuGraphicsGraphicsOptionsLayers.Text = "Layers"
+        '
+        'mnuGraphicsGraphicsOptionsAxes
+        '
+        Me.mnuGraphicsGraphicsOptionsAxes.Name = "mnuGraphicsGraphicsOptionsAxes"
+        Me.mnuGraphicsGraphicsOptionsAxes.Size = New System.Drawing.Size(152, 22)
+        Me.mnuGraphicsGraphicsOptionsAxes.Tag = "Axes"
+        Me.mnuGraphicsGraphicsOptionsAxes.Text = "Axes"
+        '
+        'mnuGraphicsGraphicsOptionsThemes
+        '
+        Me.mnuGraphicsGraphicsOptionsThemes.Name = "mnuGraphicsGraphicsOptionsThemes"
+        Me.mnuGraphicsGraphicsOptionsThemes.Size = New System.Drawing.Size(152, 22)
+        Me.mnuGraphicsGraphicsOptionsThemes.Tag = "Themes"
+        Me.mnuGraphicsGraphicsOptionsThemes.Text = "Themes"
+        '
+        'mnuGraphicsGraphicsOptionsFacets
+        '
+        Me.mnuGraphicsGraphicsOptionsFacets.Name = "mnuGraphicsGraphicsOptionsFacets"
+        Me.mnuGraphicsGraphicsOptionsFacets.Size = New System.Drawing.Size(152, 22)
+        Me.mnuGraphicsGraphicsOptionsFacets.Tag = "Facets"
+        Me.mnuGraphicsGraphicsOptionsFacets.Text = "Facets"
         '
         'frmMain
         '
@@ -2284,19 +2297,18 @@ Partial Class frmMain
     Friend WithEvents mnuStatsNonParametricOneWayAnova As ToolStripMenuItem
     Friend WithEvents mnuStatsNonParametricTwoWayAnova As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
-    Friend WithEvents ResizeWorksheetToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents GraphicsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuGraphics As ToolStripMenuItem
     Friend WithEvents mnuGraphicsPlot As ToolStripMenuItem
-    Friend WithEvents mnuBoxPlot As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsBoxPlot As ToolStripMenuItem
     Friend WithEvents mnuGraphicsHistogram As ToolStripMenuItem
     Friend WithEvents mnuGraphicsProbabilityPlot As ToolStripMenuItem
     Friend WithEvents mnuGraphisDotPlot As ToolStripMenuItem
-    Friend WithEvents WindroseToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FrequencyChartToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SummaryChartToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsWindrose As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsFrequencyChart As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsSummaryChart As ToolStripMenuItem
     Friend WithEvents mnuGraphicsScatterplot As ToolStripMenuItem
-    Friend WithEvents StemAndLeafToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents LoadGraphToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsStemAndLeaf As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsLoadGraph As ToolStripMenuItem
     Friend WithEvents StatisticsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SummaryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DescribeToolStripMenuItem As ToolStripMenuItem
@@ -2364,7 +2376,6 @@ Partial Class frmMain
     Friend WithEvents EventsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StartOfTheRainsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExtremesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents LockUnlockToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuFileSave As ToolStripMenuItem
     Friend WithEvents mnuFileSaveAs As ToolStripMenuItem
     Friend WithEvents mnuFilePrint As ToolStripMenuItem
@@ -2447,26 +2458,16 @@ Partial Class frmMain
     Friend WithEvents AddMacroToMenuToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ModifyMacroInMenuToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RemoveMacroFromMenuToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ManageToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuManage As ToolStripMenuItem
     Friend WithEvents mnuCalculations As ToolStripMenuItem
-    Friend WithEvents DataToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RegularSequenceToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents EnterToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DuplicatecopyColumnsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RandomSamplesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DisplayToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ClearRemoveToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuManageReshapeSubset As ToolStripMenuItem
-    Friend WithEvents StacksToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents UnstackToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SelectToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SelectSndStackToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ExpandToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ColumnPropertiesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FactorToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NameToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FormatCtrlDToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AlignmentToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuManageData As ToolStripMenuItem
+    Friend WithEvents mnuManageDataRegularSequence As ToolStripMenuItem
+    Friend WithEvents mnuManageDataRandomSamples As ToolStripMenuItem
+    Friend WithEvents mnuManageDataView As ToolStripMenuItem
+    Friend WithEvents mnuManageReshape As ToolStripMenuItem
+    Friend WithEvents mnuManageRechapeStack As ToolStripMenuItem
+    Friend WithEvents mnuManageRechapeUnstack As ToolStripMenuItem
+    Friend WithEvents mnuManageRechapeSelect As ToolStripMenuItem
     Friend WithEvents mnuEndofRains As ToolStripMenuItem
     Friend WithEvents mnuGraphicsInventory As ToolStripMenuItem
     Friend WithEvents mnuClimateMethods As ToolStripMenuItem
@@ -2507,35 +2508,25 @@ Partial Class frmMain
     Friend WithEvents SeasonalSummaryRainToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents WaterBalanceToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents mnuClmateMethodThreeSummaries As ToolStripMenuItem
-    Friend WithEvents ManipulateToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents TransformToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RecodeToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuManageDataSort As ToolStripMenuItem
-    Friend WithEvents mnuManageManipulateRowStat As ToolStripMenuItem
-    Friend WithEvents InteractionsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents IndicatorVariablesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OneSampleToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DeleteRowsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents FactorToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents PolynomialsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuManageFactor As ToolStripMenuItem
     Friend WithEvents ProbabilityDistributionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuFileOptions As ToolStripMenuItem
-    Friend WithEvents mnuManageSubset As ToolStripMenuItem
-    Friend WithEvents mnuManageDataMerge As ToolStripMenuItem
-    Friend WithEvents SubsetToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuManageDataName As ToolStripMenuItem
+    Friend WithEvents mnuManageRechapeMerge As ToolStripMenuItem
     Friend WithEvents mnuWindowVariable As ToolStripMenuItem
     Friend WithEvents mnuWindowDataFrame As ToolStripMenuItem
     Friend WithEvents LogToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ScriptToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DataFrameToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OrderToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents InsertToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DisplayToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents DataFileToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DeleteSheetToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RenameSheetToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ReorderSheetToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuManageDataFrame As ToolStripMenuItem
+    Friend WithEvents mnuManageDataFrameOrder As ToolStripMenuItem
+    Friend WithEvents mnuManageDataFrameInsert As ToolStripMenuItem
+    Friend WithEvents mnuManageDataFrameDelete As ToolStripMenuItem
+    Friend WithEvents mnuManageDataFrameDisplay As ToolStripMenuItem
+    Friend WithEvents mnuManageDataFile As ToolStripMenuItem
+    Friend WithEvents mnuManageDataFileDeleteSheet As ToolStripMenuItem
+    Friend WithEvents mnuManageDataFileRenameSheet As ToolStripMenuItem
+    Friend WithEvents mnuManageDataFileReorderSheet As ToolStripMenuItem
     Friend WithEvents WindowsLayoutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuWindowsCascading As ToolStripMenuItem
     Friend WithEvents mnuWindowsStacked As ToolStripMenuItem
@@ -2543,4 +2534,25 @@ Partial Class frmMain
     Friend WithEvents mnuWindowsArrangedIcons As ToolStripMenuItem
     Friend WithEvents mnuWindowsEditor As ToolStripMenuItem
     Friend WithEvents mnuEditRedo As ToolStripMenuItem
+    Friend WithEvents mnuManageFactorconvertTo As ToolStripMenuItem
+    Friend WithEvents mnuMangeFactorLabel As ToolStripMenuItem
+    Friend WithEvents mnuManageFactorReorderLevels As ToolStripMenuItem
+    Friend WithEvents mnuManageFactorRecode As ToolStripMenuItem
+    Friend WithEvents mnuManageFactorReferenceLevels As ToolStripMenuItem
+    Friend WithEvents mnuManageFactorInteraction As ToolStripMenuItem
+    Friend WithEvents mnuManageFactorUnusedLevels As ToolStripMenuItem
+    Friend WithEvents mnuManageFactorIndicatorVariables As ToolStripMenuItem
+    Friend WithEvents mnuManageManipulate As ToolStripMenuItem
+    Friend WithEvents mnuTransform As ToolStripMenuItem
+    Friend WithEvents mnuManageManipulateRecode As ToolStripMenuItem
+    Friend WithEvents mnuManageManipulateSort As ToolStripMenuItem
+    Friend WithEvents mnuManageManipulateRowStat As ToolStripMenuItem
+    Friend WithEvents mnuManageManipulatePolynomials As ToolStripMenuItem
+    Friend WithEvents mnuManageDataFrameProtectLockUnlock As ToolStripMenuItem
+    Friend WithEvents mnuManageDataFrameHideShow As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsGraphicsOptions As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsGraphicsOptionsLayers As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsGraphicsOptionsAxes As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsGraphicsOptionsThemes As ToolStripMenuItem
+    Friend WithEvents mnuGraphicsGraphicsOptionsFacets As ToolStripMenuItem
 End Class

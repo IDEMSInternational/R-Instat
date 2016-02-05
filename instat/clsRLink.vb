@@ -19,7 +19,7 @@ Imports RDotNet
 Public Class RLink
     ' R interface class. Each instance of the class has its own REngine instance
     Dim strClimateObjectPath As String = "C:\\ClimateObject\\R"
-    Dim strClimateObject As String = "ClimateObject"
+    Public strClimateObject As String = "ClimateObject"
     Dim strInstatObjectPath As String = "static/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
     Public clsEngine As REngine
@@ -150,12 +150,11 @@ Public Class RLink
 
     End Function
 
-    Public Sub climateObject() 'creates an instance of the climate object
+    Public Sub CreateNewClimateObject() 'creates an instance of the climate object
         If Not bClimateObjectExists Then
             RunScript("setwd('" & strClimateObjectPath & "')")
             RunScript("source(" & Chr(34) & "SourcingScript.R" & Chr(34) & ")")
-            MsgBox("Need to fix the code here to get data from the data object")
-            RunScript("ClimateObject<-climate$new(data_tables=list(data=data))")
+            RunScript(strClimateObject & "<-climate$new()")
             bClimateObjectExists = True
         End If
     End Sub

@@ -40,7 +40,7 @@ Public Class ucrSelector
             lstAvailableVariable.MultiSelect = True
         End If
     End Sub
-    'lstAvailableVariable.SelectedItems.Count > 0
+
     Public Sub Add()
         If (lstAvailableVariable.SelectedItems.Count > 0) Then
             CurrentReceiver.AddSelected()
@@ -48,12 +48,33 @@ Public Class ucrSelector
         End If
     End Sub
 
-    Public Sub Remove()
-        CurrentReceiver.RemoveSelected()
+    Public Sub AddVariable(strDataFrameName As String, strVariableName As String)
+        Dim lviTemp As New ListViewItem
+        lstAvailableVariable.SelectedItems.Clear()
+        lstAvailableVariable.FullRowSelect = True
+        lstAvailableVariable.HideSelection = False
+        CurrentReceiver.Clear()
+        For Each lviTemp In lstAvailableVariable.Items
+            If lviTemp.Name = strVariableName Then
+                If lviTemp.Group.Name = strDataFrameName Then
+                    lviTemp.Selected = True
+                    lstAvailableVariable.Select()
+                End If
+            End If
+        Next
+        Add()
     End Sub
-
+    Public Sub ShowOptionsDialog()
+        'code for dislaying dialog goes here
+    End Sub
     Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.DoubleClick
         Add()
+    End Sub
+
+    Private Sub lstAvailableVariable_KeyPress(sender As Object, e As KeyPressEventArgs) Handles lstAvailableVariable.KeyPress
+        If e.KeyChar = vbCr Then
+            Add()
+        End If
     End Sub
 
 End Class
