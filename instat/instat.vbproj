@@ -695,6 +695,12 @@
     <Compile Include="dlgRecode.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReferenceLevel.Designer.vb">
+      <DependentUpon>dlgReferenceLevel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReferenceLevel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRegressionSimple.Designer.vb">
       <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
     </Compile>
@@ -1910,6 +1916,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRecode.sw-KE.resx">
       <DependentUpon>dlgRecode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevel.fr-FR.resx">
+      <DependentUpon>dlgReferenceLevel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevel.resx">
+      <DependentUpon>dlgReferenceLevel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevel.sw-KE.resx">
+      <DependentUpon>dlgReferenceLevel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegressionSimple.fr-FR.resx">
       <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
