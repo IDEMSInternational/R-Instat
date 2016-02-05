@@ -120,7 +120,7 @@ Public Class frmMain
         dlgStemAndLeaf.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphisDotPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphisDotPlot.Click
+    Private Sub mnuGraphisDotPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsDotPlot.Click
         dlgDotPlot.ShowDialog()
     End Sub
 
@@ -261,7 +261,7 @@ Public Class frmMain
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuManageManipulateRowStat_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRowStat.Click
+    Private Sub mnuManageManipulateRowStat_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRowSummary.Click
         dlgRowStats.ShowDialog()
     End Sub
 
