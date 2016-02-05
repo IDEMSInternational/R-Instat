@@ -16,6 +16,9 @@
 Imports instat.Translations
 Public Class dlgStack
     Private Sub stackDefaultSettings()
+        'Set receiver/selector options
+        ucrReceiverColumnsToBeStack.Selector = ucrDataFrameAddRemove
+        ucrIDVariablesReceiver.Selector = ucrDataFrameAddRemove
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         ucrIDVariablesReceiver.Visible = False
         txtStackDataInto.Text = "Value"
@@ -25,11 +28,6 @@ Public Class dlgStack
     End Sub
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         stackDefaultSettings()
-
-        'Set receiver/selector options
-        ucrReceiverColumnsToBeStack.Selector = ucrDataFrameAddRemove
-        ucrIDVariablesReceiver.Selector = ucrDataFrameAddRemove
-
         'Set function parameters/settings
         ucrBase.clsRsyntax.SetFunction("melt")
         ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtFactorInto.Text & Chr(34))
