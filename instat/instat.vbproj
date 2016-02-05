@@ -1045,6 +1045,12 @@
     <Compile Include="ucrDistributionsWithParameters.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrMultipleNumeric.Designer.vb">
+      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMultipleNumeric.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrNewColumnName.Designer.vb">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
     </Compile>
@@ -2375,6 +2381,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDistributionsWithParameters.sw-KE.resx">
       <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMultipleNumeric.fr-FR.resx">
+      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMultipleNumeric.resx">
+      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMultipleNumeric.sw-KE.resx">
+      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNewColumnName.fr-FR.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
