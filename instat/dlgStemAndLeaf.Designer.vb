@@ -22,18 +22,18 @@ Partial Class dlgStemAndLeaf
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverStemAndLeaf = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'UcrAddRemove
+        'ucrAddRemove
         '
-        Me.UcrAddRemove.Location = New System.Drawing.Point(2, 12)
-        Me.UcrAddRemove.Name = "UcrAddRemove"
-        Me.UcrAddRemove.Size = New System.Drawing.Size(213, 129)
-        Me.UcrAddRemove.TabIndex = 0
+        Me.ucrAddRemove.Location = New System.Drawing.Point(2, 12)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(213, 129)
+        Me.ucrAddRemove.TabIndex = 0
         '
         'ucrReceiverStemAndLeaf
         '
@@ -67,7 +67,7 @@ Partial Class dlgStemAndLeaf
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverStemAndLeaf)
-        Me.Controls.Add(Me.UcrAddRemove)
+        Me.Controls.Add(Me.ucrAddRemove)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -79,7 +79,7 @@ Partial Class dlgStemAndLeaf
 
     End Sub
 
-    Friend WithEvents UcrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrReceiverStemAndLeaf As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblSelectedVariable As Label

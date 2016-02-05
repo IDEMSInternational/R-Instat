@@ -28,6 +28,18 @@ Public Class ucrReceiver
 
     End Sub
 
+    Public Overridable Sub Clear()
+
+    End Sub
+
+    Public Overridable Sub SetColor()
+
+    End Sub
+
+    Public Overridable Sub RemoveColor()
+
+    End Sub
+
     Public Overridable Function GetVariables() As RFunction
         Dim clsGetVariablesFunc As New RFunction
         Return clsGetVariablesFunc
@@ -39,7 +51,9 @@ Public Class ucrReceiver
     End Function
 
     Public Sub SetMeAsReceiver()
+        Selector.CurrentReceiver.RemoveColor()
         Selector.SetCurrentReceiver(Me)
+        Selector.CurrentReceiver.SetColor()
     End Sub
 
     Private Sub ucrReceiver_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -70,4 +84,5 @@ Public Class ucrReceiver
         Next
         Return strTemp
     End Function
+
 End Class
