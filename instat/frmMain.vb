@@ -92,7 +92,7 @@ Public Class frmMain
         dlgCalculator.ShowDialog()
     End Sub
 
-    Private Sub mnuBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuBoxPlot.Click
+    Private Sub mnuGraphicsBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBoxPlot.Click
         dlgBoxplot.ShowDialog()
     End Sub
 
@@ -116,7 +116,7 @@ Public Class frmMain
         dlgHistogram.ShowDialog()
     End Sub
 
-    Private Sub StemAndLeafToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StemAndLeafToolStripMenuItem.Click
+    Private Sub StemAndLeafToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsStemAndLeaf.Click
         dlgStemAndLeaf.ShowDialog()
     End Sub
 
@@ -746,5 +746,37 @@ Public Class frmMain
 
     Private Sub mnuEditRedo_Click(sender As Object, e As EventArgs) Handles mnuEditRedo.Click
         frmEditor.grdData.Redo()
+    End Sub
+
+    Private Sub mnuFilePrint_Click(sender As Object, e As EventArgs) Handles mnuFilePrint.Click
+        Dim docToPrint As Printing.PrintDocument = Nothing
+        Try
+            docToPrint = frmEditor.grdData.CurrentWorksheet.CreatePrintSession().PrintDocument
+
+        Catch ex As Exception
+            MessageBox.Show(Me, ex.Message, Me.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End Try
+        Using pd = New PrintDialog()
+            pd.Document = docToPrint
+            pd.UseEXDialog = True
+            If pd.ShowDialog() = DialogResult.OK Then
+                docToPrint.PrinterSettings = pd.PrinterSettings
+                docToPrint.Print()
+            End If
+        End Using
+    End Sub
+
+    Private Sub mnuFilePrintPreview_Click(sender As Object, e As EventArgs) Handles mnuFilePrintPreview.Click
+        Dim sheetPreview = frmEditor.grdData.CurrentWorksheet
+
+        Using session = sheetPreview.CreatePrintSession()
+            Using previewPrint As New PrintPreviewDialog()
+                previewPrint.Document = session.PrintDocument
+                previewPrint.SetBounds(200, 200, 1024, 768)
+                previewPrint.PrintPreviewControl.Zoom = 1.0
+                previewPrint.ShowDialog(Me)
+            End Using
+        End Using
     End Sub
 End Class
