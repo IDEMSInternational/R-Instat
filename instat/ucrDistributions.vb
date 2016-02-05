@@ -100,6 +100,7 @@ Public Class ucrDistributions
         Dim clsBernouliDist As New Distribution
         Dim clsBinomialDist As New Distribution
         Dim clsPoissonDist As New Distribution
+        Dim clsVonnMises As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -188,6 +189,17 @@ Public Class ucrDistributions
         clsPoissonDist.strDFunctionName = "dpois"
         clsPoissonDist.AddParameter("mean", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
+
+
+        ' von mises distribution
+        clsVonnMises.strNameTag = "von_mises"
+        clsVonnMises.strRFunctionName = "rvonmises"
+        clsVonnMises.strPFunctionName = "pvonmises"
+        clsVonnMises.strQFunctionName = "qvonmises"
+        clsVonnMises.strDFunctionName = "dvonmises"
+        clsVonnMises.AddParameter("mean", "Mean", "pi")
+        clsVonnMises.AddParameter("kappa", "Kappa", 0)
+        lstAllDistributions.Add(clsVonnMises)
 
         bDistributionsSet = True
     End Sub

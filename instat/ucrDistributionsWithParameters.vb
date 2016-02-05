@@ -65,8 +65,8 @@ Public Class ucrDistributionsWithParameters
                 lstParameterLabels(i).Text = translate(clsCurrDistribution.clsParameters(i).strNameTag)
                 lstCurrArguments.Add(clsCurrDistribution.clsParameters(i).strArgumentName)
                 If clsCurrDistribution.clsParameters(i).bHasDefault Then
-                    lstParameterTextBoxes(i).Text = clsCurrDistribution.clsParameters(i).dcmDefaultValue
-                    clsRSyntax.AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).dcmDefaultValue, clsRFunction:=clsCurrRFunction)
+                    lstParameterTextBoxes(i).Text = clsCurrDistribution.clsParameters(i).strDefaultValue
+                    clsRSyntax.AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).strDefaultValue, clsRFunction:=clsCurrRFunction)
                 Else
                     lstParameterTextBoxes(i).Clear()
                 End If
