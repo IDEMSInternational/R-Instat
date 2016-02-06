@@ -459,6 +459,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Condition.
+        '''</summary>
+        Friend ReadOnly Property Condition() As String
+            Get
+                Return ResourceManager.GetString("Condition", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Continuity Correction.
         '''</summary>
         Friend ReadOnly Property Continuity__Correction() As String
@@ -855,11 +864,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Equal To.
+        '''</summary>
+        Friend ReadOnly Property Equal_To() As String
+            Get
+                Return ResourceManager.GetString("Equal_To", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Evaporation.
         '''</summary>
         Friend ReadOnly Property Evaporation() As String
             Get
                 Return ResourceManager.GetString("Evaporation", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Exclude.
+        '''</summary>
+        Friend ReadOnly Property Exclude() As String
+            Get
+                Return ResourceManager.GetString("Exclude", resourceCulture)
             End Get
         End Property
         
@@ -1125,6 +1152,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Greater Than.
+        '''</summary>
+        Friend ReadOnly Property Greater_Than() As String
+            Get
+                Return ResourceManager.GetString("Greater_Than", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Grid square.
         '''</summary>
         Friend ReadOnly Property Grid_square() As String
@@ -1211,6 +1247,15 @@ Namespace My.Resources
         Friend ReadOnly Property Import_Export() As String
             Get
                 Return ResourceManager.GetString("Import_Export", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Include.
+        '''</summary>
+        Friend ReadOnly Property Include() As String
+            Get
+                Return ResourceManager.GetString("Include", resourceCulture)
             End Get
         End Property
         
@@ -2231,6 +2276,15 @@ Namespace My.Resources
         Friend ReadOnly Property Restrict_filter() As String
             Get
                 Return ResourceManager.GetString("Restrict_filter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Restrict Options.
+        '''</summary>
+        Friend ReadOnly Property Restrict_Options() As String
+            Get
+                Return ResourceManager.GetString("Restrict_Options", resourceCulture)
             End Get
         End Property
         
