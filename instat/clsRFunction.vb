@@ -88,7 +88,9 @@ Public Class RFunction
     Public Sub AddParameter(clsParam As RParameter)
         Dim i As Integer = -1
         If Not clsParameters Is Nothing Then
-            i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(clsParam.strArgumentName))
+            If clsParam.strArgumentName IsNot Nothing Then
+                i = clsParameters.FindIndex(Function(x) x.strArgumentName.Equals(clsParam.strArgumentName))
+            End If
         End If
 
         If i = -1 Then
