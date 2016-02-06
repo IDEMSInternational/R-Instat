@@ -1135,4 +1135,22 @@
   <data name="von_mises" xml:space="preserve">
     <value>von mises</value>
   </data>
+  <data name="Condition" xml:space="preserve">
+    <value>Condition</value>
+  </data>
+  <data name="Equal_To" xml:space="preserve">
+    <value>Equal To</value>
+  </data>
+  <data name="Exclude" xml:space="preserve">
+    <value>Exclude</value>
+  </data>
+  <data name="Greater_Than" xml:space="preserve">
+    <value>Greater Than</value>
+  </data>
+  <data name="Include" xml:space="preserve">
+    <value>Include</value>
+  </data>
+  <data name="Restrict_Options" xml:space="preserve">
+    <value>Restrict Options</value>
+  </data>
 </root>
