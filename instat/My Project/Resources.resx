@@ -1075,4 +1075,64 @@
   <data name="View" xml:space="preserve">
     <value>View</value>
   </data>
+  <data name="Axes" xml:space="preserve">
+    <value>Axes</value>
+  </data>
+  <data name="Bottom" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="Column_summaries" xml:space="preserve">
+    <value>Column summaries</value>
+  </data>
+  <data name="Facets" xml:space="preserve">
+    <value>Facets</value>
+  </data>
+  <data name="Graphic_options" xml:space="preserve">
+    <value>Graphic options</value>
+  </data>
+  <data name="Layers" xml:space="preserve">
+    <value>Layers</value>
+  </data>
+  <data name="Permute_rows" xml:space="preserve">
+    <value>Permute rows</value>
+  </data>
+  <data name="Random_subset" xml:space="preserve">
+    <value>Random subset</value>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="Rename_sheets" xml:space="preserve">
+    <value>Rename sheets</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>Reorder</value>
+  </data>
+  <data name="Reorder_sheets" xml:space="preserve">
+    <value>Reoder sheets</value>
+  </data>
+  <data name="Restrict_filter" xml:space="preserve">
+    <value>Restrict(Filter)</value>
+  </data>
+  <data name="Row_summary" xml:space="preserve">
+    <value>Row summary</value>
+  </data>
+  <data name="Themes" xml:space="preserve">
+    <value>Themes</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="View_data" xml:space="preserve">
+    <value>View data</value>
+  </data>
+  <data name="Kappa" xml:space="preserve">
+    <value>Kappa</value>
+  </data>
+  <data name="vonmises" xml:space="preserve">
+    <value>vonmises</value>
+  </data>
+  <data name="von_mises" xml:space="preserve">
+    <value>von mises</value>
+  </data>
 </root>
