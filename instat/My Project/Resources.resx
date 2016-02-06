@@ -1153,4 +1153,55 @@
   <data name="Restrict_Options" xml:space="preserve">
     <value>Restrict Options</value>
   </data>
+  <data name="Counts_Totals" xml:space="preserve">
+    <value>Counts Totals</value>
+  </data>
+  <data name="End_of_the_Rains" xml:space="preserve">
+    <value>End of the Rains</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="Examine" xml:space="preserve">
+    <value>Examine</value>
+  </data>
+  <data name="Heat_Sum" xml:space="preserve">
+    <value>Heat Sum</value>
+  </data>
+  <data name="Import_daily_data" xml:space="preserve">
+    <value>Import daily data</value>
+  </data>
+  <data name="Interpolate" xml:space="preserve">
+    <value>Interpolate</value>
+  </data>
+  <data name="Make_Factor" xml:space="preserve">
+    <value>Make Factor</value>
+  </data>
+  <data name="Markov_Modelling" xml:space="preserve">
+    <value>Markov Modelling</value>
+  </data>
+  <data name="Model_Probabilities" xml:space="preserve">
+    <value>Model Probabilities</value>
+  </data>
+  <data name="Penman" xml:space="preserve">
+    <value>Penman</value>
+  </data>
+  <data name="Prepare" xml:space="preserve">
+    <value>Prepare</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>Process</value>
+  </data>
+  <data name="Shift_Daily_data" xml:space="preserve">
+    <value>Shift Daily data</value>
+  </data>
+  <data name="Site" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="Stack_Daily_data" xml:space="preserve">
+    <value>Stack Daily data</value>
+  </data>
+  <data name="Unstack_Daily_data" xml:space="preserve">
+    <value>Unstack Daily data</value>
+  </data>
 </root>
