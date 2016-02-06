@@ -233,16 +233,22 @@
     <Compile Include="dlgColumnStats.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgControlOptions.Designer.vb">
-      <DependentUpon>dlgControlOptions.vb</DependentUpon>
+    <Compile Include="sdgRestrict.Designer.vb">
+      <DependentUpon>sdgRestrict.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgControlOptions.vb">
+    <Compile Include="sdgRestrict.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgConvertColumnsToFactors.Designer.vb">
       <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgConvertColumnsToFactors.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgConvertTo.Designer.vb">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgConvertTo.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCorrelation.designer.vb">
@@ -695,6 +701,12 @@
     <Compile Include="dlgRandomSample.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRank.Designer.vb">
+      <DependentUpon>dlgRank.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRank.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRecode.Designer.vb">
       <DependentUpon>dlgRecode.vb</DependentUpon>
     </Compile>
@@ -717,6 +729,12 @@
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRegularSequence.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRemoveUnusedLabels.Designer.vb">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRemoveUnusedLabels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReorder.Designer.vb">
@@ -1045,6 +1063,12 @@
     <Compile Include="ucrDistributionsWithParameters.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrMultipleNumeric.Designer.vb">
+      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMultipleNumeric.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrNewColumnName.Designer.vb">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
     </Compile>
@@ -1242,14 +1266,14 @@
     <EmbeddedResource Include="dlgColumnRows.sw-KE.resx">
       <DependentUpon>dlgColumnRows.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgControlOptions.fr-FR.resx">
-      <DependentUpon>dlgControlOptions.vb</DependentUpon>
+    <EmbeddedResource Include="sdgRestrict.fr-FR.resx">
+      <DependentUpon>sdgRestrict.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgControlOptions.resx">
-      <DependentUpon>dlgControlOptions.vb</DependentUpon>
+    <EmbeddedResource Include="sdgRestrict.resx">
+      <DependentUpon>sdgRestrict.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgControlOptions.sw-KE.resx">
-      <DependentUpon>dlgControlOptions.vb</DependentUpon>
+    <EmbeddedResource Include="sdgRestrict.sw-KE.resx">
+      <DependentUpon>sdgRestrict.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgConvertColumnsToFactors.fr-FR.resx">
       <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
@@ -1259,6 +1283,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgConvertColumnsToFactors.sw-KE.resx">
       <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConvertTo.fr-FR.resx">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConvertTo.resx">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConvertTo.sw-KE.resx">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorrelation.fr-FR.resx">
       <DependentUpon>dlgCorrelation.vb</DependentUpon>
@@ -1923,6 +1956,15 @@
     <EmbeddedResource Include="dlgRandomSample.sw-KE.resx">
       <DependentUpon>dlgRandomSample.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRank.fr-FR.resx">
+      <DependentUpon>dlgRank.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRank.resx">
+      <DependentUpon>dlgRank.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRank.sw-KE.resx">
+      <DependentUpon>dlgRank.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRecode.fr-FR.resx">
       <DependentUpon>dlgRecode.vb</DependentUpon>
     </EmbeddedResource>
@@ -1958,6 +2000,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.sw-KE.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRemoveUnusedLabels.fr-FR.resx">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRemoveUnusedLabels.resx">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRemoveUnusedLabels.sw-KE.resx">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorder.fr-FR.resx">
       <DependentUpon>dlgReorder.vb</DependentUpon>
@@ -2375,6 +2426,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDistributionsWithParameters.sw-KE.resx">
       <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMultipleNumeric.fr-FR.resx">
+      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMultipleNumeric.resx">
+      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMultipleNumeric.sw-KE.resx">
+      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNewColumnName.fr-FR.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>

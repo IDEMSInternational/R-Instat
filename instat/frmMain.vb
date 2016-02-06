@@ -50,7 +50,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
+    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSummaryDescribe.Click
         dlgDescriptiveStatistics.ShowDialog()
     End Sub
 
@@ -120,7 +120,7 @@ Public Class frmMain
         dlgStemAndLeaf.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphisDotPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphisDotPlot.Click
+    Private Sub mnuGraphisDotPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsDotPlot.Click
         dlgDotPlot.ShowDialog()
     End Sub
 
@@ -253,15 +253,15 @@ Public Class frmMain
         dlgSeasonalSummaryRain.ShowDialog()
     End Sub
 
-    Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) Handles mnuStatsNonParametricOneWayAnova.Click
+    Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricOneWayAnova.Click
         'dlgOneWayAnova.ShowDialog()
     End Sub
 
-    Private Sub mnuStatsSummaryColumnStat_Click(sender As Object, e As EventArgs) Handles mnuStatsSummaryColumnStat.Click
+    Private Sub mnuStatsSummaryColumnStat_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSummaryColumnStat.Click
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuManageManipulateRowStat_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRowStat.Click
+    Private Sub mnuManageManipulateRowStat_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRowSummary.Click
         dlgRowStats.ShowDialog()
     End Sub
 
@@ -269,7 +269,7 @@ Public Class frmMain
         dlgScatterPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuStatsRegressionSimple_Click(sender As Object, e As EventArgs) Handles mnuStatsRegressionSimple.Click
+    Private Sub mnuStatsRegressionSimple_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionSimple.Click
         dlgRegressionSimple.ShowDialog()
     End Sub
 
@@ -301,19 +301,19 @@ Public Class frmMain
         dlgReplace.ShowDialog()
     End Sub
 
-    Private Sub OneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneSampleToolStripMenuItem.Click
+    Private Sub OneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsOneSample.Click
         dlgOneSample.ShowDialog()
     End Sub
 
-    Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyToolStripMenuItem.Click
+    Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesFrequency.Click
         dlgFreqTables.ShowDialog()
     End Sub
 
-    Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SummaryToolStripMenuItem1.Click
+    Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesSummary.Click
         dlgSummaryTables.ShowDialog()
     End Sub
 
-    Private Sub GammaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GammaToolStripMenuItem.Click
+    Private Sub GammaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsGamma.Click
         dlgGammaDistr.ShowDialog()
     End Sub
 
@@ -333,7 +333,7 @@ Public Class frmMain
         dlgPolynomials.ShowDialog()
     End Sub
 
-    Private Sub ExtremaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExtremaToolStripMenuItem.Click
+    Private Sub ExtremaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsExtrema.Click
         dlgExtremes.ShowDialog()
     End Sub
 
@@ -345,7 +345,7 @@ Public Class frmMain
         dlgUnstack.ShowDialog()
     End Sub
 
-    Private Sub ChisquareTestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChisquareTestToolStripMenuItem.Click
+    Private Sub ChisquareTestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsChisquareTest.Click
         dlgChiSquareTest.ShowDialog()
     End Sub
 
@@ -407,47 +407,47 @@ Public Class frmMain
         dlgDeleteRows.ShowDialog()
     End Sub
 
-    Private Sub OrthogonalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OrthogonalToolStripMenuItem.Click
+    Private Sub OrthogonalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOrthogonal.Click
         dlgOrthogonal.ShowDialog()
     End Sub
 
-    Private Sub GeneralToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles GeneralToolStripMenuItem1.Click
+    Private Sub GeneralToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceGeneral.Click
         dlgGeneral.ShowDialog()
     End Sub
 
-    Private Sub BivariateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BivariateToolStripMenuItem.Click
+    Private Sub BivariateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceBivariate.Click
         dlgBivariateANOVA.ShowDialog()
     End Sub
 
-    Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OnewayToolStripMenuItem.Click
+    Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOneWay.Click
         'dlgOneWayAnova.ShowDialog()
     End Sub
 
-    Private Sub SimpleWithGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SimpleWithGroupsToolStripMenuItem.Click
+    Private Sub SimpleWithGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionSimpleWithGroups.Click
         dlgSimpleWithGroups.ShowDialog()
     End Sub
 
-    Private Sub GeneralLinearModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneralLinearModelToolStripMenuItem.Click
+    Private Sub GeneralLinearModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionGeneralLinearModel.Click
         dlgGeneralisedLinearModels.ShowDialog()
     End Sub
 
-    Private Sub CorrelationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationToolStripMenuItem.Click
+    Private Sub CorrelationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionCorrelation.Click
         dlgCorrelation.ShowDialog()
     End Sub
 
-    Private Sub LogLinearModelsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogLinearModelsToolStripMenuItem.Click
+    Private Sub LogLinearModelsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionLogLinearModels.Click
         dlglogLinearModels.ShowDialog()
     End Sub
 
-    Private Sub OneAndTwoSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OneAndTwoSamplesToolStripMenuItem.Click
+    Private Sub OneAndTwoSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricOneAndTwoSamples.Click
         dlgNon_ParemetricOneandTwoSampleTests.ShowDialog()
     End Sub
 
-    Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuStatsNonParametricTwoWayAnova.Click
+    Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoWayAnova.Click
         dlgTwoWayAnova.ShowDialog()
     End Sub
 
-    Private Sub CorrelationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorrelationsToolStripMenuItem.Click
+    Private Sub CorrelationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTimeSeriesCorrelations.Click
         dlgCorrelation.ShowDialog()
     End Sub
 
@@ -563,7 +563,7 @@ Public Class frmMain
         dlgTotals.ShowDialog()
     End Sub
 
-    Private Sub PoissonOneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PoissonOneSampleToolStripMenuItem.Click
+    Private Sub PoissonOneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsTwoSample.Click
         dlgTwoSamples.ShowDialog()
     End Sub
 
