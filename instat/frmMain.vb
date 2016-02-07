@@ -176,80 +176,80 @@ Public Class frmMain
         dlgThreeSummaries.ShowDialog()
     End Sub
 
-    Private Sub StartOfRainToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartOfRainToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationStartOfRain_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationStartOfRain.Click
         dlgAddStartRain.ShowDialog()
     End Sub
 
-    Private Sub EndOfRainToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EndOfRainToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationEndOfRain_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationEndOfRain.Click
         dlgEndRain.ShowDialog()
     End Sub
 
-    Private Sub ChangeFormatDayMonthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeFormatDayMonthToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationChangeFormatDayMonth_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationChangeFormatDayMonth.Click
         dlgChangeFormatDayMonth.ShowDialog()
     End Sub
 
-    Private Sub ExportCPTToTabularToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportCPTToTabularToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationExportCPTToTabular_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationExportCPTToTabular.Click
         dlgCPTtoTabularData.ShowDialog()
     End Sub
 
-    Private Sub DayMonthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DayMonthToolStripMenuItem.Click
+    Private Sub nuClimateMethodsDataManipulationDayMonth_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationDayMonth.Click
         dlgDayMonth.ShowDialog()
 
     End Sub
 
-    Private Sub DisplayDailyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DisplayDailyToolStripMenuItem1.Click
+    Private Sub mnuClimateMethodsDataManipulationDisplayDaily_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationDisplayDaily.Click
         dlgDisplayDaily.ShowDialog()
     End Sub
 
-    Private Sub DisplayDOYOfYearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayDOYOfYearToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationDisplayDOYOfYear_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationDisplayDOYOfYear.Click
         dlgDisplayDOYofYear.ShowDialog()
     End Sub
 
-    Private Sub DisplayRainRunningTotalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayRainRunningTotalToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationDisplayRainRunningTotal_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationDisplayRainRunningTotal.Click
         dlgDisplayRainRunningTotal.ShowDialog()
     End Sub
 
-    Private Sub DisplaySpellLengthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplaySpellLengthToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationDisplaySpellLength_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationDisplaySpellLength.Click
         dlgDisplaySpellLength.ShowDialog()
     End Sub
 
-    Private Sub ExportForPICSAToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportForPICSAToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationExportForPICSA_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationExportForPICSA.Click
         dlgExportforPICSA.ShowDialog()
     End Sub
 
-    Private Sub ExtremeEventsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExtremeEventsToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationExtremeEvents_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationExtremeEvents.Click
         dlgExtremeEvents.ShowDialog()
     End Sub
 
-    Private Sub MissingDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MissingDataToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationMissingData_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationMissingData.Click
         dlgMissingData.ShowDialog()
     End Sub
 
-    Private Sub MissingDataTableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MissingDataTableToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationMissingDataTable_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationMissingDataTable.Click
         dlgMissingDataTable.ShowDialog()
     End Sub
 
-    Private Sub MonthlySummariesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlySummariesToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationMonthlySummaries_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationMonthlySummaries.Click
         dlgMonthlySummaries.ShowDialog()
     End Sub
 
-    Private Sub OutputForCDTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputForCDTToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsDataManipulationOutputForCD_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsDataManipulationOutputForCD.Click
         dlgOutputforCDT.ShowDialog()
     End Sub
 
-    Private Sub OutputForCPTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputForCPTToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsAdditionalOutputForCPT_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsAdditionalOutputForCPT.Click
         dlgOutputforCPT.ShowDialog()
     End Sub
 
-    Private Sub RainsStatisticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RainsStatisticsToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsAdditionalRainsStatistics_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsAdditionalRainsStatistics.Click
         dlgRainStats.ShowDialog()
     End Sub
 
-    Private Sub SeasonalSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SeasonalSummaryToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsAdditionalSeasonalSummary_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsAdditionalSeasonalSummary.Click
         dlgSeasonalSummary.ShowDialog()
     End Sub
 
-    Private Sub SeasonalSummaryRainToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SeasonalSummaryRainToolStripMenuItem.Click
+    Private Sub mnuClimateMethodsAdditionalSeasonalSummaryRain_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsAdditionalSeasonalSummaryRain.Click
         dlgSeasonalSummaryRain.ShowDialog()
     End Sub
 
