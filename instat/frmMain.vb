@@ -24,8 +24,10 @@ Public Class frmMain
 
     Public clsRLink As New RLink
     Public clsGrids As New clsGridLink
+    Public strHelpFilePath As String = ""
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        strHelpFilePath = "static\Help\R-Instat.chm"
         frmEditor.MdiParent = Me
         frmCommand.MdiParent = Me
         frmLog.MdiParent = Me
@@ -39,7 +41,7 @@ Public Class frmMain
 
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
-        clsRLink.SetOutput(frmCommand.txtCommand)
+        clsRLink.SetOutput(frmCommand.txtcommand)
         clsRLink.clsEngine = REngine.GetInstance()
         clsRLink.clsEngine.Initialize()
         'Sets up R source files
