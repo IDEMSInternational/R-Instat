@@ -37,8 +37,7 @@ Partial Class dlgRank
         Me.rdoKeptAsMissing = New System.Windows.Forms.RadioButton()
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirstMissingValues = New System.Windows.Forms.RadioButton()
-        Me.txtNewColumnName = New System.Windows.Forms.TextBox()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.SuspendLayout()
@@ -205,30 +204,20 @@ Partial Class dlgRank
         Me.rdoFirstMissingValues.Text = "First"
         Me.rdoFirstMissingValues.UseVisualStyleBackColor = True
         '
-        'txtNewColumnName
+        'ucrNewColumnNameSelector
         '
-        Me.txtNewColumnName.Location = New System.Drawing.Point(153, 286)
-        Me.txtNewColumnName.Name = "txtNewColumnName"
-        Me.txtNewColumnName.Size = New System.Drawing.Size(253, 20)
-        Me.txtNewColumnName.TabIndex = 7
-        '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(9, 293)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(95, 13)
-        Me.lblNewColumnName.TabIndex = 8
-        Me.lblNewColumnName.Tag = "New_column_name"
-        Me.lblNewColumnName.Text = "New column name"
+        Me.ucrNewColumnNameSelector.Location = New System.Drawing.Point(12, 284)
+        Me.ucrNewColumnNameSelector.Name = "ucrNewColumnNameSelector"
+        Me.ucrNewColumnNameSelector.Size = New System.Drawing.Size(367, 35)
+        Me.ucrNewColumnNameSelector.TabIndex = 7
+        Me.ucrNewColumnNameSelector.ucrDataFrameSelector = Nothing
         '
         'dlgRank
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 385)
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.txtNewColumnName)
+        Me.Controls.Add(Me.ucrNewColumnNameSelector)
         Me.Controls.Add(Me.grpMissingValues)
         Me.Controls.Add(Me.grpTies)
         Me.Controls.Add(Me.lblSelectedVariable)
@@ -264,6 +253,5 @@ Partial Class dlgRank
     Friend WithEvents rdoKeptAsMissing As RadioButton
     Friend WithEvents rdoLast As RadioButton
     Friend WithEvents rdoFirstMissingValues As RadioButton
-    Friend WithEvents txtNewColumnName As TextBox
-    Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents ucrNewColumnNameSelector As ucrNewColumnName
 End Class
