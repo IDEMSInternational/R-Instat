@@ -36,9 +36,9 @@ Public Class dlgRank
         If rdoAverage.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "average" & Chr(34))
         ElseIf rdoMinimum.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "minimum" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "min" & Chr(34))
         ElseIf rdoMaximum.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "maximum" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "max" & Chr(34))
         ElseIf rdoFirst.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "first" & Chr(34))
         ElseIf rdoRandom.Checked = True Then
