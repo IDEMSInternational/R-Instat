@@ -624,16 +624,17 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
-        Dim kvpFile As KeyValuePair(Of String, String)
-        Dim clsRsyntax As New RSyntax
+        dlgSaveAs.ShowDialog()
+        'Dim kvpFile As KeyValuePair(Of String, String)
+        'Dim clsRsyntax As New RSyntax
 
-        kvpFile = SaveDialog()
-        If Not IsNothing(kvpFile.Key) Then
-            clsRsyntax.SetFunction("saveRDS")
-            clsRsyntax.AddParameter("object", clsRLink.strInstatDataObject)
-            clsRsyntax.AddParameter("file", kvpFile.Value)
-            clsRLink.RunScript(clsRsyntax.GetScript())
-        End If
+        'kvpFile = SaveDialog()
+        'If Not IsNothing(kvpFile.Key) Then
+        '    clsRsyntax.SetFunction("saveRDS")
+        '    clsRsyntax.AddParameter("object", clsRLink.strInstatDataObject)
+        '    clsRsyntax.AddParameter("file", kvpFile.Value)
+        '    clsRLink.RunScript(clsRsyntax.GetScript())
+        'End If
     End Sub
 
     Public Function SaveDialog() As KeyValuePair(Of String, String)
@@ -782,5 +783,9 @@ Public Class frmMain
 
     Private Sub RemoveUnusedLabelsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveUnusedLabelsToolStripMenuItem.Click
         dlgRemoveUnusedLabels.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageManipulateRank_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRank.Click
+        dlgRank.ShowDialog()
     End Sub
 End Class
