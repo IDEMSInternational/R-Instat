@@ -1075,4 +1075,217 @@
   <data name="View" xml:space="preserve">
     <value>View</value>
   </data>
+  <data name="Axes" xml:space="preserve">
+    <value>Axes</value>
+  </data>
+  <data name="Bottom" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="Column_summaries" xml:space="preserve">
+    <value>Column summaries</value>
+  </data>
+  <data name="Facets" xml:space="preserve">
+    <value>Facets</value>
+  </data>
+  <data name="Graphic_options" xml:space="preserve">
+    <value>Graphic options</value>
+  </data>
+  <data name="Layers" xml:space="preserve">
+    <value>Layers</value>
+  </data>
+  <data name="Permute_rows" xml:space="preserve">
+    <value>Permute rows</value>
+  </data>
+  <data name="Random_subset" xml:space="preserve">
+    <value>Random subset</value>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="Rename_sheets" xml:space="preserve">
+    <value>Rename sheets</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>Reorder</value>
+  </data>
+  <data name="Reorder_sheets" xml:space="preserve">
+    <value>Reoder sheets</value>
+  </data>
+  <data name="Restrict_filter" xml:space="preserve">
+    <value>Restrict(Filter)</value>
+  </data>
+  <data name="Row_summary" xml:space="preserve">
+    <value>Row summary</value>
+  </data>
+  <data name="Themes" xml:space="preserve">
+    <value>Themes</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="View_data" xml:space="preserve">
+    <value>View data</value>
+  </data>
+  <data name="Kappa" xml:space="preserve">
+    <value>Kappa</value>
+  </data>
+  <data name="vonmises" xml:space="preserve">
+    <value>vonmises</value>
+  </data>
+  <data name="von_mises" xml:space="preserve">
+    <value>von mises</value>
+  </data>
+  <data name="Condition" xml:space="preserve">
+    <value>Condition</value>
+  </data>
+  <data name="Equal_To" xml:space="preserve">
+    <value>Equal To</value>
+  </data>
+  <data name="Exclude" xml:space="preserve">
+    <value>Exclude</value>
+  </data>
+  <data name="Greater_Than" xml:space="preserve">
+    <value>Greater Than</value>
+  </data>
+  <data name="Include" xml:space="preserve">
+    <value>Include</value>
+  </data>
+  <data name="Restrict_Options" xml:space="preserve">
+    <value>Restrict Options</value>
+  </data>
+  <data name="Counts_Totals" xml:space="preserve">
+    <value>Counts Totals</value>
+  </data>
+  <data name="End_of_the_Rains" xml:space="preserve">
+    <value>End of the Rains</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="Examine" xml:space="preserve">
+    <value>Examine</value>
+  </data>
+  <data name="Heat_Sum" xml:space="preserve">
+    <value>Heat Sum</value>
+  </data>
+  <data name="Import_daily_data" xml:space="preserve">
+    <value>Import daily data</value>
+  </data>
+  <data name="Interpolate" xml:space="preserve">
+    <value>Interpolate</value>
+  </data>
+  <data name="Make_Factor" xml:space="preserve">
+    <value>Make Factor</value>
+  </data>
+  <data name="Markov_Modelling" xml:space="preserve">
+    <value>Markov Modelling</value>
+  </data>
+  <data name="Model_Probabilities" xml:space="preserve">
+    <value>Model Probabilities</value>
+  </data>
+  <data name="Penman" xml:space="preserve">
+    <value>Penman</value>
+  </data>
+  <data name="Prepare" xml:space="preserve">
+    <value>Prepare</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>Process</value>
+  </data>
+  <data name="Shift_Daily_data" xml:space="preserve">
+    <value>Shift Daily data</value>
+  </data>
+  <data name="Site" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="Stack_Daily_data" xml:space="preserve">
+    <value>Stack Daily data</value>
+  </data>
+  <data name="Unstack_Daily_data" xml:space="preserve">
+    <value>Unstack Daily data</value>
+  </data>
+  <data name="Additional" xml:space="preserve">
+    <value>Additional</value>
+  </data>
+  <data name="Annual_rainfall" xml:space="preserve">
+    <value>Annual rainfall</value>
+  </data>
+  <data name="Change_Format_Month" xml:space="preserve">
+    <value>Change Format Month</value>
+  </data>
+  <data name="Cliboxplot" xml:space="preserve">
+    <value>Cliboxplot</value>
+  </data>
+  <data name="Climatic_Methods" xml:space="preserve">
+    <value>Climatic Methods</value>
+  </data>
+  <data name="Cliplot" xml:space="preserve">
+    <value>Cliplot</value>
+  </data>
+  <data name="Cumulative_Exceedence" xml:space="preserve">
+    <value>Cumulative Exceedence</value>
+  </data>
+  <data name="Data_Manipulation" xml:space="preserve">
+    <value>Data Manipulation</value>
+  </data>
+  <data name="Display_Rain_Running_Total" xml:space="preserve">
+    <value>Display Rain Running Total</value>
+  </data>
+  <data name="Display_Spell_length" xml:space="preserve">
+    <value>Display Spell length</value>
+  </data>
+  <data name="Export_for_PICSA" xml:space="preserve">
+    <value>Export for PICSA</value>
+  </data>
+  <data name="Expot_CPT_to_Tabular" xml:space="preserve">
+    <value>Expot CPT to Tabular</value>
+  </data>
+  <data name="Extreme_Events" xml:space="preserve">
+    <value>Extreme Events</value>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
+  <data name="Missing_Data" xml:space="preserve">
+    <value>Missing Data</value>
+  </data>
+  <data name="Missing_Data_Table" xml:space="preserve">
+    <value>Missing Data Table</value>
+  </data>
+  <data name="Missing_values" xml:space="preserve">
+    <value>Missing values</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="Monthly_Summaries" xml:space="preserve">
+    <value>Monthly Summaries</value>
+  </data>
+  <data name="Multiple_lines" xml:space="preserve">
+    <value>Multiple lines</value>
+  </data>
+  <data name="Output_for_CDT" xml:space="preserve">
+    <value>Output for CDT</value>
+  </data>
+  <data name="Output_for_CPT" xml:space="preserve">
+    <value>Output for CPT</value>
+  </data>
+  <data name="Rain_count" xml:space="preserve">
+    <value>Rain count</value>
+  </data>
+  <data name="Rain_Statistics" xml:space="preserve">
+    <value>Rain Statistics</value>
+  </data>
+  <data name="Seasonal_Summary" xml:space="preserve">
+    <value>Seasonal Summary</value>
+  </data>
+  <data name="Seasonal_Summary_Rain" xml:space="preserve">
+    <value>Seasonal Summary Rain</value>
+  </data>
+  <data name="Three_Summaries" xml:space="preserve">
+    <value>Three Summaries</value>
+  </data>
+  <data name="Timeseries" xml:space="preserve">
+    <value>Timeseries</value>
+  </data>
 </root>

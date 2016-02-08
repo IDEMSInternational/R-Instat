@@ -50,7 +50,6 @@ Public Class ucrSelector
 
     Public Sub AddVariable(strDataFrameName As String, strVariableName As String)
         Dim lviTemp As New ListViewItem
-        Dim j As Integer
         lstAvailableVariable.SelectedItems.Clear()
         lstAvailableVariable.FullRowSelect = True
         lstAvailableVariable.HideSelection = False
@@ -65,11 +64,10 @@ Public Class ucrSelector
         Next
         Add()
     End Sub
-
-    Public Sub Remove()
-        CurrentReceiver.RemoveSelected()
+    Public Sub ShowOptionsDialog()
+        'code for dislaying dialog goes here
+        sdgRestrict.ShowDialog()
     End Sub
-
     Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.DoubleClick
         Add()
     End Sub

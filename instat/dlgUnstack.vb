@@ -16,6 +16,9 @@
 Imports instat.Translations
 Public Class dlgUnstack
     Private Sub unstackDefaultSettings()
+        ucrIDColumnReceiver.Selector = ucrSelectorByDataFrameAddRemove
+        ucrFactorToUnstackReceiver.Selector = ucrSelectorByDataFrameAddRemove
+        ucrFactorToUnstackReceiver.SetMeAsReceiver()
         autoTranslate(Me)
         ucrIDColumnReceiver.Visible = False
         chkIDColumn.Checked = False
@@ -23,9 +26,6 @@ Public Class dlgUnstack
     Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         unstackDefaultSettings()
         ucrBase.clsRsyntax.SetFunction("dcast")
-        ucrIDColumnReceiver.Selector = ucrSelectorByDataFrameAddRemove
-        ucrFactorToUnstackReceiver.Selector = ucrSelectorByDataFrameAddRemove
-        ucrFactorToUnstackReceiver.SetMeAsReceiver()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
