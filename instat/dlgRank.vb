@@ -24,6 +24,9 @@ Public Class dlgRank
         rdoKeptAsMissing.Checked = True
         rdoAverage.Checked = True
         ucrBase.clsRsyntax.iCallType = 1
+        ucrNewColumnNameSelector.SetDataFrameSelector(ucrDataFrameSelector)
+        ucrNewColumnNameSelector.SetPrefix("Rank")
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrDataFrameSelector.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
     End Sub
     Private Sub ucrReceiverRank_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRank.Leave
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables())
