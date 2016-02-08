@@ -368,3 +368,10 @@ instat_obj$methods(get_next_default_dataframe_name = function(prefix) {
 } 
 )
 
+instat_obj$methods(delete_dataframe = function(data_name) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]<<-NULL
+} 
+)
