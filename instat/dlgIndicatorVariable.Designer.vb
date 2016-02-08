@@ -28,16 +28,17 @@ Partial Class dlgIndicatorVariable
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirst = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
-        Me.cboInto = New System.Windows.Forms.ComboBox()
-        Me.lblInto = New System.Windows.Forms.Label()
         Me.chkXvariable = New System.Windows.Forms.CheckBox()
-        Me.lblInfo = New System.Windows.Forms.Label()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrDataFrameSelector = New instat.ucrDataFrame()
+        Me.lblSelectedFactors = New System.Windows.Forms.Label()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.grpLevelToBeOmitted.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(18, 260)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 369)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 0
@@ -48,7 +49,7 @@ Partial Class dlgIndicatorVariable
         Me.grpLevelToBeOmitted.Controls.Add(Me.rdoLast)
         Me.grpLevelToBeOmitted.Controls.Add(Me.rdoFirst)
         Me.grpLevelToBeOmitted.Controls.Add(Me.rdoNone)
-        Me.grpLevelToBeOmitted.Location = New System.Drawing.Point(12, 142)
+        Me.grpLevelToBeOmitted.Location = New System.Drawing.Point(5, 234)
         Me.grpLevelToBeOmitted.Name = "grpLevelToBeOmitted"
         Me.grpLevelToBeOmitted.Size = New System.Drawing.Size(123, 112)
         Me.grpLevelToBeOmitted.TabIndex = 1
@@ -104,28 +105,10 @@ Partial Class dlgIndicatorVariable
         Me.rdoNone.Text = "None"
         Me.rdoNone.UseVisualStyleBackColor = True
         '
-        'cboInto
-        '
-        Me.cboInto.FormattingEnabled = True
-        Me.cboInto.Location = New System.Drawing.Point(203, 67)
-        Me.cboInto.Name = "cboInto"
-        Me.cboInto.Size = New System.Drawing.Size(121, 21)
-        Me.cboInto.TabIndex = 2
-        '
-        'lblInto
-        '
-        Me.lblInto.AutoSize = True
-        Me.lblInto.Location = New System.Drawing.Point(204, 44)
-        Me.lblInto.Name = "lblInto"
-        Me.lblInto.Size = New System.Drawing.Size(25, 13)
-        Me.lblInto.TabIndex = 3
-        Me.lblInto.Tag = "Into"
-        Me.lblInto.Text = "Into"
-        '
         'chkXvariable
         '
         Me.chkXvariable.AutoSize = True
-        Me.chkXvariable.Location = New System.Drawing.Point(18, 108)
+        Me.chkXvariable.Location = New System.Drawing.Point(5, 196)
         Me.chkXvariable.Name = "chkXvariable"
         Me.chkXvariable.Size = New System.Drawing.Size(114, 17)
         Me.chkXvariable.TabIndex = 4
@@ -133,25 +116,47 @@ Partial Class dlgIndicatorVariable
         Me.chkXvariable.Text = "With an X Variable"
         Me.chkXvariable.UseVisualStyleBackColor = True
         '
-        'lblInfo
+        'ucrAddRemove
         '
-        Me.lblInfo.AutoSize = True
-        Me.lblInfo.Location = New System.Drawing.Point(18, 44)
-        Me.lblInfo.Name = "lblInfo"
-        Me.lblInfo.Size = New System.Drawing.Size(176, 13)
-        Me.lblInfo.TabIndex = 5
-        Me.lblInfo.Tag = "REQUIRES_FACTOR_SELECTORS"
-        Me.lblInfo.Text = "REQUIRES FACTOR SELECTORS"
+        Me.ucrAddRemove.Location = New System.Drawing.Point(1, 49)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(212, 127)
+        Me.ucrAddRemove.TabIndex = 5
+        '
+        'ucrDataFrameSelector
+        '
+        Me.ucrDataFrameSelector.Location = New System.Drawing.Point(1, 2)
+        Me.ucrDataFrameSelector.Name = "ucrDataFrameSelector"
+        Me.ucrDataFrameSelector.Size = New System.Drawing.Size(127, 41)
+        Me.ucrDataFrameSelector.TabIndex = 6
+        '
+        'lblSelectedFactors
+        '
+        Me.lblSelectedFactors.AutoSize = True
+        Me.lblSelectedFactors.Location = New System.Drawing.Point(240, 60)
+        Me.lblSelectedFactors.Name = "lblSelectedFactors"
+        Me.lblSelectedFactors.Size = New System.Drawing.Size(88, 13)
+        Me.lblSelectedFactors.TabIndex = 7
+        Me.lblSelectedFactors.Tag = "Selected_factor"
+        Me.lblSelectedFactors.Text = "selected factor(s)"
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(234, 78)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverFactor.TabIndex = 8
         '
         'dlgIndicatorVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(431, 317)
-        Me.Controls.Add(Me.lblInfo)
+        Me.ClientSize = New System.Drawing.Size(431, 424)
+        Me.Controls.Add(Me.ucrReceiverFactor)
+        Me.Controls.Add(Me.lblSelectedFactors)
+        Me.Controls.Add(Me.ucrDataFrameSelector)
+        Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.chkXvariable)
-        Me.Controls.Add(Me.lblInto)
-        Me.Controls.Add(Me.cboInto)
         Me.Controls.Add(Me.grpLevelToBeOmitted)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -172,8 +177,9 @@ Partial Class dlgIndicatorVariable
     Friend WithEvents rdoLast As RadioButton
     Friend WithEvents rdoFirst As RadioButton
     Friend WithEvents rdoNone As RadioButton
-    Friend WithEvents cboInto As ComboBox
-    Friend WithEvents lblInto As Label
     Friend WithEvents chkXvariable As CheckBox
-    Friend WithEvents lblInfo As Label
+    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrDataFrameSelector As ucrDataFrame
+    Friend WithEvents lblSelectedFactors As Label
+    Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
 End Class
