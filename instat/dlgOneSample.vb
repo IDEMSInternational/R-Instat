@@ -29,6 +29,7 @@ Public Class dlgOneSample
 
     Private Sub dlgOneSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         OneSampleDefaultSettings()
+        ucrBase.clsRsyntax.iCallType = 1
     End Sub
 
     Private Sub chkSignificanceTest_CheckedChanged(sender As Object, e As EventArgs) Handles chkSignificanceTest.CheckedChanged
@@ -70,12 +71,7 @@ Public Class dlgOneSample
             lblValue.Visible = True
         End If
     End Sub
-
-    Private Sub txtValue_TextChanged(sender As Object, e As EventArgs) Handles txtValue.TextChanged
-
-    End Sub
-
     Private Sub txtValue_Leave(sender As Object, e As EventArgs) Handles txtValue.Leave
-        ucrBase.clsRsyntax.AddParameter("", txtValue.Text)
+        ucrBase.clsRsyntax.AddParameter("mu", txtValue.Text)
     End Sub
 End Class
