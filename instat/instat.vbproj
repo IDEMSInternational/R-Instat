@@ -233,7 +233,6 @@
     <Compile Include="dlgColumnStats.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="mHelpConstants.vb" />
     <Compile Include="sdgRestrict.Designer.vb">
       <DependentUpon>sdgRestrict.vb</DependentUpon>
     </Compile>
@@ -2533,7 +2532,9 @@
     <Content Include="static\InstatObject\R\Rsetup.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="static\Help\R-Instat.chm" />
+    <Content Include="static\Help\R-Instat.chm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
