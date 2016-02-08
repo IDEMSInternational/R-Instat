@@ -64,7 +64,7 @@ Partial Class dlgOneSample
         Me.lblValue.Location = New System.Drawing.Point(130, 156)
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(34, 13)
-        Me.lblValue.TabIndex = 6
+        Me.lblValue.TabIndex = 5
         Me.lblValue.Tag = "Value"
         Me.lblValue.Text = "Value"
         Me.lblValue.Visible = False
@@ -74,7 +74,7 @@ Partial Class dlgOneSample
         Me.txtValue.Location = New System.Drawing.Point(173, 153)
         Me.txtValue.Name = "txtValue"
         Me.txtValue.Size = New System.Drawing.Size(41, 20)
-        Me.txtValue.TabIndex = 5
+        Me.txtValue.TabIndex = 6
         Me.txtValue.Visible = False
         '
         'chkSignificanceTest
@@ -94,7 +94,7 @@ Partial Class dlgOneSample
         Me.lblParameters.Location = New System.Drawing.Point(13, 92)
         Me.lblParameters.Name = "lblParameters"
         Me.lblParameters.Size = New System.Drawing.Size(55, 13)
-        Me.lblParameters.TabIndex = 3
+        Me.lblParameters.TabIndex = 2
         Me.lblParameters.Tag = "Parameter"
         Me.lblParameters.Text = "Parameter"
         '
@@ -105,7 +105,7 @@ Partial Class dlgOneSample
         Me.cboParameters.Location = New System.Drawing.Point(13, 111)
         Me.cboParameters.Name = "cboParameters"
         Me.cboParameters.Size = New System.Drawing.Size(201, 21)
-        Me.cboParameters.TabIndex = 2
+        Me.cboParameters.TabIndex = 3
         '
         'lblModels
         '
@@ -113,7 +113,7 @@ Partial Class dlgOneSample
         Me.lblModels.Location = New System.Drawing.Point(10, 34)
         Me.lblModels.Name = "lblModels"
         Me.lblModels.Size = New System.Drawing.Size(41, 13)
-        Me.lblModels.TabIndex = 1
+        Me.lblModels.TabIndex = 0
         Me.lblModels.Tag = "Models"
         Me.lblModels.Text = "Models"
         '
@@ -124,7 +124,7 @@ Partial Class dlgOneSample
         Me.cboModels.Location = New System.Drawing.Point(13, 50)
         Me.cboModels.Name = "cboModels"
         Me.cboModels.Size = New System.Drawing.Size(201, 21)
-        Me.cboModels.TabIndex = 0
+        Me.cboModels.TabIndex = 1
         Me.cboModels.Tag = ""
         '
         'lblDataColumn
@@ -133,7 +133,7 @@ Partial Class dlgOneSample
         Me.lblDataColumn.Location = New System.Drawing.Point(213, 19)
         Me.lblDataColumn.Name = "lblDataColumn"
         Me.lblDataColumn.Size = New System.Drawing.Size(68, 13)
-        Me.lblDataColumn.TabIndex = 4
+        Me.lblDataColumn.TabIndex = 1
         Me.lblDataColumn.Tag = "Data_Column"
         Me.lblDataColumn.Text = "Data Column"
         '
@@ -143,7 +143,7 @@ Partial Class dlgOneSample
         Me.grpGraphs.Location = New System.Drawing.Point(12, 149)
         Me.grpGraphs.Name = "grpGraphs"
         Me.grpGraphs.Size = New System.Drawing.Size(173, 130)
-        Me.grpGraphs.TabIndex = 5
+        Me.grpGraphs.TabIndex = 4
         Me.grpGraphs.TabStop = False
         Me.grpGraphs.Tag = "Graphs"
         Me.grpGraphs.Text = "Graphs"
@@ -162,7 +162,7 @@ Partial Class dlgOneSample
         Me.cmdOptions.Location = New System.Drawing.Point(446, 237)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOptions.TabIndex = 6
+        Me.cmdOptions.TabIndex = 5
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -172,21 +172,21 @@ Partial Class dlgOneSample
         Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(207, 35)
         Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
         Me.ucrReceiverDataColumn.Size = New System.Drawing.Size(110, 26)
-        Me.ucrReceiverDataColumn.TabIndex = 9
+        Me.ucrReceiverDataColumn.TabIndex = 2
         '
         'ucrAddRemove
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(1, 12)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(206, 131)
-        Me.ucrAddRemove.TabIndex = 8
+        Me.ucrAddRemove.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(73, 285)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 53)
-        Me.ucrBase.TabIndex = 7
+        Me.ucrBase.TabIndex = 6
         '
         'dlgOneSample
         '
