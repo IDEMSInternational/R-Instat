@@ -624,16 +624,17 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
-        Dim kvpFile As KeyValuePair(Of String, String)
-        Dim clsRsyntax As New RSyntax
+        dlgSaveAs.ShowDialog()
+        'Dim kvpFile As KeyValuePair(Of String, String)
+        'Dim clsRsyntax As New RSyntax
 
-        kvpFile = SaveDialog()
-        If Not IsNothing(kvpFile.Key) Then
-            clsRsyntax.SetFunction("saveRDS")
-            clsRsyntax.AddParameter("object", clsRLink.strInstatDataObject)
-            clsRsyntax.AddParameter("file", kvpFile.Value)
-            clsRLink.RunScript(clsRsyntax.GetScript())
-        End If
+        'kvpFile = SaveDialog()
+        'If Not IsNothing(kvpFile.Key) Then
+        '    clsRsyntax.SetFunction("saveRDS")
+        '    clsRsyntax.AddParameter("object", clsRLink.strInstatDataObject)
+        '    clsRsyntax.AddParameter("file", kvpFile.Value)
+        '    clsRLink.RunScript(clsRsyntax.GetScript())
+        'End If
     End Sub
 
     Public Function SaveDialog() As KeyValuePair(Of String, String)
