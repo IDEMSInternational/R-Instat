@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRank
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,34 +20,33 @@ Partial Class dlgRank
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrDataFrameSelector = New instat.ucrDataFrame()
-        Me.ucrReceiverSelectedVariable = New instat.ucrReceiverSingle()
+        Me.ucrReceiverRank = New instat.ucrReceiverSingle()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.grpTies = New System.Windows.Forms.GroupBox()
         Me.rdoRandom = New System.Windows.Forms.RadioButton()
         Me.rdoFirst = New System.Windows.Forms.RadioButton()
-        Me.dlgMaximum = New System.Windows.Forms.RadioButton()
+        Me.rdoMaximum = New System.Windows.Forms.RadioButton()
         Me.rdoMinimum = New System.Windows.Forms.RadioButton()
         Me.rdoAverage = New System.Windows.Forms.RadioButton()
         Me.grpMissingValues = New System.Windows.Forms.GroupBox()
         Me.rdoKeptAsMissing = New System.Windows.Forms.RadioButton()
         Me.rdoLast = New System.Windows.Forms.RadioButton()
-        Me.rdoFirst_ = New System.Windows.Forms.RadioButton()
-        Me.txtNewColumnName = New System.Windows.Forms.TextBox()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.rdoFirstMissingValues = New System.Windows.Forms.RadioButton()
+        Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 395)
+        Me.ucrBase.Location = New System.Drawing.Point(3, 325)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(403, 53)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove
@@ -64,12 +63,12 @@ Partial Class dlgRank
         Me.ucrDataFrameSelector.Size = New System.Drawing.Size(127, 41)
         Me.ucrDataFrameSelector.TabIndex = 2
         '
-        'ucrReceiverSelectedVariable
+        'ucrReceiverRank
         '
-        Me.ucrReceiverSelectedVariable.Location = New System.Drawing.Point(242, 71)
-        Me.ucrReceiverSelectedVariable.Name = "ucrReceiverSelectedVariable"
-        Me.ucrReceiverSelectedVariable.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverSelectedVariable.TabIndex = 3
+        Me.ucrReceiverRank.Location = New System.Drawing.Point(242, 71)
+        Me.ucrReceiverRank.Name = "ucrReceiverRank"
+        Me.ucrReceiverRank.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverRank.TabIndex = 3
         '
         'lblSelectedVariable
         '
@@ -85,12 +84,12 @@ Partial Class dlgRank
         '
         Me.grpTies.Controls.Add(Me.rdoRandom)
         Me.grpTies.Controls.Add(Me.rdoFirst)
-        Me.grpTies.Controls.Add(Me.dlgMaximum)
+        Me.grpTies.Controls.Add(Me.rdoMaximum)
         Me.grpTies.Controls.Add(Me.rdoMinimum)
         Me.grpTies.Controls.Add(Me.rdoAverage)
-        Me.grpTies.Location = New System.Drawing.Point(3, 185)
+        Me.grpTies.Location = New System.Drawing.Point(230, 114)
         Me.grpTies.Name = "grpTies"
-        Me.grpTies.Size = New System.Drawing.Size(190, 140)
+        Me.grpTies.Size = New System.Drawing.Size(176, 140)
         Me.grpTies.TabIndex = 5
         Me.grpTies.TabStop = False
         Me.grpTies.Tag = "Ties"
@@ -120,17 +119,17 @@ Partial Class dlgRank
         Me.rdoFirst.Text = "First"
         Me.rdoFirst.UseVisualStyleBackColor = True
         '
-        'dlgMaximum
+        'rdoMaximum
         '
-        Me.dlgMaximum.AutoSize = True
-        Me.dlgMaximum.Location = New System.Drawing.Point(0, 67)
-        Me.dlgMaximum.Name = "dlgMaximum"
-        Me.dlgMaximum.Size = New System.Drawing.Size(69, 17)
-        Me.dlgMaximum.TabIndex = 0
-        Me.dlgMaximum.TabStop = True
-        Me.dlgMaximum.Tag = "Maximum"
-        Me.dlgMaximum.Text = "Maximum"
-        Me.dlgMaximum.UseVisualStyleBackColor = True
+        Me.rdoMaximum.AutoSize = True
+        Me.rdoMaximum.Location = New System.Drawing.Point(0, 67)
+        Me.rdoMaximum.Name = "rdoMaximum"
+        Me.rdoMaximum.Size = New System.Drawing.Size(69, 17)
+        Me.rdoMaximum.TabIndex = 0
+        Me.rdoMaximum.TabStop = True
+        Me.rdoMaximum.Tag = "Maximum"
+        Me.rdoMaximum.Text = "Maximum"
+        Me.rdoMaximum.UseVisualStyleBackColor = True
         '
         'rdoMinimum
         '
@@ -160,8 +159,8 @@ Partial Class dlgRank
         '
         Me.grpMissingValues.Controls.Add(Me.rdoKeptAsMissing)
         Me.grpMissingValues.Controls.Add(Me.rdoLast)
-        Me.grpMissingValues.Controls.Add(Me.rdoFirst_)
-        Me.grpMissingValues.Location = New System.Drawing.Point(220, 197)
+        Me.grpMissingValues.Controls.Add(Me.rdoFirstMissingValues)
+        Me.grpMissingValues.Location = New System.Drawing.Point(12, 186)
         Me.grpMissingValues.Name = "grpMissingValues"
         Me.grpMissingValues.Size = New System.Drawing.Size(180, 94)
         Me.grpMissingValues.TabIndex = 6
@@ -193,46 +192,36 @@ Partial Class dlgRank
         Me.rdoLast.Text = "Last"
         Me.rdoLast.UseVisualStyleBackColor = True
         '
-        'rdoFirst_
+        'rdoFirstMissingValues
         '
-        Me.rdoFirst_.AutoSize = True
-        Me.rdoFirst_.Location = New System.Drawing.Point(7, 43)
-        Me.rdoFirst_.Name = "rdoFirst_"
-        Me.rdoFirst_.Size = New System.Drawing.Size(44, 17)
-        Me.rdoFirst_.TabIndex = 0
-        Me.rdoFirst_.TabStop = True
-        Me.rdoFirst_.Tag = "First"
-        Me.rdoFirst_.Text = "First"
-        Me.rdoFirst_.UseVisualStyleBackColor = True
+        Me.rdoFirstMissingValues.AutoSize = True
+        Me.rdoFirstMissingValues.Location = New System.Drawing.Point(7, 43)
+        Me.rdoFirstMissingValues.Name = "rdoFirstMissingValues"
+        Me.rdoFirstMissingValues.Size = New System.Drawing.Size(44, 17)
+        Me.rdoFirstMissingValues.TabIndex = 0
+        Me.rdoFirstMissingValues.TabStop = True
+        Me.rdoFirstMissingValues.Tag = "First"
+        Me.rdoFirstMissingValues.Text = "First"
+        Me.rdoFirstMissingValues.UseVisualStyleBackColor = True
         '
-        'txtNewColumnName
+        'ucrNewColumnNameSelector
         '
-        Me.txtNewColumnName.Location = New System.Drawing.Point(153, 348)
-        Me.txtNewColumnName.Name = "txtNewColumnName"
-        Me.txtNewColumnName.Size = New System.Drawing.Size(195, 20)
-        Me.txtNewColumnName.TabIndex = 7
-        '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(52, 351)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(95, 13)
-        Me.lblNewColumnName.TabIndex = 8
-        Me.lblNewColumnName.Tag = "New_column_name"
-        Me.lblNewColumnName.Text = "New column name"
+        Me.ucrNewColumnNameSelector.Location = New System.Drawing.Point(12, 284)
+        Me.ucrNewColumnNameSelector.Name = "ucrNewColumnNameSelector"
+        Me.ucrNewColumnNameSelector.Size = New System.Drawing.Size(367, 35)
+        Me.ucrNewColumnNameSelector.TabIndex = 7
+        Me.ucrNewColumnNameSelector.ucrDataFrameSelector = Nothing
         '
         'dlgRank
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 449)
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.txtNewColumnName)
+        Me.ClientSize = New System.Drawing.Size(423, 385)
+        Me.Controls.Add(Me.ucrNewColumnNameSelector)
         Me.Controls.Add(Me.grpMissingValues)
         Me.Controls.Add(Me.grpTies)
         Me.Controls.Add(Me.lblSelectedVariable)
-        Me.Controls.Add(Me.ucrReceiverSelectedVariable)
+        Me.Controls.Add(Me.ucrReceiverRank)
         Me.Controls.Add(Me.ucrDataFrameSelector)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
@@ -252,18 +241,17 @@ Partial Class dlgRank
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrDataFrameSelector As ucrDataFrame
-    Friend WithEvents ucrReceiverSelectedVariable As ucrReceiverSingle
+    Friend WithEvents ucrReceiverRank As ucrReceiverSingle
     Friend WithEvents lblSelectedVariable As Label
     Friend WithEvents grpTies As GroupBox
     Friend WithEvents rdoRandom As RadioButton
     Friend WithEvents rdoFirst As RadioButton
-    Friend WithEvents dlgMaximum As RadioButton
+    Friend WithEvents rdoMaximum As RadioButton
     Friend WithEvents rdoMinimum As RadioButton
     Friend WithEvents rdoAverage As RadioButton
     Friend WithEvents grpMissingValues As GroupBox
     Friend WithEvents rdoKeptAsMissing As RadioButton
     Friend WithEvents rdoLast As RadioButton
-    Friend WithEvents rdoFirst_ As RadioButton
-    Friend WithEvents txtNewColumnName As TextBox
-    Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents rdoFirstMissingValues As RadioButton
+    Friend WithEvents ucrNewColumnNameSelector As ucrNewColumnName
 End Class
