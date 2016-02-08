@@ -26,7 +26,7 @@ Partial Class dlgReferenceLevel
         Me.ucrDataFrameSelector = New instat.ucrDataFrame()
         Me.ucrFactorSelected = New instat.ucrReceiverSingle()
         Me.lblFactorSelected = New System.Windows.Forms.Label()
-        Me.lblInfo2 = New System.Windows.Forms.Label()
+        Me.lblInfo = New System.Windows.Forms.Label()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.SuspendLayout()
         '
@@ -61,15 +61,15 @@ Partial Class dlgReferenceLevel
         Me.lblFactorSelected.Tag = "Factor_selected"
         Me.lblFactorSelected.Text = "Factor selected"
         '
-        'lblInfo2
+        'lblInfo
         '
-        Me.lblInfo2.AutoSize = True
-        Me.lblInfo2.Location = New System.Drawing.Point(199, 200)
-        Me.lblInfo2.Name = "lblInfo2"
-        Me.lblInfo2.Size = New System.Drawing.Size(215, 13)
-        Me.lblInfo2.TabIndex = 5
-        Me.lblInfo2.Tag = "REQUIRES_A_FACTOR_LEVEL_SELECTOR"
-        Me.lblInfo2.Text = "REQUIRES A FACTOR LEVEL SELECTOR"
+        Me.lblInfo.AutoSize = True
+        Me.lblInfo.Location = New System.Drawing.Point(-2, 208)
+        Me.lblInfo.Name = "lblInfo"
+        Me.lblInfo.Size = New System.Drawing.Size(215, 13)
+        Me.lblInfo.TabIndex = 5
+        Me.lblInfo.Tag = "REQUIRES_A_FACTOR_LEVEL_SELECTOR"
+        Me.lblInfo.Text = "REQUIRES A FACTOR LEVEL SELECTOR"
         '
         'ucrAddRemove
         '
@@ -84,7 +84,7 @@ Partial Class dlgReferenceLevel
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 350)
         Me.Controls.Add(Me.ucrAddRemove)
-        Me.Controls.Add(Me.lblInfo2)
+        Me.Controls.Add(Me.lblInfo)
         Me.Controls.Add(Me.lblFactorSelected)
         Me.Controls.Add(Me.ucrFactorSelected)
         Me.Controls.Add(Me.ucrDataFrameSelector)
@@ -102,6 +102,6 @@ Partial Class dlgReferenceLevel
     Friend WithEvents ucrDataFrameSelector As ucrDataFrame
     Friend WithEvents ucrFactorSelected As ucrReceiverSingle
     Friend WithEvents lblFactorSelected As Label
-    Friend WithEvents lblInfo2 As Label
+    Friend WithEvents lblInfo As Label
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
 End Class
