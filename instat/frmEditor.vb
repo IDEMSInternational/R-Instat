@@ -202,8 +202,20 @@ Public Class frmEditor
     End Sub
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
-        grdData.RemoveWorksheet(grdData.GetWorksheetIndex(grdData.CurrentWorksheet))
+        If grdData.Worksheets.Count > 0 Then
+            strf = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
+            frmMain.clsRLink.RunScript(strf)
+            'grdData.RemoveWorksheet(grdData.GetWorksheetIndex(grdData.CurrentWorksheet))
+        End If
     End Sub
+
+    Private Sub grdData_WorksheetRemoved(sender As Object, e As WorksheetRemovedEventArgs) Handles grdData.WorksheetRemoved
+        If grdData.Worksheets.Count < 1 Then
+            grdData.Hide()
+            MessageBox.Show("No more worksheets loaded", "Attention")
+        End If
+    End Sub
+
 
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
         'dlgName.setWorksheet(grdData.CurrentWorksheet.Name, (grdData.CurrentWorksheet.ColumnHeaders(grdData.CurrentWorksheet.SelectionRange.Col)).[Text])
