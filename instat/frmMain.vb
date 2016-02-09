@@ -25,6 +25,7 @@ Public Class frmMain
     Public clsRLink As New RLink
     Public clsGrids As New clsGridLink
     Public strHelpFilePath As String = ""
+    Public strStaticPath As String
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         strHelpFilePath = "static\Help\R-Instat.chm"
@@ -34,6 +35,7 @@ Public Class frmMain
         frmScript.MdiParent = Me
         frmVariables.MdiParent = Me
         frmMetaData.MdiParent = Me
+        strStaticPath = Path.GetFullPath("static")
 
         frmCommand.Show()
         frmEditor.Show()
@@ -789,5 +791,9 @@ Public Class frmMain
 
     Private Sub mnuManageManipulateRank_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRank.Click
         dlgRank.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimateMethodsCreateClimateObject_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsCreateClimateObject.Click
+        dlgCreateClimateObject.ShowDialog()
     End Sub
 End Class
