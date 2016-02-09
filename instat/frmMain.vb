@@ -369,7 +369,7 @@ Public Class frmMain
         dlgDeleteColumns.ShowDialog()
     End Sub
 
-    Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeSelect.Click
+    Private Sub mnuManageRechapeSubset_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeSubset.Click
         dlgSelect.ShowDialog()
     End Sub
 
@@ -781,7 +781,7 @@ Public Class frmMain
         End Using
     End Sub
 
-    Private Sub RemoveUnusedLabelsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveUnusedLabelsToolStripMenuItem.Click
+    Private Sub mnuManageReshapeFactorUnusedLevels_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeFactorUnusedLevels.Click
         dlgRemoveUnusedLabels.ShowDialog()
     End Sub
 
