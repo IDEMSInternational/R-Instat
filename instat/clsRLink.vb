@@ -27,11 +27,16 @@ Public Class RLink
     Dim txtLog As New TextBox
     Public bLog As Boolean = False
     Public bOutput As Boolean = False
+    Public bsave As New ToolStripMenuItem
     Public bClimateObjectExists As Boolean = False
     Public bInstatObjectExists As Boolean = False
     Public bClimsoftLinkExists As Boolean = False
 
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
+    End Sub
+
+    Public Sub boolSave(mnuStripSave As ToolStripMenuItem)
+        bsave = mnuStripSave
     End Sub
 
     Public Sub SetOutput(tempOutput As RichTextBox)
@@ -170,6 +175,7 @@ Public Class RLink
     Public Sub CreateNewInstatObject()
         RunScript(strInstatDataObject & " <- instat_obj$new()")
         bInstatObjectExists = True
+        bsave.Enabled = True
     End Sub
 
     Public Sub LoadData(strDataName As String, strFile As String, strFileExt As String)
