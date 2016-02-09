@@ -267,7 +267,6 @@ Partial Class frmMain
         Me.mnuManageRechapeRandomSubset = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageRechapeSelect = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageRechapeMerge = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RemoveUnusedLabelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageDataFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageDataFileRenameSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageDataFileReorderSheets = New System.Windows.Forms.ToolStripMenuItem()
@@ -310,6 +309,7 @@ Partial Class frmMain
         Me.mnuClimateMethodsAdditionalSeasonalSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsAdditionalSeasonalSummaryRain = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsAdditionalWaterBalance = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveUnusedLabelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -318,7 +318,7 @@ Partial Class frmMain
         'ToolStripSeparator12
         '
         Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
-        Me.ToolStripSeparator12.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(175, 6)
         '
         'mnuStatisticsSimpleModelsTwoSample
         '
@@ -364,7 +364,7 @@ Partial Class frmMain
         '
         Me.mnuStatisticsAnalysisOfVariance.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatisticsAnalysisOfVarianceOneWay, Me.mnuStatisticsAnalysisOfVarianceOrthogonal, Me.mnuStatisticsAnalysisOfVarianceGeneral, Me.mnuStatisticsAnalysisOfVarianceBivariate})
         Me.mnuStatisticsAnalysisOfVariance.Name = "mnuStatisticsAnalysisOfVariance"
-        Me.mnuStatisticsAnalysisOfVariance.Size = New System.Drawing.Size(179, 22)
+        Me.mnuStatisticsAnalysisOfVariance.Size = New System.Drawing.Size(178, 22)
         Me.mnuStatisticsAnalysisOfVariance.Tag = "Analysis_of_Variance"
         Me.mnuStatisticsAnalysisOfVariance.Text = "Analysis of Variance"
         '
@@ -400,7 +400,7 @@ Partial Class frmMain
         '
         Me.mnuStatisticsRegression.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatisticsRegressionSimple, Me.mnuStatisticsRegressionSimpleWithGroups, Me.mnuStatisticsRegressionMultiple, Me.mnuStatisticsRegressionGeneralLinearModel, Me.ToolStripSeparator11, Me.mnuStatisticsRegressionCorrelation, Me.mnuStatisticsRegressionLogLinearModels})
         Me.mnuStatisticsRegression.Name = "mnuStatisticsRegression"
-        Me.mnuStatisticsRegression.Size = New System.Drawing.Size(179, 22)
+        Me.mnuStatisticsRegression.Size = New System.Drawing.Size(178, 22)
         Me.mnuStatisticsRegression.Tag = "Regression"
         Me.mnuStatisticsRegression.Text = "Regression"
         '
@@ -455,7 +455,7 @@ Partial Class frmMain
         '
         Me.mnuSimpleModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatisticsSimpleModelsOneSample, Me.mnuStatisticsSimpleModelsTwoSample, Me.ToolStripSeparator9, Me.mnuStatisticsSimpleModelsGamma, Me.mnuStatisticsSimpleModelsExtrema, Me.mnuStatisticsSimpleModelsChisquareTest, Me.mnuStatisticsSimpleModelsGoodnessOfFit, Me.mnuStatisticsSimpleModelsProbabilityDistributions})
         Me.mnuSimpleModels.Name = "mnuSimpleModels"
-        Me.mnuSimpleModels.Size = New System.Drawing.Size(179, 22)
+        Me.mnuSimpleModels.Size = New System.Drawing.Size(178, 22)
         Me.mnuSimpleModels.Tag = "Simple_Models"
         Me.mnuSimpleModels.Text = "Simple Models"
         '
@@ -477,35 +477,35 @@ Partial Class frmMain
         '
         Me.mnuStatisticsNonParametric.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatisticsNonParametricOneAndTwoSamples, Me.mnuStatisticsNonParametricOneWayAnova, Me.mnuStatisticsNonParametricTwoWayAnova})
         Me.mnuStatisticsNonParametric.Name = "mnuStatisticsNonParametric"
-        Me.mnuStatisticsNonParametric.Size = New System.Drawing.Size(179, 22)
+        Me.mnuStatisticsNonParametric.Size = New System.Drawing.Size(178, 22)
         Me.mnuStatisticsNonParametric.Tag = "Non_Parametric"
         Me.mnuStatisticsNonParametric.Text = "Non-Parametric"
         '
         'mnuStatisticsNonParametricOneAndTwoSamples
         '
         Me.mnuStatisticsNonParametricOneAndTwoSamples.Name = "mnuStatisticsNonParametricOneAndTwoSamples"
-        Me.mnuStatisticsNonParametricOneAndTwoSamples.Size = New System.Drawing.Size(201, 22)
+        Me.mnuStatisticsNonParametricOneAndTwoSamples.Size = New System.Drawing.Size(200, 22)
         Me.mnuStatisticsNonParametricOneAndTwoSamples.Tag = "One_and_Two_Samples"
         Me.mnuStatisticsNonParametricOneAndTwoSamples.Text = "One and Two Samples..."
         '
         'mnuStatisticsNonParametricOneWayAnova
         '
         Me.mnuStatisticsNonParametricOneWayAnova.Name = "mnuStatisticsNonParametricOneWayAnova"
-        Me.mnuStatisticsNonParametricOneWayAnova.Size = New System.Drawing.Size(201, 22)
+        Me.mnuStatisticsNonParametricOneWayAnova.Size = New System.Drawing.Size(200, 22)
         Me.mnuStatisticsNonParametricOneWayAnova.Tag = "one_way"
         Me.mnuStatisticsNonParametricOneWayAnova.Text = "One-Way (ANOVA)"
         '
         'mnuStatisticsNonParametricTwoWayAnova
         '
         Me.mnuStatisticsNonParametricTwoWayAnova.Name = "mnuStatisticsNonParametricTwoWayAnova"
-        Me.mnuStatisticsNonParametricTwoWayAnova.Size = New System.Drawing.Size(201, 22)
+        Me.mnuStatisticsNonParametricTwoWayAnova.Size = New System.Drawing.Size(200, 22)
         Me.mnuStatisticsNonParametricTwoWayAnova.Tag = "Two_way"
         Me.mnuStatisticsNonParametricTwoWayAnova.Text = "Two-Way (ANOVA)..."
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(175, 6)
         '
         'mnuGraphics
         '
@@ -640,7 +640,7 @@ Partial Class frmMain
         '
         Me.mnuStatisticsSummary.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatisticsSummaryDescribe, Me.mnuStatisticsSummaryColumnStat, Me.ToolStripSeparator7, Me.mnuStatisticsSummaryCircularStatistics})
         Me.mnuStatisticsSummary.Name = "mnuStatisticsSummary"
-        Me.mnuStatisticsSummary.Size = New System.Drawing.Size(179, 22)
+        Me.mnuStatisticsSummary.Size = New System.Drawing.Size(178, 22)
         Me.mnuStatisticsSummary.Tag = "Summary"
         Me.mnuStatisticsSummary.Text = "Summary"
         '
@@ -674,7 +674,7 @@ Partial Class frmMain
         '
         Me.mnuStatisticsTables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatisticsTablesGeneral, Me.mnuStatisticsTablesFrequency, Me.mnuStatisticsTablesSummary, Me.mnuStatisticsTablesGroup, Me.mnuStatisticsTablesMultipleResponse})
         Me.mnuStatisticsTables.Name = "mnuStatisticsTables"
-        Me.mnuStatisticsTables.Size = New System.Drawing.Size(179, 22)
+        Me.mnuStatisticsTables.Size = New System.Drawing.Size(178, 22)
         Me.mnuStatisticsTables.Tag = "Tables"
         Me.mnuStatisticsTables.Text = "Tables"
         '
@@ -716,13 +716,13 @@ Partial Class frmMain
         'ToolStripSeparator13
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(175, 6)
         '
         'mnuStatisticsTimeSeries
         '
         Me.mnuStatisticsTimeSeries.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatisticsTimeSeriesMovingAverages, Me.mnuStatisticsTimeSeriesCorrelations})
         Me.mnuStatisticsTimeSeries.Name = "mnuStatisticsTimeSeries"
-        Me.mnuStatisticsTimeSeries.Size = New System.Drawing.Size(179, 22)
+        Me.mnuStatisticsTimeSeries.Size = New System.Drawing.Size(178, 22)
         Me.mnuStatisticsTimeSeries.Tag = "Time_Series"
         Me.mnuStatisticsTimeSeries.Text = "Time Series"
         '
@@ -744,7 +744,7 @@ Partial Class frmMain
         '
         Me.mnuStatisticsSurvival.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStatisticsSurvivalKaplanMeir, Me.mnuStatisticsSurvivalLogRank})
         Me.mnuStatisticsSurvival.Name = "mnuStatisticsSurvival"
-        Me.mnuStatisticsSurvival.Size = New System.Drawing.Size(179, 22)
+        Me.mnuStatisticsSurvival.Size = New System.Drawing.Size(178, 22)
         Me.mnuStatisticsSurvival.Tag = "Survival"
         Me.mnuStatisticsSurvival.Text = "Survival"
         '
@@ -765,12 +765,12 @@ Partial Class frmMain
         'ToolStripSeparator14
         '
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
-        Me.ToolStripSeparator14.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripSeparator14.Size = New System.Drawing.Size(175, 6)
         '
         'mnuStatisticsSampleSize
         '
         Me.mnuStatisticsSampleSize.Name = "mnuStatisticsSampleSize"
-        Me.mnuStatisticsSampleSize.Size = New System.Drawing.Size(179, 22)
+        Me.mnuStatisticsSampleSize.Size = New System.Drawing.Size(178, 22)
         Me.mnuStatisticsSampleSize.Tag = "Sample_Size"
         Me.mnuStatisticsSampleSize.Text = "Sample Size..."
         '
@@ -924,38 +924,38 @@ Partial Class frmMain
         'mnuWindowVariable
         '
         Me.mnuWindowVariable.Name = "mnuWindowVariable"
-        Me.mnuWindowVariable.Size = New System.Drawing.Size(221, 22)
+        Me.mnuWindowVariable.Size = New System.Drawing.Size(220, 22)
         Me.mnuWindowVariable.Text = "Variable (column) Metadata"
         '
         'mnuWindowDataFrame
         '
         Me.mnuWindowDataFrame.Name = "mnuWindowDataFrame"
-        Me.mnuWindowDataFrame.Size = New System.Drawing.Size(221, 22)
+        Me.mnuWindowDataFrame.Size = New System.Drawing.Size(220, 22)
         Me.mnuWindowDataFrame.Text = "Data frame Metadata"
         '
         'LogToolStripMenuItem
         '
         Me.LogToolStripMenuItem.Name = "LogToolStripMenuItem"
-        Me.LogToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
+        Me.LogToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
         Me.LogToolStripMenuItem.Text = "Log"
         '
         'ScriptToolStripMenuItem
         '
         Me.ScriptToolStripMenuItem.Name = "ScriptToolStripMenuItem"
-        Me.ScriptToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
+        Me.ScriptToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
         Me.ScriptToolStripMenuItem.Text = "Script"
         '
         'mnuWindowsEditor
         '
         Me.mnuWindowsEditor.Name = "mnuWindowsEditor"
-        Me.mnuWindowsEditor.Size = New System.Drawing.Size(221, 22)
+        Me.mnuWindowsEditor.Size = New System.Drawing.Size(220, 22)
         Me.mnuWindowsEditor.Text = "Editor"
         '
         'WindowsLayoutToolStripMenuItem
         '
         Me.WindowsLayoutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuWindowsCascading, Me.mnuWindowsStacked, Me.mnuWindowsSideBySide, Me.mnuWindowsArrangedIcons})
         Me.WindowsLayoutToolStripMenuItem.Name = "WindowsLayoutToolStripMenuItem"
-        Me.WindowsLayoutToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
+        Me.WindowsLayoutToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
         Me.WindowsLayoutToolStripMenuItem.Text = "Windows Layout"
         '
         'mnuWindowsCascading
@@ -1821,20 +1821,20 @@ Partial Class frmMain
         Me.mnuManageDataView.Name = "mnuManageDataView"
         Me.mnuManageDataView.Size = New System.Drawing.Size(177, 22)
         Me.mnuManageDataView.Tag = "View"
-        Me.mnuManageDataView.Text = "View data..."
+        Me.mnuManageDataView.Text = "View data"
         '
         'mnuManageDataName
         '
         Me.mnuManageDataName.Name = "mnuManageDataName"
         Me.mnuManageDataName.Size = New System.Drawing.Size(177, 22)
         Me.mnuManageDataName.Tag = "Name"
-        Me.mnuManageDataName.Text = "Name..."
+        Me.mnuManageDataName.Text = "Name"
         '
         'mnuManageDataType
         '
         Me.mnuManageDataType.Name = "mnuManageDataType"
         Me.mnuManageDataType.Size = New System.Drawing.Size(177, 22)
-        Me.mnuManageDataType.Text = "Type..."
+        Me.mnuManageDataType.Text = "Type"
         '
         'mnuManageFactor
         '
@@ -1847,58 +1847,58 @@ Partial Class frmMain
         'mnuManageFactorconvertTo
         '
         Me.mnuManageFactorconvertTo.Name = "mnuManageFactorconvertTo"
-        Me.mnuManageFactorconvertTo.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorconvertTo.Size = New System.Drawing.Size(170, 22)
         Me.mnuManageFactorconvertTo.Tag = "Convert_to"
-        Me.mnuManageFactorconvertTo.Text = "Convert to..."
+        Me.mnuManageFactorconvertTo.Text = "Convert to"
         '
         'mnuMangeFactorLabel
         '
         Me.mnuMangeFactorLabel.Name = "mnuMangeFactorLabel"
-        Me.mnuMangeFactorLabel.Size = New System.Drawing.Size(179, 22)
+        Me.mnuMangeFactorLabel.Size = New System.Drawing.Size(170, 22)
         Me.mnuMangeFactorLabel.Tag = "Label"
-        Me.mnuMangeFactorLabel.Text = "Label..."
+        Me.mnuMangeFactorLabel.Text = "Label"
         '
         'mnuManageFactorReorderLevels
         '
         Me.mnuManageFactorReorderLevels.Name = "mnuManageFactorReorderLevels"
-        Me.mnuManageFactorReorderLevels.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorReorderLevels.Size = New System.Drawing.Size(170, 22)
         Me.mnuManageFactorReorderLevels.Tag = "Reorder_levels"
-        Me.mnuManageFactorReorderLevels.Text = "Reorder levels..."
+        Me.mnuManageFactorReorderLevels.Text = "Reorder levels"
         '
         'mnuManageFactorRecode
         '
         Me.mnuManageFactorRecode.Name = "mnuManageFactorRecode"
-        Me.mnuManageFactorRecode.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorRecode.Size = New System.Drawing.Size(170, 22)
         Me.mnuManageFactorRecode.Tag = "Recode"
-        Me.mnuManageFactorRecode.Text = "Recode..."
+        Me.mnuManageFactorRecode.Text = "Recode"
         '
         'mnuManageFactorReferenceLevels
         '
         Me.mnuManageFactorReferenceLevels.Name = "mnuManageFactorReferenceLevels"
-        Me.mnuManageFactorReferenceLevels.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorReferenceLevels.Size = New System.Drawing.Size(170, 22)
         Me.mnuManageFactorReferenceLevels.Tag = "Reference_levels"
-        Me.mnuManageFactorReferenceLevels.Text = "Reference levels..."
+        Me.mnuManageFactorReferenceLevels.Text = "Reference levels"
         '
         'mnuManageFactorInteraction
         '
         Me.mnuManageFactorInteraction.Name = "mnuManageFactorInteraction"
-        Me.mnuManageFactorInteraction.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorInteraction.Size = New System.Drawing.Size(170, 22)
         Me.mnuManageFactorInteraction.Tag = "Interaction"
-        Me.mnuManageFactorInteraction.Text = "Interaction..."
+        Me.mnuManageFactorInteraction.Text = "Interaction"
         '
         'mnuManageFactorUnusedLevels
         '
         Me.mnuManageFactorUnusedLevels.Name = "mnuManageFactorUnusedLevels"
-        Me.mnuManageFactorUnusedLevels.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorUnusedLevels.Size = New System.Drawing.Size(170, 22)
         Me.mnuManageFactorUnusedLevels.Tag = "Unused_levels"
-        Me.mnuManageFactorUnusedLevels.Text = "Unused levels..."
+        Me.mnuManageFactorUnusedLevels.Text = "Unused levels"
         '
         'mnuManageFactorIndicatorVariables
         '
         Me.mnuManageFactorIndicatorVariables.Name = "mnuManageFactorIndicatorVariables"
-        Me.mnuManageFactorIndicatorVariables.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorIndicatorVariables.Size = New System.Drawing.Size(170, 22)
         Me.mnuManageFactorIndicatorVariables.Tag = "Indicator_variables"
-        Me.mnuManageFactorIndicatorVariables.Text = "Indicator variables..."
+        Me.mnuManageFactorIndicatorVariables.Text = "Indicator variables"
         '
         'mnuManageManipulate
         '
@@ -1927,14 +1927,14 @@ Partial Class frmMain
         Me.mnuManageManipulateSort.Name = "mnuManageManipulateSort"
         Me.mnuManageManipulateSort.Size = New System.Drawing.Size(160, 22)
         Me.mnuManageManipulateSort.Tag = "Sort"
-        Me.mnuManageManipulateSort.Text = "Sort..."
+        Me.mnuManageManipulateSort.Text = "Sort"
         '
         'mnuManageManipulateRank
         '
         Me.mnuManageManipulateRank.Name = "mnuManageManipulateRank"
         Me.mnuManageManipulateRank.Size = New System.Drawing.Size(160, 22)
         Me.mnuManageManipulateRank.Tag = "Rank"
-        Me.mnuManageManipulateRank.Text = "Rank..."
+        Me.mnuManageManipulateRank.Text = "Rank"
         '
         'mnuManageManipulateRowSummary
         '
@@ -1948,14 +1948,14 @@ Partial Class frmMain
         Me.mnuManagePermuteRows.Name = "mnuManagePermuteRows"
         Me.mnuManagePermuteRows.Size = New System.Drawing.Size(160, 22)
         Me.mnuManagePermuteRows.Tag = "Permute"
-        Me.mnuManagePermuteRows.Text = "Permute rows..."
+        Me.mnuManagePermuteRows.Text = "Permute rows"
         '
         'mnuManageManipulatePolynomials
         '
         Me.mnuManageManipulatePolynomials.Name = "mnuManageManipulatePolynomials"
         Me.mnuManageManipulatePolynomials.Size = New System.Drawing.Size(160, 22)
         Me.mnuManageManipulatePolynomials.Tag = "Polynomials"
-        Me.mnuManageManipulatePolynomials.Text = "Polynomials..."
+        Me.mnuManageManipulatePolynomials.Text = "Polynomials"
         '
         'mnuManageDataFrame
         '
@@ -1968,51 +1968,51 @@ Partial Class frmMain
         'mnuManageDataFrameRestrict
         '
         Me.mnuManageDataFrameRestrict.Name = "mnuManageDataFrameRestrict"
-        Me.mnuManageDataFrameRestrict.Size = New System.Drawing.Size(192, 22)
+        Me.mnuManageDataFrameRestrict.Size = New System.Drawing.Size(183, 22)
         Me.mnuManageDataFrameRestrict.Tag = "Restrict_filter"
-        Me.mnuManageDataFrameRestrict.Text = "Restrict(Filter)..."
+        Me.mnuManageDataFrameRestrict.Text = "Restrict(Filter)"
         '
         'mnuManageDataFrameReorder
         '
         Me.mnuManageDataFrameReorder.Name = "mnuManageDataFrameReorder"
-        Me.mnuManageDataFrameReorder.Size = New System.Drawing.Size(192, 22)
+        Me.mnuManageDataFrameReorder.Size = New System.Drawing.Size(183, 22)
         Me.mnuManageDataFrameReorder.Tag = "Reorder"
-        Me.mnuManageDataFrameReorder.Text = "Reorder..."
+        Me.mnuManageDataFrameReorder.Text = "Reorder"
         '
         'mnuManageDataFrameInsert
         '
         Me.mnuManageDataFrameInsert.Name = "mnuManageDataFrameInsert"
-        Me.mnuManageDataFrameInsert.Size = New System.Drawing.Size(192, 22)
+        Me.mnuManageDataFrameInsert.Size = New System.Drawing.Size(183, 22)
         Me.mnuManageDataFrameInsert.Tag = "Insert"
-        Me.mnuManageDataFrameInsert.Text = "Insert..."
+        Me.mnuManageDataFrameInsert.Text = "Insert"
         '
         'mnuManageDataFrameDelete
         '
         Me.mnuManageDataFrameDelete.Name = "mnuManageDataFrameDelete"
-        Me.mnuManageDataFrameDelete.Size = New System.Drawing.Size(192, 22)
+        Me.mnuManageDataFrameDelete.Size = New System.Drawing.Size(183, 22)
         Me.mnuManageDataFrameDelete.Tag = "Delete"
-        Me.mnuManageDataFrameDelete.Text = "Delete..."
+        Me.mnuManageDataFrameDelete.Text = "Delete"
         '
         'mnuManageDataFrameDisplay
         '
         Me.mnuManageDataFrameDisplay.Name = "mnuManageDataFrameDisplay"
-        Me.mnuManageDataFrameDisplay.Size = New System.Drawing.Size(192, 22)
+        Me.mnuManageDataFrameDisplay.Size = New System.Drawing.Size(183, 22)
         Me.mnuManageDataFrameDisplay.Tag = "Display"
-        Me.mnuManageDataFrameDisplay.Text = "Display..."
+        Me.mnuManageDataFrameDisplay.Text = "Display"
         '
         'mnuManageDataFrameProtectLockUnlock
         '
         Me.mnuManageDataFrameProtectLockUnlock.Name = "mnuManageDataFrameProtectLockUnlock"
-        Me.mnuManageDataFrameProtectLockUnlock.Size = New System.Drawing.Size(192, 22)
+        Me.mnuManageDataFrameProtectLockUnlock.Size = New System.Drawing.Size(183, 22)
         Me.mnuManageDataFrameProtectLockUnlock.Tag = "Protect_Lock_Unlock"
-        Me.mnuManageDataFrameProtectLockUnlock.Text = "Protect(Lock/Unlock..."
+        Me.mnuManageDataFrameProtectLockUnlock.Text = "Protect(Lock/Unlock"
         '
         'mnuManageDataFrameHideShow
         '
         Me.mnuManageDataFrameHideShow.Name = "mnuManageDataFrameHideShow"
-        Me.mnuManageDataFrameHideShow.Size = New System.Drawing.Size(192, 22)
+        Me.mnuManageDataFrameHideShow.Size = New System.Drawing.Size(183, 22)
         Me.mnuManageDataFrameHideShow.Tag = "Hide_Show"
-        Me.mnuManageDataFrameHideShow.Text = "Hide/Show..."
+        Me.mnuManageDataFrameHideShow.Text = "Hide/Show"
         '
         'mnuManageReshape
         '
@@ -2025,50 +2025,44 @@ Partial Class frmMain
         'mnuManageRechapeColumnSummaries
         '
         Me.mnuManageRechapeColumnSummaries.Name = "mnuManageRechapeColumnSummaries"
-        Me.mnuManageRechapeColumnSummaries.Size = New System.Drawing.Size(201, 22)
+        Me.mnuManageRechapeColumnSummaries.Size = New System.Drawing.Size(192, 22)
         Me.mnuManageRechapeColumnSummaries.Tag = "Column_summaries"
-        Me.mnuManageRechapeColumnSummaries.Text = "Column summaries..."
+        Me.mnuManageRechapeColumnSummaries.Text = "Column summaries"
         '
         'mnuManageRechapeStack
         '
         Me.mnuManageRechapeStack.Name = "mnuManageRechapeStack"
-        Me.mnuManageRechapeStack.Size = New System.Drawing.Size(201, 22)
+        Me.mnuManageRechapeStack.Size = New System.Drawing.Size(192, 22)
         Me.mnuManageRechapeStack.Tag = "Stack_Melt"
-        Me.mnuManageRechapeStack.Text = "Stack(Melt)..."
+        Me.mnuManageRechapeStack.Text = "Stack(Melt)"
         '
         'mnuManageRechapeUnstack
         '
         Me.mnuManageRechapeUnstack.Name = "mnuManageRechapeUnstack"
-        Me.mnuManageRechapeUnstack.Size = New System.Drawing.Size(201, 22)
+        Me.mnuManageRechapeUnstack.Size = New System.Drawing.Size(192, 22)
         Me.mnuManageRechapeUnstack.Tag = "Unstack_Dcast"
-        Me.mnuManageRechapeUnstack.Text = "unstack(Dcast)..."
+        Me.mnuManageRechapeUnstack.Text = "unstack(Dcast)"
         '
         'mnuManageRechapeRandomSubset
         '
         Me.mnuManageRechapeRandomSubset.Name = "mnuManageRechapeRandomSubset"
-        Me.mnuManageRechapeRandomSubset.Size = New System.Drawing.Size(201, 22)
+        Me.mnuManageRechapeRandomSubset.Size = New System.Drawing.Size(192, 22)
         Me.mnuManageRechapeRandomSubset.Tag = "Random_subset"
-        Me.mnuManageRechapeRandomSubset.Text = "Random subset..."
+        Me.mnuManageRechapeRandomSubset.Text = "Random subset"
         '
         'mnuManageRechapeSelect
         '
         Me.mnuManageRechapeSelect.Name = "mnuManageRechapeSelect"
-        Me.mnuManageRechapeSelect.Size = New System.Drawing.Size(201, 22)
+        Me.mnuManageRechapeSelect.Size = New System.Drawing.Size(192, 22)
         Me.mnuManageRechapeSelect.Tag = "Select"
         Me.mnuManageRechapeSelect.Text = "Select..."
         '
         'mnuManageRechapeMerge
         '
         Me.mnuManageRechapeMerge.Name = "mnuManageRechapeMerge"
-        Me.mnuManageRechapeMerge.Size = New System.Drawing.Size(201, 22)
+        Me.mnuManageRechapeMerge.Size = New System.Drawing.Size(192, 22)
         Me.mnuManageRechapeMerge.Tag = "Merge"
-        Me.mnuManageRechapeMerge.Text = "Merge..."
-        '
-        'RemoveUnusedLabelsToolStripMenuItem
-        '
-        Me.RemoveUnusedLabelsToolStripMenuItem.Name = "RemoveUnusedLabelsToolStripMenuItem"
-        Me.RemoveUnusedLabelsToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.RemoveUnusedLabelsToolStripMenuItem.Text = "Remove unused labels..."
+        Me.mnuManageRechapeMerge.Text = "Merge"
         '
         'mnuManageDataFile
         '
@@ -2081,23 +2075,23 @@ Partial Class frmMain
         'mnuManageDataFileRenameSheet
         '
         Me.mnuManageDataFileRenameSheet.Name = "mnuManageDataFileRenameSheet"
-        Me.mnuManageDataFileRenameSheet.Size = New System.Drawing.Size(166, 22)
+        Me.mnuManageDataFileRenameSheet.Size = New System.Drawing.Size(157, 22)
         Me.mnuManageDataFileRenameSheet.Tag = "ReName_sheet"
-        Me.mnuManageDataFileRenameSheet.Text = "(Re)name Sheet..."
+        Me.mnuManageDataFileRenameSheet.Text = "(Re)name Sheet"
         '
         'mnuManageDataFileReorderSheets
         '
         Me.mnuManageDataFileReorderSheets.Name = "mnuManageDataFileReorderSheets"
-        Me.mnuManageDataFileReorderSheets.Size = New System.Drawing.Size(166, 22)
+        Me.mnuManageDataFileReorderSheets.Size = New System.Drawing.Size(157, 22)
         Me.mnuManageDataFileReorderSheets.Tag = "Reorder_sheets"
-        Me.mnuManageDataFileReorderSheets.Text = "Reorder Sheets..."
+        Me.mnuManageDataFileReorderSheets.Text = "Reorder Sheets"
         '
         'mnuManageDataFileDeleteSheets
         '
         Me.mnuManageDataFileDeleteSheets.Name = "mnuManageDataFileDeleteSheets"
-        Me.mnuManageDataFileDeleteSheets.Size = New System.Drawing.Size(166, 22)
+        Me.mnuManageDataFileDeleteSheets.Size = New System.Drawing.Size(157, 22)
         Me.mnuManageDataFileDeleteSheets.Tag = "Delete_sheets"
-        Me.mnuManageDataFileDeleteSheets.Text = "Delete Sheets..."
+        Me.mnuManageDataFileDeleteSheets.Text = "Delete Sheets"
         '
         'mnuClimateMethods
         '
@@ -2368,6 +2362,12 @@ Partial Class frmMain
         Me.mnuClimateMethodsAdditionalWaterBalance.Size = New System.Drawing.Size(200, 22)
         Me.mnuClimateMethodsAdditionalWaterBalance.Tag = "Water_Balance"
         Me.mnuClimateMethodsAdditionalWaterBalance.Text = "Water Balance"
+        '
+        'RemoveUnusedLabelsToolStripMenuItem
+        '
+        Me.RemoveUnusedLabelsToolStripMenuItem.Name = "RemoveUnusedLabelsToolStripMenuItem"
+        Me.RemoveUnusedLabelsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.RemoveUnusedLabelsToolStripMenuItem.Text = "Remove unused labels"
         '
         'frmMain
         '
