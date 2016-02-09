@@ -782,12 +782,13 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
-        Dim dlgSave As New SaveFileDialog
-        dlgSave.Filter = "Comma Separated file (*.csv)|*.csv"
-        dlgSave.Title = "Save worksheet as .csv file"
-        If dlgSave.ShowDialog() = DialogResult.OK Then
-            'Write the data  
-            clsRLink.RunScript("write.csv(x=" & frmEditor.grdData.CurrentWorksheet.Name & ",file=" & dlgSave.FileName.Replace("\", "/") & ")")
-        End If
+        'For discussion
+        'Dim dlgSave As New SaveFileDialog
+        'dlgSave.Filter = "Comma Separated file (*.csv)|*.csv"
+        'dlgSave.Title = "Save worksheet as .csv file"
+        'If dlgSave.ShowDialog() = DialogResult.OK Then
+        '    'Write the data  
+        '    clsRLink.RunScript("write.csv(x=" & frmEditor.grdData.CurrentWorksheet.Name & ",file=" & dlgSave.FileName.Replace("\", "/") & ")")
+        'End If
     End Sub
 End Class
