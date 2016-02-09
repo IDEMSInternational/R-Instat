@@ -267,6 +267,7 @@ Partial Class frmMain
         Me.mnuManageRechapeRandomSubset = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageRechapeSelect = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageRechapeMerge = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveUnusedLabelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageDataFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageDataFileRenameSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageDataFileReorderSheets = New System.Windows.Forms.ToolStripMenuItem()
@@ -309,7 +310,8 @@ Partial Class frmMain
         Me.mnuClimateMethodsAdditionalSeasonalSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsAdditionalSeasonalSummaryRain = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsAdditionalWaterBalance = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RemoveUnusedLabelsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuExportAs = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1668,7 +1670,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.mnuFileClose, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileOptions, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.mnuFileClose, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileOptions, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(37, 20)
         Me.mnuFile.Tag = "File"
@@ -1790,7 +1792,7 @@ Partial Class frmMain
         'mnuCalculations
         '
         Me.mnuCalculations.Name = "mnuCalculations"
-        Me.mnuCalculations.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCalculations.Size = New System.Drawing.Size(148, 22)
         Me.mnuCalculations.Tag = "Calculations"
         Me.mnuCalculations.Text = "Calculations..."
         '
@@ -1798,7 +1800,7 @@ Partial Class frmMain
         '
         Me.mnuManageData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataRegularSequence, Me.mnuManageDataRandomSamples, Me.mnuManageDataView, Me.mnuManageDataName, Me.mnuManageDataType})
         Me.mnuManageData.Name = "mnuManageData"
-        Me.mnuManageData.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageData.Size = New System.Drawing.Size(148, 22)
         Me.mnuManageData.Tag = "Data"
         Me.mnuManageData.Text = "Data"
         '
@@ -1840,7 +1842,7 @@ Partial Class frmMain
         '
         Me.mnuManageFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageFactorconvertTo, Me.mnuMangeFactorLabel, Me.mnuManageFactorReorderLevels, Me.mnuManageFactorRecode, Me.mnuManageFactorReferenceLevels, Me.mnuManageFactorInteraction, Me.mnuManageFactorUnusedLevels, Me.mnuManageFactorIndicatorVariables})
         Me.mnuManageFactor.Name = "mnuManageFactor"
-        Me.mnuManageFactor.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageFactor.Size = New System.Drawing.Size(148, 22)
         Me.mnuManageFactor.Tag = "Factor"
         Me.mnuManageFactor.Text = "Factor"
         '
@@ -1904,7 +1906,7 @@ Partial Class frmMain
         '
         Me.mnuManageManipulate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTransform, Me.mnuManageManipulateRecode, Me.mnuManageManipulateSort, Me.mnuManageManipulateRank, Me.mnuManageManipulateRowSummary, Me.mnuManagePermuteRows, Me.mnuManageManipulatePolynomials})
         Me.mnuManageManipulate.Name = "mnuManageManipulate"
-        Me.mnuManageManipulate.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageManipulate.Size = New System.Drawing.Size(148, 22)
         Me.mnuManageManipulate.Tag = "Manipulate"
         Me.mnuManageManipulate.Text = "Manipulate"
         '
@@ -1961,7 +1963,7 @@ Partial Class frmMain
         '
         Me.mnuManageDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataFrameRestrict, Me.mnuManageDataFrameReorder, Me.mnuManageDataFrameInsert, Me.mnuManageDataFrameDelete, Me.mnuManageDataFrameDisplay, Me.mnuManageDataFrameProtectLockUnlock, Me.mnuManageDataFrameHideShow})
         Me.mnuManageDataFrame.Name = "mnuManageDataFrame"
-        Me.mnuManageDataFrame.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageDataFrame.Size = New System.Drawing.Size(148, 22)
         Me.mnuManageDataFrame.Tag = "Data_Frame"
         Me.mnuManageDataFrame.Text = "Data Frame"
         '
@@ -2018,7 +2020,7 @@ Partial Class frmMain
         '
         Me.mnuManageReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageRechapeColumnSummaries, Me.mnuManageRechapeStack, Me.mnuManageRechapeUnstack, Me.mnuManageRechapeRandomSubset, Me.mnuManageRechapeSelect, Me.mnuManageRechapeMerge, Me.RemoveUnusedLabelsToolStripMenuItem})
         Me.mnuManageReshape.Name = "mnuManageReshape"
-        Me.mnuManageReshape.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageReshape.Size = New System.Drawing.Size(148, 22)
         Me.mnuManageReshape.Tag = "Reshape"
         Me.mnuManageReshape.Text = "Reshape"
         '
@@ -2064,11 +2066,17 @@ Partial Class frmMain
         Me.mnuManageRechapeMerge.Tag = "Merge"
         Me.mnuManageRechapeMerge.Text = "Merge"
         '
+        'RemoveUnusedLabelsToolStripMenuItem
+        '
+        Me.RemoveUnusedLabelsToolStripMenuItem.Name = "RemoveUnusedLabelsToolStripMenuItem"
+        Me.RemoveUnusedLabelsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.RemoveUnusedLabelsToolStripMenuItem.Text = "Remove unused labels"
+        '
         'mnuManageDataFile
         '
         Me.mnuManageDataFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataFileRenameSheet, Me.mnuManageDataFileReorderSheets, Me.mnuManageDataFileDeleteSheets})
         Me.mnuManageDataFile.Name = "mnuManageDataFile"
-        Me.mnuManageDataFile.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageDataFile.Size = New System.Drawing.Size(148, 22)
         Me.mnuManageDataFile.Tag = "Data_file"
         Me.mnuManageDataFile.Text = "Data File"
         '
@@ -2363,11 +2371,18 @@ Partial Class frmMain
         Me.mnuClimateMethodsAdditionalWaterBalance.Tag = "Water_Balance"
         Me.mnuClimateMethodsAdditionalWaterBalance.Text = "Water Balance"
         '
-        'RemoveUnusedLabelsToolStripMenuItem
+        'mnuExport
         '
-        Me.RemoveUnusedLabelsToolStripMenuItem.Name = "RemoveUnusedLabelsToolStripMenuItem"
-        Me.RemoveUnusedLabelsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.RemoveUnusedLabelsToolStripMenuItem.Text = "Remove unused labels"
+        Me.mnuExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuExportAs})
+        Me.mnuExport.Name = "mnuExport"
+        Me.mnuExport.Size = New System.Drawing.Size(204, 22)
+        Me.mnuExport.Text = "Export"
+        '
+        'mnuExportAs
+        '
+        Me.mnuExportAs.Name = "mnuExportAs"
+        Me.mnuExportAs.Size = New System.Drawing.Size(152, 22)
+        Me.mnuExportAs.Text = "Export as"
         '
         'frmMain
         '
@@ -2680,4 +2695,6 @@ Partial Class frmMain
     Friend WithEvents mnuGraphicsGraphcsOptionsThemes As ToolStripMenuItem
     Friend WithEvents mnuGraphicsGraphcsOptionsFacets As ToolStripMenuItem
     Friend WithEvents RemoveUnusedLabelsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuExport As ToolStripMenuItem
+    Friend WithEvents mnuExportAs As ToolStripMenuItem
 End Class
