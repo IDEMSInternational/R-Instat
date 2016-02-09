@@ -30,19 +30,28 @@ Partial Class dlgOptions
         Me.tbpComments = New System.Windows.Forms.TabPage()
         Me.txtComment = New System.Windows.Forms.TextBox()
         Me.lblComment = New System.Windows.Forms.Label()
+        Me.tbpOutput = New System.Windows.Forms.TabPage()
+        Me.cmdChangeSettings = New System.Windows.Forms.Button()
+        Me.txtFontFamily = New System.Windows.Forms.TextBox()
+        Me.txtFontColor = New System.Windows.Forms.TextBox()
+        Me.lblColorFont = New System.Windows.Forms.Label()
+        Me.lblFamilyFont = New System.Windows.Forms.Label()
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.lblTitle = New System.Windows.Forms.Label()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguageSettings.SuspendLayout()
         Me.tbpComments.SuspendLayout()
+        Me.tbpOutput.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbcOptions
         '
         Me.tbcOptions.Controls.Add(Me.tbpLanguageSettings)
         Me.tbcOptions.Controls.Add(Me.tbpComments)
+        Me.tbcOptions.Controls.Add(Me.tbpOutput)
         Me.tbcOptions.Location = New System.Drawing.Point(13, 13)
         Me.tbcOptions.Name = "tbcOptions"
         Me.tbcOptions.SelectedIndex = 0
@@ -66,6 +75,7 @@ Partial Class dlgOptions
         'rdoEnglish
         '
         Me.rdoEnglish.AutoSize = True
+        Me.rdoEnglish.Checked = True
         Me.rdoEnglish.Location = New System.Drawing.Point(20, 65)
         Me.rdoEnglish.Name = "rdoEnglish"
         Me.rdoEnglish.Size = New System.Drawing.Size(59, 17)
@@ -82,7 +92,6 @@ Partial Class dlgOptions
         Me.rdoFrench.Name = "rdoFrench"
         Me.rdoFrench.Size = New System.Drawing.Size(58, 17)
         Me.rdoFrench.TabIndex = 0
-        Me.rdoFrench.TabStop = True
         Me.rdoFrench.Tag = "French"
         Me.rdoFrench.Text = "French"
         Me.rdoFrench.UseVisualStyleBackColor = True
@@ -94,7 +103,6 @@ Partial Class dlgOptions
         Me.rdoKiswahili.Name = "rdoKiswahili"
         Me.rdoKiswahili.Size = New System.Drawing.Size(65, 17)
         Me.rdoKiswahili.TabIndex = 0
-        Me.rdoKiswahili.TabStop = True
         Me.rdoKiswahili.Tag = "Kiswahili"
         Me.rdoKiswahili.Text = "Kiswahili"
         Me.rdoKiswahili.UseVisualStyleBackColor = True
@@ -128,6 +136,65 @@ Partial Class dlgOptions
         Me.lblComment.TabIndex = 0
         Me.lblComment.Tag = "Comment"
         Me.lblComment.Text = "Comment"
+        '
+        'tbpOutput
+        '
+        Me.tbpOutput.Controls.Add(Me.lblTitle)
+        Me.tbpOutput.Controls.Add(Me.cmdChangeSettings)
+        Me.tbpOutput.Controls.Add(Me.txtFontFamily)
+        Me.tbpOutput.Controls.Add(Me.txtFontColor)
+        Me.tbpOutput.Controls.Add(Me.lblColorFont)
+        Me.tbpOutput.Controls.Add(Me.lblFamilyFont)
+        Me.tbpOutput.Location = New System.Drawing.Point(4, 22)
+        Me.tbpOutput.Name = "tbpOutput"
+        Me.tbpOutput.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpOutput.Size = New System.Drawing.Size(392, 233)
+        Me.tbpOutput.TabIndex = 2
+        Me.tbpOutput.Text = "Output Window"
+        Me.tbpOutput.UseVisualStyleBackColor = True
+        '
+        'cmdChangeSettings
+        '
+        Me.cmdChangeSettings.Location = New System.Drawing.Point(153, 145)
+        Me.cmdChangeSettings.Name = "cmdChangeSettings"
+        Me.cmdChangeSettings.Size = New System.Drawing.Size(100, 23)
+        Me.cmdChangeSettings.TabIndex = 4
+        Me.cmdChangeSettings.Text = "Change settings"
+        Me.cmdChangeSettings.UseVisualStyleBackColor = True
+        '
+        'txtFontFamily
+        '
+        Me.txtFontFamily.Location = New System.Drawing.Point(96, 63)
+        Me.txtFontFamily.Name = "txtFontFamily"
+        Me.txtFontFamily.ReadOnly = True
+        Me.txtFontFamily.Size = New System.Drawing.Size(157, 20)
+        Me.txtFontFamily.TabIndex = 3
+        '
+        'txtFontColor
+        '
+        Me.txtFontColor.Location = New System.Drawing.Point(153, 106)
+        Me.txtFontColor.Name = "txtFontColor"
+        Me.txtFontColor.ReadOnly = True
+        Me.txtFontColor.Size = New System.Drawing.Size(100, 20)
+        Me.txtFontColor.TabIndex = 2
+        '
+        'lblColorFont
+        '
+        Me.lblColorFont.AutoSize = True
+        Me.lblColorFont.Location = New System.Drawing.Point(21, 109)
+        Me.lblColorFont.Name = "lblColorFont"
+        Me.lblColorFont.Size = New System.Drawing.Size(55, 13)
+        Me.lblColorFont.TabIndex = 1
+        Me.lblColorFont.Text = "Font Color"
+        '
+        'lblFamilyFont
+        '
+        Me.lblFamilyFont.AutoSize = True
+        Me.lblFamilyFont.Location = New System.Drawing.Point(21, 66)
+        Me.lblFamilyFont.Name = "lblFamilyFont"
+        Me.lblFamilyFont.Size = New System.Drawing.Size(60, 13)
+        Me.lblFamilyFont.TabIndex = 0
+        Me.lblFamilyFont.Text = "Font Family"
         '
         'cmdOk
         '
@@ -169,6 +236,15 @@ Partial Class dlgOptions
         Me.cmdHelp.Text = "&Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
+        'lblTitle
+        '
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Location = New System.Drawing.Point(21, 13)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(223, 13)
+        Me.lblTitle.TabIndex = 5
+        Me.lblTitle.Text = "Font and Color options for the Output Window"
+        '
         'dlgOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -189,6 +265,8 @@ Partial Class dlgOptions
         Me.tbpLanguageSettings.PerformLayout()
         Me.tbpComments.ResumeLayout(False)
         Me.tbpComments.PerformLayout()
+        Me.tbpOutput.ResumeLayout(False)
+        Me.tbpOutput.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -204,4 +282,11 @@ Partial Class dlgOptions
     Friend WithEvents txtComment As TextBox
     Friend WithEvents lblComment As Label
     Friend WithEvents cmdHelp As Button
+    Friend WithEvents tbpOutput As TabPage
+    Friend WithEvents cmdChangeSettings As Button
+    Friend WithEvents txtFontFamily As TextBox
+    Friend WithEvents txtFontColor As TextBox
+    Friend WithEvents lblColorFont As Label
+    Friend WithEvents lblFamilyFont As Label
+    Friend WithEvents lblTitle As Label
 End Class

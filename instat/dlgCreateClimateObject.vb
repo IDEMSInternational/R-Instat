@@ -16,8 +16,6 @@
 Imports instat.Translations
 Public Class dlgCreateClimateObject
 
-    Dim newdataframe As String = UcrDataFrame.Text
-
     Private Sub dlgCreateClimateObject_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         frmMain.clsRLink.CreateNewClimateObject()

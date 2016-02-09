@@ -41,7 +41,9 @@ Public Class dlgOptions
         End Select
         cmdApply.Enabled = False
         cmdOk.Enabled = False
-
+        'Formatting 
+        txtFontFamily.Text = frmCommand.txtcommand.Font.Name
+        txtFontColor.Text = frmCommand.txtcommand.BackColor.Name
     End Sub
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.Close()
@@ -124,4 +126,16 @@ Public Class dlgOptions
         cmdOk.Enabled = True
     End Sub
 
+    Private Sub cmdChangeSettings_Click(sender As Object, e As EventArgs) Handles cmdChangeSettings.Click
+        Dim dlgFont As New FontDialog
+        dlgFont.ShowColor = True
+        dlgFont.MaxSize = 15
+        dlgFont.MinSize = 8
+
+        If dlgFont.ShowDialog = DialogResult.OK Then
+            txtFontFamily.Text = dlgFont.Font.FontFamily.Name
+            txtFontColor.Text = dlgFont.Color.Name
+        End If
+
+    End Sub
 End Class
