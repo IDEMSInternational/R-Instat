@@ -6,6 +6,7 @@ Public Class dlgCalculator
         ucrBase.OKEnabled(False)
         cmdBackSpace.Enabled = True
         txtCalcLine.Select()
+        ucrBase.iHelpTopicID = 14
     End Sub
 
     Private Sub AddText(strVar As String, Optional intStepsBack As Integer = 0, Optional bolInsertSelected As Boolean = False)
