@@ -24,8 +24,10 @@ Public Class dlgRegularSequence
         dtpSelectorA.Visible = False
         dtpSelectorB.Visible = False
         'ucrSelectDataFrame.SetColumnList(ucrColName)
+        ucrNewColumnNameSelector.SetDataFrameSelector(ucrSelectDataFrame)
+        ucrNewColumnNameSelector.SetPrefix("Sequence")
 
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrColName.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrColName.cboColumnName.Text)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
     End Sub
     Private Sub rdoDates_Click(sender As Object, e As EventArgs) Handles rdoDates.Click
         chkDefineAsFactor.Visible = False
@@ -97,11 +99,11 @@ Public Class dlgRegularSequence
         ucrBase.clsRsyntax.AddParameter("length.out", txtRepeatValues.Text)
     End Sub
     Private Sub ucrSelectDataFrame_LostFocus(sender As Object, e As EventArgs) Handles ucrSelectDataFrame.LostFocus
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrColName.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrColName.cboColumnName.Text)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
     End Sub
 
-    Private Sub ucrColName_LostFocus(sender As Object, e As EventArgs) Handles ucrColName.LostFocus
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrColName.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrColName.cboColumnName.Text)
+    Private Sub ucrColName_LostFocus(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelector.LostFocus
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
     End Sub
 
 
