@@ -424,7 +424,7 @@ Public Class frmMain
     End Sub
 
     Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOneWay.Click
-        'dlgOneWayAnova.ShowDialog()
+        dlgOneWayANOVA.ShowDialog()
     End Sub
 
     Private Sub SimpleWithGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionSimpleWithGroups.Click
