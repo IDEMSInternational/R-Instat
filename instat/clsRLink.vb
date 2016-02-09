@@ -18,9 +18,9 @@ Imports RDotNet
 
 Public Class RLink
     ' R interface class. Each instance of the class has its own REngine instance
-    Dim strClimateObjectPath As String = "C:\\ClimateObject\\R"
+    Dim strClimateObjectPath As String = "/ClimateObject/R" 'new climateobject path
     Public strClimateObject As String = "ClimateObject"
-    Dim strInstatObjectPath As String = "static/InstatObject/R" 'path to the Instat object
+    Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
     Public clsEngine As REngine
     Dim txtOutput As New RichTextBox
@@ -152,7 +152,7 @@ Public Class RLink
 
     Public Sub CreateNewClimateObject() 'creates an instance of the climate object
         If Not bClimateObjectExists Then
-            RunScript("setwd('" & strClimateObjectPath & "')")
+            RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strClimateObjectPath & "')")
             RunScript("source(" & Chr(34) & "SourcingScript.R" & Chr(34) & ")")
             RunScript(strClimateObject & "<-climate$new()")
             bClimateObjectExists = True
@@ -161,7 +161,7 @@ Public Class RLink
 
     Public Sub RSetup()
         'run script to load libraries
-        RunScript("setwd('" & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
+        RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
         RunScript("source(" & Chr(34) & "data_object.R" & Chr(34) & ")")
         RunScript("source(" & Chr(34) & "instat_object.R" & Chr(34) & ")")
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
