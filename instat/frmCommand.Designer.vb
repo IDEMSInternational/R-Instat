@@ -22,25 +22,25 @@ Partial Class frmCommand
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtcommand = New System.Windows.Forms.RichTextBox()
+        Me.txtCommand = New System.Windows.Forms.RichTextBox()
         Me.SuspendLayout()
         '
-        'txtcommand
+        'txtCommand
         '
-        Me.txtcommand.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtcommand.Location = New System.Drawing.Point(0, 0)
-        Me.txtcommand.Name = "txtcommand"
-        Me.txtcommand.ReadOnly = True
-        Me.txtcommand.Size = New System.Drawing.Size(631, 261)
-        Me.txtcommand.TabIndex = 0
-        Me.txtcommand.Text = ""
+        Me.txtCommand.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtCommand.Location = New System.Drawing.Point(0, 0)
+        Me.txtCommand.Name = "txtCommand"
+        Me.txtCommand.ReadOnly = True
+        Me.txtCommand.Size = New System.Drawing.Size(631, 261)
+        Me.txtCommand.TabIndex = 0
+        Me.txtCommand.Text = ""
         '
         'frmCommand
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(631, 261)
-        Me.Controls.Add(Me.txtcommand)
+        Me.Controls.Add(Me.txtCommand)
         Me.Name = "frmCommand"
         Me.ShowIcon = False
         Me.Tag = "Output_Window"
@@ -49,5 +49,5 @@ Partial Class frmCommand
 
     End Sub
 
-    Friend WithEvents txtcommand As RichTextBox
+    Friend WithEvents txtCommand As RichTextBox
 End Class
