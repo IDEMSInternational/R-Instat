@@ -641,22 +641,6 @@ Public Class frmMain
         'End If
     End Sub
 
-    Public Function SaveDialog() As KeyValuePair(Of String, String)
-        Dim dlgOpen As New SaveFileDialog
-        Dim strFilePath, strFileName As String
-        dlgOpen.Filter = "RDS (*.RDS)|*.RDS"
-        dlgOpen.Title = "Save workbook as RDS file"
-        If dlgOpen.ShowDialog() = DialogResult.OK Then
-            'checks if the file name is not blank'
-            If dlgOpen.FileName <> "" Then
-                strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
-                strFilePath = Replace(dlgOpen.FileName, "\", "/")
-                Return New KeyValuePair(Of String, String)(strFileName, Chr(34) & strFilePath & Chr(34))
-            End If
-        End If
-        Return New KeyValuePair(Of String, String)("", "")
-    End Function
-
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
         'TODO decide what Open From Library does and edit below
         'Dim kvpFile As KeyValuePair(Of String, String)
@@ -795,5 +779,15 @@ Public Class frmMain
 
     Private Sub mnuClimateMethodsCreateClimateObject_Click(sender As Object, e As EventArgs) Handles mnuClimateMethodsCreateClimateObject.Click
         dlgCreateClimateObject.ShowDialog()
+    End Sub
+
+    Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
+        Dim dlgSave As New SaveFileDialog
+        dlgSave.Filter = "Comma Separated file (*.csv)|*.csv"
+        dlgSave.Title = "Save worksheet as .csv file"
+        If dlgSave.ShowDialog() = DialogResult.OK Then
+            'Write the data  
+            clsRLink.RunScript("write.csv(x=" & frmEditor.grdData.CurrentWorksheet.Name & ",file=" & dlgSave.FileName.Replace("\", "/") & ")")
+        End If
     End Sub
 End Class
