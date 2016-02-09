@@ -784,4 +784,8 @@ Public Class frmMain
     Private Sub RemoveUnusedLabelsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveUnusedLabelsToolStripMenuItem.Click
         dlgRemoveUnusedLabels.ShowDialog()
     End Sub
+
+    Private Sub mnuManageManipulateRank_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRank.Click
+        dlgRank.ShowDialog()
+    End Sub
 End Class
