@@ -311,7 +311,6 @@ Partial Class frmMain
         Me.mnuClimateMethodsAdditionalSeasonalSummaryRain = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsAdditionalWaterBalance = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuExportAs = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2373,16 +2372,9 @@ Partial Class frmMain
         '
         'mnuExport
         '
-        Me.mnuExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuExportAs})
         Me.mnuExport.Name = "mnuExport"
         Me.mnuExport.Size = New System.Drawing.Size(204, 22)
-        Me.mnuExport.Text = "Export"
-        '
-        'mnuExportAs
-        '
-        Me.mnuExportAs.Name = "mnuExportAs"
-        Me.mnuExportAs.Size = New System.Drawing.Size(152, 22)
-        Me.mnuExportAs.Text = "Export as"
+        Me.mnuExport.Text = "Export Data"
         '
         'frmMain
         '
@@ -2696,5 +2688,4 @@ Partial Class frmMain
     Friend WithEvents mnuGraphicsGraphcsOptionsFacets As ToolStripMenuItem
     Friend WithEvents RemoveUnusedLabelsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuExport As ToolStripMenuItem
-    Friend WithEvents mnuExportAs As ToolStripMenuItem
 End Class
