@@ -119,7 +119,7 @@ Public Class ucrDistributions
         clsExponentialDist.strPFunctionName = "pexp"
         clsExponentialDist.strQFunctionName = "qexp"
         clsExponentialDist.strDFunctionName = "dexp"
-        clsExponentialDist.AddParameter("mean", "Mean", 1)
+        clsExponentialDist.AddParameter("rate", "Rate", 1)
         lstAllDistributions.Add(clsExponentialDist)
 
         ' Geometric Distribution
