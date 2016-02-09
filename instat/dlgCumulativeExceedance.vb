@@ -65,7 +65,7 @@ Public Class dlgCumulativeExceedance
 
     Private Sub dlgCumulativeExceedance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("climate_obj$cumulative_exceedance_graphs")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$cumulative_exceedance_graphs")
         ucrBase.clsRsyntax.iCallType = 0
     End Sub
 
