@@ -233,6 +233,12 @@
     <Compile Include="dlgColumnStats.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOneWayANOVA.Designer.vb">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneWayANOVA.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgRestrict.Designer.vb">
       <DependentUpon>sdgRestrict.vb</DependentUpon>
     </Compile>
@@ -1265,6 +1271,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnRows.sw-KE.resx">
       <DependentUpon>dlgColumnRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayANOVA.resx">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgRestrict.fr-FR.resx">
       <DependentUpon>sdgRestrict.vb</DependentUpon>
