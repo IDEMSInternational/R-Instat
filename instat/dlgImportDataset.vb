@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+Imports System.IO
 
 Public Class dlgImportDataset
 
@@ -49,7 +50,9 @@ Public Class dlgImportDataset
     End Sub
 
     Public Sub SetFilePath(strFilePath As String)
+        Dim sReader As New StreamReader(strFilePath)
         ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+        txtInputFile.Text = sReader.ReadToEnd
     End Sub
 
     Private Sub txtName_Leave(sender As Object, e As EventArgs) Handles txtName.Leave
