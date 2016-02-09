@@ -42,6 +42,7 @@ Public Class frmMain
         clsRLink.SetOutput(frmCommand.txtCommand)
         clsRLink.clsEngine = REngine.GetInstance()
         clsRLink.clsEngine.Initialize()
+        clsRLink.boolSave(mnuFileSave)
         'Sets up R source files
         clsRLink.RSetup()
 
