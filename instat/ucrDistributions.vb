@@ -100,7 +100,12 @@ Public Class ucrDistributions
         Dim clsBernouliDist As New Distribution
         Dim clsBinomialDist As New Distribution
         Dim clsPoissonDist As New Distribution
-        Dim clsVonnMises As New Distribution
+        Dim clsVonnMisesDist As New Distribution
+        Dim clsCategoricalDist As New Distribution
+        Dim clsGammaWithZerosDist As New Distribution
+        Dim clsGammaWithShapeandScale As New Distribution
+        Dim clsGammaWithShapeandMean As New Distribution
+        Dim clsGammaWithShapeandRate As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -119,7 +124,7 @@ Public Class ucrDistributions
         clsExponentialDist.strPFunctionName = "pexp"
         clsExponentialDist.strQFunctionName = "qexp"
         clsExponentialDist.strDFunctionName = "dexp"
-        clsExponentialDist.AddParameter("mean", "Mean", 1)
+        clsExponentialDist.AddParameter("rate", "Rate", 1)
         lstAllDistributions.Add(clsExponentialDist)
 
         ' Geometric Distribution
@@ -192,14 +197,68 @@ Public Class ucrDistributions
 
 
         ' von mises distribution
-        clsVonnMises.strNameTag = "von_mises"
-        clsVonnMises.strRFunctionName = "rvonmises"
-        clsVonnMises.strPFunctionName = "pvonmises"
-        clsVonnMises.strQFunctionName = "qvonmises"
-        clsVonnMises.strDFunctionName = "dvonmises"
-        clsVonnMises.AddParameter("mean", "Mean", "pi")
-        clsVonnMises.AddParameter("kappa", "Kappa", 0)
-        lstAllDistributions.Add(clsVonnMises)
+        clsVonnMisesDist.strNameTag = "von_mises"
+        clsVonnMisesDist.strRFunctionName = "rvonmises"
+        clsVonnMisesDist.strPFunctionName = "pvonmises"
+        clsVonnMisesDist.strQFunctionName = "qvonmises"
+        clsVonnMisesDist.strDFunctionName = "dvonmises"
+        clsVonnMisesDist.AddParameter("mean", "Mean", "pi")
+        clsVonnMisesDist.AddParameter("kappa", "Kappa", 0)
+        lstAllDistributions.Add(clsVonnMisesDist)
+
+        'Categorical distribution
+        clsCategoricalDist.strNameTag = "Categorical"
+        clsCategoricalDist.strRFunctionName = ""
+        clsCategoricalDist.strPFunctionName = ""
+        clsCategoricalDist.strQFunctionName = ""
+        clsCategoricalDist.strDFunctionName = ""
+        clsCategoricalDist.AddParameter("", "", "")
+        clsCategoricalDist.AddParameter("", "", )
+        lstAllDistributions.Add(clsCategoricalDist)
+
+        'Gamma With Shape and Scale distribution
+        clsGammaWithShapeandScale.strNameTag = "Gamma_With_Shape_and_Scale"
+        clsGammaWithShapeandScale.strRFunctionName = ""
+        clsGammaWithShapeandScale.strPFunctionName = ""
+        clsGammaWithShapeandScale.strQFunctionName = ""
+        clsGammaWithShapeandScale.strDFunctionName = ""
+        clsGammaWithShapeandScale.AddParameter("shape", "Shape")
+        clsGammaWithShapeandScale.AddParameter("scale", "Scale")
+        lstAllDistributions.Add(clsGammaWithShapeandScale)
+
+        'Gamma With Shape and Mean distribution
+        clsGammaWithShapeandMean.strNameTag = "Gamma_With_Shape_and_Mean"
+        clsGammaWithShapeandMean.strRFunctionName = ""
+        clsGammaWithShapeandMean.strPFunctionName = ""
+        clsGammaWithShapeandMean.strQFunctionName = ""
+        clsGammaWithShapeandMean.strDFunctionName = ""
+        clsGammaWithShapeandMean.AddParameter("shape", "Shape")
+        clsGammaWithShapeandMean.AddParameter("mean", "Mean")
+        lstAllDistributions.Add(clsGammaWithShapeandMean)
+
+
+
+
+        'Gamma With Shape and Rate distribution
+        clsGammaWithShapeandRate.strNameTag = "Gamma_With_Shape_and_Rate"
+        clsGammaWithShapeandRate.strRFunctionName = ""
+        clsGammaWithShapeandRate.strPFunctionName = ""
+        clsGammaWithShapeandRate.strQFunctionName = ""
+        clsGammaWithShapeandRate.strDFunctionName = ""
+        clsGammaWithShapeandRate.AddParameter("shape", "Shape")
+        clsGammaWithShapeandRate.AddParameter("rate", "Rate")
+        lstAllDistributions.Add(clsGammaWithShapeandRate)
+
+
+        'Gamma with Zeros distribution
+        clsGammaWithZerosDist.strNameTag = "Gamma_With_Zeros"
+        clsGammaWithZerosDist.strRFunctionName = ""
+        clsGammaWithZerosDist.strPFunctionName = ""
+        clsGammaWithZerosDist.strQFunctionName = ""
+        clsGammaWithZerosDist.strDFunctionName = ""
+        clsGammaWithZerosDist.AddParameter("", "", "")
+        clsGammaWithZerosDist.AddParameter("", "", )
+        lstAllDistributions.Add(clsGammaWithZerosDist)
 
         bDistributionsSet = True
     End Sub
