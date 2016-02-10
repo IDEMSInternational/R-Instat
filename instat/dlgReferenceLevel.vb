@@ -16,12 +16,14 @@
 Imports instat.Translations
 Public Class dlgReferenceLevel
     Private Sub dlgReferenceLevel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("")
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.SetFunction("relevel")
+
         ucrFactorSelected.SetMeAsReceiver()
         ucrFactorSelected.Selector = ucrAddRemove
         ucrFactorSelected.SetDataType("factor")
         autoTranslate(Me)
 
     End Sub
+
+
 End Class
