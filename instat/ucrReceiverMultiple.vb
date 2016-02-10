@@ -72,7 +72,7 @@ Public Class ucrReceiverMultiple
         Return clsGetVariablesFunc
     End Function
 
-    Public Overrides Function GetVariableNames() As String
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
         Dim i As Integer
         If objSelected.Count = 1 Then
@@ -83,7 +83,11 @@ Public Class ucrReceiverMultiple
                 If i > 0 Then
                     strTemp = strTemp & ","
                 End If
-                strTemp = strTemp & Chr(34) & objSelected(i).Text & Chr(34)
+                If bWithQuotes Then
+                    strTemp = strTemp & Chr(34) & objSelected(i).Text & Chr(34)
+                Else
+                    strTemp = strTemp & objSelected(i).Text
+                End If
             Next
             strTemp = strTemp & ")"
         End If
