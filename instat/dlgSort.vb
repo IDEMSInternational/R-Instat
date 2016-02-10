@@ -16,51 +16,33 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports RDotNet
-Public Class dlgSort
-    Dim newdata As DataFrame
 
+Public Class dlgSort
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("sort")
-        ucrMultiple.Selector = ucrAddRemove
-        ucrMultiple.SetMeAsReceiver()
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.SetFunction("order")
+        ucrReceiverSort.Selector = ucrAddRemove
+        ucrReceiverSort.SetMeAsReceiver()
         autoTranslate(Me)
     End Sub
+    Private Sub ucrReceiverSort_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSort.Leave
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverSort.GetVariables())
 
-    Private Sub ucrMultiple_Leave(sender As Object, e As EventArgs) Handles ucrMultiple.Leave
-        'Dim objItem As Object
-        ''Dim temp_obj As ListBox.ObjectCollection = ucrMultiple.lstSelectedVariables.Items
-        'If ucrMultiple.lstSelectedVariables.Items.Count > 0 Then
-        '    For Each objItem In temp_obj
-        '        ucrBase.clsRsyntax.AddParameter("data_temp$" & objItem & "", "x")
-        '    Next
-        'End If
     End Sub
-
-    Private Sub rdoAscending_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged
+    Private Sub grpOrder_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged, rdoDescending.CheckedChanged
         If rdoAscending.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("TRUE", "decreasing")
-        End If
-    End Sub
-
-    Private Sub rdoDescending_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDescending.CheckedChanged
-        If rdoDescending.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("FALSE", "decreasing")
-        End If
-    End Sub
-
-    Private Sub chkWriteBack_CheckStateChanged(sender As Object, e As EventArgs) Handles chkWriteBack.CheckStateChanged
-        If chkWriteBack.Checked = True Then
-            ucrBase.clsRsyntax.SetFunction("data_temp<-data_temp[order")
-            newdata = frmMain.clsRLink.GetData("data_temp")
-            'frmEditor.UpdateSheet(newdata)
+            ucrBase.clsRsyntax.AddParameter("Descending", "FALSE")
         Else
-            ucrBase.clsRsyntax.SetFunction("order")
+            ucrBase.clsRsyntax.AddParameter("Descending", "TRUE")
         End If
+
     End Sub
 
-    Private Sub chkWriteBack_CheckedChanged(sender As Object, e As EventArgs) Handles chkWriteBack.CheckedChanged
+    Private Sub grpMissingValues_ChekedChanged(sender As Object, e As EventArgs) Handles rdoFirst.CheckedChanged, rdoLast.CheckedChanged
+        If rdoFirst.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("na.last", "FALSE")
+        Else
+            ucrBase.clsRsyntax.AddParameter("na.last", "TRUE")
+        End If
 
     End Sub
 End Class
