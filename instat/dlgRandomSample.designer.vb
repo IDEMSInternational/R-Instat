@@ -32,6 +32,7 @@ Partial Class dlgRandomSample
         Me.txtSampleSize = New System.Windows.Forms.TextBox()
         Me.lblNumberofSamples = New System.Windows.Forms.Label()
         Me.txtNumberofSamples = New System.Windows.Forms.TextBox()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblSeed
@@ -114,11 +115,22 @@ Partial Class dlgRandomSample
         Me.txtNumberofSamples.Size = New System.Drawing.Size(100, 20)
         Me.txtNumberofSamples.TabIndex = 11
         '
+        'cmdOptions
+        '
+        Me.cmdOptions.Location = New System.Drawing.Point(331, 197)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.TabIndex = 12
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(418, 342)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.txtNumberofSamples)
         Me.Controls.Add(Me.lblNumberofSamples)
         Me.Controls.Add(Me.txtSampleSize)
@@ -150,4 +162,5 @@ Partial Class dlgRandomSample
     Friend WithEvents txtSampleSize As TextBox
     Friend WithEvents lblNumberofSamples As Label
     Friend WithEvents txtNumberofSamples As TextBox
+    Friend WithEvents cmdOptions As Button
 End Class
