@@ -83,10 +83,12 @@ Public Class ucrReceiverMultiple
                 If i > 0 Then
                     strTemp = strTemp & ","
                 End If
-                If bWithQuotes Then
-                    strTemp = strTemp & Chr(34) & objSelected(i).Text & Chr(34)
-                Else
-                    strTemp = strTemp & objSelected(i).Text
+                If objSelected(i).Text <> "" Then
+                    If bWithQuotes Then
+                        strTemp = strTemp & Chr(34) & objSelected(i).Text & Chr(34)
+                    Else
+                        strTemp = strTemp & objSelected(i).Text
+                    End If
                 End If
             Next
             strTemp = strTemp & ")"
