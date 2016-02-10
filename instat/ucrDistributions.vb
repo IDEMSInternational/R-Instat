@@ -105,6 +105,7 @@ Public Class ucrDistributions
         Dim clsGammaWithZerosDist As New Distribution
         Dim clsGammaWithShapeandScale As New Distribution
         Dim clsGammaWithShapeandMean As New Distribution
+        Dim clsGammaWithShapeandRate As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -226,7 +227,7 @@ Public Class ucrDistributions
         lstAllDistributions.Add(clsGammaWithShapeandScale)
 
         'Gamma With Shape and Mean distribution
-        clsGammaWithShapeandMean.strNameTag = "Gamma With Shape and Mean"
+        clsGammaWithShapeandMean.strNameTag = "Gamma_With_Shape_and_Mean"
         clsGammaWithShapeandMean.strRFunctionName = ""
         clsGammaWithShapeandMean.strPFunctionName = ""
         clsGammaWithShapeandMean.strQFunctionName = ""
@@ -234,6 +235,19 @@ Public Class ucrDistributions
         clsGammaWithShapeandMean.AddParameter("shape", "Shape")
         clsGammaWithShapeandMean.AddParameter("mean", "Mean")
         lstAllDistributions.Add(clsGammaWithShapeandMean)
+
+
+
+
+        'Gamma With Shape and Rate distribution
+        clsGammaWithShapeandRate.strNameTag = "Gamma_With_Shape_and_Rate"
+        clsGammaWithShapeandRate.strRFunctionName = ""
+        clsGammaWithShapeandRate.strPFunctionName = ""
+        clsGammaWithShapeandRate.strQFunctionName = ""
+        clsGammaWithShapeandRate.strDFunctionName = ""
+        clsGammaWithShapeandRate.AddParameter("shape", "Shape")
+        clsGammaWithShapeandRate.AddParameter("rate", "Rate")
+        lstAllDistributions.Add(clsGammaWithShapeandRate)
 
 
         'Gamma with Zeros distribution
