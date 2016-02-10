@@ -45,7 +45,7 @@ Public Class ucrReceiver
         Return clsGetVariablesFunc
     End Function
 
-    Public Overridable Function GetVariableNames() As String
+    Public Overridable Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strVarNames As String = ""
         Return strVarNames
     End Function
