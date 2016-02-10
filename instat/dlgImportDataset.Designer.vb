@@ -255,6 +255,7 @@ Partial Class dlgImportDataset
         Me.txtInputFile.Location = New System.Drawing.Point(265, 25)
         Me.txtInputFile.Multiline = True
         Me.txtInputFile.Name = "txtInputFile"
+        Me.txtInputFile.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtInputFile.Size = New System.Drawing.Size(422, 205)
         Me.txtInputFile.TabIndex = 22
         '
