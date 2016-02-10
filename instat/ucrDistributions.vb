@@ -218,20 +218,20 @@ Public Class ucrDistributions
 
         'Gamma With Shape and Scale distribution
         clsGammaWithShapeandScale.strNameTag = "Gamma_With_Shape_and_Scale"
-        clsGammaWithShapeandScale.strRFunctionName = ""
-        clsGammaWithShapeandScale.strPFunctionName = ""
-        clsGammaWithShapeandScale.strQFunctionName = ""
-        clsGammaWithShapeandScale.strDFunctionName = ""
+        clsGammaWithShapeandScale.strRFunctionName = "rgamma"
+        clsGammaWithShapeandScale.strPFunctionName = "pgamma"
+        clsGammaWithShapeandScale.strQFunctionName = "qgamma"
+        clsGammaWithShapeandScale.strDFunctionName = "dgamma"
         clsGammaWithShapeandScale.AddParameter("shape", "Shape")
         clsGammaWithShapeandScale.AddParameter("scale", "Scale")
         lstAllDistributions.Add(clsGammaWithShapeandScale)
 
         'Gamma With Shape and Mean distribution
         clsGammaWithShapeandMean.strNameTag = "Gamma_With_Shape_and_Mean"
-        clsGammaWithShapeandMean.strRFunctionName = ""
-        clsGammaWithShapeandMean.strPFunctionName = ""
-        clsGammaWithShapeandMean.strQFunctionName = ""
-        clsGammaWithShapeandMean.strDFunctionName = ""
+        clsGammaWithShapeandMean.strRFunctionName = "rgamma"
+        clsGammaWithShapeandMean.strPFunctionName = "pgamma"
+        clsGammaWithShapeandMean.strQFunctionName = "qgamma"
+        clsGammaWithShapeandMean.strDFunctionName = "dgamma"
         clsGammaWithShapeandMean.AddParameter("shape", "Shape")
         clsGammaWithShapeandMean.AddParameter("mean", "Mean")
         lstAllDistributions.Add(clsGammaWithShapeandMean)
@@ -241,10 +241,10 @@ Public Class ucrDistributions
 
         'Gamma With Shape and Rate distribution
         clsGammaWithShapeandRate.strNameTag = "Gamma_With_Shape_and_Rate"
-        clsGammaWithShapeandRate.strRFunctionName = ""
-        clsGammaWithShapeandRate.strPFunctionName = ""
-        clsGammaWithShapeandRate.strQFunctionName = ""
-        clsGammaWithShapeandRate.strDFunctionName = ""
+        clsGammaWithShapeandRate.strRFunctionName = "rgamma"
+        clsGammaWithShapeandRate.strPFunctionName = "pgamma"
+        clsGammaWithShapeandRate.strQFunctionName = "qgamma"
+        clsGammaWithShapeandRate.strDFunctionName = "dgamma"
         clsGammaWithShapeandRate.AddParameter("shape", "Shape")
         clsGammaWithShapeandRate.AddParameter("rate", "Rate")
         lstAllDistributions.Add(clsGammaWithShapeandRate)
@@ -252,10 +252,10 @@ Public Class ucrDistributions
 
         'Gamma with Zeros distribution
         clsGammaWithZerosDist.strNameTag = "Gamma_With_Zeros"
-        clsGammaWithZerosDist.strRFunctionName = ""
-        clsGammaWithZerosDist.strPFunctionName = ""
-        clsGammaWithZerosDist.strQFunctionName = ""
-        clsGammaWithZerosDist.strDFunctionName = ""
+        clsGammaWithZerosDist.strRFunctionName = "rgamma"
+        clsGammaWithZerosDist.strPFunctionName = "pgamma"
+        clsGammaWithZerosDist.strQFunctionName = "qgamma"
+        clsGammaWithZerosDist.strDFunctionName = "dgamma"
         clsGammaWithZerosDist.AddParameter("", "", "")
         clsGammaWithZerosDist.AddParameter("", "", )
         lstAllDistributions.Add(clsGammaWithZerosDist)

@@ -17,12 +17,14 @@ Imports instat.Translations
 Public Class dlgOneWayANOVA
     Private Sub dlgOneWayAnova_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("aov")
+        ucrBase.clsRsyntax.iCallType = 0
         ucrYVariate.Selector = ucrAddRemove
         ucrYVariate.SetMeAsReceiver()
         ucrFactor.Selector = ucrAddRemove
         ucrFactor.SetDataType("factor")
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrDataSelector.clsCurrDataFrame)
         autoTranslate(Me)
-        ucrBase.OKEnabled(False)
+        Fillformula()
 
     End Sub
 
@@ -37,12 +39,12 @@ Public Class dlgOneWayANOVA
     Private Sub Fillformula()
         Dim strFactor As String = ""
         Dim strYVariate As String = ""
-        strYVariate = ucrYVariate.GetVariableNames()
-        strFactor = ucrFactor.GetVariableNames()
-
-
+        strYVariate = ucrYVariate.GetVariableNames(bWithQuotes:=False)
+        strFactor = ucrFactor.GetVariableNames(bWithQuotes:=False)
 
         If ((Not (strYVariate = "")) And (Not (strFactor = ""))) Then
+            ucrBase.clsRsyntax.AddParameter("formula", strYVariate & "~" & strFactor)
+
 
             ucrBase.OKEnabled(True)
         Else
@@ -50,5 +52,7 @@ Public Class dlgOneWayANOVA
         End If
     End Sub
 
-
+    Private Sub ucrDataSelector_Leave(sender As Object, e As EventArgs) Handles ucrDataSelector.Leave
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrDataSelector.clsCurrDataFrame)
+    End Sub
 End Class
