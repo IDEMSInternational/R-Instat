@@ -64,11 +64,13 @@ Public Class ucrReceiverSingle
     End Function
 
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
-        Dim strTemp As String
-        If bWithQuotes Then
-            strTemp = Chr(34) & objSelected.Text & Chr(34)
-        Else
-            strTemp = objSelected.Text
+        Dim strTemp As String = ""
+        If txtReceiverSingle.Text <> "" Then
+            If bWithQuotes Then
+                strTemp = Chr(34) & objSelected.Text & Chr(34)
+            Else
+                strTemp = objSelected.Text
+            End If
         End If
         Return strTemp
     End Function
