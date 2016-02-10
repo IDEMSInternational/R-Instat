@@ -19,26 +19,37 @@ Public Class dlgRowStats
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction("apply")
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrReceiverRowStatistics.Selector = ucrSelectorDataFrame
+        ucrBase.clsRsyntax.iCallType = 1
+        ucrReceiverRowStatistics.Selector = ucrAddRemove
         ucrReceiverRowStatistics.SetMeAsReceiver()
         ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
+        ucrNewColumnNameSelector.SetDataFrameSelector(ucrDataFrameSelector)
+        ucrNewColumnNameSelector.SetPrefix("Row_Summary")
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrDataFrameSelector.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+
     End Sub
 
     Private Sub ucrReceiverRowStatistics_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRowStatistics.Leave
-        ucrBase.clsRsyntax.AddParameter("X", ucrReceiverRowStatistics.GetVariableNames())
+        ucrBase.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverRowStatistics.GetVariables())
 
     End Sub
 
 
+
     Private Sub Statistic_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMean.CheckedChanged, rdoCount.CheckedChanged, rdoMaximum.CheckedChanged, rdoMinimum.CheckedChanged, rdoSum.CheckedChanged, rdoStandardDeviation.CheckedChanged
-        ' ucrNewColumnName.setPrefix= "RowMean", "RowCount", "RowMaximum", "RowMinimum, "RowSum", "RowStandardDeviation"
-        ucrBase.clsRsyntax.AddParameter("FUN", "mean")
-        ucrBase.clsRsyntax.AddParameter("FUN", "count")
-        ucrBase.clsRsyntax.AddParameter("FUN", "maximum")
-        ucrBase.clsRsyntax.AddParameter("FUN", "minimum")
-        ucrBase.clsRsyntax.AddParameter("FUN", "sum")
-        ucrBase.clsRsyntax.AddParameter("FUN", "sd")
+        If rdoMean.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("FUN", "mean")
+        ElseIf rdoCount.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("FUN", "count")
+        ElseIf rdoMaximum.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("FUN", "max")
+        ElseIf rdoMinimum.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("FUN", "min")
+        ElseIf rdoSum.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("FUN", "sum")
+        ElseIf rdoStandardDeviation.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("FUN", "sd")
+        End If
 
     End Sub
 End Class

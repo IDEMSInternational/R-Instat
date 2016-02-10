@@ -22,45 +22,11 @@ Public Class dlgSort
 
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("sort")
-        ucrMultiple.Selector = ucrAddRemove
-        ucrMultiple.SetMeAsReceiver()
+        ucrReceiverSort.Selector = ucrAddRemove
+        ucrReceiverSort.SetMeAsReceiver()
         ucrBase.clsRsyntax.iCallType = 2
         autoTranslate(Me)
     End Sub
 
-    Private Sub ucrMultiple_Leave(sender As Object, e As EventArgs) Handles ucrMultiple.Leave
-        'Dim objItem As Object
-        ''Dim temp_obj As ListBox.ObjectCollection = ucrMultiple.lstSelectedVariables.Items
-        'If ucrMultiple.lstSelectedVariables.Items.Count > 0 Then
-        '    For Each objItem In temp_obj
-        '        ucrBase.clsRsyntax.AddParameter("data_temp$" & objItem & "", "x")
-        '    Next
-        'End If
-    End Sub
 
-    Private Sub rdoAscending_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged
-        If rdoAscending.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("TRUE", "decreasing")
-        End If
-    End Sub
-
-    Private Sub rdoDescending_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDescending.CheckedChanged
-        If rdoDescending.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("FALSE", "decreasing")
-        End If
-    End Sub
-
-    Private Sub chkWriteBack_CheckStateChanged(sender As Object, e As EventArgs) Handles chkWriteBack.CheckStateChanged
-        If chkWriteBack.Checked = True Then
-            ucrBase.clsRsyntax.SetFunction("data_temp<-data_temp[order")
-            newdata = frmMain.clsRLink.GetData("data_temp")
-            'frmEditor.UpdateSheet(newdata)
-        Else
-            ucrBase.clsRsyntax.SetFunction("order")
-        End If
-    End Sub
-
-    Private Sub chkWriteBack_CheckedChanged(sender As Object, e As EventArgs) Handles chkWriteBack.CheckedChanged
-
-    End Sub
 End Class
