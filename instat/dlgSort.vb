@@ -16,17 +16,33 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports RDotNet
-Public Class dlgSort
-    Dim newdata As DataFrame
 
+Public Class dlgSort
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("sort")
+        ucrBase.clsRsyntax.SetFunction("order")
         ucrReceiverSort.Selector = ucrAddRemove
         ucrReceiverSort.SetMeAsReceiver()
-        ucrBase.clsRsyntax.iCallType = 2
         autoTranslate(Me)
     End Sub
+    Private Sub ucrReceiverSort_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSort.Leave
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverSort.GetVariables())
 
+    End Sub
+    Private Sub grpOrder_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged, rdoDescending.CheckedChanged
+        If rdoAscending.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("Descending", "FALSE")
+        Else
+            ucrBase.clsRsyntax.AddParameter("Descending", "TRUE")
+        End If
 
+    End Sub
+
+    Private Sub grpMissingValues_ChekedChanged(sender As Object, e As EventArgs) Handles rdoFirst.CheckedChanged, rdoLast.CheckedChanged
+        If rdoFirst.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("na.last", "FALSE")
+        Else
+            ucrBase.clsRsyntax.AddParameter("na.last", "TRUE")
+        End If
+
+    End Sub
 End Class
