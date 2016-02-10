@@ -63,11 +63,15 @@ Public Class ucrReceiverSingle
         End If
     End Function
 
-    Public Overrides Function GetVariableNames() As String
-        Return Chr(34) & objSelected.Text & Chr(34)
-        'in multiple return c( 'column names' )
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
+        Dim strTemp As String
+        If bWithQuotes Then
+            strTemp = Chr(34) & objSelected.Text & Chr(34)
+        Else
+            strTemp = objSelected.Text
+        End If
+        Return strTemp
     End Function
-
 
     Private Sub txtReceiverSingle_TextChanged(sender As Object, e As EventArgs) Handles txtReceiverSingle.TextChanged
         OnValueChanged(sender, e)

@@ -24,11 +24,10 @@ Public Class frmMain
 
     Public clsRLink As New RLink
     Public clsGrids As New clsGridLink
-    Public strHelpFilePath As String = ""
     Public strStaticPath As String
+    Public strHelpFilePath As String
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        strHelpFilePath = "static\Help\R-Instat.chm"
         frmEditor.MdiParent = Me
         frmCommand.MdiParent = Me
         frmLog.MdiParent = Me
@@ -36,7 +35,7 @@ Public Class frmMain
         frmVariables.MdiParent = Me
         frmMetaData.MdiParent = Me
         strStaticPath = Path.GetFullPath("static")
-
+        strHelpFilePath = "Help\R-Instat.chm"
         frmCommand.Show()
         frmEditor.Show()
         Me.LayoutMdi(MdiLayout.TileVertical)
