@@ -51,12 +51,13 @@ Public Class ucrReceiverSingle
         'return columns (in data frame) in both cases
         'call GetVariableNames
         Dim clsGetVariablesFunc As New RFunction
+        Dim clsParam As New RParameter
         If bSelected Then
-            clsRSyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data", clsFunction:=clsGetVariablesFunc)
-            clsRSyntax.AddParameter("data_name", Chr(34) & objSelected.Group.ToString() & Chr(34), clsRFunction:=clsGetVariablesFunc)
-            clsRSyntax.AddParameter("col_name", GetVariableNames(), clsRFunction:=clsGetVariablesFunc)
+            clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+            clsGetVariablesFunc.AddParameter("data_name", Chr(34) & objSelected.Group.ToString() & Chr(34))
+            clsGetVariablesFunc.AddParameter("col_name", GetVariableNames())
             'TODO make this an option set in Options menu
-            clsRSyntax.SetAssignTo(MakeValidRString(objSelected.Text), clsFunction:=clsGetVariablesFunc)
+            clsGetVariablesFunc.SetAssignTo(MakeValidRString(objSelected.Text))
             Return clsGetVariablesFunc
         Else
             Return clsGetVariablesFunc

@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class sdgBoxplot
+Public Class sdgPlots
     Private Sub sdgBoxplot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         chkGridOptions.Checked = False
         chkWrapOptions.Checked = False
