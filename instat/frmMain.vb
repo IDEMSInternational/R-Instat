@@ -107,7 +107,7 @@ Public Class frmMain
         dlgInventoryPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsRegressionMultiple_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionMultiple.Click
+    Private Sub mnuStatisticsRegressionMultinomial_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionMultinomial.Click
         dlgMultipleRegression.ShowDialog()
     End Sub
 
@@ -316,9 +316,7 @@ Public Class frmMain
         dlgSummaryTables.ShowDialog()
     End Sub
 
-    Private Sub GammaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsGamma.Click
-        dlgGammaDistr.ShowDialog()
-    End Sub
+
 
     Private Sub DuplicatecopyColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgDuplicateColumns.ShowDialog()
@@ -336,9 +334,7 @@ Public Class frmMain
         dlgPolynomials.ShowDialog()
     End Sub
 
-    Private Sub ExtremaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsExtrema.Click
-        dlgExtremes.ShowDialog()
-    End Sub
+
 
     Private Sub StacksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeStack.Click
         dlgStack.ShowDialog()
@@ -418,9 +414,7 @@ Public Class frmMain
         dlgGeneral.ShowDialog()
     End Sub
 
-    Private Sub BivariateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceBivariate.Click
-        dlgBivariateANOVA.ShowDialog()
-    End Sub
+
 
     Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOneWay.Click
         dlgOneWayANOVA.ShowDialog()
@@ -430,19 +424,17 @@ Public Class frmMain
         dlgSimpleWithGroups.ShowDialog()
     End Sub
 
-    Private Sub GeneralLinearModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionGeneralLinearModel.Click
+    Private Sub mnuStatisticsRegressionLogLinea_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionLogLinear.Click
         dlgGeneralisedLinearModels.ShowDialog()
     End Sub
 
-    Private Sub CorrelationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionCorrelation.Click
-        dlgCorrelation.ShowDialog()
-    End Sub
 
-    Private Sub LogLinearModelsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionLogLinearModels.Click
+
+    Private Sub mnuStatisticsRegressionLogLinear_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionLogLinear.Click
         dlglogLinearModels.ShowDialog()
     End Sub
 
-    Private Sub OneAndTwoSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricOneAndTwoSamples.Click
+    Private Sub OneAndTwoSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricOneSample.Click
         dlgNon_ParemetricOneandTwoSampleTests.ShowDialog()
     End Sub
 
@@ -450,9 +442,7 @@ Public Class frmMain
         dlgTwoWayAnova.ShowDialog()
     End Sub
 
-    Private Sub CorrelationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTimeSeriesCorrelations.Click
-        dlgCorrelation.ShowDialog()
-    End Sub
+
 
     Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticManageNewWorksheet.Click
         dlgNewWorksheet.ShowDialog()
@@ -566,7 +556,7 @@ Public Class frmMain
         dlgTotals.ShowDialog()
     End Sub
 
-    Private Sub PoissonOneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsTwoSample.Click
+    Private Sub mnuStatisticsSimpleModelsTwoSample_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsTwoSamples.Click
         dlgTwoSamples.ShowDialog()
     End Sub
 
