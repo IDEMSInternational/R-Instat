@@ -30,8 +30,26 @@ Public Class RLink
     Public bClimateObjectExists As Boolean = False
     Public bInstatObjectExists As Boolean = False
     Public bClimsoftLinkExists As Boolean = False
+    'sets the font for the strScript
+    Public fScript As Font = New Font(txtOutput.Font.FontFamily, txtOutput.Font.Size)
+    Public clrScript As Color = Color.Black
+    'sets the font for the strOutput
+    Public fOutput As Font = New Font(txtOutput.Font.FontFamily, txtOutput.Font.Size)
+    Public clrOutput As Color = Color.Blue
+    'sets the font for the Comments
+    'ToDo
 
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
+    End Sub
+
+    Public Sub setFormatOutput(tempFont As Font, tempColor As Color)
+        fOutput = tempFont
+        clrOutput = tempColor
+    End Sub
+
+    Public Sub setFormatScript(tempFont As Font, tempColor As Color)
+        fScript = tempFont
+        clrScript = tempColor
     End Sub
 
     Public Sub SetOutput(tempOutput As RichTextBox)
@@ -108,7 +126,7 @@ Public Class RLink
             If bOutput Then
 
                 'input format here
-                AppendText(txtOutput, Color.Black, strScript & vbCrLf)
+                AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
             End If
             If bReturnOutput = 0 Then
                 clsEngine.Evaluate(strScript)
@@ -130,24 +148,26 @@ Public Class RLink
             If bOutput Then
                 'txtOutput.Text = txtOutput.Text & strOutput
                 'output format here
-                AppendText(txtOutput, Color.Blue, strOutput)
+                AppendText(txtOutput, clrOutput, fOutput, strOutput)
             End If
         Catch
             MsgBox(strScript)
         End Try
         frmMain.clsGrids.UpdateGrids()
     End Sub
-    Private Sub AppendText(box As RichTextBox, color As Color, text As String)
-        Dim start As Integer = box.TextLength
+
+    Private Sub AppendText(box As RichTextBox, color As Color, font As Font, text As String)
+        Dim iStart As Integer = box.TextLength
+        Dim iEnd As Integer
+
         box.AppendText(text)
-        Dim [end] As Integer = box.TextLength
+        iEnd = box.TextLength
 
         ' Textbox may transform chars, so (end-start) != text.Length
-        box.[Select](start, [end] - start)
-        If True Then
-            box.SelectionColor = color
-            'To set Font and Font Size after Discussion
-        End If
+        box.[Select](iStart, iEnd - iStart)
+        box.SelectionColor = color
+        box.SelectionFont = font
+        'TClears selection
         box.SelectionLength = 0
         ' clear
     End Sub
