@@ -161,7 +161,7 @@ Partial Class dlgBoxplot
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblYVarToPlot)
         Me.Controls.Add(Me.ucrBase)
-        Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Me.Cursor = System.Windows.Forms.Cursors.Default
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgBoxplot"
