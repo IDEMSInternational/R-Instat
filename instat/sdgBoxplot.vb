@@ -16,6 +16,40 @@
 Imports instat.Translations
 Public Class sdgBoxplot
     Private Sub sdgBoxplot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        chkGridOptions.Checked = False
+        chkWrapOptions.Checked = False
+        chkFreeScales.Checked = False
+        rdoVertical.Visible = False
+        rdoHorizontal.Visible = False
+        rdoMargins.Visible = False
+        lblNoOfColumns.Visible = False
+        txtNoOfColumns.Visible = False
+        ucrReceiveFactor1.Selector = ucrAddRemove
+        ucrReceiveFactor1.SetMeAsReceiver()
+        ucrReceiveFactor2.Selector = ucrAddRemove
         autoTranslate(Me)
     End Sub
+
+    Private Sub chkGridOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkGridOptions.CheckedChanged
+        If chkGridOptions.Checked = True Then
+            rdoVertical.Visible = True
+            rdoHorizontal.Visible = True
+            rdoMargins.Visible = True
+        Else
+            rdoVertical.Visible = False
+            rdoHorizontal.Visible = False
+            rdoMargins.Visible = False
+        End If
+    End Sub
+
+    Private Sub chkWrapOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkWrapOptions.CheckedChanged
+        If chkWrapOptions.Checked = True Then
+            lblNoOfColumns.Visible = True
+            txtNoOfColumns.Visible = True
+        Else
+            lblNoOfColumns.Visible = False
+            txtNoOfColumns.Visible = False
+        End If
+    End Sub
+
 End Class
