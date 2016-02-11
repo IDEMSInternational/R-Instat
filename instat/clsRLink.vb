@@ -38,7 +38,7 @@ Public Class RLink
     Public clrOutput As Color = Color.Blue
     'sets the font for the Comments
     Public fComments As Font = New Font(txtOutput.Font.FontFamily, txtOutput.Font.Size)
-    Public clrComments As Color = Color.Brown
+    Public clrComments As Color = Color.Green
 
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
     End Sub
@@ -123,16 +123,21 @@ Public Class RLink
         Dim temp As RDotNet.SymbolicExpression
         Dim strTemp As String
         Dim strOutput As String
+        Dim strScriptWithComment As String
         Dim strSplitScript As String
         strOutput = ""
         Try
-            If bLog And strComment <> "" Then
-                txtLog.Text = txtLog.Text & strComment & vbCrLf
-                txtLog.Text = txtLog.Text & strScript & vbCrLf
+            If strComment <> "" Then
+                strScriptWithComment = "# " & strComment & vbCrLf & strScript
+            Else
+                strScriptWithComment = strScript
+            End If
+            If bLog Then
+                txtLog.Text = txtLog.Text & strScriptWithComment & vbCrLf
             End If
             If bOutput Then
                 If strComment <> "" Then
-                    AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
+                    AppendText(txtOutput, clrComments, fComments, strScriptWithComment & vbCrLf)
                 End If
                 AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
             End If
