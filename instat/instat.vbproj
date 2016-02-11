@@ -1026,10 +1026,10 @@
     <Compile Include="clsRLink.vb" />
     <Compile Include="clsRParameter.vb" />
     <Compile Include="clsRSyntax.vb" />
-    <Compile Include="sdgBoxplot.Designer.vb">
-      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    <Compile Include="sdgPlots.Designer.vb">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgBoxplot.vb">
+    <Compile Include="sdgPlots.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Translations.vb" />
@@ -2379,14 +2379,14 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.sw-KE.resx" />
-    <EmbeddedResource Include="sdgBoxplot.fr-FR.resx">
-      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    <EmbeddedResource Include="sdgPlots.fr-FR.resx">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgBoxplot.resx">
-      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    <EmbeddedResource Include="sdgPlots.resx">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgBoxplot.sw-KE.resx">
-      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    <EmbeddedResource Include="sdgPlots.sw-KE.resx">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
