@@ -42,16 +42,22 @@ Public Class dlgOptions
         End Select
         cmdApply.Enabled = False
         'cmdOk.Enabled = False
-        'Loads the current font and color
+        'Loads the current font and color for the Script
         txtScriptFont.Text = frmMain.clsRLink.fScript.FontFamily.Name
         txtScriptColor.Text = frmMain.clsRLink.clrScript.Name
         txtScriptColor.ForeColor = frmMain.clsRLink.clrScript
         txtScriptSize.Text = frmMain.clsRLink.fScript.Size
         'For the output
-        txtOutputFont.Text = frmMain.clsRLink.fScript.FontFamily.Name
-        txtOutputcolor.Text = frmMain.clsRLink.clrScript.Name
-        txtOutputcolor.ForeColor = frmMain.clsRLink.clrScript
-        txtOutputSize.Text = frmMain.clsRLink.fScript.Size
+        txtOutputFont.Text = frmMain.clsRLink.fOutput.FontFamily.Name
+        txtOutputcolor.Text = frmMain.clsRLink.clrOutput.Name
+        txtOutputcolor.ForeColor = frmMain.clsRLink.clrOutput
+        txtOutputSize.Text = frmMain.clsRLink.fOutput.Size
+        'For the Comments
+        txtCommentsFont.Text = frmMain.clsRLink.fComments.FontFamily.Name
+        txtCommentsColor.Text = frmMain.clsRLink.clrComments.Name
+        txtCommentsColor.ForeColor = frmMain.clsRLink.clrComments
+        txtCommentsSize.Text = frmMain.clsRLink.fComments.Size
+
     End Sub
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.Close()
@@ -61,6 +67,7 @@ Public Class dlgOptions
         cmdApply_Click(sender, e)
         frmMain.clsRLink.setFormatOutput(txtOutputFont.Font, txtOutputcolor.ForeColor)
         frmMain.clsRLink.setFormatScript(txtScriptFont.Font, txtScriptColor.ForeColor)
+        frmMain.clsRLink.setFormatComment(txtCommentsFont.Font, txtCommentsColor.ForeColor)
         Me.Close()
     End Sub
 
@@ -170,7 +177,9 @@ Public Class dlgOptions
         dlgFont.MinSize = 8
         If dlgFont.ShowDialog = DialogResult.OK Then
             txtCommentsFont.Text = dlgFont.Font.FontFamily.Name
+            txtCommentsFont.Font = dlgFont.Font
             txtCommentsColor.Text = dlgFont.Color.Name
+            txtCommentsColor.ForeColor = dlgFont.Color
             txtCommentsSize.Text = dlgFont.Font.Size
         End If
     End Sub

@@ -37,7 +37,8 @@ Public Class RLink
     Public fOutput As Font = New Font(txtOutput.Font.FontFamily, txtOutput.Font.Size)
     Public clrOutput As Color = Color.Blue
     'sets the font for the Comments
-    'ToDo
+    Public fComments As Font = New Font(txtOutput.Font.FontFamily, txtOutput.Font.Size)
+    Public clrComments As Color = Color.Brown
 
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
     End Sub
@@ -50,6 +51,11 @@ Public Class RLink
     Public Sub setFormatScript(tempFont As Font, tempColor As Color)
         fScript = tempFont
         clrScript = tempColor
+    End Sub
+
+    Public Sub setFormatComment(tempFont As Font, tempColor As Color)
+        fComments = tempFont
+        clrComments = tempColor
     End Sub
 
     Public Sub SetOutput(tempOutput As RichTextBox)
@@ -112,7 +118,7 @@ Public Class RLink
         Return lstNextDefaults
     End Function
 
-    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0)
+    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "")
         Dim strCapturedScript As String
         Dim temp As RDotNet.SymbolicExpression
         Dim strTemp As String
@@ -120,12 +126,14 @@ Public Class RLink
         Dim strSplitScript As String
         strOutput = ""
         Try
-            If bLog Then
+            If bLog And strComment <> "" Then
+                txtLog.Text = txtLog.Text & strComment & vbCrLf
                 txtLog.Text = txtLog.Text & strScript & vbCrLf
             End If
             If bOutput Then
-
-                'input format here
+                If strComment <> "" Then
+                    AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
+                End If
                 AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
             End If
             If bReturnOutput = 0 Then
