@@ -22,30 +22,20 @@ Partial Class dlgPolynomials
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.nmdOrder = New System.Windows.Forms.NumericUpDown()
         Me.rdoSimple = New System.Windows.Forms.RadioButton()
-        Me.lstPasteInto = New System.Windows.Forms.ListBox()
-        Me.cmdAddTo = New System.Windows.Forms.Button()
-        Me.txtInto = New System.Windows.Forms.TextBox()
-        Me.lblInto = New System.Windows.Forms.Label()
         Me.lblOrder = New System.Windows.Forms.Label()
         Me.grpType = New System.Windows.Forms.GroupBox()
         Me.rdoOrthogonal = New System.Windows.Forms.RadioButton()
         Me.rdoCentered = New System.Windows.Forms.RadioButton()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.chkWeights = New System.Windows.Forms.CheckBox()
         Me.ucrBase = New instat.ucrButtons()
-        CType(Me.nmdOrder, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
+        Me.lblSelected = New System.Windows.Forms.Label()
+        Me.ucrDataFrame = New instat.ucrDataFrame()
+        Me.ucrReceiverPolynomial = New instat.ucrReceiverSingle()
+        Me.txtOrder = New System.Windows.Forms.TextBox()
         Me.grpType.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'nmdOrder
-        '
-        Me.nmdOrder.Location = New System.Drawing.Point(226, 81)
-        Me.nmdOrder.Name = "nmdOrder"
-        Me.nmdOrder.Size = New System.Drawing.Size(46, 20)
-        Me.nmdOrder.TabIndex = 0
-        Me.nmdOrder.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'rdoSimple
         '
@@ -62,47 +52,10 @@ Partial Class dlgPolynomials
         Me.rdoSimple.Text = "simple"
         Me.rdoSimple.UseVisualStyleBackColor = True
         '
-        'lstPasteInto
-        '
-        Me.lstPasteInto.FormattingEnabled = True
-        Me.lstPasteInto.Location = New System.Drawing.Point(290, 117)
-        Me.lstPasteInto.Name = "lstPasteInto"
-        Me.lstPasteInto.Size = New System.Drawing.Size(120, 82)
-        Me.lstPasteInto.Sorted = True
-        Me.lstPasteInto.TabIndex = 2
-        '
-        'cmdAddTo
-        '
-        Me.cmdAddTo.Location = New System.Drawing.Point(387, 79)
-        Me.cmdAddTo.Name = "cmdAddTo"
-        Me.cmdAddTo.Size = New System.Drawing.Size(23, 23)
-        Me.cmdAddTo.TabIndex = 3
-        Me.cmdAddTo.Text = "<"
-        Me.cmdAddTo.UseVisualStyleBackColor = True
-        '
-        'txtInto
-        '
-        Me.txtInto.Location = New System.Drawing.Point(290, 81)
-        Me.txtInto.Multiline = True
-        Me.txtInto.Name = "txtInto"
-        Me.txtInto.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtInto.Size = New System.Drawing.Size(100, 34)
-        Me.txtInto.TabIndex = 4
-        '
-        'lblInto
-        '
-        Me.lblInto.AutoSize = True
-        Me.lblInto.Location = New System.Drawing.Point(287, 65)
-        Me.lblInto.Name = "lblInto"
-        Me.lblInto.Size = New System.Drawing.Size(25, 13)
-        Me.lblInto.TabIndex = 5
-        Me.lblInto.Tag = "Into"
-        Me.lblInto.Text = "Into"
-        '
         'lblOrder
         '
         Me.lblOrder.AutoSize = True
-        Me.lblOrder.Location = New System.Drawing.Point(223, 65)
+        Me.lblOrder.Location = New System.Drawing.Point(270, 138)
         Me.lblOrder.Name = "lblOrder"
         Me.lblOrder.Size = New System.Drawing.Size(33, 13)
         Me.lblOrder.TabIndex = 6
@@ -114,7 +67,7 @@ Partial Class dlgPolynomials
         Me.grpType.Controls.Add(Me.rdoOrthogonal)
         Me.grpType.Controls.Add(Me.rdoSimple)
         Me.grpType.Controls.Add(Me.rdoCentered)
-        Me.grpType.Location = New System.Drawing.Point(12, 12)
+        Me.grpType.Location = New System.Drawing.Point(12, 221)
         Me.grpType.Name = "grpType"
         Me.grpType.Size = New System.Drawing.Size(398, 47)
         Me.grpType.TabIndex = 7
@@ -155,64 +108,88 @@ Partial Class dlgPolynomials
         Me.ucrAddRemove.Size = New System.Drawing.Size(205, 127)
         Me.ucrAddRemove.TabIndex = 8
         '
-        'chkWeights
-        '
-        Me.chkWeights.AutoSize = True
-        Me.chkWeights.Enabled = False
-        Me.chkWeights.Location = New System.Drawing.Point(12, 198)
-        Me.chkWeights.Name = "chkWeights"
-        Me.chkWeights.Size = New System.Drawing.Size(65, 17)
-        Me.chkWeights.TabIndex = 10
-        Me.chkWeights.Tag = "Weights"
-        Me.chkWeights.Text = "Weights"
-        Me.chkWeights.UseVisualStyleBackColor = True
-        '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 221)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 311)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(403, 53)
         Me.ucrBase.TabIndex = 11
+        '
+        'ucrNewColumnNameSelector
+        '
+        Me.ucrNewColumnNameSelector.Location = New System.Drawing.Point(12, 270)
+        Me.ucrNewColumnNameSelector.Name = "ucrNewColumnNameSelector"
+        Me.ucrNewColumnNameSelector.Size = New System.Drawing.Size(367, 35)
+        Me.ucrNewColumnNameSelector.TabIndex = 12
+        Me.ucrNewColumnNameSelector.ucrDataFrameSelector = Nothing
+        '
+        'lblSelected
+        '
+        Me.lblSelected.AutoSize = True
+        Me.lblSelected.Location = New System.Drawing.Point(270, 65)
+        Me.lblSelected.Name = "lblSelected"
+        Me.lblSelected.Size = New System.Drawing.Size(49, 13)
+        Me.lblSelected.TabIndex = 14
+        Me.lblSelected.Tag = "Selected"
+        Me.lblSelected.Text = "Selected"
+        '
+        'ucrDataFrame
+        '
+        Me.ucrDataFrame.Location = New System.Drawing.Point(13, 13)
+        Me.ucrDataFrame.Name = "ucrDataFrame"
+        Me.ucrDataFrame.Size = New System.Drawing.Size(127, 41)
+        Me.ucrDataFrame.TabIndex = 15
+        '
+        'ucrReceiverPolynomial
+        '
+        Me.ucrReceiverPolynomial.Location = New System.Drawing.Point(273, 81)
+        Me.ucrReceiverPolynomial.Name = "ucrReceiverPolynomial"
+        Me.ucrReceiverPolynomial.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverPolynomial.TabIndex = 16
+        '
+        'txtOrder
+        '
+        Me.txtOrder.Location = New System.Drawing.Point(339, 131)
+        Me.txtOrder.Name = "txtOrder"
+        Me.txtOrder.Size = New System.Drawing.Size(40, 20)
+        Me.txtOrder.TabIndex = 17
+        Me.txtOrder.Tag = "Order"
         '
         'dlgPolynomials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 278)
-        Me.Controls.Add(Me.chkWeights)
+        Me.ClientSize = New System.Drawing.Size(427, 376)
+        Me.Controls.Add(Me.txtOrder)
+        Me.Controls.Add(Me.ucrReceiverPolynomial)
+        Me.Controls.Add(Me.ucrDataFrame)
+        Me.Controls.Add(Me.lblSelected)
+        Me.Controls.Add(Me.ucrNewColumnNameSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.grpType)
         Me.Controls.Add(Me.lblOrder)
-        Me.Controls.Add(Me.lblInto)
-        Me.Controls.Add(Me.txtInto)
-        Me.Controls.Add(Me.cmdAddTo)
-        Me.Controls.Add(Me.lstPasteInto)
-        Me.Controls.Add(Me.nmdOrder)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgPolynomials"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Generate_polynomial_terms"
         Me.Text = "Generate polynomial terms"
-        CType(Me.nmdOrder, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpType.ResumeLayout(False)
         Me.grpType.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents nmdOrder As NumericUpDown
     Friend WithEvents rdoSimple As RadioButton
-    Friend WithEvents lstPasteInto As ListBox
-    Friend WithEvents cmdAddTo As Button
-    Friend WithEvents txtInto As TextBox
-    Friend WithEvents lblInto As Label
     Friend WithEvents lblOrder As Label
     Friend WithEvents grpType As GroupBox
     Friend WithEvents rdoOrthogonal As RadioButton
     Friend WithEvents rdoCentered As RadioButton
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents chkWeights As CheckBox
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrNewColumnNameSelector As ucrNewColumnName
+    Friend WithEvents lblSelected As Label
+    Friend WithEvents ucrDataFrame As ucrDataFrame
+    Friend WithEvents ucrReceiverPolynomial As ucrReceiverSingle
+    Friend WithEvents txtOrder As TextBox
 End Class

@@ -16,26 +16,24 @@ Imports instat.Translations
 Public Class dlgPolynomials
     Private Sub dlgPolynomials_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        defaultSettings()
+
+        ucrNewColumnNameSelector.SetDataFrameSelector(ucrDataFrame)
+        ucrNewColumnNameSelector.SetPrefix("Poly")
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
     End Sub
 
-    Private Sub rdoOrthogonal_CheckedChanged(sender As Object, e As EventArgs) Handles rdoOrthogonal.CheckedChanged
-        If rdoOrthogonal.Checked = True Then
-            chkWeights.Enabled = True
-        ElseIf rdoOrthogonal.Checked = False
-            chkWeights.Enabled = False
+
+
+
+    Private Sub txtOrder_TextChanged(sender As Object, e As EventArgs) Handles txtOrder.TextChanged
+        If Not txtOrder.Text >= 0 And IsNumeric(txtOrder.Text) Then
+            MsgBox("Enter a positive number", vbOKOnly)
         End If
-    End Sub
-
-    Private Sub defaultSettings()
-        rdoSimple.Checked = True
-        nmdOrder.Value = 2
-        txtInto.Text = ""
-        chkWeights.Checked = False
 
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        defaultSettings()
+    Private Sub ucrReceiverPolynomial_Leave(sender As Object, e As EventArgs) Handles ucrReceiverPolynomial.Leave
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
+
     End Sub
 End Class
