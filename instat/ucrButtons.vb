@@ -15,10 +15,11 @@ Public Class ucrButtons
     Public Event ClickReset(sender As Object, e As EventArgs)
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+        Dim strComments As String = ""
         If chkComment.Checked Then
-            clsRsyntax.strScript = "# " & txtComment.Text & vbCrLf
+            strComments = txtComment.Text
         End If
-        frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType)
+        frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComments)
         RaiseEvent ClickOk(sender, e)
 
         Me.ParentForm.Hide()
