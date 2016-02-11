@@ -34,11 +34,8 @@ Public Class RSyntax
         bUseBaseOperator = False
     End Sub
 
-    Public Sub SetOperation(strOp As String, Optional ByRef clsROp As ROperator = Nothing)
-        If clsROp Is Nothing Then
-            clsROp = clsBaseOperator
-        End If
-        clsROp.SetOperation(strOp)
+    Public Sub SetOperation(strOp As String)
+        clsBaseOperator.SetOperation(strOp)
         bUseBaseFunction = False
         bUseBaseOperator = True
     End Sub
@@ -60,6 +57,10 @@ Public Class RSyntax
         clsBaseFunction.AddParameter(clsRParam)
     End Sub
 
+    Public Sub SetOperatorParameter(bSetLeftNotRight As Boolean, Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
+        clsBaseOperator.SetParameter(bSetLeftNotRight, clsParam, clsRFunc, clsOp)
+    End Sub
+
     Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)
         Dim clsParam As New RParameter
 
@@ -79,18 +80,26 @@ Public Class RSyntax
 
     Public Function GetScript(Optional ByRef clsFunction As RFunction = Nothing, Optional bExcludeAssignedFunctionOutput As Boolean = True) As String
 
-        Dim strTemp As String
+        Dim strTemp As String = ""
 
         If IsNothing(clsFunction) Then
-            clsFunction = clsBaseFunction
-        End If
-
-        strTemp = clsFunction.ToScript(strScript)
-        If bExcludeAssignedFunctionOutput And clsFunction.bIsAssigned Then
-            Return strScript
+            If bUseBaseFunction Then
+                clsFunction = clsBaseFunction
+                strTemp = clsBaseFunction.ToScript(strScript)
+            End If
+            If bUseBaseOperator Then
+                strTemp = clsBaseOperator.ToScript(strScript)
+            End If
         Else
-            Return strScript & strTemp
+            strTemp = clsFunction.ToScript(strScript)
         End If
+        If bUseBaseFunction Then
+            If bExcludeAssignedFunctionOutput And clsFunction.bIsAssigned Then
+                Return strScript
+                Exit Function
+            End If
+        End If
+        Return strScript & strTemp
 
     End Function
 
