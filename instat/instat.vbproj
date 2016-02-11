@@ -137,6 +137,7 @@
   <ItemGroup>
     <Compile Include="clsDistribution.vb" />
     <Compile Include="clsRFunction.vb" />
+    <Compile Include="clsROperator.vb" />
     <Compile Include="dlgAddStartRain.designer.vb">
       <DependentUpon>dlgAddStartRain.vb</DependentUpon>
     </Compile>
