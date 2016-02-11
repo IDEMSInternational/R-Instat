@@ -1288,4 +1288,52 @@
   <data name="Timeseries" xml:space="preserve">
     <value>Timeseries</value>
   </data>
+  <data name="Categorical" xml:space="preserve">
+    <value>Categorical</value>
+  </data>
+  <data name="Gamma_With_Shape_and_Mean" xml:space="preserve">
+    <value>Gamma With Shape and Mean</value>
+  </data>
+  <data name="Gamma_With_Shape_and_Rate" xml:space="preserve">
+    <value>Gamma With Shape and Rate</value>
+  </data>
+  <data name="Gamma_With_Shape_and_Scale" xml:space="preserve">
+    <value>Gamma With Shape and Scale</value>
+  </data>
+  <data name="Gamma_With_Zeros" xml:space="preserve">
+    <value>Gamma With Zeros</value>
+  </data>
+  <data name="Number_of_Samples" xml:space="preserve">
+    <value>Number of Samples</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>rate</value>
+  </data>
+  <data name="Canonical_Correlations" xml:space="preserve">
+    <value>Canonical Correlations</value>
+  </data>
+  <data name="Copy_Sheet" xml:space="preserve">
+    <value>Copy Sheet</value>
+  </data>
+  <data name="Factor_unused_levels" xml:space="preserve">
+    <value>Factor unused levels</value>
+  </data>
+  <data name="Log_Linear" xml:space="preserve">
+    <value>Log-Linear</value>
+  </data>
+  <data name="Missing" xml:space="preserve">
+    <value>Missing</value>
+  </data>
+  <data name="Multinomial" xml:space="preserve">
+    <value>Multinomial</value>
+  </data>
+  <data name="One_Sample_Summary_Data" xml:space="preserve">
+    <value>One Sample Summary Data</value>
+  </data>
+  <data name="Principal_Components" xml:space="preserve">
+    <value>Principal Components</value>
+  </data>
+  <data name="Two_Samles_Summary_Data" xml:space="preserve">
+    <value>Two Samples Summary Data</value>
+  </data>
 </root>

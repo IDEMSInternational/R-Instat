@@ -16,9 +16,9 @@
 Imports instat.Translations
 Public Class dlgBoxplot
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("boxplot")
+        ucrBase.clsRsyntax.SetFunction("ggplot")
         ucrBase.clsRsyntax.iCallType = 0
-        ucrReceiverDataToPlot.Selector = ucrAddRemove
+        ucrReceiverDataToPlot.Selector = ucrSelectorBoxPlot
         ucrReceiverDataToPlot.SetMeAsReceiver()
         autoTranslate(Me)
         ucrBase.OKEnabled(False)
@@ -28,7 +28,6 @@ Public Class dlgBoxplot
         ucrReceiverDataToPlot.SetMeAsReceiver()
     End Sub
 
-
     Private Sub ucrReceiveBoxplotVariable_ValueChanged(sender As Object, e As EventArgs)
         'TODO fix this
         'If Not (ucrReceiverDataToPlot.lstSelectedVariables.SelectedItem = "") Then
@@ -37,5 +36,13 @@ Public Class dlgBoxplot
         'Else
         '    ucrBase.OKEnabled(False)
         'End If
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.ShowDialog()
+    End Sub
+
+    Private Sub ucrByFactorsReceiver_Enter(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.Enter
+        ucrByFactorsReceiver.SetMeAsReceiver()
     End Sub
 End Class
