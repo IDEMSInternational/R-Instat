@@ -28,6 +28,10 @@ Public Class frmEditor
         frmMain.clsGrids.SetData(grdData)
         grdData.Visible = False
         autoTranslate(Me)
+        'Disable Autoformat cell
+        'This needs to be added at the part when we are writing data to the grid, not here
+        'Needs discussion, with this the grid can show NA's
+        grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
     End Sub
     ''' <summary>
     ''' Hides the form when it is closed and not exiting it.
