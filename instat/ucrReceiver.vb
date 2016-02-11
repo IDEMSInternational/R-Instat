@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class ucrReceiver
     Public Selector As ucrSelector
     Public strDataType As String = "all"
-    Public clsRSyntax As New RSyntax
 
     Public Overridable Sub AddSelected()
 
