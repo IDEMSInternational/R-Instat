@@ -29,16 +29,15 @@ Public Class dlgFileNew
         'TODO remove line below when above is fixed
         txtName.Text = "Sheet1"
         ucrBase.clsRsyntax.SetFunction("matrix", clsMatrix)
-        ucrBase.clsRsyntax.AddParameter("data", "NA", clsRFunction:=clsMatrix)
-        ucrBase.clsRsyntax.AddParameter("nrow", txtRows.Text, clsRFunction:=clsMatrix)
-        ucrBase.clsRsyntax.AddParameter("ncol", txtColumns.Text, clsRFunction:=clsMatrix)
-        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsMatrix)
+        clsMatrix.AddParameter("data", "NA")
+        clsMatrix.AddParameter("nrow", txtRows.Text)
+        clsMatrix.AddParameter("ncol", txtColumns.Text)
         ucrBase.clsRsyntax.SetFunction("data.frame")
         ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
     End Sub
 
     Private Sub txtColumns_Leave(sender As Object, e As EventArgs) Handles txtColumns.Leave
-        ucrBase.clsRsyntax.AddParameter("ncol", txtColumns.Text, clsRFunction:=clsMatrix)
+        clsMatrix.AddParameter("ncol", txtColumns.Text)
     End Sub
 
     Private Sub txtName_Leave(sender As Object, e As EventArgs) Handles txtName.Leave
@@ -46,7 +45,7 @@ Public Class dlgFileNew
     End Sub
 
     Private Sub txtRows_Leave(sender As Object, e As EventArgs) Handles txtRows.Leave
-        ucrBase.clsRsyntax.AddParameter("nrow", txtRows.Text, clsRFunction:=clsMatrix)
+        clsMatrix.AddParameter("nrow", txtRows.Text)
     End Sub
 
 End Class

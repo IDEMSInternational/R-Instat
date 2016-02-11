@@ -29,14 +29,14 @@ Partial Class dlgBoxplot
         Me.chkHorizontalBoxplot = New System.Windows.Forms.CheckBox()
         Me.chkNotchedBoxplot = New System.Windows.Forms.CheckBox()
         Me.ucrReceiverDataToPlot = New instat.ucrReceiverMultiple()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
+        Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.ucrSelectorBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 335)
+        Me.ucrBase.Location = New System.Drawing.Point(0, 312)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 51)
         Me.ucrBase.TabIndex = 4
@@ -53,7 +53,7 @@ Partial Class dlgBoxplot
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(274, 255)
+        Me.cmdOptions.Location = New System.Drawing.Point(274, 245)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdOptions.TabIndex = 14
@@ -101,12 +101,12 @@ Partial Class dlgBoxplot
         Me.ucrReceiverDataToPlot.Size = New System.Drawing.Size(121, 133)
         Me.ucrReceiverDataToPlot.TabIndex = 18
         '
-        'UcrReceiverSingle1
+        'ucrByFactorsReceiver
         '
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(271, 213)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(126, 26)
-        Me.UcrReceiverSingle1.TabIndex = 19
+        Me.ucrByFactorsReceiver.Location = New System.Drawing.Point(271, 213)
+        Me.ucrByFactorsReceiver.Name = "ucrByFactorsReceiver"
+        Me.ucrByFactorsReceiver.Size = New System.Drawing.Size(126, 26)
+        Me.ucrByFactorsReceiver.TabIndex = 19
         '
         'lblByFactors
         '
@@ -129,10 +129,10 @@ Partial Class dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 395)
+        Me.ClientSize = New System.Drawing.Size(412, 368)
         Me.Controls.Add(Me.ucrSelectorBoxPlot)
         Me.Controls.Add(Me.lblByFactors)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
+        Me.Controls.Add(Me.ucrByFactorsReceiver)
         Me.Controls.Add(Me.ucrReceiverDataToPlot)
         Me.Controls.Add(Me.chkNotchedBoxplot)
         Me.Controls.Add(Me.chkHorizontalBoxplot)
@@ -159,7 +159,7 @@ Partial Class dlgBoxplot
     Friend WithEvents chkHorizontalBoxplot As CheckBox
     Friend WithEvents chkNotchedBoxplot As CheckBox
     Friend WithEvents ucrReceiverDataToPlot As ucrReceiverMultiple
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
+    Friend WithEvents ucrByFactorsReceiver As ucrReceiverSingle
     Friend WithEvents lblByFactors As Label
     Friend WithEvents ucrSelectorBoxPlot As ucrSelectorByDataFrameAddRemove
 End Class
