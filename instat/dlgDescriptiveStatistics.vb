@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
 Public Class dlgDescriptiveStatistics
     Private Sub dlgDescriptiveStatistics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -24,7 +23,6 @@ Public Class dlgDescriptiveStatistics
         autoTranslate(Me)
         grpgraphics.Visible = False
     End Sub
-
     Private Sub chkGraphics_CheckedChanged(sender As Object, e As EventArgs) Handles chkGraphics.CheckedChanged
         If chkGraphics.Checked = True Then
             grpgraphics.Visible = True
@@ -33,9 +31,15 @@ Public Class dlgDescriptiveStatistics
             grpgraphics.Visible = False
         End If
     End Sub
-
     Private Sub ucrObjectReceiver_Leave(sender As Object, e As EventArgs) Handles ucrObjectReceiver.Leave
         ucrBase.clsRsyntax.AddParameter("object", clsRFunctionParameter:=ucrObjectReceiver.GetVariables())
+    End Sub
+    Private Sub chkGraphics_KeyPress(sender As Object, e As KeyPressEventArgs) Handles chkGraphics.KeyPress
+        If chkGraphics.Checked = False And e.KeyChar = vbCr Then
+            chkGraphics.Checked = True
+        ElseIf chkGraphics.Checked = True And e.KeyChar = vbCr Then
+            chkGraphics.Checked = False
+        End If
     End Sub
 End Class
 

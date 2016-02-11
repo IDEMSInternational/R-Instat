@@ -29,9 +29,9 @@ Partial Class dlgDescriptiveStatistics
         Me.chkStemAndLeaf = New System.Windows.Forms.CheckBox()
         Me.chkGraphics = New System.Windows.Forms.CheckBox()
         Me.ucrDataSelector = New instat.ucrSelectorAddRemove()
-        Me.ucrObjectReceiver = New instat.ucrReceiverSingle()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrObjectReceiver = New instat.ucrReceiverMultiple()
         Me.grpgraphics.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -40,7 +40,7 @@ Partial Class dlgDescriptiveStatistics
         Me.cmdStatistics.Location = New System.Drawing.Point(7, 133)
         Me.cmdStatistics.Name = "cmdStatistics"
         Me.cmdStatistics.Size = New System.Drawing.Size(104, 23)
-        Me.cmdStatistics.TabIndex = 90
+        Me.cmdStatistics.TabIndex = 3
         Me.cmdStatistics.Tag = "Choose_Statistics"
         Me.cmdStatistics.Text = "Choose Statistics "
         Me.cmdStatistics.UseVisualStyleBackColor = True
@@ -52,8 +52,8 @@ Partial Class dlgDescriptiveStatistics
         Me.grpgraphics.Controls.Add(Me.chkStemAndLeaf)
         Me.grpgraphics.Location = New System.Drawing.Point(76, 164)
         Me.grpgraphics.Name = "grpgraphics"
-        Me.grpgraphics.Size = New System.Drawing.Size(292, 28)
-        Me.grpgraphics.TabIndex = 89
+        Me.grpgraphics.Size = New System.Drawing.Size(319, 28)
+        Me.grpgraphics.TabIndex = 5
         Me.grpgraphics.TabStop = False
         '
         'chkCumulativeFrequency
@@ -62,7 +62,7 @@ Partial Class dlgDescriptiveStatistics
         Me.chkCumulativeFrequency.Location = New System.Drawing.Point(189, 5)
         Me.chkCumulativeFrequency.Name = "chkCumulativeFrequency"
         Me.chkCumulativeFrequency.Size = New System.Drawing.Size(128, 17)
-        Me.chkCumulativeFrequency.TabIndex = 61
+        Me.chkCumulativeFrequency.TabIndex = 2
         Me.chkCumulativeFrequency.Tag = "Cumulative_frequency"
         Me.chkCumulativeFrequency.Text = "Cumulative frequency"
         Me.chkCumulativeFrequency.UseVisualStyleBackColor = True
@@ -73,7 +73,7 @@ Partial Class dlgDescriptiveStatistics
         Me.chkBoxPlot.Location = New System.Drawing.Point(112, 6)
         Me.chkBoxPlot.Name = "chkBoxPlot"
         Me.chkBoxPlot.Size = New System.Drawing.Size(65, 17)
-        Me.chkBoxPlot.TabIndex = 60
+        Me.chkBoxPlot.TabIndex = 1
         Me.chkBoxPlot.Tag = "Box_Plot"
         Me.chkBoxPlot.Text = "Box Plot"
         Me.chkBoxPlot.UseVisualStyleBackColor = True
@@ -84,7 +84,7 @@ Partial Class dlgDescriptiveStatistics
         Me.chkStemAndLeaf.Location = New System.Drawing.Point(7, 5)
         Me.chkStemAndLeaf.Name = "chkStemAndLeaf"
         Me.chkStemAndLeaf.Size = New System.Drawing.Size(91, 17)
-        Me.chkStemAndLeaf.TabIndex = 1
+        Me.chkStemAndLeaf.TabIndex = 0
         Me.chkStemAndLeaf.Tag = "Stem_and_Leaf"
         Me.chkStemAndLeaf.Text = "Stem and leaf"
         Me.chkStemAndLeaf.UseVisualStyleBackColor = True
@@ -95,7 +95,7 @@ Partial Class dlgDescriptiveStatistics
         Me.chkGraphics.Location = New System.Drawing.Point(7, 170)
         Me.chkGraphics.Name = "chkGraphics"
         Me.chkGraphics.Size = New System.Drawing.Size(71, 17)
-        Me.chkGraphics.TabIndex = 88
+        Me.chkGraphics.TabIndex = 4
         Me.chkGraphics.Tag = "Graphics"
         Me.chkGraphics.Text = "Graphics "
         Me.chkGraphics.UseVisualStyleBackColor = True
@@ -105,40 +105,40 @@ Partial Class dlgDescriptiveStatistics
         Me.ucrDataSelector.Location = New System.Drawing.Point(3, 1)
         Me.ucrDataSelector.Name = "ucrDataSelector"
         Me.ucrDataSelector.Size = New System.Drawing.Size(203, 127)
-        Me.ucrDataSelector.TabIndex = 92
-        '
-        'ucrObjectReceiver
-        '
-        Me.ucrObjectReceiver.Location = New System.Drawing.Point(212, 31)
-        Me.ucrObjectReceiver.Name = "ucrObjectReceiver"
-        Me.ucrObjectReceiver.Size = New System.Drawing.Size(120, 26)
-        Me.ucrObjectReceiver.TabIndex = 93
+        Me.ucrDataSelector.TabIndex = 0
         '
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(213, 12)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(213, 5)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
-        Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
-        Me.lblSelectedVariable.TabIndex = 94
+        Me.lblSelectedVariable.Size = New System.Drawing.Size(95, 13)
+        Me.lblSelectedVariable.TabIndex = 1
         Me.lblSelectedVariable.Tag = "Selected_Variable"
-        Me.lblSelectedVariable.Text = "Selected Variable"
+        Me.lblSelectedVariable.Text = "Selected Variables"
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(12, 198)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 95
+        Me.ucrBase.TabIndex = 6
+        '
+        'ucrObjectReceiver
+        '
+        Me.ucrObjectReceiver.Location = New System.Drawing.Point(212, 16)
+        Me.ucrObjectReceiver.Name = "ucrObjectReceiver"
+        Me.ucrObjectReceiver.Size = New System.Drawing.Size(121, 104)
+        Me.ucrObjectReceiver.TabIndex = 2
         '
         'dlgDescriptiveStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 252)
+        Me.ClientSize = New System.Drawing.Size(421, 252)
+        Me.Controls.Add(Me.ucrObjectReceiver)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblSelectedVariable)
-        Me.Controls.Add(Me.ucrObjectReceiver)
         Me.Controls.Add(Me.ucrDataSelector)
         Me.Controls.Add(Me.cmdStatistics)
         Me.Controls.Add(Me.grpgraphics)
@@ -162,7 +162,7 @@ Partial Class dlgDescriptiveStatistics
     Friend WithEvents chkStemAndLeaf As CheckBox
     Friend WithEvents chkGraphics As CheckBox
     Friend WithEvents ucrDataSelector As ucrSelectorAddRemove
-    Friend WithEvents ucrObjectReceiver As ucrReceiverSingle
     Friend WithEvents lblSelectedVariable As Label
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrObjectReceiver As ucrReceiverMultiple
 End Class
