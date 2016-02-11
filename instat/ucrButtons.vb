@@ -50,9 +50,9 @@ Public Class ucrButtons
 
         ' (1) Use HelpNDoc's Help Context number. Not dependent on HelpNDoc.
         If iHelpTopicID > 0 Then
-            Help.ShowHelp(Me.Parent, frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpTopicID.ToString())
+            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpTopicID.ToString())
         Else
-            Help.ShowHelp(Me.Parent, frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
         End If
 
         ' (2) Use HelpNDoc's Help ID. Dependent on how HelpNDoc complies .htm files using the Help ID
