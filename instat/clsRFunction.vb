@@ -85,6 +85,23 @@ Public Class RFunction
         End If
     End Function
 
+    Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing)
+        Dim clsParam As New RParameter
+
+        clsParam.SetArgumentName(strParameterName)
+        If Not strParameterValue = "" Then
+            clsParam.SetArgumentValue(strParameterValue)
+        End If
+        If Not clsRFunctionParameter Is Nothing Then
+            clsParam.SetArgumentFunction(clsRFunctionParameter)
+        End If
+        If Not clsROperatorParameter Is Nothing Then
+            clsParam.SetArgumentOperator(clsROperatorParameter)
+        End If
+        Me.AddParameter(clsParam)
+
+    End Sub
+
     Public Sub AddParameter(clsParam As RParameter)
         Dim i As Integer = -1
         If Not clsParameters Is Nothing Then

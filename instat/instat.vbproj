@@ -137,6 +137,7 @@
   <ItemGroup>
     <Compile Include="clsDistribution.vb" />
     <Compile Include="clsRFunction.vb" />
+    <Compile Include="clsROperator.vb" />
     <Compile Include="dlgAddStartRain.designer.vb">
       <DependentUpon>dlgAddStartRain.vb</DependentUpon>
     </Compile>
@@ -237,6 +238,12 @@
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOneWayANOVA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgOptions.Designer.vb">
+      <DependentUpon>sdgOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgRestrict.Designer.vb">
@@ -1280,6 +1287,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOptions.fr-FR.resx">
+      <DependentUpon>sdgOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOptions.resx">
+      <DependentUpon>sdgOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOptions.sw-KE.resx">
+      <DependentUpon>sdgOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgRestrict.fr-FR.resx">
       <DependentUpon>sdgRestrict.vb</DependentUpon>
