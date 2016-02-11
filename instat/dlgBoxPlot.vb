@@ -16,7 +16,7 @@
 Imports instat.Translations
 Public Class dlgBoxplot
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("boxplot")
+        ucrBase.clsRsyntax.SetFunction("ggplot")
         ucrBase.clsRsyntax.iCallType = 0
         ucrReceiverDataToPlot.Selector = ucrSelectorBoxPlot
         ucrReceiverDataToPlot.SetMeAsReceiver()
@@ -40,5 +40,9 @@ Public Class dlgBoxplot
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
+    End Sub
+
+    Private Sub ucrByFactorsReceiver_Enter(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.Enter
+        ucrByFactorsReceiver.SetMeAsReceiver()
     End Sub
 End Class
