@@ -18,9 +18,9 @@ Imports RDotNet
 
 Public Class RLink
     ' R interface class. Each instance of the class has its own REngine instance
-    Dim strClimateObjectPath As String = "C:\\ClimateObject\\R"
+    Dim strClimateObjectPath As String = "/ClimateObject/R" 'new climateobject path
     Public strClimateObject As String = "ClimateObject"
-    Dim strInstatObjectPath As String = "static/InstatObject/R" 'path to the Instat object
+    Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
     Public clsEngine As REngine
     Dim txtOutput As New RichTextBox
@@ -99,12 +99,16 @@ Public Class RLink
         Dim temp As RDotNet.SymbolicExpression
         Dim strTemp As String
         Dim strOutput As String
+        Dim strSplitScript As String
         strOutput = ""
         Try
             If bLog Then
                 txtLog.Text = txtLog.Text & strScript & vbCrLf
             End If
-            strOutput = strScript & vbCrLf
+            If bOutput Then
+                txtOutput.Text = txtOutput.Text & strScript & vbCrLf
+                'input format here
+            End If
             If bReturnOutput = 0 Then
                 clsEngine.Evaluate(strScript)
             ElseIf bReturnOutput = 1 Then
@@ -112,19 +116,26 @@ Public Class RLink
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
             Else
-                strCapturedScript = "capture.output(" & strScript & ")"
+                strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
+                If strSplitScript <> "" Then
+                    clsEngine.Evaluate(strSplitScript)
+                End If
+                strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
+                strCapturedScript = "capture.output(" & strSplitScript & ")"
                 temp = clsEngine.Evaluate(strCapturedScript)
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
             End If
             If bOutput Then
                 txtOutput.Text = txtOutput.Text & strOutput
+                'output format here
             End If
         Catch
-            MsgBox(strOutput)
+            MsgBox(strScript)
         End Try
         frmMain.clsGrids.UpdateGrids()
     End Sub
+
 
     Public Function GetData(strLabel As String) As DataFrame
 
@@ -152,7 +163,7 @@ Public Class RLink
 
     Public Sub CreateNewClimateObject() 'creates an instance of the climate object
         If Not bClimateObjectExists Then
-            RunScript("setwd('" & strClimateObjectPath & "')")
+            RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strClimateObjectPath & "')")
             RunScript("source(" & Chr(34) & "SourcingScript.R" & Chr(34) & ")")
             RunScript(strClimateObject & "<-climate$new()")
             bClimateObjectExists = True
@@ -161,7 +172,7 @@ Public Class RLink
 
     Public Sub RSetup()
         'run script to load libraries
-        RunScript("setwd('" & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
+        RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
         RunScript("source(" & Chr(34) & "data_object.R" & Chr(34) & ")")
         RunScript("source(" & Chr(34) & "instat_object.R" & Chr(34) & ")")
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")

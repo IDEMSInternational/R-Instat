@@ -1288,4 +1288,25 @@
   <data name="Timeseries" xml:space="preserve">
     <value>Timeseries</value>
   </data>
+  <data name="Categorical" xml:space="preserve">
+    <value>Categorical</value>
+  </data>
+  <data name="Gamma_With_Shape_and_Mean" xml:space="preserve">
+    <value>Gamma With Shape and Mean</value>
+  </data>
+  <data name="Gamma_With_Shape_and_Rate" xml:space="preserve">
+    <value>Gamma With Shape and Rate</value>
+  </data>
+  <data name="Gamma_With_Shape_and_Scale" xml:space="preserve">
+    <value>Gamma With Shape and Scale</value>
+  </data>
+  <data name="Gamma_With_Zeros" xml:space="preserve">
+    <value>Gamma With Zeros</value>
+  </data>
+  <data name="Number_of_Samples" xml:space="preserve">
+    <value>Number of Samples</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>rate</value>
+  </data>
 </root>
