@@ -99,12 +99,16 @@ Public Class RLink
         Dim temp As RDotNet.SymbolicExpression
         Dim strTemp As String
         Dim strOutput As String
+        Dim strSplitScript As String
         strOutput = ""
         Try
             If bLog Then
                 txtLog.Text = txtLog.Text & strScript & vbCrLf
             End If
-            strOutput = strScript & vbCrLf
+            If bOutput Then
+                txtOutput.Text = txtOutput.Text & strScript & vbCrLf
+                'input format here
+            End If
             If bReturnOutput = 0 Then
                 clsEngine.Evaluate(strScript)
             ElseIf bReturnOutput = 1 Then
@@ -112,19 +116,26 @@ Public Class RLink
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
             Else
-                strCapturedScript = "capture.output(" & strScript & ")"
+                strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
+                If strSplitScript <> "" Then
+                    clsEngine.Evaluate(strSplitScript)
+                End If
+                strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
+                strCapturedScript = "capture.output(" & strSplitScript & ")"
                 temp = clsEngine.Evaluate(strCapturedScript)
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
             End If
             If bOutput Then
                 txtOutput.Text = txtOutput.Text & strOutput
+                'output format here
             End If
         Catch
-            MsgBox(strOutput)
+            MsgBox(strScript)
         End Try
         frmMain.clsGrids.UpdateGrids()
     End Sub
+
 
     Public Function GetData(strLabel As String) As DataFrame
 

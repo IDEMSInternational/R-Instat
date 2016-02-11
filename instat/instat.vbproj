@@ -137,6 +137,7 @@
   <ItemGroup>
     <Compile Include="clsDistribution.vb" />
     <Compile Include="clsRFunction.vb" />
+    <Compile Include="clsROperator.vb" />
     <Compile Include="dlgAddStartRain.designer.vb">
       <DependentUpon>dlgAddStartRain.vb</DependentUpon>
     </Compile>
@@ -231,6 +232,18 @@
       <DependentUpon>dlgColumnStats.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgColumnStats.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOneWayANOVA.Designer.vb">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneWayANOVA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgOptions.Designer.vb">
+      <DependentUpon>sdgOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgRestrict.Designer.vb">
@@ -1020,10 +1033,10 @@
     <Compile Include="clsRLink.vb" />
     <Compile Include="clsRParameter.vb" />
     <Compile Include="clsRSyntax.vb" />
-    <Compile Include="sdgBoxplot.Designer.vb">
-      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    <Compile Include="sdgPlots.Designer.vb">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgBoxplot.vb">
+    <Compile Include="sdgPlots.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Translations.vb" />
@@ -1265,6 +1278,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnRows.sw-KE.resx">
       <DependentUpon>dlgColumnRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayANOVA.resx">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOptions.fr-FR.resx">
+      <DependentUpon>sdgOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOptions.resx">
+      <DependentUpon>sdgOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOptions.sw-KE.resx">
+      <DependentUpon>sdgOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgRestrict.fr-FR.resx">
       <DependentUpon>sdgRestrict.vb</DependentUpon>
@@ -2364,14 +2395,14 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.sw-KE.resx" />
-    <EmbeddedResource Include="sdgBoxplot.fr-FR.resx">
-      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    <EmbeddedResource Include="sdgPlots.fr-FR.resx">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgBoxplot.resx">
-      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    <EmbeddedResource Include="sdgPlots.resx">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgBoxplot.sw-KE.resx">
-      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    <EmbeddedResource Include="sdgPlots.sw-KE.resx">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
