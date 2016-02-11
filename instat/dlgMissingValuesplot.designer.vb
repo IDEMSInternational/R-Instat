@@ -22,7 +22,6 @@ Partial Class dlgMissingValuesplot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkStationName = New System.Windows.Forms.CheckBox()
         Me.chkHorizontal = New System.Windows.Forms.CheckBox()
@@ -43,22 +42,16 @@ Partial Class dlgMissingValuesplot
         Me.lblLog = New System.Windows.Forms.Label()
         Me.lblASP = New System.Windows.Forms.Label()
         Me.lblFillColour = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblLegendPosition = New System.Windows.Forms.Label()
         Me.lblLegend = New System.Windows.Forms.Label()
         Me.lblYLabel = New System.Windows.Forms.Label()
         Me.lblXLabel = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.ucrBase = New instat.ucrButtons()
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudYlim, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPlotCharacter, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(74, 355)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
-        Me.ucrBase.TabIndex = 0
         '
         'Label1
         '
@@ -74,10 +67,10 @@ Partial Class dlgMissingValuesplot
         Me.chkStationName.AutoSize = True
         Me.chkStationName.Location = New System.Drawing.Point(339, 238)
         Me.chkStationName.Name = "chkStationName"
-        Me.chkStationName.Size = New System.Drawing.Size(81, 17)
+        Me.chkStationName.Size = New System.Drawing.Size(90, 17)
         Me.chkStationName.TabIndex = 2
         Me.chkStationName.Tag = "Station_Name"
-        Me.chkStationName.Text = "CheckBox1"
+        Me.chkStationName.Text = "Station Name"
         Me.chkStationName.UseVisualStyleBackColor = True
         '
         'chkHorizontal
@@ -85,10 +78,10 @@ Partial Class dlgMissingValuesplot
         Me.chkHorizontal.AutoSize = True
         Me.chkHorizontal.Location = New System.Drawing.Point(379, 205)
         Me.chkHorizontal.Name = "chkHorizontal"
-        Me.chkHorizontal.Size = New System.Drawing.Size(81, 17)
+        Me.chkHorizontal.Size = New System.Drawing.Size(73, 17)
         Me.chkHorizontal.TabIndex = 3
         Me.chkHorizontal.Tag = "Horizontal"
-        Me.chkHorizontal.Text = "CheckBox2"
+        Me.chkHorizontal.Text = "Horizontal"
         Me.chkHorizontal.UseVisualStyleBackColor = True
         '
         'txtlog
@@ -175,120 +168,128 @@ Partial Class dlgMissingValuesplot
         Me.lblYLimits.AutoSize = True
         Me.lblYLimits.Location = New System.Drawing.Point(255, 283)
         Me.lblYLimits.Name = "lblYLimits"
-        Me.lblYLimits.Size = New System.Drawing.Size(39, 13)
+        Me.lblYLimits.Size = New System.Drawing.Size(43, 13)
         Me.lblYLimits.TabIndex = 19
         Me.lblYLimits.Tag = "lblYLimits"
-        Me.lblYLimits.Text = "Label2"
+        Me.lblYLimits.Text = "Y Limits"
         '
         'lblPlotCharacter
         '
         Me.lblPlotCharacter.AutoSize = True
         Me.lblPlotCharacter.Location = New System.Drawing.Point(28, 307)
         Me.lblPlotCharacter.Name = "lblPlotCharacter"
-        Me.lblPlotCharacter.Size = New System.Drawing.Size(39, 13)
+        Me.lblPlotCharacter.Size = New System.Drawing.Size(74, 13)
         Me.lblPlotCharacter.TabIndex = 20
         Me.lblPlotCharacter.Tag = "Plot_Character"
-        Me.lblPlotCharacter.Text = "Label3"
+        Me.lblPlotCharacter.Text = "Plot Character"
         '
         'lblThreshold
         '
         Me.lblThreshold.AutoSize = True
         Me.lblThreshold.Location = New System.Drawing.Point(28, 281)
         Me.lblThreshold.Name = "lblThreshold"
-        Me.lblThreshold.Size = New System.Drawing.Size(39, 13)
+        Me.lblThreshold.Size = New System.Drawing.Size(54, 13)
         Me.lblThreshold.TabIndex = 21
         Me.lblThreshold.Tag = "Threshold"
-        Me.lblThreshold.Text = "Label4"
+        Me.lblThreshold.Text = "Threshold"
         '
         'lblLog
         '
         Me.lblLog.AutoSize = True
         Me.lblLog.Location = New System.Drawing.Point(28, 206)
         Me.lblLog.Name = "lblLog"
-        Me.lblLog.Size = New System.Drawing.Size(39, 13)
+        Me.lblLog.Size = New System.Drawing.Size(25, 13)
         Me.lblLog.TabIndex = 22
         Me.lblLog.Tag = "log"
-        Me.lblLog.Text = "Label5"
+        Me.lblLog.Text = "Log"
         '
         'lblASP
         '
         Me.lblASP.AutoSize = True
         Me.lblASP.Location = New System.Drawing.Point(28, 180)
         Me.lblASP.Name = "lblASP"
-        Me.lblASP.Size = New System.Drawing.Size(39, 13)
+        Me.lblASP.Size = New System.Drawing.Size(28, 13)
         Me.lblASP.TabIndex = 23
         Me.lblASP.Tag = "asp"
-        Me.lblASP.Text = "Label6"
+        Me.lblASP.Text = "ASP"
         '
         'lblFillColour
         '
         Me.lblFillColour.AutoSize = True
         Me.lblFillColour.Location = New System.Drawing.Point(28, 154)
         Me.lblFillColour.Name = "lblFillColour"
-        Me.lblFillColour.Size = New System.Drawing.Size(39, 13)
+        Me.lblFillColour.Size = New System.Drawing.Size(46, 13)
         Me.lblFillColour.TabIndex = 24
         Me.lblFillColour.Tag = "Fill_Colour"
-        Me.lblFillColour.Text = "Label7"
+        Me.lblFillColour.Text = "Fill Color"
         '
-        'Label8
+        'lblLegendPosition
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(28, 128)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(39, 13)
-        Me.Label8.TabIndex = 25
-        Me.Label8.Text = "Label8"
+        Me.lblLegendPosition.AutoSize = True
+        Me.lblLegendPosition.Location = New System.Drawing.Point(28, 128)
+        Me.lblLegendPosition.Name = "lblLegendPosition"
+        Me.lblLegendPosition.Size = New System.Drawing.Size(83, 13)
+        Me.lblLegendPosition.TabIndex = 25
+        Me.lblLegendPosition.Tag = "Legend_Position"
+        Me.lblLegendPosition.Text = "Legend Position"
         '
         'lblLegend
         '
         Me.lblLegend.AutoSize = True
         Me.lblLegend.Location = New System.Drawing.Point(28, 102)
         Me.lblLegend.Name = "lblLegend"
-        Me.lblLegend.Size = New System.Drawing.Size(39, 13)
+        Me.lblLegend.Size = New System.Drawing.Size(43, 13)
         Me.lblLegend.TabIndex = 26
         Me.lblLegend.Tag = "Legend"
-        Me.lblLegend.Text = "Label9"
+        Me.lblLegend.Text = "Legend"
         '
         'lblYLabel
         '
         Me.lblYLabel.AutoSize = True
         Me.lblYLabel.Location = New System.Drawing.Point(28, 76)
         Me.lblYLabel.Name = "lblYLabel"
-        Me.lblYLabel.Size = New System.Drawing.Size(45, 13)
+        Me.lblYLabel.Size = New System.Drawing.Size(43, 13)
         Me.lblYLabel.TabIndex = 27
         Me.lblYLabel.Tag = "Y_Label"
-        Me.lblYLabel.Text = "Label10"
+        Me.lblYLabel.Text = "Y Label"
         '
         'lblXLabel
         '
         Me.lblXLabel.AutoSize = True
         Me.lblXLabel.Location = New System.Drawing.Point(28, 50)
         Me.lblXLabel.Name = "lblXLabel"
-        Me.lblXLabel.Size = New System.Drawing.Size(45, 13)
+        Me.lblXLabel.Size = New System.Drawing.Size(43, 13)
         Me.lblXLabel.TabIndex = 28
         Me.lblXLabel.Tag = "X_Label"
-        Me.lblXLabel.Text = "Label11"
+        Me.lblXLabel.Text = "X Label"
         '
         'lblTitle
         '
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Location = New System.Drawing.Point(28, 25)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(45, 13)
+        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
         Me.lblTitle.TabIndex = 29
         Me.lblTitle.Tag = "Title"
-        Me.lblTitle.Text = "Label12"
+        Me.lblTitle.Text = "Title"
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(21, 333)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgMissingValuesplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(537, 387)
+        Me.ClientSize = New System.Drawing.Size(479, 391)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.lblXLabel)
         Me.Controls.Add(Me.lblYLabel)
         Me.Controls.Add(Me.lblLegend)
-        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.lblLegendPosition)
         Me.Controls.Add(Me.lblFillColour)
         Me.Controls.Add(Me.lblASP)
         Me.Controls.Add(Me.lblLog)
@@ -341,7 +342,7 @@ Partial Class dlgMissingValuesplot
     Friend WithEvents lblLog As Label
     Friend WithEvents lblASP As Label
     Friend WithEvents lblFillColour As Label
-    Friend WithEvents Label8 As Label
+    Friend WithEvents lblLegendPosition As Label
     Friend WithEvents lblLegend As Label
     Friend WithEvents lblYLabel As Label
     Friend WithEvents lblXLabel As Label

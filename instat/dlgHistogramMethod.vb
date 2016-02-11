@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgHistogramMethod
     Private Sub dlgHistogramMethod_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("climate_obj$histogram")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$histogram")
         ucrBase.clsRsyntax.iCallType = 0
     End Sub
 End Class
