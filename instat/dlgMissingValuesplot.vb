@@ -19,7 +19,7 @@ Public Class dlgMissingValuesplot
 
     Private Sub dlgMissingValuesplot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("climate_obj$plot_missing_values_rain")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$plot_missing_values_rain")
         ucrBase.clsRsyntax.iCallType = 0
     End Sub
 
@@ -57,6 +57,7 @@ Public Class dlgMissingValuesplot
     End Sub
 
     Private Sub chkHorizontal_Leave(sender As Object, e As EventArgs) Handles chkHorizontal.Leave
+
         If chkHorizontal.Checked Then
             ucrBase.clsRsyntax.AddParameter("horiz", Chr(34) & chkHorizontal.Text.ToString().ToUpper & Chr(34))
 
@@ -81,6 +82,13 @@ Public Class dlgMissingValuesplot
 
     Private Sub nudThreshold_Leave(sender As Object, e As EventArgs) Handles nudThreshold.Leave
         ucrBase.clsRsyntax.AddParameter("threshold", nudThreshold.Value.ToString())
+
+    End Sub
+
+    Private Sub chkHorizontal_CheckedChanged(sender As Object, e As EventArgs) Handles chkHorizontal.CheckedChanged
+        If chkHorizontal.Checked Then
+            ucrBase.clsRsyntax.AddParameter("horiz", Chr(34) & chkHorizontal.Text.ToString().ToUpper & Chr(34))
+        End If
 
     End Sub
 End Class
