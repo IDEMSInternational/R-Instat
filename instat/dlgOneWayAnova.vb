@@ -17,7 +17,7 @@ Imports instat.Translations
 Public Class dlgOneWayANOVA
     Private Sub dlgOneWayAnova_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("aov")
-        ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.clsRsyntax.iCallType = 2
         ucrYVariate.Selector = ucrAddRemove
         ucrYVariate.SetMeAsReceiver()
         ucrFactor.Selector = ucrAddRemove
