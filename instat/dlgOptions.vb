@@ -41,7 +41,17 @@ Public Class dlgOptions
                 rdoKiswahili.Checked = True
         End Select
         cmdApply.Enabled = False
-        cmdOk.Enabled = False
+        'cmdOk.Enabled = False
+        'Loads the current font and color
+        txtScriptFont.Text = frmMain.clsRLink.fScript.FontFamily.Name
+        txtScriptColor.Text = frmMain.clsRLink.clrScript.Name
+        txtScriptColor.ForeColor = frmMain.clsRLink.clrScript
+        txtScriptSize.Text = frmMain.clsRLink.fScript.Size
+        'For the output
+        txtOutputFont.Text = frmMain.clsRLink.fScript.FontFamily.Name
+        txtOutputcolor.Text = frmMain.clsRLink.clrScript.Name
+        txtOutputcolor.ForeColor = frmMain.clsRLink.clrScript
+        txtOutputSize.Text = frmMain.clsRLink.fScript.Size
     End Sub
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.Close()
@@ -49,6 +59,8 @@ Public Class dlgOptions
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
         cmdApply_Click(sender, e)
+        frmMain.clsRLink.setFormatOutput(txtOutputFont.Font, txtOutputcolor.ForeColor)
+        frmMain.clsRLink.setFormatScript(txtScriptFont.Font, txtScriptColor.ForeColor)
         Me.Close()
     End Sub
 
@@ -130,8 +142,11 @@ Public Class dlgOptions
         dlgFont.MinSize = 8
         If dlgFont.ShowDialog = DialogResult.OK Then
             txtScriptFont.Text = dlgFont.Font.FontFamily.Name
+            txtScriptColor.ForeColor = dlgFont.Color
+            txtScriptFont.Font = dlgFont.Font
             txtScriptColor.Text = dlgFont.Color.Name
             txtScriptSize.Text = dlgFont.Font.Size
+            dlgFont.Reset()
         End If
     End Sub
 
@@ -141,8 +156,11 @@ Public Class dlgOptions
         dlgFont.MinSize = 8
         If dlgFont.ShowDialog = DialogResult.OK Then
             txtOutputFont.Text = dlgFont.Font.FontFamily.Name
+            txtOutputFont.Font = dlgFont.Font
             txtOutputcolor.Text = dlgFont.Color.Name
+            txtOutputcolor.ForeColor = dlgFont.Color
             txtOutputSize.Text = dlgFont.Font.Size
+            dlgFont.Reset()
         End If
     End Sub
 
