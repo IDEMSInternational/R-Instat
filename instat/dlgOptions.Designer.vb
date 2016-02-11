@@ -30,28 +30,54 @@ Partial Class dlgOptions
         Me.tbpComments = New System.Windows.Forms.TabPage()
         Me.txtComment = New System.Windows.Forms.TextBox()
         Me.lblComment = New System.Windows.Forms.Label()
-        Me.tbpOutput = New System.Windows.Forms.TabPage()
-        Me.cmdChangeSettings = New System.Windows.Forms.Button()
-        Me.txtFontFamily = New System.Windows.Forms.TextBox()
-        Me.txtFontColor = New System.Windows.Forms.TextBox()
-        Me.lblColorFont = New System.Windows.Forms.Label()
-        Me.lblFamilyFont = New System.Windows.Forms.Label()
+        Me.tbpFormat = New System.Windows.Forms.TabPage()
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.thpOptions = New System.Windows.Forms.TabControl()
+        Me.tbpScript = New System.Windows.Forms.TabPage()
+        Me.tbpROutput = New System.Windows.Forms.TabPage()
+        Me.tbpComment = New System.Windows.Forms.TabPage()
+        Me.lblScriptTitle = New System.Windows.Forms.Label()
+        Me.cmdScriptChange = New System.Windows.Forms.Button()
+        Me.txtScriptFont = New System.Windows.Forms.TextBox()
+        Me.txtScriptColor = New System.Windows.Forms.TextBox()
+        Me.lblScriptColor = New System.Windows.Forms.Label()
+        Me.lblScriptFont = New System.Windows.Forms.Label()
+        Me.lblOutputTitle = New System.Windows.Forms.Label()
+        Me.cmdOutputChange = New System.Windows.Forms.Button()
+        Me.txtOutputFont = New System.Windows.Forms.TextBox()
+        Me.txtOutputcolor = New System.Windows.Forms.TextBox()
+        Me.lblOutputColor = New System.Windows.Forms.Label()
+        Me.lblOutputFont = New System.Windows.Forms.Label()
+        Me.lblCommentsTitle = New System.Windows.Forms.Label()
+        Me.cmdCommentsChange = New System.Windows.Forms.Button()
+        Me.txtCommentsFont = New System.Windows.Forms.TextBox()
+        Me.txtCommentsColor = New System.Windows.Forms.TextBox()
+        Me.lblCommentsColor = New System.Windows.Forms.Label()
+        Me.lblCommentsFont = New System.Windows.Forms.Label()
+        Me.lblScriptSize = New System.Windows.Forms.Label()
+        Me.txtScriptSize = New System.Windows.Forms.TextBox()
+        Me.txtOutputSize = New System.Windows.Forms.TextBox()
+        Me.lblOutputsize = New System.Windows.Forms.Label()
+        Me.txtCommentsSize = New System.Windows.Forms.TextBox()
+        Me.lblCommentsSize = New System.Windows.Forms.Label()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguageSettings.SuspendLayout()
         Me.tbpComments.SuspendLayout()
-        Me.tbpOutput.SuspendLayout()
+        Me.tbpFormat.SuspendLayout()
+        Me.thpOptions.SuspendLayout()
+        Me.tbpScript.SuspendLayout()
+        Me.tbpROutput.SuspendLayout()
+        Me.tbpComment.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbcOptions
         '
         Me.tbcOptions.Controls.Add(Me.tbpLanguageSettings)
         Me.tbcOptions.Controls.Add(Me.tbpComments)
-        Me.tbcOptions.Controls.Add(Me.tbpOutput)
+        Me.tbcOptions.Controls.Add(Me.tbpFormat)
         Me.tbcOptions.Location = New System.Drawing.Point(13, 13)
         Me.tbcOptions.Name = "tbcOptions"
         Me.tbcOptions.SelectedIndex = 0
@@ -137,64 +163,16 @@ Partial Class dlgOptions
         Me.lblComment.Tag = "Comment"
         Me.lblComment.Text = "Comment"
         '
-        'tbpOutput
+        'tbpFormat
         '
-        Me.tbpOutput.Controls.Add(Me.lblTitle)
-        Me.tbpOutput.Controls.Add(Me.cmdChangeSettings)
-        Me.tbpOutput.Controls.Add(Me.txtFontFamily)
-        Me.tbpOutput.Controls.Add(Me.txtFontColor)
-        Me.tbpOutput.Controls.Add(Me.lblColorFont)
-        Me.tbpOutput.Controls.Add(Me.lblFamilyFont)
-        Me.tbpOutput.Location = New System.Drawing.Point(4, 22)
-        Me.tbpOutput.Name = "tbpOutput"
-        Me.tbpOutput.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpOutput.Size = New System.Drawing.Size(392, 233)
-        Me.tbpOutput.TabIndex = 2
-        Me.tbpOutput.Text = "Output Window"
-        Me.tbpOutput.UseVisualStyleBackColor = True
-        '
-        'cmdChangeSettings
-        '
-        Me.cmdChangeSettings.Location = New System.Drawing.Point(153, 145)
-        Me.cmdChangeSettings.Name = "cmdChangeSettings"
-        Me.cmdChangeSettings.Size = New System.Drawing.Size(100, 23)
-        Me.cmdChangeSettings.TabIndex = 4
-        Me.cmdChangeSettings.Text = "Change settings"
-        Me.cmdChangeSettings.UseVisualStyleBackColor = True
-        '
-        'txtFontFamily
-        '
-        Me.txtFontFamily.Location = New System.Drawing.Point(96, 63)
-        Me.txtFontFamily.Name = "txtFontFamily"
-        Me.txtFontFamily.ReadOnly = True
-        Me.txtFontFamily.Size = New System.Drawing.Size(157, 20)
-        Me.txtFontFamily.TabIndex = 3
-        '
-        'txtFontColor
-        '
-        Me.txtFontColor.Location = New System.Drawing.Point(153, 106)
-        Me.txtFontColor.Name = "txtFontColor"
-        Me.txtFontColor.ReadOnly = True
-        Me.txtFontColor.Size = New System.Drawing.Size(100, 20)
-        Me.txtFontColor.TabIndex = 2
-        '
-        'lblColorFont
-        '
-        Me.lblColorFont.AutoSize = True
-        Me.lblColorFont.Location = New System.Drawing.Point(21, 109)
-        Me.lblColorFont.Name = "lblColorFont"
-        Me.lblColorFont.Size = New System.Drawing.Size(55, 13)
-        Me.lblColorFont.TabIndex = 1
-        Me.lblColorFont.Text = "Font Color"
-        '
-        'lblFamilyFont
-        '
-        Me.lblFamilyFont.AutoSize = True
-        Me.lblFamilyFont.Location = New System.Drawing.Point(21, 66)
-        Me.lblFamilyFont.Name = "lblFamilyFont"
-        Me.lblFamilyFont.Size = New System.Drawing.Size(60, 13)
-        Me.lblFamilyFont.TabIndex = 0
-        Me.lblFamilyFont.Text = "Font Family"
+        Me.tbpFormat.Controls.Add(Me.thpOptions)
+        Me.tbpFormat.Location = New System.Drawing.Point(4, 22)
+        Me.tbpFormat.Name = "tbpFormat"
+        Me.tbpFormat.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpFormat.Size = New System.Drawing.Size(392, 233)
+        Me.tbpFormat.TabIndex = 2
+        Me.tbpFormat.Text = "Format Options"
+        Me.tbpFormat.UseVisualStyleBackColor = True
         '
         'cmdOk
         '
@@ -236,14 +214,276 @@ Partial Class dlgOptions
         Me.cmdHelp.Text = "&Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
-        'lblTitle
+        'thpOptions
         '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(21, 13)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(223, 13)
-        Me.lblTitle.TabIndex = 5
-        Me.lblTitle.Text = "Font and Color options for the Output Window"
+        Me.thpOptions.Controls.Add(Me.tbpScript)
+        Me.thpOptions.Controls.Add(Me.tbpROutput)
+        Me.thpOptions.Controls.Add(Me.tbpComment)
+        Me.thpOptions.Location = New System.Drawing.Point(0, 0)
+        Me.thpOptions.Name = "thpOptions"
+        Me.thpOptions.SelectedIndex = 0
+        Me.thpOptions.Size = New System.Drawing.Size(283, 227)
+        Me.thpOptions.TabIndex = 0
+        '
+        'tbpScript
+        '
+        Me.tbpScript.Controls.Add(Me.txtScriptSize)
+        Me.tbpScript.Controls.Add(Me.lblScriptSize)
+        Me.tbpScript.Controls.Add(Me.lblScriptTitle)
+        Me.tbpScript.Controls.Add(Me.cmdScriptChange)
+        Me.tbpScript.Controls.Add(Me.txtScriptFont)
+        Me.tbpScript.Controls.Add(Me.txtScriptColor)
+        Me.tbpScript.Controls.Add(Me.lblScriptColor)
+        Me.tbpScript.Controls.Add(Me.lblScriptFont)
+        Me.tbpScript.Location = New System.Drawing.Point(4, 22)
+        Me.tbpScript.Name = "tbpScript"
+        Me.tbpScript.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpScript.Size = New System.Drawing.Size(275, 201)
+        Me.tbpScript.TabIndex = 0
+        Me.tbpScript.Text = "R Script"
+        Me.tbpScript.UseVisualStyleBackColor = True
+        '
+        'tbpROutput
+        '
+        Me.tbpROutput.Controls.Add(Me.txtOutputSize)
+        Me.tbpROutput.Controls.Add(Me.lblOutputsize)
+        Me.tbpROutput.Controls.Add(Me.lblOutputTitle)
+        Me.tbpROutput.Controls.Add(Me.cmdOutputChange)
+        Me.tbpROutput.Controls.Add(Me.txtOutputFont)
+        Me.tbpROutput.Controls.Add(Me.txtOutputcolor)
+        Me.tbpROutput.Controls.Add(Me.lblOutputColor)
+        Me.tbpROutput.Controls.Add(Me.lblOutputFont)
+        Me.tbpROutput.Location = New System.Drawing.Point(4, 22)
+        Me.tbpROutput.Name = "tbpROutput"
+        Me.tbpROutput.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpROutput.Size = New System.Drawing.Size(275, 201)
+        Me.tbpROutput.TabIndex = 1
+        Me.tbpROutput.Text = "R Output"
+        Me.tbpROutput.UseVisualStyleBackColor = True
+        '
+        'tbpComment
+        '
+        Me.tbpComment.Controls.Add(Me.txtCommentsSize)
+        Me.tbpComment.Controls.Add(Me.lblCommentsSize)
+        Me.tbpComment.Controls.Add(Me.lblCommentsTitle)
+        Me.tbpComment.Controls.Add(Me.cmdCommentsChange)
+        Me.tbpComment.Controls.Add(Me.txtCommentsFont)
+        Me.tbpComment.Controls.Add(Me.txtCommentsColor)
+        Me.tbpComment.Controls.Add(Me.lblCommentsColor)
+        Me.tbpComment.Controls.Add(Me.lblCommentsFont)
+        Me.tbpComment.Location = New System.Drawing.Point(4, 22)
+        Me.tbpComment.Name = "tbpComment"
+        Me.tbpComment.Size = New System.Drawing.Size(275, 201)
+        Me.tbpComment.TabIndex = 2
+        Me.tbpComment.Text = "Comments"
+        Me.tbpComment.UseVisualStyleBackColor = True
+        '
+        'lblScriptTitle
+        '
+        Me.lblScriptTitle.AutoSize = True
+        Me.lblScriptTitle.Location = New System.Drawing.Point(10, 5)
+        Me.lblScriptTitle.Name = "lblScriptTitle"
+        Me.lblScriptTitle.Size = New System.Drawing.Size(187, 13)
+        Me.lblScriptTitle.TabIndex = 11
+        Me.lblScriptTitle.Text = "Font and Color options for the R Script"
+        '
+        'cmdScriptChange
+        '
+        Me.cmdScriptChange.Location = New System.Drawing.Point(142, 158)
+        Me.cmdScriptChange.Name = "cmdScriptChange"
+        Me.cmdScriptChange.Size = New System.Drawing.Size(100, 23)
+        Me.cmdScriptChange.TabIndex = 10
+        Me.cmdScriptChange.Text = "Change settings"
+        Me.cmdScriptChange.UseVisualStyleBackColor = True
+        '
+        'txtScriptFont
+        '
+        Me.txtScriptFont.Location = New System.Drawing.Point(85, 23)
+        Me.txtScriptFont.Name = "txtScriptFont"
+        Me.txtScriptFont.ReadOnly = True
+        Me.txtScriptFont.Size = New System.Drawing.Size(157, 20)
+        Me.txtScriptFont.TabIndex = 9
+        '
+        'txtScriptColor
+        '
+        Me.txtScriptColor.Location = New System.Drawing.Point(142, 66)
+        Me.txtScriptColor.Name = "txtScriptColor"
+        Me.txtScriptColor.ReadOnly = True
+        Me.txtScriptColor.Size = New System.Drawing.Size(100, 20)
+        Me.txtScriptColor.TabIndex = 8
+        '
+        'lblScriptColor
+        '
+        Me.lblScriptColor.AutoSize = True
+        Me.lblScriptColor.Location = New System.Drawing.Point(10, 69)
+        Me.lblScriptColor.Name = "lblScriptColor"
+        Me.lblScriptColor.Size = New System.Drawing.Size(55, 13)
+        Me.lblScriptColor.TabIndex = 7
+        Me.lblScriptColor.Text = "Font Color"
+        '
+        'lblScriptFont
+        '
+        Me.lblScriptFont.AutoSize = True
+        Me.lblScriptFont.Location = New System.Drawing.Point(10, 26)
+        Me.lblScriptFont.Name = "lblScriptFont"
+        Me.lblScriptFont.Size = New System.Drawing.Size(60, 13)
+        Me.lblScriptFont.TabIndex = 6
+        Me.lblScriptFont.Text = "Font Family"
+        '
+        'lblOutputTitle
+        '
+        Me.lblOutputTitle.AutoSize = True
+        Me.lblOutputTitle.Location = New System.Drawing.Point(7, 8)
+        Me.lblOutputTitle.Name = "lblOutputTitle"
+        Me.lblOutputTitle.Size = New System.Drawing.Size(192, 13)
+        Me.lblOutputTitle.TabIndex = 17
+        Me.lblOutputTitle.Text = "Font and Color options for the R Output"
+        '
+        'cmdOutputChange
+        '
+        Me.cmdOutputChange.Location = New System.Drawing.Point(139, 140)
+        Me.cmdOutputChange.Name = "cmdOutputChange"
+        Me.cmdOutputChange.Size = New System.Drawing.Size(100, 23)
+        Me.cmdOutputChange.TabIndex = 16
+        Me.cmdOutputChange.Text = "Change settings"
+        Me.cmdOutputChange.UseVisualStyleBackColor = True
+        '
+        'txtOutputFont
+        '
+        Me.txtOutputFont.Location = New System.Drawing.Point(82, 27)
+        Me.txtOutputFont.Name = "txtOutputFont"
+        Me.txtOutputFont.ReadOnly = True
+        Me.txtOutputFont.Size = New System.Drawing.Size(157, 20)
+        Me.txtOutputFont.TabIndex = 15
+        '
+        'txtOutputcolor
+        '
+        Me.txtOutputcolor.Location = New System.Drawing.Point(139, 70)
+        Me.txtOutputcolor.Name = "txtOutputcolor"
+        Me.txtOutputcolor.ReadOnly = True
+        Me.txtOutputcolor.Size = New System.Drawing.Size(100, 20)
+        Me.txtOutputcolor.TabIndex = 14
+        '
+        'lblOutputColor
+        '
+        Me.lblOutputColor.AutoSize = True
+        Me.lblOutputColor.Location = New System.Drawing.Point(7, 73)
+        Me.lblOutputColor.Name = "lblOutputColor"
+        Me.lblOutputColor.Size = New System.Drawing.Size(55, 13)
+        Me.lblOutputColor.TabIndex = 13
+        Me.lblOutputColor.Text = "Font Color"
+        '
+        'lblOutputFont
+        '
+        Me.lblOutputFont.AutoSize = True
+        Me.lblOutputFont.Location = New System.Drawing.Point(7, 30)
+        Me.lblOutputFont.Name = "lblOutputFont"
+        Me.lblOutputFont.Size = New System.Drawing.Size(60, 13)
+        Me.lblOutputFont.TabIndex = 12
+        Me.lblOutputFont.Text = "Font Family"
+        '
+        'lblCommentsTitle
+        '
+        Me.lblCommentsTitle.AutoSize = True
+        Me.lblCommentsTitle.Location = New System.Drawing.Point(7, 9)
+        Me.lblCommentsTitle.Name = "lblCommentsTitle"
+        Me.lblCommentsTitle.Size = New System.Drawing.Size(198, 13)
+        Me.lblCommentsTitle.TabIndex = 17
+        Me.lblCommentsTitle.Text = "Font and Color options for the Comments"
+        '
+        'cmdCommentsChange
+        '
+        Me.cmdCommentsChange.Location = New System.Drawing.Point(139, 141)
+        Me.cmdCommentsChange.Name = "cmdCommentsChange"
+        Me.cmdCommentsChange.Size = New System.Drawing.Size(100, 23)
+        Me.cmdCommentsChange.TabIndex = 16
+        Me.cmdCommentsChange.Text = "Change settings"
+        Me.cmdCommentsChange.UseVisualStyleBackColor = True
+        '
+        'txtCommentsFont
+        '
+        Me.txtCommentsFont.Location = New System.Drawing.Point(82, 26)
+        Me.txtCommentsFont.Name = "txtCommentsFont"
+        Me.txtCommentsFont.ReadOnly = True
+        Me.txtCommentsFont.Size = New System.Drawing.Size(157, 20)
+        Me.txtCommentsFont.TabIndex = 15
+        '
+        'txtCommentsColor
+        '
+        Me.txtCommentsColor.Location = New System.Drawing.Point(139, 69)
+        Me.txtCommentsColor.Name = "txtCommentsColor"
+        Me.txtCommentsColor.ReadOnly = True
+        Me.txtCommentsColor.Size = New System.Drawing.Size(100, 20)
+        Me.txtCommentsColor.TabIndex = 14
+        '
+        'lblCommentsColor
+        '
+        Me.lblCommentsColor.AutoSize = True
+        Me.lblCommentsColor.Location = New System.Drawing.Point(7, 72)
+        Me.lblCommentsColor.Name = "lblCommentsColor"
+        Me.lblCommentsColor.Size = New System.Drawing.Size(55, 13)
+        Me.lblCommentsColor.TabIndex = 13
+        Me.lblCommentsColor.Text = "Font Color"
+        '
+        'lblCommentsFont
+        '
+        Me.lblCommentsFont.AutoSize = True
+        Me.lblCommentsFont.Location = New System.Drawing.Point(7, 29)
+        Me.lblCommentsFont.Name = "lblCommentsFont"
+        Me.lblCommentsFont.Size = New System.Drawing.Size(60, 13)
+        Me.lblCommentsFont.TabIndex = 12
+        Me.lblCommentsFont.Text = "Font Family"
+        '
+        'lblScriptSize
+        '
+        Me.lblScriptSize.AutoSize = True
+        Me.lblScriptSize.Location = New System.Drawing.Point(10, 107)
+        Me.lblScriptSize.Name = "lblScriptSize"
+        Me.lblScriptSize.Size = New System.Drawing.Size(51, 13)
+        Me.lblScriptSize.TabIndex = 12
+        Me.lblScriptSize.Text = "Font Size"
+        '
+        'txtScriptSize
+        '
+        Me.txtScriptSize.Location = New System.Drawing.Point(142, 100)
+        Me.txtScriptSize.Name = "txtScriptSize"
+        Me.txtScriptSize.ReadOnly = True
+        Me.txtScriptSize.Size = New System.Drawing.Size(100, 20)
+        Me.txtScriptSize.TabIndex = 13
+        '
+        'txtOutputSize
+        '
+        Me.txtOutputSize.Location = New System.Drawing.Point(139, 107)
+        Me.txtOutputSize.Name = "txtOutputSize"
+        Me.txtOutputSize.ReadOnly = True
+        Me.txtOutputSize.Size = New System.Drawing.Size(100, 20)
+        Me.txtOutputSize.TabIndex = 19
+        '
+        'lblOutputsize
+        '
+        Me.lblOutputsize.AutoSize = True
+        Me.lblOutputsize.Location = New System.Drawing.Point(7, 114)
+        Me.lblOutputsize.Name = "lblOutputsize"
+        Me.lblOutputsize.Size = New System.Drawing.Size(51, 13)
+        Me.lblOutputsize.TabIndex = 18
+        Me.lblOutputsize.Text = "Font Size"
+        '
+        'txtCommentsSize
+        '
+        Me.txtCommentsSize.Location = New System.Drawing.Point(140, 102)
+        Me.txtCommentsSize.Name = "txtCommentsSize"
+        Me.txtCommentsSize.ReadOnly = True
+        Me.txtCommentsSize.Size = New System.Drawing.Size(100, 20)
+        Me.txtCommentsSize.TabIndex = 19
+        '
+        'lblCommentsSize
+        '
+        Me.lblCommentsSize.AutoSize = True
+        Me.lblCommentsSize.Location = New System.Drawing.Point(8, 109)
+        Me.lblCommentsSize.Name = "lblCommentsSize"
+        Me.lblCommentsSize.Size = New System.Drawing.Size(51, 13)
+        Me.lblCommentsSize.TabIndex = 18
+        Me.lblCommentsSize.Text = "Font Size"
         '
         'dlgOptions
         '
@@ -265,8 +505,14 @@ Partial Class dlgOptions
         Me.tbpLanguageSettings.PerformLayout()
         Me.tbpComments.ResumeLayout(False)
         Me.tbpComments.PerformLayout()
-        Me.tbpOutput.ResumeLayout(False)
-        Me.tbpOutput.PerformLayout()
+        Me.tbpFormat.ResumeLayout(False)
+        Me.thpOptions.ResumeLayout(False)
+        Me.tbpScript.ResumeLayout(False)
+        Me.tbpScript.PerformLayout()
+        Me.tbpROutput.ResumeLayout(False)
+        Me.tbpROutput.PerformLayout()
+        Me.tbpComment.ResumeLayout(False)
+        Me.tbpComment.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -282,11 +528,33 @@ Partial Class dlgOptions
     Friend WithEvents txtComment As TextBox
     Friend WithEvents lblComment As Label
     Friend WithEvents cmdHelp As Button
-    Friend WithEvents tbpOutput As TabPage
-    Friend WithEvents cmdChangeSettings As Button
-    Friend WithEvents txtFontFamily As TextBox
-    Friend WithEvents txtFontColor As TextBox
-    Friend WithEvents lblColorFont As Label
-    Friend WithEvents lblFamilyFont As Label
-    Friend WithEvents lblTitle As Label
+    Friend WithEvents tbpFormat As TabPage
+    Friend WithEvents thpOptions As TabControl
+    Friend WithEvents tbpScript As TabPage
+    Friend WithEvents txtScriptSize As TextBox
+    Friend WithEvents lblScriptSize As Label
+    Friend WithEvents lblScriptTitle As Label
+    Friend WithEvents cmdScriptChange As Button
+    Friend WithEvents txtScriptFont As TextBox
+    Friend WithEvents txtScriptColor As TextBox
+    Friend WithEvents lblScriptColor As Label
+    Friend WithEvents lblScriptFont As Label
+    Friend WithEvents tbpROutput As TabPage
+    Friend WithEvents txtOutputSize As TextBox
+    Friend WithEvents lblOutputsize As Label
+    Friend WithEvents lblOutputTitle As Label
+    Friend WithEvents cmdOutputChange As Button
+    Friend WithEvents txtOutputFont As TextBox
+    Friend WithEvents txtOutputcolor As TextBox
+    Friend WithEvents lblOutputColor As Label
+    Friend WithEvents lblOutputFont As Label
+    Friend WithEvents tbpComment As TabPage
+    Friend WithEvents txtCommentsSize As TextBox
+    Friend WithEvents lblCommentsSize As Label
+    Friend WithEvents lblCommentsTitle As Label
+    Friend WithEvents cmdCommentsChange As Button
+    Friend WithEvents txtCommentsFont As TextBox
+    Friend WithEvents txtCommentsColor As TextBox
+    Friend WithEvents lblCommentsColor As Label
+    Friend WithEvents lblCommentsFont As Label
 End Class

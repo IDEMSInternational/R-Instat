@@ -106,8 +106,9 @@ Public Class RLink
                 txtLog.Text = txtLog.Text & strScript & vbCrLf
             End If
             If bOutput Then
-                txtOutput.Text = txtOutput.Text & strScript & vbCrLf
+
                 'input format here
+                AppendText(txtOutput, Color.Black, strScript & vbCrLf)
             End If
             If bReturnOutput = 0 Then
                 clsEngine.Evaluate(strScript)
@@ -127,13 +128,28 @@ Public Class RLink
                 strOutput = strOutput & strTemp & vbCrLf
             End If
             If bOutput Then
-                txtOutput.Text = txtOutput.Text & strOutput
+                'txtOutput.Text = txtOutput.Text & strOutput
                 'output format here
+                AppendText(txtOutput, Color.Blue, strOutput)
             End If
         Catch
             MsgBox(strScript)
         End Try
         frmMain.clsGrids.UpdateGrids()
+    End Sub
+    Private Sub AppendText(box As RichTextBox, color As Color, text As String)
+        Dim start As Integer = box.TextLength
+        box.AppendText(text)
+        Dim [end] As Integer = box.TextLength
+
+        ' Textbox may transform chars, so (end-start) != text.Length
+        box.[Select](start, [end] - start)
+        If True Then
+            box.SelectionColor = color
+            'To set Font and Font Size after Discussion
+        End If
+        box.SelectionLength = 0
+        ' clear
     End Sub
 
 
