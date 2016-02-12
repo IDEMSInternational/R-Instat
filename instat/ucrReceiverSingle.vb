@@ -51,23 +51,30 @@ Public Class ucrReceiverSingle
         'return columns (in data frame) in both cases
         'call GetVariableNames
         Dim clsGetVariablesFunc As New RFunction
+        Dim clsParam As New RParameter
         If bSelected Then
-            clsRSyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data", clsFunction:=clsGetVariablesFunc)
-            clsRSyntax.AddParameter("data_name", Chr(34) & objSelected.Group.ToString() & Chr(34), clsRFunction:=clsGetVariablesFunc)
-            clsRSyntax.AddParameter("col_name", GetVariableNames(), clsRFunction:=clsGetVariablesFunc)
+            clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+            clsGetVariablesFunc.AddParameter("data_name", Chr(34) & objSelected.Group.ToString() & Chr(34))
+            clsGetVariablesFunc.AddParameter("col_name", GetVariableNames())
             'TODO make this an option set in Options menu
-            clsRSyntax.SetAssignTo(MakeValidRString(objSelected.Text), clsFunction:=clsGetVariablesFunc)
+            clsGetVariablesFunc.SetAssignTo(MakeValidRString(objSelected.Text))
             Return clsGetVariablesFunc
         Else
             Return clsGetVariablesFunc
         End If
     End Function
 
-    Public Overrides Function GetVariableNames() As String
-        Return Chr(34) & objSelected.Text & Chr(34)
-        'in multiple return c( 'column names' )
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
+        Dim strTemp As String = ""
+        If txtReceiverSingle.Text <> "" Then
+            If bWithQuotes Then
+                strTemp = Chr(34) & objSelected.Text & Chr(34)
+            Else
+                strTemp = objSelected.Text
+            End If
+        End If
+        Return strTemp
     End Function
-
 
     Private Sub txtReceiverSingle_TextChanged(sender As Object, e As EventArgs) Handles txtReceiverSingle.TextChanged
         OnValueChanged(sender, e)

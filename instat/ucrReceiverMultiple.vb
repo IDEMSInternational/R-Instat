@@ -62,17 +62,16 @@ Public Class ucrReceiverMultiple
 
         If lstCurrDataFrames.Count = 1 Then
             strCurrDataFrame = lstCurrDataFrames(0)
-            clsRSyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data", clsFunction:=clsGetVariablesFunc)
-            clsRSyntax.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34), clsRFunction:=clsGetVariablesFunc)
-            clsRSyntax.AddParameter("col_names", GetVariableNames(), clsRFunction:=clsGetVariablesFunc)
+            clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+            clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34))
+            clsGetVariablesFunc.AddParameter("col_names", GetVariableNames())
             'TODO make this an option set in Options menu
             'clsRSyntax.SetAssignTo(MakeValidRString(strCurrDataFrame) & "_temp", clsFunction:=clsGetVariablesFunc)
-        Else
         End If
         Return clsGetVariablesFunc
     End Function
 
-    Public Overrides Function GetVariableNames() As String
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
         Dim i As Integer
         If objSelected.Count = 1 Then
@@ -83,7 +82,13 @@ Public Class ucrReceiverMultiple
                 If i > 0 Then
                     strTemp = strTemp & ","
                 End If
-                strTemp = strTemp & Chr(34) & objSelected(i).Text & Chr(34)
+                If objSelected(i).Text <> "" Then
+                    If bWithQuotes Then
+                        strTemp = strTemp & Chr(34) & objSelected(i).Text & Chr(34)
+                    Else
+                        strTemp = strTemp & objSelected(i).Text
+                    End If
+                End If
             Next
             strTemp = strTemp & ")"
         End If

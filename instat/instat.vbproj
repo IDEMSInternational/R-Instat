@@ -137,6 +137,7 @@
   <ItemGroup>
     <Compile Include="clsDistribution.vb" />
     <Compile Include="clsRFunction.vb" />
+    <Compile Include="clsROperator.vb" />
     <Compile Include="dlgAddStartRain.designer.vb">
       <DependentUpon>dlgAddStartRain.vb</DependentUpon>
     </Compile>
@@ -231,6 +232,18 @@
       <DependentUpon>dlgColumnStats.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgColumnStats.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOneWayANOVA.Designer.vb">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneWayANOVA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgOptions.Designer.vb">
+      <DependentUpon>sdgOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgRestrict.Designer.vb">
@@ -1020,10 +1033,10 @@
     <Compile Include="clsRLink.vb" />
     <Compile Include="clsRParameter.vb" />
     <Compile Include="clsRSyntax.vb" />
-    <Compile Include="sdgBoxplot.Designer.vb">
-      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    <Compile Include="sdgPlots.Designer.vb">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgBoxplot.vb">
+    <Compile Include="sdgPlots.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Translations.vb" />
@@ -1265,6 +1278,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnRows.sw-KE.resx">
       <DependentUpon>dlgColumnRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayANOVA.resx">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOptions.fr-FR.resx">
+      <DependentUpon>sdgOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOptions.resx">
+      <DependentUpon>sdgOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgOptions.sw-KE.resx">
+      <DependentUpon>sdgOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgRestrict.fr-FR.resx">
       <DependentUpon>sdgRestrict.vb</DependentUpon>
@@ -2364,14 +2395,14 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.sw-KE.resx" />
-    <EmbeddedResource Include="sdgBoxplot.fr-FR.resx">
-      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    <EmbeddedResource Include="sdgPlots.fr-FR.resx">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgBoxplot.resx">
-      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    <EmbeddedResource Include="sdgPlots.resx">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgBoxplot.sw-KE.resx">
-      <DependentUpon>sdgBoxplot.vb</DependentUpon>
+    <EmbeddedResource Include="sdgPlots.sw-KE.resx">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
@@ -2520,6 +2551,10 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <Content Include="static\ClimateObject\R\ClimateMethods\Models\readme_model.txt" />
+    <Content Include="static\ClimateObject\R\R_front_ends\readme_front.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="static\InstatObject\R\data_object.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -2530,6 +2565,240 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\Rsetup.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Help\R-Instat.chm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\.Rbuildignore">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\after_build_script.r">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\before_build_script.r">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\ClimateObject.Rproj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\DESCRIPTION">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\man\cumulative_exceedance_graphs.Rd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\man\graphics_frontend.Rd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\man\histogram.Rd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\man\timeseries.Rd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\man\typeWR.Rd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\man\windrose.Rd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\NAMESPACE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\README.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\Rsav\placeholder">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\BackendComponents\DateManipulationMethods.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\BackendComponents\summary_functions.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\add_end_rain_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\add_start_rain_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\boxplot_count_variable_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\change_format_day_month.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\CPT_to_tabular_data_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\create_climate_object.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\day_month_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\display_daily_data_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\display_daily_data_rain.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\display_doy_table_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\display_rain_running_total_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\display_spell_length_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\display_water_balance_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\export_for_PICSA.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\export_for_VB.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\extreme_events_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\isnalist_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\missing_data_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\missing_data_table_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\monthly_summaries_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\output_for_CDT_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\output_for_CPT_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\rain_stats_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\read_multistat.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\read_write_multistat.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\seasonal_summary_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\seasonal_summary_rain.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\spell_lengths_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\DataManipulation\summary_statistics_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\Boxplot_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\boxplot_new_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\cliboxplot_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\cliplot_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\cumulative_exceedance_graphs_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\daily_summary_plot.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\get_zooObject.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\histogram_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\histogram_method_shiny.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\plot_annual_rain_total_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\plot_annual_variable_total_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\plot_compare_longterm_tendaily_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\plot_count_rain_day_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\plot_inventory_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\plot_lines.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\plot_missing_rain_values_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\plot_three_summaries_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\plot_yearly_rain_count.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\plot_yearly_summary_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\timeseries_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\timeseries_method_shiny.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\windrose_method.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\ClimateMethods\Graphics\windrose_method_shiny.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\climate_data_refclass.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\climate_refclass.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\labels_and_defaults.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\R_front_ends\graphics_frontend.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\R_front_ends\graphics_frontend_shiny.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\R_front_ends\shiny_server.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\R_front_ends\shiny_ui.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\ClimateObject\R\SourcingScript.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
