@@ -128,7 +128,8 @@ Public Class RLink
         strOutput = ""
         Try
             If strComment <> "" Then
-                strScriptWithComment = "# " & strComment & vbCrLf & strScript
+                strComment = "# " & strComment
+                strScriptWithComment = strComment & vbCrLf & strScript
             Else
                 strScriptWithComment = strScript
             End If
@@ -137,7 +138,7 @@ Public Class RLink
             End If
             If bOutput Then
                 If strComment <> "" Then
-                    AppendText(txtOutput, clrComments, fComments, strScriptWithComment & vbCrLf)
+                    AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
                 End If
                 AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
             End If
