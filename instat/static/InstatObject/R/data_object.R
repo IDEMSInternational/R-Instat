@@ -469,6 +469,20 @@ next_default_item = function(prefix, existing_names) {
   return(out)
 } 
 
+data_obj$methods(get_column_factor_levels = function(col_name = "") {
+  if(!(col_name %in% names(data))){
+    stop(col_name, " is not a column in", get_metadata(data_name_label))
+  }
+  if(!(is.factor(data[,c(col_name)]))){
+    stop(col_name, " is not a factor column")
+  }
+  
+  counts <- as.data.frame(table(data[,c(col_name)]))
+  counts <- rename(counts, replace = c("Var1" = "Levels", "Freq" = "Counts"))
+  return(counts)
+}
+)
+
 #Labels for strings which will be added to logs
 Set_property="Set"
 Added_col="Added column"

@@ -62,12 +62,11 @@ Public Class ucrReceiverMultiple
 
         If lstCurrDataFrames.Count = 1 Then
             strCurrDataFrame = lstCurrDataFrames(0)
-            clsRSyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data", clsFunction:=clsGetVariablesFunc)
-            clsRSyntax.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34), clsRFunction:=clsGetVariablesFunc)
-            clsRSyntax.AddParameter("col_names", GetVariableNames(), clsRFunction:=clsGetVariablesFunc)
+            clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+            clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34))
+            clsGetVariablesFunc.AddParameter("col_names", GetVariableNames())
             'TODO make this an option set in Options menu
             'clsRSyntax.SetAssignTo(MakeValidRString(strCurrDataFrame) & "_temp", clsFunction:=clsGetVariablesFunc)
-        Else
         End If
         Return clsGetVariablesFunc
     End Function
