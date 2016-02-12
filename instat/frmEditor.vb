@@ -28,6 +28,10 @@ Public Class frmEditor
         frmMain.clsGrids.SetData(grdData)
         grdData.Visible = False
         autoTranslate(Me)
+        'Disable Autoformat cell
+        'This needs to be added at the part when we are writing data to the grid, not here
+        'Needs discussion, with this the grid can show NA's
+        grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
     End Sub
     ''' <summary>
     ''' Hides the form when it is closed and not exiting it.
@@ -202,8 +206,20 @@ Public Class frmEditor
     End Sub
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
-        grdData.RemoveWorksheet(grdData.GetWorksheetIndex(grdData.CurrentWorksheet))
+        If grdData.Worksheets.Count > 0 Then
+            strf = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
+            frmMain.clsRLink.RunScript(strf)
+            'grdData.RemoveWorksheet(grdData.GetWorksheetIndex(grdData.CurrentWorksheet))
+        End If
     End Sub
+
+    Private Sub grdData_WorksheetRemoved(sender As Object, e As WorksheetRemovedEventArgs) Handles grdData.WorksheetRemoved
+        If grdData.Worksheets.Count < 1 Then
+            grdData.Hide()
+            MessageBox.Show("No more worksheets loaded", "Attention")
+        End If
+    End Sub
+
 
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
         'dlgName.setWorksheet(grdData.CurrentWorksheet.Name, (grdData.CurrentWorksheet.ColumnHeaders(grdData.CurrentWorksheet.SelectionRange.Col)).[Text])

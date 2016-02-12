@@ -18,9 +18,9 @@ Imports RDotNet
 
 Public Class RLink
     ' R interface class. Each instance of the class has its own REngine instance
-    Dim strClimateObjectPath As String = "C:\\ClimateObject\\R"
+    Dim strClimateObjectPath As String = "/ClimateObject/R" 'new climateobject path
     Public strClimateObject As String = "ClimateObject"
-    Dim strInstatObjectPath As String = "static/InstatObject/R" 'path to the Instat object
+    Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
     Public clsEngine As REngine
     Dim txtOutput As New RichTextBox
@@ -30,8 +30,32 @@ Public Class RLink
     Public bClimateObjectExists As Boolean = False
     Public bInstatObjectExists As Boolean = False
     Public bClimsoftLinkExists As Boolean = False
+    'sets the font for the strScript
+    Public fScript As Font = New Font(txtOutput.Font.FontFamily, txtOutput.Font.Size)
+    Public clrScript As Color = Color.Black
+    'sets the font for the strOutput
+    Public fOutput As Font = New Font(txtOutput.Font.FontFamily, txtOutput.Font.Size)
+    Public clrOutput As Color = Color.Blue
+    'sets the font for the Comments
+    Public fComments As Font = New Font(txtOutput.Font.FontFamily, txtOutput.Font.Size)
+    Public clrComments As Color = Color.Green
 
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
+    End Sub
+
+    Public Sub setFormatOutput(tempFont As Font, tempColor As Color)
+        fOutput = tempFont
+        clrOutput = tempColor
+    End Sub
+
+    Public Sub setFormatScript(tempFont As Font, tempColor As Color)
+        fScript = tempFont
+        clrScript = tempColor
+    End Sub
+
+    Public Sub setFormatComment(tempFont As Font, tempColor As Color)
+        fComments = tempFont
+        clrComments = tempColor
     End Sub
 
     Public Sub SetOutput(tempOutput As RichTextBox)
@@ -94,17 +118,29 @@ Public Class RLink
         Return lstNextDefaults
     End Function
 
-    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0)
+    Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "")
         Dim strCapturedScript As String
         Dim temp As RDotNet.SymbolicExpression
         Dim strTemp As String
         Dim strOutput As String
+        Dim strScriptWithComment As String
+        Dim strSplitScript As String
         strOutput = ""
         Try
-            If bLog Then
-                txtLog.Text = txtLog.Text & strScript & vbCrLf
+            If strComment <> "" Then
+                strScriptWithComment = "# " & strComment & vbCrLf & strScript
+            Else
+                strScriptWithComment = strScript
             End If
-            strOutput = strScript & vbCrLf
+            If bLog Then
+                txtLog.Text = txtLog.Text & strScriptWithComment & vbCrLf
+            End If
+            If bOutput Then
+                If strComment <> "" Then
+                    AppendText(txtOutput, clrComments, fComments, strScriptWithComment & vbCrLf)
+                End If
+                AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
+            End If
             If bReturnOutput = 0 Then
                 clsEngine.Evaluate(strScript)
             ElseIf bReturnOutput = 1 Then
@@ -112,19 +148,43 @@ Public Class RLink
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
             Else
-                strCapturedScript = "capture.output(" & strScript & ")"
+                strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
+                If strSplitScript <> "" Then
+                    clsEngine.Evaluate(strSplitScript)
+                End If
+                strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
+                strCapturedScript = "capture.output(" & strSplitScript & ")"
                 temp = clsEngine.Evaluate(strCapturedScript)
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
             End If
             If bOutput Then
-                txtOutput.Text = txtOutput.Text & strOutput
+                'txtOutput.Text = txtOutput.Text & strOutput
+                'output format here
+                AppendText(txtOutput, clrOutput, fOutput, strOutput)
             End If
         Catch
-            MsgBox(strOutput)
+            MsgBox(strScript)
         End Try
         frmMain.clsGrids.UpdateGrids()
     End Sub
+
+    Private Sub AppendText(box As RichTextBox, color As Color, font As Font, text As String)
+        Dim iStart As Integer = box.TextLength
+        Dim iEnd As Integer
+
+        box.AppendText(text)
+        iEnd = box.TextLength
+
+        ' Textbox may transform chars, so (end-start) != text.Length
+        box.[Select](iStart, iEnd - iStart)
+        box.SelectionColor = color
+        box.SelectionFont = font
+        'TClears selection
+        box.SelectionLength = 0
+        ' clear
+    End Sub
+
 
     Public Function GetData(strLabel As String) As DataFrame
 
@@ -152,7 +212,7 @@ Public Class RLink
 
     Public Sub CreateNewClimateObject() 'creates an instance of the climate object
         If Not bClimateObjectExists Then
-            RunScript("setwd('" & strClimateObjectPath & "')")
+            RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strClimateObjectPath & "')")
             RunScript("source(" & Chr(34) & "SourcingScript.R" & Chr(34) & ")")
             RunScript(strClimateObject & "<-climate$new()")
             bClimateObjectExists = True
@@ -161,7 +221,7 @@ Public Class RLink
 
     Public Sub RSetup()
         'run script to load libraries
-        RunScript("setwd('" & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
+        RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
         RunScript("source(" & Chr(34) & "data_object.R" & Chr(34) & ")")
         RunScript("source(" & Chr(34) & "instat_object.R" & Chr(34) & ")")
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
