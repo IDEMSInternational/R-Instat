@@ -15,15 +15,23 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Imports System.IO
+Imports RDotNet
 
 Public Class dlgImportDataset
-
+    Dim dfTemp As DataFrame
+    Public strDataName As String = ""
+    Public strFilePath As String = ""
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("read.csv")
         autoTranslate(Me)
         cboEncoding.Text = "Automatic"
+        'Needs discussion for this
         rdoHeadingsYes.Checked = True
+
+        ucrBase.clsRsyntax.AddParameter("header", "TRUE")
         cboRowNames.Text = "Automatic"
+
+        ucrBase.clsRsyntax.AddParameter("row.names", "NULL")
 
         cboSeparator.Text = "Comma"
         ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "," & Chr(34))
@@ -40,6 +48,11 @@ Public Class dlgImportDataset
         txtNAStrings.Text = "NA"
         ucrBase.clsRsyntax.AddParameter("na.strings", "NA")
 
+        SetName(strDataName)
+        SetFilePath(strFilePath)
+        'defaults for the preview data frame
+        dataFrame.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
+        refreshFrameView()
     End Sub
 
     Public Sub SetName(strName As String)
@@ -47,6 +60,7 @@ Public Class dlgImportDataset
         strName = Replace(strName, "-", "")
         txtName.Text = strName
         ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
+        strDataName = strName
     End Sub
 
     Public Sub SetFilePath(strFilePath As String)
@@ -57,11 +71,13 @@ Public Class dlgImportDataset
 
     Private Sub txtName_Leave(sender As Object, e As EventArgs) Handles txtName.Leave
         SetName(txtName.Text)
+        refreshFrameView()
     End Sub
 
     Private Sub cboEncoding_Leave(sender As Object, e As EventArgs) Handles cboEncoding.Leave
         If cboEncoding.Text <> "Automatic" Then
             ucrBase.clsRsyntax.AddParameter("encoding", cboEncoding.Text)
+            refreshFrameView()
         End If
     End Sub
 
@@ -74,6 +90,7 @@ Public Class dlgImportDataset
                     ucrBase.clsRsyntax.AddParameter("row.names", "NULL")
             End Select
         End If
+        refreshFrameView()
     End Sub
 
     Private Sub cboSeparator_Leave(sender As Object, e As EventArgs) Handles cboSeparator.Leave
@@ -85,6 +102,7 @@ Public Class dlgImportDataset
             Case "Semicolon"
                 ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ";" & Chr(34))
         End Select
+        refreshFrameView()
     End Sub
 
     Private Sub cboDecimal_Leave(sender As Object, e As EventArgs) Handles cboDecimal.Leave
@@ -94,6 +112,7 @@ Public Class dlgImportDataset
             Case "Comma"
                 ucrBase.clsRsyntax.AddParameter("dec", Chr(34) & "," & Chr(34))
         End Select
+        refreshFrameView()
     End Sub
 
     Private Sub cboQuote_Leave(sender As Object, e As EventArgs) Handles cboQuote.Leave
@@ -105,6 +124,7 @@ Public Class dlgImportDataset
                     ucrBase.clsRsyntax.AddParameter("quote", Chr(34) & "\" & Chr(39) & Chr(34))
             End Select
         End If
+        refreshFrameView()
     End Sub
 
     Private Sub cboComment_Leave(sender As Object, e As EventArgs) Handles cboComment.Leave
@@ -113,7 +133,7 @@ Public Class dlgImportDataset
         Else
             ucrBase.clsRsyntax.AddParameter("comment.char", Chr(34) & cboComment.Text & Chr(34))
         End If
-
+        refreshFrameView()
     End Sub
 
     Private Sub txtNAStrings_Leave(sender As Object, e As EventArgs) Handles txtNAStrings.Leave
@@ -122,6 +142,35 @@ Public Class dlgImportDataset
         Else
             ucrBase.clsRsyntax.AddParameter("na.strings", Chr(34) & txtNAStrings.Text & Chr(34))
         End If
+        refreshFrameView()
     End Sub
 
+    Private Sub refreshFrameView()
+        'Needs discusion
+        ucrBase.clsRsyntax.SetAssignTo(strDataName, "")
+        frmMain.clsRLink.clsEngine.Evaluate(ucrBase.clsRsyntax.GetScript())
+        'ucrBase.clsRsyntax.SetAssignTo(strDataName, strDataName)
+        dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(txtName.Text).AsDataFrame
+        frmMain.clsGrids.FillSheet(dfTemp, txtName.Text, dataFrame)
+    End Sub
+
+    Private Sub rdoHeadingsYes_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHeadingsYes.CheckedChanged
+        If rdoHeadingsYes.Checked Then
+            ucrBase.clsRsyntax.AddParameter("header", "TRUE")
+        End If
+    End Sub
+
+    Private Sub rdoHeadingsYes_Leave(sender As Object, e As EventArgs) Handles rdoHeadingsYes.Leave
+        refreshFrameView()
+    End Sub
+
+    Private Sub rdoHeadingsNo_Leave(sender As Object, e As EventArgs) Handles rdoHeadingsNo.Leave
+        refreshFrameView()
+    End Sub
+
+    Private Sub rdoHeadingsNo_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHeadingsNo.CheckedChanged
+        If rdoHeadingsNo.Checked Then
+            ucrBase.clsRsyntax.AddParameter("header", "FALSE")
+        End If
+    End Sub
 End Class
