@@ -17,6 +17,9 @@
 
 Public Class RSyntax
     Public clsBaseFunction As New RFunction
+    Public clsBaseOperator As New ROperator
+    Public bUseBaseFunction As Boolean = False
+    Public bUseBaseOperator As Boolean = False
     Public iCallType As Integer = 0
     Public strScript As String
     Public i As Integer
@@ -27,29 +30,35 @@ Public Class RSyntax
             clsFunction = clsBaseFunction
         End If
         clsFunction.SetRCommand(strFunctionName)
+        bUseBaseFunction = True
+        bUseBaseOperator = False
     End Sub
 
-    Public Sub SetAssignTo(strAssignToName As String, Optional ByRef clsFunction As RFunction = Nothing, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "")
-        If clsFunction Is Nothing Then
-            clsFunction = clsBaseFunction
-        End If
-        clsFunction.SetAssignTo(strAssignToName, strTempDataframe, strTempColumn, strTempModel)
+    Public Sub SetOperation(strOp As String)
+        clsBaseOperator.SetOperation(strOp)
+        bUseBaseFunction = False
+        bUseBaseOperator = True
     End Sub
 
-    Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional ByRef clsRFunction As RFunction = Nothing)
-        Dim clsParam As New RParameter
+    Public Sub SetAssignTo(strAssignToName As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "")
+        If bUseBaseOperator Then
+            clsBaseOperator.SetAssignTo(strAssignToName)
+        End If
+        If bUseBaseFunction Then
+            clsBaseFunction.SetAssignTo(strAssignToName, strTempDataframe, strTempColumn, strTempModel)
+        End If
+    End Sub
 
-        If clsRFunction Is Nothing Then
-            clsRFunction = clsBaseFunction
-        End If
-        clsParam.SetArgumentName(strParameterName)
-        If Not strParameterValue = "" Then
-            clsParam.SetArgumentValue(strParameterValue)
-        End If
-        If Not clsRFunctionParameter Is Nothing Then
-            clsParam.SetArgumentFunction(clsRFunctionParameter)
-        End If
-        clsRFunction.AddParameter(clsParam)
+    Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing)
+        clsBaseFunction.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter)
+    End Sub
+
+    Public Sub AddParameter(clsRParam As RParameter)
+        clsBaseFunction.AddParameter(clsRParam)
+    End Sub
+
+    Public Sub SetOperatorParameter(bSetLeftNotRight As Boolean, Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
+        clsBaseOperator.SetParameter(bSetLeftNotRight, clsParam, clsRFunc, clsOp)
     End Sub
 
     Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)
@@ -71,18 +80,26 @@ Public Class RSyntax
 
     Public Function GetScript(Optional ByRef clsFunction As RFunction = Nothing, Optional bExcludeAssignedFunctionOutput As Boolean = True) As String
 
-        Dim strTemp As String
+        Dim strTemp As String = ""
 
         If IsNothing(clsFunction) Then
-            clsFunction = clsBaseFunction
-        End If
-
-        strTemp = clsFunction.ToScript(strScript)
-        If bExcludeAssignedFunctionOutput And clsFunction.bIsAssigned Then
-            Return strScript
+            If bUseBaseFunction Then
+                clsFunction = clsBaseFunction
+                strTemp = clsBaseFunction.ToScript(strScript)
+            End If
+            If bUseBaseOperator Then
+                strTemp = clsBaseOperator.ToScript(strScript)
+            End If
         Else
-            Return strScript & strTemp
+            strTemp = clsFunction.ToScript(strScript)
         End If
+        If bUseBaseFunction Then
+            If bExcludeAssignedFunctionOutput And clsFunction.bIsAssigned Then
+                Return strScript
+                Exit Function
+            End If
+        End If
+        Return strScript & strTemp
 
     End Function
 

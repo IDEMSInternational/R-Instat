@@ -18,7 +18,9 @@ Public Class RParameter
     Public strArgumentName As String
     Public strArgumentValue As String
     Public clsArgumentFunction As RFunction
+    Public clsArgumentOperator As ROperator
     Public bIsFunction As Boolean = False
+    Public bIsOperator As Boolean = False
 
     Public Sub SetArgumentName(strTemp As String)
         strArgumentName = strTemp
@@ -27,11 +29,19 @@ Public Class RParameter
     Public Sub SetArgumentValue(strTemp As String)
         strArgumentValue = strTemp
         bIsFunction = False
+        bIsOperator = False
     End Sub
 
     Public Sub SetArgumentFunction(clsFunc As RFunction)
         clsArgumentFunction = clsFunc
         bIsFunction = True
+        bIsOperator = False
+    End Sub
+
+    Public Sub SetArgumentOperator(clsROp As ROperator)
+        clsArgumentOperator = clsROp
+        bIsFunction = False
+        bIsOperator = True
     End Sub
 
     Public Function ToScript(ByRef strScript As String) As String
@@ -41,6 +51,8 @@ Public Class RParameter
         End If
         If bIsFunction Then
             strRet = strRet & clsArgumentFunction.ToScript(strScript)
+        ElseIf bIsOperator Then
+            strRet = strRet & clsArgumentOperator.ToScript(strScript)
         Else
             strRet = strRet & strArgumentValue
         End If

@@ -15,30 +15,91 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgBoxplot
+    Private clsRggplotFunction As New RFunction
+    Private clsRgeom_boxplotFunction As New RFunction
+    Private clsRaesFunction As New RFunction
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("boxplot")
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
+        clsRaesFunction.SetRCommand("aes")
+        clsRaesFunction.AddParameter("x", "") ' Empty string is default x value in case no factor is chosen
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        SetOperator()
         ucrBase.clsRsyntax.iCallType = 0
-        ucrReceiverDataToPlot.Selector = ucrSelectorBoxPlot
-        ucrReceiverDataToPlot.SetMeAsReceiver()
+        ucrYvariableReceiver.Selector = ucrSelectorBoxPlot
+        ucrYvariableReceiver.SetMeAsReceiver()
+        ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
+        ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
         autoTranslate(Me)
         ucrBase.OKEnabled(False)
     End Sub
 
-    Private Sub ucrReceiveBoxplotVariable_Enter(sender As Object, e As EventArgs)
-        ucrReceiverDataToPlot.SetMeAsReceiver()
+    Private Sub SetOperator()
+        Dim clsTempOp As New ROperator
+        Dim clsTempRFunc As New RFunction
+        If chkHorizontalBoxplot.Checked Then
+            clsTempOp.SetOperation("+")
+            clsTempOp.SetParameter(True, clsRFunc:=clsRggplotFunction)
+            clsTempOp.SetParameter(False, clsRFunc:=clsRgeom_boxplotFunction)
+            clsTempRFunc.SetRCommand("coord_flip")
+            ucrBase.clsRsyntax.SetOperatorParameter(True, clsOp:=clsTempOp)
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsTempRFunc)
+        Else
+            ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_boxplotFunction)
+        End If
     End Sub
-
-    Private Sub ucrReceiveBoxplotVariable_ValueChanged(sender As Object, e As EventArgs)
-        'TODO fix this
-        'If Not (ucrReceiverDataToPlot.lstSelectedVariables.SelectedItem = "") Then
-        '    ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverDataToPlot.GetVariables())
-        '    ucrBase.OKEnabled(True)
-        'Else
-        '    ucrBase.OKEnabled(False)
-        'End If
-    End Sub
-
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
+    End Sub
+
+    Private Sub ucrByFactorsReceiver_Enter(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.Enter
+        ucrByFactorsReceiver.SetMeAsReceiver()
+    End Sub
+
+    Private Sub ucrSelectorBoxPlot_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrSelectorBoxPlot.DataFrameChanged
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorBoxPlot.ucrAvailableDataFrames.clsCurrDataFrame)
+    End Sub
+
+    Private Sub ucrByFactorsReceiver_Leave(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.Leave
+        clsRaesFunction.AddParameter("x", ucrByFactorsReceiver.GetVariableNames(False))
+    End Sub
+
+    Private Sub chkHorizontalBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles chkHorizontalBoxplot.CheckedChanged
+        SetOperator()
+    End Sub
+
+    Private Sub chkNotchedBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles chkNotchedBoxplot.CheckedChanged
+        If chkNotchedBoxplot.Checked Then
+            clsRgeom_boxplotFunction.AddParameter("notch", "TRUE")
+        Else
+            clsRgeom_boxplotFunction.RemoveParameterByName("notch")
+        End If
+    End Sub
+
+    Private Sub chkVariableWidth_CheckedChanged(sender As Object, e As EventArgs) Handles chkVariableWidth.CheckedChanged
+        If chkVariableWidth.Checked Then
+            clsRgeom_boxplotFunction.AddParameter("varwidth", "TRUE")
+        Else
+            clsRgeom_boxplotFunction.RemoveParameterByName("varwidth")
+        End If
+    End Sub
+
+    Private Sub ucrYvariableReceiver_Leave(sender As Object, e As EventArgs) Handles ucrYvariableReceiver.Leave
+        If Not (ucrYvariableReceiver.GetVariableNames = "") Then
+            clsRaesFunction.AddParameter("y", ucrYvariableReceiver.GetVariableNames(False))
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrSecondFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.Leave
+        clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
+    End Sub
+
+    Private Sub ucrSecondFactorReceiver_Enter(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.Enter
+        ucrSecondFactorReceiver.SetMeAsReceiver()
     End Sub
 End Class

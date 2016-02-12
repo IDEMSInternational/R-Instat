@@ -23,7 +23,6 @@ Public Class ucrDistributions
     Public strDistributionType As String = ""
     Public clsCurrDistribution As New Distribution
     Public bDistributionsSet As Boolean = False
-    Public clsRSyntax As New RSyntax
     Public clsCurrRFunction As New RFunction
     Public lstFunctionParameters As New List(Of RParameter)
 
@@ -35,7 +34,7 @@ Public Class ucrDistributions
 
     Public Sub AddParameter(strArgumentName As String, strArgumentValue As String)
         Dim i As Integer
-        clsRSyntax.AddParameter(strArgumentName, strArgumentValue, clsRFunction:=clsCurrRFunction)
+        clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
         i = lstFunctionParameters.FindIndex(Function(x) x.strArgumentName.Equals(strArgumentName))
         If i = -1 Then
             lstFunctionParameters.Add(clsCurrRFunction.clsParameters.Last)
@@ -267,15 +266,15 @@ Public Class ucrDistributions
         clsCurrDistribution = lstCurrentDistributions(cboDistributions.SelectedIndex)
         Select Case strDistributionType
             Case "RFunctions"
-                clsRSyntax.SetFunction(clsCurrDistribution.strRFunctionName, clsCurrRFunction)
+                clsCurrRFunction.SetRCommand(clsCurrDistribution.strRFunctionName)
             Case "PFunctions"
-                clsRSyntax.SetFunction(clsCurrDistribution.strPFunctionName, clsCurrRFunction)
+                clsCurrRFunction.SetRCommand(clsCurrDistribution.strPFunctionName)
             Case "DFunctions"
-                clsRSyntax.SetFunction(clsCurrDistribution.strDFunctionName, clsCurrRFunction)
+                clsCurrRFunction.SetRCommand(clsCurrDistribution.strDFunctionName)
             Case "QFunctions"
-                clsRSyntax.SetFunction(clsCurrDistribution.strQFunctionName, clsCurrRFunction)
+                clsCurrRFunction.SetRCommand(clsCurrDistribution.strQFunctionName)
             Case "GLMFunctions"
-                clsRSyntax.SetFunction(clsCurrDistribution.strGLMFunctionName, clsCurrRFunction)
+                clsCurrRFunction.SetRCommand(clsCurrDistribution.strGLMFunctionName)
         End Select
         RaiseEvent cboDistributionsIndexChanged(sender, e)
     End Sub
