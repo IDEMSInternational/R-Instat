@@ -23,18 +23,18 @@ Partial Class dlgPolynomials
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.rdoSimple = New System.Windows.Forms.RadioButton()
-        Me.lblOrder = New System.Windows.Forms.Label()
+        Me.lblDegree = New System.Windows.Forms.Label()
         Me.grpType = New System.Windows.Forms.GroupBox()
         Me.rdoOrthogonal = New System.Windows.Forms.RadioButton()
         Me.rdoCentered = New System.Windows.Forms.RadioButton()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
         Me.lblSelected = New System.Windows.Forms.Label()
-        Me.ucrDataFrame = New instat.ucrDataFrame()
+        Me.nudDegree = New System.Windows.Forms.NumericUpDown()
         Me.ucrReceiverPolynomial = New instat.ucrReceiverSingle()
-        Me.txtOrder = New System.Windows.Forms.TextBox()
+        Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpType.SuspendLayout()
+        CType(Me.nudDegree, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'rdoSimple
@@ -52,15 +52,15 @@ Partial Class dlgPolynomials
         Me.rdoSimple.Text = "simple"
         Me.rdoSimple.UseVisualStyleBackColor = True
         '
-        'lblOrder
+        'lblDegree
         '
-        Me.lblOrder.AutoSize = True
-        Me.lblOrder.Location = New System.Drawing.Point(270, 138)
-        Me.lblOrder.Name = "lblOrder"
-        Me.lblOrder.Size = New System.Drawing.Size(33, 13)
-        Me.lblOrder.TabIndex = 6
-        Me.lblOrder.Tag = "Order"
-        Me.lblOrder.Text = "Order"
+        Me.lblDegree.AutoSize = True
+        Me.lblDegree.Location = New System.Drawing.Point(270, 138)
+        Me.lblDegree.Name = "lblDegree"
+        Me.lblDegree.Size = New System.Drawing.Size(42, 13)
+        Me.lblDegree.TabIndex = 6
+        Me.lblDegree.Tag = "Degree"
+        Me.lblDegree.Text = "Degree"
         '
         'grpType
         '
@@ -101,28 +101,6 @@ Partial Class dlgPolynomials
         Me.rdoCentered.Text = "centered"
         Me.rdoCentered.UseVisualStyleBackColor = True
         '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(12, 65)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(205, 127)
-        Me.ucrAddRemove.TabIndex = 8
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 311)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(403, 53)
-        Me.ucrBase.TabIndex = 11
-        '
-        'ucrNewColumnNameSelector
-        '
-        Me.ucrNewColumnNameSelector.Location = New System.Drawing.Point(12, 270)
-        Me.ucrNewColumnNameSelector.Name = "ucrNewColumnNameSelector"
-        Me.ucrNewColumnNameSelector.Size = New System.Drawing.Size(367, 35)
-        Me.ucrNewColumnNameSelector.TabIndex = 12
-        Me.ucrNewColumnNameSelector.ucrDataFrameSelector = Nothing
-        '
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
@@ -133,12 +111,15 @@ Partial Class dlgPolynomials
         Me.lblSelected.Tag = "Selected"
         Me.lblSelected.Text = "Selected"
         '
-        'ucrDataFrame
+        'nudDegree
         '
-        Me.ucrDataFrame.Location = New System.Drawing.Point(13, 13)
-        Me.ucrDataFrame.Name = "ucrDataFrame"
-        Me.ucrDataFrame.Size = New System.Drawing.Size(127, 41)
-        Me.ucrDataFrame.TabIndex = 15
+        Me.nudDegree.Location = New System.Drawing.Point(335, 131)
+        Me.nudDegree.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudDegree.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudDegree.Name = "nudDegree"
+        Me.nudDegree.Size = New System.Drawing.Size(44, 20)
+        Me.nudDegree.TabIndex = 18
+        Me.nudDegree.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'ucrReceiverPolynomial
         '
@@ -147,49 +128,62 @@ Partial Class dlgPolynomials
         Me.ucrReceiverPolynomial.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverPolynomial.TabIndex = 16
         '
-        'txtOrder
+        'ucrNewColumnNameSelector
         '
-        Me.txtOrder.Location = New System.Drawing.Point(339, 131)
-        Me.txtOrder.Name = "txtOrder"
-        Me.txtOrder.Size = New System.Drawing.Size(40, 20)
-        Me.txtOrder.TabIndex = 17
-        Me.txtOrder.Tag = "Order"
+        Me.ucrNewColumnNameSelector.Location = New System.Drawing.Point(12, 270)
+        Me.ucrNewColumnNameSelector.Name = "ucrNewColumnNameSelector"
+        Me.ucrNewColumnNameSelector.Size = New System.Drawing.Size(367, 35)
+        Me.ucrNewColumnNameSelector.TabIndex = 12
+        Me.ucrNewColumnNameSelector.ucrDataFrameSelector = Nothing
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 311)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(403, 53)
+        Me.ucrBase.TabIndex = 11
+        '
+        'ucrSelectorDataFrameAddRemove
+        '
+        Me.ucrSelectorDataFrameAddRemove.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorDataFrameAddRemove.Name = "ucrSelectorDataFrameAddRemove"
+        Me.ucrSelectorDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorDataFrameAddRemove.TabIndex = 19
         '
         'dlgPolynomials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(427, 376)
-        Me.Controls.Add(Me.txtOrder)
+        Me.Controls.Add(Me.ucrSelectorDataFrameAddRemove)
+        Me.Controls.Add(Me.nudDegree)
         Me.Controls.Add(Me.ucrReceiverPolynomial)
-        Me.Controls.Add(Me.ucrDataFrame)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrNewColumnNameSelector)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.grpType)
-        Me.Controls.Add(Me.lblOrder)
+        Me.Controls.Add(Me.lblDegree)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgPolynomials"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Generate_polynomial_terms"
-        Me.Text = "Generate polynomial terms"
+        Me.Tag = "Polynomial"
+        Me.Text = "Polynomial "
         Me.grpType.ResumeLayout(False)
         Me.grpType.PerformLayout()
+        CType(Me.nudDegree, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents rdoSimple As RadioButton
-    Friend WithEvents lblOrder As Label
+    Friend WithEvents lblDegree As Label
     Friend WithEvents grpType As GroupBox
     Friend WithEvents rdoOrthogonal As RadioButton
     Friend WithEvents rdoCentered As RadioButton
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrNewColumnNameSelector As ucrNewColumnName
     Friend WithEvents lblSelected As Label
-    Friend WithEvents ucrDataFrame As ucrDataFrame
     Friend WithEvents ucrReceiverPolynomial As ucrReceiverSingle
-    Friend WithEvents txtOrder As TextBox
+    Friend WithEvents nudDegree As NumericUpDown
+    Friend WithEvents ucrSelectorDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
 End Class
