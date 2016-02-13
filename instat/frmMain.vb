@@ -585,8 +585,8 @@ Public Class frmMain
                     If Not clsRLink.bInstatObjectExists Then
                         clsRLink.CreateNewInstatObject()
                     End If
-                    dlgImportDataset.strDataName = pair.Key
-                    dlgImportDataset.strFilePath = pair.Value
+                    dlgImportDataset.SetName(pair.Key)
+                    dlgImportDataset.SetFilePath(pair.Value)
                     dlgImportDataset.ShowDialog()
             End Select
         End If
