@@ -240,6 +240,12 @@
     <Compile Include="dlgOneWayANOVA.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPrintPreviewOptions.Designer.vb">
+      <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPrintPreviewOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgOptions.Designer.vb">
       <DependentUpon>sdgOptions.vb</DependentUpon>
     </Compile>
@@ -1287,6 +1293,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPrintPreviewOptions.fr-FR.resx">
+      <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPrintPreviewOptions.resx">
+      <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPrintPreviewOptions.sw-KE.resx">
+      <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOptions.fr-FR.resx">
       <DependentUpon>sdgOptions.vb</DependentUpon>
