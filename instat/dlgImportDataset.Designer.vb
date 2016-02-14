@@ -44,8 +44,8 @@ Partial Class dlgImportDataset
         Me.rdoHeadingsYes = New System.Windows.Forms.RadioButton()
         Me.rdoHeadingsNo = New System.Windows.Forms.RadioButton()
         Me.txtInputFile = New System.Windows.Forms.TextBox()
-        Me.txtDataFrame = New System.Windows.Forms.TextBox()
         Me.chlStringsAsFactors = New System.Windows.Forms.CheckBox()
+        Me.dataFrame = New unvell.ReoGrid.ReoGridControl()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
@@ -259,14 +259,6 @@ Partial Class dlgImportDataset
         Me.txtInputFile.Size = New System.Drawing.Size(422, 205)
         Me.txtInputFile.TabIndex = 22
         '
-        'txtDataFrame
-        '
-        Me.txtDataFrame.Location = New System.Drawing.Point(265, 255)
-        Me.txtDataFrame.Multiline = True
-        Me.txtDataFrame.Name = "txtDataFrame"
-        Me.txtDataFrame.Size = New System.Drawing.Size(422, 178)
-        Me.txtDataFrame.TabIndex = 23
-        '
         'chlStringsAsFactors
         '
         Me.chlStringsAsFactors.AutoSize = True
@@ -277,6 +269,23 @@ Partial Class dlgImportDataset
         Me.chlStringsAsFactors.Tag = "Strings_as_factors"
         Me.chlStringsAsFactors.Text = "Strings as factors"
         Me.chlStringsAsFactors.UseVisualStyleBackColor = True
+        '
+        'dataFrame
+        '
+        Me.dataFrame.BackColor = System.Drawing.Color.White
+        Me.dataFrame.ColumnHeaderContextMenuStrip = Nothing
+        Me.dataFrame.LeadHeaderContextMenuStrip = Nothing
+        Me.dataFrame.Location = New System.Drawing.Point(265, 256)
+        Me.dataFrame.Name = "dataFrame"
+        Me.dataFrame.Readonly = True
+        Me.dataFrame.RowHeaderContextMenuStrip = Nothing
+        Me.dataFrame.Script = Nothing
+        Me.dataFrame.SheetTabContextMenuStrip = Nothing
+        Me.dataFrame.SheetTabControlNewButtonVisible = False
+        Me.dataFrame.SheetTabControlWidth = 60
+        Me.dataFrame.SheetTabNewButtonVisible = False
+        Me.dataFrame.Size = New System.Drawing.Size(422, 174)
+        Me.dataFrame.TabIndex = 28
         '
         'ucrBase
         '
@@ -290,9 +299,9 @@ Partial Class dlgImportDataset
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(696, 501)
+        Me.Controls.Add(Me.dataFrame)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.chlStringsAsFactors)
-        Me.Controls.Add(Me.txtDataFrame)
         Me.Controls.Add(Me.txtInputFile)
         Me.Controls.Add(Me.rdoHeadingsNo)
         Me.Controls.Add(Me.rdoHeadingsYes)
@@ -347,7 +356,7 @@ Partial Class dlgImportDataset
     Friend WithEvents rdoHeadingsYes As RadioButton
     Friend WithEvents rdoHeadingsNo As RadioButton
     Friend WithEvents txtInputFile As TextBox
-    Friend WithEvents txtDataFrame As TextBox
     Friend WithEvents chlStringsAsFactors As CheckBox
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents dataFrame As unvell.ReoGrid.ReoGridControl
 End Class
