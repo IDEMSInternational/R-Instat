@@ -483,6 +483,22 @@ data_obj$methods(get_column_factor_levels = function(col_name = "") {
 }
 )
 
+data_obj$methods(sort_dataframe = function(col_names = c(), decreasing = TRUE, na.last = TRUE) {
+  string = list()
+  for(col_name in col_names){
+    if(!(col_name %in% names(data))){
+      stop(col_name, " is not a column in ", get_metadata(data_name_label))
+    }
+  }
+  if(length(col_names)==1){
+    data <<- data[with(data, order(eval(parse(text = col_names)), decreasing = decreasing, na.last = na.last)), ]
+  }else{
+    data <<-data[ do.call(order, c(as.list(data[,col_names]), decreasing = decreasing, na.last = na.last)), ]
+  }
+  .self$set_data_changed(TRUE)
+}
+)
+
 #Labels for strings which will be added to logs
 Set_property="Set"
 Added_col="Added column"
