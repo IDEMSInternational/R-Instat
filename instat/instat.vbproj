@@ -1064,6 +1064,24 @@
     <Compile Include="ucrDistributionsWithParameters.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrFactor.Designer.vb">
+      <DependentUpon>ucrFactor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFactor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrFactorMultiple.Designer.vb">
+      <DependentUpon>ucrFactorMultiple.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFactorMultiple.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrFactorSingle.Designer.vb">
+      <DependentUpon>ucrFactorSingle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFactorSingle.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMultipleNumeric.Designer.vb">
       <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
     </Compile>
