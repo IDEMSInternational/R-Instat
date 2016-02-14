@@ -23,8 +23,6 @@ Partial Class dlgOneWayANOVA
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDataSelector = New instat.ucrDataFrame()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrYVariate = New instat.ucrReceiverSingle()
         Me.ucrFactor = New instat.ucrReceiverSingle()
         Me.lblYVariate = New System.Windows.Forms.Label()
@@ -34,6 +32,7 @@ Partial Class dlgOneWayANOVA
         Me.rdoResiduals = New System.Windows.Forms.RadioButton()
         Me.rdoMeans = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
+        Me.ucrAddRemoveDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpPlots.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -44,30 +43,16 @@ Partial Class dlgOneWayANOVA
         Me.ucrBase.Size = New System.Drawing.Size(410, 57)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrDataSelector
-        '
-        Me.ucrDataSelector.Location = New System.Drawing.Point(8, 11)
-        Me.ucrDataSelector.Name = "ucrDataSelector"
-        Me.ucrDataSelector.Size = New System.Drawing.Size(127, 41)
-        Me.ucrDataSelector.TabIndex = 1
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(4, 61)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
-        Me.ucrAddRemove.TabIndex = 2
-        '
         'ucrYVariate
         '
-        Me.ucrYVariate.Location = New System.Drawing.Point(265, 88)
+        Me.ucrYVariate.Location = New System.Drawing.Point(265, 112)
         Me.ucrYVariate.Name = "ucrYVariate"
         Me.ucrYVariate.Size = New System.Drawing.Size(106, 26)
         Me.ucrYVariate.TabIndex = 3
         '
         'ucrFactor
         '
-        Me.ucrFactor.Location = New System.Drawing.Point(265, 136)
+        Me.ucrFactor.Location = New System.Drawing.Point(265, 160)
         Me.ucrFactor.Name = "ucrFactor"
         Me.ucrFactor.Size = New System.Drawing.Size(106, 26)
         Me.ucrFactor.TabIndex = 4
@@ -75,7 +60,7 @@ Partial Class dlgOneWayANOVA
         'lblYVariate
         '
         Me.lblYVariate.AutoSize = True
-        Me.lblYVariate.Location = New System.Drawing.Point(271, 74)
+        Me.lblYVariate.Location = New System.Drawing.Point(271, 98)
         Me.lblYVariate.Name = "lblYVariate"
         Me.lblYVariate.Size = New System.Drawing.Size(49, 13)
         Me.lblYVariate.TabIndex = 5
@@ -85,7 +70,7 @@ Partial Class dlgOneWayANOVA
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(272, 124)
+        Me.lblFactor.Location = New System.Drawing.Point(272, 148)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(37, 13)
         Me.lblFactor.TabIndex = 6
@@ -98,7 +83,7 @@ Partial Class dlgOneWayANOVA
         Me.grpPlots.Controls.Add(Me.rdoResiduals)
         Me.grpPlots.Controls.Add(Me.rdoMeans)
         Me.grpPlots.Controls.Add(Me.rdoNone)
-        Me.grpPlots.Location = New System.Drawing.Point(13, 194)
+        Me.grpPlots.Location = New System.Drawing.Point(11, 216)
         Me.grpPlots.Name = "grpPlots"
         Me.grpPlots.Size = New System.Drawing.Size(231, 76)
         Me.grpPlots.TabIndex = 7
@@ -154,18 +139,24 @@ Partial Class dlgOneWayANOVA
         Me.rdoNone.Text = "None"
         Me.rdoNone.UseVisualStyleBackColor = True
         '
+        'ucrAddRemoveDataFrame
+        '
+        Me.ucrAddRemoveDataFrame.Location = New System.Drawing.Point(4, 20)
+        Me.ucrAddRemoveDataFrame.Name = "ucrAddRemoveDataFrame"
+        Me.ucrAddRemoveDataFrame.Size = New System.Drawing.Size(242, 179)
+        Me.ucrAddRemoveDataFrame.TabIndex = 8
+        '
         'dlgOneWayANOVA
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 371)
+        Me.Controls.Add(Me.ucrAddRemoveDataFrame)
         Me.Controls.Add(Me.grpPlots)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblYVariate)
         Me.Controls.Add(Me.ucrFactor)
         Me.Controls.Add(Me.ucrYVariate)
-        Me.Controls.Add(Me.ucrAddRemove)
-        Me.Controls.Add(Me.ucrDataSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgOneWayANOVA"
@@ -179,8 +170,6 @@ Partial Class dlgOneWayANOVA
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrDataSelector As ucrDataFrame
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrYVariate As ucrReceiverSingle
     Friend WithEvents ucrFactor As ucrReceiverSingle
     Friend WithEvents lblYVariate As Label
@@ -190,4 +179,5 @@ Partial Class dlgOneWayANOVA
     Friend WithEvents rdoMeans As RadioButton
     Friend WithEvents rdoNone As RadioButton
     Friend WithEvents rdoANOVA As RadioButton
+    Friend WithEvents ucrAddRemoveDataFrame As ucrSelectorByDataFrameAddRemove
 End Class
