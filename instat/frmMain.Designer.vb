@@ -582,7 +582,7 @@ Partial Class frmMain
         Me.mnuGraphicsInventory.Name = "mnuGraphicsInventory"
         Me.mnuGraphicsInventory.Size = New System.Drawing.Size(170, 22)
         Me.mnuGraphicsInventory.Tag = "Inventory_plot"
-        Me.mnuGraphicsInventory.Text = "Inventory Plot"
+        Me.mnuGraphicsInventory.Text = "Inventory Plot..."
         '
         'mnuGraphicsGraphicsOptions
         '
@@ -595,30 +595,30 @@ Partial Class frmMain
         'mnuGraphicsGraphcsOptionsLayers
         '
         Me.mnuGraphicsGraphcsOptionsLayers.Name = "mnuGraphicsGraphcsOptionsLayers"
-        Me.mnuGraphicsGraphcsOptionsLayers.Size = New System.Drawing.Size(116, 22)
+        Me.mnuGraphicsGraphcsOptionsLayers.Size = New System.Drawing.Size(152, 22)
         Me.mnuGraphicsGraphcsOptionsLayers.Tag = "Layers"
-        Me.mnuGraphicsGraphcsOptionsLayers.Text = "Layers"
+        Me.mnuGraphicsGraphcsOptionsLayers.Text = "Layers..."
         '
         'mnuGraphicsGraphcsOptionsAxes
         '
         Me.mnuGraphicsGraphcsOptionsAxes.Name = "mnuGraphicsGraphcsOptionsAxes"
-        Me.mnuGraphicsGraphcsOptionsAxes.Size = New System.Drawing.Size(116, 22)
+        Me.mnuGraphicsGraphcsOptionsAxes.Size = New System.Drawing.Size(152, 22)
         Me.mnuGraphicsGraphcsOptionsAxes.Tag = "Axes"
-        Me.mnuGraphicsGraphcsOptionsAxes.Text = "Axes"
+        Me.mnuGraphicsGraphcsOptionsAxes.Text = "Axes..."
         '
         'mnuGraphicsGraphcsOptionsThemes
         '
         Me.mnuGraphicsGraphcsOptionsThemes.Name = "mnuGraphicsGraphcsOptionsThemes"
-        Me.mnuGraphicsGraphcsOptionsThemes.Size = New System.Drawing.Size(116, 22)
+        Me.mnuGraphicsGraphcsOptionsThemes.Size = New System.Drawing.Size(152, 22)
         Me.mnuGraphicsGraphcsOptionsThemes.Tag = "Themes"
-        Me.mnuGraphicsGraphcsOptionsThemes.Text = "Themes"
+        Me.mnuGraphicsGraphcsOptionsThemes.Text = "Themes..."
         '
         'mnuGraphicsGraphcsOptionsFacets
         '
         Me.mnuGraphicsGraphcsOptionsFacets.Name = "mnuGraphicsGraphcsOptionsFacets"
-        Me.mnuGraphicsGraphcsOptionsFacets.Size = New System.Drawing.Size(116, 22)
+        Me.mnuGraphicsGraphcsOptionsFacets.Size = New System.Drawing.Size(152, 22)
         Me.mnuGraphicsGraphcsOptionsFacets.Tag = "Facets"
-        Me.mnuGraphicsGraphcsOptionsFacets.Text = "Facets"
+        Me.mnuGraphicsGraphcsOptionsFacets.Text = "Facets..."
         '
         'mnuStatistics
         '
