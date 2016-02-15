@@ -51,6 +51,7 @@ Partial Class dlgImportDataset
         Me.lblLines = New System.Windows.Forms.Label()
         Me.numLines = New System.Windows.Forms.NumericUpDown()
         Me.numSteps = New System.Windows.Forms.NumericUpDown()
+        Me.cmdOpenDataSet = New System.Windows.Forms.Button()
         CType(Me.numLines, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numSteps, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -58,7 +59,7 @@ Partial Class dlgImportDataset
         'lblInputFile
         '
         Me.lblInputFile.AutoSize = True
-        Me.lblInputFile.Location = New System.Drawing.Point(262, 9)
+        Me.lblInputFile.Location = New System.Drawing.Point(309, 9)
         Me.lblInputFile.Name = "lblInputFile"
         Me.lblInputFile.Size = New System.Drawing.Size(50, 13)
         Me.lblInputFile.TabIndex = 0
@@ -68,7 +69,7 @@ Partial Class dlgImportDataset
         'lblDataFrame
         '
         Me.lblDataFrame.AutoSize = True
-        Me.lblDataFrame.Location = New System.Drawing.Point(262, 239)
+        Me.lblDataFrame.Location = New System.Drawing.Point(309, 239)
         Me.lblDataFrame.Name = "lblDataFrame"
         Me.lblDataFrame.Size = New System.Drawing.Size(62, 13)
         Me.lblDataFrame.TabIndex = 1
@@ -335,11 +336,21 @@ Partial Class dlgImportDataset
         Me.numSteps.Size = New System.Drawing.Size(43, 20)
         Me.numSteps.TabIndex = 32
         '
+        'cmdOpenDataSet
+        '
+        Me.cmdOpenDataSet.Location = New System.Drawing.Point(223, 22)
+        Me.cmdOpenDataSet.Name = "cmdOpenDataSet"
+        Me.cmdOpenDataSet.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOpenDataSet.TabIndex = 33
+        Me.cmdOpenDataSet.Text = "Open file"
+        Me.cmdOpenDataSet.UseVisualStyleBackColor = True
+        '
         'dlgImportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 501)
+        Me.Controls.Add(Me.cmdOpenDataSet)
         Me.Controls.Add(Me.numSteps)
         Me.Controls.Add(Me.numLines)
         Me.Controls.Add(Me.lblLines)
@@ -410,4 +421,5 @@ Partial Class dlgImportDataset
     Friend WithEvents lblLines As Label
     Friend WithEvents numLines As NumericUpDown
     Friend WithEvents numSteps As NumericUpDown
+    Friend WithEvents cmdOpenDataSet As Button
 End Class

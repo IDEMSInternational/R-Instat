@@ -246,4 +246,8 @@ Public Class dlgImportDataset
             refreshFrameView()
         End If
     End Sub
+
+    Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
+        showOpenDialog()
+    End Sub
 End Class
