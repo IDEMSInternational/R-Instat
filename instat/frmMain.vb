@@ -336,11 +336,11 @@ Public Class frmMain
 
 
 
-    Private Sub StacksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeStack.Click
+    Private Sub mnuManageReshapeStack_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeStack.Click
         dlgStack.ShowDialog()
     End Sub
 
-    Private Sub UnstackToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeUnstack.Click
+    Private Sub mnuManageReshapeUnstack_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeUnstack.Click
         dlgUnstack.ShowDialog()
     End Sub
 
@@ -361,7 +361,7 @@ Public Class frmMain
     End Sub
 
     Private Sub ViewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataView.Click
-        'dlgView.ShowDialog()
+        dlgView.ShowDialog()
     End Sub
 
     Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -650,8 +650,8 @@ Public Class frmMain
         dlgSubset.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataMerge_Click(sender As Object, e As EventArgs) Handles mnuManageDataName.Click
-        dlgMerge.ShowDialog()
+    Private Sub mnuManageDataName_Click(sender As Object, e As EventArgs) Handles mnuManageDataName.Click
+        dlgName.ShowDialog()
     End Sub
 
     Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuWindowVariable.Click
@@ -780,4 +780,10 @@ Public Class frmMain
         '    clsRLink.RunScript("write.csv(x=" & frmEditor.grdData.CurrentWorksheet.Name & ",file=" & dlgSave.FileName.Replace("\", "/") & ")")
         'End If
     End Sub
+
+    Private Sub mnuManageDataConvertTo_Click(sender As Object, e As EventArgs) Handles mnuManageDataConvertTo.Click
+        dlgConvertTo.ShowDialog()
+    End Sub
+
+
 End Class
