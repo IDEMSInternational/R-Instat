@@ -14,28 +14,49 @@
 Imports instat.Translations
 
 Public Class dlgPolynomials
+    Public clsCentredOptionFunc As New RFunction
+    Dim dataf
     Private Sub dlgPolynomials_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        defaultSettings()
+        ucrBase.clsRsyntax.SetFunction("poly")
+        ucrReceiverPolynomial.Selector = ucrSelectorDataFrameAddRemove
+        ucrReceiverPolynomial.SetMeAsReceiver()
+        nudDegree.Text = "1"
+        ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Text)
+
+        ucrNewColumnNameSelector.SetDataFrameSelector(ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames)
+        ucrNewColumnNameSelector.SetPrefix("Polynomial")
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+
+        clsCentredOptionFunc.SetRCommand("scale")
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables(), clsRFunction:=clsCentredOptionFunc)
+        ucrBase.clsRsyntax.AddParameter("raw", "TRUE", clsRFunction:=clsCentredOptionFunc)
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsCentredOptionFunc)
+
     End Sub
 
-    Private Sub rdoOrthogonal_CheckedChanged(sender As Object, e As EventArgs) Handles rdoOrthogonal.CheckedChanged
-        If rdoOrthogonal.Checked = True Then
-            chkWeights.Enabled = True
-        ElseIf rdoOrthogonal.Checked = False
-            chkWeights.Enabled = False
+
+
+    Private Sub ucrReceiverPolynomial_Leave(sender As Object, e As EventArgs) Handles ucrReceiverPolynomial.Leave
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables(), clsRFunction:=clsCentredOptionFunc)
+    End Sub
+
+    Private Sub grpType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSimple.CheckedChanged, rdoCentered.CheckedChanged, rdoOrthogonal.CheckedChanged
+        If rdoSimple.Checked Then
+            ucrBase.clsRsyntax.AddParameter("raw", "TRUE")
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
+        ElseIf rdoOrthogonal.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("raw", "FALSE")
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("raw")
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables(), clsRFunction:=clsCentredOptionFunc)
         End If
-    End Sub
-
-    Private Sub defaultSettings()
-        rdoSimple.Checked = True
-        nmdOrder.Value = 2
-        txtInto.Text = ""
-        chkWeights.Checked = False
 
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        defaultSettings()
+    Private Sub nudDegree_Leave(sender As Object, e As EventArgs) Handles nudDegree.Leave
+        ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Text)
     End Sub
 End Class
