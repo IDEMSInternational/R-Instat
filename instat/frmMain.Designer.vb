@@ -350,21 +350,21 @@ Partial Class frmMain
         'mnuStatisticsAnalysisOfVarianceOneWay
         '
         Me.mnuStatisticsAnalysisOfVarianceOneWay.Name = "mnuStatisticsAnalysisOfVarianceOneWay"
-        Me.mnuStatisticsAnalysisOfVarianceOneWay.Size = New System.Drawing.Size(144, 22)
+        Me.mnuStatisticsAnalysisOfVarianceOneWay.Size = New System.Drawing.Size(152, 22)
         Me.mnuStatisticsAnalysisOfVarianceOneWay.Tag = "One_Way"
         Me.mnuStatisticsAnalysisOfVarianceOneWay.Text = "One-way..."
         '
         'mnuStatisticsAnalysisOfVarianceOrthogonal
         '
         Me.mnuStatisticsAnalysisOfVarianceOrthogonal.Name = "mnuStatisticsAnalysisOfVarianceOrthogonal"
-        Me.mnuStatisticsAnalysisOfVarianceOrthogonal.Size = New System.Drawing.Size(144, 22)
+        Me.mnuStatisticsAnalysisOfVarianceOrthogonal.Size = New System.Drawing.Size(152, 22)
         Me.mnuStatisticsAnalysisOfVarianceOrthogonal.Tag = "Orthogonal"
         Me.mnuStatisticsAnalysisOfVarianceOrthogonal.Text = "Orthogonal..."
         '
         'mnuStatisticsAnalysisOfVarianceGeneral
         '
         Me.mnuStatisticsAnalysisOfVarianceGeneral.Name = "mnuStatisticsAnalysisOfVarianceGeneral"
-        Me.mnuStatisticsAnalysisOfVarianceGeneral.Size = New System.Drawing.Size(144, 22)
+        Me.mnuStatisticsAnalysisOfVarianceGeneral.Size = New System.Drawing.Size(152, 22)
         Me.mnuStatisticsAnalysisOfVarianceGeneral.Tag = "General"
         Me.mnuStatisticsAnalysisOfVarianceGeneral.Text = "General..."
         '
@@ -379,49 +379,49 @@ Partial Class frmMain
         'mnuStatisticsRegressionSimple
         '
         Me.mnuStatisticsRegressionSimple.Name = "mnuStatisticsRegressionSimple"
-        Me.mnuStatisticsRegressionSimple.Size = New System.Drawing.Size(185, 22)
+        Me.mnuStatisticsRegressionSimple.Size = New System.Drawing.Size(188, 22)
         Me.mnuStatisticsRegressionSimple.Tag = "Simple"
         Me.mnuStatisticsRegressionSimple.Text = "Simple..."
         '
         'mnuStatisticsRegressionSimpleWithGroups
         '
         Me.mnuStatisticsRegressionSimpleWithGroups.Name = "mnuStatisticsRegressionSimpleWithGroups"
-        Me.mnuStatisticsRegressionSimpleWithGroups.Size = New System.Drawing.Size(185, 22)
+        Me.mnuStatisticsRegressionSimpleWithGroups.Size = New System.Drawing.Size(188, 22)
         Me.mnuStatisticsRegressionSimpleWithGroups.Tag = "Simple_with_groups"
-        Me.mnuStatisticsRegressionSimpleWithGroups.Text = "Simple with groups..."
+        Me.mnuStatisticsRegressionSimpleWithGroups.Text = "Simple With Groups..."
         '
         'mnuStatisticsRegressionGeneral
         '
         Me.mnuStatisticsRegressionGeneral.Name = "mnuStatisticsRegressionGeneral"
-        Me.mnuStatisticsRegressionGeneral.Size = New System.Drawing.Size(185, 22)
+        Me.mnuStatisticsRegressionGeneral.Size = New System.Drawing.Size(188, 22)
         Me.mnuStatisticsRegressionGeneral.Tag = "General"
         Me.mnuStatisticsRegressionGeneral.Text = "General..."
         '
         'mnuStatisticsRegressionGeneralized
         '
         Me.mnuStatisticsRegressionGeneralized.Name = "mnuStatisticsRegressionGeneralized"
-        Me.mnuStatisticsRegressionGeneralized.Size = New System.Drawing.Size(185, 22)
+        Me.mnuStatisticsRegressionGeneralized.Size = New System.Drawing.Size(188, 22)
         Me.mnuStatisticsRegressionGeneralized.Tag = "Generalized"
         Me.mnuStatisticsRegressionGeneralized.Text = "Generalized..."
         '
         'mnuStatisticsRegressionLogistic
         '
         Me.mnuStatisticsRegressionLogistic.Name = "mnuStatisticsRegressionLogistic"
-        Me.mnuStatisticsRegressionLogistic.Size = New System.Drawing.Size(185, 22)
+        Me.mnuStatisticsRegressionLogistic.Size = New System.Drawing.Size(188, 22)
         Me.mnuStatisticsRegressionLogistic.Tag = "Logistic"
         Me.mnuStatisticsRegressionLogistic.Text = "Logistic..."
         '
         'mnuStatisticsRegressionLogLinear
         '
         Me.mnuStatisticsRegressionLogLinear.Name = "mnuStatisticsRegressionLogLinear"
-        Me.mnuStatisticsRegressionLogLinear.Size = New System.Drawing.Size(185, 22)
+        Me.mnuStatisticsRegressionLogLinear.Size = New System.Drawing.Size(188, 22)
         Me.mnuStatisticsRegressionLogLinear.Tag = "Log_linear"
         Me.mnuStatisticsRegressionLogLinear.Text = "Log Linear..."
         '
         'mnuStatisticsRegressionMultinomial
         '
         Me.mnuStatisticsRegressionMultinomial.Name = "mnuStatisticsRegressionMultinomial"
-        Me.mnuStatisticsRegressionMultinomial.Size = New System.Drawing.Size(185, 22)
+        Me.mnuStatisticsRegressionMultinomial.Size = New System.Drawing.Size(188, 22)
         Me.mnuStatisticsRegressionMultinomial.Tag = "Multinomial"
         Me.mnuStatisticsRegressionMultinomial.Text = "Multinomial..."
         '
@@ -598,28 +598,28 @@ Partial Class frmMain
         'mnuGraphicsGraphcsOptionsLayers
         '
         Me.mnuGraphicsGraphcsOptionsLayers.Name = "mnuGraphicsGraphcsOptionsLayers"
-        Me.mnuGraphicsGraphcsOptionsLayers.Size = New System.Drawing.Size(125, 22)
+        Me.mnuGraphicsGraphcsOptionsLayers.Size = New System.Drawing.Size(152, 22)
         Me.mnuGraphicsGraphcsOptionsLayers.Tag = "Layers"
         Me.mnuGraphicsGraphcsOptionsLayers.Text = "Layers..."
         '
         'mnuGraphicsGraphcsOptionsAxes
         '
         Me.mnuGraphicsGraphcsOptionsAxes.Name = "mnuGraphicsGraphcsOptionsAxes"
-        Me.mnuGraphicsGraphcsOptionsAxes.Size = New System.Drawing.Size(125, 22)
+        Me.mnuGraphicsGraphcsOptionsAxes.Size = New System.Drawing.Size(152, 22)
         Me.mnuGraphicsGraphcsOptionsAxes.Tag = "Axes"
         Me.mnuGraphicsGraphcsOptionsAxes.Text = "Axes..."
         '
         'mnuGraphicsGraphcsOptionsThemes
         '
         Me.mnuGraphicsGraphcsOptionsThemes.Name = "mnuGraphicsGraphcsOptionsThemes"
-        Me.mnuGraphicsGraphcsOptionsThemes.Size = New System.Drawing.Size(125, 22)
+        Me.mnuGraphicsGraphcsOptionsThemes.Size = New System.Drawing.Size(152, 22)
         Me.mnuGraphicsGraphcsOptionsThemes.Tag = "Themes"
         Me.mnuGraphicsGraphcsOptionsThemes.Text = "Themes..."
         '
         'mnuGraphicsGraphcsOptionsFacets
         '
         Me.mnuGraphicsGraphcsOptionsFacets.Name = "mnuGraphicsGraphcsOptionsFacets"
-        Me.mnuGraphicsGraphcsOptionsFacets.Size = New System.Drawing.Size(125, 22)
+        Me.mnuGraphicsGraphcsOptionsFacets.Size = New System.Drawing.Size(152, 22)
         Me.mnuGraphicsGraphcsOptionsFacets.Tag = "Facets"
         Me.mnuGraphicsGraphcsOptionsFacets.Text = "Facets..."
         '
@@ -769,14 +769,14 @@ Partial Class frmMain
         'mnuClimaticEvaporationSite
         '
         Me.mnuClimaticEvaporationSite.Name = "mnuClimaticEvaporationSite"
-        Me.mnuClimaticEvaporationSite.Size = New System.Drawing.Size(127, 22)
+        Me.mnuClimaticEvaporationSite.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticEvaporationSite.Tag = "Site"
         Me.mnuClimaticEvaporationSite.Text = "Site..."
         '
         'mnuClimaticEvaporationPenman
         '
         Me.mnuClimaticEvaporationPenman.Name = "mnuClimaticEvaporationPenman"
-        Me.mnuClimaticEvaporationPenman.Size = New System.Drawing.Size(127, 22)
+        Me.mnuClimaticEvaporationPenman.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticEvaporationPenman.Tag = "Penman"
         Me.mnuClimaticEvaporationPenman.Text = "Penman..."
         '
@@ -980,14 +980,14 @@ Partial Class frmMain
         Me.mnuClimaticManageNewWorksheet.Name = "mnuClimaticManageNewWorksheet"
         Me.mnuClimaticManageNewWorksheet.Size = New System.Drawing.Size(181, 22)
         Me.mnuClimaticManageNewWorksheet.Tag = "New_Worksheet"
-        Me.mnuClimaticManageNewWorksheet.Text = "New worksheet..."
+        Me.mnuClimaticManageNewWorksheet.Text = "New Worksheet..."
         '
         'mnuClimaticManageImportDailyData
         '
         Me.mnuClimaticManageImportDailyData.Name = "mnuClimaticManageImportDailyData"
         Me.mnuClimaticManageImportDailyData.Size = New System.Drawing.Size(181, 22)
         Me.mnuClimaticManageImportDailyData.Tag = "Import_daily_data"
-        Me.mnuClimaticManageImportDailyData.Text = "Import daily data..."
+        Me.mnuClimaticManageImportDailyData.Text = "Import daily Data..."
         '
         'mnuClimaticManageMakeFactor
         '
@@ -1691,57 +1691,57 @@ Partial Class frmMain
         'mnuSubmitCurrentWindowCtrlW
         '
         Me.mnuSubmitCurrentWindowCtrlW.Name = "mnuSubmitCurrentWindowCtrlW"
-        Me.mnuSubmitCurrentWindowCtrlW.Size = New System.Drawing.Size(226, 22)
+        Me.mnuSubmitCurrentWindowCtrlW.Size = New System.Drawing.Size(228, 22)
         Me.mnuSubmitCurrentWindowCtrlW.Text = "Current Window       Ctrl+W"
         '
         'mnuSubmitCurrentLineCtrlL
         '
         Me.mnuSubmitCurrentLineCtrlL.Name = "mnuSubmitCurrentLineCtrlL"
-        Me.mnuSubmitCurrentLineCtrlL.Size = New System.Drawing.Size(226, 22)
+        Me.mnuSubmitCurrentLineCtrlL.Size = New System.Drawing.Size(228, 22)
         Me.mnuSubmitCurrentLineCtrlL.Tag = "Current_Line"
         Me.mnuSubmitCurrentLineCtrlL.Text = "Current Line       Ctrl+L"
         '
         'mnuSubmitSelectionCtrlM
         '
         Me.mnuSubmitSelectionCtrlM.Name = "mnuSubmitSelectionCtrlM"
-        Me.mnuSubmitSelectionCtrlM.Size = New System.Drawing.Size(226, 22)
+        Me.mnuSubmitSelectionCtrlM.Size = New System.Drawing.Size(228, 22)
         Me.mnuSubmitSelectionCtrlM.Tag = "Seletion"
         Me.mnuSubmitSelectionCtrlM.Text = "Selection       Ctrl+M"
         '
         'mnuSubmitRunMacro
         '
         Me.mnuSubmitRunMacro.Name = "mnuSubmitRunMacro"
-        Me.mnuSubmitRunMacro.Size = New System.Drawing.Size(226, 22)
+        Me.mnuSubmitRunMacro.Size = New System.Drawing.Size(228, 22)
         Me.mnuSubmitRunMacro.Tag = "Run_Macro"
         Me.mnuSubmitRunMacro.Text = "Run Macro"
         '
         'mnuSubmitInterruptMacroF12
         '
         Me.mnuSubmitInterruptMacroF12.Name = "mnuSubmitInterruptMacroF12"
-        Me.mnuSubmitInterruptMacroF12.Size = New System.Drawing.Size(226, 22)
+        Me.mnuSubmitInterruptMacroF12.Size = New System.Drawing.Size(228, 22)
         Me.mnuSubmitInterruptMacroF12.Tag = "Interrupt_Macro"
         Me.mnuSubmitInterruptMacroF12.Text = "Interrupt Macro       F12"
         '
         'mnuSubmitAddMacro
         '
         Me.mnuSubmitAddMacro.Name = "mnuSubmitAddMacro"
-        Me.mnuSubmitAddMacro.Size = New System.Drawing.Size(226, 22)
+        Me.mnuSubmitAddMacro.Size = New System.Drawing.Size(228, 22)
         Me.mnuSubmitAddMacro.Tag = "Add_Macro_to_Menu"
         Me.mnuSubmitAddMacro.Text = "Add Macro to Menu..."
         '
         'mnuSubmitModifyMacroInMenu
         '
         Me.mnuSubmitModifyMacroInMenu.Name = "mnuSubmitModifyMacroInMenu"
-        Me.mnuSubmitModifyMacroInMenu.Size = New System.Drawing.Size(226, 22)
+        Me.mnuSubmitModifyMacroInMenu.Size = New System.Drawing.Size(228, 22)
         Me.mnuSubmitModifyMacroInMenu.Tag = "Modify_Macro_in_Menu"
         Me.mnuSubmitModifyMacroInMenu.Text = "Modify Macro in Menu..."
         '
         'mnuSubmitRemoveMacroFromMenu
         '
         Me.mnuSubmitRemoveMacroFromMenu.Name = "mnuSubmitRemoveMacroFromMenu"
-        Me.mnuSubmitRemoveMacroFromMenu.Size = New System.Drawing.Size(226, 22)
+        Me.mnuSubmitRemoveMacroFromMenu.Size = New System.Drawing.Size(228, 22)
         Me.mnuSubmitRemoveMacroFromMenu.Tag = "Remove_Macro_from_Menu"
-        Me.mnuSubmitRemoveMacroFromMenu.Text = "Remove Macro from Menu..."
+        Me.mnuSubmitRemoveMacroFromMenu.Text = "Remove Macro From Menu..."
         '
         'mnuManage
         '
@@ -1785,7 +1785,7 @@ Partial Class frmMain
         Me.mnuManageDataView.Name = "mnuManageDataView"
         Me.mnuManageDataView.Size = New System.Drawing.Size(177, 22)
         Me.mnuManageDataView.Tag = "View"
-        Me.mnuManageDataView.Text = "View data..."
+        Me.mnuManageDataView.Text = "View Data..."
         '
         'mnuManageDataName
         '
@@ -1812,58 +1812,58 @@ Partial Class frmMain
         'mnuManageFactorconvertToFactor
         '
         Me.mnuManageFactorconvertToFactor.Name = "mnuManageFactorconvertToFactor"
-        Me.mnuManageFactorconvertToFactor.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorconvertToFactor.Size = New System.Drawing.Size(180, 22)
         Me.mnuManageFactorconvertToFactor.Tag = "Convert_to_Factor"
         Me.mnuManageFactorconvertToFactor.Text = "Convert to Factor..."
         '
         'mnuMangeFactorLabel
         '
         Me.mnuMangeFactorLabel.Name = "mnuMangeFactorLabel"
-        Me.mnuMangeFactorLabel.Size = New System.Drawing.Size(179, 22)
+        Me.mnuMangeFactorLabel.Size = New System.Drawing.Size(180, 22)
         Me.mnuMangeFactorLabel.Tag = "Label"
         Me.mnuMangeFactorLabel.Text = "Label..."
         '
         'mnuManageFactorReorderLevels
         '
         Me.mnuManageFactorReorderLevels.Name = "mnuManageFactorReorderLevels"
-        Me.mnuManageFactorReorderLevels.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorReorderLevels.Size = New System.Drawing.Size(180, 22)
         Me.mnuManageFactorReorderLevels.Tag = "Reorder_levels"
-        Me.mnuManageFactorReorderLevels.Text = "Reorder levels..."
+        Me.mnuManageFactorReorderLevels.Text = "Reorder Levels..."
         '
         'mnuManageFactorRecode
         '
         Me.mnuManageFactorRecode.Name = "mnuManageFactorRecode"
-        Me.mnuManageFactorRecode.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorRecode.Size = New System.Drawing.Size(180, 22)
         Me.mnuManageFactorRecode.Tag = "Recode"
         Me.mnuManageFactorRecode.Text = "Recode..."
         '
         'mnuManageFactorReferenceLevels
         '
         Me.mnuManageFactorReferenceLevels.Name = "mnuManageFactorReferenceLevels"
-        Me.mnuManageFactorReferenceLevels.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorReferenceLevels.Size = New System.Drawing.Size(180, 22)
         Me.mnuManageFactorReferenceLevels.Tag = "Reference_levels"
-        Me.mnuManageFactorReferenceLevels.Text = "Reference levels..."
+        Me.mnuManageFactorReferenceLevels.Text = "Reference Levels..."
         '
         'mnuManageFactorInteraction
         '
         Me.mnuManageFactorInteraction.Name = "mnuManageFactorInteraction"
-        Me.mnuManageFactorInteraction.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorInteraction.Size = New System.Drawing.Size(180, 22)
         Me.mnuManageFactorInteraction.Tag = "Interaction"
         Me.mnuManageFactorInteraction.Text = "Interaction..."
         '
         'mnuManageFactorUnusedLevels
         '
         Me.mnuManageFactorUnusedLevels.Name = "mnuManageFactorUnusedLevels"
-        Me.mnuManageFactorUnusedLevels.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorUnusedLevels.Size = New System.Drawing.Size(180, 22)
         Me.mnuManageFactorUnusedLevels.Tag = "Unused_levels"
-        Me.mnuManageFactorUnusedLevels.Text = "Unused levels..."
+        Me.mnuManageFactorUnusedLevels.Text = "Unused Levels..."
         '
         'mnuManageFactorIndicatorVariables
         '
         Me.mnuManageFactorIndicatorVariables.Name = "mnuManageFactorIndicatorVariables"
-        Me.mnuManageFactorIndicatorVariables.Size = New System.Drawing.Size(179, 22)
+        Me.mnuManageFactorIndicatorVariables.Size = New System.Drawing.Size(180, 22)
         Me.mnuManageFactorIndicatorVariables.Tag = "Indicator_variables"
-        Me.mnuManageFactorIndicatorVariables.Text = "Indicator variables..."
+        Me.mnuManageFactorIndicatorVariables.Text = "Indicator Variables..."
         '
         'mnuManageManipulate
         '
@@ -1913,7 +1913,7 @@ Partial Class frmMain
         Me.mnuManagePermuteRows.Name = "mnuManagePermuteRows"
         Me.mnuManagePermuteRows.Size = New System.Drawing.Size(160, 22)
         Me.mnuManagePermuteRows.Tag = "Permute"
-        Me.mnuManagePermuteRows.Text = "Permute rows..."
+        Me.mnuManagePermuteRows.Text = "Permute Rows..."
         '
         'mnuManageManipulatePolynomials
         '
@@ -1997,50 +1997,50 @@ Partial Class frmMain
         'mnuManageRechapeColumnSummaries
         '
         Me.mnuManageRechapeColumnSummaries.Name = "mnuManageRechapeColumnSummaries"
-        Me.mnuManageRechapeColumnSummaries.Size = New System.Drawing.Size(201, 22)
+        Me.mnuManageRechapeColumnSummaries.Size = New System.Drawing.Size(205, 22)
         Me.mnuManageRechapeColumnSummaries.Tag = "Column_summaries"
-        Me.mnuManageRechapeColumnSummaries.Text = "Column summaries..."
+        Me.mnuManageRechapeColumnSummaries.Text = "Column Summaries..."
         '
         'mnuManageReshapeStack
         '
         Me.mnuManageReshapeStack.Name = "mnuManageReshapeStack"
-        Me.mnuManageReshapeStack.Size = New System.Drawing.Size(201, 22)
+        Me.mnuManageReshapeStack.Size = New System.Drawing.Size(205, 22)
         Me.mnuManageReshapeStack.Tag = "Stack"
         Me.mnuManageReshapeStack.Text = "Stack..."
         '
         'mnuManageReshapeUnstack
         '
         Me.mnuManageReshapeUnstack.Name = "mnuManageReshapeUnstack"
-        Me.mnuManageReshapeUnstack.Size = New System.Drawing.Size(201, 22)
+        Me.mnuManageReshapeUnstack.Size = New System.Drawing.Size(205, 22)
         Me.mnuManageReshapeUnstack.Tag = "Unstack"
         Me.mnuManageReshapeUnstack.Text = "Unstack..."
         '
         'mnuManageReshapeRandomSubst
         '
         Me.mnuManageReshapeRandomSubst.Name = "mnuManageReshapeRandomSubst"
-        Me.mnuManageReshapeRandomSubst.Size = New System.Drawing.Size(201, 22)
+        Me.mnuManageReshapeRandomSubst.Size = New System.Drawing.Size(205, 22)
         Me.mnuManageReshapeRandomSubst.Tag = "Random_subset"
-        Me.mnuManageReshapeRandomSubst.Text = "Random subset..."
+        Me.mnuManageReshapeRandomSubst.Text = "Random Subset..."
         '
         'mnuManageRechapeSelect
         '
         Me.mnuManageRechapeSelect.Name = "mnuManageRechapeSelect"
-        Me.mnuManageRechapeSelect.Size = New System.Drawing.Size(201, 22)
+        Me.mnuManageRechapeSelect.Size = New System.Drawing.Size(205, 22)
         Me.mnuManageRechapeSelect.Tag = "Select"
         Me.mnuManageRechapeSelect.Text = "Select..."
         '
         'mnuManageRechapeMerge
         '
         Me.mnuManageRechapeMerge.Name = "mnuManageRechapeMerge"
-        Me.mnuManageRechapeMerge.Size = New System.Drawing.Size(201, 22)
+        Me.mnuManageRechapeMerge.Size = New System.Drawing.Size(205, 22)
         Me.mnuManageRechapeMerge.Tag = "Merge"
         Me.mnuManageRechapeMerge.Text = "Merge..."
         '
         'RemoveUnusedLabelsToolStripMenuItem
         '
         Me.RemoveUnusedLabelsToolStripMenuItem.Name = "RemoveUnusedLabelsToolStripMenuItem"
-        Me.RemoveUnusedLabelsToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.RemoveUnusedLabelsToolStripMenuItem.Text = "Remove unused labels..."
+        Me.RemoveUnusedLabelsToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
+        Me.RemoveUnusedLabelsToolStripMenuItem.Text = "Remove Unused Labels..."
         '
         'mnuManageDataFile
         '
@@ -2233,7 +2233,7 @@ Partial Class frmMain
         Me.mnuClimateMethodsGraphicsMissingValues.Name = "mnuClimateMethodsGraphicsMissingValues"
         Me.mnuClimateMethodsGraphicsMissingValues.Size = New System.Drawing.Size(219, 22)
         Me.mnuClimateMethodsGraphicsMissingValues.Tag = "Missing_values"
-        Me.mnuClimateMethodsGraphicsMissingValues.Text = "Missing values..."
+        Me.mnuClimateMethodsGraphicsMissingValues.Text = "Missing Values..."
         '
         'mnuClimateMethodsGraphicsHistogram
         '
@@ -2268,14 +2268,14 @@ Partial Class frmMain
         Me.mnuClimateMethodsGraphicsAnnualRainfall.Name = "mnuClimateMethodsGraphicsAnnualRainfall"
         Me.mnuClimateMethodsGraphicsAnnualRainfall.Size = New System.Drawing.Size(219, 22)
         Me.mnuClimateMethodsGraphicsAnnualRainfall.Tag = "Annual_rainfall"
-        Me.mnuClimateMethodsGraphicsAnnualRainfall.Text = "Annual rainfall..."
+        Me.mnuClimateMethodsGraphicsAnnualRainfall.Text = "Annual Rainfall..."
         '
         'mnuClimateMethodsGraphicsRainCount
         '
         Me.mnuClimateMethodsGraphicsRainCount.Name = "mnuClimateMethodsGraphicsRainCount"
         Me.mnuClimateMethodsGraphicsRainCount.Size = New System.Drawing.Size(219, 22)
         Me.mnuClimateMethodsGraphicsRainCount.Tag = "Rain_count"
-        Me.mnuClimateMethodsGraphicsRainCount.Text = "Rain count..."
+        Me.mnuClimateMethodsGraphicsRainCount.Text = "Rain Count..."
         '
         'mnuClimateMethodsGraphicsTimeseries
         '
@@ -2296,7 +2296,7 @@ Partial Class frmMain
         Me.mnuClimateMethodsGraphicsMultipleLines.Name = "mnuClimateMethodsGraphicsMultipleLines"
         Me.mnuClimateMethodsGraphicsMultipleLines.Size = New System.Drawing.Size(219, 22)
         Me.mnuClimateMethodsGraphicsMultipleLines.Tag = "Multiple_lines"
-        Me.mnuClimateMethodsGraphicsMultipleLines.Text = "Multple lines..."
+        Me.mnuClimateMethodsGraphicsMultipleLines.Text = "Multple Lines..."
         '
         'mnuClmateMethodThreeSummaries
         '
