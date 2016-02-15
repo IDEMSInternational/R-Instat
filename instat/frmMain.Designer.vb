@@ -1977,7 +1977,7 @@ Partial Class frmMain
         Me.mnuManageDataFrameProtectLockUnlock.Name = "mnuManageDataFrameProtectLockUnlock"
         Me.mnuManageDataFrameProtectLockUnlock.Size = New System.Drawing.Size(207, 22)
         Me.mnuManageDataFrameProtectLockUnlock.Tag = "Protect_Lock_Unlock"
-        Me.mnuManageDataFrameProtectLockUnlock.Text = "Protect(Lock/Unlock)..."
+        Me.mnuManageDataFrameProtectLockUnlock.Text = "Protect (Lock/Unlock)..."
         '
         'mnuManageDataFrameHideShow
         '
