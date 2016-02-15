@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgColumnRows
+Partial Class dlgPrintPreviewOptions
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,14 +24,14 @@ Partial Class dlgColumnRows
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'dlgColumnRows
+        'dlgPrintPreviewOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgColumnRows"
-        Me.Text = "dlgColumnRows"
+        Me.Name = "dlgPrintPreviewOptions"
+        Me.Text = "dlgPrintPreviewOptions"
         Me.ResumeLayout(False)
 
     End Sub
