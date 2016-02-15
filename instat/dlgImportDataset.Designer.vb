@@ -47,12 +47,19 @@ Partial Class dlgImportDataset
         Me.chlStringsAsFactors = New System.Windows.Forms.CheckBox()
         Me.dataFrame = New unvell.ReoGrid.ReoGridControl()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblSteps = New System.Windows.Forms.Label()
+        Me.lblLines = New System.Windows.Forms.Label()
+        Me.numLines = New System.Windows.Forms.NumericUpDown()
+        Me.numSteps = New System.Windows.Forms.NumericUpDown()
+        Me.cmdOpenDataSet = New System.Windows.Forms.Button()
+        CType(Me.numLines, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numSteps, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblInputFile
         '
         Me.lblInputFile.AutoSize = True
-        Me.lblInputFile.Location = New System.Drawing.Point(262, 9)
+        Me.lblInputFile.Location = New System.Drawing.Point(309, 9)
         Me.lblInputFile.Name = "lblInputFile"
         Me.lblInputFile.Size = New System.Drawing.Size(50, 13)
         Me.lblInputFile.TabIndex = 0
@@ -62,7 +69,7 @@ Partial Class dlgImportDataset
         'lblDataFrame
         '
         Me.lblDataFrame.AutoSize = True
-        Me.lblDataFrame.Location = New System.Drawing.Point(262, 239)
+        Me.lblDataFrame.Location = New System.Drawing.Point(309, 239)
         Me.lblDataFrame.Name = "lblDataFrame"
         Me.lblDataFrame.Size = New System.Drawing.Size(62, 13)
         Me.lblDataFrame.TabIndex = 1
@@ -252,17 +259,17 @@ Partial Class dlgImportDataset
         '
         'txtInputFile
         '
-        Me.txtInputFile.Location = New System.Drawing.Point(265, 25)
+        Me.txtInputFile.Location = New System.Drawing.Point(306, 25)
         Me.txtInputFile.Multiline = True
         Me.txtInputFile.Name = "txtInputFile"
         Me.txtInputFile.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtInputFile.Size = New System.Drawing.Size(422, 205)
+        Me.txtInputFile.Size = New System.Drawing.Size(468, 205)
         Me.txtInputFile.TabIndex = 22
         '
         'chlStringsAsFactors
         '
         Me.chlStringsAsFactors.AutoSize = True
-        Me.chlStringsAsFactors.Location = New System.Drawing.Point(15, 432)
+        Me.chlStringsAsFactors.Location = New System.Drawing.Point(15, 467)
         Me.chlStringsAsFactors.Name = "chlStringsAsFactors"
         Me.chlStringsAsFactors.Size = New System.Drawing.Size(107, 17)
         Me.chlStringsAsFactors.TabIndex = 26
@@ -275,7 +282,7 @@ Partial Class dlgImportDataset
         Me.dataFrame.BackColor = System.Drawing.Color.White
         Me.dataFrame.ColumnHeaderContextMenuStrip = Nothing
         Me.dataFrame.LeadHeaderContextMenuStrip = Nothing
-        Me.dataFrame.Location = New System.Drawing.Point(265, 256)
+        Me.dataFrame.Location = New System.Drawing.Point(306, 256)
         Me.dataFrame.Name = "dataFrame"
         Me.dataFrame.Readonly = True
         Me.dataFrame.RowHeaderContextMenuStrip = Nothing
@@ -284,7 +291,7 @@ Partial Class dlgImportDataset
         Me.dataFrame.SheetTabControlNewButtonVisible = False
         Me.dataFrame.SheetTabControlWidth = 60
         Me.dataFrame.SheetTabNewButtonVisible = False
-        Me.dataFrame.Size = New System.Drawing.Size(422, 174)
+        Me.dataFrame.Size = New System.Drawing.Size(468, 174)
         Me.dataFrame.TabIndex = 28
         '
         'ucrBase
@@ -294,11 +301,60 @@ Partial Class dlgImportDataset
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 27
         '
+        'lblSteps
+        '
+        Me.lblSteps.AutoSize = True
+        Me.lblSteps.Location = New System.Drawing.Point(130, 431)
+        Me.lblSteps.Name = "lblSteps"
+        Me.lblSteps.Size = New System.Drawing.Size(46, 13)
+        Me.lblSteps.TabIndex = 29
+        Me.lblSteps.Text = "Steps of"
+        '
+        'lblLines
+        '
+        Me.lblLines.AutoSize = True
+        Me.lblLines.Location = New System.Drawing.Point(12, 431)
+        Me.lblLines.Name = "lblLines"
+        Me.lblLines.Size = New System.Drawing.Size(72, 13)
+        Me.lblLines.TabIndex = 30
+        Me.lblLines.Text = "Lines to show"
+        '
+        'numLines
+        '
+        Me.numLines.Location = New System.Drawing.Point(86, 431)
+        Me.numLines.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.numLines.Name = "numLines"
+        Me.numLines.Size = New System.Drawing.Size(46, 20)
+        Me.numLines.TabIndex = 31
+        Me.numLines.Value = New Decimal(New Integer() {10, 0, 0, 0})
+        '
+        'numSteps
+        '
+        Me.numSteps.Location = New System.Drawing.Point(174, 429)
+        Me.numSteps.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.numSteps.Name = "numSteps"
+        Me.numSteps.Size = New System.Drawing.Size(43, 20)
+        Me.numSteps.TabIndex = 32
+        '
+        'cmdOpenDataSet
+        '
+        Me.cmdOpenDataSet.Location = New System.Drawing.Point(223, 22)
+        Me.cmdOpenDataSet.Name = "cmdOpenDataSet"
+        Me.cmdOpenDataSet.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOpenDataSet.TabIndex = 33
+        Me.cmdOpenDataSet.Text = "Open file"
+        Me.cmdOpenDataSet.UseVisualStyleBackColor = True
+        '
         'dlgImportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(696, 501)
+        Me.ClientSize = New System.Drawing.Size(784, 501)
+        Me.Controls.Add(Me.cmdOpenDataSet)
+        Me.Controls.Add(Me.numSteps)
+        Me.Controls.Add(Me.numLines)
+        Me.Controls.Add(Me.lblLines)
+        Me.Controls.Add(Me.lblSteps)
         Me.Controls.Add(Me.dataFrame)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.chlStringsAsFactors)
@@ -329,6 +385,8 @@ Partial Class dlgImportDataset
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Import_Dataset"
         Me.Text = "Import Dataset"
+        CType(Me.numLines, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numSteps, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -359,4 +417,9 @@ Partial Class dlgImportDataset
     Friend WithEvents chlStringsAsFactors As CheckBox
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents dataFrame As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents lblSteps As Label
+    Friend WithEvents lblLines As Label
+    Friend WithEvents numLines As NumericUpDown
+    Friend WithEvents numSteps As NumericUpDown
+    Friend WithEvents cmdOpenDataSet As Button
 End Class
