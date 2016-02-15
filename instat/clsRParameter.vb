@@ -44,9 +44,9 @@ Public Class RParameter
         bIsOperator = True
     End Sub
 
-    Public Function ToScript(ByRef strScript As String) As String
+    Public Function ToScript(ByRef strScript As String, Optional bIncludeName As Boolean = True) As String
         Dim strRet As String = ""
-        If strArgumentName <> "" Then
+        If strArgumentName <> "" And bIncludeName Then
             strRet = strArgumentName & "="
         End If
         If bIsFunction Then
