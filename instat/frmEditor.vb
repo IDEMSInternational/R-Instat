@@ -23,7 +23,7 @@ Imports unvell.ReoGrid.Events
 Public Class frmEditor
     Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
-    Public strf As String
+
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsGrids.SetData(grdData)
         grdData.Visible = False
@@ -45,15 +45,15 @@ Public Class frmEditor
     End Sub
 
     Private Sub insertCol_Click(sender As Object, e As EventArgs) Handles insertColToolStripMenuItem.Click
-        'grdData.DoAction(New unvell.ReoGrid.Actions.InsertColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
-        strf = frmMain.clsRLink.strInstatDataObject & "$insert_column_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_data = " & "c(), start_pos = " & grdData.CurrentWorksheet.SelectionRange.Col + 1 & ",number_cols =" & grdData.CurrentWorksheet.SelectionRange.Cols & ")"
-        frmMain.clsRLink.RunScript(strf)
+        Dim strSctipt As String
+        strSctipt = frmMain.clsRLink.strInstatDataObject & "$insert_column_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_data = " & "c(), start_pos = " & grdData.CurrentWorksheet.SelectionRange.Col + 1 & ",number_cols =" & grdData.CurrentWorksheet.SelectionRange.Cols & ")"
+        frmMain.clsRLink.RunScript(strSctipt)
     End Sub
 
     Private Sub deleteColumnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles deleteColumnToolStripMenuItem.Click
-        'grdData.DoAction(New unvell.ReoGrid.Actions.RemoveColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
-        strf = frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data_from_start_position(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", start_pos = " & grdData.CurrentWorksheet.SelectionRange.Col + 1 & ",col_numbers =" & grdData.CurrentWorksheet.SelectionRange.Cols & ")"
-        frmMain.clsRLink.RunScript(strf)
+        Dim strSctipt As String
+        strSctipt = frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data_from_start_position(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", start_pos = " & grdData.CurrentWorksheet.SelectionRange.Col + 1 & ",col_numbers =" & grdData.CurrentWorksheet.SelectionRange.Cols & ")"
+        frmMain.clsRLink.RunScript(strSctipt)
     End Sub
 
     Private Sub resetToDefaultWidthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles resetToDefaultWidthToolStripMenuItem.Click
@@ -149,15 +149,15 @@ Public Class frmEditor
     End Sub
 
     Private Sub insertRowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles insertRowToolStripMenuItem.Click
-        'grdData.DoAction(New unvell.ReoGrid.Actions.InsertRowsAction(grdData.CurrentWorksheet.SelectionRange.Row, grdData.CurrentWorksheet.SelectionRange.Rows))
-        strf = frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",row_data = " & "c(), start_pos = " & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",number_rows =" & grdData.CurrentWorksheet.SelectionRange.Rows & ")"
-        frmMain.clsRLink.RunScript(strf)
+        Dim strSctipt As String
+        strSctipt = frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",row_data = " & "c(), start_pos = " & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",number_rows =" & grdData.CurrentWorksheet.SelectionRange.Rows & ")"
+        frmMain.clsRLink.RunScript(strSctipt)
     End Sub
 
     Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
-        'grdData.DoAction(New unvell.ReoGrid.Actions.RemoveRowsAction(grdData.CurrentWorksheet.SelectionRange.Row, grdData.CurrentWorksheet.SelectionRange.Rows))
-        strf = frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", start_pos = " & grdData.CurrentWorksheet.SelectionRange.Col + 1 & ",num_rows =" & grdData.CurrentWorksheet.SelectionRange.Cols & ")"
-        frmMain.clsRLink.RunScript(strf)
+        Dim strSctipt As String
+        strSctipt = frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", start_pos = " & grdData.CurrentWorksheet.SelectionRange.Col + 1 & ",num_rows =" & grdData.CurrentWorksheet.SelectionRange.Cols & ")"
+        frmMain.clsRLink.RunScript(strSctipt)
     End Sub
 
     Private Sub resetToDefaultHeightToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles resetToDefaultHeightToolStripMenuItem.Click
@@ -206,9 +206,10 @@ Public Class frmEditor
     End Sub
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
+        Dim strSctipt As String
         If grdData.Worksheets.Count > 0 Then
-            strf = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
-            frmMain.clsRLink.RunScript(strf)
+            strSctipt = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
+            frmMain.clsRLink.RunScript(strSctipt)
             'grdData.RemoveWorksheet(grdData.GetWorksheetIndex(grdData.CurrentWorksheet))
         End If
     End Sub
@@ -231,7 +232,8 @@ Public Class frmEditor
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
-        strf = frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_name = " & Chr(34) & grdData.CurrentWorksheet.GetColumnHeader(grdData.CurrentWorksheet.SelectionRange.Col).Text & Chr(34) & ",index=" & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",new_value=" & Chr(34) & e.NewData & Chr(34) & ")"
-        frmMain.clsRLink.clsEngine.Evaluate(strf)
+        Dim strSctipt As String
+        strSctipt = frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_name = " & Chr(34) & grdData.CurrentWorksheet.GetColumnHeader(grdData.CurrentWorksheet.SelectionRange.Col).Text & Chr(34) & ",index=" & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",new_value=" & Chr(34) & e.NewData & Chr(34) & ")"
+        frmMain.clsRLink.clsEngine.Evaluate(strSctipt)
     End Sub
 End Class
