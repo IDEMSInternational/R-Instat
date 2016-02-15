@@ -41,23 +41,7 @@ Public Class dlgOptions
                 rdoKiswahili.Checked = True
         End Select
         cmdApply.Enabled = False
-        'cmdOk.Enabled = False
-        'Loads the current font and color for the Script
-        txtScriptFont.Text = frmMain.clsRLink.fScript.FontFamily.Name
-        txtScriptColor.Text = frmMain.clsRLink.clrScript.Name
-        txtScriptColor.ForeColor = frmMain.clsRLink.clrScript
-        txtScriptSize.Text = frmMain.clsRLink.fScript.Size
-        'For the output
-        txtOutputFont.Text = frmMain.clsRLink.fOutput.FontFamily.Name
-        txtOutputcolor.Text = frmMain.clsRLink.clrOutput.Name
-        txtOutputcolor.ForeColor = frmMain.clsRLink.clrOutput
-        txtOutputSize.Text = frmMain.clsRLink.fOutput.Size
-        'For the Comments
-        txtCommentsFont.Text = frmMain.clsRLink.fComments.FontFamily.Name
-        txtCommentsColor.Text = frmMain.clsRLink.clrComments.Name
-        txtCommentsColor.ForeColor = frmMain.clsRLink.clrComments
-        txtCommentsSize.Text = frmMain.clsRLink.fComments.Size
-
+        cmdOk.Enabled = False
     End Sub
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.Close()
@@ -65,9 +49,6 @@ Public Class dlgOptions
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
         cmdApply_Click(sender, e)
-        frmMain.clsRLink.setFormatOutput(txtOutputFont.Font, txtOutputcolor.ForeColor)
-        frmMain.clsRLink.setFormatScript(txtScriptFont.Font, txtScriptColor.ForeColor)
-        frmMain.clsRLink.setFormatComment(txtCommentsFont.Font, txtCommentsColor.ForeColor)
         Me.Close()
     End Sub
 
@@ -147,13 +128,10 @@ Public Class dlgOptions
         dlgFont.ShowColor = True
         dlgFont.MaxSize = 15
         dlgFont.MinSize = 8
+        dlgFont.Font = frmMain.clsRLink.fScript
+        dlgFont.Color = frmMain.clsRLink.clrScript
         If dlgFont.ShowDialog = DialogResult.OK Then
-            txtScriptFont.Text = dlgFont.Font.FontFamily.Name
-            txtScriptColor.ForeColor = dlgFont.Color
-            txtScriptFont.Font = dlgFont.Font
-            txtScriptColor.Text = dlgFont.Color.Name
-            txtScriptSize.Text = dlgFont.Font.Size
-            dlgFont.Reset()
+            frmMain.clsRLink.setFormatScript(dlgFont.Font, dlgFont.Color)
         End If
     End Sub
 
@@ -161,12 +139,10 @@ Public Class dlgOptions
         dlgFont.ShowColor = True
         dlgFont.MaxSize = 15
         dlgFont.MinSize = 8
+        dlgFont.Font = frmMain.clsRLink.fOutput
+        dlgFont.Color = frmMain.clsRLink.clrOutput
         If dlgFont.ShowDialog = DialogResult.OK Then
-            txtOutputFont.Text = dlgFont.Font.FontFamily.Name
-            txtOutputFont.Font = dlgFont.Font
-            txtOutputcolor.Text = dlgFont.Color.Name
-            txtOutputcolor.ForeColor = dlgFont.Color
-            txtOutputSize.Text = dlgFont.Font.Size
+            frmMain.clsRLink.setFormatOutput(dlgFont.Font, dlgFont.Color)
             dlgFont.Reset()
         End If
     End Sub
@@ -175,12 +151,10 @@ Public Class dlgOptions
         dlgFont.ShowColor = True
         dlgFont.MaxSize = 15
         dlgFont.MinSize = 8
+        dlgFont.Font = frmMain.clsRLink.fComments
+        dlgFont.Color = frmMain.clsRLink.clrComments
         If dlgFont.ShowDialog = DialogResult.OK Then
-            txtCommentsFont.Text = dlgFont.Font.FontFamily.Name
-            txtCommentsFont.Font = dlgFont.Font
-            txtCommentsColor.Text = dlgFont.Color.Name
-            txtCommentsColor.ForeColor = dlgFont.Color
-            txtCommentsSize.Text = dlgFont.Font.Size
+            frmMain.clsRLink.setFormatComment(dlgFont.Font, dlgFont.Color)
         End If
     End Sub
 End Class
