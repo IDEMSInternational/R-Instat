@@ -23,17 +23,17 @@ Partial Class dlgPrintPreviewOptions
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.pnlEditor = New System.Windows.Forms.Panel()
-        Me.cmdPrevSheet = New System.Windows.Forms.Button()
         Me.cmdPrtSheet = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cmdPrevSheet = New System.Windows.Forms.Button()
+        Me.pnlLog = New System.Windows.Forms.Panel()
         Me.cmdPrtLog = New System.Windows.Forms.Button()
         Me.cmdPrevLog = New System.Windows.Forms.Button()
-        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.pnlOutput = New System.Windows.Forms.Panel()
         Me.cmdPrtOutput = New System.Windows.Forms.Button()
         Me.cmdPrevOutput = New System.Windows.Forms.Button()
         Me.pnlEditor.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.pnlLog.SuspendLayout()
+        Me.pnlOutput.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlEditor
@@ -49,16 +49,6 @@ Partial Class dlgPrintPreviewOptions
         Me.pnlEditor.Size = New System.Drawing.Size(160, 96)
         Me.pnlEditor.TabIndex = 0
         '
-        'cmdPrevSheet
-        '
-        Me.cmdPrevSheet.Dock = System.Windows.Forms.DockStyle.Top
-        Me.cmdPrevSheet.Location = New System.Drawing.Point(0, 0)
-        Me.cmdPrevSheet.Name = "cmdPrevSheet"
-        Me.cmdPrevSheet.Size = New System.Drawing.Size(156, 42)
-        Me.cmdPrevSheet.TabIndex = 0
-        Me.cmdPrevSheet.Text = "Preview Current Sheet"
-        Me.cmdPrevSheet.UseVisualStyleBackColor = True
-        '
         'cmdPrtSheet
         '
         Me.cmdPrtSheet.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -69,18 +59,28 @@ Partial Class dlgPrintPreviewOptions
         Me.cmdPrtSheet.Text = "Print Current Sheet"
         Me.cmdPrtSheet.UseVisualStyleBackColor = True
         '
-        'Panel1
+        'cmdPrevSheet
         '
-        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.cmdPrevSheet.Dock = System.Windows.Forms.DockStyle.Top
+        Me.cmdPrevSheet.Location = New System.Drawing.Point(0, 0)
+        Me.cmdPrevSheet.Name = "cmdPrevSheet"
+        Me.cmdPrevSheet.Size = New System.Drawing.Size(156, 42)
+        Me.cmdPrevSheet.TabIndex = 0
+        Me.cmdPrevSheet.Text = "Preview Current Sheet"
+        Me.cmdPrevSheet.UseVisualStyleBackColor = True
+        '
+        'pnlLog
+        '
+        Me.pnlLog.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel1.Controls.Add(Me.cmdPrtLog)
-        Me.Panel1.Controls.Add(Me.cmdPrevLog)
-        Me.Panel1.Location = New System.Drawing.Point(168, 4)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(160, 96)
-        Me.Panel1.TabIndex = 1
+        Me.pnlLog.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlLog.Controls.Add(Me.cmdPrtLog)
+        Me.pnlLog.Controls.Add(Me.cmdPrevLog)
+        Me.pnlLog.Location = New System.Drawing.Point(168, 4)
+        Me.pnlLog.Name = "pnlLog"
+        Me.pnlLog.Size = New System.Drawing.Size(160, 96)
+        Me.pnlLog.TabIndex = 1
         '
         'cmdPrtLog
         '
@@ -102,18 +102,18 @@ Partial Class dlgPrintPreviewOptions
         Me.cmdPrevLog.Text = "Preview Log"
         Me.cmdPrevLog.UseVisualStyleBackColor = True
         '
-        'Panel2
+        'pnlOutput
         '
-        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.pnlOutput.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel2.Controls.Add(Me.cmdPrtOutput)
-        Me.Panel2.Controls.Add(Me.cmdPrevOutput)
-        Me.Panel2.Location = New System.Drawing.Point(332, 6)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(160, 96)
-        Me.Panel2.TabIndex = 2
+        Me.pnlOutput.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlOutput.Controls.Add(Me.cmdPrtOutput)
+        Me.pnlOutput.Controls.Add(Me.cmdPrevOutput)
+        Me.pnlOutput.Location = New System.Drawing.Point(332, 6)
+        Me.pnlOutput.Name = "pnlOutput"
+        Me.pnlOutput.Size = New System.Drawing.Size(160, 96)
+        Me.pnlOutput.TabIndex = 2
         '
         'cmdPrtOutput
         '
@@ -140,15 +140,15 @@ Partial Class dlgPrintPreviewOptions
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(496, 104)
-        Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.pnlOutput)
+        Me.Controls.Add(Me.pnlLog)
         Me.Controls.Add(Me.pnlEditor)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgPrintPreviewOptions"
         Me.Text = "Print and Preview Options"
         Me.pnlEditor.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
+        Me.pnlLog.ResumeLayout(False)
+        Me.pnlOutput.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -156,10 +156,10 @@ Partial Class dlgPrintPreviewOptions
     Friend WithEvents pnlEditor As Panel
     Friend WithEvents cmdPrtSheet As Button
     Friend WithEvents cmdPrevSheet As Button
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents pnlLog As Panel
     Friend WithEvents cmdPrtLog As Button
     Friend WithEvents cmdPrevLog As Button
-    Friend WithEvents Panel2 As Panel
+    Friend WithEvents pnlOutput As Panel
     Friend WithEvents cmdPrtOutput As Button
     Friend WithEvents cmdPrevOutput As Button
 End Class
