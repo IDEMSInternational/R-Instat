@@ -350,21 +350,21 @@ Partial Class frmMain
         'mnuStatisticsAnalysisOfVarianceOneWay
         '
         Me.mnuStatisticsAnalysisOfVarianceOneWay.Name = "mnuStatisticsAnalysisOfVarianceOneWay"
-        Me.mnuStatisticsAnalysisOfVarianceOneWay.Size = New System.Drawing.Size(152, 22)
+        Me.mnuStatisticsAnalysisOfVarianceOneWay.Size = New System.Drawing.Size(144, 22)
         Me.mnuStatisticsAnalysisOfVarianceOneWay.Tag = "One_Way"
         Me.mnuStatisticsAnalysisOfVarianceOneWay.Text = "One-way..."
         '
         'mnuStatisticsAnalysisOfVarianceOrthogonal
         '
         Me.mnuStatisticsAnalysisOfVarianceOrthogonal.Name = "mnuStatisticsAnalysisOfVarianceOrthogonal"
-        Me.mnuStatisticsAnalysisOfVarianceOrthogonal.Size = New System.Drawing.Size(152, 22)
+        Me.mnuStatisticsAnalysisOfVarianceOrthogonal.Size = New System.Drawing.Size(144, 22)
         Me.mnuStatisticsAnalysisOfVarianceOrthogonal.Tag = "Orthogonal"
         Me.mnuStatisticsAnalysisOfVarianceOrthogonal.Text = "Orthogonal..."
         '
         'mnuStatisticsAnalysisOfVarianceGeneral
         '
         Me.mnuStatisticsAnalysisOfVarianceGeneral.Name = "mnuStatisticsAnalysisOfVarianceGeneral"
-        Me.mnuStatisticsAnalysisOfVarianceGeneral.Size = New System.Drawing.Size(152, 22)
+        Me.mnuStatisticsAnalysisOfVarianceGeneral.Size = New System.Drawing.Size(144, 22)
         Me.mnuStatisticsAnalysisOfVarianceGeneral.Tag = "General"
         Me.mnuStatisticsAnalysisOfVarianceGeneral.Text = "General..."
         '
@@ -769,14 +769,14 @@ Partial Class frmMain
         'mnuClimaticEvaporationSite
         '
         Me.mnuClimaticEvaporationSite.Name = "mnuClimaticEvaporationSite"
-        Me.mnuClimaticEvaporationSite.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticEvaporationSite.Size = New System.Drawing.Size(127, 22)
         Me.mnuClimaticEvaporationSite.Tag = "Site"
         Me.mnuClimaticEvaporationSite.Text = "Site..."
         '
         'mnuClimaticEvaporationPenman
         '
         Me.mnuClimaticEvaporationPenman.Name = "mnuClimaticEvaporationPenman"
-        Me.mnuClimaticEvaporationPenman.Size = New System.Drawing.Size(152, 22)
+        Me.mnuClimaticEvaporationPenman.Size = New System.Drawing.Size(127, 22)
         Me.mnuClimaticEvaporationPenman.Tag = "Penman"
         Me.mnuClimaticEvaporationPenman.Text = "Penman..."
         '
@@ -1933,56 +1933,56 @@ Partial Class frmMain
         'mnuManageDataFrameViewColumnMetadata
         '
         Me.mnuManageDataFrameViewColumnMetadata.Name = "mnuManageDataFrameViewColumnMetadata"
-        Me.mnuManageDataFrameViewColumnMetadata.Size = New System.Drawing.Size(215, 22)
+        Me.mnuManageDataFrameViewColumnMetadata.Size = New System.Drawing.Size(207, 22)
         Me.mnuManageDataFrameViewColumnMetadata.Tag = "View_Column_Metadata"
-        Me.mnuManageDataFrameViewColumnMetadata.Text = "View (Column) Metadata..."
+        Me.mnuManageDataFrameViewColumnMetadata.Text = "View Column Metadata..."
         '
         'mnuManageDataFrameRestrict
         '
         Me.mnuManageDataFrameRestrict.Name = "mnuManageDataFrameRestrict"
-        Me.mnuManageDataFrameRestrict.Size = New System.Drawing.Size(215, 22)
+        Me.mnuManageDataFrameRestrict.Size = New System.Drawing.Size(207, 22)
         Me.mnuManageDataFrameRestrict.Tag = "Restrict_filter"
-        Me.mnuManageDataFrameRestrict.Text = "Restrict(Filter)..."
+        Me.mnuManageDataFrameRestrict.Text = "Restrict (Filter)..."
         '
         'mnuManageDataFrameReorder
         '
         Me.mnuManageDataFrameReorder.Name = "mnuManageDataFrameReorder"
-        Me.mnuManageDataFrameReorder.Size = New System.Drawing.Size(215, 22)
+        Me.mnuManageDataFrameReorder.Size = New System.Drawing.Size(207, 22)
         Me.mnuManageDataFrameReorder.Tag = "Reorder"
         Me.mnuManageDataFrameReorder.Text = "Reorder..."
         '
         'mnuManageDataFrameInsert
         '
         Me.mnuManageDataFrameInsert.Name = "mnuManageDataFrameInsert"
-        Me.mnuManageDataFrameInsert.Size = New System.Drawing.Size(215, 22)
+        Me.mnuManageDataFrameInsert.Size = New System.Drawing.Size(207, 22)
         Me.mnuManageDataFrameInsert.Tag = "Insert"
         Me.mnuManageDataFrameInsert.Text = "Insert..."
         '
         'mnuManageDataFrameDelete
         '
         Me.mnuManageDataFrameDelete.Name = "mnuManageDataFrameDelete"
-        Me.mnuManageDataFrameDelete.Size = New System.Drawing.Size(215, 22)
+        Me.mnuManageDataFrameDelete.Size = New System.Drawing.Size(207, 22)
         Me.mnuManageDataFrameDelete.Tag = "Delete"
         Me.mnuManageDataFrameDelete.Text = "Delete..."
         '
         'mnuManageDataFrameDisplay
         '
         Me.mnuManageDataFrameDisplay.Name = "mnuManageDataFrameDisplay"
-        Me.mnuManageDataFrameDisplay.Size = New System.Drawing.Size(215, 22)
+        Me.mnuManageDataFrameDisplay.Size = New System.Drawing.Size(207, 22)
         Me.mnuManageDataFrameDisplay.Tag = "Display"
         Me.mnuManageDataFrameDisplay.Text = "Display..."
         '
         'mnuManageDataFrameProtectLockUnlock
         '
         Me.mnuManageDataFrameProtectLockUnlock.Name = "mnuManageDataFrameProtectLockUnlock"
-        Me.mnuManageDataFrameProtectLockUnlock.Size = New System.Drawing.Size(215, 22)
+        Me.mnuManageDataFrameProtectLockUnlock.Size = New System.Drawing.Size(207, 22)
         Me.mnuManageDataFrameProtectLockUnlock.Tag = "Protect_Lock_Unlock"
-        Me.mnuManageDataFrameProtectLockUnlock.Text = "Protect(Lock/Unlock..."
+        Me.mnuManageDataFrameProtectLockUnlock.Text = "Protect(Lock/Unlock)..."
         '
         'mnuManageDataFrameHideShow
         '
         Me.mnuManageDataFrameHideShow.Name = "mnuManageDataFrameHideShow"
-        Me.mnuManageDataFrameHideShow.Size = New System.Drawing.Size(215, 22)
+        Me.mnuManageDataFrameHideShow.Size = New System.Drawing.Size(207, 22)
         Me.mnuManageDataFrameHideShow.Tag = "Hide_Show"
         Me.mnuManageDataFrameHideShow.Text = "Hide/Show..."
         '
@@ -2044,7 +2044,7 @@ Partial Class frmMain
         '
         'mnuManageDataFile
         '
-        Me.mnuManageDataFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataFileViewDataMetadata, Me.mnuManageDataFileRenameSheet, Me.mnuManageDataFileCopySheet, Me.mnuManageDataFileReorderSheets, Me.mnuManageDataFileDeleteSheets})
+        Me.mnuManageDataFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataFileViewDataMetadata, Me.mnuManageDataFileRenameSheet, Me.mnuManageDataFileReorderSheets, Me.mnuManageDataFileCopySheet, Me.mnuManageDataFileDeleteSheets})
         Me.mnuManageDataFile.Name = "mnuManageDataFile"
         Me.mnuManageDataFile.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageDataFile.Tag = "Data_file"
@@ -2053,35 +2053,35 @@ Partial Class frmMain
         'mnuManageDataFileViewDataMetadata
         '
         Me.mnuManageDataFileViewDataMetadata.Name = "mnuManageDataFileViewDataMetadata"
-        Me.mnuManageDataFileViewDataMetadata.Size = New System.Drawing.Size(196, 22)
+        Me.mnuManageDataFileViewDataMetadata.Size = New System.Drawing.Size(188, 22)
         Me.mnuManageDataFileViewDataMetadata.Tag = "View_Data_Metadata"
-        Me.mnuManageDataFileViewDataMetadata.Text = "View (Data) Metadata..."
+        Me.mnuManageDataFileViewDataMetadata.Text = "View Data Metadata..."
         '
         'mnuManageDataFileRenameSheet
         '
         Me.mnuManageDataFileRenameSheet.Name = "mnuManageDataFileRenameSheet"
-        Me.mnuManageDataFileRenameSheet.Size = New System.Drawing.Size(196, 22)
+        Me.mnuManageDataFileRenameSheet.Size = New System.Drawing.Size(188, 22)
         Me.mnuManageDataFileRenameSheet.Tag = "ReName_sheet"
         Me.mnuManageDataFileRenameSheet.Text = "Rename Sheet..."
         '
         'mnuManageDataFileCopySheet
         '
         Me.mnuManageDataFileCopySheet.Name = "mnuManageDataFileCopySheet"
-        Me.mnuManageDataFileCopySheet.Size = New System.Drawing.Size(196, 22)
+        Me.mnuManageDataFileCopySheet.Size = New System.Drawing.Size(188, 22)
         Me.mnuManageDataFileCopySheet.Tag = "Copy_Sheet"
         Me.mnuManageDataFileCopySheet.Text = "Copy Sheet..."
         '
         'mnuManageDataFileReorderSheets
         '
         Me.mnuManageDataFileReorderSheets.Name = "mnuManageDataFileReorderSheets"
-        Me.mnuManageDataFileReorderSheets.Size = New System.Drawing.Size(196, 22)
+        Me.mnuManageDataFileReorderSheets.Size = New System.Drawing.Size(188, 22)
         Me.mnuManageDataFileReorderSheets.Tag = "Reorder_sheets"
         Me.mnuManageDataFileReorderSheets.Text = "Reorder Sheets..."
         '
         'mnuManageDataFileDeleteSheets
         '
         Me.mnuManageDataFileDeleteSheets.Name = "mnuManageDataFileDeleteSheets"
-        Me.mnuManageDataFileDeleteSheets.Size = New System.Drawing.Size(196, 22)
+        Me.mnuManageDataFileDeleteSheets.Size = New System.Drawing.Size(188, 22)
         Me.mnuManageDataFileDeleteSheets.Tag = "Delete_sheets"
         Me.mnuManageDataFileDeleteSheets.Text = "Delete Sheets..."
         '

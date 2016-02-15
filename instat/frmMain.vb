@@ -785,5 +785,13 @@ Public Class frmMain
         dlgConvertTo.ShowDialog()
     End Sub
 
+    Private Sub mnuManageDataFileViewDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileViewDataMetadata.Click
+        frmMetaData.Visible = True
+        frmMetaData.BringToFront()
+    End Sub
 
+    Private Sub mnuManageDataFrameViewColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameViewColumnMetadata.Click
+        frmVariables.Visible = True
+        frmVariables.BringToFront()
+    End Sub
 End Class
