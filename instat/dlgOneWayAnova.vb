@@ -18,11 +18,11 @@ Public Class dlgOneWayANOVA
     Private Sub dlgOneWayAnova_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("aov")
         ucrBase.clsRsyntax.iCallType = 2
-        ucrYVariate.Selector = ucrAddRemove
+        ucrYVariate.Selector = ucrAddRemoveDataFrame
         ucrYVariate.SetMeAsReceiver()
-        ucrFactor.Selector = ucrAddRemove
+        ucrFactor.Selector = ucrAddRemoveDataFrame
         ucrFactor.SetDataType("factor")
-        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrDataSelector.clsCurrDataFrame)
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrAddRemoveDataFrame.ucrAvailableDataFrames.clsCurrDataFrame)
         autoTranslate(Me)
         Fillformula()
 
@@ -52,7 +52,7 @@ Public Class dlgOneWayANOVA
         End If
     End Sub
 
-    Private Sub ucrDataSelector_Leave(sender As Object, e As EventArgs) Handles ucrDataSelector.Leave
-        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrDataSelector.clsCurrDataFrame)
+    Private Sub ucrAddRemoveDataframe_Leave(sender As Object, e As EventArgs) Handles ucrAddRemoveDataFrame.Leave
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrAddRemoveDataFrame.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 End Class

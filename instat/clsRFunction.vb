@@ -119,6 +119,9 @@ Public Class RFunction
             If clsParam.clsArgumentFunction IsNot Nothing Then
                 clsParameters(i).SetArgumentFunction(clsParam.clsArgumentFunction)
             End If
+            If clsParam.clsArgumentOperator IsNot Nothing Then
+                clsParameters(i).SetArgumentOperator(clsParam.clsArgumentOperator)
+            End If
         End If
         bIsAssigned = False
     End Sub
