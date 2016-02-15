@@ -25,8 +25,12 @@ Public Class dlgImportDataset
     Dim bFirstLoad As Boolean = True
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        'shows the dialog first then the open dialog
+        Me.Show()
+        showOpenDialog()
+        'removes the sheet Tab control
         dataFrame.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
+
         autoTranslate(Me)
 
         If bFirstLoad Then
@@ -54,6 +58,7 @@ Public Class dlgImportDataset
     Public Sub SetName(strName As String)
         txtName.Text = strName
         strDataName = strName
+        ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
     End Sub
 
     Public Sub SetFilePath(strFilePath As String)
@@ -61,7 +66,7 @@ Public Class dlgImportDataset
         Dim sReader As New StreamReader(strFilePath)
         ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
         txtInputFile.Text = ""
-        For i = 1 To 10 'TODO add skip and get 10 from options
+        For i = 1 To numLines.Value Step numSteps.Value + 1
             txtInputFile.Text = txtInputFile.Text & sReader.ReadLine() & vbCrLf
             If sReader.Peek() = -1 Then
                 Exit For
@@ -77,7 +82,7 @@ Public Class dlgImportDataset
 
     End Sub
 
-    Private Sub cboEncoding_Leave(sender As Object, e As EventArgs) Handles cboEncoding.Leave
+    Private Sub cboEncoding_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboEncoding.SelectionChangeCommitted
 
         If cboEncoding.Text <> "Automatic" Then
             ucrBase.clsRsyntax.AddParameter("encoding", cboEncoding.Text)
@@ -88,7 +93,7 @@ Public Class dlgImportDataset
 
     End Sub
 
-    Private Sub cboRowNames_Leave(sender As Object, e As EventArgs) Handles cboRowNames.Leave
+    Private Sub cboRowNames_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboRowNames.SelectionChangeCommitted
 
         If cboRowNames.Text <> "Automatic" Then
             Select Case cboRowNames.Text
@@ -104,7 +109,7 @@ Public Class dlgImportDataset
 
     End Sub
 
-    Private Sub cboSeparator_Leave(sender As Object, e As EventArgs) Handles cboSeparator.Leave
+    Private Sub cboSeparator_SelectionChanged(sender As Object, e As EventArgs) Handles cboSeparator.SelectionChangeCommitted
         Select Case cboSeparator.Text
             Case "Whitespace"
                 ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "" & Chr(34))
@@ -116,7 +121,7 @@ Public Class dlgImportDataset
         refreshFrameView()
     End Sub
 
-    Private Sub cboDecimal_Leave(sender As Object, e As EventArgs) Handles cboDecimal.Leave
+    Private Sub cboDecimal_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboDecimal.SelectionChangeCommitted
         Select Case cboDecimal.Text
             Case "Period"
                 ucrBase.clsRsyntax.AddParameter("dec", Chr(34) & "." & Chr(34))
@@ -126,7 +131,7 @@ Public Class dlgImportDataset
         refreshFrameView()
     End Sub
 
-    Private Sub cboQuote_Leave(sender As Object, e As EventArgs) Handles cboQuote.Leave
+    Private Sub cboQuote_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboQuote.SelectionChangeCommitted
         If cboQuote.Text <> "None" Then
             Select Case cboQuote.Text
                 Case "Double quote (" & Chr(34) & ")"
@@ -138,7 +143,7 @@ Public Class dlgImportDataset
         refreshFrameView()
     End Sub
 
-    Private Sub cboComment_Leave(sender As Object, e As EventArgs) Handles cboComment.Leave
+    Private Sub cboComment_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboComment.SelectionChangeCommitted
         If cboComment.Text = "None" Then
             ucrBase.clsRsyntax.AddParameter("comment.char", Chr(34) & Chr(34))
         Else
@@ -147,7 +152,7 @@ Public Class dlgImportDataset
         refreshFrameView()
     End Sub
 
-    Private Sub txtNAStrings_Leave(sender As Object, e As EventArgs) Handles txtNAStrings.Leave
+    Private Sub txtNAStrings_TextChanged(sender As Object, e As EventArgs) Handles txtNAStrings.TextChanged
         If txtNAStrings.Text = "NA" Then
             ucrBase.clsRsyntax.AddParameter("na.strings", txtNAStrings.Text)
         Else
@@ -160,9 +165,11 @@ Public Class dlgImportDataset
         Dim bToBeAssigned As Boolean
         bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
         ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = False
-        ucrBase.clsRsyntax.AddParameter("nrows", 10)
+        ucrBase.clsRsyntax.AddParameter("nrows", numLines.Value)
+        ucrBase.clsRsyntax.AddParameter("skip", numSteps.Value)
         dfTemp = frmMain.clsRLink.GetData(ucrBase.clsRsyntax.GetScript())
         ucrBase.clsRsyntax.RemoveParameter("nrows")
+        ucrBase.clsRsyntax.RemoveParameter("skip")
         ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
         frmMain.clsGrids.FillSheet(dfTemp, txtName.Text, dataFrame)
     End Sub
@@ -171,7 +178,7 @@ Public Class dlgImportDataset
 
         If rdoHeadingsYes.Checked Then
             ucrBase.clsRsyntax.AddParameter("header", "TRUE")
-        ElseIf rdoHeadingsno.Checked Then
+        ElseIf rdoHeadingsNo.Checked Then
             ucrBase.clsRsyntax.AddParameter("header", "FALSE")
         Else
             ucrBase.clsRsyntax.RemoveParameter("header")
@@ -186,5 +193,57 @@ Public Class dlgImportDataset
         refreshFrameView()
 
     End Sub
+    'Function to show the open dialog
 
+    Public Function OpenFromFileDialog() As KeyValuePair(Of String, String)
+        Dim dlgOpen As New OpenFileDialog
+        Dim strFilePath, strFileName As String
+        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|All Data files (*.csv,*.RDS)|*.csv;*.RDS"
+        dlgOpen.Title = "Open Data from file"
+        If dlgOpen.ShowDialog() = DialogResult.OK Then
+            'checks if the file name is not blank'
+            If dlgOpen.FileName <> "" Then
+                strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
+                strFilePath = Replace(dlgOpen.FileName, "\", "/")
+                Return New KeyValuePair(Of String, String)(strFileName, strFilePath)
+            End If
+        End If
+        Return New KeyValuePair(Of String, String)("", "")
+    End Function
+
+    'Loads the open dialog on load and click
+    Private Sub showOpenDialog()
+        Dim pair As KeyValuePair(Of String, String)
+        Dim strFileExt As String
+
+        pair = OpenFromFileDialog()
+        'pair.key is the File Name
+        'pair.value is the File Path
+
+        ' TODO Probably remove LoadData sub in clsRLink once all opening is done through dialogs
+        If Not IsNothing(pair.Key) Then
+            strFileExt = Path.GetExtension(pair.Value)
+            Select Case strFileExt
+                Case ".RDS"
+                    'TODO create dialog to do this
+                    frmMain.clsRLink.LoadData(pair.Key, pair.Value, strFileExt)
+                Case ".csv"
+                    'TODO where should this go?
+                    If Not frmMain.clsRLink.bInstatObjectExists Then
+                        frmMain.clsRLink.CreateNewInstatObject()
+                    End If
+                    SetName(pair.Key)
+                    SetFilePath(pair.Value)
+                    strFilePath = pair.Value
+            End Select
+        End If
+    End Sub
+
+    Private Sub numLines_TextChanged(sender As Object, e As EventArgs) Handles numLines.TextChanged, numSteps.TextChanged
+        'ToDo add refresh for the txtInputFile
+        If Not bFirstLoad Then
+            SetFilePath(strFilePath)
+            refreshFrameView()
+        End If
+    End Sub
 End Class
