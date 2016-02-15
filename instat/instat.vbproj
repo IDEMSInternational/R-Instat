@@ -216,18 +216,6 @@
     <Compile Include="dlgCliPlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgcolrowname.designer.vb">
-      <DependentUpon>dlgcolrowname.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgcolrowname.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgColumnRows.Designer.vb">
-      <DependentUpon>dlgColumnRows.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgColumnRows.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgColumnStats.Designer.vb">
       <DependentUpon>dlgColumnStats.vb</DependentUpon>
     </Compile>
@@ -1082,6 +1070,24 @@
     <Compile Include="ucrDistributionsWithParameters.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrFactor.Designer.vb">
+      <DependentUpon>ucrFactor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFactor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrFactorMultiple.Designer.vb">
+      <DependentUpon>ucrFactorMultiple.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFactorMultiple.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrFactorSingle.Designer.vb">
+      <DependentUpon>ucrFactorSingle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFactorSingle.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMultipleNumeric.Designer.vb">
       <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
     </Compile>
@@ -1266,24 +1272,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliPlot.sw-KE.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgcolrowname.fr-FR.resx">
-      <DependentUpon>dlgcolrowname.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgcolrowname.resx">
-      <DependentUpon>dlgcolrowname.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgcolrowname.sw-KE.resx">
-      <DependentUpon>dlgcolrowname.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgColumnRows.fr-FR.resx">
-      <DependentUpon>dlgColumnRows.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgColumnRows.resx">
-      <DependentUpon>dlgColumnRows.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgColumnRows.sw-KE.resx">
-      <DependentUpon>dlgColumnRows.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
