@@ -29,6 +29,7 @@ Public Class dlgHistogram
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.iCallType = 0
         ucrXReceiver.Selector = ucrHistogramSelector
+        ucrFactorReceiver.Selector = ucrHistogramSelector
         ucrXReceiver.SetMeAsReceiver()
         ucrBase.OKEnabled(False)
         autoTranslate(Me)
@@ -50,4 +51,5 @@ Public Class dlgHistogram
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
+
 End Class
