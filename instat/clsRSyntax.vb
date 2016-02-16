@@ -34,8 +34,8 @@ Public Class RSyntax
         bUseBaseOperator = False
     End Sub
 
-    Public Sub SetOperation(strOp As String)
-        clsBaseOperator.SetOperation(strOp)
+    Public Sub SetOperation(strOp As String, Optional bBracketTemp As Boolean = True)
+        clsBaseOperator.SetOperation(strOp, bBracketTemp)
         bUseBaseFunction = False
         bUseBaseOperator = True
     End Sub
@@ -61,13 +61,19 @@ Public Class RSyntax
         clsBaseOperator.SetParameter(bSetLeftNotRight, clsParam, clsRFunc, clsOp)
     End Sub
 
-    Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)
-        Dim clsParam As New RParameter
+    Public Sub AddOperatorParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
+        clsBaseOperator.AddAditionalParameter(strParameterName, strParameterValue, clsRFunc, clsOp)
+    End Sub
 
+    Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)
         If clsFunction Is Nothing Then
             clsFunction = clsBaseFunction
         End If
         clsFunction.RemoveParameterByName(strParameterName)
+    End Sub
+
+    Public Sub RemoveOperatorParameter(strParameterName As String)
+        clsBaseOperator.RemoveParameterByName(strParameterName)
     End Sub
 
     Public Sub ClearParameters(Optional ByRef clsFunction As RFunction = Nothing)
