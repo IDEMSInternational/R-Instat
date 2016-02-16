@@ -33,8 +33,7 @@ Partial Class dlgRowStats
         Me.rdoStandardDeviation = New System.Windows.Forms.RadioButton()
         Me.rdoSum = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverRowStatistics = New instat.ucrReceiverMultiple()
-        Me.ucrDataFrameSelector = New instat.ucrDataFrame()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrSelectorByDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpStatistic.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -158,27 +157,19 @@ Partial Class dlgRowStats
         Me.ucrReceiverRowStatistics.Size = New System.Drawing.Size(121, 106)
         Me.ucrReceiverRowStatistics.TabIndex = 18
         '
-        'ucrDataFrameSelector
+        'ucrSelectorByDataFrameAddRemove
         '
-        Me.ucrDataFrameSelector.Location = New System.Drawing.Point(18, 13)
-        Me.ucrDataFrameSelector.Name = "ucrDataFrameSelector"
-        Me.ucrDataFrameSelector.Size = New System.Drawing.Size(127, 41)
-        Me.ucrDataFrameSelector.TabIndex = 22
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(18, 69)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
-        Me.ucrAddRemove.TabIndex = 23
+        Me.ucrSelectorByDataFrameAddRemove.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorByDataFrameAddRemove.Name = "ucrSelectorByDataFrameAddRemove"
+        Me.ucrSelectorByDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorByDataFrameAddRemove.TabIndex = 22
         '
         'dlgRowStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(462, 377)
-        Me.Controls.Add(Me.ucrAddRemove)
-        Me.Controls.Add(Me.ucrDataFrameSelector)
+        Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemove)
         Me.Controls.Add(Me.grpStatistic)
         Me.Controls.Add(Me.ucrNewColumnNameSelector)
         Me.Controls.Add(Me.lblSelected)
@@ -207,6 +198,5 @@ Partial Class dlgRowStats
     Friend WithEvents rdoMean As RadioButton
     Friend WithEvents rdoStandardDeviation As RadioButton
     Friend WithEvents rdoSum As RadioButton
-    Friend WithEvents ucrDataFrameSelector As ucrDataFrame
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrSelectorByDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
 End Class
