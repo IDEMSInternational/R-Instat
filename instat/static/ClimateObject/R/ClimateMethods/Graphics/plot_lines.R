@@ -31,13 +31,17 @@
 
 
 
-climate$methods(plot_yearly_comparison = function(data_list=list(), variables, col = c("blue", "red", "green"), type = c("h", "h", "h"), lty= c(1,2,3), lty_points= c(1,2,3), ylabel="Observations", xlabel = "Year",lwd=c(2), 
+climate$methods(plot_yearly_comparison = function(data_list=list(), variables = "Total Rain", col = c("blue", "red", "green"), type = c("h", "h", "h"), lty= c(1,2,3), lty_points= c(1,2,3), ylabel="Observations", xlabel = "Year",lwd=c(2), 
                                       lwd_points=c(2,2,2), pch = c(2,20,4),bty = "o", main="Vertical Lines", time_period = yearly_label, legend.location = rep(list("topright"), length(variables)), 
                                       legend=rep(list(variables), length(variables)), legend_text_width = strwidth("0.001"), na.rm=TRUE ){    
   
   # get_climate_data_objects returns a list of the climate_data objects specified in the arguments.
   # If no objects specified then all climate_data objects will be taken by default.
-    
+
+  if(missing(ylabel)){
+    ylabel = variables
+  } 
+
   if (!is.list(variables)){
     interest_var = list(variables)
   }
