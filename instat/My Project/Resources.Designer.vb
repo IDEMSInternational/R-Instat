@@ -242,6 +242,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to BoxPlot Options.
+        '''</summary>
+        Friend ReadOnly Property BoxPlot_Options() As String
+            Get
+                Return ResourceManager.GetString("BoxPlot_Options", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to By_factor(s).
         '''</summary>
         Friend ReadOnly Property By_factors() As String

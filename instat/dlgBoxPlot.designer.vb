@@ -34,6 +34,7 @@ Partial Class dlgBoxplot
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
         Me.ucrYvariableReceiver = New instat.ucrReceiverSingle()
+        Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -144,11 +145,22 @@ Partial Class dlgBoxplot
         Me.ucrYvariableReceiver.Size = New System.Drawing.Size(106, 26)
         Me.ucrYvariableReceiver.TabIndex = 23
         '
+        'cmdBoxPlotOptions
+        '
+        Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(276, 238)
+        Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
+        Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(104, 23)
+        Me.cmdBoxPlotOptions.TabIndex = 24
+        Me.cmdBoxPlotOptions.Tag = "BoxPlot_Options"
+        Me.cmdBoxPlotOptions.Text = "BoxPlot Options"
+        Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
+        '
         'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(412, 368)
+        Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.ucrYvariableReceiver)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.Controls.Add(Me.ucrSelectorBoxPlot)
@@ -185,4 +197,5 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblBySecondFactor As Label
     Friend WithEvents ucrYvariableReceiver As ucrReceiverSingle
+    Friend WithEvents cmdBoxPlotOptions As Button
 End Class
