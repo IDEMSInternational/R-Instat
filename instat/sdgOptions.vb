@@ -1,3 +1,6 @@
-﻿Public Class sdgOptions
+﻿Public Class sdgGraphicsEstimates
+
+
+
 
 End Class
