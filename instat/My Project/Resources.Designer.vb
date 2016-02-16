@@ -1476,20 +1476,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Hisogram Options.
-        '''</summary>
-        Friend ReadOnly Property Hisogram_Options() As String
-            Get
-                Return ResourceManager.GetString("Hisogram_Options", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Histogram.
         '''</summary>
         Friend ReadOnly Property Histogram() As String
             Get
                 Return ResourceManager.GetString("Histogram", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Histogram Options.
+        '''</summary>
+        Friend ReadOnly Property Histogram_Options() As String
+            Get
+                Return ResourceManager.GetString("Histogram_Options", resourceCulture)
             End Get
         End Property
         
