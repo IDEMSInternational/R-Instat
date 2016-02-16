@@ -1336,4 +1336,7 @@
   <data name="Two_Samles_Summary_Data" xml:space="preserve">
     <value>Two Samples Summary Data</value>
   </data>
+  <data name="BoxPlot_Options" xml:space="preserve">
+    <value>BoxPlot Options</value>
+  </data>
 </root>
