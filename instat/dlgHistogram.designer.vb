@@ -22,32 +22,18 @@ Partial Class dlgHistogram
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrXReceiver = New instat.ucrReceiverSingle()
-        Me.ucrBase = New instat.ucrButtons()
         Me.lblVariableToPlot = New System.Windows.Forms.Label()
-        Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdHistogramOptions = New System.Windows.Forms.Button()
         Me.rdoHistogram = New System.Windows.Forms.RadioButton()
         Me.rdoDensity = New System.Windows.Forms.RadioButton()
         Me.rdoFreequencyPolygon = New System.Windows.Forms.RadioButton()
-        Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblfactor = New System.Windows.Forms.Label()
+        Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrXReceiver = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
-        '
-        'ucrXReceiver
-        '
-        Me.ucrXReceiver.Location = New System.Drawing.Point(286, 82)
-        Me.ucrXReceiver.Name = "ucrXReceiver"
-        Me.ucrXReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrXReceiver.TabIndex = 2
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(7, 269)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
-        Me.ucrBase.TabIndex = 3
         '
         'lblVariableToPlot
         '
@@ -58,13 +44,6 @@ Partial Class dlgHistogram
         Me.lblVariableToPlot.TabIndex = 6
         Me.lblVariableToPlot.Tag = "Variable_to_Plot"
         Me.lblVariableToPlot.Text = "Variable to Plot"
-        '
-        'ucrHistogramSelector
-        '
-        Me.ucrHistogramSelector.Location = New System.Drawing.Point(6, 42)
-        Me.ucrHistogramSelector.Name = "ucrHistogramSelector"
-        Me.ucrHistogramSelector.Size = New System.Drawing.Size(242, 179)
-        Me.ucrHistogramSelector.TabIndex = 7
         '
         'cmdOptions
         '
@@ -122,13 +101,6 @@ Partial Class dlgHistogram
         Me.rdoFreequencyPolygon.Text = "Freequency Polygon"
         Me.rdoFreequencyPolygon.UseVisualStyleBackColor = True
         '
-        'ucrFactorReceiver
-        '
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(286, 142)
-        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
-        Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrFactorReceiver.TabIndex = 10
-        '
         'lblfactor
         '
         Me.lblfactor.AutoSize = True
@@ -138,6 +110,34 @@ Partial Class dlgHistogram
         Me.lblfactor.TabIndex = 6
         Me.lblfactor.Tag = "Factor"
         Me.lblfactor.Text = "Factor"
+        '
+        'ucrFactorReceiver
+        '
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(286, 142)
+        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
+        Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrFactorReceiver.TabIndex = 10
+        '
+        'ucrHistogramSelector
+        '
+        Me.ucrHistogramSelector.Location = New System.Drawing.Point(6, 42)
+        Me.ucrHistogramSelector.Name = "ucrHistogramSelector"
+        Me.ucrHistogramSelector.Size = New System.Drawing.Size(242, 179)
+        Me.ucrHistogramSelector.TabIndex = 7
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(7, 269)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
+        Me.ucrBase.TabIndex = 3
+        '
+        'ucrXReceiver
+        '
+        Me.ucrXReceiver.Location = New System.Drawing.Point(286, 82)
+        Me.ucrXReceiver.Name = "ucrXReceiver"
+        Me.ucrXReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrXReceiver.TabIndex = 2
         '
         'dlgHistogram
         '
