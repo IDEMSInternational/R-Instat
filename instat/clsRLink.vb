@@ -30,14 +30,14 @@ Public Class RLink
     Public bClimateObjectExists As Boolean = False
     Public bInstatObjectExists As Boolean = False
     Public bClimsoftLinkExists As Boolean = False
-    'sets the font for the strScript
-    Public fScript As Font = New Font(txtOutput.Font.FontFamily, txtOutput.Font.Size)
+    'sets the default fonts and colors
+    Public fScript As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
     Public clrScript As Color = Color.Black
-    'sets the font for the strOutput
-    Public fOutput As Font = New Font(txtOutput.Font.FontFamily, txtOutput.Font.Size)
+    '
+    Public fOutput As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
     Public clrOutput As Color = Color.Blue
-    'sets the font for the Comments
-    Public fComments As Font = New Font(txtOutput.Font.FontFamily, txtOutput.Font.Size)
+    '
+    Public fComments As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
     Public clrComments As Color = Color.Green
 
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
@@ -128,7 +128,8 @@ Public Class RLink
         strOutput = ""
         Try
             If strComment <> "" Then
-                strScriptWithComment = "# " & strComment & vbCrLf & strScript
+                strComment = "# " & strComment
+                strScriptWithComment = strComment & vbCrLf & strScript
             Else
                 strScriptWithComment = strScript
             End If
@@ -137,7 +138,7 @@ Public Class RLink
             End If
             If bOutput Then
                 If strComment <> "" Then
-                    AppendText(txtOutput, clrComments, fComments, strScriptWithComment & vbCrLf)
+                    AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
                 End If
                 AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
             End If
