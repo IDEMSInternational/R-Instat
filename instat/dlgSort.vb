@@ -18,21 +18,26 @@
 Imports instat.Translations
 
 Public Class dlgSort
+
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("order")
-        ucrReceiverSort.Selector = ucrAddRemove
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+        ucrReceiverSort.Selector = ucrSelectorByDataFrameAddRemove
         ucrReceiverSort.SetMeAsReceiver()
         autoTranslate(Me)
+        rdoLast.Checked = True
+        rdoAscending.Checked = True
+        ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
+
     End Sub
     Private Sub ucrReceiverSort_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSort.Leave
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverSort.GetVariables())
-
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
     End Sub
     Private Sub grpOrder_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged, rdoDescending.CheckedChanged
         If rdoAscending.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("Descending", "FALSE")
+            ucrBase.clsRsyntax.AddParameter("decreasing", "FALSE")
         Else
-            ucrBase.clsRsyntax.AddParameter("Descending", "TRUE")
+            ucrBase.clsRsyntax.AddParameter("decreasing", "TRUE")
         End If
 
     End Sub
