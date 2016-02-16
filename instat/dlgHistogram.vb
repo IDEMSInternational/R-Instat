@@ -15,30 +15,41 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+
 Public Class dlgHistogram
+    Private clsRggplotFunction As New RFunction
+    Private clsRgeom_boxplotFunction As New RFunction
+    Private clsRaesFunction As New RFunction
+
     Private Sub dlgHistogram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("hist")
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRgeom_boxplotFunction.SetRCommand("geom_histogram")
+        clsRaesFunction.SetRCommand("aes")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.iCallType = 0
-        ucrXReceiver.Selector = ucrAddRemove
+        ucrXReceiver.Selector = ucrHistogramSelector
+        ucrFactorReceiver.Selector = ucrHistogramSelector
         ucrXReceiver.SetMeAsReceiver()
         ucrBase.OKEnabled(False)
         autoTranslate(Me)
     End Sub
 
-    Private Sub ucrReceiverSingle_Enter(sender As Object, e As EventArgs) Handles ucrXReceiver.Enter
-        ucrXReceiver.SetMeAsReceiver()
+    Private Sub ucrHistogramSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrHistogramSelector.DataFrameChanged
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrHistogramSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
     Private Sub ucrXReceiver_ValueChanged(sender As Object, e As EventArgs) Handles ucrXReceiver.ValueChanged
         If Not (ucrXReceiver.txtReceiverSingle.Text = "") Then
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrXReceiver.GetVariables())
+            clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub txtHistogramTitle_TextChanged(sender As Object, e As EventArgs) Handles txtHistogramTitle.TextChanged
-        ucrBase.clsRsyntax.AddParameter("main", Chr(34) & txtHistogramTitle.Text & Chr(34))
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.ShowDialog()
     End Sub
+
 End Class
