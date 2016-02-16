@@ -1348,8 +1348,8 @@
   <data name="Freequency_Polygon" xml:space="preserve">
     <value>Freequency Polygon</value>
   </data>
-  <data name="Hisogram_Options" xml:space="preserve">
-    <value>Hisogram Options</value>
+  <data name="Histogram_Options" xml:space="preserve">
+    <value>Histogram Options</value>
   </data>
   <data name="Plot_Options" xml:space="preserve">
     <value>Plot Options</value>
