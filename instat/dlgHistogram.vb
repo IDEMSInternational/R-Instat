@@ -15,18 +15,19 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-
 Public Class dlgHistogram
     Private clsRggplotFunction As New RFunction
-    Private clsRgeom_boxplotFunction As New RFunction
+    Private clsRgeom_histogramFunction As New RFunction
     Private clsRaesFunction As New RFunction
 
     Private Sub dlgHistogram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
-        clsRgeom_boxplotFunction.SetRCommand("geom_histogram")
+        clsRgeom_histogramFunction.SetRCommand("geom_histogram")
         clsRaesFunction.SetRCommand("aes")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_histogramFunction)
         ucrBase.clsRsyntax.iCallType = 0
         ucrXReceiver.Selector = ucrHistogramSelector
         ucrFactorReceiver.Selector = ucrHistogramSelector
@@ -39,11 +40,13 @@ Public Class dlgHistogram
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrHistogramSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-    Private Sub ucrXReceiver_ValueChanged(sender As Object, e As EventArgs) Handles ucrXReceiver.ValueChanged
+    Private Sub ucrXReceiver_Leave(sender As Object, e As EventArgs) Handles ucrXReceiver.Leave
+
         If Not (ucrXReceiver.txtReceiverSingle.Text = "") Then
             clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
             ucrBase.OKEnabled(True)
         Else
+
             ucrBase.OKEnabled(False)
         End If
     End Sub
@@ -52,4 +55,7 @@ Public Class dlgHistogram
         sdgPlots.ShowDialog()
     End Sub
 
+    Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
+        clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
+    End Sub
 End Class
