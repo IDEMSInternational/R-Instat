@@ -25,13 +25,13 @@ Partial Class dlgRecode
         Me.ucrBase = New instat.ucrButtons()
         Me.chkAddLabels = New System.Windows.Forms.CheckBox()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
-        Me.ucrSelectorByDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
+        Me.ucrSelectorDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
         Me.lblBreakPoints = New System.Windows.Forms.Label()
         Me.grpClosedOn = New System.Windows.Forms.GroupBox()
         Me.rdoLeft = New System.Windows.Forms.RadioButton()
         Me.rdoRight = New System.Windows.Forms.RadioButton()
-        Me.ucrNewColumnName = New instat.ucrNewColumnName()
+        Me.ucrSelectorNewColumnName = New instat.ucrNewColumnName()
         Me.ucrMultipleNumeric = New instat.ucrMultipleNumeric()
         Me.grpClosedOn.SuspendLayout()
         Me.SuspendLayout()
@@ -63,19 +63,19 @@ Partial Class dlgRecode
         Me.lblSelectedVariables.TabIndex = 17
         Me.lblSelectedVariables.Text = "Selected Variables"
         '
-        'ucrSelectorByDataFrameAddRemove
+        'ucrSelectorDataFrameAddRemove
         '
-        Me.ucrSelectorByDataFrameAddRemove.Location = New System.Drawing.Point(12, 12)
-        Me.ucrSelectorByDataFrameAddRemove.Name = "ucrSelectorByDataFrameAddRemove"
-        Me.ucrSelectorByDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorByDataFrameAddRemove.TabIndex = 18
+        Me.ucrSelectorDataFrameAddRemove.Location = New System.Drawing.Point(12, 12)
+        Me.ucrSelectorDataFrameAddRemove.Name = "ucrSelectorDataFrameAddRemove"
+        Me.ucrSelectorDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorDataFrameAddRemove.TabIndex = 18
         '
-        'ucrReceiverRecode
+        'ucrReceiverSingle
         '
-        Me.ucrReceiverRecode.Location = New System.Drawing.Point(298, 29)
-        Me.ucrReceiverRecode.Name = "ucrReceiverRecode"
-        Me.ucrReceiverRecode.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverRecode.TabIndex = 19
+        Me.ucrReceiverSingle.Location = New System.Drawing.Point(298, 29)
+        Me.ucrReceiverSingle.Name = "ucrReceiverSingle"
+        Me.ucrReceiverSingle.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverSingle.TabIndex = 19
         '
         'lblBreakPoints
         '
@@ -123,13 +123,13 @@ Partial Class dlgRecode
         Me.rdoRight.Text = "Right"
         Me.rdoRight.UseVisualStyleBackColor = True
         '
-        'ucrNewColumnName
+        'ucrSelectorNewColumnName
         '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(12, 220)
-        Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        Me.ucrNewColumnName.Size = New System.Drawing.Size(367, 35)
-        Me.ucrNewColumnName.TabIndex = 23
-        Me.ucrNewColumnName.ucrDataFrameSelector = Nothing
+        Me.ucrSelectorNewColumnName.Location = New System.Drawing.Point(12, 220)
+        Me.ucrSelectorNewColumnName.Name = "ucrSelectorNewColumnName"
+        Me.ucrSelectorNewColumnName.Size = New System.Drawing.Size(367, 35)
+        Me.ucrSelectorNewColumnName.TabIndex = 23
+        Me.ucrSelectorNewColumnName.ucrDataFrameSelector = Nothing
         '
         'ucrMultipleNumeric
         '
@@ -144,11 +144,11 @@ Partial Class dlgRecode
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(437, 324)
         Me.Controls.Add(Me.ucrMultipleNumeric)
-        Me.Controls.Add(Me.ucrNewColumnName)
+        Me.Controls.Add(Me.ucrSelectorNewColumnName)
         Me.Controls.Add(Me.grpClosedOn)
         Me.Controls.Add(Me.lblBreakPoints)
-        Me.Controls.Add(Me.ucrReceiverRecode)
-        Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemove)
+        Me.Controls.Add(Me.ucrReceiverSingle)
+        Me.Controls.Add(Me.ucrSelectorDataFrameAddRemove)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.chkAddLabels)
         Me.Controls.Add(Me.ucrBase)
@@ -166,12 +166,12 @@ Partial Class dlgRecode
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents chkAddLabels As CheckBox
     Friend WithEvents lblSelectedVariables As Label
-    Friend WithEvents ucrSelectorByDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverRecode As ucrReceiverSingle
+    Friend WithEvents ucrSelectorDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
     Friend WithEvents lblBreakPoints As Label
     Friend WithEvents grpClosedOn As GroupBox
     Friend WithEvents rdoLeft As RadioButton
     Friend WithEvents rdoRight As RadioButton
-    Friend WithEvents ucrNewColumnName As ucrNewColumnName
+    Friend WithEvents ucrSelectorNewColumnName As ucrNewColumnName
     Friend WithEvents ucrMultipleNumeric As ucrMultipleNumeric
 End Class
