@@ -991,7 +991,7 @@ climate$methods(create_summary = function(data_list = list(), new_time_period, f
     
     # Add number of rainy days and mean rain per rainy day 
     data_list_rain_threshold = add_to_data_info_threshold_list(curr_data_list, list(var = rain_label, lower_threshold = threshold))
-    .self$summary_calculation(data_list_rain_threshold, new_time_period, required_summaries = c(count_label, mean_label), required_variables = rain_label, na.rm = na.rm, column_names = list(c("Number of Rainy Days", "Mean Rain per Rainy Day")))
+    .self$summary_calculation(data_list_rain_threshold, new_time_period, required_summaries = c(count_over_threshold_label, mean_label), required_variables = rain_label, na.rm = na.rm, column_names = list(c("Number of Rainy Days", "Mean Rain per Rainy Day")))
     
     variables_to_summarize_present = variables_to_summarize[sapply(variables_to_summarize, data_obj$is_present)]
     if(rain_label %in% variables_to_summarize_present) variables_to_summarize_present = variables_to_summarize_present[-which(variables_to_summarize_present==rain_label)]
