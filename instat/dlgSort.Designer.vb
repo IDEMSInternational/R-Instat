@@ -26,13 +26,12 @@ Partial Class dlgSort
         Me.rdoDescending = New System.Windows.Forms.RadioButton()
         Me.rdoAscending = New System.Windows.Forms.RadioButton()
         Me.lblColumnsToSort = New System.Windows.Forms.Label()
-        Me.ucrReceiverSort = New instat.ucrReceiverMultiple()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
         Me.grpMissingValues = New System.Windows.Forms.GroupBox()
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirst = New System.Windows.Forms.RadioButton()
         Me.ucrSelectorByDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverSort = New instat.ucrReceiverMultiple()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpOrder.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.SuspendLayout()
@@ -83,28 +82,6 @@ Partial Class dlgSort
         Me.lblColumnsToSort.Tag = "Columns_To_Sort"
         Me.lblColumnsToSort.Text = "Columns To Sort"
         '
-        'ucrReceiverSort
-        '
-        Me.ucrReceiverSort.Location = New System.Drawing.Point(290, 88)
-        Me.ucrReceiverSort.Name = "ucrReceiverSort"
-        Me.ucrReceiverSort.Size = New System.Drawing.Size(125, 103)
-        Me.ucrReceiverSort.TabIndex = 4
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 291)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(402, 56)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrNewColumnNameSelector
-        '
-        Me.ucrNewColumnNameSelector.Location = New System.Drawing.Point(13, 250)
-        Me.ucrNewColumnNameSelector.Name = "ucrNewColumnNameSelector"
-        Me.ucrNewColumnNameSelector.Size = New System.Drawing.Size(367, 35)
-        Me.ucrNewColumnNameSelector.TabIndex = 7
-        Me.ucrNewColumnNameSelector.ucrDataFrameSelector = Nothing
-        '
         'grpMissingValues
         '
         Me.grpMissingValues.Controls.Add(Me.rdoLast)
@@ -148,14 +125,27 @@ Partial Class dlgSort
         Me.ucrSelectorByDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorByDataFrameAddRemove.TabIndex = 9
         '
+        'ucrReceiverSort
+        '
+        Me.ucrReceiverSort.Location = New System.Drawing.Point(290, 88)
+        Me.ucrReceiverSort.Name = "ucrReceiverSort"
+        Me.ucrReceiverSort.Size = New System.Drawing.Size(125, 103)
+        Me.ucrReceiverSort.TabIndex = 4
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 250)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(402, 56)
+        Me.ucrBase.TabIndex = 0
+        '
         'dlgSort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(468, 356)
+        Me.ClientSize = New System.Drawing.Size(468, 317)
         Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemove)
         Me.Controls.Add(Me.grpMissingValues)
-        Me.Controls.Add(Me.ucrNewColumnNameSelector)
         Me.Controls.Add(Me.lblColumnsToSort)
         Me.Controls.Add(Me.ucrReceiverSort)
         Me.Controls.Add(Me.grpOrder)
@@ -182,7 +172,6 @@ Partial Class dlgSort
     Friend WithEvents rdoAscending As RadioButton
     Friend WithEvents ucrReceiverSort As ucrReceiverMultiple
     Friend WithEvents lblColumnsToSort As Label
-    Friend WithEvents ucrNewColumnNameSelector As ucrNewColumnName
     Friend WithEvents grpMissingValues As GroupBox
     Friend WithEvents rdoLast As RadioButton
     Friend WithEvents rdoFirst As RadioButton
