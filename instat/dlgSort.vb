@@ -18,30 +18,35 @@
 Imports instat.Translations
 
 Public Class dlgSort
+
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("order")
-        ucrReceiverSort.Selector = ucrAddRemove
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+        ucrReceiverSort.Selector = ucrSelectorByDataFrameAddRemove
         ucrReceiverSort.SetMeAsReceiver()
+        ucrBase.clsRsyntax.AddParameter("col_names", clsRFunctionParameter:=ucrReceiverSort.GetVariables())
         autoTranslate(Me)
+        rdoLast.Checked = True
+        rdoAscending.Checked = True
+
     End Sub
     Private Sub ucrReceiverSort_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSort.Leave
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverSort.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("data_name", clsRFunctionParameter:=ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
 
     End Sub
     Private Sub grpOrder_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged, rdoDescending.CheckedChanged
         If rdoAscending.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("Descending", "FALSE")
+            ucrBase.clsRsyntax.AddParameter("Descending", Chr(34) & "FALSE" & Chr(34))
         Else
-            ucrBase.clsRsyntax.AddParameter("Descending", "TRUE")
+            ucrBase.clsRsyntax.AddParameter("Descending", Chr(34) & "TRUE" & Chr(34))
         End If
 
     End Sub
 
     Private Sub grpMissingValues_ChekedChanged(sender As Object, e As EventArgs) Handles rdoFirst.CheckedChanged, rdoLast.CheckedChanged
         If rdoFirst.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("na.last", "FALSE")
+            ucrBase.clsRsyntax.AddParameter("na.last", Chr(34) & "FALSE" & Chr(34))
         Else
-            ucrBase.clsRsyntax.AddParameter("na.last", "TRUE")
+            ucrBase.clsRsyntax.AddParameter("na.last", Chr(34) & "TRUE" & Chr(34))
         End If
 
     End Sub
