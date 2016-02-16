@@ -67,17 +67,12 @@ Public Class dlgImportDataset
         intLines = lines
     End Sub
 
-    Public Sub SetFilePath(strFilePath As String, Optional bSkipLines As Boolean = False)
+    Public Sub SetFilePath(strFilePath As String)
         Dim sReader As New StreamReader(strFilePath)
         ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
         txtFileOPenPath.Text = strFilePath
         txtInputFile.Text = ""
-        'skips
-        If bSkipLines Then
-            For i As Integer = 0 To nudSkips.Value - 1
-                sReader.ReadLine()
-            Next
-        End If
+
         For i = 1 To 10 + nudSkips.Value
             txtInputFile.Text = txtInputFile.Text & sReader.ReadLine() & vbCrLf
             If sReader.Peek() = -1 Then
@@ -252,7 +247,6 @@ Public Class dlgImportDataset
     Private Sub nudSkips_ValueChanged(sender As Object, e As EventArgs) Handles nudSkips.ValueChanged
         ucrBase.clsRsyntax.AddParameter("skip", nudSkips.Value)
         If Not bFirstLoad Then
-            SetFilePath(strFilePath, bSkipLines:=True)
             refreshFrameView()
         End If
     End Sub
