@@ -59,7 +59,8 @@ Public Class dlgOptions
             Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
             strCurrLanguage = "eng"
         End If
-
+        'Sets the lines to be read
+        dlgImportDataset.setLinesToRead(nudNoLines.Value)
         If rdoFrench.Checked Then
             Thread.CurrentThread.CurrentCulture = New CultureInfo("fr-FR")
             Thread.CurrentThread.CurrentUICulture = New CultureInfo("fr-FR")
@@ -156,5 +157,10 @@ Public Class dlgOptions
         If dlgFont.ShowDialog = DialogResult.OK Then
             frmMain.clsRLink.setFormatComment(dlgFont.Font, dlgFont.Color)
         End If
+    End Sub
+
+    Private Sub nudNoLines_ValueChanged(sender As Object, e As EventArgs) Handles nudNoLines.ValueChanged
+        cmdApply.Enabled = True
+        cmdOk.Enabled = True
     End Sub
 End Class
