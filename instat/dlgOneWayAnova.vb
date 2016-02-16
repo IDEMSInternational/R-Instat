@@ -55,4 +55,8 @@ Public Class dlgOneWayANOVA
     Private Sub ucrAddRemoveDataframe_Leave(sender As Object, e As EventArgs) Handles ucrAddRemoveDataFrame.Leave
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrAddRemoveDataFrame.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgOptions.ShowDialog()
+    End Sub
 End Class
