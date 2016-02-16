@@ -8,31 +8,81 @@
 # 
 # ----------------------------------------------------------------------------
 
-climate$methods(plot_annual_rain_total = function(data_list=list(), threshold = 0.85)
-  {    
-  # get_climate_data_objects returns a list of the climate_data objects specified
-  # in the arguements.
-  # If no objects specified then all climate_data objects will be taken by default
-  # TO DO have options such as colours and the rest
-  data_list=add_to_data_info_required_variable_list(data_list, list(rain_label))
-  data_list=add_to_data_info_time_period(data_list, yearly_label)
-  climate_data_objs_list = get_climate_data_objects(data_list)
+
+climate$methods(plot_annual_rain_total = function (data_list=list(), col1="blue",ylab,xlab="Year",na.rm=TRUE, pch=20,ylim=0,type="b",lty=2,col2="red",lwd = 2,lwd2 = 1.5,
+                                                   var_label = rain_label,plot_line = FALSE,ygrid=0, graph_parameter = par(mfrow=c(2,2)),plot_window = FALSE,
+                                                   main_title="Plot - Yearly Rain Count",grid=FALSE){
+  # convert data 
+  data_list = c(data_list, convert_data=TRUE)
+  # time period
+  data_list = add_to_data_info_time_period(data_list, yearly_label)
   
-  for(data_obj in climate_data_objs_list) {
-    curr_threshold = data_obj$get_meta(threshold_label,threshold)
+  climate_data_objs = get_climate_data_objects(data_list)
+  
+  for(data_obj in climate_data_objs) {
+    data_name = data_obj$get_meta(data_name_label)
     
-    rain_col  = data_obj$variables[[rain_label]]
-    # If doy or year column is not in the data frame, create it.
-    if ( !(data_obj$is_present(dos_label)&data_obj$is_present(season_label))) {
-      # add_doy_col function does not exist yet.
-      data_obj$add_doy_col()
+    # Must add these columns if not present 
+    if( !(data_obj$is_present(year_label) ) ) { 
+      data_obj$add_year_col() 
     }
-    dos_col = data_obj$variables[[dos_label]]
-    season_col = data_obj$variables[[season_label]]
-    curr_data_list=data_obj$get_data_for_analysis(data_list)
-  }
+    year_col = data_obj$getvname(year_label)
     
-   
+    interset_var_col = data_obj$getvname ("Total Rain") 
+    
+    if(missing(ylab)){
+      ylab = interset_var_col
+    }    
+    curr_data_list = data_obj$get_data_for_analysis(data_list)
+    if (plot_window){   
+      par = graph_parameter 
+    } 
+    # loop for plotting 
+    for( curr_data in curr_data_list ) { 
+      plot_yearly_summary <- plot( curr_data[[year_col]], curr_data[[interset_var_col]],type=type,pch=pch,xlab=xlab, col=col1,ylim= c(ylim, max(curr_data[[interset_var_col]], na.rm=na.rm)),
+                                   xlim = c( min(curr_data[[year_col]], na.rm=na.rm), max( curr_data[[year_col]], na.rm=na.rm)),
+                                   ylab=ylab, main= c( data_name, main_title))
+      if (grid){
+        grid(length(curr_data[[year_col]]),ygrid, lwd = lwd)
+      }      
+      
+      #if (!plot_line) {
+      # reg=lm(curr_data[[interset_var_col]] ~ curr_data[[year_col]])
+      #abline(reg,col=col2,lwd=lwd2 )
+      #print(summary(reg))
+      #}
+      
+    }
+  }
+  par(mfrow=c(1,1))
+
+# 
+# 
+# climate$methods(plot_annual_rain_total = function(data_list=list(), threshold = 0.85)
+#   {    
+#   # get_climate_data_objects returns a list of the climate_data objects specified
+#   # in the arguements.
+#   # If no objects specified then all climate_data objects will be taken by default
+#   # TO DO have options such as colours and the rest
+#   data_list=add_to_data_info_required_variable_list(data_list, list(rain_label))
+#   data_list=add_to_data_info_time_period(data_list, yearly_label)
+#   climate_data_objs_list = get_climate_data_objects(data_list)
+#   
+#   for(data_obj in climate_data_objs_list) {
+#     curr_threshold = data_obj$get_meta(threshold_label,threshold)
+#     
+#     rain_col  = data_obj$variables[[rain_label]]
+#     # If doy or year column is not in the data frame, create it.
+#     if ( !(data_obj$is_present(dos_label)&data_obj$is_present(season_label))) {
+#       # add_doy_col function does not exist yet.
+#       data_obj$add_doy_col()
+#     }
+#     dos_col = data_obj$variables[[dos_label]]
+#     season_col = data_obj$variables[[season_label]]
+#     curr_data_list=data_obj$get_data_for_analysis(data_list)
+#   }
+#     
+#    
 ##############################################################################
 #   data$year<-year(data$Date)
 #   data$Rain<-as.numeric(data$Rain)
