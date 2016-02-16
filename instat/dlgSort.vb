@@ -23,30 +23,30 @@ Public Class dlgSort
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
         ucrReceiverSort.Selector = ucrSelectorByDataFrameAddRemove
         ucrReceiverSort.SetMeAsReceiver()
-        ucrBase.clsRsyntax.AddParameter("col_names", clsRFunctionParameter:=ucrReceiverSort.GetVariables())
         autoTranslate(Me)
         rdoLast.Checked = True
         rdoAscending.Checked = True
+        ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
 
     End Sub
     Private Sub ucrReceiverSort_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSort.Leave
-        ucrBase.clsRsyntax.AddParameter("data_name", clsRFunctionParameter:=ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
-
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
     End Sub
     Private Sub grpOrder_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged, rdoDescending.CheckedChanged
         If rdoAscending.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("Descending", Chr(34) & "FALSE" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("decreasing", "FALSE")
         Else
-            ucrBase.clsRsyntax.AddParameter("Descending", Chr(34) & "TRUE" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("decreasing", "TRUE")
         End If
 
     End Sub
 
     Private Sub grpMissingValues_ChekedChanged(sender As Object, e As EventArgs) Handles rdoFirst.CheckedChanged, rdoLast.CheckedChanged
         If rdoFirst.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("na.last", Chr(34) & "FALSE" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("na.last", "FALSE")
         Else
-            ucrBase.clsRsyntax.AddParameter("na.last", Chr(34) & "TRUE" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("na.last", "TRUE")
         End If
 
     End Sub
