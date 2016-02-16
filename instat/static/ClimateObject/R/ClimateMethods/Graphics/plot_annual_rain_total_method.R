@@ -11,7 +11,7 @@
 
 climate$methods(plot_annual_rain_total = function (data_list=list(), col1="blue",ylab,xlab="Year",na.rm=TRUE, pch=20,ylim=0,type="b",lty=2,col2="red",lwd = 2,lwd2 = 1.5,
                                                    var_label = rain_label,plot_line = FALSE,ygrid=0, graph_parameter = par(mfrow=c(2,2)),plot_window = FALSE,
-                                                   main_title="Plot - Yearly Rain Count",grid=FALSE){
+                                                   main_title="Plot - Yearly Rain Total",grid=FALSE){
   # convert data 
   data_list = c(data_list, convert_data=TRUE)
   # time period
