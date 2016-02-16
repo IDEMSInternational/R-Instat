@@ -20,12 +20,12 @@ Public Class dlgRowStats
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction("apply")
         ucrBase.clsRsyntax.iCallType = 1
-        ucrReceiverRowStatistics.Selector = ucrAddRemove
+        ucrReceiverRowStatistics.Selector = ucrSelectorByDataFrameAddRemove
         ucrReceiverRowStatistics.SetMeAsReceiver()
         ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
-        ucrNewColumnNameSelector.SetDataFrameSelector(ucrDataFrameSelector)
+        ucrNewColumnNameSelector.SetDataFrameSelector(ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames)
         ucrNewColumnNameSelector.SetPrefix("Row_Summary")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrDataFrameSelector.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
 
     End Sub
 
