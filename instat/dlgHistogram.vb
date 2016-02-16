@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-
 Public Class dlgHistogram
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_histogramFunction As New RFunction
@@ -50,13 +49,13 @@ Public Class dlgHistogram
 
             ucrBase.OKEnabled(False)
         End If
-
-
-
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
 
+    Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
+        clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
+    End Sub
 End Class
