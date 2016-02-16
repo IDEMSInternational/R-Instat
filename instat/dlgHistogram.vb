@@ -47,4 +47,7 @@ Public Class dlgHistogram
         End If
     End Sub
 
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.ShowDialog()
+    End Sub
 End Class
