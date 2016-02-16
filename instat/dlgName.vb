@@ -18,23 +18,23 @@ Imports instat.Translations
 Public Class dlgName
     Private bUseDefaultName As Boolean
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ucrSingle.Selector = ucrAddRemove
-        ucrMultiple.Selector = ucrAddRemove
+        ucrReceiverNames.Selector = ucrSelectorByDataFrameAddRemove
+        ucrReceiverNames.Selector = ucrSelectorByDataFrameAddRemove
         defaultSettings()
         'set the function
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
-        ucrSingle.txtReceiverSingle.Text = frmEditor.grdData.CurrentWorksheet.ColumnHeaders(frmEditor.grdData.CurrentWorksheet.SelectionRange.Col).[Text]
+        ucrReceiverNames.txtReceiverSingle.Text = frmEditor.grdData.CurrentWorksheet.ColumnHeaders(frmEditor.grdData.CurrentWorksheet.SelectionRange.Col).[Text]
     End Sub
 
     Private Sub defaultSettings()
         autoTranslate(Me)
-        ucrMultiple.Clear()
-        ucrMultiple.Enabled = False
-        ucrMultiple.Visible = False
-        ucrSingle.Clear()
-        ucrSingle.SetMeAsReceiver()
-        ucrSingle.Enabled = True
-        ucrSingle.Visible = True
+        ucrReceiverNames.Clear()
+        ucrReceiverNames.Enabled = False
+        ucrReceiverNames.Visible = False
+        ucrReceiverNames.Clear()
+        ucrReceiverNames.SetMeAsReceiver()
+        ucrReceiverNames.Enabled = True
+        ucrReceiverNames.Visible = True
         bUseDefaultName = True
         'txtName.Text = ""
     End Sub
@@ -43,9 +43,9 @@ Public Class dlgName
         defaultSettings()
     End Sub
 
-    Private Sub ucrSingle_ValueChanged(sender As Object, e As EventArgs) Handles ucrSingle.ValueChanged
+    Private Sub ucrSingle_ValueChanged(sender As Object, e As EventArgs) Handles ucrReceiverNames.ValueChanged
         If bUseDefaultName Then
-            txtName.Text = ucrSingle.txtReceiverSingle.Text
+            txtName.Text = ucrReceiverNames.txtReceiverSingle.Text
         End If
     End Sub
 
@@ -57,7 +57,7 @@ Public Class dlgName
     '    ucrAddRemove.AddVariable(strCurrentWorksheetName, strSelectedColumn)
     'End Sub
 
-    Private Sub ucrSingle_Leave(sender As Object, e As EventArgs) Handles ucrSingle.Leave
+    Private Sub ucrSingle_Leave(sender As Object, e As EventArgs) Handles ucrReceiverNames.Leave
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & frmEditor.grdData.CurrentWorksheet.Name & Chr(34))
         ucrBase.clsRsyntax.AddParameter("column_name", Chr(34) & frmEditor.grdData.CurrentWorksheet.ColumnHeaders(frmEditor.grdData.CurrentWorksheet.SelectionRange.Col).[Text] & Chr(34))
     End Sub
