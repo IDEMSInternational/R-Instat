@@ -35,14 +35,15 @@ Partial Class sdgPlots
         Me.tabTheme = New System.Windows.Forms.TabPage()
         Me.tabLegend = New System.Windows.Forms.TabPage()
         Me.tabFacet = New System.Windows.Forms.TabPage()
-        Me.chkFreeScales = New System.Windows.Forms.CheckBox()
+        Me.txtNoOfRows = New System.Windows.Forms.TextBox()
+        Me.chkFreeScalesY = New System.Windows.Forms.CheckBox()
+        Me.chkMargin = New System.Windows.Forms.CheckBox()
+        Me.chkFreeScalesX = New System.Windows.Forms.CheckBox()
         Me.txtNoOfColumns = New System.Windows.Forms.TextBox()
         Me.lblNoOfColumns = New System.Windows.Forms.Label()
         Me.chkWrapOptions = New System.Windows.Forms.CheckBox()
-        Me.rdoMargins = New System.Windows.Forms.RadioButton()
         Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
         Me.rdoVertical = New System.Windows.Forms.RadioButton()
-        Me.chkGridOptions = New System.Windows.Forms.CheckBox()
         Me.lblFactor2 = New System.Windows.Forms.Label()
         Me.lblFactor1 = New System.Windows.Forms.Label()
         Me.ucrReceiveFactor2 = New instat.ucrReceiverSingle()
@@ -52,6 +53,7 @@ Partial Class sdgPlots
         Me.chkConnect = New System.Windows.Forms.CheckBox()
         Me.chkDotPlot = New System.Windows.Forms.CheckBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabAxes.SuspendLayout()
         Me.tabFacet.SuspendLayout()
@@ -187,14 +189,16 @@ Partial Class sdgPlots
         '
         'tabFacet
         '
-        Me.tabFacet.Controls.Add(Me.chkFreeScales)
+        Me.tabFacet.Controls.Add(Me.CheckBox1)
+        Me.tabFacet.Controls.Add(Me.txtNoOfRows)
+        Me.tabFacet.Controls.Add(Me.chkFreeScalesY)
+        Me.tabFacet.Controls.Add(Me.chkMargin)
+        Me.tabFacet.Controls.Add(Me.chkFreeScalesX)
         Me.tabFacet.Controls.Add(Me.txtNoOfColumns)
         Me.tabFacet.Controls.Add(Me.lblNoOfColumns)
         Me.tabFacet.Controls.Add(Me.chkWrapOptions)
-        Me.tabFacet.Controls.Add(Me.rdoMargins)
         Me.tabFacet.Controls.Add(Me.rdoHorizontal)
         Me.tabFacet.Controls.Add(Me.rdoVertical)
-        Me.tabFacet.Controls.Add(Me.chkGridOptions)
         Me.tabFacet.Controls.Add(Me.lblFactor2)
         Me.tabFacet.Controls.Add(Me.lblFactor1)
         Me.tabFacet.Controls.Add(Me.ucrReceiveFactor2)
@@ -209,20 +213,48 @@ Partial Class sdgPlots
         Me.tabFacet.Text = "Facet"
         Me.tabFacet.UseVisualStyleBackColor = True
         '
-        'chkFreeScales
+        'txtNoOfRows
         '
-        Me.chkFreeScales.AutoSize = True
-        Me.chkFreeScales.Location = New System.Drawing.Point(17, 227)
-        Me.chkFreeScales.Name = "chkFreeScales"
-        Me.chkFreeScales.Size = New System.Drawing.Size(80, 17)
-        Me.chkFreeScales.TabIndex = 12
-        Me.chkFreeScales.Tag = "Free_scales"
-        Me.chkFreeScales.Text = "Free scales"
-        Me.chkFreeScales.UseVisualStyleBackColor = True
+        Me.txtNoOfRows.Location = New System.Drawing.Point(240, 201)
+        Me.txtNoOfRows.Name = "txtNoOfRows"
+        Me.txtNoOfRows.Size = New System.Drawing.Size(62, 20)
+        Me.txtNoOfRows.TabIndex = 15
+        '
+        'chkFreeScalesY
+        '
+        Me.chkFreeScalesY.AutoSize = True
+        Me.chkFreeScalesY.Location = New System.Drawing.Point(151, 227)
+        Me.chkFreeScalesY.Name = "chkFreeScalesY"
+        Me.chkFreeScalesY.Size = New System.Drawing.Size(109, 17)
+        Me.chkFreeScalesY.TabIndex = 14
+        Me.chkFreeScalesY.Tag = "Free_scales"
+        Me.chkFreeScalesY.Text = "Free scales y-axis"
+        Me.chkFreeScalesY.UseVisualStyleBackColor = True
+        '
+        'chkMargin
+        '
+        Me.chkMargin.AutoSize = True
+        Me.chkMargin.Location = New System.Drawing.Point(17, 174)
+        Me.chkMargin.Name = "chkMargin"
+        Me.chkMargin.Size = New System.Drawing.Size(63, 17)
+        Me.chkMargin.TabIndex = 13
+        Me.chkMargin.Text = "Margins"
+        Me.chkMargin.UseVisualStyleBackColor = True
+        '
+        'chkFreeScalesX
+        '
+        Me.chkFreeScalesX.AutoSize = True
+        Me.chkFreeScalesX.Location = New System.Drawing.Point(17, 227)
+        Me.chkFreeScalesX.Name = "chkFreeScalesX"
+        Me.chkFreeScalesX.Size = New System.Drawing.Size(109, 17)
+        Me.chkFreeScalesX.TabIndex = 12
+        Me.chkFreeScalesX.Tag = "Free_scales"
+        Me.chkFreeScalesX.Text = "Free scales x-axis"
+        Me.chkFreeScalesX.UseVisualStyleBackColor = True
         '
         'txtNoOfColumns
         '
-        Me.txtNoOfColumns.Location = New System.Drawing.Point(241, 195)
+        Me.txtNoOfColumns.Location = New System.Drawing.Point(240, 172)
         Me.txtNoOfColumns.Name = "txtNoOfColumns"
         Me.txtNoOfColumns.Size = New System.Drawing.Size(62, 20)
         Me.txtNoOfColumns.TabIndex = 11
@@ -230,7 +262,7 @@ Partial Class sdgPlots
         'lblNoOfColumns
         '
         Me.lblNoOfColumns.AutoSize = True
-        Me.lblNoOfColumns.Location = New System.Drawing.Point(133, 198)
+        Me.lblNoOfColumns.Location = New System.Drawing.Point(136, 175)
         Me.lblNoOfColumns.Name = "lblNoOfColumns"
         Me.lblNoOfColumns.Size = New System.Drawing.Size(98, 13)
         Me.lblNoOfColumns.TabIndex = 10
@@ -240,7 +272,7 @@ Partial Class sdgPlots
         'chkWrapOptions
         '
         Me.chkWrapOptions.AutoSize = True
-        Me.chkWrapOptions.Location = New System.Drawing.Point(17, 194)
+        Me.chkWrapOptions.Location = New System.Drawing.Point(203, 139)
         Me.chkWrapOptions.Name = "chkWrapOptions"
         Me.chkWrapOptions.Size = New System.Drawing.Size(89, 17)
         Me.chkWrapOptions.TabIndex = 9
@@ -248,22 +280,10 @@ Partial Class sdgPlots
         Me.chkWrapOptions.Text = "Wrap options"
         Me.chkWrapOptions.UseVisualStyleBackColor = True
         '
-        'rdoMargins
-        '
-        Me.rdoMargins.AutoSize = True
-        Me.rdoMargins.Location = New System.Drawing.Point(272, 163)
-        Me.rdoMargins.Name = "rdoMargins"
-        Me.rdoMargins.Size = New System.Drawing.Size(62, 17)
-        Me.rdoMargins.TabIndex = 8
-        Me.rdoMargins.TabStop = True
-        Me.rdoMargins.Tag = "Margins"
-        Me.rdoMargins.Text = "Margins"
-        Me.rdoMargins.UseVisualStyleBackColor = True
-        '
         'rdoHorizontal
         '
         Me.rdoHorizontal.AutoSize = True
-        Me.rdoHorizontal.Location = New System.Drawing.Point(159, 163)
+        Me.rdoHorizontal.Location = New System.Drawing.Point(83, 138)
         Me.rdoHorizontal.Name = "rdoHorizontal"
         Me.rdoHorizontal.Size = New System.Drawing.Size(72, 17)
         Me.rdoHorizontal.TabIndex = 7
@@ -275,7 +295,7 @@ Partial Class sdgPlots
         'rdoVertical
         '
         Me.rdoVertical.AutoSize = True
-        Me.rdoVertical.Location = New System.Drawing.Point(50, 163)
+        Me.rdoVertical.Location = New System.Drawing.Point(17, 139)
         Me.rdoVertical.Name = "rdoVertical"
         Me.rdoVertical.Size = New System.Drawing.Size(60, 17)
         Me.rdoVertical.TabIndex = 6
@@ -283,17 +303,6 @@ Partial Class sdgPlots
         Me.rdoVertical.Tag = "Vertical"
         Me.rdoVertical.Text = "Vertical"
         Me.rdoVertical.UseVisualStyleBackColor = True
-        '
-        'chkGridOptions
-        '
-        Me.chkGridOptions.AutoSize = True
-        Me.chkGridOptions.Location = New System.Drawing.Point(17, 140)
-        Me.chkGridOptions.Name = "chkGridOptions"
-        Me.chkGridOptions.Size = New System.Drawing.Size(82, 17)
-        Me.chkGridOptions.TabIndex = 5
-        Me.chkGridOptions.Tag = "Grid_options"
-        Me.chkGridOptions.Text = "Grid options"
-        Me.chkGridOptions.UseVisualStyleBackColor = True
         '
         'lblFactor2
         '
@@ -377,6 +386,16 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(253, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(100, 4)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(81, 17)
+        Me.CheckBox1.TabIndex = 16
+        Me.CheckBox1.Text = "CheckBox1"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -415,14 +434,12 @@ Partial Class sdgPlots
     Friend WithEvents lblTitle As Label
     Friend WithEvents lblYlabel As Label
     Friend WithEvents lblXlabel As Label
-    Friend WithEvents chkFreeScales As CheckBox
+    Friend WithEvents chkFreeScalesX As CheckBox
     Friend WithEvents txtNoOfColumns As TextBox
     Friend WithEvents lblNoOfColumns As Label
     Friend WithEvents chkWrapOptions As CheckBox
-    Friend WithEvents rdoMargins As RadioButton
     Friend WithEvents rdoHorizontal As RadioButton
     Friend WithEvents rdoVertical As RadioButton
-    Friend WithEvents chkGridOptions As CheckBox
     Friend WithEvents lblFactor2 As Label
     Friend WithEvents lblFactor1 As Label
     Friend WithEvents ucrReceiveFactor2 As ucrReceiverSingle
@@ -430,4 +447,8 @@ Partial Class sdgPlots
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents chkConnect As CheckBox
     Friend WithEvents chkDotPlot As CheckBox
+    Friend WithEvents chkMargin As CheckBox
+    Friend WithEvents chkFreeScalesY As CheckBox
+    Friend WithEvents txtNoOfRows As TextBox
+    Friend WithEvents CheckBox1 As CheckBox
 End Class
