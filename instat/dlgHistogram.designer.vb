@@ -26,6 +26,8 @@ Partial Class dlgHistogram
         Me.ucrBase = New instat.ucrButtons()
         Me.lblVariableToPlot = New System.Windows.Forms.Label()
         Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.cmdHistogramOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrXReceiver
@@ -59,11 +61,33 @@ Partial Class dlgHistogram
         Me.ucrHistogramSelector.Size = New System.Drawing.Size(242, 179)
         Me.ucrHistogramSelector.TabIndex = 7
         '
+        'cmdOptions
+        '
+        Me.cmdOptions.Location = New System.Drawing.Point(289, 66)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.TabIndex = 8
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'cmdHistogramOptions
+        '
+        Me.cmdHistogramOptions.Location = New System.Drawing.Point(289, 95)
+        Me.cmdHistogramOptions.Name = "cmdHistogramOptions"
+        Me.cmdHistogramOptions.Size = New System.Drawing.Size(103, 23)
+        Me.cmdHistogramOptions.TabIndex = 8
+        Me.cmdHistogramOptions.Tag = "Histogram_Options"
+        Me.cmdHistogramOptions.Text = "Histogram Options"
+        Me.cmdHistogramOptions.UseVisualStyleBackColor = True
+        '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(422, 269)
+        Me.Controls.Add(Me.cmdHistogramOptions)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrHistogramSelector)
         Me.Controls.Add(Me.lblVariableToPlot)
         Me.Controls.Add(Me.ucrBase)
@@ -81,4 +105,6 @@ Partial Class dlgHistogram
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblVariableToPlot As Label
     Friend WithEvents ucrHistogramSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents cmdOptions As Button
+    Friend WithEvents cmdHistogramOptions As Button
 End Class
