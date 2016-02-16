@@ -162,6 +162,12 @@
     <Compile Include="dlgAnnualRaintotal.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgBarAndPieChart.Designer.vb">
+      <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgBarAndPieChart.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgBivariateANOVA.Designer.vb">
       <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
     </Compile>
@@ -1185,6 +1191,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAnnualRaintotal.sw-KE.resx">
       <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBarAndPieChart.fr-FR.resx">
+      <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBarAndPieChart.resx">
+      <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBarAndPieChart.sw-KE.resx">
+      <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBivariateANOVA.fr-FR.resx">
       <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
