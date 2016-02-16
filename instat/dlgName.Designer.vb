@@ -22,39 +22,23 @@ Partial Class dlgName
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrSingle = New instat.ucrReceiverSingle()
-        Me.ucrMultiple = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverNames = New instat.ucrReceiverSingle()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.lblName = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorByDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
-        'ucrAddRemove
+        'ucrReceiverNames
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(4, 5)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
-        Me.ucrAddRemove.TabIndex = 0
-        '
-        'ucrSingle
-        '
-        Me.ucrSingle.Location = New System.Drawing.Point(283, 23)
-        Me.ucrSingle.Name = "ucrSingle"
-        Me.ucrSingle.Size = New System.Drawing.Size(106, 26)
-        Me.ucrSingle.TabIndex = 1
-        '
-        'ucrMultiple
-        '
-        Me.ucrMultiple.Enabled = False
-        Me.ucrMultiple.Location = New System.Drawing.Point(277, 23)
-        Me.ucrMultiple.Name = "ucrMultiple"
-        Me.ucrMultiple.Size = New System.Drawing.Size(121, 84)
-        Me.ucrMultiple.TabIndex = 2
+        Me.ucrReceiverNames.Location = New System.Drawing.Point(287, 31)
+        Me.ucrReceiverNames.Name = "ucrReceiverNames"
+        Me.ucrReceiverNames.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverNames.TabIndex = 1
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(293, 132)
+        Me.txtName.Location = New System.Drawing.Point(295, 172)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(100, 20)
         Me.txtName.TabIndex = 3
@@ -62,7 +46,7 @@ Partial Class dlgName
         'lblName
         '
         Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(236, 135)
+        Me.lblName.Location = New System.Drawing.Point(245, 179)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(35, 13)
         Me.lblName.TabIndex = 4
@@ -72,22 +56,28 @@ Partial Class dlgName
         'ucrBase
         '
         Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ucrBase.Location = New System.Drawing.Point(0, 176)
+        Me.ucrBase.Location = New System.Drawing.Point(0, 213)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(407, 59)
+        Me.ucrBase.Size = New System.Drawing.Size(416, 59)
         Me.ucrBase.TabIndex = 5
+        '
+        'ucrSelectorByDataFrameAddRemove
+        '
+        Me.ucrSelectorByDataFrameAddRemove.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorByDataFrameAddRemove.Name = "ucrSelectorByDataFrameAddRemove"
+        Me.ucrSelectorByDataFrameAddRemove.Size = New System.Drawing.Size(226, 179)
+        Me.ucrSelectorByDataFrameAddRemove.TabIndex = 6
         '
         'dlgName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(407, 235)
+        Me.ClientSize = New System.Drawing.Size(416, 272)
+        Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.txtName)
-        Me.Controls.Add(Me.ucrMultiple)
-        Me.Controls.Add(Me.ucrSingle)
-        Me.Controls.Add(Me.ucrAddRemove)
+        Me.Controls.Add(Me.ucrReceiverNames)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgName"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -97,11 +87,9 @@ Partial Class dlgName
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents ucrSingle As ucrReceiverSingle
-    Friend WithEvents ucrMultiple As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverNames As ucrReceiverSingle
     Friend WithEvents txtName As TextBox
     Friend WithEvents lblName As Label
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSelectorByDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
 End Class
