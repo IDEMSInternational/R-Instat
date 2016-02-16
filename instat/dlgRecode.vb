@@ -18,8 +18,19 @@
 Imports instat.Translations
 Public Class dlgRecode
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrRecodeRececeiver.Selector = ucrRecodeSelector
-        ucrRecodeRececeiver.SetMeAsReceiver()
+        ucrReceiverRecode.Selector = ucrSelectorByDataFrameAddRemove
+        ucrReceiverRecode.SetMeAsReceiver()
         autoTranslate(Me)
+
+        ucrNewColumnName.SetDataFrameSelector(ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames)
+        ucrNewColumnName.SetPrefix("Recode")
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.cboColumnName.Text)
+
     End Sub
+    Private Sub ucrReceiverRecode_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRecode.Leave
+        ucrBase.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverRecode.GetVariables())
+
+    End Sub
+
+
 End Class
