@@ -41,11 +41,16 @@ Partial Class dlgOptions
         Me.lblRScript = New System.Windows.Forms.Label()
         Me.lblOutput = New System.Windows.Forms.Label()
         Me.lblComments = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.tbpImport = New System.Windows.Forms.TabPage()
+        Me.lblShowLines = New System.Windows.Forms.Label()
+        Me.nudNoLines = New System.Windows.Forms.NumericUpDown()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguageSettings.SuspendLayout()
         Me.tbpComments.SuspendLayout()
         Me.tbpFormat.SuspendLayout()
+        Me.tbpImport.SuspendLayout()
+        CType(Me.nudNoLines, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tbcOptions
@@ -53,6 +58,7 @@ Partial Class dlgOptions
         Me.tbcOptions.Controls.Add(Me.tbpLanguageSettings)
         Me.tbcOptions.Controls.Add(Me.tbpComments)
         Me.tbcOptions.Controls.Add(Me.tbpFormat)
+        Me.tbcOptions.Controls.Add(Me.tbpImport)
         Me.tbcOptions.Location = New System.Drawing.Point(13, 13)
         Me.tbcOptions.Name = "tbcOptions"
         Me.tbcOptions.SelectedIndex = 0
@@ -140,7 +146,7 @@ Partial Class dlgOptions
         '
         'tbpFormat
         '
-        Me.tbpFormat.Controls.Add(Me.Label1)
+        Me.tbpFormat.Controls.Add(Me.lblTitle)
         Me.tbpFormat.Controls.Add(Me.lblComments)
         Me.tbpFormat.Controls.Add(Me.lblOutput)
         Me.tbpFormat.Controls.Add(Me.lblRScript)
@@ -249,17 +255,46 @@ Partial Class dlgOptions
         Me.lblComments.TabIndex = 19
         Me.lblComments.Text = "Comments"
         '
-        'Label1
+        'lblTitle
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(6, 19)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(333, 15)
-        Me.Label1.TabIndex = 20
-        Me.Label1.Text = "Preview and Set the Font and Color Formats for the following Options"
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblTitle.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitle.Location = New System.Drawing.Point(6, 19)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(333, 15)
+        Me.lblTitle.TabIndex = 20
+        Me.lblTitle.Text = "Preview and Set the Font and Color Formats for the following Options"
+        '
+        'tbpImport
+        '
+        Me.tbpImport.Controls.Add(Me.nudNoLines)
+        Me.tbpImport.Controls.Add(Me.lblShowLines)
+        Me.tbpImport.Location = New System.Drawing.Point(4, 22)
+        Me.tbpImport.Name = "tbpImport"
+        Me.tbpImport.Size = New System.Drawing.Size(392, 233)
+        Me.tbpImport.TabIndex = 3
+        Me.tbpImport.Text = "Import Data"
+        Me.tbpImport.UseVisualStyleBackColor = True
+        '
+        'lblShowLines
+        '
+        Me.lblShowLines.AutoSize = True
+        Me.lblShowLines.Location = New System.Drawing.Point(21, 21)
+        Me.lblShowLines.Name = "lblShowLines"
+        Me.lblShowLines.Size = New System.Drawing.Size(158, 13)
+        Me.lblShowLines.TabIndex = 0
+        Me.lblShowLines.Text = "Number of lines to show on load"
+        '
+        'nudNoLines
+        '
+        Me.nudNoLines.Location = New System.Drawing.Point(244, 21)
+        Me.nudNoLines.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudNoLines.Name = "nudNoLines"
+        Me.nudNoLines.Size = New System.Drawing.Size(75, 20)
+        Me.nudNoLines.TabIndex = 1
+        Me.nudNoLines.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'dlgOptions
         '
@@ -283,6 +318,9 @@ Partial Class dlgOptions
         Me.tbpComments.PerformLayout()
         Me.tbpFormat.ResumeLayout(False)
         Me.tbpFormat.PerformLayout()
+        Me.tbpImport.ResumeLayout(False)
+        Me.tbpImport.PerformLayout()
+        CType(Me.nudNoLines, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -302,8 +340,11 @@ Partial Class dlgOptions
     Friend WithEvents cmdScriptChange As Button
     Friend WithEvents cmdOutputChange As Button
     Friend WithEvents cmdCommentsChange As Button
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblTitle As Label
     Friend WithEvents lblComments As Label
     Friend WithEvents lblOutput As Label
     Friend WithEvents lblRScript As Label
+    Friend WithEvents tbpImport As TabPage
+    Friend WithEvents nudNoLines As NumericUpDown
+    Friend WithEvents lblShowLines As Label
 End Class
