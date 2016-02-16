@@ -15,7 +15,7 @@ start_of_rain_summary_label="summary_start_of_rain"
 end_of_rain_summary_label="summary_end_of_rain"
 
 # list of summary functions
-summaries_list=c(sum_label, mode_label, count_label, sd_label, median_label, range_label, count_label, min_label, max_label, mean_label, running_summary_label, start_of_rain_summary_label, end_of_rain_summary_label)
+summaries_list=c(sum_label, mode_label, count_label, sd_label, median_label, range_label, count_label, min_label, max_label, mean_label, running_summary_label, start_of_rain_summary_label, end_of_rain_summary_label, count_over_threshold_label)
 
 summary_mode <- function(x,...) {
   ux <- unique(x)
@@ -98,7 +98,7 @@ summary_running_summary <- function(data, total_days = 1, func = max_label, na.r
     h[i] <- match.fun(sum_label)(data[i:(i+total_days-1)], na.rm = na.rm)
   }
   
-  print(h)
+ # print(h)
   if(missing(func)) return(h)
   else {
     func = match.fun(func)
@@ -184,7 +184,7 @@ summary_end_of_rain <- function(data, earliest_day = 228,...) {
   end_rain
 }
 
-summary_count_over_threshold <- function(x, na.rm = FALSE, threshold = 0, strict_ineq = TRUE,...) {
+summary_count_over_threshold <- function(x, na.rm = FALSE, threshold = 0.85, strict_ineq = TRUE,...) {
   if(strict_ineq) return(sum(x>threshold, na.rm=na.rm))
   else return(sum(x>=threshold, na.rm=na.rm))
   

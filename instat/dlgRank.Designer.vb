@@ -23,8 +23,6 @@ Partial Class dlgRank
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrDataFrameSelector = New instat.ucrDataFrame()
         Me.ucrReceiverRank = New instat.ucrReceiverSingle()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.grpTies = New System.Windows.Forms.GroupBox()
@@ -38,34 +36,21 @@ Partial Class dlgRank
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirstMissingValues = New System.Windows.Forms.RadioButton()
         Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
+        Me.ucrSelectorDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(3, 325)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 343)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(403, 53)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(3, 53)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
-        Me.ucrAddRemove.TabIndex = 1
-        '
-        'ucrDataFrameSelector
-        '
-        Me.ucrDataFrameSelector.Location = New System.Drawing.Point(3, 2)
-        Me.ucrDataFrameSelector.Name = "ucrDataFrameSelector"
-        Me.ucrDataFrameSelector.Size = New System.Drawing.Size(127, 41)
-        Me.ucrDataFrameSelector.TabIndex = 2
-        '
         'ucrReceiverRank
         '
-        Me.ucrReceiverRank.Location = New System.Drawing.Point(242, 71)
+        Me.ucrReceiverRank.Location = New System.Drawing.Point(261, 49)
         Me.ucrReceiverRank.Name = "ucrReceiverRank"
         Me.ucrReceiverRank.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverRank.TabIndex = 3
@@ -73,7 +58,7 @@ Partial Class dlgRank
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(248, 58)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(261, 33)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(89, 13)
         Me.lblSelectedVariable.TabIndex = 4
@@ -87,9 +72,9 @@ Partial Class dlgRank
         Me.grpTies.Controls.Add(Me.rdoMaximum)
         Me.grpTies.Controls.Add(Me.rdoMinimum)
         Me.grpTies.Controls.Add(Me.rdoAverage)
-        Me.grpTies.Location = New System.Drawing.Point(230, 114)
+        Me.grpTies.Location = New System.Drawing.Point(261, 81)
         Me.grpTies.Name = "grpTies"
-        Me.grpTies.Size = New System.Drawing.Size(176, 140)
+        Me.grpTies.Size = New System.Drawing.Size(154, 140)
         Me.grpTies.TabIndex = 5
         Me.grpTies.TabStop = False
         Me.grpTies.Tag = "Ties"
@@ -160,7 +145,7 @@ Partial Class dlgRank
         Me.grpMissingValues.Controls.Add(Me.rdoKeptAsMissing)
         Me.grpMissingValues.Controls.Add(Me.rdoLast)
         Me.grpMissingValues.Controls.Add(Me.rdoFirstMissingValues)
-        Me.grpMissingValues.Location = New System.Drawing.Point(12, 186)
+        Me.grpMissingValues.Location = New System.Drawing.Point(12, 202)
         Me.grpMissingValues.Name = "grpMissingValues"
         Me.grpMissingValues.Size = New System.Drawing.Size(180, 94)
         Me.grpMissingValues.TabIndex = 6
@@ -195,7 +180,7 @@ Partial Class dlgRank
         'rdoFirstMissingValues
         '
         Me.rdoFirstMissingValues.AutoSize = True
-        Me.rdoFirstMissingValues.Location = New System.Drawing.Point(7, 43)
+        Me.rdoFirstMissingValues.Location = New System.Drawing.Point(7, 42)
         Me.rdoFirstMissingValues.Name = "rdoFirstMissingValues"
         Me.rdoFirstMissingValues.Size = New System.Drawing.Size(44, 17)
         Me.rdoFirstMissingValues.TabIndex = 0
@@ -206,24 +191,30 @@ Partial Class dlgRank
         '
         'ucrNewColumnNameSelector
         '
-        Me.ucrNewColumnNameSelector.Location = New System.Drawing.Point(12, 284)
+        Me.ucrNewColumnNameSelector.Location = New System.Drawing.Point(12, 302)
         Me.ucrNewColumnNameSelector.Name = "ucrNewColumnNameSelector"
         Me.ucrNewColumnNameSelector.Size = New System.Drawing.Size(367, 35)
         Me.ucrNewColumnNameSelector.TabIndex = 7
         Me.ucrNewColumnNameSelector.ucrDataFrameSelector = Nothing
         '
+        'ucrSelectorDataFrameAddRemove
+        '
+        Me.ucrSelectorDataFrameAddRemove.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorDataFrameAddRemove.Name = "ucrSelectorDataFrameAddRemove"
+        Me.ucrSelectorDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorDataFrameAddRemove.TabIndex = 8
+        '
         'dlgRank
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 385)
+        Me.ClientSize = New System.Drawing.Size(454, 408)
+        Me.Controls.Add(Me.ucrSelectorDataFrameAddRemove)
         Me.Controls.Add(Me.ucrNewColumnNameSelector)
         Me.Controls.Add(Me.grpMissingValues)
         Me.Controls.Add(Me.grpTies)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrReceiverRank)
-        Me.Controls.Add(Me.ucrDataFrameSelector)
-        Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgRank"
@@ -239,8 +230,6 @@ Partial Class dlgRank
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents ucrDataFrameSelector As ucrDataFrame
     Friend WithEvents ucrReceiverRank As ucrReceiverSingle
     Friend WithEvents lblSelectedVariable As Label
     Friend WithEvents grpTies As GroupBox
@@ -254,4 +243,5 @@ Partial Class dlgRank
     Friend WithEvents rdoLast As RadioButton
     Friend WithEvents rdoFirstMissingValues As RadioButton
     Friend WithEvents ucrNewColumnNameSelector As ucrNewColumnName
+    Friend WithEvents ucrSelectorDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
 End Class
