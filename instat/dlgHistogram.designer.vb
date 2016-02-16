@@ -22,73 +22,52 @@ Partial Class dlgHistogram
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrXReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.txtHistogramTitle = New System.Windows.Forms.TextBox()
         Me.lblVariableToPlot = New System.Windows.Forms.Label()
+        Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(12, 12)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(211, 129)
-        Me.ucrAddRemove.TabIndex = 1
         '
         'ucrXReceiver
         '
-        Me.ucrXReceiver.Location = New System.Drawing.Point(229, 33)
+        Me.ucrXReceiver.Location = New System.Drawing.Point(286, 33)
         Me.ucrXReceiver.Name = "ucrXReceiver"
         Me.ucrXReceiver.Size = New System.Drawing.Size(106, 26)
         Me.ucrXReceiver.TabIndex = 2
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 155)
+        Me.ucrBase.Location = New System.Drawing.Point(4, 205)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 3
         '
-        'lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(230, 66)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(107, 13)
-        Me.lblTitle.TabIndex = 4
-        Me.lblTitle.Tag = "Title"
-        Me.lblTitle.Text = "Title of the Histogram"
-        '
-        'txtHistogramTitle
-        '
-        Me.txtHistogramTitle.Location = New System.Drawing.Point(233, 82)
-        Me.txtHistogramTitle.Name = "txtHistogramTitle"
-        Me.txtHistogramTitle.Size = New System.Drawing.Size(100, 20)
-        Me.txtHistogramTitle.TabIndex = 5
-        '
         'lblVariableToPlot
         '
         Me.lblVariableToPlot.AutoSize = True
-        Me.lblVariableToPlot.Location = New System.Drawing.Point(233, 14)
+        Me.lblVariableToPlot.Location = New System.Drawing.Point(288, 14)
         Me.lblVariableToPlot.Name = "lblVariableToPlot"
         Me.lblVariableToPlot.Size = New System.Drawing.Size(78, 13)
         Me.lblVariableToPlot.TabIndex = 6
         Me.lblVariableToPlot.Tag = "Variable_to_Plot"
         Me.lblVariableToPlot.Text = "Variable to Plot"
         '
+        'ucrHistogramSelector
+        '
+        Me.ucrHistogramSelector.Location = New System.Drawing.Point(0, 8)
+        Me.ucrHistogramSelector.Name = "ucrHistogramSelector"
+        Me.ucrHistogramSelector.Size = New System.Drawing.Size(242, 179)
+        Me.ucrHistogramSelector.TabIndex = 7
+        '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 215)
+        Me.ClientSize = New System.Drawing.Size(422, 269)
+        Me.Controls.Add(Me.ucrHistogramSelector)
         Me.Controls.Add(Me.lblVariableToPlot)
-        Me.Controls.Add(Me.txtHistogramTitle)
-        Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrXReceiver)
-        Me.Controls.Add(Me.ucrAddRemove)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgHistogram"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -98,10 +77,8 @@ Partial Class dlgHistogram
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrXReceiver As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblTitle As Label
-    Friend WithEvents txtHistogramTitle As TextBox
     Friend WithEvents lblVariableToPlot As Label
+    Friend WithEvents ucrHistogramSelector As ucrSelectorByDataFrameAddRemove
 End Class
