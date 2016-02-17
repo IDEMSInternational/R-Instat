@@ -1,4 +1,4 @@
-﻿' Instat+R
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -13,19 +13,23 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat.Translations
 
-Public Class ucrSelectorByDataFrame
-    Private Sub ucrSelectorByDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadList()
-    End Sub
-    Public Event DataFrameChanged(sender As Object, e As EventArgs)
-    Private Sub ucrAvailableDataFrames_Load(sender As Object, e As EventArgs) Handles ucrAvailableDataFrames.DataFrameChanged
-        LoadList()
-        RaiseEvent DataFrameChanged(sender, e)
-    End Sub
-
-    Public Overrides Sub LoadList()
-        frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType:=CurrentReceiver.strDataType, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+Public Class dlgBarAndPieChart
+    Private Sub dlgBarAndPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrFactorReceiver.Selector = ucrBarChartSelector
+        ucrSecondReceiver.Selector = ucrBarChartSelector
+        ucrFactorReceiver.SetMeAsReceiver()
+        rdoBarChart.Checked = True
+        ucrBase.clsRsyntax.iCallType = 0
+        autoTranslate(Me)
     End Sub
 
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.ShowDialog()
+    End Sub
+
+    Private Sub rdoBarChart_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged
+
+    End Sub
 End Class

@@ -260,6 +260,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to By Second Factor.
+        '''</summary>
+        Friend ReadOnly Property By_Second_Factor() As String
+            Get
+                Return ResourceManager.GetString("By_Second_Factor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Calculations.
         '''</summary>
         Friend ReadOnly Property Calculations() As String
@@ -783,6 +792,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Density.
+        '''</summary>
+        Friend ReadOnly Property Density() As String
+            Get
+                Return ResourceManager.GetString("Density", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Descending.
         '''</summary>
         Friend ReadOnly Property Descending() As String
@@ -1296,6 +1314,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Freequency Polygon.
+        '''</summary>
+        Friend ReadOnly Property Freequency_Polygon() As String
+            Get
+                Return ResourceManager.GetString("Freequency_Polygon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to French.
         '''</summary>
         Friend ReadOnly Property French() As String
@@ -1454,6 +1481,15 @@ Namespace My.Resources
         Friend ReadOnly Property Histogram() As String
             Get
                 Return ResourceManager.GetString("Histogram", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Histogram Options.
+        '''</summary>
+        Friend ReadOnly Property Histogram_Options() As String
+            Get
+                Return ResourceManager.GetString("Histogram_Options", resourceCulture)
             End Get
         End Property
         
@@ -2384,6 +2420,15 @@ Namespace My.Resources
         Friend ReadOnly Property Plot_character() As String
             Get
                 Return ResourceManager.GetString("Plot_character", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Plot Options.
+        '''</summary>
+        Friend ReadOnly Property Plot_Options() As String
+            Get
+                Return ResourceManager.GetString("Plot_Options", resourceCulture)
             End Get
         End Property
         
