@@ -670,6 +670,10 @@ Public Class frmMain
         frmVariables.BringToFront()
     End Sub
 
+    Private Sub mnuManageDataFrameInsert_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameInsert.Click
+        dlgInsertColumn.ShowDialog()
+    End Sub
+
     Private Sub mnuManageDataFrameRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameRename.Click
         dlgName.ShowDialog()
     End Sub

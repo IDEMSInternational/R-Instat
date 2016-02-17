@@ -47,6 +47,7 @@ Partial Class dlgInsertColumn
         '
         Me.txtDefaultData.Location = New System.Drawing.Point(12, 71)
         Me.txtDefaultData.Name = "txtDefaultData"
+        Me.txtDefaultData.ReadOnly = True
         Me.txtDefaultData.Size = New System.Drawing.Size(100, 20)
         Me.txtDefaultData.TabIndex = 1
         '
