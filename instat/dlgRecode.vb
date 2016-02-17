@@ -20,13 +20,15 @@ Public Class dlgRecode
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrReceiverRecode.Selector = ucrSelectorDataFrameAddRemove
         ucrReceiverRecode.SetMeAsReceiver()
+        ucrMultipleNumericBreakPoints.bIsNumericInput = True
+        chkAddLabels.Checked = False
+        ucrMultipleLabels.Visible = False
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction("cut")
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
         ucrSelectorNewColumnName.SetDataFrameSelector(ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames)
         ucrSelectorNewColumnName.SetPrefix("Recode")
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSelectorNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSelectorNewColumnName.cboColumnName.Text)
-
     End Sub
     Private Sub ucrReceiverRecode_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRecode.Leave
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRecode.GetVariables())
@@ -34,31 +36,61 @@ Public Class dlgRecode
     End Sub
 
     Private Sub ucrMultipleNumeric_Leave(sender As Object, e As EventArgs) Handles ucrMultipleNumericBreakPoints.Leave
+        If ucrMultipleNumericBreakPoints.clsNumericList.clsParameters.Count = 1 Then
+            If ucrMultipleNumericBreakPoints.txtNumericItems.Text < 2 Then
+                MsgBox("If break points is a single number, it specify a number of intervals > 1.", vbOKOnly, "Validation Error")
+            End If
+        Else
+            ValidateBreakPointLabelCount(True)
+        End If
         ucrBase.clsRsyntax.AddParameter("breaks", clsRFunctionParameter:=ucrMultipleNumericBreakPoints.clsNumericList)
-
     End Sub
 
+    Private Sub ucrMultipleLabels_Leave(sender As Object, e As EventArgs) Handles ucrMultipleLabels.Leave
+        ValidateBreakPointLabelCount(False)
+        AddLabelsParameter()
+    End Sub
 
+    Private Sub AddLabelsParameter()
+        If ucrMultipleLabels.txtNumericItems.Text <> "" Then
+            ucrBase.clsRsyntax.AddParameter("labels", clsRFunctionParameter:=ucrMultipleLabels.clsNumericList)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("labels")
+        End If
+    End Sub
+
+    Private Sub ValidateBreakPointLabelCount(bBreakPointFocused As Boolean)
+        If ucrMultipleNumericBreakPoints.clsNumericList.clsParameters.Count > 1 Then
+            If ucrMultipleNumericBreakPoints.txtNumericItems.Text <> "" And ucrMultipleLabels.txtNumericItems.Text <> "" Then
+                If ucrMultipleLabels.clsNumericList.clsParameters.Count <> ucrMultipleNumericBreakPoints.clsNumericList.clsParameters.Count - 1 Then
+                    MsgBox("There must be one less label than the number of break points.", vbOKOnly, "Validation Error")
+                    If bBreakPointFocused Then
+                        ucrMultipleNumericBreakPoints.Focus()
+                    Else
+                        ucrMultipleLabels.Focus()
+                    End If
+                End If
+            End If
+        End If
+    End Sub
 
     Private Sub chkAddLabels_CheckedChanged(sender As Object, e As EventArgs) Handles chkAddLabels.CheckedChanged
-        If chkAddLabels.Checked = True Then
-            'need to be changed
-            ucrBase.clsRsyntax.AddParameter("labels", "NULL")
-        ElseIf chkAddLabels.Checked = False Then
-            ucrBase.clsRsyntax.AddParameter("labels", "NULL")
+        If chkAddLabels.Checked Then
+            ucrMultipleLabels.Visible = True
+            AddLabelsParameter()
+        Else
+            ucrMultipleLabels.Visible = False
+            ucrBase.clsRsyntax.RemoveParameter("labels")
         End If
 
     End Sub
 
     Private Sub grpClosedOn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLeft.CheckedChanged, rdoRight.CheckedChanged
-        If rdoLeft.Checked = True Then
+        If rdoLeft.Checked Then
             ucrBase.clsRsyntax.AddParameter("right", "FALSE")
         Else
             ucrBase.clsRsyntax.AddParameter("right", "TRUE")
-
         End If
-
     End Sub
-
 
 End Class
