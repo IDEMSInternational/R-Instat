@@ -798,12 +798,6 @@
     <Compile Include="dlgSaveAs.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgScatterPlot.Designer.vb">
-      <DependentUpon>dlgScatterPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgScatterPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgSeasonalSummary.designer.vb">
       <DependentUpon>dlgSeasonalSummary.vb</DependentUpon>
     </Compile>
@@ -1104,18 +1098,6 @@
       <DependentUpon>ucrFactor.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrFactor.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucrFactorMultiple.Designer.vb">
-      <DependentUpon>ucrFactorMultiple.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrFactorMultiple.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucrFactorSingle.Designer.vb">
-      <DependentUpon>ucrFactorSingle.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrFactorSingle.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrMultipleNumeric.Designer.vb">
@@ -2535,6 +2517,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDistributionsWithParameters.sw-KE.resx">
       <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFactor.fr-FR.resx">
+      <DependentUpon>ucrFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFactor.resx">
+      <DependentUpon>ucrFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFactor.sw-KE.resx">
+      <DependentUpon>ucrFactor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleNumeric.fr-FR.resx">
       <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
