@@ -313,6 +313,7 @@ data_obj$methods(append_to_metadata = function(name, value) {
   else {
     metadata[[name]] <<- value 
     .self$append_to_changes(list(Added_metadata, name))
+    .self$set_metadata_changed(TRUE)
   }
 }
 )
