@@ -28,7 +28,6 @@ Public Class ucrReceiverSingle
             bSelected = True
             txtReceiverSingle.Text = objItem.text
         Next
-
     End Sub
 
     Public Overrides Sub RemoveSelected()
@@ -76,8 +75,20 @@ Public Class ucrReceiverSingle
         Return strTemp
     End Function
 
+    Public Function GetDataName() As String
+        Dim strDataName As String = ""
+
+        If bSelected Then
+            strDataName = Chr(34) & objSelected.Group.ToString() & Chr(34)
+        End If
+        Return strDataName
+    End Function
+
+    Public Event SelectionChanged(sender As Object, e As EventArgs)
+
     Private Sub txtReceiverSingle_TextChanged(sender As Object, e As EventArgs) Handles txtReceiverSingle.TextChanged
         OnValueChanged(sender, e)
+        RaiseEvent SelectionChanged(sender, e)
     End Sub
 
     Public Overrides Sub SetColor()
