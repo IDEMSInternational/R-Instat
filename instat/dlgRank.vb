@@ -19,14 +19,14 @@ Public Class dlgRank
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction("rank")
-        ucrReceiverRank.Selector = ucrAddRemove
+        ucrReceiverRank.Selector = ucrSelectorDataFrameAddRemove
         ucrReceiverRank.SetMeAsReceiver()
         rdoKeptAsMissing.Checked = True
         rdoAverage.Checked = True
         ucrBase.clsRsyntax.iCallType = 1
-        ucrNewColumnNameSelector.SetDataFrameSelector(ucrDataFrameSelector)
+        ucrNewColumnNameSelector.SetDataFrameSelector(ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames)
         ucrNewColumnNameSelector.SetPrefix("Rank")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrDataFrameSelector.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
     End Sub
     Private Sub ucrReceiverRank_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRank.Leave
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables())
