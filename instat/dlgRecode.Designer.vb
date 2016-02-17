@@ -28,7 +28,7 @@ Partial Class dlgRecode
         Me.grpClosedOn = New System.Windows.Forms.GroupBox()
         Me.rdoLeft = New System.Windows.Forms.RadioButton()
         Me.rdoRight = New System.Windows.Forms.RadioButton()
-        Me.ucrMultipleNumeric = New instat.ucrMultipleNumeric()
+        Me.ucrMultipleNumericBreakPoints = New instat.ucrMultipleNumeric()
         Me.ucrSelectorNewColumnName = New instat.ucrNewColumnName()
         Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
         Me.ucrSelectorDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
@@ -102,12 +102,12 @@ Partial Class dlgRecode
         Me.rdoRight.Text = "Right"
         Me.rdoRight.UseVisualStyleBackColor = True
         '
-        'ucrMultipleNumeric
+        'ucrMultipleNumericBreakPoints
         '
-        Me.ucrMultipleNumeric.Location = New System.Drawing.Point(298, 78)
-        Me.ucrMultipleNumeric.Name = "ucrMultipleNumeric"
-        Me.ucrMultipleNumeric.Size = New System.Drawing.Size(106, 29)
-        Me.ucrMultipleNumeric.TabIndex = 24
+        Me.ucrMultipleNumericBreakPoints.Location = New System.Drawing.Point(298, 78)
+        Me.ucrMultipleNumericBreakPoints.Name = "ucrMultipleNumericBreakPoints"
+        Me.ucrMultipleNumericBreakPoints.Size = New System.Drawing.Size(106, 29)
+        Me.ucrMultipleNumericBreakPoints.TabIndex = 24
         '
         'ucrSelectorNewColumnName
         '
@@ -143,7 +143,7 @@ Partial Class dlgRecode
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(437, 324)
-        Me.Controls.Add(Me.ucrMultipleNumeric)
+        Me.Controls.Add(Me.ucrMultipleNumericBreakPoints)
         Me.Controls.Add(Me.ucrSelectorNewColumnName)
         Me.Controls.Add(Me.grpClosedOn)
         Me.Controls.Add(Me.lblBreakPoints)
@@ -173,5 +173,5 @@ Partial Class dlgRecode
     Friend WithEvents rdoLeft As RadioButton
     Friend WithEvents rdoRight As RadioButton
     Friend WithEvents ucrSelectorNewColumnName As ucrNewColumnName
-    Friend WithEvents ucrMultipleNumeric As ucrMultipleNumeric
+    Friend WithEvents ucrMultipleNumericBreakPoints As ucrMultipleNumeric
 End Class

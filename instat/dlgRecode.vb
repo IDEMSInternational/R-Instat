@@ -28,13 +28,13 @@ Public Class dlgRecode
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSelectorNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSelectorNewColumnName.cboColumnName.Text)
 
     End Sub
-    Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRecode.Leave
+    Private Sub ucrReceiverRecode_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRecode.Leave
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRecode.GetVariables())
 
     End Sub
 
-    Private Sub ucrMultipleNumeric_Leave(sender As Object, e As EventArgs) Handles ucrMultipleNumeric.Leave
-        ucrBase.clsRsyntax.AddParameter("breaks", clsRFunctionParameter:=ucrMultipleNumeric.clsNumericList)
+    Private Sub ucrMultipleNumeric_Leave(sender As Object, e As EventArgs) Handles ucrMultipleNumericBreakPoints.Leave
+        ucrBase.clsRsyntax.AddParameter("breaks", clsRFunctionParameter:=ucrMultipleNumericBreakPoints.clsNumericList)
 
     End Sub
 
