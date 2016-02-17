@@ -20,6 +20,10 @@ Public Class ucrButtons
             strComments = txtComment.Text
         End If
         frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComments)
+
+        'What are the implications of this?
+        clsRsyntax = New RSyntax
+
         RaiseEvent ClickOk(sender, e)
 
         Me.ParentForm.Hide()
