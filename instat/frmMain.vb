@@ -280,22 +280,6 @@ Public Class frmMain
         dlgSort.ShowDialog()
     End Sub
 
-    Public Function OpenFromFileDialog() As KeyValuePair(Of String, String)
-        Dim dlgOpen As New OpenFileDialog
-        Dim strFilePath, strFileName As String
-        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|All Data files (*.csv,*.RDS)|*.csv;*.RDS"
-        dlgOpen.Title = "Open Data from file"
-        If dlgOpen.ShowDialog() = DialogResult.OK Then
-            'checks if the file name is not blank'
-            If dlgOpen.FileName <> "" Then
-                strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
-                strFilePath = Replace(dlgOpen.FileName, "\", "/")
-                Return New KeyValuePair(Of String, String)(strFileName, strFilePath)
-            End If
-        End If
-        Return New KeyValuePair(Of String, String)("", "")
-    End Function
-
     Private Sub mnuEditFont_Click(sender As Object, e As EventArgs) Handles mnuEditFont.Click
         'dlgFont.ShowDialog()
     End Sub
@@ -316,8 +300,6 @@ Public Class frmMain
         dlgSummaryTables.ShowDialog()
     End Sub
 
-
-
     Private Sub DuplicatecopyColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgDuplicateColumns.ShowDialog()
     End Sub
@@ -333,8 +315,6 @@ Public Class frmMain
     Private Sub PolynomialsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageManipulatePolynomials.Click
         dlgPolynomials.ShowDialog()
     End Sub
-
-
 
     Private Sub mnuManageReshapeStack_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeStack.Click
         dlgStack.ShowDialog()
@@ -396,8 +376,6 @@ Public Class frmMain
         dlgAlignment.ShowDialog()
     End Sub
 
-
-
     Private Sub FactorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuManageFactor.Click
         dlgfactor.ShowDialog()
     End Sub
@@ -414,8 +392,6 @@ Public Class frmMain
         dlgGeneral.ShowDialog()
     End Sub
 
-
-
     Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOneWay.Click
         dlgOneWayANOVA.ShowDialog()
     End Sub
@@ -428,8 +404,6 @@ Public Class frmMain
         dlgGeneralisedLinearModels.ShowDialog()
     End Sub
 
-
-
     Private Sub mnuStatisticsRegressionLogLinear_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionLogLinear.Click
         dlglogLinearModels.ShowDialog()
     End Sub
@@ -441,8 +415,6 @@ Public Class frmMain
     Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoWayAnova.Click
         dlgTwoWayAnova.ShowDialog()
     End Sub
-
-
 
     Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticManageNewWorksheet.Click
         dlgNewWorksheet.ShowDialog()
@@ -565,81 +537,15 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileOpenFromFile_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromFile.Click
-
-        Dim pair As KeyValuePair(Of String, String)
-        Dim strFileExt As String
-
-        pair = OpenFromFileDialog()
-        'pair.key is the File Name
-        'pair.value is the File Path
-
-        ' TODO Probably remove LoadData sub in clsRLink once all opening is done through dialogs
-        If Not IsNothing(pair.Key) Then
-            strFileExt = Path.GetExtension(pair.Value)
-            Select Case strFileExt
-                Case ".RDS"
-                    'TODO create dialog to do this
-                    clsRLink.LoadData(pair.Key, pair.Value, strFileExt)
-                Case ".csv"
-                    'TODO where should this go?
-                    If Not clsRLink.bInstatObjectExists Then
-                        clsRLink.CreateNewInstatObject()
-                    End If
-                    dlgImportDataset.SetName(pair.Key)
-                    dlgImportDataset.SetFilePath(pair.Value)
-                    dlgImportDataset.ShowDialog()
-            End Select
-        End If
-
-        'Dim kvpFile As KeyValuePair(Of String, String)
-        'Dim clsRsyntax As New RSyntax
-
-        'kvpFile = OpenWorkbookDialog()
-        'If Not IsNothing(kvpFile.Key) Then
-        '    If kvpFile.Key = ".RDS" Then
-        '        clsRsyntax.SetAssignTo(clsRLink.strInstatDataObject)
-        '        clsRsyntax.SetFunction("readRDS")
-        '        clsRsyntax.AddParameter("file", kvpFile.Value)
-        '        If Not clsRLink.bInstatObjectExists Then
-        '            clsRLink.RunScript(clsRsyntax.GetScript())
-        '            clsRLink.bInstatObjectExists = True
-        '            clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_data_frames_changed(new_val = TRUE)")
-        '            clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = TRUE)")
-        '            clsRLink.clsEngine.Evaluate(clsRLink.strInstatDataObject & "$set_variables_metadata_changed(new_val = TRUE)")
-        '        End If
-        '        clsGrids.UpdateGrids()
-        '    ElseIf kvpFile.Key = ".csv" Then
-        '    End If
-        '    frmEditor.Show()
-        'End If
-
-
+        dlgImportDataset.ShowDialog()
     End Sub
 
     Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
         dlgSaveAs.ShowDialog()
-        'Dim kvpFile As KeyValuePair(Of String, String)
-        'Dim clsRsyntax As New RSyntax
-
-        'kvpFile = SaveDialog()
-        'If Not IsNothing(kvpFile.Key) Then
-        '    clsRsyntax.SetFunction("saveRDS")
-        '    clsRsyntax.AddParameter("object", clsRLink.strInstatDataObject)
-        '    clsRsyntax.AddParameter("file", kvpFile.Value)
-        '    clsRLink.RunScript(clsRsyntax.GetScript())
-        'End If
     End Sub
 
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
         'TODO decide what Open From Library does and edit below
-        'Dim kvpFile As KeyValuePair(Of String, String)
-        'Dim clsRsyntax As New RSyntax
-
-        'kvpFile = ImportDialog()
-        'clsRsyntax.SetFunction("read.csv")
-        'clsRsyntax.AddParameter("file", kvpFile.Value)
-        'clsRInterface.LoadData(kvpFile.Key, clsRsyntax.GetScript())
-        'clsGrids.UpdateGrids()
     End Sub
 
     Private Sub mnuManageDataSubset_Click(sender As Object, e As EventArgs)
@@ -719,43 +625,19 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuEditUndo_Click(sender As Object, e As EventArgs) Handles mnuEditUndo.Click
-        frmEditor.grdData.Undo()
+        'frmEditor.grdData.Undo()
     End Sub
 
     Private Sub mnuEditRedo_Click(sender As Object, e As EventArgs) Handles mnuEditRedo.Click
-        frmEditor.grdData.Redo()
+        'frmEditor.grdData.Redo()
     End Sub
 
     Private Sub mnuFilePrint_Click(sender As Object, e As EventArgs) Handles mnuFilePrint.Click
-        Dim docToPrint As Printing.PrintDocument = Nothing
-        Try
-            docToPrint = frmEditor.grdData.CurrentWorksheet.CreatePrintSession().PrintDocument
-
-        Catch ex As Exception
-            MessageBox.Show(Me, ex.Message, Me.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Return
-        End Try
-        Using pd = New PrintDialog()
-            pd.Document = docToPrint
-            pd.UseEXDialog = True
-            If pd.ShowDialog() = DialogResult.OK Then
-                docToPrint.PrinterSettings = pd.PrinterSettings
-                docToPrint.Print()
-            End If
-        End Using
+        dlgPrintPreviewOptions.ShowDialog()
     End Sub
 
     Private Sub mnuFilePrintPreview_Click(sender As Object, e As EventArgs) Handles mnuFilePrintPreview.Click
-        Dim sheetPreview = frmEditor.grdData.CurrentWorksheet
-
-        Using session = sheetPreview.CreatePrintSession()
-            Using previewPrint As New PrintPreviewDialog()
-                previewPrint.Document = session.PrintDocument
-                previewPrint.SetBounds(200, 200, 1024, 768)
-                previewPrint.PrintPreviewControl.Zoom = 1.0
-                previewPrint.ShowDialog(Me)
-            End Using
-        End Using
+        dlgPrintPreviewOptions.ShowDialog()
     End Sub
 
     Private Sub RemoveUnusedLabelsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveUnusedLabelsToolStripMenuItem.Click
@@ -772,13 +654,6 @@ Public Class frmMain
 
     Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
         'For discussion
-        'Dim dlgSave As New SaveFileDialog
-        'dlgSave.Filter = "Comma Separated file (*.csv)|*.csv"
-        'dlgSave.Title = "Save worksheet as .csv file"
-        'If dlgSave.ShowDialog() = DialogResult.OK Then
-        '    'Write the data  
-        '    clsRLink.RunScript("write.csv(x=" & frmEditor.grdData.CurrentWorksheet.Name & ",file=" & dlgSave.FileName.Replace("\", "/") & ")")
-        'End If
     End Sub
 
     Private Sub mnuManageDataConvertTo_Click(sender As Object, e As EventArgs) Handles mnuManageDataConvertTo.Click
@@ -793,5 +668,9 @@ Public Class frmMain
     Private Sub mnuManageDataFrameViewColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameViewColumnMetadata.Click
         frmVariables.Visible = True
         frmVariables.BringToFront()
+    End Sub
+
+    Private Sub mnuManageDataFrameRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameRename.Click
+        dlgName.ShowDialog()
     End Sub
 End Class
