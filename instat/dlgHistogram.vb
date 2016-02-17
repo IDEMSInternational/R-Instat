@@ -28,7 +28,6 @@ Public Class dlgHistogram
         clsRaesFunction.SetRCommand("aes")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_histogramFunction)
         ucrBase.clsRsyntax.iCallType = 0
         ucrXReceiver.Selector = ucrHistogramSelector
         ucrFactorReceiver.Selector = ucrHistogramSelector
@@ -63,18 +62,39 @@ Public Class dlgHistogram
     Private Sub rdoHistogram_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHistogram.CheckedChanged
         If rdoHistogram.Checked = True Then
             clsRgeom_histogramFunction.SetRCommand("geom_histogram")
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_histogramFunction)
         End If
     End Sub
 
     Private Sub rdoDensity_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDensity.CheckedChanged
         If rdoDensity.Checked = True Then
             clsRgeom_densityFunction.SetRCommand("geom_density")
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_densityFunction)
         End If
     End Sub
 
     Private Sub rdoFreequencyPolygon_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFreequencyPolygon.CheckedChanged
         If rdoFreequencyPolygon.Checked = True Then
             clsRgeom_FPolygon.SetRCommand("geom_freqpoly")
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_FPolygon)
+        End If
+    End Sub
+
+    Private Sub rdoHistogram_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoHistogram.KeyPress
+        If e.KeyChar = vbCr Then
+            rdoHistogram.Checked = True
+        End If
+    End Sub
+
+    Private Sub rdoDensity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoDensity.KeyPress
+        If e.KeyChar = vbCr Then
+            rdoDensity.Checked = True
+        End If
+    End Sub
+
+    Private Sub rdoFreequencyPolygon_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoFreequencyPolygon.KeyPress
+        If e.KeyChar = vbCr Then
+            rdoFreequencyPolygon.Checked = True
         End If
     End Sub
 End Class

@@ -41,7 +41,7 @@ Partial Class dlgHistogram
         Me.lblVariableToPlot.Location = New System.Drawing.Point(288, 63)
         Me.lblVariableToPlot.Name = "lblVariableToPlot"
         Me.lblVariableToPlot.Size = New System.Drawing.Size(78, 13)
-        Me.lblVariableToPlot.TabIndex = 6
+        Me.lblVariableToPlot.TabIndex = 4
         Me.lblVariableToPlot.Tag = "Variable_to_Plot"
         Me.lblVariableToPlot.Text = "Variable to Plot"
         '
@@ -50,7 +50,7 @@ Partial Class dlgHistogram
         Me.cmdOptions.Location = New System.Drawing.Point(291, 227)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOptions.TabIndex = 8
+        Me.cmdOptions.TabIndex = 9
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -71,7 +71,7 @@ Partial Class dlgHistogram
         Me.rdoHistogram.Location = New System.Drawing.Point(22, 13)
         Me.rdoHistogram.Name = "rdoHistogram"
         Me.rdoHistogram.Size = New System.Drawing.Size(72, 17)
-        Me.rdoHistogram.TabIndex = 9
+        Me.rdoHistogram.TabIndex = 0
         Me.rdoHistogram.TabStop = True
         Me.rdoHistogram.Tag = "Histogram"
         Me.rdoHistogram.Text = "Histogram"
@@ -83,7 +83,7 @@ Partial Class dlgHistogram
         Me.rdoDensity.Location = New System.Drawing.Point(168, 13)
         Me.rdoDensity.Name = "rdoDensity"
         Me.rdoDensity.Size = New System.Drawing.Size(60, 17)
-        Me.rdoDensity.TabIndex = 9
+        Me.rdoDensity.TabIndex = 1
         Me.rdoDensity.TabStop = True
         Me.rdoDensity.Tag = "Density"
         Me.rdoDensity.Text = "Density"
@@ -95,7 +95,7 @@ Partial Class dlgHistogram
         Me.rdoFreequencyPolygon.Location = New System.Drawing.Point(302, 13)
         Me.rdoFreequencyPolygon.Name = "rdoFreequencyPolygon"
         Me.rdoFreequencyPolygon.Size = New System.Drawing.Size(122, 17)
-        Me.rdoFreequencyPolygon.TabIndex = 9
+        Me.rdoFreequencyPolygon.TabIndex = 2
         Me.rdoFreequencyPolygon.TabStop = True
         Me.rdoFreequencyPolygon.Tag = "Freequency_Polygon"
         Me.rdoFreequencyPolygon.Text = "Freequency Polygon"
@@ -116,28 +116,28 @@ Partial Class dlgHistogram
         Me.ucrFactorReceiver.Location = New System.Drawing.Point(286, 142)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrFactorReceiver.TabIndex = 10
+        Me.ucrFactorReceiver.TabIndex = 7
         '
         'ucrHistogramSelector
         '
         Me.ucrHistogramSelector.Location = New System.Drawing.Point(6, 42)
         Me.ucrHistogramSelector.Name = "ucrHistogramSelector"
         Me.ucrHistogramSelector.Size = New System.Drawing.Size(242, 179)
-        Me.ucrHistogramSelector.TabIndex = 7
+        Me.ucrHistogramSelector.TabIndex = 3
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(7, 269)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 58)
-        Me.ucrBase.TabIndex = 3
+        Me.ucrBase.TabIndex = 10
         '
         'ucrXReceiver
         '
         Me.ucrXReceiver.Location = New System.Drawing.Point(286, 82)
         Me.ucrXReceiver.Name = "ucrXReceiver"
         Me.ucrXReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrXReceiver.TabIndex = 2
+        Me.ucrXReceiver.TabIndex = 5
         '
         'dlgHistogram
         '
