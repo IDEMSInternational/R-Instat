@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgYearRaincount
     Private Sub dlgYearRaincount_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("climate_obj$plot_yearly_rain_count")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$plot_yearly_rain_count")
         ucrBase.clsRsyntax.iCallType = 0
     End Sub
 

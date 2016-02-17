@@ -22,39 +22,22 @@ Partial Class dlgPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtTitle = New System.Windows.Forms.TextBox()
-        Me.lblTitle = New System.Windows.Forms.Label()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblYVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.cmdPlotOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
-        '
-        'txtTitle
-        '
-        Me.txtTitle.Location = New System.Drawing.Point(15, 158)
-        Me.txtTitle.Name = "txtTitle"
-        Me.txtTitle.Size = New System.Drawing.Size(326, 20)
-        Me.txtTitle.TabIndex = 22
-        '
-        'lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(12, 142)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
-        Me.lblTitle.TabIndex = 21
-        Me.lblTitle.Tag = "Title"
-        Me.lblTitle.Text = "Title"
         '
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(222, 60)
+        Me.lblXVariable.Location = New System.Drawing.Point(267, 60)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(64, 13)
         Me.lblXVariable.TabIndex = 18
@@ -64,7 +47,7 @@ Partial Class dlgPlot
         'lblYVariable
         '
         Me.lblYVariable.AutoSize = True
-        Me.lblYVariable.Location = New System.Drawing.Point(222, 15)
+        Me.lblYVariable.Location = New System.Drawing.Point(267, 15)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(72, 13)
         Me.lblYVariable.TabIndex = 17
@@ -81,24 +64,17 @@ Partial Class dlgPlot
         '
         'ucrReceiverY
         '
-        Me.ucrReceiverY.Location = New System.Drawing.Point(225, 31)
+        Me.ucrReceiverY.Location = New System.Drawing.Point(270, 31)
         Me.ucrReceiverY.Name = "ucrReceiverY"
         Me.ucrReceiverY.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverY.TabIndex = 26
         '
         'ucrReceiverX
         '
-        Me.ucrReceiverX.Location = New System.Drawing.Point(225, 76)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(270, 76)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverX.TabIndex = 25
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(2, 12)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
-        Me.ucrAddRemove.TabIndex = 23
         '
         'ucrBase
         '
@@ -107,17 +83,44 @@ Partial Class dlgPlot
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 27
         '
+        'ucrPlotSelector
+        '
+        Me.ucrPlotSelector.Location = New System.Drawing.Point(3, 3)
+        Me.ucrPlotSelector.Name = "ucrPlotSelector"
+        Me.ucrPlotSelector.Size = New System.Drawing.Size(242, 179)
+        Me.ucrPlotSelector.TabIndex = 28
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.Location = New System.Drawing.Point(273, 109)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.TabIndex = 29
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'cmdPlotOptions
+        '
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(273, 139)
+        Me.cmdPlotOptions.Name = "cmdPlotOptions"
+        Me.cmdPlotOptions.Size = New System.Drawing.Size(103, 23)
+        Me.cmdPlotOptions.TabIndex = 30
+        Me.cmdPlotOptions.Tag = "Plot_Options"
+        Me.cmdPlotOptions.Text = "Plot Options"
+        Me.cmdPlotOptions.UseVisualStyleBackColor = True
+        '
         'dlgPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 246)
+        Me.Controls.Add(Me.cmdPlotOptions)
+        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.ucrPlotSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverY)
         Me.Controls.Add(Me.ucrReceiverX)
-        Me.Controls.Add(Me.ucrAddRemove)
-        Me.Controls.Add(Me.txtTitle)
-        Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.lblYVariable)
         Me.Controls.Add(Me.lblAvailable)
@@ -132,14 +135,14 @@ Partial Class dlgPlot
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents txtTitle As TextBox
-    Friend WithEvents lblTitle As Label
     Friend WithEvents lblXVariable As Label
     Friend WithEvents lblYVariable As Label
     Friend WithEvents lblAvailable As Label
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents ucrReceiverY As ucrReceiverSingle
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrPlotSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents cmdOptions As Button
+    Friend WithEvents cmdPlotOptions As Button
 End Class
