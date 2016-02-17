@@ -256,7 +256,7 @@ Public Class RLink
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
-    Public Sub FillListView(lstView As ListView, Optional strDataType As String = "All")
+    Public Sub FillListView(lstView As ListView, Optional strDataType As String = "all", Optional strDataFrameName As String = "")
         Dim dfList As GenericVector
         Dim dfTemp As DataFrame
         Dim i As Integer
@@ -264,7 +264,12 @@ Public Class RLink
         If bInstatObjectExists Then
             lstView.Clear()
             lstView.Columns.Add("Available Data")
-            dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variables_metadata(data_type = " & Chr(34) & strDataType & Chr(34) & ")").AsList
+            If strDataFrameName = "" Then
+                dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variables_metadata(data_type = " & Chr(34) & strDataType & Chr(34) & ")").AsList
+            Else
+                dfList = clsEngine.Evaluate("list(" & strDataFrameName & "=" & strInstatDataObject & "$get_variables_metadata(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", data_type = " & Chr(34) & strDataType & Chr(34) & "))").AsList
+            End If
+
             For i = 0 To dfList.Count - 1
                 grps = New ListViewGroup(dfList.Names(i), HorizontalAlignment.Left)
                 If Not lstView.Groups.Contains(grps) Then
