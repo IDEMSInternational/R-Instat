@@ -20,18 +20,16 @@ Public Class ucrSelector
     Public CurrentReceiver As New ucrReceiver
 
     Private Sub ucrdataselection_load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadList(strDataType:=CurrentReceiver.strDataType)
+        LoadList()
     End Sub
 
-    Public Overridable Sub LoadList(Optional strDataType As String = "all")
-        frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType)
+    Public Overridable Sub LoadList()
+        frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType:=CurrentReceiver.strDataType)
     End Sub
 
     Public Sub SetCurrentReceiver(conReceiver As ucrReceiver)
-        If CurrentReceiver.strDataType <> conReceiver.strDataType Then
-            LoadList(strDataType:=conReceiver.strDataType)
-        End If
         CurrentReceiver = conReceiver
+        LoadList()
         If (TypeOf CurrentReceiver Is ucrReceiverSingle) Then
             'lstAvailableVariable.SelectionMode = SelectionMode.One
             lstAvailableVariable.MultiSelect = False

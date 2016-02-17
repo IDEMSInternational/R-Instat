@@ -31,6 +31,7 @@ Partial Class dlgPrintPreviewOptions
         Me.pnlOutput = New System.Windows.Forms.Panel()
         Me.cmdPrtOutput = New System.Windows.Forms.Button()
         Me.cmdPrevOutput = New System.Windows.Forms.Button()
+        Me.cmdExitPreview = New System.Windows.Forms.Button()
         Me.pnlEditor.SuspendLayout()
         Me.pnlLog.SuspendLayout()
         Me.pnlOutput.SuspendLayout()
@@ -38,21 +39,20 @@ Partial Class dlgPrintPreviewOptions
         '
         'pnlEditor
         '
-        Me.pnlEditor.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.pnlEditor.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlEditor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlEditor.Controls.Add(Me.cmdPrtSheet)
         Me.pnlEditor.Controls.Add(Me.cmdPrevSheet)
         Me.pnlEditor.Location = New System.Drawing.Point(2, 4)
         Me.pnlEditor.Name = "pnlEditor"
-        Me.pnlEditor.Size = New System.Drawing.Size(160, 96)
+        Me.pnlEditor.Size = New System.Drawing.Size(160, 92)
         Me.pnlEditor.TabIndex = 0
         '
         'cmdPrtSheet
         '
         Me.cmdPrtSheet.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.cmdPrtSheet.Location = New System.Drawing.Point(0, 48)
+        Me.cmdPrtSheet.Location = New System.Drawing.Point(0, 44)
         Me.cmdPrtSheet.Name = "cmdPrtSheet"
         Me.cmdPrtSheet.Size = New System.Drawing.Size(156, 44)
         Me.cmdPrtSheet.TabIndex = 1
@@ -71,21 +71,20 @@ Partial Class dlgPrintPreviewOptions
         '
         'pnlLog
         '
-        Me.pnlLog.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.pnlLog.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlLog.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlLog.Controls.Add(Me.cmdPrtLog)
         Me.pnlLog.Controls.Add(Me.cmdPrevLog)
         Me.pnlLog.Location = New System.Drawing.Point(168, 4)
         Me.pnlLog.Name = "pnlLog"
-        Me.pnlLog.Size = New System.Drawing.Size(160, 96)
+        Me.pnlLog.Size = New System.Drawing.Size(160, 92)
         Me.pnlLog.TabIndex = 1
         '
         'cmdPrtLog
         '
         Me.cmdPrtLog.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.cmdPrtLog.Location = New System.Drawing.Point(0, 48)
+        Me.cmdPrtLog.Location = New System.Drawing.Point(0, 44)
         Me.cmdPrtLog.Name = "cmdPrtLog"
         Me.cmdPrtLog.Size = New System.Drawing.Size(156, 44)
         Me.cmdPrtLog.TabIndex = 1
@@ -104,21 +103,20 @@ Partial Class dlgPrintPreviewOptions
         '
         'pnlOutput
         '
-        Me.pnlOutput.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.pnlOutput.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlOutput.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlOutput.Controls.Add(Me.cmdPrtOutput)
         Me.pnlOutput.Controls.Add(Me.cmdPrevOutput)
         Me.pnlOutput.Location = New System.Drawing.Point(332, 6)
         Me.pnlOutput.Name = "pnlOutput"
-        Me.pnlOutput.Size = New System.Drawing.Size(160, 96)
+        Me.pnlOutput.Size = New System.Drawing.Size(160, 92)
         Me.pnlOutput.TabIndex = 2
         '
         'cmdPrtOutput
         '
         Me.cmdPrtOutput.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.cmdPrtOutput.Location = New System.Drawing.Point(0, 48)
+        Me.cmdPrtOutput.Location = New System.Drawing.Point(0, 44)
         Me.cmdPrtOutput.Name = "cmdPrtOutput"
         Me.cmdPrtOutput.Size = New System.Drawing.Size(156, 44)
         Me.cmdPrtOutput.TabIndex = 1
@@ -135,11 +133,24 @@ Partial Class dlgPrintPreviewOptions
         Me.cmdPrevOutput.Text = "Preview Output"
         Me.cmdPrevOutput.UseVisualStyleBackColor = True
         '
+        'cmdExitPreview
+        '
+        Me.cmdExitPreview.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmdExitPreview.Location = New System.Drawing.Point(168, 102)
+        Me.cmdExitPreview.Name = "cmdExitPreview"
+        Me.cmdExitPreview.Size = New System.Drawing.Size(156, 32)
+        Me.cmdExitPreview.TabIndex = 3
+        Me.cmdExitPreview.Text = "Exit Preview and Print"
+        Me.cmdExitPreview.UseVisualStyleBackColor = True
+        '
         'dlgPrintPreviewOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(496, 104)
+        Me.ClientSize = New System.Drawing.Size(496, 144)
+        Me.Controls.Add(Me.cmdExitPreview)
         Me.Controls.Add(Me.pnlOutput)
         Me.Controls.Add(Me.pnlLog)
         Me.Controls.Add(Me.pnlEditor)
@@ -162,4 +173,5 @@ Partial Class dlgPrintPreviewOptions
     Friend WithEvents pnlOutput As Panel
     Friend WithEvents cmdPrtOutput As Button
     Friend WithEvents cmdPrevOutput As Button
+    Friend WithEvents cmdExitPreview As Button
 End Class

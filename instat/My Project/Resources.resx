@@ -1336,4 +1336,22 @@
   <data name="Two_Samles_Summary_Data" xml:space="preserve">
     <value>Two Samples Summary Data</value>
   </data>
+  <data name="BoxPlot_Options" xml:space="preserve">
+    <value>BoxPlot Options</value>
+  </data>
+  <data name="By_Second_Factor" xml:space="preserve">
+    <value>By Second Factor</value>
+  </data>
+  <data name="Density" xml:space="preserve">
+    <value>Density</value>
+  </data>
+  <data name="Freequency_Polygon" xml:space="preserve">
+    <value>Freequency Polygon</value>
+  </data>
+  <data name="Histogram_Options" xml:space="preserve">
+    <value>Histogram Options</value>
+  </data>
+  <data name="Plot_Options" xml:space="preserve">
+    <value>Plot Options</value>
+  </data>
 </root>
