@@ -27,10 +27,10 @@ climate$methods(plot_yearly_rain_count = function (data_list=list(), col1="blue"
     }
     year_col = data_obj$getvname(year_label)
     
-    interset_var_col = data_obj$getvname ("Total Rain") 
+    interset_var_col = data_obj$getvname ("Number of Rainy Days") 
     
     if(missing(ylab)){
-      ylab = data_obj$getvname(var_label)
+      ylab = interset_var_col
     }    
     curr_data_list = data_obj$get_data_for_analysis(data_list)
     if (plot_window){   

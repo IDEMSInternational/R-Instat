@@ -669,4 +669,8 @@ Public Class frmMain
         frmVariables.Visible = True
         frmVariables.BringToFront()
     End Sub
+
+    Private Sub mnuManageDataFrameRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameRename.Click
+        dlgName.ShowDialog()
+    End Sub
 End Class
