@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrReceiverSingle
-    Dim objSelected As New ListViewItem
+    Dim strDataFrameName As String = ""
     Dim bSelected As Boolean = False
 
     Public Overrides Sub AddSelected()
@@ -24,8 +24,8 @@ Public Class ucrReceiverSingle
 
         Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
         For Each objItem In tempObjects
-            objSelected = objItem
             bSelected = True
+            strDataFrameName = objItem.Group.ToString()
             txtReceiverSingle.Text = objItem.text
         Next
     End Sub
@@ -53,10 +53,10 @@ Public Class ucrReceiverSingle
         Dim clsParam As New RParameter
         If bSelected Then
             clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-            clsGetVariablesFunc.AddParameter("data_name", Chr(34) & objSelected.Group.ToString() & Chr(34))
+            clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
             clsGetVariablesFunc.AddParameter("col_name", GetVariableNames())
             'TODO make this an option set in Options menu
-            clsGetVariablesFunc.SetAssignTo(MakeValidRString(objSelected.Text))
+            clsGetVariablesFunc.SetAssignTo(MakeValidRString(txtReceiverSingle.Text))
             Return clsGetVariablesFunc
         Else
             Return clsGetVariablesFunc
@@ -67,21 +67,16 @@ Public Class ucrReceiverSingle
         Dim strTemp As String = ""
         If txtReceiverSingle.Text <> "" Then
             If bWithQuotes Then
-                strTemp = Chr(34) & objSelected.Text & Chr(34)
+                strTemp = Chr(34) & txtReceiverSingle.Text & Chr(34)
             Else
-                strTemp = objSelected.Text
+                strTemp = txtReceiverSingle.Text
             End If
         End If
         Return strTemp
     End Function
 
     Public Function GetDataName() As String
-        Dim strDataName As String = ""
-
-        If bSelected Then
-            strDataName = Chr(34) & objSelected.Group.ToString() & Chr(34)
-        End If
-        Return strDataName
+        Return strDataFrameName
     End Function
 
     Public Event SelectionChanged(sender As Object, e As EventArgs)
