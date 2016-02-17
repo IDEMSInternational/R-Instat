@@ -387,6 +387,7 @@ instat_obj$methods(get_column_factor_levels = function(data_name,col_name = "") 
 )
 
 instat_obj$methods(sort_dataframe = function(data_name, col_names = c(), decreasing = FALSE, na.last = TRUE) {
+  #data_name = is.character(data_name)
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
