@@ -38,18 +38,20 @@ Public Class dlgInsertColumn
 
     Private Sub setDefaultValues()
         txtDefaultData.Text = "NA"
+        ucrBase.clsRsyntax.AddParameter("col_data ", "c()")
         txtStartPos.Text = "At the end."
-        ucrBase.clsRsyntax.AddParameter("start_pos ", "length(" & ucrDataFramesList.cboAvailableDataFrames.SelectedItem & ")")
+        ucrBase.clsRsyntax.AddParameter("start_pos", "length(" & ucrDataFramesList.cboAvailableDataFrames.SelectedItem & ")")
         nudPos.Enabled = False
     End Sub
 
     Private Sub ucrDataFramesList_Leave(sender As Object, e As EventArgs) Handles ucrDataFramesList.Leave
+        nudPos.Maximum = frmEditor.grdData.GetWorksheetByName(ucrDataFramesList.cboAvailableDataFrames.SelectedItem).ColumnCount
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFramesList.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
-    Private Sub txtDefaultData_Leave(sender As Object, e As EventArgs) Handles txtDefaultData.Leave
-        ucrBase.clsRsyntax.AddParameter("col_data ", "c(" & txtDefaultData.Text & ")")
-    End Sub
+    'Private Sub txtDefaultData_Leave(sender As Object, e As EventArgs) Handles txtDefaultData.Leave
+    '    ucrBase.clsRsyntax.AddParameter("col_data ", "c(" & txtDefaultData.Text & ")")
+    'End Sub
 
     Private Sub nudPos_ValueChanged(sender As Object, e As EventArgs) Handles nudPos.ValueChanged
         ucrBase.clsRsyntax.AddParameter("start_pos ", nudPos.Value)
