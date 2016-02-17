@@ -14,21 +14,20 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-
 Public Class dlgPlot
+    Private clsRggplotFunction As New RFunction
+    Private clsRgeom_boxplotFunction As New RFunction
+    Private clsRaesFunction As New RFunction
+
     Private Sub dlgPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("plot")
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRaesFunction.SetRCommand("aes")
         ucrBase.clsRsyntax.iCallType = 0
         autoTranslate(Me)
-        ucrReceiverY.Selector = ucrAddRemove
+        ucrReceiverY.Selector = ucrPlotSelector
         ucrReceiverY.SetMeAsReceiver()
-        ucrReceiverX.Selector = ucrAddRemove
-
-
-    End Sub
-
-    Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
-        ucrBase.clsRsyntax.AddParameter("main", Chr(34) & txtTitle.Text & Chr(34))
+        ucrReceiverX.Selector = ucrPlotSelector
     End Sub
 
     Private Sub ucrReceiverY_Leave(sender As Object, e As EventArgs) Handles ucrReceiverY.Leave
@@ -38,5 +37,4 @@ Public Class dlgPlot
     Private Sub ucrReceiverX_Leave(sender As Object, e As EventArgs) Handles ucrReceiverX.Leave
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverX.GetVariables())
     End Sub
-
 End Class
