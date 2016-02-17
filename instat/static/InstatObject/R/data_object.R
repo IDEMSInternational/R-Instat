@@ -365,10 +365,10 @@ data_obj$methods(get_next_default_column_name = function(prefix) {
 } 
 )
 
-data_obj$methods(insert_column_in_data = function(col_data =c(), start_pos = length(names(data)), number_cols = 1) {
+data_obj$methods(insert_column_in_data = function(col_data =c(), start_pos = (length(names(data))+1), number_cols = 1) {
   if (start_pos <= 0) stop("You cannot put a column into the position less or equal to zero.")
   if (start_pos %% 1 != 0) stop("start_pos value should be an integer.")
-  if (length(names(data)) < start_pos) stop("The start_pos argument exceeds the number of columns in the data.")
+  if ((length(names(data))+1) < start_pos) stop("The start_pos argument exceeds the number of columns in the data plus 0ne.")
   
   if(length(col_data)==0){
       col_data <- rep(NA, nrow(data))
@@ -380,14 +380,19 @@ data_obj$methods(insert_column_in_data = function(col_data =c(), start_pos = len
     data[, col_name] <<- col_data
   }
   if(start_pos==1){
-      data <<- cbind(data[(ncol(data)-number_cols+1): ncol(data)], data[(start_pos):(ncol(data)-number_cols)])
-    }
+    data <<- cbind(data[(ncol(data)-number_cols+1): ncol(data)], data[(start_pos):(ncol(data)-number_cols)])
+  }
+  else if(start_pos==(length(names(data))+1 - number_cols)){
+    data <<- data
+  }
   else{
-      data <<- cbind(data[1:(start_pos -1)],data[(ncol(data)-number_cols+1):ncol(data)], data[(start_pos+number_cols):ncol(data)-number_cols])
-    }
-    .self$append_to_changes(list(Inserted_col, start_pos))
-    .self$set_data_changed(TRUE)
-    .self$set_variables_metadata_changed(TRUE)
+    data <<- cbind(data[1:(start_pos -1)], data[(ncol(data)-number_cols+1): ncol(data)], data[start_pos:(ncol(data)-number_cols)])
+      
+  }
+  
+  .self$append_to_changes(list(Inserted_col, start_pos))
+  .self$set_data_changed(TRUE)
+  .self$set_variables_metadata_changed(TRUE)
 }
 )
 
