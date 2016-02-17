@@ -143,7 +143,8 @@ data_obj$methods(get_data_frame = function() {
 )
 
 data_obj$methods(get_variables_metadata = function(include_all = TRUE, data_type = "all") {
-  .self$update_variables_metadata()
+  #I commented out next line so that I can rename the data_object. What is the consequence? Steve
+  #.self$update_variables_metadata()
   if(!include_all) return(variables_metadata)
   else {
     out = variables_metadata
@@ -497,6 +498,14 @@ data_obj$methods(sort_dataframe = function(col_names = c(), decreasing = TRUE, n
   }
   .self$set_data_changed(TRUE)
 }
+)
+
+data_obj$methods(rename_dataframe = function(new_value = "") {
+  names(data) <<- new_value
+  metadata[[1]] <<- new_value
+  .self$set_metadata_changed(TRUE)
+  .self$set_variables_metadata_changed(TRUE)
+} 
 )
 
 #Labels for strings which will be added to logs
