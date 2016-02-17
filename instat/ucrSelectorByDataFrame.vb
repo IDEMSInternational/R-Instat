@@ -24,8 +24,8 @@ Public Class ucrSelectorByDataFrame
         RaiseEvent DataFrameChanged(sender, e)
     End Sub
 
-    Public Overrides Sub LoadList(Optional strDataType As String = "all")
-        frmMain.clsRLink.FillColumnNames(ucrAvailableDataFrames.cboAvailableDataFrames.Text, lstColumns:=lstAvailableVariable)
+    Public Overrides Sub LoadList()
+        frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType:=CurrentReceiver.strDataType, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text)
     End Sub
 
 End Class
