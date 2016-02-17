@@ -798,12 +798,6 @@
     <Compile Include="dlgSaveAs.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgScatterPlot.Designer.vb">
-      <DependentUpon>dlgScatterPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgScatterPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgSeasonalSummary.designer.vb">
       <DependentUpon>dlgSeasonalSummary.vb</DependentUpon>
     </Compile>

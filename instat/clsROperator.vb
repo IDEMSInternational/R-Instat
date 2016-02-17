@@ -84,7 +84,7 @@ Public Class ROperator
 
         For Each clsParam In clsAdditionalParameters
             strTemp = strTemp & Chr(32) & strOperation & Chr(32)
-            strTemp = strTemp & clsRightParameter.ToScript(strScript, False)
+            strTemp = strTemp & clsParam.ToScript(strScript, False)
         Next
 
         If bToBeAssigned Then
