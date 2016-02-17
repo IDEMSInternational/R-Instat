@@ -397,14 +397,14 @@ instat_obj$methods(sort_dataframe = function(data_name, col_names = c(), decreas
 instat_obj$methods(rename_dataframe = function(data_name, new_value = "") {
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  data_objects[[data_name]]$rename_dataframe(new_value = new_value)
   
   for (i in 1:length(names(data_objects))){
       if(names(data_objects)[i] == data_name){
         names(data_objects)[i] <<- new_value
       }
-    }
-  .self$get_variables_metadata_changed(TRUE)
+  }
+  
+  data_objects[[new_value]]$append_to_metadata(data_name_label, new_value)
   .self$get_metadata_changed(TRUE)
 } 
 )
