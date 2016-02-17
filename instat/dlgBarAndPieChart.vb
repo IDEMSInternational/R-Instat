@@ -14,9 +14,17 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-
 Public Class dlgBarAndPieChart
+    Private clsRggplotFunction As New RFunction
+    Private clsRgeom_barchart As New RFunction
+    Private clsRgeom_Piechart As New RFunction
+    Private clsRaesFunction As New RFunction
     Private Sub dlgBarAndPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRaesFunction.SetRCommand("aes")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrFactorReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrFactorReceiver.SetMeAsReceiver()
@@ -29,7 +37,22 @@ Public Class dlgBarAndPieChart
         sdgPlots.ShowDialog()
     End Sub
 
-    Private Sub rdoBarChart_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged
+    Private Sub ucrBarChartSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrBarChartSelector.DataFrameChanged
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrBarChartSelector.ucrAvailableDataFrames.clsCurrDataFrame)
+    End Sub
 
+    Private Sub grpSelection_CheckedChanged(sender As Object, e As EventArgs)
+        If rdoBarChart.Checked = True Then
+            clsRgeom_barchart.SetRCommand("geom_bar")
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_barchart)
+        Else
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=Nothing)
+        End If
+    End Sub
+    Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
+        clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+    End Sub
+    Private Sub ucrSecondReceiver_Leave(sender As Object, e As EventArgs) Handles ucrSecondReceiver.Leave
+        clsRaesFunction.AddParameter("fill", ucrSecondReceiver.GetVariableNames(False))
     End Sub
 End Class
