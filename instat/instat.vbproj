@@ -264,6 +264,10 @@
     <Compile Include="dlgRenameSheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSummaryBarOrPieChart.Designer.vb" />
+    <Compile Include="dlgSummaryBarOrPieChart.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgOptions.Designer.vb">
       <DependentUpon>sdgOptions.vb</DependentUpon>
     </Compile>
@@ -1354,6 +1358,9 @@
     <EmbeddedResource Include="dlgRenameSheet.sw-KE.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryBarOrPieChart.fr-FR.resx" />
+    <EmbeddedResource Include="dlgSummaryBarOrPieChart.resx" />
+    <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx" />
     <EmbeddedResource Include="sdgOptions.fr-FR.resx">
       <DependentUpon>sdgOptions.vb</DependentUpon>
     </EmbeddedResource>
