@@ -405,6 +405,5 @@ instat_obj$methods(rename_dataframe = function(data_name, new_value = "") {
   }
   
   data_objects[[new_value]]$append_to_metadata(data_name_label, new_value)
-  .self$get_metadata_changed(TRUE)
 } 
 )
