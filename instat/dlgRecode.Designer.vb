@@ -28,11 +28,12 @@ Partial Class dlgRecode
         Me.grpClosedOn = New System.Windows.Forms.GroupBox()
         Me.rdoLeft = New System.Windows.Forms.RadioButton()
         Me.rdoRight = New System.Windows.Forms.RadioButton()
-        Me.ucrMultipleNumericBreakPoints = New instat.ucrMultipleNumeric()
+        Me.ucrMultipleNumericBreakPoints = New instat.ucrMultipleInput()
         Me.ucrSelectorNewColumnName = New instat.ucrNewColumnName()
         Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
         Me.ucrSelectorDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrMultipleLabels = New instat.ucrMultipleInput()
         Me.grpClosedOn.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -138,11 +139,19 @@ Partial Class dlgRecode
         Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 1
         '
+        'ucrMultipleLabels
+        '
+        Me.ucrMultipleLabels.Location = New System.Drawing.Point(115, 192)
+        Me.ucrMultipleLabels.Name = "ucrMultipleLabels"
+        Me.ucrMultipleLabels.Size = New System.Drawing.Size(150, 29)
+        Me.ucrMultipleLabels.TabIndex = 25
+        '
         'dlgRecode
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(437, 324)
+        Me.Controls.Add(Me.ucrMultipleLabels)
         Me.Controls.Add(Me.ucrMultipleNumericBreakPoints)
         Me.Controls.Add(Me.ucrSelectorNewColumnName)
         Me.Controls.Add(Me.grpClosedOn)
@@ -173,5 +182,6 @@ Partial Class dlgRecode
     Friend WithEvents rdoLeft As RadioButton
     Friend WithEvents rdoRight As RadioButton
     Friend WithEvents ucrSelectorNewColumnName As ucrNewColumnName
-    Friend WithEvents ucrMultipleNumericBreakPoints As ucrMultipleNumeric
+    Friend WithEvents ucrMultipleNumericBreakPoints As ucrMultipleInput
+    Friend WithEvents ucrMultipleLabels As ucrMultipleInput
 End Class

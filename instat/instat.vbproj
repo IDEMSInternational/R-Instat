@@ -1100,10 +1100,10 @@
     <Compile Include="ucrFactor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrMultipleNumeric.Designer.vb">
-      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    <Compile Include="ucrMultipleInput.Designer.vb">
+      <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrMultipleNumeric.vb">
+    <Compile Include="ucrMultipleInput.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrNewColumnName.Designer.vb">
@@ -2527,14 +2527,14 @@
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrMultipleNumeric.fr-FR.resx">
-      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
+      <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrMultipleNumeric.resx">
-      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    <EmbeddedResource Include="ucrMultipleInput.resx">
+      <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrMultipleNumeric.sw-KE.resx">
-      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    <EmbeddedResource Include="ucrMultipleInput.sw-KE.resx">
+      <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNewColumnName.fr-FR.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
