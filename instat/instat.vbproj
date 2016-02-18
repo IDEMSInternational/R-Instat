@@ -252,6 +252,12 @@
     <Compile Include="dlgOneWayANOVA.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPermuteRows.Designer.vb">
+      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPermuteRows.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgPrintPreviewOptions.Designer.vb">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </Compile>
@@ -262,6 +268,12 @@
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRenameSheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSummaryBarOrPieChart.Designer.vb">
+      <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSummaryBarOrPieChart.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgOptions.Designer.vb">
@@ -1100,10 +1112,10 @@
     <Compile Include="ucrFactor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrMultipleNumeric.Designer.vb">
-      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    <Compile Include="ucrMultipleInput.Designer.vb">
+      <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrMultipleNumeric.vb">
+    <Compile Include="ucrMultipleInput.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrNewColumnName.Designer.vb">
@@ -1330,6 +1342,15 @@
     <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgPermuteRows.fr-FR.resx">
+      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPermuteRows.resx">
+      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPermuteRows.sw-KE.resx">
+      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgPrintPreviewOptions.fr-FR.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -1347,6 +1368,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameSheet.sw-KE.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryBarOrPieChart.fr-FR.resx">
+      <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryBarOrPieChart.resx">
+      <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
+      <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOptions.fr-FR.resx">
       <DependentUpon>sdgOptions.vb</DependentUpon>
@@ -2527,14 +2557,14 @@
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrMultipleNumeric.fr-FR.resx">
-      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
+      <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrMultipleNumeric.resx">
-      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    <EmbeddedResource Include="ucrMultipleInput.resx">
+      <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrMultipleNumeric.sw-KE.resx">
-      <DependentUpon>ucrMultipleNumeric.vb</DependentUpon>
+    <EmbeddedResource Include="ucrMultipleInput.sw-KE.resx">
+      <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNewColumnName.fr-FR.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>

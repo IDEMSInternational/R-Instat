@@ -676,5 +676,11 @@ Public Class frmMain
         dlgName.ShowDialog()
     End Sub
 
+    Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPie.Click
+        dlgBarAndPieChart.ShowDialog()
+    End Sub
 
+    Private Sub mnuManagePermuteRows_Click(sender As Object, e As EventArgs) Handles mnuManagePermuteRows.Click
+        dlgPermuteRows.ShowDialog()
+    End Sub
 End Class
