@@ -45,11 +45,11 @@ Partial Class dlgImportDataset
         Me.rdoHeadingsNo = New System.Windows.Forms.RadioButton()
         Me.txtInputFile = New System.Windows.Forms.TextBox()
         Me.chlStringsAsFactors = New System.Windows.Forms.CheckBox()
-        Me.dataFrame = New unvell.ReoGrid.ReoGridControl()
+        Me.grdDataPreview = New unvell.ReoGrid.ReoGridControl()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
         Me.lblLinesToSkip = New System.Windows.Forms.Label()
-        Me.txtFileOPenPath = New System.Windows.Forms.TextBox()
+        Me.txtFilePath = New System.Windows.Forms.TextBox()
         Me.nudSkips = New System.Windows.Forms.NumericUpDown()
         Me.cmdOpenDataSet = New System.Windows.Forms.Button()
         CType(Me.nudSkips, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -78,7 +78,7 @@ Partial Class dlgImportDataset
         'lblName
         '
         Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(12, 9)
+        Me.lblName.Location = New System.Drawing.Point(12, 61)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(35, 13)
         Me.lblName.TabIndex = 2
@@ -88,7 +88,7 @@ Partial Class dlgImportDataset
         'lblEncoding
         '
         Me.lblEncoding.AutoSize = True
-        Me.lblEncoding.Location = New System.Drawing.Point(12, 104)
+        Me.lblEncoding.Location = New System.Drawing.Point(12, 99)
         Me.lblEncoding.Name = "lblEncoding"
         Me.lblEncoding.Size = New System.Drawing.Size(52, 13)
         Me.lblEncoding.TabIndex = 3
@@ -166,7 +166,7 @@ Partial Class dlgImportDataset
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(15, 25)
+        Me.txtName.Location = New System.Drawing.Point(50, 58)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(202, 20)
         Me.txtName.TabIndex = 11
@@ -276,22 +276,22 @@ Partial Class dlgImportDataset
         Me.chlStringsAsFactors.Text = "Strings as factors"
         Me.chlStringsAsFactors.UseVisualStyleBackColor = True
         '
-        'dataFrame
+        'grdDataPreview
         '
-        Me.dataFrame.BackColor = System.Drawing.Color.White
-        Me.dataFrame.ColumnHeaderContextMenuStrip = Nothing
-        Me.dataFrame.LeadHeaderContextMenuStrip = Nothing
-        Me.dataFrame.Location = New System.Drawing.Point(295, 256)
-        Me.dataFrame.Name = "dataFrame"
-        Me.dataFrame.Readonly = True
-        Me.dataFrame.RowHeaderContextMenuStrip = Nothing
-        Me.dataFrame.Script = Nothing
-        Me.dataFrame.SheetTabContextMenuStrip = Nothing
-        Me.dataFrame.SheetTabControlNewButtonVisible = False
-        Me.dataFrame.SheetTabControlWidth = 60
-        Me.dataFrame.SheetTabNewButtonVisible = False
-        Me.dataFrame.Size = New System.Drawing.Size(422, 174)
-        Me.dataFrame.TabIndex = 28
+        Me.grdDataPreview.BackColor = System.Drawing.Color.White
+        Me.grdDataPreview.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdDataPreview.LeadHeaderContextMenuStrip = Nothing
+        Me.grdDataPreview.Location = New System.Drawing.Point(295, 256)
+        Me.grdDataPreview.Name = "grdDataPreview"
+        Me.grdDataPreview.Readonly = True
+        Me.grdDataPreview.RowHeaderContextMenuStrip = Nothing
+        Me.grdDataPreview.Script = Nothing
+        Me.grdDataPreview.SheetTabContextMenuStrip = Nothing
+        Me.grdDataPreview.SheetTabControlNewButtonVisible = False
+        Me.grdDataPreview.SheetTabControlWidth = 60
+        Me.grdDataPreview.SheetTabNewButtonVisible = False
+        Me.grdDataPreview.Size = New System.Drawing.Size(422, 174)
+        Me.grdDataPreview.TabIndex = 28
         '
         'ucrBase
         '
@@ -303,11 +303,11 @@ Partial Class dlgImportDataset
         'lblFileOpenPath
         '
         Me.lblFileOpenPath.AutoSize = True
-        Me.lblFileOpenPath.Location = New System.Drawing.Point(12, 51)
+        Me.lblFileOpenPath.Location = New System.Drawing.Point(12, 28)
         Me.lblFileOpenPath.Name = "lblFileOpenPath"
-        Me.lblFileOpenPath.Size = New System.Drawing.Size(64, 13)
+        Me.lblFileOpenPath.Size = New System.Drawing.Size(23, 13)
         Me.lblFileOpenPath.TabIndex = 29
-        Me.lblFileOpenPath.Text = "Path To File"
+        Me.lblFileOpenPath.Text = "File"
         '
         'lblLinesToSkip
         '
@@ -318,13 +318,13 @@ Partial Class dlgImportDataset
         Me.lblLinesToSkip.TabIndex = 30
         Me.lblLinesToSkip.Text = "Lines To Skip"
         '
-        'txtFileOPenPath
+        'txtFilePath
         '
-        Me.txtFileOPenPath.Location = New System.Drawing.Point(12, 67)
-        Me.txtFileOPenPath.Name = "txtFileOPenPath"
-        Me.txtFileOPenPath.ReadOnly = True
-        Me.txtFileOPenPath.Size = New System.Drawing.Size(205, 20)
-        Me.txtFileOPenPath.TabIndex = 31
+        Me.txtFilePath.Location = New System.Drawing.Point(50, 25)
+        Me.txtFilePath.Name = "txtFilePath"
+        Me.txtFilePath.ReadOnly = True
+        Me.txtFilePath.Size = New System.Drawing.Size(167, 20)
+        Me.txtFilePath.TabIndex = 31
         '
         'nudSkips
         '
@@ -339,7 +339,8 @@ Partial Class dlgImportDataset
         Me.cmdOpenDataSet.Name = "cmdOpenDataSet"
         Me.cmdOpenDataSet.Size = New System.Drawing.Size(66, 23)
         Me.cmdOpenDataSet.TabIndex = 33
-        Me.cmdOpenDataSet.Text = "Open File"
+        Me.cmdOpenDataSet.Tag = "select_file"
+        Me.cmdOpenDataSet.Text = "Select File"
         Me.cmdOpenDataSet.UseVisualStyleBackColor = True
         '
         'dlgImportDataset
@@ -349,10 +350,10 @@ Partial Class dlgImportDataset
         Me.ClientSize = New System.Drawing.Size(723, 501)
         Me.Controls.Add(Me.cmdOpenDataSet)
         Me.Controls.Add(Me.nudSkips)
-        Me.Controls.Add(Me.txtFileOPenPath)
+        Me.Controls.Add(Me.txtFilePath)
         Me.Controls.Add(Me.lblLinesToSkip)
         Me.Controls.Add(Me.lblFileOpenPath)
-        Me.Controls.Add(Me.dataFrame)
+        Me.Controls.Add(Me.grdDataPreview)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.chlStringsAsFactors)
         Me.Controls.Add(Me.txtInputFile)
@@ -412,10 +413,10 @@ Partial Class dlgImportDataset
     Friend WithEvents txtInputFile As TextBox
     Friend WithEvents chlStringsAsFactors As CheckBox
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents dataFrame As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents grdDataPreview As unvell.ReoGrid.ReoGridControl
     Friend WithEvents lblFileOpenPath As Label
     Friend WithEvents lblLinesToSkip As Label
-    Friend WithEvents txtFileOPenPath As TextBox
+    Friend WithEvents txtFilePath As TextBox
     Friend WithEvents nudSkips As NumericUpDown
     Friend WithEvents cmdOpenDataSet As Button
 End Class
