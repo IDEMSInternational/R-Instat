@@ -39,7 +39,7 @@ Public Class ucrFactor
     End Sub
 
     Public Sub SetAsMultipleSelector()
-        bIsSelector = False
+        bIsSelector = True
         bIsMultipleSelector = True
     End Sub
 
