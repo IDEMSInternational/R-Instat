@@ -32,12 +32,15 @@ Partial Class dlgCorrelation
         Me.rdoPearson = New System.Windows.Forms.RadioButton()
         Me.cmdPlots = New System.Windows.Forms.Button()
         Me.grpMissing = New System.Windows.Forms.GroupBox()
+        Me.rdoPairwise = New System.Windows.Forms.RadioButton()
         Me.rdoCompleteRowsOnly = New System.Windows.Forms.RadioButton()
-        Me.Pairwise = New System.Windows.Forms.RadioButton()
+        Me.lblConfInterval = New System.Windows.Forms.Label()
+        Me.txtConfidenceInterval = New System.Windows.Forms.TextBox()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorDataFrameVarAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
         Me.grpMethod.SuspendLayout()
         Me.grpMissing.SuspendLayout()
         Me.SuspendLayout()
@@ -134,7 +137,7 @@ Partial Class dlgCorrelation
         '
         'cmdPlots
         '
-        Me.cmdPlots.Location = New System.Drawing.Point(351, 329)
+        Me.cmdPlots.Location = New System.Drawing.Point(332, 293)
         Me.cmdPlots.Name = "cmdPlots"
         Me.cmdPlots.Size = New System.Drawing.Size(75, 23)
         Me.cmdPlots.TabIndex = 11
@@ -144,15 +147,26 @@ Partial Class dlgCorrelation
         '
         'grpMissing
         '
-        Me.grpMissing.Controls.Add(Me.Pairwise)
+        Me.grpMissing.Controls.Add(Me.rdoPairwise)
         Me.grpMissing.Controls.Add(Me.rdoCompleteRowsOnly)
         Me.grpMissing.Location = New System.Drawing.Point(3, 283)
         Me.grpMissing.Name = "grpMissing"
-        Me.grpMissing.Size = New System.Drawing.Size(423, 40)
+        Me.grpMissing.Size = New System.Drawing.Size(309, 40)
         Me.grpMissing.TabIndex = 12
         Me.grpMissing.TabStop = False
         Me.grpMissing.Tag = "Missing"
         Me.grpMissing.Text = "Missing"
+        '
+        'rdoPairwise
+        '
+        Me.rdoPairwise.AutoSize = True
+        Me.rdoPairwise.Location = New System.Drawing.Point(203, 16)
+        Me.rdoPairwise.Name = "rdoPairwise"
+        Me.rdoPairwise.Size = New System.Drawing.Size(64, 17)
+        Me.rdoPairwise.TabIndex = 1
+        Me.rdoPairwise.Tag = "Pairwise"
+        Me.rdoPairwise.Text = "Pairwise"
+        Me.rdoPairwise.UseVisualStyleBackColor = True
         '
         'rdoCompleteRowsOnly
         '
@@ -167,16 +181,21 @@ Partial Class dlgCorrelation
         Me.rdoCompleteRowsOnly.Text = "Complete rows only"
         Me.rdoCompleteRowsOnly.UseVisualStyleBackColor = True
         '
-        'Pairwise
+        'lblConfInterval
         '
-        Me.Pairwise.AutoSize = True
-        Me.Pairwise.Location = New System.Drawing.Point(203, 16)
-        Me.Pairwise.Name = "Pairwise"
-        Me.Pairwise.Size = New System.Drawing.Size(64, 17)
-        Me.Pairwise.TabIndex = 1
-        Me.Pairwise.Tag = "Pairwise"
-        Me.Pairwise.Text = "Pairwise"
-        Me.Pairwise.UseVisualStyleBackColor = True
+        Me.lblConfInterval.AutoSize = True
+        Me.lblConfInterval.Location = New System.Drawing.Point(12, 325)
+        Me.lblConfInterval.Name = "lblConfInterval"
+        Me.lblConfInterval.Size = New System.Drawing.Size(133, 13)
+        Me.lblConfInterval.TabIndex = 13
+        Me.lblConfInterval.Text = "T Test Confidence Interval"
+        '
+        'txtConfidenceInterval
+        '
+        Me.txtConfidenceInterval.Location = New System.Drawing.Point(156, 322)
+        Me.txtConfidenceInterval.Name = "txtConfidenceInterval"
+        Me.txtConfidenceInterval.Size = New System.Drawing.Size(100, 20)
+        Me.txtConfidenceInterval.TabIndex = 14
         '
         'ucrReceiverSecondColumn
         '
@@ -206,11 +225,21 @@ Partial Class dlgCorrelation
         Me.ucrBase.Size = New System.Drawing.Size(409, 57)
         Me.ucrBase.TabIndex = 1
         '
+        'ucrReceiverMultipleColumns
+        '
+        Me.ucrReceiverMultipleColumns.Location = New System.Drawing.Point(278, 112)
+        Me.ucrReceiverMultipleColumns.Name = "ucrReceiverMultipleColumns"
+        Me.ucrReceiverMultipleColumns.Size = New System.Drawing.Size(121, 104)
+        Me.ucrReceiverMultipleColumns.TabIndex = 15
+        '
         'dlgCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(438, 415)
+        Me.Controls.Add(Me.ucrReceiverMultipleColumns)
+        Me.Controls.Add(Me.lblConfInterval)
+        Me.Controls.Add(Me.txtConfidenceInterval)
         Me.Controls.Add(Me.grpMissing)
         Me.Controls.Add(Me.cmdPlots)
         Me.Controls.Add(Me.grpMethod)
@@ -248,6 +277,9 @@ Partial Class dlgCorrelation
     Friend WithEvents rdoPearson As RadioButton
     Friend WithEvents cmdPlots As Button
     Friend WithEvents grpMissing As GroupBox
-    Friend WithEvents Pairwise As RadioButton
+    Friend WithEvents rdoPairwise As RadioButton
     Friend WithEvents rdoCompleteRowsOnly As RadioButton
+    Friend WithEvents txtConfidenceInterval As TextBox
+    Friend WithEvents lblConfInterval As Label
+    Friend WithEvents ucrReceiverMultipleColumns As ucrReceiverMultiple
 End Class
