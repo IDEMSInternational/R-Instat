@@ -24,7 +24,7 @@ Partial Class dlgSummaryBarOrPieChart
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.rdoPieChart = New System.Windows.Forms.RadioButton()
         Me.ucrSummarybarSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrYReceiver = New instat.ucrReceiverSingle()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
@@ -34,6 +34,8 @@ Partial Class dlgSummaryBarOrPieChart
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblSecondFactor = New System.Windows.Forms.Label()
+        Me.grpChartOptions = New System.Windows.Forms.GroupBox()
+        Me.grpChartOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -46,7 +48,7 @@ Partial Class dlgSummaryBarOrPieChart
         'rdoBarChart
         '
         Me.rdoBarChart.AutoSize = True
-        Me.rdoBarChart.Location = New System.Drawing.Point(24, 13)
+        Me.rdoBarChart.Location = New System.Drawing.Point(5, 9)
         Me.rdoBarChart.Name = "rdoBarChart"
         Me.rdoBarChart.Size = New System.Drawing.Size(69, 17)
         Me.rdoBarChart.TabIndex = 1
@@ -55,16 +57,16 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoBarChart.Text = "Bar Chart"
         Me.rdoBarChart.UseVisualStyleBackColor = True
         '
-        'RadioButton2
+        'rdoPieChart
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(190, 12)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(68, 17)
-        Me.RadioButton2.TabIndex = 1
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "Pie Chart"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.rdoPieChart.AutoSize = True
+        Me.rdoPieChart.Location = New System.Drawing.Point(95, 9)
+        Me.rdoPieChart.Name = "rdoPieChart"
+        Me.rdoPieChart.Size = New System.Drawing.Size(68, 17)
+        Me.rdoPieChart.TabIndex = 1
+        Me.rdoPieChart.TabStop = True
+        Me.rdoPieChart.Text = "Pie Chart"
+        Me.rdoPieChart.UseVisualStyleBackColor = True
         '
         'ucrSummarybarSelector
         '
@@ -144,11 +146,22 @@ Partial Class dlgSummaryBarOrPieChart
         Me.lblSecondFactor.Tag = "Second+Factor"
         Me.lblSecondFactor.Text = "Second Factor"
         '
+        'grpChartOptions
+        '
+        Me.grpChartOptions.Controls.Add(Me.rdoPieChart)
+        Me.grpChartOptions.Controls.Add(Me.rdoBarChart)
+        Me.grpChartOptions.Location = New System.Drawing.Point(7, 1)
+        Me.grpChartOptions.Name = "grpChartOptions"
+        Me.grpChartOptions.Size = New System.Drawing.Size(170, 34)
+        Me.grpChartOptions.TabIndex = 8
+        Me.grpChartOptions.TabStop = False
+        '
         'dlgSummaryBarOrPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(432, 319)
+        Me.Controls.Add(Me.grpChartOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdPieChartOptions)
         Me.Controls.Add(Me.lblSecondFactor)
@@ -158,14 +171,14 @@ Partial Class dlgSummaryBarOrPieChart
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.ucrYReceiver)
         Me.Controls.Add(Me.ucrSummarybarSelector)
-        Me.Controls.Add(Me.RadioButton2)
-        Me.Controls.Add(Me.rdoBarChart)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgSummaryBarOrPieChart"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Summary_Bar_Pie_Chart"
         Me.Text = "Summary Bar Or PieChart"
+        Me.grpChartOptions.ResumeLayout(False)
+        Me.grpChartOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -173,7 +186,7 @@ Partial Class dlgSummaryBarOrPieChart
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents rdoBarChart As RadioButton
-    Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents rdoPieChart As RadioButton
     Friend WithEvents ucrSummarybarSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrYReceiver As ucrReceiverSingle
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
@@ -183,4 +196,5 @@ Partial Class dlgSummaryBarOrPieChart
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblSecondFactor As Label
+    Friend WithEvents grpChartOptions As GroupBox
 End Class
