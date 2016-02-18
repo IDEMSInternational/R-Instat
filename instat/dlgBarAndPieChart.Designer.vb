@@ -23,8 +23,6 @@ Partial Class dlgBarAndPieChart
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoBarChart = New System.Windows.Forms.RadioButton()
-        Me.rdoPieChart = New System.Windows.Forms.RadioButton()
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrSecondReceiver = New instat.ucrReceiverSingle()
@@ -32,6 +30,10 @@ Partial Class dlgBarAndPieChart
         Me.lblSecondFactor = New System.Windows.Forms.Label()
         Me.cmdBarChartOptions = New System.Windows.Forms.Button()
         Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.rdoBarChart = New System.Windows.Forms.RadioButton()
+        Me.rdoPieChart = New System.Windows.Forms.RadioButton()
+        Me.grpSelection = New System.Windows.Forms.GroupBox()
+        Me.grpSelection.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -40,30 +42,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
-        '
-        'rdoBarChart
-        '
-        Me.rdoBarChart.AutoSize = True
-        Me.rdoBarChart.Location = New System.Drawing.Point(17, 13)
-        Me.rdoBarChart.Name = "rdoBarChart"
-        Me.rdoBarChart.Size = New System.Drawing.Size(69, 17)
-        Me.rdoBarChart.TabIndex = 1
-        Me.rdoBarChart.TabStop = True
-        Me.rdoBarChart.Tag = "Bar_Chart"
-        Me.rdoBarChart.Text = "Bar Chart"
-        Me.rdoBarChart.UseVisualStyleBackColor = True
-        '
-        'rdoPieChart
-        '
-        Me.rdoPieChart.AutoSize = True
-        Me.rdoPieChart.Location = New System.Drawing.Point(207, 13)
-        Me.rdoPieChart.Name = "rdoPieChart"
-        Me.rdoPieChart.Size = New System.Drawing.Size(68, 17)
-        Me.rdoPieChart.TabIndex = 1
-        Me.rdoPieChart.TabStop = True
-        Me.rdoPieChart.Tag = "Pie_Chart"
-        Me.rdoPieChart.Text = "Pie Chart"
-        Me.rdoPieChart.UseVisualStyleBackColor = True
         '
         'ucrBarChartSelector
         '
@@ -126,11 +104,46 @@ Partial Class dlgBarAndPieChart
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
+        'rdoBarChart
+        '
+        Me.rdoBarChart.AutoSize = True
+        Me.rdoBarChart.Location = New System.Drawing.Point(5, 12)
+        Me.rdoBarChart.Name = "rdoBarChart"
+        Me.rdoBarChart.Size = New System.Drawing.Size(69, 17)
+        Me.rdoBarChart.TabIndex = 1
+        Me.rdoBarChart.TabStop = True
+        Me.rdoBarChart.Tag = "Bar_Chart"
+        Me.rdoBarChart.Text = "Bar Chart"
+        Me.rdoBarChart.UseVisualStyleBackColor = True
+        '
+        'rdoPieChart
+        '
+        Me.rdoPieChart.AutoSize = True
+        Me.rdoPieChart.Location = New System.Drawing.Point(103, 12)
+        Me.rdoPieChart.Name = "rdoPieChart"
+        Me.rdoPieChart.Size = New System.Drawing.Size(68, 17)
+        Me.rdoPieChart.TabIndex = 1
+        Me.rdoPieChart.TabStop = True
+        Me.rdoPieChart.Tag = "Pie_Chart"
+        Me.rdoPieChart.Text = "Pie Chart"
+        Me.rdoPieChart.UseVisualStyleBackColor = True
+        '
+        'grpSelection
+        '
+        Me.grpSelection.Controls.Add(Me.rdoBarChart)
+        Me.grpSelection.Controls.Add(Me.rdoPieChart)
+        Me.grpSelection.Location = New System.Drawing.Point(12, 0)
+        Me.grpSelection.Name = "grpSelection"
+        Me.grpSelection.Size = New System.Drawing.Size(200, 39)
+        Me.grpSelection.TabIndex = 8
+        Me.grpSelection.TabStop = False
+        '
         'dlgBarAndPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(412, 317)
+        Me.Controls.Add(Me.grpSelection)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdBarChartOptions)
         Me.Controls.Add(Me.lblSecondFactor)
@@ -138,22 +151,20 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrSecondReceiver)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.ucrBarChartSelector)
-        Me.Controls.Add(Me.rdoPieChart)
-        Me.Controls.Add(Me.rdoBarChart)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgBarAndPieChart"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Bar_And_Pie_Chart"
         Me.Text = "Bar And Pie Chart"
+        Me.grpSelection.ResumeLayout(False)
+        Me.grpSelection.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents rdoBarChart As RadioButton
-    Friend WithEvents rdoPieChart As RadioButton
     Friend WithEvents ucrBarChartSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents ucrSecondReceiver As ucrReceiverSingle
@@ -161,4 +172,7 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents lblSecondFactor As Label
     Friend WithEvents cmdBarChartOptions As Button
     Friend WithEvents cmdOptions As Button
+    Friend WithEvents rdoBarChart As RadioButton
+    Friend WithEvents rdoPieChart As RadioButton
+    Friend WithEvents grpSelection As GroupBox
 End Class
