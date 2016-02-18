@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class sdgGraphicsEstimates
+Partial Class sdgOptions
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -44,7 +44,6 @@ Partial Class sdgGraphicsEstimates
         Me.chkFourInOne = New System.Windows.Forms.CheckBox()
         Me.chkMeans = New System.Windows.Forms.CheckBox()
         Me.chkResiduals = New System.Windows.Forms.CheckBox()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbcOptions.SuspendLayout()
         Me.tbpDisplay.SuspendLayout()
         CType(Me.nudConfidenceLevel, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -312,22 +311,14 @@ Partial Class sdgGraphicsEstimates
         Me.chkResiduals.Text = "Residuals"
         Me.chkResiduals.UseVisualStyleBackColor = True
         '
-        'ucrBaseSubdialog
-        '
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(32, 285)
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(225, 30)
-        Me.ucrBaseSubdialog.TabIndex = 0
-        '
-        'sdgGraphicsEstimates
+        'sdgOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(332, 316)
         Me.Controls.Add(Me.tbcOptions)
-        Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "sdgGraphicsEstimates"
+        Me.Name = "sdgOptions"
         Me.Tag = "Graphics_Estimates"
         Me.Text = "Graphics/Estimates"
         Me.tbcOptions.ResumeLayout(False)
