@@ -40,19 +40,19 @@ Public Class dlgBarAndPieChart
     Private Sub ucrBarChartSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrBarChartSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrBarChartSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
+    Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
+        clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+    End Sub
+    Private Sub ucrSecondReceiver_Leave(sender As Object, e As EventArgs) Handles ucrSecondReceiver.Leave
+        clsRaesFunction.AddParameter("fill", ucrSecondReceiver.GetVariableNames(False))
+    End Sub
 
-    Private Sub grpSelection_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub grpSelection_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
         If rdoBarChart.Checked = True Then
             clsRgeom_barchart.SetRCommand("geom_bar")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_barchart)
         Else
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=Nothing)
         End If
-    End Sub
-    Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
-        clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
-    End Sub
-    Private Sub ucrSecondReceiver_Leave(sender As Object, e As EventArgs) Handles ucrSecondReceiver.Leave
-        clsRaesFunction.AddParameter("fill", ucrSecondReceiver.GetVariableNames(False))
     End Sub
 End Class
