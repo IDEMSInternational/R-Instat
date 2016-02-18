@@ -53,18 +53,19 @@ Public Class ucrFactor
                     frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
                     grdFactorData.Visible = True
                     If bIsSelector Then
-                        'To change once we have a method to set alevel selected on load
-                        grdFactorData.CurrentWorksheet.AppendCols(1)
-                        grdFactorData.CurrentWorksheet.ColumnHeaders("C").DefaultCellBody = GetType(CheckBoxCell)
-                        setDisabled()
-                        grdFactorData.CurrentWorksheet.ColumnHeaders("C").Text = "Select/Unselect"
-                    ElseIf bIsMultipleSelector Then
-                        'To change once we have a method to set alevel selected on load
-                        grdFactorData.CurrentWorksheet.AppendCols(1)
-                        grdFactorData.CurrentWorksheet.ColumnHeaders("C").DefaultCellBody = GetType(RadioButtonCell)
-                        setDisabled()
-                        grdFactorData.CurrentWorksheet.ColumnHeaders("C").Text = "Select/Unselect"
-                    Else
+                        If bIsMultipleSelector Then
+                            'To change once we have a method to set alevel selected on load
+                            grdFactorData.CurrentWorksheet.AppendCols(1)
+                            grdFactorData.CurrentWorksheet.ColumnHeaders("C").DefaultCellBody = GetType(RadioButtonCell)
+                            setDisabled()
+                            grdFactorData.CurrentWorksheet.ColumnHeaders("C").Text = "Select/Unselect"
+                        Else
+                            'To change once we have a method to set alevel selected on load
+                            grdFactorData.CurrentWorksheet.AppendCols(1)
+                            grdFactorData.CurrentWorksheet.ColumnHeaders("C").DefaultCellBody = GetType(CheckBoxCell)
+                            setDisabled()
+                            grdFactorData.CurrentWorksheet.ColumnHeaders("C").Text = "Select/Unselect"
+                        End If
                     End If
                 End If
             End If
@@ -88,7 +89,10 @@ Public Class ucrFactor
         Dim i As Integer
         Dim checked As Boolean
         If grdFactorData.CurrentWorksheet.RowCount = 1 Then
-            strTemp = Chr(34) & grdFactorData.CurrentWorksheet(1, 1) & Chr(34)
+            checked = DirectCast(grdFactorData.CurrentWorksheet(0, 0), Boolean)
+            If checked Then
+                strTemp = Chr(34) & grdFactorData.CurrentWorksheet(0, 0) & Chr(34)
+            End If
         ElseIf grdFactorData.CurrentWorksheet.RowCount > 1 Then
             strTemp = "c" & "("
             For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
