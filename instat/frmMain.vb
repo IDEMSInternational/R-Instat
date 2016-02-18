@@ -268,9 +268,7 @@ Public Class frmMain
         dlgRowStats.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsScatterplot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsScatterplot.Click
-        dlgScatterPlot.ShowDialog()
-    End Sub
+
 
     Private Sub mnuStatsRegressionSimple_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionSimple.Click
         dlgRegressionSimple.ShowDialog()
@@ -676,5 +674,9 @@ Public Class frmMain
 
     Private Sub mnuManageDataFrameRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameRename.Click
         dlgName.ShowDialog()
+    End Sub
+
+    Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPie.Click
+        dlgBarAndPieChart.ShowDialog()
     End Sub
 End Class

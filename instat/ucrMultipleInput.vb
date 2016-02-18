@@ -14,8 +14,9 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Class ucrMultipleNumeric
+Public Class ucrMultipleInput
     Public clsNumericList As New RFunction
+    Public bIsNumericInput As Boolean = False
 
     Private Sub ucrMultipleNumeric_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         clsNumericList.SetRCommand("c")
@@ -31,12 +32,16 @@ Public Class ucrMultipleNumeric
             strItems = strTemp.Split(",")
             For Each strVal In strItems
                 Dim clsTempParam As New RParameter
-                If Not IsNumeric(strVal) Then
-                    MsgBox("Textbox requires a list of numbers separated by commas.", vbOKOnly, "Validation Error")
-                    txtNumericItems.Focus()
-                    Exit Sub
+                If bIsNumericInput Then
+                    If Not IsNumeric(strVal) Then
+                        MsgBox("Textbox requires a list of numbers separated by commas.", vbOKOnly, "Validation Error")
+                        txtNumericItems.Focus()
+                        Exit Sub
+                    End If
+                    clsTempParam.SetArgumentValue(strVal)
+                Else
+                    clsTempParam.SetArgumentValue(Chr(34) & strVal & Chr(34))
                 End If
-                clsTempParam.SetArgumentValue(strVal)
                 clsNumericList.AddParameter(clsTempParam)
             Next
         End If
