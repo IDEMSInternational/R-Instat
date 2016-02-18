@@ -22,26 +22,20 @@ Partial Class dlgRecode
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
         Me.chkAddLabels = New System.Windows.Forms.CheckBox()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
-        Me.ucrSelectorDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
         Me.lblBreakPoints = New System.Windows.Forms.Label()
         Me.grpClosedOn = New System.Windows.Forms.GroupBox()
         Me.rdoLeft = New System.Windows.Forms.RadioButton()
         Me.rdoRight = New System.Windows.Forms.RadioButton()
+        Me.ucrMultipleNumericBreakPoints = New instat.ucrMultipleInput()
         Me.ucrSelectorNewColumnName = New instat.ucrNewColumnName()
-        Me.ucrMultipleNumeric = New instat.ucrMultipleNumeric()
+        Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
+        Me.ucrSelectorDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrMultipleLabels = New instat.ucrMultipleInput()
         Me.grpClosedOn.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 261)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
-        Me.ucrBase.TabIndex = 1
         '
         'chkAddLabels
         '
@@ -62,20 +56,6 @@ Partial Class dlgRecode
         Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
         Me.lblSelectedVariables.TabIndex = 17
         Me.lblSelectedVariables.Text = "Selected Variables"
-        '
-        'ucrSelectorDataFrameAddRemove
-        '
-        Me.ucrSelectorDataFrameAddRemove.Location = New System.Drawing.Point(12, 12)
-        Me.ucrSelectorDataFrameAddRemove.Name = "ucrSelectorDataFrameAddRemove"
-        Me.ucrSelectorDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorDataFrameAddRemove.TabIndex = 18
-        '
-        'ucrReceiverSingle
-        '
-        Me.ucrReceiverSingle.Location = New System.Drawing.Point(298, 29)
-        Me.ucrReceiverSingle.Name = "ucrReceiverSingle"
-        Me.ucrReceiverSingle.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverSingle.TabIndex = 19
         '
         'lblBreakPoints
         '
@@ -123,6 +103,13 @@ Partial Class dlgRecode
         Me.rdoRight.Text = "Right"
         Me.rdoRight.UseVisualStyleBackColor = True
         '
+        'ucrMultipleNumericBreakPoints
+        '
+        Me.ucrMultipleNumericBreakPoints.Location = New System.Drawing.Point(298, 78)
+        Me.ucrMultipleNumericBreakPoints.Name = "ucrMultipleNumericBreakPoints"
+        Me.ucrMultipleNumericBreakPoints.Size = New System.Drawing.Size(106, 29)
+        Me.ucrMultipleNumericBreakPoints.TabIndex = 24
+        '
         'ucrSelectorNewColumnName
         '
         Me.ucrSelectorNewColumnName.Location = New System.Drawing.Point(12, 220)
@@ -131,23 +118,45 @@ Partial Class dlgRecode
         Me.ucrSelectorNewColumnName.TabIndex = 23
         Me.ucrSelectorNewColumnName.ucrDataFrameSelector = Nothing
         '
-        'ucrMultipleNumeric
+        'ucrReceiverRecode
         '
-        Me.ucrMultipleNumeric.Location = New System.Drawing.Point(298, 78)
-        Me.ucrMultipleNumeric.Name = "ucrMultipleNumeric"
-        Me.ucrMultipleNumeric.Size = New System.Drawing.Size(106, 29)
-        Me.ucrMultipleNumeric.TabIndex = 24
+        Me.ucrReceiverRecode.Location = New System.Drawing.Point(298, 29)
+        Me.ucrReceiverRecode.Name = "ucrReceiverRecode"
+        Me.ucrReceiverRecode.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverRecode.TabIndex = 19
+        '
+        'ucrSelectorDataFrameAddRemove
+        '
+        Me.ucrSelectorDataFrameAddRemove.Location = New System.Drawing.Point(12, 12)
+        Me.ucrSelectorDataFrameAddRemove.Name = "ucrSelectorDataFrameAddRemove"
+        Me.ucrSelectorDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorDataFrameAddRemove.TabIndex = 18
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 261)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
+        Me.ucrBase.TabIndex = 1
+        '
+        'ucrMultipleLabels
+        '
+        Me.ucrMultipleLabels.Location = New System.Drawing.Point(115, 192)
+        Me.ucrMultipleLabels.Name = "ucrMultipleLabels"
+        Me.ucrMultipleLabels.Size = New System.Drawing.Size(150, 29)
+        Me.ucrMultipleLabels.TabIndex = 25
         '
         'dlgRecode
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(437, 324)
-        Me.Controls.Add(Me.ucrMultipleNumeric)
+        Me.Controls.Add(Me.ucrMultipleLabels)
+        Me.Controls.Add(Me.ucrMultipleNumericBreakPoints)
         Me.Controls.Add(Me.ucrSelectorNewColumnName)
         Me.Controls.Add(Me.grpClosedOn)
         Me.Controls.Add(Me.lblBreakPoints)
-        Me.Controls.Add(Me.ucrReceiverSingle)
+        Me.Controls.Add(Me.ucrReceiverRecode)
         Me.Controls.Add(Me.ucrSelectorDataFrameAddRemove)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.chkAddLabels)
@@ -167,11 +176,12 @@ Partial Class dlgRecode
     Friend WithEvents chkAddLabels As CheckBox
     Friend WithEvents lblSelectedVariables As Label
     Friend WithEvents ucrSelectorDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
+    Friend WithEvents ucrReceiverRecode As ucrReceiverSingle
     Friend WithEvents lblBreakPoints As Label
     Friend WithEvents grpClosedOn As GroupBox
     Friend WithEvents rdoLeft As RadioButton
     Friend WithEvents rdoRight As RadioButton
     Friend WithEvents ucrSelectorNewColumnName As ucrNewColumnName
-    Friend WithEvents ucrMultipleNumeric As ucrMultipleNumeric
+    Friend WithEvents ucrMultipleNumericBreakPoints As ucrMultipleInput
+    Friend WithEvents ucrMultipleLabels As ucrMultipleInput
 End Class
