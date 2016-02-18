@@ -22,10 +22,6 @@ Partial Class dlgBarAndPieChart
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
-        Me.ucrSecondReceiver = New instat.ucrReceiverSingle()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.lblSecondFactor = New System.Windows.Forms.Label()
         Me.cmdBarChartOptions = New System.Windows.Forms.Button()
@@ -33,36 +29,12 @@ Partial Class dlgBarAndPieChart
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.rdoPieChart = New System.Windows.Forms.RadioButton()
         Me.grpSelection = New System.Windows.Forms.GroupBox()
+        Me.ucrSecondReceiver = New instat.ucrReceiverSingle()
+        Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpSelection.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(8, 262)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrBarChartSelector
-        '
-        Me.ucrBarChartSelector.Location = New System.Drawing.Point(12, 36)
-        Me.ucrBarChartSelector.Name = "ucrBarChartSelector"
-        Me.ucrBarChartSelector.Size = New System.Drawing.Size(242, 179)
-        Me.ucrBarChartSelector.TabIndex = 2
-        '
-        'ucrFactorReceiver
-        '
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(283, 81)
-        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
-        Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrFactorReceiver.TabIndex = 3
-        '
-        'ucrSecondReceiver
-        '
-        Me.ucrSecondReceiver.Location = New System.Drawing.Point(283, 139)
-        Me.ucrSecondReceiver.Name = "ucrSecondReceiver"
-        Me.ucrSecondReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrSecondReceiver.TabIndex = 3
         '
         'lblFactor
         '
@@ -70,7 +42,7 @@ Partial Class dlgBarAndPieChart
         Me.lblFactor.Location = New System.Drawing.Point(290, 56)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(40, 13)
-        Me.lblFactor.TabIndex = 4
+        Me.lblFactor.TabIndex = 3
         Me.lblFactor.Tag = "Factor"
         Me.lblFactor.Text = "Factor "
         '
@@ -80,7 +52,7 @@ Partial Class dlgBarAndPieChart
         Me.lblSecondFactor.Location = New System.Drawing.Point(283, 123)
         Me.lblSecondFactor.Name = "lblSecondFactor"
         Me.lblSecondFactor.Size = New System.Drawing.Size(77, 13)
-        Me.lblSecondFactor.TabIndex = 4
+        Me.lblSecondFactor.TabIndex = 5
         Me.lblSecondFactor.Tag = "Second_Factor"
         Me.lblSecondFactor.Text = "Second Factor"
         '
@@ -89,7 +61,7 @@ Partial Class dlgBarAndPieChart
         Me.cmdBarChartOptions.Location = New System.Drawing.Point(17, 222)
         Me.cmdBarChartOptions.Name = "cmdBarChartOptions"
         Me.cmdBarChartOptions.Size = New System.Drawing.Size(118, 23)
-        Me.cmdBarChartOptions.TabIndex = 5
+        Me.cmdBarChartOptions.TabIndex = 7
         Me.cmdBarChartOptions.Tag = "Bar_Chart_Options"
         Me.cmdBarChartOptions.Text = "Bar Chart Options"
         Me.cmdBarChartOptions.UseVisualStyleBackColor = True
@@ -99,7 +71,7 @@ Partial Class dlgBarAndPieChart
         Me.cmdOptions.Location = New System.Drawing.Point(313, 221)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOptions.TabIndex = 6
+        Me.cmdOptions.TabIndex = 8
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -110,7 +82,7 @@ Partial Class dlgBarAndPieChart
         Me.rdoBarChart.Location = New System.Drawing.Point(5, 12)
         Me.rdoBarChart.Name = "rdoBarChart"
         Me.rdoBarChart.Size = New System.Drawing.Size(69, 17)
-        Me.rdoBarChart.TabIndex = 1
+        Me.rdoBarChart.TabIndex = 0
         Me.rdoBarChart.TabStop = True
         Me.rdoBarChart.Tag = "Bar_Chart"
         Me.rdoBarChart.Text = "Bar Chart"
@@ -135,8 +107,36 @@ Partial Class dlgBarAndPieChart
         Me.grpSelection.Location = New System.Drawing.Point(12, 0)
         Me.grpSelection.Name = "grpSelection"
         Me.grpSelection.Size = New System.Drawing.Size(200, 39)
-        Me.grpSelection.TabIndex = 8
+        Me.grpSelection.TabIndex = 0
         Me.grpSelection.TabStop = False
+        '
+        'ucrSecondReceiver
+        '
+        Me.ucrSecondReceiver.Location = New System.Drawing.Point(283, 139)
+        Me.ucrSecondReceiver.Name = "ucrSecondReceiver"
+        Me.ucrSecondReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrSecondReceiver.TabIndex = 6
+        '
+        'ucrFactorReceiver
+        '
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(283, 81)
+        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
+        Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrFactorReceiver.TabIndex = 4
+        '
+        'ucrBarChartSelector
+        '
+        Me.ucrBarChartSelector.Location = New System.Drawing.Point(12, 36)
+        Me.ucrBarChartSelector.Name = "ucrBarChartSelector"
+        Me.ucrBarChartSelector.Size = New System.Drawing.Size(242, 179)
+        Me.ucrBarChartSelector.TabIndex = 2
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(8, 262)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgBarAndPieChart
         '
