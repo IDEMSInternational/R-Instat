@@ -252,6 +252,12 @@
     <Compile Include="dlgOneWayANOVA.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPermuteRows.Designer.vb">
+      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPermuteRows.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgPrintPreviewOptions.Designer.vb">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </Compile>
@@ -1329,6 +1335,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPermuteRows.fr-FR.resx">
+      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPermuteRows.resx">
+      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPermuteRows.sw-KE.resx">
+      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrintPreviewOptions.fr-FR.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
