@@ -683,4 +683,8 @@ Public Class frmMain
     Private Sub mnuManagePermuteRows_Click(sender As Object, e As EventArgs) Handles mnuManagePermuteRows.Click
         dlgPermuteRows.ShowDialog()
     End Sub
+
+    Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariateCorrelation.Click
+        dlgCorrelation.ShowDialog()
+    End Sub
 End Class
