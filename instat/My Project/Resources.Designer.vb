@@ -197,6 +197,33 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Bar And Pie Chart.
+        '''</summary>
+        Friend ReadOnly Property Bar_And_Pie_Chart() As String
+            Get
+                Return ResourceManager.GetString("Bar_And_Pie_Chart", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Bar Chart.
+        '''</summary>
+        Friend ReadOnly Property Bar_Chart() As String
+            Get
+                Return ResourceManager.GetString("Bar_Chart", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Bar Chart Options.
+        '''</summary>
+        Friend ReadOnly Property Bar_Chart_Options() As String
+            Get
+                Return ResourceManager.GetString("Bar_Chart_Options", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Bernouli.
         '''</summary>
         Friend ReadOnly Property Bernouli() As String
@@ -2406,6 +2433,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Pie Chart.
+        '''</summary>
+        Friend ReadOnly Property Pie_Chart() As String
+            Get
+                Return ResourceManager.GetString("Pie_Chart", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Pie Chart Options.
+        '''</summary>
+        Friend ReadOnly Property Pie_Chart_Options() As String
+            Get
+                Return ResourceManager.GetString("Pie_Chart_Options", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Plot.
         '''</summary>
         Friend ReadOnly Property Plot() As String
@@ -2982,6 +3027,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Second Factor.
+        '''</summary>
+        Friend ReadOnly Property Second_Factor() As String
+            Get
+                Return ResourceManager.GetString("Second_Factor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Seed.
         '''</summary>
         Friend ReadOnly Property Seed() As String
@@ -3311,6 +3365,15 @@ Namespace My.Resources
         Friend ReadOnly Property Summary() As String
             Get
                 Return ResourceManager.GetString("Summary", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Summary Bar Or PieChart.
+        '''</summary>
+        Friend ReadOnly Property Summary_Bar_Pie_Chart() As String
+            Get
+                Return ResourceManager.GetString("Summary_Bar_Pie_Chart", resourceCulture)
             End Get
         End Property
         
@@ -3770,6 +3833,15 @@ Namespace My.Resources
         Friend ReadOnly Property Yes() As String
             Get
                 Return ResourceManager.GetString("Yes", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Y variable.
+        '''</summary>
+        Friend ReadOnly Property Yvariable() As String
+            Get
+                Return ResourceManager.GetString("Yvariable", resourceCulture)
             End Get
         End Property
     End Module
