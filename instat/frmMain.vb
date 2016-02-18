@@ -687,4 +687,8 @@ Public Class frmMain
     Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariateCorrelation.Click
         dlgCorrelation.ShowDialog()
     End Sub
+
+    Private Sub mnuGraphicsBarPieChartSummaryData_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPieChartSummaryData.Click
+        dlgSummaryBarOrPieChart.ShowDialog()
+    End Sub
 End Class
