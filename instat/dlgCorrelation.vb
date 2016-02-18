@@ -35,16 +35,16 @@ Public Class dlgCorrelation
         ucrBase.clsRsyntax.AddParameter("y", clsRFunctionParameter:=ucrReceiverSecondColumn.GetVariables())
     End Sub
 
-    Private Sub rdoPearson_CheckedChanged(sender As Object, e As EventArgs) Handles rdoPearson.CheckedChanged
-        ucrBase.clsRsyntax.AddParameter("method", Chr(34) & "pearson" & Chr(34))
-    End Sub
-
-    Private Sub rdoKendall_CheckedChanged(sender As Object, e As EventArgs) Handles rdoKendall.CheckedChanged
-        ucrBase.clsRsyntax.AddParameter("method", Chr(34) & "kendall" & Chr(34))
-    End Sub
-
-    Private Sub rdoSpearman_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSpearman.CheckedChanged
-        ucrBase.clsRsyntax.AddParameter("method", Chr(34) & "spearman" & Chr(34))
+    Private Sub rdoForMethodsCheckedChanged(sender As Object, e As EventArgs) Handles rdoPearson.CheckedChanged, rdoKendall.CheckedChanged, rdoSpearman.CheckedChanged
+        If rdoPearson.Checked Then
+            ucrBase.clsRsyntax.AddParameter("method", Chr(34) & "pearson" & Chr(34))
+        ElseIf rdoKendall.Checked Then
+            ucrBase.clsRsyntax.AddParameter("method", Chr(34) & "kendall" & Chr(34))
+        ElseIf rdoSpearman.Checked Then
+            ucrBase.clsRsyntax.AddParameter("method", Chr(34) & "spearman" & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("method")
+        End If
     End Sub
 
     Private Sub rdoCompleteRowsOnly_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCompleteRowsOnly.CheckedChanged
