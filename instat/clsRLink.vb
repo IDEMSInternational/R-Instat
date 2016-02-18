@@ -149,12 +149,16 @@ Public Class RLink
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
             Else
-                strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
-                If strSplitScript <> "" Then
-                    clsEngine.Evaluate(strSplitScript)
+                If strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) = -1 Then
+                    strCapturedScript = "capture.output(" & strScript & ")"
+                Else
+                    strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
+                    If strSplitScript <> "" Then
+                        clsEngine.Evaluate(strSplitScript)
+                    End If
+                    strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
+                    strCapturedScript = "capture.output(" & strSplitScript & ")"
                 End If
-                strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
-                strCapturedScript = "capture.output(" & strSplitScript & ")"
                 temp = clsEngine.Evaluate(strCapturedScript)
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
@@ -240,6 +244,7 @@ Public Class RLink
         Dim grps As New ListViewGroup
         If bInstatObjectExists Then
             lstView.Clear()
+            lstView.Groups.Clear()
             lstView.Columns.Add("Available Data")
             If strDataFrameName = "" Then
                 dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variables_metadata(data_type = " & Chr(34) & strDataType & Chr(34) & ")").AsList
