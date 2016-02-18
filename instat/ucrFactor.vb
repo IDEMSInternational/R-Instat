@@ -39,8 +39,8 @@ Public Class ucrFactor
     End Sub
 
     Public Sub SetAsMultipleSelector()
-        bIsSelector = True
-        bIsMultipleSelector = False
+        bIsSelector = False
+        bIsMultipleSelector = True
     End Sub
 
     Private Sub RefreshFactorData()
@@ -53,17 +53,18 @@ Public Class ucrFactor
                     frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
                     grdFactorData.Visible = True
                     If bIsSelector Then
-                        If bIsMultipleSelector Then
-                            'To change once we have a method to set alevel selected on load
-                            grdFactorData.CurrentWorksheet.InsertColumns(2, 1)
-                            grdFactorData.CurrentWorksheet.ColumnHeaders("C").DefaultCellBody = GetType(RadioButtonCell)
-                            grdFactorData.CurrentWorksheet.ColumnHeaders("C").Text = "Select/Unselect"
-                        Else
-                            'To change once we have a method to set alevel selected on load
-                            grdFactorData.CurrentWorksheet.InsertColumns(2, 1)
-                            grdFactorData.CurrentWorksheet.ColumnHeaders("C").DefaultCellBody = GetType(CheckBoxCell)
-                            grdFactorData.CurrentWorksheet.ColumnHeaders("C").Text = "Select/Unselect"
-                        End If
+                        'To change once we have a method to set alevel selected on load
+                        grdFactorData.CurrentWorksheet.AppendCols(1)
+                        grdFactorData.CurrentWorksheet.ColumnHeaders("C").DefaultCellBody = GetType(CheckBoxCell)
+                        setDisabled()
+                        grdFactorData.CurrentWorksheet.ColumnHeaders("C").Text = "Select/Unselect"
+                    ElseIf bIsMultipleSelector Then
+                        'To change once we have a method to set alevel selected on load
+                        grdFactorData.CurrentWorksheet.AppendCols(1)
+                        grdFactorData.CurrentWorksheet.ColumnHeaders("C").DefaultCellBody = GetType(RadioButtonCell)
+                        setDisabled()
+                        grdFactorData.CurrentWorksheet.ColumnHeaders("C").Text = "Select/Unselect"
+                    Else
                     End If
                 End If
             End If
@@ -72,6 +73,14 @@ Public Class ucrFactor
 
     Private Sub clsReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles clsReceiver.SelectionChanged
         RefreshFactorData()
+    End Sub
+
+    Private Sub setDisabled()
+        'sets the default as unchecked
+        Dim i As Integer
+        For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
+            grdFactorData.CurrentWorksheet(i, 2) = False
+        Next
     End Sub
 
     Public Function GetSelectedLevels() As String
