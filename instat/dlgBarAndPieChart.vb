@@ -17,7 +17,8 @@ Imports instat.Translations
 Public Class dlgBarAndPieChart
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_barchart As New RFunction
-    Private clsRgeom_Piechart As New RFunction
+    Private clsRgeom_piechart As New RFunction
+    Private clsRgeom_piechartCoord As New RFunction
     Private clsRaesFunction As New RFunction
     Private Sub dlgBarAndPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetOperation("+")
@@ -41,16 +42,42 @@ Public Class dlgBarAndPieChart
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrBarChartSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
     Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
-        clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+        If rdoBarChart.Checked = True Then
+            clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
+
+        End If
     End Sub
     Private Sub ucrSecondReceiver_Leave(sender As Object, e As EventArgs) Handles ucrSecondReceiver.Leave
-        clsRaesFunction.AddParameter("fill", ucrSecondReceiver.GetVariableNames(False))
+        If rdoBarChart.Checked = True Then
+            clsRaesFunction.AddParameter("fill", ucrSecondReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
     End Sub
 
     Private Sub grpSelection_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
         If rdoBarChart.Checked = True Then
             clsRgeom_barchart.SetRCommand("geom_bar")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_barchart)
+
+        ElseIf rdoPieChart.Checked = True Then
+
+            Dim clsTempOp As New ROperator
+            Dim clsTempRFunc As New RFunction
+            clsTempOp.SetOperation("+")
+
+            clsRgeom_piechart.SetRCommand("geom_bar")
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_piechart)
+            clsRgeom_piechart.AddParameter("width", "1")
+
+            clsTempOp.SetParameter(True, clsRFunc:=clsRggplotFunction)
+            clsTempOp.SetParameter(False, clsRFunc:=clsRgeom_piechart)
+            clsTempRFunc.SetRCommand("coord_polar")
+            clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
+            ucrBase.clsRsyntax.SetOperatorParameter(True, clsOp:=clsTempOp)
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsTempRFunc)
         Else
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=Nothing)
         End If
