@@ -691,4 +691,8 @@ Public Class frmMain
     Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariateCorrelation.Click
         dlgCorrelation.ShowDialog()
     End Sub
+
+    Private Sub mnuManageDataFileRenameSheet_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileRenameSheet.Click
+        dlgRenameSheet.ShowDialog()
+    End Sub
 End Class
