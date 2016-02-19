@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
+Imports unvell.ReoGrid.CellTypes
 
 Public Class ucrFactor
     Public WithEvents clsReceiver As ucrReceiverSingle
@@ -23,6 +24,7 @@ Public Class ucrFactor
     Public bIsMultipleSelector As Boolean = False
 
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        grdFactorData.Visible = False
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
     End Sub
 
@@ -38,7 +40,7 @@ Public Class ucrFactor
 
     Public Sub SetAsMultipleSelector()
         bIsSelector = True
-        bIsMultipleSelector = False
+        bIsMultipleSelector = True
     End Sub
 
     Private Sub RefreshFactorData()
@@ -47,13 +49,22 @@ Public Class ucrFactor
         If clsReceiver IsNot Nothing Then
             If clsReceiver.strDataType = "factor" Then
                 If clsReceiver.GetVariableNames <> "" Then
-                    dfTemp = frmMain.clsRLink.GetData(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & clsReceiver.GetDataName() & ", col_name = " & clsReceiver.GetVariableNames() & ")")
+                    dfTemp = frmMain.clsRLink.GetData(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & clsReceiver.GetDataName() & Chr(34) & ", col_name = " & clsReceiver.GetVariableNames() & ")")
                     frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
+                    grdFactorData.Visible = True
                     If bIsSelector Then
                         If bIsMultipleSelector Then
-                            'Add a radio button column at end
+                            'To change once we have a method to set alevel selected on load
+                            grdFactorData.CurrentWorksheet.AppendCols(1)
+                            grdFactorData.CurrentWorksheet.ColumnHeaders("C").DefaultCellBody = GetType(RadioButtonCell)
+                            setDisabled()
+                            grdFactorData.CurrentWorksheet.ColumnHeaders("C").Text = "Select/Unselect"
                         Else
-                            'Add a checkbox column at end
+                            'To change once we have a method to set alevel selected on load
+                            grdFactorData.CurrentWorksheet.AppendCols(1)
+                            grdFactorData.CurrentWorksheet.ColumnHeaders("C").DefaultCellBody = GetType(CheckBoxCell)
+                            setDisabled()
+                            grdFactorData.CurrentWorksheet.ColumnHeaders("C").Text = "Select/Unselect"
                         End If
                     End If
                 End If
@@ -65,8 +76,38 @@ Public Class ucrFactor
         RefreshFactorData()
     End Sub
 
+    Private Sub setDisabled()
+        'sets the default as unchecked
+        Dim i As Integer
+        For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
+            grdFactorData.CurrentWorksheet(i, 2) = False
+        Next
+    End Sub
+
     Public Function GetSelectedLevels() As String
-        'return a string of the names of the level(s) that have been checked
-        Return ""
+        Dim strTemp As String = ""
+        Dim i As Integer
+        Dim checked As Boolean
+        If grdFactorData.CurrentWorksheet.RowCount = 1 Then
+            checked = DirectCast(grdFactorData.CurrentWorksheet(0, 0), Boolean)
+            If checked Then
+                strTemp = Chr(34) & grdFactorData.CurrentWorksheet(0, 0) & Chr(34)
+            End If
+        ElseIf grdFactorData.CurrentWorksheet.RowCount > 1 Then
+            strTemp = "c" & "("
+            For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
+                If i > 0 Then
+                    strTemp = strTemp & ","
+                End If
+                checked = DirectCast(grdFactorData.CurrentWorksheet(i, 2), Boolean)
+                If checked Then
+                    If grdFactorData.CurrentWorksheet(i, 0) <> "" Then
+                        strTemp = strTemp & Chr(34) & grdFactorData.CurrentWorksheet(i, 0) & Chr(34)
+                    End If
+                End If
+            Next
+            strTemp = strTemp & ")"
+        End If
+        Return strTemp
     End Function
 End Class
