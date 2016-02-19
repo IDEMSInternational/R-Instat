@@ -89,7 +89,7 @@ Public Class ucrFactor
         Dim i As Integer
         Dim checked As Boolean
         If grdFactorData.CurrentWorksheet.RowCount = 1 Then
-            checked = DirectCast(grdFactorData.CurrentWorksheet(0, 0), Boolean)
+            checked = DirectCast(grdFactorData.CurrentWorksheet(0, 2), Boolean)
             If checked Then
                 strTemp = Chr(34) & grdFactorData.CurrentWorksheet(0, 0) & Chr(34)
             End If
