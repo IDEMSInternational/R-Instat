@@ -195,6 +195,7 @@ Partial Class dlgYearRaincount
         Me.nudPlotCharacter.Name = "nudPlotCharacter"
         Me.nudPlotCharacter.Size = New System.Drawing.Size(52, 20)
         Me.nudPlotCharacter.TabIndex = 18
+        Me.nudPlotCharacter.Value = New Decimal(New Integer() {20, 0, 0, 0})
         '
         'nudLineWidth2
         '
@@ -202,6 +203,7 @@ Partial Class dlgYearRaincount
         Me.nudLineWidth2.Name = "nudLineWidth2"
         Me.nudLineWidth2.Size = New System.Drawing.Size(52, 20)
         Me.nudLineWidth2.TabIndex = 19
+        Me.nudLineWidth2.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
         'nudLineWidth1
         '
@@ -209,6 +211,7 @@ Partial Class dlgYearRaincount
         Me.nudLineWidth1.Name = "nudLineWidth1"
         Me.nudLineWidth1.Size = New System.Drawing.Size(52, 20)
         Me.nudLineWidth1.TabIndex = 20
+        Me.nudLineWidth1.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
         'nudLineType
         '
@@ -216,10 +219,13 @@ Partial Class dlgYearRaincount
         Me.nudLineType.Name = "nudLineType"
         Me.nudLineType.Size = New System.Drawing.Size(52, 20)
         Me.nudLineType.TabIndex = 21
+        Me.nudLineType.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
         'chkPlotWindow
         '
         Me.chkPlotWindow.AutoSize = True
+        Me.chkPlotWindow.Checked = True
+        Me.chkPlotWindow.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkPlotWindow.Location = New System.Drawing.Point(267, 90)
         Me.chkPlotWindow.Name = "chkPlotWindow"
         Me.chkPlotWindow.Size = New System.Drawing.Size(86, 17)
@@ -231,6 +237,8 @@ Partial Class dlgYearRaincount
         'chkRemoveNA
         '
         Me.chkRemoveNA.AutoSize = True
+        Me.chkRemoveNA.Checked = True
+        Me.chkRemoveNA.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkRemoveNA.Location = New System.Drawing.Point(267, 61)
         Me.chkRemoveNA.Name = "chkRemoveNA"
         Me.chkRemoveNA.Size = New System.Drawing.Size(84, 17)
@@ -242,6 +250,8 @@ Partial Class dlgYearRaincount
         'chkGrid
         '
         Me.chkGrid.AutoSize = True
+        Me.chkGrid.Checked = True
+        Me.chkGrid.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkGrid.Location = New System.Drawing.Point(267, 280)
         Me.chkGrid.Name = "chkGrid"
         Me.chkGrid.Size = New System.Drawing.Size(45, 17)
@@ -256,6 +266,7 @@ Partial Class dlgYearRaincount
         Me.txtXLabel.Name = "txtXLabel"
         Me.txtXLabel.Size = New System.Drawing.Size(100, 20)
         Me.txtXLabel.TabIndex = 26
+        Me.txtXLabel.Text = "Year"
         '
         'txtYLabel
         '
@@ -263,6 +274,7 @@ Partial Class dlgYearRaincount
         Me.txtYLabel.Name = "txtYLabel"
         Me.txtYLabel.Size = New System.Drawing.Size(100, 20)
         Me.txtYLabel.TabIndex = 27
+        Me.txtYLabel.Text = "Year"
         '
         'txtType
         '
@@ -270,6 +282,7 @@ Partial Class dlgYearRaincount
         Me.txtType.Name = "txtType"
         Me.txtType.Size = New System.Drawing.Size(100, 20)
         Me.txtType.TabIndex = 28
+        Me.txtType.Text = "b"
         '
         'txtVariableLabel
         '
@@ -277,6 +290,7 @@ Partial Class dlgYearRaincount
         Me.txtVariableLabel.Name = "txtVariableLabel"
         Me.txtVariableLabel.Size = New System.Drawing.Size(100, 20)
         Me.txtVariableLabel.TabIndex = 29
+        Me.txtVariableLabel.Text = "rain_label"
         '
         'txtVariable
         '
@@ -291,6 +305,7 @@ Partial Class dlgYearRaincount
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.Size = New System.Drawing.Size(122, 20)
         Me.txtTitle.TabIndex = 31
+        Me.txtTitle.Text = "Plot-Yearly Rain Count"
         '
         'nudYLimits
         '
@@ -312,6 +327,7 @@ Partial Class dlgYearRaincount
         Me.txtColour1.Name = "txtColour1"
         Me.txtColour1.Size = New System.Drawing.Size(100, 20)
         Me.txtColour1.TabIndex = 32
+        Me.txtColour1.Text = "blue"
         '
         'lblColour
         '
@@ -339,6 +355,7 @@ Partial Class dlgYearRaincount
         Me.txtColour2.Name = "txtColour2"
         Me.txtColour2.Size = New System.Drawing.Size(100, 20)
         Me.txtColour2.TabIndex = 35
+        Me.txtColour2.Text = "red"
         '
         'dlgYearRaincount
         '
