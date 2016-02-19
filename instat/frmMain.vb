@@ -691,4 +691,8 @@ Public Class frmMain
     Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariateCorrelation.Click
         dlgCorrelation.ShowDialog()
     End Sub
+
+    Private Sub mnuManageDataFrameDelete_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameDelete.Click
+        dlgDeleteColumn.ShowDialog()
+    End Sub
 End Class

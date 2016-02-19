@@ -276,6 +276,12 @@
     <Compile Include="dlgSummaryBarOrPieChart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgCorrPlot.Designer.vb">
+      <DependentUpon>sdgCorrPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCorrPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgOptions.Designer.vb">
       <DependentUpon>sdgOptions.vb</DependentUpon>
     </Compile>
@@ -1377,6 +1383,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCorrPlot.fr-FR.resx">
+      <DependentUpon>sdgCorrPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCorrPlot.resx">
+      <DependentUpon>sdgCorrPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCorrPlot.sw-KE.resx">
+      <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOptions.fr-FR.resx">
       <DependentUpon>sdgOptions.vb</DependentUpon>

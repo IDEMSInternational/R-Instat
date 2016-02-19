@@ -18,7 +18,6 @@ Public Class dlgSummaryBarOrPieChart
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_summarybar As New RFunction
     Private clsRgeom_Piechart As New RFunction
-    Private clsRgeom_Piechartcoord As New RFunction
     Private clsRaesFunction As New RFunction
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetOperation("+")
@@ -36,20 +35,35 @@ Public Class dlgSummaryBarOrPieChart
 
     Private Sub grpChartOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
         If rdoBarChart.Checked = True Then
+            lblFactor.Visible = True
+            ucrFactorReceiver.Visible = True
             clsRgeom_summarybar.SetRCommand("geom_bar")
             clsRgeom_summarybar.AddParameter("stat", Chr(34) & "identity" & Chr(34))
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_summarybar)
-        ElseIf rdoPieChart.Checked = True Then
+
+        Else 'rdoPieChart.Checked = True
+            Dim clsTempOp As New ROperator
+            Dim clsTempRFunc As New RFunction
+            clsTempOp.SetOperation("+")
+
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+            lblFactor.Visible = False
+            ucrFactorReceiver.Visible = False
+            ucrYReceiver.SetMeAsReceiver()
+
             clsRgeom_Piechart.SetRCommand("geom_bar")
-            clsRgeom_summarybar.AddParameter("width", 1)
-            clsRgeom_summarybar.AddParameter("stat", Chr(34) & "identity" & Chr(34))
+            clsRgeom_Piechart.AddParameter("width", 1)
+            clsRgeom_Piechart.AddParameter("stat", Chr(34) & "identity" & Chr(34))
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_Piechart)
-            ucrBase.clsRsyntax.SetOperation("+")
-            clsRgeom_Piechartcoord.SetRCommand("coord_polar")
-            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_Piechartcoord)
-            clsRgeom_Piechartcoord.AddParameter("theta", Chr(34) & "Y" & Chr(34))
-        Else
-            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=Nothing)
+
+            clsTempOp.SetParameter(True, clsRFunc:=clsRggplotFunction)
+            clsTempOp.SetParameter(False, clsRFunc:=clsRgeom_Piechart)
+            clsTempRFunc.SetRCommand("coord_polar")
+            clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
+            ucrBase.clsRsyntax.SetOperatorParameter(True, clsOp:=clsTempOp)
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsTempRFunc)
+            'Else
+            '    ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=Nothing)
         End If
     End Sub
 
@@ -63,5 +77,13 @@ Public Class dlgSummaryBarOrPieChart
 
     Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
         clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+    End Sub
+
+    Private Sub ucrSummarybarSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrSummarybarSelector.DataFrameChanged
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSummarybarSelector.ucrAvailableDataFrames.clsCurrDataFrame)
+    End Sub
+
+    Private Sub ucrSummarybarSelector_Load(sender As Object, e As EventArgs)
+
     End Sub
 End Class
