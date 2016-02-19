@@ -21,8 +21,9 @@ Public Class ucrButtons
         End If
         frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComments)
 
-        'What are the implications of this?
-        clsRsyntax = New RSyntax
+        'This clears the script after it has been run, but leave the function and parameters in the base function
+        'so that it can be run exactly the same when reopened.
+        clsRsyntax.strScript = ""
 
         RaiseEvent ClickOk(sender, e)
 
