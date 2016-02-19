@@ -24,7 +24,6 @@ Public Class dlgRenameSheet
 
     Private Sub txtNewName_Leave(sender As Object, e As EventArgs) Handles txtNewName.Leave
         If txtNewName.Text <> "" Then
-            frmEditor.grdData.CurrentWorksheet.Name = txtNewName.Text
             ucrBase.clsRsyntax.AddParameter("new_value", Chr(34) & txtNewName.Text & Chr(34))
         End If
     End Sub
