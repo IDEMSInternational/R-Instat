@@ -1,7 +1,7 @@
-climate$methods(boxplot_method = function(data_list= list(), fill_col="blue",interest_var,factor=month_label,
-                                   whisker_col="red", convert=TRUE,data_period_label=daily_label,
-                                   title="Rain Amount boxplot",whisklty=1,xlab="Months",
-                                   ylab=interest_var,horizontal=FALSE){
+climate$methods(boxplot_method = function(data_list= list(), fill_col="blue",interest_var = rain_label, factor=month_label,
+                                   whisker_col="red", convert = TRUE,data_period_label = daily_label,
+                                   title, whisklty = 1,xlab,
+                                   ylab ,horizontal=FALSE){
   #--------------------------------------------------------------------------------------------#
   # This function plots the boxplot for the variable of interest i.e interest_var
   # To Do: how to handle threshold    
@@ -10,7 +10,7 @@ climate$methods(boxplot_method = function(data_list= list(), fill_col="blue",int
   # Specifying the needed variable
   data_list = add_to_data_info_required_variable_list( data_list, list(interest_var))
   #Using convert_data
-  data_list=c(data_list,convert_data=convert)
+  data_list=c(data_list,convert_data = convert)
   # Specifying the data_time_period
   data_list=add_to_data_info_time_period( data_list, data_period_label)
   # use data_list to get the required data objects
@@ -28,6 +28,16 @@ climate$methods(boxplot_method = function(data_list= list(), fill_col="blue",int
     interest_col=data_obj$getvname(interest_var)
     
     # Get the title of the column of factors
+    if(missing(xlab)){
+      xlab = factor
+    }
+    
+    if(missing(ylab)){
+      ylab = interest_var
+    }
+    if(missing(title)){
+      title = paste(interest_var, " amount boxplot")
+    }
     
     factor_col = data_obj$getvname(factor)
     # Access data in methods
