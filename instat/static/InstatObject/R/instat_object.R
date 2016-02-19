@@ -292,11 +292,11 @@ instat_obj$methods(remove_columns_in_data_from_start_position = function(data_na
 } 
 )
 
-instat_obj$methods(remove_column_in_data = function(data_name, cols) {
+instat_obj$methods(remove_columns_in_data = function(data_name, cols) {
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[data_name]]$remove_column_in_data(cols = cols)
+  data_objects[[data_name]]$remove_columns_in_data(cols = cols)
 } 
 )
 
