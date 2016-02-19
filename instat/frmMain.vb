@@ -690,6 +690,9 @@ Public Class frmMain
 
     Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariateCorrelation.Click
         dlgCorrelation.ShowDialog()
+<<<<<<< HEAD
+    End Sub
+=======
     End Sub
 
     Private Sub mnuManageDataFileDeleteSheets_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileDeleteSheets.Click
