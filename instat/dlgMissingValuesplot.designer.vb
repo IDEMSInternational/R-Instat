@@ -27,7 +27,7 @@ Partial Class dlgMissingValuesplot
         Me.chkHorizontal = New System.Windows.Forms.CheckBox()
         Me.txtlog = New System.Windows.Forms.TextBox()
         Me.txtASP = New System.Windows.Forms.TextBox()
-        Me.txtFillColour = New System.Windows.Forms.TextBox()
+        Me.txtRainFillColour = New System.Windows.Forms.TextBox()
         Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.txtXLabel = New System.Windows.Forms.TextBox()
         Me.txtYLabel = New System.Windows.Forms.TextBox()
@@ -41,12 +41,16 @@ Partial Class dlgMissingValuesplot
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.lblLog = New System.Windows.Forms.Label()
         Me.lblASP = New System.Windows.Forms.Label()
-        Me.lblFillColour = New System.Windows.Forms.Label()
+        Me.lblRainFillColour = New System.Windows.Forms.Label()
         Me.lblLegendPosition = New System.Windows.Forms.Label()
         Me.lblLegend = New System.Windows.Forms.Label()
         Me.lblYLabel = New System.Windows.Forms.Label()
         Me.lblXLabel = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.txtMissingFillColor = New System.Windows.Forms.TextBox()
+        Me.lblMissingFillColor = New System.Windows.Forms.Label()
+        Me.txtDryFillColor = New System.Windows.Forms.TextBox()
+        Me.lblDryFillColor = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudYlim, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,7 +90,7 @@ Partial Class dlgMissingValuesplot
         '
         'txtlog
         '
-        Me.txtlog.Location = New System.Drawing.Point(147, 206)
+        Me.txtlog.Location = New System.Drawing.Point(147, 256)
         Me.txtlog.Name = "txtlog"
         Me.txtlog.Size = New System.Drawing.Size(100, 20)
         Me.txtlog.TabIndex = 5
@@ -94,17 +98,17 @@ Partial Class dlgMissingValuesplot
         '
         'txtASP
         '
-        Me.txtASP.Location = New System.Drawing.Point(147, 180)
+        Me.txtASP.Location = New System.Drawing.Point(147, 230)
         Me.txtASP.Name = "txtASP"
         Me.txtASP.Size = New System.Drawing.Size(100, 20)
         Me.txtASP.TabIndex = 6
         '
-        'txtFillColour
+        'txtRainFillColour
         '
-        Me.txtFillColour.Location = New System.Drawing.Point(147, 154)
-        Me.txtFillColour.Name = "txtFillColour"
-        Me.txtFillColour.Size = New System.Drawing.Size(100, 20)
-        Me.txtFillColour.TabIndex = 7
+        Me.txtRainFillColour.Location = New System.Drawing.Point(147, 154)
+        Me.txtRainFillColour.Name = "txtRainFillColour"
+        Me.txtRainFillColour.Size = New System.Drawing.Size(100, 20)
+        Me.txtRainFillColour.TabIndex = 7
         '
         'txtTitle
         '
@@ -196,7 +200,7 @@ Partial Class dlgMissingValuesplot
         'lblLog
         '
         Me.lblLog.AutoSize = True
-        Me.lblLog.Location = New System.Drawing.Point(28, 206)
+        Me.lblLog.Location = New System.Drawing.Point(28, 256)
         Me.lblLog.Name = "lblLog"
         Me.lblLog.Size = New System.Drawing.Size(25, 13)
         Me.lblLog.TabIndex = 22
@@ -206,22 +210,22 @@ Partial Class dlgMissingValuesplot
         'lblASP
         '
         Me.lblASP.AutoSize = True
-        Me.lblASP.Location = New System.Drawing.Point(28, 180)
+        Me.lblASP.Location = New System.Drawing.Point(28, 230)
         Me.lblASP.Name = "lblASP"
         Me.lblASP.Size = New System.Drawing.Size(28, 13)
         Me.lblASP.TabIndex = 23
         Me.lblASP.Tag = "asp"
         Me.lblASP.Text = "ASP"
         '
-        'lblFillColour
+        'lblRainFillColour
         '
-        Me.lblFillColour.AutoSize = True
-        Me.lblFillColour.Location = New System.Drawing.Point(28, 154)
-        Me.lblFillColour.Name = "lblFillColour"
-        Me.lblFillColour.Size = New System.Drawing.Size(46, 13)
-        Me.lblFillColour.TabIndex = 24
-        Me.lblFillColour.Tag = "Fill_Colour"
-        Me.lblFillColour.Text = "Fill Color"
+        Me.lblRainFillColour.AutoSize = True
+        Me.lblRainFillColour.Location = New System.Drawing.Point(28, 154)
+        Me.lblRainFillColour.Name = "lblRainFillColour"
+        Me.lblRainFillColour.Size = New System.Drawing.Size(71, 13)
+        Me.lblRainFillColour.TabIndex = 24
+        Me.lblRainFillColour.Tag = "Fill_Colour"
+        Me.lblRainFillColour.Text = "Rain Fill Color"
         '
         'lblLegendPosition
         '
@@ -273,6 +277,40 @@ Partial Class dlgMissingValuesplot
         Me.lblTitle.Tag = "Title"
         Me.lblTitle.Text = "Title"
         '
+        'txtMissingFillColor
+        '
+        Me.txtMissingFillColor.Location = New System.Drawing.Point(147, 180)
+        Me.txtMissingFillColor.Name = "txtMissingFillColor"
+        Me.txtMissingFillColor.Size = New System.Drawing.Size(100, 20)
+        Me.txtMissingFillColor.TabIndex = 7
+        '
+        'lblMissingFillColor
+        '
+        Me.lblMissingFillColor.AutoSize = True
+        Me.lblMissingFillColor.Location = New System.Drawing.Point(28, 180)
+        Me.lblMissingFillColor.Name = "lblMissingFillColor"
+        Me.lblMissingFillColor.Size = New System.Drawing.Size(84, 13)
+        Me.lblMissingFillColor.TabIndex = 24
+        Me.lblMissingFillColor.Tag = "Fill_Colour"
+        Me.lblMissingFillColor.Text = "Missing Fill Color"
+        '
+        'txtDryFillColor
+        '
+        Me.txtDryFillColor.Location = New System.Drawing.Point(147, 205)
+        Me.txtDryFillColor.Name = "txtDryFillColor"
+        Me.txtDryFillColor.Size = New System.Drawing.Size(100, 20)
+        Me.txtDryFillColor.TabIndex = 7
+        '
+        'lblDryFillColor
+        '
+        Me.lblDryFillColor.AutoSize = True
+        Me.lblDryFillColor.Location = New System.Drawing.Point(28, 205)
+        Me.lblDryFillColor.Name = "lblDryFillColor"
+        Me.lblDryFillColor.Size = New System.Drawing.Size(65, 13)
+        Me.lblDryFillColor.TabIndex = 24
+        Me.lblDryFillColor.Tag = "Fill_Colour"
+        Me.lblDryFillColor.Text = "Dry Fill Color"
+        '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(21, 333)
@@ -290,7 +328,9 @@ Partial Class dlgMissingValuesplot
         Me.Controls.Add(Me.lblYLabel)
         Me.Controls.Add(Me.lblLegend)
         Me.Controls.Add(Me.lblLegendPosition)
-        Me.Controls.Add(Me.lblFillColour)
+        Me.Controls.Add(Me.lblDryFillColor)
+        Me.Controls.Add(Me.lblMissingFillColor)
+        Me.Controls.Add(Me.lblRainFillColour)
         Me.Controls.Add(Me.lblASP)
         Me.Controls.Add(Me.lblLog)
         Me.Controls.Add(Me.lblThreshold)
@@ -304,7 +344,9 @@ Partial Class dlgMissingValuesplot
         Me.Controls.Add(Me.txtYLabel)
         Me.Controls.Add(Me.txtXLabel)
         Me.Controls.Add(Me.txtTitle)
-        Me.Controls.Add(Me.txtFillColour)
+        Me.Controls.Add(Me.txtDryFillColor)
+        Me.Controls.Add(Me.txtMissingFillColor)
+        Me.Controls.Add(Me.txtRainFillColour)
         Me.Controls.Add(Me.txtASP)
         Me.Controls.Add(Me.txtlog)
         Me.Controls.Add(Me.chkHorizontal)
@@ -327,7 +369,7 @@ Partial Class dlgMissingValuesplot
     Friend WithEvents chkHorizontal As CheckBox
     Friend WithEvents txtlog As TextBox
     Friend WithEvents txtASP As TextBox
-    Friend WithEvents txtFillColour As TextBox
+    Friend WithEvents txtRainFillColour As TextBox
     Friend WithEvents txtTitle As TextBox
     Friend WithEvents txtXLabel As TextBox
     Friend WithEvents txtYLabel As TextBox
@@ -341,10 +383,14 @@ Partial Class dlgMissingValuesplot
     Friend WithEvents lblThreshold As Label
     Friend WithEvents lblLog As Label
     Friend WithEvents lblASP As Label
-    Friend WithEvents lblFillColour As Label
+    Friend WithEvents lblRainFillColour As Label
     Friend WithEvents lblLegendPosition As Label
     Friend WithEvents lblLegend As Label
     Friend WithEvents lblYLabel As Label
     Friend WithEvents lblXLabel As Label
     Friend WithEvents lblTitle As Label
+    Friend WithEvents txtMissingFillColor As TextBox
+    Friend WithEvents lblMissingFillColor As Label
+    Friend WithEvents txtDryFillColor As TextBox
+    Friend WithEvents lblDryFillColor As Label
 End Class
