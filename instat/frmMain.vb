@@ -692,7 +692,4 @@ Public Class frmMain
         dlgCorrelation.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFileDeleteSheets_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileDeleteSheets.Click
-        dlgDeleteSheet.ShowDialog()
-    End Sub
 End Class
