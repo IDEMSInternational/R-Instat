@@ -50,16 +50,6 @@ Public Class dlgPermuteRows
         End If
     End Sub
 
-    Private Sub txtNumberOfPerColumns_Leave(sender As Object, e As EventArgs) Handles txtNumberOfPerColumns.Leave
-        If IsNumeric(txtNumberOfPerColumns.Text) = True Then
-
-            ucrBase.clsRsyntax.AddParameter("n", txtNumberOfPerColumns.Text)
-
-
-
-        End If
-
-    End Sub
 
     Private Sub txtSetSeed_Leave(sender As Object, e As EventArgs) Handles txtSetSeed.Leave
         If Not IsNumeric(txtSetSeed.Text) = False Then
@@ -70,4 +60,10 @@ Public Class dlgPermuteRows
         End If
 
     End Sub
+
+    Private Sub nudNumberOfPerColumns_Leave(sender As Object, e As EventArgs) Handles nudNumberOfPerColumns.Leave
+        ucrBase.clsRsyntax.AddParameter("n", nudNumberOfPerColumns.Text)
+    End Sub
+
+
 End Class
