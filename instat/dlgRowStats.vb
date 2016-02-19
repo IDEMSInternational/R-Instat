@@ -19,14 +19,13 @@ Public Class dlgRowStats
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction("apply")
-        ucrBase.clsRsyntax.iCallType = 1
+        ucrBase.clsRsyntax.iCallType = 0
         ucrReceiverRowStatistics.Selector = ucrSelectorByDataFrameAddRemove
         ucrReceiverRowStatistics.SetMeAsReceiver()
         ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
         ucrNewColumnNameSelector.SetDataFrameSelector(ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames)
         ucrNewColumnNameSelector.SetPrefix("Row_Summary")
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
-
     End Sub
 
     Private Sub ucrReceiverRowStatistics_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRowStatistics.Leave
@@ -40,7 +39,7 @@ Public Class dlgRowStats
         If rdoMean.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("FUN", "mean")
         ElseIf rdoCount.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("FUN", "count")
+            ucrBase.clsRsyntax.AddParameter("FUN", "function(z) sum(!is.na(z))")
         ElseIf rdoMaximum.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("FUN", "max")
         ElseIf rdoMinimum.Checked = True Then
@@ -49,7 +48,13 @@ Public Class dlgRowStats
             ucrBase.clsRsyntax.AddParameter("FUN", "sum")
         ElseIf rdoStandardDeviation.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("FUN", "sd")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("FUN")
         End If
 
+    End Sub
+
+    Private Sub ucrNewColumnNameSelector_Leave(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelector.Leave
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
     End Sub
 End Class
