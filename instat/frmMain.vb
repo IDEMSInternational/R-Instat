@@ -692,4 +692,4 @@ Public Class frmMain
         dlgCorrelation.ShowDialog()
     End Sub
 
-End Class
+    end class
