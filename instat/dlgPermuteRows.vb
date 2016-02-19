@@ -16,16 +16,30 @@
 
 Imports instat.Translations
 Public Class dlgPermuteRows
+    Public clsSetSampleFunc As New RFunction
+    Public clsSetSeedFunc As New RFunction
     Private Sub dlgPermuteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrReceiverPermuteRows.Selector = ucrSelectorDataFrameAddRemove
         ucrReceiverPermuteRows.SetMeAsReceiver()
         ucrSelectorNewColumnName.SetDataFrameSelector(ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames)
         ucrSelectorNewColumnName.SetPrefix("Perm")
+        clsSetSeedFunc.SetRCommand("set.seed")
+
+        ucrBase.clsRsyntax.SetFunction("replicate")
+        ucrBase.clsRsyntax.AddParameter("expr", clsRFunctionParameter:=clsSetSampleFunc)
+        clsSetSampleFunc.SetRCommand("sample")
+
+        clsSetSampleFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPermuteRows.GetVariables())
+        clsSetSampleFunc.AddParameter("replace", "FALSE")
+        clsSetSampleFunc.AddParameter("size", ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.iDataFrameLength)
         txtSetSeed.Visible = False
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSelectorNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSelectorNewColumnName.cboColumnName.Text)
     End Sub
+    Private Sub ucrReceiverPermuteRows_Leave(sender As Object, e As EventArgs) Handles ucrReceiverPermuteRows.Leave
+        clsSetSampleFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPermuteRows.GetVariables())
 
+    End Sub
     Private Sub chkSetSeed_CheckedChanged(sender As Object, e As EventArgs) Handles chkSetSeed.CheckedChanged
         If chkSetSeed.Checked = True Then
             txtSetSeed.Visible = True
@@ -34,5 +48,26 @@ Public Class dlgPermuteRows
 
 
         End If
+    End Sub
+
+    Private Sub txtNumberOfPerColumns_Leave(sender As Object, e As EventArgs) Handles txtNumberOfPerColumns.Leave
+        If IsNumeric(txtNumberOfPerColumns.Text) = True Then
+
+            ucrBase.clsRsyntax.AddParameter("n", txtNumberOfPerColumns.Text)
+
+
+
+        End If
+
+    End Sub
+
+    Private Sub txtSetSeed_Leave(sender As Object, e As EventArgs) Handles txtSetSeed.Leave
+        If Not IsNumeric(txtSetSeed.Text) = False Then
+
+            clsSetSeedFunc.AddParameter("seed", txtSetSeed.Text)
+
+
+        End If
+
     End Sub
 End Class
