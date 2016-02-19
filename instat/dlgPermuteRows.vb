@@ -33,7 +33,7 @@ Public Class dlgPermuteRows
         clsSetSampleFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPermuteRows.GetVariables())
         clsSetSampleFunc.AddParameter("replace", "FALSE")
         clsSetSampleFunc.AddParameter("size", ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.iDataFrameLength)
-        txtSetSeed.Visible = False
+        nudSetSeed.Visible = False
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSelectorNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSelectorNewColumnName.cboColumnName.Text)
     End Sub
     Private Sub ucrReceiverPermuteRows_Leave(sender As Object, e As EventArgs) Handles ucrReceiverPermuteRows.Leave
@@ -42,28 +42,18 @@ Public Class dlgPermuteRows
     End Sub
     Private Sub chkSetSeed_CheckedChanged(sender As Object, e As EventArgs) Handles chkSetSeed.CheckedChanged
         If chkSetSeed.Checked = True Then
-            txtSetSeed.Visible = True
+            nudSetSeed.Visible = True
         Else
-            txtSetSeed.Visible = False
-
-
+            nudSetSeed.Visible = False
         End If
     End Sub
 
 
-    Private Sub txtSetSeed_Leave(sender As Object, e As EventArgs) Handles txtSetSeed.Leave
-        If Not IsNumeric(txtSetSeed.Text) = False Then
-
-            clsSetSeedFunc.AddParameter("seed", txtSetSeed.Text)
-
-
-        End If
-
+    Private Sub nudSetSeed_Leave(sender As Object, e As EventArgs) Handles nudSetSeed.Leave
+        clsSetSeedFunc.AddParameter("seed", nudSetSeed.Text)
     End Sub
 
     Private Sub nudNumberOfPerColumns_Leave(sender As Object, e As EventArgs) Handles nudNumberOfPerColumns.Leave
         ucrBase.clsRsyntax.AddParameter("n", nudNumberOfPerColumns.Text)
     End Sub
-
-
 End Class
