@@ -22,8 +22,7 @@ Partial Class dlgBoxplotMethod
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblDataList = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.txtInterestedVariable = New System.Windows.Forms.TextBox()
         Me.txtFactor = New System.Windows.Forms.TextBox()
@@ -42,34 +41,28 @@ Partial Class dlgBoxplotMethod
         Me.lblWhisklty = New System.Windows.Forms.Label()
         Me.lblDataPeriodLabel = New System.Windows.Forms.Label()
         Me.txtDataPeriodLabel = New System.Windows.Forms.TextBox()
+        Me.ucrBase = New instat.ucrButtons()
         CType(Me.nudWhisklty, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'lblDataList
         '
-        Me.ucrBase.Location = New System.Drawing.Point(35, 282)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(146, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(125, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Data list not implemented"
+        Me.lblDataList.AutoSize = True
+        Me.lblDataList.Location = New System.Drawing.Point(146, 9)
+        Me.lblDataList.Name = "lblDataList"
+        Me.lblDataList.Size = New System.Drawing.Size(125, 13)
+        Me.lblDataList.TabIndex = 1
+        Me.lblDataList.Text = "Data list not implemented"
         '
         'lblTitle
         '
         Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(12, 48)
+        Me.lblTitle.Location = New System.Drawing.Point(12, 49)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(39, 13)
+        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
         Me.lblTitle.TabIndex = 2
         Me.lblTitle.Tag = "Title"
-        Me.lblTitle.Text = "Label2"
+        Me.lblTitle.Text = "Title"
         '
         'txtInterestedVariable
         '
@@ -119,10 +112,10 @@ Partial Class dlgBoxplotMethod
         Me.chkConvert.AutoSize = True
         Me.chkConvert.Location = New System.Drawing.Point(364, 187)
         Me.chkConvert.Name = "chkConvert"
-        Me.chkConvert.Size = New System.Drawing.Size(81, 17)
+        Me.chkConvert.Size = New System.Drawing.Size(63, 17)
         Me.chkConvert.TabIndex = 9
         Me.chkConvert.Tag = "Convert"
-        Me.chkConvert.Text = "CheckBox1"
+        Me.chkConvert.Text = "Convert"
         Me.chkConvert.UseVisualStyleBackColor = True
         '
         'chkHorizontal
@@ -130,10 +123,10 @@ Partial Class dlgBoxplotMethod
         Me.chkHorizontal.AutoSize = True
         Me.chkHorizontal.Location = New System.Drawing.Point(364, 221)
         Me.chkHorizontal.Name = "chkHorizontal"
-        Me.chkHorizontal.Size = New System.Drawing.Size(81, 17)
+        Me.chkHorizontal.Size = New System.Drawing.Size(73, 17)
         Me.chkHorizontal.TabIndex = 10
         Me.chkHorizontal.Tag = "Horizontal"
-        Me.chkHorizontal.Text = "CheckBox2"
+        Me.chkHorizontal.Text = "Horizontal"
         Me.chkHorizontal.UseVisualStyleBackColor = True
         '
         'nudWhisklty
@@ -146,71 +139,72 @@ Partial Class dlgBoxplotMethod
         'lblFillColour
         '
         Me.lblFillColour.AutoSize = True
-        Me.lblFillColour.Location = New System.Drawing.Point(12, 71)
+        Me.lblFillColour.Location = New System.Drawing.Point(12, 70)
         Me.lblFillColour.Name = "lblFillColour"
-        Me.lblFillColour.Size = New System.Drawing.Size(39, 13)
+        Me.lblFillColour.Size = New System.Drawing.Size(46, 13)
         Me.lblFillColour.TabIndex = 12
         Me.lblFillColour.Tag = "Fill_Colour"
-        Me.lblFillColour.Text = "Label3"
+        Me.lblFillColour.Text = "Fill Color"
         '
         'lblYLabel
         '
         Me.lblYLabel.AutoSize = True
         Me.lblYLabel.Location = New System.Drawing.Point(12, 93)
         Me.lblYLabel.Name = "lblYLabel"
-        Me.lblYLabel.Size = New System.Drawing.Size(39, 13)
+        Me.lblYLabel.Size = New System.Drawing.Size(43, 13)
         Me.lblYLabel.TabIndex = 14
         Me.lblYLabel.Tag = "Y_Label"
-        Me.lblYLabel.Text = "Label5"
+        Me.lblYLabel.Text = "Y Label"
         '
         'lblXLabel
         '
         Me.lblXLabel.AutoSize = True
         Me.lblXLabel.Location = New System.Drawing.Point(12, 123)
         Me.lblXLabel.Name = "lblXLabel"
-        Me.lblXLabel.Size = New System.Drawing.Size(39, 13)
+        Me.lblXLabel.Size = New System.Drawing.Size(43, 13)
         Me.lblXLabel.TabIndex = 15
         Me.lblXLabel.Tag = "X_Label"
-        Me.lblXLabel.Text = "Label6"
+        Me.lblXLabel.Text = "X Label"
         '
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
         Me.lblFactor.Location = New System.Drawing.Point(12, 149)
         Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(39, 13)
+        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
         Me.lblFactor.TabIndex = 16
         Me.lblFactor.Tag = "Factor"
-        Me.lblFactor.Text = "Label7"
+        Me.lblFactor.Text = "Factor"
         '
         'lblInterestedVariable
         '
         Me.lblInterestedVariable.AutoSize = True
         Me.lblInterestedVariable.Location = New System.Drawing.Point(12, 175)
         Me.lblInterestedVariable.Name = "lblInterestedVariable"
-        Me.lblInterestedVariable.Size = New System.Drawing.Size(39, 13)
+        Me.lblInterestedVariable.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.lblInterestedVariable.Size = New System.Drawing.Size(95, 13)
         Me.lblInterestedVariable.TabIndex = 17
         Me.lblInterestedVariable.Tag = "Interested_Variable"
-        Me.lblInterestedVariable.Text = "Label8"
+        Me.lblInterestedVariable.Text = "Interested Variable"
         '
         'lblWhisklty
         '
         Me.lblWhisklty.AutoSize = True
         Me.lblWhisklty.Location = New System.Drawing.Point(12, 220)
         Me.lblWhisklty.Name = "lblWhisklty"
-        Me.lblWhisklty.Size = New System.Drawing.Size(39, 13)
+        Me.lblWhisklty.Size = New System.Drawing.Size(47, 13)
         Me.lblWhisklty.TabIndex = 18
-        Me.lblWhisklty.Text = "Label4"
+        Me.lblWhisklty.Text = "Whisklty"
         '
         'lblDataPeriodLabel
         '
         Me.lblDataPeriodLabel.AutoSize = True
         Me.lblDataPeriodLabel.Location = New System.Drawing.Point(12, 194)
         Me.lblDataPeriodLabel.Name = "lblDataPeriodLabel"
-        Me.lblDataPeriodLabel.Size = New System.Drawing.Size(39, 13)
+        Me.lblDataPeriodLabel.Size = New System.Drawing.Size(63, 13)
         Me.lblDataPeriodLabel.TabIndex = 19
         Me.lblDataPeriodLabel.Tag = "Period_Label"
-        Me.lblDataPeriodLabel.Text = "Label2"
+        Me.lblDataPeriodLabel.Text = "Data Period"
         '
         'txtDataPeriodLabel
         '
@@ -218,6 +212,13 @@ Partial Class dlgBoxplotMethod
         Me.txtDataPeriodLabel.Name = "txtDataPeriodLabel"
         Me.txtDataPeriodLabel.Size = New System.Drawing.Size(100, 20)
         Me.txtDataPeriodLabel.TabIndex = 20
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(35, 282)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgBoxplotMethod
         '
@@ -242,7 +243,7 @@ Partial Class dlgBoxplotMethod
         Me.Controls.Add(Me.txtFactor)
         Me.Controls.Add(Me.txtInterestedVariable)
         Me.Controls.Add(Me.lblTitle)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblDataList)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -257,7 +258,7 @@ Partial Class dlgBoxplotMethod
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblDataList As Label
     Friend WithEvents lblTitle As Label
     Friend WithEvents txtInterestedVariable As TextBox
     Friend WithEvents txtFactor As TextBox

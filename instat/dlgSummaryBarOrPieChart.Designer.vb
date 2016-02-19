@@ -43,7 +43,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrBase.Location = New System.Drawing.Point(12, 260)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 10
         '
         'rdoBarChart
         '
@@ -51,7 +51,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoBarChart.Location = New System.Drawing.Point(5, 9)
         Me.rdoBarChart.Name = "rdoBarChart"
         Me.rdoBarChart.Size = New System.Drawing.Size(69, 17)
-        Me.rdoBarChart.TabIndex = 1
+        Me.rdoBarChart.TabIndex = 0
         Me.rdoBarChart.TabStop = True
         Me.rdoBarChart.Tag = "Bar_Chart"
         Me.rdoBarChart.Text = "Bar Chart"
@@ -70,10 +70,10 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'ucrSummarybarSelector
         '
-        Me.ucrSummarybarSelector.Location = New System.Drawing.Point(12, 38)
+        Me.ucrSummarybarSelector.Location = New System.Drawing.Point(13, 33)
         Me.ucrSummarybarSelector.Name = "ucrSummarybarSelector"
         Me.ucrSummarybarSelector.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSummarybarSelector.TabIndex = 2
+        Me.ucrSummarybarSelector.TabIndex = 1
         '
         'ucrYReceiver
         '
@@ -87,7 +87,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrFactorReceiver.Location = New System.Drawing.Point(287, 123)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrFactorReceiver.TabIndex = 4
+        Me.ucrFactorReceiver.TabIndex = 5
         '
         'lblYvariable
         '
@@ -95,7 +95,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.lblYvariable.Location = New System.Drawing.Point(284, 47)
         Me.lblYvariable.Name = "lblYvariable"
         Me.lblYvariable.Size = New System.Drawing.Size(54, 13)
-        Me.lblYvariable.TabIndex = 5
+        Me.lblYvariable.TabIndex = 2
         Me.lblYvariable.Tag = "Yvariable"
         Me.lblYvariable.Text = "Y variable"
         '
@@ -105,7 +105,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.lblFactor.Location = New System.Drawing.Point(293, 104)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(37, 13)
-        Me.lblFactor.TabIndex = 5
+        Me.lblFactor.TabIndex = 4
         Me.lblFactor.Tag = "Factor"
         Me.lblFactor.Text = "Factor"
         '
@@ -114,7 +114,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.cmdPieChartOptions.Location = New System.Drawing.Point(12, 222)
         Me.cmdPieChartOptions.Name = "cmdPieChartOptions"
         Me.cmdPieChartOptions.Size = New System.Drawing.Size(128, 23)
-        Me.cmdPieChartOptions.TabIndex = 6
+        Me.cmdPieChartOptions.TabIndex = 8
         Me.cmdPieChartOptions.Tag = "Pie_Chart_Options"
         Me.cmdPieChartOptions.Text = "Pie Chart Options"
         Me.cmdPieChartOptions.UseVisualStyleBackColor = True
@@ -124,7 +124,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.cmdOptions.Location = New System.Drawing.Point(287, 222)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOptions.TabIndex = 7
+        Me.cmdOptions.TabIndex = 9
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -134,7 +134,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(287, 180)
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrSecondFactorReceiver.TabIndex = 4
+        Me.ucrSecondFactorReceiver.TabIndex = 7
         '
         'lblSecondFactor
         '
@@ -142,7 +142,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.lblSecondFactor.Location = New System.Drawing.Point(293, 161)
         Me.lblSecondFactor.Name = "lblSecondFactor"
         Me.lblSecondFactor.Size = New System.Drawing.Size(77, 13)
-        Me.lblSecondFactor.TabIndex = 5
+        Me.lblSecondFactor.TabIndex = 6
         Me.lblSecondFactor.Tag = "Second+Factor"
         Me.lblSecondFactor.Text = "Second Factor"
         '
@@ -153,7 +153,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.grpChartOptions.Location = New System.Drawing.Point(7, 1)
         Me.grpChartOptions.Name = "grpChartOptions"
         Me.grpChartOptions.Size = New System.Drawing.Size(170, 34)
-        Me.grpChartOptions.TabIndex = 8
+        Me.grpChartOptions.TabIndex = 0
         Me.grpChartOptions.TabStop = False
         '
         'dlgSummaryBarOrPieChart
