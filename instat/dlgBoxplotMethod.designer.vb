@@ -22,7 +22,7 @@ Partial Class dlgBoxplotMethod
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblDataList = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.txtInterestedVariable = New System.Windows.Forms.TextBox()
         Me.txtFactor = New System.Windows.Forms.TextBox()
@@ -45,14 +45,14 @@ Partial Class dlgBoxplotMethod
         CType(Me.nudWhisklty, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblDataList
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(146, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(125, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Data list not implemented"
+        Me.lblDataList.AutoSize = True
+        Me.lblDataList.Location = New System.Drawing.Point(146, 9)
+        Me.lblDataList.Name = "lblDataList"
+        Me.lblDataList.Size = New System.Drawing.Size(125, 13)
+        Me.lblDataList.TabIndex = 1
+        Me.lblDataList.Text = "Data list not implemented"
         '
         'lblTitle
         '
@@ -243,7 +243,7 @@ Partial Class dlgBoxplotMethod
         Me.Controls.Add(Me.txtFactor)
         Me.Controls.Add(Me.txtInterestedVariable)
         Me.Controls.Add(Me.lblTitle)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblDataList)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -258,7 +258,7 @@ Partial Class dlgBoxplotMethod
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblDataList As Label
     Friend WithEvents lblTitle As Label
     Friend WithEvents txtInterestedVariable As TextBox
     Friend WithEvents txtFactor As TextBox
