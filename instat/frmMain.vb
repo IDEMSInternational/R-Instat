@@ -692,7 +692,9 @@ Public Class frmMain
         dlgCorrelation.ShowDialog()
     End Sub
 
+<<<<<<< HEAD
     Private Sub mnuManageDataFileRenameSheet_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileRenameSheet.Click
         dlgRenameSheet.ShowDialog()
-    End Sub
+ end sub
+ 
 End Class
