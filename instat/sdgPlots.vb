@@ -133,7 +133,7 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Public Sub AddRSyntax(clsRSyntaxIn As RSyntax)
+    Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
 
         clsRsyntax = clsRSyntaxIn
 

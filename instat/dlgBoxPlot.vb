@@ -51,6 +51,7 @@ Public Class dlgBoxplot
         End If
     End Sub
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         sdgPlots.ShowDialog()
     End Sub
 
