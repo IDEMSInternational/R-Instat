@@ -204,6 +204,15 @@ Public Class RLink
 
     End Function
 
+    Public Function GetDefaultDataFrameName(strPrefix As String) As String
+        Dim strTemp As String
+        If Not bInstatObjectExists Then
+            CreateNewInstatObject()
+        End If
+        strTemp = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_dataframe_name(prefix = " & Chr(34) & strPrefix & Chr(34) & ")").AsCharacter()(0)
+        Return strTemp
+    End Function
+
     Public Function GetVar(strLabel As String) As CharacterVector
 
         Try
