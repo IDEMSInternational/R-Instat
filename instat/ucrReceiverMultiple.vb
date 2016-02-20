@@ -58,7 +58,6 @@ Public Class ucrReceiverMultiple
     Public Overrides Sub RemoveSelected()
         Dim objItem As ListViewItem
         Dim tempObjects(lstSelectedVariables.SelectedItems.Count - 1) As Object
-        Dim i As Integer
 
         If lstSelectedVariables.SelectedItems.Count > 0 Then
             lstSelectedVariables.SelectedItems.CopyTo(tempObjects, 0)

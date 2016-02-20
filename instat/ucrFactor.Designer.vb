@@ -43,7 +43,6 @@ Partial Class ucrFactor
         Me.grdFactorData.LeadHeaderContextMenuStrip = Nothing
         Me.grdFactorData.Location = New System.Drawing.Point(4, 4)
         Me.grdFactorData.Name = "grdFactorData"
-        Me.grdFactorData.Readonly = True
         Me.grdFactorData.RowHeaderContextMenuStrip = Nothing
         Me.grdFactorData.Script = Nothing
         Me.grdFactorData.SheetTabContextMenuStrip = Nothing
