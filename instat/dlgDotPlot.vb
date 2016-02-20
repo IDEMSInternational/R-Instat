@@ -17,6 +17,10 @@
 Imports instat.Translations
 Public Class dlgDotPlot
     Private Sub dlgDotPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrYVariableReceiver.Selector = ucrDotPlotSelector
+        ucrFactorReceiver.Selector = ucrDotPlotSelector
+        ucrSecondfactorReceiver.Selector = ucrDotPlotSelector
+        ucrYVariableReceiver.SetMeAsReceiver()
         ucrBase.clsRsyntax.iCallType = 0
         autoTranslate(Me)
     End Sub
