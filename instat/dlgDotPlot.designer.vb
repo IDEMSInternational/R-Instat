@@ -25,7 +25,7 @@ Partial Class dlgDotPlot
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrYVariableReceiver = New instat.ucrReceiverSingle()
         Me.lblYVariable = New System.Windows.Forms.Label()
-        Me.UcrSelectorByDataFrameAddRemove1 = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrDotPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdDotPlotOptions = New System.Windows.Forms.Button()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
@@ -58,12 +58,12 @@ Partial Class dlgDotPlot
         Me.lblYVariable.Tag = "Y_Variable"
         Me.lblYVariable.Text = "Y Variable"
         '
-        'UcrSelectorByDataFrameAddRemove1
+        'ucrDotPlotSelector
         '
-        Me.UcrSelectorByDataFrameAddRemove1.Location = New System.Drawing.Point(6, 5)
-        Me.UcrSelectorByDataFrameAddRemove1.Name = "UcrSelectorByDataFrameAddRemove1"
-        Me.UcrSelectorByDataFrameAddRemove1.Size = New System.Drawing.Size(242, 179)
-        Me.UcrSelectorByDataFrameAddRemove1.TabIndex = 6
+        Me.ucrDotPlotSelector.Location = New System.Drawing.Point(6, 5)
+        Me.ucrDotPlotSelector.Name = "ucrDotPlotSelector"
+        Me.ucrDotPlotSelector.Size = New System.Drawing.Size(242, 179)
+        Me.ucrDotPlotSelector.TabIndex = 6
         '
         'cmdDotPlotOptions
         '
@@ -126,7 +126,7 @@ Partial Class dlgDotPlot
         Me.ClientSize = New System.Drawing.Size(423, 285)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdDotPlotOptions)
-        Me.Controls.Add(Me.UcrSelectorByDataFrameAddRemove1)
+        Me.Controls.Add(Me.ucrDotPlotSelector)
         Me.Controls.Add(Me.lblSecondFactor)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblYVariable)
@@ -149,7 +149,7 @@ Partial Class dlgDotPlot
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrYVariableReceiver As ucrReceiverSingle
     Friend WithEvents lblYVariable As Label
-    Friend WithEvents UcrSelectorByDataFrameAddRemove1 As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrDotPlotSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdDotPlotOptions As Button
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
