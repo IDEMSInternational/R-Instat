@@ -15,23 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-
 Public Class dlgDotPlot
     Private Sub dlgDotPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("dotchart")
         ucrBase.clsRsyntax.iCallType = 0
         autoTranslate(Me)
-        ucrReceiverSingle.Selector = ucrAddRemove
-        ucrReceiverSingle.SetMeAsReceiver()
     End Sub
-
-    Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
-        ucrBase.clsRsyntax.AddParameter("main", Chr(34) & txtTitle.Text & Chr(34))
-    End Sub
-
-    Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingle.Leave
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverSingle.GetVariables())
-    End Sub
-
-
 End Class
