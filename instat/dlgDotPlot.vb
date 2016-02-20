@@ -20,4 +20,16 @@ Public Class dlgDotPlot
         ucrBase.clsRsyntax.iCallType = 0
         autoTranslate(Me)
     End Sub
+
+    Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
+        ucrBase.clsRsyntax.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+    End Sub
+
+    Private Sub ucrSecondfactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrSecondfactorReceiver.Leave
+        ucrBase.clsRsyntax.AddParameter("fill", ucrSecondfactorReceiver.GetVariableNames(False))
+    End Sub
+
+    Private Sub ucrYVariableReceiver_Leave(sender As Object, e As EventArgs) Handles ucrYVariableReceiver.Leave
+        ucrBase.clsRsyntax.AddParameter("y", ucrYVariableReceiver.GetVariableNames(False))
+    End Sub
 End Class
