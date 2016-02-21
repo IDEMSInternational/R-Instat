@@ -15,23 +15,42 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-
 Public Class dlgDotPlot
+    Private clsRggplotFunction As New RFunction
+    Private clsRgeom_dotplot As New RFunction
+    Private clsRaesFunction As New RFunction
     Private Sub dlgDotPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("dotchart")
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRaesFunction.SetRCommand("aes")
+        clsRgeom_dotplot.SetRCommand("geom_dotplot")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+        ucrYVariableReceiver.Selector = ucrDotPlotSelector
+        ucrFactorReceiver.Selector = ucrDotPlotSelector
+        ucrSecondfactorReceiver.Selector = ucrDotPlotSelector
+        ucrYVariableReceiver.SetMeAsReceiver()
         ucrBase.clsRsyntax.iCallType = 0
         autoTranslate(Me)
-        ucrReceiverSingle.Selector = ucrAddRemove
-        ucrReceiverSingle.SetMeAsReceiver()
+
     End Sub
 
-    Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
-        ucrBase.clsRsyntax.AddParameter("main", Chr(34) & txtTitle.Text & Chr(34))
+    Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
+        clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
     End Sub
 
-    Private Sub ucrReceiverSingle_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingle.Leave
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverSingle.GetVariables())
+    Private Sub ucrSecondfactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrSecondfactorReceiver.Leave
+        clsRaesFunction.AddParameter("fill", ucrSecondfactorReceiver.GetVariableNames(False))
     End Sub
 
+    Private Sub ucrYVariableReceiver_Leave(sender As Object, e As EventArgs) Handles ucrYVariableReceiver.Leave
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_dotplot)
 
+        If ucrFactorReceiver.txtReceiverSingle.Text = "" And ucrSecondfactorReceiver.txtReceiverSingle.Text = "" Then
+            clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
+        Else
+            clsRaesFunction.AddParameter("y", ucrYVariableReceiver.GetVariableNames(False))
+        End If
+
+    End Sub
 End Class
