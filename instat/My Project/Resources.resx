@@ -1354,4 +1354,28 @@
   <data name="Plot_Options" xml:space="preserve">
     <value>Plot Options</value>
   </data>
+  <data name="Bar_And_Pie_Chart" xml:space="preserve">
+    <value>Bar And Pie Chart</value>
+  </data>
+  <data name="Bar_Chart" xml:space="preserve">
+    <value>Bar Chart</value>
+  </data>
+  <data name="Bar_Chart_Options" xml:space="preserve">
+    <value>Bar Chart Options</value>
+  </data>
+  <data name="Pie_Chart" xml:space="preserve">
+    <value>Pie Chart</value>
+  </data>
+  <data name="Pie_Chart_Options" xml:space="preserve">
+    <value>Pie Chart Options</value>
+  </data>
+  <data name="Second_Factor" xml:space="preserve">
+    <value>Second Factor</value>
+  </data>
+  <data name="Summary_Bar_Pie_Chart" xml:space="preserve">
+    <value>Summary Bar Or PieChart</value>
+  </data>
+  <data name="Yvariable" xml:space="preserve">
+    <value>Y variable</value>
+  </data>
 </root>

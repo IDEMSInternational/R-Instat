@@ -408,6 +408,7 @@ Partial Class sdgPlots
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Plot_Options"
         Me.Text = "Plot Options"
+        Me.TopMost = True
         Me.tabctrlBoxSubdialog.ResumeLayout(False)
         Me.tabAxes.ResumeLayout(False)
         Me.tabAxes.PerformLayout()

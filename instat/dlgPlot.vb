@@ -26,15 +26,24 @@ Public Class dlgPlot
         ucrBase.clsRsyntax.iCallType = 0
         autoTranslate(Me)
         ucrReceiverY.Selector = ucrPlotSelector
-        ucrReceiverY.SetMeAsReceiver()
         ucrReceiverX.Selector = ucrPlotSelector
+        ucrFactorOptionalReceiver.Selector = ucrPlotSelector
+        ucrReceiverY.SetMeAsReceiver()
+
     End Sub
 
     Private Sub ucrReceiverY_Leave(sender As Object, e As EventArgs) Handles ucrReceiverY.Leave
-        ucrBase.clsRsyntax.AddParameter("y", clsRFunctionParameter:=ucrReceiverY.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("y", ucrReceiverY.GetVariableNames(False))
     End Sub
 
     Private Sub ucrReceiverX_Leave(sender As Object, e As EventArgs) Handles ucrReceiverX.Leave
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverX.GetVariables())
+        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverX.GetVariableNames(False))
+    End Sub
+
+    Private Sub ucrPlotSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrPlotSelector.DataFrameChanged
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrPlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
+    End Sub
+    Private Sub ucrFactorOptionalReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.Leave
+        ucrBase.clsRsyntax.AddParameter("fill", ucrFactorOptionalReceiver.GetVariableNames(False))
     End Sub
 End Class

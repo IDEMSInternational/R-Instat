@@ -19,7 +19,7 @@ Public Class dlgYearRaincount
     Private Sub dlgYearRaincount_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$plot_yearly_rain_count")
-        ucrBase.clsRsyntax.iCallType = 0
+
     End Sub
 
     Private Sub chkGrid_CheckedChanged(sender As Object, e As EventArgs) Handles chkGrid.CheckedChanged
