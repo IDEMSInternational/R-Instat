@@ -70,7 +70,7 @@ Public Class dlgStack
         ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.txtValidation.Text, strTempDataframe:=ucrNewDataFrameName.txtValidation.Text)
     End Sub
 
-    Private Sub ucrDataFrameAddRemove_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrDataFrameAddRemove.DataFrameChanged
+    Private Sub ucrDataFrameAddRemove_DataFrameChanged() Handles ucrDataFrameAddRemove.DataFrameChanged
         If Not ucrNewDataFrameName.bUserTyped Then
             ucrNewDataFrameName.txtValidation.Text = ucrDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked"
         End If
