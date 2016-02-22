@@ -143,8 +143,20 @@ Public Class ucrReceiverMultiple
     End Sub
 
     Private Sub lstSelectedVariables_KeyDown(sender As Object, e As KeyEventArgs) Handles lstSelectedVariables.KeyDown
-        If e.KeyCode = Keys.Delete Then
+        If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
             RemoveSelected()
         End If
+    End Sub
+
+    Private Sub lstSelectedVariables_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lstSelectedVariables.MouseDoubleClick
+        RemoveSelected()
+    End Sub
+
+    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
+        RemoveSelected()
+    End Sub
+
+    Private Sub ClearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem.Click
+        Clear()
     End Sub
 End Class
