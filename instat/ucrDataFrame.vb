@@ -31,6 +31,12 @@ Public Class ucrDataFrame
         SetDataFrameProperties()
     End Sub
 
+    Public Sub SetToGivenDataFrame(strDataFrame As String)
+        If cboAvailableDataFrames.Items.Contains(strDataFrame) Then
+            cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(strDataFrame)
+        End If
+    End Sub
+
     Public Event DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String)
 
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged

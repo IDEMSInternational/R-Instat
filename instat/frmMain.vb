@@ -27,6 +27,7 @@ Public Class frmMain
     Public strStaticPath As String
     Public strHelpFilePath As String
     Public clsInstatOptions As InstatOptions
+    Public strCurrentDataFrame As String
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
