@@ -48,15 +48,12 @@ Public Class dlgPlot
         clsRaesFunction.AddParameter("fill", ucrFactorOptionalReceiver.GetVariableNames(False))
     End Sub
 
-    Private Sub chkPoints_CheckedChanged(sender As Object, e As EventArgs) Handles chkPoints.CheckedChanged
-        If chkPoints.Checked = True Then
+    Private Sub grpPointsAndLines_CheckedChanged(sender As Object, e As EventArgs) Handles chkLines.CheckedChanged, chkPoints.CheckedChanged
+        If chkPoints.Checked = True And chkLines.Checked = False Then
             clsRgeom_plotFunction.SetRCommand("geom_point")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_plotFunction)
-        End If
-    End Sub
 
-    Private Sub chkLines_CheckedChanged(sender As Object, e As EventArgs) Handles chkLines.CheckedChanged
-        If chkLines.Checked = True Then
+        ElseIf chkLines.Checked = True And chkPoints.Checked = False Then
             clsRgeom_plotFunction.SetRCommand("geom_line")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_plotFunction)
         End If
