@@ -51,6 +51,7 @@ Public Class dlgBoxplot
         End If
     End Sub
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         sdgPlots.ShowDialog()
     End Sub
 
@@ -58,7 +59,7 @@ Public Class dlgBoxplot
         ucrByFactorsReceiver.SetMeAsReceiver()
     End Sub
 
-    Private Sub ucrSelectorBoxPlot_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrSelectorBoxPlot.DataFrameChanged
+    Private Sub ucrSelectorBoxPlot_DataFrameChanged() Handles ucrSelectorBoxPlot.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorBoxPlot.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
