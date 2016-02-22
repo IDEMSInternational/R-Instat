@@ -25,17 +25,17 @@ Partial Class dlgPlot
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblYVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
-        Me.ucrReceiverY = New instat.ucrReceiverSingle()
-        Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdPointOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
-        Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.chkPoints = New System.Windows.Forms.CheckBox()
         Me.chkLines = New System.Windows.Forms.CheckBox()
         Me.cmdLineOptions = New System.Windows.Forms.Button()
+        Me.ucrPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverY = New instat.ucrReceiverSingle()
+        Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
+        Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -66,34 +66,6 @@ Partial Class dlgPlot
         Me.lblAvailable.Size = New System.Drawing.Size(0, 13)
         Me.lblAvailable.TabIndex = 16
         '
-        'ucrReceiverY
-        '
-        Me.ucrReceiverY.Location = New System.Drawing.Point(270, 31)
-        Me.ucrReceiverY.Name = "ucrReceiverY"
-        Me.ucrReceiverY.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverY.TabIndex = 26
-        '
-        'ucrReceiverX
-        '
-        Me.ucrReceiverX.Location = New System.Drawing.Point(270, 76)
-        Me.ucrReceiverX.Name = "ucrReceiverX"
-        Me.ucrReceiverX.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverX.TabIndex = 25
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(3, 252)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 27
-        '
-        'ucrPlotSelector
-        '
-        Me.ucrPlotSelector.Location = New System.Drawing.Point(3, 3)
-        Me.ucrPlotSelector.Name = "ucrPlotSelector"
-        Me.ucrPlotSelector.Size = New System.Drawing.Size(242, 179)
-        Me.ucrPlotSelector.TabIndex = 28
-        '
         'cmdOptions
         '
         Me.cmdOptions.Location = New System.Drawing.Point(288, 213)
@@ -123,13 +95,6 @@ Partial Class dlgPlot
         Me.lblFactorOptional.TabIndex = 18
         Me.lblFactorOptional.Tag = "Factor_Optional"
         Me.lblFactorOptional.Text = "Factor(Optional)"
-        '
-        'ucrFactorOptionalReceiver
-        '
-        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(270, 132)
-        Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
-        Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrFactorOptionalReceiver.TabIndex = 25
         '
         'chkPoints
         '
@@ -162,6 +127,44 @@ Partial Class dlgPlot
         Me.cmdLineOptions.Tag = "Line_Options"
         Me.cmdLineOptions.Text = "Line Options"
         Me.cmdLineOptions.UseVisualStyleBackColor = True
+        '
+        'ucrPlotSelector
+        '
+        Me.ucrPlotSelector.Location = New System.Drawing.Point(3, 3)
+        Me.ucrPlotSelector.Name = "ucrPlotSelector"
+        Me.ucrPlotSelector.Size = New System.Drawing.Size(242, 179)
+        Me.ucrPlotSelector.TabIndex = 28
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(3, 252)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 27
+        '
+        'ucrReceiverY
+        '
+        Me.ucrReceiverY.Location = New System.Drawing.Point(270, 31)
+        Me.ucrReceiverY.Name = "ucrReceiverY"
+        Me.ucrReceiverY.Selector = Nothing
+        Me.ucrReceiverY.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverY.TabIndex = 26
+        '
+        'ucrFactorOptionalReceiver
+        '
+        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(270, 132)
+        Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
+        Me.ucrFactorOptionalReceiver.Selector = Nothing
+        Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrFactorOptionalReceiver.TabIndex = 25
+        '
+        'ucrReceiverX
+        '
+        Me.ucrReceiverX.Location = New System.Drawing.Point(270, 76)
+        Me.ucrReceiverX.Name = "ucrReceiverX"
+        Me.ucrReceiverX.Selector = Nothing
+        Me.ucrReceiverX.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverX.TabIndex = 25
         '
         'dlgPlot
         '
