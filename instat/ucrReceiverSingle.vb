@@ -89,7 +89,7 @@ Public Class ucrReceiverSingle
     End Sub
 
     Private Sub txtReceiverSingle_KeyDown(sender As Object, e As KeyEventArgs) Handles txtReceiverSingle.KeyDown
-        If e.KeyCode = Keys.Delete Then
+        If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
             RemoveSelected()
         End If
     End Sub
