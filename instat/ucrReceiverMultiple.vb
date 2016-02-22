@@ -27,18 +27,17 @@ Public Class ucrReceiverMultiple
 
     Public Overrides Sub AddSelected()
         Dim objItem As ListViewItem
-        Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As Object
+        Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
         Dim grpTemp As ListViewGroup
 
         Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
         For Each objItem In tempObjects
-            If Not lstSelectedVariables.Items.Contains(objItem) Then
-                If Not GetCurrHeaders().Contains(objItem.Group.Header) Then
-                    grpTemp = New ListViewGroup(objItem.Group.Header, HorizontalAlignment.Left)
-                    grpTemp.Name = objItem.Group.Header
+            If Not GetCurrItemNames().Contains(objItem.Text) Then
+                If Not GetCurrGroupNames().Contains(objItem.Group.Name) Then
+                    grpTemp = New ListViewGroup(key:=objItem.Group.Name, headerText:=objItem.Group.Name)
                     lstSelectedVariables.Groups.Add(grpTemp)
                 Else
-                    grpTemp = lstSelectedVariables.Groups(objItem.Group.Header)
+                    grpTemp = lstSelectedVariables.Groups(objItem.Group.Name)
                 End If
                 lstSelectedVariables.Items.Add(objItem.Text).Group = grpTemp
             End If
@@ -47,13 +46,23 @@ Public Class ucrReceiverMultiple
 
     End Sub
 
-    Private Function GetCurrHeaders() As List(Of String)
+    Private Function GetCurrItemNames() As List(Of String)
+        Dim strItemNames As New List(Of String)
+        Dim currItem As ListViewItem
+
+        For Each currItem In lstSelectedVariables.Items
+            strItemNames.Add(currItem.Text)
+        Next
+        Return strItemNames
+    End Function
+
+    Private Function GetCurrGroupNames() As List(Of String)
         Dim strHeaders As New List(Of String)
         Dim grpTemp As ListViewGroup
 
         For Each grpTemp In lstSelectedVariables.Groups
-            If Not strHeaders.Contains(grpTemp.Header) Then
-                strHeaders.Add(grpTemp.Header)
+            If Not strHeaders.Contains(grpTemp.Name) Then
+                strHeaders.Add(grpTemp.Name)
             End If
         Next
         Return strHeaders

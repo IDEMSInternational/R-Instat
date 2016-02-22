@@ -18,17 +18,27 @@ Imports RDotNet
 Imports instat.Translations
 Public Class ucrSelector
     Public CurrentReceiver As New ucrReceiver
-    Public Event DataFrameChanged()
+    Public Event ResetAll()
+    Public Event ResetReceivers()
     Private Sub ucrdataselection_load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadList()
     End Sub
 
-    Protected Sub OnDataFrameChanged()
-        RaiseEvent DataFrameChanged()
+    Protected Sub OnResetAll()
+        RaiseEvent ResetAll()
+    End Sub
+
+    Protected Sub OnResetReceivers()
+        RaiseEvent ResetReceivers()
     End Sub
 
     Public Overridable Sub LoadList()
         frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType:=CurrentReceiver.strDataType)
+    End Sub
+
+    Public Overridable Sub Reset()
+        RaiseEvent ResetReceivers()
+        LoadList()
     End Sub
 
     Public Sub SetCurrentReceiver(conReceiver As ucrReceiver)
@@ -80,4 +90,7 @@ Public Class ucrSelector
         End If
     End Sub
 
+    Private Sub ucrSelector_ResetAll() Handles Me.ResetAll
+        Reset()
+    End Sub
 End Class
