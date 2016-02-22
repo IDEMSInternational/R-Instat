@@ -18,9 +18,13 @@ Imports RDotNet
 Imports instat.Translations
 Public Class ucrSelector
     Public CurrentReceiver As New ucrReceiver
-
+    Public Event DataFrameChanged()
     Private Sub ucrdataselection_load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadList()
+    End Sub
+
+    Protected Sub OnDataFrameChanged()
+        RaiseEvent DataFrameChanged()
     End Sub
 
     Public Overridable Sub LoadList()
