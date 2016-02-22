@@ -269,16 +269,20 @@ Public Class RLink
                 dfList = clsEngine.Evaluate("list(" & strDataFrameName & "=" & strInstatDataObject & "$get_variables_metadata(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", data_type = " & Chr(34) & strDataType & Chr(34) & "))").AsList
                 End If
 
-                For i = 0 To dfList.Count - 1
-                    grps = New ListViewGroup(dfList.Names(i), HorizontalAlignment.Left)
-                    If Not lstView.Groups.Contains(grps) Then
-                        lstView.Groups.Add(grps)
-                    End If
-                    dfTemp = dfList(i).AsDataFrame()
-                    For j = 0 To dfTemp.RowCount - 1
-                        lstView.Items.Add(dfTemp(j, 0)).Group = lstView.Groups(i)
-                    Next
+            For i = 0 To dfList.Count - 1
+                If dfList.Count = 1 Then
+                    grps = New ListViewGroup(key:=dfList.Names(i), headerText:="")
+                Else
+                    grps = New ListViewGroup(key:=dfList.Names(i), headerText:=dfList.Names(i))
+                End If
+                If Not lstView.Groups.Contains(grps) Then
+                    lstView.Groups.Add(grps)
+                End If
+                dfTemp = dfList(i).AsDataFrame()
+                For j = 0 To dfTemp.RowCount - 1
+                    lstView.Items.Add(dfTemp(j, 0)).Group = lstView.Groups(i)
                 Next
+            Next
             'TODO Find out how to get this to set automatically ( Width = -2 almost works)
             lstView.Columns(0).Width = 115
         End If
