@@ -37,6 +37,8 @@ Public Class dlgSort
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
 
         'Checks if Ok can be enabled.
@@ -53,6 +55,11 @@ Public Class dlgSort
         ucrReceiverSort.Clear()
         'Test ok enabled
         TestOKEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+        SetOrderValue()
+        SetMissingValue()
     End Sub
 
     'Sub that tests if the OK button can be enabled.
@@ -75,6 +82,10 @@ Public Class dlgSort
 
     'For grouped radio buttons put all CheckedChanged events into one sub and check which is checked.
     Private Sub grpOrder_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged, rdoDescending.CheckedChanged
+        SetOrderValue()
+    End Sub
+
+    Private Sub SetOrderValue()
         If rdoAscending.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 ucrBase.clsRsyntax.AddParameter("decreasing", "FALSE")
@@ -94,6 +105,10 @@ Public Class dlgSort
 
     'Same here for this group of buttona
     Private Sub grpMissingValues_ChekedChanged(sender As Object, e As EventArgs) Handles rdoFirst.CheckedChanged, rdoLast.CheckedChanged
+        SetMissingValue()
+    End Sub
+
+    Private Sub SetMissingValue()
         If rdoFirst.Checked Then
             ucrBase.clsRsyntax.AddParameter("na.last", "FALSE")
         ElseIf rdoLast.Checked Then
