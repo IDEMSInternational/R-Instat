@@ -26,6 +26,7 @@ Public Class frmMain
     Public clsGrids As New clsGridLink
     Public strStaticPath As String
     Public strHelpFilePath As String
+    Public clsInstatOptions As InstatOptions
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
@@ -36,8 +37,12 @@ Public Class frmMain
         frmMetaData.MdiParent = Me
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
+
+        LoadInstatOptions()
+
         frmCommand.Show()
         frmEditor.Show()
+
         Me.LayoutMdi(MdiLayout.TileVertical)
 
         'Setting the properties of R Interface
@@ -51,6 +56,11 @@ Public Class frmMain
         ' TODO tstatus shouldn't be set here in this way
         tstatus.Text = frmEditor.grdData.CurrentWorksheet.Name
 
+    End Sub
+
+    Private Sub LoadInstatOptions()
+        clsInstatOptions = New InstatOptions
+        clsInstatOptions.bIncludeRDefaultParameters = False
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSummaryDescribe.Click
