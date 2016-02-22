@@ -87,8 +87,6 @@ Public Class ucrButtons
             chkComment.Checked = False
         ElseIf e.KeyChar = vbCr And chkComment.Checked = False Then
             chkComment.Checked = True
-        Else
-            chkComment.Checked = True
         End If
     End Sub
 End Class
