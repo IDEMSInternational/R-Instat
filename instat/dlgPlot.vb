@@ -40,7 +40,7 @@ Public Class dlgPlot
         ucrBase.clsRsyntax.AddParameter("x", ucrReceiverX.GetVariableNames(False))
     End Sub
 
-    Private Sub ucrPlotSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrPlotSelector.DataFrameChanged
+    Private Sub ucrPlotSelector_DataFrameChanged() Handles ucrPlotSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrPlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
     Private Sub ucrFactorOptionalReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.Leave

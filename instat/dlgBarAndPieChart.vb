@@ -38,7 +38,7 @@ Public Class dlgBarAndPieChart
         sdgPlots.ShowDialog()
     End Sub
 
-    Private Sub ucrBarChartSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrBarChartSelector.DataFrameChanged
+    Private Sub ucrBarChartSelector_DataFrameChanged() Handles ucrBarChartSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrBarChartSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
     Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
