@@ -44,7 +44,7 @@ Partial Class dlgPlot
         Me.lblXVariable.Location = New System.Drawing.Point(267, 60)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(64, 13)
-        Me.lblXVariable.TabIndex = 18
+        Me.lblXVariable.TabIndex = 4
         Me.lblXVariable.Tag = "X_Variable"
         Me.lblXVariable.Text = "X  - Variable"
         '
@@ -54,7 +54,7 @@ Partial Class dlgPlot
         Me.lblYVariable.Location = New System.Drawing.Point(267, 15)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(72, 13)
-        Me.lblYVariable.TabIndex = 17
+        Me.lblYVariable.TabIndex = 2
         Me.lblYVariable.Tag = "Y_Variable"
         Me.lblYVariable.Text = "Y - Variable(s)"
         '
@@ -64,14 +64,14 @@ Partial Class dlgPlot
         Me.lblAvailable.Location = New System.Drawing.Point(27, 15)
         Me.lblAvailable.Name = "lblAvailable"
         Me.lblAvailable.Size = New System.Drawing.Size(0, 13)
-        Me.lblAvailable.TabIndex = 16
+        Me.lblAvailable.TabIndex = 1
         '
         'cmdOptions
         '
         Me.cmdOptions.Location = New System.Drawing.Point(288, 213)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOptions.TabIndex = 29
+        Me.cmdOptions.TabIndex = 12
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -81,7 +81,7 @@ Partial Class dlgPlot
         Me.cmdPointOptions.Location = New System.Drawing.Point(12, 213)
         Me.cmdPointOptions.Name = "cmdPointOptions"
         Me.cmdPointOptions.Size = New System.Drawing.Size(103, 23)
-        Me.cmdPointOptions.TabIndex = 30
+        Me.cmdPointOptions.TabIndex = 10
         Me.cmdPointOptions.Tag = "Point_Options"
         Me.cmdPointOptions.Text = "Point Options"
         Me.cmdPointOptions.UseVisualStyleBackColor = True
@@ -92,7 +92,7 @@ Partial Class dlgPlot
         Me.lblFactorOptional.Location = New System.Drawing.Point(267, 116)
         Me.lblFactorOptional.Name = "lblFactorOptional"
         Me.lblFactorOptional.Size = New System.Drawing.Size(82, 13)
-        Me.lblFactorOptional.TabIndex = 18
+        Me.lblFactorOptional.TabIndex = 6
         Me.lblFactorOptional.Tag = "Factor_Optional"
         Me.lblFactorOptional.Text = "Factor(Optional)"
         '
@@ -102,7 +102,7 @@ Partial Class dlgPlot
         Me.chkPoints.Location = New System.Drawing.Point(13, 189)
         Me.chkPoints.Name = "chkPoints"
         Me.chkPoints.Size = New System.Drawing.Size(55, 17)
-        Me.chkPoints.TabIndex = 31
+        Me.chkPoints.TabIndex = 8
         Me.chkPoints.Tag = "Points"
         Me.chkPoints.Text = "Points"
         Me.chkPoints.UseVisualStyleBackColor = True
@@ -113,7 +113,7 @@ Partial Class dlgPlot
         Me.chkLines.Location = New System.Drawing.Point(120, 190)
         Me.chkLines.Name = "chkLines"
         Me.chkLines.Size = New System.Drawing.Size(51, 17)
-        Me.chkLines.TabIndex = 31
+        Me.chkLines.TabIndex = 9
         Me.chkLines.Tag = "Lines"
         Me.chkLines.Text = "Lines"
         Me.chkLines.UseVisualStyleBackColor = True
@@ -123,7 +123,7 @@ Partial Class dlgPlot
         Me.cmdLineOptions.Location = New System.Drawing.Point(168, 212)
         Me.cmdLineOptions.Name = "cmdLineOptions"
         Me.cmdLineOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdLineOptions.TabIndex = 32
+        Me.cmdLineOptions.TabIndex = 11
         Me.cmdLineOptions.Tag = "Line_Options"
         Me.cmdLineOptions.Text = "Line Options"
         Me.cmdLineOptions.UseVisualStyleBackColor = True
@@ -133,14 +133,14 @@ Partial Class dlgPlot
         Me.ucrPlotSelector.Location = New System.Drawing.Point(3, 3)
         Me.ucrPlotSelector.Name = "ucrPlotSelector"
         Me.ucrPlotSelector.Size = New System.Drawing.Size(242, 179)
-        Me.ucrPlotSelector.TabIndex = 28
+        Me.ucrPlotSelector.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(3, 252)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 27
+        Me.ucrBase.TabIndex = 13
         '
         'ucrReceiverY
         '
@@ -148,7 +148,7 @@ Partial Class dlgPlot
         Me.ucrReceiverY.Name = "ucrReceiverY"
         Me.ucrReceiverY.Selector = Nothing
         Me.ucrReceiverY.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverY.TabIndex = 26
+        Me.ucrReceiverY.TabIndex = 3
         '
         'ucrFactorOptionalReceiver
         '
@@ -156,7 +156,7 @@ Partial Class dlgPlot
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
         Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrFactorOptionalReceiver.TabIndex = 25
+        Me.ucrFactorOptionalReceiver.TabIndex = 7
         '
         'ucrReceiverX
         '
@@ -164,7 +164,7 @@ Partial Class dlgPlot
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
         Me.ucrReceiverX.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverX.TabIndex = 25
+        Me.ucrReceiverX.TabIndex = 5
         '
         'dlgPlot
         '
