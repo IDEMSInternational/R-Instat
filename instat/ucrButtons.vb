@@ -1,13 +1,16 @@
 ﻿Imports instat.Translations
 Public Class ucrButtons
+
     Public clsRsyntax As New RSyntax
     Public iHelpTopicID As Integer = -1
+    Public bFirstLoad As Boolean = True
 
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.ParentForm.Hide()
     End Sub
 
     Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
+        SetDefaults()
         RaiseEvent ClickReset(sender, e)
     End Sub
 
@@ -37,6 +40,13 @@ Public Class ucrButtons
 
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         translateEach(Controls)
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub SetDefaults()
         chkComment.Checked = True
         'TODO these defaults should be moved to general options dialog
         '     default text should be translatable
@@ -45,7 +55,10 @@ Public Class ucrButtons
     End Sub
 
     Private Sub cmdPaste_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click
+        frmScript.txtScript.Text = frmScript.txtScript.Text & vbCrLf & "# " & txtComment.Text
         frmScript.txtScript.Text = frmScript.txtScript.Text & vbCrLf & clsRsyntax.GetScript()
+        frmScript.Visible = True
+        frmScript.BringToFront()
     End Sub
 
     Private Sub chkComment_CheckedChanged(sender As Object, e As EventArgs) Handles chkComment.CheckedChanged
