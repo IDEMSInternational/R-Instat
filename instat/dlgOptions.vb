@@ -163,4 +163,8 @@ Public Class dlgOptions
         cmdApply.Enabled = True
         cmdOk.Enabled = True
     End Sub
+
+    Private Sub chkIncludeDefaultParams_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeDefaultParams.CheckedChanged
+        frmMain.clsInstatOptions.bIncludeRDefaultParameters = chkIncludeDefaultParams.Checked
+    End Sub
 End Class
