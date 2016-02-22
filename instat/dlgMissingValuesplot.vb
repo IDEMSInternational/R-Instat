@@ -13,14 +13,25 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
-Public Class dlgMissingValuesplot
 
+Public Class dlgMissingValuesplot
     Private Sub dlgMissingValuesplot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrBase.clsRsyntax.iCallType = 0
+        txtTitle.Text = "Rain Present"
+        txtXLabel.Text = "Year"
+        txtYLabel.Text = "Day of Year"
+        txtLegendPosition.Text = "topright"
+        txtRainFillColour.Text = "blue"
+        txtMissingFillColor.Text = "red"
+        txtDryFillColor.Text = "yellow"
+        chkStationName.Checked = True
+        chkHorizontal.Checked = True
+        nudThreshold.Value = "0.85"
+        txtASP.Text = "NA"
+        txtlog.Text = ""
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$plot_missing_values_rain")
-        ucrBase.clsRsyntax.iCallType = 0
     End Sub
 
     Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
@@ -37,15 +48,18 @@ Public Class dlgMissingValuesplot
     End Sub
 
     Private Sub txtLegend_Leave(sender As Object, e As EventArgs) Handles txtLegend.Leave
-        ucrBase.clsRsyntax.AddParameter("legend", Chr(34) & txtLegend.Text.ToString() & Chr(34)) ' legend is a vector"c(len1,len2,len3)"
+        'legend is a vector"c(len1,len2,len3)"
+        ucrBase.clsRsyntax.AddParameter("legend", "c(" & Chr(34) & "Rain" & Chr(34) & "," & Chr(34) & "Dry" & Chr(34) & "," & Chr(34) & "NA" & Chr(34) & ")")
     End Sub
 
     Private Sub txtLegendPosition_Leave(sender As Object, e As EventArgs) Handles txtLegendPosition.Leave
         ucrBase.clsRsyntax.AddParameter("legend_position", Chr(34) & txtLegendPosition.Text.ToString() & Chr(34))
+
     End Sub
 
-    Private Sub txtFillColour_Leave(sender As Object, e As EventArgs) Handles txtFillColour.Leave
-        ucrBase.clsRsyntax.AddParameter("fill_col", Chr(34) & txtTitle.Text.ToString() & Chr(34)) ' fill colour is a 3-tuple "c(col1,col2,col3)"
+    Private Sub txtFillColour_Leave(sender As Object, e As EventArgs) Handles txtRainFillColour.Leave, txtDryFillColor.Leave, txtMissingFillColor.Leave
+        ucrBase.clsRsyntax.AddParameter("fill_col", "c(" & Chr(34) & txtDryFillColor.Text.ToString() & Chr(34) & "," & Chr(34) & txtMissingFillColor.Text.ToString() & Chr(34) & "," & Chr(34) & txtRainFillColour.Text.ToString() & Chr(34) & ")") ' fill colour is a 3-tuple "c(col1,col2,col3)"
+
     End Sub
 
     Private Sub txtASP_Leave(sender As Object, e As EventArgs) Handles txtASP.Leave
@@ -54,22 +68,6 @@ Public Class dlgMissingValuesplot
 
     Private Sub txtlog_Leave(sender As Object, e As EventArgs) Handles txtlog.Leave
         ucrBase.clsRsyntax.AddParameter("log", Chr(34) & txtlog.Text.ToString() & Chr(34))
-    End Sub
-
-    Private Sub chkHorizontal_Leave(sender As Object, e As EventArgs) Handles chkHorizontal.Leave
-
-        If chkHorizontal.Checked Then
-            ucrBase.clsRsyntax.AddParameter("horiz", Chr(34) & chkHorizontal.Text.ToString().ToUpper & Chr(34))
-
-        End If
-    End Sub
-
-    Private Sub chkStationName_Leave(sender As Object, e As EventArgs) Handles chkStationName.Leave
-        If chkStationName.Checked Then
-            ucrBase.clsRsyntax.AddParameter("station_name", Chr(34) & chkStationName.Text.ToString().ToUpper & Chr(34))
-
-        End If
-
     End Sub
 
     Private Sub nudYlim_Leave(sender As Object, e As EventArgs) Handles nudYlim.Leave
@@ -87,8 +85,17 @@ Public Class dlgMissingValuesplot
 
     Private Sub chkHorizontal_CheckedChanged(sender As Object, e As EventArgs) Handles chkHorizontal.CheckedChanged
         If chkHorizontal.Checked Then
-            ucrBase.clsRsyntax.AddParameter("horiz", Chr(34) & chkHorizontal.Text.ToString().ToUpper & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("horiz", "TRUE")
+        Else
+            ucrBase.clsRsyntax.AddParameter("horiz", "FALSE")
         End If
 
+    End Sub
+    Private Sub chkStationName_CheckedChanged(sender As Object, e As EventArgs) Handles chkStationName.CheckedChanged
+        If chkStationName.Checked Then
+            ucrBase.clsRsyntax.AddParameter("station_name", "TRUE")
+        Else
+            ucrBase.clsRsyntax.AddParameter("station_name", "FALSE")
+        End If
     End Sub
 End Class

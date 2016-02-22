@@ -68,7 +68,7 @@ Public Class RLink
         bLog = True
     End Sub
 
-    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox)
+    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True)
         Dim lstAvailableDataFrames As GenericVector
         Dim i As Integer
 
@@ -79,7 +79,9 @@ Public Class RLink
                 cboDataFrames.Items.Add(lstAvailableDataFrames.AsCharacter(i))
             Next
         End If
-        cboDataFrames.Text = frmEditor.grdData.CurrentWorksheet.Name
+        If bSetDefault Then
+            cboDataFrames.Text = frmEditor.grdData.CurrentWorksheet.Name
+        End If
     End Sub
 
     Public Sub FillColumnNames(strDataFrame As String, Optional ByRef cboColumns As ComboBox = Nothing, Optional ByRef lstColumns As ListView = Nothing)
@@ -149,12 +151,16 @@ Public Class RLink
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
             Else
-                strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
-                If strSplitScript <> "" Then
-                    clsEngine.Evaluate(strSplitScript)
+                If strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) = -1 Then
+                    strCapturedScript = "capture.output(" & strScript & ")"
+                Else
+                    strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
+                    If strSplitScript <> "" Then
+                        clsEngine.Evaluate(strSplitScript)
+                    End If
+                    strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
+                    strCapturedScript = "capture.output(" & strSplitScript & ")"
                 End If
-                strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
-                strCapturedScript = "capture.output(" & strSplitScript & ")"
                 temp = clsEngine.Evaluate(strCapturedScript)
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
@@ -200,6 +206,15 @@ Public Class RLink
 
     End Function
 
+    Public Function GetDefaultDataFrameName(strPrefix As String) As String
+        Dim strTemp As String
+        If Not bInstatObjectExists Then
+            CreateNewInstatObject()
+        End If
+        strTemp = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_dataframe_name(prefix = " & Chr(34) & strPrefix & Chr(34) & ")").AsCharacter()(0)
+        Return strTemp
+    End Function
+
     Public Function GetVar(strLabel As String) As CharacterVector
 
         Try
@@ -240,24 +255,32 @@ Public Class RLink
         Dim grps As New ListViewGroup
         If bInstatObjectExists Then
             lstView.Clear()
-            lstView.Columns.Add("Available Data")
+            lstView.Groups.Clear()
+            If strDataType = "factor" Then
+                lstView.Columns.Add("Available Factors")
+            ElseIf strDataType = "numeric" Then
+                lstView.Columns.Add("Available Numerics")
+            ElseIf strDataType = "all" Then
+                lstView.Columns.Add("Available Variables")
+            End If
             If strDataFrameName = "" Then
                 dfList = clsEngine.Evaluate(strInstatDataObject & "$get_variables_metadata(data_type = " & Chr(34) & strDataType & Chr(34) & ")").AsList
             Else
                 dfList = clsEngine.Evaluate("list(" & strDataFrameName & "=" & strInstatDataObject & "$get_variables_metadata(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", data_type = " & Chr(34) & strDataType & Chr(34) & "))").AsList
-            End If
-
-            For i = 0 To dfList.Count - 1
-                grps = New ListViewGroup(dfList.Names(i), HorizontalAlignment.Left)
-                If Not lstView.Groups.Contains(grps) Then
-                    lstView.Groups.Add(grps)
                 End If
-                dfTemp = dfList(i).AsDataFrame()
-                For j = 0 To dfTemp.RowCount - 1
-                    lstView.Items.Add(dfTemp(j, 0)).Group = lstView.Groups(i)
+
+                For i = 0 To dfList.Count - 1
+                    grps = New ListViewGroup(dfList.Names(i), HorizontalAlignment.Left)
+                    If Not lstView.Groups.Contains(grps) Then
+                        lstView.Groups.Add(grps)
+                    End If
+                    dfTemp = dfList(i).AsDataFrame()
+                    For j = 0 To dfTemp.RowCount - 1
+                        lstView.Items.Add(dfTemp(j, 0)).Group = lstView.Groups(i)
+                    Next
                 Next
-            Next
-            lstView.Columns(0).Width = -2
+            'TODO Find out how to get this to set automatically ( Width = -2 almost works)
+            lstView.Columns(0).Width = 115
         End If
     End Sub
 
