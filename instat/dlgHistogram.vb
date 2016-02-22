@@ -16,6 +16,8 @@
 
 Imports instat.Translations
 Public Class dlgHistogram
+    Public bFirstLoad As Boolean = True
+
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_histogramFunction As New RFunction
     Private clsRgeom_densityFunction As New RFunction
@@ -23,6 +25,12 @@ Public Class dlgHistogram
     Private clsRaesFunction As New RFunction
 
     Private Sub dlgHistogram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            'setdefaults
+            bFirstLoad = False
+        Else
+            'todo what happens when it reopens
+        End If
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRaesFunction.SetRCommand("aes")
@@ -32,7 +40,7 @@ Public Class dlgHistogram
         ucrXReceiver.Selector = ucrHistogramSelector
         ucrFactorReceiver.Selector = ucrHistogramSelector
         ucrXReceiver.SetMeAsReceiver()
-        ucrBase.OKEnabled(False)
+        TestOkEnabled()
         autoTranslate(Me)
     End Sub
 
@@ -41,14 +49,7 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub ucrXReceiver_Leave(sender As Object, e As EventArgs) Handles ucrXReceiver.Leave
-
-        If Not (ucrXReceiver.txtReceiverSingle.Text = "") Then
-            clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
-            ucrBase.OKEnabled(True)
-        Else
-
-            ucrBase.OKEnabled(False)
-        End If
+        clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -80,6 +81,24 @@ Public Class dlgHistogram
         End If
     End Sub
 
+    Private Sub TestOkEnabled()
+        'tests when ok can be enabled
+        If ucrFactorReceiver.GetVariableNames() <> "" And ucrXReceiver.GetVariableNames() <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+
+    End Sub
+
+    Private Sub SetDefaults()
+        'seting Defaults for the dialog
+        ucrXReceiver.Clear()
+        ucrFactorReceiver.Clear()
+        ucrXReceiver.SetMeAsReceiver()
+        TestOkEnabled()
+    End Sub
+
     Private Sub rdoHistogram_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoHistogram.KeyPress
         If e.KeyChar = vbCr Then
             rdoHistogram.Checked = True
@@ -96,5 +115,9 @@ Public Class dlgHistogram
         If e.KeyChar = vbCr Then
             rdoFreequencyPolygon.Checked = True
         End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class
