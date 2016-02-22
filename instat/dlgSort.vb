@@ -52,8 +52,7 @@ Public Class dlgSort
     Private Sub SetDefaults()
         rdoLast.Checked = True
         rdoAscending.Checked = True
-        ucrSelectForSort.ucrAvailableDataFrames.SetToGivenDataFrame(frmMain.strCurrentDataFrame)
-        ucrReceiverSort.Clear()
+        ucrSelectForSort.Reset()
     End Sub
 
     Private Sub ReopenDialog()
