@@ -66,7 +66,7 @@ Public Class ucrNewColumnName
         End If
     End Sub
 
-    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrDataFrameSelector.DataFrameChanged
+    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPreviousDataFrame As String) Handles ucrDataFrameSelector.DataFrameChanged
         frmMain.clsRLink.FillColumnNames(ucrDataFrameSelector.cboAvailableDataFrames.Text, cboColumns:=cboColumnName)
         SetDefaultName()
     End Sub
