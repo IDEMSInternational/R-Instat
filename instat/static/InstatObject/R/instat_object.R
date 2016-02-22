@@ -373,8 +373,6 @@ instat_obj$methods(delete_dataframe = function(data_name) {
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
   data_objects[[data_name]]<<-NULL
-  .self$get_metadata_changed(TRUE)
-  .self$get_data_changed(TRUE)
 } 
 )
 
