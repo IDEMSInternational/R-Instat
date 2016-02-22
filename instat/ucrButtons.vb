@@ -82,4 +82,13 @@ Public Class ucrButtons
         'Help.ShowHelp(Me, strHelpFilePath, HelpNavigator.TopicId, mHelpConstants.HELP_Maths.ToString)
     End Sub
 
+    Private Sub chkComment_KeyPress(sender As Object, e As KeyPressEventArgs) Handles chkComment.KeyPress
+        If e.KeyChar = vbCr And chkComment.Checked = True Then
+            chkComment.Checked = False
+        ElseIf e.KeyChar = vbCr And chkComment.Checked = False Then
+            chkComment.Checked = True
+        Else
+            chkComment.Checked = True
+        End If
+    End Sub
 End Class
