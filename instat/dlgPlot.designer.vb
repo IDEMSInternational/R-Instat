@@ -36,6 +36,8 @@ Partial Class dlgPlot
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
+        Me.grpPointsAndLines = New System.Windows.Forms.GroupBox()
+        Me.grpPointsAndLines.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -68,7 +70,7 @@ Partial Class dlgPlot
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(288, 213)
+        Me.cmdOptions.Location = New System.Drawing.Point(286, 229)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdOptions.TabIndex = 12
@@ -78,7 +80,7 @@ Partial Class dlgPlot
         '
         'cmdPointOptions
         '
-        Me.cmdPointOptions.Location = New System.Drawing.Point(12, 213)
+        Me.cmdPointOptions.Location = New System.Drawing.Point(9, 229)
         Me.cmdPointOptions.Name = "cmdPointOptions"
         Me.cmdPointOptions.Size = New System.Drawing.Size(103, 23)
         Me.cmdPointOptions.TabIndex = 10
@@ -99,7 +101,7 @@ Partial Class dlgPlot
         'chkPoints
         '
         Me.chkPoints.AutoSize = True
-        Me.chkPoints.Location = New System.Drawing.Point(13, 189)
+        Me.chkPoints.Location = New System.Drawing.Point(6, 12)
         Me.chkPoints.Name = "chkPoints"
         Me.chkPoints.Size = New System.Drawing.Size(55, 17)
         Me.chkPoints.TabIndex = 8
@@ -110,7 +112,7 @@ Partial Class dlgPlot
         'chkLines
         '
         Me.chkLines.AutoSize = True
-        Me.chkLines.Location = New System.Drawing.Point(120, 190)
+        Me.chkLines.Location = New System.Drawing.Point(115, 12)
         Me.chkLines.Name = "chkLines"
         Me.chkLines.Size = New System.Drawing.Size(51, 17)
         Me.chkLines.TabIndex = 9
@@ -120,7 +122,7 @@ Partial Class dlgPlot
         '
         'cmdLineOptions
         '
-        Me.cmdLineOptions.Location = New System.Drawing.Point(168, 212)
+        Me.cmdLineOptions.Location = New System.Drawing.Point(170, 229)
         Me.cmdLineOptions.Name = "cmdLineOptions"
         Me.cmdLineOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdLineOptions.TabIndex = 11
@@ -137,7 +139,7 @@ Partial Class dlgPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(3, 252)
+        Me.ucrBase.Location = New System.Drawing.Point(3, 258)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 13
@@ -166,14 +168,23 @@ Partial Class dlgPlot
         Me.ucrReceiverX.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverX.TabIndex = 5
         '
+        'grpPointsAndLines
+        '
+        Me.grpPointsAndLines.Controls.Add(Me.chkLines)
+        Me.grpPointsAndLines.Controls.Add(Me.chkPoints)
+        Me.grpPointsAndLines.Location = New System.Drawing.Point(7, 183)
+        Me.grpPointsAndLines.Name = "grpPointsAndLines"
+        Me.grpPointsAndLines.Size = New System.Drawing.Size(168, 40)
+        Me.grpPointsAndLines.TabIndex = 14
+        Me.grpPointsAndLines.TabStop = False
+        '
         'dlgPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 312)
+        Me.ClientSize = New System.Drawing.Size(412, 315)
+        Me.Controls.Add(Me.grpPointsAndLines)
         Me.Controls.Add(Me.cmdLineOptions)
-        Me.Controls.Add(Me.chkLines)
-        Me.Controls.Add(Me.chkPoints)
         Me.Controls.Add(Me.cmdPointOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrPlotSelector)
@@ -192,6 +203,8 @@ Partial Class dlgPlot
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Plot"
         Me.Text = "Plot"
+        Me.grpPointsAndLines.ResumeLayout(False)
+        Me.grpPointsAndLines.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -210,4 +223,5 @@ Partial Class dlgPlot
     Friend WithEvents chkPoints As CheckBox
     Friend WithEvents chkLines As CheckBox
     Friend WithEvents cmdLineOptions As Button
+    Friend WithEvents grpPointsAndLines As GroupBox
 End Class
