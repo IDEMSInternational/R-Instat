@@ -79,7 +79,7 @@ Public Class dlgSummaryBarOrPieChart
         clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
     End Sub
 
-    Private Sub ucrSummarybarSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrSummarybarSelector.DataFrameChanged
+    Private Sub ucrSummarybarSelector_DataFrameChanged() Handles ucrSummarybarSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSummarybarSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 

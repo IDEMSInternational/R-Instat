@@ -23,6 +23,8 @@ Public Class ucrReceiverMultiple
         End If
     End Sub
 
+    Public Event SelectionChanged()
+
     Public Overrides Sub AddSelected()
         Dim objItem As ListViewItem
         Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As Object
@@ -41,6 +43,7 @@ Public Class ucrReceiverMultiple
                 lstSelectedVariables.Items.Add(objItem.Text).Group = grpTemp
             End If
         Next
+        RaiseEvent SelectionChanged()
 
     End Sub
 
@@ -65,11 +68,13 @@ Public Class ucrReceiverMultiple
                 lstSelectedVariables.Items.Remove(objItem)
             Next
         End If
+        RaiseEvent SelectionChanged()
     End Sub
 
     Public Overrides Sub Clear()
 
-        lstSelectedVariables.SelectedItems.Clear()
+        lstSelectedVariables.Items.Clear()
+        RaiseEvent SelectionChanged()
 
     End Sub
 
@@ -137,14 +142,9 @@ Public Class ucrReceiverMultiple
         lstSelectedVariables.BackColor = Color.White
     End Sub
 
-    Private Sub lstSelectedVariables_KeyPress(sender As Object, e As KeyPressEventArgs) Handles lstSelectedVariables.KeyPress
-        If e.KeyChar = vbCr Then
+    Private Sub lstSelectedVariables_KeyDown(sender As Object, e As KeyEventArgs) Handles lstSelectedVariables.KeyDown
+        If e.KeyCode = Keys.Delete Then
             RemoveSelected()
         End If
     End Sub
-
-    Private Sub lstSelectedVariables_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstSelectedVariables.SelectedIndexChanged
-
-    End Sub
-
 End Class
