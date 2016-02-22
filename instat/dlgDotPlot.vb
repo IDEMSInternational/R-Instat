@@ -45,12 +45,18 @@ Public Class dlgDotPlot
 
     Private Sub ucrYVariableReceiver_Leave(sender As Object, e As EventArgs) Handles ucrYVariableReceiver.Leave
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_dotplot)
+        clsRaesFunction.AddParameter("y", ucrYVariableReceiver.GetVariableNames(False))
+        clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
 
-        If ucrFactorReceiver.txtReceiverSingle.Text = "" And ucrSecondfactorReceiver.txtReceiverSingle.Text = "" Then
-            clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
-        Else
-            clsRaesFunction.AddParameter("y", ucrYVariableReceiver.GetVariableNames(False))
-        End If
+        'If ucrFactorReceiver.txtReceiverSingle.Text = "" And ucrSecondfactorReceiver.txtReceiverSingle.Text = "" Then
 
+        'Else
+
+        'End If
+
+    End Sub
+
+    Private Sub ucrDotPlotSelector_DataFrameChanged() Handles ucrDotPlotSelector.DataFrameChanged
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrDotPlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 End Class
