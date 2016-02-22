@@ -33,6 +33,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdPieChartOptions = New System.Windows.Forms.Button()
         Me.grpSelection.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -114,6 +115,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrSecondReceiver.Location = New System.Drawing.Point(283, 139)
         Me.ucrSecondReceiver.Name = "ucrSecondReceiver"
+        Me.ucrSecondReceiver.Selector = Nothing
         Me.ucrSecondReceiver.Size = New System.Drawing.Size(106, 26)
         Me.ucrSecondReceiver.TabIndex = 6
         '
@@ -121,6 +123,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrFactorReceiver.Location = New System.Drawing.Point(283, 81)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
+        Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
         Me.ucrFactorReceiver.TabIndex = 4
         '
@@ -138,11 +141,22 @@ Partial Class dlgBarAndPieChart
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
+        'cmdPieChartOptions
+        '
+        Me.cmdPieChartOptions.Location = New System.Drawing.Point(17, 221)
+        Me.cmdPieChartOptions.Name = "cmdPieChartOptions"
+        Me.cmdPieChartOptions.Size = New System.Drawing.Size(118, 23)
+        Me.cmdPieChartOptions.TabIndex = 9
+        Me.cmdPieChartOptions.Tag = "Pie_Chart_Options"
+        Me.cmdPieChartOptions.Text = "Pie Chart Options"
+        Me.cmdPieChartOptions.UseVisualStyleBackColor = True
+        '
         'dlgBarAndPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(412, 317)
+        Me.Controls.Add(Me.cmdPieChartOptions)
         Me.Controls.Add(Me.grpSelection)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdBarChartOptions)
@@ -175,4 +189,5 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents rdoBarChart As RadioButton
     Friend WithEvents rdoPieChart As RadioButton
     Friend WithEvents grpSelection As GroupBox
+    Friend WithEvents cmdPieChartOptions As Button
 End Class
