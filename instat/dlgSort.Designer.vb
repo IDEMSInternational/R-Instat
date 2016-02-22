@@ -77,10 +77,10 @@ Partial Class dlgSort
         Me.lblColumnsToSort.AutoSize = True
         Me.lblColumnsToSort.Location = New System.Drawing.Point(287, 72)
         Me.lblColumnsToSort.Name = "lblColumnsToSort"
-        Me.lblColumnsToSort.Size = New System.Drawing.Size(85, 13)
+        Me.lblColumnsToSort.Size = New System.Drawing.Size(103, 13)
         Me.lblColumnsToSort.TabIndex = 5
         Me.lblColumnsToSort.Tag = "Columns_To_Sort"
-        Me.lblColumnsToSort.Text = "Columns To Sort"
+        Me.lblColumnsToSort.Text = "Columns To Sort By:"
         '
         'grpMissingValues
         '
@@ -129,6 +129,7 @@ Partial Class dlgSort
         '
         Me.ucrReceiverSort.Location = New System.Drawing.Point(290, 88)
         Me.ucrReceiverSort.Name = "ucrReceiverSort"
+        Me.ucrReceiverSort.Selector = Nothing
         Me.ucrReceiverSort.Size = New System.Drawing.Size(125, 103)
         Me.ucrReceiverSort.TabIndex = 4
         '
