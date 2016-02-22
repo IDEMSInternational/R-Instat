@@ -76,7 +76,11 @@ Public Class dlgSort
     'For grouped radio buttons put all CheckedChanged events into one sub and check which is checked.
     Private Sub grpOrder_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged, rdoDescending.CheckedChanged
         If rdoAscending.Checked Then
-            ucrBase.clsRsyntax.AddParameter("decreasing", "FALSE")
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("decreasing", "FALSE")
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("decreasing")
+            End If
         ElseIf rdoDescending.Checked Then
             ucrBase.clsRsyntax.AddParameter("decreasing", "TRUE")
         Else
@@ -93,7 +97,11 @@ Public Class dlgSort
         If rdoFirst.Checked Then
             ucrBase.clsRsyntax.AddParameter("na.last", "FALSE")
         ElseIf rdoLast.Checked Then
-            ucrBase.clsRsyntax.AddParameter("na.last", "TRUE")
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("na.last", "TRUE")
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("na.last")
+            End If
         Else
             ucrBase.clsRsyntax.RemoveParameter("na.last")
         End If
