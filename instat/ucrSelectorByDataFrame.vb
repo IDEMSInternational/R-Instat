@@ -18,14 +18,22 @@ Public Class ucrSelectorByDataFrame
     Private Sub ucrSelectorByDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadList()
     End Sub
-    Public Event DataFrameChanged(sender As Object, e As EventArgs)
-    Private Sub ucrAvailableDataFrames_Load(sender As Object, e As EventArgs) Handles ucrAvailableDataFrames.DataFrameChanged
+
+    'Private Sub ucrAvailableDataFrames_Load(sender As Object, e As EventArgs) Handles ucrAvailableDataFrames.DataFrameChanged
+    '    LoadList()
+    'End Sub
+    Private Sub ucrAvailableDataFrames_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrAvailableDataFrames.DataFrameChanged
         LoadList()
-        RaiseEvent DataFrameChanged(sender, e)
+        If strPrevDataFrame <> ucrAvailableDataFrames.cboAvailableDataFrames.Text Then
+            OnDataFrameChanged()
+        End If
     End Sub
 
     Public Overrides Sub LoadList()
-        frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType:=CurrentReceiver.strDataType, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        Dim strPrevDataFrame As String
+        strPrevDataFrame = ucrAvailableDataFrames.cboAvailableDataFrames.Text
+        If ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType:=CurrentReceiver.strDataType, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        End If
     End Sub
-
 End Class

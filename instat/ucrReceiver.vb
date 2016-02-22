@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class ucrReceiver
-    Public Selector As ucrSelector
+    Public WithEvents Selector As ucrSelector
     Public strDataType As String = "all"
 
     Public Overridable Sub AddSelected()
@@ -84,4 +84,9 @@ Public Class ucrReceiver
         Return strTemp
     End Function
 
+    Private Sub Selector_ListChanged() Handles Selector.DataFrameChanged
+        If (TypeOf Selector Is ucrSelectorByDataFrame) Then
+            Clear()
+        End If
+    End Sub
 End Class
