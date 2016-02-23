@@ -18,15 +18,15 @@ Imports instat.Translations
 
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
+    Dim clsModel As New ROperator
 
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
         ucrBase.clsRsyntax.SetFunction("lm")
         ucrBase.clsRsyntax.iCallType = 2
-        ucrResponse.Selector = UcrSelectorByDataFrameAddRemoveSimpleReg
-
-        ucrExplanatory.Selector = UcrSelectorByDataFrameAddRemoveSimpleReg
+        clsModel.SetOperation("~")
+        ucrResponse.Selector = ucrSelectorSimpleReg
+        ucrExplanatory.Selector = ucrSelectorSimpleReg
         autoTranslate(Me)
-        'To add correct help ID
         ucrBase.iHelpTopicID = 171
 
         If bFirstLoad Then
@@ -40,9 +40,9 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetDefaults()
-        UcrSelectorByDataFrameAddRemoveSimpleReg.Reset()
+        ucrSelectorSimpleReg.Reset()
         ucrResponse.SetMeAsReceiver()
-        UcrSelectorByDataFrameAddRemoveSimpleReg.Focus()
+        ucrSelectorSimpleReg.Focus()
         'include last lm
         'Test ok enabled
         TestOKEnabled()
@@ -55,26 +55,15 @@ Public Class dlgRegressionSimple
         strExplanatory = ucrExplanatory.GetVariableNames(bWithQuotes:=False)
 
         If ((Not (strResponse = "")) And (Not (strExplanatory = ""))) Then
-            ucrBase.clsRsyntax.AddParameter("formula", strResponse & "~" & strExplanatory)
-
-
+            ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-
-
-    Private Sub ucrResponse_Leave(sender As Object, e As EventArgs) Handles ucrResponse.Leave
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrExplanatory_Leave(sender As Object, e As EventArgs) Handles ucrExplanatory.Leave
-        TestOKEnabled()
-    End Sub
-    Private Sub UcrSelectorByDataFrameAddRemoveSimpleReg_Leave(sender As Object, e As EventArgs) Handles UcrSelectorByDataFrameAddRemoveSimpleReg.Leave
-        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=UcrSelectorByDataFrameAddRemoveSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
+    Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorSimpleReg.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
     Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdRegressionOptions.Click
@@ -82,11 +71,12 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
-        'Test ok enabled
+        clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
+
     Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
-        'Test ok enabled
+        clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
