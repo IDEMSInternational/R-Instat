@@ -95,7 +95,12 @@ Public Class ROperator
         End If
     End Function
 
-    Public Sub SetParameter(bSetLeftNotRight As Boolean, Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
+    Public Sub SetParameter(bSetLeftNotRight As Boolean, Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
+
+        If strValue <> "" Then
+            clsParam = New RParameter
+            clsParam.SetArgumentValue(strValue)
+        End If
 
         If bSetLeftNotRight Then
             clsLeftParameter = clsParam
