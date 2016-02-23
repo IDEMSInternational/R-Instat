@@ -27,11 +27,15 @@ Partial Class dlgPlot
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.cmdPlotOptions = New System.Windows.Forms.Button()
+        Me.cmdPointOptions = New System.Windows.Forms.Button()
+        Me.lblFactorOptional = New System.Windows.Forms.Label()
+        Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
+        Me.chkPoints = New System.Windows.Forms.CheckBox()
+        Me.chkLines = New System.Windows.Forms.CheckBox()
+        Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -78,7 +82,7 @@ Partial Class dlgPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(3, 190)
+        Me.ucrBase.Location = New System.Drawing.Point(3, 252)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 27
@@ -92,7 +96,7 @@ Partial Class dlgPlot
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(273, 109)
+        Me.cmdOptions.Location = New System.Drawing.Point(288, 213)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdOptions.TabIndex = 29
@@ -100,26 +104,80 @@ Partial Class dlgPlot
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'cmdPlotOptions
+        'cmdPointOptions
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(273, 139)
-        Me.cmdPlotOptions.Name = "cmdPlotOptions"
-        Me.cmdPlotOptions.Size = New System.Drawing.Size(103, 23)
-        Me.cmdPlotOptions.TabIndex = 30
-        Me.cmdPlotOptions.Tag = "Plot_Options"
-        Me.cmdPlotOptions.Text = "Plot Options"
-        Me.cmdPlotOptions.UseVisualStyleBackColor = True
+        Me.cmdPointOptions.Location = New System.Drawing.Point(12, 213)
+        Me.cmdPointOptions.Name = "cmdPointOptions"
+        Me.cmdPointOptions.Size = New System.Drawing.Size(103, 23)
+        Me.cmdPointOptions.TabIndex = 30
+        Me.cmdPointOptions.Tag = "Point_Options"
+        Me.cmdPointOptions.Text = "Point Options"
+        Me.cmdPointOptions.UseVisualStyleBackColor = True
+        '
+        'lblFactorOptional
+        '
+        Me.lblFactorOptional.AutoSize = True
+        Me.lblFactorOptional.Location = New System.Drawing.Point(267, 116)
+        Me.lblFactorOptional.Name = "lblFactorOptional"
+        Me.lblFactorOptional.Size = New System.Drawing.Size(82, 13)
+        Me.lblFactorOptional.TabIndex = 18
+        Me.lblFactorOptional.Tag = "Factor_Optional"
+        Me.lblFactorOptional.Text = "Factor(Optional)"
+        '
+        'ucrFactorOptionalReceiver
+        '
+        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(270, 132)
+        Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
+        Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrFactorOptionalReceiver.TabIndex = 25
+        '
+        'chkPoints
+        '
+        Me.chkPoints.AutoSize = True
+        Me.chkPoints.Location = New System.Drawing.Point(13, 189)
+        Me.chkPoints.Name = "chkPoints"
+        Me.chkPoints.Size = New System.Drawing.Size(55, 17)
+        Me.chkPoints.TabIndex = 31
+        Me.chkPoints.Tag = "Points"
+        Me.chkPoints.Text = "Points"
+        Me.chkPoints.UseVisualStyleBackColor = True
+        '
+        'chkLines
+        '
+        Me.chkLines.AutoSize = True
+        Me.chkLines.Location = New System.Drawing.Point(120, 190)
+        Me.chkLines.Name = "chkLines"
+        Me.chkLines.Size = New System.Drawing.Size(51, 17)
+        Me.chkLines.TabIndex = 31
+        Me.chkLines.Tag = "Lines"
+        Me.chkLines.Text = "Lines"
+        Me.chkLines.UseVisualStyleBackColor = True
+        '
+        'cmdLineOptions
+        '
+        Me.cmdLineOptions.Location = New System.Drawing.Point(168, 212)
+        Me.cmdLineOptions.Name = "cmdLineOptions"
+        Me.cmdLineOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdLineOptions.TabIndex = 32
+        Me.cmdLineOptions.Tag = "Line_Options"
+        Me.cmdLineOptions.Text = "Line Options"
+        Me.cmdLineOptions.UseVisualStyleBackColor = True
         '
         'dlgPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 246)
-        Me.Controls.Add(Me.cmdPlotOptions)
+        Me.ClientSize = New System.Drawing.Size(412, 312)
+        Me.Controls.Add(Me.cmdLineOptions)
+        Me.Controls.Add(Me.chkLines)
+        Me.Controls.Add(Me.chkPoints)
+        Me.Controls.Add(Me.cmdPointOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrPlotSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverY)
+        Me.Controls.Add(Me.ucrFactorOptionalReceiver)
+        Me.Controls.Add(Me.lblFactorOptional)
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.lblYVariable)
@@ -140,9 +198,13 @@ Partial Class dlgPlot
     Friend WithEvents lblAvailable As Label
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents ucrReceiverY As ucrReceiverSingle
-    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrPlotSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdOptions As Button
-    Friend WithEvents cmdPlotOptions As Button
+    Friend WithEvents cmdPointOptions As Button
+    Friend WithEvents lblFactorOptional As Label
+    Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
+    Friend WithEvents chkPoints As CheckBox
+    Friend WithEvents chkLines As CheckBox
+    Friend WithEvents cmdLineOptions As Button
 End Class
