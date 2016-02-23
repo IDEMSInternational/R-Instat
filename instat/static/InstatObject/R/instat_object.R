@@ -34,6 +34,8 @@ instat_obj$methods(initialize = function(data_tables = list(), instat_obj_metada
                       imported_from=imported_from, messages=messages, convert=convert, create=create)
   }
   
+  .self$data_objects_changed=FALSE
+  
 }
 )
 
