@@ -25,7 +25,7 @@ Public Class dlgRandomSample
         ucrDistWithParameters.SetRDistributions()
         ucrBase.clsRsyntax.clsBaseFunction = ucrDistWithParameters.clsCurrRFunction
         ucrDistWithParameters.AddParameter("n", ucrDataFrameSelector.iDataFrameLength)
-
+        ucrSampleSize.SetDataFrameSelector(ucrDataFrameSelector)
         ' Setting link between DataFrameSelector and NewColumnNameSelector
         ' TODO tidy these links up
         'ucrDataFrameSelector.SetColumnList(ucrNewColumnNameSelector)
@@ -37,11 +37,16 @@ Public Class dlgRandomSample
 
     End Sub
 
-    Private Sub ucrDataFrameSelector_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameSelector.Leave
+    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameSelector.DataFrameChanged
         ucrDistWithParameters.AddParameter("n", ucrDataFrameSelector.iDataFrameLength)
     End Sub
 
     Private Sub ucrNewColumnNameSelector_Leave(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelector.Leave
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrDataFrameSelector.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
     End Sub
+
+    Private Sub ucrDataFrameSelector_Leave(sender As Object, e As EventArgs)
+
+    End Sub
+
 End Class
