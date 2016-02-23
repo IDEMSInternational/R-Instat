@@ -22,8 +22,6 @@ Partial Class dlgRank
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverRank = New instat.ucrReceiverSingle()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.grpTies = New System.Windows.Forms.GroupBox()
         Me.rdoRandom = New System.Windows.Forms.RadioButton()
@@ -35,26 +33,13 @@ Partial Class dlgRank
         Me.rdoKeptAsMissing = New System.Windows.Forms.RadioButton()
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirstMissingValues = New System.Windows.Forms.RadioButton()
-        Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
         Me.ucrSelectorForRank = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
+        Me.ucrReceiverRank = New instat.ucrReceiverSingle()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 343)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(403, 53)
-        Me.ucrBase.TabIndex = 6
-        '
-        'ucrReceiverRank
-        '
-        Me.ucrReceiverRank.Location = New System.Drawing.Point(261, 49)
-        Me.ucrReceiverRank.Name = "ucrReceiverRank"
-        Me.ucrReceiverRank.Selector = Nothing
-        Me.ucrReceiverRank.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverRank.TabIndex = 2
         '
         'lblSelectedVariable
         '
@@ -76,7 +61,7 @@ Partial Class dlgRank
         Me.grpTies.Location = New System.Drawing.Point(261, 81)
         Me.grpTies.Name = "grpTies"
         Me.grpTies.Size = New System.Drawing.Size(154, 140)
-        Me.grpTies.TabIndex = 4
+        Me.grpTies.TabIndex = 3
         Me.grpTies.TabStop = False
         Me.grpTies.Tag = "Ties"
         Me.grpTies.Text = "Ties"
@@ -149,7 +134,7 @@ Partial Class dlgRank
         Me.grpMissingValues.Location = New System.Drawing.Point(12, 202)
         Me.grpMissingValues.Name = "grpMissingValues"
         Me.grpMissingValues.Size = New System.Drawing.Size(180, 94)
-        Me.grpMissingValues.TabIndex = 3
+        Me.grpMissingValues.TabIndex = 4
         Me.grpMissingValues.TabStop = False
         Me.grpMissingValues.Tag = "Misssing_values"
         Me.grpMissingValues.Text = "Missing values"
@@ -190,6 +175,13 @@ Partial Class dlgRank
         Me.rdoFirstMissingValues.Text = "First"
         Me.rdoFirstMissingValues.UseVisualStyleBackColor = True
         '
+        'ucrSelectorForRank
+        '
+        Me.ucrSelectorForRank.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorForRank.Name = "ucrSelectorForRank"
+        Me.ucrSelectorForRank.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorForRank.TabIndex = 0
+        '
         'ucrNewColumnNameSelector
         '
         Me.ucrNewColumnNameSelector.Location = New System.Drawing.Point(12, 302)
@@ -198,12 +190,20 @@ Partial Class dlgRank
         Me.ucrNewColumnNameSelector.TabIndex = 5
         Me.ucrNewColumnNameSelector.ucrDataFrameSelector = Nothing
         '
-        'ucrSelectorForRank
+        'ucrReceiverRank
         '
-        Me.ucrSelectorForRank.Location = New System.Drawing.Point(13, 13)
-        Me.ucrSelectorForRank.Name = "ucrSelectorForRank"
-        Me.ucrSelectorForRank.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorForRank.TabIndex = 0
+        Me.ucrReceiverRank.Location = New System.Drawing.Point(261, 49)
+        Me.ucrReceiverRank.Name = "ucrReceiverRank"
+        Me.ucrReceiverRank.Selector = Nothing
+        Me.ucrReceiverRank.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverRank.TabIndex = 2
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 343)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(403, 53)
+        Me.ucrBase.TabIndex = 6
         '
         'dlgRank
         '
