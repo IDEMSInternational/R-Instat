@@ -34,11 +34,22 @@ Public Class ucrReceiverSingle
         If txtReceiverSingle.Text <> "" Then
             txtReceiverSingle.Text = ""
         End If
+
     End Sub
 
     Public Overrides Sub Clear()
         txtReceiverSingle.Text = ""
     End Sub
+
+    Public Overrides Function IsEmpty() As Boolean
+
+        If txtReceiverSingle.Text <> "" Then
+            Return False
+        Else
+            Return True
+        End If
+
+    End Function
 
     Public Overrides Function GetVariables() As RFunction
         'return columns (in data frame) in both cases
