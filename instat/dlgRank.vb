@@ -23,8 +23,6 @@ Public Class dlgRank
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction("rank")
         ucrBase.iHelpTopicID = 25
-        ucrReceiverRank.Selector = ucrSelectorForRank
-        ucrReceiverRank.SetMeAsReceiver()
         ucrNewColumnNameSelector.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
         ucrNewColumnNameSelector.SetPrefix("Rank")
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
@@ -54,23 +52,26 @@ Public Class dlgRank
 
     ' Sub that runs only the first time the dialog loads
     Private Sub SetDefaults()
+        ucrReceiverRank.SetMeAsReceiver()
+        ucrReceiverRank.Selector = ucrSelectorForRank
         rdoKeptAsMissing.Checked = True
         rdoAverage.Checked = True
-        ucrReceiverRank.Clear()
+        ' ucrSelectorForRank.ResetText()
+        TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
 
-        SetOrderValues()
+        SetTiesValues()
         setMissingValue()
     End Sub
 
     Private Sub grpTies_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAverage.CheckedChanged, rdoMinimum.CheckedChanged, rdoMaximum.CheckedChanged, rdoFirst.CheckedChanged, rdoRandom.CheckedChanged
-        SetOrderValues()
+        SetTiesValues()
 
     End Sub
 
-    Private Sub SetOrderValues()
+    Private Sub SetTiesValues()
 
         If rdoAverage.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
