@@ -30,6 +30,9 @@ Public Class dlgBarAndPieChart
         ucrFactorReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrFactorReceiver.SetMeAsReceiver()
+        ucrFactorReceiver.SetDataType("factor")
+        ucrSecondReceiver.SetDataType("factor")
+
         rdoBarChart.Checked = True
         ucrBase.clsRsyntax.iCallType = 0
         autoTranslate(Me)
