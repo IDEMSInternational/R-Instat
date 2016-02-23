@@ -801,7 +801,6 @@ climate$methods(summary_calculation = function(data_list = list(), summary_time_
     }
     
     curr_required_variables = list()
-    print(required_variables)
     for(var in required_variables) {
       curr_required_variables[[length(curr_required_variables)+1]] = data_obj$getvname(var)
       #curr_required_variables[[length(curr_required_variables)+1]] = data_obj$getvname(var)

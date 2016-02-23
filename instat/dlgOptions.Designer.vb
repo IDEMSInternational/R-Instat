@@ -31,26 +31,29 @@ Partial Class dlgOptions
         Me.txtComment = New System.Windows.Forms.TextBox()
         Me.lblComment = New System.Windows.Forms.Label()
         Me.tbpFormat = New System.Windows.Forms.TabPage()
-        Me.cmdScriptChange = New System.Windows.Forms.Button()
-        Me.cmdOutputChange = New System.Windows.Forms.Button()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.lblComments = New System.Windows.Forms.Label()
+        Me.lblOutput = New System.Windows.Forms.Label()
+        Me.lblRScript = New System.Windows.Forms.Label()
         Me.cmdCommentsChange = New System.Windows.Forms.Button()
+        Me.cmdOutputChange = New System.Windows.Forms.Button()
+        Me.cmdScriptChange = New System.Windows.Forms.Button()
+        Me.tbpImport = New System.Windows.Forms.TabPage()
+        Me.nudNoLines = New System.Windows.Forms.NumericUpDown()
+        Me.lblShowLines = New System.Windows.Forms.Label()
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.lblRScript = New System.Windows.Forms.Label()
-        Me.lblOutput = New System.Windows.Forms.Label()
-        Me.lblComments = New System.Windows.Forms.Label()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.tbpImport = New System.Windows.Forms.TabPage()
-        Me.lblShowLines = New System.Windows.Forms.Label()
-        Me.nudNoLines = New System.Windows.Forms.NumericUpDown()
+        Me.tbpRScriptOptions = New System.Windows.Forms.TabPage()
+        Me.chkIncludeDefaultParams = New System.Windows.Forms.CheckBox()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguageSettings.SuspendLayout()
         Me.tbpComments.SuspendLayout()
         Me.tbpFormat.SuspendLayout()
         Me.tbpImport.SuspendLayout()
         CType(Me.nudNoLines, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpRScriptOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbcOptions
@@ -59,6 +62,7 @@ Partial Class dlgOptions
         Me.tbcOptions.Controls.Add(Me.tbpComments)
         Me.tbcOptions.Controls.Add(Me.tbpFormat)
         Me.tbcOptions.Controls.Add(Me.tbpImport)
+        Me.tbcOptions.Controls.Add(Me.tbpRScriptOptions)
         Me.tbcOptions.Location = New System.Drawing.Point(13, 13)
         Me.tbcOptions.Name = "tbcOptions"
         Me.tbcOptions.SelectedIndex = 0
@@ -161,14 +165,53 @@ Partial Class dlgOptions
         Me.tbpFormat.Text = "Format Options"
         Me.tbpFormat.UseVisualStyleBackColor = True
         '
-        'cmdScriptChange
+        'lblTitle
         '
-        Me.cmdScriptChange.Location = New System.Drawing.Point(85, 58)
-        Me.cmdScriptChange.Name = "cmdScriptChange"
-        Me.cmdScriptChange.Size = New System.Drawing.Size(100, 23)
-        Me.cmdScriptChange.TabIndex = 10
-        Me.cmdScriptChange.Text = "Preview Settings"
-        Me.cmdScriptChange.UseVisualStyleBackColor = True
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblTitle.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitle.Location = New System.Drawing.Point(6, 19)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(333, 15)
+        Me.lblTitle.TabIndex = 20
+        Me.lblTitle.Text = "Preview and Set the Font and Color Formats for the following Options"
+        '
+        'lblComments
+        '
+        Me.lblComments.AutoSize = True
+        Me.lblComments.Location = New System.Drawing.Point(6, 146)
+        Me.lblComments.Name = "lblComments"
+        Me.lblComments.Size = New System.Drawing.Size(56, 13)
+        Me.lblComments.TabIndex = 19
+        Me.lblComments.Text = "Comments"
+        '
+        'lblOutput
+        '
+        Me.lblOutput.AutoSize = True
+        Me.lblOutput.Location = New System.Drawing.Point(6, 107)
+        Me.lblOutput.Name = "lblOutput"
+        Me.lblOutput.Size = New System.Drawing.Size(50, 13)
+        Me.lblOutput.TabIndex = 18
+        Me.lblOutput.Text = "R Output"
+        '
+        'lblRScript
+        '
+        Me.lblRScript.AutoSize = True
+        Me.lblRScript.Location = New System.Drawing.Point(6, 68)
+        Me.lblRScript.Name = "lblRScript"
+        Me.lblRScript.Size = New System.Drawing.Size(45, 13)
+        Me.lblRScript.TabIndex = 17
+        Me.lblRScript.Text = "R Script"
+        '
+        'cmdCommentsChange
+        '
+        Me.cmdCommentsChange.Location = New System.Drawing.Point(85, 136)
+        Me.cmdCommentsChange.Name = "cmdCommentsChange"
+        Me.cmdCommentsChange.Size = New System.Drawing.Size(100, 23)
+        Me.cmdCommentsChange.TabIndex = 16
+        Me.cmdCommentsChange.Text = "Preview Settings"
+        Me.cmdCommentsChange.UseVisualStyleBackColor = True
         '
         'cmdOutputChange
         '
@@ -179,14 +222,43 @@ Partial Class dlgOptions
         Me.cmdOutputChange.Text = "Preview Settings"
         Me.cmdOutputChange.UseVisualStyleBackColor = True
         '
-        'cmdCommentsChange
+        'cmdScriptChange
         '
-        Me.cmdCommentsChange.Location = New System.Drawing.Point(85, 136)
-        Me.cmdCommentsChange.Name = "cmdCommentsChange"
-        Me.cmdCommentsChange.Size = New System.Drawing.Size(100, 23)
-        Me.cmdCommentsChange.TabIndex = 16
-        Me.cmdCommentsChange.Text = "Preview Settings"
-        Me.cmdCommentsChange.UseVisualStyleBackColor = True
+        Me.cmdScriptChange.Location = New System.Drawing.Point(85, 58)
+        Me.cmdScriptChange.Name = "cmdScriptChange"
+        Me.cmdScriptChange.Size = New System.Drawing.Size(100, 23)
+        Me.cmdScriptChange.TabIndex = 10
+        Me.cmdScriptChange.Text = "Preview Settings"
+        Me.cmdScriptChange.UseVisualStyleBackColor = True
+        '
+        'tbpImport
+        '
+        Me.tbpImport.Controls.Add(Me.nudNoLines)
+        Me.tbpImport.Controls.Add(Me.lblShowLines)
+        Me.tbpImport.Location = New System.Drawing.Point(4, 22)
+        Me.tbpImport.Name = "tbpImport"
+        Me.tbpImport.Size = New System.Drawing.Size(392, 233)
+        Me.tbpImport.TabIndex = 3
+        Me.tbpImport.Text = "Import Data"
+        Me.tbpImport.UseVisualStyleBackColor = True
+        '
+        'nudNoLines
+        '
+        Me.nudNoLines.Location = New System.Drawing.Point(244, 21)
+        Me.nudNoLines.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudNoLines.Name = "nudNoLines"
+        Me.nudNoLines.Size = New System.Drawing.Size(75, 20)
+        Me.nudNoLines.TabIndex = 1
+        Me.nudNoLines.Value = New Decimal(New Integer() {10, 0, 0, 0})
+        '
+        'lblShowLines
+        '
+        Me.lblShowLines.AutoSize = True
+        Me.lblShowLines.Location = New System.Drawing.Point(21, 21)
+        Me.lblShowLines.Name = "lblShowLines"
+        Me.lblShowLines.Size = New System.Drawing.Size(158, 13)
+        Me.lblShowLines.TabIndex = 0
+        Me.lblShowLines.Text = "Number of lines to show on load"
         '
         'cmdOk
         '
@@ -228,73 +300,28 @@ Partial Class dlgOptions
         Me.cmdHelp.Text = "&Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
-        'lblRScript
+        'tbpRScriptOptions
         '
-        Me.lblRScript.AutoSize = True
-        Me.lblRScript.Location = New System.Drawing.Point(6, 68)
-        Me.lblRScript.Name = "lblRScript"
-        Me.lblRScript.Size = New System.Drawing.Size(45, 13)
-        Me.lblRScript.TabIndex = 17
-        Me.lblRScript.Text = "R Script"
+        Me.tbpRScriptOptions.Controls.Add(Me.chkIncludeDefaultParams)
+        Me.tbpRScriptOptions.Location = New System.Drawing.Point(4, 22)
+        Me.tbpRScriptOptions.Name = "tbpRScriptOptions"
+        Me.tbpRScriptOptions.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpRScriptOptions.Size = New System.Drawing.Size(392, 233)
+        Me.tbpRScriptOptions.TabIndex = 4
+        Me.tbpRScriptOptions.Tag = "R_Script_Options"
+        Me.tbpRScriptOptions.Text = "R Script Options"
+        Me.tbpRScriptOptions.UseVisualStyleBackColor = True
         '
-        'lblOutput
+        'chkIncludeDefaultParams
         '
-        Me.lblOutput.AutoSize = True
-        Me.lblOutput.Location = New System.Drawing.Point(6, 107)
-        Me.lblOutput.Name = "lblOutput"
-        Me.lblOutput.Size = New System.Drawing.Size(50, 13)
-        Me.lblOutput.TabIndex = 18
-        Me.lblOutput.Text = "R Output"
-        '
-        'lblComments
-        '
-        Me.lblComments.AutoSize = True
-        Me.lblComments.Location = New System.Drawing.Point(6, 146)
-        Me.lblComments.Name = "lblComments"
-        Me.lblComments.Size = New System.Drawing.Size(56, 13)
-        Me.lblComments.TabIndex = 19
-        Me.lblComments.Text = "Comments"
-        '
-        'lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblTitle.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitle.Location = New System.Drawing.Point(6, 19)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(333, 15)
-        Me.lblTitle.TabIndex = 20
-        Me.lblTitle.Text = "Preview and Set the Font and Color Formats for the following Options"
-        '
-        'tbpImport
-        '
-        Me.tbpImport.Controls.Add(Me.nudNoLines)
-        Me.tbpImport.Controls.Add(Me.lblShowLines)
-        Me.tbpImport.Location = New System.Drawing.Point(4, 22)
-        Me.tbpImport.Name = "tbpImport"
-        Me.tbpImport.Size = New System.Drawing.Size(392, 233)
-        Me.tbpImport.TabIndex = 3
-        Me.tbpImport.Text = "Import Data"
-        Me.tbpImport.UseVisualStyleBackColor = True
-        '
-        'lblShowLines
-        '
-        Me.lblShowLines.AutoSize = True
-        Me.lblShowLines.Location = New System.Drawing.Point(21, 21)
-        Me.lblShowLines.Name = "lblShowLines"
-        Me.lblShowLines.Size = New System.Drawing.Size(158, 13)
-        Me.lblShowLines.TabIndex = 0
-        Me.lblShowLines.Text = "Number of lines to show on load"
-        '
-        'nudNoLines
-        '
-        Me.nudNoLines.Location = New System.Drawing.Point(244, 21)
-        Me.nudNoLines.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudNoLines.Name = "nudNoLines"
-        Me.nudNoLines.Size = New System.Drawing.Size(75, 20)
-        Me.nudNoLines.TabIndex = 1
-        Me.nudNoLines.Value = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.chkIncludeDefaultParams.AutoSize = True
+        Me.chkIncludeDefaultParams.Location = New System.Drawing.Point(8, 12)
+        Me.chkIncludeDefaultParams.Name = "chkIncludeDefaultParams"
+        Me.chkIncludeDefaultParams.Size = New System.Drawing.Size(236, 17)
+        Me.chkIncludeDefaultParams.TabIndex = 0
+        Me.chkIncludeDefaultParams.Tag = "Include_Default_Parameter_Values_in_R_Script"
+        Me.chkIncludeDefaultParams.Text = "Include Default Parameter Values in R Script"
+        Me.chkIncludeDefaultParams.UseVisualStyleBackColor = True
         '
         'dlgOptions
         '
@@ -321,6 +348,8 @@ Partial Class dlgOptions
         Me.tbpImport.ResumeLayout(False)
         Me.tbpImport.PerformLayout()
         CType(Me.nudNoLines, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpRScriptOptions.ResumeLayout(False)
+        Me.tbpRScriptOptions.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -347,4 +376,6 @@ Partial Class dlgOptions
     Friend WithEvents tbpImport As TabPage
     Friend WithEvents nudNoLines As NumericUpDown
     Friend WithEvents lblShowLines As Label
+    Friend WithEvents tbpRScriptOptions As TabPage
+    Friend WithEvents chkIncludeDefaultParams As CheckBox
 End Class

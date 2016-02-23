@@ -36,7 +36,7 @@ Public Class dlgHistogram
         autoTranslate(Me)
     End Sub
 
-    Private Sub ucrHistogramSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrHistogramSelector.DataFrameChanged
+    Private Sub ucrHistogramSelector_DataFrameChanged() Handles ucrHistogramSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrHistogramSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 

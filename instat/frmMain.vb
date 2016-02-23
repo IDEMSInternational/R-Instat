@@ -26,6 +26,13 @@ Public Class frmMain
     Public clsGrids As New clsGridLink
     Public strStaticPath As String
     Public strHelpFilePath As String
+    Public clsInstatOptions As InstatOptions
+    Public strCurrentDataFrame As String
+    'This is the default data frame to appear in the data frame selector
+    'If "" the current worksheet will be used
+    'TODO This should be an option in the Options dialog
+    '     User can choose a default data frame or set the default as the current worksheet
+    Public strDefaultDataFrame As String = ""
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
@@ -36,8 +43,12 @@ Public Class frmMain
         frmMetaData.MdiParent = Me
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
+
+        LoadInstatOptions()
+
         frmCommand.Show()
         frmEditor.Show()
+
         Me.LayoutMdi(MdiLayout.TileVertical)
 
         'Setting the properties of R Interface
@@ -51,6 +62,11 @@ Public Class frmMain
         ' TODO tstatus shouldn't be set here in this way
         tstatus.Text = frmEditor.grdData.CurrentWorksheet.Name
 
+    End Sub
+
+    Private Sub LoadInstatOptions()
+        clsInstatOptions = New InstatOptions
+        clsInstatOptions.bIncludeRDefaultParameters = False
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSummaryDescribe.Click
@@ -268,9 +284,7 @@ Public Class frmMain
         dlgRowStats.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsScatterplot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsScatterplot.Click
-        dlgScatterPlot.ShowDialog()
-    End Sub
+
 
     Private Sub mnuStatsRegressionSimple_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionSimple.Click
         dlgRegressionSimple.ShowDialog()
@@ -670,7 +684,35 @@ Public Class frmMain
         frmVariables.BringToFront()
     End Sub
 
+    Private Sub mnuManageDataFrameInsert_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameInsert.Click
+        dlgInsertColumn.ShowDialog()
+    End Sub
+
     Private Sub mnuManageDataFrameRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameRename.Click
         dlgName.ShowDialog()
+    End Sub
+
+    Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPie.Click
+        dlgBarAndPieChart.ShowDialog()
+    End Sub
+
+    Private Sub mnuManagePermuteRows_Click(sender As Object, e As EventArgs) Handles mnuManagePermuteRows.Click
+        dlgPermuteRows.ShowDialog()
+    End Sub
+
+    Private Sub mnuGraphicsBarPieChartSummaryData_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPieChartSummaryData.Click
+        dlgSummaryBarOrPieChart.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariateCorrelation.Click
+        dlgCorrelation.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageDataFileDeleteSheets_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileDeleteSheets.Click
+        dlgDeleteSheet.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageDataFrameDelete_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameDelete.Click
+        dlgDeleteColumn.ShowDialog()
     End Sub
 End Class

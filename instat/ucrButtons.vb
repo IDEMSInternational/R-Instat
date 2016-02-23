@@ -1,13 +1,16 @@
 ﻿Imports instat.Translations
 Public Class ucrButtons
+
     Public clsRsyntax As New RSyntax
     Public iHelpTopicID As Integer = -1
+    Public bFirstLoad As Boolean = True
 
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.ParentForm.Hide()
     End Sub
 
     Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
+        SetDefaults()
         RaiseEvent ClickReset(sender, e)
     End Sub
 
@@ -21,8 +24,9 @@ Public Class ucrButtons
         End If
         frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComments)
 
-        'What are the implications of this?
-        clsRsyntax = New RSyntax
+        'This clears the script after it has been run, but leave the function and parameters in the base function
+        'so that it can be run exactly the same when reopened.
+        clsRsyntax.strScript = ""
 
         RaiseEvent ClickOk(sender, e)
 
@@ -36,6 +40,13 @@ Public Class ucrButtons
 
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         translateEach(Controls)
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub SetDefaults()
         chkComment.Checked = True
         'TODO these defaults should be moved to general options dialog
         '     default text should be translatable
@@ -44,7 +55,10 @@ Public Class ucrButtons
     End Sub
 
     Private Sub cmdPaste_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click
+        frmScript.txtScript.Text = frmScript.txtScript.Text & vbCrLf & "# " & txtComment.Text
         frmScript.txtScript.Text = frmScript.txtScript.Text & vbCrLf & clsRsyntax.GetScript()
+        frmScript.Visible = True
+        frmScript.BringToFront()
     End Sub
 
     Private Sub chkComment_CheckedChanged(sender As Object, e As EventArgs) Handles chkComment.CheckedChanged
@@ -68,4 +82,11 @@ Public Class ucrButtons
         'Help.ShowHelp(Me, strHelpFilePath, HelpNavigator.TopicId, mHelpConstants.HELP_Maths.ToString)
     End Sub
 
+    Private Sub chkComment_KeyPress(sender As Object, e As KeyPressEventArgs) Handles chkComment.KeyPress
+        If e.KeyChar = vbCr And chkComment.Checked = True Then
+            chkComment.Checked = False
+        ElseIf e.KeyChar = vbCr And chkComment.Checked = False Then
+            chkComment.Checked = True
+        End If
+    End Sub
 End Class

@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class ucrReceiver
-    Public Selector As ucrSelector
+    Public WithEvents Selector As ucrSelector
     Public strDataType As String = "all"
 
     Public Overridable Sub AddSelected()
@@ -76,12 +76,7 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Public Function MakeValidRString(strTemp As String) As String
-        Dim InvalidStrings() As String = {" ", "-"}
-        For Each strInvalid In InvalidStrings
-            strTemp = Replace(strTemp, strInvalid, "")
-        Next
-        Return strTemp
-    End Function
-
+    Private Sub Selector_ResetAll() Handles Selector.ResetReceivers
+        Clear()
+    End Sub
 End Class
