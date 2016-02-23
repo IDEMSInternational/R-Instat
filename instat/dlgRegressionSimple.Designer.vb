@@ -27,18 +27,15 @@ Partial Class dlgRegressionSimple
         Me.lblDF = New System.Windows.Forms.Label()
         Me.txtResidualMsg = New System.Windows.Forms.TextBox()
         Me.txtdf = New System.Windows.Forms.TextBox()
-        Me.lblConfidence = New System.Windows.Forms.Label()
-        Me.lblExplanatoryVariable = New System.Windows.Forms.Label()
-        Me.lblResponseVariable = New System.Windows.Forms.Label()
-        Me.ucrExplanatory = New instat.ucrReceiverSingle()
-        Me.ucrResponse = New instat.ucrReceiverSingle()
-        Me.UcrSelectorByDataFrameAddRemoveSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
         Me.lblResponse = New System.Windows.Forms.Label()
         Me.lblExplanatory = New System.Windows.Forms.Label()
         Me.lblFittedModel = New System.Windows.Forms.Label()
         Me.txtLastLM = New System.Windows.Forms.TextBox()
         Me.cmdRegressionOptions = New System.Windows.Forms.Button()
+        Me.ucrExplanatory = New instat.ucrReceiverSingle()
+        Me.ucrResponse = New instat.ucrReceiverSingle()
+        Me.UcrSelectorByDataFrameAddRemoveSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -62,46 +59,6 @@ Partial Class dlgRegressionSimple
         '
         resources.ApplyResources(Me.txtdf, "txtdf")
         Me.txtdf.Name = "txtdf"
-        '
-        'lblConfidence
-        '
-        resources.ApplyResources(Me.lblConfidence, "lblConfidence")
-        Me.lblConfidence.Name = "lblConfidence"
-        Me.lblConfidence.Tag = "Confidence_Limits"
-        '
-        'lblExplanatoryVariable
-        '
-        resources.ApplyResources(Me.lblExplanatoryVariable, "lblExplanatoryVariable")
-        Me.lblExplanatoryVariable.Name = "lblExplanatoryVariable"
-        Me.lblExplanatoryVariable.Tag = "Explanatory_Variable"
-        '
-        'lblResponseVariable
-        '
-        resources.ApplyResources(Me.lblResponseVariable, "lblResponseVariable")
-        Me.lblResponseVariable.Name = "lblResponseVariable"
-        Me.lblResponseVariable.Tag = "Response_Variable"
-        '
-        'ucrExplanatory
-        '
-        resources.ApplyResources(Me.ucrExplanatory, "ucrExplanatory")
-        Me.ucrExplanatory.Name = "ucrExplanatory"
-        Me.ucrExplanatory.Selector = Nothing
-        '
-        'ucrResponse
-        '
-        resources.ApplyResources(Me.ucrResponse, "ucrResponse")
-        Me.ucrResponse.Name = "ucrResponse"
-        Me.ucrResponse.Selector = Nothing
-        '
-        'UcrSelectorByDataFrameAddRemoveSimpleReg
-        '
-        resources.ApplyResources(Me.UcrSelectorByDataFrameAddRemoveSimpleReg, "UcrSelectorByDataFrameAddRemoveSimpleReg")
-        Me.UcrSelectorByDataFrameAddRemoveSimpleReg.Name = "UcrSelectorByDataFrameAddRemoveSimpleReg"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
         '
         'lblResponse
         '
@@ -133,6 +90,28 @@ Partial Class dlgRegressionSimple
         Me.cmdRegressionOptions.Tag = "Options"
         Me.cmdRegressionOptions.UseVisualStyleBackColor = True
         '
+        'ucrExplanatory
+        '
+        resources.ApplyResources(Me.ucrExplanatory, "ucrExplanatory")
+        Me.ucrExplanatory.Name = "ucrExplanatory"
+        Me.ucrExplanatory.Selector = Nothing
+        '
+        'ucrResponse
+        '
+        resources.ApplyResources(Me.ucrResponse, "ucrResponse")
+        Me.ucrResponse.Name = "ucrResponse"
+        Me.ucrResponse.Selector = Nothing
+        '
+        'UcrSelectorByDataFrameAddRemoveSimpleReg
+        '
+        resources.ApplyResources(Me.UcrSelectorByDataFrameAddRemoveSimpleReg, "UcrSelectorByDataFrameAddRemoveSimpleReg")
+        Me.UcrSelectorByDataFrameAddRemoveSimpleReg.Name = "UcrSelectorByDataFrameAddRemoveSimpleReg"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
@@ -145,9 +124,6 @@ Partial Class dlgRegressionSimple
         Me.Controls.Add(Me.ucrExplanatory)
         Me.Controls.Add(Me.ucrResponse)
         Me.Controls.Add(Me.UcrSelectorByDataFrameAddRemoveSimpleReg)
-        Me.Controls.Add(Me.lblConfidence)
-        Me.Controls.Add(Me.lblExplanatoryVariable)
-        Me.Controls.Add(Me.lblResponseVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpButton = True
@@ -164,9 +140,6 @@ Partial Class dlgRegressionSimple
     Friend WithEvents lblDF As Label
     Friend WithEvents txtResidualMsg As TextBox
     Friend WithEvents txtdf As TextBox
-    Friend WithEvents lblConfidence As Label
-    Friend WithEvents lblExplanatoryVariable As Label
-    Friend WithEvents lblResponseVariable As Label
     Friend WithEvents UcrSelectorByDataFrameAddRemoveSimpleReg As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrResponse As ucrReceiverSingle
     Friend WithEvents ucrExplanatory As ucrReceiverSingle

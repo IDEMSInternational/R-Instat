@@ -23,12 +23,11 @@ Public Class dlgRegressionSimple
         ucrBase.clsRsyntax.SetFunction("lm")
         ucrBase.clsRsyntax.iCallType = 2
         ucrResponse.Selector = UcrSelectorByDataFrameAddRemoveSimpleReg
-        ucrResponse.SetMeAsReceiver()
+
         ucrExplanatory.Selector = UcrSelectorByDataFrameAddRemoveSimpleReg
-        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=UcrSelectorByDataFrameAddRemoveSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
         autoTranslate(Me)
         'To add correct help ID
-        ucrBase.iHelpTopicID = 44
+        ucrBase.iHelpTopicID = 171
 
         If bFirstLoad Then
             SetDefaults()
@@ -41,8 +40,9 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetDefaults()
-        ucrResponse.Clear()
-        ucrExplanatory.Clear()
+        UcrSelectorByDataFrameAddRemoveSimpleReg.Reset()
+        ucrResponse.SetMeAsReceiver()
+        UcrSelectorByDataFrameAddRemoveSimpleReg.Focus()
         'include last lm
         'Test ok enabled
         TestOKEnabled()
