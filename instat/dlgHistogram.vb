@@ -50,6 +50,7 @@ Public Class dlgHistogram
 
     Private Sub ucrXReceiver_Leave(sender As Object, e As EventArgs) Handles ucrXReceiver.Leave
         clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -71,6 +72,7 @@ Public Class dlgHistogram
         If rdoDensity.Checked = True Then
             clsRgeom_densityFunction.SetRCommand("geom_density")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_densityFunction)
+
         End If
     End Sub
 
@@ -97,6 +99,7 @@ Public Class dlgHistogram
         ucrFactorReceiver.Clear()
         ucrXReceiver.SetMeAsReceiver()
         rdoHistogram.Checked = True
+
         TestOkEnabled()
     End Sub
 
