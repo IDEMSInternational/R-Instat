@@ -18,27 +18,45 @@ Imports instat.Translations
 Public Class ucrDataFrame
     Public iDataFrameLength As Integer
     Public clsCurrDataFrame As New RFunction
+    Public bFirstLoad As Boolean = True
+    Public strCurrDataFrame As String = ""
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames)
+        If bFirstLoad Then
+            frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, True)
+            bFirstLoad = False
+        Else
+            frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, False)
+        End If
         SetDataFrameProperties()
     End Sub
 
-    Public Event DataFrameChanged(sender As Object, e As EventArgs)
+    Public Sub Reset()
+        If frmMain.strDefaultDataFrame <> "" Then
+            cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strDefaultDataFrame)
+        Else
+            cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strCurrentDataFrame)
+        End If
+    End Sub
+
+    Public Event DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String)
 
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged
         SetDataFrameProperties()
-        RaiseEvent DataFrameChanged(sender, e)
+        RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
+        strCurrDataFrame = cboAvailableDataFrames.Text
     End Sub
 
     Public Sub SetDataFrameProperties()
         Dim clsParam As New RParameter
-        iDataFrameLength = frmMain.clsRLink.GetDataFrameLength(cboAvailableDataFrames.Text)
-        clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        clsParam.SetArgumentName("data_name")
-        clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsCurrDataFrame.AddParameter(clsParam)
-        clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.SelectedItem & "_temp")
+        If cboAvailableDataFrames.Text <> "" Then
+            iDataFrameLength = frmMain.clsRLink.GetDataFrameLength(cboAvailableDataFrames.Text)
+            clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+            clsParam.SetArgumentName("data_name")
+            clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
+            clsCurrDataFrame.AddParameter(clsParam)
+            clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.Text & "_temp")
+        End If
     End Sub
 
 End Class

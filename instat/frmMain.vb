@@ -26,6 +26,14 @@ Public Class frmMain
     Public clsGrids As New clsGridLink
     Public strStaticPath As String
     Public strHelpFilePath As String
+    Public clsInstatOptions As InstatOptions
+    Public strCurrentDataFrame As String
+    Public dlgLastDialog As Form
+    'This is the default data frame to appear in the data frame selector
+    'If "" the current worksheet will be used
+    'TODO This should be an option in the Options dialog
+    '     User can choose a default data frame or set the default as the current worksheet
+    Public strDefaultDataFrame As String = ""
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
@@ -36,8 +44,12 @@ Public Class frmMain
         frmMetaData.MdiParent = Me
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
+
+        LoadInstatOptions()
+
         frmCommand.Show()
         frmEditor.Show()
+
         Me.LayoutMdi(MdiLayout.TileVertical)
 
         'Setting the properties of R Interface
@@ -51,6 +63,11 @@ Public Class frmMain
         ' TODO tstatus shouldn't be set here in this way
         tstatus.Text = frmEditor.grdData.CurrentWorksheet.Name
 
+    End Sub
+
+    Private Sub LoadInstatOptions()
+        clsInstatOptions = New InstatOptions
+        clsInstatOptions.bIncludeRDefaultParameters = False
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSummaryDescribe.Click
@@ -698,5 +715,11 @@ Public Class frmMain
 
     Private Sub mnuManageDataFrameDelete_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameDelete.Click
         dlgDeleteColumn.ShowDialog()
+    End Sub
+
+    Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles EditLastDialogueToolStrip.Click
+        If Not IsNothing(dlgLastDialog) Then
+            dlgLastDialog.ShowDialog()
+        End If
     End Sub
 End Class

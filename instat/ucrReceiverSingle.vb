@@ -16,34 +16,28 @@
 
 Public Class ucrReceiverSingle
     Dim strDataFrameName As String = ""
-    Dim bSelected As Boolean = False
 
     Public Overrides Sub AddSelected()
-        Dim objItem As Object
-        Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As Object
+        Dim objItem As ListViewItem
+        Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
 
         Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
         For Each objItem In tempObjects
-            bSelected = True
-            strDataFrameName = objItem.Group.ToString()
+            strDataFrameName = objItem.Group.Name
             txtReceiverSingle.Text = objItem.text
         Next
+
     End Sub
 
     Public Overrides Sub RemoveSelected()
 
         If txtReceiverSingle.Text <> "" Then
-            bSelected = False
-            txtReceiverSingle.Text = Nothing
+            txtReceiverSingle.Text = ""
         End If
     End Sub
 
     Public Overrides Sub Clear()
-
-        If txtReceiverSingle.Text <> "" Then
-            bSelected = False
-            txtReceiverSingle.Text = Nothing
-        End If
+        txtReceiverSingle.Text = ""
     End Sub
 
     Public Overrides Function GetVariables() As RFunction
@@ -51,12 +45,12 @@ Public Class ucrReceiverSingle
         'call GetVariableNames
         Dim clsGetVariablesFunc As New RFunction
         Dim clsParam As New RParameter
-        If bSelected Then
+        If txtReceiverSingle.Text <> "" Then
             clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
             clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
             clsGetVariablesFunc.AddParameter("col_name", GetVariableNames())
             'TODO make this an option set in Options menu
-            clsGetVariablesFunc.SetAssignTo(MakeValidRString(txtReceiverSingle.Text))
+            clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
             Return clsGetVariablesFunc
         Else
             Return clsGetVariablesFunc
@@ -94,5 +88,10 @@ Public Class ucrReceiverSingle
         txtReceiverSingle.BackColor = Color.White
     End Sub
 
+    Private Sub txtReceiverSingle_KeyDown(sender As Object, e As KeyEventArgs) Handles txtReceiverSingle.KeyDown
+        If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
+            RemoveSelected()
+        End If
+    End Sub
 End Class
 

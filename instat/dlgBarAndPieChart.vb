@@ -20,6 +20,7 @@ Public Class dlgBarAndPieChart
     Private clsRgeom_piechart As New RFunction
     Private clsRgeom_piechartCoord As New RFunction
     Private clsRaesFunction As New RFunction
+    Private bFirstLoad As Boolean = True
     Private Sub dlgBarAndPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -29,16 +30,48 @@ Public Class dlgBarAndPieChart
         ucrFactorReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrFactorReceiver.SetMeAsReceiver()
+        ucrFactorReceiver.SetDataType("factor")
+        ucrSecondReceiver.SetDataType("factor")
+
         rdoBarChart.Checked = True
         ucrBase.clsRsyntax.iCallType = 0
         autoTranslate(Me)
+
+        sdgBarChart.SetBarChartFunction(clsRgeom_barchart)
+        'set pie chart function when it exists
+        'sdgPieChart.SetPieChartFunction(clsRgeom_piechart)
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+    End Sub
+
+    Private Sub SetDefaults()
+        'Set main dialog defaults...
+
+        'set subdialog defaults
+        sdgBarChart.SetDefaults()
+    End Sub
+
+    Private Sub ReopenDialog()
+    End Sub
+
+    Public Sub TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
 
-    Private Sub ucrBarChartSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrBarChartSelector.DataFrameChanged
+    Private Sub ucrBarChartSelector_DataFrameChanged() Handles ucrBarChartSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrBarChartSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
     Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
@@ -61,7 +94,8 @@ Public Class dlgBarAndPieChart
         If rdoBarChart.Checked = True Then
             clsRgeom_barchart.SetRCommand("geom_bar")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_barchart)
-
+            cmdBarChartOptions.Visible = True
+            cmdPieChartOptions.Visible = False
         ElseIf rdoPieChart.Checked = True Then
 
             Dim clsTempOp As New ROperator
@@ -78,8 +112,16 @@ Public Class dlgBarAndPieChart
             clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
             ucrBase.clsRsyntax.SetOperatorParameter(True, clsOp:=clsTempOp)
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsTempRFunc)
+            cmdBarChartOptions.Visible = False
+            cmdPieChartOptions.Visible = True
         Else
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=Nothing)
+            cmdBarChartOptions.Visible = False
+            cmdPieChartOptions.Visible = False
         End If
+    End Sub
+
+    Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
+        sdgBarChart.ShowDialog()
     End Sub
 End Class
