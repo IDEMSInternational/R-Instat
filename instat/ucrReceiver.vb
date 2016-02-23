@@ -76,17 +76,7 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Public Function MakeValidRString(strTemp As String) As String
-        Dim InvalidStrings() As String = {" ", "-"}
-        For Each strInvalid In InvalidStrings
-            strTemp = Replace(strTemp, strInvalid, "")
-        Next
-        Return strTemp
-    End Function
-
-    Private Sub Selector_ListChanged() Handles Selector.DataFrameChanged
-        If (TypeOf Selector Is ucrSelectorByDataFrame) Then
-            Clear()
-        End If
+    Private Sub Selector_ResetAll() Handles Selector.ResetReceivers
+        Clear()
     End Sub
 End Class
