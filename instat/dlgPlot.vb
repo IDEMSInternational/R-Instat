@@ -48,14 +48,39 @@ Public Class dlgPlot
         clsRaesFunction.AddParameter("fill", ucrFactorOptionalReceiver.GetVariableNames(False))
     End Sub
 
+    Private Sub chkPoints_CheckedChanged(sender As Object, e As EventArgs) Handles chkPoints.CheckedChanged
+        If chkPoints.Checked = True Then
+            clsRgeom_plotFunction.SetRCommand("geom_point")
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_plotFunction)
+        Else
+            ucrBase.clsRsyntax.RemoveOperatorParameter("geom_point")
+        End If
+    End Sub
+
+    Private Sub chkLines_CheckedChanged(sender As Object, e As EventArgs) Handles chkLines.CheckedChanged
+        If chkLines.Checked = True Then
+            clsRgeom_plotFunction.SetRCommand("geom_line")
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_plotFunction)
+        Else
+            ucrBase.clsRsyntax.RemoveOperatorParameter("geom_line")
+        End If
+    End Sub
+
     Private Sub grpPointsAndLines_CheckedChanged(sender As Object, e As EventArgs) Handles chkLines.CheckedChanged, chkPoints.CheckedChanged
-        If chkPoints.Checked = True And chkLines.Checked = False Then
+
+        If chkPoints.Checked = True AndAlso chkLines.Checked = True Then
+            Dim clsTempOp As New ROperator
+            Dim clsTempRFunc As New RFunction
+            clsTempOp.SetOperation("+")
+
             clsRgeom_plotFunction.SetRCommand("geom_point")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_plotFunction)
 
-        ElseIf chkLines.Checked = True And chkPoints.Checked = False Then
-            clsRgeom_plotFunction.SetRCommand("geom_line")
-            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_plotFunction)
+            clsTempOp.SetParameter(True, clsRFunc:=clsRggplotFunction)
+            clsTempOp.SetParameter(False, clsRFunc:=clsRgeom_plotFunction)
+            clsTempRFunc.SetRCommand("geom_line")
+            ucrBase.clsRsyntax.SetOperatorParameter(True, clsOp:=clsTempOp)
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsTempRFunc)
         End If
     End Sub
 End Class
