@@ -1088,6 +1088,12 @@
     <Compile Include="sdgPlots.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgSimpleRegOptions.Designer.vb">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSimpleRegOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Translations.vb" />
     <Compile Include="ucrButtons.designer.vb">
       <DependentUpon>ucrButtons.vb</DependentUpon>
@@ -2539,6 +2545,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPlots.sw-KE.resx">
       <DependentUpon>sdgPlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.fr-FR.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
