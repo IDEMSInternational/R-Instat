@@ -83,4 +83,14 @@ Public Class ucrReceiver
     Private Sub Selector_ResetAll() Handles Selector.ResetReceivers
         Clear()
     End Sub
+
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+        If keyData = (Keys.Shift + Keys.Tab) Then
+            Selector.Focus()
+            Return True
+        Else
+            Return MyBase.ProcessCmdKey(msg, keyData)
+        End If
+    End Function
+
 End Class
