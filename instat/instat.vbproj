@@ -1107,6 +1107,12 @@
     <Compile Include="ucrDataFrame.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrDataFrameLength.Designer.vb">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDataFrameLength.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrDataSelection.designer.vb">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
     </Compile>
@@ -2566,6 +2572,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.sw-KE.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrameLength.fr-FR.resx">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrameLength.resx">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrameLength.sw-KE.resx">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.fr-FR.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
