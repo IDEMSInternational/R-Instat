@@ -131,4 +131,13 @@ Public Class dlgHistogram
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
+
+    Private Sub ucrXReceiver_Leave(sender As Object, e As EventArgs) Handles ucrXReceiver.Leave
+        If Not (ucrXReceiver.txtReceiverSingle.Text = "") Then
+            clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
 End Class
