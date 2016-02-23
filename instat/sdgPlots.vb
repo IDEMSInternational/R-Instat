@@ -49,7 +49,6 @@ Public Class sdgPlots
     Public Sub SetFacetParameter()
 
         Dim clsTempOp As New ROperator
-        Dim clsTempParam As New RParameter
         Dim strFactor1 As String
         Dim strFactor2 As String
 
@@ -61,15 +60,11 @@ Public Class sdgPlots
         End If
 
         If rdoHorizontal.Checked Then
-            clsTempParam.SetArgumentValue(strFactor1)
-            clsTempOp.SetParameter(False, clsTempParam)
-            clsTempParam.SetArgumentValue(strFactor2)
-            clsTempOp.SetParameter(True, clsTempParam)
+            clsTempOp.SetParameter(False, strFactor1)
+            clsTempOp.SetParameter(True, strFactor2)
         Else
-            clsTempParam.SetArgumentValue(strFactor1)
-            clsTempOp.SetParameter(True, clsTempParam)
-            clsTempParam.SetArgumentValue(strFactor2)
-            clsTempOp.SetParameter(False, clsTempParam)
+            clsTempOp.SetParameter(True, strFactor1)
+            clsTempOp.SetParameter(False, strFactor2)
         End If
         clsRfacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
 
