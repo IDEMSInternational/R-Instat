@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgRank
     'Define a boolean to check if the dialog is loading for the first time
     Public bFirstLoad As Boolean = True
+
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction("rank")
@@ -41,8 +42,8 @@ Public Class dlgRank
         TestOKEnabled()
 
     End Sub
-    'This runs on load and after anything is changed on the dialog.
 
+    'This runs on load and after anything is changed on the dialog.
     Private Sub TestOKEnabled()
         If ucrReceiverRank.GetVariableNames() <> "" Then
             ucrBase.OKEnabled(True)
@@ -50,31 +51,25 @@ Public Class dlgRank
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
     ' Sub that runs only the first time the dialog loads
     Private Sub SetDefaults()
         rdoKeptAsMissing.Checked = True
         rdoAverage.Checked = True
         ucrReceiverRank.Clear()
     End Sub
+
     Private Sub ReopenDialog()
 
         SetOrderValues()
         setMissingValue()
     End Sub
 
-
-    Private Sub ucrReceiverRank_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRank.Leave
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables())
-        TestOKEnabled()
-
-    End Sub
-    Private Sub ucrReceiverRank_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRank.SelectionChanged
-        TestOKEnabled()
-    End Sub
     Private Sub grpTies_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAverage.CheckedChanged, rdoMinimum.CheckedChanged, rdoMaximum.CheckedChanged, rdoFirst.CheckedChanged, rdoRandom.CheckedChanged
         SetOrderValues()
 
     End Sub
+
     Private Sub SetOrderValues()
 
         If rdoAverage.Checked Then
@@ -85,30 +80,34 @@ Public Class dlgRank
             End If
         ElseIf rdoMinimum.Checked Then
             ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "min" & Chr(34))
-            ElseIf rdoMaximum.Checked Then
-                ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "max" & Chr(34))
-            ElseIf rdoFirst.Checked Then
-                ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "first" & Chr(34))
-            ElseIf rdoRandom.Checked Then
-                ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "random" & Chr(34))
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("ties.method")
-            End If
+        ElseIf rdoMaximum.Checked Then
+            ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "max" & Chr(34))
+        ElseIf rdoFirst.Checked Then
+            ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "first" & Chr(34))
+        ElseIf rdoRandom.Checked Then
+            ucrBase.clsRsyntax.AddParameter("ties.method", Chr(34) & "random" & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("ties.method")
+        End If
 
     End Sub
+
     'When the reset button is clicked, set the defaults again
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
     End Sub
+
     'Use this event to see when something has changed in a receiver
     Private Sub ucrReceiverRank_SelectionChanged() Handles ucrReceiverRank.SelectionChanged
-
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables())
         TestOKEnabled()
     End Sub
+
     Private Sub rdoKeptAsMissing_CheckedChanged(sender As Object, e As EventArgs) Handles rdoKeptAsMissing.CheckedChanged, rdoFirstMissingValues.CheckedChanged, rdoLast.CheckedChanged
         setMissingValue()
     End Sub
+
     Private Sub setMissingValue()
         If rdoKeptAsMissing.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
@@ -123,8 +122,6 @@ Public Class dlgRank
         Else
             ucrBase.clsRsyntax.RemoveParameter("na.last")
         End If
-
     End Sub
-
 
 End Class
