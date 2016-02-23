@@ -277,10 +277,22 @@
     <Compile Include="dlgSummaryBarOrPieChart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgBarChart.Designer.vb">
+      <DependentUpon>sdgBarChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgBarChart.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgCorrPlot.Designer.vb">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCorrPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgHistogramOptions.Designer.vb">
+      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgHistogramOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgOptions.Designer.vb">
@@ -1076,6 +1088,12 @@
     <Compile Include="sdgPlots.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgSimpleRegOptions.Designer.vb">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSimpleRegOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Translations.vb" />
     <Compile Include="ucrButtons.designer.vb">
       <DependentUpon>ucrButtons.vb</DependentUpon>
@@ -1385,6 +1403,15 @@
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
+      <DependentUpon>sdgBarChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgBarChart.resx">
+      <DependentUpon>sdgBarChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgBarChart.sw-KE.resx">
+      <DependentUpon>sdgBarChart.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.fr-FR.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -1393,6 +1420,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.sw-KE.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgHistogramOptions.fr-FR.resx">
+      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgHistogramOptions.resx">
+      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgHistogramOptions.sw-KE.resx">
+      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOptions.fr-FR.resx">
       <DependentUpon>sdgOptions.vb</DependentUpon>
@@ -2509,6 +2545,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPlots.sw-KE.resx">
       <DependentUpon>sdgPlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.fr-FR.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
