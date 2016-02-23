@@ -3,7 +3,8 @@
 
 instat_obj <- setRefClass("instat_obj", 
                        fields = list(data_objects = "list", 
-                                     metadata = "list", models = "list")
+                                     metadata = "list", models = "list", 
+                                     data_objects_changed = "logical")
 )
 
 # INITIALIZE method
@@ -165,6 +166,7 @@ instat_obj$methods(get_data_names = function() {
 
 instat_obj$methods(get_data_changed = function(data_name) {
   if(missing(data_name)) {
+    if(data_objects_changed) return (TRUE)
     for(curr_obj in data_objects) {
       if(curr_obj$data_changed) return(TRUE)
     }
@@ -178,6 +180,7 @@ instat_obj$methods(get_data_changed = function(data_name) {
 
 instat_obj$methods(get_variables_metadata_changed = function(data_obj) { 
   if(missing(data_obj)) {
+    if(data_objects_changed) return (TRUE)
     for(curr_obj in data_objects) {
       if(curr_obj$variables_metadata_changed) return(TRUE)
     }
@@ -191,6 +194,7 @@ instat_obj$methods(get_variables_metadata_changed = function(data_obj) {
 
 instat_obj$methods(get_metadata_changed = function(data_obj) { 
   if(missing(data_obj)) {
+    if(data_objects_changed) return (TRUE)
     for(curr_obj in data_objects) {
       if(curr_obj$metadata_changed) return(TRUE)
     }
@@ -373,6 +377,7 @@ instat_obj$methods(delete_dataframe = function(data_name) {
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
   data_objects[[data_name]]<<-NULL
+  data_objects_changed = TRUE
 } 
 )
 

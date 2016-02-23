@@ -28,6 +28,12 @@ Public Class frmMain
     Public strHelpFilePath As String
     Public clsInstatOptions As InstatOptions
     Public strCurrentDataFrame As String
+    Public dlgLastDialog As Form
+    'This is the default data frame to appear in the data frame selector
+    'If "" the current worksheet will be used
+    'TODO This should be an option in the Options dialog
+    '     User can choose a default data frame or set the default as the current worksheet
+    Public strDefaultDataFrame As String = ""
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
@@ -709,5 +715,11 @@ Public Class frmMain
 
     Private Sub mnuManageDataFrameDelete_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameDelete.Click
         dlgDeleteColumn.ShowDialog()
+    End Sub
+
+    Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles EditLastDialogueToolStrip.Click
+        If Not IsNothing(dlgLastDialog) Then
+            dlgLastDialog.ShowDialog()
+        End If
     End Sub
 End Class

@@ -31,9 +31,11 @@ Public Class ucrDataFrame
         SetDataFrameProperties()
     End Sub
 
-    Public Sub SetToGivenDataFrame(strDataFrame As String)
-        If cboAvailableDataFrames.Items.Contains(strDataFrame) Then
-            cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(strDataFrame)
+    Public Sub Reset()
+        If frmMain.strDefaultDataFrame <> "" Then
+            cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strDefaultDataFrame)
+        Else
+            cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strCurrentDataFrame)
         End If
     End Sub
 

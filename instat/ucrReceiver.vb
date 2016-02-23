@@ -76,17 +76,17 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Public Function MakeValidRString(strTemp As String) As String
-        Dim InvalidStrings() As String = {" ", "-"}
-        For Each strInvalid In InvalidStrings
-            strTemp = Replace(strTemp, strInvalid, "")
-        Next
-        Return strTemp
+    Private Sub Selector_ResetAll() Handles Selector.ResetReceivers
+        Clear()
+    End Sub
+
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+        If keyData = (Keys.Shift + Keys.Tab) Then
+            Selector.Focus()
+            Return True
+        Else
+            Return MyBase.ProcessCmdKey(msg, keyData)
+        End If
     End Function
 
-    Private Sub Selector_ListChanged() Handles Selector.DataFrameChanged
-        If (TypeOf Selector Is ucrSelectorByDataFrame) Then
-            Clear()
-        End If
-    End Sub
 End Class
