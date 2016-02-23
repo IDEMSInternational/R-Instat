@@ -19,8 +19,6 @@ Public Class dlgRank
     'Define a boolean to check if the dialog is loading for the first time
     Public bFirstLoad As Boolean = True
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Set the things that will always be constant for the dialog
-        ' e.g. function name, selectors and receivers
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction("rank")
         ucrBase.iHelpTopicID = 25
@@ -30,9 +28,7 @@ Public Class dlgRank
         ucrNewColumnNameSelector.SetPrefix("Rank")
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
 
-        'If this is the first load, set the defaults and then change bFirstLoad to False
-        ' On future loads the dialog will keep previous values used
-        ' and not reset to defaults.
+
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
@@ -41,14 +37,12 @@ Public Class dlgRank
         End If
 
         'Checks if Ok can be enabled.
-        'Define this method for each dialog 
-        'depending on what parameters are neccessary for the function to run.
+
         TestOKEnabled()
 
     End Sub
-    'Sub that tests if the OK button can be enabled.
     'This runs on load and after anything is changed on the dialog.
-    'No other place needs to set Ok enabled, always done through this sub
+
     Private Sub TestOKEnabled()
         If ucrReceiverRank.GetVariableNames() <> "" Then
             ucrBase.OKEnabled(True)
@@ -60,7 +54,6 @@ Public Class dlgRank
     Private Sub SetDefaults()
         rdoKeptAsMissing.Checked = True
         rdoAverage.Checked = True
-        ucrSelectorForRank.ucrAvailableDataFrames.SetToGivenDataFrame(frmMain.strCurrentDataFrame)
         ucrReceiverRank.Clear()
     End Sub
     Private Sub ReopenDialog()
@@ -110,7 +103,7 @@ Public Class dlgRank
     End Sub
     'Use this event to see when something has changed in a receiver
     Private Sub ucrReceiverRank_SelectionChanged() Handles ucrReceiverRank.SelectionChanged
-        'Test ok enabled
+
         TestOKEnabled()
     End Sub
     Private Sub rdoKeptAsMissing_CheckedChanged(sender As Object, e As EventArgs) Handles rdoKeptAsMissing.CheckedChanged, rdoFirstMissingValues.CheckedChanged, rdoLast.CheckedChanged
