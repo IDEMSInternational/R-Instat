@@ -35,6 +35,9 @@ Public Class frmMain
     '     User can choose a default data frame or set the default as the current worksheet
     Public strDefaultDataFrame As String = ""
 
+    ' declare a variable to contain the most recent opened items
+    Private strListMRU As New List(Of String)
+
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
         frmCommand.MdiParent = Me
@@ -722,4 +725,102 @@ Public Class frmMain
             dlgLastDialog.ShowDialog()
         End If
     End Sub
+
+    Private ReadOnly Property MRUPath() As String
+        Get
+            ' returns a path in the same folder as the EXE with the same name, but with a '.mru' 
+            ' extension...
+            Return Path.ChangeExtension(Application.ExecutablePath, ".mru")
+        End Get
+    End Property
+
+    Protected Overrides Sub OnLoad(ByVal e As EventArgs)
+        ' enable events...
+        MyBase.OnLoad(e)
+        ' load recently opened files
+        If (File.Exists(MRUPath)) Then
+            ' read file into array...
+            Dim sPaths() As String = File.ReadAllLines(MRUPath)
+            ' work through each item...
+            For Each sPath As String In sPaths
+                ' only add items that are not empty...
+                If Not String.IsNullOrEmpty(sPath) Then
+                    ' only add files that still exist...
+                    If File.Exists(sPath) Then
+                        ' add to the list of recently opened files
+                        strListMRU.Add(sPath)
+                    End If
+                End If
+            Next
+        End If
+        ' display the recently opened files if there are any items to display...
+        If strListMRU.Count > 0 Then UpdateMRU()
+    End Sub
+
+    Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
+        'enable events...
+        MyBase.OnFormClosing(e)
+        ' save MRU - delete existing file...
+        If File.Exists(MRUPath) Then File.Delete(MRUPath)
+        ' write each item to the file...
+        For Each sPath As String In strListMRU
+            File.AppendAllText(MRUPath, sPath & vbCrLf)
+        Next
+    End Sub
+
+    Public Sub AddToMRU(ByVal Path As String)
+        ' remove the item from the collection if exists so that we can 
+        ' re-add it to the beginning...
+        If strListMRU.Contains(Path) Then strListMRU.Remove(Path)
+        ' add to MRU list..
+        strListMRU.Add(Path)
+        ' make sure there are only ever 5 items...
+        'To add this to the general options on the number of recently files to show
+        While strListMRU.Count > 5
+            strListMRU.RemoveAt(0)
+        End While
+        ' update UI..
+        UpdateMRU()
+    End Sub
+
+    Private Sub UpdateMRU()
+        ' clear MRU menu items...
+        Dim clsItems As New List(Of ToolStripItem)
+        ' create a temporary collection containing every MRU menu item 
+        ' (identified by the tag text when added to the list)...
+        For Each clsMenu As ToolStripItem In mnuFile.DropDownItems
+            If Not clsMenu.Tag Is Nothing Then
+                If (clsMenu.Tag.ToString().StartsWith("MRU:")) Then
+                    clsItems.Add(clsMenu)
+                End If
+            End If
+        Next
+        ' iterate through list and remove each from menu...
+        For Each clsMenu As ToolStripItem In clsItems
+            mnuFile.DropDownItems.Remove(clsMenu)
+        Next
+        ' display items (in reverse order so the most recent is on top)...
+        For iCounter As Integer = strListMRU.Count - 1 To 0 Step -1
+            Dim sPath As String = strListMRU(iCounter)
+            ' create new ToolStripItem, displaying the name of the file...
+            Dim clsItem As New ToolStripMenuItem(Path.GetFileName(sPath))
+            ' set the tag - identifies the ToolStripItem as an MRU item and 
+            ' contains the full path so it can be opened later...
+            clsItem.Tag = "MRU:" & sPath
+            ' hook into the click event handler so we can open the file later...
+            AddHandler clsItem.Click, AddressOf mnuFileMRU_Click
+            ' insert into DropDownItems list...
+            mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 2, clsItem)
+        Next
+        ' show separator...
+        sepStart.Visible = True
+    End Sub
+
+    Private Sub mnuFileMRU_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ' open the file on click
+        'ToDo
+        'dlgImportDataset.SetFilePath(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4))
+        'dlgImportDataset.ShowDialog()
+    End Sub
+
 End Class

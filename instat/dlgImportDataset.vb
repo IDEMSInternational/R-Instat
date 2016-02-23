@@ -241,6 +241,8 @@ Public Class dlgImportDataset
                 End If
                 SetDataName(strFileName)
                 SetFilePath(strFilePath)
+                ' add the item to the MRU (Most Recently Used) list...
+                frmMain.AddToMRU(strFilePath)
         End Select
         ' TODO Remove LoadData sub in clsRLink once all opening is done through dialogs
     End Sub
