@@ -56,7 +56,7 @@ Public Class dlgRank
         ucrReceiverRank.Selector = ucrSelectorForRank
         rdoKeptAsMissing.Checked = True
         rdoAverage.Checked = True
-        ' ucrSelectorForRank.ResetText()
+        ucrSelectorForRank.Reset()
         TestOKEnabled()
     End Sub
 
