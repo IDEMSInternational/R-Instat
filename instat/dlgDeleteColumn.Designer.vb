@@ -41,7 +41,7 @@ Partial Class dlgDeleteColumn
         Me.ucrSelectColumnsToDelete.Location = New System.Drawing.Point(0, 3)
         Me.ucrSelectColumnsToDelete.Name = "ucrSelectColumnsToDelete"
         Me.ucrSelectColumnsToDelete.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectColumnsToDelete.TabIndex = 4
+        Me.ucrSelectColumnsToDelete.TabIndex = 0
         '
         'ucrReceiveColumnsToDelete
         '
@@ -49,7 +49,7 @@ Partial Class dlgDeleteColumn
         Me.ucrReceiveColumnsToDelete.Name = "ucrReceiveColumnsToDelete"
         Me.ucrReceiveColumnsToDelete.Selector = Nothing
         Me.ucrReceiveColumnsToDelete.Size = New System.Drawing.Size(121, 105)
-        Me.ucrReceiveColumnsToDelete.TabIndex = 3
+        Me.ucrReceiveColumnsToDelete.TabIndex = 1
         '
         'dlgDeleteColumn
         '

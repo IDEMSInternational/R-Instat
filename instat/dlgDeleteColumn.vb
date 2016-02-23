@@ -34,16 +34,6 @@ Public Class dlgDeleteColumn
         ucrReceiveColumnsToDelete.Clear()
     End Sub
 
-    Private Sub ucrDataFrameAddRemove_Leave(sender As Object, e As EventArgs) Handles ucrSelectColumnsToDelete.Leave
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectColumnsToDelete.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverColumnsToDelete_Leave(sender As Object, e As EventArgs) Handles ucrReceiveColumnsToDelete.Leave
-        ucrBase.clsRsyntax.AddParameter("cols", ucrReceiveColumnsToDelete.GetVariableNames)
-        TestOKEnabled()
-    End Sub
-
     Private Sub TestOKEnabled()
         If ucrReceiveColumnsToDelete.GetVariableNames <> "" Then
             ucrBase.OKEnabled(True)
@@ -58,6 +48,12 @@ Public Class dlgDeleteColumn
     End Sub
 
     Private Sub ucrReceiveColumnsToDelete_SelectionChanged() Handles ucrReceiveColumnsToDelete.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("cols", ucrReceiveColumnsToDelete.GetVariableNames)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectColumnsToDelete_DataFrameChanged() Handles ucrSelectColumnsToDelete.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectColumnsToDelete.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         TestOKEnabled()
     End Sub
 End Class
