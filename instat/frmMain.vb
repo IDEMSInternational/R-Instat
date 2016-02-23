@@ -27,6 +27,12 @@ Public Class frmMain
     Public strStaticPath As String
     Public strHelpFilePath As String
     Public clsInstatOptions As InstatOptions
+    Public strCurrentDataFrame As String
+    'This is the default data frame to appear in the data frame selector
+    'If "" the current worksheet will be used
+    'TODO This should be an option in the Options dialog
+    '     User can choose a default data frame or set the default as the current worksheet
+    Public strDefaultDataFrame As String = ""
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me

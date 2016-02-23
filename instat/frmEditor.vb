@@ -225,6 +225,7 @@ Public Class frmEditor
 
     Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged, Me.Load, grdData.WorksheetInserted
         grdCurrSheet = grdData.CurrentWorksheet
+        frmMain.strCurrentDataFrame = grdCurrSheet.Name
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
