@@ -372,25 +372,25 @@
   <data name="&gt;&gt;ucrResponse.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="UcrSelectorByDataFrameAddRemoveSimpleReg.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrSelectorSimpleReg.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 3</value>
   </data>
-  <data name="UcrSelectorByDataFrameAddRemoveSimpleReg.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrSelectorSimpleReg.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 179</value>
   </data>
-  <data name="UcrSelectorByDataFrameAddRemoveSimpleReg.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrSelectorSimpleReg.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;UcrSelectorByDataFrameAddRemoveSimpleReg.Name" xml:space="preserve">
-    <value>UcrSelectorByDataFrameAddRemoveSimpleReg</value>
+  <data name="&gt;&gt;ucrSelectorSimpleReg.Name" xml:space="preserve">
+    <value>ucrSelectorSimpleReg</value>
   </data>
-  <data name="&gt;&gt;UcrSelectorByDataFrameAddRemoveSimpleReg.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrSelectorSimpleReg.Type" xml:space="preserve">
     <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrSelectorByDataFrameAddRemoveSimpleReg.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrSelectorSimpleReg.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;UcrSelectorByDataFrameAddRemoveSimpleReg.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrSelectorSimpleReg.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
@@ -422,9 +422,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>424, 271</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

@@ -34,7 +34,7 @@ Partial Class dlgRegressionSimple
         Me.cmdRegressionOptions = New System.Windows.Forms.Button()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
         Me.ucrResponse = New instat.ucrReceiverSingle()
-        Me.UcrSelectorByDataFrameAddRemoveSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
@@ -102,10 +102,10 @@ Partial Class dlgRegressionSimple
         Me.ucrResponse.Name = "ucrResponse"
         Me.ucrResponse.Selector = Nothing
         '
-        'UcrSelectorByDataFrameAddRemoveSimpleReg
+        'ucrSelectorSimpleReg
         '
-        resources.ApplyResources(Me.UcrSelectorByDataFrameAddRemoveSimpleReg, "UcrSelectorByDataFrameAddRemoveSimpleReg")
-        Me.UcrSelectorByDataFrameAddRemoveSimpleReg.Name = "UcrSelectorByDataFrameAddRemoveSimpleReg"
+        resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
+        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
         '
         'ucrBase
         '
@@ -123,7 +123,7 @@ Partial Class dlgRegressionSimple
         Me.Controls.Add(Me.lblResponse)
         Me.Controls.Add(Me.ucrExplanatory)
         Me.Controls.Add(Me.ucrResponse)
-        Me.Controls.Add(Me.UcrSelectorByDataFrameAddRemoveSimpleReg)
+        Me.Controls.Add(Me.ucrSelectorSimpleReg)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpButton = True
@@ -140,7 +140,7 @@ Partial Class dlgRegressionSimple
     Friend WithEvents lblDF As Label
     Friend WithEvents txtResidualMsg As TextBox
     Friend WithEvents txtdf As TextBox
-    Friend WithEvents UcrSelectorByDataFrameAddRemoveSimpleReg As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorSimpleReg As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrResponse As ucrReceiverSingle
     Friend WithEvents ucrExplanatory As ucrReceiverSingle
 
