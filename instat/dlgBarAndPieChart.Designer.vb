@@ -69,12 +69,12 @@ Partial Class dlgBarAndPieChart
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(313, 221)
+        Me.cmdOptions.Location = New System.Drawing.Point(302, 222)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(87, 23)
         Me.cmdOptions.TabIndex = 8
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.Tag = "Plot_Options..."
+        Me.cmdOptions.Text = "Plot Options..."
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'rdoBarChart
