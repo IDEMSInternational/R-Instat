@@ -83,7 +83,7 @@ Public Class dlgHistogram
 
     Private Sub TestOkEnabled()
         'tests when ok can be enabled
-        If ucrFactorReceiver.GetVariableNames() <> "" And ucrXReceiver.GetVariableNames() <> "" Then
+        If ucrXReceiver.GetVariableNames() <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
