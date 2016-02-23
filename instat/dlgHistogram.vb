@@ -51,7 +51,12 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub ucrXReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrXReceiver.SelectionChanged
-        clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
+        If Not (ucrXReceiver.txtReceiverSingle.Text = "") Then
+            clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
+            TestOkEnabled()
+        Else
+            TestOkEnabled()
+        End If
         TestOkEnabled()
     End Sub
 
@@ -130,14 +135,5 @@ Public Class dlgHistogram
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub ucrXReceiver_Leave(sender As Object, e As EventArgs) Handles ucrXReceiver.Leave
-        If Not (ucrXReceiver.txtReceiverSingle.Text = "") Then
-            clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
     End Sub
 End Class
