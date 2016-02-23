@@ -96,6 +96,7 @@ Public Class dlgHistogram
         ucrXReceiver.Clear()
         ucrFactorReceiver.Clear()
         ucrXReceiver.SetMeAsReceiver()
+        rdoHistogram.Checked = True
         TestOkEnabled()
     End Sub
 
