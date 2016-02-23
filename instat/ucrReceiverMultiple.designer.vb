@@ -32,6 +32,7 @@ Partial Class ucrReceiverMultiple
         Me.lstSelectedVariables.Activation = System.Windows.Forms.ItemActivation.TwoClick
         Me.lstSelectedVariables.ContextMenuStrip = Me.MenuStripDelete
         Me.lstSelectedVariables.GridLines = True
+        Me.lstSelectedVariables.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lstSelectedVariables.Location = New System.Drawing.Point(3, 5)
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
         Me.lstSelectedVariables.Size = New System.Drawing.Size(113, 95)
@@ -43,19 +44,19 @@ Partial Class ucrReceiverMultiple
         '
         Me.MenuStripDelete.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteToolStripMenuItem, Me.ClearToolStripMenuItem})
         Me.MenuStripDelete.Name = "ContextMenuStrip1"
-        Me.MenuStripDelete.Size = New System.Drawing.Size(153, 70)
+        Me.MenuStripDelete.Size = New System.Drawing.Size(108, 48)
         '
         'DeleteToolStripMenuItem
         '
         Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
-        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.DeleteToolStripMenuItem.Tag = "delete"
         Me.DeleteToolStripMenuItem.Text = "Delete"
         '
         'ClearToolStripMenuItem
         '
         Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.ClearToolStripMenuItem.Text = "Clear"
         '
         'ucrReceiverMultiple

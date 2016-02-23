@@ -52,10 +52,13 @@ Public Class dlgSort
     Private Sub SetDefaults()
         rdoLast.Checked = True
         rdoAscending.Checked = True
-        ucrSelectForSort.ucrAvailableDataFrames.SetToGivenDataFrame(frmMain.strCurrentDataFrame)
-        ucrReceiverSort.Clear()
+        ucrSelectForSort.Reset()
     End Sub
 
+    'Currently we are not clearing the RSyntax after running script (only clearing strScript)
+    'so I don't think this is neccessary. Should we be clearing the RSyntax as well?
+    'Not clearing seems to be a good way to keep the parameters from the last call
+    'but will there be unwanted consequences of this?
     Private Sub ReopenDialog()
         SetOrderValue()
         SetMissingValue()

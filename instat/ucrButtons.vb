@@ -30,7 +30,9 @@ Public Class ucrButtons
 
         RaiseEvent ClickOk(sender, e)
 
+        frmMain.dlgLastDialog = Me.ParentForm
         Me.ParentForm.Hide()
+
     End Sub
 
     Public Sub OKEnabled(bEnabled As Boolean)
@@ -86,8 +88,6 @@ Public Class ucrButtons
         If e.KeyChar = vbCr And chkComment.Checked = True Then
             chkComment.Checked = False
         ElseIf e.KeyChar = vbCr And chkComment.Checked = False Then
-            chkComment.Checked = True
-        Else
             chkComment.Checked = True
         End If
     End Sub
