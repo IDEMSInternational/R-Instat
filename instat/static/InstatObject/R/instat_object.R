@@ -34,7 +34,7 @@ instat_obj$methods(initialize = function(data_tables = list(), instat_obj_metada
                       imported_from=imported_from, messages=messages, convert=convert, create=create)
   }
   
-  .self$data_objects_changed=FALSE
+  .self$data_objects_changed <<- FALSE
   
 }
 )
@@ -268,8 +268,8 @@ instat_obj$methods(add_model = function(model, model_name = paste("model",length
 
 instat_obj$methods(get_model = function(model_name) {
   if(missing(model_name)) stop("model_name is required")
-  if(!is.character(name)) stop("name must be a character")
-  if(!name %in% names(models)) stop(name, "not found in models")
+  if(!is.character(model_name)) stop("name must be a character")
+  if(!model_name %in% names(models)) stop(model_name, "not found in models")
   models[[model_name]]
 }
 )
@@ -379,7 +379,7 @@ instat_obj$methods(delete_dataframe = function(data_name) {
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
   data_objects[[data_name]]<<-NULL
-  data_objects_changed = TRUE
+  data_objects_changed <<- TRUE
 } 
 )
 
