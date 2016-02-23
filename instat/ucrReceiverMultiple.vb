@@ -67,6 +67,7 @@ Public Class ucrReceiverMultiple
         Next
         Return strHeaders
     End Function
+
     Public Overrides Sub RemoveSelected()
         Dim objItem As ListViewItem
         Dim tempObjects(lstSelectedVariables.SelectedItems.Count - 1) As Object
@@ -86,6 +87,16 @@ Public Class ucrReceiverMultiple
         RaiseEvent SelectionChanged()
 
     End Sub
+
+    Public Overrides Function IsEmpty() As Boolean
+
+        If lstSelectedVariables.SelectedItems.Count > 0 Then
+            Return False
+        Else
+            Return True
+        End If
+
+    End Function
 
     Public Overrides Function GetVariables() As RFunction
         'TODO sort this out

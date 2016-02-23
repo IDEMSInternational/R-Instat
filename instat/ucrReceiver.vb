@@ -31,6 +31,10 @@ Public Class ucrReceiver
 
     End Sub
 
+    Public Overridable Function IsEmpty() As Boolean
+        Return True
+    End Function
+
     Public Overridable Sub SetColor()
 
     End Sub
