@@ -103,7 +103,7 @@ Public Class sdgPlots
         SetFacetParameter()
     End Sub
 
-    Private Sub ucrReceiveFactor2_SelectionChanged(sender As Object, e As EventArgs) Handles ucr2ndFactorReceiver.SelectionChanged
+    Private Sub ucr2ndFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr2ndFactorReceiver.SelectionChanged
         SetFacetFunction()
         SetFacetParameter()
     End Sub
@@ -147,7 +147,7 @@ Public Class sdgPlots
     End Sub
 
     Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
-        Includefacets()
+        IncludeFacets()
 
         If chkIncludeFacets.Checked Then
             clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRfacetFunction)
@@ -156,7 +156,7 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub Includefacets()
+    Private Sub IncludeFacets()
         rdoHorizontal.Visible = True
         rdoVertical.Visible = True
         chkWrapOptions.Visible = True
