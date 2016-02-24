@@ -43,6 +43,7 @@ Public Class dlgRegressionSimple
         ucrSelectorSimpleReg.Reset()
         ucrResponse.SetMeAsReceiver()
         ucrSelectorSimpleReg.Focus()
+        chkModelName.Checked = False
         'include last lm
         'Test ok enabled
         TestOKEnabled()
@@ -67,7 +68,7 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdRegressionOptions.Click
-        ' sdgSimpleRegressionOptions.ShowDialog()
+        sdgSimpleRegOptions.ShowDialog()
     End Sub
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
@@ -82,6 +83,38 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    'Private Sub ucrModelName_Leave(sender As Object, e As EventArgs) Handles ucrModelName.Leave
+    '    ucrBase.clsRsyntax.SetAssignTo("temp_model", strTempModel:=ucrModelName.txtValidation.Text)
+    'End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        Dim clsRaovFunction As New RFunction
+
+        clsRaovFunction.SetRCommand("aov")
+        clsRaovFunction.AddParameter("", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+        frmMain.clsRLink.RunScript(clsRaovFunction.ToScript(), 2)
+    End Sub
+
+    Private Sub ucrModelName_Load(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
+    End Sub
+
+    Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkModelName.CheckedChanged
+        If chkModelName.Checked Then
+            ucrBase.clsRsyntax.SetAssignTo("temp_model", strTempModel:=ucrModelName.txtValidation.Text)
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("", strTempModel:=ucrModelName.txtValidation.Text)
+        End If
     End Sub
 
     'TO DO reopen dialogue given the options
