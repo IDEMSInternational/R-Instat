@@ -571,7 +571,7 @@ Public Class frmMain
         dlgSubset.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataName_Click(sender As Object, e As EventArgs) Handles mnuManageDataRename.Click
+    Private Sub mnuManageDataRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataRename.Click
         dlgName.ShowDialog()
     End Sub
 
@@ -680,19 +680,14 @@ Public Class frmMain
         frmMetaData.BringToFront()
     End Sub
 
-    Private Sub mnuManageDataFrameViewColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageSheetColumnMetadata.Click
+    Private Sub mnuManageSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageSheetColumnMetadata.Click
         frmVariables.Visible = True
         frmVariables.BringToFront()
     End Sub
 
-    Private Sub mnuManageDataFrameInsert_Click(sender As Object, e As EventArgs) Handles mnuManageSheetInsertColumnsRows.Click
+    Private Sub mnuManageSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuManageSheetInsertColumnsRows.Click
         dlgInsertColumn.ShowDialog()
     End Sub
-
-    Private Sub mnuManageDataFrameRename_Click(sender As Object, e As EventArgs)
-        dlgName.ShowDialog()
-    End Sub
-
     Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPie.Click
         dlgBarAndPieChart.ShowDialog()
     End Sub
@@ -713,7 +708,7 @@ Public Class frmMain
         dlgDeleteSheet.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFrameDelete_Click(sender As Object, e As EventArgs) Handles mnuManageSheetDeleteColumnsRows.Click
+    Private Sub mnuManageSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuManageSheetDeleteColumnsRows.Click
         dlgDeleteColumn.ShowDialog()
     End Sub
 
