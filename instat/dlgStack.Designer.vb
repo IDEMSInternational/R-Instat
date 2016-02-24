@@ -31,7 +31,7 @@ Partial Class dlgStack
         Me.lblNewDataFrameName = New System.Windows.Forms.Label()
         Me.ucrNewDataFrameName = New instat.ucrVariableName()
         Me.ucrIDVariablesReceiver = New instat.ucrReceiverMultiple()
-        Me.ucrDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorStack = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverColumnsToBeStack = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
@@ -117,12 +117,12 @@ Partial Class dlgStack
         Me.ucrIDVariablesReceiver.Size = New System.Drawing.Size(121, 128)
         Me.ucrIDVariablesReceiver.TabIndex = 4
         '
-        'ucrDataFrameAddRemove
+        'ucrSelectorStack
         '
-        Me.ucrDataFrameAddRemove.Location = New System.Drawing.Point(15, 12)
-        Me.ucrDataFrameAddRemove.Name = "ucrDataFrameAddRemove"
-        Me.ucrDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
-        Me.ucrDataFrameAddRemove.TabIndex = 0
+        Me.ucrSelectorStack.Location = New System.Drawing.Point(15, 12)
+        Me.ucrSelectorStack.Name = "ucrSelectorStack"
+        Me.ucrSelectorStack.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorStack.TabIndex = 0
         '
         'ucrBase
         '
@@ -148,7 +148,7 @@ Partial Class dlgStack
         Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.ucrIDVariablesReceiver)
         Me.Controls.Add(Me.chkIDVariables)
-        Me.Controls.Add(Me.ucrDataFrameAddRemove)
+        Me.Controls.Add(Me.ucrSelectorStack)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblFactorInto)
         Me.Controls.Add(Me.txtFactorInto)
@@ -172,7 +172,7 @@ Partial Class dlgStack
     Friend WithEvents lblFactorInto As Label
     Friend WithEvents txtFactorInto As TextBox
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorStack As ucrSelectorByDataFrameAddRemove
     Friend WithEvents chkIDVariables As CheckBox
     Friend WithEvents ucrIDVariablesReceiver As ucrReceiverMultiple
     Friend WithEvents ucrNewDataFrameName As ucrVariableName
