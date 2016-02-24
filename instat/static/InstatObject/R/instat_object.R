@@ -369,8 +369,8 @@ instat_obj$methods(length_of_data = function(data_name) {
 }
 )
 
-instat_obj$methods(get_next_default_dataframe_name = function(prefix) {
-  next_default_item(prefix = prefix, existing_names = names(data_objects))
+instat_obj$methods(get_next_default_dataframe_name = function(prefix, include_index = TRUE, start_index = 1) {
+  next_default_item(prefix = prefix, existing_names = names(data_objects), include_index = include_index, start_index = start_index)
 } 
 )
 
