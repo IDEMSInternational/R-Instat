@@ -19,6 +19,8 @@ Public Class dlgPlot
     Private clsRgeom_plotFunction As New RFunction
     Private clsRaesFunction As New RFunction
 
+    Public bFirstLoad As Boolean = True
+
     Private Sub dlgPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -30,21 +32,40 @@ Public Class dlgPlot
         ucrReceiverY.Selector = ucrPlotSelector
         ucrReceiverX.Selector = ucrPlotSelector
         ucrFactorOptionalReceiver.Selector = ucrPlotSelector
+
+        If bFirstLoad Then
+            bFirstLoad = False
+            'SetDefaults
+            SetDefaults()
+        Else
+            'reopendialog
+        End If
+    End Sub
+
+    Private Sub SetDefaults()
+        chkPoints.Checked = False
+        chkLines.Checked = False
+        ucrPlotSelector.Focus()
         ucrReceiverY.SetMeAsReceiver()
     End Sub
+    Private Sub TeskOkEnabled()
+        'i will implement this soon when i update with master
 
-    Private Sub ucrReceiverY_Leave(sender As Object, e As EventArgs) Handles ucrReceiverY.Leave
+    End Sub
+    Private Sub ucrReceiverY_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverY.SelectionChanged
         clsRaesFunction.AddParameter("y", ucrReceiverY.GetVariableNames(False))
+        TeskOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverX_Leave(sender As Object, e As EventArgs) Handles ucrReceiverX.Leave
+    Private Sub ucrReceiverX_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverX.SelectionChanged
         clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False))
+        TeskOkEnabled()
     End Sub
 
     Private Sub ucrPlotSelector_DataFrameChanged() Handles ucrPlotSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrPlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
-    Private Sub ucrFactorOptionalReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.Leave
+    Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
         clsRaesFunction.AddParameter("fill", ucrFactorOptionalReceiver.GetVariableNames(False))
     End Sub
 
@@ -67,20 +88,30 @@ Public Class dlgPlot
     End Sub
 
     Private Sub grpPointsAndLines_CheckedChanged(sender As Object, e As EventArgs) Handles chkLines.CheckedChanged, chkPoints.CheckedChanged
+        Dim clsTempOp As New ROperator
+        Dim clsTempRFunc As New RFunction
+        clsTempOp.SetOperation("+")
 
         If chkPoints.Checked = True AndAlso chkLines.Checked = True Then
-            Dim clsTempOp As New ROperator
-            Dim clsTempRFunc As New RFunction
-            clsTempOp.SetOperation("+")
+            ucrBase.clsRsyntax.RemoveOperatorParameter("geom_line")
+            ucrBase.clsRsyntax.RemoveOperatorParameter("geom_point")
+            clsTempOp.SetParameter(True, clsRFunc:=clsRggplotFunction)
 
             clsRgeom_plotFunction.SetRCommand("geom_point")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_plotFunction)
 
-            clsTempOp.SetParameter(True, clsRFunc:=clsRggplotFunction)
+
             clsTempOp.SetParameter(False, clsRFunc:=clsRgeom_plotFunction)
             clsTempRFunc.SetRCommand("geom_line")
             ucrBase.clsRsyntax.SetOperatorParameter(True, clsOp:=clsTempOp)
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsTempRFunc)
         End If
+    End Sub
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.ShowDialog()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class
