@@ -29,10 +29,10 @@ Partial Class dlgRandomSample
         Me.ucrDataFrameSelector = New instat.ucrDataFrame()
         Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
         Me.lblSampleSize = New System.Windows.Forms.Label()
-        Me.txtSampleSize = New System.Windows.Forms.TextBox()
         Me.lblNumberofSamples = New System.Windows.Forms.Label()
         Me.txtNumberofSamples = New System.Windows.Forms.TextBox()
         Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.ucrSampleSize = New instat.ucrDataFrameLength()
         Me.SuspendLayout()
         '
         'lblSeed
@@ -91,13 +91,6 @@ Partial Class dlgRandomSample
         Me.lblSampleSize.Tag = "Sample_Size"
         Me.lblSampleSize.Text = "Sample Size"
         '
-        'txtSampleSize
-        '
-        Me.txtSampleSize.Location = New System.Drawing.Point(174, 19)
-        Me.txtSampleSize.Name = "txtSampleSize"
-        Me.txtSampleSize.Size = New System.Drawing.Size(100, 20)
-        Me.txtSampleSize.TabIndex = 11
-        '
         'lblNumberofSamples
         '
         Me.lblNumberofSamples.AutoSize = True
@@ -125,15 +118,23 @@ Partial Class dlgRandomSample
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
+        'ucrSampleSize
+        '
+        Me.ucrSampleSize.clsDataFrameSelector = Nothing
+        Me.ucrSampleSize.Location = New System.Drawing.Point(174, 19)
+        Me.ucrSampleSize.Name = "ucrSampleSize"
+        Me.ucrSampleSize.Size = New System.Drawing.Size(53, 23)
+        Me.ucrSampleSize.TabIndex = 13
+        '
         'dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(418, 342)
+        Me.Controls.Add(Me.ucrSampleSize)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.txtNumberofSamples)
         Me.Controls.Add(Me.lblNumberofSamples)
-        Me.Controls.Add(Me.txtSampleSize)
         Me.Controls.Add(Me.lblSampleSize)
         Me.Controls.Add(Me.ucrNewColumnNameSelector)
         Me.Controls.Add(Me.ucrDataFrameSelector)
@@ -159,8 +160,8 @@ Partial Class dlgRandomSample
     Friend WithEvents ucrDataFrameSelector As ucrDataFrame
     Friend WithEvents ucrNewColumnNameSelector As ucrNewColumnName
     Friend WithEvents lblSampleSize As Label
-    Friend WithEvents txtSampleSize As TextBox
     Friend WithEvents lblNumberofSamples As Label
     Friend WithEvents txtNumberofSamples As TextBox
     Friend WithEvents cmdOptions As Button
+    Friend WithEvents ucrSampleSize As ucrDataFrameLength
 End Class
