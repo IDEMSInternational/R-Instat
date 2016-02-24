@@ -505,6 +505,41 @@ data_obj$methods(sort_dataframe = function(col_names = c(), decreasing = TRUE, n
 }
 )
 
+data_obj$methods(convert_column_to_type = function(col_names = c(), to_type = "factor") {
+  for(col_name in col_names){
+    if(!(col_name %in% names(data))){
+      stop(col_name, " is not a column in ", get_metadata(data_name_label))
+    }
+  }
+  if(length(to_type)>1){
+    warning("Column(s) will be converted to type ", to_type[1])
+    to_type = to_type[1]
+  }
+  
+  if(!(to_type %in% c("integer", "factor", "numeric","character"))){
+    stop(to_type, " is not a valid type to convert to")
+  }
+  
+  if(to_type=="factor"){
+    data[,col_names] <<- as.factor(data[,col_names])
+  }
+  
+  if(to_type=="integer"){
+    data[,col_names] <<- as.integer(data[,col_names])
+  }
+  
+  else if(to_type=="numeric"){
+    data[,col_names] <<- as.numeric(data[,col_names])
+  }
+  
+  if(to_type=="character"){
+    data[,col_names] <<- as.character(data[,col_names])
+  }
+  .self$set_data_changed(TRUE)
+  .self$set_variables_metadata_changed(TRUE)
+}
+)
+
 #Labels for strings which will be added to logs
 Set_property="Set"
 Added_col="Added column"

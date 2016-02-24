@@ -413,3 +413,11 @@ instat_obj$methods(rename_dataframe = function(data_name, new_value = "") {
   data_objects[[new_value]]$append_to_metadata(data_name_label, new_value)
 } 
 )
+
+instat_obj$methods(convert_column_to_type = function(data_name, col_names = c(), to_type ="factor") {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$convert_column_to_type(col_names = col_names, to_type = to_type)
+} 
+)
