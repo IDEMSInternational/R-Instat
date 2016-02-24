@@ -90,7 +90,7 @@ Public Class ucrReceiverMultiple
 
     Public Overrides Function IsEmpty() As Boolean
 
-        If lstSelectedVariables.SelectedItems.Count > 0 Then
+        If lstSelectedVariables.Items.Count > 0 Then
             Return False
         Else
             Return True

@@ -16,8 +16,8 @@
 Imports instat.Translations
 Public Class dlgUnstack
     Private Sub unstackDefaultSettings()
-        ucrIDColumnReceiver.Selector = ucrSelectorByDataFrameAddRemove
-        ucrFactorToUnstackReceiver.Selector = ucrSelectorByDataFrameAddRemove
+        ucrIDColumnReceiver.Selector = ucrSelectorForUnstack
+        ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
         autoTranslate(Me)
         ucrIDColumnReceiver.Visible = False
@@ -51,28 +51,28 @@ Public Class dlgUnstack
         ucrBase.clsRsyntax.AddParameter("", ucrIDColumnReceiver.GetVariableNames())
     End Sub
 
-    Private Sub ucrColumnToUnstackReceiver_Enter(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.Enter
-        ucrColumnToUnstackReceiver.SetMeAsReceiver()
-    End Sub
-    Private Sub ucrIDColumnReceiver_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrIDColumnReceiver.KeyPress
-        If e.KeyChar = vbCr Then
-            ucrIDColumnReceiver.RemoveSelected()
-        End If
-    End Sub
+    'Private Sub ucrColumnToUnstackReceiver_Enter(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.Enter
+    '    ucrColumnToUnstackReceiver.SetMeAsReceiver()
+    'End Sub
+    'Private Sub ucrIDColumnReceiver_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrIDColumnReceiver.KeyPress
+    '    If e.KeyChar = vbCr Then
+    '        ucrIDColumnReceiver.RemoveSelected()
+    '    End If
+    'End Sub
 
-    Private Sub ucrFactorToUnstackReceiver_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrFactorToUnstackReceiver.KeyPress
-        If e.KeyChar = vbCr Then
-            ucrFactorToUnstackReceiver.RemoveSelected()
-        End If
-    End Sub
-    Private Sub ucrColumnToUnstackReceiver_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrColumnToUnstackReceiver.KeyPress
-        If e.KeyChar = vbCr Then
-            ucrColumnToUnstackReceiver.RemoveSelected()
-        End If
-    End Sub
-    Private Sub ucrSelectorByDataFrameAddRemove_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrSelectorByDataFrameAddRemove.KeyPress
-        If e.KeyChar = vbCr Then
-            ucrSelectorByDataFrameAddRemove.Add()
-        End If
-    End Sub
+    'Private Sub ucrFactorToUnstackReceiver_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrFactorToUnstackReceiver.KeyPress
+    '    If e.KeyChar = vbCr Then
+    '        ucrFactorToUnstackReceiver.RemoveSelected()
+    '    End If
+    'End Sub
+    'Private Sub ucrColumnToUnstackReceiver_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrColumnToUnstackReceiver.KeyPress
+    '    If e.KeyChar = vbCr Then
+    '        ucrColumnToUnstackReceiver.RemoveSelected()
+    '    End If
+    'End Sub
+    'Private Sub ucrSelectorByDataFrameAddRemove_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrSelectorByDataFrameAddRemove.KeyPress
+    '    If e.KeyChar = vbCr Then
+    '        ucrSelectorByDataFrameAddRemove.Add()
+    '    End If
+    'End Sub
 End Class
