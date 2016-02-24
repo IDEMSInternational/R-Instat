@@ -16,8 +16,8 @@
 Imports instat.Translations
 Public Class dlgUnstack
     Private Sub unstackDefaultSettings()
-        ucrIDColumnReceiver.Selector = ucrSelectorByDataFrameAddRemove
-        ucrFactorToUnstackReceiver.Selector = ucrSelectorByDataFrameAddRemove
+        ucrIDColumnReceiver.Selector = ucrSelectorForUnstack
+        ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
         autoTranslate(Me)
         ucrIDColumnReceiver.Visible = False
@@ -70,9 +70,9 @@ Public Class dlgUnstack
             ucrColumnToUnstackReceiver.RemoveSelected()
         End If
     End Sub
-    Private Sub ucrSelectorByDataFrameAddRemove_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrSelectorByDataFrameAddRemove.KeyPress
+    Private Sub ucrSelectorForUnstack_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrSelectorForUnstack.KeyPress
         If e.KeyChar = vbCr Then
-            ucrSelectorByDataFrameAddRemove.Add()
+            ucrSelectorForUnstack.Add()
         End If
     End Sub
 End Class
