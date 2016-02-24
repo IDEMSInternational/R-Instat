@@ -1088,6 +1088,12 @@
     <Compile Include="sdgPlots.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgSimpleRegOptions.Designer.vb">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSimpleRegOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Translations.vb" />
     <Compile Include="ucrButtons.designer.vb">
       <DependentUpon>ucrButtons.vb</DependentUpon>
@@ -1105,6 +1111,12 @@
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrDataFrame.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDataFrameLength.Designer.vb">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDataFrameLength.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrDataSelection.designer.vb">
@@ -2540,6 +2552,15 @@
     <EmbeddedResource Include="sdgPlots.sw-KE.resx">
       <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.fr-FR.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
@@ -2566,6 +2587,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.sw-KE.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrameLength.fr-FR.resx">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrameLength.resx">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrameLength.sw-KE.resx">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.fr-FR.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
