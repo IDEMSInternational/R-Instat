@@ -49,6 +49,15 @@ Public Class RSyntax
         End If
     End Sub
 
+    Public Sub RemoveAssignTo()
+        If bUseBaseOperator Then
+            clsBaseOperator.RemoveAssignTo()
+        End If
+        If bUseBaseFunction Then
+            clsBaseFunction.RemoveAssignTo()
+        End If
+    End Sub
+
     Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing)
         clsBaseFunction.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter)
     End Sub
