@@ -22,7 +22,6 @@ Public Class sdgPlots
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucr1stFactorReceiver.Selector = ucrAddRemove
         ucr1stFactorReceiver.SetDataType("factor")
-        ucr1stFactorReceiver.SetMeAsReceiver()
         ucr2ndFactorReceiver.Selector = ucrAddRemove
         ucr2ndFactorReceiver.SetDataType("factor")
         autoTranslate(Me)
@@ -34,6 +33,7 @@ Public Class sdgPlots
     End Sub
 
     Private Sub Setdefaults()
+        ucr1stFactorReceiver.SetMeAsReceiver()
         chkWrapOptions.Checked = False
         lblNoOfColumns.Visible = False
         txtNoOfColumns.Visible = False
