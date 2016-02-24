@@ -86,7 +86,7 @@ Public Class sdgPlots
     End Sub
 
     Public Sub SetFacetFunction()
-        If ucr2ndFactorReceiver.GetVariableNames = "" Then
+        If ucr2ndFactorReceiver.IsEmpty() = True Then
             If chkMargin.Checked Then
                 clsRfacetFunction.SetRCommand("facet_grid")
             Else
