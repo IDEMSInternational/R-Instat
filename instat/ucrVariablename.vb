@@ -30,33 +30,40 @@ Public Class ucrVariableName
         bUserTyped = True
     End Sub
 
-    Private Sub txtValidation_Leave(sender As Object, e As EventArgs) Handles txtValidation.Leave
-        bAcceptableString = True
-        If txtValidation.Text = "" Then
-            Exit Sub
+    Public Function IsValidRString(strText As String) As Boolean
+        If ValidateRString(strText) = 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    'Returns integer as code for validation
+    ' 0 : string is valid
+    ' 1 : string is a reserved word
+    ' 2 : string starts with invalid character
+    ' 3 : string starts with "." followed by a number/nothing
+    ' 4 : string contains a space
+    ' 5 : string contains other invalid character
+    Public Function ValidateRString(strText As String) As Integer
+        If strText = "" Then
+            Return 0
         End If
 
-        If strReservedWords.Contains(txtValidation.Text) Then
-            MsgBox(Chr(34) & txtValidation.Text & Chr(34) & " is a reserved word in R and cannot be used.", vbOKOnly)
-            txtValidation.Focus()
+        If strReservedWords.Contains(strText) Then
+            Return 1
         End If
-        firstChar = txtValidation.Text(0)
+        firstChar = strText(0)
         If Not Char.IsLetter(firstChar) Then
             If firstChar <> "." Then
-                MsgBox("This name cannot start with " & firstChar, vbOKOnly)
-                txtValidation.Focus()
-                Exit Sub
+                Return 2
             Else
                 If txtValidation.Text.Length > 1 Then
                     If Char.IsNumber(txtValidation.Text(1)) Then
-                        MsgBox("This name cannot start with a dot followed by a number", vbOKOnly)
-                        txtValidation.Focus()
-                        Exit Sub
+                        Return 3
                     End If
                 Else
-                    MsgBox("This name cannot equal .", vbOKOnly)
-                    txtValidation.Focus()
-                    Exit Sub
+                    Return 3
                 End If
             End If
         End If
@@ -65,14 +72,40 @@ Public Class ucrVariableName
             bAcceptableString = Char.IsLetterOrDigit(CurrChar) Or CurrChar = "." Or CurrChar = "_"
             If Not bAcceptableString Then
                 If CurrChar = " " Then
-                    MsgBox("This name cannot contain a space", vbOKOnly)
-                    txtValidation.Focus()
+                    Return 4
                 Else
-                    MsgBox("This name cannot contain " & CurrChar, vbOKOnly)
-                    txtValidation.Focus()
+                    Return 5
                 End If
-                Exit For
             End If
         Next
+        Return 0
+    End Function
+
+    Public Sub ValidateTextBox()
+        Dim iValidationCode As Integer
+        iValidationCode = ValidateRString(txtValidation.Text)
+
+        Select Case iValidationCode
+            Case 1
+                MsgBox(Chr(34) & txtValidation.Text & Chr(34) & " is a reserved word in R and cannot be used.", vbOKOnly)
+                txtValidation.Focus()
+            Case 2
+                MsgBox("This name cannot start with " & firstChar, vbOKOnly)
+                txtValidation.Focus()
+            Case 3
+                MsgBox("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
+                txtValidation.Focus()
+            Case 4
+                MsgBox("This name cannot contain a space", vbOKOnly)
+                txtValidation.Focus()
+            Case 5
+                MsgBox("This name cannot contain " & CurrChar, vbOKOnly)
+                txtValidation.Focus()
+        End Select
+
+    End Sub
+
+    Private Sub txtValidation_Leave(sender As Object, e As EventArgs) Handles txtValidation.Leave
+        ValidateTextBox()
     End Sub
 End Class

@@ -30,7 +30,6 @@ Public Class dlgDeleteColumn
     End Sub
 
     Private Sub setDefaults()
-        ucrSelectColumnsToDelete.ucrAvailableDataFrames.SetToGivenDataFrame(frmMain.strCurrentDataFrame)
         ucrReceiveColumnsToDelete.Clear()
     End Sub
 
