@@ -461,16 +461,21 @@ data_obj$methods(length_of_data = function() {
 }
 )
 
-next_default_item = function(prefix, existing_names) {
+next_default_item = function(prefix, existing_names, include_index = TRUE, start_index = 1) {
   if(!is.character(prefix)) stop("prefix must be of type character")
+  
+  if(!include_index) {
+    if(!prefix %in% existing_names) return(prefix)
+  }
+  
   item_name_exists = TRUE
-  i = 1
+  start_index = 1
   while(item_name_exists) {
-    out = paste0(prefix,i)
+    out = paste0(prefix,start_index)
     if(!out %in% existing_names) {
       item_name_exists = FALSE
     }
-    i = i + 1
+    start_index = start_index + 1
   }
   return(out)
 } 
