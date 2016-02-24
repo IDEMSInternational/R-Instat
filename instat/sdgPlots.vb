@@ -98,12 +98,12 @@ Public Class sdgPlots
 
     End Sub
 
-    Private Sub ucrReceiveFactor1_Leave(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.Leave
+    Private Sub ucr1stFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.SelectionChanged
         SetFacetFunction()
         SetFacetParameter()
     End Sub
 
-    Private Sub ucrReceiveFactor2_Leave(sender As Object, e As EventArgs) Handles ucr2ndFactorReceiver.Leave
+    Private Sub ucrReceiveFactor2_SelectionChanged(sender As Object, e As EventArgs) Handles ucr2ndFactorReceiver.SelectionChanged
         SetFacetFunction()
         SetFacetParameter()
     End Sub
