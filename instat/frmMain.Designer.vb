@@ -226,7 +226,7 @@ Partial Class frmMain
         Me.mnuManageDataRegularSequence = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageDataRandomSamples = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageDataView = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataName = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageDataRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageDataConvertTo = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageFactorconvertToFactor = New System.Windows.Forms.ToolStripMenuItem()
@@ -245,15 +245,14 @@ Partial Class frmMain
         Me.mnuManageManipulateRowSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManagePermuteRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageManipulatePolynomials = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataFrame = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataFrameViewColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataFrameRestrict = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataFrameReorder = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataFrameInsert = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataFrameDelete = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataFrameDisplay = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataFrameProtectLockUnlock = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataFrameHideShow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageSheetColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageSheetRestrict = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageSheetReorder = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageSheetInsertColumnsRows = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageSheetDeleteColumnsRows = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageSheetProtect = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageSheetHideShowColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageReshape = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageRechapeColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageReshapeStack = New System.Windows.Forms.ToolStripMenuItem()
@@ -307,7 +306,6 @@ Partial Class frmMain
         Me.mnuClimateMethodsAdditionalSeasonalSummaryRain = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsAdditionalWaterBalance = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsCreateClimateObject = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageDataFrameRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1734,7 +1732,7 @@ Partial Class frmMain
         '
         'mnuManage
         '
-        Me.mnuManage.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCalculations, Me.mnuManageData, Me.mnuManageFactor, Me.mnuManageManipulate, Me.mnuManageDataFrame, Me.mnuManageReshape, Me.mnuManageDataFile})
+        Me.mnuManage.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCalculations, Me.mnuManageData, Me.mnuManageFactor, Me.mnuManageManipulate, Me.mnuManageSheet, Me.mnuManageReshape, Me.mnuManageDataFile})
         Me.mnuManage.Name = "mnuManage"
         Me.mnuManage.Size = New System.Drawing.Size(62, 20)
         Me.mnuManage.Tag = "Manage"
@@ -1749,7 +1747,7 @@ Partial Class frmMain
         '
         'mnuManageData
         '
-        Me.mnuManageData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataRegularSequence, Me.mnuManageDataRandomSamples, Me.mnuManageDataView, Me.mnuManageDataName, Me.mnuManageDataConvertTo})
+        Me.mnuManageData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataRegularSequence, Me.mnuManageDataRandomSamples, Me.mnuManageDataView, Me.mnuManageDataRename, Me.mnuManageDataConvertTo})
         Me.mnuManageData.Name = "mnuManageData"
         Me.mnuManageData.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageData.Tag = "Data"
@@ -1776,12 +1774,12 @@ Partial Class frmMain
         Me.mnuManageDataView.Tag = "View"
         Me.mnuManageDataView.Text = "View Data..."
         '
-        'mnuManageDataName
+        'mnuManageDataRename
         '
-        Me.mnuManageDataName.Name = "mnuManageDataName"
-        Me.mnuManageDataName.Size = New System.Drawing.Size(177, 22)
-        Me.mnuManageDataName.Tag = "Name"
-        Me.mnuManageDataName.Text = "Name..."
+        Me.mnuManageDataRename.Name = "mnuManageDataRename"
+        Me.mnuManageDataRename.Size = New System.Drawing.Size(177, 22)
+        Me.mnuManageDataRename.Tag = "Rename..."
+        Me.mnuManageDataRename.Text = "Rename..."
         '
         'mnuManageDataConvertTo
         '
@@ -1911,69 +1909,62 @@ Partial Class frmMain
         Me.mnuManageManipulatePolynomials.Tag = "Polynomials"
         Me.mnuManageManipulatePolynomials.Text = "Polynomials..."
         '
-        'mnuManageDataFrame
+        'mnuManageSheet
         '
-        Me.mnuManageDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataFrameViewColumnMetadata, Me.mnuManageDataFrameRestrict, Me.mnuManageDataFrameReorder, Me.mnuManageDataFrameInsert, Me.mnuManageDataFrameDelete, Me.mnuManageDataFrameDisplay, Me.mnuManageDataFrameProtectLockUnlock, Me.mnuManageDataFrameHideShow, Me.mnuManageDataFrameRename})
-        Me.mnuManageDataFrame.Name = "mnuManageDataFrame"
-        Me.mnuManageDataFrame.Size = New System.Drawing.Size(152, 22)
-        Me.mnuManageDataFrame.Tag = "Data_Frame"
-        Me.mnuManageDataFrame.Text = "Data Frame"
+        Me.mnuManageSheet.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageSheetColumnMetadata, Me.mnuManageSheetRestrict, Me.mnuManageSheetReorder, Me.mnuManageSheetInsertColumnsRows, Me.mnuManageSheetDeleteColumnsRows, Me.mnuManageSheetProtect, Me.mnuManageSheetHideShowColumns})
+        Me.mnuManageSheet.Name = "mnuManageSheet"
+        Me.mnuManageSheet.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageSheet.Tag = "Sheet"
+        Me.mnuManageSheet.Text = "Sheet"
         '
-        'mnuManageDataFrameViewColumnMetadata
+        'mnuManageSheetColumnMetadata
         '
-        Me.mnuManageDataFrameViewColumnMetadata.Name = "mnuManageDataFrameViewColumnMetadata"
-        Me.mnuManageDataFrameViewColumnMetadata.Size = New System.Drawing.Size(207, 22)
-        Me.mnuManageDataFrameViewColumnMetadata.Tag = "View_Column_Metadata"
-        Me.mnuManageDataFrameViewColumnMetadata.Text = "View Column Metadata..."
+        Me.mnuManageSheetColumnMetadata.Name = "mnuManageSheetColumnMetadata"
+        Me.mnuManageSheetColumnMetadata.Size = New System.Drawing.Size(200, 22)
+        Me.mnuManageSheetColumnMetadata.Tag = "Column_Metadata"
+        Me.mnuManageSheetColumnMetadata.Text = "Column Metadata..."
         '
-        'mnuManageDataFrameRestrict
+        'mnuManageSheetRestrict
         '
-        Me.mnuManageDataFrameRestrict.Name = "mnuManageDataFrameRestrict"
-        Me.mnuManageDataFrameRestrict.Size = New System.Drawing.Size(207, 22)
-        Me.mnuManageDataFrameRestrict.Tag = "Restrict_filter"
-        Me.mnuManageDataFrameRestrict.Text = "Restrict (Filter)..."
+        Me.mnuManageSheetRestrict.Name = "mnuManageSheetRestrict"
+        Me.mnuManageSheetRestrict.Size = New System.Drawing.Size(200, 22)
+        Me.mnuManageSheetRestrict.Tag = "Restrict_filter"
+        Me.mnuManageSheetRestrict.Text = "Restrict (Filter)..."
         '
-        'mnuManageDataFrameReorder
+        'mnuManageSheetReorder
         '
-        Me.mnuManageDataFrameReorder.Name = "mnuManageDataFrameReorder"
-        Me.mnuManageDataFrameReorder.Size = New System.Drawing.Size(207, 22)
-        Me.mnuManageDataFrameReorder.Tag = "Reorder"
-        Me.mnuManageDataFrameReorder.Text = "Reorder..."
+        Me.mnuManageSheetReorder.Name = "mnuManageSheetReorder"
+        Me.mnuManageSheetReorder.Size = New System.Drawing.Size(200, 22)
+        Me.mnuManageSheetReorder.Tag = "Reorder"
+        Me.mnuManageSheetReorder.Text = "Reorder..."
         '
-        'mnuManageDataFrameInsert
+        'mnuManageSheetInsertColumnsRows
         '
-        Me.mnuManageDataFrameInsert.Name = "mnuManageDataFrameInsert"
-        Me.mnuManageDataFrameInsert.Size = New System.Drawing.Size(207, 22)
-        Me.mnuManageDataFrameInsert.Tag = "Insert"
-        Me.mnuManageDataFrameInsert.Text = "Insert..."
+        Me.mnuManageSheetInsertColumnsRows.Name = "mnuManageSheetInsertColumnsRows"
+        Me.mnuManageSheetInsertColumnsRows.Size = New System.Drawing.Size(200, 22)
+        Me.mnuManageSheetInsertColumnsRows.Tag = "Insert_Columns_Rows"
+        Me.mnuManageSheetInsertColumnsRows.Text = "Insert Columns/Rows..."
         '
-        'mnuManageDataFrameDelete
+        'mnuManageSheetDeleteColumnsRows
         '
-        Me.mnuManageDataFrameDelete.Name = "mnuManageDataFrameDelete"
-        Me.mnuManageDataFrameDelete.Size = New System.Drawing.Size(207, 22)
-        Me.mnuManageDataFrameDelete.Tag = "Delete"
-        Me.mnuManageDataFrameDelete.Text = "Delete..."
+        Me.mnuManageSheetDeleteColumnsRows.Name = "mnuManageSheetDeleteColumnsRows"
+        Me.mnuManageSheetDeleteColumnsRows.Size = New System.Drawing.Size(200, 22)
+        Me.mnuManageSheetDeleteColumnsRows.Tag = "Delete_Columns_Rows"
+        Me.mnuManageSheetDeleteColumnsRows.Text = "Delete Columns/Rows..."
         '
-        'mnuManageDataFrameDisplay
+        'mnuManageSheetProtect
         '
-        Me.mnuManageDataFrameDisplay.Name = "mnuManageDataFrameDisplay"
-        Me.mnuManageDataFrameDisplay.Size = New System.Drawing.Size(207, 22)
-        Me.mnuManageDataFrameDisplay.Tag = "Display"
-        Me.mnuManageDataFrameDisplay.Text = "Display..."
+        Me.mnuManageSheetProtect.Name = "mnuManageSheetProtect"
+        Me.mnuManageSheetProtect.Size = New System.Drawing.Size(200, 22)
+        Me.mnuManageSheetProtect.Tag = "Protect_Lock_Unlock"
+        Me.mnuManageSheetProtect.Text = "Protect (Lock/Unlock)..."
         '
-        'mnuManageDataFrameProtectLockUnlock
+        'mnuManageSheetHideShowColumns
         '
-        Me.mnuManageDataFrameProtectLockUnlock.Name = "mnuManageDataFrameProtectLockUnlock"
-        Me.mnuManageDataFrameProtectLockUnlock.Size = New System.Drawing.Size(207, 22)
-        Me.mnuManageDataFrameProtectLockUnlock.Tag = "Protect_Lock_Unlock"
-        Me.mnuManageDataFrameProtectLockUnlock.Text = "Protect (Lock/Unlock)..."
-        '
-        'mnuManageDataFrameHideShow
-        '
-        Me.mnuManageDataFrameHideShow.Name = "mnuManageDataFrameHideShow"
-        Me.mnuManageDataFrameHideShow.Size = New System.Drawing.Size(207, 22)
-        Me.mnuManageDataFrameHideShow.Tag = "Hide_Show"
-        Me.mnuManageDataFrameHideShow.Text = "Hide/Show..."
+        Me.mnuManageSheetHideShowColumns.Name = "mnuManageSheetHideShowColumns"
+        Me.mnuManageSheetHideShowColumns.Size = New System.Drawing.Size(200, 22)
+        Me.mnuManageSheetHideShowColumns.Tag = "Hide_Show_Columns"
+        Me.mnuManageSheetHideShowColumns.Text = "Hide/Show Columns..."
         '
         'mnuManageReshape
         '
@@ -2351,13 +2342,6 @@ Partial Class frmMain
         Me.mnuClimateMethodsCreateClimateObject.Tag = "Create_Climate_Object"
         Me.mnuClimateMethodsCreateClimateObject.Text = "Create Climate Object..."
         '
-        'mnuManageDataFrameRename
-        '
-        Me.mnuManageDataFrameRename.Name = "mnuManageDataFrameRename"
-        Me.mnuManageDataFrameRename.Size = New System.Drawing.Size(207, 22)
-        Me.mnuManageDataFrameRename.Tag = "Rename"
-        Me.mnuManageDataFrameRename.Text = "Rename..."
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2598,17 +2582,16 @@ Partial Class frmMain
     Friend WithEvents mnuManageFactor As ToolStripMenuItem
     Friend WithEvents mnuStatisticsSimpleModelsProbabilityDistributions As ToolStripMenuItem
     Friend WithEvents mnuFileOptions As ToolStripMenuItem
-    Friend WithEvents mnuManageDataName As ToolStripMenuItem
+    Friend WithEvents mnuManageDataRename As ToolStripMenuItem
     Friend WithEvents mnuManageRechapeMerge As ToolStripMenuItem
     Friend WithEvents mnuWindowVariable As ToolStripMenuItem
     Friend WithEvents mnuWindowDataFrame As ToolStripMenuItem
     Friend WithEvents LogToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ScriptToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuManageDataFrame As ToolStripMenuItem
-    Friend WithEvents mnuManageDataFrameReorder As ToolStripMenuItem
-    Friend WithEvents mnuManageDataFrameInsert As ToolStripMenuItem
-    Friend WithEvents mnuManageDataFrameDelete As ToolStripMenuItem
-    Friend WithEvents mnuManageDataFrameDisplay As ToolStripMenuItem
+    Friend WithEvents mnuManageSheet As ToolStripMenuItem
+    Friend WithEvents mnuManageSheetReorder As ToolStripMenuItem
+    Friend WithEvents mnuManageSheetInsertColumnsRows As ToolStripMenuItem
+    Friend WithEvents mnuManageSheetDeleteColumnsRows As ToolStripMenuItem
     Friend WithEvents mnuManageDataFile As ToolStripMenuItem
     Friend WithEvents mnuManageDataFileDeleteSheets As ToolStripMenuItem
     Friend WithEvents mnuManageDataFileRenameSheet As ToolStripMenuItem
@@ -2634,12 +2617,12 @@ Partial Class frmMain
     Friend WithEvents mnuManageManipulateSort As ToolStripMenuItem
     Friend WithEvents mnuManageManipulateRowSummary As ToolStripMenuItem
     Friend WithEvents mnuManageManipulatePolynomials As ToolStripMenuItem
-    Friend WithEvents mnuManageDataFrameProtectLockUnlock As ToolStripMenuItem
-    Friend WithEvents mnuManageDataFrameHideShow As ToolStripMenuItem
+    Friend WithEvents mnuManageSheetProtect As ToolStripMenuItem
+    Friend WithEvents mnuManageSheetHideShowColumns As ToolStripMenuItem
     Friend WithEvents mnuManageDataConvertTo As ToolStripMenuItem
     Friend WithEvents mnuManageManipulateRank As ToolStripMenuItem
     Friend WithEvents mnuManagePermuteRows As ToolStripMenuItem
-    Friend WithEvents mnuManageDataFrameRestrict As ToolStripMenuItem
+    Friend WithEvents mnuManageSheetRestrict As ToolStripMenuItem
     Friend WithEvents mnuManageRechapeColumnSummaries As ToolStripMenuItem
     Friend WithEvents mnuManageReshapeRandomSubst As ToolStripMenuItem
     Friend WithEvents RemoveUnusedLabelsToolStripMenuItem As ToolStripMenuItem
@@ -2657,7 +2640,7 @@ Partial Class frmMain
     Friend WithEvents mnuStatistcsMultivariatePrincipalComponents As ToolStripMenuItem
     Friend WithEvents mnuStatistcsMultivariateCanonicalCorrelations As ToolStripMenuItem
     Friend WithEvents mnuStatisticsNonParametricTwoSamples As ToolStripMenuItem
-    Friend WithEvents mnuManageDataFrameViewColumnMetadata As ToolStripMenuItem
+    Friend WithEvents mnuManageSheetColumnMetadata As ToolStripMenuItem
     Friend WithEvents mnuManageDataFileViewDataMetadata As ToolStripMenuItem
     Friend WithEvents mnuManageDataFileCopySheet As ToolStripMenuItem
     Friend WithEvents mnuGraphicsBarPie As ToolStripMenuItem
@@ -2665,5 +2648,4 @@ Partial Class frmMain
     Friend WithEvents mnuGraphicsBarPieChartSummaryData As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
-    Friend WithEvents mnuManageDataFrameRename As ToolStripMenuItem
 End Class
