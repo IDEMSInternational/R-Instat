@@ -48,6 +48,7 @@ Public Class dlgInsertColumn
         nudNumCols.Value = 1
         nudPos.Value = iCountVariables
         nudPos.Enabled = False
+        ucrDataFramesList.Reset()
     End Sub
 
     Private Sub nudPos_ValueChanged(sender As Object, e As EventArgs) Handles nudPos.ValueChanged
@@ -60,7 +61,6 @@ Public Class dlgInsertColumn
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         setDefaultValues()
-        ucrDataFramesList.Reset()
     End Sub
 
     Private Sub ucrDataFramesList_Leave(sender As Object, e As EventArgs) Handles ucrDataFramesList.Leave
