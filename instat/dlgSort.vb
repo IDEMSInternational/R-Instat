@@ -76,7 +76,6 @@ Public Class dlgSort
     End Sub
 
     Private Sub ucrReceiverSort_SelectionChanged() Handles ucrReceiverSort.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectForSort.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
         ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
         'Test ok enabled
         TestOKEnabled()
@@ -128,4 +127,7 @@ Public Class dlgSort
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrSelectForSort_DataFrameChanged() Handles ucrSelectForSort.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectForSort.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+    End Sub
 End Class
