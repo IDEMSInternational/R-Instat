@@ -28,11 +28,11 @@ Public Class sdgPlots
 
         If bFirstLoad Then
             bFirstLoad = False
-            Setdefaults()
+            SetDefaults()
         End If
     End Sub
 
-    Private Sub Setdefaults()
+    Private Sub SetDefaults()
         ucr1stFactorReceiver.SetMeAsReceiver()
         chkWrapOptions.Checked = False
         lblNoOfColumns.Visible = False
