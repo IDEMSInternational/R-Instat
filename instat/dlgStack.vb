@@ -18,12 +18,8 @@ Public Class dlgStack
     Public bFirstLoad As Boolean = True
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("melt")
-        ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtFactorInto.Text & Chr(34))
-        ucrBase.clsRsyntax.AddParameter("value.name", Chr(34) & txtStackDataInto.Text & Chr(34))
-        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame)
-        ucrNewDataFrameName.txtValidation.Text = ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked"
-        ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.txtValidation.Text, strTempDataframe:=ucrNewDataFrameName.txtValidation.Text)
         ucrBase.iHelpTopicID = 57
+
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
@@ -37,11 +33,10 @@ Public Class dlgStack
     End Sub
 
     Private Sub ReopenDialog()
-
-
     End Sub
+
     Private Sub TestOKEnabled()
-        If ucrReceiverColumnsToBeStack.GetVariableNames() <> "" Then
+        If Not ucrReceiverColumnsToBeStack.IsEmpty() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -54,12 +49,29 @@ Public Class dlgStack
         ucrIDVariablesReceiver.Selector = ucrSelectorStack
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         ucrIDVariablesReceiver.Visible = False
-        txtStackDataInto.Text = "Value"
-        txtFactorInto.Text = "Variable"
+        SetStackIntoText("Value")
+        SetFactorIntoText("Variable")
         autoTranslate(Me)
 
     End Sub
 
+    Private Sub SetFactorIntoText(strNewVal As String)
+        txtFactorInto.Text = strNewVal
+        If txtFactorInto.Text <> "" Then
+            ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtFactorInto.Text & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("variable.name")
+        End If
+    End Sub
+
+    Private Sub SetStackIntoText(strNewVal As String)
+        txtStackDataInto.Text = strNewVal
+        If txtStackDataInto.Text <> "" Then
+            ucrBase.clsRsyntax.AddParameter("value.name", Chr(34) & txtStackDataInto.Text & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("value.name")
+        End If
+    End Sub
 
     Private Sub chkIDVariables_CheckedChanged(sender As Object, e As EventArgs) Handles chkIDVariables.CheckedChanged
         If chkIDVariables.Checked = True Then
@@ -98,18 +110,30 @@ Public Class dlgStack
     End Sub
 
     Private Sub ucrDataFrameAddRemove_DataFrameChanged() Handles ucrSelectorStack.DataFrameChanged
+        'Always change the data parameter when data frame changed.
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame)
+
+        'For Stack ucrNewDataFrameName may also be changed when data frame changed.
         If Not ucrNewDataFrameName.bUserTyped Then
-            ucrNewDataFrameName.txtValidation.Text = ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked"
+            SetNewDataFrameName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
+        End If
+
+    End Sub
+
+    Private Sub SetNewDataFrameName(strNewVal As String)
+        If ucrNewDataFrameName.ValidateRString(strNewVal) = 0 Then
+            ucrNewDataFrameName.txtValidation.Text = strNewVal
+            ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.txtValidation.Text, strTempDataframe:=ucrNewDataFrameName.txtValidation.Text)
         End If
     End Sub
 
     Private Sub chkIDVariables_KeyPress(sender As Object, e As KeyPressEventArgs) Handles chkIDVariables.KeyPress
-        If chkIDVariables.Checked = True And e.KeyChar = vbCr Then
-            chkIDVariables.Checked = False
-        Else
-            chkIDVariables.Checked = True
+        If e.KeyChar = vbCr Then
+            If chkIDVariables.Checked Then
+                chkIDVariables.Checked = False
+            Else
+                chkIDVariables.Checked = True
+            End If
         End If
     End Sub
-
-
 End Class
