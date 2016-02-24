@@ -30,7 +30,9 @@ Public Class ucrButtons
 
         RaiseEvent ClickOk(sender, e)
 
+        frmMain.dlgLastDialog = Me.ParentForm
         Me.ParentForm.Hide()
+
     End Sub
 
     Public Sub OKEnabled(bEnabled As Boolean)
