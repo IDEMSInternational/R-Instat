@@ -13,6 +13,50 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Public Class dlgConvertColumnsToFactors
+Imports instat.Translations
 
+Public Class dlgConvertColumnsToFactors
+    Public bFirstLoad As Boolean
+
+    Private Sub ucrSelectorDataFrameColumns_Load(sender As Object, e As EventArgs) Handles ucrSelectorDataFrameColumns.Load
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        ucrBase.clsRsyntax.iCallType = 2
+        ucrReceiverColumnsToConvert.Selector = ucrSelectorDataFrameColumns
+        ucrReceiverColumnsToConvert.SetMeAsReceiver()
+        autoTranslate(Me)
+        ucrBase.iHelpTopicID = 34
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+
+        End If
+
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetDefaults()
+        ucrReceiverColumnsToConvert.SetMeAsReceiver()
+        ucrReceiverColumnsToConvert.Clear()
+    End Sub
+
+    Private Sub ucrReceiverColumnsToConvert_SelectionChanged() Handles ucrReceiverColumnsToConvert.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverColumnsToConvert.GetVariables())
+        TestOKEnabled()
+    End Sub
+
+
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+    End Sub
+
+
+    Private Sub TestOKEnabled()
+        If ucrReceiverColumnsToConvert.GetVariableNames() <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
 End Class
