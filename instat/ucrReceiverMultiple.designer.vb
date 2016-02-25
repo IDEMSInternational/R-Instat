@@ -22,7 +22,7 @@ Partial Class ucrReceiverMultiple
         Me.components = New System.ComponentModel.Container()
         Me.lstSelectedVariables = New System.Windows.Forms.ListView()
         Me.MenuStripDelete = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripDelete.SuspendLayout()
         Me.SuspendLayout()
@@ -42,21 +42,21 @@ Partial Class ucrReceiverMultiple
         '
         'MenuStripDelete
         '
-        Me.MenuStripDelete.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteToolStripMenuItem, Me.ClearToolStripMenuItem})
+        Me.MenuStripDelete.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem, Me.ClearToolStripMenuItem})
         Me.MenuStripDelete.Name = "ContextMenuStrip1"
-        Me.MenuStripDelete.Size = New System.Drawing.Size(108, 48)
+        Me.MenuStripDelete.Size = New System.Drawing.Size(153, 70)
         '
-        'DeleteToolStripMenuItem
+        'RemoveToolStripMenuItem
         '
-        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
-        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
-        Me.DeleteToolStripMenuItem.Tag = "delete"
-        Me.DeleteToolStripMenuItem.Text = "Delete"
+        Me.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem"
+        Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RemoveToolStripMenuItem.Tag = "remove"
+        Me.RemoveToolStripMenuItem.Text = "Remove"
         '
         'ClearToolStripMenuItem
         '
         Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ClearToolStripMenuItem.Text = "Clear"
         '
         'ucrReceiverMultiple
@@ -71,6 +71,6 @@ Partial Class ucrReceiverMultiple
     End Sub
     Friend WithEvents lstSelectedVariables As ListView
     Friend WithEvents MenuStripDelete As ContextMenuStrip
-    Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RemoveToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ClearToolStripMenuItem As ToolStripMenuItem
 End Class
