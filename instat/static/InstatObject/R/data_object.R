@@ -461,16 +461,21 @@ data_obj$methods(length_of_data = function() {
 }
 )
 
-next_default_item = function(prefix, existing_names) {
+next_default_item = function(prefix, existing_names, include_index = TRUE, start_index = 1) {
   if(!is.character(prefix)) stop("prefix must be of type character")
+  
+  if(!include_index) {
+    if(!prefix %in% existing_names) return(prefix)
+  }
+  
   item_name_exists = TRUE
-  i = 1
+  start_index = 1
   while(item_name_exists) {
-    out = paste0(prefix,i)
+    out = paste0(prefix,start_index)
     if(!out %in% existing_names) {
       item_name_exists = FALSE
     }
-    i = i + 1
+    start_index = start_index + 1
   }
   return(out)
 } 
@@ -502,6 +507,53 @@ data_obj$methods(sort_dataframe = function(col_names = c(), decreasing = TRUE, n
     data <<-data[ do.call(order, c(as.list(data[,col_names]), decreasing = decreasing, na.last = na.last)), ]
   }
   .self$set_data_changed(TRUE)
+}
+)
+
+data_obj$methods(convert_column_to_type = function(col_names = c(), to_type = "factor", factor_numeric = "by_levels") {
+  for(col_name in col_names){
+    if(!(col_name %in% names(data))){
+      stop(col_name, " is not a column in ", get_metadata(data_name_label))
+    }
+  }
+  
+  if(length(to_type)>1){
+    warning("Column(s) will be converted to type ", to_type[1])
+    to_type = to_type[1]
+  }
+  
+
+  if(!(to_type %in% c("integer", "factor", "numeric","character"))){
+    stop(to_type, " is not a valid type to convert to")
+  }
+  
+  if(!(factor_numeric %in% c("by_levels", "by_ordinals"))){
+    stop(factor_numeric, " can either be by_levels or by_ordinals.")
+  }
+  
+  for(col_name in col_names){
+    if(to_type=="factor"){
+      data[,col_name] <<- as.factor(data[,col_name])
+    }
+    
+    if(to_type=="integer"){
+      data[,col_name] <<- as.integer(data[,col_name])
+    }
+    
+    if(to_type=="numeric"){
+      if(is.factor(data[,col_name]) & (factor_numeric == "by_levels")){
+        data[,col_name] <<- as.numeric(levels(data[,col_name]))[data[,col_name]]
+      }else{
+        data[,col_name] <<- as.numeric(data[,col_name])
+      }
+    }
+    
+    if(to_type=="character"){
+      data[,col_name] <<- as.character(data[,col_name])
+    }
+  }
+  .self$set_data_changed(TRUE)
+  .self$set_variables_metadata_changed(TRUE)
 }
 )
 
