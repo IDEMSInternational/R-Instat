@@ -91,8 +91,8 @@ Partial Class frmEditor
         Me.grdData.RowHeaderContextMenuStrip = Me.rowContextMenuStrip
         Me.grdData.Script = Nothing
         Me.grdData.SheetTabContextMenuStrip = Me.statusColumnMenu
-        Me.grdData.SheetTabControlNewButtonVisible = True
-        Me.grdData.SheetTabControlWidth = 200
+        Me.grdData.SheetTabNewButtonVisible = True
+        Me.grdData.SheetTabWidth = 200
         Me.grdData.SheetTabNewButtonVisible = True
         Me.grdData.Size = New System.Drawing.Size(410, 261)
         Me.grdData.TabIndex = 0
