@@ -18,7 +18,10 @@ Imports instat.Translations
 Public Class dlgUnstack
     Public bFirstLoad As Boolean = True
     Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
+        ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
         ucrBase.clsRsyntax.SetFunction("spread")
+        autoTranslate(Me)
         ucrBase.iHelpTopicID = 58
 
         If bFirstLoad Then
@@ -27,15 +30,11 @@ Public Class dlgUnstack
         Else
             ReopenDialog()
         End If
-
         'Checks if Ok can be enabled.
         TestOKEnabled()
     End Sub
 
     Private Sub SetDefaults()
-        autoTranslate(Me)
-        ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
-        ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
         ucrSelectorForUnstack.Reset()
         chkKeepUnusedFactorLevels.Checked = False
