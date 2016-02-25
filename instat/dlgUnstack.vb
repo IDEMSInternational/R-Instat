@@ -21,7 +21,9 @@ Public Class dlgUnstack
         ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
         ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
         ucrBase.clsRsyntax.SetFunction("tidyr::spread")
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrDataFrameForUnstack.Reset()
+        SetNewDataFrameName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
+
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 58
 
@@ -54,19 +56,37 @@ Public Class dlgUnstack
         End If
     End Sub
 
+    Private Sub SetNewDataFrameName(strNewVal As String)
+        If ucrDataFrameForUnstack.IsValidRString(strNewVal) Then
+            ucrDataFrameForUnstack.txtValidation.Text = strNewVal
+            ucrBase.clsRsyntax.SetAssignTo(ucrDataFrameForUnstack.txtValidation.Text, strTempDataframe:=ucrDataFrameForUnstack.txtValidation.Text)
+        Else
+            ucrDataFrameForUnstack.txtValidation.Text = ""
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        End If
+    End Sub
     Private Sub ucrSelectorForUnstack_DataFrameChanged() Handles ucrSelectorForUnstack.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame)
 
     End Sub
 
     Private Sub ucrFactorToUnstackReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorToUnstackReceiver.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("key", ucrFactorToUnstackReceiver.GetVariableNames(False))
+        If ucrFactorToUnstackReceiver.IsEmpty() = True Then
+            ucrBase.clsRsyntax.AddParameter("key", ucrFactorToUnstackReceiver.GetVariableNames(False))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("key")
+        End If
         TestOKEnabled()
     End Sub
 
 
     Private Sub ucrColumnToUnstackReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("value", ucrColumnToUnstackReceiver.GetVariableNames(False))
+        If ucrColumnToUnstackReceiver.IsEmpty() = True Then
+            ucrBase.clsRsyntax.AddParameter("value", ucrColumnToUnstackReceiver.GetVariableNames(False))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("value")
+        End If
+
         TestOKEnabled()
     End Sub
 
