@@ -29,7 +29,7 @@ Public Class frmMetaData
         grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, False)
         grdMetaData.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         grdMetaData.SheetTabNewButtonVisible = False
-        grdMetaData.SheetTabControlNewButtonVisible = False
+        grdMetaData.SheetTabNewButtonVisible = False
         grdMetaData.CurrentWorksheet.Resize(2, 2)
         grdMetaData.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
         grdMetaData.ContextMenuStrip = context.grdData.ContextMenuStrip
