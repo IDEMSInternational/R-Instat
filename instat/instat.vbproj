@@ -367,12 +367,6 @@
     <Compile Include="dlgDayMonth.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDeleteColumns.Designer.vb">
-      <DependentUpon>dlgDeleteColumns.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDeleteColumns.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgDeleteRows.Designer.vb">
       <DependentUpon>dlgDeleteRows.vb</DependentUpon>
     </Compile>
@@ -1543,12 +1537,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDayMonth.sw-KE.resx">
       <DependentUpon>dlgDayMonth.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteColumns.fr-FR.resx">
-      <DependentUpon>dlgDeleteColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteColumns.sw-KE.resx">
-      <DependentUpon>dlgDeleteColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteRows.fr-FR.resx">
       <DependentUpon>dlgDeleteRows.vb</DependentUpon>
