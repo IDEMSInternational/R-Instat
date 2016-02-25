@@ -20,7 +20,7 @@ Public Class dlgUnstack
     Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
         ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
-        ucrBase.clsRsyntax.SetFunction("spread")
+        ucrBase.clsRsyntax.SetFunction("tidyr::spread")
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 58
 
