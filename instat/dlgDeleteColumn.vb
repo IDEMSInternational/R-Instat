@@ -34,7 +34,7 @@ Public Class dlgDeleteColumn
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiveColumnsToDelete.GetVariableNames <> "" Then
+        If Not ucrReceiveColumnsToDelete.IsEmpty() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
