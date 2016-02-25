@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgDeleteSheet
+Partial Class sdgHistogramOptions
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,39 +22,30 @@ Partial Class dlgDeleteSheet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDataFrameToDelete = New instat.ucrDataFrame()
+        Me.ucrSubDialogButtons = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'ucrSubDialogButtons
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 47)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 1
+        Me.ucrSubDialogButtons.Location = New System.Drawing.Point(65, 219)
+        Me.ucrSubDialogButtons.Name = "ucrSubDialogButtons"
+        Me.ucrSubDialogButtons.Size = New System.Drawing.Size(142, 30)
+        Me.ucrSubDialogButtons.TabIndex = 0
         '
-        'ucrDataFrameToDelete
-        '
-        Me.ucrDataFrameToDelete.Location = New System.Drawing.Point(0, 0)
-        Me.ucrDataFrameToDelete.Name = "ucrDataFrameToDelete"
-        Me.ucrDataFrameToDelete.Size = New System.Drawing.Size(127, 41)
-        Me.ucrDataFrameToDelete.TabIndex = 0
-        '
-        'dlgDeleteSheet
+        'sdgHistogramOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(404, 102)
-        Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrDataFrameToDelete)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
-        Me.Name = "dlgDeleteSheet"
+        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.ucrSubDialogButtons)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Name = "sdgHistogramOptions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Delete Sheet (s)"
+        Me.Tag = "Histogram_Options"
+        Me.Text = "Histogram Options"
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents ucrDataFrameToDelete As ucrDataFrame
-    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSubDialogButtons As ucrButtonsSubdialogue
 End Class

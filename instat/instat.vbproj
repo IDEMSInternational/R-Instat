@@ -241,6 +241,12 @@
     <Compile Include="dlgDeleteSheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFromLibrary.Designer.vb">
+      <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFromLibrary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgInsertColumn.Designer.vb">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
     </Compile>
@@ -287,6 +293,12 @@
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCorrPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgHistogramOptions.Designer.vb">
+      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgHistogramOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgOptions.Designer.vb">
@@ -359,12 +371,6 @@
       <DependentUpon>dlgDayMonth.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDayMonth.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgDeleteColumns.Designer.vb">
-      <DependentUpon>dlgDeleteColumns.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDeleteColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDeleteRows.Designer.vb">
@@ -1082,6 +1088,12 @@
     <Compile Include="sdgPlots.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgSimpleRegOptions.Designer.vb">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSimpleRegOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Translations.vb" />
     <Compile Include="ucrButtons.designer.vb">
       <DependentUpon>ucrButtons.vb</DependentUpon>
@@ -1099,6 +1111,12 @@
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrDataFrame.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDataFrameLength.Designer.vb">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDataFrameLength.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrDataSelection.designer.vb">
@@ -1337,6 +1355,15 @@
     <EmbeddedResource Include="dlgDeleteSheet.sw-KE.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgFromLibrary.fr-FR.resx">
+      <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFromLibrary.resx">
+      <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
+      <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.fr-FR.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
     </EmbeddedResource>
@@ -1408,6 +1435,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.sw-KE.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgHistogramOptions.fr-FR.resx">
+      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgHistogramOptions.resx">
+      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgHistogramOptions.sw-KE.resx">
+      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOptions.fr-FR.resx">
       <DependentUpon>sdgOptions.vb</DependentUpon>
@@ -1516,12 +1552,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDayMonth.sw-KE.resx">
       <DependentUpon>dlgDayMonth.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteColumns.fr-FR.resx">
-      <DependentUpon>dlgDeleteColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteColumns.sw-KE.resx">
-      <DependentUpon>dlgDeleteColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteRows.fr-FR.resx">
       <DependentUpon>dlgDeleteRows.vb</DependentUpon>
@@ -2525,6 +2555,15 @@
     <EmbeddedResource Include="sdgPlots.sw-KE.resx">
       <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.fr-FR.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
@@ -2551,6 +2590,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.sw-KE.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrameLength.fr-FR.resx">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrameLength.resx">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrameLength.sw-KE.resx">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.fr-FR.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
@@ -2931,6 +2979,12 @@
     <Content Include="static\ClimateObject\R\SourcingScript.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\Library\ExperimentalSurveyData.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Samaru56.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -2964,6 +3018,7 @@
     <XliffResource Include="MultilingualResources\instat.fr-FR.xlf" />
     <XliffResource Include="MultilingualResources\instat.sw-KE.xlf" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />
   <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">
