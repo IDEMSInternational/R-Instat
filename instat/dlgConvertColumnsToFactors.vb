@@ -36,7 +36,9 @@ Public Class dlgConvertColumnsToFactors
 
     Private Sub SetDefaults()
         ucrReceiverColumnsToConvert.SetMeAsReceiver()
-        ucrReceiverColumnsToConvert.Clear()
+        ucrSelectorDataFrameColumns.Reset()
+        ucrSelectorDataFrameColumns.Focus()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverColumnsToConvert_SelectionChanged() Handles ucrReceiverColumnsToConvert.SelectionChanged

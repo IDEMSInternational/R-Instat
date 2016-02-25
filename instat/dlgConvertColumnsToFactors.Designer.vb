@@ -72,8 +72,8 @@ Partial Class dlgConvertColumnsToFactors
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgConvertColumnsToFactors"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Convert_columns_to_factors"
-        Me.Text = "Convert Columns To Factors"
+        Me.Tag = "Convert_columns"
+        Me.Text = "Convert Columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
