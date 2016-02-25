@@ -241,6 +241,12 @@
     <Compile Include="dlgDeleteSheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFromLibrary.Designer.vb">
+      <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFromLibrary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgInsertColumn.Designer.vb">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
     </Compile>
@@ -365,12 +371,6 @@
       <DependentUpon>dlgDayMonth.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDayMonth.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgDeleteColumns.Designer.vb">
-      <DependentUpon>dlgDeleteColumns.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDeleteColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDeleteRows.Designer.vb">
@@ -1355,6 +1355,15 @@
     <EmbeddedResource Include="dlgDeleteSheet.sw-KE.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgFromLibrary.fr-FR.resx">
+      <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFromLibrary.resx">
+      <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
+      <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.fr-FR.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
     </EmbeddedResource>
@@ -1543,12 +1552,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDayMonth.sw-KE.resx">
       <DependentUpon>dlgDayMonth.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteColumns.fr-FR.resx">
-      <DependentUpon>dlgDeleteColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteColumns.sw-KE.resx">
-      <DependentUpon>dlgDeleteColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteRows.fr-FR.resx">
       <DependentUpon>dlgDeleteRows.vb</DependentUpon>
