@@ -46,12 +46,16 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub TestOKEnabled()
-
+        If ucrFactorToUnstackReceiver.IsEmpty() = False And ucrColumnToUnstackReceiver.IsEmpty() = False Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrSelectorForUnstack_DataFrameChanged() Handles ucrSelectorForUnstack.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame)
-        TestOKEnabled()
+
     End Sub
 
     Private Sub ucrFactorToUnstackReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorToUnstackReceiver.SelectionChanged
@@ -66,7 +70,7 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub chkKeepUnusedFactorLevels_CheckedChanged(sender As Object, e As EventArgs) Handles chkKeepUnusedFactorLevels.CheckedChanged
-        TestOKEnabled()
+
         If chkKeepUnusedFactorLevels.Checked = False Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 ucrBase.clsRsyntax.AddParameter("drop", "TRUE")
