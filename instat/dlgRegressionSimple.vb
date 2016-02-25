@@ -17,34 +17,105 @@
 Imports instat.Translations
 
 Public Class dlgRegressionSimple
+    Public bFirstLoad As Boolean = True
+    Dim clsModel As New ROperator
+
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ucrBase.clsRsyntax.SetFunction("summary(lm")
+        ucrBase.clsRsyntax.SetFunction("lm")
         ucrBase.clsRsyntax.iCallType = 2
-        ucrReceiverSingleA.Selector = ucrAddRemove
-        ucrReceiverSingleA.SetMeAsReceiver()
-        grpLackFit.Enabled = False
+        clsModel.SetOperation("~")
+        ucrResponse.Selector = ucrSelectorSimpleReg
+        ucrExplanatory.Selector = ucrSelectorSimpleReg
         autoTranslate(Me)
+        ucrBase.iHelpTopicID = 171
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+            'Else
+            'ReopenDialog()
+        End If
+
+        TestOKEnabled()
     End Sub
 
-    Private Sub chkLackFit_CheckedChanged(sender As Object, e As EventArgs) Handles chkLackFit.CheckedChanged
-        If chkLackFit.Checked = True Then
-            grpLackFit.Enabled = True
+    Private Sub SetDefaults()
+        ucrSelectorSimpleReg.Reset()
+        ucrResponse.SetMeAsReceiver()
+        ucrSelectorSimpleReg.Focus()
+        chkModelName.Checked = False
+        'include last lm
+        'Test ok enabled
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+        Dim strResponse As String = ""
+        Dim strExplanatory As String = ""
+        strResponse = ucrResponse.GetVariableNames(bWithQuotes:=False)
+        strExplanatory = ucrExplanatory.GetVariableNames(bWithQuotes:=False)
+
+        If ((Not (strResponse = "")) And (Not (strExplanatory = ""))) Then
+            ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
+            ucrBase.OKEnabled(True)
         Else
-            grpLackFit.Enabled = False
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrReceiverSingleB_Enter(sender As Object, e As EventArgs) Handles ucrReceiverSingleB.Enter
-        ucrReceiverSingleB.Selector = ucrAddRemove
-        ucrReceiverSingleB.SetMeAsReceiver()
+    Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorSimpleReg.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-    Private Sub ucrReceiverSingleA_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingleA.Leave
-        ucrBase.clsRsyntax.AddParameter(ucrReceiverSingleA.txtReceiverSingle.Text, "")
+    Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdRegressionOptions.Click
+        sdgSimpleRegOptions.ShowDialog()
     End Sub
 
-    Private Sub ucrReceiverSingleB_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSingleB.Leave
-        ucrBase.clsRsyntax.AddParameter(ucrReceiverSingleB.txtReceiverSingle.Text, "")
+    Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
+        clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+        TestOKEnabled()
     End Sub
 
+    Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
+        clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
+
+    'Private Sub ucrModelName_Leave(sender As Object, e As EventArgs) Handles ucrModelName.Leave
+    '    ucrBase.clsRsyntax.SetAssignTo("temp_model", strTempModel:=ucrModelName.txtValidation.Text)
+    'End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        Dim clsRaovFunction As New RFunction
+
+        clsRaovFunction.SetRCommand("aov")
+        clsRaovFunction.AddParameter("", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+        frmMain.clsRLink.RunScript(clsRaovFunction.ToScript(), 2)
+    End Sub
+
+    Private Sub ucrModelName_Load(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
+    End Sub
+
+    Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkModelName.CheckedChanged
+        If chkModelName.Checked Then
+            ucrBase.clsRsyntax.SetAssignTo("temp_model", strTempModel:=ucrModelName.txtValidation.Text)
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("", strTempModel:=ucrModelName.txtValidation.Text)
+        End If
+    End Sub
+
+    'TO DO reopen dialogue given the options
 End Class
