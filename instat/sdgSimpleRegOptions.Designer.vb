@@ -130,7 +130,7 @@ Partial Class sdgSimpleRegOptions
         'chkAnovaPvalues
         '
         Me.chkAnovaPvalues.AutoSize = True
-        Me.chkAnovaPvalues.Location = New System.Drawing.Point(6, 72)
+        Me.chkAnovaPvalues.Location = New System.Drawing.Point(5, 72)
         Me.chkAnovaPvalues.Name = "chkAnovaPvalues"
         Me.chkAnovaPvalues.Size = New System.Drawing.Size(101, 17)
         Me.chkAnovaPvalues.TabIndex = 2
@@ -141,7 +141,7 @@ Partial Class sdgSimpleRegOptions
         'chkAnovaTable
         '
         Me.chkAnovaTable.AutoSize = True
-        Me.chkAnovaTable.Location = New System.Drawing.Point(4, 49)
+        Me.chkAnovaTable.Location = New System.Drawing.Point(6, 21)
         Me.chkAnovaTable.Name = "chkAnovaTable"
         Me.chkAnovaTable.Size = New System.Drawing.Size(87, 17)
         Me.chkAnovaTable.TabIndex = 1
@@ -152,7 +152,7 @@ Partial Class sdgSimpleRegOptions
         'chkModel
         '
         Me.chkModel.AutoSize = True
-        Me.chkModel.Location = New System.Drawing.Point(4, 21)
+        Me.chkModel.Location = New System.Drawing.Point(6, 49)
         Me.chkModel.Name = "chkModel"
         Me.chkModel.Size = New System.Drawing.Size(55, 17)
         Me.chkModel.TabIndex = 0
