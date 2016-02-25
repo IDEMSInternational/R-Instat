@@ -68,6 +68,7 @@ Partial Class frmEditor
         Me.deleteSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblNoData = New System.Windows.Forms.Label()
+        Me.mnuConvertToFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.leadHeaderContextMenuStrip.SuspendLayout()
@@ -196,43 +197,43 @@ Partial Class frmEditor
         '
         'cellContextMenuStrip
         '
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.ToolStripSeparator4, Me.mergeRangeToolStripMenuItem, Me.unmergeRangeToolStripMenuItem})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.ToolStripSeparator4, Me.mergeRangeToolStripMenuItem, Me.unmergeRangeToolStripMenuItem, Me.mnuConvertToFactor})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(124, 120)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(167, 164)
         '
         'cutRangeToolStripMenuItem
         '
         Me.cutRangeToolStripMenuItem.Name = "cutRangeToolStripMenuItem"
-        Me.cutRangeToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.cutRangeToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.cutRangeToolStripMenuItem.Text = "Cut"
         '
         'copyRangeToolStripMenuItem
         '
         Me.copyRangeToolStripMenuItem.Name = "copyRangeToolStripMenuItem"
-        Me.copyRangeToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.copyRangeToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.copyRangeToolStripMenuItem.Text = "Copy"
         '
         'pasteRangeToolStripMenuItem
         '
         Me.pasteRangeToolStripMenuItem.Name = "pasteRangeToolStripMenuItem"
-        Me.pasteRangeToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.pasteRangeToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.pasteRangeToolStripMenuItem.Text = "Paste"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(120, 6)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(163, 6)
         '
         'mergeRangeToolStripMenuItem
         '
         Me.mergeRangeToolStripMenuItem.Name = "mergeRangeToolStripMenuItem"
-        Me.mergeRangeToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.mergeRangeToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.mergeRangeToolStripMenuItem.Text = "Merge"
         '
         'unmergeRangeToolStripMenuItem
         '
         Me.unmergeRangeToolStripMenuItem.Name = "unmergeRangeToolStripMenuItem"
-        Me.unmergeRangeToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.unmergeRangeToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.unmergeRangeToolStripMenuItem.Text = "Unmerge"
         '
         'leadHeaderContextMenuStrip
@@ -251,7 +252,7 @@ Partial Class frmEditor
         '
         Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRow, Me.mnuDeleteRows, Me.toolStripMenuItem4, Me.resetToDefaultHeightToolStripMenuItem, Me.rowHeightToolStripMenuItem, Me.hideRowsToolStripMenuItem, Me.unhideRowsToolStripMenuItem, Me.toolStripMenuItem20, Me.groupRowsToolStripMenuItem1, Me.ungroupRowsToolStripMenuItem1, Me.ungroupAllRowsToolStripMenuItem, Me.toolStripMenuItem33})
         Me.rowContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.rowContextMenuStrip.Size = New System.Drawing.Size(197, 242)
+        Me.rowContextMenuStrip.Size = New System.Drawing.Size(197, 220)
         '
         'mnuInsertRow
         '
@@ -358,6 +359,12 @@ Partial Class frmEditor
         Me.lblNoData.Tag = "no_data_loaded"
         Me.lblNoData.Text = "No Data Loaded"
         '
+        'mnuConvertToFactor
+        '
+        Me.mnuConvertToFactor.Name = "mnuConvertToFactor"
+        Me.mnuConvertToFactor.Size = New System.Drawing.Size(166, 22)
+        Me.mnuConvertToFactor.Text = "Convert to Factor"
+        '
         'frmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -424,4 +431,5 @@ Partial Class frmEditor
     Friend WithEvents deleteSheet As ToolStripMenuItem
     Friend WithEvents renameSheet As ToolStripMenuItem
     Friend WithEvents mnuColumnRename As ToolStripMenuItem
+    Friend WithEvents mnuConvertToFactor As ToolStripMenuItem
 End Class
