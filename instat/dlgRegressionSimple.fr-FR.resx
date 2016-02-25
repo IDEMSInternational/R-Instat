@@ -111,30 +111,6 @@
   <data name="lblExplanatory.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="lblFittedModel.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblFittedModel.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblFittedModel.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
-    <value>15, 192</value>
-  </data>
-  <data name="lblFittedModel.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
-    <value>65, 13</value>
-  </data>
-  <data name="lblFittedModel.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="txtLastLM.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
-    <value>103, 188</value>
-  </data>
-  <data name="txtLastLM.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="txtLastLM.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
   <data name="cmdRegressionOptions.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -172,6 +148,24 @@
     <value>242, 179</value>
   </data>
   <data name="ucrSelectorSimpleReg.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrModelName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>253, 3</value>
+  </data>
+  <data name="ucrModelName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>149, 23</value>
+  </data>
+  <data name="ucrModelName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chkModelName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>223, 3</value>
+  </data>
+  <data name="chkModelName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="chkModelName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
 </root>
