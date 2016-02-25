@@ -172,7 +172,7 @@ Public Class ucrReceiverMultiple
         RemoveSelected()
     End Sub
 
-    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
+    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
         RemoveSelected()
     End Sub
 
