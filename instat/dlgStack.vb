@@ -51,28 +51,27 @@ Public Class dlgStack
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         chkIDVariables.Checked = False
         ucrIDVariablesReceiver.Visible = False
-        SetStackIntoText("Value")
-        SetFactorIntoText("Variable")
+        SetStackIntoText("value")
+        SetFactorIntoText("variable")
         ucrNewDataFrameName.bUserTyped = False
         autoTranslate(Me)
-
     End Sub
 
     Private Sub SetFactorIntoText(strNewVal As String)
         txtFactorInto.Text = strNewVal
-        If txtFactorInto.Text <> "" Then
-            ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtFactorInto.Text & Chr(34))
-        Else
+        If txtFactorInto.Text = "" Or (txtFactorInto.Text = "variable" AndAlso (Not frmMain.clsInstatOptions.bIncludeRDefaultParameters)) Then
             ucrBase.clsRsyntax.RemoveParameter("variable.name")
+        Else
+            ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtFactorInto.Text & Chr(34))
         End If
     End Sub
 
     Private Sub SetStackIntoText(strNewVal As String)
         txtStackDataInto.Text = strNewVal
-        If txtStackDataInto.Text <> "" Then
-            ucrBase.clsRsyntax.AddParameter("value.name", Chr(34) & txtStackDataInto.Text & Chr(34))
-        Else
+        If txtStackDataInto.Text = "" Or (txtStackDataInto.Text = "value" AndAlso (Not frmMain.clsInstatOptions.bIncludeRDefaultParameters)) Then
             ucrBase.clsRsyntax.RemoveParameter("value.name")
+        Else
+            ucrBase.clsRsyntax.AddParameter("value.name", Chr(34) & txtStackDataInto.Text & Chr(34))
         End If
     End Sub
 
