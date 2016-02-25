@@ -33,7 +33,12 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub SetDefaults()
-
+        autoTranslate(Me)
+        ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
+        ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
+        ucrFactorToUnstackReceiver.SetMeAsReceiver()
+        ucrSelectorForUnstack.Reset()
+        chkKeepUnusedFactorLevels.Checked = False
     End Sub
 
     Private Sub ReopenDialog()
@@ -46,26 +51,38 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub ucrSelectorForUnstack_DataFrameChanged() Handles ucrSelectorForUnstack.DataFrameChanged
-
-
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrFactorToUnstackReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorToUnstackReceiver.SelectionChanged
-
+        ucrBase.clsRsyntax.AddParameter("key", ucrFactorToUnstackReceiver.GetVariableNames(False))
+        TestOKEnabled()
     End Sub
 
 
     Private Sub ucrColumnToUnstackReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.SelectionChanged
-
-
+        ucrBase.clsRsyntax.AddParameter("value", ucrColumnToUnstackReceiver.GetVariableNames(False))
+        TestOKEnabled()
     End Sub
 
     Private Sub chkKeepUnusedFactorLevels_CheckedChanged(sender As Object, e As EventArgs) Handles chkKeepUnusedFactorLevels.CheckedChanged
-
-
-
+        TestOKEnabled()
+        If chkKeepUnusedFactorLevels.Checked = False Then
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("drop", "TRUE")
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("drop")
+            End If
+        Else
+            ucrBase.clsRsyntax.AddParameter("drop", "FALSE")
+        End If
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+    End Sub
 
 End Class
 
