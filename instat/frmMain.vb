@@ -359,10 +359,6 @@ Public Class frmMain
         dlgView.ShowDialog()
     End Sub
 
-    Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgDeleteColumns.ShowDialog()
-    End Sub
-
     Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeSelect.Click
         dlgSelect.ShowDialog()
     End Sub
@@ -571,7 +567,7 @@ Public Class frmMain
         dlgSubset.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataName_Click(sender As Object, e As EventArgs) Handles mnuManageDataName.Click
+    Private Sub mnuManageDataRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataRename.Click
         dlgName.ShowDialog()
     End Sub
 
@@ -680,19 +676,14 @@ Public Class frmMain
         frmMetaData.BringToFront()
     End Sub
 
-    Private Sub mnuManageDataFrameViewColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameViewColumnMetadata.Click
+    Private Sub mnuManageSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageSheetColumnMetadata.Click
         frmVariables.Visible = True
         frmVariables.BringToFront()
     End Sub
 
-    Private Sub mnuManageDataFrameInsert_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameInsert.Click
+    Private Sub mnuManageSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuManageSheetInsertColumnsRows.Click
         dlgInsertColumn.ShowDialog()
     End Sub
-
-    Private Sub mnuManageDataFrameRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameRename.Click
-        dlgName.ShowDialog()
-    End Sub
-
     Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPie.Click
         dlgBarAndPieChart.ShowDialog()
     End Sub
@@ -713,7 +704,7 @@ Public Class frmMain
         dlgDeleteSheet.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFrameDelete_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameDelete.Click
+    Private Sub mnuManageSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuManageSheetDeleteColumnsRows.Click
         dlgDeleteColumn.ShowDialog()
     End Sub
 
