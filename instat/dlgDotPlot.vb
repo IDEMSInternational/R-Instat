@@ -19,6 +19,8 @@ Public Class dlgDotPlot
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_dotplot As New RFunction
     Private clsRaesFunction As New RFunction
+    Private bFirstLoad As Boolean = True
+
     Private Sub dlgDotPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -29,38 +31,63 @@ Public Class dlgDotPlot
         ucrYVariableReceiver.Selector = ucrDotPlotSelector
         ucrFactorReceiver.Selector = ucrDotPlotSelector
         ucrSecondfactorReceiver.Selector = ucrDotPlotSelector
-        ucrYVariableReceiver.SetMeAsReceiver()
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.OKEnabled(False)
         autoTranslate(Me)
 
-
+        If bFirstLoad Then
+            Setdefaults()
+            bFirstLoad = False
+        End If
+        TestOkEnabled()
     End Sub
 
-    Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
-        clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
-    End Sub
-
-    Private Sub ucrSecondfactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrSecondfactorReceiver.Leave
-        clsRaesFunction.AddParameter("fill", ucrSecondfactorReceiver.GetVariableNames(False))
-    End Sub
-
-    Private Sub ucrYVariableReceiver_Leave(sender As Object, e As EventArgs) Handles ucrYVariableReceiver.Leave
-        If Not (ucrYVariableReceiver.txtReceiverSingle.Text = "") Then
+    Private Sub TestOkEnabled()
+        If ucrYVariableReceiver.IsEmpty() = False Then
             ucrBase.OKEnabled(True)
-            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_dotplot)
-            clsRaesFunction.AddParameter("y", ucrYVariableReceiver.GetVariableNames(False))
-            clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
         Else
             ucrBase.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub Setdefaults()
+        ucrDotPlotSelector.Reset()
+        ucrYVariableReceiver.SetMeAsReceiver()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
+        If ucrFactorReceiver.IsEmpty() = False Then
+            clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.AddParameter("x", Chr(34) & "" & Chr(34))
+        End If
+
+    End Sub
+
+    Private Sub ucrSecondfactorReceiver_SelectonChanged(sender As Object, e As EventArgs) Handles ucrSecondfactorReceiver.SelectionChanged
+        If ucrSecondfactorReceiver.IsEmpty() = False Then
+            clsRaesFunction.AddParameter("fill", ucrSecondfactorReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+        End If
+    End Sub
+
+    Private Sub ucrYVariableReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYVariableReceiver.SelectionChanged
+
+        If ucrYVariableReceiver.IsEmpty() = False Then
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_dotplot)
+            clsRaesFunction.AddParameter("y", ucrYVariableReceiver.GetVariableNames(False))
+            clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
+        End If
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrDotPlotSelector_DataFrameChanged() Handles ucrDotPlotSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrDotPlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-    Private Sub ucrYVariableReceiver_TextChanged(sender As Object, e As EventArgs) Handles ucrYVariableReceiver.TextChanged
-
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        Setdefaults()
     End Sub
 End Class
