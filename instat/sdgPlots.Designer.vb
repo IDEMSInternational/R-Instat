@@ -35,6 +35,7 @@ Partial Class sdgPlots
         Me.tabTheme = New System.Windows.Forms.TabPage()
         Me.tabLegend = New System.Windows.Forms.TabPage()
         Me.tabFacet = New System.Windows.Forms.TabPage()
+        Me.chkIncludeFacets = New System.Windows.Forms.CheckBox()
         Me.txtNoOfRows = New System.Windows.Forms.TextBox()
         Me.chkFreeScalesY = New System.Windows.Forms.CheckBox()
         Me.chkMargin = New System.Windows.Forms.CheckBox()
@@ -46,14 +47,14 @@ Partial Class sdgPlots
         Me.rdoVertical = New System.Windows.Forms.RadioButton()
         Me.lblFactor2 = New System.Windows.Forms.Label()
         Me.lblFactor1 = New System.Windows.Forms.Label()
-        Me.ucrReceiveFactor2 = New instat.ucrReceiverSingle()
-        Me.ucrReceiveFactor1 = New instat.ucrReceiverSingle()
+        Me.ucr2ndFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.tabLayers = New System.Windows.Forms.TabPage()
         Me.chkConnect = New System.Windows.Forms.CheckBox()
         Me.chkDotPlot = New System.Windows.Forms.CheckBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.lblNoofRows = New System.Windows.Forms.Label()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabAxes.SuspendLayout()
         Me.tabFacet.SuspendLayout()
@@ -70,7 +71,7 @@ Partial Class sdgPlots
         Me.tabctrlBoxSubdialog.Location = New System.Drawing.Point(1, -1)
         Me.tabctrlBoxSubdialog.Name = "tabctrlBoxSubdialog"
         Me.tabctrlBoxSubdialog.SelectedIndex = 0
-        Me.tabctrlBoxSubdialog.Size = New System.Drawing.Size(357, 276)
+        Me.tabctrlBoxSubdialog.Size = New System.Drawing.Size(376, 283)
         Me.tabctrlBoxSubdialog.TabIndex = 0
         '
         'tabAxes
@@ -86,7 +87,7 @@ Partial Class sdgPlots
         Me.tabAxes.Location = New System.Drawing.Point(4, 22)
         Me.tabAxes.Name = "tabAxes"
         Me.tabAxes.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabAxes.Size = New System.Drawing.Size(349, 250)
+        Me.tabAxes.Size = New System.Drawing.Size(368, 257)
         Me.tabAxes.TabIndex = 0
         Me.tabAxes.Tag = "Axes"
         Me.tabAxes.Text = "Axes"
@@ -170,7 +171,7 @@ Partial Class sdgPlots
         Me.tabTheme.Location = New System.Drawing.Point(4, 22)
         Me.tabTheme.Name = "tabTheme"
         Me.tabTheme.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabTheme.Size = New System.Drawing.Size(349, 250)
+        Me.tabTheme.Size = New System.Drawing.Size(368, 257)
         Me.tabTheme.TabIndex = 1
         Me.tabTheme.Tag = "Theme"
         Me.tabTheme.Text = "Theme"
@@ -181,7 +182,7 @@ Partial Class sdgPlots
         Me.tabLegend.Location = New System.Drawing.Point(4, 22)
         Me.tabLegend.Name = "tabLegend"
         Me.tabLegend.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabLegend.Size = New System.Drawing.Size(349, 250)
+        Me.tabLegend.Size = New System.Drawing.Size(368, 257)
         Me.tabLegend.TabIndex = 2
         Me.tabLegend.Tag = "Legend"
         Me.tabLegend.Text = "Legend"
@@ -189,33 +190,45 @@ Partial Class sdgPlots
         '
         'tabFacet
         '
-        Me.tabFacet.Controls.Add(Me.CheckBox1)
+        Me.tabFacet.Controls.Add(Me.chkIncludeFacets)
         Me.tabFacet.Controls.Add(Me.txtNoOfRows)
         Me.tabFacet.Controls.Add(Me.chkFreeScalesY)
         Me.tabFacet.Controls.Add(Me.chkMargin)
         Me.tabFacet.Controls.Add(Me.chkFreeScalesX)
         Me.tabFacet.Controls.Add(Me.txtNoOfColumns)
+        Me.tabFacet.Controls.Add(Me.lblNoofRows)
         Me.tabFacet.Controls.Add(Me.lblNoOfColumns)
         Me.tabFacet.Controls.Add(Me.chkWrapOptions)
         Me.tabFacet.Controls.Add(Me.rdoHorizontal)
         Me.tabFacet.Controls.Add(Me.rdoVertical)
         Me.tabFacet.Controls.Add(Me.lblFactor2)
         Me.tabFacet.Controls.Add(Me.lblFactor1)
-        Me.tabFacet.Controls.Add(Me.ucrReceiveFactor2)
-        Me.tabFacet.Controls.Add(Me.ucrReceiveFactor1)
+        Me.tabFacet.Controls.Add(Me.ucr2ndFactorReceiver)
+        Me.tabFacet.Controls.Add(Me.ucr1stFactorReceiver)
         Me.tabFacet.Controls.Add(Me.ucrAddRemove)
         Me.tabFacet.Location = New System.Drawing.Point(4, 22)
         Me.tabFacet.Name = "tabFacet"
         Me.tabFacet.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabFacet.Size = New System.Drawing.Size(349, 250)
+        Me.tabFacet.Size = New System.Drawing.Size(368, 257)
         Me.tabFacet.TabIndex = 3
         Me.tabFacet.Tag = "Facet"
         Me.tabFacet.Text = "Facet"
         Me.tabFacet.UseVisualStyleBackColor = True
         '
+        'chkIncludeFacets
+        '
+        Me.chkIncludeFacets.AutoSize = True
+        Me.chkIncludeFacets.Location = New System.Drawing.Point(262, 119)
+        Me.chkIncludeFacets.Name = "chkIncludeFacets"
+        Me.chkIncludeFacets.Size = New System.Drawing.Size(96, 17)
+        Me.chkIncludeFacets.TabIndex = 16
+        Me.chkIncludeFacets.Tag = "Include_Facets"
+        Me.chkIncludeFacets.Text = "Include Facets"
+        Me.chkIncludeFacets.UseVisualStyleBackColor = True
+        '
         'txtNoOfRows
         '
-        Me.txtNoOfRows.Location = New System.Drawing.Point(240, 201)
+        Me.txtNoOfRows.Location = New System.Drawing.Point(240, 208)
         Me.txtNoOfRows.Name = "txtNoOfRows"
         Me.txtNoOfRows.Size = New System.Drawing.Size(62, 20)
         Me.txtNoOfRows.TabIndex = 15
@@ -223,7 +236,7 @@ Partial Class sdgPlots
         'chkFreeScalesY
         '
         Me.chkFreeScalesY.AutoSize = True
-        Me.chkFreeScalesY.Location = New System.Drawing.Point(151, 227)
+        Me.chkFreeScalesY.Location = New System.Drawing.Point(151, 238)
         Me.chkFreeScalesY.Name = "chkFreeScalesY"
         Me.chkFreeScalesY.Size = New System.Drawing.Size(109, 17)
         Me.chkFreeScalesY.TabIndex = 14
@@ -234,7 +247,7 @@ Partial Class sdgPlots
         'chkMargin
         '
         Me.chkMargin.AutoSize = True
-        Me.chkMargin.Location = New System.Drawing.Point(17, 174)
+        Me.chkMargin.Location = New System.Drawing.Point(17, 182)
         Me.chkMargin.Name = "chkMargin"
         Me.chkMargin.Size = New System.Drawing.Size(63, 17)
         Me.chkMargin.TabIndex = 13
@@ -244,7 +257,7 @@ Partial Class sdgPlots
         'chkFreeScalesX
         '
         Me.chkFreeScalesX.AutoSize = True
-        Me.chkFreeScalesX.Location = New System.Drawing.Point(17, 227)
+        Me.chkFreeScalesX.Location = New System.Drawing.Point(17, 238)
         Me.chkFreeScalesX.Name = "chkFreeScalesX"
         Me.chkFreeScalesX.Size = New System.Drawing.Size(109, 17)
         Me.chkFreeScalesX.TabIndex = 12
@@ -254,7 +267,7 @@ Partial Class sdgPlots
         '
         'txtNoOfColumns
         '
-        Me.txtNoOfColumns.Location = New System.Drawing.Point(240, 172)
+        Me.txtNoOfColumns.Location = New System.Drawing.Point(240, 180)
         Me.txtNoOfColumns.Name = "txtNoOfColumns"
         Me.txtNoOfColumns.Size = New System.Drawing.Size(62, 20)
         Me.txtNoOfColumns.TabIndex = 11
@@ -262,7 +275,7 @@ Partial Class sdgPlots
         'lblNoOfColumns
         '
         Me.lblNoOfColumns.AutoSize = True
-        Me.lblNoOfColumns.Location = New System.Drawing.Point(136, 175)
+        Me.lblNoOfColumns.Location = New System.Drawing.Point(136, 183)
         Me.lblNoOfColumns.Name = "lblNoOfColumns"
         Me.lblNoOfColumns.Size = New System.Drawing.Size(98, 13)
         Me.lblNoOfColumns.TabIndex = 10
@@ -272,7 +285,7 @@ Partial Class sdgPlots
         'chkWrapOptions
         '
         Me.chkWrapOptions.AutoSize = True
-        Me.chkWrapOptions.Location = New System.Drawing.Point(203, 139)
+        Me.chkWrapOptions.Location = New System.Drawing.Point(203, 143)
         Me.chkWrapOptions.Name = "chkWrapOptions"
         Me.chkWrapOptions.Size = New System.Drawing.Size(89, 17)
         Me.chkWrapOptions.TabIndex = 9
@@ -283,7 +296,7 @@ Partial Class sdgPlots
         'rdoHorizontal
         '
         Me.rdoHorizontal.AutoSize = True
-        Me.rdoHorizontal.Location = New System.Drawing.Point(83, 138)
+        Me.rdoHorizontal.Location = New System.Drawing.Point(83, 142)
         Me.rdoHorizontal.Name = "rdoHorizontal"
         Me.rdoHorizontal.Size = New System.Drawing.Size(72, 17)
         Me.rdoHorizontal.TabIndex = 7
@@ -295,7 +308,7 @@ Partial Class sdgPlots
         'rdoVertical
         '
         Me.rdoVertical.AutoSize = True
-        Me.rdoVertical.Location = New System.Drawing.Point(17, 139)
+        Me.rdoVertical.Location = New System.Drawing.Point(17, 143)
         Me.rdoVertical.Name = "rdoVertical"
         Me.rdoVertical.Size = New System.Drawing.Size(60, 17)
         Me.rdoVertical.TabIndex = 6
@@ -307,7 +320,7 @@ Partial Class sdgPlots
         'lblFactor2
         '
         Me.lblFactor2.AutoSize = True
-        Me.lblFactor2.Location = New System.Drawing.Point(227, 67)
+        Me.lblFactor2.Location = New System.Drawing.Point(265, 67)
         Me.lblFactor2.Name = "lblFactor2"
         Me.lblFactor2.Size = New System.Drawing.Size(101, 13)
         Me.lblFactor2.TabIndex = 4
@@ -316,32 +329,34 @@ Partial Class sdgPlots
         'lblFactor1
         '
         Me.lblFactor1.AutoSize = True
-        Me.lblFactor1.Location = New System.Drawing.Point(224, 15)
+        Me.lblFactor1.Location = New System.Drawing.Point(262, 15)
         Me.lblFactor1.Name = "lblFactor1"
         Me.lblFactor1.Size = New System.Drawing.Size(51, 13)
         Me.lblFactor1.TabIndex = 3
         Me.lblFactor1.Tag = ""
         Me.lblFactor1.Text = "1st factor"
         '
-        'ucrReceiveFactor2
+        'ucr2ndFactorReceiver
         '
-        Me.ucrReceiveFactor2.Location = New System.Drawing.Point(224, 87)
-        Me.ucrReceiveFactor2.Name = "ucrReceiveFactor2"
-        Me.ucrReceiveFactor2.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiveFactor2.TabIndex = 2
+        Me.ucr2ndFactorReceiver.Location = New System.Drawing.Point(262, 87)
+        Me.ucr2ndFactorReceiver.Name = "ucr2ndFactorReceiver"
+        Me.ucr2ndFactorReceiver.Selector = Nothing
+        Me.ucr2ndFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucr2ndFactorReceiver.TabIndex = 2
         '
-        'ucrReceiveFactor1
+        'ucr1stFactorReceiver
         '
-        Me.ucrReceiveFactor1.Location = New System.Drawing.Point(224, 34)
-        Me.ucrReceiveFactor1.Name = "ucrReceiveFactor1"
-        Me.ucrReceiveFactor1.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiveFactor1.TabIndex = 1
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(262, 34)
+        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
+        Me.ucr1stFactorReceiver.Selector = Nothing
+        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucr1stFactorReceiver.TabIndex = 1
         '
         'ucrAddRemove
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(6, 6)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(228, 127)
         Me.ucrAddRemove.TabIndex = 0
         '
         'tabLayers
@@ -351,7 +366,7 @@ Partial Class sdgPlots
         Me.tabLayers.Location = New System.Drawing.Point(4, 22)
         Me.tabLayers.Name = "tabLayers"
         Me.tabLayers.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabLayers.Size = New System.Drawing.Size(349, 250)
+        Me.tabLayers.Size = New System.Drawing.Size(368, 257)
         Me.tabLayers.TabIndex = 4
         Me.tabLayers.Tag = "Layers"
         Me.tabLayers.Text = "Layers"
@@ -381,26 +396,26 @@ Partial Class sdgPlots
         '
         'ucrBaseSubdialog
         '
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(44, 277)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(83, 288)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(253, 41)
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
-        'CheckBox1
+        'lblNoofRows
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(100, 4)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(81, 17)
-        Me.CheckBox1.TabIndex = 16
-        Me.CheckBox1.Text = "CheckBox1"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.lblNoofRows.AutoSize = True
+        Me.lblNoofRows.Location = New System.Drawing.Point(136, 209)
+        Me.lblNoofRows.Name = "lblNoofRows"
+        Me.lblNoofRows.Size = New System.Drawing.Size(86, 13)
+        Me.lblNoofRows.TabIndex = 10
+        Me.lblNoofRows.Tag = "Number_of_Rows"
+        Me.lblNoofRows.Text = "Number of Rows"
         '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(358, 324)
+        Me.ClientSize = New System.Drawing.Size(381, 320)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tabctrlBoxSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -408,6 +423,7 @@ Partial Class sdgPlots
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Plot_Options"
         Me.Text = "Plot Options"
+        Me.TopMost = True
         Me.tabctrlBoxSubdialog.ResumeLayout(False)
         Me.tabAxes.ResumeLayout(False)
         Me.tabAxes.PerformLayout()
@@ -442,13 +458,14 @@ Partial Class sdgPlots
     Friend WithEvents rdoVertical As RadioButton
     Friend WithEvents lblFactor2 As Label
     Friend WithEvents lblFactor1 As Label
-    Friend WithEvents ucrReceiveFactor2 As ucrReceiverSingle
-    Friend WithEvents ucrReceiveFactor1 As ucrReceiverSingle
+    Friend WithEvents ucr2ndFactorReceiver As ucrReceiverSingle
+    Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents chkConnect As CheckBox
     Friend WithEvents chkDotPlot As CheckBox
     Friend WithEvents chkMargin As CheckBox
     Friend WithEvents chkFreeScalesY As CheckBox
     Friend WithEvents txtNoOfRows As TextBox
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents chkIncludeFacets As CheckBox
+    Friend WithEvents lblNoofRows As Label
 End Class

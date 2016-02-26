@@ -16,6 +16,8 @@
 
 Imports instat.Translations
 Public Class dlgHistogram
+    Public bFirstLoad As Boolean = True
+
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_histogramFunction As New RFunction
     Private clsRgeom_densityFunction As New RFunction
@@ -23,32 +25,39 @@ Public Class dlgHistogram
     Private clsRaesFunction As New RFunction
 
     Private Sub dlgHistogram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            'setdefaults
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            'todo what happens when it reopens
+            ReopenDialog()
+        End If
+
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRaesFunction.SetRCommand("aes")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrBase.clsRsyntax.iCallType = 0
-        ucrXReceiver.Selector = ucrHistogramSelector
-        ucrFactorReceiver.Selector = ucrHistogramSelector
+        ucrBase.iHelpTopicID = 118
         ucrXReceiver.SetMeAsReceiver()
-        ucrBase.OKEnabled(False)
+        TestOkEnabled()
         autoTranslate(Me)
     End Sub
 
-    Private Sub ucrHistogramSelector_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrHistogramSelector.DataFrameChanged
+    Private Sub ucrHistogramSelector_DataFrameChanged() Handles ucrHistogramSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrHistogramSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-    Private Sub ucrXReceiver_Leave(sender As Object, e As EventArgs) Handles ucrXReceiver.Leave
-
+    Private Sub ucrXReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrXReceiver.SelectionChanged
         If Not (ucrXReceiver.txtReceiverSingle.Text = "") Then
             clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
-            ucrBase.OKEnabled(True)
+            TestOkEnabled()
         Else
-
-            ucrBase.OKEnabled(False)
+            TestOkEnabled()
         End If
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -70,6 +79,7 @@ Public Class dlgHistogram
         If rdoDensity.Checked = True Then
             clsRgeom_densityFunction.SetRCommand("geom_density")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_densityFunction)
+
         End If
     End Sub
 
@@ -78,6 +88,31 @@ Public Class dlgHistogram
             clsRgeom_FPolygon.SetRCommand("geom_freqpoly")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_FPolygon)
         End If
+    End Sub
+
+    Private Sub TestOkEnabled()
+        'tests when ok can be enabled
+        If ucrXReceiver.GetVariableNames() <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+
+    End Sub
+
+    Private Sub SetDefaults()
+        'seting Defaults for the dialog
+        ucrXReceiver.Selector = ucrHistogramSelector
+        ucrFactorReceiver.Selector = ucrHistogramSelector
+        ucrXReceiver.SetMeAsReceiver()
+        ucrHistogramSelector.Reset()
+        rdoHistogram.Checked = True
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+        'TODO what happens on reopening
+
     End Sub
 
     Private Sub rdoHistogram_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoHistogram.KeyPress
@@ -96,5 +131,13 @@ Public Class dlgHistogram
         If e.KeyChar = vbCr Then
             rdoFreequencyPolygon.Checked = True
         End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
+
+    Private Sub cmdHistogramOptions_Click(sender As Object, e As EventArgs) Handles cmdHistogramOptions.Click
+        sdgHistogramOptions.ShowDialog()
     End Sub
 End Class

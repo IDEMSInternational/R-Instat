@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class ucrReceiver
-    Public Selector As ucrSelector
+    Public WithEvents Selector As ucrSelector
     Public strDataType As String = "all"
 
     Public Overridable Sub AddSelected()
@@ -30,6 +30,10 @@ Public Class ucrReceiver
     Public Overridable Sub Clear()
 
     End Sub
+
+    Public Overridable Function IsEmpty() As Boolean
+        Return True
+    End Function
 
     Public Overridable Sub SetColor()
 
@@ -76,12 +80,17 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Public Function MakeValidRString(strTemp As String) As String
-        Dim InvalidStrings() As String = {" ", "-"}
-        For Each strInvalid In InvalidStrings
-            strTemp = Replace(strTemp, strInvalid, "")
-        Next
-        Return strTemp
+    Private Sub Selector_ResetAll() Handles Selector.ResetReceivers
+        Clear()
+    End Sub
+
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+        If keyData = (Keys.Shift + Keys.Tab) Then
+            Selector.Focus()
+            Return True
+        Else
+            Return MyBase.ProcessCmdKey(msg, keyData)
+        End If
     End Function
 
 End Class

@@ -23,42 +23,54 @@ Public Class ucrReceiverMultiple
         End If
     End Sub
 
+    Public Event SelectionChanged()
+
     Public Overrides Sub AddSelected()
         Dim objItem As ListViewItem
-        Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As Object
+        Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
         Dim grpTemp As ListViewGroup
 
         Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
         For Each objItem In tempObjects
-            If Not lstSelectedVariables.Items.Contains(objItem) Then
-                If Not GetCurrHeaders().Contains(objItem.Group.Header) Then
-                    grpTemp = New ListViewGroup(objItem.Group.Header, HorizontalAlignment.Left)
-                    grpTemp.Name = objItem.Group.Header
+            If Not GetCurrItemNames().Contains(objItem.Text) Then
+                If Not GetCurrGroupNames().Contains(objItem.Group.Name) Then
+                    grpTemp = New ListViewGroup(key:=objItem.Group.Name, headerText:=objItem.Group.Name)
                     lstSelectedVariables.Groups.Add(grpTemp)
                 Else
-                    grpTemp = lstSelectedVariables.Groups(objItem.Group.Header)
+                    grpTemp = lstSelectedVariables.Groups(objItem.Group.Name)
                 End If
                 lstSelectedVariables.Items.Add(objItem.Text).Group = grpTemp
             End If
         Next
+        RaiseEvent SelectionChanged()
 
     End Sub
 
-    Private Function GetCurrHeaders() As List(Of String)
+    Private Function GetCurrItemNames() As List(Of String)
+        Dim strItemNames As New List(Of String)
+        Dim currItem As ListViewItem
+
+        For Each currItem In lstSelectedVariables.Items
+            strItemNames.Add(currItem.Text)
+        Next
+        Return strItemNames
+    End Function
+
+    Private Function GetCurrGroupNames() As List(Of String)
         Dim strHeaders As New List(Of String)
         Dim grpTemp As ListViewGroup
 
         For Each grpTemp In lstSelectedVariables.Groups
-            If Not strHeaders.Contains(grpTemp.Header) Then
-                strHeaders.Add(grpTemp.Header)
+            If Not strHeaders.Contains(grpTemp.Name) Then
+                strHeaders.Add(grpTemp.Name)
             End If
         Next
         Return strHeaders
     End Function
+
     Public Overrides Sub RemoveSelected()
         Dim objItem As ListViewItem
         Dim tempObjects(lstSelectedVariables.SelectedItems.Count - 1) As Object
-        Dim i As Integer
 
         If lstSelectedVariables.SelectedItems.Count > 0 Then
             lstSelectedVariables.SelectedItems.CopyTo(tempObjects, 0)
@@ -66,13 +78,25 @@ Public Class ucrReceiverMultiple
                 lstSelectedVariables.Items.Remove(objItem)
             Next
         End If
+        RaiseEvent SelectionChanged()
     End Sub
 
     Public Overrides Sub Clear()
 
-        lstSelectedVariables.SelectedItems.Clear()
+        lstSelectedVariables.Items.Clear()
+        RaiseEvent SelectionChanged()
 
     End Sub
+
+    Public Overrides Function IsEmpty() As Boolean
+
+        If lstSelectedVariables.Items.Count > 0 Then
+            Return False
+        Else
+            Return True
+        End If
+
+    End Function
 
     Public Overrides Function GetVariables() As RFunction
         'TODO sort this out
@@ -138,14 +162,21 @@ Public Class ucrReceiverMultiple
         lstSelectedVariables.BackColor = Color.White
     End Sub
 
-    Private Sub lstSelectedVariables_KeyPress(sender As Object, e As KeyPressEventArgs) Handles lstSelectedVariables.KeyPress
-        If e.KeyChar = vbCr Then
+    Private Sub lstSelectedVariables_KeyDown(sender As Object, e As KeyEventArgs) Handles lstSelectedVariables.KeyDown
+        If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
             RemoveSelected()
         End If
     End Sub
 
-    Private Sub lstSelectedVariables_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstSelectedVariables.SelectedIndexChanged
-
+    Private Sub lstSelectedVariables_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lstSelectedVariables.MouseDoubleClick
+        RemoveSelected()
     End Sub
 
+    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
+        RemoveSelected()
+    End Sub
+
+    Private Sub ClearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem.Click
+        Clear()
+    End Sub
 End Class
