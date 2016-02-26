@@ -129,7 +129,7 @@ data_obj$methods(update_variables_metadata = function() {
     else {
       for(col in colnames(data)[!colnames(data) %in% rownames(variables_metadata)]) {
         variables_metadata[col, name_label] <<- col
-        variables_metadata[col, display_decimal_label] <<- if(is.numeric(data[[col]])) if(min(data[[col]], na.rm = T)>100) 0 else if(min(data[[col]], na.rm = T)>10) 1 else 2 else NA
+        variables_metadata[col, display_decimal_label] <<- get_default_decimal_places(data[[col]])
       }
     }
   }
@@ -137,14 +137,52 @@ data_obj$methods(update_variables_metadata = function() {
 }
 )
 
-data_obj$methods(get_data_frame = function() {
-  return(data)
+get_default_decimal_places <- function(data) {
+  if(is.numeric(data)) {
+    if(class(data) == "integer" || min(data, na.rm = TRUE)>100) {
+      return(0)
+    }
+    else {
+      if(min(data, na.rm = T)>10) {
+        return(1)
+      }
+      else {  
+        return(2) 
+      }
+    }
+  }
+  else return(NA)  
+}
+
+data_obj$methods(get_data_frame = function(convert_to_character = FALSE) {
+  if(convert_to_character) {
+    decimal_places = .self$variables_metadata[[display_decimal_label]]
+    return(convert_to_character_matrix(data, TRUE, decimal_places))
+  }
+  else return(data)
 }
 )
 
-data_obj$methods(get_variables_metadata = function(include_all = TRUE, data_type = "all") {
+convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places) {
+  out = matrix(nrow = nrow(data), ncol = ncol(data))
+  if(!format_decimal_places) decimal_places=rep(NA, ncol(data))
+  else if(missing(decimal_places)) decimal_places = sapply(data, get_default_decimal_places)
+  
+  for(i in 1:ncol(data)) {
+    if(is.na(decimal_places[i])) {
+      out[,i] <- as.character(data[,i])
+    }
+    else {
+      out[,i] <- as.character(format(data[,i], nsmall = decimal_places[i]))
+    }
+  }
+  colnames(out) <- colnames(data)
+  return(out)
+}
+
+data_obj$methods(get_variables_metadata = function(include_all = TRUE, data_type = "all", convert_to_character = FALSE) {
   .self$update_variables_metadata()
-  if(!include_all) return(variables_metadata)
+  if(!include_all) out = variables_metadata
   else {
     out = variables_metadata
     out[[data_type_label]] = sapply(data, class)
@@ -156,7 +194,8 @@ data_obj$methods(get_variables_metadata = function(include_all = TRUE, data_type
       out = out[out[[data_type_label]]==data_type, ]
       }
     }
-    return(out)
+    if(convert_to_character) return(convert_to_character_matrix(out, FALSE))
+    else return(out)
   }
 }
 )
@@ -315,6 +354,23 @@ data_obj$methods(append_to_metadata = function(name, value) {
     .self$append_to_changes(list(Added_metadata, name))
     .self$set_metadata_changed(TRUE)
   }
+}
+)
+
+data_obj$methods(append_to_variables_metadata = function(col_name, property, new_val) {
+  
+  if( missing(col_name) || missing(property) || missing(new_val) ) {
+    stop("col_name, property and new_val arguements must be specified.")
+  }
+  if(!col_name %in% names(data)) stop("col_name not found in data")
+  
+  row = which(variables_metadata[,1]==col_name)
+  col = which(colnames(variables_metadata)==property)
+  variables_metadata[row, col] <<- new_val
+  
+  .self$append_to_changes(list(Added_variables_metadata, col_name, property))
+  .self$set_variables_metadata_changed(TRUE)
+  .self$set_data_changed(TRUE)
 }
 )
 
@@ -564,6 +620,7 @@ Replaced_col="Replaced column"
 Renamed_col="Renamed column"
 Removed_col="Removed column"
 Added_metadata="Added metadata"
+Added_variables_metadata="Added variables metadata"
 Converted_col_="Converted column"
 Replaced_value="Replaced value"
 Removed_row="Removed row"
