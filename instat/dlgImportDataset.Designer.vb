@@ -287,8 +287,8 @@ Partial Class dlgImportDataset
         Me.grdDataPreview.RowHeaderContextMenuStrip = Nothing
         Me.grdDataPreview.Script = Nothing
         Me.grdDataPreview.SheetTabContextMenuStrip = Nothing
-        Me.grdDataPreview.SheetTabControlNewButtonVisible = False
-        Me.grdDataPreview.SheetTabControlWidth = 60
+        Me.grdDataPreview.SheetTabNewButtonVisible = False
+        Me.grdDataPreview.SheetTabWidth = 60
         Me.grdDataPreview.SheetTabNewButtonVisible = False
         Me.grdDataPreview.Size = New System.Drawing.Size(422, 174)
         Me.grdDataPreview.TabIndex = 28
