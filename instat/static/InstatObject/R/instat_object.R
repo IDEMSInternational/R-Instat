@@ -125,31 +125,31 @@ instat_obj$methods(append_data_objects = function(name, obj) {
 }
 )
 
-instat_obj$methods(get_data_frame = function(data_name) { 
+instat_obj$methods(get_data_frame = function(data_name, convert_to_character = FALSE) { 
   if(missing(data_name)) {
     retlist <- list()
     for ( i in (1:length(data_objects)) ) {
-      retlist[[names(data_objects)[[i]]]] = data_objects[[i]]$get_data()
+      retlist[[names(data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character)
     }
     return(retlist)
   }
-  else return(data_objects[[data_name]]$get_data_frame())
+  else return(data_objects[[data_name]]$get_data_frame(convert_to_character = convert_to_character))
   } 
 )
 
-instat_obj$methods(get_variables_metadata = function(data_name, data_type = "all") { 
+instat_obj$methods(get_variables_metadata = function(data_name, data_type = "all", convert_to_character = FALSE) { 
   if(missing(data_name)) {
     retlist <- list()
   for ( i in (1:length(data_objects)) ) {
-    retlist[[names(data_objects)[[i]]]] = data_objects[[i]]$get_variables_metadata(data_type = data_type)
+    retlist[[names(data_objects)[[i]]]] = data_objects[[i]]$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character)
   }
   return(retlist)
   }
-  else return(data_objects[[data_name]]$get_variables_metadata(data_type = data_type))
+  else return(data_objects[[data_name]]$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character))
 } 
 )
 
-instat_obj$methods(get_combined_metadata = function() { 
+instat_obj$methods(get_combined_metadata = function(convert_to_character = FALSE) { 
   retlist <- data.frame()
   for ( i in (1:length(data_objects)) ) {
     templist=data_objects[[i]]$get_metadata()
@@ -157,7 +157,8 @@ instat_obj$methods(get_combined_metadata = function() {
       retlist[names(data_objects)[[i]],names(templist[j])] =templist[[j]]         
     }
   }
-  return(retlist)
+  if(convert_to_character) return(convert_to_character_matrix(retlist, FALSE))
+  else return(retlist)
 } 
 )
 
@@ -419,5 +420,21 @@ instat_obj$methods(convert_column_to_type = function(data_name, col_names = c(),
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
   data_objects[[data_name]]$convert_column_to_type(col_names = col_names, to_type = to_type, factor_numeric = factor_numeric)
+} 
+)
+
+instat_obj$methods(append_to_variables_metadata = function(data_name, col_name, property, new_val) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$append_to_variables_metadata(col_name, property, new_val)
+} 
+)
+
+instat_obj$methods(append_to_dataframe_metadata = function(data_name, property, new_val) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$append_to_metadata(property, new_val)
 } 
 )

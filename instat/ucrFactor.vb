@@ -64,7 +64,7 @@ Public Class ucrFactor
     End Sub
 
     Private Sub RefreshFactorData()
-        Dim dfTemp As DataFrame
+        Dim dfTemp As CharacterMatrix
         Dim bShowGrid As Boolean = False
         grdFactorData.Worksheets.Clear()
         If clsReceiver IsNot Nothing AndAlso clsReceiver.strDataType = "factor" AndAlso clsReceiver.GetVariableNames <> "" Then
