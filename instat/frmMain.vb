@@ -60,9 +60,6 @@ Public Class frmMain
         'Sets up R source files
         clsRLink.RSetup()
 
-        ' TODO tstatus shouldn't be set here in this way
-        tstatus.Text = frmEditor.grdData.CurrentWorksheet.Name
-
     End Sub
 
     Private Sub LoadInstatOptions()
