@@ -359,10 +359,6 @@ Public Class frmMain
         dlgView.ShowDialog()
     End Sub
 
-    Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgDeleteColumns.ShowDialog()
-    End Sub
-
     Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeSelect.Click
         dlgSelect.ShowDialog()
     End Sub
