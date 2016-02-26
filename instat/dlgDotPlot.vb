@@ -36,7 +36,7 @@ Public Class dlgDotPlot
         autoTranslate(Me)
 
         If bFirstLoad Then
-            Setdefaults()
+            SetDefaults()
             bFirstLoad = False
         End If
         TestOkEnabled()
@@ -50,7 +50,7 @@ Public Class dlgDotPlot
         End If
     End Sub
 
-    Private Sub Setdefaults()
+    Private Sub SetDefaults()
         ucrDotPlotSelector.Reset()
         ucrYVariableReceiver.SetMeAsReceiver()
         TestOkEnabled()
@@ -88,6 +88,6 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        Setdefaults()
+        SetDefaults()
     End Sub
 End Class
