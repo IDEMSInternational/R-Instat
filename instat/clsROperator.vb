@@ -56,6 +56,15 @@ Public Class ROperator
         bIsAssigned = False
     End Sub
 
+    Public Sub RemoveAssignTo()
+        strAssignTo = ""
+        strAssignToDataFrame = ""
+        strAssignToColumn = ""
+        strAssignToModel = ""
+        bToBeAssigned = False
+        bIsAssigned = False
+    End Sub
+
     Public Function ToScript(Optional ByRef strScript As String = "") As String
         Dim strTemp As String = ""
 
