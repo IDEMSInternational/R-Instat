@@ -18,11 +18,15 @@ Imports instat.Translations
 Public Class dlgInsertColumn
     Dim bFirstLoad As Boolean = True
 
+    'stores the number of variables for the selected data frame.
+    Private iCountVariables As Integer
+
     Private Sub chkPos_CheckStateChanged(sender As Object, e As EventArgs) Handles chkPos.CheckStateChanged
         If chkPos.Checked = True Then
             nudPos.Enabled = True
             txtStartPos.Enabled = False
         Else
+            ucrBase.clsRsyntax.AddParameter("start_pos", iCountVariables + 1)
             nudPos.Enabled = False
             txtStartPos.Enabled = True
         End If
@@ -38,34 +42,34 @@ Public Class dlgInsertColumn
 
     Private Sub setDefaultValues()
         txtDefaultData.Text = "NA"
-        ucrBase.clsRsyntax.AddParameter("col_data ", "c()")
+        ucrBase.clsRsyntax.AddParameter("col_data", "c()")
         txtStartPos.Text = "At the end."
-        ucrBase.clsRsyntax.AddParameter("start_pos", "length(" & ucrDataFramesList.cboAvailableDataFrames.SelectedItem & ")")
+        ucrBase.clsRsyntax.AddParameter("start_pos", iCountVariables + 1)
+        nudNumCols.Value = 1
+        nudPos.Value = iCountVariables
         nudPos.Enabled = False
+        ucrDataFramesList.Reset()
     End Sub
-
-    Private Sub ucrDataFramesList_Leave(sender As Object, e As EventArgs) Handles ucrDataFramesList.Leave
-        nudPos.Maximum = frmEditor.grdData.GetWorksheetByName(ucrDataFramesList.cboAvailableDataFrames.SelectedItem).ColumnCount
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFramesList.cboAvailableDataFrames.SelectedItem & Chr(34))
-    End Sub
-
-    'Private Sub txtDefaultData_Leave(sender As Object, e As EventArgs) Handles txtDefaultData.Leave
-    '    ucrBase.clsRsyntax.AddParameter("col_data ", "c(" & txtDefaultData.Text & ")")
-    'End Sub
 
     Private Sub nudPos_ValueChanged(sender As Object, e As EventArgs) Handles nudPos.ValueChanged
-        ucrBase.clsRsyntax.AddParameter("start_pos ", nudPos.Value)
+        ucrBase.clsRsyntax.AddParameter("start_pos", nudPos.Value)
     End Sub
 
     Private Sub nudNumCols_ValueChanged(sender As Object, e As EventArgs) Handles nudNumCols.ValueChanged
         ucrBase.clsRsyntax.AddParameter("number_cols", nudNumCols.Value)
     End Sub
 
-    Private Sub txtStartPos_Leave(sender As Object, e As EventArgs) Handles txtStartPos.Leave
-        ucrBase.clsRsyntax.AddParameter("start_pos ", "length(" & ucrDataFramesList.cboAvailableDataFrames.SelectedItem & ")")
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         setDefaultValues()
+    End Sub
+
+    Private Sub ucrDataFramesList_Leave(sender As Object, e As EventArgs) Handles ucrDataFramesList.Leave
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFramesList.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub ucrDataFramesList_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFramesList.DataFrameChanged
+        iCountVariables = frmEditor.grdData.GetWorksheetByName(ucrDataFramesList.cboAvailableDataFrames.SelectedItem).ColumnCount
+        nudPos.Maximum = iCountVariables + 1
+        nudPos.Value = iCountVariables
     End Sub
 End Class
