@@ -21,41 +21,45 @@ Public Class dlgRegressionSimple
     Dim clsModel As New ROperator
 
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+
+        autoTranslate(Me)
+
+    End Sub
+
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("lm")
         ucrBase.clsRsyntax.iCallType = 2
         clsModel.SetOperation("~")
         ucrResponse.Selector = ucrSelectorSimpleReg
         ucrExplanatory.Selector = ucrSelectorSimpleReg
-        autoTranslate(Me)
         ucrBase.iHelpTopicID = 171
+        sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+    End Sub
 
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
-            'Else
-            'ReopenDialog()
-        End If
+    Private Sub ReopenDialog()
 
-        TestOKEnabled()
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorSimpleReg.Reset()
         ucrResponse.SetMeAsReceiver()
         ucrSelectorSimpleReg.Focus()
-        chkModelName.Checked = False
-        'include last lm
-        'Test ok enabled
+        chkModelName.Checked = True
+        ucrModelName.SetName("temp_model")
+        sdgSimpleRegOptions.SetDefaults()
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        Dim strResponse As String = ""
-        Dim strExplanatory As String = ""
-        strResponse = ucrResponse.GetVariableNames(bWithQuotes:=False)
-        strExplanatory = ucrExplanatory.GetVariableNames(bWithQuotes:=False)
-
-        If ((Not (strResponse = "")) And (Not (strExplanatory = ""))) Then
+        If (Not ucrResponse.IsEmpty()) And (Not ucrExplanatory.IsEmpty()) Then
             ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
             ucrBase.OKEnabled(True)
         Else
@@ -85,37 +89,45 @@ Public Class dlgRegressionSimple
         SetDefaults()
     End Sub
 
-    'Private Sub ucrModelName_Leave(sender As Object, e As EventArgs) Handles ucrModelName.Leave
-    '    ucrBase.clsRsyntax.SetAssignTo("temp_model", strTempModel:=ucrModelName.txtValidation.Text)
+    Private Sub ucrModelName_NameChanged() Handles ucrModelName.NameChanged
+        AssignModelName()
+    End Sub
+
+    'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+    '    Dim clsRaovFunction As New RFunction
+
+    '    clsRaovFunction.SetRCommand("aov")
+    '    clsRaovFunction.AddParameter("", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+    '    frmMain.clsRLink.RunScript(clsRaovFunction.ToScript(), 2)
     'End Sub
 
+
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        Dim clsRaovFunction As New RFunction
-
-        clsRaovFunction.SetRCommand("aov")
-        clsRaovFunction.AddParameter("", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
-        frmMain.clsRLink.RunScript(clsRaovFunction.ToScript(), 2)
+        sdgSimpleRegOptions.RegOptions()
     End Sub
 
-    Private Sub ucrModelName_Load(sender As Object, e As EventArgs)
+    'Private Sub anovatable()
+    '    Dim clsRaovFunction As New RFunction
 
-    End Sub
-
-    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
-
-    End Sub
+    '    clsRaovFunction.SetRCommand("aov")
+    '    clsRaovFunction.AddParameter("", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
+    '    frmMain.clsRLink.RunScript(clsRaovFunction.ToScript(), 2)
+    'End Sub
 
     Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkModelName.CheckedChanged
         If chkModelName.Checked Then
-            ucrBase.clsRsyntax.SetAssignTo("temp_model", strTempModel:=ucrModelName.txtValidation.Text)
+            AssignModelName()
         Else
-            ucrBase.clsRsyntax.SetAssignTo("", strTempModel:=ucrModelName.txtValidation.Text)
+            ucrBase.clsRsyntax.RemoveAssignTo()
         End If
     End Sub
 
+    Private Sub AssignModelName()
+        If ucrModelName.txtValidation.Text <> "" Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrModelName.txtValidation.Text, strTempModel:=ucrModelName.txtValidation.Text)
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model")
+        End If
+    End Sub
     'TO DO reopen dialogue given the options
 End Class
