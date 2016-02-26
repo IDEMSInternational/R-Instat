@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRegressionSimple
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,92 +20,23 @@ Partial Class dlgRegressionSimple
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRegressionSimple))
-        Me.tbctrlSimple = New System.Windows.Forms.TabControl()
-        Me.tbRegress = New System.Windows.Forms.TabPage()
-        Me.ucrReceiverSingleB = New instat.ucrReceiverSingle()
-        Me.grpLackFit = New System.Windows.Forms.GroupBox()
-        Me.txtdf = New System.Windows.Forms.TextBox()
-        Me.txtResidualMsg = New System.Windows.Forms.TextBox()
-        Me.lblDF = New System.Windows.Forms.Label()
         Me.lblResidualMsg = New System.Windows.Forms.Label()
-        Me.chkLackFit = New System.Windows.Forms.CheckBox()
-        Me.chkANOVATable = New System.Windows.Forms.CheckBox()
-        Me.chkShowPlots = New System.Windows.Forms.CheckBox()
-        Me.chkSiginificance = New System.Windows.Forms.CheckBox()
-        Me.cboConfidenceLimits = New System.Windows.Forms.ComboBox()
-        Me.lblConfidence = New System.Windows.Forms.Label()
-        Me.lblExplanatoryVariable = New System.Windows.Forms.Label()
-        Me.lblResponseVariable = New System.Windows.Forms.Label()
-        Me.ucrReceiverSingleA = New instat.ucrReceiverSingle()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.tbPlot = New System.Windows.Forms.TabPage()
-        Me.tbSave = New System.Windows.Forms.TabPage()
+        Me.lblDF = New System.Windows.Forms.Label()
+        Me.txtResidualMsg = New System.Windows.Forms.TextBox()
+        Me.txtdf = New System.Windows.Forms.TextBox()
+        Me.lblResponse = New System.Windows.Forms.Label()
+        Me.lblExplanatory = New System.Windows.Forms.Label()
+        Me.cmdRegressionOptions = New System.Windows.Forms.Button()
+        Me.ucrExplanatory = New instat.ucrReceiverSingle()
+        Me.ucrResponse = New instat.ucrReceiverSingle()
+        Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.tbctrlSimple.SuspendLayout()
-        Me.tbRegress.SuspendLayout()
-        Me.grpLackFit.SuspendLayout()
+        Me.ucrModelName = New instat.ucrVariableName()
+        Me.chkModelName = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
-        '
-        'tbctrlSimple
-        '
-        Me.tbctrlSimple.Controls.Add(Me.tbRegress)
-        Me.tbctrlSimple.Controls.Add(Me.tbPlot)
-        Me.tbctrlSimple.Controls.Add(Me.tbSave)
-        resources.ApplyResources(Me.tbctrlSimple, "tbctrlSimple")
-        Me.tbctrlSimple.Name = "tbctrlSimple"
-        Me.tbctrlSimple.SelectedIndex = 0
-        '
-        'tbRegress
-        '
-        Me.tbRegress.Controls.Add(Me.ucrReceiverSingleB)
-        Me.tbRegress.Controls.Add(Me.grpLackFit)
-        Me.tbRegress.Controls.Add(Me.chkLackFit)
-        Me.tbRegress.Controls.Add(Me.chkANOVATable)
-        Me.tbRegress.Controls.Add(Me.chkShowPlots)
-        Me.tbRegress.Controls.Add(Me.chkSiginificance)
-        Me.tbRegress.Controls.Add(Me.cboConfidenceLimits)
-        Me.tbRegress.Controls.Add(Me.lblConfidence)
-        Me.tbRegress.Controls.Add(Me.lblExplanatoryVariable)
-        Me.tbRegress.Controls.Add(Me.lblResponseVariable)
-        Me.tbRegress.Controls.Add(Me.ucrReceiverSingleA)
-        Me.tbRegress.Controls.Add(Me.ucrAddRemove)
-        resources.ApplyResources(Me.tbRegress, "tbRegress")
-        Me.tbRegress.Name = "tbRegress"
-        Me.tbRegress.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverSingleB
-        '
-        resources.ApplyResources(Me.ucrReceiverSingleB, "ucrReceiverSingleB")
-        Me.ucrReceiverSingleB.Name = "ucrReceiverSingleB"
-        '
-        'grpLackFit
-        '
-        Me.grpLackFit.Controls.Add(Me.txtdf)
-        Me.grpLackFit.Controls.Add(Me.txtResidualMsg)
-        Me.grpLackFit.Controls.Add(Me.lblDF)
-        Me.grpLackFit.Controls.Add(Me.lblResidualMsg)
-        resources.ApplyResources(Me.grpLackFit, "grpLackFit")
-        Me.grpLackFit.Name = "grpLackFit"
-        Me.grpLackFit.TabStop = False
-        '
-        'txtdf
-        '
-        resources.ApplyResources(Me.txtdf, "txtdf")
-        Me.txtdf.Name = "txtdf"
-        '
-        'txtResidualMsg
-        '
-        resources.ApplyResources(Me.txtResidualMsg, "txtResidualMsg")
-        Me.txtResidualMsg.Name = "txtResidualMsg"
-        '
-        'lblDF
-        '
-        resources.ApplyResources(Me.lblDF, "lblDF")
-        Me.lblDF.Name = "lblDF"
-        Me.lblDF.Tag = "Degrees_of_freedom"
         '
         'lblResidualMsg
         '
@@ -113,126 +44,114 @@ Partial Class dlgRegressionSimple
         Me.lblResidualMsg.Name = "lblResidualMsg"
         Me.lblResidualMsg.Tag = "Residual_Msg"
         '
-        'chkLackFit
+        'lblDF
         '
-        resources.ApplyResources(Me.chkLackFit, "chkLackFit")
-        Me.chkLackFit.Name = "chkLackFit"
-        Me.chkLackFit.Tag = "Lack_of_Fit"
-        Me.chkLackFit.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.lblDF, "lblDF")
+        Me.lblDF.Name = "lblDF"
+        Me.lblDF.Tag = "Degrees_of_freedom"
         '
-        'chkANOVATable
+        'txtResidualMsg
         '
-        resources.ApplyResources(Me.chkANOVATable, "chkANOVATable")
-        Me.chkANOVATable.Name = "chkANOVATable"
-        Me.chkANOVATable.Tag = "Show_Anova_Table"
-        Me.chkANOVATable.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.txtResidualMsg, "txtResidualMsg")
+        Me.txtResidualMsg.Name = "txtResidualMsg"
         '
-        'chkShowPlots
+        'txtdf
         '
-        resources.ApplyResources(Me.chkShowPlots, "chkShowPlots")
-        Me.chkShowPlots.Name = "chkShowPlots"
-        Me.chkShowPlots.Tag = "Show_Plot"
-        Me.chkShowPlots.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.txtdf, "txtdf")
+        Me.txtdf.Name = "txtdf"
         '
-        'chkSiginificance
+        'lblResponse
         '
-        resources.ApplyResources(Me.chkSiginificance, "chkSiginificance")
-        Me.chkSiginificance.Name = "chkSiginificance"
-        Me.chkSiginificance.Tag = "Significance_Test"
-        Me.chkSiginificance.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.lblResponse, "lblResponse")
+        Me.lblResponse.Name = "lblResponse"
+        Me.lblResponse.Tag = "Response_Variable"
         '
-        'cboConfidenceLimits
+        'lblExplanatory
         '
-        Me.cboConfidenceLimits.FormattingEnabled = True
-        Me.cboConfidenceLimits.Items.AddRange(New Object() {resources.GetString("cboConfidenceLimits.Items"), resources.GetString("cboConfidenceLimits.Items1"), resources.GetString("cboConfidenceLimits.Items2"), resources.GetString("cboConfidenceLimits.Items3"), resources.GetString("cboConfidenceLimits.Items4"), resources.GetString("cboConfidenceLimits.Items5")})
-        resources.ApplyResources(Me.cboConfidenceLimits, "cboConfidenceLimits")
-        Me.cboConfidenceLimits.Name = "cboConfidenceLimits"
+        resources.ApplyResources(Me.lblExplanatory, "lblExplanatory")
+        Me.lblExplanatory.Name = "lblExplanatory"
+        Me.lblExplanatory.Tag = "Explanatory_Variable"
         '
-        'lblConfidence
+        'cmdRegressionOptions
         '
-        resources.ApplyResources(Me.lblConfidence, "lblConfidence")
-        Me.lblConfidence.Name = "lblConfidence"
-        Me.lblConfidence.Tag = "Confidence_Limits"
+        resources.ApplyResources(Me.cmdRegressionOptions, "cmdRegressionOptions")
+        Me.cmdRegressionOptions.Name = "cmdRegressionOptions"
+        Me.cmdRegressionOptions.Tag = "Regression_Options..."
+        Me.cmdRegressionOptions.UseVisualStyleBackColor = True
         '
-        'lblExplanatoryVariable
+        'ucrExplanatory
         '
-        resources.ApplyResources(Me.lblExplanatoryVariable, "lblExplanatoryVariable")
-        Me.lblExplanatoryVariable.Name = "lblExplanatoryVariable"
-        Me.lblExplanatoryVariable.Tag = "Explanatory_Variable"
+        resources.ApplyResources(Me.ucrExplanatory, "ucrExplanatory")
+        Me.ucrExplanatory.Name = "ucrExplanatory"
+        Me.ucrExplanatory.Selector = Nothing
         '
-        'lblResponseVariable
+        'ucrResponse
         '
-        resources.ApplyResources(Me.lblResponseVariable, "lblResponseVariable")
-        Me.lblResponseVariable.Name = "lblResponseVariable"
-        Me.lblResponseVariable.Tag = "Response_Variable"
+        resources.ApplyResources(Me.ucrResponse, "ucrResponse")
+        Me.ucrResponse.Name = "ucrResponse"
+        Me.ucrResponse.Selector = Nothing
         '
-        'ucrReceiverSingleA
+        'ucrSelectorSimpleReg
         '
-        resources.ApplyResources(Me.ucrReceiverSingleA, "ucrReceiverSingleA")
-        Me.ucrReceiverSingleA.Name = "ucrReceiverSingleA"
-        '
-        'ucrAddRemove
-        '
-        resources.ApplyResources(Me.ucrAddRemove, "ucrAddRemove")
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        '
-        'tbPlot
-        '
-        resources.ApplyResources(Me.tbPlot, "tbPlot")
-        Me.tbPlot.Name = "tbPlot"
-        Me.tbPlot.UseVisualStyleBackColor = True
-        '
-        'tbSave
-        '
-        resources.ApplyResources(Me.tbSave, "tbSave")
-        Me.tbSave.Name = "tbSave"
-        Me.tbSave.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
+        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
         '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrModelName
+        '
+        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
+        Me.ucrModelName.Name = "ucrModelName"
+        '
+        'chkModelName
+        '
+        resources.ApplyResources(Me.chkModelName, "chkModelName")
+        Me.chkModelName.Name = "chkModelName"
+        Me.chkModelName.Tag = "Model_Name"
+        Me.chkModelName.UseVisualStyleBackColor = True
+        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.chkModelName)
+        Me.Controls.Add(Me.ucrModelName)
+        Me.Controls.Add(Me.cmdRegressionOptions)
+        Me.Controls.Add(Me.lblExplanatory)
+        Me.Controls.Add(Me.lblResponse)
+        Me.Controls.Add(Me.ucrExplanatory)
+        Me.Controls.Add(Me.ucrResponse)
+        Me.Controls.Add(Me.ucrSelectorSimpleReg)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.tbctrlSimple)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpButton = True
         Me.Name = "dlgRegressionSimple"
         Me.ShowIcon = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Tag = "Simple_Regression"
-        Me.tbctrlSimple.ResumeLayout(False)
-        Me.tbRegress.ResumeLayout(False)
-        Me.tbRegress.PerformLayout()
-        Me.grpLackFit.ResumeLayout(False)
-        Me.grpLackFit.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents lblResidualMsg As Label
+    Friend WithEvents lblDF As Label
+    Friend WithEvents txtResidualMsg As TextBox
+    Friend WithEvents txtdf As TextBox
+    Friend WithEvents ucrSelectorSimpleReg As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrResponse As ucrReceiverSingle
+    Friend WithEvents ucrExplanatory As ucrReceiverSingle
+
+    Private Sub UcrReceiverSingle1_Load(sender As Object, e As EventArgs) Handles ucrResponse.Load
 
     End Sub
 
-    Friend WithEvents tbctrlSimple As TabControl
-    Friend WithEvents tbRegress As TabPage
-    Friend WithEvents grpLackFit As GroupBox
-    Friend WithEvents txtdf As TextBox
-    Friend WithEvents txtResidualMsg As TextBox
-    Friend WithEvents lblDF As Label
-    Friend WithEvents lblResidualMsg As Label
-    Friend WithEvents chkLackFit As CheckBox
-    Friend WithEvents chkANOVATable As CheckBox
-    Friend WithEvents chkShowPlots As CheckBox
-    Friend WithEvents chkSiginificance As CheckBox
-    Friend WithEvents cboConfidenceLimits As ComboBox
-    Friend WithEvents lblConfidence As Label
-    Friend WithEvents lblExplanatoryVariable As Label
-    Friend WithEvents lblResponseVariable As Label
-    Friend WithEvents ucrReceiverSingleA As ucrReceiverSingle
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents tbPlot As TabPage
-    Friend WithEvents tbSave As TabPage
-    Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReceiverSingleB As ucrReceiverSingle
+    Friend WithEvents lblResponse As Label
+    Friend WithEvents lblExplanatory As Label
+    Friend WithEvents cmdRegressionOptions As Button
+    Friend WithEvents ucrModelName As ucrVariableName
+    Friend WithEvents chkModelName As CheckBox
 End Class
