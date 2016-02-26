@@ -19,6 +19,8 @@ Public Class dlgStack
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("melt")
         ucrBase.iHelpTopicID = 57
+        ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
+        ucrIDVariablesReceiver.Selector = ucrSelectorStack
 
         If bFirstLoad Then
             SetDefaults()
@@ -27,12 +29,11 @@ Public Class dlgStack
             ReopenDialog()
         End If
 
-        'Checks if Ok can be enabled.
-
         TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
+        SetNewDataFrameName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
     End Sub
 
     Private Sub TestOKEnabled()
@@ -44,13 +45,15 @@ Public Class dlgStack
     End Sub
 
     Private Sub SetDefaults()
-        'Set receiver/selector options
-        ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
-        ucrIDVariablesReceiver.Selector = ucrSelectorStack
+        ucrNewDataFrameName.Reset()
+        SetNewDataFrameName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
+        ucrSelectorStack.Reset()
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+        chkIDVariables.Checked = False
         ucrIDVariablesReceiver.Visible = False
         SetStackIntoText("Value")
         SetFactorIntoText("Variable")
+        ucrNewDataFrameName.bUserTyped = False
         autoTranslate(Me)
 
     End Sub
@@ -74,39 +77,53 @@ Public Class dlgStack
     End Sub
 
     Private Sub chkIDVariables_CheckedChanged(sender As Object, e As EventArgs) Handles chkIDVariables.CheckedChanged
-        If chkIDVariables.Checked = True Then
+        If chkIDVariables.Checked Then
             ucrIDVariablesReceiver.Visible = True
-            ucrIDVariablesReceiver.Focus()
+            SetIDVars()
             ucrIDVariablesReceiver.SetMeAsReceiver()
         Else
             ucrIDVariablesReceiver.Visible = False
+            ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+            ucrBase.clsRsyntax.AddParameter("id.vars", "NULL")
         End If
     End Sub
 
     Private Sub ucrReceiverColumnsToBeStack_SelectionChanged() Handles ucrReceiverColumnsToBeStack.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("measure.vars", ucrReceiverColumnsToBeStack.GetVariableNames())
+        If Not ucrReceiverColumnsToBeStack.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("measure.vars", ucrReceiverColumnsToBeStack.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("measure.vars")
+        End If
         TestOKEnabled()
     End Sub
 
 
     Private Sub ucrIDVariablesReceiver_SelectionChanged() Handles ucrIDVariablesReceiver.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("id.vars", ucrIDVariablesReceiver.GetVariableNames())
+        SetIDVars()
         TestOKEnabled()
     End Sub
 
+    Private Sub SetIDVars()
+        If Not ucrIDVariablesReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("id.vars", ucrIDVariablesReceiver.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.AddParameter("id.vars", "NULL")
+        End If
+
+    End Sub
+
     Private Sub txtFactorInto_Leave(sender As Object, e As EventArgs) Handles txtFactorInto.Leave
-        ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtFactorInto.Text & Chr(34))
+        SetFactorIntoText(txtFactorInto.Text)
         TestOKEnabled()
     End Sub
 
     Private Sub txtStackDataInto_Leave(sender As Object, e As EventArgs) Handles txtStackDataInto.Leave
-        ucrBase.clsRsyntax.AddParameter("value.name", Chr(34) & txtStackDataInto.Text & Chr(34))
+        SetStackIntoText(txtStackDataInto.Text)
         TestOKEnabled()
     End Sub
 
     Private Sub ucrNewDataFrameName_Leave(sender As Object, e As EventArgs) Handles ucrNewDataFrameName.Leave
-        ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.txtValidation.Text, strTempDataframe:=ucrNewDataFrameName.txtValidation.Text)
-
+        SetNewDataFrameName(ucrNewDataFrameName.txtValidation.Text)
     End Sub
 
     Private Sub ucrDataFrameAddRemove_DataFrameChanged() Handles ucrSelectorStack.DataFrameChanged
@@ -121,9 +138,12 @@ Public Class dlgStack
     End Sub
 
     Private Sub SetNewDataFrameName(strNewVal As String)
-        If ucrNewDataFrameName.ValidateRString(strNewVal) = 0 Then
+        If ucrNewDataFrameName.IsValidRString(strNewVal) Then
             ucrNewDataFrameName.txtValidation.Text = strNewVal
             ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.txtValidation.Text, strTempDataframe:=ucrNewDataFrameName.txtValidation.Text)
+        Else
+            ucrNewDataFrameName.txtValidation.Text = ""
+            ucrBase.clsRsyntax.RemoveAssignTo()
         End If
     End Sub
 
@@ -135,5 +155,10 @@ Public Class dlgStack
                 chkIDVariables.Checked = True
             End If
         End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
     End Sub
 End Class

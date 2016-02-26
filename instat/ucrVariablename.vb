@@ -18,16 +18,18 @@ Public Class ucrVariableName
     Dim firstChar As Char
     Dim CurrChar As Char
     Dim bAcceptableString As Boolean
-    Public bUserTyped As Boolean
+    Public bUserTyped As Boolean = False
     Dim strReservedWords() As String = ({"if", "else", "repeat", "while", "function", "for", "in", "next", "break", "TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_"})
-
-    Private Sub ucrVariableName_Load(sender As Object, e As EventArgs) Handles Me.Load
-        bUserTyped = False
-    End Sub
-
+    Public Event NameChanged()
     'TODO this has a bug if using for setting default values in textbox if user does not use keyboard
     Private Sub txtValidation_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtValidation.KeyPress
         bUserTyped = True
+    End Sub
+
+
+    Public Sub Reset()
+        bUserTyped = False
+        txtValidation.Text = ""
     End Sub
 
     Public Function IsValidRString(strText As String) As Boolean
@@ -86,6 +88,8 @@ Public Class ucrVariableName
         iValidationCode = ValidateRString(txtValidation.Text)
 
         Select Case iValidationCode
+            Case 0
+                RaiseEvent NameChanged()
             Case 1
                 MsgBox(Chr(34) & txtValidation.Text & Chr(34) & " is a reserved word in R and cannot be used.", vbOKOnly)
                 txtValidation.Focus()
@@ -103,6 +107,15 @@ Public Class ucrVariableName
                 txtValidation.Focus()
         End Select
 
+    End Sub
+
+    Public Sub SetName(strName As String)
+        If IsValidRString(strName) Then
+            txtValidation.Text = strName
+            RaiseEvent NameChanged()
+        Else
+            MsgBox(strName & "is not a valid R variable name", vbOKOnly)
+        End If
     End Sub
 
     Private Sub txtValidation_Leave(sender As Object, e As EventArgs) Handles txtValidation.Leave
