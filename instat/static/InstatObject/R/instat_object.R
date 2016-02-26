@@ -3,7 +3,8 @@
 
 instat_obj <- setRefClass("instat_obj", 
                        fields = list(data_objects = "list", 
-                                     metadata = "list", models = "list")
+                                     metadata = "list", models = "list", 
+                                     data_objects_changed = "logical")
 )
 
 # INITIALIZE method
@@ -32,6 +33,8 @@ instat_obj$methods(initialize = function(data_tables = list(), instat_obj_metada
                       data_tables_metadata=data_tables_metadata, 
                       imported_from=imported_from, messages=messages, convert=convert, create=create)
   }
+  
+  .self$data_objects_changed <<- FALSE
   
 }
 )
@@ -165,6 +168,7 @@ instat_obj$methods(get_data_names = function() {
 
 instat_obj$methods(get_data_changed = function(data_name) {
   if(missing(data_name)) {
+    if(data_objects_changed) return (TRUE)
     for(curr_obj in data_objects) {
       if(curr_obj$data_changed) return(TRUE)
     }
@@ -178,6 +182,7 @@ instat_obj$methods(get_data_changed = function(data_name) {
 
 instat_obj$methods(get_variables_metadata_changed = function(data_obj) { 
   if(missing(data_obj)) {
+    if(data_objects_changed) return (TRUE)
     for(curr_obj in data_objects) {
       if(curr_obj$variables_metadata_changed) return(TRUE)
     }
@@ -191,6 +196,7 @@ instat_obj$methods(get_variables_metadata_changed = function(data_obj) {
 
 instat_obj$methods(get_metadata_changed = function(data_obj) { 
   if(missing(data_obj)) {
+    if(data_objects_changed) return (TRUE)
     for(curr_obj in data_objects) {
       if(curr_obj$metadata_changed) return(TRUE)
     }
@@ -262,8 +268,8 @@ instat_obj$methods(add_model = function(model, model_name = paste("model",length
 
 instat_obj$methods(get_model = function(model_name) {
   if(missing(model_name)) stop("model_name is required")
-  if(!is.character(name)) stop("name must be a character")
-  if(!name %in% names(models)) stop(name, "not found in models")
+  if(!is.character(model_name)) stop("name must be a character")
+  if(!model_name %in% names(models)) stop(model_name, "not found in models")
   models[[model_name]]
 }
 )
@@ -363,8 +369,8 @@ instat_obj$methods(length_of_data = function(data_name) {
 }
 )
 
-instat_obj$methods(get_next_default_dataframe_name = function(prefix) {
-  next_default_item(prefix = prefix, existing_names = names(data_objects))
+instat_obj$methods(get_next_default_dataframe_name = function(prefix, include_index = TRUE, start_index = 1) {
+  next_default_item(prefix = prefix, existing_names = names(data_objects), include_index = include_index, start_index = start_index)
 } 
 )
 
@@ -373,8 +379,7 @@ instat_obj$methods(delete_dataframe = function(data_name) {
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
   data_objects[[data_name]]<<-NULL
-  .self$get_metadata_changed(TRUE)
-  .self$get_data_changed(TRUE)
+  data_objects_changed <<- TRUE
 } 
 )
 
@@ -406,5 +411,13 @@ instat_obj$methods(rename_dataframe = function(data_name, new_value = "") {
   }
   
   data_objects[[new_value]]$append_to_metadata(data_name_label, new_value)
+} 
+)
+
+instat_obj$methods(convert_column_to_type = function(data_name, col_names = c(), to_type ="factor", factor_numeric = "by_levels") {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$convert_column_to_type(col_names = col_names, to_type = to_type, factor_numeric = factor_numeric)
 } 
 )

@@ -61,7 +61,6 @@ Public Class clsGridLink
                     FillSheet(dfTemp, strDataName, grdVariablesMetadata)
                     frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
                 End If
-
             Next
             'delete old sheets
             'TODO look at this code to improve it (simplify)
@@ -109,7 +108,10 @@ Public Class clsGridLink
         If bGrdMetadataExists And (bGrdMetadataChanged Or bRMetadataChanged) Then
             dfTemp = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_combined_metadata()").AsDataFrame
             FillSheet(dfTemp, "metadata", grdMetadata)
+            frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = FALSE)")
         End If
+
+        frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed = FALSE")
 
         If grdData.Worksheets.Count = 0 Then
             grdData.Visible = False
