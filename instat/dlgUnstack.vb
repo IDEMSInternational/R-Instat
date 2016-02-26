@@ -21,8 +21,7 @@ Public Class dlgUnstack
         ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
         ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
         ucrBase.clsRsyntax.SetFunction("tidyr::spread")
-        ucrDataFrameForUnstack.Reset()
-        SetNewDataFrameName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
+
 
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 58
@@ -41,6 +40,8 @@ Public Class dlgUnstack
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
         ucrSelectorForUnstack.Reset()
         chkKeepUnusedFactorLevels.Checked = False
+        ucrDataFrameForUnstack.Reset()
+        SetNewDataFrameName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
     End Sub
 
     Private Sub ReopenDialog()
@@ -56,6 +57,10 @@ Public Class dlgUnstack
         End If
     End Sub
 
+    Private Sub ucrDataFrameForUnstack_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameForUnstack.Leave
+        SetNewDataFrameName(ucrDataFrameForUnstack.txtValidation.Text)
+    End Sub
+
     Private Sub SetNewDataFrameName(strNewVal As String)
         If ucrDataFrameForUnstack.IsValidRString(strNewVal) Then
             ucrDataFrameForUnstack.txtValidation.Text = strNewVal
@@ -67,11 +72,14 @@ Public Class dlgUnstack
     End Sub
     Private Sub ucrSelectorForUnstack_DataFrameChanged() Handles ucrSelectorForUnstack.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame)
+        If Not ucrDataFrameForUnstack.bUserTyped Then
+            SetNewDataFrameName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
+        End If
 
     End Sub
 
-    Private Sub ucrFactorToUnstackReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorToUnstackReceiver.SelectionChanged
-        If ucrFactorToUnstackReceiver.IsEmpty() = True Then
+    Private Sub ucrFactorToUnstackReceiver_SelectionChanged() Handles ucrFactorToUnstackReceiver.SelectionChanged
+        If Not ucrFactorToUnstackReceiver.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("key", ucrFactorToUnstackReceiver.GetVariableNames(False))
         Else
             ucrBase.clsRsyntax.RemoveParameter("key")
@@ -80,8 +88,8 @@ Public Class dlgUnstack
     End Sub
 
 
-    Private Sub ucrColumnToUnstackReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.SelectionChanged
-        If ucrColumnToUnstackReceiver.IsEmpty() = True Then
+    Private Sub ucrColumnToUnstackReceiver_SelectionChanged() Handles ucrColumnToUnstackReceiver.SelectionChanged
+        If Not ucrColumnToUnstackReceiver.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("value", ucrColumnToUnstackReceiver.GetVariableNames(False))
         Else
             ucrBase.clsRsyntax.RemoveParameter("value")
