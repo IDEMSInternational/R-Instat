@@ -568,6 +568,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataRename.Click
+        dlgName.setSettings("", "")
         dlgName.ShowDialog()
     End Sub
 
