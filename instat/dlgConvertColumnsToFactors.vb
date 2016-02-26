@@ -97,8 +97,8 @@ Public Class dlgConvertColumnsToFactors
     End Sub
 
     Private Sub cboFactorNumeric_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFactorNumeric.SelectedValueChanged
-        If Not bFirstLoad Then
-            ucrBase.clsRsyntax.AddParameter("factor_numeric", cboFactorNumeric.SelectedItem.ToString)
-        End If
+
+        ucrBase.clsRsyntax.AddParameter("factor_numeric", cboFactorNumeric.SelectedItem.ToString)
+
     End Sub
 End Class
