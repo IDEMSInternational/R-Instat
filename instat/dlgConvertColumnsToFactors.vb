@@ -13,6 +13,92 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Public Class dlgConvertColumnsToFactors
+Imports instat.Translations
 
+Public Class dlgConvertColumnsToFactors
+    Public bFirstLoad As Boolean = True
+
+    Private Sub ucrSelectorDataFrameColumns_Load(sender As Object, e As EventArgs) Handles ucrSelectorDataFrameColumns.Load
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+
+        ucrReceiverColumnsToConvert.Selector = ucrSelectorDataFrameColumns
+        autoTranslate(Me)
+        ucrBase.iHelpTopicID = 34
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+
+        End If
+
+        TestOKEnabled()
+
+    End Sub
+
+    Private Sub SetDefaults()
+        ucrSelectorDataFrameColumns.Reset()
+        ucrSelectorDataFrameColumns.Focus()
+        ucrReceiverColumnsToConvert.SetMeAsReceiver()
+        rdoFactor.Checked = True
+
+
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorDataFrameolumns_DataFrameChanged() Handles ucrSelectorDataFrameColumns.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorDataFrameColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+
+    End Sub
+
+    Private Sub ucrReceiverColumnsToConvert_SelectionChanged() Handles ucrReceiverColumnsToConvert.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverColumnsToConvert.GetVariableNames)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub grpForConvertToType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFactor.CheckedChanged, rdoNumeric.CheckedChanged, rdoCharacter.CheckedChanged, rdoInteger.CheckedChanged
+        If rdoFactor.Checked Then
+            grpFactorNumeric.Visible = True
+            ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
+            TestOKEnabled()
+
+        ElseIf rdoNumeric.Checked Then
+            grpFactorNumeric.Visible = False
+            ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
+            TestOKEnabled()
+        ElseIf rdoCharacter.Checked Then
+            grpFactorNumeric.Visible = False
+            ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "character" & Chr(34))
+            TestOKEnabled()
+        ElseIf rdoInteger.Checked Then
+            grpFactorNumeric.Visible = False
+            ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "integer" & Chr(34))
+            TestOKEnabled()
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("to_type")
+            grpFactorNumeric.Visible = False
+
+            'the else case should never happen but is there just in case
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+
+    End Sub
+
+
+    Private Sub TestOKEnabled()
+        If ucrReceiverColumnsToConvert.IsEmpty() = False And (rdoFactor.Checked = True Or rdoNumeric.Checked = True Or rdoCharacter.Checked = True Or rdoInteger.Checked = True) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub cboFactorNumeric_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFactorNumeric.SelectedValueChanged
+
+        ucrBase.clsRsyntax.AddParameter("factor_numeric", cboFactorNumeric.SelectedItem.ToString)
+
+    End Sub
 End Class
