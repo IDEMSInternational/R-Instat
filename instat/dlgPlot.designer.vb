@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgPlot
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgPlot
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblYVariable = New System.Windows.Forms.Label()
@@ -29,15 +29,11 @@ Partial Class dlgPlot
         Me.cmdPointOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.chkPoints = New System.Windows.Forms.CheckBox()
-        Me.chkLines = New System.Windows.Forms.CheckBox()
-        Me.cmdLineOptions = New System.Windows.Forms.Button()
-        Me.ucrPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrLinePlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.grpPointsAndLines = New System.Windows.Forms.GroupBox()
-        Me.grpPointsAndLines.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -70,7 +66,7 @@ Partial Class dlgPlot
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(286, 229)
+        Me.cmdOptions.Location = New System.Drawing.Point(301, 229)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdOptions.TabIndex = 12
@@ -80,7 +76,7 @@ Partial Class dlgPlot
         '
         'cmdPointOptions
         '
-        Me.cmdPointOptions.Location = New System.Drawing.Point(9, 229)
+        Me.cmdPointOptions.Location = New System.Drawing.Point(7, 229)
         Me.cmdPointOptions.Name = "cmdPointOptions"
         Me.cmdPointOptions.Size = New System.Drawing.Size(103, 23)
         Me.cmdPointOptions.TabIndex = 10
@@ -101,7 +97,7 @@ Partial Class dlgPlot
         'chkPoints
         '
         Me.chkPoints.AutoSize = True
-        Me.chkPoints.Location = New System.Drawing.Point(6, 12)
+        Me.chkPoints.Location = New System.Drawing.Point(8, 189)
         Me.chkPoints.Name = "chkPoints"
         Me.chkPoints.Size = New System.Drawing.Size(55, 17)
         Me.chkPoints.TabIndex = 8
@@ -109,33 +105,12 @@ Partial Class dlgPlot
         Me.chkPoints.Text = "Points"
         Me.chkPoints.UseVisualStyleBackColor = True
         '
-        'chkLines
+        'ucrLinePlotSelector
         '
-        Me.chkLines.AutoSize = True
-        Me.chkLines.Location = New System.Drawing.Point(115, 12)
-        Me.chkLines.Name = "chkLines"
-        Me.chkLines.Size = New System.Drawing.Size(51, 17)
-        Me.chkLines.TabIndex = 9
-        Me.chkLines.Tag = "Lines"
-        Me.chkLines.Text = "Lines"
-        Me.chkLines.UseVisualStyleBackColor = True
-        '
-        'cmdLineOptions
-        '
-        Me.cmdLineOptions.Location = New System.Drawing.Point(170, 229)
-        Me.cmdLineOptions.Name = "cmdLineOptions"
-        Me.cmdLineOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdLineOptions.TabIndex = 11
-        Me.cmdLineOptions.Tag = "Line_Options"
-        Me.cmdLineOptions.Text = "Line Options"
-        Me.cmdLineOptions.UseVisualStyleBackColor = True
-        '
-        'ucrPlotSelector
-        '
-        Me.ucrPlotSelector.Location = New System.Drawing.Point(3, 3)
-        Me.ucrPlotSelector.Name = "ucrPlotSelector"
-        Me.ucrPlotSelector.Size = New System.Drawing.Size(242, 179)
-        Me.ucrPlotSelector.TabIndex = 0
+        Me.ucrLinePlotSelector.Location = New System.Drawing.Point(3, 3)
+        Me.ucrLinePlotSelector.Name = "ucrLinePlotSelector"
+        Me.ucrLinePlotSelector.Size = New System.Drawing.Size(242, 179)
+        Me.ucrLinePlotSelector.TabIndex = 0
         '
         'ucrBase
         '
@@ -168,26 +143,15 @@ Partial Class dlgPlot
         Me.ucrReceiverX.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverX.TabIndex = 5
         '
-        'grpPointsAndLines
-        '
-        Me.grpPointsAndLines.Controls.Add(Me.chkLines)
-        Me.grpPointsAndLines.Controls.Add(Me.chkPoints)
-        Me.grpPointsAndLines.Location = New System.Drawing.Point(7, 183)
-        Me.grpPointsAndLines.Name = "grpPointsAndLines"
-        Me.grpPointsAndLines.Size = New System.Drawing.Size(168, 40)
-        Me.grpPointsAndLines.TabIndex = 14
-        Me.grpPointsAndLines.TabStop = False
-        '
         'dlgPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(412, 315)
-        Me.Controls.Add(Me.grpPointsAndLines)
-        Me.Controls.Add(Me.cmdLineOptions)
+        Me.Controls.Add(Me.chkPoints)
         Me.Controls.Add(Me.cmdPointOptions)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.ucrPlotSelector)
+        Me.Controls.Add(Me.ucrLinePlotSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverY)
         Me.Controls.Add(Me.ucrFactorOptionalReceiver)
@@ -201,10 +165,8 @@ Partial Class dlgPlot
         Me.MinimizeBox = False
         Me.Name = "dlgPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Plot"
-        Me.Text = "Plot"
-        Me.grpPointsAndLines.ResumeLayout(False)
-        Me.grpPointsAndLines.PerformLayout()
+        Me.Tag = "Line_Plot"
+        Me.Text = "Line Plot"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -215,13 +177,10 @@ Partial Class dlgPlot
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents ucrReceiverY As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrPlotSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrLinePlotSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdOptions As Button
     Friend WithEvents cmdPointOptions As Button
     Friend WithEvents lblFactorOptional As Label
     Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
     Friend WithEvents chkPoints As CheckBox
-    Friend WithEvents chkLines As CheckBox
-    Friend WithEvents cmdLineOptions As Button
-    Friend WithEvents grpPointsAndLines As GroupBox
 End Class
