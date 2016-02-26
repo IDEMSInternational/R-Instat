@@ -23,20 +23,20 @@ Public Class dlgName
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         ucrReceiverName.Selector = ucrSelectVariables
         If bFirstLoad Then
-            defaultSettings()
+            SetDefaults()
             bFirstLoad = False
         End If
         TestOKEnabled()
     End Sub
 
-    Private Sub defaultSettings()
+    Private Sub SetDefaults()
         txtName.Text = ""
         ucrReceiverName.SetMeAsReceiver()
+        ucrSelectVariables.Reset()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        ucrSelectVariables.Reset()
-        defaultSettings()
+        SetDefaults()
         TestOKEnabled()
     End Sub
 
