@@ -286,6 +286,12 @@
     <Compile Include="dlgReorderSheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgScatterPlot.Designer.vb">
+      <DependentUpon>dlgScatterPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgScatterPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSummaryBarOrPieChart.Designer.vb">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </Compile>
@@ -1435,6 +1441,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderSheet.sw-KE.resx">
       <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgScatterPlot.fr-FR.resx">
+      <DependentUpon>dlgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgScatterPlot.resx">
+      <DependentUpon>dlgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgScatterPlot.sw-KE.resx">
+      <DependentUpon>dlgScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.fr-FR.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
