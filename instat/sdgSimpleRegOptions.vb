@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgSimpleRegOptions
-    Public clsRsyntax As RSyntax
+    Public clsRModelFunction As RFunction
     Public clsRaovFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
@@ -23,14 +23,18 @@ Public Class sdgSimpleRegOptions
         autoTranslate(Me)
 
         If bFirstLoad Then
-            bFirstLoad = False
             SetDefaults()
+            bFirstLoad = False
         End If
     End Sub
 
-    Private Sub anovatable()
+    Public Sub SetRModelFunction(clsRModelFunc As RFunction)
+        clsRModelFunction = clsRModelFunc
+    End Sub
+
+    Private Sub AnovaTable()
         clsRaovFunction.SetRCommand("aov")
-        clsRaovFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+        clsRaovFunction.AddParameter("", clsRFunctionParameter:=clsRModelFunction)
         frmMain.clsRLink.RunScript(clsRaovFunction.ToScript(), 2)
     End Sub
 
@@ -40,7 +44,7 @@ Public Class sdgSimpleRegOptions
 
     Public Sub RegOptions()
         If (chkAnovaTable.Checked) Then
-            anovatable() 'is this the right way. How do I get it to the main dialogue?
+            AnovaTable()
         End If
     End Sub
 End Class
