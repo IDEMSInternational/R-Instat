@@ -39,14 +39,15 @@ Partial Class dlgDotPlot
         Me.ucrBase.Location = New System.Drawing.Point(13, 221)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 9
         '
         'ucrYVariableReceiver
         '
         Me.ucrYVariableReceiver.Location = New System.Drawing.Point(287, 29)
         Me.ucrYVariableReceiver.Name = "ucrYVariableReceiver"
+        Me.ucrYVariableReceiver.Selector = Nothing
         Me.ucrYVariableReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrYVariableReceiver.TabIndex = 4
+        Me.ucrYVariableReceiver.TabIndex = 2
         '
         'lblYVariable
         '
@@ -54,7 +55,7 @@ Partial Class dlgDotPlot
         Me.lblYVariable.Location = New System.Drawing.Point(287, 13)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(55, 13)
-        Me.lblYVariable.TabIndex = 5
+        Me.lblYVariable.TabIndex = 1
         Me.lblYVariable.Tag = "Y_Variable"
         Me.lblYVariable.Text = "Y Variable"
         '
@@ -63,7 +64,7 @@ Partial Class dlgDotPlot
         Me.ucrDotPlotSelector.Location = New System.Drawing.Point(6, 5)
         Me.ucrDotPlotSelector.Name = "ucrDotPlotSelector"
         Me.ucrDotPlotSelector.Size = New System.Drawing.Size(242, 179)
-        Me.ucrDotPlotSelector.TabIndex = 6
+        Me.ucrDotPlotSelector.TabIndex = 0
         '
         'cmdDotPlotOptions
         '
@@ -89,6 +90,7 @@ Partial Class dlgDotPlot
         '
         Me.ucrFactorReceiver.Location = New System.Drawing.Point(287, 74)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
+        Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
         Me.ucrFactorReceiver.TabIndex = 4
         '
@@ -98,7 +100,7 @@ Partial Class dlgDotPlot
         Me.lblFactor.Location = New System.Drawing.Point(287, 58)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(82, 13)
-        Me.lblFactor.TabIndex = 5
+        Me.lblFactor.TabIndex = 3
         Me.lblFactor.Tag = "Factor_Optional"
         Me.lblFactor.Text = "Factor(Optional)"
         '
@@ -106,8 +108,9 @@ Partial Class dlgDotPlot
         '
         Me.ucrSecondfactorReceiver.Location = New System.Drawing.Point(287, 122)
         Me.ucrSecondfactorReceiver.Name = "ucrSecondfactorReceiver"
+        Me.ucrSecondfactorReceiver.Selector = Nothing
         Me.ucrSecondfactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrSecondfactorReceiver.TabIndex = 4
+        Me.ucrSecondfactorReceiver.TabIndex = 6
         '
         'lblSecondFactor
         '
