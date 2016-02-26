@@ -27,6 +27,13 @@ Public Class frmMain
     Public strStaticPath As String
     Public strHelpFilePath As String
     Public clsInstatOptions As InstatOptions
+    Public strCurrentDataFrame As String
+    Public dlgLastDialog As Form
+    'This is the default data frame to appear in the data frame selector
+    'If "" the current worksheet will be used
+    'TODO This should be an option in the Options dialog
+    '     User can choose a default data frame or set the default as the current worksheet
+    Public strDefaultDataFrame As String = ""
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
@@ -352,10 +359,6 @@ Public Class frmMain
         dlgView.ShowDialog()
     End Sub
 
-    Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgDeleteColumns.ShowDialog()
-    End Sub
-
     Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeSelect.Click
         dlgSelect.ShowDialog()
     End Sub
@@ -564,7 +567,7 @@ Public Class frmMain
         dlgSubset.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataName_Click(sender As Object, e As EventArgs) Handles mnuManageDataName.Click
+    Private Sub mnuManageDataRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataRename.Click
         dlgName.ShowDialog()
     End Sub
 
@@ -673,19 +676,14 @@ Public Class frmMain
         frmMetaData.BringToFront()
     End Sub
 
-    Private Sub mnuManageDataFrameViewColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameViewColumnMetadata.Click
+    Private Sub mnuManageSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageSheetColumnMetadata.Click
         frmVariables.Visible = True
         frmVariables.BringToFront()
     End Sub
 
-    Private Sub mnuManageDataFrameInsert_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameInsert.Click
+    Private Sub mnuManageSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuManageSheetInsertColumnsRows.Click
         dlgInsertColumn.ShowDialog()
     End Sub
-
-    Private Sub mnuManageDataFrameRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameRename.Click
-        dlgName.ShowDialog()
-    End Sub
-
     Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPie.Click
         dlgBarAndPieChart.ShowDialog()
     End Sub
@@ -706,7 +704,13 @@ Public Class frmMain
         dlgDeleteSheet.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFrameDelete_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameDelete.Click
+    Private Sub mnuManageSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuManageSheetDeleteColumnsRows.Click
         dlgDeleteColumn.ShowDialog()
+    End Sub
+
+    Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles EditLastDialogueToolStrip.Click
+        If Not IsNothing(dlgLastDialog) Then
+            dlgLastDialog.ShowDialog()
+        End If
     End Sub
 End Class

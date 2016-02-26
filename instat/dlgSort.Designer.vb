@@ -29,7 +29,7 @@ Partial Class dlgSort
         Me.grpMissingValues = New System.Windows.Forms.GroupBox()
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirst = New System.Windows.Forms.RadioButton()
-        Me.ucrSelectorByDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectForSort = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSort = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpOrder.SuspendLayout()
@@ -43,7 +43,7 @@ Partial Class dlgSort
         Me.grpOrder.Location = New System.Drawing.Point(13, 197)
         Me.grpOrder.Name = "grpOrder"
         Me.grpOrder.Size = New System.Drawing.Size(181, 47)
-        Me.grpOrder.TabIndex = 2
+        Me.grpOrder.TabIndex = 3
         Me.grpOrder.TabStop = False
         Me.grpOrder.Tag = "Order"
         Me.grpOrder.Text = "Order"
@@ -54,7 +54,7 @@ Partial Class dlgSort
         Me.rdoDescending.Location = New System.Drawing.Point(88, 20)
         Me.rdoDescending.Name = "rdoDescending"
         Me.rdoDescending.Size = New System.Drawing.Size(82, 17)
-        Me.rdoDescending.TabIndex = 0
+        Me.rdoDescending.TabIndex = 1
         Me.rdoDescending.TabStop = True
         Me.rdoDescending.Tag = "Descending"
         Me.rdoDescending.Text = "Descending"
@@ -78,7 +78,7 @@ Partial Class dlgSort
         Me.lblColumnsToSort.Location = New System.Drawing.Point(287, 72)
         Me.lblColumnsToSort.Name = "lblColumnsToSort"
         Me.lblColumnsToSort.Size = New System.Drawing.Size(103, 13)
-        Me.lblColumnsToSort.TabIndex = 5
+        Me.lblColumnsToSort.TabIndex = 1
         Me.lblColumnsToSort.Tag = "Columns_To_Sort"
         Me.lblColumnsToSort.Text = "Columns To Sort By:"
         '
@@ -89,7 +89,7 @@ Partial Class dlgSort
         Me.grpMissingValues.Location = New System.Drawing.Point(200, 197)
         Me.grpMissingValues.Name = "grpMissingValues"
         Me.grpMissingValues.Size = New System.Drawing.Size(215, 47)
-        Me.grpMissingValues.TabIndex = 8
+        Me.grpMissingValues.TabIndex = 4
         Me.grpMissingValues.TabStop = False
         Me.grpMissingValues.Tag = "Missing_values"
         Me.grpMissingValues.Text = "Missing values"
@@ -118,12 +118,12 @@ Partial Class dlgSort
         Me.rdoFirst.Text = "First"
         Me.rdoFirst.UseVisualStyleBackColor = True
         '
-        'ucrSelectorByDataFrameAddRemove
+        'ucrSelectForSort
         '
-        Me.ucrSelectorByDataFrameAddRemove.Location = New System.Drawing.Point(12, 12)
-        Me.ucrSelectorByDataFrameAddRemove.Name = "ucrSelectorByDataFrameAddRemove"
-        Me.ucrSelectorByDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorByDataFrameAddRemove.TabIndex = 9
+        Me.ucrSelectForSort.Location = New System.Drawing.Point(12, 12)
+        Me.ucrSelectForSort.Name = "ucrSelectForSort"
+        Me.ucrSelectForSort.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectForSort.TabIndex = 0
         '
         'ucrReceiverSort
         '
@@ -131,21 +131,21 @@ Partial Class dlgSort
         Me.ucrReceiverSort.Name = "ucrReceiverSort"
         Me.ucrReceiverSort.Selector = Nothing
         Me.ucrReceiverSort.Size = New System.Drawing.Size(125, 103)
-        Me.ucrReceiverSort.TabIndex = 4
+        Me.ucrReceiverSort.TabIndex = 2
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(12, 250)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(402, 56)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 5
         '
         'dlgSort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(468, 317)
-        Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemove)
+        Me.Controls.Add(Me.ucrSelectForSort)
         Me.Controls.Add(Me.grpMissingValues)
         Me.Controls.Add(Me.lblColumnsToSort)
         Me.Controls.Add(Me.ucrReceiverSort)
@@ -157,6 +157,7 @@ Partial Class dlgSort
         Me.Name = "dlgSort"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Sort"
         Me.Text = "Sort"
         Me.grpOrder.ResumeLayout(False)
         Me.grpOrder.PerformLayout()
@@ -176,5 +177,5 @@ Partial Class dlgSort
     Friend WithEvents grpMissingValues As GroupBox
     Friend WithEvents rdoLast As RadioButton
     Friend WithEvents rdoFirst As RadioButton
-    Friend WithEvents ucrSelectorByDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectForSort As ucrSelectorByDataFrameAddRemove
 End Class
