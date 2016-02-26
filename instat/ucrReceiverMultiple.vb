@@ -90,7 +90,7 @@ Public Class ucrReceiverMultiple
 
     Public Overrides Function IsEmpty() As Boolean
 
-        If lstSelectedVariables.SelectedItems.Count > 0 Then
+        If lstSelectedVariables.Items.Count > 0 Then
             Return False
         Else
             Return True
@@ -172,7 +172,7 @@ Public Class ucrReceiverMultiple
         RemoveSelected()
     End Sub
 
-    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
+    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
         RemoveSelected()
     End Sub
 
