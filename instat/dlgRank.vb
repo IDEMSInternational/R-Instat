@@ -102,7 +102,7 @@ Public Class dlgRank
     'Use this event to see when something has changed in a receiver
     Private Sub ucrReceiverRank_SelectionChanged() Handles ucrReceiverRank.SelectionChanged
         If Not ucrReceiverRank.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables())
+            ucrBase.clsRsyntax.AddParameter("x", ucrReceiverRank.GetVariableNames(False))
         Else
             ucrBase.clsRsyntax.RemoveParameter("x")
         End If
