@@ -43,12 +43,11 @@ Partial Class ucrFactor
         Me.grdFactorData.LeadHeaderContextMenuStrip = Nothing
         Me.grdFactorData.Location = New System.Drawing.Point(4, 4)
         Me.grdFactorData.Name = "grdFactorData"
-        Me.grdFactorData.Readonly = True
         Me.grdFactorData.RowHeaderContextMenuStrip = Nothing
         Me.grdFactorData.Script = Nothing
         Me.grdFactorData.SheetTabContextMenuStrip = Nothing
-        Me.grdFactorData.SheetTabControlNewButtonVisible = False
-        Me.grdFactorData.SheetTabControlWidth = 60
+        Me.grdFactorData.SheetTabNewButtonVisible = False
+        Me.grdFactorData.SheetTabWidth = 60
         Me.grdFactorData.SheetTabNewButtonVisible = False
         Me.grdFactorData.Size = New System.Drawing.Size(260, 174)
         Me.grdFactorData.TabIndex = 32

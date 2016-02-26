@@ -14,25 +14,30 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+Imports RDotNet
 
 Public Class dlgFileNew
     Public clsMatrix As New RFunction
+    Public strDefaultSheetPrefix As String = "Sheet"
+    Public iDefaultColumnNumber As Integer = 2
+    Public iDefaultRowNumber As Integer = 10
 
     Private Sub dlgFileNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         'TODO What should these defaults be?
         '     Defaults should be stored in Options dialog 
-        txtRows.Text = 10
-        txtColumns.Text = 2
-        'TODO add this line back in with correct method name when Steve has written method
-        'frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_next_default_object_name(" & Chr(34) & "Sheet" & Chr(34) & ")")
-        'TODO remove line below when above is fixed
-        txtName.Text = "Sheet1"
-        ucrBase.clsRsyntax.SetFunction("matrix", clsMatrix)
+        txtRows.Text = iDefaultRowNumber
+        txtColumns.Text = iDefaultColumnNumber
+
+        txtName.Text = frmMain.clsRLink.GetDefaultDataFrameName(strDefaultSheetPrefix).ToString()
+        clsMatrix.SetRCommand("matrix")
         clsMatrix.AddParameter("data", "NA")
         clsMatrix.AddParameter("nrow", txtRows.Text)
         clsMatrix.AddParameter("ncol", txtColumns.Text)
+
         ucrBase.clsRsyntax.SetFunction("data.frame")
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsMatrix)
+
         ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
     End Sub
 

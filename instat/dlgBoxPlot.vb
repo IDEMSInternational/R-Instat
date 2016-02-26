@@ -30,7 +30,10 @@ Public Class dlgBoxplot
         ucrYvariableReceiver.Selector = ucrSelectorBoxPlot
         ucrYvariableReceiver.SetMeAsReceiver()
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
+        ucrByFactorsReceiver.SetDataType("factor")
         ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
+        ucrSecondFactorReceiver.SetDataType("factor")
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         autoTranslate(Me)
         ucrBase.OKEnabled(False)
     End Sub
@@ -58,7 +61,7 @@ Public Class dlgBoxplot
         ucrByFactorsReceiver.SetMeAsReceiver()
     End Sub
 
-    Private Sub ucrSelectorBoxPlot_DataFrameChanged(sender As Object, e As EventArgs) Handles ucrSelectorBoxPlot.DataFrameChanged
+    Private Sub ucrSelectorBoxPlot_DataFrameChanged() Handles ucrSelectorBoxPlot.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorBoxPlot.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
