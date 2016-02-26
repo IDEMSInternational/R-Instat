@@ -30,7 +30,7 @@ Public Class dlgDotPlot
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrYVariableReceiver.Selector = ucrDotPlotSelector
         ucrFactorReceiver.Selector = ucrDotPlotSelector
-        ucrSecondfactorReceiver.Selector = ucrDotPlotSelector
+        ucrSecondFactorReceiver.Selector = ucrDotPlotSelector
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.OKEnabled(False)
         autoTranslate(Me)
@@ -65,9 +65,9 @@ Public Class dlgDotPlot
 
     End Sub
 
-    Private Sub ucrSecondfactorReceiver_SelectonChanged(sender As Object, e As EventArgs) Handles ucrSecondfactorReceiver.SelectionChanged
-        If ucrSecondfactorReceiver.IsEmpty() = False Then
-            clsRaesFunction.AddParameter("fill", ucrSecondfactorReceiver.GetVariableNames(False))
+    Private Sub ucrSecondFactorReceiver_SelectonChanged(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.SelectionChanged
+        If ucrSecondFactorReceiver.IsEmpty() = False Then
+            clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName("fill")
         End If

@@ -30,7 +30,7 @@ Partial Class dlgDotPlot
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblFactor = New System.Windows.Forms.Label()
-        Me.ucrSecondfactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblSecondFactor = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -104,13 +104,13 @@ Partial Class dlgDotPlot
         Me.lblFactor.Tag = "Factor_Optional"
         Me.lblFactor.Text = "Factor(Optional)"
         '
-        'ucrSecondfactorReceiver
+        'ucrSecondFactorReceiver
         '
-        Me.ucrSecondfactorReceiver.Location = New System.Drawing.Point(287, 122)
-        Me.ucrSecondfactorReceiver.Name = "ucrSecondfactorReceiver"
-        Me.ucrSecondfactorReceiver.Selector = Nothing
-        Me.ucrSecondfactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrSecondfactorReceiver.TabIndex = 6
+        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(287, 122)
+        Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
+        Me.ucrSecondFactorReceiver.Selector = Nothing
+        Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrSecondFactorReceiver.TabIndex = 6
         '
         'lblSecondFactor
         '
@@ -133,7 +133,7 @@ Partial Class dlgDotPlot
         Me.Controls.Add(Me.lblSecondFactor)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblYVariable)
-        Me.Controls.Add(Me.ucrSecondfactorReceiver)
+        Me.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.ucrYVariableReceiver)
         Me.Controls.Add(Me.ucrBase)
@@ -157,6 +157,6 @@ Partial Class dlgDotPlot
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblFactor As Label
-    Friend WithEvents ucrSecondfactorReceiver As ucrReceiverSingle
+    Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblSecondFactor As Label
 End Class
