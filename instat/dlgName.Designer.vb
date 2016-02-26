@@ -22,19 +22,20 @@ Partial Class dlgName
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrReceiverNames = New instat.ucrReceiverSingle()
+        Me.ucrReceiverName = New instat.ucrReceiverSingle()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.lblName = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorByDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
-        'ucrReceiverNames
+        'ucrReceiverName
         '
-        Me.ucrReceiverNames.Location = New System.Drawing.Point(287, 31)
-        Me.ucrReceiverNames.Name = "ucrReceiverNames"
-        Me.ucrReceiverNames.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverNames.TabIndex = 1
+        Me.ucrReceiverName.Location = New System.Drawing.Point(287, 31)
+        Me.ucrReceiverName.Name = "ucrReceiverName"
+        Me.ucrReceiverName.Selector = Nothing
+        Me.ucrReceiverName.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverName.TabIndex = 1
         '
         'txtName
         '
@@ -61,23 +62,23 @@ Partial Class dlgName
         Me.ucrBase.Size = New System.Drawing.Size(416, 59)
         Me.ucrBase.TabIndex = 5
         '
-        'ucrSelectorByDataFrameAddRemove
+        'ucrSelectVariables
         '
-        Me.ucrSelectorByDataFrameAddRemove.Location = New System.Drawing.Point(13, 13)
-        Me.ucrSelectorByDataFrameAddRemove.Name = "ucrSelectorByDataFrameAddRemove"
-        Me.ucrSelectorByDataFrameAddRemove.Size = New System.Drawing.Size(226, 179)
-        Me.ucrSelectorByDataFrameAddRemove.TabIndex = 6
+        Me.ucrSelectVariables.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectVariables.Name = "ucrSelectVariables"
+        Me.ucrSelectVariables.Size = New System.Drawing.Size(226, 179)
+        Me.ucrSelectVariables.TabIndex = 6
         '
         'dlgName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(416, 272)
-        Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemove)
+        Me.Controls.Add(Me.ucrSelectVariables)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.txtName)
-        Me.Controls.Add(Me.ucrReceiverNames)
+        Me.Controls.Add(Me.ucrReceiverName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgName"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -87,9 +88,9 @@ Partial Class dlgName
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ucrReceiverNames As ucrReceiverSingle
+    Friend WithEvents ucrReceiverName As ucrReceiverSingle
     Friend WithEvents txtName As TextBox
     Friend WithEvents lblName As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSelectorByDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectVariables As ucrSelectorByDataFrameAddRemove
 End Class
