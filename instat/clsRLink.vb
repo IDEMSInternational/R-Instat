@@ -193,10 +193,11 @@ Public Class RLink
     End Sub
 
 
-    Public Function GetData(strLabel As String) As DataFrame
+    Public Function GetData(strLabel As String) As CharacterMatrix
 
-        Me.clsEngine.Evaluate("temp<-" & strLabel).AsDataFrame()
-        Return Me.clsEngine.GetSymbol("temp").AsDataFrame()
+        Me.clsEngine.Evaluate("temp<-" & strLabel)
+        Me.clsEngine.Evaluate("temp <- convert_to_character_matrix(temp)")
+        Return Me.clsEngine.GetSymbol("temp").AsCharacterMatrix()
 
     End Function
 
