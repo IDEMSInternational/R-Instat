@@ -13,37 +13,89 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgPlot
     Private clsRggplotFunction As New RFunction
-    Private clsRgeom_boxplotFunction As New RFunction
+    Private clsRgeom_lineplotFunction As New RFunction
     Private clsRaesFunction As New RFunction
+    Public bFirstLoad As Boolean = True
 
     Private Sub dlgPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRaesFunction.SetRCommand("aes")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+
+        clsRgeom_lineplotFunction.SetRCommand("geom_line")
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_lineplotFunction)
+
         ucrBase.clsRsyntax.iCallType = 0
         autoTranslate(Me)
-        ucrReceiverY.Selector = ucrPlotSelector
-        ucrReceiverX.Selector = ucrPlotSelector
-        ucrFactorOptionalReceiver.Selector = ucrPlotSelector
+        ucrReceiverY.Selector = ucrLinePlotSelector
+        ucrReceiverX.Selector = ucrLinePlotSelector
+        ucrFactorOptionalReceiver.Selector = ucrLinePlotSelector
+
+        If bFirstLoad Then
+            bFirstLoad = False
+            'SetDefaults
+            SetDefaults()
+        Else
+            'reopendialog
+        End If
+        TeskOkEnabled()
+    End Sub
+
+    Private Sub SetDefaults()
+        chkPoints.Checked = False
+        ucrLinePlotSelector.Focus()
+        ucrLinePlotSelector.Reset()
         ucrReceiverY.SetMeAsReceiver()
-
+        TeskOkEnabled()
+    End Sub
+    Private Sub TeskOkEnabled()
+        If ucrReceiverX.IsEmpty() = True Or ucrReceiverY.IsEmpty() = True Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
+    End Sub
+    Private Sub ucrReceiverY_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverY.SelectionChanged
+        If ucrReceiverY.IsEmpty() = False Then
+            clsRaesFunction.AddParameter("y", ucrReceiverY.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("y")
+        End If
+        TeskOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverY_Leave(sender As Object, e As EventArgs) Handles ucrReceiverY.Leave
-        ucrBase.clsRsyntax.AddParameter("y", ucrReceiverY.GetVariableNames(False))
+    Private Sub ucrReceiverX_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverX.SelectionChanged
+
+        If ucrReceiverX.IsEmpty() = False Then
+            clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("x")
+        End If
+        TeskOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverX_Leave(sender As Object, e As EventArgs) Handles ucrReceiverX.Leave
-        ucrBase.clsRsyntax.AddParameter("x", ucrReceiverX.GetVariableNames(False))
+    Private Sub ucrPlotSelector_DataFrameChanged() Handles ucrLinePlotSelector.DataFrameChanged
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
+    End Sub
+    Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
+        If ucrFactorOptionalReceiver.IsEmpty() = False Then
+            clsRaesFunction.AddParameter("fill", ucrFactorOptionalReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+        End If
     End Sub
 
-    Private Sub ucrPlotSelector_DataFrameChanged() Handles ucrPlotSelector.DataFrameChanged
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrPlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.ShowDialog()
     End Sub
-    Private Sub ucrFactorOptionalReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("fill", ucrFactorOptionalReceiver.GetVariableNames(False))
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class
