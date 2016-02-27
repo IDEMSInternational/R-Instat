@@ -17,7 +17,7 @@ Imports instat.Translations
 Imports System.IO
 Public Class dlgFromLibrary
     Dim strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
-    Private Sub dlgFromLibrary_DragEnter(sender As Object, e As DragEventArgs) Handles Me.DragEnter
+    Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
     End Sub
 
