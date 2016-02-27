@@ -55,11 +55,7 @@ Public Class dlgPlot
         TeskOkEnabled()
     End Sub
     Private Sub TeskOkEnabled()
-        If ucrReceiverX.IsEmpty() = True Then
-            ucrBase.OKEnabled(False)
-            ucrBase.clsRsyntax.RemoveParameter("x")
-        ElseIf ucrReceiverY.IsEmpty() = True Then
-            ucrBase.clsRsyntax.RemoveParameter("y")
+        If ucrReceiverX.IsEmpty() = True Or ucrReceiverY.IsEmpty() = True Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
