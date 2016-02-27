@@ -18,8 +18,19 @@ Imports instat.Translations
 
 Public Class dlgScatterPlot
     Private clsRggplotFunction As New RFunction
+    Private clsRgeom_scatterplotFunction As New RFunction
+    Private clsRaesFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private Sub ucrPlotSelector_Load(sender As Object, e As EventArgs) Handles ucrScatterPlotSelector.Load
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRaesFunction.SetRCommand("aes")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+
+        clsRgeom_scatterplotFunction.SetRCommand("geom_point")
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
+
         ucrReceiverX.Selector = ucrScatterPlotSelector
         ucrReceiverY.Selector = ucrScatterPlotSelector
         ucrFactorOptionalReceiver.Selector = ucrScatterPlotSelector
@@ -35,12 +46,59 @@ Public Class dlgScatterPlot
     Private Sub ucrScatterPlotSelector_DataFrameChanged() Handles ucrScatterPlotSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrScatterPlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
+
+    Private Sub ucrReceiverY_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverY.SelectionChanged
+        If ucrReceiverY.IsEmpty() = False Then
+            clsRaesFunction.AddParameter("y", ucrReceiverY.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("y")
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverX_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverX.SelectionChanged
+
+        If ucrReceiverX.IsEmpty() = False Then
+            clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("x")
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
+        If ucrFactorOptionalReceiver.IsEmpty() = False Then
+            clsRaesFunction.AddParameter("fill", ucrFactorOptionalReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+        End If
+    End Sub
+
     Private Sub TestOkEnabled()
         'tests when okay is enable
+        If ucrReceiverX.IsEmpty() = True Then
+            ucrBase.OKEnabled(False)
+            ucrBase.clsRsyntax.RemoveParameter("x")
+        ElseIf ucrReceiverY.IsEmpty() = True Then
+            ucrBase.clsRsyntax.RemoveParameter("y")
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
+
     End Sub
     Private Sub SetDefaults()
         'setDefaults
         ucrScatterPlotSelector.Reset()
+        ucrScatterPlotSelector.Focus()
         ucrReceiverY.SetMeAsReceiver()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.ShowDialog()
     End Sub
 End Class

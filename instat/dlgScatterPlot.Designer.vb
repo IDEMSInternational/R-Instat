@@ -38,14 +38,14 @@ Partial Class dlgScatterPlot
         Me.ucrBase.Location = New System.Drawing.Point(7, 198)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 8
         '
         'cmdOptions
         '
         Me.cmdOptions.Location = New System.Drawing.Point(276, 165)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOptions.TabIndex = 37
+        Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -55,7 +55,7 @@ Partial Class dlgScatterPlot
         Me.ucrScatterPlotSelector.Location = New System.Drawing.Point(4, 4)
         Me.ucrScatterPlotSelector.Name = "ucrScatterPlotSelector"
         Me.ucrScatterPlotSelector.Size = New System.Drawing.Size(242, 179)
-        Me.ucrScatterPlotSelector.TabIndex = 36
+        Me.ucrScatterPlotSelector.TabIndex = 0
         '
         'ucrReceiverY
         '
@@ -63,7 +63,7 @@ Partial Class dlgScatterPlot
         Me.ucrReceiverY.Name = "ucrReceiverY"
         Me.ucrReceiverY.Selector = Nothing
         Me.ucrReceiverY.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverY.TabIndex = 35
+        Me.ucrReceiverY.TabIndex = 2
         '
         'ucrFactorOptionalReceiver
         '
@@ -71,7 +71,7 @@ Partial Class dlgScatterPlot
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
         Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrFactorOptionalReceiver.TabIndex = 33
+        Me.ucrFactorOptionalReceiver.TabIndex = 6
         '
         'lblFactorOptional
         '
@@ -79,7 +79,7 @@ Partial Class dlgScatterPlot
         Me.lblFactorOptional.Location = New System.Drawing.Point(268, 117)
         Me.lblFactorOptional.Name = "lblFactorOptional"
         Me.lblFactorOptional.Size = New System.Drawing.Size(82, 13)
-        Me.lblFactorOptional.TabIndex = 31
+        Me.lblFactorOptional.TabIndex = 5
         Me.lblFactorOptional.Tag = "Factor_Optional"
         Me.lblFactorOptional.Text = "Factor(Optional)"
         '
@@ -89,7 +89,7 @@ Partial Class dlgScatterPlot
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
         Me.ucrReceiverX.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverX.TabIndex = 34
+        Me.ucrReceiverX.TabIndex = 4
         '
         'lblXVariable
         '
@@ -97,7 +97,7 @@ Partial Class dlgScatterPlot
         Me.lblXVariable.Location = New System.Drawing.Point(268, 61)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(64, 13)
-        Me.lblXVariable.TabIndex = 32
+        Me.lblXVariable.TabIndex = 3
         Me.lblXVariable.Tag = "X_Variable"
         Me.lblXVariable.Text = "X  - Variable"
         '
@@ -107,7 +107,7 @@ Partial Class dlgScatterPlot
         Me.lblYVariable.Location = New System.Drawing.Point(268, 16)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(72, 13)
-        Me.lblYVariable.TabIndex = 30
+        Me.lblYVariable.TabIndex = 1
         Me.lblYVariable.Tag = "Y_Variable"
         Me.lblYVariable.Text = "Y - Variable(s)"
         '
