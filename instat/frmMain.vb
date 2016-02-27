@@ -77,7 +77,7 @@ Public Class frmMain
         autoTranslate(Me)
     End Sub
 
-    Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsProbabilityPlot.Click
+    Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsCummulativeDistribution.Click
         dlgProbabilityPlot.ShowDialog()
     End Sub
 
@@ -125,7 +125,7 @@ Public Class frmMain
         dlgMultipleRegression.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsPlot.Click
+    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsLinePlot.Click
         dlgPlot.ShowDialog()
     End Sub
 
@@ -689,8 +689,8 @@ Public Class frmMain
         dlgPermuteRows.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsBarPieChartSummaryData_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPieChartSummaryData.Click
-        dlgSummaryBarOrPieChart.ShowDialog()
+    Private Sub mnuGraphicsBarPieChartSummaryData_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariateCorrelation.Click
@@ -742,5 +742,11 @@ Public Class frmMain
     Private Sub mnuTbHelp_Click(sender As Object, e As EventArgs) Handles mnuTbHelp.Click
         mnuHelp_Click(sender, e)
     End Sub
+    Private Sub mnuGraphicsBarPieChart_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPieChart.Click
+        dlgSummaryBarOrPieChart.ShowDialog()
+    End Sub
 
+    Private Sub mnuGraphicsScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsScatterPlot.Click
+        dlgScatterPlot.ShowDialog()
+    End Sub
 End Class
