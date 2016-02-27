@@ -76,16 +76,11 @@ Public Class dlgScatterPlot
 
     Private Sub TestOkEnabled()
         'tests when okay is enable
-        If ucrReceiverX.IsEmpty() = True Then
-            ucrBase.OKEnabled(False)
-            ucrBase.clsRsyntax.RemoveParameter("x")
-        ElseIf ucrReceiverY.IsEmpty() = True Then
-            ucrBase.clsRsyntax.RemoveParameter("y")
+        If ucrReceiverX.IsEmpty() = True Or ucrReceiverY.IsEmpty() = True Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
-
     End Sub
     Private Sub SetDefaults()
         'setDefaults
@@ -101,4 +96,6 @@ Public Class dlgScatterPlot
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
+
+
 End Class
