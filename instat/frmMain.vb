@@ -553,7 +553,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
-        'TODO decide what Open From Library does and edit below
+        dlgFromLibrary.ShowDialog()
     End Sub
 
     Private Sub mnuManageDataSubset_Click(sender As Object, e As EventArgs)
