@@ -60,9 +60,6 @@ Public Class frmMain
         'Sets up R source files
         clsRLink.RSetup()
 
-        ' TODO tstatus shouldn't be set here in this way
-        tstatus.Text = frmEditor.grdData.CurrentWorksheet.Name
-
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -80,7 +77,7 @@ Public Class frmMain
         autoTranslate(Me)
     End Sub
 
-    Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsProbabilityPlot.Click
+    Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsCummulativeDistribution.Click
         dlgProbabilityPlot.ShowDialog()
     End Sub
 
@@ -128,7 +125,7 @@ Public Class frmMain
         dlgMultipleRegression.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsPlot.Click
+    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsLinePlot.Click
         dlgPlot.ShowDialog()
     End Sub
 
@@ -556,7 +553,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
-        'TODO decide what Open From Library does and edit below
+        dlgFromLibrary.ShowDialog()
     End Sub
 
     Private Sub mnuManageDataSubset_Click(sender As Object, e As EventArgs)
@@ -692,8 +689,8 @@ Public Class frmMain
         dlgPermuteRows.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsBarPieChartSummaryData_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPieChartSummaryData.Click
-        dlgSummaryBarOrPieChart.ShowDialog()
+    Private Sub mnuGraphicsBarPieChartSummaryData_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariateCorrelation.Click
@@ -712,5 +709,44 @@ Public Class frmMain
         If Not IsNothing(dlgLastDialog) Then
             dlgLastDialog.ShowDialog()
         End If
+    End Sub
+
+    Private Sub mnuTbNew_Click(sender As Object, e As EventArgs) Handles mnuTbNew.Click
+        mnuFileNewDataFrame_Click(sender, e)
+    End Sub
+
+    Private Sub mnuTbOpen_Click(sender As Object, e As EventArgs) Handles mnuTbOpen.Click
+        mnuFileOpenFromFile_Click(sender, e)
+    End Sub
+
+    Private Sub mnuTbImport_Click(sender As Object, e As EventArgs) Handles mnuTbImport.Click
+        mnuFileOpenFromFile_Click(sender, e)
+    End Sub
+
+    Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.Click
+        mnuFileSave_click(sender, e)
+    End Sub
+
+    Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
+        dlgSaveAs.ShowDialog()
+    End Sub
+
+    Private Sub mnuTbPrint_Click(sender As Object, e As EventArgs) Handles mnuTbPrint.Click
+        mnuFilePrint_Click(sender, e)
+    End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+        Help.ShowHelp(Me, strStaticPath & strHelpFilePath)
+    End Sub
+
+    Private Sub mnuTbHelp_Click(sender As Object, e As EventArgs) Handles mnuTbHelp.Click
+        mnuHelp_Click(sender, e)
+    End Sub
+    Private Sub mnuGraphicsBarPieChart_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPieChart.Click
+        dlgSummaryBarOrPieChart.ShowDialog()
+    End Sub
+
+    Private Sub mnuGraphicsScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsScatterPlot.Click
+        dlgScatterPlot.ShowDialog()
     End Sub
 End Class
