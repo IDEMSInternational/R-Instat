@@ -304,10 +304,22 @@
     <Compile Include="sdgBarChart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgBoxPlot.Designer.vb">
+      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgBoxPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgCorrPlot.Designer.vb">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCorrPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgDotPlot.Designer.vb">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDotPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgHistogramOptions.Designer.vb">
@@ -1469,6 +1481,15 @@
     <EmbeddedResource Include="sdgBarChart.sw-KE.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgBoxPlot.fr-FR.resx">
+      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgBoxPlot.resx">
+      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgBoxPlot.sw-KE.resx">
+      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.fr-FR.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -1477,6 +1498,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.sw-KE.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDotPlot.fr-FR.resx">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDotPlot.resx">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDotPlot.sw-KE.resx">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHistogramOptions.fr-FR.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
@@ -2807,6 +2837,7 @@
     <Content Include="lib\unvell.ReoGrid.XML">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="lib\unvell.ReoScript.dll" />
     <Content Include="static\ClimateObject\R\ClimateMethods\Models\readme_model.txt" />
     <Content Include="static\ClimateObject\R\R_front_ends\readme_front.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
