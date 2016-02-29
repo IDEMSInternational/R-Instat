@@ -77,7 +77,7 @@ Public Class dlgSort
 
     Private Sub ucrReceiverSort_SelectionChanged() Handles ucrReceiverSort.SelectionChanged
         If Not ucrReceiverSort.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames(False))
+            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
         Else
             ucrBase.clsRsyntax.RemoveParameter("col_names")
         End If
