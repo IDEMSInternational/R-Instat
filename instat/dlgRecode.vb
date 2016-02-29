@@ -21,11 +21,13 @@ Public Class dlgRecode
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 37
+
         ucrBase.clsRsyntax.SetFunction("cut")
+        ucrBase.clsRsyntax.iCallType = 1
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
-        ucrSelectorNewColumnName.SetDataFrameSelector(ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames)
+        ucrSelectorNewColumnName.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrSelectorNewColumnName.SetPrefix("Recode")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSelectorNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSelectorNewColumnName.cboColumnName.Text)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSelectorNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSelectorNewColumnName.cboColumnName.Text)
 
         If bFirstLoad Then
             SetDefaults()
@@ -38,17 +40,17 @@ Public Class dlgRecode
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrReceiverRecode.Selector = ucrSelectorForRecode
+        ucrReceiverRecode.SetMeAsReceiver()
         ucrMultipleNumericRecode.bIsNumericInput = True
         chkAddLabels.Checked = False
         ucrMultipleLabels.Visible = False
         rdoRight.Checked = True
-
-        ucrReceiverRecode.ResetText()
+        ucrSelectorForRecode.ResetText()
     End Sub
 
     Private Sub ReopenDialog()
-
+        SetClosedOn()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -61,7 +63,7 @@ Public Class dlgRecode
 
     Private Sub ucrReceiverRecode_SelectionChanged() Handles ucrReceiverRecode.SelectionChanged
         If Not ucrReceiverRecode.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", ucrReceiverRecode.GetVariableNames(False))
+            ucrBase.clsRsyntax.AddParameter("x", ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString & "$" & ucrReceiverRecode.GetVariableNames(False))
         Else
             ucrBase.clsRsyntax.RemoveParameter("x")
         End If
