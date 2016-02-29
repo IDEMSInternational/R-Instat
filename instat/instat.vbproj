@@ -316,6 +316,12 @@
     <Compile Include="sdgCorrPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDotPlot.Designer.vb">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDotPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgHistogramOptions.Designer.vb">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
     </Compile>
@@ -1492,6 +1498,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.sw-KE.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDotPlot.fr-FR.resx">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDotPlot.resx">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDotPlot.sw-KE.resx">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHistogramOptions.fr-FR.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
