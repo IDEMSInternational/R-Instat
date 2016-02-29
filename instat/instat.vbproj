@@ -102,9 +102,6 @@
       <HintPath>..\packages\R.NET.Community.1.6.5\lib\net40\RDotNet.NativeLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ReoGridDemo">
-      <HintPath>References\ReoGridDemo.exe</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -229,6 +226,12 @@
     <Compile Include="dlgColumnStats.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCopySheet.Designer.vb">
+      <DependentUpon>dlgCopySheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDeleteColumn.Designer.vb">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </Compile>
@@ -277,6 +280,18 @@
     <Compile Include="dlgRenameSheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReorderSheet.Designer.vb">
+      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReorderSheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgScatterPlot.Designer.vb">
+      <DependentUpon>dlgScatterPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgScatterPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSummaryBarOrPieChart.Designer.vb">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </Compile>
@@ -289,10 +304,22 @@
     <Compile Include="sdgBarChart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgBoxPlot.Designer.vb">
+      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgBoxPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgCorrPlot.Designer.vb">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCorrPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgDotPlot.Designer.vb">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDotPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgHistogramOptions.Designer.vb">
@@ -1337,6 +1364,15 @@
     <EmbeddedResource Include="dlgCliPlot.sw-KE.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySheet.fr-FR.resx">
+      <DependentUpon>dlgCopySheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySheet.resx">
+      <DependentUpon>dlgCopySheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
+      <DependentUpon>dlgCopySheet.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteColumn.fr-FR.resx">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </EmbeddedResource>
@@ -1409,6 +1445,24 @@
     <EmbeddedResource Include="dlgRenameSheet.sw-KE.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderSheet.fr-FR.resx">
+      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderSheet.resx">
+      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderSheet.sw-KE.resx">
+      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgScatterPlot.fr-FR.resx">
+      <DependentUpon>dlgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgScatterPlot.resx">
+      <DependentUpon>dlgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgScatterPlot.sw-KE.resx">
+      <DependentUpon>dlgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.fr-FR.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </EmbeddedResource>
@@ -1427,6 +1481,15 @@
     <EmbeddedResource Include="sdgBarChart.sw-KE.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgBoxPlot.fr-FR.resx">
+      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgBoxPlot.resx">
+      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgBoxPlot.sw-KE.resx">
+      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.fr-FR.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -1435,6 +1498,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.sw-KE.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDotPlot.fr-FR.resx">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDotPlot.resx">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDotPlot.sw-KE.resx">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHistogramOptions.fr-FR.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
@@ -2729,10 +2801,22 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <Content Include="lib\ANTLR 3 License.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Antlr3.Runtime.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="lib\DynamicInterop.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="lib\DynamicInterop.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\FastColoredTextBox License.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\FastColoredTextBox.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="lib\RDotNet.dll">
@@ -2753,6 +2837,7 @@
     <Content Include="lib\unvell.ReoGrid.XML">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="lib\unvell.ReoScript.dll" />
     <Content Include="static\ClimateObject\R\ClimateMethods\Models\readme_model.txt" />
     <Content Include="static\ClimateObject\R\R_front_ends\readme_front.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
