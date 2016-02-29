@@ -33,6 +33,7 @@ Partial Class dlgName
         '
         Me.ucrReceiverNames.Location = New System.Drawing.Point(287, 31)
         Me.ucrReceiverNames.Name = "ucrReceiverNames"
+        Me.ucrReceiverNames.Selector = Nothing
         Me.ucrReceiverNames.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverNames.TabIndex = 1
         '
@@ -46,12 +47,12 @@ Partial Class dlgName
         'lblName
         '
         Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(245, 179)
+        Me.lblName.Location = New System.Drawing.Point(292, 144)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(35, 13)
+        Me.lblName.Size = New System.Drawing.Size(58, 13)
         Me.lblName.TabIndex = 4
         Me.lblName.Tag = "Name"
-        Me.lblName.Text = "Name"
+        Me.lblName.Text = "New name"
         '
         'ucrBase
         '
