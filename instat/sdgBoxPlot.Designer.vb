@@ -38,6 +38,7 @@ Partial Class sdgBoxPlot
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
         Me.Controls.Add(Me.ucrBaseSdgBoxplot)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgBoxPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "BoxPlot_Options"
