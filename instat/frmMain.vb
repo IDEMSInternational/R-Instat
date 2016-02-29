@@ -565,7 +565,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataRename.Click
-        dlgName.setSettings("", "")
         dlgName.ShowDialog()
     End Sub
 
@@ -725,7 +724,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.Click
-        mnuFileSave_click(sender, e)
+        mnuFileSave_Click(sender, e)
     End Sub
 
     Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
@@ -750,4 +749,9 @@ Public Class frmMain
     Private Sub mnuGraphicsScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsScatterPlot.Click
         dlgScatterPlot.ShowDialog()
     End Sub
+
+    Private Sub mnuManageDataFileRenameSheet_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileRenameSheet.Click
+        dlgRenameSheet.ShowDialog()
+    End Sub
 End Class
+
