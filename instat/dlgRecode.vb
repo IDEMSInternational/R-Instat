@@ -38,6 +38,8 @@ Public Class dlgRecode
     End Sub
 
     Private Sub SetDefaults()
+        ucrReceiverRecode.Selector = ucrSelectorForRecode
+        ucrReceiverRecode.SetMeAsReceiver()
 
         ucrMultipleNumericRecode.bIsNumericInput = True
         chkAddLabels.Checked = False
@@ -61,7 +63,7 @@ Public Class dlgRecode
 
     Private Sub ucrReceiverRecode_SelectionChanged() Handles ucrReceiverRecode.SelectionChanged
         If Not ucrReceiverRecode.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString & "$" & ucrReceiverRecode.GetVariableNames(False))
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRecode.GetVariables())
 
         Else
             ucrBase.clsRsyntax.RemoveParameter("x")
