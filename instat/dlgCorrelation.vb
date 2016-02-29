@@ -17,6 +17,7 @@ Imports instat.Translations
 
 Public Class dlgCorrelation
     Public bFirstLoad As Boolean = True
+    Public bIsTwoColumnFunction As Boolean
 
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Set properties needed on load
@@ -37,8 +38,12 @@ Public Class dlgCorrelation
             bFirstLoad = False
         End If
 
-        TestOKEnabledForMultipleColumns()
-        TestOKEnabledforTwoColumns()
+        If bIsTwoColumnFunction Then
+            TestOKEnabledForMultipleColumns()
+        Else
+            TestOKEnabledForMultipleColumns()
+        End If
+
     End Sub
 
     Private Sub SetDefaults()
@@ -46,16 +51,14 @@ Public Class dlgCorrelation
         ucrSelectorDataFrameVarAddRemove.Focus()
         rdoPearson.Checked = True
         rdoTwoColumns.Checked = True
-        TestOKEnabledForMultipleColumns()
-        TestOKEnabledforTwoColumns()
+        TestOKEnabledForTwoColumns()
     End Sub
 
 
 
     Private Sub ucrReceiverFirstColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFirstColumn.SelectionChanged
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverFirstColumn.GetVariables())
-
-        TestOKEnabledforTwoColumns()
+        TestOKEnabledForTwoColumns()
     End Sub
 
     Private Sub ucrReceiverSecondColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSecondColumn.SelectionChanged
@@ -73,7 +76,11 @@ Public Class dlgCorrelation
     Private Sub rdoForMethodsCheckedChanged(sender As Object, e As EventArgs) Handles rdoPearson.CheckedChanged, rdoKendall.CheckedChanged, rdoSpearman.CheckedChanged
         If rdoPearson.Checked Then
             ucrBase.clsRsyntax.AddParameter("method", Chr(34) & "pearson" & Chr(34))
-
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("method", Chr(34) & "pearson" & Chr(34))
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("method")
+            End If
         ElseIf rdoKendall.Checked Then
             ucrBase.clsRsyntax.AddParameter("method", Chr(34) & "kendall" & Chr(34))
 
@@ -130,6 +137,7 @@ Public Class dlgCorrelation
         ucrBase.clsRsyntax.AddParameter("y", clsRFunctionParameter:=ucrReceiverSecondColumn.GetVariables())
         ucrBase.clsRsyntax.AddParameter("alternative", Chr(34) & "two.sided" & Chr(34))
         ucrBase.clsRsyntax.AddParameter("exact", "NULL")
+        bIsTwoColumnFunction = True
 
 
     End Sub
@@ -154,7 +162,7 @@ Public Class dlgCorrelation
         'Add back in parameters they may have been removed in TwoColumn case
         SetUseParameter()
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverMultipleColumns.GetVariables())
-
+        bIsTwoColumnFunction = False
     End Sub
 
 
@@ -176,7 +184,7 @@ Public Class dlgCorrelation
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdCorrplot.Click
         sdgCorrPlot.ShowDialog()
     End Sub
-    Private Sub TestOKEnabledforTwoColumns()
+    Private Sub TestOKEnabledForTwoColumns()
         If ucrReceiverFirstColumn.IsEmpty() = False And ucrReceiverSecondColumn.IsEmpty() = False And (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
             ucrBase.OKEnabled(True)
         Else
