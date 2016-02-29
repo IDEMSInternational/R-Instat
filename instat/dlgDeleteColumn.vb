@@ -16,18 +16,43 @@
 
 Imports instat.Translations
 Public Class dlgDeleteColumn
+    Public bFirstLoad As Boolean = True
     Private Sub dlgDeleteColumn_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ucrReceiverColumnsToDelete.Selector = ucrDataFrameAddRemove
-        ucrReceiverColumnsToDelete.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 53
+        ucrReceiveColumnsToDelete.Selector = ucrSelectColumnsToDelete
+        ucrReceiveColumnsToDelete.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
         autoTranslate(Me)
+        If bFirstLoad Then
+            setDefaults()
+        End If
+        TestOKEnabled()
     End Sub
 
-    Private Sub ucrDataFrameAddRemove_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameAddRemove.Leave
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    Private Sub setDefaults()
+        ucrReceiveColumnsToDelete.Clear()
     End Sub
 
-    Private Sub ucrReceiverColumnsToDelete_Leave(sender As Object, e As EventArgs) Handles ucrReceiverColumnsToDelete.Leave
-        ucrBase.clsRsyntax.AddParameter("cols", ucrReceiverColumnsToDelete.GetVariableNames)
+    Private Sub TestOKEnabled()
+        If Not ucrReceiveColumnsToDelete.IsEmpty() Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        setDefaults()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiveColumnsToDelete_SelectionChanged() Handles ucrReceiveColumnsToDelete.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("cols", ucrReceiveColumnsToDelete.GetVariableNames)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectColumnsToDelete_DataFrameChanged() Handles ucrSelectColumnsToDelete.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectColumnsToDelete.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        TestOKEnabled()
     End Sub
 End Class
