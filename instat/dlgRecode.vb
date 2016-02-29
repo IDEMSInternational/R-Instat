@@ -17,6 +17,7 @@
 
 Imports instat.Translations
 Public Class dlgRecode
+    Public bFirstLoad As Boolean = True
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrReceiverRecode.Selector = ucrSelectorDataFrameAddRemove
         ucrReceiverRecode.SetMeAsReceiver()
@@ -29,7 +30,29 @@ Public Class dlgRecode
         ucrSelectorNewColumnName.SetDataFrameSelector(ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames)
         ucrSelectorNewColumnName.SetPrefix("Recode")
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSelectorNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSelectorNewColumnName.cboColumnName.Text)
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+        'Checks if Ok can be enabled.
+        TestOKEnabled()
     End Sub
+
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+
+    End Sub
+
     Private Sub ucrReceiverRecode_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRecode.Leave
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRecode.GetVariables())
 
