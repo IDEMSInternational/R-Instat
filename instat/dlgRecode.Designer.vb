@@ -43,7 +43,7 @@ Partial Class dlgRecode
         Me.chkAddLabels.Location = New System.Drawing.Point(12, 197)
         Me.chkAddLabels.Name = "chkAddLabels"
         Me.chkAddLabels.Size = New System.Drawing.Size(79, 17)
-        Me.chkAddLabels.TabIndex = 2
+        Me.chkAddLabels.TabIndex = 7
         Me.chkAddLabels.Tag = "Add_Labels"
         Me.chkAddLabels.Text = "Add Labels"
         Me.chkAddLabels.UseVisualStyleBackColor = True
@@ -54,7 +54,7 @@ Partial Class dlgRecode
         Me.lblSelectedVariables.Location = New System.Drawing.Point(295, 12)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
-        Me.lblSelectedVariables.TabIndex = 17
+        Me.lblSelectedVariables.TabIndex = 2
         Me.lblSelectedVariables.Text = "Selected Variables"
         '
         'lblBreakPoints
@@ -63,7 +63,7 @@ Partial Class dlgRecode
         Me.lblBreakPoints.Location = New System.Drawing.Point(298, 62)
         Me.lblBreakPoints.Name = "lblBreakPoints"
         Me.lblBreakPoints.Size = New System.Drawing.Size(70, 13)
-        Me.lblBreakPoints.TabIndex = 20
+        Me.lblBreakPoints.TabIndex = 4
         Me.lblBreakPoints.Tag = "Break_Points"
         Me.lblBreakPoints.Text = "Break Points:"
         '
@@ -74,7 +74,7 @@ Partial Class dlgRecode
         Me.grpClosedOn.Location = New System.Drawing.Point(298, 107)
         Me.grpClosedOn.Name = "grpClosedOn"
         Me.grpClosedOn.Size = New System.Drawing.Size(106, 84)
-        Me.grpClosedOn.TabIndex = 22
+        Me.grpClosedOn.TabIndex = 6
         Me.grpClosedOn.TabStop = False
         Me.grpClosedOn.Tag = "Closed_on"
         Me.grpClosedOn.Text = "Closed on"
@@ -106,21 +106,21 @@ Partial Class dlgRecode
         Me.ucrMultipleLabels.Location = New System.Drawing.Point(115, 192)
         Me.ucrMultipleLabels.Name = "ucrMultipleLabels"
         Me.ucrMultipleLabels.Size = New System.Drawing.Size(150, 29)
-        Me.ucrMultipleLabels.TabIndex = 25
+        Me.ucrMultipleLabels.TabIndex = 8
         '
         'ucrMultipleNumericRecode
         '
         Me.ucrMultipleNumericRecode.Location = New System.Drawing.Point(298, 78)
         Me.ucrMultipleNumericRecode.Name = "ucrMultipleNumericRecode"
         Me.ucrMultipleNumericRecode.Size = New System.Drawing.Size(106, 29)
-        Me.ucrMultipleNumericRecode.TabIndex = 24
+        Me.ucrMultipleNumericRecode.TabIndex = 5
         '
         'ucrSelectorNewColumnName
         '
         Me.ucrSelectorNewColumnName.Location = New System.Drawing.Point(12, 220)
         Me.ucrSelectorNewColumnName.Name = "ucrSelectorNewColumnName"
         Me.ucrSelectorNewColumnName.Size = New System.Drawing.Size(367, 35)
-        Me.ucrSelectorNewColumnName.TabIndex = 23
+        Me.ucrSelectorNewColumnName.TabIndex = 9
         Me.ucrSelectorNewColumnName.ucrDataFrameSelector = Nothing
         '
         'ucrReceiverRecode
@@ -129,21 +129,21 @@ Partial Class dlgRecode
         Me.ucrReceiverRecode.Name = "ucrReceiverRecode"
         Me.ucrReceiverRecode.Selector = Nothing
         Me.ucrReceiverRecode.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverRecode.TabIndex = 19
+        Me.ucrReceiverRecode.TabIndex = 3
         '
         'ucrSelectorForRecode
         '
         Me.ucrSelectorForRecode.Location = New System.Drawing.Point(12, 12)
         Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
         Me.ucrSelectorForRecode.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorForRecode.TabIndex = 18
+        Me.ucrSelectorForRecode.TabIndex = 1
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(12, 261)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 58)
-        Me.ucrBase.TabIndex = 1
+        Me.ucrBase.TabIndex = 0
         '
         'dlgRecode
         '
