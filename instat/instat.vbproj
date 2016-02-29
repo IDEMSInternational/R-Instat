@@ -298,6 +298,12 @@
     <Compile Include="dlgSummaryBarOrPieChart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ucrInputComboBox.Designer.vb">
+      <DependentUpon>ucrInputComboBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrInputComboBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="sdgBarChart.Designer.vb">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
     </Compile>
@@ -1168,6 +1174,18 @@
       <DependentUpon>ucrFactor.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrFactor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrInput.Designer.vb">
+      <DependentUpon>ucrInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrInput.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrInputTextBox.Designer.vb">
+      <DependentUpon>ucrInputTextBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrInputTextBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrMultipleInput.Designer.vb">
@@ -2239,12 +2257,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegressionSimple.fr-FR.resx">
       <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegressionSimple.resx">
       <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegressionSimple.sw-KE.resx">
       <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRegularSequence.fr-FR.resx">
       <DependentUpon>dlgRegularSequence.vb</DependentUpon>
@@ -2555,6 +2575,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditor.sw-KE.resx">
       <DependentUpon>frmEditor.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFileNew.fr-FR.resx">
       <DependentUpon>dlgFileNew.vb</DependentUpon>
@@ -2707,6 +2728,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInput.fr-FR.resx">
+      <DependentUpon>ucrInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInput.resx">
+      <DependentUpon>ucrInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInput.sw-KE.resx">
+      <DependentUpon>ucrInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputComboBox.fr-FR.resx">
+      <DependentUpon>ucrInputComboBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputComboBox.resx">
+      <DependentUpon>ucrInputComboBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputComboBox.sw-KE.resx">
+      <DependentUpon>ucrInputComboBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputTextBox.fr-FR.resx">
+      <DependentUpon>ucrInputTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputTextBox.resx">
+      <DependentUpon>ucrInputTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputTextBox.sw-KE.resx">
+      <DependentUpon>ucrInputTextBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
