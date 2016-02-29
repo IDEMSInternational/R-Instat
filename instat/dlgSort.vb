@@ -26,7 +26,7 @@ Public Class dlgSort
         'Set the things that will always be constant for the dialog
         ' e.g. function name, selectors and receivers
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
-        ucrReceiverSort.Selector = ucrSelectorByDataFrameAddRemove
+        ucrReceiverSort.Selector = ucrSelectForSort
         ucrReceiverSort.SetMeAsReceiver()
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 44
@@ -37,6 +37,8 @@ Public Class dlgSort
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
 
         'Checks if Ok can be enabled.
@@ -50,33 +52,51 @@ Public Class dlgSort
     Private Sub SetDefaults()
         rdoLast.Checked = True
         rdoAscending.Checked = True
-        ucrReceiverSort.Clear()
-        'Test ok enabled
-        TestOKEnabled()
+        ucrSelectForSort.Reset()
+    End Sub
+
+    'Currently we are not clearing the RSyntax after running script (only clearing strScript)
+    'so I don't think this is neccessary. Should we be clearing the RSyntax as well?
+    'Not clearing seems to be a good way to keep the parameters from the last call
+    'but will there be unwanted consequences of this?
+    Private Sub ReopenDialog()
+        SetOrderValue()
+        SetMissingValue()
     End Sub
 
     'Sub that tests if the OK button can be enabled.
     'This runs on load and after anything is changed on the dialog.
     'No other place needs to set Ok enabled, always done through this sub
     Private Sub TestOKEnabled()
-        If ucrReceiverSort.GetVariableNames() <> "" AndAlso (rdoAscending.Checked Or rdoDescending.Checked) AndAlso (rdoFirst.Checked Or rdoLast.Checked) Then
-            ucrBase.cmdOk.Enabled = True
+        If ucrReceiverSort.IsEmpty() = False Then
+            ucrBase.OKEnabled(True)
         Else
-            ucrBase.cmdOk.Enabled = False
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrReceiverSort_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSort.Leave
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-        ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
+    Private Sub ucrReceiverSort_SelectionChanged() Handles ucrReceiverSort.SelectionChanged
+        If Not ucrReceiverSort.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_names")
+        End If
         'Test ok enabled
         TestOKEnabled()
     End Sub
 
     'For grouped radio buttons put all CheckedChanged events into one sub and check which is checked.
     Private Sub grpOrder_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged, rdoDescending.CheckedChanged
+        SetOrderValue()
+    End Sub
+
+    Private Sub SetOrderValue()
         If rdoAscending.Checked Then
-            ucrBase.clsRsyntax.AddParameter("decreasing", "FALSE")
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("decreasing", "FALSE")
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("decreasing")
+            End If
         ElseIf rdoDescending.Checked Then
             ucrBase.clsRsyntax.AddParameter("decreasing", "TRUE")
         Else
@@ -84,33 +104,34 @@ Public Class dlgSort
             'but in case of problems it keeps the code stable
             ucrBase.clsRsyntax.RemoveParameter("decreasing")
         End If
-        'Test ok enabled
-        TestOKEnabled()
     End Sub
 
     'Same here for this group of buttona
     Private Sub grpMissingValues_ChekedChanged(sender As Object, e As EventArgs) Handles rdoFirst.CheckedChanged, rdoLast.CheckedChanged
+        SetMissingValue()
+    End Sub
+
+    Private Sub SetMissingValue()
         If rdoFirst.Checked Then
             ucrBase.clsRsyntax.AddParameter("na.last", "FALSE")
         ElseIf rdoLast.Checked Then
-            ucrBase.clsRsyntax.AddParameter("na.last", "TRUE")
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("na.last", "TRUE")
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("na.last")
+            End If
         Else
             ucrBase.clsRsyntax.RemoveParameter("na.last")
         End If
-
-        'Test ok enabled
-        TestOKEnabled()
     End Sub
 
     'When the reset button is clicked, set the defaults again
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
     End Sub
 
-    'Use this event to see when something has changed in a receiver
-    'For some receivers you need to run TestOKEnabled() on this event.
-    Private Sub ucrReceiverSort_SelectionChanged() Handles ucrReceiverSort.SelectionChanged
-        'Test ok enabled
-        TestOKEnabled()
+    Private Sub ucrSelectForSort_DataFrameChanged() Handles ucrSelectForSort.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectForSort.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
 End Class

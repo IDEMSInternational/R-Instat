@@ -18,12 +18,12 @@ Public Class ucrReceiverSingle
     Dim strDataFrameName As String = ""
 
     Public Overrides Sub AddSelected()
-        Dim objItem As Object
-        Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As Object
+        Dim objItem As ListViewItem
+        Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
 
         Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
         For Each objItem In tempObjects
-            strDataFrameName = objItem.Group.ToString()
+            strDataFrameName = objItem.Group.Name
             txtReceiverSingle.Text = objItem.text
         Next
 
@@ -31,14 +31,24 @@ Public Class ucrReceiverSingle
 
     Public Overrides Sub RemoveSelected()
 
-        If txtReceiverSingle.Text <> "" Then
-            txtReceiverSingle.Text = ""
-        End If
+        txtReceiverSingle.Text = ""
+        strDataFrameName = ""
+
     End Sub
 
     Public Overrides Sub Clear()
-        txtReceiverSingle.Text = ""
+        RemoveSelected()
     End Sub
+
+    Public Overrides Function IsEmpty() As Boolean
+
+        If txtReceiverSingle.Text <> "" Then
+            Return False
+        Else
+            Return True
+        End If
+
+    End Function
 
     Public Overrides Function GetVariables() As RFunction
         'return columns (in data frame) in both cases
@@ -50,7 +60,7 @@ Public Class ucrReceiverSingle
             clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
             clsGetVariablesFunc.AddParameter("col_name", GetVariableNames())
             'TODO make this an option set in Options menu
-            clsGetVariablesFunc.SetAssignTo(MakeValidRString(txtReceiverSingle.Text))
+            clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
             Return clsGetVariablesFunc
         Else
             Return clsGetVariablesFunc
@@ -89,9 +99,13 @@ Public Class ucrReceiverSingle
     End Sub
 
     Private Sub txtReceiverSingle_KeyDown(sender As Object, e As KeyEventArgs) Handles txtReceiverSingle.KeyDown
-        If e.KeyCode = Keys.Delete Then
+        If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
             RemoveSelected()
         End If
+    End Sub
+
+    Private Sub RemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
+        RemoveSelected()
     End Sub
 End Class
 
