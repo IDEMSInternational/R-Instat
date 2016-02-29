@@ -33,6 +33,7 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub dlgInsertColumn_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ucrBase.iHelpTopicID = 52
         If bFirstLoad Then
             setDefaultValues()
             bFirstLoad = False

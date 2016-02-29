@@ -22,21 +22,14 @@ Partial Class dlgFileNew
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
         Me.lblRows = New System.Windows.Forms.Label()
         Me.txtRows = New System.Windows.Forms.TextBox()
         Me.txtColumns = New System.Windows.Forms.TextBox()
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.lblName = New System.Windows.Forms.Label()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 170)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 61)
-        Me.ucrBase.TabIndex = 0
         '
         'lblRows
         '
@@ -44,7 +37,7 @@ Partial Class dlgFileNew
         Me.lblRows.Location = New System.Drawing.Point(37, 35)
         Me.lblRows.Name = "lblRows"
         Me.lblRows.Size = New System.Drawing.Size(37, 13)
-        Me.lblRows.TabIndex = 1
+        Me.lblRows.TabIndex = 0
         Me.lblRows.Text = "Rows:"
         '
         'txtRows
@@ -52,14 +45,14 @@ Partial Class dlgFileNew
         Me.txtRows.Location = New System.Drawing.Point(137, 35)
         Me.txtRows.Name = "txtRows"
         Me.txtRows.Size = New System.Drawing.Size(39, 20)
-        Me.txtRows.TabIndex = 2
+        Me.txtRows.TabIndex = 1
         '
         'txtColumns
         '
         Me.txtColumns.Location = New System.Drawing.Point(137, 75)
         Me.txtColumns.Name = "txtColumns"
         Me.txtColumns.Size = New System.Drawing.Size(39, 20)
-        Me.txtColumns.TabIndex = 4
+        Me.txtColumns.TabIndex = 3
         '
         'lblColumns
         '
@@ -67,7 +60,7 @@ Partial Class dlgFileNew
         Me.lblColumns.Location = New System.Drawing.Point(37, 78)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(50, 13)
-        Me.lblColumns.TabIndex = 3
+        Me.lblColumns.TabIndex = 2
         Me.lblColumns.Text = "Columns:"
         '
         'txtName
@@ -83,8 +76,15 @@ Partial Class dlgFileNew
         Me.lblName.Location = New System.Drawing.Point(37, 122)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(94, 13)
-        Me.lblName.TabIndex = 6
+        Me.lblName.TabIndex = 4
         Me.lblName.Text = "New Sheet Name:"
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 170)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 61)
+        Me.ucrBase.TabIndex = 6
         '
         'dlgFileNew
         '
