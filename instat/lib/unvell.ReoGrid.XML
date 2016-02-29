@@ -94,6 +94,12 @@
             Represents an floating object above worksheet
             </summary>
         </member>
+        <member name="M:unvell.ReoGrid.Drawing.IFloatingObject.OnBoundsChanged(unvell.ReoGrid.Graphics.Rectangle)">
+            <summary>
+            Method invoked when Bounds property changed.
+            </summary>
+            <param name="oldRect">Previous bounds value before changing.</param>
+        </member>
         <member name="P:unvell.ReoGrid.Drawing.IFloatingObject.Bounds">
             <summary>
             Get or set the bounds relative to the container of this floating object.
@@ -795,24 +801,21 @@
             Determine the style of data serial
             </summary>
         </member>
-        <member name="T:unvell.ReoGrid.Chart.ILegendSupportedChart">
+        <member name="M:unvell.ReoGrid.Chart.Chart.#ctor">
             <summary>
-            Represents legend supported chart interface.
+            Create chart instance.
             </summary>
         </member>
-        <member name="M:unvell.ReoGrid.Chart.ILegendSupportedChart.GetLegendSymbolSize">
+        <member name="M:unvell.ReoGrid.Chart.Chart.OnBoundsChanged(unvell.ReoGrid.Graphics.Rectangle)">
             <summary>
-            Get default symbol size of chart legend.
+            Relayout this view.
             </summary>
-            <returns>Symbol size of chart legend.</returns>
+            <param name="oldRect">Bounds rectangle before changed.</param>
         </member>
-        <member name="M:unvell.ReoGrid.Chart.ILegendSupportedChart.DrawLegendSymbol(unvell.ReoGrid.Rendering.DrawingContext,System.Int32,unvell.ReoGrid.Graphics.Rectangle)">
+        <member name="M:unvell.ReoGrid.Chart.Chart.UpdateChildrenBounds">
             <summary>
-            Draw legend symbol for every data rows
+            Update children view bounds.
             </summary>
-            <param name="dc">Current instance of drawing context.</param>
-            <param name="index">Number of row in data source.</param>
-            <param name="bounds">Symbol bounds relative to legend view.</param>
         </member>
         <member name="M:unvell.ReoGrid.Chart.Chart.GetDefaultTitleBounds">
             <summary>
@@ -826,6 +829,12 @@
             </summary>
             <returns>Rectangle of body bounds.</returns>
         </member>
+        <member name="M:unvell.ReoGrid.Chart.Chart.GetLegendBounds">
+            <summary>
+            Get legend view bounds.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:unvell.ReoGrid.Chart.Chart.OnDataChanged">
             <summary>
             This method will be invoked when data from data source is changed.
@@ -836,7 +845,7 @@
             This method will be invoked when chart data source is changed.
             </summary>
         </member>
-        <member name="M:unvell.ReoGrid.Chart.Chart.UpdateDataInfo">
+        <member name="M:unvell.ReoGrid.Chart.Chart.UpdateDataStatInfo">
             <summary>
             Update data information.
             </summary>
@@ -847,19 +856,11 @@
             </summary>
             <param name="view">Chart plot view object.</param>
         </member>
-        <member name="M:unvell.ReoGrid.Chart.Chart.GetLegendSymbolSize">
+        <member name="M:unvell.ReoGrid.Chart.Chart.CreateChartLegend">
             <summary>
-            Get default symbol size of chart legend.
+            Create chart legend.
             </summary>
-            <returns>Symbol size of chart legend.</returns>
-        </member>
-        <member name="M:unvell.ReoGrid.Chart.Chart.DrawLegendSymbol(unvell.ReoGrid.Rendering.DrawingContext,System.Int32,unvell.ReoGrid.Graphics.Rectangle)">
-            <summary>
-            Draw chart legend symbol for data row by specified index.
-            </summary>
-            <param name="dc">Drawing context.</param>
-            <param name="index">Row index of data range.</param>
-            <param name="bounds">Bounds to draw symbol.</param>
+            <returns>Instance of chart legend.</returns>
         </member>
         <member name="M:unvell.ReoGrid.Chart.Chart.ResetDataSerialStyles">
             <summary>
@@ -898,11 +899,6 @@
             Get or set the title string object.
             </summary>
         </member>
-        <member name="P:unvell.ReoGrid.Chart.Chart.PrimaryLegend">
-            <summary>
-            Get or set the primary legend object.
-            </summary>
-        </member>
         <member name="P:unvell.ReoGrid.Chart.Chart.Title">
             <summary>
             Get or set the title of chart.
@@ -928,6 +924,16 @@
             Get the chart plot view component.
             </summary>
         </member>
+        <member name="P:unvell.ReoGrid.Chart.Chart.ShowLegend">
+            <summary>
+            Get or set whether or not to show legend view.
+            </summary>
+        </member>
+        <member name="P:unvell.ReoGrid.Chart.Chart.PrimaryLegend">
+            <summary>
+            Get or set the primary legend object.
+            </summary>
+        </member>
         <member name="P:unvell.ReoGrid.Chart.Chart.DataSerialStyles">
             <summary>
             Get data serial styles.
@@ -944,6 +950,25 @@
             Create axis-based chart instance.
             </summary>
         </member>
+        <member name="M:unvell.ReoGrid.Chart.AxisChart.CreatePrimaryAxisCategoryLabelView(unvell.ReoGrid.Graphics.Rectangle)">
+            <summary>
+            Create default primary axis category label view.
+            </summary>
+            <param name="bodyBounds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:unvell.ReoGrid.Chart.AxisChart.GetDefaultVerticalAxisInfoViewBounds(unvell.ReoGrid.Graphics.Rectangle)">
+            <summary>
+            Return default vertical axis bounds.
+            </summary>
+            <param name="bodyBounds">Bounds of chart body.</param>
+            <returns>Vertical axis bounds rectangle.</returns>
+        </member>
+        <member name="M:unvell.ReoGrid.Chart.AxisChart.UpdateChildrenBounds">
+            <summary>
+            Update all children bounds.
+            </summary>
+        </member>
         <member name="M:unvell.ReoGrid.Chart.AxisChart.OnDataSourceChanged">
             <summary>
             This method will be invoked when data source of this chart is changed.
@@ -954,7 +979,7 @@
             This method will be invoked when data from the data source of this chart is changed.
             </summary>
         </member>
-        <member name="M:unvell.ReoGrid.Chart.AxisChart.UpdateDataInfo">
+        <member name="M:unvell.ReoGrid.Chart.AxisChart.UpdateDataStatInfo">
             <summary>
             Update chart data information.
             </summary>
@@ -1029,14 +1054,9 @@
             Specifies that whether or not allow to display the horizontal guide lines.
             </summary>
         </member>
-        <member name="P:unvell.ReoGrid.Chart.AxisChart.ShowVerticalGridLines">
+        <member name="P:unvell.ReoGrid.Chart.AxisChart.ShowVerticalGuideLines">
             <summary>
             Specifies that whether or not allow to display the vertical guide lines.
-            </summary>
-        </member>
-        <member name="P:unvell.ReoGrid.Chart.AxisChart.ColumnLegend">
-            <summary>
-            Get or set the chart legend view object.
             </summary>
         </member>
         <member name="P:unvell.ReoGrid.Chart.AxisChart.ZeroWidth">
@@ -1066,6 +1086,20 @@
             </summary>
             <param name="dc">Platform no-associated drawing context instance.</param>
         </member>
+        <member name="M:unvell.ReoGrid.Chart.ChartLegend.GetSymbolSize">
+            <summary>
+            Get default symbol size of chart legend.
+            </summary>
+            <returns>Symbol size of chart legend.</returns>
+        </member>
+        <member name="M:unvell.ReoGrid.Chart.ChartLegend.DrawSymbol(unvell.ReoGrid.Rendering.DrawingContext,System.Int32,unvell.ReoGrid.Graphics.Rectangle)">
+            <summary>
+            Draw chart legend symbol for data row by specified index.
+            </summary>
+            <param name="dc">Drawing context.</param>
+            <param name="index">Row index of data range.</param>
+            <param name="bounds">Bounds to draw symbol.</param>
+        </member>
         <member name="P:unvell.ReoGrid.Chart.ChartLegend.Chart">
             <summary>
             Get the instance of owner chart.
@@ -1086,16 +1120,33 @@
             Create line chart component instance.
             </summary>
         </member>
-        <member name="M:unvell.ReoGrid.Chart.LineChart.GetLegendSymbolSize">
+        <member name="M:unvell.ReoGrid.Chart.LineChart.CreateChartLegend">
             <summary>
-            Get default symbol size of chart legend.
+            Creates and returns line chart legend instance.
             </summary>
-            <returns>Symbol size of chart legend.</returns>
+            <returns>Instance of line chart legend.</returns>
         </member>
         <member name="P:unvell.ReoGrid.Chart.LineChart.LineChartPlotView">
             <summary>
             Get plot view object of line chart component.
             </summary>
+        </member>
+        <member name="T:unvell.ReoGrid.Chart.LineChartLegend">
+            <summary>
+            Represents line chart legend.
+            </summary>
+        </member>
+        <member name="M:unvell.ReoGrid.Chart.LineChartLegend.#ctor(unvell.ReoGrid.Chart.IChart)">
+            <summary>
+            Create line chart legend.
+            </summary>
+            <param name="chart">Parent chart component.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Chart.LineChartLegend.GetSymbolSize">
+            <summary>
+            Get default symbol size of chart legend.
+            </summary>
+            <returns>Symbol size of chart legend.</returns>
         </member>
         <member name="T:unvell.ReoGrid.Chart.LineChartPlotView">
             <summary>
@@ -1538,6 +1589,122 @@
             <summary>
             Default button size of outlinetextColor buttons
             </summary>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.String)">
+            <summary>
+            Load CSV file into worksheet.
+            </summary>
+            <param name="path">File contains CSV data.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.String,unvell.ReoGrid.RangePosition)">
+            <summary>
+            Load CSV file into worksheet.
+            </summary>
+            <param name="path">File contains CSV data.</param>
+            <param name="targetRange">The range used to fill loaded CSV data.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.String,System.Text.Encoding)">
+            <summary>
+            Load CSV file into worksheet.
+            </summary>
+            <param name="path">Path to load CSV file.</param>
+            <param name="encoding">Encoding used to read and decode plain-text from file.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.String,System.Text.Encoding,unvell.ReoGrid.RangePosition)">
+            <summary>
+            Load CSV file into worksheet.
+            </summary>
+            <param name="path">Path to load CSV file.</param>
+            <param name="encoding">Encoding used to read and decode plain-text from file.</param>
+            <param name="targetRange">The range used to fill loaded CSV data.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.IO.Stream)">
+            <summary>
+            Load CSV data from stream into worksheet.
+            </summary>
+            <param name="s">Input stream to read CSV data.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.IO.Stream,unvell.ReoGrid.RangePosition)">
+            <summary>
+            Load CSV data from stream into worksheet.
+            </summary>
+            <param name="s">Input stream to read CSV data.</param>
+            <param name="targetRange">The range used to fill loaded CSV data.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.IO.Stream,System.Text.Encoding)">
+            <summary>
+            Load CSV data from stream into worksheet.
+            </summary>
+            <param name="s">Input stream to read CSV data.</param>
+            <param name="encoding">Text encoding used to read and decode plain-text from stream.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.IO.Stream,System.Text.Encoding,unvell.ReoGrid.RangePosition)">
+            <summary>
+            Load CSV data from stream into worksheet.
+            </summary>
+            <param name="s">Input stream to read CSV data.</param>
+            <param name="encoding">Text encoding used to read and decode plain-text from stream.</param>
+            <param name="targetRange">The range used to fill loaded CSV data.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.IO.Stream,System.Text.Encoding,unvell.ReoGrid.RangePosition,System.Boolean,System.Int32)">
+            <summary>
+            Load CSV data from stream into worksheet.
+            </summary>
+            <param name="s">Input stream to read CSV data.</param>
+            <param name="encoding">Text encoding used to read and decode plain-text from stream.</param>
+            <param name="targetRange">The range used to fill loaded CSV data.</param>
+            <param name="autoSpread">decide whether or not to append rows or columns automatically to fill csv data</param>
+            <param name="bufferLines">decide how many lines int the buffer to read and fill csv data</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.ExportAsCSV(System.String,System.Int32,System.Text.Encoding)">
+            <summary>
+            Export spreadsheet as CSV format from specified number of rows.
+            </summary>
+            <param name="path">File path to write CSV format as stream.</param>
+            <param name="startRow">Number of rows start to export data, 
+            this property is useful to skip the headers on top of worksheet.</param>
+            <param name="encoding">Text encoding during output text in CSV format.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.ExportAsCSV(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Export spreadsheet as CSV format from specified range.
+            </summary>
+            <param name="path">File path to write CSV format as stream.</param>
+            <param name="addressOrName">Range to be output from this worksheet, specified by address or name.</param>
+            <param name="encoding">Text encoding during output text in CSV format.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.ExportAsCSV(System.String,unvell.ReoGrid.RangePosition,System.Text.Encoding)">
+            <summary>
+            Export spreadsheet as CSV format from specified range.
+            </summary>
+            <param name="path">File path to write CSV format as stream.</param>
+            <param name="range">Range to be output from this worksheet.</param>
+            <param name="encoding">Text encoding during output text in CSV format.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.ExportAsCSV(System.IO.Stream,System.Int32,System.Text.Encoding)">
+            <summary>
+            Export spreadsheet as CSV format from specified number of rows.
+            </summary>
+            <param name="s">Stream to write CSV format as stream.</param>
+            <param name="startRow">Number of rows start to export data, 
+            this property is useful to skip the headers on top of worksheet.</param>
+            <param name="encoding">Text encoding during output text in CSV format</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.ExportAsCSV(System.IO.Stream,System.String,System.Text.Encoding)">
+            <summary>
+            Export spreadsheet as CSV format from specified range.
+            </summary>
+            <param name="s">Stream to write CSV format as stream.</param>
+            <param name="addressOrName">Range to be output from this worksheet, specified by address or name.</param>
+            <param name="encoding">Text encoding during output text in CSV format.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.ExportAsCSV(System.IO.Stream,unvell.ReoGrid.RangePosition,System.Text.Encoding)">
+            <summary>
+            Export spreadsheet as CSV format from specified range.
+            </summary>
+            <param name="s">Stream to write CSV format as stream.</param>
+            <param name="range">Range to be output from this worksheet.</param>
+            <param name="encoding">Text encoding during output text in CSV format.</param>
         </member>
         <member name="M:unvell.ReoGrid.Worksheet.CreateColumnFilter(unvell.ReoGrid.RangePosition)">
             <summary>
@@ -2929,43 +3096,49 @@
         </member>
         <member name="M:unvell.ReoGrid.Worksheet.HideRows(System.Int32,System.Int32)">
             <summary>
-            Hide specified rows 
+            Hide specified rows.
             </summary>
-            <param name="row">index of start row to hide</param>
-            <param name="count">number of rows to be hidden</param>
+            <seealso cref="M:unvell.ReoGrid.Worksheet.ShowRows(System.Int32,System.Int32)"/>
+            <param name="row">Index of row start to hide.</param>
+            <param name="count">Number of rows to be hidden.</param>
         </member>
         <member name="M:unvell.ReoGrid.Worksheet.ShowRows(System.Int32,System.Int32)">
             <summary>
-            Show specified rows
+            Show specified rows.
             </summary>
-            <param name="row">number of row</param>
-            <param name="count">number of rows</param>
+            <seealso cref="M:unvell.ReoGrid.Worksheet.HideRows(System.Int32,System.Int32)"/>
+            <param name="row">Number of row start to show.</param>
+            <param name="count">Number of rows to show.</param>
         </member>
         <member name="M:unvell.ReoGrid.Worksheet.HideColumns(System.Int32,System.Int32)">
             <summary>
-            Hide specified columns 
+            Hide specified columns.
             </summary>
+            <seealso cref="M:unvell.ReoGrid.Worksheet.ShowColumns(System.Int32,System.Int32)"/>
             <param name="col">index of start column to hide</param>
             <param name="count">number of columns to be hidden</param>
         </member>
         <member name="M:unvell.ReoGrid.Worksheet.ShowColumns(System.Int32,System.Int32)">
             <summary>
-            Show specified columns
+            Show specified columns.
             </summary>
-            <param name="col">number of column</param>
-            <param name="count">number of columns</param>
+            <seealso cref="M:unvell.ReoGrid.Worksheet.HideColumns(System.Int32,System.Int32)"/>
+            <param name="col">Number of column start to show.</param>
+            <param name="count">Number of columns to show.</param>
         </member>
         <member name="M:unvell.ReoGrid.Worksheet.IsRowVisible(System.Int32)">
             <summary>
-            Check whether or not a specified row on worksheet is visible.
+            Check whether or not a specified row is visible.
             </summary>
+            <seealso cref="M:unvell.ReoGrid.Worksheet.IsColumnVisible(System.Int32)"/>
             <param name="row">Zero-based row index to check.</param>
             <returns>True if the specified row on worksheet is visible; otherwise return false.</returns>
         </member>
         <member name="M:unvell.ReoGrid.Worksheet.IsColumnVisible(System.Int32)">
             <summary>
-            Check whether or not a specified column on worksheet is visible.
+            Check whether or not a specified column is visible.
             </summary>
+            <seealso cref="M:unvell.ReoGrid.Worksheet.IsRowVisible(System.Int32)"/>
             <param name="col">Zero-based row index to check.</param>
             <returns>True if the specified column on worksheet is visible; otherwise return false.</returns>
         </member>
@@ -3230,21 +3403,19 @@
         </member>
         <member name="M:unvell.ReoGrid.Worksheet.ChangeColumnPageBreak(System.Int32,System.Int32,System.Boolean)">
             <summary>
-            Change (Move) a column page break at specified column to another new position
+            Change (Move) a column page break index from specified position to a new position.
             </summary>
-            <param name="oldIndex">zero-based number of column to find the page break that will be moved</param>
-            <param name="newIndex">zero-based number of column to put column page break</param>
-            <param name="refreshPageBreaks">indicates that whether allow to update others page 
-            break and adjust the page scale automatically. (default is true)</param>
+            <param name="oldIndex">Zero-based number of column to find the page break that will be moved.</param>
+            <param name="newIndex">Zero-based number of column to put column page break.</param>
+            <param name="refreshPageBreaks">Indicates whether or not to resplit all pages after changing. (Default is true)</param>
         </member>
         <member name="M:unvell.ReoGrid.Worksheet.ChangeRowPageBreak(System.Int32,System.Int32,System.Boolean)">
             <summary>
-            Change (Move) a row page break at specified row to another new position
+            Move a specified row page break index from specified position to a new position.
             </summary>
-            <param name="oldIndex">zero-based number of row to find the page break that will be moved</param>
-            <param name="newIndex">zero-based number of row to put row page break</param>
-            <param name="refreshPageBreaks">indicates that whether allow to update others page 
-            break and adjust the page scale automatically. (default is true)</param>
+            <param name="oldIndex">Zero-based number of row to find the page break that will be moved.</param>
+            <param name="newIndex">Zero-based number of row to put row page break.</param>
+            <param name="refreshPageBreaks">Indicates whether or not to resplit all pages after changing. (Default is true)</param>
         </member>
         <member name="M:unvell.ReoGrid.Worksheet.InsertColumnPageBreak(System.Int32,System.Boolean)">
             <summary>
@@ -3551,41 +3722,6 @@
             <returns>True if spreadsheet is loaded successfully.</returns>
             <exception cref="T:unvell.ReoGrid.ReoGridLoadException">Exception will be thrown if any errors happen during loading.</exception>
         </member>
-        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.String)">
-            <summary>
-            Load a csv file format from file
-            </summary>
-            <param name="path"></param>
-        </member>
-        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.String,System.Text.Encoding)">
-            <summary>
-            Load a csv file format from file
-            </summary>
-            <param name="path">path to load csv file</param>
-            <param name="encoding">encoding used to read string from file</param>
-        </member>
-        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.IO.Stream)">
-            <summary>
-            Load a csv file format from stream
-            </summary>
-            <param name="s"></param>
-        </member>
-        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.IO.Stream,System.Text.Encoding)">
-            <summary>
-            Load data from CSV file
-            </summary>
-            <param name="s">stream to read data</param>
-            <param name="encoding">text encoding to read string</param>
-        </member>
-        <member name="M:unvell.ReoGrid.Worksheet.LoadCSV(System.IO.Stream,System.Boolean,System.Int32,System.Text.Encoding)">
-            <summary>
-            Load a csv file format from stream
-            </summary>
-            <param name="s">input stream to read data</param>
-            <param name="autoSpread">decide whether or not to append rows or columns automatically to fill csv data</param>
-            <param name="bufferLines">decide how many lines int the buffer to read and fill csv data</param>
-            <param name="encoding">text encoding to read string</param>
-        </member>
         <member name="M:unvell.ReoGrid.Worksheet.Save(System.String)">
             <summary>
             Save current worksheet into file.
@@ -3718,7 +3854,7 @@
             <param name="cell"></param>
             <param name="updateRowHeight"></param>
         </member>
-        <member name="M:unvell.ReoGrid.Worksheet.UpdateCellTextBounds(unvell.ReoGrid.Graphics.IGraphics,unvell.ReoGrid.ReoGridCell,unvell.ReoGrid.Rendering.DrawMode,System.Single)">
+        <member name="M:unvell.ReoGrid.Worksheet.UpdateCellTextBounds(unvell.ReoGrid.Rendering.IRenderer,unvell.ReoGrid.ReoGridCell,unvell.ReoGrid.Rendering.DrawMode,System.Single,unvell.ReoGrid.Core.UpdateFontReason)">
             <summary>
             Update cell text bounds. 
             need to call this method when content of cell is changed, contains styles like align, font, etc.
@@ -3779,12 +3915,12 @@
             </summary>
             <param name="address">Cell position described in address string to freeze worksheet.</param>
         </member>
-        <member name="M:unvell.ReoGrid.Worksheet.FreezeToCell(unvell.ReoGrid.CellPosition,unvell.ReoGrid.FreezePosition)">
+        <member name="M:unvell.ReoGrid.Worksheet.FreezeToCell(unvell.ReoGrid.CellPosition,unvell.ReoGrid.FreezeArea)">
             <summary>
             Freezes worksheet at specified cell position and specifies the freeze areas.
             </summary>
             <param name="pos">Cell position to freeze worksheet.</param>
-            <param name="position">Specifies the frozen areas and activate areas.</param>
+            <param name="area">Specifies the frozen panes.</param>
         </member>
         <member name="M:unvell.ReoGrid.Worksheet.FreezeToCell(System.Int32,System.Int32)">
             <summary>
@@ -3793,13 +3929,13 @@
             <param name="row">Zero-based number of row to freeze worksheet.</param>
             <param name="col">Zero-based number of column to freeze worksheet.</param>
         </member>
-        <member name="M:unvell.ReoGrid.Worksheet.FreezeToCell(System.Int32,System.Int32,unvell.ReoGrid.FreezePosition)">
+        <member name="M:unvell.ReoGrid.Worksheet.FreezeToCell(System.Int32,System.Int32,unvell.ReoGrid.FreezeArea)">
             <summary>
             Freezes worksheet at specified cell position and specifies the freeze areas.
             </summary>
             <param name="row">Zero-based number of row to freeze worksheet.</param>
             <param name="col">Zero-based number of column to freeze worksheet.</param>
-            <param name="position">Specifies the frozen areas and activate areas.</param>
+            <param name="area">Specifies the frozen panes.</param>
         </member>
         <member name="M:unvell.ReoGrid.Worksheet.Unfreeze">
             <summary>
@@ -4137,54 +4273,6 @@
             <param name="pageTitle">A string will be printed out to the html as page title</param>
             <param name="exportHeader">true to export the html headers, false to export content only inside table tag.</param>
         </member>
-        <member name="M:unvell.ReoGrid.Worksheet.ExportAsCSV(System.String,System.Int32,System.Text.Encoding)">
-            <summary>
-            Export spreadsheet as CSV format from specified number of rows
-            </summary>
-            <param name="path">File path to write CSV format as stream</param>
-            <param name="startRow">Number of rows start to export data, this property is useful to skip the headers on top rows of spreadsheet</param>
-            <param name="encoding">Text encoding during output text in CSV format</param>
-        </member>
-        <member name="M:unvell.ReoGrid.Worksheet.ExportAsCSV(System.String,System.String,System.Text.Encoding)">
-            <summary>
-            Export spreadsheet as CSV format from specified range
-            </summary>
-            <param name="path">File path to write CSV format as stream</param>
-            <param name="addressOrName">Range to be output from this worksheet, specified by address or name</param>
-            <param name="encoding">Text encoding during output text in CSV format</param>
-        </member>
-        <member name="M:unvell.ReoGrid.Worksheet.ExportAsCSV(System.String,unvell.ReoGrid.RangePosition,System.Text.Encoding)">
-            <summary>
-            Export spreadsheet as CSV format from specified range
-            </summary>
-            <param name="path">File path to write CSV format as stream</param>
-            <param name="range">Range to be output from this worksheet</param>
-            <param name="encoding">Text encoding during output text in CSV format</param>
-        </member>
-        <member name="M:unvell.ReoGrid.Worksheet.ExportAsCSV(System.IO.Stream,System.Int32,System.Text.Encoding)">
-            <summary>
-            Export spreadsheet as CSV format from specified number of rows
-            </summary>
-            <param name="s">Stream to write CSV format as stream</param>
-            <param name="startRow">Number of rows start to export data, this property is useful to skip the headers on top rows of spreadsheet</param>
-            <param name="encoding">Text encoding during output text in CSV format</param>
-        </member>
-        <member name="M:unvell.ReoGrid.Worksheet.ExportAsCSV(System.IO.Stream,System.String,System.Text.Encoding)">
-            <summary>
-            Export spreadsheet as CSV format from specified range
-            </summary>
-            <param name="s">Stream to write CSV format as stream</param>
-            <param name="addressOrName">Range to be output from this worksheet, specified by address or name</param>
-            <param name="encoding">Text encoding during output text in CSV format</param>
-        </member>
-        <member name="M:unvell.ReoGrid.Worksheet.ExportAsCSV(System.IO.Stream,unvell.ReoGrid.RangePosition,System.Text.Encoding)">
-            <summary>
-            Export spreadsheet as CSV format from specified range
-            </summary>
-            <param name="s">Stream to write CSV format as stream</param>
-            <param name="range">Range to be output from this worksheet</param>
-            <param name="encoding">Text encoding during output text in CSV format</param>
-        </member>
         <member name="M:unvell.ReoGrid.Worksheet.ToString">
             <summary>
             Convert to friendly string.
@@ -4195,6 +4283,19 @@
             <summary>
             Dispose worksheet, release all attached resources.
             </summary>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.RaiseScriptEvent(System.String)">
+            <summary>
+            Call script's function. The function must be method of workbook object.
+            </summary>
+            <param name="eventName">Function name of workbook object in script.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.Worksheet.RaiseScriptEvent(System.String,unvell.ReoScript.ObjectValue)">
+            <summary>
+            Call script's function. The function must be method of workbook object.
+            </summary>
+            <param name="eventName">Function name of workbook object in script.</param>
+            <param name="eventArg">Function argument.</param>
         </member>
         <member name="P:unvell.ReoGrid.Worksheet.FloatingObjects">
             <summary>
@@ -4632,12 +4733,22 @@
             Event raised when name of worksheet is changed
             </summary>
         </member>
+        <member name="P:unvell.ReoGrid.Worksheet.FreezeArea">
+            <summary>
+            Get current frozen areas. Use method <code>FreezeToCells</code> to change this property.
+            </summary>
+        </member>
+        <member name="P:unvell.ReoGrid.Worksheet.FreezePos">
+            <summary>
+            Get current frozen position. Use method <code>FreezeToCells</code> to change this property.
+            </summary>
+        </member>
         <member name="E:unvell.ReoGrid.Worksheet.CellsFrozen">
             <summary>
             Event raised when worksheet is frozen.
             </summary>
         </member>
-        <member name="E:unvell.ReoGrid.Worksheet.CellsUnfreezed">
+        <member name="E:unvell.ReoGrid.Worksheet.CellsUnfrozen">
             <summary>
             Event raised when worksheet is unfreezed.
             </summary>
@@ -5890,6 +6001,11 @@
             Return whether or not current range is empty. (Both Rows and Columns is zero)
             </summary>
         </member>
+        <member name="P:unvell.ReoGrid.RangePosition.IsEntire">
+            <summary>
+            Check whether or not this range contains whole rows and columns.
+            </summary>
+        </member>
         <member name="P:unvell.ReoGrid.RangePosition.IsSingleCell">
             <summary>
             Identify whether this range only contains one single cell.
@@ -6743,6 +6859,29 @@
             <param name="sheet">Worksheet where the exception happened</param>
             <param name="ex">Exception to describe the details of error information</param>
         </member>
+        <member name="F:unvell.ReoGrid.Workbook.srm">
+            <summary>
+            ReoScript Runtime Machine 
+            </summary>
+        </member>
+        <member name="M:unvell.ReoGrid.Workbook.RunScript">
+            <summary>
+            Run script belongs to this control
+            </summary>
+            <returns>Last value returned from script execution</returns>
+        </member>
+        <member name="M:unvell.ReoGrid.Workbook.RunScript(System.String)">
+            <summary>
+            Run specified script.
+            </summary>
+            <param name="script">Script to be executed.</param>
+            <returns>Last value returned from script execution.</returns>
+        </member>
+        <member name="M:unvell.ReoGrid.Workbook.InitSRM">
+            <summary>
+            Initial or reset Script Running Machine
+            </summary>
+        </member>
         <member name="E:unvell.ReoGrid.Workbook.WorkbookLoaded">
             <summary>
             Event raised when workbook loaded from stream or file
@@ -6796,6 +6935,11 @@
         <member name="P:unvell.ReoGrid.Workbook.Script">
             <summary>
             Script content for this control
+            </summary>
+        </member>
+        <member name="P:unvell.ReoGrid.Workbook.Srm">
+            <summary>
+            ReoScript Runtime Machine
             </summary>
         </member>
         <member name="T:unvell.ReoGrid.WorksheetCollection">
@@ -7304,7 +7448,7 @@
         </member>
         <member name="T:unvell.ReoGrid.Graphics.Rectangle">
             <summary>
-            Represents rectangle position information.
+            Represents a rectangle that contains x, y, width and height information.
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.Graphics.Rectangle.X">
@@ -7754,6 +7898,11 @@
             Determine whether or not to show the paper margins during preview and print.
             </summary>
         </member>
+        <member name="P:unvell.ReoGrid.Print.PrintSettings.ShowGridLines">
+            <summary>
+            Determines whether or not print grid lines.
+            </summary>
+        </member>
         <member name="P:unvell.ReoGrid.Print.PrintSettings.PageScaling">
             <summary>
             Scale factor for printing each pages (0.1f - 4f).
@@ -7926,37 +8075,37 @@
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            Construct color value with specified ARGB value
+            Construct color value with specified ARGB value.
             </summary>
-            <param name="a">Alpha value</param>
-            <param name="r">Red value</param>
-            <param name="g">Green value</param>
-            <param name="b">Blue value</param>
+            <param name="a">Alpha value.</param>
+            <param name="r">Red value.</param>
+            <param name="g">Green value.</param>
+            <param name="b">Blue value.</param>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.#ctor(System.Byte,System.Byte,System.Byte,System.Byte)">
             <summary>
-            Construct color value with specified ARGB value
+            Construct color value with specified ARGB value.
             </summary>
-            <param name="a">Alpha value</param>
-            <param name="r">Red value</param>
-            <param name="g">Green value</param>
-            <param name="b">Blue value</param>
+            <param name="a">Alpha value.</param>
+            <param name="r">Red value.</param>
+            <param name="g">Green value.</param>
+            <param name="b">Blue value.</param>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.#ctor(System.Int32,System.Int32,System.Int32)">
             <summary>
-            Construct color value with specified ARGB value
+            Construct color value with specified ARGB value.
             </summary>
-            <param name="r">Red value</param>
-            <param name="g">Green value</param>
-            <param name="b">Blue value</param>
+            <param name="r">Red value.</param>
+            <param name="g">Green value.</param>
+            <param name="b">Blue value.</param>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.#ctor(System.Byte,System.Byte,System.Byte)">
             <summary>
-            Construct color value with specified ARGB value
+            Construct color value with specified ARGB value.
             </summary>
-            <param name="r">Red value</param>
-            <param name="g">Green value</param>
-            <param name="b">Blue value</param>
+            <param name="r">Red value.</param>
+            <param name="g">Green value.</param>
+            <param name="b">Blue value.</param>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.#ctor(System.Int32,unvell.ReoGrid.Graphics.SolidColor)">
             <summary>
@@ -7967,47 +8116,47 @@
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.ToArgb">
             <summary>
-            Convert color value to 4 bytes integer value
+            Convert color value to 4 bytes integer value.
             </summary>
-            <returns>Converted 4 bytes integer value</returns>
+            <returns>Converted 4 bytes integer value.</returns>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.FromArgb(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            Create color with specified ARGB values
+            Create color with specified ARGB values.
             </summary>
-            <param name="a">Alpha value</param>
-            <param name="r">Red value</param>
-            <param name="g">Green value</param>
-            <param name="b">Blue value</param>
-            <returns>Converted color value</returns>
+            <param name="a">Alpha value.</param>
+            <param name="r">Red value.</param>
+            <param name="g">Green value.</param>
+            <param name="b">Blue value.</param>
+            <returns>Converted color value.</returns>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.FromArgb(System.Byte,System.Byte,System.Byte,System.Byte)">
             <summary>
-            Create color with specified ARGB values
+            Create color with specified ARGB values.
             </summary>
-            <param name="a">Alpha value</param>
-            <param name="r">Red value</param>
-            <param name="g">Green value</param>
-            <param name="b">Blue value</param>
-            <returns>Converted color value</returns>
+            <param name="a">Alpha value.</param>
+            <param name="r">Red value.</param>
+            <param name="g">Green value.</param>
+            <param name="b">Blue value.</param>
+            <returns>Converted color value.</returns>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.FromArgb(System.Int32,System.Int32,System.Int32)">
             <summary>
-            Create color with specified RGB values
+            Create color with specified RGB values.
             </summary>
-            <param name="r">Red value</param>
-            <param name="g">Green value</param>
-            <param name="b">Blue value</param>
-            <returns>Converted color value</returns>
+            <param name="r">Red value.</param>
+            <param name="g">Green value.</param>
+            <param name="b">Blue value.</param>
+            <returns>Converted color value.</returns>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.FromArgb(System.Byte,System.Byte,System.Byte)">
             <summary>
-            Create color with specified RGB values
+            Create color with specified RGB values.
             </summary>
-            <param name="r">Red value</param>
-            <param name="g">Green value</param>
-            <param name="b">Blue value</param>
-            <returns>Converted color value</returns>
+            <param name="r">Red value.</param>
+            <param name="g">Green value.</param>
+            <param name="b">Blue value.</param>
+            <returns>Converted color value.</returns>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.FromArgb(System.Int32)">
             <summary>
@@ -8023,21 +8172,43 @@
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.ToString">
             <summary>
-            Convert to friendly description
+            Convert to friendly description.
             </summary>
-            <returns>Description of color</returns>
+            <returns>Description of color.</returns>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.ToSolidColor">
             <summary>
-            Convert to solid color (equal to self)
+            Convert to solid color. (equal to self)
             </summary>
-            <returns>Converted solid color</returns>
+            <returns>Converted solid color.</returns>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.Randomly">
             <summary>
-            Randomly generate a color
+            Randomly generate a color.
             </summary>
-            <returns>New random solid color</returns>
+            <returns>New random solid color.</returns>
+        </member>
+        <member name="M:unvell.ReoGrid.Graphics.SolidColor.Light(unvell.ReoGrid.Graphics.SolidColor)">
+            <summary>
+            Returns a lighter color of specified color.
+            </summary>
+            <param name="color">Original color to be changed.</param>
+            <returns>Lighter color.</returns>
+        </member>
+        <member name="M:unvell.ReoGrid.Graphics.SolidColor.Dark(unvell.ReoGrid.Graphics.SolidColor)">
+            <summary>
+            Returns a darker color of specified color.
+            </summary>
+            <param name="color">Original color to be changed.</param>
+            <returns>Darker color.</returns>
+        </member>
+        <member name="M:unvell.ReoGrid.Graphics.SolidColor.SetBrightness(System.Single,unvell.ReoGrid.Graphics.SolidColor)">
+            <summary>
+            Change color brightness.
+            </summary>
+            <param name="bright">Brightness value.</param>
+            <param name="color">Color to be changed.</param>
+            <returns>Color has been changed.</returns>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.SolidColor.op_Equality(unvell.ReoGrid.Graphics.SolidColor,unvell.ReoGrid.Graphics.SolidColor)">
             <summary>
@@ -8093,48 +8264,48 @@
         </member>
         <member name="P:unvell.ReoGrid.Graphics.SolidColor.A">
             <summary>
-            Get or set alpha value
+            Get or set alpha value.
             </summary>
         </member>
         <member name="P:unvell.ReoGrid.Graphics.SolidColor.R">
             <summary>
-            Get or set red value
+            Get or set red value.
             </summary>
         </member>
         <member name="P:unvell.ReoGrid.Graphics.SolidColor.G">
             <summary>
-            Get or set green value
+            Get or set green value.
             </summary>
         </member>
         <member name="P:unvell.ReoGrid.Graphics.SolidColor.B">
             <summary>
-            Get or set blue value
+            Get or set blue value.
             </summary>
         </member>
         <member name="P:unvell.ReoGrid.Graphics.SolidColor.IsTransparent">
             <summary>
-            Check whether or not this color is transparent
+            Check whether or not this color is transparent.
             </summary>
         </member>
         <member name="T:unvell.ReoGrid.Graphics.LinearColor">
             <summary>
-            Store the ARGB values of linear color
+            Store the ARGB values of linear color.
             </summary>
         </member>
         <member name="M:unvell.ReoGrid.Graphics.LinearColor.ToSolidColor">
             <summary>
-            Convert linear color to a solid color
+            Convert linear color to a solid color.
             </summary>
-            <returns>Solid color converted from this linear color</returns>
+            <returns>Solid color converted from this linear color.</returns>
         </member>
         <member name="P:unvell.ReoGrid.Graphics.LinearColor.StartColor">
             <summary>
-            Get or set the start color of linear fill region
+            Get or set the start color of linear fill region.
             </summary>
         </member>
         <member name="P:unvell.ReoGrid.Graphics.LinearColor.EndColor">
             <summary>
-            Get or set the end color of linear fill region
+            Get or set the end color of linear fill region.
             </summary>
         </member>
         <member name="P:unvell.ReoGrid.Graphics.LinearColor.Angle">
@@ -8144,7 +8315,7 @@
         </member>
         <member name="P:unvell.ReoGrid.Graphics.LinearColor.IsTransparent">
             <summary>
-            Check whether or not this color is transparent
+            Check whether or not this color is transparent.
             </summary>
         </member>
         <member name="T:unvell.ReoGrid.Drawing.Text.FontStyles">
@@ -9844,7 +10015,7 @@
         </member>
         <member name="T:unvell.ReoGrid.CellTypes.ICellBody">
             <summary>
-            Cell body interface
+            Represents cell body interface.
             </summary>
         </member>
         <member name="M:unvell.ReoGrid.CellTypes.ICellBody.OnSetup(unvell.ReoGrid.ReoGridCell)">
@@ -9964,7 +10135,7 @@
         </member>
         <member name="P:unvell.ReoGrid.CellTypes.ICellBody.Bounds">
             <summary>
-            Get or set the cell body bounds. (relative position to cell)
+            Get or set the cell body bounds. (Relative position to cell)
             </summary>
         </member>
         <member name="P:unvell.ReoGrid.CellTypes.ICellBody.DisableWhenCellReadonly">
@@ -9990,7 +10161,7 @@
         </member>
         <member name="M:unvell.ReoGrid.CellTypes.CellBody.AutoCaptureMouse">
             <summary>
-            Determine whether or not to allow capture the mouse when mouse down inside this body.
+            Determines whether or not to allow capture the mouse when mouse down inside this body.
             </summary>
             <returns>True to allow caption; False to abort capture.</returns>
         </member>
@@ -10054,7 +10225,7 @@
             <summary>
             Paint the content of body.
             </summary>
-            <param name="dc">ReoGrid common drawing context.</param>
+            <param name="dc">Platform independency graphics context.</param>
         </member>
         <member name="M:unvell.ReoGrid.CellTypes.CellBody.OnStartEdit">
             <summary>
@@ -10100,12 +10271,44 @@
         </member>
         <member name="P:unvell.ReoGrid.CellTypes.CellBody.Bounds">
             <summary>
-            Boundaries in pixel of body in cell.
+            Get cell body bounds rectangle.
             </summary>
         </member>
         <member name="P:unvell.ReoGrid.CellTypes.CellBody.DisableWhenCellReadonly">
             <summary>
             Determines whether or not become disable when owner cell is set as read-only. (Default is True)
+            </summary>
+        </member>
+        <member name="T:unvell.ReoGrid.CellTypes.ContentCellBody">
+            <summary>
+            Represents a cell body that contains a child visual content object such as Check-box or Radio-button.
+            </summary>
+        </member>
+        <member name="M:unvell.ReoGrid.CellTypes.ContentCellBody.GetContentSize">
+            <summary>
+            Determines the preferred body size.
+            </summary>
+        </member>
+        <member name="M:unvell.ReoGrid.CellTypes.ContentCellBody.OnBoundsChanged">
+            <summary>
+            Handles when bounds changed.
+            </summary>
+        </member>
+        <member name="M:unvell.ReoGrid.CellTypes.ContentCellBody.OnPaint(unvell.ReoGrid.Rendering.CellDrawingContext)">
+            <summary>
+            Paint cell body.
+            </summary>
+            <param name="dc">Platform independency graphics context.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.CellTypes.ContentCellBody.OnContentPaint(unvell.ReoGrid.Rendering.CellDrawingContext)">
+            <summary>
+            Paint content of cell body.
+            </summary>
+            <param name="dc">Platform independency graphics context.</param>
+        </member>
+        <member name="P:unvell.ReoGrid.CellTypes.ContentCellBody.ContentBounds">
+            <summary>
+            Get or set cell body content bounds rectangle.
             </summary>
         </member>
         <member name="T:unvell.ReoGrid.CellTypes.IHeaderBody">
@@ -10206,6 +10409,13 @@
             </summary>
             <param name="dc">ReoGrid common drawing context</param>
         </member>
+        <member name="M:unvell.ReoGrid.CellTypes.ButtonCell.DrawButton(unvell.ReoGrid.Rendering.CellDrawingContext)">
+            <summary>
+            Draw button surface.
+            </summary>
+            <param name="dc">Platform independence drawing context.</param>
+            <param name="state">Button state.</param>
+        </member>
         <member name="M:unvell.ReoGrid.CellTypes.ButtonCell.OnMouseDown(unvell.ReoGrid.Events.CellMouseEventArgs)">
             <summary>
             Invoked when mouse down inside this body
@@ -10219,12 +10429,6 @@
             </summary>
             <param name="e">mouse event argument</param>
             <returns>true to notify spreadsheet that event has been handled</returns>
-        </member>
-        <member name="M:unvell.ReoGrid.CellTypes.ButtonCell.OnStartEdit">
-            <summary>
-            Return false to disable edit operation for this cell.
-            </summary>
-            <returns>False to abort edit operation on this cell.</returns>
         </member>
         <member name="M:unvell.ReoGrid.CellTypes.ButtonCell.OnKeyDown(unvell.ReoGrid.Interaction.KeyCode)">
             <summary>
@@ -10240,9 +10444,20 @@
             <param name="keyCode">Virtual keys code that is converted from system platform.</param>
             <returns>True to notify spreadsheet that event has been handled.</returns>
         </member>
+        <member name="M:unvell.ReoGrid.CellTypes.ButtonCell.OnStartEdit">
+            <summary>
+            Return false to disable edit operation for this cell.
+            </summary>
+            <returns>False to disable edit operation for this cell.</returns>
+        </member>
+        <member name="M:unvell.ReoGrid.CellTypes.ButtonCell.PerformClick">
+            <summary>
+            Perform click operation.
+            </summary>
+        </member>
         <member name="P:unvell.ReoGrid.CellTypes.ButtonCell.IsPressed">
             <summary>
-            Check whether current is pressed 
+            Check whether or not button is pressed.
             </summary>
         </member>
         <member name="E:unvell.ReoGrid.CellTypes.ButtonCell.Click">
@@ -10428,11 +10643,6 @@
             </summary>
             <param name="cell">The cell this body will set into.</param>
         </member>
-        <member name="M:unvell.ReoGrid.CellTypes.CheckBoxCell.OnBoundsChanged">
-            <summary>
-            Handle event when bounds of cell body has been changed.
-            </summary>
-        </member>
         <member name="M:unvell.ReoGrid.CellTypes.CheckBoxCell.OnMouseDown(unvell.ReoGrid.Events.CellMouseEventArgs)">
             <summary>
             Handle the mouse down event.
@@ -10447,11 +10657,21 @@
             <param name="e">Arguments of mouse up event.</param>
             <returns>True if event has been handled; Otherwise return false.</returns>
         </member>
-        <member name="M:unvell.ReoGrid.CellTypes.CheckBoxCell.OnPaint(unvell.ReoGrid.Rendering.CellDrawingContext)">
+        <member name="M:unvell.ReoGrid.CellTypes.CheckBoxCell.RaiseClickEvent">
             <summary>
-            Render this check box body.
+            Raise the click event.
             </summary>
-            <param name="dc">Platform no-associated drawing context instance.</param>
+        </member>
+        <member name="M:unvell.ReoGrid.CellTypes.CheckBoxCell.RaiseCheckChangedEvent">
+            <summary>
+            Raise the click event.
+            </summary>
+        </member>
+        <member name="M:unvell.ReoGrid.CellTypes.CheckBoxCell.OnContentPaint(unvell.ReoGrid.Rendering.CellDrawingContext)">
+            <summary>
+            Paint content of cell body.
+            </summary>
+            <param name="dc">Platform independency graphics context.</param>
         </member>
         <member name="M:unvell.ReoGrid.CellTypes.CheckBoxCell.OnSetData(System.Object)">
             <summary>
@@ -10462,8 +10682,20 @@
         </member>
         <member name="M:unvell.ReoGrid.CellTypes.CheckBoxCell.ToggleCheckStatus">
             <summary>
-            Toggle the check box.
+            Toggle the check status of check box.
             </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.CellTypes.CheckBoxCell.isChecked">
+            <summary>
+            Check status.
+            </summary>
+        </member>
+        <member name="M:unvell.ReoGrid.CellTypes.CheckBoxCell.OnKeyDown(unvell.ReoGrid.Interaction.KeyCode)">
+            <summary>
+            Handle keyboard down event.
+            </summary>
+            <param name="keyCode">Virtual keys that are pressed.</param>
+            <returns>True if event has been marked as handled.</returns>
         </member>
         <member name="M:unvell.ReoGrid.CellTypes.CheckBoxCell.OnKeyUp(unvell.ReoGrid.Interaction.KeyCode)">
             <summary>
@@ -10472,150 +10704,137 @@
             <param name="keyCode">Virtual keys code that is converted from system platform.</param>
             <returns>True if event has been handled; Otherwise return false.</returns>
         </member>
-        <member name="P:unvell.ReoGrid.CellTypes.CheckBoxCell.RadioButtonSize">
+        <member name="P:unvell.ReoGrid.CellTypes.CheckBoxCell.IsPressed">
             <summary>
-            Get or set the radio button size.
-            </summary>
-        </member>
-        <member name="P:unvell.ReoGrid.CellTypes.CheckBoxCell.ButtonState">
-            <summary>
-            Get or set the check status.
+            Determines whether or not mouse or key pressed inside check box.
             </summary>
         </member>
         <member name="E:unvell.ReoGrid.CellTypes.CheckBoxCell.Click">
             <summary>
-            Event raied when user clicked inside check box bounds.
+            Event raied when user clicked inside check box.
+            </summary>
+        </member>
+        <member name="E:unvell.ReoGrid.CellTypes.CheckBoxCell.CheckChanged">
+            <summary>
+            Event raised when check status changed.
             </summary>
         </member>
         <member name="P:unvell.ReoGrid.CellTypes.CheckBoxCell.Checked">
+            <summary>
+            Determines whether or not check-box is pressed or checked.
+            </summary>
+        </member>
+        <member name="P:unvell.ReoGrid.CellTypes.CheckBoxCell.IsChecked">
             <summary>
             Get or set the check-status of check box.
             </summary>
         </member>
         <member name="T:unvell.ReoGrid.CellTypes.RadioButtonGroup">
             <summary>
-            Radio button group for toggling radios inside one group
+            Radio button group for toggling radios inside one group.
             </summary>
         </member>
         <member name="M:unvell.ReoGrid.CellTypes.RadioButtonGroup.AddRadioButton(unvell.ReoGrid.CellTypes.RadioButtonCell)">
             <summary>
-            Add radio button into this group
+            Add radio button into this group.
             </summary>
             <param name="cell"></param>
         </member>
-        <member name="M:unvell.ReoGrid.CellTypes.RadioButtonGroup.ClearAllButMe(unvell.ReoGrid.CellTypes.RadioButtonCell)">
-            <summary>
-            uncheck all radios but specified one
-            </summary>
-            <param name="cell">uncheck other radio cells except this one</param>
-        </member>
         <member name="M:unvell.ReoGrid.CellTypes.RadioButtonGroup.Contains(unvell.ReoGrid.CellTypes.RadioButtonCell)">
             <summary>
-            Check whether specified radio is contained by this group
+            Check whether specified radio is contained by this group.
             </summary>
-            <param name="cell">radio cell body to be checked</param>
-            <returns>true if the radio cell body is contained by this group</returns>
+            <param name="cell">radio cell body to be checked.</param>
+            <returns>true if the radio cell body is contained by this group.</returns>
         </member>
         <member name="T:unvell.ReoGrid.CellTypes.RadioButtonCell">
             <summary>
-            Representation for a radio button of cell body
+            Representation for a radio button of cell body.
             </summary>
         </member>
         <member name="M:unvell.ReoGrid.CellTypes.RadioButtonCell.#ctor">
             <summary>
-            Create instance of radio button cell
+            Create instance of radio button cell.
             </summary>
         </member>
-        <member name="M:unvell.ReoGrid.CellTypes.RadioButtonCell.OnBoundsChanged">
+        <member name="M:unvell.ReoGrid.CellTypes.RadioButtonCell.ToggleCheckStatus">
             <summary>
-            Recalc the check button bounds when cell body bounds changed
+            Toggle check status of radio-button. (Only work when radio button not be added into any groups)
             </summary>
         </member>
-        <member name="M:unvell.ReoGrid.CellTypes.RadioButtonCell.OnMouseDown(unvell.ReoGrid.Events.CellMouseEventArgs)">
+        <member name="M:unvell.ReoGrid.CellTypes.RadioButtonCell.OnContentPaint(unvell.ReoGrid.Rendering.CellDrawingContext)">
             <summary>
-            Handle the mouse down event.
+            Paint content of cell body.
             </summary>
-            <param name="e">Arguments of mouse down event.</param>
-            <returns>True if event has been handled; Otherwise return false.</returns>
-        </member>
-        <member name="M:unvell.ReoGrid.CellTypes.RadioButtonCell.OnMouseUp(unvell.ReoGrid.Events.CellMouseEventArgs)">
-            <summary>
-            Handle the mouse up event.
-            </summary>
-            <param name="e">Arguments of mouse up event.</param>
-            <returns>True if event has been handled; Otherwise return false.</returns>
-        </member>
-        <member name="M:unvell.ReoGrid.CellTypes.RadioButtonCell.Toggle">
-            <summary>
-            Toggle radio button
-            </summary>
-        </member>
-        <member name="M:unvell.ReoGrid.CellTypes.RadioButtonCell.OnPaint(unvell.ReoGrid.Rendering.CellDrawingContext)">
-            <summary>
-            Overrides to repaint radio button.
-            </summary>
-            <param name="dc">Platform no-associated drawing context instance.</param>
-        </member>
-        <member name="M:unvell.ReoGrid.CellTypes.RadioButtonCell.OnStartEdit">
-            <summary>
-            Overrides to handle event of starting edit
-            </summary>
-            <returns>True to allow edit; False to abort edit operation</returns>
-        </member>
-        <member name="M:unvell.ReoGrid.CellTypes.RadioButtonCell.OnSetData(System.Object)">
-            <summary>
-            Overrides to handle cell data setting
-            </summary>
-            <param name="data">The data to be set into owner cell</param>
-            <returns>New data to be set</returns>
-        </member>
-        <member name="M:unvell.ReoGrid.CellTypes.RadioButtonCell.OnKeyDown(unvell.ReoGrid.Interaction.KeyCode)">
-            <summary>
-            Overrides to handle key-down event
-            </summary>
-            <param name="keyCode">Virtual keys code that is converted from system platform.</param>
-            <returns>Return true if this event was handled; Otherwise return false</returns>
-        </member>
-        <member name="M:unvell.ReoGrid.CellTypes.RadioButtonCell.OnKeyUp(unvell.ReoGrid.Interaction.KeyCode)">
-            <summary>
-            Overrides to handle key-up event
-            </summary>
-            <param name="e">Platform key code</param>
-            <returns>Return true if this event was handled; Otherwise return false</returns>
+            <param name="dc">Platform independency graphics context.</param>
         </member>
         <member name="P:unvell.ReoGrid.CellTypes.RadioButtonCell.RadioGroup">
             <summary>
-            Radio groups for toggling other radios inside same group
+            Radio groups for toggling other radios inside same group.
             </summary>
         </member>
-        <member name="P:unvell.ReoGrid.CellTypes.RadioButtonCell.CheckButtonBounds">
-            <summary>
-            Get the check button size (in pixel)
-            </summary>
-        </member>
-        <member name="P:unvell.ReoGrid.CellTypes.RadioButtonCell.RadioButtonSize">
-            <summary>
-            Get or set size of radio button (in pixel)
-            </summary>
-        </member>
-        <member name="P:unvell.ReoGrid.CellTypes.RadioButtonCell.ButtonState">
-            <summary>
-            Get or set button status for radio button
-            </summary>
-        </member>
-        <member name="P:unvell.ReoGrid.CellTypes.RadioButtonCell.Checked">
+        <member name="P:unvell.ReoGrid.CellTypes.RadioButtonCell.IsChecked">
             <summary>
             Get or set check status for radio button
             </summary>
         </member>
-        <member name="E:unvell.ReoGrid.CellTypes.RadioButtonCell.Click">
+        <member name="T:unvell.ReoGrid.CellTypes.ImageCell">
             <summary>
-            Event raised when radio button clicking
+            Representation for an image of cell body
             </summary>
         </member>
-        <member name="E:unvell.ReoGrid.CellTypes.RadioButtonCell.CheckChanged">
+        <member name="M:unvell.ReoGrid.CellTypes.ImageCell.#ctor">
             <summary>
-            Event raised when radio was checked
+            Create image cell object.
+            </summary>
+        </member>
+        <member name="M:unvell.ReoGrid.CellTypes.ImageCell.#ctor(System.Drawing.Image)">
+            <summary>
+            Construct image cell-body to show a specified image
+            </summary>
+            <param name="image">Image to be displayed</param>
+        </member>
+        <member name="M:unvell.ReoGrid.CellTypes.ImageCell.#ctor(System.Drawing.Image,unvell.ReoGrid.CellTypes.ImageCellViewMode)">
+            <summary>
+            Construct image cell-body to show a image by specified display-method
+            </summary>
+            <param name="image">Image to be displayed</param>
+            <param name="viewMode">View mode decides how to display a image inside a cell</param>
+        </member>
+        <member name="M:unvell.ReoGrid.CellTypes.ImageCell.OnPaint(unvell.ReoGrid.Rendering.CellDrawingContext)">
+            <summary>
+            Render the image cell body.
+            </summary>
+            <param name="dc">Platform no-associated drawing context instance.</param>
+        </member>
+        <member name="P:unvell.ReoGrid.CellTypes.ImageCell.Image">
+            <summary>
+            Get or set the image to be displayed in cell
+            </summary>
+        </member>
+        <member name="P:unvell.ReoGrid.CellTypes.ImageCell.ViewMode">
+            <summary>
+            Set or get the view mode of this image cell
+            </summary>
+        </member>
+        <member name="T:unvell.ReoGrid.CellTypes.ImageCellViewMode">
+            <summary>
+            Image dispaly method in ImageCell-body
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.CellTypes.ImageCellViewMode.Stretch">
+            <summary>
+            Fill to cell boundary (default)
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.CellTypes.ImageCellViewMode.Zoom">
+            <summary>
+            Lock aspect ratio to fit cell boundary
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.CellTypes.ImageCellViewMode.Clip">
+            <summary>
+            Keep image size and clip to fill the cell
             </summary>
         </member>
         <member name="T:unvell.ReoGrid.CellTypes.DropdownListCell">
@@ -10900,65 +11119,6 @@
         <member name="M:unvell.ReoGrid.CellTypes.ColumnDropdownListCell.PullUp">
             <summary>
             Push up the dropdown panel.
-            </summary>
-        </member>
-        <member name="T:unvell.ReoGrid.CellTypes.ImageCell">
-            <summary>
-            Representation for an image of cell body
-            </summary>
-        </member>
-        <member name="M:unvell.ReoGrid.CellTypes.ImageCell.#ctor">
-            <summary>
-            Create image cell object.
-            </summary>
-        </member>
-        <member name="M:unvell.ReoGrid.CellTypes.ImageCell.#ctor(System.Drawing.Image)">
-            <summary>
-            Construct image cell-body to show a specified image
-            </summary>
-            <param name="image">Image to be displayed</param>
-        </member>
-        <member name="M:unvell.ReoGrid.CellTypes.ImageCell.#ctor(System.Drawing.Image,unvell.ReoGrid.CellTypes.ImageCellViewMode)">
-            <summary>
-            Construct image cell-body to show a image by specified display-method
-            </summary>
-            <param name="image">Image to be displayed</param>
-            <param name="viewMode">View mode decides how to display a image inside a cell</param>
-        </member>
-        <member name="M:unvell.ReoGrid.CellTypes.ImageCell.OnPaint(unvell.ReoGrid.Rendering.CellDrawingContext)">
-            <summary>
-            Render the image cell body.
-            </summary>
-            <param name="dc">Platform no-associated drawing context instance.</param>
-        </member>
-        <member name="P:unvell.ReoGrid.CellTypes.ImageCell.Image">
-            <summary>
-            Get or set the image to be displayed in cell
-            </summary>
-        </member>
-        <member name="P:unvell.ReoGrid.CellTypes.ImageCell.ViewMode">
-            <summary>
-            Set or get the view mode of this image cell
-            </summary>
-        </member>
-        <member name="T:unvell.ReoGrid.CellTypes.ImageCellViewMode">
-            <summary>
-            Image dispaly method in ImageCell-body
-            </summary>
-        </member>
-        <member name="F:unvell.ReoGrid.CellTypes.ImageCellViewMode.Stretch">
-            <summary>
-            Fill to cell boundary (default)
-            </summary>
-        </member>
-        <member name="F:unvell.ReoGrid.CellTypes.ImageCellViewMode.Zoom">
-            <summary>
-            Lock aspect ratio to fit cell boundary
-            </summary>
-        </member>
-        <member name="F:unvell.ReoGrid.CellTypes.ImageCellViewMode.Clip">
-            <summary>
-            Keep image size and clip to fill the cell
             </summary>
         </member>
         <member name="T:unvell.ReoGrid.Chart.ChartDrawingEventArgs">
@@ -11986,6 +12146,19 @@
             </summary>
             <param name="settings">Settings to be disabled.</param>
         </member>
+        <member name="M:unvell.ReoGrid.ReoGridControl.RunScript">
+            <summary>
+            Run workbook script.
+            </summary>
+            <returns>Return value from script.</returns>
+        </member>
+        <member name="M:unvell.ReoGrid.ReoGridControl.RunScript(System.String)">
+            <summary>
+            Run specified script by workbook.
+            </summary>
+            <param name="script">Script to be executed.</param>
+            <returns>Return value from specified script.</returns>
+        </member>
         <member name="M:unvell.ReoGrid.ReoGridControl.NotifyExceptionHappen(unvell.ReoGrid.Worksheet,System.Exception)">
             <summary>
             Notify that there are exceptions happen on any worksheet. 
@@ -12111,12 +12284,6 @@
             Overrides system message process method
             </summary>
             <param name="m">Windows message</param>
-        </member>
-        <member name="M:unvell.ReoGrid.ReoGridControl.OnGotFocus(System.EventArgs)">
-            <summary>
-            Overrides got-focus process method
-            </summary>
-            <param name="e">Argument of got-focus event</param>
         </member>
         <member name="M:unvell.ReoGrid.ReoGridControl.OnResize(System.EventArgs)">
             <summary>
@@ -12956,16 +13123,6 @@
             Determines that whether or not show the separators in numbers.
             </summary>
         </member>
-        <member name="P:unvell.ReoGrid.DataFormat.NumberDataFormatter.INumberFormatArgs.CustomNegativePrefix">
-            <summary>
-            Prefix symbol before negative numbers. (Requires that <code>NegativeStyle</code> set to <code>Custom</code>)
-            </summary>
-        </member>
-        <member name="P:unvell.ReoGrid.DataFormat.NumberDataFormatter.INumberFormatArgs.CustomNegativePostfix">
-            <summary>
-            Postfix symbol after negative numbers. (Requires that <code>NegativeStyle</code> set to <code>Custom</code>)
-            </summary>
-        </member>
         <member name="T:unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberFormatArgs">
             <summary>
             Represents number format arguments.
@@ -12997,16 +13154,6 @@
         <member name="P:unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberFormatArgs.UseSeparator">
             <summary>
             Determine whether to use a separator to split number every 3 digits.
-            </summary>
-        </member>
-        <member name="P:unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberFormatArgs.CustomNegativePrefix">
-            <summary>
-            Prefix symbol before negative numbers. (Requires that <code>NegativeStyle</code> set to <code>Custom</code>)
-            </summary>
-        </member>
-        <member name="P:unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberFormatArgs.CustomNegativePostfix">
-            <summary>
-            Postfix symbol after negative numbers. (Requires that <code>NegativeStyle</code> set to <code>Custom</code>)
             </summary>
         </member>
         <member name="T:unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberNegativeStyle">
@@ -14836,22 +14983,22 @@
         </member>
         <member name="F:unvell.ReoGrid.OperationStatus.RangeSelect">
             <summary>
-            Selecting focus range by dragging mouse
+            Selecting focus range by dragging mouse.
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.OperationStatus.AdjustRowHeight">
             <summary>
-            Adjust row height or column width
+            Adjust row height or column width.
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.OperationStatus.SelectionRangeMove">
             <summary>
-            Move a selection range by dragging mouse on border of selection
+            Move a selection range by dragging mouse on border of selection.
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.OperationStatus.RangePicker">
             <summary>
-            Picking a range during formula inputting
+            Picking a range during formula inputting.
             </summary>
         </member>
         <member name="T:unvell.ReoGrid.FreezePosition">
@@ -14861,52 +15008,102 @@
         </member>
         <member name="F:unvell.ReoGrid.FreezePosition.None">
             <summary>
-            Do not freeze to any positions
+            Do not freeze to any positions.
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.FreezePosition.Left">
             <summary>
-            Freeze to left 
+            Freeze to left .
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.FreezePosition.Top">
             <summary>
-            Freeze to top
+            Freeze to top.
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.FreezePosition.Right">
             <summary>
-            Freeze to right
+            Freeze to right.
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.FreezePosition.Bottom">
             <summary>
-            Freeze to bottom
+            Freeze to bottom.
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.FreezePosition.LeftTop">
             <summary>
-            Freeze to left and top
+            Freeze to left and top.
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.FreezePosition.LeftBottom">
             <summary>
-            Freeze to left and bottom
+            Freeze to left and bottom.
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.FreezePosition.RightTop">
             <summary>
-            Freeze to right and top
+            Freeze to right and top.
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.FreezePosition.RightBottom">
             <summary>
-            Freeze to right and bottom
+            Freeze to right and bottom.
+            </summary>
+        </member>
+        <member name="T:unvell.ReoGrid.FreezeArea">
+            <summary>
+            Represents the frozen areas.
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.FreezeArea.None">
+            <summary>
+            Do not freeze to any positions
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.FreezeArea.Left">
+            <summary>
+            Freeze to left .
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.FreezeArea.Top">
+            <summary>
+            Freeze to top.
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.FreezeArea.Right">
+            <summary>
+            Freeze to right.
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.FreezeArea.Bottom">
+            <summary>
+            Freeze to bottom.
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.FreezeArea.LeftTop">
+            <summary>
+            Freeze to left and top.
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.FreezeArea.LeftBottom">
+            <summary>
+            Freeze to left and bottom.
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.FreezeArea.RightTop">
+            <summary>
+            Freeze to right and top.
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.FreezeArea.RightBottom">
+            <summary>
+            Freeze to right and bottom.
             </summary>
         </member>
         <member name="T:unvell.ReoGrid.ReoGridViewMode">
             <summary>
-            View mode of current worksheet
+            View mode of current worksheet.
             </summary>
         </member>
         <member name="F:unvell.ReoGrid.ReoGridViewMode.Normal">
@@ -15754,6 +15951,11 @@
             Determines the default worksheet name if CSV file loaded into a new workbook. (Default is "Sheet1")
             </summary>
         </member>
+        <member name="P:unvell.ReoGrid.IO.CSVFormatArgument.TargetRange">
+            <summary>
+            Determines where to start import CSV data on worksheet.
+            </summary>
+        </member>
         <member name="F:unvell.ReoGrid.IO.OpenXML.Schema.SharedStringItem.text">
             <summary>
             tag: t
@@ -15775,18 +15977,18 @@
             (This enum is a copy from System.Drawing.Drawing2D.HatchStyle)
             </summary>
         </member>
-        <member name="M:unvell.ReoGrid.Utility.ColorUtility.RgbToHLS(unvell.ReoGrid.Graphics.SolidColor)">
+        <member name="M:unvell.ReoGrid.Utility.ColorUtility.RGBToHSL(unvell.ReoGrid.Graphics.SolidColor)">
             <summary>
             Source: http://ciintelligence.blogspot.jp/2012/02/converting-excel-theme-color-and-tint.html
             </summary>
             <param name="rgbColor"></param>
             <returns></returns>
         </member>
-        <member name="M:unvell.ReoGrid.Utility.ColorUtility.HLSToRgb(unvell.ReoGrid.Utility.HLSColor)">
+        <member name="M:unvell.ReoGrid.Utility.ColorUtility.HSLToRgb(unvell.ReoGrid.Utility.HSLColor)">
             <summary>
             Source: http://ciintelligence.blogspot.jp/2012/02/converting-excel-theme-color-and-tint.html
             </summary>
-            <param name="hlsColor"></param>
+            <param name="hslColor"></param>
             <returns></returns>
         </member>
         <member name="M:unvell.ReoGrid.Utility.ColorUtility.SetColor(System.Single,System.Single,System.Single)">
@@ -16033,7 +16235,7 @@
             Interface for freezable ViewportController
             </summary>
         </member>
-        <member name="M:unvell.ReoGrid.Views.IFreezableViewportController.Freeze(System.Int32,System.Int32,unvell.ReoGrid.FreezePosition)">
+        <member name="M:unvell.ReoGrid.Views.IFreezableViewportController.Freeze(System.Int32,System.Int32,unvell.ReoGrid.FreezeArea)">
             <summary>
             Freeze to specified cell and position.
             </summary>
@@ -16041,16 +16243,6 @@
             <param name="col">Number of column to start freeze.</param>
             <param name="resetViewStart">Determines whether or not to reset the view start position.</param>
             <param name="position">Freeze position that decides the frozen view position.</param>
-        </member>
-        <member name="P:unvell.ReoGrid.Views.IFreezableViewportController.FreezePosition">
-            <summary>
-            Get or set position of freezing viewport.
-            </summary>
-        </member>
-        <member name="P:unvell.ReoGrid.Views.IFreezableViewportController.FreezePos">
-            <summary>
-            Get current frozen position.
-            </summary>
         </member>
         <member name="M:unvell.ReoGrid.Views.NormalViewportController.GetVisibleRegion(unvell.ReoGrid.Worksheet,unvell.ReoGrid.Views.Viewport)">
             <summary>
@@ -32221,7 +32413,7 @@
         </member>
         <member name="P:unvell.ReoGrid.Rendering.DrawingContext.Graphics">
             <summary>
-            Get platform non-associated graphics context.
+            Platform independent drawing context.
             </summary>
         </member>
         <member name="P:unvell.ReoGrid.Rendering.DrawingContext.DrawMode">
@@ -32363,6 +32555,27 @@
             <param name="range">Range to be converted</param>
             <returns>Single cell address if convert is successful; otherwise return the range address</returns>
         </member>
+        <member name="T:unvell.ReoGrid.Script.RSUtility">
+            <summary>
+            Utility for ReoGrid script extension
+            </summary>
+        </member>
+        <member name="M:unvell.ReoGrid.Script.RSUtility.GetRangeFromValue(unvell.ReoGrid.Worksheet,System.Object)">
+            <summary>
+            Get range information from script value
+            </summary>
+            <param name="sheet">worksheet instance</param>
+            <param name="arg">script object to be converted</param>
+            <returns></returns>
+        </member>
+        <member name="M:unvell.ReoGrid.Script.RSUtility.GetRangeFromArgs(unvell.ReoGrid.Worksheet,System.Object[])">
+            <summary>
+            Get range information from script value
+            </summary>
+            <param name="sheet">worksheet instance</param>
+            <param name="args">script value to be converted</param>
+            <returns></returns>
+        </member>
         <member name="T:unvell.ReoGrid.ReoGridSettings">
             <summary>
             Obsoleted control settings, changed to WorkbookSettings and WorksheetSettings
@@ -32411,6 +32624,21 @@
         <member name="F:unvell.ReoGrid.WorkbookSettings.View_ShowVerScroll">
             <summary>
             Determine whether or not to show vertical scroll bar
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.WorkbookSettings.Script_Default">
+            <summary>
+            Default settings of script
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.WorkbookSettings.Script_AutoRunOnload">
+            <summary>
+            Whether to run script if grid loaded from file which contains script
+            </summary>
+        </member>
+        <member name="F:unvell.ReoGrid.WorkbookSettings.Script_PromptBeforeAutoRun">
+            <summary>
+            Confirm to user that whether allowed to run script if the script is loaded from a file
             </summary>
         </member>
         <member name="M:unvell.ReoGrid.Views.GridRegion.ToRange">
