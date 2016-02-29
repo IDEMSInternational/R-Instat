@@ -82,12 +82,10 @@ Partial Class dlgRecode
         'rdoLeft
         '
         Me.rdoLeft.AutoSize = True
-        Me.rdoLeft.Checked = True
         Me.rdoLeft.Location = New System.Drawing.Point(7, 20)
         Me.rdoLeft.Name = "rdoLeft"
         Me.rdoLeft.Size = New System.Drawing.Size(43, 17)
         Me.rdoLeft.TabIndex = 1
-        Me.rdoLeft.TabStop = True
         Me.rdoLeft.Tag = "Left"
         Me.rdoLeft.Text = "Left"
         Me.rdoLeft.UseVisualStyleBackColor = True

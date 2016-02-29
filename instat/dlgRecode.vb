@@ -22,6 +22,7 @@ Public Class dlgRecode
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 37
         ucrBase.clsRsyntax.SetFunction("cut")
+        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
         ucrSelectorNewColumnName.SetDataFrameSelector(ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames)
         ucrSelectorNewColumnName.SetPrefix("Recode")
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSelectorNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSelectorNewColumnName.cboColumnName.Text)
@@ -37,12 +38,13 @@ Public Class dlgRecode
     End Sub
 
     Private Sub SetDefaults()
-        ucrReceiverRecode.Selector = ucrSelectorDataFrameAddRemove
-        ucrReceiverRecode.SetMeAsReceiver()
+
         ucrMultipleNumericRecode.bIsNumericInput = True
         chkAddLabels.Checked = False
         ucrMultipleLabels.Visible = False
-        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
+        rdoRight.Checked = True
+
+        ucrReceiverRecode.ResetText()
     End Sub
 
     Private Sub ReopenDialog()
@@ -50,14 +52,14 @@ Public Class dlgRecode
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverRecode.IsEmpty() = False And ucrMultipleNumericRecode.bIsNumericInput = True Then
+        If ucrReceiverRecode.IsEmpty() = False And ucrMultipleNumericRecode.txtNumericItems.Text <> " " Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrReceiverRecode_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRecode.SelectionChanged
+    Private Sub ucrReceiverRecode_SelectionChanged() Handles ucrReceiverRecode.SelectionChanged
         If Not ucrReceiverRecode.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("x", ucrReceiverRecode.GetVariableNames(False))
         Else
