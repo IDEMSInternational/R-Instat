@@ -23,9 +23,9 @@ Public Class dlgRecode
         ucrBase.iHelpTopicID = 37
         ucrBase.clsRsyntax.SetFunction("cut")
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
-        ucrSelectorNewColumnName.SetDataFrameSelector(ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames)
+        ucrSelectorNewColumnName.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrSelectorNewColumnName.SetPrefix("Recode")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSelectorNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSelectorNewColumnName.cboColumnName.Text)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSelectorNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSelectorNewColumnName.cboColumnName.Text)
 
         If bFirstLoad Then
             SetDefaults()
@@ -61,7 +61,8 @@ Public Class dlgRecode
 
     Private Sub ucrReceiverRecode_SelectionChanged() Handles ucrReceiverRecode.SelectionChanged
         If Not ucrReceiverRecode.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", ucrReceiverRecode.GetVariableNames(False))
+            ucrBase.clsRsyntax.AddParameter("x", ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem.ToString & "$" & ucrReceiverRecode.GetVariableNames(False))
+
         Else
             ucrBase.clsRsyntax.RemoveParameter("x")
         End If
