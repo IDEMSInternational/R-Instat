@@ -8,7 +8,8 @@
     Dim dcmMaximum As Decimal = Decimal.MaxValue
     Dim bMinimumIncluded, bMaximumIncluded As Boolean
 
-    Public MustOverride Sub SetName(strName As String)
+    Public Overloads Sub SetName(strName As String)
+    End Sub
 
     Public Overridable Sub Reset()
         bUserTyped = False
@@ -87,9 +88,12 @@
         Return iType
     End Function
 
-    Public Sub ValidateText(strText As String)
+    Public Sub ValidateText(strText As String, Optional ctrInputControl As Control = Nothing)
         Dim iValidationCode As Integer
+        Dim bControlGiven As Boolean
+
         iValidationCode = GetValidationCode(strText)
+        bControlGiven = (ctrInputControl IsNot Nothing)
 
         Select Case iValidationCode
             Case 0
@@ -130,6 +134,9 @@
                         MsgBox("This name contains an invalid character", vbOKOnly)
                 End Select
         End Select
+        If iValidationCode >= 1 AndAlso iValidationCode <= 5 AndAlso bControlGiven Then
+            ctrInputControl.Focus()
+        End If
     End Sub
 
     'Returns integer as code for validation
