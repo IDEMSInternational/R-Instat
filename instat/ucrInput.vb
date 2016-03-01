@@ -1,14 +1,17 @@
 ﻿Public Class ucrInput
-    Public bUserTyped As Boolean = False
+    Protected bUserTyped As Boolean = False
     Public Event NameChanged()
-    Dim strValidationType As String = "None"
+    Protected strValidationType As String = "None"
     Dim strReservedWords() As String = ({"if", "else", "repeat", "while", "function", "for", "in", "next", "break", "TRUE", "FALSE", "NULL", "Inf", "NaN", "NA", "NA_integer_", "NA_real_", "NA_complex_", "NA_character_"})
-    Dim clsRList As New RFunction
-    Dim dcmMinimum As Decimal = Decimal.MinValue
-    Dim dcmMaximum As Decimal = Decimal.MaxValue
-    Dim bMinimumIncluded, bMaximumIncluded As Boolean
+    Protected clsRList As New RFunction
+    Protected dcmMinimum As Decimal = Decimal.MinValue
+    Protected dcmMaximum As Decimal = Decimal.MaxValue
+    Protected bMinimumIncluded, bMaximumIncluded As Boolean
+    Protected strDefaultType As String = ""
+    Protected strDefaultPrefix As String = ""
+    Protected WithEvents ucrDataFrameSelector As ucrDataFrame
 
-    Public Overloads Sub SetName(strName As String)
+    Public Overridable Sub SetName(strName As String)
     End Sub
 
     Public Overridable Sub Reset()
@@ -19,11 +22,45 @@
         RaiseEvent NameChanged()
     End Sub
 
-    Public Sub SetValidationRVariable()
+    Public Sub SetDefaultTypeAsColumn()
+        strDefaultType = "Column"
+    End Sub
+
+    Public Sub SetDefaultTypeAsModel()
+        strDefaultType = "Model"
+    End Sub
+
+    Public Sub SetDefaultTypeAsDataFrame()
+        strDefaultType = "Data Frame"
+    End Sub
+
+    Public Sub SetValidationTypeAsRVariable()
         strValidationType = "RVariable"
     End Sub
 
-    Public Sub SetValidationNumeric(Optional dcmMin As Decimal = Decimal.MinValue, Optional bIncludeMin As Boolean = True, Optional dcmMax As Decimal = Decimal.MaxValue, Optional bIncludeMax As Boolean = True)
+    Public Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
+        ucrDataFrameSelector = ucrNewSelector
+        If Not bUserTyped Then
+            SetDefaultName()
+        End If
+    End Sub
+
+    Public Sub SetPrefix(strNewPrefix As String)
+        strDefaultPrefix = strNewPrefix
+        SetDefaultName()
+    End Sub
+
+    Public Sub SetDefaultName()
+        If strDefaultType = "Column" AndAlso (ucrDataFrameSelector IsNot Nothing) Then
+            SetName(frmMain.clsRLink.GetDefaultColumnNames(strDefaultPrefix, ucrDataFrameSelector.cboAvailableDataFrames.Text))
+        ElseIf strDefaultType = "Model" Then
+        ElseIf strDefaultType = "Data Frame" Then
+        End If
+    End Sub
+
+
+
+    Public Sub SetValidationTypeAsNumeric(Optional dcmMin As Decimal = Decimal.MinValue, Optional bIncludeMin As Boolean = True, Optional dcmMax As Decimal = Decimal.MaxValue, Optional bIncludeMax As Boolean = True)
         strValidationType = "Numeric"
         If dcmMin <> Decimal.MinValue Then
             dcmMinimum = dcmMin
@@ -50,20 +87,20 @@
             End If
             If dcmMaximum <> Decimal.MaxValue Then
                 If bMaximumIncluded Then
-                    strRange = "<= " & dcmMaximum.ToString()
+                    strRange = strRange & "<= " & dcmMaximum.ToString()
                 Else
-                    strRange = "< " & dcmMaximum.ToString()
+                    strRange = strRange & "< " & dcmMaximum.ToString()
                 End If
             End If
         End If
             Return strRange
     End Function
 
-    Public Sub SetValidationList()
+    Public Sub SetValidationTypeAsList()
         strValidationType = "List"
     End Sub
 
-    Public Sub SetValidationNumericList()
+    Public Sub SetValidationTypeAsNumericList()
         strValidationType = "NumericList"
     End Sub
 
@@ -114,7 +151,7 @@
                     Case "RVariable"
                         MsgBox("This name cannot start with " & strText(0), vbOKOnly)
                     Case "Numeric"
-                        MsgBox("This number must be:" & GetNumericRange(), vbOKOnly)
+                        MsgBox("This number must be: " & GetNumericRange(), vbOKOnly)
                     Case "NumericList"
                         MsgBox("Each item in the list must be numeric.", vbOKOnly, "Validation Error")
                 End Select
@@ -134,7 +171,7 @@
                         MsgBox("This name contains an invalid character", vbOKOnly)
                 End Select
         End Select
-        If iValidationCode >= 1 AndAlso iValidationCode <= 5 AndAlso bControlGiven Then
+        If iValidationCode > 0 AndAlso bControlGiven Then
             ctrInputControl.Focus()
         End If
     End Sub
@@ -147,12 +184,14 @@
         Dim dcmText As Decimal
         Dim iType As Integer = 0
 
-        If Not IsNumeric(strText) Then
-            iType = 1
-        Else
-            dcmText = Convert.ToDecimal(strText)
-            If (dcmText < dcmMinimum) OrElse (dcmText > dcmMaximum) OrElse (Not bMinimumIncluded And dcmText <= dcmMinimum) OrElse (Not bMaximumIncluded And dcmText >= dcmMaximum) Then
-                iType = 2
+        If strText <> "" Then
+            If Not IsNumeric(strText) Then
+                iType = 1
+            Else
+                dcmText = Convert.ToDecimal(strText)
+                If (dcmText < dcmMinimum) OrElse (dcmText > dcmMaximum) OrElse (Not bMinimumIncluded And dcmText <= dcmMinimum) OrElse (Not bMaximumIncluded And dcmText >= dcmMaximum) Then
+                    iType = 2
+                End If
             End If
         End If
         Return iType
@@ -213,6 +252,7 @@
         Dim strItems As String()
         Dim strTemp As String
 
+        If strText = "" Then Return 0
         clsRList.ClearParameters()
         clsRList.SetRCommand("c")
         'TODO deal with spaces differently e.g. "8 8" should give error/warning instead of "88"
@@ -238,4 +278,9 @@
         Return 0
     End Function
 
+    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameSelector.DataFrameChanged
+        If Not bUserTyped Then
+            SetDefaultName()
+        End If
+    End Sub
 End Class
