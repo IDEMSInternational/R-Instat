@@ -279,6 +279,54 @@
   <data name="&gt;&gt;cmdRegressionOptions.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="chkSaveModel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkSaveModel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 183</value>
+  </data>
+  <data name="chkSaveModel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 24</value>
+  </data>
+  <data name="chkSaveModel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="chkSaveModel.Text" xml:space="preserve">
+    <value>Save Model</value>
+  </data>
+  <data name="&gt;&gt;chkSaveModel.Name" xml:space="preserve">
+    <value>chkSaveModel</value>
+  </data>
+  <data name="&gt;&gt;chkSaveModel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkSaveModel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkSaveModel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrModelName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 181</value>
+  </data>
+  <data name="ucrModelName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 23</value>
+  </data>
+  <data name="ucrModelName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrModelName.Name" xml:space="preserve">
+    <value>ucrModelName</value>
+  </data>
+  <data name="&gt;&gt;ucrModelName.Type" xml:space="preserve">
+    <value>instat.ucrVariableName, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrModelName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrModelName.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrExplanatory.Location" type="System.Drawing.Point, System.Drawing">
     <value>296, 105</value>
   </data>
@@ -363,51 +411,6 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="ucrModelName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 181</value>
-  </data>
-  <data name="ucrModelName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 23</value>
-  </data>
-  <data name="ucrModelName.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrModelName.Name" xml:space="preserve">
-    <value>ucrModelName</value>
-  </data>
-  <data name="&gt;&gt;ucrModelName.Type" xml:space="preserve">
-    <value>instat.ucrVariableName, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrModelName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrModelName.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="chkModelName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 183</value>
-  </data>
-  <data name="chkModelName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 24</value>
-  </data>
-  <data name="chkModelName.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="chkModelName.Text" xml:space="preserve">
-    <value>Model Name</value>
-  </data>
-  <data name="&gt;&gt;chkModelName.Name" xml:space="preserve">
-    <value>chkModelName</value>
-  </data>
-  <data name="&gt;&gt;chkModelName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkModelName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;chkModelName.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -416,6 +419,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>424, 271</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
