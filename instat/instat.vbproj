@@ -316,6 +316,12 @@
     <Compile Include="dlgSummaryBarOrPieChart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgCanonicalCorrelation.Designer.vb">
+      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCanonicalCorrelation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
     </Compile>
@@ -1552,6 +1558,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBoxPlot.sw-KE.resx">
       <DependentUpon>sdgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCanonicalCorrelation.fr-FR.resx">
+      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCanonicalCorrelation.resx">
+      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCanonicalCorrelation.sw-KE.resx">
+      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.fr-FR.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
