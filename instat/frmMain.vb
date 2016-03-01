@@ -38,6 +38,8 @@ Public Class frmMain
     ' declare a variable to contain the most recent opened items
     Private strListMRU As New List(Of String)
 
+    Dim strRecentFilesPath As String
+
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
         frmCommand.MdiParent = Me
@@ -47,7 +49,7 @@ Public Class frmMain
         frmMetaData.MdiParent = Me
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
-
+        strRecentFilesPath = "Recent_files"
         LoadInstatOptions()
 
         frmCommand.Show()
@@ -65,6 +67,9 @@ Public Class frmMain
 
         ' TODO tstatus shouldn't be set here in this way
         tstatus.Text = frmEditor.grdData.CurrentWorksheet.Name
+
+        'checks mru
+        checkOnLoad()
 
     End Sub
 
@@ -728,15 +733,13 @@ Public Class frmMain
 
     Private ReadOnly Property MRUPath() As String
         Get
-            ' returns a path in the same folder as the EXE with the same name, but with a '.mru' 
+            ' returns a path in the static folder, but with a '.mru' 
             ' extension...
-            Return Path.ChangeExtension(Application.ExecutablePath, ".mru")
+            Return Path.ChangeExtension(strStaticPath & "\" & strRecentFilesPath, ".mru")
         End Get
     End Property
 
-    Protected Overrides Sub OnLoad(ByVal e As EventArgs)
-        ' enable events...
-        MyBase.OnLoad(e)
+    Private Sub checkOnLoad()
         ' load recently opened files
         If (File.Exists(MRUPath)) Then
             ' read file into array...
@@ -757,9 +760,9 @@ Public Class frmMain
         If strListMRU.Count > 0 Then UpdateMRU()
     End Sub
 
-    Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
-        'enable events...
-        MyBase.OnFormClosing(e)
+
+
+    Private Sub saveOnClose(ByVal e As FormClosingEventArgs)
         ' save MRU - delete existing file...
         If File.Exists(MRUPath) Then File.Delete(MRUPath)
         ' write each item to the file...
@@ -821,6 +824,10 @@ Public Class frmMain
         'ToDo
         'dlgImportDataset.SetFilePath(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4))
         'dlgImportDataset.ShowDialog()
+    End Sub
+
+    Private Sub frmMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        saveOnClose(e)
     End Sub
 
 End Class
