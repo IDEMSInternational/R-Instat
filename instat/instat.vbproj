@@ -328,6 +328,12 @@
     <Compile Include="sdgCanonicalCorrelation.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgPrincipalComponentAnalysis.Designer.vb">
+      <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPrincipalComponentAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
     </Compile>
@@ -1618,6 +1624,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOptions.sw-KE.resx">
       <DependentUpon>sdgOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPrincipalComponentAnalysis.fr-FR.resx">
+      <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPrincipalComponentAnalysis.resx">
+      <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPrincipalComponentAnalysis.sw-KE.resx">
+      <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgRestrict.fr-FR.resx">
       <DependentUpon>sdgRestrict.vb</DependentUpon>
