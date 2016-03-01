@@ -190,6 +190,12 @@
     <Compile Include="dlgCalculator.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCanonicalCorrelationAnalysis.Designer.vb">
+      <DependentUpon>dlgCanonicalCorrelationAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCanonicalCorrelationAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgChangeFormatDayMonth.designer.vb">
       <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
     </Compile>
@@ -1348,6 +1354,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCalculator.sw-KE.resx">
       <DependentUpon>dlgCalculator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCanonicalCorrelationAnalysis.fr-FR.resx">
+      <DependentUpon>dlgCanonicalCorrelationAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCanonicalCorrelationAnalysis.resx">
+      <DependentUpon>dlgCanonicalCorrelationAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCanonicalCorrelationAnalysis.sw-KE.resx">
+      <DependentUpon>dlgCanonicalCorrelationAnalysis.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgChangeFormatDayMonth.fr-FR.resx">
       <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
