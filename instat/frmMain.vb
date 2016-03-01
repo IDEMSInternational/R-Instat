@@ -806,4 +806,15 @@ Public Class frmMain
         Next
     End Sub
 
+    Private Sub mnuStatistcsMultivariatePrincipalComponents_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariatePrincipalComponents.Click
+        dlgPrincipalComponentAnalysis.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatistcsMultivariateCanonicalCorrelations_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariateCanonicalCorrelations.Click
+        dlgCanonicalCorrelationAnalysis.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuManageFactorRecode.Click
+        dlgRecode.ShowDialog()
+    End Sub
 End Class
