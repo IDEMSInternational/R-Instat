@@ -334,10 +334,10 @@
     <Compile Include="sdgHistogramOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgOptions.Designer.vb">
-      <DependentUpon>sdgOptions.vb</DependentUpon>
+    <Compile Include="sdgANOVAOptions.Designer.vb">
+      <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgOptions.vb">
+    <Compile Include="sdgANOVAOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgRestrict.Designer.vb">
@@ -1536,13 +1536,14 @@
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOptions.fr-FR.resx">
-      <DependentUpon>sdgOptions.vb</DependentUpon>
+      <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgOptions.resx">
-      <DependentUpon>sdgOptions.vb</DependentUpon>
+    <EmbeddedResource Include="sdgANOVAOptions.resx">
+      <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgOptions.sw-KE.resx">
-      <DependentUpon>sdgOptions.vb</DependentUpon>
+    <EmbeddedResource Include="sdgANOVAOptions.sw-KE.resx">
+      <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgRestrict.fr-FR.resx">
       <DependentUpon>sdgRestrict.vb</DependentUpon>
