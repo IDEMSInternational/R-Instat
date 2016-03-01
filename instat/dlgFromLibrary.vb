@@ -18,6 +18,7 @@ Imports System.IO
 Public Class dlgFromLibrary
     Dim strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ucrBase.iHelpTopicID = 156
         autoTranslate(Me)
     End Sub
 
