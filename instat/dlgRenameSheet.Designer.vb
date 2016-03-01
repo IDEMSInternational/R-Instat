@@ -70,6 +70,7 @@ Partial Class dlgRenameSheet
         Me.Controls.Add(Me.ucrDataFrameToRename)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "dlgRenameSheet"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Rename Sheet"
         Me.ResumeLayout(False)
         Me.PerformLayout()

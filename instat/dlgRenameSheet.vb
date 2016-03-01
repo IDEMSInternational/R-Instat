@@ -20,15 +20,26 @@ Public Class dlgRenameSheet
         autoTranslate(Me)
         'set the function
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
+        TestOKEnabled()
     End Sub
 
     Private Sub txtNewName_Leave(sender As Object, e As EventArgs) Handles txtNewName.Leave
         If txtNewName.Text <> "" Then
             ucrBase.clsRsyntax.AddParameter("new_value", Chr(34) & txtNewName.Text & Chr(34))
         End If
+        TestOKEnabled()
     End Sub
 
-    Private Sub ucrDataFrameToRename_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameToRename.Leave
+    Private Sub TestOKEnabled()
+        If txtNewName.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrDataFrameToRename_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameToRename.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem & Chr(34))
+        TestOKEnabled()
     End Sub
 End Class
