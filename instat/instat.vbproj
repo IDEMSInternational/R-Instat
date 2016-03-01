@@ -286,6 +286,12 @@
     <Compile Include="dlgPermuteRows.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPrincipalComponentAnalysis.Designer.vb">
+      <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPrincipalComponentAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgPrintPreviewOptions.Designer.vb">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </Compile>
@@ -1495,6 +1501,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPermuteRows.sw-KE.resx">
       <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPrincipalComponentAnalysis.fr-FR.resx">
+      <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPrincipalComponentAnalysis.resx">
+      <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPrincipalComponentAnalysis.sw-KE.resx">
+      <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrintPreviewOptions.fr-FR.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
