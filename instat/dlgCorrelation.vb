@@ -39,7 +39,7 @@ Public Class dlgCorrelation
         End If
 
         If bIsTwoColumnFunction Then
-            TestOKEnabledForMultipleColumns()
+            TestOKEnabledForTwoColumns()
         Else
             TestOKEnabledForMultipleColumns()
         End If
