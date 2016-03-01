@@ -37,7 +37,6 @@ Public Class frmMain
     'TODO This should be an option in the Options dialog
     '     User can choose a default data frame or set the default as the current worksheet
     Public strDefaultDataFrame As String = ""
-    Dim allForms As New List(Of Form)
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmEditor.MdiParent = Me
