@@ -56,7 +56,7 @@ Public Class dlgOneWayANOVA
     End Sub
 
     Private Sub ucrFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactor.SelectionChanged
-        clsModel.SetParameter(False, strValue:=ucrYVariate.GetVariableNames(bWithQuotes:=False))
+        clsModel.SetParameter(False, strValue:=ucrFactor.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
@@ -74,7 +74,7 @@ Public Class dlgOneWayANOVA
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgOptions.ShowDialog()
+        sdgANOVAOptions.ShowDialog()
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaultSettings()
