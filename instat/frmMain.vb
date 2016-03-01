@@ -749,4 +749,8 @@ Public Class frmMain
     Private Sub mnuGraphicsScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsScatterPlot.Click
         dlgScatterPlot.ShowDialog()
     End Sub
+
+    Private Sub mnuManageDataFileRenameSheet_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileRenameSheet.Click
+        dlgRenameSheet.ShowDialog()
+    End Sub
 End Class

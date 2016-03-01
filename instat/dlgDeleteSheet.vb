@@ -16,6 +16,7 @@
 Imports instat.Translations
 Public Class dlgDeleteSheet
     Private Sub dlgDeleteSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ucrBase.iHelpTopicID = 63
         'set the function
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
         ucrDataFrameToDelete.Focus()
