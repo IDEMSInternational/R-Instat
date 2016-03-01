@@ -256,6 +256,12 @@
     <Compile Include="dlgInsertColumn.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgInsertSheet.Designer.vb">
+      <DependentUpon>dlgInsertSheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgInsertSheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneWayANOVA.Designer.vb">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
     </Compile>
@@ -1426,6 +1432,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.sw-KE.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInsertSheet.fr-FR.resx">
+      <DependentUpon>dlgInsertSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInsertSheet.resx">
+      <DependentUpon>dlgInsertSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInsertSheet.sw-KE.resx">
+      <DependentUpon>dlgInsertSheet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
