@@ -30,7 +30,7 @@ Public Class frmMain
     Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
 
-    Dim mnuItems As New List(Of String)
+    Dim mnuItems As New List(Of Form)
 
     'This is the default data frame to appear in the data frame selector
     'If "" the current worksheet will be used
@@ -63,8 +63,6 @@ Public Class frmMain
         clsRLink.clsEngine.Initialize()
         'Sets up R source files
         clsRLink.RSetup()
-        'Loads the list of forms
-        ListOFForms()
 
     End Sub
 
@@ -756,7 +754,7 @@ Public Class frmMain
         dlgScatterPlot.ShowDialog()
     End Sub
 
-    Public Sub addToMenu(ByVal dialog As String)
+    Public Sub addToMenu(ByVal dialog As Form)
         'Checks for existance, else add it to the beginning
         If mnuItems.Contains(dialog) Then mnuItems.Remove(dialog)
         'adds to the list
@@ -766,7 +764,7 @@ Public Class frmMain
             mnuItems.RemoveAt(0)
         End While
         'updates the interface
-        UpdateItemsMenu
+        UpdateItemsMenu()
     End Sub
 
     Private Sub UpdateItemsMenu()
@@ -787,9 +785,9 @@ Public Class frmMain
         Next
         'displays items (_in reverse order)
         For icounter As Integer = mnuItems.Count - 1 To 0 Step -1
-            Dim dialog As String = mnuItems(icounter)
+            Dim dialog As Form = mnuItems(icounter)
             'creates new toolstripitem, displaying name of the dialog
-            Dim clsItem As New ToolStripMenuItem(dialog)
+            Dim clsItem As New ToolStripMenuItem(dialog.Text)
             'sets the tag
             clsItem.Tag = "Last"
             AddHandler clsItem.Click, AddressOf mnuFile_Click
@@ -801,19 +799,10 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFile_Click(ByVal sender As Object, ByVal e As EventArgs)
-        'displays the form from the list of forms
-        For Each f As Form In allForms
-            If f.Text = sender.ToString Then
-                f.ShowDialog()
-            End If
-        Next
-    End Sub
-
-    Private Sub ListOFForms()
-        For Each t As Type In Me.GetType().Assembly.GetTypes()
-            If t.BaseType.Name = "Form" Then
-                Dim allF As Form = DirectCast(Activator.CreateInstance(t), Form)
-                allForms.Add(allF)
+        For Each dfTemp As Form In mnuItems
+            If dfTemp.Text = sender.ToString Then
+                dfTemp.ShowDialog()
+                Exit Sub
             End If
         Next
     End Sub
