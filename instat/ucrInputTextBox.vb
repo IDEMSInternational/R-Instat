@@ -2,6 +2,7 @@
     Public Overrides Sub SetName(strName As String)
         If IsValid(strName) Then
             txtInput.Text = strName
+            OnNameChanged()
         Else
             MsgBox(strName & "is not a valid for this textbox", vbOKOnly)
         End If
