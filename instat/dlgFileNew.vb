@@ -39,18 +39,31 @@ Public Class dlgFileNew
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsMatrix)
 
         ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
+
+        TestOKEnabled()
     End Sub
 
     Private Sub txtColumns_Leave(sender As Object, e As EventArgs) Handles txtColumns.Leave
         clsMatrix.AddParameter("ncol", txtColumns.Text)
+        TestOKEnabled()
     End Sub
 
     Private Sub txtName_Leave(sender As Object, e As EventArgs) Handles txtName.Leave
         ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
+        TestOKEnabled()
     End Sub
 
     Private Sub txtRows_Leave(sender As Object, e As EventArgs) Handles txtRows.Leave
         clsMatrix.AddParameter("nrow", txtRows.Text)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If txtColumns.Text <> "" And txtName.Text <> "" And txtRows.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
 End Class
