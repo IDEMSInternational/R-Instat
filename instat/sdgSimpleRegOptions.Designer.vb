@@ -42,6 +42,7 @@ Partial Class sdgSimpleRegOptions
         Me.chkFourinOne = New System.Windows.Forms.CheckBox()
         Me.chkAdditionalVariable = New System.Windows.Forms.CheckBox()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.chkStandardError = New System.Windows.Forms.CheckBox()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         CType(Me.nudConfidenceInteval, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -58,7 +59,7 @@ Partial Class sdgSimpleRegOptions
         Me.tbRegOptions.Location = New System.Drawing.Point(2, 3)
         Me.tbRegOptions.Name = "tbRegOptions"
         Me.tbRegOptions.SelectedIndex = 0
-        Me.tbRegOptions.Size = New System.Drawing.Size(251, 221)
+        Me.tbRegOptions.Size = New System.Drawing.Size(252, 233)
         Me.tbRegOptions.TabIndex = 0
         '
         'tbDisplay
@@ -73,7 +74,7 @@ Partial Class sdgSimpleRegOptions
         Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
         Me.tbDisplay.Name = "tbDisplay"
         Me.tbDisplay.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbDisplay.Size = New System.Drawing.Size(243, 195)
+        Me.tbDisplay.Size = New System.Drawing.Size(244, 207)
         Me.tbDisplay.TabIndex = 0
         Me.tbDisplay.Tag = "Display"
         Me.tbDisplay.Text = "Display"
@@ -81,11 +82,14 @@ Partial Class sdgSimpleRegOptions
         '
         'nudConfidenceInteval
         '
+        Me.nudConfidenceInteval.DecimalPlaces = 2
+        Me.nudConfidenceInteval.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
         Me.nudConfidenceInteval.Location = New System.Drawing.Point(118, 106)
+        Me.nudConfidenceInteval.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudConfidenceInteval.Name = "nudConfidenceInteval"
-        Me.nudConfidenceInteval.Size = New System.Drawing.Size(39, 20)
+        Me.nudConfidenceInteval.Size = New System.Drawing.Size(45, 20)
         Me.nudConfidenceInteval.TabIndex = 6
-        Me.nudConfidenceInteval.Value = New Decimal(New Integer() {95, 0, 0, 0})
+        Me.nudConfidenceInteval.Value = New Decimal(New Integer() {95, 0, 0, 131072})
         '
         'lblConfidenceInterval
         '
@@ -160,7 +164,7 @@ Partial Class sdgSimpleRegOptions
         Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tbGraphics.Name = "tbGraphics"
         Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraphics.Size = New System.Drawing.Size(243, 195)
+        Me.tbGraphics.Size = New System.Drawing.Size(244, 207)
         Me.tbGraphics.TabIndex = 1
         Me.tbGraphics.Tag = "Graphics"
         Me.tbGraphics.Text = "Graphics"
@@ -168,6 +172,7 @@ Partial Class sdgSimpleRegOptions
         '
         'grpModel
         '
+        Me.grpModel.Controls.Add(Me.chkStandardError)
         Me.grpModel.Controls.Add(Me.chkFittedModel)
         Me.grpModel.Controls.Add(Me.chkPredictionInterval)
         Me.grpModel.Controls.Add(Me.nudConvidenceLevel)
@@ -175,7 +180,7 @@ Partial Class sdgSimpleRegOptions
         Me.grpModel.Controls.Add(Me.chkConfidenceInterval)
         Me.grpModel.Location = New System.Drawing.Point(16, 80)
         Me.grpModel.Name = "grpModel"
-        Me.grpModel.Size = New System.Drawing.Size(219, 104)
+        Me.grpModel.Size = New System.Drawing.Size(219, 121)
         Me.grpModel.TabIndex = 1
         Me.grpModel.TabStop = False
         Me.grpModel.Tag = "Model"
@@ -195,7 +200,7 @@ Partial Class sdgSimpleRegOptions
         'chkPredictionInterval
         '
         Me.chkPredictionInterval.AutoSize = True
-        Me.chkPredictionInterval.Location = New System.Drawing.Point(49, 80)
+        Me.chkPredictionInterval.Location = New System.Drawing.Point(50, 98)
         Me.chkPredictionInterval.Name = "chkPredictionInterval"
         Me.chkPredictionInterval.Size = New System.Drawing.Size(111, 17)
         Me.chkPredictionInterval.TabIndex = 3
@@ -205,11 +210,14 @@ Partial Class sdgSimpleRegOptions
         '
         'nudConvidenceLevel
         '
+        Me.nudConvidenceLevel.DecimalPlaces = 2
+        Me.nudConvidenceLevel.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
         Me.nudConvidenceLevel.Location = New System.Drawing.Point(167, 56)
+        Me.nudConvidenceLevel.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudConvidenceLevel.Name = "nudConvidenceLevel"
-        Me.nudConvidenceLevel.Size = New System.Drawing.Size(39, 20)
+        Me.nudConvidenceLevel.Size = New System.Drawing.Size(46, 20)
         Me.nudConvidenceLevel.TabIndex = 4
-        Me.nudConvidenceLevel.Value = New Decimal(New Integer() {95, 0, 0, 0})
+        Me.nudConvidenceLevel.Value = New Decimal(New Integer() {95, 0, 0, 131072})
         '
         'lblConfidenceLevel
         '
@@ -268,16 +276,27 @@ Partial Class sdgSimpleRegOptions
         '
         'ucrSdgButtons
         '
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(41, 226)
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(41, 242)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
+        '
+        'chkStandardError
+        '
+        Me.chkStandardError.AutoSize = True
+        Me.chkStandardError.Location = New System.Drawing.Point(74, 77)
+        Me.chkStandardError.Name = "chkStandardError"
+        Me.chkStandardError.Size = New System.Drawing.Size(94, 17)
+        Me.chkStandardError.TabIndex = 5
+        Me.chkStandardError.Tag = "Standard_Error"
+        Me.chkStandardError.Text = "Standard Error"
+        Me.chkStandardError.UseVisualStyleBackColor = True
         '
         'sdgSimpleRegOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(259, 257)
+        Me.ClientSize = New System.Drawing.Size(266, 271)
         Me.Controls.Add(Me.tbRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -318,4 +337,5 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents chkFourinOne As CheckBox
     Friend WithEvents chkAdditionalVariable As CheckBox
     Friend WithEvents chkModel As CheckBox
+    Friend WithEvents chkStandardError As CheckBox
 End Class
