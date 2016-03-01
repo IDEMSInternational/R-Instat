@@ -24,6 +24,7 @@ Public Class RSyntax
     Public strScript As String
     Public i As Integer
     Public strAssignTo As String
+    Public bExcludeAssignedFunctionOutput As Boolean = True
 
     Public Sub SetFunction(strFunctionName As String, Optional ByRef clsFunction As RFunction = Nothing)
         If clsFunction Is Nothing Then
@@ -93,7 +94,7 @@ Public Class RSyntax
         clsFunction.ClearParameters()
     End Sub
 
-    Public Function GetScript(Optional ByRef clsFunction As RFunction = Nothing, Optional bExcludeAssignedFunctionOutput As Boolean = True) As String
+    Public Function GetScript(Optional ByRef clsFunction As RFunction = Nothing) As String
 
         Dim strTemp As String = ""
 

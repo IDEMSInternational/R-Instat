@@ -30,12 +30,12 @@ Partial Class dlgRegressionSimple
         Me.lblResponse = New System.Windows.Forms.Label()
         Me.lblExplanatory = New System.Windows.Forms.Label()
         Me.cmdRegressionOptions = New System.Windows.Forms.Button()
+        Me.chkSaveModel = New System.Windows.Forms.CheckBox()
+        Me.ucrModelName = New instat.ucrVariableName()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
         Me.ucrResponse = New instat.ucrReceiverSingle()
         Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrModelName = New instat.ucrVariableName()
-        Me.chkModelName = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -79,6 +79,18 @@ Partial Class dlgRegressionSimple
         Me.cmdRegressionOptions.Tag = "Regression_Options..."
         Me.cmdRegressionOptions.UseVisualStyleBackColor = True
         '
+        'chkSaveModel
+        '
+        resources.ApplyResources(Me.chkSaveModel, "chkSaveModel")
+        Me.chkSaveModel.Name = "chkSaveModel"
+        Me.chkSaveModel.Tag = "Save_Model"
+        Me.chkSaveModel.UseVisualStyleBackColor = True
+        '
+        'ucrModelName
+        '
+        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
+        Me.ucrModelName.Name = "ucrModelName"
+        '
         'ucrExplanatory
         '
         resources.ApplyResources(Me.ucrExplanatory, "ucrExplanatory")
@@ -101,23 +113,11 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrModelName
-        '
-        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
-        Me.ucrModelName.Name = "ucrModelName"
-        '
-        'chkModelName
-        '
-        resources.ApplyResources(Me.chkModelName, "chkModelName")
-        Me.chkModelName.Name = "chkModelName"
-        Me.chkModelName.Tag = "Model_Name"
-        Me.chkModelName.UseVisualStyleBackColor = True
-        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.chkModelName)
+        Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.cmdRegressionOptions)
         Me.Controls.Add(Me.lblExplanatory)
@@ -153,5 +153,5 @@ Partial Class dlgRegressionSimple
     Friend WithEvents lblExplanatory As Label
     Friend WithEvents cmdRegressionOptions As Button
     Friend WithEvents ucrModelName As ucrVariableName
-    Friend WithEvents chkModelName As CheckBox
+    Friend WithEvents chkSaveModel As CheckBox
 End Class
