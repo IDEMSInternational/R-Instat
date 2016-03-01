@@ -232,6 +232,12 @@
     <Compile Include="dlgCopySheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCummulativeDistribution.Designer.vb">
+      <DependentUpon>dlgCummulativeDistribution.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCummulativeDistribution.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDeleteColumn.Designer.vb">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </Compile>
@@ -254,6 +260,12 @@
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgInsertColumn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgInsertSheet.Designer.vb">
+      <DependentUpon>dlgInsertSheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgInsertSheet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOneWayANOVA.Designer.vb">
@@ -1391,6 +1403,15 @@
     <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCummulativeDistribution.fr-FR.resx">
+      <DependentUpon>dlgCummulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCummulativeDistribution.resx">
+      <DependentUpon>dlgCummulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCummulativeDistribution.sw-KE.resx">
+      <DependentUpon>dlgCummulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteColumn.fr-FR.resx">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </EmbeddedResource>
@@ -1426,6 +1447,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.sw-KE.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInsertSheet.fr-FR.resx">
+      <DependentUpon>dlgInsertSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInsertSheet.resx">
+      <DependentUpon>dlgInsertSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInsertSheet.sw-KE.resx">
+      <DependentUpon>dlgInsertSheet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
