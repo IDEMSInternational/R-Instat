@@ -44,6 +44,7 @@ Public Class dlgRecode
         chkAddLabels.Checked = False
         ucrMultipleLabels.Visible = False
         rdoRight.Checked = True
+        ucrSelectorForRecode.Reset()
     End Sub
 
     Private Sub ReopenDialog()
