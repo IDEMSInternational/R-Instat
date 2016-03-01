@@ -68,7 +68,7 @@ Public Class dlgSort
     'This runs on load and after anything is changed on the dialog.
     'No other place needs to set Ok enabled, always done through this sub
     Private Sub TestOKEnabled()
-        If ucrReceiverSort.GetVariableNames() <> "" Then
+        If ucrReceiverSort.IsEmpty() = False Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -76,8 +76,11 @@ Public Class dlgSort
     End Sub
 
     Private Sub ucrReceiverSort_SelectionChanged() Handles ucrReceiverSort.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectForSort.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-        ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
+        If Not ucrReceiverSort.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_names")
+        End If
         'Test ok enabled
         TestOKEnabled()
     End Sub
@@ -128,4 +131,7 @@ Public Class dlgSort
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrSelectForSort_DataFrameChanged() Handles ucrSelectForSort.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectForSort.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+    End Sub
 End Class

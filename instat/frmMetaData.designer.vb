@@ -37,8 +37,8 @@ Partial Class frmMetaData
         Me.grdMetaData.RowHeaderContextMenuStrip = Nothing
         Me.grdMetaData.Script = Nothing
         Me.grdMetaData.SheetTabContextMenuStrip = Nothing
-        Me.grdMetaData.SheetTabControlNewButtonVisible = False
-        Me.grdMetaData.SheetTabControlWidth = 100
+        Me.grdMetaData.SheetTabNewButtonVisible = False
+        Me.grdMetaData.SheetTabWidth = 100
         Me.grdMetaData.SheetTabNewButtonVisible = False
         Me.grdMetaData.Size = New System.Drawing.Size(228, 201)
         Me.grdMetaData.TabIndex = 1

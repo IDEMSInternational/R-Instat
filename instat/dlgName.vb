@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgName
     Private bUseDefaultName As Boolean
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ucrBase.iHelpTopicID = 33
         ucrReceiverNames.Selector = ucrSelectorByDataFrameAddRemove
         ucrReceiverNames.Selector = ucrSelectorByDataFrameAddRemove
         defaultSettings()
