@@ -29,6 +29,9 @@ Public Class frmMain
     Public clsInstatOptions As InstatOptions
     Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
+
+    Dim mnuItems As New List(Of Form)
+
     'This is the default data frame to appear in the data frame selector
     'If "" the current worksheet will be used
     'TODO This should be an option in the Options dialog
@@ -750,8 +753,58 @@ Public Class frmMain
         dlgScatterPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFileRenameSheet_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileRenameSheet.Click
-        dlgRenameSheet.ShowDialog()
+    Public Sub addToMenu(ByVal dialog As Form)
+        'Checks for existance, else add it to the beginning
+        If mnuItems.Contains(dialog) Then mnuItems.Remove(dialog)
+        'adds to the list
+        mnuItems.Add(dialog)
+        'checks that only 1o items are allowed
+        While mnuItems.Count > 10
+            mnuItems.RemoveAt(0)
+        End While
+        'updates the interface
+        UpdateItemsMenu()
     End Sub
+
+    Private Sub UpdateItemsMenu()
+        'clears the menu items first
+        Dim clsItems As New List(Of ToolStripItem)
+        'creates a temp collection
+        'will be identified by tag
+        For Each clsMenu As ToolStripItem In mnuTbShowLast10.DropDownItems
+            If Not clsMenu.Tag Is Nothing Then
+                If (clsMenu.Tag.ToString().StartsWith("Last")) Then
+                    clsItems.Add(clsMenu)
+                End If
+            End If
+        Next
+        'go through the list and remove each from the menu
+        For Each clsMenu As ToolStripItem In clsItems
+            mnuTbShowLast10.DropDownItems.Remove(clsMenu)
+        Next
+        'displays items (_in reverse order)
+        For icounter As Integer = mnuItems.Count - 1 To 0 Step -1
+            Dim dialog As Form = mnuItems(icounter)
+            'creates new toolstripitem, displaying name of the dialog
+            Dim clsItem As New ToolStripMenuItem(dialog.Text)
+            'sets the tag
+            clsItem.Tag = "Last"
+            AddHandler clsItem.Click, AddressOf mnuFile_Click
+            'insert into the dropdownitems
+            mnuTbShowLast10.DropDownItems.Insert(mnuTbShowLast10.DropDownItems.Count - 1, clsItem)
+        Next
+        sepStart.visible = True
+        sepEnd.Visible = True
+    End Sub
+
+    Private Sub mnuFile_Click(ByVal sender As Object, ByVal e As EventArgs)
+        For Each dfTemp As Form In mnuItems
+            If dfTemp.Text = sender.ToString Then
+                dfTemp.ShowDialog()
+                Exit Sub
+            End If
+        Next
+    End Sub
+
 End Class
 

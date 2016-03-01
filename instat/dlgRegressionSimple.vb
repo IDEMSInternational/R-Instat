@@ -93,26 +93,9 @@ Public Class dlgRegressionSimple
         AssignModelName()
     End Sub
 
-    'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-    '    Dim clsRaovFunction As New RFunction
-
-    '    clsRaovFunction.SetRCommand("aov")
-    '    clsRaovFunction.AddParameter("", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
-    '    frmMain.clsRLink.RunScript(clsRaovFunction.ToScript(), 2)
-    'End Sub
-
-
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         sdgSimpleRegOptions.RegOptions()
     End Sub
-
-    'Private Sub anovatable()
-    '    Dim clsRaovFunction As New RFunction
-
-    '    clsRaovFunction.SetRCommand("aov")
-    '    clsRaovFunction.AddParameter("", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction)
-    '    frmMain.clsRLink.RunScript(clsRaovFunction.ToScript(), 2)
-    'End Sub
 
     Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkModelName.CheckedChanged
         If chkModelName.Checked Then
@@ -129,5 +112,4 @@ Public Class dlgRegressionSimple
             ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model")
         End If
     End Sub
-    'TO DO reopen dialogue given the options
 End Class
