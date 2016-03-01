@@ -105,4 +105,8 @@ Public Class dlgBoxplot
     Private Sub ucrSecondFactorReceiver_Enter(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.Enter
         ucrSecondFactorReceiver.SetMeAsReceiver()
     End Sub
+
+    Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
+        sdgBoxPlot.ShowDialog()
+    End Sub
 End Class
