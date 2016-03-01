@@ -29,14 +29,16 @@ Public Class frmMain
     Public clsInstatOptions As InstatOptions
     Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
+
+    Dim mnuItems As New List(Of Form)
+    ' declare a variable to contain the most recent opened items
+    Private strListMRU As New List(Of String)
+
     'This is the default data frame to appear in the data frame selector
     'If "" the current worksheet will be used
     'TODO This should be an option in the Options dialog
     '     User can choose a default data frame or set the default as the current worksheet
     Public strDefaultDataFrame As String = ""
-
-    ' declare a variable to contain the most recent opened items
-    Private strListMRU As New List(Of String)
 
     Dim strRecentFilesPath As String
 
@@ -49,7 +51,7 @@ Public Class frmMain
         frmMetaData.MdiParent = Me
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
-        strRecentFilesPath = "Recent_files"
+
         LoadInstatOptions()
 
         frmCommand.Show()
@@ -64,9 +66,6 @@ Public Class frmMain
         clsRLink.clsEngine.Initialize()
         'Sets up R source files
         clsRLink.RSetup()
-
-        ' TODO tstatus shouldn't be set here in this way
-        tstatus.Text = frmEditor.grdData.CurrentWorksheet.Name
 
         'checks mru
         checkOnLoad()
@@ -88,7 +87,7 @@ Public Class frmMain
         autoTranslate(Me)
     End Sub
 
-    Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsProbabilityPlot.Click
+    Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsCummulativeDistribution.Click
         dlgProbabilityPlot.ShowDialog()
     End Sub
 
@@ -136,7 +135,7 @@ Public Class frmMain
         dlgMultipleRegression.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsPlot.Click
+    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsLinePlot.Click
         dlgPlot.ShowDialog()
     End Sub
 
@@ -367,10 +366,6 @@ Public Class frmMain
         dlgView.ShowDialog()
     End Sub
 
-    Private Sub ClearRemoveToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgDeleteColumns.ShowDialog()
-    End Sub
-
     Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeSelect.Click
         dlgSelect.ShowDialog()
     End Sub
@@ -568,7 +563,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
-        'TODO decide what Open From Library does and edit below
+        dlgFromLibrary.ShowDialog()
     End Sub
 
     Private Sub mnuManageDataSubset_Click(sender As Object, e As EventArgs)
@@ -579,7 +574,7 @@ Public Class frmMain
         dlgSubset.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataName_Click(sender As Object, e As EventArgs) Handles mnuManageDataName.Click
+    Private Sub mnuManageDataRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataRename.Click
         dlgName.ShowDialog()
     End Sub
 
@@ -688,19 +683,14 @@ Public Class frmMain
         frmMetaData.BringToFront()
     End Sub
 
-    Private Sub mnuManageDataFrameViewColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameViewColumnMetadata.Click
+    Private Sub mnuManageSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageSheetColumnMetadata.Click
         frmVariables.Visible = True
         frmVariables.BringToFront()
     End Sub
 
-    Private Sub mnuManageDataFrameInsert_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameInsert.Click
+    Private Sub mnuManageSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuManageSheetInsertColumnsRows.Click
         dlgInsertColumn.ShowDialog()
     End Sub
-
-    Private Sub mnuManageDataFrameRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameRename.Click
-        dlgName.ShowDialog()
-    End Sub
-
     Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPie.Click
         dlgBarAndPieChart.ShowDialog()
     End Sub
@@ -709,8 +699,8 @@ Public Class frmMain
         dlgPermuteRows.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsBarPieChartSummaryData_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPieChartSummaryData.Click
-        dlgSummaryBarOrPieChart.ShowDialog()
+    Private Sub mnuGraphicsBarPieChartSummaryData_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariateCorrelation.Click
@@ -721,7 +711,7 @@ Public Class frmMain
         dlgDeleteSheet.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFrameDelete_Click(sender As Object, e As EventArgs) Handles mnuManageDataFrameDelete.Click
+    Private Sub mnuManageSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuManageSheetDeleteColumnsRows.Click
         dlgDeleteColumn.ShowDialog()
     End Sub
 
@@ -731,6 +721,99 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub mnuTbNew_Click(sender As Object, e As EventArgs) Handles mnuTbNew.Click
+        mnuFileNewDataFrame_Click(sender, e)
+    End Sub
+
+    Private Sub mnuTbOpen_Click(sender As Object, e As EventArgs) Handles mnuTbOpen.Click
+        mnuFileOpenFromFile_Click(sender, e)
+    End Sub
+
+    Private Sub mnuTbImport_Click(sender As Object, e As EventArgs) Handles mnuTbImport.Click
+        mnuFileOpenFromFile_Click(sender, e)
+    End Sub
+
+    Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.Click
+        mnuFileSave_Click(sender, e)
+    End Sub
+
+    Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
+        dlgSaveAs.ShowDialog()
+    End Sub
+
+    Private Sub mnuTbPrint_Click(sender As Object, e As EventArgs) Handles mnuTbPrint.Click
+        mnuFilePrint_Click(sender, e)
+    End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+        Help.ShowHelp(Me, strStaticPath & strHelpFilePath)
+    End Sub
+
+    Private Sub mnuTbHelp_Click(sender As Object, e As EventArgs) Handles mnuTbHelp.Click
+        mnuHelp_Click(sender, e)
+    End Sub
+    Private Sub mnuGraphicsBarPieChart_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPieChart.Click
+        dlgSummaryBarOrPieChart.ShowDialog()
+    End Sub
+
+    Private Sub mnuGraphicsScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsScatterPlot.Click
+        dlgScatterPlot.ShowDialog()
+    End Sub
+
+    Public Sub addToMenu(ByVal dialog As Form)
+        'Checks for existance, else add it to the beginning
+        If mnuItems.Contains(dialog) Then mnuItems.Remove(dialog)
+        'adds to the list
+        mnuItems.Add(dialog)
+        'checks that only 1o items are allowed
+        While mnuItems.Count > 10
+            mnuItems.RemoveAt(0)
+        End While
+        'updates the interface
+        UpdateItemsMenu()
+    End Sub
+
+    Private Sub UpdateItemsMenu()
+        'clears the menu items first
+        Dim clsItems As New List(Of ToolStripItem)
+        'creates a temp collection
+        'will be identified by tag
+        For Each clsMenu As ToolStripItem In mnuTbShowLast10.DropDownItems
+            If Not clsMenu.Tag Is Nothing Then
+                If (clsMenu.Tag.ToString().StartsWith("Last")) Then
+                    clsItems.Add(clsMenu)
+                End If
+            End If
+        Next
+        'go through the list and remove each from the menu
+        For Each clsMenu As ToolStripItem In clsItems
+            mnuTbShowLast10.DropDownItems.Remove(clsMenu)
+        Next
+        'displays items (_in reverse order)
+        For icounter As Integer = mnuItems.Count - 1 To 0 Step -1
+            Dim dialog As Form = mnuItems(icounter)
+            'creates new toolstripitem, displaying name of the dialog
+            Dim clsItem As New ToolStripMenuItem(dialog.Text)
+            'sets the tag
+            clsItem.Tag = "Last"
+            AddHandler clsItem.Click, AddressOf mnuFile_Click
+            'insert into the dropdownitems
+            mnuTbShowLast10.DropDownItems.Insert(mnuTbShowLast10.DropDownItems.Count - 1, clsItem)
+        Next
+        sepStart.Visible = True
+        sepEnd.Visible = True
+    End Sub
+
+    Private Sub mnuFile_Click(ByVal sender As Object, ByVal e As EventArgs)
+        For Each dfTemp As Form In mnuItems
+            If dfTemp.Text = sender.ToString Then
+                dfTemp.ShowDialog()
+                Exit Sub
+            End If
+        Next
+    End Sub
+
+    'To Unify this with the above show last 10 dialogs
     Private ReadOnly Property MRUPath() As String
         Get
             ' returns a path in the static folder, but with a '.mru' 
@@ -829,5 +912,4 @@ Public Class frmMain
     Private Sub frmMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         saveOnClose(e)
     End Sub
-
 End Class
