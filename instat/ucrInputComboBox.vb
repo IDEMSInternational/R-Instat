@@ -37,6 +37,7 @@
     Public Overrides Sub SetName(strName As String)
         If IsValid(strName) Then
             cboInput.Text = strName
+            OnNameChanged()
         Else
             MsgBox(strName & "is not a valid for this combobox", vbOKOnly)
         End If
