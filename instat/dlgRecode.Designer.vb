@@ -32,7 +32,7 @@ Partial Class dlgRecode
         Me.ucrMultipleNumericRecode = New instat.ucrMultipleInput()
         Me.ucrSelectorNewColumnName = New instat.ucrNewColumnName()
         Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
-        Me.ucrSelectorDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpClosedOn.SuspendLayout()
         Me.SuspendLayout()
@@ -131,12 +131,12 @@ Partial Class dlgRecode
         Me.ucrReceiverRecode.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverRecode.TabIndex = 19
         '
-        'ucrSelectorDataFrameAddRemove
+        'ucrSelectorForRecode
         '
-        Me.ucrSelectorDataFrameAddRemove.Location = New System.Drawing.Point(12, 12)
-        Me.ucrSelectorDataFrameAddRemove.Name = "ucrSelectorDataFrameAddRemove"
-        Me.ucrSelectorDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorDataFrameAddRemove.TabIndex = 18
+        Me.ucrSelectorForRecode.Location = New System.Drawing.Point(12, 12)
+        Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
+        Me.ucrSelectorForRecode.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorForRecode.TabIndex = 18
         '
         'ucrBase
         '
@@ -156,7 +156,7 @@ Partial Class dlgRecode
         Me.Controls.Add(Me.grpClosedOn)
         Me.Controls.Add(Me.lblBreakPoints)
         Me.Controls.Add(Me.ucrReceiverRecode)
-        Me.Controls.Add(Me.ucrSelectorDataFrameAddRemove)
+        Me.Controls.Add(Me.ucrSelectorForRecode)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.chkAddLabels)
         Me.Controls.Add(Me.ucrBase)
@@ -174,7 +174,7 @@ Partial Class dlgRecode
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents chkAddLabels As CheckBox
     Friend WithEvents lblSelectedVariables As Label
-    Friend WithEvents ucrSelectorDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorForRecode As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRecode As ucrReceiverSingle
     Friend WithEvents lblBreakPoints As Label
     Friend WithEvents grpClosedOn As GroupBox
