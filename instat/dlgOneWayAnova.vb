@@ -34,6 +34,7 @@ Public Class dlgOneWayANOVA
         ucrBase.clsRsyntax.iCallType = 2
         ucrYVariate.Selector = ucrAddRemoveDataFrame
         ucrFactor.Selector = ucrAddRemoveDataFrame
+        ucrFactor.SetDataType("factor")
         clsModel.SetOperation("~")
 
         autoTranslate(Me)
