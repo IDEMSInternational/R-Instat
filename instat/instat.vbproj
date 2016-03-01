@@ -190,6 +190,12 @@
     <Compile Include="dlgCalculator.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCanonicalCorrelationAnalysis.Designer.vb">
+      <DependentUpon>dlgCanonicalCorrelationAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCanonicalCorrelationAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgChangeFormatDayMonth.designer.vb">
       <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
     </Compile>
@@ -232,6 +238,12 @@
     <Compile Include="dlgCopySheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCummulativeDistribution.Designer.vb">
+      <DependentUpon>dlgCummulativeDistribution.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCummulativeDistribution.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDeleteColumn.Designer.vb">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </Compile>
@@ -268,6 +280,12 @@
     <Compile Include="dlgPermuteRows.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPrincipalComponentAnalysis.Designer.vb">
+      <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPrincipalComponentAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgPrintPreviewOptions.Designer.vb">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </Compile>
@@ -296,6 +314,18 @@
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgSummaryBarOrPieChart.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgCanonicalCorrelation.Designer.vb">
+      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCanonicalCorrelation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgPrincipalComponentAnalysis.Designer.vb">
+      <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPrincipalComponentAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
@@ -1337,6 +1367,15 @@
     <EmbeddedResource Include="dlgCalculator.sw-KE.resx">
       <DependentUpon>dlgCalculator.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCanonicalCorrelationAnalysis.fr-FR.resx">
+      <DependentUpon>dlgCanonicalCorrelationAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCanonicalCorrelationAnalysis.resx">
+      <DependentUpon>dlgCanonicalCorrelationAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCanonicalCorrelationAnalysis.sw-KE.resx">
+      <DependentUpon>dlgCanonicalCorrelationAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgChangeFormatDayMonth.fr-FR.resx">
       <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
     </EmbeddedResource>
@@ -1391,6 +1430,15 @@
     <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCummulativeDistribution.fr-FR.resx">
+      <DependentUpon>dlgCummulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCummulativeDistribution.resx">
+      <DependentUpon>dlgCummulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCummulativeDistribution.sw-KE.resx">
+      <DependentUpon>dlgCummulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteColumn.fr-FR.resx">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </EmbeddedResource>
@@ -1444,6 +1492,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPermuteRows.sw-KE.resx">
       <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPrincipalComponentAnalysis.fr-FR.resx">
+      <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPrincipalComponentAnalysis.resx">
+      <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPrincipalComponentAnalysis.sw-KE.resx">
+      <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrintPreviewOptions.fr-FR.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
@@ -1508,6 +1565,15 @@
     <EmbeddedResource Include="sdgBoxPlot.sw-KE.resx">
       <DependentUpon>sdgBoxPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgCanonicalCorrelation.fr-FR.resx">
+      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCanonicalCorrelation.resx">
+      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCanonicalCorrelation.sw-KE.resx">
+      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.fr-FR.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -1543,6 +1609,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOptions.sw-KE.resx">
       <DependentUpon>sdgOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPrincipalComponentAnalysis.fr-FR.resx">
+      <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPrincipalComponentAnalysis.resx">
+      <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPrincipalComponentAnalysis.sw-KE.resx">
+      <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgRestrict.fr-FR.resx">
       <DependentUpon>sdgRestrict.vb</DependentUpon>
