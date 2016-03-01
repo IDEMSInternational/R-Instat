@@ -20,6 +20,9 @@ Public Class dlgRecode
     Public bFirstLoad As Boolean = True
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        ucrReceiverRecode.Selector = ucrSelectorForRecode
+        ucrReceiverRecode.SetMeAsReceiver()
+        ucrMultipleNumericRecode.bIsNumericInput = True
         ucrBase.iHelpTopicID = 37
         ucrBase.clsRsyntax.SetFunction("cut")
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
@@ -38,15 +41,9 @@ Public Class dlgRecode
     End Sub
 
     Private Sub SetDefaults()
-        ucrReceiverRecode.Selector = ucrSelectorForRecode
-        ucrReceiverRecode.SetMeAsReceiver()
-
-        ucrMultipleNumericRecode.bIsNumericInput = True
         chkAddLabels.Checked = False
         ucrMultipleLabels.Visible = False
         rdoRight.Checked = True
-
-        ucrReceiverRecode.ResetText()
     End Sub
 
     Private Sub ReopenDialog()
