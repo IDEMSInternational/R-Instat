@@ -60,22 +60,23 @@ Public Class ucrSelector
         End If
     End Sub
 
-    Public Sub AddVariable(strDataFrameName As String, strVariableName As String)
-        Dim lviTemp As New ListViewItem
-        lstAvailableVariable.SelectedItems.Clear()
-        lstAvailableVariable.FullRowSelect = True
-        lstAvailableVariable.HideSelection = False
-        CurrentReceiver.Clear()
-        For Each lviTemp In lstAvailableVariable.Items
-            If lviTemp.Name = strVariableName Then
-                If lviTemp.Group.Name = strDataFrameName Then
-                    lviTemp.Selected = True
-                    lstAvailableVariable.Select()
-                End If
-            End If
-        Next
-        Add()
-    End Sub
+    'TODO can this be removed?
+    'Public Sub AddVariable(strDataFrameName As String, strVariableName As String)
+    '    Dim lviTemp As New ListViewItem
+    '    lstAvailableVariable.SelectedItems.Clear()
+    '    lstAvailableVariable.FullRowSelect = True
+    '    lstAvailableVariable.HideSelection = False
+    '    CurrentReceiver.Clear()
+    '    For Each lviTemp In lstAvailableVariable.Items
+    '        If lviTemp.Name = strVariableName Then
+    '            If lviTemp.Group.Name = strDataFrameName Then
+    '                lviTemp.Selected = True
+    '                lstAvailableVariable.Select()
+    '            End If
+    '        End If
+    '    Next
+    '    Add()
+    'End Sub
     Public Sub ShowOptionsDialog()
         'code for dislaying dialog goes here
         sdgRestrict.ShowDialog()
@@ -92,5 +93,24 @@ Public Class ucrSelector
 
     Private Sub ucrSelector_ResetAll() Handles Me.ResetAll
         Reset()
+    End Sub
+
+    Private Sub AddSelectedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddSelectedToolStripMenuItem.Click
+        Add()
+    End Sub
+
+    Private Sub ClearSelectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearSelectionToolStripMenuItem.Click
+        lstAvailableVariable.SelectedItems.Clear()
+    End Sub
+
+    Private Sub SelectAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectAllToolStripMenuItem.Click
+        Dim lviTemp As ListViewItem
+
+        lstAvailableVariable.BeginUpdate()
+        For Each lviTemp In lstAvailableVariable.Items
+            lviTemp.Selected = True
+        Next
+        lstAvailableVariable.EndUpdate()
+
     End Sub
 End Class
