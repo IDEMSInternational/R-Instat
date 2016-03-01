@@ -14,16 +14,13 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class dlgDeleteSheet
-    Private Sub dlgDeleteSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ucrBase.iHelpTopicID = 63
-        'set the function
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
-        ucrDataFrameToDelete.Focus()
-        autoTranslate(Me)
-    End Sub
+Public Class sdgBoxPlot
+    Public clsBoxplotFunction As RFunction
 
-    Private Sub ucrDataFrameToDelete_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameToDelete.Leave
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameToDelete.cboAvailableDataFrames.SelectedItem & Chr(34))
+    Public Sub SetBarChartFunction(clsBoxPlotFunc As RFunction)
+        clsBoxplotFunction = clsBoxPlotFunc
+    End Sub
+    Private Sub sdgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
     End Sub
 End Class
