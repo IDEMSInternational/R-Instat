@@ -274,7 +274,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricOneWayAnova.Click
-        'dlgOneWayAnova.ShowDialog()
+        dlgNon_ParametricOneWayANOVA.ShowDialog()
     End Sub
 
     Private Sub mnuStatsSummaryColumnStat_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSummaryColumnStat.Click
