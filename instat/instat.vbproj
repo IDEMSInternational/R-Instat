@@ -262,6 +262,12 @@
     <Compile Include="dlgFromLibrary.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgHideShowColumns.Designer.vb">
+      <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgHideShowColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgInsertColumn.Designer.vb">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
     </Compile>
@@ -1501,6 +1507,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideShowColumns.fr-FR.resx">
+      <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideShowColumns.resx">
+      <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideShowColumns.sw-KE.resx">
+      <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.fr-FR.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
