@@ -304,6 +304,12 @@
     <Compile Include="dlgProtect.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRandomSubset.Designer.vb">
+      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRandomSubset.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgReferenceLevels.Designer.vb">
       <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
     </Compile>
@@ -1570,6 +1576,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgProtect.sw-KE.resx">
       <DependentUpon>dlgProtect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubset.fr-FR.resx">
+      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubset.resx">
+      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubset.sw-KE.resx">
+      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReferenceLevels.fr-FR.resx">
       <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
