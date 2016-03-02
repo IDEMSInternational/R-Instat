@@ -352,6 +352,12 @@
     <Compile Include="dlgSummaryBarOrPieChart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTwoSampleNonparametricTest.Designer.vb">
+      <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTwoSampleNonparametricTest.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgUnusedLevels.Designer.vb">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
     </Compile>
@@ -1648,6 +1654,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoSampleNonparametricTest.fr-FR.resx">
+      <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoSampleNonparametricTest.resx">
+      <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoSampleNonparametricTest.sw-KE.resx">
+      <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
