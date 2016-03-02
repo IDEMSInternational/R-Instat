@@ -23,6 +23,7 @@ Partial Class dlgPrintPreviewOptions
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.pnlEditor = New System.Windows.Forms.Panel()
+        Me.chkGridLines = New System.Windows.Forms.CheckBox()
         Me.cmdPrtSheet = New System.Windows.Forms.Button()
         Me.cmdPrevSheet = New System.Windows.Forms.Button()
         Me.pnlLog = New System.Windows.Forms.Panel()
@@ -42,17 +43,30 @@ Partial Class dlgPrintPreviewOptions
         Me.pnlEditor.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlEditor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlEditor.Controls.Add(Me.chkGridLines)
         Me.pnlEditor.Controls.Add(Me.cmdPrtSheet)
         Me.pnlEditor.Controls.Add(Me.cmdPrevSheet)
         Me.pnlEditor.Location = New System.Drawing.Point(2, 4)
         Me.pnlEditor.Name = "pnlEditor"
-        Me.pnlEditor.Size = New System.Drawing.Size(160, 92)
+        Me.pnlEditor.Size = New System.Drawing.Size(160, 128)
         Me.pnlEditor.TabIndex = 0
+        '
+        'chkGridLines
+        '
+        Me.chkGridLines.AutoSize = True
+        Me.chkGridLines.Checked = True
+        Me.chkGridLines.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkGridLines.Location = New System.Drawing.Point(8, 57)
+        Me.chkGridLines.Name = "chkGridLines"
+        Me.chkGridLines.Size = New System.Drawing.Size(97, 17)
+        Me.chkGridLines.TabIndex = 2
+        Me.chkGridLines.Text = "Show grid lines"
+        Me.chkGridLines.UseVisualStyleBackColor = True
         '
         'cmdPrtSheet
         '
         Me.cmdPrtSheet.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.cmdPrtSheet.Location = New System.Drawing.Point(0, 44)
+        Me.cmdPrtSheet.Location = New System.Drawing.Point(0, 80)
         Me.cmdPrtSheet.Name = "cmdPrtSheet"
         Me.cmdPrtSheet.Size = New System.Drawing.Size(156, 44)
         Me.cmdPrtSheet.TabIndex = 1
@@ -159,6 +173,7 @@ Partial Class dlgPrintPreviewOptions
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Print and Preview Options"
         Me.pnlEditor.ResumeLayout(False)
+        Me.pnlEditor.PerformLayout()
         Me.pnlLog.ResumeLayout(False)
         Me.pnlOutput.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -175,4 +190,5 @@ Partial Class dlgPrintPreviewOptions
     Friend WithEvents cmdPrtOutput As Button
     Friend WithEvents cmdPrevOutput As Button
     Friend WithEvents cmdExitPreview As Button
+    Friend WithEvents chkGridLines As CheckBox
 End Class
