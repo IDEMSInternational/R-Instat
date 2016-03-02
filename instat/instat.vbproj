@@ -328,6 +328,12 @@
     <Compile Include="dlgSummaryBarOrPieChart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgUnusedLevels.Designer.vb">
+      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgUnusedLevels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgCanonicalCorrelation.Designer.vb">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </Compile>
@@ -1582,6 +1588,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
+      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUnusedLevels.resx">
+      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUnusedLevels.sw-KE.resx">
+      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
