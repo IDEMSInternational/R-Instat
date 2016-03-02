@@ -292,6 +292,12 @@
     <Compile Include="dlgPrintPreviewOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgProtect.Designer.vb">
+      <DependentUpon>dlgProtect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgProtect.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgReferenceLevels.Designer.vb">
       <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
     </Compile>
@@ -1540,6 +1546,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrintPreviewOptions.sw-KE.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgProtect.fr-FR.resx">
+      <DependentUpon>dlgProtect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgProtect.resx">
+      <DependentUpon>dlgProtect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgProtect.sw-KE.resx">
+      <DependentUpon>dlgProtect.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReferenceLevels.fr-FR.resx">
       <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
