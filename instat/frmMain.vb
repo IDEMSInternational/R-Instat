@@ -857,4 +857,12 @@ Public Class frmMain
     Private Sub mnuManageFactorconvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuManageFactorconvertToFactor.Click
         dlgConvertColumnsToFactors.ShowDialog()
     End Sub
+
+    Private Sub mnuSimpleModels_Click(sender As Object, e As EventArgs) Handles mnuSimpleModels.Click
+
+    End Sub
+
+    Private Sub mnuStatisticsNonParametricTwoSamples_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoSamples.Click
+
+    End Sub
 End Class
