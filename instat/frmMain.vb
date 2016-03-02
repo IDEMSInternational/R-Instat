@@ -80,8 +80,8 @@ Public Class frmMain
         autoTranslate(Me)
     End Sub
 
-    Private Sub ProbabilityPlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsCummulativeDistribution.Click
-        dlgProbabilityPlot.ShowDialog()
+    Private Sub mnuGraphicsCummulativeDistribution_Click(sender As Object, e As EventArgs) Handles mnuGraphicsCummulativeDistribution.Click
+        dlgCumulativeDistribution.ShowDialog()
     End Sub
 
     Private Sub FrenchToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -858,11 +858,27 @@ Public Class frmMain
         dlgConvertColumnsToFactors.ShowDialog()
     End Sub
 
-    Private Sub mnuSimpleModels_Click(sender As Object, e As EventArgs) Handles mnuSimpleModels.Click
-
+    Private Sub mnuManageFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorReorderLevels.Click
+        dlgReorderLevels.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsNonParametricTwoSamples_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoSamples.Click
+    Private Sub mnuManageFactorUnusedLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorUnusedLevels.Click
+        dlgUnusedLevels.ShowDialog()
+    End Sub
 
+    Private Sub mnuManageSheetRestrict_Click(sender As Object, e As EventArgs) Handles mnuManageSheetRestrict.Click
+        dlgRestrict.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageSheetProtect_Click(sender As Object, e As EventArgs) Handles mnuManageSheetProtect.Click
+        dlgProtect.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageSheetHideShowColumns_Click(sender As Object, e As EventArgs) Handles mnuManageSheetHideShowColumns.Click
+        dlgHideShowColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageReshapeRandomSubst_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeRandomSubst.Click
+        dlgRandomSubset.ShowDialog()
     End Sub
 End Class
