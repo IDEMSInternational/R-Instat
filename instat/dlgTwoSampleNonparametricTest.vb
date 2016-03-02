@@ -27,7 +27,8 @@ Public Class dlgTwoSampleNonparametricTest
         End If
     End Sub
     Private Sub SetDefaults()
-
+        ucrTwoSampleSelector.Reset()
+        rdoDataColandFactorCol.Focus()
     End Sub
     Private Sub TestOkEnabled()
 
