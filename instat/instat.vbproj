@@ -292,6 +292,12 @@
     <Compile Include="dlgPrintPreviewOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReferenceLevels.Designer.vb">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReferenceLevels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRenameSheet.Designer.vb">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </Compile>
@@ -1522,6 +1528,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrintPreviewOptions.sw-KE.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevels.fr-FR.resx">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevels.resx">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevels.sw-KE.resx">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameSheet.fr-FR.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
