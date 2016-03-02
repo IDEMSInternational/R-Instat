@@ -256,4 +256,9 @@ Public Class dlgImportDataset
         GetFileFromOpenDialog()
     End Sub
 
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        ' add the item to the MRU (Most Recently Used) list...
+        frmMain.addToMenu(txtFilePath.Text)
+    End Sub
+
 End Class

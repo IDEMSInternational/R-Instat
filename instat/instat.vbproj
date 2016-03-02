@@ -3387,7 +3387,9 @@
     <XliffResource Include="MultilingualResources\instat.fr-FR.xlf" />
     <XliffResource Include="MultilingualResources\instat.sw-KE.xlf" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="static\Recent_Files\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />
   <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">
