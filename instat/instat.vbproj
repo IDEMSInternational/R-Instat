@@ -238,6 +238,12 @@
     <Compile Include="dlgCopySheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCumulativeDistribution.Designer.vb">
+      <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCumulativeDistribution.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDeleteColumn.Designer.vb">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </Compile>
@@ -254,6 +260,12 @@
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgFromLibrary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgHideShowColumns.Designer.vb">
+      <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgHideShowColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgInsertColumn.Designer.vb">
@@ -286,16 +298,46 @@
     <Compile Include="dlgPrintPreviewOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgProtect.Designer.vb">
+      <DependentUpon>dlgProtect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgProtect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRandomSubset.Designer.vb">
+      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRandomSubset.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgReferenceLevels.Designer.vb">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReferenceLevels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRenameSheet.Designer.vb">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRenameSheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReorderLevels.Designer.vb">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReorderLevels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgReorderSheet.Designer.vb">
       <DependentUpon>dlgReorderSheet.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgReorderSheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRestrict.Designer.vb">
+      <DependentUpon>dlgRestrict.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRestrict.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgScatterPlot.Designer.vb">
@@ -308,6 +350,12 @@
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgSummaryBarOrPieChart.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgUnusedLevels.Designer.vb">
+      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgUnusedLevels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgCanonicalCorrelation.Designer.vb">
@@ -1206,6 +1254,12 @@
     <Compile Include="ucrInput.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrInputConfidenceLimit.Designer.vb">
+      <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrInputConfidenceLimit.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrInputTextBox.Designer.vb">
       <DependentUpon>ucrInputTextBox.vb</DependentUpon>
     </Compile>
@@ -1424,6 +1478,15 @@
     <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCumulativeDistribution.fr-FR.resx">
+      <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCumulativeDistribution.resx">
+      <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCumulativeDistribution.sw-KE.resx">
+      <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteColumn.fr-FR.resx">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </EmbeddedResource>
@@ -1450,6 +1513,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideShowColumns.fr-FR.resx">
+      <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideShowColumns.resx">
+      <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideShowColumns.sw-KE.resx">
+      <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.fr-FR.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
@@ -1496,6 +1568,33 @@
     <EmbeddedResource Include="dlgPrintPreviewOptions.sw-KE.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgProtect.fr-FR.resx">
+      <DependentUpon>dlgProtect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgProtect.resx">
+      <DependentUpon>dlgProtect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgProtect.sw-KE.resx">
+      <DependentUpon>dlgProtect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubset.fr-FR.resx">
+      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubset.resx">
+      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubset.sw-KE.resx">
+      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevels.fr-FR.resx">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevels.resx">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevels.sw-KE.resx">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameSheet.fr-FR.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </EmbeddedResource>
@@ -1505,6 +1604,15 @@
     <EmbeddedResource Include="dlgRenameSheet.sw-KE.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderLevels.fr-FR.resx">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderLevels.resx">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderLevels.sw-KE.resx">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderSheet.fr-FR.resx">
       <DependentUpon>dlgReorderSheet.vb</DependentUpon>
     </EmbeddedResource>
@@ -1513,6 +1621,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderSheet.sw-KE.resx">
       <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRestrict.fr-FR.resx">
+      <DependentUpon>dlgRestrict.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRestrict.resx">
+      <DependentUpon>dlgRestrict.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRestrict.sw-KE.resx">
+      <DependentUpon>dlgRestrict.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.fr-FR.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
@@ -1531,6 +1648,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
+      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUnusedLevels.resx">
+      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUnusedLevels.sw-KE.resx">
+      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
@@ -2807,6 +2933,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInputComboBox.sw-KE.resx">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputConfidenceLimit.fr-FR.resx">
+      <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputConfidenceLimit.resx">
+      <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputConfidenceLimit.sw-KE.resx">
+      <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInputTextBox.fr-FR.resx">
       <DependentUpon>ucrInputTextBox.vb</DependentUpon>

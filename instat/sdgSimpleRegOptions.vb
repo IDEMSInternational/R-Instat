@@ -18,9 +18,8 @@ Public Class sdgSimpleRegOptions
     Public clsRModelFunction As RFunction
     Public clsRGraphics, clsRFittedModelGraphics, clsRFittedModelGraphics2 As New RSyntax
     Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsRFourPlotsFunction, clsRgeom_point As New RFunction
-    Public clsRggplotFunction, clsRaesFunction, clsRStat_smooth As New RFunction
+    Public clsRggplotFunction, clsRaesFunction, clsRStat_smooth, clsRModelsFunction As New RFunction
     Public bFirstLoad As Boolean = True
-    'Public clsRStat_smooth As New RFunction
 
     Private Sub sdgSimpleRegOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -36,29 +35,20 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Private Sub AnovaTable()
-        clsRaovFunction.SetRCommand("aov")
-        clsRaovFunction.AddParameter("", clsRFunctionParameter:=clsRModelFunction)
+        'p-values should be false here
+        clsRaovFunction.SetRCommand("anova")
+        clsRaovFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
         frmMain.clsRLink.RunScript(clsRaovFunction.ToScript(), 2)
     End Sub
 
     Private Sub AnovaTablePvalues()
-        clsRaovpvalFunction.SetRCommand("summary")
-        clsRaovpvalFunction.AddParameter("", clsRFunctionParameter:=clsRaovFunction)
+        clsRaovpvalFunction.SetRCommand("anova")
+        clsRaovpvalFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
         frmMain.clsRLink.RunScript(clsRaovpvalFunction.ToScript(), 2)
     End Sub
 
-    'Private Sub AnovaTablePvalues()
-    '    clsRaovpvalFunction.SetRCommand("summary")
-    '    clsRaovpvalFunction.AddParameter("", clsRFunctionParameter:=clsRaovFunction)
-
-    '    clsRaovpval2Function.SetRCommand("HTML")
-    '    clsRaovpval2Function.AddParameter("x", clsRFunctionParameter:=clsRaovpvalFunction)
-    '    clsRaovpval2Function.AddParameter("nsmall", "c(3,1)")
-    '    clsRaovpval2Function.AddParameter("file", Chr(34) & Chr(34))
-    '    frmMain.clsRLink.RunScript(clsRaovpval2Function.ToScript(), 1)
-    'End Sub
-
     Private Sub Estimates()
+        'p-values should be false here
         frmMain.clsRLink.RunScript(dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction.ToScript(), 2)
     End Sub
 
@@ -69,10 +59,9 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Private Sub Model()
-        'I am not sure what should be output when model is checked.
-        'There is an option lm$model which outputs the input variables which I think is not correct
-        'For now it has the lm just like Estimates()
-        frmMain.clsRLink.RunScript(dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction.ToScript(), 2)
+        clsRModelsFunction.SetRCommand("formula")
+        clsRModelsFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+        frmMain.clsRLink.RunScript(clsRModelsFunction.ToScript(), 2)
     End Sub
 
     Private Sub FourPlots()
@@ -100,12 +89,9 @@ Public Class sdgSimpleRegOptions
         clsRFittedModelGraphics.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         clsRFittedModelGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
 
-        'Public clsRStat_smooth As New RFunction
-
         clsRStat_smooth.SetRCommand("stat_smooth")
-        clsRStat_smooth.AddParameter("method", "lm")
-        StandardError()
-        clsRStat_smooth.AddParameter("level", nudConvidenceLevel.Value)
+        clsRStat_smooth.AddParameter("method", Chr(34) & "lm" & Chr(34))
+        ConfidenceSE()
         clsRFittedModelGraphics.AddOperatorParameter("", clsRFunc:=clsRStat_smooth)
 
         'need to factor in prediction interval
@@ -114,16 +100,16 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Public Sub SetDefaults()
-        chkAnovaTable.Checked = False
-        chkAnovaPvalues.Checked = False
-        chkAnovaPvalues.Enabled = False
-        chkEstimatesPvalues.Checked = False
-        chkEstimatesPvalues.Enabled = False
+        chkANOVA.Checked = True
+        chkModel.Checked = True
+        chkEstimates.Checked = True
+        chkAnovaPvalues.Checked = True
+        chkAnovaPvalues.Enabled = True
+        chkEstimatesPvalues.Checked = True
+        chkEstimatesPvalues.Enabled = True
         chkPredictionInterval.Enabled = False
-        chkConfidenceInterval.Checked = False
-        chkStandardError.Checked = False
-        chkStandardError.Enabled = False
-        chkConfidenceInterval.Enabled = False
+        chkConfidenceLimits.Checked = False
+        chkConfidenceLimits.Enabled = False
         lblConfidenceLevel.Enabled = False
         nudConvidenceLevel.Enabled = False
         chkPredictionInterval.Enabled = False
@@ -133,54 +119,34 @@ Public Class sdgSimpleRegOptions
         chkAdditionalVariable.Checked = False
     End Sub
 
-    Private Sub chkAnovaTable_CheckedChanged(sender As Object, e As EventArgs) Handles chkAnovaTable.CheckedChanged
-        If (chkAnovaTable.Checked) Then
+    Private Sub chkAnovaTable_CheckedChanged(sender As Object, e As EventArgs) Handles chkANOVA.CheckedChanged
+        If (chkANOVA.Checked) Then
             chkAnovaPvalues.Enabled = True
-            chkEstimates.Checked = False 'should we run one command at a time?
-            chkModel.Checked = False
         Else
+            chkAnovaPvalues.Checked = False
             chkAnovaPvalues.Enabled = False
         End If
 
     End Sub
 
-    Private Sub StandardError()
-        If (chkStandardError.Checked = True) Then
-            clsRStat_smooth.AddParameter("se", "TRUE")
-        ElseIf (chkStandardError.Checked = False) Then
-            clsRStat_smooth.AddParameter("se", "FALSE")
-        Else
-            clsRStat_smooth.RemoveParameterByName("se")
-        End If
-    End Sub
-
     Private Sub chkEstimates_CheckedChanged(sender As Object, e As EventArgs) Handles chkEstimates.CheckedChanged
         If (chkEstimates.Checked) Then
             chkEstimatesPvalues.Enabled = True
-            chkAnovaTable.Checked = False
-            chkModel.Checked = False
         Else
+            chkEstimatesPvalues.Checked = False
             chkEstimatesPvalues.Enabled = False
         End If
     End Sub
 
-    Private Sub chkModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkModel.CheckedChanged
-        If (chkModel.Checked) Then
-            chkAnovaTable.Checked = False
-            chkEstimates.Checked = False
-        End If
-    End Sub
-
     Private Sub chkFittedModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkFittedModel.CheckedChanged
-        'chkConfidenceInterval.Checked = True
         If (chkFittedModel.Checked) Then
             chkPredictionInterval.Enabled = True
-            chkConfidenceInterval.Enabled = True
-            chkConfidenceInterval.Checked = True
+            chkConfidenceLimits.Enabled = True
+            chkConfidenceLimits.Checked = True
         Else
             chkPredictionInterval.Enabled = False
-            chkConfidenceInterval.Checked = False
-            chkConfidenceInterval.Enabled = False
+            chkConfidenceLimits.Checked = False
+            chkConfidenceLimits.Enabled = False
         End If
     End Sub
 
@@ -188,25 +154,34 @@ Public Class sdgSimpleRegOptions
         chkFourinOne.Checked = False
     End Sub
 
-    Private Sub chkConfidenceInterval_CheckedChanged(sender As Object, e As EventArgs) Handles chkConfidenceInterval.CheckedChanged
-        If (chkConfidenceInterval.Checked) Then
+    Private Sub chkConfidenceLimits_CheckedChanged(sender As Object, e As EventArgs) Handles chkConfidenceLimits.CheckedChanged
+        If (chkConfidenceLimits.Checked) Then
             lblConfidenceLevel.Enabled = True
             nudConvidenceLevel.Enabled = True
             chkPredictionInterval.Checked = False
-            chkStandardError.Enabled = True
-            chkStandardError.Checked = True
 
         Else
             lblConfidenceLevel.Enabled = False
             nudConvidenceLevel.Enabled = False
-            chkStandardError.Checked = False
-            chkStandardError.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ConfidenceSE()
+        If (chkConfidenceLimits.Checked = True) Then
+            clsRStat_smooth.AddParameter("se", "TRUE")
+            clsRStat_smooth.AddParameter("level", nudConvidenceLevel.Value)
+        ElseIf (chkConfidenceLimits.Checked = False) Then
+            clsRStat_smooth.AddParameter("se", "FALSE")
+            clsRStat_smooth.RemoveParameterByName("level")
+        Else
+            clsRStat_smooth.RemoveParameterByName("se")
+            clsRStat_smooth.RemoveParameterByName("level")
         End If
     End Sub
 
     Private Sub chkPredictionInterval_CheckedChanged(sender As Object, e As EventArgs) Handles chkPredictionInterval.CheckedChanged
         If (chkPredictionInterval.Checked) Then
-            chkConfidenceInterval.Checked = False
+            chkConfidenceLimits.Checked = False
         End If
     End Sub
 
@@ -215,7 +190,7 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Public Sub RegOptions()
-        If (chkAnovaTable.Checked) Then
+        If (chkANOVA.Checked) Then
             If (chkAnovaPvalues.Checked) Then
                 AnovaTablePvalues()
             Else
