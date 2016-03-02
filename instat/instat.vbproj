@@ -1655,7 +1655,13 @@
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoSampleNonparametricTest.fr-FR.resx">
+      <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoSampleNonparametricTest.resx">
+      <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoSampleNonparametricTest.sw-KE.resx">
       <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
