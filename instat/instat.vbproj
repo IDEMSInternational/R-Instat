@@ -1206,6 +1206,12 @@
     <Compile Include="ucrInput.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrInputConfidenceLimit.Designer.vb">
+      <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrInputConfidenceLimit.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrInputTextBox.Designer.vb">
       <DependentUpon>ucrInputTextBox.vb</DependentUpon>
     </Compile>
@@ -2807,6 +2813,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInputComboBox.sw-KE.resx">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputConfidenceLimit.fr-FR.resx">
+      <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputConfidenceLimit.resx">
+      <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputConfidenceLimit.sw-KE.resx">
+      <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInputTextBox.fr-FR.resx">
       <DependentUpon>ucrInputTextBox.vb</DependentUpon>
