@@ -129,4 +129,8 @@ Public Class dlgSummaryBarOrPieChart
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
+
+    Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
+        sdgBarChart.ShowDialog()
+    End Sub
 End Class
