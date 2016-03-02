@@ -298,6 +298,12 @@
     <Compile Include="dlgRenameSheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReorderLevels.Designer.vb">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReorderLevels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgReorderSheet.Designer.vb">
       <DependentUpon>dlgReorderSheet.vb</DependentUpon>
     </Compile>
@@ -1525,6 +1531,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameSheet.sw-KE.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderLevels.fr-FR.resx">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderLevels.resx">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderLevels.sw-KE.resx">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderSheet.fr-FR.resx">
       <DependentUpon>dlgReorderSheet.vb</DependentUpon>
