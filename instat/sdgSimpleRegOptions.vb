@@ -35,6 +35,7 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Private Sub AnovaTable()
+        'p-values should be false here
         clsRaovFunction.SetRCommand("anova")
         clsRaovFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
         frmMain.clsRLink.RunScript(clsRaovFunction.ToScript(), 2)
@@ -47,6 +48,7 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Private Sub Estimates()
+        'p-values should be false here
         frmMain.clsRLink.RunScript(dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction.ToScript(), 2)
     End Sub
 
@@ -89,8 +91,7 @@ Public Class sdgSimpleRegOptions
 
         clsRStat_smooth.SetRCommand("stat_smooth")
         clsRStat_smooth.AddParameter("method", Chr(34) & "lm" & Chr(34))
-        clsRStat_smooth.AddParameter("se", "TRUE")
-        clsRStat_smooth.AddParameter("level", nudConvidenceLevel.Value)
+        ConfidenceSE()
         clsRFittedModelGraphics.AddOperatorParameter("", clsRFunc:=clsRStat_smooth)
 
         'need to factor in prediction interval
@@ -153,7 +154,7 @@ Public Class sdgSimpleRegOptions
         chkFourinOne.Checked = False
     End Sub
 
-    Private Sub chkConfidenceInterval_CheckedChanged(sender As Object, e As EventArgs) Handles chkConfidenceLimits.CheckedChanged
+    Private Sub chkConfidenceLimits_CheckedChanged(sender As Object, e As EventArgs) Handles chkConfidenceLimits.CheckedChanged
         If (chkConfidenceLimits.Checked) Then
             lblConfidenceLevel.Enabled = True
             nudConvidenceLevel.Enabled = True
@@ -162,6 +163,19 @@ Public Class sdgSimpleRegOptions
         Else
             lblConfidenceLevel.Enabled = False
             nudConvidenceLevel.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ConfidenceSE()
+        If (chkConfidenceLimits.Checked = True) Then
+            clsRStat_smooth.AddParameter("se", "TRUE")
+            clsRStat_smooth.AddParameter("level", nudConvidenceLevel.Value)
+        ElseIf (chkConfidenceLimits.Checked = False) Then
+            clsRStat_smooth.AddParameter("se", "FALSE")
+            clsRStat_smooth.RemoveParameterByName("level")
+        Else
+            clsRStat_smooth.RemoveParameterByName("se")
+            clsRStat_smooth.RemoveParameterByName("level")
         End If
     End Sub
 
