@@ -111,13 +111,22 @@ Public Class RLink
 
     End Sub
 
-    Public Function GetDefaultColumnNames(strPrefix As String)
+    Public Function GetDefaultColumnNames(strPrefix As String) As GenericVector
         Dim lstNextDefaults As GenericVector = Nothing
 
         If bInstatObjectExists Then
             lstNextDefaults = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_column_name(prefix = " & Chr(34) & strPrefix & Chr(34) & ")").AsList
         End If
         Return lstNextDefaults
+    End Function
+
+    Public Function GetDefaultColumnNames(strPrefix As String, strDataFrameName As String) As String
+        Dim strNextDefault As String = ""
+
+        If bInstatObjectExists Then
+            strNextDefault = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_column_name(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", prefix = " & Chr(34) & strPrefix & Chr(34) & ")").AsCharacter(0)
+        End If
+        Return strNextDefault
     End Function
 
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "")
