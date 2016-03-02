@@ -45,20 +45,12 @@ Public Class dlgSummaryBarOrPieChart
         End If
     End Sub
     Private Sub TestOkEnabled()
-        If rdoBarChart.Checked = True Then
-            If Not ucrYReceiver.IsEmpty And Not ucrFactorReceiver.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        ElseIf rdoBarChart.Checked = True Then
-            If Not ucrYReceiver.IsEmpty And Not ucrSecondFactorReceiver.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        End If
+        If Not ucrYReceiver.IsEmpty And Not ucrFactorReceiver.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
 
+        End If
     End Sub
     Private Sub SetDefaults()
         rdoBarChart.Checked = True
@@ -70,16 +62,16 @@ Public Class dlgSummaryBarOrPieChart
 
         Dim clsTempRFunc As New RFunction
         If rdoBarChart.Checked = True Then
-            lblFactor.Visible = True
-            ucrFactorReceiver.Visible = True
+            lblSecondFactor.Visible = True
+            ucrSecondFactorReceiver.Visible = True
             clsRgeom_summarybar.AddParameter("stat", Chr(34) & "identity" & Chr(34))
             ucrBase.clsRsyntax.RemoveOperatorParameter("polar")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_summarybar)
 
-        Else rdoPieChart.Checked = True
+        ElseIf rdoPieChart.Checked = True
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-            lblFactor.Visible = False
-            ucrFactorReceiver.Visible = False
+            lblSecondFactor.Visible = False
+            ucrSecondFactorReceiver.Visible = False
             ucrYReceiver.SetMeAsReceiver()
 
             clsRgeom_summarybar.AddParameter("width", 1)
@@ -89,6 +81,7 @@ Public Class dlgSummaryBarOrPieChart
             clsTempRFunc.SetRCommand("coord_polar")
             clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
             ucrBase.clsRsyntax.AddOperatorParameter("polar", clsRFunc:=clsTempRFunc)
+
         End If
     End Sub
 
@@ -113,9 +106,14 @@ Public Class dlgSummaryBarOrPieChart
     Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
 
         If Not ucrFactorReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName("x")
+            If rdoBarChart.Checked = True Then
+                clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+            ElseIf rdoPieChart.Checked = True Then
+                clsRaesFunction.AddParameter("fill", ucrYReceiver.GetVariableNames(False))
+            Else
+                clsRaesFunction.RemoveParameterByName("x")
+                clsRaesFunction.RemoveParameterByName("fill")
+            End If
         End If
         TestOkEnabled()
     End Sub
