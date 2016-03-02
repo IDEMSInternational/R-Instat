@@ -1,45 +1,37 @@
 ﻿Imports System.Drawing.Printing
+Imports instat.Translations
 Public Class dlgPrintPreviewOptions
     Public WithEvents printDocument As New PrintDocument
     Dim previewPrint As New PrintPreviewDialog
     Dim pd As New PrintDialog
     Dim printTextCtrl As TextBoxBase
+    Dim sheetPreview = frmEditor.grdData.CurrentWorksheet
+    Dim session = sheetPreview.CreatePrintSession()
     Private Sub cmdPrevSheet_Click(sender As Object, e As EventArgs) Handles cmdPrevSheet.Click
-        Dim sheetPreview = frmEditor.grdData.CurrentWorksheet
+        previewPrint.Document = session.PrintDocument
+        previewPrint.SetBounds(200, 200, 1024, 768)
+        previewPrint.PrintPreviewControl.Zoom = 1.0
+        previewPrint.ShowDialog(Me)
 
-        Using session = sheetPreview.CreatePrintSession()
-            'sets the the print to show gridlines
-            sheetPreview.SetRangeBorders(sheetPreview.PrintableRange, unvell.ReoGrid.BorderPositions.All, unvell.ReoGrid.RangeBorderStyle.BlackSolid)
-
-            previewPrint.Document = session.PrintDocument
-            previewPrint.SetBounds(200, 200, 1024, 768)
-            previewPrint.PrintPreviewControl.Zoom = 1.0
-            previewPrint.ShowDialog(Me)
-
-            session.Dispose()
-        End Using
+        session.Dispose()
     End Sub
 
     Private Sub cmdPrtSheet_Click(sender As Object, e As EventArgs) Handles cmdPrtSheet.Click
         Dim docToPrint As PrintDocument = Nothing
         Try
-            Dim sheetPreview = frmEditor.grdData.CurrentWorksheet
-            'sets the the print to show gridlines
-            sheetPreview.SetRangeBorders(sheetPreview.PrintableRange, unvell.ReoGrid.BorderPositions.All, unvell.ReoGrid.RangeBorderStyle.BlackSolid)
             docToPrint = sheetPreview.CreatePrintSession().PrintDocument
 
         Catch ex As Exception
             MessageBox.Show(Me, ex.Message, Me.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
         End Try
-        Using pd
-            pd.Document = docToPrint
-            pd.UseEXDialog = True
-            If pd.ShowDialog() = DialogResult.OK Then
-                docToPrint.PrinterSettings = pd.PrinterSettings
-                docToPrint.Print()
-            End If
-        End Using
+        pd.Document = docToPrint
+        pd.UseEXDialog = True
+        If pd.ShowDialog() = DialogResult.OK Then
+            docToPrint.PrinterSettings = pd.PrinterSettings
+            docToPrint.Print()
+        End If
+
     End Sub
 
     Private Sub cmdPrtLog_Click(sender As Object, e As EventArgs) Handles cmdPrtLog.Click
@@ -137,7 +129,23 @@ Public Class dlgPrintPreviewOptions
     End Sub
 
     Private Sub cmdExitPreview_Click(sender As Object, e As EventArgs) Handles cmdExitPreview.Click
+        'reverts to original
+        sheetPreview.SetRangeBorders(sheetPreview.PrintableRange, unvell.ReoGrid.BorderPositions.All, unvell.ReoGrid.RangeBorderStyle.Empty)
         Me.Close()
     End Sub
 
+    Private Sub chkGridLines_CheckStateChanged(sender As Object, e As EventArgs) Handles chkGridLines.CheckStateChanged
+        If chkGridLines.Checked Then
+            'shows the gridlines
+            sheetPreview.SetRangeBorders(sheetPreview.PrintableRange, unvell.ReoGrid.BorderPositions.All, unvell.ReoGrid.RangeBorderStyle.BlackSolid)
+        Else
+            'hides the grid lines
+            sheetPreview.SetRangeBorders(sheetPreview.PrintableRange, unvell.ReoGrid.BorderPositions.All, unvell.ReoGrid.RangeBorderStyle.Empty)
+        End If
+    End Sub
+
+    Private Sub dlgPrintPreviewOptions_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        chkGridLines_CheckStateChanged(sender, e)
+        autoTranslate(Me)
+    End Sub
 End Class
