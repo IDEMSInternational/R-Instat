@@ -43,9 +43,22 @@ Public Class RFunction
         bIsAssigned = False
     End Sub
 
+    Public Sub RemoveAssignTo()
+        strAssignTo = ""
+        strAssignToDataFrame = ""
+        strAssignToColumn = ""
+        strAssignToModel = ""
+        bToBeAssigned = False
+        bIsAssigned = False
+    End Sub
+
     Public Function ToScript(Optional ByRef strScript As String = "") As String
         Dim strTemp As String = ""
         Dim i As Integer
+
+        If bIsAssigned Then
+            Return (strAssignTo)
+        End If
 
         strTemp = strRCommand & "("
 
@@ -139,4 +152,5 @@ Public Class RFunction
         clsParameters.Clear()
         bIsAssigned = False
     End Sub
+
 End Class

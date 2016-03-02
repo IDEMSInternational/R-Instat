@@ -67,6 +67,7 @@ Public Class ucrReceiverMultiple
         Next
         Return strHeaders
     End Function
+
     Public Overrides Sub RemoveSelected()
         Dim objItem As ListViewItem
         Dim tempObjects(lstSelectedVariables.SelectedItems.Count - 1) As Object
@@ -86,6 +87,16 @@ Public Class ucrReceiverMultiple
         RaiseEvent SelectionChanged()
 
     End Sub
+
+    Public Overrides Function IsEmpty() As Boolean
+
+        If lstSelectedVariables.Items.Count > 0 Then
+            Return False
+        Else
+            Return True
+        End If
+
+    End Function
 
     Public Overrides Function GetVariables() As RFunction
         'TODO sort this out
@@ -109,7 +120,11 @@ Public Class ucrReceiverMultiple
         Dim strTemp As String = ""
         Dim i As Integer
         If lstSelectedVariables.Items.Count = 1 Then
-            strTemp = Chr(34) & lstSelectedVariables.Items(0).Text & Chr(34)
+            If bWithQuotes Then
+                strTemp = Chr(34) & lstSelectedVariables.Items(0).Text & Chr(34)
+            Else
+                strTemp = lstSelectedVariables.Items(0).Text
+            End If
         ElseIf lstSelectedVariables.Items.Count > 1 Then
             strTemp = "c" & "("
             For i = 0 To lstSelectedVariables.Items.Count - 1
@@ -161,7 +176,7 @@ Public Class ucrReceiverMultiple
         RemoveSelected()
     End Sub
 
-    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
+    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
         RemoveSelected()
     End Sub
 

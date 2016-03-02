@@ -120,7 +120,7 @@ Public Class dlgCalculator
         Dim strScript As String
         strScript = ("data[[" & Chr(34) & txtNewColumnName.Text & Chr(34) & "]]" & " <- " & txtCalcLine.Text).ToString
         frmMain.clsRLink.RunScript(strScript)
-        dataset = frmMain.clsRLink.GetData("data")
+        'dataset = frmMain.clsRLink.GetData("data")
         'frmEditor.UpdateSheet(dataset)
     End Sub
 

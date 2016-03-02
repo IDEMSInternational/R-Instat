@@ -30,7 +30,10 @@ Public Class dlgBoxplot
         ucrYvariableReceiver.Selector = ucrSelectorBoxPlot
         ucrYvariableReceiver.SetMeAsReceiver()
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
+        ucrByFactorsReceiver.SetDataType("factor")
         ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
+        ucrSecondFactorReceiver.SetDataType("factor")
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         autoTranslate(Me)
         ucrBase.OKEnabled(False)
     End Sub
@@ -51,7 +54,6 @@ Public Class dlgBoxplot
         End If
     End Sub
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         sdgPlots.ShowDialog()
     End Sub
 
@@ -102,5 +104,9 @@ Public Class dlgBoxplot
 
     Private Sub ucrSecondFactorReceiver_Enter(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.Enter
         ucrSecondFactorReceiver.SetMeAsReceiver()
+    End Sub
+
+    Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
+        sdgBoxPlot.ShowDialog()
     End Sub
 End Class

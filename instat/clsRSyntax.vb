@@ -24,6 +24,7 @@ Public Class RSyntax
     Public strScript As String
     Public i As Integer
     Public strAssignTo As String
+    Public bExcludeAssignedFunctionOutput As Boolean = True
 
     Public Sub SetFunction(strFunctionName As String, Optional ByRef clsFunction As RFunction = Nothing)
         If clsFunction Is Nothing Then
@@ -49,6 +50,15 @@ Public Class RSyntax
         End If
     End Sub
 
+    Public Sub RemoveAssignTo()
+        If bUseBaseOperator Then
+            clsBaseOperator.RemoveAssignTo()
+        End If
+        If bUseBaseFunction Then
+            clsBaseFunction.RemoveAssignTo()
+        End If
+    End Sub
+
     Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing)
         clsBaseFunction.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter)
     End Sub
@@ -57,8 +67,8 @@ Public Class RSyntax
         clsBaseFunction.AddParameter(clsRParam)
     End Sub
 
-    Public Sub SetOperatorParameter(bSetLeftNotRight As Boolean, Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
-        clsBaseOperator.SetParameter(bSetLeftNotRight, clsParam, clsRFunc, clsOp)
+    Public Sub SetOperatorParameter(bSetLeftNotRight As Boolean, Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
+        clsBaseOperator.SetParameter(bSetLeftNotRight, strValue, clsParam, clsRFunc, clsOp)
     End Sub
 
     Public Sub AddOperatorParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
@@ -84,7 +94,7 @@ Public Class RSyntax
         clsFunction.ClearParameters()
     End Sub
 
-    Public Function GetScript(Optional ByRef clsFunction As RFunction = Nothing, Optional bExcludeAssignedFunctionOutput As Boolean = True) As String
+    Public Function GetScript(Optional ByRef clsFunction As RFunction = Nothing) As String
 
         Dim strTemp As String = ""
 

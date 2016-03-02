@@ -157,6 +157,7 @@ Partial Class dlgSort
         Me.Name = "dlgSort"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Sort"
         Me.Text = "Sort"
         Me.grpOrder.ResumeLayout(False)
         Me.grpOrder.PerformLayout()

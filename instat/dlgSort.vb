@@ -68,16 +68,19 @@ Public Class dlgSort
     'This runs on load and after anything is changed on the dialog.
     'No other place needs to set Ok enabled, always done through this sub
     Private Sub TestOKEnabled()
-        If ucrReceiverSort.GetVariableNames() <> "" Then
+        If ucrReceiverSort.IsEmpty() = False Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrReceiverSort_Leave(sender As Object, e As EventArgs) Handles ucrReceiverSort.Leave
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectForSort.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-        ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
+    Private Sub ucrReceiverSort_SelectionChanged() Handles ucrReceiverSort.SelectionChanged
+        If Not ucrReceiverSort.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_names")
+        End If
         'Test ok enabled
         TestOKEnabled()
     End Sub
@@ -128,10 +131,7 @@ Public Class dlgSort
         TestOKEnabled()
     End Sub
 
-    'Use this event to see when something has changed in a receiver
-    'For some receivers you need to run TestOKEnabled() on this event.
-    Private Sub ucrReceiverSort_SelectionChanged() Handles ucrReceiverSort.SelectionChanged
-        'Test ok enabled
-        TestOKEnabled()
+    Private Sub ucrSelectForSort_DataFrameChanged() Handles ucrSelectForSort.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectForSort.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
 End Class

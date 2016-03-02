@@ -30,7 +30,9 @@ Public Class ucrButtons
 
         RaiseEvent ClickOk(sender, e)
 
+        frmMain.dlgLastDialog = Me.ParentForm
         Me.ParentForm.Hide()
+
     End Sub
 
     Public Sub OKEnabled(bEnabled As Boolean)
@@ -39,6 +41,7 @@ Public Class ucrButtons
     End Sub
 
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        frmMain.addToMenu(Me.Parent)
         translateEach(Controls)
         If bFirstLoad Then
             SetDefaults()

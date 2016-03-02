@@ -16,22 +16,32 @@
 Imports instat.Translations
 Public Class sdgPlots
     Public clsRsyntax As RSyntax
-    Public clsRfacetFunction As RFunction
+    Public clsRfacetFunction As New RFunction
+    Public bFirstLoad As Boolean = True
+
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        chkFreeScalesX.Checked = False
-        chkFreeScalesY.Checked = False
-        rdoHorizontal.Checked = True
-        chkMargin.Checked = False
+        ucr1stFactorReceiver.Selector = ucrAddRemove
+        ucr1stFactorReceiver.SetDataType("factor")
+        ucr2ndFactorReceiver.Selector = ucrAddRemove
+        ucr2ndFactorReceiver.SetDataType("factor")
+        autoTranslate(Me)
+
+        If bFirstLoad Then
+            bFirstLoad = False
+            SetDefaults()
+        End If
+    End Sub
+
+    Private Sub SetDefaults()
+        ucr1stFactorReceiver.SetMeAsReceiver()
         chkWrapOptions.Checked = False
         lblNoOfColumns.Visible = False
         txtNoOfColumns.Visible = False
         txtNoOfRows.Visible = False
-        ucrReceiveFactor1.Selector = ucrAddRemove
-        ucrReceiveFactor1.SetDataType("factor")
-        ucrReceiveFactor1.SetMeAsReceiver()
-        ucrReceiveFactor2.Selector = ucrAddRemove
-        ucrReceiveFactor2.SetDataType("factor")
-        autoTranslate(Me)
+        chkFreeScalesX.Checked = False
+        chkFreeScalesY.Checked = False
+        rdoHorizontal.Checked = True
+        chkMargin.Checked = False
     End Sub
 
     Private Sub chkWrapOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkWrapOptions.CheckedChanged
@@ -49,35 +59,34 @@ Public Class sdgPlots
     Public Sub SetFacetParameter()
 
         Dim clsTempOp As New ROperator
-        Dim clsTempParam As New RParameter
         Dim strFactor1 As String
         Dim strFactor2 As String
 
         clsTempOp.SetOperation("~")
-        strFactor1 = ucrReceiveFactor1.GetVariableNames(False)
-        strFactor2 = ucrReceiveFactor2.GetVariableNames(False)
-        If chkMargin.Checked And strFactor2 = "" Then
-            strFactor2 = "."
-        End If
+        strFactor1 = ucr1stFactorReceiver.GetVariableNames(False)
+        strFactor2 = ucr2ndFactorReceiver.GetVariableNames(False)
 
-        If rdoHorizontal.Checked Then
-            clsTempParam.SetArgumentValue(strFactor1)
-            clsTempOp.SetParameter(False, clsTempParam)
-            clsTempParam.SetArgumentValue(strFactor2)
-            clsTempOp.SetParameter(True, clsTempParam)
+        If strFactor1 = "" Then
+            clsRfacetFunction.RemoveParameterByName("facets")
         Else
-            clsTempParam.SetArgumentValue(strFactor1)
-            clsTempOp.SetParameter(True, clsTempParam)
-            clsTempParam.SetArgumentValue(strFactor2)
-            clsTempOp.SetParameter(False, clsTempParam)
+            If chkMargin.Checked And strFactor2 = "" Then
+                strFactor2 = "."
+            End If
+
+            If rdoHorizontal.Checked Then
+                clsTempOp.SetParameter(False, strFactor1)
+                clsTempOp.SetParameter(True, strFactor2)
+            Else
+                clsTempOp.SetParameter(True, strFactor1)
+                clsTempOp.SetParameter(False, strFactor2)
+            End If
+            clsRfacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
         End If
-        clsRfacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
 
     End Sub
 
     Public Sub SetFacetFunction()
-
-        If ucrReceiveFactor2.GetVariableNames = "" Then
+        If ucr2ndFactorReceiver.IsEmpty() = True Then
             If chkMargin.Checked Then
                 clsRfacetFunction.SetRCommand("facet_grid")
             Else
@@ -89,12 +98,12 @@ Public Class sdgPlots
 
     End Sub
 
-    Private Sub ucrReceiveFactor1_Leave(sender As Object, e As EventArgs) Handles ucrReceiveFactor1.Leave
+    Private Sub ucr1stFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.SelectionChanged
         SetFacetFunction()
         SetFacetParameter()
     End Sub
 
-    Private Sub ucrReceiveFactor2_Leave(sender As Object, e As EventArgs) Handles ucrReceiveFactor2.Leave
+    Private Sub ucr2ndFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr2ndFactorReceiver.SelectionChanged
         SetFacetFunction()
         SetFacetParameter()
     End Sub
@@ -134,18 +143,25 @@ Public Class sdgPlots
     End Sub
 
     Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
-
         clsRsyntax = clsRSyntaxIn
-
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+    Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
+        IncludeFacets()
 
-        If CheckBox1.Checked Then
+        If chkIncludeFacets.Checked Then
             clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRfacetFunction)
         Else
             clsRsyntax.RemoveOperatorParameter("facet")
         End If
+    End Sub
 
+    Private Sub IncludeFacets()
+        rdoHorizontal.Visible = True
+        rdoVertical.Visible = True
+        chkWrapOptions.Visible = True
+        chkMargin.Visible = True
+        chkFreeScalesX.Visible = True
+        chkFreeScalesY.Visible = True
     End Sub
 End Class

@@ -31,14 +31,24 @@ Public Class ucrReceiverSingle
 
     Public Overrides Sub RemoveSelected()
 
-        If txtReceiverSingle.Text <> "" Then
-            txtReceiverSingle.Text = ""
-        End If
+        txtReceiverSingle.Text = ""
+        strDataFrameName = ""
+
     End Sub
 
     Public Overrides Sub Clear()
-        txtReceiverSingle.Text = ""
+        RemoveSelected()
     End Sub
+
+    Public Overrides Function IsEmpty() As Boolean
+
+        If txtReceiverSingle.Text <> "" Then
+            Return False
+        Else
+            Return True
+        End If
+
+    End Function
 
     Public Overrides Function GetVariables() As RFunction
         'return columns (in data frame) in both cases
@@ -92,6 +102,10 @@ Public Class ucrReceiverSingle
         If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
             RemoveSelected()
         End If
+    End Sub
+
+    Private Sub RemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
+        RemoveSelected()
     End Sub
 End Class
 
