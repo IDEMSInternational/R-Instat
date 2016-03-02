@@ -238,6 +238,12 @@
     <Compile Include="dlgCopySheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCumulativeDistribution.Designer.vb">
+      <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCumulativeDistribution.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDeleteColumn.Designer.vb">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </Compile>
@@ -286,10 +292,22 @@
     <Compile Include="dlgPrintPreviewOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReferenceLevels.Designer.vb">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReferenceLevels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRenameSheet.Designer.vb">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRenameSheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgReorderLevels.Designer.vb">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReorderLevels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReorderSheet.Designer.vb">
@@ -1430,6 +1448,15 @@
     <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCumulativeDistribution.fr-FR.resx">
+      <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCumulativeDistribution.resx">
+      <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCumulativeDistribution.sw-KE.resx">
+      <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteColumn.fr-FR.resx">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </EmbeddedResource>
@@ -1502,6 +1529,15 @@
     <EmbeddedResource Include="dlgPrintPreviewOptions.sw-KE.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevels.fr-FR.resx">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevels.resx">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevels.sw-KE.resx">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameSheet.fr-FR.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </EmbeddedResource>
@@ -1510,6 +1546,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameSheet.sw-KE.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderLevels.fr-FR.resx">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderLevels.resx">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderLevels.sw-KE.resx">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderSheet.fr-FR.resx">
       <DependentUpon>dlgReorderSheet.vb</DependentUpon>
