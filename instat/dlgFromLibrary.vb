@@ -15,11 +15,31 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Imports System.IO
+Imports RDotNet
+
 Public Class dlgFromLibrary
+    Dim strLibraryTemp As String = "dfLibrary"
     Dim strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
+    Dim bFirstLoad As Boolean = True
+
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ucrBase.iHelpTopicID = 156
         autoTranslate(Me)
+        If bFirstLoad Then
+            setLibrary()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub setLibrary()
+        Dim dfTemp As DataFrame
+        Dim lstItem As New ListViewItem
+        frmMain.clsRLink.clsEngine.Evaluate(strLibraryTemp & "<-data.frame(data(package =  .packages(all.available = TRUE))$results[1:343,3:4])")
+        dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(strLibraryTemp).AsDataFrame
+        'Fills the list
+        For i As Integer = 0 To dfTemp.RowCount - 1
+            lstItem = lstCollection.Items.Add(dfTemp(i, 0))
+            lstItem.SubItems.Add(dfTemp(i, 1))
+        Next
     End Sub
 
     Private Sub cmdLibraryCollection_Click(sender As Object, e As EventArgs) Handles cmdLibraryCollection.Click
@@ -41,4 +61,13 @@ Public Class dlgFromLibrary
         ucrBase.clsRsyntax.SetAssignTo(frmMain.clsRLink.strInstatDataObject)
         ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
     End Sub
+
+    Private Sub chkChooseFrom_CheckStateChanged(sender As Object, e As EventArgs) Handles chkChooseFrom.CheckStateChanged
+        If chkChooseFrom.Checked Then
+            lstCollection.Enabled = True
+        Else
+            lstCollection.Enabled = False
+        End If
+    End Sub
+
 End Class
