@@ -56,12 +56,16 @@ Public Class dlgSummaryBarOrPieChart
         rdoBarChart.Checked = True
         ucrSummarybarSelector.Reset()
         ucrSummarybarSelector.Focus()
+        cmdBarChartOptions.Visible = False
+        cmdPieChartOptions.Visible = False
         TestOkEnabled()
     End Sub
     Private Sub grpChartOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
 
         Dim clsTempRFunc As New RFunction
         If rdoBarChart.Checked = True Then
+            cmdBarChartOptions.Visible = True
+            cmdPieChartOptions.Visible = False
             lblSecondFactor.Visible = True
             ucrSecondFactorReceiver.Visible = True
             clsRgeom_summarybar.AddParameter("stat", Chr(34) & "identity" & Chr(34))
@@ -69,6 +73,8 @@ Public Class dlgSummaryBarOrPieChart
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_summarybar)
 
         ElseIf rdoPieChart.Checked = True
+            cmdPieChartOptions.Visible = True
+            cmdBarChartOptions.Visible = False
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
             lblSecondFactor.Visible = False
             ucrSecondFactorReceiver.Visible = False
@@ -130,7 +136,7 @@ Public Class dlgSummaryBarOrPieChart
         sdgPlots.ShowDialog()
     End Sub
 
-    Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
+    Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click, cmdPieChartOptions.Click
         sdgBarChart.ShowDialog()
     End Sub
 End Class
