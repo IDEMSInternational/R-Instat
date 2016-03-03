@@ -109,8 +109,8 @@ Public Class sdgSimpleRegOptions
         chkANOVA.Checked = True
         chkModel.Checked = True
         chkEstimates.Checked = True
-        chkPvalues.Checked = True
         chkPvalues.Enabled = True
+        chkPvalues.Checked = True
         chkPredictionInterval.Enabled = False
         chkGraphicsCLimits.Checked = False
         chkGraphicsCLimits.Enabled = False
@@ -130,16 +130,16 @@ Public Class sdgSimpleRegOptions
         If (chkANOVA.Checked Or chkEstimates.Checked) Then
             chkPvalues.Enabled = True
         Else
-            chkPvalues.Checked = False
+            'chkPvalues.Checked = False
             chkPvalues.Enabled = False
         End If
     End Sub
 
-    Private Sub chkAnovaTable_CheckedChanged(sender As Object, e As EventArgs) Handles chkANOVA.CheckedChanged
+    Private Sub chkanovatable_checkedchanged(sender As Object, e As EventArgs) Handles chkANOVA.CheckedChanged
         pvalues()
     End Sub
 
-    Private Sub chkEstimates_CheckedChanged(sender As Object, e As EventArgs) Handles chkEstimates.CheckedChanged
+    Private Sub chkestimates_checkedchanged(sender As Object, e As EventArgs) Handles chkEstimates.CheckedChanged
         pvalues()
     End Sub
 

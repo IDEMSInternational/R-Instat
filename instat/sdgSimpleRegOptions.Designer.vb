@@ -24,6 +24,7 @@ Partial Class sdgSimpleRegOptions
     Private Sub InitializeComponent()
         Me.tbRegOptions = New System.Windows.Forms.TabControl()
         Me.tbDisplay = New System.Windows.Forms.TabPage()
+        Me.chkDisplayCLimits = New System.Windows.Forms.CheckBox()
         Me.nudDisplayCLevel = New System.Windows.Forms.NumericUpDown()
         Me.lblDisplayCLevel = New System.Windows.Forms.Label()
         Me.chkEstimates = New System.Windows.Forms.CheckBox()
@@ -40,7 +41,6 @@ Partial Class sdgSimpleRegOptions
         Me.grpResiduals = New System.Windows.Forms.GroupBox()
         Me.chkFourinOne = New System.Windows.Forms.CheckBox()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
-        Me.chkDisplayCLimits = New System.Windows.Forms.CheckBox()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         CType(Me.nudDisplayCLevel, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -77,6 +77,17 @@ Partial Class sdgSimpleRegOptions
         Me.tbDisplay.Tag = "Display"
         Me.tbDisplay.Text = "Display"
         Me.tbDisplay.UseVisualStyleBackColor = True
+        '
+        'chkDisplayCLimits
+        '
+        Me.chkDisplayCLimits.AutoSize = True
+        Me.chkDisplayCLimits.Location = New System.Drawing.Point(7, 102)
+        Me.chkDisplayCLimits.Name = "chkDisplayCLimits"
+        Me.chkDisplayCLimits.Size = New System.Drawing.Size(109, 17)
+        Me.chkDisplayCLimits.TabIndex = 4
+        Me.chkDisplayCLimits.Tag = "Confidence_Limits"
+        Me.chkDisplayCLimits.Text = "Confidence Limits"
+        Me.chkDisplayCLimits.UseVisualStyleBackColor = True
         '
         'nudDisplayCLevel
         '
@@ -188,7 +199,7 @@ Partial Class sdgSimpleRegOptions
         Me.chkPredictionInterval.Location = New System.Drawing.Point(50, 81)
         Me.chkPredictionInterval.Name = "chkPredictionInterval"
         Me.chkPredictionInterval.Size = New System.Drawing.Size(111, 17)
-        Me.chkPredictionInterval.TabIndex = 3
+        Me.chkPredictionInterval.TabIndex = 4
         Me.chkPredictionInterval.Tag = "Prediction_Interval"
         Me.chkPredictionInterval.Text = "Prediction Interval"
         Me.chkPredictionInterval.UseVisualStyleBackColor = True
@@ -201,7 +212,7 @@ Partial Class sdgSimpleRegOptions
         Me.nudGraphicsCLevel.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudGraphicsCLevel.Name = "nudGraphicsCLevel"
         Me.nudGraphicsCLevel.Size = New System.Drawing.Size(46, 20)
-        Me.nudGraphicsCLevel.TabIndex = 4
+        Me.nudGraphicsCLevel.TabIndex = 3
         Me.nudGraphicsCLevel.Value = New Decimal(New Integer() {95, 0, 0, 131072})
         '
         'lblGraphicsCLevel
@@ -253,17 +264,6 @@ Partial Class sdgSimpleRegOptions
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
-        '
-        'chkDisplayCLimits
-        '
-        Me.chkDisplayCLimits.AutoSize = True
-        Me.chkDisplayCLimits.Location = New System.Drawing.Point(7, 102)
-        Me.chkDisplayCLimits.Name = "chkDisplayCLimits"
-        Me.chkDisplayCLimits.Size = New System.Drawing.Size(109, 17)
-        Me.chkDisplayCLimits.TabIndex = 7
-        Me.chkDisplayCLimits.Tag = "Confidence_Limits"
-        Me.chkDisplayCLimits.Text = "Confidence Limits"
-        Me.chkDisplayCLimits.UseVisualStyleBackColor = True
         '
         'sdgSimpleRegOptions
         '
