@@ -24,30 +24,29 @@ Partial Class sdgSimpleRegOptions
     Private Sub InitializeComponent()
         Me.tbRegOptions = New System.Windows.Forms.TabControl()
         Me.tbDisplay = New System.Windows.Forms.TabPage()
-        Me.nudConfidenceInteval = New System.Windows.Forms.NumericUpDown()
-        Me.lblConfidenceInterval = New System.Windows.Forms.Label()
-        Me.chkEstimatesPvalues = New System.Windows.Forms.CheckBox()
+        Me.chkDisplayCLimits = New System.Windows.Forms.CheckBox()
+        Me.nudDisplayCLevel = New System.Windows.Forms.NumericUpDown()
+        Me.lblDisplayCLevel = New System.Windows.Forms.Label()
         Me.chkEstimates = New System.Windows.Forms.CheckBox()
-        Me.chkAnovaPvalues = New System.Windows.Forms.CheckBox()
+        Me.chkPvalues = New System.Windows.Forms.CheckBox()
         Me.chkANOVA = New System.Windows.Forms.CheckBox()
         Me.chkModel = New System.Windows.Forms.CheckBox()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
         Me.grpModel = New System.Windows.Forms.GroupBox()
         Me.chkFittedModel = New System.Windows.Forms.CheckBox()
         Me.chkPredictionInterval = New System.Windows.Forms.CheckBox()
-        Me.nudConvidenceLevel = New System.Windows.Forms.NumericUpDown()
-        Me.lblConfidenceLevel = New System.Windows.Forms.Label()
-        Me.chkConfidenceLimits = New System.Windows.Forms.CheckBox()
+        Me.nudGraphicsCLevel = New System.Windows.Forms.NumericUpDown()
+        Me.lblGraphicsCLevel = New System.Windows.Forms.Label()
+        Me.chkGraphicsCLimits = New System.Windows.Forms.CheckBox()
         Me.grpResiduals = New System.Windows.Forms.GroupBox()
         Me.chkFourinOne = New System.Windows.Forms.CheckBox()
-        Me.chkAdditionalVariable = New System.Windows.Forms.CheckBox()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
-        CType(Me.nudConfidenceInteval, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudDisplayCLevel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbGraphics.SuspendLayout()
         Me.grpModel.SuspendLayout()
-        CType(Me.nudConvidenceLevel, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudGraphicsCLevel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpResiduals.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -58,59 +57,58 @@ Partial Class sdgSimpleRegOptions
         Me.tbRegOptions.Location = New System.Drawing.Point(2, 3)
         Me.tbRegOptions.Name = "tbRegOptions"
         Me.tbRegOptions.SelectedIndex = 0
-        Me.tbRegOptions.Size = New System.Drawing.Size(252, 214)
+        Me.tbRegOptions.Size = New System.Drawing.Size(254, 193)
         Me.tbRegOptions.TabIndex = 0
         '
         'tbDisplay
         '
-        Me.tbDisplay.Controls.Add(Me.nudConfidenceInteval)
-        Me.tbDisplay.Controls.Add(Me.lblConfidenceInterval)
-        Me.tbDisplay.Controls.Add(Me.chkEstimatesPvalues)
+        Me.tbDisplay.Controls.Add(Me.chkDisplayCLimits)
+        Me.tbDisplay.Controls.Add(Me.nudDisplayCLevel)
+        Me.tbDisplay.Controls.Add(Me.lblDisplayCLevel)
         Me.tbDisplay.Controls.Add(Me.chkEstimates)
-        Me.tbDisplay.Controls.Add(Me.chkAnovaPvalues)
+        Me.tbDisplay.Controls.Add(Me.chkPvalues)
         Me.tbDisplay.Controls.Add(Me.chkANOVA)
         Me.tbDisplay.Controls.Add(Me.chkModel)
         Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
         Me.tbDisplay.Name = "tbDisplay"
         Me.tbDisplay.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbDisplay.Size = New System.Drawing.Size(244, 188)
+        Me.tbDisplay.Size = New System.Drawing.Size(246, 167)
         Me.tbDisplay.TabIndex = 0
         Me.tbDisplay.Tag = "Display"
         Me.tbDisplay.Text = "Display"
         Me.tbDisplay.UseVisualStyleBackColor = True
         '
-        'nudConfidenceInteval
+        'chkDisplayCLimits
         '
-        Me.nudConfidenceInteval.DecimalPlaces = 2
-        Me.nudConfidenceInteval.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
-        Me.nudConfidenceInteval.Location = New System.Drawing.Point(118, 106)
-        Me.nudConfidenceInteval.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudConfidenceInteval.Name = "nudConfidenceInteval"
-        Me.nudConfidenceInteval.Size = New System.Drawing.Size(45, 20)
-        Me.nudConfidenceInteval.TabIndex = 6
-        Me.nudConfidenceInteval.Value = New Decimal(New Integer() {95, 0, 0, 131072})
+        Me.chkDisplayCLimits.AutoSize = True
+        Me.chkDisplayCLimits.Location = New System.Drawing.Point(7, 102)
+        Me.chkDisplayCLimits.Name = "chkDisplayCLimits"
+        Me.chkDisplayCLimits.Size = New System.Drawing.Size(109, 17)
+        Me.chkDisplayCLimits.TabIndex = 4
+        Me.chkDisplayCLimits.Tag = "Confidence_Limits"
+        Me.chkDisplayCLimits.Text = "Confidence Limits"
+        Me.chkDisplayCLimits.UseVisualStyleBackColor = True
         '
-        'lblConfidenceInterval
+        'nudDisplayCLevel
         '
-        Me.lblConfidenceInterval.AutoSize = True
-        Me.lblConfidenceInterval.Location = New System.Drawing.Point(3, 108)
-        Me.lblConfidenceInterval.Name = "lblConfidenceInterval"
-        Me.lblConfidenceInterval.Size = New System.Drawing.Size(99, 13)
-        Me.lblConfidenceInterval.TabIndex = 5
-        Me.lblConfidenceInterval.Tag = "Confidence_Interval"
-        Me.lblConfidenceInterval.Text = "Confidence Interval"
+        Me.nudDisplayCLevel.DecimalPlaces = 2
+        Me.nudDisplayCLevel.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
+        Me.nudDisplayCLevel.Location = New System.Drawing.Point(149, 124)
+        Me.nudDisplayCLevel.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudDisplayCLevel.Name = "nudDisplayCLevel"
+        Me.nudDisplayCLevel.Size = New System.Drawing.Size(45, 20)
+        Me.nudDisplayCLevel.TabIndex = 6
+        Me.nudDisplayCLevel.Value = New Decimal(New Integer() {95, 0, 0, 131072})
         '
-        'chkEstimatesPvalues
+        'lblDisplayCLevel
         '
-        Me.chkEstimatesPvalues.AutoSize = True
-        Me.chkEstimatesPvalues.Location = New System.Drawing.Point(118, 73)
-        Me.chkEstimatesPvalues.Name = "chkEstimatesPvalues"
-        Me.chkEstimatesPvalues.Size = New System.Drawing.Size(67, 17)
-        Me.chkEstimatesPvalues.TabIndex = 4
-        Me.chkEstimatesPvalues.Tag = "P_values"
-        Me.chkEstimatesPvalues.Text = "P-values"
-        Me.chkEstimatesPvalues.ThreeState = True
-        Me.chkEstimatesPvalues.UseVisualStyleBackColor = True
+        Me.lblDisplayCLevel.AutoSize = True
+        Me.lblDisplayCLevel.Location = New System.Drawing.Point(34, 126)
+        Me.lblDisplayCLevel.Name = "lblDisplayCLevel"
+        Me.lblDisplayCLevel.Size = New System.Drawing.Size(90, 13)
+        Me.lblDisplayCLevel.TabIndex = 5
+        Me.lblDisplayCLevel.Tag = "Confidence_Level"
+        Me.lblDisplayCLevel.Text = "Confidence Level"
         '
         'chkEstimates
         '
@@ -123,16 +121,16 @@ Partial Class sdgSimpleRegOptions
         Me.chkEstimates.Text = "Estimates"
         Me.chkEstimates.UseVisualStyleBackColor = True
         '
-        'chkAnovaPvalues
+        'chkPvalues
         '
-        Me.chkAnovaPvalues.AutoSize = True
-        Me.chkAnovaPvalues.Location = New System.Drawing.Point(118, 44)
-        Me.chkAnovaPvalues.Name = "chkAnovaPvalues"
-        Me.chkAnovaPvalues.Size = New System.Drawing.Size(67, 17)
-        Me.chkAnovaPvalues.TabIndex = 2
-        Me.chkAnovaPvalues.Tag = "P_values"
-        Me.chkAnovaPvalues.Text = "P-values"
-        Me.chkAnovaPvalues.UseVisualStyleBackColor = True
+        Me.chkPvalues.AutoSize = True
+        Me.chkPvalues.Location = New System.Drawing.Point(118, 46)
+        Me.chkPvalues.Name = "chkPvalues"
+        Me.chkPvalues.Size = New System.Drawing.Size(67, 17)
+        Me.chkPvalues.TabIndex = 2
+        Me.chkPvalues.Tag = "P_values"
+        Me.chkPvalues.Text = "P-values"
+        Me.chkPvalues.UseVisualStyleBackColor = True
         '
         'chkANOVA
         '
@@ -163,7 +161,7 @@ Partial Class sdgSimpleRegOptions
         Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tbGraphics.Name = "tbGraphics"
         Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraphics.Size = New System.Drawing.Size(244, 188)
+        Me.tbGraphics.Size = New System.Drawing.Size(246, 167)
         Me.tbGraphics.TabIndex = 1
         Me.tbGraphics.Tag = "Graphics"
         Me.tbGraphics.Text = "Graphics"
@@ -173,10 +171,10 @@ Partial Class sdgSimpleRegOptions
         '
         Me.grpModel.Controls.Add(Me.chkFittedModel)
         Me.grpModel.Controls.Add(Me.chkPredictionInterval)
-        Me.grpModel.Controls.Add(Me.nudConvidenceLevel)
-        Me.grpModel.Controls.Add(Me.lblConfidenceLevel)
-        Me.grpModel.Controls.Add(Me.chkConfidenceLimits)
-        Me.grpModel.Location = New System.Drawing.Point(16, 80)
+        Me.grpModel.Controls.Add(Me.nudGraphicsCLevel)
+        Me.grpModel.Controls.Add(Me.lblGraphicsCLevel)
+        Me.grpModel.Controls.Add(Me.chkGraphicsCLimits)
+        Me.grpModel.Location = New System.Drawing.Point(16, 56)
         Me.grpModel.Name = "grpModel"
         Me.grpModel.Size = New System.Drawing.Size(219, 102)
         Me.grpModel.TabIndex = 1
@@ -201,50 +199,49 @@ Partial Class sdgSimpleRegOptions
         Me.chkPredictionInterval.Location = New System.Drawing.Point(50, 81)
         Me.chkPredictionInterval.Name = "chkPredictionInterval"
         Me.chkPredictionInterval.Size = New System.Drawing.Size(111, 17)
-        Me.chkPredictionInterval.TabIndex = 3
+        Me.chkPredictionInterval.TabIndex = 4
         Me.chkPredictionInterval.Tag = "Prediction_Interval"
         Me.chkPredictionInterval.Text = "Prediction Interval"
         Me.chkPredictionInterval.UseVisualStyleBackColor = True
         '
-        'nudConvidenceLevel
+        'nudGraphicsCLevel
         '
-        Me.nudConvidenceLevel.DecimalPlaces = 2
-        Me.nudConvidenceLevel.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
-        Me.nudConvidenceLevel.Location = New System.Drawing.Point(167, 56)
-        Me.nudConvidenceLevel.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudConvidenceLevel.Name = "nudConvidenceLevel"
-        Me.nudConvidenceLevel.Size = New System.Drawing.Size(46, 20)
-        Me.nudConvidenceLevel.TabIndex = 4
-        Me.nudConvidenceLevel.Value = New Decimal(New Integer() {95, 0, 0, 131072})
+        Me.nudGraphicsCLevel.DecimalPlaces = 2
+        Me.nudGraphicsCLevel.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
+        Me.nudGraphicsCLevel.Location = New System.Drawing.Point(167, 56)
+        Me.nudGraphicsCLevel.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudGraphicsCLevel.Name = "nudGraphicsCLevel"
+        Me.nudGraphicsCLevel.Size = New System.Drawing.Size(46, 20)
+        Me.nudGraphicsCLevel.TabIndex = 3
+        Me.nudGraphicsCLevel.Value = New Decimal(New Integer() {95, 0, 0, 131072})
         '
-        'lblConfidenceLevel
+        'lblGraphicsCLevel
         '
-        Me.lblConfidenceLevel.AutoSize = True
-        Me.lblConfidenceLevel.Location = New System.Drawing.Point(71, 58)
-        Me.lblConfidenceLevel.Name = "lblConfidenceLevel"
-        Me.lblConfidenceLevel.Size = New System.Drawing.Size(90, 13)
-        Me.lblConfidenceLevel.TabIndex = 2
-        Me.lblConfidenceLevel.Tag = "Confidence_Level"
-        Me.lblConfidenceLevel.Text = "Confidence Level"
+        Me.lblGraphicsCLevel.AutoSize = True
+        Me.lblGraphicsCLevel.Location = New System.Drawing.Point(71, 58)
+        Me.lblGraphicsCLevel.Name = "lblGraphicsCLevel"
+        Me.lblGraphicsCLevel.Size = New System.Drawing.Size(90, 13)
+        Me.lblGraphicsCLevel.TabIndex = 2
+        Me.lblGraphicsCLevel.Tag = "Confidence_Level"
+        Me.lblGraphicsCLevel.Text = "Confidence Level"
         '
-        'chkConfidenceLimits
+        'chkGraphicsCLimits
         '
-        Me.chkConfidenceLimits.AutoSize = True
-        Me.chkConfidenceLimits.Location = New System.Drawing.Point(49, 36)
-        Me.chkConfidenceLimits.Name = "chkConfidenceLimits"
-        Me.chkConfidenceLimits.Size = New System.Drawing.Size(109, 17)
-        Me.chkConfidenceLimits.TabIndex = 1
-        Me.chkConfidenceLimits.Tag = "Confidence_Limits"
-        Me.chkConfidenceLimits.Text = "Confidence Limits"
-        Me.chkConfidenceLimits.UseVisualStyleBackColor = True
+        Me.chkGraphicsCLimits.AutoSize = True
+        Me.chkGraphicsCLimits.Location = New System.Drawing.Point(49, 36)
+        Me.chkGraphicsCLimits.Name = "chkGraphicsCLimits"
+        Me.chkGraphicsCLimits.Size = New System.Drawing.Size(109, 17)
+        Me.chkGraphicsCLimits.TabIndex = 1
+        Me.chkGraphicsCLimits.Tag = "Confidence_Limits"
+        Me.chkGraphicsCLimits.Text = "Confidence Limits"
+        Me.chkGraphicsCLimits.UseVisualStyleBackColor = True
         '
         'grpResiduals
         '
         Me.grpResiduals.Controls.Add(Me.chkFourinOne)
-        Me.grpResiduals.Controls.Add(Me.chkAdditionalVariable)
         Me.grpResiduals.Location = New System.Drawing.Point(16, 6)
         Me.grpResiduals.Name = "grpResiduals"
-        Me.grpResiduals.Size = New System.Drawing.Size(219, 68)
+        Me.grpResiduals.Size = New System.Drawing.Size(219, 46)
         Me.grpResiduals.TabIndex = 0
         Me.grpResiduals.TabStop = False
         Me.grpResiduals.Tag = "Residuals"
@@ -261,20 +258,9 @@ Partial Class sdgSimpleRegOptions
         Me.chkFourinOne.Text = "Four in One"
         Me.chkFourinOne.UseVisualStyleBackColor = True
         '
-        'chkAdditionalVariable
-        '
-        Me.chkAdditionalVariable.AutoSize = True
-        Me.chkAdditionalVariable.Location = New System.Drawing.Point(19, 42)
-        Me.chkAdditionalVariable.Name = "chkAdditionalVariable"
-        Me.chkAdditionalVariable.Size = New System.Drawing.Size(127, 17)
-        Me.chkAdditionalVariable.TabIndex = 1
-        Me.chkAdditionalVariable.Tag = "vs_Additional_Variable"
-        Me.chkAdditionalVariable.Text = "vs Additional Variable"
-        Me.chkAdditionalVariable.UseVisualStyleBackColor = True
-        '
         'ucrSdgButtons
         '
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(41, 220)
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(41, 201)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
@@ -283,7 +269,7 @@ Partial Class sdgSimpleRegOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(255, 253)
+        Me.ClientSize = New System.Drawing.Size(255, 233)
         Me.Controls.Add(Me.tbRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -293,11 +279,11 @@ Partial Class sdgSimpleRegOptions
         Me.tbRegOptions.ResumeLayout(False)
         Me.tbDisplay.ResumeLayout(False)
         Me.tbDisplay.PerformLayout()
-        CType(Me.nudConfidenceInteval, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudDisplayCLevel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbGraphics.ResumeLayout(False)
         Me.grpModel.ResumeLayout(False)
         Me.grpModel.PerformLayout()
-        CType(Me.nudConvidenceLevel, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudGraphicsCLevel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpResiduals.ResumeLayout(False)
         Me.grpResiduals.PerformLayout()
         Me.ResumeLayout(False)
@@ -307,21 +293,20 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents ucrSdgButtons As ucrButtonsSubdialogue
     Friend WithEvents tbRegOptions As TabControl
     Friend WithEvents tbDisplay As TabPage
-    Friend WithEvents nudConfidenceInteval As NumericUpDown
-    Friend WithEvents lblConfidenceInterval As Label
-    Friend WithEvents chkEstimatesPvalues As CheckBox
+    Friend WithEvents nudDisplayCLevel As NumericUpDown
+    Friend WithEvents lblDisplayCLevel As Label
     Friend WithEvents chkEstimates As CheckBox
-    Friend WithEvents chkAnovaPvalues As CheckBox
+    Friend WithEvents chkPvalues As CheckBox
     Friend WithEvents chkANOVA As CheckBox
     Friend WithEvents tbGraphics As TabPage
     Friend WithEvents grpModel As GroupBox
     Friend WithEvents grpResiduals As GroupBox
     Friend WithEvents chkFittedModel As CheckBox
     Friend WithEvents chkPredictionInterval As CheckBox
-    Friend WithEvents nudConvidenceLevel As NumericUpDown
-    Friend WithEvents lblConfidenceLevel As Label
-    Friend WithEvents chkConfidenceLimits As CheckBox
+    Friend WithEvents nudGraphicsCLevel As NumericUpDown
+    Friend WithEvents lblGraphicsCLevel As Label
+    Friend WithEvents chkGraphicsCLimits As CheckBox
     Friend WithEvents chkFourinOne As CheckBox
-    Friend WithEvents chkAdditionalVariable As CheckBox
     Friend WithEvents chkModel As CheckBox
+    Friend WithEvents chkDisplayCLimits As CheckBox
 End Class
