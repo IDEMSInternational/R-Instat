@@ -23,7 +23,7 @@ Public Class dlgView
         ucrBase.clsRsyntax.iCallType = 2
         txtBottom.Enabled = False
         txtTop.Enabled = False
-        ucrBase.clsRsyntax.SetFunction("head")
+
         ucrReceiverView.Selector = ucrSelctorForView
         ucrReceiverView.SetMeAsReceiver()
         If bFirstLoad Then
@@ -60,7 +60,7 @@ Public Class dlgView
         Else
             txtBottom.Enabled = True
         End If
-
+        grpRowsToBeSelected()
     End Sub
 
     Private Sub grpRowsToBeSelected()
