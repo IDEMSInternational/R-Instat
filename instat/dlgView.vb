@@ -15,9 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgView
+    Public bFast As Boolean = True
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.iHelpTopicID = 32
         ucrReceiverView.Selector = ucrSelectorDataFrame
         ucrReceiverView.SetMeAsReceiver()
     End Sub
