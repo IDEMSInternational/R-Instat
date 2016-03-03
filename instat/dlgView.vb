@@ -21,8 +21,7 @@ Public Class dlgView
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 32
         ucrBase.clsRsyntax.iCallType = 2
-        txtBottom.Enabled = False
-        txtTop.Enabled = False
+        nudNumberRows.Value = 6
 
         ucrReceiverView.Selector = ucrSelctorForView
         ucrReceiverView.SetMeAsReceiver()
@@ -55,11 +54,7 @@ Public Class dlgView
 
 
     Private Sub grpSelectedRows_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBottom.CheckedChanged, rdoTop.CheckedChanged
-        If rdoTop.Checked Then
-            txtTop.Enabled = True
-        Else
-            txtBottom.Enabled = True
-        End If
+
         grpRowsToBeSelected()
     End Sub
 
@@ -69,13 +64,14 @@ Public Class dlgView
 
             ucrBase.clsRsyntax.SetFunction("head")
 
-            ucrBase.clsRsyntax.AddParameter("n", txtTop.Text)
+
         Else
             ucrBase.clsRsyntax.SetFunction("tail")
-            ucrBase.clsRsyntax.AddParameter("n")
+
         End If
 
     End Sub
+
 
     Private Sub ucrReceiverView_SelctionChanged() Handles ucrReceiverView.SelectionChanged
         If Not ucrReceiverView.IsEmpty Then
@@ -85,6 +81,13 @@ Public Class dlgView
             ucrBase.clsRsyntax.RemoveParameter("x")
         End If
         TestOKEnabled()
+
+    End Sub
+
+    Private Sub nudNumberRows_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberRows.ValueChanged
+
+        ucrBase.clsRsyntax.AddParameter("n", nudNumberRows.Value)
+
 
     End Sub
 End Class
