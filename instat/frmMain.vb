@@ -29,7 +29,6 @@ Public Class frmMain
     Public clsInstatOptions As InstatOptions
     Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
-    Public iSaveCount As Integer = 0
 
     Dim mnuItems As New List(Of Form)
 
@@ -732,11 +731,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
-        If iSaveCount = 0 Then
-            dlgSaveAs.ShowDialog()
-        Else
-            dlgSaveAs.mnuFileSave_Click()
-        End If
+        dlgSaveAs.ShowDialog()
     End Sub
 
     Private Sub mnuTbPrint_Click(sender As Object, e As EventArgs) Handles mnuTbPrint.Click

@@ -115,7 +115,6 @@ Public Class dlgSaveAs
             End Try
         End If
 
-        frmMain.iSaveCount = frmMain.iSaveCount + 1
     End Sub
 
     Private Sub txtEditorSave_TextChanged(sender As Object, e As EventArgs) Handles txtEditorSave.TextChanged
@@ -150,10 +149,6 @@ Public Class dlgSaveAs
         Else
             ucrBase.OKEnabled(False)
         End If
-    End Sub
-
-    Public Sub mnuFileSave_Click()
-        frmMain.clsRLink.RunScript(ucrBase.clsRsyntax.GetScript(), ucrBase.clsRsyntax.iCallType, strComment:=ucrBase.txtComment.Text)
     End Sub
 
     Private Sub cmdScriptSave_Click(sender As Object, e As EventArgs) Handles cmdScriptSave.Click
