@@ -144,7 +144,7 @@ Public Class dlgPrintPreviewOptions
         End If
     End Sub
 
-    Private Sub dlgPrintPreviewOptions_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+    Private Sub dlgPrintPreviewOptions_Load(sender As Object, e As EventArgs) Handles Me.Load
         chkGridLines_CheckStateChanged(sender, e)
         autoTranslate(Me)
     End Sub
