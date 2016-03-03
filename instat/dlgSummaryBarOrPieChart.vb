@@ -41,7 +41,6 @@ Public Class dlgSummaryBarOrPieChart
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
-
         End If
     End Sub
     Private Sub TestOkEnabled()
@@ -53,7 +52,6 @@ Public Class dlgSummaryBarOrPieChart
         End If
     End Sub
     Private Sub SetDefaults()
-        rdoBarChart.Checked = True
         ucrSummarybarSelector.Reset()
         ucrSummarybarSelector.Focus()
         cmdBarChartOptions.Visible = False
@@ -62,6 +60,7 @@ Public Class dlgSummaryBarOrPieChart
     End Sub
     Private Sub grpChartOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
 
+        SummaryCheck()
         Dim clsTempRFunc As New RFunction
         If rdoBarChart.Checked = True Then
             cmdBarChartOptions.Visible = True
@@ -70,6 +69,7 @@ Public Class dlgSummaryBarOrPieChart
             ucrSecondFactorReceiver.Visible = True
             clsRgeom_summarybar.AddParameter("stat", Chr(34) & "identity" & Chr(34))
             ucrBase.clsRsyntax.RemoveOperatorParameter("polar")
+            clsRgeom_summarybar.RemoveParameterByName("width")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_summarybar)
 
         ElseIf rdoPieChart.Checked = True
@@ -110,18 +110,25 @@ Public Class dlgSummaryBarOrPieChart
     End Sub
 
     Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
+        SummaryCheck()
+        TestOkEnabled()
+    End Sub
 
-        If Not ucrFactorReceiver.IsEmpty Then
-            If rdoBarChart.Checked = True Then
-                clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
-            ElseIf rdoPieChart.Checked = True Then
-                clsRaesFunction.AddParameter("fill", ucrYReceiver.GetVariableNames(False))
-            Else
+    Private Sub SummaryCheck()
+        If rdoBarChart.Checked = True Then
+            If ucrFactorReceiver.IsEmpty Then
                 clsRaesFunction.RemoveParameterByName("x")
+            Else
+                clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+            End If
+
+        ElseIf rdoPieChart.Checked = True Then
+            If ucrFactorReceiver.IsEmpty Then
                 clsRaesFunction.RemoveParameterByName("fill")
+            Else
+                clsRaesFunction.AddParameter("fill", ucrYReceiver.GetVariableNames(False))
             End If
         End If
-        TestOkEnabled()
     End Sub
 
     Private Sub ucrSummarybarSelector_DataFrameChanged() Handles ucrSummarybarSelector.DataFrameChanged
