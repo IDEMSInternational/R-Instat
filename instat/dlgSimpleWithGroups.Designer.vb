@@ -23,7 +23,6 @@ Partial Class dlgSimpleWithGroups
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.chkSaveModel = New System.Windows.Forms.CheckBox()
-        Me.cmdSimpleGroupsOptions = New System.Windows.Forms.Button()
         Me.lblExplanatory = New System.Windows.Forms.Label()
         Me.lblResponse = New System.Windows.Forms.Label()
         Me.lblGroupingFactor = New System.Windows.Forms.Label()
@@ -52,17 +51,6 @@ Partial Class dlgSimpleWithGroups
         Me.chkSaveModel.Tag = "Save_Model"
         Me.chkSaveModel.Text = "Save Model"
         Me.chkSaveModel.UseVisualStyleBackColor = True
-        '
-        'cmdSimpleGroupsOptions
-        '
-        Me.cmdSimpleGroupsOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSimpleGroupsOptions.Location = New System.Drawing.Point(271, 247)
-        Me.cmdSimpleGroupsOptions.Name = "cmdSimpleGroupsOptions"
-        Me.cmdSimpleGroupsOptions.Size = New System.Drawing.Size(120, 23)
-        Me.cmdSimpleGroupsOptions.TabIndex = 15
-        Me.cmdSimpleGroupsOptions.Tag = "Regression_Options..."
-        Me.cmdSimpleGroupsOptions.Text = "Regression Options..."
-        Me.cmdSimpleGroupsOptions.UseVisualStyleBackColor = True
         '
         'lblExplanatory
         '
@@ -207,7 +195,7 @@ Partial Class dlgSimpleWithGroups
         '
         'ucrBaseRegWithGroups
         '
-        Me.ucrBaseRegWithGroups.Location = New System.Drawing.Point(9, 277)
+        Me.ucrBaseRegWithGroups.Location = New System.Drawing.Point(3, 277)
         Me.ucrBaseRegWithGroups.Name = "ucrBaseRegWithGroups"
         Me.ucrBaseRegWithGroups.Size = New System.Drawing.Size(410, 55)
         Me.ucrBaseRegWithGroups.TabIndex = 0
@@ -216,13 +204,12 @@ Partial Class dlgSimpleWithGroups
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 329)
+        Me.ClientSize = New System.Drawing.Size(409, 329)
         Me.Controls.Add(Me.grpModelstofit)
         Me.Controls.Add(Me.lblGroupingFactor)
         Me.Controls.Add(Me.ucrGroupingFactor)
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrModelName)
-        Me.Controls.Add(Me.cmdSimpleGroupsOptions)
         Me.Controls.Add(Me.lblExplanatory)
         Me.Controls.Add(Me.lblResponse)
         Me.Controls.Add(Me.ucrExplanatory)
@@ -243,7 +230,6 @@ Partial Class dlgSimpleWithGroups
     Friend WithEvents ucrBaseRegWithGroups As ucrButtons
     Friend WithEvents chkSaveModel As CheckBox
     Friend WithEvents ucrModelName As ucrVariableName
-    Friend WithEvents cmdSimpleGroupsOptions As Button
     Friend WithEvents lblExplanatory As Label
     Friend WithEvents lblResponse As Label
     Friend WithEvents ucrExplanatory As ucrReceiverSingle
