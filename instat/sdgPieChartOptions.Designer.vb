@@ -22,22 +22,22 @@ Partial Class sdgPieChartOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
+        Me.ucrBaseSdgPieChart = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
-        'UcrButtonsSubdialogue1
+        'ucrBaseSdgPieChart
         '
-        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(49, 219)
-        Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
-        Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
-        Me.UcrButtonsSubdialogue1.TabIndex = 0
+        Me.ucrBaseSdgPieChart.Location = New System.Drawing.Point(49, 219)
+        Me.ucrBaseSdgPieChart.Name = "ucrBaseSdgPieChart"
+        Me.ucrBaseSdgPieChart.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSdgPieChart.TabIndex = 0
         '
         'sdgPieChartOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
-        Me.Controls.Add(Me.UcrButtonsSubdialogue1)
+        Me.Controls.Add(Me.ucrBaseSdgPieChart)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgPieChartOptions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -47,5 +47,5 @@ Partial Class sdgPieChartOptions
 
     End Sub
 
-    Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
+    Friend WithEvents ucrBaseSdgPieChart As ucrButtonsSubdialogue
 End Class
