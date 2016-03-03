@@ -21,7 +21,7 @@ Public Class dlgView
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 32
         ucrBase.clsRsyntax.iCallType = 2
-        nudNumberRows.Value = 6
+
 
         ucrReceiverView.Selector = ucrSelctorForView
         ucrReceiverView.SetMeAsReceiver()
@@ -36,7 +36,9 @@ Public Class dlgView
     End Sub
 
     Private Sub SetDefaults()
+        nudNumberRows.Value = 6
         ucrSelctorForView.Reset()
+        rdoTop.Checked = True
     End Sub
 
     Private Sub ReopenDialog()
