@@ -15,31 +15,71 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgView
-    Public bFast As Boolean = True
+    Public bFirstLoad As Boolean = True
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 32
-        ucrReceiverView.Selector = ucrSelectorDataFrame
+        txtBottom.Enabled = False
+        txtTop.Enabled = False
+        ucrReceiverView.Selector = ucrSelectorForView
         ucrReceiverView.SetMeAsReceiver()
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+        'Checks if Ok can be enabled.
+        TestOKEnabled()
     End Sub
-    Private Sub ucrReceiverView_Leave(sender As Object, e As EventArgs) Handles ucrReceiverView.Leave
-        ucrBase.clsRsyntax.AddParameter("X", ucrReceiverView.GetVariableNames())
+
+    Private Sub SetDefaults()
 
     End Sub
 
-    Private Sub txtTop_leave(sender As Object, e As EventArgs) Handles txtTop.Leave
-        ucrBase.clsRsyntax.AddParameter("n", txtTop.Text)
+    Private Sub ReopenDialog()
+
     End Sub
 
-    Private Sub txtBottom_leave(sender As Object, e As EventArgs) Handles txtBottom.Leave
-        ucrBase.clsRsyntax.AddParameter("n", txtBottom.Text)
+    Private Sub TestOKEnabled()
+        If ucrReceiverView.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
-    Private Sub rdoTop_click(sender As Object, e As EventArgs) Handles rdoTop.Click
-        ucrBase.clsRsyntax.SetFunction("head")
+    Private Sub ucrReceiverView_SelectionChanged() Handles ucrReceiverView.SelectionChanged
+        If Not ucrReceiverView.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("x", ucrReceiverView.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("x")
+        End If
+        TestOKEnabled()
     End Sub
 
-    Private Sub rdoBottom_click(sender As Object, e As EventArgs) Handles rdoBottom.Click
-        ucrBase.clsRsyntax.SetFunction("tail")
+    Private Sub grpSelectedRows_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBottom.CheckedChanged, rdoTop.CheckedChanged
+        If rdoTop.Checked Then
+            txtTop.Enabled = True
+        Else
+            txtBottom.Enabled = True
+        End If
+
     End Sub
+
+    Private Sub grpRowsToBeSelected()
+
+        If rdoTop.Checked Then
+            ucrBase.clsRsyntax.SetFunction("head")
+            ucrBase.clsRsyntax.AddParameter("n", txtTop.Text)
+        Else
+            ucrBase.clsRsyntax.SetFunction("tail")
+            ucrBase.clsRsyntax.AddParameter("n")
+        End If
+
+    End Sub
+
+
+
 End Class

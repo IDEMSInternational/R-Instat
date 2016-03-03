@@ -22,7 +22,7 @@ Partial Class dlgView
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrSelectorDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.lblSelected = New System.Windows.Forms.Label()
@@ -34,12 +34,12 @@ Partial Class dlgView
         Me.grpSelectedRows.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrSelectorDataFrame
+        'ucrSelectorForView
         '
-        Me.ucrSelectorDataFrame.Location = New System.Drawing.Point(13, 13)
-        Me.ucrSelectorDataFrame.Name = "ucrSelectorDataFrame"
-        Me.ucrSelectorDataFrame.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorDataFrame.TabIndex = 0
+        Me.ucrSelectorForView.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorForView.Name = "ucrSelectorForView"
+        Me.ucrSelectorForView.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorForView.TabIndex = 0
         '
         'ucrBase
         '
@@ -52,6 +52,7 @@ Partial Class dlgView
         '
         Me.ucrReceiverView.Location = New System.Drawing.Point(261, 88)
         Me.ucrReceiverView.Name = "ucrReceiverView"
+        Me.ucrReceiverView.Selector = Nothing
         Me.ucrReceiverView.Size = New System.Drawing.Size(121, 104)
         Me.ucrReceiverView.TabIndex = 2
         '
@@ -126,7 +127,7 @@ Partial Class dlgView
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrReceiverView)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrSelectorDataFrame)
+        Me.Controls.Add(Me.ucrSelectorForView)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgView"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -139,7 +140,7 @@ Partial Class dlgView
 
     End Sub
 
-    Friend WithEvents ucrSelectorDataFrame As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorForView As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverView As ucrReceiverMultiple
     Friend WithEvents lblSelected As Label
