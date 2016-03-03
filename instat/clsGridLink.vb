@@ -36,7 +36,7 @@ Public Class clsGridLink
         Dim i As Integer
         Dim j As Integer
         Dim k As Integer
-        Dim dfTemp As DataFrame
+        Dim dfTemp As CharacterMatrix
         Dim strDataName As String
         Dim shtTemp As Worksheet
 
@@ -51,13 +51,13 @@ Public Class clsGridLink
             For i = 0 To lstDataNames.Length - 1
                 strDataName = lstDataNames.AsCharacter(i)
                 If (bGrdDataExists And frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_changed(data_name = " & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
-                    frmMain.clsRLink.clsEngine.Evaluate(strDataName & "<-" & frmMain.clsRLink.strInstatDataObject & "$get_data_frame(" & Chr(34) & strDataName & Chr(34) & ")")
-                    dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(strDataName).AsDataFrame
+                    frmMain.clsRLink.clsEngine.Evaluate(strDataName & "<-" & frmMain.clsRLink.strInstatDataObject & "$get_data_frame(" & Chr(34) & strDataName & Chr(34) & ", convert_to_character = TRUE)")
+                    dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(strDataName).AsCharacterMatrix
                     FillSheet(dfTemp, strDataName, grdData)
                     frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_data_frames_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
                 End If
                 If (bGrdVariablesMetadataExists And frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
-                    dfTemp = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata(" & Chr(34) & strDataName & Chr(34) & ")").AsDataFrame
+                    dfTemp = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata(" & Chr(34) & strDataName & Chr(34) & ", convert_to_character = TRUE)").AsCharacterMatrix
                     FillSheet(dfTemp, strDataName, grdVariablesMetadata)
                     frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
                 End If
@@ -106,7 +106,7 @@ Public Class clsGridLink
         End If
 
         If bGrdMetadataExists And (bGrdMetadataChanged Or bRMetadataChanged) Then
-            dfTemp = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_combined_metadata()").AsDataFrame
+            dfTemp = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_combined_metadata(convert_to_character = TRUE)").AsCharacterMatrix
             FillSheet(dfTemp, "metadata", grdMetadata)
             frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = FALSE)")
         End If
@@ -145,10 +145,11 @@ Public Class clsGridLink
         UpdateGrids()
     End Sub
 
-    Public Sub FillSheet(dfTemp As DataFrame, strName As String, grdCurr As ReoGridControl)
+    Public Sub FillSheet(dfTemp As CharacterMatrix, strName As String, grdCurr As ReoGridControl)
         Dim bFoundWorksheet As Boolean = False
         Dim tempWorkSheet As Worksheet
         Dim fillWorkSheet As Worksheet
+        Dim rngDataRange As RangePosition
 
         For Each tempWorkSheet In grdCurr.Worksheets
             If tempWorkSheet.Name = strName Then
@@ -165,6 +166,8 @@ Public Class clsGridLink
         End If
 
         fillWorkSheet.Reset()
+        rngDataRange = New RangePosition(0, 0, dfTemp.RowCount, dfTemp.ColumnCount)
+        fillWorkSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
         fillWorkSheet.Rows = dfTemp.RowCount
         fillWorkSheet.Columns = dfTemp.ColumnCount
         For i As Integer = 0 To dfTemp.RowCount - 1

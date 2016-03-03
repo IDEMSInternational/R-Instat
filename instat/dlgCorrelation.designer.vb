@@ -30,7 +30,7 @@ Partial Class dlgCorrelation
         Me.rdoSpearman = New System.Windows.Forms.RadioButton()
         Me.rdoKendall = New System.Windows.Forms.RadioButton()
         Me.rdoPearson = New System.Windows.Forms.RadioButton()
-        Me.cmdPlots = New System.Windows.Forms.Button()
+        Me.cmdPlot = New System.Windows.Forms.Button()
         Me.grpMissing = New System.Windows.Forms.GroupBox()
         Me.rdoPairwise = New System.Windows.Forms.RadioButton()
         Me.rdoCompleteRowsOnly = New System.Windows.Forms.RadioButton()
@@ -135,15 +135,15 @@ Partial Class dlgCorrelation
         Me.rdoPearson.Text = "Pearson"
         Me.rdoPearson.UseVisualStyleBackColor = True
         '
-        'cmdPlots
+        'cmdPlot
         '
-        Me.cmdPlots.Location = New System.Drawing.Point(332, 293)
-        Me.cmdPlots.Name = "cmdPlots"
-        Me.cmdPlots.Size = New System.Drawing.Size(75, 23)
-        Me.cmdPlots.TabIndex = 11
-        Me.cmdPlots.Tag = "Plots"
-        Me.cmdPlots.Text = "Plots"
-        Me.cmdPlots.UseVisualStyleBackColor = True
+        Me.cmdPlot.Location = New System.Drawing.Point(332, 293)
+        Me.cmdPlot.Name = "cmdPlot"
+        Me.cmdPlot.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPlot.TabIndex = 11
+        Me.cmdPlot.Tag = "Plot"
+        Me.cmdPlot.Text = "Plot"
+        Me.cmdPlot.UseVisualStyleBackColor = True
         '
         'grpMissing
         '
@@ -201,6 +201,7 @@ Partial Class dlgCorrelation
         '
         Me.ucrReceiverSecondColumn.Location = New System.Drawing.Point(301, 181)
         Me.ucrReceiverSecondColumn.Name = "ucrReceiverSecondColumn"
+        Me.ucrReceiverSecondColumn.Selector = Nothing
         Me.ucrReceiverSecondColumn.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverSecondColumn.TabIndex = 6
         '
@@ -208,6 +209,7 @@ Partial Class dlgCorrelation
         '
         Me.ucrReceiverFirstColumn.Location = New System.Drawing.Point(301, 129)
         Me.ucrReceiverFirstColumn.Name = "ucrReceiverFirstColumn"
+        Me.ucrReceiverFirstColumn.Selector = Nothing
         Me.ucrReceiverFirstColumn.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverFirstColumn.TabIndex = 5
         '
@@ -229,6 +231,7 @@ Partial Class dlgCorrelation
         '
         Me.ucrReceiverMultipleColumns.Location = New System.Drawing.Point(278, 112)
         Me.ucrReceiverMultipleColumns.Name = "ucrReceiverMultipleColumns"
+        Me.ucrReceiverMultipleColumns.Selector = Nothing
         Me.ucrReceiverMultipleColumns.Size = New System.Drawing.Size(121, 104)
         Me.ucrReceiverMultipleColumns.TabIndex = 15
         '
@@ -241,7 +244,7 @@ Partial Class dlgCorrelation
         Me.Controls.Add(Me.lblConfInterval)
         Me.Controls.Add(Me.txtConfidenceInterval)
         Me.Controls.Add(Me.grpMissing)
-        Me.Controls.Add(Me.cmdPlots)
+        Me.Controls.Add(Me.cmdPlot)
         Me.Controls.Add(Me.grpMethod)
         Me.Controls.Add(Me.lblSecondColumn)
         Me.Controls.Add(Me.lblFirstColumn)
@@ -275,7 +278,7 @@ Partial Class dlgCorrelation
     Friend WithEvents rdoSpearman As RadioButton
     Friend WithEvents rdoKendall As RadioButton
     Friend WithEvents rdoPearson As RadioButton
-    Friend WithEvents cmdPlots As Button
+    Friend WithEvents cmdPlot As Button
     Friend WithEvents grpMissing As GroupBox
     Friend WithEvents rdoPairwise As RadioButton
     Friend WithEvents rdoCompleteRowsOnly As RadioButton

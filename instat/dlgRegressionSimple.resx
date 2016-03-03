@@ -252,71 +252,20 @@
   <data name="&gt;&gt;lblExplanatory.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="lblFittedModel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblFittedModel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblFittedModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 192</value>
-  </data>
-  <data name="lblFittedModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 13</value>
-  </data>
-  <data name="lblFittedModel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="lblFittedModel.Text" xml:space="preserve">
-    <value>Fitted Model</value>
-  </data>
-  <data name="&gt;&gt;lblFittedModel.Name" xml:space="preserve">
-    <value>lblFittedModel</value>
-  </data>
-  <data name="&gt;&gt;lblFittedModel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblFittedModel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblFittedModel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="txtLastLM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 188</value>
-  </data>
-  <data name="txtLastLM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="txtLastLM.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;txtLastLM.Name" xml:space="preserve">
-    <value>txtLastLM</value>
-  </data>
-  <data name="&gt;&gt;txtLastLM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtLastLM.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;txtLastLM.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="cmdRegressionOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdRegressionOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 182</value>
+    <value>277, 181</value>
   </data>
   <data name="cmdRegressionOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>120, 23</value>
   </data>
   <data name="cmdRegressionOptions.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="cmdRegressionOptions.Text" xml:space="preserve">
-    <value>Options...</value>
+    <value>Regression Options...</value>
   </data>
   <data name="&gt;&gt;cmdRegressionOptions.Name" xml:space="preserve">
     <value>cmdRegressionOptions</value>
@@ -328,7 +277,55 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdRegressionOptions.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="chkSaveModel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkSaveModel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 183</value>
+  </data>
+  <data name="chkSaveModel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 24</value>
+  </data>
+  <data name="chkSaveModel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="chkSaveModel.Text" xml:space="preserve">
+    <value>Save Model</value>
+  </data>
+  <data name="&gt;&gt;chkSaveModel.Name" xml:space="preserve">
+    <value>chkSaveModel</value>
+  </data>
+  <data name="&gt;&gt;chkSaveModel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkSaveModel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkSaveModel.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrModelName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 181</value>
+  </data>
+  <data name="ucrModelName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 23</value>
+  </data>
+  <data name="ucrModelName.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrModelName.Name" xml:space="preserve">
+    <value>ucrModelName</value>
+  </data>
+  <data name="&gt;&gt;ucrModelName.Type" xml:space="preserve">
+    <value>instat.ucrVariableName, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrModelName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrModelName.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrExplanatory.Location" type="System.Drawing.Point, System.Drawing">
     <value>296, 105</value>
