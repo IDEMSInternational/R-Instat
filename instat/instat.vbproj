@@ -370,6 +370,12 @@
     <Compile Include="sdgCanonicalCorrelation.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgPieChartOptions.Designer.vb">
+      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPieChartOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgPrincipalComponentAnalysis.Designer.vb">
       <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
     </Compile>
@@ -1736,6 +1742,15 @@
     <EmbeddedResource Include="sdgANOVAOptions.sw-KE.resx">
       <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPieChartOptions.fr-FR.resx">
+      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPieChartOptions.resx">
+      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPieChartOptions.sw-KE.resx">
+      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPrincipalComponentAnalysis.fr-FR.resx">
       <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
