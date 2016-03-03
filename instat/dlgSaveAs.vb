@@ -1,52 +1,8 @@
 ﻿Imports System.IO
 Imports instat.Translations
 Public Class dlgSaveAs
-    Dim returnResults As KeyValuePair(Of String, String)
-    Public Function SaveDialog(strFilter As String) As KeyValuePair(Of String, String)
-        Dim dlgOpen As New SaveFileDialog
-        Dim strFilePath, strFileName As String
-        Select Case strFilter
-            Case ".txt"
-                dlgOpen.Filter = "Text file (*.txt)|*.txt"
-            Case ".rtf"
-                dlgOpen.Filter = "Rich Text file (*.rtf)|*.rtf"
-            Case ".dataFile"
-                dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS (*.RDS)|*.RDS"
-        End Select
-        dlgOpen.Title = "Save workbook"
-        If dlgOpen.ShowDialog() = DialogResult.OK Then
-            'checks if the file name is not blank'
-            If dlgOpen.FileName <> "" Then
-                strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
-                strFilePath = Replace(dlgOpen.FileName, "\", "/")
-                Return New KeyValuePair(Of String, String)(strFileName, strFilePath)
-            End If
-        End If
-        Return New KeyValuePair(Of String, String)("", "")
-    End Function
-
-    Public Sub setFilePath(strFilePath As String)
-        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-    End Sub
-
-    Public Sub setFileExtension(strFileExtension As String)
-        Select Case strFileExtension
-            Case ".RDS"
-                'set function
-                setFunction("saveRDS")
-                ucrBase.clsRsyntax.RemoveParameter("x")
-                ucrBase.clsRsyntax.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
-            Case ".csv"
-                'set function
-                setFunction("write.csv")
-                ucrBase.clsRsyntax.RemoveParameter("object")
-                ucrBase.clsRsyntax.AddParameter("x", frmEditor.grdData.CurrentWorksheet.Name)
-        End Select
-    End Sub
-
-    Public Sub setFunction(strRfunction As String)
-        ucrBase.clsRsyntax.SetFunction(strRfunction)
-    End Sub
+    Dim dlgSave As New SaveFileDialog
+    Dim bFirstLoad As Boolean = True
 
     Private Sub chkLog_CheckedChanged(sender As Object, e As EventArgs) Handles chkLog.CheckedChanged
         If chkLog.Checked = True Then
@@ -67,67 +23,75 @@ Public Class dlgSaveAs
     Private Sub dlgSaveAs_Load(sender As Object, e As EventArgs) Handles Me.Load
         ttScript.SetToolTip(chkScript, "You cannot save an empty script.")
         autoTranslate(Me)
-        grpLog.Enabled = False
-        grpOutput.Enabled = False
-        grpScript.Enabled = False
+        If bFirstLoad Then
+            setDefaults()
+            bFirstLoad = False
+        End If
         TestOKEnabled()
     End Sub
 
     Private Sub cmdLogSave_Click(sender As Object, e As EventArgs) Handles cmdLogSave.Click
-        returnResults = SaveDialog(".txt")
-        'Save the path
-        txtLogSave.Text = returnResults.Value
+        dlgSave.Reset()
+        dlgSave.Title = "Save Log File"
+        dlgSave.Filter = "Text file (*.txt)|*.txt"
+        If dlgSave.ShowDialog() = DialogResult.OK Then
+            txtLogSave.Text = dlgSave.FileName.Replace("\", "/")
+        End If
     End Sub
 
     Private Sub cmdOutputSave_Click(sender As Object, e As EventArgs) Handles cmdOutputSave.Click
-        returnResults = SaveDialog(".rtf")
-        'Save path
-        txtOutputSave.Text = returnResults.Value
+        dlgSave.Reset()
+        dlgSave.Title = "Save Output File"
+        dlgSave.Filter = "Rich Text file (*.rtf)|*.rtf"
+        If dlgSave.ShowDialog() = DialogResult.OK Then
+            txtOutputSave.Text = dlgSave.FileName.Replace("\", "/")
+        End If
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If txtEditorSave.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        Dim sWriter As StreamWriter
-        If chkLog.Checked Then
-            Try
-                sWriter = File.AppendText(txtLogSave.Text)
-                sWriter.Write(frmLog.txtLog.Text)
-                sWriter.Flush()
-                sWriter.Dispose()
-            Catch ex As Exception
-                MessageBox.Show(ex.Message)
-            End Try
+        If chkLog.Checked And txtLogSave.Text <> "" Then
+            saveTextFiles(txtLogSave.Text, frmLog.txtLog.Text)
         End If
 
         If chkScript.Checked Then
-            Try
-                sWriter = File.AppendText(txtScriptSave.Text)
-                sWriter.Write(frmScript.txtScript.Text)
-                sWriter.Flush()
-                sWriter.Dispose()
-            Catch ex As Exception
-                MessageBox.Show(ex.Message)
-            End Try
+            saveTextFiles(txtScriptSave.Text, frmScript.txtScript.Text)
         End If
-        If chkOutput.Checked = True Then
+
+        If chkOutput.Checked And txtOutputSave.Text <> "" Then
             Try
                 frmCommand.txtCommand.SaveFile(txtOutputSave.Text, RichTextBoxStreamType.RichText)
             Catch ex As Exception
             End Try
         End If
+    End Sub
 
+    Private Sub cmdEditorSave_Click(sender As Object, e As EventArgs) Handles cmdEditorSave.Click
+        dlgSave.Title = "Save Data File"
+        dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
+        If dlgSave.ShowDialog() = DialogResult.OK Then
+            'Save path
+            txtEditorSave.Text = dlgSave.FileName.Replace("\", "/")
+        End If
+        'Pass the function
+        ucrBase.clsRsyntax.SetFunction("saveRDS")
+        'Pass the object
+        ucrBase.clsRsyntax.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
+        'Pass the file
+        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & txtEditorSave.Text & Chr(34))
+
+        TestOKEnabled()
     End Sub
 
     Private Sub txtEditorSave_TextChanged(sender As Object, e As EventArgs) Handles txtEditorSave.TextChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub cmdEditorSave_Click(sender As Object, e As EventArgs) Handles cmdEditorSave.Click
-        returnResults = SaveDialog(".dataFile")
-        'Save path
-        txtEditorSave.Text = returnResults.Value
-        'Pass the File extension
-        setFileExtension(Path.GetExtension(returnResults.Value))
-        setFilePath(returnResults.Value)
     End Sub
 
     Private Sub chkScript_CheckStateChanged(sender As Object, e As EventArgs) Handles chkScript.CheckStateChanged
@@ -143,17 +107,38 @@ Public Class dlgSaveAs
         End If
     End Sub
 
-    Private Sub TestOKEnabled()
-        If txtEditorSave.Text <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
+    Private Sub cmdScriptSave_Click(sender As Object, e As EventArgs) Handles cmdScriptSave.Click
+        dlgSave.Reset()
+        dlgSave.Title = "Save Script File"
+        dlgSave.Filter = "Text file (*.txt)|*.txt"
+        If dlgSave.ShowDialog() = DialogResult.OK Then
+            txtScriptSave.Text = dlgSave.FileName.Replace("\", "/")
         End If
     End Sub
 
-    Private Sub cmdScriptSave_Click(sender As Object, e As EventArgs) Handles cmdScriptSave.Click
-        returnResults = SaveDialog(".txt")
-        'Save the path
-        txtScriptSave.Text = returnResults.Value
+    Private Sub saveTextFiles(strPath As String, strFile As String)
+        Dim sWrite As New StreamWriter(strPath)
+        Try
+            sWrite.Write(strFile)
+            sWrite.Flush()
+            sWrite.Dispose()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        setDefaults()
+    End Sub
+
+    Private Sub setDefaults()
+        txtEditorSave.Text = ""
+        txtLogSave.Text = ""
+        txtOutputSave.Text = ""
+        txtScriptSave.Text = ""
+        chkLog.Checked = False
+        chkOutput.Checked = False
+        chkScript.Checked = False
+
     End Sub
 End Class
