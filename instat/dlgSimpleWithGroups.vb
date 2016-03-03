@@ -40,7 +40,6 @@ Public Class dlgSimpleWithGroups
         ucrExplanatory.Selector = ucrSelectorSimpleRegGroups
         ucrGroupingFactor.Selector = ucrSelectorSimpleRegGroups
         ucrBaseRegWithGroups.iHelpTopicID = 176
-        'sdgSimpleRegOptions.SetRModelFunction(ucrBaseRegWithGroups.clsRsyntax.clsBaseFunction)
     End Sub
 
     Private Sub ReopenDialog()
@@ -53,20 +52,9 @@ Public Class dlgSimpleWithGroups
         ucrSelectorSimpleRegGroups.Focus()
         chkSaveModel.Checked = True
         ucrModelName.SetName("reg_grp")
-        sdgSimpleRegOptions.SetDefaults()
-        'chkSingle.Checked = True
+        chkAll.Checked = True
         TestOKEnabled(clsModel)
     End Sub
-    'Public Sub TestOKEnabled()
-    '    If (Not ucrResponse.IsEmpty()) And (Not ucrExplanatory.IsEmpty()) And (Not ucrGroupingFactor.IsEmpty()) Then
-    '        If ((chkAll.Checked = True) Or (chkSingle.Checked = True) Or (chkJointLines.Checked = True) Or (chkParallelLines.Checked = True) Or (chkCommonIntercept.Checked = True)) Then
-    '            'ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel2)
-    '            ucrBaseRegWithGroups.OKEnabled(True)
-    '        End If
-    '    Else
-    '        ucrBaseRegWithGroups.OKEnabled(False)
-    '    End If
-    'End Sub
 
     Public Sub TestOKEnabled(clsModelNew)
         If (Not ucrResponse.IsEmpty()) And (Not ucrExplanatory.IsEmpty()) And (Not ucrGroupingFactor.IsEmpty()) Then
@@ -106,8 +94,6 @@ Public Class dlgSimpleWithGroups
 
     Private Sub ucrBaseRegWithGroups_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseRegWithGroups.ClickOk
         RegOptions()
-        InitialiseDialog()
-        'frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.clsBaseFunction.ToScript(), 2)
     End Sub
 
     Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
@@ -131,11 +117,8 @@ Public Class dlgSimpleWithGroups
 
     Private Sub SingleModel()
         ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
-        'TestOKEnabled()
         TestOKEnabled(clsModel)
-        'frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.GetScript(), 2)
         frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.clsBaseFunction.ToScript(), 2)
-        'TestOKEnabled(clsModel)
     End Sub
 
     Private Sub CommonIntercept()
@@ -144,11 +127,23 @@ Public Class dlgSimpleWithGroups
         clsModel1.SetParameter(True, clsOp:=clsModel)
         clsModel1.SetParameter(False, strValue:=ucrGroupingFactor.GetVariableNames(bWithQuotes:=False))
         ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel1)
-        'TestOKEnabled()
         TestOKEnabled(clsModel1)
-        'frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.GetScript(), 2)
         frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.clsBaseFunction.ToScript(), 2)
-        'TestOKEnabled(clsModel1)
+    End Sub
+
+
+    Private Sub chkAll_CheckedChanged(sender As Object, e As EventArgs) Handles chkAll.CheckedChanged
+        If (chkAll.Checked) Then
+            chkSingle.Checked = True
+            chkCommonIntercept.Checked = True
+            chkParallelLines.Checked = True
+            chkJointLines.Checked = True
+        Else
+            chkSingle.Checked = False
+            chkCommonIntercept.Checked = False
+            chkParallelLines.Checked = False
+            chkJointLines.Checked = False
+        End If
     End Sub
 
     Private Sub ParallelLines()
@@ -157,11 +152,8 @@ Public Class dlgSimpleWithGroups
         clsModel2.SetParameter(True, clsOp:=clsModel)
         clsModel2.SetParameter(False, strValue:=ucrGroupingFactor.GetVariableNames(bWithQuotes:=False))
         ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel2)
-        'TestOKEnabled()
         TestOKEnabled(clsModel2)
-        'frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.GetScript(), 2)
         frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.clsBaseFunction.ToScript(), 2)
-        'TestOKEnabled(clsModel2)
     End Sub
 
     Private Sub JointLines()
@@ -170,12 +162,8 @@ Public Class dlgSimpleWithGroups
         clsModel3.SetParameter(True, clsOp:=clsModel)
         clsModel3.SetParameter(False, strValue:=ucrGroupingFactor.GetVariableNames(bWithQuotes:=False))
         ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel3)
-        'TestOKEnabled()
         TestOKEnabled(clsModel3)
         frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.clsBaseFunction.ToScript(), 2)
-
-        'frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.GetScript(), 2)
-
     End Sub
 
     Public Sub RegOptions()
