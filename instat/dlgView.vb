@@ -16,14 +16,16 @@
 Imports instat.Translations
 Public Class dlgView
     Public bFirstLoad As Boolean = True
+
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 32
+        ucrBase.clsRsyntax.iCallType = 2
         txtBottom.Enabled = False
         txtTop.Enabled = False
-        ucrReceiverView.Selector = ucrSelectorForView
+        ucrBase.clsRsyntax.SetFunction("head")
+        ucrReceiverView.Selector = ucrSelctorForView
         ucrReceiverView.SetMeAsReceiver()
-
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
@@ -35,7 +37,7 @@ Public Class dlgView
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrSelctorForView.Reset()
     End Sub
 
     Private Sub ReopenDialog()
@@ -43,21 +45,14 @@ Public Class dlgView
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverView.IsEmpty Then
+        If ucrReceiverView.IsEmpty() = False Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrReceiverView_SelectionChanged() Handles ucrReceiverView.SelectionChanged
-        If Not ucrReceiverView.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", ucrReceiverView.GetVariableNames())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("x")
-        End If
-        TestOKEnabled()
-    End Sub
+
 
     Private Sub grpSelectedRows_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBottom.CheckedChanged, rdoTop.CheckedChanged
         If rdoTop.Checked Then
@@ -71,7 +66,9 @@ Public Class dlgView
     Private Sub grpRowsToBeSelected()
 
         If rdoTop.Checked Then
+
             ucrBase.clsRsyntax.SetFunction("head")
+
             ucrBase.clsRsyntax.AddParameter("n", txtTop.Text)
         Else
             ucrBase.clsRsyntax.SetFunction("tail")
@@ -80,6 +77,14 @@ Public Class dlgView
 
     End Sub
 
+    Private Sub ucrReceiverView_SelctionChanged() Handles ucrReceiverView.SelectionChanged
+        If Not ucrReceiverView.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
 
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("x")
+        End If
+        TestOKEnabled()
 
+    End Sub
 End Class
