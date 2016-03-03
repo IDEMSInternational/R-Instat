@@ -30,7 +30,7 @@ Partial Class dlgCorrelation
         Me.rdoSpearman = New System.Windows.Forms.RadioButton()
         Me.rdoKendall = New System.Windows.Forms.RadioButton()
         Me.rdoPearson = New System.Windows.Forms.RadioButton()
-        Me.cmdCorrplot = New System.Windows.Forms.Button()
+        Me.cmdPlot = New System.Windows.Forms.Button()
         Me.grpMissing = New System.Windows.Forms.GroupBox()
         Me.rdoPairwise = New System.Windows.Forms.RadioButton()
         Me.rdoCompleteRowsOnly = New System.Windows.Forms.RadioButton()
@@ -135,15 +135,15 @@ Partial Class dlgCorrelation
         Me.rdoPearson.Text = "Pearson"
         Me.rdoPearson.UseVisualStyleBackColor = True
         '
-        'cmdCorrplot
+        'cmdPlot
         '
-        Me.cmdCorrplot.Location = New System.Drawing.Point(332, 293)
-        Me.cmdCorrplot.Name = "cmdCorrplot"
-        Me.cmdCorrplot.Size = New System.Drawing.Size(75, 23)
-        Me.cmdCorrplot.TabIndex = 11
-        Me.cmdCorrplot.Tag = "corrplot"
-        Me.cmdCorrplot.Text = "corrplot"
-        Me.cmdCorrplot.UseVisualStyleBackColor = True
+        Me.cmdPlot.Location = New System.Drawing.Point(332, 293)
+        Me.cmdPlot.Name = "cmdPlot"
+        Me.cmdPlot.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPlot.TabIndex = 11
+        Me.cmdPlot.Tag = "Plot"
+        Me.cmdPlot.Text = "Plot"
+        Me.cmdPlot.UseVisualStyleBackColor = True
         '
         'grpMissing
         '
@@ -244,7 +244,7 @@ Partial Class dlgCorrelation
         Me.Controls.Add(Me.lblConfInterval)
         Me.Controls.Add(Me.txtConfidenceInterval)
         Me.Controls.Add(Me.grpMissing)
-        Me.Controls.Add(Me.cmdCorrplot)
+        Me.Controls.Add(Me.cmdPlot)
         Me.Controls.Add(Me.grpMethod)
         Me.Controls.Add(Me.lblSecondColumn)
         Me.Controls.Add(Me.lblFirstColumn)
@@ -278,7 +278,7 @@ Partial Class dlgCorrelation
     Friend WithEvents rdoSpearman As RadioButton
     Friend WithEvents rdoKendall As RadioButton
     Friend WithEvents rdoPearson As RadioButton
-    Friend WithEvents cmdCorrplot As Button
+    Friend WithEvents cmdPlot As Button
     Friend WithEvents grpMissing As GroupBox
     Friend WithEvents rdoPairwise As RadioButton
     Friend WithEvents rdoCompleteRowsOnly As RadioButton
