@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgFromLibrary
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,23 +20,16 @@ Partial Class dlgFromLibrary
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
         Me.lblBrowse = New System.Windows.Forms.Label()
         Me.cmdLibraryCollection = New System.Windows.Forms.Button()
         Me.chkChooseFrom = New System.Windows.Forms.CheckBox()
-        Me.lstDataCollection = New System.Windows.Forms.ListView()
+        Me.lstCollection = New System.Windows.Forms.ListView()
+        Me.clmDatasets = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.clmDesc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucrBase.Location = New System.Drawing.Point(0, 115)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
         '
         'lblBrowse
         '
@@ -49,7 +42,7 @@ Partial Class dlgFromLibrary
         '
         'cmdLibraryCollection
         '
-        Me.cmdLibraryCollection.Location = New System.Drawing.Point(15, 25)
+        Me.cmdLibraryCollection.Location = New System.Drawing.Point(176, 9)
         Me.cmdLibraryCollection.Name = "cmdLibraryCollection"
         Me.cmdLibraryCollection.Size = New System.Drawing.Size(142, 23)
         Me.cmdLibraryCollection.TabIndex = 2
@@ -59,30 +52,56 @@ Partial Class dlgFromLibrary
         'chkChooseFrom
         '
         Me.chkChooseFrom.AutoSize = True
-        Me.chkChooseFrom.Location = New System.Drawing.Point(163, 9)
+        Me.chkChooseFrom.Location = New System.Drawing.Point(15, 37)
         Me.chkChooseFrom.Name = "chkChooseFrom"
         Me.chkChooseFrom.Size = New System.Drawing.Size(98, 17)
         Me.chkChooseFrom.TabIndex = 3
         Me.chkChooseFrom.Text = "Or Load from R"
         Me.chkChooseFrom.UseVisualStyleBackColor = True
         '
-        'lstDataCollection
+        'lstCollection
         '
-        Me.lstDataCollection.Location = New System.Drawing.Point(267, 9)
-        Me.lstDataCollection.MultiSelect = False
-        Me.lstDataCollection.Name = "lstDataCollection"
-        Me.lstDataCollection.Size = New System.Drawing.Size(127, 100)
-        Me.lstDataCollection.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.lstDataCollection.TabIndex = 4
-        Me.lstDataCollection.UseCompatibleStateImageBehavior = False
-        Me.lstDataCollection.View = System.Windows.Forms.View.Details
+        Me.lstCollection.Activation = System.Windows.Forms.ItemActivation.OneClick
+        Me.lstCollection.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmDatasets, Me.clmDesc})
+        Me.lstCollection.Enabled = False
+        Me.lstCollection.HotTracking = True
+        Me.lstCollection.HoverSelection = True
+        Me.lstCollection.Location = New System.Drawing.Point(15, 60)
+        Me.lstCollection.MultiSelect = False
+        Me.lstCollection.Name = "lstCollection"
+        Me.lstCollection.ShowGroups = False
+        Me.lstCollection.ShowItemToolTips = True
+        Me.lstCollection.Size = New System.Drawing.Size(415, 229)
+        Me.lstCollection.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.lstCollection.TabIndex = 4
+        Me.lstCollection.UseCompatibleStateImageBehavior = False
+        Me.lstCollection.View = System.Windows.Forms.View.Details
+        '
+        'clmDatasets
+        '
+        Me.clmDatasets.Text = "Data"
+        Me.clmDatasets.Width = 142
+        '
+        'clmDesc
+        '
+        Me.clmDesc.Text = "Description"
+        Me.clmDesc.Width = 266
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ucrBase.Location = New System.Drawing.Point(24, 295)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(406, 53)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgFromLibrary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(406, 168)
-        Me.Controls.Add(Me.lstDataCollection)
+        Me.ClientSize = New System.Drawing.Size(437, 348)
+        Me.Controls.Add(Me.lstCollection)
         Me.Controls.Add(Me.chkChooseFrom)
         Me.Controls.Add(Me.cmdLibraryCollection)
         Me.Controls.Add(Me.lblBrowse)
@@ -100,5 +119,7 @@ Partial Class dlgFromLibrary
     Friend WithEvents lblBrowse As Label
     Friend WithEvents cmdLibraryCollection As Button
     Friend WithEvents chkChooseFrom As CheckBox
-    Friend WithEvents lstDataCollection As ListView
+    Friend WithEvents lstCollection As ListView
+    Friend WithEvents clmDatasets As ColumnHeader
+    Friend WithEvents clmDesc As ColumnHeader
 End Class
