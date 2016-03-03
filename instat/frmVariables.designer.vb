@@ -36,8 +36,8 @@ Partial Class frmVariables
         Me.grdVariables.RowHeaderContextMenuStrip = Nothing
         Me.grdVariables.Script = Nothing
         Me.grdVariables.SheetTabContextMenuStrip = Nothing
-        Me.grdVariables.SheetTabControlNewButtonVisible = True
-        Me.grdVariables.SheetTabControlWidth = 300
+        Me.grdVariables.SheetTabNewButtonVisible = True
+        Me.grdVariables.SheetTabWidth = 300
         Me.grdVariables.SheetTabNewButtonVisible = True
         Me.grdVariables.Size = New System.Drawing.Size(344, 138)
         Me.grdVariables.TabIndex = 2

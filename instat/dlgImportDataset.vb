@@ -177,7 +177,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub RefreshFrameView()
-        Dim dfTemp As DataFrame
+        Dim dfTemp As CharacterMatrix
         Dim bToBeAssigned As Boolean
         bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
         Try

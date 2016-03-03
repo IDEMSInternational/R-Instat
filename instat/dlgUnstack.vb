@@ -14,65 +14,107 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+
 Public Class dlgUnstack
-    Private Sub unstackDefaultSettings()
-        ucrIDColumnReceiver.Selector = ucrSelectorForUnstack
-        ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
-        ucrFactorToUnstackReceiver.SetMeAsReceiver()
-        autoTranslate(Me)
-        ucrIDColumnReceiver.Visible = False
-        chkIDColumn.Checked = False
-    End Sub
+    Public bFirstLoad As Boolean = True
     Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        unstackDefaultSettings()
-        ucrBase.clsRsyntax.SetFunction("dcast")
+        ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
+        ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
+        ucrBase.clsRsyntax.SetFunction("tidyr::spread")
+
+
+        autoTranslate(Me)
+        ucrBase.iHelpTopicID = 58
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+        'Checks if Ok can be enabled.
+        TestOKEnabled()
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        unstackDefaultSettings()
+    Private Sub SetDefaults()
+        ucrFactorToUnstackReceiver.SetMeAsReceiver()
+        ucrSelectorForUnstack.Reset()
+        chkKeepUnusedFactorLevels.Checked = False
+        ucrDataFrameForUnstack.Reset()
+        SetNewDataFrameName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
     End Sub
-    Private Sub chkIDColumn_CheckedChanged(sender As Object, e As EventArgs) Handles chkIDColumn.CheckedChanged
-        If chkIDColumn.Checked = True Then
-            ucrIDColumnReceiver.Visible = True
-            ucrIDColumnReceiver.SetMeAsReceiver()
+
+    Private Sub ReopenDialog()
+
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ucrFactorToUnstackReceiver.IsEmpty() = False And ucrColumnToUnstackReceiver.IsEmpty() = False Then
+            ucrBase.OKEnabled(True)
         Else
-            ucrIDColumnReceiver.Visible = False
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrfactortoUnstackReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorToUnstackReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("", ucrFactorToUnstackReceiver.GetVariableNames())
+    Private Sub ucrDataFrameForUnstack_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameForUnstack.Leave
+        SetNewDataFrameName(ucrDataFrameForUnstack.txtValidation.Text)
     End Sub
 
-    Private Sub ucrColumntoUnstackReceiver_Leave(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("value.var", ucrColumnToUnstackReceiver.GetVariableNames())
+    Private Sub SetNewDataFrameName(strNewVal As String)
+        If ucrDataFrameForUnstack.IsValidRString(strNewVal) Then
+            ucrDataFrameForUnstack.txtValidation.Text = strNewVal
+            ucrBase.clsRsyntax.SetAssignTo(ucrDataFrameForUnstack.txtValidation.Text, strTempDataframe:=ucrDataFrameForUnstack.txtValidation.Text)
+        Else
+            ucrDataFrameForUnstack.txtValidation.Text = ""
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        End If
     End Sub
-    Private Sub ucrIDColumnReceiver_Leave(sender As Object, e As EventArgs) Handles ucrIDColumnReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("", ucrIDColumnReceiver.GetVariableNames())
+    Private Sub ucrSelectorForUnstack_DataFrameChanged() Handles ucrSelectorForUnstack.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame)
+        If Not ucrDataFrameForUnstack.bUserTyped Then
+            SetNewDataFrameName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
+        End If
+
     End Sub
 
-    'Private Sub ucrColumnToUnstackReceiver_Enter(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.Enter
-    '    ucrColumnToUnstackReceiver.SetMeAsReceiver()
-    'End Sub
-    'Private Sub ucrIDColumnReceiver_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrIDColumnReceiver.KeyPress
-    '    If e.KeyChar = vbCr Then
-    '        ucrIDColumnReceiver.RemoveSelected()
-    '    End If
-    'End Sub
+    Private Sub ucrFactorToUnstackReceiver_SelectionChanged() Handles ucrFactorToUnstackReceiver.SelectionChanged
+        If Not ucrFactorToUnstackReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("key", ucrFactorToUnstackReceiver.GetVariableNames(False))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("key")
+        End If
+        TestOKEnabled()
+    End Sub
 
-    'Private Sub ucrFactorToUnstackReceiver_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrFactorToUnstackReceiver.KeyPress
-    '    If e.KeyChar = vbCr Then
-    '        ucrFactorToUnstackReceiver.RemoveSelected()
-    '    End If
-    'End Sub
-    'Private Sub ucrColumnToUnstackReceiver_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrColumnToUnstackReceiver.KeyPress
-    '    If e.KeyChar = vbCr Then
-    '        ucrColumnToUnstackReceiver.RemoveSelected()
-    '    End If
-    'End Sub
-    'Private Sub ucrSelectorByDataFrameAddRemove_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrSelectorByDataFrameAddRemove.KeyPress
-    '    If e.KeyChar = vbCr Then
-    '        ucrSelectorByDataFrameAddRemove.Add()
-    '    End If
-    'End Sub
+
+    Private Sub ucrColumnToUnstackReceiver_SelectionChanged() Handles ucrColumnToUnstackReceiver.SelectionChanged
+        If Not ucrColumnToUnstackReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("value", ucrColumnToUnstackReceiver.GetVariableNames(False))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("value")
+        End If
+
+        TestOKEnabled()
+    End Sub
+
+    Private Sub chkKeepUnusedFactorLevels_CheckedChanged(sender As Object, e As EventArgs) Handles chkKeepUnusedFactorLevels.CheckedChanged
+
+        If chkKeepUnusedFactorLevels.Checked = False Then
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("drop", "TRUE")
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("drop")
+            End If
+        Else
+            ucrBase.clsRsyntax.AddParameter("drop", "FALSE")
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+    End Sub
+
 End Class
+

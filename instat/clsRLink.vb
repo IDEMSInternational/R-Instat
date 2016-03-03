@@ -111,13 +111,22 @@ Public Class RLink
 
     End Sub
 
-    Public Function GetDefaultColumnNames(strPrefix As String)
+    Public Function GetDefaultColumnNames(strPrefix As String) As GenericVector
         Dim lstNextDefaults As GenericVector = Nothing
 
         If bInstatObjectExists Then
             lstNextDefaults = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_column_name(prefix = " & Chr(34) & strPrefix & Chr(34) & ")").AsList
         End If
         Return lstNextDefaults
+    End Function
+
+    Public Function GetDefaultColumnNames(strPrefix As String, strDataFrameName As String) As String
+        Dim strNextDefault As String = ""
+
+        If bInstatObjectExists Then
+            strNextDefault = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_column_name(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", prefix = " & Chr(34) & strPrefix & Chr(34) & ")").AsCharacter(0)
+        End If
+        Return strNextDefault
     End Function
 
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "")
@@ -193,10 +202,11 @@ Public Class RLink
     End Sub
 
 
-    Public Function GetData(strLabel As String) As DataFrame
+    Public Function GetData(strLabel As String) As CharacterMatrix
 
-        Me.clsEngine.Evaluate("temp<-" & strLabel).AsDataFrame()
-        Return Me.clsEngine.GetSymbol("temp").AsDataFrame()
+        Me.clsEngine.Evaluate("temp<-" & strLabel)
+        Me.clsEngine.Evaluate("temp <- convert_to_character_matrix(temp)")
+        Return Me.clsEngine.GetSymbol("temp").AsCharacterMatrix()
 
     End Function
 
@@ -206,12 +216,17 @@ Public Class RLink
 
     End Function
 
-    Public Function GetDefaultDataFrameName(strPrefix As String) As String
+    Public Function GetDefaultDataFrameName(strPrefix As String, Optional iStartIndex As Integer = 1, Optional bIncludeIndex As Boolean = True) As String
         Dim strTemp As String
         If Not bInstatObjectExists Then
             CreateNewInstatObject()
         End If
-        strTemp = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_dataframe_name(prefix = " & Chr(34) & strPrefix & Chr(34) & ")").AsCharacter()(0)
+        If bIncludeIndex Then
+            strTemp = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_dataframe_name(prefix = " & Chr(34) & strPrefix & Chr(34) & ", include_index = TRUE, start_index =" & iStartIndex & ")").AsCharacter()(0)
+        Else
+            strTemp = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_dataframe_name(prefix = " & Chr(34) & strPrefix & Chr(34) & ", include_index = FALSE, start_index =" & iStartIndex & ")").AsCharacter()(0)
+        End If
+
         Return strTemp
     End Function
 
