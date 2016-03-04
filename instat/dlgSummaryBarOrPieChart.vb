@@ -63,6 +63,7 @@ Public Class dlgSummaryBarOrPieChart
         SummaryCheck()
         Dim clsTempRFunc As New RFunction
         If rdoBarChart.Checked = True Then
+            ucrSecondreceiver()
             cmdBarChartOptions.Visible = True
             cmdPieChartOptions.Visible = False
             lblSecondFactor.Visible = True
@@ -78,7 +79,7 @@ Public Class dlgSummaryBarOrPieChart
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
             lblSecondFactor.Visible = False
             ucrSecondFactorReceiver.Visible = False
-            ucrYReceiver.SetMeAsReceiver()
+            ucrSecondFactorReceiver.SetMeAsReceiver()
 
             clsRgeom_summarybar.AddParameter("width", 1)
             clsRgeom_summarybar.AddParameter("stat", Chr(34) & "identity" & Chr(34))
@@ -100,12 +101,15 @@ Public Class dlgSummaryBarOrPieChart
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSecondFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.SelectionChanged
+    Private Sub ucrSecondreceiver()
         If Not ucrSecondFactorReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName("fill")
         End If
+    End Sub
+    Private Sub ucrSecondFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.SelectionChanged
+        ucrSecondreceiver()
         TestOkEnabled()
     End Sub
 
