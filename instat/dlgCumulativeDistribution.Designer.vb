@@ -41,14 +41,14 @@ Partial Class dlgCumulativeDistribution
         Me.ucrBase.Location = New System.Drawing.Point(7, 331)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 11
         '
         'ucrCumDistSelector
         '
         Me.ucrCumDistSelector.Location = New System.Drawing.Point(4, 4)
         Me.ucrCumDistSelector.Name = "ucrCumDistSelector"
         Me.ucrCumDistSelector.Size = New System.Drawing.Size(242, 179)
-        Me.ucrCumDistSelector.TabIndex = 1
+        Me.ucrCumDistSelector.TabIndex = 0
         '
         'ucrVariatesreceiver
         '
@@ -64,7 +64,7 @@ Partial Class dlgCumulativeDistribution
         Me.lblvariates.Location = New System.Drawing.Point(270, 10)
         Me.lblvariates.Name = "lblvariates"
         Me.lblvariates.Size = New System.Drawing.Size(51, 13)
-        Me.lblvariates.TabIndex = 3
+        Me.lblvariates.TabIndex = 1
         Me.lblvariates.Tag = "Variates"
         Me.lblvariates.Text = "Variate(s)"
         '
@@ -74,7 +74,7 @@ Partial Class dlgCumulativeDistribution
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(121, 104)
-        Me.ucrFactorReceiver.TabIndex = 2
+        Me.ucrFactorReceiver.TabIndex = 4
         '
         'lblFactors
         '
@@ -92,7 +92,7 @@ Partial Class dlgCumulativeDistribution
         Me.chkExeedancePlots.Location = New System.Drawing.Point(13, 181)
         Me.chkExeedancePlots.Name = "chkExeedancePlots"
         Me.chkExeedancePlots.Size = New System.Drawing.Size(106, 17)
-        Me.chkExeedancePlots.TabIndex = 4
+        Me.chkExeedancePlots.TabIndex = 5
         Me.chkExeedancePlots.Tag = "Exeedance_Plots"
         Me.chkExeedancePlots.Text = "Exeedance Plots"
         Me.chkExeedancePlots.UseVisualStyleBackColor = True
@@ -103,7 +103,7 @@ Partial Class dlgCumulativeDistribution
         Me.chkCountsOnYAxis.Location = New System.Drawing.Point(12, 217)
         Me.chkCountsOnYAxis.Name = "chkCountsOnYAxis"
         Me.chkCountsOnYAxis.Size = New System.Drawing.Size(108, 17)
-        Me.chkCountsOnYAxis.TabIndex = 4
+        Me.chkCountsOnYAxis.TabIndex = 6
         Me.chkCountsOnYAxis.Tag = "Counts_On_YAxis"
         Me.chkCountsOnYAxis.Text = "Counts On Y-Axis"
         Me.chkCountsOnYAxis.UseVisualStyleBackColor = True
@@ -114,7 +114,7 @@ Partial Class dlgCumulativeDistribution
         Me.chkIncludePoints.Location = New System.Drawing.Point(13, 254)
         Me.chkIncludePoints.Name = "chkIncludePoints"
         Me.chkIncludePoints.Size = New System.Drawing.Size(93, 17)
-        Me.chkIncludePoints.TabIndex = 4
+        Me.chkIncludePoints.TabIndex = 7
         Me.chkIncludePoints.Tag = "Include Points"
         Me.chkIncludePoints.Text = "Include Points"
         Me.chkIncludePoints.UseVisualStyleBackColor = True
@@ -124,7 +124,7 @@ Partial Class dlgCumulativeDistribution
         Me.cmdLineOptions.Location = New System.Drawing.Point(13, 294)
         Me.cmdLineOptions.Name = "cmdLineOptions"
         Me.cmdLineOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdLineOptions.TabIndex = 5
+        Me.cmdLineOptions.TabIndex = 8
         Me.cmdLineOptions.Tag = "Line_Options"
         Me.cmdLineOptions.Text = "Line Options"
         Me.cmdLineOptions.UseVisualStyleBackColor = True
@@ -134,7 +134,7 @@ Partial Class dlgCumulativeDistribution
         Me.cmdPlotOptions.Location = New System.Drawing.Point(146, 294)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdPlotOptions.TabIndex = 5
+        Me.cmdPlotOptions.TabIndex = 9
         Me.cmdPlotOptions.Tag = "Plot_Options"
         Me.cmdPlotOptions.Text = "Plot Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
@@ -144,7 +144,7 @@ Partial Class dlgCumulativeDistribution
         Me.cmdThemeOptions.Location = New System.Drawing.Point(276, 294)
         Me.cmdThemeOptions.Name = "cmdThemeOptions"
         Me.cmdThemeOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdThemeOptions.TabIndex = 5
+        Me.cmdThemeOptions.TabIndex = 10
         Me.cmdThemeOptions.Tag = "Theme_Options"
         Me.cmdThemeOptions.Text = "Theme Options"
         Me.cmdThemeOptions.UseVisualStyleBackColor = True
