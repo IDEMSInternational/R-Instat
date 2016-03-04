@@ -16,20 +16,53 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgRowStats
+    Public bFirstLoad As Boolean = False
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction("apply")
-        ucrBase.clsRsyntax.iCallType = 0
         ucrReceiverForRowStatistics.Selector = ucrSelectorForRowStats
         ucrReceiverForRowStatistics.SetMeAsReceiver()
-        ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
+
         ucrNewColumnSelectorForRowStats.SetDataFrameSelector(ucrSelectorForRowStats.ucrAvailableDataFrames)
         ucrNewColumnSelectorForRowStats.SetPrefix("Row_Summary")
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnSelectorForRowStats.cboColumnName.Text, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnSelectorForRowStats.cboColumnName.Text)
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+        'Checks if Ok can be enabled.
+        TestOKEnabled()
+
     End Sub
 
-    Private Sub ucrReceiverRowStatistics_Leave(sender As Object, e As EventArgs) Handles ucrReceiverForRowStatistics.Leave
-        ucrBase.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverForRowStatistics.GetVariables())
+    Private Sub SetDefaults()
+        ucrSelectorForRowStats.Reset()
+        ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
+        rdoMean.Checked = True
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ucrReceiverForRowStatistics.IsEmpty() = False Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+
+    Private Sub ucrReceiverForRowStatistics_SelectionChanged() Handles ucrReceiverForRowStatistics.SelectionChanged
+        If Not ucrReceiverForRowStatistics.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverForRowStatistics.GetVariables())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("x")
+        End If
 
     End Sub
 
