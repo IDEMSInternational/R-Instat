@@ -382,6 +382,12 @@
     <Compile Include="sdgPrincipalComponentAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgThemeOptions.Designer.vb">
+      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgThemeOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
     </Compile>
@@ -2874,6 +2880,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgThemeOptions.fr-FR.resx">
+      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgThemeOptions.resx">
+      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgThemeOptions.sw-KE.resx">
+      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
