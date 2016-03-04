@@ -14,49 +14,70 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+
 Public Class dlgOneWayANOVA
+
+    Public bFirstLoad As Boolean = True
+    Dim clsModel As New ROperator
+
     Private Sub dlgOneWayAnova_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaultSettings()
+            bFirstLoad = False
+        End If
+
+    End Sub
+
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("aov")
         ucrBase.clsRsyntax.iCallType = 2
         ucrYVariate.Selector = ucrAddRemoveDataFrame
-        ucrYVariate.SetMeAsReceiver()
         ucrFactor.Selector = ucrAddRemoveDataFrame
         ucrFactor.SetDataType("factor")
-        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrAddRemoveDataFrame.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsModel.SetOperation("~")
+
         autoTranslate(Me)
-        Fillformula()
+
+        ucrBase.iHelpTopicID = 315
+    End Sub
+
+    Private Sub SetDefaultSettings()
+        ucrAddRemoveDataFrame.Reset()
+        ucrAddRemoveDataFrame.Focus()
+        ucrYVariate.SetMeAsReceiver()
+        TestOKEnabled()
 
     End Sub
 
 
-    Private Sub ucrYVariate_ValueChanged(sender As Object, e As EventArgs) Handles ucrYVariate.ValueChanged
-        Fillformula()
+    Private Sub ucrYVariate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYVariate.SelectionChanged
+        clsModel.SetParameter(True, strValue:=ucrYVariate.GetVariableNames(bWithQuotes:=False))
+        TestOKEnabled()
     End Sub
 
-    Private Sub ucrFactor_ValueChanged(sender As Object, e As EventArgs) Handles ucrFactor.ValueChanged
-        Fillformula()
+    Private Sub ucrFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactor.SelectionChanged
+        clsModel.SetParameter(False, strValue:=ucrFactor.GetVariableNames(bWithQuotes:=False))
+        TestOKEnabled()
     End Sub
-    Private Sub Fillformula()
-        Dim strFactor As String = ""
-        Dim strYVariate As String = ""
-        strYVariate = ucrYVariate.GetVariableNames(bWithQuotes:=False)
-        strFactor = ucrFactor.GetVariableNames(bWithQuotes:=False)
 
-        If ((Not (strYVariate = "")) And (Not (strFactor = ""))) Then
-            ucrBase.clsRsyntax.AddParameter("formula", strYVariate & "~" & strFactor)
-
-
+    Private Sub TestOKEnabled()
+        If (Not ucrYVariate.IsEmpty()) And (Not ucrFactor.IsEmpty()) Then
+            ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrAddRemoveDataframe_Leave(sender As Object, e As EventArgs) Handles ucrAddRemoveDataFrame.Leave
+    Private Sub ucrAddRemoveDataframe_DataFrameChanged() Handles ucrAddRemoveDataFrame.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrAddRemoveDataFrame.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgOptions.ShowDialog()
+        sdgANOVAOptions.ShowDialog()
+    End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaultSettings()
     End Sub
 End Class

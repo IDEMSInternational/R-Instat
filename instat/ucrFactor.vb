@@ -80,14 +80,13 @@ Public Class ucrFactor
                     shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
                     InitialiseSelected()
                 Else
-                    shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).DefaultCellBody = GetType(RadioButtonCell)
                     shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
                     InitialiseSelected()
-                    'Dim rgpSelectColumn As New RadioButtonGroup
+                    Dim rgpselectcolumn As New RadioButtonGroup
                     For i = 0 To shtCurrSheet.RowCount - 1
-                        'Dim rdoTemp As New RadioButtonCell
-                        'rdoTemp.RadioGroup = rgpSelectColumn
-                        'shtCurrSheet(i, iSelectorColumnIndex) = rdoTemp
+                        Dim rdotemp As New RadioButtonCell
+                        rdotemp.RadioGroup = rgpselectcolumn
+                        shtCurrSheet(i, iSelectorColumnIndex) = rdotemp
                     Next
                 End If
             End If
@@ -102,7 +101,7 @@ Public Class ucrFactor
     End Sub
 
     Private Sub InitialiseSelected()
-        'sets the default as unchecked, cells may be blank otherwise
+        'sets the Default As unchecked, cells may be blank otherwise
         Dim i As Integer
         If iSelectorColumnIndex <> -1 Then
             For i = 0 To shtCurrSheet.RowCount - 1
@@ -135,4 +134,18 @@ Public Class ucrFactor
         Return strTemp
     End Function
 
+    Private Sub shtcurrsheet_celldatachanged(sender As Object, e As CellEventArgs) Handles shtCurrSheet.CellDataChanged
+        Dim i As Integer
+        Dim checked As Boolean
+        For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
+            If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
+                checked = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
+                If checked Then
+                    shtCurrSheet.RowHeaders(i).Style.BackColor = Color.Blue
+                Else
+                    shtCurrSheet.RowHeaders(i).Style.BackColor = Color.White
+                End If
+            End If
+        Next
+    End Sub
 End Class
