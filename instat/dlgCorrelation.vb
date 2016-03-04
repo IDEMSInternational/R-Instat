@@ -120,7 +120,7 @@ Public Class dlgCorrelation
         ucrBase.clsRsyntax.SetFunction("cor.test")
         'Set what should be visible/invisible
         grpMissing.Visible = False
-        cmdCorrplot.Visible = False
+        cmdPlot.Visible = False
         lblConfInterval.Visible = True
         txtConfidenceInterval.Visible = True
         ucrReceiverFirstColumn.Visible = True
@@ -148,7 +148,7 @@ Public Class dlgCorrelation
         ucrBase.clsRsyntax.SetFunction("cor")
         'Set what should be visible/invisible
         grpMissing.Visible = True
-        cmdCorrplot.Visible = True
+        cmdPlot.Visible = True
         lblConfInterval.Visible = False
         txtConfidenceInterval.Visible = False
         ucrReceiverFirstColumn.Visible = False
@@ -181,7 +181,7 @@ Public Class dlgCorrelation
         SetDefaults()
     End Sub
 
-    Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdCorrplot.Click
+    Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdPlot.Click
         sdgCorrPlot.ShowDialog()
     End Sub
     Private Sub TestOKEnabledForTwoColumns()
