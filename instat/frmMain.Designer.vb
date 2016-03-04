@@ -195,7 +195,9 @@ Partial Class frmMain
         Me.mnuTbDelete = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.EditLastDialogueToolStrip = New System.Windows.Forms.ToolStripButton()
-        Me.mnuTbShowLast10 = New System.Windows.Forms.ToolStripButton()
+        Me.mnuTbShowLast10 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.sepStart = New System.Windows.Forms.ToolStripSeparator()
+        Me.sepEnd = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbHelp = New System.Windows.Forms.ToolStripButton()
         Me.mnuBar = New System.Windows.Forms.MenuStrip()
@@ -507,16 +509,16 @@ Partial Class frmMain
         'mnuGraphicsScatterPlot
         '
         Me.mnuGraphicsScatterPlot.Name = "mnuGraphicsScatterPlot"
-        Me.mnuGraphicsScatterPlot.Size = New System.Drawing.Size(213, 22)
+        Me.mnuGraphicsScatterPlot.Size = New System.Drawing.Size(222, 22)
         Me.mnuGraphicsScatterPlot.Tag = "Scatter_Plot"
-        Me.mnuGraphicsScatterPlot.Text = "Scatter Plot"
+        Me.mnuGraphicsScatterPlot.Text = "Scatter Plot..."
         '
         'mnuGraphicsLinePlot
         '
         Me.mnuGraphicsLinePlot.Name = "mnuGraphicsLinePlot"
-        Me.mnuGraphicsLinePlot.Size = New System.Drawing.Size(213, 22)
+        Me.mnuGraphicsLinePlot.Size = New System.Drawing.Size(222, 22)
         Me.mnuGraphicsLinePlot.Tag = "Line_Plot"
-        Me.mnuGraphicsLinePlot.Text = "Line Plot"
+        Me.mnuGraphicsLinePlot.Text = "Line Plot..."
         '
         'mnuGraphicsHistogram
         '
@@ -549,16 +551,16 @@ Partial Class frmMain
         'mnuGraphicsBarPie
         '
         Me.mnuGraphicsBarPie.Name = "mnuGraphicsBarPie"
-        Me.mnuGraphicsBarPie.Size = New System.Drawing.Size(213, 22)
+        Me.mnuGraphicsBarPie.Size = New System.Drawing.Size(222, 22)
         Me.mnuGraphicsBarPie.Tag = "Bar_Pie_Chart"
-        Me.mnuGraphicsBarPie.Text = "Bar Charts"
+        Me.mnuGraphicsBarPie.Text = "Bar Charts..."
         '
         'mnuGraphicsBarPieChart
         '
         Me.mnuGraphicsBarPieChart.Name = "mnuGraphicsBarPieChart"
-        Me.mnuGraphicsBarPieChart.Size = New System.Drawing.Size(213, 22)
+        Me.mnuGraphicsBarPieChart.Size = New System.Drawing.Size(222, 22)
         Me.mnuGraphicsBarPieChart.Tag = "Bar_Pie_Chart"
-        Me.mnuGraphicsBarPieChart.Text = "Bar Charts From Summary"
+        Me.mnuGraphicsBarPieChart.Text = "Bar Charts From Summary..."
         '
         'ToolStripSeparator4
         '
@@ -568,9 +570,9 @@ Partial Class frmMain
         'mnuGraphicsCummulativeDistribution
         '
         Me.mnuGraphicsCummulativeDistribution.Name = "mnuGraphicsCummulativeDistribution"
-        Me.mnuGraphicsCummulativeDistribution.Size = New System.Drawing.Size(213, 22)
+        Me.mnuGraphicsCummulativeDistribution.Size = New System.Drawing.Size(222, 22)
         Me.mnuGraphicsCummulativeDistribution.Tag = "Cummulative_Distribution"
-        Me.mnuGraphicsCummulativeDistribution.Text = "Cummulative Distribution"
+        Me.mnuGraphicsCummulativeDistribution.Text = "Cummulative Distribution..."
         '
         'ToolStripSeparator5
         '
@@ -1545,11 +1547,24 @@ Partial Class frmMain
         'mnuTbShowLast10
         '
         Me.mnuTbShowLast10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbShowLast10.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.sepStart, Me.sepEnd})
         Me.mnuTbShowLast10.Image = Global.instat.My.Resources.Resources.Oxygen_Icons_org_Oxygen_Actions_window_duplicate
         Me.mnuTbShowLast10.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbShowLast10.Name = "mnuTbShowLast10"
-        Me.mnuTbShowLast10.Size = New System.Drawing.Size(23, 22)
+        Me.mnuTbShowLast10.Size = New System.Drawing.Size(29, 22)
         Me.mnuTbShowLast10.Text = "&Show last 10 dialogues"
+        '
+        'sepStart
+        '
+        Me.sepStart.Name = "sepStart"
+        Me.sepStart.Size = New System.Drawing.Size(57, 6)
+        Me.sepStart.Visible = False
+        '
+        'sepEnd
+        '
+        Me.sepEnd.Name = "sepEnd"
+        Me.sepEnd.Size = New System.Drawing.Size(57, 6)
+        Me.sepEnd.Visible = False
         '
         'ToolStripSeparator2
         '
@@ -1708,7 +1723,7 @@ Partial Class frmMain
         'mnuCalculations
         '
         Me.mnuCalculations.Name = "mnuCalculations"
-        Me.mnuCalculations.Size = New System.Drawing.Size(148, 22)
+        Me.mnuCalculations.Size = New System.Drawing.Size(152, 22)
         Me.mnuCalculations.Tag = "Calculations"
         Me.mnuCalculations.Text = "Calculations..."
         '
@@ -1716,7 +1731,7 @@ Partial Class frmMain
         '
         Me.mnuManageData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataRegularSequence, Me.mnuManageDataRandomSamples, Me.mnuManageDataView, Me.mnuManageDataRename, Me.mnuManageDataConvertTo})
         Me.mnuManageData.Name = "mnuManageData"
-        Me.mnuManageData.Size = New System.Drawing.Size(148, 22)
+        Me.mnuManageData.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageData.Tag = "Data"
         Me.mnuManageData.Text = "Data"
         '
@@ -1759,7 +1774,7 @@ Partial Class frmMain
         '
         Me.mnuManageFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageFactorconvertToFactor, Me.mnuMangeFactorLabel, Me.mnuManageFactorReorderLevels, Me.mnuManageFactorRecode, Me.mnuManageFactorReferenceLevels, Me.mnuManageFactorInteraction, Me.mnuManageFactorUnusedLevels, Me.mnuManageFactorIndicatorVariables})
         Me.mnuManageFactor.Name = "mnuManageFactor"
-        Me.mnuManageFactor.Size = New System.Drawing.Size(148, 22)
+        Me.mnuManageFactor.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageFactor.Tag = "Factor"
         Me.mnuManageFactor.Text = "Factor"
         '
@@ -1823,7 +1838,7 @@ Partial Class frmMain
         '
         Me.mnuManageManipulate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTransform, Me.mnuManageManipulateRecode, Me.mnuManageManipulateSort, Me.mnuManageManipulateRank, Me.mnuManageManipulateRowSummary, Me.mnuManagePermuteRows, Me.mnuManageManipulatePolynomials})
         Me.mnuManageManipulate.Name = "mnuManageManipulate"
-        Me.mnuManageManipulate.Size = New System.Drawing.Size(148, 22)
+        Me.mnuManageManipulate.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageManipulate.Tag = "Manipulate"
         Me.mnuManageManipulate.Text = "Manipulate"
         '
@@ -1880,7 +1895,7 @@ Partial Class frmMain
         '
         Me.mnuManageSheet.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageSheetColumnMetadata, Me.mnuManageSheetRestrict, Me.mnuManageSheetReorder, Me.mnuManageSheetInsertColumnsRows, Me.mnuManageSheetDeleteColumnsRows, Me.mnuManageSheetProtect, Me.mnuManageSheetHideShowColumns})
         Me.mnuManageSheet.Name = "mnuManageSheet"
-        Me.mnuManageSheet.Size = New System.Drawing.Size(148, 22)
+        Me.mnuManageSheet.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageSheet.Tag = "Sheet"
         Me.mnuManageSheet.Text = "Sheet"
         '
@@ -1937,7 +1952,7 @@ Partial Class frmMain
         '
         Me.mnuManageReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageRechapeColumnSummaries, Me.mnuManageReshapeStack, Me.mnuManageReshapeUnstack, Me.mnuManageReshapeRandomSubst, Me.mnuManageRechapeSelect, Me.mnuManageRechapeMerge, Me.RemoveUnusedLabelsToolStripMenuItem})
         Me.mnuManageReshape.Name = "mnuManageReshape"
-        Me.mnuManageReshape.Size = New System.Drawing.Size(148, 22)
+        Me.mnuManageReshape.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageReshape.Tag = "Reshape"
         Me.mnuManageReshape.Text = "Reshape"
         '
@@ -1993,7 +2008,7 @@ Partial Class frmMain
         '
         Me.mnuManageDataFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataFileViewDataMetadata, Me.mnuManageDataFileRenameSheet, Me.mnuManageDataFileReorderSheets, Me.mnuManageDataFileCopySheet, Me.mnuManageDataFileDeleteSheets})
         Me.mnuManageDataFile.Name = "mnuManageDataFile"
-        Me.mnuManageDataFile.Size = New System.Drawing.Size(148, 22)
+        Me.mnuManageDataFile.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageDataFile.Tag = "Data_file"
         Me.mnuManageDataFile.Text = "Data File"
         '
@@ -2472,7 +2487,6 @@ Partial Class frmMain
     Friend WithEvents mnuTbDelete As ToolStripButton
     Friend WithEvents toolStripSeparator1 As ToolStripSeparator
     Friend WithEvents EditLastDialogueToolStrip As ToolStripButton
-    Friend WithEvents mnuTbShowLast10 As ToolStripButton
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents mnuTbHelp As ToolStripButton
     Private WithEvents mnuBar As MenuStrip
@@ -2611,4 +2625,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
     Friend WithEvents mnuGraphicsScatterPlot As ToolStripMenuItem
+    Friend WithEvents mnuTbShowLast10 As ToolStripDropDownButton
+    Friend WithEvents sepEnd As ToolStripSeparator
+    Friend WithEvents sepStart As ToolStripSeparator
 End Class
