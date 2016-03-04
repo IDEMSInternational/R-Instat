@@ -1,8 +1,8 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ucrInputTextBox
-    Inherits instat.ucrInput
+Partial Class sdgPieChartOptions
+    Inherits System.Windows.Forms.Form
 
-    'UserControl overrides dispose to clean up the component list.
+    'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -22,28 +22,30 @@ Partial Class ucrInputTextBox
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtInput = New System.Windows.Forms.TextBox()
+        Me.ucrBaseSdgPieChart = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
-        'txtInput
+        'ucrBaseSdgPieChart
         '
-        Me.txtInput.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtInput.Location = New System.Drawing.Point(0, 0)
-        Me.txtInput.Name = "txtInput"
-        Me.txtInput.Size = New System.Drawing.Size(142, 20)
-        Me.txtInput.TabIndex = 0
+        Me.ucrBaseSdgPieChart.Location = New System.Drawing.Point(49, 219)
+        Me.ucrBaseSdgPieChart.Name = "ucrBaseSdgPieChart"
+        Me.ucrBaseSdgPieChart.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSdgPieChart.TabIndex = 0
         '
-        'ucrInputTextBox
+        'sdgPieChartOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.txtInput)
-        Me.Name = "ucrInputTextBox"
-        Me.Size = New System.Drawing.Size(142, 21)
+        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.ucrBaseSdgPieChart)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Name = "sdgPieChartOptions"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Pie_Chart_Options"
+        Me.Text = "Pie Chart Options"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents txtInput As TextBox
+    Friend WithEvents ucrBaseSdgPieChart As ucrButtonsSubdialogue
 End Class
