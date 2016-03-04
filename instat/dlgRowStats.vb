@@ -20,16 +20,16 @@ Public Class dlgRowStats
         autoTranslate(Me)
         ucrBase.clsRsyntax.SetFunction("apply")
         ucrBase.clsRsyntax.iCallType = 0
-        ucrReceiverRowStatistics.Selector = ucrSelectorByDataFrameAddRemove
-        ucrReceiverRowStatistics.SetMeAsReceiver()
+        ucrReceiverForRowStatistics.Selector = ucrSelectorForRowStats
+        ucrReceiverForRowStatistics.SetMeAsReceiver()
         ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
-        ucrNewColumnNameSelector.SetDataFrameSelector(ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames)
-        ucrNewColumnNameSelector.SetPrefix("Row_Summary")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+        ucrNewColumnSelectorForRowStats.SetDataFrameSelector(ucrSelectorForRowStats.ucrAvailableDataFrames)
+        ucrNewColumnSelectorForRowStats.SetPrefix("Row_Summary")
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnSelectorForRowStats.cboColumnName.Text, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnSelectorForRowStats.cboColumnName.Text)
     End Sub
 
-    Private Sub ucrReceiverRowStatistics_Leave(sender As Object, e As EventArgs) Handles ucrReceiverRowStatistics.Leave
-        ucrBase.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverRowStatistics.GetVariables())
+    Private Sub ucrReceiverRowStatistics_Leave(sender As Object, e As EventArgs) Handles ucrReceiverForRowStatistics.Leave
+        ucrBase.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverForRowStatistics.GetVariables())
 
     End Sub
 
@@ -54,7 +54,7 @@ Public Class dlgRowStats
 
     End Sub
 
-    Private Sub ucrNewColumnNameSelector_Leave(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelector.Leave
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectorByDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+    Private Sub ucrNewColumnNameSelector_Leave(sender As Object, e As EventArgs) Handles ucrNewColumnSelectorForRowStats.Leave
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnSelectorForRowStats.cboColumnName.Text, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnSelectorForRowStats.cboColumnName.Text)
     End Sub
 End Class
