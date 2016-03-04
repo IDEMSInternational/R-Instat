@@ -24,26 +24,26 @@ Partial Class sdgANOVAOptions
     Private Sub InitializeComponent()
         Me.tbcOptions = New System.Windows.Forms.TabControl()
         Me.tbpDisplay = New System.Windows.Forms.TabPage()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.chkContrasts = New System.Windows.Forms.CheckBox()
         Me.chkStandardErrors = New System.Windows.Forms.CheckBox()
-        Me.chkTableOfMeans = New System.Windows.Forms.CheckBox()
+        Me.chkMeansAndCounts = New System.Windows.Forms.CheckBox()
         Me.chkEstimateValues = New System.Windows.Forms.CheckBox()
         Me.chkANOVATable = New System.Windows.Forms.CheckBox()
         Me.tbpGraphics = New System.Windows.Forms.TabPage()
         Me.grpMeans = New System.Windows.Forms.GroupBox()
+        Me.nudConfidenceLevel = New System.Windows.Forms.NumericUpDown()
+        Me.lblConfidenceLevel = New System.Windows.Forms.Label()
+        Me.chkConfidenceLimits = New System.Windows.Forms.CheckBox()
         Me.chkMeans = New System.Windows.Forms.CheckBox()
         Me.grpResiduals = New System.Windows.Forms.GroupBox()
         Me.chkResiduals = New System.Windows.Forms.CheckBox()
         Me.ucrBaseSdg = New instat.ucrButtonsSubdialogue()
-        Me.chkConfidenceLimits = New System.Windows.Forms.CheckBox()
-        Me.lblConfidenceLevel = New System.Windows.Forms.Label()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.tbcOptions.SuspendLayout()
         Me.tbpDisplay.SuspendLayout()
         Me.tbpGraphics.SuspendLayout()
         Me.grpMeans.SuspendLayout()
+        CType(Me.nudConfidenceLevel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpResiduals.SuspendLayout()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tbcOptions
@@ -58,30 +58,30 @@ Partial Class sdgANOVAOptions
         '
         'tbpDisplay
         '
-        Me.tbpDisplay.Controls.Add(Me.CheckBox1)
+        Me.tbpDisplay.Controls.Add(Me.chkContrasts)
         Me.tbpDisplay.Controls.Add(Me.chkStandardErrors)
-        Me.tbpDisplay.Controls.Add(Me.chkTableOfMeans)
+        Me.tbpDisplay.Controls.Add(Me.chkMeansAndCounts)
         Me.tbpDisplay.Controls.Add(Me.chkEstimateValues)
         Me.tbpDisplay.Controls.Add(Me.chkANOVATable)
         Me.tbpDisplay.Location = New System.Drawing.Point(4, 22)
         Me.tbpDisplay.Name = "tbpDisplay"
         Me.tbpDisplay.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpDisplay.Size = New System.Drawing.Size(323, 162)
+        Me.tbpDisplay.Size = New System.Drawing.Size(337, 182)
         Me.tbpDisplay.TabIndex = 0
         Me.tbpDisplay.Tag = "Display"
         Me.tbpDisplay.Text = "Display"
         Me.tbpDisplay.UseVisualStyleBackColor = True
         '
-        'CheckBox1
+        'chkContrasts
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(10, 131)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(70, 17)
-        Me.CheckBox1.TabIndex = 7
-        Me.CheckBox1.Tag = "Contrasts"
-        Me.CheckBox1.Text = "Contrasts"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.chkContrasts.AutoSize = True
+        Me.chkContrasts.Location = New System.Drawing.Point(10, 131)
+        Me.chkContrasts.Name = "chkContrasts"
+        Me.chkContrasts.Size = New System.Drawing.Size(70, 17)
+        Me.chkContrasts.TabIndex = 7
+        Me.chkContrasts.Tag = "Contrasts"
+        Me.chkContrasts.Text = "Contrasts"
+        Me.chkContrasts.UseVisualStyleBackColor = True
         '
         'chkStandardErrors
         '
@@ -94,16 +94,16 @@ Partial Class sdgANOVAOptions
         Me.chkStandardErrors.Text = "Standard errors"
         Me.chkStandardErrors.UseVisualStyleBackColor = True
         '
-        'chkTableOfMeans
+        'chkMeansAndCounts
         '
-        Me.chkTableOfMeans.AutoSize = True
-        Me.chkTableOfMeans.Location = New System.Drawing.Point(10, 98)
-        Me.chkTableOfMeans.Name = "chkTableOfMeans"
-        Me.chkTableOfMeans.Size = New System.Drawing.Size(114, 17)
-        Me.chkTableOfMeans.TabIndex = 5
-        Me.chkTableOfMeans.Tag = "Means_and_counts"
-        Me.chkTableOfMeans.Text = "Means and counts"
-        Me.chkTableOfMeans.UseVisualStyleBackColor = True
+        Me.chkMeansAndCounts.AutoSize = True
+        Me.chkMeansAndCounts.Location = New System.Drawing.Point(10, 98)
+        Me.chkMeansAndCounts.Name = "chkMeansAndCounts"
+        Me.chkMeansAndCounts.Size = New System.Drawing.Size(114, 17)
+        Me.chkMeansAndCounts.TabIndex = 5
+        Me.chkMeansAndCounts.Tag = "Means_and_counts"
+        Me.chkMeansAndCounts.Text = "Means and counts"
+        Me.chkMeansAndCounts.UseVisualStyleBackColor = True
         '
         'chkEstimateValues
         '
@@ -142,7 +142,7 @@ Partial Class sdgANOVAOptions
         '
         'grpMeans
         '
-        Me.grpMeans.Controls.Add(Me.NumericUpDown1)
+        Me.grpMeans.Controls.Add(Me.nudConfidenceLevel)
         Me.grpMeans.Controls.Add(Me.lblConfidenceLevel)
         Me.grpMeans.Controls.Add(Me.chkConfidenceLimits)
         Me.grpMeans.Controls.Add(Me.chkMeans)
@@ -153,6 +153,35 @@ Partial Class sdgANOVAOptions
         Me.grpMeans.TabStop = False
         Me.grpMeans.Tag = "Means"
         Me.grpMeans.Text = "Means"
+        '
+        'nudConfidenceLevel
+        '
+        Me.nudConfidenceLevel.Location = New System.Drawing.Point(149, 61)
+        Me.nudConfidenceLevel.Name = "nudConfidenceLevel"
+        Me.nudConfidenceLevel.Size = New System.Drawing.Size(46, 20)
+        Me.nudConfidenceLevel.TabIndex = 4
+        Me.nudConfidenceLevel.Value = New Decimal(New Integer() {95, 0, 0, 0})
+        '
+        'lblConfidenceLevel
+        '
+        Me.lblConfidenceLevel.AutoSize = True
+        Me.lblConfidenceLevel.Location = New System.Drawing.Point(50, 68)
+        Me.lblConfidenceLevel.Name = "lblConfidenceLevel"
+        Me.lblConfidenceLevel.Size = New System.Drawing.Size(86, 13)
+        Me.lblConfidenceLevel.TabIndex = 3
+        Me.lblConfidenceLevel.Tag = "Confidence_level"
+        Me.lblConfidenceLevel.Text = "Confidence level"
+        '
+        'chkConfidenceLimits
+        '
+        Me.chkConfidenceLimits.AutoSize = True
+        Me.chkConfidenceLimits.Location = New System.Drawing.Point(6, 42)
+        Me.chkConfidenceLimits.Name = "chkConfidenceLimits"
+        Me.chkConfidenceLimits.Size = New System.Drawing.Size(105, 17)
+        Me.chkConfidenceLimits.TabIndex = 2
+        Me.chkConfidenceLimits.Tag = "Confidence_limits"
+        Me.chkConfidenceLimits.Text = "Confidence limits"
+        Me.chkConfidenceLimits.UseVisualStyleBackColor = True
         '
         'chkMeans
         '
@@ -194,35 +223,6 @@ Partial Class sdgANOVAOptions
         Me.ucrBaseSdg.Size = New System.Drawing.Size(142, 30)
         Me.ucrBaseSdg.TabIndex = 2
         '
-        'chkConfidenceLimits
-        '
-        Me.chkConfidenceLimits.AutoSize = True
-        Me.chkConfidenceLimits.Location = New System.Drawing.Point(6, 42)
-        Me.chkConfidenceLimits.Name = "chkConfidenceLimits"
-        Me.chkConfidenceLimits.Size = New System.Drawing.Size(105, 17)
-        Me.chkConfidenceLimits.TabIndex = 2
-        Me.chkConfidenceLimits.Tag = "Confidence_limits"
-        Me.chkConfidenceLimits.Text = "Confidence limits"
-        Me.chkConfidenceLimits.UseVisualStyleBackColor = True
-        '
-        'lblConfidenceLevel
-        '
-        Me.lblConfidenceLevel.AutoSize = True
-        Me.lblConfidenceLevel.Location = New System.Drawing.Point(50, 68)
-        Me.lblConfidenceLevel.Name = "lblConfidenceLevel"
-        Me.lblConfidenceLevel.Size = New System.Drawing.Size(86, 13)
-        Me.lblConfidenceLevel.TabIndex = 3
-        Me.lblConfidenceLevel.Tag = "Confidence_level"
-        Me.lblConfidenceLevel.Text = "Confidence level"
-        '
-        'NumericUpDown1
-        '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(149, 61)
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(46, 20)
-        Me.NumericUpDown1.TabIndex = 4
-        Me.NumericUpDown1.Value = New Decimal(New Integer() {95, 0, 0, 0})
-        '
         'sdgANOVAOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -240,9 +240,9 @@ Partial Class sdgANOVAOptions
         Me.tbpGraphics.ResumeLayout(False)
         Me.grpMeans.ResumeLayout(False)
         Me.grpMeans.PerformLayout()
+        CType(Me.nudConfidenceLevel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpResiduals.ResumeLayout(False)
         Me.grpResiduals.PerformLayout()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -250,18 +250,18 @@ Partial Class sdgANOVAOptions
     Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
     Friend WithEvents tbcOptions As TabControl
     Friend WithEvents tbpDisplay As TabPage
-    Friend WithEvents chkTableOfMeans As CheckBox
+    Friend WithEvents chkMeansAndCounts As CheckBox
     Friend WithEvents chkEstimateValues As CheckBox
     Friend WithEvents chkANOVATable As CheckBox
     Friend WithEvents tbpGraphics As TabPage
     Friend WithEvents chkMeans As CheckBox
     Friend WithEvents chkResiduals As CheckBox
     Friend WithEvents ucrBaseSdg As ucrButtonsSubdialogue
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents chkContrasts As CheckBox
     Friend WithEvents chkStandardErrors As CheckBox
     Friend WithEvents grpMeans As GroupBox
     Friend WithEvents grpResiduals As GroupBox
-    Friend WithEvents NumericUpDown1 As NumericUpDown
+    Friend WithEvents nudConfidenceLevel As NumericUpDown
     Friend WithEvents lblConfidenceLevel As Label
     Friend WithEvents chkConfidenceLimits As CheckBox
 End Class
