@@ -90,4 +90,8 @@ Public Class dlgDotPlot
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
+
+    Private Sub cmdDotPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdDotPlotOptions.Click
+        sdgDotPlot.ShowDialog()
+    End Sub
 End Class

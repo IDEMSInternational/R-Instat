@@ -34,18 +34,29 @@ Public Class ucrDistributions
 
     Public Sub AddParameter(strArgumentName As String, strArgumentValue As String)
         Dim i As Integer
-        clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
+        Dim clsParam As New RParameter
         i = lstFunctionParameters.FindIndex(Function(x) x.strArgumentName.Equals(strArgumentName))
         If i = -1 Then
-            lstFunctionParameters.Add(clsCurrRFunction.clsParameters.Last)
+            clsParam.SetArgumentName(strArgumentName)
+            clsParam.SetArgumentValue(strArgumentValue)
+            lstFunctionParameters.Add(clsParam)
         Else
             lstFunctionParameters(i).strArgumentValue = strArgumentValue
         End If
     End Sub
 
     Public Sub IncludeFunctionParameter()
+        Dim clsTempOp As ROperator
         For Each clsParam In lstFunctionParameters
-            clsCurrRFunction.AddParameter(clsParam)
+            If clsCurrDistribution.strNameTag = "Exponential" And clsParam.strArgumentName = "mean" Then
+                clsTempOp = New ROperator
+                clsTempOp.SetOperation("/")
+                clsTempOp.SetParameter(True, 1)
+                clsTempOp.SetParameter(False, clsParam:=clsParam)
+                clsCurrRFunction.AddParameter("rate", clsROperatorParameter:=clsTempOp)
+            Else
+                clsCurrRFunction.AddParameter(clsParam)
+            End If
         Next
     End Sub
 
@@ -123,7 +134,7 @@ Public Class ucrDistributions
         clsExponentialDist.strPFunctionName = "pexp"
         clsExponentialDist.strQFunctionName = "qexp"
         clsExponentialDist.strDFunctionName = "dexp"
-        clsExponentialDist.AddParameter("rate", "Rate", 1)
+        clsExponentialDist.AddParameter("mean", "Mean", 1)
         lstAllDistributions.Add(clsExponentialDist)
 
         ' Geometric Distribution
