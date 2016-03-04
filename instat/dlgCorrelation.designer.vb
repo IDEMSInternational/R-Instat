@@ -36,11 +36,11 @@ Partial Class dlgCorrelation
         Me.rdoCompleteRowsOnly = New System.Windows.Forms.RadioButton()
         Me.lblConfInterval = New System.Windows.Forms.Label()
         Me.txtConfidenceInterval = New System.Windows.Forms.TextBox()
+        Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorDataFrameVarAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
         Me.grpMethod.SuspendLayout()
         Me.grpMissing.SuspendLayout()
         Me.SuspendLayout()
@@ -197,6 +197,14 @@ Partial Class dlgCorrelation
         Me.txtConfidenceInterval.Size = New System.Drawing.Size(100, 20)
         Me.txtConfidenceInterval.TabIndex = 14
         '
+        'ucrReceiverMultipleColumns
+        '
+        Me.ucrReceiverMultipleColumns.Location = New System.Drawing.Point(278, 112)
+        Me.ucrReceiverMultipleColumns.Name = "ucrReceiverMultipleColumns"
+        Me.ucrReceiverMultipleColumns.Selector = Nothing
+        Me.ucrReceiverMultipleColumns.Size = New System.Drawing.Size(121, 104)
+        Me.ucrReceiverMultipleColumns.TabIndex = 15
+        '
         'ucrReceiverSecondColumn
         '
         Me.ucrReceiverSecondColumn.Location = New System.Drawing.Point(301, 181)
@@ -226,14 +234,6 @@ Partial Class dlgCorrelation
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(409, 57)
         Me.ucrBase.TabIndex = 1
-        '
-        'ucrReceiverMultipleColumns
-        '
-        Me.ucrReceiverMultipleColumns.Location = New System.Drawing.Point(278, 112)
-        Me.ucrReceiverMultipleColumns.Name = "ucrReceiverMultipleColumns"
-        Me.ucrReceiverMultipleColumns.Selector = Nothing
-        Me.ucrReceiverMultipleColumns.Size = New System.Drawing.Size(121, 104)
-        Me.ucrReceiverMultipleColumns.TabIndex = 15
         '
         'dlgCorrelation
         '
