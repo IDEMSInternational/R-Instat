@@ -22,7 +22,7 @@ Public Class dlgRowStats
         ucrBase.clsRsyntax.SetFunction("apply")
         ucrReceiverForRowStatistics.Selector = ucrSelectorForRowStats
         ucrReceiverForRowStatistics.SetMeAsReceiver()
-
+        ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
         ucrNewColumnSelectorForRowStats.SetDataFrameSelector(ucrSelectorForRowStats.ucrAvailableDataFrames)
         ucrNewColumnSelectorForRowStats.SetPrefix("Row_Summary")
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnSelectorForRowStats.cboColumnName.Text, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnSelectorForRowStats.cboColumnName.Text)
@@ -40,8 +40,6 @@ Public Class dlgRowStats
 
     Private Sub SetDefaults()
         ucrSelectorForRowStats.Reset()
-        ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
-        rdoMean.Checked = True
     End Sub
 
     Private Sub ReopenDialog()
@@ -70,14 +68,9 @@ Public Class dlgRowStats
 
     Private Sub Statistic_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMean.CheckedChanged, rdoCount.CheckedChanged, rdoMaximum.CheckedChanged, rdoMinimum.CheckedChanged, rdoSum.CheckedChanged, rdoStandardDeviation.CheckedChanged
         If rdoMean.Checked = True Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                ucrBase.clsRsyntax.AddParameter("FUN", "mean")
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("FUN")
-            End If
-
+            ucrBase.clsRsyntax.AddParameter("FUN", "mean")
         ElseIf rdoCount.Checked = True Then
-                ucrBase.clsRsyntax.AddParameter("FUN", "function(z) sum(!is.na(z))")
+            ucrBase.clsRsyntax.AddParameter("FUN", "function(z) sum(!is.na(z))")
             ElseIf rdoMaximum.Checked = True Then
                 ucrBase.clsRsyntax.AddParameter("FUN", "max")
             ElseIf rdoMinimum.Checked = True Then
@@ -92,7 +85,5 @@ Public Class dlgRowStats
 
     End Sub
 
-    Private Sub ucrNewColumnNameSelector_Leave(sender As Object, e As EventArgs) Handles ucrNewColumnSelectorForRowStats.Leave
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnSelectorForRowStats.cboColumnName.Text, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnSelectorForRowStats.cboColumnName.Text)
-    End Sub
+
 End Class
