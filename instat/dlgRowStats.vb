@@ -85,5 +85,7 @@ Public Class dlgRowStats
 
     End Sub
 
-
+    Private Sub ucrNewColumnNameSelector_Leave(sender As Object, e As EventArgs) Handles ucrNewColumnSelectorForRowStats.Leave
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnSelectorForRowStats.cboColumnName.Text, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnSelectorForRowStats.cboColumnName.Text)
+    End Sub
 End Class
