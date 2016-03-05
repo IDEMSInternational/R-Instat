@@ -15,8 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgCorrPlot
-    'Public clsRGraphics As New RSyntax
-    Public clsRaovFunction, clsRGGPairsFunction, clsRaovpvalFunction, clsRestpvalFunction, clsRFourPlotsFunction, clsRgeom_point As New RFunction
+    Public clsRGGPairsFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub sdgCorrPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -30,22 +29,23 @@ Public Class sdgCorrPlot
 
     Private Sub GGPairs()
         Dim clsRGraphics As New RSyntax
-        'clsRGraphics.SetFunction("ggpairs")
-        'clsRGraphics.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.ucrSelectorDataFrameVarAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
-        'clsRGraphics.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames())
-        'frmMain.clsRLink.RunScript(clsRGraphics.GetScript(), 2)
-        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRGGPairsFunction)
-        clsRGraphics.SetOperation("")
-        clsRGGPairsFunction.SetRCommand("ggpairs")
-        clsRGGPairsFunction.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.ucrSelectorDataFrameVarAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsRGGPairsFunction.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames())
-        clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRGGPairsFunction)
+        clsRGraphics.SetFunction("ggpairs")
+        clsRGraphics.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.ucrSelectorDataFrameVarAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsRGraphics.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames())
+
+        'clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRGGPairsFunction)
+        'clsRGraphics.SetOperation("")
+        'clsRGGPairsFunction.SetRCommand("ggpairs")
+        'clsRGGPairsFunction.AddParameter("data", clsRFunctionParameter:=dlgCorrelation.ucrSelectorDataFrameVarAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
+        'clsRGGPairsFunction.AddParameter("columns", dlgCorrelation.ucrReceiverMultipleColumns.GetVariableNames())
+        'clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRGGPairsFunction)
+
         'Calltype is not the right one but it works
         frmMain.clsRLink.RunScript(clsRGraphics.GetScript(), 2)
     End Sub
 
     Public Sub SetDefaults()
-        chkGGPairs.Checked = True
+        chkGGPairs.Checked = False
     End Sub
 
     Public Sub RegOptions()
