@@ -24,8 +24,9 @@ Partial Class sdgCorrPlot
     Private Sub InitializeComponent()
         Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
-        Me.tbSdgCorrelation = New System.Windows.Forms.TabControl()
         Me.chkGGPairs = New System.Windows.Forms.CheckBox()
+        Me.tbSdgCorrelation = New System.Windows.Forms.TabControl()
+        Me.chkGGcorr = New System.Windows.Forms.CheckBox()
         Me.tbGraphics.SuspendLayout()
         Me.tbSdgCorrelation.SuspendLayout()
         Me.SuspendLayout()
@@ -39,6 +40,7 @@ Partial Class sdgCorrPlot
         '
         'tbGraphics
         '
+        Me.tbGraphics.Controls.Add(Me.chkGGcorr)
         Me.tbGraphics.Controls.Add(Me.chkGGPairs)
         Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tbGraphics.Name = "tbGraphics"
@@ -48,16 +50,6 @@ Partial Class sdgCorrPlot
         Me.tbGraphics.Tag = "Graphics"
         Me.tbGraphics.Text = "Graphics"
         Me.tbGraphics.UseVisualStyleBackColor = True
-        '
-        'tbSdgCorrelation
-        '
-        Me.tbSdgCorrelation.Controls.Add(Me.tbGraphics)
-        Me.tbSdgCorrelation.Location = New System.Drawing.Point(12, 12)
-        Me.tbSdgCorrelation.Name = "tbSdgCorrelation"
-        Me.tbSdgCorrelation.SelectedIndex = 0
-        Me.tbSdgCorrelation.Size = New System.Drawing.Size(212, 210)
-        Me.tbSdgCorrelation.TabIndex = 1
-        Me.tbSdgCorrelation.Tag = ""
         '
         'chkGGPairs
         '
@@ -69,6 +61,27 @@ Partial Class sdgCorrPlot
         Me.chkGGPairs.Tag = "GG_Pairs"
         Me.chkGGPairs.Text = "GG Pairs"
         Me.chkGGPairs.UseVisualStyleBackColor = True
+        '
+        'tbSdgCorrelation
+        '
+        Me.tbSdgCorrelation.Controls.Add(Me.tbGraphics)
+        Me.tbSdgCorrelation.Location = New System.Drawing.Point(12, 12)
+        Me.tbSdgCorrelation.Name = "tbSdgCorrelation"
+        Me.tbSdgCorrelation.SelectedIndex = 0
+        Me.tbSdgCorrelation.Size = New System.Drawing.Size(212, 210)
+        Me.tbSdgCorrelation.TabIndex = 1
+        Me.tbSdgCorrelation.Tag = ""
+        '
+        'chkGGcorr
+        '
+        Me.chkGGcorr.AutoSize = True
+        Me.chkGGcorr.Location = New System.Drawing.Point(28, 54)
+        Me.chkGGcorr.Name = "chkGGcorr"
+        Me.chkGGcorr.Size = New System.Drawing.Size(63, 17)
+        Me.chkGGcorr.TabIndex = 1
+        Me.chkGGcorr.Tag = "GG_corr"
+        Me.chkGGcorr.Text = "GG corr"
+        Me.chkGGcorr.UseVisualStyleBackColor = True
         '
         'sdgCorrPlot
         '
@@ -93,4 +106,5 @@ Partial Class sdgCorrPlot
     Friend WithEvents tbGraphics As TabPage
     Friend WithEvents chkGGPairs As CheckBox
     Friend WithEvents tbSdgCorrelation As TabControl
+    Friend WithEvents chkGGcorr As CheckBox
 End Class
