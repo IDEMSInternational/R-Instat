@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgCorrelation
     Public bFirstLoad As Boolean = True
     Public bIsTwoColumnFunction As Boolean
-    Public MultipleVariables
 
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Set properties needed on load
@@ -67,8 +66,6 @@ Public Class dlgCorrelation
     End Sub
 
     Public Sub ucrReceiverMultipleColumns_SelectionChanged() Handles ucrReceiverMultipleColumns.SelectionChanged
-        MultipleVariables = ucrSelectorDataFrameVarAddRemove.ucrAvailableDataFrames.strCurrDataFrame.ToString & "[," & ucrReceiverMultipleColumns.GetVariableNames() & "]"
-        'ucrBase.clsRsyntax.AddParameter("Y", MultipleVariables)
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverMultipleColumns.GetVariables())
         TestOKEnabledForMultipleColumns()
     End Sub
