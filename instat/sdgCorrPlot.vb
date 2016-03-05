@@ -44,13 +44,31 @@ Public Class sdgCorrPlot
         frmMain.clsRLink.RunScript(clsRGraphics.GetScript(), 2)
     End Sub
 
+    Private Sub GGcorr()
+        Dim clsRGGcorrGraphics As New RSyntax
+        'We may have to save the correlation matrix then use it here.
+        'We still need to add more arguments to the ggcorr function 
+        clsRGGcorrGraphics.SetFunction("ggcorr")
+        clsRGGcorrGraphics.AddParameter("data", "NULL")
+        clsRGGcorrGraphics.AddParameter("cor_matrix", dlgCorrelation.ucrBase.clsRsyntax.GetScript())
+
+
+        'Calltype is not the right one but it works
+        frmMain.clsRLink.RunScript(clsRGGcorrGraphics.GetScript(), 2)
+    End Sub
+
+
     Public Sub SetDefaults()
         chkGGPairs.Checked = False
+        chkGGcorr.Checked = False
     End Sub
 
     Public Sub RegOptions()
         If (chkGGPairs.Checked = True) Then
             GGPairs()
+        End If
+        If (chkGGcorr.Checked = True) Then
+            GGcorr()
         End If
     End Sub
 End Class
