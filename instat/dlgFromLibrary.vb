@@ -33,7 +33,7 @@ Public Class dlgFromLibrary
     Private Sub setLibrary()
         Dim dfTemp As DataFrame
         Dim lstItem As New ListViewItem
-        frmMain.clsRLink.clsEngine.Evaluate(strLibraryTemp & "<-data.frame(data(package =  .packages(all.available = TRUE))$results[1:343,3:4])")
+        frmMain.clsRLink.clsEngine.Evaluate(strLibraryTemp & "<-data.frame(data(package =  .packages(all.available = TRUE))$results[1:nrow(data(package =  .packages(all.available = TRUE))$results),3:4])")
         dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(strLibraryTemp).AsDataFrame
         'Fills the list
         For i As Integer = 0 To dfTemp.RowCount - 1
