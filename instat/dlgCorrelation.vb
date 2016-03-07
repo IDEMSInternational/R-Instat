@@ -124,6 +124,7 @@ Public Class dlgCorrelation
         ucrBase.clsRsyntax.AddParameter("alternative", Chr(34) & "two.sided" & Chr(34))
         ucrBase.clsRsyntax.AddParameter("exact", "NULL")
         bIsTwoColumnFunction = True
+        TestOKEnabled()
     End Sub
 
     Private Sub SetMultipleColumnAsFunction()
@@ -147,6 +148,7 @@ Public Class dlgCorrelation
         SetUseParameter()
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverMultipleColumns.GetVariables())
         bIsTwoColumnFunction = False
+        TestOKEnabled()
     End Sub
 
     Private Sub ColumnTypeChanged(sender As Object, e As EventArgs) Handles rdoTwoColumns.CheckedChanged, rdoMultipleColumns.CheckedChanged
@@ -173,10 +175,14 @@ Public Class dlgCorrelation
         If (rdoTwoColumns.Checked = True) Then
             If ucrReceiverFirstColumn.IsEmpty() = False And ucrReceiverSecondColumn.IsEmpty() = False And (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
                 ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
             End If
         ElseIf (rdoMultipleColumns.Checked = True) Then
             If ucrReceiverMultipleColumns.IsEmpty() = False And ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 And (rdoCompleteRowsOnly.Checked = True Or rdoPairwise.Checked = True) AndAlso (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
                 ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
             End If
         Else
             ucrBase.OKEnabled(False)
@@ -184,6 +190,8 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        sdgCorrPlot.RegOptions()
+        If (rdoMultipleColumns.Checked) Then
+            sdgCorrPlot.RegOptions()
+        End If
     End Sub
 End Class

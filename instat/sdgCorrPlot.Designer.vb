@@ -22,21 +22,21 @@ Partial Class sdgCorrPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
+        Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
+        Me.chkGGcorr = New System.Windows.Forms.CheckBox()
         Me.chkGGPairs = New System.Windows.Forms.CheckBox()
         Me.tbSdgCorrelation = New System.Windows.Forms.TabControl()
-        Me.chkGGcorr = New System.Windows.Forms.CheckBox()
         Me.tbGraphics.SuspendLayout()
         Me.tbSdgCorrelation.SuspendLayout()
         Me.SuspendLayout()
         '
-        'UcrButtonsSubdialogue1
+        'ucrBaseSdgCorrPlot
         '
-        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(44, 228)
-        Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
-        Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
-        Me.UcrButtonsSubdialogue1.TabIndex = 0
+        Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(44, 228)
+        Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
+        Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSdgCorrPlot.TabIndex = 0
         '
         'tbGraphics
         '
@@ -50,6 +50,17 @@ Partial Class sdgCorrPlot
         Me.tbGraphics.Tag = "Graphics"
         Me.tbGraphics.Text = "Graphics"
         Me.tbGraphics.UseVisualStyleBackColor = True
+        '
+        'chkGGcorr
+        '
+        Me.chkGGcorr.AutoSize = True
+        Me.chkGGcorr.Location = New System.Drawing.Point(28, 54)
+        Me.chkGGcorr.Name = "chkGGcorr"
+        Me.chkGGcorr.Size = New System.Drawing.Size(63, 17)
+        Me.chkGGcorr.TabIndex = 1
+        Me.chkGGcorr.Tag = "GG_corr"
+        Me.chkGGcorr.Text = "GG corr"
+        Me.chkGGcorr.UseVisualStyleBackColor = True
         '
         'chkGGPairs
         '
@@ -72,24 +83,13 @@ Partial Class sdgCorrPlot
         Me.tbSdgCorrelation.TabIndex = 1
         Me.tbSdgCorrelation.Tag = ""
         '
-        'chkGGcorr
-        '
-        Me.chkGGcorr.AutoSize = True
-        Me.chkGGcorr.Location = New System.Drawing.Point(28, 54)
-        Me.chkGGcorr.Name = "chkGGcorr"
-        Me.chkGGcorr.Size = New System.Drawing.Size(63, 17)
-        Me.chkGGcorr.TabIndex = 1
-        Me.chkGGcorr.Tag = "GG_corr"
-        Me.chkGGcorr.Text = "GG corr"
-        Me.chkGGcorr.UseVisualStyleBackColor = True
-        '
         'sdgCorrPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(227, 261)
         Me.Controls.Add(Me.tbSdgCorrelation)
-        Me.Controls.Add(Me.UcrButtonsSubdialogue1)
+        Me.Controls.Add(Me.ucrBaseSdgCorrPlot)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgCorrPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -102,7 +102,7 @@ Partial Class sdgCorrPlot
 
     End Sub
 
-    Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
+    Friend WithEvents ucrBaseSdgCorrPlot As ucrButtonsSubdialogue
     Friend WithEvents tbGraphics As TabPage
     Friend WithEvents chkGGPairs As CheckBox
     Friend WithEvents tbSdgCorrelation As TabControl
