@@ -145,10 +145,19 @@ Public Class clsRecentFiles
     End Sub
 
     Private Sub mnuFileMRU_Click(ByVal sender As Object, ByVal e As EventArgs)
-        'open the file on click
-        'To Discuss
-        dlgImportDataset.SetFilePath(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4))
-        dlgImportDataset.ShowDialog()
+        If File.Exists(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)) Then
+            dlgImportDataset.SetFilePath(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4))
+            dlgImportDataset.SetDataName(Path.GetFileNameWithoutExtension(sender.ToString))
+            dlgImportDataset.ShowDialog()
+        Else
+            MessageBox.Show(frmMain, "The file has either been moved or deleted", "Error trying to open file")
+            'removes the path to the non existent file
+            strListMRU.RemoveAt(strListMRU.FindLastIndex(Function(value As String)
+                                                             Return value.Contains(sender.ToString)
+                                                         End Function))
+            'updates the interfaces
+            UpdateItemsMenu()
+        End If
     End Sub
 
     Private Sub mnuFile_Click(ByVal sender As Object, ByVal e As EventArgs)
