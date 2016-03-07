@@ -35,6 +35,7 @@ Public Class dlgFromLibrary
         Dim lstItem As New ListViewItem
         frmMain.clsRLink.clsEngine.Evaluate(strLibraryTemp & "<-data.frame(data(package =  .packages(all.available = TRUE))$results[1:nrow(data(package =  .packages(all.available = TRUE))$results),3:4])")
         dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(strLibraryTemp).AsDataFrame
+        lblDatasetsNumber.Text = dfTemp.RowCount
         'Fills the list
         For i As Integer = 0 To dfTemp.RowCount - 1
             lstItem = lstCollection.Items.Add(dfTemp(i, 0))
