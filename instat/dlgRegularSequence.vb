@@ -36,7 +36,7 @@ Public Class dlgRegularSequence
     End Sub
 
 
-    Private Sub txtFrom_Leave(sender As Object, e As EventArgs) Handles txtFrom.Leave
+    Private Sub txtFrom_Leave(sender As Object, e As EventArgs) 
 
         If IsNumeric(txtFrom.Text) = True Or txtFrom.Text = "" Then
             ucrBase.clsRsyntax.AddParameter("from", txtFrom.Text)
@@ -50,7 +50,7 @@ Public Class dlgRegularSequence
 
 
     End Sub
-    Private Sub txtRepeatValues_Leave(sender As Object, e As EventArgs) Handles txtRepeatValues.Leave
+    Private Sub txtRepeatValues_Leave(sender As Object, e As EventArgs) 
 
         If IsNumeric(txtRepeatValues.Text) = True Or txtRepeatValues.Text = "" Then
             ucrBase.clsRsyntax.AddParameter("from", txtRepeatValues.Text)
@@ -64,7 +64,7 @@ Public Class dlgRegularSequence
 
 
     End Sub
-    Private Sub txtTo_Leave(sender As Object, e As EventArgs) Handles txtTo.Leave
+    Private Sub txtTo_Leave(sender As Object, e As EventArgs) 
         If IsNumeric(txtFrom.Text) = True Or txtTo.Text = "" Then
             ucrBase.clsRsyntax.AddParameter("from", txtTo.Text)
 
