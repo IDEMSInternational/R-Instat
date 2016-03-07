@@ -36,10 +36,11 @@ Public Class clsRecentItems
             For Each sPath As String In sPaths
                 If Not String.IsNullOrEmpty(sPath) Then
                     ' only add files that still exist...
-                    If File.Exists(sPath) Then
-                        ' add to the list of recently opened files
-                        strListMRU.Add(sPath)
-                    End If
+                    'If File.Exists(sPath) Then
+                    '    ' add to the list of recently opened files
+                    '    strListMRU.Add(sPath)
+                    'End If
+                    strListMRU.Add(sPath)
                 End If
             Next
         End If
