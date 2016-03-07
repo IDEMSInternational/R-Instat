@@ -1,11 +1,12 @@
 ﻿Imports System.Drawing.Printing
 Imports instat.Translations
+Imports unvell.ReoGrid
 Public Class dlgPrintPreviewOptions
     Public WithEvents printDocument As New PrintDocument
     Dim previewPrint As New PrintPreviewDialog
     Dim pd As New PrintDialog
     Dim printTextCtrl As TextBoxBase
-    Dim sheetPreview = frmEditor.grdData.CurrentWorksheet
+    Dim sheetPreview As Worksheet
 
     Dim bFirstLoad As Boolean = True
     Private Sub cmdPrevSheet_Click(sender As Object, e As EventArgs) Handles cmdPrevSheet.Click
@@ -33,6 +34,7 @@ Public Class dlgPrintPreviewOptions
             docToPrint.PrinterSettings = pd.PrinterSettings
             docToPrint.Print()
         End If
+        docToPrint.Dispose()
 
     End Sub
 
@@ -137,6 +139,7 @@ Public Class dlgPrintPreviewOptions
     End Sub
 
     Private Sub chkGridLines_CheckStateChanged(sender As Object, e As EventArgs) Handles chkGridLines.CheckStateChanged
+        sheetPreview.CreatePrintSession()
         If chkGridLines.Checked Then
             'shows the gridlines
             sheetPreview.SetRangeBorders(sheetPreview.PrintableRange, unvell.ReoGrid.BorderPositions.All, unvell.ReoGrid.RangeBorderStyle.BlackSolid)
@@ -147,11 +150,12 @@ Public Class dlgPrintPreviewOptions
     End Sub
 
     Private Sub dlgPrintPreviewOptions_Load(sender As Object, e As EventArgs) Handles Me.Load
-        setDefaults()
+        sheetPreview = frmEditor.grdData.CurrentWorksheet
         autoTranslate(Me)
+        setDefaults()
     End Sub
 
     Private Sub setDefaults()
-        sheetPreview.CreatePrintSession()
+        chkGridLines.Checked = True
     End Sub
 End Class
