@@ -6,10 +6,11 @@ Public Class dlgPrintPreviewOptions
     Dim pd As New PrintDialog
     Dim printTextCtrl As TextBoxBase
     Dim sheetPreview = frmEditor.grdData.CurrentWorksheet
-    Dim session = sheetPreview.CreatePrintSession()
+
     Dim bFirstLoad As Boolean = True
     Private Sub cmdPrevSheet_Click(sender As Object, e As EventArgs) Handles cmdPrevSheet.Click
-        previewPrint.Document = session.PrintDocument
+        Dim session = sheetPreview.CreatePrintSession()
+        previewPrint.Document = sheetPreview.CreatePrintSession().PrintDocument
         previewPrint.SetBounds(200, 200, 1024, 768)
         previewPrint.PrintPreviewControl.Zoom = 1.0
         previewPrint.ShowDialog(Me)
@@ -132,7 +133,7 @@ Public Class dlgPrintPreviewOptions
     Private Sub cmdExitPreview_Click(sender As Object, e As EventArgs) Handles cmdExitPreview.Click
         'reverts to original
         sheetPreview.SetRangeBorders(sheetPreview.PrintableRange, unvell.ReoGrid.BorderPositions.All, unvell.ReoGrid.RangeBorderStyle.Empty)
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub chkGridLines_CheckStateChanged(sender As Object, e As EventArgs) Handles chkGridLines.CheckStateChanged
@@ -146,16 +147,11 @@ Public Class dlgPrintPreviewOptions
     End Sub
 
     Private Sub dlgPrintPreviewOptions_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If bFirstLoad Then
-            setDefaults()
-            bFirstLoad = False
-        Else
-            chkGridLines_CheckStateChanged(sender, e)
-        End If
+        setDefaults()
         autoTranslate(Me)
     End Sub
 
     Private Sub setDefaults()
-        chkGridLines.Checked = True
+        sheetPreview.CreatePrintSession()
     End Sub
 End Class
