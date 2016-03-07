@@ -28,17 +28,12 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition = New System.Windows.Forms.GroupBox()
         Me.dtpSelectorB = New System.Windows.Forms.DateTimePicker()
         Me.dtpSelectorA = New System.Windows.Forms.DateTimePicker()
-        Me.txtRepeatValues = New System.Windows.Forms.TextBox()
-        Me.cboInStepsOf = New System.Windows.Forms.ComboBox()
         Me.chkDefineAsFactor = New System.Windows.Forms.CheckBox()
         Me.lblTimes1 = New System.Windows.Forms.Label()
         Me.lblRepeatValues = New System.Windows.Forms.Label()
         Me.lblSteps = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
-        Me.txtFrom = New System.Windows.Forms.TextBox()
-        Me.txtTo = New System.Windows.Forms.TextBox()
-        Me.txtLength = New System.Windows.Forms.TextBox()
         Me.lblPreview = New System.Windows.Forms.Label()
         Me.lblLength = New System.Windows.Forms.Label()
         Me.cmdRefreshPreview = New System.Windows.Forms.Button()
@@ -46,8 +41,18 @@ Partial Class dlgRegularSequence
         Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
         Me.ucrSelectDataFrame = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
+        Me.nudInstepsOf = New System.Windows.Forms.NumericUpDown()
+        Me.nudRepeatValues = New System.Windows.Forms.NumericUpDown()
+        Me.nudFrom = New System.Windows.Forms.NumericUpDown()
+        Me.nudTo = New System.Windows.Forms.NumericUpDown()
+        Me.nudLength = New System.Windows.Forms.NumericUpDown()
         Me.grpSequenceType.SuspendLayout()
         Me.grpSequenceDefinition.SuspendLayout()
+        CType(Me.nudInstepsOf, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudRepeatValues, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudTo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudLength, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'grpSequenceType
@@ -94,18 +99,18 @@ Partial Class dlgRegularSequence
         '
         'grpSequenceDefinition
         '
+        Me.grpSequenceDefinition.Controls.Add(Me.nudTo)
+        Me.grpSequenceDefinition.Controls.Add(Me.nudFrom)
+        Me.grpSequenceDefinition.Controls.Add(Me.nudRepeatValues)
         Me.grpSequenceDefinition.Controls.Add(Me.dtpSelectorB)
+        Me.grpSequenceDefinition.Controls.Add(Me.nudInstepsOf)
         Me.grpSequenceDefinition.Controls.Add(Me.dtpSelectorA)
-        Me.grpSequenceDefinition.Controls.Add(Me.txtRepeatValues)
-        Me.grpSequenceDefinition.Controls.Add(Me.cboInStepsOf)
         Me.grpSequenceDefinition.Controls.Add(Me.chkDefineAsFactor)
         Me.grpSequenceDefinition.Controls.Add(Me.lblTimes1)
         Me.grpSequenceDefinition.Controls.Add(Me.lblRepeatValues)
         Me.grpSequenceDefinition.Controls.Add(Me.lblSteps)
         Me.grpSequenceDefinition.Controls.Add(Me.lblTo)
         Me.grpSequenceDefinition.Controls.Add(Me.lblFrom)
-        Me.grpSequenceDefinition.Controls.Add(Me.txtFrom)
-        Me.grpSequenceDefinition.Controls.Add(Me.txtTo)
         Me.grpSequenceDefinition.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSequenceDefinition.Location = New System.Drawing.Point(12, 100)
         Me.grpSequenceDefinition.Name = "grpSequenceDefinition"
@@ -118,33 +123,17 @@ Partial Class dlgRegularSequence
         '
         'dtpSelectorB
         '
-        Me.dtpSelectorB.Location = New System.Drawing.Point(102, 49)
+        Me.dtpSelectorB.Location = New System.Drawing.Point(98, 48)
         Me.dtpSelectorB.Name = "dtpSelectorB"
-        Me.dtpSelectorB.Size = New System.Drawing.Size(95, 20)
+        Me.dtpSelectorB.Size = New System.Drawing.Size(87, 20)
         Me.dtpSelectorB.TabIndex = 5
         '
         'dtpSelectorA
         '
-        Me.dtpSelectorA.Location = New System.Drawing.Point(101, 23)
+        Me.dtpSelectorA.Location = New System.Drawing.Point(98, 20)
         Me.dtpSelectorA.Name = "dtpSelectorA"
-        Me.dtpSelectorA.Size = New System.Drawing.Size(95, 20)
+        Me.dtpSelectorA.Size = New System.Drawing.Size(91, 20)
         Me.dtpSelectorA.TabIndex = 2
-        '
-        'txtRepeatValues
-        '
-        Me.txtRepeatValues.Location = New System.Drawing.Point(100, 103)
-        Me.txtRepeatValues.Name = "txtRepeatValues"
-        Me.txtRepeatValues.Size = New System.Drawing.Size(38, 20)
-        Me.txtRepeatValues.TabIndex = 9
-        Me.txtRepeatValues.Tag = ""
-        '
-        'cboInStepsOf
-        '
-        Me.cboInStepsOf.FormattingEnabled = True
-        Me.cboInStepsOf.Location = New System.Drawing.Point(100, 76)
-        Me.cboInStepsOf.Name = "cboInStepsOf"
-        Me.cboInStepsOf.Size = New System.Drawing.Size(38, 21)
-        Me.cboInStepsOf.TabIndex = 7
         '
         'chkDefineAsFactor
         '
@@ -213,30 +202,6 @@ Partial Class dlgRegularSequence
         Me.lblFrom.Tag = "From"
         Me.lblFrom.Text = "From"
         '
-        'txtFrom
-        '
-        Me.txtFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFrom.Location = New System.Drawing.Point(100, 23)
-        Me.txtFrom.Name = "txtFrom"
-        Me.txtFrom.Size = New System.Drawing.Size(38, 20)
-        Me.txtFrom.TabIndex = 1
-        '
-        'txtTo
-        '
-        Me.txtTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTo.Location = New System.Drawing.Point(100, 49)
-        Me.txtTo.Name = "txtTo"
-        Me.txtTo.Size = New System.Drawing.Size(38, 20)
-        Me.txtTo.TabIndex = 4
-        '
-        'txtLength
-        '
-        Me.txtLength.Enabled = False
-        Me.txtLength.Location = New System.Drawing.Point(147, 25)
-        Me.txtLength.Name = "txtLength"
-        Me.txtLength.Size = New System.Drawing.Size(58, 20)
-        Me.txtLength.TabIndex = 2
-        '
         'lblPreview
         '
         Me.lblPreview.AutoSize = True
@@ -297,17 +262,60 @@ Partial Class dlgRegularSequence
         Me.ucrBase.Size = New System.Drawing.Size(402, 55)
         Me.ucrBase.TabIndex = 9
         '
+        'nudInstepsOf
+        '
+        Me.nudInstepsOf.DecimalPlaces = 4
+        Me.nudInstepsOf.Location = New System.Drawing.Point(98, 74)
+        Me.nudInstepsOf.Name = "nudInstepsOf"
+        Me.nudInstepsOf.Size = New System.Drawing.Size(47, 20)
+        Me.nudInstepsOf.TabIndex = 10
+        '
+        'nudRepeatValues
+        '
+        Me.nudRepeatValues.Location = New System.Drawing.Point(98, 103)
+        Me.nudRepeatValues.Name = "nudRepeatValues"
+        Me.nudRepeatValues.Size = New System.Drawing.Size(44, 20)
+        Me.nudRepeatValues.TabIndex = 12
+        '
+        'nudFrom
+        '
+        Me.nudFrom.DecimalPlaces = 4
+        Me.nudFrom.Location = New System.Drawing.Point(138, 20)
+        Me.nudFrom.Maximum = New Decimal(New Integer() {100000000, 0, 0, 0})
+        Me.nudFrom.Name = "nudFrom"
+        Me.nudFrom.Size = New System.Drawing.Size(51, 20)
+        Me.nudFrom.TabIndex = 13
+        '
+        'nudTo
+        '
+        Me.nudTo.DecimalPlaces = 4
+        Me.nudTo.Location = New System.Drawing.Point(138, 48)
+        Me.nudTo.Maximum = New Decimal(New Integer() {10000000, 0, 0, 0})
+        Me.nudTo.Minimum = New Decimal(New Integer() {10000000, 0, 0, 0})
+        Me.nudTo.Name = "nudTo"
+        Me.nudTo.Size = New System.Drawing.Size(51, 20)
+        Me.nudTo.TabIndex = 14
+        Me.nudTo.Value = New Decimal(New Integer() {10000000, 0, 0, 0})
+        '
+        'nudLength
+        '
+        Me.nudLength.Location = New System.Drawing.Point(144, 25)
+        Me.nudLength.Maximum = New Decimal(New Integer() {10000000, 0, 0, 0})
+        Me.nudLength.Name = "nudLength"
+        Me.nudLength.Size = New System.Drawing.Size(57, 20)
+        Me.nudLength.TabIndex = 10
+        '
         'dlgRegularSequence
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 351)
+        Me.Controls.Add(Me.nudLength)
         Me.Controls.Add(Me.txtGetPreview)
         Me.Controls.Add(Me.cmdRefreshPreview)
         Me.Controls.Add(Me.grpSequenceDefinition)
         Me.Controls.Add(Me.lblLength)
         Me.Controls.Add(Me.lblPreview)
-        Me.Controls.Add(Me.txtLength)
         Me.Controls.Add(Me.ucrNewColumnNameSelector)
         Me.Controls.Add(Me.ucrSelectDataFrame)
         Me.Controls.Add(Me.ucrBase)
@@ -323,6 +331,11 @@ Partial Class dlgRegularSequence
         Me.grpSequenceType.PerformLayout()
         Me.grpSequenceDefinition.ResumeLayout(False)
         Me.grpSequenceDefinition.PerformLayout()
+        CType(Me.nudInstepsOf, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudRepeatValues, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudTo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudLength, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -335,21 +348,21 @@ Partial Class dlgRegularSequence
     Friend WithEvents lblSteps As Label
     Friend WithEvents lblTo As Label
     Friend WithEvents lblFrom As Label
-    Friend WithEvents txtFrom As TextBox
-    Friend WithEvents txtTo As TextBox
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectDataFrame As ucrDataFrame
     Friend WithEvents ucrNewColumnNameSelector As ucrNewColumnName
-    Friend WithEvents txtLength As TextBox
     Friend WithEvents lblPreview As Label
     Friend WithEvents lblLength As Label
     Friend WithEvents cmdRefreshPreview As Button
     Friend WithEvents lblTimes1 As Label
     Friend WithEvents lblRepeatValues As Label
-    Friend WithEvents cboInStepsOf As ComboBox
     Friend WithEvents chkDefineAsFactor As CheckBox
-    Friend WithEvents txtRepeatValues As TextBox
     Friend WithEvents dtpSelectorA As DateTimePicker
     Friend WithEvents dtpSelectorB As DateTimePicker
     Friend WithEvents txtGetPreview As RichTextBox
+    Friend WithEvents nudTo As NumericUpDown
+    Friend WithEvents nudFrom As NumericUpDown
+    Friend WithEvents nudRepeatValues As NumericUpDown
+    Friend WithEvents nudInstepsOf As NumericUpDown
+    Friend WithEvents nudLength As NumericUpDown
 End Class
