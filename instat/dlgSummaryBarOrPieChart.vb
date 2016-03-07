@@ -130,7 +130,7 @@ Public Class dlgSummaryBarOrPieChart
             If ucrFactorReceiver.IsEmpty Then
                 clsRaesFunction.RemoveParameterByName("fill")
             Else
-                clsRaesFunction.AddParameter("fill", ucrYReceiver.GetVariableNames(False))
+                clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
             End If
         End If
     End Sub
