@@ -258,7 +258,7 @@ Public Class dlgImportDataset
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ' add the item to the MRU (Most Recently Used) list...
-        frmMain.addToMenu(txtFilePath.Text)
+        frmMain.clsRecentItems.addToMenu(txtFilePath.Text)
     End Sub
 
 End Class
