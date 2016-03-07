@@ -134,6 +134,7 @@
   <ItemGroup>
     <Compile Include="clsDistribution.vb" />
     <Compile Include="clsInstatOptions.vb" />
+    <Compile Include="clsRecentItems.vb" />
     <Compile Include="clsRFunction.vb" />
     <Compile Include="clsROperator.vb" />
     <Compile Include="dlgAddStartRain.designer.vb">
