@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-Public Class clsRecentItems
+Public Class clsRecentFiles
     Public mnuItems As New List(Of Form)
     Dim strRecentFiles As String = "Recent_Files\recent.mru"
     Dim mnuTbShowLast10 As ToolStripDropDownItem
@@ -140,7 +140,7 @@ Public Class clsRecentItems
         Next
 
         ' show separator
-        sepStart.visible = True
+        sepStart.Visible = True
         sepEnd.Visible = True
     End Sub
 

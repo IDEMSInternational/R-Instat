@@ -24,7 +24,7 @@ Public Class frmMain
 
     Public clsRLink As New RLink
     Public clsGrids As New clsGridLink
-    Public clsRecentItems As New clsRecentItems
+    Public clsRecentItems As New clsRecentFiles
     Public strStaticPath As String
     Public strHelpFilePath As String
     Public clsInstatOptions As InstatOptions
