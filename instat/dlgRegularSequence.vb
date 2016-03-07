@@ -16,63 +16,84 @@
 Imports instat.Translations
 Public Class dlgRegularSequence
     Dim bIsExtended As Boolean = False
-
+    Public bFirstLoad As Boolean = True
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("seq")
         autoTranslate(Me)
+        ucrBase.iHelpTopicID = 30
         frmMain.clsRLink.SetOutput(txtGetPreview)
+        'ucrSelectDataFrame.SetColumnList(ucrColName)
+        ucrNewColumnNameSelectorRegularSequence.SetDataFrameSelector(ucrSelectDataFrame)
+        ucrNewColumnNameSelectorRegularSequence.SetPrefix("Sequence")
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetDefaults()
         dtpSelectorA.Visible = False
         dtpSelectorB.Visible = False
-        'ucrSelectDataFrame.SetColumnList(ucrColName)
-        ucrNewColumnNameSelector.SetDataFrameSelector(ucrSelectDataFrame)
-        ucrNewColumnNameSelector.SetPrefix("Sequence")
 
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
-    End Sub
-    Private Sub rdoDates_Click(sender As Object, e As EventArgs) Handles rdoDates.Click
-        chkDefineAsFactor.Visible = False
-        dtpSelectorA.Visible = True
-        dtpSelectorB.Visible = True
     End Sub
 
+    Private Sub ReopenDialog()
 
-    Private Sub txtFrom_Leave(sender As Object, e As EventArgs) 
+    End Sub
 
-        If IsNumeric(txtFrom.Text) = True Or txtFrom.Text = "" Then
-            ucrBase.clsRsyntax.AddParameter("from", txtFrom.Text)
-
-        ElseIf IsNumeric(txtFrom.Text) = False Then
-            MsgBox("Enter numeric value", vbOKOnly)
-            txtFrom.Focus()
+    Private Sub TestOKEnabled()
+        If nudFrom.Value <> "" And nudTo.Value <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
 
         End If
+    End Sub
+
+
+    Private Sub txtFrom_Leave(sender As Object, e As EventArgs)
+
+        'If IsNumeric(txtFrom.Text) = True Or txtFrom.Text = "" Then
+        '    ucrBase.clsRsyntax.AddParameter("from", txtFrom.Text)
+
+        'ElseIf IsNumeric(txtFrom.Text) = False Then
+        '    MsgBox("Enter numeric value", vbOKOnly)
+        '    txtFrom.Focus()
+
+        'End If
 
 
 
     End Sub
-    Private Sub txtRepeatValues_Leave(sender As Object, e As EventArgs) 
+    Private Sub txtRepeatValues_Leave(sender As Object, e As EventArgs)
 
-        If IsNumeric(txtRepeatValues.Text) = True Or txtRepeatValues.Text = "" Then
-            ucrBase.clsRsyntax.AddParameter("from", txtRepeatValues.Text)
+        'If IsNumeric(txtRepeatValues.Text) = True Or nudRepeatValues.Text = "" Then
+        '    ucrBase.clsRsyntax.AddParameter("from", txtRepeatValues.Text)
 
-        ElseIf IsNumeric(txtRepeatValues.Text) = False Then
-            MsgBox("Enter numeric value", vbOKOnly)
-            txtRepeatValues.Focus()
+        'ElseIf IsNumeric(txtRepeatValues.Text) = False Then
+        '    MsgBox("Enter numeric value", vbOKOnly)
+        '    txtRepeatValues.Focus()
 
-        End If
+        'End If
 
 
 
     End Sub
-    Private Sub txtTo_Leave(sender As Object, e As EventArgs) 
-        If IsNumeric(txtFrom.Text) = True Or txtTo.Text = "" Then
-            ucrBase.clsRsyntax.AddParameter("from", txtTo.Text)
+    Private Sub txtTo_Leave(sender As Object, e As EventArgs)
+        'If IsNumeric(txtFrom.Text) = True Or txtTo.Text = "" Then
+        '    ucrBase.clsRsyntax.AddParameter("from", txtTo.Text)
 
-        ElseIf IsNumeric(txtTo.Text) = False Then
-            MsgBox("Enter numeric value", vbOKOnly)
-            txtTo.Focus()
+        'ElseIf IsNumeric(txtTo.Text) = False Then
+        '    MsgBox("Enter numeric value", vbOKOnly)
+        '    txtTo.Focus()
 
-        End If
+        'End If
 
     End Sub
 
@@ -93,22 +114,22 @@ Public Class dlgRegularSequence
         ucrBase.clsRsyntax.AddParameter("to", "as.Date('" & Format(dtpSelectorB.Value, "yyyy/MM/dd") & "')")
     End Sub
     Private Sub cboInStepsOf_SelectedIndexChanged(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("by", "'" & cboInStepsOf.SelectedItem.ToString() & "'")
+        ucrBase.clsRsyntax.AddParameter("by", "'" & nudInstepsOf.Value.ToString() & "'")
     End Sub
     Private Sub txtRepeatValues_TextChanged(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("length.out", txtRepeatValues.Text)
+        ucrBase.clsRsyntax.AddParameter("length.out", nudRepeatValues.Text)
     End Sub
     Private Sub ucrSelectDataFrame_LostFocus(sender As Object, e As EventArgs) Handles ucrSelectDataFrame.LostFocus
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
     End Sub
 
-    Private Sub ucrColName_LostFocus(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelector.LostFocus
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+    Private Sub ucrColName_LostFocus(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelectorRegularSequence.LostFocus
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
     End Sub
 
 
     Private Sub cboInStepsOf_TextChanged(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("by", cboInStepsOf.Text)
+        ucrBase.clsRsyntax.AddParameter("by", nudInstepsOf.Text)
     End Sub
 
     Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click

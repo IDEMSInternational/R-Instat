@@ -38,7 +38,7 @@ Partial Class dlgRegularSequence
         Me.lblLength = New System.Windows.Forms.Label()
         Me.cmdRefreshPreview = New System.Windows.Forms.Button()
         Me.txtGetPreview = New System.Windows.Forms.RichTextBox()
-        Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
+        Me.ucrNewColumnNameSelectorRegularSequence = New instat.ucrNewColumnName()
         Me.ucrSelectDataFrame = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
         Me.nudInstepsOf = New System.Windows.Forms.NumericUpDown()
@@ -240,13 +240,13 @@ Partial Class dlgRegularSequence
         Me.txtGetPreview.TabIndex = 8
         Me.txtGetPreview.Text = ""
         '
-        'ucrNewColumnNameSelector
+        'ucrNewColumnNameSelectorRegularSequence
         '
-        Me.ucrNewColumnNameSelector.Location = New System.Drawing.Point(12, 258)
-        Me.ucrNewColumnNameSelector.Name = "ucrNewColumnNameSelector"
-        Me.ucrNewColumnNameSelector.Size = New System.Drawing.Size(402, 35)
-        Me.ucrNewColumnNameSelector.TabIndex = 5
-        Me.ucrNewColumnNameSelector.ucrDataFrameSelector = Nothing
+        Me.ucrNewColumnNameSelectorRegularSequence.Location = New System.Drawing.Point(12, 258)
+        Me.ucrNewColumnNameSelectorRegularSequence.Name = "ucrNewColumnNameSelectorRegularSequence"
+        Me.ucrNewColumnNameSelectorRegularSequence.Size = New System.Drawing.Size(402, 35)
+        Me.ucrNewColumnNameSelectorRegularSequence.TabIndex = 5
+        Me.ucrNewColumnNameSelectorRegularSequence.ucrDataFrameSelector = Nothing
         '
         'ucrSelectDataFrame
         '
@@ -316,7 +316,7 @@ Partial Class dlgRegularSequence
         Me.Controls.Add(Me.grpSequenceDefinition)
         Me.Controls.Add(Me.lblLength)
         Me.Controls.Add(Me.lblPreview)
-        Me.Controls.Add(Me.ucrNewColumnNameSelector)
+        Me.Controls.Add(Me.ucrNewColumnNameSelectorRegularSequence)
         Me.Controls.Add(Me.ucrSelectDataFrame)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpSequenceType)
@@ -350,7 +350,7 @@ Partial Class dlgRegularSequence
     Friend WithEvents lblFrom As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectDataFrame As ucrDataFrame
-    Friend WithEvents ucrNewColumnNameSelector As ucrNewColumnName
+    Friend WithEvents ucrNewColumnNameSelectorRegularSequence As ucrNewColumnName
     Friend WithEvents lblPreview As Label
     Friend WithEvents lblLength As Label
     Friend WithEvents cmdRefreshPreview As Button
