@@ -37,37 +37,32 @@ Public Class dlgCorrelation
             SetDefaults()
             bFirstLoad = False
         End If
-
-        If bIsTwoColumnFunction Then
-            TestOKEnabledForTwoColumns()
-        Else
-            TestOKEnabledForMultipleColumns()
-        End If
-
+        TestOKEnabled()
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorDataFrameVarAddRemove.Reset()
         ucrSelectorDataFrameVarAddRemove.Focus()
+        ' ucrReceiverFirstColumn.Focus()
         rdoPearson.Checked = True
         rdoTwoColumns.Checked = True
         sdgCorrPlot.SetDefaults()
-        TestOKEnabledForTwoColumns()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverFirstColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFirstColumn.SelectionChanged
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverFirstColumn.GetVariables())
-        TestOKEnabledForTwoColumns()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverSecondColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSecondColumn.SelectionChanged
         ucrBase.clsRsyntax.AddParameter("y", clsRFunctionParameter:=ucrReceiverSecondColumn.GetVariables())
-        TestOKEnabledForTwoColumns()
+        TestOKEnabled()
     End Sub
 
     Public Sub ucrReceiverMultipleColumns_SelectionChanged() Handles ucrReceiverMultipleColumns.SelectionChanged
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverMultipleColumns.GetVariables())
-        TestOKEnabledForMultipleColumns()
+        TestOKEnabled()
     End Sub
 
     'put all rdo button checked changed in one sub to make it shorter
@@ -174,24 +169,18 @@ Public Class dlgCorrelation
         sdgCorrPlot.ShowDialog()
     End Sub
 
-    Private Sub TestOKEnabledForTwoColumns()
-        If ucrReceiverFirstColumn.IsEmpty() = False And ucrReceiverSecondColumn.IsEmpty() = False And (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
-            ucrBase.OKEnabled(True)
+    Private Sub TestOKEnabled()
+        If (rdoTwoColumns.Checked = True) Then
+            If ucrReceiverFirstColumn.IsEmpty() = False And ucrReceiverSecondColumn.IsEmpty() = False And (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
+                ucrBase.OKEnabled(True)
+            End If
+        ElseIf (rdoMultipleColumns.Checked = True) Then
+            If ucrReceiverMultipleColumns.IsEmpty() = False And ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 And (rdoCompleteRowsOnly.Checked = True Or rdoPairwise.Checked = True) AndAlso (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
+                ucrBase.OKEnabled(True)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
-    End Sub
-
-    Private Sub TestOKEnabledForMultipleColumns()
-        If ucrReceiverMultipleColumns.IsEmpty() = False And ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 And (rdoCompleteRowsOnly.Checked = True Or rdoPairwise.Checked = True) AndAlso (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub ucrReceiverMultipleColumns_Load(sender As Object, e As EventArgs) Handles ucrReceiverMultipleColumns.Load
-
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
