@@ -48,53 +48,12 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub TestOKEnabled()
-        If nudFrom.Value <> "" And nudTo.Value <> "" Then
+        If nudFrom.Text <> "" And nudTo.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
 
         End If
-    End Sub
-
-
-    Private Sub txtFrom_Leave(sender As Object, e As EventArgs)
-
-        'If IsNumeric(txtFrom.Text) = True Or txtFrom.Text = "" Then
-        '    ucrBase.clsRsyntax.AddParameter("from", txtFrom.Text)
-
-        'ElseIf IsNumeric(txtFrom.Text) = False Then
-        '    MsgBox("Enter numeric value", vbOKOnly)
-        '    txtFrom.Focus()
-
-        'End If
-
-
-
-    End Sub
-    Private Sub txtRepeatValues_Leave(sender As Object, e As EventArgs)
-
-        'If IsNumeric(txtRepeatValues.Text) = True Or nudRepeatValues.Text = "" Then
-        '    ucrBase.clsRsyntax.AddParameter("from", txtRepeatValues.Text)
-
-        'ElseIf IsNumeric(txtRepeatValues.Text) = False Then
-        '    MsgBox("Enter numeric value", vbOKOnly)
-        '    txtRepeatValues.Focus()
-
-        'End If
-
-
-
-    End Sub
-    Private Sub txtTo_Leave(sender As Object, e As EventArgs)
-        'If IsNumeric(txtFrom.Text) = True Or txtTo.Text = "" Then
-        '    ucrBase.clsRsyntax.AddParameter("from", txtTo.Text)
-
-        'ElseIf IsNumeric(txtTo.Text) = False Then
-        '    MsgBox("Enter numeric value", vbOKOnly)
-        '    txtTo.Focus()
-
-        'End If
-
     End Sub
 
     Private Sub rdoNumeric_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNumeric.Click
@@ -106,19 +65,6 @@ Public Class dlgRegularSequence
         End If
     End Sub
 
-
-    Private Sub dtpSelectorA_Leave(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("from", "as.Date('" & Format(dtpSelectorA.Value, "yyyy/MM/dd") & "')")
-    End Sub
-    Private Sub dtpSelectorB_Leave(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("to", "as.Date('" & Format(dtpSelectorB.Value, "yyyy/MM/dd") & "')")
-    End Sub
-    Private Sub cboInStepsOf_SelectedIndexChanged(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("by", "'" & nudInstepsOf.Value.ToString() & "'")
-    End Sub
-    Private Sub txtRepeatValues_TextChanged(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("length.out", nudRepeatValues.Text)
-    End Sub
     Private Sub ucrSelectDataFrame_LostFocus(sender As Object, e As EventArgs) Handles ucrSelectDataFrame.LostFocus
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
     End Sub
@@ -128,13 +74,36 @@ Public Class dlgRegularSequence
     End Sub
 
 
-    Private Sub cboInStepsOf_TextChanged(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("by", nudInstepsOf.Text)
-    End Sub
-
     Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click
         frmMain.clsRLink.RunScript(ucrBase.clsRsyntax.GetScript(), ucrBase.clsRsyntax.iCallType)
         txtGetPreview.Refresh()
     End Sub
 
+    Private Sub grpSequenceType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDates.CheckedChanged, rdoNumeric.CheckedChanged
+
+        If rdoNumeric.Checked Then
+            ucrBase.clsRsyntax.AddParameter("from", nudFrom.Value)
+            ucrBase.clsRsyntax.AddParameter("to", nudTo.Value)
+        Else
+            dtpSelectorA.Visible = True
+            dtpSelectorB.Visible = True
+            nudFrom.Visible = False
+            nudTo.Visible = False
+            ucrBase.clsRsyntax.AddParameter("from", "as.Date('" & Format(dtpSelectorA.Value, "yyyy/MM/dd") & "')")
+            ucrBase.clsRsyntax.AddParameter("to", "as.Date('" & Format(dtpSelectorB.Value, "yyyy/MM/dd") & "')")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub nudInstepsOf_ValueChanged(sender As Object, e As EventArgs) Handles nudInstepsOf.ValueChanged
+        ucrBase.clsRsyntax.AddParameter("by", nudInstepsOf.Value)
+    End Sub
+
+    Private Sub nudRepeatValues_ValueChanged(sender As Object, e As EventArgs) Handles nudRepeatValues.ValueChanged
+        ucrBase.clsRsyntax.AddParameter("length.out", nudRepeatValues.Value)
+    End Sub
+
+    Private Sub nudLength_ValueChanged(sender As Object, e As EventArgs) Handles nudLength.ValueChanged
+        ucrBase.clsRsyntax.AddParameter("length", nudLength.Value)
+    End Sub
 End Class

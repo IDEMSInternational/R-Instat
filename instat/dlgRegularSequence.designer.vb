@@ -26,7 +26,11 @@ Partial Class dlgRegularSequence
         Me.rdoDates = New System.Windows.Forms.RadioButton()
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.grpSequenceDefinition = New System.Windows.Forms.GroupBox()
+        Me.nudTo = New System.Windows.Forms.NumericUpDown()
+        Me.nudFrom = New System.Windows.Forms.NumericUpDown()
+        Me.nudRepeatValues = New System.Windows.Forms.NumericUpDown()
         Me.dtpSelectorB = New System.Windows.Forms.DateTimePicker()
+        Me.nudInstepsOf = New System.Windows.Forms.NumericUpDown()
         Me.dtpSelectorA = New System.Windows.Forms.DateTimePicker()
         Me.chkDefineAsFactor = New System.Windows.Forms.CheckBox()
         Me.lblTimes1 = New System.Windows.Forms.Label()
@@ -38,20 +42,16 @@ Partial Class dlgRegularSequence
         Me.lblLength = New System.Windows.Forms.Label()
         Me.cmdRefreshPreview = New System.Windows.Forms.Button()
         Me.txtGetPreview = New System.Windows.Forms.RichTextBox()
+        Me.nudLength = New System.Windows.Forms.NumericUpDown()
         Me.ucrNewColumnNameSelectorRegularSequence = New instat.ucrNewColumnName()
         Me.ucrSelectDataFrame = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
-        Me.nudInstepsOf = New System.Windows.Forms.NumericUpDown()
-        Me.nudRepeatValues = New System.Windows.Forms.NumericUpDown()
-        Me.nudFrom = New System.Windows.Forms.NumericUpDown()
-        Me.nudTo = New System.Windows.Forms.NumericUpDown()
-        Me.nudLength = New System.Windows.Forms.NumericUpDown()
         Me.grpSequenceType.SuspendLayout()
         Me.grpSequenceDefinition.SuspendLayout()
-        CType(Me.nudInstepsOf, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudRepeatValues, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudTo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudRepeatValues, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudInstepsOf, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudLength, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -85,14 +85,12 @@ Partial Class dlgRegularSequence
         'rdoNumeric
         '
         Me.rdoNumeric.AutoSize = True
-        Me.rdoNumeric.Checked = True
         Me.rdoNumeric.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.rdoNumeric.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rdoNumeric.Location = New System.Drawing.Point(6, 13)
         Me.rdoNumeric.Name = "rdoNumeric"
         Me.rdoNumeric.Size = New System.Drawing.Size(70, 18)
         Me.rdoNumeric.TabIndex = 0
-        Me.rdoNumeric.TabStop = True
         Me.rdoNumeric.Tag = "Numeric"
         Me.rdoNumeric.Text = "Numeric"
         Me.rdoNumeric.UseVisualStyleBackColor = True
@@ -121,12 +119,42 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.Text = "Sequence definition"
         Me.grpSequenceDefinition.UseCompatibleTextRendering = True
         '
+        'nudTo
+        '
+        Me.nudTo.Location = New System.Drawing.Point(138, 48)
+        Me.nudTo.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudTo.Name = "nudTo"
+        Me.nudTo.Size = New System.Drawing.Size(51, 20)
+        Me.nudTo.TabIndex = 14
+        '
+        'nudFrom
+        '
+        Me.nudFrom.Location = New System.Drawing.Point(138, 20)
+        Me.nudFrom.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nudFrom.Name = "nudFrom"
+        Me.nudFrom.Size = New System.Drawing.Size(51, 20)
+        Me.nudFrom.TabIndex = 13
+        '
+        'nudRepeatValues
+        '
+        Me.nudRepeatValues.Location = New System.Drawing.Point(98, 103)
+        Me.nudRepeatValues.Name = "nudRepeatValues"
+        Me.nudRepeatValues.Size = New System.Drawing.Size(44, 20)
+        Me.nudRepeatValues.TabIndex = 12
+        '
         'dtpSelectorB
         '
         Me.dtpSelectorB.Location = New System.Drawing.Point(98, 48)
         Me.dtpSelectorB.Name = "dtpSelectorB"
         Me.dtpSelectorB.Size = New System.Drawing.Size(87, 20)
         Me.dtpSelectorB.TabIndex = 5
+        '
+        'nudInstepsOf
+        '
+        Me.nudInstepsOf.Location = New System.Drawing.Point(98, 74)
+        Me.nudInstepsOf.Name = "nudInstepsOf"
+        Me.nudInstepsOf.Size = New System.Drawing.Size(47, 20)
+        Me.nudInstepsOf.TabIndex = 10
         '
         'dtpSelectorA
         '
@@ -240,6 +268,14 @@ Partial Class dlgRegularSequence
         Me.txtGetPreview.TabIndex = 8
         Me.txtGetPreview.Text = ""
         '
+        'nudLength
+        '
+        Me.nudLength.Location = New System.Drawing.Point(144, 25)
+        Me.nudLength.Maximum = New Decimal(New Integer() {10000000, 0, 0, 0})
+        Me.nudLength.Name = "nudLength"
+        Me.nudLength.Size = New System.Drawing.Size(57, 20)
+        Me.nudLength.TabIndex = 10
+        '
         'ucrNewColumnNameSelectorRegularSequence
         '
         Me.ucrNewColumnNameSelectorRegularSequence.Location = New System.Drawing.Point(12, 258)
@@ -261,49 +297,6 @@ Partial Class dlgRegularSequence
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(402, 55)
         Me.ucrBase.TabIndex = 9
-        '
-        'nudInstepsOf
-        '
-        Me.nudInstepsOf.DecimalPlaces = 4
-        Me.nudInstepsOf.Location = New System.Drawing.Point(98, 74)
-        Me.nudInstepsOf.Name = "nudInstepsOf"
-        Me.nudInstepsOf.Size = New System.Drawing.Size(47, 20)
-        Me.nudInstepsOf.TabIndex = 10
-        '
-        'nudRepeatValues
-        '
-        Me.nudRepeatValues.Location = New System.Drawing.Point(98, 103)
-        Me.nudRepeatValues.Name = "nudRepeatValues"
-        Me.nudRepeatValues.Size = New System.Drawing.Size(44, 20)
-        Me.nudRepeatValues.TabIndex = 12
-        '
-        'nudFrom
-        '
-        Me.nudFrom.DecimalPlaces = 4
-        Me.nudFrom.Location = New System.Drawing.Point(138, 20)
-        Me.nudFrom.Maximum = New Decimal(New Integer() {100000000, 0, 0, 0})
-        Me.nudFrom.Name = "nudFrom"
-        Me.nudFrom.Size = New System.Drawing.Size(51, 20)
-        Me.nudFrom.TabIndex = 13
-        '
-        'nudTo
-        '
-        Me.nudTo.DecimalPlaces = 4
-        Me.nudTo.Location = New System.Drawing.Point(138, 48)
-        Me.nudTo.Maximum = New Decimal(New Integer() {10000000, 0, 0, 0})
-        Me.nudTo.Minimum = New Decimal(New Integer() {10000000, 0, 0, 0})
-        Me.nudTo.Name = "nudTo"
-        Me.nudTo.Size = New System.Drawing.Size(51, 20)
-        Me.nudTo.TabIndex = 14
-        Me.nudTo.Value = New Decimal(New Integer() {10000000, 0, 0, 0})
-        '
-        'nudLength
-        '
-        Me.nudLength.Location = New System.Drawing.Point(144, 25)
-        Me.nudLength.Maximum = New Decimal(New Integer() {10000000, 0, 0, 0})
-        Me.nudLength.Name = "nudLength"
-        Me.nudLength.Size = New System.Drawing.Size(57, 20)
-        Me.nudLength.TabIndex = 10
         '
         'dlgRegularSequence
         '
@@ -331,10 +324,10 @@ Partial Class dlgRegularSequence
         Me.grpSequenceType.PerformLayout()
         Me.grpSequenceDefinition.ResumeLayout(False)
         Me.grpSequenceDefinition.PerformLayout()
-        CType(Me.nudInstepsOf, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudRepeatValues, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudTo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudRepeatValues, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudInstepsOf, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudLength, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
