@@ -54,8 +54,6 @@ Partial Class dlgPrintPreviewOptions
         'chkGridLines
         '
         Me.chkGridLines.AutoSize = True
-        Me.chkGridLines.Checked = True
-        Me.chkGridLines.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkGridLines.Location = New System.Drawing.Point(8, 57)
         Me.chkGridLines.Name = "chkGridLines"
         Me.chkGridLines.Size = New System.Drawing.Size(97, 17)
