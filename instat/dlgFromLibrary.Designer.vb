@@ -28,6 +28,8 @@ Partial Class dlgFromLibrary
         Me.lstCollection = New System.Windows.Forms.ListView()
         Me.clmDatasets = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.clmDesc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.lblDatasets = New System.Windows.Forms.Label()
+        Me.lblDatasetsNumber = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
@@ -87,6 +89,23 @@ Partial Class dlgFromLibrary
         Me.clmDesc.Text = "Description"
         Me.clmDesc.Width = 266
         '
+        'lblDatasets
+        '
+        Me.lblDatasets.AutoSize = True
+        Me.lblDatasets.Location = New System.Drawing.Point(173, 44)
+        Me.lblDatasets.Name = "lblDatasets"
+        Me.lblDatasets.Size = New System.Drawing.Size(99, 13)
+        Me.lblDatasets.TabIndex = 5
+        Me.lblDatasets.Text = "Number of datasets"
+        '
+        'lblDatasetsNumber
+        '
+        Me.lblDatasetsNumber.AutoSize = True
+        Me.lblDatasetsNumber.Location = New System.Drawing.Point(279, 44)
+        Me.lblDatasetsNumber.Name = "lblDatasetsNumber"
+        Me.lblDatasetsNumber.Size = New System.Drawing.Size(0, 13)
+        Me.lblDatasetsNumber.TabIndex = 6
+        '
         'ucrBase
         '
         Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
@@ -101,6 +120,8 @@ Partial Class dlgFromLibrary
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(437, 348)
+        Me.Controls.Add(Me.lblDatasetsNumber)
+        Me.Controls.Add(Me.lblDatasets)
         Me.Controls.Add(Me.lstCollection)
         Me.Controls.Add(Me.chkChooseFrom)
         Me.Controls.Add(Me.cmdLibraryCollection)
@@ -122,4 +143,6 @@ Partial Class dlgFromLibrary
     Friend WithEvents lstCollection As ListView
     Friend WithEvents clmDatasets As ColumnHeader
     Friend WithEvents clmDesc As ColumnHeader
+    Friend WithEvents lblDatasets As Label
+    Friend WithEvents lblDatasetsNumber As Label
 End Class
