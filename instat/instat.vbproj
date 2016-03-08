@@ -460,6 +460,18 @@
     <Compile Include="sdgCumDistPlotOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDensityOptions.Designer.vb">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDensityOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgFrequencyPolygonOptions.Designer.vb">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFrequencyPolygonOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgPieChartOptions.Designer.vb">
       <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
     </Compile>
@@ -1946,6 +1958,15 @@
     <EmbeddedResource Include="sdgCumDistPlotOptions.sw-KE.resx">
       <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgDensityOptions.fr-FR.resx">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDensityOptions.resx">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDensityOptions.sw-KE.resx">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgDotPlot.fr-FR.resx">
       <DependentUpon>sdgDotPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -1954,6 +1975,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDotPlot.sw-KE.resx">
       <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFrequencyPolygonOptions.fr-FR.resx">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFrequencyPolygonOptions.resx">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFrequencyPolygonOptions.sw-KE.resx">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHistogramOptions.fr-FR.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
