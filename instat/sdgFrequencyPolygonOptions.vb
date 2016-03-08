@@ -13,25 +13,9 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports System.ComponentModel
-
-Public Class ucrInputTextBox
-    Public Overrides Sub SetName(strName As String)
-        If ValidateText(strName) Then
-            txtInput.Text = strName
-            OnNameChanged()
-        End If
+Imports instat.Translations
+Public Class sdgFrequencyPolygonOptions
+    Private Sub sdgFrequencyPolygonOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
     End Sub
-
-    Private Sub txtInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtInput.KeyPress
-        bUserTyped = True
-    End Sub
-
-    Private Sub txtInput_Validating(sender As Object, e As CancelEventArgs) Handles txtInput.Validating
-        e.Cancel = Not ValidateText(txtInput.Text)
-    End Sub
-
-    Public Overrides Function GetText() As String
-        Return txtInput.Text
-    End Function
 End Class
