@@ -613,6 +613,17 @@ data_obj$methods(convert_column_to_type = function(col_names = c(), to_type = "f
 }
 )
 
+data_obj$methods(sub_dataframe = function(col_names = "") {
+  for(col_name in col_names){
+    if(!(col_name %in% names(data))){
+      stop(col_name, " is not a column in ", get_metadata(data_name_label))
+    }
+  }
+  subdata <- as.data.frame(data[, col_names])
+  return(subdata)
+}
+)
+
 #Labels for strings which will be added to logs
 Set_property="Set"
 Added_col="Added column"
