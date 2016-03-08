@@ -31,7 +31,6 @@ Public Class dlgRegressionSimple
         End If
 
         autoTranslate(Me)
-
     End Sub
 
     Private Sub InitialiseDialog()
