@@ -430,10 +430,10 @@
     <Compile Include="dlgUnusedLevels.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgViewDescriptive.Designer.vb">
-      <DependentUpon>dlgViewDescriptive.vb</DependentUpon>
+    <Compile Include="dlgViewDescriptives.Designer.vb">
+      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgViewDescriptive.vb">
+    <Compile Include="dlgViewDescriptives.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgViewModels.Designer.vb">
@@ -1874,14 +1874,14 @@
     <EmbeddedResource Include="dlgUnusedLevels.sw-KE.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgViewDescriptive.fr-FR.resx">
-      <DependentUpon>dlgViewDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgViewDescriptives.fr-FR.resx">
+      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgViewDescriptive.resx">
-      <DependentUpon>dlgViewDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgViewDescriptives.resx">
+      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgViewDescriptive.sw-KE.resx">
-      <DependentUpon>dlgViewDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgViewDescriptives.sw-KE.resx">
+      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewModels.fr-FR.resx">
       <DependentUpon>dlgViewModels.vb</DependentUpon>

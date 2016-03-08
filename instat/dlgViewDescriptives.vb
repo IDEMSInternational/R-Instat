@@ -14,8 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class dlgViewDescriptive
-    Private Sub dlgViewDescriptive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class dlgViewDescriptives
+    Private Sub dlgViewDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 End Class
