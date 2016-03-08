@@ -72,6 +72,9 @@ Public Class dlgHistogram
         If rdoHistogram.Checked = True Then
             clsRgeom_histogramFunction.SetRCommand("geom_histogram")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_histogramFunction)
+            cmdHistogramOptions.Visible = True
+        Else
+            cmdHistogramOptions.Visible = False
         End If
     End Sub
 
@@ -79,6 +82,9 @@ Public Class dlgHistogram
         If rdoDensity.Checked = True Then
             clsRgeom_densityFunction.SetRCommand("geom_density")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_densityFunction)
+            cmdDensityOptions.Visible = True
+        Else
+            cmdDensityOptions.Visible = False
 
         End If
     End Sub
@@ -87,6 +93,9 @@ Public Class dlgHistogram
         If rdoFreequencyPolygon.Checked = True Then
             clsRgeom_FPolygon.SetRCommand("geom_freqpoly")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_FPolygon)
+            cmdFrequencyOptions.Visible = True
+        Else
+            cmdFrequencyOptions.Visible = False
         End If
     End Sub
 
@@ -107,6 +116,9 @@ Public Class dlgHistogram
         ucrXReceiver.SetMeAsReceiver()
         ucrHistogramSelector.Reset()
         rdoHistogram.Checked = True
+        cmdHistogramOptions.Visible = True
+        cmdDensityOptions.Visible = False
+        cmdFrequencyOptions.Visible = False
         TestOkEnabled()
     End Sub
 
@@ -137,7 +149,7 @@ Public Class dlgHistogram
         SetDefaults()
     End Sub
 
-    Private Sub cmdHistogramOptions_Click(sender As Object, e As EventArgs) Handles cmdHistogramOptions.Click
+    Private Sub cmdHistogramOptions_Click(sender As Object, e As EventArgs) Handles cmdHistogramOptions.Click, cmdDensityOptions.Click, cmdFrequencyOptions.Click
         sdgHistogramOptions.ShowDialog()
     End Sub
 End Class
