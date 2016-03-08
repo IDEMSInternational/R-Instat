@@ -24,8 +24,10 @@ Public Class dlgBoxplot
         clsRggplotFunction.SetRCommand("ggplot")
         clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
         clsRaesFunction.SetRCommand("aes")
-        clsRaesFunction.AddParameter("x", "") ' Empty string is default x value in case no factor is chosen
+        clsRaesFunction.AddParameter("x", Chr(34) & " " & Chr(34)) ' Empty string is default x value in case no factor is chosen
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        ucrBase.iHelpTopicID = 102
+
         SetOperator()
         ucrBase.clsRsyntax.iCallType = 0
         ucrYvariableReceiver.Selector = ucrSelectorBoxPlot
@@ -67,6 +69,8 @@ Public Class dlgBoxplot
         chkHorizontalBoxplot.Checked = False
         chkNotchedBoxplot.Checked = False
         chkVariableWidth.Checked = False
+
+        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -86,6 +90,7 @@ Public Class dlgBoxplot
     Private Sub ucrYvariableReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYvariableReceiver.SelectionChanged
         If Not ucrYvariableReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("y", ucrYvariableReceiver.GetVariableNames(False))
+            ucrByFactorsReceiver.SetMeAsReceiver()
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
@@ -95,14 +100,16 @@ Public Class dlgBoxplot
     Private Sub ucrByFactorsReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.SelectionChanged
         If Not ucrByFactorsReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("x", ucrByFactorsReceiver.GetVariableNames(False))
+            ucrSecondFactorReceiver.SetMeAsReceiver()
         Else
-            clsRaesFunction.RemoveParameterByName("x")
+            clsRaesFunction.AddParameter("x", Chr(34) & " " & Chr(34))
         End If
     End Sub
     Private Sub ucrSecondFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.SelectionChanged
 
         If Not ucrSecondFactorReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
+            ucrYvariableReceiver.SetMeAsReceiver()
         Else
             clsRaesFunction.RemoveParameterByName("fill")
         End If
