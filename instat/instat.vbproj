@@ -382,6 +382,12 @@
     <Compile Include="sdgCumDistPlotOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgFrequencyPolygonOptions.Designer.vb">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFrequencyPolygonOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgPieChartOptions.Designer.vb">
       <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
     </Compile>
@@ -1759,6 +1765,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDotPlot.sw-KE.resx">
       <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFrequencyPolygonOptions.fr-FR.resx">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFrequencyPolygonOptions.resx">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFrequencyPolygonOptions.sw-KE.resx">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHistogramOptions.fr-FR.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>

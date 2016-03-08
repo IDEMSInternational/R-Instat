@@ -149,7 +149,12 @@ Public Class dlgHistogram
         SetDefaults()
     End Sub
 
-    Private Sub cmdHistogramOptions_Click(sender As Object, e As EventArgs) Handles cmdHistogramOptions.Click, cmdDensityOptions.Click, cmdFrequencyOptions.Click
+    Private Sub cmdHistogramOptions_Click(sender As Object, e As EventArgs) Handles cmdHistogramOptions.Click
         sdgHistogramOptions.ShowDialog()
     End Sub
+
+    Private Sub cmdFrequencyOptions_Click(sender As Object, e As EventArgs) Handles cmdFrequencyOptions.Click
+        sdgFrequencyPolygonOptions.ShowDialog()
+    End Sub
+
 End Class
