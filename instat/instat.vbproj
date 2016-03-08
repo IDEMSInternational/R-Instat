@@ -382,6 +382,12 @@
     <Compile Include="sdgCumDistPlotOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDensityOptions.Designer.vb">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDensityOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgFrequencyPolygonOptions.Designer.vb">
       <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
     </Compile>
@@ -1756,6 +1762,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCumDistPlotOptions.sw-KE.resx">
       <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDensityOptions.fr-FR.resx">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDensityOptions.resx">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDensityOptions.sw-KE.resx">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDotPlot.fr-FR.resx">
       <DependentUpon>sdgDotPlot.vb</DependentUpon>
