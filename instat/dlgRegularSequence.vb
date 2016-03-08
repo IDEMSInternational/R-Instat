@@ -16,64 +16,44 @@
 Imports instat.Translations
 Public Class dlgRegularSequence
     Dim bIsExtended As Boolean = False
-
+    Public bFirstLoad As Boolean = True
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("seq")
         autoTranslate(Me)
+        ucrBase.iHelpTopicID = 30
         frmMain.clsRLink.SetOutput(txtGetPreview)
+        'ucrSelectDataFrame.SetColumnList(ucrColName)
+        ucrNewColumnNameSelectorRegularSequence.SetDataFrameSelector(ucrSelectDataFrame)
+        ucrNewColumnNameSelectorRegularSequence.SetPrefix("Sequence")
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetDefaults()
         dtpSelectorA.Visible = False
         dtpSelectorB.Visible = False
-        'ucrSelectDataFrame.SetColumnList(ucrColName)
-        ucrNewColumnNameSelector.SetDataFrameSelector(ucrSelectDataFrame)
-        ucrNewColumnNameSelector.SetPrefix("Sequence")
 
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
-    End Sub
-    Private Sub rdoDates_Click(sender As Object, e As EventArgs) Handles rdoDates.Click
-        chkDefineAsFactor.Visible = False
-        dtpSelectorA.Visible = True
-        dtpSelectorB.Visible = True
     End Sub
 
+    Private Sub ReopenDialog()
 
-    Private Sub txtFrom_Leave(sender As Object, e As EventArgs) Handles txtFrom.Leave
+    End Sub
 
-        If IsNumeric(txtFrom.Text) = True Or txtFrom.Text = "" Then
-            ucrBase.clsRsyntax.AddParameter("from", txtFrom.Text)
-
-        ElseIf IsNumeric(txtFrom.Text) = False Then
-            MsgBox("Enter numeric value", vbOKOnly)
-            txtFrom.Focus()
+    Private Sub TestOKEnabled()
+        If nudFrom.Text <> "" And nudTo.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
 
         End If
-
-
-
-    End Sub
-    Private Sub txtRepeatValues_Leave(sender As Object, e As EventArgs) Handles txtRepeatValues.Leave
-
-        If IsNumeric(txtRepeatValues.Text) = True Or txtRepeatValues.Text = "" Then
-            ucrBase.clsRsyntax.AddParameter("from", txtRepeatValues.Text)
-
-        ElseIf IsNumeric(txtRepeatValues.Text) = False Then
-            MsgBox("Enter numeric value", vbOKOnly)
-            txtRepeatValues.Focus()
-
-        End If
-
-
-
-    End Sub
-    Private Sub txtTo_Leave(sender As Object, e As EventArgs) Handles txtTo.Leave
-        If IsNumeric(txtFrom.Text) = True Or txtTo.Text = "" Then
-            ucrBase.clsRsyntax.AddParameter("from", txtTo.Text)
-
-        ElseIf IsNumeric(txtTo.Text) = False Then
-            MsgBox("Enter numeric value", vbOKOnly)
-            txtTo.Focus()
-
-        End If
-
     End Sub
 
     Private Sub rdoNumeric_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNumeric.Click
@@ -85,35 +65,45 @@ Public Class dlgRegularSequence
         End If
     End Sub
 
-
-    Private Sub dtpSelectorA_Leave(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("from", "as.Date('" & Format(dtpSelectorA.Value, "yyyy/MM/dd") & "')")
-    End Sub
-    Private Sub dtpSelectorB_Leave(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("to", "as.Date('" & Format(dtpSelectorB.Value, "yyyy/MM/dd") & "')")
-    End Sub
-    Private Sub cboInStepsOf_SelectedIndexChanged(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("by", "'" & cboInStepsOf.SelectedItem.ToString() & "'")
-    End Sub
-    Private Sub txtRepeatValues_TextChanged(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("length.out", txtRepeatValues.Text)
-    End Sub
     Private Sub ucrSelectDataFrame_LostFocus(sender As Object, e As EventArgs) Handles ucrSelectDataFrame.LostFocus
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
     End Sub
 
-    Private Sub ucrColName_LostFocus(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelector.LostFocus
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+    Private Sub ucrColName_LostFocus(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelectorRegularSequence.LostFocus
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
     End Sub
 
-
-    Private Sub cboInStepsOf_TextChanged(sender As Object, e As EventArgs)
-        ucrBase.clsRsyntax.AddParameter("by", cboInStepsOf.Text)
-    End Sub
 
     Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click
         frmMain.clsRLink.RunScript(ucrBase.clsRsyntax.GetScript(), ucrBase.clsRsyntax.iCallType)
         txtGetPreview.Refresh()
     End Sub
 
+    Private Sub grpSequenceType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDates.CheckedChanged, rdoNumeric.CheckedChanged
+
+        If rdoNumeric.Checked Then
+            ucrBase.clsRsyntax.AddParameter("from", nudFrom.Value)
+            ucrBase.clsRsyntax.AddParameter("to", nudTo.Value)
+        Else
+            dtpSelectorA.Visible = True
+            dtpSelectorB.Visible = True
+            nudFrom.Visible = False
+            nudTo.Visible = False
+            ucrBase.clsRsyntax.AddParameter("from", "as.Date('" & Format(dtpSelectorA.Value, "yyyy/MM/dd") & "')")
+            ucrBase.clsRsyntax.AddParameter("to", "as.Date('" & Format(dtpSelectorB.Value, "yyyy/MM/dd") & "')")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub nudInstepsOf_ValueChanged(sender As Object, e As EventArgs) Handles nudInstepsOf.ValueChanged
+        ucrBase.clsRsyntax.AddParameter("by", nudInstepsOf.Value)
+    End Sub
+
+    Private Sub nudRepeatValues_ValueChanged(sender As Object, e As EventArgs) Handles nudRepeatValues.ValueChanged
+        ucrBase.clsRsyntax.AddParameter("length.out", nudRepeatValues.Value)
+    End Sub
+
+    Private Sub nudLength_ValueChanged(sender As Object, e As EventArgs) Handles nudLength.ValueChanged
+        ucrBase.clsRsyntax.AddParameter("length", nudLength.Value)
+    End Sub
 End Class
