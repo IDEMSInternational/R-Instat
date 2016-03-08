@@ -340,6 +340,12 @@
     <Compile Include="dlgReoderDescriptive.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReoderModels.Designer.vb">
+      <DependentUpon>dlgReoderModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReoderModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgReorderLevels.Designer.vb">
       <DependentUpon>dlgReorderLevels.vb</DependentUpon>
     </Compile>
@@ -1690,6 +1696,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReoderDescriptive.sw-KE.resx">
       <DependentUpon>dlgReoderDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderModels.fr-FR.resx">
+      <DependentUpon>dlgReoderModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderModels.resx">
+      <DependentUpon>dlgReoderModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderModels.sw-KE.resx">
+      <DependentUpon>dlgReoderModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderLevels.fr-FR.resx">
       <DependentUpon>dlgReorderLevels.vb</DependentUpon>
