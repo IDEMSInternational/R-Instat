@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgViewDescriptive
+Partial Class dlgReoderDescriptive
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -27,22 +27,22 @@ Partial Class dlgViewDescriptive
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 196)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 204)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
-        'dlgViewDescriptive
+        'dlgReoderDescriptive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 261)
+        Me.ClientSize = New System.Drawing.Size(428, 269)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgViewDescriptive"
+        Me.Name = "dlgReoderDescriptive"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "View"
-        Me.Text = "View"
+        Me.Tag = "Reoder"
+        Me.Text = "Reoder"
         Me.ResumeLayout(False)
 
     End Sub
