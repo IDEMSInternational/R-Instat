@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ucrSaveModel
+Partial Class ucrSaveGraph
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
@@ -22,42 +22,41 @@ Partial Class ucrSaveModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.chkSaveModel = New System.Windows.Forms.CheckBox()
-        Me.ucrInputModelName = New instat.ucrInputComboBox()
+        Me.ucrInputGraphName = New instat.ucrInputComboBox()
+        Me.chkSaveGraph = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
-        'chkSaveModel
+        'ucrInputGraphName
         '
-        Me.chkSaveModel.AutoSize = True
-        Me.chkSaveModel.Location = New System.Drawing.Point(3, 5)
-        Me.chkSaveModel.Name = "chkSaveModel"
-        Me.chkSaveModel.Size = New System.Drawing.Size(83, 17)
-        Me.chkSaveModel.TabIndex = 1
-        Me.chkSaveModel.Tag = "Save_Model"
-        Me.chkSaveModel.Text = "Save Model"
-        Me.chkSaveModel.UseVisualStyleBackColor = True
+        Me.ucrInputGraphName.Location = New System.Drawing.Point(86, 3)
+        Me.ucrInputGraphName.Name = "ucrInputGraphName"
+        Me.ucrInputGraphName.Size = New System.Drawing.Size(176, 25)
+        Me.ucrInputGraphName.TabIndex = 0
         '
-        'ucrInputModelName
+        'chkSaveGraph
         '
-        Me.ucrInputModelName.Location = New System.Drawing.Point(86, 3)
-        Me.ucrInputModelName.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrInputModelName.Name = "ucrInputModelName"
-        Me.ucrInputModelName.Size = New System.Drawing.Size(176, 25)
-        Me.ucrInputModelName.TabIndex = 0
+        Me.chkSaveGraph.AutoSize = True
+        Me.chkSaveGraph.Location = New System.Drawing.Point(3, 5)
+        Me.chkSaveGraph.Name = "chkSaveGraph"
+        Me.chkSaveGraph.Size = New System.Drawing.Size(83, 17)
+        Me.chkSaveGraph.TabIndex = 1
+        Me.chkSaveGraph.Tag = "Save_Graph"
+        Me.chkSaveGraph.Text = "Save Graph"
+        Me.chkSaveGraph.UseVisualStyleBackColor = True
         '
-        'ucrSaveModel
+        'ucrSaveGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.chkSaveModel)
-        Me.Controls.Add(Me.ucrInputModelName)
-        Me.Name = "ucrSaveModel"
+        Me.Controls.Add(Me.chkSaveGraph)
+        Me.Controls.Add(Me.ucrInputGraphName)
+        Me.Name = "ucrSaveGraph"
         Me.Size = New System.Drawing.Size(265, 27)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents chkSaveModel As CheckBox
-    Friend WithEvents ucrInputModelName As ucrInputComboBox
+    Friend WithEvents ucrInputGraphName As ucrInputComboBox
+    Friend WithEvents chkSaveGraph As CheckBox
 End Class
