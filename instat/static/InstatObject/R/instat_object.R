@@ -346,11 +346,27 @@ instat_obj$methods(insert_column_in_data = function(data_name, col_data =c(), st
 }
 )
 
-instat_obj$methods(move_columns_in_data = function(data_name, col_names = "", col_number){
+# instat_obj$methods(move_columns_in_data = function(data_name, col_names = "", col_number){
+#   if(!is.character(data_name)) stop("data_name must be of type character")
+#   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+#   
+#   data_objects[[data_name]]$move_columns_in_data(col_names = col_names, col_number = col_number)
+# }
+# )
+
+instat_obj$methods(order_columns_in_data_by_names = function(data_name, col_names_order = ""){
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[data_name]]$move_columns_in_data(col_names = col_names, col_number = col_number)
+  data_objects[[data_name]]$order_columns_in_data_by_names(col_names_order = col_names_order)
+}
+)
+
+instat_obj$methods(order_columns_in_data_by_number = function(data_name, numeric_order){
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$order_columns_in_data_by_number(numeric_order = numeric_order)
 }
 )
 
