@@ -1416,6 +1416,12 @@
     <Compile Include="ucrReceiverSingle.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSaveModel.Designer.vb">
+      <DependentUpon>ucrSaveModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSaveModel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrSelector.designer.vb">
       <DependentUpon>ucrSelector.vb</DependentUpon>
     </Compile>
@@ -3288,6 +3294,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverSingle.sw-KE.resx">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSaveModel.fr-FR.resx">
+      <DependentUpon>ucrSaveModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSaveModel.resx">
+      <DependentUpon>ucrSaveModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSaveModel.sw-KE.resx">
+      <DependentUpon>ucrSaveModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelector.fr-FR.resx">
       <DependentUpon>ucrSelector.vb</DependentUpon>
