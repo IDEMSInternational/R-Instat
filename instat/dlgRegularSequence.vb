@@ -21,7 +21,7 @@ Public Class dlgRegularSequence
         ucrBase.clsRsyntax.SetFunction("seq")
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 30
-        frmMain.clsRLink.SetOutput(txtGetPreview)
+        'frmMain.clsRLink.SetOutput(txtGetPreview)
         'ucrSelectDataFrame.SetColumnList(ucrColName)
         ucrNewColumnNameSelectorRegularSequence.SetDataFrameSelector(ucrSelectDataFrame)
         ucrNewColumnNameSelectorRegularSequence.SetPrefix("Sequence")
@@ -37,6 +37,8 @@ Public Class dlgRegularSequence
         TestOKEnabled()
     End Sub
 
+    'There should be a sequence type selected as a default.
+    'Then these things should become invisible automatically.
     Private Sub SetDefaults()
         dtpSelectorA.Visible = False
         dtpSelectorB.Visible = False
@@ -47,6 +49,10 @@ Public Class dlgRegularSequence
 
     End Sub
 
+    'This is not correct.
+    'It depends on which option has been chosen (numeric/dates)
+    'Need If statement to check that first.
+    'Ask if not sure how to do this.
     Private Sub TestOKEnabled()
         If nudFrom.Text <> "" And nudTo.Text <> "" Then
             ucrBase.OKEnabled(True)
@@ -56,6 +62,8 @@ Public Class dlgRegularSequence
         End If
     End Sub
 
+    'This is the same event as in grpSequenceType_CheckedChanged
+    'Remove this sub and copy any code needed from here into grpSequenceType_CheckedChanged
     Private Sub rdoNumeric_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNumeric.Click
         If rdoNumeric.Checked = True Then
             dtpSelectorA.Visible = False
@@ -65,22 +73,26 @@ Public Class dlgRegularSequence
         End If
     End Sub
 
+    'Remove this sub.
+    'Use DataFrameChanged event instead.
     Private Sub ucrSelectDataFrame_LostFocus(sender As Object, e As EventArgs) Handles ucrSelectDataFrame.LostFocus
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
     End Sub
 
+    'Delete ucrNewColumnNameSelectorRegularSequence and use the new ucrInputComboBox
     Private Sub ucrColName_LostFocus(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelectorRegularSequence.LostFocus
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
     End Sub
 
-
+    'To be looked at further
     Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click
-        frmMain.clsRLink.RunScript(ucrBase.clsRsyntax.GetScript(), ucrBase.clsRsyntax.iCallType)
-        txtGetPreview.Refresh()
+        'frmMain.clsRLink.RunScript(ucrBase.clsRsyntax.clsBaseFunction.ToScript(), 2)
+        'txtGetPreview.Refresh()
     End Sub
 
     Private Sub grpSequenceType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDates.CheckedChanged, rdoNumeric.CheckedChanged
 
+        'Put the correct visible properties in here
         If rdoNumeric.Checked Then
             ucrBase.clsRsyntax.AddParameter("from", nudFrom.Value)
             ucrBase.clsRsyntax.AddParameter("to", nudTo.Value)
@@ -106,4 +118,8 @@ Public Class dlgRegularSequence
     Private Sub nudLength_ValueChanged(sender As Object, e As EventArgs) Handles nudLength.ValueChanged
         ucrBase.clsRsyntax.AddParameter("length", nudLength.Value)
     End Sub
+
+    'Add value change event subs for dtpSelectorA and dtpSelectorB as you have for the nuds
+    'This will fix the error you are having
+
 End Class
