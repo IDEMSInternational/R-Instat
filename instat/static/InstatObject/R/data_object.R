@@ -452,19 +452,24 @@ data_obj$methods(insert_column_in_data = function(col_data =c(), start_pos = (le
 }
 )
 
-data_obj$methods(move_column_in_data = function(col_name = "", col_number) {
+data_obj$methods(move_columns_in_data = function(col_names = "", col_number) {
   if (col_number <= 0) stop("You cannot move a column into the position less or equal to zero.")
   if (col_number %% 1 != 0) stop("col_number value should be an integer.")
   if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
   
-  if(!(col_name %in% names(data))){
-    stop(col_name, " is not a column in", get_metadata(data_name_label))
+  for(col_name in col_names){
+    if(!(col_name %in% names(data))){
+      stop(col_name, " is not a column in ", get_metadata(data_name_label))
+    }
   }
   
-  dat1 <- as.data.frame(data[,c(col_name)])
-  names(dat1) <- col_name
+  old_names = names(data)
+  dat1 <- data[(col_names)]
+  names(dat1) <- col_names
   
-  names(data)[names(data) == col_name] <<- "to_delete"
+  for(name in col_names){
+    names(data)[names(data) == name] <<- .self$get_next_default_column_name(prefix = "to_delete")
+  }
   
   if(col_number==1){
     data <<- cbind(dat1, data)
@@ -475,10 +480,14 @@ data_obj$methods(move_column_in_data = function(col_name = "", col_number) {
   else{
     data <<- cbind(data[1:(col_number)], dat1, data[(col_number+1):ncol(data)])
   }
+  new_names = names(data)
   
-  data[,"to_delete"]<<- NULL
-  
-  .self$append_to_changes(list(Move_col, col_name))
+  for(name in new_names){
+    if(!(name %in% old_names)){
+      data[,name]<<- NULL
+    }
+  }
+  .self$append_to_changes(list(Move_col, col_names))
 }
 )
 
