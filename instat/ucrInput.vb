@@ -30,6 +30,10 @@ Public Class ucrInput
     Public Overridable Sub SetName(strName As String)
     End Sub
 
+    Public Overridable Function GetText() As String
+        Return ""
+    End Function
+
     Public Overridable Sub Reset()
         bUserTyped = False
     End Sub
