@@ -17,7 +17,7 @@ Imports instat.Translations
 Public Class sdgBoxPlot
     Public clsBoxplotFunction As RFunction
 
-    Public Sub SetBarChartFunction(clsBoxPlotFunc As RFunction)
+    Public Sub SetBoxPlotFUnction(clsBoxPlotFunc As RFunction)
         clsBoxplotFunction = clsBoxPlotFunc
     End Sub
     Private Sub sdgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load

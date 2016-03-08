@@ -18,6 +18,7 @@ Public Class dlgBoxplot
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_boxplotFunction As New RFunction
     Private clsRaesFunction As New RFunction
+    Private bFirstLoad As Boolean = True
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -35,10 +36,16 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.SetDataType("factor")
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         autoTranslate(Me)
-        ucrBase.OKEnabled(False)
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
+
     End Sub
 
     Private Sub SetOperator()
+
         Dim clsTempOp As New ROperator
         Dim clsTempRFunc As New RFunction
         If chkHorizontalBoxplot.Checked Then
@@ -53,22 +60,53 @@ Public Class dlgBoxplot
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_boxplotFunction)
         End If
     End Sub
+    Private Sub SetDefaults()
+        ucrSelectorBoxPlot.Reset()
+        ucrSelectorBoxPlot.Focus()
+        ucrYvariableReceiver.SetMeAsReceiver()
+        chkHorizontalBoxplot.Checked = False
+        chkNotchedBoxplot.Checked = False
+        chkVariableWidth.Checked = False
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If Not ucrYvariableReceiver.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
-
-    Private Sub ucrByFactorsReceiver_Enter(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.Enter
-        ucrByFactorsReceiver.SetMeAsReceiver()
-    End Sub
-
     Private Sub ucrSelectorBoxPlot_DataFrameChanged() Handles ucrSelectorBoxPlot.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorBoxPlot.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-    Private Sub ucrByFactorsReceiver_Leave(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.Leave
-        clsRaesFunction.AddParameter("x", ucrByFactorsReceiver.GetVariableNames(False))
+    Private Sub ucrYvariableReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYvariableReceiver.SelectionChanged
+        If Not ucrYvariableReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("y", ucrYvariableReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("y")
+        End If
+        TestOkEnabled()
     End Sub
 
+    Private Sub ucrByFactorsReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.SelectionChanged
+        If Not ucrByFactorsReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("x", ucrByFactorsReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("x")
+        End If
+    End Sub
+    Private Sub ucrSecondFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.SelectionChanged
+
+        If Not ucrSecondFactorReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+        End If
+    End Sub
     Private Sub chkHorizontalBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles chkHorizontalBoxplot.CheckedChanged
         SetOperator()
     End Sub
@@ -88,25 +126,11 @@ Public Class dlgBoxplot
             clsRgeom_boxplotFunction.RemoveParameterByName("varwidth")
         End If
     End Sub
-
-    Private Sub ucrYvariableReceiver_Leave(sender As Object, e As EventArgs) Handles ucrYvariableReceiver.Leave
-        If Not (ucrYvariableReceiver.GetVariableNames = "") Then
-            clsRaesFunction.AddParameter("y", ucrYvariableReceiver.GetVariableNames(False))
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub ucrSecondFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.Leave
-        clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
-    End Sub
-
-    Private Sub ucrSecondFactorReceiver_Enter(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.Enter
-        ucrSecondFactorReceiver.SetMeAsReceiver()
-    End Sub
-
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
         sdgBoxPlot.ShowDialog()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class
