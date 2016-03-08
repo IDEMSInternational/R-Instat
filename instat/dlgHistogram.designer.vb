@@ -115,7 +115,7 @@ Partial Class dlgHistogram
         '
         'cmdDensityOptions
         '
-        Me.cmdDensityOptions.Location = New System.Drawing.Point(254, 186)
+        Me.cmdDensityOptions.Location = New System.Drawing.Point(255, 186)
         Me.cmdDensityOptions.Name = "cmdDensityOptions"
         Me.cmdDensityOptions.Size = New System.Drawing.Size(103, 23)
         Me.cmdDensityOptions.TabIndex = 8
