@@ -208,6 +208,12 @@
     <Compile Include="dlgChangeType.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCheck.Designer.vb">
+      <DependentUpon>dlgCheck.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCheck.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgChiSquareTest.designer.vb">
       <DependentUpon>dlgChiSquareTest.vb</DependentUpon>
     </Compile>
@@ -226,10 +232,22 @@
     <Compile Include="dlgCliPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgColumnMetadata.Designer.vb">
+      <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgColumnMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgColumnStats.Designer.vb">
       <DependentUpon>dlgColumnStats.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgColumnStats.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgContrasts.Designer.vb">
+      <DependentUpon>dlgContrasts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgContrasts.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCopySheet.Designer.vb">
@@ -248,6 +266,18 @@
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDeleteColumn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgDeleteDescriptive.Designer.vb">
+      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDeleteDescriptive.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgDeleteModels.Designer.vb">
+      <DependentUpon>dlgDeleteModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDeleteModels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDeleteSheet.Designer.vb">
@@ -272,6 +302,12 @@
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgInsertColumn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgMakeSheets.Designer.vb">
+      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMakeSheets.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOneWayANOVA.Designer.vb">
@@ -316,10 +352,34 @@
     <Compile Include="dlgReferenceLevels.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRenameDescriptive.Designer.vb">
+      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRenameDescriptive.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRenameModels.Designer.vb">
+      <DependentUpon>dlgRenameModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRenameModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRenameSheet.Designer.vb">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRenameSheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgReoderDescriptives.Designer.vb">
+      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReoderDescriptives.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgReoderModels.Designer.vb">
+      <DependentUpon>dlgReoderModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReoderModels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReorderLevels.Designer.vb">
@@ -346,6 +406,12 @@
     <Compile Include="dlgScatterPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSheetMetadata.Designer.vb">
+      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSheetMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSummaryBarOrPieChart.Designer.vb">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </Compile>
@@ -364,6 +430,18 @@
     <Compile Include="dlgUnusedLevels.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgViewDescriptives.Designer.vb">
+      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgViewDescriptives.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgViewModels.Designer.vb">
+      <DependentUpon>dlgViewModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgViewModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgCanonicalCorrelation.Designer.vb">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </Compile>
@@ -380,6 +458,18 @@
       <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCumDistPlotOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgDensityOptions.Designer.vb">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDensityOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgFrequencyPolygonOptions.Designer.vb">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFrequencyPolygonOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgPieChartOptions.Designer.vb">
@@ -1472,6 +1562,15 @@
     <EmbeddedResource Include="dlgChangeType.sw-KE.resx">
       <DependentUpon>dlgChangeType.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCheck.fr-FR.resx">
+      <DependentUpon>dlgCheck.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCheck.resx">
+      <DependentUpon>dlgCheck.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCheck.sw-KE.resx">
+      <DependentUpon>dlgCheck.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgChiSquareTest.fr-FR.resx">
       <DependentUpon>dlgChiSquareTest.vb</DependentUpon>
     </EmbeddedResource>
@@ -1499,6 +1598,24 @@
     <EmbeddedResource Include="dlgCliPlot.sw-KE.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnMetadata.fr-FR.resx">
+      <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnMetadata.resx">
+      <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnMetadata.sw-KE.resx">
+      <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgContrasts.fr-FR.resx">
+      <DependentUpon>dlgContrasts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgContrasts.resx">
+      <DependentUpon>dlgContrasts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgContrasts.sw-KE.resx">
+      <DependentUpon>dlgContrasts.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCopySheet.fr-FR.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
     </EmbeddedResource>
@@ -1525,6 +1642,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteColumn.sw-KE.resx">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
+      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteDescriptive.resx">
+      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteDescriptive.sw-KE.resx">
+      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteModels.fr-FR.resx">
+      <DependentUpon>dlgDeleteModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteModels.resx">
+      <DependentUpon>dlgDeleteModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteModels.sw-KE.resx">
+      <DependentUpon>dlgDeleteModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteSheet.fr-FR.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
@@ -1561,6 +1696,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.sw-KE.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMakeSheets.fr-FR.resx">
+      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMakeSheets.resx">
+      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMakeSheets.sw-KE.resx">
+      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
@@ -1625,6 +1769,24 @@
     <EmbeddedResource Include="dlgReferenceLevels.sw-KE.resx">
       <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameDescriptive.fr-FR.resx">
+      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameDescriptive.resx">
+      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameDescriptive.sw-KE.resx">
+      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameModels.fr-FR.resx">
+      <DependentUpon>dlgRenameModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameModels.resx">
+      <DependentUpon>dlgRenameModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameModels.sw-KE.resx">
+      <DependentUpon>dlgRenameModels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameSheet.fr-FR.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </EmbeddedResource>
@@ -1633,6 +1795,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameSheet.sw-KE.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderDescriptives.fr-FR.resx">
+      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderDescriptives.resx">
+      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderDescriptives.sw-KE.resx">
+      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderModels.fr-FR.resx">
+      <DependentUpon>dlgReoderModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderModels.resx">
+      <DependentUpon>dlgReoderModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderModels.sw-KE.resx">
+      <DependentUpon>dlgReoderModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderLevels.fr-FR.resx">
       <DependentUpon>dlgReorderLevels.vb</DependentUpon>
@@ -1670,6 +1850,15 @@
     <EmbeddedResource Include="dlgScatterPlot.sw-KE.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgSheetMetadata.fr-FR.resx">
+      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSheetMetadata.resx">
+      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSheetMetadata.sw-KE.resx">
+      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.fr-FR.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </EmbeddedResource>
@@ -1696,6 +1885,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.sw-KE.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewDescriptives.fr-FR.resx">
+      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewDescriptives.resx">
+      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewDescriptives.sw-KE.resx">
+      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewModels.fr-FR.resx">
+      <DependentUpon>dlgViewModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewModels.resx">
+      <DependentUpon>dlgViewModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewModels.sw-KE.resx">
+      <DependentUpon>dlgViewModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
@@ -1751,6 +1958,15 @@
     <EmbeddedResource Include="sdgCumDistPlotOptions.sw-KE.resx">
       <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgDensityOptions.fr-FR.resx">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDensityOptions.resx">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDensityOptions.sw-KE.resx">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgDotPlot.fr-FR.resx">
       <DependentUpon>sdgDotPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -1759,6 +1975,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDotPlot.sw-KE.resx">
       <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFrequencyPolygonOptions.fr-FR.resx">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFrequencyPolygonOptions.resx">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFrequencyPolygonOptions.sw-KE.resx">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHistogramOptions.fr-FR.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
