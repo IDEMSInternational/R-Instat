@@ -438,3 +438,11 @@ instat_obj$methods(append_to_dataframe_metadata = function(data_name, property, 
   data_objects[[data_name]]$append_to_metadata(property, new_val)
 } 
 )
+
+instat_obj$methods(sub_dataframe = function(data_name, col_names = "") {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$sub_dataframe(col_names = col_names)
+} 
+)
