@@ -244,6 +244,12 @@
     <Compile Include="dlgColumnStats.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgContrasts.Designer.vb">
+      <DependentUpon>dlgContrasts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgContrasts.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCopySheet.Designer.vb">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
     </Compile>
@@ -1576,6 +1582,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnMetadata.sw-KE.resx">
       <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgContrasts.fr-FR.resx">
+      <DependentUpon>dlgContrasts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgContrasts.resx">
+      <DependentUpon>dlgContrasts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgContrasts.sw-KE.resx">
+      <DependentUpon>dlgContrasts.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCopySheet.fr-FR.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
