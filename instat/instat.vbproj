@@ -232,6 +232,12 @@
     <Compile Include="dlgCliPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgColumnMetadata.Designer.vb">
+      <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgColumnMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgColumnStats.Designer.vb">
       <DependentUpon>dlgColumnStats.vb</DependentUpon>
     </Compile>
@@ -1561,6 +1567,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliPlot.sw-KE.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnMetadata.fr-FR.resx">
+      <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnMetadata.resx">
+      <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnMetadata.sw-KE.resx">
+      <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCopySheet.fr-FR.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
