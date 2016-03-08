@@ -17,7 +17,6 @@
 Imports instat.Translations
 Public Class dlgHistogram
     Public bFirstLoad As Boolean = True
-
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_histogramFunction As New RFunction
     Private clsRgeom_densityFunction As New RFunction
@@ -42,6 +41,7 @@ Public Class dlgHistogram
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 118
         ucrXReceiver.SetMeAsReceiver()
+        ucrFactorReceiver.SetDataType("factor")
         TestOkEnabled()
         autoTranslate(Me)
     End Sub
@@ -51,11 +51,10 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub ucrXReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrXReceiver.SelectionChanged
-        If Not (ucrXReceiver.txtReceiverSingle.Text = "") Then
+        If Not ucrXReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
-            TestOkEnabled()
         Else
-            TestOkEnabled()
+            clsRaesFunction.RemoveParameterByName("x")
         End If
         TestOkEnabled()
     End Sub
@@ -64,8 +63,12 @@ Public Class dlgHistogram
         sdgPlots.ShowDialog()
     End Sub
 
-    Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
-        clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
+    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
+        If Not ucrFactorReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+        End If
     End Sub
 
     Private Sub rdoHistogram_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHistogram.CheckedChanged
@@ -85,7 +88,6 @@ Public Class dlgHistogram
             cmdDensityOptions.Visible = True
         Else
             cmdDensityOptions.Visible = False
-
         End If
     End Sub
 
@@ -101,10 +103,10 @@ Public Class dlgHistogram
 
     Private Sub TestOkEnabled()
         'tests when ok can be enabled
-        If ucrXReceiver.GetVariableNames() <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrXReceiver.IsEmpty Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
 
     End Sub

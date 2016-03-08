@@ -40,6 +40,7 @@ Partial Class sdgDensityOptions
         Me.Controls.Add(Me.ucrBaseDensityOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgDensityOptions"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Density_Options"
         Me.Text = "Density Options"
         Me.ResumeLayout(False)
