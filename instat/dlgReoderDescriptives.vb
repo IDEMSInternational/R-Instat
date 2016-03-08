@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgReoderDescriptives
-    Private Sub dlgReoderDescriptive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgReoderDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 End Class
