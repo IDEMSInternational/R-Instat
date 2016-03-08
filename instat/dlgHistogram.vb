@@ -157,4 +157,7 @@ Public Class dlgHistogram
         sdgFrequencyPolygonOptions.ShowDialog()
     End Sub
 
+    Private Sub cmdDensityOptions_Click(sender As Object, e As EventArgs) Handles cmdDensityOptions.Click
+        sdgDensityOptions.ShowDialog()
+    End Sub
 End Class
