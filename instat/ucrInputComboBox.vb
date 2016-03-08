@@ -45,6 +45,7 @@ Public Class ucrInputComboBox
                 End If
             Case "Data Frames"
             Case "Models"
+                cboInput.Items.Add(frmMain.clsRLink.GetModelNames().ToArray)
         End Select
     End Sub
 
