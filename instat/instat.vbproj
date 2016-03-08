@@ -256,6 +256,12 @@
     <Compile Include="dlgDeleteDescriptive.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDeleteModels.Designer.vb">
+      <DependentUpon>dlgDeleteModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDeleteModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDeleteSheet.Designer.vb">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
     </Compile>
@@ -1576,6 +1582,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.sw-KE.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteModels.fr-FR.resx">
+      <DependentUpon>dlgDeleteModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteModels.resx">
+      <DependentUpon>dlgDeleteModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteModels.sw-KE.resx">
+      <DependentUpon>dlgDeleteModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteSheet.fr-FR.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
