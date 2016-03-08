@@ -16,9 +16,7 @@
 Imports instat.Translations
 Public Class dlgCanonicalCorrelationAnalysis
     Public bFirstLoad As Boolean = True
-    Dim clsModel As New ROperator
-    'Public Variables As New RSyntax
-    Public YVariables, XVariables, dataframe
+    Public YVariables, XVariables
     Private Sub dlgCanonicalCorrelationAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -56,10 +54,6 @@ Public Class dlgCanonicalCorrelationAnalysis
         End If
     End Sub
 
-    Public Sub ucrSelectorCCA_DataFrameChanged() Handles ucrSelectorCCA.DataFrameChanged
-        dataframe = ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame.ToString()
-    End Sub
-
     Private Sub ucrBaseCCA_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseCCA.ClickReset
         SetDefaults()
     End Sub
@@ -68,8 +62,6 @@ Public Class dlgCanonicalCorrelationAnalysis
         'sdgcanonicalcorrelation.regoptions
         Options()
     End Sub
-
-
 
     Public Sub ucrReceiverYvariables_SelectionChanged() Handles ucrReceiverYvariables.SelectionChanged
         TestOKEnabled()
