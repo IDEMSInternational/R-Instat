@@ -17,73 +17,141 @@ Imports instat.Translations
 Public Class dlgSummaryBarOrPieChart
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_summarybar As New RFunction
-    Private clsRgeom_Piechart As New RFunction
     Private clsRaesFunction As New RFunction
+    Private bFirstLoad As Boolean = True
+
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRaesFunction.SetRCommand("aes")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+        clsRgeom_summarybar.SetRCommand("geom_bar")
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_summarybar)
+
         ucrYReceiver.Selector = ucrSummarybarSelector
         ucrFactorReceiver.Selector = ucrSummarybarSelector
+        ucrFactorReceiver.SetDataType("factor")
         ucrSecondFactorReceiver.Selector = ucrSummarybarSelector
+        ucrSecondFactorReceiver.SetDataType("factor")
         ucrYReceiver.SetMeAsReceiver()
         autoTranslate(Me)
         ucrBase.clsRsyntax.iCallType = 0
-    End Sub
 
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
+    End Sub
+    Private Sub TestOkEnabled()
+        If Not ucrYReceiver.IsEmpty And Not ucrFactorReceiver.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+
+        End If
+    End Sub
+    Private Sub SetDefaults()
+        ucrSummarybarSelector.Reset()
+        ucrSummarybarSelector.Focus()
+        cmdBarChartOptions.Visible = False
+        cmdPieChartOptions.Visible = False
+        TestOkEnabled()
+    End Sub
     Private Sub grpChartOptions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
+
+        SummaryCheck()
+        Dim clsTempRFunc As New RFunction
         If rdoBarChart.Checked = True Then
-            lblFactor.Visible = True
-            ucrFactorReceiver.Visible = True
-            clsRgeom_summarybar.SetRCommand("geom_bar")
+            AddParameterSecondReceiver()
+            cmdBarChartOptions.Visible = True
+            cmdPieChartOptions.Visible = False
+            lblSecondFactor.Visible = True
+            ucrSecondFactorReceiver.Visible = True
+            clsRgeom_summarybar.AddParameter("stat", Chr(34) & "identity" & Chr(34))
+            ucrBase.clsRsyntax.RemoveOperatorParameter("polar")
+            clsRgeom_summarybar.RemoveParameterByName("width")
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_summarybar)
+
+        ElseIf rdoPieChart.Checked = True
+            cmdPieChartOptions.Visible = True
+            cmdBarChartOptions.Visible = False
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+            lblSecondFactor.Visible = False
+            ucrSecondFactorReceiver.Visible = False
+            ucrSecondFactorReceiver.SetMeAsReceiver()
+
+            clsRgeom_summarybar.AddParameter("width", 1)
             clsRgeom_summarybar.AddParameter("stat", Chr(34) & "identity" & Chr(34))
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_summarybar)
 
-        Else 'rdoPieChart.Checked = True
-            Dim clsTempOp As New ROperator
-            Dim clsTempRFunc As New RFunction
-            clsTempOp.SetOperation("+")
-
-            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-            lblFactor.Visible = False
-            ucrFactorReceiver.Visible = False
-            ucrYReceiver.SetMeAsReceiver()
-
-            clsRgeom_Piechart.SetRCommand("geom_bar")
-            clsRgeom_Piechart.AddParameter("width", 1)
-            clsRgeom_Piechart.AddParameter("stat", Chr(34) & "identity" & Chr(34))
-            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_Piechart)
-
-            clsTempOp.SetParameter(True, clsRFunc:=clsRggplotFunction)
-            clsTempOp.SetParameter(False, clsRFunc:=clsRgeom_Piechart)
             clsTempRFunc.SetRCommand("coord_polar")
             clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
-            ucrBase.clsRsyntax.SetOperatorParameter(True, clsOp:=clsTempOp)
-            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsTempRFunc)
-            'Else
-            '    ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=Nothing)
+            ucrBase.clsRsyntax.AddOperatorParameter("polar", clsRFunc:=clsTempRFunc)
+
         End If
     End Sub
 
-    Private Sub ucrYReceiver_Leave(sender As Object, e As EventArgs) Handles ucrYReceiver.Leave
-        clsRaesFunction.AddParameter("y", ucrYReceiver.GetVariableNames(False))
+    Private Sub ucrYReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYReceiver.SelectionChanged
+        If Not ucrYReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("y", ucrYReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("y")
+        End If
+        TestOkEnabled()
     End Sub
 
-    Private Sub ucrSecondFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.Leave
-        clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
+    Private Sub AddParameterSecondReceiver()
+        If Not ucrSecondFactorReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+        End If
+    End Sub
+    Private Sub ucrSecondFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.SelectionChanged
+        AddParameterSecondReceiver()
+        TestOkEnabled()
     End Sub
 
-    Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
-        clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
+        SummaryCheck()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub SummaryCheck()
+        If rdoBarChart.Checked = True Then
+            If ucrFactorReceiver.IsEmpty Then
+                clsRaesFunction.RemoveParameterByName("x")
+            Else
+                clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+            End If
+
+        ElseIf rdoPieChart.Checked = True Then
+            If ucrFactorReceiver.IsEmpty Then
+                clsRaesFunction.RemoveParameterByName("fill")
+            Else
+                clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
+            End If
+        End If
     End Sub
 
     Private Sub ucrSummarybarSelector_DataFrameChanged() Handles ucrSummarybarSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSummarybarSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-    Private Sub ucrSummarybarSelector_Load(sender As Object, e As EventArgs)
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
 
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.ShowDialog()
+    End Sub
+
+    Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
+        sdgBarChart.ShowDialog()
+    End Sub
+
+    Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
+        sdgPieChartOptions.ShowDialog()
     End Sub
 End Class
