@@ -40,6 +40,7 @@ Partial Class sdgFrequencyPolygonOptions
         Me.Controls.Add(Me.ucrBaseFrequencyOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgFrequencyPolygonOptions"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Frequency_Polygon_Options"
         Me.Text = "Frequency Polygon Options"
         Me.ResumeLayout(False)
