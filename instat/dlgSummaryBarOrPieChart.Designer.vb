@@ -30,11 +30,12 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblYvariable = New System.Windows.Forms.Label()
         Me.lblFactor = New System.Windows.Forms.Label()
-        Me.cmdPieChartOptions = New System.Windows.Forms.Button()
+        Me.cmdBarChartOptions = New System.Windows.Forms.Button()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblSecondFactor = New System.Windows.Forms.Label()
         Me.grpChartOptions = New System.Windows.Forms.GroupBox()
+        Me.cmdPieChartOptions = New System.Windows.Forms.Button()
         Me.grpChartOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -79,6 +80,7 @@ Partial Class dlgSummaryBarOrPieChart
         '
         Me.ucrYReceiver.Location = New System.Drawing.Point(287, 69)
         Me.ucrYReceiver.Name = "ucrYReceiver"
+        Me.ucrYReceiver.Selector = Nothing
         Me.ucrYReceiver.Size = New System.Drawing.Size(106, 26)
         Me.ucrYReceiver.TabIndex = 3
         '
@@ -86,6 +88,7 @@ Partial Class dlgSummaryBarOrPieChart
         '
         Me.ucrFactorReceiver.Location = New System.Drawing.Point(287, 123)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
+        Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
         Me.ucrFactorReceiver.TabIndex = 5
         '
@@ -109,15 +112,15 @@ Partial Class dlgSummaryBarOrPieChart
         Me.lblFactor.Tag = "Factor"
         Me.lblFactor.Text = "Factor"
         '
-        'cmdPieChartOptions
+        'cmdBarChartOptions
         '
-        Me.cmdPieChartOptions.Location = New System.Drawing.Point(12, 222)
-        Me.cmdPieChartOptions.Name = "cmdPieChartOptions"
-        Me.cmdPieChartOptions.Size = New System.Drawing.Size(128, 23)
-        Me.cmdPieChartOptions.TabIndex = 8
-        Me.cmdPieChartOptions.Tag = "Pie_Chart_Options"
-        Me.cmdPieChartOptions.Text = "Pie Chart Options"
-        Me.cmdPieChartOptions.UseVisualStyleBackColor = True
+        Me.cmdBarChartOptions.Location = New System.Drawing.Point(12, 222)
+        Me.cmdBarChartOptions.Name = "cmdBarChartOptions"
+        Me.cmdBarChartOptions.Size = New System.Drawing.Size(128, 23)
+        Me.cmdBarChartOptions.TabIndex = 8
+        Me.cmdBarChartOptions.Tag = "Bar_Chart_Options"
+        Me.cmdBarChartOptions.Text = "Bar Chart Options"
+        Me.cmdBarChartOptions.UseVisualStyleBackColor = True
         '
         'cmdOptions
         '
@@ -133,6 +136,7 @@ Partial Class dlgSummaryBarOrPieChart
         '
         Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(287, 180)
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
+        Me.ucrSecondFactorReceiver.Selector = Nothing
         Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(106, 26)
         Me.ucrSecondFactorReceiver.TabIndex = 7
         '
@@ -156,6 +160,16 @@ Partial Class dlgSummaryBarOrPieChart
         Me.grpChartOptions.TabIndex = 0
         Me.grpChartOptions.TabStop = False
         '
+        'cmdPieChartOptions
+        '
+        Me.cmdPieChartOptions.Location = New System.Drawing.Point(146, 222)
+        Me.cmdPieChartOptions.Name = "cmdPieChartOptions"
+        Me.cmdPieChartOptions.Size = New System.Drawing.Size(128, 23)
+        Me.cmdPieChartOptions.TabIndex = 8
+        Me.cmdPieChartOptions.Tag = "Pie_Chart_Options"
+        Me.cmdPieChartOptions.Text = "Pie Chart Options"
+        Me.cmdPieChartOptions.UseVisualStyleBackColor = True
+        '
         'dlgSummaryBarOrPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -164,6 +178,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.Controls.Add(Me.grpChartOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdPieChartOptions)
+        Me.Controls.Add(Me.cmdBarChartOptions)
         Me.Controls.Add(Me.lblSecondFactor)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
@@ -192,9 +207,10 @@ Partial Class dlgSummaryBarOrPieChart
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblYvariable As Label
     Friend WithEvents lblFactor As Label
-    Friend WithEvents cmdPieChartOptions As Button
+    Friend WithEvents cmdBarChartOptions As Button
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblSecondFactor As Label
     Friend WithEvents grpChartOptions As GroupBox
+    Friend WithEvents cmdPieChartOptions As Button
 End Class
