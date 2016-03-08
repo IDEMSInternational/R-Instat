@@ -322,6 +322,12 @@
     <Compile Include="dlgRenameSheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReoderDescriptive.Designer.vb">
+      <DependentUpon>dlgReoderDescriptive.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReoderDescriptive.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgReorderLevels.Designer.vb">
       <DependentUpon>dlgReorderLevels.vb</DependentUpon>
     </Compile>
@@ -1639,6 +1645,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameSheet.sw-KE.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderDescriptive.fr-FR.resx">
+      <DependentUpon>dlgReoderDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderDescriptive.resx">
+      <DependentUpon>dlgReoderDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderDescriptive.sw-KE.resx">
+      <DependentUpon>dlgReoderDescriptive.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderLevels.fr-FR.resx">
       <DependentUpon>dlgReorderLevels.vb</DependentUpon>
