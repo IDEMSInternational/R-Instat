@@ -452,42 +452,80 @@ data_obj$methods(insert_column_in_data = function(col_data =c(), start_pos = (le
 }
 )
 
-data_obj$methods(move_columns_in_data = function(col_names = "", col_number) {
-  if (col_number <= 0) stop("You cannot move a column into the position less or equal to zero.")
-  if (col_number %% 1 != 0) stop("col_number value should be an integer.")
-  if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
+# data_obj$methods(move_columns_in_data = function(col_names = "", col_number) {
+#   if (col_number <= 0) stop("You cannot move a column into the position less or equal to zero.")
+#   if (col_number %% 1 != 0) stop("col_number value should be an integer.")
+#   if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
+#   
+#   for(col_name in col_names){
+#     if(!(col_name %in% names(data))){
+#       stop(col_name, " is not a column in ", get_metadata(data_name_label))
+#     }
+#   }
+#   
+#   old_names = names(data)
+#   dat1 <- data[(col_names)]
+#   names(dat1) <- col_names
+#   
+#   for(name in col_names){
+#     names(data)[names(data) == name] <<- .self$get_next_default_column_name(prefix = "to_delete")
+#   }
+#   
+#   if(col_number==1){
+#     data <<- cbind(dat1, data)
+#   }
+#   else if(col_number == ncol(data)){
+#     data <<- cbind(data,dat1)
+#   }
+#   else{
+#     data <<- cbind(data[1:(col_number)], dat1, data[(col_number+1):ncol(data)])
+#   }
+#   new_names = names(data)
+#   
+#   for(name in new_names){
+#     if(!(name %in% old_names)){
+#       data[,name]<<- NULL
+#     }
+#   }
+#   .self$append_to_changes(list(Move_col, col_names))
+# }
+# )
+
+data_obj$methods(order_columns_in_data_by_names = function(col_names_order = "") {
+  if (length(names(data)) != length(col_names_order)) stop("Columns to order should be same as columns in the data.")
   
-  for(col_name in col_names){
-    if(!(col_name %in% names(data))){
-      stop(col_name, " is not a column in ", get_metadata(data_name_label))
+  old_names_order <- names(data)
+  
+  for(col_name in old_names_order){
+    if(!(col_name %in% col_names_order)){
+      stop(col_name, " is missing in columns order")
     }
   }
   
-  old_names = names(data)
-  dat1 <- data[(col_names)]
-  names(dat1) <- col_names
+  numeric_order = c()
   
-  for(name in col_names){
-    names(data)[names(data) == name] <<- .self$get_next_default_column_name(prefix = "to_delete")
+  for(i in 1: length(col_names_order)){
+    numeric_order[i] = which(old_names_order == col_names_order[i])
   }
   
-  if(col_number==1){
-    data <<- cbind(dat1, data)
-  }
-  else if(col_number == ncol(data)){
-    data <<- cbind(data,dat1)
-  }
-  else{
-    data <<- cbind(data[1:(col_number)], dat1, data[(col_number+1):ncol(data)])
-  }
-  new_names = names(data)
+  data <<- data[ ,numeric_order]
+  .self$append_to_changes(list(Col_order, col_names_order))
+}
+)
+
+data_obj$methods(order_columns_in_data_by_number = function(numeric_order) {
+  if (length(names(data)) != length(numeric_order)) stop("Columns order should be the same length as columns in the data.")
   
-  for(name in new_names){
-    if(!(name %in% old_names)){
-      data[,name]<<- NULL
+  old_order <- c(1:ncol(data))
+  
+  for(old_col_num in old_order){
+    if(!(old_col_num %in% numeric_order)){
+      stop(old_col_num, " is missing in numeric order")
     }
   }
-  .self$append_to_changes(list(Move_col, col_names))
+
+  data <<- data[ ,numeric_order]
+  .self$append_to_changes(list(Numeric_column_order, numeric_order))
 }
 )
 
@@ -635,6 +673,8 @@ Replaced_value="Replaced value"
 Removed_row="Removed row"
 Inserted_col = "Inserted column"
 Move_col = "Moved column"
+Col_order = "Order of columns"
+Numeric_column_order = "Numeric Order of columns"
 Inserted_row = "Inserted row"
 
 #meta data labels
