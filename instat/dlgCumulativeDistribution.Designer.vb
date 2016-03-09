@@ -24,7 +24,7 @@ Partial Class dlgCumulativeDistribution
     Private Sub InitializeComponent()
         Me.lblvariates = New System.Windows.Forms.Label()
         Me.lblFactors = New System.Windows.Forms.Label()
-        Me.chkExeedancePlots = New System.Windows.Forms.CheckBox()
+        Me.chkExceedancePlots = New System.Windows.Forms.CheckBox()
         Me.chkCountsOnYAxis = New System.Windows.Forms.CheckBox()
         Me.chkIncludePoints = New System.Windows.Forms.CheckBox()
         Me.cmdLineOptions = New System.Windows.Forms.Button()
@@ -56,16 +56,16 @@ Partial Class dlgCumulativeDistribution
         Me.lblFactors.Tag = "Factors_Optional"
         Me.lblFactors.Text = "Factor  (Optional)"
         '
-        'chkExeedancePlots
+        'chkExceedancePlots
         '
-        Me.chkExeedancePlots.AutoSize = True
-        Me.chkExeedancePlots.Location = New System.Drawing.Point(13, 181)
-        Me.chkExeedancePlots.Name = "chkExeedancePlots"
-        Me.chkExeedancePlots.Size = New System.Drawing.Size(106, 17)
-        Me.chkExeedancePlots.TabIndex = 5
-        Me.chkExeedancePlots.Tag = "Exeedance_Plots"
-        Me.chkExeedancePlots.Text = "Exeedance Plots"
-        Me.chkExeedancePlots.UseVisualStyleBackColor = True
+        Me.chkExceedancePlots.AutoSize = True
+        Me.chkExceedancePlots.Location = New System.Drawing.Point(13, 181)
+        Me.chkExceedancePlots.Name = "chkExceedancePlots"
+        Me.chkExceedancePlots.Size = New System.Drawing.Size(112, 17)
+        Me.chkExceedancePlots.TabIndex = 5
+        Me.chkExceedancePlots.Tag = "Exceedance_Plots"
+        Me.chkExceedancePlots.Text = "Exceedance Plots"
+        Me.chkExceedancePlots.UseVisualStyleBackColor = True
         '
         'chkCountsOnYAxis
         '
@@ -161,7 +161,7 @@ Partial Class dlgCumulativeDistribution
         Me.Controls.Add(Me.cmdLineOptions)
         Me.Controls.Add(Me.chkIncludePoints)
         Me.Controls.Add(Me.chkCountsOnYAxis)
-        Me.Controls.Add(Me.chkExeedancePlots)
+        Me.Controls.Add(Me.chkExceedancePlots)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.lblvariates)
         Me.Controls.Add(Me.ucrCumDistSelector)
@@ -180,7 +180,7 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents ucrCumDistSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblvariates As Label
     Friend WithEvents lblFactors As Label
-    Friend WithEvents chkExeedancePlots As CheckBox
+    Friend WithEvents chkExceedancePlots As CheckBox
     Friend WithEvents chkCountsOnYAxis As CheckBox
     Friend WithEvents chkIncludePoints As CheckBox
     Friend WithEvents cmdLineOptions As Button

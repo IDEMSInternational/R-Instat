@@ -32,7 +32,6 @@ Public Class dlgCumulativeDistribution
         ucrVariateReceiver.Selector = ucrCumDistSelector
         ucrFactorReceiver.Selector = ucrCumDistSelector
         ucrFactorReceiver.SetDataType("factor")
-        ucrVariateReceiver.SetMeAsReceiver()
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 133
 
@@ -49,8 +48,9 @@ Public Class dlgCumulativeDistribution
         ucrCumDistSelector.Reset()
         ucrCumDistSelector.Focus()
         chkCountsOnYAxis.Checked = False
-        chkExeedancePlots.Checked = False
+        chkExceedancePlots.Checked = False
         chkIncludePoints.Checked = False
+        ucrVariateReceiver.SetMeAsReceiver()
         TestOkEnabled()
     End Sub
 
@@ -88,6 +88,14 @@ Public Class dlgCumulativeDistribution
     End Sub
 
     Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
+        sdgCumDistLineOptions.ShowDialog()
+    End Sub
 
+    Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
+        sdgCumDistPlotOptions.ShowDialog()
+    End Sub
+
+    Private Sub cmdThemeOptions_Click(sender As Object, e As EventArgs) Handles cmdThemeOptions.Click
+        sdgThemeOptions.ShowDialog()
     End Sub
 End Class
