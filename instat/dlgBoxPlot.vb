@@ -24,7 +24,7 @@ Public Class dlgBoxplot
         clsRggplotFunction.SetRCommand("ggplot")
         clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
         clsRaesFunction.SetRCommand("aes")
-        clsRaesFunction.AddParameter("x", Chr(34) & " " & Chr(34)) ' Empty string is default x value in case no factor is chosen
+        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34)) ' Empty string is default x value in case no factor is chosen
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.iHelpTopicID = 102
 
@@ -102,7 +102,7 @@ Public Class dlgBoxplot
             clsRaesFunction.AddParameter("x", ucrByFactorsReceiver.GetVariableNames(False))
             ucrSecondFactorReceiver.SetMeAsReceiver()
         Else
-            clsRaesFunction.AddParameter("x", Chr(34) & " " & Chr(34))
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         End If
     End Sub
     Private Sub ucrSecondFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.SelectionChanged
