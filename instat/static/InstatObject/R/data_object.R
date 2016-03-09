@@ -491,41 +491,17 @@ data_obj$methods(insert_column_in_data = function(col_data =c(), start_pos = (le
 # }
 # )
 
-data_obj$methods(order_columns_in_data_by_names = function(col_names_order = "") {
+data_obj$methods(order_columns_in_data = function(col_names_order) {
   if (length(names(data)) != length(col_names_order)) stop("Columns to order should be same as columns in the data.")
+  if(is.numeric(col_names_order) && identical(sort(col_names_order), sort(as.numeric(1:ncol(data))))){
   
-  old_names_order <- names(data)
-  
-  for(col_name in old_names_order){
-    if(!(col_name %in% col_names_order)){
-      stop(col_name, " is missing in columns order")
-    }
+  }else if(is.character(col_names_order) && identical(sort(col_names_order), sort(as.character(names(data))))){
+ 
+  }else{
+    stop("Invalid column order")
   }
-  
-  numeric_order = c()
-  
-  for(i in 1: length(col_names_order)){
-    numeric_order[i] = which(old_names_order == col_names_order[i])
-  }
-  
-  data <<- data[ ,numeric_order]
+  data <<- data[ ,col_names_order]
   .self$append_to_changes(list(Col_order, col_names_order))
-}
-)
-
-data_obj$methods(order_columns_in_data_by_number = function(numeric_order) {
-  if (length(names(data)) != length(numeric_order)) stop("Columns order should be the same length as columns in the data.")
-  
-  old_order <- c(1:ncol(data))
-  
-  for(old_col_num in old_order){
-    if(!(old_col_num %in% numeric_order)){
-      stop(old_col_num, " is missing in numeric order")
-    }
-  }
-
-  data <<- data[ ,numeric_order]
-  .self$append_to_changes(list(Numeric_column_order, numeric_order))
 }
 )
 
@@ -674,7 +650,6 @@ Removed_row="Removed row"
 Inserted_col = "Inserted column"
 Move_col = "Moved column"
 Col_order = "Order of columns"
-Numeric_column_order = "Numeric Order of columns"
 Inserted_row = "Inserted row"
 
 #meta data labels
