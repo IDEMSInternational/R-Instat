@@ -354,11 +354,11 @@ instat_obj$methods(insert_column_in_data = function(data_name, col_data =c(), st
 # }
 # )
 
-instat_obj$methods(order_columns_in_data = function(data_name, col_names_order){
+instat_obj$methods(order_columns_in_data = function(data_name, col_order){
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[data_name]]$order_columns_in_data(col_names_order = col_names_order)
+  data_objects[[data_name]]$order_columns_in_data(col_order = col_order)
 }
 )
 

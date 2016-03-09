@@ -491,17 +491,23 @@ data_obj$methods(insert_column_in_data = function(col_data =c(), start_pos = (le
 # }
 # )
 
-data_obj$methods(order_columns_in_data = function(col_names_order) {
-  if (length(names(data)) != length(col_names_order)) stop("Columns to order should be same as columns in the data.")
-  if(is.numeric(col_names_order) && identical(sort(col_names_order), sort(as.numeric(1:ncol(data))))){
+
+data_obj$methods(order_columns_in_data = function(col_order) {
+  if (length(names(data)) != length(col_order)) stop("Columns to order should be same as columns in the data.")
   
-  }else if(is.character(col_names_order) && identical(sort(col_names_order), sort(as.character(names(data))))){
- 
-  }else{
-    stop("Invalid column order")
+  if(is.numeric(col_order)) {
+    if(! (identical(sort(col_order), sort(as.numeric(1:ncol(data)))))) {
+      stop("Invalid column order")
+    }
+  }else if(is.character(col_order)) {
+    if(! (identical(sort(col_order), sort(as.character(names(data)))))){
+      stop("Invalid column order")
+    }
+  }else{ 
+    stop("column order must be a numeric or character vector")
   }
-  data <<- data[ ,col_names_order]
-  .self$append_to_changes(list(Col_order, col_names_order))
+  data <<- data[ ,col_order]
+  .self$append_to_changes(list(Col_order, col_order))
 }
 )
 
