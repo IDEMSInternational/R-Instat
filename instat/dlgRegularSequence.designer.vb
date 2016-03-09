@@ -42,10 +42,11 @@ Partial Class dlgRegularSequence
         Me.lblLength = New System.Windows.Forms.Label()
         Me.cmdRefreshPreview = New System.Windows.Forms.Button()
         Me.txtGetPreview = New System.Windows.Forms.RichTextBox()
-        Me.ucrNewColumnNameSelectorRegularSequence = New instat.ucrNewColumnName()
         Me.ucrSelectDataFrameRegularSequence = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
         Me.UcrDataFrameLengthForRegularSequence = New instat.ucrDataFrameLength()
+        Me.UcrInputCboRegularSequence = New instat.ucrInputComboBox()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.grpSequenceType.SuspendLayout()
         Me.grpSequenceDefinition.SuspendLayout()
         CType(Me.nudTo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -267,14 +268,6 @@ Partial Class dlgRegularSequence
         Me.txtGetPreview.TabIndex = 8
         Me.txtGetPreview.Text = ""
         '
-        'ucrNewColumnNameSelectorRegularSequence
-        '
-        Me.ucrNewColumnNameSelectorRegularSequence.Location = New System.Drawing.Point(12, 258)
-        Me.ucrNewColumnNameSelectorRegularSequence.Name = "ucrNewColumnNameSelectorRegularSequence"
-        Me.ucrNewColumnNameSelectorRegularSequence.Size = New System.Drawing.Size(402, 35)
-        Me.ucrNewColumnNameSelectorRegularSequence.TabIndex = 5
-        Me.ucrNewColumnNameSelectorRegularSequence.ucrDataFrameSelector = Nothing
-        '
         'ucrSelectDataFrameRegularSequence
         '
         Me.ucrSelectDataFrameRegularSequence.Location = New System.Drawing.Point(12, 9)
@@ -297,18 +290,36 @@ Partial Class dlgRegularSequence
         Me.UcrDataFrameLengthForRegularSequence.Size = New System.Drawing.Size(53, 23)
         Me.UcrDataFrameLengthForRegularSequence.TabIndex = 10
         '
+        'UcrInputCboRegularSequence
+        '
+        Me.UcrInputCboRegularSequence.Location = New System.Drawing.Point(272, 252)
+        Me.UcrInputCboRegularSequence.Name = "UcrInputCboRegularSequence"
+        Me.UcrInputCboRegularSequence.Size = New System.Drawing.Size(137, 25)
+        Me.UcrInputCboRegularSequence.TabIndex = 11
+        '
+        'lblNewColumnName
+        '
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(18, 263)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.TabIndex = 12
+        Me.lblNewColumnName.Tag = "New_Column_Name"
+        Me.lblNewColumnName.Text = "New Column Name"
+        '
         'dlgRegularSequence
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 351)
+        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.UcrInputCboRegularSequence)
         Me.Controls.Add(Me.UcrDataFrameLengthForRegularSequence)
         Me.Controls.Add(Me.txtGetPreview)
         Me.Controls.Add(Me.cmdRefreshPreview)
         Me.Controls.Add(Me.grpSequenceDefinition)
         Me.Controls.Add(Me.lblLength)
         Me.Controls.Add(Me.lblPreview)
-        Me.Controls.Add(Me.ucrNewColumnNameSelectorRegularSequence)
         Me.Controls.Add(Me.ucrSelectDataFrameRegularSequence)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpSequenceType)
@@ -341,7 +352,6 @@ Partial Class dlgRegularSequence
     Friend WithEvents lblFrom As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectDataFrameRegularSequence As ucrDataFrame
-    Friend WithEvents ucrNewColumnNameSelectorRegularSequence As ucrNewColumnName
     Friend WithEvents lblPreview As Label
     Friend WithEvents lblLength As Label
     Friend WithEvents cmdRefreshPreview As Button
@@ -356,4 +366,6 @@ Partial Class dlgRegularSequence
     Friend WithEvents nudRepeatValues As NumericUpDown
     Friend WithEvents nudInstepsOf As NumericUpDown
     Friend WithEvents UcrDataFrameLengthForRegularSequence As ucrDataFrameLength
+    Friend WithEvents UcrInputCboRegularSequence As ucrInputComboBox
+    Friend WithEvents lblNewColumnName As Label
 End Class

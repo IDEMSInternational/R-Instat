@@ -21,13 +21,15 @@ Public Class dlgRegularSequence
         ucrBase.clsRsyntax.SetFunction("seq")
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 30
+        UcrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
+        UcrInputCboRegularSequence.SetPrefix("Regular")
+        UcrInputCboRegularSequence.SetItemsTypeAsColumns()
+        UcrInputCboRegularSequence.SetDefaultTypeAsColumn()
+        UcrInputCboRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
         'frmMain.clsRLink.SetOutput(txtGetPreview)
         'ucrSelectDataFrame.SetColumnList(ucrColName)
-        UcrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
 
-        ucrNewColumnNameSelectorRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
-        ucrNewColumnNameSelectorRegularSequence.SetPrefix("Sequence")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
+
 
         If bFirstLoad Then
             SetDefaults()
@@ -42,8 +44,7 @@ Public Class dlgRegularSequence
     'There should be a sequence type selected as a default.
     'Then these things should become invisible automatically.
     Private Sub SetDefaults()
-        dtpSelectorA.Visible = False
-        dtpSelectorB.Visible = False
+        rdoNumeric.Checked = True
 
     End Sub
 
@@ -56,10 +57,18 @@ Public Class dlgRegularSequence
     'Need If statement to check that first.
     'Ask if not sure how to do this.
     Private Sub TestOKEnabled()
-        If nudFrom.Text <> "" And nudTo.Text <> "" Then
+        If rdoNumeric.Checked = True Then
+            If nudFrom.Text <> "" And nudTo.Text <> "" Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        ElseIf rdoDates.Checked = True Then
+
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
+
 
         End If
     End Sub
@@ -77,14 +86,12 @@ Public Class dlgRegularSequence
 
     'Remove this sub.
     'Use DataFrameChanged event instead.
-    Private Sub ucrSelectDataFrame_LostFocus(sender As Object, e As EventArgs) Handles ucrSelectDataFrameRegularSequence.LostFocus
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
+    Private Sub ucrSelectDataFrame_DataFrameChanged() Handles ucrSelectDataFrameRegularSequence.DataFrameChanged
+
     End Sub
 
     'Delete ucrNewColumnNameSelectorRegularSequence and use the new ucrInputComboBox
-    Private Sub ucrColName_LostFocus(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelectorRegularSequence.LostFocus
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
-    End Sub
+
 
     'To be looked at further
     Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click
@@ -96,8 +103,9 @@ Public Class dlgRegularSequence
 
         'Put the correct visible properties in here
         If rdoNumeric.Checked Then
-            ucrBase.clsRsyntax.AddParameter("from", nudFrom.Value)
-            ucrBase.clsRsyntax.AddParameter("to", nudTo.Value)
+            nudFrom.Visible = True
+            nudTo.Visible = True
+
         Else
             dtpSelectorA.Visible = True
             dtpSelectorB.Visible = True
@@ -116,6 +124,8 @@ Public Class dlgRegularSequence
     Private Sub nudRepeatValues_ValueChanged(sender As Object, e As EventArgs) Handles nudRepeatValues.ValueChanged
         ucrBase.clsRsyntax.AddParameter("length.out", nudRepeatValues.Value)
     End Sub
+
+
 
     'Private Sub nudLength_ValueChanged(sender As Object, e As EventArgs)
     '    ucrBase.clsRsyntax.AddParameter("length", nudLength.Value)
