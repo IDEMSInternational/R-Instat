@@ -26,10 +26,7 @@ Public Class dlgRegularSequence
         UcrInputCboRegularSequence.SetItemsTypeAsColumns()
         UcrInputCboRegularSequence.SetDefaultTypeAsColumn()
         UcrInputCboRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
-        'frmMain.clsRLink.SetOutput(txtGetPreview)
-        'ucrSelectDataFrame.SetColumnList(ucrColName)
-
-
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=UcrInputCboRegularSequence.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=UcrInputCboRegularSequence.GetText)
 
         If bFirstLoad Then
             SetDefaults()
@@ -37,25 +34,17 @@ Public Class dlgRegularSequence
         Else
             ReopenDialog()
         End If
-
         TestOKEnabled()
     End Sub
 
-    'There should be a sequence type selected as a default.
-    'Then these things should become invisible automatically.
     Private Sub SetDefaults()
         rdoNumeric.Checked = True
-
     End Sub
 
     Private Sub ReopenDialog()
 
     End Sub
 
-    'This is not correct.
-    'It depends on which option has been chosen (numeric/dates)
-    'Need If statement to check that first.
-    'Ask if not sure how to do this.
     Private Sub TestOKEnabled()
         If rdoNumeric.Checked = True Then
             If nudFrom.Text <> "" And nudTo.Text <> "" Then
@@ -68,54 +57,26 @@ Public Class dlgRegularSequence
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
-
-
         End If
     End Sub
 
-    'This is the same event as in grpSequenceType_CheckedChanged
-    'Remove this sub and copy any code needed from here into grpSequenceType_CheckedChanged
-    Private Sub rdoNumeric_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNumeric.Click
-        If rdoNumeric.Checked = True Then
-            dtpSelectorA.Visible = False
-            dtpSelectorB.Visible = False
-            chkDefineAsFactor.Visible = True
-
-        End If
-    End Sub
-
-    'Remove this sub.
-    'Use DataFrameChanged event instead.
-    Private Sub ucrSelectDataFrame_DataFrameChanged() Handles ucrSelectDataFrameRegularSequence.DataFrameChanged
-
-    End Sub
-
-    'Delete ucrNewColumnNameSelectorRegularSequence and use the new ucrInputComboBox
-
-
-    'To be looked at further
-    Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click
-        'frmMain.clsRLink.RunScript(ucrBase.clsRsyntax.clsBaseFunction.ToScript(), 2)
-        'txtGetPreview.Refresh()
-    End Sub
+    'Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click
+    '    frmMain.clsRLink.RunScript(ucrBase.clsRsyntax.clsBaseFunction.ToScript(), 2)
+    '    txtGetPreview.Refresh()
+    'End Sub
 
     Private Sub grpSequenceType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDates.CheckedChanged, rdoNumeric.CheckedChanged
-
-        'Put the correct visible properties in here
         If rdoNumeric.Checked Then
             nudFrom.Visible = True
             nudTo.Visible = True
             dtpSelectorA.Visible = False
             dtpSelectorB.Visible = False
             nudRepeatValues.Enabled = False
-
-
         Else
             dtpSelectorA.Visible = True
             dtpSelectorB.Visible = True
             nudFrom.Visible = False
             nudTo.Visible = False
-
         End If
         TestOKEnabled()
     End Sub
@@ -148,14 +109,4 @@ Public Class dlgRegularSequence
     Private Sub dtpSelectorB_ValueChanged(sender As Object, e As EventArgs) Handles dtpSelectorB.ValueChanged
         ucrBase.clsRsyntax.AddParameter("to", "as.Date('" & Format(dtpSelectorB.Value, "yyyy/MM/dd") & "')")
     End Sub
-
-
-
-    'Private Sub nudLength_ValueChanged(sender As Object, e As EventArgs)
-    '    ucrBase.clsRsyntax.AddParameter("length", nudLength.Value)
-    'End Sub
-
-    'Add value change event subs for dtpSelectorA and dtpSelectorB as you have for the nuds
-    'This will fix the error you are having
-
 End Class
