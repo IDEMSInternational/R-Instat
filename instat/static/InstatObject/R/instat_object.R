@@ -268,10 +268,15 @@ instat_obj$methods(add_model = function(model, model_name = paste("model",length
 )
 
 instat_obj$methods(get_model = function(model_name) {
-  if(missing(model_name)) stop("model_name is required")
+  if(missing(model_name)) stop("model_name must be given.")
   if(!is.character(model_name)) stop("name must be a character")
   if(!model_name %in% names(models)) stop(model_name, "not found in models")
   models[[model_name]]
+}
+)
+
+instat_obj$methods(get_model_names = function() {
+  return(names(models))
 }
 )
 
