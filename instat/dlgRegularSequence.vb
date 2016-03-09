@@ -23,9 +23,11 @@ Public Class dlgRegularSequence
         ucrBase.iHelpTopicID = 30
         'frmMain.clsRLink.SetOutput(txtGetPreview)
         'ucrSelectDataFrame.SetColumnList(ucrColName)
-        ucrNewColumnNameSelectorRegularSequence.SetDataFrameSelector(ucrSelectDataFrame)
+        UcrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
+
+        ucrNewColumnNameSelectorRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
         ucrNewColumnNameSelectorRegularSequence.SetPrefix("Sequence")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
 
         If bFirstLoad Then
             SetDefaults()
@@ -75,13 +77,13 @@ Public Class dlgRegularSequence
 
     'Remove this sub.
     'Use DataFrameChanged event instead.
-    Private Sub ucrSelectDataFrame_LostFocus(sender As Object, e As EventArgs) Handles ucrSelectDataFrame.LostFocus
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
+    Private Sub ucrSelectDataFrame_LostFocus(sender As Object, e As EventArgs) Handles ucrSelectDataFrameRegularSequence.LostFocus
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
     End Sub
 
     'Delete ucrNewColumnNameSelectorRegularSequence and use the new ucrInputComboBox
     Private Sub ucrColName_LostFocus(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelectorRegularSequence.LostFocus
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrame.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelectorRegularSequence.cboColumnName.Text)
     End Sub
 
     'To be looked at further
@@ -115,9 +117,9 @@ Public Class dlgRegularSequence
         ucrBase.clsRsyntax.AddParameter("length.out", nudRepeatValues.Value)
     End Sub
 
-    Private Sub nudLength_ValueChanged(sender As Object, e As EventArgs) Handles nudLength.ValueChanged
-        ucrBase.clsRsyntax.AddParameter("length", nudLength.Value)
-    End Sub
+    'Private Sub nudLength_ValueChanged(sender As Object, e As EventArgs)
+    '    ucrBase.clsRsyntax.AddParameter("length", nudLength.Value)
+    'End Sub
 
     'Add value change event subs for dtpSelectorA and dtpSelectorB as you have for the nuds
     'This will fix the error you are having
