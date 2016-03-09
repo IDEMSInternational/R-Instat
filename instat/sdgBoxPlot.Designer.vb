@@ -30,7 +30,7 @@ Partial Class sdgBoxPlot
         '
         'ucrBaseSdgBoxplot
         '
-        Me.ucrBaseSdgBoxplot.Location = New System.Drawing.Point(56, 219)
+        Me.ucrBaseSdgBoxplot.Location = New System.Drawing.Point(12, 115)
         Me.ucrBaseSdgBoxplot.Name = "ucrBaseSdgBoxplot"
         Me.ucrBaseSdgBoxplot.Size = New System.Drawing.Size(142, 30)
         Me.ucrBaseSdgBoxplot.TabIndex = 0
@@ -72,7 +72,7 @@ Partial Class sdgBoxPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.ClientSize = New System.Drawing.Size(186, 157)
         Me.Controls.Add(Me.chkNotchedBoxplot)
         Me.Controls.Add(Me.chkHorizontalBoxplot)
         Me.Controls.Add(Me.chkVariableWidth)
@@ -82,6 +82,7 @@ Partial Class sdgBoxPlot
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "BoxPlot_Options"
         Me.Text = "BoxPlot Options"
+        Me.TopMost = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
