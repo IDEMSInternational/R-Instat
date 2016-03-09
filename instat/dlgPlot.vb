@@ -89,9 +89,9 @@ Public Class dlgPlot
 
     Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
         If ucrFactorOptionalReceiver.IsEmpty() = False Then
-            clsRaesFunction.AddParameter("fill", ucrFactorOptionalReceiver.GetVariableNames(False))
+            clsRaesFunction.AddParameter("color", ucrFactorOptionalReceiver.GetVariableNames(False))
         Else
-            clsRaesFunction.RemoveParameterByName("fill")
+            clsRaesFunction.RemoveParameterByName("color")
         End If
     End Sub
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -116,7 +116,6 @@ Public Class dlgPlot
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsTempRFunc)
         Else
             ucrBase.clsRsyntax.RemoveParameter("geom_point")
-
         End If
     End Sub
 End Class
