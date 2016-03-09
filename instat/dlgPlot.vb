@@ -61,9 +61,15 @@ Public Class dlgPlot
             ucrBase.OKEnabled(True)
         End If
     End Sub
+
+    Private Sub ucrPlotSelector_DataFrameChanged() Handles ucrLinePlotSelector.DataFrameChanged
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
+    End Sub
+
     Private Sub ucrReceiverY_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverY.SelectionChanged
         If ucrReceiverY.IsEmpty() = False Then
             clsRaesFunction.AddParameter("y", ucrReceiverY.GetVariableNames(False))
+            ucrReceiverX.SetMeAsReceiver()
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
@@ -74,15 +80,13 @@ Public Class dlgPlot
 
         If ucrReceiverX.IsEmpty() = False Then
             clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False))
+            ucrFactorOptionalReceiver.SetMeAsReceiver()
         Else
             clsRaesFunction.RemoveParameterByName("x")
         End If
         TeskOkEnabled()
     End Sub
 
-    Private Sub ucrPlotSelector_DataFrameChanged() Handles ucrLinePlotSelector.DataFrameChanged
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
-    End Sub
     Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
         If ucrFactorOptionalReceiver.IsEmpty() = False Then
             clsRaesFunction.AddParameter("fill", ucrFactorOptionalReceiver.GetVariableNames(False))
@@ -90,12 +94,29 @@ Public Class dlgPlot
             clsRaesFunction.RemoveParameterByName("fill")
         End If
     End Sub
-
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub chkPoints_CheckedChanged(sender As Object, e As EventArgs) Handles chkPoints.CheckedChanged
+
+        Dim clsTempOp As New ROperator
+        Dim clsTempRFunc As New RFunction
+
+        If chkPoints.Checked = True Then
+            clsTempOp.SetOperation("+")
+            clsTempOp.SetParameter(True, clsRFunc:=clsRggplotFunction)
+            clsTempOp.SetParameter(False, clsRFunc:=clsRgeom_lineplotFunction)
+            clsTempRFunc.SetRCommand("geom_point")
+            ucrBase.clsRsyntax.SetOperatorParameter(True, clsOp:=clsTempOp)
+            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsTempRFunc)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("geom_point")
+
+        End If
     End Sub
 End Class
