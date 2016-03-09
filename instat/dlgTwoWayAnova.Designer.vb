@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgNon_ParametricTwoWayAnova
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class dlgTwoWayAnova
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -100,7 +100,7 @@ Partial Class dlgNon_ParametricTwoWayAnova
         Me.ucrBaseNPTwoWayANOVA.Size = New System.Drawing.Size(410, 56)
         Me.ucrBaseNPTwoWayANOVA.TabIndex = 0
         '
-        'dlgNon_ParametricTwoWayAnova
+        'dlgTwoWayAnova
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -114,7 +114,7 @@ Partial Class dlgNon_ParametricTwoWayAnova
         Me.Controls.Add(Me.ucrReceiverDataColumn)
         Me.Controls.Add(Me.ucrBaseNPTwoWayANOVA)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgNon_ParametricTwoWayAnova"
+        Me.Name = "dlgTwoWayAnova"
         Me.Tag = "Non-Parametric_Two_Way_ANOVA"
         Me.Text = "Non-Parametric Two Way ANOVA"
         Me.ResumeLayout(False)

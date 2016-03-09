@@ -15,32 +15,32 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgNon_ParametricTwoWayAnova
+Public Class dlgTwoWayAnova
     Public bFirstLoad As Boolean = True
-    Public clsmodel, clsmodel1 As New ROperator
+    Dim clsModel, clsModel1 As New ROperator
 
-    Private Sub dlgTwoWayAnova_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgSimpleWithGroups_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If bFirstLoad Then
             InitialiseDialog()
-            setDefaults()
+            SetDefaults()
+            bFirstLoad = False
         Else
             ReopenDialog()
         End If
-        ucrBaseNPTwoWayANOVA.iHelpTopicID = 184
-
-            autoTranslate(Me)
-
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
+
         ucrBaseNPTwoWayANOVA.clsRsyntax.SetFunction("friedman.test")
         ucrBaseNPTwoWayANOVA.clsRsyntax.iCallType = 2
-        clsmodel.SetOperation("~")
+        clsModel.SetOperation("~")
+        clsModel1.SetOperation("|")
         ucrReceiverDataColumn.Selector = ucrSelectorDataFrameAndVars
-        ucrReceiverDataColumn.SetMeAsReceiver()
         ucrReceiverFirstFactor.Selector = ucrSelectorDataFrameAndVars
         ucrReceiverSecondFactor.Selector = ucrSelectorDataFrameAndVars
+        ucrBaseNPTwoWayANOVA.iHelpTopicID = 184
         ucrReceiverFirstFactor.SetDataType("factor")
         ucrReceiverSecondFactor.SetDataType("factor")
 
@@ -52,57 +52,43 @@ Public Class dlgNon_ParametricTwoWayAnova
 
     Private Sub SetDefaults()
         ucrSelectorDataFrameAndVars.Reset()
-        ucrSelectorDataFrameAndVars.Focus()
         ucrReceiverDataColumn.SetMeAsReceiver()
+        ucrSelectorDataFrameAndVars.Focus()
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectorDataFrameAndVars_DataFrameChanged() Handles ucrSelectorDataFrameAndVars.DataFrameChanged
-        ucrBaseNPTwoWayANOVA.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorDataFrameAndVars.ucrAvailableDataFrames.clsCurrDataFrame)
-    End Sub
-
-    Private Sub Fillformula()
-        clsmodel1.SetOperation("+")
-        clsmodel1.bBrackets = False
-        clsmodel1.SetParameter(True, clsOp:=clsmodel)
-        clsmodel1.SetParameter(False, strValue:=ucrReceiverSecondFactor.GetVariableNames(bWithQuotes:=False))
-        ucrBaseNPTwoWayANOVA.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsmodel)
-        TestOKEnabled()
-        frmMain.clsRLink.RunScript(ucrBaseNPTwoWayANOVA.clsRsyntax.clsBaseFunction.ToScript(), 2)
-    End Sub
-
-    Private Sub ucrReceiverDataColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDataColumn.SelectionChanged
-        clsmodel.SetParameter(True, strValue:=ucrReceiverDataColumn.GetVariableNames(bWithQuotes:=False))
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverFirstFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFirstFactor.SelectionChanged
-        clsmodel.SetParameter(False, strValue:=ucrReceiverFirstFactor.GetVariableNames(bWithQuotes:=False))
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverSecondFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSecondFactor.SelectionChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub TestOKEnabled()
+    Public Sub TestOKEnabled()
         If (Not ucrReceiverDataColumn.IsEmpty()) And (Not ucrReceiverFirstFactor.IsEmpty()) And (Not ucrReceiverSecondFactor.IsEmpty()) Then
-            'ucrBaseNPTwoWayANOVA.clsRsyntax.AddParameter("formula", clsROperatorParameter:=newmodel)
-
+            clsModel1.bBrackets = False
+            clsModel1.SetParameter(True, clsOp:=clsModel)
+            clsModel1.SetParameter(False, strValue:=ucrReceiverSecondFactor.GetVariableNames(bWithQuotes:=False))
+            ucrBaseNPTwoWayANOVA.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel1)
             ucrBaseNPTwoWayANOVA.OKEnabled(True)
 
         Else
             ucrBaseNPTwoWayANOVA.OKEnabled(False)
         End If
     End Sub
-    Private Sub ucrBaseNPTwoWayANOVA_clickReset() Handles ucrBaseNPTwoWayANOVA.Click
+
+    Private Sub ucrSelectorDataFrameAndVars_DataFrameChanged() Handles ucrSelectorDataFrameAndVars.DataFrameChanged
+        ucrBaseNPTwoWayANOVA.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorDataFrameAndVars.ucrAvailableDataFrames.clsCurrDataFrame)
+    End Sub
+
+    Private Sub ucrReceiverDataColumn_SelectionChanged() Handles ucrReceiverDataColumn.SelectionChanged
+        clsModel.SetParameter(True, strValue:=ucrReceiverDataColumn.GetVariableNames(bWithQuotes:=False))
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverFirstFactor_SelectionChanged() Handles ucrReceiverFirstFactor.SelectionChanged
+        clsModel.SetParameter(False, strValue:=ucrReceiverFirstFactor.GetVariableNames(bWithQuotes:=False))
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverSecondFactor_SelectionChanged() Handles ucrReceiverSecondFactor.SelectionChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBaseNPTwoWayANOVA_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseNPTwoWayANOVA.ClickReset
         SetDefaults()
     End Sub
-
-    Private Sub ucrBaseNPTwoWayANOVA_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseNPTwoWayANOVA.ClickOk
-        Fillformula()
-    End Sub
-
-
-
 End Class
