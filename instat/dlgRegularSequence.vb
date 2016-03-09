@@ -106,13 +106,13 @@ Public Class dlgRegularSequence
             nudFrom.Visible = True
             nudTo.Visible = True
 
+
         Else
             dtpSelectorA.Visible = True
             dtpSelectorB.Visible = True
             nudFrom.Visible = False
             nudTo.Visible = False
-            ucrBase.clsRsyntax.AddParameter("from", "as.Date('" & Format(dtpSelectorA.Value, "yyyy/MM/dd") & "')")
-            ucrBase.clsRsyntax.AddParameter("to", "as.Date('" & Format(dtpSelectorB.Value, "yyyy/MM/dd") & "')")
+
         End If
         TestOKEnabled()
     End Sub
@@ -122,7 +122,24 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub nudRepeatValues_ValueChanged(sender As Object, e As EventArgs) Handles nudRepeatValues.ValueChanged
+
         ucrBase.clsRsyntax.AddParameter("length.out", nudRepeatValues.Value)
+    End Sub
+
+    Private Sub nudFrom_ValueChanged(sender As Object, e As EventArgs) Handles nudFrom.ValueChanged
+        ucrBase.clsRsyntax.AddParameter("from", nudFrom.Value)
+    End Sub
+
+    Private Sub nudTo_ValueChanged(sender As Object, e As EventArgs) Handles nudTo.ValueChanged
+        ucrBase.clsRsyntax.AddParameter("to", nudTo.Value)
+    End Sub
+
+    Private Sub dtpSelectorA_ValueChanged(sender As Object, e As EventArgs) Handles dtpSelectorA.ValueChanged
+        ucrBase.clsRsyntax.AddParameter("from", "as.Date('" & Format(dtpSelectorA.Value, "yyyy/MM/dd") & "')")
+    End Sub
+
+    Private Sub dtpSelectorB_ValueChanged(sender As Object, e As EventArgs) Handles dtpSelectorB.ValueChanged
+        ucrBase.clsRsyntax.AddParameter("to", "as.Date('" & Format(dtpSelectorB.Value, "yyyy/MM/dd") & "')")
     End Sub
 
 
