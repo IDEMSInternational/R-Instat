@@ -1,7 +1,25 @@
-﻿Public Class ucrInputComboBox
+﻿' Instat-R
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License k
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.ComponentModel
+
+Public Class ucrInputComboBox
     Dim strItemsType As String = ""
-    Private Sub cboInput_Leave(sender As Object, e As EventArgs) Handles cboInput.Leave
-        ValidateText(cboInput.Text, cboInput)
+
+    Private Sub cboInput_Validating(sender As Object, e As CancelEventArgs) Handles cboInput.Validating
+        e.Cancel = Not ValidateText(cboInput.Text)
     End Sub
 
     Public Sub SetItemsTypeAsColumns()
@@ -19,6 +37,11 @@
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsGraphs()
+        strItemsType = "Graphs"
+        FillItemTypes()
+    End Sub
+
     Private Sub FillItemTypes()
         Select Case strItemsType
             Case "Columns"
@@ -27,6 +50,8 @@
                 End If
             Case "Data Frames"
             Case "Models"
+                cboInput.Items.Add(frmMain.clsRLink.GetModelNames().ToArray)
+            Case "Graphs"
         End Select
     End Sub
 
@@ -35,13 +60,15 @@
     End Sub
 
     Public Overrides Sub SetName(strName As String)
-        If IsValid(strName) Then
+        If ValidateText(strName) Then
             cboInput.Text = strName
             OnNameChanged()
-        Else
-            MsgBox(strName & "is not a valid for this combobox", vbOKOnly)
         End If
     End Sub
+
+    Public Overrides Function GetText() As String
+        Return cboInput.Text
+    End Function
 
     Public Sub AddItems(strItems As String())
         cboInput.Items.AddRange(strItems)
