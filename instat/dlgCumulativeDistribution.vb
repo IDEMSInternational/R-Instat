@@ -75,7 +75,7 @@ Public Class dlgCumulativeDistribution
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrFactorReceiver_Load(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Load
+    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
         If Not ucrFactorReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False))
         Else
