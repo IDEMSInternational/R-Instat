@@ -506,7 +506,7 @@ data_obj$methods(order_columns_in_data = function(col_order) {
   }else{ 
     stop("column order must be a numeric or character vector")
   }
-  data <<- data[ ,col_order]
+  set_data(data[ ,col_order])
   .self$append_to_changes(list(Col_order, col_order))
 }
 )
