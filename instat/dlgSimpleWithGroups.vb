@@ -21,6 +21,7 @@ Public Class dlgSimpleWithGroups
     Dim clsModel, clsModel1, clsModel2, clsModel3 As New ROperator
 
     Private Sub dlgSimpleWithGroups_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        UcrInputComboBox1.SetItemsTypeAsModels()
 
         If bFirstLoad Then
             InitialiseDialog()
