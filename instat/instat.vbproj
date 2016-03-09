@@ -1889,6 +1889,15 @@
     <EmbeddedResource Include="dlgTwoSampleNonparametricTest.sw-KE.resx">
       <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoWayAnova.fr-FR.resx">
+      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoWayAnova.resx">
+      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoWayAnova.sw-KE.resx">
+      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
