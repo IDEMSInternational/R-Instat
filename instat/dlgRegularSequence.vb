@@ -105,6 +105,9 @@ Public Class dlgRegularSequence
         If rdoNumeric.Checked Then
             nudFrom.Visible = True
             nudTo.Visible = True
+            dtpSelectorA.Visible = False
+            dtpSelectorB.Visible = False
+            nudRepeatValues.Enabled = False
 
 
         Else
@@ -122,8 +125,12 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub nudRepeatValues_ValueChanged(sender As Object, e As EventArgs) Handles nudRepeatValues.ValueChanged
+        If rdoDates.Checked Then
+            ucrBase.clsRsyntax.AddParameter("length.out", "NULL")
+        Else
+            ucrBase.clsRsyntax.AddParameter("length.out", nudRepeatValues.Value)
+        End If
 
-        ucrBase.clsRsyntax.AddParameter("length.out", nudRepeatValues.Value)
     End Sub
 
     Private Sub nudFrom_ValueChanged(sender As Object, e As EventArgs) Handles nudFrom.ValueChanged
