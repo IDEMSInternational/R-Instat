@@ -13,14 +13,43 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
+
 Public Class sdgBoxPlot
     Public clsBoxplotFunction As RFunction
 
-    Public Sub SetBoxPlotFUnction(clsBoxPlotFunc As RFunction)
+    Public Sub SetBoxPlotFunction(clsBoxPlotFunc As RFunction)
         clsBoxplotFunction = clsBoxPlotFunc
     End Sub
     Private Sub sdgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.BringToFront()
         autoTranslate(Me)
+        SetSubdialogDefaults()
+    End Sub
+
+    Public Sub SetSubdialogDefaults()
+        chkHorizontalBoxplot.Checked = False
+        chkNotchedBoxplot.Checked = False
+        chkVariableWidth.Checked = False
+    End Sub
+
+    Private Sub chkVariableWidth_CheckedChanged(sender As Object, e As EventArgs) Handles chkVariableWidth.CheckedChanged
+        If chkVariableWidth.Checked Then
+            clsBoxplotFunction.AddParameter("varwidth", "TRUE")
+        Else
+            clsBoxplotFunction.RemoveParameterByName("varwidth")
+        End If
+    End Sub
+
+    Private Sub chkNotchedBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles chkNotchedBoxplot.CheckedChanged
+        If chkNotchedBoxplot.Checked Then
+            clsBoxplotFunction.AddParameter("notch", "TRUE")
+        Else
+            clsBoxplotFunction.RemoveParameterByName("notch")
+        End If
+    End Sub
+    Private Sub chkHorizontalBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles chkHorizontalBoxplot.CheckedChanged
+        dlgBoxplot.SetOperator()
     End Sub
 End Class

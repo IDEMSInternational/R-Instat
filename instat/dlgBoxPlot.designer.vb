@@ -24,9 +24,6 @@ Partial Class dlgBoxplot
     Private Sub InitializeComponent()
         Me.lblYVarToPlot = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.chkVariableWidth = New System.Windows.Forms.CheckBox()
-        Me.chkHorizontalBoxplot = New System.Windows.Forms.CheckBox()
-        Me.chkNotchedBoxplot = New System.Windows.Forms.CheckBox()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
         Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
@@ -49,46 +46,13 @@ Partial Class dlgBoxplot
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(276, 208)
+        Me.cmdOptions.Location = New System.Drawing.Point(307, 208)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
-        '
-        'chkVariableWidth
-        '
-        Me.chkVariableWidth.AutoSize = True
-        Me.chkVariableWidth.Location = New System.Drawing.Point(12, 228)
-        Me.chkVariableWidth.Name = "chkVariableWidth"
-        Me.chkVariableWidth.Size = New System.Drawing.Size(92, 17)
-        Me.chkVariableWidth.TabIndex = 9
-        Me.chkVariableWidth.Tag = "Variable_width"
-        Me.chkVariableWidth.Text = "Variable width"
-        Me.chkVariableWidth.UseVisualStyleBackColor = True
-        '
-        'chkHorizontalBoxplot
-        '
-        Me.chkHorizontalBoxplot.AutoSize = True
-        Me.chkHorizontalBoxplot.Location = New System.Drawing.Point(12, 259)
-        Me.chkHorizontalBoxplot.Name = "chkHorizontalBoxplot"
-        Me.chkHorizontalBoxplot.Size = New System.Drawing.Size(110, 17)
-        Me.chkHorizontalBoxplot.TabIndex = 10
-        Me.chkHorizontalBoxplot.Tag = "Horizontal_boxplot"
-        Me.chkHorizontalBoxplot.Text = "Horizontal boxplot"
-        Me.chkHorizontalBoxplot.UseVisualStyleBackColor = True
-        '
-        'chkNotchedBoxplot
-        '
-        Me.chkNotchedBoxplot.AutoSize = True
-        Me.chkNotchedBoxplot.Location = New System.Drawing.Point(12, 288)
-        Me.chkNotchedBoxplot.Name = "chkNotchedBoxplot"
-        Me.chkNotchedBoxplot.Size = New System.Drawing.Size(104, 17)
-        Me.chkNotchedBoxplot.TabIndex = 11
-        Me.chkNotchedBoxplot.Tag = "Notched_boxplot"
-        Me.chkNotchedBoxplot.Text = "Notched boxplot"
-        Me.chkNotchedBoxplot.UseVisualStyleBackColor = True
         '
         'lblByFactors
         '
@@ -112,7 +76,7 @@ Partial Class dlgBoxplot
         '
         'cmdBoxPlotOptions
         '
-        Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(276, 238)
+        Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(171, 208)
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
         Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(104, 23)
         Me.cmdBoxPlotOptions.TabIndex = 8
@@ -153,7 +117,7 @@ Partial Class dlgBoxplot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 312)
+        Me.ucrBase.Location = New System.Drawing.Point(0, 236)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 51)
         Me.ucrBase.TabIndex = 12
@@ -162,7 +126,7 @@ Partial Class dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 368)
+        Me.ClientSize = New System.Drawing.Size(402, 291)
         Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.ucrYvariableReceiver)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
@@ -170,9 +134,6 @@ Partial Class dlgBoxplot
         Me.Controls.Add(Me.lblBySecondFactor)
         Me.Controls.Add(Me.lblByFactors)
         Me.Controls.Add(Me.ucrByFactorsReceiver)
-        Me.Controls.Add(Me.chkNotchedBoxplot)
-        Me.Controls.Add(Me.chkHorizontalBoxplot)
-        Me.Controls.Add(Me.chkVariableWidth)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblYVarToPlot)
         Me.Controls.Add(Me.ucrBase)
@@ -193,9 +154,6 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblYVarToPlot As Label
     Friend WithEvents cmdOptions As Button
-    Friend WithEvents chkVariableWidth As CheckBox
-    Friend WithEvents chkHorizontalBoxplot As CheckBox
-    Friend WithEvents chkNotchedBoxplot As CheckBox
     Friend WithEvents ucrByFactorsReceiver As ucrReceiverSingle
     Friend WithEvents lblByFactors As Label
     Friend WithEvents ucrSelectorBoxPlot As ucrSelectorByDataFrameAddRemove
