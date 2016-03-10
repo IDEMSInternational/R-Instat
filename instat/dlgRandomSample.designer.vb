@@ -26,13 +26,13 @@ Partial Class dlgRandomSample
         Me.txtSeed = New System.Windows.Forms.TextBox()
         Me.ucrDistWithParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDataFrameSelector = New instat.ucrDataFrame()
+        Me.ucrSelectorRandomSamples = New instat.ucrDataFrame()
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberofSamples = New System.Windows.Forms.Label()
         Me.txtNumberofSamples = New System.Windows.Forms.TextBox()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrSampleSize = New instat.ucrDataFrameLength()
-        Me.ucrInputNewColumnName = New instat.ucrInputComboBox()
+        Me.ucrInputRandomSamples = New instat.ucrInputComboBox()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -67,12 +67,12 @@ Partial Class dlgRandomSample
         Me.ucrBase.Size = New System.Drawing.Size(410, 55)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrDataFrameSelector
+        'ucrSelectorRandomSamples
         '
-        Me.ucrDataFrameSelector.Location = New System.Drawing.Point(3, 2)
-        Me.ucrDataFrameSelector.Name = "ucrDataFrameSelector"
-        Me.ucrDataFrameSelector.Size = New System.Drawing.Size(127, 41)
-        Me.ucrDataFrameSelector.TabIndex = 8
+        Me.ucrSelectorRandomSamples.Location = New System.Drawing.Point(3, 2)
+        Me.ucrSelectorRandomSamples.Name = "ucrSelectorRandomSamples"
+        Me.ucrSelectorRandomSamples.Size = New System.Drawing.Size(127, 41)
+        Me.ucrSelectorRandomSamples.TabIndex = 8
         '
         'lblSampleSize
         '
@@ -119,12 +119,12 @@ Partial Class dlgRandomSample
         Me.ucrSampleSize.Size = New System.Drawing.Size(53, 23)
         Me.ucrSampleSize.TabIndex = 13
         '
-        'ucrInputNewColumnName
+        'ucrInputRandomSamples
         '
-        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(254, 206)
-        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
-        Me.ucrInputNewColumnName.Size = New System.Drawing.Size(137, 25)
-        Me.ucrInputNewColumnName.TabIndex = 14
+        Me.ucrInputRandomSamples.Location = New System.Drawing.Point(254, 206)
+        Me.ucrInputRandomSamples.Name = "ucrInputRandomSamples"
+        Me.ucrInputRandomSamples.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputRandomSamples.TabIndex = 14
         '
         'lblNewColumnName
         '
@@ -142,13 +142,13 @@ Partial Class dlgRandomSample
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(418, 342)
         Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrInputNewColumnName)
+        Me.Controls.Add(Me.ucrInputRandomSamples)
         Me.Controls.Add(Me.ucrSampleSize)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.txtNumberofSamples)
         Me.Controls.Add(Me.lblNumberofSamples)
         Me.Controls.Add(Me.lblSampleSize)
-        Me.Controls.Add(Me.ucrDataFrameSelector)
+        Me.Controls.Add(Me.ucrSelectorRandomSamples)
         Me.Controls.Add(Me.ucrDistWithParameters)
         Me.Controls.Add(Me.txtSeed)
         Me.Controls.Add(Me.lblSeed)
@@ -168,12 +168,12 @@ Partial Class dlgRandomSample
     Friend WithEvents lblSeed As Label
     Friend WithEvents txtSeed As TextBox
     Friend WithEvents ucrDistWithParameters As ucrDistributionsWithParameters
-    Friend WithEvents ucrDataFrameSelector As ucrDataFrame
+    Friend WithEvents ucrSelectorRandomSamples As ucrDataFrame
     Friend WithEvents lblSampleSize As Label
     Friend WithEvents lblNumberofSamples As Label
     Friend WithEvents txtNumberofSamples As TextBox
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrSampleSize As ucrDataFrameLength
-    Friend WithEvents ucrInputNewColumnName As ucrInputComboBox
+    Friend WithEvents ucrInputRandomSamples As ucrInputComboBox
     Friend WithEvents lblNewColumnName As Label
 End Class
