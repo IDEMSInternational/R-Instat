@@ -17,7 +17,6 @@
 Imports instat.Translations
 Public Class dlgHistogram
     Public bFirstLoad As Boolean = True
-
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_histogramFunction As New RFunction
     Private clsRgeom_densityFunction As New RFunction
@@ -42,6 +41,7 @@ Public Class dlgHistogram
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 118
         ucrXReceiver.SetMeAsReceiver()
+        ucrFactorReceiver.SetDataType("factor")
         TestOkEnabled()
         autoTranslate(Me)
     End Sub
@@ -51,11 +51,10 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub ucrXReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrXReceiver.SelectionChanged
-        If Not (ucrXReceiver.txtReceiverSingle.Text = "") Then
+        If Not ucrXReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
-            TestOkEnabled()
         Else
-            TestOkEnabled()
+            clsRaesFunction.RemoveParameterByName("x")
         End If
         TestOkEnabled()
     End Sub
@@ -64,14 +63,21 @@ Public Class dlgHistogram
         sdgPlots.ShowDialog()
     End Sub
 
-    Private Sub ucrFactorReceiver_Leave(sender As Object, e As EventArgs) Handles ucrFactorReceiver.Leave
-        clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
+    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
+        If Not ucrFactorReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+        End If
     End Sub
 
     Private Sub rdoHistogram_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHistogram.CheckedChanged
         If rdoHistogram.Checked = True Then
             clsRgeom_histogramFunction.SetRCommand("geom_histogram")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_histogramFunction)
+            cmdHistogramOptions.Visible = True
+        Else
+            cmdHistogramOptions.Visible = False
         End If
     End Sub
 
@@ -79,7 +85,9 @@ Public Class dlgHistogram
         If rdoDensity.Checked = True Then
             clsRgeom_densityFunction.SetRCommand("geom_density")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_densityFunction)
-
+            cmdDensityOptions.Visible = True
+        Else
+            cmdDensityOptions.Visible = False
         End If
     End Sub
 
@@ -87,15 +95,18 @@ Public Class dlgHistogram
         If rdoFreequencyPolygon.Checked = True Then
             clsRgeom_FPolygon.SetRCommand("geom_freqpoly")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_FPolygon)
+            cmdFrequencyOptions.Visible = True
+        Else
+            cmdFrequencyOptions.Visible = False
         End If
     End Sub
 
     Private Sub TestOkEnabled()
         'tests when ok can be enabled
-        If ucrXReceiver.GetVariableNames() <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrXReceiver.IsEmpty Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
 
     End Sub
@@ -107,6 +118,9 @@ Public Class dlgHistogram
         ucrXReceiver.SetMeAsReceiver()
         ucrHistogramSelector.Reset()
         rdoHistogram.Checked = True
+        cmdHistogramOptions.Visible = True
+        cmdDensityOptions.Visible = False
+        cmdFrequencyOptions.Visible = False
         TestOkEnabled()
     End Sub
 
@@ -139,5 +153,13 @@ Public Class dlgHistogram
 
     Private Sub cmdHistogramOptions_Click(sender As Object, e As EventArgs) Handles cmdHistogramOptions.Click
         sdgHistogramOptions.ShowDialog()
+    End Sub
+
+    Private Sub cmdFrequencyOptions_Click(sender As Object, e As EventArgs) Handles cmdFrequencyOptions.Click
+        sdgFrequencyPolygonOptions.ShowDialog()
+    End Sub
+
+    Private Sub cmdDensityOptions_Click(sender As Object, e As EventArgs) Handles cmdDensityOptions.Click
+        sdgDensityOptions.ShowDialog()
     End Sub
 End Class
