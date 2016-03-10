@@ -42,17 +42,17 @@ Partial Class dlgRegularSequence
         Me.lblLength = New System.Windows.Forms.Label()
         Me.cmdRefreshPreview = New System.Windows.Forms.Button()
         Me.txtGetPreview = New System.Windows.Forms.RichTextBox()
-        Me.nudLength = New System.Windows.Forms.NumericUpDown()
-        Me.ucrNewColumnNameSelectorRegularSequence = New instat.ucrNewColumnName()
-        Me.ucrSelectDataFrame = New instat.ucrDataFrame()
+        Me.ucrSelectDataFrameRegularSequence = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
+        Me.UcrDataFrameLengthForRegularSequence = New instat.ucrDataFrameLength()
+        Me.UcrInputCboRegularSequence = New instat.ucrInputComboBox()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.grpSequenceType.SuspendLayout()
         Me.grpSequenceDefinition.SuspendLayout()
         CType(Me.nudTo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudRepeatValues, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudInstepsOf, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudLength, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'grpSequenceType
@@ -235,10 +235,10 @@ Partial Class dlgRegularSequence
         Me.lblPreview.AutoSize = True
         Me.lblPreview.Location = New System.Drawing.Point(235, 48)
         Me.lblPreview.Name = "lblPreview"
-        Me.lblPreview.Size = New System.Drawing.Size(64, 13)
+        Me.lblPreview.Size = New System.Drawing.Size(45, 13)
         Me.lblPreview.TabIndex = 7
-        Me.lblPreview.Tag = "Get_preview"
-        Me.lblPreview.Text = "Get preview"
+        Me.lblPreview.Tag = "Preview"
+        Me.lblPreview.Text = "Preview"
         '
         'lblLength
         '
@@ -268,28 +268,12 @@ Partial Class dlgRegularSequence
         Me.txtGetPreview.TabIndex = 8
         Me.txtGetPreview.Text = ""
         '
-        'nudLength
+        'ucrSelectDataFrameRegularSequence
         '
-        Me.nudLength.Location = New System.Drawing.Point(144, 25)
-        Me.nudLength.Maximum = New Decimal(New Integer() {10000000, 0, 0, 0})
-        Me.nudLength.Name = "nudLength"
-        Me.nudLength.Size = New System.Drawing.Size(57, 20)
-        Me.nudLength.TabIndex = 10
-        '
-        'ucrNewColumnNameSelectorRegularSequence
-        '
-        Me.ucrNewColumnNameSelectorRegularSequence.Location = New System.Drawing.Point(12, 258)
-        Me.ucrNewColumnNameSelectorRegularSequence.Name = "ucrNewColumnNameSelectorRegularSequence"
-        Me.ucrNewColumnNameSelectorRegularSequence.Size = New System.Drawing.Size(402, 35)
-        Me.ucrNewColumnNameSelectorRegularSequence.TabIndex = 5
-        Me.ucrNewColumnNameSelectorRegularSequence.ucrDataFrameSelector = Nothing
-        '
-        'ucrSelectDataFrame
-        '
-        Me.ucrSelectDataFrame.Location = New System.Drawing.Point(12, 9)
-        Me.ucrSelectDataFrame.Name = "ucrSelectDataFrame"
-        Me.ucrSelectDataFrame.Size = New System.Drawing.Size(126, 39)
-        Me.ucrSelectDataFrame.TabIndex = 0
+        Me.ucrSelectDataFrameRegularSequence.Location = New System.Drawing.Point(12, 9)
+        Me.ucrSelectDataFrameRegularSequence.Name = "ucrSelectDataFrameRegularSequence"
+        Me.ucrSelectDataFrameRegularSequence.Size = New System.Drawing.Size(126, 39)
+        Me.ucrSelectDataFrameRegularSequence.TabIndex = 0
         '
         'ucrBase
         '
@@ -298,19 +282,45 @@ Partial Class dlgRegularSequence
         Me.ucrBase.Size = New System.Drawing.Size(402, 55)
         Me.ucrBase.TabIndex = 9
         '
+        'UcrDataFrameLengthForRegularSequence
+        '
+        Me.UcrDataFrameLengthForRegularSequence.clsDataFrameSelector = Nothing
+        Me.UcrDataFrameLengthForRegularSequence.Location = New System.Drawing.Point(154, 25)
+        Me.UcrDataFrameLengthForRegularSequence.Name = "UcrDataFrameLengthForRegularSequence"
+        Me.UcrDataFrameLengthForRegularSequence.Size = New System.Drawing.Size(53, 23)
+        Me.UcrDataFrameLengthForRegularSequence.TabIndex = 10
+        '
+        'UcrInputCboRegularSequence
+        '
+        Me.UcrInputCboRegularSequence.Location = New System.Drawing.Point(272, 252)
+        Me.UcrInputCboRegularSequence.Name = "UcrInputCboRegularSequence"
+        Me.UcrInputCboRegularSequence.Size = New System.Drawing.Size(137, 25)
+        Me.UcrInputCboRegularSequence.TabIndex = 11
+        '
+        'lblNewColumnName
+        '
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(18, 263)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.TabIndex = 12
+        Me.lblNewColumnName.Tag = "New_Column_Name"
+        Me.lblNewColumnName.Text = "New Column Name"
+        '
         'dlgRegularSequence
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 351)
-        Me.Controls.Add(Me.nudLength)
+        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.UcrInputCboRegularSequence)
+        Me.Controls.Add(Me.UcrDataFrameLengthForRegularSequence)
         Me.Controls.Add(Me.txtGetPreview)
         Me.Controls.Add(Me.cmdRefreshPreview)
         Me.Controls.Add(Me.grpSequenceDefinition)
         Me.Controls.Add(Me.lblLength)
         Me.Controls.Add(Me.lblPreview)
-        Me.Controls.Add(Me.ucrNewColumnNameSelectorRegularSequence)
-        Me.Controls.Add(Me.ucrSelectDataFrame)
+        Me.Controls.Add(Me.ucrSelectDataFrameRegularSequence)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpSequenceType)
         Me.MaximizeBox = False
@@ -328,7 +338,6 @@ Partial Class dlgRegularSequence
         CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudRepeatValues, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudInstepsOf, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudLength, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -342,8 +351,7 @@ Partial Class dlgRegularSequence
     Friend WithEvents lblTo As Label
     Friend WithEvents lblFrom As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSelectDataFrame As ucrDataFrame
-    Friend WithEvents ucrNewColumnNameSelectorRegularSequence As ucrNewColumnName
+    Friend WithEvents ucrSelectDataFrameRegularSequence As ucrDataFrame
     Friend WithEvents lblPreview As Label
     Friend WithEvents lblLength As Label
     Friend WithEvents cmdRefreshPreview As Button
@@ -357,5 +365,7 @@ Partial Class dlgRegularSequence
     Friend WithEvents nudFrom As NumericUpDown
     Friend WithEvents nudRepeatValues As NumericUpDown
     Friend WithEvents nudInstepsOf As NumericUpDown
-    Friend WithEvents nudLength As NumericUpDown
+    Friend WithEvents UcrDataFrameLengthForRegularSequence As ucrDataFrameLength
+    Friend WithEvents UcrInputCboRegularSequence As ucrInputComboBox
+    Friend WithEvents lblNewColumnName As Label
 End Class
