@@ -26,6 +26,9 @@ Public Class dlgFromLibrary
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
+            'fills the combo box
+            FillPackagesCombo()
+            '
             setDefaults()
             bFirstLoad = False
         End If
@@ -69,22 +72,18 @@ Public Class dlgFromLibrary
     Private Sub rdoDefaultDatasets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultDatasets.CheckedChanged, rdoChooseDatasets.CheckedChanged
         If rdoDefaultDatasets.Checked Then
             Dim dfDefault As DataFrame
-            cboPackages.Visible = False
-            frmMain.clsRLink.clsEngine.Evaluate(strLibraryTemp & "<-data.frame(data(package = 'datasets')$results[1:nrow(data(package = 'datasets')$results),3:4])")
-            dfDefault = frmMain.clsRLink.clsEngine.GetSymbol(strLibraryTemp).AsDataFrame
-            FillListView(dfDataframe:=dfDefault)
+            cboPackages.Enabled = False
+            cboPackages.SelectedItem = "datasets"
         ElseIf rdoChooseDatasets.Checked Then
-            lstCollection.Items.Clear()
-            FillPackagesCombo()
-            cboPackages.Visible = True
+            cboPackages.Enabled = True
         End If
     End Sub
 
     Private Sub FillPackagesCombo()
         Dim i As Integer
-        Dim lstAvailablePackages As GenericVector
-        lstAvailablePackages = frmMain.clsRLink.clsEngine.Evaluate(strPackages & "<-installed.packages(lib.loc = NULL)[,1]").AsList
+        Dim lstAvailablePackages As CharacterVector
         cboPackages.Items.Clear()
+        lstAvailablePackages = frmMain.clsRLink.clsEngine.Evaluate(strPackages & "<-(.packages())").AsCharacter
         For i = 0 To lstAvailablePackages.Length - 1
             cboPackages.Items.Add(lstAvailablePackages.AsCharacter(i))
         Next
@@ -92,7 +91,6 @@ Public Class dlgFromLibrary
 
     Private Sub FillListView(dfDataframe As DataFrame)
         Dim lstItem As New ListViewItem
-        lblDatasetsNumber.Text = dfDataframe.RowCount
         'clears the listview before loading
         lstCollection.Items.Clear()
         'Fills the list
@@ -107,9 +105,10 @@ Public Class dlgFromLibrary
             Dim dfPackage As DataFrame
             frmMain.clsRLink.clsEngine.Evaluate(strLibraryTemp & "<-data.frame(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results[1:nrow(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results),3:4])")
             dfPackage = frmMain.clsRLink.clsEngine.GetSymbol(strLibraryTemp).AsDataFrame
-            FillListView(dfDataframe:=dfPackage)
+            If dfPackage.RowCount > 1 Then
+                FillListView(dfDataframe:=dfPackage)
+            End If
         Catch ex As Exception
-            MessageBox.Show("Selected package does not contain any datasets", "Error in loading datasets")
             lstCollection.Items.Clear()
         End Try
 
