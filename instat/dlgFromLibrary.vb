@@ -19,28 +19,21 @@ Imports RDotNet
 
 Public Class dlgFromLibrary
     Dim strLibraryTemp As String = "dfLibrary"
+    Dim strPackages As String = "dfPackagesList"
     Dim strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
     Dim bFirstLoad As Boolean = True
 
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            setLibrary()
+            setDefaults()
             bFirstLoad = False
         End If
     End Sub
 
-    Private Sub setLibrary()
-        Dim dfTemp As DataFrame
-        Dim lstItem As New ListViewItem
-        frmMain.clsRLink.clsEngine.Evaluate(strLibraryTemp & "<-data.frame(data(package =  .packages(all.available = TRUE))$results[1:nrow(data(package =  .packages(all.available = TRUE))$results),3:4])")
-        dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(strLibraryTemp).AsDataFrame
-        lblDatasetsNumber.Text = dfTemp.RowCount
-        'Fills the list
-        For i As Integer = 0 To dfTemp.RowCount - 1
-            lstItem = lstCollection.Items.Add(dfTemp(i, 0))
-            lstItem.SubItems.Add(dfTemp(i, 1))
-        Next
+    Private Sub setDefaults()
+        rdoDefaultDatasets.Checked = True
+        grpR.Enabled = False
     End Sub
 
     Private Sub cmdLibraryCollection_Click(sender As Object, e As EventArgs) Handles cmdLibraryCollection.Click
@@ -65,10 +58,63 @@ Public Class dlgFromLibrary
 
     Private Sub chkChooseFrom_CheckStateChanged(sender As Object, e As EventArgs) Handles chkChooseFrom.CheckStateChanged
         If chkChooseFrom.Checked Then
+            grpR.Enabled = True
             lstCollection.Enabled = True
         Else
+            grpR.Enabled = False
             lstCollection.Enabled = False
         End If
     End Sub
 
+    Private Sub rdoDefaultDatasets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultDatasets.CheckedChanged, rdoChooseDatasets.CheckedChanged
+        If rdoDefaultDatasets.Checked Then
+            Dim dfDefault As DataFrame
+            cboPackages.Visible = False
+            frmMain.clsRLink.clsEngine.Evaluate(strLibraryTemp & "<-data.frame(data(package = 'datasets')$results[1:nrow(data(package = 'datasets')$results),3:4])")
+            dfDefault = frmMain.clsRLink.clsEngine.GetSymbol(strLibraryTemp).AsDataFrame
+            FillListView(dfDataframe:=dfDefault)
+        ElseIf rdoChooseDatasets.Checked Then
+            lstCollection.Items.Clear()
+            FillPackagesCombo()
+            cboPackages.Visible = True
+        End If
+    End Sub
+
+    Private Sub FillPackagesCombo()
+        Dim i As Integer
+        Dim lstAvailablePackages As GenericVector
+        lstAvailablePackages = frmMain.clsRLink.clsEngine.Evaluate(strPackages & "<-installed.packages(lib.loc = NULL)[,1]").AsList
+        cboPackages.Items.Clear()
+        For i = 0 To lstAvailablePackages.Length - 1
+            cboPackages.Items.Add(lstAvailablePackages.AsCharacter(i))
+        Next
+    End Sub
+
+    Private Sub FillListView(dfDataframe As DataFrame)
+        Dim lstItem As New ListViewItem
+        lblDatasetsNumber.Text = dfDataframe.RowCount
+        'clears the listview before loading
+        lstCollection.Items.Clear()
+        'Fills the list
+        For i As Integer = 0 To dfDataframe.RowCount - 1
+            lstItem = lstCollection.Items.Add(dfDataframe(i, 0))
+            lstItem.SubItems.Add(dfDataframe(i, 1))
+        Next
+    End Sub
+
+    Private Sub loadDatasets(strPackage As String)
+        Try
+            Dim dfPackage As DataFrame
+            frmMain.clsRLink.clsEngine.Evaluate(strLibraryTemp & "<-data.frame(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results[1:nrow(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results),3:4])")
+            dfPackage = frmMain.clsRLink.clsEngine.GetSymbol(strLibraryTemp).AsDataFrame
+            FillListView(dfDataframe:=dfPackage)
+        Catch ex As Exception
+            MessageBox.Show("Selected package does not contain any datasets", "Error in loading datasets")
+        End Try
+
+    End Sub
+
+    Private Sub cboPackages_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPackages.SelectedValueChanged
+        loadDatasets(cboPackages.SelectedItem.ToString)
+    End Sub
 End Class
