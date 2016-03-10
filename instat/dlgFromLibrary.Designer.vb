@@ -28,13 +28,11 @@ Partial Class dlgFromLibrary
         Me.lstCollection = New System.Windows.Forms.ListView()
         Me.clmDatasets = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.clmDesc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpR = New System.Windows.Forms.GroupBox()
         Me.cboPackages = New System.Windows.Forms.ComboBox()
         Me.rdoChooseDatasets = New System.Windows.Forms.RadioButton()
         Me.rdoDefaultDatasets = New System.Windows.Forms.RadioButton()
-        Me.lblDatasetsNumber = New System.Windows.Forms.Label()
-        Me.lblDatasets = New System.Windows.Forms.Label()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpR.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -68,17 +66,14 @@ Partial Class dlgFromLibrary
         '
         'lstCollection
         '
-        Me.lstCollection.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.lstCollection.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmDatasets, Me.clmDesc})
         Me.lstCollection.Enabled = False
-        Me.lstCollection.HotTracking = True
-        Me.lstCollection.HoverSelection = True
-        Me.lstCollection.Location = New System.Drawing.Point(15, 148)
+        Me.lstCollection.Location = New System.Drawing.Point(15, 125)
         Me.lstCollection.MultiSelect = False
         Me.lstCollection.Name = "lstCollection"
         Me.lstCollection.ShowGroups = False
         Me.lstCollection.ShowItemToolTips = True
-        Me.lstCollection.Size = New System.Drawing.Size(415, 208)
+        Me.lstCollection.Size = New System.Drawing.Size(415, 231)
         Me.lstCollection.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.lstCollection.TabIndex = 4
         Me.lstCollection.UseCompatibleStateImageBehavior = False
@@ -94,37 +89,26 @@ Partial Class dlgFromLibrary
         Me.clmDesc.Text = "Description"
         Me.clmDesc.Width = 266
         '
-        'ucrBase
-        '
-        Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucrBase.Location = New System.Drawing.Point(24, 362)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(406, 53)
-        Me.ucrBase.TabIndex = 0
-        '
         'grpR
         '
         Me.grpR.AutoSize = True
+        Me.grpR.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.grpR.Controls.Add(Me.cboPackages)
         Me.grpR.Controls.Add(Me.rdoChooseDatasets)
         Me.grpR.Controls.Add(Me.rdoDefaultDatasets)
-        Me.grpR.Controls.Add(Me.lblDatasetsNumber)
-        Me.grpR.Controls.Add(Me.lblDatasets)
         Me.grpR.Location = New System.Drawing.Point(15, 76)
         Me.grpR.Name = "grpR"
-        Me.grpR.Size = New System.Drawing.Size(415, 66)
+        Me.grpR.Size = New System.Drawing.Size(415, 43)
         Me.grpR.TabIndex = 5
         Me.grpR.TabStop = False
         '
         'cboPackages
         '
         Me.cboPackages.FormattingEnabled = True
-        Me.cboPackages.Location = New System.Drawing.Point(117, 26)
+        Me.cboPackages.Location = New System.Drawing.Point(288, 3)
         Me.cboPackages.Name = "cboPackages"
         Me.cboPackages.Size = New System.Drawing.Size(121, 21)
         Me.cboPackages.TabIndex = 14
-        Me.cboPackages.Visible = False
         '
         'rdoChooseDatasets
         '
@@ -148,23 +132,14 @@ Partial Class dlgFromLibrary
         Me.rdoDefaultDatasets.Text = "Default datsets"
         Me.rdoDefaultDatasets.UseVisualStyleBackColor = True
         '
-        'lblDatasetsNumber
+        'ucrBase
         '
-        Me.lblDatasetsNumber.AutoSize = True
-        Me.lblDatasetsNumber.Location = New System.Drawing.Point(389, 8)
-        Me.lblDatasetsNumber.Name = "lblDatasetsNumber"
-        Me.lblDatasetsNumber.Size = New System.Drawing.Size(13, 13)
-        Me.lblDatasetsNumber.TabIndex = 11
-        Me.lblDatasetsNumber.Text = "0"
-        '
-        'lblDatasets
-        '
-        Me.lblDatasets.AutoSize = True
-        Me.lblDatasets.Location = New System.Drawing.Point(249, 7)
-        Me.lblDatasets.Name = "lblDatasets"
-        Me.lblDatasets.Size = New System.Drawing.Size(134, 13)
-        Me.lblDatasets.TabIndex = 10
-        Me.lblDatasets.Text = "Number of datasets loaded"
+        Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ucrBase.Location = New System.Drawing.Point(24, 362)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(406, 53)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgFromLibrary
         '
@@ -196,8 +171,6 @@ Partial Class dlgFromLibrary
     Friend WithEvents clmDatasets As ColumnHeader
     Friend WithEvents clmDesc As ColumnHeader
     Friend WithEvents grpR As GroupBox
-    Friend WithEvents lblDatasets As Label
-    Friend WithEvents lblDatasetsNumber As Label
     Friend WithEvents rdoDefaultDatasets As RadioButton
     Friend WithEvents rdoChooseDatasets As RadioButton
     Friend WithEvents cboPackages As ComboBox
