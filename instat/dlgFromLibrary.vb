@@ -87,13 +87,11 @@ Public Class dlgFromLibrary
         lstAvailablePackages = frmMain.clsRLink.clsEngine.Evaluate(strPackages & "<-(.packages())").AsCharacter
         For i = 0 To lstAvailablePackages.Length - 1
             Try
-                frmMain.clsRLink.clsEngine.Evaluate(strTempHolder & "<-data.frame(data(package =" & Chr(34) & lstAvailablePackages.AsCharacter(i) & Chr(34) & ")$results[1:nrow(data(package =" & Chr(34) & lstAvailablePackages.AsCharacter(i) & Chr(34) & ")$results),3:4])")
-                'Only adds the packages that have datasets, if not an exception is thrown
-                cboPackages.Items.Add(lstAvailablePackages.AsCharacter(i))
+                If frmMain.clsRLink.clsEngine.Evaluate("nrow(data(package = " & Chr(34) & lstAvailablePackages.AsCharacter(i) & Chr(34) & ")$results[ , 3:  4])").AsInteger(0) > 0 Then
+                    cboPackages.Items.Add(lstAvailablePackages.AsCharacter(i))
+                End If
             Catch ex As Exception
-                'ToDo
-                'If the package has no datset it throws an exception
-                'and that package is not added
+
             End Try
         Next
     End Sub
