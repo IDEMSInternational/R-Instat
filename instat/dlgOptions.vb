@@ -31,6 +31,7 @@ Public Class dlgOptions
         rdoEnglish.Checked = False
         rdoFrench.Checked = False
         rdoKiswahili.Checked = False
+        rdoSpanish.Checked = False
 
         Select Case strCurrLanguage
             Case "eng"
@@ -39,6 +40,8 @@ Public Class dlgOptions
                 rdoFrench.Checked = True
             Case "swa"
                 rdoKiswahili.Checked = True
+            Case "esp"
+                rdoSpanish.Checked = True
         End Select
         cmdApply.Enabled = False
         cmdOk.Enabled = False
@@ -71,6 +74,12 @@ Public Class dlgOptions
             Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
             Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
             strCurrLanguage = "swa"
+        End If
+
+        If rdoSpanish.Checked Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("es")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("es")
+            strCurrLanguage = "esp"
         End If
         cmdApply.Enabled = False
         cmdOk.Enabled = False
@@ -116,6 +125,11 @@ Public Class dlgOptions
     End Sub
 
     Private Sub rdoEnglish_CheckedChanged(sender As Object, e As EventArgs) Handles rdoEnglish.CheckedChanged
+        cmdApply.Enabled = True
+        cmdOk.Enabled = True
+    End Sub
+
+    Private Sub rdoSpanish_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSpanish.CheckedChanged
         cmdApply.Enabled = True
         cmdOk.Enabled = True
     End Sub
