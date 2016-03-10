@@ -41,12 +41,13 @@ Partial Class dlgOptions
         Me.tbpImport = New System.Windows.Forms.TabPage()
         Me.nudNoLines = New System.Windows.Forms.NumericUpDown()
         Me.lblShowLines = New System.Windows.Forms.Label()
+        Me.tbpRScriptOptions = New System.Windows.Forms.TabPage()
+        Me.chkIncludeDefaultParams = New System.Windows.Forms.CheckBox()
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.tbpRScriptOptions = New System.Windows.Forms.TabPage()
-        Me.chkIncludeDefaultParams = New System.Windows.Forms.CheckBox()
+        Me.rdoSpanish = New System.Windows.Forms.RadioButton()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguageSettings.SuspendLayout()
         Me.tbpComments.SuspendLayout()
@@ -71,6 +72,7 @@ Partial Class dlgOptions
         '
         'tbpLanguageSettings
         '
+        Me.tbpLanguageSettings.Controls.Add(Me.rdoSpanish)
         Me.tbpLanguageSettings.Controls.Add(Me.rdoEnglish)
         Me.tbpLanguageSettings.Controls.Add(Me.rdoFrench)
         Me.tbpLanguageSettings.Controls.Add(Me.rdoKiswahili)
@@ -260,6 +262,29 @@ Partial Class dlgOptions
         Me.lblShowLines.TabIndex = 0
         Me.lblShowLines.Text = "Number of lines to show on load"
         '
+        'tbpRScriptOptions
+        '
+        Me.tbpRScriptOptions.Controls.Add(Me.chkIncludeDefaultParams)
+        Me.tbpRScriptOptions.Location = New System.Drawing.Point(4, 22)
+        Me.tbpRScriptOptions.Name = "tbpRScriptOptions"
+        Me.tbpRScriptOptions.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpRScriptOptions.Size = New System.Drawing.Size(392, 233)
+        Me.tbpRScriptOptions.TabIndex = 4
+        Me.tbpRScriptOptions.Tag = "R_Script_Options"
+        Me.tbpRScriptOptions.Text = "R Script Options"
+        Me.tbpRScriptOptions.UseVisualStyleBackColor = True
+        '
+        'chkIncludeDefaultParams
+        '
+        Me.chkIncludeDefaultParams.AutoSize = True
+        Me.chkIncludeDefaultParams.Location = New System.Drawing.Point(8, 12)
+        Me.chkIncludeDefaultParams.Name = "chkIncludeDefaultParams"
+        Me.chkIncludeDefaultParams.Size = New System.Drawing.Size(236, 17)
+        Me.chkIncludeDefaultParams.TabIndex = 0
+        Me.chkIncludeDefaultParams.Tag = "Include_Default_Parameter_Values_in_R_Script"
+        Me.chkIncludeDefaultParams.Text = "Include Default Parameter Values in R Script"
+        Me.chkIncludeDefaultParams.UseVisualStyleBackColor = True
+        '
         'cmdOk
         '
         Me.cmdOk.Location = New System.Drawing.Point(17, 279)
@@ -300,28 +325,17 @@ Partial Class dlgOptions
         Me.cmdHelp.Text = "&Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
-        'tbpRScriptOptions
+        'rdoSpanish
         '
-        Me.tbpRScriptOptions.Controls.Add(Me.chkIncludeDefaultParams)
-        Me.tbpRScriptOptions.Location = New System.Drawing.Point(4, 22)
-        Me.tbpRScriptOptions.Name = "tbpRScriptOptions"
-        Me.tbpRScriptOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpRScriptOptions.Size = New System.Drawing.Size(392, 233)
-        Me.tbpRScriptOptions.TabIndex = 4
-        Me.tbpRScriptOptions.Tag = "R_Script_Options"
-        Me.tbpRScriptOptions.Text = "R Script Options"
-        Me.tbpRScriptOptions.UseVisualStyleBackColor = True
-        '
-        'chkIncludeDefaultParams
-        '
-        Me.chkIncludeDefaultParams.AutoSize = True
-        Me.chkIncludeDefaultParams.Location = New System.Drawing.Point(8, 12)
-        Me.chkIncludeDefaultParams.Name = "chkIncludeDefaultParams"
-        Me.chkIncludeDefaultParams.Size = New System.Drawing.Size(236, 17)
-        Me.chkIncludeDefaultParams.TabIndex = 0
-        Me.chkIncludeDefaultParams.Tag = "Include_Default_Parameter_Values_in_R_Script"
-        Me.chkIncludeDefaultParams.Text = "Include Default Parameter Values in R Script"
-        Me.chkIncludeDefaultParams.UseVisualStyleBackColor = True
+        Me.rdoSpanish.AutoSize = True
+        Me.rdoSpanish.Location = New System.Drawing.Point(20, 89)
+        Me.rdoSpanish.Name = "rdoSpanish"
+        Me.rdoSpanish.Size = New System.Drawing.Size(63, 17)
+        Me.rdoSpanish.TabIndex = 1
+        Me.rdoSpanish.TabStop = True
+        Me.rdoSpanish.Tag = "Spanish"
+        Me.rdoSpanish.Text = "Spanish"
+        Me.rdoSpanish.UseVisualStyleBackColor = True
         '
         'dlgOptions
         '
@@ -378,4 +392,5 @@ Partial Class dlgOptions
     Friend WithEvents lblShowLines As Label
     Friend WithEvents tbpRScriptOptions As TabPage
     Friend WithEvents chkIncludeDefaultParams As CheckBox
+    Friend WithEvents rdoSpanish As RadioButton
 End Class

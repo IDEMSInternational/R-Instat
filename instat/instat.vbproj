@@ -1460,6 +1460,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgAddStartRain.es.resx">
+      <DependentUpon>dlgAddStartRain.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgAddStartRain.fr-FR.resx">
       <DependentUpon>dlgAddStartRain.vb</DependentUpon>
     </EmbeddedResource>
@@ -1468,6 +1471,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddStartRain.sw-KE.resx">
       <DependentUpon>dlgAddStartRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAdvanceOptions.es.resx">
+      <DependentUpon>dlgAdvanceOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAdvanceOptions.fr-FR.resx">
       <DependentUpon>dlgAdvanceOptions.vb</DependentUpon>
@@ -1478,6 +1484,9 @@
     <EmbeddedResource Include="dlgAdvanceOptions.sw-KE.resx">
       <DependentUpon>dlgAdvanceOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgAlignment.es.resx">
+      <DependentUpon>dlgAlignment.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgAlignment.fr-FR.resx">
       <DependentUpon>dlgAlignment.vb</DependentUpon>
     </EmbeddedResource>
@@ -1486,6 +1495,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAlignment.sw-KE.resx">
       <DependentUpon>dlgAlignment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAnnualRaintotal.es.resx">
+      <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAnnualRaintotal.fr-FR.resx">
       <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
@@ -1496,6 +1508,9 @@
     <EmbeddedResource Include="dlgAnnualRaintotal.sw-KE.resx">
       <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgBarAndPieChart.es.resx">
+      <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgBarAndPieChart.fr-FR.resx">
       <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
     </EmbeddedResource>
@@ -1504,6 +1519,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBarAndPieChart.sw-KE.resx">
       <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBivariateANOVA.es.resx">
+      <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBivariateANOVA.fr-FR.resx">
       <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
@@ -1514,11 +1532,17 @@
     <EmbeddedResource Include="dlgBivariateANOVA.sw-KE.resx">
       <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxPlot.es.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxPlot.fr-FR.resx">
       <DependentUpon>dlgBoxPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxPlot.sw-KE.resx">
       <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxplotCountVariable.es.resx">
+      <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxplotCountVariable.fr-FR.resx">
       <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
@@ -1529,6 +1553,9 @@
     <EmbeddedResource Include="dlgBoxplotCountVariable.sw-KE.resx">
       <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxplotMethod.es.resx">
+      <DependentUpon>dlgBoxplotMethod.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxplotMethod.fr-FR.resx">
       <DependentUpon>dlgBoxplotMethod.vb</DependentUpon>
     </EmbeddedResource>
@@ -1537,6 +1564,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxplotMethod.sw-KE.resx">
       <DependentUpon>dlgBoxplotMethod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCalculator.es.resx">
+      <DependentUpon>dlgCalculator.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCalculator.fr-FR.resx">
       <DependentUpon>dlgCalculator.vb</DependentUpon>
@@ -1547,6 +1577,9 @@
     <EmbeddedResource Include="dlgCalculator.sw-KE.resx">
       <DependentUpon>dlgCalculator.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCanonicalCorrelationAnalysis.es.resx">
+      <DependentUpon>dlgCanonicalCorrelationAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCanonicalCorrelationAnalysis.fr-FR.resx">
       <DependentUpon>dlgCanonicalCorrelationAnalysis.vb</DependentUpon>
     </EmbeddedResource>
@@ -1555,6 +1588,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCanonicalCorrelationAnalysis.sw-KE.resx">
       <DependentUpon>dlgCanonicalCorrelationAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgChangeFormatDayMonth.es.resx">
+      <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgChangeFormatDayMonth.fr-FR.resx">
       <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
@@ -1565,6 +1601,9 @@
     <EmbeddedResource Include="dlgChangeFormatDayMonth.sw-KE.resx">
       <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgChangeType.es.resx">
+      <DependentUpon>dlgChangeType.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgChangeType.fr-FR.resx">
       <DependentUpon>dlgChangeType.vb</DependentUpon>
     </EmbeddedResource>
@@ -1573,6 +1612,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgChangeType.sw-KE.resx">
       <DependentUpon>dlgChangeType.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCheck.es.resx">
+      <DependentUpon>dlgCheck.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCheck.fr-FR.resx">
       <DependentUpon>dlgCheck.vb</DependentUpon>
@@ -1583,6 +1625,9 @@
     <EmbeddedResource Include="dlgCheck.sw-KE.resx">
       <DependentUpon>dlgCheck.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgChiSquareTest.es.resx">
+      <DependentUpon>dlgChiSquareTest.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgChiSquareTest.fr-FR.resx">
       <DependentUpon>dlgChiSquareTest.vb</DependentUpon>
     </EmbeddedResource>
@@ -1591,6 +1636,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgChiSquareTest.sw-KE.resx">
       <DependentUpon>dlgChiSquareTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCliBoxplot.es.resx">
+      <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliBoxplot.fr-FR.resx">
       <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
@@ -1601,6 +1649,9 @@
     <EmbeddedResource Include="dlgCliBoxplot.sw-KE.resx">
       <DependentUpon>dlgCliBoxplot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCliPlot.es.resx">
+      <DependentUpon>dlgCliPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCliPlot.fr-FR.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -1609,6 +1660,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliPlot.sw-KE.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnMetadata.es.resx">
+      <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnMetadata.fr-FR.resx">
       <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
@@ -1619,6 +1673,9 @@
     <EmbeddedResource Include="dlgColumnMetadata.sw-KE.resx">
       <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgContrasts.es.resx">
+      <DependentUpon>dlgContrasts.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgContrasts.fr-FR.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>
     </EmbeddedResource>
@@ -1627,6 +1684,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgContrasts.sw-KE.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConvertColumnsToFactors.es.resx">
+      <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConvertTo.es.resx">
+      <DependentUpon>dlgConvertTo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySheet.es.resx">
+      <DependentUpon>dlgCopySheet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCopySheet.fr-FR.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
@@ -1637,6 +1703,27 @@
     <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCorrelation.es.resx">
+      <DependentUpon>dlgCorrelation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCounts.es.resx">
+      <DependentUpon>dlgCounts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCountsTotals.es.resx">
+      <DependentUpon>dlgCountsTotals.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCPTtoTabularData.es.resx">
+      <DependentUpon>dlgCPTtoTabularData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCreateClimateObject.es.resx">
+      <DependentUpon>dlgCreateClimateObject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCropCoefficients.es.resx">
+      <DependentUpon>dlgCropCoefficients.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCumulativeDistribution.es.resx">
+      <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.fr-FR.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
     </EmbeddedResource>
@@ -1645,6 +1732,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.sw-KE.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCumulativeExceedance.es.resx">
+      <DependentUpon>dlgCumulativeExceedance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDayMonth.es.resx">
+      <DependentUpon>dlgDayMonth.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteColumn.es.resx">
+      <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteColumn.fr-FR.resx">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
@@ -1655,6 +1751,9 @@
     <EmbeddedResource Include="dlgDeleteColumn.sw-KE.resx">
       <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteDescriptive.es.resx">
+      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
     </EmbeddedResource>
@@ -1663,6 +1762,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.sw-KE.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteModels.es.resx">
+      <DependentUpon>dlgDeleteModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteModels.fr-FR.resx">
       <DependentUpon>dlgDeleteModels.vb</DependentUpon>
@@ -1673,6 +1775,12 @@
     <EmbeddedResource Include="dlgDeleteModels.sw-KE.resx">
       <DependentUpon>dlgDeleteModels.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteRows.es.resx">
+      <DependentUpon>dlgDeleteRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteSheet.es.resx">
+      <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteSheet.fr-FR.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
     </EmbeddedResource>
@@ -1681,6 +1789,72 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteSheet.sw-KE.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescriptiveStatistics.es.resx">
+      <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplayDaily.es.resx">
+      <DependentUpon>dlgDisplayDaily.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplayDailyDataRain.es.resx">
+      <DependentUpon>dlgDisplayDailyDataRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplayDoyofYear.es.resx">
+      <DependentUpon>dlgDisplayDoyofYear.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplayRainRunningTotal.es.resx">
+      <DependentUpon>dlgDisplayRainRunningTotal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplaySpellLength.es.resx">
+      <DependentUpon>dlgDisplaySpellLength.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDotPlot.es.resx">
+      <DependentUpon>dlgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDuplicateColumns.es.resx">
+      <DependentUpon>dlgDuplicateColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEndofRains.es.resx">
+      <DependentUpon>dlgEndofRains.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgEndRain.es.resx">
+      <DependentUpon>dlgEndRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExamine.es.resx">
+      <DependentUpon>dlgExamine.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExpand.es.resx">
+      <DependentUpon>dlgExpand.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportforPICSA.es.resx">
+      <DependentUpon>dlgExportforPICSA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExtremeEvents.es.resx">
+      <DependentUpon>dlgExtremeEvents.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExtremes.es.resx">
+      <DependentUpon>dlgExtremes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExtremesClimatic.es.resx">
+      <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgfactor.es.resx">
+      <DependentUpon>dlgfactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFileNew.es.resx">
+      <DependentUpon>dlgFileNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFind.es.resx">
+      <DependentUpon>dlgFind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFormat.es.resx">
+      <DependentUpon>dlgFormat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFreqTables.es.resx">
+      <DependentUpon>dlgFreqTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFromLibrary.es.resx">
+      <DependentUpon>dlgFromLibrary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.fr-FR.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
@@ -1691,6 +1865,21 @@
     <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgGammaDistr.es.resx">
+      <DependentUpon>dlgGammaDistr.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneral.es.resx">
+      <DependentUpon>dlgGeneral.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralisedLinearModels.es.resx">
+      <DependentUpon>dlgGeneralisedLinearModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHeatSum.es.resx">
+      <DependentUpon>dlgHeatSum.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideShowColumns.es.resx">
+      <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgHideShowColumns.fr-FR.resx">
       <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
     </EmbeddedResource>
@@ -1699,6 +1888,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHideShowColumns.sw-KE.resx">
       <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHistogram.es.resx">
+      <DependentUpon>dlgHistogram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHistogramMethod.es.resx">
+      <DependentUpon>dlgHistogramMethod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportDataset.es.resx">
+      <DependentUpon>dlgImportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgIndicatorVariable.es.resx">
+      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInsertColumn.es.resx">
+      <DependentUpon>dlgInsertColumn.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.fr-FR.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
@@ -1709,6 +1913,42 @@
     <EmbeddedResource Include="dlgInsertColumn.sw-KE.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgInteractions.es.resx">
+      <DependentUpon>dlgInteractions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInterpolate.es.resx">
+      <DependentUpon>dlgInterpolate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInterpolateDaily.es.resx">
+      <DependentUpon>dlgInterpolateDaily.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInventoryMethod.es.resx">
+      <DependentUpon>dlgInventoryMethod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInventoryPlot.es.resx">
+      <DependentUpon>dlgInventoryPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgIsNAListvb.es.resx">
+      <DependentUpon>dlgIsNAListvb.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgLabels.es.resx">
+      <DependentUpon>dlgLabels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgLines.es.resx">
+      <DependentUpon>dlgLines.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgLockUnlock.es.resx">
+      <DependentUpon>dlgLockUnlock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlglogLinearModels.es.resx">
+      <DependentUpon>dlglogLinearModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMakeFactor.es.resx">
+      <DependentUpon>dlgMakeFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMakeSheets.es.resx">
+      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgMakeSheets.fr-FR.resx">
       <DependentUpon>dlgMakeSheets.vb</DependentUpon>
     </EmbeddedResource>
@@ -1717,6 +1957,48 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMakeSheets.sw-KE.resx">
       <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMissingData.es.resx">
+      <DependentUpon>dlgMissingData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMissingDataTable.es.resx">
+      <DependentUpon>dlgMissingDataTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMissingValuesplot.es.resx">
+      <DependentUpon>dlgMissingValuesplot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgModelAmounts.es.resx">
+      <DependentUpon>dlgModelAmounts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgModelProbabilities.es.resx">
+      <DependentUpon>dlgModelProbabilities.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMonthlySummaries.es.resx">
+      <DependentUpon>dlgMonthlySummaries.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMovingAverage.es.resx">
+      <DependentUpon>dlgMovingAverage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMultipleRegression.es.resx">
+      <DependentUpon>dlgMultipleRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgName.es.resx">
+      <DependentUpon>dlgName.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNewWorksheet.es.resx">
+      <DependentUpon>dlgNewWorksheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNon-ParametricOneWayANOVA.es.resx">
+      <DependentUpon>dlgNon-ParametricOneWayANOVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgNon-ParemetricOneandTwoSampleTests.es.resx">
+      <DependentUpon>dlgNon-ParemetricOneandTwoSampleTests.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneSample.es.resx">
+      <DependentUpon>dlgOneSample.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneWayANOVA.es.resx">
+      <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
@@ -1727,6 +2009,24 @@
     <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgOptions.es.resx">
+      <DependentUpon>dlgOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOrthogonal.es.resx">
+      <DependentUpon>dlgOrthogonal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOutputforCDT.es.resx">
+      <DependentUpon>dlgOutputforCDT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOutputforCPT.es.resx">
+      <DependentUpon>dlgOutputforCPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPenman.es.resx">
+      <DependentUpon>dlgPenman.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPermuteRows.es.resx">
+      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgPermuteRows.fr-FR.resx">
       <DependentUpon>dlgPermuteRows.vb</DependentUpon>
     </EmbeddedResource>
@@ -1735,6 +2035,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPermuteRows.sw-KE.resx">
       <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPlot.es.resx">
+      <DependentUpon>dlgPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPolynomials.es.resx">
+      <DependentUpon>dlgPolynomials.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPrepare.es.resx">
+      <DependentUpon>dlgPrepare.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPrincipalComponentAnalysis.es.resx">
+      <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrincipalComponentAnalysis.fr-FR.resx">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
@@ -1745,6 +2057,9 @@
     <EmbeddedResource Include="dlgPrincipalComponentAnalysis.sw-KE.resx">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgPrintPreviewOptions.es.resx">
+      <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgPrintPreviewOptions.fr-FR.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -1753,6 +2068,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrintPreviewOptions.sw-KE.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgProbabilityPlot.es.resx">
+      <DependentUpon>dlgProbabilityPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgProcess.es.resx">
+      <DependentUpon>dlgProcess.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgProtect.es.resx">
+      <DependentUpon>dlgProtect.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgProtect.fr-FR.resx">
       <DependentUpon>dlgProtect.vb</DependentUpon>
@@ -1763,6 +2087,15 @@
     <EmbeddedResource Include="dlgProtect.sw-KE.resx">
       <DependentUpon>dlgProtect.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRainStats.es.resx">
+      <DependentUpon>dlgRainStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSample.es.resx">
+      <DependentUpon>dlgRandomSample.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubset.es.resx">
+      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubset.fr-FR.resx">
       <DependentUpon>dlgRandomSubset.vb</DependentUpon>
     </EmbeddedResource>
@@ -1771,6 +2104,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubset.sw-KE.resx">
       <DependentUpon>dlgRandomSubset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRank.es.resx">
+      <DependentUpon>dlgRank.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecode.es.resx">
+      <DependentUpon>dlgRecode.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevel.es.resx">
+      <DependentUpon>dlgReferenceLevel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReferenceLevels.es.resx">
+      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReferenceLevels.fr-FR.resx">
       <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
@@ -1781,6 +2126,18 @@
     <EmbeddedResource Include="dlgReferenceLevels.sw-KE.resx">
       <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegressionSimple.es.resx">
+      <DependentUpon>dlgRegressionSimple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRegularSequence.es.resx">
+      <DependentUpon>dlgRegularSequence.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRemoveUnusedLabels.es.resx">
+      <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameDescriptive.es.resx">
+      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDescriptive.fr-FR.resx">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
     </EmbeddedResource>
@@ -1789,6 +2146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDescriptive.sw-KE.resx">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameModels.es.resx">
+      <DependentUpon>dlgRenameModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameModels.fr-FR.resx">
       <DependentUpon>dlgRenameModels.vb</DependentUpon>
@@ -1799,6 +2159,9 @@
     <EmbeddedResource Include="dlgRenameModels.sw-KE.resx">
       <DependentUpon>dlgRenameModels.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameSheet.es.resx">
+      <DependentUpon>dlgRenameSheet.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameSheet.fr-FR.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </EmbeddedResource>
@@ -1807,6 +2170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameSheet.sw-KE.resx">
       <DependentUpon>dlgRenameSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderDescriptives.es.resx">
+      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReoderDescriptives.fr-FR.resx">
       <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
@@ -1817,6 +2183,9 @@
     <EmbeddedResource Include="dlgReoderDescriptives.sw-KE.resx">
       <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderModels.es.resx">
+      <DependentUpon>dlgReoderModels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgReoderModels.fr-FR.resx">
       <DependentUpon>dlgReoderModels.vb</DependentUpon>
     </EmbeddedResource>
@@ -1825,6 +2194,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReoderModels.sw-KE.resx">
       <DependentUpon>dlgReoderModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorder.es.resx">
+      <DependentUpon>dlgReorder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderLevels.es.resx">
+      <DependentUpon>dlgReorderLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderLevels.fr-FR.resx">
       <DependentUpon>dlgReorderLevels.vb</DependentUpon>
@@ -1835,6 +2210,9 @@
     <EmbeddedResource Include="dlgReorderLevels.sw-KE.resx">
       <DependentUpon>dlgReorderLevels.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderSheet.es.resx">
+      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderSheet.fr-FR.resx">
       <DependentUpon>dlgReorderSheet.vb</DependentUpon>
     </EmbeddedResource>
@@ -1843,6 +2221,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderSheet.sw-KE.resx">
       <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReplace.es.resx">
+      <DependentUpon>dlgReplace.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRestrict.es.resx">
+      <DependentUpon>dlgRestrict.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRestrict.fr-FR.resx">
       <DependentUpon>dlgRestrict.vb</DependentUpon>
@@ -1853,6 +2237,15 @@
     <EmbeddedResource Include="dlgRestrict.sw-KE.resx">
       <DependentUpon>dlgRestrict.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRowStats.es.resx">
+      <DependentUpon>dlgRowStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSaveAs.es.resx">
+      <DependentUpon>dlgSaveAs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgScatterPlot.es.resx">
+      <DependentUpon>dlgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.fr-FR.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -1861,6 +2254,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.sw-KE.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalSummary.es.resx">
+      <DependentUpon>dlgSeasonalSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalSummaryRain.es.resx">
+      <DependentUpon>dlgSeasonalSummaryRain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSelect.es.resx">
+      <DependentUpon>dlgSelect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSelectAndStuck.es.resx">
+      <DependentUpon>dlgSelectAndStuck.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSheetMetadata.es.resx">
+      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSheetMetadata.fr-FR.resx">
       <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
@@ -1871,6 +2279,39 @@
     <EmbeddedResource Include="dlgSheetMetadata.sw-KE.resx">
       <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgShiftDailyData.es.resx">
+      <DependentUpon>dlgShiftDailyData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSimpleWithGroups.es.resx">
+      <DependentUpon>dlgSimpleWithGroups.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSite.es.resx">
+      <DependentUpon>dlgSite.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSort.es.resx">
+      <DependentUpon>dlgSort.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSpellLength.es.resx">
+      <DependentUpon>dlgSpellLength.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStack.es.resx">
+      <DependentUpon>dlgStack.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStackDailyData.es.resx">
+      <DependentUpon>dlgStackDailyData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStartofRains.es.resx">
+      <DependentUpon>dlgStartofRains.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStemAndLeaf.es.resx">
+      <DependentUpon>dlgStemAndLeaf.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummary.es.resx">
+      <DependentUpon>dlgSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryBarOrPieChart.es.resx">
+      <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.fr-FR.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </EmbeddedResource>
@@ -1879,6 +2320,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSummaryTables.es.resx">
+      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTimeseriesPlot.es.resx">
+      <DependentUpon>dlgTimeseriesPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTotals.es.resx">
+      <DependentUpon>dlgTotals.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransform.es.resx">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoSampleNonparametricTest.es.resx">
+      <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoSampleNonparametricTest.fr-FR.resx">
       <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
@@ -1889,6 +2345,30 @@
     <EmbeddedResource Include="dlgTwoSampleNonparametricTest.sw-KE.resx">
       <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoSamples.es.resx">
+      <DependentUpon>dlgTwoSamples.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoWayAnova.es.resx">
+      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoWayAnova.fr-FR.resx">
+      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoWayAnova.resx">
+      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoWayAnova.sw-KE.resx">
+      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUnstack.es.resx">
+      <DependentUpon>dlgUnstack.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUnstackDailyData.es.resx">
+      <DependentUpon>dlgUnstackDailyData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUnusedLevels.es.resx">
+      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
@@ -1897,6 +2377,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.sw-KE.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgView.es.resx">
+      <DependentUpon>dlgView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewDescriptives.es.resx">
+      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewDescriptives.fr-FR.resx">
       <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
@@ -1907,6 +2393,9 @@
     <EmbeddedResource Include="dlgViewDescriptives.sw-KE.resx">
       <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewModels.es.resx">
+      <DependentUpon>dlgViewModels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgViewModels.fr-FR.resx">
       <DependentUpon>dlgViewModels.vb</DependentUpon>
     </EmbeddedResource>
@@ -1915,6 +2404,46 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewModels.sw-KE.resx">
       <DependentUpon>dlgViewModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWaterBalance.es.resx">
+      <DependentUpon>dlgWaterBalance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWaterSatisfactionIndex.es.resx">
+      <DependentUpon>dlgWaterSatisfactionIndex.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWindrosePlot.es.resx">
+      <DependentUpon>dlgWindrosePlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgYearRaincount.es.resx">
+      <DependentUpon>dlgYearRaincount.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCommand.es.resx">
+      <DependentUpon>frmCommand.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditor.es.resx">
+      <DependentUpon>frmEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLog.es.resx">
+      <DependentUpon>frmLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.es.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMetaData.es.resx">
+      <DependentUpon>frmMetaData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmScript.es.resx">
+      <DependentUpon>frmScript.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVariables.es.resx">
+      <DependentUpon>frmVariables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.es.resx" />
+    <EmbeddedResource Include="sdgANOVAOptions.es.resx">
+      <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgBarChart.es.resx">
+      <DependentUpon>sdgBarChart.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
@@ -1925,6 +2454,9 @@
     <EmbeddedResource Include="sdgBarChart.sw-KE.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgBoxPlot.es.resx">
+      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgBoxPlot.fr-FR.resx">
       <DependentUpon>sdgBoxPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -1933,6 +2465,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBoxPlot.sw-KE.resx">
       <DependentUpon>sdgBoxPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCanonicalCorrelation.es.resx">
+      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCanonicalCorrelation.fr-FR.resx">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
@@ -1943,6 +2478,9 @@
     <EmbeddedResource Include="sdgCanonicalCorrelation.sw-KE.resx">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgCorrPlot.es.resx">
+      <DependentUpon>sdgCorrPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.fr-FR.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -1951,6 +2489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.sw-KE.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCumDistLineOptions.es.resx">
+      <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCumDistLineOptions.fr-FR.resx">
       <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>
@@ -1961,6 +2502,9 @@
     <EmbeddedResource Include="sdgCumDistLineOptions.sw-KE.resx">
       <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgCumDistPlotOptions.es.resx">
+      <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgCumDistPlotOptions.fr-FR.resx">
       <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -1969,6 +2513,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCumDistPlotOptions.sw-KE.resx">
       <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDensityOptions.es.resx">
+      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDensityOptions.fr-FR.resx">
       <DependentUpon>sdgDensityOptions.vb</DependentUpon>
@@ -1979,6 +2526,9 @@
     <EmbeddedResource Include="sdgDensityOptions.sw-KE.resx">
       <DependentUpon>sdgDensityOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgDotPlot.es.resx">
+      <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgDotPlot.fr-FR.resx">
       <DependentUpon>sdgDotPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -1988,6 +2538,9 @@
     <EmbeddedResource Include="sdgDotPlot.sw-KE.resx">
       <DependentUpon>sdgDotPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgFrequencyPolygonOptions.es.resx">
+      <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgFrequencyPolygonOptions.fr-FR.resx">
       <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -1996,6 +2549,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFrequencyPolygonOptions.sw-KE.resx">
       <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgHistogramOptions.es.resx">
+      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHistogramOptions.fr-FR.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
@@ -2016,6 +2572,9 @@
       <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgPieChartOptions.es.resx">
+      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgPieChartOptions.fr-FR.resx">
       <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -2025,6 +2584,12 @@
     <EmbeddedResource Include="sdgPieChartOptions.sw-KE.resx">
       <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgPlots.es.resx">
+      <DependentUpon>sdgPlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPrincipalComponentAnalysis.es.resx">
+      <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgPrincipalComponentAnalysis.fr-FR.resx">
       <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
     </EmbeddedResource>
@@ -2033,6 +2598,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPrincipalComponentAnalysis.sw-KE.resx">
       <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgRestrict.es.resx">
+      <DependentUpon>sdgRestrict.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgRestrict.fr-FR.resx">
       <DependentUpon>sdgRestrict.vb</DependentUpon>
@@ -3139,6 +3707,9 @@
     <EmbeddedResource Include="sdgPlots.sw-KE.resx">
       <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgSimpleRegOptions.es.resx">
+      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.fr-FR.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -3147,6 +3718,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgThemeOptions.es.resx">
+      <DependentUpon>sdgThemeOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgThemeOptions.fr-FR.resx">
       <DependentUpon>sdgThemeOptions.vb</DependentUpon>
@@ -3157,6 +3731,9 @@
     <EmbeddedResource Include="sdgThemeOptions.sw-KE.resx">
       <DependentUpon>sdgThemeOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrButtons.es.resx">
+      <DependentUpon>ucrButtons.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
@@ -3165,6 +3742,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.sw-KE.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrButtonsSubdialogue.es.resx">
+      <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtonsSubdialogue.fr-FR.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
@@ -3175,6 +3755,9 @@
     <EmbeddedResource Include="ucrButtonsSubdialogue.sw-KE.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrame.es.resx">
+      <DependentUpon>ucrDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.fr-FR.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
     </EmbeddedResource>
@@ -3183,6 +3766,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.sw-KE.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrameLength.es.resx">
+      <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrameLength.fr-FR.resx">
       <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
@@ -3193,6 +3779,9 @@
     <EmbeddedResource Include="ucrDataFrameLength.sw-KE.resx">
       <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataSelection.es.resx">
+      <DependentUpon>ucrDataSelection.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.fr-FR.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
     </EmbeddedResource>
@@ -3201,6 +3790,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.sw-KE.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDistributions.es.resx">
+      <DependentUpon>ucrDistributions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDistributions.fr-FR.resx">
       <DependentUpon>ucrDistributions.vb</DependentUpon>
@@ -3211,6 +3803,9 @@
     <EmbeddedResource Include="ucrDistributions.sw-KE.resx">
       <DependentUpon>ucrDistributions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrDistributionsWithParameters.es.resx">
+      <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDistributionsWithParameters.fr-FR.resx">
       <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
     </EmbeddedResource>
@@ -3219,6 +3814,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDistributionsWithParameters.sw-KE.resx">
       <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFactor.es.resx">
+      <DependentUpon>ucrFactor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFactor.fr-FR.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
@@ -3229,6 +3827,9 @@
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrInput.es.resx">
+      <DependentUpon>ucrInput.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrInput.fr-FR.resx">
       <DependentUpon>ucrInput.vb</DependentUpon>
     </EmbeddedResource>
@@ -3237,6 +3838,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInput.sw-KE.resx">
       <DependentUpon>ucrInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputComboBox.es.resx">
+      <DependentUpon>ucrInputComboBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInputComboBox.fr-FR.resx">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
@@ -3247,6 +3851,9 @@
     <EmbeddedResource Include="ucrInputComboBox.sw-KE.resx">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputConfidenceLimit.es.resx">
+      <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrInputConfidenceLimit.fr-FR.resx">
       <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
     </EmbeddedResource>
@@ -3255,6 +3862,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInputConfidenceLimit.sw-KE.resx">
       <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputTextBox.es.resx">
+      <DependentUpon>ucrInputTextBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInputTextBox.fr-FR.resx">
       <DependentUpon>ucrInputTextBox.vb</DependentUpon>
@@ -3265,6 +3875,9 @@
     <EmbeddedResource Include="ucrInputTextBox.sw-KE.resx">
       <DependentUpon>ucrInputTextBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrMultipleInput.es.resx">
+      <DependentUpon>ucrMultipleInput.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </EmbeddedResource>
@@ -3273,6 +3886,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.sw-KE.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrNewColumnName.es.resx">
+      <DependentUpon>ucrNewColumnName.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNewColumnName.fr-FR.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
@@ -3283,6 +3899,9 @@
     <EmbeddedResource Include="ucrNewColumnName.sw-KE.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverMultiple.es.resx">
+      <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverMultiple.fr-FR.resx">
       <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
     </EmbeddedResource>
@@ -3291,6 +3910,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverMultiple.sw-KE.resx">
       <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverSingle.es.resx">
+      <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverSingle.fr-FR.resx">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
@@ -3301,6 +3923,9 @@
     <EmbeddedResource Include="ucrReceiverSingle.sw-KE.resx">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrSaveGraph.es.resx">
+      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrSaveGraph.fr-FR.resx">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>
     </EmbeddedResource>
@@ -3309,6 +3934,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSaveGraph.sw-KE.resx">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSaveModel.es.resx">
+      <DependentUpon>ucrSaveModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSaveModel.fr-FR.resx">
       <DependentUpon>ucrSaveModel.vb</DependentUpon>
@@ -3319,6 +3947,9 @@
     <EmbeddedResource Include="ucrSaveModel.sw-KE.resx">
       <DependentUpon>ucrSaveModel.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelector.es.resx">
+      <DependentUpon>ucrSelector.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrSelector.fr-FR.resx">
       <DependentUpon>ucrSelector.vb</DependentUpon>
     </EmbeddedResource>
@@ -3327,6 +3958,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelector.sw-KE.resx">
       <DependentUpon>ucrSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorAddRemove.es.resx">
+      <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorAddRemove.fr-FR.resx">
       <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
@@ -3337,6 +3971,9 @@
     <EmbeddedResource Include="ucrSelectorAddRemove.sw-KE.resx">
       <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrame.es.resx">
+      <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorByDataFrame.fr-FR.resx">
       <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
     </EmbeddedResource>
@@ -3346,6 +3983,9 @@
     <EmbeddedResource Include="ucrSelectorByDataFrame.sw-KE.resx">
       <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.es.resx">
+      <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.fr-FR.resx">
       <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
     </EmbeddedResource>
@@ -3354,6 +3994,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.sw-KE.resx">
       <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrVariablename.es.resx">
+      <DependentUpon>ucrVariablename.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablename.fr-FR.resx">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
@@ -3699,6 +4342,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <XliffResource Include="MultilingualResources\instat.es.xlf" />
     <XliffResource Include="MultilingualResources\instat.fr-FR.xlf" />
     <XliffResource Include="MultilingualResources\instat.sw-KE.xlf" />
   </ItemGroup>
