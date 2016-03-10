@@ -27,18 +27,19 @@ Partial Class dlgRandomSample
         Me.ucrDistWithParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFrameSelector = New instat.ucrDataFrame()
-        Me.ucrNewColumnNameSelector = New instat.ucrNewColumnName()
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberofSamples = New System.Windows.Forms.Label()
         Me.txtNumberofSamples = New System.Windows.Forms.TextBox()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrSampleSize = New instat.ucrDataFrameLength()
+        Me.ucrInputNewColumnName = New instat.ucrInputComboBox()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblSeed
         '
         Me.lblSeed.AutoSize = True
-        Me.lblSeed.Location = New System.Drawing.Point(276, 269)
+        Me.lblSeed.Location = New System.Drawing.Point(288, 245)
         Me.lblSeed.Name = "lblSeed"
         Me.lblSeed.Size = New System.Drawing.Size(32, 13)
         Me.lblSeed.TabIndex = 5
@@ -47,7 +48,7 @@ Partial Class dlgRandomSample
         '
         'txtSeed
         '
-        Me.txtSeed.Location = New System.Drawing.Point(315, 262)
+        Me.txtSeed.Location = New System.Drawing.Point(344, 238)
         Me.txtSeed.Name = "txtSeed"
         Me.txtSeed.Size = New System.Drawing.Size(47, 20)
         Me.txtSeed.TabIndex = 6
@@ -56,7 +57,7 @@ Partial Class dlgRandomSample
         '
         Me.ucrDistWithParameters.Location = New System.Drawing.Point(6, 45)
         Me.ucrDistWithParameters.Name = "ucrDistWithParameters"
-        Me.ucrDistWithParameters.Size = New System.Drawing.Size(221, 156)
+        Me.ucrDistWithParameters.Size = New System.Drawing.Size(221, 125)
         Me.ucrDistWithParameters.TabIndex = 7
         '
         'ucrBase
@@ -72,14 +73,6 @@ Partial Class dlgRandomSample
         Me.ucrDataFrameSelector.Name = "ucrDataFrameSelector"
         Me.ucrDataFrameSelector.Size = New System.Drawing.Size(127, 41)
         Me.ucrDataFrameSelector.TabIndex = 8
-        '
-        'ucrNewColumnNameSelector
-        '
-        Me.ucrNewColumnNameSelector.Location = New System.Drawing.Point(3, 226)
-        Me.ucrNewColumnNameSelector.Name = "ucrNewColumnNameSelector"
-        Me.ucrNewColumnNameSelector.Size = New System.Drawing.Size(376, 35)
-        Me.ucrNewColumnNameSelector.TabIndex = 9
-        Me.ucrNewColumnNameSelector.ucrDataFrameSelector = Nothing
         '
         'lblSampleSize
         '
@@ -110,7 +103,7 @@ Partial Class dlgRandomSample
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(331, 197)
+        Me.cmdOptions.Location = New System.Drawing.Point(316, 164)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdOptions.TabIndex = 12
@@ -126,17 +119,35 @@ Partial Class dlgRandomSample
         Me.ucrSampleSize.Size = New System.Drawing.Size(53, 23)
         Me.ucrSampleSize.TabIndex = 13
         '
+        'ucrInputNewColumnName
+        '
+        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(254, 206)
+        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
+        Me.ucrInputNewColumnName.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputNewColumnName.TabIndex = 14
+        '
+        'lblNewColumnName
+        '
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(13, 218)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.TabIndex = 15
+        Me.lblNewColumnName.Tag = "New_Column_Name"
+        Me.lblNewColumnName.Text = "New Column Name"
+        '
         'dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(418, 342)
+        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.ucrInputNewColumnName)
         Me.Controls.Add(Me.ucrSampleSize)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.txtNumberofSamples)
         Me.Controls.Add(Me.lblNumberofSamples)
         Me.Controls.Add(Me.lblSampleSize)
-        Me.Controls.Add(Me.ucrNewColumnNameSelector)
         Me.Controls.Add(Me.ucrDataFrameSelector)
         Me.Controls.Add(Me.ucrDistWithParameters)
         Me.Controls.Add(Me.txtSeed)
@@ -158,10 +169,11 @@ Partial Class dlgRandomSample
     Friend WithEvents txtSeed As TextBox
     Friend WithEvents ucrDistWithParameters As ucrDistributionsWithParameters
     Friend WithEvents ucrDataFrameSelector As ucrDataFrame
-    Friend WithEvents ucrNewColumnNameSelector As ucrNewColumnName
     Friend WithEvents lblSampleSize As Label
     Friend WithEvents lblNumberofSamples As Label
     Friend WithEvents txtNumberofSamples As TextBox
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrSampleSize As ucrDataFrameLength
+    Friend WithEvents ucrInputNewColumnName As ucrInputComboBox
+    Friend WithEvents lblNewColumnName As Label
 End Class
