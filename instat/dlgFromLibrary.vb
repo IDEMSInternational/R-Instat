@@ -110,6 +110,7 @@ Public Class dlgFromLibrary
             FillListView(dfDataframe:=dfPackage)
         Catch ex As Exception
             MessageBox.Show("Selected package does not contain any datasets", "Error in loading datasets")
+            lstCollection.Items.Clear()
         End Try
 
     End Sub
