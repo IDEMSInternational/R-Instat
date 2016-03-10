@@ -61,7 +61,7 @@ Public Class dlgTwoWayAnova
         If (Not ucrReceiverDataColumn.IsEmpty()) And (Not ucrReceiverFirstFactor.IsEmpty()) And (Not ucrReceiverSecondFactor.IsEmpty()) Then
             clsModel1.bBrackets = False
             clsModel1.SetParameter(True, clsOp:=clsModel)
-            clsModel1.SetParameter(False, strValue:=ucrReceiverSecondFactor.GetVariableNames(bWithQuotes:=False))
+
             ucrBaseNPTwoWayANOVA.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel1)
             ucrBaseNPTwoWayANOVA.OKEnabled(True)
 
@@ -85,6 +85,7 @@ Public Class dlgTwoWayAnova
     End Sub
 
     Private Sub ucrReceiverSecondFactor_SelectionChanged() Handles ucrReceiverSecondFactor.SelectionChanged
+        clsModel1.SetParameter(False, strValue:=ucrReceiverSecondFactor.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
