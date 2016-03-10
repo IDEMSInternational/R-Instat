@@ -71,7 +71,6 @@ Public Class dlgFromLibrary
 
     Private Sub rdoDefaultDatasets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultDatasets.CheckedChanged, rdoChooseDatasets.CheckedChanged
         If rdoDefaultDatasets.Checked Then
-            Dim dfDefault As DataFrame
             cboPackages.Enabled = False
             cboPackages.SelectedItem = "datasets"
         ElseIf rdoChooseDatasets.Checked Then
@@ -125,4 +124,17 @@ Public Class dlgFromLibrary
         loadDatasets(cboPackages.SelectedItem.ToString)
     End Sub
 
+    Private Sub lstCollection_Click(sender As Object, e As EventArgs) Handles lstCollection.Click
+        ucrBase.clsRsyntax.SetFunction("data.frame")
+        ucrBase.clsRsyntax.SetAssignTo(lstCollection.SelectedItems(0).SubItems(0).Text, strTempDataframe:=lstCollection.SelectedItems(0).SubItems(0).Text)
+        ucrBase.clsRsyntax.AddParameter("x", lstCollection.SelectedItems(0).SubItems(0).Text)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If ucrBase.clsRsyntax.GetScript <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
 End Class
