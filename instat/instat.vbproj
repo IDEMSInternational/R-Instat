@@ -1458,6 +1458,12 @@
     <Compile Include="ucrVariablename.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrVariablesAsFactor.Designer.vb">
+      <DependentUpon>ucrVariablesAsFactor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrVariablesAsFactor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlgAddStartRain.fr-FR.resx">
@@ -3363,6 +3369,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablename.sw-KE.resx">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrVariablesAsFactor.fr-FR.resx">
+      <DependentUpon>ucrVariablesAsFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrVariablesAsFactor.resx">
+      <DependentUpon>ucrVariablesAsFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrVariablesAsFactor.sw-KE.resx">
+      <DependentUpon>ucrVariablesAsFactor.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
