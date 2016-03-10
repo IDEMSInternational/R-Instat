@@ -80,12 +80,21 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub FillPackagesCombo()
+        Dim strTempHolder As String = "lsPackagesHolder"
         Dim i As Integer
         Dim lstAvailablePackages As CharacterVector
         cboPackages.Items.Clear()
         lstAvailablePackages = frmMain.clsRLink.clsEngine.Evaluate(strPackages & "<-(.packages())").AsCharacter
         For i = 0 To lstAvailablePackages.Length - 1
-            cboPackages.Items.Add(lstAvailablePackages.AsCharacter(i))
+            Try
+                frmMain.clsRLink.clsEngine.Evaluate(strTempHolder & "<-data.frame(data(package =" & Chr(34) & lstAvailablePackages.AsCharacter(i) & Chr(34) & ")$results[1:nrow(data(package =" & Chr(34) & lstAvailablePackages.AsCharacter(i) & Chr(34) & ")$results),3:4])")
+                'Only adds the packages that have datasets, if not an exception is thrown
+                cboPackages.Items.Add(lstAvailablePackages.AsCharacter(i))
+            Catch ex As Exception
+                'ToDo
+                'If the package has no datset it throws an exception
+                'and that package is not added
+            End Try
         Next
     End Sub
 
@@ -109,7 +118,7 @@ Public Class dlgFromLibrary
                 FillListView(dfDataframe:=dfPackage)
             End If
         Catch ex As Exception
-            lstCollection.Items.Clear()
+            'lstCollection.Items.Clear()
         End Try
 
     End Sub
@@ -117,4 +126,5 @@ Public Class dlgFromLibrary
     Private Sub cboPackages_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPackages.SelectedValueChanged
         loadDatasets(cboPackages.SelectedItem.ToString)
     End Sub
+
 End Class
