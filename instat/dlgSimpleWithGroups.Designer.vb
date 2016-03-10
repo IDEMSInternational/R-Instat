@@ -38,6 +38,7 @@ Partial Class dlgSimpleWithGroups
         Me.ucrResponse = New instat.ucrReceiverSingle()
         Me.ucrSelectorSimpleRegGroups = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseRegWithGroups = New instat.ucrButtons()
+        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
         Me.grpModelstofit.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -200,11 +201,19 @@ Partial Class dlgSimpleWithGroups
         Me.ucrBaseRegWithGroups.Size = New System.Drawing.Size(410, 55)
         Me.ucrBaseRegWithGroups.TabIndex = 0
         '
+        'UcrInputComboBox1
+        '
+        Me.UcrInputComboBox1.Location = New System.Drawing.Point(149, 15)
+        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
+        Me.UcrInputComboBox1.Size = New System.Drawing.Size(137, 25)
+        Me.UcrInputComboBox1.TabIndex = 19
+        '
         'dlgSimpleWithGroups
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(409, 329)
+        Me.Controls.Add(Me.UcrInputComboBox1)
         Me.Controls.Add(Me.grpModelstofit)
         Me.Controls.Add(Me.lblGroupingFactor)
         Me.Controls.Add(Me.ucrGroupingFactor)
@@ -243,4 +252,5 @@ Partial Class dlgSimpleWithGroups
     Friend WithEvents chkParallelLines As CheckBox
     Friend WithEvents chkSingle As CheckBox
     Friend WithEvents chkAll As CheckBox
+    Friend WithEvents UcrInputComboBox1 As ucrInputComboBox
 End Class

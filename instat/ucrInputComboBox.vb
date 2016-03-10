@@ -37,6 +37,11 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsGraphs()
+        strItemsType = "Graphs"
+        FillItemTypes()
+    End Sub
+
     Private Sub FillItemTypes()
         Select Case strItemsType
             Case "Columns"
@@ -45,6 +50,8 @@ Public Class ucrInputComboBox
                 End If
             Case "Data Frames"
             Case "Models"
+                cboInput.Items.Add(frmMain.clsRLink.GetModelNames().ToArray)
+            Case "Graphs"
         End Select
     End Sub
 
