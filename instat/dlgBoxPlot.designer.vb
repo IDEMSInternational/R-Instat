@@ -32,6 +32,7 @@ Partial Class dlgBoxplot
         Me.ucrSelectorBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.chkHorizontalBoxplot = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'lblYVarToPlot
@@ -122,11 +123,23 @@ Partial Class dlgBoxplot
         Me.ucrBase.Size = New System.Drawing.Size(410, 51)
         Me.ucrBase.TabIndex = 12
         '
+        'chkHorizontalBoxplot
+        '
+        Me.chkHorizontalBoxplot.AutoSize = True
+        Me.chkHorizontalBoxplot.Location = New System.Drawing.Point(12, 207)
+        Me.chkHorizontalBoxplot.Name = "chkHorizontalBoxplot"
+        Me.chkHorizontalBoxplot.Size = New System.Drawing.Size(110, 17)
+        Me.chkHorizontalBoxplot.TabIndex = 20
+        Me.chkHorizontalBoxplot.Tag = "Horizontal_boxplot"
+        Me.chkHorizontalBoxplot.Text = "Horizontal boxplot"
+        Me.chkHorizontalBoxplot.UseVisualStyleBackColor = True
+        '
         'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(402, 291)
+        Me.Controls.Add(Me.chkHorizontalBoxplot)
         Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.ucrYvariableReceiver)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
@@ -161,4 +174,5 @@ Partial Class dlgBoxplot
     Friend WithEvents lblBySecondFactor As Label
     Friend WithEvents ucrYvariableReceiver As ucrReceiverSingle
     Friend WithEvents cmdBoxPlotOptions As Button
+    Friend WithEvents chkHorizontalBoxplot As CheckBox
 End Class

@@ -56,7 +56,7 @@ Public Class dlgBoxplot
     Public Sub SetOperator()
         Dim clsTempOp As New ROperator
         Dim clsTempRFunc As New RFunction
-        If sdgBoxPlot.chkHorizontalBoxplot.Checked Then
+        If chkHorizontalBoxplot.Checked Then
             clsTempOp.SetOperation("+")
             clsTempOp.SetParameter(True, clsRFunc:=clsRggplotFunction)
             clsTempOp.SetParameter(False, clsRFunc:=clsRgeom_boxplotFunction)
@@ -69,6 +69,7 @@ Public Class dlgBoxplot
         ucrSelectorBoxPlot.Reset()
         ucrSelectorBoxPlot.Focus()
         ucrYvariableReceiver.SetMeAsReceiver()
+        sdgBoxPlot.SetDefaults()
         TestOkEnabled()
 
     End Sub
@@ -123,5 +124,9 @@ Public Class dlgBoxplot
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub chkHorizontalBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles chkHorizontalBoxplot.CheckedChanged
+        SetOperator()
     End Sub
 End Class

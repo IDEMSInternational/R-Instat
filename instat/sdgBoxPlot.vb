@@ -25,10 +25,9 @@ Public Class sdgBoxPlot
     Private Sub sdgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.BringToFront()
         autoTranslate(Me)
-        SetSubdialogDefaults()
     End Sub
 
-    Public Sub SetSubdialogDefaults()
+    Public Sub SetDefaults()
         chkHorizontalBoxplot.Checked = False
         chkNotchedBoxplot.Checked = False
         chkVariableWidth.Checked = False
@@ -49,7 +48,7 @@ Public Class sdgBoxPlot
             clsBoxplotFunction.RemoveParameterByName("notch")
         End If
     End Sub
-    Private Sub chkHorizontalBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles chkHorizontalBoxplot.CheckedChanged
+    Private Sub chkHorizontalBoxplot_CheckedChanged(sender As Object, e As EventArgs)
         dlgBoxplot.SetOperator()
     End Sub
 End Class
