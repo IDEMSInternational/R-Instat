@@ -87,7 +87,7 @@ Public Class dlgFromLibrary
         lstAvailablePackages = frmMain.clsRLink.clsEngine.Evaluate(strPackages & "<-(.packages())").AsCharacter
         For i = 0 To lstAvailablePackages.Length - 1
             Try
-                If frmMain.clsRLink.clsEngine.Evaluate("nrow(data(package = " & Chr(34) & lstAvailablePackages.AsCharacter(i) & Chr(34) & ")$results[ , 3:  4])").AsInteger(0) > 0 Then
+                If frmMain.clsRLink.clsEngine.Evaluate("nrow(data(package = " & Chr(34) & lstAvailablePackages.AsCharacter(i) & Chr(34) & ")$results)").AsInteger(0) > 0 Then
                     cboPackages.Items.Add(lstAvailablePackages.AsCharacter(i))
                 End If
             Catch ex As Exception
