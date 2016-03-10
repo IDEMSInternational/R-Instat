@@ -28,7 +28,6 @@ Public Class sdgBoxPlot
     End Sub
 
     Public Sub SetDefaults()
-        chkHorizontalBoxplot.Checked = False
         chkNotchedBoxplot.Checked = False
         chkVariableWidth.Checked = False
     End Sub
