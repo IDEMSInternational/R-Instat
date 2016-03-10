@@ -19,7 +19,7 @@ Public Class dlgTwoWayAnova
     Public bFirstLoad As Boolean = True
     Dim clsModel, clsModel1 As New ROperator
 
-    Private Sub dlgSimpleWithGroups_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgTwoWayANOVA_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If bFirstLoad Then
             InitialiseDialog()
