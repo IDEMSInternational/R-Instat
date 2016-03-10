@@ -20,33 +20,24 @@ Public Class dlgRandomSample
     Private Sub dlgRandomSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         'ucrBase.OKEnabled(False)
+        ucrBase.iHelpTopicID = 31
 
         ' Setting distribution type and base function as distribution function
         ucrDistWithParameters.SetRDistributions()
         ucrBase.clsRsyntax.clsBaseFunction = ucrDistWithParameters.clsCurrRFunction
-        ucrDistWithParameters.AddParameter("n", ucrDataFrameSelector.iDataFrameLength)
-        ucrSampleSize.SetDataFrameSelector(ucrDataFrameSelector)
-        ' Setting link between DataFrameSelector and NewColumnNameSelector
-        ' TODO tidy these links up
-        'ucrDataFrameSelector.SetColumnList(ucrNewColumnNameSelector)
-        ucrNewColumnNameSelector.SetDataFrameSelector(ucrDataFrameSelector)
-        ucrNewColumnNameSelector.SetPrefix("Rand")
+        ucrDistWithParameters.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
+        ucrSampleSize.SetDataFrameSelector(ucrSelectorRandomSamples)
 
-        ' Setting the assign
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrDataFrameSelector.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+        ucrInputRandomSamples.SetPrefix("Rand")
+        ucrInputRandomSamples.SetItemsTypeAsColumns()
+        ucrInputRandomSamples.SetDefaultTypeAsColumn()
+        ucrInputRandomSamples.SetDataFrameSelector(ucrSelectorRandomSamples)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputRandomSamples.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrInputRandomSamples.GetText)
 
     End Sub
 
-    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameSelector.DataFrameChanged
-        ucrDistWithParameters.AddParameter("n", ucrDataFrameSelector.iDataFrameLength)
-    End Sub
-
-    Private Sub ucrNewColumnNameSelector_Leave(sender As Object, e As EventArgs) Handles ucrNewColumnNameSelector.Leave
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrDataFrameSelector.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
-    End Sub
-
-    Private Sub ucrDataFrameSelector_Leave(sender As Object, e As EventArgs)
-
+    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSelectorRandomSamples.DataFrameChanged
+        ucrDistWithParameters.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
     End Sub
 
 End Class
