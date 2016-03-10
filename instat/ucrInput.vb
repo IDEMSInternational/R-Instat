@@ -44,22 +44,27 @@ Public Class ucrInput
 
     Public Sub SetDefaultTypeAsColumn()
         strDefaultType = "Column"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDefaultTypeAsModel()
         strDefaultType = "Model"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDefaultTypeAsDataFrame()
         strDefaultType = "Data Frame"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDefaultTypeAsGraph()
         strDefaultType = "Graph"
+        SetDefaultName()
     End Sub
 
     Public Sub SetValidationTypeAsRVariable()
         strValidationType = "RVariable"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
