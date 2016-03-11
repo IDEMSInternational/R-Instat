@@ -214,6 +214,12 @@
     <Compile Include="dlgCheck.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCheckData.Designer.vb">
+      <DependentUpon>dlgCheckData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCheckData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgChiSquareTest.designer.vb">
       <DependentUpon>dlgChiSquareTest.vb</DependentUpon>
     </Compile>
@@ -1594,6 +1600,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCheck.sw-KE.resx">
       <DependentUpon>dlgCheck.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCheckData.fr-FR.resx">
+      <DependentUpon>dlgCheckData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCheckData.resx">
+      <DependentUpon>dlgCheckData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCheckData.sw-KE.resx">
+      <DependentUpon>dlgCheckData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgChiSquareTest.fr-FR.resx">
       <DependentUpon>dlgChiSquareTest.vb</DependentUpon>
