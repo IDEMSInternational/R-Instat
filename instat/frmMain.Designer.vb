@@ -316,8 +316,14 @@ Partial Class frmMain
         Me.mnuManageModelsReoder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageModelsRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageModelsDelete = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContrastsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MakeSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageFactorContrasts = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageFactorMakeSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ManageDataCheck = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageTextSplit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageTextCombine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageTextMatch = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageTextDistance = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1740,7 +1746,7 @@ Partial Class frmMain
         '
         'mnuManage
         '
-        Me.mnuManage.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCalculations, Me.mnuManageData, Me.mnuManageFactor, Me.mnuManageAddColumn, Me.mnuManageSheet, Me.mnuManageReshape, Me.mnuManageDataFile, Me.mnuManageDescriptives, Me.mnuManageModels})
+        Me.mnuManage.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCalculations, Me.mnuManageData, Me.mnuManageText, Me.mnuManageDescriptives, Me.mnuManageModels, Me.mnuManageFactor, Me.mnuManageAddColumn, Me.mnuManageSheet, Me.mnuManageReshape, Me.mnuManageDataFile})
         Me.mnuManage.Name = "mnuManage"
         Me.mnuManage.Size = New System.Drawing.Size(62, 20)
         Me.mnuManage.Tag = "Manage"
@@ -1749,15 +1755,15 @@ Partial Class frmMain
         'mnuCalculations
         '
         Me.mnuCalculations.Name = "mnuCalculations"
-        Me.mnuCalculations.Size = New System.Drawing.Size(183, 22)
+        Me.mnuCalculations.Size = New System.Drawing.Size(152, 22)
         Me.mnuCalculations.Tag = "Calculations"
         Me.mnuCalculations.Text = "Calculations..."
         '
         'mnuManageData
         '
-        Me.mnuManageData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataRegularSequence, Me.mnuManageDataRandomSamples, Me.mnuManageDataView, Me.mnuManageDataRename, Me.mnuManageDataConvertTo, Me.mnuManageDataSort})
+        Me.mnuManageData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataRegularSequence, Me.mnuManageDataRandomSamples, Me.mnuManageDataView, Me.mnuManageDataRename, Me.mnuManageDataConvertTo, Me.mnuManageDataSort, Me.ManageDataCheck})
         Me.mnuManageData.Name = "mnuManageData"
-        Me.mnuManageData.Size = New System.Drawing.Size(183, 22)
+        Me.mnuManageData.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageData.Tag = "Data"
         Me.mnuManageData.Text = "Data"
         '
@@ -1805,9 +1811,9 @@ Partial Class frmMain
         '
         'mnuManageFactor
         '
-        Me.mnuManageFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageFactorconvertToFactor, Me.mnuMangeFactorLabel, Me.mnuManageFactorReorderLevels, Me.mnuManageFactorRecode, Me.mnuManageFactorReferenceLevels, Me.mnuManageFactorInteraction, Me.mnuManageFactorUnusedLevels, Me.mnuManageFactorIndicatorVariables, Me.ContrastsToolStripMenuItem, Me.MakeSheetToolStripMenuItem})
+        Me.mnuManageFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageFactorconvertToFactor, Me.mnuMangeFactorLabel, Me.mnuManageFactorReorderLevels, Me.mnuManageFactorRecode, Me.mnuManageFactorReferenceLevels, Me.mnuManageFactorInteraction, Me.mnuManageFactorUnusedLevels, Me.mnuManageFactorIndicatorVariables, Me.mnuManageFactorContrasts, Me.mnuManageFactorMakeSheet})
         Me.mnuManageFactor.Name = "mnuManageFactor"
-        Me.mnuManageFactor.Size = New System.Drawing.Size(183, 22)
+        Me.mnuManageFactor.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageFactor.Tag = "Factor"
         Me.mnuManageFactor.Text = "Factor"
         '
@@ -1871,9 +1877,9 @@ Partial Class frmMain
         '
         Me.mnuManageAddColumn.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageAddColumnTransform, Me.mnuManageAddColumnRecode, Me.mnuManageAddColumnRank, Me.mnuManageAddColumnRowSummary, Me.mnuManageAddColumnPermuteRows, Me.mnuManageAddColumnPolynomials, Me.mnuManageAddColumnFilter})
         Me.mnuManageAddColumn.Name = "mnuManageAddColumn"
-        Me.mnuManageAddColumn.Size = New System.Drawing.Size(183, 22)
-        Me.mnuManageAddColumn.Tag = "Add_Column"
-        Me.mnuManageAddColumn.Text = "Add Column"
+        Me.mnuManageAddColumn.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageAddColumn.Tag = "Add_Columns"
+        Me.mnuManageAddColumn.Text = "Add Columns"
         '
         'mnuManageAddColumnTransform
         '
@@ -1928,7 +1934,7 @@ Partial Class frmMain
         '
         Me.mnuManageSheet.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageSheetColumnMetadata, Me.mnuManageSheetReorder, Me.mnuManageSheetInsertColumnsRows, Me.mnuManageSheetDeleteColumnsRows, Me.mnuManageSheetProtect, Me.mnuManageSheetHideShowColumns})
         Me.mnuManageSheet.Name = "mnuManageSheet"
-        Me.mnuManageSheet.Size = New System.Drawing.Size(183, 22)
+        Me.mnuManageSheet.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageSheet.Tag = "Sheet"
         Me.mnuManageSheet.Text = "Sheet"
         '
@@ -1978,7 +1984,7 @@ Partial Class frmMain
         '
         Me.mnuManageReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageRechapeColumnSummaries, Me.mnuManageReshapeStack, Me.mnuManageReshapeUnstack, Me.mnuManageReshapeRandomSubst, Me.mnuManageRechapeSubset, Me.mnuManageRechapeMerge, Me.RemoveUnusedLabelsToolStripMenuItem})
         Me.mnuManageReshape.Name = "mnuManageReshape"
-        Me.mnuManageReshape.Size = New System.Drawing.Size(183, 22)
+        Me.mnuManageReshape.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageReshape.Tag = "Reshape"
         Me.mnuManageReshape.Text = "Reshape"
         '
@@ -2034,7 +2040,7 @@ Partial Class frmMain
         '
         Me.mnuManageDataFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDataFileSheetMetadata, Me.mnuManageDataFileRenameSheet, Me.mnuManageDataFileReorderSheets, Me.mnuManageDataFileCopySheet, Me.mnuManageDataFileDeleteSheets})
         Me.mnuManageDataFile.Name = "mnuManageDataFile"
-        Me.mnuManageDataFile.Size = New System.Drawing.Size(183, 22)
+        Me.mnuManageDataFile.Size = New System.Drawing.Size(152, 22)
         Me.mnuManageDataFile.Tag = "Data_file"
         Me.mnuManageDataFile.Text = "Data File"
         '
@@ -2354,9 +2360,9 @@ Partial Class frmMain
         '
         Me.mnuManageDescriptives.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageDescriptivesView, Me.mnuManageDescriptivesReoder, Me.mnuManageDescriptivesRename, Me.mnuManageDescriptivesDelete})
         Me.mnuManageDescriptives.Name = "mnuManageDescriptives"
-        Me.mnuManageDescriptives.Size = New System.Drawing.Size(183, 22)
-        Me.mnuManageDescriptives.Tag = "Manage_Descriptives"
-        Me.mnuManageDescriptives.Text = "Manage Descriptives"
+        Me.mnuManageDescriptives.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageDescriptives.Tag = "Descriptives"
+        Me.mnuManageDescriptives.Text = "Descriptives"
         '
         'mnuManageDescriptivesView
         '
@@ -2390,9 +2396,9 @@ Partial Class frmMain
         '
         Me.mnuManageModels.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageModelsView, Me.mnuManageModelsReoder, Me.mnuManageModelsRename, Me.mnuManageModelsDelete})
         Me.mnuManageModels.Name = "mnuManageModels"
-        Me.mnuManageModels.Size = New System.Drawing.Size(183, 22)
-        Me.mnuManageModels.Tag = "Manage_Models"
-        Me.mnuManageModels.Text = "Manage Models"
+        Me.mnuManageModels.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageModels.Tag = "Models"
+        Me.mnuManageModels.Text = "Models"
         '
         'mnuManageModelsView
         '
@@ -2422,17 +2428,62 @@ Partial Class frmMain
         Me.mnuManageModelsDelete.Tag = "Delete"
         Me.mnuManageModelsDelete.Text = "Delete..."
         '
-        'ContrastsToolStripMenuItem
+        'mnuManageFactorContrasts
         '
-        Me.ContrastsToolStripMenuItem.Name = "ContrastsToolStripMenuItem"
-        Me.ContrastsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ContrastsToolStripMenuItem.Text = "Contrasts"
+        Me.mnuManageFactorContrasts.Name = "mnuManageFactorContrasts"
+        Me.mnuManageFactorContrasts.Size = New System.Drawing.Size(180, 22)
+        Me.mnuManageFactorContrasts.Tag = "Contrats"
+        Me.mnuManageFactorContrasts.Text = "Contrasts..."
         '
-        'MakeSheetToolStripMenuItem
+        'mnuManageFactorMakeSheet
         '
-        Me.MakeSheetToolStripMenuItem.Name = "MakeSheetToolStripMenuItem"
-        Me.MakeSheetToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.MakeSheetToolStripMenuItem.Text = "Make Sheet..."
+        Me.mnuManageFactorMakeSheet.Name = "mnuManageFactorMakeSheet"
+        Me.mnuManageFactorMakeSheet.Size = New System.Drawing.Size(180, 22)
+        Me.mnuManageFactorMakeSheet.Tag = "Make_Sheet"
+        Me.mnuManageFactorMakeSheet.Text = "Make Sheet..."
+        '
+        'ManageDataCheck
+        '
+        Me.ManageDataCheck.Name = "ManageDataCheck"
+        Me.ManageDataCheck.Size = New System.Drawing.Size(177, 22)
+        Me.ManageDataCheck.Tag = "Check"
+        Me.ManageDataCheck.Text = "Check..."
+        '
+        'mnuManageText
+        '
+        Me.mnuManageText.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageTextSplit, Me.mnuManageTextCombine, Me.mnuManageTextMatch, Me.mnuManageTextDistance})
+        Me.mnuManageText.Name = "mnuManageText"
+        Me.mnuManageText.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageText.Tag = "Text"
+        Me.mnuManageText.Text = "Text"
+        '
+        'mnuManageTextSplit
+        '
+        Me.mnuManageTextSplit.Name = "mnuManageTextSplit"
+        Me.mnuManageTextSplit.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageTextSplit.Tag = "Split"
+        Me.mnuManageTextSplit.Text = "Split..."
+        '
+        'mnuManageTextCombine
+        '
+        Me.mnuManageTextCombine.Name = "mnuManageTextCombine"
+        Me.mnuManageTextCombine.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageTextCombine.Tag = "Combine"
+        Me.mnuManageTextCombine.Text = "Combine..."
+        '
+        'mnuManageTextMatch
+        '
+        Me.mnuManageTextMatch.Name = "mnuManageTextMatch"
+        Me.mnuManageTextMatch.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageTextMatch.Tag = "Match"
+        Me.mnuManageTextMatch.Text = "Match..."
+        '
+        'mnuManageTextDistance
+        '
+        Me.mnuManageTextDistance.Name = "mnuManageTextDistance"
+        Me.mnuManageTextDistance.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageTextDistance.Tag = "Distance"
+        Me.mnuManageTextDistance.Text = "Distance..."
         '
         'frmMain
         '
@@ -2750,6 +2801,12 @@ Partial Class frmMain
     Friend WithEvents mnuManageModelsReoder As ToolStripMenuItem
     Friend WithEvents mnuManageModelsRename As ToolStripMenuItem
     Friend WithEvents mnuManageModelsDelete As ToolStripMenuItem
-    Friend WithEvents ContrastsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents MakeSheetToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuManageFactorContrasts As ToolStripMenuItem
+    Friend WithEvents mnuManageFactorMakeSheet As ToolStripMenuItem
+    Friend WithEvents ManageDataCheck As ToolStripMenuItem
+    Friend WithEvents mnuManageText As ToolStripMenuItem
+    Friend WithEvents mnuManageTextSplit As ToolStripMenuItem
+    Friend WithEvents mnuManageTextCombine As ToolStripMenuItem
+    Friend WithEvents mnuManageTextMatch As ToolStripMenuItem
+    Friend WithEvents mnuManageTextDistance As ToolStripMenuItem
 End Class
