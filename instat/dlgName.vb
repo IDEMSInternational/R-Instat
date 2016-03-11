@@ -60,6 +60,7 @@ Public Class dlgName
 
     Private Sub txtName_Leave(sender As Object, e As EventArgs) Handles txtName.Leave
         ucrBase.clsRsyntax.AddParameter("new_val", Chr(34) & txtName.Text & Chr(34))
+        TestOKEnabled()
     End Sub
     Private Sub TestOKEnabled()
         If Not ucrReceiverName.IsEmpty() And txtName.Text <> "" Then
@@ -71,10 +72,6 @@ Public Class dlgName
 
     Private Sub ucrSelectVariables_DataFrameChanged() Handles ucrSelectVariables.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", ucrSelectVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-    End Sub
-
-    Private Sub txtName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtName.KeyPress
-        TestOKEnabled()
     End Sub
 
 End Class
