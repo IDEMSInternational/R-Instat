@@ -316,6 +316,8 @@ Partial Class frmMain
         Me.mnuManageModelsReoder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageModelsRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageModelsDelete = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContrastsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MakeSheetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1803,7 +1805,7 @@ Partial Class frmMain
         '
         'mnuManageFactor
         '
-        Me.mnuManageFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageFactorconvertToFactor, Me.mnuMangeFactorLabel, Me.mnuManageFactorReorderLevels, Me.mnuManageFactorRecode, Me.mnuManageFactorReferenceLevels, Me.mnuManageFactorInteraction, Me.mnuManageFactorUnusedLevels, Me.mnuManageFactorIndicatorVariables})
+        Me.mnuManageFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuManageFactorconvertToFactor, Me.mnuMangeFactorLabel, Me.mnuManageFactorReorderLevels, Me.mnuManageFactorRecode, Me.mnuManageFactorReferenceLevels, Me.mnuManageFactorInteraction, Me.mnuManageFactorUnusedLevels, Me.mnuManageFactorIndicatorVariables, Me.ContrastsToolStripMenuItem, Me.MakeSheetToolStripMenuItem})
         Me.mnuManageFactor.Name = "mnuManageFactor"
         Me.mnuManageFactor.Size = New System.Drawing.Size(183, 22)
         Me.mnuManageFactor.Tag = "Factor"
@@ -2420,6 +2422,18 @@ Partial Class frmMain
         Me.mnuManageModelsDelete.Tag = "Delete"
         Me.mnuManageModelsDelete.Text = "Delete..."
         '
+        'ContrastsToolStripMenuItem
+        '
+        Me.ContrastsToolStripMenuItem.Name = "ContrastsToolStripMenuItem"
+        Me.ContrastsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ContrastsToolStripMenuItem.Text = "Contrasts"
+        '
+        'MakeSheetToolStripMenuItem
+        '
+        Me.MakeSheetToolStripMenuItem.Name = "MakeSheetToolStripMenuItem"
+        Me.MakeSheetToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.MakeSheetToolStripMenuItem.Text = "Make Sheet..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2736,4 +2750,6 @@ Partial Class frmMain
     Friend WithEvents mnuManageModelsReoder As ToolStripMenuItem
     Friend WithEvents mnuManageModelsRename As ToolStripMenuItem
     Friend WithEvents mnuManageModelsDelete As ToolStripMenuItem
+    Friend WithEvents ContrastsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MakeSheetToolStripMenuItem As ToolStripMenuItem
 End Class
