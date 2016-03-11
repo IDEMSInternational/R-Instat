@@ -133,4 +133,9 @@ Public Class dlgFromLibrary
     Private Sub TestOkEnabled()
 
     End Sub
+
+    Private Sub lstCollection_DoubleClick(sender As Object, e As EventArgs) Handles lstCollection.DoubleClick
+        lstCollection_Click(sender, e)
+        ucrBase.cmdOk.PerformClick()
+    End Sub
 End Class
