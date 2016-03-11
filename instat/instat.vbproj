@@ -1416,6 +1416,18 @@
     <Compile Include="ucrReceiverSingle.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSaveGraph.Designer.vb">
+      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSaveGraph.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrSaveModel.Designer.vb">
+      <DependentUpon>ucrSaveModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSaveModel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrSelector.designer.vb">
       <DependentUpon>ucrSelector.vb</DependentUpon>
     </Compile>
@@ -1444,6 +1456,12 @@
       <DependentUpon>ucrVariablename.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrVariablename.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrVariablesAsFactor.Designer.vb">
+      <DependentUpon>ucrVariablesAsFactor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrVariablesAsFactor.vb">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -1876,6 +1894,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoSampleNonparametricTest.sw-KE.resx">
       <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoWayAnova.fr-FR.resx">
+      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoWayAnova.resx">
+      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoWayAnova.sw-KE.resx">
+      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
@@ -3289,6 +3316,24 @@
     <EmbeddedResource Include="ucrReceiverSingle.sw-KE.resx">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrSaveGraph.fr-FR.resx">
+      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSaveGraph.resx">
+      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSaveGraph.sw-KE.resx">
+      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSaveModel.fr-FR.resx">
+      <DependentUpon>ucrSaveModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSaveModel.resx">
+      <DependentUpon>ucrSaveModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSaveModel.sw-KE.resx">
+      <DependentUpon>ucrSaveModel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrSelector.fr-FR.resx">
       <DependentUpon>ucrSelector.vb</DependentUpon>
     </EmbeddedResource>
@@ -3333,6 +3378,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablename.sw-KE.resx">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrVariablesAsFactor.fr-FR.resx">
+      <DependentUpon>ucrVariablesAsFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrVariablesAsFactor.resx">
+      <DependentUpon>ucrVariablesAsFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrVariablesAsFactor.sw-KE.resx">
+      <DependentUpon>ucrVariablesAsFactor.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

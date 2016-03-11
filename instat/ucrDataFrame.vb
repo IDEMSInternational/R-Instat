@@ -22,11 +22,9 @@ Public Class ucrDataFrame
     Public strCurrDataFrame As String = ""
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad)
         If bFirstLoad Then
-            frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, True)
             bFirstLoad = False
-        Else
-            frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, False)
         End If
         SetDataFrameProperties()
     End Sub

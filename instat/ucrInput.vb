@@ -44,18 +44,27 @@ Public Class ucrInput
 
     Public Sub SetDefaultTypeAsColumn()
         strDefaultType = "Column"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDefaultTypeAsModel()
         strDefaultType = "Model"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDefaultTypeAsDataFrame()
         strDefaultType = "Data Frame"
+        SetDefaultName()
+    End Sub
+
+    Public Sub SetDefaultTypeAsGraph()
+        strDefaultType = "Graph"
+        SetDefaultName()
     End Sub
 
     Public Sub SetValidationTypeAsRVariable()
         strValidationType = "RVariable"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
@@ -71,13 +80,15 @@ Public Class ucrInput
     End Sub
 
     Public Sub SetDefaultName()
-        If strDefaultType = "Column" AndAlso (ucrDataFrameSelector IsNot Nothing) Then
-            SetName(frmMain.clsRLink.GetDefaultColumnNames(strDefaultPrefix, ucrDataFrameSelector.cboAvailableDataFrames.Text))
-        ElseIf strDefaultType = "Model" Then
-        ElseIf strDefaultType = "Data Frame" Then
+        If strDefaultPrefix <> "" Then
+            If strDefaultType = "Column" AndAlso (ucrDataFrameSelector IsNot Nothing) Then
+                SetName(frmMain.clsRLink.GetDefaultColumnNames(strDefaultPrefix, ucrDataFrameSelector.cboAvailableDataFrames.Text))
+            ElseIf strDefaultType = "Model" Then
+            ElseIf strDefaultType = "Data Frame" Then
+            ElseIf strDefaultType = "Graph" Then
+            End If
         End If
     End Sub
-
 
 
     Public Sub SetValidationTypeAsNumeric(Optional dcmMin As Decimal = Decimal.MinValue, Optional bIncludeMin As Boolean = True, Optional dcmMax As Decimal = Decimal.MaxValue, Optional bIncludeMax As Boolean = True)

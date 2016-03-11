@@ -268,10 +268,15 @@ instat_obj$methods(add_model = function(model, model_name = paste("model",length
 )
 
 instat_obj$methods(get_model = function(model_name) {
-  if(missing(model_name)) stop("model_name is required")
+  if(missing(model_name)) stop("model_name must be given.")
   if(!is.character(model_name)) stop("name must be a character")
   if(!model_name %in% names(models)) stop(model_name, "not found in models")
   models[[model_name]]
+}
+)
+
+instat_obj$methods(get_model_names = function() {
+  return(names(models))
 }
 )
 
@@ -346,11 +351,19 @@ instat_obj$methods(insert_column_in_data = function(data_name, col_data =c(), st
 }
 )
 
-instat_obj$methods(move_column_in_data = function(data_name, col_name, col_number){
+# instat_obj$methods(move_columns_in_data = function(data_name, col_names = "", col_number){
+#   if(!is.character(data_name)) stop("data_name must be of type character")
+#   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+#   
+#   data_objects[[data_name]]$move_columns_in_data(col_names = col_names, col_number = col_number)
+# }
+# )
+
+instat_obj$methods(order_columns_in_data = function(data_name, col_order){
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[data_name]]$move_column_in_data(col_name = col_name, col_number = col_number)
+  data_objects[[data_name]]$order_columns_in_data(col_order = col_order)
 }
 )
 
