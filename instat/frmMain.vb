@@ -727,7 +727,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.Click
-        mnuFileSave_click(sender, e)
+        mnuFileSave_Click(sender, e)
     End Sub
 
     Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
@@ -882,3 +882,4 @@ Public Class frmMain
         dlgRandomSubset.ShowDialog()
     End Sub
 End Class
+
