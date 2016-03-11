@@ -281,7 +281,7 @@ Public Class frmMain
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuManageManipulateRowStat_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRowSummary.Click
+    Private Sub mnuManageManipulateRowStat_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnRowSummary.Click
         dlgRowStats.ShowDialog()
     End Sub
 
@@ -291,9 +291,7 @@ Public Class frmMain
         dlgRegressionSimple.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateSort.Click
-        dlgSort.ShowDialog()
-    End Sub
+
 
     Private Sub mnuEditFont_Click(sender As Object, e As EventArgs) Handles mnuEditFont.Click
         'dlgFont.ShowDialog()
@@ -319,7 +317,7 @@ Public Class frmMain
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
-    Private Sub TransformToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTransform.Click
+    Private Sub TransformToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnTransform.Click
         dlgTransform.ShowDialog()
     End Sub
 
@@ -327,7 +325,7 @@ Public Class frmMain
         dlgIndicatorVariable.ShowDialog()
     End Sub
 
-    Private Sub PolynomialsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageManipulatePolynomials.Click
+    Private Sub PolynomialsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnPolynomials.Click
         dlgPolynomials.ShowDialog()
     End Sub
 
@@ -343,7 +341,7 @@ Public Class frmMain
         dlgChiSquareTest.ShowDialog()
     End Sub
 
-    Private Sub RecodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRecode.Click
+    Private Sub RecodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnRecode.Click
         dlgRecode.ShowDialog()
     End Sub
 
@@ -655,7 +653,7 @@ Public Class frmMain
         dlgRemoveUnusedLabels.ShowDialog()
     End Sub
 
-    Private Sub mnuManageManipulateRank_Click(sender As Object, e As EventArgs) Handles mnuManageManipulateRank.Click
+    Private Sub mnuManageManipulateRank_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnRank.Click
         dlgRank.ShowDialog()
     End Sub
 
@@ -688,7 +686,7 @@ Public Class frmMain
         dlgBarAndPieChart.ShowDialog()
     End Sub
 
-    Private Sub mnuManagePermuteRows_Click(sender As Object, e As EventArgs) Handles mnuManagePermuteRows.Click
+    Private Sub mnuManagePermuteRows_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnPermuteRows.Click
         dlgPermuteRows.ShowDialog()
     End Sub
 
@@ -880,5 +878,9 @@ Public Class frmMain
 
     Private Sub mnuManageReshapeRandomSubst_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeRandomSubst.Click
         dlgRandomSubset.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
+        dlgSort.ShowDialog()
     End Sub
 End Class
