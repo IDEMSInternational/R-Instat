@@ -430,6 +430,12 @@
     <Compile Include="dlgUnusedLevels.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgUseGraph.Designer.vb">
+      <DependentUpon>dlgUseGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgUseGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgViewDescriptives.Designer.vb">
       <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
     </Compile>
@@ -1912,6 +1918,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.sw-KE.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUseGraph.fr-FR.resx">
+      <DependentUpon>dlgUseGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUseGraph.resx">
+      <DependentUpon>dlgUseGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUseGraph.sw-KE.resx">
+      <DependentUpon>dlgUseGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewDescriptives.fr-FR.resx">
       <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
