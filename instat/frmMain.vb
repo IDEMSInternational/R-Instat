@@ -887,4 +887,36 @@ Public Class frmMain
     Private Sub mnuManageAddColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnFilter.Click
         dlgRestrict.ShowDialog()
     End Sub
+
+    Private Sub mnuManageDescriptivesView_Click(sender As Object, e As EventArgs) Handles mnuManageDescriptivesView.Click
+        dlgViewDescriptives.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageDescriptivesReoder_Click(sender As Object, e As EventArgs) Handles mnuManageDescriptivesReoder.Click
+        dlgReoderDescriptives.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageDescriptivesRename_Click(sender As Object, e As EventArgs) Handles mnuManageDescriptivesRename.Click
+        dlgRenameDescriptive.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageDescriptivesDelete_Click(sender As Object, e As EventArgs) Handles mnuManageDescriptivesDelete.Click
+        dlgDeleteDescriptive.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageModelsView_Click(sender As Object, e As EventArgs) Handles mnuManageModelsView.Click
+        dlgViewModels.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageModelsReoder_Click(sender As Object, e As EventArgs) Handles mnuManageModelsReoder.Click
+        dlgReoderModels.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageModelsRename_Click(sender As Object, e As EventArgs) Handles mnuManageModelsRename.Click
+        dlgRenameModels.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageModelsDelete_Click(sender As Object, e As EventArgs) Handles mnuManageModelsDelete.Click
+        dlgDeleteModels.ShowDialog()
+    End Sub
 End Class
