@@ -919,4 +919,12 @@ Public Class frmMain
     Private Sub mnuManageModelsDelete_Click(sender As Object, e As EventArgs) Handles mnuManageModelsDelete.Click
         dlgDeleteModels.ShowDialog()
     End Sub
+
+    Private Sub mnuManageFactorContrasts_Click(sender As Object, e As EventArgs) Handles mnuManageFactorContrasts.Click
+        dlgContrasts.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageFactorMakeSheet_Click(sender As Object, e As EventArgs) Handles mnuManageFactorMakeSheet.Click
+        dlgMakeSheets.ShowDialog()
+    End Sub
 End Class
