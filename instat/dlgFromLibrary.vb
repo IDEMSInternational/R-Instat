@@ -63,6 +63,7 @@ Public Class dlgFromLibrary
         If chkChooseFrom.Checked Then
             grpR.Enabled = True
             lstCollection.Enabled = True
+            initialiseFunction()
         Else
             grpR.Enabled = False
             lstCollection.Enabled = False
@@ -125,17 +126,16 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub lstCollection_Click(sender As Object, e As EventArgs) Handles lstCollection.Click
-        ucrBase.clsRsyntax.SetFunction("data.frame")
         ucrBase.clsRsyntax.SetAssignTo(lstCollection.SelectedItems(0).SubItems(0).Text, strTempDataframe:=lstCollection.SelectedItems(0).SubItems(0).Text)
         ucrBase.clsRsyntax.AddParameter("x", lstCollection.SelectedItems(0).SubItems(0).Text)
     End Sub
 
+    Private Sub initialiseFunction()
+        ucrBase.clsRsyntax.SetFunction("as.data.frame")
+    End Sub
+
     Private Sub TestOkEnabled()
-
+        'ToDO
     End Sub
 
-    Private Sub lstCollection_DoubleClick(sender As Object, e As EventArgs) Handles lstCollection.DoubleClick
-        lstCollection_Click(sender, e)
-        ucrBase.cmdOk.PerformClick()
-    End Sub
 End Class
