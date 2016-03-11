@@ -357,7 +357,7 @@ Public Class frmMain
         dlgView.ShowDialog()
     End Sub
 
-    Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeSelect.Click
+    Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeSubset.Click
         dlgSelect.ShowDialog()
     End Sub
 
@@ -669,7 +669,7 @@ Public Class frmMain
         dlgConvertTo.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFileViewDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileViewDataMetadata.Click
+    Private Sub mnuManageDataFileSheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileSheetMetadata.Click
         frmMetaData.Visible = True
         frmMetaData.BringToFront()
     End Sub
@@ -725,7 +725,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.Click
-        mnuFileSave_click(sender, e)
+        mnuFileSave_Click(sender, e)
     End Sub
 
     Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
@@ -791,7 +791,7 @@ Public Class frmMain
             'insert into the dropdownitems
             mnuTbShowLast10.DropDownItems.Insert(mnuTbShowLast10.DropDownItems.Count - 1, clsItem)
         Next
-        sepStart.visible = True
+        sepStart.Visible = True
         sepEnd.Visible = True
     End Sub
 
@@ -864,7 +864,7 @@ Public Class frmMain
         dlgUnusedLevels.ShowDialog()
     End Sub
 
-    Private Sub mnuManageSheetRestrict_Click(sender As Object, e As EventArgs) Handles mnuManageSheetRestrict.Click
+    Private Sub mnuManageSheetRestrict_Click(sender As Object, e As EventArgs)
         dlgRestrict.ShowDialog()
     End Sub
 
@@ -882,5 +882,9 @@ Public Class frmMain
 
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
         dlgSort.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageAddColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnFilter.Click
+        dlgRestrict.ShowDialog()
     End Sub
 End Class
