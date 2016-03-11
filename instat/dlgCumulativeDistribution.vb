@@ -16,7 +16,33 @@
 
 Imports instat.Translations
 Public Class dlgCumulativeDistribution
+    Public bFirstLoad As Boolean = True
     Private Sub dlgCumulativeDistribution_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrVariatesreceiver.Selector = ucrCumDistSelector
+        ucrFactorReceiver.Selector = ucrCumDistSelector
+        ucrFactorReceiver.SetDataType("factor")
+        ucrVariatesreceiver.SetMeAsReceiver()
+
+        ucrBase.clsRsyntax.iCallType = 0
         autoTranslate(Me)
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub SetDefaults()
+        'set defaults here 
+
+    End Sub
+
+    Private Sub TestOkEnabled()
+        'TODO what enables ok
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class

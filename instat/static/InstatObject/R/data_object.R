@@ -452,33 +452,62 @@ data_obj$methods(insert_column_in_data = function(col_data =c(), start_pos = (le
 }
 )
 
-data_obj$methods(move_column_in_data = function(col_name = "", col_number) {
-  if (col_number <= 0) stop("You cannot move a column into the position less or equal to zero.")
-  if (col_number %% 1 != 0) stop("col_number value should be an integer.")
-  if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
+# data_obj$methods(move_columns_in_data = function(col_names = "", col_number) {
+#   if (col_number <= 0) stop("You cannot move a column into the position less or equal to zero.")
+#   if (col_number %% 1 != 0) stop("col_number value should be an integer.")
+#   if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
+#   
+#   for(col_name in col_names){
+#     if(!(col_name %in% names(data))){
+#       stop(col_name, " is not a column in ", get_metadata(data_name_label))
+#     }
+#   }
+#   
+#   old_names = names(data)
+#   dat1 <- data[(col_names)]
+#   names(dat1) <- col_names
+#   
+#   for(name in col_names){
+#     names(data)[names(data) == name] <<- .self$get_next_default_column_name(prefix = "to_delete")
+#   }
+#   
+#   if(col_number==1){
+#     data <<- cbind(dat1, data)
+#   }
+#   else if(col_number == ncol(data)){
+#     data <<- cbind(data,dat1)
+#   }
+#   else{
+#     data <<- cbind(data[1:(col_number)], dat1, data[(col_number+1):ncol(data)])
+#   }
+#   new_names = names(data)
+#   
+#   for(name in new_names){
+#     if(!(name %in% old_names)){
+#       data[,name]<<- NULL
+#     }
+#   }
+#   .self$append_to_changes(list(Move_col, col_names))
+# }
+# )
+
+
+data_obj$methods(order_columns_in_data = function(col_order) {
+  if (length(names(data)) != length(col_order)) stop("Columns to order should be same as columns in the data.")
   
-  if(!(col_name %in% names(data))){
-    stop(col_name, " is not a column in", get_metadata(data_name_label))
+  if(is.numeric(col_order)) {
+    if(! (identical(sort(col_order), sort(as.numeric(1:ncol(data)))))) {
+      stop("Invalid column order")
+    }
+  }else if(is.character(col_order)) {
+    if(! (identical(sort(col_order), sort(as.character(names(data)))))){
+      stop("Invalid column order")
+    }
+  }else{ 
+    stop("column order must be a numeric or character vector")
   }
-  
-  dat1 <- as.data.frame(data[,c(col_name)])
-  names(dat1) <- col_name
-  
-  names(data)[names(data) == col_name] <<- "to_delete"
-  
-  if(col_number==1){
-    data <<- cbind(dat1, data)
-  }
-  else if(col_number == ncol(data)){
-    data <<- cbind(data,dat1)
-  }
-  else{
-    data <<- cbind(data[1:(col_number)], dat1, data[(col_number+1):ncol(data)])
-  }
-  
-  data[,"to_delete"]<<- NULL
-  
-  .self$append_to_changes(list(Move_col, col_name))
+  set_data(data[ ,col_order])
+  .self$append_to_changes(list(Col_order, col_order))
 }
 )
 
@@ -626,6 +655,7 @@ Replaced_value="Replaced value"
 Removed_row="Removed row"
 Inserted_col = "Inserted column"
 Move_col = "Moved column"
+Col_order = "Order of columns"
 Inserted_row = "Inserted row"
 
 #meta data labels
