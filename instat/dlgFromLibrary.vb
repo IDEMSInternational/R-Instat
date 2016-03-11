@@ -131,10 +131,6 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrBase.clsRsyntax.GetScript <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+
     End Sub
 End Class
