@@ -670,8 +670,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataFileSheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileSheetMetadata.Click
-        frmMetaData.Visible = True
-        frmMetaData.BringToFront()
+        dlgSheetMetadata.ShowDialog()
     End Sub
 
     Private Sub mnuManageSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageSheetColumnMetadata.Click
@@ -926,5 +925,29 @@ Public Class frmMain
 
     Private Sub mnuManageFactorMakeSheet_Click(sender As Object, e As EventArgs) Handles mnuManageFactorMakeSheet.Click
         dlgMakeSheets.ShowDialog()
+    End Sub
+
+    Private Sub mnuGraphicsUseGraph_Click(sender As Object, e As EventArgs) Handles mnuGraphicsUseGraph.Click
+        dlgUseGraph.ShowDialog()
+    End Sub
+
+    Private Sub ManageDataCheck_Click(sender As Object, e As EventArgs) Handles ManageDataCheck.Click
+        dlgCheckData.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageTextSplit_Click(sender As Object, e As EventArgs) Handles mnuManageTextSplit.Click
+        dlgSplitText.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageTextCombine_Click(sender As Object, e As EventArgs) Handles mnuManageTextCombine.Click
+        dlgCombineText.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageTextMatch_Click(sender As Object, e As EventArgs) Handles mnuManageTextMatch.Click
+        dlgMatchText.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageTextDistance_Click(sender As Object, e As EventArgs) Handles mnuManageTextDistance.Click
+        dlgDistanceText.ShowDialog()
     End Sub
 End Class
