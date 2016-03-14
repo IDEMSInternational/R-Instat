@@ -451,3 +451,29 @@ instat_obj$methods(append_to_dataframe_metadata = function(data_name, property, 
   data_objects[[data_name]]$append_to_metadata(property, new_val)
 } 
 )
+
+
+instat_obj$methods(order_dataframes = function(data_frames_order) {
+  if(length(data_frames_order) != length(names(data_objects))) stop("number data frames to order should be equal to number of dataframes in the object")
+  for(name in names(data_objects)){
+    if(!(name %in% data_frames_order)){
+      stop(name, "is missing in data frames to order")
+    }
+  }
+  new_data_objects = list()
+  for(i in 1:length(names(data_objects))){
+     new_data_objects[[i]] = data_objects[[data_frames_order[i]]]
+  }
+  names(new_data_objects) <- data_frames_order
+  data_objects <<- new_data_objects
+  data_objects_changed <<- TRUE
+} 
+)
+
+instat_obj$methods(copy_columns = function(data_name, col_names = "") {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$copy_columns(col_names = col_names)
+} 
+)
