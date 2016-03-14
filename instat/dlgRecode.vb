@@ -26,10 +26,13 @@ Public Class dlgRecode
         ucrBase.iHelpTopicID = 37
         ucrBase.clsRsyntax.SetFunction("cut")
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
-        ucrSelectorNewColumnName.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
-        ucrSelectorNewColumnName.SetPrefix("Recode")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSelectorNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSelectorNewColumnName.cboColumnName.Text)
+        ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
 
+        ucrInputRecode.SetPrefix("Recode")
+        ucrInputRecode.SetItemsTypeAsColumns()
+        ucrInputRecode.SetDefaultTypeAsColumn()
+
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputRecode.GetText, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputRecode.GetText)
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
