@@ -3,7 +3,7 @@ Public Class dlgDeleteRows
     Public bFirstLoad As Boolean = True
     Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("subset")
-        ucrReceiverDeleteRows.Selector = ucrAddRemove
+        ucrReceiverDeleteRows.Selector = ucrSelectorForDeleteRows
         ucrReceiverDeleteRows.SetMeAsReceiver()
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 53
@@ -32,6 +32,7 @@ Public Class dlgDeleteRows
 
     End Sub
     Private Sub SetDefaults()
+        ucr.Reset()
 
     End Sub
 
