@@ -388,11 +388,6 @@ Public Class frmMain
     Private Sub FactorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuManageFactor.Click
         dlgfactor.ShowDialog()
     End Sub
-
-    Private Sub DeleteRowsToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgDeleteRows.ShowDialog()
-    End Sub
-
     Private Sub OrthogonalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOrthogonal.Click
         dlgOrthogonal.ShowDialog()
     End Sub
@@ -702,7 +697,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuManageSheetDeleteColumnsRows.Click
-        dlgDeleteColumn.ShowDialog()
+        dlgDeleteRowsOrColums.ShowDialog()
     End Sub
 
     Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles EditLastDialogueToolStrip.Click
