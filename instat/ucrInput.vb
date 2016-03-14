@@ -310,4 +310,8 @@ Public Class ucrInput
             SetDefaultName()
         End If
     End Sub
+
+    Public Overridable Function IsEmpty() As Boolean
+        Return True
+    End Function
 End Class
