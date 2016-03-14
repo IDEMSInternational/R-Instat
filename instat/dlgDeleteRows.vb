@@ -1,5 +1,6 @@
 ﻿Imports instat.Translations
 Public Class dlgDeleteRows
+    Public bFirstLoad As Boolean = True
     Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("subset")
         ucrBase.clsRsyntax.iCallType = 1
@@ -7,6 +8,18 @@ Public Class dlgDeleteRows
         ucrReceiverDeleteRows.SetMeAsReceiver()
         autoTranslate(Me)
 
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
+    End Sub
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
     Private Sub ucrReceiverDeleteRows_Enter(sender As Object, e As EventArgs) Handles ucrReceiverDeleteRows.Enter
         ucrReceiverDeleteRows.SetMeAsReceiver()
