@@ -654,7 +654,7 @@ data_obj$methods(copy_columns = function(col_names = "") {
     names(dat1)[names(dat1) == name] <- .self$get_next_default_column_name(prefix = paste(name, "copy", sep = "_" ) )
   }
   
-  data <<- cbind(data, dat1)
+  set_data(cbind(data, dat1))
   .self$append_to_changes(list(Copy_cols, col_names))
 }
 )
