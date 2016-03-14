@@ -23,7 +23,6 @@ Partial Class dlgDeleteRowsOrColums
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lstRowsToDelete = New System.Windows.Forms.ListBox()
         Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.ucrSelectorForDeleteRows = New instat.ucrDataFrame()
         Me.rdoColumns = New System.Windows.Forms.RadioButton()
@@ -42,14 +41,6 @@ Partial Class dlgDeleteRowsOrColums
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(404, 55)
         Me.ucrBase.TabIndex = 5
-        '
-        'lstRowsToDelete
-        '
-        Me.lstRowsToDelete.FormattingEnabled = True
-        Me.lstRowsToDelete.Location = New System.Drawing.Point(277, 129)
-        Me.lstRowsToDelete.Name = "lstRowsToDelete"
-        Me.lstRowsToDelete.Size = New System.Drawing.Size(134, 56)
-        Me.lstRowsToDelete.TabIndex = 4
         '
         'lblNumberofRows
         '
@@ -157,7 +148,6 @@ Partial Class dlgDeleteRowsOrColums
         Me.Controls.Add(Me.rdoColumns)
         Me.Controls.Add(Me.ucrSelectorForDeleteRows)
         Me.Controls.Add(Me.lblNumberofRows)
-        Me.Controls.Add(Me.lstRowsToDelete)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgDeleteRowsOrColums"
@@ -170,7 +160,6 @@ Partial Class dlgDeleteRowsOrColums
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lstRowsToDelete As ListBox
     Friend WithEvents lblNumberofRows As Label
     Friend WithEvents ucrSelectorForDeleteRows As ucrDataFrame
     Friend WithEvents rdoColumns As RadioButton
