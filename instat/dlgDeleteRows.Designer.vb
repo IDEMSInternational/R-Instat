@@ -23,30 +23,23 @@ Partial Class dlgDeleteRows
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverDeleteRows = New instat.ucrReceiverMultiple()
         Me.lstRowsToDelete = New System.Windows.Forms.ListBox()
         Me.lblRowsToDelete = New System.Windows.Forms.Label()
         Me.lblColumnsFromWhichToDeleteTheseRows = New System.Windows.Forms.Label()
+        Me.ucrSelectorForDeleteRows = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(15, 244)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 277)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(404, 55)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrAddRemove
-        '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(12, 12)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
-        Me.ucrAddRemove.TabIndex = 1
+        Me.ucrBase.TabIndex = 5
         '
         'ucrReceiverDeleteRows
         '
-        Me.ucrReceiverDeleteRows.Location = New System.Drawing.Point(232, 33)
+        Me.ucrReceiverDeleteRows.Location = New System.Drawing.Point(286, 42)
         Me.ucrReceiverDeleteRows.Name = "ucrReceiverDeleteRows"
         Me.ucrReceiverDeleteRows.Selector = Nothing
         Me.ucrReceiverDeleteRows.Size = New System.Drawing.Size(121, 138)
@@ -55,40 +48,47 @@ Partial Class dlgDeleteRows
         'lstRowsToDelete
         '
         Me.lstRowsToDelete.FormattingEnabled = True
-        Me.lstRowsToDelete.Location = New System.Drawing.Point(12, 183)
+        Me.lstRowsToDelete.Location = New System.Drawing.Point(12, 215)
         Me.lstRowsToDelete.Name = "lstRowsToDelete"
         Me.lstRowsToDelete.Size = New System.Drawing.Size(226, 56)
-        Me.lstRowsToDelete.TabIndex = 3
+        Me.lstRowsToDelete.TabIndex = 4
         '
         'lblRowsToDelete
         '
         Me.lblRowsToDelete.AutoSize = True
-        Me.lblRowsToDelete.Location = New System.Drawing.Point(12, 158)
+        Me.lblRowsToDelete.Location = New System.Drawing.Point(12, 199)
         Me.lblRowsToDelete.Name = "lblRowsToDelete"
         Me.lblRowsToDelete.Size = New System.Drawing.Size(78, 13)
-        Me.lblRowsToDelete.TabIndex = 4
+        Me.lblRowsToDelete.TabIndex = 3
         Me.lblRowsToDelete.Tag = "Rows_to_delete"
         Me.lblRowsToDelete.Text = "Rows to delete"
         '
         'lblColumnsFromWhichToDeleteTheseRows
         '
         Me.lblColumnsFromWhichToDeleteTheseRows.AutoSize = True
-        Me.lblColumnsFromWhichToDeleteTheseRows.Location = New System.Drawing.Point(229, 12)
+        Me.lblColumnsFromWhichToDeleteTheseRows.Location = New System.Drawing.Point(293, 13)
         Me.lblColumnsFromWhichToDeleteTheseRows.Name = "lblColumnsFromWhichToDeleteTheseRows"
         Me.lblColumnsFromWhichToDeleteTheseRows.Size = New System.Drawing.Size(50, 13)
-        Me.lblColumnsFromWhichToDeleteTheseRows.TabIndex = 5
+        Me.lblColumnsFromWhichToDeleteTheseRows.TabIndex = 1
         Me.lblColumnsFromWhichToDeleteTheseRows.Text = "Variables"
+        '
+        'ucrSelectorForDeleteRows
+        '
+        Me.ucrSelectorForDeleteRows.Location = New System.Drawing.Point(12, 12)
+        Me.ucrSelectorForDeleteRows.Name = "ucrSelectorForDeleteRows"
+        Me.ucrSelectorForDeleteRows.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorForDeleteRows.TabIndex = 0
         '
         'dlgDeleteRows
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 303)
+        Me.ClientSize = New System.Drawing.Size(432, 344)
+        Me.Controls.Add(Me.ucrSelectorForDeleteRows)
         Me.Controls.Add(Me.lblColumnsFromWhichToDeleteTheseRows)
         Me.Controls.Add(Me.lblRowsToDelete)
         Me.Controls.Add(Me.lstRowsToDelete)
         Me.Controls.Add(Me.ucrReceiverDeleteRows)
-        Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgDeleteRows"
@@ -101,9 +101,9 @@ Partial Class dlgDeleteRows
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
     Friend WithEvents ucrReceiverDeleteRows As ucrReceiverMultiple
     Friend WithEvents lstRowsToDelete As ListBox
     Friend WithEvents lblRowsToDelete As Label
     Friend WithEvents lblColumnsFromWhichToDeleteTheseRows As Label
+    Friend WithEvents ucrSelectorForDeleteRows As ucrSelectorByDataFrameAddRemove
 End Class
