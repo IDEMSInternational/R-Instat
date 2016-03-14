@@ -19,7 +19,7 @@ Public Class dlgReorderLevels
     Public bFirstLoad As Boolean = True
     Private Sub dlgReorderLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        autoTranslate(Me)
+
 
         If bFirstLoad Then
             SetDefaults()
