@@ -48,6 +48,7 @@ Partial Class dlgDeleteRows
         '
         Me.ucrReceiverDeleteRows.Location = New System.Drawing.Point(232, 33)
         Me.ucrReceiverDeleteRows.Name = "ucrReceiverDeleteRows"
+        Me.ucrReceiverDeleteRows.Selector = Nothing
         Me.ucrReceiverDeleteRows.Size = New System.Drawing.Size(121, 138)
         Me.ucrReceiverDeleteRows.TabIndex = 2
         '

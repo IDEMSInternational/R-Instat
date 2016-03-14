@@ -3,16 +3,33 @@ Public Class dlgDeleteRows
     Public bFirstLoad As Boolean = True
     Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("subset")
-        ucrBase.clsRsyntax.iCallType = 1
         ucrReceiverDeleteRows.Selector = ucrAddRemove
         ucrReceiverDeleteRows.SetMeAsReceiver()
         autoTranslate(Me)
-
+        ucrBase.iHelpTopicID = 53
 
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
+        TestOKEnabled()
+
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ucrReceiverDeleteRows.IsEmpty() = True And lstRowsToDelete IsNot Nothing Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+
+        End If
+
     End Sub
     Private Sub SetDefaults()
 
@@ -24,10 +41,20 @@ Public Class dlgDeleteRows
     Private Sub ucrReceiverDeleteRows_Enter(sender As Object, e As EventArgs) Handles ucrReceiverDeleteRows.Enter
         ucrReceiverDeleteRows.SetMeAsReceiver()
     End Sub
-    Private Sub ucrReceiverDeleteColumns_Leave(sender As Object, e As EventArgs) Handles ucrReceiverDeleteRows.Leave
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverDeleteRows.GetVariables())
+    Private Sub ucrReceiverDeleteColumns_SelectionChanged() Handles ucrReceiverDeleteRows.SelectionChanged
+        If Not ucrReceiverDeleteRows.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverDeleteRows.GetVariables())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("x")
+        End If
     End Sub
     Private Sub lstRowsToDelete_Leave(sender As Object, e As EventArgs) Handles lstRowsToDelete.Leave
-        ucrBase.clsRsyntax.AddParameter("select", Chr(34) & lstRowsToDelete.Text & Chr(34))
+        If Not lstRowsToDelete IsNot Nothing Then
+            ucrBase.clsRsyntax.AddParameter("select", Chr(34) & lstRowsToDelete.Text & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("select")
+        End If
     End Sub
+
+
 End Class
