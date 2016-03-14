@@ -21,7 +21,7 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub TestOKEnabled()
-        If lstRowsToDelete IsNot Nothing Or ucrReceiverForColumnsToDelete.IsEmpty = False Then
+        If ucrInputRowsToDelete IsNot Nothing Or ucrReceiverForColumnsToDelete.IsEmpty = False Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -61,8 +61,8 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub ucrinputRowsToDelete_Leave(sender As Object, e As EventArgs) Handles ucrInputRowsToDelete.Leave
-        If Not lstRowsToDelete IsNot Nothing Then
-            ucrBase.clsRsyntax.AddParameter("select", Chr(34) & lstRowsToDelete.Text & Chr(34))
+        If Not ucrInputRowsToDelete IsNot Nothing Then
+            ucrBase.clsRsyntax.AddParameter("select", Chr(34) & ucrInputRowsToDelete.Text & Chr(34))
         Else
             ucrBase.clsRsyntax.RemoveParameter("select")
         End If
@@ -80,8 +80,9 @@ Public Class dlgDeleteRowsOrColums
             ucrInputRowsToDelete.Visible = True
             ucrSelectorForDeleteColumns.Visible = False
             lblColumnsToDelete.Visible = False
-            ucrReceiverForColumnsToDelete.Visible = True
-        Else
+            ucrReceiverForColumnsToDelete.Visible = False
+        End If
+        If rdoColumns.Checked = True Then
             ucrSelectorForDeleteRows.Reset()
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
             ucrSelectorForDeleteRows.Visible = False
@@ -89,9 +90,11 @@ Public Class dlgDeleteRowsOrColums
             lblNumberofRows.Visible = False
             lblRowsToDelete.Visible = False
             ucrInputRowsToDelete.Visible = False
-            ucrSelectorForDeleteColumns.Visible = False
-            lblColumnsToDelete.Visible = False
-            ucrReceiverForColumnsToDelete.Visible = False
+            ucrSelectorForDeleteColumns.Visible = True
+            lblColumnsToDelete.Visible = True
+            ucrReceiverForColumnsToDelete.Visible = True
+            ucrReceiverForColumnsToDelete.Selector = ucrSelectorForDeleteColumns
+            ucrReceiverForColumnsToDelete.SetMeAsReceiver()
 
         End If
 
