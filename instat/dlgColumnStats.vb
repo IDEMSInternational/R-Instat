@@ -17,12 +17,25 @@
 
 Imports instat.Translations
 Public Class dlgColumnStats
+    Public bFirstLoad As Boolean = True
     Private Sub dlgColumnStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         ucrReceiverMultiple.Selector = ucrAddRemove
         ucrReceiverMultiple.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("colStats")
         ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.iHelpTopicID = 64
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
+    End Sub
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 
     Private Sub ucrReceiverMultiple_Leave(sender As Object, e As EventArgs) Handles ucrReceiverMultiple.Leave

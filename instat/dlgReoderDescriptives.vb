@@ -15,7 +15,29 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgReoderDescriptives
+    Public bFirstLoad As Boolean = True
     Private Sub dlgReoderDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+        'Checks if Ok can be enabled.
+        TestOKEnabled()
+    End Sub
+    Private Sub ReopenDialog()
+
+    End Sub
+    Private Sub TestOKEnabled()
+
+    End Sub
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class
