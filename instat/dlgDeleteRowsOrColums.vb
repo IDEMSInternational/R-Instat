@@ -46,7 +46,7 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub ucrSelectorForDeleteRows_DataFrameChanged() Handles ucrSelectorForDeleteRows.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrSelectorForDeleteColumns.ucrAvailableDataFrames.clsCurrDataFrame)
+        ucrBase.clsRsyntax.AddParameter("data_name", clsRFunctionParameter:=ucrSelectorForDeleteColumns.ucrAvailableDataFrames.clsCurrDataFrame)
 
 
     End Sub
@@ -62,7 +62,7 @@ Public Class dlgDeleteRowsOrColums
 
     Private Sub ucrinputRowsToDelete_Leave(sender As Object, e As EventArgs) Handles ucrInputRowsToDelete.Leave
         If Not ucrInputRowsToDelete IsNot Nothing Then
-            ucrBase.clsRsyntax.AddParameter("select", Chr(34) & ucrInputRowsToDelete.Text & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("select", Chr(34) & ucrInputRowsToDelete.GetText & Chr(34))
         Else
             ucrBase.clsRsyntax.RemoveParameter("select")
         End If
@@ -72,7 +72,7 @@ Public Class dlgDeleteRowsOrColums
     Private Sub rdoColumnsRows_CheckedChanged(sender As Object, e As EventArgs) Handles rdoColumns.CheckedChanged, rdoRows.CheckedChanged
         If rdoRows.Checked = True Then
             ucrSelectorForDeleteRows.Reset()
-            ucrBase.clsRsyntax.SetFunction("subset")
+            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
             ucrSelectorForDeleteRows.Visible = True
             ucrDataFrameLengthForDeleteRows.Visible = True
             lblNumberofRows.Visible = True
