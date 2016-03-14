@@ -274,12 +274,6 @@
     <Compile Include="dlgCumulativeDistribution.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDeleteColumn.Designer.vb">
-      <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDeleteColumn.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgDeleteDescriptive.Designer.vb">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
     </Compile>
@@ -1699,15 +1693,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.sw-KE.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteColumn.fr-FR.resx">
-      <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteColumn.resx">
-      <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteColumn.sw-KE.resx">
-      <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
