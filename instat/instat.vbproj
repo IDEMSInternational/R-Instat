@@ -370,12 +370,6 @@
     <Compile Include="dlgRandomSubset.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgReferenceLevels.Designer.vb">
-      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgReferenceLevels.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgRenameDescriptive.Designer.vb">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
     </Compile>
@@ -1849,15 +1843,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubset.sw-KE.resx">
       <DependentUpon>dlgRandomSubset.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgReferenceLevels.fr-FR.resx">
-      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgReferenceLevels.resx">
-      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgReferenceLevels.sw-KE.resx">
-      <DependentUpon>dlgReferenceLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDescriptive.fr-FR.resx">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
