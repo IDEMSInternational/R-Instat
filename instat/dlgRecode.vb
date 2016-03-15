@@ -19,16 +19,12 @@ Imports instat.Translations
 Public Class dlgRecode
     Public bFirstLoad As Boolean = True
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         autoTranslate(Me)
-        ucrInputRecode.SetPrefix("Recode")
-        ucrInputRecode.SetItemsTypeAsColumns()
-        ucrInputRecode.SetDefaultTypeAsColumn()
-        ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputRecode.GetText, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputRecode.GetText)
         ucrReceiverRecode.SetDataType("numeric")
         ucrBase.clsRsyntax.SetFunction("cut")
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
-
+        ucrBase.iHelpTopicID = 37
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -40,15 +36,13 @@ Public Class dlgRecode
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
+
         ucrReceiverRecode.Selector = ucrSelectorForRecode
-        ucrReceiverRecode.SetMeAsReceiver()
         ucrMultipleNumericRecode.bIsNumericInput = True
-        ucrBase.iHelpTopicID = 37
-
+        ucrInputRecode.SetPrefix("Recode")
+        ucrInputRecode.SetItemsTypeAsColumns()
+        ucrInputRecode.SetDefaultTypeAsColumn()
         ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
-
-
-
 
     End Sub
 
@@ -57,7 +51,9 @@ Public Class dlgRecode
         ucrMultipleLabels.Visible = False
         rdoRight.Checked = True
         ucrSelectorForRecode.Reset()
+        ucrSelectorForRecode.Focus()
         ucrMultipleNumericRecode.txtNumericItems.ResetText()
+        ucrReceiverRecode.SetMeAsReceiver()
     End Sub
 
     Private Sub ReopenDialog()
@@ -155,5 +151,9 @@ Public Class dlgRecode
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub ucrInputRecode_Namechanged() Handles ucrInputRecode.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputRecode.GetText, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputRecode.GetText)
     End Sub
 End Class
