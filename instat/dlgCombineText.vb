@@ -19,7 +19,7 @@ Public Class dlgCombineText
     Private Sub dlgCombineText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
-        autoTranslate(Me)
+
 
         If bFirstLoad Then
             SetDefaults()
