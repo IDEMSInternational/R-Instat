@@ -20,27 +20,36 @@ Public Class dlgRecode
     Public bFirstLoad As Boolean = True
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrReceiverRecode.Selector = ucrSelectorForRecode
-        ucrReceiverRecode.SetMeAsReceiver()
-        ucrMultipleNumericRecode.bIsNumericInput = True
-        ucrBase.iHelpTopicID = 37
-        ucrBase.clsRsyntax.SetFunction("cut")
-        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
-        ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
-
         ucrInputRecode.SetPrefix("Recode")
         ucrInputRecode.SetItemsTypeAsColumns()
         ucrInputRecode.SetDefaultTypeAsColumn()
-
+        ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputRecode.GetText, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputRecode.GetText)
+        ucrReceiverRecode.SetDataType("numeric")
+        ucrBase.clsRsyntax.SetFunction("cut")
+        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
+
+
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
         End If
-        'Checks if Ok can be enabled.
         TestOKEnabled()
+    End Sub
+    Private Sub InitialiseDialog()
+        ucrReceiverRecode.Selector = ucrSelectorForRecode
+        ucrReceiverRecode.SetMeAsReceiver()
+        ucrMultipleNumericRecode.bIsNumericInput = True
+        ucrBase.iHelpTopicID = 37
+
+        ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
+
+
+
+
     End Sub
 
     Private Sub SetDefaults()
@@ -55,7 +64,7 @@ Public Class dlgRecode
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverRecode.IsEmpty() = False And ucrMultipleNumericRecode.txtNumericItems.Text <> " " Then
+        If ucrReceiverRecode.IsEmpty() = False And ucrMultipleNumericReco Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
