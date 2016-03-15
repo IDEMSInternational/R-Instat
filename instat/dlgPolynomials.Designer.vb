@@ -113,13 +113,14 @@ Partial Class dlgPolynomials
         'nudDegree
         '
         Me.nudDegree.AllowDrop = True
+        Me.nudDegree.AutoSize = True
         Me.nudDegree.Location = New System.Drawing.Point(335, 131)
         Me.nudDegree.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.nudDegree.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.nudDegree.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudDegree.Name = "nudDegree"
         Me.nudDegree.Size = New System.Drawing.Size(44, 20)
         Me.nudDegree.TabIndex = 18
-        Me.nudDegree.Value = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.nudDegree.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblNewColumnName
         '
