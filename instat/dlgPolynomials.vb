@@ -20,15 +20,14 @@ Public Class dlgPolynomials
     Private Sub dlgPolynomials_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
-        nudDegree.Value = 1
+
         rdoSimple.Checked = True
         ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Text)
-
+        ucrBase.clsRsyntax.SetFunction("poly")
         ucrInputPolynomial.SetPrefix("Polynomial")
         ucrInputPolynomial.SetItemsTypeAsColumns()
         ucrInputPolynomial.SetDefaultTypeAsColumn()
         ucrInputPolynomial.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
-
         clsCentredOptionFunc.SetRCommand("scale")
         clsCentredOptionFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
         clsCentredOptionFunc.AddParameter("raw", "TRUE")
@@ -37,11 +36,17 @@ Public Class dlgPolynomials
         If bFirstLoad Then
             InitializeDialog()
             SetDefaults()
+
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         TestOKEnabled()
     End Sub
 
+    Private Sub ReopenDialog()
+
+    End Sub
     Private Sub TestOKEnabled()
         If ucrReceiverPolynomial.IsEmpty() = False And nudDegree.Value >= 2 Then
             ucrBase.OKEnabled(True)
@@ -51,6 +56,8 @@ Public Class dlgPolynomials
 
     End Sub
     Private Sub SetDefaults()
+        nudDegree.Value = 2
+        rdoSimple.Checked = True
 
     End Sub
 
@@ -59,9 +66,10 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub InitializeDialog()
-        ucrBase.clsRsyntax.SetFunction("poly")
+
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
         ucrReceiverPolynomial.SetMeAsReceiver()
+        ucrReceiverPolynomial.SetDataType("numeric")
     End Sub
 
 
@@ -69,33 +77,52 @@ Public Class dlgPolynomials
 
     Private Sub ucrReceiverPolynomial_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverPolynomial.SelectionChanged
         If Not ucrReceiverPolynomial.IsEmpty Then
+
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
             clsCentredOptionFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
         Else
             ucrBase.clsRsyntax.RemoveParameter("x")
         End If
         TestOKEnabled()
+
     End Sub
 
     Private Sub grpType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSimple.CheckedChanged, rdoCentered.CheckedChanged, rdoOrthogonal.CheckedChanged
         If rdoSimple.Checked Then
             ucrBase.clsRsyntax.AddParameter("raw", "TRUE")
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
+
+
         ElseIf rdoOrthogonal.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("raw", "FALSE")
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
+
+        ElseIf rdoCentered.Checked = True Then
+            clsCentredOptionFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
+            clsCentredOptionFunc.AddParameter("center", "True")
+            clsCentredOptionFunc.AddParameter("scale", "FALSE")
+            ucrBase.clsRsyntax.AddParameter("raw", "TRUE")
         Else
+
             ucrBase.clsRsyntax.RemoveParameter("raw")
             clsCentredOptionFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
+
         End If
 
     End Sub
 
     Private Sub nudDegree_ValueChanged(sender As Object, e As EventArgs) Handles nudDegree.ValueChanged
-        If nudDegree.Value >= 1 Then
-            ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Text)
+        If nudDegree.Value >= 2 Then
+            If rdoSimple.Checked Then
+                ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Value)
+            ElseIf rdoOrthogonal.Checked Then
+                ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Value)
+            ElseIf rdoCentered.Checked Then
+                ucrBase.clsRsyntax.AddParameter("degree", "1")
+            End If
         Else
             ucrBase.clsRsyntax.RemoveParameter("degree")
+
         End If
         TestOKEnabled()
     End Sub
