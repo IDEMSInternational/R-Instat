@@ -21,9 +21,7 @@ Public Class dlgRecode
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         autoTranslate(Me)
-        ucrReceiverRecode.SetDataType("numeric")
-        ucrBase.clsRsyntax.SetFunction("cut")
-        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
+
         ucrBase.iHelpTopicID = 37
 
         If bFirstLoad Then
@@ -43,6 +41,9 @@ Public Class dlgRecode
         ucrInputRecode.SetItemsTypeAsColumns()
         ucrInputRecode.SetDefaultTypeAsColumn()
         ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
+        ucrReceiverRecode.SetDataType("numeric")
+        ucrBase.clsRsyntax.SetFunction("cut")
+        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
 
     End Sub
 
@@ -54,6 +55,8 @@ Public Class dlgRecode
         ucrSelectorForRecode.Focus()
         ucrMultipleNumericRecode.txtNumericItems.ResetText()
         ucrReceiverRecode.SetMeAsReceiver()
+        ucrMultipleLabels.txtNumericItems.ResetText()
+        ucrInputRecode.cboInput.ResetText()
     End Sub
 
     Private Sub ReopenDialog()
@@ -79,7 +82,6 @@ Public Class dlgRecode
     End Sub
 
     Private Sub ucrMultipleNumericRecode_Leave(sender As Object, e As EventArgs) Handles ucrMultipleNumericRecode.Leave
-
         If ucrMultipleNumericRecode.clsNumericList.clsParameters.Count = 1 Then
             If ucrMultipleNumericRecode.txtNumericItems.Text < 2 Then
                 MsgBox("If break points is a single number, it specify a number of intervals > 1.", vbOKOnly, "Validation Error")
