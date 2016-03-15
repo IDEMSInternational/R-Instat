@@ -16,12 +16,23 @@
 
 Imports instat.Translations
 Public Class dlgDuplicateColumns
+    Public bFirstLoad As Boolean = True
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
-        'sets the function
-        ucrBase.clsRsyntax.SetFunction("copy_columns")
+        If bFirstLoad Then
+            initialiseDialog()
+            bFirstLoad = False
+        End If
         'checks OkEnabled
         TestOKEnabled()
+    End Sub
+
+    Private Sub initialiseDialog()
+        'sets the function
+        ucrBase.clsRsyntax.SetFunction("copy_columns")
+        ucrReceiveColumns.Selector = ucrSelectColumnstoCopy
+        ucrReceiveColumns.SetMeAsReceiver()
+        'ucrBase.iHelpTopicID = 
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
