@@ -106,6 +106,13 @@ Public Class dlgConvertColumnsToFactors
     End Sub
 
     Private Sub rdoByLevelsAndrdoByOrdinals_CheckedChanged(sender As Object, e As EventArgs) Handles rdoByLevels.CheckedChanged, rdoByOrdinals.CheckedChanged
-        ucrBase.clsRsyntax.AddParameter("factor_numeric")
+        If rdoByLevels.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("factor_numeric", Chr(34) & "by_levels" & Chr(34))
+        ElseIf rdoByOrdinals.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("factor_numeric", Chr(34) & "by_ordinals" & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("factor_numeric")
+        End If
+
     End Sub
 End Class
