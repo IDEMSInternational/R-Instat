@@ -14,9 +14,13 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class dlgLabels
-    Public bFirstLoad As Boolean = True
-    Private Sub dlgLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class dlgSplitText
+    Private bFirstLoad As Boolean = True
+    Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+
+        autoTranslate(Me)
+
         autoTranslate(Me)
 
         If bFirstLoad Then

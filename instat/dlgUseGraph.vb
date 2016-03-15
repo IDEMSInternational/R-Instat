@@ -14,13 +14,9 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class dlgDeleteSheet
-    Public bFirstLoad As Boolean = True
-    Private Sub dlgDeleteSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ucrBase.iHelpTopicID = 63
-        'set the function
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
-        ucrDataFrameToDelete.Focus()
+Public Class dlgUseGraph
+    Private bFirstLoad As Boolean = True
+    Private Sub dlgUseGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
         If bFirstLoad Then
@@ -28,15 +24,12 @@ Public Class dlgDeleteSheet
             bFirstLoad = False
         End If
     End Sub
+
     Private Sub SetDefaults()
 
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub ucrDataFrameToDelete_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameToDelete.Leave
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameToDelete.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 End Class
