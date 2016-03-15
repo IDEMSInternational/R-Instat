@@ -274,12 +274,6 @@
     <Compile Include="dlgCumulativeDistribution.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDeleteColumn.Designer.vb">
-      <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDeleteColumn.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgDeleteDescriptive.Designer.vb">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
     </Compile>
@@ -628,10 +622,10 @@
     <Compile Include="dlgDayMonth.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDeleteRows.Designer.vb">
-      <DependentUpon>dlgDeleteRows.vb</DependentUpon>
+    <Compile Include="dlgDeleteRowsOrColums.Designer.vb">
+      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDeleteRows.vb">
+    <Compile Include="dlgDeleteRowsOrColums.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDescriptiveStatistics.Designer.vb">
@@ -1700,15 +1694,6 @@
     <EmbeddedResource Include="dlgCumulativeDistribution.sw-KE.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteColumn.fr-FR.resx">
-      <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteColumn.resx">
-      <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteColumn.sw-KE.resx">
-      <DependentUpon>dlgDeleteColumn.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
     </EmbeddedResource>
@@ -2223,14 +2208,14 @@
     <EmbeddedResource Include="dlgDayMonth.sw-KE.resx">
       <DependentUpon>dlgDayMonth.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteRows.fr-FR.resx">
-      <DependentUpon>dlgDeleteRows.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteRowsOrColums.fr-FR.resx">
+      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteRows.resx">
-      <DependentUpon>dlgDeleteRows.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteRowsOrColums.resx">
+      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteRows.sw-KE.resx">
-      <DependentUpon>dlgDeleteRows.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteRowsOrColums.sw-KE.resx">
+      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDescriptiveStatistics.fr-FR.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
