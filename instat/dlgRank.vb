@@ -21,24 +21,27 @@ Public Class dlgRank
 
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("rank")
-        ucrBase.iHelpTopicID = 25
-        ucrNewColumnNameSelector.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
-        ucrNewColumnNameSelector.SetPrefix("Rank")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
-
-
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
         End If
-
         'Checks if Ok can be enabled.
-
         TestOKEnabled()
 
+    End Sub
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction("rank")
+        ucrReceiverRank.Selector = ucrSelectorForRank
+        ucrReceiverRank.SetDataType("numeric")
+        ucrBase.iHelpTopicID = 25
+        ucrInputColName.SetPrefix("Rank")
+        ucrInputColName.SetItemsTypeAsColumns()
+        ucrInputColName.SetDefaultTypeAsColumn()
+        ucrInputColName.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
     End Sub
 
     'This runs on load and after anything is changed on the dialog.
@@ -96,18 +99,15 @@ Public Class dlgRank
     'When the reset button is clicked, set the defaults again
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
     End Sub
 
     'Use this event to see when something has changed in a receiver
     Private Sub ucrReceiverRank_SelectionChanged() Handles ucrReceiverRank.SelectionChanged
         If Not ucrReceiverRank.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", ucrReceiverRank.GetVariableNames(False))
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRank.GetVariables())
         Else
             ucrBase.clsRsyntax.RemoveParameter("x")
         End If
-
-
         TestOKEnabled()
     End Sub
 
@@ -131,4 +131,7 @@ Public Class dlgRank
         End If
     End Sub
 
+    Private Sub ucrInputColName_NameChnahed() Handles ucrInputColName.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
+    End Sub
 End Class
