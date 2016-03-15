@@ -29,7 +29,7 @@ Public Class dlgDuplicateColumns
 
     Private Sub initialiseDialog()
         'sets the function
-        ucrBase.clsRsyntax.SetFunction("copy_columns")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$copy_columns")
         ucrReceiveColumns.Selector = ucrSelectColumnstoCopy
         ucrReceiveColumns.SetMeAsReceiver()
         'ucrBase.iHelpTopicID = 
