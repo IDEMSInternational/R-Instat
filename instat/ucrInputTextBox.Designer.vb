@@ -27,9 +27,10 @@ Partial Class ucrInputTextBox
         '
         'txtInput
         '
-        Me.txtInput.Location = New System.Drawing.Point(0, 3)
+        Me.txtInput.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtInput.Location = New System.Drawing.Point(0, 0)
         Me.txtInput.Name = "txtInput"
-        Me.txtInput.Size = New System.Drawing.Size(139, 20)
+        Me.txtInput.Size = New System.Drawing.Size(142, 20)
         Me.txtInput.TabIndex = 0
         '
         'ucrInputTextBox
@@ -38,6 +39,7 @@ Partial Class ucrInputTextBox
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.txtInput)
         Me.Name = "ucrInputTextBox"
+        Me.Size = New System.Drawing.Size(142, 21)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

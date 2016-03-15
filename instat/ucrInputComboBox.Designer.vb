@@ -27,10 +27,11 @@ Partial Class ucrInputComboBox
         '
         'cboInput
         '
+        Me.cboInput.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cboInput.FormattingEnabled = True
         Me.cboInput.Location = New System.Drawing.Point(0, 0)
         Me.cboInput.Name = "cboInput"
-        Me.cboInput.Size = New System.Drawing.Size(121, 21)
+        Me.cboInput.Size = New System.Drawing.Size(137, 21)
         Me.cboInput.TabIndex = 0
         '
         'ucrInputComboBox
@@ -39,6 +40,7 @@ Partial Class ucrInputComboBox
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cboInput)
         Me.Name = "ucrInputComboBox"
+        Me.Size = New System.Drawing.Size(137, 25)
         Me.ResumeLayout(False)
 
     End Sub

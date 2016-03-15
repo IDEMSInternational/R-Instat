@@ -31,7 +31,6 @@ Public Class dlgRegressionSimple
         End If
 
         autoTranslate(Me)
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -52,8 +51,11 @@ Public Class dlgRegressionSimple
         ucrSelectorSimpleReg.Reset()
         ucrResponse.SetMeAsReceiver()
         ucrSelectorSimpleReg.Focus()
-        chkModelName.Checked = True
-        ucrModelName.SetName("temp_model")
+        chkSaveModel.Checked = True
+        ucrModelName.Visible = True
+        'TODO get this to be getting a default name e.g. reg1, reg2, etc.
+        '     will be possible with new textbox user control
+        ucrModelName.SetName("reg")
         sdgSimpleRegOptions.SetDefaults()
         TestOKEnabled()
     End Sub
@@ -97,19 +99,22 @@ Public Class dlgRegressionSimple
         sdgSimpleRegOptions.RegOptions()
     End Sub
 
-    Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkModelName.CheckedChanged
-        If chkModelName.Checked Then
-            AssignModelName()
+    Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
+        If chkSaveModel.Checked Then
+            ucrModelName.Visible = True
         Else
-            ucrBase.clsRsyntax.RemoveAssignTo()
+            ucrModelName.Visible = False
         End If
+        AssignModelName()
     End Sub
 
     Private Sub AssignModelName()
-        If ucrModelName.txtValidation.Text <> "" Then
+        If chkSaveModel.Checked AndAlso ucrModelName.txtValidation.Text <> "" Then
             ucrBase.clsRsyntax.SetAssignTo(ucrModelName.txtValidation.Text, strTempModel:=ucrModelName.txtValidation.Text)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
 End Class
