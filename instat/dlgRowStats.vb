@@ -18,15 +18,8 @@ Imports instat.Translations
 Public Class dlgRowStats
     Public bFirstLoad As Boolean = False
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        InitialiseDialog()
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("apply")
-        ucrReceiverForRowStatistics.Selector = ucrSelectorForRowStats
-        ucrReceiverForRowStatistics.SetMeAsReceiver()
-        ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
-        ucrNewColumnSelectorForRowStats.SetDataFrameSelector(ucrSelectorForRowStats.ucrAvailableDataFrames)
-        ucrNewColumnSelectorForRowStats.SetPrefix("Row_Summary")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnSelectorForRowStats.cboColumnName.Text, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnSelectorForRowStats.cboColumnName.Text)
-
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
@@ -40,6 +33,7 @@ Public Class dlgRowStats
 
     Private Sub SetDefaults()
         ucrSelectorForRowStats.Reset()
+        ucrSelectorForRowStats.Focus()
     End Sub
 
     Private Sub ReopenDialog()
@@ -47,11 +41,27 @@ Public Class dlgRowStats
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverForRowStatistics.IsEmpty() = False Then
+        If (ucrReceiverForRowStatistics.lstSelectedVariables.Items.Count > 1) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction("apply")
+        ucrReceiverForRowStatistics.Selector = ucrSelectorForRowStats
+        ucrReceiverForRowStatistics.SetMeAsReceiver()
+        ucrReceiverForRowStatistics.SetDataType("numeric")
+        ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
+        ucrBase.iHelpTopicID = 45
+
+        ucrInputcboRowSummary.SetPrefix("RowSummary")
+        ucrInputcboRowSummary.SetItemsTypeAsColumns()
+        ucrInputcboRowSummary.SetDefaultTypeAsColumn()
+        ucrInputcboRowSummary.SetDataFrameSelector(ucrSelectorForRowStats.ucrAvailableDataFrames)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputcboRowSummary.GetText, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputcboRowSummary.GetText)
+
     End Sub
 
 
@@ -64,28 +74,30 @@ Public Class dlgRowStats
         TestOKEnabled()
     End Sub
 
-
-
-    Private Sub Statistic_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMean.CheckedChanged, rdoCount.CheckedChanged, rdoMaximum.CheckedChanged, rdoMinimum.CheckedChanged, rdoSum.CheckedChanged, rdoStandardDeviation.CheckedChanged
+    Private Sub Statistic_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMean.CheckedChanged, rdoCount.CheckedChanged, rdoMaximum.CheckedChanged, rdoMinimum.CheckedChanged, rdoSum.CheckedChanged, rdoStandardDeviation.CheckedChanged, rdoNumberofMissing.CheckedChanged, rdoMedian.CheckedChanged, rdoMedian.CheckedChanged, rdoNumberofMissing.CheckedChanged
         If rdoMean.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("FUN", "mean")
         ElseIf rdoCount.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("FUN", "function(z) sum(!is.na(z))")
-            ElseIf rdoMaximum.Checked = True Then
-                ucrBase.clsRsyntax.AddParameter("FUN", "max")
-            ElseIf rdoMinimum.Checked = True Then
-                ucrBase.clsRsyntax.AddParameter("FUN", "min")
-            ElseIf rdoSum.Checked = True Then
-                ucrBase.clsRsyntax.AddParameter("FUN", "sum")
-            ElseIf rdoStandardDeviation.Checked = True Then
-                ucrBase.clsRsyntax.AddParameter("FUN", "sd")
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("FUN")
+        ElseIf rdoMaximum.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("FUN", "max")
+        ElseIf rdoMinimum.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("FUN", "min")
+        ElseIf rdoSum.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("FUN", "sum")
+        ElseIf rdoStandardDeviation.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("FUN", "sd")
+        ElseIf rdoMedian.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("FUN", "median")
+            'ElseIf rdoNumberofMissing.Checked = True Then
+            '    ucrBase.clsRsyntax.AddParameter("FUN", "is.na")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("FUN")
         End If
 
     End Sub
 
-    Private Sub ucrNewColumnNameSelector_Leave(sender As Object, e As EventArgs) Handles ucrNewColumnSelectorForRowStats.Leave
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnSelectorForRowStats.cboColumnName.Text, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnSelectorForRowStats.cboColumnName.Text)
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class
