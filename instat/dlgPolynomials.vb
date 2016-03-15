@@ -14,32 +14,67 @@
 Imports instat.Translations
 
 Public Class dlgPolynomials
+    Public bFirstLoad As Boolean = True
     Public clsCentredOptionFunc As New RFunction
     Dim dataf
     Private Sub dlgPolynomials_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("poly")
-        ucrReceiverPolynomial.Selector = ucrSelectorDataFrameAddRemove
-        ucrReceiverPolynomial.SetMeAsReceiver()
-        nudDegree.Text = "1"
+
+        nudDegree.Value = 1
+        rdoSimple.Checked = True
         ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Text)
 
-        ucrNewColumnNameSelector.SetDataFrameSelector(ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames)
-        ucrNewColumnNameSelector.SetPrefix("Polynomial")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnNameSelector.cboColumnName.Text, strTempDataframe:=ucrSelectorDataFrameAddRemove.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnNameSelector.cboColumnName.Text)
+        ucrInputPolynomial.SetPrefix("Polynomial")
+        ucrInputPolynomial.SetItemsTypeAsColumns()
+        ucrInputPolynomial.SetDefaultTypeAsColumn()
+        ucrInputPolynomial.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
 
         clsCentredOptionFunc.SetRCommand("scale")
         clsCentredOptionFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
         clsCentredOptionFunc.AddParameter("raw", "TRUE")
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsCentredOptionFunc)
 
+        If bFirstLoad Then
+            InitializeDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ucrReceiverPolynomial.IsEmpty() = False And nudDegree.Value >= 2 Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+
+    End Sub
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
+
+    Private Sub InitializeDialog()
+        ucrBase.clsRsyntax.SetFunction("poly")
+        ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
+        ucrReceiverPolynomial.SetMeAsReceiver()
     End Sub
 
 
 
-    Private Sub ucrReceiverPolynomial_Leave(sender As Object, e As EventArgs) Handles ucrReceiverPolynomial.Leave
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
-        clsCentredOptionFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
+
+    Private Sub ucrReceiverPolynomial_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverPolynomial.SelectionChanged
+        If Not ucrReceiverPolynomial.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
+            clsCentredOptionFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("x")
+        End If
+        TestOKEnabled()
     End Sub
 
     Private Sub grpType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSimple.CheckedChanged, rdoCentered.CheckedChanged, rdoOrthogonal.CheckedChanged
@@ -56,7 +91,16 @@ Public Class dlgPolynomials
 
     End Sub
 
-    Private Sub nudDegree_Leave(sender As Object, e As EventArgs) Handles nudDegree.Leave
-        ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Text)
+    Private Sub nudDegree_ValueChanged(sender As Object, e As EventArgs) Handles nudDegree.ValueChanged
+        If nudDegree.Value >= 1 Then
+            ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Text)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("degree")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrInputPolynomial_NameChanged() Handles ucrInputPolynomial.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPolynomial.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPolynomial.GetText)
     End Sub
 End Class
