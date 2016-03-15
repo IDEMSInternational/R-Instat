@@ -268,10 +268,15 @@ instat_obj$methods(add_model = function(model, model_name = paste("model",length
 )
 
 instat_obj$methods(get_model = function(model_name) {
-  if(missing(model_name)) stop("model_name is required")
+  if(missing(model_name)) stop("model_name must be given.")
   if(!is.character(model_name)) stop("name must be a character")
   if(!model_name %in% names(models)) stop(model_name, "not found in models")
   models[[model_name]]
+}
+)
+
+instat_obj$methods(get_model_names = function() {
+  return(names(models))
 }
 )
 
@@ -346,11 +351,19 @@ instat_obj$methods(insert_column_in_data = function(data_name, col_data =c(), st
 }
 )
 
-instat_obj$methods(move_column_in_data = function(data_name, col_name, col_number){
+# instat_obj$methods(move_columns_in_data = function(data_name, col_names = "", col_number){
+#   if(!is.character(data_name)) stop("data_name must be of type character")
+#   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+#   
+#   data_objects[[data_name]]$move_columns_in_data(col_names = col_names, col_number = col_number)
+# }
+# )
+
+instat_obj$methods(order_columns_in_data = function(data_name, col_order){
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[data_name]]$move_column_in_data(col_name = col_name, col_number = col_number)
+  data_objects[[data_name]]$order_columns_in_data(col_order = col_order)
 }
 )
 
@@ -436,5 +449,31 @@ instat_obj$methods(append_to_dataframe_metadata = function(data_name, property, 
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
   data_objects[[data_name]]$append_to_metadata(property, new_val)
+} 
+)
+
+
+instat_obj$methods(order_dataframes = function(data_frames_order) {
+  if(length(data_frames_order) != length(names(data_objects))) stop("number data frames to order should be equal to number of dataframes in the object")
+  for(name in names(data_objects)){
+    if(!(name %in% data_frames_order)){
+      stop(name, "is missing in data frames to order")
+    }
+  }
+  new_data_objects = list()
+  for(i in 1:length(names(data_objects))){
+     new_data_objects[[i]] = data_objects[[data_frames_order[i]]]
+  }
+  names(new_data_objects) <- data_frames_order
+  data_objects <<- new_data_objects
+  data_objects_changed <<- TRUE
+} 
+)
+
+instat_obj$methods(copy_columns = function(data_name, col_names = "") {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$copy_columns(col_names = col_names)
 } 
 )

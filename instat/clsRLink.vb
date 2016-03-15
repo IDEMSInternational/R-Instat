@@ -68,56 +68,77 @@ Public Class RLink
         bLog = True
     End Sub
 
+    Public Function GetDataFrameNames() As List(Of String)
+        Dim chrDataFrameNames As CharacterVector
+        Dim lstDataFrameNames As New List(Of String)
+        chrDataFrameNames = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_names()").AsCharacter
+        lstDataFrameNames.AddRange(chrDataFrameNames)
+        Return lstDataFrameNames
+    End Function
+
+    Public Function GetColumnNames(strDataFrameName As String) As List(Of String)
+        Dim chrCurrColumns As CharacterVector
+        Dim lstCurrColumns As New List(Of String)
+        chrCurrColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(" & Chr(34) & strDataFrameName & Chr(34) & ")").AsCharacter
+        lstCurrColumns.AddRange(chrCurrColumns)
+        Return lstCurrColumns
+    End Function
+
     Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True)
-        Dim lstAvailableDataFrames As GenericVector
-        Dim i As Integer
 
         If bInstatObjectExists Then
-            lstAvailableDataFrames = clsEngine.Evaluate(strInstatDataObject & "$get_data_names()").AsList
             cboDataFrames.Items.Clear()
-            For i = 0 To lstAvailableDataFrames.Length - 1
-                cboDataFrames.Items.Add(lstAvailableDataFrames.AsCharacter(i))
-            Next
+            cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
         End If
+
         If bSetDefault Then
-            cboDataFrames.Text = frmEditor.grdData.CurrentWorksheet.Name
+            cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(frmEditor.grdData.CurrentWorksheet.Name)
         End If
     End Sub
 
-    Public Sub FillColumnNames(strDataFrame As String, Optional ByRef cboColumns As ComboBox = Nothing, Optional ByRef lstColumns As ListView = Nothing)
-        Dim lstCurrColumns As GenericVector
-        Dim i As Integer
+    Public Sub FillColumnNames(strDataFrame As String, ByRef cboColumns As ComboBox)
+        Dim lstCurrColumns As List(Of String)
 
-        If bInstatObjectExists Then
-            If clsEngine IsNot Nothing Then
-                lstCurrColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(" & Chr(34) & strDataFrame & Chr(34) & ")").AsList
-                If cboColumns IsNot Nothing Then
-                    cboColumns.Items.Clear()
-                    For i = 0 To lstCurrColumns.Length - 1
-                        cboColumns.Items.Add(lstCurrColumns.AsCharacter(i))
-                    Next
-                ElseIf lstColumns IsNot Nothing Then
-                    lstColumns.Items.Clear()
-                    If lstColumns.Columns.Count = 0 Then
-                        lstColumns.Columns.Add("Available Data")
-                    End If
-                    For i = 0 To lstCurrColumns.Length - 1
-                        lstColumns.Items.Add(lstCurrColumns.AsCharacter(i))
-                    Next
-                    lstColumns.Columns(0).Width = -2
-                End If
+        If bInstatObjectExists AndAlso clsEngine IsNot Nothing Then
+            lstCurrColumns = GetColumnNames(strDataFrame)
+            cboColumns.Items.Clear()
+            cboColumns.Items.AddRange(lstCurrColumns.ToArray)
+        End If
+    End Sub
+
+    Public Sub FillColumnNames(strDataFrame As String, ByRef lstColumns As ListView)
+        Dim lstCurrColumns As List(Of String)
+
+        If bInstatObjectExists AndAlso clsEngine IsNot Nothing Then
+            lstCurrColumns = GetColumnNames(strDataFrame)
+            lstColumns.Items.Clear()
+            If lstColumns.Columns.Count = 0 Then
+                lstColumns.Columns.Add("Available Data")
             End If
+            For Each strTemp In lstCurrColumns
+                lstColumns.Items.Add(strTemp)
+            Next
+            lstColumns.Columns(0).Width = -2
         End If
 
     End Sub
 
-    Public Function GetDefaultColumnNames(strPrefix As String)
+    Public Function GetDefaultColumnNames(strPrefix As String) As GenericVector
         Dim lstNextDefaults As GenericVector = Nothing
 
         If bInstatObjectExists Then
             lstNextDefaults = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_column_name(prefix = " & Chr(34) & strPrefix & Chr(34) & ")").AsList
         End If
         Return lstNextDefaults
+    End Function
+
+    Public Function GetDefaultColumnNames(strPrefix As String, strDataFrameName As String) As String
+        Dim strNextDefault As String = ""
+
+        If bInstatObjectExists Then
+            strNextDefault = clsEngine.Evaluate(strInstatDataObject & "$get_next_default_column_name(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", prefix = " & Chr(34) & strPrefix & Chr(34) & ")").AsCharacter(0)
+        End If
+        Return strNextDefault
     End Function
 
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "")
@@ -300,5 +321,13 @@ Public Class RLink
             intLength = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$length_of_data(" & Chr(34) & strDataFrameName & Chr(34) & ")").AsInteger(0)
         End If
         Return intLength
+    End Function
+
+    Public Function GetModelNames() As List(Of String)
+        Dim chrModelNames As CharacterVector
+        Dim lstModelNames As New List(Of String)
+        chrModelNames = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_model_names()").AsCharacter
+        lstModelNames.AddRange(chrModelNames)
+        Return lstModelNames
     End Function
 End Class
