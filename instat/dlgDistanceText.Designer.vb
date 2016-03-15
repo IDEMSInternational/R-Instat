@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgReferenceLevels
+Partial Class dlgDistanceText
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -27,22 +27,22 @@ Partial Class dlgReferenceLevels
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 196)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 196)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
-        'dlgReferenceLevels
+        'dlgDistanceText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 261)
+        Me.ClientSize = New System.Drawing.Size(426, 261)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgReferenceLevels"
+        Me.Name = "dlgDistanceText"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Reference_Levels"
-        Me.Text = "Reference Levels"
+        Me.Tag = "Distance"
+        Me.Text = "Distance"
         Me.ResumeLayout(False)
 
     End Sub

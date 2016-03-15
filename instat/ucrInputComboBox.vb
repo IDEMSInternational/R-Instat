@@ -77,4 +77,12 @@ Public Class ucrInputComboBox
     Private Sub cboInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboInput.KeyPress
         bUserTyped = True
     End Sub
+
+    Public Overrides Function IsEmpty() As Boolean
+        If cboInput.Text = "" Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 End Class
