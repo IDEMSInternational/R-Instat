@@ -57,6 +57,7 @@ Public Class dlgRecode
         ucrMultipleLabels.Visible = False
         rdoRight.Checked = True
         ucrSelectorForRecode.Reset()
+        ucrMultipleNumericRecode.txtNumericItems.ResetText()
     End Sub
 
     Private Sub ReopenDialog()
@@ -64,7 +65,7 @@ Public Class dlgRecode
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverRecode.IsEmpty() = False And ucrMultipleNumericReco Then
+        If ucrReceiverRecode.IsEmpty() = False AndAlso ucrMultipleNumericRecode.txtNumericItems.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -152,4 +153,7 @@ Public Class dlgRecode
         End If
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
 End Class
