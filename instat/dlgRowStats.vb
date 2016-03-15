@@ -16,11 +16,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgRowStats
-    Public bFirstLoad As Boolean = False
+    Public bFirstLoad As Boolean = True
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        InitialiseDialog()
         autoTranslate(Me)
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -55,6 +55,8 @@ Public Class dlgRowStats
         ucrReceiverForRowStatistics.SetDataType("numeric")
         ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
         ucrBase.iHelpTopicID = 45
+        cmdUserDefined.Enabled = False
+
 
         ucrInputcboRowSummary.SetPrefix("RowSummary")
         ucrInputcboRowSummary.SetItemsTypeAsColumns()
@@ -89,8 +91,8 @@ Public Class dlgRowStats
             ucrBase.clsRsyntax.AddParameter("FUN", "sd")
         ElseIf rdoMedian.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("FUN", "median")
-            'ElseIf rdoNumberofMissing.Checked = True Then
-            '    ucrBase.clsRsyntax.AddParameter("FUN", "is.na")
+        ElseIf rdoNumberofMissing.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("FUN", "function(z) sum(is.na(z))")
         Else
             ucrBase.clsRsyntax.RemoveParameter("FUN")
         End If
@@ -99,5 +101,9 @@ Public Class dlgRowStats
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub ucrInputcboRowSummary_NameChanged() Handles ucrInputcboRowSummary.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputcboRowSummary.GetText, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputcboRowSummary.GetText)
     End Sub
 End Class
