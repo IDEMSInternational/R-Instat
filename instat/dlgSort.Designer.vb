@@ -75,7 +75,7 @@ Partial Class dlgSort
         'lblColumnsToSort
         '
         Me.lblColumnsToSort.AutoSize = True
-        Me.lblColumnsToSort.Location = New System.Drawing.Point(287, 72)
+        Me.lblColumnsToSort.Location = New System.Drawing.Point(274, 34)
         Me.lblColumnsToSort.Name = "lblColumnsToSort"
         Me.lblColumnsToSort.Size = New System.Drawing.Size(103, 13)
         Me.lblColumnsToSort.TabIndex = 1
@@ -127,10 +127,10 @@ Partial Class dlgSort
         '
         'ucrReceiverSort
         '
-        Me.ucrReceiverSort.Location = New System.Drawing.Point(290, 88)
+        Me.ucrReceiverSort.Location = New System.Drawing.Point(277, 50)
         Me.ucrReceiverSort.Name = "ucrReceiverSort"
         Me.ucrReceiverSort.Selector = Nothing
-        Me.ucrReceiverSort.Size = New System.Drawing.Size(125, 103)
+        Me.ucrReceiverSort.Size = New System.Drawing.Size(125, 117)
         Me.ucrReceiverSort.TabIndex = 2
         '
         'ucrBase
@@ -144,14 +144,14 @@ Partial Class dlgSort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(468, 317)
+        Me.ClientSize = New System.Drawing.Size(416, 305)
         Me.Controls.Add(Me.ucrSelectForSort)
         Me.Controls.Add(Me.grpMissingValues)
         Me.Controls.Add(Me.lblColumnsToSort)
         Me.Controls.Add(Me.ucrReceiverSort)
         Me.Controls.Add(Me.grpOrder)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSort"
