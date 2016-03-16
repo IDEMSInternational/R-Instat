@@ -17,12 +17,10 @@ Imports instat.Translations
 Public Class dlgStack
     Public bFirstLoad As Boolean = True
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("melt")
-        ucrBase.iHelpTopicID = 57
-        ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
-        ucrIDVariablesReceiver.Selector = ucrSelectorStack
+
 
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -32,10 +30,24 @@ Public Class dlgStack
         TestOKEnabled()
     End Sub
 
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction("melt")
+        ucrBase.iHelpTopicID = 57
+        ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
+        ucrIDVariablesReceiver.Selector = ucrSelectorStack
+        autoTranslate(Me)
+        ucrNewDataFrameName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
+        SetStackIntoText("value")
+        SetFactorIntoText("variable")
+        ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+    End Sub
+
     Private Sub ReopenDialog()
         'TODO this is a work around for AssignTo not clearing in RSyntax
         ucrNewDataFrameName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
     End Sub
+
+
 
     Private Sub TestOKEnabled()
         If Not ucrReceiverColumnsToBeStack.IsEmpty() Then
@@ -47,15 +59,12 @@ Public Class dlgStack
 
     Private Sub SetDefaults()
         ucrNewDataFrameName.Reset()
-        ucrNewDataFrameName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
         ucrSelectorStack.Reset()
-        ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+        ucrSelectorStack.Focus()
         chkIDVariables.Checked = False
         ucrIDVariablesReceiver.Visible = False
-        SetStackIntoText("value")
-        SetFactorIntoText("variable")
         ucrNewDataFrameName.bUserTyped = False
-        autoTranslate(Me)
+
     End Sub
 
     Private Sub SetFactorIntoText(strNewVal As String)
