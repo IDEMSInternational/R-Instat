@@ -314,4 +314,10 @@ Public Class ucrInput
     Public Overridable Function IsEmpty() As Boolean
         Return True
     End Function
+
+    Private Sub ucrInput_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If Not bUserTyped Then
+            SetDefaultName()
+        End If
+    End Sub
 End Class

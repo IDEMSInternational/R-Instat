@@ -38,6 +38,7 @@ Public Class dlgView
     Private Sub SetDefaults()
         nudNumberRows.Value = 6
         ucrSelctorForView.Reset()
+        ucrSelctorForView.Focus()
         rdoTop.Checked = True
     End Sub
 
@@ -92,4 +93,13 @@ Public Class dlgView
 
 
     End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
+
+    Private Sub ucrSelctorForView_DataFrameChanged() Handles ucrSelctorForView.DataFrameChanged
+        nudNumberRows.Maximum = ucrSelctorForView.ucrAvailableDataFrames.iDataFrameLength
+    End Sub
+
 End Class
