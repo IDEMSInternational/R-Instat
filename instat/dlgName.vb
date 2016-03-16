@@ -61,7 +61,7 @@ Public Class dlgName
 
     Private Sub ucrReceiverName_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverName.SelectionChanged
         ucrBase.clsRsyntax.AddParameter("column_name", ucrReceiverName.GetVariableNames)
-        txtName.Text = ucrReceiverName.GetVariableNames
+        txtName.Text = ucrReceiverName.GetVariableNames.Replace(Chr(34), "")
         TestOKEnabled()
     End Sub
 
@@ -78,7 +78,7 @@ Public Class dlgName
     End Sub
 
     Private Sub ucrSelectVariables_DataFrameChanged() Handles ucrSelectVariables.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", ucrSelectVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
 End Class
