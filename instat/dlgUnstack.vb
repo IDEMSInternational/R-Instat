@@ -36,7 +36,7 @@ Public Class dlgUnstack
         ucrBase.clsRsyntax.SetFunction("tidyr::spread")
         ucrFactorTounstackReceiver.SetMeAsReceiver()
         ucrSelectorForunstack.Reset()
-        SetNewDataFrameName(ucrSelectorForunstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
+        SetNewDataFrameName(ucrSelectorForunstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
         ucrBase.iHelpTopicID = 58
     End Sub
 
@@ -77,7 +77,7 @@ Public Class dlgUnstack
     Private Sub ucrSelectorForunstack_DataFrameChanged() Handles ucrSelectorForunstack.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorForunstack.ucrAvailableDataFrames.clsCurrDataFrame)
         If Not ucrDataFrameForunstack.bUserTyped Then
-            SetNewDataFrameName(ucrSelectorForunstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
+            SetNewDataFrameName(ucrSelectorForunstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
         End If
 
     End Sub
