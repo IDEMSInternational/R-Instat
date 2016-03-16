@@ -18,15 +18,10 @@ Imports instat.Translations
 Public Class dlgUnstack
     Public bFirstLoad As Boolean = True
     Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
-        ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
-        ucrBase.clsRsyntax.SetFunction("tidyr::spread")
-
-
         autoTranslate(Me)
-        ucrBase.iHelpTopicID = 58
 
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -35,13 +30,22 @@ Public Class dlgUnstack
         'Checks if Ok can be enabled.
         TestOKEnabled()
     End Sub
+    Private Sub InitialiseDialog()
+        ucrFactorTounstackReceiver.Selector = ucrSelectorForunstack
+        ucrColumnTounstackReceiver.Selector = ucrSelectorForunstack
+        ucrBase.clsRsyntax.SetFunction("tidyr::spread")
+        ucrFactorTounstackReceiver.SetMeAsReceiver()
+        ucrSelectorForunstack.Reset()
+        SetNewDataFrameName(ucrSelectorForunstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
+        ucrBase.iHelpTopicID = 58
+    End Sub
 
     Private Sub SetDefaults()
-        ucrFactorToUnstackReceiver.SetMeAsReceiver()
-        ucrSelectorForUnstack.Reset()
+
         chkKeepUnusedFactorLevels.Checked = False
-        ucrDataFrameForUnstack.Reset()
-        SetNewDataFrameName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
+        ucrDataFrameForunstack.Reset()
+        ucrDataFrameForunstack.Focus()
+
     End Sub
 
     Private Sub ReopenDialog()
@@ -50,37 +54,37 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrFactorToUnstackReceiver.IsEmpty() = False And ucrColumnToUnstackReceiver.IsEmpty() = False Then
+        If ucrFactorTounstackReceiver.IsEmpty() = False And ucrColumnTounstackReceiver.IsEmpty() = False Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrDataFrameForUnstack_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameForUnstack.Leave
-        SetNewDataFrameName(ucrDataFrameForUnstack.txtValidation.Text)
+    Private Sub ucrDataFrameForunstack_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameForunstack.Leave
+        SetNewDataFrameName(ucrDataFrameForunstack.txtValidation.Text)
     End Sub
 
     Private Sub SetNewDataFrameName(strNewVal As String)
-        If ucrDataFrameForUnstack.IsValidRString(strNewVal) Then
-            ucrDataFrameForUnstack.txtValidation.Text = strNewVal
-            ucrBase.clsRsyntax.SetAssignTo(ucrDataFrameForUnstack.txtValidation.Text, strTempDataframe:=ucrDataFrameForUnstack.txtValidation.Text)
+        If ucrDataFrameForunstack.IsValidRString(strNewVal) Then
+            ucrDataFrameForunstack.txtValidation.Text = strNewVal
+            ucrBase.clsRsyntax.SetAssignTo(ucrDataFrameForunstack.txtValidation.Text, strTempDataframe:=ucrDataFrameForunstack.txtValidation.Text)
         Else
-            ucrDataFrameForUnstack.txtValidation.Text = ""
+            ucrDataFrameForunstack.txtValidation.Text = ""
             ucrBase.clsRsyntax.RemoveAssignTo()
         End If
     End Sub
-    Private Sub ucrSelectorForUnstack_DataFrameChanged() Handles ucrSelectorForUnstack.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame)
-        If Not ucrDataFrameForUnstack.bUserTyped Then
-            SetNewDataFrameName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
+    Private Sub ucrSelectorForunstack_DataFrameChanged() Handles ucrSelectorForunstack.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorForunstack.ucrAvailableDataFrames.clsCurrDataFrame)
+        If Not ucrDataFrameForunstack.bUserTyped Then
+            SetNewDataFrameName(ucrSelectorForunstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
         End If
 
     End Sub
 
-    Private Sub ucrFactorToUnstackReceiver_SelectionChanged() Handles ucrFactorToUnstackReceiver.SelectionChanged
-        If Not ucrFactorToUnstackReceiver.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("key", ucrFactorToUnstackReceiver.GetVariableNames(False))
+    Private Sub ucrFactorTounstackReceiver_SelectionChanged() Handles ucrFactorTounstackReceiver.SelectionChanged
+        If Not ucrFactorTounstackReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("key", ucrFactorTounstackReceiver.GetVariableNames(False))
         Else
             ucrBase.clsRsyntax.RemoveParameter("key")
         End If
@@ -88,9 +92,9 @@ Public Class dlgUnstack
     End Sub
 
 
-    Private Sub ucrColumnToUnstackReceiver_SelectionChanged() Handles ucrColumnToUnstackReceiver.SelectionChanged
-        If Not ucrColumnToUnstackReceiver.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("value", ucrColumnToUnstackReceiver.GetVariableNames(False))
+    Private Sub ucrColumnTounstackReceiver_SelectionChanged() Handles ucrColumnTounstackReceiver.SelectionChanged
+        If Not ucrColumnTounstackReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("value", ucrColumnTounstackReceiver.GetVariableNames(False))
         Else
             ucrBase.clsRsyntax.RemoveParameter("value")
         End If
