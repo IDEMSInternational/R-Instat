@@ -31,20 +31,20 @@ Public Class dlgUnstack
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
-        ucrFactorTounstackReceiver.Selector = ucrSelectorForUnstack
-        ucrColumnTounstackReceiver.Selector = ucrSelectorForUnstack
+        ucrFactorTounstackReceiver.Selector = ucrSelectorForunstack
+        ucrColumnTounstackReceiver.Selector = ucrSelectorForunstack
         ucrBase.clsRsyntax.SetFunction("tidyr::spread")
         ucrFactorTounstackReceiver.SetMeAsReceiver()
-        ucrSelectorForUnstack.Reset()
-        SetNewDataFrameName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
+        ucrSelectorForunstack.Reset()
+        SetNewDataFrameName(ucrSelectorForunstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
         ucrBase.iHelpTopicID = 58
     End Sub
 
     Private Sub SetDefaults()
 
         chkKeepUnusedFactorLevels.Checked = False
-        ucrDataFrameForUnstack.Reset()
-        ucrDataFrameForUnstack.Focus()
+        ucrDataFrameForunstack.Reset()
+        ucrDataFrameForunstack.Focus()
 
     End Sub
 
@@ -61,28 +61,28 @@ Public Class dlgUnstack
         End If
     End Sub
 
-    Private Sub ucrDataFrameForUnstack_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameForUnstack.Leave
-        SetNewDataFrameName(ucrDataFrameForUnstack.txtValidation.Text)
+    Private Sub ucrDataFrameForunstack_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameForunstack.Leave
+        SetNewDataFrameName(ucrDataFrameForunstack.txtValidation.Text)
     End Sub
 
     Private Sub SetNewDataFrameName(strNewVal As String)
-        If ucrDataFrameForUnstack.IsValidRString(strNewVal) Then
-            ucrDataFrameForUnstack.txtValidation.Text = strNewVal
-            ucrBase.clsRsyntax.SetAssignTo(ucrDataFrameForUnstack.txtValidation.Text, strTempDataframe:=ucrDataFrameForUnstack.txtValidation.Text)
+        If ucrDataFrameForunstack.IsValidRString(strNewVal) Then
+            ucrDataFrameForunstack.txtValidation.Text = strNewVal
+            ucrBase.clsRsyntax.SetAssignTo(ucrDataFrameForunstack.txtValidation.Text, strTempDataframe:=ucrDataFrameForunstack.txtValidation.Text)
         Else
-            ucrDataFrameForUnstack.txtValidation.Text = ""
+            ucrDataFrameForunstack.txtValidation.Text = ""
             ucrBase.clsRsyntax.RemoveAssignTo()
         End If
     End Sub
-    Private Sub ucrSelectorForUnstack_DataFrameChanged() Handles ucrSelectorForUnstack.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorForUnstack.ucrAvailableDataFrames.clsCurrDataFrame)
-        If Not ucrDataFrameForUnstack.bUserTyped Then
-            SetNewDataFrameName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
+    Private Sub ucrSelectorForunstack_DataFrameChanged() Handles ucrSelectorForunstack.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorForunstack.ucrAvailableDataFrames.clsCurrDataFrame)
+        If Not ucrDataFrameForunstack.bUserTyped Then
+            SetNewDataFrameName(ucrSelectorForunstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
         End If
 
     End Sub
 
-    Private Sub ucrFactorToUnstackReceiver_SelectionChanged() Handles ucrFactorTounstackReceiver.SelectionChanged
+    Private Sub ucrFactorTounstackReceiver_SelectionChanged() Handles ucrFactorTounstackReceiver.SelectionChanged
         If Not ucrFactorTounstackReceiver.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("key", ucrFactorTounstackReceiver.GetVariableNames(False))
         Else
@@ -92,7 +92,7 @@ Public Class dlgUnstack
     End Sub
 
 
-    Private Sub ucrColumnToUnstackReceiver_SelectionChanged() Handles ucrColumnTounstackReceiver.SelectionChanged
+    Private Sub ucrColumnTounstackReceiver_SelectionChanged() Handles ucrColumnTounstackReceiver.SelectionChanged
         If Not ucrColumnTounstackReceiver.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("value", ucrColumnTounstackReceiver.GetVariableNames(False))
         Else
