@@ -1,5 +1,4 @@
-﻿
-' Instat-R
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -35,10 +34,10 @@ Public Class dlgRowStats
         ucrSelectorForRowStats.Reset()
         ucrSelectorForRowStats.Focus()
         ucrInputcboRowSummary.SetPrefix("RowSummary")
+        rdoMean.Checked = True
     End Sub
 
     Private Sub ReopenDialog()
-        ucrInputcboRowSummary.SetPrefix("RowSummary")
     End Sub
 
     Private Sub TestOKEnabled()
