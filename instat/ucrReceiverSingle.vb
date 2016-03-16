@@ -23,10 +23,14 @@ Public Class ucrReceiverSingle
 
         Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
         For Each objItem In tempObjects
-            strDataFrameName = objItem.Group.Name
-            txtReceiverSingle.Text = objItem.text
+            SetSelected(objItem.Text, objItem.Group.Name)
         Next
 
+    End Sub
+
+    Public Sub SetSelected(strColumn As String, strDataFrame As String)
+        strDataFrameName = strDataFrame
+        txtReceiverSingle.Text = strColumn
     End Sub
 
     Public Overrides Sub RemoveSelected()
