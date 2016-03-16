@@ -17,9 +17,9 @@
 Imports instat.Translations
 Public Class dlgName
     Dim bFirstLoad As Boolean = True
-    Public bRightClick As Boolean = False
-    Public strCurrentWorksheetName As String
-    Public strSelectedColumn As String
+    Dim strSelectedColumn As String = ""
+    Dim strSelectedDataFrame As String = ""
+
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
         ucrBase.iHelpTopicID = 33
         autoTranslate(Me)
@@ -27,24 +27,26 @@ Public Class dlgName
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         If bFirstLoad Then
             SetDefaults()
-            bFirstLoad = False
-        End If
-        If bRightClick Then
-            ucrReceiverName.txtReceiverSingle.Text = strSelectedColumn
-            txtName.Text = strSelectedColumn
-            bRightClick = False
-        Else
-            ucrReceiverName.txtReceiverSingle.Text = ""
-            txtName.Text = ""
         End If
         TestOKEnabled()
     End Sub
 
-    Private Sub SetDefaults()
+    Public Sub SetDefaults()
         ucrSelectVariables.Reset()
         ucrReceiverName.Selector = ucrSelectVariables
         ucrReceiverName.SetMeAsReceiver()
-        ucrSelectVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strCurrentWorksheetName
+        If strSelectedColumn <> "" AndAlso strSelectedDataFrame <> "" Then
+            ucrSelectVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+            ucrReceiverName.SetSelected(strSelectedColumn, strSelectedDataFrame)
+            strSelectedColumn = ""
+            strSelectedDataFrame = ""
+        End If
+        bFirstLoad = False
+    End Sub
+
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

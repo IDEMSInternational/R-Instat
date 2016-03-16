@@ -220,9 +220,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
-        dlgName.bRightClick = True
-        dlgName.strCurrentWorksheetName = grdCurrSheet.Name
-        dlgName.strSelectedColumn = grdCurrSheet.ColumnHeaders(grdData.CurrentWorksheet.SelectionRange.Col).[Text]
+        dlgName.SetCurrentColumn(grdCurrSheet.ColumnHeaders(grdData.CurrentWorksheet.SelectionRange.Col).Text, grdCurrSheet.Name)
         dlgName.ShowDialog()
     End Sub
 
