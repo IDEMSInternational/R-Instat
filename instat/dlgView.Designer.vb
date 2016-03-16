@@ -27,10 +27,10 @@ Partial Class dlgView
         Me.rdoTop = New System.Windows.Forms.RadioButton()
         Me.nudNumberRows = New System.Windows.Forms.NumericUpDown()
         Me.lblSelected = New System.Windows.Forms.Label()
+        Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.ucrSelctorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.grpDisplayFrom.SuspendLayout()
         CType(Me.nudNumberRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -74,11 +74,10 @@ Partial Class dlgView
         'nudNumberRows
         '
         Me.nudNumberRows.Location = New System.Drawing.Point(126, 187)
-        Me.nudNumberRows.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudNumberRows.Maximum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.nudNumberRows.Name = "nudNumberRows"
-        Me.nudNumberRows.Size = New System.Drawing.Size(47, 20)
+        Me.nudNumberRows.Size = New System.Drawing.Size(73, 20)
         Me.nudNumberRows.TabIndex = 4
-        Me.nudNumberRows.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblSelected
         '
@@ -89,6 +88,16 @@ Partial Class dlgView
         Me.lblSelected.TabIndex = 7
         Me.lblSelected.Tag = "Selected"
         Me.lblSelected.Text = "Selected"
+        '
+        'lblNumberofRows
+        '
+        Me.lblNumberofRows.AutoSize = True
+        Me.lblNumberofRows.Location = New System.Drawing.Point(2, 189)
+        Me.lblNumberofRows.Name = "lblNumberofRows"
+        Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
+        Me.lblNumberofRows.TabIndex = 8
+        Me.lblNumberofRows.Tag = "Number_of_rows"
+        Me.lblNumberofRows.Text = "Number  of Rows"
         '
         'ucrReceiverView
         '
@@ -111,16 +120,6 @@ Partial Class dlgView
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(401, 53)
         Me.ucrBase.TabIndex = 1
-        '
-        'lblNumberofRows
-        '
-        Me.lblNumberofRows.AutoSize = True
-        Me.lblNumberofRows.Location = New System.Drawing.Point(2, 189)
-        Me.lblNumberofRows.Name = "lblNumberofRows"
-        Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
-        Me.lblNumberofRows.TabIndex = 8
-        Me.lblNumberofRows.Tag = "Number_of_rows"
-        Me.lblNumberofRows.Text = "Number  of Rows"
         '
         'dlgView
         '
