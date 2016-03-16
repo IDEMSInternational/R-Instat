@@ -20,10 +20,6 @@ Public Class dlgRank
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrInputColName.SetPrefix("Rank")
-        ucrInputColName.SetItemsTypeAsColumns()
-        ucrInputColName.SetDefaultTypeAsColumn()
-        ucrInputColName.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -41,6 +37,11 @@ Public Class dlgRank
         ucrReceiverRank.Selector = ucrSelectorForRank
         ucrReceiverRank.SetDataType("numeric")
         ucrBase.iHelpTopicID = 25
+
+        ucrInputColName.SetPrefix("Rank")
+        ucrInputColName.SetItemsTypeAsColumns()
+        ucrInputColName.SetDefaultTypeAsColumn()
+        ucrInputColName.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
     End Sub
 
     'This runs on load and after anything is changed on the dialog.
@@ -54,25 +55,25 @@ Public Class dlgRank
 
     ' Sub that runs only the first time the dialog loads
     Private Sub SetDefaults()
-        ucrReceiverRank.SetMeAsReceiver()
         ucrReceiverRank.Selector = ucrSelectorForRank
+        ucrReceiverRank.SetMeAsReceiver()
         rdoKeptAsMissing.Checked = True
         rdoAverage.Checked = True
         ucrSelectorForRank.Reset()
+        ucrInputColName.SetPrefix("Rank")
         TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
-
         SetTiesValues()
         setMissingValue()
+        ucrInputColName.SetPrefix("Rank")
     End Sub
 
     Private Sub grpTies_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAverage.CheckedChanged, rdoMinimum.CheckedChanged, rdoMaximum.CheckedChanged, rdoFirst.CheckedChanged, rdoRandom.CheckedChanged
         SetTiesValues()
 
     End Sub
-
     Private Sub SetTiesValues()
 
         If rdoAverage.Checked Then
