@@ -393,7 +393,7 @@ Public Class frmMain
     End Sub
 
     Private Sub GeneralToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceGeneral.Click
-        dlgGeneral.ShowDialog()
+        dlgGeneralANOVA.ShowDialog()
     End Sub
 
     Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOneWay.Click
@@ -417,7 +417,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoWayAnova.Click
-        dlgTwoWayAnova.ShowDialog()
+        dlgNon_ParametricTwoWayAnova.ShowDialog()
     End Sub
 
     Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticManageNewWorksheet.Click
