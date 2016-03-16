@@ -20,6 +20,10 @@ Public Class dlgRank
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrInputColName.SetPrefix("Rank")
+        ucrInputColName.SetItemsTypeAsColumns()
+        ucrInputColName.SetDefaultTypeAsColumn()
+        ucrInputColName.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -37,11 +41,6 @@ Public Class dlgRank
         ucrReceiverRank.Selector = ucrSelectorForRank
         ucrReceiverRank.SetDataType("numeric")
         ucrBase.iHelpTopicID = 25
-        ucrInputColName.SetPrefix("Rank")
-        ucrInputColName.SetItemsTypeAsColumns()
-        ucrInputColName.SetDefaultTypeAsColumn()
-        ucrInputColName.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
     End Sub
 
     'This runs on load and after anything is changed on the dialog.
