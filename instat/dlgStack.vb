@@ -17,12 +17,10 @@ Imports instat.Translations
 Public Class dlgStack
     Public bFirstLoad As Boolean = True
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("melt")
-        ucrBase.iHelpTopicID = 57
-        ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
-        ucrIDVariablesReceiver.Selector = ucrSelectorStack
+
 
         If bFirstLoad Then
+            initialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -32,10 +30,19 @@ Public Class dlgStack
         TestOKEnabled()
     End Sub
 
+    Private Sub initialiseDialog()
+        ucrBase.clsRsyntax.SetFunction("melt")
+        ucrBase.iHelpTopicID = 57
+        ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
+        ucrIDVariablesReceiver.Selector = ucrSelectorStack
+    End Sub
+
     Private Sub ReopenDialog()
         'TODO this is a work around for AssignTo not clearing in RSyntax
         ucrNewDataFrameName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
     End Sub
+
+
 
     Private Sub TestOKEnabled()
         If Not ucrReceiverColumnsToBeStack.IsEmpty() Then
