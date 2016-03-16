@@ -934,10 +934,10 @@
     <Compile Include="dlgNon-ParametricOneWayANOVA.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgNon-ParemetricOneandTwoSampleTests.Designer.vb">
-      <DependentUpon>dlgNon-ParemetricOneandTwoSampleTests.vb</DependentUpon>
+    <Compile Include="dlgNon-ParametricOneSampleTests.Designer.vb">
+      <DependentUpon>dlgNon-ParametricOneSampleTests.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgNon-ParemetricOneandTwoSampleTests.vb">
+    <Compile Include="dlgNon-ParametricOneSampleTests.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOneSample.Designer.vb">
@@ -2668,14 +2668,14 @@
       <DependentUpon>dlgNon-ParametricOneWayANOVA.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgNon-ParemetricOneandTwoSampleTests.fr-FR.resx">
-      <DependentUpon>dlgNon-ParemetricOneandTwoSampleTests.vb</DependentUpon>
+    <EmbeddedResource Include="dlgNon-ParametricOneSampleTests.fr-FR.resx">
+      <DependentUpon>dlgNon-ParametricOneSampleTests.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgNon-ParemetricOneandTwoSampleTests.resx">
-      <DependentUpon>dlgNon-ParemetricOneandTwoSampleTests.vb</DependentUpon>
+    <EmbeddedResource Include="dlgNon-ParametricOneSampleTests.resx">
+      <DependentUpon>dlgNon-ParametricOneSampleTests.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgNon-ParemetricOneandTwoSampleTests.sw-KE.resx">
-      <DependentUpon>dlgNon-ParemetricOneandTwoSampleTests.vb</DependentUpon>
+    <EmbeddedResource Include="dlgNon-ParametricOneSampleTests.sw-KE.resx">
+      <DependentUpon>dlgNon-ParametricOneSampleTests.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneSample.fr-FR.resx">
       <DependentUpon>dlgOneSample.vb</DependentUpon>
