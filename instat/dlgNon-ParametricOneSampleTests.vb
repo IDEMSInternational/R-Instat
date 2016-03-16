@@ -16,8 +16,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgNon_ParemetricOneandTwoSampleTests
-    Private Sub dlgNon_ParemetricOneandTwoSampleTests_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-    End Sub
+Public Class dlgNon_ParametricOneSampleTests
+
+
 End Class
