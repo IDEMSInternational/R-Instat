@@ -22,7 +22,7 @@ Public Class dlgPolynomials
 
         If bFirstLoad Then
             SetDefaults()
-            InitializeDialog()
+            InitialiseDialog()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -35,7 +35,7 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverPolynomial.IsEmpty() = False Then
+        If ucrReceiverPolynomial.IsEmpty() = False And nudDegree.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -55,23 +55,23 @@ Public Class dlgPolynomials
         SetDefaults()
     End Sub
 
-    Private Sub InitializeDialog()
+    Private Sub InitialiseDialog()
 
         ucrBase.clsRsyntax.SetFunction("poly")
         ucrBase.iHelpTopicID = 46
 
-        ucrInputPolynomial.SetPrefix("Polynomial")
+
         ucrInputPolynomial.SetItemsTypeAsColumns()
         ucrInputPolynomial.SetDefaultTypeAsColumn()
         ucrInputPolynomial.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
 
         clsCentredOptionFunc.AddParameter("center", "TRUE")
         clsCentredOptionFunc.AddParameter("scale", "FALSE")
+        clsCentredOptionFunc.SetRCommand("scale")
 
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
         ucrReceiverPolynomial.SetMeAsReceiver()
         ucrReceiverPolynomial.SetDataType("numeric")
-
     End Sub
 
     Private Sub ucrInputPolynomial_NameChanged() Handles ucrInputPolynomial.NameChanged
@@ -101,18 +101,16 @@ Public Class dlgPolynomials
 
         ElseIf rdoCentered.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsCentredOptionFunc)
-            clsCentredOptionFunc.SetRCommand("scale")
-            clsCentredOptionFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
             ucrBase.clsRsyntax.AddParameter("raw", "TRUE")
 
         Else
             ucrBase.clsRsyntax.RemoveParameter("raw")
-            clsCentredOptionFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
+
         End If
     End Sub
 
-    Private Sub nudDegree_ValueChanged(sender As Object, e As EventArgs) Handles nudDegree.ValueChanged
+    Private Sub nudDegree_TextChanged(sender As Object, e As EventArgs) Handles nudDegree.TextChanged
         ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Value)
+        TestOKEnabled()
     End Sub
-
 End Class
