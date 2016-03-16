@@ -413,7 +413,7 @@ Public Class frmMain
     End Sub
 
     Private Sub OneAndTwoSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricOneSample.Click
-        dlgNon_ParemetricOneandTwoSampleTests.ShowDialog()
+        dlgNon_ParametricOneSampleTests.ShowDialog()
     End Sub
 
     Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoWayAnova.Click
