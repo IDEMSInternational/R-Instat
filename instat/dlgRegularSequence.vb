@@ -18,17 +18,13 @@ Public Class dlgRegularSequence
     Dim bIsExtended As Boolean = False
     Public bFirstLoad As Boolean = True
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("seq")
+
         autoTranslate(Me)
-        ucrBase.iHelpTopicID = 30
-        UcrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
-        UcrInputCboRegularSequence.SetPrefix("Regular")
-        UcrInputCboRegularSequence.SetItemsTypeAsColumns()
-        UcrInputCboRegularSequence.SetDefaultTypeAsColumn()
-        UcrInputCboRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=UcrInputCboRegularSequence.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=UcrInputCboRegularSequence.GetText)
+
+
 
         If bFirstLoad Then
+            InitializeDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -37,11 +33,29 @@ Public Class dlgRegularSequence
         TestOKEnabled()
     End Sub
 
+    Private Sub InitializeDialog()
+        ucrBase.clsRsyntax.SetFunction("seq")
+        ucrBase.iHelpTopicID = 30
+        UcrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
+        UcrInputCboRegularSequence.SetPrefix("Regular")
+        UcrInputCboRegularSequence.SetItemsTypeAsColumns()
+        UcrInputCboRegularSequence.SetDefaultTypeAsColumn()
+        UcrInputCboRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
+    End Sub
+
     Private Sub SetDefaults()
         rdoNumeric.Checked = True
+        rdoDates.Checked = False
+        ucrSelectDataFrameRegularSequence.Reset()
+        ucrSelectDataFrameRegularSequence.Focus()
     End Sub
 
     Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
 
     End Sub
 
@@ -108,5 +122,9 @@ Public Class dlgRegularSequence
 
     Private Sub dtpSelectorB_ValueChanged(sender As Object, e As EventArgs) Handles dtpSelectorB.ValueChanged
         ucrBase.clsRsyntax.AddParameter("to", "as.Date('" & Format(dtpSelectorB.Value, "yyyy/MM/dd") & "')")
+    End Sub
+
+    Private Sub UcrInputCboRegularSequence_NameChanged() Handles UcrInputCboRegularSequence.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=UcrInputCboRegularSequence.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=UcrInputCboRegularSequence.GetText)
     End Sub
 End Class
