@@ -24,7 +24,7 @@ Public Class dlgRegularSequence
 
 
         If bFirstLoad Then
-            InitializeDialog()
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -33,7 +33,7 @@ Public Class dlgRegularSequence
         TestOKEnabled()
     End Sub
 
-    Private Sub InitializeDialog()
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("seq")
         ucrBase.iHelpTopicID = 30
         UcrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
