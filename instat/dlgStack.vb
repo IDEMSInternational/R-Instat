@@ -35,6 +35,11 @@ Public Class dlgStack
         ucrBase.iHelpTopicID = 57
         ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
         ucrIDVariablesReceiver.Selector = ucrSelectorStack
+        autoTranslate(Me)
+        ucrNewDataFrameName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
+        SetStackIntoText("value")
+        SetFactorIntoText("variable")
+        ucrReceiverColumnsToBeStack.SetMeAsReceiver()
     End Sub
 
     Private Sub ReopenDialog()
@@ -54,15 +59,12 @@ Public Class dlgStack
 
     Private Sub SetDefaults()
         ucrNewDataFrameName.Reset()
-        ucrNewDataFrameName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
         ucrSelectorStack.Reset()
-        ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+        ucrSelectorStack.Focus()
         chkIDVariables.Checked = False
         ucrIDVariablesReceiver.Visible = False
-        SetStackIntoText("value")
-        SetFactorIntoText("variable")
         ucrNewDataFrameName.bUserTyped = False
-        autoTranslate(Me)
+
     End Sub
 
     Private Sub SetFactorIntoText(strNewVal As String)
