@@ -18,6 +18,11 @@ Imports instat.Translations
 Public Class dlgRowStats
     Public bFirstLoad As Boolean = True
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrInputcboRowSummary.SetPrefix("RowSummary")
+        ucrInputcboRowSummary.SetItemsTypeAsColumns()
+        ucrInputcboRowSummary.SetDefaultTypeAsColumn()
+        ucrInputcboRowSummary.SetDataFrameSelector(ucrSelectorForRowStats.ucrAvailableDataFrames)
+
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -41,7 +46,7 @@ Public Class dlgRowStats
     End Sub
 
     Private Sub TestOKEnabled()
-        If (ucrReceiverForRowStatistics.lstSelectedVariables.Items.Count > 1) Then
+        If Not ucrReceiverForRowStatistics.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -56,14 +61,6 @@ Public Class dlgRowStats
         ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
         ucrBase.iHelpTopicID = 45
         cmdUserDefined.Enabled = False
-
-
-        ucrInputcboRowSummary.SetPrefix("RowSummary")
-        ucrInputcboRowSummary.SetItemsTypeAsColumns()
-        ucrInputcboRowSummary.SetDefaultTypeAsColumn()
-        ucrInputcboRowSummary.SetDataFrameSelector(ucrSelectorForRowStats.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputcboRowSummary.GetText, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputcboRowSummary.GetText)
-
     End Sub
 
 
