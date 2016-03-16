@@ -20,7 +20,7 @@ Public Class dlgStack
 
 
         If bFirstLoad Then
-            initialiseDialog()
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -30,7 +30,7 @@ Public Class dlgStack
         TestOKEnabled()
     End Sub
 
-    Private Sub initialiseDialog()
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("melt")
         ucrBase.iHelpTopicID = 57
         ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
