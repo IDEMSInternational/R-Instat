@@ -21,19 +21,27 @@ Public Class dlgPermuteColumn
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgPermuteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        InitialiseDialog()
         If bFirstLoad Then
             SetDefaults()
+            InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
 
         autoTranslate(Me)
 
     End Sub
     Private Sub SetDefaults()
+        ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
+        ucrReceiverPermuteRows.SetMeAsReceiver()
+        ucrInputPermuteRows.SetPrefix("permute")
         chkSetSeed.Checked = False
         nudSetSeed.Visible = False
         TestOkEnabled()
+    End Sub
+    Private Sub ReopenDialog()
+        ucrInputPermuteRows.SetPrefix("permute")
     End Sub
     Private Sub InitialiseDialog()
         ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
@@ -52,9 +60,7 @@ Public Class dlgPermuteColumn
         ucrInputPermuteRows.SetItemsTypeAsColumns()
         ucrInputPermuteRows.SetDefaultTypeAsColumn()
         ucrInputPermuteRows.SetDataFrameSelector(ucrPermuteRowsSelector.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPermuteRows.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPermuteRows.GetText)
 
-        TestOkEnabled()
 
     End Sub
 
@@ -91,5 +97,9 @@ Public Class dlgPermuteColumn
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub ucrInputPermuteRows_nameChanged() Handles ucrInputPermuteRows.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPermuteRows.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPermuteRows.GetText)
     End Sub
 End Class
