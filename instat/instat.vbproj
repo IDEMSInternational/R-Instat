@@ -3497,6 +3497,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="lib\unvell.ReoScript.dll" />
+    <Content Include="Resources\arrows-1.png" />
+    <Content Include="Resources\arrows-3.png" />
+    <Content Include="Resources\arrows-4.png" />
+    <Content Include="Resources\arrows-5.png" />
     <Content Include="static\ClimateObject\R\ClimateMethods\Models\readme_model.txt" />
     <Content Include="static\ClimateObject\R\R_front_ends\readme_front.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
