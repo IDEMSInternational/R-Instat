@@ -1,4 +1,20 @@
-﻿Public Class ucrInput
+﻿' Instat-R
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License k
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Public Class ucrInput
     Protected bUserTyped As Boolean = False
     Public Event NameChanged()
     Protected strValidationType As String = "None"
@@ -14,6 +30,10 @@
     Public Overridable Sub SetName(strName As String)
     End Sub
 
+    Public Overridable Function GetText() As String
+        Return ""
+    End Function
+
     Public Overridable Sub Reset()
         bUserTyped = False
     End Sub
@@ -24,18 +44,27 @@
 
     Public Sub SetDefaultTypeAsColumn()
         strDefaultType = "Column"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDefaultTypeAsModel()
         strDefaultType = "Model"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDefaultTypeAsDataFrame()
         strDefaultType = "Data Frame"
+        SetDefaultName()
+    End Sub
+
+    Public Sub SetDefaultTypeAsGraph()
+        strDefaultType = "Graph"
+        SetDefaultName()
     End Sub
 
     Public Sub SetValidationTypeAsRVariable()
         strValidationType = "RVariable"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
@@ -51,13 +80,15 @@
     End Sub
 
     Public Sub SetDefaultName()
-        If strDefaultType = "Column" AndAlso (ucrDataFrameSelector IsNot Nothing) Then
-            SetName(frmMain.clsRLink.GetDefaultColumnNames(strDefaultPrefix, ucrDataFrameSelector.cboAvailableDataFrames.Text))
-        ElseIf strDefaultType = "Model" Then
-        ElseIf strDefaultType = "Data Frame" Then
+        If strDefaultPrefix <> "" Then
+            If strDefaultType = "Column" AndAlso (ucrDataFrameSelector IsNot Nothing) Then
+                SetName(frmMain.clsRLink.GetDefaultColumnNames(strDefaultPrefix, ucrDataFrameSelector.cboAvailableDataFrames.Text))
+            ElseIf strDefaultType = "Model" Then
+            ElseIf strDefaultType = "Data Frame" Then
+            ElseIf strDefaultType = "Graph" Then
+            End If
         End If
     End Sub
-
 
 
     Public Sub SetValidationTypeAsNumeric(Optional dcmMin As Decimal = Decimal.MinValue, Optional bIncludeMin As Boolean = True, Optional dcmMax As Decimal = Decimal.MaxValue, Optional bIncludeMax As Boolean = True)
@@ -93,7 +124,7 @@
                 End If
             End If
         End If
-            Return strRange
+        Return strRange
     End Function
 
     Public Sub SetValidationTypeAsList()
@@ -125,12 +156,10 @@
         Return iType
     End Function
 
-    Public Sub ValidateText(strText As String, Optional ctrInputControl As Control = Nothing)
+    Public Function ValidateText(strText As String) As Boolean
         Dim iValidationCode As Integer
-        Dim bControlGiven As Boolean
 
         iValidationCode = GetValidationCode(strText)
-        bControlGiven = (ctrInputControl IsNot Nothing)
 
         Select Case iValidationCode
             Case 0
@@ -171,10 +200,8 @@
                         MsgBox("This name contains an invalid character", vbOKOnly)
                 End Select
         End Select
-        If iValidationCode > 0 AndAlso bControlGiven Then
-            ctrInputControl.Focus()
-        End If
-    End Sub
+        Return (iValidationCode = 0)
+    End Function
 
     'Returns integer as code for validation
     ' 0 : string is valid
@@ -279,6 +306,16 @@
     End Function
 
     Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameSelector.DataFrameChanged
+        If Not bUserTyped Then
+            SetDefaultName()
+        End If
+    End Sub
+
+    Public Overridable Function IsEmpty() As Boolean
+        Return True
+    End Function
+
+    Private Sub ucrInput_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Not bUserTyped Then
             SetDefaultName()
         End If

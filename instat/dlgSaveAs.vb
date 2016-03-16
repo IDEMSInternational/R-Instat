@@ -2,6 +2,7 @@
 Imports instat.Translations
 Public Class dlgSaveAs
     Dim dlgSave As New SaveFileDialog
+    Dim bFirstLoad As Boolean = True
 
     Private Sub chkLog_CheckedChanged(sender As Object, e As EventArgs) Handles chkLog.CheckedChanged
         If chkLog.Checked = True Then
@@ -9,7 +10,6 @@ Public Class dlgSaveAs
         Else
             grpLog.Enabled = False
         End If
-        CheckOKEnable()
     End Sub
 
     Private Sub chkOutput_CheckedChanged(sender As Object, e As EventArgs) Handles chkOutput.CheckedChanged
@@ -18,22 +18,16 @@ Public Class dlgSaveAs
         Else
             grpOutput.Enabled = False
         End If
-        CheckOKEnable()
     End Sub
 
     Private Sub dlgSaveAs_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ttScript.SetToolTip(chkScript, "You cannot save an empty script.")
         autoTranslate(Me)
-        ucrBase.OKEnabled(False)
-        If chkOutput.Checked Then
-            grpLog.Enabled = True
-        Else
-            grpLog.Enabled = False
+        If bFirstLoad Then
+            setDefaults()
+            bFirstLoad = False
         End If
-        If chkLog.Checked Then
-            grpOutput.Enabled = True
-        Else
-            grpOutput.Enabled = False
-        End If
+        TestOKEnabled()
     End Sub
 
     Private Sub cmdLogSave_Click(sender As Object, e As EventArgs) Handles cmdLogSave.Click
@@ -43,7 +37,6 @@ Public Class dlgSaveAs
         If dlgSave.ShowDialog() = DialogResult.OK Then
             txtLogSave.Text = dlgSave.FileName.Replace("\", "/")
         End If
-        CheckOKEnable()
     End Sub
 
     Private Sub cmdOutputSave_Click(sender As Object, e As EventArgs) Handles cmdOutputSave.Click
@@ -53,32 +46,26 @@ Public Class dlgSaveAs
         If dlgSave.ShowDialog() = DialogResult.OK Then
             txtOutputSave.Text = dlgSave.FileName.Replace("\", "/")
         End If
-        CheckOKEnable()
     End Sub
 
-    Public Sub CheckOKEnable()
-        Dim bEnable = False
+    Private Sub TestOKEnabled()
         If txtEditorSave.Text <> "" Then
-            bEnable = True
-            If chkLog.Checked And txtLogSave.Text = "" Then
-                bEnable = False
-            End If
-            If chkOutput.Checked And txtOutputSave.Text = "" Then
-                bEnable = False
-            End If
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
-        ucrBase.OKEnabled(bEnable)
     End Sub
+
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        If chkLog.Checked = True And txtLogSave.Text <> "" Then
-            Try
-                Dim sWriter As New StreamWriter(txtOutputSave.Text)
-                sWriter.Write(frmLog.txtLog.Text)
-                sWriter.Flush()
-            Catch ex As Exception
-            End Try
+        If chkLog.Checked And txtLogSave.Text <> "" Then
+            saveTextFiles(txtLogSave.Text, frmLog.txtLog.Text)
         End If
-        If chkOutput.Checked = True And txtOutputSave.Text <> "" Then
+
+        If chkScript.Checked Then
+            saveTextFiles(txtScriptSave.Text, frmScript.txtScript.Text)
+        End If
+
+        If chkOutput.Checked And txtOutputSave.Text <> "" Then
             Try
                 frmCommand.txtCommand.SaveFile(txtOutputSave.Text, RichTextBoxStreamType.RichText)
             Catch ex As Exception
@@ -100,6 +87,58 @@ Public Class dlgSaveAs
         'Pass the file
         ucrBase.clsRsyntax.AddParameter("file", Chr(34) & txtEditorSave.Text & Chr(34))
 
-        CheckOKEnable()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub txtEditorSave_TextChanged(sender As Object, e As EventArgs) Handles txtEditorSave.TextChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub chkScript_CheckStateChanged(sender As Object, e As EventArgs) Handles chkScript.CheckStateChanged
+        If frmScript.txtScript.Text <> "" Then
+            If chkScript.Checked Then
+                grpScript.Enabled = True
+            Else
+                grpScript.Enabled = False
+            End If
+        Else
+            chkScript.Checked = False
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub cmdScriptSave_Click(sender As Object, e As EventArgs) Handles cmdScriptSave.Click
+        dlgSave.Reset()
+        dlgSave.Title = "Save Script File"
+        dlgSave.Filter = "Text file (*.txt)|*.txt"
+        If dlgSave.ShowDialog() = DialogResult.OK Then
+            txtScriptSave.Text = dlgSave.FileName.Replace("\", "/")
+        End If
+    End Sub
+
+    Private Sub saveTextFiles(strPath As String, strFile As String)
+        Dim sWrite As New StreamWriter(strPath)
+        Try
+            sWrite.Write(strFile)
+            sWrite.Flush()
+            sWrite.Dispose()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        setDefaults()
+    End Sub
+
+    Private Sub setDefaults()
+        txtEditorSave.Text = ""
+        txtLogSave.Text = ""
+        txtOutputSave.Text = ""
+        txtScriptSave.Text = ""
+        chkLog.Checked = False
+        chkOutput.Checked = False
+        chkScript.Checked = False
+
     End Sub
 End Class
