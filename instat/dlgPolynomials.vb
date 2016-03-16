@@ -22,7 +22,7 @@ Public Class dlgPolynomials
 
         If bFirstLoad Then
             SetDefaults()
-            InitializeDialog()
+            InitialiseDialog()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -55,7 +55,7 @@ Public Class dlgPolynomials
         SetDefaults()
     End Sub
 
-    Private Sub InitializeDialog()
+    Private Sub InitialiseDialog()
 
         ucrBase.clsRsyntax.SetFunction("poly")
         ucrBase.iHelpTopicID = 46
