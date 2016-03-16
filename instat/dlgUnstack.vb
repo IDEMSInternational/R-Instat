@@ -18,15 +18,10 @@ Imports instat.Translations
 Public Class dlgUnstack
     Public bFirstLoad As Boolean = True
     Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
-        ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
-        ucrBase.clsRsyntax.SetFunction("tidyr::spread")
-
-
         autoTranslate(Me)
-        ucrBase.iHelpTopicID = 58
 
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -35,13 +30,22 @@ Public Class dlgUnstack
         'Checks if Ok can be enabled.
         TestOKEnabled()
     End Sub
-
-    Private Sub SetDefaults()
+    Private Sub InitialiseDialog()
+        ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
+        ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
+        ucrBase.clsRsyntax.SetFunction("tidyr::spread")
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
         ucrSelectorForUnstack.Reset()
+        SetNewDataFrameName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
+        ucrBase.iHelpTopicID = 58
+    End Sub
+
+    Private Sub SetDefaults()
+
         chkKeepUnusedFactorLevels.Checked = False
         ucrDataFrameForUnstack.Reset()
-        SetNewDataFrameName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Unstacked")
+        ucrDataFrameForUnstack.Focus()
+
     End Sub
 
     Private Sub ReopenDialog()
