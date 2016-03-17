@@ -790,10 +790,10 @@
     <Compile Include="dlgImportDataset.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgIndicatorVariable.Designer.vb">
-      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
+    <Compile Include="dlgDummyVariables.Designer.vb">
+      <DependentUpon>dlgDummyVariables.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgIndicatorVariable.vb">
+    <Compile Include="dlgDummyVariables.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCombine.Designer.vb">
@@ -2460,14 +2460,14 @@
     <EmbeddedResource Include="dlgImportDataset.sw-KE.resx">
       <DependentUpon>dlgImportDataset.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgIndicatorVariable.fr-FR.resx">
-      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDummyVariables.fr-FR.resx">
+      <DependentUpon>dlgDummyVariables.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgIndicatorVariable.resx">
-      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDummyVariables.resx">
+      <DependentUpon>dlgDummyVariables.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgIndicatorVariable.sw-KE.resx">
-      <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDummyVariables.sw-KE.resx">
+      <DependentUpon>dlgDummyVariables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCombine.fr-FR.resx">
       <DependentUpon>dlgCombine.vb</DependentUpon>
