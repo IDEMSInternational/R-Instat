@@ -10,17 +10,56 @@
 'GNU General Public License for more details.
 'You should have received a copy of the GNU General Public License k
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'
+
 Imports instat.Translations
 Public Class dlgCombine
+    Private bFirstLoad As Boolean = True
     Private Sub dlgInteractions_Load(sender As Object, e As KeyEventArgs) Handles Me.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+        Else
+            ReOpenDialog()
+        End If
         autoTranslate(Me)
-        SetDefaults()
     End Sub
     Private Sub SetDefaults()
-    End Sub
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs)
-        SetDefaults()
+        ucrSelectorCombineFactors.Reset()
+        ucrSelectorCombineFactors.Focus()
+        ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
+        ucrFactorsReceiver.SetMeAsReceiver()
+
+        chkDropUnusedLevels.Checked = False
+        ucrInputColName.SetPrefix("Interract")
     End Sub
 
+    Private Sub ReOpenDialog()
+        ucrInputColName.SetPrefix("Interract")
+
+    End Sub
+
+    Private Sub TesTOkEnabled()
+
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
+        ucrFactorsReceiver.SetDataType("factor")
+        chkDropUnusedLevels.Checked = False
+
+
+        ucrInputColName.SetPrefix("Interract")
+        ucrInputColName.SetItemsTypeAsColumns()
+        ucrInputColName.SetDefaultTypeAsColumn()
+        ucrInputColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
+
+    End Sub
+
+    Private Sub ucrInputColName_NameChanged() Handles ucrInputColName.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
 End Class

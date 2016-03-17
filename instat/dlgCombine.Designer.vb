@@ -25,8 +25,8 @@ Partial Class dlgCombine
         Me.ucrSelectorCombineFactors = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrFactorsReceiver = New instat.ucrReceiverMultiple()
         Me.lblFactors = New System.Windows.Forms.Label()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
+        Me.chkDropUnusedLevels = New System.Windows.Forms.CheckBox()
+        Me.ucrInputColName = New instat.ucrInputComboBox()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
@@ -36,7 +36,7 @@ Partial Class dlgCombine
         Me.ucrSelectorCombineFactors.Location = New System.Drawing.Point(3, 4)
         Me.ucrSelectorCombineFactors.Name = "ucrSelectorCombineFactors"
         Me.ucrSelectorCombineFactors.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorCombineFactors.TabIndex = 26
+        Me.ucrSelectorCombineFactors.TabIndex = 0
         '
         'ucrFactorsReceiver
         '
@@ -44,7 +44,7 @@ Partial Class dlgCombine
         Me.ucrFactorsReceiver.Name = "ucrFactorsReceiver"
         Me.ucrFactorsReceiver.Selector = Nothing
         Me.ucrFactorsReceiver.Size = New System.Drawing.Size(121, 104)
-        Me.ucrFactorsReceiver.TabIndex = 27
+        Me.ucrFactorsReceiver.TabIndex = 2
         '
         'lblFactors
         '
@@ -52,27 +52,27 @@ Partial Class dlgCombine
         Me.lblFactors.Location = New System.Drawing.Point(251, 30)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(42, 13)
-        Me.lblFactors.TabIndex = 28
+        Me.lblFactors.TabIndex = 1
         Me.lblFactors.Tag = "Factors"
         Me.lblFactors.Text = "Factors"
         '
-        'CheckBox1
+        'chkDropUnusedLevels
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(13, 190)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(126, 17)
-        Me.CheckBox1.TabIndex = 29
-        Me.CheckBox1.Tag = "Drop_Unused_Levels "
-        Me.CheckBox1.Text = "Drop Unused Levels "
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.chkDropUnusedLevels.AutoSize = True
+        Me.chkDropUnusedLevels.Location = New System.Drawing.Point(13, 190)
+        Me.chkDropUnusedLevels.Name = "chkDropUnusedLevels"
+        Me.chkDropUnusedLevels.Size = New System.Drawing.Size(126, 17)
+        Me.chkDropUnusedLevels.TabIndex = 3
+        Me.chkDropUnusedLevels.Tag = "Drop_Unused_Levels "
+        Me.chkDropUnusedLevels.Text = "Drop Unused Levels "
+        Me.chkDropUnusedLevels.UseVisualStyleBackColor = True
         '
-        'UcrInputComboBox1
+        'ucrInputColName
         '
-        Me.UcrInputComboBox1.Location = New System.Drawing.Point(165, 214)
-        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
-        Me.UcrInputComboBox1.Size = New System.Drawing.Size(171, 25)
-        Me.UcrInputComboBox1.TabIndex = 30
+        Me.ucrInputColName.Location = New System.Drawing.Point(165, 214)
+        Me.ucrInputColName.Name = "ucrInputColName"
+        Me.ucrInputColName.Size = New System.Drawing.Size(171, 25)
+        Me.ucrInputColName.TabIndex = 5
         '
         'lblNewColumnName
         '
@@ -80,7 +80,7 @@ Partial Class dlgCombine
         Me.lblNewColumnName.Location = New System.Drawing.Point(13, 219)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
-        Me.lblNewColumnName.TabIndex = 31
+        Me.lblNewColumnName.TabIndex = 4
         Me.lblNewColumnName.Tag = "New_Column_Name"
         Me.lblNewColumnName.Text = "New Column Name"
         '
@@ -89,7 +89,7 @@ Partial Class dlgCombine
         Me.ucrBase.Location = New System.Drawing.Point(0, 241)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 32
+        Me.ucrBase.TabIndex = 6
         '
         'dlgCombine
         '
@@ -98,8 +98,8 @@ Partial Class dlgCombine
         Me.ClientSize = New System.Drawing.Size(404, 304)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.UcrInputComboBox1)
-        Me.Controls.Add(Me.CheckBox1)
+        Me.Controls.Add(Me.ucrInputColName)
+        Me.Controls.Add(Me.chkDropUnusedLevels)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.ucrFactorsReceiver)
         Me.Controls.Add(Me.ucrSelectorCombineFactors)
@@ -115,8 +115,8 @@ Partial Class dlgCombine
     Friend WithEvents ucrSelectorCombineFactors As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrFactorsReceiver As ucrReceiverMultiple
     Friend WithEvents lblFactors As Label
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents UcrInputComboBox1 As ucrInputComboBox
+    Friend WithEvents chkDropUnusedLevels As CheckBox
+    Friend WithEvents ucrInputColName As ucrInputComboBox
     Friend WithEvents lblNewColumnName As Label
     Friend WithEvents ucrBase As ucrButtons
 End Class
