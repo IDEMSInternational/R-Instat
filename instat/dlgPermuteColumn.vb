@@ -41,7 +41,7 @@ Public Class dlgPermuteColumn
         TestOkEnabled()
     End Sub
     Private Sub ReopenDialog()
-        ucrInputPermuteRows.SetPrefix("permute")
+
     End Sub
     Private Sub InitialiseDialog()
         ucrReceiverPermuteRows.Selector = ucrPermuteRowsSelector
@@ -52,7 +52,6 @@ Public Class dlgPermuteColumn
         clsSetSampleFunc.SetRCommand("sample")
         clsSetSampleFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverPermuteRows.GetVariables())
         clsSetSampleFunc.AddParameter("replace", "FALSE")
-        clsSetSampleFunc.AddParameter("size", ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength)
         nudSetSeed.Visible = False
         ucrBase.iHelpTopicID = 66
 
@@ -101,5 +100,9 @@ Public Class dlgPermuteColumn
 
     Private Sub ucrInputPermuteRows_nameChanged() Handles ucrInputPermuteRows.NameChanged
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPermuteRows.GetText, strTempDataframe:=ucrPermuteRowsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPermuteRows.GetText)
+    End Sub
+
+    Private Sub ucrPermuteRowsSelector_DataFrameChanged() Handles ucrPermuteRowsSelector.DataFrameChanged
+        clsSetSampleFunc.AddParameter("size", ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength)
     End Sub
 End Class
