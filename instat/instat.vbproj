@@ -796,10 +796,10 @@
     <Compile Include="dlgIndicatorVariable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgInteractions.Designer.vb">
-      <DependentUpon>dlgInteractions.vb</DependentUpon>
+    <Compile Include="dlgCombine.Designer.vb">
+      <DependentUpon>dlgCombine.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgInteractions.vb">
+    <Compile Include="dlgCombine.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgInterpolate.Designer.vb">
@@ -2469,14 +2469,14 @@
     <EmbeddedResource Include="dlgIndicatorVariable.sw-KE.resx">
       <DependentUpon>dlgIndicatorVariable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgInteractions.fr-FR.resx">
-      <DependentUpon>dlgInteractions.vb</DependentUpon>
+    <EmbeddedResource Include="dlgCombine.fr-FR.resx">
+      <DependentUpon>dlgCombine.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgInteractions.resx">
-      <DependentUpon>dlgInteractions.vb</DependentUpon>
+    <EmbeddedResource Include="dlgCombine.resx">
+      <DependentUpon>dlgCombine.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgInteractions.sw-KE.resx">
-      <DependentUpon>dlgInteractions.vb</DependentUpon>
+    <EmbeddedResource Include="dlgCombine.sw-KE.resx">
+      <DependentUpon>dlgCombine.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInterpolate.fr-FR.resx">
       <DependentUpon>dlgInterpolate.vb</DependentUpon>
