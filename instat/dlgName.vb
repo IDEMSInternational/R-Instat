@@ -61,7 +61,7 @@ Public Class dlgName
 
     Private Sub ucrReceiverName_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverName.SelectionChanged
         ucrBase.clsRsyntax.AddParameter("column_name", ucrReceiverName.GetVariableNames)
-        txtName.Text = ucrReceiverName.GetVariableNames.Replace(Chr(34), "")
+        txtName.Text = ucrReceiverName.GetVariableNames(bWithQuotes:=False)
         TestOKEnabled()
     End Sub
 
