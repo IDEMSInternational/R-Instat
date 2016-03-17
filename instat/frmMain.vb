@@ -322,7 +322,7 @@ Public Class frmMain
     End Sub
 
     Private Sub InteractionsToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgIndicatorVariable.ShowDialog()
+        dlgDummyVariables.ShowDialog()
     End Sub
 
     Private Sub mnuManageAddColumnPolynomials_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnPolynomials.Click
@@ -831,7 +831,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageFactorIndicatorVariables_Click(sender As Object, e As EventArgs) Handles mnuManageFactorIndicatorVariables.Click
-        dlgIndicatorVariable.ShowDialog()
+        dlgDummyVariables.ShowDialog()
     End Sub
 
     Private Sub mnuManageFactorInteraction_Click(sender As Object, e As EventArgs) Handles mnuManageFactorInteraction.Click
