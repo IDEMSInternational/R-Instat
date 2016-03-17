@@ -22,51 +22,47 @@ Partial Class dlgIndicatorVariable
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.grpLevelToBeOmitted = New System.Windows.Forms.GroupBox()
+        Me.grpLevelOmitted = New System.Windows.Forms.GroupBox()
         Me.rdoLevelNumber = New System.Windows.Forms.RadioButton()
         Me.rdoLast = New System.Windows.Forms.RadioButton()
         Me.rdoFirst = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.chkXvariable = New System.Windows.Forms.CheckBox()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrDataFrameSelector = New instat.ucrDataFrame()
-        Me.lblSelectedFactors = New System.Windows.Forms.Label()
+        Me.lblSelected = New System.Windows.Forms.Label()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.lblVariate = New System.Windows.Forms.Label()
+        Me.ucrInputColName = New instat.ucrInputComboBox()
+        Me.ucrSelectorDummyVariable = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrVariateReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
-        Me.grpLevelToBeOmitted.SuspendLayout()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.grpLevelOmitted.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'grpLevelOmitted
         '
-        Me.ucrBase.Location = New System.Drawing.Point(7, 369)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
-        Me.ucrBase.TabIndex = 0
-        '
-        'grpLevelToBeOmitted
-        '
-        Me.grpLevelToBeOmitted.Controls.Add(Me.rdoLevelNumber)
-        Me.grpLevelToBeOmitted.Controls.Add(Me.rdoLast)
-        Me.grpLevelToBeOmitted.Controls.Add(Me.rdoFirst)
-        Me.grpLevelToBeOmitted.Controls.Add(Me.rdoNone)
-        Me.grpLevelToBeOmitted.Location = New System.Drawing.Point(5, 234)
-        Me.grpLevelToBeOmitted.Name = "grpLevelToBeOmitted"
-        Me.grpLevelToBeOmitted.Size = New System.Drawing.Size(123, 112)
-        Me.grpLevelToBeOmitted.TabIndex = 1
-        Me.grpLevelToBeOmitted.TabStop = False
-        Me.grpLevelToBeOmitted.Tag = "Level_to_be_omitted"
-        Me.grpLevelToBeOmitted.Text = "Level to be omitted"
+        Me.grpLevelOmitted.Controls.Add(Me.rdoLevelNumber)
+        Me.grpLevelOmitted.Controls.Add(Me.rdoLast)
+        Me.grpLevelOmitted.Controls.Add(Me.rdoFirst)
+        Me.grpLevelOmitted.Controls.Add(Me.rdoNone)
+        Me.grpLevelOmitted.Location = New System.Drawing.Point(275, 100)
+        Me.grpLevelOmitted.Name = "grpLevelOmitted"
+        Me.grpLevelOmitted.Size = New System.Drawing.Size(123, 112)
+        Me.grpLevelOmitted.TabIndex = 1
+        Me.grpLevelOmitted.TabStop = False
+        Me.grpLevelOmitted.Tag = "Level_Omitted"
+        Me.grpLevelOmitted.Text = "Level Omitted"
         '
         'rdoLevelNumber
         '
         Me.rdoLevelNumber.AutoSize = True
         Me.rdoLevelNumber.Location = New System.Drawing.Point(6, 88)
         Me.rdoLevelNumber.Name = "rdoLevelNumber"
-        Me.rdoLevelNumber.Size = New System.Drawing.Size(89, 17)
+        Me.rdoLevelNumber.Size = New System.Drawing.Size(51, 17)
         Me.rdoLevelNumber.TabIndex = 0
         Me.rdoLevelNumber.TabStop = True
-        Me.rdoLevelNumber.Tag = "Level_number"
-        Me.rdoLevelNumber.Text = "Level number"
+        Me.rdoLevelNumber.Tag = "Level"
+        Me.rdoLevelNumber.Text = "Level"
         Me.rdoLevelNumber.UseVisualStyleBackColor = True
         '
         'rdoLast
@@ -108,7 +104,7 @@ Partial Class dlgIndicatorVariable
         'chkXvariable
         '
         Me.chkXvariable.AutoSize = True
-        Me.chkXvariable.Location = New System.Drawing.Point(5, 196)
+        Me.chkXvariable.Location = New System.Drawing.Point(5, 206)
         Me.chkXvariable.Name = "chkXvariable"
         Me.chkXvariable.Size = New System.Drawing.Size(114, 17)
         Me.chkXvariable.TabIndex = 4
@@ -116,70 +112,113 @@ Partial Class dlgIndicatorVariable
         Me.chkXvariable.Text = "With an X Variable"
         Me.chkXvariable.UseVisualStyleBackColor = True
         '
-        'ucrAddRemove
+        'lblSelected
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(1, 49)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(212, 127)
-        Me.ucrAddRemove.TabIndex = 5
+        Me.lblSelected.AutoSize = True
+        Me.lblSelected.Location = New System.Drawing.Point(280, 46)
+        Me.lblSelected.Name = "lblSelected"
+        Me.lblSelected.Size = New System.Drawing.Size(49, 13)
+        Me.lblSelected.TabIndex = 7
+        Me.lblSelected.Tag = "Selected"
+        Me.lblSelected.Text = "Selected"
         '
-        'ucrDataFrameSelector
+        'lblNewColumnName
         '
-        Me.ucrDataFrameSelector.Location = New System.Drawing.Point(1, 2)
-        Me.ucrDataFrameSelector.Name = "ucrDataFrameSelector"
-        Me.ucrDataFrameSelector.Size = New System.Drawing.Size(127, 41)
-        Me.ucrDataFrameSelector.TabIndex = 6
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(7, 246)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.TabIndex = 11
+        Me.lblNewColumnName.Tag = "New_Column_Name"
+        Me.lblNewColumnName.Text = "New Column Name"
         '
-        'lblSelectedFactors
+        'lblVariate
         '
-        Me.lblSelectedFactors.AutoSize = True
-        Me.lblSelectedFactors.Location = New System.Drawing.Point(240, 60)
-        Me.lblSelectedFactors.Name = "lblSelectedFactors"
-        Me.lblSelectedFactors.Size = New System.Drawing.Size(88, 13)
-        Me.lblSelectedFactors.TabIndex = 7
-        Me.lblSelectedFactors.Tag = "Selected_factor"
-        Me.lblSelectedFactors.Text = "selected factor(s)"
+        Me.lblVariate.AutoSize = True
+        Me.lblVariate.Location = New System.Drawing.Point(119, 209)
+        Me.lblVariate.Name = "lblVariate"
+        Me.lblVariate.Size = New System.Drawing.Size(40, 13)
+        Me.lblVariate.TabIndex = 7
+        Me.lblVariate.Tag = "Variate"
+        Me.lblVariate.Text = "Variate"
+        '
+        'ucrInputColName
+        '
+        Me.ucrInputColName.Location = New System.Drawing.Point(141, 246)
+        Me.ucrInputColName.Name = "ucrInputColName"
+        Me.ucrInputColName.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputColName.TabIndex = 10
+        '
+        'ucrSelectorDummyVariable
+        '
+        Me.ucrSelectorDummyVariable.Location = New System.Drawing.Point(5, 19)
+        Me.ucrSelectorDummyVariable.Name = "ucrSelectorDummyVariable"
+        Me.ucrSelectorDummyVariable.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorDummyVariable.TabIndex = 9
+        '
+        'ucrVariateReceiver
+        '
+        Me.ucrVariateReceiver.Location = New System.Drawing.Point(165, 204)
+        Me.ucrVariateReceiver.Name = "ucrVariateReceiver"
+        Me.ucrVariateReceiver.Selector = Nothing
+        Me.ucrVariateReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrVariateReceiver.TabIndex = 8
         '
         'ucrReceiverFactor
         '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(234, 78)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(275, 64)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverFactor.TabIndex = 8
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 282)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgIndicatorVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(431, 424)
+        Me.ClientSize = New System.Drawing.Size(417, 343)
+        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.ucrInputColName)
+        Me.Controls.Add(Me.ucrSelectorDummyVariable)
+        Me.Controls.Add(Me.ucrVariateReceiver)
+        Me.Controls.Add(Me.lblVariate)
         Me.Controls.Add(Me.ucrReceiverFactor)
-        Me.Controls.Add(Me.lblSelectedFactors)
-        Me.Controls.Add(Me.ucrDataFrameSelector)
-        Me.Controls.Add(Me.ucrAddRemove)
+        Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.chkXvariable)
-        Me.Controls.Add(Me.grpLevelToBeOmitted)
+        Me.Controls.Add(Me.grpLevelOmitted)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgIndicatorVariable"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Indicator_variable"
-        Me.Text = "Indicator variable"
-        Me.grpLevelToBeOmitted.ResumeLayout(False)
-        Me.grpLevelToBeOmitted.PerformLayout()
+        Me.Tag = "Dummy_Variables"
+        Me.Text = "Dummy Variables"
+        Me.TopMost = True
+        Me.grpLevelOmitted.ResumeLayout(False)
+        Me.grpLevelOmitted.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents grpLevelToBeOmitted As GroupBox
+    Friend WithEvents grpLevelOmitted As GroupBox
     Friend WithEvents rdoLevelNumber As RadioButton
     Friend WithEvents rdoLast As RadioButton
     Friend WithEvents rdoFirst As RadioButton
     Friend WithEvents rdoNone As RadioButton
     Friend WithEvents chkXvariable As CheckBox
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents ucrDataFrameSelector As ucrDataFrame
-    Friend WithEvents lblSelectedFactors As Label
+    Friend WithEvents lblSelected As Label
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
+    Friend WithEvents ucrSelectorDummyVariable As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrInputColName As ucrInputComboBox
+    Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents lblVariate As Label
+    Friend WithEvents ucrVariateReceiver As ucrReceiverSingle
 End Class
