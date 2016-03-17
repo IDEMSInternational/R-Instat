@@ -45,6 +45,7 @@ Public Class dlgRecode
         ucrReceiverRecode.SetDataType("numeric")
         ucrBase.clsRsyntax.SetFunction("cut")
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
+        ucrFactorRecode.SetReceiver(ucrReceiverRecode)
 
     End Sub
 
