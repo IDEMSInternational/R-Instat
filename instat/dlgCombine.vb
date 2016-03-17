@@ -28,17 +28,15 @@ Public Class dlgCombine
         ucrSelectorCombineFactors.Focus()
         ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
         ucrFactorsReceiver.SetMeAsReceiver()
-
         chkDropUnusedLevels.Checked = False
-        ucrInputColName.SetPrefix("Interract")
+
     End Sub
 
     Private Sub ReOpenDialog()
-        ucrInputColName.SetPrefix("Interract")
 
     End Sub
 
-    Private Sub TesTOkEnabled()
+    Private Sub TestOkEnabled()
 
     End Sub
 
@@ -48,7 +46,7 @@ Public Class dlgCombine
         chkDropUnusedLevels.Checked = False
 
 
-        ucrInputColName.SetPrefix("Interract")
+        ucrInputColName.SetPrefix("Interact")
         ucrInputColName.SetItemsTypeAsColumns()
         ucrInputColName.SetDefaultTypeAsColumn()
         ucrInputColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
