@@ -24,17 +24,25 @@ Public Class dlgLabels
             SetDefaults()
             bFirstLoad = False
         End If
+        TestOKEnabled()
     End Sub
 
-    Private Sub InitialiseDialog()
+    Private Sub TestOKEnabled()
 
+    End Sub
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 35
+        ucrReceiverLabels.Selector = ucrSelectorForLabels
+        ucrReceiverLabels.SetMeAsReceiver()
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrSelectorForLabels.Reset()
+        ucrSelectorForLabels.Focus()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        TestOKEnabled()
         SetDefaults()
     End Sub
 End Class
