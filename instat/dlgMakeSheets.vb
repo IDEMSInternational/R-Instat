@@ -21,9 +21,14 @@ Public Class dlgMakeSheets
         autoTranslate(Me)
 
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
+    End Sub
+
+    Private Sub InitialiseDialog()
+
     End Sub
     Private Sub SetDefaults()
 
