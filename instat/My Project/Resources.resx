@@ -1378,4 +1378,61 @@
   <data name="Yvariable" xml:space="preserve">
     <value>Y variable</value>
   </data>
+  <data name="Combine_Factors" xml:space="preserve">
+    <value>Combine Factors</value>
+  </data>
+  <data name="Dot_Plot_Options" xml:space="preserve">
+    <value>Dot Plot Options</value>
+  </data>
+  <data name="Drop_Unused_Levels" xml:space="preserve">
+    <value>Drop Unused Levels </value>
+  </data>
+  <data name="Dummy_Variables" xml:space="preserve">
+    <value>Dummy Variables</value>
+  </data>
+  <data name="Factors" xml:space="preserve">
+    <value>Factors</value>
+  </data>
+  <data name="Factor_Optional" xml:space="preserve">
+    <value>Factor(Optional)</value>
+  </data>
+  <data name="Include_Facets" xml:space="preserve">
+    <value>Include Facets</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="Level_Omitted" xml:space="preserve">
+    <value>Level Omitted</value>
+  </data>
+  <data name="Line_Options" xml:space="preserve">
+    <value>Line Options</value>
+  </data>
+  <data name="New_Column_Name" xml:space="preserve">
+    <value>New Column Name</value>
+  </data>
+  <data name="Number_of_Rows" xml:space="preserve">
+    <value>Number of Rows</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="Point_Options" xml:space="preserve">
+    <value>Point Options</value>
+  </data>
+  <data name="Second_Factor_Optional" xml:space="preserve">
+    <value>Second Factor(Optional)</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="Simple_Regression_Options" xml:space="preserve">
+    <value>Simple Regression Options</value>
+  </data>
+  <data name="Variate" xml:space="preserve">
+    <value>Variate</value>
+  </data>
+  <data name="Y_Variable" xml:space="preserve">
+    <value>Y Variable</value>
+  </data>
 </root>
