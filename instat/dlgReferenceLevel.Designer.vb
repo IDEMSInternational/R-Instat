@@ -23,11 +23,11 @@ Partial Class dlgReferenceLevel
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDataFrameSelector = New instat.ucrDataFrame()
-        Me.ucrFactorSelected = New instat.ucrReceiverSingle()
+        Me.ucrReceiverReferenceLevels = New instat.ucrReceiverSingle()
         Me.lblFactorSelected = New System.Windows.Forms.Label()
         Me.lblInfo = New System.Windows.Forms.Label()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrFactorReferenceLevels = New instat.ucrFactor()
+        Me.ucrSelectorForReferenceLevels = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -37,24 +37,18 @@ Partial Class dlgReferenceLevel
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrDataFrameSelector
+        'ucrReceiverReferenceLevels
         '
-        Me.ucrDataFrameSelector.Location = New System.Drawing.Point(1, 1)
-        Me.ucrDataFrameSelector.Name = "ucrDataFrameSelector"
-        Me.ucrDataFrameSelector.Size = New System.Drawing.Size(127, 41)
-        Me.ucrDataFrameSelector.TabIndex = 1
-        '
-        'ucrFactorSelected
-        '
-        Me.ucrFactorSelected.Location = New System.Drawing.Point(237, 84)
-        Me.ucrFactorSelected.Name = "ucrFactorSelected"
-        Me.ucrFactorSelected.Size = New System.Drawing.Size(106, 26)
-        Me.ucrFactorSelected.TabIndex = 3
+        Me.ucrReceiverReferenceLevels.Location = New System.Drawing.Point(261, 58)
+        Me.ucrReceiverReferenceLevels.Name = "ucrReceiverReferenceLevels"
+        Me.ucrReceiverReferenceLevels.Selector = Nothing
+        Me.ucrReceiverReferenceLevels.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverReferenceLevels.TabIndex = 3
         '
         'lblFactorSelected
         '
         Me.lblFactorSelected.AutoSize = True
-        Me.lblFactorSelected.Location = New System.Drawing.Point(243, 69)
+        Me.lblFactorSelected.Location = New System.Drawing.Point(261, 42)
         Me.lblFactorSelected.Name = "lblFactorSelected"
         Me.lblFactorSelected.Size = New System.Drawing.Size(80, 13)
         Me.lblFactorSelected.TabIndex = 4
@@ -71,23 +65,34 @@ Partial Class dlgReferenceLevel
         Me.lblInfo.Tag = "REQUIRES_A_FACTOR_LEVEL_SELECTOR"
         Me.lblInfo.Text = "REQUIRES A FACTOR LEVEL SELECTOR"
         '
-        'ucrAddRemove
+        'ucrFactorReferenceLevels
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(1, 58)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
-        Me.ucrAddRemove.TabIndex = 6
+        Me.ucrFactorReferenceLevels.AutoSize = True
+        Me.ucrFactorReferenceLevels.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrFactorReferenceLevels.clsReceiver = Nothing
+        Me.ucrFactorReferenceLevels.Location = New System.Drawing.Point(251, 90)
+        Me.ucrFactorReferenceLevels.Name = "ucrFactorReferenceLevels"
+        Me.ucrFactorReferenceLevels.shtCurrSheet = Nothing
+        Me.ucrFactorReferenceLevels.Size = New System.Drawing.Size(267, 181)
+        Me.ucrFactorReferenceLevels.TabIndex = 7
+        '
+        'ucrSelectorForReferenceLevels
+        '
+        Me.ucrSelectorForReferenceLevels.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorForReferenceLevels.Name = "ucrSelectorForReferenceLevels"
+        Me.ucrSelectorForReferenceLevels.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorForReferenceLevels.TabIndex = 8
         '
         'dlgReferenceLevel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 350)
-        Me.Controls.Add(Me.ucrAddRemove)
+        Me.ClientSize = New System.Drawing.Size(543, 350)
+        Me.Controls.Add(Me.ucrSelectorForReferenceLevels)
+        Me.Controls.Add(Me.ucrFactorReferenceLevels)
         Me.Controls.Add(Me.lblInfo)
         Me.Controls.Add(Me.lblFactorSelected)
-        Me.Controls.Add(Me.ucrFactorSelected)
-        Me.Controls.Add(Me.ucrDataFrameSelector)
+        Me.Controls.Add(Me.ucrReceiverReferenceLevels)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgReferenceLevel"
@@ -99,9 +104,9 @@ Partial Class dlgReferenceLevel
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrDataFrameSelector As ucrDataFrame
-    Friend WithEvents ucrFactorSelected As ucrReceiverSingle
+    Friend WithEvents ucrReceiverReferenceLevels As ucrReceiverSingle
     Friend WithEvents lblFactorSelected As Label
     Friend WithEvents lblInfo As Label
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
+    Friend WithEvents ucrFactorReferenceLevels As ucrFactor
+    Friend WithEvents ucrSelectorForReferenceLevels As ucrSelectorByDataFrameAddRemove
 End Class
