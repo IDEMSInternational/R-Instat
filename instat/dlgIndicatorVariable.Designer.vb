@@ -48,7 +48,7 @@ Partial Class dlgIndicatorVariable
         Me.grpLevelOmitted.Location = New System.Drawing.Point(275, 100)
         Me.grpLevelOmitted.Name = "grpLevelOmitted"
         Me.grpLevelOmitted.Size = New System.Drawing.Size(123, 112)
-        Me.grpLevelOmitted.TabIndex = 1
+        Me.grpLevelOmitted.TabIndex = 3
         Me.grpLevelOmitted.TabStop = False
         Me.grpLevelOmitted.Tag = "Level_Omitted"
         Me.grpLevelOmitted.Text = "Level Omitted"
@@ -59,7 +59,7 @@ Partial Class dlgIndicatorVariable
         Me.rdoLevelNumber.Location = New System.Drawing.Point(6, 88)
         Me.rdoLevelNumber.Name = "rdoLevelNumber"
         Me.rdoLevelNumber.Size = New System.Drawing.Size(51, 17)
-        Me.rdoLevelNumber.TabIndex = 0
+        Me.rdoLevelNumber.TabIndex = 3
         Me.rdoLevelNumber.TabStop = True
         Me.rdoLevelNumber.Tag = "Level"
         Me.rdoLevelNumber.Text = "Level"
@@ -71,7 +71,7 @@ Partial Class dlgIndicatorVariable
         Me.rdoLast.Location = New System.Drawing.Point(6, 65)
         Me.rdoLast.Name = "rdoLast"
         Me.rdoLast.Size = New System.Drawing.Size(45, 17)
-        Me.rdoLast.TabIndex = 0
+        Me.rdoLast.TabIndex = 2
         Me.rdoLast.TabStop = True
         Me.rdoLast.Tag = "Last"
         Me.rdoLast.Text = "Last"
@@ -83,7 +83,7 @@ Partial Class dlgIndicatorVariable
         Me.rdoFirst.Location = New System.Drawing.Point(6, 42)
         Me.rdoFirst.Name = "rdoFirst"
         Me.rdoFirst.Size = New System.Drawing.Size(44, 17)
-        Me.rdoFirst.TabIndex = 0
+        Me.rdoFirst.TabIndex = 1
         Me.rdoFirst.TabStop = True
         Me.rdoFirst.Tag = "First"
         Me.rdoFirst.Text = "First"
@@ -118,7 +118,7 @@ Partial Class dlgIndicatorVariable
         Me.lblSelected.Location = New System.Drawing.Point(280, 46)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
-        Me.lblSelected.TabIndex = 7
+        Me.lblSelected.TabIndex = 1
         Me.lblSelected.Tag = "Selected"
         Me.lblSelected.Text = "Selected"
         '
@@ -128,7 +128,7 @@ Partial Class dlgIndicatorVariable
         Me.lblNewColumnName.Location = New System.Drawing.Point(7, 246)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
-        Me.lblNewColumnName.TabIndex = 11
+        Me.lblNewColumnName.TabIndex = 7
         Me.lblNewColumnName.Tag = "New_Column_Name"
         Me.lblNewColumnName.Text = "New Column Name"
         '
@@ -138,7 +138,7 @@ Partial Class dlgIndicatorVariable
         Me.lblVariate.Location = New System.Drawing.Point(119, 209)
         Me.lblVariate.Name = "lblVariate"
         Me.lblVariate.Size = New System.Drawing.Size(40, 13)
-        Me.lblVariate.TabIndex = 7
+        Me.lblVariate.TabIndex = 5
         Me.lblVariate.Tag = "Variate"
         Me.lblVariate.Text = "Variate"
         '
@@ -147,14 +147,14 @@ Partial Class dlgIndicatorVariable
         Me.ucrInputColName.Location = New System.Drawing.Point(141, 246)
         Me.ucrInputColName.Name = "ucrInputColName"
         Me.ucrInputColName.Size = New System.Drawing.Size(137, 25)
-        Me.ucrInputColName.TabIndex = 10
+        Me.ucrInputColName.TabIndex = 8
         '
         'ucrSelectorDummyVariable
         '
         Me.ucrSelectorDummyVariable.Location = New System.Drawing.Point(5, 19)
         Me.ucrSelectorDummyVariable.Name = "ucrSelectorDummyVariable"
         Me.ucrSelectorDummyVariable.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorDummyVariable.TabIndex = 9
+        Me.ucrSelectorDummyVariable.TabIndex = 0
         '
         'ucrVariateReceiver
         '
@@ -162,7 +162,7 @@ Partial Class dlgIndicatorVariable
         Me.ucrVariateReceiver.Name = "ucrVariateReceiver"
         Me.ucrVariateReceiver.Selector = Nothing
         Me.ucrVariateReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrVariateReceiver.TabIndex = 8
+        Me.ucrVariateReceiver.TabIndex = 6
         '
         'ucrReceiverFactor
         '
@@ -170,14 +170,14 @@ Partial Class dlgIndicatorVariable
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverFactor.TabIndex = 8
+        Me.ucrReceiverFactor.TabIndex = 2
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(9, 282)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 9
         '
         'dlgIndicatorVariable
         '
