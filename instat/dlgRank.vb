@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgRank
     'Define a boolean to check if the dialog is loading for the first time
     Public bFirstLoad As Boolean = True
-
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -61,18 +60,17 @@ Public Class dlgRank
         rdoAverage.Checked = True
         ucrSelectorForRank.Reset()
         ucrInputColName.SetPrefix("Rank")
+        rdoAverage.Checked = True
+        rdoKeptAsMissing.Checked = True
         TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
-        SetTiesValues()
-        setMissingValue()
-        ucrInputColName.SetPrefix("Rank")
+
     End Sub
 
     Private Sub grpTies_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAverage.CheckedChanged, rdoMinimum.CheckedChanged, rdoMaximum.CheckedChanged, rdoFirst.CheckedChanged, rdoRandom.CheckedChanged
         SetTiesValues()
-
     End Sub
     Private Sub SetTiesValues()
 
