@@ -41,10 +41,7 @@ Public Class dlgDummyVariables
         ucrSelectorDummyVariable.Reset()
         ucrReceiverFactor.Selector = ucrSelectorDummyVariable
         ucrReceiverFactor.SetMeAsReceiver()
-        ucrVariateReceiver.Visible = False
-        lblVariate.Visible = False
-
-
+        chkXvariable.Checked = False
         TestOkEnabled()
     End Sub
 
