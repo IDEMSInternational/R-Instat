@@ -19,9 +19,9 @@ Public Class dlgReferenceLevel
     Private Sub dlgReferenceLevel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.clsRsyntax.SetFunction("relevel")
 
-        ucrFactorSelected.SetMeAsReceiver()
-        ucrFactorSelected.Selector = ucrAddRemove
-        ucrFactorSelected.SetDataType("factor")
+        ucrReceiverReferenceLevels.SetMeAsReceiver()
+        ucrReceiverReferenceLevels.Selector = ucrSelectorForReferenceLevels
+        ucrReceiverReferenceLevels.SetDataType("factor")
         autoTranslate(Me)
 
         If bFirstLoad Then
