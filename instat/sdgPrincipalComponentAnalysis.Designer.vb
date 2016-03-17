@@ -1,9 +1,10 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgPrincipalComponentAnalysis
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,20 +21,89 @@ Partial Class sdgPrincipalComponentAnalysis
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.tbRegOptions = New System.Windows.Forms.TabControl()
+        Me.tbDisplay = New System.Windows.Forms.TabPage()
+        Me.chkEigenValues = New System.Windows.Forms.CheckBox()
+        Me.tbGraphics = New System.Windows.Forms.TabPage()
+        Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.tbRegOptions.SuspendLayout()
+        Me.tbDisplay.SuspendLayout()
         Me.SuspendLayout()
         '
-        'sdgPrincipalComponentAnalysis
+        'tbRegOptions
+        '
+        Me.tbRegOptions.Controls.Add(Me.tbDisplay)
+        Me.tbRegOptions.Controls.Add(Me.tbGraphics)
+        Me.tbRegOptions.Location = New System.Drawing.Point(2, 3)
+        Me.tbRegOptions.Name = "tbRegOptions"
+        Me.tbRegOptions.SelectedIndex = 0
+        Me.tbRegOptions.Size = New System.Drawing.Size(254, 193)
+        Me.tbRegOptions.TabIndex = 0
+        '
+        'tbDisplay
+        '
+        Me.tbDisplay.Controls.Add(Me.chkEigenValues)
+        Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
+        Me.tbDisplay.Name = "tbDisplay"
+        Me.tbDisplay.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbDisplay.Size = New System.Drawing.Size(246, 167)
+        Me.tbDisplay.TabIndex = 0
+        Me.tbDisplay.Tag = "Display"
+        Me.tbDisplay.Text = "Display"
+        Me.tbDisplay.UseVisualStyleBackColor = True
+        '
+        'chkEigenValues
+        '
+        Me.chkEigenValues.AutoSize = True
+        Me.chkEigenValues.Location = New System.Drawing.Point(6, 15)
+        Me.chkEigenValues.Name = "chkEigenValues"
+        Me.chkEigenValues.Size = New System.Drawing.Size(88, 17)
+        Me.chkEigenValues.TabIndex = 0
+        Me.chkEigenValues.Tag = "Eigen_Values"
+        Me.chkEigenValues.Text = "Eigen Values"
+        Me.chkEigenValues.UseVisualStyleBackColor = True
+        '
+        'tbGraphics
+        '
+        Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
+        Me.tbGraphics.Name = "tbGraphics"
+        Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbGraphics.Size = New System.Drawing.Size(246, 167)
+        Me.tbGraphics.TabIndex = 1
+        Me.tbGraphics.Tag = "Graphics"
+        Me.tbGraphics.Text = "Graphics"
+        Me.tbGraphics.UseVisualStyleBackColor = True
+        '
+        'ucrSdgButtons
+        '
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(41, 201)
+        Me.ucrSdgButtons.Name = "ucrSdgButtons"
+        Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
+        Me.ucrSdgButtons.TabIndex = 0
+        '
+        'sdgPCAOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(385, 261)
+        Me.ClientSize = New System.Drawing.Size(255, 233)
+        Me.Controls.Add(Me.tbRegOptions)
+        Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "sdgPrincipalComponentAnalysis"
-        Me.Tag = "Principal_Component_Analysis_Plot"
-        Me.Text = "Principal Component Analysis Plot"
+        Me.Name = "sdgPCAOptions"
+        Me.Tag = "PCA_Options"
+        Me.Text = "PCA Options"
+        Me.tbRegOptions.ResumeLayout(False)
+        Me.tbDisplay.ResumeLayout(False)
+        Me.tbDisplay.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents ucrSdgButtons As ucrButtonsSubdialogue
+    Friend WithEvents tbRegOptions As TabControl
+    Friend WithEvents tbDisplay As TabPage
+    Friend WithEvents tbGraphics As TabPage
+    Friend WithEvents chkEigenValues As CheckBox
 End Class

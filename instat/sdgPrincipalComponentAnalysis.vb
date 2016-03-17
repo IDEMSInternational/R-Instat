@@ -15,7 +15,35 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgPrincipalComponentAnalysis
+    'Public clsRPCAFunction As RFunction
+    Public bFirstLoad As Boolean = True
+
     Private Sub sdgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    'Public Sub SetRModelFunction(clsRModelFunc As RFunction)
+    '    clsRModelFunction = clsRModelFunc
+    'End Sub
+
+    Private Sub EigenValues()
+        frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$eig", 2)
+    End Sub
+
+    Public Sub SetDefaults()
+        chkEigenValues.Checked = True
+    End Sub
+
+    Public Sub PCAOptions()
+        If (chkEigenValues.Checked) Then
+            EigenValues()
+        End If
     End Sub
 End Class
+
+
