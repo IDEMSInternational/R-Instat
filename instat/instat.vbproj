@@ -286,6 +286,12 @@
     <Compile Include="dlgDeleteModels.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDeleteRowsOrColums.Designer.vb">
+      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDeleteRowsOrColums.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDeleteSheet.Designer.vb">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
     </Compile>
@@ -334,10 +340,10 @@
     <Compile Include="dlgOneWayANOVA.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPermuteRows.Designer.vb">
-      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    <Compile Include="dlgPermuteColumn.Designer.vb">
+      <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgPermuteRows.vb">
+    <Compile Include="dlgPermuteColumn.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgPrincipalComponentAnalysis.Designer.vb">
@@ -620,12 +626,6 @@
       <DependentUpon>dlgDayMonth.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDayMonth.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgDeleteRowsOrColums.Designer.vb">
-      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDeleteRowsOrColums.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDescriptiveStatistics.Designer.vb">
@@ -1712,6 +1712,15 @@
     <EmbeddedResource Include="dlgDeleteModels.sw-KE.resx">
       <DependentUpon>dlgDeleteModels.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteRowsOrColums.fr-FR.resx">
+      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteRowsOrColums.resx">
+      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteRowsOrColums.sw-KE.resx">
+      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteSheet.fr-FR.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
     </EmbeddedResource>
@@ -1784,14 +1793,14 @@
     <EmbeddedResource Include="dlgOneWayANOVA.sw-KE.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPermuteRows.fr-FR.resx">
-      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    <EmbeddedResource Include="dlgPermuteColumn.fr-FR.resx">
+      <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPermuteRows.resx">
-      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    <EmbeddedResource Include="dlgPermuteColumn.resx">
+      <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPermuteRows.sw-KE.resx">
-      <DependentUpon>dlgPermuteRows.vb</DependentUpon>
+    <EmbeddedResource Include="dlgPermuteColumn.sw-KE.resx">
+      <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrincipalComponentAnalysis.fr-FR.resx">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
@@ -2207,15 +2216,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDayMonth.sw-KE.resx">
       <DependentUpon>dlgDayMonth.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteRowsOrColums.fr-FR.resx">
-      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteRowsOrColums.resx">
-      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteRowsOrColums.sw-KE.resx">
-      <DependentUpon>dlgDeleteRowsOrColums.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDescriptiveStatistics.fr-FR.resx">
       <DependentUpon>dlgDescriptiveStatistics.vb</DependentUpon>
@@ -3497,6 +3497,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="lib\unvell.ReoScript.dll" />
+    <Content Include="Resources\arrows_bottom.png" />
+    <Content Include="Resources\arrows_down.png" />
+    <Content Include="Resources\arrows_top.png" />
+    <Content Include="Resources\arrows_up.png" />
     <Content Include="static\ClimateObject\R\ClimateMethods\Models\readme_model.txt" />
     <Content Include="static\ClimateObject\R\R_front_ends\readme_front.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
