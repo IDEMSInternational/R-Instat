@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgConvertColumnsToFactors
+Partial Class dlgConvertToColumnFactors
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -164,7 +164,7 @@ Partial Class dlgConvertColumnsToFactors
         Me.grpFactorNumeric.TabIndex = 7
         Me.grpFactorNumeric.TabStop = False
         '
-        'dlgConvertColumnsToFactors
+        'dlgConvertToColumnFactors
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -176,10 +176,10 @@ Partial Class dlgConvertColumnsToFactors
         Me.Controls.Add(Me.ucrReceiverColumnsToConvert)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgConvertColumnsToFactors"
+        Me.Name = "dlgConvertToColumnFactors"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Convert_columns"
-        Me.Text = "Convert Columns"
+        Me.Tag = "Convert_to_Column_Factors"
+        Me.Text = "Convert to Column Factors"
         Me.grpToType.ResumeLayout(False)
         Me.grpToType.PerformLayout()
         Me.grpFactorNumeric.ResumeLayout(False)
