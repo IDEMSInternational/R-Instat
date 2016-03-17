@@ -35,7 +35,7 @@ Public Class dlgReferenceLevel
         ucrReceiverReferenceLevels.SetMeAsReceiver()
         ucrReceiverReferenceLevels.Selector = ucrSelectorForReferenceLevels
         ucrReceiverReferenceLevels.SetDataType("factor")
-
+        ucrFactorReferenceLevels.SetReceiver(ucrReceiverReferenceLevels)
     End Sub
 
     Private Sub SetDefaults()
