@@ -166,12 +166,6 @@
     <Compile Include="dlgBarAndPieChart.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgBivariateANOVA.Designer.vb">
-      <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgBivariateANOVA.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgBoxplotCountVariable.designer.vb">
       <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
     </Compile>
@@ -1216,10 +1210,10 @@
     <Compile Include="dlgTwoSamples.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgTwoWayAnova.Designer.vb">
-      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    <Compile Include="dlgNon_ParametricTwoWayAnova.Designer.vb">
+      <DependentUpon>dlgNon_ParametricTwoWayAnova.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgTwoWayAnova.vb">
+    <Compile Include="dlgNon_ParametricTwoWayAnova.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgUnstack.Designer.vb">
@@ -1534,15 +1528,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBarAndPieChart.sw-KE.resx">
       <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBivariateANOVA.fr-FR.resx">
-      <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBivariateANOVA.resx">
-      <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBivariateANOVA.sw-KE.resx">
-      <DependentUpon>dlgBivariateANOVA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxPlot.fr-FR.resx">
       <DependentUpon>dlgBoxPlot.vb</DependentUpon>
@@ -1955,14 +1940,14 @@
     <EmbeddedResource Include="dlgTwoSampleNonparametricTest.sw-KE.resx">
       <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgTwoWayAnova.fr-FR.resx">
-      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    <EmbeddedResource Include="dlgNon_ParametricTwoWayAnova.fr-FR.resx">
+      <DependentUpon>dlgNon_ParametricTwoWayAnova.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgTwoWayAnova.resx">
-      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    <EmbeddedResource Include="dlgNon_ParametricTwoWayAnova.resx">
+      <DependentUpon>dlgNon_ParametricTwoWayAnova.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgTwoWayAnova.sw-KE.resx">
-      <DependentUpon>dlgTwoWayAnova.vb</DependentUpon>
+    <EmbeddedResource Include="dlgNon_ParametricTwoWayAnova.sw-KE.resx">
+      <DependentUpon>dlgNon_ParametricTwoWayAnova.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
