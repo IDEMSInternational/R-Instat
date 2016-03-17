@@ -835,7 +835,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageFactorInteraction_Click(sender As Object, e As EventArgs) Handles mnuManageFactorInteraction.Click
-        dlgInteractions.ShowDialog()
+        dlgCombine.ShowDialog()
     End Sub
 
     Private Sub mnuManageFactorReferenceLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorReferenceLevels.Click
