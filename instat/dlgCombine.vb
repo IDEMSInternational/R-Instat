@@ -12,37 +12,15 @@
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
 Imports instat.Translations
-
 Public Class dlgCombine
     Private Sub dlgInteractions_Load(sender As Object, e As KeyEventArgs) Handles Me.Load
         autoTranslate(Me)
-        defaultSettings()
+        SetDefaults()
+    End Sub
+    Private Sub SetDefaults()
+    End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs)
+        SetDefaults()
     End Sub
 
-    Private Sub rdoCombineToNewFactor_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCombineToNewFactor.CheckedChanged
-        If rdoCombineToNewFactor.Checked = True Then
-            chkWithLabel.Enabled = True
-        ElseIf rdoCombineToNewFactor.Checked = False
-            chkWithLabel.Enabled = False
-        End If
-    End Sub
-
-    Private Sub chkWithLabel_CheckedChanged(sender As Object, e As EventArgs) Handles chkWithLabel.CheckedChanged
-        If chkWithLabel.Enabled = True Then
-            cboAvailableLabels.Enabled = True
-            chkUseExitingFactorLevelCombinations.Enabled = True
-        ElseIf chkWithLabel.Enabled = False
-            cboAvailableLabels.Enabled = False
-            chkUseExitingFactorLevelCombinations.Enabled = False
-        End If
-    End Sub
-    Private Sub defaultSettings()
-        txtSelectedFactors.Text = ""
-        txtTobeSavedFactors.Text = ""
-        rdoCreateInteractionVariable.Checked = True
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        defaultSettings()
-    End Sub
 End Class

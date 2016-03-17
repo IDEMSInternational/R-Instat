@@ -22,206 +22,101 @@ Partial Class dlgCombine
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtSelectedFactors = New System.Windows.Forms.TextBox()
+        Me.ucrSelectorCombineFactors = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrFactorsReceiver = New instat.ucrReceiverMultiple()
         Me.lblFactors = New System.Windows.Forms.Label()
-        Me.lblSaveInto = New System.Windows.Forms.Label()
-        Me.rdoCreateInteractionVariable = New System.Windows.Forms.RadioButton()
-        Me.rdoCombineToNewFactor = New System.Windows.Forms.RadioButton()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.cmdAdd = New System.Windows.Forms.Button()
-        Me.lstAvailableColumns = New System.Windows.Forms.ListBox()
-        Me.txtTobeSavedFactors = New System.Windows.Forms.TextBox()
-        Me.chkWithLabel = New System.Windows.Forms.CheckBox()
-        Me.chkUseExitingFactorLevelCombinations = New System.Windows.Forms.CheckBox()
-        Me.cboAvailableLabels = New System.Windows.Forms.ComboBox()
-        Me.lblToImplement = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'txtSelectedFactors
+        'ucrSelectorCombineFactors
         '
-        Me.txtSelectedFactors.Location = New System.Drawing.Point(12, 36)
-        Me.txtSelectedFactors.Multiline = True
-        Me.txtSelectedFactors.Name = "txtSelectedFactors"
-        Me.txtSelectedFactors.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtSelectedFactors.Size = New System.Drawing.Size(106, 43)
-        Me.txtSelectedFactors.TabIndex = 9
+        Me.ucrSelectorCombineFactors.Location = New System.Drawing.Point(3, 4)
+        Me.ucrSelectorCombineFactors.Name = "ucrSelectorCombineFactors"
+        Me.ucrSelectorCombineFactors.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorCombineFactors.TabIndex = 26
+        '
+        'ucrFactorsReceiver
+        '
+        Me.ucrFactorsReceiver.Location = New System.Drawing.Point(246, 54)
+        Me.ucrFactorsReceiver.Name = "ucrFactorsReceiver"
+        Me.ucrFactorsReceiver.Selector = Nothing
+        Me.ucrFactorsReceiver.Size = New System.Drawing.Size(121, 104)
+        Me.ucrFactorsReceiver.TabIndex = 27
         '
         'lblFactors
         '
         Me.lblFactors.AutoSize = True
-        Me.lblFactors.Location = New System.Drawing.Point(12, 9)
+        Me.lblFactors.Location = New System.Drawing.Point(251, 30)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(42, 13)
-        Me.lblFactors.TabIndex = 11
+        Me.lblFactors.TabIndex = 28
         Me.lblFactors.Tag = "Factors"
         Me.lblFactors.Text = "Factors"
         '
-        'lblSaveInto
+        'CheckBox1
         '
-        Me.lblSaveInto.AutoSize = True
-        Me.lblSaveInto.Location = New System.Drawing.Point(241, 9)
-        Me.lblSaveInto.Name = "lblSaveInto"
-        Me.lblSaveInto.Size = New System.Drawing.Size(52, 13)
-        Me.lblSaveInto.TabIndex = 12
-        Me.lblSaveInto.Tag = "Save_into"
-        Me.lblSaveInto.Text = "Save into"
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(13, 190)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(126, 17)
+        Me.CheckBox1.TabIndex = 29
+        Me.CheckBox1.Tag = "Drop_Unused_Levels "
+        Me.CheckBox1.Text = "Drop Unused Levels "
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
-        'rdoCreateInteractionVariable
+        'UcrInputComboBox1
         '
-        Me.rdoCreateInteractionVariable.AutoSize = True
-        Me.rdoCreateInteractionVariable.Checked = True
-        Me.rdoCreateInteractionVariable.Location = New System.Drawing.Point(12, 198)
-        Me.rdoCreateInteractionVariable.Name = "rdoCreateInteractionVariable"
-        Me.rdoCreateInteractionVariable.Size = New System.Drawing.Size(149, 17)
-        Me.rdoCreateInteractionVariable.TabIndex = 15
-        Me.rdoCreateInteractionVariable.TabStop = True
-        Me.rdoCreateInteractionVariable.Tag = "Create_Interaction_variable"
-        Me.rdoCreateInteractionVariable.Text = "Create Interaction variable"
-        Me.rdoCreateInteractionVariable.UseVisualStyleBackColor = True
+        Me.UcrInputComboBox1.Location = New System.Drawing.Point(165, 214)
+        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
+        Me.UcrInputComboBox1.Size = New System.Drawing.Size(171, 25)
+        Me.UcrInputComboBox1.TabIndex = 30
         '
-        'rdoCombineToNewFactor
+        'lblNewColumnName
         '
-        Me.rdoCombineToNewFactor.AutoSize = True
-        Me.rdoCombineToNewFactor.Enabled = False
-        Me.rdoCombineToNewFactor.Location = New System.Drawing.Point(12, 221)
-        Me.rdoCombineToNewFactor.Name = "rdoCombineToNewFactor"
-        Me.rdoCombineToNewFactor.Size = New System.Drawing.Size(183, 17)
-        Me.rdoCombineToNewFactor.TabIndex = 16
-        Me.rdoCombineToNewFactor.Tag = "Combine_factors_into_a_new_factor"
-        Me.rdoCombineToNewFactor.Text = "Combine factors into a new factor"
-        Me.rdoCombineToNewFactor.UseVisualStyleBackColor = True
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(13, 219)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.TabIndex = 31
+        Me.lblNewColumnName.Tag = "New_Column_Name"
+        Me.lblNewColumnName.Text = "New Column Name"
         '
         'ucrBase
         '
-        Me.ucrBase.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ucrBase.Location = New System.Drawing.Point(0, 304)
+        Me.ucrBase.Location = New System.Drawing.Point(0, 241)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(404, 50)
-        Me.ucrBase.TabIndex = 17
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 32
         '
-        'btnAdd
-        '
-        Me.btnAdd.Location = New System.Drawing.Point(124, 47)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(37, 23)
-        Me.btnAdd.TabIndex = 19
-        Me.btnAdd.Tag = "Add"
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = True
-        '
-        'cmdAdd
-        '
-        Me.cmdAdd.Location = New System.Drawing.Point(356, 47)
-        Me.cmdAdd.Name = "cmdAdd"
-        Me.cmdAdd.Size = New System.Drawing.Size(37, 23)
-        Me.cmdAdd.TabIndex = 22
-        Me.cmdAdd.Tag = "Add"
-        Me.cmdAdd.Text = "Add"
-        Me.cmdAdd.UseVisualStyleBackColor = True
-        '
-        'lstAvailableColumns
-        '
-        Me.lstAvailableColumns.FormattingEnabled = True
-        Me.lstAvailableColumns.Location = New System.Drawing.Point(244, 85)
-        Me.lstAvailableColumns.Name = "lstAvailableColumns"
-        Me.lstAvailableColumns.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
-        Me.lstAvailableColumns.Size = New System.Drawing.Size(149, 95)
-        Me.lstAvailableColumns.Sorted = True
-        Me.lstAvailableColumns.TabIndex = 21
-        '
-        'txtTobeSavedFactors
-        '
-        Me.txtTobeSavedFactors.Location = New System.Drawing.Point(244, 36)
-        Me.txtTobeSavedFactors.Multiline = True
-        Me.txtTobeSavedFactors.Name = "txtTobeSavedFactors"
-        Me.txtTobeSavedFactors.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtTobeSavedFactors.Size = New System.Drawing.Size(106, 43)
-        Me.txtTobeSavedFactors.TabIndex = 20
-        '
-        'chkWithLabel
-        '
-        Me.chkWithLabel.AutoSize = True
-        Me.chkWithLabel.Enabled = False
-        Me.chkWithLabel.Location = New System.Drawing.Point(37, 244)
-        Me.chkWithLabel.Name = "chkWithLabel"
-        Me.chkWithLabel.Size = New System.Drawing.Size(77, 17)
-        Me.chkWithLabel.TabIndex = 23
-        Me.chkWithLabel.Text = "With Label"
-        Me.chkWithLabel.UseVisualStyleBackColor = True
-        '
-        'chkUseExitingFactorLevelCombinations
-        '
-        Me.chkUseExitingFactorLevelCombinations.AutoSize = True
-        Me.chkUseExitingFactorLevelCombinations.Enabled = False
-        Me.chkUseExitingFactorLevelCombinations.Location = New System.Drawing.Point(37, 267)
-        Me.chkUseExitingFactorLevelCombinations.Name = "chkUseExitingFactorLevelCombinations"
-        Me.chkUseExitingFactorLevelCombinations.Size = New System.Drawing.Size(225, 17)
-        Me.chkUseExitingFactorLevelCombinations.TabIndex = 24
-        Me.chkUseExitingFactorLevelCombinations.Tag = "Only_use_existing_factor_level_combinations"
-        Me.chkUseExitingFactorLevelCombinations.Text = "Only use existing factor level combinations"
-        Me.chkUseExitingFactorLevelCombinations.UseVisualStyleBackColor = True
-        '
-        'cboAvailableLabels
-        '
-        Me.cboAvailableLabels.Enabled = False
-        Me.cboAvailableLabels.FormattingEnabled = True
-        Me.cboAvailableLabels.Location = New System.Drawing.Point(145, 240)
-        Me.cboAvailableLabels.Name = "cboAvailableLabels"
-        Me.cboAvailableLabels.Size = New System.Drawing.Size(100, 21)
-        Me.cboAvailableLabels.Sorted = True
-        Me.cboAvailableLabels.TabIndex = 25
-        '
-        'lblToImplement
-        '
-        Me.lblToImplement.AutoSize = True
-        Me.lblToImplement.Location = New System.Drawing.Point(9, 97)
-        Me.lblToImplement.Name = "lblToImplement"
-        Me.lblToImplement.Size = New System.Drawing.Size(167, 13)
-        Me.lblToImplement.TabIndex = 26
-        Me.lblToImplement.Text = "To implement selector with factors"
-        '
-        'dlgInteractions
+        'dlgCombine
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(404, 354)
-        Me.Controls.Add(Me.lblToImplement)
-        Me.Controls.Add(Me.cboAvailableLabels)
-        Me.Controls.Add(Me.chkUseExitingFactorLevelCombinations)
-        Me.Controls.Add(Me.chkWithLabel)
-        Me.Controls.Add(Me.cmdAdd)
-        Me.Controls.Add(Me.lstAvailableColumns)
-        Me.Controls.Add(Me.txtTobeSavedFactors)
-        Me.Controls.Add(Me.btnAdd)
+        Me.ClientSize = New System.Drawing.Size(404, 304)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.rdoCombineToNewFactor)
-        Me.Controls.Add(Me.rdoCreateInteractionVariable)
-        Me.Controls.Add(Me.lblSaveInto)
+        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.UcrInputComboBox1)
+        Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.lblFactors)
-        Me.Controls.Add(Me.txtSelectedFactors)
+        Me.Controls.Add(Me.ucrFactorsReceiver)
+        Me.Controls.Add(Me.ucrSelectorCombineFactors)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgInteractions"
+        Me.Name = "dlgCombine"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Interactions"
-        Me.Text = "Interactions"
+        Me.Tag = "Combine_Factors"
+        Me.Text = "Combine Factors"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents txtSelectedFactors As TextBox
+    Friend WithEvents ucrSelectorCombineFactors As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrFactorsReceiver As ucrReceiverMultiple
     Friend WithEvents lblFactors As Label
-    Friend WithEvents lblSaveInto As Label
-    Friend WithEvents rdoCreateInteractionVariable As RadioButton
-    Friend WithEvents rdoCombineToNewFactor As RadioButton
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents UcrInputComboBox1 As ucrInputComboBox
+    Friend WithEvents lblNewColumnName As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents btnAdd As Button
-    Friend WithEvents cmdAdd As Button
-    Friend WithEvents lstAvailableColumns As ListBox
-    Friend WithEvents txtTobeSavedFactors As TextBox
-    Friend WithEvents chkWithLabel As CheckBox
-    Friend WithEvents chkUseExitingFactorLevelCombinations As CheckBox
-    Friend WithEvents cboAvailableLabels As ComboBox
-    Friend WithEvents lblToImplement As Label
 End Class
