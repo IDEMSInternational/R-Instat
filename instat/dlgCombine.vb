@@ -13,7 +13,7 @@
 '
 Imports instat.Translations
 
-Public Class dlgInteractions
+Public Class dlgCombine
     Private Sub dlgInteractions_Load(sender As Object, e As KeyEventArgs) Handles Me.Load
         autoTranslate(Me)
         defaultSettings()
