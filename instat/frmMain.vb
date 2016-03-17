@@ -392,10 +392,6 @@ Public Class frmMain
         dlgOrthogonal.ShowDialog()
     End Sub
 
-    Private Sub GeneralToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceGeneral.Click
-        dlgGeneralANOVA.ShowDialog()
-    End Sub
-
     Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOneWay.Click
         dlgOneWayANOVA.ShowDialog()
     End Sub
@@ -681,7 +677,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageAddColumnPermuteRows_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnPermuteColumn.Click
-        dlgPermuteRows.ShowDialog()
+        dlgPermuteColumn.ShowDialog()
     End Sub
 
     Private Sub mnuGraphicsBarPieChartSummaryData_Click(sender As Object, e As EventArgs)
