@@ -43,7 +43,7 @@ Public Class dlgDummyVariables
         ucrReceiverFactor.SetMeAsReceiver()
         ucrVariateReceiver.Visible = False
         lblVariate.Visible = False
-        ucrInputColName.SetPrefix("Dummy")
+
 
         TestOkEnabled()
     End Sub
@@ -68,7 +68,7 @@ Public Class dlgDummyVariables
     End Sub
 
     Private Sub ReopenDialog()
-        ucrInputColName.SetPrefix("Dummy")
+
     End Sub
 
     Private Sub chkXvariable_CheckedChanged(sender As Object, e As EventArgs) Handles chkXvariable.CheckedChanged
