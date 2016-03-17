@@ -22,7 +22,7 @@ Public Class dlgRecode
 
         autoTranslate(Me)
 
-        ucrBase.iHelpTopicID = 37
+
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -34,8 +34,9 @@ Public Class dlgRecode
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 37
         ucrReceiverRecode.Selector = ucrSelectorForRecode
+        ucrReceiverRecode.SetMeAsReceiver()
         ucrMultipleNumericRecode.bIsNumericInput = True
         ucrInputRecode.SetPrefix("Recode")
         ucrInputRecode.SetItemsTypeAsColumns()
@@ -54,7 +55,7 @@ Public Class dlgRecode
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
         ucrMultipleNumericRecode.txtNumericItems.ResetText()
-        ucrReceiverRecode.SetMeAsReceiver()
+
         ucrMultipleLabels.txtNumericItems.ResetText()
         ucrInputRecode.cboInput.ResetText()
     End Sub
@@ -153,6 +154,8 @@ Public Class dlgRecode
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
+
     End Sub
 
     Private Sub ucrInputRecode_Namechanged() Handles ucrInputRecode.NameChanged
