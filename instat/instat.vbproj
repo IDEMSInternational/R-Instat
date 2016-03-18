@@ -442,6 +442,12 @@
     <Compile Include="dlgSummaryBarOrPieChart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTransposeColumns.Designer.vb">
+      <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTransposeColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTwoSampleNonparametricTest.Designer.vb">
       <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
     </Compile>
@@ -1951,6 +1957,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransposeColumns.fr-FR.resx">
+      <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransposeColumns.resx">
+      <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransposeColumns.sw-KE.resx">
+      <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoSampleNonparametricTest.fr-FR.resx">
       <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
