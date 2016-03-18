@@ -30,12 +30,16 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBaseCCA.clsRsyntax.SetFunction("cancor")
+        ucrBaseCCA.clsRsyntax.iCallType = 0
         ucrReceiverYvariables.Selector = ucrSelectorCCA
         ucrReceiverXvariables.Selector = ucrSelectorCCA
-        'ucrBaseCCA.iHelpTopicID = 
+        ucrBaseCCA.iHelpTopicID = 188
+        ucrReceiverYvariables.SetDataType("numeric")
+        ucrReceiverXvariables.SetDataType("numeric")
     End Sub
 
-    Private Sub ReopenDialog()
+    Private Sub reopendialog()
 
     End Sub
 
@@ -43,6 +47,10 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrSelectorCCA.Reset()
         ucrReceiverYvariables.SetMeAsReceiver()
         ucrSelectorCCA.Focus()
+        chkSaveResult.Checked = True
+        ucrResultName.Visible = True
+        ucrResultName.SetName("CCA_1")
+        sdgCanonicalCorrelation.SetDefaults()
         TestOKEnabled()
     End Sub
 
@@ -58,23 +66,16 @@ Public Class dlgCanonicalCorrelationAnalysis
         SetDefaults()
     End Sub
 
-    Private Sub ucrbaseCCA_clickok(sender As Object, e As EventArgs) Handles ucrBaseCCA.ClickOk
-        'sdgcanonicalcorrelation.regoptions
-        Options()
+    Public Sub ucrreceiverxvariables_selectionchanged() Handles ucrReceiverXvariables.SelectionChanged
+        TestOKEnabled()
+        XVariables = XYariables(ucrReceiverXvariables.GetVariableNames())
+        ucrBaseCCA.clsRsyntax.AddParameter("x", XVariables)
     End Sub
 
     Public Sub ucrReceiverYvariables_SelectionChanged() Handles ucrReceiverYvariables.SelectionChanged
         TestOKEnabled()
         YVariables = XYariables(ucrReceiverYvariables.GetVariableNames())
-    End Sub
-
-    Public Sub ucrReceiverXvariables_SelectionChanged() Handles ucrReceiverXvariables.SelectionChanged
-        TestOKEnabled()
-        XVariables = XYariables(ucrReceiverXvariables.GetVariableNames())
-    End Sub
-
-    Private Sub Options()
-        Cancor()
+        ucrBaseCCA.clsRsyntax.AddParameter("y", YVariables)
     End Sub
 
     Public Function XYariables(ByVal my_variable) As String
@@ -85,10 +86,34 @@ Public Class dlgCanonicalCorrelationAnalysis
         Return (Variables.GetScript())
     End Function
 
-    Private Sub Cancor()
-        ucrBaseCCA.clsRsyntax.SetFunction("cc") 'or matcor
-        ucrBaseCCA.clsRsyntax.AddParameter("Y", YVariables)
-        ucrBaseCCA.clsRsyntax.AddParameter("X", XVariables)
-        frmMain.clsRLink.RunScript(ucrBaseCCA.clsRsyntax.GetScript(), 2)
+    Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
+        sdgCanonicalCorrelation.ShowDialog()
+    End Sub
+
+    Private Sub ucrResultName_NameChanged() Handles ucrResultName.NameChanged
+        AssignName()
+    End Sub
+
+    Private Sub chkSaveResult_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResult.CheckedChanged
+        If chkSaveResult.Checked Then
+            ucrResultName.Visible = True
+        Else
+            ucrResultName.Visible = False
+        End If
+        AssignName()
+    End Sub
+
+    Private Sub AssignName()
+        If chkSaveResult.Checked AndAlso ucrResultName.txtValidation.Text <> "" Then
+            ucrBaseCCA.clsRsyntax.SetAssignTo(ucrResultName.txtValidation.Text, strTempModel:=ucrResultName.txtValidation.Text)
+            ucrBaseCCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        Else
+            ucrBaseCCA.clsRsyntax.SetAssignTo("last_CCA", strTempModel:="last_CCA")
+            ucrBaseCCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
+    End Sub
+
+    Private Sub ucrBaseCCA_clickok(sender As Object, e As EventArgs) Handles ucrBaseCCA.ClickOk
+        sdgCanonicalCorrelation.CCAOptions()
     End Sub
 End Class

@@ -29,25 +29,27 @@ Partial Class dlgCanonicalCorrelationAnalysis
         Me.lblYVariables = New System.Windows.Forms.Label()
         Me.lblXVariables = New System.Windows.Forms.Label()
         Me.cmdCCAOptions = New System.Windows.Forms.Button()
+        Me.chkSaveResult = New System.Windows.Forms.CheckBox()
+        Me.ucrResultName = New instat.ucrVariableName()
         Me.SuspendLayout()
         '
         'ucrBaseCCA
         '
-        Me.ucrBaseCCA.Location = New System.Drawing.Point(9, 289)
+        Me.ucrBaseCCA.Location = New System.Drawing.Point(4, 277)
         Me.ucrBaseCCA.Name = "ucrBaseCCA"
         Me.ucrBaseCCA.Size = New System.Drawing.Size(410, 53)
         Me.ucrBaseCCA.TabIndex = 0
         '
         'ucrSelectorCCA
         '
-        Me.ucrSelectorCCA.Location = New System.Drawing.Point(9, 36)
+        Me.ucrSelectorCCA.Location = New System.Drawing.Point(9, 12)
         Me.ucrSelectorCCA.Name = "ucrSelectorCCA"
         Me.ucrSelectorCCA.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorCCA.TabIndex = 1
         '
         'ucrReceiverYvariables
         '
-        Me.ucrReceiverYvariables.Location = New System.Drawing.Point(307, 21)
+        Me.ucrReceiverYvariables.Location = New System.Drawing.Point(272, 20)
         Me.ucrReceiverYvariables.Name = "ucrReceiverYvariables"
         Me.ucrReceiverYvariables.Selector = Nothing
         Me.ucrReceiverYvariables.Size = New System.Drawing.Size(121, 104)
@@ -55,7 +57,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'ucrReceiverXvariables
         '
-        Me.ucrReceiverXvariables.Location = New System.Drawing.Point(307, 150)
+        Me.ucrReceiverXvariables.Location = New System.Drawing.Point(271, 141)
         Me.ucrReceiverXvariables.Name = "ucrReceiverXvariables"
         Me.ucrReceiverXvariables.Selector = Nothing
         Me.ucrReceiverXvariables.Size = New System.Drawing.Size(121, 104)
@@ -64,7 +66,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         'lblYVariables
         '
         Me.lblYVariables.AutoSize = True
-        Me.lblYVariables.Location = New System.Drawing.Point(334, 5)
+        Me.lblYVariables.Location = New System.Drawing.Point(307, 5)
         Me.lblYVariables.Name = "lblYVariables"
         Me.lblYVariables.Size = New System.Drawing.Size(60, 13)
         Me.lblYVariables.TabIndex = 4
@@ -74,7 +76,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         'lblXVariables
         '
         Me.lblXVariables.AutoSize = True
-        Me.lblXVariables.Location = New System.Drawing.Point(334, 134)
+        Me.lblXVariables.Location = New System.Drawing.Point(305, 128)
         Me.lblXVariables.Name = "lblXVariables"
         Me.lblXVariables.Size = New System.Drawing.Size(60, 13)
         Me.lblXVariables.TabIndex = 5
@@ -83,7 +85,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'cmdCCAOptions
         '
-        Me.cmdCCAOptions.Location = New System.Drawing.Point(316, 260)
+        Me.cmdCCAOptions.Location = New System.Drawing.Point(295, 249)
         Me.cmdCCAOptions.Name = "cmdCCAOptions"
         Me.cmdCCAOptions.Size = New System.Drawing.Size(94, 23)
         Me.cmdCCAOptions.TabIndex = 7
@@ -91,11 +93,31 @@ Partial Class dlgCanonicalCorrelationAnalysis
         Me.cmdCCAOptions.Text = "CCA Options..."
         Me.cmdCCAOptions.UseVisualStyleBackColor = True
         '
+        'chkSaveResult
+        '
+        Me.chkSaveResult.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.chkSaveResult.Location = New System.Drawing.Point(11, 249)
+        Me.chkSaveResult.Name = "chkSaveResult"
+        Me.chkSaveResult.Size = New System.Drawing.Size(104, 24)
+        Me.chkSaveResult.TabIndex = 8
+        Me.chkSaveResult.Tag = "Save_Result"
+        Me.chkSaveResult.Text = "Save Result"
+        Me.chkSaveResult.UseVisualStyleBackColor = True
+        '
+        'ucrResultName
+        '
+        Me.ucrResultName.Location = New System.Drawing.Point(119, 247)
+        Me.ucrResultName.Name = "ucrResultName"
+        Me.ucrResultName.Size = New System.Drawing.Size(149, 23)
+        Me.ucrResultName.TabIndex = 9
+        '
         'dlgCanonicalCorrelationAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(433, 339)
+        Me.ClientSize = New System.Drawing.Size(413, 331)
+        Me.Controls.Add(Me.chkSaveResult)
+        Me.Controls.Add(Me.ucrResultName)
         Me.Controls.Add(Me.cmdCCAOptions)
         Me.Controls.Add(Me.lblXVariables)
         Me.Controls.Add(Me.lblYVariables)
@@ -120,4 +142,6 @@ Partial Class dlgCanonicalCorrelationAnalysis
     Friend WithEvents lblYVariables As Label
     Friend WithEvents lblXVariables As Label
     Friend WithEvents cmdCCAOptions As Button
+    Friend WithEvents chkSaveResult As CheckBox
+    Friend WithEvents ucrResultName As ucrVariableName
 End Class
