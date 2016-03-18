@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgUnusedLevels
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,32 +20,81 @@ Partial Class dlgUnusedLevels
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorFactorColumn = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverFactorColumn = New instat.ucrReceiverSingle()
+        Me.lblFactor = New System.Windows.Forms.Label()
+        Me.ucrRemoveUnusedFactorLevels = New instat.ucrFactor()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 196)
+        Me.ucrBase.Location = New System.Drawing.Point(75, 292)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrSelectorFactorColumn
+        '
+        Me.ucrSelectorFactorColumn.Location = New System.Drawing.Point(5, 2)
+        Me.ucrSelectorFactorColumn.Name = "ucrSelectorFactorColumn"
+        Me.ucrSelectorFactorColumn.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorFactorColumn.TabIndex = 1
+        '
+        'ucrReceiverFactorColumn
+        '
+        Me.ucrReceiverFactorColumn.Location = New System.Drawing.Point(275, 74)
+        Me.ucrReceiverFactorColumn.Name = "ucrReceiverFactorColumn"
+        Me.ucrReceiverFactorColumn.Selector = Nothing
+        Me.ucrReceiverFactorColumn.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverFactorColumn.TabIndex = 2
+        '
+        'lblFactor
+        '
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.Location = New System.Drawing.Point(281, 61)
+        Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
+        Me.lblFactor.TabIndex = 3
+        Me.lblFactor.Tag = "Factor"
+        Me.lblFactor.Text = "Factor"
+        '
+        'ucrRemoveUnusedFactorLevels
+        '
+        Me.ucrRemoveUnusedFactorLevels.AutoSize = True
+        Me.ucrRemoveUnusedFactorLevels.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrRemoveUnusedFactorLevels.clsReceiver = Nothing
+        Me.ucrRemoveUnusedFactorLevels.Location = New System.Drawing.Point(275, 106)
+        Me.ucrRemoveUnusedFactorLevels.Name = "ucrRemoveUnusedFactorLevels"
+        Me.ucrRemoveUnusedFactorLevels.shtCurrSheet = Nothing
+        Me.ucrRemoveUnusedFactorLevels.Size = New System.Drawing.Size(267, 181)
+        Me.ucrRemoveUnusedFactorLevels.TabIndex = 4
         '
         'dlgUnusedLevels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 261)
+        Me.ClientSize = New System.Drawing.Size(558, 345)
+        Me.Controls.Add(Me.ucrRemoveUnusedFactorLevels)
+        Me.Controls.Add(Me.lblFactor)
+        Me.Controls.Add(Me.ucrReceiverFactorColumn)
+        Me.Controls.Add(Me.ucrSelectorFactorColumn)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgUnusedLevels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Unused_Levels"
-        Me.Text = "Unused Levels"
+        Me.Tag = "Remove_Unused_Factor_Levels"
+        Me.Text = "Remove Unused Factor Levels"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSelectorFactorColumn As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverFactorColumn As ucrReceiverSingle
+    Friend WithEvents lblFactor As Label
+    Friend WithEvents ucrRemoveUnusedFactorLevels As ucrFactor
 End Class
