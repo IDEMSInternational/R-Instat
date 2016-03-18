@@ -77,9 +77,10 @@ Partial Class ucrReorder
         '
         Me.lstAvailableData.Location = New System.Drawing.Point(3, 3)
         Me.lstAvailableData.Name = "lstAvailableData"
-        Me.lstAvailableData.Size = New System.Drawing.Size(121, 130)
+        Me.lstAvailableData.Size = New System.Drawing.Size(121, 133)
         Me.lstAvailableData.TabIndex = 5
         Me.lstAvailableData.UseCompatibleStateImageBehavior = False
+        Me.lstAvailableData.View = System.Windows.Forms.View.Details
         '
         'ucrReorder
         '
@@ -91,7 +92,7 @@ Partial Class ucrReorder
         Me.Controls.Add(Me.cmdUp)
         Me.Controls.Add(Me.cmdTop)
         Me.Name = "ucrReorder"
-        Me.Size = New System.Drawing.Size(159, 139)
+        Me.Size = New System.Drawing.Size(154, 139)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
