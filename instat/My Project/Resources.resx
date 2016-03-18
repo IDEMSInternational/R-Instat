@@ -1447,4 +1447,31 @@
   <data name="Y_Variable" xml:space="preserve">
     <value>Y Variable</value>
   </data>
+  <data name="Columns_To_Transpose" xml:space="preserve">
+    <value>Columns To Transpose</value>
+  </data>
+  <data name="Name_New_Columns" xml:space="preserve">
+    <value>Name New Columns</value>
+  </data>
+  <data name="New_Data_Frame_Name" xml:space="preserve">
+    <value>New Data Frame Name</value>
+  </data>
+  <data name="Number_Of_Columns" xml:space="preserve">
+    <value>Number Of Columns</value>
+  </data>
+  <data name="Random_Subsets" xml:space="preserve">
+    <value>Random Subsets</value>
+  </data>
+  <data name="Set_Seed" xml:space="preserve">
+    <value>Set Seed</value>
+  </data>
+  <data name="Transpose_Columns" xml:space="preserve">
+    <value>Transpose Columns</value>
+  </data>
+  <data name="Without_Replacement" xml:space="preserve">
+    <value>Without Replacement</value>
+  </data>
+  <data name="With_Replacement" xml:space="preserve">
+    <value>With Replacement</value>
+  </data>
 </root>
