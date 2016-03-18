@@ -54,7 +54,7 @@ Public Class ucrReceiverSingle
 
     End Function
 
-    Public Overrides Function GetVariables() As RFunction
+    Public Overrides Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
         'return columns (in data frame) in both cases
         'call GetVariableNames
         Dim clsGetVariablesFunc As New RFunction
@@ -63,8 +63,15 @@ Public Class ucrReceiverSingle
             clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
             clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
             clsGetVariablesFunc.AddParameter("col_name", GetVariableNames())
-            'TODO make this an option set in Options menu
-            clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+            If bForceAsDataFrame Then
+                clsGetVariablesFunc.AddParameter("force_as_data_frame", "TRUE")
+            Else
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
+                End If
+            End If
+                'TODO make this an option set in Options menu
+                clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
             Return clsGetVariablesFunc
         Else
             Return clsGetVariablesFunc
