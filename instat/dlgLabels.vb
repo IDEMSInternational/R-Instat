@@ -34,6 +34,7 @@ Public Class dlgLabels
         ucrBase.iHelpTopicID = 35
         ucrReceiverLabels.Selector = ucrSelectorForLabels
         ucrReceiverLabels.SetMeAsReceiver()
+        ucrFactorLabels.SetReceiver(ucrReceiverLabels)
     End Sub
 
     Private Sub SetDefaults()
