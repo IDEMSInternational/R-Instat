@@ -18,7 +18,7 @@ Public Class dlgStack
     Public bFirstLoad As Boolean = True
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -35,7 +35,7 @@ Public Class dlgStack
         ucrBase.iHelpTopicID = 57
         ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
         ucrColumnsToCarryReceiver.Selector = ucrSelectorStack
-        autoTranslate(Me)
+
         ucrNewDataFrameName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
         SetStackIntoText("value")
         SetFactorIntoText("variable")
