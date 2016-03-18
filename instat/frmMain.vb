@@ -640,9 +640,7 @@ Public Class frmMain
         dlgPrintPreviewOptions.ShowDialog()
     End Sub
 
-    Private Sub RemoveUnusedLabelsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveUnusedLabelsToolStripMenuItem.Click
-        dlgRemoveUnusedLabels.ShowDialog()
-    End Sub
+
 
     Private Sub mnuManageAddColumnRank_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnRank.Click
         dlgRank.ShowDialog()
@@ -862,7 +860,7 @@ Public Class frmMain
         dlgHideShowColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuManageReshapeRandomSubst_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeRandomSubst.Click
+    Private Sub mnuManageReshapeRandomSubst_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeRandomSubset.Click
         dlgRandomSubset.ShowDialog()
     End Sub
 
@@ -944,6 +942,10 @@ Public Class frmMain
 
     Private Sub mnuManageDataConvertTo_Click(sender As Object, e As EventArgs) Handles mnuManageDataConvertTo.Click
         dlgConvertColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageReshapeTranspose_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeTranspose.Click
+        dlgTransposeColumns.ShowDialog()
     End Sub
 End Class
 
