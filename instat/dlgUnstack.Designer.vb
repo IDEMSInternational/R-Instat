@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgUnstack
+Partial Class dlgunstack
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -25,14 +25,14 @@ Partial Class dlgUnstack
         Me.lblFactorToUnstackBy = New System.Windows.Forms.Label()
         Me.lblColumnToUnstack = New System.Windows.Forms.Label()
         Me.chkKeepUnusedFactorLevels = New System.Windows.Forms.CheckBox()
+        Me.lblDataFrameForUnstack = New System.Windows.Forms.Label()
+        Me.chkCarryAllColumns = New System.Windows.Forms.CheckBox()
+        Me.ucrCarryAllColumns = New instat.ucrReceiverMultiple()
+        Me.ucrDataFrameForunstack = New instat.ucrVariableName()
         Me.ucrColumnTounstackReceiver = New instat.ucrReceiverSingle()
         Me.ucrFactorTounstackReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForunstack = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDataFrameForunstack = New instat.ucrVariableName()
-        Me.lblDataFrameForUnstack = New System.Windows.Forms.Label()
-        Me.chkCarryAllColumns = New System.Windows.Forms.CheckBox()
-        Me.ucrCarryAllColumns = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
         '
         'lblFactorToUnstackBy
@@ -66,6 +66,42 @@ Partial Class dlgUnstack
         Me.chkKeepUnusedFactorLevels.Text = "Keep Unused Factor Levels"
         Me.chkKeepUnusedFactorLevels.UseVisualStyleBackColor = True
         '
+        'lblDataFrameForUnstack
+        '
+        Me.lblDataFrameForUnstack.AutoSize = True
+        Me.lblDataFrameForUnstack.Location = New System.Drawing.Point(-2, 293)
+        Me.lblDataFrameForUnstack.Name = "lblDataFrameForUnstack"
+        Me.lblDataFrameForUnstack.Size = New System.Drawing.Size(118, 13)
+        Me.lblDataFrameForUnstack.TabIndex = 10
+        Me.lblDataFrameForUnstack.Tag = "New_Data_Frame_Name"
+        Me.lblDataFrameForUnstack.Text = "New Data Frame Name"
+        '
+        'chkCarryAllColumns
+        '
+        Me.chkCarryAllColumns.AutoSize = True
+        Me.chkCarryAllColumns.Location = New System.Drawing.Point(258, 120)
+        Me.chkCarryAllColumns.Name = "chkCarryAllColumns"
+        Me.chkCarryAllColumns.Size = New System.Drawing.Size(106, 17)
+        Me.chkCarryAllColumns.TabIndex = 11
+        Me.chkCarryAllColumns.Tag = "Carry_All_Columns"
+        Me.chkCarryAllColumns.Text = "Carry all Columns"
+        Me.chkCarryAllColumns.UseVisualStyleBackColor = True
+        '
+        'ucrCarryAllColumns
+        '
+        Me.ucrCarryAllColumns.Location = New System.Drawing.Point(256, 143)
+        Me.ucrCarryAllColumns.Name = "ucrCarryAllColumns"
+        Me.ucrCarryAllColumns.Selector = Nothing
+        Me.ucrCarryAllColumns.Size = New System.Drawing.Size(121, 104)
+        Me.ucrCarryAllColumns.TabIndex = 12
+        '
+        'ucrDataFrameForunstack
+        '
+        Me.ucrDataFrameForunstack.Location = New System.Drawing.Point(140, 283)
+        Me.ucrDataFrameForunstack.Name = "ucrDataFrameForunstack"
+        Me.ucrDataFrameForunstack.Size = New System.Drawing.Size(149, 23)
+        Me.ucrDataFrameForunstack.TabIndex = 9
+        '
         'ucrColumnTounstackReceiver
         '
         Me.ucrColumnTounstackReceiver.Location = New System.Drawing.Point(256, 87)
@@ -96,43 +132,7 @@ Partial Class dlgUnstack
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 8
         '
-        'ucrDataFrameForunstack
-        '
-        Me.ucrDataFrameForunstack.Location = New System.Drawing.Point(140, 283)
-        Me.ucrDataFrameForunstack.Name = "ucrDataFrameForunstack"
-        Me.ucrDataFrameForunstack.Size = New System.Drawing.Size(149, 23)
-        Me.ucrDataFrameForunstack.TabIndex = 9
-        '
-        'lblDataFrameForUnstack
-        '
-        Me.lblDataFrameForUnstack.AutoSize = True
-        Me.lblDataFrameForUnstack.Location = New System.Drawing.Point(-2, 293)
-        Me.lblDataFrameForUnstack.Name = "lblDataFrameForUnstack"
-        Me.lblDataFrameForUnstack.Size = New System.Drawing.Size(118, 13)
-        Me.lblDataFrameForUnstack.TabIndex = 10
-        Me.lblDataFrameForUnstack.Tag = "New_Data_Frame_Name"
-        Me.lblDataFrameForUnstack.Text = "New Data Frame Name"
-        '
-        'chkCarryAllColumns
-        '
-        Me.chkCarryAllColumns.AutoSize = True
-        Me.chkCarryAllColumns.Location = New System.Drawing.Point(258, 120)
-        Me.chkCarryAllColumns.Name = "chkCarryAllColumns"
-        Me.chkCarryAllColumns.Size = New System.Drawing.Size(106, 17)
-        Me.chkCarryAllColumns.TabIndex = 11
-        Me.chkCarryAllColumns.Tag = "Carry_All_Columns"
-        Me.chkCarryAllColumns.Text = "Carry all Columns"
-        Me.chkCarryAllColumns.UseVisualStyleBackColor = True
-        '
-        'ucrCarryAllColumns
-        '
-        Me.ucrCarryAllColumns.Location = New System.Drawing.Point(256, 143)
-        Me.ucrCarryAllColumns.Name = "ucrCarryAllColumns"
-        Me.ucrCarryAllColumns.Selector = Nothing
-        Me.ucrCarryAllColumns.Size = New System.Drawing.Size(121, 104)
-        Me.ucrCarryAllColumns.TabIndex = 12
-        '
-        'dlgUnstack
+        'dlgunstack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -149,7 +149,7 @@ Partial Class dlgUnstack
         Me.Controls.Add(Me.ucrSelectorForunstack)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgUnstack"
+        Me.Name = "dlgunstack"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Unstack_Columns"
         Me.Text = "Unstack Columns"
