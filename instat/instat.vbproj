@@ -364,6 +364,12 @@
     <Compile Include="dlgRandomSubset.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRandomSubsets.Designer.vb">
+      <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRandomSubsets.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRenameDescriptive.Designer.vb">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
     </Compile>
@@ -434,6 +440,12 @@
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgSummaryBarOrPieChart.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTransposeColumns.Designer.vb">
+      <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTransposeColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTwoSampleNonparametricTest.Designer.vb">
@@ -1829,6 +1841,15 @@
     <EmbeddedResource Include="dlgRandomSubset.sw-KE.resx">
       <DependentUpon>dlgRandomSubset.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubsets.fr-FR.resx">
+      <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubsets.resx">
+      <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubsets.sw-KE.resx">
+      <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDescriptive.fr-FR.resx">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
     </EmbeddedResource>
@@ -1936,6 +1957,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransposeColumns.fr-FR.resx">
+      <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransposeColumns.resx">
+      <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransposeColumns.sw-KE.resx">
+      <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoSampleNonparametricTest.fr-FR.resx">
       <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
