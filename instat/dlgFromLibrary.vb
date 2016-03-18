@@ -36,7 +36,6 @@ Public Class dlgFromLibrary
 
     Private Sub setDefaults()
         rdoDefaultDatasets.Checked = True
-        grpR.Enabled = False
     End Sub
 
     Private Sub cmdLibraryCollection_Click(sender As Object, e As EventArgs) Handles cmdLibraryCollection.Click
@@ -57,25 +56,18 @@ Public Class dlgFromLibrary
         ucrBase.clsRsyntax.SetFunction("readRDS")
         ucrBase.clsRsyntax.SetAssignTo(frmMain.clsRLink.strInstatDataObject)
         ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+        txtFilePath.Text = strFilePath
     End Sub
 
-    Private Sub chkChooseFrom_CheckStateChanged(sender As Object, e As EventArgs) Handles chkChooseFrom.CheckStateChanged
-        If chkChooseFrom.Checked Then
-            grpR.Enabled = True
-            lstCollection.Enabled = True
-            initialiseFunction()
-        Else
-            grpR.Enabled = False
-            lstCollection.Enabled = False
-        End If
-    End Sub
-
-    Private Sub rdoDefaultDatasets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultDatasets.CheckedChanged, rdoChooseDatasets.CheckedChanged
+    Private Sub rdoDefaultDatasets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultDatasets.CheckedChanged, rdoInstatCollection.CheckedChanged
         If rdoDefaultDatasets.Checked Then
             cboPackages.Enabled = False
             cboPackages.SelectedItem = "datasets"
-        ElseIf rdoChooseDatasets.Checked Then
             cboPackages.Enabled = True
+            grpCollection.Enabled = False
+        ElseIf rdoInstatCollection.Checked Then
+            cboPackages.Enabled = False
+            grpCollection.Enabled = True
         End If
     End Sub
 
