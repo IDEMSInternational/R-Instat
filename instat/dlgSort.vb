@@ -17,24 +17,17 @@
 Imports instat.Translations
 
 Public Class dlgSort
-
     'Define a boolean to check if the dialog is loading for the first time
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         'Set the things that will always be constant for the dialog
         ' e.g. function name, selectors and receivers
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
-        ucrReceiverSort.Selector = ucrSelectForSort
-        ucrReceiverSort.SetMeAsReceiver()
-        autoTranslate(Me)
-        ucrBase.iHelpTopicID = 44
-
         'If this is the first load, set the defaults and then change bFirstLoad to False
         ' On future loads the dialog will keep previous values used
         ' and not reset to defaults.
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -45,7 +38,7 @@ Public Class dlgSort
         'Define this method for each dialog 
         'depending on what parameters are neccessary for the function to run.
         TestOKEnabled()
-
+        autoTranslate(Me)
     End Sub
 
     ' Sub that runs only the first time the dialog loads
@@ -73,6 +66,13 @@ Public Class dlgSort
         Else
             ucrBase.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+        ucrReceiverSort.Selector = ucrSelectForSort
+        ucrReceiverSort.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 44
     End Sub
 
     Private Sub ucrReceiverSort_SelectionChanged() Handles ucrReceiverSort.SelectionChanged

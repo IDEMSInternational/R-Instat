@@ -230,11 +230,14 @@ data_obj$methods(add_column_to_data = function(col_name = "", col_data) {
 }
 )
 
-data_obj$methods(get_columns_from_data = function(col_names) {
+data_obj$methods(get_columns_from_data = function(col_names, force_as_data_frame = FALSE) {
   if(missing(col_names)) stop("no col_names to return")
   if(!all(sapply(col_names, function(x) x %in% names(data)))) stop("Not all column names were found in data")
   
-  if(length(col_names)==1) return (data[[col_names]])
+  if(length(col_names)==1) {
+    if(force_as_data_frame) return(data[col_names])
+    else (data[[col_names]])
+  }
   else return(data[col_names])
 }
 )
@@ -642,6 +645,23 @@ data_obj$methods(convert_column_to_type = function(col_names = c(), to_type = "f
 }
 )
 
+data_obj$methods(copy_columns = function(col_names = "") {
+  for(col_name in col_names){
+    if(!(col_name %in% names(data))){
+      stop(col_name, " is not a column in ", get_metadata(data_name_label))
+    }
+  }
+  dat1 <- data[(col_names)]
+  
+  for(name in col_names){
+    names(dat1)[names(dat1) == name] <- .self$get_next_default_column_name(prefix = paste(name, "copy", sep = "_" ) )
+  }
+  
+  set_data(cbind(data, dat1))
+  .self$append_to_changes(list(Copy_cols, col_names))
+}
+)
+
 #Labels for strings which will be added to logs
 Set_property="Set"
 Added_col="Added column"
@@ -657,6 +677,7 @@ Inserted_col = "Inserted column"
 Move_col = "Moved column"
 Col_order = "Order of columns"
 Inserted_row = "Inserted row"
+Copy_cols = "Copied columns"
 
 #meta data labels
 data_name_label="data_name"

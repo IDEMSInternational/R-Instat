@@ -15,14 +15,43 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgReferenceLevel
+    Public bFirstLoad As Boolean = True
     Private Sub dlgReferenceLevel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("relevel")
 
-        ucrFactorSelected.SetMeAsReceiver()
-        ucrFactorSelected.Selector = ucrAddRemove
-        ucrFactorSelected.SetDataType("factor")
         autoTranslate(Me)
 
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        TestOKEnabled()
+
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction("relevel")
+        ucrBase.iHelpTopicID = 38
+        ucrReceiverReferenceLevels.SetMeAsReceiver()
+        ucrReceiverReferenceLevels.Selector = ucrSelectorForReferenceLevels
+        ucrReceiverReferenceLevels.SetDataType("factor")
+        ucrFactorReferenceLevels.SetReceiver(ucrReceiverReferenceLevels)
+    End Sub
+
+    Private Sub SetDefaults()
+        ucrSelectorForReferenceLevels.Reset()
+        ucrSelectorForReferenceLevels.Focus()
+
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
     End Sub
 
 

@@ -78,10 +78,10 @@ Partial Class dlgScatterPlot
         Me.lblFactorOptional.AutoSize = True
         Me.lblFactorOptional.Location = New System.Drawing.Point(268, 117)
         Me.lblFactorOptional.Name = "lblFactorOptional"
-        Me.lblFactorOptional.Size = New System.Drawing.Size(82, 13)
+        Me.lblFactorOptional.Size = New System.Drawing.Size(85, 13)
         Me.lblFactorOptional.TabIndex = 5
         Me.lblFactorOptional.Tag = "Factor_Optional"
-        Me.lblFactorOptional.Text = "Factor(Optional)"
+        Me.lblFactorOptional.Text = "Factor (Optional)"
         '
         'ucrReceiverX
         '
@@ -106,10 +106,10 @@ Partial Class dlgScatterPlot
         Me.lblYVariable.AutoSize = True
         Me.lblYVariable.Location = New System.Drawing.Point(268, 16)
         Me.lblYVariable.Name = "lblYVariable"
-        Me.lblYVariable.Size = New System.Drawing.Size(72, 13)
+        Me.lblYVariable.Size = New System.Drawing.Size(61, 13)
         Me.lblYVariable.TabIndex = 1
         Me.lblYVariable.Tag = "Y_Variable"
-        Me.lblYVariable.Text = "Y - Variable(s)"
+        Me.lblYVariable.Text = "Y - Variable"
         '
         'dlgScatterPlot
         '
