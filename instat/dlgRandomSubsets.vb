@@ -47,7 +47,7 @@ Public Class dlgRandomSubsets
         ucrSelectorRandomSubsets.Focus()
         ucrReceiverSelected.Selector = ucrSelectorRandomSubsets
         ucrReceiverSelected.SetMeAsReceiver()
-
+        rdoWithReplacement.Checked = True
         TestOkEnabled()
 
     End Sub

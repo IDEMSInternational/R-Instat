@@ -40,14 +40,14 @@ Partial Class dlgRandomSubsets
         Me.ucrBase.Location = New System.Drawing.Point(12, 243)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 10
         '
         'ucrSelectorRandomSubsets
         '
         Me.ucrSelectorRandomSubsets.Location = New System.Drawing.Point(3, 3)
         Me.ucrSelectorRandomSubsets.Name = "ucrSelectorRandomSubsets"
         Me.ucrSelectorRandomSubsets.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorRandomSubsets.TabIndex = 1
+        Me.ucrSelectorRandomSubsets.TabIndex = 0
         '
         'ucrReceiverSelected
         '
@@ -63,7 +63,7 @@ Partial Class dlgRandomSubsets
         Me.lblSelected.Location = New System.Drawing.Point(267, 31)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
-        Me.lblSelected.TabIndex = 3
+        Me.lblSelected.TabIndex = 1
         Me.lblSelected.Tag = "Selected"
         Me.lblSelected.Text = "Selected"
         '
@@ -73,7 +73,7 @@ Partial Class dlgRandomSubsets
         Me.chkSetSeed.Location = New System.Drawing.Point(266, 80)
         Me.chkSetSeed.Name = "chkSetSeed"
         Me.chkSetSeed.Size = New System.Drawing.Size(70, 17)
-        Me.chkSetSeed.TabIndex = 4
+        Me.chkSetSeed.TabIndex = 3
         Me.chkSetSeed.Tag = "Set_Seed"
         Me.chkSetSeed.Text = "Set Seed"
         Me.chkSetSeed.UseVisualStyleBackColor = True
@@ -84,7 +84,7 @@ Partial Class dlgRandomSubsets
         Me.rdoWithReplacement.Location = New System.Drawing.Point(13, 182)
         Me.rdoWithReplacement.Name = "rdoWithReplacement"
         Me.rdoWithReplacement.Size = New System.Drawing.Size(113, 17)
-        Me.rdoWithReplacement.TabIndex = 5
+        Me.rdoWithReplacement.TabIndex = 4
         Me.rdoWithReplacement.TabStop = True
         Me.rdoWithReplacement.Tag = "With_Replacement"
         Me.rdoWithReplacement.Text = "With Replacement"
@@ -125,7 +125,7 @@ Partial Class dlgRandomSubsets
         Me.lblNumberOfColumns.Location = New System.Drawing.Point(186, 215)
         Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
         Me.lblNumberOfColumns.Size = New System.Drawing.Size(101, 13)
-        Me.lblNumberOfColumns.TabIndex = 6
+        Me.lblNumberOfColumns.TabIndex = 8
         Me.lblNumberOfColumns.Tag = "Number_Of_Columns"
         Me.lblNumberOfColumns.Text = "Number Of Columns"
         '
@@ -134,7 +134,7 @@ Partial Class dlgRandomSubsets
         Me.TextBox1.Location = New System.Drawing.Point(293, 214)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(75, 20)
-        Me.TextBox1.TabIndex = 7
+        Me.TextBox1.TabIndex = 9
         '
         'dlgRandomSubsets
         '
