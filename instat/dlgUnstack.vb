@@ -124,6 +124,10 @@ Public Class dlgUnstack
     Private Sub chkCarryAllColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkCarryAllColumns.CheckedChanged
         If chkCarryAllColumns.Checked = False Then
             ucrCarryAllColumns.Visible = True
+            ucrCarryAllColumns.Selector = ucrSelectorForunstack
+            ucrCarryAllColumns.SetMeAsReceiver()
+
+
         Else
             ucrCarryAllColumns.Visible = False
         End If
