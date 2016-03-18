@@ -22,46 +22,16 @@ Partial Class dlgCanonicalCorrelationAnalysis
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBaseCCA = New instat.ucrButtons()
-        Me.ucrSelectorCCA = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverYvariables = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverXvariables = New instat.ucrReceiverMultiple()
         Me.lblYVariables = New System.Windows.Forms.Label()
         Me.lblXVariables = New System.Windows.Forms.Label()
         Me.cmdCCAOptions = New System.Windows.Forms.Button()
         Me.chkSaveResult = New System.Windows.Forms.CheckBox()
         Me.ucrResultName = New instat.ucrVariableName()
+        Me.ucrReceiverXvariables = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverYvariables = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorCCA = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBaseCCA = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBaseCCA
-        '
-        Me.ucrBaseCCA.Location = New System.Drawing.Point(4, 277)
-        Me.ucrBaseCCA.Name = "ucrBaseCCA"
-        Me.ucrBaseCCA.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBaseCCA.TabIndex = 0
-        '
-        'ucrSelectorCCA
-        '
-        Me.ucrSelectorCCA.Location = New System.Drawing.Point(9, 12)
-        Me.ucrSelectorCCA.Name = "ucrSelectorCCA"
-        Me.ucrSelectorCCA.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorCCA.TabIndex = 1
-        '
-        'ucrReceiverYvariables
-        '
-        Me.ucrReceiverYvariables.Location = New System.Drawing.Point(272, 20)
-        Me.ucrReceiverYvariables.Name = "ucrReceiverYvariables"
-        Me.ucrReceiverYvariables.Selector = Nothing
-        Me.ucrReceiverYvariables.Size = New System.Drawing.Size(121, 104)
-        Me.ucrReceiverYvariables.TabIndex = 2
-        '
-        'ucrReceiverXvariables
-        '
-        Me.ucrReceiverXvariables.Location = New System.Drawing.Point(271, 141)
-        Me.ucrReceiverXvariables.Name = "ucrReceiverXvariables"
-        Me.ucrReceiverXvariables.Selector = Nothing
-        Me.ucrReceiverXvariables.Size = New System.Drawing.Size(121, 104)
-        Me.ucrReceiverXvariables.TabIndex = 3
         '
         'lblYVariables
         '
@@ -110,6 +80,36 @@ Partial Class dlgCanonicalCorrelationAnalysis
         Me.ucrResultName.Name = "ucrResultName"
         Me.ucrResultName.Size = New System.Drawing.Size(149, 23)
         Me.ucrResultName.TabIndex = 9
+        '
+        'ucrReceiverXvariables
+        '
+        Me.ucrReceiverXvariables.Location = New System.Drawing.Point(271, 141)
+        Me.ucrReceiverXvariables.Name = "ucrReceiverXvariables"
+        Me.ucrReceiverXvariables.Selector = Nothing
+        Me.ucrReceiverXvariables.Size = New System.Drawing.Size(121, 104)
+        Me.ucrReceiverXvariables.TabIndex = 3
+        '
+        'ucrReceiverYvariables
+        '
+        Me.ucrReceiverYvariables.Location = New System.Drawing.Point(272, 20)
+        Me.ucrReceiverYvariables.Name = "ucrReceiverYvariables"
+        Me.ucrReceiverYvariables.Selector = Nothing
+        Me.ucrReceiverYvariables.Size = New System.Drawing.Size(121, 104)
+        Me.ucrReceiverYvariables.TabIndex = 2
+        '
+        'ucrSelectorCCA
+        '
+        Me.ucrSelectorCCA.Location = New System.Drawing.Point(9, 12)
+        Me.ucrSelectorCCA.Name = "ucrSelectorCCA"
+        Me.ucrSelectorCCA.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorCCA.TabIndex = 1
+        '
+        'ucrBaseCCA
+        '
+        Me.ucrBaseCCA.Location = New System.Drawing.Point(4, 277)
+        Me.ucrBaseCCA.Name = "ucrBaseCCA"
+        Me.ucrBaseCCA.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBaseCCA.TabIndex = 0
         '
         'dlgCanonicalCorrelationAnalysis
         '

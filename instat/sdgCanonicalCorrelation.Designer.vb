@@ -27,6 +27,7 @@ Partial Class sdgCanonicalCorrelation
         Me.chkCanonicalCorrelations = New System.Windows.Forms.CheckBox()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.chkCoef = New System.Windows.Forms.CheckBox()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.SuspendLayout()
@@ -43,6 +44,7 @@ Partial Class sdgCanonicalCorrelation
         '
         'tbDisplay
         '
+        Me.tbDisplay.Controls.Add(Me.chkCoef)
         Me.tbDisplay.Controls.Add(Me.chkCanonicalCorrelations)
         Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
         Me.tbDisplay.Name = "tbDisplay"
@@ -82,6 +84,17 @@ Partial Class sdgCanonicalCorrelation
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
         '
+        'chkCoef
+        '
+        Me.chkCoef.AutoSize = True
+        Me.chkCoef.Location = New System.Drawing.Point(6, 49)
+        Me.chkCoef.Name = "chkCoef"
+        Me.chkCoef.Size = New System.Drawing.Size(81, 17)
+        Me.chkCoef.TabIndex = 1
+        Me.chkCoef.Tag = "Coefficients"
+        Me.chkCoef.Text = "Coefficients"
+        Me.chkCoef.UseVisualStyleBackColor = True
+        '
         'sdgCanonicalCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -105,4 +118,5 @@ Partial Class sdgCanonicalCorrelation
     Friend WithEvents tbDisplay As TabPage
     Friend WithEvents tbGraphics As TabPage
     Friend WithEvents chkCanonicalCorrelations As CheckBox
+    Friend WithEvents chkCoef As CheckBox
 End Class

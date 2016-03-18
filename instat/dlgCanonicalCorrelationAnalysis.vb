@@ -16,14 +16,13 @@
 Imports instat.Translations
 Public Class dlgCanonicalCorrelationAnalysis
     Public bFirstLoad As Boolean = True
-    Public YVariables, XVariables
     Private Sub dlgCanonicalCorrelationAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
-            ReopenDialog()
+            reopendialog()
         End If
 
         autoTranslate(Me)
@@ -68,23 +67,13 @@ Public Class dlgCanonicalCorrelationAnalysis
 
     Public Sub ucrreceiverxvariables_selectionchanged() Handles ucrReceiverXvariables.SelectionChanged
         TestOKEnabled()
-        XVariables = XYariables(ucrReceiverXvariables.GetVariableNames())
-        ucrBaseCCA.clsRsyntax.AddParameter("x", XVariables)
+        ucrBaseCCA.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverXvariables.GetVariables())
     End Sub
 
     Public Sub ucrReceiverYvariables_SelectionChanged() Handles ucrReceiverYvariables.SelectionChanged
         TestOKEnabled()
-        YVariables = XYariables(ucrReceiverYvariables.GetVariableNames())
-        ucrBaseCCA.clsRsyntax.AddParameter("y", YVariables)
+        ucrBaseCCA.clsRsyntax.AddParameter("y", clsRFunctionParameter:=ucrReceiverYvariables.GetVariables())
     End Sub
-
-    Public Function XYariables(ByVal my_variable) As String
-        Dim Variables As New RSyntax
-        Variables.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        Variables.AddParameter("col_names", my_variable)
-        Variables.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        Return (Variables.GetScript())
-    End Function
 
     Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
         sdgCanonicalCorrelation.ShowDialog()
