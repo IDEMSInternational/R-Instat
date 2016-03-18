@@ -15,7 +15,7 @@
 
 Imports instat.Translations
 
-Public Class dlgunstack
+Public Class dlgUnstack
     Public bFirstLoad As Boolean = True
     Private Sub dlgunstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -39,7 +39,7 @@ Public Class dlgunstack
         SetNewDataFrameName(ucrSelectorForunstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
         ucrBase.iHelpTopicID = 58
         ucrFactorTounstackReceiver.SetDataType("factor")
-        ucrCarryAllColumns.Selector = ucrSelectorForunstack
+        ucrColumnsToCarry.Selector = ucrSelectorForunstack
     End Sub
 
     Private Sub SetDefaults()
@@ -123,12 +123,14 @@ Public Class dlgunstack
 
     Private Sub chkCarryAllColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkCarryAllColumns.CheckedChanged
         If chkCarryAllColumns.Checked = False Then
-            ucrCarryAllColumns.Visible = True
-            ucrCarryAllColumns.SetMeAsReceiver()
+            ucrColumnsToCarry.Visible = True
+            ucrColumnsToCarry.SetMeAsReceiver()
 
 
         Else
             ucrFactorTounstackReceiver.SetMeAsReceiver()
+            ucrColumnsToCarry.Visible = False
+
         End If
     End Sub
 End Class
