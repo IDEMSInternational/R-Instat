@@ -16,7 +16,41 @@
 
 Imports instat.Translations
 Public Class dlgUnusedLevels
+
+    Public bFirstLoad As Boolean = True
+
     Private Sub dlgUnusedLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If bFirstLoad Then
+            SetDefaultSettings()
+            InitialiseDialog()
+        End If
+        TestOKEnabled()
+        ucrBase.iHelpTopicID = 40
         autoTranslate(Me)
+    End Sub
+    Private Sub SetDefaultSettings()
+        ucrSelectorFactorColumn.Reset()
+        ucrSelectorFactorColumn.Focus()
+        TestOKEnabled()
+    End Sub
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction(" droplevels")
+        ucrReceiverFactorColumn.Selector = ucrSelectorFactorColumn
+        ucrReceiverFactorColumn.SetMeAsReceiver()
+        ucrReceiverFactorColumn.SetDataType("factor")
+        ucrRemoveUnusedFactorLevels.SetReceiver(ucrReceiverFactorColumn)
+    End Sub
+
+    Private Sub ucrBase_clickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaultSettings()
+        TestOKEnabled()
+    End Sub
+    Private Sub TestOKEnabled()
+        If ucrReceiverFactorColumn.IsEmpty() = False Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 End Class
