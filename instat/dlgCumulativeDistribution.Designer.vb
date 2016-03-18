@@ -29,7 +29,6 @@ Partial Class dlgCumulativeDistribution
         Me.chkIncludePoints = New System.Windows.Forms.CheckBox()
         Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
-        Me.cmdThemeOptions = New System.Windows.Forms.Button()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrVariateReceiver = New instat.ucrReceiverSingle()
         Me.ucrCumDistSelector = New instat.ucrSelectorByDataFrameAddRemove()
@@ -101,23 +100,13 @@ Partial Class dlgCumulativeDistribution
         '
         'cmdPlotOptions
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(146, 294)
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(282, 294)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdPlotOptions.TabIndex = 9
         Me.cmdPlotOptions.Tag = "Plot_Options"
         Me.cmdPlotOptions.Text = "Plot Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
-        '
-        'cmdThemeOptions
-        '
-        Me.cmdThemeOptions.Location = New System.Drawing.Point(276, 294)
-        Me.cmdThemeOptions.Name = "cmdThemeOptions"
-        Me.cmdThemeOptions.Size = New System.Drawing.Size(93, 23)
-        Me.cmdThemeOptions.TabIndex = 10
-        Me.cmdThemeOptions.Tag = "Theme_Options"
-        Me.cmdThemeOptions.Text = "Theme Options"
-        Me.cmdThemeOptions.UseVisualStyleBackColor = True
         '
         'ucrFactorReceiver
         '
@@ -156,7 +145,6 @@ Partial Class dlgCumulativeDistribution
         Me.ClientSize = New System.Drawing.Size(415, 390)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.ucrVariateReceiver)
-        Me.Controls.Add(Me.cmdThemeOptions)
         Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.cmdLineOptions)
         Me.Controls.Add(Me.chkIncludePoints)
@@ -185,7 +173,6 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents chkIncludePoints As CheckBox
     Friend WithEvents cmdLineOptions As Button
     Friend WithEvents cmdPlotOptions As Button
-    Friend WithEvents cmdThemeOptions As Button
     Friend WithEvents ucrVariateReceiver As ucrReceiverSingle
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
 End Class
