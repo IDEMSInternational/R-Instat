@@ -94,8 +94,4 @@ Public Class dlgCumulativeDistribution
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
         sdgCumDistPlotOptions.ShowDialog()
     End Sub
-
-    Private Sub cmdThemeOptions_Click(sender As Object, e As EventArgs) 
-        sdgThemeOptions.ShowDialog()
-    End Sub
 End Class
