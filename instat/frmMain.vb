@@ -839,7 +839,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageFactorconvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuManageFactorconvertToFactor.Click
-        dlgConvertColumnsToFactors.ShowDialog()
+        dlgConvertColumns.ShowDialog()
     End Sub
 
     Private Sub mnuManageFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorReorderLevels.Click
@@ -940,6 +940,10 @@ Public Class frmMain
 
     Private Sub mnuManageDataFilter_Click(sender As Object, e As EventArgs) Handles mnuManageDataFilter.Click
         dlgRestrict.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageDataConvertTo_Click(sender As Object, e As EventArgs) Handles mnuManageDataConvertTo.Click
+        dlgConvertColumns.ShowDialog()
     End Sub
 End Class
 
