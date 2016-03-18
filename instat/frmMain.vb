@@ -640,9 +640,7 @@ Public Class frmMain
         dlgPrintPreviewOptions.ShowDialog()
     End Sub
 
-    Private Sub RemoveUnusedLabelsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveUnusedLabelsToolStripMenuItem.Click
-        dlgRemoveUnusedLabels.ShowDialog()
-    End Sub
+
 
     Private Sub mnuManageAddColumnRank_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnRank.Click
         dlgRank.ShowDialog()
@@ -822,19 +820,11 @@ Public Class frmMain
         dlgReorderSheet.ShowDialog()
     End Sub
 
-    Private Sub mnuManageFactorIndicatorVariables_Click(sender As Object, e As EventArgs) Handles mnuManageFactorIndicatorVariables.Click
-        dlgDummyVariables.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageFactorInteraction_Click(sender As Object, e As EventArgs) Handles mnuManageFactorInteraction.Click
-        dlgCombine.ShowDialog()
-    End Sub
-
     Private Sub mnuManageFactorReferenceLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorReferenceLevels.Click
         dlgReferenceLevel.ShowDialog()
     End Sub
 
-    Private Sub mnuMangeFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuMangeFactorLabel.Click
+    Private Sub mnuMangeFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuMangeFactorLabels.Click
         dlgLabels.ShowDialog()
     End Sub
 
@@ -862,7 +852,7 @@ Public Class frmMain
         dlgHideShowColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuManageReshapeRandomSubst_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeRandomSubst.Click
+    Private Sub mnuManageReshapeRandomSubst_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeRandomSubset.Click
         dlgRandomSubset.ShowDialog()
     End Sub
 
@@ -910,7 +900,7 @@ Public Class frmMain
         dlgContrasts.ShowDialog()
     End Sub
 
-    Private Sub mnuManageFactorMakeSheet_Click(sender As Object, e As EventArgs) Handles mnuManageFactorMakeSheet.Click
+    Private Sub mnuManageFactorSheet_Click(sender As Object, e As EventArgs) Handles mnuManageFactorSheet.Click
         dlgMakeSheets.ShowDialog()
     End Sub
 
@@ -944,6 +934,18 @@ Public Class frmMain
 
     Private Sub mnuManageDataConvertTo_Click(sender As Object, e As EventArgs) Handles mnuManageDataConvertTo.Click
         dlgConvertColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageReshapeTranspose_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeTranspose.Click
+        dlgTransposeColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageFactorCombine_Click(sender As Object, e As EventArgs) Handles mnuManageFactorCombine.Click
+        dlgCombine.ShowDialog()
+    End Sub
+
+    Private Sub mnuManageFactorDummyVariable_Click(sender As Object, e As EventArgs) Handles mnuManageFactorDummyVariable.Click
+        dlgDummyVariables.ShowDialog()
     End Sub
 End Class
 
