@@ -31,6 +31,8 @@ Partial Class dlgUnstack
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFrameForunstack = New instat.ucrVariableName()
         Me.lblDataFrameForUnstack = New System.Windows.Forms.Label()
+        Me.chkCarryAllColumns = New System.Windows.Forms.CheckBox()
+        Me.ucrCarryAllColumns = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
         '
         'lblFactorToUnstackBy
@@ -56,7 +58,7 @@ Partial Class dlgUnstack
         'chkKeepUnusedFactorLevels
         '
         Me.chkKeepUnusedFactorLevels.AutoSize = True
-        Me.chkKeepUnusedFactorLevels.Location = New System.Drawing.Point(250, 174)
+        Me.chkKeepUnusedFactorLevels.Location = New System.Drawing.Point(12, 197)
         Me.chkKeepUnusedFactorLevels.Name = "chkKeepUnusedFactorLevels"
         Me.chkKeepUnusedFactorLevels.Size = New System.Drawing.Size(158, 17)
         Me.chkKeepUnusedFactorLevels.TabIndex = 7
@@ -89,14 +91,14 @@ Partial Class dlgUnstack
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(-2, 225)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 312)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 8
         '
         'ucrDataFrameForunstack
         '
-        Me.ucrDataFrameForunstack.Location = New System.Drawing.Point(137, 196)
+        Me.ucrDataFrameForunstack.Location = New System.Drawing.Point(140, 283)
         Me.ucrDataFrameForunstack.Name = "ucrDataFrameForunstack"
         Me.ucrDataFrameForunstack.Size = New System.Drawing.Size(149, 23)
         Me.ucrDataFrameForunstack.TabIndex = 9
@@ -104,18 +106,39 @@ Partial Class dlgUnstack
         'lblDataFrameForUnstack
         '
         Me.lblDataFrameForUnstack.AutoSize = True
-        Me.lblDataFrameForUnstack.Location = New System.Drawing.Point(13, 206)
+        Me.lblDataFrameForUnstack.Location = New System.Drawing.Point(-2, 293)
         Me.lblDataFrameForUnstack.Name = "lblDataFrameForUnstack"
         Me.lblDataFrameForUnstack.Size = New System.Drawing.Size(118, 13)
         Me.lblDataFrameForUnstack.TabIndex = 10
         Me.lblDataFrameForUnstack.Tag = "New_Data_Frame_Name"
         Me.lblDataFrameForUnstack.Text = "New Data Frame Name"
         '
+        'chkCarryAllColumns
+        '
+        Me.chkCarryAllColumns.AutoSize = True
+        Me.chkCarryAllColumns.Location = New System.Drawing.Point(258, 120)
+        Me.chkCarryAllColumns.Name = "chkCarryAllColumns"
+        Me.chkCarryAllColumns.Size = New System.Drawing.Size(106, 17)
+        Me.chkCarryAllColumns.TabIndex = 11
+        Me.chkCarryAllColumns.Tag = "Carry_All_Columns"
+        Me.chkCarryAllColumns.Text = "Carry all Columns"
+        Me.chkCarryAllColumns.UseVisualStyleBackColor = True
+        '
+        'ucrCarryAllColumns
+        '
+        Me.ucrCarryAllColumns.Location = New System.Drawing.Point(256, 143)
+        Me.ucrCarryAllColumns.Name = "ucrCarryAllColumns"
+        Me.ucrCarryAllColumns.Selector = Nothing
+        Me.ucrCarryAllColumns.Size = New System.Drawing.Size(121, 104)
+        Me.ucrCarryAllColumns.TabIndex = 12
+        '
         'dlgUnstack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 283)
+        Me.ClientSize = New System.Drawing.Size(420, 380)
+        Me.Controls.Add(Me.ucrCarryAllColumns)
+        Me.Controls.Add(Me.chkCarryAllColumns)
         Me.Controls.Add(Me.lblDataFrameForUnstack)
         Me.Controls.Add(Me.ucrDataFrameForunstack)
         Me.Controls.Add(Me.ucrColumnTounstackReceiver)
@@ -143,4 +166,6 @@ Partial Class dlgUnstack
     Friend WithEvents ucrColumnTounstackReceiver As ucrReceiverSingle
     Friend WithEvents ucrDataFrameForunstack As ucrVariableName
     Friend WithEvents lblDataFrameForUnstack As Label
+    Friend WithEvents chkCarryAllColumns As CheckBox
+    Friend WithEvents ucrCarryAllColumns As ucrReceiverMultiple
 End Class
