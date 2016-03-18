@@ -106,9 +106,9 @@ Public Class dlgPlot
         Dim clsTempRFunc As New RFunction
         If chkPoints.Checked = True Then
             clsTempRFunc.SetRCommand("geom_point")
-            ucrBase.clsRsyntax.AddOperatorParameter(True, clsRFunc:=clsTempRFunc)
+            ucrBase.clsRsyntax.AddOperatorParameter("geom_point", clsRFunc:=clsTempRFunc)
         Else
-
+            ucrBase.clsRsyntax.RemoveOperatorParameter("geom_point")
         End If
     End Sub
 End Class
