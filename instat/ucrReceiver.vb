@@ -43,7 +43,7 @@ Public Class ucrReceiver
 
     End Sub
 
-    Public Overridable Function GetVariables() As RFunction
+    Public Overridable Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
         Dim clsGetVariablesFunc As New RFunction
         Return clsGetVariablesFunc
     End Function
