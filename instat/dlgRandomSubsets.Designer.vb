@@ -24,7 +24,7 @@ Partial Class dlgRandomSubsets
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.chkSetSeed = New System.Windows.Forms.CheckBox()
         Me.rdoWithReplacement = New System.Windows.Forms.RadioButton()
@@ -49,13 +49,13 @@ Partial Class dlgRandomSubsets
         Me.ucrSelectorRandomSubsets.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorRandomSubsets.TabIndex = 1
         '
-        'UcrReceiverSingle1
+        'ucrReceiverSelected
         '
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(262, 47)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Selector = Nothing
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(106, 26)
-        Me.UcrReceiverSingle1.TabIndex = 2
+        Me.ucrReceiverSelected.Location = New System.Drawing.Point(262, 47)
+        Me.ucrReceiverSelected.Name = "ucrReceiverSelected"
+        Me.ucrReceiverSelected.Selector = Nothing
+        Me.ucrReceiverSelected.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverSelected.TabIndex = 2
         '
         'lblSelected
         '
@@ -149,7 +149,7 @@ Partial Class dlgRandomSubsets
         Me.Controls.Add(Me.rdoWithReplacement)
         Me.Controls.Add(Me.chkSetSeed)
         Me.Controls.Add(Me.lblSelected)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
+        Me.Controls.Add(Me.ucrReceiverSelected)
         Me.Controls.Add(Me.ucrSelectorRandomSubsets)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -164,7 +164,7 @@ Partial Class dlgRandomSubsets
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorRandomSubsets As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSelected As ucrReceiverSingle
     Friend WithEvents lblSelected As Label
     Friend WithEvents chkSetSeed As CheckBox
     Friend WithEvents rdoWithReplacement As RadioButton
