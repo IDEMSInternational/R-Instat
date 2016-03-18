@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgConvertColumnsToFactors
+Partial Class dlgConvertColumns
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,18 +23,18 @@ Partial Class dlgConvertColumnsToFactors
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblColumnsToConvert = New System.Windows.Forms.Label()
-        Me.grpToType = New System.Windows.Forms.GroupBox()
+        Me.grpTo = New System.Windows.Forms.GroupBox()
         Me.rdoInteger = New System.Windows.Forms.RadioButton()
         Me.rdoCharacter = New System.Windows.Forms.RadioButton()
         Me.rdoFactor = New System.Windows.Forms.RadioButton()
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
-        Me.cboFactorNumeric = New System.Windows.Forms.ComboBox()
-        Me.lblFactorNumeric = New System.Windows.Forms.Label()
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpFactorNumeric = New System.Windows.Forms.GroupBox()
-        Me.grpToType.SuspendLayout()
+        Me.rdoByLevels = New System.Windows.Forms.RadioButton()
+        Me.rdoByOrdinals = New System.Windows.Forms.RadioButton()
+        Me.grpTo.SuspendLayout()
         Me.grpFactorNumeric.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -48,19 +48,19 @@ Partial Class dlgConvertColumnsToFactors
         Me.lblColumnsToConvert.Tag = "Columns_to_convert"
         Me.lblColumnsToConvert.Text = "Columns to convert"
         '
-        'grpToType
+        'grpTo
         '
-        Me.grpToType.Controls.Add(Me.rdoInteger)
-        Me.grpToType.Controls.Add(Me.rdoCharacter)
-        Me.grpToType.Controls.Add(Me.rdoFactor)
-        Me.grpToType.Controls.Add(Me.rdoNumeric)
-        Me.grpToType.Location = New System.Drawing.Point(18, 183)
-        Me.grpToType.Name = "grpToType"
-        Me.grpToType.Size = New System.Drawing.Size(101, 132)
-        Me.grpToType.TabIndex = 4
-        Me.grpToType.TabStop = False
-        Me.grpToType.Tag = "To_type"
-        Me.grpToType.Text = "To type"
+        Me.grpTo.Controls.Add(Me.rdoInteger)
+        Me.grpTo.Controls.Add(Me.rdoCharacter)
+        Me.grpTo.Controls.Add(Me.rdoFactor)
+        Me.grpTo.Controls.Add(Me.rdoNumeric)
+        Me.grpTo.Location = New System.Drawing.Point(18, 183)
+        Me.grpTo.Name = "grpTo"
+        Me.grpTo.Size = New System.Drawing.Size(101, 132)
+        Me.grpTo.TabIndex = 4
+        Me.grpTo.TabStop = False
+        Me.grpTo.Tag = "To"
+        Me.grpTo.Text = "To"
         '
         'rdoInteger
         '
@@ -110,28 +110,6 @@ Partial Class dlgConvertColumnsToFactors
         Me.rdoNumeric.Text = "numeric"
         Me.rdoNumeric.UseVisualStyleBackColor = True
         '
-        'cboFactorNumeric
-        '
-        Me.cboFactorNumeric.AllowDrop = True
-        Me.cboFactorNumeric.FormattingEnabled = True
-        Me.cboFactorNumeric.Items.AddRange(New Object() {"by_levels", "by_ordinals"})
-        Me.cboFactorNumeric.Location = New System.Drawing.Point(92, 12)
-        Me.cboFactorNumeric.Name = "cboFactorNumeric"
-        Me.cboFactorNumeric.Size = New System.Drawing.Size(121, 21)
-        Me.cboFactorNumeric.TabIndex = 5
-        Me.cboFactorNumeric.Tag = "by_levels"
-        Me.cboFactorNumeric.Text = "by_levels"
-        '
-        'lblFactorNumeric
-        '
-        Me.lblFactorNumeric.AutoSize = True
-        Me.lblFactorNumeric.Location = New System.Drawing.Point(6, 16)
-        Me.lblFactorNumeric.Name = "lblFactorNumeric"
-        Me.lblFactorNumeric.Size = New System.Drawing.Size(80, 13)
-        Me.lblFactorNumeric.TabIndex = 6
-        Me.lblFactorNumeric.Tag = "Factor_numeric"
-        Me.lblFactorNumeric.Text = "Factor_numeric"
-        '
         'ucrSelectorDataFrameColumns
         '
         Me.ucrSelectorDataFrameColumns.Location = New System.Drawing.Point(4, 2)
@@ -156,32 +134,58 @@ Partial Class dlgConvertColumnsToFactors
         '
         'grpFactorNumeric
         '
-        Me.grpFactorNumeric.Controls.Add(Me.lblFactorNumeric)
-        Me.grpFactorNumeric.Controls.Add(Me.cboFactorNumeric)
-        Me.grpFactorNumeric.Location = New System.Drawing.Point(144, 187)
+        Me.grpFactorNumeric.Controls.Add(Me.rdoByOrdinals)
+        Me.grpFactorNumeric.Controls.Add(Me.rdoByLevels)
+        Me.grpFactorNumeric.Location = New System.Drawing.Point(144, 240)
         Me.grpFactorNumeric.Name = "grpFactorNumeric"
-        Me.grpFactorNumeric.Size = New System.Drawing.Size(217, 57)
+        Me.grpFactorNumeric.Size = New System.Drawing.Size(217, 44)
         Me.grpFactorNumeric.TabIndex = 7
         Me.grpFactorNumeric.TabStop = False
+        Me.grpFactorNumeric.Tag = "Factor numeric"
+        Me.grpFactorNumeric.Text = "Factor numeric"
         '
-        'dlgConvertColumnsToFactors
+        'rdoByLevels
+        '
+        Me.rdoByLevels.AutoSize = True
+        Me.rdoByLevels.Location = New System.Drawing.Point(6, 16)
+        Me.rdoByLevels.Name = "rdoByLevels"
+        Me.rdoByLevels.Size = New System.Drawing.Size(69, 17)
+        Me.rdoByLevels.TabIndex = 7
+        Me.rdoByLevels.TabStop = True
+        Me.rdoByLevels.Tag = "by_levels"
+        Me.rdoByLevels.Text = "by_levels"
+        Me.rdoByLevels.UseVisualStyleBackColor = True
+        '
+        'rdoByOrdinals
+        '
+        Me.rdoByOrdinals.AutoSize = True
+        Me.rdoByOrdinals.Location = New System.Drawing.Point(113, 16)
+        Me.rdoByOrdinals.Name = "rdoByOrdinals"
+        Me.rdoByOrdinals.Size = New System.Drawing.Size(78, 17)
+        Me.rdoByOrdinals.TabIndex = 8
+        Me.rdoByOrdinals.TabStop = True
+        Me.rdoByOrdinals.Tag = "by_ordinals"
+        Me.rdoByOrdinals.Text = "by_ordinals"
+        Me.rdoByOrdinals.UseVisualStyleBackColor = True
+        '
+        'dlgConvertToColumnFactors
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(407, 382)
         Me.Controls.Add(Me.grpFactorNumeric)
-        Me.Controls.Add(Me.grpToType)
+        Me.Controls.Add(Me.grpTo)
         Me.Controls.Add(Me.ucrSelectorDataFrameColumns)
         Me.Controls.Add(Me.lblColumnsToConvert)
         Me.Controls.Add(Me.ucrReceiverColumnsToConvert)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgConvertColumnsToFactors"
+        Me.Name = "dlgConvertToColumnFactors"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Convert_columns"
         Me.Text = "Convert Columns"
-        Me.grpToType.ResumeLayout(False)
-        Me.grpToType.PerformLayout()
+        Me.grpTo.ResumeLayout(False)
+        Me.grpTo.PerformLayout()
         Me.grpFactorNumeric.ResumeLayout(False)
         Me.grpFactorNumeric.PerformLayout()
         Me.ResumeLayout(False)
@@ -193,12 +197,12 @@ Partial Class dlgConvertColumnsToFactors
     Friend WithEvents ucrReceiverColumnsToConvert As ucrReceiverMultiple
     Friend WithEvents lblColumnsToConvert As Label
     Friend WithEvents ucrSelectorDataFrameColumns As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents grpToType As GroupBox
+    Friend WithEvents grpTo As GroupBox
     Friend WithEvents rdoInteger As RadioButton
     Friend WithEvents rdoCharacter As RadioButton
     Friend WithEvents rdoFactor As RadioButton
     Friend WithEvents rdoNumeric As RadioButton
-    Friend WithEvents cboFactorNumeric As ComboBox
-    Friend WithEvents lblFactorNumeric As Label
     Friend WithEvents grpFactorNumeric As GroupBox
+    Friend WithEvents rdoByOrdinals As RadioButton
+    Friend WithEvents rdoByLevels As RadioButton
 End Class
