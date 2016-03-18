@@ -1822,9 +1822,9 @@ Partial Class frmMain
         'mnuManageDataConvertTo
         '
         Me.mnuManageDataConvertTo.Name = "mnuManageDataConvertTo"
-        Me.mnuManageDataConvertTo.Size = New System.Drawing.Size(226, 22)
+        Me.mnuManageDataConvertTo.Size = New System.Drawing.Size(177, 22)
         Me.mnuManageDataConvertTo.Tag = "Convert_To"
-        Me.mnuManageDataConvertTo.Text = "Convert to Column Factors..."
+        Me.mnuManageDataConvertTo.Text = "Convert Columns..."
         '
         'mnuManageAddColumn
         '
@@ -1948,9 +1948,9 @@ Partial Class frmMain
         'mnuManageFactorconvertToFactor
         '
         Me.mnuManageFactorconvertToFactor.Name = "mnuManageFactorconvertToFactor"
-        Me.mnuManageFactorconvertToFactor.Size = New System.Drawing.Size(226, 22)
+        Me.mnuManageFactorconvertToFactor.Size = New System.Drawing.Size(179, 22)
         Me.mnuManageFactorconvertToFactor.Tag = "Convert_to_Factor"
-        Me.mnuManageFactorconvertToFactor.Text = "Convert to Column Factors..."
+        Me.mnuManageFactorconvertToFactor.Text = "Convert Columns..."
         '
         'mnuMangeFactorLabel
         '

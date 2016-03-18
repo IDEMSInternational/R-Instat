@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 
-Public Class dlgConvertToColumnFactors
+Public Class dlgConvertColumns
     Public bFirstLoad As Boolean = True
 
     Private Sub ucrSelectorDataFrameColumns_Load(sender As Object, e As EventArgs) Handles ucrSelectorDataFrameColumns.Load
@@ -100,7 +100,14 @@ Public Class dlgConvertToColumnFactors
     End Sub
     Private Sub rdoByLevelsAndrdoByOrdinals_CheckedChanged(sender As Object, e As EventArgs) Handles rdoByLevels.CheckedChanged, rdoByOrdinals.CheckedChanged
         If rdoByLevels.Checked = True Then
-            ucrBase.clsRsyntax.AddParameter("factor_numeric", Chr(34) & "by_levels" & Chr(34))
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("factor_numeric", Chr(34) & "by_levels" & Chr(34))
+
+
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("factor_numeric")
+            End If
+
         ElseIf rdoByOrdinals.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("factor_numeric", Chr(34) & "by_ordinals" & Chr(34))
         Else
