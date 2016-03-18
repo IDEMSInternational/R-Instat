@@ -364,6 +364,12 @@
     <Compile Include="dlgRandomSubset.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRandomSubsets.Designer.vb">
+      <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRandomSubsets.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRenameDescriptive.Designer.vb">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
     </Compile>
@@ -1828,6 +1834,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubset.sw-KE.resx">
       <DependentUpon>dlgRandomSubset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubsets.fr-FR.resx">
+      <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubsets.resx">
+      <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubsets.sw-KE.resx">
+      <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDescriptive.fr-FR.resx">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
