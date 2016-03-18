@@ -18,7 +18,7 @@ Public Class dlgStack
     Public bFirstLoad As Boolean = True
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -34,8 +34,8 @@ Public Class dlgStack
         ucrBase.clsRsyntax.SetFunction("melt")
         ucrBase.iHelpTopicID = 57
         ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
-        ucrIDVariablesReceiver.Selector = ucrSelectorStack
-        autoTranslate(Me)
+        ucrColumnsToCarryReceiver.Selector = ucrSelectorStack
+
         ucrNewDataFrameName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
         SetStackIntoText("value")
         SetFactorIntoText("variable")
@@ -61,37 +61,37 @@ Public Class dlgStack
         ucrNewDataFrameName.Reset()
         ucrSelectorStack.Reset()
         ucrSelectorStack.Focus()
-        chkIDVariables.Checked = False
-        ucrIDVariablesReceiver.Visible = False
+        chkColumnsToCarry.Checked = False
+        ucrColumnsToCarryReceiver.Visible = False
         ucrNewDataFrameName.bUserTyped = False
 
     End Sub
 
     Private Sub SetFactorIntoText(strNewVal As String)
-        txtFactorInto.Text = strNewVal
-        If txtFactorInto.Text = "" Or (txtFactorInto.Text = "variable" AndAlso (Not frmMain.clsInstatOptions.bIncludeRDefaultParameters)) Then
+        ucrFactorInto.Name = strNewVal
+        If ucrFactorInto.GetText = "" Or (ucrFactorInto.Text = "variable" AndAlso (Not frmMain.clsInstatOptions.bIncludeRDefaultParameters)) Then
             ucrBase.clsRsyntax.RemoveParameter("variable.name")
         Else
-            ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtFactorInto.Text & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & ucrFactorInto.Text & Chr(34))
         End If
     End Sub
 
     Private Sub SetStackIntoText(strNewVal As String)
-        txtStackDataInto.Text = strNewVal
-        If txtStackDataInto.Text = "" Or (txtStackDataInto.Text = "value" AndAlso (Not frmMain.clsInstatOptions.bIncludeRDefaultParameters)) Then
+        ucrStackDataInto.Name = strNewVal
+        If ucrStackDataInto.GetText = "" Or (ucrStackDataInto.Text = "value" AndAlso (Not frmMain.clsInstatOptions.bIncludeRDefaultParameters)) Then
             ucrBase.clsRsyntax.RemoveParameter("value.name")
         Else
-            ucrBase.clsRsyntax.AddParameter("value.name", Chr(34) & txtStackDataInto.Text & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("value.name", Chr(34) & ucrStackDataInto.Text & Chr(34))
         End If
     End Sub
 
-    Private Sub chkIDVariables_CheckedChanged(sender As Object, e As EventArgs) Handles chkIDVariables.CheckedChanged
-        If chkIDVariables.Checked Then
-            ucrIDVariablesReceiver.Visible = True
+    Private Sub chkIDVariables_CheckedChanged(sender As Object, e As EventArgs) Handles chkColumnsToCarry.CheckedChanged
+        If chkColumnsToCarry.Checked Then
+            ucrColumnsToCarryReceiver.Visible = True
             SetIDVars()
-            ucrIDVariablesReceiver.SetMeAsReceiver()
+            ucrColumnsToCarryReceiver.SetMeAsReceiver()
         Else
-            ucrIDVariablesReceiver.Visible = False
+            ucrColumnsToCarryReceiver.Visible = False
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
             ucrBase.clsRsyntax.AddParameter("id.vars", "NULL")
         End If
@@ -107,27 +107,27 @@ Public Class dlgStack
     End Sub
 
 
-    Private Sub ucrIDVariablesReceiver_SelectionChanged() Handles ucrIDVariablesReceiver.SelectionChanged
+    Private Sub ucrIDVariablesReceiver_SelectionChanged() Handles ucrColumnsToCarryReceiver.SelectionChanged
         SetIDVars()
         TestOKEnabled()
     End Sub
 
     Private Sub SetIDVars()
-        If Not ucrIDVariablesReceiver.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("id.vars", ucrIDVariablesReceiver.GetVariableNames())
+        If Not ucrColumnsToCarryReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("id.vars", ucrColumnsToCarryReceiver.GetVariableNames())
         Else
             ucrBase.clsRsyntax.AddParameter("id.vars", "NULL")
         End If
 
     End Sub
 
-    Private Sub txtFactorInto_Leave(sender As Object, e As EventArgs) Handles txtFactorInto.Leave
-        SetFactorIntoText(txtFactorInto.Text)
+    Private Sub txtFactorInto_Leave(sender As Object, e As EventArgs)
+        SetFactorIntoText(ucrFactorInto.Text)
         TestOKEnabled()
     End Sub
 
-    Private Sub txtStackDataInto_Leave(sender As Object, e As EventArgs) Handles txtStackDataInto.Leave
-        SetStackIntoText(txtStackDataInto.Text)
+    Private Sub txtStackDataInto_Leave(sender As Object, e As EventArgs)
+        SetStackIntoText(ucrStackDataInto.Text)
         TestOKEnabled()
     End Sub
 
@@ -142,12 +142,12 @@ Public Class dlgStack
 
     End Sub
 
-    Private Sub chkIDVariables_KeyPress(sender As Object, e As KeyPressEventArgs) Handles chkIDVariables.KeyPress
+    Private Sub chkIDVariables_KeyPress(sender As Object, e As KeyPressEventArgs) Handles chkColumnsToCarry.KeyPress
         If e.KeyChar = vbCr Then
-            If chkIDVariables.Checked Then
-                chkIDVariables.Checked = False
+            If chkColumnsToCarry.Checked Then
+                chkColumnsToCarry.Checked = False
             Else
-                chkIDVariables.Checked = True
+                chkColumnsToCarry.Checked = True
             End If
         End If
     End Sub

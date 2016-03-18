@@ -574,10 +574,10 @@
     <Compile Include="sdgRestrict.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgConvertColumnsToFactors.Designer.vb">
-      <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
+    <Compile Include="dlgConvertColumns.Designer.vb">
+      <DependentUpon>dlgConvertColumns.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgConvertColumnsToFactors.vb">
+    <Compile Include="dlgConvertColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCorrelation.designer.vb">
@@ -2142,14 +2142,14 @@
     <EmbeddedResource Include="sdgRestrict.sw-KE.resx">
       <DependentUpon>sdgRestrict.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgConvertColumnsToFactors.fr-FR.resx">
-      <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
+    <EmbeddedResource Include="dlgConvertColumns.fr-FR.resx">
+      <DependentUpon>dlgConvertColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgConvertColumnsToFactors.resx">
-      <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
+    <EmbeddedResource Include="dlgConvertColumns.resx">
+      <DependentUpon>dlgConvertColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgConvertColumnsToFactors.sw-KE.resx">
-      <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
+    <EmbeddedResource Include="dlgConvertColumns.sw-KE.resx">
+      <DependentUpon>dlgConvertColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorrelation.fr-FR.resx">
       <DependentUpon>dlgCorrelation.vb</DependentUpon>
