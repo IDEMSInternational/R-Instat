@@ -103,19 +103,12 @@ Public Class dlgPlot
     End Sub
 
     Private Sub chkPoints_CheckedChanged(sender As Object, e As EventArgs) Handles chkPoints.CheckedChanged
-
-        Dim clsTempOp As New ROperator
         Dim clsTempRFunc As New RFunction
-
         If chkPoints.Checked = True Then
-            clsTempOp.SetOperation("+")
-            clsTempOp.SetParameter(True, clsRFunc:=clsRggplotFunction)
-            clsTempOp.SetParameter(False, clsRFunc:=clsRgeom_lineplotFunction)
             clsTempRFunc.SetRCommand("geom_point")
-            ucrBase.clsRsyntax.SetOperatorParameter(True, clsOp:=clsTempOp)
-            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsTempRFunc)
+            ucrBase.clsRsyntax.AddOperatorParameter(True, clsRFunc:=clsTempRFunc)
         Else
-            ucrBase.clsRsyntax.RemoveParameter("geom_point")
+
         End If
     End Sub
 End Class
