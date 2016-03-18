@@ -16,16 +16,26 @@
 
 Imports instat.Translations
 Public Class dlgCumulativeDistribution
+    Private clsRggplotFunction As New RFunction
+    Private clsRgeom_CumDistFunction As New RFunction
+    Private clsRaesFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgCumulativeDistribution_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrVariatesreceiver.Selector = ucrCumDistSelector
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRaesFunction.SetRCommand("aes")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+        clsRgeom_CumDistFunction.SetRCommand("stat_ecdf")
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_CumDistFunction)
+
+        ucrVariateReceiver.Selector = ucrCumDistSelector
         ucrFactorReceiver.Selector = ucrCumDistSelector
         ucrFactorReceiver.SetDataType("factor")
-        ucrVariatesreceiver.SetMeAsReceiver()
-
         ucrBase.clsRsyntax.iCallType = 0
-        autoTranslate(Me)
+        ucrBase.iHelpTopicID = 133
 
+        autoTranslate(Me)
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
@@ -35,14 +45,53 @@ Public Class dlgCumulativeDistribution
 
     Private Sub SetDefaults()
         'set defaults here 
-
+        ucrCumDistSelector.Reset()
+        ucrCumDistSelector.Focus()
+        chkCountsOnYAxis.Checked = False
+        chkExceedancePlots.Checked = False
+        chkIncludePoints.Checked = False
+        ucrVariateReceiver.SetMeAsReceiver()
+        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
         'TODO what enables ok
+        If Not ucrVariateReceiver.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+    Private Sub ucrCumDistSelector_DataFrameChanged() Handles ucrCumDistSelector.DataFrameChanged
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrCumDistSelector.ucrAvailableDataFrames.clsCurrDataFrame)
+    End Sub
+
+    Private Sub ucrVariateReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrVariateReceiver.SelectionChanged
+        If Not ucrVariateReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("x", ucrVariateReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("x")
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
+        If Not ucrFactorReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("colour")
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
+        sdgCumDistLineOptions.ShowDialog()
+    End Sub
+
+    Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
+        sdgCumDistPlotOptions.ShowDialog()
     End Sub
 End Class
