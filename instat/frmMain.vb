@@ -656,10 +656,6 @@ Public Class frmMain
         'For discussion
     End Sub
 
-    Private Sub mnuManageDataConvertTo_Click(sender As Object, e As EventArgs) Handles mnuManageDataConvertTo.Click
-        dlgConvertTo.ShowDialog()
-    End Sub
-
     Private Sub mnuManageDataFileSheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileSheetMetadata.Click
         dlgSheetMetadata.ShowDialog()
     End Sub
