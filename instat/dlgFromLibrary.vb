@@ -26,16 +26,23 @@ Public Class dlgFromLibrary
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            'fills the combo box
-            FillPackagesCombo()
+            InitialiseDialog()
             '
             setDefaults()
             bFirstLoad = False
         End If
+        TestOkEnabled()
     End Sub
 
     Private Sub setDefaults()
         rdoDefaultDatasets.Checked = True
+        cboPackages.SelectedItem = "datasets"
+        loadDatasets(cboPackages.SelectedItem.ToString)
+    End Sub
+
+    Private Sub InitialiseDialog()
+        'fills the combo box
+        FillPackagesCombo()
     End Sub
 
     Private Sub cmdLibraryCollection_Click(sender As Object, e As EventArgs) Handles cmdLibraryCollection.Click
@@ -50,6 +57,7 @@ Public Class dlgFromLibrary
             loadData(dlgOpenDialog.FileName.Replace("\", "/"))
             dlgOpenDialog.RestoreDirectory = True
         End If
+        TestOkEnabled()
     End Sub
 
     Private Sub loadData(strFilePath As String)
@@ -61,14 +69,17 @@ Public Class dlgFromLibrary
 
     Private Sub rdoDefaultDatasets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultDatasets.CheckedChanged, rdoInstatCollection.CheckedChanged
         If rdoDefaultDatasets.Checked Then
-            cboPackages.Enabled = False
-            cboPackages.SelectedItem = "datasets"
+            ucrBase.clsRsyntax.SetFunction("as.data.frame")
             cboPackages.Enabled = True
+            lstCollection.Enabled = True
             grpCollection.Enabled = False
         ElseIf rdoInstatCollection.Checked Then
+            lstCollection.Items.Clear()
+            lstCollection.Enabled = False
             cboPackages.Enabled = False
             grpCollection.Enabled = True
         End If
+        TestOkEnabled()
     End Sub
 
     Private Sub FillPackagesCombo()
@@ -115,19 +126,21 @@ Public Class dlgFromLibrary
 
     Private Sub cboPackages_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPackages.SelectedValueChanged
         loadDatasets(cboPackages.SelectedItem.ToString)
+        TestOkEnabled()
     End Sub
 
     Private Sub lstCollection_Click(sender As Object, e As EventArgs) Handles lstCollection.Click
         ucrBase.clsRsyntax.SetAssignTo(lstCollection.SelectedItems(0).SubItems(0).Text, strTempDataframe:=lstCollection.SelectedItems(0).SubItems(0).Text)
         ucrBase.clsRsyntax.AddParameter("x", lstCollection.SelectedItems(0).SubItems(0).Text)
-    End Sub
-
-    Private Sub initialiseFunction()
-        ucrBase.clsRsyntax.SetFunction("as.data.frame")
+        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
-        'ToDO
+        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 OrElse rdoInstatCollection.Checked AndAlso txtFilePath.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
 End Class
