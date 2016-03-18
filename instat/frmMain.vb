@@ -657,7 +657,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataConvertTo_Click(sender As Object, e As EventArgs) Handles mnuManageDataConvertTo.Click
-        dlgConvertTo.ShowDialog()
+        dlgConvertToColumnFactors.ShowDialog()
     End Sub
 
     Private Sub mnuManageDataFileSheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileSheetMetadata.Click
@@ -843,7 +843,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageFactorconvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuManageFactorconvertToFactor.Click
-        dlgConvertColumnsToFactors.ShowDialog()
+        dlgConvertToColumnFactors.ShowDialog()
     End Sub
 
     Private Sub mnuManageFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorReorderLevels.Click
