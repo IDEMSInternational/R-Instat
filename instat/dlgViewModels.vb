@@ -20,9 +20,13 @@ Public Class dlgViewModels
     Private Sub dlgViewModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
+
+    End Sub
+    Private Sub InitialiseDialog()
 
     End Sub
     Private Sub SetDefaults()

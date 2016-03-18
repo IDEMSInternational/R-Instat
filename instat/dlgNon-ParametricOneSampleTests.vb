@@ -16,13 +16,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgIndicatorVariable
-    Private Sub dlgIndicatorVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("")
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrReceiverFactor.Selector = ucrAddRemove
-        ucrReceiverFactor.SetMeAsReceiver()
-        ucrReceiverFactor.SetDataType("factor")
-        autoTranslate(Me)
-    End Sub
+Public Class dlgNon_ParametricOneSampleTests
+
+
 End Class

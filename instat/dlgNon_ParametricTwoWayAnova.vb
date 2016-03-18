@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgTwoWayAnova
+Public Class dlgNon_ParametricTwoWayAnova
     Public bFirstLoad As Boolean = True
     Dim clsModel, clsModel1 As New ROperator
 

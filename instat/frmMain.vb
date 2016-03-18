@@ -322,7 +322,7 @@ Public Class frmMain
     End Sub
 
     Private Sub InteractionsToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgIndicatorVariable.ShowDialog()
+        dlgDummyVariables.ShowDialog()
     End Sub
 
     Private Sub mnuManageAddColumnPolynomials_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnPolynomials.Click
@@ -392,10 +392,6 @@ Public Class frmMain
         dlgOrthogonal.ShowDialog()
     End Sub
 
-    Private Sub GeneralToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceGeneral.Click
-        dlgGeneral.ShowDialog()
-    End Sub
-
     Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOneWay.Click
         dlgOneWayANOVA.ShowDialog()
     End Sub
@@ -413,11 +409,11 @@ Public Class frmMain
     End Sub
 
     Private Sub OneAndTwoSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricOneSample.Click
-        dlgNon_ParemetricOneandTwoSampleTests.ShowDialog()
+        dlgNon_ParametricOneSampleTests.ShowDialog()
     End Sub
 
     Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoWayAnova.Click
-        dlgTwoWayAnova.ShowDialog()
+        dlgNon_ParametricTwoWayAnova.ShowDialog()
     End Sub
 
     Private Sub NewWorksheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticManageNewWorksheet.Click
@@ -680,8 +676,8 @@ Public Class frmMain
         dlgBarAndPieChart.ShowDialog()
     End Sub
 
-    Private Sub mnuManageAddColumnPermuteRows_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnPermuteRows.Click
-        dlgPermuteRows.ShowDialog()
+    Private Sub mnuManageAddColumnPermuteRows_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnPermuteColumn.Click
+        dlgPermuteColumn.ShowDialog()
     End Sub
 
     Private Sub mnuGraphicsBarPieChartSummaryData_Click(sender As Object, e As EventArgs)
@@ -831,11 +827,11 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageFactorIndicatorVariables_Click(sender As Object, e As EventArgs) Handles mnuManageFactorIndicatorVariables.Click
-        dlgIndicatorVariable.ShowDialog()
+        dlgDummyVariables.ShowDialog()
     End Sub
 
     Private Sub mnuManageFactorInteraction_Click(sender As Object, e As EventArgs) Handles mnuManageFactorInteraction.Click
-        dlgInteractions.ShowDialog()
+        dlgCombine.ShowDialog()
     End Sub
 
     Private Sub mnuManageFactorReferenceLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorReferenceLevels.Click
@@ -878,7 +874,7 @@ Public Class frmMain
         dlgSort.ShowDialog()
     End Sub
 
-    Private Sub mnuManageAddColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnFilter.Click
+    Private Sub mnuManageAddColumnFilter_Click(sender As Object, e As EventArgs)
         dlgRestrict.ShowDialog()
     End Sub
 
@@ -945,4 +941,9 @@ Public Class frmMain
     Private Sub mnuManageTextDistance_Click(sender As Object, e As EventArgs) Handles mnuManageTextDistance.Click
         dlgDistanceText.ShowDialog()
     End Sub
+
+    Private Sub mnuManageDataFilter_Click(sender As Object, e As EventArgs) Handles mnuManageDataFilter.Click
+        dlgRestrict.ShowDialog()
+    End Sub
 End Class
+
