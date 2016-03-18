@@ -28,11 +28,11 @@ Partial Class dlgFromLibrary
         Me.clmDesc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cboPackages = New System.Windows.Forms.ComboBox()
         Me.rdoDefaultDatasets = New System.Windows.Forms.RadioButton()
-        Me.ucrBase = New instat.ucrButtons()
         Me.rdoInstatCollection = New System.Windows.Forms.RadioButton()
         Me.txtFilePath = New System.Windows.Forms.TextBox()
         Me.lblFromPackage = New System.Windows.Forms.Label()
         Me.grpCollection = New System.Windows.Forms.GroupBox()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpCollection.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -48,7 +48,6 @@ Partial Class dlgFromLibrary
         'lstCollection
         '
         Me.lstCollection.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmDatasets, Me.clmDesc})
-        Me.lstCollection.Enabled = False
         Me.lstCollection.Location = New System.Drawing.Point(15, 56)
         Me.lstCollection.MultiSelect = False
         Me.lstCollection.Name = "lstCollection"
@@ -90,15 +89,6 @@ Partial Class dlgFromLibrary
         Me.rdoDefaultDatasets.Text = "Load from R"
         Me.rdoDefaultDatasets.UseVisualStyleBackColor = True
         '
-        'ucrBase
-        '
-        Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucrBase.Location = New System.Drawing.Point(24, 329)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(406, 53)
-        Me.ucrBase.TabIndex = 0
-        '
         'rdoInstatCollection
         '
         Me.rdoInstatCollection.AutoSize = True
@@ -138,6 +128,15 @@ Partial Class dlgFromLibrary
         Me.grpCollection.Size = New System.Drawing.Size(427, 61)
         Me.grpCollection.TabIndex = 16
         Me.grpCollection.TabStop = False
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ucrBase.Location = New System.Drawing.Point(24, 329)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(406, 53)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgFromLibrary
         '
