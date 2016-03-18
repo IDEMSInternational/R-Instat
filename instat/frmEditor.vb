@@ -220,13 +220,13 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
+        dlgName.SetCurrentColumn(grdCurrSheet.ColumnHeaders(grdData.CurrentWorksheet.SelectionRange.Col).Text, grdCurrSheet.Name)
         dlgName.ShowDialog()
     End Sub
 
     Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged, Me.Load, grdData.WorksheetInserted
         grdCurrSheet = grdData.CurrentWorksheet
         frmMain.strCurrentDataFrame = grdCurrSheet.Name
-
         frmMain.tstatus.Text = grdCurrSheet.Name
     End Sub
 

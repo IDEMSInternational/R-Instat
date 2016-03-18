@@ -19,6 +19,7 @@ Public Class dlgReoderDescriptives
     Private Sub dlgReoderDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -26,6 +27,10 @@ Public Class dlgReoderDescriptives
         End If
         'Checks if Ok can be enabled.
         TestOKEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
+
     End Sub
     Private Sub ReopenDialog()
 

@@ -23,28 +23,77 @@ Partial Class dlgLabels
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorForLabels = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrFactorLabels = New instat.ucrFactor()
+        Me.lblFactor = New System.Windows.Forms.Label()
+        Me.ucrReceiverLabels = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(1, 205)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 275)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrSelectorForLabels
+        '
+        Me.ucrSelectorForLabels.Location = New System.Drawing.Point(12, 12)
+        Me.ucrSelectorForLabels.Name = "ucrSelectorForLabels"
+        Me.ucrSelectorForLabels.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorForLabels.TabIndex = 1
+        '
+        'ucrFactorLabels
+        '
+        Me.ucrFactorLabels.AutoSize = True
+        Me.ucrFactorLabels.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrFactorLabels.clsReceiver = Nothing
+        Me.ucrFactorLabels.Location = New System.Drawing.Point(260, 88)
+        Me.ucrFactorLabels.Name = "ucrFactorLabels"
+        Me.ucrFactorLabels.shtCurrSheet = Nothing
+        Me.ucrFactorLabels.Size = New System.Drawing.Size(267, 181)
+        Me.ucrFactorLabels.TabIndex = 2
+        '
+        'lblFactor
+        '
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.Location = New System.Drawing.Point(271, 40)
+        Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
+        Me.lblFactor.TabIndex = 3
+        Me.lblFactor.Tag = "Factor"
+        Me.lblFactor.Text = "Factor"
+        '
+        'ucrReceiverLabels
+        '
+        Me.ucrReceiverLabels.Location = New System.Drawing.Point(274, 56)
+        Me.ucrReceiverLabels.Name = "ucrReceiverLabels"
+        Me.ucrReceiverLabels.Selector = Nothing
+        Me.ucrReceiverLabels.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverLabels.TabIndex = 4
         '
         'dlgLabels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(410, 261)
+        Me.ClientSize = New System.Drawing.Size(570, 340)
+        Me.Controls.Add(Me.ucrReceiverLabels)
+        Me.Controls.Add(Me.lblFactor)
+        Me.Controls.Add(Me.ucrFactorLabels)
+        Me.Controls.Add(Me.ucrSelectorForLabels)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgLabels"
         Me.Tag = "Labels"
         Me.Text = "Labels"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSelectorForLabels As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrFactorLabels As ucrFactor
+    Friend WithEvents lblFactor As Label
+    Friend WithEvents ucrReceiverLabels As ucrReceiverSingle
 End Class

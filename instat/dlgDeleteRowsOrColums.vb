@@ -3,10 +3,10 @@ Public Class dlgDeleteRowsOrColums
     Public bFirstLoad As Boolean = True
     Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.iHelpTopicID = 53
-        ucrDataFrameLengthForDeleteRows.SetDataFrameSelector(ucrSelectorForDeleteRows)
+
 
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -14,6 +14,11 @@ Public Class dlgDeleteRowsOrColums
         End If
         TestOKEnabled()
 
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 53
+        ucrDataFrameLengthForDeleteRows.SetDataFrameSelector(ucrSelectorForDeleteRows)
     End Sub
 
     Private Sub ReopenDialog()
