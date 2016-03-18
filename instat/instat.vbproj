@@ -1434,6 +1434,12 @@
     <Compile Include="ucrReceiverSingle.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrReorder.Designer.vb">
+      <DependentUpon>ucrReorder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReorder.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrSaveGraph.Designer.vb">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>
     </Compile>
@@ -3360,6 +3366,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverSingle.sw-KE.resx">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReorder.fr-FR.resx">
+      <DependentUpon>ucrReorder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReorder.resx">
+      <DependentUpon>ucrReorder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReorder.sw-KE.resx">
+      <DependentUpon>ucrReorder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSaveGraph.fr-FR.resx">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>
