@@ -17,7 +17,7 @@ Imports instat.Translations
 
 Public Class dlgUnstack
     Public bFirstLoad As Boolean = True
-    Private Sub dlgUnstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgunstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
         If bFirstLoad Then
@@ -38,14 +38,15 @@ Public Class dlgUnstack
         ucrSelectorForunstack.Reset()
         SetNewDataFrameName(ucrSelectorForunstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
         ucrBase.iHelpTopicID = 58
+        ucrFactorTounstackReceiver.SetDataType("factor")
     End Sub
 
     Private Sub SetDefaults()
-
+        chkCarryAllColumns.Checked = True
         chkKeepUnusedFactorLevels.Checked = False
         ucrDataFrameForunstack.Reset()
         ucrDataFrameForunstack.Focus()
-
+        ucrCarryAllColumns.Visible = False
     End Sub
 
     Private Sub ReopenDialog()
@@ -120,5 +121,12 @@ Public Class dlgUnstack
         TestOKEnabled()
     End Sub
 
+    Private Sub chkCarryAllColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkCarryAllColumns.CheckedChanged
+        If chkCarryAllColumns.Checked = False Then
+            ucrCarryAllColumns.Visible = True
+        Else
+            ucrCarryAllColumns.Visible = False
+        End If
+    End Sub
 End Class
 
