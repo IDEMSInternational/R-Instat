@@ -85,8 +85,8 @@ Partial Class dlgUnusedLevels
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgUnusedLevels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Remove_unused_Factor_Levels"
-        Me.Text = "Remove unused Factor Levels"
+        Me.Tag = "Remove_Unused_Factor_Levels"
+        Me.Text = "Remove Unused Factor Levels"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
