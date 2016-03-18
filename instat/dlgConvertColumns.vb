@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 
-Public Class dlgConvertColumnsToFactors
+Public Class dlgConvertColumns
     Public bFirstLoad As Boolean = True
 
     Private Sub ucrSelectorDataFrameColumns_Load(sender As Object, e As EventArgs) Handles ucrSelectorDataFrameColumns.Load
@@ -31,6 +31,9 @@ Public Class dlgConvertColumnsToFactors
 
         End If
 
+        rdoCharacter.Enabled = False
+        rdoInteger.Enabled = False
+        rdoNumeric.Enabled = False
         TestOKEnabled()
 
     End Sub
@@ -39,8 +42,8 @@ Public Class dlgConvertColumnsToFactors
         ucrSelectorDataFrameColumns.Reset()
         ucrSelectorDataFrameColumns.Focus()
         ucrReceiverColumnsToConvert.SetMeAsReceiver()
-        rdoFactor.Checked = True
-
+        rdoByLevels.Checked = True
+        grpFactorNumeric.Visible = False
 
         TestOKEnabled()
     End Sub
@@ -57,12 +60,12 @@ Public Class dlgConvertColumnsToFactors
 
     Private Sub grpForConvertToType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFactor.CheckedChanged, rdoNumeric.CheckedChanged, rdoCharacter.CheckedChanged, rdoInteger.CheckedChanged
         If rdoFactor.Checked Then
-            grpFactorNumeric.Visible = True
+            grpFactorNumeric.Visible = False
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
             TestOKEnabled()
 
         ElseIf rdoNumeric.Checked Then
-            grpFactorNumeric.Visible = False
+            grpFactorNumeric.Visible = True
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
             TestOKEnabled()
         ElseIf rdoCharacter.Checked Then
@@ -95,10 +98,21 @@ Public Class dlgConvertColumnsToFactors
             ucrBase.OKEnabled(False)
         End If
     End Sub
+    Private Sub rdoByLevelsAndrdoByOrdinals_CheckedChanged(sender As Object, e As EventArgs) Handles rdoByLevels.CheckedChanged, rdoByOrdinals.CheckedChanged
+        If rdoByLevels.Checked = True Then
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("factor_numeric", Chr(34) & "by_levels" & Chr(34))
 
-    Private Sub cboFactorNumeric_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFactorNumeric.SelectedValueChanged
 
-        ucrBase.clsRsyntax.AddParameter("factor_numeric", cboFactorNumeric.SelectedItem.ToString)
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("factor_numeric")
+            End If
 
+        ElseIf rdoByOrdinals.Checked = True Then
+            ucrBase.clsRsyntax.AddParameter("factor_numeric", Chr(34) & "by_ordinals" & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("factor_numeric")
+        End If
     End Sub
+
 End Class
