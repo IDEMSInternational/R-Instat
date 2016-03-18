@@ -25,11 +25,11 @@ Partial Class dlgUnstack
         Me.lblFactorToUnstackBy = New System.Windows.Forms.Label()
         Me.lblColumnToUnstack = New System.Windows.Forms.Label()
         Me.chkKeepUnusedFactorLevels = New System.Windows.Forms.CheckBox()
-        Me.ucrColumnToUnstackReceiver = New instat.ucrReceiverSingle()
-        Me.ucrFactorToUnstackReceiver = New instat.ucrReceiverSingle()
-        Me.ucrSelectorForUnstack = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrColumnTounstackReceiver = New instat.ucrReceiverSingle()
+        Me.ucrFactorTounstackReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSelectorForunstack = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDataFrameForUnstack = New instat.ucrVariableName()
+        Me.ucrDataFrameForunstack = New instat.ucrVariableName()
         Me.lblDataFrameForUnstack = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -64,28 +64,28 @@ Partial Class dlgUnstack
         Me.chkKeepUnusedFactorLevels.Text = "Keep Unused Factor Levels"
         Me.chkKeepUnusedFactorLevels.UseVisualStyleBackColor = True
         '
-        'ucrColumnToUnstackReceiver
+        'ucrColumnTounstackReceiver
         '
-        Me.ucrColumnToUnstackReceiver.Location = New System.Drawing.Point(256, 87)
-        Me.ucrColumnToUnstackReceiver.Name = "ucrColumnToUnstackReceiver"
-        Me.ucrColumnToUnstackReceiver.Selector = Nothing
-        Me.ucrColumnToUnstackReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrColumnToUnstackReceiver.TabIndex = 4
+        Me.ucrColumnTounstackReceiver.Location = New System.Drawing.Point(256, 87)
+        Me.ucrColumnTounstackReceiver.Name = "ucrColumnTounstackReceiver"
+        Me.ucrColumnTounstackReceiver.Selector = Nothing
+        Me.ucrColumnTounstackReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrColumnTounstackReceiver.TabIndex = 4
         '
-        'ucrFactorToUnstackReceiver
+        'ucrFactorTounstackReceiver
         '
-        Me.ucrFactorToUnstackReceiver.Location = New System.Drawing.Point(256, 40)
-        Me.ucrFactorToUnstackReceiver.Name = "ucrFactorToUnstackReceiver"
-        Me.ucrFactorToUnstackReceiver.Selector = Nothing
-        Me.ucrFactorToUnstackReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrFactorToUnstackReceiver.TabIndex = 2
+        Me.ucrFactorTounstackReceiver.Location = New System.Drawing.Point(256, 40)
+        Me.ucrFactorTounstackReceiver.Name = "ucrFactorTounstackReceiver"
+        Me.ucrFactorTounstackReceiver.Selector = Nothing
+        Me.ucrFactorTounstackReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrFactorTounstackReceiver.TabIndex = 2
         '
-        'ucrSelectorForUnstack
+        'ucrSelectorForunstack
         '
-        Me.ucrSelectorForUnstack.Location = New System.Drawing.Point(1, 12)
-        Me.ucrSelectorForUnstack.Name = "ucrSelectorForUnstack"
-        Me.ucrSelectorForUnstack.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorForUnstack.TabIndex = 0
+        Me.ucrSelectorForunstack.Location = New System.Drawing.Point(1, 12)
+        Me.ucrSelectorForunstack.Name = "ucrSelectorForunstack"
+        Me.ucrSelectorForunstack.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorForunstack.TabIndex = 0
         '
         'ucrBase
         '
@@ -94,12 +94,12 @@ Partial Class dlgUnstack
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 8
         '
-        'ucrDataFrameForUnstack
+        'ucrDataFrameForunstack
         '
-        Me.ucrDataFrameForUnstack.Location = New System.Drawing.Point(137, 196)
-        Me.ucrDataFrameForUnstack.Name = "ucrDataFrameForUnstack"
-        Me.ucrDataFrameForUnstack.Size = New System.Drawing.Size(149, 23)
-        Me.ucrDataFrameForUnstack.TabIndex = 9
+        Me.ucrDataFrameForunstack.Location = New System.Drawing.Point(137, 196)
+        Me.ucrDataFrameForunstack.Name = "ucrDataFrameForunstack"
+        Me.ucrDataFrameForunstack.Size = New System.Drawing.Size(149, 23)
+        Me.ucrDataFrameForunstack.TabIndex = 9
         '
         'lblDataFrameForUnstack
         '
@@ -117,13 +117,13 @@ Partial Class dlgUnstack
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 283)
         Me.Controls.Add(Me.lblDataFrameForUnstack)
-        Me.Controls.Add(Me.ucrDataFrameForUnstack)
-        Me.Controls.Add(Me.ucrColumnToUnstackReceiver)
-        Me.Controls.Add(Me.ucrFactorToUnstackReceiver)
+        Me.Controls.Add(Me.ucrDataFrameForunstack)
+        Me.Controls.Add(Me.ucrColumnTounstackReceiver)
+        Me.Controls.Add(Me.ucrFactorTounstackReceiver)
         Me.Controls.Add(Me.chkKeepUnusedFactorLevels)
         Me.Controls.Add(Me.lblColumnToUnstack)
         Me.Controls.Add(Me.lblFactorToUnstackBy)
-        Me.Controls.Add(Me.ucrSelectorForUnstack)
+        Me.Controls.Add(Me.ucrSelectorForunstack)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgUnstack"
@@ -135,12 +135,12 @@ Partial Class dlgUnstack
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSelectorForUnstack As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorForunstack As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblFactorToUnstackBy As Label
     Friend WithEvents lblColumnToUnstack As Label
     Friend WithEvents chkKeepUnusedFactorLevels As CheckBox
-    Friend WithEvents ucrFactorToUnstackReceiver As ucrReceiverSingle
-    Friend WithEvents ucrColumnToUnstackReceiver As ucrReceiverSingle
-    Friend WithEvents ucrDataFrameForUnstack As ucrVariableName
+    Friend WithEvents ucrFactorTounstackReceiver As ucrReceiverSingle
+    Friend WithEvents ucrColumnTounstackReceiver As ucrReceiverSingle
+    Friend WithEvents ucrDataFrameForunstack As ucrVariableName
     Friend WithEvents lblDataFrameForUnstack As Label
 End Class
