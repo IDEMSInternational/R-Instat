@@ -2391,39 +2391,39 @@
         </trans-unit>
         <trans-unit id="BarCharts" translate="yes" xml:space="preserve">
           <source>Bar Charts...</source>
-          <target state="new">Bar Charts...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Graphiques à barres...</target>
         </trans-unit>
         <trans-unit id="BarChartSummary" translate="yes" xml:space="preserve">
           <source>Bar Charts From Summary...</source>
-          <target state="new">Bar Charts From Summary...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Graphiques à barres de résumé...</target>
         </trans-unit>
         <trans-unit id="BoxPlot" translate="yes" xml:space="preserve">
           <source>Boxplot...</source>
-          <target state="new">Boxplot...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">BoxPlot...</target>
         </trans-unit>
         <trans-unit id="CummDist" translate="yes" xml:space="preserve">
           <source>Cummulative Distribution...</source>
-          <target state="new">Cummulative Distribution...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Distribution cumulative...</target>
         </trans-unit>
         <trans-unit id="DotPlot" translate="yes" xml:space="preserve">
           <source>Dotplot...</source>
-          <target state="new">Dotplot...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Dotplot...</target>
         </trans-unit>
         <trans-unit id="InventoryPlot" translate="yes" xml:space="preserve">
           <source>Inventory Plot...</source>
-          <target state="new">Inventory Plot...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">L'inventaire terrain...</target>
         </trans-unit>
         <trans-unit id="LinePlot" translate="yes" xml:space="preserve">
           <source>Line Plot...</source>
-          <target state="new">Line Plot...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Terrain en ligne...</target>
         </trans-unit>
         <trans-unit id="StemLeaf" translate="yes" xml:space="preserve">
           <source>Stem and Leaf...</source>
-          <target state="new">Stem and Leaf...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Tige et feuille...</target>
         </trans-unit>
         <trans-unit id="UseGraph" translate="yes" xml:space="preserve">
           <source>Use Graph...</source>
-          <target state="new">Use Graph...</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Utiliser le graphique...</target>
         </trans-unit>
       </group>
     </body>

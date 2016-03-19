@@ -1893,7 +1893,7 @@
         </trans-unit>
         <trans-unit id="BarCharts" translate="yes" xml:space="preserve">
           <source>Bar Charts...</source>
-          <target state="new">Bar Charts...</target>
+          <target state="needs-review-translation" state-qualifier="tm-suggestion">Chati Mwambaa</target>
         </trans-unit>
         <trans-unit id="BarChartSummary" translate="yes" xml:space="preserve">
           <source>Bar Charts From Summary...</source>

@@ -1362,4 +1362,31 @@
   <data name="With_Replacement" xml:space="preserve">
     <value>Avec remplacement</value>
   </data>
+  <data name="BarCharts" xml:space="preserve">
+    <value>Graphiques à barres...</value>
+  </data>
+  <data name="BarChartSummary" xml:space="preserve">
+    <value>Graphiques à barres de résumé...</value>
+  </data>
+  <data name="BoxPlot" xml:space="preserve">
+    <value>BoxPlot...</value>
+  </data>
+  <data name="CummDist" xml:space="preserve">
+    <value>Distribution cumulative...</value>
+  </data>
+  <data name="DotPlot" xml:space="preserve">
+    <value>Dotplot...</value>
+  </data>
+  <data name="InventoryPlot" xml:space="preserve">
+    <value>L'inventaire terrain...</value>
+  </data>
+  <data name="LinePlot" xml:space="preserve">
+    <value>Terrain en ligne...</value>
+  </data>
+  <data name="StemLeaf" xml:space="preserve">
+    <value>Tige et feuille...</value>
+  </data>
+  <data name="UseGraph" xml:space="preserve">
+    <value>Utiliser le graphique...</value>
+  </data>
 </root>
