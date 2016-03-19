@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmEditor
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmEditor
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.grdData = New unvell.ReoGrid.ReoGridControl()
@@ -71,11 +71,9 @@ Partial Class frmEditor
         Me.insertSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.deleteSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblNoData = New System.Windows.Forms.Label()
         Me.MoveOrCopySheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.HideSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UnhideSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SelctAllSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblNoData = New System.Windows.Forms.Label()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.leadHeaderContextMenuStrip.SuspendLayout()
@@ -356,9 +354,9 @@ Partial Class frmEditor
         '
         'statusColumnMenu
         '
-        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteSheet, Me.renameSheet, Me.MoveOrCopySheet, Me.HideSheet, Me.UnhideSheet, Me.SelctAllSheet})
+        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteSheet, Me.renameSheet, Me.MoveOrCopySheet, Me.HideSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(160, 180)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(153, 136)
         '
         'insertSheet
         '
@@ -378,17 +376,6 @@ Partial Class frmEditor
         Me.renameSheet.Size = New System.Drawing.Size(159, 22)
         Me.renameSheet.Text = "Rename"
         '
-        'lblNoData
-        '
-        Me.lblNoData.AutoSize = True
-        Me.lblNoData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNoData.Location = New System.Drawing.Point(122, 105)
-        Me.lblNoData.Name = "lblNoData"
-        Me.lblNoData.Size = New System.Drawing.Size(211, 31)
-        Me.lblNoData.TabIndex = 1
-        Me.lblNoData.Tag = "no_data_loaded"
-        Me.lblNoData.Text = "No Data Loaded"
-        '
         'MoveOrCopySheet
         '
         Me.MoveOrCopySheet.Name = "MoveOrCopySheet"
@@ -401,17 +388,16 @@ Partial Class frmEditor
         Me.HideSheet.Size = New System.Drawing.Size(159, 22)
         Me.HideSheet.Text = "Hide"
         '
-        'UnhideSheet
+        'lblNoData
         '
-        Me.UnhideSheet.Name = "UnhideSheet"
-        Me.UnhideSheet.Size = New System.Drawing.Size(159, 22)
-        Me.UnhideSheet.Text = "Unhide.."
-        '
-        'SelctAllSheet
-        '
-        Me.SelctAllSheet.Name = "SelctAllSheet"
-        Me.SelctAllSheet.Size = New System.Drawing.Size(159, 22)
-        Me.SelctAllSheet.Text = "Select All Sheets"
+        Me.lblNoData.AutoSize = True
+        Me.lblNoData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNoData.Location = New System.Drawing.Point(122, 105)
+        Me.lblNoData.Name = "lblNoData"
+        Me.lblNoData.Size = New System.Drawing.Size(211, 31)
+        Me.lblNoData.TabIndex = 1
+        Me.lblNoData.Tag = "no_data_loaded"
+        Me.lblNoData.Text = "No Data Loaded"
         '
         'frmEditor
         '
@@ -485,6 +471,4 @@ Partial Class frmEditor
     Friend WithEvents mnuConvertToFactor As ToolStripMenuItem
     Friend WithEvents MoveOrCopySheet As ToolStripMenuItem
     Friend WithEvents HideSheet As ToolStripMenuItem
-    Friend WithEvents UnhideSheet As ToolStripMenuItem
-    Friend WithEvents SelctAllSheet As ToolStripMenuItem
 End Class
