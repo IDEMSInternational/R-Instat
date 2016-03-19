@@ -85,4 +85,8 @@ Public Class ucrInputComboBox
             Return False
         End If
     End Function
+
+    Private Sub ucrInputComboBox_Load(sender As Object, e As EventArgs) Handles Me.Load
+        FillItemTypes()
+    End Sub
 End Class
