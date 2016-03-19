@@ -251,11 +251,11 @@ instat_obj$methods(add_column_to_data = function(data_name, col_name, col_data) 
 }
 )
 
-instat_obj$methods(get_columns_from_data = function(data_name, col_names) {
+instat_obj$methods(get_columns_from_data = function(data_name, col_names, force_as_data_frame=FALSE) {
   if(missing(data_name)) stop("data_name is required")
   if(!data_name %in% names(data_objects)) stop(paste(data_name, "not found"))
   
-  data_objects[[data_name]]$get_columns_from_data(col_names)
+  data_objects[[data_name]]$get_columns_from_data(col_names, force_as_data_frame=force_as_data_frame)
 }
 )
 
