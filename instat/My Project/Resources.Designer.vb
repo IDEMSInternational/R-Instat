@@ -264,6 +264,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Bar Charts....
+        '''</summary>
+        Friend ReadOnly Property BarCharts() As String
+            Get
+                Return ResourceManager.GetString("BarCharts", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Bar Charts From Summary....
+        '''</summary>
+        Friend ReadOnly Property BarChartSummary() As String
+            Get
+                Return ResourceManager.GetString("BarChartSummary", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Bernouli.
         '''</summary>
         Friend ReadOnly Property Bernouli() As String
@@ -300,11 +318,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Boxplot.
+        '''  Looks up a localized string similar to Boxplot....
         '''</summary>
-        Friend ReadOnly Property Boxplot() As String
+        Friend ReadOnly Property BoxPlot() As String
             Get
-                Return ResourceManager.GetString("Boxplot", resourceCulture)
+                Return ResourceManager.GetString("BoxPlot", resourceCulture)
             End Get
         End Property
         
@@ -742,6 +760,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Cummulative Distribution....
+        '''</summary>
+        Friend ReadOnly Property CummDist() As String
+            Get
+                Return ResourceManager.GetString("CummDist", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Cumulative exceedance.
         '''</summary>
         Friend ReadOnly Property Cumulative_exceedance() As String
@@ -1003,11 +1030,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Dotplot.
+        '''  Looks up a localized string similar to Dotplot....
         '''</summary>
-        Friend ReadOnly Property Dotplot() As String
+        Friend ReadOnly Property DotPlot() As String
             Get
-                Return ResourceManager.GetString("Dotplot", resourceCulture)
+                Return ResourceManager.GetString("DotPlot", resourceCulture)
             End Get
         End Property
         
@@ -1777,6 +1804,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Inventory Plot....
+        '''</summary>
+        Friend ReadOnly Property InventoryPlot() As String
+            Get
+                Return ResourceManager.GetString("InventoryPlot", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Kappa.
         '''</summary>
         Friend ReadOnly Property Kappa() As String
@@ -1926,6 +1962,15 @@ Namespace My.Resources
         Friend ReadOnly Property Line_width() As String
             Get
                 Return ResourceManager.GetString("Line_width", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Line Plot....
+        '''</summary>
+        Friend ReadOnly Property LinePlot() As String
+            Get
+                Return ResourceManager.GetString("LinePlot", resourceCulture)
             End Get
         End Property
         
@@ -3193,7 +3238,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to ScatterPlot....
+        '''  Looks up a localized string similar to Scatter Plot....
         '''</summary>
         Friend ReadOnly Property ScatterPlot() As String
             Get
@@ -3562,6 +3607,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Stem and Leaf....
+        '''</summary>
+        Friend ReadOnly Property StemLeaf() As String
+            Get
+                Return ResourceManager.GetString("StemLeaf", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to New.
         '''</summary>
         Friend ReadOnly Property String1() As String
@@ -3882,6 +3936,15 @@ Namespace My.Resources
         Friend ReadOnly Property Unused_levels() As String
             Get
                 Return ResourceManager.GetString("Unused_levels", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Use Graph....
+        '''</summary>
+        Friend ReadOnly Property UseGraph() As String
+            Get
+                Return ResourceManager.GetString("UseGraph", resourceCulture)
             End Get
         End Property
         
