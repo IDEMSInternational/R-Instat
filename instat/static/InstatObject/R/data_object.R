@@ -230,11 +230,14 @@ data_obj$methods(add_column_to_data = function(col_name = "", col_data) {
 }
 )
 
-data_obj$methods(get_columns_from_data = function(col_names) {
+data_obj$methods(get_columns_from_data = function(col_names, force_as_data_frame = FALSE) {
   if(missing(col_names)) stop("no col_names to return")
   if(!all(sapply(col_names, function(x) x %in% names(data)))) stop("Not all column names were found in data")
   
-  if(length(col_names)==1) return (data[[col_names]])
+  if(length(col_names)==1) {
+    if(force_as_data_frame) return(data[col_names])
+    else (data[[col_names]])
+  }
   else return(data[col_names])
 }
 )
