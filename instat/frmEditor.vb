@@ -220,13 +220,13 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
+        dlgName.SetCurrentColumn(grdCurrSheet.ColumnHeaders(grdData.CurrentWorksheet.SelectionRange.Col).Text, grdCurrSheet.Name)
         dlgName.ShowDialog()
     End Sub
 
     Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged, Me.Load, grdData.WorksheetInserted
         grdCurrSheet = grdData.CurrentWorksheet
         frmMain.strCurrentDataFrame = grdCurrSheet.Name
-
         frmMain.tstatus.Text = grdCurrSheet.Name
     End Sub
 
@@ -234,5 +234,13 @@ Public Class frmEditor
         Dim strSctipt As String
         strSctipt = frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_name = " & Chr(34) & grdData.CurrentWorksheet.GetColumnHeader(grdData.CurrentWorksheet.SelectionRange.Col).Text & Chr(34) & ",index=" & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",new_value=" & Chr(34) & e.NewData & Chr(34) & ")"
         frmMain.clsRLink.clsEngine.Evaluate(strSctipt)
+    End Sub
+
+    Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
+        dlgRenameSheet.ShowDialog()
+    End Sub
+
+    Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles MoveOrCopySheet.Click
+        dlgCopySheet.ShowDialog()
     End Sub
 End Class
