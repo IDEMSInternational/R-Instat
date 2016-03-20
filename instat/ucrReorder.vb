@@ -22,11 +22,9 @@ Public Class ucrReorder
     Dim selectedListViewItem As New ListViewItem
     Dim selectedIndex As Integer
     Dim itemsCount As Integer
-    Dim i As Integer
 
     Public Sub setDataType(strType As String)
         strDataType = strType
-        loadList()
     End Sub
 
     Private Sub cmdUp_Click(sender As Object, e As EventArgs) Handles cmdUp.Click
@@ -129,20 +127,23 @@ Public Class ucrReorder
 
     Public Sub setDataframes(dfDataframes As ucrDataFrame)
         ucrDataFrameList = dfDataframes
+        lstAvailableData.Clear()
         lstAvailableData.Columns.Add("Available Variables")
         lstAvailableData.Columns(0).Width = -2
+        loadList()
     End Sub
 
     Public Sub setReceiver(dfSingle As ucrReceiverSingle)
         ucrReceiver = dfSingle
         lstAvailableData.Columns.Add("Available Levels")
         lstAvailableData.Columns(0).Width = -2
+        loadList()
     End Sub
 
     Public Sub loadList()
         Dim dfTemp As CharacterMatrix
         Select Case strDataType
-            Case "all"
+            Case "column"
                 If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
                     frmMain.clsRLink.clsEngine.Evaluate(ucrDataFrameList.cboAvailableDataFrames.SelectedItem & "=" & frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.SelectedItem & Chr(34) & ", data_type = " & Chr(34) & strDataType & Chr(34) & ")[,1]")
                     dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(ucrDataFrameList.cboAvailableDataFrames.SelectedItem).AsCharacterMatrix
