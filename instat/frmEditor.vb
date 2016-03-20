@@ -235,4 +235,12 @@ Public Class frmEditor
         strSctipt = frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_name = " & Chr(34) & grdData.CurrentWorksheet.GetColumnHeader(grdData.CurrentWorksheet.SelectionRange.Col).Text & Chr(34) & ",index=" & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",new_value=" & Chr(34) & e.NewData & Chr(34) & ")"
         frmMain.clsRLink.clsEngine.Evaluate(strSctipt)
     End Sub
+
+    Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
+        dlgRenameSheet.ShowDialog()
+    End Sub
+
+    Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles MoveOrCopySheet.Click
+        dlgCopySheet.ShowDialog()
+    End Sub
 End Class

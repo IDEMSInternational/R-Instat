@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmEditor
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmEditor
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.grdData = New unvell.ReoGrid.ReoGridControl()
@@ -71,6 +71,8 @@ Partial Class frmEditor
         Me.insertSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.deleteSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MoveOrCopySheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblNoData = New System.Windows.Forms.Label()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
@@ -92,8 +94,8 @@ Partial Class frmEditor
         Me.grdData.Script = Nothing
         Me.grdData.SheetTabContextMenuStrip = Me.statusColumnMenu
         Me.grdData.SheetTabNewButtonVisible = True
+        Me.grdData.SheetTabVisible = True
         Me.grdData.SheetTabWidth = 200
-        Me.grdData.SheetTabNewButtonVisible = True
         Me.grdData.Size = New System.Drawing.Size(410, 261)
         Me.grdData.TabIndex = 0
         '
@@ -101,7 +103,7 @@ Partial Class frmEditor
         '
         Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuInsertCol, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuConvertText, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.resetToDefaultWidthToolStripMenuItem, Me.columnWidthToolStripMenuItem, Me.hideColumnsToolStripMenuItem, Me.unhideColumnsToolStripMenuItem, Me.toolStripMenuItem21, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem, Me.toolStripMenuItem35, Me.groupColumnsToolStripMenuItem1, Me.ungroupColumnsToolStripMenuItem1, Me.ungroupAllColumnsToolStripMenuItem, Me.ToolStripMenuItem1})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(193, 402)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(193, 380)
         '
         'mnuColumnRename
         '
@@ -352,27 +354,39 @@ Partial Class frmEditor
         '
         'statusColumnMenu
         '
-        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteSheet, Me.renameSheet})
+        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteSheet, Me.renameSheet, Me.MoveOrCopySheet, Me.HideSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(118, 70)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(153, 136)
         '
         'insertSheet
         '
         Me.insertSheet.Name = "insertSheet"
-        Me.insertSheet.Size = New System.Drawing.Size(117, 22)
+        Me.insertSheet.Size = New System.Drawing.Size(159, 22)
         Me.insertSheet.Text = "Insert"
         '
         'deleteSheet
         '
         Me.deleteSheet.Name = "deleteSheet"
-        Me.deleteSheet.Size = New System.Drawing.Size(117, 22)
+        Me.deleteSheet.Size = New System.Drawing.Size(159, 22)
         Me.deleteSheet.Text = "Delete"
         '
         'renameSheet
         '
         Me.renameSheet.Name = "renameSheet"
-        Me.renameSheet.Size = New System.Drawing.Size(117, 22)
+        Me.renameSheet.Size = New System.Drawing.Size(159, 22)
         Me.renameSheet.Text = "Rename"
+        '
+        'MoveOrCopySheet
+        '
+        Me.MoveOrCopySheet.Name = "MoveOrCopySheet"
+        Me.MoveOrCopySheet.Size = New System.Drawing.Size(159, 22)
+        Me.MoveOrCopySheet.Text = "Move or Copy"
+        '
+        'HideSheet
+        '
+        Me.HideSheet.Name = "HideSheet"
+        Me.HideSheet.Size = New System.Drawing.Size(159, 22)
+        Me.HideSheet.Text = "Hide"
         '
         'lblNoData
         '
@@ -455,4 +469,6 @@ Partial Class frmEditor
     Friend WithEvents mnuConvertVariate As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents mnuConvertToFactor As ToolStripMenuItem
+    Friend WithEvents MoveOrCopySheet As ToolStripMenuItem
+    Friend WithEvents HideSheet As ToolStripMenuItem
 End Class
