@@ -74,6 +74,9 @@ Public Class dlgFromLibrary
             lstCollection.Enabled = True
             grpCollection.Enabled = False
         ElseIf rdoInstatCollection.Checked Then
+            If txtFilePath.Text <> "" Then
+                loadData(txtFilePath.Text)
+            End If
             lstCollection.Items.Clear()
             lstCollection.Enabled = False
             cboPackages.Enabled = False
