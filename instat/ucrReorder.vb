@@ -25,6 +25,7 @@ Public Class ucrReorder
 
     Public Sub setDataType(strType As String)
         strDataType = strType
+        loadList()
     End Sub
 
     Private Sub cmdUp_Click(sender As Object, e As EventArgs) Handles cmdUp.Click
