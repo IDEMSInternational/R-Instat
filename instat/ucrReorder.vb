@@ -136,6 +136,7 @@ Public Class ucrReorder
 
     Public Sub setReceiver(dfSingle As ucrReceiverSingle)
         ucrReceiver = dfSingle
+        lstAvailableData.Clear()
         lstAvailableData.Columns.Add("Available Levels")
         lstAvailableData.Columns(0).Width = -2
         loadList()
