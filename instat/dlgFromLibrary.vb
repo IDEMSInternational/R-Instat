@@ -15,11 +15,34 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Imports System.IO
+Imports RDotNet
+
 Public Class dlgFromLibrary
+    Dim strLibraryTemp As String = "dfLibrary"
+    Dim strPackages As String = "dfPackagesList"
     Dim strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
+    Dim bFirstLoad As Boolean = True
+
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ucrBase.iHelpTopicID = 156
         autoTranslate(Me)
+        If bFirstLoad Then
+            InitialiseDialog()
+            '
+            setDefaults()
+            bFirstLoad = False
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub setDefaults()
+        rdoDefaultDatasets.Checked = True
+        cboPackages.SelectedItem = "datasets"
+        loadDatasets(cboPackages.SelectedItem.ToString)
+    End Sub
+
+    Private Sub InitialiseDialog()
+        'fills the combo box
+        FillPackagesCombo()
     End Sub
 
     Private Sub cmdLibraryCollection_Click(sender As Object, e As EventArgs) Handles cmdLibraryCollection.Click
@@ -34,11 +57,93 @@ Public Class dlgFromLibrary
             loadData(dlgOpenDialog.FileName.Replace("\", "/"))
             dlgOpenDialog.RestoreDirectory = True
         End If
+        TestOkEnabled()
     End Sub
 
     Private Sub loadData(strFilePath As String)
         ucrBase.clsRsyntax.SetFunction("readRDS")
         ucrBase.clsRsyntax.SetAssignTo(frmMain.clsRLink.strInstatDataObject)
         ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+        txtFilePath.Text = strFilePath
     End Sub
+
+    Private Sub rdoDefaultDatasets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultDatasets.CheckedChanged, rdoInstatCollection.CheckedChanged
+        If rdoDefaultDatasets.Checked Then
+            ucrBase.clsRsyntax.SetFunction("as.data.frame")
+            cboPackages.Enabled = True
+            lstCollection.Enabled = True
+            grpCollection.Enabled = False
+        ElseIf rdoInstatCollection.Checked Then
+            If txtFilePath.Text <> "" Then
+                loadData(txtFilePath.Text)
+            End If
+            lstCollection.Items.Clear()
+            lstCollection.Enabled = False
+            cboPackages.Enabled = False
+            grpCollection.Enabled = True
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub FillPackagesCombo()
+        Dim strTempHolder As String = "lsPackagesHolder"
+        Dim i As Integer
+        Dim lstAvailablePackages As CharacterVector
+        cboPackages.Items.Clear()
+        lstAvailablePackages = frmMain.clsRLink.clsEngine.Evaluate(strPackages & "<-(.packages())").AsCharacter
+        For i = 0 To lstAvailablePackages.Length - 1
+            Try
+                If frmMain.clsRLink.clsEngine.Evaluate("nrow(data(package = " & Chr(34) & lstAvailablePackages.AsCharacter(i) & Chr(34) & ")$results)").AsInteger(0) > 0 Then
+                    cboPackages.Items.Add(lstAvailablePackages.AsCharacter(i))
+                End If
+            Catch ex As Exception
+
+            End Try
+        Next
+    End Sub
+
+    Private Sub FillListView(dfDataframe As DataFrame)
+        Dim lstItem As New ListViewItem
+        'clears the listview before loading
+        lstCollection.Items.Clear()
+        'Fills the list
+        For i As Integer = 0 To dfDataframe.RowCount - 1
+            lstItem = lstCollection.Items.Add(dfDataframe(i, 0))
+            lstItem.SubItems.Add(dfDataframe(i, 1))
+        Next
+    End Sub
+
+    Private Sub loadDatasets(strPackage As String)
+        Try
+            Dim dfPackage As DataFrame
+            frmMain.clsRLink.clsEngine.Evaluate(strLibraryTemp & "<-data.frame(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results[1:nrow(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results),3:4])")
+            dfPackage = frmMain.clsRLink.clsEngine.GetSymbol(strLibraryTemp).AsDataFrame
+            If dfPackage.RowCount > 1 Then
+                FillListView(dfDataframe:=dfPackage)
+            End If
+        Catch ex As Exception
+            'lstCollection.Items.Clear()
+        End Try
+
+    End Sub
+
+    Private Sub cboPackages_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPackages.SelectedValueChanged
+        loadDatasets(cboPackages.SelectedItem.ToString)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub lstCollection_Click(sender As Object, e As EventArgs) Handles lstCollection.Click
+        ucrBase.clsRsyntax.SetAssignTo(lstCollection.SelectedItems(0).SubItems(0).Text, strTempDataframe:=lstCollection.SelectedItems(0).SubItems(0).Text)
+        ucrBase.clsRsyntax.AddParameter("x", lstCollection.SelectedItems(0).SubItems(0).Text)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 OrElse rdoInstatCollection.Checked AndAlso txtFilePath.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
 End Class
