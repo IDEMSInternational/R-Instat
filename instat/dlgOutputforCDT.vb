@@ -24,14 +24,14 @@ Public Class dlgOutputforCDT
     End Sub
 
 
-    Private Sub txtFilename_Leave(sender As Object, e As EventArgs) Handles txtFilename.Leave
-        ucrBase.clsRsyntax.AddParameter("Filename", Chr(34) & txtFilename.Text & Chr(34))
+    Private Sub txtFilename_Leave(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("Filename", Chr(34) & ucrInputFileName.Text & Chr(34))
 
     End Sub
 
 
-    Private Sub txtInterestedVariables_TextChanged(sender As Object, e As EventArgs) Handles txtInterestedVariables.TextChanged
-        ucrBase.clsRsyntax.AddParameter("Interested_vaiables", Chr(34) & txtInterestedVariables.Text & Chr(34))
+    Private Sub txtInterestedVariables_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("Interested_vaiables", Chr(34) & ucrInputInterestedVariables.Text & Chr(34))
 
     End Sub
 End Class
