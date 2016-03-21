@@ -14,8 +14,24 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgStartofRains
+    Public bFirstLoad As Boolean = True
     Private Sub ucrBase_clickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+
+        autoTranslate(Me)
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+
+        TestOKEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
         Dim strScript As String
+
         strScript = "climate_obj$add_start_rain(data_list=list()"
         strScript = strScript & ", earliest_day=" & nudEarliest.Value.ToString()
         strScript = strScript & ", total_days=" & nudNumberofRainDays.Value.ToString()
@@ -36,6 +52,23 @@ Public Class dlgStartofRains
         Me.Hide()
     End Sub
 
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+    End Sub
+
     Private Sub chkDrySpell_CheckedChanged(sender As Object, e As EventArgs) Handles chkDrySpell.CheckedChanged
         UpdateVisible()
     End Sub
@@ -52,13 +85,5 @@ Public Class dlgStartofRains
         lblDays.Visible = chkDrySpell.Checked
         nudDryLength.Visible = chkDrySpell.Checked
         nudWithin.Visible = chkDrySpell.Checked
-    End Sub
-
-    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
-
-    End Sub
-
-    Private Sub lblColumnName_Click(sender As Object, e As EventArgs) Handles lblColumnName.Click
-
     End Sub
 End Class
