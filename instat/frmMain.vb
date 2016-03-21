@@ -963,5 +963,9 @@ Public Class frmMain
     Private Sub mnuStatisticsTablesGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesGeneral.Click
         dlgGeneralTables.ShowDialog()
     End Sub
+
+    Private Sub mnuStatisticsTablesMultipleResponse_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesMultipleResponse.Click
+        dlgMultipleResponse.ShowDialog()
+    End Sub
 End Class
 

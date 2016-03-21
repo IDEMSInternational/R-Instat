@@ -340,6 +340,12 @@
     <Compile Include="dlgMatchText.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMultipleResponse.Designer.vb">
+      <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMultipleResponse.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneWayANOVA.Designer.vb">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
     </Compile>
@@ -1816,6 +1822,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMatchText.sw-KE.resx">
       <DependentUpon>dlgMatchText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMultipleResponse.fr-FR.resx">
+      <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMultipleResponse.resx">
+      <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMultipleResponse.sw-KE.resx">
+      <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
