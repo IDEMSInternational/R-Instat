@@ -68,7 +68,7 @@ Public Class dlgRowStats
 
     Private Sub ucrReceiverForRowStatistics_SelectionChanged() Handles ucrReceiverForRowStatistics.SelectionChanged
         If Not ucrReceiverForRowStatistics.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverForRowStatistics.GetVariables())
+            ucrBase.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverForRowStatistics.GetVariables(True))
         Else
             ucrBase.clsRsyntax.RemoveParameter("x")
         End If
