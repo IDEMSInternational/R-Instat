@@ -15,11 +15,38 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-    Public Class dlgChangeFormatDayMonth
-    Private Sub UcrButtons1_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
+Public Class dlgChangeFormatDayMonth
+    Public bFirstLoad As Boolean = True
+    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("climate_obj$change_format_day_month()")
 
+
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+
+        TestOKEnabled()
+    End Sub
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction("climate_obj$change_format_day_month()")
+    End Sub
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+    Private Sub TestOKEnabled()
+
+    End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
     End Sub
 End Class
 
