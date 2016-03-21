@@ -967,5 +967,9 @@ Public Class frmMain
     Private Sub mnuStatisticsTablesMultipleResponse_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesMultipleResponse.Click
         dlgMultipleResponse.ShowDialog()
     End Sub
+
+    Private Sub mnuStatisticsSimpleModelsOneSampleSummaryData_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsOneSampleSummaryData.Click
+        dlgOneSampleSummaryData.ShowDialog()
+    End Sub
 End Class
 
