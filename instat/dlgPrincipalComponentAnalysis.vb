@@ -34,7 +34,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrBasePCA.clsRsyntax.iCallType = 0
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
         ucrReceiverMultiplePCA.SetDataType("numeric")
-        'ucrBase.iHelpTopicID = 171
+        ucrBasePCA.iHelpTopicID = 187
         ' sdgPrincipalComponentAnalysis.SetPCAFunction(ucrBasePCA.clsRsyntax.clsBaseFunction)
     End Sub
 
@@ -59,6 +59,7 @@ Public Class dlgPrincipalComponentAnalysis
     Private Sub TestOKEnabled()
         If (Not ucrReceiverMultiplePCA.IsEmpty()) Then
             ucrBasePCA.OKEnabled(True)
+            AssignName()
         Else
             ucrBasePCA.OKEnabled(False)
         End If
@@ -70,8 +71,7 @@ Public Class dlgPrincipalComponentAnalysis
 
     Public Sub ucrReceiverMultiplePCA_SelectionChanged() Handles ucrReceiverMultiplePCA.SelectionChanged
         TestOKEnabled()
-        ExplanatoryVariables = XVariables(ucrReceiverMultiplePCA.GetVariableNames())
-        ucrBasePCA.clsRsyntax.AddParameter("X", ExplanatoryVariables)
+        ucrBasePCA.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverMultiplePCA.GetVariables())
     End Sub
 
     Private Sub nudComponents_ValueChanged(sender As Object, e As EventArgs) Handles nudComponents.ValueChanged
@@ -85,14 +85,6 @@ Public Class dlgPrincipalComponentAnalysis
             ucrBasePCA.clsRsyntax.AddParameter("scale.unit", "FALSE")
         End If
     End Sub
-
-    Public Function XVariables(ByVal my_variable) As String
-        Dim Variables As New RSyntax
-        Variables.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        Variables.AddParameter("col_names", my_variable)
-        Variables.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        Return (Variables.GetScript())
-    End Function
 
     Private Sub cmdPCAOptions_Click(sender As Object, e As EventArgs) Handles cmdPCAOptions.Click
         sdgPrincipalComponentAnalysis.ShowDialog()
