@@ -31,11 +31,11 @@ Partial Class dlgConvertColumns
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpFactorNumeric = New System.Windows.Forms.GroupBox()
-        Me.rdoByLevels = New System.Windows.Forms.RadioButton()
+        Me.grpFactorToNumeric = New System.Windows.Forms.GroupBox()
         Me.rdoByOrdinals = New System.Windows.Forms.RadioButton()
+        Me.rdoByLevels = New System.Windows.Forms.RadioButton()
         Me.grpTo.SuspendLayout()
-        Me.grpFactorNumeric.SuspendLayout()
+        Me.grpFactorToNumeric.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblColumnsToConvert
@@ -132,29 +132,17 @@ Partial Class dlgConvertColumns
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 3
         '
-        'grpFactorNumeric
+        'grpFactorToNumeric
         '
-        Me.grpFactorNumeric.Controls.Add(Me.rdoByOrdinals)
-        Me.grpFactorNumeric.Controls.Add(Me.rdoByLevels)
-        Me.grpFactorNumeric.Location = New System.Drawing.Point(144, 240)
-        Me.grpFactorNumeric.Name = "grpFactorNumeric"
-        Me.grpFactorNumeric.Size = New System.Drawing.Size(217, 44)
-        Me.grpFactorNumeric.TabIndex = 7
-        Me.grpFactorNumeric.TabStop = False
-        Me.grpFactorNumeric.Tag = "Factor numeric"
-        Me.grpFactorNumeric.Text = "Factor numeric"
-        '
-        'rdoByLevels
-        '
-        Me.rdoByLevels.AutoSize = True
-        Me.rdoByLevels.Location = New System.Drawing.Point(6, 16)
-        Me.rdoByLevels.Name = "rdoByLevels"
-        Me.rdoByLevels.Size = New System.Drawing.Size(69, 17)
-        Me.rdoByLevels.TabIndex = 7
-        Me.rdoByLevels.TabStop = True
-        Me.rdoByLevels.Tag = "by_levels"
-        Me.rdoByLevels.Text = "by_levels"
-        Me.rdoByLevels.UseVisualStyleBackColor = True
+        Me.grpFactorToNumeric.Controls.Add(Me.rdoByOrdinals)
+        Me.grpFactorToNumeric.Controls.Add(Me.rdoByLevels)
+        Me.grpFactorToNumeric.Location = New System.Drawing.Point(144, 240)
+        Me.grpFactorToNumeric.Name = "grpFactorToNumeric"
+        Me.grpFactorToNumeric.Size = New System.Drawing.Size(217, 44)
+        Me.grpFactorToNumeric.TabIndex = 7
+        Me.grpFactorToNumeric.TabStop = False
+        Me.grpFactorToNumeric.Tag = "Factor_to_numeric"
+        Me.grpFactorToNumeric.Text = "Factor to numeric"
         '
         'rdoByOrdinals
         '
@@ -168,26 +156,38 @@ Partial Class dlgConvertColumns
         Me.rdoByOrdinals.Text = "by_ordinals"
         Me.rdoByOrdinals.UseVisualStyleBackColor = True
         '
-        'dlgConvertToColumnFactors
+        'rdoByLevels
+        '
+        Me.rdoByLevels.AutoSize = True
+        Me.rdoByLevels.Location = New System.Drawing.Point(6, 16)
+        Me.rdoByLevels.Name = "rdoByLevels"
+        Me.rdoByLevels.Size = New System.Drawing.Size(69, 17)
+        Me.rdoByLevels.TabIndex = 7
+        Me.rdoByLevels.TabStop = True
+        Me.rdoByLevels.Tag = "by_levels"
+        Me.rdoByLevels.Text = "by_levels"
+        Me.rdoByLevels.UseVisualStyleBackColor = True
+        '
+        'dlgConvertColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(407, 382)
-        Me.Controls.Add(Me.grpFactorNumeric)
+        Me.Controls.Add(Me.grpFactorToNumeric)
         Me.Controls.Add(Me.grpTo)
         Me.Controls.Add(Me.ucrSelectorDataFrameColumns)
         Me.Controls.Add(Me.lblColumnsToConvert)
         Me.Controls.Add(Me.ucrReceiverColumnsToConvert)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgConvertToColumnFactors"
+        Me.Name = "dlgConvertColumns"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Convert_columns"
         Me.Text = "Convert Columns"
         Me.grpTo.ResumeLayout(False)
         Me.grpTo.PerformLayout()
-        Me.grpFactorNumeric.ResumeLayout(False)
-        Me.grpFactorNumeric.PerformLayout()
+        Me.grpFactorToNumeric.ResumeLayout(False)
+        Me.grpFactorToNumeric.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -202,7 +202,7 @@ Partial Class dlgConvertColumns
     Friend WithEvents rdoCharacter As RadioButton
     Friend WithEvents rdoFactor As RadioButton
     Friend WithEvents rdoNumeric As RadioButton
-    Friend WithEvents grpFactorNumeric As GroupBox
+    Friend WithEvents grpFactorToNumeric As GroupBox
     Friend WithEvents rdoByOrdinals As RadioButton
     Friend WithEvents rdoByLevels As RadioButton
 End Class
