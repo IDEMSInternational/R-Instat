@@ -16,21 +16,37 @@
 Imports instat.Translations
 
 Public Class dlgMultipleRegression
+    Private bFirstLoad As Boolean = True
     Private Sub dlgMultipleRegression_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            Setdefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+
+        End If
         autoTranslate(Me)
-        ucrReceiveResponseVariable.Selector = ucrAddRemove
-        ucrReceiveResponseVariable.SetMeAsReceiver()
-        ucrBase.OKEnabled(False)
-        defaultSettings()
+        TestOkEnabled()
     End Sub
 
-    Private Sub defaultSettings()
-        ucrAddRemove.lstAvailableVariable.ResetText()
-        ucrReceiveExplanatoryVaraibles.lstSelectedVariables.Items.Clear()
-        ucrReceiveResponseVariable.ResetText()
+    Private Sub InitialiseDialog()
+
+    End Sub
+
+    Private Sub Setdefaults()
+
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+    Private Sub TestOkEnabled()
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        defaultSettings()
+        Setdefaults()
     End Sub
+
 End Class
