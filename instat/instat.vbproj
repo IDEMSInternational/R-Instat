@@ -304,6 +304,12 @@
     <Compile Include="dlgFromLibrary.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgGeneralTables.Designer.vb">
+      <DependentUpon>dlgGeneralTables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGeneralTables.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgGroup.Designer.vb">
       <DependentUpon>dlgGroup.vb</DependentUpon>
     </Compile>
@@ -1756,6 +1762,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralTables.fr-FR.resx">
+      <DependentUpon>dlgGeneralTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralTables.resx">
+      <DependentUpon>dlgGeneralTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralTables.sw-KE.resx">
+      <DependentUpon>dlgGeneralTables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGroup.fr-FR.resx">
       <DependentUpon>dlgGroup.vb</DependentUpon>
