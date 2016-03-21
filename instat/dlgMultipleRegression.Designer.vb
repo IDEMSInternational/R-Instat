@@ -34,12 +34,12 @@ Partial Class dlgMultipleRegression
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(12, 12)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(211, 131)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(226, 131)
         Me.ucrAddRemove.TabIndex = 3
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 283)
+        Me.ucrBase.Location = New System.Drawing.Point(4, 206)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 55)
         Me.ucrBase.TabIndex = 2
@@ -48,13 +48,15 @@ Partial Class dlgMultipleRegression
         '
         Me.ucrReceiveExplanatoryVaraibles.Location = New System.Drawing.Point(247, 105)
         Me.ucrReceiveExplanatoryVaraibles.Name = "ucrReceiveExplanatoryVaraibles"
-        Me.ucrReceiveExplanatoryVaraibles.Size = New System.Drawing.Size(98, 118)
+        Me.ucrReceiveExplanatoryVaraibles.Selector = Nothing
+        Me.ucrReceiveExplanatoryVaraibles.Size = New System.Drawing.Size(131, 118)
         Me.ucrReceiveExplanatoryVaraibles.TabIndex = 0
         '
         'ucrReceiveResponseVariable
         '
         Me.ucrReceiveResponseVariable.Location = New System.Drawing.Point(247, 50)
         Me.ucrReceiveResponseVariable.Name = "ucrReceiveResponseVariable"
+        Me.ucrReceiveResponseVariable.Selector = Nothing
         Me.ucrReceiveResponseVariable.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiveResponseVariable.TabIndex = 4
         '
@@ -82,16 +84,18 @@ Partial Class dlgMultipleRegression
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(441, 339)
+        Me.ClientSize = New System.Drawing.Size(409, 263)
         Me.Controls.Add(Me.lblResponseVariable)
         Me.Controls.Add(Me.lblExplanatoryVariables)
         Me.Controls.Add(Me.ucrReceiveResponseVariable)
         Me.Controls.Add(Me.ucrAddRemove)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiveExplanatoryVaraibles)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgMultipleRegression"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Multiple Regression"
         Me.ResumeLayout(False)
         Me.PerformLayout()
