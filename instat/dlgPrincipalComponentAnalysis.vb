@@ -35,7 +35,6 @@ Public Class dlgPrincipalComponentAnalysis
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
         ucrReceiverMultiplePCA.SetDataType("numeric")
         ucrBasePCA.iHelpTopicID = 187
-        ' sdgPrincipalComponentAnalysis.SetPCAFunction(ucrBasePCA.clsRsyntax.clsBaseFunction)
     End Sub
 
     Private Sub ReopenDialog()
@@ -50,7 +49,6 @@ Public Class dlgPrincipalComponentAnalysis
         ucrResultName.Visible = True
         chkScaleData.Checked = True
         ucrBasePCA.clsRsyntax.AddParameter("graph", "FALSE")
-        'Need to ask if we really need to used FactoMineR package for PCA as it outputs graph by default
         ucrResultName.SetName("PCA_1")
         sdgPrincipalComponentAnalysis.SetDefaults()
         TestOKEnabled()
@@ -71,7 +69,13 @@ Public Class dlgPrincipalComponentAnalysis
 
     Public Sub ucrReceiverMultiplePCA_SelectionChanged() Handles ucrReceiverMultiplePCA.SelectionChanged
         TestOKEnabled()
+        If ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 5 Then
+            nudComponents.Value = 5
+        Else
+            nudComponents.Value = ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
+        End If
         ucrBasePCA.clsRsyntax.AddParameter("X", clsRFunctionParameter:=ucrReceiverMultiplePCA.GetVariables())
+        ucrBasePCA.clsRsyntax.AddParameter("ncp", nudComponents.Value)
     End Sub
 
     Private Sub nudComponents_ValueChanged(sender As Object, e As EventArgs) Handles nudComponents.ValueChanged

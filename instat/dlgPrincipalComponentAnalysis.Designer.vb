@@ -22,9 +22,6 @@ Partial Class dlgPrincipalComponentAnalysis
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBasePCA = New instat.ucrButtons()
-        Me.ucrSelectorPCA = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverMultiplePCA = New instat.ucrReceiverMultiple()
         Me.lblExplanatoryVariables = New System.Windows.Forms.Label()
         Me.cmdPCAOptions = New System.Windows.Forms.Button()
         Me.nudComponents = New System.Windows.Forms.NumericUpDown()
@@ -32,30 +29,11 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.chkScaleData = New System.Windows.Forms.CheckBox()
         Me.chkSaveResult = New System.Windows.Forms.CheckBox()
         Me.ucrResultName = New instat.ucrVariableName()
+        Me.ucrReceiverMultiplePCA = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorPCA = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBasePCA = New instat.ucrButtons()
         CType(Me.nudComponents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'ucrBasePCA
-        '
-        Me.ucrBasePCA.Location = New System.Drawing.Point(12, 246)
-        Me.ucrBasePCA.Name = "ucrBasePCA"
-        Me.ucrBasePCA.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBasePCA.TabIndex = 0
-        '
-        'ucrSelectorPCA
-        '
-        Me.ucrSelectorPCA.Location = New System.Drawing.Point(11, 5)
-        Me.ucrSelectorPCA.Name = "ucrSelectorPCA"
-        Me.ucrSelectorPCA.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorPCA.TabIndex = 1
-        '
-        'ucrReceiverMultiplePCA
-        '
-        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(268, 58)
-        Me.ucrReceiverMultiplePCA.Name = "ucrReceiverMultiplePCA"
-        Me.ucrReceiverMultiplePCA.Selector = Nothing
-        Me.ucrReceiverMultiplePCA.Size = New System.Drawing.Size(121, 104)
-        Me.ucrReceiverMultiplePCA.TabIndex = 5
         '
         'lblExplanatoryVariables
         '
@@ -63,7 +41,7 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.lblExplanatoryVariables.Location = New System.Drawing.Point(274, 42)
         Me.lblExplanatoryVariables.Name = "lblExplanatoryVariables"
         Me.lblExplanatoryVariables.Size = New System.Drawing.Size(108, 13)
-        Me.lblExplanatoryVariables.TabIndex = 6
+        Me.lblExplanatoryVariables.TabIndex = 1
         Me.lblExplanatoryVariables.Tag = "Explanatory_Variables"
         Me.lblExplanatoryVariables.Text = "Explanatory Variables"
         '
@@ -82,8 +60,7 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.nudComponents.Location = New System.Drawing.Point(141, 191)
         Me.nudComponents.Name = "nudComponents"
         Me.nudComponents.Size = New System.Drawing.Size(42, 20)
-        Me.nudComponents.TabIndex = 9
-        Me.nudComponents.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.nudComponents.TabIndex = 4
         '
         'lblComponents
         '
@@ -91,7 +68,7 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.lblComponents.Location = New System.Drawing.Point(15, 193)
         Me.lblComponents.Name = "lblComponents"
         Me.lblComponents.Size = New System.Drawing.Size(118, 13)
-        Me.lblComponents.TabIndex = 10
+        Me.lblComponents.TabIndex = 3
         Me.lblComponents.Tag = "Number_of_Components"
         Me.lblComponents.Text = "Number of Components"
         '
@@ -101,7 +78,7 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.chkScaleData.Location = New System.Drawing.Point(315, 193)
         Me.chkScaleData.Name = "chkScaleData"
         Me.chkScaleData.Size = New System.Drawing.Size(79, 17)
-        Me.chkScaleData.TabIndex = 11
+        Me.chkScaleData.TabIndex = 5
         Me.chkScaleData.Tag = "Scale_Data"
         Me.chkScaleData.Text = "Scale Data"
         Me.chkScaleData.UseVisualStyleBackColor = True
@@ -112,7 +89,7 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.chkSaveResult.Location = New System.Drawing.Point(14, 219)
         Me.chkSaveResult.Name = "chkSaveResult"
         Me.chkSaveResult.Size = New System.Drawing.Size(104, 24)
-        Me.chkSaveResult.TabIndex = 12
+        Me.chkSaveResult.TabIndex = 6
         Me.chkSaveResult.Tag = "Save_Result"
         Me.chkSaveResult.Text = "Save Result"
         Me.chkSaveResult.UseVisualStyleBackColor = True
@@ -122,7 +99,29 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.ucrResultName.Location = New System.Drawing.Point(122, 217)
         Me.ucrResultName.Name = "ucrResultName"
         Me.ucrResultName.Size = New System.Drawing.Size(149, 23)
-        Me.ucrResultName.TabIndex = 13
+        Me.ucrResultName.TabIndex = 7
+        '
+        'ucrReceiverMultiplePCA
+        '
+        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(268, 58)
+        Me.ucrReceiverMultiplePCA.Name = "ucrReceiverMultiplePCA"
+        Me.ucrReceiverMultiplePCA.Selector = Nothing
+        Me.ucrReceiverMultiplePCA.Size = New System.Drawing.Size(121, 104)
+        Me.ucrReceiverMultiplePCA.TabIndex = 2
+        '
+        'ucrSelectorPCA
+        '
+        Me.ucrSelectorPCA.Location = New System.Drawing.Point(11, 5)
+        Me.ucrSelectorPCA.Name = "ucrSelectorPCA"
+        Me.ucrSelectorPCA.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorPCA.TabIndex = 0
+        '
+        'ucrBasePCA
+        '
+        Me.ucrBasePCA.Location = New System.Drawing.Point(12, 246)
+        Me.ucrBasePCA.Name = "ucrBasePCA"
+        Me.ucrBasePCA.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBasePCA.TabIndex = 9
         '
         'dlgPrincipalComponentAnalysis
         '
