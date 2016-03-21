@@ -957,7 +957,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuStatisticsTablesGroup_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesGroup.Click
-        dlgGroup.ShowDialog()
+        dlgGroupTables.ShowDialog()
     End Sub
 
     Private Sub mnuStatisticsTablesGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesGeneral.Click
