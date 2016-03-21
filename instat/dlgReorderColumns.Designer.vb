@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgReorderColumns
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,29 +20,31 @@ Partial Class dlgReorderColumns
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrSelectColumnstoOrder = New instat.ucrSelectorByDataFrame()
         Me.lblColumns = New System.Windows.Forms.Label()
+        Me.ucrReorderColumns = New instat.ucrReorder()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiveColumns = New instat.ucrReceiverMultiple()
+        Me.ucrDataFrameSelect = New instat.ucrDataFrame()
         Me.SuspendLayout()
-        '
-        'ucrSelectColumnstoOrder
-        '
-        Me.ucrSelectColumnstoOrder.Location = New System.Drawing.Point(3, 0)
-        Me.ucrSelectColumnstoOrder.Name = "ucrSelectColumnstoOrder"
-        Me.ucrSelectColumnstoOrder.Size = New System.Drawing.Size(147, 177)
-        Me.ucrSelectColumnstoOrder.TabIndex = 12
         '
         'lblColumns
         '
         Me.lblColumns.AutoSize = True
-        Me.lblColumns.Location = New System.Drawing.Point(177, 48)
+        Me.lblColumns.Location = New System.Drawing.Point(186, 22)
         Me.lblColumns.Name = "lblColumns"
-        Me.lblColumns.Size = New System.Drawing.Size(160, 13)
+        Me.lblColumns.Size = New System.Drawing.Size(95, 13)
         Me.lblColumns.TabIndex = 11
-        Me.lblColumns.Text = "Insert Columns in their new order"
+        Me.lblColumns.Text = "Columns to reorder"
+        '
+        'ucrReorderColumns
+        '
+        Me.ucrReorderColumns.Location = New System.Drawing.Point(189, 38)
+        Me.ucrReorderColumns.Name = "ucrReorderColumns"
+        Me.ucrReorderColumns.Size = New System.Drawing.Size(154, 139)
+        Me.ucrReorderColumns.TabIndex = 13
+        Me.ucrReorderColumns.ucrDataFrameList = Nothing
+        Me.ucrReorderColumns.ucrReceiver = Nothing
         '
         'ucrBase
         '
@@ -50,26 +52,25 @@ Partial Class dlgReorderColumns
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ucrBase.Location = New System.Drawing.Point(3, 183)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(403, 53)
         Me.ucrBase.TabIndex = 10
         '
-        'ucrReceiveColumns
+        'ucrDataFrameSelect
         '
-        Me.ucrReceiveColumns.Location = New System.Drawing.Point(180, 73)
-        Me.ucrReceiveColumns.Name = "ucrReceiveColumns"
-        Me.ucrReceiveColumns.Selector = Nothing
-        Me.ucrReceiveColumns.Size = New System.Drawing.Size(121, 104)
-        Me.ucrReceiveColumns.TabIndex = 9
+        Me.ucrDataFrameSelect.Location = New System.Drawing.Point(12, 22)
+        Me.ucrDataFrameSelect.Name = "ucrDataFrameSelect"
+        Me.ucrDataFrameSelect.Size = New System.Drawing.Size(127, 41)
+        Me.ucrDataFrameSelect.TabIndex = 14
         '
         'dlgReorderColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 235)
-        Me.Controls.Add(Me.ucrSelectColumnstoOrder)
+        Me.ClientSize = New System.Drawing.Size(412, 235)
+        Me.Controls.Add(Me.ucrDataFrameSelect)
+        Me.Controls.Add(Me.ucrReorderColumns)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrReceiveColumns)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgReorderColumns"
         Me.ShowIcon = False
@@ -79,9 +80,8 @@ Partial Class dlgReorderColumns
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrSelectColumnstoOrder As ucrSelectorByDataFrame
     Friend WithEvents lblColumns As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReceiveColumns As ucrReceiverMultiple
+    Friend WithEvents ucrReorderColumns As ucrReorder
+    Friend WithEvents ucrDataFrameSelect As ucrDataFrame
 End Class

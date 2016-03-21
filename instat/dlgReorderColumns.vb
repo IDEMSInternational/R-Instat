@@ -17,47 +17,41 @@
 Imports instat.Translations
 Public Class dlgReorderColumns
     Dim bFirstLoad As Boolean = True
-    Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub dlgReorderColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             initialiseDialog()
         End If
-        'checks OkEnabled
-        TestOKEnabled()
+        TestOkEnabled()
     End Sub
 
     Private Sub initialiseDialog()
         'sets the function
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$order_columns_in_data")
-        ucrReceiveColumns.Selector = ucrSelectColumnstoOrder
-        ucrReceiveColumns.SetMeAsReceiver()
+        ucrReorderColumns.strDataType = "all"
+        ucrReorderColumns.setDataframes(ucrDataFrameSelect)
         'ucrBase.iHelpTopicID = 
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        ucrSelectColumnstoOrder.Reset()
-        TestOKEnabled()
+        ucrDataFrameSelect.Reset()
+        TestOkEnabled()
     End Sub
 
-    Private Sub TestOKEnabled()
-        If Not ucrReceiveColumns.IsEmpty() And ucrReceiveColumns.lstSelectedVariables.Items.Count = ucrSelectColumnstoOrder.lstAvailableVariable.Items.Count Then
+    Private Sub ucrReorderColumns_Leave(sender As Object, e As EventArgs) Handles ucrReorderColumns.Leave
+        ucrBase.clsRsyntax.AddParameter("col_order", ucrReorderColumns.GetVariableNames)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If Not ucrReorderColumns.isEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrReceiveColumns_SelectionChanged() Handles ucrReceiveColumns.SelectionChanged
-        If Not ucrReceiveColumns.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_order", ucrReceiveColumns.GetVariableNames())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("col_order")
-        End If
-        'Test ok enabled
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrSelectColumnstoCopy_DataFrameChanged() Handles ucrSelectColumnstoOrder.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectColumnstoOrder.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+    Private Sub ucrDataFrameSelect_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameSelect.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameSelect.cboAvailableDataFrames.Text & Chr(34))
+        TestOkEnabled()
     End Sub
 End Class
