@@ -8,6 +8,11 @@ Public Class dlgDisplayRainRunningTotal
             SetDefaults()
             bFirstLoad = False
         End If
+        TestOKEnabled()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
