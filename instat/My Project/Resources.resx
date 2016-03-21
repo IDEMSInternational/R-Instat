@@ -583,9 +583,6 @@
   <data name="Earilest_Day" xml:space="preserve">
     <value>Earilest Day</value>
   </data>
-  <data name="ScatterPlot" xml:space="preserve">
-    <value>ScatterPlot...</value>
-  </data>
   <data name="X_Axis_Variable" xml:space="preserve">
     <value>X Axis Variable</value>
   </data>
@@ -906,9 +903,6 @@
   </data>
   <data name="Rain_Statistics" xml:space="preserve">
     <value>Rain Statistics</value>
-  </data>
-  <data name="Dotplot" xml:space="preserve">
-    <value>Dotplot</value>
   </data>
   <data name="Probability_Distribution" xml:space="preserve">
     <value>Probability Distribution</value>
@@ -1273,9 +1267,6 @@
   <data name="Counts_Totals" xml:space="preserve">
     <value>Counts Totals</value>
   </data>
-  <data name="Boxplot" xml:space="preserve">
-    <value>Boxplot</value>
-  </data>
   <data name="Seasonal_Summary_Rain" xml:space="preserve">
     <value>Seasonal Summary Rain</value>
   </data>
@@ -1446,5 +1437,62 @@
   </data>
   <data name="Y_Variable" xml:space="preserve">
     <value>Y Variable</value>
+  </data>
+  <data name="Columns_To_Transpose" xml:space="preserve">
+    <value>Columns To Transpose</value>
+  </data>
+  <data name="Name_New_Columns" xml:space="preserve">
+    <value>Name New Columns</value>
+  </data>
+  <data name="New_Data_Frame_Name" xml:space="preserve">
+    <value>New Data Frame Name</value>
+  </data>
+  <data name="Number_Of_Columns" xml:space="preserve">
+    <value>Number Of Columns</value>
+  </data>
+  <data name="Random_Subsets" xml:space="preserve">
+    <value>Random Subsets</value>
+  </data>
+  <data name="Set_Seed" xml:space="preserve">
+    <value>Set Seed</value>
+  </data>
+  <data name="Transpose_Columns" xml:space="preserve">
+    <value>Transpose Columns</value>
+  </data>
+  <data name="Without_Replacement" xml:space="preserve">
+    <value>Without Replacement</value>
+  </data>
+  <data name="With_Replacement" xml:space="preserve">
+    <value>With Replacement</value>
+  </data>
+  <data name="BarCharts" xml:space="preserve">
+    <value>Bar Charts...</value>
+  </data>
+  <data name="BarChartSummary" xml:space="preserve">
+    <value>Bar Charts From Summary...</value>
+  </data>
+  <data name="BoxPlot" xml:space="preserve">
+    <value>Boxplot...</value>
+  </data>
+  <data name="CummDist" xml:space="preserve">
+    <value>Cummulative Distribution...</value>
+  </data>
+  <data name="DotPlot" xml:space="preserve">
+    <value>Dotplot...</value>
+  </data>
+  <data name="InventoryPlot" xml:space="preserve">
+    <value>Inventory Plot...</value>
+  </data>
+  <data name="LinePlot" xml:space="preserve">
+    <value>Line Plot...</value>
+  </data>
+  <data name="ScatterPlot" xml:space="preserve">
+    <value>Scatter Plot...</value>
+  </data>
+  <data name="StemLeaf" xml:space="preserve">
+    <value>Stem and Leaf...</value>
+  </data>
+  <data name="UseGraph" xml:space="preserve">
+    <value>Use Graph...</value>
   </data>
 </root>
