@@ -947,5 +947,9 @@ Public Class frmMain
     Private Sub mnuManageFactorDummyVariable_Click(sender As Object, e As EventArgs) Handles mnuManageFactorDummyVariable.Click
         dlgDummyVariables.ShowDialog()
     End Sub
+
+    Private Sub mnuStatisticsAnalysisOfVarianceGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceGeneral.Click
+        dlgGeneralANOVA.ShowDialog()
+    End Sub
 End Class
 
