@@ -87,63 +87,63 @@ Public Class dlgCliBoxplot
 
     End Sub
 
-    Private Sub txtColour_TextChanged(sender As Object, e As EventArgs) Handles txtColour.TextChanged
-        ucrBase.clsRsyntax.AddParameter("col", Chr(34) & txtColour.Text.ToString() & Chr(34))
+    Private Sub txtColour_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("col", Chr(34) & ucrInputColour.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtTitle_TextChanged(sender As Object, e As EventArgs) Handles txtTitle.TextChanged
-        ucrBase.clsRsyntax.AddParameter("title", Chr(34) & txtTitle.Text.ToString() & Chr(34))
+    Private Sub txtTitle_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrInputTitle.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtVariable_TextChanged(sender As Object, e As EventArgs) Handles txtVariable.TextChanged
-        ucrBase.clsRsyntax.AddParameter("var", Chr(34) & txtVariable.Text.ToString() & Chr(34))
+    Private Sub txtVariable_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("var", Chr(34) & ucrInputVariable.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtYLabel_TextChanged(sender As Object, e As EventArgs) Handles txtYLabel.TextChanged
-        ucrBase.clsRsyntax.AddParameter("ylab", Chr(34) & txtYLabel.Text.ToString() & Chr(34))
+    Private Sub txtYLabel_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("ylab", Chr(34) & ucrInputYLabel.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtXLabel_TextChanged(sender As Object, e As EventArgs) Handles txtXLabel.TextChanged
-        ucrBase.clsRsyntax.AddParameter("xlab", Chr(34) & txtXLabel.Text.ToString() & Chr(34))
+    Private Sub txtXLabel_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("xlab", Chr(34) & ucrInputXLabel.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtDataPeriodLabel_TextChanged(sender As Object, e As EventArgs) Handles txtDataPeriodLabel.TextChanged
-        ucrBase.clsRsyntax.AddParameter("data_period_label", Chr(34) & txtDataPeriodLabel.Text.ToString() & Chr(34))
+    Private Sub txtDataPeriodLabel_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("data_period_label", Chr(34) & ucrInputDataPeriod.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtFactor_TextChanged(sender As Object, e As EventArgs) Handles txtFactor.TextChanged
-        ucrBase.clsRsyntax.AddParameter("factor", Chr(34) & txtFactor.Text.ToString() & Chr(34))
+    Private Sub txtFactor_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("factor", Chr(34) & ucrInputFactorLab.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtWidth_TextChanged(sender As Object, e As EventArgs) Handles txtWidth.TextChanged
-        ucrBase.clsRsyntax.AddParameter("width", Chr(34) & txtWidth.Text.ToString() & Chr(34)) ' is a vector
+    Private Sub txtWidth_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("width", Chr(34) & ucrInputWidth.Text.ToString() & Chr(34)) ' is a vector
 
     End Sub
 
-    Private Sub txtLog_TextChanged(sender As Object, e As EventArgs) Handles txtLog.TextChanged
-        ucrBase.clsRsyntax.AddParameter("log", Chr(34) & txtLog.Text.ToString() & Chr(34))
+    Private Sub txtLog_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("log", Chr(34) & ucrInputLog.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtAT_TextChanged(sender As Object, e As EventArgs) Handles txtAT.TextChanged
-        ucrBase.clsRsyntax.AddParameter("at", Chr(34) & txtAT.Text.ToString() & Chr(34))
+    Private Sub txtAT_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("at", Chr(34) & ucrInputAt.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtBorder_TextChanged(sender As Object, e As EventArgs) Handles txtBorder.TextChanged
-        ucrBase.clsRsyntax.AddParameter("border", Chr(34) & txtBorder.Text.ToString() & Chr(34)) ' is a par("fg")
+    Private Sub txtBorder_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("border", Chr(34) & ucrInputBorder.Text.ToString() & Chr(34)) ' is a par("fg")
 
     End Sub
 
-    Private Sub txtPARS_TextChanged(sender As Object, e As EventArgs) Handles txtPARS.TextChanged
-        ucrBase.clsRsyntax.AddParameter("pars", Chr(34) & txtColour.Text.ToString() & Chr(34)) ' is a vector
+    Private Sub txtPARS_TextChanged(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("pars", Chr(34) & ucrInputColour.Text.ToString() & Chr(34)) ' is a vector
 
     End Sub
 End Class
