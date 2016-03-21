@@ -20,7 +20,7 @@ Public Class dlgWindrose
     Private Sub dlgWindrose_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            Setdefaults()
+            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -34,7 +34,7 @@ Public Class dlgWindrose
 
     End Sub
 
-    Private Sub Setdefaults()
+    Private Sub SetDefaults()
 
     End Sub
 
@@ -46,6 +46,6 @@ Public Class dlgWindrose
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        Setdefaults()
+        SetDefaults()
     End Sub
 End Class
