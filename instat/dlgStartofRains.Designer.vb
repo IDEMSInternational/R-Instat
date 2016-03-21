@@ -25,7 +25,7 @@ Partial Class dlgStartofRains
         Me.lblDataList = New System.Windows.Forms.Label()
         Me.lblEarliest = New System.Windows.Forms.Label()
         Me.nudNumberofRainDays = New System.Windows.Forms.NumericUpDown()
-        Me.lblThreashold = New System.Windows.Forms.Label()
+        Me.lblThreshold = New System.Windows.Forms.Label()
         Me.lblNumberRainDays = New System.Windows.Forms.Label()
         Me.lblTotalRain = New System.Windows.Forms.Label()
         Me.nudTotalRain = New System.Windows.Forms.NumericUpDown()
@@ -38,14 +38,14 @@ Partial Class dlgStartofRains
         Me.lblColumnName = New System.Windows.Forms.Label()
         Me.txtColumnName = New System.Windows.Forms.TextBox()
         Me.nudEarliest = New System.Windows.Forms.NumericUpDown()
-        Me.nudThreshold = New System.Windows.Forms.NumericUpDown()
+        Me.nudThreashold = New System.Windows.Forms.NumericUpDown()
         Me.ucrBase = New instat.ucrButtons()
         CType(Me.nudNumberofRainDays, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudTotalRain, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudWithin, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudDryLength, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudEarliest, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudThreashold, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblDataList
@@ -76,35 +76,35 @@ Partial Class dlgStartofRains
         Me.nudNumberofRainDays.TabIndex = 4
         Me.nudNumberofRainDays.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
-        'lblThreashold
+        'lblThreshold
         '
-        Me.lblThreashold.AutoSize = True
-        Me.lblThreashold.Location = New System.Drawing.Point(39, 95)
-        Me.lblThreashold.Name = "lblThreashold"
-        Me.lblThreashold.Size = New System.Drawing.Size(39, 13)
-        Me.lblThreashold.TabIndex = 5
-        Me.lblThreashold.Tag = "Threashold"
-        Me.lblThreashold.Text = "Label1"
+        Me.lblThreshold.AutoSize = True
+        Me.lblThreshold.Location = New System.Drawing.Point(39, 95)
+        Me.lblThreshold.Name = "lblThreshold"
+        Me.lblThreshold.Size = New System.Drawing.Size(54, 13)
+        Me.lblThreshold.TabIndex = 5
+        Me.lblThreshold.Tag = "Threshold"
+        Me.lblThreshold.Text = "Threshold"
         '
         'lblNumberRainDays
         '
         Me.lblNumberRainDays.AutoSize = True
         Me.lblNumberRainDays.Location = New System.Drawing.Point(39, 115)
         Me.lblNumberRainDays.Name = "lblNumberRainDays"
-        Me.lblNumberRainDays.Size = New System.Drawing.Size(39, 13)
+        Me.lblNumberRainDays.Size = New System.Drawing.Size(108, 13)
         Me.lblNumberRainDays.TabIndex = 7
         Me.lblNumberRainDays.Tag = "Number_of_Rain_Days"
-        Me.lblNumberRainDays.Text = "Label1"
+        Me.lblNumberRainDays.Text = "Number of Rain Days"
         '
         'lblTotalRain
         '
         Me.lblTotalRain.AutoSize = True
         Me.lblTotalRain.Location = New System.Drawing.Point(39, 135)
         Me.lblTotalRain.Name = "lblTotalRain"
-        Me.lblTotalRain.Size = New System.Drawing.Size(39, 13)
+        Me.lblTotalRain.Size = New System.Drawing.Size(56, 13)
         Me.lblTotalRain.TabIndex = 8
         Me.lblTotalRain.Tag = "Total_Rain"
-        Me.lblTotalRain.Text = "Label1"
+        Me.lblTotalRain.Text = "Total Rain"
         '
         'nudTotalRain
         '
@@ -120,10 +120,10 @@ Partial Class dlgStartofRains
         Me.chkDrySpell.AutoSize = True
         Me.chkDrySpell.Location = New System.Drawing.Point(12, 163)
         Me.chkDrySpell.Name = "chkDrySpell"
-        Me.chkDrySpell.Size = New System.Drawing.Size(81, 17)
+        Me.chkDrySpell.Size = New System.Drawing.Size(68, 17)
         Me.chkDrySpell.TabIndex = 10
         Me.chkDrySpell.Tag = "Dry_Spell"
-        Me.chkDrySpell.Text = "CheckBox1"
+        Me.chkDrySpell.Text = "Dry Spell"
         Me.chkDrySpell.UseVisualStyleBackColor = True
         '
         'nudWithin
@@ -140,20 +140,20 @@ Partial Class dlgStartofRains
         Me.lblWithin.AutoSize = True
         Me.lblWithin.Location = New System.Drawing.Point(233, 193)
         Me.lblWithin.Name = "lblWithin"
-        Me.lblWithin.Size = New System.Drawing.Size(39, 13)
+        Me.lblWithin.Size = New System.Drawing.Size(37, 13)
         Me.lblWithin.TabIndex = 13
         Me.lblWithin.Tag = "Within"
-        Me.lblWithin.Text = "Label1"
+        Me.lblWithin.Text = "Within"
         '
         'lblDryLength
         '
         Me.lblDryLength.AutoSize = True
         Me.lblDryLength.Location = New System.Drawing.Point(39, 193)
         Me.lblDryLength.Name = "lblDryLength"
-        Me.lblDryLength.Size = New System.Drawing.Size(39, 13)
+        Me.lblDryLength.Size = New System.Drawing.Size(97, 13)
         Me.lblDryLength.TabIndex = 12
         Me.lblDryLength.Tag = "Length_of_Dry_Spell"
-        Me.lblDryLength.Text = "Label1"
+        Me.lblDryLength.Text = "Length of Dry Spell"
         '
         'nudDryLength
         '
@@ -168,20 +168,20 @@ Partial Class dlgStartofRains
         Me.lblDays.AutoSize = True
         Me.lblDays.Location = New System.Drawing.Point(329, 193)
         Me.lblDays.Name = "lblDays"
-        Me.lblDays.Size = New System.Drawing.Size(13, 13)
+        Me.lblDays.Size = New System.Drawing.Size(31, 13)
         Me.lblDays.TabIndex = 15
         Me.lblDays.Tag = "Days"
-        Me.lblDays.Text = "2"
+        Me.lblDays.Text = "Days"
         '
         'lblColumnName
         '
         Me.lblColumnName.AutoSize = True
         Me.lblColumnName.Location = New System.Drawing.Point(39, 230)
         Me.lblColumnName.Name = "lblColumnName"
-        Me.lblColumnName.Size = New System.Drawing.Size(39, 13)
+        Me.lblColumnName.Size = New System.Drawing.Size(73, 13)
         Me.lblColumnName.TabIndex = 16
         Me.lblColumnName.Tag = "Column_Name"
-        Me.lblColumnName.Text = "Label1"
+        Me.lblColumnName.Text = "Column Name"
         '
         'txtColumnName
         '
@@ -201,15 +201,15 @@ Partial Class dlgStartofRains
         Me.nudEarliest.TabIndex = 18
         Me.nudEarliest.Value = New Decimal(New Integer() {92, 0, 0, 0})
         '
-        'nudThreshold
+        'nudThreashold
         '
-        Me.nudThreshold.DecimalPlaces = 2
-        Me.nudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.nudThreshold.Location = New System.Drawing.Point(192, 89)
-        Me.nudThreshold.Name = "nudThreshold"
-        Me.nudThreshold.Size = New System.Drawing.Size(53, 20)
-        Me.nudThreshold.TabIndex = 19
-        Me.nudThreshold.Value = New Decimal(New Integer() {85, 0, 0, 131072})
+        Me.nudThreashold.DecimalPlaces = 2
+        Me.nudThreashold.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.nudThreashold.Location = New System.Drawing.Point(192, 89)
+        Me.nudThreashold.Name = "nudThreashold"
+        Me.nudThreashold.Size = New System.Drawing.Size(53, 20)
+        Me.nudThreashold.TabIndex = 19
+        Me.nudThreashold.Value = New Decimal(New Integer() {85, 0, 0, 131072})
         '
         'ucrBase
         '
@@ -223,7 +223,7 @@ Partial Class dlgStartofRains
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(449, 328)
-        Me.Controls.Add(Me.nudThreshold)
+        Me.Controls.Add(Me.nudThreashold)
         Me.Controls.Add(Me.nudEarliest)
         Me.Controls.Add(Me.txtColumnName)
         Me.Controls.Add(Me.lblColumnName)
@@ -236,7 +236,7 @@ Partial Class dlgStartofRains
         Me.Controls.Add(Me.nudTotalRain)
         Me.Controls.Add(Me.lblTotalRain)
         Me.Controls.Add(Me.lblNumberRainDays)
-        Me.Controls.Add(Me.lblThreashold)
+        Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.nudNumberofRainDays)
         Me.Controls.Add(Me.lblEarliest)
         Me.Controls.Add(Me.lblDataList)
@@ -251,7 +251,7 @@ Partial Class dlgStartofRains
         CType(Me.nudWithin, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudDryLength, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudEarliest, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudThreashold, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -261,7 +261,7 @@ Partial Class dlgStartofRains
     Friend WithEvents lblDataList As Label
     Friend WithEvents lblEarliest As Label
     Friend WithEvents nudNumberofRainDays As NumericUpDown
-    Friend WithEvents lblThreashold As Label
+    Friend WithEvents lblThreshold As Label
     Friend WithEvents lblNumberRainDays As Label
     Friend WithEvents lblTotalRain As Label
     Friend WithEvents nudTotalRain As NumericUpDown
@@ -274,5 +274,5 @@ Partial Class dlgStartofRains
     Friend WithEvents lblColumnName As Label
     Friend WithEvents txtColumnName As TextBox
     Friend WithEvents nudEarliest As NumericUpDown
-    Friend WithEvents nudThreshold As NumericUpDown
+    Friend WithEvents nudThreashold As NumericUpDown
 End Class
