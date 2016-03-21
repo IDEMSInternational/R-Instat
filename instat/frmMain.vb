@@ -955,5 +955,9 @@ Public Class frmMain
     Private Sub mnuGraphicsWindrose_Click(sender As Object, e As EventArgs) Handles mnuGraphicsWindrose.Click
         dlgWindrose.ShowDialog()
     End Sub
+
+    Private Sub mnuStatisticsTablesGroup_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesGroup.Click
+        dlgGroup.ShowDialog()
+    End Sub
 End Class
 
