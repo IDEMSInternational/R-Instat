@@ -52,7 +52,7 @@ Public Class dlgExtremeEvents
 
     End Sub
 
-    Private Sub txtColumnNameExtreme_Leave(sender As Object, e As EventArgs) Handles txtColumNameExtremeEvent.Leave
+    Private Sub txtColumnNameExtreme_Leave(sender As Object, e As EventArgs) 
         ucrBase.clsRsyntax.AddParameter("col_names", Chr(34) & txtColumNameExtremeEvent.Text & Chr(34))
         ucrBase.clsRsyntax.AddParameter("col_names", Chr(34) & txtColumnNameEventDay.Text & Chr(34)) ' this is not quite right the col_names is a vector that takes to parameters; is of the form col_names=c(par1,par2). Not sure of a way to proceed, could use some help
     End Sub
