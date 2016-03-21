@@ -26,7 +26,7 @@ Public Class dlgStartofRains
             strScript = strScript & ", dry_days=" & nudDryLength.Value.ToString()
             strScript = strScript & ", dry_length=" & nudWithin.Value.ToString()
         End If
-        strScript = strScript & ", col_name=" & Chr(34) & txtColumnName.Text & Chr(34)
+        strScript = strScript & ", col_name=" & Chr(34) & ucrInputColumnName.Name & Chr(34)
         strScript = strScript & ",replace=TRUE)"
 
         frmMain.clsRLink.RunScript(strScript, False)

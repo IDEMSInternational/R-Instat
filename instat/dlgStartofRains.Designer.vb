@@ -36,10 +36,10 @@ Partial Class dlgStartofRains
         Me.nudDryLength = New System.Windows.Forms.NumericUpDown()
         Me.lblDays = New System.Windows.Forms.Label()
         Me.lblColumnName = New System.Windows.Forms.Label()
-        Me.txtColumnName = New System.Windows.Forms.TextBox()
         Me.nudEarliest = New System.Windows.Forms.NumericUpDown()
         Me.nudThreashold = New System.Windows.Forms.NumericUpDown()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputColumnName = New instat.ucrInputTextBox()
         CType(Me.nudNumberofRainDays, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudTotalRain, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudWithin, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -183,14 +183,6 @@ Partial Class dlgStartofRains
         Me.lblColumnName.Tag = "Column_Name"
         Me.lblColumnName.Text = "Column Name"
         '
-        'txtColumnName
-        '
-        Me.txtColumnName.Location = New System.Drawing.Point(192, 222)
-        Me.txtColumnName.Name = "txtColumnName"
-        Me.txtColumnName.Size = New System.Drawing.Size(100, 20)
-        Me.txtColumnName.TabIndex = 17
-        Me.txtColumnName.Tag = "Start_of_Rain"
-        '
         'nudEarliest
         '
         Me.nudEarliest.Location = New System.Drawing.Point(192, 68)
@@ -218,14 +210,21 @@ Partial Class dlgStartofRains
         Me.ucrBase.Size = New System.Drawing.Size(409, 52)
         Me.ucrBase.TabIndex = 0
         '
+        'ucrInputColumnName
+        '
+        Me.ucrInputColumnName.Location = New System.Drawing.Point(192, 221)
+        Me.ucrInputColumnName.Name = "ucrInputColumnName"
+        Me.ucrInputColumnName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputColumnName.TabIndex = 20
+        '
         'dlgStartofRains
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(449, 328)
+        Me.Controls.Add(Me.ucrInputColumnName)
         Me.Controls.Add(Me.nudThreashold)
         Me.Controls.Add(Me.nudEarliest)
-        Me.Controls.Add(Me.txtColumnName)
         Me.Controls.Add(Me.lblColumnName)
         Me.Controls.Add(Me.lblDays)
         Me.Controls.Add(Me.nudWithin)
@@ -272,7 +271,7 @@ Partial Class dlgStartofRains
     Friend WithEvents nudDryLength As NumericUpDown
     Friend WithEvents lblDays As Label
     Friend WithEvents lblColumnName As Label
-    Friend WithEvents txtColumnName As TextBox
     Friend WithEvents nudEarliest As NumericUpDown
     Friend WithEvents nudThreashold As NumericUpDown
+    Friend WithEvents ucrInputColumnName As ucrInputTextBox
 End Class
