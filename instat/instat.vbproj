@@ -310,6 +310,12 @@
     <Compile Include="dlgGeneralTables.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgGoodnessofFit.Designer.vb">
+      <DependentUpon>dlgGoodnessofFit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGoodnessofFit.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgGroup.Designer.vb">
       <DependentUpon>dlgGroup.vb</DependentUpon>
     </Compile>
@@ -1789,6 +1795,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGeneralTables.sw-KE.resx">
       <DependentUpon>dlgGeneralTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGoodnessofFit.fr-FR.resx">
+      <DependentUpon>dlgGoodnessofFit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGoodnessofFit.resx">
+      <DependentUpon>dlgGoodnessofFit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGoodnessofFit.sw-KE.resx">
+      <DependentUpon>dlgGoodnessofFit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGroup.fr-FR.resx">
       <DependentUpon>dlgGroup.vb</DependentUpon>
