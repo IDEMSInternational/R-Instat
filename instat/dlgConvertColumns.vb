@@ -43,8 +43,7 @@ Public Class dlgConvertColumns
         ucrSelectorDataFrameColumns.Focus()
         ucrReceiverColumnsToConvert.SetMeAsReceiver()
         rdoByLevels.Checked = True
-        grpFactorNumeric.Visible = False
-
+        rdoFactor.Checked = True
         TestOKEnabled()
     End Sub
 
@@ -60,25 +59,25 @@ Public Class dlgConvertColumns
 
     Private Sub grpForConvertToType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFactor.CheckedChanged, rdoNumeric.CheckedChanged, rdoCharacter.CheckedChanged, rdoInteger.CheckedChanged
         If rdoFactor.Checked Then
-            grpFactorNumeric.Visible = False
+            grpFactorToNumeric.Visible = False
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
             TestOKEnabled()
 
         ElseIf rdoNumeric.Checked Then
-            grpFactorNumeric.Visible = True
+            grpFactorToNumeric.Visible = True
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
             TestOKEnabled()
         ElseIf rdoCharacter.Checked Then
-            grpFactorNumeric.Visible = False
+            grpFactorToNumeric.Visible = False
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "character" & Chr(34))
             TestOKEnabled()
         ElseIf rdoInteger.Checked Then
-            grpFactorNumeric.Visible = False
+            grpFactorToNumeric.Visible = False
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "integer" & Chr(34))
             TestOKEnabled()
         Else
             ucrBase.clsRsyntax.RemoveParameter("to_type")
-            grpFactorNumeric.Visible = False
+            grpFactorToNumeric.Visible = False
 
             'the else case should never happen but is there just in case
         End If
