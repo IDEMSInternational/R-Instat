@@ -15,9 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 
-Public Class dlgMultipleRegression
+Public Class dlgGroupTables
     Private bFirstLoad As Boolean = True
-    Private Sub dlgMultipleRegression_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub dlgGroup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -48,4 +48,5 @@ Public Class dlgMultipleRegression
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
+
 End Class
