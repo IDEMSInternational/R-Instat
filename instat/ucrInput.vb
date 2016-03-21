@@ -319,5 +319,6 @@ Public Class ucrInput
         If Not bUserTyped Then
             SetDefaultName()
         End If
+        RaiseEvent NameChanged()
     End Sub
 End Class
