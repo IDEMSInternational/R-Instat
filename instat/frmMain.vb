@@ -979,5 +979,9 @@ Public Class frmMain
     Private Sub mnuStatisticsSimpleModelsGoodnessOfFit_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsGoodnessOfFit.Click
         dlgGoodnessofFit.ShowDialog()
     End Sub
+
+    Private Sub mnuStatisticsNonParametricTwoSamples_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoSamples.Click
+        dlgTwoSamples.ShowDialog()
+    End Sub
 End Class
 
