@@ -20,7 +20,7 @@ Public Class dlgMultipleRegression
     Private Sub dlgMultipleRegression_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
-            Setdefaults()
+            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -34,7 +34,7 @@ Public Class dlgMultipleRegression
 
     End Sub
 
-    Private Sub Setdefaults()
+    Private Sub SetDefaults()
 
     End Sub
 
@@ -46,7 +46,6 @@ Public Class dlgMultipleRegression
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        Setdefaults()
+        SetDefaults()
     End Sub
-
 End Class

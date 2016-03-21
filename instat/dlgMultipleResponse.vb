@@ -18,10 +18,9 @@ Public Class dlgMultipleResponse
     Private bFirstLoad As Boolean = True
 
     Private Sub dlgMultipleResponse_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         If bFirstLoad Then
             InitialiseDialog()
-            Setdefaults()
+            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -35,7 +34,7 @@ Public Class dlgMultipleResponse
 
     End Sub
 
-    Private Sub Setdefaults()
+    Private Sub SetDefaults()
 
     End Sub
 
@@ -47,7 +46,6 @@ Public Class dlgMultipleResponse
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        Setdefaults()
+        SetDefaults()
     End Sub
-
 End Class
