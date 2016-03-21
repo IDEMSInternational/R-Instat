@@ -754,10 +754,10 @@
     <Compile Include="dlgGammaDistr.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgGeneral.Designer.vb">
-      <DependentUpon>dlgGeneral.vb</DependentUpon>
+    <Compile Include="dlgGeneralANOVA.Designer.vb">
+      <DependentUpon>dlgGeneralANOVA.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgGeneral.vb">
+    <Compile Include="dlgGeneralANOVA.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgGeneralisedLinearModels.Designer.vb">
@@ -2412,14 +2412,14 @@
     <EmbeddedResource Include="dlgGammaDistr.sw-KE.resx">
       <DependentUpon>dlgGammaDistr.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgGeneral.fr-FR.resx">
-      <DependentUpon>dlgGeneral.vb</DependentUpon>
+    <EmbeddedResource Include="dlgGeneralANOVA.fr-FR.resx">
+      <DependentUpon>dlgGeneralANOVA.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgGeneral.resx">
-      <DependentUpon>dlgGeneral.vb</DependentUpon>
+    <EmbeddedResource Include="dlgGeneralANOVA.resx">
+      <DependentUpon>dlgGeneralANOVA.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgGeneral.sw-KE.resx">
-      <DependentUpon>dlgGeneral.vb</DependentUpon>
+    <EmbeddedResource Include="dlgGeneralANOVA.sw-KE.resx">
+      <DependentUpon>dlgGeneralANOVA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGeneralisedLinearModels.fr-FR.resx">
       <DependentUpon>dlgGeneralisedLinearModels.vb</DependentUpon>
