@@ -478,6 +478,12 @@
     <Compile Include="dlgViewModels.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgWindrose.Designer.vb">
+      <DependentUpon>dlgWindrose.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgWindrose.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgCanonicalCorrelation.Designer.vb">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </Compile>
@@ -2014,6 +2020,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewModels.sw-KE.resx">
       <DependentUpon>dlgViewModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWindrose.fr-FR.resx">
+      <DependentUpon>dlgWindrose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWindrose.resx">
+      <DependentUpon>dlgWindrose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWindrose.sw-KE.resx">
+      <DependentUpon>dlgWindrose.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
