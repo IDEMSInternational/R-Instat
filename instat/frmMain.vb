@@ -951,5 +951,9 @@ Public Class frmMain
     Private Sub mnuStatisticsAnalysisOfVarianceGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceGeneral.Click
         dlgGeneralANOVA.ShowDialog()
     End Sub
+
+    Private Sub mnuGraphicsWindrose_Click(sender As Object, e As EventArgs) Handles mnuGraphicsWindrose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
 End Class
 
