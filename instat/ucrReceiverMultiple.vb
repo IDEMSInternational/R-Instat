@@ -98,7 +98,7 @@ Public Class ucrReceiverMultiple
 
     End Function
 
-    Public Overrides Function GetVariables() As RFunction
+    Public Overrides Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
         'TODO sort this out
         Dim clsGetVariablesFunc As New RFunction
         Dim lstCurrDataFrames As List(Of String)
@@ -110,6 +110,14 @@ Public Class ucrReceiverMultiple
             clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
             clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34))
             clsGetVariablesFunc.AddParameter("col_names", GetVariableNames())
+            If bForceAsDataFrame Then
+                clsGetVariablesFunc.AddParameter("force_as_data_frame", "TRUE")
+            Else
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
+                End If
+            End If
+
             'TODO make this an option set in Options menu
             'clsRSyntax.SetAssignTo(MakeValidRString(strCurrDataFrame) & "_temp", clsFunction:=clsGetVariablesFunc)
         End If

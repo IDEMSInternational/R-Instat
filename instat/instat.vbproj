@@ -364,6 +364,12 @@
     <Compile Include="dlgRandomSubset.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRandomSubsets.Designer.vb">
+      <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRandomSubsets.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRenameDescriptive.Designer.vb">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
     </Compile>
@@ -434,6 +440,12 @@
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgSummaryBarOrPieChart.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTransposeColumns.Designer.vb">
+      <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTransposeColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTwoSampleNonparametricTest.Designer.vb">
@@ -562,16 +574,10 @@
     <Compile Include="sdgRestrict.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgConvertColumnsToFactors.Designer.vb">
-      <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
+    <Compile Include="dlgConvertColumns.Designer.vb">
+      <DependentUpon>dlgConvertColumns.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgConvertColumnsToFactors.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgConvertTo.Designer.vb">
-      <DependentUpon>dlgConvertTo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgConvertTo.vb">
+    <Compile Include="dlgConvertColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCorrelation.designer.vb">
@@ -1434,6 +1440,12 @@
     <Compile Include="ucrReceiverSingle.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrReorder.Designer.vb">
+      <DependentUpon>ucrReorder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReorder.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrSaveGraph.Designer.vb">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>
     </Compile>
@@ -1823,6 +1835,15 @@
     <EmbeddedResource Include="dlgRandomSubset.sw-KE.resx">
       <DependentUpon>dlgRandomSubset.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubsets.fr-FR.resx">
+      <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubsets.resx">
+      <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSubsets.sw-KE.resx">
+      <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDescriptive.fr-FR.resx">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
     </EmbeddedResource>
@@ -1930,6 +1951,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransposeColumns.fr-FR.resx">
+      <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransposeColumns.resx">
+      <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransposeColumns.sw-KE.resx">
+      <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTwoSampleNonparametricTest.fr-FR.resx">
       <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
@@ -2112,23 +2142,14 @@
     <EmbeddedResource Include="sdgRestrict.sw-KE.resx">
       <DependentUpon>sdgRestrict.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgConvertColumnsToFactors.fr-FR.resx">
-      <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
+    <EmbeddedResource Include="dlgConvertColumns.fr-FR.resx">
+      <DependentUpon>dlgConvertColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgConvertColumnsToFactors.resx">
-      <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
+    <EmbeddedResource Include="dlgConvertColumns.resx">
+      <DependentUpon>dlgConvertColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgConvertColumnsToFactors.sw-KE.resx">
-      <DependentUpon>dlgConvertColumnsToFactors.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgConvertTo.fr-FR.resx">
-      <DependentUpon>dlgConvertTo.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgConvertTo.resx">
-      <DependentUpon>dlgConvertTo.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgConvertTo.sw-KE.resx">
-      <DependentUpon>dlgConvertTo.vb</DependentUpon>
+    <EmbeddedResource Include="dlgConvertColumns.sw-KE.resx">
+      <DependentUpon>dlgConvertColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorrelation.fr-FR.resx">
       <DependentUpon>dlgCorrelation.vb</DependentUpon>
@@ -3189,7 +3210,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="My Project\Resources.sw-KE.resx" />
+    <EmbeddedResource Include="My Project\Resources.sw-KE.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgPlots.fr-FR.resx">
       <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
@@ -3360,6 +3383,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverSingle.sw-KE.resx">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReorder.fr-FR.resx">
+      <DependentUpon>ucrReorder.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReorder.resx">
+      <DependentUpon>ucrReorder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReorder.sw-KE.resx">
+      <DependentUpon>ucrReorder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSaveGraph.fr-FR.resx">
       <DependentUpon>ucrSaveGraph.vb</DependentUpon>

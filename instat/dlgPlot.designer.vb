@@ -51,10 +51,10 @@ Partial Class dlgPlot
         Me.lblYVariable.AutoSize = True
         Me.lblYVariable.Location = New System.Drawing.Point(267, 15)
         Me.lblYVariable.Name = "lblYVariable"
-        Me.lblYVariable.Size = New System.Drawing.Size(72, 13)
+        Me.lblYVariable.Size = New System.Drawing.Size(61, 13)
         Me.lblYVariable.TabIndex = 2
         Me.lblYVariable.Tag = "Y_Variable"
-        Me.lblYVariable.Text = "Y - Variable(s)"
+        Me.lblYVariable.Text = "Y - Variable"
         '
         'lblAvailable
         '
@@ -89,10 +89,10 @@ Partial Class dlgPlot
         Me.lblFactorOptional.AutoSize = True
         Me.lblFactorOptional.Location = New System.Drawing.Point(267, 116)
         Me.lblFactorOptional.Name = "lblFactorOptional"
-        Me.lblFactorOptional.Size = New System.Drawing.Size(82, 13)
+        Me.lblFactorOptional.Size = New System.Drawing.Size(85, 13)
         Me.lblFactorOptional.TabIndex = 6
         Me.lblFactorOptional.Tag = "Factor_Optional"
-        Me.lblFactorOptional.Text = "Factor(Optional)"
+        Me.lblFactorOptional.Text = "Factor (Optional)"
         '
         'chkPoints
         '
