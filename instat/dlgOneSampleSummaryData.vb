@@ -17,10 +17,9 @@ Imports instat.Translations
 Public Class dlgOneSampleSummaryData
     Private bFirstLoad As Boolean = True
     Private Sub dlgOneSampleSummaryData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         If bFirstLoad Then
             InitialiseDialog()
-            Setdefaults()
+            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -34,7 +33,7 @@ Public Class dlgOneSampleSummaryData
 
     End Sub
 
-    Private Sub Setdefaults()
+    Private Sub SetDefaults()
 
     End Sub
 
@@ -46,7 +45,6 @@ Public Class dlgOneSampleSummaryData
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        Setdefaults()
-
+        SetDefaults()
     End Sub
 End Class
