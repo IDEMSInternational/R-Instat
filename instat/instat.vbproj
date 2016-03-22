@@ -298,6 +298,12 @@
     <Compile Include="dlgDistanceText.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportDataset.Designer.vb">
+      <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportDataset.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFromLibrary.Designer.vb">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
     </Compile>
@@ -1777,6 +1783,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDistanceText.sw-KE.resx">
       <DependentUpon>dlgDistanceText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportDataset.fr-FR.resx">
+      <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportDataset.resx">
+      <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
+      <DependentUpon>dlgExportDataset.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.fr-FR.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
