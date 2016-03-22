@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgMissingData
+Partial Class dlgOneSampleSummaryData
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -27,23 +27,21 @@ Partial Class dlgMissingData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 213)
+        Me.ucrBase.Location = New System.Drawing.Point(3, 203)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 63)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
-        'dlgMissingData
+        'dlgOneSampleSummaryData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(428, 288)
+        Me.ClientSize = New System.Drawing.Size(410, 261)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "dlgMissingData"
-        Me.Tag = "Missing_Data"
-        Me.Text = "Missing Data"
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Name = "dlgOneSampleSummaryData"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "One Sample Summary Data"
         Me.ResumeLayout(False)
 
     End Sub

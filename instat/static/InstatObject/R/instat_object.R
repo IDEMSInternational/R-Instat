@@ -243,11 +243,12 @@ instat_obj$methods(set_metadata_changed = function(data_name = "", new_val) {
 } 
 )
 
-instat_obj$methods(add_column_to_data = function(data_name, col_name, col_data) {
+instat_obj$methods(add_columns_to_data = function(data_name, col_name, col_data, use_col_name_as_prefix) {
   if(missing(data_name)) stop("data_name is required")
   if(!data_name %in% names(data_objects)) stop(paste(data_name, "not found"))
   
-  data_objects[[data_name]]$add_column_to_data(col_name, col_data)
+  if(missing(use_col_name_as_prefix)) data_objects[[data_name]]$add_columns_to_data(col_name, col_data)
+  else data_objects[[data_name]]$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix)
 }
 )
 

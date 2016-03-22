@@ -210,23 +210,41 @@ data_obj$methods(get_metadata = function(label) {
 )
 
 
-data_obj$methods(add_column_to_data = function(col_name = "", col_data) {
+data_obj$methods(add_columns_to_data = function(col_name = "", col_data, use_col_name_as_prefix) {
   
   # Column name must be character
   if( ! is.character(col_name) ) stop("Column name must be of type: character")
-  
-  col_data <- unlist(col_data)
-  
-  if(col_name %in% names(data)) {
-    message(paste("A column named", col_name, "already exists. The column will be replaced in the data"))
-    .self$append_to_changes(list(Replaced_col, col_name))
+  if(is.matrix(col_data) || is.data.frame(col_data)) {
+    num_cols = ncol(col_data)
+    if( (length(col_name) != 1) && (length(col_name) != num_cols) ) stop("col_name must be a character or character vector with the same length as the number of new columns")
+  }
+  else {
+    use_col_name_as_prefix = FALSE
+    num_cols = 1
+    col_data = matrix(col_data)
   }
   
-  else .self$append_to_changes(list(Added_col, col_name))
+  if(missing(use_col_name_as_prefix)) {
+    if(num_cols > 1 && length(col_name) == num_cols) use_col_name_as_prefix = FALSE
+    else use_col_name_as_prefix = TRUE
+  }
   
-  data[[col_name]] <<- col_data
-  .self$set_data_changed(TRUE)
-  .self$set_variables_metadata_changed(TRUE)
+  for(i in 1:num_cols) {
+    curr_col = unlist(col_data[,i])
+    if(use_col_name_as_prefix) curr_col_name = .self$get_next_default_column_name(col_name)
+    else curr_col_name = col_name[[i]]
+
+    if(curr_col_name %in% names(data)) {
+      message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
+      .self$append_to_changes(list(Replaced_col, curr_col_name))
+    }
+    
+    else .self$append_to_changes(list(Added_col, curr_col_name))
+    
+    data[[curr_col_name]] <<- curr_col
+    .self$set_data_changed(TRUE)
+    .self$set_variables_metadata_changed(TRUE)
+  }
 }
 )
 
