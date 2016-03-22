@@ -22,7 +22,7 @@ Public Class dlgCanonicalCorrelationAnalysis
             SetDefaults()
             bFirstLoad = False
         Else
-            reopendialog()
+            ReopenDialog()
         End If
 
         autoTranslate(Me)
@@ -38,7 +38,7 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrReceiverXvariables.SetDataType("numeric")
     End Sub
 
-    Private Sub reopendialog()
+    Private Sub ReopenDialog()
 
     End Sub
 
@@ -56,6 +56,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     Private Sub TestOKEnabled()
         If (Not ucrReceiverYvariables.IsEmpty()) And (Not ucrReceiverXvariables.IsEmpty()) Then
             ucrBaseCCA.OKEnabled(True)
+            AssignName()
         Else
             ucrBaseCCA.OKEnabled(False)
         End If
