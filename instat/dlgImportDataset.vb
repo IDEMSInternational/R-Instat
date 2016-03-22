@@ -218,7 +218,7 @@ Public Class dlgImportDataset
         Dim strFileName As String = ""
         Dim strFileExt As String = ""
 
-        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|All Data files (*.csv,*.RDS)|*.csv;*.RDS"
+        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|Excel files (*.xls,*xlsx)|*.xls;*.xlsx|All Data files (*.csv,*.RDS)|*.csv;*.RDS"
         dlgOpen.Title = "Open Data from file"
 
         If dlgOpen.ShowDialog() = DialogResult.OK Then
@@ -241,6 +241,10 @@ Public Class dlgImportDataset
                 End If
                 SetDataName(strFileName)
                 SetFilePath(strFilePath)
+            Case ".xls"
+                'to add
+            Case ".xlsx"
+                'to add
         End Select
         ' TODO Remove LoadData sub in clsRLink once all opening is done through dialogs
     End Sub
