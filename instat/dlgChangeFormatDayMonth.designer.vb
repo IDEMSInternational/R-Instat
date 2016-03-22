@@ -28,12 +28,12 @@ Partial Class dlgChangeFormatDayMonth
         Me.lblMonthFormat = New System.Windows.Forms.Label()
         Me.lblRequiredFormat = New System.Windows.Forms.Label()
         Me.nudOption = New System.Windows.Forms.NumericUpDown()
-        Me.txtColumnName = New System.Windows.Forms.TextBox()
-        Me.txtMonthFormat = New System.Windows.Forms.TextBox()
-        Me.txtPeriods = New System.Windows.Forms.TextBox()
         Me.lblOption = New System.Windows.Forms.Label()
-        Me.txtRequiredFormat = New System.Windows.Forms.TextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputPeriod = New instat.ucrInputTextBox()
+        Me.ucrInputColumnName = New instat.ucrInputTextBox()
+        Me.ucrInputMonthFormat = New instat.ucrInputTextBox()
+        Me.ucrInputRequiredFormat = New instat.ucrInputTextBox()
         CType(Me.nudOption, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -51,40 +51,40 @@ Partial Class dlgChangeFormatDayMonth
         Me.lblPeriod.AutoSize = True
         Me.lblPeriod.Location = New System.Drawing.Point(32, 45)
         Me.lblPeriod.Name = "lblPeriod"
-        Me.lblPeriod.Size = New System.Drawing.Size(39, 13)
+        Me.lblPeriod.Size = New System.Drawing.Size(37, 13)
         Me.lblPeriod.TabIndex = 2
         Me.lblPeriod.Tag = "Period"
-        Me.lblPeriod.Text = "Label2"
+        Me.lblPeriod.Text = "Period"
         '
         'lblColumnName
         '
         Me.lblColumnName.AutoSize = True
         Me.lblColumnName.Location = New System.Drawing.Point(32, 71)
         Me.lblColumnName.Name = "lblColumnName"
-        Me.lblColumnName.Size = New System.Drawing.Size(39, 13)
+        Me.lblColumnName.Size = New System.Drawing.Size(73, 13)
         Me.lblColumnName.TabIndex = 3
         Me.lblColumnName.Tag = "Column_Name"
-        Me.lblColumnName.Text = "Label3"
+        Me.lblColumnName.Text = "Column Name"
         '
         'lblMonthFormat
         '
         Me.lblMonthFormat.AutoSize = True
         Me.lblMonthFormat.Location = New System.Drawing.Point(32, 97)
         Me.lblMonthFormat.Name = "lblMonthFormat"
-        Me.lblMonthFormat.Size = New System.Drawing.Size(39, 13)
+        Me.lblMonthFormat.Size = New System.Drawing.Size(72, 13)
         Me.lblMonthFormat.TabIndex = 4
         Me.lblMonthFormat.Tag = "Month_Format"
-        Me.lblMonthFormat.Text = "Label4"
+        Me.lblMonthFormat.Text = "Month Format"
         '
         'lblRequiredFormat
         '
         Me.lblRequiredFormat.AutoSize = True
-        Me.lblRequiredFormat.Location = New System.Drawing.Point(32, 116)
+        Me.lblRequiredFormat.Location = New System.Drawing.Point(32, 123)
         Me.lblRequiredFormat.Name = "lblRequiredFormat"
-        Me.lblRequiredFormat.Size = New System.Drawing.Size(39, 13)
+        Me.lblRequiredFormat.Size = New System.Drawing.Size(85, 13)
         Me.lblRequiredFormat.TabIndex = 5
         Me.lblRequiredFormat.Tag = "Required_Format"
-        Me.lblRequiredFormat.Text = "Label5"
+        Me.lblRequiredFormat.Text = "Required Format"
         '
         'nudOption
         '
@@ -94,65 +94,61 @@ Partial Class dlgChangeFormatDayMonth
         Me.nudOption.TabIndex = 6
         Me.nudOption.Tag = "Option"
         '
-        'txtColumnName
-        '
-        Me.txtColumnName.Location = New System.Drawing.Point(129, 64)
-        Me.txtColumnName.Name = "txtColumnName"
-        Me.txtColumnName.Size = New System.Drawing.Size(100, 20)
-        Me.txtColumnName.TabIndex = 7
-        Me.txtColumnName.Tag = ""
-        '
-        'txtMonthFormat
-        '
-        Me.txtMonthFormat.Location = New System.Drawing.Point(129, 90)
-        Me.txtMonthFormat.Name = "txtMonthFormat"
-        Me.txtMonthFormat.Size = New System.Drawing.Size(100, 20)
-        Me.txtMonthFormat.TabIndex = 8
-        Me.txtMonthFormat.Tag = ""
-        '
-        'txtPeriods
-        '
-        Me.txtPeriods.Location = New System.Drawing.Point(129, 38)
-        Me.txtPeriods.Name = "txtPeriods"
-        Me.txtPeriods.Size = New System.Drawing.Size(100, 20)
-        Me.txtPeriods.TabIndex = 9
-        Me.txtPeriods.Tag = ""
-        '
         'lblOption
         '
         Me.lblOption.AutoSize = True
         Me.lblOption.Location = New System.Drawing.Point(32, 177)
         Me.lblOption.Name = "lblOption"
-        Me.lblOption.Size = New System.Drawing.Size(39, 13)
+        Me.lblOption.Size = New System.Drawing.Size(38, 13)
         Me.lblOption.TabIndex = 10
         Me.lblOption.Tag = "Option"
-        Me.lblOption.Text = "Label6"
-        '
-        'txtRequiredFormat
-        '
-        Me.txtRequiredFormat.Location = New System.Drawing.Point(129, 109)
-        Me.txtRequiredFormat.Name = "txtRequiredFormat"
-        Me.txtRequiredFormat.Size = New System.Drawing.Size(100, 20)
-        Me.txtRequiredFormat.TabIndex = 11
-        Me.txtRequiredFormat.Tag = ""
+        Me.lblOption.Text = "Option"
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(7, 227)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 201)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrInputPeriod
+        '
+        Me.ucrInputPeriod.Location = New System.Drawing.Point(129, 37)
+        Me.ucrInputPeriod.Name = "ucrInputPeriod"
+        Me.ucrInputPeriod.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputPeriod.TabIndex = 12
+        '
+        'ucrInputColumnName
+        '
+        Me.ucrInputColumnName.Location = New System.Drawing.Point(129, 63)
+        Me.ucrInputColumnName.Name = "ucrInputColumnName"
+        Me.ucrInputColumnName.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputColumnName.TabIndex = 13
+        '
+        'ucrInputMonthFormat
+        '
+        Me.ucrInputMonthFormat.Location = New System.Drawing.Point(129, 89)
+        Me.ucrInputMonthFormat.Name = "ucrInputMonthFormat"
+        Me.ucrInputMonthFormat.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputMonthFormat.TabIndex = 14
+        '
+        'ucrInputRequiredFormat
+        '
+        Me.ucrInputRequiredFormat.Location = New System.Drawing.Point(129, 115)
+        Me.ucrInputRequiredFormat.Name = "ucrInputRequiredFormat"
+        Me.ucrInputRequiredFormat.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputRequiredFormat.TabIndex = 15
         '
         'dlgChangeFormatDayMonth
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 262)
-        Me.Controls.Add(Me.txtRequiredFormat)
+        Me.ClientSize = New System.Drawing.Size(429, 263)
+        Me.Controls.Add(Me.ucrInputRequiredFormat)
+        Me.Controls.Add(Me.ucrInputMonthFormat)
+        Me.Controls.Add(Me.ucrInputColumnName)
+        Me.Controls.Add(Me.ucrInputPeriod)
         Me.Controls.Add(Me.lblOption)
-        Me.Controls.Add(Me.txtPeriods)
-        Me.Controls.Add(Me.txtMonthFormat)
-        Me.Controls.Add(Me.txtColumnName)
         Me.Controls.Add(Me.nudOption)
         Me.Controls.Add(Me.lblRequiredFormat)
         Me.Controls.Add(Me.lblMonthFormat)
@@ -179,9 +175,9 @@ Partial Class dlgChangeFormatDayMonth
     Friend WithEvents lblMonthFormat As Label
     Friend WithEvents lblRequiredFormat As Label
     Friend WithEvents nudOption As NumericUpDown
-    Friend WithEvents txtColumnName As TextBox
-    Friend WithEvents txtMonthFormat As TextBox
-    Friend WithEvents txtPeriods As TextBox
     Friend WithEvents lblOption As Label
-    Friend WithEvents txtRequiredFormat As TextBox
+    Friend WithEvents ucrInputPeriod As ucrInputTextBox
+    Friend WithEvents ucrInputColumnName As ucrInputTextBox
+    Friend WithEvents ucrInputMonthFormat As ucrInputTextBox
+    Friend WithEvents ucrInputRequiredFormat As ucrInputTextBox
 End Class
