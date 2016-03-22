@@ -651,7 +651,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
-        'For discussion
+        dlgExportDataset.ShowDialog()
     End Sub
 
     Private Sub mnuManageDataFileSheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileSheetMetadata.Click
@@ -817,7 +817,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageSheetReorder_Click(sender As Object, e As EventArgs) Handles mnuManageSheetReorder.Click
-        dlgReorderSheet.ShowDialog()
+        dlgReorderColumns.ShowDialog()
     End Sub
 
     Private Sub mnuManageFactorReferenceLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorReferenceLevels.Click
