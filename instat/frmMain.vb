@@ -947,5 +947,41 @@ Public Class frmMain
     Private Sub mnuManageFactorDummyVariable_Click(sender As Object, e As EventArgs) Handles mnuManageFactorDummyVariable.Click
         dlgDummyVariables.ShowDialog()
     End Sub
+
+    Private Sub mnuStatisticsAnalysisOfVarianceGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceGeneral.Click
+        dlgGeneralANOVA.ShowDialog()
+    End Sub
+
+    Private Sub mnuGraphicsWindrose_Click(sender As Object, e As EventArgs) Handles mnuGraphicsWindrose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatisticsTablesGroup_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesGroup.Click
+        dlgGroupTables.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatisticsTablesGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesGeneral.Click
+        dlgGeneralTables.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatisticsTablesMultipleResponse_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesMultipleResponse.Click
+        dlgMultipleResponse.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatisticsSimpleModelsOneSampleSummaryData_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsOneSampleSummaryData.Click
+        dlgOneSampleSummaryData.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatisticsSimpleModelsTwoSamplesSummaryData_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsTwoSamplesSummaryData.Click
+        dlgTwoSampleSummaryData.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatisticsSimpleModelsGoodnessOfFit_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsGoodnessOfFit.Click
+        dlgGoodnessofFit.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatisticsNonParametricTwoSamples_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoSamples.Click
+        dlgTwoSamples.ShowDialog()
+    End Sub
 End Class
 

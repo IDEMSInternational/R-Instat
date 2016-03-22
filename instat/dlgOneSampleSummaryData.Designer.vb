@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgGeneral
+Partial Class dlgOneSampleSummaryData
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -27,21 +27,21 @@ Partial Class dlgGeneral
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 278)
+        Me.ucrBase.Location = New System.Drawing.Point(3, 203)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 51)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
-        'dlgGeneral
+        'dlgOneSampleSummaryData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(428, 332)
+        Me.ClientSize = New System.Drawing.Size(410, 261)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgGeneral"
+        Me.Name = "dlgOneSampleSummaryData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "General"
+        Me.Text = "One Sample Summary Data"
         Me.ResumeLayout(False)
 
     End Sub
