@@ -15,14 +15,36 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.Imports instat.Translations
 Imports instat.Translations
 Public Class dlgExtremeEvents
-    Private Sub ucrBase_clickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+    Public bFirstLoad As Boolean = True
+
+    Private Sub dlgExtremeEvents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+
+        autoTranslate(Me)
+
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        TestOKEnabled()
+
+
+    End Sub
+    Private Sub TestOKEnabled()
+
+    End Sub
+
+    Private Sub InitialiseDialog()
         Dim strScript As String
+        ucrBase.clsRsyntax.SetFunction("climate_obj$()")
         strScript = "climate_obj$extreme_events(data_list=list()"
         strScript = strScript & ", start_day=" & nudStartDay.Value.ToString()
         strScript = strScript & ", end_day=" & nudEndDay.Value.ToString()
         strScript = strScript & ", total_days=" & nudTotalDays.Value.ToString()
-        strScript = strScript & ", col_names=c(" & Chr(34) & txtColumNameExtremeEvent.Text.ToString() & Chr(34)
-        strScript = strScript & "," & Chr(34) & txtColumnNameEventDay.Text.ToString() & Chr(34) & ")"
+        strScript = strScript & ", col_names=c(" & Chr(34) & ucrInputColumnNameExtremeEvents.Text.ToString() & Chr(34)
+        strScript = strScript & "," & Chr(34) & ucrInputColumnNameEventDay.Text.ToString() & Chr(34) & ")"
         strScript = strScript & ", val_threshold=" & chkThresholdValue.Checked.ToString().ToUpper()
         strScript = strScript & ", na.rm=" & chkRemoveNA.Checked.ToString().ToUpper()
 
@@ -37,6 +59,13 @@ Public Class dlgExtremeEvents
         '        frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
         Me.Hide()
     End Sub
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
 
     Private Sub chkDrySpell_CheckedChanged(sender As Object, e As EventArgs) Handles chkThresholdValue.CheckedChanged
         UpdateVisible()
@@ -44,30 +73,24 @@ Public Class dlgExtremeEvents
     Private Sub UpdateVisible()
         lblThreshold.Visible = chkThresholdValue.Checked
     End Sub
-    Private Sub dlgExtremeEvents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("climate_obj$()")
-        ucrBase.clsRsyntax.iCallType = 0
 
+    Private Sub ucrInputColumnNames_Leave(sender As Object, e As EventArgs) Handles ucrInputColumnNameEventDay.Leave, ucrInputColumnNameExtremeEvents.Leave
+        ucrBase.clsRsyntax.AddParameter("col_names", Chr(34) & ucrInputColumnNameExtremeEvents.Text & Chr(34))
+        ucrBase.clsRsyntax.AddParameter("col_names", Chr(34) & ucrInputColumnNameEventDay.Text & Chr(34)) ' this is not quite right the col_names is a vector that takes to parameters; is of the form col_names=c(par1,par2). Not sure of a way to proceed, could use some help
     End Sub
-
-    Private Sub txtColumnNameExtreme_Leave(sender As Object, e As EventArgs) Handles txtColumNameExtremeEvent.Leave
-        ucrBase.clsRsyntax.AddParameter("col_names", Chr(34) & txtColumNameExtremeEvent.Text & Chr(34))
-        ucrBase.clsRsyntax.AddParameter("col_names", Chr(34) & txtColumnNameEventDay.Text & Chr(34)) ' this is not quite right the col_names is a vector that takes to parameters; is of the form col_names=c(par1,par2). Not sure of a way to proceed, could use some help
-    End Sub
-    Private Sub nudStartDay_Leave(sender As Object, e As EventArgs) Handles nudStartDay.Leave
+    Private Sub nudStartDay_ValueChanged(sender As Object, e As EventArgs) Handles nudStartDay.ValueChanged
         ucrBase.clsRsyntax.AddParameter("start_day", nudStartDay.Value.ToString())
     End Sub
 
-    Private Sub nudEndDay_Leave(sender As Object, e As EventArgs) Handles nudEndDay.Leave
+    Private Sub nudEndDay_ValueChanged(sender As Object, e As EventArgs) Handles nudEndDay.ValueChanged
         ucrBase.clsRsyntax.AddParameter("end_day", nudEndDay.Value.ToString())
     End Sub
 
-    Private Sub nudTotalDays_Leave(sender As Object, e As EventArgs) Handles nudTotalDays.Leave
+    Private Sub nudTotalDays_ValueChanged(sender As Object, e As EventArgs) Handles nudTotalDays.ValueChanged
         ucrBase.clsRsyntax.AddParameter("total_days", nudTotalDays.Value.ToString())
     End Sub
-    Private Sub chkThresholdValue_Leave(sender As Object, e As EventArgs) Handles chkThresholdValue.Leave
+    Private Sub chkThresholdValue_CheckedChanged(sender As Object, e As EventArgs) Handles chkThresholdValue.CheckedChanged
         ucrBase.clsRsyntax.AddParameter("val_threshold", chkThresholdValue.Checked.ToString().ToUpper())
     End Sub
 
