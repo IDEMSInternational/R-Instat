@@ -41,8 +41,8 @@ Partial Class dlgUnstackDailyData
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgUnstackDailyData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Unstack_Daily_Data"
-        Me.Text = "Unstack Daily Data"
+        Me.Tag = "unstack_Daily_Data"
+        Me.Text = "unstack Daily Data"
         Me.ResumeLayout(False)
 
     End Sub

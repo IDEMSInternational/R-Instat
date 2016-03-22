@@ -26,15 +26,15 @@ Partial Class dlgOutputforCDT
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblFilename = New System.Windows.Forms.Label()
         Me.lblInterestedVariables = New System.Windows.Forms.Label()
-        Me.txtFilename = New System.Windows.Forms.TextBox()
-        Me.txtInterestedVariables = New System.Windows.Forms.TextBox()
+        Me.ucrInputFileName = New instat.ucrInputTextBox()
+        Me.ucrInputInterestedVariables = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(24, 229)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 83)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 0
         '
         'Label1
@@ -49,50 +49,49 @@ Partial Class dlgOutputforCDT
         'lblFilename
         '
         Me.lblFilename.AutoSize = True
-        Me.lblFilename.Location = New System.Drawing.Point(21, 64)
+        Me.lblFilename.Location = New System.Drawing.Point(21, 37)
         Me.lblFilename.Name = "lblFilename"
-        Me.lblFilename.Size = New System.Drawing.Size(39, 13)
+        Me.lblFilename.Size = New System.Drawing.Size(54, 13)
         Me.lblFilename.TabIndex = 2
         Me.lblFilename.Tag = "Filename"
-        Me.lblFilename.Text = "Label2"
+        Me.lblFilename.Text = "File Name"
         '
         'lblInterestedVariables
         '
         Me.lblInterestedVariables.AutoSize = True
-        Me.lblInterestedVariables.Location = New System.Drawing.Point(21, 140)
+        Me.lblInterestedVariables.Location = New System.Drawing.Point(12, 64)
         Me.lblInterestedVariables.Name = "lblInterestedVariables"
-        Me.lblInterestedVariables.Size = New System.Drawing.Size(39, 13)
+        Me.lblInterestedVariables.Size = New System.Drawing.Size(100, 13)
         Me.lblInterestedVariables.TabIndex = 3
         Me.lblInterestedVariables.Tag = "Interested_Variables"
-        Me.lblInterestedVariables.Text = "Label3"
+        Me.lblInterestedVariables.Text = "Interested Variables"
         '
-        'txtFilename
+        'ucrInputFileName
         '
-        Me.txtFilename.Location = New System.Drawing.Point(125, 61)
-        Me.txtFilename.Name = "txtFilename"
-        Me.txtFilename.Size = New System.Drawing.Size(197, 20)
-        Me.txtFilename.TabIndex = 4
+        Me.ucrInputFileName.Location = New System.Drawing.Point(133, 25)
+        Me.ucrInputFileName.Name = "ucrInputFileName"
+        Me.ucrInputFileName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputFileName.TabIndex = 6
         '
-        'txtInterestedVariables
+        'ucrInputInterestedVariables
         '
-        Me.txtInterestedVariables.Location = New System.Drawing.Point(125, 133)
-        Me.txtInterestedVariables.Name = "txtInterestedVariables"
-        Me.txtInterestedVariables.Size = New System.Drawing.Size(197, 20)
-        Me.txtInterestedVariables.TabIndex = 5
-        Me.txtInterestedVariables.Tag = ""
+        Me.ucrInputInterestedVariables.Location = New System.Drawing.Point(133, 56)
+        Me.ucrInputInterestedVariables.Name = "ucrInputInterestedVariables"
+        Me.ucrInputInterestedVariables.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputInterestedVariables.TabIndex = 6
         '
         'dlgOutputforCDT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(456, 262)
-        Me.Controls.Add(Me.txtInterestedVariables)
-        Me.Controls.Add(Me.txtFilename)
+        Me.ClientSize = New System.Drawing.Size(456, 147)
+        Me.Controls.Add(Me.ucrInputInterestedVariables)
+        Me.Controls.Add(Me.ucrInputFileName)
         Me.Controls.Add(Me.lblInterestedVariables)
         Me.Controls.Add(Me.lblFilename)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgOutputforCDT"
@@ -108,6 +107,6 @@ Partial Class dlgOutputforCDT
     Friend WithEvents Label1 As Label
     Friend WithEvents lblFilename As Label
     Friend WithEvents lblInterestedVariables As Label
-    Friend WithEvents txtFilename As TextBox
-    Friend WithEvents txtInterestedVariables As TextBox
+    Friend WithEvents ucrInputFileName As ucrInputTextBox
+    Friend WithEvents ucrInputInterestedVariables As ucrInputTextBox
 End Class
