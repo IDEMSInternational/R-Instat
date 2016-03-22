@@ -29,13 +29,47 @@ Public Class dlgCombineText
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrReceiverCombineText.Selector = ucrSelectorForCombineText
+        ucrReceiverCombineText.SetMeAsReceiver()
+        ucrBase.clsRsyntax.SetFunction("stringr::str_c")
+        ucrInputColumnInto.SetPrefix("combine")
+        ucrReceiverCombineText.SetDataType("factor")
+        ucrInputColumnInto.SetItemsTypeAsColumns()
+        ucrInputColumnInto.SetDefaultTypeAsColumn()
+        ucrInputColumnInto.SetDataFrameSelector(ucrSelectorForCombineText.ucrAvailableDataFrames)
+        ucrBase.clsRsyntax.AddParameter("collapse", "NULL")
+        ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & Chr(34))
 
     End Sub
     Private Sub SetDefaults()
-
+        ucrSelectorForCombineText.Reset()
+        ucrSelectorForCombineText.Focus()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
+
+    Private Sub cboSeperator_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSeperator.SelectedIndexChanged
+        Select Case cboSeperator.SelectedItem
+            Case "null"
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "" & Chr(34))
+            Case "Hyphen"
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "-" & Chr(34))
+            Case "Underscore"
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "_" & Chr(34))
+            Case "period"
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "." & Chr(34))
+        End Select
+    End Sub
+
+    Private Sub ucrInputColumnInto_NameChanged() Handles ucrInputColumnInto.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColumnInto.GetText, strTempDataframe:=ucrSelectorForCombineText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColumnInto.GetText)
+    End Sub
+    Private Sub ucrReceiverCombineText_SelectionChanged() Handles ucrReceiverCombineText.SelectionChanged
+
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverCombineText.GetVariables())
+
+    End Sub
+
 End Class
