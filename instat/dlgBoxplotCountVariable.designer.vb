@@ -32,17 +32,17 @@ Partial Class dlgBoxplotCountVariable
         Me.lblTimeperiod = New System.Windows.Forms.Label()
         Me.lblWhiskLineType = New System.Windows.Forms.Label()
         Me.nudWhiskLineType = New System.Windows.Forms.NumericUpDown()
-        Me.txtFillColour = New System.Windows.Forms.TextBox()
-        Me.txtTimeperiod = New System.Windows.Forms.TextBox()
-        Me.txtTitle = New System.Windows.Forms.TextBox()
-        Me.txtVariableLabel = New System.Windows.Forms.TextBox()
-        Me.txtWhiskerColour = New System.Windows.Forms.TextBox()
+        Me.ucrInputTitle = New instat.ucrInputTextBox()
+        Me.ucrInputVariable = New instat.ucrInputTextBox()
+        Me.ucrInputColour = New instat.ucrInputTextBox()
+        Me.ucrInputTimePeriod = New instat.ucrInputTextBox()
+        Me.ucrInputWhiskerColour = New instat.ucrInputTextBox()
         CType(Me.nudWhiskLineType, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 244)
+        Me.ucrBase.Location = New System.Drawing.Point(3, 188)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 55)
         Me.ucrBase.TabIndex = 0
@@ -50,12 +50,12 @@ Partial Class dlgBoxplotCountVariable
         'chkVarwidth
         '
         Me.chkVarwidth.AutoSize = True
-        Me.chkVarwidth.Location = New System.Drawing.Point(313, 193)
+        Me.chkVarwidth.Location = New System.Drawing.Point(198, 162)
         Me.chkVarwidth.Name = "chkVarwidth"
-        Me.chkVarwidth.Size = New System.Drawing.Size(81, 17)
+        Me.chkVarwidth.Size = New System.Drawing.Size(95, 17)
         Me.chkVarwidth.TabIndex = 1
-        Me.chkVarwidth.Tag = "Varwidth"
-        Me.chkVarwidth.Text = "CheckBox1"
+        Me.chkVarwidth.Tag = "Variable_Width"
+        Me.chkVarwidth.Text = "Variable Width"
         Me.chkVarwidth.UseVisualStyleBackColor = True
         '
         'Label1
@@ -70,113 +70,115 @@ Partial Class dlgBoxplotCountVariable
         'lblTitle
         '
         Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(16, 62)
+        Me.lblTitle.Location = New System.Drawing.Point(16, 34)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(39, 13)
+        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
         Me.lblTitle.TabIndex = 3
-        Me.lblTitle.Text = "Label2"
+        Me.lblTitle.Tag = "Title"
+        Me.lblTitle.Text = "Title"
         '
         'lblVariableLabel
         '
         Me.lblVariableLabel.AutoSize = True
-        Me.lblVariableLabel.Location = New System.Drawing.Point(16, 88)
+        Me.lblVariableLabel.Location = New System.Drawing.Point(16, 62)
         Me.lblVariableLabel.Name = "lblVariableLabel"
-        Me.lblVariableLabel.Size = New System.Drawing.Size(39, 13)
+        Me.lblVariableLabel.Size = New System.Drawing.Size(45, 13)
         Me.lblVariableLabel.TabIndex = 4
         Me.lblVariableLabel.Tag = "Variable_Label"
-        Me.lblVariableLabel.Text = "Label3"
+        Me.lblVariableLabel.Text = "Variable"
         '
         'lblWhisker_Colour
         '
         Me.lblWhisker_Colour.AutoSize = True
-        Me.lblWhisker_Colour.Location = New System.Drawing.Point(242, 123)
+        Me.lblWhisker_Colour.Location = New System.Drawing.Point(16, 143)
         Me.lblWhisker_Colour.Name = "lblWhisker_Colour"
-        Me.lblWhisker_Colour.Size = New System.Drawing.Size(39, 13)
+        Me.lblWhisker_Colour.Size = New System.Drawing.Size(79, 13)
         Me.lblWhisker_Colour.TabIndex = 5
-        Me.lblWhisker_Colour.Text = "Label4"
+        Me.lblWhisker_Colour.Tag = "Whisker_Colour"
+        Me.lblWhisker_Colour.Text = "Whisker Colour"
         '
         'lblFillColour
         '
         Me.lblFillColour.AutoSize = True
-        Me.lblFillColour.Location = New System.Drawing.Point(16, 123)
+        Me.lblFillColour.Location = New System.Drawing.Point(16, 90)
         Me.lblFillColour.Name = "lblFillColour"
-        Me.lblFillColour.Size = New System.Drawing.Size(39, 13)
+        Me.lblFillColour.Size = New System.Drawing.Size(37, 13)
         Me.lblFillColour.TabIndex = 6
-        Me.lblFillColour.Tag = "Fill_Colour"
-        Me.lblFillColour.Text = "Label5"
+        Me.lblFillColour.Tag = "Colour"
+        Me.lblFillColour.Text = "Colour"
         '
         'lblTimeperiod
         '
         Me.lblTimeperiod.AutoSize = True
-        Me.lblTimeperiod.Location = New System.Drawing.Point(16, 148)
+        Me.lblTimeperiod.Location = New System.Drawing.Point(16, 118)
         Me.lblTimeperiod.Name = "lblTimeperiod"
-        Me.lblTimeperiod.Size = New System.Drawing.Size(39, 13)
+        Me.lblTimeperiod.Size = New System.Drawing.Size(63, 13)
         Me.lblTimeperiod.TabIndex = 7
         Me.lblTimeperiod.Tag = "Time_period"
-        Me.lblTimeperiod.Text = "Label6"
+        Me.lblTimeperiod.Text = "Time Period"
         '
         'lblWhiskLineType
         '
         Me.lblWhiskLineType.AutoSize = True
-        Me.lblWhiskLineType.Location = New System.Drawing.Point(16, 194)
+        Me.lblWhiskLineType.Location = New System.Drawing.Point(14, 169)
         Me.lblWhiskLineType.Name = "lblWhiskLineType"
-        Me.lblWhiskLineType.Size = New System.Drawing.Size(39, 13)
+        Me.lblWhiskLineType.Size = New System.Drawing.Size(87, 13)
         Me.lblWhiskLineType.TabIndex = 8
-        Me.lblWhiskLineType.Tag = "Whisklty"
-        Me.lblWhiskLineType.Text = "Label7"
+        Me.lblWhiskLineType.Tag = "Whisk_Line_Type"
+        Me.lblWhiskLineType.Text = "Whisk Line Type"
         '
         'nudWhiskLineType
         '
-        Me.nudWhiskLineType.Location = New System.Drawing.Point(107, 187)
+        Me.nudWhiskLineType.Location = New System.Drawing.Point(101, 162)
         Me.nudWhiskLineType.Name = "nudWhiskLineType"
         Me.nudWhiskLineType.Size = New System.Drawing.Size(58, 20)
         Me.nudWhiskLineType.TabIndex = 9
         '
-        'txtFillColour
+        'ucrInputTitle
         '
-        Me.txtFillColour.Location = New System.Drawing.Point(107, 116)
-        Me.txtFillColour.Name = "txtFillColour"
-        Me.txtFillColour.Size = New System.Drawing.Size(100, 20)
-        Me.txtFillColour.TabIndex = 11
+        Me.ucrInputTitle.Location = New System.Drawing.Point(101, 25)
+        Me.ucrInputTitle.Name = "ucrInputTitle"
+        Me.ucrInputTitle.Size = New System.Drawing.Size(111, 21)
+        Me.ucrInputTitle.TabIndex = 10
         '
-        'txtTimeperiod
+        'ucrInputVariable
         '
-        Me.txtTimeperiod.Location = New System.Drawing.Point(107, 142)
-        Me.txtTimeperiod.Name = "txtTimeperiod"
-        Me.txtTimeperiod.Size = New System.Drawing.Size(100, 20)
-        Me.txtTimeperiod.TabIndex = 12
+        Me.ucrInputVariable.Location = New System.Drawing.Point(101, 54)
+        Me.ucrInputVariable.Name = "ucrInputVariable"
+        Me.ucrInputVariable.Size = New System.Drawing.Size(111, 21)
+        Me.ucrInputVariable.TabIndex = 11
         '
-        'txtTitle
+        'ucrInputColour
         '
-        Me.txtTitle.Location = New System.Drawing.Point(107, 57)
-        Me.txtTitle.Name = "txtTitle"
-        Me.txtTitle.Size = New System.Drawing.Size(100, 20)
-        Me.txtTitle.TabIndex = 13
+        Me.ucrInputColour.Location = New System.Drawing.Point(101, 82)
+        Me.ucrInputColour.Name = "ucrInputColour"
+        Me.ucrInputColour.Size = New System.Drawing.Size(111, 21)
+        Me.ucrInputColour.TabIndex = 12
         '
-        'txtVariableLabel
+        'ucrInputTimePeriod
         '
-        Me.txtVariableLabel.Location = New System.Drawing.Point(107, 84)
-        Me.txtVariableLabel.Name = "txtVariableLabel"
-        Me.txtVariableLabel.Size = New System.Drawing.Size(100, 20)
-        Me.txtVariableLabel.TabIndex = 15
+        Me.ucrInputTimePeriod.Location = New System.Drawing.Point(101, 109)
+        Me.ucrInputTimePeriod.Name = "ucrInputTimePeriod"
+        Me.ucrInputTimePeriod.Size = New System.Drawing.Size(111, 21)
+        Me.ucrInputTimePeriod.TabIndex = 13
         '
-        'txtWhiskerColour
+        'ucrInputWhiskerColour
         '
-        Me.txtWhiskerColour.Location = New System.Drawing.Point(313, 123)
-        Me.txtWhiskerColour.Name = "txtWhiskerColour"
-        Me.txtWhiskerColour.Size = New System.Drawing.Size(100, 20)
-        Me.txtWhiskerColour.TabIndex = 16
+        Me.ucrInputWhiskerColour.Location = New System.Drawing.Point(101, 135)
+        Me.ucrInputWhiskerColour.Name = "ucrInputWhiskerColour"
+        Me.ucrInputWhiskerColour.Size = New System.Drawing.Size(111, 21)
+        Me.ucrInputWhiskerColour.TabIndex = 14
         '
         'dlgBoxplotCountVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(441, 297)
-        Me.Controls.Add(Me.txtWhiskerColour)
-        Me.Controls.Add(Me.txtVariableLabel)
-        Me.Controls.Add(Me.txtTitle)
-        Me.Controls.Add(Me.txtTimeperiod)
-        Me.Controls.Add(Me.txtFillColour)
+        Me.ClientSize = New System.Drawing.Size(411, 252)
+        Me.Controls.Add(Me.ucrInputWhiskerColour)
+        Me.Controls.Add(Me.ucrInputTimePeriod)
+        Me.Controls.Add(Me.ucrInputColour)
+        Me.Controls.Add(Me.ucrInputVariable)
+        Me.Controls.Add(Me.ucrInputTitle)
         Me.Controls.Add(Me.nudWhiskLineType)
         Me.Controls.Add(Me.lblWhiskLineType)
         Me.Controls.Add(Me.lblTimeperiod)
@@ -191,6 +193,7 @@ Partial Class dlgBoxplotCountVariable
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgBoxplotCountVariable"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Boxplot_Count_Variable"
         Me.Text = "Boxplot Count Variable"
         CType(Me.nudWhiskLineType, System.ComponentModel.ISupportInitialize).EndInit()
@@ -209,9 +212,9 @@ Partial Class dlgBoxplotCountVariable
     Friend WithEvents lblTimeperiod As Label
     Friend WithEvents lblWhiskLineType As Label
     Friend WithEvents nudWhiskLineType As NumericUpDown
-    Friend WithEvents txtFillColour As TextBox
-    Friend WithEvents txtTimeperiod As TextBox
-    Friend WithEvents txtTitle As TextBox
-    Friend WithEvents txtVariableLabel As TextBox
-    Friend WithEvents txtWhiskerColour As TextBox
+    Friend WithEvents ucrInputTitle As ucrInputTextBox
+    Friend WithEvents ucrInputVariable As ucrInputTextBox
+    Friend WithEvents ucrInputColour As ucrInputTextBox
+    Friend WithEvents ucrInputTimePeriod As ucrInputTextBox
+    Friend WithEvents ucrInputWhiskerColour As ucrInputTextBox
 End Class

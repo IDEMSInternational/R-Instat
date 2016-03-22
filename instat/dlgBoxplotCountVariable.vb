@@ -30,28 +30,28 @@ Public Class dlgBoxplotCountVariable
 
     End Sub
 
-    Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
-        ucrBase.clsRsyntax.AddParameter("title", Chr(34) & txtTitle.Text.ToString() & Chr(34))
+    Private Sub txtTitle_Leave(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrInputTitle.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtVariableLabel_Leave(sender As Object, e As EventArgs) Handles txtVariableLabel.Leave
-        ucrBase.clsRsyntax.AddParameter("var_label", Chr(34) & txtVariableLabel.Text.ToString() & Chr(34))
+    Private Sub txtVariableLabel_Leave(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("var_label", Chr(34) & ucrInputVariable.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtFillColour_Leave(sender As Object, e As EventArgs) Handles txtFillColour.Leave
-        ucrBase.clsRsyntax.AddParameter("fill_col", Chr(34) & txtFillColour.Text.ToString() & Chr(34))
+    Private Sub txtFillColour_Leave(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("fill_col", Chr(34) & ucrInputColour.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtWhiskerColour_Leave(sender As Object, e As EventArgs) Handles txtWhiskerColour.Leave
-        ucrBase.clsRsyntax.AddParameter("whisker_col", Chr(34) & txtWhiskerColour.Text.ToString() & Chr(34))
+    Private Sub txtWhiskerColour_Leave(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("whisker_col", Chr(34) & ucrInputWhiskerColour.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtTimeperiod_Leave(sender As Object, e As EventArgs) Handles txtTimeperiod.Leave
-        ucrBase.clsRsyntax.AddParameter("time_period", Chr(34) & txtTimeperiod.Text.ToString() & Chr(34))
+    Private Sub txtTimeperiod_Leave(sender As Object, e As EventArgs)
+        ucrBase.clsRsyntax.AddParameter("time_period", Chr(34) & ucrInputTimePeriod.Text.ToString() & Chr(34))
 
     End Sub
 
