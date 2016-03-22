@@ -64,6 +64,7 @@ Partial Class dlgCombineText
         'cboSeperator
         '
         Me.cboSeperator.FormattingEnabled = True
+        Me.cboSeperator.Items.AddRange(New Object() {"NULL", "Hyphen", "Whitespace", "Underscore", "Period"})
         Me.cboSeperator.Location = New System.Drawing.Point(261, 157)
         Me.cboSeperator.Name = "cboSeperator"
         Me.cboSeperator.Size = New System.Drawing.Size(121, 21)
