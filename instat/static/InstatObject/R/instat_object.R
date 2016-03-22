@@ -243,19 +243,20 @@ instat_obj$methods(set_metadata_changed = function(data_name = "", new_val) {
 } 
 )
 
-instat_obj$methods(add_column_to_data = function(data_name, col_name, col_data) {
+instat_obj$methods(add_columns_to_data = function(data_name, col_name, col_data, use_col_name_as_prefix) {
   if(missing(data_name)) stop("data_name is required")
   if(!data_name %in% names(data_objects)) stop(paste(data_name, "not found"))
   
-  data_objects[[data_name]]$add_column_to_data(col_name, col_data)
+  if(missing(use_col_name_as_prefix)) data_objects[[data_name]]$add_columns_to_data(col_name, col_data)
+  else data_objects[[data_name]]$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix)
 }
 )
 
-instat_obj$methods(get_columns_from_data = function(data_name, col_names) {
+instat_obj$methods(get_columns_from_data = function(data_name, col_names, force_as_data_frame=FALSE) {
   if(missing(data_name)) stop("data_name is required")
   if(!data_name %in% names(data_objects)) stop(paste(data_name, "not found"))
   
-  data_objects[[data_name]]$get_columns_from_data(col_names)
+  data_objects[[data_name]]$get_columns_from_data(col_names, force_as_data_frame=force_as_data_frame)
 }
 )
 
@@ -351,11 +352,19 @@ instat_obj$methods(insert_column_in_data = function(data_name, col_data =c(), st
 }
 )
 
-instat_obj$methods(move_column_in_data = function(data_name, col_name, col_number){
+# instat_obj$methods(move_columns_in_data = function(data_name, col_names = "", col_number){
+#   if(!is.character(data_name)) stop("data_name must be of type character")
+#   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+#   
+#   data_objects[[data_name]]$move_columns_in_data(col_names = col_names, col_number = col_number)
+# }
+# )
+
+instat_obj$methods(order_columns_in_data = function(data_name, col_order){
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  data_objects[[data_name]]$move_column_in_data(col_name = col_name, col_number = col_number)
+  data_objects[[data_name]]$order_columns_in_data(col_order = col_order)
 }
 )
 
@@ -441,5 +450,31 @@ instat_obj$methods(append_to_dataframe_metadata = function(data_name, property, 
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
   data_objects[[data_name]]$append_to_metadata(property, new_val)
+} 
+)
+
+
+instat_obj$methods(order_dataframes = function(data_frames_order) {
+  if(length(data_frames_order) != length(names(data_objects))) stop("number data frames to order should be equal to number of dataframes in the object")
+  for(name in names(data_objects)){
+    if(!(name %in% data_frames_order)){
+      stop(name, "is missing in data frames to order")
+    }
+  }
+  new_data_objects = list()
+  for(i in 1:length(names(data_objects))){
+     new_data_objects[[i]] = data_objects[[data_frames_order[i]]]
+  }
+  names(new_data_objects) <- data_frames_order
+  data_objects <<- new_data_objects
+  data_objects_changed <<- TRUE
+} 
+)
+
+instat_obj$methods(copy_columns = function(data_name, col_names = "") {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$copy_columns(col_names = col_names)
 } 
 )

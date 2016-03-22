@@ -44,22 +44,27 @@ Public Class ucrInput
 
     Public Sub SetDefaultTypeAsColumn()
         strDefaultType = "Column"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDefaultTypeAsModel()
         strDefaultType = "Model"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDefaultTypeAsDataFrame()
         strDefaultType = "Data Frame"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDefaultTypeAsGraph()
         strDefaultType = "Graph"
+        SetDefaultName()
     End Sub
 
     Public Sub SetValidationTypeAsRVariable()
         strValidationType = "RVariable"
+        SetDefaultName()
     End Sub
 
     Public Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
@@ -304,5 +309,16 @@ Public Class ucrInput
         If Not bUserTyped Then
             SetDefaultName()
         End If
+    End Sub
+
+    Public Overridable Function IsEmpty() As Boolean
+        Return True
+    End Function
+
+    Private Sub ucrInput_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If Not bUserTyped Then
+            SetDefaultName()
+        End If
+        RaiseEvent NameChanged()
     End Sub
 End Class

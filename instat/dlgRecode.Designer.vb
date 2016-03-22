@@ -30,10 +30,12 @@ Partial Class dlgRecode
         Me.rdoRight = New System.Windows.Forms.RadioButton()
         Me.ucrMultipleLabels = New instat.ucrMultipleInput()
         Me.ucrMultipleNumericRecode = New instat.ucrMultipleInput()
-        Me.ucrSelectorNewColumnName = New instat.ucrNewColumnName()
         Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
         Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.ucrInputRecode = New instat.ucrInputComboBox()
+        Me.ucrFactorRecode = New instat.ucrFactor()
         Me.grpClosedOn.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -71,7 +73,7 @@ Partial Class dlgRecode
         '
         Me.grpClosedOn.Controls.Add(Me.rdoLeft)
         Me.grpClosedOn.Controls.Add(Me.rdoRight)
-        Me.grpClosedOn.Location = New System.Drawing.Point(298, 107)
+        Me.grpClosedOn.Location = New System.Drawing.Point(448, 12)
         Me.grpClosedOn.Name = "grpClosedOn"
         Me.grpClosedOn.Size = New System.Drawing.Size(106, 84)
         Me.grpClosedOn.TabIndex = 22
@@ -93,7 +95,7 @@ Partial Class dlgRecode
         'rdoRight
         '
         Me.rdoRight.AutoSize = True
-        Me.rdoRight.Location = New System.Drawing.Point(6, 55)
+        Me.rdoRight.Location = New System.Drawing.Point(7, 43)
         Me.rdoRight.Name = "rdoRight"
         Me.rdoRight.Size = New System.Drawing.Size(50, 17)
         Me.rdoRight.TabIndex = 0
@@ -115,14 +117,6 @@ Partial Class dlgRecode
         Me.ucrMultipleNumericRecode.Size = New System.Drawing.Size(106, 29)
         Me.ucrMultipleNumericRecode.TabIndex = 24
         '
-        'ucrSelectorNewColumnName
-        '
-        Me.ucrSelectorNewColumnName.Location = New System.Drawing.Point(12, 220)
-        Me.ucrSelectorNewColumnName.Name = "ucrSelectorNewColumnName"
-        Me.ucrSelectorNewColumnName.Size = New System.Drawing.Size(367, 35)
-        Me.ucrSelectorNewColumnName.TabIndex = 23
-        Me.ucrSelectorNewColumnName.ucrDataFrameSelector = Nothing
-        '
         'ucrReceiverRecode
         '
         Me.ucrReceiverRecode.Location = New System.Drawing.Point(298, 29)
@@ -140,19 +134,49 @@ Partial Class dlgRecode
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 261)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 289)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 1
+        '
+        'lblNewColumnName
+        '
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(9, 270)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.TabIndex = 26
+        Me.lblNewColumnName.Tag = "New_Column_Name"
+        Me.lblNewColumnName.Text = "New Column Name"
+        '
+        'ucrInputRecode
+        '
+        Me.ucrInputRecode.Location = New System.Drawing.Point(212, 258)
+        Me.ucrInputRecode.Name = "ucrInputRecode"
+        Me.ucrInputRecode.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputRecode.TabIndex = 27
+        '
+        'ucrFactorRecode
+        '
+        Me.ucrFactorRecode.AutoSize = True
+        Me.ucrFactorRecode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrFactorRecode.clsReceiver = Nothing
+        Me.ucrFactorRecode.Location = New System.Drawing.Point(355, 102)
+        Me.ucrFactorRecode.Name = "ucrFactorRecode"
+        Me.ucrFactorRecode.shtCurrSheet = Nothing
+        Me.ucrFactorRecode.Size = New System.Drawing.Size(267, 181)
+        Me.ucrFactorRecode.TabIndex = 28
         '
         'dlgRecode
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(437, 324)
+        Me.ClientSize = New System.Drawing.Size(628, 359)
+        Me.Controls.Add(Me.ucrFactorRecode)
+        Me.Controls.Add(Me.ucrInputRecode)
+        Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrMultipleLabels)
         Me.Controls.Add(Me.ucrMultipleNumericRecode)
-        Me.Controls.Add(Me.ucrSelectorNewColumnName)
         Me.Controls.Add(Me.grpClosedOn)
         Me.Controls.Add(Me.lblBreakPoints)
         Me.Controls.Add(Me.ucrReceiverRecode)
@@ -180,7 +204,9 @@ Partial Class dlgRecode
     Friend WithEvents grpClosedOn As GroupBox
     Friend WithEvents rdoLeft As RadioButton
     Friend WithEvents rdoRight As RadioButton
-    Friend WithEvents ucrSelectorNewColumnName As ucrNewColumnName
     Friend WithEvents ucrMultipleNumericRecode As ucrMultipleInput
     Friend WithEvents ucrMultipleLabels As ucrMultipleInput
+    Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents ucrInputRecode As ucrInputComboBox
+    Friend WithEvents ucrFactorRecode As ucrFactor
 End Class

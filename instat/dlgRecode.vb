@@ -19,25 +19,34 @@ Imports instat.Translations
 Public Class dlgRecode
     Public bFirstLoad As Boolean = True
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         autoTranslate(Me)
-        ucrReceiverRecode.Selector = ucrSelectorForRecode
-        ucrReceiverRecode.SetMeAsReceiver()
-        ucrMultipleNumericRecode.bIsNumericInput = True
-        ucrBase.iHelpTopicID = 37
-        ucrBase.clsRsyntax.SetFunction("cut")
-        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
-        ucrSelectorNewColumnName.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
-        ucrSelectorNewColumnName.SetPrefix("Recode")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSelectorNewColumnName.cboColumnName.Text, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSelectorNewColumnName.cboColumnName.Text)
+
+
 
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
         End If
-        'Checks if Ok can be enabled.
         TestOKEnabled()
+    End Sub
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 37
+        ucrReceiverRecode.Selector = ucrSelectorForRecode
+        ucrReceiverRecode.SetMeAsReceiver()
+        ucrMultipleNumericRecode.bIsNumericInput = True
+        ucrInputRecode.SetPrefix("Recode")
+        ucrInputRecode.SetItemsTypeAsColumns()
+        ucrInputRecode.SetDefaultTypeAsColumn()
+        ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
+        ucrReceiverRecode.SetDataType("numeric")
+        ucrBase.clsRsyntax.SetFunction("cut")
+        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
+        ucrFactorRecode.SetReceiver(ucrReceiverRecode)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -45,6 +54,11 @@ Public Class dlgRecode
         ucrMultipleLabels.Visible = False
         rdoRight.Checked = True
         ucrSelectorForRecode.Reset()
+        ucrSelectorForRecode.Focus()
+        ucrMultipleNumericRecode.txtNumericItems.ResetText()
+
+        ucrMultipleLabels.txtNumericItems.ResetText()
+        ucrInputRecode.cboInput.ResetText()
     End Sub
 
     Private Sub ReopenDialog()
@@ -52,7 +66,7 @@ Public Class dlgRecode
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverRecode.IsEmpty() = False And ucrMultipleNumericRecode.txtNumericItems.Text <> " " Then
+        If ucrReceiverRecode.IsEmpty() = False AndAlso ucrMultipleNumericRecode.txtNumericItems.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -70,7 +84,6 @@ Public Class dlgRecode
     End Sub
 
     Private Sub ucrMultipleNumericRecode_Leave(sender As Object, e As EventArgs) Handles ucrMultipleNumericRecode.Leave
-
         If ucrMultipleNumericRecode.clsNumericList.clsParameters.Count = 1 Then
             If ucrMultipleNumericRecode.txtNumericItems.Text < 2 Then
                 MsgBox("If break points is a single number, it specify a number of intervals > 1.", vbOKOnly, "Validation Error")
@@ -140,4 +153,13 @@ Public Class dlgRecode
         End If
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+
+    End Sub
+
+    Private Sub ucrInputRecode_Namechanged() Handles ucrInputRecode.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputRecode.GetText, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputRecode.GetText)
+    End Sub
 End Class
