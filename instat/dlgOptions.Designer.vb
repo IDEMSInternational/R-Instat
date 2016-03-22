@@ -35,16 +35,16 @@ Partial Class dlgOptions
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.tbpRScript = New System.Windows.Forms.TabPage()
         Me.pnRScript = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cmdScript = New System.Windows.Forms.Button()
+        Me.lblScript = New System.Windows.Forms.Label()
         Me.tbpROutput = New System.Windows.Forms.TabPage()
         Me.pnRoutput = New System.Windows.Forms.Panel()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cmdOutput = New System.Windows.Forms.Button()
+        Me.lblROutput = New System.Windows.Forms.Label()
         Me.cmdScriptChange = New System.Windows.Forms.Button()
         Me.pnCommentFormat = New System.Windows.Forms.Panel()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.cmdRComments = New System.Windows.Forms.Button()
+        Me.lblRComments = New System.Windows.Forms.Label()
         Me.tbpRScriptOptions = New System.Windows.Forms.TabPage()
         Me.pnScriptOptions = New System.Windows.Forms.Panel()
         Me.chkIncludeDefaultParams = New System.Windows.Forms.CheckBox()
@@ -118,7 +118,7 @@ Partial Class dlgOptions
         '
         'cmdApply
         '
-        Me.cmdApply.Location = New System.Drawing.Point(274, 320)
+        Me.cmdApply.Location = New System.Drawing.Point(456, 320)
         Me.cmdApply.Name = "cmdApply"
         Me.cmdApply.Size = New System.Drawing.Size(75, 23)
         Me.cmdApply.TabIndex = 10
@@ -140,30 +140,30 @@ Partial Class dlgOptions
         '
         Me.pnRScript.AutoSize = True
         Me.pnRScript.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnRScript.Controls.Add(Me.Button1)
-        Me.pnRScript.Controls.Add(Me.Label2)
+        Me.pnRScript.Controls.Add(Me.cmdScript)
+        Me.pnRScript.Controls.Add(Me.lblScript)
         Me.pnRScript.Location = New System.Drawing.Point(3, 3)
         Me.pnRScript.Name = "pnRScript"
         Me.pnRScript.Size = New System.Drawing.Size(186, 26)
         Me.pnRScript.TabIndex = 0
         '
-        'Button1
+        'cmdScript
         '
-        Me.Button1.Location = New System.Drawing.Point(83, 0)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(100, 23)
-        Me.Button1.TabIndex = 18
-        Me.Button1.Text = "Preview Settings"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.cmdScript.Location = New System.Drawing.Point(83, 0)
+        Me.cmdScript.Name = "cmdScript"
+        Me.cmdScript.Size = New System.Drawing.Size(100, 23)
+        Me.cmdScript.TabIndex = 18
+        Me.cmdScript.Text = "Preview Settings"
+        Me.cmdScript.UseVisualStyleBackColor = True
         '
-        'Label2
+        'lblScript
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(4, 10)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(45, 13)
-        Me.Label2.TabIndex = 19
-        Me.Label2.Text = "R Script"
+        Me.lblScript.AutoSize = True
+        Me.lblScript.Location = New System.Drawing.Point(4, 10)
+        Me.lblScript.Name = "lblScript"
+        Me.lblScript.Size = New System.Drawing.Size(45, 13)
+        Me.lblScript.TabIndex = 19
+        Me.lblScript.Text = "R Script"
         '
         'tbpROutput
         '
@@ -179,30 +179,30 @@ Partial Class dlgOptions
         '
         Me.pnRoutput.AutoSize = True
         Me.pnRoutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnRoutput.Controls.Add(Me.Button2)
-        Me.pnRoutput.Controls.Add(Me.Label3)
+        Me.pnRoutput.Controls.Add(Me.cmdOutput)
+        Me.pnRoutput.Controls.Add(Me.lblROutput)
         Me.pnRoutput.Location = New System.Drawing.Point(3, 3)
         Me.pnRoutput.Name = "pnRoutput"
         Me.pnRoutput.Size = New System.Drawing.Size(185, 29)
         Me.pnRoutput.TabIndex = 21
         '
-        'Button2
+        'cmdOutput
         '
-        Me.Button2.Location = New System.Drawing.Point(82, 3)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(100, 23)
-        Me.Button2.TabIndex = 19
-        Me.Button2.Text = "Preview Settings"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.cmdOutput.Location = New System.Drawing.Point(82, 3)
+        Me.cmdOutput.Name = "cmdOutput"
+        Me.cmdOutput.Size = New System.Drawing.Size(100, 23)
+        Me.cmdOutput.TabIndex = 19
+        Me.cmdOutput.Text = "Preview Settings"
+        Me.cmdOutput.UseVisualStyleBackColor = True
         '
-        'Label3
+        'lblROutput
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(3, 13)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(50, 13)
-        Me.Label3.TabIndex = 20
-        Me.Label3.Text = "R Output"
+        Me.lblROutput.AutoSize = True
+        Me.lblROutput.Location = New System.Drawing.Point(3, 13)
+        Me.lblROutput.Name = "lblROutput"
+        Me.lblROutput.Size = New System.Drawing.Size(50, 13)
+        Me.lblROutput.TabIndex = 20
+        Me.lblROutput.Text = "R Output"
         '
         'cmdScriptChange
         '
@@ -217,30 +217,30 @@ Partial Class dlgOptions
         '
         Me.pnCommentFormat.AutoSize = True
         Me.pnCommentFormat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnCommentFormat.Controls.Add(Me.Button3)
-        Me.pnCommentFormat.Controls.Add(Me.Label4)
+        Me.pnCommentFormat.Controls.Add(Me.cmdRComments)
+        Me.pnCommentFormat.Controls.Add(Me.lblRComments)
         Me.pnCommentFormat.Location = New System.Drawing.Point(3, 3)
         Me.pnCommentFormat.Name = "pnCommentFormat"
         Me.pnCommentFormat.Size = New System.Drawing.Size(184, 26)
         Me.pnCommentFormat.TabIndex = 22
         '
-        'Button3
+        'cmdRComments
         '
-        Me.Button3.Location = New System.Drawing.Point(81, 0)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(100, 23)
-        Me.Button3.TabIndex = 20
-        Me.Button3.Text = "Preview Settings"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.cmdRComments.Location = New System.Drawing.Point(81, 0)
+        Me.cmdRComments.Name = "cmdRComments"
+        Me.cmdRComments.Size = New System.Drawing.Size(100, 23)
+        Me.cmdRComments.TabIndex = 20
+        Me.cmdRComments.Text = "Preview Settings"
+        Me.cmdRComments.UseVisualStyleBackColor = True
         '
-        'Label4
+        'lblRComments
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(2, 10)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(56, 13)
-        Me.Label4.TabIndex = 21
-        Me.Label4.Text = "Comments"
+        Me.lblRComments.AutoSize = True
+        Me.lblRComments.Location = New System.Drawing.Point(2, 10)
+        Me.lblRComments.Name = "lblRComments"
+        Me.lblRComments.Size = New System.Drawing.Size(56, 13)
+        Me.lblRComments.TabIndex = 21
+        Me.lblRComments.Text = "Comments"
         '
         'tbpRScriptOptions
         '
@@ -277,7 +277,7 @@ Partial Class dlgOptions
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(496, 320)
+        Me.cmdHelp.Location = New System.Drawing.Point(358, 320)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
         Me.cmdHelp.TabIndex = 12
@@ -287,7 +287,7 @@ Partial Class dlgOptions
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(390, 320)
+        Me.cmdCancel.Location = New System.Drawing.Point(249, 320)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 9
@@ -698,15 +698,15 @@ Partial Class dlgOptions
 
     Friend WithEvents tbpRScript As TabPage
     Friend WithEvents pnRScript As Panel
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Label2 As Label
+    Friend WithEvents cmdScript As Button
+    Friend WithEvents lblScript As Label
     Friend WithEvents tbpROutput As TabPage
     Friend WithEvents pnRoutput As Panel
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Label3 As Label
+    Friend WithEvents cmdOutput As Button
+    Friend WithEvents lblROutput As Label
     Friend WithEvents pnCommentFormat As Panel
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Label4 As Label
+    Friend WithEvents cmdRComments As Button
+    Friend WithEvents lblRComments As Label
     Friend WithEvents pnScriptOptions As Panel
     Friend WithEvents tbpComment As TabPage
     Friend WithEvents pnLanguages As Panel
