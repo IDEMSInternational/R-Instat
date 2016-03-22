@@ -17,45 +17,66 @@
 
 Imports instat.Translations
 Public Class dlgBoxplotCountVariable
+    Public bFirstLoad As Boolean = True
     Private Sub dlgBoxplotCountVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("climate_obj$boxplot_method")
-        ucrBase.clsRsyntax.iCallType = 0
+
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        TestOKEnabled()
+
     End Sub
 
-    Private Sub chkVarwidth_Leave(sender As Object, e As EventArgs) Handles chkVarwidth.Leave
+    Private Sub TestOKEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction("climate_obj$boxplot_method")
+    End Sub
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
+
+    Private Sub chkVarwidth_ValueChanged(sender As Object, e As EventArgs) Handles chkVarwidth.CheckedChanged
         If chkVarwidth.Checked Then
             ucrBase.clsRsyntax.AddParameter("varwidth", chkVarwidth.Checked.ToString().ToUpper())
         End If
 
     End Sub
 
-    Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
-        ucrBase.clsRsyntax.AddParameter("title", Chr(34) & txtTitle.Text.ToString() & Chr(34))
+    Private Sub ucrInputTitle_Leave(sender As Object, e As EventArgs) Handles ucrInputTitle.Leave
+        ucrBase.clsRsyntax.AddParameter("title", Chr(34) & ucrInputTitle.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtVariableLabel_Leave(sender As Object, e As EventArgs) Handles txtVariableLabel.Leave
-        ucrBase.clsRsyntax.AddParameter("var_label", Chr(34) & txtVariableLabel.Text.ToString() & Chr(34))
+    Private Sub ucrInputVariable_TextChanged(sender As Object, e As EventArgs) Handles ucrInputVariable.TextChanged
+        ucrBase.clsRsyntax.AddParameter("var_label", Chr(34) & ucrInputVariable.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtFillColour_Leave(sender As Object, e As EventArgs) Handles txtFillColour.Leave
-        ucrBase.clsRsyntax.AddParameter("fill_col", Chr(34) & txtFillColour.Text.ToString() & Chr(34))
+    Private Sub ucrInputColour_TextChanged(sender As Object, e As EventArgs) Handles ucrInputColour.TextChanged
+        ucrBase.clsRsyntax.AddParameter("fill_col", Chr(34) & ucrInputColour.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtWhiskerColour_Leave(sender As Object, e As EventArgs) Handles txtWhiskerColour.Leave
-        ucrBase.clsRsyntax.AddParameter("whisker_col", Chr(34) & txtWhiskerColour.Text.ToString() & Chr(34))
+    Private Sub ucrInputWhiskerColour_TextChanged(sender As Object, e As EventArgs) Handles ucrInputWhiskerColour.TextChanged
+        ucrBase.clsRsyntax.AddParameter("whisker_col", Chr(34) & ucrInputWhiskerColour.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub txtTimeperiod_Leave(sender As Object, e As EventArgs) Handles txtTimeperiod.Leave
-        ucrBase.clsRsyntax.AddParameter("time_period", Chr(34) & txtTimeperiod.Text.ToString() & Chr(34))
+    Private Sub ucrInputTimeperiod_TextChanged(sender As Object, e As EventArgs) Handles ucrInputTimePeriod.TextChanged
+        ucrBase.clsRsyntax.AddParameter("time_period", Chr(34) & ucrInputTimePeriod.Text.ToString() & Chr(34))
 
     End Sub
 
-    Private Sub nudWhiskLineType_Leave(sender As Object, e As EventArgs) Handles nudWhiskLineType.Leave
+    Private Sub nudWhiskLineType_ValueChanged(sender As Object, e As EventArgs) Handles nudWhiskLineType.ValueChanged
         ucrBase.clsRsyntax.AddParameter("whiskerlty", nudWhiskLineType.Value.ToString())
 
     End Sub
