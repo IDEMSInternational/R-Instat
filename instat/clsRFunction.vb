@@ -76,7 +76,7 @@ Public Class RFunction
             strScript = strScript & strAssignTo & " <- " & strTemp & vbCrLf
             If Not strAssignToDataFrame = "" Then
                 If Not strAssignToColumn = "" Then
-                    strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$add_column_to_data(data_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ", col_name = " & Chr(34) & strAssignToColumn & Chr(34) & ", col_data = " & strAssignTo & ")" & vbCrLf
+                    strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data(data_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ", col_name = " & Chr(34) & strAssignToColumn & Chr(34) & ", col_data = " & strAssignTo & ")" & vbCrLf
                     strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_column_from_data(data_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ", col_name = " & Chr(34) & strAssignToColumn & Chr(34) & ")"
                     bIsAssigned = True
                     bToBeAssigned = False

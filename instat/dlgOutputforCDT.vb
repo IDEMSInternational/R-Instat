@@ -17,22 +17,45 @@ Imports instat.Translations
 
 
 Public Class dlgOutputforCDT
-    Private Sub UcrButtons1_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
+    Public bFirstLoad As Boolean = True
+
+    Private Sub ucrInputFileName_Leave(sender As Object, e As EventArgs) Handles ucrInputFileName.Leave
+        ucrBase.clsRsyntax.AddParameter("Filename", Chr(34) & ucrInputFileName.Text & Chr(34))
+
+    End Sub
+
+
+    Private Sub ucrInputInterestedVariables_Leave(sender As Object, e As EventArgs) Handles ucrInputInterestedVariables.Leave
+        ucrBase.clsRsyntax.AddParameter("Interested_vaiables", Chr(34) & ucrInputInterestedVariables.Text & Chr(34))
+
+    End Sub
+
+    Private Sub dlgOutputforCDT_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+
+
+
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        TestOKEnabled()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("climate_obj$output_for_CDT")
-        ucrBase.clsRsyntax.iCallType = 1
     End Sub
-
-
-    Private Sub txtFilename_Leave(sender As Object, e As EventArgs) Handles txtFilename.Leave
-        ucrBase.clsRsyntax.AddParameter("Filename", Chr(34) & txtFilename.Text & Chr(34))
+    Private Sub SetDefaults()
 
     End Sub
 
-
-    Private Sub txtInterestedVariables_TextChanged(sender As Object, e As EventArgs) Handles txtInterestedVariables.TextChanged
-        ucrBase.clsRsyntax.AddParameter("Interested_vaiables", Chr(34) & txtInterestedVariables.Text & Chr(34))
-
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class
 
