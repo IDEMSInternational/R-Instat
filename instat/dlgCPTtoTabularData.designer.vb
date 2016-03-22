@@ -64,40 +64,40 @@ Partial Class dlgCPTtoTabularData
         Me.lblMaxLon.AutoSize = True
         Me.lblMaxLon.Location = New System.Drawing.Point(8, 122)
         Me.lblMaxLon.Name = "lblMaxLon"
-        Me.lblMaxLon.Size = New System.Drawing.Size(48, 13)
+        Me.lblMaxLon.Size = New System.Drawing.Size(95, 13)
         Me.lblMaxLon.TabIndex = 7
-        Me.lblMaxLon.Tag = "Max_Lon"
-        Me.lblMaxLon.Text = "Max Lon"
+        Me.lblMaxLon.Tag = "Maximum_Logitude"
+        Me.lblMaxLon.Text = "Maximum Logitude"
         '
         'lblMinLon
         '
         Me.lblMinLon.AutoSize = True
         Me.lblMinLon.Location = New System.Drawing.Point(8, 82)
         Me.lblMinLon.Name = "lblMinLon"
-        Me.lblMinLon.Size = New System.Drawing.Size(45, 13)
+        Me.lblMinLon.Size = New System.Drawing.Size(98, 13)
         Me.lblMinLon.TabIndex = 6
-        Me.lblMinLon.Tag = "Min_Lon"
-        Me.lblMinLon.Text = "Min Lon"
+        Me.lblMinLon.Tag = "Minimum_Longitude"
+        Me.lblMinLon.Text = "Minimum Longitude"
         '
         'lblMaxLat
         '
         Me.lblMaxLat.AutoSize = True
         Me.lblMaxLat.Location = New System.Drawing.Point(8, 63)
         Me.lblMaxLat.Name = "lblMaxLat"
-        Me.lblMaxLat.Size = New System.Drawing.Size(45, 13)
+        Me.lblMaxLat.Size = New System.Drawing.Size(92, 13)
         Me.lblMaxLat.TabIndex = 5
-        Me.lblMaxLat.Tag = "Max_Lat"
-        Me.lblMaxLat.Text = "Max Lat"
+        Me.lblMaxLat.Tag = "Maximum_Latitude"
+        Me.lblMaxLat.Text = "Maximum Latitude"
         '
         'lblMinLat
         '
         Me.lblMinLat.AutoSize = True
         Me.lblMinLat.Location = New System.Drawing.Point(8, 37)
         Me.lblMinLat.Name = "lblMinLat"
-        Me.lblMinLat.Size = New System.Drawing.Size(42, 13)
+        Me.lblMinLat.Size = New System.Drawing.Size(89, 13)
         Me.lblMinLat.TabIndex = 4
-        Me.lblMinLat.Tag = "Min_Lat"
-        Me.lblMinLat.Text = "Min Lat"
+        Me.lblMinLat.Tag = "Minimum_Latitude"
+        Me.lblMinLat.Text = "Minimum Latitude"
         '
         'nudMaxLat
         '
@@ -143,26 +143,26 @@ Partial Class dlgCPTtoTabularData
         'chkWestEast
         '
         Me.chkWestEast.AutoSize = True
-        Me.chkWestEast.Location = New System.Drawing.Point(325, 196)
+        Me.chkWestEast.Location = New System.Drawing.Point(37, 205)
         Me.chkWestEast.Name = "chkWestEast"
-        Me.chkWestEast.Size = New System.Drawing.Size(81, 17)
+        Me.chkWestEast.Size = New System.Drawing.Size(75, 17)
         Me.chkWestEast.TabIndex = 8
         Me.chkWestEast.Tag = "West_East"
-        Me.chkWestEast.Text = "CheckBox1"
+        Me.chkWestEast.Text = "West East"
         Me.chkWestEast.UseVisualStyleBackColor = True
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 228)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 60)
         Me.ucrBase.TabIndex = 0
         '
         'dlgCPTtoTabularData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 262)
+        Me.ClientSize = New System.Drawing.Size(432, 290)
         Me.Controls.Add(Me.chkWestEast)
         Me.Controls.Add(Me.lbl)
         Me.Controls.Add(Me.grpDomain)

@@ -15,7 +15,25 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgContrasts
+    Public bFirstLoad As Boolean = True
     Private Sub dlgContrasts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub InitialiseDialog()
+
+    End Sub
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class

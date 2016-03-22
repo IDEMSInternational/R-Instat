@@ -210,31 +210,52 @@ data_obj$methods(get_metadata = function(label) {
 )
 
 
-data_obj$methods(add_column_to_data = function(col_name = "", col_data) {
+data_obj$methods(add_columns_to_data = function(col_name = "", col_data, use_col_name_as_prefix) {
   
   # Column name must be character
   if( ! is.character(col_name) ) stop("Column name must be of type: character")
-  
-  col_data <- unlist(col_data)
-  
-  if(col_name %in% names(data)) {
-    message(paste("A column named", col_name, "already exists. The column will be replaced in the data"))
-    .self$append_to_changes(list(Replaced_col, col_name))
+  if(is.matrix(col_data) || is.data.frame(col_data)) {
+    num_cols = ncol(col_data)
+    if( (length(col_name) != 1) && (length(col_name) != num_cols) ) stop("col_name must be a character or character vector with the same length as the number of new columns")
+  }
+  else {
+    use_col_name_as_prefix = FALSE
+    num_cols = 1
+    col_data = matrix(col_data)
   }
   
-  else .self$append_to_changes(list(Added_col, col_name))
+  if(missing(use_col_name_as_prefix)) {
+    if(num_cols > 1 && length(col_name) == num_cols) use_col_name_as_prefix = FALSE
+    else use_col_name_as_prefix = TRUE
+  }
   
-  data[[col_name]] <<- col_data
-  .self$set_data_changed(TRUE)
-  .self$set_variables_metadata_changed(TRUE)
+  for(i in 1:num_cols) {
+    curr_col = unlist(col_data[,i])
+    if(use_col_name_as_prefix) curr_col_name = .self$get_next_default_column_name(col_name)
+    else curr_col_name = col_name[[i]]
+
+    if(curr_col_name %in% names(data)) {
+      message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
+      .self$append_to_changes(list(Replaced_col, curr_col_name))
+    }
+    
+    else .self$append_to_changes(list(Added_col, curr_col_name))
+    
+    data[[curr_col_name]] <<- curr_col
+    .self$set_data_changed(TRUE)
+    .self$set_variables_metadata_changed(TRUE)
+  }
 }
 )
 
-data_obj$methods(get_columns_from_data = function(col_names) {
+data_obj$methods(get_columns_from_data = function(col_names, force_as_data_frame = FALSE) {
   if(missing(col_names)) stop("no col_names to return")
   if(!all(sapply(col_names, function(x) x %in% names(data)))) stop("Not all column names were found in data")
   
-  if(length(col_names)==1) return (data[[col_names]])
+  if(length(col_names)==1) {
+    if(force_as_data_frame) return(data[col_names])
+    else (data[[col_names]])
+  }
   else return(data[col_names])
 }
 )
@@ -452,33 +473,62 @@ data_obj$methods(insert_column_in_data = function(col_data =c(), start_pos = (le
 }
 )
 
-data_obj$methods(move_column_in_data = function(col_name = "", col_number) {
-  if (col_number <= 0) stop("You cannot move a column into the position less or equal to zero.")
-  if (col_number %% 1 != 0) stop("col_number value should be an integer.")
-  if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
+# data_obj$methods(move_columns_in_data = function(col_names = "", col_number) {
+#   if (col_number <= 0) stop("You cannot move a column into the position less or equal to zero.")
+#   if (col_number %% 1 != 0) stop("col_number value should be an integer.")
+#   if (length(names(data)) < col_number) stop("The col_number argument exceeds the number of columns in the data.")
+#   
+#   for(col_name in col_names){
+#     if(!(col_name %in% names(data))){
+#       stop(col_name, " is not a column in ", get_metadata(data_name_label))
+#     }
+#   }
+#   
+#   old_names = names(data)
+#   dat1 <- data[(col_names)]
+#   names(dat1) <- col_names
+#   
+#   for(name in col_names){
+#     names(data)[names(data) == name] <<- .self$get_next_default_column_name(prefix = "to_delete")
+#   }
+#   
+#   if(col_number==1){
+#     data <<- cbind(dat1, data)
+#   }
+#   else if(col_number == ncol(data)){
+#     data <<- cbind(data,dat1)
+#   }
+#   else{
+#     data <<- cbind(data[1:(col_number)], dat1, data[(col_number+1):ncol(data)])
+#   }
+#   new_names = names(data)
+#   
+#   for(name in new_names){
+#     if(!(name %in% old_names)){
+#       data[,name]<<- NULL
+#     }
+#   }
+#   .self$append_to_changes(list(Move_col, col_names))
+# }
+# )
+
+
+data_obj$methods(order_columns_in_data = function(col_order) {
+  if (length(names(data)) != length(col_order)) stop("Columns to order should be same as columns in the data.")
   
-  if(!(col_name %in% names(data))){
-    stop(col_name, " is not a column in", get_metadata(data_name_label))
+  if(is.numeric(col_order)) {
+    if(! (identical(sort(col_order), sort(as.numeric(1:ncol(data)))))) {
+      stop("Invalid column order")
+    }
+  }else if(is.character(col_order)) {
+    if(! (identical(sort(col_order), sort(as.character(names(data)))))){
+      stop("Invalid column order")
+    }
+  }else{ 
+    stop("column order must be a numeric or character vector")
   }
-  
-  dat1 <- as.data.frame(data[,c(col_name)])
-  names(dat1) <- col_name
-  
-  names(data)[names(data) == col_name] <<- "to_delete"
-  
-  if(col_number==1){
-    data <<- cbind(dat1, data)
-  }
-  else if(col_number == ncol(data)){
-    data <<- cbind(data,dat1)
-  }
-  else{
-    data <<- cbind(data[1:(col_number)], dat1, data[(col_number+1):ncol(data)])
-  }
-  
-  data[,"to_delete"]<<- NULL
-  
-  .self$append_to_changes(list(Move_col, col_name))
+  set_data(data[ ,col_order])
+  .self$append_to_changes(list(Col_order, col_order))
 }
 )
 
@@ -613,6 +663,23 @@ data_obj$methods(convert_column_to_type = function(col_names = c(), to_type = "f
 }
 )
 
+data_obj$methods(copy_columns = function(col_names = "") {
+  for(col_name in col_names){
+    if(!(col_name %in% names(data))){
+      stop(col_name, " is not a column in ", get_metadata(data_name_label))
+    }
+  }
+  dat1 <- data[(col_names)]
+  
+  for(name in col_names){
+    names(dat1)[names(dat1) == name] <- .self$get_next_default_column_name(prefix = paste(name, "copy", sep = "_" ) )
+  }
+  
+  set_data(cbind(data, dat1))
+  .self$append_to_changes(list(Copy_cols, col_names))
+}
+)
+
 #Labels for strings which will be added to logs
 Set_property="Set"
 Added_col="Added column"
@@ -626,7 +693,9 @@ Replaced_value="Replaced value"
 Removed_row="Removed row"
 Inserted_col = "Inserted column"
 Move_col = "Moved column"
+Col_order = "Order of columns"
 Inserted_row = "Inserted row"
+Copy_cols = "Copied columns"
 
 #meta data labels
 data_name_label="data_name"
