@@ -334,6 +334,12 @@
     <Compile Include="dlgInsertColumn.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgInsertColunsOrRows.Designer.vb">
+      <DependentUpon>dlgInsertColunsOrRows.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgInsertColunsOrRows.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgMakeSheets.Designer.vb">
       <DependentUpon>dlgMakeSheets.vb</DependentUpon>
     </Compile>
@@ -1831,6 +1837,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.sw-KE.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInsertColunsOrRows.fr-FR.resx">
+      <DependentUpon>dlgInsertColunsOrRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInsertColunsOrRows.resx">
+      <DependentUpon>dlgInsertColunsOrRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgInsertColunsOrRows.sw-KE.resx">
+      <DependentUpon>dlgInsertColunsOrRows.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMakeSheets.fr-FR.resx">
       <DependentUpon>dlgMakeSheets.vb</DependentUpon>
