@@ -35,7 +35,12 @@ Public Class dlgInsertColunsOrRows
     End Sub
 
     Private Sub Setdefaults()
-
+        rdoColumns.Checked = True
+        txtColumns.Enabled = False
+        txtRows.Enabled = False
+        nudNumbertoInsert.Value = 1
+        rdoEnd.Checked = True
+        txtValue.Text = "NA"
     End Sub
 
     Private Sub ReopenDialog()

@@ -664,7 +664,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuManageSheetInsertColumnsRows.Click
-        dlgInsertColumn.ShowDialog()
+        dlgInsertColunsOrRows.ShowDialog()
     End Sub
     Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPie.Click
         dlgBarAndPieChart.ShowDialog()
