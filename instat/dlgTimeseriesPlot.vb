@@ -16,11 +16,32 @@
 
 Imports instat.Translations
 Public Class dlgTimeseriesPlot
-
+    Public bFirstLoad As Boolean = True
     Private Sub dlgTimeseriesPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+
+
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        TestOKEnabled()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$timeseries")
-        ucrBase.clsRsyntax.iCallType = 0
+    End Sub
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
 
     End Sub
 End Class
