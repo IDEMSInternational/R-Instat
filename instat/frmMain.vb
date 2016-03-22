@@ -651,7 +651,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
-        'For discussion
+        dlgExportDataset.ShowDialog()
     End Sub
 
     Private Sub mnuManageDataFileSheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileSheetMetadata.Click
