@@ -27,16 +27,16 @@ Partial Class dlgProcess
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(-3, 255)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 125)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 0
         '
         'dlgProcess
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(401, 286)
+        Me.ClientSize = New System.Drawing.Size(434, 200)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgProcess"

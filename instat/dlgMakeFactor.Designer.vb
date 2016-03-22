@@ -27,9 +27,9 @@ Partial Class dlgMakeFactor
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 359)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 130)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 59)
         Me.ucrBase.TabIndex = 0
         Me.ucrBase.Tag = ""
         '
@@ -37,7 +37,7 @@ Partial Class dlgMakeFactor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(410, 396)
+        Me.ClientSize = New System.Drawing.Size(434, 197)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgMakeFactor"
