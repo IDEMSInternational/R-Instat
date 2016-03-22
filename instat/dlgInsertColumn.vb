@@ -33,6 +33,7 @@ Public Class dlgInsertColumn
     'End Sub
 
     Private Sub dlgInsertColumn_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ucrDataFrameLength.SetDataFrameSelector(ucrDataFramesList)
         ucrBase.iHelpTopicID = 52
         If bFirstLoad Then
             setDefaultValues()
@@ -51,6 +52,8 @@ Public Class dlgInsertColumn
         nudPos.Enabled = False
         rdoColumns.Checked = True
         rdoEnd.Checked = True
+        ucrInputColumns.Enabled = False
+        'ucrInputRows.Enabled = False
         ucrDataFramesList.Reset()
     End Sub
 
@@ -86,6 +89,4 @@ Public Class dlgInsertColumn
             'txtStartPos.Enabled = True
         End If
     End Sub
-
-
 End Class
