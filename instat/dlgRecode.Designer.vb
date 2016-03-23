@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRecode
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgRecode
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.chkAddLabels = New System.Windows.Forms.CheckBox()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
@@ -29,7 +29,7 @@ Partial Class dlgRecode
         Me.rdoLeft = New System.Windows.Forms.RadioButton()
         Me.rdoRight = New System.Windows.Forms.RadioButton()
         Me.lblPrefixForNewColumns = New System.Windows.Forms.Label()
-        Me.ucrInputRecode = New instat.ucrInputTextBox()
+        Me.ucrInputRecode = New instat.ucrInputComboBox()
         Me.ucrMultipleLabels = New instat.ucrMultipleInput()
         Me.ucrMultipleNumericRecode = New instat.ucrMultipleInput()
         Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
@@ -52,7 +52,7 @@ Partial Class dlgRecode
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(303, 16)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(309, 27)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
         Me.lblSelectedVariable.TabIndex = 17
@@ -62,7 +62,7 @@ Partial Class dlgRecode
         'lblBreakPoints
         '
         Me.lblBreakPoints.AutoSize = True
-        Me.lblBreakPoints.Location = New System.Drawing.Point(298, 62)
+        Me.lblBreakPoints.Location = New System.Drawing.Point(311, 77)
         Me.lblBreakPoints.Name = "lblBreakPoints"
         Me.lblBreakPoints.Size = New System.Drawing.Size(70, 13)
         Me.lblBreakPoints.TabIndex = 20
@@ -95,7 +95,7 @@ Partial Class dlgRecode
         'rdoRight
         '
         Me.rdoRight.AutoSize = True
-        Me.rdoRight.Location = New System.Drawing.Point(7, 43)
+        Me.rdoRight.Location = New System.Drawing.Point(7, 54)
         Me.rdoRight.Name = "rdoRight"
         Me.rdoRight.Size = New System.Drawing.Size(50, 17)
         Me.rdoRight.TabIndex = 0
@@ -115,9 +115,9 @@ Partial Class dlgRecode
         '
         'ucrInputRecode
         '
-        Me.ucrInputRecode.Location = New System.Drawing.Point(164, 252)
+        Me.ucrInputRecode.Location = New System.Drawing.Point(168, 252)
         Me.ucrInputRecode.Name = "ucrInputRecode"
-        Me.ucrInputRecode.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputRecode.Size = New System.Drawing.Size(137, 25)
         Me.ucrInputRecode.TabIndex = 27
         '
         'ucrMultipleLabels
@@ -129,14 +129,14 @@ Partial Class dlgRecode
         '
         'ucrMultipleNumericRecode
         '
-        Me.ucrMultipleNumericRecode.Location = New System.Drawing.Point(298, 78)
+        Me.ucrMultipleNumericRecode.Location = New System.Drawing.Point(304, 89)
         Me.ucrMultipleNumericRecode.Name = "ucrMultipleNumericRecode"
-        Me.ucrMultipleNumericRecode.Size = New System.Drawing.Size(106, 29)
+        Me.ucrMultipleNumericRecode.Size = New System.Drawing.Size(116, 29)
         Me.ucrMultipleNumericRecode.TabIndex = 24
         '
         'ucrReceiverRecode
         '
-        Me.ucrReceiverRecode.Location = New System.Drawing.Point(298, 29)
+        Me.ucrReceiverRecode.Location = New System.Drawing.Point(304, 40)
         Me.ucrReceiverRecode.Name = "ucrReceiverRecode"
         Me.ucrReceiverRecode.Selector = Nothing
         Me.ucrReceiverRecode.Size = New System.Drawing.Size(106, 26)
@@ -195,5 +195,5 @@ Partial Class dlgRecode
     Friend WithEvents ucrMultipleNumericRecode As ucrMultipleInput
     Friend WithEvents ucrMultipleLabels As ucrMultipleInput
     Friend WithEvents lblPrefixForNewColumns As Label
-    Friend WithEvents ucrInputRecode As ucrInputTextBox
+    Friend WithEvents ucrInputRecode As ucrInputComboBox
 End Class
