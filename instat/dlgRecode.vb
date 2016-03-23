@@ -32,19 +32,20 @@ Public Class dlgRecode
             ReopenDialog()
         End If
         TestOKEnabled()
+        ucrBase.iHelpTopicID = 37
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 37
+
         ucrReceiverRecode.Selector = ucrSelectorForRecode
         ucrReceiverRecode.SetMeAsReceiver()
         ucrMultipleNumericRecode.bIsNumericInput = True
         ucrInputRecode.SetPrefix("Recode")
+        ucrInputRecode.SetItemsTypeAsColumns()
         ucrInputRecode.SetDefaultTypeAsColumn()
         ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrReceiverRecode.SetDataType("numeric")
         ucrBase.clsRsyntax.SetFunction("cut")
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
-
 
     End Sub
 
@@ -56,7 +57,7 @@ Public Class dlgRecode
         ucrSelectorForRecode.Focus()
         ucrMultipleNumericRecode.txtNumericItems.ResetText()
         ucrMultipleLabels.txtNumericItems.ResetText()
-        ucrInputRecode.txtInput.ResetText()
+        ucrInputRecode.cboInput.ResetText()
     End Sub
 
     Private Sub ReopenDialog()
