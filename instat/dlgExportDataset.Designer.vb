@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgProcess
+Partial Class dlgExportDataset
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,29 +22,19 @@ Partial Class dlgProcess
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 125)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
-        Me.ucrBase.TabIndex = 0
-        '
-        'dlgProcess
+        'dlgExportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(434, 200)
-        Me.Controls.Add(Me.ucrBase)
+        Me.ClientSize = New System.Drawing.Size(284, 261)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgProcess"
-        Me.Tag = "Process"
-        Me.Text = "Process"
+        Me.Name = "dlgExportDataset"
+        Me.ShowIcon = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "Export Datasets"
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents ucrBase As ucrButtons
 End Class
