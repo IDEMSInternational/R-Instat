@@ -28,7 +28,7 @@ Partial Class dlgHistogramMethod
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 218)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 203)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 60)
         Me.ucrBase.TabIndex = 0
@@ -49,11 +49,12 @@ Partial Class dlgHistogramMethod
         Me.ClientSize = New System.Drawing.Size(434, 275)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgHistogramMethod"
-        Me.Text = "dlgHistogramMethod"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Histogram Method"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

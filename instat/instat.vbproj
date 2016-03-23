@@ -298,6 +298,12 @@
     <Compile Include="dlgDistanceText.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportDataset.Designer.vb">
+      <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportDataset.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFromLibrary.Designer.vb">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
     </Compile>
@@ -428,6 +434,12 @@
       <DependentUpon>dlgReoderModels.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgReoderModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgReorderColumns.Designer.vb">
+      <DependentUpon>dlgReorderColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReorderColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReorderLevels.Designer.vb">
@@ -1778,6 +1790,15 @@
     <EmbeddedResource Include="dlgDistanceText.sw-KE.resx">
       <DependentUpon>dlgDistanceText.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportDataset.fr-FR.resx">
+      <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportDataset.resx">
+      <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
+      <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.fr-FR.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
     </EmbeddedResource>
@@ -1975,6 +1996,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReoderModels.sw-KE.resx">
       <DependentUpon>dlgReoderModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderColumns.fr-FR.resx">
+      <DependentUpon>dlgReorderColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderColumns.resx">
+      <DependentUpon>dlgReorderColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderColumns.sw-KE.resx">
+      <DependentUpon>dlgReorderColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderLevels.fr-FR.resx">
       <DependentUpon>dlgReorderLevels.vb</DependentUpon>
