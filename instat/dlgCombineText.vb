@@ -54,11 +54,14 @@ Public Class dlgCombineText
     Private Sub SetDefaults()
         ucrSelectorForCombineText.Reset()
         ucrSelectorForCombineText.Focus()
+        cboSeperator.Text = "Whitespace"
+        ucrInputColumnInto.cboInput.ResetText()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         TestOKEnabled()
         SetDefaults()
+
     End Sub
 
     Private Sub cboSeperator_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSeperator.SelectedIndexChanged
