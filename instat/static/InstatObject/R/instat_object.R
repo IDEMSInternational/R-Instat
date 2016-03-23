@@ -478,3 +478,11 @@ instat_obj$methods(copy_columns = function(data_name, col_names = "") {
   data_objects[[data_name]]$copy_columns(col_names = col_names)
 } 
 )
+
+instat_obj$methods(get_column_count = function(data_name) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  return(ncol(data_objects[[data_name]]$data))
+} 
+)
