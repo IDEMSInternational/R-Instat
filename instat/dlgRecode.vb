@@ -57,7 +57,7 @@ Public Class dlgRecode
         ucrSelectorForRecode.Focus()
         ucrMultipleNumericRecode.txtNumericItems.ResetText()
         ucrMultipleLabels.txtNumericItems.ResetText()
-        ucrInputRecode.cboInput.ResetText()
+
     End Sub
 
     Private Sub ReopenDialog()
