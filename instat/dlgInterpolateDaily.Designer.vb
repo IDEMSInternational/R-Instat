@@ -27,7 +27,7 @@ Partial Class dlgInterpolateDaily
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(-1, 211)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 197)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -36,13 +36,13 @@ Partial Class dlgInterpolateDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(404, 261)
+        Me.ClientSize = New System.Drawing.Size(423, 261)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgInterpolateDaily"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Interpolate_Daily"
-        Me.Text = "InterpolateDaily"
+        Me.Text = "Interpolate Daily"
         Me.ResumeLayout(False)
 
     End Sub

@@ -27,23 +27,24 @@ Partial Class dlgMonthlySummaries
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(31, 229)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 215)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 60)
         Me.ucrBase.TabIndex = 0
         '
         'dlgMonthlySummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(472, 262)
+        Me.ClientSize = New System.Drawing.Size(432, 287)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgMonthlySummaries"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Monthly_Summaries"
-        Me.Text = "dlgMonthlySummaries"
+        Me.Text = "Monthly Summaries"
         Me.ResumeLayout(False)
 
     End Sub
