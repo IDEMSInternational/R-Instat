@@ -502,3 +502,11 @@ instat_obj$methods(set_factor_reference_level = function(data_name, col_name, ne
   data_objects[[data_name]]$set_factor_reference_level(col_name = col_name, new_ref_level = new_ref_level)
 } 
 )
+
+instat_obj$methods(get_column_count = function(data_name) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  return(ncol(data_objects[[data_name]]$data))
+} 
+)
