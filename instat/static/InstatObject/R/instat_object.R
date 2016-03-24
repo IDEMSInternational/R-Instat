@@ -478,3 +478,27 @@ instat_obj$methods(copy_columns = function(data_name, col_names = "") {
   data_objects[[data_name]]$copy_columns(col_names = col_names)
 } 
 )
+
+instat_obj$methods(drop_unused_factor_levels = function(data_name, col_name) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$drop_unused_factor_levels(col_name = col_name)
+} 
+)
+
+instat_obj$methods(set_factor_levels = function(data_name, col_name, new_levels) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$set_factor_levels(col_name = col_name, new_levels = new_levels)
+} 
+)
+
+instat_obj$methods(set_factor_reference_level = function(data_name, col_name, new_ref_level) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$set_factor_reference_level(col_name = col_name, new_ref_level = new_ref_level)
+} 
+)
