@@ -164,6 +164,8 @@ Public Class dlgRecode
     End Sub
 
     Private Sub ucrReceiverRecode_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRecode.SelectionChanged
-
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRecode.GetVariables())
     End Sub
+
+
 End Class
