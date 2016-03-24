@@ -23,7 +23,7 @@ Partial Class dlgCombineText
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblSeparator = New System.Windows.Forms.Label()
-        Me.lblColuumnInto = New System.Windows.Forms.Label()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.lblColumnsToCobine = New System.Windows.Forms.Label()
         Me.cboSeperator = New System.Windows.Forms.ComboBox()
         Me.ucrInputColumnInto = New instat.ucrInputComboBox()
@@ -41,20 +41,20 @@ Partial Class dlgCombineText
         Me.lblSeparator.TabIndex = 4
         Me.lblSeparator.Text = "Separator"
         '
-        'lblColuumnInto
+        'lblNewColumnName
         '
-        Me.lblColuumnInto.AutoSize = True
-        Me.lblColuumnInto.Location = New System.Drawing.Point(23, 210)
-        Me.lblColuumnInto.Name = "lblColuumnInto"
-        Me.lblColuumnInto.Size = New System.Drawing.Size(63, 13)
-        Me.lblColuumnInto.TabIndex = 5
-        Me.lblColuumnInto.Tag = "Column Into"
-        Me.lblColuumnInto.Text = "Column Into"
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(21, 204)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.TabIndex = 5
+        Me.lblNewColumnName.Tag = "New_Column_Name"
+        Me.lblNewColumnName.Text = "New Column Name"
         '
         'lblColumnsToCobine
         '
         Me.lblColumnsToCobine.AutoSize = True
-        Me.lblColumnsToCobine.Location = New System.Drawing.Point(265, 13)
+        Me.lblColumnsToCobine.Location = New System.Drawing.Point(258, 13)
         Me.lblColumnsToCobine.Name = "lblColumnsToCobine"
         Me.lblColumnsToCobine.Size = New System.Drawing.Size(103, 13)
         Me.lblColumnsToCobine.TabIndex = 7
@@ -72,7 +72,7 @@ Partial Class dlgCombineText
         '
         'ucrInputColumnInto
         '
-        Me.ucrInputColumnInto.Location = New System.Drawing.Point(118, 198)
+        Me.ucrInputColumnInto.Location = New System.Drawing.Point(137, 198)
         Me.ucrInputColumnInto.Name = "ucrInputColumnInto"
         Me.ucrInputColumnInto.Size = New System.Drawing.Size(137, 25)
         Me.ucrInputColumnInto.TabIndex = 9
@@ -94,7 +94,7 @@ Partial Class dlgCombineText
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 247)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 241)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -103,11 +103,11 @@ Partial Class dlgCombineText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(446, 312)
+        Me.ClientSize = New System.Drawing.Size(446, 300)
         Me.Controls.Add(Me.ucrInputColumnInto)
         Me.Controls.Add(Me.cboSeperator)
         Me.Controls.Add(Me.lblColumnsToCobine)
-        Me.Controls.Add(Me.lblColuumnInto)
+        Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.lblSeparator)
         Me.Controls.Add(Me.ucrReceiverCombineText)
         Me.Controls.Add(Me.ucrSelectorForCombineText)
@@ -126,7 +126,7 @@ Partial Class dlgCombineText
     Friend WithEvents ucrSelectorForCombineText As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverCombineText As ucrReceiverMultiple
     Friend WithEvents lblSeparator As Label
-    Friend WithEvents lblColuumnInto As Label
+    Friend WithEvents lblNewColumnName As Label
     Friend WithEvents lblColumnsToCobine As Label
     Friend WithEvents cboSeperator As ComboBox
     Friend WithEvents ucrInputColumnInto As ucrInputComboBox
