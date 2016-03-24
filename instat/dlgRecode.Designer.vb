@@ -28,7 +28,7 @@ Partial Class dlgRecode
         Me.grpClosedOn = New System.Windows.Forms.GroupBox()
         Me.rdoLeft = New System.Windows.Forms.RadioButton()
         Me.rdoRight = New System.Windows.Forms.RadioButton()
-        Me.lblPrefixForNewColumns = New System.Windows.Forms.Label()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.ucrInputRecode = New instat.ucrInputComboBox()
         Me.ucrMultipleLabels = New instat.ucrMultipleInput()
         Me.ucrMultipleNumericRecode = New instat.ucrMultipleInput()
@@ -52,7 +52,7 @@ Partial Class dlgRecode
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(309, 27)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(278, 27)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
         Me.lblSelectedVariable.TabIndex = 17
@@ -62,7 +62,7 @@ Partial Class dlgRecode
         'lblBreakPoints
         '
         Me.lblBreakPoints.AutoSize = True
-        Me.lblBreakPoints.Location = New System.Drawing.Point(311, 77)
+        Me.lblBreakPoints.Location = New System.Drawing.Point(278, 82)
         Me.lblBreakPoints.Name = "lblBreakPoints"
         Me.lblBreakPoints.Size = New System.Drawing.Size(70, 13)
         Me.lblBreakPoints.TabIndex = 20
@@ -103,19 +103,19 @@ Partial Class dlgRecode
         Me.rdoRight.Text = "Right"
         Me.rdoRight.UseVisualStyleBackColor = True
         '
-        'lblPrefixForNewColumns
+        'lblNewColumnName
         '
-        Me.lblPrefixForNewColumns.AutoSize = True
-        Me.lblPrefixForNewColumns.Location = New System.Drawing.Point(9, 252)
-        Me.lblPrefixForNewColumns.Name = "lblPrefixForNewColumns"
-        Me.lblPrefixForNewColumns.Size = New System.Drawing.Size(142, 13)
-        Me.lblPrefixForNewColumns.TabIndex = 26
-        Me.lblPrefixForNewColumns.Tag = "Prefix_for_new_column_names"
-        Me.lblPrefixForNewColumns.Text = "Prefix for new column names"
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(9, 260)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.TabIndex = 26
+        Me.lblNewColumnName.Tag = "New_Column_Name"
+        Me.lblNewColumnName.Text = "New Column Name"
         '
         'ucrInputRecode
         '
-        Me.ucrInputRecode.Location = New System.Drawing.Point(168, 252)
+        Me.ucrInputRecode.Location = New System.Drawing.Point(121, 248)
         Me.ucrInputRecode.Name = "ucrInputRecode"
         Me.ucrInputRecode.Size = New System.Drawing.Size(137, 25)
         Me.ucrInputRecode.TabIndex = 27
@@ -129,14 +129,14 @@ Partial Class dlgRecode
         '
         'ucrMultipleNumericRecode
         '
-        Me.ucrMultipleNumericRecode.Location = New System.Drawing.Point(304, 89)
+        Me.ucrMultipleNumericRecode.Location = New System.Drawing.Point(270, 93)
         Me.ucrMultipleNumericRecode.Name = "ucrMultipleNumericRecode"
-        Me.ucrMultipleNumericRecode.Size = New System.Drawing.Size(116, 29)
+        Me.ucrMultipleNumericRecode.Size = New System.Drawing.Size(152, 29)
         Me.ucrMultipleNumericRecode.TabIndex = 24
         '
         'ucrReceiverRecode
         '
-        Me.ucrReceiverRecode.Location = New System.Drawing.Point(304, 40)
+        Me.ucrReceiverRecode.Location = New System.Drawing.Point(273, 40)
         Me.ucrReceiverRecode.Name = "ucrReceiverRecode"
         Me.ucrReceiverRecode.Selector = Nothing
         Me.ucrReceiverRecode.Size = New System.Drawing.Size(106, 26)
@@ -162,7 +162,7 @@ Partial Class dlgRecode
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(432, 359)
         Me.Controls.Add(Me.ucrInputRecode)
-        Me.Controls.Add(Me.lblPrefixForNewColumns)
+        Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrMultipleLabels)
         Me.Controls.Add(Me.ucrMultipleNumericRecode)
         Me.Controls.Add(Me.grpClosedOn)
@@ -194,6 +194,6 @@ Partial Class dlgRecode
     Friend WithEvents rdoRight As RadioButton
     Friend WithEvents ucrMultipleNumericRecode As ucrMultipleInput
     Friend WithEvents ucrMultipleLabels As ucrMultipleInput
-    Friend WithEvents lblPrefixForNewColumns As Label
+    Friend WithEvents lblNewColumnName As Label
     Friend WithEvents ucrInputRecode As ucrInputComboBox
 End Class
