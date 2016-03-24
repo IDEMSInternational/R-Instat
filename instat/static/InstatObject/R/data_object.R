@@ -221,7 +221,7 @@ data_obj$methods(add_columns_to_data = function(col_name = "", col_data, use_col
   else {
     use_col_name_as_prefix = FALSE
     num_cols = 1
-    col_data = matrix(col_data)
+    col_data = data.frame(col_data)
   }
   
   if(missing(use_col_name_as_prefix)) {
@@ -678,6 +678,32 @@ data_obj$methods(copy_columns = function(col_names = "") {
   set_data(cbind(data, dat1))
   .self$append_to_changes(list(Copy_cols, col_names))
 }
+)
+
+data_obj$methods(drop_unused_factor_levels = function(col_name) {
+  if(!col_name %in% names(data)) stop(paste(col_name,"not found in data."))
+  if(!is.factor(data[[col_name]])) stop(paste(col_name,"is not a factor."))
+  
+  .self$add_columns_to_data(col_name, droplevels(data[[col_name]]))
+} 
+)
+
+data_obj$methods(set_factor_levels = function(col_name, new_levels) {
+  if(!col_name %in% names(data)) stop(paste(col_name,"not found in data."))
+  if(!is.factor(data[[col_name]])) stop(paste(col_name,"is not a factor."))
+  if(!length(new_levels)==length(levels(data[[col_name]]))) stop("Incorrect number of new levels given.")
+  
+  levels(data[[col_name]]) <<- new_levels
+} 
+)
+
+data_obj$methods(set_factor_reference_level = function(col_name, new_ref_level) {
+  if(!col_name %in% names(data)) stop(paste(col_name,"not found in data."))
+  if(!is.factor(data[[col_name]])) stop(paste(col_name,"is not a factor."))
+  if(!new_ref_level %in% levels(data[[col_name]])) stop(paste(new_ref_level, "is not a level of the factor"))
+  
+  .self$add_columns_to_data(col_name, relevel(data[[col_name]], new_ref_level))
+} 
 )
 
 #Labels for strings which will be added to logs
