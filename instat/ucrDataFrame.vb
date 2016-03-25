@@ -17,6 +17,7 @@ Imports instat.Translations
 
 Public Class ucrDataFrame
     Public iDataFrameLength As Integer
+    Public iColumnCount As Integer
     Public clsCurrDataFrame As New RFunction
     Public bFirstLoad As Boolean = True
     Public strCurrDataFrame As String = ""
@@ -49,6 +50,7 @@ Public Class ucrDataFrame
         Dim clsParam As New RParameter
         If cboAvailableDataFrames.Text <> "" Then
             iDataFrameLength = frmMain.clsRLink.GetDataFrameLength(cboAvailableDataFrames.Text)
+            iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(cboAvailableDataFrames.Text)
             clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
             clsParam.SetArgumentName("data_name")
             clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
