@@ -32,20 +32,21 @@ Public Class dlgRecode
             ReopenDialog()
         End If
         TestOKEnabled()
+        ucrBase.iHelpTopicID = 37
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 37
+
         ucrReceiverRecode.Selector = ucrSelectorForRecode
         ucrReceiverRecode.SetMeAsReceiver()
         ucrMultipleNumericRecode.bIsNumericInput = True
+        ucrReceiverRecode.SetDataType("numeric")
+        ucrBase.clsRsyntax.SetFunction("cut")
+        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
         ucrInputRecode.SetPrefix("Recode")
         ucrInputRecode.SetItemsTypeAsColumns()
         ucrInputRecode.SetDefaultTypeAsColumn()
         ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
-        ucrReceiverRecode.SetDataType("numeric")
-        ucrBase.clsRsyntax.SetFunction("cut")
-        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
-        ucrFactorRecode.SetReceiver(ucrReceiverRecode)
+
 
     End Sub
 
@@ -56,9 +57,8 @@ Public Class dlgRecode
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
         ucrMultipleNumericRecode.txtNumericItems.ResetText()
-
         ucrMultipleLabels.txtNumericItems.ResetText()
-        ucrInputRecode.cboInput.ResetText()
+
     End Sub
 
     Private Sub ReopenDialog()
@@ -137,7 +137,7 @@ Public Class dlgRecode
     End Sub
 
     Private Sub grpClosedOn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLeft.CheckedChanged, rdoRight.CheckedChanged
-        setClosedOn()
+        SetClosedOn()
 
     End Sub
 
@@ -162,4 +162,10 @@ Public Class dlgRecode
     Private Sub ucrInputRecode_Namechanged() Handles ucrInputRecode.NameChanged
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputRecode.GetText, strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputRecode.GetText)
     End Sub
+
+    Private Sub ucrReceiverRecode_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRecode.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRecode.GetVariables())
+    End Sub
+
+
 End Class
