@@ -817,7 +817,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageSheetReorder_Click(sender As Object, e As EventArgs) Handles mnuManageSheetReorder.Click
-        dlgReorderSheet.ShowDialog()
+        dlgReorderColumns.ShowDialog()
     End Sub
 
     Private Sub mnuManageFactorReferenceLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorReferenceLevels.Click
