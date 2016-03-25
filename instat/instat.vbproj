@@ -550,6 +550,12 @@
     <Compile Include="sdgFrequencyPolygonOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgImportDataset.Designer.vb">
+      <DependentUpon>sdgImportDataset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgImportDataset.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgPieChartOptions.Designer.vb">
       <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
     </Compile>
@@ -2209,6 +2215,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHistogramOptions.sw-KE.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgImportDataset.fr-FR.resx">
+      <DependentUpon>sdgImportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgImportDataset.resx">
+      <DependentUpon>sdgImportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgImportDataset.sw-KE.resx">
+      <DependentUpon>sdgImportDataset.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOptions.fr-FR.resx">
       <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
