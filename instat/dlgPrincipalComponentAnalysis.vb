@@ -49,7 +49,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrResultName.Visible = True
         chkScaleData.Checked = True
         ucrBasePCA.clsRsyntax.AddParameter("graph", "FALSE")
-        ucrResultName.SetName("PCA_1")
+        ucrResultName.SetName("PCA")
         sdgPrincipalComponentAnalysis.SetDefaults()
         TestOKEnabled()
     End Sub
@@ -108,8 +108,8 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub AssignName()
-        If chkSaveResult.Checked AndAlso ucrResultName.txtValidation.Text <> "" Then
-            ucrBasePCA.clsRsyntax.SetAssignTo(ucrResultName.txtValidation.Text, strTempModel:=ucrResultName.txtValidation.Text)
+        If chkSaveResult.Checked AndAlso ucrResultName.GetText() <> "" Then
+            ucrBasePCA.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText())
             ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
         Else
             ucrBasePCA.clsRsyntax.SetAssignTo("last_PCA", strTempModel:="last_PCA")
@@ -120,4 +120,6 @@ Public Class dlgPrincipalComponentAnalysis
     Private Sub ucrBasePCA_clickok(sender As Object, e As EventArgs) Handles ucrBasePCA.ClickOk
         sdgPrincipalComponentAnalysis.PCAOptions()
     End Sub
+
+
 End Class

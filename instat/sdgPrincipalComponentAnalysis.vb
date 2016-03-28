@@ -35,15 +35,40 @@ Public Class sdgPrincipalComponentAnalysis
         frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$eig", 2)
     End Sub
 
+    Private Sub EigenVectors()
+        frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$ind$contrib", 2)
+    End Sub
+
+    Private Sub Scores()
+        frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$ind$coord", 2)
+    End Sub
+
+    Private Sub Residuals()
+        'frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$eig", 2)
+    End Sub
+
     Public Sub SetDefaults()
         chkEigenValues.Checked = True
+        chkEigenVectors.Checked = True
+        chkScores.Checked = True
+        chkResiduals.Checked = True
     End Sub
 
     Public Sub PCAOptions()
         If (chkEigenValues.Checked) Then
             EigenValues()
         End If
+        If (chkEigenVectors.Checked) Then
+            EigenVectors()
+        End If
+        If (chkScores.Checked) Then
+            Scores()
+        End If
+        If (chkResiduals.Checked) Then
+            Residuals()
+        End If
     End Sub
+
 End Class
 
 

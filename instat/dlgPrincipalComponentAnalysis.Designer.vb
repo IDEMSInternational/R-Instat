@@ -28,7 +28,7 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.lblComponents = New System.Windows.Forms.Label()
         Me.chkScaleData = New System.Windows.Forms.CheckBox()
         Me.chkSaveResult = New System.Windows.Forms.CheckBox()
-        Me.ucrResultName = New instat.ucrVariableName()
+        Me.ucrResultName = New instat.ucrInputTextBox()
         Me.ucrReceiverMultiplePCA = New instat.ucrReceiverMultiple()
         Me.ucrSelectorPCA = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBasePCA = New instat.ucrButtons()
@@ -96,10 +96,10 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'ucrResultName
         '
-        Me.ucrResultName.Location = New System.Drawing.Point(122, 217)
+        Me.ucrResultName.Location = New System.Drawing.Point(111, 222)
         Me.ucrResultName.Name = "ucrResultName"
-        Me.ucrResultName.Size = New System.Drawing.Size(149, 23)
-        Me.ucrResultName.TabIndex = 7
+        Me.ucrResultName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrResultName.TabIndex = 10
         '
         'ucrReceiverMultiplePCA
         '
@@ -128,8 +128,8 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 298)
-        Me.Controls.Add(Me.chkSaveResult)
         Me.Controls.Add(Me.ucrResultName)
+        Me.Controls.Add(Me.chkSaveResult)
         Me.Controls.Add(Me.chkScaleData)
         Me.Controls.Add(Me.lblComponents)
         Me.Controls.Add(Me.nudComponents)
@@ -158,5 +158,5 @@ Partial Class dlgPrincipalComponentAnalysis
     Friend WithEvents lblComponents As Label
     Friend WithEvents chkScaleData As CheckBox
     Friend WithEvents chkSaveResult As CheckBox
-    Friend WithEvents ucrResultName As ucrVariableName
+    Friend WithEvents ucrResultName As ucrInputTextBox
 End Class
