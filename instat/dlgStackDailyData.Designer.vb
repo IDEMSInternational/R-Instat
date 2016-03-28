@@ -27,7 +27,7 @@ Partial Class dlgStackDailyData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(4, 296)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 182)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 57)
         Me.ucrBase.TabIndex = 0
@@ -36,7 +36,7 @@ Partial Class dlgStackDailyData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 351)
+        Me.ClientSize = New System.Drawing.Size(420, 254)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgStackDailyData"
