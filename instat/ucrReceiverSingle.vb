@@ -118,5 +118,13 @@ Public Class ucrReceiverSingle
     Private Sub RemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
         RemoveSelected()
     End Sub
+
+    Public Sub SetStackedFactorMode(bDisableReceiver As Boolean)
+        If bDisableReceiver Then
+            txtReceiverSingle.Text = "variable"
+            txtReceiverSingle.Enabled = False
+        End If
+    End Sub
+
 End Class
 
