@@ -31,7 +31,6 @@ Public Class dlgImportDataset
         grdDataPreview.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
 
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("read.csv")
 
         If bFirstLoad Then
             SetDefaultValues()
@@ -218,7 +217,7 @@ Public Class dlgImportDataset
         Dim strFileName As String = ""
         Dim strFileExt As String = ""
 
-        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|Excel files (*.xls,*xlsx)|*.xls;*.xlsx|All Data files (*.csv,*.RDS)|*.csv;*.RDS"
+        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|Excel files (*.xlsx)|*.xlsx|All Data files (*.csv,*.xlsx,*.RDS)|*.csv;*.xlsx;*.RDS"
         dlgOpen.Title = "Open Data from file"
 
         If dlgOpen.ShowDialog() = DialogResult.OK Then
@@ -235,18 +234,27 @@ Public Class dlgImportDataset
                 'TODO create dialog to do this
                 'frmMain.clsRLink.LoadData(pair.Key, pair.Value, strFileExt)
             Case ".csv"
+                ucrBase.clsRsyntax.SetFunction("read.csv")
                 'TODO where should this go?
                 If Not frmMain.clsRLink.bInstatObjectExists Then
                     frmMain.clsRLink.CreateNewInstatObject()
                 End If
                 SetDataName(strFileName)
                 SetFilePath(strFilePath)
-            Case ".xls"
-                'to add
             Case ".xlsx"
-                'to add
+                'calls the sub dialog
+                sdgImportExcel.receiveExcel(strFilePath)
+                'hides the import txt dialog
+                sdgImportExcel.ShowDialog()
+
         End Select
         ' TODO Remove LoadData sub in clsRLink once all opening is done through dialogs
+    End Sub
+
+    Public Sub setExcelRead(strFilePath As String, strFileName As String)
+
+
+
     End Sub
 
     Private Sub nudSkips_ValueChanged(sender As Object, e As EventArgs) Handles nudSkips.ValueChanged
