@@ -27,7 +27,7 @@ Partial Class dlgShiftDailyData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 270)
+        Me.ucrBase.Location = New System.Drawing.Point(2, 138)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 55)
         Me.ucrBase.TabIndex = 0
@@ -36,7 +36,7 @@ Partial Class dlgShiftDailyData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 328)
+        Me.ClientSize = New System.Drawing.Size(424, 218)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgShiftDailyData"

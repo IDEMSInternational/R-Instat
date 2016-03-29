@@ -27,7 +27,7 @@ Partial Class dlgExamine
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 277)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 91)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -36,7 +36,7 @@ Partial Class dlgExamine
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(433, 337)
+        Me.ClientSize = New System.Drawing.Size(433, 180)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgExamine"
