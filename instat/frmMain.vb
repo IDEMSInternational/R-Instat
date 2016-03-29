@@ -386,7 +386,7 @@ Public Class frmMain
     End Sub
 
     Private Sub FactorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuManageFactor.Click
-        dlgfactor.ShowDialog()
+        'dlgfactor.ShowDialog()
     End Sub
     Private Sub OrthogonalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOrthogonal.Click
         dlgOrthogonal.ShowDialog()
