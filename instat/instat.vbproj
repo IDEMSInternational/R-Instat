@@ -310,6 +310,12 @@
     <Compile Include="dlgFromLibrary.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgGeneralRegression.Designer.vb">
+      <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGeneralRegression.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgGeneralTables.Designer.vb">
       <DependentUpon>dlgGeneralTables.vb</DependentUpon>
     </Compile>
@@ -1807,6 +1813,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralRegression.fr-FR.resx">
+      <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralRegression.resx">
+      <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralRegression.sw-KE.resx">
+      <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGeneralTables.fr-FR.resx">
       <DependentUpon>dlgGeneralTables.vb</DependentUpon>
