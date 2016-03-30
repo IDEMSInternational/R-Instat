@@ -574,6 +574,12 @@
     <Compile Include="sdgPrincipalComponentAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgScatterPlot.Designer.vb">
+      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgScatterPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgThemeOptions.Designer.vb">
       <DependentUpon>sdgThemeOptions.vb</DependentUpon>
     </Compile>
@@ -3356,6 +3362,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPlots.sw-KE.resx">
       <DependentUpon>sdgPlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgScatterPlot.fr-FR.resx">
+      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgScatterPlot.resx">
+      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgScatterPlot.sw-KE.resx">
+      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.fr-FR.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
