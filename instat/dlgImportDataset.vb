@@ -31,10 +31,10 @@ Public Class dlgImportDataset
         grdDataPreview.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
 
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("read.csv")
 
         If bFirstLoad Then
             SetDefaultValues()
+            setExcelDefaults()
             bFirstLoad = False
         End If
 
@@ -43,6 +43,8 @@ Public Class dlgImportDataset
         txtName.Focus()
 
         RefreshFrameView()
+
+        TestOkEnabled()
 
     End Sub
 
@@ -60,17 +62,23 @@ Public Class dlgImportDataset
 
     Public Sub SetDataName(strName As String)
         txtName.Text = strName
-        ucrBase.clsRsyntax.SetAssignTo(txtName.Text, strTempDataframe:=txtName.Text)
+        ucrBase.clsRsyntax.SetAssignTo(txtName.Text, txtName.Text)
+        TestOkEnabled()
     End Sub
 
     Public Sub setLinesToRead(lines As Integer)
         intLines = lines
     End Sub
 
-    Public Sub SetFilePath(strFilePath As String)
-        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+    Public Sub SetFilePath(strFilePath As String, strRparameter As String)
+        ucrBase.clsRsyntax.AddParameter(strRparameter, Chr(34) & strFilePath & Chr(34))
         txtFilePath.Text = strFilePath
-        RefreshFilePreview()
+        If strRparameter <> "xlsxFile" Then
+            RefreshFilePreview()
+        Else
+            txtInputFile.Text = "Cannot access file contents"
+            FillExcelSheets(strFilePath)
+        End If
         RefreshFrameView()
     End Sub
 
@@ -176,15 +184,22 @@ Public Class dlgImportDataset
         RefreshFrameView()
     End Sub
 
-    Private Sub RefreshFrameView()
+    Private Sub RefreshFrameView(Optional bPreviewExcel As Boolean = False)
         Dim dfTemp As CharacterMatrix
         Dim bToBeAssigned As Boolean
         bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
         Try
             ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = False
-            ucrBase.clsRsyntax.AddParameter("nrows", intLines)
+            If bPreviewExcel Then
+                ucrBase.clsRsyntax.AddParameter("rows", "1:" & intLines)
+                ucrBase.clsRsyntax.RemoveParameter("nrows")
+            Else
+                ucrBase.clsRsyntax.AddParameter("nrows", intLines)
+                ucrBase.clsRsyntax.RemoveParameter("rows")
+            End If
             dfTemp = frmMain.clsRLink.GetData(ucrBase.clsRsyntax.GetScript())
             ucrBase.clsRsyntax.RemoveParameter("nrows")
+            ucrBase.clsRsyntax.RemoveParameter("rows")
             ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
             frmMain.clsGrids.FillSheet(dfTemp, txtName.Text, grdDataPreview)
         Catch
@@ -211,6 +226,14 @@ Public Class dlgImportDataset
 
     End Sub
 
+    Private Sub TestOkEnabled()
+        If txtName.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
     'Loads the open dialog on load and click
     Private Sub GetFileFromOpenDialog()
         Dim dlgOpen As New OpenFileDialog
@@ -218,10 +241,11 @@ Public Class dlgImportDataset
         Dim strFileName As String = ""
         Dim strFileExt As String = ""
 
-        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|Excel files (*.xls,*xlsx)|*.xls;*.xlsx|All Data files (*.csv,*.RDS)|*.csv;*.RDS"
+        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|Excel files (*.xls,*xlsx)|*.xls;*.xlsx|All Data files (*.csv,*.xls,*.xlsx,*.RDS)|*.csv;*.xls;*.xlsx;*.RDS"
         dlgOpen.Title = "Open Data from file"
 
         If dlgOpen.ShowDialog() = DialogResult.OK Then
+            txtName.Text = ""
             'checks if the file name is not blank'
             If dlgOpen.FileName <> "" Then
                 strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
@@ -235,18 +259,30 @@ Public Class dlgImportDataset
                 'TODO create dialog to do this
                 'frmMain.clsRLink.LoadData(pair.Key, pair.Value, strFileExt)
             Case ".csv"
+                ucrBase.clsRsyntax.SetFunction("read.csv")
+                removeExcelParameters()
+                grpExcel.Hide()
+                grpCSV.Show()
                 'TODO where should this go?
                 If Not frmMain.clsRLink.bInstatObjectExists Then
                     frmMain.clsRLink.CreateNewInstatObject()
                 End If
                 SetDataName(strFileName)
-                SetFilePath(strFilePath)
+                SetFilePath(strFilePath, "file")
             Case ".xls"
                 'to add
             Case ".xlsx"
-                'to add
+                ucrBase.clsRsyntax.SetFunction("readWorkbook")
+                If Not frmMain.clsRLink.bInstatObjectExists Then
+                    frmMain.clsRLink.CreateNewInstatObject()
+                End If
+                SetFilePath(strFilePath, "xlsxFile")
+                removeCsvParameters()
+                grpCSV.Hide()
+                grpExcel.Show()
         End Select
-        ' TODO Remove LoadData sub in clsRLink once all opening is done through dialogs
+
+
     End Sub
 
     Private Sub nudSkips_ValueChanged(sender As Object, e As EventArgs) Handles nudSkips.ValueChanged
@@ -260,4 +296,107 @@ Public Class dlgImportDataset
         GetFileFromOpenDialog()
     End Sub
 
+    Private Sub removeCsvParameters()
+        ucrBase.clsRsyntax.RemoveParameter("file")
+        ucrBase.clsRsyntax.RemoveParameter("header")
+        ucrBase.clsRsyntax.RemoveParameter("comment.char")
+        ucrBase.clsRsyntax.RemoveParameter("dec")
+        ucrBase.clsRsyntax.RemoveParameter("sep")
+        ucrBase.clsRsyntax.RemoveParameter("row.names")
+        ucrBase.clsRsyntax.RemoveParameter("encoding")
+        ucrBase.clsRsyntax.RemoveParameter("na.strings")
+    End Sub
+#Region "Excel options"
+    Private Sub removeExcelParameters()
+        ucrBase.clsRsyntax.RemoveParameter("xlsxFile")
+        ucrBase.clsRsyntax.RemoveParameter("sheet")
+        ucrBase.clsRsyntax.RemoveParameter("startRow")
+        ucrBase.clsRsyntax.RemoveParameter("colNames")
+        ucrBase.clsRsyntax.RemoveParameter("detectDates")
+        ucrBase.clsRsyntax.RemoveParameter("rowNames")
+        ucrBase.clsRsyntax.RemoveParameter("skipEmptyRows")
+        ucrBase.clsRsyntax.RemoveParameter("rows")
+        ucrBase.clsRsyntax.RemoveParameter("cols")
+        ucrBase.clsRsyntax.RemoveParameter("check.names")
+    End Sub
+
+    Private Sub setExcelDefaults()
+        nudStartRow.Value = 1
+        chkColumnNames.Checked = True
+        chkDates.Checked = False
+        chkSkipEmptyRows.Checked = True
+        'txtRegionName.Text = "None"
+        cboAvailableSheets.SelectedIndex = -1
+    End Sub
+
+    Private Sub cboAvailableSheets_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboAvailableSheets.SelectedValueChanged
+        SetDataName(cboAvailableSheets.SelectedItem)
+        ucrBase.clsRsyntax.AddParameter("sheet", Chr(34) & cboAvailableSheets.SelectedItem & Chr(34))
+        RefreshFrameView(bPreviewExcel:=True)
+    End Sub
+
+    Private Sub FillExcelSheets(strFilePath As String)
+        Dim i As Integer
+        Dim dfSheetList As CharacterMatrix
+        dfSheetList = frmMain.clsRLink.clsEngine.Evaluate("getSheetNames(" & Chr(34) & strFilePath & Chr(34) & ")").AsCharacterMatrix
+        'fills the combo box
+        cboAvailableSheets.Items.Clear()
+        cboAvailableSheets.SelectedIndex = -1
+        For i = 0 To dfSheetList.RowCount - 1
+            cboAvailableSheets.Items.Add(dfSheetList(i, 0))
+        Next
+    End Sub
+
+    Private Sub nudStartRow_ValueChanged(sender As Object, e As EventArgs) Handles nudStartRow.ValueChanged
+        If cboAvailableSheets.SelectedItem <> "" Then
+            ucrBase.clsRsyntax.AddParameter("startRow", nudStartRow.Value)
+            RefreshFrameView(bPreviewExcel:=True)
+        End If
+    End Sub
+
+    Private Sub chkColumnNames_CheckStateChanged(sender As Object, e As EventArgs) Handles chkColumnNames.CheckStateChanged
+        If cboAvailableSheets.SelectedItem <> "" Then
+            If chkColumnNames.Checked Then
+                ucrBase.clsRsyntax.AddParameter("colNames", "TRUE")
+            Else
+                ucrBase.clsRsyntax.AddParameter("colNames", "FALSE")
+            End If
+            RefreshFrameView(bPreviewExcel:=True)
+        End If
+    End Sub
+
+    Private Sub chkDates_CheckStateChanged(sender As Object, e As EventArgs) Handles chkDates.CheckStateChanged
+        If cboAvailableSheets.SelectedItem <> "" Then
+            If chkDates.Checked Then
+                ucrBase.clsRsyntax.AddParameter("detectDates", "TRUE")
+            Else
+                ucrBase.clsRsyntax.AddParameter("detectDates", "FALSE")
+            End If
+            RefreshFrameView(bPreviewExcel:=True)
+        End If
+    End Sub
+
+    Private Sub chkNames_CheckStateChanged(sender As Object, e As EventArgs) Handles chkNames.CheckStateChanged
+        If cboAvailableSheets.SelectedItem <> "" Then
+            If chkNames.Checked Then
+                ucrBase.clsRsyntax.AddParameter("check.names", "TRUE")
+            Else
+                ucrBase.clsRsyntax.AddParameter("check.names", "FALSE")
+            End If
+            RefreshFrameView(bPreviewExcel:=True)
+        End If
+    End Sub
+
+    Private Sub chkSkipEmptyRows_CheckStateChanged(sender As Object, e As EventArgs) Handles chkSkipEmptyRows.CheckStateChanged
+        If cboAvailableSheets.SelectedItem <> "" Then
+            If chkSkipEmptyRows.Checked Then
+                ucrBase.clsRsyntax.AddParameter("skipEmptyRows", "TRUE")
+            Else
+                ucrBase.clsRsyntax.AddParameter("skipEmptyRows", "FALSE")
+            End If
+            RefreshFrameView(bPreviewExcel:=True)
+        End If
+    End Sub
+
+#End Region
 End Class
