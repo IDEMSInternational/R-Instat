@@ -78,7 +78,7 @@ Public Class dlgReferenceLevel
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrFactorReferenceLevels_CheckedChanged() Handles ucrFactorReferenceLevels.CheckedChanged
+    Private Sub ucrFactorReferenceLevels_SelectedLevelChanged() Handles ucrFactorReferenceLevels.SelectedLevelChanged
         ucrBase.clsRsyntax.AddParameter("new_ref_level", ucrFactorReferenceLevels.GetSelectedLevels())
     End Sub
 End Class

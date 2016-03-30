@@ -19,7 +19,7 @@ Imports unvell.ReoGrid.CellTypes
 Imports unvell.ReoGrid.Events
 
 Public Class ucrFactor
-    Public Event CheckedChanged()
+    Public Event SelectedLevelChanged()
     Public WithEvents clsReceiver As ucrReceiverSingle
     Public WithEvents shtCurrSheet As unvell.ReoGrid.Worksheet
     Public clsRSyntax As New RSyntax
@@ -169,7 +169,7 @@ Public Class ucrFactor
                     End If
                 End If
             Next
-            RaiseEvent CheckedChanged()
+            RaiseEvent SelectedLevelChanged()
         End If
 
     End Sub
