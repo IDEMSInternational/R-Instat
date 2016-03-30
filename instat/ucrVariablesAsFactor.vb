@@ -1,4 +1,5 @@
 ﻿Public Class ucrVariablesAsFactor
+    Dim strDataType As String
     Public bSingleVariable As Boolean = True
     Public bFirstLoad As Boolean = True
     Public ucrFactorReceiver As ucrReceiverSingle
@@ -17,6 +18,10 @@
 
     Public Sub SetFactorReceiver(ucrReceiverToSet As ucrReceiverSingle)
         ucrFactorReceiver = ucrReceiverToSet
+    End Sub
+    Public Sub SetDataType(strTemp As String)
+        ucrSingleVariable.SetDataType(strTemp)
+        ucrMultipleVariables.SetDataType(strTemp)
     End Sub
 
     Public Sub SetSelector(ucrSelectorToSet As ucrSelectorByDataFrame)
