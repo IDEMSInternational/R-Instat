@@ -32,7 +32,11 @@ Public Class ucrSelectorByDataFrame
 
     Public Overrides Sub LoadList()
         If ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType:=CurrentReceiver.strDataType, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            If CurrentReceiver IsNot Nothing Then
+                frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType:=CurrentReceiver.strDataType, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            Else
+                frmMain.clsRLink.FillListView(lstAvailableVariable, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            End If
         End If
     End Sub
     Public Overrides Sub Reset()
