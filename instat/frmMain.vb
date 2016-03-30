@@ -983,5 +983,9 @@ Public Class frmMain
     Private Sub mnuStatisticsNonParametricTwoSamples_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoSamples.Click
         dlgTwoSamples.ShowDialog()
     End Sub
+
+    Private Sub mnuStatisticsRegressionGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionGeneral.Click
+        dlgGeneralRegression.ShowDialog()
+    End Sub
 End Class
 
