@@ -17,8 +17,8 @@ Imports instat.Translations
 Public Class sdgSimpleRegOptions
     Public clsRModelFunction As RFunction
     Public clsRGraphics, clsRFittedModelGraphics, clsRFittedModelGraphics2 As New RSyntax
-    Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsRFourPlotsFunction, clsRgeom_point As New RFunction
-    Public clsRggplotFunction, clsRaesFunction, clsRStat_smooth, clsRModelsFunction, clsRCIFunction As New RFunction
+    Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsRFourPlotsFunction, clsRgeom_point, clsRPredFunction, clsRDFFunction As New RFunction
+    Public clsRggplotFunction, clsRaesFunction, clsRStat_smooth, clsRModelsFunction, clsRCIFunction, clsR_ribbon, clsRaes_ribbon As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub sdgSimpleRegOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -92,10 +92,30 @@ Public Class sdgSimpleRegOptions
         clsRStat_smooth.AddParameter("method", Chr(34) & "lm" & Chr(34))
         GraphicsConfidenceSE()
         clsRFittedModelGraphics.AddOperatorParameter("", clsRFunc:=clsRStat_smooth)
+    End Sub
 
-        'need to factor in prediction interval
+    Private Sub FitConfidence()
+        FittedModel()
         frmMain.clsRLink.RunScript(clsRFittedModelGraphics.GetScript, 0)
+    End Sub
 
+    Private Sub FitPrediction()
+        FittedModel()
+        clsRPredFunction.SetRCommand("predict")
+        clsRDFFunction.SetRCommand("data.frame")
+        clsRPredFunction.AddParameter("object", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+        clsRPredFunction.AddParameter("interval", Chr(34) & "prediction" & Chr(34))
+        clsRDFFunction.AddParameter("", clsRFunctionParameter:=clsRPredFunction)
+        clsRaes_ribbon.SetRCommand("aes")
+        clsRaes_ribbon.AddParameter("ymin", clsRDFFunction.ToScript() & "$lwr")
+        clsRaes_ribbon.AddParameter("ymax", clsRDFFunction.ToScript() & "$upr")
+        clsR_ribbon.SetRCommand("geom_ribbon")
+        clsR_ribbon.AddParameter("mapping", clsRFunctionParameter:=clsRaes_ribbon)
+        clsR_ribbon.AddParameter("alpha", 0.95) 'to fix alpha
+        clsR_ribbon.AddParameter("show.legend", "FALSE") 'to fix show  legend
+        clsRFittedModelGraphics.AddOperatorParameter("", clsRFunc:=clsR_ribbon)
+
+        frmMain.clsRLink.RunScript(clsRFittedModelGraphics.GetScript, 0)
     End Sub
 
     Private Sub ConfidenceInterval()
@@ -230,7 +250,12 @@ Public Class sdgSimpleRegOptions
             FourPlots()
         End If
         If (chkFittedModel.Checked) Then
-            FittedModel()
+            If (chkGraphicsCLimits.Checked) Then
+                FitConfidence()
+            End If
+            If (chkPredictionInterval.Checked) Then
+                FitPrediction()
+            End If
         End If
     End Sub
 End Class
