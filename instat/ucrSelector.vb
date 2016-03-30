@@ -17,9 +17,12 @@
 Imports RDotNet
 Imports instat.Translations
 Public Class ucrSelector
-    Public CurrentReceiver As New ucrReceiver
+    Public CurrentReceiver As ucrReceiver
     Public Event ResetAll()
     Public Event ResetReceivers()
+    Public Event VariablesInReceiversChanged()
+    Public WithEvents lstVariablesInReceivers As New List(Of String)
+
     Private Sub ucrdataselection_load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadList()
     End Sub
@@ -33,16 +36,23 @@ Public Class ucrSelector
     End Sub
 
     Public Overridable Sub LoadList()
-        frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType:=CurrentReceiver.strDataType)
+        If CurrentReceiver IsNot Nothing Then
+            frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType:=CurrentReceiver.strDataType)
+        End If
     End Sub
 
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
         LoadList()
+        'lstItemsInReceivers.Clear()
     End Sub
 
     Public Sub SetCurrentReceiver(conReceiver As ucrReceiver)
+        If CurrentReceiver IsNot Nothing Then
+            CurrentReceiver.RemoveColor()
+        End If
         CurrentReceiver = conReceiver
+        CurrentReceiver.SetColor()
         LoadList()
         If (TypeOf CurrentReceiver Is ucrReceiverSingle) Then
             'lstAvailableVariable.SelectionMode = SelectionMode.One
@@ -54,7 +64,7 @@ Public Class ucrSelector
     End Sub
 
     Public Sub Add()
-        If (lstAvailableVariable.SelectedItems.Count > 0) Then
+        If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
             CurrentReceiver.AddSelected()
             CurrentReceiver.Focus()
         End If
@@ -113,4 +123,15 @@ Public Class ucrSelector
         lstAvailableVariable.EndUpdate()
 
     End Sub
+
+    Public Sub AddToVariablesList(strVariable As String)
+        lstVariablesInReceivers.Add(strVariable)
+        RaiseEvent VariablesInReceiversChanged()
+    End Sub
+
+    Public Sub RemoveFromVariablesList(strVariable As String)
+        lstVariablesInReceivers.Remove(strVariable)
+        RaiseEvent VariablesInReceiversChanged()
+    End Sub
+
 End Class
