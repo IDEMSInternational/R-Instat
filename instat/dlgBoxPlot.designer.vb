@@ -22,28 +22,18 @@ Partial Class dlgBoxplot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblYVarToPlot = New System.Windows.Forms.Label()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgBoxplot))
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
         Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
-        Me.ucrYvariableReceiver = New instat.ucrReceiverSingle()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.chkHorizontalBoxplot = New System.Windows.Forms.CheckBox()
+        Me.UcrVariablesAsFactor1 = New instat.ucrVariablesAsFactor()
         Me.SuspendLayout()
-        '
-        'lblYVarToPlot
-        '
-        Me.lblYVarToPlot.AutoSize = True
-        Me.lblYVarToPlot.Location = New System.Drawing.Point(271, 58)
-        Me.lblYVarToPlot.Name = "lblYVarToPlot"
-        Me.lblYVarToPlot.Size = New System.Drawing.Size(91, 13)
-        Me.lblYVarToPlot.TabIndex = 1
-        Me.lblYVarToPlot.Tag = "Y_variables_to_plot"
-        Me.lblYVarToPlot.Text = "Y variables to plot"
         '
         'cmdOptions
         '
@@ -85,14 +75,6 @@ Partial Class dlgBoxplot
         Me.cmdBoxPlotOptions.Text = "BoxPlot Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
         '
-        'ucrYvariableReceiver
-        '
-        Me.ucrYvariableReceiver.Location = New System.Drawing.Point(276, 75)
-        Me.ucrYvariableReceiver.Name = "ucrYvariableReceiver"
-        Me.ucrYvariableReceiver.Selector = Nothing
-        Me.ucrYvariableReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrYvariableReceiver.TabIndex = 2
-        '
         'ucrSecondFactorReceiver
         '
         Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(276, 176)
@@ -104,6 +86,7 @@ Partial Class dlgBoxplot
         'ucrSelectorBoxPlot
         '
         Me.ucrSelectorBoxPlot.Location = New System.Drawing.Point(12, 9)
+        Me.ucrSelectorBoxPlot.lstVariablesInReceivers = CType(resources.GetObject("ucrSelectorBoxPlot.lstVariablesInReceivers"), System.Collections.Generic.List(Of String))
         Me.ucrSelectorBoxPlot.Name = "ucrSelectorBoxPlot"
         Me.ucrSelectorBoxPlot.Size = New System.Drawing.Size(230, 215)
         Me.ucrSelectorBoxPlot.TabIndex = 0
@@ -134,21 +117,28 @@ Partial Class dlgBoxplot
         Me.chkHorizontalBoxplot.Text = "Horizontal boxplot"
         Me.chkHorizontalBoxplot.UseVisualStyleBackColor = True
         '
+        'UcrVariablesAsFactor1
+        '
+        Me.UcrVariablesAsFactor1.Location = New System.Drawing.Point(408, 9)
+        Me.UcrVariablesAsFactor1.Name = "UcrVariablesAsFactor1"
+        Me.UcrVariablesAsFactor1.Size = New System.Drawing.Size(125, 136)
+        Me.UcrVariablesAsFactor1.TabIndex = 21
+        Me.UcrVariablesAsFactor1.ucrVariableSelector = Nothing
+        '
         'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(402, 291)
+        Me.ClientSize = New System.Drawing.Size(569, 291)
+        Me.Controls.Add(Me.UcrVariablesAsFactor1)
         Me.Controls.Add(Me.chkHorizontalBoxplot)
         Me.Controls.Add(Me.cmdBoxPlotOptions)
-        Me.Controls.Add(Me.ucrYvariableReceiver)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.Controls.Add(Me.ucrSelectorBoxPlot)
         Me.Controls.Add(Me.lblBySecondFactor)
         Me.Controls.Add(Me.lblByFactors)
         Me.Controls.Add(Me.ucrByFactorsReceiver)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.lblYVarToPlot)
         Me.Controls.Add(Me.ucrBase)
         Me.Cursor = System.Windows.Forms.Cursors.Default
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -165,14 +155,13 @@ Partial Class dlgBoxplot
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblYVarToPlot As Label
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrByFactorsReceiver As ucrReceiverSingle
     Friend WithEvents lblByFactors As Label
     Friend WithEvents ucrSelectorBoxPlot As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblBySecondFactor As Label
-    Friend WithEvents ucrYvariableReceiver As ucrReceiverSingle
     Friend WithEvents cmdBoxPlotOptions As Button
     Friend WithEvents chkHorizontalBoxplot As CheckBox
+    Friend WithEvents UcrVariablesAsFactor1 As ucrVariablesAsFactor
 End Class
