@@ -41,8 +41,8 @@ Public Class dlgBoxplot
         sdgBoxPlot.SetBoxPlotFunction(clsRgeom_boxplotFunction)
         autoTranslate(Me)
 
-        UcrVariablesAsFactor1.SetFactorReceiver(ucrByFactorsReceiver)
-        UcrVariablesAsFactor1.SetSelector(ucrSelectorBoxPlot)
+        ucrVariablesAsFactor.SetFactorReceiver(ucrByFactorsReceiver)
+        ucrVariablesAsFactor.SetSelector(ucrSelectorBoxPlot)
 
         If bFirstLoad Then
             SetDefaults()
@@ -74,7 +74,7 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not UcrVariablesAsFactor1.IsEmpty Then
+        If Not ucrVariablesAsFactor.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -128,9 +128,9 @@ Public Class dlgBoxplot
         SetOperator()
     End Sub
 
-    Private Sub UcrVariablesAsFactor1_SelectionChanged() Handles UcrVariablesAsFactor1.SelectionChanged
-        If Not UcrVariablesAsFactor1.IsEmpty Then
-            clsRaesFunction.AddParameter("y", UcrVariablesAsFactor1.GetVariableNames(False))
+    Private Sub UcrVariablesAsFactor1_SelectionChanged() Handles ucrVariablesAsFactor.SelectionChanged
+        If Not ucrVariablesAsFactor.IsEmpty Then
+            clsRaesFunction.AddParameter("y", ucrVariablesAsFactor.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
