@@ -63,13 +63,13 @@ Public Class dlgPlot
 
 
 
-        ucrVariablesAsFactor.SetFactorReceiver(ucrFactorOptionalReceiver)
-        ucrVariablesAsFactor.SetSelector(ucrLinePlotSelector)
-        'ucrVariablesAsFactor.SetDataType("numeric")
+        ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
+        ucrVariablesAsFactorForLinePlot.SetSelector(ucrLinePlotSelector)
+        ' ucrVariablesAsFactor.SetDataType("numeric")
 
     End Sub
     Private Sub TeskOkEnabled()
-        If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactor.IsEmpty() Then
+        If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactorForLinePlot.IsEmpty() Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -116,9 +116,9 @@ Public Class dlgPlot
         End If
     End Sub
 
-    Private Sub UcrVariablesAsFactor_SelectionChanged() Handles ucrVariablesAsFactor.SelectionChanged
-        If Not ucrVariablesAsFactor.IsEmpty() Then
-            clsRaesFunction.AddParameter("y", ucrVariablesAsFactor.GetVariableNames(False))
+    Private Sub UcrVariablesAsFactor_SelectionChanged() Handles ucrVariablesAsFactorForLinePlot.SelectionChanged
+        If Not ucrVariablesAsFactorForLinePlot.IsEmpty() Then
+            clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForLinePlot.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If

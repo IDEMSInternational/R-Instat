@@ -22,7 +22,6 @@ Partial Class dlgPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgPlot))
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
@@ -30,7 +29,7 @@ Partial Class dlgPlot
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.chkPoints = New System.Windows.Forms.CheckBox()
         Me.ucrSaveLinePlot = New instat.ucrSaveGraph()
-        Me.ucrVariablesAsFactor = New instat.ucrVariablesAsFactor()
+        Me.ucrVariablesAsFactorForLinePlot = New instat.ucrVariablesAsFactor()
         Me.ucrLinePlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
@@ -103,18 +102,18 @@ Partial Class dlgPlot
         Me.ucrSaveLinePlot.Size = New System.Drawing.Size(265, 27)
         Me.ucrSaveLinePlot.TabIndex = 15
         '
-        'ucrVariablesAsFactor
+        'ucrVariablesAsFactorForLinePlot
         '
-        Me.ucrVariablesAsFactor.Location = New System.Drawing.Point(251, 2)
-        Me.ucrVariablesAsFactor.Name = "ucrVariablesAsFactor"
-        Me.ucrVariablesAsFactor.Size = New System.Drawing.Size(125, 136)
-        Me.ucrVariablesAsFactor.TabIndex = 14
-        Me.ucrVariablesAsFactor.ucrVariableSelector = Nothing
+        Me.ucrVariablesAsFactorForLinePlot.Location = New System.Drawing.Point(251, 2)
+        Me.ucrVariablesAsFactorForLinePlot.Name = "ucrVariablesAsFactorForLinePlot"
+        Me.ucrVariablesAsFactorForLinePlot.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorForLinePlot.TabIndex = 14
+        Me.ucrVariablesAsFactorForLinePlot.ucrVariableSelector = Nothing
         '
         'ucrLinePlotSelector
         '
         Me.ucrLinePlotSelector.Location = New System.Drawing.Point(3, 3)
-        Me.ucrLinePlotSelector.lstVariablesInReceivers = CType(resources.GetObject("ucrLinePlotSelector.lstVariablesInReceivers"), System.Collections.Generic.List(Of String))
+        Me.ucrLinePlotSelector.lstVariablesInReceivers = Nothing
         Me.ucrLinePlotSelector.Name = "ucrLinePlotSelector"
         Me.ucrLinePlotSelector.Size = New System.Drawing.Size(242, 179)
         Me.ucrLinePlotSelector.TabIndex = 0
@@ -148,7 +147,7 @@ Partial Class dlgPlot
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(412, 315)
         Me.Controls.Add(Me.ucrSaveLinePlot)
-        Me.Controls.Add(Me.ucrVariablesAsFactor)
+        Me.Controls.Add(Me.ucrVariablesAsFactorForLinePlot)
         Me.Controls.Add(Me.chkPoints)
         Me.Controls.Add(Me.cmdPointOptions)
         Me.Controls.Add(Me.cmdOptions)
@@ -180,6 +179,6 @@ Partial Class dlgPlot
     Friend WithEvents lblFactorOptional As Label
     Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
     Friend WithEvents chkPoints As CheckBox
-    Friend WithEvents ucrVariablesAsFactor As ucrVariablesAsFactor
+    Friend WithEvents ucrVariablesAsFactorForLinePlot As ucrVariablesAsFactor
     Friend WithEvents ucrSaveLinePlot As ucrSaveGraph
 End Class
