@@ -27,8 +27,8 @@ Public Class dlgOptions
     'Define the Fonts dialog (only one)
     Dim dlgFont As New FontDialog
     Dim bFirstLoad As Boolean = True
-    Dim fntOutput As Font
-    Dim clrOutput As Color
+    Dim fntOutput, fntScript, fntComment As Font
+    Dim clrOutput, clrScript, clrComment As Color
 
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -50,16 +50,43 @@ Public Class dlgOptions
         chkIncludeDefaultParams.Checked = frmMain.clsInstatOptions.bIncludeRDefaultParameters
         fntOutput = frmMain.clsInstatOptions.fntOutput
         clrOutput = frmMain.clsInstatOptions.clrOutput
-        'every option in the dialog should be set here by getting the corresponding value
-        'in clsInstatOptions.
-        'This sub is run every time the dialog opens.
+        fntScript = frmMain.clsInstatOptions.fntScript
+        clrScript = frmMain.clsInstatOptions.clrScript
+        fntComment = frmMain.clsInstatOptions.fntComment
+        clrComment = frmMain.clsInstatOptions.clrComment
+        '
+        rdoEnglish.Checked = frmMain.clsInstatOptions.bEng
+        rdoFrench.Checked = frmMain.clsInstatOptions.bFr
+        rdoKiswahili.Checked = frmMain.clsInstatOptions.bKis
+        '
+        nudNoLines.Value = frmMain.clsInstatOptions.iLines
+
     End Sub
 
     Private Sub SetInstatOptions()
         frmMain.clsInstatOptions.bIncludeRDefaultParameters = chkIncludeDefaultParams.Checked
         frmMain.clsInstatOptions.SetFormatOutput(fntOutput, clrOutput)
-        'every value in clsInstatOptions should be set here from the current value in the dialog.
-        'This sub is called when the user clicks Apply/OK
+        frmMain.clsInstatOptions.SetFormatComment(fntComment, clrComment)
+        frmMain.clsInstatOptions.SetFormatScript(fntScript, clrScript)
+        frmMain.clsInstatOptions.SetComments(txtComment.Text)
+        frmMain.clsInstatOptions.SetNoLines(nudNoLines.Value)
+        '
+        If frmMain.clsInstatOptions.bEng Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+            strCurrLanguage = "eng"
+        End If
+        If frmMain.clsInstatOptions.bFr Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("fr-FR")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("fr-FR")
+            strCurrLanguage = "fra"
+        End If
+        If frmMain.clsInstatOptions.bKis Then
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
+            Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
+            strCurrLanguage = "swa"
+        End If
+
     End Sub
 
     Private Sub SetView()
@@ -105,8 +132,6 @@ Public Class dlgOptions
     End Sub
 
     Private Sub SetDefaults()
-        ' Load saved values.
-        'InstatOptions.LoadAllSettings(Application.ProductName, Me)
         txtComment.Text = strComment
         strCurrLanguage = Thread.CurrentThread.CurrentCulture.ThreeLetterISOLanguageName
         rdoEnglish.Checked = False
@@ -137,28 +162,6 @@ Public Class dlgOptions
 
         SetInstatOptions()
 
-        'These setting will now all be done though SetInstatOptions()
-        'strComment = txtComment.Text
-        'If rdoEnglish.Checked Then
-        '    Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
-        '    Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
-        '    strCurrLanguage = "eng"
-        'End If
-        ''Sets the lines to be read
-        'dlgImportDataset.setLinesToRead(nudNoLines.Value)
-        'If rdoFrench.Checked Then
-        '    Thread.CurrentThread.CurrentCulture = New CultureInfo("fr-FR")
-        '    Thread.CurrentThread.CurrentUICulture = New CultureInfo("fr-FR")
-        '    strCurrLanguage = "fra"
-        'End If
-
-        'If rdoKiswahili.Checked Then
-        '    Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
-        '    Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
-        '    strCurrLanguage = "swa"
-        'End If
-
-        'cmdOk.Enabled = False
         autoTranslate(Me)
 
         If frmMain.Visible Then
@@ -193,14 +196,17 @@ Public Class dlgOptions
     End Sub
 
     Private Sub rdoKiswahili_CheckedChanged(sender As Object, e As EventArgs) Handles rdoKiswahili.CheckedChanged
+        frmMain.clsInstatOptions.bKis = rdoKiswahili.Checked
         cmdApply.Enabled = True
     End Sub
 
     Private Sub rdoFrench_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFrench.CheckedChanged
+        frmMain.clsInstatOptions.bFr = rdoFrench.Checked
         cmdApply.Enabled = True
     End Sub
 
     Private Sub rdoEnglish_CheckedChanged(sender As Object, e As EventArgs) Handles rdoEnglish.CheckedChanged
+        frmMain.clsInstatOptions.bEng = rdoEnglish.Checked
         cmdApply.Enabled = True
     End Sub
 
@@ -215,8 +221,9 @@ Public Class dlgOptions
         dlgFont.Font = frmMain.clsRLink.fScript
         dlgFont.Color = frmMain.clsRLink.clrScript
         If dlgFont.ShowDialog = DialogResult.OK Then
+            fntScript = dlgFont.Font
+            clrScript = dlgFont.Color
             cmdApply.Enabled = True
-            frmMain.clsRLink.setFormatScript(dlgFont.Font, dlgFont.Color)
             dlgFont.Reset()
         End If
     End Sub
@@ -228,12 +235,9 @@ Public Class dlgOptions
         dlgFont.Font = fntOutput
         dlgFont.Color = clrOutput
         If dlgFont.ShowDialog = DialogResult.OK Then
-            'Setting the RLink values is now done through the InstatOptions class
-            'Here we only need to set the local font and color values so that
-            'they are set when apply is clicked.
             fntOutput = dlgFont.Font
             clrOutput = dlgFont.Color
-            'frmMain.clsRLink.setFormatOutput(dlgFont.Font, dlgFont.Color)
+            cmdApply.Enabled = True
             dlgFont.Reset()
         End If
     End Sub
@@ -245,22 +249,20 @@ Public Class dlgOptions
         dlgFont.Font = frmMain.clsRLink.fComments
         dlgFont.Color = frmMain.clsRLink.clrComments
         If dlgFont.ShowDialog = DialogResult.OK Then
-            frmMain.clsRLink.setFormatComment(dlgFont.Font, dlgFont.Color)
+            fntComment = dlgFont.Font
+            clrComment = dlgFont.Color
+            cmdApply.Enabled = True
             dlgFont.Reset()
         End If
     End Sub
 
     Private Sub nudNoLines_ValueChanged(sender As Object, e As EventArgs) Handles nudNoLines.ValueChanged
+        frmMain.clsInstatOptions.iLines = nudNoLines.Value
         cmdApply.Enabled = True
     End Sub
 
     Private Sub chkIncludeDefaultParams_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeDefaultParams.CheckedChanged
         frmMain.clsInstatOptions.bIncludeRDefaultParameters = chkIncludeDefaultParams.Checked
-    End Sub
-
-    Private Sub dlgOptions_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        'to save the values
-        'InstatOptions.SaveAllSettings(Application.ProductName, Me)
     End Sub
 
     Private Sub cmdOutput_Click(sender As Object, e As EventArgs) Handles cmdOutput.Click
