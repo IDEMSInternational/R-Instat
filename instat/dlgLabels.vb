@@ -28,13 +28,26 @@ Public Class dlgLabels
     End Sub
 
     Private Sub TestOKEnabled()
+        If ucrReceiverLabels.IsEmpty() = False Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
     End Sub
+
     Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
         ucrBase.iHelpTopicID = 35
         ucrReceiverLabels.Selector = ucrSelectorForLabels
         ucrReceiverLabels.SetMeAsReceiver()
+
+        ucrReceiverLabels.SetDataType("factor")
         ucrFactorLabels.SetReceiver(ucrReceiverLabels)
+        ucrFactorLabels.SetAsViewerOnly()
+        'ucrFactorLabels.SetSelectorColumnName(strNewColumnName:=ucrFactorLabels.)
+        ucrFactorLabels.SetEditableStatus(bEditable:=True)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -45,5 +58,23 @@ Public Class dlgLabels
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         TestOKEnabled()
         SetDefaults()
+    End Sub
+
+    Private Sub ucrFactorLabels_GridContentChanged() Handles ucrFactorLabels.GridContentChanged
+        ucrBase.clsRsyntax.AddParameter("new_levels", ucrFactorLabels.GetColumnInFactorSheet(iColumn:=0))
+    End Sub
+
+    Private Sub ucrReceiverLabels_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverLabels.SelectionChanged
+        If Not ucrReceiverLabels.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverLabels.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_name")
+        End If
+        TestOKEnabled()
+    End Sub
+
+
+    Private Sub ucrSelectorForLabels_DataFrameChanged() Handles ucrSelectorForLabels.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForLabels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
 End Class

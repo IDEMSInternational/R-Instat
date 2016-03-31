@@ -369,11 +369,6 @@ Public Class frmMain
     Private Sub ExpandToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgExpand.ShowDialog()
     End Sub
-
-    Private Sub FactorToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgfactor.ShowDialog()
-    End Sub
-
     Private Sub NameToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgName.ShowDialog()
     End Sub
@@ -384,10 +379,6 @@ Public Class frmMain
 
     Private Sub AlignmentToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgAlignment.ShowDialog()
-    End Sub
-
-    Private Sub FactorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuManageFactor.Click
-        dlgfactor.ShowDialog()
     End Sub
     Private Sub OrthogonalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOrthogonal.Click
         dlgOrthogonal.ShowDialog()
