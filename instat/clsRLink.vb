@@ -34,7 +34,7 @@ Public Class RLink
     Public fScript As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
     Public clrScript As Color = Color.Black
     '
-    Public fOutput As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
+    Public fOutput As Font = New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular)
     Public clrOutput As Color = Color.Blue
     '
     Public fComments As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
@@ -321,6 +321,14 @@ Public Class RLink
             intLength = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$length_of_data(" & Chr(34) & strDataFrameName & Chr(34) & ")").AsInteger(0)
         End If
         Return intLength
+    End Function
+
+    Public Function GetDataFrameColumnCount(strDataFrameName As String) As Integer
+        Dim intColumnCount As Integer
+        If clsEngine IsNot Nothing Then
+            intColumnCount = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_column_count(" & Chr(34) & strDataFrameName & Chr(34) & ")").AsInteger(0)
+        End If
+        Return intColumnCount
     End Function
 
     Public Function GetModelNames() As List(Of String)

@@ -68,6 +68,8 @@ Public Class frmMain
     Private Sub LoadInstatOptions()
         clsInstatOptions = New InstatOptions
         clsInstatOptions.bIncludeRDefaultParameters = False
+        clsInstatOptions.fntOutput = New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular)
+        clsInstatOptions.clrOutput = Color.Blue
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSummaryDescribe.Click
@@ -651,7 +653,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
-        'For discussion
+        dlgExportDataset.ShowDialog()
     End Sub
 
     Private Sub mnuManageDataFileSheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileSheetMetadata.Click
@@ -817,7 +819,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageSheetReorder_Click(sender As Object, e As EventArgs) Handles mnuManageSheetReorder.Click
-        dlgReorderSheet.ShowDialog()
+        dlgReorderColumns.ShowDialog()
     End Sub
 
     Private Sub mnuManageFactorReferenceLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorReferenceLevels.Click
@@ -982,6 +984,10 @@ Public Class frmMain
 
     Private Sub mnuStatisticsNonParametricTwoSamples_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoSamples.Click
         dlgTwoSamples.ShowDialog()
+    End Sub
+
+    Private Sub mnuStatisticsRegressionGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionGeneral.Click
+        dlgGeneralRegression.ShowDialog()
     End Sub
 End Class
 

@@ -21,23 +21,26 @@ Public Class ucrReceiverSingle
         Dim objItem As ListViewItem
         Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
 
-        Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
-        For Each objItem In tempObjects
-            SetSelected(objItem.Text, objItem.Group.Name)
-        Next
-
+        If txtReceiverSingle.Enabled Then
+            Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
+            For Each objItem In tempObjects
+                SetSelected(objItem.Text, objItem.Group.Name)
+            Next
+        End If
     End Sub
 
     Public Sub SetSelected(strColumn As String, strDataFrame As String)
         strDataFrameName = strDataFrame
         txtReceiverSingle.Text = strColumn
+        Selector.AddToVariablesList(strColumn)
     End Sub
 
     Public Overrides Sub RemoveSelected()
-
-        txtReceiverSingle.Text = ""
-        strDataFrameName = ""
-
+        If txtReceiverSingle.Enabled Then
+            Selector.RemoveFromVariablesList(txtReceiverSingle.Text)
+            txtReceiverSingle.Text = ""
+            strDataFrameName = ""
+        End If
     End Sub
 
     Public Overrides Sub Clear()
@@ -118,5 +121,16 @@ Public Class ucrReceiverSingle
     Private Sub RemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
         RemoveSelected()
     End Sub
-End Class
 
+    Public Sub SetStackedFactorMode(bDisableReceiver As Boolean)
+        If bDisableReceiver Then
+            SetSelected("variable", "")
+            Me.Enabled = False
+            Selector.RemoveFromVariablesList("variable")
+        Else
+            Me.Enabled = True
+            RemoveSelected()
+        End If
+    End Sub
+
+End Class
