@@ -51,10 +51,10 @@ Partial Class dlgBoxplot
         Me.lblByFactors.AutoSize = True
         Me.lblByFactors.Location = New System.Drawing.Point(248, 143)
         Me.lblByFactors.Name = "lblByFactors"
-        Me.lblByFactors.Size = New System.Drawing.Size(97, 13)
+        Me.lblByFactors.Size = New System.Drawing.Size(100, 13)
         Me.lblByFactors.TabIndex = 2
         Me.lblByFactors.Tag = "By_factor_s_"
-        Me.lblByFactors.Text = "By factor (Optional)"
+        Me.lblByFactors.Text = "By Factor (Optional)"
         '
         'lblBySecondFactor
         '
