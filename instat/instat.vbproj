@@ -790,12 +790,6 @@
     <Compile Include="dlgExtremesClimatic.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgfactor.Designer.vb">
-      <DependentUpon>dlgfactor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgfactor.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgFind.Designer.vb">
       <DependentUpon>dlgFind.vb</DependentUpon>
     </Compile>
@@ -2522,15 +2516,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExtremesClimatic.sw-KE.resx">
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgfactor.fr-FR.resx">
-      <DependentUpon>dlgfactor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgfactor.resx">
-      <DependentUpon>dlgfactor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgfactor.sw-KE.resx">
-      <DependentUpon>dlgfactor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFind.fr-FR.resx">
       <DependentUpon>dlgFind.vb</DependentUpon>
