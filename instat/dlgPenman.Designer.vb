@@ -27,16 +27,16 @@ Partial Class dlgPenman
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 311)
+        Me.ucrBase.Location = New System.Drawing.Point(-4, 246)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 32)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
         'dlgPenman
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(403, 353)
+        Me.ClientSize = New System.Drawing.Size(403, 303)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgPenman"
