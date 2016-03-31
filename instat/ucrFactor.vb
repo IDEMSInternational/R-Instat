@@ -19,6 +19,8 @@ Imports unvell.ReoGrid.CellTypes
 Imports unvell.ReoGrid.Events
 
 Public Class ucrFactor
+    Public Event SelectedLevelChanged()
+    Public Event GridContentChanged()
     Public WithEvents clsReceiver As ucrReceiverSingle
     Public WithEvents shtCurrSheet As unvell.ReoGrid.Worksheet
     Public clsRSyntax As New RSyntax
@@ -133,16 +135,18 @@ Public Class ucrFactor
         Dim checked As Boolean
         Dim iCount As Integer = 0
         For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
-            checked = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
+            If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
+                checked = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
 
-            If checked Then
-                If iCount = 1 Then
-                    strTemp = "c(" & strTemp & ","
-                ElseIf iCount > 1 Then
-                    strTemp = strTemp & ","
+                If checked Then
+                    If iCount = 1 Then
+                        strTemp = "c(" & strTemp & ","
+                    ElseIf iCount > 1 Then
+                        strTemp = strTemp & ","
+                    End If
+                    strTemp = strTemp & Chr(34) & shtCurrSheet(i, 0) & Chr(34)
+                    iCount = iCount + 1
                 End If
-                strTemp = strTemp & Chr(34) & shtCurrSheet(i, 0) & Chr(34)
-                iCount = iCount + 1
             End If
         Next
         If iCount > 1 Then
@@ -165,6 +169,9 @@ Public Class ucrFactor
                     End If
                 End If
             Next
+            RaiseEvent SelectedLevelChanged()
+        Else
+            RaiseEvent GridContentChanged()
         End If
     End Sub
 
