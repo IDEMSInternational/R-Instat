@@ -580,6 +580,12 @@
     <Compile Include="sdgPrincipalComponentAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgScatterPlot.Designer.vb">
+      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgScatterPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgThemeOptions.Designer.vb">
       <DependentUpon>sdgThemeOptions.vb</DependentUpon>
     </Compile>
@@ -782,12 +788,6 @@
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgExtremesClimatic.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgfactor.Designer.vb">
-      <DependentUpon>dlgfactor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgfactor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFind.Designer.vb">
@@ -2517,15 +2517,6 @@
     <EmbeddedResource Include="dlgExtremesClimatic.sw-KE.resx">
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgfactor.fr-FR.resx">
-      <DependentUpon>dlgfactor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgfactor.resx">
-      <DependentUpon>dlgfactor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgfactor.sw-KE.resx">
-      <DependentUpon>dlgfactor.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgFind.fr-FR.resx">
       <DependentUpon>dlgFind.vb</DependentUpon>
     </EmbeddedResource>
@@ -3371,6 +3362,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPlots.sw-KE.resx">
       <DependentUpon>sdgPlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgScatterPlot.fr-FR.resx">
+      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgScatterPlot.resx">
+      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgScatterPlot.sw-KE.resx">
+      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.fr-FR.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
