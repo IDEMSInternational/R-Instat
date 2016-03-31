@@ -22,36 +22,19 @@ Public Class dlgScatterPlot
     Private bFirstLoad As Boolean = True
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsRaesFunction.SetRCommand("aes")
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-
-        clsRgeom_scatterplotFunction.SetRCommand("geom_point")
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
-
-        ucrReceiverX.Selector = ucrSelectorScatterPlot
-        ucrReceiverX.SetDataType("numeric")
-        ucrFactorOptionalReceiver.Selector = ucrSelectorScatterPlot
-        ucrFactorOptionalReceiver.SetDataType("factor")
-        autoTranslate(Me)
-
-        ucrVariablesAsFactor.SetFactorReceiver(ucrFactorOptionalReceiver)
-        ucrVariablesAsFactor.SetSelector(ucrSelectorScatterPlot)
-        ucrVariablesAsFactor.SetDataType("numeric")
-
         If bFirstLoad Then
             'setdefauts
-            bFirstLoad = False
+            InitialiseDialog()
             SetDefaults()
-
+            bFirstLoad = False
         End If
+        autoTranslate(Me)
+        TestOkEnabled()
 
     End Sub
 
-    Private Sub ucrSelectorScatterPlot_DataFrameChanged()
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorScatterPlot.ucrAvailableDataFrames.clsCurrDataFrame)
+    Private Sub ucrSelectorForScatter_DataFrameChanged() Handles ucrSelectorForScatter.DataFrameChanged
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForScatter.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
     Private Sub ucrReceiverX_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverX.SelectionChanged
@@ -75,16 +58,37 @@ Public Class dlgScatterPlot
 
     Private Sub TestOkEnabled()
         'tests when okay Is enable
-        If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactor.IsEmpty Then
+        If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactorForScatter.IsEmpty Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
     End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRaesFunction.SetRCommand("aes")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+
+        clsRgeom_scatterplotFunction.SetRCommand("geom_point")
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
+
+        ucrReceiverX.Selector = ucrSelectorForScatter
+        ucrReceiverX.SetDataType("numeric")
+        ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
+        ucrFactorOptionalReceiver.SetDataType("factor")
+
+
+        ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
+        ucrVariablesAsFactorForScatter.SetSelector(ucrSelectorForScatter)
+        ucrVariablesAsFactorForScatter.SetDataType("numeric")
+    End Sub
     Private Sub SetDefaults()
         'setDefaults
-        ucrSelectorScatterPlot.Reset()
-        ucrSelectorScatterPlot.Focus()
+        ucrSelectorForScatter.Reset()
+        ucrSelectorForScatter.Focus()
         TestOkEnabled()
     End Sub
 
@@ -95,9 +99,9 @@ Public Class dlgScatterPlot
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
-    Private Sub ucrVariablesAsFactor_SelectionChanged() Handles ucrVariablesAsFactor.SelectionChanged
-        If Not ucrVariablesAsFactor.ucrSingleVariable.IsEmpty Then
-            clsRaesFunction.AddParameter("y", ucrVariablesAsFactor.GetVariableNames(False))
+    Private Sub ucrVariablesAsFactor_SelectionChanged() Handles ucrVariablesAsFactorForScatter.SelectionChanged
+        If Not ucrVariablesAsFactorForScatter.IsEmpty Then
+            clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForScatter.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
