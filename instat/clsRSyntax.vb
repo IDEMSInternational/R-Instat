@@ -34,7 +34,7 @@ Public Class RSyntax
         bUseBaseOperator = False
     End Sub
 
-    Public Sub SetBaseRFunction(clsFunction)
+    Public Sub SetBaseRFunction(clsFunction As RFunction)
         clsBaseFunction = clsFunction
         bUseBaseFunction = True
         bUseBaseOperator = False
