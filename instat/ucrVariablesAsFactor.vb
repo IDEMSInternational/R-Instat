@@ -1,5 +1,4 @@
 ﻿Public Class ucrVariablesAsFactor
-    Dim strDataType As String
     Public bSingleVariable As Boolean = True
     Public bFirstLoad As Boolean = True
     Public ucrFactorReceiver As ucrReceiverSingle
