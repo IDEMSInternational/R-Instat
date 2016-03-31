@@ -368,11 +368,6 @@ Public Class frmMain
     Private Sub ExpandToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgExpand.ShowDialog()
     End Sub
-
-    Private Sub FactorToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgfactor.ShowDialog()
-    End Sub
-
     Private Sub NameToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgName.ShowDialog()
     End Sub
