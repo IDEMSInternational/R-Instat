@@ -40,9 +40,9 @@ Public Class dlgImportDataset
 
         GetFileFromOpenDialog()
 
-        txtName.Focus()
+        'txtName.Focus()
 
-        RefreshFrameView()
+        'RefreshFrameView()
 
         TestOkEnabled()
 
@@ -75,11 +75,13 @@ Public Class dlgImportDataset
         txtFilePath.Text = strFilePath
         If strRparameter <> "xlsxFile" Then
             RefreshFilePreview()
+            RefreshFrameView()
         Else
             txtInputFile.Text = "Cannot access file contents"
             FillExcelSheets(strFilePath)
+            RefreshFrameView(bPreviewExcel:=True)
         End If
-        RefreshFrameView()
+
     End Sub
 
     Public Sub RefreshFilePreview()
@@ -241,7 +243,7 @@ Public Class dlgImportDataset
         Dim strFileName As String = ""
         Dim strFileExt As String = ""
 
-        dlgOpen.Filter = "Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|Excel files (*.xls,*xlsx)|*.xls;*.xlsx|All Data files (*.csv,*.xls,*.xlsx,*.RDS)|*.csv;*.xls;*.xlsx;*.RDS"
+        dlgOpen.Filter = "All Data files (*.csv,.xlsx,*.RDS)|*.csv;*.xlsx;*.RDS|Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|Excel files (*.xlsx)|*.xlsx"
         dlgOpen.Title = "Open Data from file"
 
         If dlgOpen.ShowDialog() = DialogResult.OK Then
@@ -269,8 +271,6 @@ Public Class dlgImportDataset
                 End If
                 SetDataName(strFileName)
                 SetFilePath(strFilePath, "file")
-            Case ".xls"
-                'to add
             Case ".xlsx"
                 ucrBase.clsRsyntax.SetFunction("readWorkbook")
                 If Not frmMain.clsRLink.bInstatObjectExists Then
@@ -305,6 +305,7 @@ Public Class dlgImportDataset
         ucrBase.clsRsyntax.RemoveParameter("row.names")
         ucrBase.clsRsyntax.RemoveParameter("encoding")
         ucrBase.clsRsyntax.RemoveParameter("na.strings")
+        ucrBase.clsRsyntax.RemoveParameter("nrows")
     End Sub
 #Region "Excel options"
     Private Sub removeExcelParameters()
@@ -325,8 +326,11 @@ Public Class dlgImportDataset
         chkColumnNames.Checked = True
         chkDates.Checked = False
         chkSkipEmptyRows.Checked = True
-        'txtRegionName.Text = "None"
-        cboAvailableSheets.SelectedIndex = -1
+        chkNamedRegion.Checked = False
+        txtNamedRegion.ReadOnly = True
+        txtNamedRegion.Text = "NULL"
+        txtRows.Text = "NULL"
+        txtCols.Text = "NULL"
     End Sub
 
     Private Sub cboAvailableSheets_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboAvailableSheets.SelectedValueChanged
@@ -341,10 +345,12 @@ Public Class dlgImportDataset
         dfSheetList = frmMain.clsRLink.clsEngine.Evaluate("getSheetNames(" & Chr(34) & strFilePath & Chr(34) & ")").AsCharacterMatrix
         'fills the combo box
         cboAvailableSheets.Items.Clear()
-        cboAvailableSheets.SelectedIndex = -1
         For i = 0 To dfSheetList.RowCount - 1
             cboAvailableSheets.Items.Add(dfSheetList(i, 0))
         Next
+        cboAvailableSheets.SelectedItem = cboAvailableSheets.Items(0)
+        cboAvailableSheets.Focus()
+        RefreshFrameView(bPreviewExcel:=True)
     End Sub
 
     Private Sub nudStartRow_ValueChanged(sender As Object, e As EventArgs) Handles nudStartRow.ValueChanged
@@ -396,6 +402,42 @@ Public Class dlgImportDataset
             End If
             RefreshFrameView(bPreviewExcel:=True)
         End If
+    End Sub
+
+    Private Sub chkNamedRegion_CheckStateChanged(sender As Object, e As EventArgs) Handles chkNamedRegion.CheckStateChanged
+        If chkNamedRegion.Checked Then
+            txtNamedRegion.ReadOnly = False
+            nudStartRow.Enabled = False
+            txtCols.ReadOnly = True
+            txtRows.ReadOnly = True
+        Else
+            txtNamedRegion.ReadOnly = True
+            nudStartRow.Enabled = True
+            txtCols.ReadOnly = False
+            txtRows.ReadOnly = False
+        End If
+    End Sub
+
+    Private Sub txtCols_Leave(sender As Object, e As EventArgs) Handles txtCols.Leave
+        If txtCols.Text <> "NULL" Then
+            ucrBase.clsRsyntax.AddParameter("cols", txtCols.Text)
+        End If
+    End Sub
+
+    Private Sub txtRows_Leave(sender As Object, e As EventArgs) Handles txtRows.Leave
+        If txtRows.Text <> "NULL" Then
+            ucrBase.clsRsyntax.AddParameter("rows", txtRows.Text)
+        End If
+    End Sub
+
+    Private Sub txtNamedRegion_Leave(sender As Object, e As EventArgs) Handles txtNamedRegion.Leave
+        If txtNamedRegion.Text <> "NULL" Then
+            ucrBase.clsRsyntax.AddParameter("namedRegion", txtNamedRegion.Text)
+        End If
+    End Sub
+
+    Private Sub cboAvailableSheets_Enter(sender As Object, e As EventArgs) Handles cboAvailableSheets.Enter
+        cboAvailableSheets_SelectedValueChanged(sender, e)
     End Sub
 
 #End Region
