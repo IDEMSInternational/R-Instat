@@ -21,30 +21,9 @@ Public Class dlgBoxplot
     Private bFirstLoad As Boolean = True
 
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
-        clsRaesFunction.SetRCommand("aes")
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_boxplotFunction)
-
-        ucrBase.iHelpTopicID = 102
-        ucrBase.clsRsyntax.iCallType = 0
-
-        ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
-        ucrByFactorsReceiver.SetDataType("factor")
-        ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
-        ucrSecondFactorReceiver.SetDataType("factor")
-
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        sdgBoxPlot.SetBoxPlotFunction(clsRgeom_boxplotFunction)
         autoTranslate(Me)
-
-        UcrVariablesAsFactor1.SetFactorReceiver(ucrByFactorsReceiver)
-        UcrVariablesAsFactor1.SetSelector(ucrSelectorBoxPlot)
-
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -73,8 +52,33 @@ Public Class dlgBoxplot
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34)) ' Empty string is default x value in case no factor is chosen
     End Sub
 
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
+        clsRaesFunction.SetRCommand("aes")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_boxplotFunction)
+
+        ucrBase.iHelpTopicID = 102
+        ucrBase.clsRsyntax.iCallType = 0
+
+        ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
+        ucrByFactorsReceiver.SetDataType("factor")
+        ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
+        ucrSecondFactorReceiver.SetDataType("factor")
+
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        sdgBoxPlot.SetBoxPlotFunction(clsRgeom_boxplotFunction)
+
+
+        ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
+        ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
+    End Sub
+
     Private Sub TestOkEnabled()
-        If Not UcrVariablesAsFactor1.IsEmpty Then
+        If Not ucrVariablesAsFactorForBoxplot.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -87,15 +91,6 @@ Public Class dlgBoxplot
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorBoxPlot.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-    Private Sub ucrYvariableReceiver_SelectionChanged(sender As Object, e As EventArgs)
-        'If Not ucrYvariableReceiver.IsEmpty Then
-        '    clsRaesFunction.AddParameter("y", ucrYvariableReceiver.GetVariableNames(False))
-        '    ucrByFactorsReceiver.SetMeAsReceiver()
-        'Else
-        '    clsRaesFunction.RemoveParameterByName("y")
-        'End If
-        'TestOkEnabled()
-    End Sub
 
     Private Sub ucrByFactorsReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.SelectionChanged
         If Not ucrByFactorsReceiver.IsEmpty Then
@@ -128,9 +123,9 @@ Public Class dlgBoxplot
         SetOperator()
     End Sub
 
-    Private Sub UcrVariablesAsFactor1_SelectionChanged() Handles UcrVariablesAsFactor1.SelectionChanged
-        If Not UcrVariablesAsFactor1.IsEmpty Then
-            clsRaesFunction.AddParameter("y", UcrVariablesAsFactor1.GetVariableNames(False))
+    Private Sub UcrVariablesAsFactor1_SelectionChanged() Handles ucrVariablesAsFactorForBoxplot.SelectionChanged
+        If Not ucrVariablesAsFactorForBoxplot.IsEmpty Then
+            clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForBoxplot.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
