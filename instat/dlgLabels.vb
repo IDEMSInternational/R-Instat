@@ -35,6 +35,7 @@ Public Class dlgLabels
         End If
 
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
         ucrBase.iHelpTopicID = 35
@@ -43,8 +44,8 @@ Public Class dlgLabels
 
         ucrReceiverLabels.SetDataType("factor")
         ucrFactorLabels.SetReceiver(ucrReceiverLabels)
-        ucrFactorLabels.SetAsMultipleSelector()
-        'ucrFactorLabels.SetSelectorColumnName(strNewColumnName:=)
+        ucrFactorLabels.SetAsViewerOnly()
+        'ucrFactorLabels.SetSelectorColumnName(strNewColumnName:=ucrFactorLabels.)
         ucrFactorLabels.SetEditableStatus(bEditable:=True)
 
     End Sub
@@ -59,7 +60,7 @@ Public Class dlgLabels
         SetDefaults()
     End Sub
 
-    Private Sub ucrFactorLabels_CheckedChanged() Handles ucrFactorLabels.checkedChanged
+    Private Sub ucrFactorLabels_SelectedlevelChanged() Handles ucrFactorLabels.GridContentChanged
         ucrBase.clsRsyntax.AddParameter("new_levels", ucrFactorLabels.GetSelectedLevels())
     End Sub
 
@@ -72,9 +73,6 @@ Public Class dlgLabels
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverLabels_Load(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub ucrSelectorForLabels_DataFrameChanged() Handles ucrSelectorForLabels.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForLabels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
