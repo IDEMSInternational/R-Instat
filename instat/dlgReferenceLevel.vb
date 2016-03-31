@@ -30,12 +30,16 @@ Public Class dlgReferenceLevel
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction("relevel")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_factor_reference_level")
         ucrBase.iHelpTopicID = 38
-        ucrReceiverReferenceLevels.SetMeAsReceiver()
         ucrReceiverReferenceLevels.Selector = ucrSelectorForReferenceLevels
+        ucrReceiverReferenceLevels.SetMeAsReceiver()
         ucrReceiverReferenceLevels.SetDataType("factor")
         ucrFactorReferenceLevels.SetReceiver(ucrReceiverReferenceLevels)
+        ucrFactorReferenceLevels.SetAsSingleSelector()
+
+
+
     End Sub
 
     Private Sub SetDefaults()
@@ -46,6 +50,13 @@ Public Class dlgReferenceLevel
     End Sub
 
     Private Sub TestOKEnabled()
+        If ucrReceiverReferenceLevels.IsEmpty() = False Then
+            ucrBase.OKEnabled(True)
+
+        Else
+            ucrBase.OKEnabled(False)
+
+        End If
 
     End Sub
 
@@ -54,5 +65,20 @@ Public Class dlgReferenceLevel
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrSelectorForReferenceLevels_DataFrameChanged() Handles ucrSelectorForReferenceLevels.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForReferenceLevels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+    End Sub
 
+    Private Sub ucrReceiverReferenceLevels_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverReferenceLevels.SelectionChanged
+        If Not ucrReceiverReferenceLevels.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverReferenceLevels.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_name")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrFactorReferenceLevels_SelectedLevelChanged() Handles ucrFactorReferenceLevels.SelectedLevelChanged
+        ucrBase.clsRsyntax.AddParameter("new_ref_level", ucrFactorReferenceLevels.GetSelectedLevels())
+    End Sub
 End Class

@@ -19,6 +19,7 @@ Imports unvell.ReoGrid.CellTypes
 Imports unvell.ReoGrid.Events
 
 Public Class ucrFactor
+    Public Event SelectedLevelChanged()
     Public WithEvents clsReceiver As ucrReceiverSingle
     Public WithEvents shtCurrSheet As unvell.ReoGrid.Worksheet
     Public clsRSyntax As New RSyntax
@@ -133,16 +134,18 @@ Public Class ucrFactor
         Dim checked As Boolean
         Dim iCount As Integer = 0
         For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
-            checked = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
+            If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
+                checked = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
 
-            If checked Then
-                If iCount = 1 Then
-                    strTemp = "c(" & strTemp & ","
-                ElseIf iCount > 1 Then
-                    strTemp = strTemp & ","
+                If checked Then
+                    If iCount = 1 Then
+                        strTemp = "c(" & strTemp & ","
+                    ElseIf iCount > 1 Then
+                        strTemp = strTemp & ","
+                    End If
+                    strTemp = strTemp & Chr(34) & shtCurrSheet(i, 0) & Chr(34)
+                    iCount = iCount + 1
                 End If
-                strTemp = strTemp & Chr(34) & shtCurrSheet(i, 0) & Chr(34)
-                iCount = iCount + 1
             End If
         Next
         If iCount > 1 Then
@@ -155,6 +158,7 @@ Public Class ucrFactor
         Dim i As Integer
         Dim iSelected As Boolean
         If e.Cell.Column = iSelectorColumnIndex Then
+
             For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
                 If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
                     iSelected = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
@@ -165,7 +169,9 @@ Public Class ucrFactor
                     End If
                 End If
             Next
+            RaiseEvent SelectedLevelChanged()
         End If
+
     End Sub
 
     Public Function GetColumnInFactorSheet(iColumn As Integer, Optional bWithQuotes As Boolean = True)
