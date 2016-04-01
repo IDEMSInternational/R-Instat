@@ -40,19 +40,21 @@ Public Class dlgSplitText
         ucrReceiverSplitTextColumn.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("stringr::str_split")
         ucrReceiverSplitTextColumn.SetDataType("factor")
-        ucrInputColumnsIntoText.SetName("SplitText")
-        ucrInputColumnsIntoText.SetDefaultName()
+        ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & Chr(34))
+        ucrInputColumnsIntoText.SetPrefix("SplitText")
+        ucrInputColumnsIntoText.SetItemsTypeAsColumns()
         ucrInputColumnsIntoText.SetDefaultTypeAsColumn()
         ucrInputColumnsIntoText.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
-        ucrInputColumnsIntoText.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & Chr(34))
+
+
+
 
     End Sub
     Private Sub SetDefaults()
         ucrSelectorSplitTextColumn.Reset()
         ucrSelectorSplitTextColumn.Focus()
-        cboPattern.Text = "Whitespace"
         ucrInputColumnsIntoText.ResetText()
+        cboPattern.Text = "Whitespace"
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
