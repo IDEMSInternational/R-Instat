@@ -32,7 +32,7 @@ Partial Class dlgSplitText
         Me.ucrReceiverSplitTextColumn = New instat.ucrReceiverMultiple()
         Me.lblNumberofPiecesToReturn = New System.Windows.Forms.Label()
         Me.nudN = New System.Windows.Forms.NumericUpDown()
-        Me.ucrInputColumnsIntoText = New instat.ucrInputComboBox()
+        Me.ucrInputColumnsIntoText = New instat.ucrInputTextBox()
         CType(Me.nudN, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -116,9 +116,9 @@ Partial Class dlgSplitText
         '
         'ucrInputColumnsIntoText
         '
-        Me.ucrInputColumnsIntoText.Location = New System.Drawing.Point(263, 225)
+        Me.ucrInputColumnsIntoText.Location = New System.Drawing.Point(259, 225)
         Me.ucrInputColumnsIntoText.Name = "ucrInputColumnsIntoText"
-        Me.ucrInputColumnsIntoText.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputColumnsIntoText.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputColumnsIntoText.TabIndex = 11
         '
         'dlgSplitText
@@ -156,5 +156,5 @@ Partial Class dlgSplitText
     Friend WithEvents ucrReceiverSplitTextColumn As ucrReceiverMultiple
     Friend WithEvents lblNumberofPiecesToReturn As Label
     Friend WithEvents nudN As NumericUpDown
-    Friend WithEvents ucrInputColumnsIntoText As ucrInputComboBox
+    Friend WithEvents ucrInputColumnsIntoText As ucrInputTextBox
 End Class
