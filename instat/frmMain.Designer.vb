@@ -65,6 +65,8 @@ Partial Class frmMain
         Me.mnuGraphicsUseGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuGraphicsWindrose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WindRoseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PopulationPyramidsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuGraphicsInventory = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStatistics = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStatisticsSummary = New System.Windows.Forms.ToolStripMenuItem()
@@ -621,10 +623,23 @@ Partial Class frmMain
         '
         'mnuGraphicsWindrose
         '
+        Me.mnuGraphicsWindrose.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WindRoseToolStripMenuItem, Me.PopulationPyramidsToolStripMenuItem})
         Me.mnuGraphicsWindrose.Name = "mnuGraphicsWindrose"
         Me.mnuGraphicsWindrose.Size = New System.Drawing.Size(222, 22)
         Me.mnuGraphicsWindrose.Tag = "Windrose"
-        Me.mnuGraphicsWindrose.Text = "Windrose..."
+        Me.mnuGraphicsWindrose.Text = "Plotrix"
+        '
+        'WindRoseToolStripMenuItem
+        '
+        Me.WindRoseToolStripMenuItem.Name = "WindRoseToolStripMenuItem"
+        Me.WindRoseToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.WindRoseToolStripMenuItem.Text = "WindRose..."
+        '
+        'PopulationPyramidsToolStripMenuItem
+        '
+        Me.PopulationPyramidsToolStripMenuItem.Name = "PopulationPyramidsToolStripMenuItem"
+        Me.PopulationPyramidsToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.PopulationPyramidsToolStripMenuItem.Text = "Population Pyramids..."
         '
         'mnuGraphicsInventory
         '
@@ -2865,4 +2880,6 @@ Partial Class frmMain
     Friend WithEvents mnuManageFactorCombine As ToolStripMenuItem
     Friend WithEvents mnuManageFactorDummyVariable As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator19 As ToolStripSeparator
+    Friend WithEvents WindRoseToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PopulationPyramidsToolStripMenuItem As ToolStripMenuItem
 End Class
