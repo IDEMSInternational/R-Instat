@@ -40,6 +40,7 @@ Public Class ucrReceiverMultiple
                     grpTemp = lstSelectedVariables.Groups(objItem.Group.Name)
                 End If
                 lstSelectedVariables.Items.Add(objItem.Text).Group = grpTemp
+                Selector.AddToVariablesList(objItem.Text)
             End If
         Next
         RaiseEvent SelectionChanged()
@@ -76,15 +77,18 @@ Public Class ucrReceiverMultiple
             lstSelectedVariables.SelectedItems.CopyTo(tempObjects, 0)
             For Each objItem In tempObjects
                 lstSelectedVariables.Items.Remove(objItem)
+                Selector.RemoveFromVariablesList(objItem.Text)
             Next
         End If
         RaiseEvent SelectionChanged()
     End Sub
 
     Public Overrides Sub Clear()
-
-        lstSelectedVariables.Items.Clear()
-        RaiseEvent SelectionChanged()
+        Dim lviVar As ListViewItem
+        For Each lviVar In lstSelectedVariables.Items
+            lviVar.Selected = True
+        Next
+        RemoveSelected()
 
     End Sub
 
