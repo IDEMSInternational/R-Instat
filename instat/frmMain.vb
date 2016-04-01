@@ -944,10 +944,6 @@ Public Class frmMain
         dlgGeneralANOVA.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsWindrose_Click(sender As Object, e As EventArgs) Handles mnuGraphicsWindrose.Click
-        dlgWindrose.ShowDialog()
-    End Sub
-
     Private Sub mnuStatisticsTablesGroup_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesGroup.Click
         dlgGroupTables.ShowDialog()
     End Sub
@@ -978,6 +974,10 @@ Public Class frmMain
 
     Private Sub mnuStatisticsRegressionGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionGeneral.Click
         dlgGeneralRegression.ShowDialog()
+    End Sub
+
+    Private Sub WindRoseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindRoseToolStripMenuItem.Click
+        dlgWindrose.ShowDialog()
     End Sub
 End Class
 
