@@ -538,6 +538,12 @@
     <Compile Include="dlgWindrose.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCombineforGraphics.Designer.vb">
+      <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCombineforGraphics.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgCanonicalCorrelation.Designer.vb">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </Compile>
@@ -2164,6 +2170,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindrose.sw-KE.resx">
       <DependentUpon>dlgWindrose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCombineforGraphics.fr-FR.resx">
+      <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCombineforGraphics.resx">
+      <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCombineforGraphics.sw-KE.resx">
+      <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
