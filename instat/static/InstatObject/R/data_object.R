@@ -694,6 +694,8 @@ data_obj$methods(set_factor_levels = function(col_name, new_levels) {
   if(!length(new_levels)==length(levels(data[[col_name]]))) stop("Incorrect number of new levels given.")
   
   levels(data[[col_name]]) <<- new_levels
+  .self$set_data_changed(TRUE)
+  .self$set_variables_metadata_changed(TRUE)
 } 
 )
 

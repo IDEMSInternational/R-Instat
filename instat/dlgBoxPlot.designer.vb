@@ -27,20 +27,21 @@ Partial Class dlgBoxplot
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
         Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
+        Me.chkHorizontalBoxplot = New System.Windows.Forms.CheckBox()
+        Me.ucrVariablesAsFactorForBoxplot = New instat.ucrVariablesAsFactor()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.chkHorizontalBoxplot = New System.Windows.Forms.CheckBox()
-        Me.UcrVariablesAsFactor1 = New instat.ucrVariablesAsFactor()
+        Me.ucrSaveBoxplot = New instat.ucrSaveGraph()
         Me.SuspendLayout()
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(307, 208)
+        Me.cmdOptions.Location = New System.Drawing.Point(336, 260)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOptions.TabIndex = 7
+        Me.cmdOptions.TabIndex = 8
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -48,40 +49,59 @@ Partial Class dlgBoxplot
         'lblByFactors
         '
         Me.lblByFactors.AutoSize = True
-        Me.lblByFactors.Location = New System.Drawing.Point(278, 104)
+        Me.lblByFactors.Location = New System.Drawing.Point(248, 143)
         Me.lblByFactors.Name = "lblByFactors"
-        Me.lblByFactors.Size = New System.Drawing.Size(60, 13)
-        Me.lblByFactors.TabIndex = 3
+        Me.lblByFactors.Size = New System.Drawing.Size(100, 13)
+        Me.lblByFactors.TabIndex = 2
         Me.lblByFactors.Tag = "By_factor_s_"
-        Me.lblByFactors.Text = "By factor(s)"
+        Me.lblByFactors.Text = "By Factor (Optional)"
         '
         'lblBySecondFactor
         '
         Me.lblBySecondFactor.AutoSize = True
-        Me.lblBySecondFactor.Location = New System.Drawing.Point(278, 158)
+        Me.lblBySecondFactor.Location = New System.Drawing.Point(248, 190)
         Me.lblBySecondFactor.Name = "lblBySecondFactor"
-        Me.lblBySecondFactor.Size = New System.Drawing.Size(92, 13)
-        Me.lblBySecondFactor.TabIndex = 5
+        Me.lblBySecondFactor.Size = New System.Drawing.Size(140, 13)
+        Me.lblBySecondFactor.TabIndex = 4
         Me.lblBySecondFactor.Tag = "By_Second_Factor"
-        Me.lblBySecondFactor.Text = "By Second Factor"
+        Me.lblBySecondFactor.Text = "By Second Factor (Optional)"
         '
         'cmdBoxPlotOptions
         '
-        Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(171, 208)
+        Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(216, 262)
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
         Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(104, 23)
-        Me.cmdBoxPlotOptions.TabIndex = 8
+        Me.cmdBoxPlotOptions.TabIndex = 7
         Me.cmdBoxPlotOptions.Tag = "BoxPlot_Options"
         Me.cmdBoxPlotOptions.Text = "BoxPlot Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
         '
+        'chkHorizontalBoxplot
+        '
+        Me.chkHorizontalBoxplot.AutoSize = True
+        Me.chkHorizontalBoxplot.Location = New System.Drawing.Point(12, 190)
+        Me.chkHorizontalBoxplot.Name = "chkHorizontalBoxplot"
+        Me.chkHorizontalBoxplot.Size = New System.Drawing.Size(110, 17)
+        Me.chkHorizontalBoxplot.TabIndex = 6
+        Me.chkHorizontalBoxplot.Tag = "Horizontal_boxplot"
+        Me.chkHorizontalBoxplot.Text = "Horizontal boxplot"
+        Me.chkHorizontalBoxplot.UseVisualStyleBackColor = True
+        '
+        'ucrVariablesAsFactorForBoxplot
+        '
+        Me.ucrVariablesAsFactorForBoxplot.Location = New System.Drawing.Point(240, 4)
+        Me.ucrVariablesAsFactorForBoxplot.Name = "ucrVariablesAsFactorForBoxplot"
+        Me.ucrVariablesAsFactorForBoxplot.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorForBoxplot.TabIndex = 1
+        Me.ucrVariablesAsFactorForBoxplot.ucrVariableSelector = Nothing
+        '
         'ucrSecondFactorReceiver
         '
-        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(276, 176)
+        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(246, 208)
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
         Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrSecondFactorReceiver.TabIndex = 6
+        Me.ucrSecondFactorReceiver.TabIndex = 5
         '
         'ucrSelectorBoxPlot
         '
@@ -93,44 +113,33 @@ Partial Class dlgBoxplot
         '
         'ucrByFactorsReceiver
         '
-        Me.ucrByFactorsReceiver.Location = New System.Drawing.Point(276, 120)
+        Me.ucrByFactorsReceiver.Location = New System.Drawing.Point(246, 159)
         Me.ucrByFactorsReceiver.Name = "ucrByFactorsReceiver"
         Me.ucrByFactorsReceiver.Selector = Nothing
         Me.ucrByFactorsReceiver.Size = New System.Drawing.Size(126, 26)
-        Me.ucrByFactorsReceiver.TabIndex = 4
+        Me.ucrByFactorsReceiver.TabIndex = 3
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 236)
+        Me.ucrBase.Location = New System.Drawing.Point(0, 288)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 51)
-        Me.ucrBase.TabIndex = 12
+        Me.ucrBase.TabIndex = 9
         '
-        'chkHorizontalBoxplot
+        'ucrSaveBoxplot
         '
-        Me.chkHorizontalBoxplot.AutoSize = True
-        Me.chkHorizontalBoxplot.Location = New System.Drawing.Point(12, 207)
-        Me.chkHorizontalBoxplot.Name = "chkHorizontalBoxplot"
-        Me.chkHorizontalBoxplot.Size = New System.Drawing.Size(110, 17)
-        Me.chkHorizontalBoxplot.TabIndex = 20
-        Me.chkHorizontalBoxplot.Tag = "Horizontal_boxplot"
-        Me.chkHorizontalBoxplot.Text = "Horizontal boxplot"
-        Me.chkHorizontalBoxplot.UseVisualStyleBackColor = True
-        '
-        'UcrVariablesAsFactor1
-        '
-        Me.UcrVariablesAsFactor1.Location = New System.Drawing.Point(408, 9)
-        Me.UcrVariablesAsFactor1.Name = "UcrVariablesAsFactor1"
-        Me.UcrVariablesAsFactor1.Size = New System.Drawing.Size(125, 136)
-        Me.UcrVariablesAsFactor1.TabIndex = 21
-        Me.UcrVariablesAsFactor1.ucrVariableSelector = Nothing
+        Me.ucrSaveBoxplot.Location = New System.Drawing.Point(5, 234)
+        Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
+        Me.ucrSaveBoxplot.Size = New System.Drawing.Size(265, 27)
+        Me.ucrSaveBoxplot.TabIndex = 10
         '
         'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(569, 291)
-        Me.Controls.Add(Me.UcrVariablesAsFactor1)
+        Me.ClientSize = New System.Drawing.Size(436, 341)
+        Me.Controls.Add(Me.ucrSaveBoxplot)
+        Me.Controls.Add(Me.ucrVariablesAsFactorForBoxplot)
         Me.Controls.Add(Me.chkHorizontalBoxplot)
         Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
@@ -163,5 +172,6 @@ Partial Class dlgBoxplot
     Friend WithEvents lblBySecondFactor As Label
     Friend WithEvents cmdBoxPlotOptions As Button
     Friend WithEvents chkHorizontalBoxplot As CheckBox
-    Friend WithEvents UcrVariablesAsFactor1 As ucrVariablesAsFactor
+    Friend WithEvents ucrVariablesAsFactorForBoxplot As ucrVariablesAsFactor
+    Friend WithEvents ucrSaveBoxplot As ucrSaveGraph
 End Class
