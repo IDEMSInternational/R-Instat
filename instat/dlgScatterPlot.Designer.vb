@@ -27,11 +27,12 @@ Partial Class dlgScatterPlot
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.cmdScatterPlotOptions = New System.Windows.Forms.Button()
+        Me.ucrSaveScatterPlot = New instat.ucrSaveGraph()
+        Me.ucrVariablesAsFactorForScatter = New instat.ucrVariablesAsFactor()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrVariablesAsFactorForScatter = New instat.ucrVariablesAsFactor()
-        Me.ucrSelectorForScatter = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorScatterPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -74,6 +75,21 @@ Partial Class dlgScatterPlot
         Me.cmdScatterPlotOptions.Text = "ScatterPlot Options"
         Me.cmdScatterPlotOptions.UseVisualStyleBackColor = True
         '
+        'ucrSaveScatterPlot
+        '
+        Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(13, 225)
+        Me.ucrSaveScatterPlot.Name = "ucrSaveScatterPlot"
+        Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(265, 27)
+        Me.ucrSaveScatterPlot.TabIndex = 14
+        '
+        'ucrVariablesAsFactorForScatter
+        '
+        Me.ucrVariablesAsFactorForScatter.Location = New System.Drawing.Point(252, 4)
+        Me.ucrVariablesAsFactorForScatter.Name = "ucrVariablesAsFactorForScatter"
+        Me.ucrVariablesAsFactorForScatter.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorForScatter.TabIndex = 12
+        Me.ucrVariablesAsFactorForScatter.ucrVariableSelector = Nothing
+        '
         'ucrFactorOptionalReceiver
         '
         Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(277, 210)
@@ -92,33 +108,26 @@ Partial Class dlgScatterPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(4, 238)
+        Me.ucrBase.Location = New System.Drawing.Point(4, 258)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 8
         '
-        'ucrVariablesAsFactorForScatter
+        'ucrSelectorScatterPlot
         '
-        Me.ucrVariablesAsFactorForScatter.Location = New System.Drawing.Point(252, 4)
-        Me.ucrVariablesAsFactorForScatter.Name = "ucrVariablesAsFactorForScatter"
-        Me.ucrVariablesAsFactorForScatter.Size = New System.Drawing.Size(125, 136)
-        Me.ucrVariablesAsFactorForScatter.TabIndex = 12
-        Me.ucrVariablesAsFactorForScatter.ucrVariableSelector = Nothing
-        '
-        'ucrSelectorForScatter
-        '
-        Me.ucrSelectorForScatter.Location = New System.Drawing.Point(12, 4)
-        Me.ucrSelectorForScatter.lstVariablesInReceivers = CType(resources.GetObject("ucrSelectorForScatter.lstVariablesInReceivers"), System.Collections.Generic.List(Of String))
-        Me.ucrSelectorForScatter.Name = "ucrSelectorForScatter"
-        Me.ucrSelectorForScatter.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorForScatter.TabIndex = 13
+        Me.ucrSelectorScatterPlot.Location = New System.Drawing.Point(4, 4)
+        Me.ucrSelectorScatterPlot.lstVariablesInReceivers = CType(resources.GetObject("ucrSelectorScatterPlot.lstVariablesInReceivers"), System.Collections.Generic.List(Of String))
+        Me.ucrSelectorScatterPlot.Name = "ucrSelectorScatterPlot"
+        Me.ucrSelectorScatterPlot.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorScatterPlot.TabIndex = 15
         '
         'dlgScatterPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(411, 292)
-        Me.Controls.Add(Me.ucrSelectorForScatter)
+        Me.ClientSize = New System.Drawing.Size(411, 307)
+        Me.Controls.Add(Me.ucrSelectorScatterPlot)
+        Me.Controls.Add(Me.ucrSaveScatterPlot)
         Me.Controls.Add(Me.ucrVariablesAsFactorForScatter)
         Me.Controls.Add(Me.cmdScatterPlotOptions)
         Me.Controls.Add(Me.cmdOptions)
@@ -144,5 +153,6 @@ Partial Class dlgScatterPlot
     Friend WithEvents lblXVariable As Label
     Friend WithEvents cmdScatterPlotOptions As Button
     Friend WithEvents ucrVariablesAsFactorForScatter As ucrVariablesAsFactor
-    Friend WithEvents ucrSelectorForScatter As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSaveScatterPlot As ucrSaveGraph
+    Friend WithEvents ucrSelectorScatterPlot As ucrSelectorByDataFrameAddRemove
 End Class
