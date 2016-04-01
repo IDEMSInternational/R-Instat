@@ -382,6 +382,12 @@
     <Compile Include="dlgPermuteColumn.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPopulationPyramids.Designer.vb">
+      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPopulationPyramids.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgPrincipalComponentAnalysis.Designer.vb">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
     </Compile>
@@ -1933,6 +1939,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPermuteColumn.sw-KE.resx">
       <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPopulationPyramids.fr-FR.resx">
+      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPopulationPyramids.resx">
+      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPopulationPyramids.sw-KE.resx">
+      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrincipalComponentAnalysis.fr-FR.resx">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
