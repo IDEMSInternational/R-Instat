@@ -40,6 +40,7 @@ Public Class dlgOptions
             bFirstLoad = False
         End If
         LoadInstatOptions()
+        cmdApply.Enabled = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -55,11 +56,16 @@ Public Class dlgOptions
         fntComment = frmMain.clsInstatOptions.fntComment
         clrComment = frmMain.clsInstatOptions.clrComment
         '
-        rdoEnglish.Checked = frmMain.clsInstatOptions.bEng
-        rdoFrench.Checked = frmMain.clsInstatOptions.bFr
-        rdoKiswahili.Checked = frmMain.clsInstatOptions.bKis
+        Select Case frmMain.clsInstatOptions.strLanguageCode
+            Case "eng"
+                rdoEnglish.Checked = True
+            Case "fra"
+                rdoFrench.Checked = True
+            Case "swa"
+                rdoKiswahili.Checked = True
+        End Select
         '
-        nudNoLines.Value = frmMain.clsInstatOptions.iLines
+        nudNoLines.Value = 10
 
     End Sub
 
@@ -70,22 +76,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetFormatScript(fntScript, clrScript)
         frmMain.clsInstatOptions.SetComments(txtComment.Text)
         frmMain.clsInstatOptions.SetNoLines(nudNoLines.Value)
-        '
-        If frmMain.clsInstatOptions.bEng Then
-            Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
-            Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
-            strCurrLanguage = "eng"
-        End If
-        If frmMain.clsInstatOptions.bFr Then
-            Thread.CurrentThread.CurrentCulture = New CultureInfo("fr-FR")
-            Thread.CurrentThread.CurrentUICulture = New CultureInfo("fr-FR")
-            strCurrLanguage = "fra"
-        End If
-        If frmMain.clsInstatOptions.bKis Then
-            Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
-            Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
-            strCurrLanguage = "swa"
-        End If
+        frmMain.clsInstatOptions.SetLanguage(strCurrLanguage)
 
     End Sub
 
@@ -131,23 +122,23 @@ Public Class dlgOptions
         DisplayPanel(index)
     End Sub
 
-    Private Sub SetDefaults()
-        txtComment.Text = strComment
-        strCurrLanguage = Thread.CurrentThread.CurrentCulture.ThreeLetterISOLanguageName
-        rdoEnglish.Checked = False
-        rdoFrench.Checked = False
-        rdoKiswahili.Checked = False
+    'Private Sub SetDefaults()
+    '    txtComment.Text = strComment
+    '    strCurrLanguage = Thread.CurrentThread.CurrentCulture.ThreeLetterISOLanguageName
+    '    rdoEnglish.Checked = False
+    '    rdoFrench.Checked = False
+    '    rdoKiswahili.Checked = False
 
-        Select Case strCurrLanguage
-            Case "eng"
-                rdoEnglish.Checked = True
-            Case "fra"
-                rdoFrench.Checked = True
-            Case "swa"
-                rdoKiswahili.Checked = True
-        End Select
-        cmdApply.Enabled = False
-    End Sub
+    '    Select Case strCurrLanguage
+    '        Case "eng"
+    '            rdoEnglish.Checked = True
+    '        Case "fra"
+    '            rdoFrench.Checked = True
+    '        Case "swa"
+    '            rdoKiswahili.Checked = True
+    '    End Select
+    '    cmdApply.Enabled = False
+    'End Sub
 
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.Close()
@@ -196,17 +187,17 @@ Public Class dlgOptions
     End Sub
 
     Private Sub rdoKiswahili_CheckedChanged(sender As Object, e As EventArgs) Handles rdoKiswahili.CheckedChanged
-        frmMain.clsInstatOptions.bKis = rdoKiswahili.Checked
+        strCurrLanguage = "swa"
         cmdApply.Enabled = True
     End Sub
 
     Private Sub rdoFrench_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFrench.CheckedChanged
-        frmMain.clsInstatOptions.bFr = rdoFrench.Checked
+        strCurrLanguage = "fra"
         cmdApply.Enabled = True
     End Sub
 
     Private Sub rdoEnglish_CheckedChanged(sender As Object, e As EventArgs) Handles rdoEnglish.CheckedChanged
-        frmMain.clsInstatOptions.bEng = rdoEnglish.Checked
+        strCurrLanguage = "eng"
         cmdApply.Enabled = True
     End Sub
 

@@ -1,9 +1,11 @@
-﻿Public Class InstatOptions
-    Public bIncludeRDefaultParameters, bKis, bEng, bFr As Boolean
+﻿Imports System.Threading
+Imports System.Globalization
+Public Class InstatOptions
+    Public bIncludeRDefaultParameters As Boolean
     Public fntOutput, fntScript, fntComment As Font
     Public clrOutput, clrScript, clrComment As Color
-    Public txtComment As String
-    Public iLines As Integer = 10
+    Public txtComment, strLanguageCode As String
+    Public iLines As Integer
 
     Public Sub SetFormatOutput(fntNew As Font, clrNew As Color)
         fntOutput = fntNew
@@ -31,6 +33,22 @@
     Public Sub SetComments(strText As String)
         txtComment = strText
         dlgOptions.strComment = txtComment
+    End Sub
+
+    Public Sub SetLanguage(strLanguage As String)
+        strLanguageCode = strLanguage
+        Select Case strLanguageCode
+            Case "eng"
+                Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
+                Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
+            Case "fra"
+                Thread.CurrentThread.CurrentCulture = New CultureInfo("fr-FR")
+                Thread.CurrentThread.CurrentUICulture = New CultureInfo("fr-FR")
+            Case "swa"
+                Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
+                Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
+        End Select
+
     End Sub
 
 End Class
