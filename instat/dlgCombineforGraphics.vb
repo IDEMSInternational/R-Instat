@@ -19,7 +19,7 @@ Public Class dlgCombineforGraphics
     Private Sub dlgCombineforGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            Setdefaults()
+            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -33,7 +33,7 @@ Public Class dlgCombineforGraphics
 
     End Sub
 
-    Private Sub Setdefaults()
+    Private Sub SetDefaults()
 
     End Sub
 
@@ -45,6 +45,6 @@ Public Class dlgCombineforGraphics
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        Setdefaults()
+        SetDefaults()
     End Sub
 End Class
