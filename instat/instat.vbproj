@@ -490,6 +490,12 @@
     <Compile Include="dlgSummaryBarOrPieChart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgThemes.Designer.vb">
+      <DependentUpon>dlgThemes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgThemes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTransposeColumns.Designer.vb">
       <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
     </Compile>
@@ -2089,6 +2095,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThemes.fr-FR.resx">
+      <DependentUpon>dlgThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThemes.resx">
+      <DependentUpon>dlgThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThemes.sw-KE.resx">
+      <DependentUpon>dlgThemes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTransposeColumns.fr-FR.resx">
       <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
