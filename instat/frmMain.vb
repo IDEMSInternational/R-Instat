@@ -58,6 +58,7 @@ Public Class frmMain
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
         clsRLink.SetOutput(frmCommand.txtCommand)
+        REngine.SetEnvironmentVariables()
         clsRLink.clsEngine = REngine.GetInstance()
         clsRLink.clsEngine.Initialize()
         'Sets up R source files
