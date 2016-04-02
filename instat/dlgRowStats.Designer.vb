@@ -44,7 +44,7 @@ Partial Class dlgRowStats
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(269, 26)
+        Me.lblSelected.Location = New System.Drawing.Point(269, 44)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
         Me.lblSelected.TabIndex = 1
@@ -61,9 +61,9 @@ Partial Class dlgRowStats
         Me.grpStatistic.Controls.Add(Me.rdoNumberofMissing)
         Me.grpStatistic.Controls.Add(Me.rdoMedian)
         Me.grpStatistic.Controls.Add(Me.rdoSum)
-        Me.grpStatistic.Location = New System.Drawing.Point(12, 197)
+        Me.grpStatistic.Location = New System.Drawing.Point(5, 196)
         Me.grpStatistic.Name = "grpStatistic"
-        Me.grpStatistic.Size = New System.Drawing.Size(410, 65)
+        Me.grpStatistic.Size = New System.Drawing.Size(424, 76)
         Me.grpStatistic.TabIndex = 3
         Me.grpStatistic.TabStop = False
         Me.grpStatistic.Tag = "Statistic"
@@ -72,7 +72,7 @@ Partial Class dlgRowStats
         'rdoMinimum
         '
         Me.rdoMinimum.AutoSize = True
-        Me.rdoMinimum.Location = New System.Drawing.Point(121, 19)
+        Me.rdoMinimum.Location = New System.Drawing.Point(121, 15)
         Me.rdoMinimum.Name = "rdoMinimum"
         Me.rdoMinimum.Size = New System.Drawing.Size(66, 17)
         Me.rdoMinimum.TabIndex = 2
@@ -84,7 +84,7 @@ Partial Class dlgRowStats
         'rdoMaximum
         '
         Me.rdoMaximum.AutoSize = True
-        Me.rdoMaximum.Location = New System.Drawing.Point(241, 42)
+        Me.rdoMaximum.Location = New System.Drawing.Point(241, 50)
         Me.rdoMaximum.Name = "rdoMaximum"
         Me.rdoMaximum.Size = New System.Drawing.Size(69, 17)
         Me.rdoMaximum.TabIndex = 5
@@ -96,7 +96,7 @@ Partial Class dlgRowStats
         'rdoCount
         '
         Me.rdoCount.AutoSize = True
-        Me.rdoCount.Location = New System.Drawing.Point(338, 42)
+        Me.rdoCount.Location = New System.Drawing.Point(338, 50)
         Me.rdoCount.Name = "rdoCount"
         Me.rdoCount.Size = New System.Drawing.Size(53, 17)
         Me.rdoCount.TabIndex = 7
@@ -108,7 +108,7 @@ Partial Class dlgRowStats
         'rdoMean
         '
         Me.rdoMean.AutoSize = True
-        Me.rdoMean.Location = New System.Drawing.Point(6, 19)
+        Me.rdoMean.Location = New System.Drawing.Point(6, 16)
         Me.rdoMean.Name = "rdoMean"
         Me.rdoMean.Size = New System.Drawing.Size(52, 17)
         Me.rdoMean.TabIndex = 0
@@ -120,7 +120,7 @@ Partial Class dlgRowStats
         'rdoStandardDeviation
         '
         Me.rdoStandardDeviation.AutoSize = True
-        Me.rdoStandardDeviation.Location = New System.Drawing.Point(121, 42)
+        Me.rdoStandardDeviation.Location = New System.Drawing.Point(121, 51)
         Me.rdoStandardDeviation.Name = "rdoStandardDeviation"
         Me.rdoStandardDeviation.Size = New System.Drawing.Size(114, 17)
         Me.rdoStandardDeviation.TabIndex = 3
@@ -132,7 +132,7 @@ Partial Class dlgRowStats
         'rdoNumberofMissing
         '
         Me.rdoNumberofMissing.AutoSize = True
-        Me.rdoNumberofMissing.Location = New System.Drawing.Point(6, 42)
+        Me.rdoNumberofMissing.Location = New System.Drawing.Point(6, 52)
         Me.rdoNumberofMissing.Name = "rdoNumberofMissing"
         Me.rdoNumberofMissing.Size = New System.Drawing.Size(112, 17)
         Me.rdoNumberofMissing.TabIndex = 1
@@ -144,7 +144,7 @@ Partial Class dlgRowStats
         'rdoMedian
         '
         Me.rdoMedian.AutoSize = True
-        Me.rdoMedian.Location = New System.Drawing.Point(335, 19)
+        Me.rdoMedian.Location = New System.Drawing.Point(335, 15)
         Me.rdoMedian.Name = "rdoMedian"
         Me.rdoMedian.Size = New System.Drawing.Size(60, 17)
         Me.rdoMedian.TabIndex = 6
@@ -156,7 +156,7 @@ Partial Class dlgRowStats
         'rdoSum
         '
         Me.rdoSum.AutoSize = True
-        Me.rdoSum.Location = New System.Drawing.Point(242, 19)
+        Me.rdoSum.Location = New System.Drawing.Point(242, 17)
         Me.rdoSum.Name = "rdoSum"
         Me.rdoSum.Size = New System.Drawing.Size(46, 17)
         Me.rdoSum.TabIndex = 4
@@ -168,7 +168,7 @@ Partial Class dlgRowStats
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(14, 279)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(14, 304)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumnName.TabIndex = 4
@@ -177,7 +177,7 @@ Partial Class dlgRowStats
         '
         'cmdUserDefined
         '
-        Me.cmdUserDefined.Location = New System.Drawing.Point(319, 273)
+        Me.cmdUserDefined.Location = New System.Drawing.Point(318, 301)
         Me.cmdUserDefined.Name = "cmdUserDefined"
         Me.cmdUserDefined.Size = New System.Drawing.Size(100, 23)
         Me.cmdUserDefined.TabIndex = 6
@@ -187,21 +187,21 @@ Partial Class dlgRowStats
         '
         'ucrInputcboRowSummary
         '
-        Me.ucrInputcboRowSummary.Location = New System.Drawing.Point(171, 273)
+        Me.ucrInputcboRowSummary.Location = New System.Drawing.Point(125, 302)
         Me.ucrInputcboRowSummary.Name = "ucrInputcboRowSummary"
         Me.ucrInputcboRowSummary.Size = New System.Drawing.Size(137, 25)
         Me.ucrInputcboRowSummary.TabIndex = 5
         '
         'ucrSelectorForRowStats
         '
-        Me.ucrSelectorForRowStats.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorForRowStats.Location = New System.Drawing.Point(13, 4)
         Me.ucrSelectorForRowStats.Name = "ucrSelectorForRowStats"
         Me.ucrSelectorForRowStats.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorForRowStats.TabIndex = 0
         '
         'ucrReceiverForRowStatistics
         '
-        Me.ucrReceiverForRowStatistics.Location = New System.Drawing.Point(272, 42)
+        Me.ucrReceiverForRowStatistics.Location = New System.Drawing.Point(272, 60)
         Me.ucrReceiverForRowStatistics.Name = "ucrReceiverForRowStatistics"
         Me.ucrReceiverForRowStatistics.Selector = Nothing
         Me.ucrReceiverForRowStatistics.Size = New System.Drawing.Size(121, 106)
@@ -209,16 +209,16 @@ Partial Class dlgRowStats
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 309)
+        Me.ucrBase.Location = New System.Drawing.Point(14, 356)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 60)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 54)
         Me.ucrBase.TabIndex = 7
         '
         'dlgRowStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 361)
+        Me.ClientSize = New System.Drawing.Size(437, 413)
         Me.Controls.Add(Me.cmdUserDefined)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputcboRowSummary)

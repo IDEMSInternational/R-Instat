@@ -125,16 +125,24 @@ instat_obj$methods(append_data_objects = function(name, obj) {
 }
 )
 
-instat_obj$methods(get_data_frame = function(data_name, convert_to_character = FALSE) { 
-  if(missing(data_name)) {
-    retlist <- list()
-    for ( i in (1:length(data_objects)) ) {
-      retlist[[names(data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character)
+instat_obj$methods(get_data_frame = function(data_name, convert_to_character = FALSE, 
+                                             stack_data = FALSE,...) {
+  if(!stack_data) {
+    if(missing(data_name)) {
+      retlist <- list()
+      for ( i in (1:length(data_objects)) ) {
+        retlist[[names(data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character)
+      }
+      return(retlist)
     }
-    return(retlist)
+    else return(data_objects[[data_name]]$get_data_frame(convert_to_character = convert_to_character))
   }
-  else return(data_objects[[data_name]]$get_data_frame(convert_to_character = convert_to_character))
-  } 
+  else {
+    if(missing(data_name)) stop("data to be stacked is missing")
+    if(!data_name %in% names(data_objects)) stop(paste(data_name, "not found."))
+    return(melt(data_objects[[data_name]]$get_data_frame(), ...))
+  }
+}
 )
 
 instat_obj$methods(get_variables_metadata = function(data_name, data_type = "all", convert_to_character = FALSE) { 
@@ -243,19 +251,28 @@ instat_obj$methods(set_metadata_changed = function(data_name = "", new_val) {
 } 
 )
 
-instat_obj$methods(add_column_to_data = function(data_name, col_name, col_data) {
+instat_obj$methods(add_columns_to_data = function(data_name, col_name, col_data, use_col_name_as_prefix) {
   if(missing(data_name)) stop("data_name is required")
   if(!data_name %in% names(data_objects)) stop(paste(data_name, "not found"))
   
-  data_objects[[data_name]]$add_column_to_data(col_name, col_data)
+  if(missing(use_col_name_as_prefix)) data_objects[[data_name]]$add_columns_to_data(col_name, col_data)
+  else data_objects[[data_name]]$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix)
 }
 )
 
-instat_obj$methods(get_columns_from_data = function(data_name, col_names, force_as_data_frame=FALSE) {
+instat_obj$methods(get_columns_from_data = function(data_name, col_names, 
+                                                    from_stacked_data = FALSE) {
   if(missing(data_name)) stop("data_name is required")
-  if(!data_name %in% names(data_objects)) stop(paste(data_name, "not found"))
-  
-  data_objects[[data_name]]$get_columns_from_data(col_names, force_as_data_frame=force_as_data_frame)
+  if(!from_stacked_data) {
+    if(!data_name %in% names(data_objects)) stop(paste(data_name, "not found"))
+    data_objects[[data_name]]$get_columns_from_data(col_names)
+  }
+  else {
+    if(!exists(data_name)) stop(paste(data_name, "not found."))
+    if(!all(sapply(col_names, function(x) x %in% names(data_name)))) stop("Not all column names were found in data")
+    if(length(col_names)==1) return (data_name[[col_names]])
+    else return(data_name[col_names])
+  }
 }
 )
 
@@ -475,5 +492,37 @@ instat_obj$methods(copy_columns = function(data_name, col_names = "") {
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
   data_objects[[data_name]]$copy_columns(col_names = col_names)
+} 
+)
+
+instat_obj$methods(drop_unused_factor_levels = function(data_name, col_name) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$drop_unused_factor_levels(col_name = col_name)
+} 
+)
+
+instat_obj$methods(set_factor_levels = function(data_name, col_name, new_levels) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$set_factor_levels(col_name = col_name, new_levels = new_levels)
+} 
+)
+
+instat_obj$methods(set_factor_reference_level = function(data_name, col_name, new_ref_level) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$set_factor_reference_level(col_name = col_name, new_ref_level = new_ref_level)
+} 
+)
+
+instat_obj$methods(get_column_count = function(data_name) {
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  return(ncol(data_objects[[data_name]]$data))
 } 
 )

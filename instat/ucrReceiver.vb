@@ -54,9 +54,9 @@ Public Class ucrReceiver
     End Function
 
     Public Sub SetMeAsReceiver()
-        Selector.CurrentReceiver.RemoveColor()
-        Selector.SetCurrentReceiver(Me)
-        Selector.CurrentReceiver.SetColor()
+        If Selector IsNot Nothing Then
+            Selector.SetCurrentReceiver(Me)
+        End If
     End Sub
 
     Private Sub ucrReceiver_Load(sender As Object, e As EventArgs) Handles MyBase.Load

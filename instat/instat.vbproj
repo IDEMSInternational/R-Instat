@@ -298,10 +298,46 @@
     <Compile Include="dlgDistanceText.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportDataset.Designer.vb">
+      <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportDataset.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFromLibrary.Designer.vb">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgFromLibrary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgGeneralForGraphics.Designer.vb">
+      <DependentUpon>dlgGeneralForGraphics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGeneralForGraphics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgGeneralRegression.Designer.vb">
+      <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGeneralRegression.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgGeneralTables.Designer.vb">
+      <DependentUpon>dlgGeneralTables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGeneralTables.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgGoodnessofFit.Designer.vb">
+      <DependentUpon>dlgGoodnessofFit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGoodnessofFit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgGroupTables.Designer.vb">
+      <DependentUpon>dlgGroupTables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGroupTables.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgHideShowColumns.Designer.vb">
@@ -328,6 +364,18 @@
     <Compile Include="dlgMatchText.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMultipleResponse.Designer.vb">
+      <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMultipleResponse.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOneSampleSummaryData.Designer.vb">
+      <DependentUpon>dlgOneSampleSummaryData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOneSampleSummaryData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOneWayANOVA.Designer.vb">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
     </Compile>
@@ -338,6 +386,12 @@
       <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgPermuteColumn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPopulationPyramids.Designer.vb">
+      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPopulationPyramids.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgPrincipalComponentAnalysis.Designer.vb">
@@ -400,6 +454,12 @@
     <Compile Include="dlgReoderModels.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReorderColumns.Designer.vb">
+      <DependentUpon>dlgReorderColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReorderColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgReorderLevels.Designer.vb">
       <DependentUpon>dlgReorderLevels.vb</DependentUpon>
     </Compile>
@@ -442,6 +502,12 @@
     <Compile Include="dlgSummaryBarOrPieChart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgThemes.Designer.vb">
+      <DependentUpon>dlgThemes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgThemes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTransposeColumns.Designer.vb">
       <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
     </Compile>
@@ -452,6 +518,12 @@
       <DependentUpon>dlgTwoSampleNonparametricTest.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTwoSampleNonparametricTest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTwoSampleSummaryData.Designer.vb">
+      <DependentUpon>dlgTwoSampleSummaryData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTwoSampleSummaryData.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgUnusedLevels.Designer.vb">
@@ -476,6 +548,18 @@
       <DependentUpon>dlgViewModels.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgViewModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgWindrose.Designer.vb">
+      <DependentUpon>dlgWindrose.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgWindrose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCombineforGraphics.Designer.vb">
+      <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCombineforGraphics.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgCanonicalCorrelation.Designer.vb">
@@ -518,6 +602,12 @@
       <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgPrincipalComponentAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgScatterPlot.Designer.vb">
+      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgScatterPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgThemeOptions.Designer.vb">
@@ -724,12 +814,6 @@
     <Compile Include="dlgExtremesClimatic.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgfactor.Designer.vb">
-      <DependentUpon>dlgfactor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgfactor.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgFind.Designer.vb">
       <DependentUpon>dlgFind.vb</DependentUpon>
     </Compile>
@@ -754,10 +838,10 @@
     <Compile Include="dlgGammaDistr.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgGeneral.Designer.vb">
-      <DependentUpon>dlgGeneral.vb</DependentUpon>
+    <Compile Include="dlgGeneralANOVA.Designer.vb">
+      <DependentUpon>dlgGeneralANOVA.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgGeneral.vb">
+    <Compile Include="dlgGeneralANOVA.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgGeneralisedLinearModels.Designer.vb">
@@ -1736,6 +1820,15 @@
     <EmbeddedResource Include="dlgDistanceText.sw-KE.resx">
       <DependentUpon>dlgDistanceText.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportDataset.fr-FR.resx">
+      <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportDataset.resx">
+      <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
+      <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.fr-FR.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
     </EmbeddedResource>
@@ -1744,6 +1837,51 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralForGraphics.fr-FR.resx">
+      <DependentUpon>dlgGeneralForGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralForGraphics.resx">
+      <DependentUpon>dlgGeneralForGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralForGraphics.sw-KE.resx">
+      <DependentUpon>dlgGeneralForGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralRegression.fr-FR.resx">
+      <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralRegression.resx">
+      <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralRegression.sw-KE.resx">
+      <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralTables.fr-FR.resx">
+      <DependentUpon>dlgGeneralTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralTables.resx">
+      <DependentUpon>dlgGeneralTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralTables.sw-KE.resx">
+      <DependentUpon>dlgGeneralTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGoodnessofFit.fr-FR.resx">
+      <DependentUpon>dlgGoodnessofFit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGoodnessofFit.resx">
+      <DependentUpon>dlgGoodnessofFit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGoodnessofFit.sw-KE.resx">
+      <DependentUpon>dlgGoodnessofFit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGroupTables.fr-FR.resx">
+      <DependentUpon>dlgGroupTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGroupTables.resx">
+      <DependentUpon>dlgGroupTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGroupTables.sw-KE.resx">
+      <DependentUpon>dlgGroupTables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHideShowColumns.fr-FR.resx">
       <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
@@ -1781,6 +1919,24 @@
     <EmbeddedResource Include="dlgMatchText.sw-KE.resx">
       <DependentUpon>dlgMatchText.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgMultipleResponse.fr-FR.resx">
+      <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMultipleResponse.resx">
+      <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMultipleResponse.sw-KE.resx">
+      <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneSampleSummaryData.fr-FR.resx">
+      <DependentUpon>dlgOneSampleSummaryData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneSampleSummaryData.resx">
+      <DependentUpon>dlgOneSampleSummaryData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOneSampleSummaryData.sw-KE.resx">
+      <DependentUpon>dlgOneSampleSummaryData.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOneWayANOVA.fr-FR.resx">
       <DependentUpon>dlgOneWayANOVA.vb</DependentUpon>
     </EmbeddedResource>
@@ -1798,6 +1954,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPermuteColumn.sw-KE.resx">
       <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPopulationPyramids.fr-FR.resx">
+      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPopulationPyramids.resx">
+      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPopulationPyramids.sw-KE.resx">
+      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrincipalComponentAnalysis.fr-FR.resx">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
@@ -1889,6 +2054,15 @@
     <EmbeddedResource Include="dlgReoderModels.sw-KE.resx">
       <DependentUpon>dlgReoderModels.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderColumns.fr-FR.resx">
+      <DependentUpon>dlgReorderColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderColumns.resx">
+      <DependentUpon>dlgReorderColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReorderColumns.sw-KE.resx">
+      <DependentUpon>dlgReorderColumns.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderLevels.fr-FR.resx">
       <DependentUpon>dlgReorderLevels.vb</DependentUpon>
     </EmbeddedResource>
@@ -1952,6 +2126,15 @@
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgThemes.fr-FR.resx">
+      <DependentUpon>dlgThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThemes.resx">
+      <DependentUpon>dlgThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThemes.sw-KE.resx">
+      <DependentUpon>dlgThemes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTransposeColumns.fr-FR.resx">
       <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
     </EmbeddedResource>
@@ -1978,6 +2161,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgNon_ParametricTwoWayAnova.sw-KE.resx">
       <DependentUpon>dlgNon_ParametricTwoWayAnova.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoSampleSummaryData.fr-FR.resx">
+      <DependentUpon>dlgTwoSampleSummaryData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoSampleSummaryData.resx">
+      <DependentUpon>dlgTwoSampleSummaryData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTwoSampleSummaryData.sw-KE.resx">
+      <DependentUpon>dlgTwoSampleSummaryData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
       <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
@@ -2014,6 +2206,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewModels.sw-KE.resx">
       <DependentUpon>dlgViewModels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWindrose.fr-FR.resx">
+      <DependentUpon>dlgWindrose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWindrose.resx">
+      <DependentUpon>dlgWindrose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWindrose.sw-KE.resx">
+      <DependentUpon>dlgWindrose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCombineforGraphics.fr-FR.resx">
+      <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCombineforGraphics.resx">
+      <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCombineforGraphics.sw-KE.resx">
+      <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
@@ -2367,15 +2577,6 @@
     <EmbeddedResource Include="dlgExtremesClimatic.sw-KE.resx">
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgfactor.fr-FR.resx">
-      <DependentUpon>dlgfactor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgfactor.resx">
-      <DependentUpon>dlgfactor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgfactor.sw-KE.resx">
-      <DependentUpon>dlgfactor.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgFind.fr-FR.resx">
       <DependentUpon>dlgFind.vb</DependentUpon>
     </EmbeddedResource>
@@ -2412,14 +2613,14 @@
     <EmbeddedResource Include="dlgGammaDistr.sw-KE.resx">
       <DependentUpon>dlgGammaDistr.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgGeneral.fr-FR.resx">
-      <DependentUpon>dlgGeneral.vb</DependentUpon>
+    <EmbeddedResource Include="dlgGeneralANOVA.fr-FR.resx">
+      <DependentUpon>dlgGeneralANOVA.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgGeneral.resx">
-      <DependentUpon>dlgGeneral.vb</DependentUpon>
+    <EmbeddedResource Include="dlgGeneralANOVA.resx">
+      <DependentUpon>dlgGeneralANOVA.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgGeneral.sw-KE.resx">
-      <DependentUpon>dlgGeneral.vb</DependentUpon>
+    <EmbeddedResource Include="dlgGeneralANOVA.sw-KE.resx">
+      <DependentUpon>dlgGeneralANOVA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGeneralisedLinearModels.fr-FR.resx">
       <DependentUpon>dlgGeneralisedLinearModels.vb</DependentUpon>
@@ -3221,6 +3422,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPlots.sw-KE.resx">
       <DependentUpon>sdgPlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgScatterPlot.fr-FR.resx">
+      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgScatterPlot.resx">
+      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgScatterPlot.sw-KE.resx">
+      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.fr-FR.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>

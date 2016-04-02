@@ -13,10 +13,38 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
-Public Class dlgGeneral
-    Private Sub dlgGeneral_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class dlgCombineforGraphics
+    Private bFirstLoad As Boolean = True
+    Private Sub dlgCombineforGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+
+        End If
         autoTranslate(Me)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
+
+    End Sub
+
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+    Private Sub TestOkEnabled()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class
