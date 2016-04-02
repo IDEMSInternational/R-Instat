@@ -382,6 +382,12 @@
     <Compile Include="dlgPermuteColumn.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPopulationPyramids.Designer.vb">
+      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPopulationPyramids.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgPrincipalComponentAnalysis.Designer.vb">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
     </Compile>
@@ -490,6 +496,12 @@
     <Compile Include="dlgSummaryBarOrPieChart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgThemes.Designer.vb">
+      <DependentUpon>dlgThemes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgThemes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTransposeColumns.Designer.vb">
       <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
     </Compile>
@@ -536,6 +548,12 @@
       <DependentUpon>dlgWindrose.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgWindrose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCombineforGraphics.Designer.vb">
+      <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCombineforGraphics.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgCanonicalCorrelation.Designer.vb">
@@ -1922,6 +1940,15 @@
     <EmbeddedResource Include="dlgPermuteColumn.sw-KE.resx">
       <DependentUpon>dlgPermuteColumn.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgPopulationPyramids.fr-FR.resx">
+      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPopulationPyramids.resx">
+      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPopulationPyramids.sw-KE.resx">
+      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgPrincipalComponentAnalysis.fr-FR.resx">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
     </EmbeddedResource>
@@ -2084,6 +2111,15 @@
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.sw-KE.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgThemes.fr-FR.resx">
+      <DependentUpon>dlgThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThemes.resx">
+      <DependentUpon>dlgThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThemes.sw-KE.resx">
+      <DependentUpon>dlgThemes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTransposeColumns.fr-FR.resx">
       <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
     </EmbeddedResource>
@@ -2164,6 +2200,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindrose.sw-KE.resx">
       <DependentUpon>dlgWindrose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCombineforGraphics.fr-FR.resx">
+      <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCombineforGraphics.resx">
+      <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCombineforGraphics.sw-KE.resx">
+      <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
