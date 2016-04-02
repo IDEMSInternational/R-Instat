@@ -310,6 +310,12 @@
     <Compile Include="dlgFromLibrary.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgGeneralForGraphics.Designer.vb">
+      <DependentUpon>dlgGeneralForGraphics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgGeneralForGraphics.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgGeneralRegression.Designer.vb">
       <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
     </Compile>
@@ -1831,6 +1837,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralForGraphics.fr-FR.resx">
+      <DependentUpon>dlgGeneralForGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralForGraphics.resx">
+      <DependentUpon>dlgGeneralForGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgGeneralForGraphics.sw-KE.resx">
+      <DependentUpon>dlgGeneralForGraphics.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGeneralRegression.fr-FR.resx">
       <DependentUpon>dlgGeneralRegression.vb</DependentUpon>
