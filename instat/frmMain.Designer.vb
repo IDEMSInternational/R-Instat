@@ -68,6 +68,9 @@ Partial Class frmMain
         Me.WindRoseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PopulationPyramidsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuGraphicsInventory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ThemesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CombineToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GeneralToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStatistics = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStatisticsSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStatisticsSummaryDescribe = New System.Windows.Forms.ToolStripMenuItem()
@@ -334,8 +337,6 @@ Partial Class frmMain
         Me.mnuClimateMethodsAdditionalSeasonalSummaryRain = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsAdditionalWaterBalance = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsCreateClimateObject = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ThemesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CombineToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -532,7 +533,7 @@ Partial Class frmMain
         '
         'mnuGraphics
         '
-        Me.mnuGraphics.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuGraphicsScatterPlot, Me.mnuGraphicsLinePlot, Me.mnuGraphicsHistogram, Me.mnuGraphicsBoxPlot, Me.mnuGraphicsDotPlot, Me.mnuGraphicsStemAndLeaf, Me.mnuGraphicsBarPie, Me.mnuGraphicsBarPieChart, Me.ToolStripSeparator4, Me.mnuGraphicsCummulativeDistribution, Me.ToolStripSeparator5, Me.mnuGraphicsUseGraph, Me.ToolStripSeparator3, Me.mnuGraphicsWindrose, Me.mnuGraphicsInventory, Me.ThemesToolStripMenuItem, Me.CombineToolStripMenuItem})
+        Me.mnuGraphics.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuGraphicsScatterPlot, Me.mnuGraphicsLinePlot, Me.mnuGraphicsHistogram, Me.mnuGraphicsBoxPlot, Me.mnuGraphicsDotPlot, Me.mnuGraphicsStemAndLeaf, Me.mnuGraphicsBarPie, Me.mnuGraphicsBarPieChart, Me.ToolStripSeparator4, Me.mnuGraphicsCummulativeDistribution, Me.ToolStripSeparator5, Me.mnuGraphicsUseGraph, Me.ToolStripSeparator3, Me.mnuGraphicsWindrose, Me.mnuGraphicsInventory, Me.ThemesToolStripMenuItem, Me.CombineToolStripMenuItem, Me.GeneralToolStripMenuItem})
         Me.mnuGraphics.Name = "mnuGraphics"
         Me.mnuGraphics.Size = New System.Drawing.Size(65, 20)
         Me.mnuGraphics.Tag = "Graphics"
@@ -649,6 +650,24 @@ Partial Class frmMain
         Me.mnuGraphicsInventory.Size = New System.Drawing.Size(222, 22)
         Me.mnuGraphicsInventory.Tag = "InventoryPlot"
         Me.mnuGraphicsInventory.Text = "Inventory Plot..."
+        '
+        'ThemesToolStripMenuItem
+        '
+        Me.ThemesToolStripMenuItem.Name = "ThemesToolStripMenuItem"
+        Me.ThemesToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.ThemesToolStripMenuItem.Text = "Themes..."
+        '
+        'CombineToolStripMenuItem
+        '
+        Me.CombineToolStripMenuItem.Name = "CombineToolStripMenuItem"
+        Me.CombineToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.CombineToolStripMenuItem.Text = "Combine"
+        '
+        'GeneralToolStripMenuItem
+        '
+        Me.GeneralToolStripMenuItem.Name = "GeneralToolStripMenuItem"
+        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.GeneralToolStripMenuItem.Text = "General"
         '
         'mnuStatistics
         '
@@ -2550,18 +2569,6 @@ Partial Class frmMain
         Me.mnuClimateMethodsCreateClimateObject.Tag = "Create_Climate_Object"
         Me.mnuClimateMethodsCreateClimateObject.Text = "Create Climate Object..."
         '
-        'ThemesToolStripMenuItem
-        '
-        Me.ThemesToolStripMenuItem.Name = "ThemesToolStripMenuItem"
-        Me.ThemesToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
-        Me.ThemesToolStripMenuItem.Text = "Themes..."
-        '
-        'CombineToolStripMenuItem
-        '
-        Me.CombineToolStripMenuItem.Name = "CombineToolStripMenuItem"
-        Me.CombineToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
-        Me.CombineToolStripMenuItem.Text = "Combine"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2898,4 +2905,5 @@ Partial Class frmMain
     Friend WithEvents PopulationPyramidsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ThemesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CombineToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GeneralToolStripMenuItem As ToolStripMenuItem
 End Class

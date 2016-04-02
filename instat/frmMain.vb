@@ -991,5 +991,9 @@ Public Class frmMain
     Private Sub PopulationPyramidsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PopulationPyramidsToolStripMenuItem.Click
         dlgPopulationPyramids.ShowDialog()
     End Sub
+
+    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneralToolStripMenuItem.Click
+        dlgGeneralForGraphics.ShowDialog()
+    End Sub
 End Class
 
