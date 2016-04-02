@@ -979,5 +979,17 @@ Public Class frmMain
     Private Sub WindRoseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindRoseToolStripMenuItem.Click
         dlgWindrose.ShowDialog()
     End Sub
+
+    Private Sub ThemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ThemesToolStripMenuItem.Click
+        dlgThemes.ShowDialog()
+    End Sub
+
+    Private Sub CombineToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineToolStripMenuItem.Click
+        dlgCombineforGraphics.ShowDialog()
+    End Sub
+
+    Private Sub PopulationPyramidsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PopulationPyramidsToolStripMenuItem.Click
+        dlgPopulationPyramids.ShowDialog()
+    End Sub
 End Class
 
