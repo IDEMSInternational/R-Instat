@@ -38,7 +38,7 @@ Public Class dlgSplitText
     Private Sub InitialiseDialog()
         ucrReceiverSplitTextColumn.Selector = ucrSelectorSplitTextColumn
         ucrReceiverSplitTextColumn.SetMeAsReceiver()
-        ucrBase.clsRsyntax.SetFunction("stringr::str_split")
+        ucrBase.clsRsyntax.SetFunction("stringr::str_split_fixed")
         ucrReceiverSplitTextColumn.SetDataType("factor")
         ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & Chr(34))
         ucrInputColumnsIntoText.SetPrefix("SplitText")
