@@ -29,10 +29,10 @@ Partial Class dlgSplitText
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.lblNumberofPiecesToReturn = New System.Windows.Forms.Label()
         Me.nudN = New System.Windows.Forms.NumericUpDown()
+        Me.ucrInputColumnsIntoText = New instat.ucrInputComboBox()
         Me.ucrReceiverSplitTextColumn = New instat.ucrReceiverMultiple()
         Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputColumnsIntoText = New instat.ucrInputComboBox()
         CType(Me.nudN, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -49,7 +49,7 @@ Partial Class dlgSplitText
         'cboPattern
         '
         Me.cboPattern.FormattingEnabled = True
-        Me.cboPattern.Items.AddRange(New Object() {"Whitespace", "Hyphen", "Period", "NULL", "Underscore"})
+        Me.cboPattern.Items.AddRange(New Object() {"Whitespace", "Hyphen", "Period", "Underscore"})
         Me.cboPattern.Location = New System.Drawing.Point(280, 171)
         Me.cboPattern.Name = "cboPattern"
         Me.cboPattern.Size = New System.Drawing.Size(121, 21)
@@ -92,6 +92,13 @@ Partial Class dlgSplitText
         Me.nudN.Size = New System.Drawing.Size(120, 20)
         Me.nudN.TabIndex = 10
         '
+        'ucrInputColumnsIntoText
+        '
+        Me.ucrInputColumnsIntoText.Location = New System.Drawing.Point(263, 226)
+        Me.ucrInputColumnsIntoText.Name = "ucrInputColumnsIntoText"
+        Me.ucrInputColumnsIntoText.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputColumnsIntoText.TabIndex = 11
+        '
         'ucrReceiverSplitTextColumn
         '
         Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(280, 33)
@@ -114,13 +121,6 @@ Partial Class dlgSplitText
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
-        '
-        'ucrInputColumnsIntoText
-        '
-        Me.ucrInputColumnsIntoText.Location = New System.Drawing.Point(263, 226)
-        Me.ucrInputColumnsIntoText.Name = "ucrInputColumnsIntoText"
-        Me.ucrInputColumnsIntoText.Size = New System.Drawing.Size(137, 25)
-        Me.ucrInputColumnsIntoText.TabIndex = 11
         '
         'dlgSplitText
         '

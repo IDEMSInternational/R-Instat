@@ -65,10 +65,8 @@ Public Class dlgSplitText
 
     Private Sub cboPattern_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPattern.SelectedIndexChanged
         Select Case cboPattern.SelectedItem
-            Case "NULL"
-                ucrBase.clsRsyntax.AddParameter("pattern", "NULL")
             Case "WhiteSpace"
-                ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & "" & Chr(34))
+                ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & Chr(34))
             Case "Hyphen"
                 ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & "-" & Chr(34))
             Case "Underscore"
