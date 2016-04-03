@@ -40,7 +40,7 @@ Public Class dlgSplitText
         ucrReceiverSplitTextColumn.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("stringr::str_split_fixed")
         ucrReceiverSplitTextColumn.SetDataType("factor")
-        ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & Chr(34))
+        ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & " " & Chr(34))
         ucrInputColumnsIntoText.SetPrefix("SplitText")
         ucrInputColumnsIntoText.SetItemsTypeAsColumns()
         ucrInputColumnsIntoText.SetDefaultTypeAsColumn()
@@ -66,7 +66,7 @@ Public Class dlgSplitText
     Private Sub cboPattern_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPattern.SelectedIndexChanged
         Select Case cboPattern.SelectedItem
             Case "WhiteSpace"
-                ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & Chr(34))
+                ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & " " & Chr(34))
             Case "Hyphen"
                 ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & "-" & Chr(34))
             Case "Underscore"
