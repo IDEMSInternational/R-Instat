@@ -32,6 +32,7 @@
     Private Sub cmdVariables_Click(sender As Object, e As EventArgs) Handles cmdVariables.Click
         bSingleVariable = Not bSingleVariable
         SetReceiverStatus()
+        RaiseEvent SelectionChanged()
     End Sub
 
     Public Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
@@ -135,7 +136,7 @@
         Else
             ucrSingleVariable.Visible = False
             ucrMultipleVariables.Visible = True
-            'need to translate correctly
+            'TODO need to translate correctly
             cmdVariables.Text = "Multiple Variables"
             cmdVariables.FlatStyle = FlatStyle.Flat
             If ucrVariableSelector IsNot Nothing Then
@@ -154,15 +155,12 @@
     End Sub
 
     Private Sub SetMeasureVars()
+        If ucrFactorReceiver IsNot Nothing Then
+            ucrFactorReceiver.SetStackedFactorMode(True)
+        End If
         If Not ucrMultipleVariables.IsEmpty Then
             ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("measure.vars", ucrMultipleVariables.GetVariableNames())
-            If ucrFactorReceiver IsNot Nothing Then
-                ucrFactorReceiver.SetStackedFactorMode(True)
-            End If
         Else
-            If ucrFactorReceiver IsNot Nothing Then
-                ucrFactorReceiver.SetStackedFactorMode(False)
-            End If
             ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("measure.vars")
         End If
     End Sub
