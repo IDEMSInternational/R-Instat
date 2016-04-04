@@ -26,6 +26,9 @@ Public Class sdgPlots
         ucr2ndFactorReceiver.SetDataType("factor")
         autoTranslate(Me)
 
+        grpLabels.Visible = False
+        grpTitle.Visible = False
+
         If bFirstLoad Then
             bFirstLoad = False
             SetDefaults()
@@ -163,5 +166,23 @@ Public Class sdgPlots
         chkMargin.Visible = True
         chkFreeScalesX.Visible = True
         chkFreeScalesY.Visible = True
+    End Sub
+
+    Private Sub chkChangeTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkChangeTitle.CheckedChanged
+        If chkChangeTitle.Checked Then
+            txtChangeTitle.Visible = True
+        Else
+            txtChangeTitle.Visible = False
+        End If
+    End Sub
+
+    Private Sub chkDisplayLegend_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegend.CheckedChanged
+        If chkDisplayLegend.Checked Then
+            grpLabels.Visible = True
+            grpTitle.Visible = True
+        Else
+            grpLabels.Visible = False
+            grpTitle.Visible = False
+        End If
     End Sub
 End Class

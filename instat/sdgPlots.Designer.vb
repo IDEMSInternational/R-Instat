@@ -41,6 +41,7 @@ Partial Class sdgPlots
         Me.chkMargin = New System.Windows.Forms.CheckBox()
         Me.chkFreeScalesX = New System.Windows.Forms.CheckBox()
         Me.txtNoOfColumns = New System.Windows.Forms.TextBox()
+        Me.lblNoofRows = New System.Windows.Forms.Label()
         Me.lblNoOfColumns = New System.Windows.Forms.Label()
         Me.chkWrapOptions = New System.Windows.Forms.CheckBox()
         Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
@@ -54,11 +55,21 @@ Partial Class sdgPlots
         Me.chkConnect = New System.Windows.Forms.CheckBox()
         Me.chkDotPlot = New System.Windows.Forms.CheckBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.lblNoofRows = New System.Windows.Forms.Label()
+        Me.chkDisplayLegend = New System.Windows.Forms.CheckBox()
+        Me.grpTitle = New System.Windows.Forms.GroupBox()
+        Me.grpLabels = New System.Windows.Forms.GroupBox()
+        Me.chkDisplayTitle = New System.Windows.Forms.CheckBox()
+        Me.chkChangeTitle = New System.Windows.Forms.CheckBox()
+        Me.chkChangeLabels = New System.Windows.Forms.CheckBox()
+        Me.chkReorderLabels = New System.Windows.Forms.CheckBox()
+        Me.txtChangeTitle = New System.Windows.Forms.TextBox()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabAxes.SuspendLayout()
+        Me.tabLegend.SuspendLayout()
         Me.tabFacet.SuspendLayout()
         Me.tabLayers.SuspendLayout()
+        Me.grpTitle.SuspendLayout()
+        Me.grpLabels.SuspendLayout()
         Me.SuspendLayout()
         '
         'tabctrlBoxSubdialog
@@ -179,6 +190,9 @@ Partial Class sdgPlots
         '
         'tabLegend
         '
+        Me.tabLegend.Controls.Add(Me.grpLabels)
+        Me.tabLegend.Controls.Add(Me.grpTitle)
+        Me.tabLegend.Controls.Add(Me.chkDisplayLegend)
         Me.tabLegend.Location = New System.Drawing.Point(4, 22)
         Me.tabLegend.Name = "tabLegend"
         Me.tabLegend.Padding = New System.Windows.Forms.Padding(3)
@@ -271,6 +285,16 @@ Partial Class sdgPlots
         Me.txtNoOfColumns.Name = "txtNoOfColumns"
         Me.txtNoOfColumns.Size = New System.Drawing.Size(62, 20)
         Me.txtNoOfColumns.TabIndex = 11
+        '
+        'lblNoofRows
+        '
+        Me.lblNoofRows.AutoSize = True
+        Me.lblNoofRows.Location = New System.Drawing.Point(136, 209)
+        Me.lblNoofRows.Name = "lblNoofRows"
+        Me.lblNoofRows.Size = New System.Drawing.Size(86, 13)
+        Me.lblNoofRows.TabIndex = 10
+        Me.lblNoofRows.Tag = "Number_of_Rows"
+        Me.lblNoofRows.Text = "Number of Rows"
         '
         'lblNoOfColumns
         '
@@ -401,15 +425,85 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
-        'lblNoofRows
+        'chkDisplayLegend
         '
-        Me.lblNoofRows.AutoSize = True
-        Me.lblNoofRows.Location = New System.Drawing.Point(136, 209)
-        Me.lblNoofRows.Name = "lblNoofRows"
-        Me.lblNoofRows.Size = New System.Drawing.Size(86, 13)
-        Me.lblNoofRows.TabIndex = 10
-        Me.lblNoofRows.Tag = "Number_of_Rows"
-        Me.lblNoofRows.Text = "Number of Rows"
+        Me.chkDisplayLegend.AutoSize = True
+        Me.chkDisplayLegend.Location = New System.Drawing.Point(7, 6)
+        Me.chkDisplayLegend.Name = "chkDisplayLegend"
+        Me.chkDisplayLegend.Size = New System.Drawing.Size(99, 17)
+        Me.chkDisplayLegend.TabIndex = 0
+        Me.chkDisplayLegend.Text = "Display Legend"
+        Me.chkDisplayLegend.UseVisualStyleBackColor = True
+        '
+        'grpTitle
+        '
+        Me.grpTitle.Controls.Add(Me.txtChangeTitle)
+        Me.grpTitle.Controls.Add(Me.chkChangeTitle)
+        Me.grpTitle.Controls.Add(Me.chkDisplayTitle)
+        Me.grpTitle.Location = New System.Drawing.Point(7, 29)
+        Me.grpTitle.Name = "grpTitle"
+        Me.grpTitle.Size = New System.Drawing.Size(209, 100)
+        Me.grpTitle.TabIndex = 1
+        Me.grpTitle.TabStop = False
+        Me.grpTitle.Text = "Title"
+        '
+        'grpLabels
+        '
+        Me.grpLabels.Controls.Add(Me.chkReorderLabels)
+        Me.grpLabels.Controls.Add(Me.chkChangeLabels)
+        Me.grpLabels.Location = New System.Drawing.Point(7, 141)
+        Me.grpLabels.Name = "grpLabels"
+        Me.grpLabels.Size = New System.Drawing.Size(209, 100)
+        Me.grpLabels.TabIndex = 2
+        Me.grpLabels.TabStop = False
+        Me.grpLabels.Text = "Labels"
+        '
+        'chkDisplayTitle
+        '
+        Me.chkDisplayTitle.AutoSize = True
+        Me.chkDisplayTitle.Location = New System.Drawing.Point(7, 20)
+        Me.chkDisplayTitle.Name = "chkDisplayTitle"
+        Me.chkDisplayTitle.Size = New System.Drawing.Size(83, 17)
+        Me.chkDisplayTitle.TabIndex = 0
+        Me.chkDisplayTitle.Text = "Display Title"
+        Me.chkDisplayTitle.UseVisualStyleBackColor = True
+        '
+        'chkChangeTitle
+        '
+        Me.chkChangeTitle.AutoSize = True
+        Me.chkChangeTitle.Location = New System.Drawing.Point(7, 45)
+        Me.chkChangeTitle.Name = "chkChangeTitle"
+        Me.chkChangeTitle.Size = New System.Drawing.Size(86, 17)
+        Me.chkChangeTitle.TabIndex = 0
+        Me.chkChangeTitle.Text = "Change Title"
+        Me.chkChangeTitle.UseVisualStyleBackColor = True
+        '
+        'chkChangeLabels
+        '
+        Me.chkChangeLabels.AutoSize = True
+        Me.chkChangeLabels.Location = New System.Drawing.Point(7, 20)
+        Me.chkChangeLabels.Name = "chkChangeLabels"
+        Me.chkChangeLabels.Size = New System.Drawing.Size(97, 17)
+        Me.chkChangeLabels.TabIndex = 0
+        Me.chkChangeLabels.Text = "Change Labels"
+        Me.chkChangeLabels.UseVisualStyleBackColor = True
+        '
+        'chkReorderLabels
+        '
+        Me.chkReorderLabels.AutoSize = True
+        Me.chkReorderLabels.Location = New System.Drawing.Point(7, 43)
+        Me.chkReorderLabels.Name = "chkReorderLabels"
+        Me.chkReorderLabels.Size = New System.Drawing.Size(98, 17)
+        Me.chkReorderLabels.TabIndex = 0
+        Me.chkReorderLabels.Text = "Reorder Labels"
+        Me.chkReorderLabels.UseVisualStyleBackColor = True
+        '
+        'txtChangeTitle
+        '
+        Me.txtChangeTitle.Location = New System.Drawing.Point(99, 45)
+        Me.txtChangeTitle.Name = "txtChangeTitle"
+        Me.txtChangeTitle.Size = New System.Drawing.Size(100, 20)
+        Me.txtChangeTitle.TabIndex = 1
         '
         'sdgPlots
         '
@@ -427,10 +521,16 @@ Partial Class sdgPlots
         Me.tabctrlBoxSubdialog.ResumeLayout(False)
         Me.tabAxes.ResumeLayout(False)
         Me.tabAxes.PerformLayout()
+        Me.tabLegend.ResumeLayout(False)
+        Me.tabLegend.PerformLayout()
         Me.tabFacet.ResumeLayout(False)
         Me.tabFacet.PerformLayout()
         Me.tabLayers.ResumeLayout(False)
         Me.tabLayers.PerformLayout()
+        Me.grpTitle.ResumeLayout(False)
+        Me.grpTitle.PerformLayout()
+        Me.grpLabels.ResumeLayout(False)
+        Me.grpLabels.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -468,4 +568,12 @@ Partial Class sdgPlots
     Friend WithEvents txtNoOfRows As TextBox
     Friend WithEvents chkIncludeFacets As CheckBox
     Friend WithEvents lblNoofRows As Label
+    Friend WithEvents chkDisplayLegend As CheckBox
+    Friend WithEvents grpLabels As GroupBox
+    Friend WithEvents grpTitle As GroupBox
+    Friend WithEvents chkChangeTitle As CheckBox
+    Friend WithEvents chkDisplayTitle As CheckBox
+    Friend WithEvents chkReorderLabels As CheckBox
+    Friend WithEvents chkChangeLabels As CheckBox
+    Friend WithEvents txtChangeTitle As TextBox
 End Class
