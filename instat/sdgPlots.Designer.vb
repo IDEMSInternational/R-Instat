@@ -71,9 +71,26 @@ Partial Class sdgPlots
         Me.chkDisplayLabels = New System.Windows.Forms.CheckBox()
         Me.grpXAxisTitle = New System.Windows.Forms.GroupBox()
         Me.txtXTitle = New System.Windows.Forms.TextBox()
-        Me.chkChangeXTitle = New System.Windows.Forms.CheckBox()
         Me.chkXDisplayTitle = New System.Windows.Forms.CheckBox()
         Me.tbpYAxis = New System.Windows.Forms.TabPage()
+        Me.grpYlabels = New System.Windows.Forms.GroupBox()
+        Me.cboYChangeLevel = New System.Windows.Forms.ComboBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
+        Me.grpYTitle = New System.Windows.Forms.GroupBox()
+        Me.txtYTitle = New System.Windows.Forms.TextBox()
+        Me.chkDisplayYTitle = New System.Windows.Forms.CheckBox()
+        Me.grpYTich = New System.Windows.Forms.GroupBox()
+        Me.CheckBox7 = New System.Windows.Forms.CheckBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.CheckBox8 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox6 = New System.Windows.Forms.CheckBox()
+        Me.grpYScale = New System.Windows.Forms.GroupBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.CheckBox9 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox10 = New System.Windows.Forms.CheckBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabLegend.SuspendLayout()
@@ -86,6 +103,11 @@ Partial Class sdgPlots
         Me.grpScale.SuspendLayout()
         Me.grpXLabel.SuspendLayout()
         Me.grpXAxisTitle.SuspendLayout()
+        Me.tbpYAxis.SuspendLayout()
+        Me.grpYlabels.SuspendLayout()
+        Me.grpYTitle.SuspendLayout()
+        Me.grpYTich.SuspendLayout()
+        Me.grpYScale.SuspendLayout()
         Me.SuspendLayout()
         '
         'tabctrlBoxSubdialog
@@ -449,7 +471,7 @@ Partial Class sdgPlots
         Me.grpTich.Size = New System.Drawing.Size(164, 84)
         Me.grpTich.TabIndex = 0
         Me.grpTich.TabStop = False
-        Me.grpTich.Text = "Tich Marhors"
+        Me.grpTich.Text = "Tick Markers "
         '
         'chkSpecificPoints
         '
@@ -492,7 +514,7 @@ Partial Class sdgPlots
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(125, 17)
         Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "Display Tich Marhors"
+        Me.CheckBox1.Text = "Display Tich Markers"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'grpScale
@@ -585,7 +607,6 @@ Partial Class sdgPlots
         'grpXAxisTitle
         '
         Me.grpXAxisTitle.Controls.Add(Me.txtXTitle)
-        Me.grpXAxisTitle.Controls.Add(Me.chkChangeXTitle)
         Me.grpXAxisTitle.Controls.Add(Me.chkXDisplayTitle)
         Me.grpXAxisTitle.Location = New System.Drawing.Point(6, 3)
         Me.grpXAxisTitle.Name = "grpXAxisTitle"
@@ -597,20 +618,10 @@ Partial Class sdgPlots
         'txtXTitle
         '
         Me.txtXTitle.AcceptsReturn = True
-        Me.txtXTitle.Location = New System.Drawing.Point(54, 64)
+        Me.txtXTitle.Location = New System.Drawing.Point(4, 44)
         Me.txtXTitle.Name = "txtXTitle"
-        Me.txtXTitle.Size = New System.Drawing.Size(100, 20)
+        Me.txtXTitle.Size = New System.Drawing.Size(116, 20)
         Me.txtXTitle.TabIndex = 1
-        '
-        'chkChangeXTitle
-        '
-        Me.chkChangeXTitle.AutoSize = True
-        Me.chkChangeXTitle.Location = New System.Drawing.Point(4, 44)
-        Me.chkChangeXTitle.Name = "chkChangeXTitle"
-        Me.chkChangeXTitle.Size = New System.Drawing.Size(86, 17)
-        Me.chkChangeXTitle.TabIndex = 0
-        Me.chkChangeXTitle.Text = "Change Title"
-        Me.chkChangeXTitle.UseVisualStyleBackColor = True
         '
         'chkXDisplayTitle
         '
@@ -624,6 +635,10 @@ Partial Class sdgPlots
         '
         'tbpYAxis
         '
+        Me.tbpYAxis.Controls.Add(Me.grpYlabels)
+        Me.tbpYAxis.Controls.Add(Me.grpYTitle)
+        Me.tbpYAxis.Controls.Add(Me.grpYTich)
+        Me.tbpYAxis.Controls.Add(Me.grpYScale)
         Me.tbpYAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpYAxis.Name = "tbpYAxis"
         Me.tbpYAxis.Padding = New System.Windows.Forms.Padding(3)
@@ -631,6 +646,180 @@ Partial Class sdgPlots
         Me.tbpYAxis.TabIndex = 6
         Me.tbpYAxis.Text = "Y-Axis"
         Me.tbpYAxis.UseVisualStyleBackColor = True
+        '
+        'grpYlabels
+        '
+        Me.grpYlabels.Controls.Add(Me.cboYChangeLevel)
+        Me.grpYlabels.Controls.Add(Me.CheckBox2)
+        Me.grpYlabels.Controls.Add(Me.CheckBox3)
+        Me.grpYlabels.Location = New System.Drawing.Point(175, 16)
+        Me.grpYlabels.Name = "grpYlabels"
+        Me.grpYlabels.Size = New System.Drawing.Size(171, 88)
+        Me.grpYlabels.TabIndex = 1
+        Me.grpYlabels.TabStop = False
+        Me.grpYlabels.Text = "Labels"
+        '
+        'cboYChangeLevel
+        '
+        Me.cboYChangeLevel.FormattingEnabled = True
+        Me.cboYChangeLevel.Location = New System.Drawing.Point(24, 61)
+        Me.cboYChangeLevel.Name = "cboYChangeLevel"
+        Me.cboYChangeLevel.Size = New System.Drawing.Size(121, 21)
+        Me.cboYChangeLevel.TabIndex = 1
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(7, 41)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(97, 17)
+        Me.CheckBox2.TabIndex = 0
+        Me.CheckBox2.Text = "Change Labels"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Location = New System.Drawing.Point(7, 20)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(94, 17)
+        Me.CheckBox3.TabIndex = 0
+        Me.CheckBox3.Text = "Display Labels"
+        Me.CheckBox3.UseVisualStyleBackColor = True
+        '
+        'grpYTitle
+        '
+        Me.grpYTitle.Controls.Add(Me.txtYTitle)
+        Me.grpYTitle.Controls.Add(Me.chkDisplayYTitle)
+        Me.grpYTitle.Location = New System.Drawing.Point(8, 13)
+        Me.grpYTitle.Name = "grpYTitle"
+        Me.grpYTitle.Size = New System.Drawing.Size(161, 91)
+        Me.grpYTitle.TabIndex = 2
+        Me.grpYTitle.TabStop = False
+        Me.grpYTitle.Text = "Title"
+        '
+        'txtYTitle
+        '
+        Me.txtYTitle.AcceptsReturn = True
+        Me.txtYTitle.Location = New System.Drawing.Point(54, 40)
+        Me.txtYTitle.Name = "txtYTitle"
+        Me.txtYTitle.Size = New System.Drawing.Size(100, 20)
+        Me.txtYTitle.TabIndex = 1
+        '
+        'chkDisplayYTitle
+        '
+        Me.chkDisplayYTitle.AutoSize = True
+        Me.chkDisplayYTitle.Location = New System.Drawing.Point(4, 20)
+        Me.chkDisplayYTitle.Name = "chkDisplayYTitle"
+        Me.chkDisplayYTitle.Size = New System.Drawing.Size(83, 17)
+        Me.chkDisplayYTitle.TabIndex = 0
+        Me.chkDisplayYTitle.Text = "Display Title"
+        Me.chkDisplayYTitle.UseVisualStyleBackColor = True
+        '
+        'grpYTich
+        '
+        Me.grpYTich.Controls.Add(Me.CheckBox7)
+        Me.grpYTich.Controls.Add(Me.TextBox2)
+        Me.grpYTich.Controls.Add(Me.TextBox3)
+        Me.grpYTich.Controls.Add(Me.CheckBox8)
+        Me.grpYTich.Controls.Add(Me.CheckBox6)
+        Me.grpYTich.Location = New System.Drawing.Point(182, 125)
+        Me.grpYTich.Name = "grpYTich"
+        Me.grpYTich.Size = New System.Drawing.Size(164, 84)
+        Me.grpYTich.TabIndex = 3
+        Me.grpYTich.TabStop = False
+        Me.grpYTich.Text = "Tick Markers "
+        '
+        'CheckBox7
+        '
+        Me.CheckBox7.AutoSize = True
+        Me.CheckBox7.Location = New System.Drawing.Point(6, 61)
+        Me.CheckBox7.Name = "CheckBox7"
+        Me.CheckBox7.Size = New System.Drawing.Size(96, 17)
+        Me.CheckBox7.TabIndex = 0
+        Me.CheckBox7.Text = "Specific Points"
+        Me.CheckBox7.UseVisualStyleBackColor = True
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(112, 59)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(42, 20)
+        Me.TextBox2.TabIndex = 1
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(112, 37)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(42, 20)
+        Me.TextBox3.TabIndex = 1
+        '
+        'CheckBox8
+        '
+        Me.CheckBox8.AutoSize = True
+        Me.CheckBox8.Location = New System.Drawing.Point(6, 40)
+        Me.CheckBox8.Name = "CheckBox8"
+        Me.CheckBox8.Size = New System.Drawing.Size(66, 17)
+        Me.CheckBox8.TabIndex = 0
+        Me.CheckBox8.Text = "Intervals"
+        Me.CheckBox8.UseVisualStyleBackColor = True
+        '
+        'CheckBox6
+        '
+        Me.CheckBox6.AutoSize = True
+        Me.CheckBox6.Location = New System.Drawing.Point(6, 17)
+        Me.CheckBox6.Name = "CheckBox6"
+        Me.CheckBox6.Size = New System.Drawing.Size(125, 17)
+        Me.CheckBox6.TabIndex = 0
+        Me.CheckBox6.Text = "Display Tich Markers"
+        Me.CheckBox6.UseVisualStyleBackColor = True
+        '
+        'grpYScale
+        '
+        Me.grpYScale.Controls.Add(Me.TextBox4)
+        Me.grpYScale.Controls.Add(Me.TextBox5)
+        Me.grpYScale.Controls.Add(Me.CheckBox9)
+        Me.grpYScale.Controls.Add(Me.CheckBox10)
+        Me.grpYScale.Location = New System.Drawing.Point(5, 125)
+        Me.grpYScale.Name = "grpYScale"
+        Me.grpYScale.Size = New System.Drawing.Size(164, 84)
+        Me.grpYScale.TabIndex = 4
+        Me.grpYScale.TabStop = False
+        Me.grpYScale.Text = "Scale"
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(115, 51)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(42, 20)
+        Me.TextBox4.TabIndex = 1
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(115, 17)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(42, 20)
+        Me.TextBox5.TabIndex = 1
+        '
+        'CheckBox9
+        '
+        Me.CheckBox9.AutoSize = True
+        Me.CheckBox9.Location = New System.Drawing.Point(7, 54)
+        Me.CheckBox9.Name = "CheckBox9"
+        Me.CheckBox9.Size = New System.Drawing.Size(79, 17)
+        Me.CheckBox9.TabIndex = 0
+        Me.CheckBox9.Text = "Upper Limit"
+        Me.CheckBox9.UseVisualStyleBackColor = True
+        '
+        'CheckBox10
+        '
+        Me.CheckBox10.AutoSize = True
+        Me.CheckBox10.Location = New System.Drawing.Point(7, 20)
+        Me.CheckBox10.Name = "CheckBox10"
+        Me.CheckBox10.Size = New System.Drawing.Size(79, 17)
+        Me.CheckBox10.TabIndex = 0
+        Me.CheckBox10.Text = "Lower Limit"
+        Me.CheckBox10.UseVisualStyleBackColor = True
         '
         'ucrBaseSubdialog
         '
@@ -672,6 +861,15 @@ Partial Class sdgPlots
         Me.grpXLabel.PerformLayout()
         Me.grpXAxisTitle.ResumeLayout(False)
         Me.grpXAxisTitle.PerformLayout()
+        Me.tbpYAxis.ResumeLayout(False)
+        Me.grpYlabels.ResumeLayout(False)
+        Me.grpYlabels.PerformLayout()
+        Me.grpYTitle.ResumeLayout(False)
+        Me.grpYTitle.PerformLayout()
+        Me.grpYTich.ResumeLayout(False)
+        Me.grpYTich.PerformLayout()
+        Me.grpYScale.ResumeLayout(False)
+        Me.grpYScale.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -728,5 +926,22 @@ Partial Class sdgPlots
     Friend WithEvents txtIntervals As TextBox
     Friend WithEvents chkIntervals As CheckBox
     Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents chkChangeXTitle As CheckBox
+    Friend WithEvents grpYlabels As GroupBox
+    Friend WithEvents cboYChangeLevel As ComboBox
+    Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents CheckBox3 As CheckBox
+    Friend WithEvents grpYTitle As GroupBox
+    Friend WithEvents txtYTitle As TextBox
+    Friend WithEvents chkDisplayYTitle As CheckBox
+    Friend WithEvents grpYTich As GroupBox
+    Friend WithEvents CheckBox7 As CheckBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents CheckBox8 As CheckBox
+    Friend WithEvents CheckBox6 As CheckBox
+    Friend WithEvents grpYScale As GroupBox
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents CheckBox9 As CheckBox
+    Friend WithEvents CheckBox10 As CheckBox
 End Class
