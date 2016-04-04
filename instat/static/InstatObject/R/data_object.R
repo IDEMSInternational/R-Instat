@@ -137,23 +137,6 @@ data_obj$methods(update_variables_metadata = function() {
 }
 )
 
-get_default_decimal_places <- function(data) {
-  if(is.numeric(data)) {
-    if(class(data) == "integer" || min(data, na.rm = TRUE)>100) {
-      return(0)
-    }
-    else {
-      if(min(data, na.rm = T)>10) {
-        return(1)
-      }
-      else {  
-        return(2) 
-      }
-    }
-  }
-  else return(NA)  
-}
-
 data_obj$methods(get_data_frame = function(convert_to_character = FALSE) {
   if(convert_to_character) {
     decimal_places = .self$variables_metadata[[display_decimal_label]]
@@ -162,23 +145,6 @@ data_obj$methods(get_data_frame = function(convert_to_character = FALSE) {
   else return(data)
 }
 )
-
-convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places) {
-  out = matrix(nrow = nrow(data), ncol = ncol(data))
-  if(!format_decimal_places) decimal_places=rep(NA, ncol(data))
-  else if(missing(decimal_places)) decimal_places = sapply(data, get_default_decimal_places)
-  
-  for(i in 1:ncol(data)) {
-    if(is.na(decimal_places[i])) {
-      out[,i] <- as.character(data[,i])
-    }
-    else {
-      out[,i] <- as.character(format(data[,i], nsmall = decimal_places[i]))
-    }
-  }
-  colnames(out) <- colnames(data)
-  return(out)
-}
 
 data_obj$methods(get_variables_metadata = function(include_all = TRUE, data_type = "all", convert_to_character = FALSE) {
   .self$update_variables_metadata()
@@ -567,25 +533,6 @@ data_obj$methods(length_of_data = function() {
 }
 )
 
-next_default_item = function(prefix, existing_names, include_index = TRUE, start_index = 1) {
-  if(!is.character(prefix)) stop("prefix must be of type character")
-  
-  if(!include_index) {
-    if(!prefix %in% existing_names) return(prefix)
-  }
-  
-  item_name_exists = TRUE
-  start_index = 1
-  while(item_name_exists) {
-    out = paste0(prefix,start_index)
-    if(!out %in% existing_names) {
-      item_name_exists = FALSE
-    }
-    start_index = start_index + 1
-  }
-  return(out)
-} 
-
 data_obj$methods(get_column_factor_levels = function(col_name = "") {
   if(!(col_name %in% names(data))){
     stop(col_name, " is not a column in", get_metadata(data_name_label))
@@ -707,32 +654,3 @@ data_obj$methods(set_factor_reference_level = function(col_name, new_ref_level) 
   .self$add_columns_to_data(col_name, relevel(data[[col_name]], new_ref_level))
 } 
 )
-
-#Labels for strings which will be added to logs
-Set_property="Set"
-Added_col="Added column"
-Replaced_col="Replaced column"
-Renamed_col="Renamed column"
-Removed_col="Removed column"
-Added_metadata="Added metadata"
-Added_variables_metadata="Added variables metadata"
-Converted_col_="Converted column"
-Replaced_value="Replaced value"
-Removed_row="Removed row"
-Inserted_col = "Inserted column"
-Move_col = "Moved column"
-Col_order = "Order of columns"
-Inserted_row = "Inserted row"
-Copy_cols = "Copied columns"
-
-#meta data labels
-data_name_label="data_name"
-is_calculated_label="is_calculated"
-decimal_places_label="decimal_places"
-columns_label="columns"
-
-#variables_metadata labels
-display_decimal_label="DisplayDecimal"
-name_label="Name"
-is_factor_label="IsFactor"
-data_type_label="DataType"
