@@ -45,11 +45,8 @@ Public Class dlgSplitText
         ucrInputColumnsIntoText.SetItemsTypeAsColumns()
         ucrInputColumnsIntoText.SetDefaultTypeAsColumn()
         ucrInputColumnsIntoText.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
-
-
-
-
     End Sub
+
     Private Sub SetDefaults()
         ucrSelectorSplitTextColumn.Reset()
         ucrSelectorSplitTextColumn.Focus()
@@ -60,7 +57,6 @@ Public Class dlgSplitText
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         TestOKEnabled()
         SetDefaults()
-
     End Sub
 
     Private Sub cboPattern_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPattern.SelectedIndexChanged
@@ -80,7 +76,7 @@ Public Class dlgSplitText
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColumnsIntoText.GetText, strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColumnsIntoText.GetText)
     End Sub
 
-    Private Sub ucrReceiverSplitTextColumn_SelectionChanged() Handles ucrReceiverSplitTextColumn.SelectionChanged
+    Private Sub ucrReceiverSplitTextColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSplitTextColumn.SelectionChanged
         If Not ucrReceiverSplitTextColumn.IsEmpty Then
 
             ucrBase.clsRsyntax.AddParameter("string", clsRFunctionParameter:=ucrReceiverSplitTextColumn.GetVariables())
