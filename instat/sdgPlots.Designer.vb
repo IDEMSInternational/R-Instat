@@ -31,7 +31,6 @@ Partial Class sdgPlots
         Me.grpTitle = New System.Windows.Forms.GroupBox()
         Me.txtChangeTitle = New System.Windows.Forms.TextBox()
         Me.chkChangeTitle = New System.Windows.Forms.CheckBox()
-        Me.chkDisplayTitle = New System.Windows.Forms.CheckBox()
         Me.chkDisplayLegend = New System.Windows.Forms.CheckBox()
         Me.tabFacet = New System.Windows.Forms.TabPage()
         Me.chkIncludeFacets = New System.Windows.Forms.CheckBox()
@@ -59,7 +58,7 @@ Partial Class sdgPlots
         Me.txtSpecificPoints = New System.Windows.Forms.TextBox()
         Me.txtIntervals = New System.Windows.Forms.TextBox()
         Me.chkIntervals = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.chkXDisplayMarkers = New System.Windows.Forms.CheckBox()
         Me.grpScale = New System.Windows.Forms.GroupBox()
         Me.txtUpperLimit = New System.Windows.Forms.TextBox()
         Me.txtLowerLimit = New System.Windows.Forms.TextBox()
@@ -75,22 +74,22 @@ Partial Class sdgPlots
         Me.tbpYAxis = New System.Windows.Forms.TabPage()
         Me.grpYlabels = New System.Windows.Forms.GroupBox()
         Me.cboYChangeLevel = New System.Windows.Forms.ComboBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
+        Me.chkChangeYLabelschkDisplayYLabels = New System.Windows.Forms.CheckBox()
+        Me.chkDisplayYLabels = New System.Windows.Forms.CheckBox()
         Me.grpYTitle = New System.Windows.Forms.GroupBox()
         Me.txtYTitle = New System.Windows.Forms.TextBox()
         Me.chkDisplayYTitle = New System.Windows.Forms.CheckBox()
         Me.grpYTich = New System.Windows.Forms.GroupBox()
-        Me.CheckBox7 = New System.Windows.Forms.CheckBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.CheckBox8 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox6 = New System.Windows.Forms.CheckBox()
+        Me.chkYSpecificPoints = New System.Windows.Forms.CheckBox()
+        Me.txtYSpecificPoints = New System.Windows.Forms.TextBox()
+        Me.txtYIntervals = New System.Windows.Forms.TextBox()
+        Me.chkYIntervals = New System.Windows.Forms.CheckBox()
+        Me.chkDisplayMarkers = New System.Windows.Forms.CheckBox()
         Me.grpYScale = New System.Windows.Forms.GroupBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.CheckBox9 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox10 = New System.Windows.Forms.CheckBox()
+        Me.txtYUpperLimit = New System.Windows.Forms.TextBox()
+        Me.txtYLowerLimit = New System.Windows.Forms.TextBox()
+        Me.chkYUpperLimit = New System.Windows.Forms.CheckBox()
+        Me.chkYLowerLimit = New System.Windows.Forms.CheckBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabLegend.SuspendLayout()
@@ -153,7 +152,7 @@ Partial Class sdgPlots
         '
         Me.grpLabels.Controls.Add(Me.chkReorderLabels)
         Me.grpLabels.Controls.Add(Me.chkChangeLabels)
-        Me.grpLabels.Location = New System.Drawing.Point(7, 141)
+        Me.grpLabels.Location = New System.Drawing.Point(7, 137)
         Me.grpLabels.Name = "grpLabels"
         Me.grpLabels.Size = New System.Drawing.Size(209, 100)
         Me.grpLabels.TabIndex = 2
@@ -184,7 +183,6 @@ Partial Class sdgPlots
         '
         Me.grpTitle.Controls.Add(Me.txtChangeTitle)
         Me.grpTitle.Controls.Add(Me.chkChangeTitle)
-        Me.grpTitle.Controls.Add(Me.chkDisplayTitle)
         Me.grpTitle.Location = New System.Drawing.Point(7, 29)
         Me.grpTitle.Name = "grpTitle"
         Me.grpTitle.Size = New System.Drawing.Size(209, 100)
@@ -194,30 +192,20 @@ Partial Class sdgPlots
         '
         'txtChangeTitle
         '
-        Me.txtChangeTitle.Location = New System.Drawing.Point(99, 45)
+        Me.txtChangeTitle.Location = New System.Drawing.Point(5, 42)
         Me.txtChangeTitle.Name = "txtChangeTitle"
-        Me.txtChangeTitle.Size = New System.Drawing.Size(100, 20)
+        Me.txtChangeTitle.Size = New System.Drawing.Size(180, 20)
         Me.txtChangeTitle.TabIndex = 1
         '
         'chkChangeTitle
         '
         Me.chkChangeTitle.AutoSize = True
-        Me.chkChangeTitle.Location = New System.Drawing.Point(7, 45)
+        Me.chkChangeTitle.Location = New System.Drawing.Point(6, 19)
         Me.chkChangeTitle.Name = "chkChangeTitle"
         Me.chkChangeTitle.Size = New System.Drawing.Size(86, 17)
         Me.chkChangeTitle.TabIndex = 0
         Me.chkChangeTitle.Text = "Change Title"
         Me.chkChangeTitle.UseVisualStyleBackColor = True
-        '
-        'chkDisplayTitle
-        '
-        Me.chkDisplayTitle.AutoSize = True
-        Me.chkDisplayTitle.Location = New System.Drawing.Point(7, 20)
-        Me.chkDisplayTitle.Name = "chkDisplayTitle"
-        Me.chkDisplayTitle.Size = New System.Drawing.Size(83, 17)
-        Me.chkDisplayTitle.TabIndex = 0
-        Me.chkDisplayTitle.Text = "Display Title"
-        Me.chkDisplayTitle.UseVisualStyleBackColor = True
         '
         'chkDisplayLegend
         '
@@ -465,7 +453,7 @@ Partial Class sdgPlots
         Me.grpTich.Controls.Add(Me.txtSpecificPoints)
         Me.grpTich.Controls.Add(Me.txtIntervals)
         Me.grpTich.Controls.Add(Me.chkIntervals)
-        Me.grpTich.Controls.Add(Me.CheckBox1)
+        Me.grpTich.Controls.Add(Me.chkXDisplayMarkers)
         Me.grpTich.Location = New System.Drawing.Point(180, 115)
         Me.grpTich.Name = "grpTich"
         Me.grpTich.Size = New System.Drawing.Size(164, 84)
@@ -507,15 +495,15 @@ Partial Class sdgPlots
         Me.chkIntervals.Text = "Intervals"
         Me.chkIntervals.UseVisualStyleBackColor = True
         '
-        'CheckBox1
+        'chkXDisplayMarkers
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(6, 17)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(125, 17)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "Display Tich Markers"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.chkXDisplayMarkers.AutoSize = True
+        Me.chkXDisplayMarkers.Location = New System.Drawing.Point(6, 17)
+        Me.chkXDisplayMarkers.Name = "chkXDisplayMarkers"
+        Me.chkXDisplayMarkers.Size = New System.Drawing.Size(125, 17)
+        Me.chkXDisplayMarkers.TabIndex = 0
+        Me.chkXDisplayMarkers.Text = "Display Tich Markers"
+        Me.chkXDisplayMarkers.UseVisualStyleBackColor = True
         '
         'grpScale
         '
@@ -650,8 +638,8 @@ Partial Class sdgPlots
         'grpYlabels
         '
         Me.grpYlabels.Controls.Add(Me.cboYChangeLevel)
-        Me.grpYlabels.Controls.Add(Me.CheckBox2)
-        Me.grpYlabels.Controls.Add(Me.CheckBox3)
+        Me.grpYlabels.Controls.Add(Me.chkChangeYLabelschkDisplayYLabels)
+        Me.grpYlabels.Controls.Add(Me.chkDisplayYLabels)
         Me.grpYlabels.Location = New System.Drawing.Point(175, 16)
         Me.grpYlabels.Name = "grpYlabels"
         Me.grpYlabels.Size = New System.Drawing.Size(171, 88)
@@ -667,25 +655,25 @@ Partial Class sdgPlots
         Me.cboYChangeLevel.Size = New System.Drawing.Size(121, 21)
         Me.cboYChangeLevel.TabIndex = 1
         '
-        'CheckBox2
+        'chkChangeYLabelschkDisplayYLabels
         '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(7, 41)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(97, 17)
-        Me.CheckBox2.TabIndex = 0
-        Me.CheckBox2.Text = "Change Labels"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.chkChangeYLabelschkDisplayYLabels.AutoSize = True
+        Me.chkChangeYLabelschkDisplayYLabels.Location = New System.Drawing.Point(7, 41)
+        Me.chkChangeYLabelschkDisplayYLabels.Name = "chkChangeYLabelschkDisplayYLabels"
+        Me.chkChangeYLabelschkDisplayYLabels.Size = New System.Drawing.Size(97, 17)
+        Me.chkChangeYLabelschkDisplayYLabels.TabIndex = 0
+        Me.chkChangeYLabelschkDisplayYLabels.Text = "Change Labels"
+        Me.chkChangeYLabelschkDisplayYLabels.UseVisualStyleBackColor = True
         '
-        'CheckBox3
+        'chkDisplayYLabels
         '
-        Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Location = New System.Drawing.Point(7, 20)
-        Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(94, 17)
-        Me.CheckBox3.TabIndex = 0
-        Me.CheckBox3.Text = "Display Labels"
-        Me.CheckBox3.UseVisualStyleBackColor = True
+        Me.chkDisplayYLabels.AutoSize = True
+        Me.chkDisplayYLabels.Location = New System.Drawing.Point(7, 20)
+        Me.chkDisplayYLabels.Name = "chkDisplayYLabels"
+        Me.chkDisplayYLabels.Size = New System.Drawing.Size(94, 17)
+        Me.chkDisplayYLabels.TabIndex = 0
+        Me.chkDisplayYLabels.Text = "Display Labels"
+        Me.chkDisplayYLabels.UseVisualStyleBackColor = True
         '
         'grpYTitle
         '
@@ -718,11 +706,11 @@ Partial Class sdgPlots
         '
         'grpYTich
         '
-        Me.grpYTich.Controls.Add(Me.CheckBox7)
-        Me.grpYTich.Controls.Add(Me.TextBox2)
-        Me.grpYTich.Controls.Add(Me.TextBox3)
-        Me.grpYTich.Controls.Add(Me.CheckBox8)
-        Me.grpYTich.Controls.Add(Me.CheckBox6)
+        Me.grpYTich.Controls.Add(Me.chkYSpecificPoints)
+        Me.grpYTich.Controls.Add(Me.txtYSpecificPoints)
+        Me.grpYTich.Controls.Add(Me.txtYIntervals)
+        Me.grpYTich.Controls.Add(Me.chkYIntervals)
+        Me.grpYTich.Controls.Add(Me.chkDisplayMarkers)
         Me.grpYTich.Location = New System.Drawing.Point(182, 125)
         Me.grpYTich.Name = "grpYTich"
         Me.grpYTich.Size = New System.Drawing.Size(164, 84)
@@ -730,56 +718,56 @@ Partial Class sdgPlots
         Me.grpYTich.TabStop = False
         Me.grpYTich.Text = "Tick Markers "
         '
-        'CheckBox7
+        'chkYSpecificPoints
         '
-        Me.CheckBox7.AutoSize = True
-        Me.CheckBox7.Location = New System.Drawing.Point(6, 61)
-        Me.CheckBox7.Name = "CheckBox7"
-        Me.CheckBox7.Size = New System.Drawing.Size(96, 17)
-        Me.CheckBox7.TabIndex = 0
-        Me.CheckBox7.Text = "Specific Points"
-        Me.CheckBox7.UseVisualStyleBackColor = True
+        Me.chkYSpecificPoints.AutoSize = True
+        Me.chkYSpecificPoints.Location = New System.Drawing.Point(6, 61)
+        Me.chkYSpecificPoints.Name = "chkYSpecificPoints"
+        Me.chkYSpecificPoints.Size = New System.Drawing.Size(96, 17)
+        Me.chkYSpecificPoints.TabIndex = 0
+        Me.chkYSpecificPoints.Text = "Specific Points"
+        Me.chkYSpecificPoints.UseVisualStyleBackColor = True
         '
-        'TextBox2
+        'txtYSpecificPoints
         '
-        Me.TextBox2.Location = New System.Drawing.Point(112, 59)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(42, 20)
-        Me.TextBox2.TabIndex = 1
+        Me.txtYSpecificPoints.Location = New System.Drawing.Point(112, 59)
+        Me.txtYSpecificPoints.Name = "txtYSpecificPoints"
+        Me.txtYSpecificPoints.Size = New System.Drawing.Size(42, 20)
+        Me.txtYSpecificPoints.TabIndex = 1
         '
-        'TextBox3
+        'txtYIntervals
         '
-        Me.TextBox3.Location = New System.Drawing.Point(112, 37)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(42, 20)
-        Me.TextBox3.TabIndex = 1
+        Me.txtYIntervals.Location = New System.Drawing.Point(112, 37)
+        Me.txtYIntervals.Name = "txtYIntervals"
+        Me.txtYIntervals.Size = New System.Drawing.Size(42, 20)
+        Me.txtYIntervals.TabIndex = 1
         '
-        'CheckBox8
+        'chkYIntervals
         '
-        Me.CheckBox8.AutoSize = True
-        Me.CheckBox8.Location = New System.Drawing.Point(6, 40)
-        Me.CheckBox8.Name = "CheckBox8"
-        Me.CheckBox8.Size = New System.Drawing.Size(66, 17)
-        Me.CheckBox8.TabIndex = 0
-        Me.CheckBox8.Text = "Intervals"
-        Me.CheckBox8.UseVisualStyleBackColor = True
+        Me.chkYIntervals.AutoSize = True
+        Me.chkYIntervals.Location = New System.Drawing.Point(6, 40)
+        Me.chkYIntervals.Name = "chkYIntervals"
+        Me.chkYIntervals.Size = New System.Drawing.Size(66, 17)
+        Me.chkYIntervals.TabIndex = 0
+        Me.chkYIntervals.Text = "Intervals"
+        Me.chkYIntervals.UseVisualStyleBackColor = True
         '
-        'CheckBox6
+        'chkDisplayMarkers
         '
-        Me.CheckBox6.AutoSize = True
-        Me.CheckBox6.Location = New System.Drawing.Point(6, 17)
-        Me.CheckBox6.Name = "CheckBox6"
-        Me.CheckBox6.Size = New System.Drawing.Size(125, 17)
-        Me.CheckBox6.TabIndex = 0
-        Me.CheckBox6.Text = "Display Tich Markers"
-        Me.CheckBox6.UseVisualStyleBackColor = True
+        Me.chkDisplayMarkers.AutoSize = True
+        Me.chkDisplayMarkers.Location = New System.Drawing.Point(6, 17)
+        Me.chkDisplayMarkers.Name = "chkDisplayMarkers"
+        Me.chkDisplayMarkers.Size = New System.Drawing.Size(125, 17)
+        Me.chkDisplayMarkers.TabIndex = 0
+        Me.chkDisplayMarkers.Text = "Display Tich Markers"
+        Me.chkDisplayMarkers.UseVisualStyleBackColor = True
         '
         'grpYScale
         '
-        Me.grpYScale.Controls.Add(Me.TextBox4)
-        Me.grpYScale.Controls.Add(Me.TextBox5)
-        Me.grpYScale.Controls.Add(Me.CheckBox9)
-        Me.grpYScale.Controls.Add(Me.CheckBox10)
+        Me.grpYScale.Controls.Add(Me.txtYUpperLimit)
+        Me.grpYScale.Controls.Add(Me.txtYLowerLimit)
+        Me.grpYScale.Controls.Add(Me.chkYUpperLimit)
+        Me.grpYScale.Controls.Add(Me.chkYLowerLimit)
         Me.grpYScale.Location = New System.Drawing.Point(5, 125)
         Me.grpYScale.Name = "grpYScale"
         Me.grpYScale.Size = New System.Drawing.Size(164, 84)
@@ -787,39 +775,39 @@ Partial Class sdgPlots
         Me.grpYScale.TabStop = False
         Me.grpYScale.Text = "Scale"
         '
-        'TextBox4
+        'txtYUpperLimit
         '
-        Me.TextBox4.Location = New System.Drawing.Point(115, 51)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(42, 20)
-        Me.TextBox4.TabIndex = 1
+        Me.txtYUpperLimit.Location = New System.Drawing.Point(115, 51)
+        Me.txtYUpperLimit.Name = "txtYUpperLimit"
+        Me.txtYUpperLimit.Size = New System.Drawing.Size(42, 20)
+        Me.txtYUpperLimit.TabIndex = 1
         '
-        'TextBox5
+        'txtYLowerLimit
         '
-        Me.TextBox5.Location = New System.Drawing.Point(115, 17)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(42, 20)
-        Me.TextBox5.TabIndex = 1
+        Me.txtYLowerLimit.Location = New System.Drawing.Point(115, 17)
+        Me.txtYLowerLimit.Name = "txtYLowerLimit"
+        Me.txtYLowerLimit.Size = New System.Drawing.Size(42, 20)
+        Me.txtYLowerLimit.TabIndex = 1
         '
-        'CheckBox9
+        'chkYUpperLimit
         '
-        Me.CheckBox9.AutoSize = True
-        Me.CheckBox9.Location = New System.Drawing.Point(7, 54)
-        Me.CheckBox9.Name = "CheckBox9"
-        Me.CheckBox9.Size = New System.Drawing.Size(79, 17)
-        Me.CheckBox9.TabIndex = 0
-        Me.CheckBox9.Text = "Upper Limit"
-        Me.CheckBox9.UseVisualStyleBackColor = True
+        Me.chkYUpperLimit.AutoSize = True
+        Me.chkYUpperLimit.Location = New System.Drawing.Point(7, 54)
+        Me.chkYUpperLimit.Name = "chkYUpperLimit"
+        Me.chkYUpperLimit.Size = New System.Drawing.Size(79, 17)
+        Me.chkYUpperLimit.TabIndex = 0
+        Me.chkYUpperLimit.Text = "Upper Limit"
+        Me.chkYUpperLimit.UseVisualStyleBackColor = True
         '
-        'CheckBox10
+        'chkYLowerLimit
         '
-        Me.CheckBox10.AutoSize = True
-        Me.CheckBox10.Location = New System.Drawing.Point(7, 20)
-        Me.CheckBox10.Name = "CheckBox10"
-        Me.CheckBox10.Size = New System.Drawing.Size(79, 17)
-        Me.CheckBox10.TabIndex = 0
-        Me.CheckBox10.Text = "Lower Limit"
-        Me.CheckBox10.UseVisualStyleBackColor = True
+        Me.chkYLowerLimit.AutoSize = True
+        Me.chkYLowerLimit.Location = New System.Drawing.Point(7, 20)
+        Me.chkYLowerLimit.Name = "chkYLowerLimit"
+        Me.chkYLowerLimit.Size = New System.Drawing.Size(79, 17)
+        Me.chkYLowerLimit.TabIndex = 0
+        Me.chkYLowerLimit.Text = "Lower Limit"
+        Me.chkYLowerLimit.UseVisualStyleBackColor = True
         '
         'ucrBaseSubdialog
         '
@@ -902,7 +890,6 @@ Partial Class sdgPlots
     Friend WithEvents grpLabels As GroupBox
     Friend WithEvents grpTitle As GroupBox
     Friend WithEvents chkChangeTitle As CheckBox
-    Friend WithEvents chkDisplayTitle As CheckBox
     Friend WithEvents chkReorderLabels As CheckBox
     Friend WithEvents chkChangeLabels As CheckBox
     Friend WithEvents txtChangeTitle As TextBox
@@ -925,23 +912,23 @@ Partial Class sdgPlots
     Friend WithEvents txtSpecificPoints As TextBox
     Friend WithEvents txtIntervals As TextBox
     Friend WithEvents chkIntervals As CheckBox
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents chkXDisplayMarkers As CheckBox
     Friend WithEvents grpYlabels As GroupBox
     Friend WithEvents cboYChangeLevel As ComboBox
-    Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents CheckBox3 As CheckBox
+    Friend WithEvents chkChangeYLabelschkDisplayYLabels As CheckBox
+    Friend WithEvents chkDisplayYLabels As CheckBox
     Friend WithEvents grpYTitle As GroupBox
     Friend WithEvents txtYTitle As TextBox
     Friend WithEvents chkDisplayYTitle As CheckBox
     Friend WithEvents grpYTich As GroupBox
-    Friend WithEvents CheckBox7 As CheckBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents CheckBox8 As CheckBox
-    Friend WithEvents CheckBox6 As CheckBox
+    Friend WithEvents chkYSpecificPoints As CheckBox
+    Friend WithEvents txtYSpecificPoints As TextBox
+    Friend WithEvents txtYIntervals As TextBox
+    Friend WithEvents chkYIntervals As CheckBox
+    Friend WithEvents chkDisplayMarkers As CheckBox
     Friend WithEvents grpYScale As GroupBox
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents CheckBox9 As CheckBox
-    Friend WithEvents CheckBox10 As CheckBox
+    Friend WithEvents txtYUpperLimit As TextBox
+    Friend WithEvents txtYLowerLimit As TextBox
+    Friend WithEvents chkYUpperLimit As CheckBox
+    Friend WithEvents chkYLowerLimit As CheckBox
 End Class

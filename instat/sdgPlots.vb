@@ -31,6 +31,7 @@ Public Class sdgPlots
         grpLabels.Visible = False
         grpTitle.Visible = False
 
+
         If bFirstLoad Then
             bFirstLoad = False
             SetDefaults()
@@ -211,6 +212,10 @@ Public Class sdgPlots
     End Sub
 
     Private Sub txtYTitle_Leave(sender As Object, e As EventArgs) Handles txtYTitle.Leave
-        clsYLabFunction.AddParameter("label", Chr(34) & txtXTitle.Text & Chr(34))
+        clsYLabFunction.AddParameter("label", Chr(34) & txtYTitle.Text & Chr(34))
+    End Sub
+
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles txtYUpperLimit.TextChanged
+
     End Sub
 End Class
