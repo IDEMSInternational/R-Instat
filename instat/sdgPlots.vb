@@ -17,6 +17,7 @@ Imports instat.Translations
 Public Class sdgPlots
     Public clsRsyntax As RSyntax
     Public clsRfacetFunction As New RFunction
+    Public clsXLabFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -101,6 +102,12 @@ Public Class sdgPlots
 
     End Sub
 
+    Public Sub SetXLabFunction()
+        If chkChangeXTitle.Checked Then
+            clsXLabFunction.SetRCommand("xlab")
+        End If
+    End Sub
+
     Private Sub ucr1stFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.SelectionChanged
         SetFacetFunction()
         SetFacetParameter()
@@ -183,6 +190,19 @@ Public Class sdgPlots
         Else
             grpLabels.Visible = False
             grpTitle.Visible = False
+        End If
+    End Sub
+
+    Private Sub txtXTitle_Leave(sender As Object, e As EventArgs) Handles txtXTitle.Leave
+        clsXLabFunction.AddParameter("label", Chr(34) & txtXTitle.Text & Chr(34))
+    End Sub
+
+    Private Sub chkChangeXTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkChangeXTitle.CheckedChanged
+        If chkChangeXTitle.Checked Then
+            clsXLabFunction.SetRCommand("xlab")
+            clsRsyntax.AddOperatorParameter("xlab", clsRFunc:=clsXLabFunction)
+        Else
+            clsRsyntax.RemoveOperatorParameter("xlab")
         End If
     End Sub
 End Class
