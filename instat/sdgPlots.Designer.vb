@@ -23,15 +23,6 @@ Partial Class sdgPlots
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.tabctrlBoxSubdialog = New System.Windows.Forms.TabControl()
-        Me.tabAxes = New System.Windows.Forms.TabPage()
-        Me.chkDisplayMeans = New System.Windows.Forms.CheckBox()
-        Me.chkDisplayError = New System.Windows.Forms.CheckBox()
-        Me.txtTitle = New System.Windows.Forms.TextBox()
-        Me.txtYlabel = New System.Windows.Forms.TextBox()
-        Me.txtXlabel = New System.Windows.Forms.TextBox()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.lblYlabel = New System.Windows.Forms.Label()
-        Me.lblXlabel = New System.Windows.Forms.Label()
         Me.tabTheme = New System.Windows.Forms.TabPage()
         Me.tabLegend = New System.Windows.Forms.TabPage()
         Me.tabFacet = New System.Windows.Forms.TabPage()
@@ -63,8 +54,9 @@ Partial Class sdgPlots
         Me.chkChangeLabels = New System.Windows.Forms.CheckBox()
         Me.chkReorderLabels = New System.Windows.Forms.CheckBox()
         Me.txtChangeTitle = New System.Windows.Forms.TextBox()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.tabctrlBoxSubdialog.SuspendLayout()
-        Me.tabAxes.SuspendLayout()
         Me.tabLegend.SuspendLayout()
         Me.tabFacet.SuspendLayout()
         Me.tabLayers.SuspendLayout()
@@ -74,108 +66,17 @@ Partial Class sdgPlots
         '
         'tabctrlBoxSubdialog
         '
-        Me.tabctrlBoxSubdialog.Controls.Add(Me.tabAxes)
         Me.tabctrlBoxSubdialog.Controls.Add(Me.tabTheme)
         Me.tabctrlBoxSubdialog.Controls.Add(Me.tabLegend)
         Me.tabctrlBoxSubdialog.Controls.Add(Me.tabFacet)
         Me.tabctrlBoxSubdialog.Controls.Add(Me.tabLayers)
+        Me.tabctrlBoxSubdialog.Controls.Add(Me.TabPage1)
+        Me.tabctrlBoxSubdialog.Controls.Add(Me.TabPage2)
         Me.tabctrlBoxSubdialog.Location = New System.Drawing.Point(1, -1)
         Me.tabctrlBoxSubdialog.Name = "tabctrlBoxSubdialog"
         Me.tabctrlBoxSubdialog.SelectedIndex = 0
         Me.tabctrlBoxSubdialog.Size = New System.Drawing.Size(376, 283)
         Me.tabctrlBoxSubdialog.TabIndex = 0
-        '
-        'tabAxes
-        '
-        Me.tabAxes.Controls.Add(Me.chkDisplayMeans)
-        Me.tabAxes.Controls.Add(Me.chkDisplayError)
-        Me.tabAxes.Controls.Add(Me.txtTitle)
-        Me.tabAxes.Controls.Add(Me.txtYlabel)
-        Me.tabAxes.Controls.Add(Me.txtXlabel)
-        Me.tabAxes.Controls.Add(Me.lblTitle)
-        Me.tabAxes.Controls.Add(Me.lblYlabel)
-        Me.tabAxes.Controls.Add(Me.lblXlabel)
-        Me.tabAxes.Location = New System.Drawing.Point(4, 22)
-        Me.tabAxes.Name = "tabAxes"
-        Me.tabAxes.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabAxes.Size = New System.Drawing.Size(368, 257)
-        Me.tabAxes.TabIndex = 0
-        Me.tabAxes.Tag = "Axes"
-        Me.tabAxes.Text = "Axes"
-        Me.tabAxes.UseVisualStyleBackColor = True
-        '
-        'chkDisplayMeans
-        '
-        Me.chkDisplayMeans.AutoSize = True
-        Me.chkDisplayMeans.Location = New System.Drawing.Point(23, 216)
-        Me.chkDisplayMeans.Name = "chkDisplayMeans"
-        Me.chkDisplayMeans.Size = New System.Drawing.Size(94, 17)
-        Me.chkDisplayMeans.TabIndex = 7
-        Me.chkDisplayMeans.Tag = "Display_means"
-        Me.chkDisplayMeans.Text = "Display means"
-        Me.chkDisplayMeans.UseVisualStyleBackColor = True
-        '
-        'chkDisplayError
-        '
-        Me.chkDisplayError.AutoSize = True
-        Me.chkDisplayError.Location = New System.Drawing.Point(23, 176)
-        Me.chkDisplayError.Name = "chkDisplayError"
-        Me.chkDisplayError.Size = New System.Drawing.Size(107, 17)
-        Me.chkDisplayError.TabIndex = 6
-        Me.chkDisplayError.Tag = "Display_error_bars"
-        Me.chkDisplayError.Text = "Display error bars"
-        Me.chkDisplayError.UseVisualStyleBackColor = True
-        '
-        'txtTitle
-        '
-        Me.txtTitle.Location = New System.Drawing.Point(92, 122)
-        Me.txtTitle.Name = "txtTitle"
-        Me.txtTitle.Size = New System.Drawing.Size(159, 20)
-        Me.txtTitle.TabIndex = 5
-        '
-        'txtYlabel
-        '
-        Me.txtYlabel.Location = New System.Drawing.Point(92, 80)
-        Me.txtYlabel.Name = "txtYlabel"
-        Me.txtYlabel.Size = New System.Drawing.Size(159, 20)
-        Me.txtYlabel.TabIndex = 4
-        '
-        'txtXlabel
-        '
-        Me.txtXlabel.Location = New System.Drawing.Point(92, 36)
-        Me.txtXlabel.Name = "txtXlabel"
-        Me.txtXlabel.Size = New System.Drawing.Size(159, 20)
-        Me.txtXlabel.TabIndex = 3
-        '
-        'lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(23, 129)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
-        Me.lblTitle.TabIndex = 2
-        Me.lblTitle.Tag = "Title"
-        Me.lblTitle.Text = "Title"
-        '
-        'lblYlabel
-        '
-        Me.lblYlabel.AutoSize = True
-        Me.lblYlabel.Location = New System.Drawing.Point(23, 83)
-        Me.lblYlabel.Name = "lblYlabel"
-        Me.lblYlabel.Size = New System.Drawing.Size(43, 13)
-        Me.lblYlabel.TabIndex = 1
-        Me.lblYlabel.Tag = "Y_Label"
-        Me.lblYlabel.Text = "Y Label"
-        '
-        'lblXlabel
-        '
-        Me.lblXlabel.AutoSize = True
-        Me.lblXlabel.Location = New System.Drawing.Point(23, 39)
-        Me.lblXlabel.Name = "lblXlabel"
-        Me.lblXlabel.Size = New System.Drawing.Size(43, 13)
-        Me.lblXlabel.TabIndex = 0
-        Me.lblXlabel.Tag = "X_Label"
-        Me.lblXlabel.Text = "X Label"
         '
         'tabTheme
         '
@@ -505,6 +406,26 @@ Partial Class sdgPlots
         Me.txtChangeTitle.Size = New System.Drawing.Size(100, 20)
         Me.txtChangeTitle.TabIndex = 1
         '
+        'TabPage1
+        '
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(368, 257)
+        Me.TabPage1.TabIndex = 5
+        Me.TabPage1.Text = "X-Axis"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(368, 257)
+        Me.TabPage2.TabIndex = 6
+        Me.TabPage2.Text = "Y-Axis"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -519,8 +440,6 @@ Partial Class sdgPlots
         Me.Text = "Plot Options"
         Me.TopMost = True
         Me.tabctrlBoxSubdialog.ResumeLayout(False)
-        Me.tabAxes.ResumeLayout(False)
-        Me.tabAxes.PerformLayout()
         Me.tabLegend.ResumeLayout(False)
         Me.tabLegend.PerformLayout()
         Me.tabFacet.ResumeLayout(False)
@@ -536,20 +455,11 @@ Partial Class sdgPlots
     End Sub
 
     Friend WithEvents tabctrlBoxSubdialog As TabControl
-    Friend WithEvents tabAxes As TabPage
     Friend WithEvents tabTheme As TabPage
     Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
     Friend WithEvents tabLegend As TabPage
     Friend WithEvents tabFacet As TabPage
     Friend WithEvents tabLayers As TabPage
-    Friend WithEvents chkDisplayMeans As CheckBox
-    Friend WithEvents chkDisplayError As CheckBox
-    Friend WithEvents txtTitle As TextBox
-    Friend WithEvents txtYlabel As TextBox
-    Friend WithEvents txtXlabel As TextBox
-    Friend WithEvents lblTitle As Label
-    Friend WithEvents lblYlabel As Label
-    Friend WithEvents lblXlabel As Label
     Friend WithEvents chkFreeScalesX As CheckBox
     Friend WithEvents txtNoOfColumns As TextBox
     Friend WithEvents lblNoOfColumns As Label
@@ -576,4 +486,6 @@ Partial Class sdgPlots
     Friend WithEvents chkReorderLabels As CheckBox
     Friend WithEvents chkChangeLabels As CheckBox
     Friend WithEvents txtChangeTitle As TextBox
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
 End Class
