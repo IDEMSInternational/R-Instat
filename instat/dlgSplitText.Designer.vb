@@ -24,7 +24,6 @@ Partial Class dlgSplitText
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSplitText))
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
-        Me.cboPattern = New System.Windows.Forms.ComboBox()
         Me.lblPattern = New System.Windows.Forms.Label()
         Me.lblNewColumnNames = New System.Windows.Forms.Label()
         Me.lblNumberofPiecesToReturn = New System.Windows.Forms.Label()
@@ -33,6 +32,7 @@ Partial Class dlgSplitText
         Me.ucrInputColumnsIntoText = New instat.ucrInputComboBox()
         Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputPattern = New instat.ucrInputComboBox()
         CType(Me.nudN, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -45,15 +45,6 @@ Partial Class dlgSplitText
         Me.lblSelectedFactor.TabIndex = 3
         Me.lblSelectedFactor.Tag = "Selected_Factor"
         Me.lblSelectedFactor.Text = "Selected Factor"
-        '
-        'cboPattern
-        '
-        Me.cboPattern.FormattingEnabled = True
-        Me.cboPattern.Items.AddRange(New Object() {"Whitespace", "Hyphen", "Period", "Underscore"})
-        Me.cboPattern.Location = New System.Drawing.Point(263, 75)
-        Me.cboPattern.Name = "cboPattern"
-        Me.cboPattern.Size = New System.Drawing.Size(120, 21)
-        Me.cboPattern.TabIndex = 4
         '
         'lblPattern
         '
@@ -122,18 +113,25 @@ Partial Class dlgSplitText
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
+        'ucrInputPattern
+        '
+        Me.ucrInputPattern.Location = New System.Drawing.Point(263, 75)
+        Me.ucrInputPattern.Name = "ucrInputPattern"
+        Me.ucrInputPattern.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputPattern.TabIndex = 13
+        '
         'dlgSplitText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(418, 277)
+        Me.Controls.Add(Me.ucrInputPattern)
         Me.Controls.Add(Me.ucrReceiverSplitTextColumn)
         Me.Controls.Add(Me.ucrInputColumnsIntoText)
         Me.Controls.Add(Me.nudN)
         Me.Controls.Add(Me.lblNumberofPiecesToReturn)
         Me.Controls.Add(Me.lblNewColumnNames)
         Me.Controls.Add(Me.lblPattern)
-        Me.Controls.Add(Me.cboPattern)
         Me.Controls.Add(Me.lblSelectedFactor)
         Me.Controls.Add(Me.ucrSelectorSplitTextColumn)
         Me.Controls.Add(Me.ucrBase)
@@ -151,11 +149,11 @@ Partial Class dlgSplitText
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorSplitTextColumn As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblSelectedFactor As Label
-    Friend WithEvents cboPattern As ComboBox
     Friend WithEvents lblPattern As Label
     Friend WithEvents lblNewColumnNames As Label
     Friend WithEvents lblNumberofPiecesToReturn As Label
     Friend WithEvents nudN As NumericUpDown
     Friend WithEvents ucrInputColumnsIntoText As ucrInputComboBox
     Friend WithEvents ucrReceiverSplitTextColumn As ucrReceiverSingle
+    Friend WithEvents ucrInputPattern As ucrInputComboBox
 End Class
