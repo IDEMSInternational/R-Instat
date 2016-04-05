@@ -24,7 +24,7 @@ Partial Class dlgSplitText
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSplitText))
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
-        Me.lblPattern = New System.Windows.Forms.Label()
+        Me.lblSplitBy = New System.Windows.Forms.Label()
         Me.lblNewColumnNames = New System.Windows.Forms.Label()
         Me.lblNumberofPiecesToReturn = New System.Windows.Forms.Label()
         Me.nudN = New System.Windows.Forms.NumericUpDown()
@@ -39,22 +39,22 @@ Partial Class dlgSplitText
         'lblSelectedFactor
         '
         Me.lblSelectedFactor.AutoSize = True
-        Me.lblSelectedFactor.Location = New System.Drawing.Point(260, 13)
+        Me.lblSelectedFactor.Location = New System.Drawing.Point(257, 14)
         Me.lblSelectedFactor.Name = "lblSelectedFactor"
         Me.lblSelectedFactor.Size = New System.Drawing.Size(82, 13)
         Me.lblSelectedFactor.TabIndex = 3
         Me.lblSelectedFactor.Tag = "Selected_Factor"
         Me.lblSelectedFactor.Text = "Selected Factor"
         '
-        'lblPattern
+        'lblSplitBy
         '
-        Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(260, 59)
-        Me.lblPattern.Name = "lblPattern"
-        Me.lblPattern.Size = New System.Drawing.Size(41, 13)
-        Me.lblPattern.TabIndex = 5
-        Me.lblPattern.Tag = "Pattern"
-        Me.lblPattern.Text = "Pattern"
+        Me.lblSplitBy.AutoSize = True
+        Me.lblSplitBy.Location = New System.Drawing.Point(260, 59)
+        Me.lblSplitBy.Name = "lblSplitBy"
+        Me.lblSplitBy.Size = New System.Drawing.Size(42, 13)
+        Me.lblSplitBy.TabIndex = 5
+        Me.lblSplitBy.Tag = ""
+        Me.lblSplitBy.Text = "Split By"
         '
         'lblNewColumnNames
         '
@@ -78,7 +78,7 @@ Partial Class dlgSplitText
         '
         'nudN
         '
-        Me.nudN.Location = New System.Drawing.Point(323, 119)
+        Me.nudN.Location = New System.Drawing.Point(263, 119)
         Me.nudN.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudN.Name = "nudN"
         Me.nudN.Size = New System.Drawing.Size(46, 20)
@@ -94,7 +94,7 @@ Partial Class dlgSplitText
         '
         'ucrReceiverSplitTextColumn
         '
-        Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(263, 30)
+        Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(260, 30)
         Me.ucrReceiverSplitTextColumn.Name = "ucrReceiverSplitTextColumn"
         Me.ucrReceiverSplitTextColumn.Selector = Nothing
         Me.ucrReceiverSplitTextColumn.Size = New System.Drawing.Size(106, 26)
@@ -109,7 +109,7 @@ Partial Class dlgSplitText
         '
         'ucrSelectorSplitTextColumn
         '
-        Me.ucrSelectorSplitTextColumn.Location = New System.Drawing.Point(12, 13)
+        Me.ucrSelectorSplitTextColumn.Location = New System.Drawing.Point(12, 12)
         Me.ucrSelectorSplitTextColumn.lstVariablesInReceivers = CType(resources.GetObject("ucrSelectorSplitTextColumn.lstVariablesInReceivers"), System.Collections.Generic.List(Of String))
         Me.ucrSelectorSplitTextColumn.Name = "ucrSelectorSplitTextColumn"
         Me.ucrSelectorSplitTextColumn.Size = New System.Drawing.Size(242, 179)
@@ -133,7 +133,7 @@ Partial Class dlgSplitText
         Me.Controls.Add(Me.nudN)
         Me.Controls.Add(Me.lblNumberofPiecesToReturn)
         Me.Controls.Add(Me.lblNewColumnNames)
-        Me.Controls.Add(Me.lblPattern)
+        Me.Controls.Add(Me.lblSplitBy)
         Me.Controls.Add(Me.lblSelectedFactor)
         Me.Controls.Add(Me.ucrSelectorSplitTextColumn)
         Me.Controls.Add(Me.ucrBase)
@@ -151,7 +151,7 @@ Partial Class dlgSplitText
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorSplitTextColumn As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblSelectedFactor As Label
-    Friend WithEvents lblPattern As Label
+    Friend WithEvents lblSplitBy As Label
     Friend WithEvents lblNewColumnNames As Label
     Friend WithEvents lblNumberofPiecesToReturn As Label
     Friend WithEvents nudN As NumericUpDown
