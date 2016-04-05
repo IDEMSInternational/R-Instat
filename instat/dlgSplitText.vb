@@ -56,7 +56,6 @@ Public Class dlgSplitText
         ucrSelectorSplitTextColumn.Reset()
         ucrSelectorSplitTextColumn.Focus()
         ucrInputColumnsIntoText.Reset()
-        ucrInputPattern.cboInput.Items.Add("Whitespace")
         ucrInputColumnsIntoText.SetName("SplitText")
 
     End Sub
