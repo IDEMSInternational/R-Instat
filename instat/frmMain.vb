@@ -70,6 +70,7 @@ Public Class frmMain
         clsInstatOptions.bIncludeRDefaultParameters = False
         clsInstatOptions.fntOutput = New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular)
         clsInstatOptions.clrOutput = Color.Blue
+        clsInstatOptions.iLines = 10
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSummaryDescribe.Click

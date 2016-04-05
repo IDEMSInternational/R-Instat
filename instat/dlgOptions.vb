@@ -65,7 +65,7 @@ Public Class dlgOptions
                 rdoKiswahili.Checked = True
         End Select
         '
-        nudNoLines.Value = 10
+        nudNoLines.Value = frmMain.clsInstatOptions.iLines
 
     End Sub
 
