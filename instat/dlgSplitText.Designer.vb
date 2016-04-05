@@ -59,7 +59,7 @@ Partial Class dlgSplitText
         'lblNewColumnNames
         '
         Me.lblNewColumnNames.AutoSize = True
-        Me.lblNewColumnNames.Location = New System.Drawing.Point(12, 194)
+        Me.lblNewColumnNames.Location = New System.Drawing.Point(12, 201)
         Me.lblNewColumnNames.Name = "lblNewColumnNames"
         Me.lblNewColumnNames.Size = New System.Drawing.Size(116, 13)
         Me.lblNewColumnNames.TabIndex = 6
@@ -69,7 +69,7 @@ Partial Class dlgSplitText
         'lblNumberofPiecesToReturn
         '
         Me.lblNumberofPiecesToReturn.AutoSize = True
-        Me.lblNumberofPiecesToReturn.Location = New System.Drawing.Point(260, 99)
+        Me.lblNumberofPiecesToReturn.Location = New System.Drawing.Point(260, 103)
         Me.lblNumberofPiecesToReturn.Name = "lblNumberofPiecesToReturn"
         Me.lblNumberofPiecesToReturn.Size = New System.Drawing.Size(138, 13)
         Me.lblNumberofPiecesToReturn.TabIndex = 9
@@ -78,10 +78,10 @@ Partial Class dlgSplitText
         '
         'nudN
         '
-        Me.nudN.Location = New System.Drawing.Point(263, 115)
-        Me.nudN.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.nudN.Location = New System.Drawing.Point(323, 119)
+        Me.nudN.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudN.Name = "nudN"
-        Me.nudN.Size = New System.Drawing.Size(120, 20)
+        Me.nudN.Size = New System.Drawing.Size(46, 20)
         Me.nudN.TabIndex = 10
         Me.nudN.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
@@ -89,7 +89,7 @@ Partial Class dlgSplitText
         '
         Me.ucrInputPattern.Location = New System.Drawing.Point(263, 75)
         Me.ucrInputPattern.Name = "ucrInputPattern"
-        Me.ucrInputPattern.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputPattern.Size = New System.Drawing.Size(106, 25)
         Me.ucrInputPattern.TabIndex = 13
         '
         'ucrReceiverSplitTextColumn
@@ -97,12 +97,12 @@ Partial Class dlgSplitText
         Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(263, 30)
         Me.ucrReceiverSplitTextColumn.Name = "ucrReceiverSplitTextColumn"
         Me.ucrReceiverSplitTextColumn.Selector = Nothing
-        Me.ucrReceiverSplitTextColumn.Size = New System.Drawing.Size(120, 26)
+        Me.ucrReceiverSplitTextColumn.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverSplitTextColumn.TabIndex = 12
         '
         'ucrInputColumnsIntoText
         '
-        Me.ucrInputColumnsIntoText.Location = New System.Drawing.Point(181, 188)
+        Me.ucrInputColumnsIntoText.Location = New System.Drawing.Point(134, 196)
         Me.ucrInputColumnsIntoText.Name = "ucrInputColumnsIntoText"
         Me.ucrInputColumnsIntoText.Size = New System.Drawing.Size(137, 25)
         Me.ucrInputColumnsIntoText.TabIndex = 11
@@ -117,7 +117,7 @@ Partial Class dlgSplitText
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 214)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 225)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -126,7 +126,7 @@ Partial Class dlgSplitText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 277)
+        Me.ClientSize = New System.Drawing.Size(418, 285)
         Me.Controls.Add(Me.ucrInputPattern)
         Me.Controls.Add(Me.ucrReceiverSplitTextColumn)
         Me.Controls.Add(Me.ucrInputColumnsIntoText)
@@ -140,8 +140,8 @@ Partial Class dlgSplitText
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgSplitText"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Split_text_column"
-        Me.Text = "Split text column"
+        Me.Tag = "Split_Text_Column"
+        Me.Text = "Split Text Column"
         CType(Me.nudN, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
