@@ -79,7 +79,12 @@ Public Class sdgSimpleRegOptions
     Private Sub FittedModel()
         clsRFittedModelGraphics.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
-        clsRggplotFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+        If (chkGraphicsCLimits.Checked = True) Then
+            clsRggplotFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+        End If
+        If (chkPredictionInterval.Checked = True) Then
+            clsRggplotFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
+        End If
         clsRaesFunction.SetRCommand("aes")
         'this is not the right way of adding the aesthetics x and y since we are using the lm object
         clsRaesFunction.AddParameter("y", dlgRegressionSimple.ucrResponse.GetVariableNames(bWithQuotes:=False))
@@ -99,19 +104,27 @@ Public Class sdgSimpleRegOptions
         frmMain.clsRLink.RunScript(clsRFittedModelGraphics.GetScript, 0)
     End Sub
 
-    Private Sub FitPrediction()
-        FittedModel()
+    Private Sub AddCols()
         clsRPredFunction.SetRCommand("predict")
-        clsRDFFunction.SetRCommand("data.frame")
         clsRPredFunction.AddParameter("object", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
         clsRPredFunction.AddParameter("interval", Chr(34) & "prediction" & Chr(34))
-        clsRDFFunction.AddParameter("", clsRFunctionParameter:=clsRPredFunction)
+        clsRDFFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+        clsRDFFunction.AddParameter("data_name", Chr(34) & dlgRegressionSimple.ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsRDFFunction.AddParameter("col_name", "c(" & Chr(34) & "fit" & Chr(34) & "," & Chr(34) & "lwr" & Chr(34) & "," & Chr(34) & "upr" & Chr(34) & ")")
+        clsRDFFunction.AddParameter("col_data", clsRFunctionParameter:=clsRPredFunction)
+        clsRDFFunction.AddParameter("use_col_name_as_prefix", "FALSE")
+        frmMain.clsRLink.RunScript(clsRDFFunction.ToScript(), 2)
+    End Sub
+
+    Private Sub FitPrediction()
+        AddCols()
+        FittedModel()
         clsRaes_ribbon.SetRCommand("aes")
-        clsRaes_ribbon.AddParameter("ymin", clsRDFFunction.ToScript() & "$lwr")
-        clsRaes_ribbon.AddParameter("ymax", clsRDFFunction.ToScript() & "$upr")
+        clsRaes_ribbon.AddParameter("ymin", "lwr")
+        clsRaes_ribbon.AddParameter("ymax", "upr")
         clsR_ribbon.SetRCommand("geom_ribbon")
         clsR_ribbon.AddParameter("mapping", clsRFunctionParameter:=clsRaes_ribbon)
-        clsR_ribbon.AddParameter("alpha", 0.95) 'to fix alpha
+        clsR_ribbon.AddParameter("alpha", 0.3) 'to fix alpha
         clsR_ribbon.AddParameter("show.legend", "FALSE") 'to fix show  legend
         clsRFittedModelGraphics.AddOperatorParameter("", clsRFunc:=clsR_ribbon)
 
