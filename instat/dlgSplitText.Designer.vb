@@ -28,11 +28,11 @@ Partial Class dlgSplitText
         Me.lblNewColumnNames = New System.Windows.Forms.Label()
         Me.lblNumberofPiecesToReturn = New System.Windows.Forms.Label()
         Me.nudN = New System.Windows.Forms.NumericUpDown()
+        Me.ucrInputPattern = New instat.ucrInputComboBox()
         Me.ucrReceiverSplitTextColumn = New instat.ucrReceiverSingle()
         Me.ucrInputColumnsIntoText = New instat.ucrInputComboBox()
         Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputPattern = New instat.ucrInputComboBox()
         CType(Me.nudN, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -79,9 +79,18 @@ Partial Class dlgSplitText
         'nudN
         '
         Me.nudN.Location = New System.Drawing.Point(263, 115)
+        Me.nudN.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
         Me.nudN.Name = "nudN"
         Me.nudN.Size = New System.Drawing.Size(120, 20)
         Me.nudN.TabIndex = 10
+        Me.nudN.Value = New Decimal(New Integer() {2, 0, 0, 0})
+        '
+        'ucrInputPattern
+        '
+        Me.ucrInputPattern.Location = New System.Drawing.Point(263, 75)
+        Me.ucrInputPattern.Name = "ucrInputPattern"
+        Me.ucrInputPattern.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputPattern.TabIndex = 13
         '
         'ucrReceiverSplitTextColumn
         '
@@ -112,13 +121,6 @@ Partial Class dlgSplitText
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
-        '
-        'ucrInputPattern
-        '
-        Me.ucrInputPattern.Location = New System.Drawing.Point(263, 75)
-        Me.ucrInputPattern.Name = "ucrInputPattern"
-        Me.ucrInputPattern.Size = New System.Drawing.Size(137, 25)
-        Me.ucrInputPattern.TabIndex = 13
         '
         'dlgSplitText
         '

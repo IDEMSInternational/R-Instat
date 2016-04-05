@@ -27,7 +27,7 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverSplitTextColumn.IsEmpty() = False Then
+        If ucrReceiverSplitTextColumn.IsEmpty() = False And nudN.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -40,7 +40,6 @@ Public Class dlgSplitText
         ucrReceiverSplitTextColumn.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("stringr::str_split_fixed")
         ucrReceiverSplitTextColumn.SetDataType("factor")
-        ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & " " & Chr(34))
         ucrInputColumnsIntoText.SetItemsTypeAsColumns()
         ucrInputColumnsIntoText.SetDefaultTypeAsColumn()
         ucrInputColumnsIntoText.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
@@ -57,6 +56,7 @@ Public Class dlgSplitText
         ucrSelectorSplitTextColumn.Focus()
         ucrInputColumnsIntoText.Reset()
         ucrInputColumnsIntoText.SetName("SplitText")
+
 
     End Sub
 
