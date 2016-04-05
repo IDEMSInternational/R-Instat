@@ -37,6 +37,7 @@ Public Class dlgRegressionSimple
         ucrBase.clsRsyntax.SetFunction("lm")
         ucrBase.clsRsyntax.iCallType = 2
         clsModel.SetOperation("~")
+        ucrResponse.SetDataType("numeric")
         ucrResponse.Selector = ucrSelectorSimpleReg
         ucrExplanatory.Selector = ucrSelectorSimpleReg
         ucrBase.iHelpTopicID = 171
