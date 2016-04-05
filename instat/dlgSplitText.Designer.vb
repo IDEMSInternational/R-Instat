@@ -23,34 +23,34 @@ Partial Class dlgSplitText
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSplitText))
-        Me.lblSelectedFactors = New System.Windows.Forms.Label()
+        Me.lblSelectedFactor = New System.Windows.Forms.Label()
         Me.cboPattern = New System.Windows.Forms.ComboBox()
         Me.lblPattern = New System.Windows.Forms.Label()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.lblNewColumnNames = New System.Windows.Forms.Label()
         Me.lblNumberofPiecesToReturn = New System.Windows.Forms.Label()
         Me.nudN = New System.Windows.Forms.NumericUpDown()
+        Me.ucrReceiverSplitTextColumn = New instat.ucrReceiverSingle()
         Me.ucrInputColumnsIntoText = New instat.ucrInputComboBox()
         Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverSplitTextColumn = New instat.ucrReceiverSingle()
         CType(Me.nudN, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'lblSelectedFactors
+        'lblSelectedFactor
         '
-        Me.lblSelectedFactors.AutoSize = True
-        Me.lblSelectedFactors.Location = New System.Drawing.Point(277, 13)
-        Me.lblSelectedFactors.Name = "lblSelectedFactors"
-        Me.lblSelectedFactors.Size = New System.Drawing.Size(84, 13)
-        Me.lblSelectedFactors.TabIndex = 3
-        Me.lblSelectedFactors.Tag = "Selected_Factors"
-        Me.lblSelectedFactors.Text = "Selected factors"
+        Me.lblSelectedFactor.AutoSize = True
+        Me.lblSelectedFactor.Location = New System.Drawing.Point(260, 13)
+        Me.lblSelectedFactor.Name = "lblSelectedFactor"
+        Me.lblSelectedFactor.Size = New System.Drawing.Size(82, 13)
+        Me.lblSelectedFactor.TabIndex = 3
+        Me.lblSelectedFactor.Tag = "Selected_Factor"
+        Me.lblSelectedFactor.Text = "Selected Factor"
         '
         'cboPattern
         '
         Me.cboPattern.FormattingEnabled = True
         Me.cboPattern.Items.AddRange(New Object() {"Whitespace", "Hyphen", "Period", "Underscore"})
-        Me.cboPattern.Location = New System.Drawing.Point(280, 75)
+        Me.cboPattern.Location = New System.Drawing.Point(263, 75)
         Me.cboPattern.Name = "cboPattern"
         Me.cboPattern.Size = New System.Drawing.Size(120, 21)
         Me.cboPattern.TabIndex = 4
@@ -58,43 +58,51 @@ Partial Class dlgSplitText
         'lblPattern
         '
         Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(277, 59)
+        Me.lblPattern.Location = New System.Drawing.Point(260, 59)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(41, 13)
         Me.lblPattern.TabIndex = 5
         Me.lblPattern.Tag = "Pattern"
         Me.lblPattern.Text = "Pattern"
         '
-        'lblNewColumnName
+        'lblNewColumnNames
         '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(12, 195)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
-        Me.lblNewColumnName.TabIndex = 6
-        Me.lblNewColumnName.Tag = "New_Column_Name"
-        Me.lblNewColumnName.Text = "New Column Name"
+        Me.lblNewColumnNames.AutoSize = True
+        Me.lblNewColumnNames.Location = New System.Drawing.Point(12, 194)
+        Me.lblNewColumnNames.Name = "lblNewColumnNames"
+        Me.lblNewColumnNames.Size = New System.Drawing.Size(116, 13)
+        Me.lblNewColumnNames.TabIndex = 6
+        Me.lblNewColumnNames.Tag = ""
+        Me.lblNewColumnNames.Text = "Prefix for New Columns"
         '
         'lblNumberofPiecesToReturn
         '
         Me.lblNumberofPiecesToReturn.AutoSize = True
-        Me.lblNumberofPiecesToReturn.Location = New System.Drawing.Point(277, 112)
+        Me.lblNumberofPiecesToReturn.Location = New System.Drawing.Point(260, 99)
         Me.lblNumberofPiecesToReturn.Name = "lblNumberofPiecesToReturn"
-        Me.lblNumberofPiecesToReturn.Size = New System.Drawing.Size(132, 13)
+        Me.lblNumberofPiecesToReturn.Size = New System.Drawing.Size(138, 13)
         Me.lblNumberofPiecesToReturn.TabIndex = 9
-        Me.lblNumberofPiecesToReturn.Tag = "Number_of_Pieces_to_return"
-        Me.lblNumberofPiecesToReturn.Text = "Number of pieces to return"
+        Me.lblNumberofPiecesToReturn.Tag = "Number_of_Pieces_to_Return"
+        Me.lblNumberofPiecesToReturn.Text = "Number of Pieces to Return"
         '
         'nudN
         '
-        Me.nudN.Location = New System.Drawing.Point(280, 128)
+        Me.nudN.Location = New System.Drawing.Point(263, 115)
         Me.nudN.Name = "nudN"
         Me.nudN.Size = New System.Drawing.Size(120, 20)
         Me.nudN.TabIndex = 10
         '
+        'ucrReceiverSplitTextColumn
+        '
+        Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(263, 30)
+        Me.ucrReceiverSplitTextColumn.Name = "ucrReceiverSplitTextColumn"
+        Me.ucrReceiverSplitTextColumn.Selector = Nothing
+        Me.ucrReceiverSplitTextColumn.Size = New System.Drawing.Size(120, 26)
+        Me.ucrReceiverSplitTextColumn.TabIndex = 12
+        '
         'ucrInputColumnsIntoText
         '
-        Me.ucrInputColumnsIntoText.Location = New System.Drawing.Point(263, 183)
+        Me.ucrInputColumnsIntoText.Location = New System.Drawing.Point(181, 188)
         Me.ucrInputColumnsIntoText.Name = "ucrInputColumnsIntoText"
         Me.ucrInputColumnsIntoText.Size = New System.Drawing.Size(137, 25)
         Me.ucrInputColumnsIntoText.TabIndex = 11
@@ -114,14 +122,6 @@ Partial Class dlgSplitText
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrReceiverSplitTextColumn
-        '
-        Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(280, 30)
-        Me.ucrReceiverSplitTextColumn.Name = "ucrReceiverSplitTextColumn"
-        Me.ucrReceiverSplitTextColumn.Selector = Nothing
-        Me.ucrReceiverSplitTextColumn.Size = New System.Drawing.Size(120, 26)
-        Me.ucrReceiverSplitTextColumn.TabIndex = 12
-        '
         'dlgSplitText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -131,10 +131,10 @@ Partial Class dlgSplitText
         Me.Controls.Add(Me.ucrInputColumnsIntoText)
         Me.Controls.Add(Me.nudN)
         Me.Controls.Add(Me.lblNumberofPiecesToReturn)
-        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.lblNewColumnNames)
         Me.Controls.Add(Me.lblPattern)
         Me.Controls.Add(Me.cboPattern)
-        Me.Controls.Add(Me.lblSelectedFactors)
+        Me.Controls.Add(Me.lblSelectedFactor)
         Me.Controls.Add(Me.ucrSelectorSplitTextColumn)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -150,10 +150,10 @@ Partial Class dlgSplitText
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorSplitTextColumn As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents lblSelectedFactors As Label
+    Friend WithEvents lblSelectedFactor As Label
     Friend WithEvents cboPattern As ComboBox
     Friend WithEvents lblPattern As Label
-    Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents lblNewColumnNames As Label
     Friend WithEvents lblNumberofPiecesToReturn As Label
     Friend WithEvents nudN As NumericUpDown
     Friend WithEvents ucrInputColumnsIntoText As ucrInputComboBox

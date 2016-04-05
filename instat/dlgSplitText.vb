@@ -69,6 +69,7 @@ Public Class dlgSplitText
                 ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & "_" & Chr(34))
             Case "Period"
                 ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & "." & Chr(34))
+
         End Select
     End Sub
 
@@ -89,5 +90,9 @@ Public Class dlgSplitText
 
     Private Sub nudN_ValueChanged(sender As Object, e As EventArgs) Handles nudN.ValueChanged
         ucrBase.clsRsyntax.AddParameter("n", nudN.Value)
+    End Sub
+
+    Private Sub cboPattern_Leave(sender As Object, e As EventArgs) Handles cboPattern.Leave
+        ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & cboPattern.Text & Chr(34))
     End Sub
 End Class
