@@ -100,7 +100,7 @@ Public Class dlgSplitText
 
     Private Sub nudN_ValueChanged(sender As Object, e As EventArgs) Handles nudN.ValueChanged
         ucrBase.clsRsyntax.AddParameter("n", nudN.Value)
+        TestOKEnabled()
     End Sub
-
 
 End Class
