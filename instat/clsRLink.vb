@@ -265,8 +265,6 @@ Public Class RLink
     Public Sub RSetup()
         'run script to load libraries
         RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
-        RunScript("source(" & Chr(34) & "data_object.R" & Chr(34) & ")")
-        RunScript("source(" & Chr(34) & "instat_object.R" & Chr(34) & ")")
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
     End Sub
 
