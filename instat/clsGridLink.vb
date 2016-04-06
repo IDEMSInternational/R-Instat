@@ -165,16 +165,17 @@ Public Class clsGridLink
             grdCurr.AddWorksheet(fillWorkSheet)
         End If
 
-        fillWorkSheet.Reset()
-        rngDataRange = New RangePosition(0, 0, dfTemp.RowCount, dfTemp.ColumnCount)
-        fillWorkSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
         fillWorkSheet.Rows = dfTemp.RowCount
         fillWorkSheet.Columns = dfTemp.ColumnCount
+        rngDataRange = New RangePosition(0, 0, dfTemp.RowCount, dfTemp.ColumnCount)
+        fillWorkSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
         For i As Integer = 0 To dfTemp.RowCount - 1
             For j As Integer = 0 To dfTemp.ColumnCount - 1
-                fillWorkSheet.ColumnHeaders(j).Text = dfTemp.ColumnNames(j)
                 fillWorkSheet(row:=i, col:=j) = dfTemp(i, j)
             Next
+        Next
+        For k As Integer = 0 To dfTemp.ColumnCount - 1
+            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
         Next
         grdCurr.CurrentWorksheet = fillWorkSheet
     End Sub
