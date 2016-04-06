@@ -34,7 +34,7 @@ Public Class RLink
     Public fScript As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
     Public clrScript As Color = Color.Black
     '
-    Public fOutput As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
+    Public fOutput As Font = New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular)
     Public clrOutput As Color = Color.Blue
     '
     Public fComments As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
