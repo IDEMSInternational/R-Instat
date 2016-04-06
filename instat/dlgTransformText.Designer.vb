@@ -22,11 +22,7 @@ Partial Class dlgTransformText
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorForTransformText = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverTransformText = New instat.ucrReceiverSingle()
         Me.lblColumnToTransform = New System.Windows.Forms.Label()
-        Me.ucrInputPrefixForNewColumn = New instat.ucrInputComboBox()
         Me.lblPrefixForNewColumns = New System.Windows.Forms.Label()
         Me.grpOperation = New System.Windows.Forms.GroupBox()
         Me.chkLeft = New System.Windows.Forms.CheckBox()
@@ -49,33 +45,15 @@ Partial Class dlgTransformText
         Me.rdoPad = New System.Windows.Forms.RadioButton()
         Me.rdoLength = New System.Windows.Forms.RadioButton()
         Me.rdoConvertCase = New System.Windows.Forms.RadioButton()
+        Me.ucrInputPrefixForNewColumn = New instat.ucrInputComboBox()
+        Me.ucrReceiverTransformText = New instat.ucrReceiverSingle()
+        Me.ucrSelectorForTransformText = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpOperation.SuspendLayout()
         CType(Me.nudLastWord, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudFirstWord, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudWidth, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 432)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrSelectorForTransformText
-        '
-        Me.ucrSelectorForTransformText.Location = New System.Drawing.Point(13, 13)
-        Me.ucrSelectorForTransformText.Name = "ucrSelectorForTransformText"
-        Me.ucrSelectorForTransformText.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorForTransformText.TabIndex = 1
-        '
-        'ucrReceiverTransformText
-        '
-        Me.ucrReceiverTransformText.Location = New System.Drawing.Point(299, 26)
-        Me.ucrReceiverTransformText.Name = "ucrReceiverTransformText"
-        Me.ucrReceiverTransformText.Selector = Nothing
-        Me.ucrReceiverTransformText.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverTransformText.TabIndex = 2
         '
         'lblColumnToTransform
         '
@@ -85,13 +63,6 @@ Partial Class dlgTransformText
         Me.lblColumnToTransform.Size = New System.Drawing.Size(108, 13)
         Me.lblColumnToTransform.TabIndex = 3
         Me.lblColumnToTransform.Text = "Column To Transform"
-        '
-        'ucrInputPrefixForNewColumn
-        '
-        Me.ucrInputPrefixForNewColumn.Location = New System.Drawing.Point(142, 401)
-        Me.ucrInputPrefixForNewColumn.Name = "ucrInputPrefixForNewColumn"
-        Me.ucrInputPrefixForNewColumn.Size = New System.Drawing.Size(137, 25)
-        Me.ucrInputPrefixForNewColumn.TabIndex = 4
         '
         'lblPrefixForNewColumns
         '
@@ -310,6 +281,35 @@ Partial Class dlgTransformText
         Me.rdoConvertCase.TabStop = True
         Me.rdoConvertCase.Text = "Convert Case"
         Me.rdoConvertCase.UseVisualStyleBackColor = True
+        '
+        'ucrInputPrefixForNewColumn
+        '
+        Me.ucrInputPrefixForNewColumn.Location = New System.Drawing.Point(142, 401)
+        Me.ucrInputPrefixForNewColumn.Name = "ucrInputPrefixForNewColumn"
+        Me.ucrInputPrefixForNewColumn.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputPrefixForNewColumn.TabIndex = 4
+        '
+        'ucrReceiverTransformText
+        '
+        Me.ucrReceiverTransformText.Location = New System.Drawing.Point(299, 26)
+        Me.ucrReceiverTransformText.Name = "ucrReceiverTransformText"
+        Me.ucrReceiverTransformText.Selector = Nothing
+        Me.ucrReceiverTransformText.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverTransformText.TabIndex = 2
+        '
+        'ucrSelectorForTransformText
+        '
+        Me.ucrSelectorForTransformText.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorForTransformText.Name = "ucrSelectorForTransformText"
+        Me.ucrSelectorForTransformText.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorForTransformText.TabIndex = 1
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 432)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgTransformText
         '
