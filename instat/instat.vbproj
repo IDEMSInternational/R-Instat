@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsDistribution.vb" />
+    <Compile Include="clsGeom.vb" />
     <Compile Include="clsInstatOptions.vb" />
     <Compile Include="clsRFunction.vb" />
     <Compile Include="clsROperator.vb" />
@@ -615,6 +616,24 @@
     </Compile>
     <Compile Include="sdgThemeOptions.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UcrGeomListWithAes.designer.vb">
+      <DependentUpon>UcrGeomListWithAes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UcrGeomListWithAes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcrGeoms.designer.vb">
+      <DependentUpon>UcrGeoms.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UcrGeoms.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcrGeomWithAes.designer.vb">
+      <DependentUpon>UcrGeomWithAes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UcrGeomWithAes.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
@@ -3521,6 +3540,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcrGeomListWithAes.fr-FR.resx">
+      <DependentUpon>UcrGeomListWithAes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcrGeomListWithAes.resx">
+      <DependentUpon>UcrGeomListWithAes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcrGeomListWithAes.sw-KE.resx">
+      <DependentUpon>UcrGeomListWithAes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcrGeoms.fr-FR.resx">
+      <DependentUpon>UcrGeoms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcrGeoms.resx">
+      <DependentUpon>UcrGeoms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcrGeoms.sw-KE.resx">
+      <DependentUpon>UcrGeoms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcrGeomWithAes.fr-FR.resx">
+      <DependentUpon>UcrGeomWithAes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcrGeomWithAes.resx">
+      <DependentUpon>UcrGeomWithAes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcrGeomWithAes.sw-KE.resx">
+      <DependentUpon>UcrGeomWithAes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInput.fr-FR.resx">
       <DependentUpon>ucrInput.vb</DependentUpon>
