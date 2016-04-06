@@ -269,6 +269,7 @@ Partial Class frmMain
         Me.ToolStripSeparator19 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuManageFactorSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuManageTextTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageTextSplit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageTextCombine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuManageTextMatch = New System.Windows.Forms.ToolStripMenuItem()
@@ -337,7 +338,6 @@ Partial Class frmMain
         Me.mnuClimateMethodsAdditionalSeasonalSummaryRain = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsAdditionalWaterBalance = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateMethodsCreateClimateObject = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuManageTextTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2090,6 +2090,12 @@ Partial Class frmMain
         Me.mnuManageText.Tag = "Text"
         Me.mnuManageText.Text = "Text"
         '
+        'mnuManageTextTransform
+        '
+        Me.mnuManageTextTransform.Name = "mnuManageTextTransform"
+        Me.mnuManageTextTransform.Size = New System.Drawing.Size(152, 22)
+        Me.mnuManageTextTransform.Text = "Transform..."
+        '
         'mnuManageTextSplit
         '
         Me.mnuManageTextSplit.Name = "mnuManageTextSplit"
@@ -2569,12 +2575,6 @@ Partial Class frmMain
         Me.mnuClimateMethodsCreateClimateObject.Size = New System.Drawing.Size(199, 22)
         Me.mnuClimateMethodsCreateClimateObject.Tag = "Create_Climate_Object"
         Me.mnuClimateMethodsCreateClimateObject.Text = "Create Climate Object..."
-        '
-        'mnuManageTextTransform
-        '
-        Me.mnuManageTextTransform.Name = "mnuManageTextTransform"
-        Me.mnuManageTextTransform.Size = New System.Drawing.Size(152, 22)
-        Me.mnuManageTextTransform.Text = "Transform"
         '
         'frmMain
         '
