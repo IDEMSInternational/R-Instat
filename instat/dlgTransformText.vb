@@ -56,6 +56,8 @@ Public Class dlgTransformText
         ucrInputPrefixForNewColumn.SetItemsTypeAsColumns()
         ucrInputPrefixForNewColumn.SetDefaultTypeAsColumn()
         ucrInputPrefixForNewColumn.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
+        ucrReceiverOrColumn.SetDataType("numeric")
+        ucrReceiverTransformText.SetDataType("factor")
 
     End Sub
 
@@ -106,6 +108,10 @@ Public Class dlgTransformText
 
         ElseIf rdoTrim.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_trim")
+
+        ElseIf rdoWords.Checked Then
+            ucrBase.clsRsyntax.SetFunction("stringr::word")
+
         Else
 
             lblFirstWord.Visible = True
@@ -115,6 +121,7 @@ Public Class dlgTransformText
             nudLastWord.Visible = True
             ucrInputSeparator.Visible = True
             lblSeparator.Visible = True
+
 
             If rdoOrColumn.Checked Then
                 ucrReceiverOrColumn.Visible = True
@@ -161,5 +168,36 @@ Public Class dlgTransformText
 
     Private Sub nudWidth_ValueChanged(sender As Object, e As EventArgs) Handles nudWidth.ValueChanged
         ucrBase.clsRsyntax.AddParameter("width", nudWidth.Value)
+    End Sub
+
+    Private Sub ucrReceiverOrColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverOrColumn.SelectionChanged
+        If Not ucrReceiverOrColumn.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("string", clsRFunctionParameter:=ucrReceiverOrColumn.GetVariables())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("string")
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputSeparator_Namechanged() Handles ucrInputSeparator.NameChanged
+        Select Case ucrInputSeparator.GetText
+            Case "space"
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & " " & Chr(34))
+            Case "Period"
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "." & Chr(34))
+            Case "colon"
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ":" & Chr(34))
+            Case "Underscore"
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "_" & Chr(34))
+        End Select
+    End Sub
+
+    Private Sub nudFirstWord_TextChanged(sender As Object, e As EventArgs) Handles nudFirstWord.TextChanged
+        ucrBase.clsRsyntax.AddParameter("start", nudFirstWord.Value)
+
+    End Sub
+
+    Private Sub nudLastWord_TextChanged(sender As Object, e As EventArgs) Handles nudLastWord.TextChanged
+        ucrBase.clsRsyntax.AddParameter("end", nudLastWord.Value)
     End Sub
 End Class
