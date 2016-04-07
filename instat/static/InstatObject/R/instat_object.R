@@ -260,12 +260,12 @@ instat_obj$methods(add_columns_to_data = function(data_name, col_name, col_data,
 }
 )
 
-instat_obj$methods(get_columns_from_data = function(data_name, col_names, 
-                                                    from_stacked_data = FALSE) {
+instat_obj$methods(get_columns_from_data = function(data_name, col_names, from_stacked_data = FALSE,
+                                                    force_as_data_frame = FALSE) {
   if(missing(data_name)) stop("data_name is required")
   if(!from_stacked_data) {
     if(!data_name %in% names(data_objects)) stop(paste(data_name, "not found"))
-    data_objects[[data_name]]$get_columns_from_data(col_names)
+    data_objects[[data_name]]$get_columns_from_data(col_names, force_as_data_frame)
   }
   else {
     if(!exists(data_name)) stop(paste(data_name, "not found."))
