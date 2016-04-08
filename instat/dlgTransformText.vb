@@ -66,6 +66,21 @@ Public Class dlgTransformText
         ucrSelectorForTransformText.Focus()
         ucrInputPrefixForNewColumn.Reset()
         ucrInputPrefixForNewColumn.SetName("New_Text")
+        ucrInputTo.Visible = False
+        lblTo.Visible = False
+        lblWidth.Visible = False
+        nudWidth.Visible = False
+        chkLeft.Visible = False
+        lblPad.Visible = False
+        ucrInputPad.Visible = False
+        lblFirstWord.Visible = False
+        nudFirstWord.Visible = False
+        rdoOrColumn.Visible = False
+        lblLastWord.Visible = False
+        nudLastWord.Visible = False
+        ucrInputSeparator.Visible = False
+        lblSeparator.Visible = False
+        ucrReceiverOrColumn.Visible = False
 
     End Sub
 
@@ -105,6 +120,11 @@ Public Class dlgTransformText
             ucrBase.clsRsyntax.SetFunction("stringr::str_legth")
         ElseIf rdoPad.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_pad")
+            lblWidth.Visible = True
+            nudWidth.Visible = True
+            chkLeft.Visible = True
+            lblPad.Visible = True
+            ucrInputPad.Visible = True
 
         ElseIf rdoTrim.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_trim")
@@ -121,6 +141,8 @@ Public Class dlgTransformText
             nudLastWord.Visible = True
             ucrInputSeparator.Visible = True
             lblSeparator.Visible = True
+
+
 
 
             If rdoOrColumn.Checked Then
