@@ -248,7 +248,6 @@ Public Class dlgOptions
     End Sub
 
     Private Sub nudNoLines_ValueChanged(sender As Object, e As EventArgs) Handles nudNoLines.ValueChanged
-        frmMain.clsInstatOptions.iLines = nudNoLines.Value
         cmdApply.Enabled = True
     End Sub
 
