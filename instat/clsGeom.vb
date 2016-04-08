@@ -15,30 +15,24 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class Geoms
     Public strGeomName As String
-    Public clsAes As New List(Of GeomAes)
-    Public clsGeomParameter As New List(Of GeomParameters)
+    Public clsGgParameter As List(Of GgParameters)
 
-    Public Sub AddGeomParameter(strGeomParameterName As String, Optional ParameterValue As String = "")
+
+    Public Sub AddGgParameter(strGgParameterName As String, Optional ParameterValue As String = "")
         'will be adding parameters to the geom as well as the value of the parameter.
 
     End Sub
 
-    Public Sub AddGeomAes(strGeomAes As String)
-        'will pass the Geom Aesthetics
 
-
-    End Sub
 
 End Class
 
-Public Class GeomAes
-    'contains info about the geom aesthetics
-    Public strAesName As String
+Public Class GgParameters
+    'contains info about the geom aesthetics and urguments for the geom
+    Public strGgParameterName As String
 
 End Class
 
-Public Class GeomParameters
-    'contains info about the geom Parameters
-    Public strGeomParameterName As String
 
-End Class
+
+
