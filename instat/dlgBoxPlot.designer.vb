@@ -22,7 +22,7 @@ Partial Class dlgBoxplot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.cmdPlotOptions = New System.Windows.Forms.Button()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
         Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
@@ -35,15 +35,15 @@ Partial Class dlgBoxplot
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'cmdOptions
+        'cmdPlotOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(271, 306)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(141, 23)
-        Me.cmdOptions.TabIndex = 8
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(271, 276)
+        Me.cmdPlotOptions.Name = "cmdPlotOptions"
+        Me.cmdPlotOptions.Size = New System.Drawing.Size(98, 23)
+        Me.cmdPlotOptions.TabIndex = 8
+        Me.cmdPlotOptions.Tag = "Plot_Options"
+        Me.cmdPlotOptions.Text = "Plot Options"
+        Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
         'lblByFactors
         '
@@ -67,9 +67,9 @@ Partial Class dlgBoxplot
         '
         'cmdBoxPlotOptions
         '
-        Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(271, 280)
+        Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(137, 275)
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
-        Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(141, 23)
+        Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(98, 23)
         Me.cmdBoxPlotOptions.TabIndex = 7
         Me.cmdBoxPlotOptions.Tag = "BoxPlot_Options"
         Me.cmdBoxPlotOptions.Text = "BoxPlot Options"
@@ -78,7 +78,7 @@ Partial Class dlgBoxplot
         'chkHorizontalBoxplot
         '
         Me.chkHorizontalBoxplot.AutoSize = True
-        Me.chkHorizontalBoxplot.Location = New System.Drawing.Point(12, 218)
+        Me.chkHorizontalBoxplot.Location = New System.Drawing.Point(12, 210)
         Me.chkHorizontalBoxplot.Name = "chkHorizontalBoxplot"
         Me.chkHorizontalBoxplot.Size = New System.Drawing.Size(110, 17)
         Me.chkHorizontalBoxplot.TabIndex = 6
@@ -88,7 +88,7 @@ Partial Class dlgBoxplot
         '
         'ucrSaveBoxplot
         '
-        Me.ucrSaveBoxplot.Location = New System.Drawing.Point(12, 241)
+        Me.ucrSaveBoxplot.Location = New System.Drawing.Point(12, 237)
         Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
         Me.ucrSaveBoxplot.Size = New System.Drawing.Size(265, 27)
         Me.ucrSaveBoxplot.TabIndex = 10
@@ -126,7 +126,7 @@ Partial Class dlgBoxplot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 339)
+        Me.ucrBase.Location = New System.Drawing.Point(6, 308)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 51)
         Me.ucrBase.TabIndex = 9
@@ -135,7 +135,7 @@ Partial Class dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 388)
+        Me.ClientSize = New System.Drawing.Size(424, 357)
         Me.Controls.Add(Me.ucrSaveBoxplot)
         Me.Controls.Add(Me.ucrVariablesAsFactorForBoxplot)
         Me.Controls.Add(Me.chkHorizontalBoxplot)
@@ -145,7 +145,7 @@ Partial Class dlgBoxplot
         Me.Controls.Add(Me.lblBySecondFactor)
         Me.Controls.Add(Me.lblByFactors)
         Me.Controls.Add(Me.ucrByFactorsReceiver)
-        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Cursor = System.Windows.Forms.Cursors.Default
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -162,7 +162,7 @@ Partial Class dlgBoxplot
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents cmdOptions As Button
+    Friend WithEvents cmdPlotOptions As Button
     Friend WithEvents ucrByFactorsReceiver As ucrReceiverSingle
     Friend WithEvents lblByFactors As Label
     Friend WithEvents ucrSelectorBoxPlot As ucrSelectorByDataFrameAddRemove
