@@ -32,7 +32,7 @@ Partial Class dlgReorderLevels
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(250, 85)
+        Me.lblFactor.Location = New System.Drawing.Point(249, 19)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(37, 13)
         Me.lblFactor.TabIndex = 4
@@ -41,7 +41,7 @@ Partial Class dlgReorderLevels
         '
         'ucrReorderFactor
         '
-        Me.ucrReorderFactor.Location = New System.Drawing.Point(250, 131)
+        Me.ucrReorderFactor.Location = New System.Drawing.Point(249, 60)
         Me.ucrReorderFactor.Name = "ucrReorderFactor"
         Me.ucrReorderFactor.Size = New System.Drawing.Size(154, 139)
         Me.ucrReorderFactor.TabIndex = 3
@@ -50,7 +50,7 @@ Partial Class dlgReorderLevels
         '
         'ucrReceiverFactor
         '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(250, 98)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(249, 32)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(106, 26)
@@ -65,7 +65,7 @@ Partial Class dlgReorderLevels
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 293)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 211)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -74,7 +74,7 @@ Partial Class dlgReorderLevels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 349)
+        Me.ClientSize = New System.Drawing.Size(432, 265)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrReorderFactor)
         Me.Controls.Add(Me.ucrReceiverFactor)
