@@ -114,10 +114,14 @@ Public Class dlgTransformText
     Private Sub grpOperation_CheckedChanged(sender As Object, e As EventArgs) Handles rdoConvertCase.CheckedChanged, rdoLength.CheckedChanged, rdoPad.CheckedChanged, rdoTrim.CheckedChanged, rdoWords.CheckedChanged
         If rdoConvertCase.Checked Then
             ucrInputTo.Visible = True
+
             lblTo.Visible = True
+
 
         ElseIf rdoLength.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_legth")
+
+
         ElseIf rdoPad.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_pad")
             lblWidth.Visible = True
@@ -126,14 +130,14 @@ Public Class dlgTransformText
             lblPad.Visible = True
             ucrInputPad.Visible = True
 
+
+
         ElseIf rdoTrim.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_trim")
 
+
         ElseIf rdoWords.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::word")
-
-        Else
-
             lblFirstWord.Visible = True
             nudFirstWord.Visible = True
             rdoOrColumn.Visible = True
@@ -141,13 +145,15 @@ Public Class dlgTransformText
             nudLastWord.Visible = True
             ucrInputSeparator.Visible = True
             lblSeparator.Visible = True
-
-
-
-
-            If rdoOrColumn.Checked Then
+            If rdoWords.Checked And rdoOrColumn.Checked Then
                 ucrReceiverOrColumn.Visible = True
+            Else
+
             End If
+
+
+
+
         End If
         TestOkEnabled()
     End Sub
