@@ -74,6 +74,27 @@ Public Class ucrDistributions
 
     End Sub
 
+    Public Sub SetQDistributions()
+
+        strDistributionType = "QFunctions"
+        SetDistributions()
+
+    End Sub
+
+    Public Sub SetDDistributions()
+
+        strDistributionType = "DFunctions"
+        SetDistributions()
+
+    End Sub
+
+    Public Sub SetGLMDistributions()
+
+        strDistributionType = "GLMFunctions"
+        SetDistributions()
+
+    End Sub
+
     Private Sub SetDistributions()
 
         Dim bUse As Boolean
@@ -88,8 +109,11 @@ Public Class ucrDistributions
                 Case "PFunctions"
                     bUse = (Dist.strPFunctionName <> "")
                 Case "QFunctions"
+                    bUse = (Dist.strQFunctionName <> "")
                 Case "DFunctions"
+                    bUse = (Dist.strDFunctionName <> "")
                 Case "GLMFunctions"
+                    bUse = (Dist.strGLMFunctionName <> "")
             End Select
             If Dist.bIncluded And bUse Then
                 lstCurrentDistributions.Add(Dist)
@@ -116,6 +140,10 @@ Public Class ucrDistributions
         Dim clsGammaWithShapeandScale As New Distribution
         Dim clsGammaWithShapeandMean As New Distribution
         Dim clsGammaWithShapeandRate As New Distribution
+        Dim clsInverseGaussianDist As New Distribution
+        Dim clsQuasiDist As New Distribution
+        Dim clsQuasibinomialDist As New Distribution
+        Dim clsQuasipoissonDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -123,7 +151,7 @@ Public Class ucrDistributions
         clsNormalDist.strPFunctionName = "pnorm"
         clsNormalDist.strQFunctionName = "qnorm"
         clsNormalDist.strDFunctionName = "dnorm"
-        clsNormalDist.strGLMFunctionName = "gausian"
+        clsNormalDist.strGLMFunctionName = "gaussian"
         clsNormalDist.AddParameter("mean", "Mean", 0)
         clsNormalDist.AddParameter("sd", "Standard_deviation", 1)
         lstAllDistributions.Add(clsNormalDist)
@@ -176,7 +204,6 @@ Public Class ucrDistributions
         clsUniformDist.AddParameter("b", "b", 1)
         lstAllDistributions.Add(clsUniformDist)
 
-
         'Bernouli Distribution
         clsBernouliDist.strNameTag = "Bernouli"
         clsBernouliDist.strRFunctionName = "rbern"
@@ -192,6 +219,7 @@ Public Class ucrDistributions
         clsBinomialDist.strPFunctionName = "pbinom"
         clsBinomialDist.strQFunctionName = "qbinom"
         clsBinomialDist.strDFunctionName = "dbinom"
+        clsBinomialDist.strGLMFunctionName = "binomial"
         clsBinomialDist.AddParameter("number", "Number", 1)
         clsBinomialDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsBinomialDist)
@@ -202,9 +230,9 @@ Public Class ucrDistributions
         clsPoissonDist.strPFunctionName = "ppois"
         clsPoissonDist.strQFunctionName = "qpois"
         clsPoissonDist.strDFunctionName = "dpois"
+        clsPoissonDist.strGLMFunctionName = "poisson"
         clsPoissonDist.AddParameter("mean", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
-
 
         ' von mises distribution
         clsVonnMisesDist.strNameTag = "von_mises"
@@ -232,6 +260,7 @@ Public Class ucrDistributions
         clsGammaWithShapeandScale.strPFunctionName = "pgamma"
         clsGammaWithShapeandScale.strQFunctionName = "qgamma"
         clsGammaWithShapeandScale.strDFunctionName = "dgamma"
+        clsGammaWithShapeandScale.strGLMFunctionName = "Gamma"
         clsGammaWithShapeandScale.AddParameter("shape", "Shape")
         clsGammaWithShapeandScale.AddParameter("scale", "Scale")
         lstAllDistributions.Add(clsGammaWithShapeandScale)
@@ -246,9 +275,6 @@ Public Class ucrDistributions
         clsGammaWithShapeandMean.AddParameter("mean", "Mean")
         lstAllDistributions.Add(clsGammaWithShapeandMean)
 
-
-
-
         'Gamma With Shape and Rate distribution
         clsGammaWithShapeandRate.strNameTag = "Gamma_With_Shape_and_Rate"
         clsGammaWithShapeandRate.strRFunctionName = "rgamma"
@@ -259,7 +285,6 @@ Public Class ucrDistributions
         clsGammaWithShapeandRate.AddParameter("rate", "Rate")
         lstAllDistributions.Add(clsGammaWithShapeandRate)
 
-
         'Gamma with Zeros distribution
         clsGammaWithZerosDist.strNameTag = "Gamma_With_Zeros"
         clsGammaWithZerosDist.strRFunctionName = "rgamma"
@@ -269,6 +294,32 @@ Public Class ucrDistributions
         clsGammaWithZerosDist.AddParameter("", "", "")
         clsGammaWithZerosDist.AddParameter("", "", )
         lstAllDistributions.Add(clsGammaWithZerosDist)
+
+        'Inverse Gaussian distribution
+        clsInverseGaussianDist.strNameTag = "Inverse_Gaussian"
+        clsInverseGaussianDist.strRFunctionName = ""
+        clsInverseGaussianDist.strPFunctionName = ""
+        clsInverseGaussianDist.strQFunctionName = ""
+        clsInverseGaussianDist.strDFunctionName = ""
+        clsInverseGaussianDist.strGLMFunctionName = "inverse.gaussian"
+        clsInverseGaussianDist.AddParameter("", "", "")
+        clsInverseGaussianDist.AddParameter("", "", )
+        lstAllDistributions.Add(clsInverseGaussianDist)
+
+        'Quasi distribution
+        clsQuasiDist.strNameTag = "Quasi"
+        clsQuasiDist.strGLMFunctionName = "quasi"
+        lstAllDistributions.Add(clsQuasiDist)
+
+        'Quasibinomial distribution
+        clsQuasibinomialDist.strNameTag = "Quasibinomial"
+        clsQuasibinomialDist.strGLMFunctionName = "quasibinomial"
+        lstAllDistributions.Add(clsQuasibinomialDist)
+
+        'Quasipoisson distribution
+        clsQuasipoissonDist.strNameTag = "Quasipoisson"
+        clsQuasipoissonDist.strGLMFunctionName = "quasipoisson"
+        lstAllDistributions.Add(clsQuasipoissonDist)
 
         bDistributionsSet = True
     End Sub
