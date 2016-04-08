@@ -84,7 +84,7 @@ Public Class dlgBoxplot
             ucrBase.OKEnabled(False)
         End If
     End Sub
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+    Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
         sdgPlots.ShowDialog()
     End Sub
     Private Sub ucrSelectorBoxPlot_DataFrameChanged() Handles ucrSelectorBoxPlot.DataFrameChanged
