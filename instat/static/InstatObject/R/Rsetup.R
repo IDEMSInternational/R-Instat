@@ -11,6 +11,7 @@ library(extRemes)
 library(ggfortify)
 library(GGally)
 library(CCA)
+library(candisc) 
 
 setwd(dirname(parent.frame(2)$ofile))
 
