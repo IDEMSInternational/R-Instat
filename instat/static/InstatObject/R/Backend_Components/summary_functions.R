@@ -14,33 +14,19 @@ data_obj$methods(calculate_summary = function(columns_to_summarise, summaries, f
   if(!all(summaries %in% all_summaries)) stop(paste("Some of the summaries from:",summaries,"were not recognised."))
   if(!all(factors %in% names(data))) stop(paste("Some of the factors:",factors,"were not found in the data."))
   
+  combinations = expand.grid(summaries,columns_to_summarise)
   if(length(summaries)==1) {
     if(length(columns_to_summarise) == 1) out = ddply(data, factors, function(x) match.fun(summaries)(x[[columns_to_summarise]],...), .drop = drop)
     else out = ddply(data, factors, function(x) sapply(columns_to_summarise, function(y) match.fun(summaries)(x[[y]]),...), .drop = drop)
   }
    else {
      if(length(columns_to_summarise) == 1) out = ddply(data, factors, function(x) sapply(summaries, function(y) match.fun(y)(x[[columns_to_summarise]],...)), .drop = drop)
-     else out = ddply(data, factors, function(x) apply(expand.grid(summaries,columns_to_summarise), 1, FUN = function(y) match.fun(y[[1]])(x[[y[[2]]]],...)), .drop = drop)
+     else out = ddply(data, factors, function(x) apply(combinations, 1, FUN = function(y) match.fun(y[[1]])(x[[y[[2]]]],...)), .drop = drop)
    }
+  names(out)[-(1:length(factors))] <- apply(combinations, 1, paste, collapse="_")
   return(out)
 }
 )
-
-# climate$methods(summary_calculation = function(data_list = list(), summary_time_period, required_summaries = list(), required_variables = list(), subyearly_factor, column_names = rep(list(rep("",length(required_summaries))),length(required_variables)), replace = FALSE, ...) {
-#        if(length(curr_var_name)==1) out[[curr_label]] = as.vector(by(curr_data[[curr_var_name]], curr_factors, match.fun(single_summary), ...))
-#         else out[[curr_label]] = as.vector(by(curr_data[curr_var_name], curr_factors, match.fun(single_summary), ...))
-#         # TODO make get_summary_label a climate method
-#         # TODO think how to use get_summary_label when required_variables[[i]] is a list
-#         labels[[curr_label]] = .self$get_summary_name(summary_time_period, data_obj)$get_summary_label(required_variables[[i]][[1]], single_summary, curr_definition)
-#         j = j + 1
-#       }
-#       i = i + 1
-#     }
-#     mapply(function(x,y) .self$append_to_summary(time_period = summary_time_period, data_obj = data_obj, col_data = out[[x]], col_name = x, label = y, replace = replace), names(out), labels)
-#   }
-#   
-# }
-# )
 
 # summary function labels
 sum_label="summary_sum"
