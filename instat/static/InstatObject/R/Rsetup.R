@@ -12,6 +12,9 @@ library(ggfortify)
 library(GGally)
 library(CCA)
 
+
+library(FactoMineR)
+
 setwd(dirname(parent.frame(2)$ofile))
 
 source("instat_object.R")
