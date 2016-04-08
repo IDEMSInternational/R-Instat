@@ -22,15 +22,32 @@ Public Class dlgReorderLevels
 
 
         If bFirstLoad Then
-            SetDefaults()
+            InitialiseDialog()
             bFirstLoad = False
         End If
-    End Sub
-    Private Sub SetDefaults()
 
     End Sub
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "")
+        ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
+        ucrReceiverFactor.SetMeAsReceiver()
+        ucrReceiverFactor.SetDataType("factor")
+        ucrReorderFactor.setReceiver(ucrReceiverFactor)
+        ucrReorderFactor.strDataType = "factor"
 
+    End Sub
+    Private Sub SetDefaultSettings()
+
+        ucrSelectorFactorLevelsToReorder.Reset()
+        ucrSelectorFactorLevelsToReorder.Focus()
+        ucrReorderFactor.lstAvailableData.ResetText()
+
+    End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
+
+    End Sub
+
+    Private Sub ucrReorderFactor_Leave(sender As Object, e As EventArgs) Handles ucrReorderFactor.Leave
+
     End Sub
 End Class
