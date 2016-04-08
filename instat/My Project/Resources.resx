@@ -1495,4 +1495,16 @@
   <data name="UseGraph" xml:space="preserve">
     <value>Use Graph...</value>
   </data>
+  <data name="Inverse_Gaussian" xml:space="preserve">
+    <value>Inverse Gaussian</value>
+  </data>
+  <data name="Quasi" xml:space="preserve">
+    <value>Quasi</value>
+  </data>
+  <data name="Quasibinomial" xml:space="preserve">
+    <value>Quasibinomial</value>
+  </data>
+  <data name="Quasipoisson" xml:space="preserve">
+    <value>Quasipoisson</value>
+  </data>
 </root>
