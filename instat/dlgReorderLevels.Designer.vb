@@ -23,20 +23,62 @@ Partial Class dlgReorderLevels
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorFactorLevelsToReorder = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
+        Me.ucrReorderFactor = New instat.ucrReorder()
+        Me.lblFactor = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 196)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 212)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrSelectorFactorLevelsToReorder
+        '
+        Me.ucrSelectorFactorLevelsToReorder.Location = New System.Drawing.Point(5, 14)
+        Me.ucrSelectorFactorLevelsToReorder.Name = "ucrSelectorFactorLevelsToReorder"
+        Me.ucrSelectorFactorLevelsToReorder.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorFactorLevelsToReorder.TabIndex = 1
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(269, 32)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverFactor.TabIndex = 2
+        '
+        'ucrReorderFactor
+        '
+        Me.ucrReorderFactor.Location = New System.Drawing.Point(269, 64)
+        Me.ucrReorderFactor.Name = "ucrReorderFactor"
+        Me.ucrReorderFactor.Size = New System.Drawing.Size(154, 139)
+        Me.ucrReorderFactor.TabIndex = 3
+        Me.ucrReorderFactor.ucrDataFrameList = Nothing
+        Me.ucrReorderFactor.ucrReceiver = Nothing
+        '
+        'lblFactor
+        '
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.Location = New System.Drawing.Point(275, 20)
+        Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
+        Me.lblFactor.TabIndex = 4
+        Me.lblFactor.Tag = "Factor"
+        Me.lblFactor.Text = "Factor"
         '
         'dlgReorderLevels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(447, 261)
+        Me.ClientSize = New System.Drawing.Size(432, 271)
+        Me.Controls.Add(Me.lblFactor)
+        Me.Controls.Add(Me.ucrReorderFactor)
+        Me.Controls.Add(Me.ucrReceiverFactor)
+        Me.Controls.Add(Me.ucrSelectorFactorLevelsToReorder)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgReorderLevels"
@@ -44,8 +86,13 @@ Partial Class dlgReorderLevels
         Me.Tag = "Reorder_Levels"
         Me.Text = "Reorder Levels"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSelectorFactorLevelsToReorder As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
+    Friend WithEvents ucrReorderFactor As ucrReorder
+    Friend WithEvents lblFactor As Label
 End Class
