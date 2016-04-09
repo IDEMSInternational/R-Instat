@@ -562,6 +562,12 @@
     <Compile Include="dlgCombineforGraphics.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSetupLoading.Designer.vb">
+      <DependentUpon>frmSetupLoading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetupLoading.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgCanonicalCorrelation.Designer.vb">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </Compile>
@@ -2224,6 +2230,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCombineforGraphics.sw-KE.resx">
       <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetupLoading.fr-FR.resx">
+      <DependentUpon>frmSetupLoading.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetupLoading.resx">
+      <DependentUpon>frmSetupLoading.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetupLoading.sw-KE.resx">
+      <DependentUpon>frmSetupLoading.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
@@ -3983,6 +3998,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\Samaru56.RDS">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\labels_and_defaults.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\stand_alone_functions.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\summary_functions.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\data_object_R6.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\instat_object_R6.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

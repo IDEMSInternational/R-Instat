@@ -1813,6 +1813,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Inverse Gaussian.
+        '''</summary>
+        Friend ReadOnly Property Inverse_Gaussian() As String
+            Get
+                Return ResourceManager.GetString("Inverse_Gaussian", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Kappa.
         '''</summary>
         Friend ReadOnly Property Kappa() As String
@@ -2820,6 +2829,33 @@ Namespace My.Resources
         Friend ReadOnly Property Process() As String
             Get
                 Return ResourceManager.GetString("Process", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quasi.
+        '''</summary>
+        Friend ReadOnly Property Quasi() As String
+            Get
+                Return ResourceManager.GetString("Quasi", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quasibinomial.
+        '''</summary>
+        Friend ReadOnly Property Quasibinomial() As String
+            Get
+                Return ResourceManager.GetString("Quasibinomial", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quasipoisson.
+        '''</summary>
+        Friend ReadOnly Property Quasipoisson() As String
+            Get
+                Return ResourceManager.GetString("Quasipoisson", resourceCulture)
             End Get
         End Property
         
