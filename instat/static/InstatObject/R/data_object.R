@@ -669,19 +669,13 @@ data_obj$methods(get_data_type = function(col_name = "") {
    if(!(col_name %in% names(data))){
     stop(col_name, " is not a column in ", get_metadata(data_name_label))
   }
-
+  type = ""
   if(is.numeric(data[[col_name]])){
     type = "numeric"
   }
   
   if(is.integer(data[[col_name]])){
-    count=0
-    for(i in 1:nrow(data)){
-      if(data[[col_name]][i]<0){
-        count  = count + 1
-      }
-    }
-    if(count==0){
+    if(all(data[[col_name]]>0)){
       type = "positive integer"
     }else{
       type = "integer"
@@ -696,5 +690,6 @@ data_obj$methods(get_data_type = function(col_name = "") {
     type = "multilevel factor"
   }
   return(type)
+  #TODO: This needs to be completed for all possible types e.g. "character", "Date"
 }
 )
