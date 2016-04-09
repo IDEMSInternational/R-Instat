@@ -664,3 +664,37 @@ data_obj$methods(reorder_factor_levels = function(col_name, new_level_names) {
   .self$set_variables_metadata_changed(TRUE)
 }
 )
+
+data_obj$methods(get_data_type = function(col_name = "") {
+   if(!(col_name %in% names(data))){
+    stop(col_name, " is not a column in ", get_metadata(data_name_label))
+  }
+
+  if(is.numeric(data[[col_name]])){
+    type = "numeric"
+  }
+  
+  if(is.integer(data[[col_name]])){
+    count=0
+    for(i in 1:nrow(data)){
+      if(data[[col_name]][i]<0){
+        count  = count + 1
+      }
+    }
+    if(count==0){
+      type = "positive integer"
+    }else{
+      type = "integer"
+    }
+  }
+  
+  if(is.factor(data[[col_name]]) & (length(levels(data[[col_name]]))==2)){
+    type = "2 level factor"
+  }
+  
+  if(is.factor(data[[col_name]]) & (length(levels(data[[col_name]]))>2)){
+    type = "multilevel factor"
+  }
+  return(type)
+}
+)
