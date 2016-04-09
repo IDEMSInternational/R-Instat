@@ -23,15 +23,31 @@ Public Class UcrGeomListWithParameters
         SetParameters()
     End Sub
 
-    Public Sub SetParameters()
-        'this will set function or aes parameters
-        lstGgParameterLabels.AddRange({lblGgParam1, lblGgParam2, lblGgParam3, lblGgParam4, lblGgParam5, lblGgParam6, lblGgParam7}) 'Adds range for the parameter labels
+    Public Sub SetParameters() 'this will set function or aes parameters
+        Dim i As Integer = 0
 
+        If lstGgParameterLabels.Count = 0 Then
+            lstGgParameterLabels.AddRange({lblGgParam1, lblGgParam2, lblGgParam3, lblGgParam4, lblGgParam5, lblGgParam6, lblGgParam7}) 'Adds range for the parameter labels
+        End If
 
-        'Adds range for the parameter receivers
-        lstGgParameterUcr.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7})
+        If lstGgParameterUcr.Count = 0 Then
+            'Adds range for the parameter receivers
+            lstGgParameterUcr.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7})
+        End If
 
+        If clsCurrGeom.clsGgParameters.Count < 7 Then
+            lblGgParam7.Visible = False
+            ucrReceiverParam7.Visible = False
+        Else
+            lblGgParam7.Visible = True
+            ucrReceiverParam7.Visible = True
+        End If
+
+        'populating labels with appropriate names
+        If clsCurrGeom IsNot Nothing Then
+            For i = 0 To clsCurrGeom.clsGgParameters.Count - 1
+                lstGgParameterLabels(i).Text = clsCurrGeom.clsGgParameters(i).strGgParameterName
+            Next
+        End If
     End Sub
-
-
 End Class

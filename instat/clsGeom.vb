@@ -15,16 +15,15 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class Geoms
     Public strGeomName As String
-    Public clsGgParameter As List(Of GgParameters)
+    Public clsGgParameters As New List(Of GgParameters)
 
 
     Public Sub AddGgParameter(strGgParameterName As String, Optional ParameterValue As String = "")
         'will be adding parameters to the geom as well as the value of the parameter.
-
+        Dim NewGgParameter As New GgParameters
+        NewGgParameter.strGgParameterName = strGgParameterName
+        clsGgParameters.Add(NewGgParameter)
     End Sub
-
-
-
 End Class
 
 Public Class GgParameters
