@@ -63,9 +63,9 @@ Public Class dlgTransformText
 
     Private Sub SetDefaults()
         ucrSelectorForTransformText.Reset()
+        ucrInputPrefixForNewColumn.SetName("New_Text")
         ucrSelectorForTransformText.Focus()
         ucrInputPrefixForNewColumn.Reset()
-        ucrInputPrefixForNewColumn.SetName("New_Text")
         ucrInputTo.Visible = False
         lblTo.Visible = False
         lblWidth.Visible = False
@@ -85,7 +85,7 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrReceiverTransformText.IsEmpty = False Or ucrReceiverOrColumn.IsEmpty = False) And (rdoConvertCase.Checked = True Or rdoLength.Checked = True Or rdoPad.Checked = True Or rdoTrim.Checked = True Or rdoWords.Checked = True) Then
+        If (ucrReceiverTransformText.IsEmpty = False Or ucrReceiverOrColumn.IsEmpty = False Or ucrReceiverOrColumn.IsEmpty = False) And (rdoConvertCase.Checked = True Or rdoLength.Checked = True Or rdoPad.Checked = True Or rdoTrim.Checked = True Or rdoWords.Checked = True Or rdoOrColumn.Checked = True) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -130,7 +130,7 @@ Public Class dlgTransformText
             ucrInputPad.Visible = False
 
         ElseIf rdoLength.Checked Then
-            ucrBase.clsRsyntax.SetFunction("stringr::str_legth")
+            ucrBase.clsRsyntax.SetFunction("stringr::str_length")
             lblWidth.Visible = False
             nudWidth.Visible = False
             chkLeft.Visible = False
@@ -211,43 +211,58 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub ucrInputTo_Namechanged() Handles ucrInputTo.NameChanged
-        Select Case ucrInputTo.GetText
-            Case "Lower"
-                ucrBase.clsRsyntax.SetFunction("stringr::str_to_lower")
-            Case "Upper"
-                ucrBase.clsRsyntax.SetFunction("stringr::str_to_upper")
-            Case "Title"
-                ucrBase.clsRsyntax.SetFunction("stringr::str_to_title")
-        End Select
+        If rdoConvertCase.Checked Then
+            Select Case ucrInputTo.GetText
+                Case "Lower"
+                    ucrBase.clsRsyntax.SetFunction("stringr::str_to_lower")
+                Case "Upper"
+                    ucrBase.clsRsyntax.SetFunction("stringr::str_to_upper")
+                Case "Title"
+                    ucrBase.clsRsyntax.SetFunction("stringr::str_to_title")
+            End Select
+        Else
+        End If
     End Sub
 
     Private Sub ucrInputPad_Namechanged() Handles ucrInputPad.NameChanged
-        Select Case ucrInputPad.GetText
-            Case "Space"
-                ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & " " & Chr(34))
-            Case "Hash"
-                ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "#" & Chr(34))
-            Case "Hyphen"
-                ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "-" & Chr(34))
-            Case "Period"
-                ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "." & Chr(34))
-            Case "Underscore"
-                ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "_" & Chr(34))
-            Case Else
-                ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
-        End Select
+        If rdoPad.Checked Then
+            Select Case ucrInputPad.GetText
+                Case "Space"
+                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & " " & Chr(34))
+                Case "Hash"
+                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "#" & Chr(34))
+                Case "Hyphen"
+                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "-" & Chr(34))
+                Case "Period"
+                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "." & Chr(34))
+                Case "Underscore"
+                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "_" & Chr(34))
+                Case Else
+                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
+            End Select
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("pad")
+        End If
     End Sub
 
     Private Sub chkLeft_CheckedChanged(sender As Object, e As EventArgs) Handles chkLeft.CheckedChanged
-        If chkLeft.Checked Then
-            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
+        If rdoPad.Checked Then
+            If chkLeft.Checked Then
+                ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
+            Else
+                ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "right" & Chr(34))
+            End If
         Else
-            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "right" & Chr(34))
+            ucrBase.clsRsyntax.RemoveParameter("side")
         End If
     End Sub
 
     Private Sub nudWidth_ValueChanged(sender As Object, e As EventArgs) Handles nudWidth.ValueChanged
-        ucrBase.clsRsyntax.AddParameter("width", nudWidth.Value)
+        If rdoPad.Checked Then
+            ucrBase.clsRsyntax.AddParameter("width", nudWidth.Value)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("width")
+        End If
     End Sub
 
     Private Sub ucrReceiverOrColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverOrColumn.SelectionChanged
@@ -260,24 +275,36 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub ucrInputSeparator_Namechanged() Handles ucrInputSeparator.NameChanged
-        Select Case ucrInputSeparator.GetText
-            Case "space"
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & " " & Chr(34))
-            Case "Period"
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "." & Chr(34))
-            Case "colon"
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ":" & Chr(34))
-            Case "Underscore"
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "_" & Chr(34))
-        End Select
+        If rdoWords.Checked Then
+            Select Case ucrInputSeparator.GetText
+                Case "space"
+                    ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & " " & Chr(34))
+                Case "Period"
+                    ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "." & Chr(34))
+                Case "colon"
+                    ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ":" & Chr(34))
+                Case "Underscore"
+                    ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "_" & Chr(34))
+            End Select
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("sep")
+        End If
     End Sub
 
     Private Sub nudFirstWord_TextChanged(sender As Object, e As EventArgs) Handles nudFirstWord.TextChanged
-        ucrBase.clsRsyntax.AddParameter("start", nudFirstWord.Value)
+        If rdoWords.Checked Then
+            ucrBase.clsRsyntax.AddParameter("start", nudFirstWord.Value)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("start")
+        End If
 
     End Sub
 
     Private Sub nudLastWord_TextChanged(sender As Object, e As EventArgs) Handles nudLastWord.TextChanged
-        ucrBase.clsRsyntax.AddParameter("end", nudLastWord.Value)
+        If rdoWords.Checked Then
+            ucrBase.clsRsyntax.AddParameter("end", nudLastWord.Value)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("end")
+        End If
     End Sub
 End Class
