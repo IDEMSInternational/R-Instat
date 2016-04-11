@@ -233,32 +233,19 @@ Public Class dlgTransformText
             ucrBase.clsRsyntax.RemoveParameter("side")
 
         Else
-
-
-
         End If
-
-
     End Sub
-
-
-
-
-
-
 
     Private Sub ucrReceiverOrColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverOrColumn.SelectionChanged
 
         If chkOrColumn.Checked Then
-            End If
-            If Not ucrReceiverOrColumn.IsEmpty Then
-                ucrBase.clsRsyntax.AddParameter("start", clsRFunctionParameter:=ucrReceiverOrColumn.GetVariables())
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("start")
-            End If
-
-
-            TestOkEnabled()
+        End If
+        If Not ucrReceiverOrColumn.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("start", clsRFunctionParameter:=ucrReceiverOrColumn.GetVariables())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("start")
+        End If
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrInputTo_NameChanged() Handles ucrInputTo.NameChanged
@@ -337,19 +324,20 @@ Public Class dlgTransformText
     Private Sub ucrInputSeparator_NameChanged() Handles ucrInputSeparator.NameChanged
         If rdoWords.Checked Then
             Select Case ucrInputSeparator.GetText
-                Case "space"
+                Case "Space"
                     ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & " " & Chr(34))
                 Case "Period"
                     ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "." & Chr(34))
-                Case "colon"
+                Case "Colon"
                     ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ":" & Chr(34))
                 Case "Underscore"
                     ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "_" & Chr(34))
+                Case Else
+                    ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ucrInputSeparator.GetText & Chr(34))
             End Select
-
-
         Else
             ucrBase.clsRsyntax.RemoveParameter("sep")
+
         End If
 
     End Sub

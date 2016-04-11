@@ -25,6 +25,7 @@ Partial Class dlgTransformText
         Me.lblColumnToTransform = New System.Windows.Forms.Label()
         Me.lblPrefixForNewColumns = New System.Windows.Forms.Label()
         Me.grpOperation = New System.Windows.Forms.GroupBox()
+        Me.chkOrColumn = New System.Windows.Forms.CheckBox()
         Me.chkLeft = New System.Windows.Forms.CheckBox()
         Me.lblSeparator = New System.Windows.Forms.Label()
         Me.ucrInputSeparator = New instat.ucrInputComboBox()
@@ -48,7 +49,6 @@ Partial Class dlgTransformText
         Me.ucrReceiverTransformText = New instat.ucrReceiverSingle()
         Me.ucrSelectorForTransformText = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.chkOrColumn = New System.Windows.Forms.CheckBox()
         Me.grpOperation.SuspendLayout()
         CType(Me.nudLastWord, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudFirstWord, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -102,6 +102,16 @@ Partial Class dlgTransformText
         Me.grpOperation.TabStop = False
         Me.grpOperation.Text = "Operation"
         '
+        'chkOrColumn
+        '
+        Me.chkOrColumn.AutoSize = True
+        Me.chkOrColumn.Location = New System.Drawing.Point(163, 132)
+        Me.chkOrColumn.Name = "chkOrColumn"
+        Me.chkOrColumn.Size = New System.Drawing.Size(75, 17)
+        Me.chkOrColumn.TabIndex = 20
+        Me.chkOrColumn.Text = "Or Column"
+        Me.chkOrColumn.UseVisualStyleBackColor = True
+        '
         'chkLeft
         '
         Me.chkLeft.AutoSize = True
@@ -131,6 +141,8 @@ Partial Class dlgTransformText
         'nudLastWord
         '
         Me.nudLastWord.Location = New System.Drawing.Point(105, 169)
+        Me.nudLastWord.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
+        Me.nudLastWord.Minimum = New Decimal(New Integer() {100000, 0, 0, -2147483648})
         Me.nudLastWord.Name = "nudLastWord"
         Me.nudLastWord.Size = New System.Drawing.Size(51, 20)
         Me.nudLastWord.TabIndex = 16
@@ -164,6 +176,8 @@ Partial Class dlgTransformText
         'nudFirstWord
         '
         Me.nudFirstWord.Location = New System.Drawing.Point(105, 130)
+        Me.nudFirstWord.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nudFirstWord.Minimum = New Decimal(New Integer() {10000, 0, 0, -2147483648})
         Me.nudFirstWord.Name = "nudFirstWord"
         Me.nudFirstWord.Size = New System.Drawing.Size(51, 20)
         Me.nudFirstWord.TabIndex = 11
@@ -302,16 +316,6 @@ Partial Class dlgTransformText
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
-        '
-        'chkOrColumn
-        '
-        Me.chkOrColumn.AutoSize = True
-        Me.chkOrColumn.Location = New System.Drawing.Point(163, 132)
-        Me.chkOrColumn.Name = "chkOrColumn"
-        Me.chkOrColumn.Size = New System.Drawing.Size(75, 17)
-        Me.chkOrColumn.TabIndex = 20
-        Me.chkOrColumn.Text = "Or Column"
-        Me.chkOrColumn.UseVisualStyleBackColor = True
         '
         'dlgTransformText
         '
