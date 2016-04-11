@@ -32,11 +32,12 @@ Partial Class dlgDotPlot
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblSecondFactor = New System.Windows.Forms.Label()
+        Me.ucrSaveDotPlot = New instat.ucrSaveGraph()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 221)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 252)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 9
@@ -68,7 +69,7 @@ Partial Class dlgDotPlot
         '
         'cmdDotPlotOptions
         '
-        Me.cmdDotPlotOptions.Location = New System.Drawing.Point(13, 191)
+        Me.cmdDotPlotOptions.Location = New System.Drawing.Point(6, 190)
         Me.cmdDotPlotOptions.Name = "cmdDotPlotOptions"
         Me.cmdDotPlotOptions.Size = New System.Drawing.Size(110, 23)
         Me.cmdDotPlotOptions.TabIndex = 7
@@ -78,12 +79,12 @@ Partial Class dlgDotPlot
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(336, 191)
+        Me.cmdOptions.Location = New System.Drawing.Point(137, 190)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdOptions.TabIndex = 8
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrFactorReceiver
@@ -122,11 +123,19 @@ Partial Class dlgDotPlot
         Me.lblSecondFactor.Tag = "Second_Factor_Optional"
         Me.lblSecondFactor.Text = "Second Factor(Optional)"
         '
+        'ucrSaveDotPlot
+        '
+        Me.ucrSaveDotPlot.Location = New System.Drawing.Point(9, 220)
+        Me.ucrSaveDotPlot.Name = "ucrSaveDotPlot"
+        Me.ucrSaveDotPlot.Size = New System.Drawing.Size(265, 27)
+        Me.ucrSaveDotPlot.TabIndex = 10
+        '
         'dlgDotPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 285)
+        Me.ClientSize = New System.Drawing.Size(423, 311)
+        Me.Controls.Add(Me.ucrSaveDotPlot)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdDotPlotOptions)
         Me.Controls.Add(Me.ucrDotPlotSelector)
@@ -159,4 +168,5 @@ Partial Class dlgDotPlot
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblSecondFactor As Label
+    Friend WithEvents ucrSaveDotPlot As ucrSaveGraph
 End Class
