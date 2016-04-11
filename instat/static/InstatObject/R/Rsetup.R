@@ -11,3 +11,12 @@ library(extRemes)
 library(ggfortify)
 library(GGally)
 library(CCA)
+
+setwd(dirname(parent.frame(2)$ofile))
+
+source("instat_object.R")
+source("data_object.R")
+source("labels_and_defaults.R")
+source("stand_alone_functions.R")
+files <- sort(dir(file.path(getwd(), 'Backend_Components/'),pattern=".R$", full.names = TRUE))
+lapply(files, source, chdir = TRUE)
