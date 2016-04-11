@@ -11,9 +11,15 @@
     End Sub
 
     Public Sub SetGeoms()
-        For Each Geom In lstAllGeoms
-            cboGeomList.Items.Add(Geom.strGeomName)
+        Dim GeomCount As New Geoms
+        lstCurrentGeoms.Clear()
+        cboGeomList.Items.Clear()
+
+        For Each GeomCount In lstAllGeoms
+            cboGeomList.Items.Add(GeomCount.strGeomName)
         Next
+        lstCurrentGeoms.Add(GeomCount)
+
         cboGeomList.SelectedIndex = 0
     End Sub
     Public Sub CreateGeomList()
@@ -30,11 +36,9 @@
         clsgeom_boxplot.AddGgParameter("width")
         lstAllGeoms.Add(clsgeom_boxplot)
     End Sub
-
-    'Public Event cboGeomListIndexChanged(sender As Object, e As EventArgs)
-
-    'Private Sub cboGeomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
-    '    clsCurrGeom = lstCurrentGeoms(cboGeomList.SelectedIndex)
-    '    RaiseEvent cboGeomListIndexChanged(sender, e)
-    'End Sub
+    Public Event cboGeomListIndexChanged(sender As Object, e As EventArgs)
+    Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
+        clsCurrGeom = lstCurrentGeoms(cboGeomList.SelectedIndex)
+        RaiseEvent cboGeomListIndexChanged(sender, e)
+    End Sub
 End Class
