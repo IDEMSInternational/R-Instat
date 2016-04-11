@@ -22,6 +22,26 @@ Public Class dlgScatterPlot
     Private bFirstLoad As Boolean = True
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRaesFunction.SetRCommand("aes")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+
+        clsRgeom_scatterplotFunction.SetRCommand("geom_point")
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
+
+        ucrReceiverX.Selector = ucrSelectorScatterPlot
+        ucrReceiverX.SetDataType("numeric")
+        ucrFactorOptionalReceiver.Selector = ucrSelectorScatterPlot
+        ucrFactorOptionalReceiver.SetDataType("factor")
+
+
+        ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
+        ucrVariablesAsFactorForScatter.SetSelector(ucrSelectorScatterPlot)
+        ucrVariablesAsFactorForScatter.SetDataType("numeric")
+
         If bFirstLoad Then
             'setdefauts
             InitialiseDialog()
@@ -33,8 +53,8 @@ Public Class dlgScatterPlot
 
     End Sub
 
-    Private Sub ucrSelectorForScatter_DataFrameChanged() Handles ucrSelectorForScatter.DataFrameChanged
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForScatter.ucrAvailableDataFrames.clsCurrDataFrame)
+    Private Sub ucrSelectorForScatter_DataFrameChanged() Handles ucrSelectorScatterPlot.DataFrameChanged
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorScatterPlot.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
     Private Sub ucrReceiverX_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverX.SelectionChanged
@@ -57,7 +77,7 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        'tests when okay Is enable
+        ' tests when okay Is enable
         If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactorForScatter.IsEmpty Then
             ucrBase.OKEnabled(False)
         Else
@@ -66,29 +86,14 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsRaesFunction.SetRCommand("aes")
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-
-        clsRgeom_scatterplotFunction.SetRCommand("geom_point")
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
-
-        ucrReceiverX.Selector = ucrSelectorForScatter
-        ucrReceiverX.SetDataType("numeric")
-        ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
-        ucrFactorOptionalReceiver.SetDataType("factor")
 
 
-        ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
-        ucrVariablesAsFactorForScatter.SetSelector(ucrSelectorForScatter)
-        ucrVariablesAsFactorForScatter.SetDataType("numeric")
+
     End Sub
     Private Sub SetDefaults()
         'setDefaults
-        ucrSelectorForScatter.Reset()
-        ucrSelectorForScatter.Focus()
+        ucrSelectorScatterPlot.Reset()
+        ucrSelectorScatterPlot.Focus()
         TestOkEnabled()
     End Sub
 
