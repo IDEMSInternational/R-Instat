@@ -152,7 +152,7 @@ instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrit
 )
 
 instat_obj$methods(replace_instat_object = function(new_instatObj) {
-  .self$data_objects<-new_instatObj$data_objects 
+  data_objects<<-new_instatObj$data_objects 
   .self$set_meta(new_instatObj$metadata)
   .self$set_models(new_instatObj$models)
   data_objects_changed <<- TRUE
