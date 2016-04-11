@@ -35,18 +35,12 @@ Public Class sdgPlots
     Private Sub SetDefaults()
         ucr1stFactorReceiver.SetMeAsReceiver()
         chkWrapOptions.Checked = False
-        lblNoOfColumns.Visible = False
-        txtNoOfColumns.Visible = False
-        txtNoOfRows.Visible = False
         chkFreeScalesX.Checked = False
         chkFreeScalesY.Checked = False
         rdoHorizontal.Checked = True
+        chkDisplayYTitle.Checked = False
+        chkDisplayYTitle.Checked = False
         chkMargin.Checked = False
-        txtXTitle.Visible = False
-        txtYTitle.Visible = False
-
-        grpLabels.Visible = False
-        grpTitle.Visible = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -208,7 +202,9 @@ Public Class sdgPlots
             clsRsyntax.AddOperatorParameter("xlab", clsRFunc:=clsXLabFunction)
         Else
             clsRsyntax.RemoveOperatorParameter("xlab")
+            txtXTitle.Visible = False
         End If
+
     End Sub
 
     Private Sub chkDisplayYTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayYTitle.CheckedChanged
@@ -218,10 +214,15 @@ Public Class sdgPlots
             clsRsyntax.AddOperatorParameter("ylab", clsRFunc:=clsYLabFunction)
         Else
             clsRsyntax.RemoveOperatorParameter("ylab")
+            txtYTitle.Visible = False
         End If
     End Sub
 
     Private Sub txtYTitle_Leave(sender As Object, e As EventArgs) Handles txtYTitle.Leave
         clsYLabFunction.AddParameter("label", Chr(34) & txtYTitle.Text & Chr(34))
+    End Sub
+
+    Private Sub chkFreeScalesY_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScalesY.CheckedChanged
+
     End Sub
 End Class
