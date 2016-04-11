@@ -102,7 +102,7 @@ instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrit
 { 
   if(class(data_RDS) == "instat_obj"){ 
     if (!keep_existing & include_models & include_graphics & include_metadata & include_logs){
-      .self<<-data_RDS
+      .self$data_objects<-data_RDS$data_objects
       data_objects_changed <<- TRUE
     } else {
       if (!keep_existing) {
