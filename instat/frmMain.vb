@@ -58,6 +58,7 @@ Public Class frmMain
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
         clsRLink.SetOutput(frmCommand.txtCommand)
+        REngine.SetEnvironmentVariables()
         clsRLink.clsEngine = REngine.GetInstance()
         clsRLink.clsEngine.Initialize()
         'Sets up R source files
@@ -371,11 +372,6 @@ Public Class frmMain
     Private Sub ExpandToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgExpand.ShowDialog()
     End Sub
-
-    Private Sub FactorToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgfactor.ShowDialog()
-    End Sub
-
     Private Sub NameToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgName.ShowDialog()
     End Sub
@@ -386,10 +382,6 @@ Public Class frmMain
 
     Private Sub AlignmentToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgAlignment.ShowDialog()
-    End Sub
-
-    Private Sub FactorToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuManageFactor.Click
-        dlgfactor.ShowDialog()
     End Sub
     Private Sub OrthogonalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOrthogonal.Click
         dlgOrthogonal.ShowDialog()
@@ -955,10 +947,6 @@ Public Class frmMain
         dlgGeneralANOVA.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsWindrose_Click(sender As Object, e As EventArgs) Handles mnuGraphicsWindrose.Click
-        dlgWindrose.ShowDialog()
-    End Sub
-
     Private Sub mnuStatisticsTablesGroup_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesGroup.Click
         dlgGroupTables.ShowDialog()
     End Sub
@@ -989,6 +977,26 @@ Public Class frmMain
 
     Private Sub mnuStatisticsRegressionGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionGeneral.Click
         dlgGeneralRegression.ShowDialog()
+    End Sub
+
+    Private Sub WindRoseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindRoseToolStripMenuItem.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub ThemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ThemesToolStripMenuItem.Click
+        dlgThemes.ShowDialog()
+    End Sub
+
+    Private Sub CombineToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineToolStripMenuItem.Click
+        dlgCombineforGraphics.ShowDialog()
+    End Sub
+
+    Private Sub PopulationPyramidsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PopulationPyramidsToolStripMenuItem.Click
+        dlgPopulationPyramids.ShowDialog()
+    End Sub
+
+    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneralToolStripMenuItem.Click
+        dlgGeneralForGraphics.ShowDialog()
     End Sub
 End Class
 
