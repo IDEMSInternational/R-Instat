@@ -21,10 +21,19 @@ Public Class ucrSelector
     Public Event ResetAll()
     Public Event ResetReceivers()
     Public Event VariablesInReceiversChanged()
-    Public WithEvents lstVariablesInReceivers As New List(Of String)
+    Public lstVariablesInReceivers As List(Of String)
+    Public bFirstLoad As Boolean = True
 
-    Private Sub ucrdataselection_load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub ucrSelection_load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadList()
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub InitialiseDialog()
+        lstVariablesInReceivers = New List(Of String)
     End Sub
 
     Protected Sub OnResetAll()
@@ -44,6 +53,7 @@ Public Class ucrSelector
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
         LoadList()
+        InitialiseDialog()
         'lstItemsInReceivers.Clear()
     End Sub
 
