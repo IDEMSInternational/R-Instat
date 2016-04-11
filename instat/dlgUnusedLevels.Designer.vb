@@ -22,42 +22,20 @@ Partial Class dlgUnusedLevels
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorFactorColumn = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverFactorColumn = New instat.ucrReceiverSingle()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.ucrRemoveUnusedFactorLevels = New instat.ucrFactor()
+        Me.ucrReceiverFactorColumn = New instat.ucrReceiverSingle()
+        Me.ucrSelectorFactorColumn = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(75, 292)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrSelectorFactorColumn
-        '
-        Me.ucrSelectorFactorColumn.Location = New System.Drawing.Point(5, 2)
-        Me.ucrSelectorFactorColumn.Name = "ucrSelectorFactorColumn"
-        Me.ucrSelectorFactorColumn.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorFactorColumn.TabIndex = 1
-        '
-        'ucrReceiverFactorColumn
-        '
-        Me.ucrReceiverFactorColumn.Location = New System.Drawing.Point(275, 74)
-        Me.ucrReceiverFactorColumn.Name = "ucrReceiverFactorColumn"
-        Me.ucrReceiverFactorColumn.Selector = Nothing
-        Me.ucrReceiverFactorColumn.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverFactorColumn.TabIndex = 2
         '
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(281, 61)
+        Me.lblFactor.Location = New System.Drawing.Point(236, 12)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(37, 13)
-        Me.lblFactor.TabIndex = 3
+        Me.lblFactor.TabIndex = 1
         Me.lblFactor.Tag = "Factor"
         Me.lblFactor.Text = "Factor"
         '
@@ -66,17 +44,39 @@ Partial Class dlgUnusedLevels
         Me.ucrRemoveUnusedFactorLevels.AutoSize = True
         Me.ucrRemoveUnusedFactorLevels.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrRemoveUnusedFactorLevels.clsReceiver = Nothing
-        Me.ucrRemoveUnusedFactorLevels.Location = New System.Drawing.Point(275, 106)
+        Me.ucrRemoveUnusedFactorLevels.Location = New System.Drawing.Point(231, 57)
         Me.ucrRemoveUnusedFactorLevels.Name = "ucrRemoveUnusedFactorLevels"
         Me.ucrRemoveUnusedFactorLevels.shtCurrSheet = Nothing
         Me.ucrRemoveUnusedFactorLevels.Size = New System.Drawing.Size(267, 181)
-        Me.ucrRemoveUnusedFactorLevels.TabIndex = 4
+        Me.ucrRemoveUnusedFactorLevels.TabIndex = 3
+        '
+        'ucrReceiverFactorColumn
+        '
+        Me.ucrReceiverFactorColumn.Location = New System.Drawing.Point(230, 25)
+        Me.ucrReceiverFactorColumn.Name = "ucrReceiverFactorColumn"
+        Me.ucrReceiverFactorColumn.Selector = Nothing
+        Me.ucrReceiverFactorColumn.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverFactorColumn.TabIndex = 2
+        '
+        'ucrSelectorFactorColumn
+        '
+        Me.ucrSelectorFactorColumn.Location = New System.Drawing.Point(5, 2)
+        Me.ucrSelectorFactorColumn.Name = "ucrSelectorFactorColumn"
+        Me.ucrSelectorFactorColumn.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorFactorColumn.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(5, 238)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 4
         '
         'dlgUnusedLevels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(558, 345)
+        Me.ClientSize = New System.Drawing.Size(416, 290)
         Me.Controls.Add(Me.ucrRemoveUnusedFactorLevels)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrReceiverFactorColumn)
@@ -86,7 +86,7 @@ Partial Class dlgUnusedLevels
         Me.Name = "dlgUnusedLevels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Remove_Unused_Factor_Levels"
-        Me.Text = "Remove Unused Factor Levels"
+        Me.Text = "Remove Unused Levels"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
