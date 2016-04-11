@@ -17,6 +17,8 @@ Imports instat.Translations
 Public Class sdgPlots
     Public clsRsyntax As RSyntax
     Public clsRfacetFunction As New RFunction
+    Public clsXLabFunction As New RFunction
+    Public clsYLabFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -25,6 +27,10 @@ Public Class sdgPlots
         ucr2ndFactorReceiver.Selector = ucrAddRemove
         ucr2ndFactorReceiver.SetDataType("factor")
         autoTranslate(Me)
+
+        grpLabels.Visible = False
+        grpTitle.Visible = False
+
 
         If bFirstLoad Then
             bFirstLoad = False
@@ -163,5 +169,53 @@ Public Class sdgPlots
         chkMargin.Visible = True
         chkFreeScalesX.Visible = True
         chkFreeScalesY.Visible = True
+    End Sub
+
+    Private Sub chkChangeTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkChangeTitle.CheckedChanged
+        If chkChangeTitle.Checked Then
+            txtChangeTitle.Visible = True
+        Else
+            txtChangeTitle.Visible = False
+        End If
+    End Sub
+
+    Private Sub chkDisplayLegend_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegend.CheckedChanged
+        If chkDisplayLegend.Checked Then
+            grpLabels.Visible = True
+            grpTitle.Visible = True
+        Else
+            grpLabels.Visible = False
+            grpTitle.Visible = False
+        End If
+    End Sub
+
+    Private Sub txtXTitle_Leave(sender As Object, e As EventArgs) Handles txtXTitle.Leave
+        clsXLabFunction.AddParameter("label", Chr(34) & txtXTitle.Text & Chr(34))
+    End Sub
+
+    Private Sub chkXDisplayTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkXDisplayTitle.CheckedChanged
+        If chkXDisplayTitle.Checked Then
+            clsXLabFunction.SetRCommand("xlab")
+            clsRsyntax.AddOperatorParameter("xlab", clsRFunc:=clsXLabFunction)
+        Else
+            clsRsyntax.RemoveOperatorParameter("xlab")
+        End If
+    End Sub
+
+    Private Sub chkDisplayYTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayYTitle.CheckedChanged
+        If chkDisplayYTitle.Checked Then
+            clsYLabFunction.SetRCommand("ylab")
+            clsRsyntax.AddOperatorParameter("ylab", clsRFunc:=clsYLabFunction)
+        Else
+            clsRsyntax.RemoveOperatorParameter("ylab")
+        End If
+    End Sub
+
+    Private Sub txtYTitle_Leave(sender As Object, e As EventArgs) Handles txtYTitle.Leave
+        clsYLabFunction.AddParameter("label", Chr(34) & txtYTitle.Text & Chr(34))
+    End Sub
+
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles txtYUpperLimit.TextChanged
+
     End Sub
 End Class
