@@ -35,6 +35,7 @@ Partial Class dlgHistogram
         Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrXReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSaveHist = New instat.ucrSaveGraph()
         Me.SuspendLayout()
         '
         'lblVariableToPlot
@@ -49,17 +50,17 @@ Partial Class dlgHistogram
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(255, 215)
+        Me.cmdOptions.Location = New System.Drawing.Point(180, 217)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(87, 23)
         Me.cmdOptions.TabIndex = 9
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'cmdHistogramOptions
         '
-        Me.cmdHistogramOptions.Location = New System.Drawing.Point(254, 186)
+        Me.cmdHistogramOptions.Location = New System.Drawing.Point(6, 217)
         Me.cmdHistogramOptions.Name = "cmdHistogramOptions"
         Me.cmdHistogramOptions.Size = New System.Drawing.Size(103, 23)
         Me.cmdHistogramOptions.TabIndex = 8
@@ -115,7 +116,7 @@ Partial Class dlgHistogram
         '
         'cmdDensityOptions
         '
-        Me.cmdDensityOptions.Location = New System.Drawing.Point(255, 186)
+        Me.cmdDensityOptions.Location = New System.Drawing.Point(6, 217)
         Me.cmdDensityOptions.Name = "cmdDensityOptions"
         Me.cmdDensityOptions.Size = New System.Drawing.Size(103, 23)
         Me.cmdDensityOptions.TabIndex = 8
@@ -125,7 +126,7 @@ Partial Class dlgHistogram
         '
         'cmdFrequencyOptions
         '
-        Me.cmdFrequencyOptions.Location = New System.Drawing.Point(255, 186)
+        Me.cmdFrequencyOptions.Location = New System.Drawing.Point(6, 217)
         Me.cmdFrequencyOptions.Name = "cmdFrequencyOptions"
         Me.cmdFrequencyOptions.Size = New System.Drawing.Size(163, 23)
         Me.cmdFrequencyOptions.TabIndex = 8
@@ -150,7 +151,7 @@ Partial Class dlgHistogram
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(7, 241)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 275)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 10
@@ -163,11 +164,19 @@ Partial Class dlgHistogram
         Me.ucrXReceiver.Size = New System.Drawing.Size(106, 26)
         Me.ucrXReceiver.TabIndex = 5
         '
+        'ucrSaveHist
+        '
+        Me.ucrSaveHist.Location = New System.Drawing.Point(6, 242)
+        Me.ucrSaveHist.Name = "ucrSaveHist"
+        Me.ucrSaveHist.Size = New System.Drawing.Size(269, 27)
+        Me.ucrSaveHist.TabIndex = 11
+        '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 294)
+        Me.ClientSize = New System.Drawing.Size(427, 327)
+        Me.Controls.Add(Me.ucrSaveHist)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.rdoFreequencyPolygon)
         Me.Controls.Add(Me.rdoDensity)
@@ -203,4 +212,5 @@ Partial Class dlgHistogram
     Friend WithEvents lblfactor As Label
     Friend WithEvents cmdDensityOptions As Button
     Friend WithEvents cmdFrequencyOptions As Button
+    Friend WithEvents ucrSaveHist As ucrSaveGraph
 End Class
