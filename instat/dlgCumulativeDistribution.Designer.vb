@@ -33,6 +33,7 @@ Partial Class dlgCumulativeDistribution
         Me.ucrVariateReceiver = New instat.ucrReceiverSingle()
         Me.ucrCumDistSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveCumDist = New instat.ucrSaveGraph()
         Me.SuspendLayout()
         '
         'lblvariates
@@ -69,7 +70,7 @@ Partial Class dlgCumulativeDistribution
         'chkCountsOnYAxis
         '
         Me.chkCountsOnYAxis.AutoSize = True
-        Me.chkCountsOnYAxis.Location = New System.Drawing.Point(12, 217)
+        Me.chkCountsOnYAxis.Location = New System.Drawing.Point(138, 181)
         Me.chkCountsOnYAxis.Name = "chkCountsOnYAxis"
         Me.chkCountsOnYAxis.Size = New System.Drawing.Size(108, 17)
         Me.chkCountsOnYAxis.TabIndex = 6
@@ -80,7 +81,7 @@ Partial Class dlgCumulativeDistribution
         'chkIncludePoints
         '
         Me.chkIncludePoints.AutoSize = True
-        Me.chkIncludePoints.Location = New System.Drawing.Point(13, 254)
+        Me.chkIncludePoints.Location = New System.Drawing.Point(266, 181)
         Me.chkIncludePoints.Name = "chkIncludePoints"
         Me.chkIncludePoints.Size = New System.Drawing.Size(93, 17)
         Me.chkIncludePoints.TabIndex = 7
@@ -90,7 +91,7 @@ Partial Class dlgCumulativeDistribution
         '
         'cmdLineOptions
         '
-        Me.cmdLineOptions.Location = New System.Drawing.Point(13, 294)
+        Me.cmdLineOptions.Location = New System.Drawing.Point(13, 211)
         Me.cmdLineOptions.Name = "cmdLineOptions"
         Me.cmdLineOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdLineOptions.TabIndex = 8
@@ -100,7 +101,7 @@ Partial Class dlgCumulativeDistribution
         '
         'cmdPlotOptions
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(282, 294)
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(110, 215)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdPlotOptions.TabIndex = 9
@@ -133,16 +134,24 @@ Partial Class dlgCumulativeDistribution
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(7, 331)
+        Me.ucrBase.Location = New System.Drawing.Point(4, 280)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 11
+        '
+        'ucrSaveCumDist
+        '
+        Me.ucrSaveCumDist.Location = New System.Drawing.Point(12, 247)
+        Me.ucrSaveCumDist.Name = "ucrSaveCumDist"
+        Me.ucrSaveCumDist.Size = New System.Drawing.Size(265, 27)
+        Me.ucrSaveCumDist.TabIndex = 14
         '
         'dlgCumulativeDistribution
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 390)
+        Me.ClientSize = New System.Drawing.Size(410, 335)
+        Me.Controls.Add(Me.ucrSaveCumDist)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.ucrVariateReceiver)
         Me.Controls.Add(Me.cmdPlotOptions)
@@ -175,4 +184,5 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents cmdPlotOptions As Button
     Friend WithEvents ucrVariateReceiver As ucrReceiverSingle
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
+    Friend WithEvents ucrSaveCumDist As ucrSaveGraph
 End Class
