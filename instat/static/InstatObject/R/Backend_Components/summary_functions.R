@@ -1,9 +1,15 @@
 #Methods temporarily here to avoid conflicts
+
+instat_obj$methods(append_summaries_to_data_object = function(out, data_name, columns_to_summarise, summaries, factors) {
+} 
+)
+
 instat_obj$methods(calculate_summary = function(data_name, columns_to_summarise, summaries, factors, store_results = TRUE, drop = FALSE, return_output = TRUE,...) {
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
   out = data_objects[[data_name]]$calculate_summary(columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, ... = ...)
+  if(store_results) .self$append_summaries_to_data_object(out, data_name, columns_to_summarise, summaries, factors)
   if(return_output) return(out)
 } 
 )
