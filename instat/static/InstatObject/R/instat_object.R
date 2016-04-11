@@ -102,8 +102,7 @@ instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrit
 { 
   if(class(data_RDS) == "instat_obj"){ 
     if (!keep_existing & include_models & include_graphics & include_metadata & include_logs){
-      .self$data_objects<-data_RDS$data_objects
-      data_objects_changed <<- TRUE
+      .self$replace_instat_object(new_instatObj = data_RDS)
     } else {
       if (!keep_existing) {
         .self$clear_data()
@@ -152,7 +151,13 @@ instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrit
 }
 )
 
-
+instat_obj$methods(replace_instat_object = function(new_instatObj) {
+  .self$data_objects<-new_instatObj$data_objects 
+  .self$set_meta(new_instatObj$metadata)
+  .self$set_models(new_instatObj$models)
+  data_objects_changed <<- TRUE
+}
+)
 
 instat_obj$methods(set_meta = function(new_meta) {
   if( ! is.list(new_meta) ) {
