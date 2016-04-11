@@ -45,7 +45,7 @@ Public Class UcrGeomListWithParameters
 
         'populating labels with appropriate names
         If clsCurrGeom IsNot Nothing Then
-            For i = 0 To clsCurrGeom.clsGgParameters.Count - 1
+            For i = 0 To (clsCurrGeom.clsGgParameters.Count - 1)
                 lstGgParameterLabels(i).Text = clsCurrGeom.clsGgParameters(i).strGgParameterName
             Next
         End If
