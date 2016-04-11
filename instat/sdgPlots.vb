@@ -17,19 +17,19 @@ Imports instat.Translations
 Public Class sdgPlots
     Public clsRsyntax As RSyntax
     Public clsRfacetFunction As New RFunction
+    Public clsXLabFunction As New RFunction
+    Public clsYLabFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucr1stFactorReceiver.Selector = ucrAddRemove
-        ucr1stFactorReceiver.SetDataType("factor")
-        ucr2ndFactorReceiver.Selector = ucrAddRemove
-        ucr2ndFactorReceiver.SetDataType("factor")
-        autoTranslate(Me)
-
         If bFirstLoad Then
-            bFirstLoad = False
+            InitialiseDialog()
             SetDefaults()
+
+            bFirstLoad = False
         End If
+
+        autoTranslate(Me)
     End Sub
 
     Private Sub SetDefaults()
@@ -42,6 +42,20 @@ Public Class sdgPlots
         chkFreeScalesY.Checked = False
         rdoHorizontal.Checked = True
         chkMargin.Checked = False
+        txtXTitle.Visible = False
+        txtYTitle.Visible = False
+
+        grpLabels.Visible = False
+        grpTitle.Visible = False
+    End Sub
+
+    Private Sub InitialiseDialog()
+
+        ucr1stFactorReceiver.Selector = ucrAddRemove
+        ucr1stFactorReceiver.SetDataType("factor")
+        ucr2ndFactorReceiver.Selector = ucrAddRemove
+        ucr2ndFactorReceiver.SetDataType("factor")
+
     End Sub
 
     Private Sub chkWrapOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkWrapOptions.CheckedChanged
@@ -163,5 +177,51 @@ Public Class sdgPlots
         chkMargin.Visible = True
         chkFreeScalesX.Visible = True
         chkFreeScalesY.Visible = True
+    End Sub
+
+    Private Sub chkChangeTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkChangeTitle.CheckedChanged
+        If chkChangeTitle.Checked Then
+            txtChangeTitle.Visible = True
+        Else
+            txtChangeTitle.Visible = False
+        End If
+    End Sub
+
+    Private Sub chkDisplayLegend_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegend.CheckedChanged
+        If chkDisplayLegend.Checked Then
+            grpLabels.Visible = True
+            grpTitle.Visible = True
+        Else
+            grpLabels.Visible = False
+            grpTitle.Visible = False
+        End If
+    End Sub
+
+    Private Sub txtXTitle_Leave(sender As Object, e As EventArgs) Handles txtXTitle.Leave
+        clsXLabFunction.AddParameter("label", Chr(34) & txtXTitle.Text & Chr(34))
+    End Sub
+
+    Private Sub chkXDisplayTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkXDisplayTitle.CheckedChanged
+        If chkXDisplayTitle.Checked Then
+            txtXTitle.Visible = True
+            clsXLabFunction.SetRCommand("xlab")
+            clsRsyntax.AddOperatorParameter("xlab", clsRFunc:=clsXLabFunction)
+        Else
+            clsRsyntax.RemoveOperatorParameter("xlab")
+        End If
+    End Sub
+
+    Private Sub chkDisplayYTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayYTitle.CheckedChanged
+        If chkDisplayYTitle.Checked Then
+            txtYTitle.Visible = True
+            clsYLabFunction.SetRCommand("ylab")
+            clsRsyntax.AddOperatorParameter("ylab", clsRFunc:=clsYLabFunction)
+        Else
+            clsRsyntax.RemoveOperatorParameter("ylab")
+        End If
+    End Sub
+
+    Private Sub txtYTitle_Leave(sender As Object, e As EventArgs) Handles txtYTitle.Leave
+        clsYLabFunction.AddParameter("label", Chr(34) & txtYTitle.Text & Chr(34))
     End Sub
 End Class
