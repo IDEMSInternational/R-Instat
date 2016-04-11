@@ -32,7 +32,6 @@ Partial Class dlgTransformText
         Me.lblLastWord = New System.Windows.Forms.Label()
         Me.lblFirstWord = New System.Windows.Forms.Label()
         Me.ucrReceiverOrColumn = New instat.ucrReceiverSingle()
-        Me.rdoOrColumn = New System.Windows.Forms.RadioButton()
         Me.nudFirstWord = New System.Windows.Forms.NumericUpDown()
         Me.lblPad = New System.Windows.Forms.Label()
         Me.ucrInputPad = New instat.ucrInputComboBox()
@@ -49,6 +48,7 @@ Partial Class dlgTransformText
         Me.ucrReceiverTransformText = New instat.ucrReceiverSingle()
         Me.ucrSelectorForTransformText = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.chkOrColumn = New System.Windows.Forms.CheckBox()
         Me.grpOperation.SuspendLayout()
         CType(Me.nudLastWord, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudFirstWord, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,6 +75,7 @@ Partial Class dlgTransformText
         '
         'grpOperation
         '
+        Me.grpOperation.Controls.Add(Me.chkOrColumn)
         Me.grpOperation.Controls.Add(Me.chkLeft)
         Me.grpOperation.Controls.Add(Me.lblSeparator)
         Me.grpOperation.Controls.Add(Me.ucrInputSeparator)
@@ -82,7 +83,6 @@ Partial Class dlgTransformText
         Me.grpOperation.Controls.Add(Me.lblLastWord)
         Me.grpOperation.Controls.Add(Me.lblFirstWord)
         Me.grpOperation.Controls.Add(Me.ucrReceiverOrColumn)
-        Me.grpOperation.Controls.Add(Me.rdoOrColumn)
         Me.grpOperation.Controls.Add(Me.nudFirstWord)
         Me.grpOperation.Controls.Add(Me.lblPad)
         Me.grpOperation.Controls.Add(Me.ucrInputPad)
@@ -160,17 +160,6 @@ Partial Class dlgTransformText
         Me.ucrReceiverOrColumn.Selector = Nothing
         Me.ucrReceiverOrColumn.Size = New System.Drawing.Size(107, 26)
         Me.ucrReceiverOrColumn.TabIndex = 13
-        '
-        'rdoOrColumn
-        '
-        Me.rdoOrColumn.AutoSize = True
-        Me.rdoOrColumn.Location = New System.Drawing.Point(162, 133)
-        Me.rdoOrColumn.Name = "rdoOrColumn"
-        Me.rdoOrColumn.Size = New System.Drawing.Size(74, 17)
-        Me.rdoOrColumn.TabIndex = 12
-        Me.rdoOrColumn.TabStop = True
-        Me.rdoOrColumn.Text = "Or Column"
-        Me.rdoOrColumn.UseVisualStyleBackColor = True
         '
         'nudFirstWord
         '
@@ -314,6 +303,16 @@ Partial Class dlgTransformText
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
+        'chkOrColumn
+        '
+        Me.chkOrColumn.AutoSize = True
+        Me.chkOrColumn.Location = New System.Drawing.Point(163, 132)
+        Me.chkOrColumn.Name = "chkOrColumn"
+        Me.chkOrColumn.Size = New System.Drawing.Size(75, 17)
+        Me.chkOrColumn.TabIndex = 20
+        Me.chkOrColumn.Text = "Or Column"
+        Me.chkOrColumn.UseVisualStyleBackColor = True
+        '
         'dlgTransformText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -359,7 +358,6 @@ Partial Class dlgTransformText
     Friend WithEvents lblPad As Label
     Friend WithEvents ucrInputPad As ucrInputComboBox
     Friend WithEvents ucrReceiverOrColumn As ucrReceiverSingle
-    Friend WithEvents rdoOrColumn As RadioButton
     Friend WithEvents nudFirstWord As NumericUpDown
     Friend WithEvents nudLastWord As NumericUpDown
     Friend WithEvents lblLastWord As Label
@@ -367,4 +365,5 @@ Partial Class dlgTransformText
     Friend WithEvents lblSeparator As Label
     Friend WithEvents ucrInputSeparator As ucrInputComboBox
     Friend WithEvents chkLeft As CheckBox
+    Friend WithEvents chkOrColumn As CheckBox
 End Class
