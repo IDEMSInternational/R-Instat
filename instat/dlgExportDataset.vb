@@ -2,6 +2,8 @@
 Imports instat.Translations
 Public Class dlgExportDataset
     Dim bFirstLoad As Boolean = True
+    Private clsWriteCSV, clsWriteXLSX As New RFunction
+
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
         Dim dlgSave As New SaveFileDialog
         dlgSave.Title = "Export file dialog"
@@ -19,8 +21,10 @@ Public Class dlgExportDataset
     End Sub
 
     Private Sub setDefaultValues()
-        ucrAvailableSheets.Reset()
         txtExportFile.Text = ""
+        chkOptions.Enabled = False
+        grpOptions.Enabled = False
+        ucrAvailableSheets.Reset()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -51,14 +55,61 @@ Public Class dlgExportDataset
     Private Sub SaveFileType(strFilePath As String)
         Select Case Path.GetExtension(strFilePath)
             Case ".csv"
-                ucrBase.clsRsyntax.SetFunction("write.csv")
-
-                'ToDo
+                clsWriteCSV.SetRCommand("write.csv")
+                chkOptions.Enabled = False
+                grpOptions.Enabled = False
+                clsWriteCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                clsWriteCSV.AddParameter("x", ucrAvailableSheets.cboAvailableDataFrames.SelectedItem)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteCSV)
             Case ".xlsx"
-                ucrBase.clsRsyntax.SetFunction("write.xlsx")
-                'ToDo
+                clsWriteXLSX.SetRCommand("write.xlsx")
+                chkOptions.Enabled = True
+                clsWriteXLSX.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                clsWriteXLSX.AddParameter("x", ucrAvailableSheets.cboAvailableDataFrames.SelectedItem)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteXLSX)
         End Select
-        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-        ucrBase.clsRsyntax.AddParameter("x", ucrAvailableSheets.cboAvailableDataFrames.SelectedItem)
+    End Sub
+
+    Private Sub chkOptions_CheckStateChanged(sender As Object, e As EventArgs) Handles chkOptions.CheckStateChanged
+        If chkOptions.Checked Then
+            grpOptions.Enabled = True
+        Else
+            grpOptions.Enabled = False
+        End If
+    End Sub
+
+    Private Sub txtAuthor_Leave(sender As Object, e As EventArgs) Handles txtAuthor.Leave
+        If txtAuthor.Text <> "" Then
+            clsWriteXLSX.AddParameter("creator", Chr(34) & txtAuthor.Text & Chr(34))
+        End If
+    End Sub
+
+    Private Sub txtSheetName_Leave(sender As Object, e As EventArgs) Handles txtSheetName.Leave
+        If txtSheetName.Text <> "" Then
+            clsWriteXLSX.AddParameter("sheetName", Chr(34) & txtSheetName.Text & Chr(34))
+        End If
+    End Sub
+
+    Private Sub txtRows_Leave(sender As Object, e As EventArgs) Handles txtRows.Leave
+        If txtRows.Text <> "" Then
+            clsWriteXLSX.AddParameter("startRow", txtRows.Text)
+        End If
+    End Sub
+
+    Private Sub txtCols_Leave(sender As Object, e As EventArgs) Handles txtCols.Leave
+        If txtRows.Text <> "" Then
+            clsWriteXLSX.AddParameter("startCol", txtCols.Text)
+        End If
+    End Sub
+
+    Private Sub chkRowNames_CheckStateChanged(sender As Object, e As EventArgs) Handles chkRowNames.CheckStateChanged, chkColNames.CheckStateChanged
+        If chkRowNames.Checked Then
+            ucrBase.clsRsyntax.AddParameter("rowNames", "TRUE")
+        ElseIf chkColNames.Checked Then
+            ucrBase.clsRsyntax.AddParameter("colNames", "TRUE")
+        Else
+            ucrBase.clsRsyntax.AddParameter("rowNames", "FALSE")
+            ucrBase.clsRsyntax.AddParameter("colNames", "FALSE")
+        End If
     End Sub
 End Class
