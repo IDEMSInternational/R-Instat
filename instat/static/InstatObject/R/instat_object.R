@@ -95,6 +95,69 @@ instat_obj$methods(import_data = function(data_tables = list(), data_tables_vari
     }
   }
 )
+# Import RDS FUNCTION
+##############################################################################################
+instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrite_existing=FALSE, include_models=TRUE,
+                                         include_graphics=TRUE, include_metadata=TRUE, include_logs=TRUE,messages=TRUE)
+{ 
+  if(class(data_RDS) == "instat_obj"){ 
+    if (!keep_existing & include_models & include_graphics & include_metadata & include_logs){
+      .self$replace_instat_object(new_instatObj = data_RDS)
+    } else {
+      if (!keep_existing) {
+        .self$clear_data()
+        .self$set_meta(list())
+        .self$set_models(list())
+      }
+      for ( i in (1:length(data_RDS$data_objects)) ) {
+        if (!(data_RDS$data_objects[[i]]$metadata[[data_name_label]] %in% names(data_objects)) | overwrite_existing){
+          #TODO in data_object if (!include_models) data_RDS$data_objects[i]$clear_models
+          #TODO in data_object if (!include_graphics) data_RDS$data_objects[i]$clear_graphics
+          if (!include_metadata) {
+            data_RDS$data_objects[[i]]$set_meta(list()) 
+            data_RDS$data_objects[[i]]$set_variables_metadata(data.frame()) 
+            
+          }
+          if (!include_logs) data_RDS$data_objects[i]$set_changes(list())
+          # Add this new data object to our list of data objects
+          .self$append_data_objects(data_RDS$data_objects[[i]]$metadata[[data_name_label]],data_RDS$data_objects[[i]])
+        }
+      }
+      if (include_models & length(data_RDS$models) > 0){
+        for ( i in (1:length(data_RDS$models)) ) {
+          if (!(names(data_RDS$models)[i] %in% names(models)) | overwrite_existing){ 
+            .self$add_model(data_RDS$models[i],names(data_RDS$models)[i])
+          }
+        }
+      }
+      if (include_metadata & length(data_RDS$metadata) > 0){
+        for ( i in (1:length(data_RDS$metadata)) ) {
+          if (!(names(data_RDS$metadata)[i] %in% names(metadata)) | overwrite_existing){ 
+            .self$metadata[names(data_RDS$models)[i]]<<-data_RDS$metadata[i] #todo this should be in an addmetadata method
+          }
+        }
+      }
+    }
+    data_objects_changed <<- TRUE
+  }
+  else if (is.data.frame(data_RDS)) {
+    .self$import_data(data_tables = list(data_RDS = data_RDS))
+  }
+  else{
+    if (messages){
+    stop(paste("RDS_data: ", data_RDS, " Unidentified Object"))#TODO work on messages and error handling
+    }
+  }
+}
+)
+
+instat_obj$methods(replace_instat_object = function(new_instatObj) {
+  data_objects<<-new_instatObj$data_objects 
+  .self$set_meta(new_instatObj$metadata)
+  .self$set_models(new_instatObj$models)
+  data_objects_changed <<- TRUE
+}
+)
 
 instat_obj$methods(set_meta = function(new_meta) {
   if( ! is.list(new_meta) ) {
