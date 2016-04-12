@@ -14,10 +14,11 @@
 Imports instat.Translations
 Public Class dlgCombine
     Private bFirstLoad As Boolean = True
-    Private Sub dlgInteractions_Load(sender As Object, e As KeyEventArgs) Handles Me.Load
+    Private Sub dlgCombine_load() Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
+            bFirstLoad = False
         Else
             ReOpenDialog()
         End If
@@ -26,8 +27,7 @@ Public Class dlgCombine
     Private Sub SetDefaults()
         ucrSelectorCombineFactors.Reset()
         ucrSelectorCombineFactors.Focus()
-        ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
-        ucrFactorsReceiver.SetMeAsReceiver()
+
         chkDropUnusedLevels.Checked = False
 
     End Sub
@@ -42,9 +42,9 @@ Public Class dlgCombine
 
     Private Sub InitialiseDialog()
         ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
+        ucrFactorsReceiver.SetMeAsReceiver()
         ucrFactorsReceiver.SetDataType("factor")
         chkDropUnusedLevels.Checked = False
-
 
         ucrInputColName.SetPrefix("Interact")
         ucrInputColName.SetItemsTypeAsColumns()
@@ -60,4 +60,6 @@ Public Class dlgCombine
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
+
+
 End Class
