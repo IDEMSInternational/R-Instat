@@ -14,12 +14,14 @@ Move_col = "Moved column"
 Col_order = "Order of columns"
 Inserted_row = "Inserted row"
 Copy_cols = "Copied columns"
+Merged_data = "Merged data"
 
 #meta data labels
 data_name_label="data_name"
 is_calculated_label="is_calculated"
 decimal_places_label="decimal_places"
 columns_label="columns"
+summarised_from_label="summarised_from"
 
 #variables_metadata labels
 display_decimal_label="DisplayDecimal"
