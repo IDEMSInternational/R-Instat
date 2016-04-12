@@ -21,18 +21,19 @@ Public Class dlgInsertColumn
     'stores the number of variables for the selected data frame.
     Private iCountVariables As Integer
 
-    Private Sub chkPos_CheckStateChanged(sender As Object, e As EventArgs) Handles chkPos.CheckStateChanged
-        If chkPos.Checked = True Then
-            nudPos.Enabled = True
-            txtStartPos.Enabled = False
-        Else
-            ucrBase.clsRsyntax.AddParameter("start_pos", iCountVariables + 1)
-            nudPos.Enabled = False
-            txtStartPos.Enabled = True
-        End If
-    End Sub
+    'Private Sub chkPos_CheckStateChanged(sender As Object, e As EventArgs)
+    'If chkPos.Checked = True Then
+    '    nudPos.Enabled = True
+    '    txtStartPos.Enabled = False
+    'Else
+    '    ucrBase.clsRsyntax.AddParameter("start_pos", iCountVariables + 1)
+    '    nudPos.Enabled = False
+    '    txtStartPos.Enabled = True
+    'End If
+    'End Sub
 
     Private Sub dlgInsertColumn_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ucrDataFrameLength.SetDataFrameSelector(ucrDataFramesList)
         ucrBase.iHelpTopicID = 52
         If bFirstLoad Then
             setDefaultValues()
@@ -44,11 +45,15 @@ Public Class dlgInsertColumn
     Private Sub setDefaultValues()
         txtDefaultData.Text = "NA"
         ucrBase.clsRsyntax.AddParameter("col_data", "c()")
-        txtStartPos.Text = "At the end."
+        ' txtStartPos.Text = "At the end."
         ucrBase.clsRsyntax.AddParameter("start_pos", iCountVariables + 1)
         nudNumCols.Value = 1
         nudPos.Value = iCountVariables
         nudPos.Enabled = False
+        rdoColumns.Checked = True
+        rdoEnd.Checked = True
+        ucrInputColumns.Enabled = False
+        'ucrInputRows.Enabled = False
         ucrDataFramesList.Reset()
     End Sub
 
@@ -72,5 +77,16 @@ Public Class dlgInsertColumn
         iCountVariables = frmEditor.grdData.GetWorksheetByName(ucrDataFramesList.cboAvailableDataFrames.SelectedItem).ColumnCount
         nudPos.Maximum = iCountVariables + 1
         nudPos.Value = iCountVariables
+    End Sub
+
+    Private Sub rdoPosition_CheckedChanged(sender As Object, e As EventArgs) Handles rdoPosition.CheckedChanged
+        If rdoPosition.Checked = True Then
+            nudPos.Enabled = True
+            'txtStartPos.Enabled = False
+        Else
+            ucrBase.clsRsyntax.AddParameter("start_pos", iCountVariables + 1)
+            nudPos.Enabled = False
+            'txtStartPos.Enabled = True
+        End If
     End Sub
 End Class
