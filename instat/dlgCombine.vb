@@ -14,7 +14,7 @@
 Imports instat.Translations
 Public Class dlgCombine
     Private bFirstLoad As Boolean = True
-    Private Sub dlgCombine_load() Handles MyBase.Load
+    Private Sub dlgCombine_load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
