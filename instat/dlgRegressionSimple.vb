@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
     Dim clsModel As New ROperator
@@ -34,7 +33,6 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction("lm")
         ucrBase.clsRsyntax.iCallType = 2
         clsModel.SetOperation("~")
         ucrResponse.Selector = ucrSelectorSimpleReg
@@ -53,6 +51,7 @@ Public Class dlgRegressionSimple
         ucrSelectorSimpleReg.Focus()
         chkSaveModel.Checked = True
         ucrModelName.Visible = True
+        ucrFamily.Enabled = False
         'TODO get this to be getting a default name e.g. reg1, reg2, etc.
         '     will be possible with new textbox user control
         ucrModelName.SetName("reg")
@@ -78,7 +77,12 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
-        clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+        If Not ucrResponse.IsEmpty Then
+            clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+            ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+            ucrFamily.Enabled = True
+            ucrFamily.SetGLMDistributions()
+        End If
         TestOKEnabled()
     End Sub
 
@@ -115,6 +119,17 @@ Public Class dlgRegressionSimple
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
+    End Sub
+
+    Private Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+        'TODO: Include multinomial as an option and the appripriate function
+        If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
+            ucrBase.clsRsyntax.SetFunction("lm")
+            ucrBase.clsRsyntax.RemoveParameter("family")
+        Else
+            ucrBase.clsRsyntax.SetFunction("glm")
+            ucrBase.clsRsyntax.AddParameter("family", ucrFamily.clsCurrDistribution.strGLMFunctionName)
         End If
     End Sub
 End Class
