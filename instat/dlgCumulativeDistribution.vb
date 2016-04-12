@@ -103,4 +103,15 @@ Public Class dlgCumulativeDistribution
         End If
         TestOkEnabled()
     End Sub
+
+    Private Sub chkExceedancePlots_CheckedChanged(sender As Object, e As EventArgs) Handles chkExceedancePlots.CheckedChanged
+        Dim clsTempRFunc As New RFunction
+        If chkExceedancePlots.Checked Then
+            clsTempRFunc.SetRCommand("scale_y_reverse")
+            clsTempRFunc.AddParameter("breaks", "seq(1,0,-0.25), labels = seq(0,1,0.25)")
+            ucrBase.clsRsyntax.AddOperatorParameter("scale_y_reverse", clsRFunc:=clsTempRFunc)
+        Else
+            ucrBase.clsRsyntax.RemoveOperatorParameter("scale_y_reverse")
+        End If
+    End Sub
 End Class
