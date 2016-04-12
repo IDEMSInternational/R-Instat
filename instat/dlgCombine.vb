@@ -27,6 +27,8 @@ Public Class dlgCombine
     Private Sub SetDefaults()
         ucrSelectorCombineFactors.Reset()
         ucrSelectorCombineFactors.Focus()
+        ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
+        ucrFactorsReceiver.SetMeAsReceiver()
 
         chkDropUnusedLevels.Checked = False
 
@@ -41,8 +43,7 @@ Public Class dlgCombine
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
-        ucrFactorsReceiver.SetMeAsReceiver()
+
         ucrFactorsReceiver.SetDataType("factor")
         chkDropUnusedLevels.Checked = False
 
