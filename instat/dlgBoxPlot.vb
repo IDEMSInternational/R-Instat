@@ -33,20 +33,19 @@ Public Class dlgBoxplot
     End Sub
 
     Public Sub SetOperator()
-        Dim clsTempOp As New ROperator
         Dim clsTempRFunc As New RFunction
         If chkHorizontalBoxplot.Checked Then
-            clsTempOp.SetOperation("+")
-            clsTempOp.SetParameter(True, clsRFunc:=clsRggplotFunction)
-            clsTempOp.SetParameter(False, clsRFunc:=clsRgeom_boxplotFunction)
             clsTempRFunc.SetRCommand("coord_flip")
-            ucrBase.clsRsyntax.SetOperatorParameter(True, clsOp:=clsTempOp)
-            ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsTempRFunc)
+            ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", clsRFunc:=clsTempRFunc)
+        Else
+            ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
         End If
     End Sub
+
     Private Sub SetDefaults()
         ucrSelectorBoxPlot.Reset()
         ucrSelectorBoxPlot.Focus()
+        chkHorizontalBoxplot.Checked = False
         sdgBoxPlot.SetDefaults()
         TestOkEnabled()
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34)) ' Empty string is default x value in case no factor is chosen
