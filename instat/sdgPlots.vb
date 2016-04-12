@@ -39,7 +39,9 @@ Public Class sdgPlots
         chkDisplayYTitle.Checked = False
         chkDisplayYTitle.Checked = False
         chkMargin.Checked = False
+        RemoveFacets()
         chkIncludeFacets.Checked = False
+
     End Sub
 
     Private Sub InitialiseDialog()
@@ -55,6 +57,7 @@ Public Class sdgPlots
             lblNoOfColumns.Visible = True
             txtNoOfColumns.Visible = True
             txtNoOfRows.Visible = True
+            lblNoofRows.Visible = True
         Else
             lblNoOfColumns.Visible = False
             txtNoOfColumns.Visible = False
@@ -154,7 +157,6 @@ Public Class sdgPlots
     End Sub
 
     Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
-
         If chkIncludeFacets.Checked Then
             IncludeFacets()
             clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRfacetFunction)
@@ -180,6 +182,13 @@ Public Class sdgPlots
         chkMargin.Visible = False
         chkFreeScalesX.Visible = False
         chkFreeScalesY.Visible = False
+        lblNoofRows.Visible = False
+        lblNoOfColumns.Visible = False
+        txtNoOfRows.Visible = False
+        txtNoOfColumns.Visible = False
+        txtXTitle.Visible = False
+        txtYTitle.Visible = False
+        chkWrapOptions.Checked = False
     End Sub
 
     Private Sub chkChangeTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkChangeTitle.CheckedChanged
