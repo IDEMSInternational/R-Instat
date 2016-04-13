@@ -22,6 +22,10 @@ Public Class Distribution
     Public strQFunctionName As String = ""
     Public strDFunctionName As String = ""
     Public strGLMFunctionName As String = ""
+    Public bNumeric As Boolean = False
+    Public bFactor As Boolean = False
+    Public bTwoLevelFactor As Boolean = False
+    Public bPositiveInt As Boolean = False
     Public clsParameters As New List(Of DistributionParameter)
 
     Public Sub SetNameTag(strTemp As String)
