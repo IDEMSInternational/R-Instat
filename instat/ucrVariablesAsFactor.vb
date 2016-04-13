@@ -174,7 +174,6 @@
 
     Public Sub ResetControl()
         'this resets the ucrReceiverFactor
-        ucrFactorReceiver.SetStackedFactorMode(False)
+        SetDefaults()
     End Sub
-
 End Class
