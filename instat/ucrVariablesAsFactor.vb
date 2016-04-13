@@ -1,5 +1,5 @@
 ﻿Public Class ucrVariablesAsFactor
-    Public bSingleVariable As Boolean = True
+    Public bSingleVariable As Boolean
     Public bFirstLoad As Boolean = True
     Public ucrFactorReceiver As ucrReceiverSingle
     Public WithEvents ucrVariableSelector As ucrSelectorByDataFrame
@@ -8,10 +8,12 @@
     Private Sub ucrVariablesAsFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             SetDefaults()
+            bFirstLoad = False
         End If
     End Sub
 
     Public Sub SetDefaults()
+        bSingleVariable = True
         SetReceiverStatus()
     End Sub
 
@@ -100,7 +102,10 @@
     End Function
 
     Private Sub ucrMultipleVariables_SelectionChanged() Handles ucrMultipleVariables.SelectionChanged
-        SetMeasureVars()
+        If Not bSingleVariable Then
+            SetMeasureVars()
+        End If
+
         RaiseEvent SelectionChanged()
     End Sub
 
@@ -116,12 +121,13 @@
         End If
     End Function
 
-    Private Sub SetReceiverStatus()
+    Public Sub SetReceiverStatus()
         If bSingleVariable Then
             'need to translate correctly
             cmdVariables.Text = "Single Variable"
             cmdVariables.FlatStyle = FlatStyle.Popup
             ucrSingleVariable.Visible = True
+            'ucrSingleVariable.SetMeAsReceiver()
             ucrMultipleVariables.Visible = False
             If ucrVariableSelector IsNot Nothing Then
                 ucrSingleVariable.SetMeAsReceiver()
@@ -136,6 +142,7 @@
         Else
             ucrSingleVariable.Visible = False
             ucrMultipleVariables.Visible = True
+            'ucrMultipleVariables.SetMeAsReceiver()
             'TODO need to translate correctly
             cmdVariables.Text = "Multiple Variables"
             cmdVariables.FlatStyle = FlatStyle.Flat
@@ -163,5 +170,10 @@
         Else
             ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("measure.vars")
         End If
+    End Sub
+
+    Public Sub ResetControl()
+        'this resets the ucrReceiverFactor
+        SetDefaults()
     End Sub
 End Class
