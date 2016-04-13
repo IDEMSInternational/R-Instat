@@ -65,7 +65,10 @@ Public Class dlgTransformText
         ucrSelectorForTransformText.Reset()
         ucrInputPrefixForNewColumn.SetName("New_Text")
         ucrSelectorForTransformText.Focus()
-        ucrInputPrefixForNewColumn.Reset()
+        ucrInputPrefixForNewColumn.ResetText()
+        ucrInputSeparator.ResetText()
+        ucrInputPad.ResetText()
+        ucrInputTo.ResetText()
         ucrInputTo.Visible = False
         lblTo.Visible = False
         lblWidth.Visible = False
@@ -449,6 +452,7 @@ Public Class dlgTransformText
             ElseIf chkOrColumn.Checked = False
                 ucrBase.clsRsyntax.RemoveParameter("first")
                 ucrReceiverOrColumn.Visible = False
+                nudFirstWord.Enabled = True
 
             End If
         End If
