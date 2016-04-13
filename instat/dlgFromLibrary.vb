@@ -46,25 +46,9 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub cmdLibraryCollection_Click(sender As Object, e As EventArgs) Handles cmdLibraryCollection.Click
-        Dim dlgOpenDialog As New OpenFileDialog
-        dlgOpenDialog.Title = "Import from library"
-        dlgOpenDialog.InitialDirectory = strLibraryPath
-        dlgOpenDialog.Filter = "RDS R-file (*.RDS)|*.RDS"
-        If Not frmMain.clsRLink.bInstatObjectExists Then
-            frmMain.clsRLink.CreateNewInstatObject()
-        End If
-        If dlgOpenDialog.ShowDialog = DialogResult.OK Then
-            loadData(dlgOpenDialog.FileName.Replace("\", "/"))
-            dlgOpenDialog.RestoreDirectory = True
-        End If
-        TestOkEnabled()
-    End Sub
-
-    Private Sub loadData(strFilePath As String)
-        ucrBase.clsRsyntax.SetFunction("readRDS")
-        ucrBase.clsRsyntax.SetAssignTo(frmMain.clsRLink.strInstatDataObject)
-        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-        txtFilePath.Text = strFilePath
+        dlgImportDataset.bFromLibrary = True
+        dlgImportDataset.ShowDialog()
+        Me.Hide()
     End Sub
 
     Private Sub rdoDefaultDatasets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultDatasets.CheckedChanged, rdoInstatCollection.CheckedChanged
@@ -74,11 +58,9 @@ Public Class dlgFromLibrary
             lstCollection.Enabled = True
             grpCollection.Enabled = False
         ElseIf rdoInstatCollection.Checked Then
-            If txtFilePath.Text <> "" Then
-                loadData(txtFilePath.Text)
-            End If
             lstCollection.Items.Clear()
             lstCollection.Enabled = False
+            cboPackages.SelectedIndex = -1
             cboPackages.Enabled = False
             grpCollection.Enabled = True
         End If
@@ -139,7 +121,7 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 OrElse rdoInstatCollection.Checked AndAlso txtFilePath.Text <> "" Then
+        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 OrElse rdoInstatCollection.Checked Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
