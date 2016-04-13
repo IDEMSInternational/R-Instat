@@ -340,4 +340,11 @@ Public Class RLink
         lstModelNames.AddRange(chrModelNames)
         Return lstModelNames
     End Function
+
+    Public Function GetDataType(strDataFrameName As String, strColumnName As String) As String
+        Dim strDataType As CharacterVector
+        strDataType = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_type(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ",col_name=" & Chr(34) & strColumnName & Chr(34) & ")").AsCharacter
+        Return strDataType(0)
+    End Function
+
 End Class
