@@ -1,5 +1,5 @@
 ﻿Public Class ucrVariablesAsFactor
-    Public bSingleVariable As Boolean = True
+    Public bSingleVariable As Boolean = False
     Public bFirstLoad As Boolean = True
     Public ucrFactorReceiver As ucrReceiverSingle
     Public WithEvents ucrVariableSelector As ucrSelectorByDataFrame
@@ -116,12 +116,13 @@
         End If
     End Function
 
-    Private Sub SetReceiverStatus()
+    Public Sub SetReceiverStatus()
         If bSingleVariable Then
             'need to translate correctly
             cmdVariables.Text = "Single Variable"
             cmdVariables.FlatStyle = FlatStyle.Popup
             ucrSingleVariable.Visible = True
+            'ucrSingleVariable.SetMeAsReceiver()
             ucrMultipleVariables.Visible = False
             If ucrVariableSelector IsNot Nothing Then
                 ucrSingleVariable.SetMeAsReceiver()
@@ -136,6 +137,7 @@
         Else
             ucrSingleVariable.Visible = False
             ucrMultipleVariables.Visible = True
+            'ucrMultipleVariables.SetMeAsReceiver()
             'TODO need to translate correctly
             cmdVariables.Text = "Multiple Variables"
             cmdVariables.FlatStyle = FlatStyle.Flat
