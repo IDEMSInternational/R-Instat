@@ -86,6 +86,7 @@ Public Class dlgTransformText
         rdoPad.Checked = False
         rdoLength.Checked = False
         rdoConvertCase.Checked = False
+        ucrInputTo.cboInput.Text = "Lower"
 
     End Sub
 
