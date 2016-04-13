@@ -52,7 +52,7 @@ Public Class dlgImportDataset
         txtName.Text = strName
         Select Case Path.GetExtension(txtFilePath.Text)
             Case ".RDS"
-                clsReadRDS.SetAssignTo(strName)
+                'clsReadRDS.SetAssignTo(strName)
             Case ".xlsx"
                 clsReadXLSX.SetAssignTo(strName, strName)
             Case ".csv"
@@ -66,8 +66,8 @@ Public Class dlgImportDataset
     End Sub
 
     Public Sub SetFilePath(strFilePath As String, strRparameter As String)
-        ucrBase.clsRsyntax.AddParameter(strRparameter, Chr(34) & strFilePath & Chr(34))
         txtFilePath.Text = strFilePath
+
         If strRparameter <> "xlsxFile" Then
             RefreshFilePreview()
             RefreshFrameView()
@@ -130,18 +130,20 @@ Public Class dlgImportDataset
         Select Case strFileExt
             Case ".RDS"
                 clsReadRDS.SetRCommand("readRDS")
+                clsReadRDS.SetAssignTo(strFileName)
                 clsReadRDS.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                 grpExcel.Hide()
                 grpCSV.Hide()
                 grpRDS.Show()
-                SetFilePath(strFilePath, "file")
                 clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
                 clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
-
+                'txtFilePath.Text = strFilePath
+                SetFilePath(strFilePath, "file")
             Case ".csv"
                 clsReadCSV.SetRCommand("read.csv")
                 ucrBase.clsRsyntax.SetBaseRFunction(clsReadCSV)
+                ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                 grpRDS.Hide()
                 grpExcel.Hide()
                 grpCSV.Show()
@@ -149,6 +151,7 @@ Public Class dlgImportDataset
             Case ".xlsx"
                 clsReadXLSX.SetRCommand("readWorkbook")
                 ucrBase.clsRsyntax.SetBaseRFunction(clsReadXLSX)
+                ucrBase.clsRsyntax.AddParameter("xlsxFile", Chr(34) & strFilePath & Chr(34))
                 SetFilePath(strFilePath, "xlsxFile")
                 grpCSV.Hide()
                 grpRDS.Hide()
