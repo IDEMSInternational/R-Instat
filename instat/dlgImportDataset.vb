@@ -70,14 +70,17 @@ Public Class dlgImportDataset
         txtFilePath.Text = strFilePath
 
         If Path.GetExtension(strFilePath) = ".csv" Then
+            txtInputFile.show()
             RefreshFilePreview()
             RefreshFrameView()
         ElseIf Path.GetExtension(strFilePath) = ".xlsx" Then
-            txtInputFile.Text = "Cannot access file contents"
+            'txtInputFile.Text = "Cannot access file contents"
+            txtInputFile.hide()
             FillExcelSheets(strFilePath)
             RefreshFrameView(bPreviewExcel:=True)
         Else
-            txtInputFile.Text = "Cannot access file contents"
+            'txtInputFile.Text = "Cannot access file contents"
+            txtInputFile.hide()
         End If
 
     End Sub
