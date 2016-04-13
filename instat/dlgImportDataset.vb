@@ -26,6 +26,13 @@ Public Class dlgImportDataset
     Dim strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            SetCSVDefault()
+            setExcelDefaults()
+            SetRDSDefaults()
+            bFirstLoad = False
+        End If
+
         'shows the dialog first then the open dialog
         Me.Show()
 
@@ -34,13 +41,6 @@ Public Class dlgImportDataset
         grdDataPreview.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
 
         autoTranslate(Me)
-
-        If bFirstLoad Then
-            SetCSVDefault()
-            setExcelDefaults()
-            SetRDSDefaults
-            bFirstLoad = False
-        End If
 
         GetFileFromOpenDialog()
         TestOkEnabled()
@@ -69,13 +69,15 @@ Public Class dlgImportDataset
     Public Sub SetFilePath(strFilePath As String, strRparameter As String)
         txtFilePath.Text = strFilePath
 
-        If strRparameter <> "xlsxFile" Then
+        If Path.GetExtension(strFilePath) = ".csv" Then
             RefreshFilePreview()
             RefreshFrameView()
-        Else
+        ElseIf Path.GetExtension(strFilePath) = ".xlsx" Then
             txtInputFile.Text = "Cannot access file contents"
             FillExcelSheets(strFilePath)
             RefreshFrameView(bPreviewExcel:=True)
+        Else
+            txtInputFile.Text = "Cannot access file contents"
         End If
 
     End Sub
@@ -108,6 +110,7 @@ Public Class dlgImportDataset
             dlgOpen.Title = "Import from library"
             dlgOpen.InitialDirectory = strLibraryPath
             dlgOpen.Filter = "RDS R-file (*.RDS)|*.RDS"
+            bFromLibrary = False
         Else
             dlgOpen.Filter = "All Data files (*.csv,.xlsx,*.RDS)|*.csv;*.xlsx;*.RDS|Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|Excel files (*.xlsx)|*.xlsx"
             dlgOpen.Title = "Open Data from file"
@@ -153,10 +156,10 @@ Public Class dlgImportDataset
                 clsReadXLSX.SetRCommand("readWorkbook")
                 ucrBase.clsRsyntax.SetBaseRFunction(clsReadXLSX)
                 ucrBase.clsRsyntax.AddParameter("xlsxFile", Chr(34) & strFilePath & Chr(34))
-                SetFilePath(strFilePath, "xlsxFile")
                 grpCSV.Hide()
                 grpRDS.Hide()
                 grpExcel.Show()
+                SetFilePath(strFilePath, "xlsx")
         End Select
         SetDataName(strFileName)
 
@@ -206,6 +209,7 @@ Public Class dlgImportDataset
         chkExisting.Checked = True
         chkModel.Checked = True
         chkMetadata.Checked = True
+        grpRDS.Hide()
     End Sub
 
     'Private Sub chkExisting_CheckStateChanged(sender As Object, e As EventArgs) Handles chkExisting.CheckStateChanged, chkMetadata.CheckStateChanged, chkModel.CheckStateChanged
@@ -235,6 +239,7 @@ Public Class dlgImportDataset
         cboComment.SelectedIndex = cboComment.Items.IndexOf("None")
         SetNAStringsText("NA")
         nudSkips.Value = 0
+        grpCSV.Hide()
     End Sub
 
     Private Sub SetNAStringsText(strTemp As String)
@@ -359,6 +364,7 @@ Public Class dlgImportDataset
         txtNamedRegion.Text = "NULL"
         txtRows.Text = "NULL"
         txtCols.Text = "NULL"
+        grpExcel.Hide()
     End Sub
 
     Private Sub cboAvailableSheets_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboAvailableSheets.SelectedValueChanged
