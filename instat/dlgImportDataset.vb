@@ -126,7 +126,7 @@ Public Class dlgImportDataset
                 End If
             End If
         End If
-        SetDataName(strFileName)
+
         Select Case strFileExt
             Case ".RDS"
                 clsReadRDS.SetRCommand("readRDS")
@@ -134,7 +134,7 @@ Public Class dlgImportDataset
                 grpExcel.Hide()
                 grpCSV.Hide()
                 grpRDS.Show()
-                'SetFilePath(strFilePath, "file")
+                SetFilePath(strFilePath, "file")
                 clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
                 clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
@@ -154,6 +154,7 @@ Public Class dlgImportDataset
                 grpRDS.Hide()
                 grpExcel.Show()
         End Select
+        SetDataName(strFileName)
 
     End Sub
 #End Region
@@ -203,19 +204,19 @@ Public Class dlgImportDataset
         chkMetadata.Checked = True
     End Sub
 
-    Private Sub chkExisting_CheckStateChanged(sender As Object, e As EventArgs) Handles chkExisting.CheckStateChanged, chkMetadata.CheckStateChanged, chkModel.CheckStateChanged
-        If chkExisting.Checked Then
-            clsImportRDS.AddParameter("keep_existing", "TRUE")
-        ElseIf chkMetadata.Checked Then
-            clsImportRDS.AddParameter("include_metadata", "TRUE")
-        ElseIf chkModel.Checked Then
-            clsImportRDS.AddParameter("include_models", "TRUE")
-        Else
-            clsImportRDS.AddParameter("include_metadata", "FALSE")
-            clsImportRDS.AddParameter("include_metadata", "FALSE")
-            clsImportRDS.AddParameter("keep_existing", "FALSE")
-        End If
-    End Sub
+    'Private Sub chkExisting_CheckStateChanged(sender As Object, e As EventArgs) Handles chkExisting.CheckStateChanged, chkMetadata.CheckStateChanged, chkModel.CheckStateChanged
+    '    If chkExisting.Checked Then
+    '        clsImportRDS.AddParameter("keep_existing", "TRUE")
+    '    ElseIf chkMetadata.Checked Then
+    '        clsImportRDS.AddParameter("include_metadata", "TRUE")
+    '    ElseIf chkModel.Checked Then
+    '        clsImportRDS.AddParameter("include_models", "TRUE")
+    '    Else
+    '        clsImportRDS.AddParameter("include_metadata", "FALSE")
+    '        clsImportRDS.AddParameter("include_metadata", "FALSE")
+    '        clsImportRDS.AddParameter("keep_existing", "FALSE")
+    '    End If
+    'End Sub
 
 #End Region
 
