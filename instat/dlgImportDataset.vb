@@ -22,6 +22,7 @@ Public Class dlgImportDataset
     Private intLines As Integer = 10
     Private clsReadCSV, clsReadRDS, clsImportRDS, clsReadXLSX As New RFunction
     Dim bFirstLoad As Boolean = True
+    Public bFromLibrary As Boolean = False
     Dim strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -97,7 +98,7 @@ Public Class dlgImportDataset
 
 #Region "Import options"
     'Loads the open dialog on load and click
-    Public Sub GetFileFromOpenDialog(Optional bFromLibrary As Boolean = False)
+    Public Sub GetFileFromOpenDialog()
         Dim dlgOpen As New OpenFileDialog
         Dim strFilePath As String = ""
         Dim strFileName As String = ""
