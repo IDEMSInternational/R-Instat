@@ -1507,4 +1507,7 @@
   <data name="Quasipoisson" xml:space="preserve">
     <value>Quasipoisson</value>
   </data>
+  <data name="Gamma" xml:space="preserve">
+    <value>Gamma</value>
+  </data>
 </root>
