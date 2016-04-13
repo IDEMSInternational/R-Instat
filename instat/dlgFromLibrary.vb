@@ -60,7 +60,6 @@ Public Class dlgFromLibrary
         ElseIf rdoInstatCollection.Checked Then
             lstCollection.Items.Clear()
             lstCollection.Enabled = False
-            cboPackages.SelectedIndex = -1
             cboPackages.Enabled = False
             grpCollection.Enabled = True
         End If
