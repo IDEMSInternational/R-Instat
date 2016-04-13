@@ -20,7 +20,7 @@ Imports RDotNet
 Public Class dlgImportDataset
 
     Private intLines As Integer = 10
-    Private clsReadCSV, clsReadRDS, clsReadXLSX As New RFunction
+    Private clsReadCSV, clsReadRDS, clsImportRDS, clsReadXLSX As New RFunction
     Dim bFirstLoad As Boolean = True
     Dim strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
 
@@ -37,6 +37,7 @@ Public Class dlgImportDataset
         If bFirstLoad Then
             SetCSVDefault()
             setExcelDefaults()
+            SetRDSDefaults
             bFirstLoad = False
         End If
 
@@ -129,11 +130,19 @@ Public Class dlgImportDataset
         Select Case strFileExt
             Case ".RDS"
                 clsReadRDS.SetRCommand("readRDS")
+                clsReadRDS.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                 grpExcel.Hide()
                 grpCSV.Hide()
+                grpRDS.Show()
+                'SetFilePath(strFilePath, "file")
+                clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
+                clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
+
             Case ".csv"
                 clsReadCSV.SetRCommand("read.csv")
                 ucrBase.clsRsyntax.SetBaseRFunction(clsReadCSV)
+                grpRDS.Hide()
                 grpExcel.Hide()
                 grpCSV.Show()
                 SetFilePath(strFilePath, "file")
@@ -142,6 +151,7 @@ Public Class dlgImportDataset
                 ucrBase.clsRsyntax.SetBaseRFunction(clsReadXLSX)
                 SetFilePath(strFilePath, "xlsxFile")
                 grpCSV.Hide()
+                grpRDS.Hide()
                 grpExcel.Show()
         End Select
 
@@ -187,6 +197,25 @@ Public Class dlgImportDataset
 #End Region
 
 #Region "RDS options"
+    Private Sub SetRDSDefaults()
+        chkExisting.Checked = True
+        chkModel.Checked = True
+        chkMetadata.Checked = True
+    End Sub
+
+    Private Sub chkExisting_CheckStateChanged(sender As Object, e As EventArgs) Handles chkExisting.CheckStateChanged, chkMetadata.CheckStateChanged, chkModel.CheckStateChanged
+        If chkExisting.Checked Then
+            clsImportRDS.AddParameter("keep_existing", "TRUE")
+        ElseIf chkMetadata.Checked Then
+            clsImportRDS.AddParameter("include_metadata", "TRUE")
+        ElseIf chkModel.Checked Then
+            clsImportRDS.AddParameter("include_models", "TRUE")
+        Else
+            clsImportRDS.AddParameter("include_metadata", "FALSE")
+            clsImportRDS.AddParameter("include_metadata", "FALSE")
+            clsImportRDS.AddParameter("keep_existing", "FALSE")
+        End If
+    End Sub
 
 #End Region
 
