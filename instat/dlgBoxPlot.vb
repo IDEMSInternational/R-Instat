@@ -76,7 +76,7 @@ Public Class dlgBoxplot
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
         ucrVariablesAsFactorForBoxplot.SetDataType("numeric")
-        ucrVariablesAsFactorForBoxplot.SetReceiverStatus()
+
 
     End Sub
 
