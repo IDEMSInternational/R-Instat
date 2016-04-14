@@ -60,6 +60,7 @@ Public Class dlgDotPlot
 
     Private Sub SetDefaults()
         ucrDotPlotSelector.Reset()
+        ucrVariablesAsFactorDotPlot.ResetControl()
         TestOkEnabled()
     End Sub
 
