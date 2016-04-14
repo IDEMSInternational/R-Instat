@@ -21,6 +21,15 @@ Public Class dlgCumulativeDistribution
     Private clsRaesFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgCumulativeDistribution_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+        If bFirstLoad Then
+            InitaliseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        TestOkEnabled()
+    End Sub
+    Public Sub InitaliseDialog()
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRaesFunction.SetRCommand("aes")
@@ -29,18 +38,16 @@ Public Class dlgCumulativeDistribution
         clsRgeom_CumDistFunction.SetRCommand("stat_ecdf")
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_CumDistFunction)
 
-        ucrVariateReceiver.Selector = ucrCumDistSelector
+
         ucrFactorReceiver.Selector = ucrCumDistSelector
         ucrFactorReceiver.SetDataType("factor")
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 133
 
-        autoTranslate(Me)
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
-        End If
-        TestOkEnabled()
+
+        ucrVariablesAsFactorforCumDist.SetFactorReceiver(ucrFactorReceiver)
+        ucrVariablesAsFactorforCumDist.SetSelector(ucrCumDistSelector)
+        ucrVariablesAsFactorforCumDist.SetDataType("numeric")
     End Sub
 
     Private Sub SetDefaults()
@@ -50,13 +57,12 @@ Public Class dlgCumulativeDistribution
         chkCountsOnYAxis.Checked = False
         chkExceedancePlots.Checked = False
         chkIncludePoints.Checked = False
-        ucrVariateReceiver.SetMeAsReceiver()
         TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
         'TODO what enables ok
-        If Not ucrVariateReceiver.IsEmpty Then
+        If Not ucrVariablesAsFactorforCumDist.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -65,16 +71,6 @@ Public Class dlgCumulativeDistribution
     Private Sub ucrCumDistSelector_DataFrameChanged() Handles ucrCumDistSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrCumDistSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
-
-    Private Sub ucrVariateReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrVariateReceiver.SelectionChanged
-        If Not ucrVariateReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("x", ucrVariateReceiver.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName("x")
-        End If
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
         If Not ucrFactorReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False))
@@ -93,5 +89,29 @@ Public Class dlgCumulativeDistribution
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
         sdgCumDistPlotOptions.ShowDialog()
+    End Sub
+
+    Private Sub ucrVariateReceiver_Load(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub ucrVariablesAsFactorforCumDist_SelectionChanged() Handles ucrVariablesAsFactorforCumDist.SelectionChanged
+        If Not ucrVariablesAsFactorforCumDist.IsEmpty Then
+            clsRaesFunction.AddParameter("x", ucrVariablesAsFactorforCumDist.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("x")
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub chkExceedancePlots_CheckedChanged(sender As Object, e As EventArgs) Handles chkExceedancePlots.CheckedChanged
+        Dim clsTempRFunc As New RFunction
+        If chkExceedancePlots.Checked Then
+            clsTempRFunc.SetRCommand("scale_y_reverse")
+            clsTempRFunc.AddParameter("breaks", "seq(1,0,-0.25), labels = seq(0,1,0.25)")
+            ucrBase.clsRsyntax.AddOperatorParameter("scale_y_reverse", clsRFunc:=clsTempRFunc)
+        Else
+            ucrBase.clsRsyntax.RemoveOperatorParameter("scale_y_reverse")
+        End If
     End Sub
 End Class

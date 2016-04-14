@@ -107,6 +107,7 @@ Public Class dlgBarAndPieChart
             cmdBarChartOptions.Visible = True
             cmdPieChartOptions.Visible = False
             ucrSecondReceiver.Visible = True
+            lblSecondFactor.Visible = True
         ElseIf rdoPieChart.Checked = True Then
             clsRgeom_barchart.AddParameter("width", "1")
             clsTempRFunc.SetRCommand("coord_polar")
@@ -115,6 +116,7 @@ Public Class dlgBarAndPieChart
             cmdBarChartOptions.Visible = False
             cmdPieChartOptions.Visible = True
             ucrSecondReceiver.Visible = False
+            lblSecondFactor.Visible = False
         End If
         TestOKEnabled()
     End Sub

@@ -255,17 +255,21 @@ Public Class RLink
 
     Public Sub CreateNewClimateObject() 'creates an instance of the climate object
         If Not bClimateObjectExists Then
+            frmSetupLoading.Show()
             RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strClimateObjectPath & "')")
             RunScript("source(" & Chr(34) & "SourcingScript.R" & Chr(34) & ")")
             RunScript(strClimateObject & "<-climate$new()")
             bClimateObjectExists = True
+            frmSetupLoading.Close()
         End If
     End Sub
 
     Public Sub RSetup()
         'run script to load libraries
+        frmSetupLoading.Show()
         RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath & "')") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
         RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")")
+        frmSetupLoading.Close()
     End Sub
 
     Public Sub CreateNewInstatObject()
@@ -336,4 +340,11 @@ Public Class RLink
         lstModelNames.AddRange(chrModelNames)
         Return lstModelNames
     End Function
+
+    Public Function GetDataType(strDataFrameName As String, strColumnName As String) As String
+        Dim strDataType As CharacterVector
+        strDataType = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_type(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ",col_name=" & Chr(34) & strColumnName & Chr(34) & ")").AsCharacter
+        Return strDataType(0)
+    End Function
+
 End Class
