@@ -257,7 +257,7 @@ Partial Class sdgPlots
         '
         'txtNoOfRows
         '
-        Me.txtNoOfRows.Location = New System.Drawing.Point(240, 208)
+        Me.txtNoOfRows.Location = New System.Drawing.Point(298, 195)
         Me.txtNoOfRows.Name = "txtNoOfRows"
         Me.txtNoOfRows.Size = New System.Drawing.Size(62, 20)
         Me.txtNoOfRows.TabIndex = 15
@@ -265,7 +265,7 @@ Partial Class sdgPlots
         'chkFreeScalesY
         '
         Me.chkFreeScalesY.AutoSize = True
-        Me.chkFreeScalesY.Location = New System.Drawing.Point(151, 238)
+        Me.chkFreeScalesY.Location = New System.Drawing.Point(14, 225)
         Me.chkFreeScalesY.Name = "chkFreeScalesY"
         Me.chkFreeScalesY.Size = New System.Drawing.Size(109, 17)
         Me.chkFreeScalesY.TabIndex = 14
@@ -276,7 +276,7 @@ Partial Class sdgPlots
         'chkMargin
         '
         Me.chkMargin.AutoSize = True
-        Me.chkMargin.Location = New System.Drawing.Point(17, 182)
+        Me.chkMargin.Location = New System.Drawing.Point(14, 179)
         Me.chkMargin.Name = "chkMargin"
         Me.chkMargin.Size = New System.Drawing.Size(63, 17)
         Me.chkMargin.TabIndex = 13
@@ -286,7 +286,7 @@ Partial Class sdgPlots
         'chkFreeScalesX
         '
         Me.chkFreeScalesX.AutoSize = True
-        Me.chkFreeScalesX.Location = New System.Drawing.Point(17, 238)
+        Me.chkFreeScalesX.Location = New System.Drawing.Point(14, 202)
         Me.chkFreeScalesX.Name = "chkFreeScalesX"
         Me.chkFreeScalesX.Size = New System.Drawing.Size(109, 17)
         Me.chkFreeScalesX.TabIndex = 12
@@ -296,7 +296,7 @@ Partial Class sdgPlots
         '
         'txtNoOfColumns
         '
-        Me.txtNoOfColumns.Location = New System.Drawing.Point(240, 180)
+        Me.txtNoOfColumns.Location = New System.Drawing.Point(298, 167)
         Me.txtNoOfColumns.Name = "txtNoOfColumns"
         Me.txtNoOfColumns.Size = New System.Drawing.Size(62, 20)
         Me.txtNoOfColumns.TabIndex = 11
@@ -304,7 +304,7 @@ Partial Class sdgPlots
         'lblNoofRows
         '
         Me.lblNoofRows.AutoSize = True
-        Me.lblNoofRows.Location = New System.Drawing.Point(136, 209)
+        Me.lblNoofRows.Location = New System.Drawing.Point(194, 196)
         Me.lblNoofRows.Name = "lblNoofRows"
         Me.lblNoofRows.Size = New System.Drawing.Size(86, 13)
         Me.lblNoofRows.TabIndex = 10
@@ -314,7 +314,7 @@ Partial Class sdgPlots
         'lblNoOfColumns
         '
         Me.lblNoOfColumns.AutoSize = True
-        Me.lblNoOfColumns.Location = New System.Drawing.Point(136, 183)
+        Me.lblNoOfColumns.Location = New System.Drawing.Point(194, 170)
         Me.lblNoOfColumns.Name = "lblNoOfColumns"
         Me.lblNoOfColumns.Size = New System.Drawing.Size(98, 13)
         Me.lblNoOfColumns.TabIndex = 10
@@ -324,7 +324,7 @@ Partial Class sdgPlots
         'chkWrapOptions
         '
         Me.chkWrapOptions.AutoSize = True
-        Me.chkWrapOptions.Location = New System.Drawing.Point(203, 143)
+        Me.chkWrapOptions.Location = New System.Drawing.Point(197, 142)
         Me.chkWrapOptions.Name = "chkWrapOptions"
         Me.chkWrapOptions.Size = New System.Drawing.Size(89, 17)
         Me.chkWrapOptions.TabIndex = 9
