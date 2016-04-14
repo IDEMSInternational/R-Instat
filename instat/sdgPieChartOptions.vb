@@ -15,7 +15,24 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgPieChartOptions
-    Private Sub sdgPieChartOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public clsPieChartFunction As RFunction
+    Public Sub SetPieChartFunction(clsPieChartFunc As RFunction)
+        clsPieChartFunction = clsPieChartFunc
+    End Sub
 
+    Public Sub SetDefaults()
+        nudStartPoint.Value = "0"
+        chkClockwise.Checked = True
+    End Sub
+    Private Sub nudStartPoint_Leave(sender As Object, e As EventArgs) Handles nudStartPoint.Leave
+        clsPieChartFunction.AddParameter("start", nudStartPoint.Value)
+    End Sub
+
+    Private Sub chkClockwise_CheckedChanged(sender As Object, e As EventArgs) Handles chkClockwise.CheckedChanged
+        If Not chkClockwise.Checked Then
+            clsPieChartFunction.AddParameter("direction", -1)
+        Else
+            clsPieChartFunction.AddParameter("direction", 1)
+        End If
     End Sub
 End Class
