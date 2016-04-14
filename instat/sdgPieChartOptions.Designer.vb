@@ -24,7 +24,7 @@ Partial Class sdgPieChartOptions
     Private Sub InitializeComponent()
         Me.ucrBaseSdgPieChart = New instat.ucrButtonsSubdialogue()
         Me.chkClockwise = New System.Windows.Forms.CheckBox()
-        Me.lblStartPoint = New System.Windows.Forms.Label()
+        Me.lblOffset = New System.Windows.Forms.Label()
         Me.nudStartPoint = New System.Windows.Forms.NumericUpDown()
         CType(Me.nudStartPoint, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -46,18 +46,18 @@ Partial Class sdgPieChartOptions
         Me.chkClockwise.Text = "Clockwise"
         Me.chkClockwise.UseVisualStyleBackColor = True
         '
-        'lblStartPoint
+        'lblOffset
         '
-        Me.lblStartPoint.AutoSize = True
-        Me.lblStartPoint.Location = New System.Drawing.Point(108, 24)
-        Me.lblStartPoint.Name = "lblStartPoint"
-        Me.lblStartPoint.Size = New System.Drawing.Size(56, 13)
-        Me.lblStartPoint.TabIndex = 12
-        Me.lblStartPoint.Text = "Start Point"
+        Me.lblOffset.AutoSize = True
+        Me.lblOffset.Location = New System.Drawing.Point(108, 24)
+        Me.lblOffset.Name = "lblOffset"
+        Me.lblOffset.Size = New System.Drawing.Size(35, 13)
+        Me.lblOffset.TabIndex = 12
+        Me.lblOffset.Text = "Offset"
         '
         'nudStartPoint
         '
-        Me.nudStartPoint.Location = New System.Drawing.Point(170, 24)
+        Me.nudStartPoint.Location = New System.Drawing.Point(161, 21)
         Me.nudStartPoint.Maximum = New Decimal(New Integer() {360, 0, 0, 0})
         Me.nudStartPoint.Name = "nudStartPoint"
         Me.nudStartPoint.Size = New System.Drawing.Size(43, 20)
@@ -69,7 +69,7 @@ Partial Class sdgPieChartOptions
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
         Me.Controls.Add(Me.nudStartPoint)
-        Me.Controls.Add(Me.lblStartPoint)
+        Me.Controls.Add(Me.lblOffset)
         Me.Controls.Add(Me.chkClockwise)
         Me.Controls.Add(Me.ucrBaseSdgPieChart)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -85,6 +85,6 @@ Partial Class sdgPieChartOptions
 
     Friend WithEvents ucrBaseSdgPieChart As ucrButtonsSubdialogue
     Friend WithEvents chkClockwise As CheckBox
-    Friend WithEvents lblStartPoint As Label
+    Friend WithEvents lblOffset As Label
     Friend WithEvents nudStartPoint As NumericUpDown
 End Class
