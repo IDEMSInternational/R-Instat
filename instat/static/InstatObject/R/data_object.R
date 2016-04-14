@@ -654,3 +654,42 @@ data_obj$methods(set_factor_reference_level = function(col_name, new_ref_level) 
   .self$add_columns_to_data(col_name, relevel(data[[col_name]], new_ref_level))
 } 
 )
+
+data_obj$methods(reorder_factor_levels = function(col_name, new_level_names) {
+  if(!col_name %in% names(data)) stop(paste(col_name,"not found in data."))
+  if(!is.factor(data[[col_name]])) stop(paste(col_name,"is not a factor."))
+  if(length(new_level_names)!=length(levels(data[[col_name]]))) stop("Incorrect number of new level names given.")
+  if(!all(new_level_names %in% levels(data[[col_name]]))) stop(paste("new_level_names must be a reordering of the current levels:",paste(levels(data[[col_name]]), collapse = " ")))
+  .self$add_columns_to_data(col_name = col_name, col_data = factor(data[[col_name]], levels = new_level_names))
+  .self$set_variables_metadata_changed(TRUE)
+}
+)
+
+data_obj$methods(get_data_type = function(col_name = "") {
+   if(!(col_name %in% names(data))){
+    stop(col_name, " is not a column in ", get_metadata(data_name_label))
+  }
+  type = ""
+  if(is.numeric(data[[col_name]])){
+    type = "numeric"
+  }
+  
+  if(is.integer(data[[col_name]])){
+    if(all(data[[col_name]]>0)){
+      type = "positive integer"
+    }else{
+      type = "integer"
+    }
+  }
+  
+  if(is.factor(data[[col_name]]) & (length(levels(data[[col_name]]))==2)){
+    type = "2 level factor"
+  }
+  
+  if(is.factor(data[[col_name]]) & (length(levels(data[[col_name]]))>2)){
+    type = "multilevel factor"
+  }
+  return(type)
+  #TODO: This needs to be completed for all possible types e.g. "character", "Date"
+}
+)
