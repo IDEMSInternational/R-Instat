@@ -40,10 +40,10 @@ Partial Class dlgRenameSheet
         Me.lblName.AutoSize = True
         Me.lblName.Location = New System.Drawing.Point(145, 21)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(58, 13)
+        Me.lblName.Size = New System.Drawing.Size(60, 13)
         Me.lblName.TabIndex = 6
         Me.lblName.Tag = "Name"
-        Me.lblName.Text = "New name"
+        Me.lblName.Text = "New Name"
         '
         'ucrBase
         '
@@ -68,9 +68,9 @@ Partial Class dlgRenameSheet
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.ucrDataFrameToRename)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgRenameSheet"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Rename Sheet"
         Me.ResumeLayout(False)
         Me.PerformLayout()
