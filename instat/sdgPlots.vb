@@ -39,7 +39,6 @@ Public Class sdgPlots
         chkDisplayYTitle.Checked = False
         chkDisplayYTitle.Checked = False
         chkMargin.Checked = False
-        RemoveFacets()
         chkIncludeFacets.Checked = False
 
     End Sub
@@ -49,7 +48,7 @@ Public Class sdgPlots
         ucr1stFactorReceiver.SetDataType("factor")
         ucr2ndFactorReceiver.Selector = ucrAddRemove
         ucr2ndFactorReceiver.SetDataType("factor")
-
+        chkIncludeFacets.Checked = True
     End Sub
 
     Private Sub chkWrapOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkWrapOptions.CheckedChanged
