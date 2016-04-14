@@ -53,6 +53,7 @@ Public Class dlgTransformText
         ucrInputSeparator.cboInput.Items.Add("Colon")
         ucrInputSeparator.cboInput.Items.Add("Underscore")
         ucrInputSeparator.cboInput.Items.Add("Hyphen")
+        ucrInputPad.cboInput.MaxLength = 1
         ucrInputPrefixForNewColumn.SetItemsTypeAsColumns()
         ucrInputPrefixForNewColumn.SetDefaultTypeAsColumn()
         ucrInputPrefixForNewColumn.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
@@ -364,10 +365,24 @@ Public Class dlgTransformText
     End Sub
 
 
+    Private Sub ucrInputPad_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPad.TextChanged
 
-    Private Sub ucrInputPad_Namechanged() Handles ucrInputPad.NameChanged
+        If Not ((IsNumeric(ucrInputPad)) Or (Not IsNumeric(ucrInputPad) And (ucrInputPad.cboInput.MaxLength = 1))) Then
+            MsgBox("Please enter a number or one character")
+        Else
+            ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
+
+        End If
+
+    End Sub
+
+
+
+    Private Sub ucrInputPad_NameChanged() Handles ucrInputPad.NameChanged
+
 
         If rdoPad.Checked Or rdoRight.Checked Or rdoLeft.Checked Or rdoBoth.Checked Then
+
             Select Case ucrInputPad.GetText
                 Case "Space"
                     ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & " " & Chr(34))
@@ -381,12 +396,6 @@ Public Class dlgTransformText
                     ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "_" & Chr(34))
                 Case Else
 
-                    If IsNumeric(ucrInputPad) Then
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
-                    ElseIf (Not IsNumeric(ucrInputPad) And (ucrInputPad.cboInput.Text.Length = 1)) Then
-                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
-
-                    End If
             End Select
         Else
             ucrBase.clsRsyntax.RemoveParameter("pad")
