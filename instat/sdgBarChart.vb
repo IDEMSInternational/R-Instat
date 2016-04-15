@@ -28,11 +28,13 @@
         End If
     End Sub
 
-    Private Sub nudWidth_Leave(sender As Object, e As EventArgs) Handles nudWidth.Leave
-        clsBarChartFunction.AddParameter("width", nudWidth.Value)
+    Private Sub nudWidth_TextChanged(sender As Object, e As EventArgs) Handles nudWidth.TextChanged
+        If nudWidth.Value <> "" Then
+            clsBarChartFunction.AddParameter("width", nudWidth.Value)
+        Else
+            clsBarChartFunction.RemoveParameterByName("width")
+        End If
     End Sub
 
-    Private Sub sdgBarChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
 End Class
