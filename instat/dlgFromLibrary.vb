@@ -57,6 +57,9 @@ Public Class dlgFromLibrary
             cboPackages.Enabled = True
             lstCollection.Enabled = True
             grpCollection.Enabled = False
+            If Not bFirstLoad Then
+                loadDatasets(cboPackages.SelectedItem.ToString)
+            End If
         ElseIf rdoInstatCollection.Checked Then
             lstCollection.Items.Clear()
             lstCollection.Enabled = False
