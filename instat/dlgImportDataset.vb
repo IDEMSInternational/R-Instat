@@ -214,30 +214,57 @@ Public Class dlgImportDataset
         chkMetadata.Checked = True
         chkGraphics.Checked = True
         chkLogs.Checked = True
-        chkOvverwrite.Checked = False
+        chkOverwrite.Checked = False
         grpRDS.Hide()
     End Sub
 
-    Private Sub chkExisting_CheckStateChanged(sender As Object, e As EventArgs) Handles chkExisting.CheckStateChanged, chkMetadata.CheckStateChanged, chkModel.CheckStateChanged
+
+    Private Sub chkExisting_CheckStateChanged(sender As Object, e As EventArgs) Handles chkExisting.CheckStateChanged
         If chkExisting.Checked Then
             clsImportRDS.AddParameter("keep_existing", "TRUE")
-        ElseIf chkMetadata.Checked Then
-            clsImportRDS.AddParameter("include_metadata", "TRUE")
-        ElseIf chkModel.Checked Then
-            clsImportRDS.AddParameter("include_models", "TRUE")
-        ElseIf chkGraphics.Checked Then
+        Else
+            clsImportRDS.AddParameter("keep_existing", "FALSE")
+        End If
+
+    End Sub
+
+    Private Sub chkGraphics_CheckStateChanged(sender As Object, e As EventArgs) Handles chkGraphics.CheckStateChanged
+        If chkGraphics.Checked Then
             clsImportRDS.AddParameter("include_graphics", "TRUE")
-        ElseIf chkLogs.Checked Then
+        Else
+            clsImportRDS.RemoveParameterByName("include_graphics")
+        End If
+    End Sub
+
+    Private Sub chkLogs_CheckStateChanged(sender As Object, e As EventArgs) Handles chkLogs.CheckStateChanged
+        If chkLogs.Checked Then
             clsImportRDS.AddParameter("include_logs", "TRUE")
-        ElseIf chkOvverwrite.Checked Then
+        Else
+            clsImportRDS.RemoveParameterByName("include_logs")
+        End If
+    End Sub
+
+    Private Sub chkOverWrite_CheckStateChanged(sender As Object, e As EventArgs) Handles chkOverWrite.CheckStateChanged
+        If chkOverWrite.Checked Then
             clsImportRDS.AddParameter("overwrite_existing", "TRUE")
         Else
-            clsImportRDS.RemoveParameterByName("include_metadata")
-            clsImportRDS.RemoveParameterByName("include_metadata")
-            clsImportRDS.RemoveParameterByName("keep_existing")
-            clsImportRDS.RemoveParameterByName("include_graphics")
-            clsImportRDS.RemoveParameterByName("include_logs")
             clsImportRDS.RemoveParameterByName("overwrite_existing")
+        End If
+    End Sub
+
+    Private Sub chkMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles chkMetadata.CheckStateChanged
+        If chkMetadata.Checked Then
+            clsImportRDS.AddParameter("include_metadata", "TRUE")
+        Else
+            clsImportRDS.AddParameter("include_metadata", "FALSE")
+        End If
+    End Sub
+
+    Private Sub chkModel_CheckStateChanged(sender As Object, e As EventArgs) Handles chkModel.CheckStateChanged
+        If chkModel.Checked Then
+            clsImportRDS.AddParameter("include_models", "TRUE")
+        Else
+            clsImportRDS.AddParameter("include_models", "FALSE")
         End If
     End Sub
 
@@ -488,6 +515,5 @@ Public Class dlgImportDataset
     Private Sub cboAvailableSheets_Enter(sender As Object, e As EventArgs) Handles cboAvailableSheets.Enter
         cboAvailableSheets_SelectedValueChanged(sender, e)
     End Sub
-
 #End Region
 End Class

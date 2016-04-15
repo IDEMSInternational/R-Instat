@@ -73,10 +73,10 @@ Partial Class dlgImportDataset
         Me.chkMetadata = New System.Windows.Forms.CheckBox()
         Me.chkModel = New System.Windows.Forms.CheckBox()
         Me.chkExisting = New System.Windows.Forms.CheckBox()
-        Me.chkGraphics = New System.Windows.Forms.CheckBox()
-        Me.chkLogs = New System.Windows.Forms.CheckBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.chkOvverwrite = New System.Windows.Forms.CheckBox()
+        Me.chkLogs = New System.Windows.Forms.CheckBox()
+        Me.chkOverWrite = New System.Windows.Forms.CheckBox()
+        Me.chkGraphics = New System.Windows.Forms.CheckBox()
         CType(Me.nudSkips, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
@@ -545,15 +545,15 @@ Partial Class dlgImportDataset
         '
         'grpRDS
         '
-        Me.grpRDS.Controls.Add(Me.chkOvverwrite)
-        Me.grpRDS.Controls.Add(Me.chkGraphics)
         Me.grpRDS.Controls.Add(Me.chkLogs)
+        Me.grpRDS.Controls.Add(Me.chkOverWrite)
+        Me.grpRDS.Controls.Add(Me.chkGraphics)
         Me.grpRDS.Controls.Add(Me.chkMetadata)
         Me.grpRDS.Controls.Add(Me.chkModel)
         Me.grpRDS.Controls.Add(Me.chkExisting)
         Me.grpRDS.Location = New System.Drawing.Point(12, 84)
         Me.grpRDS.Name = "grpRDS"
-        Me.grpRDS.Size = New System.Drawing.Size(148, 134)
+        Me.grpRDS.Size = New System.Drawing.Size(148, 131)
         Me.grpRDS.TabIndex = 36
         Me.grpRDS.TabStop = False
         Me.grpRDS.Text = "Import RDS options"
@@ -588,28 +588,6 @@ Partial Class dlgImportDataset
         Me.chkExisting.Text = "Keep existing data"
         Me.chkExisting.UseVisualStyleBackColor = True
         '
-        'chkGraphics
-        '
-        Me.chkGraphics.AutoSize = True
-        Me.chkGraphics.Enabled = False
-        Me.chkGraphics.Location = New System.Drawing.Point(3, 74)
-        Me.chkGraphics.Name = "chkGraphics"
-        Me.chkGraphics.Size = New System.Drawing.Size(132, 17)
-        Me.chkGraphics.TabIndex = 4
-        Me.chkGraphics.Text = "Keep existing graphics"
-        Me.chkGraphics.UseVisualStyleBackColor = True
-        '
-        'chkLogs
-        '
-        Me.chkLogs.AutoSize = True
-        Me.chkLogs.Enabled = False
-        Me.chkLogs.Location = New System.Drawing.Point(3, 93)
-        Me.chkLogs.Name = "chkLogs"
-        Me.chkLogs.Size = New System.Drawing.Size(111, 17)
-        Me.chkLogs.TabIndex = 3
-        Me.chkLogs.Text = "Keep existing logs"
-        Me.chkLogs.UseVisualStyleBackColor = True
-        '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(241, 445)
@@ -617,16 +595,35 @@ Partial Class dlgImportDataset
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 27
         '
-        'chkOvverwrite
+        'chkLogs
         '
-        Me.chkOvverwrite.AutoSize = True
-        Me.chkOvverwrite.Enabled = False
-        Me.chkOvverwrite.Location = New System.Drawing.Point(3, 111)
-        Me.chkOvverwrite.Name = "chkOvverwrite"
-        Me.chkOvverwrite.Size = New System.Drawing.Size(109, 17)
-        Me.chkOvverwrite.TabIndex = 5
-        Me.chkOvverwrite.Text = "Overwrite existing"
-        Me.chkOvverwrite.UseVisualStyleBackColor = True
+        Me.chkLogs.AutoSize = True
+        Me.chkLogs.Location = New System.Drawing.Point(3, 90)
+        Me.chkLogs.Name = "chkLogs"
+        Me.chkLogs.Size = New System.Drawing.Size(111, 17)
+        Me.chkLogs.TabIndex = 5
+        Me.chkLogs.Text = "Keep existing logs"
+        Me.chkLogs.UseVisualStyleBackColor = True
+        '
+        'chkOverWrite
+        '
+        Me.chkOverWrite.AutoSize = True
+        Me.chkOverWrite.Location = New System.Drawing.Point(3, 109)
+        Me.chkOverWrite.Name = "chkOverWrite"
+        Me.chkOverWrite.Size = New System.Drawing.Size(109, 17)
+        Me.chkOverWrite.TabIndex = 4
+        Me.chkOverWrite.Text = "Overwrite existing"
+        Me.chkOverWrite.UseVisualStyleBackColor = True
+        '
+        'chkGraphics
+        '
+        Me.chkGraphics.AutoSize = True
+        Me.chkGraphics.Location = New System.Drawing.Point(3, 73)
+        Me.chkGraphics.Name = "chkGraphics"
+        Me.chkGraphics.Size = New System.Drawing.Size(132, 17)
+        Me.chkGraphics.TabIndex = 3
+        Me.chkGraphics.Text = "Keep existing graphics"
+        Me.chkGraphics.UseVisualStyleBackColor = True
         '
         'dlgImportDataset
         '
@@ -715,7 +712,7 @@ Partial Class dlgImportDataset
     Friend WithEvents chkMetadata As CheckBox
     Friend WithEvents chkModel As CheckBox
     Friend WithEvents chkExisting As CheckBox
+    Friend WithEvents chkOverWrite As CheckBox
     Friend WithEvents chkGraphics As CheckBox
     Friend WithEvents chkLogs As CheckBox
-    Friend WithEvents chkOvverwrite As CheckBox
 End Class
