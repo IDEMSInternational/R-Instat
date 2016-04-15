@@ -364,20 +364,6 @@ Public Class dlgTransformText
         End If
     End Sub
 
-
-    Private Sub ucrInputPad_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPad.TextChanged
-
-        If Not ((IsNumeric(ucrInputPad)) Or (Not IsNumeric(ucrInputPad) And (ucrInputPad.cboInput.MaxLength = 1))) Then
-            MsgBox("Please enter a number or one character")
-        Else
-            ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
-
-        End If
-
-    End Sub
-
-
-
     Private Sub ucrInputPad_NameChanged() Handles ucrInputPad.NameChanged
 
 
@@ -395,7 +381,7 @@ Public Class dlgTransformText
                 Case "Underscore"
                     ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "_" & Chr(34))
                 Case Else
-
+                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
             End Select
         Else
             ucrBase.clsRsyntax.RemoveParameter("pad")
