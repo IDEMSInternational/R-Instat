@@ -20,12 +20,13 @@ Public Class sdgPlots
     Public clsXLabFunction As New RFunction
     Public clsYLabFunction As New RFunction
     Public bFirstLoad As Boolean = True
-
+    Public bIncludeFacets As Boolean
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+            bIncludeFacets = False
         End If
         autoTranslate(Me)
     End Sub
@@ -49,6 +50,7 @@ Public Class sdgPlots
         ucr2ndFactorReceiver.Selector = ucrAddRemove
         ucr2ndFactorReceiver.SetDataType("factor")
         chkIncludeFacets.Checked = True
+
     End Sub
 
     Private Sub chkWrapOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkWrapOptions.CheckedChanged
@@ -156,7 +158,17 @@ Public Class sdgPlots
     End Sub
 
     Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
+
+        If Not bIncludeFacets Then
+            FacetsCheck()
+        Else
+            FacetsCheck()
+        End If
+    End Sub
+
+    Private Sub FacetsCheck()
         If chkIncludeFacets.Checked Then
+
             IncludeFacets()
             clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRfacetFunction)
         Else
