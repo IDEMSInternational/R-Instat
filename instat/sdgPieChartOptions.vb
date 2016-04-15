@@ -24,8 +24,11 @@ Public Class sdgPieChartOptions
         nudStartPoint.Value = "0"
         chkClockwise.Checked = True
     End Sub
-    Private Sub nudStartPoint_Leave(sender As Object, e As EventArgs) Handles nudStartPoint.Leave
-        clsPieChartFunction.AddParameter("start", nudStartPoint.Value)
+    Private Sub nudStartPoint_TextChanged(sender As Object, e As EventArgs) Handles nudStartPoint.TextChanged
+        If nudStartPoint.Value <> "" Then
+            clsPieChartFunction.AddParameter("start", nudStartPoint.Value)
+            clsPieChartFunction.RemoveParameterByName("start")
+        End If
     End Sub
 
     Private Sub chkClockwise_CheckedChanged(sender As Object, e As EventArgs) Handles chkClockwise.CheckedChanged

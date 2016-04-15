@@ -113,7 +113,7 @@ Public Class dlgBarAndPieChart
             cmdPieChartOptions.Visible = False
             ucrSecondReceiver.Visible = True
             lblSecondFactor.Visible = True
-        ElseIf rdoPieChart.Checked = True
+        ElseIf rdoPieChart.Checked = True Then
             clsRgeom_barchart.AddParameter("width", "1")
             clsTempRFunc.SetRCommand("coord_polar")
             clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
