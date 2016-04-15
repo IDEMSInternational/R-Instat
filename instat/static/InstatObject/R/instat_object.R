@@ -130,6 +130,7 @@ instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrit
 		  curr_data_name = data_RDS$data_objects[[i]]$metadata[[data_name_label]]
           if (!include_metadata) {
             data_RDS$data_objects[[i]]$set_meta(list()) 
+			data_RDS$data_objects[[i]]$add_defaults_meta()
             data_RDS$data_objects[[i]]$set_variables_metadata(data.frame()) 
             
           }
