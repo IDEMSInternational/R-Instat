@@ -116,8 +116,7 @@ instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrit
 { 
   if(class(data_RDS) == "instat_obj"){ 
     if (!keep_existing & include_models & include_graphics & include_metadata & include_logs){
-      .self<<-data_RDS
-      data_objects_changed <<- TRUE
+      .self$replace_instat_object(new_instatObj = data_RDS) 
     } else {
       if (!keep_existing) {
         .self$clear_data()
@@ -128,6 +127,7 @@ instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrit
         if (!(data_RDS$data_objects[[i]]$metadata[[data_name_label]] %in% names(data_objects)) | overwrite_existing){
           #TODO in data_object if (!include_models) data_RDS$data_objects[i]$clear_models
           #TODO in data_object if (!include_graphics) data_RDS$data_objects[i]$clear_graphics
+		  curr_data_name = data_RDS$data_objects[[i]]$metadata[[data_name_label]]
           if (!include_metadata) {
             data_RDS$data_objects[[i]]$set_meta(list()) 
             data_RDS$data_objects[[i]]$set_variables_metadata(data.frame()) 
@@ -135,7 +135,7 @@ instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrit
           }
           if (!include_logs) data_RDS$data_objects[i]$set_changes(list())
           # Add this new data object to our list of data objects
-          .self$append_data_objects(data_RDS$data_objects[[i]]$metadata[[data_name_label]],data_RDS$data_objects[[i]])
+          .self$append_data_objects(curr_data_name,data_RDS$data_objects[[i]])
         }
       }
       if (include_models & length(data_RDS$models) > 0){
@@ -165,6 +165,16 @@ instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrit
   }
 }
 )
+
+instat_obj$methods(replace_instat_object = function(new_instatObj) { 
+   data_objects<<-new_instatObj$data_objects  
+   .self$set_meta(new_instatObj$metadata) 
+   .self$set_models(new_instatObj$models) 
+   data_objects_changed <<- TRUE 
+   lapply(data_objects, function(x) x$set_data_changed(TRUE))
+ } 
+ ) 
+
 
 instat_obj$methods(set_meta = function(new_meta) {
   if( ! is.list(new_meta) ) {
