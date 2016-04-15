@@ -20,13 +20,12 @@ Public Class sdgPlots
     Public clsXLabFunction As New RFunction
     Public clsYLabFunction As New RFunction
     Public bFirstLoad As Boolean = True
-    Public bIncludeFacets As Boolean
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-            bIncludeFacets = False
+
         End If
         autoTranslate(Me)
     End Sub
@@ -41,6 +40,7 @@ Public Class sdgPlots
         chkDisplayYTitle.Checked = False
         chkMargin.Checked = False
         chkIncludeFacets.Checked = False
+        FacetsCheck(False)
 
     End Sub
 
@@ -158,17 +158,11 @@ Public Class sdgPlots
     End Sub
 
     Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
-
-        If Not bIncludeFacets Then
-            FacetsCheck()
-        Else
-            FacetsCheck()
-        End If
+        FacetsCheck(chkIncludeFacets.Checked)
     End Sub
 
-    Private Sub FacetsCheck()
-        If chkIncludeFacets.Checked Then
-
+    Private Sub FacetsCheck(bChecked As Boolean)
+        If bChecked Then
             IncludeFacets()
             clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRfacetFunction)
         Else
