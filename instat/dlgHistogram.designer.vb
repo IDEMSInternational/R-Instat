@@ -22,7 +22,6 @@ Partial Class dlgHistogram
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblVariableToPlot = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdHistogramOptions = New System.Windows.Forms.Button()
         Me.rdoHistogram = New System.Windows.Forms.RadioButton()
@@ -34,19 +33,9 @@ Partial Class dlgHistogram
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrXReceiver = New instat.ucrReceiverSingle()
         Me.ucrSaveHist = New instat.ucrSaveGraph()
+        Me.ucrVariablesAsFactorforHist = New instat.ucrVariablesAsFactor()
         Me.SuspendLayout()
-        '
-        'lblVariableToPlot
-        '
-        Me.lblVariableToPlot.AutoSize = True
-        Me.lblVariableToPlot.Location = New System.Drawing.Point(288, 63)
-        Me.lblVariableToPlot.Name = "lblVariableToPlot"
-        Me.lblVariableToPlot.Size = New System.Drawing.Size(78, 13)
-        Me.lblVariableToPlot.TabIndex = 4
-        Me.lblVariableToPlot.Tag = "Variable_to_Plot"
-        Me.lblVariableToPlot.Text = "Variable to Plot"
         '
         'cmdOptions
         '
@@ -107,7 +96,7 @@ Partial Class dlgHistogram
         'lblfactor
         '
         Me.lblfactor.AutoSize = True
-        Me.lblfactor.Location = New System.Drawing.Point(293, 126)
+        Me.lblfactor.Location = New System.Drawing.Point(301, 193)
         Me.lblfactor.Name = "lblfactor"
         Me.lblfactor.Size = New System.Drawing.Size(37, 13)
         Me.lblfactor.TabIndex = 6
@@ -136,7 +125,7 @@ Partial Class dlgHistogram
         '
         'ucrFactorReceiver
         '
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(286, 142)
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(294, 209)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
@@ -144,7 +133,7 @@ Partial Class dlgHistogram
         '
         'ucrHistogramSelector
         '
-        Me.ucrHistogramSelector.Location = New System.Drawing.Point(6, 42)
+        Me.ucrHistogramSelector.Location = New System.Drawing.Point(6, 32)
         Me.ucrHistogramSelector.Name = "ucrHistogramSelector"
         Me.ucrHistogramSelector.Size = New System.Drawing.Size(242, 179)
         Me.ucrHistogramSelector.TabIndex = 3
@@ -156,14 +145,6 @@ Partial Class dlgHistogram
         Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 10
         '
-        'ucrXReceiver
-        '
-        Me.ucrXReceiver.Location = New System.Drawing.Point(286, 82)
-        Me.ucrXReceiver.Name = "ucrXReceiver"
-        Me.ucrXReceiver.Selector = Nothing
-        Me.ucrXReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrXReceiver.TabIndex = 5
-        '
         'ucrSaveHist
         '
         Me.ucrSaveHist.Location = New System.Drawing.Point(6, 242)
@@ -171,11 +152,20 @@ Partial Class dlgHistogram
         Me.ucrSaveHist.Size = New System.Drawing.Size(269, 27)
         Me.ucrSaveHist.TabIndex = 11
         '
+        'ucrVariablesAsFactorforHist
+        '
+        Me.ucrVariablesAsFactorforHist.Location = New System.Drawing.Point(286, 54)
+        Me.ucrVariablesAsFactorforHist.Name = "ucrVariablesAsFactorforHist"
+        Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorforHist.TabIndex = 12
+        Me.ucrVariablesAsFactorforHist.ucrVariableSelector = Nothing
+        '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(427, 327)
+        Me.Controls.Add(Me.ucrVariablesAsFactorforHist)
         Me.Controls.Add(Me.ucrSaveHist)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.rdoFreequencyPolygon)
@@ -187,9 +177,7 @@ Partial Class dlgHistogram
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrHistogramSelector)
         Me.Controls.Add(Me.lblfactor)
-        Me.Controls.Add(Me.lblVariableToPlot)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrXReceiver)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgHistogram"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -199,9 +187,7 @@ Partial Class dlgHistogram
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ucrXReceiver As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblVariableToPlot As Label
     Friend WithEvents ucrHistogramSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdOptions As Button
     Friend WithEvents cmdHistogramOptions As Button
@@ -213,4 +199,5 @@ Partial Class dlgHistogram
     Friend WithEvents cmdDensityOptions As Button
     Friend WithEvents cmdFrequencyOptions As Button
     Friend WithEvents ucrSaveHist As ucrSaveGraph
+    Friend WithEvents ucrVariablesAsFactorforHist As ucrVariablesAsFactor
 End Class
