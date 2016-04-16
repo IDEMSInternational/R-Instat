@@ -19,31 +19,39 @@ Public Class dlgConvertColumns
     Public bFirstLoad As Boolean = True
 
     Private Sub ucrSelectorDataFrameColumns_Load(sender As Object, e As EventArgs) Handles ucrSelectorDataFrameColumns.Load
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
-
-        ucrReceiverColumnsToConvert.Selector = ucrSelectorDataFrameColumns
         autoTranslate(Me)
-        ucrBase.iHelpTopicID = 34
 
         If bFirstLoad Then
             SetDefaults()
+            InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialog()
 
         End If
 
-        rdoCharacter.Enabled = False
-        rdoInteger.Enabled = False
-        rdoNumeric.Enabled = False
         TestOKEnabled()
 
+    End Sub
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        ucrReceiverColumnsToConvert.Selector = ucrSelectorDataFrameColumns
+        ucrReceiverColumnsToConvert.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 34
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorDataFrameColumns.Reset()
         ucrSelectorDataFrameColumns.Focus()
-        ucrReceiverColumnsToConvert.SetMeAsReceiver()
         rdoByLevels.Checked = True
         rdoFactor.Checked = True
+        rdoCharacter.Enabled = False
+        rdoInteger.Enabled = False
+        rdoNumeric.Enabled = False
         TestOKEnabled()
     End Sub
 
@@ -53,7 +61,11 @@ Public Class dlgConvertColumns
     End Sub
 
     Private Sub ucrReceiverColumnsToConvert_SelectionChanged() Handles ucrReceiverColumnsToConvert.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverColumnsToConvert.GetVariableNames)
+        If Not ucrReceiverColumnsToConvert.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverColumnsToConvert.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_names")
+        End If
         TestOKEnabled()
     End Sub
 
