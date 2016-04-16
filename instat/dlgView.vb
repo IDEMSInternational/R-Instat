@@ -19,14 +19,11 @@ Public Class dlgView
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.iHelpTopicID = 32
         ucrBase.clsRsyntax.iCallType = 2
 
-
-        ucrReceiverView.Selector = ucrSelctorForView
-        ucrReceiverView.SetMeAsReceiver()
         If bFirstLoad Then
             SetDefaults()
+            InitialiseDialog()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -40,6 +37,14 @@ Public Class dlgView
         ucrSelctorForView.Reset()
         ucrSelctorForView.Focus()
         rdoTop.Checked = True
+        grpDisplayFrom.ResetText()
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrReceiverView.Selector = ucrSelctorForView
+        ucrReceiverView.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 32
+
     End Sub
 
     Private Sub ReopenDialog()
@@ -56,8 +61,7 @@ Public Class dlgView
 
 
 
-    Private Sub grpSelectedRows_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBottom.CheckedChanged, rdoTop.CheckedChanged
-
+    Private Sub grpDisplayFrom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBottom.CheckedChanged, rdoTop.CheckedChanged
         grpRowsToBeSelected()
     End Sub
 
@@ -87,19 +91,16 @@ Public Class dlgView
 
     End Sub
 
-    Private Sub nudNumberRows_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberRows.ValueChanged
-
+    Private Sub nudNumberRows_TextChanged(sender As Object, e As EventArgs) Handles nudNumberRows.TextChanged
         ucrBase.clsRsyntax.AddParameter("n", nudNumberRows.Value)
-
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelctorForView_DataFrameChanged() Handles ucrSelctorForView.DataFrameChanged
         nudNumberRows.Maximum = ucrSelctorForView.ucrAvailableDataFrames.iDataFrameLength
     End Sub
-
 End Class
