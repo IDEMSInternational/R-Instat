@@ -27,6 +27,7 @@ Public Class sdgPieChartOptions
     Private Sub nudStartPoint_TextChanged(sender As Object, e As EventArgs) Handles nudStartPoint.TextChanged
         If nudStartPoint.Value <> "" Then
             clsPieChartFunction.AddParameter("start", nudStartPoint.Value)
+        Else
             clsPieChartFunction.RemoveParameterByName("start")
         End If
     End Sub
