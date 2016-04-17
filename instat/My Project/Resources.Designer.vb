@@ -1489,6 +1489,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Gamma.
+        '''</summary>
+        Friend ReadOnly Property Gamma() As String
+            Get
+                Return ResourceManager.GetString("Gamma", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Gamma With Shape and Mean.
         '''</summary>
         Friend ReadOnly Property Gamma_With_Shape_and_Mean() As String
@@ -1809,6 +1818,15 @@ Namespace My.Resources
         Friend ReadOnly Property InventoryPlot() As String
             Get
                 Return ResourceManager.GetString("InventoryPlot", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inverse Gaussian.
+        '''</summary>
+        Friend ReadOnly Property Inverse_Gaussian() As String
+            Get
+                Return ResourceManager.GetString("Inverse_Gaussian", resourceCulture)
             End Get
         End Property
         
@@ -2820,6 +2838,33 @@ Namespace My.Resources
         Friend ReadOnly Property Process() As String
             Get
                 Return ResourceManager.GetString("Process", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quasi.
+        '''</summary>
+        Friend ReadOnly Property Quasi() As String
+            Get
+                Return ResourceManager.GetString("Quasi", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quasibinomial.
+        '''</summary>
+        Friend ReadOnly Property Quasibinomial() As String
+            Get
+                Return ResourceManager.GetString("Quasibinomial", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quasipoisson.
+        '''</summary>
+        Friend ReadOnly Property Quasipoisson() As String
+            Get
+                Return ResourceManager.GetString("Quasipoisson", resourceCulture)
             End Get
         End Property
         
