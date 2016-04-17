@@ -13,6 +13,7 @@ library(GGally)
 library(CCA)
 library(plotrix)
 library(agridat)
+library(candisc)
 setwd(dirname(parent.frame(2)$ofile))
 
 source("instat_object.R")
