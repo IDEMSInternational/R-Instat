@@ -23,12 +23,13 @@ Public Class dlgReorderLevels
 
         If bFirstLoad Then
             InitialiseDialog()
+            SetDefaultSettings()
             bFirstLoad = False
         End If
-
+        TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
         ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetDataType("factor")
@@ -41,13 +42,30 @@ Public Class dlgReorderLevels
         ucrSelectorFactorLevelsToReorder.Reset()
         ucrSelectorFactorLevelsToReorder.Focus()
         ucrReorderFactor.lstAvailableData.ResetText()
-
+        TestOKEnabled()
     End Sub
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
 
+    Private Sub ucrSelectorFactorLevelsToReorder_DataFrameChanged() Handles ucrSelectorFactorLevelsToReorder.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+    End Sub
+
+    Private Sub ucrReceiverFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverFactor.GetVariableNames)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReorderFactor_Leave(sender As Object, e As EventArgs) Handles ucrReorderFactor.Leave
+        ucrBase.clsRsyntax.AddParameter("new_level_names", ucrReorderFactor.GetVariableNames)
+    End Sub
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverFactor.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaultSettings()
     End Sub
 End Class
