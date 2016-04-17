@@ -28,4 +28,14 @@ Public Class frmCommand
             'mnuContextRTB.Enabled = False
         End If
     End Sub
+
+    Public Sub txtCommand_KeyUp(sender As Object, e As KeyEventArgs) Handles txtCommand.KeyUp
+        If e.Control And e.KeyCode = Keys.A Then
+            txtCommand.SelectAll()
+        End If
+
+        If e.Control And e.KeyCode = Keys.C And txtCommand.SelectedText <> "" Then
+            txtCommand.Copy()
+        End If
+    End Sub
 End Class

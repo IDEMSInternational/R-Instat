@@ -7,4 +7,13 @@
         End If
     End Sub
 
+    Private Sub txtLog_KeyUp(sender As Object, e As KeyEventArgs) Handles txtLog.KeyUp
+        If e.Control And e.KeyCode = Keys.A Then
+            txtLog.SelectAll()
+        End If
+
+        If e.Control And e.KeyCode = Keys.C And txtLog.SelectedText <> "" Then
+            txtLog.Copy()
+        End If
+    End Sub
 End Class
