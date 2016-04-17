@@ -1489,6 +1489,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Gamma.
+        '''</summary>
+        Friend ReadOnly Property Gamma() As String
+            Get
+                Return ResourceManager.GetString("Gamma", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Gamma With Shape and Mean.
         '''</summary>
         Friend ReadOnly Property Gamma_With_Shape_and_Mean() As String
