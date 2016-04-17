@@ -24,6 +24,7 @@ Public Class ucrDistributions
     Public clsCurrDistribution As New Distribution
     Public bDistributionsSet As Boolean = False
     Public clsCurrRFunction As New RFunction
+    Private strDatatype As String = ""
     Public lstFunctionParameters As New List(Of RParameter)
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -74,6 +75,27 @@ Public Class ucrDistributions
 
     End Sub
 
+    Public Sub SetQDistributions()
+
+        strDistributionType = "QFunctions"
+        SetDistributions()
+
+    End Sub
+
+    Public Sub SetDDistributions()
+
+        strDistributionType = "DFunctions"
+        SetDistributions()
+
+    End Sub
+
+    Public Sub SetGLMDistributions()
+
+        strDistributionType = "GLMFunctions"
+        SetDistributions()
+
+    End Sub
+
     Private Sub SetDistributions()
 
         Dim bUse As Boolean
@@ -88,16 +110,35 @@ Public Class ucrDistributions
                 Case "PFunctions"
                     bUse = (Dist.strPFunctionName <> "")
                 Case "QFunctions"
+                    bUse = (Dist.strQFunctionName <> "")
                 Case "DFunctions"
+                    bUse = (Dist.strDFunctionName <> "")
                 Case "GLMFunctions"
+                    If (Dist.strGLMFunctionName <> "") Then
+                        Select Case strDatatype
+                            Case "numeric"
+                                If Dist.bNumeric Then
+                                    bUse = True
+                                End If
+                            Case "positive integer"
+                                If Dist.bPositiveInt Then
+                                    bUse = True
+                                End If
+                            Case "two levels factor"
+                                If Dist.bTwoLevelFactor Then
+                                    bUse = True
+                                End If
+                        End Select
+                    End If
             End Select
             If Dist.bIncluded And bUse Then
                 lstCurrentDistributions.Add(Dist)
                 cboDistributions.Items.Add(translate(Dist.strNameTag))
             End If
         Next
-        cboDistributions.SelectedIndex = 0
-
+        If cboDistributions.Items.Count > 0 Then
+            cboDistributions.SelectedIndex = 0
+        End If
     End Sub
 
     Public Sub CreateDistributions()
@@ -112,10 +153,15 @@ Public Class ucrDistributions
         Dim clsPoissonDist As New Distribution
         Dim clsVonnMisesDist As New Distribution
         Dim clsCategoricalDist As New Distribution
+        Dim clsGamma As New Distribution
         Dim clsGammaWithZerosDist As New Distribution
         Dim clsGammaWithShapeandScale As New Distribution
         Dim clsGammaWithShapeandMean As New Distribution
         Dim clsGammaWithShapeandRate As New Distribution
+        Dim clsInverseGaussianDist As New Distribution
+        Dim clsQuasiDist As New Distribution
+        Dim clsQuasibinomialDist As New Distribution
+        Dim clsQuasipoissonDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -123,7 +169,8 @@ Public Class ucrDistributions
         clsNormalDist.strPFunctionName = "pnorm"
         clsNormalDist.strQFunctionName = "qnorm"
         clsNormalDist.strDFunctionName = "dnorm"
-        clsNormalDist.strGLMFunctionName = "gausian"
+        clsNormalDist.strGLMFunctionName = "gaussian"
+        clsNormalDist.bNumeric = True
         clsNormalDist.AddParameter("mean", "Mean", 0)
         clsNormalDist.AddParameter("sd", "Standard_deviation", 1)
         lstAllDistributions.Add(clsNormalDist)
@@ -176,7 +223,6 @@ Public Class ucrDistributions
         clsUniformDist.AddParameter("b", "b", 1)
         lstAllDistributions.Add(clsUniformDist)
 
-
         'Bernouli Distribution
         clsBernouliDist.strNameTag = "Bernouli"
         clsBernouliDist.strRFunctionName = "rbern"
@@ -192,6 +238,8 @@ Public Class ucrDistributions
         clsBinomialDist.strPFunctionName = "pbinom"
         clsBinomialDist.strQFunctionName = "qbinom"
         clsBinomialDist.strDFunctionName = "dbinom"
+        clsBinomialDist.strGLMFunctionName = "binomial"
+        clsBinomialDist.bTwoLevelFactor = True
         clsBinomialDist.AddParameter("number", "Number", 1)
         clsBinomialDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsBinomialDist)
@@ -202,9 +250,10 @@ Public Class ucrDistributions
         clsPoissonDist.strPFunctionName = "ppois"
         clsPoissonDist.strQFunctionName = "qpois"
         clsPoissonDist.strDFunctionName = "dpois"
+        clsPoissonDist.strGLMFunctionName = "poisson"
+        clsPoissonDist.bPositiveInt = True
         clsPoissonDist.AddParameter("mean", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
-
 
         ' von mises distribution
         clsVonnMisesDist.strNameTag = "von_mises"
@@ -216,7 +265,7 @@ Public Class ucrDistributions
         clsVonnMisesDist.AddParameter("kappa", "Kappa", 0)
         lstAllDistributions.Add(clsVonnMisesDist)
 
-        'Categorical distribution
+        'TODO Categorical distribution
         clsCategoricalDist.strNameTag = "Categorical"
         clsCategoricalDist.strRFunctionName = ""
         clsCategoricalDist.strPFunctionName = ""
@@ -246,9 +295,6 @@ Public Class ucrDistributions
         clsGammaWithShapeandMean.AddParameter("mean", "Mean")
         lstAllDistributions.Add(clsGammaWithShapeandMean)
 
-
-
-
         'Gamma With Shape and Rate distribution
         clsGammaWithShapeandRate.strNameTag = "Gamma_With_Shape_and_Rate"
         clsGammaWithShapeandRate.strRFunctionName = "rgamma"
@@ -259,8 +305,14 @@ Public Class ucrDistributions
         clsGammaWithShapeandRate.AddParameter("rate", "Rate")
         lstAllDistributions.Add(clsGammaWithShapeandRate)
 
+        'Gamma With Shape and Scale distribution
+        clsGamma.strNameTag = "Gamma"
+        clsGamma.strGLMFunctionName = "Gamma"
+        clsGamma.bNumeric = True
+        lstAllDistributions.Add(clsGamma)
 
         'Gamma with Zeros distribution
+        'TODO Paramaters 
         clsGammaWithZerosDist.strNameTag = "Gamma_With_Zeros"
         clsGammaWithZerosDist.strRFunctionName = "rgamma"
         clsGammaWithZerosDist.strPFunctionName = "pgamma"
@@ -270,11 +322,36 @@ Public Class ucrDistributions
         clsGammaWithZerosDist.AddParameter("", "", )
         lstAllDistributions.Add(clsGammaWithZerosDist)
 
+        'Inverse Gaussian distribution
+        clsInverseGaussianDist.strNameTag = "Inverse_Gaussian"
+        clsInverseGaussianDist.strGLMFunctionName = "inverse.gaussian"
+        clsInverseGaussianDist.bNumeric = True
+        lstAllDistributions.Add(clsInverseGaussianDist)
+
+        'Quasi distribution
+        clsQuasiDist.strNameTag = "Quasi"
+        clsQuasiDist.strGLMFunctionName = "quasi"
+        clsQuasiDist.bNumeric = True
+        lstAllDistributions.Add(clsQuasiDist)
+
+        'Quasibinomial distribution
+        clsQuasibinomialDist.strNameTag = "Quasibinomial"
+        clsQuasibinomialDist.strGLMFunctionName = "quasibinomial"
+        clsQuasibinomialDist.bTwoLevelFactor = True
+        lstAllDistributions.Add(clsQuasibinomialDist)
+
+        'Quasipoisson distribution
+        clsQuasipoissonDist.strNameTag = "Quasipoisson"
+        clsQuasipoissonDist.strGLMFunctionName = "quasipoisson"
+        clsQuasipoissonDist.bPositiveInt = True
+        lstAllDistributions.Add(clsQuasipoissonDist)
+
         bDistributionsSet = True
     End Sub
     Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
         clsCurrDistribution = lstCurrentDistributions(cboDistributions.SelectedIndex)
+        'TODO why is this in here it's not relavent to the selection.
         Select Case strDistributionType
             Case "RFunctions"
                 clsCurrRFunction.SetRCommand(clsCurrDistribution.strRFunctionName)
@@ -289,4 +366,10 @@ Public Class ucrDistributions
         End Select
         RaiseEvent cboDistributionsIndexChanged(sender, e)
     End Sub
+
+    Public Sub RecieverDatatype(DataFrame As String, Column As String)
+        strDatatype = frmMain.clsRLink.GetDataType(DataFrame, Column)
+        SetDistributions()
+    End Sub
+
 End Class
