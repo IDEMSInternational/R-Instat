@@ -169,7 +169,7 @@ Partial Class dlgRegularSequence
         Me.chkDefineAsFactor.Checked = True
         Me.chkDefineAsFactor.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkDefineAsFactor.Enabled = False
-        Me.chkDefineAsFactor.Location = New System.Drawing.Point(9, 129)
+        Me.chkDefineAsFactor.Location = New System.Drawing.Point(12, 129)
         Me.chkDefineAsFactor.Name = "chkDefineAsFactor"
         Me.chkDefineAsFactor.Size = New System.Drawing.Size(101, 17)
         Me.chkDefineAsFactor.TabIndex = 11
@@ -190,7 +190,7 @@ Partial Class dlgRegularSequence
         'lblRepeatValues
         '
         Me.lblRepeatValues.AutoSize = True
-        Me.lblRepeatValues.Location = New System.Drawing.Point(6, 108)
+        Me.lblRepeatValues.Location = New System.Drawing.Point(12, 108)
         Me.lblRepeatValues.Name = "lblRepeatValues"
         Me.lblRepeatValues.Size = New System.Drawing.Size(76, 13)
         Me.lblRepeatValues.TabIndex = 8
@@ -201,7 +201,7 @@ Partial Class dlgRegularSequence
         '
         Me.lblSteps.AutoSize = True
         Me.lblSteps.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSteps.Location = New System.Drawing.Point(6, 82)
+        Me.lblSteps.Location = New System.Drawing.Point(12, 82)
         Me.lblSteps.Name = "lblSteps"
         Me.lblSteps.Size = New System.Drawing.Size(56, 13)
         Me.lblSteps.TabIndex = 6
@@ -212,7 +212,7 @@ Partial Class dlgRegularSequence
         '
         Me.lblTo.AutoSize = True
         Me.lblTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTo.Location = New System.Drawing.Point(6, 56)
+        Me.lblTo.Location = New System.Drawing.Point(12, 56)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(20, 13)
         Me.lblTo.TabIndex = 3
@@ -223,7 +223,7 @@ Partial Class dlgRegularSequence
         '
         Me.lblFrom.AutoSize = True
         Me.lblFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFrom.Location = New System.Drawing.Point(6, 30)
+        Me.lblFrom.Location = New System.Drawing.Point(12, 30)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(30, 13)
         Me.lblFrom.TabIndex = 0
@@ -233,7 +233,7 @@ Partial Class dlgRegularSequence
         'lblPreview
         '
         Me.lblPreview.AutoSize = True
-        Me.lblPreview.Location = New System.Drawing.Point(235, 48)
+        Me.lblPreview.Location = New System.Drawing.Point(235, 51)
         Me.lblPreview.Name = "lblPreview"
         Me.lblPreview.Size = New System.Drawing.Size(45, 13)
         Me.lblPreview.TabIndex = 7
@@ -292,7 +292,7 @@ Partial Class dlgRegularSequence
         '
         'UcrInputCboRegularSequence
         '
-        Me.UcrInputCboRegularSequence.Location = New System.Drawing.Point(272, 252)
+        Me.UcrInputCboRegularSequence.Location = New System.Drawing.Point(122, 258)
         Me.UcrInputCboRegularSequence.Name = "UcrInputCboRegularSequence"
         Me.UcrInputCboRegularSequence.Size = New System.Drawing.Size(137, 25)
         Me.UcrInputCboRegularSequence.TabIndex = 11
@@ -300,7 +300,7 @@ Partial Class dlgRegularSequence
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(18, 263)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(12, 263)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumnName.TabIndex = 12

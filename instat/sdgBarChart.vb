@@ -9,6 +9,7 @@
         'Need to be careful that this will trigger the checkedchaged event
         'If rdoStack is checked in the designer, this will not trigger the event
         rdoStack.Checked = True
+        nudWidth.Value = "0.9"
     End Sub
 
     Private Sub grpPosition_CheckedChanged(sender As Object, e As EventArgs) Handles rdoStack.CheckedChanged, rdoDodge.CheckedChanged, rdoFill.CheckedChanged
@@ -26,4 +27,14 @@
             clsBarChartFunction.RemoveParameterByName("position")
         End If
     End Sub
+
+    Private Sub nudWidth_TextChanged(sender As Object, e As EventArgs) Handles nudWidth.TextChanged
+        If nudWidth.Value <> "" Then
+            clsBarChartFunction.AddParameter("width", nudWidth.Value)
+        Else
+            clsBarChartFunction.RemoveParameterByName("width")
+        End If
+    End Sub
+
+
 End Class

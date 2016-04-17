@@ -31,6 +31,7 @@ Partial Class dlgRegressionSimple
         Me.lblExplanatory = New System.Windows.Forms.Label()
         Me.cmdRegressionOptions = New System.Windows.Forms.Button()
         Me.chkSaveModel = New System.Windows.Forms.CheckBox()
+        Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrModelName = New instat.ucrVariableName()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
         Me.ucrResponse = New instat.ucrReceiverSingle()
@@ -86,6 +87,11 @@ Partial Class dlgRegressionSimple
         Me.chkSaveModel.Tag = "Save_Model"
         Me.chkSaveModel.UseVisualStyleBackColor = True
         '
+        'ucrFamily
+        '
+        resources.ApplyResources(Me.ucrFamily, "ucrFamily")
+        Me.ucrFamily.Name = "ucrFamily"
+        '
         'ucrModelName
         '
         resources.ApplyResources(Me.ucrModelName, "ucrModelName")
@@ -117,6 +123,7 @@ Partial Class dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.cmdRegressionOptions)
@@ -154,4 +161,5 @@ Partial Class dlgRegressionSimple
     Friend WithEvents cmdRegressionOptions As Button
     Friend WithEvents ucrModelName As ucrVariableName
     Friend WithEvents chkSaveModel As CheckBox
+    Friend WithEvents ucrFamily As ucrDistributions
 End Class
