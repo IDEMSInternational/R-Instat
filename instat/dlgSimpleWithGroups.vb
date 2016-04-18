@@ -19,9 +19,10 @@ Public Class dlgSimpleWithGroups
     Public bFirstLoad As Boolean = True
     Public clsRSingleModelFunction As RFunction
     Dim clsModel, clsModel1, clsModel2, clsModel3 As New ROperator
+    Dim operation As String
 
     Private Sub dlgSimpleWithGroups_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        UcrInputComboBox1.SetItemsTypeAsModels()
+        'UcrInputComboBox1.SetItemsTypeAsModels()
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -30,11 +31,11 @@ Public Class dlgSimpleWithGroups
         Else
             ReopenDialog()
         End If
+
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBaseRegWithGroups.clsRsyntax.SetFunction("lm")
         ucrBaseRegWithGroups.clsRsyntax.iCallType = 2
         clsModel.SetOperation("~")
         ucrResponse.Selector = ucrSelectorSimpleRegGroups
@@ -51,15 +52,25 @@ Public Class dlgSimpleWithGroups
         ucrSelectorSimpleRegGroups.Reset()
         ucrResponse.SetMeAsReceiver()
         ucrSelectorSimpleRegGroups.Focus()
+        operation = ""
         chkSaveModel.Checked = True
-        ucrModelName.SetName("reg_grp")
-        chkAll.Checked = True
-        TestOKEnabled(clsModel)
+        ucrModelName.Visible = True
+        ucrFamily.Enabled = False
+        'TODO get this to be getting a default name e.g. reg1, reg2, etc.
+        '     will be possible with new textbox user control
+        ucrModelName.SetName("reg")
+        'sdgSimpleRegOptions.SetDefaults()
+        TestOKEnabled()
     End Sub
 
-    Public Sub TestOKEnabled(clsModelNew)
-        If (Not ucrResponse.IsEmpty()) And (Not ucrExplanatory.IsEmpty()) And (Not ucrGroupingFactor.IsEmpty()) Then
-            ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModelNew)
+    Public Sub TestOKEnabled()
+        If (Not ucrResponse.IsEmpty()) And (Not ucrExplanatory.IsEmpty()) And (Not ucrGroupingFactor.IsEmpty()) And (operation <> "") Then
+            clsModel1.SetOperation(operation)
+            clsModel1.bBrackets = False
+            clsModel1.SetParameter(True, clsOp:=clsModel)
+            clsModel1.SetParameter(False, strValue:=ucrGroupingFactor.GetVariableNames(bWithQuotes:=False))
+            ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel1)
+            ucrModelPreview.txtInput.Text = clsModel1.strAssignToModel
             ucrBaseRegWithGroups.OKEnabled(True)
 
         Else
@@ -70,19 +81,23 @@ Public Class dlgSimpleWithGroups
     Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorSimpleRegGroups.DataFrameChanged
         ucrBaseRegWithGroups.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleRegGroups.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
-
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
-        clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
-        TestOKEnabled(clsModel)
+        If Not ucrResponse.IsEmpty Then
+            clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+            ucrFamily.RecieverDatatype(ucrSelectorSimpleRegGroups.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+            ucrFamily.Enabled = True
+            ucrFamily.SetGLMDistributions()
+        End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
         clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
-        TestOKEnabled(clsModel)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrGroupingFactor_SelectionChanged() Handles ucrGroupingFactor.SelectionChanged
-        TestOKEnabled(clsModel)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBaseRegWithGroups_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseRegWithGroups.ClickReset
@@ -93,17 +108,32 @@ Public Class dlgSimpleWithGroups
         AssignModelName()
     End Sub
 
-    Private Sub ucrBaseRegWithGroups_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseRegWithGroups.ClickOk
-        RegOptions()
+    Private Sub ucrModelPreview_TextChanged(sender As Object, e As EventArgs) Handles ucrModelPreview.TextChanged
+        'TODO: we need to preview the model here
     End Sub
 
-    Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
-        If chkSaveModel.Checked Then
-            ucrModelName.Visible = True
-        Else
-            ucrModelName.Visible = False
-        End If
-        AssignModelName()
+    Private Sub cmdSWGOptions_Click(sender As Object, e As EventArgs) Handles cmdSWGOptions.Click
+        'sdgSimpleWithGroupsOptions.ShowDialog()
+    End Sub
+
+    Private Sub cmdParallelLines_Click(sender As Object, e As EventArgs) Handles cmdParallelLines.Click
+        operation = "+"
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdConditional_Click(sender As Object, e As EventArgs) Handles cmdConditional.Click
+        operation = ":"
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdJointLines_Click(sender As Object, e As EventArgs) Handles cmdJointLines.Click
+        operation = "*"
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdCommonIntercept_Click(sender As Object, e As EventArgs) Handles cmdCommonIntercept.Click
+        operation = "/"
+        TestOKEnabled()
     End Sub
 
     Private Sub AssignModelName()
@@ -116,69 +146,14 @@ Public Class dlgSimpleWithGroups
         End If
     End Sub
 
-    Private Sub SingleModel()
-        ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
-        TestOKEnabled(clsModel)
-        frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.clsBaseFunction.ToScript(), 2)
-    End Sub
-
-    Private Sub CommonIntercept()
-        clsModel1.SetOperation("/")
-        clsModel1.bBrackets = False
-        clsModel1.SetParameter(True, clsOp:=clsModel)
-        clsModel1.SetParameter(False, strValue:=ucrGroupingFactor.GetVariableNames(bWithQuotes:=False))
-        ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel1)
-        TestOKEnabled(clsModel1)
-        frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.clsBaseFunction.ToScript(), 2)
-    End Sub
-
-
-    Private Sub chkAll_CheckedChanged(sender As Object, e As EventArgs) Handles chkAll.CheckedChanged
-        If (chkAll.Checked) Then
-            chkSingle.Checked = True
-            chkCommonIntercept.Checked = True
-            chkParallelLines.Checked = True
-            chkJointLines.Checked = True
+    Private Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+        'TODO: Include multinomial as an option and the appropriate function
+        If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
+            ucrBaseRegWithGroups.clsRsyntax.SetFunction("lm")
+            ucrBaseRegWithGroups.clsRsyntax.RemoveParameter("family")
         Else
-            chkSingle.Checked = False
-            chkCommonIntercept.Checked = False
-            chkParallelLines.Checked = False
-            chkJointLines.Checked = False
-        End If
-    End Sub
-
-    Private Sub ParallelLines()
-        clsModel2.SetOperation("+")
-        clsModel2.bBrackets = False
-        clsModel2.SetParameter(True, clsOp:=clsModel)
-        clsModel2.SetParameter(False, strValue:=ucrGroupingFactor.GetVariableNames(bWithQuotes:=False))
-        ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel2)
-        TestOKEnabled(clsModel2)
-        frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.clsBaseFunction.ToScript(), 2)
-    End Sub
-
-    Private Sub JointLines()
-        clsModel3.SetOperation("*")
-        clsModel3.bBrackets = False
-        clsModel3.SetParameter(True, clsOp:=clsModel)
-        clsModel3.SetParameter(False, strValue:=ucrGroupingFactor.GetVariableNames(bWithQuotes:=False))
-        ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel3)
-        TestOKEnabled(clsModel3)
-        frmMain.clsRLink.RunScript(ucrBaseRegWithGroups.clsRsyntax.clsBaseFunction.ToScript(), 2)
-    End Sub
-
-    Public Sub RegOptions()
-        If (chkSingle.Checked) Then
-            SingleModel()
-        End If
-        If (chkCommonIntercept.Checked) Then
-            CommonIntercept()
-        End If
-        If (chkParallelLines.Checked) Then
-            ParallelLines()
-        End If
-        If (chkJointLines.Checked) Then
-            JointLines()
+            ucrBaseRegWithGroups.clsRsyntax.SetFunction("glm")
+            ucrBaseRegWithGroups.clsRsyntax.AddParameter("family", ucrFamily.clsCurrDistribution.strGLMFunctionName)
         End If
     End Sub
 End Class
