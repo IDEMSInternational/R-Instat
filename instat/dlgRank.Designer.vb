@@ -45,7 +45,7 @@ Partial Class dlgRank
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(261, 33)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(261, 20)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
         Me.lblSelectedVariable.TabIndex = 1
@@ -59,7 +59,7 @@ Partial Class dlgRank
         Me.grpTies.Controls.Add(Me.rdoMaximum)
         Me.grpTies.Controls.Add(Me.rdoMinimum)
         Me.grpTies.Controls.Add(Me.rdoAverage)
-        Me.grpTies.Location = New System.Drawing.Point(261, 81)
+        Me.grpTies.Location = New System.Drawing.Point(264, 68)
         Me.grpTies.Name = "grpTies"
         Me.grpTies.Size = New System.Drawing.Size(106, 140)
         Me.grpTies.TabIndex = 3
@@ -202,7 +202,7 @@ Partial Class dlgRank
         '
         'ucrReceiverRank
         '
-        Me.ucrReceiverRank.Location = New System.Drawing.Point(261, 49)
+        Me.ucrReceiverRank.Location = New System.Drawing.Point(264, 36)
         Me.ucrReceiverRank.Name = "ucrReceiverRank"
         Me.ucrReceiverRank.Selector = Nothing
         Me.ucrReceiverRank.Size = New System.Drawing.Size(106, 26)
