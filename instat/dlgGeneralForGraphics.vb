@@ -15,8 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgGeneralForGraphics
+    Private clsRggplotFunction As New RFunction
+
+    Private clsRaesFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -26,11 +31,19 @@ Public Class dlgGeneralForGraphics
 
         End If
         autoTranslate(Me)
+
         TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
+        'setting the base ggplot functions
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
 
+        'this sets the geoms andthe command to be used
+        UcrGeomListWithParameters1.SetGeoms()
+        ucrBase.clsRsyntax.clsBaseFunction = UcrGeomListWithParameters1.clsCurrRFunction
     End Sub
 
     Private Sub SetDefaults()
@@ -46,5 +59,9 @@ Public Class dlgGeneralForGraphics
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub dlgGeneralForGraphics_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
+
     End Sub
 End Class
