@@ -21,6 +21,7 @@ Public Class dlgUnusedLevels
         If bFirstLoad Then
             SetDefaultSettings()
             InitialiseDialog()
+            bFirstLoad = False
         End If
 
         TestOKEnabled()
