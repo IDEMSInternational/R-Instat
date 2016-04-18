@@ -7,7 +7,7 @@
         End If
     End Sub
 
-    Private Sub txtScript_KeyUp(sender As Object, e As KeyEventArgs) Handles txtScript.KeyUp
+    Private Sub txtScript_KeyDown(sender As Object, e As KeyEventArgs) Handles txtScript.KeyDown
         If e.Control And e.KeyCode = Keys.A Then
             txtScript.SelectAll()
         End If
