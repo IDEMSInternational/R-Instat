@@ -1,3 +1,5 @@
+key_label="key"
+
 #Methods temporarily here to avoid conflicts
 data_obj$methods(merge_data = function(new_data, by = NULL, type = "left", match = "all") {
   set_data(join(data, new_data, by, type, match))
@@ -25,6 +27,7 @@ instat_obj$methods(append_summaries_to_data_object = function(out, data_name, co
     .self$import_data(summary_data)
     summary_obj = data_objects[[summary_name]]
     summary_obj$append_to_metadata(summarised_from_label, list(from = data_name, by = factors))
+    summary_obj$append_to_metadata(key_label, factors)
   }
 } 
 )
