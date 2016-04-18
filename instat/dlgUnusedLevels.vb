@@ -22,6 +22,7 @@ Public Class dlgUnusedLevels
             SetDefaultSettings()
             InitialiseDialog()
         End If
+
         TestOKEnabled()
         ucrBase.iHelpTopicID = 40
         autoTranslate(Me)
