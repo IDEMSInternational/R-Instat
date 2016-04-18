@@ -132,7 +132,7 @@ Partial Class dlgRank
         Me.grpMissingValues.Controls.Add(Me.rdoKeptAsMissing)
         Me.grpMissingValues.Controls.Add(Me.rdoLast)
         Me.grpMissingValues.Controls.Add(Me.rdoFirstMissingValues)
-        Me.grpMissingValues.Location = New System.Drawing.Point(3, 232)
+        Me.grpMissingValues.Location = New System.Drawing.Point(13, 232)
         Me.grpMissingValues.Name = "grpMissingValues"
         Me.grpMissingValues.Size = New System.Drawing.Size(349, 44)
         Me.grpMissingValues.TabIndex = 4
@@ -143,7 +143,7 @@ Partial Class dlgRank
         'rdoKeptAsMissing
         '
         Me.rdoKeptAsMissing.AutoSize = True
-        Me.rdoKeptAsMissing.Location = New System.Drawing.Point(6, 19)
+        Me.rdoKeptAsMissing.Location = New System.Drawing.Point(13, 19)
         Me.rdoKeptAsMissing.Name = "rdoKeptAsMissing"
         Me.rdoKeptAsMissing.Size = New System.Drawing.Size(98, 17)
         Me.rdoKeptAsMissing.TabIndex = 0
@@ -179,7 +179,7 @@ Partial Class dlgRank
         'lblNewColumName
         '
         Me.lblNewColumName.AutoSize = True
-        Me.lblNewColumName.Location = New System.Drawing.Point(5, 296)
+        Me.lblNewColumName.Location = New System.Drawing.Point(13, 296)
         Me.lblNewColumName.Name = "lblNewColumName"
         Me.lblNewColumName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumName.TabIndex = 5
@@ -210,7 +210,7 @@ Partial Class dlgRank
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 326)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 326)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(403, 53)
         Me.ucrBase.TabIndex = 7
