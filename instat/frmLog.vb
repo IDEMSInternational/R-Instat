@@ -7,7 +7,7 @@
         End If
     End Sub
 
-    Private Sub txtLog_KeyUp(sender As Object, e As KeyEventArgs) Handles txtLog.KeyUp
+    Private Sub txtLog_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLog.KeyDown
         If e.Control And e.KeyCode = Keys.A Then
             txtLog.SelectAll()
         End If
