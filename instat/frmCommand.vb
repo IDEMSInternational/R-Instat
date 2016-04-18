@@ -29,7 +29,7 @@ Public Class frmCommand
         End If
     End Sub
 
-    Public Sub txtCommand_KeyUp(sender As Object, e As KeyEventArgs) Handles txtCommand.KeyUp
+    Public Sub txtCommand_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCommand.KeyDown
         If e.Control And e.KeyCode = Keys.A Then
             txtCommand.SelectAll()
         End If
