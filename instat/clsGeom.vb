@@ -18,7 +18,7 @@ Public Class Geoms
     Public clsGgParameters As New List(Of GgParameters)
 
 
-    Public Sub AddGgParameter(strGgParameterName As String, Optional ParameterValue As String = "")
+    Public Sub AddGgParameter(strGgParameterName As String, Optional strGgParameterValue As String = "")
         'will be adding parameters to the geom as well as the value of the parameter.
         Dim NewGgParameter As New GgParameters
         NewGgParameter.strGgParameterName = strGgParameterName

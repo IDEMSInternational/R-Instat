@@ -24,9 +24,8 @@
         cboGeomList.SelectedIndex = 0
     End Sub
 
-    Public Sub AddParameter(strArgumentName As String)
+    Public Sub AddParameter()
         'this adds parameters TODO pass appropriate parameters.
-
 
     End Sub
 
