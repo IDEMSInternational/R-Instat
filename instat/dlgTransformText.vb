@@ -40,6 +40,7 @@ Public Class dlgTransformText
         ucrReceiverTransformText.Selector = ucrSelectorForTransformText
         ucrReceiverOrColumn.Selector = ucrSelectorForTransformText
         ucrReceiverTransformText.SetMeAsReceiver()
+        ucrBase.clsRsyntax.bUseBaseFunction = True
         ucrInputTo.cboInput.Items.Add("Lower")
         ucrInputTo.cboInput.Items.Add("Upper")
         ucrInputTo.cboInput.Items.Add("Title")
@@ -54,6 +55,7 @@ Public Class dlgTransformText
         ucrInputSeparator.cboInput.Items.Add("Underscore")
         ucrInputSeparator.cboInput.Items.Add("Hyphen")
         ucrInputPad.cboInput.MaxLength = 1
+        ucrInputPrefixForNewColumn.SetPrefix("New_Text")
         ucrInputPrefixForNewColumn.SetItemsTypeAsColumns()
         ucrInputPrefixForNewColumn.SetDefaultTypeAsColumn()
         ucrInputPrefixForNewColumn.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
@@ -63,42 +65,17 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub SetDefaults()
+        rdoConvertCase.Checked = True
         ucrSelectorForTransformText.Reset()
-        ucrInputPrefixForNewColumn.SetName("New_Text")
         ucrSelectorForTransformText.Focus()
         ucrInputPrefixForNewColumn.ResetText()
         ucrInputSeparator.ResetText()
         ucrInputPad.ResetText()
         ucrInputTo.ResetText()
-        ucrInputTo.Visible = False
-        lblTo.Visible = False
-        lblWidth.Visible = False
-        nudWidth.Visible = False
-        rdoBoth.Visible = False
-        rdoRight.Visible = False
-        rdoLeft.Visible = False
-        rdoLeftTrim.Visible = False
-        rdoRightTrim.Visible = False
-        rdoBothTrim.Visible = False
-        lblFrom.Visible = False
-        lblToSubstring.Visible = False
-        nudFrom.Visible = False
-        nudTo.Visible = False
-        lblPad.Visible = False
-        ucrInputPad.Visible = False
-        lblFirstWord.Visible = False
-        nudFirstWord.Visible = False
-        chkOrColumn.Visible = False
-        lblLastWord.Visible = False
-        nudLastWord.Visible = False
-        ucrInputSeparator.Visible = False
-        lblSeparator.Visible = False
-        ucrReceiverOrColumn.Visible = False
         rdoWords.Checked = False
         rdoTrim.Checked = False
         rdoPad.Checked = False
         rdoLength.Checked = False
-        rdoConvertCase.Checked = False
         ucrInputTo.cboInput.Text = "Lower"
 
     End Sub
@@ -114,9 +91,6 @@ Public Class dlgTransformText
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         TestOkEnabled()
         SetDefaults()
-    End Sub
-    Private Sub ucrInputPrefixForNewColumn_NameChanged() Handles ucrInputPrefixForNewColumn.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPrefixForNewColumn.GetText, strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPrefixForNewColumn.GetText)
     End Sub
 
     Private Sub ucrReceiverTransformText_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverTransformText.SelectionChanged
@@ -500,5 +474,7 @@ Public Class dlgTransformText
 
     End Sub
 
-
+    Private Sub ucrInputPrefixForNewColumn_NameChanged() Handles ucrInputPrefixForNewColumn.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPrefixForNewColumn.GetText, strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPrefixForNewColumn.GetText)
+    End Sub
 End Class
