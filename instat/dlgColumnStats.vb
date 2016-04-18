@@ -20,17 +20,34 @@ Public Class dlgColumnStats
     Public bFirstLoad As Boolean = True
     Private Sub dlgColumnStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        ucrBase.clsRsyntax.iCallType = 2
+
+        If bFirstLoad Then
+            SetDefaults()
+            InitialiseDialog()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub SetDefaults()
         ucrReceiverMultiple.Selector = ucrAddRemove
         ucrReceiverMultiple.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("colStats")
-        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 64
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
-        End If
     End Sub
-    Private Sub SetDefaults()
+
+    Private Sub InitialiseDialog()
 
     End Sub
 
