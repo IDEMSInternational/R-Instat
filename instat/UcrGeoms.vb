@@ -2,6 +2,7 @@
     Public lstAllGeoms As New List(Of Geoms)
     Public lstCurrentGeoms As New List(Of Geoms)
     Public lstGgParameters As New List(Of RParameter)
+    Public clsCurrRFunction As New RFunction
     Public clsCurrGeom As New Geoms
 
     Private Sub UcrGeoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -22,6 +23,14 @@
 
         cboGeomList.SelectedIndex = 0
     End Sub
+
+    Public Sub AddParameter(strArgumentName As String)
+        'this adds parameters TODO pass appropriate parameters.
+
+
+    End Sub
+
+
     Public Sub CreateGeomList()
         Dim clsgeom_boxplot As New Geoms
 
@@ -33,12 +42,13 @@
         clsgeom_boxplot.AddGgParameter("lower")
         clsgeom_boxplot.AddGgParameter("middle")
         clsgeom_boxplot.AddGgParameter("upper")
-        clsgeom_boxplot.AddGgParameter("width")
+        'clsgeom_boxplot.AddGgParameter("width")
         lstAllGeoms.Add(clsgeom_boxplot)
     End Sub
     Public Event cboGeomListIndexChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
         clsCurrGeom = lstCurrentGeoms(cboGeomList.SelectedIndex)
+        clsCurrRFunction.SetRCommand(clsCurrGeom.strGeomName)
         RaiseEvent cboGeomListIndexChanged(sender, e)
     End Sub
 End Class

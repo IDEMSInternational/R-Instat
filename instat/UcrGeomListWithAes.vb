@@ -18,11 +18,32 @@
 Public Class UcrGeomListWithParameters
     Public lstGgParameterLabels As New List(Of Label)
     Public lstGgParameterUcr As New List(Of ucrReceiverSingle)
+    Public bFirstLoad As Boolean = True
 
     Private Sub UcrGeomListWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseControl()
+            Setdefaults()
+            bFirstLoad = False
+        End If
+
         SetParameters()
     End Sub
+    Private Sub InitialiseControl()
+        ucrReceiverParam1.Selector = UcrSelector
+        ucrReceiverParam2.Selector = UcrSelector
+        ucrReceiverParam3.Selector = UcrSelector
+        ucrReceiverParam4.Selector = UcrSelector
+        ucrReceiverParam5.Selector = UcrSelector
+        ucrReceiverParam6.Selector = UcrSelector
+        ucrReceiverParam7.Selector = UcrSelector
+        ucrReceiverParam1.SetMeAsReceiver()
+    End Sub
 
+    Private Sub Setdefaults()
+        'sets control defaults
+
+    End Sub
     Public Sub SetParameters() 'this will set function or aes parameters
         Dim i As Integer = 0
 
