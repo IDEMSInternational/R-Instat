@@ -43,7 +43,7 @@ Partial Class dlgPolynomials
         Me.rdoSimple.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rdoSimple.AutoSize = True
-        Me.rdoSimple.Location = New System.Drawing.Point(17, 19)
+        Me.rdoSimple.Location = New System.Drawing.Point(13, 19)
         Me.rdoSimple.Name = "rdoSimple"
         Me.rdoSimple.Size = New System.Drawing.Size(56, 17)
         Me.rdoSimple.TabIndex = 1
@@ -54,7 +54,7 @@ Partial Class dlgPolynomials
         'lblDegree
         '
         Me.lblDegree.AutoSize = True
-        Me.lblDegree.Location = New System.Drawing.Point(270, 138)
+        Me.lblDegree.Location = New System.Drawing.Point(261, 74)
         Me.lblDegree.Name = "lblDegree"
         Me.lblDegree.Size = New System.Drawing.Size(42, 13)
         Me.lblDegree.TabIndex = 6
@@ -66,7 +66,7 @@ Partial Class dlgPolynomials
         Me.grpType.Controls.Add(Me.rdoOrthogonal)
         Me.grpType.Controls.Add(Me.rdoSimple)
         Me.grpType.Controls.Add(Me.rdoCentered)
-        Me.grpType.Location = New System.Drawing.Point(12, 221)
+        Me.grpType.Location = New System.Drawing.Point(13, 198)
         Me.grpType.Name = "grpType"
         Me.grpType.Size = New System.Drawing.Size(398, 47)
         Me.grpType.TabIndex = 7
@@ -103,7 +103,7 @@ Partial Class dlgPolynomials
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(270, 65)
+        Me.lblSelected.Location = New System.Drawing.Point(258, 15)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
         Me.lblSelected.TabIndex = 14
@@ -114,7 +114,7 @@ Partial Class dlgPolynomials
         '
         Me.nudDegree.AllowDrop = True
         Me.nudDegree.AutoSize = True
-        Me.nudDegree.Location = New System.Drawing.Point(335, 131)
+        Me.nudDegree.Location = New System.Drawing.Point(309, 72)
         Me.nudDegree.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudDegree.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudDegree.Name = "nudDegree"
@@ -125,7 +125,7 @@ Partial Class dlgPolynomials
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(12, 285)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(13, 258)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumnName.TabIndex = 21
@@ -134,7 +134,7 @@ Partial Class dlgPolynomials
         '
         'ucrInputPolynomial
         '
-        Me.ucrInputPolynomial.Location = New System.Drawing.Point(229, 274)
+        Me.ucrInputPolynomial.Location = New System.Drawing.Point(116, 253)
         Me.ucrInputPolynomial.Name = "ucrInputPolynomial"
         Me.ucrInputPolynomial.Size = New System.Drawing.Size(137, 25)
         Me.ucrInputPolynomial.TabIndex = 20
@@ -148,7 +148,7 @@ Partial Class dlgPolynomials
         '
         'ucrReceiverPolynomial
         '
-        Me.ucrReceiverPolynomial.Location = New System.Drawing.Point(273, 81)
+        Me.ucrReceiverPolynomial.Location = New System.Drawing.Point(261, 31)
         Me.ucrReceiverPolynomial.Name = "ucrReceiverPolynomial"
         Me.ucrReceiverPolynomial.Selector = Nothing
         Me.ucrReceiverPolynomial.Size = New System.Drawing.Size(106, 26)
@@ -156,7 +156,7 @@ Partial Class dlgPolynomials
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 311)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 284)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(403, 53)
         Me.ucrBase.TabIndex = 11
@@ -165,7 +165,7 @@ Partial Class dlgPolynomials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 376)
+        Me.ClientSize = New System.Drawing.Size(427, 344)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputPolynomial)
         Me.Controls.Add(Me.ucrSelectorForPolynomial)
