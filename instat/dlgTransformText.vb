@@ -471,7 +471,7 @@ Public Class dlgTransformText
 
     End Sub
 
-    Private Sub TrimFunction_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub TrimFunction_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLeftTrim.CheckedChanged, rdoRightTrim.CheckedChanged, rdoBothTrim.CheckedChanged
         If rdoTrim.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_trim")
             If rdoLeftTrim.Checked Then
@@ -487,7 +487,6 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub nudFrom_TextCanged(sender As Object, e As EventArgs) Handles nudFrom.TextChanged
-
         If rdoSubstring.Checked Then
             ucrBase.clsRsyntax.AddParameter("start", nudFrom.Value)
 
@@ -498,6 +497,7 @@ Public Class dlgTransformText
 
     Private Sub nudTo_TextChanged(sender As Object, e As EventArgs) Handles nudTo.TextChanged
         If rdoSubstring.Checked Then
+
             ucrBase.clsRsyntax.AddParameter("end", nudTo.Value)
         Else
             ucrBase.clsRsyntax.RemoveParameter("end")
