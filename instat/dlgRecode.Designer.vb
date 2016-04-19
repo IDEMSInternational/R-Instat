@@ -41,7 +41,7 @@ Partial Class dlgRecode
         'chkAddLabels
         '
         Me.chkAddLabels.AutoSize = True
-        Me.chkAddLabels.Location = New System.Drawing.Point(18, 207)
+        Me.chkAddLabels.Location = New System.Drawing.Point(12, 207)
         Me.chkAddLabels.Name = "chkAddLabels"
         Me.chkAddLabels.Size = New System.Drawing.Size(79, 17)
         Me.chkAddLabels.TabIndex = 2
@@ -52,7 +52,7 @@ Partial Class dlgRecode
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(278, 27)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(260, 19)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
         Me.lblSelectedVariable.TabIndex = 17
@@ -62,7 +62,7 @@ Partial Class dlgRecode
         'lblBreakPoints
         '
         Me.lblBreakPoints.AutoSize = True
-        Me.lblBreakPoints.Location = New System.Drawing.Point(278, 82)
+        Me.lblBreakPoints.Location = New System.Drawing.Point(260, 66)
         Me.lblBreakPoints.Name = "lblBreakPoints"
         Me.lblBreakPoints.Size = New System.Drawing.Size(70, 13)
         Me.lblBreakPoints.TabIndex = 20
@@ -73,7 +73,7 @@ Partial Class dlgRecode
         '
         Me.grpClosedOn.Controls.Add(Me.rdoLeft)
         Me.grpClosedOn.Controls.Add(Me.rdoRight)
-        Me.grpClosedOn.Location = New System.Drawing.Point(302, 145)
+        Me.grpClosedOn.Location = New System.Drawing.Point(263, 117)
         Me.grpClosedOn.Name = "grpClosedOn"
         Me.grpClosedOn.Size = New System.Drawing.Size(106, 84)
         Me.grpClosedOn.TabIndex = 22
@@ -106,7 +106,7 @@ Partial Class dlgRecode
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(9, 260)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(12, 242)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumnName.TabIndex = 26
@@ -115,28 +115,28 @@ Partial Class dlgRecode
         '
         'ucrInputRecode
         '
-        Me.ucrInputRecode.Location = New System.Drawing.Point(121, 248)
+        Me.ucrInputRecode.Location = New System.Drawing.Point(112, 237)
         Me.ucrInputRecode.Name = "ucrInputRecode"
         Me.ucrInputRecode.Size = New System.Drawing.Size(137, 25)
         Me.ucrInputRecode.TabIndex = 27
         '
         'ucrMultipleLabels
         '
-        Me.ucrMultipleLabels.Location = New System.Drawing.Point(121, 202)
+        Me.ucrMultipleLabels.Location = New System.Drawing.Point(107, 201)
         Me.ucrMultipleLabels.Name = "ucrMultipleLabels"
         Me.ucrMultipleLabels.Size = New System.Drawing.Size(150, 29)
         Me.ucrMultipleLabels.TabIndex = 25
         '
         'ucrMultipleNumericRecode
         '
-        Me.ucrMultipleNumericRecode.Location = New System.Drawing.Point(270, 93)
+        Me.ucrMultipleNumericRecode.Location = New System.Drawing.Point(263, 82)
         Me.ucrMultipleNumericRecode.Name = "ucrMultipleNumericRecode"
-        Me.ucrMultipleNumericRecode.Size = New System.Drawing.Size(152, 29)
+        Me.ucrMultipleNumericRecode.Size = New System.Drawing.Size(157, 29)
         Me.ucrMultipleNumericRecode.TabIndex = 24
         '
         'ucrReceiverRecode
         '
-        Me.ucrReceiverRecode.Location = New System.Drawing.Point(273, 40)
+        Me.ucrReceiverRecode.Location = New System.Drawing.Point(263, 37)
         Me.ucrReceiverRecode.Name = "ucrReceiverRecode"
         Me.ucrReceiverRecode.Selector = Nothing
         Me.ucrReceiverRecode.Size = New System.Drawing.Size(106, 26)
@@ -151,7 +151,7 @@ Partial Class dlgRecode
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 289)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 268)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 1
@@ -160,7 +160,7 @@ Partial Class dlgRecode
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 359)
+        Me.ClientSize = New System.Drawing.Size(432, 331)
         Me.Controls.Add(Me.ucrInputRecode)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrMultipleLabels)

@@ -34,17 +34,17 @@ Partial Class dlgTransposeColumns
         'lblColumnsToTranspose
         '
         Me.lblColumnsToTranspose.AutoSize = True
-        Me.lblColumnsToTranspose.Location = New System.Drawing.Point(250, 32)
+        Me.lblColumnsToTranspose.Location = New System.Drawing.Point(250, 23)
         Me.lblColumnsToTranspose.Name = "lblColumnsToTranspose"
-        Me.lblColumnsToTranspose.Size = New System.Drawing.Size(116, 13)
+        Me.lblColumnsToTranspose.Size = New System.Drawing.Size(112, 13)
         Me.lblColumnsToTranspose.TabIndex = 1
-        Me.lblColumnsToTranspose.Tag = "Columns_To_Transpose"
-        Me.lblColumnsToTranspose.Text = "Columns To Transpose"
+        Me.lblColumnsToTranspose.Tag = "Columns_to_Transpose"
+        Me.lblColumnsToTranspose.Text = "Columns to Transpose"
         '
         'chkNameNewColumns
         '
         Me.chkNameNewColumns.AutoSize = True
-        Me.chkNameNewColumns.Location = New System.Drawing.Point(10, 196)
+        Me.chkNameNewColumns.Location = New System.Drawing.Point(2, 196)
         Me.chkNameNewColumns.Name = "chkNameNewColumns"
         Me.chkNameNewColumns.Size = New System.Drawing.Size(122, 17)
         Me.chkNameNewColumns.TabIndex = 3
@@ -55,7 +55,7 @@ Partial Class dlgTransposeColumns
         'lblNewDataFrameName
         '
         Me.lblNewDataFrameName.AutoSize = True
-        Me.lblNewDataFrameName.Location = New System.Drawing.Point(8, 220)
+        Me.lblNewDataFrameName.Location = New System.Drawing.Point(2, 220)
         Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
         Me.lblNewDataFrameName.Size = New System.Drawing.Size(118, 13)
         Me.lblNewDataFrameName.TabIndex = 4
@@ -64,14 +64,14 @@ Partial Class dlgTransposeColumns
         '
         'ucrInputNewDataFrame
         '
-        Me.ucrInputNewDataFrame.Location = New System.Drawing.Point(172, 220)
+        Me.ucrInputNewDataFrame.Location = New System.Drawing.Point(143, 217)
         Me.ucrInputNewDataFrame.Name = "ucrInputNewDataFrame"
         Me.ucrInputNewDataFrame.Size = New System.Drawing.Size(194, 21)
         Me.ucrInputNewDataFrame.TabIndex = 5
         '
         'ucrColumsToTranspose
         '
-        Me.ucrColumsToTranspose.Location = New System.Drawing.Point(250, 69)
+        Me.ucrColumsToTranspose.Location = New System.Drawing.Point(253, 39)
         Me.ucrColumsToTranspose.Name = "ucrColumsToTranspose"
         Me.ucrColumsToTranspose.Selector = Nothing
         Me.ucrColumsToTranspose.Size = New System.Drawing.Size(121, 104)
@@ -86,7 +86,7 @@ Partial Class dlgTransposeColumns
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(1, 252)
+        Me.ucrBase.Location = New System.Drawing.Point(2, 245)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 6
@@ -95,7 +95,7 @@ Partial Class dlgTransposeColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(407, 305)
+        Me.ClientSize = New System.Drawing.Size(407, 300)
         Me.Controls.Add(Me.lblNewDataFrameName)
         Me.Controls.Add(Me.ucrInputNewDataFrame)
         Me.Controls.Add(Me.chkNameNewColumns)
@@ -107,7 +107,7 @@ Partial Class dlgTransposeColumns
         Me.Name = "dlgTransposeColumns"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Transpose_Columns"
-        Me.Text = "`"
+        Me.Text = "Transpose Columns"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
