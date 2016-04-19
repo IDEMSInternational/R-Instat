@@ -18,16 +18,17 @@
 Public Class UcrGeomListWithParameters
     Public lstGgParameterLabels As New List(Of Label)
     Public lstGgParameterUcr As New List(Of ucrReceiverSingle)
+    Public lstCurrArguments As New List(Of String)
     Public bFirstLoad As Boolean = True
 
     Private Sub UcrGeomListWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseControl()
             Setdefaults()
+            SetParameters()
             bFirstLoad = False
         End If
 
-        SetParameters()
     End Sub
     Private Sub InitialiseControl()
         ucrReceiverParam1.Selector = UcrSelector
@@ -63,12 +64,31 @@ Public Class UcrGeomListWithParameters
             lblGgParam7.Visible = True
             ucrReceiverParam7.Visible = True
         End If
+        If clsCurrGeom.clsGgParameters.Count < 6 Then
+            lblGgParam6.Visible = False
+            ucrReceiverParam6.Visible = False
+        Else
+            lblGgParam6.Visible = True
+            ucrReceiverParam6.Visible = True
+        End If
 
         'populating labels with appropriate names
         If clsCurrGeom IsNot Nothing Then
+            lstCurrArguments.Clear()
             For i = 0 To (clsCurrGeom.clsGgParameters.Count - 1)
                 lstGgParameterLabels(i).Text = clsCurrGeom.clsGgParameters(i).strGgParameterName
+                lstCurrArguments.Add(clsCurrGeom.clsGgParameters(i).strGgParameterName)
+
             Next
         End If
+    End Sub
+
+    Private Sub UcrGeomListWithParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.cboGeomListIndexChanged
+        SetParameters()
+    End Sub
+
+    Private Sub ucrReceiverParam1_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam1.SelectionChanged
+        AddParameter(lstCurrArguments(0), ucrReceiverParam1.GetVariableNames())
+
     End Sub
 End Class
