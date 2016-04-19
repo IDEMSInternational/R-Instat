@@ -47,7 +47,6 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub SetDefaults()
-
     End Sub
 
     Private Sub ReopenDialog()
@@ -62,6 +61,12 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub dlgGeneralForGraphics_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
+
+    End Sub
+
+    Private Sub UcrGeomListWithParameters1_Load(sender As Object, e As EventArgs) Handles UcrGeomListWithParameters1.cboGeomListIndexChanged
+        ucrBase.clsRsyntax.AddOperatorParameter("", UcrGeomListWithParameters1.cboGeomList.SelectedItem.ToString & "(" & ")")
+
 
     End Sub
 End Class
