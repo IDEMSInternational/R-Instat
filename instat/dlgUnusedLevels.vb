@@ -16,15 +16,14 @@
 
 Imports instat.Translations
 Public Class dlgUnusedLevels
-
     Public bFirstLoad As Boolean = True
-
     Private Sub dlgUnusedLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         If bFirstLoad Then
             SetDefaultSettings()
             InitialiseDialog()
+            bFirstLoad = False
         End If
+
         TestOKEnabled()
         ucrBase.iHelpTopicID = 40
         autoTranslate(Me)
@@ -35,7 +34,7 @@ Public Class dlgUnusedLevels
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(" droplevels")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels")
         ucrReceiverFactorColumn.Selector = ucrSelectorFactorColumn
         ucrReceiverFactorColumn.SetMeAsReceiver()
         ucrReceiverFactorColumn.SetDataType("factor")
@@ -44,13 +43,25 @@ Public Class dlgUnusedLevels
 
     Private Sub ucrBase_clickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaultSettings()
-        TestOKEnabled()
     End Sub
     Private Sub TestOKEnabled()
-        If ucrReceiverFactorColumn.IsEmpty() = False Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrReceiverFactorColumn.IsEmpty() Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
+    End Sub
+
+    Private Sub ucrReceiverFactorColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactorColumn.SelectionChanged
+        If Not ucrReceiverFactorColumn.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverFactorColumn.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_name")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorFactorColumn_DataFrameChanged() Handles ucrSelectorFactorColumn.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorFactorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
 End Class

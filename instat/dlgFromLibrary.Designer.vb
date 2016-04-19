@@ -29,7 +29,6 @@ Partial Class dlgFromLibrary
         Me.cboPackages = New System.Windows.Forms.ComboBox()
         Me.rdoDefaultDatasets = New System.Windows.Forms.RadioButton()
         Me.rdoInstatCollection = New System.Windows.Forms.RadioButton()
-        Me.txtFilePath = New System.Windows.Forms.TextBox()
         Me.lblFromPackage = New System.Windows.Forms.Label()
         Me.grpCollection = New System.Windows.Forms.GroupBox()
         Me.ucrBase = New instat.ucrButtons()
@@ -42,7 +41,7 @@ Partial Class dlgFromLibrary
         Me.cmdLibraryCollection.Name = "cmdLibraryCollection"
         Me.cmdLibraryCollection.Size = New System.Drawing.Size(142, 23)
         Me.cmdLibraryCollection.TabIndex = 2
-        Me.cmdLibraryCollection.Text = "Choose file"
+        Me.cmdLibraryCollection.Text = "Load file"
         Me.cmdLibraryCollection.UseVisualStyleBackColor = True
         '
         'lstCollection
@@ -100,14 +99,6 @@ Partial Class dlgFromLibrary
         Me.rdoInstatCollection.Text = "Load from Instat collection"
         Me.rdoInstatCollection.UseVisualStyleBackColor = True
         '
-        'txtFilePath
-        '
-        Me.txtFilePath.Location = New System.Drawing.Point(154, 19)
-        Me.txtFilePath.Name = "txtFilePath"
-        Me.txtFilePath.ReadOnly = True
-        Me.txtFilePath.Size = New System.Drawing.Size(267, 20)
-        Me.txtFilePath.TabIndex = 7
-        '
         'lblFromPackage
         '
         Me.lblFromPackage.AutoSize = True
@@ -122,10 +113,9 @@ Partial Class dlgFromLibrary
         Me.grpCollection.AutoSize = True
         Me.grpCollection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.grpCollection.Controls.Add(Me.cmdLibraryCollection)
-        Me.grpCollection.Controls.Add(Me.txtFilePath)
         Me.grpCollection.Location = New System.Drawing.Point(15, 258)
         Me.grpCollection.Name = "grpCollection"
-        Me.grpCollection.Size = New System.Drawing.Size(427, 61)
+        Me.grpCollection.Size = New System.Drawing.Size(154, 61)
         Me.grpCollection.TabIndex = 16
         Me.grpCollection.TabStop = False
         '
@@ -155,7 +145,6 @@ Partial Class dlgFromLibrary
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Open dataset from library"
         Me.grpCollection.ResumeLayout(False)
-        Me.grpCollection.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -169,7 +158,6 @@ Partial Class dlgFromLibrary
     Friend WithEvents rdoDefaultDatasets As RadioButton
     Friend WithEvents cboPackages As ComboBox
     Friend WithEvents rdoInstatCollection As RadioButton
-    Friend WithEvents txtFilePath As TextBox
     Friend WithEvents lblFromPackage As Label
     Friend WithEvents grpCollection As GroupBox
 End Class
