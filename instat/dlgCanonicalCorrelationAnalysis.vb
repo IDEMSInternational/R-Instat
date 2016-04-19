@@ -48,7 +48,7 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrSelectorCCA.Focus()
         chkSaveResult.Checked = True
         ucrResultName.Visible = True
-        ucrResultName.SetName("CCA_1")
+        ucrResultName.SetName("CCA")
         sdgCanonicalCorrelation.SetDefaults()
         TestOKEnabled()
     End Sub
