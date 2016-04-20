@@ -568,7 +568,7 @@ Public Class dlgTransformText
                 ucrBase.clsRsyntax.RemoveParameter("width")
                 ucrBase.clsRsyntax.RemoveParameter("side")
 
-            ElseIf chkOrColumn.Checked = False
+            ElseIf chkOrColumn.Checked = False Then
                 ucrBase.clsRsyntax.RemoveParameter("first")
                 ucrReceiverLastWord.Visible = False
                 nudLastWord.Enabled = True
