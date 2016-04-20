@@ -72,7 +72,7 @@ Public Class dlgRegressionSimple
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-    Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdRegressionOptions.Click
+    Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgSimpleRegOptions.ShowDialog()
     End Sub
 
@@ -131,5 +131,13 @@ Public Class dlgRegressionSimple
             ucrBase.clsRsyntax.SetFunction("glm")
             ucrBase.clsRsyntax.AddParameter("family", ucrFamily.clsCurrDistribution.strGLMFunctionName)
         End If
+    End Sub
+
+    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
     End Sub
 End Class
