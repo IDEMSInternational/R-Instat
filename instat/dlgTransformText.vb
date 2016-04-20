@@ -74,6 +74,8 @@ Public Class dlgTransformText
         ucrInputPad.ResetText()
         ucrInputTo.ResetText()
         rdoWords.Checked = False
+        rdoLeftTrim.Checked = True
+        rdoLeft.Checked = True
         rdoTrim.Checked = False
         rdoPad.Checked = False
         rdoLength.Checked = False
@@ -86,16 +88,26 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrReceiverTransformText.IsEmpty = False Or ucrReceiverOrColumn.IsEmpty = False Or ucrReceiverOrColumn.IsEmpty = False Or ucrReceiverLastWord.IsEmpty = False) And (rdoConvertCase.Checked = True Or rdoLength.Checked = True Or rdoPad.Checked = True Or rdoTrim.Checked = True Or rdoWords.Checked = True Or chkOrColumn.Checked = True Or rdoBoth.Checked Or rdoLeft.Checked Or rdoRight.Checked Or rdoSubstring.Checked Or rdoLeftTrim.Checked Or rdoRightTrim.Checked Or rdoBothTrim.Checked Or chkOrColumnL.Checked) Then
-            ucrBase.OKEnabled(True)
+        If (Not ucrReceiverTransformText.IsEmpty()) And (Not ucrInputPrefixForNewColumn.IsEmpty()) Then
+            If rdoConvertCase.Checked Then
+                If Not ucrInputTo.IsEmpty() Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(True)
+                End If
+            ElseIf rdoLength.Checked Then
+                ucrBase.OKEnabled(True)
+            ElseIf rdoPad.Checked Then
+
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        TestOkEnabled()
         SetDefaults()
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrReceiverTransformText_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverTransformText.SelectionChanged
@@ -187,7 +199,6 @@ Public Class dlgTransformText
             PadSideParameter()
             SeperatorParameter()
             WidthParameter()
-            rdoLeft.Checked = True
             nudWidth.Visible = True
             lblWidth.Visible = True
             lblPad.Visible = True
@@ -235,8 +246,6 @@ Public Class dlgTransformText
             rdoBoth.Visible = False
             rdoRight.Visible = False
             rdoLeft.Visible = False
-            rdoLeftTrim.Checked = True
-            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
             rdoLeftTrim.Visible = True
             rdoRightTrim.Visible = True
             rdoBothTrim.Visible = True
