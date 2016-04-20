@@ -374,7 +374,7 @@ instat_obj$methods(add_model = function(model, model_name = paste("model",length
 )
 
 instat_obj$methods(get_model = function(model_name) {
-  if(missing(model_name)) stop("model_name must be given.")
+  if(missing(model_name)) return(models)
   if(!is.character(model_name)) stop("name must be a character")
   if(!model_name %in% names(models)) stop(model_name, "not found in models")
   models[[model_name]]
@@ -383,6 +383,27 @@ instat_obj$methods(get_model = function(model_name) {
 
 instat_obj$methods(get_model_names = function() {
   return(names(models))
+}
+)
+
+instat_obj$methods(get_from_model = function(model_name, value1, value2, value3) {
+  if(missing(model_name)) stop("model_name must be specified.")
+  if(!is.character(model_name)) stop("name must be a character")
+  if(!model_name %in% names(models)) stop(model_name, "not found in models")
+  if(missing(value1)) stop("value1 must be specified.")
+  if(!value1 %in% names(get_model(model_name))) stop(paste(value1, "not found in", model_name))
+  if(missing(value2)) {
+    if(!missing(value3)) warning(paste("value2 is missing so value3 =",value3, "will be ignored."))
+    return(get_model(model_name)[[value1]])
+  }
+  else {
+    if(!value2 %in% names(get_model(model_name)[[value1]])) stop(paste0(value2, " not found in ", model_name,"[[\"",value1,"\"]]"))
+    if(missing(value3)) return(get_model(model_name)[[value1]][[value2]])
+    else {
+      if(!value3 %in% names(get_model(model_name)[[value1]][[value2]])) stop(paste0(value3, " not found in ", model_name,"[[\"",value1,"\"]]","[[\"",value2,"\"]]"))
+      return(get_model(model_name)[[value1]][[value2]][[value3]])
+    }
+  }
 }
 )
 
