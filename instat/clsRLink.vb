@@ -273,7 +273,7 @@ Public Class RLink
     End Sub
 
     Public Sub CreateNewInstatObject()
-        RunScript(strInstatDataObject & " <- instat_obj$new()")
+        RunScript(strInstatDataObject & " <- instat_object$new()")
         bInstatObjectExists = True
     End Sub
 
