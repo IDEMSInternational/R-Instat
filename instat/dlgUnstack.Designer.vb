@@ -38,7 +38,7 @@ Partial Class dlgUnstack
         'lblFactorToUnstackBy
         '
         Me.lblFactorToUnstackBy.AutoSize = True
-        Me.lblFactorToUnstackBy.Location = New System.Drawing.Point(258, 16)
+        Me.lblFactorToUnstackBy.Location = New System.Drawing.Point(255, 19)
         Me.lblFactorToUnstackBy.Name = "lblFactorToUnstackBy"
         Me.lblFactorToUnstackBy.Size = New System.Drawing.Size(107, 13)
         Me.lblFactorToUnstackBy.TabIndex = 1
@@ -58,7 +58,7 @@ Partial Class dlgUnstack
         'chkKeepUnusedFactorLevels
         '
         Me.chkKeepUnusedFactorLevels.AutoSize = True
-        Me.chkKeepUnusedFactorLevels.Location = New System.Drawing.Point(12, 197)
+        Me.chkKeepUnusedFactorLevels.Location = New System.Drawing.Point(1, 197)
         Me.chkKeepUnusedFactorLevels.Name = "chkKeepUnusedFactorLevels"
         Me.chkKeepUnusedFactorLevels.Size = New System.Drawing.Size(158, 17)
         Me.chkKeepUnusedFactorLevels.TabIndex = 7
@@ -69,7 +69,7 @@ Partial Class dlgUnstack
         'lblDataFrameForUnstack
         '
         Me.lblDataFrameForUnstack.AutoSize = True
-        Me.lblDataFrameForUnstack.Location = New System.Drawing.Point(-2, 293)
+        Me.lblDataFrameForUnstack.Location = New System.Drawing.Point(1, 257)
         Me.lblDataFrameForUnstack.Name = "lblDataFrameForUnstack"
         Me.lblDataFrameForUnstack.Size = New System.Drawing.Size(118, 13)
         Me.lblDataFrameForUnstack.TabIndex = 10
@@ -97,7 +97,7 @@ Partial Class dlgUnstack
         '
         'ucrDataFrameForunstack
         '
-        Me.ucrDataFrameForunstack.Location = New System.Drawing.Point(140, 283)
+        Me.ucrDataFrameForunstack.Location = New System.Drawing.Point(136, 252)
         Me.ucrDataFrameForunstack.Name = "ucrDataFrameForunstack"
         Me.ucrDataFrameForunstack.Size = New System.Drawing.Size(149, 23)
         Me.ucrDataFrameForunstack.TabIndex = 9
@@ -127,7 +127,7 @@ Partial Class dlgUnstack
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 312)
+        Me.ucrBase.Location = New System.Drawing.Point(1, 281)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 8
@@ -136,7 +136,7 @@ Partial Class dlgUnstack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 380)
+        Me.ClientSize = New System.Drawing.Size(420, 346)
         Me.Controls.Add(Me.ucrColumnsToCarry)
         Me.Controls.Add(Me.chkCarryAllColumns)
         Me.Controls.Add(Me.lblDataFrameForUnstack)

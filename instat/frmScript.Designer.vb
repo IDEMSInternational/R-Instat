@@ -31,6 +31,7 @@ Partial Class frmScript
         Me.txtScript.Location = New System.Drawing.Point(0, 0)
         Me.txtScript.Multiline = True
         Me.txtScript.Name = "txtScript"
+        Me.txtScript.ReadOnly = True
         Me.txtScript.Size = New System.Drawing.Size(284, 261)
         Me.txtScript.TabIndex = 0
         '
