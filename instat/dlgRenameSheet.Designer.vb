@@ -24,8 +24,8 @@ Partial Class dlgRenameSheet
     Private Sub InitializeComponent()
         Me.ucrDataFrameToRename = New instat.ucrDataFrame()
         Me.lblName = New System.Windows.Forms.Label()
-        Me.txtNewName = New System.Windows.Forms.TextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputNewName = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'ucrDataFrameToRename
@@ -38,19 +38,12 @@ Partial Class dlgRenameSheet
         'lblName
         '
         Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(145, 24)
+        Me.lblName.Location = New System.Drawing.Point(145, 21)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(58, 13)
+        Me.lblName.Size = New System.Drawing.Size(60, 13)
         Me.lblName.TabIndex = 6
         Me.lblName.Tag = "Name"
-        Me.lblName.Text = "New name"
-        '
-        'txtNewName
-        '
-        Me.txtNewName.Location = New System.Drawing.Point(239, 17)
-        Me.txtNewName.Name = "txtNewName"
-        Me.txtNewName.Size = New System.Drawing.Size(100, 20)
-        Me.txtNewName.TabIndex = 5
+        Me.lblName.Text = "New Name"
         '
         'ucrBase
         '
@@ -59,18 +52,25 @@ Partial Class dlgRenameSheet
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 7
         '
+        'ucrInputNewName
+        '
+        Me.ucrInputNewName.Location = New System.Drawing.Point(209, 19)
+        Me.ucrInputNewName.Name = "ucrInputNewName"
+        Me.ucrInputNewName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputNewName.TabIndex = 8
+        '
         'dlgRenameSheet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(407, 99)
+        Me.Controls.Add(Me.ucrInputNewName)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblName)
-        Me.Controls.Add(Me.txtNewName)
         Me.Controls.Add(Me.ucrDataFrameToRename)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgRenameSheet"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Rename Sheet"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -79,6 +79,6 @@ Partial Class dlgRenameSheet
 
     Friend WithEvents ucrDataFrameToRename As ucrDataFrame
     Friend WithEvents lblName As Label
-    Friend WithEvents txtNewName As TextBox
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrInputNewName As ucrInputTextBox
 End Class

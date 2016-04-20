@@ -122,6 +122,7 @@ Public Class dlgHistogram
     Private Sub SetDefaults()
         'seting Defaults for the dialog
         ucrHistogramSelector.Reset()
+        ucrVariablesAsFactorforHist.ResetControl()
         rdoHistogram.Checked = True
         cmdHistogramOptions.Visible = True
         cmdDensityOptions.Visible = False
