@@ -15,7 +15,35 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgCanonicalCorrelation
+    Public bFirstLoad As Boolean = True
     Private Sub sdgCanonicalCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub Cancor()
+        frmMain.clsRLink.RunScript(dlgCanonicalCorrelationAnalysis.ucrBaseCCA.clsRsyntax.GetScript() & "$cancor", 2)
+    End Sub
+
+    Private Sub Coef()
+        frmMain.clsRLink.RunScript(dlgCanonicalCorrelationAnalysis.ucrBaseCCA.clsRsyntax.GetScript() & "$coef", 2)
+    End Sub
+
+    Public Sub SetDefaults()
+        chkCanonicalCorrelations.Checked = True
+        chkCoef.Checked = True
+    End Sub
+
+    Public Sub CCAOptions()
+        If (chkCanonicalCorrelations.Checked) Then
+            Cancor()
+        End If
+        If (chkCoef.Checked) Then
+            Coef()
+        End If
     End Sub
 End Class
