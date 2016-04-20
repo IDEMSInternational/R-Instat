@@ -622,6 +622,30 @@
     <Compile Include="sdgThemeOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgThreeVarDisplayOptions.Designer.vb">
+      <DependentUpon>sdgThreeVarDisplayOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgThreeVarDisplayOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgThreeVarModelOptions.Designer.vb">
+      <DependentUpon>sdgThreeVarModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgThreeVarModelOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgTwoVarModelOptions.Designer.vb">
+      <DependentUpon>sdgTwoVarModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTwoVarModelOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThreeVarModelOptions.Designer.vb">
+      <DependentUpon>ThreeVarModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ThreeVarModelOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
     </Compile>
@@ -3464,6 +3488,42 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgThemeOptions.sw-KE.resx">
       <DependentUpon>sdgThemeOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgThreeVarDisplayOptions.fr-FR.resx">
+      <DependentUpon>sdgThreeVarDisplayOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgThreeVarDisplayOptions.resx">
+      <DependentUpon>sdgThreeVarDisplayOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgThreeVarDisplayOptions.sw-KE.resx">
+      <DependentUpon>sdgThreeVarDisplayOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgThreeVarModelOptions.fr-FR.resx">
+      <DependentUpon>sdgThreeVarModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgThreeVarModelOptions.resx">
+      <DependentUpon>sdgThreeVarModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgThreeVarModelOptions.sw-KE.resx">
+      <DependentUpon>sdgThreeVarModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTwoVarModelOptions.fr-FR.resx">
+      <DependentUpon>sdgTwoVarModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTwoVarModelOptions.resx">
+      <DependentUpon>sdgTwoVarModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTwoVarModelOptions.sw-KE.resx">
+      <DependentUpon>sdgTwoVarModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThreeVarModelOptions.fr-FR.resx">
+      <DependentUpon>ThreeVarModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThreeVarModelOptions.resx">
+      <DependentUpon>ThreeVarModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThreeVarModelOptions.sw-KE.resx">
+      <DependentUpon>ThreeVarModelOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
