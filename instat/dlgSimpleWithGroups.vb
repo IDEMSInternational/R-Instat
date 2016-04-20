@@ -41,6 +41,8 @@ Public Class dlgSimpleWithGroups
         ucrResponse.Selector = ucrSelectorSimpleRegGroups
         ucrExplanatory.Selector = ucrSelectorSimpleRegGroups
         ucrGroupingFactor.Selector = ucrSelectorSimpleRegGroups
+        lblModelPreview.Enabled = False
+        ucrModelPreview.Enabled = False
         ucrBaseRegWithGroups.iHelpTopicID = 176
     End Sub
 
@@ -70,9 +72,8 @@ Public Class dlgSimpleWithGroups
             clsModel1.SetParameter(True, clsOp:=clsModel)
             clsModel1.SetParameter(False, strValue:=ucrGroupingFactor.GetVariableNames(bWithQuotes:=False))
             ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel1)
-            ucrModelPreview.txtInput.Text = clsModel1.strAssignToModel
+            ucrModelPreview.SetName(clsModel1.ToScript)
             ucrBaseRegWithGroups.OKEnabled(True)
-
         Else
             ucrBaseRegWithGroups.OKEnabled(False)
         End If
@@ -110,6 +111,7 @@ Public Class dlgSimpleWithGroups
 
     Private Sub ucrModelPreview_TextChanged(sender As Object, e As EventArgs) Handles ucrModelPreview.TextChanged
         'TODO: we need to preview the model here
+
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
@@ -156,6 +158,10 @@ Public Class dlgSimpleWithGroups
             ucrBaseRegWithGroups.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model")
             ucrBaseRegWithGroups.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+    End Sub
+
+    Private Sub ucrModelPreview_Load(sender As Object, e As EventArgs) Handles ucrModelPreview.Load
+
     End Sub
 
     Private Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
