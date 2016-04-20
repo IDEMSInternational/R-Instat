@@ -39,7 +39,9 @@ Public Class dlgTransformText
     Private Sub InitialiseDialog()
         ucrReceiverTransformText.Selector = ucrSelectorForTransformText
         ucrReceiverOrColumn.Selector = ucrSelectorForTransformText
+        ucrReceiverLastWord.Selector = ucrSelectorForTransformText
         ucrReceiverTransformText.SetMeAsReceiver()
+        ucrBase.clsRsyntax.bUseBaseFunction = True
         ucrInputTo.cboInput.Items.Add("Lower")
         ucrInputTo.cboInput.Items.Add("Upper")
         ucrInputTo.cboInput.Items.Add("Title")
@@ -54,6 +56,7 @@ Public Class dlgTransformText
         ucrInputSeparator.cboInput.Items.Add("Underscore")
         ucrInputSeparator.cboInput.Items.Add("Hyphen")
         ucrInputPad.cboInput.MaxLength = 1
+        ucrInputPrefixForNewColumn.SetPrefix("New_Text")
         ucrInputPrefixForNewColumn.SetItemsTypeAsColumns()
         ucrInputPrefixForNewColumn.SetDefaultTypeAsColumn()
         ucrInputPrefixForNewColumn.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
@@ -63,48 +66,28 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub SetDefaults()
+        rdoConvertCase.Checked = True
         ucrSelectorForTransformText.Reset()
-        ucrInputPrefixForNewColumn.SetName("New_Text")
         ucrSelectorForTransformText.Focus()
         ucrInputPrefixForNewColumn.ResetText()
         ucrInputSeparator.ResetText()
         ucrInputPad.ResetText()
         ucrInputTo.ResetText()
-        ucrInputTo.Visible = False
-        lblTo.Visible = False
-        lblWidth.Visible = False
-        nudWidth.Visible = False
-        rdoBoth.Visible = False
-        rdoRight.Visible = False
-        rdoLeft.Visible = False
-        rdoLeftTrim.Visible = False
-        rdoRightTrim.Visible = False
-        rdoBothTrim.Visible = False
-        lblFrom.Visible = False
-        lblToSubstring.Visible = False
-        nudFrom.Visible = False
-        nudTo.Visible = False
-        lblPad.Visible = False
-        ucrInputPad.Visible = False
-        lblFirstWord.Visible = False
-        nudFirstWord.Visible = False
-        chkOrColumn.Visible = False
-        lblLastWord.Visible = False
-        nudLastWord.Visible = False
-        ucrInputSeparator.Visible = False
-        lblSeparator.Visible = False
-        ucrReceiverOrColumn.Visible = False
         rdoWords.Checked = False
         rdoTrim.Checked = False
         rdoPad.Checked = False
         rdoLength.Checked = False
-        rdoConvertCase.Checked = False
-        ucrInputTo.cboInput.Text = "Lower"
+        nudFrom.Value = "1"
+        nudTo.Value = "-1"
+        nudWidth.Value = "1"
+        ucrInputTo.SetName("Lower")
+        ucrInputSeparator.SetName("Space")
+        ucrInputPad.SetName("Space")
 
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrReceiverTransformText.IsEmpty = False Or ucrReceiverOrColumn.IsEmpty = False Or ucrReceiverOrColumn.IsEmpty = False) And (rdoConvertCase.Checked = True Or rdoLength.Checked = True Or rdoPad.Checked = True Or rdoTrim.Checked = True Or rdoWords.Checked = True Or chkOrColumn.Checked = True Or rdoBoth.Checked Or rdoLeft.Checked Or rdoRight.Checked Or rdoSubstring.Checked Or rdoLeftTrim.Checked Or rdoRightTrim.Checked Or rdoBothTrim.Checked) Then
+        If (ucrReceiverTransformText.IsEmpty = False Or ucrReceiverOrColumn.IsEmpty = False Or ucrReceiverOrColumn.IsEmpty = False Or ucrReceiverLastWord.IsEmpty = False) And (rdoConvertCase.Checked = True Or rdoLength.Checked = True Or rdoPad.Checked = True Or rdoTrim.Checked = True Or rdoWords.Checked = True Or chkOrColumn.Checked = True Or rdoBoth.Checked Or rdoLeft.Checked Or rdoRight.Checked Or rdoSubstring.Checked Or rdoLeftTrim.Checked Or rdoRightTrim.Checked Or rdoBothTrim.Checked Or chkOrColumnL.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -114,9 +97,6 @@ Public Class dlgTransformText
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         TestOkEnabled()
         SetDefaults()
-    End Sub
-    Private Sub ucrInputPrefixForNewColumn_NameChanged() Handles ucrInputPrefixForNewColumn.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPrefixForNewColumn.GetText, strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPrefixForNewColumn.GetText)
     End Sub
 
     Private Sub ucrReceiverTransformText_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverTransformText.SelectionChanged
@@ -160,6 +140,8 @@ Public Class dlgTransformText
             lblToSubstring.Visible = False
             nudFrom.Visible = False
             nudTo.Visible = False
+            ucrReceiverLastWord.Visible = False
+            chkOrColumnL.Visible = False
             ucrBase.clsRsyntax.RemoveParameter("pad")
             ucrBase.clsRsyntax.RemoveParameter("width")
             ucrBase.clsRsyntax.RemoveParameter("side")
@@ -192,6 +174,8 @@ Public Class dlgTransformText
             lblToSubstring.Visible = False
             nudFrom.Visible = False
             nudTo.Visible = False
+            chkOrColumnL.Visible = False
+            ucrReceiverLastWord.Visible = False
             ucrBase.clsRsyntax.RemoveParameter("pad")
             ucrBase.clsRsyntax.RemoveParameter("width")
             ucrBase.clsRsyntax.RemoveParameter("side")
@@ -200,8 +184,12 @@ Public Class dlgTransformText
             ucrBase.clsRsyntax.RemoveParameter("sep")
 
         ElseIf rdoPad.Checked Then
-            lblWidth.Visible = True
+            ucrBase.clsRsyntax.SetFunction("stringr::str_pad")
+            rdoLeft.Checked = True
+            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
+            ucrBase.clsRsyntax.AddParameter("width", "1")
             nudWidth.Visible = True
+            lblWidth.Visible = True
             lblPad.Visible = True
             ucrInputPad.Visible = True
             ucrInputTo.Visible = False
@@ -223,6 +211,8 @@ Public Class dlgTransformText
             lblToSubstring.Visible = False
             nudFrom.Visible = False
             nudTo.Visible = False
+            chkOrColumnL.Visible = False
+            ucrReceiverLastWord.Visible = False
             ucrBase.clsRsyntax.RemoveParameter("start")
             ucrBase.clsRsyntax.RemoveParameter("end")
             ucrBase.clsRsyntax.RemoveParameter("sep")
@@ -247,6 +237,8 @@ Public Class dlgTransformText
             rdoBoth.Visible = False
             rdoRight.Visible = False
             rdoLeft.Visible = False
+            rdoLeftTrim.Checked = True
+            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
             rdoLeftTrim.Visible = True
             rdoRightTrim.Visible = True
             rdoBothTrim.Visible = True
@@ -254,9 +246,10 @@ Public Class dlgTransformText
             lblToSubstring.Visible = False
             nudFrom.Visible = False
             nudTo.Visible = False
+            chkOrColumnL.Visible = False
+            ucrReceiverLastWord.Visible = False
             ucrBase.clsRsyntax.RemoveParameter("pad")
             ucrBase.clsRsyntax.RemoveParameter("width")
-            ucrBase.clsRsyntax.RemoveParameter("side")
             ucrBase.clsRsyntax.RemoveParameter("start")
             ucrBase.clsRsyntax.RemoveParameter("end")
             ucrBase.clsRsyntax.RemoveParameter("sep")
@@ -291,9 +284,13 @@ Public Class dlgTransformText
             lblToSubstring.Visible = False
             nudFrom.Visible = False
             nudTo.Visible = False
+            chkOrColumnL.Visible = True
+            ucrReceiverLastWord.Visible = False
 
         ElseIf rdoSubstring.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_sub")
+            ucrBase.clsRsyntax.AddParameter("start", "1")
+            ucrBase.clsRsyntax.AddParameter("end", "-1")
             lblFirstWord.Visible = False
             nudFirstWord.Visible = False
             chkOrColumn.Visible = False
@@ -322,6 +319,8 @@ Public Class dlgTransformText
             lblToSubstring.Visible = True
             nudFrom.Visible = True
             nudTo.Visible = True
+            chkOrColumnL.Visible = False
+            ucrReceiverLastWord.Visible = False
 
 
 
@@ -330,14 +329,17 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub ucrReceiverOrColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverOrColumn.SelectionChanged
+        If rdoWords.Checked Then
+            If chkOrColumn.Checked Then
 
-        If chkOrColumn.Checked Then
-        End If
-        If Not ucrReceiverOrColumn.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("start", clsRFunctionParameter:=ucrReceiverOrColumn.GetVariables())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("start")
-        End If
+                If Not ucrReceiverOrColumn.IsEmpty Then
+                    ucrBase.clsRsyntax.AddParameter("start", clsRFunctionParameter:=ucrReceiverOrColumn.GetVariables())
+
+                Else
+                    ucrBase.clsRsyntax.RemoveParameter("start")
+                End If
+                End If
+            End If
         TestOkEnabled()
     End Sub
 
@@ -351,40 +353,41 @@ Public Class dlgTransformText
                 Case "Title"
                     ucrBase.clsRsyntax.SetFunction("stringr::str_to_title")
             End Select
-
-
         End If
     End Sub
 
     Private Sub nudWidth_TextChanged(sender As Object, e As EventArgs) Handles nudWidth.TextChanged
-        If rdoPad.Checked Or rdoBoth.Checked Or rdoLeft.Checked Or rdoRight.Checked Then
-            ucrBase.clsRsyntax.AddParameter("width", nudWidth.Value)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("width")
+        If rdoPad.Checked Then
+            If rdoBoth.Checked Or rdoLeft.Checked Or rdoRight.Checked Then
+                ucrBase.clsRsyntax.AddParameter("width", nudWidth.Value)
+
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("width")
+            End If
         End If
     End Sub
 
     Private Sub ucrInputPad_NameChanged() Handles ucrInputPad.NameChanged
+        If rdoPad.Checked Then
+            If rdoRight.Checked Or rdoLeft.Checked Or rdoBoth.Checked Then
 
-
-        If rdoPad.Checked Or rdoRight.Checked Or rdoLeft.Checked Or rdoBoth.Checked Then
-
-            Select Case ucrInputPad.GetText
-                Case "Space"
-                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & " " & Chr(34))
-                Case "Hash"
-                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "#" & Chr(34))
-                Case "Hyphen"
-                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "-" & Chr(34))
-                Case "Period"
-                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "." & Chr(34))
-                Case "Underscore"
-                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "_" & Chr(34))
-                Case Else
-                    ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
-            End Select
+                Select Case ucrInputPad.GetText
+                    Case "Space"
+                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & " " & Chr(34))
+                    Case "Hash"
+                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "#" & Chr(34))
+                    Case "Hyphen"
+                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "-" & Chr(34))
+                    Case "Period"
+                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "." & Chr(34))
+                    Case "Underscore"
+                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & "_" & Chr(34))
+                    Case Else
+                        ucrBase.clsRsyntax.AddParameter("pad", Chr(34) & ucrInputPad.GetText & Chr(34))
+                End Select
+            End If
         Else
-            ucrBase.clsRsyntax.RemoveParameter("pad")
+                ucrBase.clsRsyntax.RemoveParameter("pad")
         End If
     End Sub
 
@@ -430,7 +433,8 @@ Public Class dlgTransformText
         If rdoWords.Checked Then
             If chkOrColumn.Checked Then
                 ucrInputTo.Visible = False
-                lblTo.Visible = True
+                ucrReceiverOrColumn.SetMeAsReceiver()
+                lblTo.Visible = False
                 nudFirstWord.Enabled = False
                 chkOrColumn.Visible = True
                 ucrInputSeparator.Visible = True
@@ -448,37 +452,40 @@ Public Class dlgTransformText
                 ucrBase.clsRsyntax.RemoveParameter("first")
                 ucrReceiverOrColumn.Visible = False
                 nudFirstWord.Enabled = True
-
+                ucrReceiverTransformText.SetMeAsReceiver()
             End If
         End If
     End Sub
 
-    Private Sub SideParameter_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLeft.CheckedChanged, rdoRight.CheckedChanged, rdoBoth.CheckedChanged
-        ucrBase.clsRsyntax.SetFunction("stringr::str_pad")
-        If rdoLeft.Checked Then
-            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
-        ElseIf rdoRight.Checked Then
-            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "right" & Chr(34))
-        ElseIf rdoBoth.Checked Then
-            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "both" & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("side")
+    Private Sub SideParameter_CheckedChanged(sender As Object, e As EventArgs)
+        If rdoPad.Checked Then
 
+            If rdoLeft.Checked Then
+                ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
+            ElseIf rdoRight.Checked Then
+                ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "right" & Chr(34))
+            ElseIf rdoBoth.Checked Then
+                ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "both" & Chr(34))
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("side")
+
+            End If
         End If
 
     End Sub
 
-    Private Sub TrimFunction_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLeftTrim.CheckedChanged, rdoBothTrim.CheckedChanged, rdoRightTrim.CheckedChanged
-        ucrBase.clsRsyntax.SetFunction("stringr::str_trim")
-        If rdoLeftTrim.Checked Then
-
-            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
-        ElseIf rdoRightTrim.Checked Then
-            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "right" & Chr(34))
-        ElseIf rdoBothTrim.Checked Then
-            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "both" & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("side")
+    Private Sub TrimFunction_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLeftTrim.CheckedChanged, rdoRightTrim.CheckedChanged, rdoBothTrim.CheckedChanged
+        If rdoTrim.Checked Then
+            ucrBase.clsRsyntax.SetFunction("stringr::str_trim")
+            If rdoLeftTrim.Checked Then
+                ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
+            ElseIf rdoRightTrim.Checked Then
+                ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "right" & Chr(34))
+            ElseIf rdoBothTrim.Checked Then
+                ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "both" & Chr(34))
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("side")
+            End If
         End If
     End Sub
 
@@ -493,6 +500,7 @@ Public Class dlgTransformText
 
     Private Sub nudTo_TextChanged(sender As Object, e As EventArgs) Handles nudTo.TextChanged
         If rdoSubstring.Checked Then
+
             ucrBase.clsRsyntax.AddParameter("end", nudTo.Value)
         Else
             ucrBase.clsRsyntax.RemoveParameter("end")
@@ -500,5 +508,50 @@ Public Class dlgTransformText
 
     End Sub
 
+    Private Sub ucrInputPrefixForNewColumn_NameChanged() Handles ucrInputPrefixForNewColumn.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPrefixForNewColumn.GetText, strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPrefixForNewColumn.GetText)
+    End Sub
 
+    Private Sub chkOrColumnL_CheckedChanged(sender As Object, e As EventArgs) Handles chkOrColumnL.CheckedChanged
+        If rdoWords.Checked Then
+            If chkOrColumnL.Checked Then
+                ucrInputTo.Visible = False
+                ucrReceiverLastWord.SetMeAsReceiver()
+                lblTo.Visible = False
+                nudLastWord.Enabled = False
+                chkOrColumnL.Visible = True
+                ucrInputSeparator.Visible = True
+                lblSeparator.Visible = True
+                ucrReceiverLastWord.Visible = True
+                lblWidth.Visible = False
+                nudWidth.Visible = False
+                lblPad.Visible = False
+                ucrInputPad.Visible = False
+                ucrBase.clsRsyntax.RemoveParameter("pad")
+                ucrBase.clsRsyntax.RemoveParameter("width")
+                ucrBase.clsRsyntax.RemoveParameter("side")
+
+            ElseIf chkOrColumn.Checked = False
+                ucrBase.clsRsyntax.RemoveParameter("first")
+                ucrReceiverLastWord.Visible = False
+                nudLastWord.Enabled = True
+                ucrReceiverTransformText.SetMeAsReceiver()
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrReceiverLastWord_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverLastWord.SelectionChanged
+        If rdoWords.Checked Then
+            If chkOrColumnL.Checked Then
+
+                If Not ucrReceiverLastWord.IsEmpty Then
+                    ucrBase.clsRsyntax.AddParameter("end", clsRFunctionParameter:=ucrReceiverOrColumn.GetVariables())
+
+                Else
+                    ucrBase.clsRsyntax.RemoveParameter("end")
+                End If
+            End If
+        End If
+        TestOkEnabled()
+    End Sub
 End Class
