@@ -11,7 +11,8 @@ library(extRemes)
 library(ggfortify)
 library(GGally)
 library(CCA)
-
+library(plotrix)
+library(agridat)
 setwd(dirname(parent.frame(2)$ofile))
 
 source("instat_object.R")
