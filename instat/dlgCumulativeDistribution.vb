@@ -54,6 +54,7 @@ Public Class dlgCumulativeDistribution
         'set defaults here 
         ucrCumDistSelector.Reset()
         ucrCumDistSelector.Focus()
+        ucrVariablesAsFactorforCumDist.ResetControl()
         chkCountsOnYAxis.Checked = False
         chkExceedancePlots.Checked = False
         chkIncludePoints.Checked = False
