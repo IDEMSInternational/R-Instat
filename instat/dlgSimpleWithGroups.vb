@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgSimpleWithGroups
     Public bFirstLoad As Boolean = True
     Public clsRSingleModelFunction As RFunction
-    Dim clsModel, clsModel1, clsModel2, clsModel3 As New ROperator
+    Dim clsModel, clsModel1 As New ROperator
     Dim operation As String
 
     Private Sub dlgSimpleWithGroups_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -112,7 +112,7 @@ Public Class dlgSimpleWithGroups
         'TODO: we need to preview the model here
     End Sub
 
-    Private Sub cmdSWGOptions_Click(sender As Object, e As EventArgs) Handles cmdSWGOptions.Click
+    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         'sdgSimpleWithGroupsOptions.ShowDialog()
     End Sub
 
@@ -129,6 +129,18 @@ Public Class dlgSimpleWithGroups
     Private Sub cmdJointLines_Click(sender As Object, e As EventArgs) Handles cmdJointLines.Click
         operation = "*"
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrGroupingFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrGroupingFactor.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
     End Sub
 
     Private Sub cmdCommonIntercept_Click(sender As Object, e As EventArgs) Handles cmdCommonIntercept.Click
