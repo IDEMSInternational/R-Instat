@@ -36,6 +36,8 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrBaseCCA.iHelpTopicID = 188
         ucrReceiverYvariables.SetDataType("numeric")
         ucrReceiverXvariables.SetDataType("numeric")
+        ucrResultName.SetDefaultTypeAsModel()
+        ucrResultName.SetPrefix("CCA")
     End Sub
 
     Private Sub ReopenDialog()
@@ -48,7 +50,6 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrSelectorCCA.Focus()
         chkSaveResult.Checked = True
         ucrResultName.Visible = True
-        ucrResultName.SetName("CCA")
         sdgCanonicalCorrelation.SetDefaults()
         TestOKEnabled()
     End Sub
@@ -94,8 +95,8 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub AssignName()
-        If chkSaveResult.Checked AndAlso ucrResultName.txtValidation.Text <> "" Then
-            ucrBaseCCA.clsRsyntax.SetAssignTo(ucrResultName.txtValidation.Text, strTempModel:=ucrResultName.txtValidation.Text)
+        If chkSaveResult.Checked AndAlso ucrResultName.GetText() <> "" Then
+            ucrBaseCCA.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText())
             ucrBaseCCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
         Else
             ucrBaseCCA.clsRsyntax.SetAssignTo("last_CCA", strTempModel:="last_CCA")

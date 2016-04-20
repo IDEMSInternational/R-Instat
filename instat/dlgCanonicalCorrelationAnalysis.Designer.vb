@@ -26,11 +26,11 @@ Partial Class dlgCanonicalCorrelationAnalysis
         Me.lblXVariables = New System.Windows.Forms.Label()
         Me.cmdCCAOptions = New System.Windows.Forms.Button()
         Me.chkSaveResult = New System.Windows.Forms.CheckBox()
-        Me.ucrResultName = New instat.ucrVariableName()
         Me.ucrReceiverXvariables = New instat.ucrReceiverMultiple()
         Me.ucrReceiverYvariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorCCA = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseCCA = New instat.ucrButtons()
+        Me.ucrResultName = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblYVariables
@@ -74,13 +74,6 @@ Partial Class dlgCanonicalCorrelationAnalysis
         Me.chkSaveResult.Text = "Save Result"
         Me.chkSaveResult.UseVisualStyleBackColor = True
         '
-        'ucrResultName
-        '
-        Me.ucrResultName.Location = New System.Drawing.Point(119, 247)
-        Me.ucrResultName.Name = "ucrResultName"
-        Me.ucrResultName.Size = New System.Drawing.Size(149, 23)
-        Me.ucrResultName.TabIndex = 9
-        '
         'ucrReceiverXvariables
         '
         Me.ucrReceiverXvariables.Location = New System.Drawing.Point(271, 141)
@@ -111,13 +104,20 @@ Partial Class dlgCanonicalCorrelationAnalysis
         Me.ucrBaseCCA.Size = New System.Drawing.Size(410, 53)
         Me.ucrBaseCCA.TabIndex = 0
         '
+        'ucrResultName
+        '
+        Me.ucrResultName.Location = New System.Drawing.Point(119, 212)
+        Me.ucrResultName.Name = "ucrResultName"
+        Me.ucrResultName.Size = New System.Drawing.Size(137, 25)
+        Me.ucrResultName.TabIndex = 10
+        '
         'dlgCanonicalCorrelationAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(413, 331)
-        Me.Controls.Add(Me.chkSaveResult)
         Me.Controls.Add(Me.ucrResultName)
+        Me.Controls.Add(Me.chkSaveResult)
         Me.Controls.Add(Me.cmdCCAOptions)
         Me.Controls.Add(Me.lblXVariables)
         Me.Controls.Add(Me.lblYVariables)
@@ -143,5 +143,5 @@ Partial Class dlgCanonicalCorrelationAnalysis
     Friend WithEvents lblXVariables As Label
     Friend WithEvents cmdCCAOptions As Button
     Friend WithEvents chkSaveResult As CheckBox
-    Friend WithEvents ucrResultName As ucrVariableName
+    Friend WithEvents ucrResultName As ucrInputComboBox
 End Class
