@@ -37,7 +37,7 @@ instat_object <- R6Class("instat_object",
                     data_objects_changed = function(new_value) {
                       if(missing(new_value)) return(private$.data_objects_changed)
                       else {
-                        if(new_val != TRUE && new_val != FALSE) stop("new_val must be TRUE or FALSE")
+                        if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
                         private$.data_objects_changed <- new_value
                       }
                     }
@@ -49,7 +49,6 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
                                           imported_from = as.list(rep("",length(data_tables))), 
                                           messages=TRUE, convert=TRUE, create=TRUE)
 {
-  
   if (missing(data_tables) || length(data_tables) == 0) {
     stop("No data found. No data objects can be created.")
   }
@@ -80,7 +79,6 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
     
     # loop through the data_tables list and create a data object for each
     # data.frame given
-    
     new_data_objects = list()
     
     for ( i in (1:length(data_tables)) ) {
@@ -90,9 +88,8 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
                               imported_from = imported_from[[i]], 
                               start_point = i, 
                               messages = messages, convert = convert, create = create)
-      
       # Add this new data object to our list of data objects
-      self$append_data_objects(new_data$get_metadata(data_name_label), new_data)
+      self$append_data_object(new_data$get_metadata(data_name_label), new_data)
     }
     }
   }
@@ -188,7 +185,7 @@ instat_object$set("public", "append_data_object", function(name, obj) {
     stop("name must be a character")
   }
   
-  if ( !class(obj) == "data_obj") {
+  if ( !"data_object" %in% class(obj)) {
     stop("obj must be a data object")
   }
   
@@ -207,7 +204,8 @@ instat_object$set("public", "get_data_objects", function(data_name) {
     
     if(type=="character" && !all(data_name %in% names(private$.data_objects))) stop(paste(data_name, "not found"))
     if(type=="integer" && (!all(1 <= data_name) || !all(data_name <= length(private$.data_objects)))) stop(paste(data_name, "not found"))
-    return(private$.data_objects[[data_name]])
+    if(length(data_name) > 1) return(private$.data_objects[data_name])
+    else return(private$.data_objects[[data_name]])
   }
 }
 )
@@ -263,7 +261,7 @@ instat_object$set("public", "get_data_names", function() {
 
 instat_object$set("public", "get_data_changed", function(data_name) {
   if(missing(data_name)) {
-    if(private$.data_objects_changed) return (TRUE)
+    if(self$data_objects_changed) return (TRUE)
     for(curr_obj in private$.data_objects) {
       if(curr_obj$data_changed) return(TRUE)
     }
@@ -303,7 +301,7 @@ instat_object$set("public", "get_metadata_changed", function(data_obj) {
 instat_object$set("public", "set_data_frames_changed", function(data_name = "", new_val) {
   if(data_name == "") {
     for(curr_obj in private$.data_objects) {
-      curr_obj$set_data_changed(new_val)
+      curr_obj$data_changed <- new_val
     }
   }
   
@@ -315,7 +313,7 @@ instat_object$set("public", "set_data_frames_changed", function(data_name = "", 
 instat_object$set("public", "set_variables_metadata_changed", function(data_name = "", new_val) {
   if(data_name == "") {
     for(curr_obj in private$.data_objects) {
-      curr_obj$set_variables_metadata_changed(new_val)
+      curr_obj$variables_metadata_changed <- new_val
     }
   }
   
