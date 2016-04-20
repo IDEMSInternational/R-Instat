@@ -335,13 +335,11 @@ Public Class dlgTransformText
     Private Sub ucrReceiverOrColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverOrColumn.SelectionChanged
         If rdoWords.Checked Then
             If chkOrColumn.Checked Then
-                If Not ucrReceiverOrColumn.IsEmpty Then
-                    ucrBase.clsRsyntax.AddParameter("start", clsRFunctionParameter:=ucrReceiverOrColumn.GetVariables())
-                Else
+                ucrBase.clsRsyntax.AddParameter("start", clsRFunctionParameter:=ucrReceiverOrColumn.GetVariables())
+            Else
                     ucrBase.clsRsyntax.RemoveParameter("start")
                 End If
                 End If
-            End If
         TestOkEnabled()
     End Sub
 
@@ -533,6 +531,7 @@ Public Class dlgTransformText
 
     Private Sub ucrInputPrefixForNewColumn_NameChanged() Handles ucrInputPrefixForNewColumn.NameChanged
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPrefixForNewColumn.GetText, strTempDataframe:=ucrSelectorForTransformText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPrefixForNewColumn.GetText)
+        TestOkEnabled()
     End Sub
 
     Private Sub chkOrColumnL_CheckedChanged(sender As Object, e As EventArgs) Handles chkOrColumnL.CheckedChanged
@@ -566,13 +565,11 @@ Public Class dlgTransformText
     Private Sub ucrReceiverLastWord_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverLastWord.SelectionChanged
         If rdoWords.Checked Then
             If chkOrColumnL.Checked Then
-                If Not ucrReceiverLastWord.IsEmpty Then
-                    ucrBase.clsRsyntax.AddParameter("end", clsRFunctionParameter:=ucrReceiverOrColumn.GetVariables())
-                Else
+                ucrBase.clsRsyntax.AddParameter("end", clsRFunctionParameter:=ucrReceiverOrColumn.GetVariables())
+            Else
                     ucrBase.clsRsyntax.RemoveParameter("end")
                 End If
             End If
-        End If
         TestOkEnabled()
     End Sub
 End Class
