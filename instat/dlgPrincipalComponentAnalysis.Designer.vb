@@ -28,10 +28,10 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.lblComponents = New System.Windows.Forms.Label()
         Me.chkScaleData = New System.Windows.Forms.CheckBox()
         Me.chkSaveResult = New System.Windows.Forms.CheckBox()
-        Me.ucrResultName = New instat.ucrInputTextBox()
         Me.ucrReceiverMultiplePCA = New instat.ucrReceiverMultiple()
         Me.ucrSelectorPCA = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBasePCA = New instat.ucrButtons()
+        Me.ucrResultName = New instat.ucrInputComboBox()
         CType(Me.nudComponents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -94,13 +94,6 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.chkSaveResult.Text = "Save Result"
         Me.chkSaveResult.UseVisualStyleBackColor = True
         '
-        'ucrResultName
-        '
-        Me.ucrResultName.Location = New System.Drawing.Point(111, 222)
-        Me.ucrResultName.Name = "ucrResultName"
-        Me.ucrResultName.Size = New System.Drawing.Size(142, 21)
-        Me.ucrResultName.TabIndex = 10
-        '
         'ucrReceiverMultiplePCA
         '
         Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(268, 58)
@@ -122,6 +115,13 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.ucrBasePCA.Name = "ucrBasePCA"
         Me.ucrBasePCA.Size = New System.Drawing.Size(410, 53)
         Me.ucrBasePCA.TabIndex = 9
+        '
+        'ucrResultName
+        '
+        Me.ucrResultName.Location = New System.Drawing.Point(115, 219)
+        Me.ucrResultName.Name = "ucrResultName"
+        Me.ucrResultName.Size = New System.Drawing.Size(137, 25)
+        Me.ucrResultName.TabIndex = 10
         '
         'dlgPrincipalComponentAnalysis
         '
@@ -158,5 +158,5 @@ Partial Class dlgPrincipalComponentAnalysis
     Friend WithEvents lblComponents As Label
     Friend WithEvents chkScaleData As CheckBox
     Friend WithEvents chkSaveResult As CheckBox
-    Friend WithEvents ucrResultName As ucrInputTextBox
+    Friend WithEvents ucrResultName As ucrInputComboBox
 End Class
