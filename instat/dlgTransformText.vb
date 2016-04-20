@@ -187,7 +187,6 @@ Public Class dlgTransformText
             ucrBase.clsRsyntax.SetFunction("stringr::str_pad")
             rdoLeft.Checked = True
             ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
-            ucrBase.clsRsyntax.AddParameter("width", "1")
             nudWidth.Visible = True
             lblWidth.Visible = True
             lblPad.Visible = True
@@ -289,8 +288,6 @@ Public Class dlgTransformText
 
         ElseIf rdoSubstring.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_sub")
-            ucrBase.clsRsyntax.AddParameter("start", "1")
-            ucrBase.clsRsyntax.AddParameter("end", "-1")
             lblFirstWord.Visible = False
             nudFirstWord.Visible = False
             chkOrColumn.Visible = False
@@ -457,7 +454,7 @@ Public Class dlgTransformText
         End If
     End Sub
 
-    Private Sub SideParameter_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub SideParameter_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLeft.CheckedChanged, rdoRight.CheckedChanged, rdoBoth.CheckedChanged
         If rdoPad.Checked Then
 
             If rdoLeft.Checked Then
