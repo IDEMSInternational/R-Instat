@@ -473,11 +473,11 @@ instat_object$set("public", "insert_row_in_data", function(data_name, start_pos,
 }
 )
 
-instat_object$set("public", "length_of_data", function(data_name) {
+instat_object$set("public", "get_dataframe_length", function(data_name) {
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  self$get_data_objects(data_name)$length_of_data()
+  self$get_data_objects(data_name)$get_dataframe_length()
 }
 )
 
@@ -589,7 +589,7 @@ instat_object$set("public", "get_column_count", function(data_name) {
   if(!is.character(data_name)) stop("data_name must be of type character")
   if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
-  return(ncol(self$get_data_objects(data_name)$data))
+  return(self$get_data_objects(data_name)$get_column_count())
 } 
 )
 

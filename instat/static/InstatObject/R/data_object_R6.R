@@ -555,7 +555,7 @@ data_object$set("public", "insert_row_in_data", function(start_pos = (nrow(priva
 }
 )
 
-data_object$set("public", "length_of_data", function() {
+data_object$set("public", "get_dataframe_length", function() {
   return(nrow(private$data))
 }
 )
@@ -689,5 +689,10 @@ data_object$set("public", "reorder_factor_levels", function(col_name, new_level_
   if(!all(new_level_names %in% levels(private$data[[col_name]]))) stop(paste("new_level_names must be a reordering of the current levels:",paste(levels(data[[col_name]]), collapse = " ")))
   self$add_columns_to_data(col_name = col_name, col_data = factor(private$data[[col_name]], levels = new_level_names))
   self$variables_metadata_changed <- TRUE
+}
+)
+
+data_object$set("public", "get_column_count", function(col_name, new_level_names) {
+  return(ncol(private$data))
 }
 )
