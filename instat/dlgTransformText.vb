@@ -77,13 +77,12 @@ Public Class dlgTransformText
         rdoTrim.Checked = False
         rdoPad.Checked = False
         rdoLength.Checked = False
-        nudFrom.Value = "1"
-        nudTo.Value = "-1"
-        nudWidth.Value = "1"
+        nudFrom.Value = 1
+        nudTo.Value = -1
+        nudWidth.Value = 1
         ucrInputTo.SetName("Lower")
         ucrInputSeparator.SetName("Space")
         ucrInputPad.SetName("Space")
-
     End Sub
 
     Private Sub TestOkEnabled()
@@ -185,7 +184,7 @@ Public Class dlgTransformText
 
         ElseIf rdoPad.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_pad")
-            PadSideParameters()
+            PadSideParameter()
             SeperatorParameter()
             WidthParameter()
             rdoLeft.Checked = True
@@ -307,7 +306,6 @@ Public Class dlgTransformText
             ucrBase.clsRsyntax.RemoveParameter("width")
             ucrBase.clsRsyntax.RemoveParameter("side")
             ucrBase.clsRsyntax.RemoveParameter("pad")
-
             ucrBase.clsRsyntax.RemoveParameter("sep")
             rdoBoth.Visible = False
             rdoRight.Visible = False
@@ -464,10 +462,10 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub SideParameter_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLeft.CheckedChanged, rdoRight.CheckedChanged, rdoBoth.CheckedChanged
-        PadSideParameters()
+        PadSideParameter()
     End Sub
 
-    Private Sub PadSideParameters()
+    Private Sub PadSideParameter()
         If rdoPad.Checked Then
             If rdoLeft.Checked Then
                 ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
