@@ -439,11 +439,11 @@ data_object$set("public", "get_next_default_column_name", function(prefix) {
 data_object$set("public", "insert_column_in_data", function(col_data =c(), start_pos = (length(names(data))+1), number_cols = 1) {
   if (start_pos <= 0) stop("You cannot put a column into the position less or equal to zero.")
   if (start_pos %% 1 != 0) stop("start_pos value should be an integer.")
-  if ((ncol(private$.data) + 1) < start_pos) stop("The start_pos argument exceeds the number of columns in the data plus one.")
+  if ((ncol(private$data) + 1) < start_pos) stop("The start_pos argument exceeds the number of columns in the data plus one.")
   
   if(length(col_data)==0){
     col_data <- rep(NA, nrow(private$data))
-    warning(paste("You are inserting empty column(s) to", get_metadata(data_name_label)))
+    message(paste("You are inserting empty column(s) in:", self$get_metadata(data_name_label)))
   }
   for(j in 1:number_cols){
     col_name <- self$get_next_default_column_name("X") #change x 
