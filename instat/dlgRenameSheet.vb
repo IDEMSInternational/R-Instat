@@ -16,22 +16,54 @@
 
 Imports instat.Translations
 Public Class dlgRenameSheet
+    Public bFirstLoad As Boolean = True
     Private Sub dlgRenameSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
-        'set the function
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
+
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+
+
         TestOKEnabled()
     End Sub
 
-    Private Sub txtNewName_Leave(sender As Object, e As EventArgs) Handles txtNewName.Leave
-        If txtNewName.Text <> "" Then
-            ucrBase.clsRsyntax.AddParameter("new_value", Chr(34) & txtNewName.Text & Chr(34))
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub InitialiseDialog()
+        'set the function
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
+
+
+    End Sub
+
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrInputNewName_NameChanged() Handles ucrInputNewName.NameChanged
+        If ucrInputNewName.txtInput.Text <> "" Then
+            ucrBase.clsRsyntax.AddParameter("new_value", Chr(34) & ucrInputNewName.GetText & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("new_value")
+
         End If
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If txtNewName.Text <> "" Then
+        If ucrInputNewName.txtInput.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -42,4 +74,6 @@ Public Class dlgRenameSheet
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem & Chr(34))
         TestOKEnabled()
     End Sub
+
+
 End Class

@@ -45,7 +45,7 @@ Partial Class dlgDummyVariables
         Me.grpLevelOmitted.Controls.Add(Me.rdoLast)
         Me.grpLevelOmitted.Controls.Add(Me.rdoFirst)
         Me.grpLevelOmitted.Controls.Add(Me.rdoNone)
-        Me.grpLevelOmitted.Location = New System.Drawing.Point(275, 100)
+        Me.grpLevelOmitted.Location = New System.Drawing.Point(256, 75)
         Me.grpLevelOmitted.Name = "grpLevelOmitted"
         Me.grpLevelOmitted.Size = New System.Drawing.Size(123, 112)
         Me.grpLevelOmitted.TabIndex = 3
@@ -115,7 +115,7 @@ Partial Class dlgDummyVariables
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(280, 46)
+        Me.lblSelected.Location = New System.Drawing.Point(253, 27)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
         Me.lblSelected.TabIndex = 1
@@ -125,7 +125,7 @@ Partial Class dlgDummyVariables
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(7, 246)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(5, 246)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumnName.TabIndex = 7
@@ -166,7 +166,7 @@ Partial Class dlgDummyVariables
         '
         'ucrReceiverFactor
         '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(275, 64)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(256, 43)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(106, 26)
@@ -174,12 +174,12 @@ Partial Class dlgDummyVariables
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 282)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 282)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 56)
         Me.ucrBase.TabIndex = 9
         '
-        'dlgIndicatorVariable
+        'dlgDummyVariables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -195,7 +195,7 @@ Partial Class dlgDummyVariables
         Me.Controls.Add(Me.grpLevelOmitted)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgIndicatorVariable"
+        Me.Name = "dlgDummyVariables"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Dummy_Variables"
         Me.Text = "Dummy Variables"

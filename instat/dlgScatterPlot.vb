@@ -89,6 +89,7 @@ Public Class dlgScatterPlot
         'setDefaults
         ucrSelectorForScatter.Reset()
         ucrSelectorForScatter.Focus()
+        ucrVariablesAsFactorForScatter.ResetControl()
         TestOkEnabled()
     End Sub
 
