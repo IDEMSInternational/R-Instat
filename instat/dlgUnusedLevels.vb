@@ -22,11 +22,16 @@ Public Class dlgUnusedLevels
             SetDefaultSettings()
             InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
 
         TestOKEnabled()
-        ucrBase.iHelpTopicID = 40
+
         autoTranslate(Me)
+    End Sub
+    Private Sub ReopenDialog()
+
     End Sub
     Private Sub SetDefaultSettings()
         ucrSelectorFactorColumn.Reset()
@@ -37,12 +42,14 @@ Public Class dlgUnusedLevels
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels")
         ucrReceiverFactorColumn.Selector = ucrSelectorFactorColumn
         ucrReceiverFactorColumn.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 40
         ucrReceiverFactorColumn.SetDataType("factor")
         ucrRemoveUnusedFactorLevels.SetReceiver(ucrReceiverFactorColumn)
     End Sub
 
     Private Sub ucrBase_clickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaultSettings()
+        TestOKEnabled()
     End Sub
     Private Sub TestOKEnabled()
         If ucrReceiverFactorColumn.IsEmpty() Then
