@@ -77,9 +77,9 @@ Public Class dlgTransformText
         rdoTrim.Checked = False
         rdoPad.Checked = False
         rdoLength.Checked = False
-        nudFrom.Value = "1"
-        nudTo.Value = "-1"
-        nudWidth.Value = "1"
+        nudFrom.Value = 1
+        nudTo.Value = -1
+        nudWidth.Value = 1
         ucrInputTo.SetName("Lower")
         ucrInputSeparator.SetName("Space")
         ucrInputPad.SetName("Space")
