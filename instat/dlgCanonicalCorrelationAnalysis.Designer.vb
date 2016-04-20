@@ -106,7 +106,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'ucrResultName
         '
-        Me.ucrResultName.Location = New System.Drawing.Point(119, 212)
+        Me.ucrResultName.Location = New System.Drawing.Point(119, 247)
         Me.ucrResultName.Name = "ucrResultName"
         Me.ucrResultName.Size = New System.Drawing.Size(137, 25)
         Me.ucrResultName.TabIndex = 10
