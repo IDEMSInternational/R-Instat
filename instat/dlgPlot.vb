@@ -40,6 +40,7 @@ Public Class dlgPlot
         chkPoints.Checked = False
         ucrLinePlotSelector.Focus()
         ucrLinePlotSelector.Reset()
+        ucrVariablesAsFactorForLinePlot.ResetControl()
         TeskOkEnabled()
     End Sub
 
