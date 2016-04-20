@@ -237,6 +237,8 @@ Public Class dlgTransformText
             rdoBoth.Visible = False
             rdoRight.Visible = False
             rdoLeft.Visible = False
+            rdoLeftTrim.Checked = True
+            ucrBase.clsRsyntax.AddParameter("side", Chr(34) & "left" & Chr(34))
             rdoLeftTrim.Visible = True
             rdoRightTrim.Visible = True
             rdoBothTrim.Visible = True
@@ -248,7 +250,6 @@ Public Class dlgTransformText
             ucrReceiverLastWord.Visible = False
             ucrBase.clsRsyntax.RemoveParameter("pad")
             ucrBase.clsRsyntax.RemoveParameter("width")
-            ucrBase.clsRsyntax.RemoveParameter("side")
             ucrBase.clsRsyntax.RemoveParameter("start")
             ucrBase.clsRsyntax.RemoveParameter("end")
             ucrBase.clsRsyntax.RemoveParameter("sep")
@@ -288,6 +289,8 @@ Public Class dlgTransformText
 
         ElseIf rdoSubstring.Checked Then
             ucrBase.clsRsyntax.SetFunction("stringr::str_sub")
+            ucrBase.clsRsyntax.AddParameter("start", "1")
+            ucrBase.clsRsyntax.AddParameter("end", "-1")
             lblFirstWord.Visible = False
             nudFirstWord.Visible = False
             chkOrColumn.Visible = False
