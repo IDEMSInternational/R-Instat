@@ -35,29 +35,29 @@ Partial Class dlgTransformText
         Me.lblToSubstring = New System.Windows.Forms.Label()
         Me.nudFrom = New System.Windows.Forms.NumericUpDown()
         Me.lblFrom = New System.Windows.Forms.Label()
-        Me.chkOrColumn = New System.Windows.Forms.CheckBox()
+        Me.chkFirstWord = New System.Windows.Forms.CheckBox()
         Me.lblSeparator = New System.Windows.Forms.Label()
         Me.nudLastWord = New System.Windows.Forms.NumericUpDown()
         Me.lblLastWord = New System.Windows.Forms.Label()
         Me.lblFirstWord = New System.Windows.Forms.Label()
         Me.nudFirstWord = New System.Windows.Forms.NumericUpDown()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
+        Me.ucrInputSeparator = New instat.ucrInputComboBox()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblPad = New System.Windows.Forms.Label()
-        Me.chkOrColumnL = New System.Windows.Forms.CheckBox()
+        Me.ucrReceiverLastWord = New instat.ucrReceiverSingle()
+        Me.chkLastWord = New System.Windows.Forms.CheckBox()
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
         Me.rdoBothTrim = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverFirstWord = New instat.ucrReceiverSingle()
+        Me.ucrInputTo = New instat.ucrInputComboBox()
         Me.rdoLeft = New System.Windows.Forms.RadioButton()
+        Me.ucrInputPad = New instat.ucrInputComboBox()
         Me.rdoLeftTrim = New System.Windows.Forms.RadioButton()
         Me.rdoRight = New System.Windows.Forms.RadioButton()
         Me.rdoRightTrim = New System.Windows.Forms.RadioButton()
         Me.nudWidth = New System.Windows.Forms.NumericUpDown()
         Me.lblWidth = New System.Windows.Forms.Label()
-        Me.ucrInputSeparator = New instat.ucrInputComboBox()
-        Me.ucrReceiverLastWord = New instat.ucrReceiverSingle()
-        Me.ucrReceiverOrColumn = New instat.ucrReceiverSingle()
-        Me.ucrInputTo = New instat.ucrInputComboBox()
-        Me.ucrInputPad = New instat.ucrInputComboBox()
         Me.ucrInputPrefixForNewColumn = New instat.ucrInputComboBox()
         Me.ucrReceiverTransformText = New instat.ucrReceiverSingle()
         Me.ucrSelectorForTransformText = New instat.ucrSelectorByDataFrameAddRemove()
@@ -207,15 +207,15 @@ Partial Class dlgTransformText
         Me.lblFrom.TabIndex = 22
         Me.lblFrom.Text = "From"
         '
-        'chkOrColumn
+        'chkFirstWord
         '
-        Me.chkOrColumn.AutoSize = True
-        Me.chkOrColumn.Location = New System.Drawing.Point(67, 46)
-        Me.chkOrColumn.Name = "chkOrColumn"
-        Me.chkOrColumn.Size = New System.Drawing.Size(75, 17)
-        Me.chkOrColumn.TabIndex = 20
-        Me.chkOrColumn.Text = "Or Column"
-        Me.chkOrColumn.UseVisualStyleBackColor = True
+        Me.chkFirstWord.AutoSize = True
+        Me.chkFirstWord.Location = New System.Drawing.Point(67, 46)
+        Me.chkFirstWord.Name = "chkFirstWord"
+        Me.chkFirstWord.Size = New System.Drawing.Size(75, 17)
+        Me.chkFirstWord.TabIndex = 20
+        Me.chkFirstWord.Text = "Or Column"
+        Me.chkFirstWord.UseVisualStyleBackColor = True
         '
         'lblSeparator
         '
@@ -272,14 +272,14 @@ Partial Class dlgTransformText
         Me.grpParameters.Controls.Add(Me.lblPad)
         Me.grpParameters.Controls.Add(Me.ucrReceiverLastWord)
         Me.grpParameters.Controls.Add(Me.lblFrom)
-        Me.grpParameters.Controls.Add(Me.chkOrColumnL)
+        Me.grpParameters.Controls.Add(Me.chkLastWord)
         Me.grpParameters.Controls.Add(Me.rdoBoth)
         Me.grpParameters.Controls.Add(Me.lblToSubstring)
         Me.grpParameters.Controls.Add(Me.nudFrom)
         Me.grpParameters.Controls.Add(Me.rdoBothTrim)
         Me.grpParameters.Controls.Add(Me.nudLastWord)
-        Me.grpParameters.Controls.Add(Me.chkOrColumn)
-        Me.grpParameters.Controls.Add(Me.ucrReceiverOrColumn)
+        Me.grpParameters.Controls.Add(Me.chkFirstWord)
+        Me.grpParameters.Controls.Add(Me.ucrReceiverFirstWord)
         Me.grpParameters.Controls.Add(Me.nudFirstWord)
         Me.grpParameters.Controls.Add(Me.ucrInputTo)
         Me.grpParameters.Controls.Add(Me.lblFirstWord)
@@ -296,6 +296,13 @@ Partial Class dlgTransformText
         Me.grpParameters.TabIndex = 8
         Me.grpParameters.TabStop = False
         Me.grpParameters.Text = "Options"
+        '
+        'ucrInputSeparator
+        '
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(69, 105)
+        Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        Me.ucrInputSeparator.Size = New System.Drawing.Size(73, 25)
+        Me.ucrInputSeparator.TabIndex = 17
         '
         'lblTo
         '
@@ -315,15 +322,23 @@ Partial Class dlgTransformText
         Me.lblPad.TabIndex = 14
         Me.lblPad.Text = "Pad"
         '
-        'chkOrColumnL
+        'ucrReceiverLastWord
         '
-        Me.chkOrColumnL.AutoSize = True
-        Me.chkOrColumnL.Location = New System.Drawing.Point(67, 83)
-        Me.chkOrColumnL.Name = "chkOrColumnL"
-        Me.chkOrColumnL.Size = New System.Drawing.Size(75, 17)
-        Me.chkOrColumnL.TabIndex = 26
-        Me.chkOrColumnL.Text = "Or Column"
-        Me.chkOrColumnL.UseVisualStyleBackColor = True
+        Me.ucrReceiverLastWord.Location = New System.Drawing.Point(148, 76)
+        Me.ucrReceiverLastWord.Name = "ucrReceiverLastWord"
+        Me.ucrReceiverLastWord.Selector = Nothing
+        Me.ucrReceiverLastWord.Size = New System.Drawing.Size(107, 26)
+        Me.ucrReceiverLastWord.TabIndex = 27
+        '
+        'chkLastWord
+        '
+        Me.chkLastWord.AutoSize = True
+        Me.chkLastWord.Location = New System.Drawing.Point(67, 83)
+        Me.chkLastWord.Name = "chkLastWord"
+        Me.chkLastWord.Size = New System.Drawing.Size(75, 17)
+        Me.chkLastWord.TabIndex = 26
+        Me.chkLastWord.Text = "Or Column"
+        Me.chkLastWord.UseVisualStyleBackColor = True
         '
         'rdoBoth
         '
@@ -347,6 +362,21 @@ Partial Class dlgTransformText
         Me.rdoBothTrim.Text = "Both"
         Me.rdoBothTrim.UseVisualStyleBackColor = True
         '
+        'ucrReceiverFirstWord
+        '
+        Me.ucrReceiverFirstWord.Location = New System.Drawing.Point(148, 36)
+        Me.ucrReceiverFirstWord.Name = "ucrReceiverFirstWord"
+        Me.ucrReceiverFirstWord.Selector = Nothing
+        Me.ucrReceiverFirstWord.Size = New System.Drawing.Size(107, 26)
+        Me.ucrReceiverFirstWord.TabIndex = 13
+        '
+        'ucrInputTo
+        '
+        Me.ucrInputTo.Location = New System.Drawing.Point(32, 19)
+        Me.ucrInputTo.Name = "ucrInputTo"
+        Me.ucrInputTo.Size = New System.Drawing.Size(73, 25)
+        Me.ucrInputTo.TabIndex = 8
+        '
         'rdoLeft
         '
         Me.rdoLeft.AutoSize = True
@@ -357,6 +387,13 @@ Partial Class dlgTransformText
         Me.rdoLeft.TabStop = True
         Me.rdoLeft.Text = "Left"
         Me.rdoLeft.UseVisualStyleBackColor = True
+        '
+        'ucrInputPad
+        '
+        Me.ucrInputPad.Location = New System.Drawing.Point(135, 50)
+        Me.ucrInputPad.Name = "ucrInputPad"
+        Me.ucrInputPad.Size = New System.Drawing.Size(73, 25)
+        Me.ucrInputPad.TabIndex = 13
         '
         'rdoLeftTrim
         '
@@ -409,43 +446,6 @@ Partial Class dlgTransformText
         Me.lblWidth.Size = New System.Drawing.Size(35, 13)
         Me.lblWidth.TabIndex = 11
         Me.lblWidth.Text = "Width"
-        '
-        'ucrInputSeparator
-        '
-        Me.ucrInputSeparator.Location = New System.Drawing.Point(69, 105)
-        Me.ucrInputSeparator.Name = "ucrInputSeparator"
-        Me.ucrInputSeparator.Size = New System.Drawing.Size(73, 25)
-        Me.ucrInputSeparator.TabIndex = 17
-        '
-        'ucrReceiverLastWord
-        '
-        Me.ucrReceiverLastWord.Location = New System.Drawing.Point(148, 76)
-        Me.ucrReceiverLastWord.Name = "ucrReceiverLastWord"
-        Me.ucrReceiverLastWord.Selector = Nothing
-        Me.ucrReceiverLastWord.Size = New System.Drawing.Size(107, 26)
-        Me.ucrReceiverLastWord.TabIndex = 27
-        '
-        'ucrReceiverOrColumn
-        '
-        Me.ucrReceiverOrColumn.Location = New System.Drawing.Point(148, 36)
-        Me.ucrReceiverOrColumn.Name = "ucrReceiverOrColumn"
-        Me.ucrReceiverOrColumn.Selector = Nothing
-        Me.ucrReceiverOrColumn.Size = New System.Drawing.Size(107, 26)
-        Me.ucrReceiverOrColumn.TabIndex = 13
-        '
-        'ucrInputTo
-        '
-        Me.ucrInputTo.Location = New System.Drawing.Point(32, 19)
-        Me.ucrInputTo.Name = "ucrInputTo"
-        Me.ucrInputTo.Size = New System.Drawing.Size(73, 25)
-        Me.ucrInputTo.TabIndex = 8
-        '
-        'ucrInputPad
-        '
-        Me.ucrInputPad.Location = New System.Drawing.Point(135, 50)
-        Me.ucrInputPad.Name = "ucrInputPad"
-        Me.ucrInputPad.Size = New System.Drawing.Size(73, 25)
-        Me.ucrInputPad.TabIndex = 13
         '
         'ucrInputPrefixForNewColumn
         '
@@ -519,14 +519,14 @@ Partial Class dlgTransformText
     Friend WithEvents rdoLength As RadioButton
     Friend WithEvents rdoConvertCase As RadioButton
     Friend WithEvents rdoWords As RadioButton
-    Friend WithEvents ucrReceiverOrColumn As ucrReceiverSingle
+    Friend WithEvents ucrReceiverFirstWord As ucrReceiverSingle
     Friend WithEvents nudFirstWord As NumericUpDown
     Friend WithEvents nudLastWord As NumericUpDown
     Friend WithEvents lblLastWord As Label
     Friend WithEvents lblFirstWord As Label
     Friend WithEvents lblSeparator As Label
     Friend WithEvents ucrInputSeparator As ucrInputComboBox
-    Friend WithEvents chkOrColumn As CheckBox
+    Friend WithEvents chkFirstWord As CheckBox
     Friend WithEvents nudTo As NumericUpDown
     Friend WithEvents lblToSubstring As Label
     Friend WithEvents nudFrom As NumericUpDown
@@ -540,7 +540,7 @@ Partial Class dlgTransformText
     Friend WithEvents ucrInputTo As ucrInputComboBox
     Friend WithEvents lblTo As Label
     Friend WithEvents ucrReceiverLastWord As ucrReceiverSingle
-    Friend WithEvents chkOrColumnL As CheckBox
+    Friend WithEvents chkLastWord As CheckBox
     Friend WithEvents rdoBoth As RadioButton
     Friend WithEvents rdoRight As RadioButton
     Friend WithEvents rdoLeft As RadioButton
