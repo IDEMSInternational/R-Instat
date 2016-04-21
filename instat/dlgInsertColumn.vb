@@ -24,11 +24,11 @@ Public Class dlgInsertColumn
     Private Sub chkPos_CheckStateChanged(sender As Object, e As EventArgs) Handles chkPos.CheckStateChanged
         If chkPos.Checked = True Then
             nudPos.Enabled = True
-            txtStartPos.Enabled = False
+            ucrInputStartPos.Enabled = False
         Else
             ucrBase.clsRsyntax.AddParameter("start_pos", iCountVariables + 1)
             nudPos.Enabled = False
-            txtStartPos.Enabled = True
+            ucrInputStartPos.Enabled = True
         End If
     End Sub
 
@@ -42,9 +42,9 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub setDefaultValues()
-        txtDefaultData.Text = "NA"
+        ucrInputDefaultData.Name = "NA"
         ucrBase.clsRsyntax.AddParameter("col_data", "c()")
-        txtStartPos.Text = "At the end."
+        ucrInputStartPos.Name = "At the end."
         ucrBase.clsRsyntax.AddParameter("start_pos", iCountVariables + 1)
         nudNumCols.Value = 1
         nudPos.Value = iCountVariables
