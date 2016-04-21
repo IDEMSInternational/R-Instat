@@ -1,5 +1,3 @@
-key_label="key"
-
 #Methods temporarily here to avoid conflicts
 data_obj$methods(merge_data = function(new_data, by = NULL, type = "left", match = "all") {
   set_data(join(data, new_data, by, type, match))
