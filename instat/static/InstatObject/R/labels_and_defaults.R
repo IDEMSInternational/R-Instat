@@ -22,6 +22,7 @@ is_calculated_label="is_calculated"
 decimal_places_label="decimal_places"
 columns_label="columns"
 summarised_from_label="summarised_from"
+key_label="key"
 
 #variables_metadata labels
 display_decimal_label="DisplayDecimal"
