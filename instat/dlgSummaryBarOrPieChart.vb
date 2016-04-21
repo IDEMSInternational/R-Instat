@@ -21,6 +21,23 @@ Public Class dlgSummaryBarOrPieChart
     Private bFirstLoad As Boolean = True
 
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        autoTranslate(Me)
+        TestOkEnabled()
+    End Sub
+    Private Sub TestOkEnabled()
+        If Not ucrYReceiver.IsEmpty And Not ucrFactorReceiver.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+
+        End If
+    End Sub
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRaesFunction.SetRCommand("aes")
@@ -35,21 +52,8 @@ Public Class dlgSummaryBarOrPieChart
         ucrSecondFactorReceiver.Selector = ucrSummarybarSelector
         ucrSecondFactorReceiver.SetDataType("factor")
         ucrYReceiver.SetMeAsReceiver()
-        autoTranslate(Me)
         ucrBase.clsRsyntax.iCallType = 0
-
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
-        End If
-    End Sub
-    Private Sub TestOkEnabled()
-        If Not ucrYReceiver.IsEmpty And Not ucrFactorReceiver.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-
-        End If
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
     Private Sub SetDefaults()
         ucrSummarybarSelector.Reset()

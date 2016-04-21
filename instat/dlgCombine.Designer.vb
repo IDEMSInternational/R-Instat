@@ -40,7 +40,7 @@ Partial Class dlgCombine
         '
         'ucrFactorsReceiver
         '
-        Me.ucrFactorsReceiver.Location = New System.Drawing.Point(246, 54)
+        Me.ucrFactorsReceiver.Location = New System.Drawing.Point(246, 25)
         Me.ucrFactorsReceiver.Name = "ucrFactorsReceiver"
         Me.ucrFactorsReceiver.Selector = Nothing
         Me.ucrFactorsReceiver.Size = New System.Drawing.Size(121, 104)
@@ -49,7 +49,7 @@ Partial Class dlgCombine
         'lblFactors
         '
         Me.lblFactors.AutoSize = True
-        Me.lblFactors.Location = New System.Drawing.Point(251, 30)
+        Me.lblFactors.Location = New System.Drawing.Point(243, 9)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(42, 13)
         Me.lblFactors.TabIndex = 1
@@ -69,7 +69,7 @@ Partial Class dlgCombine
         '
         'ucrInputColName
         '
-        Me.ucrInputColName.Location = New System.Drawing.Point(165, 214)
+        Me.ucrInputColName.Location = New System.Drawing.Point(117, 215)
         Me.ucrInputColName.Name = "ucrInputColName"
         Me.ucrInputColName.Size = New System.Drawing.Size(171, 25)
         Me.ucrInputColName.TabIndex = 5

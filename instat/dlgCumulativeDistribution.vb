@@ -44,6 +44,8 @@ Public Class dlgCumulativeDistribution
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 133
 
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+
 
         ucrVariablesAsFactorforCumDist.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorforCumDist.SetSelector(ucrCumDistSelector)
