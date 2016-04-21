@@ -45,6 +45,8 @@ Public Class dlgDotPlot
         ucrSecondFactorReceiver.Selector = ucrDotPlotSelector
         ucrBase.clsRsyntax.iCallType = 0
 
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+
         ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorDotPlot.SetSelector(ucrDotPlotSelector)
         ucrVariablesAsFactorDotPlot.SetDataType("numeric")
