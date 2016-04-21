@@ -61,12 +61,13 @@ Public Class dlgPlot
         ucrReceiverX.SetDataType("numeric")
         ucrFactorOptionalReceiver.Selector = ucrLinePlotSelector
         ucrFactorOptionalReceiver.SetDataType("factor")
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
 
 
         ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForLinePlot.SetSelector(ucrLinePlotSelector)
-        ' ucrVariablesAsFactor.SetDataType("numeric")
+        'ucrVariablesAsFactor.SetDataType("numeric")
 
     End Sub
     Private Sub TeskOkEnabled()

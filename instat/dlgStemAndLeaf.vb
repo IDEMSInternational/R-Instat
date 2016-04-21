@@ -15,19 +15,36 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+
 Public Class dlgStemAndLeaf
+    Public bFirstLoad As Boolean = True
     Private Sub dlgStemAndLeaf_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        autoTranslate(Me)
+        TestOkEnabled()
+    End Sub
+    Private Sub SetDefaults()
+        ucrReceiverStemAndLeaf.SetMeAsReceiver()
+        TestOkEnabled()
+    End Sub
+    Private Sub TestOkEnabled()
+        If Not ucrReceiverStemAndLeaf.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("stem")
         ucrBase.clsRsyntax.iCallType = 2
-        ucrReceiverStemAndLeaf.Selector = ucrAddRemove
-        ucrReceiverStemAndLeaf.SetMeAsReceiver()
-        autoTranslate(Me)
+        ucrReceiverStemAndLeaf.Selector = ucrStemLeafSelector
     End Sub
-    Private Sub ucrReceiverStemAndLeaf_Enter(sender As Object, e As EventArgs) Handles ucrReceiverStemAndLeaf.Enter
-        ucrReceiverStemAndLeaf.SetMeAsReceiver()
-    End Sub
-    Private Sub ucrReceiverStemAndLeaf_Leave(sender As Object, e As EventArgs) Handles ucrReceiverStemAndLeaf.Leave
+    Private Sub ucrReceiverStemAndLeaf_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverStemAndLeaf.SelectionChanged
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverStemAndLeaf.GetVariables())
+        TestOkEnabled()
     End Sub
-
 End Class
