@@ -41,7 +41,7 @@ Partial Class dlgScatterPlot
         Me.cmdOptions.Size = New System.Drawing.Size(133, 23)
         Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "General Plot Options"
+        Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblFactorOptional

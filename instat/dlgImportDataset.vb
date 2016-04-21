@@ -112,7 +112,7 @@ Public Class dlgImportDataset
         If bFromLibrary Then
             dlgOpen.Title = "Import from library"
             dlgOpen.InitialDirectory = strLibraryPath
-            dlgOpen.Filter = "RDS R-file (*.RDS)|*.RDS"
+            dlgOpen.Filter = "All Data files (*.xlsx,*.RDS)|*.xlsx;*.RDS|RDS R-file (*.RDS)|*.RDS|Excel files (*.xlsx)|*.xlsx"
             bFromLibrary = False
         Else
             dlgOpen.Filter = "All Data files (*.csv,.xlsx,*.RDS)|*.csv;*.xlsx;*.RDS|Comma separated file (*.csv)|*.csv|RDS R-file (*.RDS)|*.RDS|Excel files (*.xlsx)|*.xlsx"
