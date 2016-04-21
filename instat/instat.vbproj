@@ -508,6 +508,12 @@
     <Compile Include="dlgThemes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTransformText.Designer.vb">
+      <DependentUpon>dlgTransformText.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTransformText.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTransposeColumns.Designer.vb">
       <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
     </Compile>
@@ -2140,6 +2146,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThemes.sw-KE.resx">
       <DependentUpon>dlgThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransformText.fr-FR.resx">
+      <DependentUpon>dlgTransformText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransformText.resx">
+      <DependentUpon>dlgTransformText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransformText.sw-KE.resx">
+      <DependentUpon>dlgTransformText.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTransposeColumns.fr-FR.resx">
       <DependentUpon>dlgTransposeColumns.vb</DependentUpon>
@@ -4019,6 +4034,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\RainGalle.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Introductory_guide_datasets.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -49,6 +49,8 @@ Public Class dlgHistogram
         ucrFactorReceiver.Selector = ucrHistogramSelector
         ucrFactorReceiver.SetDataType("factor")
 
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+
 
         ucrVariablesAsFactorforHist.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorforHist.SetSelector(ucrHistogramSelector)
