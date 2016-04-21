@@ -22,7 +22,6 @@ Partial Class dlgBoxplot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgBoxplot))
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
@@ -43,7 +42,7 @@ Partial Class dlgBoxplot
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdOptions.TabIndex = 8
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblByFactors
@@ -106,7 +105,6 @@ Partial Class dlgBoxplot
         'ucrSelectorBoxPlot
         '
         Me.ucrSelectorBoxPlot.Location = New System.Drawing.Point(12, 9)
-        Me.ucrSelectorBoxPlot.lstVariablesInReceivers = CType(resources.GetObject("ucrSelectorBoxPlot.lstVariablesInReceivers"), System.Collections.Generic.List(Of String))
         Me.ucrSelectorBoxPlot.Name = "ucrSelectorBoxPlot"
         Me.ucrSelectorBoxPlot.Size = New System.Drawing.Size(230, 215)
         Me.ucrSelectorBoxPlot.TabIndex = 0
