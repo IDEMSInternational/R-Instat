@@ -15,7 +15,58 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgPrincipalComponentAnalysis
+    'Public clsRPCAFunction As RFunction
+    Public bFirstLoad As Boolean = True
+
     Private Sub sdgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
     End Sub
+
+    'Public Sub SetRModelFunction(clsRModelFunc As RFunction)
+    '    clsRModelFunction = clsRModelFunc
+    'End Sub
+
+    Private Sub EigenValues()
+        frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$eig", 2)
+    End Sub
+
+    Private Sub EigenVectors()
+        frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$ind$contrib", 2)
+    End Sub
+
+    Private Sub Scores()
+        frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$ind$coord", 2)
+    End Sub
+
+    Private Sub Residuals()
+        'frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$eig", 2)
+    End Sub
+
+    Public Sub SetDefaults()
+        chkEigenValues.Checked = True
+        chkEigenVectors.Checked = True
+        chkScores.Checked = True
+        chkResiduals.Checked = True
+    End Sub
+
+    Public Sub PCAOptions()
+        If (chkEigenValues.Checked) Then
+            EigenValues()
+        End If
+        If (chkEigenVectors.Checked) Then
+            EigenVectors()
+        End If
+        If (chkScores.Checked) Then
+            Scores()
+        End If
+        If (chkResiduals.Checked) Then
+            Residuals()
+        End If
+    End Sub
+
 End Class
