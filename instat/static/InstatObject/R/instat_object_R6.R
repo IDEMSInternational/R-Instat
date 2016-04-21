@@ -33,21 +33,21 @@ instat_object <- R6Class("instat_object",
                     .models = list(),
                     .data_objects_changed = FALSE
                   ),
-                  active = list(
-                    data_objects_changed = function(new_value) {
-                      if(missing(new_value)) return(private$.data_objects_changed)
-                      else {
-                        if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
-                        private$.data_objects_changed <- new_value
-                      }
-                    }
-                  )
+active = list(
+  data_objects_changed = function(new_value) {
+    if(missing(new_value)) return(private$.data_objects_changed)
+    else {
+      if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
+      private$.data_objects_changed <- new_value
+    }
+  }
+)
 )
 
 instat_object$set("public", "import_data", function(data_tables = list(), data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
-                                          data_tables_metadata = rep(list(list()),length(data_tables)),
-                                          imported_from = as.list(rep("",length(data_tables))), 
-                                          messages=TRUE, convert=TRUE, create=TRUE)
+                                                    data_tables_metadata = rep(list(list()),length(data_tables)),
+                                                    imported_from = as.list(rep("",length(data_tables))), 
+                                                    messages=TRUE, convert=TRUE, create=TRUE)
 {
   if (missing(data_tables) || length(data_tables) == 0) {
     stop("No data found. No data objects can be created.")
@@ -83,16 +83,16 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
     
     for ( i in (1:length(data_tables)) ) {
       new_data = data_object$new(data=data_tables[[i]], data_name = names(data_tables)[[i]],
-                              variables_metadata = data_tables_variables_metadata[[i]],
-                              metadata = data_tables_metadata[[i]], 
-                              imported_from = imported_from[[i]], 
-                              start_point = i, 
-                              messages = messages, convert = convert, create = create)
+                                 variables_metadata = data_tables_variables_metadata[[i]],
+                                 metadata = data_tables_metadata[[i]], 
+                                 imported_from = imported_from[[i]], 
+                                 start_point = i, 
+                                 messages = messages, convert = convert, create = create)
       # Add this new data object to our list of data objects
       self$append_data_object(new_data$get_metadata(data_name_label), new_data)
     }
-    }
   }
+}
 )
 
 # Import RDS FUNCTION
@@ -168,7 +168,7 @@ instat_object$set("public", "set_data_objects", function(new_data_objects) {
 
 instat_object$set("public", "set_meta", function(new_meta) {
   if(!is.list(new_meta)) stop("new_meta must be of type: list")
-    
+  
   private$.metadata <- new_meta
 }
 )
@@ -336,7 +336,7 @@ instat_object$set("public", "add_columns_to_data", function(data_name, col_name,
   if(missing(data_name)) stop("data_name is required")
   if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found"))
   
-  if(missing(use_col_name_as_prefix)) private$.data_objects(data_name)$add_columns_to_data(col_name, col_data)
+  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data)
   else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix)
 }
 )
@@ -491,8 +491,8 @@ instat_object$set("public", "delete_dataframe", function(data_name) {
   if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
   # TODO need a set or append
-  data_objects[[data_name]]<<-NULL
-  data_objects_changed <<- TRUE
+  private$.data_objects[[data_name]] <- NULL
+  data_objects_changed <- TRUE
 } 
 )
 
