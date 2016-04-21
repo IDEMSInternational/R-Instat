@@ -211,7 +211,6 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     if(num_cols > 1 && length(col_name) == num_cols) use_col_name_as_prefix = FALSE
     else use_col_name_as_prefix = TRUE
   }
-  
   for(i in 1:num_cols) {
     curr_col = unlist(col_data[,i])
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
@@ -233,11 +232,11 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
 
 data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE) {
   if(missing(col_names)) stop("no col_names to return")
-  if(!all(col_names, function(x) x %in% names(data))) stop("Not all column names were found in data")
+  if(!all(col_names %in% names(private$data))) stop("Not all column names were found in data")
   
   if(length(col_names)==1) {
     if(force_as_data_frame) return(private$data[col_names])
-    else (private$data[[col_names]])
+    else return(private$data[[col_names]])
   }
   else return(private$data[col_names])
 }
@@ -269,7 +268,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
     names(private$data)[names(private$data) == curr_col_name] <- new_col_name
     # TODO decide if we need to do these 2 lines
     rownames(private$variables_metadata)[rownames(private$variables_metadata) == curr_col_name] <- new_col_name
-    self$append_to_variables_metadata(rownames(private$variables_metadata) == new_col_name, 1, new_col_name)
+    self$append_to_variables_metadata(rownames(private$variables_metadata)[rownames(private$variables_metadata) == new_col_name], name_label, new_col_name)
     self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
     self$data_changed <- TRUE
     self$variables_metadata_changed <- TRUE
@@ -363,10 +362,10 @@ data_object$set("public", "append_to_variables_metadata", function(col_name, pro
   
   if(missing(col_name) || missing(property) || missing(new_val)) stop("col_name, property and new_val arguements must be specified.")
   
-  if(!col_name %in% names(private$data)) stop(paste(col_name, "not found in data"))
+  if(!all(col_name %in% names(private$data))) stop(paste(col_name, "not found in data"))
   
   row = integer()
-  if(ncol(private$variables_metadata)>0) row = which(private$variables_metadata[,1]==col_name)
+  if(ncol(private$variables_metadata)>0) row = which(rownames(private$variables_metadata)==col_name)
   row_exists = TRUE
   if(length(row)==0) {
     row = nrow(private$variables_metadata) + 1
@@ -431,7 +430,7 @@ data_object$set("public", "remove_rows_in_data", function(start_pos, num_rows = 
 )
 
 data_object$set("public", "get_next_default_column_name", function(prefix) {
-  next_default_item(prefix = prefix, existing_names = names(data))
+  next_default_item(prefix = prefix, existing_names = names(private$data))
 } 
 )
 
