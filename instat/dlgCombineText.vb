@@ -56,7 +56,7 @@ Public Class dlgCombineText
     Private Sub SetDefaults()
         ucrSelectorForCombineText.Reset()
         ucrSelectorForCombineText.Focus()
-        ucrInputSeparator.cboInput.Text = "Whitespace"
+        ucrInputSeparator.SetName("Whitespace")
         ucrInputColumnInto.cboInput.ResetText()
     End Sub
 

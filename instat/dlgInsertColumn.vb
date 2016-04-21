@@ -42,9 +42,9 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub setDefaultValues()
-        ucrInputDefaultData.Name = "NA"
+        ucrInputDefaultData.SetName("NA")
         ucrBase.clsRsyntax.AddParameter("col_data", "c()")
-        ucrInputStartPos.Name = "At the end."
+        ucrInputStartPos.SetName("At the end.")
         ucrBase.clsRsyntax.AddParameter("start_pos", iCountVariables + 1)
         nudNumCols.Value = 1
         nudPos.Value = iCountVariables
