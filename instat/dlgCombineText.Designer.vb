@@ -25,11 +25,11 @@ Partial Class dlgCombineText
         Me.lblSeparator = New System.Windows.Forms.Label()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.lblColumnsToCobine = New System.Windows.Forms.Label()
-        Me.cboSeperator = New System.Windows.Forms.ComboBox()
         Me.ucrInputColumnInto = New instat.ucrInputComboBox()
         Me.ucrReceiverCombineText = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForCombineText = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputSeparator = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblSeparator
@@ -61,15 +61,6 @@ Partial Class dlgCombineText
         Me.lblColumnsToCobine.Tag = "Columns_to_Combine"
         Me.lblColumnsToCobine.Text = "Columns to Combine"
         '
-        'cboSeperator
-        '
-        Me.cboSeperator.FormattingEnabled = True
-        Me.cboSeperator.Items.AddRange(New Object() {"NULL", "Hyphen", "Whitespace", "Underscore", "Period"})
-        Me.cboSeperator.Location = New System.Drawing.Point(261, 157)
-        Me.cboSeperator.Name = "cboSeperator"
-        Me.cboSeperator.Size = New System.Drawing.Size(121, 21)
-        Me.cboSeperator.TabIndex = 8
-        '
         'ucrInputColumnInto
         '
         Me.ucrInputColumnInto.Location = New System.Drawing.Point(137, 198)
@@ -99,13 +90,20 @@ Partial Class dlgCombineText
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
+        'ucrInputSeparator
+        '
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(265, 157)
+        Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        Me.ucrInputSeparator.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputSeparator.TabIndex = 10
+        '
         'dlgCombineText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(446, 300)
+        Me.Controls.Add(Me.ucrInputSeparator)
         Me.Controls.Add(Me.ucrInputColumnInto)
-        Me.Controls.Add(Me.cboSeperator)
         Me.Controls.Add(Me.lblColumnsToCobine)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.lblSeparator)
@@ -128,6 +126,6 @@ Partial Class dlgCombineText
     Friend WithEvents lblSeparator As Label
     Friend WithEvents lblNewColumnName As Label
     Friend WithEvents lblColumnsToCobine As Label
-    Friend WithEvents cboSeperator As ComboBox
     Friend WithEvents ucrInputColumnInto As ucrInputComboBox
+    Friend WithEvents ucrInputSeparator As ucrInputComboBox
 End Class
