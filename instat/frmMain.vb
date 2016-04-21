@@ -998,5 +998,9 @@ Public Class frmMain
     Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneralToolStripMenuItem.Click
         dlgGeneralForGraphics.ShowDialog()
     End Sub
+
+    Private Sub mnuManageTextTransform_Click(sender As Object, e As EventArgs) Handles mnuManageTextTransform.Click
+        dlgTransformText.ShowDialog()
+    End Sub
 End Class
 
