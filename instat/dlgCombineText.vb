@@ -18,19 +18,22 @@ Public Class dlgCombineText
     Private bFirstLoad As Boolean = True
     Private Sub dlgCombineText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
-
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         TestOKEnabled()
     End Sub
 
+    Private Sub ReopenDialog()
+
+    End Sub
+
     Private Sub TestOKEnabled()
-        If ucrReceiverCombineText.IsEmpty() = False Then
+        If ucrReceiverCombineText.IsEmpty() = False And (Not ucrInputSeparator.IsEmpty) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -54,18 +57,23 @@ Public Class dlgCombineText
     Private Sub SetDefaults()
         ucrSelectorForCombineText.Reset()
         ucrSelectorForCombineText.Focus()
-        cboSeperator.Text = "Whitespace"
+        ucrInputSeparator.cboInput.Text = "Whitespace"
         ucrInputColumnInto.cboInput.ResetText()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        TestOKEnabled()
         SetDefaults()
+        TestOKEnabled()
 
     End Sub
 
-    Private Sub cboSeperator_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSeperator.SelectedIndexChanged
-        Select Case cboSeperator.SelectedItem
+    Private Sub ucrInputSeparator_SelectedIndexChanged() Handles ucrInputSeparator.NameChanged
+        SeparatorParameter()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SeparatorParameter()
+        Select Case ucrInputSeparator.cboInput.SelectedItem
             Case "NULL"
                 ucrBase.clsRsyntax.AddParameter("sep", "NULL")
             Case "WhiteSpace"
