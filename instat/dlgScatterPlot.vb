@@ -41,7 +41,6 @@ Public Class dlgScatterPlot
 
         If Not ucrReceiverX.IsEmpty Then
             clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False))
-            ucrFactorOptionalReceiver.SetMeAsReceiver()
         Else
             clsRaesFunction.RemoveParameterByName("x")
         End If
@@ -84,6 +83,8 @@ Public Class dlgScatterPlot
         ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForScatter.SetSelector(ucrSelectorForScatter)
         ucrVariablesAsFactorForScatter.SetDataType("numeric")
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+
     End Sub
     Private Sub SetDefaults()
         'setDefaults
