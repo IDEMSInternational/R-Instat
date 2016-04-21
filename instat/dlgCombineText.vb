@@ -45,15 +45,14 @@ Public Class dlgCombineText
         ucrReceiverCombineText.Selector = ucrSelectorForCombineText
         ucrReceiverCombineText.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("stringr::str_c")
-        ucrInputColumnInto.SetPrefix("CombineText")
+        ucrInputColumnInto.SetName("CombineText")
         ucrReceiverCombineText.SetDataType("factor")
         ucrInputColumnInto.SetItemsTypeAsColumns()
         ucrInputColumnInto.SetDefaultTypeAsColumn()
         ucrInputColumnInto.SetDataFrameSelector(ucrSelectorForCombineText.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.AddParameter("collapse", "NULL")
-        ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & Chr(34))
-
     End Sub
+
     Private Sub SetDefaults()
         ucrSelectorForCombineText.Reset()
         ucrSelectorForCombineText.Focus()
@@ -67,7 +66,7 @@ Public Class dlgCombineText
 
     End Sub
 
-    Private Sub ucrInputSeparator_SelectedIndexChanged() Handles ucrInputSeparator.NameChanged
+    Private Sub ucrInputSeparator_NameChanged() Handles ucrInputSeparator.NameChanged
         SeparatorParameter()
         TestOKEnabled()
     End Sub
@@ -93,13 +92,11 @@ Public Class dlgCombineText
 
     Private Sub ucrReceiverCombineText_SelectionChanged() Handles ucrReceiverCombineText.SelectionChanged
         If Not ucrReceiverCombineText.IsEmpty Then
-
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverCombineText.GetVariables())
         Else
             ucrBase.clsRsyntax.RemoveParameter("x")
         End If
         TestOKEnabled()
-
     End Sub
 
 End Class
