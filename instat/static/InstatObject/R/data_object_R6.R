@@ -712,16 +712,16 @@ data_object$set("public", "get_data_type", function(col_name = "") {
     type = "Date"
   }
   
-  if(is.numeric(private$data[[col_name]])){
-    type = "numeric"
-  }
-  
-  if(is.integer(private$data[[col_name]])){
-    if(all(data[[col_name]]>0)){
-      type = "positive integer"
-    }else{
-      type = "integer"
+  if(is.numeric(private$data[[col_name]])) {
+    #TODO vectors with integer values but stored as numeric will return numeric.
+    #     Is that desirable?
+    if(is.integer(private$data[[col_name]])) {
+      if(all(private$data[[col_name]]>0)) {
+        type = "positive integer"
+      }
+      else type = "integer"
     }
+    else type = "numeric"
   }
   
   if(is.factor(private$data[[col_name]])) {
