@@ -16,6 +16,7 @@
 Imports instat.Translations
 Public Class sdgCanonicalCorrelation
     Public bFirstLoad As Boolean = True
+    Public clsRCanCor, clsRCoef As New RFunction
     Private Sub sdgCanonicalCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
@@ -24,13 +25,21 @@ Public Class sdgCanonicalCorrelation
             bFirstLoad = False
         End If
     End Sub
+    Private Sub ModelName()
 
+    End Sub
     Private Sub Cancor()
-        frmMain.clsRLink.RunScript(dlgCanonicalCorrelationAnalysis.ucrBaseCCA.clsRsyntax.GetScript() & "$cancor", 2)
+        clsRCanCor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRCanCor.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.modelname & Chr(34))
+        clsRCanCor.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
+        frmMain.clsRLink.RunScript(clsRCanCor.ToScript(), 2)
     End Sub
 
     Private Sub Coef()
-        frmMain.clsRLink.RunScript(dlgCanonicalCorrelationAnalysis.ucrBaseCCA.clsRsyntax.GetScript() & "$coef", 2)
+        clsRCoef.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRCoef.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.modelname & Chr(34))
+        clsRCoef.AddParameter("value1", Chr(34) & "coef" & Chr(34))
+        frmMain.clsRLink.RunScript(clsRCoef.ToScript(), 2)
     End Sub
 
     Public Sub SetDefaults()
