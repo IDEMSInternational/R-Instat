@@ -24,7 +24,7 @@ Public Class ucrDistributions
     Public clsCurrDistribution As New Distribution
     Public bDistributionsSet As Boolean = False
     Public clsCurrRFunction As New RFunction
-    Private strDatatype As String = ""
+    Public strDatatype As String = ""
     Public lstFunctionParameters As New List(Of RParameter)
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -367,8 +367,8 @@ Public Class ucrDistributions
         RaiseEvent cboDistributionsIndexChanged(sender, e)
     End Sub
 
-    Public Sub RecieverDatatype(DataFrame As String, Column As String, asnumeric As String)
-        strDatatype = frmMain.clsRLink.GetDataType(DataFrame, Column, asnumeric)
+    Public Sub RecieverDatatype(DataFrame As String, Column As String)
+        strDatatype = frmMain.clsRLink.GetDataType(DataFrame, Column)
         SetDistributions()
     End Sub
 
