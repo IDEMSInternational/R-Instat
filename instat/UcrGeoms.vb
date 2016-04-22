@@ -37,9 +37,6 @@
         Else
             lstFunctionParameters(i).strArgumentValue = Me.strGgParameterValue
         End If
-
-
-
     End Sub
 
 
@@ -60,20 +57,21 @@
 
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
-        clsgeom_dotplot.AddGgParameter("a")
-        clsgeom_dotplot.AddGgParameter("b")
-        clsgeom_dotplot.AddGgParameter("c")
-        clsgeom_dotplot.AddGgParameter("d")
+        clsgeom_dotplot.AddGgParameter("x")
+        clsgeom_dotplot.AddGgParameter("y")
+        clsgeom_dotplot.AddGgParameter("alpha")
+        clsgeom_dotplot.AddGgParameter("colour")
+        clsgeom_dotplot.AddGgParameter("fill")
         lstAllGeoms.Add(clsgeom_dotplot)
 
 
         clsgeom_histogram.strGeomName = "geom_histogram"
-        clsgeom_histogram.AddGgParameter("y")
+        clsgeom_histogram.AddGgParameter("x")
+        clsgeom_histogram.AddGgParameter("alpha")
+        clsgeom_histogram.AddGgParameter("colour")
         clsgeom_histogram.AddGgParameter("fill")
-        clsgeom_histogram.AddGgParameter("color")
-        clsgeom_histogram.AddGgParameter("d")
-        clsgeom_histogram.AddGgParameter("e")
-        clsgeom_histogram.AddGgParameter("f")
+        clsgeom_histogram.AddGgParameter("linetype")
+        clsgeom_histogram.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_histogram)
 
     End Sub
@@ -81,8 +79,8 @@
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
         clsCurrGeom = lstAllGeoms(cboGeomList.SelectedIndex)
         clsCurrRFunction.SetRCommand(clsCurrGeom.strGeomName)
+        'clsCurrRFunction.SetRCommand(cboGeomList.SelectedItem) 'i wonder what the difference is with previous line
         RaiseEvent cboGeomListIndexChanged(sender, e)
-
 
     End Sub
 
