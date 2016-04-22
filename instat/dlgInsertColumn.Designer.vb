@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgInsertColumnorRows
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class dlgInsertColumn
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgInsertColumnorRows
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblDefaultValues = New System.Windows.Forms.Label()
         Me.lblNumberCols = New System.Windows.Forms.Label()
@@ -33,8 +33,8 @@ Partial Class dlgInsertColumnorRows
         Me.rdoInsertRows = New System.Windows.Forms.RadioButton()
         Me.rdoInsertColumns = New System.Windows.Forms.RadioButton()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
-        Me.grpRowsOrColumns = New System.Windows.Forms.GroupBox()
         Me.lblNumberOfRowsToInsert = New System.Windows.Forms.Label()
+        Me.grpRowsOrColumns = New System.Windows.Forms.GroupBox()
         CType(Me.nudPos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudNumCols, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpParameters.SuspendLayout()
@@ -144,6 +144,15 @@ Partial Class dlgInsertColumnorRows
         Me.grpParameters.TabIndex = 12
         Me.grpParameters.TabStop = False
         '
+        'lblNumberOfRowsToInsert
+        '
+        Me.lblNumberOfRowsToInsert.AutoSize = True
+        Me.lblNumberOfRowsToInsert.Location = New System.Drawing.Point(6, 19)
+        Me.lblNumberOfRowsToInsert.Name = "lblNumberOfRowsToInsert"
+        Me.lblNumberOfRowsToInsert.Size = New System.Drawing.Size(127, 13)
+        Me.lblNumberOfRowsToInsert.TabIndex = 14
+        Me.lblNumberOfRowsToInsert.Text = "Number of Rows to Insert"
+        '
         'grpRowsOrColumns
         '
         Me.grpRowsOrColumns.Controls.Add(Me.rdoInsertColumns)
@@ -154,16 +163,7 @@ Partial Class dlgInsertColumnorRows
         Me.grpRowsOrColumns.TabIndex = 13
         Me.grpRowsOrColumns.TabStop = False
         '
-        'lblNumberOfRowsToInsert
-        '
-        Me.lblNumberOfRowsToInsert.AutoSize = True
-        Me.lblNumberOfRowsToInsert.Location = New System.Drawing.Point(6, 19)
-        Me.lblNumberOfRowsToInsert.Name = "lblNumberOfRowsToInsert"
-        Me.lblNumberOfRowsToInsert.Size = New System.Drawing.Size(127, 13)
-        Me.lblNumberOfRowsToInsert.TabIndex = 14
-        Me.lblNumberOfRowsToInsert.Text = "Number of Rows to Insert"
-        '
-        'dlgInsertColumnorRows
+        'dlgInsertColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -173,7 +173,7 @@ Partial Class dlgInsertColumnorRows
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrDataFramesList)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgInsertColumnorRows"
+        Me.Name = "dlgInsertColumn"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Insert Columns/Rows"
         CType(Me.nudPos, System.ComponentModel.ISupportInitialize).EndInit()
