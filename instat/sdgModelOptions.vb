@@ -13,10 +13,9 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
-Public Class sdgTwoVarModelOptions
-    Private Sub sdgTwoVarModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class sdgModelOptions
+    Private Sub sdgModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 End Class
