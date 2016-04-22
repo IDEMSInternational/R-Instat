@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgCanonicalCorrelationAnalysis
-    Public modelname As String = ""
+    Public strModelName As String = ""
     Public bFirstLoad As Boolean = True
     Private Sub dlgCanonicalCorrelationAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -99,11 +99,11 @@ Public Class dlgCanonicalCorrelationAnalysis
         If chkSaveResult.Checked AndAlso ucrResultName.GetText() <> "" Then
             ucrBaseCCA.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText())
             ucrBaseCCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
-            modelname = ucrResultName.GetText()
+            strModelName = ucrResultName.GetText()
         Else
             ucrBaseCCA.clsRsyntax.SetAssignTo("last_CCA", strTempModel:="last_CCA")
             ucrBaseCCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
-            modelname = "last_CCA"
+            strModelName = "last_CCA"
         End If
     End Sub
 
