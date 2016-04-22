@@ -76,33 +76,19 @@ Public Class dlgRegressionSimple
         sdgSimpleRegOptions.ShowDialog()
     End Sub
 
-    'Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
-    '    If Not ucrResponse.IsEmpty Then
-    '        clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
-    '        ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
-    '        ucrFamily.Enabled = True
-    '        ucrFamily.SetGLMDistributions()
-    '    End If
-    '    TestOKEnabled()
-    'End Sub
     Private Sub ResponseConvert()
         If Not ucrResponse.IsEmpty Then
             If chkConvertToVariate.Checked Then
                 Dim asnumeric As String = "TRUE"
                 clsRConvert.SetRCommand("as.numeric")
-                clsRConvert.AddParameter("", ucrResponse.GetVariableNames(bWithQuotes:=False))
+                clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
                 clsModel.SetParameter(True, clsRFunc:=clsRConvert)
-                'The datatype of the receiver should change. How can we achieve this?
-                'Do we edit the R method that does this and add another parameter?
-
-                ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False), asnumeric)
+                ucrFamily.strDatatype = "numeric"
                 ucrFamily.Enabled = True
                 ucrFamily.SetGLMDistributions()
             Else
-                Dim asnumeric As String = "FALSE"
-                'clsRConvert.RemoveAssignTo("as.numeric")
                 clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
-                ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False), asnumeric)
+                ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
                 ucrFamily.Enabled = True
                 ucrFamily.SetGLMDistributions()
             End If
@@ -111,22 +97,6 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
         ResponseConvert()
-        'If Not ucrResponse.IsEmpty Then
-        '    If chkConvertToVariate.Checked Then
-        '        clsRConvert.SetRCommand("as.numeric")
-        '        clsRConvert.AddParameter("", ucrResponse.GetVariableNames(bWithQuotes:=False))
-        '        clsModel.SetParameter(True, clsRFunc:=clsRConvert)
-        '        'ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
-        '        ucrFamily.Enabled = True
-        '        ucrFamily.SetGLMDistributions()
-        '    Else
-        '        'clsRConvert.RemoveAssignTo("as.numeric")
-        '        clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
-        '        ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
-        '        ucrFamily.Enabled = True
-        '        ucrFamily.SetGLMDistributions()
-        '    End If
-        'End If
         TestOKEnabled()
     End Sub
 
