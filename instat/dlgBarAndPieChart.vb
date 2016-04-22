@@ -18,9 +18,32 @@ Public Class dlgBarAndPieChart
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_barchart As New RFunction
     Private clsRaesFunction As New RFunction
+    Private clsTempRFunc As New RFunction
     Private bFirstLoad As Boolean = True
 
     Private Sub dlgBarAndPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub SetDefaults()
+        'Set main dialog defaults...
+        rdoBarChart.Checked = True
+        ucrBarChartSelector.Reset()
+        ucrBarChartSelector.Focus()
+        ucrFactorReceiver.SetMeAsReceiver()
+        'set subdialog defaults
+        sdgBarChart.SetDefaults()
+        sdgPieChartOptions.SetDefaults()
+    End Sub
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRaesFunction.SetRCommand("aes")
@@ -34,29 +57,11 @@ Public Class dlgBarAndPieChart
         ucrSecondReceiver.SetDataType("factor")
 
         sdgBarChart.SetBarChartFunction(clsRgeom_barchart)
+        sdgPieChartOptions.SetPieChartFunction(clsTempRFunc)
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.iCallType = 0
-        autoTranslate(Me)
 
-        'set pie chart function when it exists
-        'sdgPieChart.SetBarChartFunction(clsRgeom_barchart)
 
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
-        Else
-            ReopenDialog()
-        End If
-    End Sub
-
-    Private Sub SetDefaults()
-        'Set main dialog defaults...
-        rdoBarChart.Checked = True
-        ucrBarChartSelector.Reset()
-        ucrBarChartSelector.Focus()
-        ucrFactorReceiver.SetMeAsReceiver()
-        'set subdialog defaults
-        sdgBarChart.SetDefaults()
     End Sub
 
     Private Sub ReopenDialog()
@@ -100,7 +105,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub grpSelection_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
-        Dim clsTempRFunc As New RFunction
+
         If rdoBarChart.Checked = True Then
             clsRgeom_barchart.RemoveParameterByName("width")
             ucrBase.clsRsyntax.RemoveOperatorParameter("polar")
@@ -129,4 +134,7 @@ Public Class dlgBarAndPieChart
         sdgBarChart.ShowDialog()
     End Sub
 
+    Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
+        sdgPieChartOptions.ShowDialog()
+    End Sub
 End Class
