@@ -28,14 +28,14 @@ Public Class sdgCanonicalCorrelation
 
     Private Sub Cancor()
         clsRCanCor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        clsRCanCor.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.modelname & Chr(34))
+        clsRCanCor.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
         clsRCanCor.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
         frmMain.clsRLink.RunScript(clsRCanCor.ToScript(), 2)
     End Sub
 
     Private Sub Coef()
         clsRCoef.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        clsRCoef.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.modelname & Chr(34))
+        clsRCoef.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
         clsRCoef.AddParameter("value1", Chr(34) & "coef" & Chr(34))
         frmMain.clsRLink.RunScript(clsRCoef.ToScript(), 2)
     End Sub
