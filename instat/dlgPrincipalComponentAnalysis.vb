@@ -17,6 +17,8 @@ Imports instat.Translations
 Public Class dlgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
     Public ExplanatoryVariables
+    Public modelname As String = ""
+
     Private Sub dlgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -35,7 +37,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
         ucrReceiverMultiplePCA.SetDataType("numeric")
         ucrResultName.SetDefaultTypeAsModel()
-        ucrResultName.SetPrefix("CCA")
+        ucrResultName.SetPrefix("PCA")
         ucrBasePCA.iHelpTopicID = 187
     End Sub
 
@@ -95,7 +97,7 @@ Public Class dlgPrincipalComponentAnalysis
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
 
-    Private Sub ucrResultName_NameChanged()
+    Private Sub ucrResultName_NameChanged() Handles ucrResultName.NameChanged
         AssignName()
     End Sub
 
@@ -112,9 +114,11 @@ Public Class dlgPrincipalComponentAnalysis
         If chkSaveResult.Checked AndAlso ucrResultName.GetText() <> "" Then
             ucrBasePCA.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText())
             ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
+            modelname = ucrResultName.GetText()
         Else
             ucrBasePCA.clsRsyntax.SetAssignTo("last_PCA", strTempModel:="last_PCA")
             ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
+            modelname = "last_PCA"
         End If
     End Sub
 
