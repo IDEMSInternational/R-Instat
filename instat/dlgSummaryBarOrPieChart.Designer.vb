@@ -36,12 +36,13 @@ Partial Class dlgSummaryBarOrPieChart
         Me.lblSecondFactor = New System.Windows.Forms.Label()
         Me.grpChartOptions = New System.Windows.Forms.GroupBox()
         Me.cmdPieChartOptions = New System.Windows.Forms.Button()
+        Me.ucrSaveSummaryBar = New instat.ucrSaveGraph()
         Me.grpChartOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 260)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 278)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 10
@@ -124,12 +125,12 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(287, 222)
+        Me.cmdOptions.Location = New System.Drawing.Point(161, 222)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(98, 23)
         Me.cmdOptions.TabIndex = 9
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrSecondFactorReceiver
@@ -162,7 +163,7 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'cmdPieChartOptions
         '
-        Me.cmdPieChartOptions.Location = New System.Drawing.Point(146, 222)
+        Me.cmdPieChartOptions.Location = New System.Drawing.Point(12, 222)
         Me.cmdPieChartOptions.Name = "cmdPieChartOptions"
         Me.cmdPieChartOptions.Size = New System.Drawing.Size(128, 23)
         Me.cmdPieChartOptions.TabIndex = 8
@@ -170,11 +171,19 @@ Partial Class dlgSummaryBarOrPieChart
         Me.cmdPieChartOptions.Text = "Pie Chart Options"
         Me.cmdPieChartOptions.UseVisualStyleBackColor = True
         '
+        'ucrSaveSummaryBar
+        '
+        Me.ucrSaveSummaryBar.Location = New System.Drawing.Point(13, 249)
+        Me.ucrSaveSummaryBar.Name = "ucrSaveSummaryBar"
+        Me.ucrSaveSummaryBar.Size = New System.Drawing.Size(265, 27)
+        Me.ucrSaveSummaryBar.TabIndex = 11
+        '
         'dlgSummaryBarOrPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 319)
+        Me.ClientSize = New System.Drawing.Size(432, 330)
+        Me.Controls.Add(Me.ucrSaveSummaryBar)
         Me.Controls.Add(Me.grpChartOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdPieChartOptions)
@@ -213,4 +222,5 @@ Partial Class dlgSummaryBarOrPieChart
     Friend WithEvents lblSecondFactor As Label
     Friend WithEvents grpChartOptions As GroupBox
     Friend WithEvents cmdPieChartOptions As Button
+    Friend WithEvents ucrSaveSummaryBar As ucrSaveGraph
 End Class

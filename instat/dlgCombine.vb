@@ -22,12 +22,11 @@ Public Class dlgCombine
             ReOpenDialog()
         End If
         autoTranslate(Me)
+        TestOkEnabled()
     End Sub
     Private Sub SetDefaults()
         ucrSelectorCombineFactors.Reset()
         ucrSelectorCombineFactors.Focus()
-        ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
-        ucrFactorsReceiver.SetMeAsReceiver()
         chkDropUnusedLevels.Checked = False
 
     End Sub
@@ -37,15 +36,19 @@ Public Class dlgCombine
     End Sub
 
     Private Sub TestOkEnabled()
+        If ucrFactorsReceiver.IsEmpty = False Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
     End Sub
 
     Private Sub InitialiseDialog()
         ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
+        ucrFactorsReceiver.SetMeAsReceiver()
         ucrFactorsReceiver.SetDataType("factor")
         chkDropUnusedLevels.Checked = False
-
-
         ucrInputColName.SetPrefix("Interact")
         ucrInputColName.SetItemsTypeAsColumns()
         ucrInputColName.SetDefaultTypeAsColumn()
@@ -59,5 +62,6 @@ Public Class dlgCombine
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOkEnabled()
     End Sub
 End Class
