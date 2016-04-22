@@ -17,7 +17,7 @@ Imports instat.Translations
 Public Class dlgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
     Public ExplanatoryVariables
-    Public modelname As String = ""
+    Public strModelName As String = ""
 
     Private Sub dlgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -114,11 +114,11 @@ Public Class dlgPrincipalComponentAnalysis
         If chkSaveResult.Checked AndAlso ucrResultName.GetText() <> "" Then
             ucrBasePCA.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText())
             ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
-            modelname = ucrResultName.GetText()
+            strModelName = ucrResultName.GetText()
         Else
             ucrBasePCA.clsRsyntax.SetAssignTo("last_PCA", strTempModel:="last_PCA")
             ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
-            modelname = "last_PCA"
+            strModelName = "last_PCA"
         End If
     End Sub
 
