@@ -15,13 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgInsertColumn
+Public Class dlgInsertColumnorRows
     Dim bFirstLoad As Boolean = True
 
     'stores the number of variables for the selected data frame.
     Private iCountVariables As Integer
 
-    Private Sub chkPos_CheckStateChanged(sender As Object, e As EventArgs) Handles chkPos.CheckStateChanged
+    Private Sub chkPos_CheckStateChanged(sender As Object, e As EventArgs)
         If chkPos.Checked = True Then
             nudPos.Enabled = True
             ucrInputStartPos.Enabled = False
