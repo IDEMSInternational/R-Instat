@@ -641,12 +641,6 @@
     <Compile Include="UcrGeoms.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UcrGeomWithAes.designer.vb">
-      <DependentUpon>UcrGeomWithAes.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UcrGeomWithAes.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
     </Compile>
@@ -3588,15 +3582,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UcrGeoms.sw-KE.resx">
       <DependentUpon>UcrGeoms.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UcrGeomWithAes.fr-FR.resx">
-      <DependentUpon>UcrGeomWithAes.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UcrGeomWithAes.resx">
-      <DependentUpon>UcrGeomWithAes.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UcrGeomWithAes.sw-KE.resx">
-      <DependentUpon>UcrGeomWithAes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInput.fr-FR.resx">
       <DependentUpon>ucrInput.vb</DependentUpon>
