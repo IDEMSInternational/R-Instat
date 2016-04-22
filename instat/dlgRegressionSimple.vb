@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
     Dim clsModel As New ROperator
-
+    Public clsRConvert As New RFunction
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
@@ -76,14 +76,62 @@ Public Class dlgRegressionSimple
         sdgSimpleRegOptions.ShowDialog()
     End Sub
 
-    Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
+    'Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
+    '    If Not ucrResponse.IsEmpty Then
+    '        clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+    '        ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+    '        ucrFamily.Enabled = True
+    '        ucrFamily.SetGLMDistributions()
+    '    End If
+    '    TestOKEnabled()
+    'End Sub
+    Private Sub ResponseConvert()
         If Not ucrResponse.IsEmpty Then
-            clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
-            ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
-            ucrFamily.Enabled = True
-            ucrFamily.SetGLMDistributions()
+            If chkConvertToVariate.Checked Then
+                Dim asnumeric As String = "TRUE"
+                clsRConvert.SetRCommand("as.numeric")
+                clsRConvert.AddParameter("", ucrResponse.GetVariableNames(bWithQuotes:=False))
+                clsModel.SetParameter(True, clsRFunc:=clsRConvert)
+                'The datatype of the receiver should change. How can we achieve this?
+                'Do we edit the R method that does this and add another parameter?
+
+                ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False), asnumeric)
+                ucrFamily.Enabled = True
+                ucrFamily.SetGLMDistributions()
+            Else
+                Dim asnumeric As String = "FALSE"
+                'clsRConvert.RemoveAssignTo("as.numeric")
+                clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+                ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False), asnumeric)
+                ucrFamily.Enabled = True
+                ucrFamily.SetGLMDistributions()
+            End If
         End If
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
+        ResponseConvert()
+        'If Not ucrResponse.IsEmpty Then
+        '    If chkConvertToVariate.Checked Then
+        '        clsRConvert.SetRCommand("as.numeric")
+        '        clsRConvert.AddParameter("", ucrResponse.GetVariableNames(bWithQuotes:=False))
+        '        clsModel.SetParameter(True, clsRFunc:=clsRConvert)
+        '        'ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+        '        ucrFamily.Enabled = True
+        '        ucrFamily.SetGLMDistributions()
+        '    Else
+        '        'clsRConvert.RemoveAssignTo("as.numeric")
+        '        clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+        '        ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+        '        ucrFamily.Enabled = True
+        '        ucrFamily.SetGLMDistributions()
+        '    End If
+        'End If
         TestOKEnabled()
+    End Sub
+
+    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
+        ResponseConvert()
     End Sub
 
     Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
@@ -133,11 +181,4 @@ Public Class dlgRegressionSimple
         End If
     End Sub
 
-    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
-
-    End Sub
 End Class

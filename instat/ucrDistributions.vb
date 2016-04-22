@@ -367,8 +367,8 @@ Public Class ucrDistributions
         RaiseEvent cboDistributionsIndexChanged(sender, e)
     End Sub
 
-    Public Sub RecieverDatatype(DataFrame As String, Column As String)
-        strDatatype = frmMain.clsRLink.GetDataType(DataFrame, Column)
+    Public Sub RecieverDatatype(DataFrame As String, Column As String, asnumeric As String)
+        strDatatype = frmMain.clsRLink.GetDataType(DataFrame, Column, asnumeric)
         SetDistributions()
     End Sub
 

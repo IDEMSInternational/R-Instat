@@ -179,10 +179,6 @@ Partial Class dlgRegressionSimple
     Friend WithEvents ucrResponse As ucrReceiverSingle
     Friend WithEvents ucrExplanatory As ucrReceiverSingle
 
-    Private Sub UcrReceiverSingle1_Load(sender As Object, e As EventArgs) Handles ucrResponse.Load
-
-    End Sub
-
     Friend WithEvents lblResponse As Label
     Friend WithEvents lblExplanatory As Label
     Friend WithEvents cmdDisplayOptions As Button
