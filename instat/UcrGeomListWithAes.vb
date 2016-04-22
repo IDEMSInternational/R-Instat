@@ -24,11 +24,10 @@ Public Class UcrGeomListWithParameters
     Private Sub UcrGeomListWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseControl()
-            Setdefaults()
+            SetDefaults()
             SetParameters()
             bFirstLoad = False
         End If
-
     End Sub
     Private Sub InitialiseControl()
         ucrReceiverParam1.Selector = UcrSelector
@@ -41,8 +40,9 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam1.SetMeAsReceiver()
     End Sub
 
-    Private Sub Setdefaults()
+    Private Sub SetDefaults()
         'sets control defaults
+        UcrSelector.Reset()
 
     End Sub
     Public Sub SetParameters() 'this will set function or aes parameters
@@ -71,14 +71,43 @@ Public Class UcrGeomListWithParameters
             lblGgParam6.Visible = True
             ucrReceiverParam6.Visible = True
         End If
+        If clsCurrGeom.clsGgParameters.Count < 5 Then
+            lblGgParam5.Visible = False
+            ucrReceiverParam5.Visible = False
+        Else
+            lblGgParam5.Visible = True
+            ucrReceiverParam5.Visible = True
+        End If
 
+        If clsCurrGeom.clsGgParameters.Count < 4 Then
+            lblGgParam4.Visible = False
+            ucrReceiverParam4.Visible = False
+        Else
+            lblGgParam4.Visible = True
+            ucrReceiverParam4.Visible = True
+        End If
+
+        If clsCurrGeom.clsGgParameters.Count < 3 Then
+            lblGgParam3.Visible = False
+            ucrReceiverParam3.Visible = False
+        Else
+            lblGgParam3.Visible = True
+            ucrReceiverParam3.Visible = True
+        End If
+
+        If clsCurrGeom.clsGgParameters.Count < 2 Then 'this is available for some cases like piechart
+            lblGgParam2.Visible = False
+            ucrReceiverParam2.Visible = False
+        Else
+            lblGgParam2.Visible = True
+            ucrReceiverParam2.Visible = True
+        End If
         'populating labels with appropriate names
         If clsCurrGeom IsNot Nothing Then
             lstCurrArguments.Clear()
             For i = 0 To (clsCurrGeom.clsGgParameters.Count - 1)
                 lstGgParameterLabels(i).Text = clsCurrGeom.clsGgParameters(i).strGgParameterName
                 lstCurrArguments.Add(clsCurrGeom.clsGgParameters(i).strGgParameterName)
-
             Next
         End If
     End Sub
@@ -86,9 +115,15 @@ Public Class UcrGeomListWithParameters
     Private Sub UcrGeomListWithParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.cboGeomListIndexChanged
         SetParameters()
     End Sub
-
     Private Sub ucrReceiverParam1_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam1.SelectionChanged
-        AddParameter(lstCurrArguments(0), ucrReceiverParam1.GetVariableNames())
+        AddParameter(lstCurrArguments(0), ucrReceiverParam1.GetVariableNames(False))
+    End Sub
 
+    Private Sub ucrReceiverParam2_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam2.SelectionChanged
+        AddParameter(lstCurrArguments(1), ucrReceiverParam2.GetVariableNames(False))
+    End Sub
+
+    Private Sub ucrReceiverParam3_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam3.SelectionChanged
+        AddParameter(lstCurrArguments(2), ucrReceiverParam3.GetVariableNames(False))
     End Sub
 End Class

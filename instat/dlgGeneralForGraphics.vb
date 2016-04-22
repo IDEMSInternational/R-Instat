@@ -15,12 +15,18 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgGeneralForGraphics
+    Private clsRgeom_Function As New RFunction
     Private clsRggplotFunction As New RFunction
-
     Private clsRaesFunction As New RFunction
-    Private bFirstLoad As Boolean = True
-    Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    Private bFirstLoad As Boolean = True
+    Public clsRSyntax As New RSyntax
+    Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        clsrgeom_function.setrcommand(UcrGeomListWithParameters1.cboGeomList.SelectedItem)
+        clsraesfunction.setrcommand("aes")
+        clsrgeom_function.addparameter("mapping", clsrfunctionparameter:=clsraesfunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsrggplotfunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsrgeom_function)
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -39,7 +45,6 @@ Public Class dlgGeneralForGraphics
         'setting the base ggplot functions
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
 
         'this sets the geoms andthe command to be used
         UcrGeomListWithParameters1.SetGeoms()
@@ -47,6 +52,7 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub SetDefaults()
+
     End Sub
 
     Private Sub ReopenDialog()
@@ -59,14 +65,7 @@ Public Class dlgGeneralForGraphics
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
-
-    Private Sub dlgGeneralForGraphics_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
-
-    End Sub
-
-    Private Sub UcrGeomListWithParameters1_Load(sender As Object, e As EventArgs) Handles UcrGeomListWithParameters1.cboGeomListIndexChanged
-        ucrBase.clsRsyntax.AddOperatorParameter("", UcrGeomListWithParameters1.cboGeomList.SelectedItem.ToString & "(" & ")")
-
-
+    Private Sub UcrGeomListWithParameters1_cboGeomList(sender As Object, e As EventArgs) Handles UcrGeomListWithParameters1.cboGeomListIndexChanged
+        clsRgeom_Function.SetRCommand(UcrGeomListWithParameters1.cboGeomList.SelectedItem)
     End Sub
 End Class
