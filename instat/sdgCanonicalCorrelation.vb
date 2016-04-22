@@ -25,9 +25,7 @@ Public Class sdgCanonicalCorrelation
             bFirstLoad = False
         End If
     End Sub
-    Private Sub ModelName()
 
-    End Sub
     Private Sub Cancor()
         clsRCanCor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsRCanCor.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.modelname & Chr(34))
