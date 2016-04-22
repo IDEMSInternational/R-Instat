@@ -512,13 +512,11 @@ data_object$set("public", "order_columns_in_data", function(col_order) {
     if(!(identical(sort(col_order), sort(as.numeric(1:ncol(data)))))) {
       stop("Invalid column order")
     }
-  }else if(is.character(col_order)) {
-    if(!(identical(sort(col_order), sort(as.character(names(data)))))){
-      stop("Invalid column order")
-    }
-  }else{ 
-    stop("column order must be a numeric or character vector")
   }
+  else if(is.character(col_order)) {
+    if(!(setequal(col_order,names(private$data)))) stop("Invalid column order")
+  }
+  else stop("column order must be a numeric or character vector")
   self$set_data(private$data[ ,col_order])
   self$append_to_changes(list(Col_order, col_order))
 }
@@ -693,5 +691,44 @@ data_object$set("public", "reorder_factor_levels", function(col_name, new_level_
 
 data_object$set("public", "get_column_count", function(col_name, new_level_names) {
   return(ncol(private$data))
+}
+)
+
+#TODO: Are there other types needed here?
+data_object$set("public", "get_data_type", function(col_name = "") {
+  if(!(col_name %in% names(private$data))){
+    stop(paste(col_name, "is not a column in", get_metadata(data_name_label)))
+  }
+  type = ""
+  if(is.character(private$data[[col_name]])) {
+    type = "character"
+  }
+  
+  if(is.logical(private$data[[col_name]])) {
+    type = "logical"
+  }
+  
+  if(is.Date(private$data[[col_name]])){
+    type = "Date"
+  }
+  
+  if(is.numeric(private$data[[col_name]])){
+    type = "numeric"
+  }
+  
+  if(is.integer(private$data[[col_name]])){
+    if(all(data[[col_name]]>0)){
+      type = "positive integer"
+    }else{
+      type = "integer"
+    }
+  }
+  
+  if(is.factor(private$data[[col_name]])) {
+    if(length(levels(private$data[[col_name]]))==2) type = "2 level factor"
+    else if(length(levels(private$data[[col_name]]))>2) type = "multilevel factor"
+    else type = "factor"
+  }
+  return(type)
 }
 )

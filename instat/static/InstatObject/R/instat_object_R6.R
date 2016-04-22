@@ -10,7 +10,7 @@ instat_object <- R6Class("instat_object",
     self$set_models(list())
                       
     if (missing(data_tables) || length(data_tables) == 0) {
-    private$.data_objects <- list()
+    self$set_data_objects(list())
     }
                       
     else {
@@ -20,28 +20,23 @@ instat_object <- R6Class("instat_object",
     }
                       
     private$.data_objects_changed <- FALSE
-    }
-                                            
-                                            
-
-                   
-                    
-                  ),
-                  private = list(
-                    .data_objects = list(),
-                    .metadata = list(),
-                    .models = list(),
-                    .data_objects_changed = FALSE
-                  ),
-active = list(
-  data_objects_changed = function(new_value) {
-    if(missing(new_value)) return(private$.data_objects_changed)
-    else {
-      if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
-      private$.data_objects_changed <- new_value
-    }
-  }
-)
+}
+                ),
+                private = list(
+                  .data_objects = list(),
+                  .metadata = list(),
+                  .models = list(),
+                  .data_objects_changed = FALSE
+                ),
+                active = list(
+                  data_objects_changed = function(new_value) {
+                    if(missing(new_value)) return(private$.data_objects_changed)
+                    else {
+                      if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
+                      private$.data_objects_changed <- new_value
+                    }
+                  }
+                )
 )
 
 instat_object$set("public", "import_data", function(data_tables = list(), data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
@@ -156,6 +151,7 @@ instat_object$set("public", "replace_instat_object", function(new_instatObj) {
   self$set_meta(new_instatObj$get_metadata())
   self$set_models(new_instatObj$get_models())
   self$data_objects_changed <- TRUE
+  lapply(data_objects, function(x) x$set_data_changed(TRUE))
 }
 )
 
@@ -165,6 +161,81 @@ instat_object$set("public", "set_data_objects", function(new_data_objects) {
 }
 )
 
+#' Title
+#'
+#' @param data_RDS 
+#' @param keep_existing 
+#' @param overwrite_existing 
+#' @param include_models 
+#' @param include_graphics 
+#' @param include_metadata 
+#' @param include_logs 
+#' @param messages 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+instat_object$set("public", "import_RDS", function(data_RDS, keep_existing =TRUE, overwrite_existing=FALSE, include_models=TRUE,
+                                         include_graphics=TRUE, include_metadata=TRUE, include_logs=TRUE,messages=TRUE)
+{ 
+  if("instat_object" %in% class(data_RDS)) {
+    if(!keep_existing && include_models && include_graphics && include_metadata && include_logs) {
+      self$replace_instat_object(new_instatObj = data_RDS) 
+    } 
+    else {
+      if(!keep_existing) {
+        self$set_data_objects(list())
+        self$set_meta(list())
+        self$set_models(list())
+      }
+      for ( curr_data_obj in data_RDS$get_data_objects() ) {
+        if (!(curr_data_obj$get_metadata(data_name_label) %in% self$get_data_names()) || overwrite_existing){
+          #TODO in data_object if (!include_models) data_RDS$data_objects[i]$clear_models
+          #TODO in data_object if (!include_graphics) data_RDS$data_objects[i]$clear_graphics
+          curr_data_name = curr_data_obj$get_metadata(data_name_label)
+          if (!include_metadata) {
+            curr_data_obj$set_meta(list()) 
+            curr_data_obj$add_defaults_meta()
+            curr_data_obj$set_variables_metadata(data.frame())
+            curr_data_obj$update_variables_metadata() 
+          }
+          if (!include_logs) curr_data_obj$set_changes(list())
+          # Add this new data object to our list of data objects
+          .self$append_data_objects(curr_data_name,curr_data_obj)
+        }
+      }
+      new_models_list = data_RDS$get_models()
+      new_models_count = length(new_models_list)
+      if (include_models && new_models_count > 0) {
+        for ( i in (1:new_models_count) ) {
+          if (!(names(new_models_list)[i] %in% names(private$.models)) || overwrite_existing) { 
+            self$add_model(new_models_list[i],names(new_models_list)[i])
+          }
+        }
+      }
+      new_metadata = data_RDS$get_metadata()
+      new_metadata_count = length(new_metadata)
+      if (include_metadata & new_metadata_count > 0) {
+        for ( i in (1:new_metadata_count) ) {
+          if (!(names(new_metadata)[i] %in% names(metadata)) || overwrite_existing) {
+            self$append_to_metadata(names(new_metadata)[i], new_metadata[[i]])
+          }
+        }
+      }
+    }
+    self$data_objects_changed <- TRUE
+  }
+  else if (is.data.frame(data_RDS)) {
+    self$import_data(data_tables = list(data_RDS = data_RDS))
+  }
+  else{
+    if (messages){
+      stop(paste("Cannot import an object of type", class(data_RDS))) #TODO work on messages and error handling
+    }
+  }
+}
+)
 
 instat_object$set("public", "set_meta", function(new_meta) {
   if(!is.list(new_meta)) stop("new_meta must be of type: list")
@@ -298,6 +369,11 @@ instat_object$set("public", "get_metadata_changed", function(data_obj) {
 } 
 )
 
+instat_object$set("public", "dataframe_count", function() {
+  return(length(private$.data_objects))
+} 
+)
+
 instat_object$set("public", "set_data_frames_changed", function(data_name = "", new_val) {
   if(data_name == "") {
     for(curr_obj in private$.data_objects) {
@@ -333,9 +409,6 @@ instat_object$set("public", "set_metadata_changed", function(data_name = "", new
 )
 
 instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix) {
-  if(missing(data_name)) stop("data_name is required")
-  if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found"))
-  
   if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data)
   else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix)
 }
@@ -351,7 +424,7 @@ instat_object$set("public", "get_columns_from_data", function(data_name, col_nam
   else {
     if(!exists(data_name)) stop(paste(data_name, "not found."))
     if(!all(sapply(col_names, function(x) x %in% names(data_name)))) stop("Not all column names were found in data")
-    if(length(col_names)==1) return (data_name[[col_names]])
+    if(length(col_names)==1 && !force_as_data_frame) return (data_name[[col_names]])
     else return(data_name[col_names])
   }
 }
@@ -365,11 +438,30 @@ instat_object$set("public", "add_model", function(model, model_name = paste("mod
 }
 ) 
 
-instat_object$set("public", "get_model", function(model_name) {
+instat_object$set("public", "get_models", function(model_name) {
   if(missing(model_name)) stop("model_name must be given.")
   if(!is.character(model_name)) stop("name must be a character")
   if(!model_name %in% names(private$.models)) stop(model_name, "not found in models")
   private$.models[[model_name]]
+}
+)
+
+instat_object$set("public", "get_from_model", function(model_name, value1, value2, value3) {
+  curr_model = self$get_models(model_name)
+  if(missing(value1)) stop("value1 must be specified.")
+  if(!value1 %in% names(curr_model)) stop(paste(value1, "not found in", model_name))
+  if(missing(value2)) {
+    if(!missing(value3)) warning(paste("value2 is missing so value3 =",value3, "will be ignored."))
+    return(curr_model[[value1]])
+  }
+  else {
+    if(!value2 %in% names(curr_model[[value1]])) stop(paste0(value2, " not found in ", model_name,"[[\"",value1,"\"]]"))
+    if(missing(value3)) return(curr_model[[value1]][[value2]])
+    else {
+      if(!value3 %in% names(curr_model[[value1]][[value2]])) stop(paste0(value3, " not found in ", model_name,"[[\"",value1,"\"]]","[[\"",value2,"\"]]"))
+      return(curr_model[[value1]][[value2]][[value3]])
+    }
+  }
 }
 )
 
@@ -379,41 +471,26 @@ instat_object$set("public", "get_model_names", function() {
 )
 
 instat_object$set("public", "replace_value_in_data", function(data_name, col_name, index, new_value) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$replace_value_in_data(col_name, index, new_value)
 } 
 )
 
 instat_object$set("public", "rename_column_in_data", function(data_name, column_name, new_val) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val)
 } 
 )
 
 instat_object$set("public", "remove_columns_in_data_from_start_position", function(data_name, start_pos, col_numbers) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$remove_columns_in_data_from_start_position(start_pos = start_pos, col_numbers = col_numbers)
 } 
 )
 
 instat_object$set("public", "remove_columns_in_data", function(data_name, cols) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$remove_columns_in_data(cols = cols)
 } 
 )
 
 instat_object$set("public", "remove_rows_in_data", function(data_name, start_pos, num_rows) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$remove_rows_in_data(start_pos  = start_pos, num_rows = num_rows)
 } 
 )
@@ -434,17 +511,11 @@ instat_object$set("public", "get_next_default_column_name", function(data_name, 
 )
 
 instat_object$set("public", "get_column_names", function(data_name) {
-  if(missing(data_name)) stop("data_name must be given")
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   return(names(self$get_data_objects(data_name)$data))
 }
 )
 
 instat_object$set("public", "insert_column_in_data", function(data_name, col_data =c(), start_pos, number_cols) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$insert_column_in_data(col_data = col_data, start_pos = start_pos, number_cols = number_cols )
 }
 )
@@ -458,25 +529,16 @@ instat_object$set("public", "insert_column_in_data", function(data_name, col_dat
 # )
 
 instat_object$set("public", "order_columns_in_data", function(data_name, col_order){
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$order_columns_in_data(col_order = col_order)
 }
 )
 
 instat_object$set("public", "insert_row_in_data", function(data_name, start_pos, row_data = c(), number_rows) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$insert_row_in_data(start_pos  = start_pos, row_data = row_data, number_rows = number_rows)
 }
 )
 
 instat_object$set("public", "get_dataframe_length", function(data_name) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$get_dataframe_length()
 }
 )
@@ -487,9 +549,6 @@ instat_object$set("public", "get_next_default_dataframe_name", function(prefix, 
 )
 
 instat_object$set("public", "delete_dataframe", function(data_name) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   # TODO need a set or append
   private$.data_objects[[data_name]] <- NULL
   data_objects_changed <- TRUE
@@ -497,18 +556,11 @@ instat_object$set("public", "delete_dataframe", function(data_name) {
 )
 
 instat_object$set("public", "get_column_factor_levels", function(data_name,col_name = "") {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$get_column_factor_levels(col_name)
 } 
 )
 
 instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(), decreasing = FALSE, na.last = TRUE) {
-  #data_name = is.character(data_name)
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$sort_dataframe(col_names = col_names, decreasing = decreasing, na.last = na.last)
 } 
 )
@@ -521,26 +573,31 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
 )
 
 instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type ="factor", factor_numeric = "by_levels") {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_numeric = factor_numeric)
 } 
 )
 
 instat_object$set("public", "append_to_variables_metadata", function(data_name, col_name, property, new_val) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$append_to_variables_metadata(col_name, property, new_val)
 } 
 )
 
 instat_object$set("public", "append_to_dataframe_metadata", function(data_name, property, new_val) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$append_to_metadata(property, new_val)
+} 
+)
+
+instat_object$set("public", "append_to_metadata", function(property, new_val) {
+  if(missing(property) || missing(new_val)) {
+    stop("property and new_val arguments must be specified.")
+  } 
+  
+  if(!is.character(property)) stop("property must be of type character")
+  
+  private$.metadata[[property]] <- new_val
+  self$metadata_changed <- TRUE
+  #TODO should there be a changes list?
+  #self$append_to_changes(list(Added_metadata, property))
 } 
 )
 
@@ -554,52 +611,36 @@ instat_object$set("public", "order_dataframes", function(data_frames_order) {
 )
 
 instat_object$set("public", "copy_columns", function(data_name, col_names = "") {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$copy_columns(col_names = col_names)
 } 
 )
 
 instat_object$set("public", "drop_unused_factor_levels", function(data_name, col_name) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$drop_unused_factor_levels(col_name = col_name)
 } 
 )
 
 instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_levels) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_levels = new_levels)
 } 
 )
 
 instat_object$set("public", "set_factor_reference_level", function(data_name, col_name, new_ref_level) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$set_factor_reference_level(col_name = col_name, new_ref_level = new_ref_level)
 } 
 )
 
 instat_object$set("public", "get_column_count", function(data_name) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   return(self$get_data_objects(data_name)$get_column_count())
 } 
 )
 
 instat_object$set("public", "reorder_factor_levels", function(data_name, col_name, new_level_names) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
   self$get_data_objects(data_name)$reorder_factor_levels(col_name = col_name, new_level_names = new_level_names)
 } 
 )
 
-
-
+instat_object$set("public","get_data_type", function(data_name, col_name) {
+  self$get_data_objects(data_name)$get_data_type(col_name = col_name)
+} 
+)
