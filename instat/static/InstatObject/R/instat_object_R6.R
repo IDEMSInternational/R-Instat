@@ -90,73 +90,19 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
 }
 )
 
-# Import RDS FUNCTION
-##############################################################################################
-# instat_object$set("public", "import_RDS", function(data_RDS, keep_existing =TRUE, overwrite_existing=FALSE, include_models=TRUE,
-#                                          include_graphics=TRUE, include_metadata=TRUE, include_logs=TRUE,messages=TRUE)
-# { 
-#   if(class(data_RDS) == "instat_object"){ 
-#     if (!keep_existing & include_models & include_graphics & include_metadata & include_logs){
-#       self$replace_instat_object(new_instatObj = data_RDS)
-#     } else {
-#       if (!keep_existing) {
-#         self$clear_data()
-#         self$set_meta(list())
-#         self$set_models(list())
-#       }
-#       for ( i in (1:length(data_RDS$data_objects)) ) {
-#         if (!(data_RDS$data_objects[[i]]$metadata[[data_name_label]] %in% names(private$.data_objects)) | overwrite_existing){
-#           #TODO in data_object if (!include_models) data_RDS$data_objects[i]$clear_models
-#           #TODO in data_object if (!include_graphics) data_RDS$data_objects[i]$clear_graphics
-#           if (!include_metadata) {
-#             data_RDS$data_objects[[i]]$set_meta(list()) 
-#             data_RDS$data_objects[[i]]$set_variables_metadata(data.frame()) 
-#             
-#           }
-#           if (!include_logs) data_RDS$data_objects[i]$set_changes(list())
-#           # Add this new data object to our list of data objects
-#           self$append_data_objects(data_RDS$data_objects[[i]]$metadata[[data_name_label]],data_RDS$data_objects[[i]])
-#         }
-#       }
-#       if (include_models & length(data_RDS$models) > 0){
-#         for ( i in (1:length(data_RDS$models)) ) {
-#           if (!(names(data_RDS$models)[i] %in% names(private$models)) | overwrite_existing){ 
-#             self$add_model(data_RDS$models[i],names(data_RDS$models)[i])
-#           }
-#         }
-#       }
-#       if (include_metadata & length(data_RDS$metadata) > 0){
-#         for ( i in (1:length(data_RDS$metadata)) ) {
-#           if (!(names(data_RDS$metadata)[i] %in% names(private$metadata)) | overwrite_existing){ 
-#             self$metadata[names(data_RDS$models)[i]] <- data_RDS$metadata[i] #todo this should be in an addmetadata method
-#           }
-#         }
-#       }
-#     }
-#     private$.data_objects_changed <- TRUE
-#   }
-#   else if (is.data.frame(data_RDS)) {
-#     self$import_data(data_tables = list(data_RDS = data_RDS))
-#   }
-#   else{
-#     if (messages){
-#       stop(paste("RDS_data: ", data_RDS, " Unidentified Object"))#TODO work on messages and error handling
-#     }
-#   }
-# }
-# )
-
 instat_object$set("public", "replace_instat_object", function(new_instatObj) {
   self$set_data_objects(new_instatObj$get_data_objects())
   self$set_meta(new_instatObj$get_metadata())
   self$set_models(new_instatObj$get_models())
   self$data_objects_changed <- TRUE
-  lapply(data_objects, function(x) x$set_data_changed(TRUE))
+  lapply(new_instatObj$get_data_objects(), function(x) x$set_data_changed(TRUE))
 }
 )
 
 instat_object$set("public", "set_data_objects", function(new_data_objects) {
-  if(!is.list(new_data_objects) || !all(lapply(new_objects_list, class)=="data_object")) stop("new_data_objects must be a list of data_objects")
+  if(!is.list(new_data_objects) || (length(new_data_objects) > 0 && !all("data_object" %in% sapply(new_data_objects, class)))) {
+    stop("new_data_objects must be a list of data_objects")
+  }
   else private$.data_objects <- new_data_objects
 }
 )
@@ -202,7 +148,7 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing =TRUE
           }
           if (!include_logs) curr_data_obj$set_changes(list())
           # Add this new data object to our list of data objects
-          .self$append_data_objects(curr_data_name,curr_data_obj)
+          self$append_data_object(curr_data_name,curr_data_obj)
         }
       }
       new_models_list = data_RDS$get_models()
@@ -325,6 +271,14 @@ instat_object$set("public", "get_combined_metadata", function(convert_to_charact
 } 
 )
 
+instat_object$set("public", "get_metadata", function(name) {
+  if(missing(name)) return(private$.metadata)
+  if(!is.character(name)) stop("name must be a character")
+  if(!name %in% names(private$.metadata)) stop(paste(name, "not found in metadata"))
+  return(private$.metadata[[name]])
+} 
+)
+
 instat_object$set("public", "get_data_names", function() { 
   return(names(private$.data_objects))
 } 
@@ -347,7 +301,7 @@ instat_object$set("public", "get_data_changed", function(data_name) {
 instat_object$set("public", "get_variables_metadata_changed", function(data_obj) { 
   if(missing(data_obj)) {
     if(private$.data_objects_changed) return(TRUE)
-    return(any(lapply(private$.data_objects, function(x) x$variables_metadata_changed)))
+    return(any(sapply(private$.data_objects, function(x) x$variables_metadata_changed)))
   }
   else {
     return(self$get_data_objects(data_obj)$variables_metadata_changed)
@@ -439,7 +393,7 @@ instat_object$set("public", "add_model", function(model, model_name = paste("mod
 ) 
 
 instat_object$set("public", "get_models", function(model_name) {
-  if(missing(model_name)) stop("model_name must be given.")
+  if(missing(model_name)) return(private$.models)
   if(!is.character(model_name)) stop("name must be a character")
   if(!model_name %in% names(private$.models)) stop(model_name, "not found in models")
   private$.models[[model_name]]
