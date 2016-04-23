@@ -111,7 +111,7 @@ Public Class clsGridLink
             frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = FALSE)")
         End If
 
-        frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed = FALSE")
+        frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed <- FALSE")
 
         If grdData.Worksheets.Count = 0 Then
             grdData.Visible = False

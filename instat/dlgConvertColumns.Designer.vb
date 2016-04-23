@@ -41,12 +41,12 @@ Partial Class dlgConvertColumns
         'lblColumnsToConvert
         '
         Me.lblColumnsToConvert.AutoSize = True
-        Me.lblColumnsToConvert.Location = New System.Drawing.Point(263, 50)
+        Me.lblColumnsToConvert.Location = New System.Drawing.Point(254, 9)
         Me.lblColumnsToConvert.Name = "lblColumnsToConvert"
-        Me.lblColumnsToConvert.Size = New System.Drawing.Size(98, 13)
+        Me.lblColumnsToConvert.Size = New System.Drawing.Size(99, 13)
         Me.lblColumnsToConvert.TabIndex = 1
-        Me.lblColumnsToConvert.Tag = "Columns_to_convert"
-        Me.lblColumnsToConvert.Text = "Columns to convert"
+        Me.lblColumnsToConvert.Tag = "Columns_to_Convert"
+        Me.lblColumnsToConvert.Text = "Columns to Convert"
         '
         'grpTo
         '
@@ -54,7 +54,7 @@ Partial Class dlgConvertColumns
         Me.grpTo.Controls.Add(Me.rdoCharacter)
         Me.grpTo.Controls.Add(Me.rdoFactor)
         Me.grpTo.Controls.Add(Me.rdoNumeric)
-        Me.grpTo.Location = New System.Drawing.Point(18, 183)
+        Me.grpTo.Location = New System.Drawing.Point(0, 188)
         Me.grpTo.Name = "grpTo"
         Me.grpTo.Size = New System.Drawing.Size(101, 132)
         Me.grpTo.TabIndex = 4
@@ -65,7 +65,7 @@ Partial Class dlgConvertColumns
         'rdoInteger
         '
         Me.rdoInteger.AutoSize = True
-        Me.rdoInteger.Location = New System.Drawing.Point(7, 96)
+        Me.rdoInteger.Location = New System.Drawing.Point(11, 96)
         Me.rdoInteger.Name = "rdoInteger"
         Me.rdoInteger.Size = New System.Drawing.Size(58, 17)
         Me.rdoInteger.TabIndex = 3
@@ -77,49 +77,49 @@ Partial Class dlgConvertColumns
         'rdoCharacter
         '
         Me.rdoCharacter.AutoSize = True
-        Me.rdoCharacter.Location = New System.Drawing.Point(7, 70)
+        Me.rdoCharacter.Location = New System.Drawing.Point(11, 70)
         Me.rdoCharacter.Name = "rdoCharacter"
-        Me.rdoCharacter.Size = New System.Drawing.Size(70, 17)
+        Me.rdoCharacter.Size = New System.Drawing.Size(71, 17)
         Me.rdoCharacter.TabIndex = 2
         Me.rdoCharacter.TabStop = True
-        Me.rdoCharacter.Tag = "character"
-        Me.rdoCharacter.Text = "character"
+        Me.rdoCharacter.Tag = "Character"
+        Me.rdoCharacter.Text = "Character"
         Me.rdoCharacter.UseVisualStyleBackColor = True
         '
         'rdoFactor
         '
         Me.rdoFactor.AutoSize = True
-        Me.rdoFactor.Location = New System.Drawing.Point(7, 18)
+        Me.rdoFactor.Location = New System.Drawing.Point(11, 18)
         Me.rdoFactor.Name = "rdoFactor"
-        Me.rdoFactor.Size = New System.Drawing.Size(52, 17)
+        Me.rdoFactor.Size = New System.Drawing.Size(55, 17)
         Me.rdoFactor.TabIndex = 1
         Me.rdoFactor.TabStop = True
-        Me.rdoFactor.Tag = "factor"
-        Me.rdoFactor.Text = "factor"
+        Me.rdoFactor.Tag = "Factor"
+        Me.rdoFactor.Text = "Factor"
         Me.rdoFactor.UseVisualStyleBackColor = True
         '
         'rdoNumeric
         '
         Me.rdoNumeric.AutoSize = True
-        Me.rdoNumeric.Location = New System.Drawing.Point(7, 44)
+        Me.rdoNumeric.Location = New System.Drawing.Point(11, 44)
         Me.rdoNumeric.Name = "rdoNumeric"
-        Me.rdoNumeric.Size = New System.Drawing.Size(62, 17)
+        Me.rdoNumeric.Size = New System.Drawing.Size(64, 17)
         Me.rdoNumeric.TabIndex = 0
         Me.rdoNumeric.TabStop = True
-        Me.rdoNumeric.Tag = "numeric"
-        Me.rdoNumeric.Text = "numeric"
+        Me.rdoNumeric.Tag = "Numeric"
+        Me.rdoNumeric.Text = "Numeric"
         Me.rdoNumeric.UseVisualStyleBackColor = True
         '
         'ucrSelectorDataFrameColumns
         '
-        Me.ucrSelectorDataFrameColumns.Location = New System.Drawing.Point(4, 2)
+        Me.ucrSelectorDataFrameColumns.Location = New System.Drawing.Point(0, 2)
         Me.ucrSelectorDataFrameColumns.Name = "ucrSelectorDataFrameColumns"
         Me.ucrSelectorDataFrameColumns.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorDataFrameColumns.TabIndex = 0
         '
         'ucrReceiverColumnsToConvert
         '
-        Me.ucrReceiverColumnsToConvert.Location = New System.Drawing.Point(257, 65)
+        Me.ucrReceiverColumnsToConvert.Location = New System.Drawing.Point(257, 25)
         Me.ucrReceiverColumnsToConvert.Name = "ucrReceiverColumnsToConvert"
         Me.ucrReceiverColumnsToConvert.Selector = Nothing
         Me.ucrReceiverColumnsToConvert.Size = New System.Drawing.Size(121, 104)
@@ -141,8 +141,8 @@ Partial Class dlgConvertColumns
         Me.grpFactorToNumeric.Size = New System.Drawing.Size(217, 44)
         Me.grpFactorToNumeric.TabIndex = 7
         Me.grpFactorToNumeric.TabStop = False
-        Me.grpFactorToNumeric.Tag = "Factor_to_numeric"
-        Me.grpFactorToNumeric.Text = "Factor to numeric"
+        Me.grpFactorToNumeric.Tag = "Factor_to_Numeric"
+        Me.grpFactorToNumeric.Text = "Factor to Numeric"
         '
         'rdoByOrdinals
         '
@@ -152,8 +152,8 @@ Partial Class dlgConvertColumns
         Me.rdoByOrdinals.Size = New System.Drawing.Size(78, 17)
         Me.rdoByOrdinals.TabIndex = 8
         Me.rdoByOrdinals.TabStop = True
-        Me.rdoByOrdinals.Tag = "by_ordinals"
-        Me.rdoByOrdinals.Text = "by_ordinals"
+        Me.rdoByOrdinals.Tag = "By_Ordinals"
+        Me.rdoByOrdinals.Text = "By Ordinals"
         Me.rdoByOrdinals.UseVisualStyleBackColor = True
         '
         'rdoByLevels
@@ -161,11 +161,11 @@ Partial Class dlgConvertColumns
         Me.rdoByLevels.AutoSize = True
         Me.rdoByLevels.Location = New System.Drawing.Point(6, 16)
         Me.rdoByLevels.Name = "rdoByLevels"
-        Me.rdoByLevels.Size = New System.Drawing.Size(69, 17)
+        Me.rdoByLevels.Size = New System.Drawing.Size(71, 17)
         Me.rdoByLevels.TabIndex = 7
         Me.rdoByLevels.TabStop = True
-        Me.rdoByLevels.Tag = "by_levels"
-        Me.rdoByLevels.Text = "by_levels"
+        Me.rdoByLevels.Tag = "By_Levels"
+        Me.rdoByLevels.Text = "By Levels"
         Me.rdoByLevels.UseVisualStyleBackColor = True
         '
         'dlgConvertColumns

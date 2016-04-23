@@ -22,32 +22,24 @@ Partial Class dlgInsertColumn
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtDefaultData = New System.Windows.Forms.TextBox()
         Me.lblDefaultValues = New System.Windows.Forms.Label()
         Me.lblNumberCols = New System.Windows.Forms.Label()
         Me.lblStartPos = New System.Windows.Forms.Label()
-        Me.txtStartPos = New System.Windows.Forms.TextBox()
         Me.chkPos = New System.Windows.Forms.CheckBox()
         Me.nudPos = New System.Windows.Forms.NumericUpDown()
         Me.nudNumCols = New System.Windows.Forms.NumericUpDown()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFramesList = New instat.ucrDataFrame()
+        Me.ucrInputStartPos = New instat.ucrInputTextBox()
+        Me.ucrInputDefaultData = New instat.ucrInputTextBox()
         CType(Me.nudPos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudNumCols, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'txtDefaultData
-        '
-        Me.txtDefaultData.Location = New System.Drawing.Point(12, 71)
-        Me.txtDefaultData.Name = "txtDefaultData"
-        Me.txtDefaultData.ReadOnly = True
-        Me.txtDefaultData.Size = New System.Drawing.Size(100, 20)
-        Me.txtDefaultData.TabIndex = 3
-        '
         'lblDefaultValues
         '
         Me.lblDefaultValues.AutoSize = True
-        Me.lblDefaultValues.Location = New System.Drawing.Point(9, 51)
+        Me.lblDefaultValues.Location = New System.Drawing.Point(12, 51)
         Me.lblDefaultValues.Name = "lblDefaultValues"
         Me.lblDefaultValues.Size = New System.Drawing.Size(75, 13)
         Me.lblDefaultValues.TabIndex = 2
@@ -56,7 +48,7 @@ Partial Class dlgInsertColumn
         'lblNumberCols
         '
         Me.lblNumberCols.AutoSize = True
-        Me.lblNumberCols.Location = New System.Drawing.Point(139, 15)
+        Me.lblNumberCols.Location = New System.Drawing.Point(145, 8)
         Me.lblNumberCols.Name = "lblNumberCols"
         Me.lblNumberCols.Size = New System.Drawing.Size(138, 13)
         Me.lblNumberCols.TabIndex = 0
@@ -65,24 +57,16 @@ Partial Class dlgInsertColumn
         'lblStartPos
         '
         Me.lblStartPos.AutoSize = True
-        Me.lblStartPos.Location = New System.Drawing.Point(141, 55)
+        Me.lblStartPos.Location = New System.Drawing.Point(141, 51)
         Me.lblStartPos.Name = "lblStartPos"
         Me.lblStartPos.Size = New System.Drawing.Size(110, 13)
         Me.lblStartPos.TabIndex = 4
         Me.lblStartPos.Text = "Insert at what position"
         '
-        'txtStartPos
-        '
-        Me.txtStartPos.Location = New System.Drawing.Point(144, 75)
-        Me.txtStartPos.Name = "txtStartPos"
-        Me.txtStartPos.ReadOnly = True
-        Me.txtStartPos.Size = New System.Drawing.Size(96, 20)
-        Me.txtStartPos.TabIndex = 5
-        '
         'chkPos
         '
         Me.chkPos.AutoSize = True
-        Me.chkPos.Location = New System.Drawing.Point(247, 78)
+        Me.chkPos.Location = New System.Drawing.Point(247, 73)
         Me.chkPos.Name = "chkPos"
         Me.chkPos.Size = New System.Drawing.Size(101, 17)
         Me.chkPos.TabIndex = 6
@@ -91,7 +75,7 @@ Partial Class dlgInsertColumn
         '
         'nudPos
         '
-        Me.nudPos.Location = New System.Drawing.Point(354, 76)
+        Me.nudPos.Location = New System.Drawing.Point(354, 70)
         Me.nudPos.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudPos.Name = "nudPos"
         Me.nudPos.Size = New System.Drawing.Size(36, 20)
@@ -100,32 +84,48 @@ Partial Class dlgInsertColumn
         '
         'nudNumCols
         '
-        Me.nudNumCols.Location = New System.Drawing.Point(144, 32)
+        Me.nudNumCols.Location = New System.Drawing.Point(148, 24)
         Me.nudNumCols.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudNumCols.Name = "nudNumCols"
-        Me.nudNumCols.Size = New System.Drawing.Size(96, 20)
+        Me.nudNumCols.Size = New System.Drawing.Size(47, 20)
         Me.nudNumCols.TabIndex = 1
         Me.nudNumCols.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(5, 101)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 98)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 8
         '
         'ucrDataFramesList
         '
-        Me.ucrDataFramesList.Location = New System.Drawing.Point(4, 8)
+        Me.ucrDataFramesList.Location = New System.Drawing.Point(12, 8)
         Me.ucrDataFramesList.Name = "ucrDataFramesList"
         Me.ucrDataFramesList.Size = New System.Drawing.Size(127, 41)
         Me.ucrDataFramesList.TabIndex = 0
+        '
+        'ucrInputStartPos
+        '
+        Me.ucrInputStartPos.Location = New System.Drawing.Point(144, 72)
+        Me.ucrInputStartPos.Name = "ucrInputStartPos"
+        Me.ucrInputStartPos.Size = New System.Drawing.Size(97, 21)
+        Me.ucrInputStartPos.TabIndex = 9
+        '
+        'ucrInputDefaultData
+        '
+        Me.ucrInputDefaultData.Location = New System.Drawing.Point(12, 71)
+        Me.ucrInputDefaultData.Name = "ucrInputDefaultData"
+        Me.ucrInputDefaultData.Size = New System.Drawing.Size(119, 21)
+        Me.ucrInputDefaultData.TabIndex = 10
         '
         'dlgInsertColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 158)
+        Me.ClientSize = New System.Drawing.Size(418, 158)
+        Me.Controls.Add(Me.ucrInputDefaultData)
+        Me.Controls.Add(Me.ucrInputStartPos)
         Me.Controls.Add(Me.nudNumCols)
         Me.Controls.Add(Me.nudPos)
         Me.Controls.Add(Me.chkPos)
@@ -133,8 +133,6 @@ Partial Class dlgInsertColumn
         Me.Controls.Add(Me.lblStartPos)
         Me.Controls.Add(Me.lblNumberCols)
         Me.Controls.Add(Me.lblDefaultValues)
-        Me.Controls.Add(Me.txtStartPos)
-        Me.Controls.Add(Me.txtDefaultData)
         Me.Controls.Add(Me.ucrDataFramesList)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgInsertColumn"
@@ -148,13 +146,13 @@ Partial Class dlgInsertColumn
     End Sub
 
     Friend WithEvents ucrDataFramesList As ucrDataFrame
-    Friend WithEvents txtDefaultData As TextBox
     Friend WithEvents lblDefaultValues As Label
     Friend WithEvents lblNumberCols As Label
     Friend WithEvents lblStartPos As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents txtStartPos As TextBox
     Friend WithEvents chkPos As CheckBox
     Friend WithEvents nudPos As NumericUpDown
     Friend WithEvents nudNumCols As NumericUpDown
+    Friend WithEvents ucrInputStartPos As ucrInputTextBox
+    Friend WithEvents ucrInputDefaultData As ucrInputTextBox
 End Class

@@ -40,7 +40,7 @@ Partial Class dlgSort
         '
         Me.grpOrder.Controls.Add(Me.rdoDescending)
         Me.grpOrder.Controls.Add(Me.rdoAscending)
-        Me.grpOrder.Location = New System.Drawing.Point(13, 197)
+        Me.grpOrder.Location = New System.Drawing.Point(12, 197)
         Me.grpOrder.Name = "grpOrder"
         Me.grpOrder.Size = New System.Drawing.Size(181, 47)
         Me.grpOrder.TabIndex = 3
@@ -63,7 +63,7 @@ Partial Class dlgSort
         'rdoAscending
         '
         Me.rdoAscending.AutoSize = True
-        Me.rdoAscending.Location = New System.Drawing.Point(7, 20)
+        Me.rdoAscending.Location = New System.Drawing.Point(12, 20)
         Me.rdoAscending.Name = "rdoAscending"
         Me.rdoAscending.Size = New System.Drawing.Size(75, 17)
         Me.rdoAscending.TabIndex = 0
@@ -75,12 +75,12 @@ Partial Class dlgSort
         'lblColumnsToSort
         '
         Me.lblColumnsToSort.AutoSize = True
-        Me.lblColumnsToSort.Location = New System.Drawing.Point(274, 34)
+        Me.lblColumnsToSort.Location = New System.Drawing.Point(260, 20)
         Me.lblColumnsToSort.Name = "lblColumnsToSort"
-        Me.lblColumnsToSort.Size = New System.Drawing.Size(103, 13)
+        Me.lblColumnsToSort.Size = New System.Drawing.Size(98, 13)
         Me.lblColumnsToSort.TabIndex = 1
-        Me.lblColumnsToSort.Tag = "Columns_To_Sort"
-        Me.lblColumnsToSort.Text = "Columns To Sort By:"
+        Me.lblColumnsToSort.Tag = ""
+        Me.lblColumnsToSort.Text = "Columns to Sort by:"
         '
         'grpMissingValues
         '
@@ -91,8 +91,8 @@ Partial Class dlgSort
         Me.grpMissingValues.Size = New System.Drawing.Size(215, 47)
         Me.grpMissingValues.TabIndex = 4
         Me.grpMissingValues.TabStop = False
-        Me.grpMissingValues.Tag = "Missing_values"
-        Me.grpMissingValues.Text = "Missing values"
+        Me.grpMissingValues.Tag = "Missing_Values"
+        Me.grpMissingValues.Text = "Missing Values"
         '
         'rdoLast
         '
@@ -127,7 +127,7 @@ Partial Class dlgSort
         '
         'ucrReceiverSort
         '
-        Me.ucrReceiverSort.Location = New System.Drawing.Point(277, 50)
+        Me.ucrReceiverSort.Location = New System.Drawing.Point(263, 36)
         Me.ucrReceiverSort.Name = "ucrReceiverSort"
         Me.ucrReceiverSort.Selector = Nothing
         Me.ucrReceiverSort.Size = New System.Drawing.Size(125, 117)
@@ -144,7 +144,7 @@ Partial Class dlgSort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 305)
+        Me.ClientSize = New System.Drawing.Size(421, 305)
         Me.Controls.Add(Me.ucrSelectForSort)
         Me.Controls.Add(Me.grpMissingValues)
         Me.Controls.Add(Me.lblColumnsToSort)
