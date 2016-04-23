@@ -117,8 +117,8 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub lstCollection_Click(sender As Object, e As EventArgs) Handles lstCollection.Click
-        ucrBase.clsRsyntax.SetAssignTo(lstCollection.SelectedItems(0).SubItems(0).Text, strTempDataframe:=lstCollection.SelectedItems(0).SubItems(0).Text)
-        ucrBase.clsRsyntax.AddParameter("x", lstCollection.SelectedItems(0).SubItems(0).Text)
+        ucrBase.clsRsyntax.SetAssignTo(chkString(lstCollection.SelectedItems(0).SubItems(0).Text), strTempDataframe:=chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
+        ucrBase.clsRsyntax.AddParameter("x", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         TestOkEnabled()
     End Sub
 
@@ -129,5 +129,14 @@ Public Class dlgFromLibrary
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
+    Private Function chkString(ByVal strValue As String)
+        Dim strLength As Integer = strValue.IndexOf(" ")
+        If strLength = -1 Then
+            Return strValue
+        Else
+            Return strValue.Substring(0, strLength)
+        End If
+    End Function
 
 End Class
