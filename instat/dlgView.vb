@@ -52,47 +52,41 @@ Public Class dlgView
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverView.IsEmpty() = False Then
+        If ucrReceiverView.IsEmpty() = False And nudNumberRows.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-
-
     Private Sub grpDisplayFrom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBottom.CheckedChanged, rdoTop.CheckedChanged
         grpRowsToBeSelected()
     End Sub
 
     Private Sub grpRowsToBeSelected()
-
         If rdoTop.Checked Then
-
             ucrBase.clsRsyntax.SetFunction("head")
-
-
         Else
             ucrBase.clsRsyntax.SetFunction("tail")
-
         End If
-
     End Sub
-
 
     Private Sub ucrReceiverView_SelctionChanged() Handles ucrReceiverView.SelectionChanged
         If Not ucrReceiverView.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables())
-
         Else
             ucrBase.clsRsyntax.RemoveParameter("x")
         End If
         TestOKEnabled()
-
     End Sub
 
     Private Sub nudNumberRows_TextChanged(sender As Object, e As EventArgs) Handles nudNumberRows.TextChanged
-        ucrBase.clsRsyntax.AddParameter("n", nudNumberRows.Value)
+        If Not nudNumberRows.Text = "" Then
+            ucrBase.clsRsyntax.AddParameter("n", nudNumberRows.Value)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("n")
+        End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
