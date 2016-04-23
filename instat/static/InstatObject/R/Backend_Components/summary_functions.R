@@ -51,10 +51,10 @@ data_obj$methods(calculate_summary = function(columns_to_summarise, summaries, f
     if(length(columns_to_summarise) == 1) out = ddply(data, factors, function(x) match.fun(summaries)(x[[columns_to_summarise]],...), .drop = drop)
     else out = ddply(data, factors, function(x) sapply(columns_to_summarise, function(y) match.fun(summaries)(x[[y]]),...), .drop = drop)
   }
-   else {
-     if(length(columns_to_summarise) == 1) out = ddply(data, factors, function(x) sapply(summaries, function(y) match.fun(y)(x[[columns_to_summarise]],...)), .drop = drop)
-     else out = ddply(data, factors, function(x) apply(combinations, 1, FUN = function(y) match.fun(y[[1]])(x[[y[[2]]]],...)), .drop = drop)
-   }
+  else {
+    if(length(columns_to_summarise) == 1) out = ddply(data, factors, function(x) sapply(summaries, function(y) match.fun(y)(x[[columns_to_summarise]],...)), .drop = drop)
+    else out = ddply(data, factors, function(x) apply(combinations, 1, FUN = function(y) match.fun(y[[1]])(x[[y[[2]]]],...)), .drop = drop)
+  }
   names(out)[-(1:length(factors))] <- apply(combinations, 1, paste, collapse="_")
   return(out)
 }
