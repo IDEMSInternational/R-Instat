@@ -50,7 +50,7 @@ Partial Class dlgView
         'rdoBottom
         '
         Me.rdoBottom.AutoSize = True
-        Me.rdoBottom.Location = New System.Drawing.Point(158, 22)
+        Me.rdoBottom.Location = New System.Drawing.Point(159, 19)
         Me.rdoBottom.Name = "rdoBottom"
         Me.rdoBottom.Size = New System.Drawing.Size(58, 17)
         Me.rdoBottom.TabIndex = 1
@@ -62,7 +62,7 @@ Partial Class dlgView
         'rdoTop
         '
         Me.rdoTop.AutoSize = True
-        Me.rdoTop.Location = New System.Drawing.Point(6, 22)
+        Me.rdoTop.Location = New System.Drawing.Point(6, 19)
         Me.rdoTop.Name = "rdoTop"
         Me.rdoTop.Size = New System.Drawing.Size(44, 17)
         Me.rdoTop.TabIndex = 0
@@ -82,7 +82,7 @@ Partial Class dlgView
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(255, 32)
+        Me.lblSelected.Location = New System.Drawing.Point(255, 9)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(101, 13)
         Me.lblSelected.TabIndex = 7
@@ -101,7 +101,7 @@ Partial Class dlgView
         '
         'ucrReceiverView
         '
-        Me.ucrReceiverView.Location = New System.Drawing.Point(258, 48)
+        Me.ucrReceiverView.Location = New System.Drawing.Point(258, 25)
         Me.ucrReceiverView.Name = "ucrReceiverView"
         Me.ucrReceiverView.Selector = Nothing
         Me.ucrReceiverView.Size = New System.Drawing.Size(121, 104)
