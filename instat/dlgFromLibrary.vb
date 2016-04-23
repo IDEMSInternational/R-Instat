@@ -131,16 +131,12 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Function chkString(ByVal strValue As String)
-        Dim strLength As Integer = 0
-        For Each chr As Char In strValue
-            If chr = " " Then
-                Return strValue.Substring(0, strLength)
-                Exit Function
-            Else
-                strLength += 1
-            End If
-        Next
-        Return strValue.Substring(0, strLength)
+        Dim strLength As Integer = strValue.IndexOf(" ")
+        If strLength = -1 Then
+            Return strValue
+        Else
+            Return strValue.Substring(0, strLength)
+        End If
     End Function
 
 End Class
