@@ -824,6 +824,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageFactorconvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuManageFactorconvertToFactor.Click
+        dlgConvertColumns.bToFactorOnly = True
         dlgConvertColumns.ShowDialog()
     End Sub
 
@@ -928,6 +929,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataConvertTo_Click(sender As Object, e As EventArgs) Handles mnuManageDataConvertTo.Click
+        dlgConvertColumns.bToFactorOnly = False
         dlgConvertColumns.ShowDialog()
     End Sub
 
