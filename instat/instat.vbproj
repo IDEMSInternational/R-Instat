@@ -604,6 +604,12 @@
     <Compile Include="sdgFrequencyPolygonOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgModelOptions.Designer.vb">
+      <DependentUpon>sdgModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgModelOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgPieChartOptions.Designer.vb">
       <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
     </Compile>
@@ -2344,6 +2350,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHistogramOptions.sw-KE.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgModelOptions.fr-FR.resx">
+      <DependentUpon>sdgModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgModelOptions.resx">
+      <DependentUpon>sdgModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgModelOptions.sw-KE.resx">
+      <DependentUpon>sdgModelOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgOptions.fr-FR.resx">
       <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
