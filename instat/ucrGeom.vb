@@ -15,7 +15,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Class UcrGeoms
+Public Class ucrGeom
     Public strGgParameterName As String
     Public strGgParameterValue As String
     Public lstAllGeoms As New List(Of Geoms)
