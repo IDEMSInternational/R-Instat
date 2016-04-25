@@ -17,7 +17,10 @@
 Imports instat.Translations
 Public Class ucrReceiver
     Public WithEvents Selector As ucrSelector
-    Public strDataType As String = "all"
+    Public lstIncludeDataTypes As List(Of String)
+    Public lstExcludeDataTypes As List(Of String)
+    Public bFirstLoad As Boolean = True
+    Public strDataType As String = ""
 
     Public Overridable Sub AddSelected()
 
@@ -61,7 +64,47 @@ Public Class ucrReceiver
 
     Private Sub ucrReceiver_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         translateEach(Controls)
+        If bFirstLoad Then
+            lstIncludeDataTypes = New List(Of String)
+            lstExcludeDataTypes = New List(Of String)
+        End If
     End Sub
+
+    Public Function GetIncludedDataTypes(Optional bWithQuotes As Boolean = True) As String
+        Return GetListAsRString(lstIncludeDataTypes, bWithQuotes)
+    End Function
+
+    Public Function GetExcludedDataTypes(Optional bWithQuotes As Boolean = True) As String
+        Return GetListAsRString(lstExcludeDataTypes, bWithQuotes)
+    End Function
+
+    Public Function GetListAsRString(lstStrings As List(Of String), Optional bWithQuotes As Boolean = True) As String
+        Dim strTemp As String = ""
+        Dim i As Integer
+        If lstStrings.Count = 1 Then
+            If bWithQuotes Then
+                strTemp = Chr(34) & lstStrings.Item(0) & Chr(34)
+            Else
+                strTemp = lstStrings.Item(0)
+            End If
+        ElseIf lstStrings.Count > 1 Then
+            strTemp = "c" & "("
+            For i = 0 To lstStrings.Count - 1
+                If i > 0 Then
+                    strTemp = strTemp & ","
+                End If
+                If lstStrings.Item(i) <> "" Then
+                    If bWithQuotes Then
+                        strTemp = strTemp & Chr(34) & lstStrings.Item(i) & Chr(34)
+                    Else
+                        strTemp = strTemp & lstStrings.Item(i)
+                    End If
+                End If
+            Next
+            strTemp = strTemp & ")"
+        End If
+        Return strTemp
+    End Function
 
     Private Sub ucrReceiver_Enter(sender As Object, e As EventArgs) Handles Me.Enter
         SetMeAsReceiver()

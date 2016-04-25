@@ -695,6 +695,28 @@ data_object$set("public", "get_column_count", function(col_name, new_level_names
 }
 )
 
+data_object$set("public", "get_column_names", function(as_list = FALSE, include_type = c(), exclude_type = c()) {
+  types = c("factor", "integer", "numeric", "logical", "character")
+  if(!length(include_type) == 0) {
+    if(!all(include_type %in% types)) stop(paste("include_type can only contain", paste(types, collapse = ", ")))
+    if(!length(exclude_type) == 0) warning("exclude_type argument will be ignored. Only one of include_type and exclude_type should be specified.")
+    out = names(private$data)[sapply(private$data, class) %in% include_type]
+  }
+  else if(!length(exclude_type) == 0) {
+    if(!all(exclude_type %in% types)) stop(paste("exclude_type can only contain", paste(types, collapse = ", ")))
+    out = names(private$data)[!(sapply(private$data, class) %in% exclude_type)]
+  }
+  else out = names(private$data)
+  
+  if(as_list) {
+    lst = list()
+    lst[[self$get_metadata(data_name_label)]] <- out
+    return(lst)
+  }
+  else return(out)
+}
+)
+
 #TODO: Are there other types needed here?
 data_object$set("public", "get_data_type", function(col_name = "") {
   if(!(col_name %in% names(private$data))){
