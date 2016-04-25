@@ -31,21 +31,18 @@ Public Class dlgInsertColumn
 
     Private Sub TestOKEnabled()
         If rdoInsertColumns.Checked Then
-            If nudNumCols.Text <> "" Then
-                If nudPos.Text <> "" Then
-                    If Not ucrInputDefaultData.IsEmpty Then
-                        ucrBase.OKEnabled(True)
-                    End If
-                End If
+            If ((nudNumCols.Text <> "") And (nudPos.Text <> "") And Not ucrInputDefaultData.IsEmpty) Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+
             End If
         ElseIf rdoInsertRows.Checked Then
-            If nudNumCols.Text <> "" Then
-                If nudPos.Text <> "" Then
-                    ucrBase.OKEnabled(True)
-                End If
+            If ((nudNumCols.Text <> "") And (nudPos.Text <> "")) Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
             End If
-        Else
-            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -56,12 +53,6 @@ Public Class dlgInsertColumn
     Private Sub setDefaults()
         rdoInsertColumns.Checked = True
         ucrInputDefaultData.SetName("NA")
-        nudPos.Value = ucrDataFramesList.iColumnCount + 1
-        nudNumCols.Value = 1
-        NumberofColumnsOrRows()
-        nudNumCols.Minimum = 1
-        lblDefaultValues.Visible = True
-        ucrInputDefaultData.Visible = True
         ucrDataFramesList.Reset()
         ucrInputDefaultData.Reset()
     End Sub
@@ -115,11 +106,11 @@ Public Class dlgInsertColumn
 
     Private Sub dataFrameListMaxMinPos()
         If rdoInsertColumns.Checked Then
-            nudPos.Maximum = ucrDataFramesList.iColumnCount + 100
+            nudPos.Maximum = ucrDataFramesList.iColumnCount + 1
             nudPos.Value = ucrDataFramesList.iColumnCount + 1
 
         Else
-            nudPos.Maximum = ucrDataFramesList.iDataFrameLength + 1000
+            nudPos.Maximum = ucrDataFramesList.iDataFrameLength + 1
             nudPos.Value = ucrDataFramesList.iDataFrameLength + 1
         End If
     End Sub
