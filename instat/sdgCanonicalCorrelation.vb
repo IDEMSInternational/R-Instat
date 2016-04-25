@@ -15,7 +15,42 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgCanonicalCorrelation
+    Public bFirstLoad As Boolean = True
+    Public clsRCanCor, clsRCoef As New RFunction
     Private Sub sdgCanonicalCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub Cancor()
+        clsRCanCor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRCanCor.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
+        clsRCanCor.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
+        frmMain.clsRLink.RunScript(clsRCanCor.ToScript(), 2)
+    End Sub
+
+    Private Sub Coef()
+        clsRCoef.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRCoef.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
+        clsRCoef.AddParameter("value1", Chr(34) & "coef" & Chr(34))
+        frmMain.clsRLink.RunScript(clsRCoef.ToScript(), 2)
+    End Sub
+
+    Public Sub SetDefaults()
+        chkCanonicalCorrelations.Checked = True
+        chkCoef.Checked = True
+    End Sub
+
+    Public Sub CCAOptions()
+        If (chkCanonicalCorrelations.Checked) Then
+            Cancor()
+        End If
+        If (chkCoef.Checked) Then
+            Coef()
+        End If
     End Sub
 End Class
