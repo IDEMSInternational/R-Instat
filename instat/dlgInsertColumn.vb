@@ -54,6 +54,7 @@ Public Class dlgInsertColumn
         rdoInsertColumns.Checked = True
         ucrInputDefaultData.SetName("NA")
         ucrDataFramesList.Reset()
+        RowsOrColumns()
         ucrInputDefaultData.Reset()
     End Sub
 
