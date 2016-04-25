@@ -15,8 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgPrincipalComponentAnalysis
-    'Public clsRPCAFunction As RFunction
     Public bFirstLoad As Boolean = True
+    Public clsREigenValues, clsREigenVectors, clsRScores As New RFunction
 
     Private Sub sdgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -27,24 +27,31 @@ Public Class sdgPrincipalComponentAnalysis
         End If
     End Sub
 
-    'Public Sub SetRModelFunction(clsRModelFunc As RFunction)
-    '    clsRModelFunction = clsRModelFunc
-    'End Sub
-
     Private Sub EigenValues()
-        frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$eig", 2)
+        clsREigenValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsREigenValues.AddParameter("model_name", Chr(34) & dlgPrincipalComponentAnalysis.strModelName & Chr(34))
+        clsREigenValues.AddParameter("value1", Chr(34) & "eig" & Chr(34))
+        frmMain.clsRLink.RunScript(clsREigenValues.ToScript(), 2)
     End Sub
 
     Private Sub EigenVectors()
-        frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$ind$contrib", 2)
+        clsREigenVectors.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsREigenVectors.AddParameter("model_name", Chr(34) & dlgPrincipalComponentAnalysis.strModelName & Chr(34))
+        clsREigenVectors.AddParameter("value1", Chr(34) & "ind" & Chr(34))
+        clsREigenVectors.AddParameter("value2", Chr(34) & "contrib" & Chr(34))
+        frmMain.clsRLink.RunScript(clsREigenVectors.ToScript(), 2)
     End Sub
 
     Private Sub Scores()
-        frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$ind$coord", 2)
+        clsRScores.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRScores.AddParameter("model_name", Chr(34) & dlgPrincipalComponentAnalysis.strModelName & Chr(34))
+        clsRScores.AddParameter("value1", Chr(34) & "ind" & Chr(34))
+        clsRScores.AddParameter("value2", Chr(34) & "coord" & Chr(34))
+        frmMain.clsRLink.RunScript(clsRScores.ToScript(), 2)
     End Sub
 
     Private Sub Residuals()
-        'frmMain.clsRLink.RunScript(dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.GetScript() & "$eig", 2)
+        'TODO
     End Sub
 
     Public Sub SetDefaults()
