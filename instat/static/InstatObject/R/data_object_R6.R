@@ -204,7 +204,6 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
   else {
     use_col_name_as_prefix = FALSE
     num_cols = 1
-    col_data = data.frame(col_data)
   }
   
   if(missing(use_col_name_as_prefix)) {
@@ -212,7 +211,9 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     else use_col_name_as_prefix = TRUE
   }
   for(i in 1:num_cols) {
-    curr_col = unlist(col_data[,i])
+    if(num_cols == 1) curr_col = col_data
+    else curr_col = unlist(col_data[,i])
+    
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
     
@@ -618,7 +619,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     }
     
     if(to_type=="numeric"){
-      if(is.factor(data[,col_name]) & (factor_numeric == "by_levels")){
+      if(is.factor(private$data[,col_name]) && (factor_numeric == "by_levels")){
         self$add_columns_to_data(col_name = col_name, col_data = as.numeric(levels(private$data[,col_name]))[private$data[,col_name]])
       }else{
         self$add_columns_to_data(col_name = col_name, col_data = as.numeric(private$data[,col_name]) )
