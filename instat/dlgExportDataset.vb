@@ -59,13 +59,13 @@ Public Class dlgExportDataset
                 chkOptions.Enabled = False
                 grpOptions.Enabled = False
                 clsWriteCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteCSV.AddParameter("x", ucrAvailableSheets.cboAvailableDataFrames.SelectedItem)
+                clsWriteCSV.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsWriteCSV)
             Case ".xlsx"
                 clsWriteXLSX.SetRCommand("write.xlsx")
                 chkOptions.Enabled = True
                 clsWriteXLSX.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteXLSX.AddParameter("x", ucrAvailableSheets.cboAvailableDataFrames.SelectedItem)
+                clsWriteXLSX.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsWriteXLSX)
         End Select
     End Sub
