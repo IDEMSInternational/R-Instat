@@ -1,19 +1,41 @@
-﻿Public Class UcrGeoms
+﻿
+' Instat-R
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License k
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Public Class UcrGeoms
     Public strGgParameterName As String
     Public strGgParameterValue As String
     Public lstAllGeoms As New List(Of Geoms)
     Public lstGgParameters As New List(Of RParameter)
-    Public clsCurrRFunction As New RFunction
+    Public clsGeomFunction As New RFunction
     Public clsCurrGeom As New Geoms
     Public lstFunctionParameters As New List(Of RParameter)
     Private bFirstLoad As Boolean = True
-
+    Public clsRaesFunction As New RFunction
     Private Sub UcrGeoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            InitialiseControl()
             CreateGeomList()
             SetGeoms()
             bFirstLoad = False
         End If
+    End Sub
+    Private Sub InitialiseControl()
+        clsRaesFunction.SetRCommand("aes")
+        clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
     End Sub
 
     Public Sub SetGeoms()
@@ -47,12 +69,12 @@
 
         clsgeom_boxplot.strGeomName = "geom_boxplot"
         clsgeom_boxplot.AddGgParameter("x")
+        clsgeom_boxplot.AddGgParameter("y")
         clsgeom_boxplot.AddGgParameter("fill")
         clsgeom_boxplot.AddGgParameter("colour")
         clsgeom_boxplot.AddGgParameter("shape")
         clsgeom_boxplot.AddGgParameter("lower")
         clsgeom_boxplot.AddGgParameter("middle")
-        clsgeom_boxplot.AddGgParameter("upper")
         lstAllGeoms.Add(clsgeom_boxplot)
 
 
@@ -75,13 +97,10 @@
         lstAllGeoms.Add(clsgeom_histogram)
 
     End Sub
-    Public Event cboGeomListIndexChanged(sender As Object, e As EventArgs)
+    Public Event GeomChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
         clsCurrGeom = lstAllGeoms(cboGeomList.SelectedIndex)
-        clsCurrRFunction.SetRCommand(clsCurrGeom.strGeomName)
-        'clsCurrRFunction.SetRCommand(cboGeomList.SelectedItem) 'i wonder what the difference is with previous line
-        RaiseEvent cboGeomListIndexChanged(sender, e)
-
+        clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
+        RaiseEvent GeomChanged(sender, e)
     End Sub
-
 End Class

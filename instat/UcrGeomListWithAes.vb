@@ -20,6 +20,7 @@ Public Class UcrGeomListWithParameters
     Public lstGgParameterUcr As New List(Of ucrReceiverSingle)
     Public lstCurrArguments As New List(Of String)
     Public bFirstLoad As Boolean = True
+    Public Event DataFrameChanged()
 
     Private Sub UcrGeomListWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -112,18 +113,68 @@ Public Class UcrGeomListWithParameters
         End If
     End Sub
 
-    Private Sub UcrGeomListWithParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.cboGeomListIndexChanged
+    Private Sub UcrGeomListWithParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
         SetParameters()
     End Sub
     Private Sub ucrReceiverParam1_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam1.SelectionChanged
-        AddParameter(lstCurrArguments(0), ucrReceiverParam1.GetVariableNames(False))
+        If Not ucrReceiverParam1.IsEmpty Then
+            clsRaesFunction.AddParameter(lstCurrArguments(0), ucrReceiverParam1.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName(lstCurrArguments(0))
+        End If
+        dlgGeneralForGraphics.TestOkEnabled()
     End Sub
 
     Private Sub ucrReceiverParam2_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam2.SelectionChanged
-        AddParameter(lstCurrArguments(1), ucrReceiverParam2.GetVariableNames(False))
+        If Not ucrReceiverParam2.IsEmpty Then
+            clsRaesFunction.AddParameter(lstCurrArguments(1), ucrReceiverParam2.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName(lstCurrArguments(1))
+        End If
+    End Sub
+    Private Sub ucrReceiverParam3_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam3.SelectionChanged
+        If Not ucrReceiverParam3.IsEmpty Then
+            clsRaesFunction.AddParameter(lstCurrArguments(2), ucrReceiverParam3.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName(lstCurrArguments(2))
+        End If
+
     End Sub
 
-    Private Sub ucrReceiverParam3_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam3.SelectionChanged
-        AddParameter(lstCurrArguments(2), ucrReceiverParam3.GetVariableNames(False))
+    Private Sub ucrReceiverParam4_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam4.SelectionChanged
+        If Not ucrReceiverParam4.IsEmpty Then
+            clsRaesFunction.AddParameter(lstCurrArguments(3), ucrReceiverParam4.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName(lstCurrArguments(3))
+        End If
+
+    End Sub
+    Private Sub ucrReceiverParam5_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam5.SelectionChanged
+        If Not ucrReceiverParam5.IsEmpty Then
+            clsRaesFunction.AddParameter(lstCurrArguments(4), ucrReceiverParam5.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName(lstCurrArguments(4))
+        End If
+    End Sub
+
+    Private Sub ucrReceiverParam6_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam6.SelectionChanged
+        If Not ucrReceiverParam6.IsEmpty Then
+            clsRaesFunction.AddParameter(lstCurrArguments(5), ucrReceiverParam6.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName(lstCurrArguments(5))
+        End If
+    End Sub
+
+    Private Sub ucrReceiverParam7_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam7.SelectionChanged
+        If Not ucrReceiverParam7.IsEmpty Then
+            clsRaesFunction.AddParameter(lstCurrArguments(6), ucrReceiverParam7.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName(lstCurrArguments(6))
+        End If
+    End Sub
+
+    Private Sub UcrSelector_DataFrameChanged() Handles UcrSelector.DataFrameChanged
+        clsGeomFunction.AddParameter("data", clsRFunctionParameter:=UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame)
+        ' RaiseEvent DataFrameChanged() do we need this?
     End Sub
 End Class
