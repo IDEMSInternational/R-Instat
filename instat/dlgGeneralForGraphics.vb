@@ -37,13 +37,13 @@ Public Class dlgGeneralForGraphics
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         'this sets the geoms andthe command to be used
-        UcrGeomListWithParameters1.SetGeoms()
+        ucrGeomListWithParameters1.SetGeoms()
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=UcrGeomListWithParameters1.clsGeomFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=ucrGeomListWithParameters1.clsGeomFunction)
     End Sub
 
     Private Sub SetDefaults()
-        UcrGeomListWithParameters1.UcrSelector.Reset()
+        ucrGeomListWithParameters1.UcrSelector.Reset()
         TestOkEnabled()
     End Sub
 
@@ -51,7 +51,7 @@ Public Class dlgGeneralForGraphics
 
     End Sub
     Public Sub TestOkEnabled()
-        If Not UcrGeomListWithParameters1.ucrReceiverParam1.IsEmpty Then
+        If Not ucrGeomListWithParameters1.ucrReceiverParam1.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
