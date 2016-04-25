@@ -15,19 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgGeneralForGraphics
-    Private clsRgeom_Function As New RFunction
     Private clsRggplotFunction As New RFunction
-    Private clsRaesFunction As New RFunction
-
     Private bFirstLoad As Boolean = True
     Public clsRSyntax As New RSyntax
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        clsrgeom_function.setrcommand(UcrGeomListWithParameters1.cboGeomList.SelectedItem)
-        clsraesfunction.setrcommand("aes")
-        clsrgeom_function.addparameter("mapping", clsrfunctionparameter:=clsraesfunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsrggplotfunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsrgeom_function)
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -45,27 +36,29 @@ Public Class dlgGeneralForGraphics
         'setting the base ggplot functions
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
-
         'this sets the geoms andthe command to be used
         UcrGeomListWithParameters1.SetGeoms()
-        ucrBase.clsRsyntax.clsBaseFunction = UcrGeomListWithParameters1.clsCurrRFunction
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=UcrGeomListWithParameters1.clsGeomFunction)
     End Sub
 
     Private Sub SetDefaults()
-
+        UcrGeomListWithParameters1.UcrSelector.Reset()
+        TestOkEnabled()
     End Sub
 
     Private Sub ReopenDialog()
 
     End Sub
-    Private Sub TestOkEnabled()
-
+    Public Sub TestOkEnabled()
+        If Not UcrGeomListWithParameters1.ucrReceiverParam1.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-    Private Sub UcrGeomListWithParameters1_cboGeomList(sender As Object, e As EventArgs) Handles UcrGeomListWithParameters1.cboGeomListIndexChanged
-        clsRgeom_Function.SetRCommand(UcrGeomListWithParameters1.cboGeomList.SelectedItem)
     End Sub
 End Class
