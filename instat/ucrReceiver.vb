@@ -17,10 +17,10 @@
 Imports instat.Translations
 Public Class ucrReceiver
     Public WithEvents Selector As ucrSelector
-    Public lstIncludeDataTypes As List(Of String)
-    Public lstExcludeDataTypes As List(Of String)
+    Public lstIncludedDataTypes As List(Of String)
+    Public lstExcludedDataTypes As List(Of String)
     Public bFirstLoad As Boolean = True
-    Public strDataType As String = ""
+    Public strSelectorHeading As String = "Available Variables"
 
     Public Overridable Sub AddSelected()
 
@@ -65,19 +65,20 @@ Public Class ucrReceiver
     Private Sub ucrReceiver_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         translateEach(Controls)
         If bFirstLoad Then
-            lstIncludeDataTypes = New List(Of String)
-            lstExcludeDataTypes = New List(Of String)
+            lstIncludedDataTypes = New List(Of String)
+            lstExcludedDataTypes = New List(Of String)
         End If
     End Sub
 
     Public Function GetIncludedDataTypes(Optional bWithQuotes As Boolean = True) As String
-        Return GetListAsRString(lstIncludeDataTypes, bWithQuotes)
+        Return GetListAsRString(lstIncludedDataTypes, bWithQuotes)
     End Function
 
     Public Function GetExcludedDataTypes(Optional bWithQuotes As Boolean = True) As String
-        Return GetListAsRString(lstExcludeDataTypes, bWithQuotes)
+        Return GetListAsRString(lstExcludedDataTypes, bWithQuotes)
     End Function
 
+    'TODO make this function available throughout project
     Public Function GetListAsRString(lstStrings As List(Of String), Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
         Dim i As Integer
@@ -116,11 +117,22 @@ Public Class ucrReceiver
         RaiseEvent ValueChanged(sender, e)
     End Sub
 
+    'TODO remove this method and replace with SetIncludedDataTypes
     Public Sub SetDataType(strTemp As String)
-        strDataType = strTemp
+        lstIncludedDataTypes.Add(strTemp)
         If Selector IsNot Nothing Then
             Selector.LoadList()
         End If
+    End Sub
+
+    Public Sub SetIncludedDataTypes(strInclude As String())
+        lstIncludedDataTypes.AddRange(strInclude)
+        lstExcludedDataTypes.Clear()
+    End Sub
+
+    Public Sub SetExcludedDataTypes(strExclude As String())
+        lstExcludedDataTypes.AddRange(strExclude)
+        lstIncludedDataTypes.Clear()
     End Sub
 
     Private Sub Selector_ResetAll() Handles Selector.ResetReceivers
