@@ -49,9 +49,6 @@ Public Class dlgConvertColumns
         ucrSelectorDataFrameColumns.Focus()
         rdoConvertLevels.Checked = True
         rdoFactor.Checked = True
-        rdoCharacter.Enabled = False
-        rdoInteger.Enabled = False
-        rdoNumeric.Enabled = False
         SetToFactorStatus(bToFactorOnly)
         TestOKEnabled()
     End Sub
