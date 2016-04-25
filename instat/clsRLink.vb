@@ -273,7 +273,7 @@ Public Class RLink
     End Sub
 
     Public Sub CreateNewInstatObject()
-        RunScript(strInstatDataObject & " <- instat_obj$new()")
+        RunScript(strInstatDataObject & " <- instat_object$new()")
         bInstatObjectExists = True
     End Sub
 
@@ -320,7 +320,7 @@ Public Class RLink
     Public Function GetDataFrameLength(strDataFrameName As String) As Integer
         Dim intLength As Integer
         If clsEngine IsNot Nothing Then
-            intLength = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$length_of_data(" & Chr(34) & strDataFrameName & Chr(34) & ")").AsInteger(0)
+            intLength = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_dataframe_length(" & Chr(34) & strDataFrameName & Chr(34) & ")").AsInteger(0)
         End If
         Return intLength
     End Function

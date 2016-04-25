@@ -30,7 +30,7 @@ Partial Class dlgMerge
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 294)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 194)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -46,6 +46,7 @@ Partial Class dlgMerge
         '
         Me.ucrReceiverMerge.Location = New System.Drawing.Point(276, 25)
         Me.ucrReceiverMerge.Name = "ucrReceiverMerge"
+        Me.ucrReceiverMerge.Selector = Nothing
         Me.ucrReceiverMerge.Size = New System.Drawing.Size(121, 128)
         Me.ucrReceiverMerge.TabIndex = 2
         '
@@ -63,7 +64,7 @@ Partial Class dlgMerge
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(433, 359)
+        Me.ClientSize = New System.Drawing.Size(433, 261)
         Me.Controls.Add(Me.lblVariables)
         Me.Controls.Add(Me.ucrReceiverMerge)
         Me.Controls.Add(Me.ucrDataFrameAddRemove)
