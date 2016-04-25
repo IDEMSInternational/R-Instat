@@ -26,6 +26,7 @@ Public Class dlgHistogram
     Private Sub dlgHistogram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             'setdefaults
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         Else
@@ -33,6 +34,11 @@ Public Class dlgHistogram
             ReopenDialog()
         End If
 
+
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRaesFunction.SetRCommand("aes")
@@ -40,23 +46,27 @@ Public Class dlgHistogram
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 118
-        ucrXReceiver.SetMeAsReceiver()
+        ucrFactorReceiver.Selector = ucrHistogramSelector
         ucrFactorReceiver.SetDataType("factor")
-        TestOkEnabled()
-        autoTranslate(Me)
-    End Sub
 
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+
+
+        ucrVariablesAsFactorforHist.SetFactorReceiver(ucrFactorReceiver)
+        ucrVariablesAsFactorforHist.SetSelector(ucrHistogramSelector)
+        ucrVariablesAsFactorforHist.SetDataType("numeric")
+    End Sub
     Private Sub ucrHistogramSelector_DataFrameChanged() Handles ucrHistogramSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrHistogramSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-    Private Sub ucrXReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrXReceiver.SelectionChanged
-        If Not ucrXReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName("x")
-        End If
-        TestOkEnabled()
+    Private Sub ucrXReceiver_SelectionChanged(sender As Object, e As EventArgs)
+        'If Not ucrXReceiver.IsEmpty Then
+        '    clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
+        'Else
+        '    clsRaesFunction.RemoveParameterByName("x")
+        'End If
+        'TestOkEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -103,7 +113,7 @@ Public Class dlgHistogram
 
     Private Sub TestOkEnabled()
         'tests when ok can be enabled
-        If ucrXReceiver.IsEmpty Then
+        If ucrVariablesAsFactorforHist.IsEmpty Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -113,10 +123,8 @@ Public Class dlgHistogram
 
     Private Sub SetDefaults()
         'seting Defaults for the dialog
-        ucrXReceiver.Selector = ucrHistogramSelector
-        ucrFactorReceiver.Selector = ucrHistogramSelector
-        ucrXReceiver.SetMeAsReceiver()
         ucrHistogramSelector.Reset()
+        ucrVariablesAsFactorforHist.ResetControl()
         rdoHistogram.Checked = True
         cmdHistogramOptions.Visible = True
         cmdDensityOptions.Visible = False
@@ -161,5 +169,15 @@ Public Class dlgHistogram
 
     Private Sub cmdDensityOptions_Click(sender As Object, e As EventArgs) Handles cmdDensityOptions.Click
         sdgDensityOptions.ShowDialog()
+    End Sub
+
+    Private Sub ucrVariablesAsFactorforHist_SelectionChanged() Handles ucrVariablesAsFactorforHist.SelectionChanged
+
+        If Not ucrVariablesAsFactorforHist.IsEmpty Then
+            clsRaesFunction.AddParameter("x", ucrVariablesAsFactorforHist.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("x")
+        End If
+        TestOkEnabled()
     End Sub
 End Class

@@ -23,7 +23,18 @@ Public Class dlgMerge
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+
     End Sub
 
     Private Sub InitialiseDialog()
@@ -35,5 +46,6 @@ Public Class dlgMerge
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
     End Sub
 End Class
