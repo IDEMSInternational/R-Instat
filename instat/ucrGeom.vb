@@ -66,6 +66,18 @@ Public Class ucrGeom
         Dim clsgeom_boxplot As New Geoms
         Dim clsgeom_dotplot As New Geoms
         Dim clsgeom_histogram As New Geoms
+        Dim clsgeom_bar As New Geoms
+
+
+
+        clsgeom_bar.strGeomName = "geom_bar"
+        clsgeom_bar.AddGgParameter("x")
+        clsgeom_bar.AddGgParameter("alpha")
+        clsgeom_bar.AddGgParameter("fill")
+        clsgeom_bar.AddGgParameter("colour")
+        clsgeom_bar.AddGgParameter("linetype")
+        clsgeom_bar.AddGgParameter("size")
+        lstAllGeoms.Add(clsgeom_bar)
 
         clsgeom_boxplot.strGeomName = "geom_boxplot"
         clsgeom_boxplot.AddGgParameter("x")
