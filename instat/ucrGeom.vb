@@ -63,12 +63,49 @@ Public Class ucrGeom
 
 
     Public Sub CreateGeomList()
-        Dim clsgeom_boxplot As New Geoms
-        Dim clsgeom_dotplot As New Geoms
-        Dim clsgeom_histogram As New Geoms
+        Dim clsgeom_abline As New Geoms
+        Dim clsgeom_area As New Geoms
         Dim clsgeom_bar As New Geoms
-
-
+        Dim clsgeom_bin2d As New Geoms
+        Dim clsgeom_blank As New Geoms
+        Dim clsgeom_boxplot As New Geoms
+        Dim clsgeom_contour As New Geoms
+        Dim clsgeom_count As New Geoms
+        Dim clsgeom_crossbar As New Geoms
+        Dim clsgeom_curve As New Geoms
+        Dim clsgeom_density As New Geoms
+        Dim clsgeom_density2d As New Geoms
+        Dim clsgeom_density_2d As New Geoms
+        Dim clsgeom_dotplot As New Geoms
+        Dim clsgeom_errorbar As New Geoms
+        Dim clsgeom_errorbarh As New Geoms
+        Dim clsgeom_freqpoly As New Geoms
+        Dim clsgeom_hex As New Geoms
+        Dim clsgeom_histogram As New Geoms
+        Dim clsgeom_hline As New Geoms
+        Dim clsgeom_jitter As New Geoms
+        Dim clsgeom_label As New Geoms
+        Dim clsgeom_line As New Geoms
+        Dim clsgeom_linerange As New Geoms
+        Dim clsgeom_map As New Geoms
+        Dim clsgeom_path As New Geoms
+        Dim clsgeom_point As New Geoms
+        Dim clsgeom_pointrange As New Geoms
+        Dim clsgeom_polygon As New Geoms
+        Dim clsgeom_qq As New Geoms
+        Dim clsgeom_quantile As New Geoms
+        Dim clsgeom_raster As New Geoms
+        Dim clsgeom_rect As New Geoms
+        Dim clsgeom_ribbon As New Geoms
+        Dim clsgeom_rug As New Geoms
+        Dim clsgeom_segment As New Geoms
+        Dim clsgeom_smooth As New Geoms
+        Dim clsgeom_spoke As New Geoms
+        Dim clsgeom_step As New Geoms
+        Dim clsgeom_text As New Geoms
+        Dim clsgeom_tile As New Geoms
+        Dim clsgeom_violin As New Geoms
+        Dim clsgeom_vline As New Geoms
 
         clsgeom_bar.strGeomName = "geom_bar"
         clsgeom_bar.AddGgParameter("x")
