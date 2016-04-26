@@ -1011,5 +1011,29 @@ Public Class frmMain
             frmCommand.txtCommand.Clear()
         End If
     End Sub
+
+    Private Sub mnuEditSelectAll_Click(sender As Object, e As EventArgs) Handles mnuEditSelectAll.Click
+        If ActiveMdiChild Is frmLog Then
+            frmLog.selectAllText()
+        ElseIf ActiveMdiChild Is frmCommand Then
+            frmCommand.selectAllText()
+        ElseIf ActiveMdiChild Is frmScript Then
+            frmScript.selectAllText()
+        ElseIf ActiveMdiChild Is frmEditor Then
+            'ToAdd later
+        End If
+    End Sub
+
+    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
+        If ActiveMdiChild Is frmLog Then
+            frmLog.copyText()
+        ElseIf ActiveMdiChild Is frmCommand Then
+            frmCommand.copyText()
+        ElseIf ActiveMdiChild Is frmScript Then
+            frmScript.copyText()
+        ElseIf ActiveMdiChild Is frmEditor Then
+            'ToAdd later
+        End If
+    End Sub
 End Class
 
