@@ -279,7 +279,7 @@ Public Class RLink
 
     Public Sub FillListView(lstView As ListView, Optional lstIncludedDataTypes As List(Of String) = Nothing, Optional lstExcludedDataTypes As List(Of String) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Available Variables")
         Dim vecColumns As GenericVector
-        Dim dfTemp As DataFrame
+        Dim chrCurrColumns As CharacterVector
         Dim i As Integer
         Dim grps As New ListViewGroup
         If bInstatObjectExists Then
@@ -288,19 +288,19 @@ Public Class RLink
             lstView.Columns.Add(strHeading)
             If strDataFrameName = "" Then
                 If lstIncludedDataTypes IsNot Nothing Then
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "get_column_names(include_type = " & GetListAsRString(lstIncludedDataTypes) & ", as_list = TRUE)").AsList
+                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(include_type = " & GetListAsRString(lstIncludedDataTypes) & ", as_list = TRUE)").AsList
                 ElseIf lstExcludedDataTypes IsNot Nothing Then
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "get_column_names(exclude_type = " & GetListAsRString(lstExcludedDataTypes) & ", as_list = TRUE)").AsList
+                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(exclude_type = " & GetListAsRString(lstExcludedDataTypes) & ", as_list = TRUE)").AsList
                 Else
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "get_column_names(as_list = TRUE)").AsList
+                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(as_list = TRUE)").AsList
                 End If
             Else
                 If lstIncludedDataTypes IsNot Nothing Then
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "get_column_names(data_name = " & Chr(34) & strDataFrameName & Chr(34) & "include_type = " & GetListAsRString(lstIncludedDataTypes) & ", as_list = TRUE)").AsList
+                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", include_type = " & GetListAsRString(lstIncludedDataTypes) & ", as_list = TRUE)").AsList
                 ElseIf lstExcludedDataTypes IsNot Nothing Then
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "get_column_names(data_name = " & Chr(34) & strDataFrameName & Chr(34) & "exclude_type = " & GetListAsRString(lstExcludedDataTypes) & ", as_list = TRUE)").AsList
+                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", exclude_type = " & GetListAsRString(lstExcludedDataTypes) & ", as_list = TRUE)").AsList
                 Else
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "data_name = " & Chr(34) & strDataFrameName & Chr(34) & "get_column_names(as_list = TRUE)").AsList
+                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", as_list = TRUE)").AsList
                 End If
 
             End If
@@ -314,9 +314,9 @@ Public Class RLink
                 If Not lstView.Groups.Contains(grps) Then
                     lstView.Groups.Add(grps)
                 End If
-                dfTemp = vecColumns(i).AsDataFrame()
-                For j = 0 To dfTemp.RowCount - 1
-                    lstView.Items.Add(dfTemp(j, 0)).Group = lstView.Groups(i)
+                chrCurrColumns = vecColumns(i).AsCharacter
+                For Each strCol As String In chrCurrColumns
+                    lstView.Items.Add(strCol).Group = lstView.Groups(i)
                 Next
             Next
             'TODO Find out how to get this to set automatically ( Width = -2 almost works)

@@ -38,6 +38,8 @@ Public Class ucrSelectorByDataFrame
                     frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=CurrentReceiver.lstIncludedDataTypes, strHeading:=CurrentReceiver.strSelectorHeading)
                 ElseIf CurrentReceiver.lstExcludedDataTypes.Count > 0 Then
                     frmMain.clsRLink.FillListView(lstAvailableVariable, lstExcludedDataTypes:=CurrentReceiver.lstExcludedDataTypes, strHeading:=CurrentReceiver.strSelectorHeading)
+                Else
+                    frmMain.clsRLink.FillListView(lstAvailableVariable, strHeading:=CurrentReceiver.strSelectorHeading)
                 End If
             End If
         End If

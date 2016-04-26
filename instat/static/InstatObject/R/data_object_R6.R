@@ -699,11 +699,13 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include_
   types = c("factor", "integer", "numeric", "logical", "character")
   if(!length(include_type) == 0) {
     if(!all(include_type %in% types)) stop(paste("include_type can only contain", paste(types, collapse = ", ")))
+    if("numeric" %in% include_type) include_type = c(include_type, "integer")
     if(!length(exclude_type) == 0) warning("exclude_type argument will be ignored. Only one of include_type and exclude_type should be specified.")
     out = names(private$data)[sapply(private$data, class) %in% include_type]
   }
   else if(!length(exclude_type) == 0) {
     if(!all(exclude_type %in% types)) stop(paste("exclude_type can only contain", paste(types, collapse = ", ")))
+    if("numeric" %in% exclude_type) exclude_type = c(exclude_type, "integer")
     out = names(private$data)[!(sapply(private$data, class) %in% exclude_type)]
   }
   else out = names(private$data)
