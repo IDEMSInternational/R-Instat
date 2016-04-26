@@ -77,7 +77,7 @@ Public Class ucrGeom
         Dim clsgeom_density_2d As New Geoms
         Dim clsgeom_dotplot As New Geoms
         Dim clsgeom_errorbar As New Geoms
-        Dim clsgeom_jitter As New Geoms
+        Dim clsgeom_errorbarh As New Geoms
         Dim clsgeom_freqpoly As New Geoms
         Dim clsgeom_hex As New Geoms
         Dim clsgeom_histogram As New Geoms
@@ -281,8 +281,6 @@ Public Class ucrGeom
         clsgeom_hline.AddGgParameter("")
         lstAllGeoms.Add(clsgeom_hline)
 
-
-
         clsgeom_jitter.strGeomName = "geom_jitter"
         clsgeom_jitter.AddGgParameter("")
         clsgeom_jitter.AddGgParameter("")
@@ -292,6 +290,205 @@ Public Class ucrGeom
         clsgeom_jitter.AddGgParameter("")
         lstAllGeoms.Add(clsgeom_jitter)
 
+        clsgeom_label.strGeomName = "geom_label"
+        clsgeom_label.AddGgParameter("")
+        clsgeom_label.AddGgParameter("")
+        clsgeom_label.AddGgParameter("")
+        clsgeom_label.AddGgParameter("")
+        clsgeom_label.AddGgParameter("")
+        clsgeom_label.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_label)
+
+
+        clsgeom_line.strGeomName = "geom_line"
+        clsgeom_line.AddGgParameter("")
+        clsgeom_line.AddGgParameter("")
+        clsgeom_line.AddGgParameter("")
+        clsgeom_line.AddGgParameter("")
+        clsgeom_line.AddGgParameter("")
+        clsgeom_line.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_line)
+
+
+        clsgeom_linerange.strGeomName = "geom_linerange"
+        clsgeom_linerange.AddGgParameter("")
+        clsgeom_linerange.AddGgParameter("")
+        clsgeom_linerange.AddGgParameter("")
+        clsgeom_linerange.AddGgParameter("")
+        clsgeom_linerange.AddGgParameter("")
+        clsgeom_linerange.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_linerange)
+
+        clsgeom_map.strGeomName = "geom_map"
+        clsgeom_map.AddGgParameter("")
+        clsgeom_map.AddGgParameter("")
+        clsgeom_map.AddGgParameter("")
+        clsgeom_map.AddGgParameter("")
+        clsgeom_map.AddGgParameter("")
+        clsgeom_map.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_map)
+
+        clsgeom_path.strGeomName = "geom_path"
+        clsgeom_path.AddGgParameter("")
+        clsgeom_path.AddGgParameter("")
+        clsgeom_path.AddGgParameter("")
+        clsgeom_path.AddGgParameter("")
+        clsgeom_path.AddGgParameter("")
+        clsgeom_path.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_path)
+
+        clsgeom_point.strGeomName = "geom_point"
+        clsgeom_point.AddGgParameter("")
+        clsgeom_point.AddGgParameter("")
+        clsgeom_point.AddGgParameter("")
+        clsgeom_point.AddGgParameter("")
+        clsgeom_point.AddGgParameter("")
+        clsgeom_point.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_point)
+
+        clsgeom_pointrange.strGeomName = "geom_pointrange"
+        clsgeom_pointrange.AddGgParameter("")
+        clsgeom_pointrange.AddGgParameter("")
+        clsgeom_pointrange.AddGgParameter("")
+        clsgeom_pointrange.AddGgParameter("")
+        clsgeom_pointrange.AddGgParameter("")
+        clsgeom_pointrange.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_pointrange)
+
+        clsgeom_polygon.strGeomName = "geom_polygon"
+        clsgeom_polygon.AddGgParameter("")
+        clsgeom_polygon.AddGgParameter("")
+        clsgeom_polygon.AddGgParameter("")
+        clsgeom_polygon.AddGgParameter("")
+        clsgeom_polygon.AddGgParameter("")
+        clsgeom_polygon.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_polygon)
+
+        clsgeom_qq.strGeomName = "geom_qq"
+        clsgeom_qq.AddGgParameter("")
+        clsgeom_qq.AddGgParameter("")
+        clsgeom_qq.AddGgParameter("")
+        clsgeom_qq.AddGgParameter("")
+        clsgeom_qq.AddGgParameter("")
+        clsgeom_qq.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_qq)
+
+        clsgeom_quantile.strGeomName = "geom_label"
+        clsgeom_quantile.AddGgParameter("")
+        clsgeom_quantile.AddGgParameter("")
+        clsgeom_quantile.AddGgParameter("")
+        clsgeom_quantile.AddGgParameter("")
+        clsgeom_quantile.AddGgParameter("")
+        clsgeom_quantile.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_quantile)
+
+        clsgeom_raster.strGeomName = "geom_label"
+        clsgeom_raster.AddGgParameter("")
+        clsgeom_raster.AddGgParameter("")
+        clsgeom_raster.AddGgParameter("")
+        clsgeom_raster.AddGgParameter("")
+        clsgeom_raster.AddGgParameter("")
+        clsgeom_raster.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_raster)
+
+        clsgeom_rect.strGeomName = "geom_rect"
+        clsgeom_rect.AddGgParameter("")
+        clsgeom_rect.AddGgParameter("")
+        clsgeom_rect.AddGgParameter("")
+        clsgeom_rect.AddGgParameter("")
+        clsgeom_rect.AddGgParameter("")
+        clsgeom_rect.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_rect)
+
+        clsgeom_ribbon.strGeomName = "geom_ribbon"
+        clsgeom_ribbon.AddGgParameter("")
+        clsgeom_ribbon.AddGgParameter("")
+        clsgeom_ribbon.AddGgParameter("")
+        clsgeom_ribbon.AddGgParameter("")
+        clsgeom_ribbon.AddGgParameter("")
+        clsgeom_ribbon.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_ribbon)
+
+        clsgeom_rug.strGeomName = "geom_rug"
+        clsgeom_rug.AddGgParameter("")
+        clsgeom_rug.AddGgParameter("")
+        clsgeom_rug.AddGgParameter("")
+        clsgeom_rug.AddGgParameter("")
+        clsgeom_rug.AddGgParameter("")
+        clsgeom_rug.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_rug)
+
+        clsgeom_segment.strGeomName = "geom_segment"
+        clsgeom_segment.AddGgParameter("")
+        clsgeom_segment.AddGgParameter("")
+        clsgeom_segment.AddGgParameter("")
+        clsgeom_segment.AddGgParameter("")
+        clsgeom_segment.AddGgParameter("")
+        clsgeom_segment.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_segment)
+
+        clsgeom_smooth.strGeomName = "geom_smooth"
+        clsgeom_smooth.AddGgParameter("")
+        clsgeom_smooth.AddGgParameter("")
+        clsgeom_smooth.AddGgParameter("")
+        clsgeom_smooth.AddGgParameter("")
+        clsgeom_smooth.AddGgParameter("")
+        clsgeom_smooth.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_smooth)
+
+        clsgeom_spoke.strGeomName = "geom_spoke"
+        clsgeom_spoke.AddGgParameter("")
+        clsgeom_spoke.AddGgParameter("")
+        clsgeom_spoke.AddGgParameter("")
+        clsgeom_spoke.AddGgParameter("")
+        clsgeom_spoke.AddGgParameter("")
+        clsgeom_spoke.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_spoke)
+
+        clsgeom_step.strGeomName = "geom_step"
+        clsgeom_step.AddGgParameter("")
+        clsgeom_step.AddGgParameter("")
+        clsgeom_step.AddGgParameter("")
+        clsgeom_step.AddGgParameter("")
+        clsgeom_step.AddGgParameter("")
+        clsgeom_step.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_step)
+
+        clsgeom_text.strGeomName = "geom_text"
+        clsgeom_text.AddGgParameter("")
+        clsgeom_text.AddGgParameter("")
+        clsgeom_text.AddGgParameter("")
+        clsgeom_text.AddGgParameter("")
+        clsgeom_text.AddGgParameter("")
+        clsgeom_text.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_text)
+
+        clsgeom_tile.strGeomName = "geom_tile"
+        clsgeom_tile.AddGgParameter("")
+        clsgeom_tile.AddGgParameter("")
+        clsgeom_tile.AddGgParameter("")
+        clsgeom_tile.AddGgParameter("")
+        clsgeom_tile.AddGgParameter("")
+        clsgeom_tile.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_tile)
+
+        clsgeom_violin.strGeomName = "geom_violin"
+        clsgeom_violin.AddGgParameter("")
+        clsgeom_violin.AddGgParameter("")
+        clsgeom_violin.AddGgParameter("")
+        clsgeom_violin.AddGgParameter("")
+        clsgeom_violin.AddGgParameter("")
+        clsgeom_violin.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_violin)
+
+        clsgeom_vline.strGeomName = "geom_vline"
+        clsgeom_vline.AddGgParameter("")
+        clsgeom_vline.AddGgParameter("")
+        clsgeom_vline.AddGgParameter("")
+        clsgeom_vline.AddGgParameter("")
+        clsgeom_vline.AddGgParameter("")
+        clsgeom_vline.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_vline)
     End Sub
     Public Event GeomChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
