@@ -35,11 +35,11 @@ Public Class ucrSelectorByDataFrame
         If ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             If CurrentReceiver IsNot Nothing Then
                 If CurrentReceiver.lstIncludedDataTypes.Count > 0 Then
-                    frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=CurrentReceiver.lstIncludedDataTypes, strHeading:=CurrentReceiver.strSelectorHeading)
+                    frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=CurrentReceiver.lstIncludedDataTypes, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text, strHeading:=CurrentReceiver.strSelectorHeading)
                 ElseIf CurrentReceiver.lstExcludedDataTypes.Count > 0 Then
-                    frmMain.clsRLink.FillListView(lstAvailableVariable, lstExcludedDataTypes:=CurrentReceiver.lstExcludedDataTypes, strHeading:=CurrentReceiver.strSelectorHeading)
+                    frmMain.clsRLink.FillListView(lstAvailableVariable, lstExcludedDataTypes:=CurrentReceiver.lstExcludedDataTypes, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text, strHeading:=CurrentReceiver.strSelectorHeading)
                 Else
-                    frmMain.clsRLink.FillListView(lstAvailableVariable, strHeading:=CurrentReceiver.strSelectorHeading)
+                    frmMain.clsRLink.FillListView(lstAvailableVariable, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text, strHeading:=CurrentReceiver.strSelectorHeading)
                 End If
             End If
         End If
