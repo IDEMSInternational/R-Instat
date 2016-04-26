@@ -36,6 +36,7 @@ Public Class ucrDataFrame
         Else
             cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strCurrentDataFrame)
         End If
+        SetDataFrameProperties()
     End Sub
 
     Public Event DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String)
