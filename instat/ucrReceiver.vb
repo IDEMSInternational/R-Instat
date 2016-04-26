@@ -67,6 +67,7 @@ Public Class ucrReceiver
         If bFirstLoad Then
             lstIncludedDataTypes = New List(Of String)
             lstExcludedDataTypes = New List(Of String)
+            bFirstLoad = False
         End If
     End Sub
 
@@ -128,11 +129,17 @@ Public Class ucrReceiver
     Public Sub SetIncludedDataTypes(strInclude As String())
         lstIncludedDataTypes.AddRange(strInclude)
         lstExcludedDataTypes.Clear()
+        If Selector IsNot Nothing Then
+            Selector.LoadList()
+        End If
     End Sub
 
     Public Sub SetExcludedDataTypes(strExclude As String())
         lstExcludedDataTypes.AddRange(strExclude)
         lstIncludedDataTypes.Clear()
+        If Selector IsNot Nothing Then
+            Selector.LoadList()
+        End If
     End Sub
 
     Private Sub Selector_ResetAll() Handles Selector.ResetReceivers
