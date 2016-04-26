@@ -77,7 +77,7 @@ Public Class ucrGeom
         Dim clsgeom_density_2d As New Geoms
         Dim clsgeom_dotplot As New Geoms
         Dim clsgeom_errorbar As New Geoms
-        Dim clsgeom_errorbarh As New Geoms
+        Dim clsgeom_jitter As New Geoms
         Dim clsgeom_freqpoly As New Geoms
         Dim clsgeom_hex As New Geoms
         Dim clsgeom_histogram As New Geoms
@@ -116,6 +116,14 @@ Public Class ucrGeom
         clsgeom_abline.AddGgParameter("")
         lstAllGeoms.Add(clsgeom_abline)
 
+        clsgeom_area.strGeomName = "geom_area"
+        clsgeom_area.AddGgParameter("")
+        clsgeom_area.AddGgParameter("")
+        clsgeom_area.AddGgParameter("")
+        clsgeom_area.AddGgParameter("")
+        clsgeom_area.AddGgParameter("")
+        clsgeom_area.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_area)
 
         clsgeom_bar.strGeomName = "geom_bar"
         clsgeom_bar.AddGgParameter("x")
@@ -125,6 +133,15 @@ Public Class ucrGeom
         clsgeom_bar.AddGgParameter("linetype")
         clsgeom_bar.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_bar)
+
+        clsgeom_bin2d.strGeomName = "geom_bin2d"
+        clsgeom_bin2d.AddGgParameter("")
+        clsgeom_bin2d.AddGgParameter("")
+        clsgeom_bin2d.AddGgParameter("")
+        clsgeom_bin2d.AddGgParameter("")
+        clsgeom_bin2d.AddGgParameter("")
+        clsgeom_bin2d.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_bin2d)
 
         clsgeom_boxplot.strGeomName = "geom_boxplot"
         clsgeom_boxplot.AddGgParameter("x")
@@ -136,6 +153,68 @@ Public Class ucrGeom
         clsgeom_boxplot.AddGgParameter("middle")
         lstAllGeoms.Add(clsgeom_boxplot)
 
+        clsgeom_contour.strGeomName = "geom_contour"
+        clsgeom_contour.AddGgParameter("")
+        clsgeom_contour.AddGgParameter("")
+        clsgeom_contour.AddGgParameter("")
+        clsgeom_contour.AddGgParameter("")
+        clsgeom_contour.AddGgParameter("")
+        clsgeom_contour.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_contour)
+
+        clsgeom_count.strGeomName = "geom_count"
+        clsgeom_count.AddGgParameter("")
+        clsgeom_count.AddGgParameter("")
+        clsgeom_count.AddGgParameter("")
+        clsgeom_count.AddGgParameter("")
+        clsgeom_count.AddGgParameter("")
+        clsgeom_count.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_count)
+
+        clsgeom_crossbar.strGeomName = "geom_crossbar"
+        clsgeom_crossbar.AddGgParameter("")
+        clsgeom_crossbar.AddGgParameter("")
+        clsgeom_crossbar.AddGgParameter("")
+        clsgeom_crossbar.AddGgParameter("")
+        clsgeom_crossbar.AddGgParameter("")
+        clsgeom_crossbar.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_crossbar)
+
+        clsgeom_curve.strGeomName = "geom_curve"
+        clsgeom_curve.AddGgParameter("")
+        clsgeom_curve.AddGgParameter("")
+        clsgeom_curve.AddGgParameter("")
+        clsgeom_curve.AddGgParameter("")
+        clsgeom_curve.AddGgParameter("")
+        clsgeom_curve.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_curve)
+
+        clsgeom_density.strGeomName = "geom_density"
+        clsgeom_density.AddGgParameter("")
+        clsgeom_density.AddGgParameter("")
+        clsgeom_density.AddGgParameter("")
+        clsgeom_density.AddGgParameter("")
+        clsgeom_density.AddGgParameter("")
+        clsgeom_density.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_density)
+
+        clsgeom_density2d.strGeomName = "geom_density2d"
+        clsgeom_density2d.AddGgParameter("")
+        clsgeom_density2d.AddGgParameter("")
+        clsgeom_density2d.AddGgParameter("")
+        clsgeom_density2d.AddGgParameter("")
+        clsgeom_density2d.AddGgParameter("")
+        clsgeom_density2d.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_density2d)
+
+        clsgeom_density_2d.strGeomName = "geom_density_2d"
+        clsgeom_density_2d.AddGgParameter("")
+        clsgeom_density_2d.AddGgParameter("")
+        clsgeom_density_2d.AddGgParameter("")
+        clsgeom_density_2d.AddGgParameter("")
+        clsgeom_density_2d.AddGgParameter("")
+        clsgeom_density_2d.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_density_2d)
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
         clsgeom_dotplot.AddGgParameter("x")
@@ -146,6 +225,43 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_dotplot)
 
 
+        clsgeom_errorbar.strGeomName = "geom_errorbar"
+        clsgeom_errorbar.AddGgParameter("")
+        clsgeom_errorbar.AddGgParameter("")
+        clsgeom_errorbar.AddGgParameter("")
+        clsgeom_errorbar.AddGgParameter("")
+        clsgeom_errorbar.AddGgParameter("")
+        clsgeom_errorbar.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_errorbar)
+
+        clsgeom_jitter.strGeomName = "geom_errorbarh"
+        clsgeom_jitter.AddGgParameter("")
+        clsgeom_jitter.AddGgParameter("")
+        clsgeom_jitter.AddGgParameter("")
+        clsgeom_jitter.AddGgParameter("")
+        clsgeom_jitter.AddGgParameter("")
+        clsgeom_jitter.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_jitter)
+
+        clsgeom_freqpoly.strGeomName = "geom_freqpoly"
+        clsgeom_freqpoly.AddGgParameter("")
+        clsgeom_freqpoly.AddGgParameter("")
+        clsgeom_freqpoly.AddGgParameter("")
+        clsgeom_freqpoly.AddGgParameter("")
+        clsgeom_freqpoly.AddGgParameter("")
+        clsgeom_freqpoly.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_freqpoly)
+
+
+        clsgeom_hex.strGeomName = "geom_hex"
+        clsgeom_hex.AddGgParameter("")
+        clsgeom_hex.AddGgParameter("")
+        clsgeom_hex.AddGgParameter("")
+        clsgeom_hex.AddGgParameter("")
+        clsgeom_hex.AddGgParameter("")
+        clsgeom_hex.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_hex)
+
         clsgeom_histogram.strGeomName = "geom_histogram"
         clsgeom_histogram.AddGgParameter("x")
         clsgeom_histogram.AddGgParameter("alpha")
@@ -154,6 +270,27 @@ Public Class ucrGeom
         clsgeom_histogram.AddGgParameter("linetype")
         clsgeom_histogram.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_histogram)
+
+
+        clsgeom_hline.strGeomName = "geom_hline"
+        clsgeom_hline.AddGgParameter("")
+        clsgeom_hline.AddGgParameter("")
+        clsgeom_hline.AddGgParameter("")
+        clsgeom_hline.AddGgParameter("")
+        clsgeom_hline.AddGgParameter("")
+        clsgeom_hline.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_hline)
+
+
+
+        clsgeom_jitter.strGeomName = "geom_jitter"
+        clsgeom_jitter.AddGgParameter("")
+        clsgeom_jitter.AddGgParameter("")
+        clsgeom_jitter.AddGgParameter("")
+        clsgeom_jitter.AddGgParameter("")
+        clsgeom_jitter.AddGgParameter("")
+        clsgeom_jitter.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_jitter)
 
     End Sub
     Public Event GeomChanged(sender As Object, e As EventArgs)
