@@ -7,13 +7,11 @@
         End If
     End Sub
 
-    Private Sub txtLog_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLog.KeyDown
-        If e.Control And e.KeyCode = Keys.A Then
-            txtLog.SelectAll()
-        End If
+    Public Sub copyText()
+        txtLog.Copy()
+    End Sub
 
-        If e.Control And e.KeyCode = Keys.C And txtLog.SelectedText <> "" Then
-            txtLog.Copy()
-        End If
+    Public Sub selectAllText()
+        txtLog.SelectAll()
     End Sub
 End Class
