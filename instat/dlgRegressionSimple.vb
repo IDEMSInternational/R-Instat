@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
-    Dim clsModel As New ROperator
+    Public clsModel As New ROperator
     Public clsRConvert As New RFunction
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
 
@@ -52,10 +52,15 @@ Public Class dlgRegressionSimple
         chkSaveModel.Checked = True
         ucrModelName.Visible = True
         ucrFamily.Enabled = False
+        chkConvertToVariate.Checked = False
+        chkConvertToVariate.Visible = False
+        chkFunction.Checked = False
+        chkFunction.Visible = False
         'TODO get this to be getting a default name e.g. reg1, reg2, etc.
         '     will be possible with new textbox user control
         ucrModelName.SetName("reg")
         sdgSimpleRegOptions.SetDefaults()
+        sdgModelOptions.SetDefaults()
         TestOKEnabled()
     End Sub
 
@@ -78,8 +83,14 @@ Public Class dlgRegressionSimple
 
     Private Sub ResponseConvert()
         If Not ucrResponse.IsEmpty Then
+            ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+            If ucrFamily.strDatatype = "numeric" Then
+                chkConvertToVariate.Checked = False
+                chkConvertToVariate.Visible = False
+            Else
+                chkConvertToVariate.Visible = True
+            End If
             If chkConvertToVariate.Checked Then
-                Dim asnumeric As String = "TRUE"
                 clsRConvert.SetRCommand("as.numeric")
                 clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
                 clsModel.SetParameter(True, clsRFunc:=clsRConvert)
@@ -104,8 +115,29 @@ Public Class dlgRegressionSimple
         ResponseConvert()
     End Sub
 
+    Private Sub ExplanatoryFunctionSelect()
+        Dim strExplanatoryType As String
+        If Not ucrExplanatory.IsEmpty Then
+            strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+            If strExplanatoryType = "numeric" Or strExplanatoryType = "positive integer" Or strExplanatoryType = "integer" Then
+                chkFunction.Visible = True
+
+            Else
+                chkFunction.Checked = False
+                chkFunction.Visible = False
+            End If
+            If chkFunction.Checked Then
+                sdgModelOptions.ModelFunction()
+            Else
+                clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+            End If
+        End If
+    End Sub
     Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
-        clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+
+        ExplanatoryFunctionSelect()
+        'sdgModelOptions.ModelFunction()
+        'clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
@@ -151,4 +183,10 @@ Public Class dlgRegressionSimple
         End If
     End Sub
 
+    Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
+        If chkFunction.Checked Then
+            sdgModelOptions.ShowDialog()
+        End If
+        ExplanatoryFunctionSelect()
+    End Sub
 End Class
