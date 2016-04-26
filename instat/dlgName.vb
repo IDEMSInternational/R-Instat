@@ -74,7 +74,7 @@ Public Class dlgName
     Private Sub ucrReceiverName_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverName.SelectionChanged
         If Not ucrReceiverName.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("column_name", ucrReceiverName.GetVariableNames)
-            ucrInputNewName.txtInput.Text = ucrReceiverName.GetVariableNames(bWithQuotes:=False)
+            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
         Else
             ucrBase.clsRsyntax.RemoveParameter("column_name")
         End If
