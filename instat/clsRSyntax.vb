@@ -23,7 +23,6 @@ Public Class RSyntax
     Public iCallType As Integer = 0
     Public strScript As String
     Public i As Integer
-    Public strAssignTo As String
     Public bExcludeAssignedFunctionOutput As Boolean = True
 
     Public Sub SetFunction(strFunctionName As String, Optional ByRef clsFunction As RFunction = Nothing)
@@ -31,6 +30,12 @@ Public Class RSyntax
             clsFunction = clsBaseFunction
         End If
         clsFunction.SetRCommand(strFunctionName)
+        bUseBaseFunction = True
+        bUseBaseOperator = False
+    End Sub
+
+    Public Sub SetBaseRFunction(clsFunction As RFunction)
+        clsBaseFunction = clsFunction
         bUseBaseFunction = True
         bUseBaseOperator = False
     End Sub

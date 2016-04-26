@@ -17,67 +17,90 @@ Imports instat.Translations
 
 Public Class dlgConvertColumns
     Public bFirstLoad As Boolean = True
+    Public bToFactorOnly As Boolean = False
 
     Private Sub ucrSelectorDataFrameColumns_Load(sender As Object, e As EventArgs) Handles ucrSelectorDataFrameColumns.Load
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
-
-        ucrReceiverColumnsToConvert.Selector = ucrSelectorDataFrameColumns
         autoTranslate(Me)
-        ucrBase.iHelpTopicID = 34
 
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-
+        Else
+            ReopenDialog()
         End If
 
-        rdoCharacter.Enabled = False
-        rdoInteger.Enabled = False
-        rdoNumeric.Enabled = False
         TestOKEnabled()
 
+    End Sub
+    Private Sub ReopenDialog()
+        SetToFactorStatus(bToFactorOnly)
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        ucrReceiverColumnsToConvert.Selector = ucrSelectorDataFrameColumns
+        ucrReceiverColumnsToConvert.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 34
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorDataFrameColumns.Reset()
         ucrSelectorDataFrameColumns.Focus()
-        ucrReceiverColumnsToConvert.SetMeAsReceiver()
-        rdoByLevels.Checked = True
+        rdoConvertLevels.Checked = True
         rdoFactor.Checked = True
+        SetToFactorStatus(bToFactorOnly)
         TestOKEnabled()
     End Sub
 
+    Private Sub SetToFactorStatus(bToFactorOnly As Boolean)
+        If bToFactorOnly Then
+            rdoFactor.Checked = True
+            rdoCharacter.Enabled = False
+            rdoInteger.Enabled = False
+            rdoNumeric.Enabled = False
+        Else
+            rdoCharacter.Enabled = True
+            rdoInteger.Enabled = True
+            rdoNumeric.Enabled = True
+        End If
+
+    End Sub
     Private Sub ucrSelectorDataFrameolumns_DataFrameChanged() Handles ucrSelectorDataFrameColumns.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorDataFrameColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
 
     End Sub
 
     Private Sub ucrReceiverColumnsToConvert_SelectionChanged() Handles ucrReceiverColumnsToConvert.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverColumnsToConvert.GetVariableNames)
+        If Not ucrReceiverColumnsToConvert.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverColumnsToConvert.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_names")
+        End If
         TestOKEnabled()
     End Sub
 
     Private Sub grpForConvertToType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFactor.CheckedChanged, rdoNumeric.CheckedChanged, rdoCharacter.CheckedChanged, rdoInteger.CheckedChanged
         If rdoFactor.Checked Then
-            grpFactorToNumeric.Visible = False
+            grpFactorToNumericOptions.Visible = False
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
             TestOKEnabled()
 
         ElseIf rdoNumeric.Checked Then
-            grpFactorToNumeric.Visible = True
+            grpFactorToNumericOptions.Visible = True
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
             TestOKEnabled()
         ElseIf rdoCharacter.Checked Then
-            grpFactorToNumeric.Visible = False
+            grpFactorToNumericOptions.Visible = False
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "character" & Chr(34))
             TestOKEnabled()
         ElseIf rdoInteger.Checked Then
-            grpFactorToNumeric.Visible = False
+            grpFactorToNumericOptions.Visible = False
             ucrBase.clsRsyntax.AddParameter("to_type", Chr(34) & "integer" & Chr(34))
             TestOKEnabled()
         Else
             ucrBase.clsRsyntax.RemoveParameter("to_type")
-            grpFactorToNumeric.Visible = False
+            grpFactorToNumericOptions.Visible = False
 
             'the else case should never happen but is there just in case
         End If
@@ -97,8 +120,8 @@ Public Class dlgConvertColumns
             ucrBase.OKEnabled(False)
         End If
     End Sub
-    Private Sub rdoByLevelsAndrdoByOrdinals_CheckedChanged(sender As Object, e As EventArgs) Handles rdoByLevels.CheckedChanged, rdoByOrdinals.CheckedChanged
-        If rdoByLevels.Checked = True Then
+    Private Sub rdoByLevelsAndrdoByOrdinals_CheckedChanged(sender As Object, e As EventArgs) Handles rdoConvertLevels.CheckedChanged, rdoConvertOrdinals.CheckedChanged
+        If rdoConvertLevels.Checked = True Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 ucrBase.clsRsyntax.AddParameter("factor_numeric", Chr(34) & "by_levels" & Chr(34))
 
@@ -107,7 +130,7 @@ Public Class dlgConvertColumns
                 ucrBase.clsRsyntax.RemoveParameter("factor_numeric")
             End If
 
-        ElseIf rdoByOrdinals.Checked = True Then
+        ElseIf rdoConvertOrdinals.Checked = True Then
             ucrBase.clsRsyntax.AddParameter("factor_numeric", Chr(34) & "by_ordinals" & Chr(34))
         Else
             ucrBase.clsRsyntax.RemoveParameter("factor_numeric")

@@ -19,6 +19,8 @@ Imports unvell.ReoGrid.CellTypes
 Imports unvell.ReoGrid.Events
 
 Public Class ucrFactor
+    Public Event SelectedLevelChanged()
+    Public Event GridContentChanged()
     Public WithEvents clsReceiver As ucrReceiverSingle
     Public WithEvents shtCurrSheet As unvell.ReoGrid.Worksheet
     Public clsRSyntax As New RSyntax
@@ -26,6 +28,7 @@ Public Class ucrFactor
     Public bIsMultipleSelector As Boolean = False
     Public iSelectorColumnIndex As Integer = -1
     Public strSelectorColumnName As String = "Select Level"
+    Dim bIsEditable As Boolean = False
 
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
@@ -54,6 +57,13 @@ Public Class ucrFactor
         RefreshFactorData()
     End Sub
 
+    Public Sub SetEditableStatus(bEditable As Boolean)
+        bIsEditable = bEditable
+        If shtCurrSheet IsNot Nothing Then
+            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, Not bEditable)
+        End If
+    End Sub
+
     Public Sub SetSelectorColumnName(strNewColumnName As String)
         strSelectorColumnName = strNewColumnName
         If iSelectorColumnIndex <> -1 Then
@@ -67,7 +77,7 @@ Public Class ucrFactor
         Dim dfTemp As CharacterMatrix
         Dim bShowGrid As Boolean = False
         grdFactorData.Worksheets.Clear()
-        If clsReceiver IsNot Nothing AndAlso clsReceiver.strDataType = "factor" AndAlso clsReceiver.GetVariableNames <> "" Then
+        If clsReceiver IsNot Nothing AndAlso clsReceiver.strDataType = "factor" AndAlso Not clsReceiver.IsEmpty() Then
             dfTemp = frmMain.clsRLink.GetData(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & clsReceiver.GetDataName() & Chr(34) & ", col_name = " & clsReceiver.GetVariableNames() & ")")
             frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
             shtCurrSheet = grdFactorData.CurrentWorksheet
@@ -81,6 +91,7 @@ Public Class ucrFactor
                     InitialiseSelected()
                 Else
                     shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
+                    shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).DefaultCellBody = GetType(RadioButtonCell)
                     InitialiseSelected()
                     Dim rgpselectcolumn As New RadioButtonGroup
                     For i = 0 To shtCurrSheet.RowCount - 1
@@ -94,6 +105,9 @@ Public Class ucrFactor
             iSelectorColumnIndex = -1
         End If
         grdFactorData.Visible = bShowGrid
+        If shtCurrSheet IsNot Nothing Then
+            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, Not bIsEditable)
+        End If
     End Sub
 
     Private Sub clsReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles clsReceiver.SelectionChanged
@@ -101,11 +115,16 @@ Public Class ucrFactor
     End Sub
 
     Private Sub InitialiseSelected()
-        'sets the Default As unchecked, cells may be blank otherwise
+        'sets the default as the reference level (always first level)
+        'TODO are there other initial selections needed?
         Dim i As Integer
         If iSelectorColumnIndex <> -1 Then
             For i = 0 To shtCurrSheet.RowCount - 1
-                shtCurrSheet(i, iSelectorColumnIndex) = True
+                If i = 0 Then
+                    shtCurrSheet(i, iSelectorColumnIndex) = True
+                Else
+                    shtCurrSheet(i, iSelectorColumnIndex) = False
+                End If
             Next
         End If
     End Sub
@@ -116,16 +135,18 @@ Public Class ucrFactor
         Dim checked As Boolean
         Dim iCount As Integer = 0
         For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
-            checked = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
+            If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
+                checked = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
 
-            If checked Then
-                If iCount = 1 Then
-                    strTemp = "c(" & strTemp & ","
-                ElseIf iCount > 1 Then
-                    strTemp = strTemp & ","
+                If checked Then
+                    If iCount = 1 Then
+                        strTemp = "c(" & strTemp & ","
+                    ElseIf iCount > 1 Then
+                        strTemp = strTemp & ","
+                    End If
+                    strTemp = strTemp & Chr(34) & shtCurrSheet(i, 0) & Chr(34)
+                    iCount = iCount + 1
                 End If
-                strTemp = strTemp & Chr(34) & shtCurrSheet(i, 0) & Chr(34)
-                iCount = iCount + 1
             End If
         Next
         If iCount > 1 Then
@@ -136,16 +157,69 @@ Public Class ucrFactor
 
     Private Sub shtcurrsheet_celldatachanged(sender As Object, e As CellEventArgs) Handles shtCurrSheet.CellDataChanged
         Dim i As Integer
-        Dim checked As Boolean
-        For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
-            If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
-                checked = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
-                If checked Then
-                    shtCurrSheet.RowHeaders(i).Style.BackColor = Color.Blue
-                Else
-                    shtCurrSheet.RowHeaders(i).Style.BackColor = Color.White
+        Dim iSelected As Boolean
+        If e.Cell.Column = iSelectorColumnIndex Then
+            For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
+                If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
+                    iSelected = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
+                    If iSelected Then
+                        shtCurrSheet.RowHeaders(i).Style.BackColor = Color.Gold
+                    Else
+                        shtCurrSheet.RowHeaders(i).Style.BackColor = Color.White
+                    End If
                 End If
-            End If
-        Next
+            Next
+            RaiseEvent SelectedLevelChanged()
+        Else
+            RaiseEvent GridContentChanged()
+        End If
     End Sub
+
+    Public Function GetColumnInFactorSheet(iColumn As Integer, Optional bWithQuotes As Boolean = True)
+        Dim strTemp As String = ""
+
+        If shtCurrSheet IsNot Nothing Then
+            If shtCurrSheet.RowCount = 1 Then
+                If bWithQuotes Then
+                    strTemp = Chr(34) & shtCurrSheet(0, iColumn).ToString & Chr(34)
+                Else
+                    strTemp = shtCurrSheet(0, iColumn).ToString
+                End If
+            ElseIf shtCurrSheet.RowCount > 1 Then
+                strTemp = "c("
+                For i = 0 To shtCurrSheet.RowCount - 1
+                    If i > 0 Then
+                        strTemp = strTemp & ","
+                    End If
+                    If shtCurrSheet(i, iColumn).ToString <> "" Then
+                        If bWithQuotes Then
+                            strTemp = strTemp & Chr(34) & shtCurrSheet(i, iColumn).ToString & Chr(34)
+                        Else
+                            strTemp = strTemp & shtCurrSheet(i, iColumn).ToString
+                        End If
+                    End If
+                Next
+                strTemp = strTemp & ")"
+            End If
+        End If
+
+        Return strTemp
+    End Function
+
+    Public Function GetColumnInFactorSheet(strColumn As String, Optional bWithQuotes As Boolean = True)
+        Dim i As Integer
+        Dim iCol As Integer = -1
+        Dim strTemp As String = ""
+
+        If shtCurrSheet IsNot Nothing Then
+            For i = 0 To shtCurrSheet.ColumnCount - 1
+                If shtCurrSheet.ColumnHeaders(i).Text = strColumn Then
+                    iCol = i
+                    Exit For
+                End If
+            Next
+            If iCol <> -1 Then strTemp = GetColumnInFactorSheet(iCol, bWithQuotes)
+        End If
+        Return strTemp
+    End Function
 End Class

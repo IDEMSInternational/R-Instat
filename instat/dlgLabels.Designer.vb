@@ -31,7 +31,7 @@ Partial Class dlgLabels
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 275)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 253)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -48,7 +48,7 @@ Partial Class dlgLabels
         Me.ucrFactorLabels.AutoSize = True
         Me.ucrFactorLabels.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrFactorLabels.clsReceiver = Nothing
-        Me.ucrFactorLabels.Location = New System.Drawing.Point(260, 88)
+        Me.ucrFactorLabels.Location = New System.Drawing.Point(274, 66)
         Me.ucrFactorLabels.Name = "ucrFactorLabels"
         Me.ucrFactorLabels.shtCurrSheet = Nothing
         Me.ucrFactorLabels.Size = New System.Drawing.Size(267, 181)
@@ -57,7 +57,7 @@ Partial Class dlgLabels
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(271, 40)
+        Me.lblFactor.Location = New System.Drawing.Point(271, 18)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(37, 13)
         Me.lblFactor.TabIndex = 3
@@ -66,7 +66,7 @@ Partial Class dlgLabels
         '
         'ucrReceiverLabels
         '
-        Me.ucrReceiverLabels.Location = New System.Drawing.Point(274, 56)
+        Me.ucrReceiverLabels.Location = New System.Drawing.Point(274, 34)
         Me.ucrReceiverLabels.Name = "ucrReceiverLabels"
         Me.ucrReceiverLabels.Selector = Nothing
         Me.ucrReceiverLabels.Size = New System.Drawing.Size(106, 26)
@@ -76,7 +76,7 @@ Partial Class dlgLabels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(570, 340)
+        Me.ClientSize = New System.Drawing.Size(553, 314)
         Me.Controls.Add(Me.ucrReceiverLabels)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrFactorLabels)

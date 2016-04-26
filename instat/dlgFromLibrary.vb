@@ -46,25 +46,9 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub cmdLibraryCollection_Click(sender As Object, e As EventArgs) Handles cmdLibraryCollection.Click
-        Dim dlgOpenDialog As New OpenFileDialog
-        dlgOpenDialog.Title = "Import from library"
-        dlgOpenDialog.InitialDirectory = strLibraryPath
-        dlgOpenDialog.Filter = "RDS R-file (*.RDS)|*.RDS"
-        If Not frmMain.clsRLink.bInstatObjectExists Then
-            frmMain.clsRLink.CreateNewInstatObject()
-        End If
-        If dlgOpenDialog.ShowDialog = DialogResult.OK Then
-            loadData(dlgOpenDialog.FileName.Replace("\", "/"))
-            dlgOpenDialog.RestoreDirectory = True
-        End If
-        TestOkEnabled()
-    End Sub
-
-    Private Sub loadData(strFilePath As String)
-        ucrBase.clsRsyntax.SetFunction("readRDS")
-        ucrBase.clsRsyntax.SetAssignTo(frmMain.clsRLink.strInstatDataObject)
-        ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-        txtFilePath.Text = strFilePath
+        dlgImportDataset.bFromLibrary = True
+        dlgImportDataset.ShowDialog()
+        Me.Hide()
     End Sub
 
     Private Sub rdoDefaultDatasets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultDatasets.CheckedChanged, rdoInstatCollection.CheckedChanged
@@ -73,10 +57,10 @@ Public Class dlgFromLibrary
             cboPackages.Enabled = True
             lstCollection.Enabled = True
             grpCollection.Enabled = False
-        ElseIf rdoInstatCollection.Checked Then
-            If txtFilePath.Text <> "" Then
-                loadData(txtFilePath.Text)
+            If Not bFirstLoad Then
+                loadDatasets(cboPackages.SelectedItem.ToString)
             End If
+        ElseIf rdoInstatCollection.Checked Then
             lstCollection.Items.Clear()
             lstCollection.Enabled = False
             cboPackages.Enabled = False
@@ -133,17 +117,26 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub lstCollection_Click(sender As Object, e As EventArgs) Handles lstCollection.Click
-        ucrBase.clsRsyntax.SetAssignTo(lstCollection.SelectedItems(0).SubItems(0).Text, strTempDataframe:=lstCollection.SelectedItems(0).SubItems(0).Text)
-        ucrBase.clsRsyntax.AddParameter("x", lstCollection.SelectedItems(0).SubItems(0).Text)
+        ucrBase.clsRsyntax.SetAssignTo(chkString(lstCollection.SelectedItems(0).SubItems(0).Text), strTempDataframe:=chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
+        ucrBase.clsRsyntax.AddParameter("x", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 OrElse rdoInstatCollection.Checked AndAlso txtFilePath.Text <> "" Then
+        If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 OrElse rdoInstatCollection.Checked Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
+    Private Function chkString(ByVal strValue As String)
+        Dim strLength As Integer = strValue.IndexOf(" ")
+        If strLength = -1 Then
+            Return strValue
+        Else
+            Return strValue.Substring(0, strLength)
+        End If
+    End Function
 
 End Class

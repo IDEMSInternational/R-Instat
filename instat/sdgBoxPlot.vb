@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-
 Public Class sdgBoxPlot
     Public clsBoxplotFunction As RFunction
 
@@ -31,7 +30,6 @@ Public Class sdgBoxPlot
         chkNotchedBoxplot.Checked = False
         chkVariableWidth.Checked = False
     End Sub
-
     Private Sub chkVariableWidth_CheckedChanged(sender As Object, e As EventArgs) Handles chkVariableWidth.CheckedChanged
         If chkVariableWidth.Checked Then
             clsBoxplotFunction.AddParameter("varwidth", "TRUE")
@@ -47,7 +45,5 @@ Public Class sdgBoxPlot
             clsBoxplotFunction.RemoveParameterByName("notch")
         End If
     End Sub
-    Private Sub chkHorizontalBoxplot_CheckedChanged(sender As Object, e As EventArgs)
-        dlgBoxplot.SetOperator()
-    End Sub
+
 End Class
