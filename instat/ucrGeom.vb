@@ -61,7 +61,6 @@ Public Class ucrGeom
         End If
     End Sub
 
-
     Public Sub CreateGeomList()
         Dim clsgeom_abline As New Geoms
         Dim clsgeom_area As New Geoms
@@ -106,6 +105,17 @@ Public Class ucrGeom
         Dim clsgeom_tile As New Geoms
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
+
+
+        clsgeom_abline.strGeomName = "geom_abline"
+        clsgeom_abline.AddGgParameter("")
+        clsgeom_abline.AddGgParameter("")
+        clsgeom_abline.AddGgParameter("")
+        clsgeom_abline.AddGgParameter("")
+        clsgeom_abline.AddGgParameter("")
+        clsgeom_abline.AddGgParameter("")
+        lstAllGeoms.Add(clsgeom_abline)
+
 
         clsgeom_bar.strGeomName = "geom_bar"
         clsgeom_bar.AddGgParameter("x")
