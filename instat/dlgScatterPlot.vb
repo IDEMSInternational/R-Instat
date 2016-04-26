@@ -15,13 +15,56 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-
 Public Class dlgScatterPlot
     Private clsRggplotFunction As New RFunction
     Private clsRgeom_scatterplotFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private bFirstLoad As Boolean = True
-    Private Sub ucrPlotSelector_Load(sender As Object, e As EventArgs) Handles ucrScatterPlotSelector.Load
+
+    Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            'setdefauts
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        autoTranslate(Me)
+        TestOkEnabled()
+
+    End Sub
+
+    Private Sub ucrSelectorForScatter_DataFrameChanged() Handles ucrSelectorForScatter.DataFrameChanged
+        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForScatter.ucrAvailableDataFrames.clsCurrDataFrame)
+    End Sub
+
+    Private Sub ucrReceiverX_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverX.SelectionChanged
+
+        If Not ucrReceiverX.IsEmpty Then
+            clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("x")
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
+        If Not ucrFactorOptionalReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("color", ucrFactorOptionalReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("color")
+        End If
+    End Sub
+
+    Private Sub TestOkEnabled()
+        'tests when okay Is enable
+        If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactorForScatter.IsEmpty Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
+    End Sub
+
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRaesFunction.SetRCommand("aes")
@@ -31,68 +74,23 @@ Public Class dlgScatterPlot
         clsRgeom_scatterplotFunction.SetRCommand("geom_point")
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
 
-        ucrReceiverX.Selector = ucrScatterPlotSelector
+        ucrReceiverX.Selector = ucrSelectorForScatter
         ucrReceiverX.SetDataType("numeric")
-        ucrReceiverY.Selector = ucrScatterPlotSelector
-        ucrReceiverY.SetDataType("numeric")
-        ucrFactorOptionalReceiver.Selector = ucrScatterPlotSelector
+        ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
         ucrFactorOptionalReceiver.SetDataType("factor")
-        autoTranslate(Me)
 
-        If bFirstLoad Then
-            'setdefauts
-            bFirstLoad = False
-            SetDefaults()
 
-        End If
-    End Sub
-    Private Sub ucrScatterPlotSelector_DataFrameChanged() Handles ucrScatterPlotSelector.DataFrameChanged
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrScatterPlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
-    End Sub
+        ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
+        ucrVariablesAsFactorForScatter.SetSelector(ucrSelectorForScatter)
+        ucrVariablesAsFactorForScatter.SetDataType("numeric")
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
-    Private Sub ucrReceiverY_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverY.SelectionChanged
-        If ucrReceiverY.IsEmpty() = False Then
-            clsRaesFunction.AddParameter("y", ucrReceiverY.GetVariableNames(False))
-            ucrReceiverX.SetMeAsReceiver()
-        Else
-            clsRaesFunction.RemoveParameterByName("y")
-        End If
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrReceiverX_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverX.SelectionChanged
-
-        If ucrReceiverX.IsEmpty() = False Then
-            clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False))
-            ucrFactorOptionalReceiver.SetMeAsReceiver()
-        Else
-            clsRaesFunction.RemoveParameterByName("x")
-        End If
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
-        If ucrFactorOptionalReceiver.IsEmpty() = False Then
-            clsRaesFunction.AddParameter("color", ucrFactorOptionalReceiver.GetVariableNames(False))
-            ucrReceiverY.SetMeAsReceiver()
-        Else
-            clsRaesFunction.RemoveParameterByName("color")
-        End If
-    End Sub
-
-    Private Sub TestOkEnabled()
-        'tests when okay is enable
-        If ucrReceiverX.IsEmpty() = True Or ucrReceiverY.IsEmpty() = True Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
     End Sub
     Private Sub SetDefaults()
         'setDefaults
-        ucrScatterPlotSelector.Reset()
-        ucrScatterPlotSelector.Focus()
-        ucrReceiverY.SetMeAsReceiver()
+        ucrSelectorForScatter.Reset()
+        ucrSelectorForScatter.Focus()
+        ucrVariablesAsFactorForScatter.ResetControl()
         TestOkEnabled()
     End Sub
 
@@ -102,5 +100,17 @@ Public Class dlgScatterPlot
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
+    End Sub
+    Private Sub ucrVariablesAsFactor_SelectionChanged() Handles ucrVariablesAsFactorForScatter.SelectionChanged
+        If Not ucrVariablesAsFactorForScatter.IsEmpty Then
+            clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForScatter.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("y")
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdScatterPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdScatterPlotOptions.Click
+        sdgScatterPlot.ShowDialog()
     End Sub
 End Class

@@ -22,6 +22,29 @@ Public Class dlgPlot
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+            'SetDefaults
+            SetDefaults()
+        Else
+            'reopendialog
+        End If
+
+        TeskOkEnabled()
+    End Sub
+
+    Private Sub SetDefaults()
+        chkPoints.Checked = False
+        ucrLinePlotSelector.Focus()
+        ucrLinePlotSelector.Reset()
+        ucrVariablesAsFactorForLinePlot.ResetControl()
+        TeskOkEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRaesFunction.SetRCommand("aes")
@@ -32,30 +55,23 @@ Public Class dlgPlot
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_lineplotFunction)
 
         ucrBase.clsRsyntax.iCallType = 0
-        autoTranslate(Me)
-        ucrReceiverY.Selector = ucrLinePlotSelector
+
+
         ucrReceiverX.Selector = ucrLinePlotSelector
+        ucrReceiverX.SetDataType("numeric")
         ucrFactorOptionalReceiver.Selector = ucrLinePlotSelector
+        ucrFactorOptionalReceiver.SetDataType("factor")
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
-        If bFirstLoad Then
-            bFirstLoad = False
-            'SetDefaults
-            SetDefaults()
-        Else
-            'reopendialog
-        End If
-        TeskOkEnabled()
-    End Sub
 
-    Private Sub SetDefaults()
-        chkPoints.Checked = False
-        ucrLinePlotSelector.Focus()
-        ucrLinePlotSelector.Reset()
-        ucrReceiverY.SetMeAsReceiver()
-        TeskOkEnabled()
+
+        ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
+        ucrVariablesAsFactorForLinePlot.SetSelector(ucrLinePlotSelector)
+        'ucrVariablesAsFactor.SetDataType("numeric")
+
     End Sub
     Private Sub TeskOkEnabled()
-        If ucrReceiverX.IsEmpty() = True Or ucrReceiverY.IsEmpty() = True Then
+        If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactorForLinePlot.IsEmpty() Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -64,16 +80,6 @@ Public Class dlgPlot
 
     Private Sub ucrPlotSelector_DataFrameChanged() Handles ucrLinePlotSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
-    End Sub
-
-    Private Sub ucrReceiverY_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverY.SelectionChanged
-        If ucrReceiverY.IsEmpty() = False Then
-            clsRaesFunction.AddParameter("y", ucrReceiverY.GetVariableNames(False))
-            ucrReceiverX.SetMeAsReceiver()
-        Else
-            clsRaesFunction.RemoveParameterByName("y")
-        End If
-        TeskOkEnabled()
     End Sub
 
     Private Sub ucrReceiverX_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverX.SelectionChanged
@@ -110,5 +116,14 @@ Public Class dlgPlot
         Else
             ucrBase.clsRsyntax.RemoveOperatorParameter("geom_point")
         End If
+    End Sub
+
+    Private Sub UcrVariablesAsFactor_SelectionChanged() Handles ucrVariablesAsFactorForLinePlot.SelectionChanged
+        If Not ucrVariablesAsFactorForLinePlot.IsEmpty() Then
+            clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForLinePlot.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("y")
+        End If
+        TeskOkEnabled()
     End Sub
 End Class

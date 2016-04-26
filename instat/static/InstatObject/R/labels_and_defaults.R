@@ -1,0 +1,31 @@
+#Labels for strings which will be added to logs
+Set_property="Set"
+Added_col="Added column"
+Replaced_col="Replaced column"
+Renamed_col="Renamed column"
+Removed_col="Removed column"
+Added_metadata="Added metadata"
+Added_variables_metadata="Added variables metadata"
+Converted_col_="Converted column"
+Replaced_value="Replaced value"
+Removed_row="Removed row"
+Inserted_col = "Inserted column"
+Move_col = "Moved column"
+Col_order = "Order of columns"
+Inserted_row = "Inserted row"
+Copy_cols = "Copied columns"
+Merged_data = "Merged data"
+
+#meta data labels
+data_name_label="data_name"
+is_calculated_label="is_calculated"
+decimal_places_label="decimal_places"
+columns_label="columns"
+summarised_from_label="summarised_from"
+key_label="key"
+
+#variables_metadata labels
+display_decimal_label="DisplayDecimal"
+name_label="Name"
+is_factor_label="IsFactor"
+data_type_label="DataType"
