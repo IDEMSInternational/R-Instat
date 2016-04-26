@@ -1004,5 +1004,12 @@ Public Class frmMain
     Private Sub mnuManageTextTransform_Click(sender As Object, e As EventArgs) Handles mnuManageTextTransform.Click
         dlgTransformText.ShowDialog()
     End Sub
+
+    Private Sub mnuTbDelete_Click(sender As Object, e As EventArgs) Handles mnuTbDelete.Click
+        Dim response As DialogResult = MessageBox.Show("Are you sure you want to clear the output window?", "Output window", MessageBoxButtons.YesNo)
+        If response = DialogResult.Yes Then
+            frmCommand.txtCommand.Clear()
+        End If
+    End Sub
 End Class
 
