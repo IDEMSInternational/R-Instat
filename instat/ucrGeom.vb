@@ -373,7 +373,7 @@ Public Class ucrGeom
         clsgeom_qq.AddGgParameter("")
         lstAllGeoms.Add(clsgeom_qq)
 
-        clsgeom_quantile.strGeomName = "geom_label"
+        clsgeom_quantile.strGeomName = "geom_quantile"
         clsgeom_quantile.AddGgParameter("")
         clsgeom_quantile.AddGgParameter("")
         clsgeom_quantile.AddGgParameter("")
@@ -382,7 +382,7 @@ Public Class ucrGeom
         clsgeom_quantile.AddGgParameter("")
         lstAllGeoms.Add(clsgeom_quantile)
 
-        clsgeom_raster.strGeomName = "geom_label"
+        clsgeom_raster.strGeomName = "geom_raster"
         clsgeom_raster.AddGgParameter("")
         clsgeom_raster.AddGgParameter("")
         clsgeom_raster.AddGgParameter("")
