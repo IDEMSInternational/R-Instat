@@ -29,7 +29,7 @@ Public Class ucrReorder
     End Sub
 
     Private Sub cmdUp_Click(sender As Object, e As EventArgs) Handles cmdUp.Click
-        If lstAvailableData.Items.Count > 0 Then
+        If lstAvailableData.Items.Count > 0 And lstAvailableData.SelectedItems.Count > 0 Then
             selectedListViewItem = lstAvailableData.SelectedItems(0)
             selectedIndex = lstAvailableData.SelectedItems.Item(0).Index
             itemsCount = lstAvailableData.Items.Count
@@ -48,7 +48,7 @@ Public Class ucrReorder
     End Sub
 
     Private Sub cmdDown_click(sender As Object, e As EventArgs) Handles cmdDown.Click
-        If lstAvailableData.Items.Count > 0 Then
+        If lstAvailableData.Items.Count > 0 And lstAvailableData.SelectedItems.Count > 0 Then
             selectedListViewItem = lstAvailableData.SelectedItems(0)
             selectedIndex = selectedListViewItem.Index
             itemsCount = lstAvailableData.Items.Count
@@ -66,7 +66,7 @@ Public Class ucrReorder
     End Sub
 
     Private Sub cmdBottom_Click(sender As Object, e As EventArgs) Handles cmdBottom.Click
-        If lstAvailableData.Items.Count > 0 Then
+        If lstAvailableData.Items.Count > 0 And lstAvailableData.SelectedItems.Count > 0 Then
             selectedListViewItem = lstAvailableData.SelectedItems(0)
             selectedIndex = selectedListViewItem.Index
             itemsCount = lstAvailableData.Items.Count
@@ -82,7 +82,7 @@ Public Class ucrReorder
     End Sub
 
     Private Sub cmdTop_Click(sender As Object, e As EventArgs) Handles cmdTop.Click
-        If lstAvailableData.Items.Count > 0 Then
+        If lstAvailableData.Items.Count > 0 And lstAvailableData.SelectedItems.Count > 0 Then
             selectedListViewItem = lstAvailableData.SelectedItems(0)
             selectedIndex = selectedListViewItem.Index
             itemsCount = lstAvailableData.Items.Count
@@ -151,7 +151,7 @@ Public Class ucrReorder
                     dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(ucrDataFrameList.cboAvailableDataFrames.SelectedItem).AsCharacterMatrix
                 End If
             Case "factor"
-                If ucrReceiver IsNot Nothing AndAlso ucrReceiver.strDataType = "factor" AndAlso ucrReceiver.GetVariableNames <> "" Then
+                If ucrReceiver IsNot Nothing AndAlso ucrReceiver.lstIncludedDataTypes.Count = 1 AndAlso ucrReceiver.lstIncludedDataTypes.Contains("factor") AndAlso ucrReceiver.GetVariableNames <> "" Then
                     dfTemp = frmMain.clsRLink.GetData(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & ucrReceiver.GetDataName() & Chr(34) & ", col_name = " & ucrReceiver.GetVariableNames() & ")")
                 End If
             Case "others"
