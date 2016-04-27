@@ -15,6 +15,8 @@ Public Class dlgDeleteRowsOrColums
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 53
+        ucrReceiverForColumnsToDelete.Selector = ucrSelectorForDeleteColumns
+        ucrReceiverForColumnsToDelete.SetMeAsReceiver()
         ucrDataFrameLengthForDeleteRows.SetDataFrameSelector(ucrSelectorForDeleteRows)
     End Sub
 
@@ -32,7 +34,6 @@ Public Class dlgDeleteRowsOrColums
 
     Private Sub SetDefaults()
         rdoRows.Checked = True
-        ColumnsRows()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -51,7 +52,9 @@ Public Class dlgDeleteRowsOrColums
     Private Sub ucrReceiveForColumnsToDelete_SelectionChanged() Handles ucrReceiverForColumnsToDelete.SelectionChanged
         If rdoColumns.Checked = True Then
             If Not ucrReceiverForColumnsToDelete.IsEmpty Then
-                ucrBase.clsRsyntax.AddParameter("cols", ucrReceiverForColumnsToDelete.GetVariableNames())
+                ucrBase.clsRsyntax.AddParameter("cols", ucrReceiverForColumnsToDelete.GetVariableNames)
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("cols")
             End If
         Else
             ucrBase.clsRsyntax.RemoveParameter("cols")
@@ -63,6 +66,8 @@ Public Class dlgDeleteRowsOrColums
         If rdoRows.Checked Then
             If Not ucrInputRowsToDelete IsNot Nothing Then
                 ucrBase.clsRsyntax.AddParameter("select", Chr(34) & ucrInputRowsToDelete.GetText & Chr(34))
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("select")
             End If
         Else
             ucrBase.clsRsyntax.RemoveParameter("select")
@@ -88,8 +93,6 @@ Public Class dlgDeleteRowsOrColums
             ucrReceiverForColumnsToDelete.Visible = False
         End If
         If rdoColumns.Checked = True Then
-            ucrReceiverForColumnsToDelete.Selector = ucrSelectorForDeleteColumns
-            ucrReceiverForColumnsToDelete.SetMeAsReceiver()
             ucrSelectorForDeleteRows.Reset()
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
             ucrSelectorForDeleteRows.Visible = False
