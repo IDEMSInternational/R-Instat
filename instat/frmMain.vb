@@ -824,6 +824,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageFactorconvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuManageFactorconvertToFactor.Click
+        dlgConvertColumns.bToFactorOnly = True
         dlgConvertColumns.ShowDialog()
     End Sub
 
@@ -928,6 +929,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataConvertTo_Click(sender As Object, e As EventArgs) Handles mnuManageDataConvertTo.Click
+        dlgConvertColumns.bToFactorOnly = False
         dlgConvertColumns.ShowDialog()
     End Sub
 
@@ -1001,6 +1003,37 @@ Public Class frmMain
 
     Private Sub mnuManageTextTransform_Click(sender As Object, e As EventArgs) Handles mnuManageTextTransform.Click
         dlgTransformText.ShowDialog()
+    End Sub
+
+    Private Sub mnuTbDelete_Click(sender As Object, e As EventArgs) Handles mnuTbDelete.Click
+        Dim response As DialogResult = MessageBox.Show("Are you sure you want to clear the output window?", "Output window", MessageBoxButtons.YesNo)
+        If response = DialogResult.Yes Then
+            frmCommand.txtCommand.Clear()
+        End If
+    End Sub
+
+    Private Sub mnuEditSelectAll_Click(sender As Object, e As EventArgs) Handles mnuEditSelectAll.Click
+        If ActiveMdiChild Is frmLog Then
+            frmLog.selectAllText()
+        ElseIf ActiveMdiChild Is frmCommand Then
+            frmCommand.selectAllText()
+        ElseIf ActiveMdiChild Is frmScript Then
+            frmScript.selectAllText()
+        ElseIf ActiveMdiChild Is frmEditor Then
+            'ToAdd later
+        End If
+    End Sub
+
+    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
+        If ActiveMdiChild Is frmLog Then
+            frmLog.copyText()
+        ElseIf ActiveMdiChild Is frmCommand Then
+            frmCommand.copyText()
+        ElseIf ActiveMdiChild Is frmScript Then
+            frmScript.copyText()
+        ElseIf ActiveMdiChild Is frmEditor Then
+            'ToAdd later
+        End If
     End Sub
 End Class
 

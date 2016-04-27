@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsDistribution.vb" />
+    <Compile Include="clsGeom.vb" />
     <Compile Include="clsInstatOptions.vb" />
     <Compile Include="clsRFunction.vb" />
     <Compile Include="clsROperator.vb" />
@@ -604,6 +605,12 @@
     <Compile Include="sdgFrequencyPolygonOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgModelOptions.Designer.vb">
+      <DependentUpon>sdgModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgModelOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgPieChartOptions.Designer.vb">
       <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
     </Compile>
@@ -627,6 +634,18 @@
     </Compile>
     <Compile Include="sdgThemeOptions.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ucrGeomListWithAes.designer.vb">
+      <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrGeomListWithAes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrGeom.designer.vb">
+      <DependentUpon>ucrGeom.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrGeom.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
@@ -2345,6 +2364,15 @@
     <EmbeddedResource Include="sdgHistogramOptions.sw-KE.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgModelOptions.fr-FR.resx">
+      <DependentUpon>sdgModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgModelOptions.resx">
+      <DependentUpon>sdgModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgModelOptions.sw-KE.resx">
+      <DependentUpon>sdgModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgOptions.fr-FR.resx">
       <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -3552,6 +3580,24 @@
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeomListWithAes.fr-FR.resx">
+      <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeomListWithAes.resx">
+      <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeomListWithAes.sw-KE.resx">
+      <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeom.fr-FR.resx">
+      <DependentUpon>ucrGeom.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeom.resx">
+      <DependentUpon>ucrGeom.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeom.sw-KE.resx">
+      <DependentUpon>ucrGeom.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrInput.fr-FR.resx">
       <DependentUpon>ucrInput.vb</DependentUpon>
     </EmbeddedResource>
@@ -4030,13 +4076,13 @@
     <Content Include="static\InstatObject\R\instat_object_R6.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Climatic_guide_data.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="static\Library\RainGalle.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\Introductory_guide_datasets.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Climatic_guide_datasets.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

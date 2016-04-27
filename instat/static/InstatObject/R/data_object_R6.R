@@ -35,9 +35,37 @@ data_object <- R6Class("data_object",
                            metadata = list(), 
                            variables_metadata = data.frame(), 
                            changes = list(), 
-                           data_changed = FALSE,
-                           metadata_changed = FALSE, 
-                           variables_metadata_changed = FALSE 
+                           .data_changed = FALSE,
+                           .metadata_changed = FALSE, 
+                           .variables_metadata_changed = FALSE 
+                          ),
+                          active = list(
+                            data_changed = function(new_value) {
+                              if(missing(new_value)) return(private$.data_changed)
+                              else {
+                                if(new_value != TRUE && new_value != FALSE) stop("new_val must be TRUE or FALSE")
+                                private$.data_changed <- new_value
+                                self$append_to_changes(list(Set_property, "data_changed"))
+                              }
+                            },
+                            metadata_changed = function(new_value) {
+                              if(missing(new_value)) return(private$.metadata_changed)
+                              else {
+                                if(new_value != TRUE && new_value != FALSE) stop("new_val must be TRUE or FALSE")
+                                private$.metadata_changed <- new_value
+                                self$append_to_changes(list(Set_property, "metadata_changed"))
+                              }
+                            },
+                            variables_metadata_changed = function(new_value) {
+                              if(missing(new_value)) return(private$.variables_metadata_changed)
+                              else {
+                                if(new_value != TRUE && new_value != FALSE) stop("new_val must be TRUE or FALSE")
+                                private$.variables_metadata_changed <- new_value
+                                self$append_to_changes(list(Set_property, "variable_data_changed"))
+                              }
+                            }
+                            
+                            
                           )
 )
 
@@ -51,8 +79,8 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE) {
     }
     private$data <- new_data
     self$append_to_changes(list(Set_property, "data"))
-    self$set_data_changed(TRUE)
-    self$set_variables_metadata_changed(TRUE)
+    self$data_changed <- TRUE
+    self$variables_metadata_changed <- TRUE
     #      is_data_split<<-FALSE
   }
 }
@@ -62,7 +90,7 @@ data_object$set("public", "set_meta", function(new_meta) {
   if(!is.list(new_meta)) stop("new_meta must be of type: list")
 
   private$metadata <- new_meta
-  self$set_metadata_changed(TRUE)
+  self$metadata_changed <- TRUE
   self$append_to_changes(list(Set_property, "meta data"))
 }
 )
@@ -83,30 +111,6 @@ data_object$set("public", "set_changes", function(new_changes) {
 }
 )
 
-data_object$set("public", "set_data_changed", function(new_val) {
-  if(new_val != TRUE && new_val != FALSE) stop("new_val must be TRUE or FALSE")
-  
-  private$data_changed <- new_val
-  self$append_to_changes(list(Set_property, "data_changed"))
-}
-)
-
-data_object$set("public", "set_variables_metadata_changed", function(new_val) {
-  if(new_val != TRUE && new_val != FALSE) stop("new_val must be TRUE or FALSE")
-  
-  private$variables_metadata_changed <- new_val
-  self$append_to_changes(list(Set_property, "variable_data_changed"))
-}
-)
-
-data_object$set("public", "set_metadata_changed", function(new_val) {
-  if(new_val != TRUE && new_val != FALSE) stop("new_val must be TRUE or FALSE")
-  
-  private$metadata_changed <- new_val
-  self$append_to_changes(list(Set_property, "metadata_changed"))
-}
-)
-
 data_object$set("public", "update_variables_metadata", function() {
   
   if(ncol(private$data) !=  nrow(private$variables_metadata) || !all(colnames(private$data)==rownames(private$variables_metadata))) {
@@ -121,6 +125,21 @@ data_object$set("public", "update_variables_metadata", function() {
     }
   }
   self$append_to_changes(list(Set_property, "variables_metadata"))
+}
+)
+
+data_object$set("public", "set_data_changed", function(new_val) {
+  self$data_changed <- new_val
+}
+)
+
+data_object$set("public", "set_variables_metadata_changed", function(new_val) {
+  self$variables_metadata_changed <- new_val
+}
+)
+
+data_object$set("public", "set_metadata_changed", function(new_val) {
+  self$metadata_changed <- new_val
 }
 )
 
@@ -168,21 +187,6 @@ data_object$set("public", "get_changes", function() {
 }
 )
 
-data_object$set("public", "get_data_changed", function() {
-  return(private$data_changed)
-}
-)
-
-data_object$set("public", "get_metadata_changed", function() {
-  return(private$metadata_changed)
-}
-)
-
-data_object$set("public", "get_variables_metadata_changed", function() {
-  return(private$variables_metadata_changed)
-}
-)
-
 data_object$set("public", "get_data", function() {
   return(private$data)
 }
@@ -200,16 +204,16 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
   else {
     use_col_name_as_prefix = FALSE
     num_cols = 1
-    col_data = data.frame(col_data)
   }
   
   if(missing(use_col_name_as_prefix)) {
     if(num_cols > 1 && length(col_name) == num_cols) use_col_name_as_prefix = FALSE
     else use_col_name_as_prefix = TRUE
   }
-  
   for(i in 1:num_cols) {
-    curr_col = unlist(col_data[,i])
+    if(num_cols == 1) curr_col = col_data
+    else curr_col = unlist(col_data[,i])
+    
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
     
@@ -221,19 +225,19 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     else self$append_to_changes(list(Added_col, curr_col_name))
     
     private$data[[curr_col_name]] <- curr_col
-    self$set_data_changed(TRUE)
-    self$set_variables_metadata_changed(TRUE)
+    self$data_changed <- TRUE
+    self$variables_metadata_changed <- TRUE
   }
 }
 )
 
 data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE) {
   if(missing(col_names)) stop("no col_names to return")
-  if(!all(col_names, function(x) x %in% names(data))) stop("Not all column names were found in data")
+  if(!all(col_names %in% names(private$data))) stop("Not all column names were found in data")
   
   if(length(col_names)==1) {
     if(force_as_data_frame) return(private$data[col_names])
-    else (private$data[[col_names]])
+    else return(private$data[[col_names]])
   }
   else return(private$data[col_names])
 }
@@ -265,10 +269,10 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
     names(private$data)[names(private$data) == curr_col_name] <- new_col_name
     # TODO decide if we need to do these 2 lines
     rownames(private$variables_metadata)[rownames(private$variables_metadata) == curr_col_name] <- new_col_name
-    self$append_to_variables_metadata(rownames(private$variables_metadata) == new_col_name, 1, new_col_name)
+    self$append_to_variables_metadata(rownames(private$variables_metadata)[rownames(private$variables_metadata) == new_col_name], name_label, new_col_name)
     self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
-    self$set_data_changed(TRUE)
-    self$set_variables_metadata_changed(TRUE)
+    self$data_changed <- TRUE
+    self$variables_metadata_changed <- TRUE
     }
 }
 )
@@ -299,8 +303,8 @@ data_object$set("public", "remove_columns_in_data", function(cols=c()) {
     }
   }
   self$append_to_changes(list(Removed_col, cols))
-  self$set_data_changed(TRUE)
-  self$set_variables_metadata_changed(TRUE)
+  self$data_changed <- TRUE
+  self$variables_metadata_changed <- TRUE
 }
 )
 
@@ -331,8 +335,8 @@ data_object$set("public", "replace_value_in_data", function(col_name = "", index
   old_value = private$data[[col_name]][[index]]
   private$data[[col_name]][[index]] <- new_value
   self$append_to_changes(list(Replaced_value, col_name, index, old_value, new_value))
-  self$set_data_changed(TRUE)
-  self$set_variables_metadata_changed(TRUE)
+  self$data_changed <- TRUE
+  self$variables_metadata_changed <- TRUE
 }
 )
 
@@ -350,7 +354,7 @@ data_object$set("public", "append_to_metadata", function(name, value) {
   else {
     private$metadata[[name]] <- value 
     self$append_to_changes(list(Added_metadata, name))
-    self$set_metadata_changed(TRUE)
+    self$metadata_changed <- TRUE
   }
 }
 )
@@ -359,10 +363,10 @@ data_object$set("public", "append_to_variables_metadata", function(col_name, pro
   
   if(missing(col_name) || missing(property) || missing(new_val)) stop("col_name, property and new_val arguements must be specified.")
   
-  if(!col_name %in% names(private$data)) stop(paste(col_name, "not found in data"))
+  if(!all(col_name %in% names(private$data))) stop(paste(col_name, "not found in data"))
   
   row = integer()
-  if(ncol(private$variables_metadata)>0) row = which(private$variables_metadata[,1]==col_name)
+  if(ncol(private$variables_metadata)>0) row = which(rownames(private$variables_metadata)==col_name)
   row_exists = TRUE
   if(length(row)==0) {
     row = nrow(private$variables_metadata) + 1
@@ -379,8 +383,8 @@ data_object$set("public", "append_to_variables_metadata", function(col_name, pro
   if(!propery_exists) colnames(private$variables_metadata)[col] <- property
   
   self$append_to_changes(list(Added_variables_metadata, col_name, property))
-  self$set_variables_metadata_changed(TRUE)
-  self$set_data_changed(TRUE)
+  self$variables_metadata_changed <- TRUE
+  self$data_changed <- TRUE
 }
 )
 
@@ -422,12 +426,12 @@ data_object$set("public", "remove_rows_in_data", function(start_pos, num_rows = 
     self$set_data(private$data[-(start_pos:end_pos),])
     self$append_to_changes(list(Removed_row, start_pos))
   }
-  self$set_data_changed(TRUE)
+  self$data_changed <- TRUE
 }
 )
 
 data_object$set("public", "get_next_default_column_name", function(prefix) {
-  next_default_item(prefix = prefix, existing_names = names(data))
+  next_default_item(prefix = prefix, existing_names = names(private$data))
 } 
 )
 
@@ -438,8 +442,8 @@ data_object$set("public", "insert_column_in_data", function(col_data =c(), start
   if ((ncol(private$data) + 1) < start_pos) stop("The start_pos argument exceeds the number of columns in the data plus one.")
   
   if(length(col_data)==0){
-    col_data <- rep(NA, nrow(data))
-    warning(paste("You are inserting empty column(s) to", get_metadata(data_name_label)))
+    col_data <- rep(NA, nrow(private$data))
+    message(paste("You are inserting empty column(s) in:", self$get_metadata(data_name_label)))
   }
   for(j in 1:number_cols){
     col_name <- self$get_next_default_column_name("X") #change x 
@@ -453,13 +457,13 @@ data_object$set("public", "insert_column_in_data", function(col_data =c(), start
     #data <<- data (do we need this?)
   }
   else{
-    self$set_data(cbind(private$data[1:(start_pos -1)], private$data[(ncol(data)-number_cols+1): ncol(private$data)], private$data[start_pos:(ncol(private$data)-number_cols)]))
+    self$set_data(cbind(private$data[1:(start_pos -1)], private$data[(ncol(private$data)-number_cols+1): ncol(private$data)], private$data[start_pos:(ncol(private$data)-number_cols)]))
     
   }
   
   self$append_to_changes(list(Inserted_col, start_pos))
-  self$set_data_changed(TRUE)
-  self$set_variables_metadata_changed(TRUE)
+  self$data_changed <- TRUE
+  self$variables_metadata_changed <- TRUE
 }
 )
 
@@ -509,13 +513,11 @@ data_object$set("public", "order_columns_in_data", function(col_order) {
     if(!(identical(sort(col_order), sort(as.numeric(1:ncol(data)))))) {
       stop("Invalid column order")
     }
-  }else if(is.character(col_order)) {
-    if(!(identical(sort(col_order), sort(as.character(names(data)))))){
-      stop("Invalid column order")
-    }
-  }else{ 
-    stop("column order must be a numeric or character vector")
   }
+  else if(is.character(col_order)) {
+    if(!(setequal(col_order,names(private$data)))) stop("Invalid column order")
+  }
+  else stop("column order must be a numeric or character vector")
   self$set_data(private$data[ ,col_order])
   self$append_to_changes(list(Col_order, col_order))
 }
@@ -547,11 +549,11 @@ data_object$set("public", "insert_row_in_data", function(start_pos = (nrow(priva
     }
   }
   self$append_to_changes(list(Inserted_row, start_pos))
-  self$set_data_changed(TRUE)
+  self$data_changed <- TRUE
 }
 )
 
-data_object$set("public", "length_of_data", function() {
+data_object$set("public", "get_dataframe_length", function() {
   return(nrow(private$data))
 }
 )
@@ -582,7 +584,7 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
   }else{
     self$set_data(private$data[ do.call(order, c(as.list(private$data[,col_names]), decreasing = decreasing, na.last = na.last)), ])
   }
-  self$set_data_changed(TRUE)
+  self$data_changed <- TRUE
 }
 )
 
@@ -617,7 +619,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     }
     
     if(to_type=="numeric"){
-      if(is.factor(data[,col_name]) & (factor_numeric == "by_levels")){
+      if(is.factor(private$data[,col_name]) && (factor_numeric == "by_levels")){
         self$add_columns_to_data(col_name = col_name, col_data = as.numeric(levels(private$data[,col_name]))[private$data[,col_name]])
       }else{
         self$add_columns_to_data(col_name = col_name, col_data = as.numeric(private$data[,col_name]) )
@@ -628,8 +630,8 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       self$add_columns_to_data(col_name = col_name, col_data = as.character(private$data[,col_name]))
     }
   }
-  self$set_data_changed(TRUE)
-  self$set_variables_metadata_changed(TRUE)
+  self$data_changed <- TRUE
+  self$variables_metadata_changed <- TRUE
 }
 )
 
@@ -664,8 +666,8 @@ data_object$set("public", "set_factor_levels", function(col_name, new_levels) {
   if(!length(new_levels)==length(levels(private$data[[col_name]]))) stop("Incorrect number of new levels given.")
   
   levels(private$data[[col_name]]) <- new_levels
-  self$set_data_changed(TRUE)
-  self$set_variables_metadata_changed(TRUE)
+  self$data_changed <- TRUE
+  self$variables_metadata_changed <- TRUE
 } 
 )
 
@@ -684,6 +686,74 @@ data_object$set("public", "reorder_factor_levels", function(col_name, new_level_
   if(length(new_level_names)!=length(levels(private$data[[col_name]]))) stop("Incorrect number of new level names given.")
   if(!all(new_level_names %in% levels(private$data[[col_name]]))) stop(paste("new_level_names must be a reordering of the current levels:",paste(levels(data[[col_name]]), collapse = " ")))
   self$add_columns_to_data(col_name = col_name, col_data = factor(private$data[[col_name]], levels = new_level_names))
-  self$set_variables_metadata_changed(TRUE)
+  self$variables_metadata_changed <- TRUE
+}
+)
+
+data_object$set("public", "get_column_count", function(col_name, new_level_names) {
+  return(ncol(private$data))
+}
+)
+
+data_object$set("public", "get_column_names", function(as_list = FALSE, include_type = c(), exclude_type = c()) {
+  types = c("factor", "integer", "numeric", "logical", "character")
+  if(!length(include_type) == 0) {
+    if(!all(include_type %in% types)) stop(paste("include_type can only contain", paste(types, collapse = ", ")))
+    if("numeric" %in% include_type) include_type = c(include_type, "integer")
+    if(!length(exclude_type) == 0) warning("exclude_type argument will be ignored. Only one of include_type and exclude_type should be specified.")
+    out = names(private$data)[sapply(private$data, class) %in% include_type]
+  }
+  else if(!length(exclude_type) == 0) {
+    if(!all(exclude_type %in% types)) stop(paste("exclude_type can only contain", paste(types, collapse = ", ")))
+    if("numeric" %in% exclude_type) exclude_type = c(exclude_type, "integer")
+    out = names(private$data)[!(sapply(private$data, class) %in% exclude_type)]
+  }
+  else out = names(private$data)
+  
+  if(as_list) {
+    lst = list()
+    lst[[self$get_metadata(data_name_label)]] <- out
+    return(lst)
+  }
+  else return(out)
+}
+)
+
+#TODO: Are there other types needed here?
+data_object$set("public", "get_data_type", function(col_name = "") {
+  if(!(col_name %in% names(private$data))){
+    stop(paste(col_name, "is not a column in", get_metadata(data_name_label)))
+  }
+  type = ""
+  if(is.character(private$data[[col_name]])) {
+    type = "character"
+  }
+  
+  if(is.logical(private$data[[col_name]])) {
+    type = "logical"
+  }
+  
+  if(is.Date(private$data[[col_name]])){
+    type = "Date"
+  }
+  
+  if(is.numeric(private$data[[col_name]])) {
+    #TODO vectors with integer values but stored as numeric will return numeric.
+    #     Is that desirable?
+    if(is.integer(private$data[[col_name]])) {
+      if(all(private$data[[col_name]]>0)) {
+        type = "positive integer"
+      }
+      else type = "integer"
+    }
+    else type = "numeric"
+  }
+  
+  if(is.factor(private$data[[col_name]])) {
+    if(length(levels(private$data[[col_name]]))==2) type = "2 level factor"
+    else if(length(levels(private$data[[col_name]]))>2) type = "multilevel factor"
+    else type = "factor"
+  }
+  return(type)
 }
 )
