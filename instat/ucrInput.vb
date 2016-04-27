@@ -42,6 +42,10 @@ Public Class ucrInput
         RaiseEvent NameChanged()
     End Sub
 
+    Public Function UserTyped()
+        Return bUserTyped
+    End Function
+
     Public Sub SetDefaultTypeAsColumn()
         strDefaultType = "Column"
         SetDefaultName()
