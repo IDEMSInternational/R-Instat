@@ -7,13 +7,11 @@
         End If
     End Sub
 
-    Private Sub txtScript_KeyDown(sender As Object, e As KeyEventArgs) Handles txtScript.KeyDown
-        If e.Control And e.KeyCode = Keys.A Then
-            txtScript.SelectAll()
-        End If
+    Public Sub copyText()
+        txtScript.Copy()
+    End Sub
 
-        If e.Control And e.KeyCode = Keys.C And txtScript.SelectedText <> "" Then
-            txtScript.Copy()
-        End If
+    Public Sub selectAllText()
+        txtScript.SelectAll()
     End Sub
 End Class
