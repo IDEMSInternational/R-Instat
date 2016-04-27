@@ -103,13 +103,13 @@ Partial Class frmEditor
         '
         Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuInsertCol, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuConvertText, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.resetToDefaultWidthToolStripMenuItem, Me.columnWidthToolStripMenuItem, Me.hideColumnsToolStripMenuItem, Me.unhideColumnsToolStripMenuItem, Me.toolStripMenuItem21, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem, Me.toolStripMenuItem35, Me.groupColumnsToolStripMenuItem1, Me.ungroupColumnsToolStripMenuItem1, Me.ungroupAllColumnsToolStripMenuItem, Me.ToolStripMenuItem1})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(193, 380)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(193, 402)
         '
         'mnuColumnRename
         '
         Me.mnuColumnRename.Name = "mnuColumnRename"
         Me.mnuColumnRename.Size = New System.Drawing.Size(192, 22)
-        Me.mnuColumnRename.Text = "Rename Column"
+        Me.mnuColumnRename.Text = "Rename Column..."
         '
         'mnuInsertCol
         '
@@ -138,13 +138,13 @@ Partial Class frmEditor
         '
         Me.mnuConvertText.Name = "mnuConvertText"
         Me.mnuConvertText.Size = New System.Drawing.Size(192, 22)
-        Me.mnuConvertText.Text = "Convert to Text"
+        Me.mnuConvertText.Text = "Convert to Character"
         '
         'mnuConvertVariate
         '
         Me.mnuConvertVariate.Name = "mnuConvertVariate"
         Me.mnuConvertVariate.Size = New System.Drawing.Size(192, 22)
-        Me.mnuConvertVariate.Text = "Convert to Variate"
+        Me.mnuConvertVariate.Text = "Convert to Numeric"
         '
         'ToolStripSeparator1
         '
@@ -356,36 +356,36 @@ Partial Class frmEditor
         '
         Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteSheet, Me.renameSheet, Me.MoveOrCopySheet, Me.HideSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(153, 136)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(150, 114)
         '
         'insertSheet
         '
         Me.insertSheet.Name = "insertSheet"
-        Me.insertSheet.Size = New System.Drawing.Size(159, 22)
+        Me.insertSheet.Size = New System.Drawing.Size(149, 22)
         Me.insertSheet.Text = "Insert"
         '
         'deleteSheet
         '
         Me.deleteSheet.Name = "deleteSheet"
-        Me.deleteSheet.Size = New System.Drawing.Size(159, 22)
+        Me.deleteSheet.Size = New System.Drawing.Size(149, 22)
         Me.deleteSheet.Text = "Delete"
         '
         'renameSheet
         '
         Me.renameSheet.Name = "renameSheet"
-        Me.renameSheet.Size = New System.Drawing.Size(159, 22)
+        Me.renameSheet.Size = New System.Drawing.Size(149, 22)
         Me.renameSheet.Text = "Rename"
         '
         'MoveOrCopySheet
         '
         Me.MoveOrCopySheet.Name = "MoveOrCopySheet"
-        Me.MoveOrCopySheet.Size = New System.Drawing.Size(159, 22)
+        Me.MoveOrCopySheet.Size = New System.Drawing.Size(149, 22)
         Me.MoveOrCopySheet.Text = "Move or Copy"
         '
         'HideSheet
         '
         Me.HideSheet.Name = "HideSheet"
-        Me.HideSheet.Size = New System.Drawing.Size(159, 22)
+        Me.HideSheet.Size = New System.Drawing.Size(149, 22)
         Me.HideSheet.Text = "Hide"
         '
         'lblNoData

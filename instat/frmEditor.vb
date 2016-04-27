@@ -182,15 +182,15 @@ Public Class frmEditor
     '    End Try
     'End Sub
 
-    'Private Sub copyRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles copyRangeToolStripMenuItem.Click
-    '    Try
-    '        grdData.CurrentWorksheet.Copy()
-    '    Catch generatedExceptionName As unvell.ReoGrid.RangeIntersectionException
-    '        MessageBox.Show("Cannot cut a range that is a part of another merged cell.")
-    '    Catch
-    '        MessageBox.Show("We can't to do that for selected range.")
-    '    End Try
-    'End Sub
+    Public Sub copyRange()
+        Try
+            grdData.CurrentWorksheet.Copy()
+        Catch generatedExceptionName As unvell.ReoGrid.RangeIntersectionException
+            MessageBox.Show("Cannot cut a range that is a part of another merged cell.")
+        Catch
+            MessageBox.Show("We can't to do that for selected range.")
+        End Try
+    End Sub
 
     'Private Sub pasteRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles pasteRangeToolStripMenuItem.Click
     '    Try
@@ -199,7 +199,9 @@ Public Class frmEditor
     '        MessageBox.Show(ex.Message)
     '    End Try
     'End Sub
-
+    Public Sub selectAllText()
+        grdCurrSheet.SelectAll()
+    End Sub
 
     Private Sub insertSheet_Click(sender As Object, e As EventArgs) Handles insertSheet.Click
         dlgFileNew.ShowDialog()
