@@ -77,7 +77,7 @@ Public Class ucrFactor
         Dim dfTemp As CharacterMatrix
         Dim bShowGrid As Boolean = False
         grdFactorData.Worksheets.Clear()
-        If clsReceiver IsNot Nothing AndAlso clsReceiver.strDataType = "factor" AndAlso Not clsReceiver.IsEmpty() Then
+        If clsReceiver IsNot Nothing AndAlso clsReceiver.lstIncludedDataTypes.Count = 1 AndAlso clsReceiver.lstIncludedDataTypes.Contains("factor") AndAlso Not clsReceiver.IsEmpty() Then
             dfTemp = frmMain.clsRLink.GetData(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & clsReceiver.GetDataName() & Chr(34) & ", col_name = " & clsReceiver.GetVariableNames() & ")")
             frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
             shtCurrSheet = grdFactorData.CurrentWorksheet
