@@ -25,7 +25,7 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrInputRowsToDelete IsNot Nothing Or ucrReceiverForColumnsToDelete.IsEmpty = False Then
+        If (((Not nudStart.Text = "") And (Not nudNumberofRows.Text = "")) Or (ucrReceiverForColumnsToDelete.IsEmpty = False)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -33,6 +33,9 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub SetDefaults()
+        nudNumberofRows.Value = 1
+        nudStart.Value = 1
+        ColumnsRows()
         rdoRows.Checked = True
     End Sub
 
@@ -46,10 +49,15 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub ucrSelectorForDeleteRows_DataFrameChanged() Handles ucrSelectorForDeleteRows.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", clsRFunctionParameter:=ucrSelectorForDeleteColumns.ucrAvailableDataFrames.clsCurrDataFrame)
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForDeleteRows.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
     Private Sub ucrReceiveForColumnsToDelete_SelectionChanged() Handles ucrReceiverForColumnsToDelete.SelectionChanged
+        ReceiverCols()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ReceiverCols()
         If rdoColumns.Checked = True Then
             If Not ucrReceiverForColumnsToDelete.IsEmpty Then
                 ucrBase.clsRsyntax.AddParameter("cols", ucrReceiverForColumnsToDelete.GetVariableNames)
@@ -59,20 +67,6 @@ Public Class dlgDeleteRowsOrColums
         Else
             ucrBase.clsRsyntax.RemoveParameter("cols")
         End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrinputRowsToDelete_NameChanged() Handles ucrInputRowsToDelete.NameChanged
-        If rdoRows.Checked Then
-            If Not ucrInputRowsToDelete IsNot Nothing Then
-                ucrBase.clsRsyntax.AddParameter("select", Chr(34) & ucrInputRowsToDelete.GetText & Chr(34))
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("select")
-            End If
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("select")
-        End If
-        TestOKEnabled()
     End Sub
 
     Private Sub rdoColumnsRows_CheckedChanged(sender As Object, e As EventArgs) Handles rdoColumns.CheckedChanged, rdoRows.CheckedChanged
@@ -83,11 +77,12 @@ Public Class dlgDeleteRowsOrColums
         If rdoRows.Checked = True Then
             ucrSelectorForDeleteRows.Reset()
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
+            FromToParameter()
+            ReceiverCols()
             ucrSelectorForDeleteRows.Visible = True
             ucrDataFrameLengthForDeleteRows.Visible = True
             lblNumberofRows.Visible = True
-            lblRowsToDelete.Visible = True
-            ucrInputRowsToDelete.Visible = True
+            grpRowsToDelete.Visible = True
             ucrSelectorForDeleteColumns.Visible = False
             lblColumnsToDelete.Visible = False
             ucrReceiverForColumnsToDelete.Visible = False
@@ -95,15 +90,45 @@ Public Class dlgDeleteRowsOrColums
         If rdoColumns.Checked = True Then
             ucrSelectorForDeleteRows.Reset()
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
+            FromToParameter()
+            ReceiverCols()
+            nudNumberofRows.Maximum = ucrSelectorForDeleteRows.iDataFrameLength
+            nudStart.Maximum = ucrSelectorForDeleteRows.iDataFrameLength
             ucrSelectorForDeleteRows.Visible = False
             ucrDataFrameLengthForDeleteRows.Visible = False
             lblNumberofRows.Visible = False
-            lblRowsToDelete.Visible = False
-            ucrInputRowsToDelete.Visible = False
+            grpRowsToDelete.Visible = False
             ucrSelectorForDeleteColumns.Visible = True
             lblColumnsToDelete.Visible = True
             ucrReceiverForColumnsToDelete.Visible = True
         End If
+
+    End Sub
+
+    Private Sub grpRowsToDelete_TextChanged(sender As Object, e As EventArgs) Handles nudStart.TextChanged, nudNumberofRows.TextChanged
+        FromToParameter()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub FromToParameter()
+        If rdoRows.Checked = True Then
+            If Not nudStart.Text = "" Then
+                ucrBase.clsRsyntax.AddParameter("start_pos", nudStart.Value)
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("start_pos")
+            End If
+            If Not nudNumberofRows.Text = "" Then
+                ucrBase.clsRsyntax.AddParameter("num_rows", nudNumberofRows.Value)
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("num_rows")
+            End If
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("start_pos")
+            ucrBase.clsRsyntax.RemoveParameter("num_rows")
+        End If
+    End Sub
+
+    Private Sub ucrSelectorForDeleteRows_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSelectorForDeleteRows.DataFrameChanged
 
     End Sub
 End Class
