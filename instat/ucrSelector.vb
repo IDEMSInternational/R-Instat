@@ -46,7 +46,11 @@ Public Class ucrSelector
 
     Public Overridable Sub LoadList()
         If CurrentReceiver IsNot Nothing Then
-            frmMain.clsRLink.FillListView(lstAvailableVariable, strDataType:=CurrentReceiver.strDataType)
+            If CurrentReceiver.lstIncludedDataTypes.Count > 0 Then
+                frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=CurrentReceiver.lstIncludedDataTypes, strHeading:=CurrentReceiver.strSelectorHeading)
+            ElseIf CurrentReceiver.lstExcludedDataTypes.Count > 0 Then
+                frmMain.clsRLink.FillListView(lstAvailableVariable, lstExcludedDataTypes:=CurrentReceiver.lstExcludedDataTypes, strHeading:=CurrentReceiver.strSelectorHeading)
+            End If
         End If
     End Sub
 
