@@ -40,14 +40,13 @@ Partial Class dlgRegularSequence
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblPreview = New System.Windows.Forms.Label()
         Me.lblLength = New System.Windows.Forms.Label()
-        Me.cmdRefreshPreview = New System.Windows.Forms.Button()
         Me.txtGetPreview = New System.Windows.Forms.RichTextBox()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.txtMessage = New System.Windows.Forms.TextBox()
         Me.ucrNewColumnName = New instat.ucrInputComboBox()
         Me.ucrDataFrameLengthForRegularSequence = New instat.ucrDataFrameLength()
         Me.ucrSelectDataFrameRegularSequence = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblMessage = New System.Windows.Forms.Label()
         Me.grpSequenceType.SuspendLayout()
         Me.grpSequenceDefinition.SuspendLayout()
         CType(Me.nudTo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -101,9 +100,11 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.Controls.Add(Me.nudTo)
         Me.grpSequenceDefinition.Controls.Add(Me.nudFrom)
         Me.grpSequenceDefinition.Controls.Add(Me.nudRepeatValues)
+        Me.grpSequenceDefinition.Controls.Add(Me.ucrDataFrameLengthForRegularSequence)
         Me.grpSequenceDefinition.Controls.Add(Me.dtpSelectorB)
         Me.grpSequenceDefinition.Controls.Add(Me.nudInStepsOf)
         Me.grpSequenceDefinition.Controls.Add(Me.dtpSelectorA)
+        Me.grpSequenceDefinition.Controls.Add(Me.lblLength)
         Me.grpSequenceDefinition.Controls.Add(Me.chkDefineAsFactor)
         Me.grpSequenceDefinition.Controls.Add(Me.lblTimes1)
         Me.grpSequenceDefinition.Controls.Add(Me.lblRepeatValues)
@@ -113,7 +114,7 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSequenceDefinition.Location = New System.Drawing.Point(12, 100)
         Me.grpSequenceDefinition.Name = "grpSequenceDefinition"
-        Me.grpSequenceDefinition.Size = New System.Drawing.Size(195, 152)
+        Me.grpSequenceDefinition.Size = New System.Drawing.Size(195, 180)
         Me.grpSequenceDefinition.TabIndex = 4
         Me.grpSequenceDefinition.TabStop = False
         Me.grpSequenceDefinition.Tag = "Sequence_definition"
@@ -123,7 +124,8 @@ Partial Class dlgRegularSequence
         'nudTo
         '
         Me.nudTo.Location = New System.Drawing.Point(98, 46)
-        Me.nudTo.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudTo.Maximum = New Decimal(New Integer() {2147483647, 0, 0, 0})
+        Me.nudTo.Minimum = New Decimal(New Integer() {2147483647, 0, 0, -2147483648})
         Me.nudTo.Name = "nudTo"
         Me.nudTo.Size = New System.Drawing.Size(51, 20)
         Me.nudTo.TabIndex = 14
@@ -131,7 +133,8 @@ Partial Class dlgRegularSequence
         'nudFrom
         '
         Me.nudFrom.Location = New System.Drawing.Point(98, 20)
-        Me.nudFrom.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nudFrom.Maximum = New Decimal(New Integer() {2147483647, 0, 0, 0})
+        Me.nudFrom.Minimum = New Decimal(New Integer() {2147483647, 0, 0, -2147483648})
         Me.nudFrom.Name = "nudFrom"
         Me.nudFrom.Size = New System.Drawing.Size(51, 20)
         Me.nudFrom.TabIndex = 13
@@ -139,7 +142,7 @@ Partial Class dlgRegularSequence
         'nudRepeatValues
         '
         Me.nudRepeatValues.Location = New System.Drawing.Point(98, 103)
-        Me.nudRepeatValues.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudRepeatValues.Maximum = New Decimal(New Integer() {2147483647, 0, 0, 0})
         Me.nudRepeatValues.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudRepeatValues.Name = "nudRepeatValues"
         Me.nudRepeatValues.Size = New System.Drawing.Size(44, 20)
@@ -156,7 +159,7 @@ Partial Class dlgRegularSequence
         'nudInStepsOf
         '
         Me.nudInStepsOf.Location = New System.Drawing.Point(98, 74)
-        Me.nudInStepsOf.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudInStepsOf.Maximum = New Decimal(New Integer() {2147483647, 0, 0, 0})
         Me.nudInStepsOf.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudInStepsOf.Name = "nudInStepsOf"
         Me.nudInStepsOf.Size = New System.Drawing.Size(47, 20)
@@ -175,8 +178,7 @@ Partial Class dlgRegularSequence
         Me.chkDefineAsFactor.AutoSize = True
         Me.chkDefineAsFactor.Checked = True
         Me.chkDefineAsFactor.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkDefineAsFactor.Enabled = False
-        Me.chkDefineAsFactor.Location = New System.Drawing.Point(12, 129)
+        Me.chkDefineAsFactor.Location = New System.Drawing.Point(15, 159)
         Me.chkDefineAsFactor.Name = "chkDefineAsFactor"
         Me.chkDefineAsFactor.Size = New System.Drawing.Size(101, 17)
         Me.chkDefineAsFactor.TabIndex = 11
@@ -240,36 +242,26 @@ Partial Class dlgRegularSequence
         'lblPreview
         '
         Me.lblPreview.AutoSize = True
-        Me.lblPreview.Location = New System.Drawing.Point(235, 51)
+        Me.lblPreview.Location = New System.Drawing.Point(235, 18)
         Me.lblPreview.Name = "lblPreview"
-        Me.lblPreview.Size = New System.Drawing.Size(45, 13)
+        Me.lblPreview.Size = New System.Drawing.Size(97, 13)
         Me.lblPreview.TabIndex = 7
         Me.lblPreview.Tag = "Preview"
-        Me.lblPreview.Text = "Preview"
+        Me.lblPreview.Text = "Sequence Preview"
         '
         'lblLength
         '
         Me.lblLength.AutoSize = True
-        Me.lblLength.Location = New System.Drawing.Point(157, 9)
+        Me.lblLength.Location = New System.Drawing.Point(12, 133)
         Me.lblLength.Name = "lblLength"
         Me.lblLength.Size = New System.Drawing.Size(40, 13)
         Me.lblLength.TabIndex = 1
         Me.lblLength.Tag = "Length"
         Me.lblLength.Text = "Length"
         '
-        'cmdRefreshPreview
-        '
-        Me.cmdRefreshPreview.Location = New System.Drawing.Point(238, 22)
-        Me.cmdRefreshPreview.Name = "cmdRefreshPreview"
-        Me.cmdRefreshPreview.Size = New System.Drawing.Size(176, 23)
-        Me.cmdRefreshPreview.TabIndex = 6
-        Me.cmdRefreshPreview.Tag = "Refresh_Preview"
-        Me.cmdRefreshPreview.Text = "Refresh Preview"
-        Me.cmdRefreshPreview.UseVisualStyleBackColor = True
-        '
         'txtGetPreview
         '
-        Me.txtGetPreview.Location = New System.Drawing.Point(238, 74)
+        Me.txtGetPreview.Location = New System.Drawing.Point(238, 34)
         Me.txtGetPreview.Name = "txtGetPreview"
         Me.txtGetPreview.Size = New System.Drawing.Size(171, 172)
         Me.txtGetPreview.TabIndex = 8
@@ -278,16 +270,26 @@ Partial Class dlgRegularSequence
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(12, 310)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(12, 297)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumnName.TabIndex = 12
         Me.lblNewColumnName.Tag = "New_Column_Name"
         Me.lblNewColumnName.Text = "New Column Name"
         '
+        'txtMessage
+        '
+        Me.txtMessage.Enabled = False
+        Me.txtMessage.Location = New System.Drawing.Point(238, 218)
+        Me.txtMessage.Multiline = True
+        Me.txtMessage.Name = "txtMessage"
+        Me.txtMessage.ReadOnly = True
+        Me.txtMessage.Size = New System.Drawing.Size(171, 58)
+        Me.txtMessage.TabIndex = 14
+        '
         'ucrNewColumnName
         '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(122, 305)
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(116, 293)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
         Me.ucrNewColumnName.Size = New System.Drawing.Size(137, 25)
         Me.ucrNewColumnName.TabIndex = 11
@@ -295,9 +297,9 @@ Partial Class dlgRegularSequence
         'ucrDataFrameLengthForRegularSequence
         '
         Me.ucrDataFrameLengthForRegularSequence.clsDataFrameSelector = Nothing
-        Me.ucrDataFrameLengthForRegularSequence.Location = New System.Drawing.Point(154, 25)
+        Me.ucrDataFrameLengthForRegularSequence.Location = New System.Drawing.Point(98, 130)
         Me.ucrDataFrameLengthForRegularSequence.Name = "ucrDataFrameLengthForRegularSequence"
-        Me.ucrDataFrameLengthForRegularSequence.Size = New System.Drawing.Size(53, 23)
+        Me.ucrDataFrameLengthForRegularSequence.Size = New System.Drawing.Size(51, 23)
         Me.ucrDataFrameLengthForRegularSequence.TabIndex = 10
         '
         'ucrSelectDataFrameRegularSequence
@@ -309,32 +311,21 @@ Partial Class dlgRegularSequence
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(7, 326)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 323)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(402, 55)
         Me.ucrBase.TabIndex = 9
-        '
-        'lblMessage
-        '
-        Me.lblMessage.AutoSize = True
-        Me.lblMessage.Location = New System.Drawing.Point(241, 258)
-        Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(0, 13)
-        Me.lblMessage.TabIndex = 13
         '
         'dlgRegularSequence
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 393)
-        Me.Controls.Add(Me.lblMessage)
+        Me.ClientSize = New System.Drawing.Size(421, 390)
+        Me.Controls.Add(Me.txtMessage)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrNewColumnName)
-        Me.Controls.Add(Me.ucrDataFrameLengthForRegularSequence)
         Me.Controls.Add(Me.txtGetPreview)
-        Me.Controls.Add(Me.cmdRefreshPreview)
         Me.Controls.Add(Me.grpSequenceDefinition)
-        Me.Controls.Add(Me.lblLength)
         Me.Controls.Add(Me.lblPreview)
         Me.Controls.Add(Me.ucrSelectDataFrameRegularSequence)
         Me.Controls.Add(Me.ucrBase)
@@ -370,7 +361,6 @@ Partial Class dlgRegularSequence
     Friend WithEvents ucrSelectDataFrameRegularSequence As ucrDataFrame
     Friend WithEvents lblPreview As Label
     Friend WithEvents lblLength As Label
-    Friend WithEvents cmdRefreshPreview As Button
     Friend WithEvents lblTimes1 As Label
     Friend WithEvents lblRepeatValues As Label
     Friend WithEvents chkDefineAsFactor As CheckBox
@@ -384,5 +374,5 @@ Partial Class dlgRegularSequence
     Friend WithEvents ucrDataFrameLengthForRegularSequence As ucrDataFrameLength
     Friend WithEvents ucrNewColumnName As ucrInputComboBox
     Friend WithEvents lblNewColumnName As Label
-    Friend WithEvents lblMessage As Label
+    Friend WithEvents txtMessage As TextBox
 End Class
