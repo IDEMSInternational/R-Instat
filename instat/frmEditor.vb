@@ -242,7 +242,7 @@ Public Class frmEditor
         dlgRenameSheet.ShowDialog()
     End Sub
 
-    Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles MoveOrCopySheet.Click
+    Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles CopySheet.Click
         dlgCopySheet.ShowDialog()
     End Sub
 
@@ -283,5 +283,9 @@ Public Class frmEditor
 
     Private Sub columnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles columnFilterToolStripMenuItem.Click
         dlgRestrict.ShowDialog()
+    End Sub
+
+    Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
+        dlgReorderSheet.ShowDialog()
     End Sub
 End Class
