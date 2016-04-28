@@ -204,7 +204,7 @@ Public Class dlgImportDataset
             ucrBase.clsRsyntax.RemoveParameter("nrows")
             ucrBase.clsRsyntax.RemoveParameter("rows")
             ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
-            frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bFromInstatObject:=False)
+            frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=True)
         Catch
             grdDataPreview.CurrentWorksheet.Reset()
         End Try
