@@ -280,4 +280,8 @@ Public Class frmEditor
         cols = cols & ")"
         Return cols
     End Function
+
+    Private Sub columnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles columnFilterToolStripMenuItem.Click
+        dlgRestrict.ShowDialog()
+    End Sub
 End Class

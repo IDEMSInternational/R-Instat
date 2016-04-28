@@ -97,82 +97,82 @@ Partial Class frmEditor
         'mnuColumnRename
         '
         Me.mnuColumnRename.Name = "mnuColumnRename"
-        Me.mnuColumnRename.Size = New System.Drawing.Size(192, 22)
+        Me.mnuColumnRename.Size = New System.Drawing.Size(184, 22)
         Me.mnuColumnRename.Text = "Rename Column..."
         '
         'mnuInsertCol
         '
         Me.mnuInsertCol.Name = "mnuInsertCol"
-        Me.mnuInsertCol.Size = New System.Drawing.Size(192, 22)
+        Me.mnuInsertCol.Size = New System.Drawing.Size(184, 22)
         Me.mnuInsertCol.Text = "Insert &Columns"
         '
         'mnuDeleteCol
         '
         Me.mnuDeleteCol.Name = "mnuDeleteCol"
-        Me.mnuDeleteCol.Size = New System.Drawing.Size(192, 22)
+        Me.mnuDeleteCol.Size = New System.Drawing.Size(184, 22)
         Me.mnuDeleteCol.Text = "Delete Columns"
         '
         'toolStripMenuItem2
         '
         Me.toolStripMenuItem2.Name = "toolStripMenuItem2"
-        Me.toolStripMenuItem2.Size = New System.Drawing.Size(189, 6)
+        Me.toolStripMenuItem2.Size = New System.Drawing.Size(181, 6)
         '
         'mnuConvertToFactor
         '
         Me.mnuConvertToFactor.Name = "mnuConvertToFactor"
-        Me.mnuConvertToFactor.Size = New System.Drawing.Size(192, 22)
+        Me.mnuConvertToFactor.Size = New System.Drawing.Size(184, 22)
         Me.mnuConvertToFactor.Text = "Convert to Factor"
         '
         'mnuConvertText
         '
         Me.mnuConvertText.Name = "mnuConvertText"
-        Me.mnuConvertText.Size = New System.Drawing.Size(192, 22)
+        Me.mnuConvertText.Size = New System.Drawing.Size(184, 22)
         Me.mnuConvertText.Text = "Convert to Character"
         '
         'mnuConvertVariate
         '
         Me.mnuConvertVariate.Name = "mnuConvertVariate"
-        Me.mnuConvertVariate.Size = New System.Drawing.Size(192, 22)
+        Me.mnuConvertVariate.Size = New System.Drawing.Size(184, 22)
         Me.mnuConvertVariate.Text = "Convert to Numeric"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(189, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(181, 6)
         '
         'hideColumnsToolStripMenuItem
         '
         Me.hideColumnsToolStripMenuItem.Name = "hideColumnsToolStripMenuItem"
-        Me.hideColumnsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.hideColumnsToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
         Me.hideColumnsToolStripMenuItem.Text = "Hide"
         '
         'unhideColumnsToolStripMenuItem
         '
         Me.unhideColumnsToolStripMenuItem.Name = "unhideColumnsToolStripMenuItem"
-        Me.unhideColumnsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.unhideColumnsToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
         Me.unhideColumnsToolStripMenuItem.Text = "Unhide"
         '
         'toolStripMenuItem21
         '
         Me.toolStripMenuItem21.Name = "toolStripMenuItem21"
-        Me.toolStripMenuItem21.Size = New System.Drawing.Size(189, 6)
+        Me.toolStripMenuItem21.Size = New System.Drawing.Size(181, 6)
         '
         'columnFilterToolStripMenuItem
         '
         Me.columnFilterToolStripMenuItem.Name = "columnFilterToolStripMenuItem"
-        Me.columnFilterToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.columnFilterToolStripMenuItem.Text = "Filter"
+        Me.columnFilterToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
+        Me.columnFilterToolStripMenuItem.Text = "Filter..."
         '
         'clearColumnFilterToolStripMenuItem
         '
         Me.clearColumnFilterToolStripMenuItem.Name = "clearColumnFilterToolStripMenuItem"
-        Me.clearColumnFilterToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.clearColumnFilterToolStripMenuItem.Text = "Clear Filter"
+        Me.clearColumnFilterToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
+        Me.clearColumnFilterToolStripMenuItem.Text = "Clear Filters"
         '
         'toolStripMenuItem35
         '
         Me.toolStripMenuItem35.Name = "toolStripMenuItem35"
-        Me.toolStripMenuItem35.Size = New System.Drawing.Size(189, 6)
+        Me.toolStripMenuItem35.Size = New System.Drawing.Size(181, 6)
         '
         'cellContextMenuStrip
         '
@@ -231,46 +231,46 @@ Partial Class frmEditor
         '
         Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRow, Me.mnuDeleteRows, Me.toolStripMenuItem4, Me.hideRowsToolStripMenuItem, Me.unhideRowsToolStripMenuItem, Me.toolStripMenuItem20, Me.toolStripMenuItem33})
         Me.rowContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.rowContextMenuStrip.Size = New System.Drawing.Size(153, 132)
+        Me.rowContextMenuStrip.Size = New System.Drawing.Size(139, 110)
         '
         'mnuInsertRow
         '
         Me.mnuInsertRow.Name = "mnuInsertRow"
-        Me.mnuInsertRow.Size = New System.Drawing.Size(196, 22)
+        Me.mnuInsertRow.Size = New System.Drawing.Size(138, 22)
         Me.mnuInsertRow.Text = "Insert &Rows"
         '
         'mnuDeleteRows
         '
         Me.mnuDeleteRows.Name = "mnuDeleteRows"
-        Me.mnuDeleteRows.Size = New System.Drawing.Size(196, 22)
+        Me.mnuDeleteRows.Size = New System.Drawing.Size(138, 22)
         Me.mnuDeleteRows.Text = "&Delete Rows"
         '
         'toolStripMenuItem4
         '
         Me.toolStripMenuItem4.Name = "toolStripMenuItem4"
-        Me.toolStripMenuItem4.Size = New System.Drawing.Size(193, 6)
+        Me.toolStripMenuItem4.Size = New System.Drawing.Size(135, 6)
         '
         'hideRowsToolStripMenuItem
         '
         Me.hideRowsToolStripMenuItem.Name = "hideRowsToolStripMenuItem"
-        Me.hideRowsToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
+        Me.hideRowsToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
         Me.hideRowsToolStripMenuItem.Text = "&Hide"
         '
         'unhideRowsToolStripMenuItem
         '
         Me.unhideRowsToolStripMenuItem.Name = "unhideRowsToolStripMenuItem"
-        Me.unhideRowsToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
+        Me.unhideRowsToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
         Me.unhideRowsToolStripMenuItem.Text = "&Unhide"
         '
         'toolStripMenuItem20
         '
         Me.toolStripMenuItem20.Name = "toolStripMenuItem20"
-        Me.toolStripMenuItem20.Size = New System.Drawing.Size(193, 6)
+        Me.toolStripMenuItem20.Size = New System.Drawing.Size(135, 6)
         '
         'toolStripMenuItem33
         '
         Me.toolStripMenuItem33.Name = "toolStripMenuItem33"
-        Me.toolStripMenuItem33.Size = New System.Drawing.Size(193, 6)
+        Me.toolStripMenuItem33.Size = New System.Drawing.Size(135, 6)
         '
         'statusColumnMenu
         '
