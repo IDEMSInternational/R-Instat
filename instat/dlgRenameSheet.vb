@@ -40,6 +40,7 @@ Public Class dlgRenameSheet
 
     Private Sub SetDefaults()
         ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
+        ucrInputNewName.Focus()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
