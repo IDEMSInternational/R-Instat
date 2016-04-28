@@ -69,8 +69,9 @@ Public Class frmMain
     Private Sub LoadInstatOptions()
         clsInstatOptions = New InstatOptions
         clsInstatOptions.bIncludeRDefaultParameters = False
-        clsInstatOptions.fntOutput = New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular)
-        clsInstatOptions.clrOutput = Color.Blue
+        clsInstatOptions.SetFormatOutput(New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular), Color.Blue)
+        clsInstatOptions.SetFormatComment(New Font(FontFamily.GenericSansSerif, 8, FontStyle.Regular), Color.Green)
+        clsInstatOptions.SetFormatScript(New Font(FontFamily.GenericSansSerif, 8, FontStyle.Regular), Color.Black)
         clsInstatOptions.iLines = 10
     End Sub
 
