@@ -222,11 +222,47 @@ Public Class RLink
 
     End Function
 
-    Public Function GetVariables(strLabel As String) As CharacterVector
+    Public Function RunInternalScriptGetValue(strScript As String) As SymbolicExpression
+        Dim expTemp As SymbolicExpression
 
-        Return Me.clsEngine.Evaluate(strLabel).AsCharacter
-
+        If clsEngine IsNot Nothing Then
+            Try
+                clsEngine.Evaluate("temp <- " & strScript)
+                expTemp = clsEngine.GetSymbol("temp")
+            Catch ex As Exception
+                'TODO what should be done here?
+                expTemp = Nothing
+            End Try
+        Else
+            expTemp = Nothing
+        End If
+        Return expTemp
     End Function
+
+    Public Function RunInternalScriptGetOutput(strScript As String) As CharacterVector
+        Dim chrTemp As CharacterVector
+        Dim expTemp As SymbolicExpression
+
+        expTemp = RunInternalScriptGetValue("capture.output(" & strScript & ")")
+        Try
+            chrTemp = expTemp.AsCharacter()
+        Catch ex As Exception
+            'TODO what should be done here?
+            chrTemp = Nothing
+        End Try
+        Return chrTemp
+    End Function
+
+    Public Sub RunInternalScript(strScript As String)
+        RunInternalScriptGetValue(strScript)
+        If clsEngine IsNot Nothing Then
+            Try
+                clsEngine.Evaluate(strScript)
+            Catch ex As Exception
+                'TODO what should be done here?
+            End Try
+        End If
+    End Sub
 
     Public Function GetDefaultDataFrameName(strPrefix As String, Optional iStartIndex As Integer = 1, Optional bIncludeIndex As Boolean = True) As String
         Dim strTemp As String
