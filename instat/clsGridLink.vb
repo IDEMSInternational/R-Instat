@@ -53,7 +53,7 @@ Public Class clsGridLink
                 If (bGrdDataExists And frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_changed(data_name = " & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
                     frmMain.clsRLink.clsEngine.Evaluate(strDataName & "<-" & frmMain.clsRLink.strInstatDataObject & "$get_data_frame(" & Chr(34) & strDataName & Chr(34) & ", convert_to_character = TRUE)")
                     dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(strDataName).AsCharacterMatrix
-                    FillSheet(dfTemp, strDataName, grdData)
+                    FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True)
                     frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_data_frames_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
                 End If
                 If (bGrdVariablesMetadataExists And frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
@@ -145,7 +145,7 @@ Public Class clsGridLink
         UpdateGrids()
     End Sub
 
-    Public Sub FillSheet(dfTemp As CharacterMatrix, strName As String, grdCurr As ReoGridControl, Optional bFromInstatObject As Boolean = True)
+    Public Sub FillSheet(dfTemp As CharacterMatrix, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False)
         Dim bFoundWorksheet As Boolean = False
         Dim tempWorkSheet As Worksheet
         Dim fillWorkSheet As Worksheet
@@ -178,32 +178,38 @@ Public Class clsGridLink
         Next
 
         Try
-            If bFromInstatObject AndAlso frmMain.clsRLink.bInstatObjectExists Then
-                clsGetVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
-                clsGetVarMetaFunc.AddParameter("data_name", Chr(34) & strName & Chr(34))
-                clsGetVarMetaFunc.AddParameter("property", "data_type_label")
+            If bIncludeDataTypes Then
+                If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists Then
+                    clsGetVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+                    clsGetVarMetaFunc.AddParameter("data_name", Chr(34) & strName & Chr(34))
+                    clsGetVarMetaFunc.AddParameter("property", "data_type_label")
+                Else
+                    clsGetVarMetaFunc.SetRCommand("sapply")
+                    clsGetVarMetaFunc.AddParameter("X", strName)
+                    clsGetVarMetaFunc.AddParameter("FUN", Chr(34) & "class" & Chr(34))
+                End If
+
+                vecColumnDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVarMetaFunc.ToScript()).AsCharacter
+
+                For k As Integer = 0 To dfTemp.ColumnCount - 1
+                    Select Case vecColumnDataTypes(k)
+                        Case "factor"
+                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (f)"
+                        Case "character"
+                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (c)"
+                        Case "Date"
+                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (D)"
+                        Case "logical"
+                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (l)"
+                        Case Else
+                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
+                    End Select
+                Next
             Else
-                clsGetVarMetaFunc.SetRCommand("sapply")
-                clsGetVarMetaFunc.AddParameter("X", strName)
-                clsGetVarMetaFunc.AddParameter("FUN", Chr(34) & "class" & Chr(34))
+                For k As Integer = 0 To dfTemp.ColumnCount - 1
+                    fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
+                Next
             End If
-
-            vecColumnDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVarMetaFunc.ToScript()).AsCharacter
-
-            For k As Integer = 0 To dfTemp.ColumnCount - 1
-                Select Case vecColumnDataTypes(k)
-                    Case "factor"
-                        fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (f)"
-                    Case "character"
-                        fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (c)"
-                    Case "Date"
-                        fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (D)"
-                    Case "logical"
-                        fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (l)"
-                    Case Else
-                        fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
-                End Select
-            Next
             grdCurr.CurrentWorksheet = fillWorkSheet
         Catch ex As Exception
             'TODO what to do in this case?
