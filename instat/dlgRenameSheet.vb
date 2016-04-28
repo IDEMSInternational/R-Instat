@@ -37,14 +37,11 @@ Public Class dlgRenameSheet
     End Sub
 
     Private Sub InitialiseDialog()
-        'set the function
+        ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
-
-
     End Sub
 
     Private Sub SetDefaults()
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
