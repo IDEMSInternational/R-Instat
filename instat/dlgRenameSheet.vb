@@ -67,6 +67,8 @@ Public Class dlgRenameSheet
 
     Private Sub ucrDataFrameToRename_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameToRename.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem & Chr(34))
+        ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
+        ucrInputNewName.Focus()
         TestOKEnabled()
     End Sub
 End Class
