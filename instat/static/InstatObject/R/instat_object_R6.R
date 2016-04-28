@@ -600,6 +600,6 @@ instat_object$set("public", "reorder_factor_levels", function(data_name, col_nam
 )
 
 instat_object$set("public","get_data_type", function(data_name, col_name) {
-  self$get_data_objects(data_name)$get_data_type(col_name = col_name, sub_classes = sub_classes)
+  self$get_data_objects(data_name)$get_data_type(col_name = col_name)
 } 
 )
