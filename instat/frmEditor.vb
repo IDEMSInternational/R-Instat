@@ -245,4 +245,39 @@ Public Class frmEditor
     Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles MoveOrCopySheet.Click
         dlgCopySheet.ShowDialog()
     End Sub
+
+    Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
+        Dim strScript As String
+        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", col_names = " & selectedColumns() & ",to_type =" & Chr(34) & "numeric" & Chr(34) & ")"
+        frmMain.clsRLink.RunScript(strScript)
+    End Sub
+
+    Private Sub mnuConvertText_Click(sender As Object, e As EventArgs) Handles mnuConvertText.Click
+        Dim strScript As String
+        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", col_names = " & selectedColumns() & ",to_type =" & Chr(34) & "character" & Chr(34) & ")"
+        frmMain.clsRLink.RunScript(strScript)
+    End Sub
+
+    Private Sub mnuConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToFactor.Click
+        Dim strScript As String
+        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", col_names = " & selectedColumns() & ",to_type =" & Chr(34) & "factor" & Chr(34) & ")"
+        frmMain.clsRLink.RunScript(strScript)
+    End Sub
+
+    Private Function selectedColumns()
+        Dim col_list As New List(Of String)
+        For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols
+            col_list.Add(grdData.CurrentWorksheet.GetColumnHeader(i).Text)
+        Next
+        Dim cols As String
+        cols = "c" & "("
+        For j As Integer = 0 To col_list.Count - 1
+            If j > 0 Then
+                cols = cols & ","
+            End If
+            cols = cols & Chr(34) & col_list(j) & Chr(34)
+        Next
+        cols = cols & ")"
+        Return cols
+    End Function
 End Class
