@@ -43,24 +43,20 @@ Partial Class frmEditor
         Me.cutRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.copyRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pasteRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.leadHeaderContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.resetAllPageBreaksToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.rowContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuInsertRow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteRows = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.toolStripMenuItem20 = New System.Windows.Forms.ToolStripSeparator()
-        Me.toolStripMenuItem33 = New System.Windows.Forms.ToolStripSeparator()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.insertSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.deleteSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.HideSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblNoData = New System.Windows.Forms.Label()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblNoData = New System.Windows.Forms.Label()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.leadHeaderContextMenuStrip.SuspendLayout()
@@ -90,7 +86,7 @@ Partial Class frmEditor
         '
         Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuInsertCol, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuConvertText, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.hideColumnsToolStripMenuItem, Me.unhideColumnsToolStripMenuItem, Me.toolStripMenuItem21, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem, Me.toolStripMenuItem35})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(185, 248)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(185, 270)
         '
         'mnuColumnRename
         '
@@ -174,9 +170,9 @@ Partial Class frmEditor
         '
         'cellContextMenuStrip
         '
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.ToolStripSeparator4})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(103, 76)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(103, 70)
         '
         'cutRangeToolStripMenuItem
         '
@@ -198,11 +194,6 @@ Partial Class frmEditor
         Me.pasteRangeToolStripMenuItem.Size = New System.Drawing.Size(102, 22)
         Me.pasteRangeToolStripMenuItem.Text = "Paste"
         '
-        'ToolStripSeparator4
-        '
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(99, 6)
-        '
         'leadHeaderContextMenuStrip
         '
         Me.leadHeaderContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.resetAllPageBreaksToolStripMenuItem1})
@@ -217,9 +208,9 @@ Partial Class frmEditor
         '
         'rowContextMenuStrip
         '
-        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRow, Me.mnuDeleteRows, Me.toolStripMenuItem4, Me.toolStripMenuItem20, Me.toolStripMenuItem33})
+        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRow, Me.mnuDeleteRows})
         Me.rowContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.rowContextMenuStrip.Size = New System.Drawing.Size(139, 66)
+        Me.rowContextMenuStrip.Size = New System.Drawing.Size(139, 48)
         '
         'mnuInsertRow
         '
@@ -233,56 +224,53 @@ Partial Class frmEditor
         Me.mnuDeleteRows.Size = New System.Drawing.Size(138, 22)
         Me.mnuDeleteRows.Text = "&Delete Rows"
         '
-        'toolStripMenuItem4
-        '
-        Me.toolStripMenuItem4.Name = "toolStripMenuItem4"
-        Me.toolStripMenuItem4.Size = New System.Drawing.Size(135, 6)
-        '
-        'toolStripMenuItem20
-        '
-        Me.toolStripMenuItem20.Name = "toolStripMenuItem20"
-        Me.toolStripMenuItem20.Size = New System.Drawing.Size(135, 6)
-        '
-        'toolStripMenuItem33
-        '
-        Me.toolStripMenuItem33.Name = "toolStripMenuItem33"
-        Me.toolStripMenuItem33.Size = New System.Drawing.Size(135, 6)
-        '
         'statusColumnMenu
         '
         Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteSheet, Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.HideSheet, Me.unhideSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(153, 180)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(127, 158)
         '
         'insertSheet
         '
         Me.insertSheet.Name = "insertSheet"
-        Me.insertSheet.Size = New System.Drawing.Size(152, 22)
+        Me.insertSheet.Size = New System.Drawing.Size(126, 22)
         Me.insertSheet.Text = "Insert..."
         '
         'deleteSheet
         '
         Me.deleteSheet.Name = "deleteSheet"
-        Me.deleteSheet.Size = New System.Drawing.Size(152, 22)
+        Me.deleteSheet.Size = New System.Drawing.Size(126, 22)
         Me.deleteSheet.Text = "Delete"
         '
         'renameSheet
         '
         Me.renameSheet.Name = "renameSheet"
-        Me.renameSheet.Size = New System.Drawing.Size(152, 22)
+        Me.renameSheet.Size = New System.Drawing.Size(126, 22)
         Me.renameSheet.Text = "Rename..."
+        '
+        'reorderSheet
+        '
+        Me.reorderSheet.Name = "reorderSheet"
+        Me.reorderSheet.Size = New System.Drawing.Size(126, 22)
+        Me.reorderSheet.Text = "Reorder..."
         '
         'CopySheet
         '
         Me.CopySheet.Name = "CopySheet"
-        Me.CopySheet.Size = New System.Drawing.Size(152, 22)
+        Me.CopySheet.Size = New System.Drawing.Size(126, 22)
         Me.CopySheet.Text = "Copy..."
         '
         'HideSheet
         '
         Me.HideSheet.Name = "HideSheet"
-        Me.HideSheet.Size = New System.Drawing.Size(152, 22)
+        Me.HideSheet.Size = New System.Drawing.Size(126, 22)
         Me.HideSheet.Text = "Hide"
+        '
+        'unhideSheet
+        '
+        Me.unhideSheet.Name = "unhideSheet"
+        Me.unhideSheet.Size = New System.Drawing.Size(126, 22)
+        Me.unhideSheet.Text = "Unhide"
         '
         'lblNoData
         '
@@ -294,18 +282,6 @@ Partial Class frmEditor
         Me.lblNoData.TabIndex = 1
         Me.lblNoData.Tag = "no_data_loaded"
         Me.lblNoData.Text = "No Data Loaded"
-        '
-        'unhideSheet
-        '
-        Me.unhideSheet.Name = "unhideSheet"
-        Me.unhideSheet.Size = New System.Drawing.Size(152, 22)
-        Me.unhideSheet.Text = "Unhide"
-        '
-        'reorderSheet
-        '
-        Me.reorderSheet.Name = "reorderSheet"
-        Me.reorderSheet.Size = New System.Drawing.Size(152, 22)
-        Me.reorderSheet.Text = "Reorder..."
         '
         'frmEditor
         '
@@ -344,15 +320,11 @@ Partial Class frmEditor
     Private WithEvents cutRangeToolStripMenuItem As ToolStripMenuItem
     Private WithEvents copyRangeToolStripMenuItem As ToolStripMenuItem
     Private WithEvents pasteRangeToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents ToolStripSeparator4 As ToolStripSeparator
     Private WithEvents leadHeaderContextMenuStrip As ContextMenuStrip
     Private WithEvents resetAllPageBreaksToolStripMenuItem1 As ToolStripMenuItem
     Private WithEvents rowContextMenuStrip As ContextMenuStrip
     Private WithEvents mnuInsertRow As ToolStripMenuItem
     Private WithEvents mnuDeleteRows As ToolStripMenuItem
-    Private WithEvents toolStripMenuItem4 As ToolStripSeparator
-    Private WithEvents toolStripMenuItem20 As ToolStripSeparator
-    Private WithEvents toolStripMenuItem33 As ToolStripSeparator
     Friend WithEvents statusColumnMenu As ContextMenuStrip
     Friend WithEvents insertSheet As ToolStripMenuItem
     Friend WithEvents deleteSheet As ToolStripMenuItem
