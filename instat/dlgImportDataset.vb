@@ -188,6 +188,9 @@ Public Class dlgImportDataset
     Private Sub RefreshFrameView(Optional bPreviewExcel As Boolean = False)
         Dim dfTemp As CharacterMatrix
         Dim bToBeAssigned As Boolean
+        Dim strTempDataFrameName As String
+
+        strTempDataFrameName = "temp"
         bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
         Try
             ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = False
@@ -196,11 +199,12 @@ Public Class dlgImportDataset
             Else
                 clsReadCSV.AddParameter("nrows", intLines)
             End If
-            dfTemp = frmMain.clsRLink.GetData(ucrBase.clsRsyntax.GetScript())
+            frmMain.clsRLink.RunInternalScript(ucrBase.clsRsyntax.GetScript(), strTempDataFrameName)
+            dfTemp = frmMain.clsRLink.RunInternalScriptGetValue("convert_to_character_matrix(" & strTempDataFrameName & ")").AsCharacterMatrix
             ucrBase.clsRsyntax.RemoveParameter("nrows")
             ucrBase.clsRsyntax.RemoveParameter("rows")
             ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
-            frmMain.clsGrids.FillSheet(dfTemp, txtName.Text, grdDataPreview)
+            frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=True)
         Catch
             grdDataPreview.CurrentWorksheet.Reset()
         End Try

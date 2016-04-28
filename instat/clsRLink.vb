@@ -222,13 +222,13 @@ Public Class RLink
 
     End Function
 
-    Public Function RunInternalScriptGetValue(strScript As String) As SymbolicExpression
+    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value") As SymbolicExpression
         Dim expTemp As SymbolicExpression
 
         If clsEngine IsNot Nothing Then
             Try
-                clsEngine.Evaluate("temp <- " & strScript)
-                expTemp = clsEngine.GetSymbol("temp")
+                clsEngine.Evaluate(strVariableName & " <- " & strScript)
+                expTemp = clsEngine.GetSymbol(strVariableName)
             Catch ex As Exception
                 'TODO what should be done here?
                 expTemp = Nothing
@@ -253,11 +253,15 @@ Public Class RLink
         Return chrTemp
     End Function
 
-    Public Sub RunInternalScript(strScript As String)
+    Public Sub RunInternalScript(strScript As String, Optional strVariableName As String = "")
         RunInternalScriptGetValue(strScript)
         If clsEngine IsNot Nothing Then
             Try
-                clsEngine.Evaluate(strScript)
+                If strVariableName <> "" Then
+                    clsEngine.Evaluate(strVariableName & "<-" & strScript)
+                Else
+                    clsEngine.Evaluate(strScript)
+                End If
             Catch ex As Exception
                 'TODO what should be done here?
             End Try
