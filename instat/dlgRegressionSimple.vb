@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
     Public clsModel As New ROperator
-    Public clsRConvert As New RFunction
+    Public clsRConvert, clsRCIFunction As New RFunction
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
@@ -134,10 +134,7 @@ Public Class dlgRegressionSimple
         End If
     End Sub
     Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
-
         ExplanatoryFunctionSelect()
-        'sdgModelOptions.ModelFunction()
-        'clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
@@ -173,14 +170,21 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
-        'TODO: Include multinomial as an option and the appripriate function
+        sdgModelOptions.RestrictLink() ' Is this supposed to be here?
+        'TODO:   Include multinomial as an option And the appripriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
             ucrBase.clsRsyntax.SetFunction("lm")
             ucrBase.clsRsyntax.RemoveParameter("family")
         Else
+            clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
+            clsRCIFunction.AddParameter("link", Chr(34) & sdgModelOptions.LinkFunction() & Chr(34))
             ucrBase.clsRsyntax.SetFunction("glm")
-            ucrBase.clsRsyntax.AddParameter("family", ucrFamily.clsCurrDistribution.strGLMFunctionName)
+            ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
         End If
+    End Sub
+    Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        sdgModelOptions.ShowDialog()
+        sdgModelOptions.RestrictLink()
     End Sub
 
     Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
