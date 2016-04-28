@@ -44,8 +44,6 @@ Partial Class frmEditor
         Me.copyRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pasteRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mergeRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.unmergeRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.leadHeaderContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.resetAllPageBreaksToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.rowContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -176,14 +174,15 @@ Partial Class frmEditor
         '
         'cellContextMenuStrip
         '
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.ToolStripSeparator4, Me.mergeRangeToolStripMenuItem, Me.unmergeRangeToolStripMenuItem})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.ToolStripSeparator4})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(124, 120)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(153, 98)
         '
         'cutRangeToolStripMenuItem
         '
+        Me.cutRangeToolStripMenuItem.Enabled = False
         Me.cutRangeToolStripMenuItem.Name = "cutRangeToolStripMenuItem"
-        Me.cutRangeToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.cutRangeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.cutRangeToolStripMenuItem.Text = "Cut"
         '
         'copyRangeToolStripMenuItem
@@ -194,26 +193,15 @@ Partial Class frmEditor
         '
         'pasteRangeToolStripMenuItem
         '
+        Me.pasteRangeToolStripMenuItem.Enabled = False
         Me.pasteRangeToolStripMenuItem.Name = "pasteRangeToolStripMenuItem"
-        Me.pasteRangeToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.pasteRangeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.pasteRangeToolStripMenuItem.Text = "Paste"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(120, 6)
-        '
-        'mergeRangeToolStripMenuItem
-        '
-        Me.mergeRangeToolStripMenuItem.Name = "mergeRangeToolStripMenuItem"
-        Me.mergeRangeToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
-        Me.mergeRangeToolStripMenuItem.Text = "Merge"
-        '
-        'unmergeRangeToolStripMenuItem
-        '
-        Me.unmergeRangeToolStripMenuItem.Name = "unmergeRangeToolStripMenuItem"
-        Me.unmergeRangeToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
-        Me.unmergeRangeToolStripMenuItem.Text = "Unmerge"
         '
         'leadHeaderContextMenuStrip
         '
@@ -357,8 +345,6 @@ Partial Class frmEditor
     Private WithEvents copyRangeToolStripMenuItem As ToolStripMenuItem
     Private WithEvents pasteRangeToolStripMenuItem As ToolStripMenuItem
     Private WithEvents ToolStripSeparator4 As ToolStripSeparator
-    Private WithEvents mergeRangeToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents unmergeRangeToolStripMenuItem As ToolStripMenuItem
     Private WithEvents leadHeaderContextMenuStrip As ContextMenuStrip
     Private WithEvents resetAllPageBreaksToolStripMenuItem1 As ToolStripMenuItem
     Private WithEvents rowContextMenuStrip As ContextMenuStrip
