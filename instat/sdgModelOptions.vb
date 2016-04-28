@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgModelOptions
-    Public clsRToFunction As New RFunction
+    Public clsRToFunction, clsRCIFunction As New RFunction
     Public clsModel1 As New ROperator
     Public bFirstLoad As Boolean = True
 
@@ -33,7 +33,10 @@ Public Class sdgModelOptions
         rdoLogBase10.Checked = False
         rdoSquareroot.Checked = False
         rdoPower.Checked = False
-        'ResetLinks()
+    End Sub
+
+    Public Sub SetRCIFunction(clsNewFunction As RFunction)
+        clsRCIFunction = clsNewFunction
     End Sub
 
     Private Sub ResetLinks()
@@ -68,7 +71,7 @@ Public Class sdgModelOptions
             rdoInverse.Enabled = True
             rdoLog.Enabled = True
         End If
-        If strFamilyName = "Binomial" Then
+        If strFamilyName = "Binomial" Or strFamilyName = "Quasibinomial" Then
             rdoLogit.Enabled = True
             rdoLogit.Checked = True
             rdoCauchit.Enabled = True
@@ -82,7 +85,7 @@ Public Class sdgModelOptions
             rdoIdentity.Enabled = True
             rdoLog.Enabled = True
         End If
-        If strFamilyName = "Poisson" Then
+        If strFamilyName = "Poisson" Or strFamilyName = "Quasipoisson" Then
             rdoLog.Enabled = True
             rdoLog.Checked = True
             rdoIdentity.Enabled = True
@@ -97,6 +100,7 @@ Public Class sdgModelOptions
         End If
         If strFamilyName = "Quasi" Then
             rdoIdentity.Enabled = True
+            rdoIdentity.Checked = True
             rdocloglog.Enabled = True
             rdoInverse.Enabled = True
             rdoLog.Enabled = True
@@ -105,6 +109,7 @@ Public Class sdgModelOptions
             rdoProbit.Enabled = True
             rdoSqrt.Enabled = True
         End If
+        LinkFunction()
     End Sub
 
     Private Function ExplanatoryFunction(strFunctionName As String, strPower As String)
@@ -140,9 +145,7 @@ Public Class sdgModelOptions
         End If
     End Sub
 
-    Public Function LinkFunction() As String
-        RestrictLink()
-        'Dim chrModelNames As CharacterVector
+    Public Sub LinkFunction()
         Dim strLinkFunction As String = ""
         If rdoInverse.Checked Then
             strLinkFunction = "inverse"
@@ -171,6 +174,10 @@ Public Class sdgModelOptions
         If rdoMuSquaredInverse.Checked Then
             strLinkFunction = "1/mu^2"
         End If
-        Return strLinkFunction
-    End Function
+        clsRCIFunction.AddParameter("link", Chr(34) & strLinkFunction & Chr(34))
+    End Sub
+
+    Private Sub rdoCauchit_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCauchit.CheckedChanged, rdocloglog.CheckedChanged, rdoIdentity.CheckedChanged, rdoInverse.CheckedChanged, rdoLog.CheckedChanged, rdoLogit.CheckedChanged, rdoMuSquaredInverse.CheckedChanged, rdoProbit.CheckedChanged, rdoSqrt.CheckedChanged
+        LinkFunction()
+    End Sub
 End Class

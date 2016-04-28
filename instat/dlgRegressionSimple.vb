@@ -39,6 +39,7 @@ Public Class dlgRegressionSimple
         ucrExplanatory.Selector = ucrSelectorSimpleReg
         ucrBase.iHelpTopicID = 171
         sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+        sdgModelOptions.SetRCIFunction(clsRCIFunction)
     End Sub
 
     Private Sub ReopenDialog()
@@ -121,7 +122,6 @@ Public Class dlgRegressionSimple
             strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrExplanatory.GetVariableNames(bWithQuotes:=False))
             If strExplanatoryType = "numeric" Or strExplanatoryType = "positive integer" Or strExplanatoryType = "integer" Then
                 chkFunction.Visible = True
-
             Else
                 chkFunction.Checked = False
                 chkFunction.Visible = False
@@ -170,26 +170,27 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
-        sdgModelOptions.RestrictLink() ' Is this supposed to be here?
+        sdgModelOptions.RestrictLink()
         'TODO:   Include multinomial as an option And the appripriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
             ucrBase.clsRsyntax.SetFunction("lm")
             ucrBase.clsRsyntax.RemoveParameter("family")
         Else
             clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
-            clsRCIFunction.AddParameter("link", Chr(34) & sdgModelOptions.LinkFunction() & Chr(34))
             ucrBase.clsRsyntax.SetFunction("glm")
             ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
         End If
     End Sub
+
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
-        sdgModelOptions.RestrictLink()
+        ' ToDo: Ensure the correct tab is open by default
     End Sub
 
     Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
         If chkFunction.Checked Then
             sdgModelOptions.ShowDialog()
+            ' ToDo: Ensure the correct tab is open by default
         End If
         ExplanatoryFunctionSelect()
     End Sub
