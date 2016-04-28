@@ -22,48 +22,48 @@ Partial Class dlgRenameSheet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrDataFrameToRename = New instat.ucrDataFrame()
         Me.lblName = New System.Windows.Forms.Label()
-        Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputNewName = New instat.ucrInputTextBox()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrDataFrameToRename = New instat.ucrDataFrame()
         Me.SuspendLayout()
+        '
+        'lblName
+        '
+        Me.lblName.AutoSize = True
+        Me.lblName.Location = New System.Drawing.Point(207, 9)
+        Me.lblName.Name = "lblName"
+        Me.lblName.Size = New System.Drawing.Size(60, 13)
+        Me.lblName.TabIndex = 1
+        Me.lblName.Tag = "Name"
+        Me.lblName.Text = "New Name"
+        '
+        'ucrInputNewName
+        '
+        Me.ucrInputNewName.Location = New System.Drawing.Point(210, 25)
+        Me.ucrInputNewName.Name = "ucrInputNewName"
+        Me.ucrInputNewName.Size = New System.Drawing.Size(185, 21)
+        Me.ucrInputNewName.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(0, 52)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 3
         '
         'ucrDataFrameToRename
         '
         Me.ucrDataFrameToRename.Location = New System.Drawing.Point(0, 0)
         Me.ucrDataFrameToRename.Name = "ucrDataFrameToRename"
         Me.ucrDataFrameToRename.Size = New System.Drawing.Size(127, 41)
-        Me.ucrDataFrameToRename.TabIndex = 0
-        '
-        'lblName
-        '
-        Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(145, 21)
-        Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(60, 13)
-        Me.lblName.TabIndex = 6
-        Me.lblName.Tag = "Name"
-        Me.lblName.Text = "New Name"
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 47)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 7
-        '
-        'ucrInputNewName
-        '
-        Me.ucrInputNewName.Location = New System.Drawing.Point(209, 19)
-        Me.ucrInputNewName.Name = "ucrInputNewName"
-        Me.ucrInputNewName.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputNewName.TabIndex = 8
+        Me.ucrDataFrameToRename.TabIndex = 2
         '
         'dlgRenameSheet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(407, 99)
+        Me.ClientSize = New System.Drawing.Size(407, 110)
         Me.Controls.Add(Me.ucrInputNewName)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblName)
