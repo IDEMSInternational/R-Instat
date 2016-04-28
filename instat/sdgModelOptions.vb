@@ -33,6 +33,78 @@ Public Class sdgModelOptions
         rdoLogBase10.Checked = False
         rdoSquareroot.Checked = False
         rdoPower.Checked = False
+        'ResetLinks()
+    End Sub
+
+    Private Sub ResetLinks()
+        rdoIdentity.Checked = False
+        rdoCauchit.Checked = False
+        rdocloglog.Checked = False
+        rdoInverse.Checked = False
+        rdoLog.Checked = False
+        rdoLogit.Checked = False
+        rdoMuSquaredInverse.Checked = False
+        rdoProbit.Checked = False
+        rdoSqrt.Checked = False
+
+        rdoIdentity.Enabled = False
+        rdoCauchit.Enabled = False
+        rdocloglog.Enabled = False
+        rdoInverse.Enabled = False
+        rdoLog.Enabled = False
+        rdoLogit.Enabled = False
+        rdoMuSquaredInverse.Enabled = False
+        rdoProbit.Enabled = False
+        rdoSqrt.Enabled = False
+    End Sub
+
+    Public Sub RestrictLink()
+        Dim strFamilyName As String
+        strFamilyName = dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag
+        ResetLinks()
+        If strFamilyName = "Normal" Then
+            rdoIdentity.Enabled = True
+            rdoIdentity.Checked = True
+            rdoInverse.Enabled = True
+            rdoLog.Enabled = True
+        End If
+        If strFamilyName = "Binomial" Then
+            rdoLogit.Enabled = True
+            rdoLogit.Checked = True
+            rdoCauchit.Enabled = True
+            rdocloglog.Enabled = True
+            rdoLog.Enabled = True
+            rdoProbit.Enabled = True
+        End If
+        If strFamilyName = "Gamma" Then
+            rdoInverse.Enabled = True
+            rdoInverse.Checked = True
+            rdoIdentity.Enabled = True
+            rdoLog.Enabled = True
+        End If
+        If strFamilyName = "Poisson" Then
+            rdoLog.Enabled = True
+            rdoLog.Checked = True
+            rdoIdentity.Enabled = True
+            rdoSqrt.Enabled = True
+        End If
+        If strFamilyName = "Inverse.gaussian" Then
+            rdoMuSquaredInverse.Enabled = True
+            rdoMuSquaredInverse.Checked = True
+            rdoIdentity.Enabled = True
+            rdoInverse.Enabled = True
+            rdoLog.Enabled = True
+        End If
+        If strFamilyName = "Quasi" Then
+            rdoIdentity.Enabled = True
+            rdocloglog.Enabled = True
+            rdoInverse.Enabled = True
+            rdoLog.Enabled = True
+            rdoLogit.Enabled = True
+            rdoMuSquaredInverse.Enabled = True
+            rdoProbit.Enabled = True
+            rdoSqrt.Enabled = True
+        End If
     End Sub
 
     Private Function ExplanatoryFunction(strFunctionName As String, strPower As String)
@@ -67,4 +139,38 @@ Public Class sdgModelOptions
             ExplanatoryFunction("power", nudPower.Value)
         End If
     End Sub
+
+    Public Function LinkFunction() As String
+        RestrictLink()
+        'Dim chrModelNames As CharacterVector
+        Dim strLinkFunction As String = ""
+        If rdoInverse.Checked Then
+            strLinkFunction = "inverse"
+        End If
+        If rdoIdentity.Checked Then
+            strLinkFunction = "identity"
+        End If
+        If rdoLog.Checked Then
+            strLinkFunction = "log"
+        End If
+        If rdoLogit.Checked Then
+            strLinkFunction = "logit"
+        End If
+        If rdoProbit.Checked Then
+            strLinkFunction = "probit"
+        End If
+        If rdoCauchit.Checked Then
+            strLinkFunction = "cauchit"
+        End If
+        If rdocloglog.Checked Then
+            strLinkFunction = "cloglog"
+        End If
+        If rdoSqrt.Checked Then
+            strLinkFunction = "sqrt"
+        End If
+        If rdoMuSquaredInverse.Checked Then
+            strLinkFunction = "1/mu^2"
+        End If
+        Return strLinkFunction
+    End Function
 End Class
