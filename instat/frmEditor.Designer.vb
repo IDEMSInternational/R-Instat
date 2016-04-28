@@ -33,8 +33,6 @@ Partial Class frmEditor
         Me.mnuConvertText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertVariate = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.resetToDefaultWidthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.columnWidthToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.hideColumnsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideColumnsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem21 = New System.Windows.Forms.ToolStripSeparator()
@@ -54,8 +52,6 @@ Partial Class frmEditor
         Me.mnuInsertRow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.resetToDefaultHeightToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.rowHeightToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.hideRowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideRowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem20 = New System.Windows.Forms.ToolStripSeparator()
@@ -94,9 +90,9 @@ Partial Class frmEditor
         '
         'columnContextMenuStrip
         '
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuInsertCol, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuConvertText, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.resetToDefaultWidthToolStripMenuItem, Me.columnWidthToolStripMenuItem, Me.hideColumnsToolStripMenuItem, Me.unhideColumnsToolStripMenuItem, Me.toolStripMenuItem21, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem, Me.toolStripMenuItem35})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuInsertCol, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuConvertText, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.hideColumnsToolStripMenuItem, Me.unhideColumnsToolStripMenuItem, Me.toolStripMenuItem21, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem, Me.toolStripMenuItem35})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(193, 292)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(185, 248)
         '
         'mnuColumnRename
         '
@@ -143,19 +139,6 @@ Partial Class frmEditor
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(189, 6)
-        '
-        'resetToDefaultWidthToolStripMenuItem
-        '
-        Me.resetToDefaultWidthToolStripMenuItem.Name = "resetToDefaultWidthToolStripMenuItem"
-        Me.resetToDefaultWidthToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.resetToDefaultWidthToolStripMenuItem.Text = "Reset to Default Width"
-        '
-        'columnWidthToolStripMenuItem
-        '
-        Me.columnWidthToolStripMenuItem.Enabled = False
-        Me.columnWidthToolStripMenuItem.Name = "columnWidthToolStripMenuItem"
-        Me.columnWidthToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.columnWidthToolStripMenuItem.Text = "Column &Width..."
         '
         'hideColumnsToolStripMenuItem
         '
@@ -246,9 +229,9 @@ Partial Class frmEditor
         '
         'rowContextMenuStrip
         '
-        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRow, Me.mnuDeleteRows, Me.toolStripMenuItem4, Me.resetToDefaultHeightToolStripMenuItem, Me.rowHeightToolStripMenuItem, Me.hideRowsToolStripMenuItem, Me.unhideRowsToolStripMenuItem, Me.toolStripMenuItem20, Me.toolStripMenuItem33})
+        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRow, Me.mnuDeleteRows, Me.toolStripMenuItem4, Me.hideRowsToolStripMenuItem, Me.unhideRowsToolStripMenuItem, Me.toolStripMenuItem20, Me.toolStripMenuItem33})
         Me.rowContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.rowContextMenuStrip.Size = New System.Drawing.Size(197, 176)
+        Me.rowContextMenuStrip.Size = New System.Drawing.Size(153, 132)
         '
         'mnuInsertRow
         '
@@ -266,19 +249,6 @@ Partial Class frmEditor
         '
         Me.toolStripMenuItem4.Name = "toolStripMenuItem4"
         Me.toolStripMenuItem4.Size = New System.Drawing.Size(193, 6)
-        '
-        'resetToDefaultHeightToolStripMenuItem
-        '
-        Me.resetToDefaultHeightToolStripMenuItem.Name = "resetToDefaultHeightToolStripMenuItem"
-        Me.resetToDefaultHeightToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
-        Me.resetToDefaultHeightToolStripMenuItem.Text = "Reset to Default Height"
-        '
-        'rowHeightToolStripMenuItem
-        '
-        Me.rowHeightToolStripMenuItem.Enabled = False
-        Me.rowHeightToolStripMenuItem.Name = "rowHeightToolStripMenuItem"
-        Me.rowHeightToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
-        Me.rowHeightToolStripMenuItem.Text = "Row &Height..."
         '
         'hideRowsToolStripMenuItem
         '
@@ -376,8 +346,6 @@ Partial Class frmEditor
     Private WithEvents mnuInsertCol As ToolStripMenuItem
     Private WithEvents mnuDeleteCol As ToolStripMenuItem
     Private WithEvents toolStripMenuItem2 As ToolStripSeparator
-    Private WithEvents resetToDefaultWidthToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents columnWidthToolStripMenuItem As ToolStripMenuItem
     Private WithEvents hideColumnsToolStripMenuItem As ToolStripMenuItem
     Private WithEvents unhideColumnsToolStripMenuItem As ToolStripMenuItem
     Private WithEvents toolStripMenuItem21 As ToolStripSeparator
@@ -397,8 +365,6 @@ Partial Class frmEditor
     Private WithEvents mnuInsertRow As ToolStripMenuItem
     Private WithEvents mnuDeleteRows As ToolStripMenuItem
     Private WithEvents toolStripMenuItem4 As ToolStripSeparator
-    Private WithEvents resetToDefaultHeightToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents rowHeightToolStripMenuItem As ToolStripMenuItem
     Private WithEvents hideRowsToolStripMenuItem As ToolStripMenuItem
     Private WithEvents unhideRowsToolStripMenuItem As ToolStripMenuItem
     Private WithEvents toolStripMenuItem20 As ToolStripSeparator
