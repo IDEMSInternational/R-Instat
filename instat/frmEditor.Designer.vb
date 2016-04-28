@@ -50,8 +50,6 @@ Partial Class frmEditor
         Me.mnuInsertRow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.hideRowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.unhideRowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem20 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem33 = New System.Windows.Forms.ToolStripSeparator()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -176,7 +174,7 @@ Partial Class frmEditor
         '
         Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.ToolStripSeparator4})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(153, 98)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(103, 76)
         '
         'cutRangeToolStripMenuItem
         '
@@ -217,9 +215,9 @@ Partial Class frmEditor
         '
         'rowContextMenuStrip
         '
-        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRow, Me.mnuDeleteRows, Me.toolStripMenuItem4, Me.hideRowsToolStripMenuItem, Me.unhideRowsToolStripMenuItem, Me.toolStripMenuItem20, Me.toolStripMenuItem33})
+        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRow, Me.mnuDeleteRows, Me.toolStripMenuItem4, Me.toolStripMenuItem20, Me.toolStripMenuItem33})
         Me.rowContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.rowContextMenuStrip.Size = New System.Drawing.Size(139, 110)
+        Me.rowContextMenuStrip.Size = New System.Drawing.Size(139, 66)
         '
         'mnuInsertRow
         '
@@ -237,18 +235,6 @@ Partial Class frmEditor
         '
         Me.toolStripMenuItem4.Name = "toolStripMenuItem4"
         Me.toolStripMenuItem4.Size = New System.Drawing.Size(135, 6)
-        '
-        'hideRowsToolStripMenuItem
-        '
-        Me.hideRowsToolStripMenuItem.Name = "hideRowsToolStripMenuItem"
-        Me.hideRowsToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
-        Me.hideRowsToolStripMenuItem.Text = "&Hide"
-        '
-        'unhideRowsToolStripMenuItem
-        '
-        Me.unhideRowsToolStripMenuItem.Name = "unhideRowsToolStripMenuItem"
-        Me.unhideRowsToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
-        Me.unhideRowsToolStripMenuItem.Text = "&Unhide"
         '
         'toolStripMenuItem20
         '
@@ -351,8 +337,6 @@ Partial Class frmEditor
     Private WithEvents mnuInsertRow As ToolStripMenuItem
     Private WithEvents mnuDeleteRows As ToolStripMenuItem
     Private WithEvents toolStripMenuItem4 As ToolStripSeparator
-    Private WithEvents hideRowsToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents unhideRowsToolStripMenuItem As ToolStripMenuItem
     Private WithEvents toolStripMenuItem20 As ToolStripSeparator
     Private WithEvents toolStripMenuItem33 As ToolStripSeparator
     Friend WithEvents statusColumnMenu As ContextMenuStrip
