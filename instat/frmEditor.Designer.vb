@@ -41,10 +41,6 @@ Partial Class frmEditor
         Me.columnFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.clearColumnFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem35 = New System.Windows.Forms.ToolStripSeparator()
-        Me.groupColumnsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ungroupColumnsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ungroupAllColumnsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.cutRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.copyRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -63,9 +59,6 @@ Partial Class frmEditor
         Me.hideRowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideRowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem20 = New System.Windows.Forms.ToolStripSeparator()
-        Me.groupRowsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ungroupRowsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ungroupAllRowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem33 = New System.Windows.Forms.ToolStripSeparator()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.insertSheet = New System.Windows.Forms.ToolStripMenuItem()
@@ -101,9 +94,9 @@ Partial Class frmEditor
         '
         'columnContextMenuStrip
         '
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuInsertCol, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuConvertText, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.resetToDefaultWidthToolStripMenuItem, Me.columnWidthToolStripMenuItem, Me.hideColumnsToolStripMenuItem, Me.unhideColumnsToolStripMenuItem, Me.toolStripMenuItem21, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem, Me.toolStripMenuItem35, Me.groupColumnsToolStripMenuItem1, Me.ungroupColumnsToolStripMenuItem1, Me.ungroupAllColumnsToolStripMenuItem, Me.ToolStripMenuItem1})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuInsertCol, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuConvertText, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.resetToDefaultWidthToolStripMenuItem, Me.columnWidthToolStripMenuItem, Me.hideColumnsToolStripMenuItem, Me.unhideColumnsToolStripMenuItem, Me.toolStripMenuItem21, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem, Me.toolStripMenuItem35})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(193, 402)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(193, 292)
         '
         'mnuColumnRename
         '
@@ -198,31 +191,6 @@ Partial Class frmEditor
         Me.toolStripMenuItem35.Name = "toolStripMenuItem35"
         Me.toolStripMenuItem35.Size = New System.Drawing.Size(189, 6)
         '
-        'groupColumnsToolStripMenuItem1
-        '
-        Me.groupColumnsToolStripMenuItem1.Name = "groupColumnsToolStripMenuItem1"
-        Me.groupColumnsToolStripMenuItem1.Size = New System.Drawing.Size(192, 22)
-        Me.groupColumnsToolStripMenuItem1.Text = "Group"
-        '
-        'ungroupColumnsToolStripMenuItem1
-        '
-        Me.ungroupColumnsToolStripMenuItem1.Name = "ungroupColumnsToolStripMenuItem1"
-        Me.ungroupColumnsToolStripMenuItem1.Size = New System.Drawing.Size(192, 22)
-        Me.ungroupColumnsToolStripMenuItem1.Text = "Ungroup"
-        '
-        'ungroupAllColumnsToolStripMenuItem
-        '
-        Me.ungroupAllColumnsToolStripMenuItem.Name = "ungroupAllColumnsToolStripMenuItem"
-        Me.ungroupAllColumnsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.ungroupAllColumnsToolStripMenuItem.Text = "Ungroup All"
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Enabled = False
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(192, 22)
-        Me.ToolStripMenuItem1.Text = "Properties..."
-        '
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cutRangeToolStripMenuItem, Me.copyRangeToolStripMenuItem, Me.pasteRangeToolStripMenuItem, Me.ToolStripSeparator4, Me.mergeRangeToolStripMenuItem, Me.unmergeRangeToolStripMenuItem})
@@ -278,9 +246,9 @@ Partial Class frmEditor
         '
         'rowContextMenuStrip
         '
-        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRow, Me.mnuDeleteRows, Me.toolStripMenuItem4, Me.resetToDefaultHeightToolStripMenuItem, Me.rowHeightToolStripMenuItem, Me.hideRowsToolStripMenuItem, Me.unhideRowsToolStripMenuItem, Me.toolStripMenuItem20, Me.groupRowsToolStripMenuItem1, Me.ungroupRowsToolStripMenuItem1, Me.ungroupAllRowsToolStripMenuItem, Me.toolStripMenuItem33})
+        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRow, Me.mnuDeleteRows, Me.toolStripMenuItem4, Me.resetToDefaultHeightToolStripMenuItem, Me.rowHeightToolStripMenuItem, Me.hideRowsToolStripMenuItem, Me.unhideRowsToolStripMenuItem, Me.toolStripMenuItem20, Me.toolStripMenuItem33})
         Me.rowContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.rowContextMenuStrip.Size = New System.Drawing.Size(197, 220)
+        Me.rowContextMenuStrip.Size = New System.Drawing.Size(197, 176)
         '
         'mnuInsertRow
         '
@@ -328,24 +296,6 @@ Partial Class frmEditor
         '
         Me.toolStripMenuItem20.Name = "toolStripMenuItem20"
         Me.toolStripMenuItem20.Size = New System.Drawing.Size(193, 6)
-        '
-        'groupRowsToolStripMenuItem1
-        '
-        Me.groupRowsToolStripMenuItem1.Name = "groupRowsToolStripMenuItem1"
-        Me.groupRowsToolStripMenuItem1.Size = New System.Drawing.Size(196, 22)
-        Me.groupRowsToolStripMenuItem1.Text = "&Group"
-        '
-        'ungroupRowsToolStripMenuItem1
-        '
-        Me.ungroupRowsToolStripMenuItem1.Name = "ungroupRowsToolStripMenuItem1"
-        Me.ungroupRowsToolStripMenuItem1.Size = New System.Drawing.Size(196, 22)
-        Me.ungroupRowsToolStripMenuItem1.Text = "Ungroup"
-        '
-        'ungroupAllRowsToolStripMenuItem
-        '
-        Me.ungroupAllRowsToolStripMenuItem.Name = "ungroupAllRowsToolStripMenuItem"
-        Me.ungroupAllRowsToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
-        Me.ungroupAllRowsToolStripMenuItem.Text = "Ungroup All"
         '
         'toolStripMenuItem33
         '
@@ -434,10 +384,6 @@ Partial Class frmEditor
     Private WithEvents columnFilterToolStripMenuItem As ToolStripMenuItem
     Private WithEvents clearColumnFilterToolStripMenuItem As ToolStripMenuItem
     Private WithEvents toolStripMenuItem35 As ToolStripSeparator
-    Private WithEvents groupColumnsToolStripMenuItem1 As ToolStripMenuItem
-    Private WithEvents ungroupColumnsToolStripMenuItem1 As ToolStripMenuItem
-    Private WithEvents ungroupAllColumnsToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Private WithEvents cellContextMenuStrip As ContextMenuStrip
     Private WithEvents cutRangeToolStripMenuItem As ToolStripMenuItem
     Private WithEvents copyRangeToolStripMenuItem As ToolStripMenuItem
@@ -456,9 +402,6 @@ Partial Class frmEditor
     Private WithEvents hideRowsToolStripMenuItem As ToolStripMenuItem
     Private WithEvents unhideRowsToolStripMenuItem As ToolStripMenuItem
     Private WithEvents toolStripMenuItem20 As ToolStripSeparator
-    Private WithEvents groupRowsToolStripMenuItem1 As ToolStripMenuItem
-    Private WithEvents ungroupRowsToolStripMenuItem1 As ToolStripMenuItem
-    Private WithEvents ungroupAllRowsToolStripMenuItem As ToolStripMenuItem
     Private WithEvents toolStripMenuItem33 As ToolStripSeparator
     Friend WithEvents statusColumnMenu As ContextMenuStrip
     Friend WithEvents insertSheet As ToolStripMenuItem
