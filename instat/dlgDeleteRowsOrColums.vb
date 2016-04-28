@@ -25,10 +25,18 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub TestOKEnabled()
-        If (((Not nudStart.Text = "") And (Not nudNumberofRows.Text = "")) Or (ucrReceiverForColumnsToDelete.IsEmpty = False)) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
+        If rdoColumns.Checked Then
+            If ucrReceiverForColumnsToDelete.IsEmpty = False Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        ElseIf rdoRows.Checked Then
+            If ((Not nudStart.Text = "") And (Not nudNumberofRows.Text = "")) Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
