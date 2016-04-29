@@ -56,17 +56,17 @@ Partial Class dlgPlot
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(297, 233)
+        Me.cmdOptions.Location = New System.Drawing.Point(120, 183)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdOptions.TabIndex = 12
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'cmdPointOptions
         '
-        Me.cmdPointOptions.Location = New System.Drawing.Point(97, 188)
+        Me.cmdPointOptions.Location = New System.Drawing.Point(291, 233)
         Me.cmdPointOptions.Name = "cmdPointOptions"
         Me.cmdPointOptions.Size = New System.Drawing.Size(103, 23)
         Me.cmdPointOptions.TabIndex = 10
@@ -113,7 +113,6 @@ Partial Class dlgPlot
         'ucrLinePlotSelector
         '
         Me.ucrLinePlotSelector.Location = New System.Drawing.Point(3, 3)
-        Me.ucrLinePlotSelector.lstVariablesInReceivers = Nothing
         Me.ucrLinePlotSelector.Name = "ucrLinePlotSelector"
         Me.ucrLinePlotSelector.Size = New System.Drawing.Size(242, 179)
         Me.ucrLinePlotSelector.TabIndex = 0
