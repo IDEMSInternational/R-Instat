@@ -24,9 +24,8 @@ Public Class dlgName
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
         ucrBase.iHelpTopicID = 33
         autoTranslate(Me)
-        'set the function
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
@@ -36,10 +35,23 @@ Public Class dlgName
         TestOKEnabled()
     End Sub
 
-    Public Sub SetDefaults()
-        ucrSelectVariables.Reset()
+    Private Sub TestOKEnabled()
+        If ((Not ucrReceiverName.IsEmpty()) And (Not ucrInputNewName.IsEmpty())) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub InitialiseDialog()
         ucrReceiverName.Selector = ucrSelectVariables
         ucrReceiverName.SetMeAsReceiver()
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
+    End Sub
+
+    Public Sub SetDefaults()
+        ucrSelectVariables.Reset()
+        ucrInputNewName.ResetText()
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -60,25 +72,25 @@ Public Class dlgName
     End Sub
 
     Private Sub ucrReceiverName_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverName.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("column_name", ucrReceiverName.GetVariableNames)
-        txtName.Text = ucrReceiverName.GetVariableNames(bWithQuotes:=False)
+        If Not ucrReceiverName.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("column_name", ucrReceiverName.GetVariableNames)
+            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("column_name")
+        End If
         TestOKEnabled()
     End Sub
 
-    Private Sub txtName_Leave(sender As Object, e As EventArgs) Handles txtName.Leave
-        ucrBase.clsRsyntax.AddParameter("new_val", Chr(34) & txtName.Text & Chr(34))
-        TestOKEnabled()
-    End Sub
-    Private Sub TestOKEnabled()
-        If Not ucrReceiverName.IsEmpty() And txtName.Text <> "" Then
-            ucrBase.OKEnabled(True)
+    Private Sub UcrInputNewName_NameChanged() Handles ucrInputNewName.NameChanged
+        If Not ucrInputNewName.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("new_val", Chr(34) & ucrInputNewName.GetText & Chr(34))
         Else
-            ucrBase.OKEnabled(False)
+            ucrBase.clsRsyntax.RemoveParameter("new_val")
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectVariables_DataFrameChanged() Handles ucrSelectVariables.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
-
 End Class

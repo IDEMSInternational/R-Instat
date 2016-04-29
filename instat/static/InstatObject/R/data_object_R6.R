@@ -153,7 +153,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
 )
 
 # TODO
-data_object$set("public", "get_variables_metadata", function(include_all = TRUE, data_type = "all", convert_to_character = FALSE) {
+data_object$set("public", "get_variables_metadata", function(include_all = TRUE, data_type = "all", convert_to_character = FALSE, property) {
   self$update_variables_metadata()
   if(!include_all) out = private$variables_metadata
   else {
@@ -168,7 +168,14 @@ data_object$set("public", "get_variables_metadata", function(include_all = TRUE,
       }
     }
   }
-  if(convert_to_character) return(convert_to_character_matrix(out, FALSE))
+  
+  if(!missing(property)) {
+    if(!property %in% names(out)) stop(property, " not found in variables metadata")
+    out = out[, property]
+  }
+  
+  #TODO get convert_to_character_matrix to work on vectors
+  if(convert_to_character && missing(property)) return(convert_to_character_matrix(out, FALSE))
   else return(out)
 }
 )
@@ -204,7 +211,6 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
   else {
     use_col_name_as_prefix = FALSE
     num_cols = 1
-    col_data = data.frame(col_data)
   }
   
   if(missing(use_col_name_as_prefix)) {
@@ -212,7 +218,9 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     else use_col_name_as_prefix = TRUE
   }
   for(i in 1:num_cols) {
-    curr_col = unlist(col_data[,i])
+    if(num_cols == 1) curr_col = col_data
+    else curr_col = unlist(col_data[,i])
+    
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
     
@@ -618,7 +626,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     }
     
     if(to_type=="numeric"){
-      if(is.factor(data[,col_name]) & (factor_numeric == "by_levels")){
+      if(is.factor(private$data[,col_name]) && (factor_numeric == "by_levels")){
         self$add_columns_to_data(col_name = col_name, col_data = as.numeric(levels(private$data[,col_name]))[private$data[,col_name]])
       }else{
         self$add_columns_to_data(col_name = col_name, col_data = as.numeric(private$data[,col_name]) )
@@ -691,6 +699,30 @@ data_object$set("public", "reorder_factor_levels", function(col_name, new_level_
 
 data_object$set("public", "get_column_count", function(col_name, new_level_names) {
   return(ncol(private$data))
+}
+)
+
+data_object$set("public", "get_column_names", function(as_list = FALSE, include_type = c(), exclude_type = c()) {
+  types = c("factor", "integer", "numeric", "logical", "character")
+  if(!length(include_type) == 0) {
+    if(!all(include_type %in% types)) stop(paste("include_type can only contain", paste(types, collapse = ", ")))
+    if("numeric" %in% include_type) include_type = c(include_type, "integer")
+    if(!length(exclude_type) == 0) warning("exclude_type argument will be ignored. Only one of include_type and exclude_type should be specified.")
+    out = names(private$data)[sapply(private$data, class) %in% include_type]
+  }
+  else if(!length(exclude_type) == 0) {
+    if(!all(exclude_type %in% types)) stop(paste("exclude_type can only contain", paste(types, collapse = ", ")))
+    if("numeric" %in% exclude_type) exclude_type = c(exclude_type, "integer")
+    out = names(private$data)[!(sapply(private$data, class) %in% exclude_type)]
+  }
+  else out = names(private$data)
+  
+  if(as_list) {
+    lst = list()
+    lst[[self$get_metadata(data_name_label)]] <- out
+    return(lst)
+  }
+  else return(out)
 }
 )
 

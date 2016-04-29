@@ -151,7 +151,7 @@ Public Class ucrReorder
                     dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(ucrDataFrameList.cboAvailableDataFrames.SelectedItem).AsCharacterMatrix
                 End If
             Case "factor"
-                If ucrReceiver IsNot Nothing AndAlso ucrReceiver.strDataType = "factor" AndAlso ucrReceiver.GetVariableNames <> "" Then
+                If ucrReceiver IsNot Nothing AndAlso ucrReceiver.lstIncludedDataTypes.Count = 1 AndAlso ucrReceiver.lstIncludedDataTypes.Contains("factor") AndAlso ucrReceiver.GetVariableNames <> "" Then
                     dfTemp = frmMain.clsRLink.GetData(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & ucrReceiver.GetDataName() & Chr(34) & ", col_name = " & ucrReceiver.GetVariableNames() & ")")
                 End If
             Case "others"

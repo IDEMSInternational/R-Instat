@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsDistribution.vb" />
+    <Compile Include="clsGeom.vb" />
     <Compile Include="clsInstatOptions.vb" />
     <Compile Include="clsRFunction.vb" />
     <Compile Include="clsROperator.vb" />
@@ -633,6 +634,18 @@
     </Compile>
     <Compile Include="sdgThemeOptions.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ucrGeomListWithAes.designer.vb">
+      <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrGeomListWithAes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrGeom.designer.vb">
+      <DependentUpon>ucrGeom.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrGeom.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
@@ -3566,6 +3579,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeomListWithAes.fr-FR.resx">
+      <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeomListWithAes.resx">
+      <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeomListWithAes.sw-KE.resx">
+      <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeom.fr-FR.resx">
+      <DependentUpon>ucrGeom.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeom.resx">
+      <DependentUpon>ucrGeom.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGeom.sw-KE.resx">
+      <DependentUpon>ucrGeom.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInput.fr-FR.resx">
       <DependentUpon>ucrInput.vb</DependentUpon>
