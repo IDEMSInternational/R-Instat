@@ -46,7 +46,7 @@ Public Class dlgCombineText
         ucrReceiverCombineText.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("stringr::str_c")
         ucrInputColumnInto.SetName("CombineText")
-        ucrReceiverCombineText.SetDataType("factor")
+        ucrReceiverCombineText.SetIncludedDataTypes({"factor", "character"})
         ucrInputColumnInto.SetItemsTypeAsColumns()
         ucrInputColumnInto.SetDefaultTypeAsColumn()
         ucrInputColumnInto.SetDataFrameSelector(ucrSelectorForCombineText.ucrAvailableDataFrames)
