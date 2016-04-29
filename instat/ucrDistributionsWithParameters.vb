@@ -28,6 +28,7 @@ Public Class ucrDistributionsWithParameters
 
     Public Sub SetParameters()
         Dim i As Integer = 0
+        Dim strParamName As String
 
         If lstParameterLabels.Count = 0 Then
             lstParameterLabels.AddRange({lblParameter1, lblParameter2, lblParameter3})
@@ -59,14 +60,20 @@ Public Class ucrDistributionsWithParameters
         End If
 
         If clsCurrDistribution IsNot Nothing Then
+            For Each strParamName In lstCurrArguments
+                clsCurrRFunction.RemoveParameterByName(strParamName)
+            Next
+            'Removes transformed parameter 'rate' from exponential distribution
+            'which is not in lstCurrArguments
+            clsCurrRFunction.RemoveParameterByName("rate")
+            clsCurrRFunction.RemoveParameterByName("scale")
             lstCurrArguments.Clear()
-            clsCurrRFunction.ClearParameters()
             For i = 0 To clsCurrDistribution.clsParameters.Count - 1
                 lstParameterLabels(i).Text = translate(clsCurrDistribution.clsParameters(i).strNameTag)
                 lstCurrArguments.Add(clsCurrDistribution.clsParameters(i).strArgumentName)
                 If clsCurrDistribution.clsParameters(i).bHasDefault Then
                     lstParameterTextBoxes(i).Text = clsCurrDistribution.clsParameters(i).strDefaultValue
-                    clsCurrRFunction.AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).strDefaultValue)
+                    AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).strDefaultValue)
                 Else
                     lstParameterTextBoxes(i).Clear()
                 End If
@@ -77,7 +84,6 @@ Public Class ucrDistributionsWithParameters
 
     Public Sub CheckParametersFilled()
         If (Not txtParameter1.Visible Or txtParameter1.Text <> "") And (Not txtParameter2.Visible Or txtParameter2.Text <> "") And (Not txtParameter3.Visible Or txtParameter3.Text <> "") Then
-            IncludeFunctionParameter()
             bParametersFilled = True
         Else
             bParametersFilled = False
