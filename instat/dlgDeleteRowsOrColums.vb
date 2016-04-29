@@ -58,6 +58,8 @@ Public Class dlgDeleteRowsOrColums
 
     Private Sub ucrSelectorForDeleteRows_DataFrameChanged() Handles ucrSelectorForDeleteRows.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForDeleteRows.cboAvailableDataFrames.SelectedItem & Chr(34))
+        nudNumberofRows.Maximum = ucrSelectorForDeleteRows.iDataFrameLength
+        nudStart.Maximum = ucrSelectorForDeleteRows.iDataFrameLength
     End Sub
 
     Private Sub ucrReceiveForColumnsToDelete_SelectionChanged() Handles ucrReceiverForColumnsToDelete.SelectionChanged
@@ -84,6 +86,9 @@ Public Class dlgDeleteRowsOrColums
     Private Sub ColumnsRows()
         If rdoRows.Checked = True Then
             ucrSelectorForDeleteRows.Reset()
+            ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForDeleteRows.cboAvailableDataFrames.SelectedItem & Chr(34))
+            nudNumberofRows.Maximum = ucrSelectorForDeleteRows.iDataFrameLength
+            nudStart.Maximum = ucrSelectorForDeleteRows.iDataFrameLength
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
             FromToParameter()
             ReceiverCols()
@@ -97,11 +102,10 @@ Public Class dlgDeleteRowsOrColums
         End If
         If rdoColumns.Checked = True Then
             ucrSelectorForDeleteRows.Reset()
+            ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
             FromToParameter()
             ReceiverCols()
-            nudNumberofRows.Maximum = ucrSelectorForDeleteRows.iDataFrameLength
-            nudStart.Maximum = ucrSelectorForDeleteRows.iDataFrameLength
             ucrSelectorForDeleteRows.Visible = False
             ucrDataFrameLengthForDeleteRows.Visible = False
             lblNumberofRows.Visible = False
@@ -134,9 +138,5 @@ Public Class dlgDeleteRowsOrColums
             ucrBase.clsRsyntax.RemoveParameter("start_pos")
             ucrBase.clsRsyntax.RemoveParameter("num_rows")
         End If
-    End Sub
-
-    Private Sub ucrSelectorForDeleteRows_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSelectorForDeleteRows.DataFrameChanged
-
     End Sub
 End Class
