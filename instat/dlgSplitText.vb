@@ -39,7 +39,7 @@ Public Class dlgSplitText
         ucrReceiverSplitTextColumn.Selector = ucrSelectorSplitTextColumn
         ucrReceiverSplitTextColumn.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("stringr::str_split_fixed")
-        ucrReceiverSplitTextColumn.SetDataType("factor")
+        ucrReceiverSplitTextColumn.SetIncludedDataTypes({"factor", "character"})
         ucrInputColumnsIntoText.SetItemsTypeAsColumns()
         ucrInputColumnsIntoText.SetDefaultTypeAsColumn()
         ucrInputColumnsIntoText.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
