@@ -17,9 +17,9 @@ library(agridat)
 library(candisc)
 library(R6)
 library(openair)
-library(circular
+library(circular)
 library(survival)
-library(evapotranspiration)
+library(Evapotranspiration)
 library(clifro)
 setwd(dirname(parent.frame(2)$ofile))
 
