@@ -28,7 +28,7 @@ Public Class dlgReorderSheet
     Private Sub initialiseDialog()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$order_dataframes")
         ucrSheetsToReoder.strDataType = "dataframe"
-        ucrSheetsToReoder.setDataframes(ucrDataFrameReoderSheets)
+
     End Sub
 
     Private Sub TestOkEnabled()
@@ -41,12 +41,7 @@ Public Class dlgReorderSheet
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        ucrDataFrameReoderSheets.Reset()
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrDataFrameReoderSheets_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameReoderSheets.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameReoderSheets.cboAvailableDataFrames.Text & Chr(34))
+        ucrSheetsToReoder.ResetText()
         TestOkEnabled()
     End Sub
 End Class
