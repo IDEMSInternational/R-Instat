@@ -26,7 +26,7 @@ Public Class frmMain
     Public clsGrids As New clsGridLink
     Public strStaticPath As String
     Public strHelpFilePath As String
-    Public clsInstatOptions As InstatOptions
+    Public clsInstatOptions As New InstatOptions
     Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
 
@@ -67,11 +67,11 @@ Public Class frmMain
     End Sub
 
     Private Sub LoadInstatOptions()
-        clsInstatOptions = New InstatOptions
         clsInstatOptions.bIncludeRDefaultParameters = False
-        clsInstatOptions.fntOutput = New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular)
-        clsInstatOptions.clrOutput = Color.Blue
-        clsInstatOptions.iLines = 10
+        clsInstatOptions.SetFormatOutput(New Font(FontFamily.GenericMonospace, 8, FontStyle.Regular), Color.Blue)
+        clsInstatOptions.SetFormatComment(New Font(FontFamily.GenericSansSerif, 8, FontStyle.Regular), Color.Green)
+        clsInstatOptions.SetFormatScript(New Font(FontFamily.GenericSansSerif, 8, FontStyle.Regular), Color.Black)
+        clsInstatOptions.SetNoLines(10)
     End Sub
 
     Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSummaryDescribe.Click
