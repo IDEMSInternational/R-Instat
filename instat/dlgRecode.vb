@@ -19,11 +19,7 @@ Imports instat.Translations
 Public Class dlgRecode
     Public bFirstLoad As Boolean = True
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         autoTranslate(Me)
-
-
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -35,7 +31,6 @@ Public Class dlgRecode
         ucrBase.iHelpTopicID = 37
     End Sub
     Private Sub InitialiseDialog()
-
         ucrReceiverRecode.Selector = ucrSelectorForRecode
         ucrReceiverRecode.SetMeAsReceiver()
         ucrMultipleNumericRecode.bIsNumericInput = True

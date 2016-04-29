@@ -2,9 +2,9 @@
 # This reference class can contain multiple data_objs
 
 instat_obj <- setRefClass("instat_obj", 
-                       fields = list(data_objects = "list", 
-                                     metadata = "list", models = "list", 
-                                     data_objects_changed = "logical")
+                          fields = list(data_objects = "list", 
+                                        metadata = "list", models = "list", 
+                                        data_objects_changed = "logical")
 )
 
 # INITIALIZE method
@@ -23,7 +23,7 @@ instat_obj$methods(initialize = function(data_tables = list(), instat_obj_metada
   
   .self$set_meta(instat_obj_metadata)
   .self$set_models(list())
-
+  
   if (missing(data_tables) || length(data_tables) == 0) {
     data_objects <<- list()
   }
@@ -95,14 +95,28 @@ instat_obj$methods(import_data = function(data_tables = list(), data_tables_vari
     }
   }
 )
-# Import RDS FUNCTION
-##############################################################################################
+
+#' Title
+#'
+#' @param data_RDS 
+#' @param keep_existing 
+#' @param overwrite_existing 
+#' @param include_models 
+#' @param include_graphics 
+#' @param include_metadata 
+#' @param include_logs 
+#' @param messages 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrite_existing=FALSE, include_models=TRUE,
                                          include_graphics=TRUE, include_metadata=TRUE, include_logs=TRUE,messages=TRUE)
 { 
   if(class(data_RDS) == "instat_obj"){ 
     if (!keep_existing & include_models & include_graphics & include_metadata & include_logs){
-      .self$replace_instat_object(new_instatObj = data_RDS)
+      .self$replace_instat_object(new_instatObj = data_RDS) 
     } else {
       if (!keep_existing) {
         .self$clear_data()
@@ -113,14 +127,17 @@ instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrit
         if (!(data_RDS$data_objects[[i]]$metadata[[data_name_label]] %in% names(data_objects)) | overwrite_existing){
           #TODO in data_object if (!include_models) data_RDS$data_objects[i]$clear_models
           #TODO in data_object if (!include_graphics) data_RDS$data_objects[i]$clear_graphics
+		  curr_data_name = data_RDS$data_objects[[i]]$metadata[[data_name_label]]
           if (!include_metadata) {
             data_RDS$data_objects[[i]]$set_meta(list()) 
-            data_RDS$data_objects[[i]]$set_variables_metadata(data.frame()) 
+			data_RDS$data_objects[[i]]$add_defaults_meta()
+            data_RDS$data_objects[[i]]$set_variables_metadata(data.frame())
+			data_RDS$data_objects[[i]]$update_variables_metadata() 
             
           }
           if (!include_logs) data_RDS$data_objects[i]$set_changes(list())
           # Add this new data object to our list of data objects
-          .self$append_data_objects(data_RDS$data_objects[[i]]$metadata[[data_name_label]],data_RDS$data_objects[[i]])
+          .self$append_data_objects(curr_data_name,data_RDS$data_objects[[i]])
         }
       }
       if (include_models & length(data_RDS$models) > 0){
@@ -151,13 +168,15 @@ instat_obj$methods(import_RDS = function(data_RDS, keep_existing =TRUE, overwrit
 }
 )
 
-instat_obj$methods(replace_instat_object = function(new_instatObj) {
-  data_objects<<-new_instatObj$data_objects 
-  .self$set_meta(new_instatObj$metadata)
-  .self$set_models(new_instatObj$models)
-  data_objects_changed <<- TRUE
-}
-)
+instat_obj$methods(replace_instat_object = function(new_instatObj) { 
+   data_objects<<-new_instatObj$data_objects  
+   .self$set_meta(new_instatObj$metadata) 
+   .self$set_models(new_instatObj$models) 
+   data_objects_changed <<- TRUE 
+   lapply(data_objects, function(x) x$set_data_changed(TRUE))
+ } 
+ ) 
+
 
 instat_obj$methods(set_meta = function(new_meta) {
   if( ! is.list(new_meta) ) {
@@ -185,6 +204,13 @@ instat_obj$methods(append_data_objects = function(name, obj) {
   }
   
   data_objects[[name]] <<- obj
+  data_objects[[name]]$data_changed <<- TRUE
+}
+)
+
+instat_obj$methods(clear_data = function() {
+  
+  data_objects <<- list()
 }
 )
 
@@ -211,10 +237,10 @@ instat_obj$methods(get_data_frame = function(data_name, convert_to_character = F
 instat_obj$methods(get_variables_metadata = function(data_name, data_type = "all", convert_to_character = FALSE) { 
   if(missing(data_name)) {
     retlist <- list()
-  for ( i in (1:length(data_objects)) ) {
-    retlist[[names(data_objects)[[i]]]] = data_objects[[i]]$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character)
-  }
-  return(retlist)
+    for ( i in (1:length(data_objects)) ) {
+      retlist[[names(data_objects)[[i]]]] = data_objects[[i]]$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character)
+    }
+    return(retlist)
   }
   else return(data_objects[[data_name]]$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character))
 } 
@@ -348,7 +374,7 @@ instat_obj$methods(add_model = function(model, model_name = paste("model",length
 )
 
 instat_obj$methods(get_model = function(model_name) {
-  if(missing(model_name)) stop("model_name must be given.")
+  if(missing(model_name)) return(models)
   if(!is.character(model_name)) stop("name must be a character")
   if(!model_name %in% names(models)) stop(model_name, "not found in models")
   models[[model_name]]
@@ -357,6 +383,27 @@ instat_obj$methods(get_model = function(model_name) {
 
 instat_obj$methods(get_model_names = function() {
   return(names(models))
+}
+)
+
+instat_obj$methods(get_from_model = function(model_name, value1, value2, value3) {
+  if(missing(model_name)) stop("model_name must be specified.")
+  if(!is.character(model_name)) stop("name must be a character")
+  if(!model_name %in% names(models)) stop(model_name, "not found in models")
+  if(missing(value1)) stop("value1 must be specified.")
+  if(!value1 %in% names(get_model(model_name))) stop(paste(value1, "not found in", model_name))
+  if(missing(value2)) {
+    if(!missing(value3)) warning(paste("value2 is missing so value3 =",value3, "will be ignored."))
+    return(get_model(model_name)[[value1]])
+  }
+  else {
+    if(!value2 %in% names(get_model(model_name)[[value1]])) stop(paste0(value2, " not found in ", model_name,"[[\"",value1,"\"]]"))
+    if(missing(value3)) return(get_model(model_name)[[value1]][[value2]])
+    else {
+      if(!value3 %in% names(get_model(model_name)[[value1]][[value2]])) stop(paste0(value3, " not found in ", model_name,"[[\"",value1,"\"]]","[[\"",value2,"\"]]"))
+      return(get_model(model_name)[[value1]][[value2]][[value3]])
+    }
+  }
 }
 )
 
@@ -369,12 +416,12 @@ instat_obj$methods(replace_value_in_data = function(data_name, col_name, index, 
 )
 
 instat_obj$methods(rename_column_in_data = function(data_name, column_name, new_val) {
-    if(!is.character(data_name)) stop("data_name must be of type character")
-    if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-    
-    data_objects[[data_name]]$rename_column_in_data(column_name, new_val)
-  } 
-  )
+  if(!is.character(data_name)) stop("data_name must be of type character")
+  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
+  
+  data_objects[[data_name]]$rename_column_in_data(column_name, new_val)
+} 
+)
 
 instat_obj$methods(remove_columns_in_data_from_start_position = function(data_name, start_pos, col_numbers) {
   if(!is.character(data_name)) stop("data_name must be of type character")
@@ -542,7 +589,7 @@ instat_obj$methods(order_dataframes = function(data_frames_order) {
   }
   new_data_objects = list()
   for(i in 1:length(names(data_objects))){
-     new_data_objects[[i]] = data_objects[[data_frames_order[i]]]
+    new_data_objects[[i]] = data_objects[[data_frames_order[i]]]
   }
   names(new_data_objects) <- data_frames_order
   data_objects <<- new_data_objects
@@ -595,13 +642,5 @@ instat_obj$methods(reorder_factor_levels = function(data_name, col_name, new_lev
   if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
   
   data_objects[[data_name]]$reorder_factor_levels(col_name = col_name, new_level_names = new_level_names)
-} 
-)
-
-instat_obj$methods(get_data_type = function(data_name, col_name) {
-  if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
-  data_objects[[data_name]]$get_data_type(col_name = col_name)
 } 
 )

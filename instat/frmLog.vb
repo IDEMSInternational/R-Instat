@@ -7,4 +7,11 @@
         End If
     End Sub
 
+    Public Sub copyText()
+        txtLog.Copy()
+    End Sub
+
+    Public Sub selectAllText()
+        txtLog.SelectAll()
+    End Sub
 End Class

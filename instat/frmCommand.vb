@@ -28,4 +28,13 @@ Public Class frmCommand
             'mnuContextRTB.Enabled = False
         End If
     End Sub
+
+    Public Sub copyText()
+        txtCommand.Copy()
+    End Sub
+
+    Public Sub selectAllText()
+        txtCommand.SelectAll()
+    End Sub
+
 End Class
