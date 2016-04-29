@@ -92,16 +92,16 @@ Partial Class dlgDeleteRowsOrColums
         Me.grpRowsToDelete.Controls.Add(Me.lblNumOfRows)
         Me.grpRowsToDelete.Controls.Add(Me.nudStart)
         Me.grpRowsToDelete.Controls.Add(Me.lblStartPosition)
-        Me.grpRowsToDelete.Location = New System.Drawing.Point(209, 38)
+        Me.grpRowsToDelete.Location = New System.Drawing.Point(219, 38)
         Me.grpRowsToDelete.Name = "grpRowsToDelete"
-        Me.grpRowsToDelete.Size = New System.Drawing.Size(207, 70)
+        Me.grpRowsToDelete.Size = New System.Drawing.Size(197, 70)
         Me.grpRowsToDelete.TabIndex = 15
         Me.grpRowsToDelete.TabStop = False
         Me.grpRowsToDelete.Text = "Rows to Delete"
         '
         'nudNumberofRows
         '
-        Me.nudNumberofRows.Location = New System.Drawing.Point(101, 46)
+        Me.nudNumberofRows.Location = New System.Drawing.Point(105, 44)
         Me.nudNumberofRows.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudNumberofRows.Name = "nudNumberofRows"
         Me.nudNumberofRows.Size = New System.Drawing.Size(43, 20)
@@ -111,7 +111,7 @@ Partial Class dlgDeleteRowsOrColums
         'lblNumOfRows
         '
         Me.lblNumOfRows.AutoSize = True
-        Me.lblNumOfRows.Location = New System.Drawing.Point(6, 48)
+        Me.lblNumOfRows.Location = New System.Drawing.Point(6, 46)
         Me.lblNumOfRows.Name = "lblNumOfRows"
         Me.lblNumOfRows.Size = New System.Drawing.Size(86, 13)
         Me.lblNumOfRows.TabIndex = 2
@@ -119,7 +119,7 @@ Partial Class dlgDeleteRowsOrColums
         '
         'nudStart
         '
-        Me.nudStart.Location = New System.Drawing.Point(101, 19)
+        Me.nudStart.Location = New System.Drawing.Point(105, 18)
         Me.nudStart.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudStart.Name = "nudStart"
         Me.nudStart.Size = New System.Drawing.Size(39, 20)
@@ -129,11 +129,12 @@ Partial Class dlgDeleteRowsOrColums
         'lblStartPosition
         '
         Me.lblStartPosition.AutoSize = True
-        Me.lblStartPosition.Location = New System.Drawing.Point(7, 21)
+        Me.lblStartPosition.Location = New System.Drawing.Point(6, 20)
         Me.lblStartPosition.Name = "lblStartPosition"
-        Me.lblStartPosition.Size = New System.Drawing.Size(30, 13)
+        Me.lblStartPosition.Size = New System.Drawing.Size(55, 13)
         Me.lblStartPosition.TabIndex = 0
-        Me.lblStartPosition.Text = "From"
+        Me.lblStartPosition.Tag = "From_Row"
+        Me.lblStartPosition.Text = "From Row"
         '
         'ucrReceiverForColumnsToDelete
         '
