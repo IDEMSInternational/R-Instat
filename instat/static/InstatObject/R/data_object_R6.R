@@ -565,7 +565,7 @@ data_object$set("public", "get_dataframe_length", function() {
 }
 )
 
-data_object$set("public", "get_column_factor_levels", function(col_name = "") {
+data_object$set("public", "get_factor_data_frame", function(col_name = "") {
   if(!(col_name %in% names(private$data))){
     stop(col_name, " is not a column in", get_metadata(data_name_label))
   }
@@ -576,6 +576,19 @@ data_object$set("public", "get_column_factor_levels", function(col_name = "") {
   counts <- as.data.frame(table(private$data[,c(col_name)]))
   counts <- rename(counts, replace = c("Var1" = "Levels", "Freq" = "Counts"))
   return(counts)
+}
+)
+
+data_object$set("public", "get_column_factor_levels", function(col_name = "") {
+  if(!(col_name %in% names(private$data))){
+    stop(col_name, " is not a column in", get_metadata(data_name_label))
+  }
+  
+  if(!(is.factor(private$data[,col_name]))){
+    stop(col_name, " is not a factor column")
+  }
+  
+  return(levels(private$data[,col_name]))
 }
 )
 
