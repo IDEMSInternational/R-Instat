@@ -14,11 +14,15 @@ Public Class ucrButtons
         RaiseEvent ClickReset(sender, e)
     End Sub
 
+    Public Event BeforeClickOk(sender As Object, e As EventArgs)
     Public Event ClickOk(sender As Object, e As EventArgs)
     Public Event ClickReset(sender As Object, e As EventArgs)
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
         Dim strComments As String = ""
+
+        RaiseEvent BeforeClickOk(sender, e)
+
         If chkComment.Checked Then
             strComments = txtComment.Text
         End If
