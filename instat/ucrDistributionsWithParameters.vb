@@ -78,12 +78,14 @@ Public Class ucrDistributionsWithParameters
                 Else
                     lstParameterTextBoxes(i).Clear()
                 End If
+                RaiseEvent ParameterChanged()
             Next
             If clsCurrDistribution.strNameTag = "Bernouli" Then
                 AddParameter("size", 1)
             End If
             bParametersFilled = False
         End If
+        CheckParametersFilled()
     End Sub
 
     Public Sub CheckParametersFilled()
@@ -114,7 +116,10 @@ Public Class ucrDistributionsWithParameters
 
     Private Sub txtParameter3_Leave(sender As Object, e As EventArgs) Handles txtParameter3.Leave
         AddParameter(lstCurrArguments(2), txtParameter3.Text)
-        CheckParametersFilled()
         RaiseEvent ParameterChanged()
+    End Sub
+
+    Private Sub ucrDistributionsWithParameters_ParameterChanged() Handles Me.ParameterChanged
+        CheckParametersFilled()
     End Sub
 End Class

@@ -31,7 +31,7 @@ Public Class dlgRandomSample
         Else
             ReopenDialog()
         End If
-
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -65,6 +65,7 @@ Public Class dlgRandomSample
 
     Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSelectorRandomSamples.DataFrameChanged
         SetDataFrameParameters()
+        TestOKEnabled()
     End Sub
 
     Private Sub SetSeedParameters()
@@ -84,10 +85,12 @@ Public Class dlgRandomSample
     Private Sub SetDataFrameParameters()
         clsDistribtionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
         SetAssignTo()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrPrefixNewColumns_NameChanged() Handles ucrPrefixNewColumns.NameChanged
         SetAssignTo()
+        TestOKEnabled()
     End Sub
 
     Private Sub SetAssignTo()
@@ -127,24 +130,43 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub TestOKEnabled()
-
+        If ucrDistWithParameters.bParametersFilled AndAlso nudNumberOfSamples.Text <> "" _
+            AndAlso nudNumberOfSamples.Text <> "" AndAlso (Not chkSetSeed.Checked OrElse (chkSetSeed.Checked AndAlso nudSeed.Text <> "")) _
+            AndAlso ((nudNumberOfSamples.Value = 1 AndAlso Not ucrNewColumnName.IsEmpty) OrElse (nudNumberOfSamples.Value <> 1 AndAlso Not ucrPrefixNewColumns.IsEmpty)) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If chkSetSeed.Checked AndAlso nudSeed.Text <> "" Then
+        If chkSetSeed.Checked Then
             frmMain.clsRLink.RunScript(clsSetSeed.ToScript(), strComment:="dlgRandomSample: Setting the seed for random number generator")
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub chkSetSeed_CheckedChanged(sender As Object, e As EventArgs) Handles chkSetSeed.CheckedChanged
         SetSeedParameters()
+        TestOKEnabled()
     End Sub
 
     Private Sub nudNumberOfSamples_TextChanged(sender As Object, e As EventArgs) Handles nudNumberOfSamples.TextChanged
         SetNumberOfSamplesParameters()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrNewColumnName_NameChanged() Handles ucrNewColumnName.NameChanged
         SetAssignTo()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrDistWithParameters_ParameterChanged() Handles ucrDistWithParameters.ParameterChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub nudSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSeed.TextChanged
+        SetSeedParameters()
+        TestOKEnabled()
     End Sub
 End Class
