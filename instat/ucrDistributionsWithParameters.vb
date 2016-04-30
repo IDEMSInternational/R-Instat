@@ -63,10 +63,11 @@ Public Class ucrDistributionsWithParameters
             For Each strParamName In lstCurrArguments
                 clsCurrRFunction.RemoveParameterByName(strParamName)
             Next
-            'Removes transformed parameter 'rate' from exponential distribution
-            'which is not in lstCurrArguments
+            'Removes transformed parameters
+            'which are not in lstCurrArguments
             clsCurrRFunction.RemoveParameterByName("rate")
             clsCurrRFunction.RemoveParameterByName("scale")
+            clsCurrRFunction.RemoveParameterByName("size")
             lstCurrArguments.Clear()
             For i = 0 To clsCurrDistribution.clsParameters.Count - 1
                 lstParameterLabels(i).Text = translate(clsCurrDistribution.clsParameters(i).strNameTag)
@@ -78,6 +79,9 @@ Public Class ucrDistributionsWithParameters
                     lstParameterTextBoxes(i).Clear()
                 End If
             Next
+            If clsCurrDistribution.strNameTag = "Bernouli" Then
+                AddParameter("size", 1)
+            End If
             bParametersFilled = False
         End If
     End Sub

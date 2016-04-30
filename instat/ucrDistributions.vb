@@ -203,12 +203,13 @@ Public Class ucrDistributions
 
         ' Extreme Value Distribution
         clsExtremeValueDist.strNameTag = "Extreme_Value"
-        clsExtremeValueDist.strRFunctionName = "rgev"
-        clsExtremeValueDist.strPFunctionName = "pgev"
-        clsExtremeValueDist.strQFunctionName = "qgev"
-        clsExtremeValueDist.strDFunctionName = "dgev"
-        clsExtremeValueDist.AddParameter("mode", "Mode")
-        clsExtremeValueDist.AddParameter("scale", "Scale")
+        clsExtremeValueDist.strRFunctionName = "revd"
+        clsExtremeValueDist.strPFunctionName = "pevd"
+        clsExtremeValueDist.strQFunctionName = "qqevd"
+        clsExtremeValueDist.strDFunctionName = "devd"
+        clsExtremeValueDist.AddParameter("shape", "Shape", 0)
+        clsExtremeValueDist.AddParameter("scale", "Scale", 1)
+        clsExtremeValueDist.AddParameter("loc", "Location", 0)
         lstAllDistributions.Add(clsExtremeValueDist)
 
         ' Weibull Distribution
@@ -233,10 +234,10 @@ Public Class ucrDistributions
 
         'Bernouli Distribution
         clsBernouliDist.strNameTag = "Bernouli"
-        clsBernouliDist.strRFunctionName = "rbern"
-        clsBernouliDist.strPFunctionName = "pbern"
-        clsBernouliDist.strQFunctionName = "qbern"
-        clsBernouliDist.strDFunctionName = "dbern"
+        clsBernouliDist.strRFunctionName = "rbinom"
+        clsBernouliDist.strPFunctionName = "pbinom"
+        clsBernouliDist.strQFunctionName = "qbinom"
+        clsBernouliDist.strDFunctionName = "dbinom"
         clsBernouliDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsBernouliDist)
 

@@ -43,6 +43,10 @@ Public Class dlgRandomSample
         clsSetSeed.SetRCommand("set.seed")
         nudSeed.Minimum = Integer.MinValue
         nudSeed.Maximum = Integer.MaxValue
+        ucrNewColumnName.SetPrefix("Rand")
+        ucrNewColumnName.SetItemsTypeAsColumns()
+        ucrNewColumnName.SetDefaultTypeAsColumn()
+        ucrNewColumnName.SetDataFrameSelector(ucrSelectorRandomSamples)
     End Sub
 
     Private Sub SetDefaults()
@@ -87,13 +91,25 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub SetAssignTo()
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrPrefixNewColumns.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrPrefixNewColumns.GetText)
+        If nudNumberOfSamples.Text <> "" Then
+            If nudNumberOfSamples.Value = 1 Then
+                ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
+            Else
+                ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrPrefixNewColumns.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrPrefixNewColumns.GetText)
+            End If
+        Else
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        End If
     End Sub
 
     Private Sub SetNumberOfSamplesParameters()
         If nudNumberOfSamples.Text <> "" Then
             If nudNumberOfSamples.Value = 1 Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
+                ucrNewColumnName.Visible = True
+                lblNewColumnName.Visible = True
+                ucrPrefixNewColumns.Visible = False
+                lblPrefixColumnName.Visible = False
             Else
                 clsDistribtionFunction.RemoveAssignTo()
                 clsMultipleSamplesFunction.ClearParameters()
@@ -101,6 +117,10 @@ Public Class dlgRandomSample
                     clsMultipleSamplesFunction.AddParameter("X" & i, clsRFunctionParameter:=clsDistribtionFunction)
                 Next
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
+                ucrNewColumnName.Visible = False
+                lblNewColumnName.Visible = False
+                ucrPrefixNewColumns.Visible = True
+                lblPrefixColumnName.Visible = True
             End If
             SetAssignTo()
         End If
@@ -122,5 +142,9 @@ Public Class dlgRandomSample
 
     Private Sub nudNumberOfSamples_TextChanged(sender As Object, e As EventArgs) Handles nudNumberOfSamples.TextChanged
         SetNumberOfSamplesParameters()
+    End Sub
+
+    Private Sub ucrNewColumnName_NameChanged() Handles ucrNewColumnName.NameChanged
+        SetAssignTo()
     End Sub
 End Class
