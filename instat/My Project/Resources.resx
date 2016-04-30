@@ -281,7 +281,7 @@
     <value>No</value>
   </data>
   <data name="Rate" xml:space="preserve">
-    <value>rate</value>
+    <value>Rate</value>
   </data>
   <data name="Stack_Daily_data" xml:space="preserve">
     <value>Stack Daily data</value>
@@ -1509,5 +1509,8 @@
   </data>
   <data name="Gamma" xml:space="preserve">
     <value>Gamma</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
   </data>
 </root>
