@@ -17,8 +17,8 @@
 Imports instat.Translations
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
-    Dim clsModel As New ROperator
-
+    Public clsModel As New ROperator
+    Public clsRConvert, clsRCIFunction As New RFunction
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
@@ -39,6 +39,7 @@ Public Class dlgRegressionSimple
         ucrExplanatory.Selector = ucrSelectorSimpleReg
         ucrBase.iHelpTopicID = 171
         sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+        sdgModelOptions.SetRCIFunction(clsRCIFunction)
     End Sub
 
     Private Sub ReopenDialog()
@@ -52,10 +53,15 @@ Public Class dlgRegressionSimple
         chkSaveModel.Checked = True
         ucrModelName.Visible = True
         ucrFamily.Enabled = False
+        chkConvertToVariate.Checked = False
+        chkConvertToVariate.Visible = False
+        chkFunction.Checked = False
+        chkFunction.Visible = False
         'TODO get this to be getting a default name e.g. reg1, reg2, etc.
         '     will be possible with new textbox user control
         ucrModelName.SetName("reg")
         sdgSimpleRegOptions.SetDefaults()
+        sdgModelOptions.SetDefaults()
         TestOKEnabled()
     End Sub
 
@@ -72,22 +78,63 @@ Public Class dlgRegressionSimple
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-    Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdRegressionOptions.Click
+    Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgSimpleRegOptions.ShowDialog()
     End Sub
 
-    Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
+    Private Sub ResponseConvert()
         If Not ucrResponse.IsEmpty Then
-            clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
             ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
-            ucrFamily.Enabled = True
-            ucrFamily.SetGLMDistributions()
+            If ucrFamily.strDatatype = "numeric" Then
+                chkConvertToVariate.Checked = False
+                chkConvertToVariate.Visible = False
+            Else
+                chkConvertToVariate.Visible = True
+            End If
+            If chkConvertToVariate.Checked Then
+                clsRConvert.SetRCommand("as.numeric")
+                clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
+                clsModel.SetParameter(True, clsRFunc:=clsRConvert)
+                ucrFamily.strDatatype = "numeric"
+                ucrFamily.Enabled = True
+                ucrFamily.SetGLMDistributions()
+            Else
+                clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+                ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+                ucrFamily.Enabled = True
+                ucrFamily.SetGLMDistributions()
+            End If
         End If
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
+        ResponseConvert()
         TestOKEnabled()
     End Sub
 
+    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
+        ResponseConvert()
+    End Sub
+
+    Private Sub ExplanatoryFunctionSelect()
+        Dim strExplanatoryType As String
+        If Not ucrExplanatory.IsEmpty Then
+            strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+            If strExplanatoryType = "numeric" Or strExplanatoryType = "positive integer" Or strExplanatoryType = "integer" Then
+                chkFunction.Visible = True
+            Else
+                chkFunction.Checked = False
+                chkFunction.Visible = False
+            End If
+            If chkFunction.Checked Then
+                sdgModelOptions.ModelFunction()
+            Else
+                clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+            End If
+        End If
+    End Sub
     Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
-        clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+        ExplanatoryFunctionSelect()
         TestOKEnabled()
     End Sub
 
@@ -123,13 +170,28 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
-        'TODO: Include multinomial as an option and the appripriate function
+        sdgModelOptions.RestrictLink()
+        'TODO:   Include multinomial as an option And the appripriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
             ucrBase.clsRsyntax.SetFunction("lm")
             ucrBase.clsRsyntax.RemoveParameter("family")
         Else
+            clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
             ucrBase.clsRsyntax.SetFunction("glm")
-            ucrBase.clsRsyntax.AddParameter("family", ucrFamily.clsCurrDistribution.strGLMFunctionName)
+            ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
         End If
+    End Sub
+
+    Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        sdgModelOptions.ShowDialog()
+        ' ToDo: Ensure the correct tab is open by default
+    End Sub
+
+    Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
+        If chkFunction.Checked Then
+            sdgModelOptions.ShowDialog()
+            ' ToDo: Ensure the correct tab is open by default
+        End If
+        ExplanatoryFunctionSelect()
     End Sub
 End Class

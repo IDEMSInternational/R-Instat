@@ -153,7 +153,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
 )
 
 # TODO
-data_object$set("public", "get_variables_metadata", function(include_all = TRUE, data_type = "all", convert_to_character = FALSE) {
+data_object$set("public", "get_variables_metadata", function(include_all = TRUE, data_type = "all", convert_to_character = FALSE, property) {
   self$update_variables_metadata()
   if(!include_all) out = private$variables_metadata
   else {
@@ -168,7 +168,14 @@ data_object$set("public", "get_variables_metadata", function(include_all = TRUE,
       }
     }
   }
-  if(convert_to_character) return(convert_to_character_matrix(out, FALSE))
+  
+  if(!missing(property)) {
+    if(!property %in% names(out)) stop(property, " not found in variables metadata")
+    out = out[, property]
+  }
+  
+  #TODO get convert_to_character_matrix to work on vectors
+  if(convert_to_character && missing(property)) return(convert_to_character_matrix(out, FALSE))
   else return(out)
 }
 )
@@ -558,7 +565,7 @@ data_object$set("public", "get_dataframe_length", function() {
 }
 )
 
-data_object$set("public", "get_column_factor_levels", function(col_name = "") {
+data_object$set("public", "get_factor_data_frame", function(col_name = "") {
   if(!(col_name %in% names(private$data))){
     stop(col_name, " is not a column in", get_metadata(data_name_label))
   }
@@ -569,6 +576,19 @@ data_object$set("public", "get_column_factor_levels", function(col_name = "") {
   counts <- as.data.frame(table(private$data[,c(col_name)]))
   counts <- rename(counts, replace = c("Var1" = "Levels", "Freq" = "Counts"))
   return(counts)
+}
+)
+
+data_object$set("public", "get_column_factor_levels", function(col_name = "") {
+  if(!(col_name %in% names(private$data))){
+    stop(col_name, " is not a column in", get_metadata(data_name_label))
+  }
+  
+  if(!(is.factor(private$data[,col_name]))){
+    stop(col_name, " is not a factor column")
+  }
+  
+  return(levels(private$data[,col_name]))
 }
 )
 

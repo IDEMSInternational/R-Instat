@@ -42,6 +42,10 @@ Public Class ucrInput
         RaiseEvent NameChanged()
     End Sub
 
+    Public Function UserTyped()
+        Return bUserTyped
+    End Function
+
     Public Sub SetDefaultTypeAsColumn()
         strDefaultType = "Column"
         SetDefaultName()
@@ -67,7 +71,7 @@ Public Class ucrInput
         SetDefaultName()
     End Sub
 
-    Public Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
+    Public Overridable Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
         ucrDataFrameSelector = ucrNewSelector
         If Not bUserTyped Then
             SetDefaultName()
