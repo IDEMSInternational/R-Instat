@@ -23,20 +23,29 @@ Public Class ucrFactor
     Public Event GridContentChanged()
     Public WithEvents clsReceiver As ucrReceiverSingle
     Public WithEvents shtCurrSheet As unvell.ReoGrid.Worksheet
-    Public clsRSyntax As New RSyntax
     Public bIsSelector As Boolean = False
     Public bIsMultipleSelector As Boolean = False
     Public iSelectorColumnIndex As Integer = -1
     Public strSelectorColumnName As String = "Select Level"
-    Dim bIsEditable As Boolean = False
+    Private bIsEditable As Boolean = False
+    Private lstEditableColumns As List(Of String)
 
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
+        RefreshFactorData()
     End Sub
 
     Public Sub SetReceiver(clsNewReceiver As ucrReceiverSingle)
         clsReceiver = clsNewReceiver
         RefreshFactorData()
+    End Sub
+
+    Public Sub AddEditableColumns(strColumns As String())
+        If lstEditableColumns Is Nothing Then
+            lstEditableColumns = New List(Of String)
+        End If
+        lstEditableColumns.AddRange(strColumns)
+        ApplyColumnSettings()
     End Sub
 
     Public Sub SetAsSingleSelector()
@@ -102,11 +111,28 @@ Public Class ucrFactor
                 End If
             End If
         Else
+            shtCurrSheet = Nothing
             iSelectorColumnIndex = -1
         End If
         grdFactorData.Visible = bShowGrid
         If shtCurrSheet IsNot Nothing Then
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, Not bIsEditable)
+            ApplyColumnSettings()
+        End If
+    End Sub
+
+    Private Sub ApplyColumnSettings()
+        Dim lstColNumber As New List(Of Integer)
+
+        If shtCurrSheet IsNot Nothing AndAlso lstEditableColumns IsNot Nothing AndAlso lstEditableColumns.Count > 0 Then
+            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, False)
+            For i = 0 To shtCurrSheet.ColumnCount - 1
+                If Not lstEditableColumns.Contains(shtCurrSheet.ColumnHeaders(i).Text) Then
+                    For j = 0 To shtCurrSheet.RowCount - 1
+                        shtCurrSheet.Cells(j, i).IsReadOnly = True
+                    Next
+                End If
+            Next
         End If
     End Sub
 
