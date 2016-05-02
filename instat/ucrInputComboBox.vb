@@ -59,6 +59,11 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Overrides Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
+        MyBase.SetDataFrameSelector(ucrNewSelector)
+        FillItemTypes()
+    End Sub
+
     Public Overrides Sub SetName(strName As String)
         If ValidateText(strName) Then
             cboInput.Text = strName
