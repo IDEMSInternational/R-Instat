@@ -519,6 +519,11 @@ instat_object$set("public", "get_column_factor_levels", function(data_name,col_n
 } 
 )
 
+instat_object$set("public", "get_factor_data_frame", function(data_name,col_name = "") {
+  self$get_data_objects(data_name)$get_factor_data_frame(col_name)
+} 
+)
+
 instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(), decreasing = FALSE, na.last = TRUE) {
   self$get_data_objects(data_name)$sort_dataframe(col_names = col_names, decreasing = decreasing, na.last = na.last)
 } 

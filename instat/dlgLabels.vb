@@ -45,9 +45,7 @@ Public Class dlgLabels
         ucrReceiverLabels.SetDataType("factor")
         ucrFactorLabels.SetReceiver(ucrReceiverLabels)
         ucrFactorLabels.SetAsViewerOnly()
-        'ucrFactorLabels.SetSelectorColumnName(strNewColumnName:=ucrFactorLabels.)
-        ucrFactorLabels.SetEditableStatus(bEditable:=True)
-
+        ucrFactorLabels.AddEditableColumns({"Levels"})
     End Sub
 
     Private Sub SetDefaults()
