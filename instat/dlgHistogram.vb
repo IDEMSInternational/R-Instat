@@ -47,14 +47,14 @@ Public Class dlgHistogram
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 118
         ucrFactorReceiver.Selector = ucrHistogramSelector
-        ucrFactorReceiver.SetDataType("factor")
+        ucrFactorReceiver.SetIncludedDataTypes({"factor"})
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
 
         ucrVariablesAsFactorforHist.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorforHist.SetSelector(ucrHistogramSelector)
-        ucrVariablesAsFactorforHist.SetDataType("numeric")
+        ucrVariablesAsFactorforHist.SetIncludedDataType({"numeric"})
     End Sub
     Private Sub ucrHistogramSelector_DataFrameChanged() Handles ucrHistogramSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrHistogramSelector.ucrAvailableDataFrames.clsCurrDataFrame)

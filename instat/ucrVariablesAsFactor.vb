@@ -24,6 +24,15 @@
         ucrSingleVariable.SetDataType(strTemp)
         ucrMultipleVariables.SetDataType(strTemp)
     End Sub
+    Public Sub SetIncludedDataType(strInclude As String())
+        ucrSingleVariable.SetIncludedDataTypes(strInclude)
+        ucrMultipleVariables.SetIncludedDataTypes(strInclude)
+    End Sub
+
+    Public Sub SetExcludedDataTypes(strExclude As String())
+        ucrMultipleVariables.SetExcludedDataTypes(strExclude)
+        ucrSingleVariable.SetExcludedDataTypes(strExclude)
+    End Sub
 
     Public Sub SetSelector(ucrSelectorToSet As ucrSelectorByDataFrame)
         ucrVariableSelector = ucrSelectorToSet
@@ -175,5 +184,9 @@
     Public Sub ResetControl()
         'this resets the ucrReceiverFactor
         SetDefaults()
+    End Sub
+
+    Private Sub ucrMultipleVariables_Load(sender As Object, e As EventArgs) Handles ucrMultipleVariables.Load
+
     End Sub
 End Class
