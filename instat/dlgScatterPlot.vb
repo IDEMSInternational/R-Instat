@@ -75,14 +75,13 @@ Public Class dlgScatterPlot
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
 
         ucrReceiverX.Selector = ucrSelectorForScatter
-        ucrReceiverX.SetDataType("numeric")
+        ucrReceiverX.SetIncludedDataTypes({"numeric"})
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
-        ucrFactorOptionalReceiver.SetDataType("factor")
-
+        ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
 
         ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForScatter.SetSelector(ucrSelectorForScatter)
-        ucrVariablesAsFactorForScatter.SetDataType("numeric")
+        ucrVariablesAsFactorForScatter.SetExcludedDataTypes({"numeric"})
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
     End Sub
