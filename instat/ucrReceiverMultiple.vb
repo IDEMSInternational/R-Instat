@@ -128,6 +128,31 @@ Public Class ucrReceiverMultiple
         Return clsGetVariablesFunc
     End Function
 
+    Public Function GetVariablesAsList() As List(Of RFunction)
+        Dim lstColumnFunctions As New List(Of RFunction)
+        Dim strColumn As String
+        Dim clsColumnFunction As RFunction
+        Dim strCurrDataFrame As String
+        Dim lstCurrDataFrames As List(Of String)
+
+        lstCurrDataFrames = GetDataFrameNames()
+        If lstCurrDataFrames.Count = 1 Then
+            strCurrDataFrame = lstCurrDataFrames(0)
+            For i = 0 To lstSelectedVariables.Items.Count - 1
+                clsColumnFunction = New RFunction
+                strColumn = lstSelectedVariables.Items(i).Text
+                clsColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+                clsColumnFunction.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34))
+                clsColumnFunction.AddParameter("col_names", Chr(34) & strColumn & Chr(34))
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    clsColumnFunction.AddParameter("force_as_data_frame", "FALSE")
+                End If
+                lstColumnFunctions.Add(clsColumnFunction)
+            Next
+        End If
+        Return lstColumnFunctions
+    End Function
+
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
         Dim i As Integer
@@ -155,6 +180,15 @@ Public Class ucrReceiverMultiple
         End If
 
         Return strTemp
+    End Function
+
+    Public Function GetVariableNamesAsList() As List(Of String)
+        Dim lstItems As New List(Of String)
+
+        For i = 0 To lstSelectedVariables.Items.Count - 1
+            lstItems.Add(lstSelectedVariables.Items(i).Text)
+        Next
+        Return lstItems
     End Function
 
     Public Function GetDataFrameNames() As List(Of String)
@@ -195,4 +229,12 @@ Public Class ucrReceiverMultiple
     Private Sub ClearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem.Click
         Clear()
     End Sub
+
+    Public Function GetCount() As Integer
+        If lstSelectedVariables IsNot Nothing Then
+            Return lstSelectedVariables.Items.Count
+        Else
+            Return 0
+        End If
+    End Function
 End Class

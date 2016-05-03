@@ -19,7 +19,7 @@ Public Class dlgConvertColumns
     Public bFirstLoad As Boolean = True
     Public bToFactorOnly As Boolean = False
 
-    Private Sub ucrSelectorDataFrameColumns_Load(sender As Object, e As EventArgs) Handles ucrSelectorDataFrameColumns.Load
+    Private Sub dlgConvertColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
 
         If bFirstLoad Then
@@ -32,7 +32,9 @@ Public Class dlgConvertColumns
 
         TestOKEnabled()
 
+
     End Sub
+
     Private Sub ReopenDialog()
         SetToFactorStatus(bToFactorOnly)
     End Sub

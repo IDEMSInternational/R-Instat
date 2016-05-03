@@ -29,8 +29,11 @@ Partial Class dlgRegressionSimple
         Me.txtdf = New System.Windows.Forms.TextBox()
         Me.lblResponse = New System.Windows.Forms.Label()
         Me.lblExplanatory = New System.Windows.Forms.Label()
-        Me.cmdRegressionOptions = New System.Windows.Forms.Button()
+        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.chkSaveModel = New System.Windows.Forms.CheckBox()
+        Me.cmdModelOptions = New System.Windows.Forms.Button()
+        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
+        Me.chkFunction = New System.Windows.Forms.CheckBox()
         Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrModelName = New instat.ucrVariableName()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
@@ -73,12 +76,12 @@ Partial Class dlgRegressionSimple
         Me.lblExplanatory.Name = "lblExplanatory"
         Me.lblExplanatory.Tag = "Explanatory_Variable"
         '
-        'cmdRegressionOptions
+        'cmdDisplayOptions
         '
-        resources.ApplyResources(Me.cmdRegressionOptions, "cmdRegressionOptions")
-        Me.cmdRegressionOptions.Name = "cmdRegressionOptions"
-        Me.cmdRegressionOptions.Tag = "Regression_Options..."
-        Me.cmdRegressionOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
+        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.Tag = "Display_Options..."
+        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
         'chkSaveModel
         '
@@ -86,6 +89,27 @@ Partial Class dlgRegressionSimple
         Me.chkSaveModel.Name = "chkSaveModel"
         Me.chkSaveModel.Tag = "Save_Model"
         Me.chkSaveModel.UseVisualStyleBackColor = True
+        '
+        'cmdModelOptions
+        '
+        resources.ApplyResources(Me.cmdModelOptions, "cmdModelOptions")
+        Me.cmdModelOptions.Name = "cmdModelOptions"
+        Me.cmdModelOptions.Tag = "Model_Options..."
+        Me.cmdModelOptions.UseVisualStyleBackColor = True
+        '
+        'chkConvertToVariate
+        '
+        resources.ApplyResources(Me.chkConvertToVariate, "chkConvertToVariate")
+        Me.chkConvertToVariate.Name = "chkConvertToVariate"
+        Me.chkConvertToVariate.Tag = "Convert_to_variate"
+        Me.chkConvertToVariate.UseVisualStyleBackColor = True
+        '
+        'chkFunction
+        '
+        resources.ApplyResources(Me.chkFunction, "chkFunction")
+        Me.chkFunction.Name = "chkFunction"
+        Me.chkFunction.Tag = "Function"
+        Me.chkFunction.UseVisualStyleBackColor = True
         '
         'ucrFamily
         '
@@ -123,10 +147,13 @@ Partial Class dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.chkFunction)
+        Me.Controls.Add(Me.chkConvertToVariate)
+        Me.Controls.Add(Me.cmdModelOptions)
         Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrModelName)
-        Me.Controls.Add(Me.cmdRegressionOptions)
+        Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.lblExplanatory)
         Me.Controls.Add(Me.lblResponse)
         Me.Controls.Add(Me.ucrExplanatory)
@@ -152,14 +179,13 @@ Partial Class dlgRegressionSimple
     Friend WithEvents ucrResponse As ucrReceiverSingle
     Friend WithEvents ucrExplanatory As ucrReceiverSingle
 
-    Private Sub UcrReceiverSingle1_Load(sender As Object, e As EventArgs) Handles ucrResponse.Load
-
-    End Sub
-
     Friend WithEvents lblResponse As Label
     Friend WithEvents lblExplanatory As Label
-    Friend WithEvents cmdRegressionOptions As Button
+    Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents ucrModelName As ucrVariableName
     Friend WithEvents chkSaveModel As CheckBox
     Friend WithEvents ucrFamily As ucrDistributions
+    Friend WithEvents cmdModelOptions As Button
+    Friend WithEvents chkConvertToVariate As CheckBox
+    Friend WithEvents chkFunction As CheckBox
 End Class
