@@ -47,10 +47,12 @@ Public Class dlgSummaryBarOrPieChart
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_summarybar)
 
         ucrYReceiver.Selector = ucrSummarybarSelector
+        ucrYReceiver.SetIncludedDataTypes({"nnumeric"})
         ucrFactorReceiver.Selector = ucrSummarybarSelector
-        ucrFactorReceiver.SetDataType("factor")
+        ucrFactorReceiver.SetIncludedDataTypes({"factor"})
+
         ucrSecondFactorReceiver.Selector = ucrSummarybarSelector
-        ucrSecondFactorReceiver.SetDataType("factor")
+        ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
         ucrYReceiver.SetMeAsReceiver()
         ucrBase.clsRsyntax.iCallType = 0
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)

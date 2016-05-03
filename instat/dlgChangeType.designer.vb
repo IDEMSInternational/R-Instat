@@ -39,29 +39,30 @@ Partial Class dlgChangeType
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(7, 267)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 234)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrChangetypeReceiver
         '
-        Me.ucrChangetypeReceiver.Location = New System.Drawing.Point(227, 34)
+        Me.ucrChangetypeReceiver.Location = New System.Drawing.Point(258, 62)
         Me.ucrChangetypeReceiver.Name = "ucrChangetypeReceiver"
+        Me.ucrChangetypeReceiver.Selector = Nothing
         Me.ucrChangetypeReceiver.Size = New System.Drawing.Size(106, 26)
         Me.ucrChangetypeReceiver.TabIndex = 1
         '
         'ucrChangeTypeSelector
         '
-        Me.ucrChangeTypeSelector.Location = New System.Drawing.Point(12, 12)
+        Me.ucrChangeTypeSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrChangeTypeSelector.Name = "ucrChangeTypeSelector"
-        Me.ucrChangeTypeSelector.Size = New System.Drawing.Size(209, 136)
+        Me.ucrChangeTypeSelector.Size = New System.Drawing.Size(239, 136)
         Me.ucrChangeTypeSelector.TabIndex = 2
         '
         'lblVariable
         '
         Me.lblVariable.AutoSize = True
-        Me.lblVariable.Location = New System.Drawing.Point(261, 18)
+        Me.lblVariable.Location = New System.Drawing.Point(258, 46)
         Me.lblVariable.Name = "lblVariable"
         Me.lblVariable.Size = New System.Drawing.Size(45, 13)
         Me.lblVariable.TabIndex = 3
@@ -74,9 +75,9 @@ Partial Class dlgChangeType
         Me.grpColumnType.Controls.Add(Me.rdoFactor)
         Me.grpColumnType.Controls.Add(Me.rdoText)
         Me.grpColumnType.Controls.Add(Me.rdoVariate)
-        Me.grpColumnType.Location = New System.Drawing.Point(217, 66)
+        Me.grpColumnType.Location = New System.Drawing.Point(10, 150)
         Me.grpColumnType.Name = "grpColumnType"
-        Me.grpColumnType.Size = New System.Drawing.Size(200, 119)
+        Me.grpColumnType.Size = New System.Drawing.Size(402, 38)
         Me.grpColumnType.TabIndex = 4
         Me.grpColumnType.TabStop = False
         Me.grpColumnType.Tag = "Column_Type"
@@ -85,7 +86,7 @@ Partial Class dlgChangeType
         'rdoUnitsVector
         '
         Me.rdoUnitsVector.AutoSize = True
-        Me.rdoUnitsVector.Location = New System.Drawing.Point(6, 88)
+        Me.rdoUnitsVector.Location = New System.Drawing.Point(303, 14)
         Me.rdoUnitsVector.Name = "rdoUnitsVector"
         Me.rdoUnitsVector.Size = New System.Drawing.Size(83, 17)
         Me.rdoUnitsVector.TabIndex = 0
@@ -97,7 +98,7 @@ Partial Class dlgChangeType
         'rdoFactor
         '
         Me.rdoFactor.AutoSize = True
-        Me.rdoFactor.Location = New System.Drawing.Point(6, 65)
+        Me.rdoFactor.Location = New System.Drawing.Point(214, 14)
         Me.rdoFactor.Name = "rdoFactor"
         Me.rdoFactor.Size = New System.Drawing.Size(55, 17)
         Me.rdoFactor.TabIndex = 0
@@ -109,7 +110,7 @@ Partial Class dlgChangeType
         'rdoText
         '
         Me.rdoText.AutoSize = True
-        Me.rdoText.Location = New System.Drawing.Point(6, 42)
+        Me.rdoText.Location = New System.Drawing.Point(127, 14)
         Me.rdoText.Name = "rdoText"
         Me.rdoText.Size = New System.Drawing.Size(46, 17)
         Me.rdoText.TabIndex = 0
@@ -121,7 +122,7 @@ Partial Class dlgChangeType
         'rdoVariate
         '
         Me.rdoVariate.AutoSize = True
-        Me.rdoVariate.Location = New System.Drawing.Point(6, 19)
+        Me.rdoVariate.Location = New System.Drawing.Point(30, 14)
         Me.rdoVariate.Name = "rdoVariate"
         Me.rdoVariate.Size = New System.Drawing.Size(58, 17)
         Me.rdoVariate.TabIndex = 0
@@ -132,7 +133,7 @@ Partial Class dlgChangeType
         '
         'chkReadTextAsDateValues
         '
-        Me.chkReadTextAsDateValues.Location = New System.Drawing.Point(148, 212)
+        Me.chkReadTextAsDateValues.Location = New System.Drawing.Point(16, 199)
         Me.chkReadTextAsDateValues.Name = "chkReadTextAsDateValues"
         Me.chkReadTextAsDateValues.Size = New System.Drawing.Size(16, 23)
         Me.chkReadTextAsDateValues.TabIndex = 0
@@ -141,7 +142,7 @@ Partial Class dlgChangeType
         '
         'cmdDateFormat
         '
-        Me.cmdDateFormat.Location = New System.Drawing.Point(314, 212)
+        Me.cmdDateFormat.Location = New System.Drawing.Point(197, 199)
         Me.cmdDateFormat.Name = "cmdDateFormat"
         Me.cmdDateFormat.Size = New System.Drawing.Size(86, 23)
         Me.cmdDateFormat.TabIndex = 5
@@ -152,7 +153,7 @@ Partial Class dlgChangeType
         'lblReadTextAsDateValues
         '
         Me.lblReadTextAsDateValues.AutoSize = True
-        Me.lblReadTextAsDateValues.Location = New System.Drawing.Point(170, 217)
+        Me.lblReadTextAsDateValues.Location = New System.Drawing.Point(38, 204)
         Me.lblReadTextAsDateValues.Name = "lblReadTextAsDateValues"
         Me.lblReadTextAsDateValues.Size = New System.Drawing.Size(125, 13)
         Me.lblReadTextAsDateValues.TabIndex = 6
@@ -163,7 +164,7 @@ Partial Class dlgChangeType
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 326)
+        Me.ClientSize = New System.Drawing.Size(432, 298)
         Me.Controls.Add(Me.lblReadTextAsDateValues)
         Me.Controls.Add(Me.cmdDateFormat)
         Me.Controls.Add(Me.chkReadTextAsDateValues)
