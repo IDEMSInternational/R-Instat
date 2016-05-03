@@ -201,8 +201,12 @@ Public Class clsGridLink
                             fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (D)"
                         Case "logical"
                             fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (l)"
+                        Case "numeric"
+                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (n)"
+                        Case "integer"
+                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (n)"
                         Case Else
-                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
+                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (U)"
                     End Select
                 Next
             Else
