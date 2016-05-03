@@ -27,76 +27,90 @@ Partial Class dlgStack
         Me.lblFactorInto = New System.Windows.Forms.Label()
         Me.chkColumnsToCarry = New System.Windows.Forms.CheckBox()
         Me.lblNewDataFrameName = New System.Windows.Forms.Label()
-        Me.ucrNewDataFrameName = New instat.ucrVariableName()
+        Me.ucrNewDataName = New instat.ucrInputTextBox()
+        Me.ucrStackDataInto = New instat.ucrInputTextBox()
+        Me.ucrFactorInto = New instat.ucrInputTextBox()
         Me.ucrColumnsToCarryReceiver = New instat.ucrReceiverMultiple()
         Me.ucrSelectorStack = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverColumnsToBeStack = New instat.ucrReceiverMultiple()
-        Me.ucrFactorInto = New instat.ucrInputTextBox()
-        Me.ucrStackDataInto = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblColumnsTostack
         '
         Me.lblColumnsTostack.AutoSize = True
-        Me.lblColumnsTostack.Location = New System.Drawing.Point(249, 8)
+        Me.lblColumnsTostack.Location = New System.Drawing.Point(295, 13)
         Me.lblColumnsTostack.Name = "lblColumnsTostack"
-        Me.lblColumnsTostack.Size = New System.Drawing.Size(91, 13)
+        Me.lblColumnsTostack.Size = New System.Drawing.Size(90, 13)
         Me.lblColumnsTostack.TabIndex = 1
-        Me.lblColumnsTostack.Tag = "Columns_to_stack"
-        Me.lblColumnsTostack.Text = "Columns to  stack"
+        Me.lblColumnsTostack.Tag = "Columns_to_Stack"
+        Me.lblColumnsTostack.Text = "Columns to Stack"
         '
         'lblStackDataInto
         '
         Me.lblStackDataInto.AutoSize = True
-        Me.lblStackDataInto.Location = New System.Drawing.Point(0, 258)
+        Me.lblStackDataInto.Location = New System.Drawing.Point(41, 256)
         Me.lblStackDataInto.Name = "lblStackDataInto"
-        Me.lblStackDataInto.Size = New System.Drawing.Size(79, 13)
+        Me.lblStackDataInto.Size = New System.Drawing.Size(85, 13)
         Me.lblStackDataInto.TabIndex = 9
-        Me.lblStackDataInto.Tag = "Stack_data_into"
-        Me.lblStackDataInto.Text = "Stack data into"
+        Me.lblStackDataInto.Tag = "Stack_Data_Into"
+        Me.lblStackDataInto.Text = "Stack Data Into:"
         '
         'lblFactorInto
         '
         Me.lblFactorInto.AutoSize = True
-        Me.lblFactorInto.Location = New System.Drawing.Point(0, 229)
+        Me.lblFactorInto.Location = New System.Drawing.Point(65, 227)
         Me.lblFactorInto.Name = "lblFactorInto"
-        Me.lblFactorInto.Size = New System.Drawing.Size(57, 13)
+        Me.lblFactorInto.Size = New System.Drawing.Size(61, 13)
         Me.lblFactorInto.TabIndex = 7
-        Me.lblFactorInto.Tag = "Factor_into"
-        Me.lblFactorInto.Text = "Factor into"
+        Me.lblFactorInto.Tag = "Factor_Into"
+        Me.lblFactorInto.Text = "Factor Into:"
         '
         'chkColumnsToCarry
         '
         Me.chkColumnsToCarry.AutoSize = True
-        Me.chkColumnsToCarry.Location = New System.Drawing.Point(295, 139)
+        Me.chkColumnsToCarry.Location = New System.Drawing.Point(287, 145)
         Me.chkColumnsToCarry.Name = "chkColumnsToCarry"
-        Me.chkColumnsToCarry.Size = New System.Drawing.Size(104, 17)
+        Me.chkColumnsToCarry.Size = New System.Drawing.Size(93, 17)
         Me.chkColumnsToCarry.TabIndex = 3
-        Me.chkColumnsToCarry.Tag = "Columns_to_carry"
-        Me.chkColumnsToCarry.Text = "Columns to carry"
+        Me.chkColumnsToCarry.Tag = "Carry_Columns"
+        Me.chkColumnsToCarry.Text = "Carry Columns"
         Me.chkColumnsToCarry.UseVisualStyleBackColor = True
         '
         'lblNewDataFrameName
         '
         Me.lblNewDataFrameName.AutoSize = True
-        Me.lblNewDataFrameName.Location = New System.Drawing.Point(0, 204)
+        Me.lblNewDataFrameName.Location = New System.Drawing.Point(5, 203)
         Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
         Me.lblNewDataFrameName.Size = New System.Drawing.Size(121, 13)
         Me.lblNewDataFrameName.TabIndex = 5
         Me.lblNewDataFrameName.Tag = "New_Data_Frame_Name:"
         Me.lblNewDataFrameName.Text = "New Data Frame Name:"
         '
-        'ucrNewDataFrameName
+        'ucrNewDataName
         '
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(134, 198)
-        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(147, 23)
-        Me.ucrNewDataFrameName.TabIndex = 6
+        Me.ucrNewDataName.Location = New System.Drawing.Point(130, 200)
+        Me.ucrNewDataName.Name = "ucrNewDataName"
+        Me.ucrNewDataName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrNewDataName.TabIndex = 14
+        '
+        'ucrStackDataInto
+        '
+        Me.ucrStackDataInto.Location = New System.Drawing.Point(130, 254)
+        Me.ucrStackDataInto.Name = "ucrStackDataInto"
+        Me.ucrStackDataInto.Size = New System.Drawing.Size(142, 21)
+        Me.ucrStackDataInto.TabIndex = 13
+        '
+        'ucrFactorInto
+        '
+        Me.ucrFactorInto.Location = New System.Drawing.Point(130, 227)
+        Me.ucrFactorInto.Name = "ucrFactorInto"
+        Me.ucrFactorInto.Size = New System.Drawing.Size(142, 21)
+        Me.ucrFactorInto.TabIndex = 12
         '
         'ucrColumnsToCarryReceiver
         '
-        Me.ucrColumnsToCarryReceiver.Location = New System.Drawing.Point(295, 156)
+        Me.ucrColumnsToCarryReceiver.Location = New System.Drawing.Point(287, 162)
         Me.ucrColumnsToCarryReceiver.Name = "ucrColumnsToCarryReceiver"
         Me.ucrColumnsToCarryReceiver.Selector = Nothing
         Me.ucrColumnsToCarryReceiver.Size = New System.Drawing.Size(121, 113)
@@ -104,49 +118,35 @@ Partial Class dlgStack
         '
         'ucrSelectorStack
         '
-        Me.ucrSelectorStack.Location = New System.Drawing.Point(0, 0)
+        Me.ucrSelectorStack.Location = New System.Drawing.Point(5, 7)
         Me.ucrSelectorStack.Name = "ucrSelectorStack"
         Me.ucrSelectorStack.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorStack.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 279)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 279)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 65)
         Me.ucrBase.TabIndex = 11
         '
         'ucrReceiverColumnsToBeStack
         '
-        Me.ucrReceiverColumnsToBeStack.Location = New System.Drawing.Point(248, 24)
+        Me.ucrReceiverColumnsToBeStack.Location = New System.Drawing.Point(287, 29)
         Me.ucrReceiverColumnsToBeStack.Name = "ucrReceiverColumnsToBeStack"
         Me.ucrReceiverColumnsToBeStack.Selector = Nothing
         Me.ucrReceiverColumnsToBeStack.Size = New System.Drawing.Size(121, 132)
         Me.ucrReceiverColumnsToBeStack.TabIndex = 2
         '
-        'ucrFactorInto
-        '
-        Me.ucrFactorInto.Location = New System.Drawing.Point(134, 227)
-        Me.ucrFactorInto.Name = "ucrFactorInto"
-        Me.ucrFactorInto.Size = New System.Drawing.Size(142, 21)
-        Me.ucrFactorInto.TabIndex = 12
-        '
-        'ucrStackDataInto
-        '
-        Me.ucrStackDataInto.Location = New System.Drawing.Point(134, 254)
-        Me.ucrStackDataInto.Name = "ucrStackDataInto"
-        Me.ucrStackDataInto.Size = New System.Drawing.Size(142, 21)
-        Me.ucrStackDataInto.TabIndex = 13
-        '
         'dlgStack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(428, 341)
+        Me.ClientSize = New System.Drawing.Size(416, 341)
+        Me.Controls.Add(Me.ucrNewDataName)
         Me.Controls.Add(Me.ucrStackDataInto)
         Me.Controls.Add(Me.ucrFactorInto)
         Me.Controls.Add(Me.lblNewDataFrameName)
-        Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.ucrColumnsToCarryReceiver)
         Me.Controls.Add(Me.chkColumnsToCarry)
         Me.Controls.Add(Me.ucrSelectorStack)
@@ -172,8 +172,8 @@ Partial Class dlgStack
     Friend WithEvents ucrSelectorStack As ucrSelectorByDataFrameAddRemove
     Friend WithEvents chkColumnsToCarry As CheckBox
     Friend WithEvents ucrColumnsToCarryReceiver As ucrReceiverMultiple
-    Friend WithEvents ucrNewDataFrameName As ucrVariableName
     Friend WithEvents lblNewDataFrameName As Label
     Friend WithEvents ucrFactorInto As ucrInputTextBox
     Friend WithEvents ucrStackDataInto As ucrInputTextBox
+    Friend WithEvents ucrNewDataName As ucrInputTextBox
 End Class

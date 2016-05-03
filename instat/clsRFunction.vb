@@ -88,7 +88,7 @@ Public Class RFunction
                 End If
             ElseIf Not strAssignToModel = "" Then
                 strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$add_model(model_name = " & Chr(34) & strAssignToModel & Chr(34) & ", model = " & strAssignTo & ")" & vbCrLf
-                strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_model( model_name = " & Chr(34) & strAssignToModel & Chr(34) & ")"
+                strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_models( model_name = " & Chr(34) & strAssignToModel & Chr(34) & ")"
                 bIsAssigned = True
                 bToBeAssigned = False
             End If

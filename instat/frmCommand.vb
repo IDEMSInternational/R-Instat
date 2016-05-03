@@ -29,13 +29,12 @@ Public Class frmCommand
         End If
     End Sub
 
-    Public Sub txtCommand_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCommand.KeyDown
-        If e.Control And e.KeyCode = Keys.A Then
-            txtCommand.SelectAll()
-        End If
-
-        If e.Control And e.KeyCode = Keys.C And txtCommand.SelectedText <> "" Then
-            txtCommand.Copy()
-        End If
+    Public Sub copyText()
+        txtCommand.Copy()
     End Sub
+
+    Public Sub selectAllText()
+        txtCommand.SelectAll()
+    End Sub
+
 End Class

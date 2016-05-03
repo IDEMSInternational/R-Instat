@@ -60,8 +60,9 @@ Public Class dlgTransformText
         ucrInputPrefixForNewColumn.SetItemsTypeAsColumns()
         ucrInputPrefixForNewColumn.SetDefaultTypeAsColumn()
         ucrInputPrefixForNewColumn.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
-        ucrReceiverFirstWord.SetDataType("numeric")
-        ucrReceiverTransformText.SetDataType("factor")
+        ucrReceiverFirstWord.SetIncludedDataTypes({"numeric"})
+        ucrReceiverTransformText.SetIncludedDataTypes({"factor", "character"})
+        ucrReceiverLastWord.SetIncludedDataTypes({"numeric"})
 
     End Sub
 
