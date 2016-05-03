@@ -38,8 +38,12 @@ Public Class dlgReorderColumns
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReorderColumns_Leave(sender As Object, e As EventArgs) Handles ucrReorderColumns.Leave
-        ucrBase.clsRsyntax.AddParameter("col_order", ucrReorderColumns.GetVariableNames)
+    Private Sub ucrReorderColumns_OrderChanged() Handles ucrReorderColumns.OrderChanged
+        If Not ucrReorderColumns.isEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_order", ucrReorderColumns.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_order")
+        End If
     End Sub
 
     Private Sub TestOkEnabled()

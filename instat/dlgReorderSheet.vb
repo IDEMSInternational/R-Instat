@@ -46,6 +46,10 @@ Public Class dlgReorderSheet
     End Sub
 
     Private Sub ucrSheetsToReoder_OrderChanged() Handles ucrSheetsToReoder.OrderChanged
-        ucrBase.clsRsyntax.AddParameter("data_frames_order", ucrSheetsToReoder.GetVariableNames)
+        If Not ucrSheetsToReoder.isEmpty Then
+            ucrBase.clsRsyntax.AddParameter("data_frames_order", ucrSheetsToReoder.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("data_frames_order")
+        End If
     End Sub
 End Class
