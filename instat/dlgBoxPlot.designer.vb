@@ -80,10 +80,10 @@ Partial Class dlgBoxplot
         Me.chkHorizontalBoxplot.AutoSize = True
         Me.chkHorizontalBoxplot.Location = New System.Drawing.Point(10, 203)
         Me.chkHorizontalBoxplot.Name = "chkHorizontalBoxplot"
-        Me.chkHorizontalBoxplot.Size = New System.Drawing.Size(110, 17)
+        Me.chkHorizontalBoxplot.Size = New System.Drawing.Size(111, 17)
         Me.chkHorizontalBoxplot.TabIndex = 6
-        Me.chkHorizontalBoxplot.Tag = "Horizontal_boxplot"
-        Me.chkHorizontalBoxplot.Text = "Horizontal boxplot"
+        Me.chkHorizontalBoxplot.Tag = "Horizontal_Boxplot"
+        Me.chkHorizontalBoxplot.Text = "Horizontal Boxplot"
         Me.chkHorizontalBoxplot.UseVisualStyleBackColor = True
         '
         'ucrVariablesAsFactorForBoxplot
