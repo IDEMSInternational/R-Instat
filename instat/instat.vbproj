@@ -197,12 +197,6 @@
     <Compile Include="dlgChangeFormatDayMonth.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgChangeType.designer.vb">
-      <DependentUpon>dlgChangeType.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgChangeType.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgCheck.Designer.vb">
       <DependentUpon>dlgCheck.vb</DependentUpon>
     </Compile>
@@ -1706,15 +1700,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgChangeFormatDayMonth.sw-KE.resx">
       <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgChangeType.fr-FR.resx">
-      <DependentUpon>dlgChangeType.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgChangeType.resx">
-      <DependentUpon>dlgChangeType.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgChangeType.sw-KE.resx">
-      <DependentUpon>dlgChangeType.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCheck.fr-FR.resx">
       <DependentUpon>dlgCheck.vb</DependentUpon>
