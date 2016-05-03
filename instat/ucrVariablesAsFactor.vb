@@ -24,7 +24,7 @@
         ucrSingleVariable.SetDataType(strTemp)
         ucrMultipleVariables.SetDataType(strTemp)
     End Sub
-    Private Sub SetIncludedDataType(strInclude As String())
+    Public Sub SetIncludedDataType(strInclude As String())
         ucrSingleVariable.lstIncludedDataTypes.AddRange(strInclude)
         ucrMultipleVariables.lstIncludedDataTypes.AddRange(strInclude)
 
@@ -198,5 +198,9 @@
     Public Sub ResetControl()
         'this resets the ucrReceiverFactor
         SetDefaults()
+    End Sub
+
+    Private Sub ucrMultipleVariables_Load(sender As Object, e As EventArgs) Handles ucrMultipleVariables.Load
+
     End Sub
 End Class
