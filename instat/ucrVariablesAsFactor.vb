@@ -27,8 +27,9 @@
     Private Sub SetIncludedDataType(strInclude As String())
         ucrSingleVariable.lstIncludedDataTypes.AddRange(strInclude)
         ucrMultipleVariables.lstIncludedDataTypes.AddRange(strInclude)
-        ucrSingleVariable.lstIncludedDataTypes.Clear()
-        ucrMultipleVariables.lstIncludedDataTypes.Clear()
+
+        ucrSingleVariable.lstExcludedDataTypes.Clear()
+        ucrMultipleVariables.lstExcludedDataTypes.Clear()
 
         If ucrVariableSelector IsNot Nothing Then
             ucrVariableSelector.LoadList()
