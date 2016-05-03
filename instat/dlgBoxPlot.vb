@@ -134,4 +134,5 @@ Public Class dlgBoxplot
         End If
         TestOkEnabled()
     End Sub
+
 End Class
