@@ -77,7 +77,7 @@ Partial Class dlgCombine
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(13, 228)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 228)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumnName.TabIndex = 4
