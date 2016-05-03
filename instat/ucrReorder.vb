@@ -143,35 +143,30 @@ Public Class ucrReorder
     End Sub
 
     Public Sub loadList()
-        Dim dfTemp As CharacterMatrix
+        Dim vecNames As CharacterVector
         Select Case strDataType
             Case "column"
                 If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
-                    frmMain.clsRLink.clsEngine.Evaluate(ucrDataFrameList.cboAvailableDataFrames.SelectedItem & "=" & frmMain.clsRLink.strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.SelectedItem & Chr(34))
-                    dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(ucrDataFrameList.cboAvailableDataFrames.SelectedItem).AsCharacterMatrix
+                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.SelectedItem & Chr(34) & ")").AsCharacter
                 End If
             Case "factor"
-                If ucrReceiver IsNot Nothing AndAlso ucrReceiver.strDataType = "factor" AndAlso ucrReceiver.GetVariableNames <> "" Then
-                    dfTemp = frmMain.clsRLink.GetData(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & ucrReceiver.GetDataName() & Chr(34) & ", col_name = " & ucrReceiver.GetVariableNames() & ")")
+                If ucrReceiver IsNot Nothing AndAlso ucrReceiver.lstIncludedDataTypes.Count = 1 AndAlso ucrReceiver.lstIncludedDataTypes.Contains("factor") AndAlso ucrReceiver.GetVariableNames <> "" Then
+                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & ucrReceiver.GetDataName() & Chr(34) & ", col_name = " & ucrReceiver.GetVariableNames() & ")").AsCharacter
                 End If
-            Case "others"
-                'ToAdd
+            Case "data frame"
+                vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_data_names()").AsCharacter
+            Case Else
+                vecNames = Nothing
         End Select
-        FillListView(dfTemp)
+        FillListView(vecNames)
     End Sub
 
-    Private Sub FillListView(dfTemp As CharacterMatrix)
-        If dfTemp IsNot Nothing Then
+    Private Sub FillListView(vecNames As CharacterVector)
+        If vecNames IsNot Nothing Then
             lstAvailableData.Items.Clear()
-            If strDataType = "factor" Then
-                For i = 0 To dfTemp.RowCount - 1
-                    lstAvailableData.Items.Add(dfTemp(i, 0))
-                Next
-            ElseIf strDataType = "column" Then
-                For i = 0 To dfTemp.ColumnCount - 1
-                    lstAvailableData.Items.Add(dfTemp.ColumnNames(i))
-                Next
-            End If
+            For i = 0 To vecNames.Count - 1
+                lstAvailableData.Items.Add(vecNames(i))
+            Next
         End If
     End Sub
 
