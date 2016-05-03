@@ -24,6 +24,28 @@
         ucrSingleVariable.SetDataType(strTemp)
         ucrMultipleVariables.SetDataType(strTemp)
     End Sub
+    Private Sub SetIncludedDataType(strInclude As String())
+        ucrSingleVariable.lstIncludedDataTypes.AddRange(strInclude)
+        ucrMultipleVariables.lstIncludedDataTypes.AddRange(strInclude)
+        ucrSingleVariable.lstIncludedDataTypes.Clear()
+        ucrMultipleVariables.lstIncludedDataTypes.Clear()
+
+        If ucrVariableSelector IsNot Nothing Then
+            ucrVariableSelector.LoadList()
+        End If
+    End Sub
+
+    Public Sub SetExcludedDataTypes(strExclude As String())
+        ucrSingleVariable.lstExcludedDataTypes.AddRange(strExclude)
+        ucrMultipleVariables.lstExcludedDataTypes.AddRange(strExclude)
+
+        ucrSingleVariable.lstIncludedDataTypes.Clear()
+        ucrMultipleVariables.lstIncludedDataTypes.Clear()
+
+        If ucrVariableSelector IsNot Nothing Then
+            ucrVariableSelector.LoadList()
+        End If
+    End Sub
 
     Public Sub SetSelector(ucrSelectorToSet As ucrSelectorByDataFrame)
         ucrVariableSelector = ucrSelectorToSet
