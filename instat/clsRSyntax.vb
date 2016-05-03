@@ -77,7 +77,7 @@ Public Class RSyntax
     End Sub
 
     Public Sub AddOperatorParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
-        clsBaseOperator.AddAditionalParameter(strParameterName, strParameterValue, clsRFunc, clsOp)
+        clsBaseOperator.AddAdditionalParameter(strParameterName, strParameterValue, clsRFunc, clsOp)
     End Sub
 
     Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)
