@@ -40,7 +40,7 @@ Public Class dlgCumulativeDistribution
 
 
         ucrFactorReceiver.Selector = ucrCumDistSelector
-        ucrFactorReceiver.SetDataType("factor")
+        ucrFactorReceiver.SetIncludedDataTypes({"factor"})
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 133
 
@@ -49,7 +49,8 @@ Public Class dlgCumulativeDistribution
 
         ucrVariablesAsFactorforCumDist.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorforCumDist.SetSelector(ucrCumDistSelector)
-        ucrVariablesAsFactorforCumDist.SetDataType("numeric")
+        ucrVariablesAsFactorforCumDist.SetIncludedDataType({"numeric"})
+
     End Sub
 
     Private Sub SetDefaults()
