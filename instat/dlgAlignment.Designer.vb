@@ -36,7 +36,7 @@ Partial Class dlgAlignment
         '
         Me.lstAlignment.FormattingEnabled = True
         Me.lstAlignment.Items.AddRange(New Object() {"Left", "Centre", "Right", "General"})
-        Me.lstAlignment.Location = New System.Drawing.Point(309, 32)
+        Me.lstAlignment.Location = New System.Drawing.Point(366, 29)
         Me.lstAlignment.Name = "lstAlignment"
         Me.lstAlignment.Size = New System.Drawing.Size(108, 56)
         Me.lstAlignment.TabIndex = 1
@@ -44,7 +44,7 @@ Partial Class dlgAlignment
         'lblAlignment
         '
         Me.lblAlignment.AutoSize = True
-        Me.lblAlignment.Location = New System.Drawing.Point(306, 9)
+        Me.lblAlignment.Location = New System.Drawing.Point(366, 10)
         Me.lblAlignment.Name = "lblAlignment"
         Me.lblAlignment.Size = New System.Drawing.Size(53, 13)
         Me.lblAlignment.TabIndex = 3
@@ -54,7 +54,7 @@ Partial Class dlgAlignment
         'lblColumnWidth
         '
         Me.lblColumnWidth.AutoSize = True
-        Me.lblColumnWidth.Location = New System.Drawing.Point(306, 96)
+        Me.lblColumnWidth.Location = New System.Drawing.Point(363, 96)
         Me.lblColumnWidth.Name = "lblColumnWidth"
         Me.lblColumnWidth.Size = New System.Drawing.Size(70, 13)
         Me.lblColumnWidth.TabIndex = 4
@@ -63,7 +63,7 @@ Partial Class dlgAlignment
         '
         'txtColumnWidth
         '
-        Me.txtColumnWidth.Location = New System.Drawing.Point(383, 92)
+        Me.txtColumnWidth.Location = New System.Drawing.Point(440, 92)
         Me.txtColumnWidth.Name = "txtColumnWidth"
         Me.txtColumnWidth.Size = New System.Drawing.Size(34, 20)
         Me.txtColumnWidth.TabIndex = 5
@@ -71,7 +71,7 @@ Partial Class dlgAlignment
         'lblSelectedColumns
         '
         Me.lblSelectedColumns.AutoSize = True
-        Me.lblSelectedColumns.Location = New System.Drawing.Point(209, 9)
+        Me.lblSelectedColumns.Location = New System.Drawing.Point(232, 10)
         Me.lblSelectedColumns.Name = "lblSelectedColumns"
         Me.lblSelectedColumns.Size = New System.Drawing.Size(92, 13)
         Me.lblSelectedColumns.TabIndex = 7
@@ -80,22 +80,24 @@ Partial Class dlgAlignment
         '
         'ucrMultiple
         '
-        Me.ucrMultiple.Location = New System.Drawing.Point(208, 23)
+        Me.ucrMultiple.Location = New System.Drawing.Point(239, 23)
         Me.ucrMultiple.Name = "ucrMultiple"
-        Me.ucrMultiple.Size = New System.Drawing.Size(93, 106)
+        Me.ucrMultiple.Selector = Nothing
+        Me.ucrMultiple.Size = New System.Drawing.Size(127, 106)
         Me.ucrMultiple.TabIndex = 6
         '
         'ucrAddRemove
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(0, 4)
+        Me.ucrAddRemove.Location = New System.Drawing.Point(10, 10)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
+        Me.ucrAddRemove.Padding = New System.Windows.Forms.Padding(10)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(226, 127)
         Me.ucrAddRemove.TabIndex = 2
         Me.ucrAddRemove.Tag = "Format_current_or_selected_columns"
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 138)
+        Me.ucrBase.Location = New System.Drawing.Point(33, 152)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 8
@@ -104,7 +106,7 @@ Partial Class dlgAlignment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(431, 195)
+        Me.ClientSize = New System.Drawing.Size(486, 217)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblSelectedColumns)
         Me.Controls.Add(Me.ucrMultiple)
