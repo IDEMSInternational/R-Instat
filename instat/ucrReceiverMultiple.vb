@@ -182,6 +182,15 @@ Public Class ucrReceiverMultiple
         Return strTemp
     End Function
 
+    Public Function GetVariableNamesAsList() As List(Of String)
+        Dim lstItems As New List(Of String)
+
+        For i = 0 To lstSelectedVariables.Items.Count - 1
+            lstItems.Add(lstSelectedVariables.Items(i).Text)
+        Next
+        Return lstItems
+    End Function
+
     Public Function GetDataFrameNames() As List(Of String)
         Dim strDataFrames As New List(Of String)
         Dim CurrObj As ListViewItem
@@ -220,4 +229,12 @@ Public Class ucrReceiverMultiple
     Private Sub ClearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem.Click
         Clear()
     End Sub
+
+    Public Function GetCount() As Integer
+        If lstSelectedVariables IsNot Nothing Then
+            Return lstSelectedVariables.Items.Count
+        Else
+            Return 0
+        End If
+    End Function
 End Class

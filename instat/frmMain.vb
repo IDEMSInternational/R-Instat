@@ -349,10 +349,6 @@ Public Class frmMain
         dlgRecode.ShowDialog()
     End Sub
 
-    Private Sub EnterToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgChangeType.ShowDialog()
-    End Sub
-
     Private Sub RandomSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataRandomSamples.Click
         dlgRandomSample.ShowDialog()
     End Sub

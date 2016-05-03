@@ -35,6 +35,7 @@ Public Class ROperator
     Public strAssignToModel As String
     Public bToBeAssigned As Boolean = False
     Public bIsAssigned As Boolean = False
+    Public bForceIncludeOperation As Boolean = True
 
     Public Sub SetOperation(strTemp As String, Optional bBracketsTemp As Boolean = True)
         strOperation = strTemp
@@ -67,6 +68,9 @@ Public Class ROperator
 
     Public Function ToScript(Optional ByRef strScript As String = "") As String
         Dim strTemp As String = ""
+        Dim bIncludeOperation As Boolean
+
+        bIncludeOperation = bForceIncludeOperation OrElse ((clsLeftParameter IsNot Nothing OrElse clsLeftFunction IsNot Nothing OrElse clsLeftOperator IsNot Nothing) AndAlso (clsRightParameter IsNot Nothing OrElse clsRightFunction IsNot Nothing OrElse clsRightOperator IsNot Nothing))
 
         If clsLeftParameter IsNot Nothing Then
             strTemp = strTemp & clsLeftParameter.ToScript(strScript, False)
@@ -80,8 +84,9 @@ Public Class ROperator
             End If
         End If
 
-
-        strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+        If bIncludeOperation Then
+            strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+        End If
 
         If clsRightParameter IsNot Nothing Then
             strTemp = strTemp & clsRightParameter.ToScript(strScript, False)
@@ -123,7 +128,7 @@ Public Class ROperator
         bIsAssigned = False
     End Sub
 
-    Public Sub AddAditionalParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing)
+    Public Sub AddAdditionalParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing)
         Dim clsParam As New RParameter
 
         clsParam.SetArgumentName(strParameterName)
@@ -174,6 +179,26 @@ Public Class ROperator
         bIsAssigned = False
     End Sub
 
+    Public Sub RemoveParameter(bRemoveLeftNotRight As Boolean)
+        If bRemoveLeftNotRight Then
+            clsLeftParameter = Nothing
+            clsLeftFunction = Nothing
+            clsLeftOperator = Nothing
+        Else
+            clsRightParameter = Nothing
+            clsRightFunction = Nothing
+            clsRightOperator = Nothing
+        End If
+        bIsAssigned = False
+    End Sub
 
+    Public Sub RemoveAllAdditionalParameters()
+        clsAdditionalParameters.Clear()
+    End Sub
 
+    Public Sub RemoveAllParameters()
+        RemoveParameter(True)
+        RemoveParameter(False)
+        RemoveAllAdditionalParameters()
+    End Sub
 End Class
