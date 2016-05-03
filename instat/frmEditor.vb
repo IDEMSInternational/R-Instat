@@ -266,8 +266,10 @@ Public Class frmEditor
 
     Private Function selectedColumns()
         Dim col_list As New List(Of String)
+        Dim strLength As Integer
         For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols
-            col_list.Add(grdData.CurrentWorksheet.GetColumnHeader(i).Text)
+            strLength = grdData.CurrentWorksheet.GetColumnHeader(i).Text.IndexOf(" ")
+            col_list.Add(grdData.CurrentWorksheet.GetColumnHeader(i).Text.Substring(0, strLength))
         Next
         Dim cols As String
         cols = "c" & "("
