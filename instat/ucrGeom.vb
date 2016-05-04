@@ -280,12 +280,14 @@ Public Class ucrGeom
 
 
         clsgeom_hex.strGeomName = "geom_hex"
-        clsgeom_hex.AddGgParameter("")
-        clsgeom_hex.AddGgParameter("")
-        clsgeom_hex.AddGgParameter("")
-        clsgeom_hex.AddGgParameter("")
-        clsgeom_hex.AddGgParameter("")
-        clsgeom_hex.AddGgParameter("")
+        'mandatory
+        clsgeom_hex.AddGgParameter("x")
+        clsgeom_hex.AddGgParameter("y")
+        'optional
+        clsgeom_hex.AddGgParameter("alpha")
+        clsgeom_hex.AddGgParameter("colour")
+        clsgeom_hex.AddGgParameter("fill")
+        clsgeom_hex.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_hex)
 
         clsgeom_histogram.strGeomName = "geom_histogram"
@@ -299,221 +301,283 @@ Public Class ucrGeom
 
 
         clsgeom_hline.strGeomName = "geom_hline"
-        clsgeom_hline.AddGgParameter("")
-        clsgeom_hline.AddGgParameter("")
-        clsgeom_hline.AddGgParameter("")
-        clsgeom_hline.AddGgParameter("")
-        clsgeom_hline.AddGgParameter("")
-        clsgeom_hline.AddGgParameter("")
+        clsgeom_hline.AddGgParameter("alpha")
+        clsgeom_hline.AddGgParameter("colour")
+        clsgeom_hline.AddGgParameter("linetype")
+        clsgeom_hline.AddGgParameter("size")
+        'aesthetics that control position of line include
+        'geom_vline:xintercept
+        'geom_hline:yintercept
+        'geom_abline: slope and intercept
+        'TO DO Discuss how to use these
+
         lstAllGeoms.Add(clsgeom_hline)
 
         clsgeom_jitter.strGeomName = "geom_jitter"
-        clsgeom_jitter.AddGgParameter("")
-        clsgeom_jitter.AddGgParameter("")
-        clsgeom_jitter.AddGgParameter("")
-        clsgeom_jitter.AddGgParameter("")
-        clsgeom_jitter.AddGgParameter("")
-        clsgeom_jitter.AddGgParameter("")
+        'mandatory
+        clsgeom_jitter.AddGgParameter("x")
+        clsgeom_jitter.AddGgParameter("y")
+        'optional
+        clsgeom_jitter.AddGgParameter("alpha")
+        clsgeom_jitter.AddGgParameter("colour")
+        clsgeom_jitter.AddGgParameter("fill")
+        clsgeom_jitter.AddGgParameter("shape")
+        clsgeom_jitter.AddGgParameter("size")
+        clsgeom_jitter.AddGgParameter("stroke")
         lstAllGeoms.Add(clsgeom_jitter)
 
         clsgeom_label.strGeomName = "geom_label"
-        clsgeom_label.AddGgParameter("")
-        clsgeom_label.AddGgParameter("")
-        clsgeom_label.AddGgParameter("")
-        clsgeom_label.AddGgParameter("")
-        clsgeom_label.AddGgParameter("")
-        clsgeom_label.AddGgParameter("")
+        'mandatory
+        clsgeom_label.AddGgParameter("label")
+        clsgeom_label.AddGgParameter("x")
+        clsgeom_label.AddGgParameter("y")
+        'optional
+        clsgeom_label.AddGgParameter("alpha")
+        clsgeom_label.AddGgParameter("color")
+        clsgeom_label.AddGgParameter("family")
+        clsgeom_label.AddGgParameter("fontface")
+        clsgeom_label.AddGgParameter("hjust")
+        clsgeom_label.AddGgParameter("lineheight")
+        'TO DO add size and vjust this might need additon of labels and receivers  
         lstAllGeoms.Add(clsgeom_label)
 
 
         clsgeom_line.strGeomName = "geom_line"
-        clsgeom_line.AddGgParameter("")
-        clsgeom_line.AddGgParameter("")
-        clsgeom_line.AddGgParameter("")
-        clsgeom_line.AddGgParameter("")
-        clsgeom_line.AddGgParameter("")
-        clsgeom_line.AddGgParameter("")
+        'mandatory
+        clsgeom_line.AddGgParameter("x")
+        clsgeom_line.AddGgParameter("y")
+        'optional
+        clsgeom_line.AddGgParameter("alpha")
+        clsgeom_line.AddGgParameter("color")
+        clsgeom_line.AddGgParameter("linetype")
+        clsgeom_line.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_line)
 
 
         clsgeom_linerange.strGeomName = "geom_linerange"
-        clsgeom_linerange.AddGgParameter("")
-        clsgeom_linerange.AddGgParameter("")
-        clsgeom_linerange.AddGgParameter("")
-        clsgeom_linerange.AddGgParameter("")
-        clsgeom_linerange.AddGgParameter("")
-        clsgeom_linerange.AddGgParameter("")
+        'mandatory
+        clsgeom_linerange.AddGgParameter("x")
+        clsgeom_linerange.AddGgParameter("ymax")
+        clsgeom_linerange.AddGgParameter("ymin")
+        'optional
+        clsgeom_linerange.AddGgParameter("alpha")
+        clsgeom_linerange.AddGgParameter("colour")
+        clsgeom_linerange.AddGgParameter("linetype")
+        clsgeom_linerange.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_linerange)
 
         clsgeom_map.strGeomName = "geom_map"
-        clsgeom_map.AddGgParameter("")
-        clsgeom_map.AddGgParameter("")
-        clsgeom_map.AddGgParameter("")
-        clsgeom_map.AddGgParameter("")
-        clsgeom_map.AddGgParameter("")
-        clsgeom_map.AddGgParameter("")
+        'mandatory
+        clsgeom_map.AddGgParameter("map_id")
+        'optional
+        clsgeom_map.AddGgParameter("alpha")
+        clsgeom_map.AddGgParameter("colour")
+        clsgeom_map.AddGgParameter("fill")
+        clsgeom_map.AddGgParameter("linetype")
+        clsgeom_map.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_map)
 
         clsgeom_path.strGeomName = "geom_path"
-        clsgeom_path.AddGgParameter("")
-        clsgeom_path.AddGgParameter("")
-        clsgeom_path.AddGgParameter("")
-        clsgeom_path.AddGgParameter("")
-        clsgeom_path.AddGgParameter("")
-        clsgeom_path.AddGgParameter("")
+        'mandatory
+        clsgeom_path.AddGgParameter("x")
+        clsgeom_path.AddGgParameter("y")
+        'optional
+        clsgeom_path.AddGgParameter("alpha")
+        clsgeom_path.AddGgParameter("colour")
+        clsgeom_path.AddGgParameter("linetype")
+        clsgeom_path.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_path)
 
         clsgeom_point.strGeomName = "geom_point"
-        clsgeom_point.AddGgParameter("")
-        clsgeom_point.AddGgParameter("")
-        clsgeom_point.AddGgParameter("")
-        clsgeom_point.AddGgParameter("")
-        clsgeom_point.AddGgParameter("")
-        clsgeom_point.AddGgParameter("")
+        'mandatory
+        clsgeom_point.AddGgParameter("x")
+        clsgeom_point.AddGgParameter("y")
+        'optional
+        clsgeom_point.AddGgParameter("alpha")
+        clsgeom_point.AddGgParameter("colour")
+        clsgeom_point.AddGgParameter("fill")
+        clsgeom_point.AddGgParameter("shape")
+        clsgeom_point.AddGgParameter("size")
+        clsgeom_point.AddGgParameter("stroke")
         lstAllGeoms.Add(clsgeom_point)
 
         clsgeom_pointrange.strGeomName = "geom_pointrange"
-        clsgeom_pointrange.AddGgParameter("")
-        clsgeom_pointrange.AddGgParameter("")
-        clsgeom_pointrange.AddGgParameter("")
-        clsgeom_pointrange.AddGgParameter("")
-        clsgeom_pointrange.AddGgParameter("")
-        clsgeom_pointrange.AddGgParameter("")
+        clsgeom_pointrange.AddGgParameter("x")
+        clsgeom_pointrange.AddGgParameter("ymax")
+        clsgeom_pointrange.AddGgParameter("ymin")
+        'optional
+        clsgeom_pointrange.AddGgParameter("alpha")
+        clsgeom_pointrange.AddGgParameter("colour")
+        clsgeom_pointrange.AddGgParameter("linetype")
+        clsgeom_pointrange.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_pointrange)
 
         clsgeom_polygon.strGeomName = "geom_polygon"
-        clsgeom_polygon.AddGgParameter("")
-        clsgeom_polygon.AddGgParameter("")
-        clsgeom_polygon.AddGgParameter("")
-        clsgeom_polygon.AddGgParameter("")
-        clsgeom_polygon.AddGgParameter("")
-        clsgeom_polygon.AddGgParameter("")
+        clsgeom_polygon.AddGgParameter("x")
+        clsgeom_polygon.AddGgParameter("y")
+        'optional
+        clsgeom_polygon.AddGgParameter("alpha")
+        clsgeom_polygon.AddGgParameter("colour")
+        clsgeom_polygon.AddGgParameter("fill")
+        clsgeom_polygon.AddGgParameter("linetype")
+        clsgeom_polygon.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_polygon)
 
         clsgeom_qq.strGeomName = "geom_qq"
-        clsgeom_qq.AddGgParameter("")
-        clsgeom_qq.AddGgParameter("")
-        clsgeom_qq.AddGgParameter("")
-        clsgeom_qq.AddGgParameter("")
-        clsgeom_qq.AddGgParameter("")
-        clsgeom_qq.AddGgParameter("")
+        clsgeom_qq.AddGgParameter("sample")
+        'optional
+        clsgeom_qq.AddGgParameter("x")
+        clsgeom_qq.AddGgParameter("y")
         lstAllGeoms.Add(clsgeom_qq)
 
         clsgeom_quantile.strGeomName = "geom_quantile"
-        clsgeom_quantile.AddGgParameter("")
-        clsgeom_quantile.AddGgParameter("")
-        clsgeom_quantile.AddGgParameter("")
-        clsgeom_quantile.AddGgParameter("")
-        clsgeom_quantile.AddGgParameter("")
-        clsgeom_quantile.AddGgParameter("")
+        clsgeom_quantile.AddGgParameter("x")
+        clsgeom_quantile.AddGgParameter("y")
+        'optional
+        clsgeom_quantile.AddGgParameter("alpha")
+        clsgeom_quantile.AddGgParameter("colour")
+        clsgeom_quantile.AddGgParameter("linetype")
+        clsgeom_quantile.AddGgParameter("size")
+        clsgeom_quantile.AddGgParameter("weight")
         lstAllGeoms.Add(clsgeom_quantile)
 
         clsgeom_raster.strGeomName = "geom_raster"
-        clsgeom_raster.AddGgParameter("")
-        clsgeom_raster.AddGgParameter("")
-        clsgeom_raster.AddGgParameter("")
-        clsgeom_raster.AddGgParameter("")
-        clsgeom_raster.AddGgParameter("")
-        clsgeom_raster.AddGgParameter("")
+        'mandatory
+        clsgeom_raster.AddGgParameter("x")
+        clsgeom_raster.AddGgParameter("y")
+        'optional
+        clsgeom_raster.AddGgParameter("alpha")
+        clsgeom_raster.AddGgParameter("colour")
+        clsgeom_raster.AddGgParameter("fill")
+        clsgeom_raster.AddGgParameter("linetype")
+        clsgeom_raster.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_raster)
 
         clsgeom_rect.strGeomName = "geom_rect"
-        clsgeom_rect.AddGgParameter("")
-        clsgeom_rect.AddGgParameter("")
-        clsgeom_rect.AddGgParameter("")
-        clsgeom_rect.AddGgParameter("")
-        clsgeom_rect.AddGgParameter("")
-        clsgeom_rect.AddGgParameter("")
+        'mandatory
+        clsgeom_rect.AddGgParameter("x")
+        clsgeom_rect.AddGgParameter("y")
+        'optional
+        clsgeom_rect.AddGgParameter("alpha")
+        clsgeom_rect.AddGgParameter("colour")
+        clsgeom_rect.AddGgParameter("fill")
+        clsgeom_rect.AddGgParameter("linetype")
+        clsgeom_rect.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_rect)
 
         clsgeom_ribbon.strGeomName = "geom_ribbon"
-        clsgeom_ribbon.AddGgParameter("")
-        clsgeom_ribbon.AddGgParameter("")
-        clsgeom_ribbon.AddGgParameter("")
-        clsgeom_ribbon.AddGgParameter("")
-        clsgeom_ribbon.AddGgParameter("")
-        clsgeom_ribbon.AddGgParameter("")
+        clsgeom_ribbon.AddGgParameter("x")
+        clsgeom_ribbon.AddGgParameter("ymax")
+        clsgeom_ribbon.AddGgParameter("ymin")
+        'optional
+        clsgeom_ribbon.AddGgParameter("alpha")
+        clsgeom_ribbon.AddGgParameter("colour")
+        clsgeom_ribbon.AddGgParameter("linetype")
+        clsgeom_ribbon.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_ribbon)
 
         clsgeom_rug.strGeomName = "geom_rug"
-        clsgeom_rug.AddGgParameter("")
-        clsgeom_rug.AddGgParameter("")
-        clsgeom_rug.AddGgParameter("")
-        clsgeom_rug.AddGgParameter("")
-        clsgeom_rug.AddGgParameter("")
-        clsgeom_rug.AddGgParameter("")
+        clsgeom_rug.AddGgParameter("alpha")
+        clsgeom_rug.AddGgParameter("colour")
+        clsgeom_rug.AddGgParameter("linetype")
+        clsgeom_rug.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_rug)
 
         clsgeom_segment.strGeomName = "geom_segment"
-        clsgeom_segment.AddGgParameter("")
-        clsgeom_segment.AddGgParameter("")
-        clsgeom_segment.AddGgParameter("")
-        clsgeom_segment.AddGgParameter("")
-        clsgeom_segment.AddGgParameter("")
-        clsgeom_segment.AddGgParameter("")
+        'mandatory
+        clsgeom_segment.AddGgParameter("x")
+        clsgeom_segment.AddGgParameter("xend")
+        clsgeom_segment.AddGgParameter("y")
+        clsgeom_segment.AddGgParameter("yend")
+        'optional
+        clsgeom_segment.AddGgParameter("alpha")
+        clsgeom_segment.AddGgParameter("colour")
+        clsgeom_segment.AddGgParameter("linetype")
+        clsgeom_segment.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_segment)
 
         clsgeom_smooth.strGeomName = "geom_smooth"
-        clsgeom_smooth.AddGgParameter("")
-        clsgeom_smooth.AddGgParameter("")
-        clsgeom_smooth.AddGgParameter("")
-        clsgeom_smooth.AddGgParameter("")
-        clsgeom_smooth.AddGgParameter("")
-        clsgeom_smooth.AddGgParameter("")
+        'mandatory
+        clsgeom_smooth.AddGgParameter("x")
+        clsgeom_smooth.AddGgParameter("y")
+        'optional 
+        clsgeom_smooth.AddGgParameter("alpha")
+        clsgeom_smooth.AddGgParameter("colour")
+        clsgeom_smooth.AddGgParameter("fill")
+        clsgeom_smooth.AddGgParameter("linetype")
+        clsgeom_smooth.AddGgParameter("size")
+        clsgeom_smooth.AddGgParameter("weight")
         lstAllGeoms.Add(clsgeom_smooth)
 
         clsgeom_spoke.strGeomName = "geom_spoke"
-        clsgeom_spoke.AddGgParameter("")
-        clsgeom_spoke.AddGgParameter("")
-        clsgeom_spoke.AddGgParameter("")
-        clsgeom_spoke.AddGgParameter("")
-        clsgeom_spoke.AddGgParameter("")
-        clsgeom_spoke.AddGgParameter("")
+        'mandatory
+        clsgeom_spoke.AddGgParameter("angle")
+        clsgeom_spoke.AddGgParameter("radius")
+        clsgeom_spoke.AddGgParameter("x")
+        clsgeom_spoke.AddGgParameter("y")
+        'optional
+        clsgeom_spoke.AddGgParameter("alpha")
+        clsgeom_spoke.AddGgParameter("colour")
+        clsgeom_spoke.AddGgParameter("linetype")
+        clsgeom_spoke.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_spoke)
 
         clsgeom_step.strGeomName = "geom_step"
-        clsgeom_step.AddGgParameter("")
-        clsgeom_step.AddGgParameter("")
-        clsgeom_step.AddGgParameter("")
-        clsgeom_step.AddGgParameter("")
-        clsgeom_step.AddGgParameter("")
-        clsgeom_step.AddGgParameter("")
+        clsgeom_step.AddGgParameter("x")
+        clsgeom_step.AddGgParameter("y")
+        'optional
+        clsgeom_step.AddGgParameter("alpha")
+        clsgeom_step.AddGgParameter("colour")
+        clsgeom_step.AddGgParameter("linetype")
+        clsgeom_step.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_step)
 
         clsgeom_text.strGeomName = "geom_text"
-        clsgeom_text.AddGgParameter("")
-        clsgeom_text.AddGgParameter("")
-        clsgeom_text.AddGgParameter("")
-        clsgeom_text.AddGgParameter("")
-        clsgeom_text.AddGgParameter("")
-        clsgeom_text.AddGgParameter("")
+        'mandatory
+        clsgeom_text.AddGgParameter("label")
+        clsgeom_text.AddGgParameter("x")
+        clsgeom_text.AddGgParameter("y")
+        'optional
+        clsgeom_text.AddGgParameter("alpha")
+        clsgeom_text.AddGgParameter("color")
+        clsgeom_text.AddGgParameter("family")
+        clsgeom_text.AddGgParameter("fontface")
+        clsgeom_text.AddGgParameter("hjust")
+        clsgeom_text.AddGgParameter("lineheight")
+        'TO DO add size and vjust this might need additon of labels and receivers  
         lstAllGeoms.Add(clsgeom_text)
 
         clsgeom_tile.strGeomName = "geom_tile"
-        clsgeom_tile.AddGgParameter("")
-        clsgeom_tile.AddGgParameter("")
-        clsgeom_tile.AddGgParameter("")
-        clsgeom_tile.AddGgParameter("")
-        clsgeom_tile.AddGgParameter("")
-        clsgeom_tile.AddGgParameter("")
+        'mandatory
+        clsgeom_tile.AddGgParameter("x")
+        clsgeom_tile.AddGgParameter("y")
+        'optional
+        clsgeom_tile.AddGgParameter("alpha")
+        clsgeom_tile.AddGgParameter("colour")
+        clsgeom_tile.AddGgParameter("fill")
+        clsgeom_tile.AddGgParameter("linetype")
+        clsgeom_tile.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_tile)
 
         clsgeom_violin.strGeomName = "geom_violin"
-        clsgeom_violin.AddGgParameter("")
-        clsgeom_violin.AddGgParameter("")
-        clsgeom_violin.AddGgParameter("")
-        clsgeom_violin.AddGgParameter("")
-        clsgeom_violin.AddGgParameter("")
-        clsgeom_violin.AddGgParameter("")
+        'mandatory
+        clsgeom_violin.AddGgParameter("x")
+        clsgeom_violin.AddGgParameter("y")
+        'optional
+        clsgeom_violin.AddGgParameter("alpha")
+        clsgeom_violin.AddGgParameter("colour")
+        clsgeom_violin.AddGgParameter("fill")
+        clsgeom_violin.AddGgParameter("linetype")
+        clsgeom_violin.AddGgParameter("size")
+        clsgeom_violin.AddGgParameter("weight")
         lstAllGeoms.Add(clsgeom_violin)
 
         clsgeom_vline.strGeomName = "geom_vline"
-        clsgeom_vline.AddGgParameter("")
-        clsgeom_vline.AddGgParameter("")
-        clsgeom_vline.AddGgParameter("")
-        clsgeom_vline.AddGgParameter("")
-        clsgeom_vline.AddGgParameter("")
-        clsgeom_vline.AddGgParameter("")
+        clsgeom_vline.AddGgParameter("alpha")
+        clsgeom_vline.AddGgParameter("colour")
+        clsgeom_vline.AddGgParameter("linetype")
+        clsgeom_vline.AddGgParameter("size")
+        'TO DO  include those that control position
         lstAllGeoms.Add(clsgeom_vline)
     End Sub
     Public Event GeomChanged(sender As Object, e As EventArgs)
