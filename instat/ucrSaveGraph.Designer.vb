@@ -28,15 +28,15 @@ Partial Class ucrSaveGraph
         '
         'ucrInputGraphName
         '
-        Me.ucrInputGraphName.Location = New System.Drawing.Point(86, 3)
+        Me.ucrInputGraphName.Location = New System.Drawing.Point(86, 0)
         Me.ucrInputGraphName.Name = "ucrInputGraphName"
-        Me.ucrInputGraphName.Size = New System.Drawing.Size(176, 25)
+        Me.ucrInputGraphName.Size = New System.Drawing.Size(180, 20)
         Me.ucrInputGraphName.TabIndex = 0
         '
         'chkSaveGraph
         '
         Me.chkSaveGraph.AutoSize = True
-        Me.chkSaveGraph.Location = New System.Drawing.Point(3, 5)
+        Me.chkSaveGraph.Location = New System.Drawing.Point(0, 3)
         Me.chkSaveGraph.Name = "chkSaveGraph"
         Me.chkSaveGraph.Size = New System.Drawing.Size(83, 17)
         Me.chkSaveGraph.TabIndex = 1
@@ -51,7 +51,7 @@ Partial Class ucrSaveGraph
         Me.Controls.Add(Me.chkSaveGraph)
         Me.Controls.Add(Me.ucrInputGraphName)
         Me.Name = "ucrSaveGraph"
-        Me.Size = New System.Drawing.Size(265, 27)
+        Me.Size = New System.Drawing.Size(265, 20)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
