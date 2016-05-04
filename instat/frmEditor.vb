@@ -182,15 +182,15 @@ Public Class frmEditor
     '    End Try
     'End Sub
 
-    'Private Sub copyRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles copyRangeToolStripMenuItem.Click
-    '    Try
-    '        grdData.CurrentWorksheet.Copy()
-    '    Catch generatedExceptionName As unvell.ReoGrid.RangeIntersectionException
-    '        MessageBox.Show("Cannot cut a range that is a part of another merged cell.")
-    '    Catch
-    '        MessageBox.Show("We can't to do that for selected range.")
-    '    End Try
-    'End Sub
+    Public Sub copyRange()
+        Try
+            grdData.CurrentWorksheet.Copy()
+        Catch generatedExceptionName As unvell.ReoGrid.RangeIntersectionException
+            MessageBox.Show("Cannot cut a range that is a part of another merged cell.")
+        Catch
+            MessageBox.Show("We can't to do that for selected range.")
+        End Try
+    End Sub
 
     'Private Sub pasteRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles pasteRangeToolStripMenuItem.Click
     '    Try
@@ -199,7 +199,9 @@ Public Class frmEditor
     '        MessageBox.Show(ex.Message)
     '    End Try
     'End Sub
-
+    Public Sub selectAllText()
+        grdCurrSheet.SelectAll()
+    End Sub
 
     Private Sub insertSheet_Click(sender As Object, e As EventArgs) Handles insertSheet.Click
         dlgFileNew.ShowDialog()
@@ -240,7 +242,52 @@ Public Class frmEditor
         dlgRenameSheet.ShowDialog()
     End Sub
 
-    Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles MoveOrCopySheet.Click
+    Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles CopySheet.Click
         dlgCopySheet.ShowDialog()
+    End Sub
+
+    Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
+        Dim strScript As String
+        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", col_names = " & selectedColumns() & ",to_type =" & Chr(34) & "numeric" & Chr(34) & ")"
+        frmMain.clsRLink.RunScript(strScript)
+    End Sub
+
+    Private Sub mnuConvertText_Click(sender As Object, e As EventArgs) Handles mnuConvertText.Click
+        Dim strScript As String
+        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", col_names = " & selectedColumns() & ",to_type =" & Chr(34) & "character" & Chr(34) & ")"
+        frmMain.clsRLink.RunScript(strScript)
+    End Sub
+
+    Private Sub mnuConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToFactor.Click
+        Dim strScript As String
+        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", col_names = " & selectedColumns() & ",to_type =" & Chr(34) & "factor" & Chr(34) & ")"
+        frmMain.clsRLink.RunScript(strScript)
+    End Sub
+
+    Private Function selectedColumns()
+        Dim col_list As New List(Of String)
+        Dim strLength As Integer
+        For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols
+            strLength = grdData.CurrentWorksheet.GetColumnHeader(i).Text.IndexOf(" ")
+            col_list.Add(grdData.CurrentWorksheet.GetColumnHeader(i).Text.Substring(0, strLength))
+        Next
+        Dim cols As String
+        cols = "c" & "("
+        For j As Integer = 0 To col_list.Count - 1
+            If j > 0 Then
+                cols = cols & ","
+            End If
+            cols = cols & Chr(34) & col_list(j) & Chr(34)
+        Next
+        cols = cols & ")"
+        Return cols
+    End Function
+
+    Private Sub columnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles columnFilterToolStripMenuItem.Click
+        dlgRestrict.ShowDialog()
+    End Sub
+
+    Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
+        dlgReorderSheet.ShowDialog()
     End Sub
 End Class
