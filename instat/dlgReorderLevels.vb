@@ -34,8 +34,7 @@ Public Class dlgReorderLevels
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetDataType("factor")
         ucrReorderFactor.setReceiver(ucrReceiverFactor)
-        ucrReorderFactor.strDataType = "factor"
-
+        ucrReorderFactor.setDataType("factor")
     End Sub
     Private Sub SetDefaultSettings()
 

@@ -14,4 +14,6 @@
     Public Sub selectAllText()
         txtScript.SelectAll()
     End Sub
+
+
 End Class

@@ -16,15 +16,28 @@
 
 Imports RDotNet
 Public Class ucrReorder
+    Public Event OrderChanged()
     Public WithEvents ucrDataFrameList As ucrDataFrame
     Public WithEvents ucrReceiver As ucrReceiverSingle
-    Public strDataType As String = ""
+    Private strDataType As String = ""
     Dim selectedListViewItem As New ListViewItem
     Dim selectedIndex As Integer
     Dim itemsCount As Integer
 
     Public Sub setDataType(strType As String)
         strDataType = strType
+        lstAvailableData.Clear()
+        Select Case strDataType
+            Case "column"
+                lstAvailableData.Columns.Add("Variables")
+                lstAvailableData.Columns(0).Width = -2
+            Case "factor"
+                lstAvailableData.Columns.Add("Levels")
+                lstAvailableData.Columns(0).Width = -2
+            Case "data frame"
+                lstAvailableData.Columns.Add("Data Frame")
+                lstAvailableData.Columns(0).Width = -2
+        End Select
         loadList()
     End Sub
 
@@ -44,7 +57,9 @@ Public Class ucrReorder
             selectedListViewItem.Selected = True
             lstAvailableData.Select()
             selectedListViewItem.EnsureVisible()
+            RaiseEvent OrderChanged()
         End If
+
     End Sub
 
     Private Sub cmdDown_click(sender As Object, e As EventArgs) Handles cmdDown.Click
@@ -62,6 +77,7 @@ Public Class ucrReorder
             selectedListViewItem.Selected = True
             lstAvailableData.Select()
             selectedListViewItem.EnsureVisible()
+            RaiseEvent OrderChanged()
         End If
     End Sub
 
@@ -78,6 +94,7 @@ Public Class ucrReorder
             selectedListViewItem.Selected = True
             lstAvailableData.Select()
             selectedListViewItem.EnsureVisible()
+            RaiseEvent OrderChanged()
         End If
     End Sub
 
@@ -94,6 +111,7 @@ Public Class ucrReorder
             selectedListViewItem.Selected = True
             lstAvailableData.Select()
             selectedListViewItem.EnsureVisible()
+            RaiseEvent OrderChanged()
         End If
     End Sub
 
@@ -128,17 +146,11 @@ Public Class ucrReorder
 
     Public Sub setDataframes(dfDataframes As ucrDataFrame)
         ucrDataFrameList = dfDataframes
-        lstAvailableData.Clear()
-        lstAvailableData.Columns.Add("Available Variables")
-        lstAvailableData.Columns(0).Width = -2
         loadList()
     End Sub
 
     Public Sub setReceiver(dfSingle As ucrReceiverSingle)
         ucrReceiver = dfSingle
-        lstAvailableData.Clear()
-        lstAvailableData.Columns.Add("Available Levels")
-        lstAvailableData.Columns(0).Width = -2
         loadList()
     End Sub
 
@@ -167,6 +179,7 @@ Public Class ucrReorder
             For i = 0 To vecNames.Count - 1
                 lstAvailableData.Items.Add(vecNames(i))
             Next
+            RaiseEvent OrderChanged()
         End If
     End Sub
 
