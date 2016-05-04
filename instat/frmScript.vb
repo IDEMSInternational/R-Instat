@@ -14,4 +14,14 @@
     Public Sub selectAllText()
         txtScript.SelectAll()
     End Sub
+
+    Private Sub txtLog_KeyDown(sender As Object, e As KeyEventArgs) Handles txtScript.KeyDown
+        If e.Control And Keys.A Then
+            selectAllText()
+        End If
+
+        If e.Control And Keys.C Then
+            copyText()
+        End If
+    End Sub
 End Class
