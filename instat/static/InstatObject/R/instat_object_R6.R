@@ -34,6 +34,8 @@ instat_object <- R6Class("instat_object",
                     else {
                       if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
                       private$.data_objects_changed <- new_value
+                      #TODO is this behaviour we want?
+                      sapply(self$get_data_objects(), function(x) x$data_changed <- new_value)
                     }
                   }
                 )
@@ -565,11 +567,11 @@ instat_object$set("public", "append_to_metadata", function(property, new_val) {
 } 
 )
 
-instat_object$set("public", "order_dataframes", function(data_frames_order) {
+instat_object$set("public", "reorder_dataframes", function(data_frames_order) {
   if(length(data_frames_order) != length(names(private$.data_objects))) stop("number data frames to order should be equal to number of dataframes in the object")
   if(!setequal(data_frames_order,names(private$.data_objects))) stop("data_frames_order must be a permutation of the dataframe names.")
 
-  self$set_data_objects(data_objects[names(data_frames_order)])
+  self$set_data_objects(private$.data_objects[data_frames_order])
   self$data_objects_changed <- TRUE
 } 
 )
