@@ -28,16 +28,17 @@ Partial Class ucrDataFrame
         '
         'cboAvailableDataFrames
         '
+        Me.cboAvailableDataFrames.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.cboAvailableDataFrames.FormattingEnabled = True
-        Me.cboAvailableDataFrames.Location = New System.Drawing.Point(3, 16)
+        Me.cboAvailableDataFrames.Location = New System.Drawing.Point(0, 18)
         Me.cboAvailableDataFrames.Name = "cboAvailableDataFrames"
-        Me.cboAvailableDataFrames.Size = New System.Drawing.Size(121, 21)
+        Me.cboAvailableDataFrames.Size = New System.Drawing.Size(120, 21)
         Me.cboAvailableDataFrames.TabIndex = 0
         '
         'lblDataFrame
         '
-        Me.lblDataFrame.AutoSize = True
-        Me.lblDataFrame.Location = New System.Drawing.Point(3, 0)
+        Me.lblDataFrame.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblDataFrame.Location = New System.Drawing.Point(0, 0)
         Me.lblDataFrame.Name = "lblDataFrame"
         Me.lblDataFrame.Size = New System.Drawing.Size(65, 13)
         Me.lblDataFrame.TabIndex = 1
@@ -50,10 +51,10 @@ Partial Class ucrDataFrame
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lblDataFrame)
         Me.Controls.Add(Me.cboAvailableDataFrames)
+        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrDataFrame"
-        Me.Size = New System.Drawing.Size(127, 41)
+        Me.Size = New System.Drawing.Size(120, 40)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
