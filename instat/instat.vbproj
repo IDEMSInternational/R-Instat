@@ -593,6 +593,12 @@
     <Compile Include="sdgCumDistPlotOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDataOptions.Designer.vb">
+      <DependentUpon>sdgDataOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDataOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgDensityOptions.Designer.vb">
       <DependentUpon>sdgDensityOptions.vb</DependentUpon>
     </Compile>
@@ -2327,6 +2333,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCumDistPlotOptions.sw-KE.resx">
       <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDataOptions.fr-FR.resx">
+      <DependentUpon>sdgDataOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDataOptions.resx">
+      <DependentUpon>sdgDataOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDataOptions.sw-KE.resx">
+      <DependentUpon>sdgDataOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDensityOptions.fr-FR.resx">
       <DependentUpon>sdgDensityOptions.vb</DependentUpon>
