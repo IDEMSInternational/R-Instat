@@ -16,6 +16,7 @@
 
 Imports RDotNet
 Public Class ucrReorder
+    Public Event OrderChanged()
     Public WithEvents ucrDataFrameList As ucrDataFrame
     Public WithEvents ucrReceiver As ucrReceiverSingle
     Public strDataType As String = ""
@@ -44,7 +45,9 @@ Public Class ucrReorder
             selectedListViewItem.Selected = True
             lstAvailableData.Select()
             selectedListViewItem.EnsureVisible()
+            RaiseEvent OrderChanged()
         End If
+
     End Sub
 
     Private Sub cmdDown_click(sender As Object, e As EventArgs) Handles cmdDown.Click
@@ -62,6 +65,7 @@ Public Class ucrReorder
             selectedListViewItem.Selected = True
             lstAvailableData.Select()
             selectedListViewItem.EnsureVisible()
+            RaiseEvent OrderChanged()
         End If
     End Sub
 
@@ -78,6 +82,7 @@ Public Class ucrReorder
             selectedListViewItem.Selected = True
             lstAvailableData.Select()
             selectedListViewItem.EnsureVisible()
+            RaiseEvent OrderChanged()
         End If
     End Sub
 
@@ -94,6 +99,7 @@ Public Class ucrReorder
             selectedListViewItem.Selected = True
             lstAvailableData.Select()
             selectedListViewItem.EnsureVisible()
+            RaiseEvent OrderChanged()
         End If
     End Sub
 
@@ -167,6 +173,7 @@ Public Class ucrReorder
             For i = 0 To vecNames.Count - 1
                 lstAvailableData.Items.Add(vecNames(i))
             Next
+            RaiseEvent OrderChanged()
         End If
     End Sub
 
