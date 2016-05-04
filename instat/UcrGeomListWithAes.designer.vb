@@ -36,6 +36,10 @@ Partial Class UcrGeomListWithParameters
         Me.lblGgParam1 = New System.Windows.Forms.Label()
         Me.ucrReceiverParam7 = New instat.ucrReceiverSingle()
         Me.ucrReceiverParam6 = New instat.ucrReceiverSingle()
+        Me.ucrReceiverParam8 = New instat.ucrReceiverSingle()
+        Me.lblGgParam8 = New System.Windows.Forms.Label()
+        Me.ucrReceiverParam9 = New instat.ucrReceiverSingle()
+        Me.lblGgParam9 = New System.Windows.Forms.Label()
         Me.grpAesList.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -97,12 +101,16 @@ Partial Class UcrGeomListWithParameters
         'grpAesList
         '
         Me.grpAesList.Controls.Add(Me.lblGgParam6)
+        Me.grpAesList.Controls.Add(Me.lblGgParam9)
+        Me.grpAesList.Controls.Add(Me.lblGgParam8)
         Me.grpAesList.Controls.Add(Me.lblGgParam7)
         Me.grpAesList.Controls.Add(Me.lblGgParam5)
         Me.grpAesList.Controls.Add(Me.lblGgParam4)
         Me.grpAesList.Controls.Add(Me.lblGgParam3)
         Me.grpAesList.Controls.Add(Me.lblGgParam2)
         Me.grpAesList.Controls.Add(Me.lblGgParam1)
+        Me.grpAesList.Controls.Add(Me.ucrReceiverParam9)
+        Me.grpAesList.Controls.Add(Me.ucrReceiverParam8)
         Me.grpAesList.Controls.Add(Me.ucrReceiverParam1)
         Me.grpAesList.Controls.Add(Me.ucrReceiverParam7)
         Me.grpAesList.Controls.Add(Me.ucrReceiverParam5)
@@ -110,9 +118,9 @@ Partial Class UcrGeomListWithParameters
         Me.grpAesList.Controls.Add(Me.ucrReceiverParam4)
         Me.grpAesList.Controls.Add(Me.ucrReceiverParam3)
         Me.grpAesList.Controls.Add(Me.ucrReceiverParam2)
-        Me.grpAesList.Location = New System.Drawing.Point(242, 52)
+        Me.grpAesList.Location = New System.Drawing.Point(242, 19)
         Me.grpAesList.Name = "grpAesList"
-        Me.grpAesList.Size = New System.Drawing.Size(219, 228)
+        Me.grpAesList.Size = New System.Drawing.Size(219, 264)
         Me.grpAesList.TabIndex = 9
         Me.grpAesList.TabStop = False
         Me.grpAesList.Text = "Geom Aesthetics"
@@ -196,6 +204,40 @@ Partial Class UcrGeomListWithParameters
         Me.ucrReceiverParam6.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam6.TabIndex = 8
         '
+        'ucrReceiverParam8
+        '
+        Me.ucrReceiverParam8.Location = New System.Drawing.Point(97, 216)
+        Me.ucrReceiverParam8.Name = "ucrReceiverParam8"
+        Me.ucrReceiverParam8.Selector = Nothing
+        Me.ucrReceiverParam8.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverParam8.TabIndex = 8
+        '
+        'lblGgParam8
+        '
+        Me.lblGgParam8.AutoSize = True
+        Me.lblGgParam8.Location = New System.Drawing.Point(6, 216)
+        Me.lblGgParam8.Name = "lblGgParam8"
+        Me.lblGgParam8.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam8.TabIndex = 10
+        Me.lblGgParam8.Text = "Label2"
+        '
+        'ucrReceiverParam9
+        '
+        Me.ucrReceiverParam9.Location = New System.Drawing.Point(98, 241)
+        Me.ucrReceiverParam9.Name = "ucrReceiverParam9"
+        Me.ucrReceiverParam9.Selector = Nothing
+        Me.ucrReceiverParam9.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverParam9.TabIndex = 8
+        '
+        'lblGgParam9
+        '
+        Me.lblGgParam9.AutoSize = True
+        Me.lblGgParam9.Location = New System.Drawing.Point(7, 241)
+        Me.lblGgParam9.Name = "lblGgParam9"
+        Me.lblGgParam9.Size = New System.Drawing.Size(39, 13)
+        Me.lblGgParam9.TabIndex = 10
+        Me.lblGgParam9.Text = "Label2"
+        '
         'UcrGeomListWithParameters
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -230,4 +272,8 @@ Partial Class UcrGeomListWithParameters
     Friend WithEvents lblGgParam3 As Label
     Friend WithEvents lblGgParam2 As Label
     Friend WithEvents lblGgParam1 As Label
+    Friend WithEvents lblGgParam9 As Label
+    Friend WithEvents lblGgParam8 As Label
+    Friend WithEvents ucrReceiverParam9 As ucrReceiverSingle
+    Friend WithEvents ucrReceiverParam8 As ucrReceiverSingle
 End Class
