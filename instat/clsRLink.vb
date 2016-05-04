@@ -317,7 +317,7 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub FillListView(lstView As ListView, Optional lstIncludedDataTypes As List(Of String) = Nothing, Optional lstExcludedDataTypes As List(Of String) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Available Variables")
+    Public Sub FillListView(lstView As ListView, Optional lstIncludedDataTypes As List(Of String) = Nothing, Optional lstExcludedDataTypes As List(Of String) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables")
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -346,21 +346,21 @@ Public Class RLink
             End If
 
             For i = 0 To vecColumns.Count - 1
-                If vecColumns.Count = 1 Then
-                    grps = New ListViewGroup(key:=vecColumns.Names(i), headerText:="")
-                Else
+                If vecColumns.Count > 1 Then
                     grps = New ListViewGroup(key:=vecColumns.Names(i), headerText:=vecColumns.Names(i))
-                End If
-                If Not lstView.Groups.Contains(grps) Then
                     lstView.Groups.Add(grps)
                 End If
                 chrCurrColumns = vecColumns(i).AsCharacter
-                For Each strCol As String In chrCurrColumns
-                    lstView.Items.Add(strCol).Group = lstView.Groups(i)
+                For j = 0 To chrCurrColumns.Count - 1
+                    lstView.Items.Add(chrCurrColumns(j))
+                    lstView.Items(j).Tag = vecColumns.Names(i)
+                    If vecColumns.Count > 1 Then
+                        lstView.Items(j).Group = lstView.Groups(i)
+                    End If
                 Next
             Next
             'TODO Find out how to get this to set automatically ( Width = -2 almost works)
-            lstView.Columns(0).Width = 115
+            lstView.Columns(0).Width = lstView.Width - 25
         End If
     End Sub
 
