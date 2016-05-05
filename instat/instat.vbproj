@@ -113,9 +113,10 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="unvell.ReoGrid, Version=0.8.5.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="unvell.ReoGrid, Version=1.2.3.0, Culture=neutral, PublicKeyToken=0a947d9ccc179105, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\unvell.ReoGrid.dll</HintPath>
+      <HintPath>..\packages\unvell.ReoGrid.dll.1.2.3.0\lib\20\unvell.ReoGrid.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -195,12 +196,6 @@
       <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgChangeFormatDayMonth.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgChangeType.designer.vb">
-      <DependentUpon>dlgChangeType.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgChangeType.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCheck.Designer.vb">
@@ -591,6 +586,12 @@
       <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCumDistPlotOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgDataOptions.Designer.vb">
+      <DependentUpon>sdgDataOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDataOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgDensityOptions.Designer.vb">
@@ -1707,15 +1708,6 @@
     <EmbeddedResource Include="dlgChangeFormatDayMonth.sw-KE.resx">
       <DependentUpon>dlgChangeFormatDayMonth.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgChangeType.fr-FR.resx">
-      <DependentUpon>dlgChangeType.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgChangeType.resx">
-      <DependentUpon>dlgChangeType.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgChangeType.sw-KE.resx">
-      <DependentUpon>dlgChangeType.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgCheck.fr-FR.resx">
       <DependentUpon>dlgCheck.vb</DependentUpon>
     </EmbeddedResource>
@@ -2327,6 +2319,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCumDistPlotOptions.sw-KE.resx">
       <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDataOptions.fr-FR.resx">
+      <DependentUpon>sdgDataOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDataOptions.resx">
+      <DependentUpon>sdgDataOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDataOptions.sw-KE.resx">
+      <DependentUpon>sdgDataOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDensityOptions.fr-FR.resx">
       <DependentUpon>sdgDensityOptions.vb</DependentUpon>
@@ -4087,7 +4088,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\Carlosjj-Microsoft-Office-2013-Excel.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿' Instat-R
+﻿
+' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -14,10 +15,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class dlgChangeType
-    Private Sub dlgChangeType_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class sdgDataOptions
+    Private Sub sdgDataOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrChangetypeReceiver.Selector = ucrChangeTypeSelector
-        ucrChangetypeReceiver.SetMeAsReceiver()
     End Sub
 End Class

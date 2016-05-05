@@ -38,6 +38,9 @@ Partial Class ucrFactor
         '
         'grdFactorData
         '
+        Me.grdFactorData.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdFactorData.BackColor = System.Drawing.Color.White
         Me.grdFactorData.ColumnHeaderContextMenuStrip = Nothing
         Me.grdFactorData.LeadHeaderContextMenuStrip = Nothing
@@ -47,8 +50,8 @@ Partial Class ucrFactor
         Me.grdFactorData.Script = Nothing
         Me.grdFactorData.SheetTabContextMenuStrip = Nothing
         Me.grdFactorData.SheetTabNewButtonVisible = False
+        Me.grdFactorData.SheetTabVisible = True
         Me.grdFactorData.SheetTabWidth = 60
-        Me.grdFactorData.SheetTabNewButtonVisible = False
         Me.grdFactorData.Size = New System.Drawing.Size(260, 174)
         Me.grdFactorData.TabIndex = 32
         '
