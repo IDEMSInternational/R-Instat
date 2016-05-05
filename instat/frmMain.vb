@@ -349,10 +349,6 @@ Public Class frmMain
         dlgRecode.ShowDialog()
     End Sub
 
-    Private Sub EnterToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgChangeType.ShowDialog()
-    End Sub
-
     Private Sub RandomSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataRandomSamples.Click
         dlgRandomSample.ShowDialog()
     End Sub
@@ -1019,8 +1015,8 @@ Public Class frmMain
             frmCommand.selectAllText()
         ElseIf ActiveMdiChild Is frmScript Then
             frmScript.selectAllText()
-        ElseIf ActiveMdiChild Is frmEditor Then
-            'ToAdd later
+        ElseIf ActiveMdiChild Is frmEditor AndAlso frmEditor.grdData.Visible Then
+            frmEditor.selectAllText()
         End If
     End Sub
 
@@ -1031,8 +1027,8 @@ Public Class frmMain
             frmCommand.copyText()
         ElseIf ActiveMdiChild Is frmScript Then
             frmScript.copyText()
-        ElseIf ActiveMdiChild Is frmEditor Then
-            'ToAdd later
+        ElseIf ActiveMdiChild Is frmEditor AndAlso frmEditor.grdData.Visible Then
+            frmEditor.copyRange()
         End If
     End Sub
 End Class

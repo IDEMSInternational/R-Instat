@@ -40,7 +40,7 @@ Partial Class ucrInputComboBox
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cboInput)
         Me.Name = "ucrInputComboBox"
-        Me.Size = New System.Drawing.Size(137, 25)
+        Me.Size = New System.Drawing.Size(137, 21)
         Me.ResumeLayout(False)
 
     End Sub

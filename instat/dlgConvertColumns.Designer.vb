@@ -28,12 +28,12 @@ Partial Class dlgConvertColumns
         Me.rdoCharacter = New System.Windows.Forms.RadioButton()
         Me.rdoFactor = New System.Windows.Forms.RadioButton()
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
-        Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpFactorToNumericOptions = New System.Windows.Forms.GroupBox()
         Me.rdoConvertOrdinals = New System.Windows.Forms.RadioButton()
         Me.rdoConvertLevels = New System.Windows.Forms.RadioButton()
+        Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpTo.SuspendLayout()
         Me.grpFactorToNumericOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -41,7 +41,7 @@ Partial Class dlgConvertColumns
         'lblColumnsToConvert
         '
         Me.lblColumnsToConvert.AutoSize = True
-        Me.lblColumnsToConvert.Location = New System.Drawing.Point(254, 9)
+        Me.lblColumnsToConvert.Location = New System.Drawing.Point(257, 59)
         Me.lblColumnsToConvert.Name = "lblColumnsToConvert"
         Me.lblColumnsToConvert.Size = New System.Drawing.Size(99, 13)
         Me.lblColumnsToConvert.TabIndex = 1
@@ -54,9 +54,9 @@ Partial Class dlgConvertColumns
         Me.grpTo.Controls.Add(Me.rdoCharacter)
         Me.grpTo.Controls.Add(Me.rdoFactor)
         Me.grpTo.Controls.Add(Me.rdoNumeric)
-        Me.grpTo.Location = New System.Drawing.Point(0, 188)
+        Me.grpTo.Location = New System.Drawing.Point(10, 188)
         Me.grpTo.Name = "grpTo"
-        Me.grpTo.Size = New System.Drawing.Size(101, 132)
+        Me.grpTo.Size = New System.Drawing.Size(101, 118)
         Me.grpTo.TabIndex = 4
         Me.grpTo.TabStop = False
         Me.grpTo.Tag = "To"
@@ -110,33 +110,11 @@ Partial Class dlgConvertColumns
         Me.rdoNumeric.Text = "Numeric"
         Me.rdoNumeric.UseVisualStyleBackColor = True
         '
-        'ucrSelectorDataFrameColumns
-        '
-        Me.ucrSelectorDataFrameColumns.Location = New System.Drawing.Point(0, 2)
-        Me.ucrSelectorDataFrameColumns.Name = "ucrSelectorDataFrameColumns"
-        Me.ucrSelectorDataFrameColumns.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorDataFrameColumns.TabIndex = 0
-        '
-        'ucrReceiverColumnsToConvert
-        '
-        Me.ucrReceiverColumnsToConvert.Location = New System.Drawing.Point(257, 25)
-        Me.ucrReceiverColumnsToConvert.Name = "ucrReceiverColumnsToConvert"
-        Me.ucrReceiverColumnsToConvert.Selector = Nothing
-        Me.ucrReceiverColumnsToConvert.Size = New System.Drawing.Size(121, 104)
-        Me.ucrReceiverColumnsToConvert.TabIndex = 2
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 326)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 3
-        '
         'grpFactorToNumericOptions
         '
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertOrdinals)
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertLevels)
-        Me.grpFactorToNumericOptions.Location = New System.Drawing.Point(152, 188)
+        Me.grpFactorToNumericOptions.Location = New System.Drawing.Point(127, 215)
         Me.grpFactorToNumericOptions.Name = "grpFactorToNumericOptions"
         Me.grpFactorToNumericOptions.Size = New System.Drawing.Size(217, 44)
         Me.grpFactorToNumericOptions.TabIndex = 7
@@ -168,11 +146,33 @@ Partial Class dlgConvertColumns
         Me.rdoConvertLevels.Text = "Convert Levels"
         Me.rdoConvertLevels.UseVisualStyleBackColor = True
         '
+        'ucrSelectorDataFrameColumns
+        '
+        Me.ucrSelectorDataFrameColumns.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorDataFrameColumns.Name = "ucrSelectorDataFrameColumns"
+        Me.ucrSelectorDataFrameColumns.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorDataFrameColumns.TabIndex = 0
+        '
+        'ucrReceiverColumnsToConvert
+        '
+        Me.ucrReceiverColumnsToConvert.Location = New System.Drawing.Point(257, 75)
+        Me.ucrReceiverColumnsToConvert.Name = "ucrReceiverColumnsToConvert"
+        Me.ucrReceiverColumnsToConvert.Selector = Nothing
+        Me.ucrReceiverColumnsToConvert.Size = New System.Drawing.Size(121, 104)
+        Me.ucrReceiverColumnsToConvert.TabIndex = 2
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 313)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 3
+        '
         'dlgConvertColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(407, 382)
+        Me.ClientSize = New System.Drawing.Size(430, 377)
         Me.Controls.Add(Me.grpFactorToNumericOptions)
         Me.Controls.Add(Me.grpTo)
         Me.Controls.Add(Me.ucrSelectorDataFrameColumns)

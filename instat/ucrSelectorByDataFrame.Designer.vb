@@ -27,13 +27,16 @@ Partial Class ucrSelectorByDataFrame
         '
         'lstAvailableVariable
         '
-        Me.lstAvailableVariable.Location = New System.Drawing.Point(3, 50)
+        Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.None
+        Me.lstAvailableVariable.Location = New System.Drawing.Point(0, 50)
+        Me.lstAvailableVariable.Margin = New System.Windows.Forms.Padding(0)
         '
         'ucrAvailableDataFrames
         '
-        Me.ucrAvailableDataFrames.Location = New System.Drawing.Point(3, 3)
+        Me.ucrAvailableDataFrames.Location = New System.Drawing.Point(0, 0)
+        Me.ucrAvailableDataFrames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAvailableDataFrames.Name = "ucrAvailableDataFrames"
-        Me.ucrAvailableDataFrames.Size = New System.Drawing.Size(127, 41)
+        Me.ucrAvailableDataFrames.Size = New System.Drawing.Size(120, 50)
         Me.ucrAvailableDataFrames.TabIndex = 84
         '
         'ucrSelectorByDataFrame
@@ -41,8 +44,9 @@ Partial Class ucrSelectorByDataFrame
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrAvailableDataFrames)
+        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrSelectorByDataFrame"
-        Me.Size = New System.Drawing.Size(147, 177)
+        Me.Size = New System.Drawing.Size(120, 180)
         Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
         Me.Controls.SetChildIndex(Me.ucrAvailableDataFrames, 0)
         Me.ResumeLayout(False)
