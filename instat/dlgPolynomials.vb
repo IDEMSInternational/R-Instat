@@ -71,7 +71,7 @@ Public Class dlgPolynomials
 
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
         ucrReceiverPolynomial.SetMeAsReceiver()
-        ucrReceiverPolynomial.SetDataType("numeric")
+        ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
     End Sub
 
     Private Sub ucrInputPolynomial_NameChanged() Handles ucrInputPolynomial.NameChanged

@@ -34,7 +34,7 @@ Public Class dlgRank
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("rank")
         ucrReceiverRank.Selector = ucrSelectorForRank
-        ucrReceiverRank.SetDataType("numeric")
+        ucrReceiverRank.SetIncludedDataTypes({"numeric"})
         ucrBase.iHelpTopicID = 25
 
         ucrInputColName.SetPrefix("Rank")
