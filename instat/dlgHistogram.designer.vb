@@ -49,7 +49,7 @@ Partial Class dlgHistogram
         '
         'cmdHistogramOptions
         '
-        Me.cmdHistogramOptions.Location = New System.Drawing.Point(6, 217)
+        Me.cmdHistogramOptions.Location = New System.Drawing.Point(10, 217)
         Me.cmdHistogramOptions.Name = "cmdHistogramOptions"
         Me.cmdHistogramOptions.Size = New System.Drawing.Size(103, 23)
         Me.cmdHistogramOptions.TabIndex = 8
@@ -60,7 +60,7 @@ Partial Class dlgHistogram
         'rdoHistogram
         '
         Me.rdoHistogram.AutoSize = True
-        Me.rdoHistogram.Location = New System.Drawing.Point(22, 13)
+        Me.rdoHistogram.Location = New System.Drawing.Point(10, 13)
         Me.rdoHistogram.Name = "rdoHistogram"
         Me.rdoHistogram.Size = New System.Drawing.Size(72, 17)
         Me.rdoHistogram.TabIndex = 0
@@ -72,7 +72,7 @@ Partial Class dlgHistogram
         'rdoDensity
         '
         Me.rdoDensity.AutoSize = True
-        Me.rdoDensity.Location = New System.Drawing.Point(168, 13)
+        Me.rdoDensity.Location = New System.Drawing.Point(160, 13)
         Me.rdoDensity.Name = "rdoDensity"
         Me.rdoDensity.Size = New System.Drawing.Size(60, 17)
         Me.rdoDensity.TabIndex = 1
@@ -84,7 +84,7 @@ Partial Class dlgHistogram
         'rdoFreequencyPolygon
         '
         Me.rdoFreequencyPolygon.AutoSize = True
-        Me.rdoFreequencyPolygon.Location = New System.Drawing.Point(302, 13)
+        Me.rdoFreequencyPolygon.Location = New System.Drawing.Point(286, 13)
         Me.rdoFreequencyPolygon.Name = "rdoFreequencyPolygon"
         Me.rdoFreequencyPolygon.Size = New System.Drawing.Size(116, 17)
         Me.rdoFreequencyPolygon.TabIndex = 2
@@ -105,7 +105,7 @@ Partial Class dlgHistogram
         '
         'cmdDensityOptions
         '
-        Me.cmdDensityOptions.Location = New System.Drawing.Point(6, 217)
+        Me.cmdDensityOptions.Location = New System.Drawing.Point(13, 217)
         Me.cmdDensityOptions.Name = "cmdDensityOptions"
         Me.cmdDensityOptions.Size = New System.Drawing.Size(103, 23)
         Me.cmdDensityOptions.TabIndex = 8
@@ -115,7 +115,7 @@ Partial Class dlgHistogram
         '
         'cmdFrequencyOptions
         '
-        Me.cmdFrequencyOptions.Location = New System.Drawing.Point(6, 217)
+        Me.cmdFrequencyOptions.Location = New System.Drawing.Point(10, 217)
         Me.cmdFrequencyOptions.Name = "cmdFrequencyOptions"
         Me.cmdFrequencyOptions.Size = New System.Drawing.Size(163, 23)
         Me.cmdFrequencyOptions.TabIndex = 8
@@ -126,6 +126,7 @@ Partial Class dlgHistogram
         'ucrFactorReceiver
         '
         Me.ucrFactorReceiver.Location = New System.Drawing.Point(294, 209)
+        Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
@@ -133,21 +134,22 @@ Partial Class dlgHistogram
         '
         'ucrHistogramSelector
         '
-        Me.ucrHistogramSelector.Location = New System.Drawing.Point(6, 32)
+        Me.ucrHistogramSelector.Location = New System.Drawing.Point(10, 32)
+        Me.ucrHistogramSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrHistogramSelector.Name = "ucrHistogramSelector"
         Me.ucrHistogramSelector.Size = New System.Drawing.Size(242, 179)
         Me.ucrHistogramSelector.TabIndex = 3
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(5, 275)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 275)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 10
         '
         'ucrSaveHist
         '
-        Me.ucrSaveHist.Location = New System.Drawing.Point(6, 242)
+        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 247)
         Me.ucrSaveHist.Name = "ucrSaveHist"
         Me.ucrSaveHist.Size = New System.Drawing.Size(269, 27)
         Me.ucrSaveHist.TabIndex = 11
