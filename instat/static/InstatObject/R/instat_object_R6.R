@@ -229,21 +229,21 @@ instat_object$set("public", "get_data_objects", function(data_name) {
 }
 )
 
-instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE,...) {
+instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE,...) {
   if(!stack_data) {
     if(missing(data_name)) {
       retlist <- list()
       for ( i in (1:length(private$.data_objects)) ) {
-        retlist[[names(private$.data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character)
+        retlist[[names(private$.data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found."))
-    return(melt(self$get_data_objects(data_name)$get_data_frame(), ...))
+    return(melt(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns), ...))
   }
 }
 )
@@ -364,9 +364,9 @@ instat_object$set("public", "set_metadata_changed", function(data_name = "", new
 } 
 )
 
-instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix) {
-  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data)
-  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix)
+instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix, hidden = FALSE) {
+  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden)
+  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden)
 }
 )
 
@@ -543,8 +543,8 @@ instat_object$set("public", "convert_column_to_type", function(data_name, col_na
 } 
 )
 
-instat_object$set("public", "append_to_variables_metadata", function(data_name, col_name, property, new_val) {
-  self$get_data_objects(data_name)$append_to_variables_metadata(col_name, property, new_val)
+instat_object$set("public", "append_to_variables_metadata", function(data_name, col_names, property, new_val) {
+  self$get_data_objects(data_name)$append_to_variables_metadata(col_names, property, new_val)
 } 
 )
 
