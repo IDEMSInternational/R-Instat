@@ -49,7 +49,7 @@ Partial Class dlgCumulativeDistribution
         'chkExceedancePlots
         '
         Me.chkExceedancePlots.AutoSize = True
-        Me.chkExceedancePlots.Location = New System.Drawing.Point(13, 181)
+        Me.chkExceedancePlots.Location = New System.Drawing.Point(10, 197)
         Me.chkExceedancePlots.Name = "chkExceedancePlots"
         Me.chkExceedancePlots.Size = New System.Drawing.Size(112, 17)
         Me.chkExceedancePlots.TabIndex = 5
@@ -60,7 +60,7 @@ Partial Class dlgCumulativeDistribution
         'chkCountsOnYAxis
         '
         Me.chkCountsOnYAxis.AutoSize = True
-        Me.chkCountsOnYAxis.Location = New System.Drawing.Point(13, 204)
+        Me.chkCountsOnYAxis.Location = New System.Drawing.Point(10, 220)
         Me.chkCountsOnYAxis.Name = "chkCountsOnYAxis"
         Me.chkCountsOnYAxis.Size = New System.Drawing.Size(108, 17)
         Me.chkCountsOnYAxis.TabIndex = 6
@@ -71,7 +71,7 @@ Partial Class dlgCumulativeDistribution
         'chkIncludePoints
         '
         Me.chkIncludePoints.AutoSize = True
-        Me.chkIncludePoints.Location = New System.Drawing.Point(13, 227)
+        Me.chkIncludePoints.Location = New System.Drawing.Point(10, 243)
         Me.chkIncludePoints.Name = "chkIncludePoints"
         Me.chkIncludePoints.Size = New System.Drawing.Size(93, 17)
         Me.chkIncludePoints.TabIndex = 7
@@ -81,7 +81,7 @@ Partial Class dlgCumulativeDistribution
         '
         'cmdLineOptions
         '
-        Me.cmdLineOptions.Location = New System.Drawing.Point(233, 218)
+        Me.cmdLineOptions.Location = New System.Drawing.Point(267, 218)
         Me.cmdLineOptions.Name = "cmdLineOptions"
         Me.cmdLineOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdLineOptions.TabIndex = 8
@@ -91,7 +91,7 @@ Partial Class dlgCumulativeDistribution
         '
         'cmdPlotOptions
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(314, 218)
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(342, 218)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdPlotOptions.TabIndex = 9
@@ -101,7 +101,8 @@ Partial Class dlgCumulativeDistribution
         '
         'ucrFactorReceiver
         '
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(264, 189)
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(267, 188)
+        Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
@@ -109,21 +110,22 @@ Partial Class dlgCumulativeDistribution
         '
         'ucrCumDistSelector
         '
-        Me.ucrCumDistSelector.Location = New System.Drawing.Point(4, 4)
+        Me.ucrCumDistSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrCumDistSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCumDistSelector.Name = "ucrCumDistSelector"
-        Me.ucrCumDistSelector.Size = New System.Drawing.Size(242, 179)
+        Me.ucrCumDistSelector.Size = New System.Drawing.Size(242, 184)
         Me.ucrCumDistSelector.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(4, 280)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 296)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 11
         '
         'ucrSaveCumDist
         '
-        Me.ucrSaveCumDist.Location = New System.Drawing.Point(12, 247)
+        Me.ucrSaveCumDist.Location = New System.Drawing.Point(10, 263)
         Me.ucrSaveCumDist.Name = "ucrSaveCumDist"
         Me.ucrSaveCumDist.Size = New System.Drawing.Size(265, 27)
         Me.ucrSaveCumDist.TabIndex = 14
@@ -150,7 +152,7 @@ Partial Class dlgCumulativeDistribution
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(410, 335)
+        Me.ClientSize = New System.Drawing.Size(419, 348)
         Me.Controls.Add(Me.ucrVariablesAsFactorforCumDist)
         Me.Controls.Add(Me.ucrSaveCumDist)
         Me.Controls.Add(Me.ucrFactorReceiver)
