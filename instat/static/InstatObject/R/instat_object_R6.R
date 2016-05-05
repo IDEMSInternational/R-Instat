@@ -610,3 +610,11 @@ instat_object$set("public","get_data_type", function(data_name, col_name) {
   self$get_data_objects(data_name)$get_data_type(col_name = col_name)
 } 
 )
+
+instat_object$set("public","copy_data_frame", function(data_name, new_name) {
+  curr_obj = self$get_data_objects(data_name)$clone(deep = TRUE)
+  
+  if(missing(new_name)) new_name = next_default_item(data_name, self$get_data_names())
+  self$append_data_object(new_name, curr_obj)
+} 
+)
