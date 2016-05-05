@@ -39,7 +39,7 @@ Public Class dlgDeleteSheet
         SetDefaults()
     End Sub
 
-    Private Sub ucrDataFrameToDelete_Leave(sender As Object, e As EventArgs) Handles ucrDataFrameToDelete.Leave
+    Private Sub ucrDataFrameToDelete_DataFrameChanged() Handles ucrDataFrameToDelete.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameToDelete.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 End Class
