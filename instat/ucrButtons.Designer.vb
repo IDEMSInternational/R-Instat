@@ -33,7 +33,7 @@ Partial Class ucrButtons
         '
         'cmdOk
         '
-        Me.cmdOk.Location = New System.Drawing.Point(3, 26)
+        Me.cmdOk.Location = New System.Drawing.Point(0, 26)
         Me.cmdOk.Name = "cmdOk"
         Me.cmdOk.Size = New System.Drawing.Size(75, 23)
         Me.cmdOk.TabIndex = 2
@@ -43,7 +43,7 @@ Partial Class ucrButtons
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(163, 26)
+        Me.cmdCancel.Location = New System.Drawing.Point(160, 26)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 4
@@ -53,7 +53,7 @@ Partial Class ucrButtons
         '
         'cmdReset
         '
-        Me.cmdReset.Location = New System.Drawing.Point(82, 26)
+        Me.cmdReset.Location = New System.Drawing.Point(79, 26)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(75, 23)
         Me.cmdReset.TabIndex = 3
@@ -63,7 +63,7 @@ Partial Class ucrButtons
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(244, 26)
+        Me.cmdHelp.Location = New System.Drawing.Point(241, 26)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
         Me.cmdHelp.TabIndex = 5
@@ -73,7 +73,7 @@ Partial Class ucrButtons
         '
         'cmdPaste
         '
-        Me.cmdPaste.Location = New System.Drawing.Point(326, 26)
+        Me.cmdPaste.Location = New System.Drawing.Point(323, 26)
         Me.cmdPaste.Name = "cmdPaste"
         Me.cmdPaste.Size = New System.Drawing.Size(75, 23)
         Me.cmdPaste.TabIndex = 6
@@ -84,7 +84,7 @@ Partial Class ucrButtons
         'chkComment
         '
         Me.chkComment.AutoSize = True
-        Me.chkComment.Location = New System.Drawing.Point(3, 3)
+        Me.chkComment.Location = New System.Drawing.Point(0, 3)
         Me.chkComment.Name = "chkComment"
         Me.chkComment.Size = New System.Drawing.Size(73, 17)
         Me.chkComment.TabIndex = 0
@@ -96,7 +96,7 @@ Partial Class ucrButtons
         '
         Me.txtComment.Location = New System.Drawing.Point(82, 1)
         Me.txtComment.Name = "txtComment"
-        Me.txtComment.Size = New System.Drawing.Size(319, 20)
+        Me.txtComment.Size = New System.Drawing.Size(316, 20)
         Me.txtComment.TabIndex = 1
         '
         'ucrButtons
@@ -111,7 +111,7 @@ Partial Class ucrButtons
         Me.Controls.Add(Me.cmdReset)
         Me.Controls.Add(Me.cmdHelp)
         Me.Name = "ucrButtons"
-        Me.Size = New System.Drawing.Size(410, 53)
+        Me.Size = New System.Drawing.Size(410, 52)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

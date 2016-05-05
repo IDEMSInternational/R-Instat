@@ -23,7 +23,7 @@ Partial Class dlgReorderSheet
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblSheetsToReoder = New System.Windows.Forms.Label()
-        Me.ucrSheetsToReoder = New instat.ucrReorder()
+        Me.ucrSheetsToReorder = New instat.ucrReorder()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
@@ -36,14 +36,14 @@ Partial Class dlgReorderSheet
         Me.lblSheetsToReoder.TabIndex = 3
         Me.lblSheetsToReoder.Text = "Sheets to Reoder"
         '
-        'ucrSheetsToReoder
+        'ucrSheetsToReorder
         '
-        Me.ucrSheetsToReoder.Location = New System.Drawing.Point(12, 25)
-        Me.ucrSheetsToReoder.Name = "ucrSheetsToReoder"
-        Me.ucrSheetsToReoder.Size = New System.Drawing.Size(154, 139)
-        Me.ucrSheetsToReoder.TabIndex = 2
-        Me.ucrSheetsToReoder.ucrDataFrameList = Nothing
-        Me.ucrSheetsToReoder.ucrReceiver = Nothing
+        Me.ucrSheetsToReorder.Location = New System.Drawing.Point(12, 25)
+        Me.ucrSheetsToReorder.Name = "ucrSheetsToReorder"
+        Me.ucrSheetsToReorder.Size = New System.Drawing.Size(154, 139)
+        Me.ucrSheetsToReorder.TabIndex = 2
+        Me.ucrSheetsToReorder.ucrDataFrameList = Nothing
+        Me.ucrSheetsToReorder.ucrReceiver = Nothing
         '
         'ucrBase
         '
@@ -58,7 +58,7 @@ Partial Class dlgReorderSheet
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 232)
         Me.Controls.Add(Me.lblSheetsToReoder)
-        Me.Controls.Add(Me.ucrSheetsToReoder)
+        Me.Controls.Add(Me.ucrSheetsToReorder)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgReorderSheet"
@@ -70,6 +70,6 @@ Partial Class dlgReorderSheet
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSheetsToReoder As ucrReorder
+    Friend WithEvents ucrSheetsToReorder As ucrReorder
     Friend WithEvents lblSheetsToReoder As Label
 End Class

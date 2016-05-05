@@ -52,7 +52,7 @@ Public Class dlgDummyVariables
         ucrVariateReceiver.Selector = ucrSelectorDummyVariable
         ucrReceiverFactor.SetMeAsReceiver()
 
-        ucrReceiverFactor.SetDataType("factor")
+        ucrReceiverFactor.SetIncludedDataTypes({"factor"})
 
         chkXvariable.Checked = False
         ucrVariateReceiver.Visible = False
