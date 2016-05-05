@@ -33,8 +33,8 @@ Partial Class frmEditor
         Me.mnuConvertText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertVariate = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.hideColumnsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.unhideColumnsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHideColumns = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuUnhideColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem21 = New System.Windows.Forms.ToolStripSeparator()
         Me.columnFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.clearColumnFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,6 +57,7 @@ Partial Class frmEditor
         Me.HideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblNoData = New System.Windows.Forms.Label()
+        Me.mnuUnhideAllColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.leadHeaderContextMenuStrip.SuspendLayout()
@@ -84,9 +85,9 @@ Partial Class frmEditor
         '
         'columnContextMenuStrip
         '
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuInsertCol, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuConvertText, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.hideColumnsToolStripMenuItem, Me.unhideColumnsToolStripMenuItem, Me.toolStripMenuItem21, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem, Me.toolStripMenuItem35})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuInsertCol, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuConvertText, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.mnuHideColumns, Me.mnuUnhideColumns, Me.mnuUnhideAllColumns, Me.toolStripMenuItem21, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem, Me.toolStripMenuItem35})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(185, 270)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(185, 292)
         '
         'mnuColumnRename
         '
@@ -134,17 +135,17 @@ Partial Class frmEditor
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(181, 6)
         '
-        'hideColumnsToolStripMenuItem
+        'mnuHideColumns
         '
-        Me.hideColumnsToolStripMenuItem.Name = "hideColumnsToolStripMenuItem"
-        Me.hideColumnsToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
-        Me.hideColumnsToolStripMenuItem.Text = "Hide"
+        Me.mnuHideColumns.Name = "mnuHideColumns"
+        Me.mnuHideColumns.Size = New System.Drawing.Size(184, 22)
+        Me.mnuHideColumns.Text = "Hide"
         '
-        'unhideColumnsToolStripMenuItem
+        'mnuUnhideColumns
         '
-        Me.unhideColumnsToolStripMenuItem.Name = "unhideColumnsToolStripMenuItem"
-        Me.unhideColumnsToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
-        Me.unhideColumnsToolStripMenuItem.Text = "Unhide"
+        Me.mnuUnhideColumns.Name = "mnuUnhideColumns"
+        Me.mnuUnhideColumns.Size = New System.Drawing.Size(184, 22)
+        Me.mnuUnhideColumns.Text = "Unhide..."
         '
         'toolStripMenuItem21
         '
@@ -283,6 +284,13 @@ Partial Class frmEditor
         Me.lblNoData.Tag = "no_data_loaded"
         Me.lblNoData.Text = "No Data Loaded"
         '
+        'mnuUnhideAllColumns
+        '
+        Me.mnuUnhideAllColumns.Name = "mnuUnhideAllColumns"
+        Me.mnuUnhideAllColumns.Size = New System.Drawing.Size(184, 22)
+        Me.mnuUnhideAllColumns.Tag = "Unhide_All"
+        Me.mnuUnhideAllColumns.Text = "Unhide All"
+        '
         'frmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -310,8 +318,8 @@ Partial Class frmEditor
     Private WithEvents mnuInsertCol As ToolStripMenuItem
     Private WithEvents mnuDeleteCol As ToolStripMenuItem
     Private WithEvents toolStripMenuItem2 As ToolStripSeparator
-    Private WithEvents hideColumnsToolStripMenuItem As ToolStripMenuItem
-    Private WithEvents unhideColumnsToolStripMenuItem As ToolStripMenuItem
+    Private WithEvents mnuHideColumns As ToolStripMenuItem
+    Private WithEvents mnuUnhideColumns As ToolStripMenuItem
     Private WithEvents toolStripMenuItem21 As ToolStripSeparator
     Private WithEvents columnFilterToolStripMenuItem As ToolStripMenuItem
     Private WithEvents clearColumnFilterToolStripMenuItem As ToolStripMenuItem
@@ -338,4 +346,5 @@ Partial Class frmEditor
     Friend WithEvents HideSheet As ToolStripMenuItem
     Friend WithEvents reorderSheet As ToolStripMenuItem
     Friend WithEvents unhideSheet As ToolStripMenuItem
+    Friend WithEvents mnuUnhideAllColumns As ToolStripMenuItem
 End Class
