@@ -20,8 +20,8 @@ Public Class dlgCopySheet
         autoTranslate(Me)
         ucrBase.iHelpTopicID = 62
         If bFirstLoad Then
-            SetDefaults()
             InitialiseDialog()
+            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -29,7 +29,7 @@ Public Class dlgCopySheet
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrNewSheetName.SetName("New_Name")
     End Sub
 
     Private Sub ReopenDialog()
@@ -37,10 +37,18 @@ Public Class dlgCopySheet
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub ucrDataFrameCopySheets_DataFrameChanged() Handles ucrDataFrameCopySheets.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub ucrNewSheetName_NameChanged() Handles ucrNewSheetName.NameChanged
+        ucrBase.clsRsyntax.AddParameter("new_name", Chr(34) & ucrNewSheetName.GetText & Chr(34))
     End Sub
 End Class
