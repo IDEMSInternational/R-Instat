@@ -38,6 +38,8 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam5.Selector = UcrSelector
         ucrReceiverParam6.Selector = UcrSelector
         ucrReceiverParam7.Selector = UcrSelector
+        ucrReceiverParam8.Selector = UcrSelector
+        ucrReceiverParam9.Selector = UcrSelector
         ucrReceiverParam1.SetMeAsReceiver()
     End Sub
 
@@ -125,7 +127,15 @@ Public Class UcrGeomListWithParameters
             For i = 0 To (clsCurrGeom.clsGgParameters.Count - 1)
                 lstGgParameterLabels(i).Text = clsCurrGeom.clsGgParameters(i).strGgParameterName
                 lstCurrArguments.Add(clsCurrGeom.clsGgParameters(i).strGgParameterName)
+
+                If clsCurrGeom.clsGgParameters(i).strIncludedDataTypes IsNot Nothing Then
+                    lstGgParameterUcr(i).SetIncludedDataTypes(clsCurrGeom.clsGgParameters(i).strIncludedDataTypes)
+
+                ElseIf clsCurrGeom.clsGgParameters(i).strExcludedDataTypes IsNot Nothing Then
+                    lstGgParameterUcr(i).SetExcludedDataTypes(clsCurrGeom.clsGgParameters(i).strExcludedDataTypes)
+                End If
             Next
+
         End If
     End Sub
 
