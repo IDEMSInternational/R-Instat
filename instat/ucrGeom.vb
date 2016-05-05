@@ -150,8 +150,8 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_bin2d)
 
         clsgeom_boxplot.strGeomName = "geom_boxplot"
-        clsgeom_boxplot.AddGgParameter("x")
-        clsgeom_boxplot.AddGgParameter("y")
+        clsgeom_boxplot.AddGgParameter("x", strIncludedDataTypes:={"factor"})
+        clsgeom_boxplot.AddGgParameter("y", strIncludedDataTypes:={"factor"})
         clsgeom_boxplot.AddGgParameter("fill")
         clsgeom_boxplot.AddGgParameter("colour")
         clsgeom_boxplot.AddGgParameter("shape")
