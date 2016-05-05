@@ -22,13 +22,32 @@ Partial Class dlgCopySheet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrDataFrameCopySheets = New instat.ucrDataFrame()
         Me.SuspendLayout()
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 59)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 0
+        '
+        'ucrDataFrameCopySheets
+        '
+        Me.ucrDataFrameCopySheets.Location = New System.Drawing.Point(13, 13)
+        Me.ucrDataFrameCopySheets.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrameCopySheets.Name = "ucrDataFrameCopySheets"
+        Me.ucrDataFrameCopySheets.Size = New System.Drawing.Size(120, 40)
+        Me.ucrDataFrameCopySheets.TabIndex = 1
         '
         'dlgCopySheet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(404, 236)
+        Me.ClientSize = New System.Drawing.Size(437, 123)
+        Me.Controls.Add(Me.ucrDataFrameCopySheets)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgCopySheet"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
@@ -36,4 +55,7 @@ Partial Class dlgCopySheet
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrDataFrameCopySheets As ucrDataFrame
 End Class
