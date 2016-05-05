@@ -34,7 +34,7 @@ Public Class dlgRecode
         ucrReceiverRecode.Selector = ucrSelectorForRecode
         ucrReceiverRecode.SetMeAsReceiver()
         ucrMultipleNumericRecode.bIsNumericInput = True
-        ucrReceiverRecode.SetDataType("numeric")
+        ucrReceiverRecode.SetIncludedDataTypes({"numeric"})
         ucrBase.clsRsyntax.SetFunction("cut")
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
         ucrInputRecode.SetPrefix("Recode")
