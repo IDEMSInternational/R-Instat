@@ -29,7 +29,7 @@ Public Class dlgCopySheet
     End Sub
 
     Private Sub SetDefaults()
-        ucrNewSheetName.SetName("New_Name")
+        ucrNewSheetName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & "_copy")
     End Sub
 
     Private Sub ReopenDialog()
