@@ -45,6 +45,7 @@ Public Class dlgCopySheet
     End Sub
 
     Private Sub ucrDataFrameCopySheets_DataFrameChanged() Handles ucrDataFrameCopySheets.DataFrameChanged
+        ucrNewSheetName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & "_copy")
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
