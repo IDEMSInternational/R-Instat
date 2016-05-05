@@ -18,18 +18,21 @@ Public Class dlgDeleteSheet
     Public bFirstLoad As Boolean = True
     Private Sub dlgDeleteSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         ucrBase.iHelpTopicID = 63
-        'set the function
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
-        ucrDataFrameToDelete.Focus()
         autoTranslate(Me)
 
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
     End Sub
-    Private Sub SetDefaults()
 
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
+    End Sub
+
+    Private Sub SetDefaults()
+        ucrDataFrameToDelete.Focus()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
