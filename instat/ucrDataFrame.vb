@@ -33,7 +33,7 @@ Public Class ucrDataFrame
     Public Sub Reset()
         If frmMain.strDefaultDataFrame <> "" Then
             cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strDefaultDataFrame)
-        Else
+        ElseIf frmMain.strCurrentDataFrame <> "" Then
             cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strCurrentDataFrame)
         End If
         SetDataFrameProperties()
