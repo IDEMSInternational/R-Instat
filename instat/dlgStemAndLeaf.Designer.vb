@@ -30,7 +30,8 @@ Partial Class dlgStemAndLeaf
         '
         'ucrReceiverStemAndLeaf
         '
-        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(253, 26)
+        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(274, 33)
+        Me.ucrReceiverStemAndLeaf.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStemAndLeaf.Name = "ucrReceiverStemAndLeaf"
         Me.ucrReceiverStemAndLeaf.Selector = Nothing
         Me.ucrReceiverStemAndLeaf.Size = New System.Drawing.Size(106, 26)
@@ -38,7 +39,7 @@ Partial Class dlgStemAndLeaf
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(3, 193)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 201)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 2
@@ -46,7 +47,7 @@ Partial Class dlgStemAndLeaf
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(260, 11)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(271, 10)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
         Me.lblSelectedVariable.TabIndex = 3
@@ -55,16 +56,17 @@ Partial Class dlgStemAndLeaf
         '
         'ucrStemLeafSelector
         '
-        Me.ucrStemLeafSelector.Location = New System.Drawing.Point(12, 11)
+        Me.ucrStemLeafSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrStemLeafSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrStemLeafSelector.Name = "ucrStemLeafSelector"
-        Me.ucrStemLeafSelector.Size = New System.Drawing.Size(242, 179)
+        Me.ucrStemLeafSelector.Size = New System.Drawing.Size(242, 188)
         Me.ucrStemLeafSelector.TabIndex = 4
         '
         'dlgStemAndLeaf
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(411, 245)
+        Me.ClientSize = New System.Drawing.Size(411, 254)
         Me.Controls.Add(Me.ucrStemLeafSelector)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrBase)
