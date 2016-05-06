@@ -24,7 +24,7 @@ Public Class ucrReceiverSingle
         If txtReceiverSingle.Enabled Then
             Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
             For Each objItem In tempObjects
-                SetSelected(objItem.Text, objItem.Group.Name)
+                SetSelected(objItem.Text, objItem.Tag)
             Next
         End If
     End Sub

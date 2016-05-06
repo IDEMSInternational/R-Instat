@@ -14,7 +14,7 @@
 Imports instat.Translations
 Public Class dlgCombine
     Private bFirstLoad As Boolean = True
-    Private Sub dlgInteractions_Load(sender As Object, e As KeyEventArgs) Handles Me.Load
+    Private Sub dlgCombine_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -64,4 +64,9 @@ Public Class dlgCombine
         SetDefaults()
         TestOkEnabled()
     End Sub
+
+    Private Sub lblNewColumnName_Click(sender As Object, e As EventArgs) Handles lblNewColumnName.Click
+
+    End Sub
+
 End Class
