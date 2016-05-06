@@ -36,7 +36,7 @@ Public Class dlgGeneralForGraphics
         'setting the base ggplot functions
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRggplotFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
 
     End Sub
     Private Sub SetDefaults()
