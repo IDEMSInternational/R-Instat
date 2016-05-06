@@ -38,13 +38,11 @@ Partial Class ucrFactor
         '
         'grdFactorData
         '
-        Me.grdFactorData.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdFactorData.BackColor = System.Drawing.Color.White
         Me.grdFactorData.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdFactorData.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdFactorData.LeadHeaderContextMenuStrip = Nothing
-        Me.grdFactorData.Location = New System.Drawing.Point(4, 4)
+        Me.grdFactorData.Location = New System.Drawing.Point(0, 0)
         Me.grdFactorData.Name = "grdFactorData"
         Me.grdFactorData.RowHeaderContextMenuStrip = Nothing
         Me.grdFactorData.Script = Nothing
@@ -52,7 +50,7 @@ Partial Class ucrFactor
         Me.grdFactorData.SheetTabNewButtonVisible = False
         Me.grdFactorData.SheetTabVisible = True
         Me.grdFactorData.SheetTabWidth = 60
-        Me.grdFactorData.Size = New System.Drawing.Size(260, 174)
+        Me.grdFactorData.Size = New System.Drawing.Size(269, 207)
         Me.grdFactorData.TabIndex = 32
         '
         'ucrFactor
@@ -60,11 +58,10 @@ Partial Class ucrFactor
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.Controls.Add(Me.grdFactorData)
         Me.Controls.Add(Me.lblNoFactorsLoaded)
         Me.Name = "ucrFactor"
-        Me.Size = New System.Drawing.Size(267, 181)
+        Me.Size = New System.Drawing.Size(269, 207)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
