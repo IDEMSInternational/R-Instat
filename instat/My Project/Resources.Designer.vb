@@ -2002,6 +2002,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Location.
+        '''</summary>
+        Friend ReadOnly Property Location() As String
+            Get
+                Return ResourceManager.GetString("Location", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Lock.
         '''</summary>
         Friend ReadOnly Property Lock() As String
@@ -2950,7 +2959,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to rate.
+        '''  Looks up a localized string similar to Rate.
         '''</summary>
         Friend ReadOnly Property Rate() As String
             Get

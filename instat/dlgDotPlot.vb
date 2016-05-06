@@ -42,14 +42,16 @@ Public Class dlgDotPlot
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrFactorReceiver.Selector = ucrDotPlotSelector
+        ucrFactorReceiver.SetIncludedDataTypes({"factor"})
         ucrSecondFactorReceiver.Selector = ucrDotPlotSelector
+        ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
         ucrBase.clsRsyntax.iCallType = 0
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
         ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorDotPlot.SetSelector(ucrDotPlotSelector)
-        ucrVariablesAsFactorDotPlot.SetDataType("numeric")
+        ucrVariablesAsFactorDotPlot.SetIncludedDataType({"numeric"})
     End Sub
 
     Private Sub TestOkEnabled()
@@ -102,9 +104,5 @@ Public Class dlgDotPlot
             clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
         End If
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrVariablesAsFactorDotPlot_Load(sender As Object, e As EventArgs) Handles ucrVariablesAsFactorDotPlot.Load
-
     End Sub
 End Class
