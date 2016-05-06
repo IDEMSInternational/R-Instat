@@ -35,6 +35,7 @@ Public Class dlgRegressionSimple
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
         clsModel.SetOperation("~")
+        ucrResponse.SetDataType("numeric")
         ucrResponse.Selector = ucrSelectorSimpleReg
         ucrExplanatory.Selector = ucrSelectorSimpleReg
         ucrBase.iHelpTopicID = 171
