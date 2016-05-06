@@ -317,50 +317,51 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub FillListView(lstView As ListView, Optional lstIncludedDataTypes As List(Of String) = Nothing, Optional lstExcludedDataTypes As List(Of String) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Available Variables")
+    Public Sub FillListView(lstView As ListView, Optional lstIncludedDataTypes As List(Of String) = Nothing, Optional lstExcludedDataTypes As List(Of String) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional bIncludeHiddenColumns As Boolean = False)
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
         Dim grps As New ListViewGroup
+        Dim clsGetColumns As New RFunction
+
         If bInstatObjectExists Then
+            clsGetColumns.SetRCommand(strInstatDataObject & "$get_column_names")
+            clsGetColumns.AddParameter("as_list", "TRUE")
+            If bIncludeHiddenColumns Then
+                clsGetColumns.AddParameter("include_hidden", "TRUE")
+            Else
+                clsGetColumns.AddParameter("include_hidden", "FALSE")
+            End If
             lstView.Clear()
             lstView.Groups.Clear()
             lstView.Columns.Add(strHeading)
-            If strDataFrameName = "" Then
-                If lstIncludedDataTypes IsNot Nothing Then
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(include_type = " & GetListAsRString(lstIncludedDataTypes) & ", as_list = TRUE)").AsList
-                ElseIf lstExcludedDataTypes IsNot Nothing Then
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(exclude_type = " & GetListAsRString(lstExcludedDataTypes) & ", as_list = TRUE)").AsList
-                Else
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(as_list = TRUE)").AsList
-                End If
-            Else
-                If lstIncludedDataTypes IsNot Nothing Then
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", include_type = " & GetListAsRString(lstIncludedDataTypes) & ", as_list = TRUE)").AsList
-                ElseIf lstExcludedDataTypes IsNot Nothing Then
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", exclude_type = " & GetListAsRString(lstExcludedDataTypes) & ", as_list = TRUE)").AsList
-                Else
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", as_list = TRUE)").AsList
-                End If
 
+            If lstIncludedDataTypes.Count > 0 Then
+                clsGetColumns.AddParameter("include_type", GetListAsRString(lstIncludedDataTypes))
+            ElseIf lstExcludedDataTypes.Count > 0 Then
+                clsGetColumns.AddParameter("exclude_type", GetListAsRString(lstExcludedDataTypes))
             End If
+            If strDataFrameName <> "" Then
+                clsGetColumns.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+            End If
+            vecColumns = RunInternalScriptGetValue(clsGetColumns.ToScript()).AsList
 
             For i = 0 To vecColumns.Count - 1
-                If vecColumns.Count = 1 Then
-                    grps = New ListViewGroup(key:=vecColumns.Names(i), headerText:="")
-                Else
+                If vecColumns.Count > 1 Then
                     grps = New ListViewGroup(key:=vecColumns.Names(i), headerText:=vecColumns.Names(i))
-                End If
-                If Not lstView.Groups.Contains(grps) Then
                     lstView.Groups.Add(grps)
                 End If
                 chrCurrColumns = vecColumns(i).AsCharacter
-                For Each strCol As String In chrCurrColumns
-                    lstView.Items.Add(strCol).Group = lstView.Groups(i)
+                For j = 0 To chrCurrColumns.Count - 1
+                    lstView.Items.Add(chrCurrColumns(j))
+                    lstView.Items(j).Tag = vecColumns.Names(i)
+                    If vecColumns.Count > 1 Then
+                        lstView.Items(j).Group = lstView.Groups(i)
+                    End If
                 Next
             Next
             'TODO Find out how to get this to set automatically ( Width = -2 almost works)
-            lstView.Columns(0).Width = 115
+            lstView.Columns(0).Width = lstView.Width - 25
         End If
     End Sub
 

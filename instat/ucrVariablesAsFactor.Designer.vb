@@ -29,25 +29,30 @@ Partial Class ucrVariablesAsFactor
         '
         'ucrMultipleVariables
         '
-        Me.ucrMultipleVariables.Location = New System.Drawing.Point(3, 31)
+        Me.ucrMultipleVariables.Location = New System.Drawing.Point(0, 30)
+        Me.ucrMultipleVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrMultipleVariables.Name = "ucrMultipleVariables"
         Me.ucrMultipleVariables.Selector = Nothing
-        Me.ucrMultipleVariables.Size = New System.Drawing.Size(121, 104)
+        Me.ucrMultipleVariables.Size = New System.Drawing.Size(120, 100)
         Me.ucrMultipleVariables.TabIndex = 1
         '
         'ucrSingleVariable
         '
-        Me.ucrSingleVariable.Location = New System.Drawing.Point(9, 35)
+        Me.ucrSingleVariable.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ucrSingleVariable.Location = New System.Drawing.Point(0, 30)
+        Me.ucrSingleVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSingleVariable.Name = "ucrSingleVariable"
         Me.ucrSingleVariable.Selector = Nothing
-        Me.ucrSingleVariable.Size = New System.Drawing.Size(107, 26)
+        Me.ucrSingleVariable.Size = New System.Drawing.Size(120, 20)
         Me.ucrSingleVariable.TabIndex = 2
         '
         'cmdVariables
         '
-        Me.cmdVariables.Location = New System.Drawing.Point(9, 3)
+        Me.cmdVariables.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.cmdVariables.Location = New System.Drawing.Point(0, 0)
         Me.cmdVariables.Name = "cmdVariables"
-        Me.cmdVariables.Size = New System.Drawing.Size(107, 23)
+        Me.cmdVariables.Size = New System.Drawing.Size(120, 27)
         Me.cmdVariables.TabIndex = 3
         Me.cmdVariables.Tag = "Single_Variable"
         Me.cmdVariables.Text = "Single Variable"
@@ -61,7 +66,7 @@ Partial Class ucrVariablesAsFactor
         Me.Controls.Add(Me.ucrSingleVariable)
         Me.Controls.Add(Me.ucrMultipleVariables)
         Me.Name = "ucrVariablesAsFactor"
-        Me.Size = New System.Drawing.Size(125, 136)
+        Me.Size = New System.Drawing.Size(120, 130)
         Me.ResumeLayout(False)
 
     End Sub

@@ -28,6 +28,7 @@ data_object <- R6Class("data_object",
   }
   
   self$add_defaults_meta()
+  self$add_defaults_variables_metadata()
 }
 ),
                          private = list(
@@ -143,17 +144,20 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE) {
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE) {
+  if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out = private$data[ , !self$get_variables_metadata(property = is_hidden_label)]
+  else out = private$data
+  
   if(convert_to_character) {
     decimal_places = private$variables_metadata[[display_decimal_label]]
-    return(convert_to_character_matrix(private$data, TRUE, decimal_places))
+    return(convert_to_character_matrix(out, TRUE, decimal_places))
   }
-  else return(private$data)
+  else return(out)
 }
 )
 
 # TODO
-data_object$set("public", "get_variables_metadata", function(include_all = TRUE, data_type = "all", convert_to_character = FALSE, property) {
+data_object$set("public", "get_variables_metadata", function(include_all = TRUE, data_type = "all", convert_to_character = FALSE, property, column) {
   self$update_variables_metadata()
   if(!include_all) out = private$variables_metadata
   else {
@@ -171,7 +175,11 @@ data_object$set("public", "get_variables_metadata", function(include_all = TRUE,
   
   if(!missing(property)) {
     if(!property %in% names(out)) stop(property, " not found in variables metadata")
-    out = out[, property]
+    if(!missing(column)) {
+      if(!column %in% names(private$data)) stop(column, " not found in data")
+      out = out[column, property]
+    }
+    else out = out[, property]
   }
   
   #TODO get convert_to_character_matrix to work on vectors
@@ -180,10 +188,19 @@ data_object$set("public", "get_variables_metadata", function(include_all = TRUE,
 }
 )
 
-data_object$set("public", "get_metadata", function(label) {
-  if(missing(label)) return(private$metadata)
+data_object$set("public", "get_metadata", function(label, include_all = TRUE) {
+  if(missing(label)) {
+    out = private$metadata
+    if(include_all) {
+    out[[row_count_label]] <- nrow(private$data)
+    out[[column_count_label]] <- ncol(private$data)
+    }
+    return(out)
+  }
   else {
     if(label %in% names(private$metadata)) return(private$metadata[[label]])
+    else if(label == row_count_label) return(nrow(private$data))
+    else if(label == column_count_label) return(ncol(private$data))
     else return("")
   }
 }
@@ -200,7 +217,7 @@ data_object$set("public", "get_data", function() {
 )
 
 # TODO
-data_object$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix) {
+data_object$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix, hidden = FALSE) {
   
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
@@ -233,6 +250,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     
     private$data[[curr_col_name]] <- curr_col
     self$data_changed <- TRUE
+    self$append_to_variables_metadata(curr_col_name, is_hidden_label, hidden)
     self$variables_metadata_changed <- TRUE
   }
 }
@@ -366,30 +384,31 @@ data_object$set("public", "append_to_metadata", function(name, value) {
 }
 )
 
-data_object$set("public", "append_to_variables_metadata", function(col_name, property, new_val) {
+data_object$set("public", "append_to_variables_metadata", function(col_names, property, new_val) {
   
-  if(missing(col_name) || missing(property) || missing(new_val)) stop("col_name, property and new_val arguements must be specified.")
+  if(missing(col_names) || missing(property) || missing(new_val)) stop("col_names, property and new_val arguements must be specified.")
   
-  if(!all(col_name %in% names(private$data))) stop(paste(col_name, "not found in data"))
-  
-  row = integer()
-  if(ncol(private$variables_metadata)>0) row = which(rownames(private$variables_metadata)==col_name)
-  row_exists = TRUE
-  if(length(row)==0) {
-    row = nrow(private$variables_metadata) + 1
-    row_exists = FALSE
+  if(!all(col_names %in% names(private$data))) stop(paste(col_names, "not found in data"))
+  for(curr_col in col_names) {
+    row = integer()
+    if(ncol(private$variables_metadata)>0) row = which(rownames(private$variables_metadata)==curr_col)
+    row_exists = TRUE
+    if(length(row)==0) {
+      row = nrow(private$variables_metadata) + 1
+      row_exists = FALSE
+    }
+    col = which(colnames(private$variables_metadata)==property)
+    propery_exists = TRUE
+    if(length(col)==0) {
+      col = ncol(private$variables_metadata) + 1
+      propery_exists = FALSE
+    }
+    private$variables_metadata[row, col] <- new_val
+    if(!row_exists) rownames(private$variables_metadata)[row] <- curr_col
+    if(!propery_exists) colnames(private$variables_metadata)[col] <- property
+    
+    self$append_to_changes(list(Added_variables_metadata, curr_col, property))
   }
-  col = which(colnames(private$variables_metadata)==property)
-  propery_exists = TRUE
-  if(length(col)==0) {
-    col = ncol(private$variables_metadata) + 1
-    propery_exists = FALSE
-  }
-  private$variables_metadata[row, col] <- new_val
-  if(!row_exists) rownames(private$variables_metadata)[row] <- col_name
-  if(!propery_exists) colnames(private$variables_metadata)[col] <- property
-  
-  self$append_to_changes(list(Added_variables_metadata, col_name, property))
   self$variables_metadata_changed <- TRUE
   self$data_changed <- TRUE
 }
@@ -407,17 +426,22 @@ data_object$set("public", "append_to_changes", function(value) {
 )
 
 data_object$set("public", "is_metadata", function(str) {
-  out = FALSE
-  
-  if(str %in% names(private$metadata) ) {
-    out = TRUE
-  }
-  return(out)
+  return(str %in% names(private$metadata))
 }
 )
 
-data_object$set("public", "add_defaults_meta", function(user) {
+data_object$set("public", "is_variables_metadata", function(str) {
+  return(str %in% names(private$variables_metadata))
+}
+)
+
+data_object$set("public", "add_defaults_meta", function() {
   self$append_to_metadata(is_calculated_label,FALSE)
+}
+)
+
+data_object$set("public", "add_defaults_variables_metadata", function() {
+  sapply(self$get_column_names(), function(col_name) self$append_to_variables_metadata(col_name, is_hidden_label, FALSE))
 }
 )
 
@@ -537,7 +561,7 @@ data_object$set("public", "insert_row_in_data", function(start_pos = (nrow(priva
   }
   if (length(row_data) == 0){
     row_data <- rep(NA,ncol(private$data))
-    warning("You are inserting an empty row to data")
+    message("You are inserting an empty row to data")
   }
   if(length(row_data)>0 && length(row_data)!=ncol(private$data)){
     stop("The dimension of Row data is different from that of the data")
@@ -547,7 +571,7 @@ data_object$set("public", "insert_row_in_data", function(start_pos = (nrow(priva
       self$set_data(rbind(row_data, private$data))
     }
     
-    else if (start_pos == (nrow(data)+1)){
+    else if (start_pos == (nrow(private$data)+1)){
       self$set_data(rbind(private$data,row_data))
     }
     else {
@@ -565,7 +589,7 @@ data_object$set("public", "get_dataframe_length", function() {
 }
 )
 
-data_object$set("public", "get_column_factor_levels", function(col_name = "") {
+data_object$set("public", "get_factor_data_frame", function(col_name = "") {
   if(!(col_name %in% names(private$data))){
     stop(col_name, " is not a column in", get_metadata(data_name_label))
   }
@@ -576,6 +600,19 @@ data_object$set("public", "get_column_factor_levels", function(col_name = "") {
   counts <- as.data.frame(table(private$data[,c(col_name)]))
   counts <- rename(counts, replace = c("Var1" = "Levels", "Freq" = "Counts"))
   return(counts)
+}
+)
+
+data_object$set("public", "get_column_factor_levels", function(col_name = "") {
+  if(!(col_name %in% names(private$data))){
+    stop(col_name, " is not a column in", get_metadata(data_name_label))
+  }
+  
+  if(!(is.factor(private$data[,col_name]))){
+    stop(col_name, " is not a factor column")
+  }
+  
+  return(levels(private$data[,col_name]))
 }
 )
 
@@ -702,7 +739,7 @@ data_object$set("public", "get_column_count", function(col_name, new_level_names
 }
 )
 
-data_object$set("public", "get_column_names", function(as_list = FALSE, include_type = c(), exclude_type = c()) {
+data_object$set("public", "get_column_names", function(as_list = FALSE, include_type = c(), exclude_type = c(), include_hidden = TRUE) {
   types = c("factor", "integer", "numeric", "logical", "character")
   if(!length(include_type) == 0) {
     if(!all(include_type %in% types)) stop(paste("include_type can only contain", paste(types, collapse = ", ")))
@@ -716,6 +753,11 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include_
     out = names(private$data)[!(sapply(private$data, class) %in% exclude_type)]
   }
   else out = names(private$data)
+  
+  if(!include_hidden) {
+    hidden = sapply(out, function(col_name) self$get_variables_metadata(property = is_hidden_label, column = col_name))
+    out = out[!hidden]
+  }
   
   if(as_list) {
     lst = list()

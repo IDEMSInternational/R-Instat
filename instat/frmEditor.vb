@@ -23,6 +23,8 @@ Imports unvell.ReoGrid.Events
 Public Class frmEditor
     'Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
+    Private clsAppendVariablesMetaData As New RFunction
+    Private clsColumnNames As New RFunction
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsGrids.SetData(grdData)
@@ -32,6 +34,7 @@ Public Class frmEditor
         'This needs to be added at the part when we are writing data to the grid, not here
         'Needs discussion, with this the grid can show NA's
         grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
+        SetRFunctions()
     End Sub
     ''' <summary>
     ''' Hides the form when it is closed and not exiting it.
@@ -42,6 +45,12 @@ Public Class frmEditor
             e.Cancel = True
             Me.Hide()
         End If
+    End Sub
+
+    Private Sub SetRFunctions()
+        clsAppendVariablesMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
+        clsColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+        UpdateRFunctionDataFrameParameters()
     End Sub
 
     Private Sub insertCol_Click(sender As Object, e As EventArgs) Handles mnuInsertCol.Click
@@ -60,13 +69,24 @@ Public Class frmEditor
     '    grdData.DoAction(New unvell.ReoGrid.Actions.SetColumnsWidthAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols, unvell.ReoGrid.Worksheet.InitDefaultColumnWidth))
     'End Sub
 
-    'Private Sub hideColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles hideColumnsToolStripMenuItem.Click
-    '    grdData.DoAction(New unvell.ReoGrid.Actions.HideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
-    'End Sub
+    Private Sub mnuHideColumns_Click(sender As Object, e As EventArgs) Handles mnuHideColumns.Click
+        clsAppendVariablesMetaData.AddParameter("col_names", SelectedColumns())
+        clsAppendVariablesMetaData.AddParameter("property", "is_hidden_label")
+        clsAppendVariablesMetaData.AddParameter("new_val", "TRUE")
+        frmMain.clsRLink.RunScript(clsAppendVariablesMetaData.ToScript(), strComment:="Hide column(s)" & SelectedColumns())
+        'grdData.DoAction(New unvell.ReoGrid.Actions.HideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
+    End Sub
 
-    'Private Sub unhideColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles unhideColumnsToolStripMenuItem.Click
-    '    grdData.DoAction(New unvell.ReoGrid.Actions.UnhideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
-    'End Sub
+    Private Sub mnuUnhideColumns_Click(sender As Object, e As EventArgs) Handles mnuUnhideColumns.Click
+        'grdData.DoAction(New unvell.ReoGrid.Actions.UnhideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
+    End Sub
+
+    Private Sub mnuUnhideAllColumns_Click(sender As Object, e As EventArgs) Handles mnuUnhideAllColumns.Click
+        clsAppendVariablesMetaData.AddParameter("col_names", clsRFunctionParameter:=clsColumnNames)
+        clsAppendVariablesMetaData.AddParameter("property", "is_hidden_label")
+        clsAppendVariablesMetaData.AddParameter("new_val", "FALSE")
+        frmMain.clsRLink.RunScript(clsAppendVariablesMetaData.ToScript(), strComment:="Unhide all columns")
+    End Sub
 
     'Private Sub groupColumnsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles groupColumnsToolStripMenuItem1.Click
     '    Dim worksheet = grdData.CurrentWorksheet
@@ -182,15 +202,15 @@ Public Class frmEditor
     '    End Try
     'End Sub
 
-    'Private Sub copyRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles copyRangeToolStripMenuItem.Click
-    '    Try
-    '        grdData.CurrentWorksheet.Copy()
-    '    Catch generatedExceptionName As unvell.ReoGrid.RangeIntersectionException
-    '        MessageBox.Show("Cannot cut a range that is a part of another merged cell.")
-    '    Catch
-    '        MessageBox.Show("We can't to do that for selected range.")
-    '    End Try
-    'End Sub
+    Public Sub copyRange()
+        Try
+            grdData.CurrentWorksheet.Copy()
+        Catch generatedExceptionName As unvell.ReoGrid.RangeIntersectionException
+            MessageBox.Show("Cannot cut a range that is a part of another merged cell.")
+        Catch
+            MessageBox.Show("We can't to do that for selected range.")
+        End Try
+    End Sub
 
     'Private Sub pasteRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles pasteRangeToolStripMenuItem.Click
     '    Try
@@ -199,7 +219,9 @@ Public Class frmEditor
     '        MessageBox.Show(ex.Message)
     '    End Try
     'End Sub
-
+    Public Sub selectAllText()
+        grdCurrSheet.SelectAll()
+    End Sub
 
     Private Sub insertSheet_Click(sender As Object, e As EventArgs) Handles insertSheet.Click
         dlgFileNew.ShowDialog()
@@ -228,19 +250,70 @@ Public Class frmEditor
         grdCurrSheet = grdData.CurrentWorksheet
         frmMain.strCurrentDataFrame = grdCurrSheet.Name
         frmMain.tstatus.Text = grdCurrSheet.Name
+        UpdateRFunctionDataFrameParameters()
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
         Dim strSctipt As String
         strSctipt = frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_name = " & Chr(34) & grdData.CurrentWorksheet.GetColumnHeader(grdData.CurrentWorksheet.SelectionRange.Col).Text & Chr(34) & ",index=" & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",new_value=" & Chr(34) & e.NewData & Chr(34) & ")"
-        frmMain.clsRLink.clsEngine.Evaluate(strSctipt)
+        frmMain.clsRLink.RunScript(strSctipt)
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
         dlgRenameSheet.ShowDialog()
     End Sub
 
-    Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles MoveOrCopySheet.Click
+    Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles CopySheet.Click
         dlgCopySheet.ShowDialog()
+    End Sub
+
+    Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
+        Dim strScript As String
+        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", col_names = " & SelectedColumns() & ",to_type =" & Chr(34) & "numeric" & Chr(34) & ")"
+        frmMain.clsRLink.RunScript(strScript)
+    End Sub
+
+    Private Sub mnuConvertText_Click(sender As Object, e As EventArgs) Handles mnuConvertText.Click
+        Dim strScript As String
+        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", col_names = " & SelectedColumns() & ",to_type =" & Chr(34) & "character" & Chr(34) & ")"
+        frmMain.clsRLink.RunScript(strScript)
+    End Sub
+
+    Private Sub mnuConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToFactor.Click
+        Dim strScript As String
+        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", col_names = " & SelectedColumns() & ",to_type =" & Chr(34) & "factor" & Chr(34) & ")"
+        frmMain.clsRLink.RunScript(strScript)
+    End Sub
+
+    Private Function SelectedColumns()
+        Dim col_list As New List(Of String)
+        Dim strLength As Integer
+        For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
+            strLength = grdData.CurrentWorksheet.GetColumnHeader(i).Text.IndexOf(" ")
+            col_list.Add(grdData.CurrentWorksheet.GetColumnHeader(i).Text.Substring(0, strLength))
+        Next
+        Dim cols As String
+        cols = "c" & "("
+        For j As Integer = 0 To col_list.Count - 1
+            If j > 0 Then
+                cols = cols & ","
+            End If
+            cols = cols & Chr(34) & col_list(j) & Chr(34)
+        Next
+        cols = cols & ")"
+        Return cols
+    End Function
+
+    Private Sub columnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles columnFilterToolStripMenuItem.Click
+        dlgRestrict.ShowDialog()
+    End Sub
+
+    Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
+        dlgReorderSheet.ShowDialog()
+    End Sub
+
+    Private Sub UpdateRFunctionDataFrameParameters()
+        clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+        clsColumnNames.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
     End Sub
 End Class

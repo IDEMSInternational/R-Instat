@@ -32,10 +32,9 @@ Public Class dlgReorderLevels
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
         ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
         ucrReceiverFactor.SetMeAsReceiver()
-        ucrReceiverFactor.SetDataType("factor")
+        ucrReceiverFactor.SetIncludedDataTypes({"factor"})
         ucrReorderFactor.setReceiver(ucrReceiverFactor)
-        ucrReorderFactor.strDataType = "factor"
-
+        ucrReorderFactor.setDataType("factor")
     End Sub
     Private Sub SetDefaultSettings()
 

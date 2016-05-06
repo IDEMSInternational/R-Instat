@@ -52,9 +52,10 @@ Public Class dlgBarAndPieChart
         clsRgeom_barchart.SetRCommand("geom_bar")
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_barchart)
         ucrFactorReceiver.Selector = ucrBarChartSelector
-        ucrFactorReceiver.SetDataType("factor")
+        ucrFactorReceiver.SetIncludedDataTypes({"factor"})
+
         ucrSecondReceiver.Selector = ucrBarChartSelector
-        ucrSecondReceiver.SetDataType("factor")
+        ucrSecondReceiver.SetIncludedDataTypes({"factor"})
 
         sdgBarChart.SetBarChartFunction(clsRgeom_barchart)
         sdgPieChartOptions.SetPieChartFunction(clsTempRFunc)

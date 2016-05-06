@@ -28,6 +28,7 @@ Public Class ucrDistributionsWithParameters
 
     Public Sub SetParameters()
         Dim i As Integer = 0
+        Dim strParamName As String
 
         If lstParameterLabels.Count = 0 Then
             lstParameterLabels.AddRange({lblParameter1, lblParameter2, lblParameter3})
@@ -59,25 +60,36 @@ Public Class ucrDistributionsWithParameters
         End If
 
         If clsCurrDistribution IsNot Nothing Then
+            For Each strParamName In lstCurrArguments
+                clsCurrRFunction.RemoveParameterByName(strParamName)
+            Next
+            'Removes transformed parameters
+            'which are not in lstCurrArguments
+            clsCurrRFunction.RemoveParameterByName("rate")
+            clsCurrRFunction.RemoveParameterByName("scale")
+            clsCurrRFunction.RemoveParameterByName("size")
             lstCurrArguments.Clear()
-            clsCurrRFunction.ClearParameters()
             For i = 0 To clsCurrDistribution.clsParameters.Count - 1
                 lstParameterLabels(i).Text = translate(clsCurrDistribution.clsParameters(i).strNameTag)
                 lstCurrArguments.Add(clsCurrDistribution.clsParameters(i).strArgumentName)
                 If clsCurrDistribution.clsParameters(i).bHasDefault Then
                     lstParameterTextBoxes(i).Text = clsCurrDistribution.clsParameters(i).strDefaultValue
-                    clsCurrRFunction.AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).strDefaultValue)
+                    AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).strDefaultValue)
                 Else
                     lstParameterTextBoxes(i).Clear()
                 End If
+                RaiseEvent ParameterChanged()
             Next
+            If clsCurrDistribution.strNameTag = "Bernouli" Then
+                AddParameter("size", 1)
+            End If
             bParametersFilled = False
         End If
+        CheckParametersFilled()
     End Sub
 
     Public Sub CheckParametersFilled()
         If (Not txtParameter1.Visible Or txtParameter1.Text <> "") And (Not txtParameter2.Visible Or txtParameter2.Text <> "") And (Not txtParameter3.Visible Or txtParameter3.Text <> "") Then
-            IncludeFunctionParameter()
             bParametersFilled = True
         Else
             bParametersFilled = False
@@ -104,7 +116,10 @@ Public Class ucrDistributionsWithParameters
 
     Private Sub txtParameter3_Leave(sender As Object, e As EventArgs) Handles txtParameter3.Leave
         AddParameter(lstCurrArguments(2), txtParameter3.Text)
-        CheckParametersFilled()
         RaiseEvent ParameterChanged()
+    End Sub
+
+    Private Sub ucrDistributionsWithParameters_ParameterChanged() Handles Me.ParameterChanged
+        CheckParametersFilled()
     End Sub
 End Class

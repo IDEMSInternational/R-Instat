@@ -19,7 +19,7 @@ Public Class ucrReceiverMultiple
     Private Sub ucrReceiverMultiple_Load(sender As Object, e As EventArgs) Handles Me.Load
         If lstSelectedVariables.Columns.Count = 0 Then
             lstSelectedVariables.Columns.Add("Selected Data")
-            lstSelectedVariables.Columns(0).Width = -2
+            lstSelectedVariables.Columns(0).Width = lstSelectedVariables.Width - 25
         End If
     End Sub
 
@@ -33,13 +33,14 @@ Public Class ucrReceiverMultiple
         Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
         For Each objItem In tempObjects
             If Not GetCurrItemNames().Contains(objItem.Text) Then
-                If Not GetCurrGroupNames().Contains(objItem.Group.Name) Then
-                    grpTemp = New ListViewGroup(key:=objItem.Group.Name, headerText:=objItem.Group.Name)
+                If Not GetCurrDataFrameNames().Contains(objItem.Tag) Then
+                    grpTemp = New ListViewGroup(key:=objItem.Tag, headerText:=objItem.Tag)
                     lstSelectedVariables.Groups.Add(grpTemp)
                 Else
-                    grpTemp = lstSelectedVariables.Groups(objItem.Group.Name)
+                    grpTemp = lstSelectedVariables.Groups(objItem.Tag)
                 End If
                 lstSelectedVariables.Items.Add(objItem.Text).Group = grpTemp
+                lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Tag = objItem.Tag
                 Selector.AddToVariablesList(objItem.Text)
             End If
         Next
@@ -57,13 +58,12 @@ Public Class ucrReceiverMultiple
         Return strItemNames
     End Function
 
-    Private Function GetCurrGroupNames() As List(Of String)
+    Private Function GetCurrDataFrameNames() As List(Of String)
         Dim strHeaders As New List(Of String)
-        Dim grpTemp As ListViewGroup
 
-        For Each grpTemp In lstSelectedVariables.Groups
-            If Not strHeaders.Contains(grpTemp.Name) Then
-                strHeaders.Add(grpTemp.Name)
+        For i = 0 To lstSelectedVariables.Items.Count - 1
+            If Not strHeaders.Contains(lstSelectedVariables.Items(i).Tag) Then
+                strHeaders.Add(lstSelectedVariables.Items(i).Tag)
             End If
         Next
         Return strHeaders
@@ -128,6 +128,31 @@ Public Class ucrReceiverMultiple
         Return clsGetVariablesFunc
     End Function
 
+    Public Function GetVariablesAsList() As List(Of RFunction)
+        Dim lstColumnFunctions As New List(Of RFunction)
+        Dim strColumn As String
+        Dim clsColumnFunction As RFunction
+        Dim strCurrDataFrame As String
+        Dim lstCurrDataFrames As List(Of String)
+
+        lstCurrDataFrames = GetDataFrameNames()
+        If lstCurrDataFrames.Count = 1 Then
+            strCurrDataFrame = lstCurrDataFrames(0)
+            For i = 0 To lstSelectedVariables.Items.Count - 1
+                clsColumnFunction = New RFunction
+                strColumn = lstSelectedVariables.Items(i).Text
+                clsColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+                clsColumnFunction.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34))
+                clsColumnFunction.AddParameter("col_names", Chr(34) & strColumn & Chr(34))
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    clsColumnFunction.AddParameter("force_as_data_frame", "FALSE")
+                End If
+                lstColumnFunctions.Add(clsColumnFunction)
+            Next
+        End If
+        Return lstColumnFunctions
+    End Function
+
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
         Dim i As Integer
@@ -155,6 +180,15 @@ Public Class ucrReceiverMultiple
         End If
 
         Return strTemp
+    End Function
+
+    Public Function GetVariableNamesAsList() As List(Of String)
+        Dim lstItems As New List(Of String)
+
+        For i = 0 To lstSelectedVariables.Items.Count - 1
+            lstItems.Add(lstSelectedVariables.Items(i).Text)
+        Next
+        Return lstItems
     End Function
 
     Public Function GetDataFrameNames() As List(Of String)
@@ -195,4 +229,12 @@ Public Class ucrReceiverMultiple
     Private Sub ClearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem.Click
         Clear()
     End Sub
+
+    Public Function GetCount() As Integer
+        If lstSelectedVariables IsNot Nothing Then
+            Return lstSelectedVariables.Items.Count
+        Else
+            Return 0
+        End If
+    End Function
 End Class
