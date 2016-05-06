@@ -14,16 +14,25 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports RDotNet
+
 Public Class ucrReceiverSingle
     Dim strDataFrameName As String = ""
+    Public strDataType As String = ""
 
     Public Overrides Sub AddSelected()
         Dim objItem As ListViewItem
+        Dim clsGetDataType As New RFunction
         Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
 
+        clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+        clsGetDataType.AddParameter("property", "data_type_label")
         If txtReceiverSingle.Enabled Then
             Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
             For Each objItem In tempObjects
+                clsGetDataType.AddParameter("data_name", Chr(34) & objItem.Tag & Chr(34))
+                clsGetDataType.AddParameter("column", Chr(34) & objItem.Text & Chr(34))
+                strDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
                 SetSelected(objItem.Text, objItem.Tag)
             Next
         End If
