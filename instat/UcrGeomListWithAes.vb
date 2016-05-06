@@ -45,7 +45,7 @@ Public Class UcrGeomListWithParameters
 
     Private Sub SetDefaults()
         'sets control defaults
-        'UcrSelector.Reset()
+        UcrSelector.Reset()
 
     End Sub
     Public Sub SetParameters() 'this will set function or aes parameters
