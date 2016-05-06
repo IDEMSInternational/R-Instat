@@ -32,7 +32,6 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         'lstAvailableVariable
         '
-        Me.lstAvailableVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.lstAvailableVariable.TabIndex = 2
         '
         'btnAdd
@@ -61,7 +60,6 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.btnDataOptions)
         Me.Controls.Add(Me.btnAdd)
-        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrSelectorByDataFrameAddRemove"
         Me.Size = New System.Drawing.Size(210, 180)
         Me.Controls.SetChildIndex(Me.ucrAvailableDataFrames, 0)

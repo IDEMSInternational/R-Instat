@@ -23,6 +23,7 @@ Public Class ucrSelectorByDataFrame
 
     Public Event DataFrameChanged()
     Private Sub ucrAvailableDataFrames_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrAvailableDataFrames.DataFrameChanged
+        strCurrentDataFrame = ucrAvailableDataFrames.cboAvailableDataFrames.Text
         LoadList()
         If strPrevDataFrame <> ucrAvailableDataFrames.cboAvailableDataFrames.Text Then
             RaiseEvent DataFrameChanged()
@@ -30,20 +31,6 @@ Public Class ucrSelectorByDataFrame
         End If
     End Sub
 
-    Public Overrides Sub LoadList()
-
-        If ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            If CurrentReceiver IsNot Nothing Then
-                If CurrentReceiver.lstIncludedDataTypes.Count > 0 Then
-                    frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=CurrentReceiver.lstIncludedDataTypes, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text, strHeading:=CurrentReceiver.strSelectorHeading)
-                ElseIf CurrentReceiver.lstExcludedDataTypes.Count > 0 Then
-                    frmMain.clsRLink.FillListView(lstAvailableVariable, lstExcludedDataTypes:=CurrentReceiver.lstExcludedDataTypes, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text, strHeading:=CurrentReceiver.strSelectorHeading)
-                Else
-                    frmMain.clsRLink.FillListView(lstAvailableVariable, strDataFrameName:=ucrAvailableDataFrames.cboAvailableDataFrames.Text, strHeading:=CurrentReceiver.strSelectorHeading)
-                End If
-            End If
-        End If
-    End Sub
     Public Overrides Sub Reset()
         ucrAvailableDataFrames.Reset()
         MyBase.Reset()
