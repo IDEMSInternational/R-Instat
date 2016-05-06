@@ -34,7 +34,7 @@ Partial Class ucrSelectorAddRemove
         'btnAdd
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.Location = New System.Drawing.Point(173, 33)
+        Me.btnAdd.Location = New System.Drawing.Point(173, 49)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 83
@@ -45,12 +45,12 @@ Partial Class ucrSelectorAddRemove
         'cmdOptions
         '
         Me.cmdOptions.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cmdOptions.Location = New System.Drawing.Point(173, 72)
+        Me.cmdOptions.Location = New System.Drawing.Point(173, 153)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(75, 34)
         Me.cmdOptions.TabIndex = 84
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.Tag = "Data_Options"
+        Me.cmdOptions.Text = "Data Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrSelectorAddRemove

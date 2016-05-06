@@ -441,7 +441,7 @@ data_object$set("public", "add_defaults_meta", function() {
 )
 
 data_object$set("public", "add_defaults_variables_metadata", function() {
-  sapply(self$get_column_names(), function(col_name) self$append_to_variables_metadata(col_names, is_hidden_label, FALSE))
+  sapply(self$get_column_names(), function(col_name) self$append_to_variables_metadata(col_name, is_hidden_label, FALSE))
 }
 )
 
@@ -739,7 +739,7 @@ data_object$set("public", "get_column_count", function(col_name, new_level_names
 }
 )
 
-data_object$set("public", "get_column_names", function(as_list = FALSE, include_type = c(), exclude_type = c()) {
+data_object$set("public", "get_column_names", function(as_list = FALSE, include_type = c(), exclude_type = c(), include_hidden = TRUE) {
   types = c("factor", "integer", "numeric", "logical", "character")
   if(!length(include_type) == 0) {
     if(!all(include_type %in% types)) stop(paste("include_type can only contain", paste(types, collapse = ", ")))
@@ -753,6 +753,11 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include_
     out = names(private$data)[!(sapply(private$data, class) %in% exclude_type)]
   }
   else out = names(private$data)
+  
+  if(!include_hidden) {
+    hidden = sapply(out, function(col_name) self$get_variables_metadata(property = is_hidden_label, column = col_name))
+    out = out[!hidden]
+  }
   
   if(as_list) {
     lst = list()
