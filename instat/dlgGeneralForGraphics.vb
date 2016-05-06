@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgGeneralForGraphics
+    Private clsRggplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Public clsRSyntax As New RSyntax
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -32,6 +33,10 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub InitialiseDialog()
+        'setting the base ggplot functions
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRggplotFunction.SetRCommand("ggplot")
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRggplotFunction)
 
     End Sub
     Private Sub SetDefaults()
