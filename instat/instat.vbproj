@@ -606,6 +606,12 @@
     <Compile Include="sdgFrequencyPolygonOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgLayers.Designer.vb">
+      <DependentUpon>sdgLayers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgLayers.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgModelOptions.Designer.vb">
       <DependentUpon>sdgModelOptions.vb</DependentUpon>
     </Compile>
@@ -635,6 +641,12 @@
     </Compile>
     <Compile Include="sdgThemeOptions.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ucrFilter.Designer.vb">
+      <DependentUpon>ucrFilter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFilter.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrGeomListWithAes.designer.vb">
       <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
@@ -2365,6 +2377,15 @@
     <EmbeddedResource Include="sdgHistogramOptions.sw-KE.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgLayers.fr-FR.resx">
+      <DependentUpon>sdgLayers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLayers.resx">
+      <DependentUpon>sdgLayers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLayers.sw-KE.resx">
+      <DependentUpon>sdgLayers.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgModelOptions.fr-FR.resx">
       <DependentUpon>sdgModelOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -3580,6 +3601,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFilter.fr-FR.resx">
+      <DependentUpon>ucrFilter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFilter.resx">
+      <DependentUpon>ucrFilter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFilter.sw-KE.resx">
+      <DependentUpon>ucrFilter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeomListWithAes.fr-FR.resx">
       <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>

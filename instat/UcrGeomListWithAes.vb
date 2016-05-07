@@ -198,6 +198,21 @@ Public Class UcrGeomListWithParameters
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(6))
         End If
     End Sub
+    Private Sub ucrReceiverParam8_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam8.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
+        If Not ucrReceiverParam8.IsEmpty Then
+            clsRaesFunction.AddParameter(lstCurrArguments(7), ucrReceiverParam8.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName(lstCurrArguments(7))
+        End If
+    End Sub
+
+    Private Sub ucrReceiverParam9_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam9.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
+        If Not ucrReceiverParam9.IsEmpty Then
+            clsRaesFunction.AddParameter(lstCurrArguments(8), ucrReceiverParam9.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName(lstCurrArguments(8))
+        End If
+    End Sub
 
     Private Sub UcrSelector_DataFrameChanged() Handles UcrSelector.DataFrameChanged
         clsGeomFunction.AddParameter("data", clsRFunctionParameter:=UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame)
