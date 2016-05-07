@@ -86,7 +86,7 @@ Public Class ucrFactor
         Dim dfTemp As CharacterMatrix
         Dim bShowGrid As Boolean = False
         grdFactorData.Worksheets.Clear()
-        If clsReceiver IsNot Nothing AndAlso clsReceiver.lstIncludedDataTypes.Count = 1 AndAlso clsReceiver.lstIncludedDataTypes.Contains("factor") AndAlso Not clsReceiver.IsEmpty() Then
+        If clsReceiver IsNot Nothing AndAlso Not clsReceiver.IsEmpty() AndAlso clsReceiver.strDataType = "factor" Then
             dfTemp = frmMain.clsRLink.GetData(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame(data_name = " & Chr(34) & clsReceiver.GetDataName() & Chr(34) & ", col_name = " & clsReceiver.GetVariableNames() & ")")
             frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
             shtCurrSheet = grdFactorData.CurrentWorksheet
@@ -160,23 +160,24 @@ Public Class ucrFactor
         Dim i As Integer
         Dim checked As Boolean
         Dim iCount As Integer = 0
-        For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
-            If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
-                checked = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
-
-                If checked Then
-                    If iCount = 1 Then
-                        strTemp = "c(" & strTemp & ","
-                    ElseIf iCount > 1 Then
-                        strTemp = strTemp & ","
+        If grdFactorData.CurrentWorksheet IsNot Nothing Then
+            For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
+                If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
+                    checked = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
+                    If checked Then
+                        If iCount = 1 Then
+                            strTemp = "c(" & strTemp & ","
+                        ElseIf iCount > 1 Then
+                            strTemp = strTemp & ","
+                        End If
+                        strTemp = strTemp & Chr(34) & shtCurrSheet(i, 0) & Chr(34)
+                        iCount = iCount + 1
                     End If
-                    strTemp = strTemp & Chr(34) & shtCurrSheet(i, 0) & Chr(34)
-                    iCount = iCount + 1
                 End If
+            Next
+            If iCount > 1 Then
+                strTemp = strTemp & ")"
             End If
-        Next
-        If iCount > 1 Then
-            strTemp = strTemp & ")"
         End If
         Return strTemp
     End Function
@@ -248,4 +249,14 @@ Public Class ucrFactor
         End If
         Return strTemp
     End Function
+
+    Public Sub SetSelectionAllLevels(bSelect As Boolean)
+        Dim i As Integer
+        If iSelectorColumnIndex <> -1 AndAlso bIsMultipleSelector = True Then
+            For i = 0 To shtCurrSheet.RowCount - 1
+                shtCurrSheet(i, iSelectorColumnIndex) = bSelect
+            Next
+        End If
+    End Sub
+
 End Class
