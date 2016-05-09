@@ -185,31 +185,38 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_count)
 
         clsgeom_crossbar.strGeomName = "geom_crossbar"
-        clsgeom_crossbar.AddGgParameter("")
-        clsgeom_crossbar.AddGgParameter("")
-        clsgeom_crossbar.AddGgParameter("")
-        clsgeom_crossbar.AddGgParameter("")
-        clsgeom_crossbar.AddGgParameter("")
-        clsgeom_crossbar.AddGgParameter("")
+        'Mandatory
+        clsgeom_crossbar.AddGgParameter("x")
+        clsgeom_crossbar.AddGgParameter("ymax")
+        clsgeom_crossbar.AddGgParameter("ymin")
+        'Optional
+        clsgeom_crossbar.AddGgParameter("alpha")
+        clsgeom_crossbar.AddGgParameter("colour")
+        clsgeom_crossbar.AddGgParameter("linetype")
+        clsgeom_crossbar.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_crossbar)
 
         clsgeom_curve.strGeomName = "geom_curve"
-        clsgeom_curve.AddGgParameter("")
-        clsgeom_curve.AddGgParameter("")
-        clsgeom_curve.AddGgParameter("")
-        clsgeom_curve.AddGgParameter("")
-        clsgeom_curve.AddGgParameter("")
-        clsgeom_curve.AddGgParameter("")
+        'Mandatory
+        clsgeom_curve.AddGgParameter("x")
+        clsgeom_curve.AddGgParameter("xend")
+        clsgeom_curve.AddGgParameter("y")
+        clsgeom_curve.AddGgParameter("yend")
+        ''Optional
+        clsgeom_curve.AddGgParameter("alpha")
+        clsgeom_curve.AddGgParameter("colour")
+        clsgeom_curve.AddGgParameter("linetype")
+        clsgeom_curve.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_curve)
 
         clsgeom_density.strGeomName = "geom_density"
         'mandatory
-        clsgeom_density.AddGgParameter("x")
+        clsgeom_density.AddGgParameter("x", strIncludedDataTypes:={"numeric"})
         clsgeom_density.AddGgParameter("y")
         'optional
         clsgeom_density.AddGgParameter("alpha")
         clsgeom_density.AddGgParameter("colour")
-        clsgeom_density.AddGgParameter("fill")
+        clsgeom_density.AddGgParameter("fill", strIncludedDataTypes:={"factor"})
         clsgeom_density.AddGgParameter("linetype")
         clsgeom_density.AddGgParameter("size")
         clsgeom_density.AddGgParameter("weight")
@@ -238,22 +245,26 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_density_2d)
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
-        clsgeom_dotplot.AddGgParameter("x")
-        clsgeom_dotplot.AddGgParameter("y")
+        clsgeom_dotplot.AddGgParameter("x", strIncludedDataTypes:={"factor"})
+        clsgeom_dotplot.AddGgParameter("y", strIncludedDataTypes:={"numeric"})
         clsgeom_dotplot.AddGgParameter("alpha")
         clsgeom_dotplot.AddGgParameter("colour")
-        clsgeom_dotplot.AddGgParameter("fill")
+        clsgeom_dotplot.AddGgParameter("fill", strIncludedDataTypes:={"factor"})
         lstAllGeoms.Add(clsgeom_dotplot)
 
 
         clsgeom_errorbar.strGeomName = "geom_errorbar"
-        clsgeom_errorbar.AddGgParameter("")
-        clsgeom_errorbar.AddGgParameter("")
-        clsgeom_errorbar.AddGgParameter("")
-        clsgeom_errorbar.AddGgParameter("")
-        clsgeom_errorbar.AddGgParameter("")
-        clsgeom_errorbar.AddGgParameter("")
+        'Mandatory
+        clsgeom_errorbar.AddGgParameter("x")
+        clsgeom_errorbar.AddGgParameter("ymax")
+        clsgeom_errorbar.AddGgParameter("ymin")
+        'Optional
+        clsgeom_errorbar.AddGgParameter("alpha")
+        clsgeom_errorbar.AddGgParameter("volour")
+        clsgeom_errorbar.AddGgParameter("linetype")
+        clsgeom_errorbar.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_errorbar)
+
 
         clsgeom_errorbarh.strGeomName = "geom_errorbarh"
         'mandatory
@@ -270,14 +281,13 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_errorbarh)
 
         clsgeom_freqpoly.strGeomName = "geom_freqpoly"
-        clsgeom_freqpoly.AddGgParameter("")
-        clsgeom_freqpoly.AddGgParameter("")
-        clsgeom_freqpoly.AddGgParameter("")
-        clsgeom_freqpoly.AddGgParameter("")
-        clsgeom_freqpoly.AddGgParameter("")
-        clsgeom_freqpoly.AddGgParameter("")
+        clsgeom_freqpoly.AddGgParameter("x", strIncludedDataTypes:={"numeric"})
+        clsgeom_freqpoly.AddGgParameter("alpha")
+        clsgeom_freqpoly.AddGgParameter("colour")
+        clsgeom_freqpoly.AddGgParameter("fill", strIncludedDataTypes:={"factor"})
+        clsgeom_freqpoly.AddGgParameter("linetype")
+        clsgeom_freqpoly.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_freqpoly)
-
 
         clsgeom_hex.strGeomName = "geom_hex"
         'mandatory
@@ -291,10 +301,10 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_hex)
 
         clsgeom_histogram.strGeomName = "geom_histogram"
-        clsgeom_histogram.AddGgParameter("x")
+        clsgeom_histogram.AddGgParameter("x", strIncludedDataTypes:={"numeric"})
         clsgeom_histogram.AddGgParameter("alpha")
         clsgeom_histogram.AddGgParameter("colour")
-        clsgeom_histogram.AddGgParameter("fill")
+        clsgeom_histogram.AddGgParameter("fill", strIncludedDataTypes:={"factor"})
         clsgeom_histogram.AddGgParameter("linetype")
         clsgeom_histogram.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_histogram)
@@ -310,7 +320,6 @@ Public Class ucrGeom
         'geom_hline:yintercept
         'geom_abline: slope and intercept
         'TO DO Discuss how to use these
-
         lstAllGeoms.Add(clsgeom_hline)
 
         clsgeom_jitter.strGeomName = "geom_jitter"
@@ -344,8 +353,8 @@ Public Class ucrGeom
 
         clsgeom_line.strGeomName = "geom_line"
         'mandatory
-        clsgeom_line.AddGgParameter("x")
-        clsgeom_line.AddGgParameter("y")
+        clsgeom_line.AddGgParameter("x", strIncludedDataTypes:={"numeric"})
+        clsgeom_line.AddGgParameter("y", strIncludedDataTypes:={"numeric"})
         'optional
         clsgeom_line.AddGgParameter("alpha")
         clsgeom_line.AddGgParameter("color")
@@ -390,8 +399,8 @@ Public Class ucrGeom
 
         clsgeom_point.strGeomName = "geom_point"
         'mandatory
-        clsgeom_point.AddGgParameter("x")
-        clsgeom_point.AddGgParameter("y")
+        clsgeom_point.AddGgParameter("x", strIncludedDataTypes:={"numeric"})
+        clsgeom_point.AddGgParameter("y", strIncludedDataTypes:={"factor"})
         'optional
         clsgeom_point.AddGgParameter("alpha")
         clsgeom_point.AddGgParameter("colour")

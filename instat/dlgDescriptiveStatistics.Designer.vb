@@ -37,7 +37,7 @@ Partial Class dlgDescriptiveStatistics
         '
         'cmdStatistics
         '
-        Me.cmdStatistics.Location = New System.Drawing.Point(7, 133)
+        Me.cmdStatistics.Location = New System.Drawing.Point(10, 165)
         Me.cmdStatistics.Name = "cmdStatistics"
         Me.cmdStatistics.Size = New System.Drawing.Size(104, 23)
         Me.cmdStatistics.TabIndex = 90
@@ -50,9 +50,9 @@ Partial Class dlgDescriptiveStatistics
         Me.grpgraphics.Controls.Add(Me.chkCumulativeFrequency)
         Me.grpgraphics.Controls.Add(Me.chkBoxPlot)
         Me.grpgraphics.Controls.Add(Me.chkStemAndLeaf)
-        Me.grpgraphics.Location = New System.Drawing.Point(76, 164)
+        Me.grpgraphics.Location = New System.Drawing.Point(93, 192)
         Me.grpgraphics.Name = "grpgraphics"
-        Me.grpgraphics.Size = New System.Drawing.Size(292, 28)
+        Me.grpgraphics.Size = New System.Drawing.Size(314, 28)
         Me.grpgraphics.TabIndex = 89
         Me.grpgraphics.TabStop = False
         '
@@ -92,7 +92,7 @@ Partial Class dlgDescriptiveStatistics
         'chkGraphics
         '
         Me.chkGraphics.AutoSize = True
-        Me.chkGraphics.Location = New System.Drawing.Point(7, 170)
+        Me.chkGraphics.Location = New System.Drawing.Point(10, 200)
         Me.chkGraphics.Name = "chkGraphics"
         Me.chkGraphics.Size = New System.Drawing.Size(71, 17)
         Me.chkGraphics.TabIndex = 88
@@ -102,22 +102,25 @@ Partial Class dlgDescriptiveStatistics
         '
         'ucrDataSelector
         '
-        Me.ucrDataSelector.Location = New System.Drawing.Point(3, 1)
+        Me.ucrDataSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrDataSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataSelector.Name = "ucrDataSelector"
-        Me.ucrDataSelector.Size = New System.Drawing.Size(203, 127)
+        Me.ucrDataSelector.Size = New System.Drawing.Size(213, 147)
         Me.ucrDataSelector.TabIndex = 92
         '
         'ucrObjectReceiver
         '
-        Me.ucrObjectReceiver.Location = New System.Drawing.Point(212, 31)
+        Me.ucrObjectReceiver.Location = New System.Drawing.Point(235, 60)
+        Me.ucrObjectReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrObjectReceiver.Name = "ucrObjectReceiver"
+        Me.ucrObjectReceiver.Selector = Nothing
         Me.ucrObjectReceiver.Size = New System.Drawing.Size(120, 26)
         Me.ucrObjectReceiver.TabIndex = 93
         '
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(213, 12)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(236, 41)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
         Me.lblSelectedVariable.TabIndex = 94
@@ -126,16 +129,16 @@ Partial Class dlgDescriptiveStatistics
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 198)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 228)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(399, 53)
         Me.ucrBase.TabIndex = 95
         '
         'dlgDescriptiveStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 252)
+        Me.ClientSize = New System.Drawing.Size(419, 297)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrObjectReceiver)
