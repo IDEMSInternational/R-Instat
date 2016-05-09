@@ -75,7 +75,7 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub ucrInputPolynomial_NameChanged() Handles ucrInputPolynomial.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPolynomial.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPolynomial.GetText)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPolynomial.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPolynomial.GetText, bAssignToIsPrefix:=True)
     End Sub
 
 

@@ -364,9 +364,9 @@ instat_object$set("public", "set_metadata_changed", function(data_name = "", new
 } 
 )
 
-instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix, hidden = FALSE) {
-  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden)
-  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden)
+instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column) {
+  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden, before = before, adjacent_column = adjacent_column)
+  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column)
 }
 )
 
