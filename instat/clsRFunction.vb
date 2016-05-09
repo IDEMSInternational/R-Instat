@@ -89,6 +89,13 @@ Public Class RFunction
                     clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                     clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
                     clsAddColumns.AddParameter("col_data", strAssignTo)
+                    If bAssignToIsPrefix Then
+                        clsAddColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+                    Else
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsAddColumns.AddParameter("use_col_name_as_prefix", "FALSE")
+                        End If
+                    End If
                     strScript = strScript & clsAddColumns.ToScript() & vbCrLf
 
                     clsGetColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
