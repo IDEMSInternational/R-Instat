@@ -28,14 +28,15 @@ Partial Class dlgDeleteSheet
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 47)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 57)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(398, 55)
         Me.ucrBase.TabIndex = 1
         '
         'ucrDataFrameToDelete
         '
-        Me.ucrDataFrameToDelete.Location = New System.Drawing.Point(0, 0)
+        Me.ucrDataFrameToDelete.Location = New System.Drawing.Point(10, 10)
+        Me.ucrDataFrameToDelete.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameToDelete.Name = "ucrDataFrameToDelete"
         Me.ucrDataFrameToDelete.Size = New System.Drawing.Size(127, 41)
         Me.ucrDataFrameToDelete.TabIndex = 0
@@ -44,7 +45,7 @@ Partial Class dlgDeleteSheet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(404, 102)
+        Me.ClientSize = New System.Drawing.Size(420, 123)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrDataFrameToDelete)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow

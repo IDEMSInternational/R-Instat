@@ -479,7 +479,7 @@ data_object$set("public", "insert_column_in_data", function(col_data =c(), start
   for(j in 1:number_cols){
     col_name <- self$get_next_default_column_name("X") #change x 
     assign(col_name, col_data)
-    private$data[, col_name] <- col_data
+    self$add_columns_to_data(col_name, col_data)
   }
   if(start_pos==1){
     self$set_data(cbind(private$data[(ncol(private$data)-number_cols+1): ncol(private$data)], private$data[(start_pos):(ncol(private$data)-number_cols)]))
@@ -537,7 +537,7 @@ data_object$set("public", "insert_column_in_data", function(col_data =c(), start
 # }
 # )
 
-data_object$set("public", "order_columns_in_data", function(col_order) {
+data_object$set("public", "reorder_columns_in_data", function(col_order) {
   if (ncol(private$data) != length(col_order)) stop("Columns to order should be same as columns in the data.")
   
   if(is.numeric(col_order)) {
