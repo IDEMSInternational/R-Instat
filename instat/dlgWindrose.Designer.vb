@@ -23,28 +23,122 @@ Partial Class dlgWindrose
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrWindRoseSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSaveWindRose = New instat.ucrSaveGraph()
+        Me.lblXVariable = New System.Windows.Forms.Label()
+        Me.ucrXReceiver = New instat.ucrReceiverSingle()
+        Me.lblYVariable = New System.Windows.Forms.Label()
+        Me.ucrYReceiver = New instat.ucrReceiverSingle()
+        Me.lblFactor = New System.Windows.Forms.Label()
+        Me.ucrFillReceiver = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 260)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 252)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrWindRoseSelector
+        '
+        Me.ucrWindRoseSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrWindRoseSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrWindRoseSelector.Name = "ucrWindRoseSelector"
+        Me.ucrWindRoseSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrWindRoseSelector.TabIndex = 1
+        '
+        'ucrSaveWindRose
+        '
+        Me.ucrSaveWindRose.Location = New System.Drawing.Point(10, 211)
+        Me.ucrSaveWindRose.Name = "ucrSaveWindRose"
+        Me.ucrSaveWindRose.Size = New System.Drawing.Size(265, 20)
+        Me.ucrSaveWindRose.TabIndex = 2
+        '
+        'lblXVariable
+        '
+        Me.lblXVariable.AutoSize = True
+        Me.lblXVariable.Location = New System.Drawing.Point(236, 10)
+        Me.lblXVariable.Name = "lblXVariable"
+        Me.lblXVariable.Size = New System.Drawing.Size(55, 13)
+        Me.lblXVariable.TabIndex = 3
+        Me.lblXVariable.Text = "X Variable"
+        '
+        'ucrXReceiver
+        '
+        Me.ucrXReceiver.Location = New System.Drawing.Point(239, 39)
+        Me.ucrXReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrXReceiver.Name = "ucrXReceiver"
+        Me.ucrXReceiver.Selector = Nothing
+        Me.ucrXReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrXReceiver.TabIndex = 4
+        '
+        'lblYVariable
+        '
+        Me.lblYVariable.AutoSize = True
+        Me.lblYVariable.Location = New System.Drawing.Point(236, 70)
+        Me.lblYVariable.Name = "lblYVariable"
+        Me.lblYVariable.Size = New System.Drawing.Size(55, 13)
+        Me.lblYVariable.TabIndex = 3
+        Me.lblYVariable.Text = "Y Variable"
+        '
+        'ucrYReceiver
+        '
+        Me.ucrYReceiver.Location = New System.Drawing.Point(239, 99)
+        Me.ucrYReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrYReceiver.Name = "ucrYReceiver"
+        Me.ucrYReceiver.Selector = Nothing
+        Me.ucrYReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrYReceiver.TabIndex = 4
+        '
+        'lblFactor
+        '
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.Location = New System.Drawing.Point(236, 130)
+        Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
+        Me.lblFactor.TabIndex = 3
+        Me.lblFactor.Text = "Factor"
+        '
+        'ucrFillReceiver
+        '
+        Me.ucrFillReceiver.Location = New System.Drawing.Point(239, 159)
+        Me.ucrFillReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrFillReceiver.Name = "ucrFillReceiver"
+        Me.ucrFillReceiver.Selector = Nothing
+        Me.ucrFillReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFillReceiver.TabIndex = 4
         '
         'dlgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(406, 317)
+        Me.ClientSize = New System.Drawing.Size(418, 321)
+        Me.Controls.Add(Me.ucrFillReceiver)
+        Me.Controls.Add(Me.ucrYReceiver)
+        Me.Controls.Add(Me.ucrXReceiver)
+        Me.Controls.Add(Me.lblFactor)
+        Me.Controls.Add(Me.lblYVariable)
+        Me.Controls.Add(Me.lblXVariable)
+        Me.Controls.Add(Me.ucrSaveWindRose)
+        Me.Controls.Add(Me.ucrWindRoseSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgWindrose"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Windrose"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrWindRoseSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSaveWindRose As ucrSaveGraph
+    Friend WithEvents lblXVariable As Label
+    Friend WithEvents ucrXReceiver As ucrReceiverSingle
+    Friend WithEvents lblYVariable As Label
+    Friend WithEvents ucrYReceiver As ucrReceiverSingle
+    Friend WithEvents lblFactor As Label
+    Friend WithEvents ucrFillReceiver As ucrReceiverSingle
 End Class
