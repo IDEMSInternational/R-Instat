@@ -25,6 +25,7 @@ Public Class frmEditor
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Private clsAppendVariablesMetaData As New RFunction
     Private clsColumnNames As New RFunction
+    Public lstColumnNames As String()
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsGrids.SetData(grdData)
@@ -73,7 +74,7 @@ Public Class frmEditor
         clsAppendVariablesMetaData.AddParameter("col_names", SelectedColumns())
         clsAppendVariablesMetaData.AddParameter("property", "is_hidden_label")
         clsAppendVariablesMetaData.AddParameter("new_val", "TRUE")
-        frmMain.clsRLink.RunScript(clsAppendVariablesMetaData.ToScript(), strComment:="Hide column(s)" & SelectedColumns())
+        frmMain.clsRLink.RunScript(clsAppendVariablesMetaData.ToScript(), strComment:="Right click menu: Hide column(s)" & SelectedColumns())
         'grdData.DoAction(New unvell.ReoGrid.Actions.HideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
     End Sub
 
@@ -285,22 +286,24 @@ Public Class frmEditor
         frmMain.clsRLink.RunScript(strScript)
     End Sub
 
-    Private Function SelectedColumns()
-        Dim col_list As New List(Of String)
-        Dim strLength As Integer
-        For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
-            strLength = grdData.CurrentWorksheet.GetColumnHeader(i).Text.IndexOf(" ")
-            col_list.Add(grdData.CurrentWorksheet.GetColumnHeader(i).Text.Substring(0, strLength))
-        Next
-        Dim cols As String
-        cols = "c" & "("
-        For j As Integer = 0 To col_list.Count - 1
-            If j > 0 Then
-                cols = cols & ","
-            End If
-            cols = cols & Chr(34) & col_list(j) & Chr(34)
-        Next
-        cols = cols & ")"
+    Private Function SelectedColumns() As String
+        Dim lstSelectedColumns As New List(Of String)
+        Dim cols As String = ""
+
+        If lstColumnNames IsNot Nothing AndAlso lstColumnNames.Count > 0 Then
+            For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
+                lstSelectedColumns.Add(lstColumnNames(i))
+            Next
+
+            cols = "c("
+            For j As Integer = 0 To lstSelectedColumns.Count - 1
+                If j > 0 Then
+                    cols = cols & ","
+                End If
+                cols = cols & Chr(34) & lstSelectedColumns(j) & Chr(34)
+            Next
+            cols = cols & ")"
+        End If
         Return cols
     End Function
 
