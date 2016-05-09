@@ -16,6 +16,8 @@
 Imports instat.Translations
 Public Class dlgCombineText
     Private bFirstLoad As Boolean = True
+    Private iColumnsUsed As Integer
+
     Private Sub dlgCombineText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -33,7 +35,7 @@ Public Class dlgCombineText
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverCombineText.IsEmpty() = False And (Not ucrInputSeparator.IsEmpty) Then
+        If Not ucrReceiverCombineText.IsEmpty() AndAlso Not ucrInputColumnInto.IsEmpty() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -45,56 +47,67 @@ Public Class dlgCombineText
         ucrReceiverCombineText.Selector = ucrSelectorForCombineText
         ucrReceiverCombineText.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction("stringr::str_c")
-        ucrInputColumnInto.SetName("CombineText")
-        ucrReceiverCombineText.SetDataType("factor")
+        ucrReceiverCombineText.SetIncludedDataTypes({"factor", "character"})
         ucrInputColumnInto.SetItemsTypeAsColumns()
         ucrInputColumnInto.SetDefaultTypeAsColumn()
         ucrInputColumnInto.SetDataFrameSelector(ucrSelectorForCombineText.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.AddParameter("collapse", "NULL")
+        ucrInputColumnInto.SetPrefix("Combine")
+        iColumnsUsed = 0
+        ucrInputSeparator.AddItems({"Space", "-", "_", "."})
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorForCombineText.Reset()
         ucrSelectorForCombineText.Focus()
-        ucrInputSeparator.SetName("Whitespace")
-        ucrInputColumnInto.cboInput.ResetText()
+        ucrInputSeparator.SetName("")
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
-
     End Sub
 
     Private Sub ucrInputSeparator_NameChanged() Handles ucrInputSeparator.NameChanged
         SeparatorParameter()
-        TestOKEnabled()
     End Sub
 
     Private Sub SeparatorParameter()
-        Select Case ucrInputSeparator.cboInput.SelectedItem
-            Case "NULL"
-                ucrBase.clsRsyntax.AddParameter("sep", "NULL")
-            Case "WhiteSpace"
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "" & Chr(34))
-            Case "Hyphen"
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "-" & Chr(34))
-            Case "Underscore"
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "_" & Chr(34))
-            Case "Period"
-                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "." & Chr(34))
+        Select Case ucrInputSeparator.GetText()
+            Case "Space"
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & " " & Chr(34))
+            Case ""
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & "" & Chr(34))
+                Else
+                    ucrBase.clsRsyntax.RemoveParameter("sep")
+                End If
+            Case Else
+                ucrBase.clsRsyntax.AddParameter("sep", Chr(34) & ucrInputSeparator.GetText() & Chr(34))
         End Select
     End Sub
 
     Private Sub ucrInputColumnInto_NameChanged() Handles ucrInputColumnInto.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColumnInto.GetText, strTempDataframe:=ucrSelectorForCombineText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColumnInto.GetText)
+        If Not ucrInputColumnInto.IsEmpty Then
+            ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColumnInto.GetText, strTempDataframe:=ucrSelectorForCombineText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColumnInto.GetText)
+        Else
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverCombineText_SelectionChanged() Handles ucrReceiverCombineText.SelectionChanged
+        Dim lstColumnFunction As List(Of RFunction)
+
+        For i = 1 To iColumnsUsed
+            ucrBase.clsRsyntax.RemoveParameter("X" & i)
+        Next
+
         If Not ucrReceiverCombineText.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverCombineText.GetVariables())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("x")
+            lstColumnFunction = ucrReceiverCombineText.GetVariablesAsList()
+            iColumnsUsed = lstColumnFunction.Count
+            For i = 0 To lstColumnFunction.Count - 1
+                ucrBase.clsRsyntax.AddParameter("X" & i + 1, clsRFunctionParameter:=lstColumnFunction(i))
+            Next
         End If
         TestOKEnabled()
     End Sub

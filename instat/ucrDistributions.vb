@@ -25,7 +25,6 @@ Public Class ucrDistributions
     Public bDistributionsSet As Boolean = False
     Public clsCurrRFunction As New RFunction
     Public strDatatype As String = ""
-    Public lstFunctionParameters As New List(Of RParameter)
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not bDistributionsSet Then
@@ -34,31 +33,40 @@ Public Class ucrDistributions
     End Sub
 
     Public Sub AddParameter(strArgumentName As String, strArgumentValue As String)
-        Dim i As Integer
-        Dim clsParam As New RParameter
-        i = lstFunctionParameters.FindIndex(Function(x) x.strArgumentName.Equals(strArgumentName))
-        If i = -1 Then
-            clsParam.SetArgumentName(strArgumentName)
-            clsParam.SetArgumentValue(strArgumentValue)
-            lstFunctionParameters.Add(clsParam)
-        Else
-            lstFunctionParameters(i).strArgumentValue = strArgumentValue
-        End If
-    End Sub
-
-    Public Sub IncludeFunctionParameter()
         Dim clsTempOp As ROperator
-        For Each clsParam In lstFunctionParameters
-            If clsCurrDistribution.strNameTag = "Exponential" And clsParam.strArgumentName = "mean" Then
-                clsTempOp = New ROperator
-                clsTempOp.SetOperation("/")
-                clsTempOp.SetParameter(True, 1)
-                clsTempOp.SetParameter(False, clsParam:=clsParam)
-                clsCurrRFunction.AddParameter("rate", clsROperatorParameter:=clsTempOp)
-            Else
-                clsCurrRFunction.AddParameter(clsParam)
+        Dim i As Integer
+
+        clsTempOp = New ROperator
+        clsTempOp.SetOperation("/")
+
+        If clsCurrDistribution.strNameTag = "Exponential" AndAlso strArgumentName = "mean" Then
+            clsTempOp.SetParameter(True, 1)
+            clsTempOp.SetParameter(False, strArgumentValue)
+            clsCurrRFunction.AddParameter("rate", clsROperatorParameter:=clsTempOp)
+        ElseIf clsCurrDistribution.strNameTag = "Gamma_With_Shape_and_Mean" AndAlso (strArgumentName = "shape" OrElse strArgumentName = "mean") Then
+            If strArgumentName = "shape" Then
+                clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
+                i = clsCurrRFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "mean")
+                If i <> -1 Then
+                    clsTempOp.SetParameter(True, clsCurrRFunction.clsParameters(i).strArgumentValue)
+                    clsTempOp.SetParameter(False, strArgumentValue)
+                    clsCurrRFunction.AddParameter("scale", clsROperatorParameter:=clsTempOp)
+                    clsCurrRFunction.RemoveParameterByName("mean")
+                End If
+            ElseIf strArgumentName = "mean" Then
+                i = clsCurrRFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "shape")
+                If i = -1 Then
+                    clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
+                Else
+                    clsTempOp.SetParameter(True, strArgumentValue)
+                    clsTempOp.SetParameter(False, clsCurrRFunction.clsParameters(i).strArgumentValue)
+                    clsCurrRFunction.AddParameter("scale", clsROperatorParameter:=clsTempOp)
+                End If
             End If
-        Next
+        Else
+            clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
+        End If
+
     End Sub
 
     Public Sub SetRDistributions()
@@ -195,12 +203,13 @@ Public Class ucrDistributions
 
         ' Extreme Value Distribution
         clsExtremeValueDist.strNameTag = "Extreme_Value"
-        clsExtremeValueDist.strRFunctionName = "rgev"
-        clsExtremeValueDist.strPFunctionName = "pgev"
-        clsExtremeValueDist.strQFunctionName = "qgev"
-        clsExtremeValueDist.strDFunctionName = "dgev"
-        clsExtremeValueDist.AddParameter("mode", "Mode")
-        clsExtremeValueDist.AddParameter("scale", "Scale")
+        clsExtremeValueDist.strRFunctionName = "revd"
+        clsExtremeValueDist.strPFunctionName = "pevd"
+        clsExtremeValueDist.strQFunctionName = "qqevd"
+        clsExtremeValueDist.strDFunctionName = "devd"
+        clsExtremeValueDist.AddParameter("shape", "Shape", 0)
+        clsExtremeValueDist.AddParameter("scale", "Scale", 1)
+        clsExtremeValueDist.AddParameter("loc", "Location", 0)
         lstAllDistributions.Add(clsExtremeValueDist)
 
         ' Weibull Distribution
@@ -219,16 +228,16 @@ Public Class ucrDistributions
         clsUniformDist.strPFunctionName = "punif"
         clsUniformDist.strQFunctionName = "qunif"
         clsUniformDist.strDFunctionName = "dunif"
-        clsUniformDist.AddParameter("a", "a", 0)
-        clsUniformDist.AddParameter("b", "b", 1)
+        clsUniformDist.AddParameter("min", "Minimum", 0)
+        clsUniformDist.AddParameter("max", "Maximum", 1)
         lstAllDistributions.Add(clsUniformDist)
 
         'Bernouli Distribution
         clsBernouliDist.strNameTag = "Bernouli"
-        clsBernouliDist.strRFunctionName = "rbern"
-        clsBernouliDist.strPFunctionName = "pbern"
-        clsBernouliDist.strQFunctionName = "qbern"
-        clsBernouliDist.strDFunctionName = "dbern"
+        clsBernouliDist.strRFunctionName = "rbinom"
+        clsBernouliDist.strPFunctionName = "pbinom"
+        clsBernouliDist.strQFunctionName = "qbinom"
+        clsBernouliDist.strDFunctionName = "dbinom"
         clsBernouliDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsBernouliDist)
 
@@ -240,7 +249,7 @@ Public Class ucrDistributions
         clsBinomialDist.strDFunctionName = "dbinom"
         clsBinomialDist.strGLMFunctionName = "binomial"
         clsBinomialDist.bTwoLevelFactor = True
-        clsBinomialDist.AddParameter("number", "Number", 1)
+        clsBinomialDist.AddParameter("size", "Number", 1)
         clsBinomialDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsBinomialDist)
 
@@ -252,7 +261,7 @@ Public Class ucrDistributions
         clsPoissonDist.strDFunctionName = "dpois"
         clsPoissonDist.strGLMFunctionName = "poisson"
         clsPoissonDist.bPositiveInt = True
-        clsPoissonDist.AddParameter("mean", "Mean", 1)
+        clsPoissonDist.AddParameter("lambda", "Mean", 1)
         lstAllDistributions.Add(clsPoissonDist)
 
         ' von mises distribution
@@ -261,7 +270,7 @@ Public Class ucrDistributions
         clsVonnMisesDist.strPFunctionName = "pvonmises"
         clsVonnMisesDist.strQFunctionName = "qvonmises"
         clsVonnMisesDist.strDFunctionName = "dvonmises"
-        clsVonnMisesDist.AddParameter("mean", "Mean", "pi")
+        clsVonnMisesDist.AddParameter("mu", "Mean", "pi")
         clsVonnMisesDist.AddParameter("kappa", "Kappa", 0)
         lstAllDistributions.Add(clsVonnMisesDist)
 

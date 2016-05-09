@@ -20,7 +20,7 @@ Public Class ucrReceiver
     Public lstIncludedDataTypes As List(Of String)
     Public lstExcludedDataTypes As List(Of String)
     Public bFirstLoad As Boolean = True
-    Public strSelectorHeading As String = "Available Variables"
+    Public strSelectorHeading As String = "Variables"
 
     Public Overridable Sub AddSelected()
 

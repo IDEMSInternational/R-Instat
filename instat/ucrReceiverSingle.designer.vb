@@ -28,22 +28,25 @@ Partial Class ucrReceiverSingle
         '
         'txtReceiverSingle
         '
-        Me.txtReceiverSingle.Location = New System.Drawing.Point(3, 3)
+        Me.txtReceiverSingle.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtReceiverSingle.Location = New System.Drawing.Point(0, 0)
         Me.txtReceiverSingle.Name = "txtReceiverSingle"
         Me.txtReceiverSingle.ReadOnly = True
-        Me.txtReceiverSingle.Size = New System.Drawing.Size(100, 20)
+        Me.txtReceiverSingle.Size = New System.Drawing.Size(120, 20)
         Me.txtReceiverSingle.TabIndex = 0
         '
         'SelectionMenuStrip
         '
         Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem})
         Me.SelectionMenuStrip.Name = "SelectionMenuStrip"
-        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 48)
+        Me.SelectionMenuStrip.Size = New System.Drawing.Size(118, 26)
         '
         'RemoveToolStripMenuItem
         '
         Me.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem"
-        Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
         Me.RemoveToolStripMenuItem.Tag = "remove"
         Me.RemoveToolStripMenuItem.Text = "Remove"
         '
@@ -51,8 +54,9 @@ Partial Class ucrReceiverSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.Controls.Add(Me.txtReceiverSingle)
+        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrReceiverSingle"
-        Me.Size = New System.Drawing.Size(106, 26)
+        Me.Size = New System.Drawing.Size(120, 20)
         Me.SelectionMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()

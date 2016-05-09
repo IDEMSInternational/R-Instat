@@ -36,14 +36,12 @@ Public Class dlgGeneralForGraphics
         'setting the base ggplot functions
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
-        'this sets the geoms andthe command to be used
-        ucrGeomListWithParameters1.SetGeoms()
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=ucrGeomListWithParameters1.clsGeomFunction)
-    End Sub
 
+    End Sub
     Private Sub SetDefaults()
-        ucrGeomListWithParameters1.UcrSelector.Reset()
+        cmdDelete.Enabled = False
+        cmdEdit.Enabled = False
         TestOkEnabled()
     End Sub
 
@@ -51,14 +49,14 @@ Public Class dlgGeneralForGraphics
 
     End Sub
     Public Sub TestOkEnabled()
-        If Not ucrGeomListWithParameters1.ucrReceiverParam1.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
+        sdgLayers.ShowDialog()
     End Sub
 End Class
