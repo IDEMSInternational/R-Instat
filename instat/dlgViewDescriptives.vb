@@ -31,10 +31,26 @@ Public Class dlgViewDescriptives
 
     End Sub
     Private Sub SetDefaults()
-
+        rdoStructure.Checked = True
+        rdoAllContents.Enabled = False
+        ObjectParameters()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub StructureComponentsAndAllContents_CheckedChanged(sender As Object, e As EventArgs) Handles rdoStructure.CheckedChanged, rdoAllContents.CheckedChanged, rdoComponent.CheckedChanged
+        ObjectParameters()
+    End Sub
+
+    Private Sub ObjectParameters()
+        If rdoStructure.Checked Then
+
+        ElseIf rdoAllContents.Checked Then
+
+        Else
+            ucrComponent.Enabled = True
+        End If
     End Sub
 End Class
