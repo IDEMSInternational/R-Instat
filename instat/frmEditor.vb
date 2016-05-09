@@ -313,7 +313,9 @@ Public Class frmEditor
     End Sub
 
     Private Sub UpdateRFunctionDataFrameParameters()
-        clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-        clsColumnNames.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+        If grdCurrSheet IsNot Nothing Then
+            clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsColumnNames.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+        End If
     End Sub
 End Class
