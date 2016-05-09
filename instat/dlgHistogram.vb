@@ -60,15 +60,6 @@ Public Class dlgHistogram
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrHistogramSelector.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-    Private Sub ucrXReceiver_SelectionChanged(sender As Object, e As EventArgs)
-        'If Not ucrXReceiver.IsEmpty Then
-        '    clsRaesFunction.AddParameter("x", ucrXReceiver.GetVariableNames(False))
-        'Else
-        '    clsRaesFunction.RemoveParameterByName("x")
-        'End If
-        'TestOkEnabled()
-    End Sub
-
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
@@ -180,4 +171,5 @@ Public Class dlgHistogram
         End If
         TestOkEnabled()
     End Sub
+
 End Class
