@@ -27,7 +27,7 @@ Public Class dlgReorderColumns
 
     Private Sub initialiseDialog()
         'sets the function
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$order_columns_in_data")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_columns_in_data")
         ucrReorderColumns.setDataType("column")
         ucrReorderColumns.setDataframes(ucrDataFrameSelect)
         'ucrBase.iHelpTopicID = 
