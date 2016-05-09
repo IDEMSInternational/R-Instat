@@ -185,21 +185,28 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_count)
 
         clsgeom_crossbar.strGeomName = "geom_crossbar"
-        clsgeom_crossbar.AddGgParameter("")
-        clsgeom_crossbar.AddGgParameter("")
-        clsgeom_crossbar.AddGgParameter("")
-        clsgeom_crossbar.AddGgParameter("")
-        clsgeom_crossbar.AddGgParameter("")
-        clsgeom_crossbar.AddGgParameter("")
+        'Mandatory
+        clsgeom_crossbar.AddGgParameter("x")
+        clsgeom_crossbar.AddGgParameter("ymax")
+        clsgeom_crossbar.AddGgParameter("ymin")
+        'Optional
+        clsgeom_crossbar.AddGgParameter("alpha")
+        clsgeom_crossbar.AddGgParameter("colour")
+        clsgeom_crossbar.AddGgParameter("linetype")
+        clsgeom_crossbar.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_crossbar)
 
         clsgeom_curve.strGeomName = "geom_curve"
-        clsgeom_curve.AddGgParameter("")
-        clsgeom_curve.AddGgParameter("")
-        clsgeom_curve.AddGgParameter("")
-        clsgeom_curve.AddGgParameter("")
-        clsgeom_curve.AddGgParameter("")
-        clsgeom_curve.AddGgParameter("")
+        'Mandatory
+        clsgeom_curve.AddGgParameter("x")
+        clsgeom_curve.AddGgParameter("xend")
+        clsgeom_curve.AddGgParameter("y")
+        clsgeom_curve.AddGgParameter("yend")
+        ''Optional
+        clsgeom_curve.AddGgParameter("alpha")
+        clsgeom_curve.AddGgParameter("colour")
+        clsgeom_curve.AddGgParameter("linetype")
+        clsgeom_curve.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_curve)
 
         clsgeom_density.strGeomName = "geom_density"
@@ -247,13 +254,17 @@ Public Class ucrGeom
 
 
         clsgeom_errorbar.strGeomName = "geom_errorbar"
-        clsgeom_errorbar.AddGgParameter("")
-        clsgeom_errorbar.AddGgParameter("")
-        clsgeom_errorbar.AddGgParameter("")
-        clsgeom_errorbar.AddGgParameter("")
-        clsgeom_errorbar.AddGgParameter("")
-        clsgeom_errorbar.AddGgParameter("")
+        'Mandatory
+        clsgeom_errorbar.AddGgParameter("x")
+        clsgeom_errorbar.AddGgParameter("ymax")
+        clsgeom_errorbar.AddGgParameter("ymin")
+        'Optional
+        clsgeom_errorbar.AddGgParameter("alpha")
+        clsgeom_errorbar.AddGgParameter("volour")
+        clsgeom_errorbar.AddGgParameter("linetype")
+        clsgeom_errorbar.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_errorbar)
+
 
         clsgeom_errorbarh.strGeomName = "geom_errorbarh"
         'mandatory
