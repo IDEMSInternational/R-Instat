@@ -48,7 +48,7 @@ Partial Class dlgCorrelation
         'rdoTwoColumns
         '
         Me.rdoTwoColumns.AutoSize = True
-        Me.rdoTwoColumns.Location = New System.Drawing.Point(3, 11)
+        Me.rdoTwoColumns.Location = New System.Drawing.Point(10, 11)
         Me.rdoTwoColumns.Name = "rdoTwoColumns"
         Me.rdoTwoColumns.Size = New System.Drawing.Size(88, 17)
         Me.rdoTwoColumns.TabIndex = 0
@@ -70,7 +70,7 @@ Partial Class dlgCorrelation
         'lblFirstColumn
         '
         Me.lblFirstColumn.AutoSize = True
-        Me.lblFirstColumn.Location = New System.Drawing.Point(307, 118)
+        Me.lblFirstColumn.Location = New System.Drawing.Point(246, 118)
         Me.lblFirstColumn.Name = "lblFirstColumn"
         Me.lblFirstColumn.Size = New System.Drawing.Size(63, 13)
         Me.lblFirstColumn.TabIndex = 4
@@ -80,7 +80,7 @@ Partial Class dlgCorrelation
         'lblSecondColumn
         '
         Me.lblSecondColumn.AutoSize = True
-        Me.lblSecondColumn.Location = New System.Drawing.Point(308, 169)
+        Me.lblSecondColumn.Location = New System.Drawing.Point(246, 165)
         Me.lblSecondColumn.Name = "lblSecondColumn"
         Me.lblSecondColumn.Size = New System.Drawing.Size(81, 13)
         Me.lblSecondColumn.TabIndex = 6
@@ -92,7 +92,7 @@ Partial Class dlgCorrelation
         Me.grpMethod.Controls.Add(Me.rdoSpearman)
         Me.grpMethod.Controls.Add(Me.rdoKendall)
         Me.grpMethod.Controls.Add(Me.rdoPearson)
-        Me.grpMethod.Location = New System.Drawing.Point(3, 233)
+        Me.grpMethod.Location = New System.Drawing.Point(10, 233)
         Me.grpMethod.Name = "grpMethod"
         Me.grpMethod.Size = New System.Drawing.Size(423, 44)
         Me.grpMethod.TabIndex = 8
@@ -149,7 +149,7 @@ Partial Class dlgCorrelation
         '
         Me.grpMissing.Controls.Add(Me.rdoPairwise)
         Me.grpMissing.Controls.Add(Me.rdoCompleteRowsOnly)
-        Me.grpMissing.Location = New System.Drawing.Point(3, 283)
+        Me.grpMissing.Location = New System.Drawing.Point(10, 283)
         Me.grpMissing.Name = "grpMissing"
         Me.grpMissing.Size = New System.Drawing.Size(309, 40)
         Me.grpMissing.TabIndex = 9
@@ -184,7 +184,7 @@ Partial Class dlgCorrelation
         'lblConfInterval
         '
         Me.lblConfInterval.AutoSize = True
-        Me.lblConfInterval.Location = New System.Drawing.Point(12, 325)
+        Me.lblConfInterval.Location = New System.Drawing.Point(14, 332)
         Me.lblConfInterval.Name = "lblConfInterval"
         Me.lblConfInterval.Size = New System.Drawing.Size(133, 13)
         Me.lblConfInterval.TabIndex = 11
@@ -192,14 +192,15 @@ Partial Class dlgCorrelation
         '
         'txtConfidenceInterval
         '
-        Me.txtConfidenceInterval.Location = New System.Drawing.Point(156, 322)
+        Me.txtConfidenceInterval.Location = New System.Drawing.Point(156, 329)
         Me.txtConfidenceInterval.Name = "txtConfidenceInterval"
         Me.txtConfidenceInterval.Size = New System.Drawing.Size(100, 20)
         Me.txtConfidenceInterval.TabIndex = 12
         '
         'ucrReceiverMultipleColumns
         '
-        Me.ucrReceiverMultipleColumns.Location = New System.Drawing.Point(278, 112)
+        Me.ucrReceiverMultipleColumns.Location = New System.Drawing.Point(246, 118)
+        Me.ucrReceiverMultipleColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleColumns.Name = "ucrReceiverMultipleColumns"
         Me.ucrReceiverMultipleColumns.Selector = Nothing
         Me.ucrReceiverMultipleColumns.Size = New System.Drawing.Size(121, 104)
@@ -207,7 +208,8 @@ Partial Class dlgCorrelation
         '
         'ucrReceiverSecondColumn
         '
-        Me.ucrReceiverSecondColumn.Location = New System.Drawing.Point(301, 181)
+        Me.ucrReceiverSecondColumn.Location = New System.Drawing.Point(246, 181)
+        Me.ucrReceiverSecondColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSecondColumn.Name = "ucrReceiverSecondColumn"
         Me.ucrReceiverSecondColumn.Selector = Nothing
         Me.ucrReceiverSecondColumn.Size = New System.Drawing.Size(106, 26)
@@ -215,7 +217,8 @@ Partial Class dlgCorrelation
         '
         'ucrReceiverFirstColumn
         '
-        Me.ucrReceiverFirstColumn.Location = New System.Drawing.Point(301, 129)
+        Me.ucrReceiverFirstColumn.Location = New System.Drawing.Point(246, 133)
+        Me.ucrReceiverFirstColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFirstColumn.Name = "ucrReceiverFirstColumn"
         Me.ucrReceiverFirstColumn.Selector = Nothing
         Me.ucrReceiverFirstColumn.Size = New System.Drawing.Size(106, 26)
@@ -223,14 +226,15 @@ Partial Class dlgCorrelation
         '
         'ucrSelectorDataFrameVarAddRemove
         '
-        Me.ucrSelectorDataFrameVarAddRemove.Location = New System.Drawing.Point(3, 37)
+        Me.ucrSelectorDataFrameVarAddRemove.Location = New System.Drawing.Point(10, 37)
+        Me.ucrSelectorDataFrameVarAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataFrameVarAddRemove.Name = "ucrSelectorDataFrameVarAddRemove"
-        Me.ucrSelectorDataFrameVarAddRemove.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorDataFrameVarAddRemove.Size = New System.Drawing.Size(233, 193)
         Me.ucrSelectorDataFrameVarAddRemove.TabIndex = 2
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(11, 358)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 358)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(409, 57)
         Me.ucrBase.TabIndex = 13
@@ -239,7 +243,7 @@ Partial Class dlgCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(438, 415)
+        Me.ClientSize = New System.Drawing.Size(429, 415)
         Me.Controls.Add(Me.ucrReceiverMultipleColumns)
         Me.Controls.Add(Me.lblConfInterval)
         Me.Controls.Add(Me.txtConfidenceInterval)
