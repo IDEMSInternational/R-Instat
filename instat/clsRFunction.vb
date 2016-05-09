@@ -23,13 +23,14 @@ Public Class RFunction
     Public strAssignToModel As String
     Public bToBeAssigned As Boolean = False
     Public bIsAssigned As Boolean = False
+    Private bAssignToIsPrefix As Boolean = False
 
     Public Sub SetRCommand(strTemp As String)
         strRCommand = strTemp
         bIsAssigned = False
     End Sub
 
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "")
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional bAssignToIsPrefix As Boolean = False)
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -37,8 +38,9 @@ Public Class RFunction
                 strAssignToColumn = strTempColumn
             End If
         ElseIf Not strTempModel = "" Then
-                strAssignToModel = strTempModel
+            strAssignToModel = strTempModel
         End If
+        Me.bAssignToIsPrefix = bAssignToIsPrefix
         bToBeAssigned = True
         bIsAssigned = False
     End Sub
@@ -55,6 +57,13 @@ Public Class RFunction
     Public Function ToScript(Optional ByRef strScript As String = "") As String
         Dim strTemp As String = ""
         Dim i As Integer
+        Dim clsAddColumns As New RFunction
+        Dim clsGetColumns As New RFunction
+        Dim clsAddData As New RFunction
+        Dim clsGetData As New RFunction
+        Dim clsAddModels As New RFunction
+        Dim clsGetModels As New RFunction
+        Dim clsDataList As New RFunction
 
         If bIsAssigned Then
             Return (strAssignTo)
@@ -64,7 +73,7 @@ Public Class RFunction
 
         For i = 0 To clsParameters.Count - 1
             If i > 0 Then
-                strTemp = strTemp & ","
+                strTemp = strTemp & ", "
             End If
             strTemp = strTemp & clsParameters(i).ToScript(strScript)
         Next
@@ -76,19 +85,43 @@ Public Class RFunction
             strScript = strScript & strAssignTo & " <- " & strTemp & vbCrLf
             If Not strAssignToDataFrame = "" Then
                 If Not strAssignToColumn = "" Then
-                    strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data(data_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ", col_name = " & Chr(34) & strAssignToColumn & Chr(34) & ", col_data = " & strAssignTo & ")" & vbCrLf
-                    strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_column_from_data(data_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ", col_name = " & Chr(34) & strAssignToColumn & Chr(34) & ")"
+                    clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+                    clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                    clsAddColumns.AddParameter("col_data", strAssignTo)
+                    strScript = strScript & clsAddColumns.ToScript() & vbCrLf
+
+                    clsGetColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+                    clsGetColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsGetColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                    strAssignTo = clsGetColumns.ToScript()
+
                     bIsAssigned = True
                     bToBeAssigned = False
                 Else
-                    strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$import_data(data_tables = list(" & strAssignToDataFrame & "=" & strAssignTo & "))" & vbCrLf
-                    strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_data_frame(data_name = " & Chr(34) & strAssignToDataFrame & Chr(34) & ")"
+                    clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+                    clsDataList.SetRCommand("list")
+                    clsDataList.AddParameter(strAssignToDataFrame, strAssignTo)
+                    clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList)
+                    strScript = strScript & clsAddData.ToScript() & vbCrLf
+
+                    clsGetData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+                    clsGetData.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    strAssignTo = clsGetData.ToScript()
+
                     bIsAssigned = True
                     bToBeAssigned = False
                 End If
             ElseIf Not strAssignToModel = "" Then
-                strScript = strScript & frmMain.clsRLink.strInstatDataObject & "$add_model(model_name = " & Chr(34) & strAssignToModel & Chr(34) & ", model = " & strAssignTo & ")" & vbCrLf
-                strAssignTo = frmMain.clsRLink.strInstatDataObject & "$get_models( model_name = " & Chr(34) & strAssignToModel & Chr(34) & ")"
+                clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
+                clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
+                clsAddModels.AddParameter("model", strAssignTo)
+                strScript = strScript & clsAddModels.ToScript() & vbCrLf
+
+                clsGetModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
+                clsGetModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
+                strAssignTo = clsGetModels.ToScript()
+
                 bIsAssigned = True
                 bToBeAssigned = False
             End If

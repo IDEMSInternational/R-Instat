@@ -36,6 +36,7 @@ Public Class ROperator
     Public bToBeAssigned As Boolean = False
     Public bIsAssigned As Boolean = False
     Public bForceIncludeOperation As Boolean = True
+    Public bAssignToIsPrefix As Boolean = False
 
     Public Sub SetOperation(strTemp As String, Optional bBracketsTemp As Boolean = True)
         strOperation = strTemp
@@ -43,7 +44,7 @@ Public Class ROperator
         bIsAssigned = False
     End Sub
 
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "")
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional bAssignToIsPrefix As Boolean = False)
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
