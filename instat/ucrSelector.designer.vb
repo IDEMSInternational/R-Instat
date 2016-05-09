@@ -35,12 +35,13 @@ Partial Class ucrSelector
         '
         Me.lstAvailableVariable.Activation = System.Windows.Forms.ItemActivation.TwoClick
         Me.lstAvailableVariable.ContextMenuStrip = Me.SelectionMenuStrip
+        Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lstAvailableVariable.GridLines = True
         Me.lstAvailableVariable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.lstAvailableVariable.HideSelection = False
-        Me.lstAvailableVariable.Location = New System.Drawing.Point(3, 3)
+        Me.lstAvailableVariable.Location = New System.Drawing.Point(0, 0)
         Me.lstAvailableVariable.Name = "lstAvailableVariable"
-        Me.lstAvailableVariable.Size = New System.Drawing.Size(139, 121)
+        Me.lstAvailableVariable.Size = New System.Drawing.Size(120, 130)
         Me.lstAvailableVariable.TabIndex = 83
         Me.lstAvailableVariable.UseCompatibleStateImageBehavior = False
         Me.lstAvailableVariable.View = System.Windows.Forms.View.Details
@@ -49,7 +50,7 @@ Partial Class ucrSelector
         '
         Me.SelectionMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddSelectedToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.ClearSelectionToolStripMenuItem})
         Me.SelectionMenuStrip.Name = "SelectionMenuStrip"
-        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 92)
+        Me.SelectionMenuStrip.Size = New System.Drawing.Size(153, 70)
         '
         'AddSelectedToolStripMenuItem
         '
@@ -77,8 +78,9 @@ Partial Class ucrSelector
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lstAvailableVariable)
+        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrSelector"
-        Me.Size = New System.Drawing.Size(145, 127)
+        Me.Size = New System.Drawing.Size(120, 130)
         Me.SelectionMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
 

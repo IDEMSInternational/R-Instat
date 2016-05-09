@@ -71,7 +71,7 @@ Public Class ucrInput
         SetDefaultName()
     End Sub
 
-    Public Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
+    Public Overridable Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
         ucrDataFrameSelector = ucrNewSelector
         If Not bUserTyped Then
             SetDefaultName()

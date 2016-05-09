@@ -29,7 +29,7 @@ Partial Class ucrSaveModel
         'chkSaveModel
         '
         Me.chkSaveModel.AutoSize = True
-        Me.chkSaveModel.Location = New System.Drawing.Point(3, 5)
+        Me.chkSaveModel.Location = New System.Drawing.Point(0, 3)
         Me.chkSaveModel.Name = "chkSaveModel"
         Me.chkSaveModel.Size = New System.Drawing.Size(83, 17)
         Me.chkSaveModel.TabIndex = 1
@@ -39,10 +39,10 @@ Partial Class ucrSaveModel
         '
         'ucrInputModelName
         '
-        Me.ucrInputModelName.Location = New System.Drawing.Point(86, 3)
+        Me.ucrInputModelName.Location = New System.Drawing.Point(86, 0)
         Me.ucrInputModelName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrInputModelName.Name = "ucrInputModelName"
-        Me.ucrInputModelName.Size = New System.Drawing.Size(176, 25)
+        Me.ucrInputModelName.Size = New System.Drawing.Size(180, 20)
         Me.ucrInputModelName.TabIndex = 0
         '
         'ucrSaveModel
@@ -52,7 +52,7 @@ Partial Class ucrSaveModel
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrInputModelName)
         Me.Name = "ucrSaveModel"
-        Me.Size = New System.Drawing.Size(265, 27)
+        Me.Size = New System.Drawing.Size(265, 20)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
