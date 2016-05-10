@@ -24,6 +24,7 @@ Public Class frmEditor
     'Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Private clsAppendVariablesMetaData As New RFunction
+    Private clsInsertColumns As New RFunction
     Private clsColumnNames As New RFunction
     Public lstColumnNames As String()
 
@@ -51,13 +52,32 @@ Public Class frmEditor
     Private Sub SetRFunctions()
         clsAppendVariablesMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+        clsInsertColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         UpdateRFunctionDataFrameParameters()
     End Sub
 
-    Private Sub insertCol_Click(sender As Object, e As EventArgs) Handles mnuInsertCol.Click
-        Dim strSctipt As String
-        strSctipt = frmMain.clsRLink.strInstatDataObject & "$insert_column_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_data = " & "c(), start_pos = " & grdData.CurrentWorksheet.SelectionRange.Col + 1 & ",number_cols =" & grdData.CurrentWorksheet.SelectionRange.Cols & ")"
-        frmMain.clsRLink.RunScript(strSctipt)
+    Private Sub mnuInsertColsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertColsBefore.Click
+        clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(True))
+        clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
+        clsInsertColumns.AddParameter("before", "TRUE")
+        'TODO This should be an option in dialog
+        clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+        clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+        frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) Before")
+    End Sub
+
+    Private Sub mnuInsertColsAfter_Click(sender As Object, e As EventArgs) Handles mnuInsertColsAfter.Click
+        clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(False))
+        clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
+        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+            clsInsertColumns.AddParameter("before", "FALSE")
+        Else
+            clsInsertColumns.RemoveParameterByName("before")
+        End If
+        'TODO This should be an option in dialog
+        clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+        clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+        frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
     End Sub
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
@@ -307,6 +327,14 @@ Public Class frmEditor
         Return cols
     End Function
 
+    Private Function SelectedColumnPosition(bFirstNotLast As Boolean)
+        If bFirstNotLast Then
+            Return Chr(34) & lstColumnNames(grdData.CurrentWorksheet.SelectionRange.Col) & Chr(34)
+        Else
+            Return Chr(34) & lstColumnNames(grdData.CurrentWorksheet.SelectionRange.EndCol) & Chr(34)
+        End If
+    End Function
+
     Private Sub columnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles columnFilterToolStripMenuItem.Click
         dlgRestrict.ShowDialog()
     End Sub
@@ -319,6 +347,7 @@ Public Class frmEditor
         If grdCurrSheet IsNot Nothing Then
             clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsColumnNames.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsInsertColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
         End If
     End Sub
 End Class
