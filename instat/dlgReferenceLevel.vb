@@ -34,7 +34,7 @@ Public Class dlgReferenceLevel
         ucrBase.iHelpTopicID = 38
         ucrReceiverReferenceLevels.Selector = ucrSelectorForReferenceLevels
         ucrReceiverReferenceLevels.SetMeAsReceiver()
-        ucrReceiverReferenceLevels.SetDataType("factor")
+        ucrReceiverReferenceLevels.SetIncludedDataTypes({"factor"})
         ucrFactorReferenceLevels.SetReceiver(ucrReceiverReferenceLevels)
         ucrFactorReferenceLevels.SetAsSingleSelector()
 

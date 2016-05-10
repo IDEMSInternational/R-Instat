@@ -51,9 +51,10 @@ Public Class clsGridLink
             For i = 0 To lstDataNames.Length - 1
                 strDataName = lstDataNames.AsCharacter(i)
                 If (bGrdDataExists And frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_changed(data_name = " & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
-                    frmMain.clsRLink.clsEngine.Evaluate(strDataName & "<-" & frmMain.clsRLink.strInstatDataObject & "$get_data_frame(" & Chr(34) & strDataName & Chr(34) & ", convert_to_character = TRUE)")
+                    frmMain.clsRLink.clsEngine.Evaluate(strDataName & "<-" & frmMain.clsRLink.strInstatDataObject & "$get_data_frame(" & Chr(34) & strDataName & Chr(34) & ", convert_to_character = TRUE, include_hidden_columns = FALSE)")
                     dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(strDataName).AsCharacterMatrix
-                    FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True)
+                    FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i)
+                    frmEditor.lstColumnNames = dfTemp.ColumnNames()
                     frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_data_frames_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
                 End If
                 If (bGrdVariablesMetadataExists And frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
@@ -145,19 +146,24 @@ Public Class clsGridLink
         UpdateGrids()
     End Sub
 
-    Public Sub FillSheet(dfTemp As CharacterMatrix, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False)
+    Public Sub FillSheet(dfTemp As CharacterMatrix, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1)
         Dim bFoundWorksheet As Boolean = False
         Dim tempWorkSheet As Worksheet
         Dim fillWorkSheet As Worksheet
         Dim rngDataRange As RangePosition
         Dim vecColumnDataTypes As CharacterVector
         Dim clsGetVarMetaFunc As New RFunction
+        Dim iCurrPosition As Integer
+        Dim iCount As Integer
 
+        iCount = 0
         For Each tempWorkSheet In grdCurr.Worksheets
             If tempWorkSheet.Name = strName Then
                 bFoundWorksheet = True
+                iCurrPosition = iCount
                 Exit For
             End If
+            iCount = iCount + 1
         Next
 
         If bFoundWorksheet Then
@@ -165,6 +171,11 @@ Public Class clsGridLink
         Else
             fillWorkSheet = grdCurr.CreateWorksheet(strName)
             grdCurr.AddWorksheet(fillWorkSheet)
+            iCurrPosition = grdCurr.Worksheets.Count - 1
+        End If
+
+        If iNewPosition <> -1 AndAlso iNewPosition <> iCurrPosition AndAlso iNewPosition < grdCurr.Worksheets.Count Then
+            grdCurr.MoveWorksheet(fillWorkSheet, iNewPosition)
         End If
 
         fillWorkSheet.Rows = dfTemp.RowCount
@@ -201,12 +212,8 @@ Public Class clsGridLink
                             fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (D)"
                         Case "logical"
                             fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (l)"
-                        Case "numeric"
-                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (n)"
-                        Case "integer"
-                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (n)"
                         Case Else
-                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (U)"
+                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
                     End Select
                 Next
             Else

@@ -71,11 +71,11 @@ Public Class dlgPolynomials
 
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
         ucrReceiverPolynomial.SetMeAsReceiver()
-        ucrReceiverPolynomial.SetDataType("numeric")
+        ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
     End Sub
 
     Private Sub ucrInputPolynomial_NameChanged() Handles ucrInputPolynomial.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPolynomial.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPolynomial.GetText)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPolynomial.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPolynomial.GetText, bAssignToIsPrefix:=True)
     End Sub
 
 

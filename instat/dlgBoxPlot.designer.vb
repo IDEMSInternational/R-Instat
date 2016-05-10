@@ -97,6 +97,7 @@ Partial Class dlgBoxplot
         'ucrSecondFactorReceiver
         '
         Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(295, 231)
+        Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
         Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(106, 26)
@@ -105,13 +106,15 @@ Partial Class dlgBoxplot
         'ucrSelectorBoxPlot
         '
         Me.ucrSelectorBoxPlot.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorBoxPlot.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorBoxPlot.Name = "ucrSelectorBoxPlot"
-        Me.ucrSelectorBoxPlot.Size = New System.Drawing.Size(230, 177)
+        Me.ucrSelectorBoxPlot.Size = New System.Drawing.Size(230, 190)
         Me.ucrSelectorBoxPlot.TabIndex = 0
         '
         'ucrByFactorsReceiver
         '
         Me.ucrByFactorsReceiver.Location = New System.Drawing.Point(295, 184)
+        Me.ucrByFactorsReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrByFactorsReceiver.Name = "ucrByFactorsReceiver"
         Me.ucrByFactorsReceiver.Selector = Nothing
         Me.ucrByFactorsReceiver.Size = New System.Drawing.Size(106, 26)
@@ -128,14 +131,14 @@ Partial Class dlgBoxplot
         '
         Me.ucrSaveBoxplot.Location = New System.Drawing.Point(10, 230)
         Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
-        Me.ucrSaveBoxplot.Size = New System.Drawing.Size(263, 27)
+        Me.ucrSaveBoxplot.Size = New System.Drawing.Size(263, 32)
         Me.ucrSaveBoxplot.TabIndex = 10
         '
         'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(436, 372)
+        Me.ClientSize = New System.Drawing.Size(435, 365)
         Me.Controls.Add(Me.ucrSaveBoxplot)
         Me.Controls.Add(Me.ucrVariablesAsFactorForBoxplot)
         Me.Controls.Add(Me.chkHorizontalBoxplot)

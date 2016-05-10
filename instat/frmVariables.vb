@@ -73,7 +73,7 @@ Public Class frmVariables
             End If
         ElseIf grdCurrSheet.ColumnHeaders(e.Cell.Column).Text = strDecimalLabel Then
             If Integer.TryParse(e.NewData, 0) AndAlso e.NewData >= 0 Then
-                strScript = frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata(data_name =" & Chr(34) & grdCurrSheet.Name & Chr(34) & ",col_name = " & Chr(34) & strColumn & Chr(34) & ",property=" & Chr(34) & strDecimalLabel & Chr(34) & ",new_val=" & e.NewData & ")"
+                strScript = frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata(data_name =" & Chr(34) & grdCurrSheet.Name & Chr(34) & ",col_names = " & Chr(34) & strColumn & Chr(34) & ",property=" & Chr(34) & strDecimalLabel & Chr(34) & ",new_val=" & e.NewData & ")"
                 strComment = "Edited variables metadata value"
                 bRunScript = True
             Else
