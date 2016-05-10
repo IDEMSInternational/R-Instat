@@ -364,9 +364,9 @@ instat_object$set("public", "set_metadata_changed", function(data_name = "", new
 } 
 )
 
-instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column) {
-  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden, before = before, adjacent_column = adjacent_column)
-  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column)
+instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols) {
+  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols)
+  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols)
 }
 )
 
@@ -476,6 +476,7 @@ instat_object$set("public", "get_column_names", function(data_name, as_list = FA
 }
 )
 
+#TODO delete and replace with add_columns_to_data
 instat_object$set("public", "insert_column_in_data", function(data_name, col_data =c(), start_pos, number_cols) {
   self$get_data_objects(data_name)$insert_column_in_data(col_data = col_data, start_pos = start_pos, number_cols = number_cols )
 }
@@ -499,8 +500,8 @@ instat_object$set("public", "insert_row_in_data", function(data_name, start_pos,
 }
 )
 
-instat_object$set("public", "get_dataframe_length", function(data_name) {
-  self$get_data_objects(data_name)$get_dataframe_length()
+instat_object$set("public", "get_data_frame_length", function(data_name) {
+  self$get_data_objects(data_name)$get_data_frame_length()
 }
 )
 

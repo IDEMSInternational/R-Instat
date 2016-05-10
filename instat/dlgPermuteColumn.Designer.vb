@@ -39,7 +39,7 @@ Partial Class dlgPermuteColumn
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(249, 12)
+        Me.lblSelected.Location = New System.Drawing.Point(249, 79)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
         Me.lblSelected.TabIndex = 1
@@ -49,7 +49,7 @@ Partial Class dlgPermuteColumn
         'chkSetSeed
         '
         Me.chkSetSeed.AutoSize = True
-        Me.chkSetSeed.Location = New System.Drawing.Point(252, 60)
+        Me.chkSetSeed.Location = New System.Drawing.Point(252, 126)
         Me.chkSetSeed.Name = "chkSetSeed"
         Me.chkSetSeed.Size = New System.Drawing.Size(70, 17)
         Me.chkSetSeed.TabIndex = 3
@@ -60,7 +60,7 @@ Partial Class dlgPermuteColumn
         'lblNumberOfPermColumns
         '
         Me.lblNumberOfPermColumns.AutoSize = True
-        Me.lblNumberOfPermColumns.Location = New System.Drawing.Point(12, 198)
+        Me.lblNumberOfPermColumns.Location = New System.Drawing.Point(12, 201)
         Me.lblNumberOfPermColumns.Name = "lblNumberOfPermColumns"
         Me.lblNumberOfPermColumns.Size = New System.Drawing.Size(158, 13)
         Me.lblNumberOfPermColumns.TabIndex = 5
@@ -69,7 +69,7 @@ Partial Class dlgPermuteColumn
         '
         'nudNumberOfPerColumns
         '
-        Me.nudNumberOfPerColumns.Location = New System.Drawing.Point(182, 195)
+        Me.nudNumberOfPerColumns.Location = New System.Drawing.Point(182, 198)
         Me.nudNumberOfPerColumns.Name = "nudNumberOfPerColumns"
         Me.nudNumberOfPerColumns.Size = New System.Drawing.Size(61, 20)
         Me.nudNumberOfPerColumns.TabIndex = 6
@@ -77,7 +77,7 @@ Partial Class dlgPermuteColumn
         '
         'nudSetSeed
         '
-        Me.nudSetSeed.Location = New System.Drawing.Point(252, 83)
+        Me.nudSetSeed.Location = New System.Drawing.Point(252, 149)
         Me.nudSetSeed.Name = "nudSetSeed"
         Me.nudSetSeed.Size = New System.Drawing.Size(61, 20)
         Me.nudSetSeed.TabIndex = 4
@@ -95,14 +95,15 @@ Partial Class dlgPermuteColumn
         '
         'ucrInputPermuteRows
         '
-        Me.ucrInputPermuteRows.Location = New System.Drawing.Point(116, 221)
+        Me.ucrInputPermuteRows.Location = New System.Drawing.Point(116, 223)
         Me.ucrInputPermuteRows.Name = "ucrInputPermuteRows"
         Me.ucrInputPermuteRows.Size = New System.Drawing.Size(137, 25)
         Me.ucrInputPermuteRows.TabIndex = 8
         '
         'ucrReceiverPermuteRows
         '
-        Me.ucrReceiverPermuteRows.Location = New System.Drawing.Point(249, 28)
+        Me.ucrReceiverPermuteRows.Location = New System.Drawing.Point(249, 95)
+        Me.ucrReceiverPermuteRows.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPermuteRows.Name = "ucrReceiverPermuteRows"
         Me.ucrReceiverPermuteRows.Selector = Nothing
         Me.ucrReceiverPermuteRows.Size = New System.Drawing.Size(106, 26)
@@ -110,23 +111,24 @@ Partial Class dlgPermuteColumn
         '
         'ucrPermuteRowsSelector
         '
-        Me.ucrPermuteRowsSelector.Location = New System.Drawing.Point(12, 12)
+        Me.ucrPermuteRowsSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrPermuteRowsSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrPermuteRowsSelector.Name = "ucrPermuteRowsSelector"
         Me.ucrPermuteRowsSelector.Size = New System.Drawing.Size(231, 179)
         Me.ucrPermuteRowsSelector.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 252)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 252)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(404, 53)
         Me.ucrBase.TabIndex = 9
         '
         'dlgPermuteColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 309)
+        Me.ClientSize = New System.Drawing.Size(419, 317)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputPermuteRows)
         Me.Controls.Add(Me.nudSetSeed)
