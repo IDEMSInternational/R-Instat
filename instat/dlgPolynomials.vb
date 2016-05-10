@@ -45,8 +45,7 @@ Public Class dlgPolynomials
     Private Sub SetDefaults()
         ucrInputPolynomial.SetPrefix("Poly")
         rdoSimple.Checked = True
-        rdoCentered.Checked = False
-        rdoOrthogonal.Checked = False
+        XParameter()
         nudDegree.Value = 2
         ucrSelectorForPolynomial.Reset()
         ucrSelectorForPolynomial.Focus()
@@ -91,6 +90,10 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub grpType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSimple.CheckedChanged, rdoCentered.CheckedChanged, rdoOrthogonal.CheckedChanged
+        XParameter()
+    End Sub
+
+    Private Sub XParameter()
         If rdoSimple.Checked Then
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
             ucrBase.clsRsyntax.AddParameter("raw", "TRUE")
@@ -105,10 +108,8 @@ Public Class dlgPolynomials
 
         Else
             ucrBase.clsRsyntax.RemoveParameter("raw")
-
         End If
     End Sub
-
     Private Sub nudDegree_TextChanged(sender As Object, e As EventArgs) Handles nudDegree.TextChanged
         ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Value)
         TestOKEnabled()
