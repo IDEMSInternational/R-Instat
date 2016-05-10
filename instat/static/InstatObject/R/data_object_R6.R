@@ -216,24 +216,30 @@ data_object$set("public", "get_data", function() {
 }
 )
 
-# TODO
-data_object$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column) {
+data_object$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols) {
   
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
-  if(is.matrix(col_data) || is.data.frame(col_data)) {
-    num_cols = ncol(col_data)
+  if(missing(num_cols)) {
+    if(!missing(col_data) && (is.matrix(col_data) || is.data.frame(col_data))) {
+      num_cols = ncol(col_data)
+    }
+    else num_cols = 1
   }
-  else num_cols = 1
-  
+  else {
+    if(missing(col_data)) col_data = replicate(num_cols, rep(NA, self$get_data_frame_length()))
+    else {
+      if(length(col_data) != 1) stop("col_data must be a vector/matrix/data.frame of correct length or a single value to be repeated.")
+      col_data = replicate(num_cols, rep(col_data, self$get_data_frame_length()))
+    }
+  }
   if( (length(col_name) != 1) && (length(col_name) != num_cols) ) stop("col_name must be a character or character vector with the same length as the number of new columns")
   
   if(use_col_name_as_prefix && length(col_name) > 1) {
     stop("Cannot use col_name as prefix when col_name is a vector.")
   }
   
-  if(!use_col_name_as_prefix && length(col_name) != num_cols) {
-    warning("col_name will be used as a prefix for new columns since it is not a character vector.")
+  if(length(col_name) != num_cols) {
     use_col_name_as_prefix = TRUE
   }
   
@@ -251,9 +257,11 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
   }
 
   for(i in 1:num_cols) {
-    if(num_cols == 1) curr_col = col_data
-    else curr_col = unlist(col_data[,i])
-    
+    if(!missing(col_data)) {
+      if(num_cols == 1) curr_col = col_data
+      else curr_col = unlist(col_data[,i])
+    }
+
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
     
@@ -490,7 +498,7 @@ data_object$set("public", "get_next_default_column_name", function(prefix) {
 } 
 )
 
-#TODO
+#TODO delete and replace with add_columns_to_data
 data_object$set("public", "insert_column_in_data", function(col_data =c(), start_pos = (length(names(data))+1), number_cols = 1) {
   if (start_pos <= 0) stop("You cannot put a column into the position less or equal to zero.")
   if (start_pos %% 1 != 0) stop("start_pos value should be an integer.")
@@ -608,7 +616,7 @@ data_object$set("public", "insert_row_in_data", function(start_pos = (nrow(priva
 }
 )
 
-data_object$set("public", "get_dataframe_length", function() {
+data_object$set("public", "get_data_frame_length", function() {
   return(nrow(private$data))
 }
 )
