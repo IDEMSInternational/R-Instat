@@ -217,23 +217,39 @@ data_object$set("public", "get_data", function() {
 )
 
 # TODO
-data_object$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix, hidden = FALSE) {
+data_object$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column) {
   
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(is.matrix(col_data) || is.data.frame(col_data)) {
     num_cols = ncol(col_data)
-    if( (length(col_name) != 1) && (length(col_name) != num_cols) ) stop("col_name must be a character or character vector with the same length as the number of new columns")
   }
-  else {
-    use_col_name_as_prefix = FALSE
-    num_cols = 1
+  else num_cols = 1
+  
+  if( (length(col_name) != 1) && (length(col_name) != num_cols) ) stop("col_name must be a character or character vector with the same length as the number of new columns")
+  
+  if(use_col_name_as_prefix && length(col_name) > 1) {
+    stop("Cannot use col_name as prefix when col_name is a vector.")
   }
   
-  if(missing(use_col_name_as_prefix)) {
-    if(num_cols > 1 && length(col_name) == num_cols) use_col_name_as_prefix = FALSE
-    else use_col_name_as_prefix = TRUE
+  if(!use_col_name_as_prefix && length(col_name) != num_cols) {
+    warning("col_name will be used as a prefix for new columns since it is not a character vector.")
+    use_col_name_as_prefix = TRUE
   }
+  
+  replaced = FALSE
+  previous_length = self$get_column_count()
+  if(!missing(adjacent_column) && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
+  
+  if(before) {
+    if(!missing(adjacent_column)) ind = which(self$get_column_names() == adjacent_column)
+    else ind = 1
+  }
+  else {
+    if(!missing(adjacent_column)) ind = which(self$get_column_names() == adjacent_column) + 1
+    else ind = previous_length + 1
+  }
+
   for(i in 1:num_cols) {
     if(num_cols == 1) curr_col = col_data
     else curr_col = unlist(col_data[,i])
@@ -244,6 +260,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     if(curr_col_name %in% names(private$data)) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
       self$append_to_changes(list(Replaced_col, curr_col_name))
+      replaced = TRUE
     }
     
     else self$append_to_changes(list(Added_col, curr_col_name))
@@ -252,6 +269,13 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     self$data_changed <- TRUE
     self$append_to_variables_metadata(curr_col_name, is_hidden_label, hidden)
     self$variables_metadata_changed <- TRUE
+  }
+  if(!replaced) {
+    if(before && ind == 1) self$set_data(self$get_data_frame()[ , c((previous_length + 1):(previous_length + num_cols), 1:previous_length)])
+    else if(before || ind != previous_length + 1) self$set_data(self$get_data_frame()[ , c(1:(ind - 1), (previous_length + 1):(previous_length + num_cols), ind:previous_length)])
+  }
+  else {
+    if(!missing(before) || !missing(adjacent_column)) warning("Cannot reposition when one or move new columns replaces an old column.")
   }
 }
 )
@@ -479,7 +503,7 @@ data_object$set("public", "insert_column_in_data", function(col_data =c(), start
   for(j in 1:number_cols){
     col_name <- self$get_next_default_column_name("X") #change x 
     assign(col_name, col_data)
-    private$data[, col_name] <- col_data
+    self$add_columns_to_data(col_name, col_data)
   }
   if(start_pos==1){
     self$set_data(cbind(private$data[(ncol(private$data)-number_cols+1): ncol(private$data)], private$data[(start_pos):(ncol(private$data)-number_cols)]))
@@ -537,7 +561,7 @@ data_object$set("public", "insert_column_in_data", function(col_data =c(), start
 # }
 # )
 
-data_object$set("public", "order_columns_in_data", function(col_order) {
+data_object$set("public", "reorder_columns_in_data", function(col_order) {
   if (ncol(private$data) != length(col_order)) stop("Columns to order should be same as columns in the data.")
   
   if(is.numeric(col_order)) {
