@@ -148,12 +148,5 @@ Public Class dlgUnstack
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrColumnToUnstackReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrColumnToUnstackReceiver.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrFactorToUnstackReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorToUnstackReceiver.SelectionChanged
-
-    End Sub
 End Class
 
