@@ -43,12 +43,7 @@ Public Class dlgSplitText
         ucrInputColumnsIntoText.SetItemsTypeAsColumns()
         ucrInputColumnsIntoText.SetDefaultTypeAsColumn()
         ucrInputColumnsIntoText.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
-        ucrInputPattern.cboInput.Items.Add("Whitespace")
-        ucrInputPattern.cboInput.Items.Add("Period")
-        ucrInputPattern.cboInput.Items.Add("Hyphen")
-        ucrInputPattern.cboInput.Items.Add("Underscore")
-
-
+        ucrInputPattern.AddItems({"Whitespace", ".", "-", "_"})
     End Sub
 
     Private Sub SetDefaults()
@@ -69,16 +64,14 @@ Public Class dlgSplitText
         Select Case ucrInputPattern.GetText
             Case "Whitespace"
                 ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & " " & Chr(34))
-            Case "Hyphen"
-                ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & "-" & Chr(34))
-            Case "Underscore"
-                ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & "_" & Chr(34))
-            Case "Period"
-                ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & "." & Chr(34))
-
+            Case ""
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & "" & Chr(34))
+                Else
+                    ucrBase.clsRsyntax.RemoveParameter("pattern")
+                End If
             Case Else
-                ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
-
+                ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText() & Chr(34))
         End Select
 
     End Sub

@@ -42,7 +42,7 @@ Public Class dlgLabels
         ucrReceiverLabels.Selector = ucrSelectorForLabels
         ucrReceiverLabels.SetMeAsReceiver()
 
-        ucrReceiverLabels.SetDataType("factor")
+        ucrReceiverLabels.SetIncludedDataTypes({"factor"})
         ucrFactorLabels.SetReceiver(ucrReceiverLabels)
         ucrFactorLabels.SetAsViewerOnly()
         ucrFactorLabels.AddEditableColumns({"Levels"})

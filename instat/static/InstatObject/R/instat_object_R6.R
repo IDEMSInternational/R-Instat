@@ -34,6 +34,8 @@ instat_object <- R6Class("instat_object",
                     else {
                       if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
                       private$.data_objects_changed <- new_value
+                      #TODO is this behaviour we want?
+                      sapply(self$get_data_objects(), function(x) x$data_changed <- new_value)
                     }
                   }
                 )
@@ -227,34 +229,34 @@ instat_object$set("public", "get_data_objects", function(data_name) {
 }
 )
 
-instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE,...) {
+instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE,...) {
   if(!stack_data) {
     if(missing(data_name)) {
       retlist <- list()
       for ( i in (1:length(private$.data_objects)) ) {
-        retlist[[names(private$.data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character)
+        retlist[[names(private$.data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found."))
-    return(melt(self$get_data_objects(data_name)$get_data_frame(), ...))
+    return(melt(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns), ...))
   }
 }
 )
 
-instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property) { 
+instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column) { 
   if(missing(data_name)) {
     retlist <- list()
     for (curr_obj in private$.data_objects) {
-      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property)
+      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column)
     }
     return(retlist)
   }
-  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property))
+  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column))
 } 
 )
 
@@ -362,9 +364,9 @@ instat_object$set("public", "set_metadata_changed", function(data_name = "", new
 } 
 )
 
-instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix) {
-  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data)
-  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix)
+instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column) {
+  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden, before = before, adjacent_column = adjacent_column)
+  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column)
 }
 )
 
@@ -464,12 +466,12 @@ instat_object$set("public", "get_next_default_column_name", function(data_name, 
 } 
 )
 
-instat_object$set("public", "get_column_names", function(data_name, as_list = FALSE, include_type = c(), exclude_type = c()) {
+instat_object$set("public", "get_column_names", function(data_name, as_list = FALSE, include_type = c(), exclude_type = c(), include_hidden = TRUE) {
   if(missing(data_name)) {
-    return(lapply(self$get_data_objects(), function(x) x$get_column_names(include_type = include_type, exclude_type = exclude_type)))
+    return(lapply(self$get_data_objects(), function(x) x$get_column_names(include_type = include_type, exclude_type = exclude_type, include_hidden = include_hidden)))
   } 
   else {
-    return(self$get_data_objects(data_name)$get_column_names(as_list, include_type, exclude_type))
+    return(self$get_data_objects(data_name)$get_column_names(as_list, include_type, exclude_type, include_hidden = include_hidden))
   }
 }
 )
@@ -487,7 +489,7 @@ instat_object$set("public", "insert_column_in_data", function(data_name, col_dat
 # }
 # )
 
-instat_object$set("public", "order_columns_in_data", function(data_name, col_order){
+instat_object$set("public", "reorder_columns_in_data", function(data_name, col_order){
   self$get_data_objects(data_name)$order_columns_in_data(col_order = col_order)
 }
 )
@@ -541,8 +543,8 @@ instat_object$set("public", "convert_column_to_type", function(data_name, col_na
 } 
 )
 
-instat_object$set("public", "append_to_variables_metadata", function(data_name, col_name, property, new_val) {
-  self$get_data_objects(data_name)$append_to_variables_metadata(col_name, property, new_val)
+instat_object$set("public", "append_to_variables_metadata", function(data_name, col_names, property, new_val) {
+  self$get_data_objects(data_name)$append_to_variables_metadata(col_names, property, new_val)
 } 
 )
 
@@ -565,11 +567,11 @@ instat_object$set("public", "append_to_metadata", function(property, new_val) {
 } 
 )
 
-instat_object$set("public", "order_dataframes", function(data_frames_order) {
+instat_object$set("public", "reorder_dataframes", function(data_frames_order) {
   if(length(data_frames_order) != length(names(private$.data_objects))) stop("number data frames to order should be equal to number of dataframes in the object")
   if(!setequal(data_frames_order,names(private$.data_objects))) stop("data_frames_order must be a permutation of the dataframe names.")
 
-  self$set_data_objects(data_objects[names(data_frames_order)])
+  self$set_data_objects(private$.data_objects[data_frames_order])
   self$data_objects_changed <- TRUE
 } 
 )
@@ -606,5 +608,13 @@ instat_object$set("public", "reorder_factor_levels", function(data_name, col_nam
 
 instat_object$set("public","get_data_type", function(data_name, col_name) {
   self$get_data_objects(data_name)$get_data_type(col_name = col_name)
+} 
+)
+
+instat_object$set("public","copy_data_frame", function(data_name, new_name) {
+  curr_obj = self$get_data_objects(data_name)$clone(deep = TRUE)
+  
+  if(missing(new_name)) new_name = next_default_item(data_name, self$get_data_names())
+  self$append_data_object(new_name, curr_obj)
 } 
 )

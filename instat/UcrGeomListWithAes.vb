@@ -38,6 +38,8 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam5.Selector = UcrSelector
         ucrReceiverParam6.Selector = UcrSelector
         ucrReceiverParam7.Selector = UcrSelector
+        ucrReceiverParam8.Selector = UcrSelector
+        ucrReceiverParam9.Selector = UcrSelector
         ucrReceiverParam1.SetMeAsReceiver()
     End Sub
 
@@ -125,7 +127,15 @@ Public Class UcrGeomListWithParameters
             For i = 0 To (clsCurrGeom.clsGgParameters.Count - 1)
                 lstGgParameterLabels(i).Text = clsCurrGeom.clsGgParameters(i).strGgParameterName
                 lstCurrArguments.Add(clsCurrGeom.clsGgParameters(i).strGgParameterName)
+
+                If clsCurrGeom.clsGgParameters(i).strIncludedDataTypes IsNot Nothing Then
+                    lstGgParameterUcr(i).SetIncludedDataTypes(clsCurrGeom.clsGgParameters(i).strIncludedDataTypes)
+
+                ElseIf clsCurrGeom.clsGgParameters(i).strExcludedDataTypes IsNot Nothing Then
+                    lstGgParameterUcr(i).SetExcludedDataTypes(clsCurrGeom.clsGgParameters(i).strExcludedDataTypes)
+                End If
             Next
+
         End If
     End Sub
 
@@ -186,6 +196,21 @@ Public Class UcrGeomListWithParameters
             clsRaesFunction.AddParameter(lstCurrArguments(6), ucrReceiverParam7.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(6))
+        End If
+    End Sub
+    Private Sub ucrReceiverParam8_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam8.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
+        If Not ucrReceiverParam8.IsEmpty Then
+            clsRaesFunction.AddParameter(lstCurrArguments(7), ucrReceiverParam8.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName(lstCurrArguments(7))
+        End If
+    End Sub
+
+    Private Sub ucrReceiverParam9_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam9.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
+        If Not ucrReceiverParam9.IsEmpty Then
+            clsRaesFunction.AddParameter(lstCurrArguments(8), ucrReceiverParam9.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName(lstCurrArguments(8))
         End If
     End Sub
 
