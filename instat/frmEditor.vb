@@ -24,10 +24,13 @@ Public Class frmEditor
     'Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Private clsAppendVariablesMetaData As New RFunction
+    Private clsUnhideAllColumns As New RFunction
     Private clsInsertColumns As New RFunction
     Private clsColumnNames As New RFunction
     Private clsDeleteColumns As New RFunction
     Private clsConvertTo As New RFunction
+    Private clsInsertRows As New RFunction
+    Private clsDeleteRows As New RFunction
     Public lstColumnNames As String()
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -57,6 +60,9 @@ Public Class frmEditor
         clsInsertColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsDeleteColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
         clsConvertTo.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsInsertRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
+        clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
+        clsUnhideAllColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unhide_all_columns")
         UpdateRFunctionDataFrameParameters()
     End Sub
 
@@ -102,14 +108,12 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuUnhideColumns_Click(sender As Object, e As EventArgs) Handles mnuUnhideColumns.Click
+        dlgHideShowColumns.ShowDialog()
         'grdData.DoAction(New unvell.ReoGrid.Actions.UnhideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
     End Sub
 
     Private Sub mnuUnhideAllColumns_Click(sender As Object, e As EventArgs) Handles mnuUnhideAllColumns.Click
-        clsAppendVariablesMetaData.AddParameter("col_names", clsRFunctionParameter:=clsColumnNames)
-        clsAppendVariablesMetaData.AddParameter("property", "is_hidden_label")
-        clsAppendVariablesMetaData.AddParameter("new_val", "FALSE")
-        frmMain.clsRLink.RunScript(clsAppendVariablesMetaData.ToScript(), strComment:="Unhide all columns")
+        frmMain.clsRLink.RunScript(clsUnhideAllColumns.ToScript(), strComment:="Right click menu: Unhide all columns")
     End Sub
 
     'Private Sub groupColumnsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles groupColumnsToolStripMenuItem1.Click
@@ -193,15 +197,15 @@ Public Class frmEditor
     'End Sub
 
     Private Sub mnuinsertRow_Click(sender As Object, e As EventArgs) Handles mnuInsertRow.Click
-        Dim strSctipt As String
-        strSctipt = frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",row_data = " & "c(), start_pos = " & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",number_rows =" & grdData.CurrentWorksheet.SelectionRange.Rows & ")"
-        frmMain.clsRLink.RunScript(strSctipt)
+        clsInsertRows.AddParameter("start_pos", grdData.CurrentWorksheet.SelectionRange.Row + 1)
+        clsInsertRows.AddParameter("number_rows", grdData.CurrentWorksheet.SelectionRange.Rows)
+        frmMain.clsRLink.RunScript(clsInsertRows.ToScript(), strComment:="Right Click menu: Insert row(s)")
     End Sub
 
     Private Sub mnuDeleteRows_Click(sender As Object, e As EventArgs) Handles mnuDeleteRows.Click
-        Dim strSctipt As String
-        strSctipt = frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", start_pos = " & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",num_rows =" & grdData.CurrentWorksheet.SelectionRange.Rows & ")"
-        frmMain.clsRLink.RunScript(strSctipt)
+        clsDeleteRows.AddParameter("start_pos", grdData.CurrentWorksheet.SelectionRange.Row + 1)
+        clsDeleteRows.AddParameter("num_rows", grdData.CurrentWorksheet.SelectionRange.Rows)
+        frmMain.clsRLink.RunScript(clsDeleteRows.ToScript(), strComment:="Right Click menu: Delete row(s)")
     End Sub
 
     'Private Sub resetToDefaultHeightToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles resetToDefaultHeightToolStripMenuItem.Click
@@ -220,7 +224,7 @@ Public Class frmEditor
     '    Try
     '        grdData.CurrentWorksheet.Cut()
     '    Catch generatedExceptionName As unvell.ReoGrid.RangeIntersectionException
-    '        MessageBox.Show("Cannot cut a range that is a part of another merged cell.")
+    '        MessageBox.Show("Cannot cut a range that Is a part Of another merged cell.")
     '    Catch
     '        MessageBox.Show("We can't to do that for selected range.")
     '    End Try
@@ -372,6 +376,9 @@ Public Class frmEditor
             clsInsertColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsDeleteColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsConvertTo.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsInsertRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsDeleteRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
         End If
     End Sub
 End Class

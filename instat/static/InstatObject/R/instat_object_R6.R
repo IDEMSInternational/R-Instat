@@ -620,3 +620,15 @@ instat_object$set("public","copy_data_frame", function(data_name, new_name) {
   self$append_data_object(new_name, curr_obj)
 } 
 )
+
+instat_object$set("public","set_hidden_columns", function(data_name, col_names) {
+  self$get_data_objects(data_name)$set_hidden_columns(col_names = col_names)
+} 
+)
+
+instat_object$set("public","unhide_all_columns", function(data_name) {
+  if(missing(data_name)) sapply(self$get_data_objects(), function(obj) obj$unhide_all_columns())
+  else self$get_data_objects(data_name)$unhide_all_columns()
+
+} 
+)

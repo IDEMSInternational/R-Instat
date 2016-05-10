@@ -839,3 +839,17 @@ data_object$set("public", "get_data_type", function(col_name = "") {
   return(type)
 }
 )
+
+data_object$set("public", "set_hidden_columns", function(col_names) {
+  if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
+  
+  self$append_to_variables_metadata(col_names, is_hidden_label, TRUE)
+  hidden_cols = self$get_column_names()[!self$get_column_names() %in% col_names]
+  self$append_to_variables_metadata(hidden_cols, is_hidden_label, FALSE)
+}
+)
+
+data_object$set("public", "unhide_all_columns", function() {
+  self$append_to_variables_metadata(self$get_column_names(), is_hidden_label, FALSE)
+}
+)
