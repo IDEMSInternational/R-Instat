@@ -436,6 +436,7 @@ instat_object$set("public", "rename_column_in_data", function(data_name, column_
 } 
 )
 
+#TODO remove this method
 instat_object$set("public", "remove_columns_in_data_from_start_position", function(data_name, start_pos, col_numbers) {
   self$get_data_objects(data_name)$remove_columns_in_data_from_start_position(start_pos = start_pos, col_numbers = col_numbers)
 } 
