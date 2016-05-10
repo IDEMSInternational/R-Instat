@@ -334,6 +334,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
 }
 )
 
+#TODO remove this method
 data_object$set("public", "remove_columns_in_data_from_start_position", function(start_pos, col_numbers = 1) {
   if (start_pos <= 0) stop("You cannot remove a column into the position less or equal to zero.")
   if (start_pos %% 1 != 0) stop("start_pos value should be an integer.")
