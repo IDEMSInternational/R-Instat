@@ -436,6 +436,7 @@ instat_object$set("public", "rename_column_in_data", function(data_name, column_
 } 
 )
 
+#TODO remove this method
 instat_object$set("public", "remove_columns_in_data_from_start_position", function(data_name, start_pos, col_numbers) {
   self$get_data_objects(data_name)$remove_columns_in_data_from_start_position(start_pos = start_pos, col_numbers = col_numbers)
 } 
@@ -617,5 +618,17 @@ instat_object$set("public","copy_data_frame", function(data_name, new_name) {
   
   if(missing(new_name)) new_name = next_default_item(data_name, self$get_data_names())
   self$append_data_object(new_name, curr_obj)
+} 
+)
+
+instat_object$set("public","set_hidden_columns", function(data_name, col_names) {
+  self$get_data_objects(data_name)$set_hidden_columns(col_names = col_names)
+} 
+)
+
+instat_object$set("public","unhide_all_columns", function(data_name) {
+  if(missing(data_name)) sapply(self$get_data_objects(), function(obj) obj$unhide_all_columns())
+  else self$get_data_objects(data_name)$unhide_all_columns()
+
 } 
 )
