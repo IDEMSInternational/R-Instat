@@ -39,7 +39,7 @@ Partial Class dlgScatterPlot
         Me.cmdOptions.Location = New System.Drawing.Point(10, 204)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(133, 23)
-        Me.cmdOptions.TabIndex = 7
+        Me.cmdOptions.TabIndex = 6
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -50,7 +50,7 @@ Partial Class dlgScatterPlot
         Me.lblFactorOptional.Location = New System.Drawing.Point(276, 193)
         Me.lblFactorOptional.Name = "lblFactorOptional"
         Me.lblFactorOptional.Size = New System.Drawing.Size(85, 13)
-        Me.lblFactorOptional.TabIndex = 5
+        Me.lblFactorOptional.TabIndex = 4
         Me.lblFactorOptional.Tag = "Factor_Optional"
         Me.lblFactorOptional.Text = "Factor (Optional)"
         '
@@ -60,7 +60,7 @@ Partial Class dlgScatterPlot
         Me.lblXVariable.Location = New System.Drawing.Point(275, 151)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(64, 13)
-        Me.lblXVariable.TabIndex = 3
+        Me.lblXVariable.TabIndex = 2
         Me.lblXVariable.Tag = "X_Variable"
         Me.lblXVariable.Text = "X  - Variable"
         '
@@ -69,7 +69,7 @@ Partial Class dlgScatterPlot
         Me.cmdScatterPlotOptions.Location = New System.Drawing.Point(148, 204)
         Me.cmdScatterPlotOptions.Name = "cmdScatterPlotOptions"
         Me.cmdScatterPlotOptions.Size = New System.Drawing.Size(117, 23)
-        Me.cmdScatterPlotOptions.TabIndex = 10
+        Me.cmdScatterPlotOptions.TabIndex = 7
         Me.cmdScatterPlotOptions.Tag = "ScatterPlot_Options"
         Me.cmdScatterPlotOptions.Text = "ScatterPlot Options"
         Me.cmdScatterPlotOptions.UseVisualStyleBackColor = True
@@ -81,7 +81,7 @@ Partial Class dlgScatterPlot
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
         Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrFactorOptionalReceiver.TabIndex = 6
+        Me.ucrFactorOptionalReceiver.TabIndex = 5
         '
         'ucrReceiverX
         '
@@ -90,21 +90,21 @@ Partial Class dlgScatterPlot
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
         Me.ucrReceiverX.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverX.TabIndex = 4
+        Me.ucrReceiverX.TabIndex = 3
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 268)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 8
+        Me.ucrBase.TabIndex = 9
         '
         'ucrVariablesAsFactorForScatter
         '
         Me.ucrVariablesAsFactorForScatter.Location = New System.Drawing.Point(274, 10)
         Me.ucrVariablesAsFactorForScatter.Name = "ucrVariablesAsFactorForScatter"
         Me.ucrVariablesAsFactorForScatter.Size = New System.Drawing.Size(125, 136)
-        Me.ucrVariablesAsFactorForScatter.TabIndex = 12
+        Me.ucrVariablesAsFactorForScatter.TabIndex = 1
         Me.ucrVariablesAsFactorForScatter.ucrVariableSelector = Nothing
         '
         'ucrSelectorForScatter
@@ -113,14 +113,14 @@ Partial Class dlgScatterPlot
         Me.ucrSelectorForScatter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForScatter.Name = "ucrSelectorForScatter"
         Me.ucrSelectorForScatter.Size = New System.Drawing.Size(242, 191)
-        Me.ucrSelectorForScatter.TabIndex = 13
+        Me.ucrSelectorForScatter.TabIndex = 0
         '
         'ucrSaveScatterPlot
         '
         Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 235)
         Me.ucrSaveScatterPlot.Name = "ucrSaveScatterPlot"
         Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(265, 27)
-        Me.ucrSaveScatterPlot.TabIndex = 14
+        Me.ucrSaveScatterPlot.TabIndex = 8
         '
         'dlgScatterPlot
         '
