@@ -23,9 +23,9 @@ Partial Class dlgThemes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cboThemes = New System.Windows.Forms.ComboBox()
         Me.lblTheme = New System.Windows.Forms.Label()
         Me.cmdCreateNewTheme = New System.Windows.Forms.Button()
+        Me.ucrInputThemeLists = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -34,14 +34,6 @@ Partial Class dlgThemes
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
-        '
-        'cboThemes
-        '
-        Me.cboThemes.FormattingEnabled = True
-        Me.cboThemes.Location = New System.Drawing.Point(13, 36)
-        Me.cboThemes.Name = "cboThemes"
-        Me.cboThemes.Size = New System.Drawing.Size(179, 21)
-        Me.cboThemes.TabIndex = 1
         '
         'lblTheme
         '
@@ -61,14 +53,21 @@ Partial Class dlgThemes
         Me.cmdCreateNewTheme.Text = "Create New Theme"
         Me.cmdCreateNewTheme.UseVisualStyleBackColor = True
         '
+        'ucrInputThemeLists
+        '
+        Me.ucrInputThemeLists.Location = New System.Drawing.Point(13, 43)
+        Me.ucrInputThemeLists.Name = "ucrInputThemeLists"
+        Me.ucrInputThemeLists.Size = New System.Drawing.Size(187, 21)
+        Me.ucrInputThemeLists.TabIndex = 4
+        '
         'dlgThemes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(431, 309)
+        Me.Controls.Add(Me.ucrInputThemeLists)
         Me.Controls.Add(Me.cmdCreateNewTheme)
         Me.Controls.Add(Me.lblTheme)
-        Me.Controls.Add(Me.cboThemes)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgThemes"
@@ -81,7 +80,7 @@ Partial Class dlgThemes
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents cboThemes As ComboBox
     Friend WithEvents lblTheme As Label
     Friend WithEvents cmdCreateNewTheme As Button
+    Friend WithEvents ucrInputThemeLists As ucrInputComboBox
 End Class
