@@ -27,31 +27,36 @@ Partial Class dlgRandomSubsets
         Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.chkSetSeed = New System.Windows.Forms.CheckBox()
-        Me.rdoWithReplacement = New System.Windows.Forms.RadioButton()
-        Me.rdoWithoutReplacement = New System.Windows.Forms.RadioButton()
         Me.lblSampleSize = New System.Windows.Forms.Label()
-        Me.txtSampleSize = New System.Windows.Forms.TextBox()
         Me.lblNumberOfColumns = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.nudSampleSize = New System.Windows.Forms.NumericUpDown()
+        Me.nudNumberOfColumns = New System.Windows.Forms.NumericUpDown()
+        Me.chkWithReplacement = New System.Windows.Forms.CheckBox()
+        Me.ucrNewDataFrameName = New instat.ucrInputTextBox()
+        Me.lblNewDataFrameName = New System.Windows.Forms.Label()
+        CType(Me.nudSampleSize, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudNumberOfColumns, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 243)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 299)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(400, 53)
         Me.ucrBase.TabIndex = 10
         '
         'ucrSelectorRandomSubsets
         '
-        Me.ucrSelectorRandomSubsets.Location = New System.Drawing.Point(3, 3)
+        Me.ucrSelectorRandomSubsets.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorRandomSubsets.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorRandomSubsets.Name = "ucrSelectorRandomSubsets"
         Me.ucrSelectorRandomSubsets.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorRandomSubsets.TabIndex = 0
         '
         'ucrReceiverSelected
         '
-        Me.ucrReceiverSelected.Location = New System.Drawing.Point(262, 47)
+        Me.ucrReceiverSelected.Location = New System.Drawing.Point(255, 97)
+        Me.ucrReceiverSelected.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelected.Name = "ucrReceiverSelected"
         Me.ucrReceiverSelected.Selector = Nothing
         Me.ucrReceiverSelected.Size = New System.Drawing.Size(106, 26)
@@ -60,7 +65,7 @@ Partial Class dlgRandomSubsets
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(267, 31)
+        Me.lblSelected.Location = New System.Drawing.Point(260, 81)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
         Me.lblSelected.TabIndex = 1
@@ -70,7 +75,7 @@ Partial Class dlgRandomSubsets
         'chkSetSeed
         '
         Me.chkSetSeed.AutoSize = True
-        Me.chkSetSeed.Location = New System.Drawing.Point(266, 80)
+        Me.chkSetSeed.Location = New System.Drawing.Point(259, 130)
         Me.chkSetSeed.Name = "chkSetSeed"
         Me.chkSetSeed.Size = New System.Drawing.Size(70, 17)
         Me.chkSetSeed.TabIndex = 3
@@ -78,75 +83,80 @@ Partial Class dlgRandomSubsets
         Me.chkSetSeed.Text = "Set Seed"
         Me.chkSetSeed.UseVisualStyleBackColor = True
         '
-        'rdoWithReplacement
-        '
-        Me.rdoWithReplacement.AutoSize = True
-        Me.rdoWithReplacement.Location = New System.Drawing.Point(13, 182)
-        Me.rdoWithReplacement.Name = "rdoWithReplacement"
-        Me.rdoWithReplacement.Size = New System.Drawing.Size(113, 17)
-        Me.rdoWithReplacement.TabIndex = 4
-        Me.rdoWithReplacement.TabStop = True
-        Me.rdoWithReplacement.Tag = "With_Replacement"
-        Me.rdoWithReplacement.Text = "With Replacement"
-        Me.rdoWithReplacement.UseVisualStyleBackColor = True
-        '
-        'rdoWithoutReplacement
-        '
-        Me.rdoWithoutReplacement.AutoSize = True
-        Me.rdoWithoutReplacement.Location = New System.Drawing.Point(186, 182)
-        Me.rdoWithoutReplacement.Name = "rdoWithoutReplacement"
-        Me.rdoWithoutReplacement.Size = New System.Drawing.Size(128, 17)
-        Me.rdoWithoutReplacement.TabIndex = 5
-        Me.rdoWithoutReplacement.TabStop = True
-        Me.rdoWithoutReplacement.Tag = "Without_Replacement"
-        Me.rdoWithoutReplacement.Text = "Without Replacement"
-        Me.rdoWithoutReplacement.UseVisualStyleBackColor = True
-        '
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(13, 214)
+        Me.lblSampleSize.Location = New System.Drawing.Point(10, 215)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(65, 13)
         Me.lblSampleSize.TabIndex = 6
         Me.lblSampleSize.Tag = "Sample_Size"
         Me.lblSampleSize.Text = "Sample Size"
         '
-        'txtSampleSize
-        '
-        Me.txtSampleSize.Location = New System.Drawing.Point(91, 213)
-        Me.txtSampleSize.Name = "txtSampleSize"
-        Me.txtSampleSize.Size = New System.Drawing.Size(78, 20)
-        Me.txtSampleSize.TabIndex = 7
-        '
         'lblNumberOfColumns
         '
         Me.lblNumberOfColumns.AutoSize = True
-        Me.lblNumberOfColumns.Location = New System.Drawing.Point(186, 215)
+        Me.lblNumberOfColumns.Location = New System.Drawing.Point(198, 215)
         Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
         Me.lblNumberOfColumns.Size = New System.Drawing.Size(101, 13)
         Me.lblNumberOfColumns.TabIndex = 8
         Me.lblNumberOfColumns.Tag = "Number_Of_Columns"
         Me.lblNumberOfColumns.Text = "Number Of Columns"
         '
-        'TextBox1
+        'nudSampleSize
         '
-        Me.TextBox1.Location = New System.Drawing.Point(293, 214)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(75, 20)
-        Me.TextBox1.TabIndex = 9
+        Me.nudSampleSize.Location = New System.Drawing.Point(85, 207)
+        Me.nudSampleSize.Name = "nudSampleSize"
+        Me.nudSampleSize.Size = New System.Drawing.Size(53, 20)
+        Me.nudSampleSize.TabIndex = 11
+        '
+        'nudNumberOfColumns
+        '
+        Me.nudNumberOfColumns.Location = New System.Drawing.Point(301, 207)
+        Me.nudNumberOfColumns.Name = "nudNumberOfColumns"
+        Me.nudNumberOfColumns.Size = New System.Drawing.Size(49, 20)
+        Me.nudNumberOfColumns.TabIndex = 12
+        '
+        'chkWithReplacement
+        '
+        Me.chkWithReplacement.AutoSize = True
+        Me.chkWithReplacement.Location = New System.Drawing.Point(10, 242)
+        Me.chkWithReplacement.Name = "chkWithReplacement"
+        Me.chkWithReplacement.Size = New System.Drawing.Size(114, 17)
+        Me.chkWithReplacement.TabIndex = 13
+        Me.chkWithReplacement.Tag = "With_Replacement"
+        Me.chkWithReplacement.Text = "With Replacement"
+        Me.chkWithReplacement.UseVisualStyleBackColor = True
+        '
+        'ucrNewDataFrameName
+        '
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(136, 265)
+        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrNewDataFrameName.TabIndex = 14
+        '
+        'lblNewDataFrameName
+        '
+        Me.lblNewDataFrameName.AutoSize = True
+        Me.lblNewDataFrameName.Location = New System.Drawing.Point(10, 273)
+        Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
+        Me.lblNewDataFrameName.Size = New System.Drawing.Size(115, 13)
+        Me.lblNewDataFrameName.TabIndex = 15
+        Me.lblNewDataFrameName.Tag = "New_DataFrame_Name"
+        Me.lblNewDataFrameName.Text = "New DataFrame Name"
         '
         'dlgRandomSubsets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 308)
-        Me.Controls.Add(Me.TextBox1)
+        Me.ClientSize = New System.Drawing.Size(422, 363)
+        Me.Controls.Add(Me.lblNewDataFrameName)
+        Me.Controls.Add(Me.ucrNewDataFrameName)
+        Me.Controls.Add(Me.chkWithReplacement)
+        Me.Controls.Add(Me.nudNumberOfColumns)
+        Me.Controls.Add(Me.nudSampleSize)
         Me.Controls.Add(Me.lblNumberOfColumns)
-        Me.Controls.Add(Me.txtSampleSize)
         Me.Controls.Add(Me.lblSampleSize)
-        Me.Controls.Add(Me.rdoWithoutReplacement)
-        Me.Controls.Add(Me.rdoWithReplacement)
         Me.Controls.Add(Me.chkSetSeed)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrReceiverSelected)
@@ -157,6 +167,8 @@ Partial Class dlgRandomSubsets
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Random_Subsets"
         Me.Text = "Random Subsets"
+        CType(Me.nudSampleSize, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudNumberOfColumns, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -167,10 +179,11 @@ Partial Class dlgRandomSubsets
     Friend WithEvents ucrReceiverSelected As ucrReceiverSingle
     Friend WithEvents lblSelected As Label
     Friend WithEvents chkSetSeed As CheckBox
-    Friend WithEvents rdoWithReplacement As RadioButton
-    Friend WithEvents rdoWithoutReplacement As RadioButton
     Friend WithEvents lblSampleSize As Label
-    Friend WithEvents txtSampleSize As TextBox
     Friend WithEvents lblNumberOfColumns As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents nudSampleSize As NumericUpDown
+    Friend WithEvents nudNumberOfColumns As NumericUpDown
+    Friend WithEvents chkWithReplacement As CheckBox
+    Friend WithEvents ucrNewDataFrameName As ucrInputTextBox
+    Friend WithEvents lblNewDataFrameName As Label
 End Class
