@@ -606,10 +606,10 @@
     <Compile Include="sdgFrequencyPolygonOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgLayers.Designer.vb">
-      <DependentUpon>sdgLayers.vb</DependentUpon>
+    <Compile Include="sdgLayerOptions.Designer.vb">
+      <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgLayers.vb">
+    <Compile Include="sdgLayerOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgModelOptions.Designer.vb">
@@ -2377,14 +2377,14 @@
     <EmbeddedResource Include="sdgHistogramOptions.sw-KE.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayers.fr-FR.resx">
-      <DependentUpon>sdgLayers.vb</DependentUpon>
+    <EmbeddedResource Include="sdgLayerOptions.fr-FR.resx">
+      <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayers.resx">
-      <DependentUpon>sdgLayers.vb</DependentUpon>
+    <EmbeddedResource Include="sdgLayerOptions.resx">
+      <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayers.sw-KE.resx">
-      <DependentUpon>sdgLayers.vb</DependentUpon>
+    <EmbeddedResource Include="sdgLayerOptions.sw-KE.resx">
+      <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgModelOptions.fr-FR.resx">
       <DependentUpon>sdgModelOptions.vb</DependentUpon>
