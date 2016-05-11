@@ -130,7 +130,7 @@ Public Class dlgInsertColumn
 
     Private Sub RowsOrColumns()
         If rdoInsertColumns.Checked Then
-            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$insert_column_in_data")
+            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
             lblNumberCols.Visible = True
             lblNumberOfRowsToInsert.Visible = False
             ucrBase.clsRsyntax.RemoveParameter("number_rows")
