@@ -47,4 +47,8 @@ Public Class dlgThemes
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
+
+    Private Sub cmdCreateNewTheme_Click(sender As Object, e As EventArgs) Handles cmdCreateNewTheme.Click
+        dlgCreateNewTheme.ShowDialog()
+    End Sub
 End Class
