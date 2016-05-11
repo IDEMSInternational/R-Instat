@@ -23,20 +23,52 @@ Partial Class dlgThemes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cboThemes = New System.Windows.Forms.ComboBox()
+        Me.lblTheme = New System.Windows.Forms.Label()
+        Me.cmdCreateNewTheme = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(4, 249)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 244)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
+        '
+        'cboThemes
+        '
+        Me.cboThemes.FormattingEnabled = True
+        Me.cboThemes.Location = New System.Drawing.Point(13, 36)
+        Me.cboThemes.Name = "cboThemes"
+        Me.cboThemes.Size = New System.Drawing.Size(179, 21)
+        Me.cboThemes.TabIndex = 1
+        '
+        'lblTheme
+        '
+        Me.lblTheme.AutoSize = True
+        Me.lblTheme.Location = New System.Drawing.Point(10, 10)
+        Me.lblTheme.Name = "lblTheme"
+        Me.lblTheme.Size = New System.Drawing.Size(45, 13)
+        Me.lblTheme.TabIndex = 2
+        Me.lblTheme.Text = "Themes"
+        '
+        'cmdCreateNewTheme
+        '
+        Me.cmdCreateNewTheme.Location = New System.Drawing.Point(13, 139)
+        Me.cmdCreateNewTheme.Name = "cmdCreateNewTheme"
+        Me.cmdCreateNewTheme.Size = New System.Drawing.Size(126, 23)
+        Me.cmdCreateNewTheme.TabIndex = 3
+        Me.cmdCreateNewTheme.Text = "Create New Theme"
+        Me.cmdCreateNewTheme.UseVisualStyleBackColor = True
         '
         'dlgThemes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 309)
+        Me.ClientSize = New System.Drawing.Size(431, 309)
+        Me.Controls.Add(Me.cmdCreateNewTheme)
+        Me.Controls.Add(Me.lblTheme)
+        Me.Controls.Add(Me.cboThemes)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgThemes"
@@ -44,8 +76,12 @@ Partial Class dlgThemes
         Me.Tag = "Themes"
         Me.Text = "Themes"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents cboThemes As ComboBox
+    Friend WithEvents lblTheme As Label
+    Friend WithEvents cmdCreateNewTheme As Button
 End Class
