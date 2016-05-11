@@ -210,8 +210,6 @@ Public Class clsGridLink
                             fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (c)"
                         Case "Date"
                             fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (D)"
-                        Case "logical"
-                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (l)"
                         Case Else
                             fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
                     End Select

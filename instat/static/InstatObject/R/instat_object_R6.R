@@ -364,9 +364,9 @@ instat_object$set("public", "set_metadata_changed", function(data_name = "", new
 } 
 )
 
-instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column) {
-  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden, before = before, adjacent_column = adjacent_column)
-  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column)
+instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols) {
+  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols)
+  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols)
 }
 )
 
@@ -436,6 +436,7 @@ instat_object$set("public", "rename_column_in_data", function(data_name, column_
 } 
 )
 
+#TODO remove this method
 instat_object$set("public", "remove_columns_in_data_from_start_position", function(data_name, start_pos, col_numbers) {
   self$get_data_objects(data_name)$remove_columns_in_data_from_start_position(start_pos = start_pos, col_numbers = col_numbers)
 } 
@@ -476,6 +477,7 @@ instat_object$set("public", "get_column_names", function(data_name, as_list = FA
 }
 )
 
+#TODO delete and replace with add_columns_to_data
 instat_object$set("public", "insert_column_in_data", function(data_name, col_data =c(), start_pos, number_cols) {
   self$get_data_objects(data_name)$insert_column_in_data(col_data = col_data, start_pos = start_pos, number_cols = number_cols )
 }
@@ -499,8 +501,8 @@ instat_object$set("public", "insert_row_in_data", function(data_name, start_pos,
 }
 )
 
-instat_object$set("public", "get_dataframe_length", function(data_name) {
-  self$get_data_objects(data_name)$get_dataframe_length()
+instat_object$set("public", "get_data_frame_length", function(data_name) {
+  self$get_data_objects(data_name)$get_data_frame_length()
 }
 )
 
@@ -616,5 +618,17 @@ instat_object$set("public","copy_data_frame", function(data_name, new_name) {
   
   if(missing(new_name)) new_name = next_default_item(data_name, self$get_data_names())
   self$append_data_object(new_name, curr_obj)
+} 
+)
+
+instat_object$set("public","set_hidden_columns", function(data_name, col_names) {
+  self$get_data_objects(data_name)$set_hidden_columns(col_names = col_names)
+} 
+)
+
+instat_object$set("public","unhide_all_columns", function(data_name) {
+  if(missing(data_name)) sapply(self$get_data_objects(), function(obj) obj$unhide_all_columns())
+  else self$get_data_objects(data_name)$unhide_all_columns()
+
 } 
 )
