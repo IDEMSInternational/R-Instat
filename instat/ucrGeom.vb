@@ -108,10 +108,10 @@ Public Class ucrGeom
 
 
         clsgeom_abline.strGeomName = "geom_abline"
-        clsgeom_abline.AddGgParameter("alpha")
-        clsgeom_abline.AddGgParameter("colour")
-        clsgeom_abline.AddGgParameter("linetype")
-        clsgeom_abline.AddGgParameter("size")
+        clsgeom_abline.AddGgParameter("alpha", bIsMandatory:=True)
+        clsgeom_abline.AddGgParameter("colour", bIsMandatory:=True)
+        clsgeom_abline.AddGgParameter("linetype", bIsMandatory:=True)
+        clsgeom_abline.AddGgParameter("size", bIsMandatory:=True)
         'aesthetics that control position of line include
         'geom_vline:xintercept
         'geom_hline:yintercept
@@ -121,9 +121,9 @@ Public Class ucrGeom
 
         clsgeom_area.strGeomName = "geom_area"
         'mandatory aesthetics 
-        clsgeom_area.AddGgParameter("x")
-        clsgeom_area.AddGgParameter("ymax")
-        clsgeom_area.AddGgParameter("ymin")
+        clsgeom_area.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_area.AddGgParameter("ymax", bIsMandatory:=True)
+        clsgeom_area.AddGgParameter("ymin", bIsMandatory:=True)
         'Optional 
         clsgeom_area.AddGgParameter("alpha")
         clsgeom_area.AddGgParameter("colour")
@@ -143,16 +143,16 @@ Public Class ucrGeom
 
         clsgeom_bin2d.strGeomName = "geom_bin2d"
         'mandatory
-        clsgeom_bin2d.AddGgParameter("x")
-        clsgeom_bin2d.AddGgParameter("y")
+        clsgeom_bin2d.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_bin2d.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_bin2d.AddGgParameter("fill")
         lstAllGeoms.Add(clsgeom_bin2d)
 
         clsgeom_boxplot.strGeomName = "geom_boxplot"
-        clsgeom_boxplot.AddGgParameter("x", strIncludedDataTypes:={"factor"})
-        clsgeom_boxplot.AddGgParameter("y", strIncludedDataTypes:={"factor"})
-        clsgeom_boxplot.AddGgParameter("fill")
+        clsgeom_boxplot.AddGgParameter("x", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_boxplot.AddGgParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_boxplot.AddGgParameter("fill", bIsMandatory:=True)
         clsgeom_boxplot.AddGgParameter("colour")
         clsgeom_boxplot.AddGgParameter("shape")
         clsgeom_boxplot.AddGgParameter("lower")
@@ -161,8 +161,8 @@ Public Class ucrGeom
 
         clsgeom_contour.strGeomName = "geom_contour"
         'Mandatory
-        clsgeom_contour.AddGgParameter("x")
-        clsgeom_contour.AddGgParameter("y")
+        clsgeom_contour.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_contour.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_contour.AddGgParameter("alpha")
         clsgeom_contour.AddGgParameter("colour")
@@ -173,8 +173,8 @@ Public Class ucrGeom
 
         clsgeom_count.strGeomName = "geom_count"
         'mandatory
-        clsgeom_count.AddGgParameter("x")
-        clsgeom_count.AddGgParameter("y")
+        clsgeom_count.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_count.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_count.AddGgParameter("alpha")
         clsgeom_count.AddGgParameter("colour")
@@ -186,9 +186,9 @@ Public Class ucrGeom
 
         clsgeom_crossbar.strGeomName = "geom_crossbar"
         'Mandatory
-        clsgeom_crossbar.AddGgParameter("x")
-        clsgeom_crossbar.AddGgParameter("ymax")
-        clsgeom_crossbar.AddGgParameter("ymin")
+        clsgeom_crossbar.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_crossbar.AddGgParameter("ymax", bIsMandatory:=True)
+        clsgeom_crossbar.AddGgParameter("ymin", bIsMandatory:=True)
         'Optional
         clsgeom_crossbar.AddGgParameter("alpha")
         clsgeom_crossbar.AddGgParameter("colour")
@@ -198,10 +198,10 @@ Public Class ucrGeom
 
         clsgeom_curve.strGeomName = "geom_curve"
         'Mandatory
-        clsgeom_curve.AddGgParameter("x")
-        clsgeom_curve.AddGgParameter("xend")
-        clsgeom_curve.AddGgParameter("y")
-        clsgeom_curve.AddGgParameter("yend")
+        clsgeom_curve.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_curve.AddGgParameter("xend", bIsMandatory:=True)
+        clsgeom_curve.AddGgParameter("y", bIsMandatory:=True)
+        clsgeom_curve.AddGgParameter("yend", bIsMandatory:=True)
         ''Optional
         clsgeom_curve.AddGgParameter("alpha")
         clsgeom_curve.AddGgParameter("colour")
@@ -211,8 +211,8 @@ Public Class ucrGeom
 
         clsgeom_density.strGeomName = "geom_density"
         'mandatory
-        clsgeom_density.AddGgParameter("x", strIncludedDataTypes:={"numeric"})
-        clsgeom_density.AddGgParameter("y")
+        clsgeom_density.AddGgParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_density.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_density.AddGgParameter("alpha")
         clsgeom_density.AddGgParameter("colour")
@@ -224,8 +224,8 @@ Public Class ucrGeom
 
         clsgeom_density2d.strGeomName = "geom_density2d"
         'Mandatory
-        clsgeom_density2d.AddGgParameter("x")
-        clsgeom_density2d.AddGgParameter("y")
+        clsgeom_density2d.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_density2d.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_density2d.AddGgParameter("alpha")
         clsgeom_density2d.AddGgParameter("colour")
@@ -235,8 +235,8 @@ Public Class ucrGeom
 
         clsgeom_density_2d.strGeomName = "geom_density_2d"
         'Mandatory
-        clsgeom_density_2d.AddGgParameter("x")
-        clsgeom_density_2d.AddGgParameter("y")
+        clsgeom_density_2d.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_density_2d.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_density_2d.AddGgParameter("alpha")
         clsgeom_density_2d.AddGgParameter("colour")
@@ -255,9 +255,9 @@ Public Class ucrGeom
 
         clsgeom_errorbar.strGeomName = "geom_errorbar"
         'Mandatory
-        clsgeom_errorbar.AddGgParameter("x")
-        clsgeom_errorbar.AddGgParameter("ymax")
-        clsgeom_errorbar.AddGgParameter("ymin")
+        clsgeom_errorbar.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_errorbar.AddGgParameter("ymax", bIsMandatory:=True)
+        clsgeom_errorbar.AddGgParameter("ymin", bIsMandatory:=True)
         'Optional
         clsgeom_errorbar.AddGgParameter("alpha")
         clsgeom_errorbar.AddGgParameter("volour")
@@ -268,10 +268,10 @@ Public Class ucrGeom
 
         clsgeom_errorbarh.strGeomName = "geom_errorbarh"
         'mandatory
-        clsgeom_errorbarh.AddGgParameter("x")
-        clsgeom_errorbarh.AddGgParameter("xmax")
-        clsgeom_errorbarh.AddGgParameter("xmin")
-        clsgeom_errorbarh.AddGgParameter("y")
+        clsgeom_errorbarh.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_errorbarh.AddGgParameter("xmax", bIsMandatory:=True)
+        clsgeom_errorbarh.AddGgParameter("xmin", bIsMandatory:=True)
+        clsgeom_errorbarh.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_errorbarh.AddGgParameter("alpha")
         clsgeom_errorbarh.AddGgParameter("colour")
@@ -281,18 +281,18 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_errorbarh)
 
         clsgeom_freqpoly.strGeomName = "geom_freqpoly"
-        clsgeom_freqpoly.AddGgParameter("x", strIncludedDataTypes:={"numeric"})
+        clsgeom_freqpoly.AddGgParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         clsgeom_freqpoly.AddGgParameter("alpha")
         clsgeom_freqpoly.AddGgParameter("colour")
-        clsgeom_freqpoly.AddGgParameter("fill", strIncludedDataTypes:={"factor"})
+        clsgeom_freqpoly.AddGgParameter("fill", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
         clsgeom_freqpoly.AddGgParameter("linetype")
         clsgeom_freqpoly.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_freqpoly)
 
         clsgeom_hex.strGeomName = "geom_hex"
         'mandatory
-        clsgeom_hex.AddGgParameter("x")
-        clsgeom_hex.AddGgParameter("y")
+        clsgeom_hex.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_hex.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_hex.AddGgParameter("alpha")
         clsgeom_hex.AddGgParameter("colour")
@@ -301,7 +301,7 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_hex)
 
         clsgeom_histogram.strGeomName = "geom_histogram"
-        clsgeom_histogram.AddGgParameter("x", strIncludedDataTypes:={"numeric"})
+        clsgeom_histogram.AddGgParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         clsgeom_histogram.AddGgParameter("alpha")
         clsgeom_histogram.AddGgParameter("colour")
         clsgeom_histogram.AddGgParameter("fill", strIncludedDataTypes:={"factor"})
@@ -324,8 +324,8 @@ Public Class ucrGeom
 
         clsgeom_jitter.strGeomName = "geom_jitter"
         'mandatory
-        clsgeom_jitter.AddGgParameter("x")
-        clsgeom_jitter.AddGgParameter("y")
+        clsgeom_jitter.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_jitter.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_jitter.AddGgParameter("alpha")
         clsgeom_jitter.AddGgParameter("colour")
@@ -337,9 +337,9 @@ Public Class ucrGeom
 
         clsgeom_label.strGeomName = "geom_label"
         'mandatory
-        clsgeom_label.AddGgParameter("label")
-        clsgeom_label.AddGgParameter("x")
-        clsgeom_label.AddGgParameter("y")
+        clsgeom_label.AddGgParameter("label", bIsMandatory:=True)
+        clsgeom_label.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_label.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_label.AddGgParameter("alpha")
         clsgeom_label.AddGgParameter("color")
@@ -353,8 +353,8 @@ Public Class ucrGeom
 
         clsgeom_line.strGeomName = "geom_line"
         'mandatory
-        clsgeom_line.AddGgParameter("x", strIncludedDataTypes:={"numeric"})
-        clsgeom_line.AddGgParameter("y", strIncludedDataTypes:={"numeric"})
+        clsgeom_line.AddGgParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_line.AddGgParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         'optional
         clsgeom_line.AddGgParameter("alpha")
         clsgeom_line.AddGgParameter("color")
@@ -365,9 +365,9 @@ Public Class ucrGeom
 
         clsgeom_linerange.strGeomName = "geom_linerange"
         'mandatory
-        clsgeom_linerange.AddGgParameter("x")
-        clsgeom_linerange.AddGgParameter("ymax")
-        clsgeom_linerange.AddGgParameter("ymin")
+        clsgeom_linerange.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_linerange.AddGgParameter("ymax", bIsMandatory:=True)
+        clsgeom_linerange.AddGgParameter("ymin", bIsMandatory:=True)
         'optional
         clsgeom_linerange.AddGgParameter("alpha")
         clsgeom_linerange.AddGgParameter("colour")
@@ -377,7 +377,7 @@ Public Class ucrGeom
 
         clsgeom_map.strGeomName = "geom_map"
         'mandatory
-        clsgeom_map.AddGgParameter("map_id")
+        clsgeom_map.AddGgParameter("map_id", bIsMandatory:=True)
         'optional
         clsgeom_map.AddGgParameter("alpha")
         clsgeom_map.AddGgParameter("colour")
@@ -388,8 +388,8 @@ Public Class ucrGeom
 
         clsgeom_path.strGeomName = "geom_path"
         'mandatory
-        clsgeom_path.AddGgParameter("x")
-        clsgeom_path.AddGgParameter("y")
+        clsgeom_path.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_path.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_path.AddGgParameter("alpha")
         clsgeom_path.AddGgParameter("colour")
@@ -399,8 +399,8 @@ Public Class ucrGeom
 
         clsgeom_point.strGeomName = "geom_point"
         'mandatory
-        clsgeom_point.AddGgParameter("x", strIncludedDataTypes:={"numeric"})
-        clsgeom_point.AddGgParameter("y", strIncludedDataTypes:={"factor"})
+        clsgeom_point.AddGgParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_point.AddGgParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
         'optional
         clsgeom_point.AddGgParameter("alpha")
         clsgeom_point.AddGgParameter("colour")
@@ -411,9 +411,9 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_point)
 
         clsgeom_pointrange.strGeomName = "geom_pointrange"
-        clsgeom_pointrange.AddGgParameter("x")
-        clsgeom_pointrange.AddGgParameter("ymax")
-        clsgeom_pointrange.AddGgParameter("ymin")
+        clsgeom_pointrange.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_pointrange.AddGgParameter("ymax", bIsMandatory:=True)
+        clsgeom_pointrange.AddGgParameter("ymin", bIsMandatory:=True)
         'optional
         clsgeom_pointrange.AddGgParameter("alpha")
         clsgeom_pointrange.AddGgParameter("colour")
@@ -422,8 +422,8 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_pointrange)
 
         clsgeom_polygon.strGeomName = "geom_polygon"
-        clsgeom_polygon.AddGgParameter("x")
-        clsgeom_polygon.AddGgParameter("y")
+        clsgeom_polygon.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_polygon.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_polygon.AddGgParameter("alpha")
         clsgeom_polygon.AddGgParameter("colour")
@@ -433,15 +433,15 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_polygon)
 
         clsgeom_qq.strGeomName = "geom_qq"
-        clsgeom_qq.AddGgParameter("sample")
+        clsgeom_qq.AddGgParameter("sample", bIsMandatory:=True)
         'optional
         clsgeom_qq.AddGgParameter("x")
         clsgeom_qq.AddGgParameter("y")
         lstAllGeoms.Add(clsgeom_qq)
 
         clsgeom_quantile.strGeomName = "geom_quantile"
-        clsgeom_quantile.AddGgParameter("x")
-        clsgeom_quantile.AddGgParameter("y")
+        clsgeom_quantile.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_quantile.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_quantile.AddGgParameter("alpha")
         clsgeom_quantile.AddGgParameter("colour")
@@ -452,8 +452,8 @@ Public Class ucrGeom
 
         clsgeom_raster.strGeomName = "geom_raster"
         'mandatory
-        clsgeom_raster.AddGgParameter("x")
-        clsgeom_raster.AddGgParameter("y")
+        clsgeom_raster.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_raster.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_raster.AddGgParameter("alpha")
         clsgeom_raster.AddGgParameter("colour")
@@ -464,8 +464,8 @@ Public Class ucrGeom
 
         clsgeom_rect.strGeomName = "geom_rect"
         'mandatory
-        clsgeom_rect.AddGgParameter("x")
-        clsgeom_rect.AddGgParameter("y")
+        clsgeom_rect.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_rect.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_rect.AddGgParameter("alpha")
         clsgeom_rect.AddGgParameter("colour")
@@ -475,9 +475,9 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_rect)
 
         clsgeom_ribbon.strGeomName = "geom_ribbon"
-        clsgeom_ribbon.AddGgParameter("x")
-        clsgeom_ribbon.AddGgParameter("ymax")
-        clsgeom_ribbon.AddGgParameter("ymin")
+        clsgeom_ribbon.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_ribbon.AddGgParameter("ymax", bIsMandatory:=True)
+        clsgeom_ribbon.AddGgParameter("ymin", bIsMandatory:=True)
         'optional
         clsgeom_ribbon.AddGgParameter("alpha")
         clsgeom_ribbon.AddGgParameter("colour")
@@ -494,10 +494,10 @@ Public Class ucrGeom
 
         clsgeom_segment.strGeomName = "geom_segment"
         'mandatory
-        clsgeom_segment.AddGgParameter("x")
-        clsgeom_segment.AddGgParameter("xend")
-        clsgeom_segment.AddGgParameter("y")
-        clsgeom_segment.AddGgParameter("yend")
+        clsgeom_segment.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_segment.AddGgParameter("xend", bIsMandatory:=True)
+        clsgeom_segment.AddGgParameter("y", bIsMandatory:=True)
+        clsgeom_segment.AddGgParameter("yend", bIsMandatory:=True)
         'optional
         clsgeom_segment.AddGgParameter("alpha")
         clsgeom_segment.AddGgParameter("colour")
@@ -507,8 +507,8 @@ Public Class ucrGeom
 
         clsgeom_smooth.strGeomName = "geom_smooth"
         'mandatory
-        clsgeom_smooth.AddGgParameter("x")
-        clsgeom_smooth.AddGgParameter("y")
+        clsgeom_smooth.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_smooth.AddGgParameter("y", bIsMandatory:=True)
         'optional 
         clsgeom_smooth.AddGgParameter("alpha")
         clsgeom_smooth.AddGgParameter("colour")
@@ -520,10 +520,10 @@ Public Class ucrGeom
 
         clsgeom_spoke.strGeomName = "geom_spoke"
         'mandatory
-        clsgeom_spoke.AddGgParameter("angle")
-        clsgeom_spoke.AddGgParameter("radius")
-        clsgeom_spoke.AddGgParameter("x")
-        clsgeom_spoke.AddGgParameter("y")
+        clsgeom_spoke.AddGgParameter("angle", bIsMandatory:=True)
+        clsgeom_spoke.AddGgParameter("radius", bIsMandatory:=True)
+        clsgeom_spoke.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_spoke.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_spoke.AddGgParameter("alpha")
         clsgeom_spoke.AddGgParameter("colour")
@@ -532,8 +532,8 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_spoke)
 
         clsgeom_step.strGeomName = "geom_step"
-        clsgeom_step.AddGgParameter("x")
-        clsgeom_step.AddGgParameter("y")
+        clsgeom_step.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_step.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_step.AddGgParameter("alpha")
         clsgeom_step.AddGgParameter("colour")
@@ -543,9 +543,9 @@ Public Class ucrGeom
 
         clsgeom_text.strGeomName = "geom_text"
         'mandatory
-        clsgeom_text.AddGgParameter("label")
-        clsgeom_text.AddGgParameter("x")
-        clsgeom_text.AddGgParameter("y")
+        clsgeom_text.AddGgParameter("label", bIsMandatory:=True)
+        clsgeom_text.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_text.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_text.AddGgParameter("alpha")
         clsgeom_text.AddGgParameter("color")
@@ -558,8 +558,8 @@ Public Class ucrGeom
 
         clsgeom_tile.strGeomName = "geom_tile"
         'mandatory
-        clsgeom_tile.AddGgParameter("x")
-        clsgeom_tile.AddGgParameter("y")
+        clsgeom_tile.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_tile.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_tile.AddGgParameter("alpha")
         clsgeom_tile.AddGgParameter("colour")
@@ -570,8 +570,8 @@ Public Class ucrGeom
 
         clsgeom_violin.strGeomName = "geom_violin"
         'mandatory
-        clsgeom_violin.AddGgParameter("x")
-        clsgeom_violin.AddGgParameter("y")
+        clsgeom_violin.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_violin.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_violin.AddGgParameter("alpha")
         clsgeom_violin.AddGgParameter("colour")
