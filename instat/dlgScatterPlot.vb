@@ -82,7 +82,6 @@ Public Class dlgScatterPlot
         ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForScatter.SetSelector(ucrSelectorForScatter)
         ucrVariablesAsFactorForScatter.SetExcludedDataTypes({"numeric"})
-        ucrVariablesAsFactorForScatter.SetReceiverStatus()
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
     End Sub
