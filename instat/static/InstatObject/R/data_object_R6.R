@@ -334,6 +334,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
 }
 )
 
+#TODO remove this method
 data_object$set("public", "remove_columns_in_data_from_start_position", function(start_pos, col_numbers = 1) {
   if (start_pos <= 0) stop("You cannot remove a column into the position less or equal to zero.")
   if (start_pos %% 1 != 0) stop("start_pos value should be an integer.")
@@ -836,5 +837,19 @@ data_object$set("public", "get_data_type", function(col_name = "") {
     else type = "factor"
   }
   return(type)
+}
+)
+
+data_object$set("public", "set_hidden_columns", function(col_names) {
+  if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
+  
+  self$append_to_variables_metadata(col_names, is_hidden_label, TRUE)
+  hidden_cols = self$get_column_names()[!self$get_column_names() %in% col_names]
+  self$append_to_variables_metadata(hidden_cols, is_hidden_label, FALSE)
+}
+)
+
+data_object$set("public", "unhide_all_columns", function() {
+  self$append_to_variables_metadata(self$get_column_names(), is_hidden_label, FALSE)
 }
 )
