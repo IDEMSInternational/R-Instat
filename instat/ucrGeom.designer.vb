@@ -23,7 +23,7 @@ Partial Class ucrGeom
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.cboGeomList = New System.Windows.Forms.ComboBox()
-        Me.lblGeomList = New System.Windows.Forms.Label()
+        Me.lblTypeofLayer = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cboGeomList
@@ -35,23 +35,23 @@ Partial Class ucrGeom
         Me.cboGeomList.Size = New System.Drawing.Size(164, 21)
         Me.cboGeomList.TabIndex = 0
         '
-        'lblGeomList
+        'lblTypeofLayer
         '
-        Me.lblGeomList.AutoSize = True
-        Me.lblGeomList.Location = New System.Drawing.Point(4, 4)
-        Me.lblGeomList.Name = "lblGeomList"
-        Me.lblGeomList.Size = New System.Drawing.Size(54, 13)
-        Me.lblGeomList.TabIndex = 1
-        Me.lblGeomList.Text = "Geom List"
-        Me.lblGeomList.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.lblTypeofLayer.AutoSize = True
+        Me.lblTypeofLayer.Location = New System.Drawing.Point(4, 4)
+        Me.lblTypeofLayer.Name = "lblTypeofLayer"
+        Me.lblTypeofLayer.Size = New System.Drawing.Size(106, 13)
+        Me.lblTypeofLayer.TabIndex = 1
+        Me.lblTypeofLayer.Text = "Type of Layer(Geom)"
+        Me.lblTypeofLayer.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'UcrGeoms
+        'ucrGeom
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblGeomList)
+        Me.Controls.Add(Me.lblTypeofLayer)
         Me.Controls.Add(Me.cboGeomList)
-        Me.Name = "UcrGeoms"
+        Me.Name = "ucrGeom"
         Me.Size = New System.Drawing.Size(182, 50)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -59,5 +59,5 @@ Partial Class ucrGeom
     End Sub
 
     Friend WithEvents cboGeomList As ComboBox
-    Friend WithEvents lblGeomList As Label
+    Friend WithEvents lblTypeofLayer As Label
 End Class
