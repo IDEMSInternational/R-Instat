@@ -46,12 +46,12 @@ Public Class RSyntax
         bUseBaseOperator = True
     End Sub
 
-    Public Sub SetAssignTo(strAssignToName As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "")
+    Public Sub SetAssignTo(strAssignToName As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional bAssignToIsPrefix As Boolean = False)
         If bUseBaseOperator Then
-            clsBaseOperator.SetAssignTo(strAssignToName)
+            clsBaseOperator.SetAssignTo(strAssignToName, bAssignToIsPrefix:=bAssignToIsPrefix)
         End If
         If bUseBaseFunction Then
-            clsBaseFunction.SetAssignTo(strAssignToName, strTempDataframe, strTempColumn, strTempModel)
+            clsBaseFunction.SetAssignTo(strAssignToName, strTempDataframe, strTempColumn, strTempModel, bAssignToIsPrefix)
         End If
     End Sub
 
