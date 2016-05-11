@@ -31,6 +31,7 @@ Public Class frmEditor
     Private clsConvertTo As New RFunction
     Private clsInsertRows As New RFunction
     Private clsDeleteRows As New RFunction
+    Private clsReplaceValue As New RFunction
     Public lstColumnNames As String()
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -63,6 +64,7 @@ Public Class frmEditor
         clsInsertRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
         clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
         clsUnhideAllColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unhide_all_columns")
+        clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         UpdateRFunctionDataFrameParameters()
     End Sub
 
@@ -293,9 +295,16 @@ Public Class frmEditor
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
-        Dim strSctipt As String
-        strSctipt = frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_name = " & Chr(34) & grdData.CurrentWorksheet.GetColumnHeader(grdData.CurrentWorksheet.SelectionRange.Col).Text & Chr(34) & ",index=" & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",new_value=" & Chr(34) & e.NewData & Chr(34) & ")"
-        frmMain.clsRLink.RunScript(strSctipt)
+        Dim dblValue As Double
+
+        clsReplaceValue.AddParameter("col_name", Chr(34) & lstColumnNames(grdCurrSheet.SelectionRange.Col) & Chr(34))
+        clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.Row).Text & Chr(34))
+        If Double.TryParse(e.NewData, dblValue) OrElse e.NewData = "TRUE" OrElse e.NewData = "FALSE" OrElse e.NewData = "NA" Then
+            clsReplaceValue.AddParameter("row", e.NewData)
+        Else
+            clsReplaceValue.AddParameter("row", Chr(34) & e.NewData & Chr(34))
+        End If
+        frmMain.clsRLink.RunScript(clsReplaceValue.ToScript())
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
@@ -412,6 +421,7 @@ Public Class frmEditor
             clsInsertRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsDeleteRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsReplaceValue.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
         End If
     End Sub
 End Class
