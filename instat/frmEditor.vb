@@ -196,15 +196,26 @@ Public Class frmEditor
     '    End If
     'End Sub
 
-    Private Sub mnuinsertRow_Click(sender As Object, e As EventArgs) Handles mnuInsertRow.Click
-        clsInsertRows.AddParameter("start_pos", grdData.CurrentWorksheet.SelectionRange.Row + 1)
+    Private Sub mnuInsertRowsAfter_Click(sender As Object, e As EventArgs) Handles mnuInsertRowsAfter.Click
+        clsInsertRows.AddParameter("start_row", grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.EndRow).Text)
         clsInsertRows.AddParameter("number_rows", grdData.CurrentWorksheet.SelectionRange.Rows)
-        frmMain.clsRLink.RunScript(clsInsertRows.ToScript(), strComment:="Right Click menu: Insert row(s)")
+        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+            clsInsertRows.AddParameter("before", "FALSE")
+        Else
+            clsInsertRows.RemoveParameterByName("before")
+        End If
+        frmMain.clsRLink.RunScript(clsInsertRows.ToScript(), strComment:="Right Click menu: Insert row(s) After")
+    End Sub
+
+    Private Sub mnuInsertRowsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertRowsBefore.Click
+        clsInsertRows.AddParameter("start_row", grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.Row).Text)
+        clsInsertRows.AddParameter("number_rows", grdData.CurrentWorksheet.SelectionRange.Rows)
+        clsInsertRows.AddParameter("before", "TRUE")
+        frmMain.clsRLink.RunScript(clsInsertRows.ToScript(), strComment:="Right Click menu: Insert row(s) Before")
     End Sub
 
     Private Sub mnuDeleteRows_Click(sender As Object, e As EventArgs) Handles mnuDeleteRows.Click
-        clsDeleteRows.AddParameter("start_pos", grdData.CurrentWorksheet.SelectionRange.Row + 1)
-        clsDeleteRows.AddParameter("num_rows", grdData.CurrentWorksheet.SelectionRange.Rows)
+        clsDeleteRows.AddParameter("row_names", SelectedRows())
         frmMain.clsRLink.RunScript(clsDeleteRows.ToScript(), strComment:="Right Click menu: Delete row(s)")
     End Sub
 
@@ -315,27 +326,49 @@ Public Class frmEditor
 
     Private Function SelectedColumns(Optional bWithQuotes As Boolean = True) As String
         Dim lstSelectedColumns As New List(Of String)
-        Dim cols As String = ""
+        Dim strCols As String = ""
 
         If lstColumnNames IsNot Nothing AndAlso lstColumnNames.Count > 0 Then
             For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
                 lstSelectedColumns.Add(lstColumnNames(i))
             Next
 
-            cols = "c("
+            strCols = "c("
             For j As Integer = 0 To lstSelectedColumns.Count - 1
                 If j > 0 Then
-                    cols = cols & ","
+                    strCols = strCols & ","
                 End If
                 If bWithQuotes Then
-                    cols = cols & Chr(34) & lstSelectedColumns(j) & Chr(34)
+                    strCols = strCols & Chr(34) & lstSelectedColumns(j) & Chr(34)
                 Else
-                    cols = cols & lstSelectedColumns(j)
+                    strCols = strCols & lstSelectedColumns(j)
                 End If
             Next
-            cols = cols & ")"
+            strCols = strCols & ")"
         End If
-        Return cols
+        Return strCols
+    End Function
+
+    Private Function SelectedRows(Optional bWithQuotes As Boolean = True) As String
+        Dim lstSelectedRows As New List(Of String)
+        Dim strRows As String = ""
+
+        For i As Integer = grdData.CurrentWorksheet.SelectionRange.Row To grdData.CurrentWorksheet.SelectionRange.Row + grdData.CurrentWorksheet.SelectionRange.Rows - 1
+            lstSelectedRows.Add(grdCurrSheet.RowHeaders.Item(i).Text)
+        Next
+        strRows = "c("
+        For j As Integer = 0 To lstSelectedRows.Count - 1
+            If j > 0 Then
+                strRows = strRows & ","
+            End If
+            If bWithQuotes Then
+                strRows = strRows & Chr(34) & lstSelectedRows(j) & Chr(34)
+            Else
+                strRows = strRows & lstSelectedRows(j)
+            End If
+        Next
+        strRows = strRows & ")"
+        Return strRows
     End Function
 
     Private Function SelectedColumnsAsArray() As String()

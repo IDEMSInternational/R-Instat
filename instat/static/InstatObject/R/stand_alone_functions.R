@@ -30,6 +30,7 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
     i = i + 1
   }
   colnames(out) <- colnames(data)
+  rownames(out) <- rownames(data)
   return(out)
 }
 
