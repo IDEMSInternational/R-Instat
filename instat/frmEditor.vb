@@ -24,7 +24,14 @@ Public Class frmEditor
     'Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Private clsAppendVariablesMetaData As New RFunction
+    Private clsUnhideAllColumns As New RFunction
+    Private clsInsertColumns As New RFunction
     Private clsColumnNames As New RFunction
+    Private clsDeleteColumns As New RFunction
+    Private clsConvertTo As New RFunction
+    Private clsInsertRows As New RFunction
+    Private clsDeleteRows As New RFunction
+    Public lstColumnNames As String()
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsGrids.SetData(grdData)
@@ -50,19 +57,42 @@ Public Class frmEditor
     Private Sub SetRFunctions()
         clsAppendVariablesMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+        clsInsertColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+        clsDeleteColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
+        clsConvertTo.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsInsertRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
+        clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
+        clsUnhideAllColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unhide_all_columns")
         UpdateRFunctionDataFrameParameters()
     End Sub
 
-    Private Sub insertCol_Click(sender As Object, e As EventArgs) Handles mnuInsertCol.Click
-        Dim strSctipt As String
-        strSctipt = frmMain.clsRLink.strInstatDataObject & "$insert_column_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",col_data = " & "c(), start_pos = " & grdData.CurrentWorksheet.SelectionRange.Col + 1 & ",number_cols =" & grdData.CurrentWorksheet.SelectionRange.Cols & ")"
-        frmMain.clsRLink.RunScript(strSctipt)
+    Private Sub mnuInsertColsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertColsBefore.Click
+        clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(True))
+        clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
+        clsInsertColumns.AddParameter("before", "TRUE")
+        'TODO This should be an option in dialog
+        clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+        clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+        frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) Before")
+    End Sub
+
+    Private Sub mnuInsertColsAfter_Click(sender As Object, e As EventArgs) Handles mnuInsertColsAfter.Click
+        clsInsertColumns.AddParameter("adjacent_column", SelectedColumnPosition(False))
+        clsInsertColumns.AddParameter("num_cols", grdCurrSheet.SelectionRange.Cols)
+        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+            clsInsertColumns.AddParameter("before", "FALSE")
+        Else
+            clsInsertColumns.RemoveParameterByName("before")
+        End If
+        'TODO This should be an option in dialog
+        clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+        clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+        frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
     End Sub
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
-        Dim strSctipt As String
-        strSctipt = frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data_from_start_position(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", start_pos = " & grdData.CurrentWorksheet.SelectionRange.Col + 1 & ",col_numbers =" & grdData.CurrentWorksheet.SelectionRange.Cols & ")"
-        frmMain.clsRLink.RunScript(strSctipt)
+        clsDeleteColumns.AddParameter("cols", SelectedColumns())
+        frmMain.clsRLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
     End Sub
 
     'Private Sub resetToDefaultWidthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles resetToDefaultWidthToolStripMenuItem.Click
@@ -73,19 +103,17 @@ Public Class frmEditor
         clsAppendVariablesMetaData.AddParameter("col_names", SelectedColumns())
         clsAppendVariablesMetaData.AddParameter("property", "is_hidden_label")
         clsAppendVariablesMetaData.AddParameter("new_val", "TRUE")
-        frmMain.clsRLink.RunScript(clsAppendVariablesMetaData.ToScript(), strComment:="Hide column(s)" & SelectedColumns())
+        frmMain.clsRLink.RunScript(clsAppendVariablesMetaData.ToScript(), strComment:="Right click menu: Hide column(s)" & SelectedColumns())
         'grdData.DoAction(New unvell.ReoGrid.Actions.HideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
     End Sub
 
     Private Sub mnuUnhideColumns_Click(sender As Object, e As EventArgs) Handles mnuUnhideColumns.Click
+        dlgHideShowColumns.ShowDialog()
         'grdData.DoAction(New unvell.ReoGrid.Actions.UnhideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
     End Sub
 
     Private Sub mnuUnhideAllColumns_Click(sender As Object, e As EventArgs) Handles mnuUnhideAllColumns.Click
-        clsAppendVariablesMetaData.AddParameter("col_names", clsRFunctionParameter:=clsColumnNames)
-        clsAppendVariablesMetaData.AddParameter("property", "is_hidden_label")
-        clsAppendVariablesMetaData.AddParameter("new_val", "FALSE")
-        frmMain.clsRLink.RunScript(clsAppendVariablesMetaData.ToScript(), strComment:="Unhide all columns")
+        frmMain.clsRLink.RunScript(clsUnhideAllColumns.ToScript(), strComment:="Right click menu: Unhide all columns")
     End Sub
 
     'Private Sub groupColumnsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles groupColumnsToolStripMenuItem1.Click
@@ -169,15 +197,15 @@ Public Class frmEditor
     'End Sub
 
     Private Sub mnuinsertRow_Click(sender As Object, e As EventArgs) Handles mnuInsertRow.Click
-        Dim strSctipt As String
-        strSctipt = frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ",row_data = " & "c(), start_pos = " & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",number_rows =" & grdData.CurrentWorksheet.SelectionRange.Rows & ")"
-        frmMain.clsRLink.RunScript(strSctipt)
+        clsInsertRows.AddParameter("start_pos", grdData.CurrentWorksheet.SelectionRange.Row + 1)
+        clsInsertRows.AddParameter("number_rows", grdData.CurrentWorksheet.SelectionRange.Rows)
+        frmMain.clsRLink.RunScript(clsInsertRows.ToScript(), strComment:="Right Click menu: Insert row(s)")
     End Sub
 
     Private Sub mnuDeleteRows_Click(sender As Object, e As EventArgs) Handles mnuDeleteRows.Click
-        Dim strSctipt As String
-        strSctipt = frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", start_pos = " & grdData.CurrentWorksheet.SelectionRange.Row + 1 & ",num_rows =" & grdData.CurrentWorksheet.SelectionRange.Rows & ")"
-        frmMain.clsRLink.RunScript(strSctipt)
+        clsDeleteRows.AddParameter("start_pos", grdData.CurrentWorksheet.SelectionRange.Row + 1)
+        clsDeleteRows.AddParameter("num_rows", grdData.CurrentWorksheet.SelectionRange.Rows)
+        frmMain.clsRLink.RunScript(clsDeleteRows.ToScript(), strComment:="Right Click menu: Delete row(s)")
     End Sub
 
     'Private Sub resetToDefaultHeightToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles resetToDefaultHeightToolStripMenuItem.Click
@@ -196,7 +224,7 @@ Public Class frmEditor
     '    Try
     '        grdData.CurrentWorksheet.Cut()
     '    Catch generatedExceptionName As unvell.ReoGrid.RangeIntersectionException
-    '        MessageBox.Show("Cannot cut a range that is a part of another merged cell.")
+    '        MessageBox.Show("Cannot cut a range that Is a part Of another merged cell.")
     '    Catch
     '        MessageBox.Show("We can't to do that for selected range.")
     '    End Try
@@ -242,7 +270,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
-        dlgName.SetCurrentColumn(grdCurrSheet.ColumnHeaders(grdData.CurrentWorksheet.SelectionRange.Col).Text, grdCurrSheet.Name)
+        dlgName.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgName.ShowDialog()
     End Sub
 
@@ -268,40 +296,69 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
-        Dim strScript As String
-        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", col_names = " & SelectedColumns() & ",to_type =" & Chr(34) & "numeric" & Chr(34) & ")"
-        frmMain.clsRLink.RunScript(strScript)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
+        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        frmMain.clsRLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
 
     Private Sub mnuConvertText_Click(sender As Object, e As EventArgs) Handles mnuConvertText.Click
-        Dim strScript As String
-        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", col_names = " & SelectedColumns() & ",to_type =" & Chr(34) & "character" & Chr(34) & ")"
-        frmMain.clsRLink.RunScript(strScript)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "character" & Chr(34))
+        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        frmMain.clsRLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
     End Sub
 
     Private Sub mnuConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToFactor.Click
-        Dim strScript As String
-        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ", col_names = " & SelectedColumns() & ",to_type =" & Chr(34) & "factor" & Chr(34) & ")"
-        frmMain.clsRLink.RunScript(strScript)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
+        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        frmMain.clsRLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
     End Sub
 
-    Private Function SelectedColumns()
-        Dim col_list As New List(Of String)
-        Dim strLength As Integer
-        For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
-            strLength = grdData.CurrentWorksheet.GetColumnHeader(i).Text.IndexOf(" ")
-            col_list.Add(grdData.CurrentWorksheet.GetColumnHeader(i).Text.Substring(0, strLength))
-        Next
-        Dim cols As String
-        cols = "c" & "("
-        For j As Integer = 0 To col_list.Count - 1
-            If j > 0 Then
-                cols = cols & ","
-            End If
-            cols = cols & Chr(34) & col_list(j) & Chr(34)
-        Next
-        cols = cols & ")"
+    Private Function SelectedColumns(Optional bWithQuotes As Boolean = True) As String
+        Dim lstSelectedColumns As New List(Of String)
+        Dim cols As String = ""
+
+        If lstColumnNames IsNot Nothing AndAlso lstColumnNames.Count > 0 Then
+            For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
+                lstSelectedColumns.Add(lstColumnNames(i))
+            Next
+
+            cols = "c("
+            For j As Integer = 0 To lstSelectedColumns.Count - 1
+                If j > 0 Then
+                    cols = cols & ","
+                End If
+                If bWithQuotes Then
+                    cols = cols & Chr(34) & lstSelectedColumns(j) & Chr(34)
+                Else
+                    cols = cols & lstSelectedColumns(j)
+                End If
+            Next
+            cols = cols & ")"
+        End If
         Return cols
+    End Function
+
+    Private Function SelectedColumnsAsArray() As String()
+        Dim strSelectedColumns As String()
+
+        If lstColumnNames IsNot Nothing AndAlso lstColumnNames.Count > 0 Then
+            strSelectedColumns = New String(grdData.CurrentWorksheet.SelectionRange.Cols - 1) {}
+            For i As Integer = 0 To grdData.CurrentWorksheet.SelectionRange.Cols - 1
+                strSelectedColumns(i) = lstColumnNames(i + grdData.CurrentWorksheet.SelectionRange.Col)
+            Next
+            Return strSelectedColumns
+        Else
+            strSelectedColumns = New String() {}
+        End If
+        Return strSelectedColumns
+    End Function
+
+    Private Function SelectedColumnPosition(bFirstNotLast As Boolean)
+        If bFirstNotLast Then
+            Return Chr(34) & lstColumnNames(grdData.CurrentWorksheet.SelectionRange.Col) & Chr(34)
+        Else
+            Return Chr(34) & lstColumnNames(grdData.CurrentWorksheet.SelectionRange.EndCol) & Chr(34)
+        End If
     End Function
 
     Private Sub columnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles columnFilterToolStripMenuItem.Click
@@ -316,6 +373,12 @@ Public Class frmEditor
         If grdCurrSheet IsNot Nothing Then
             clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsColumnNames.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsInsertColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsDeleteColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsConvertTo.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsInsertRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsDeleteRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
         End If
     End Sub
 End Class
