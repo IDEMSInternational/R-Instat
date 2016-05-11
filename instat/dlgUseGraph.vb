@@ -19,33 +19,25 @@ Public Class dlgUseGraph
     Private Sub dlgUseGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReOpenDialog()
         End If
     End Sub
 
     Private Sub SetDefaults()
 
     End Sub
+    Private Sub InitialiseDialog()
+
+    End Sub
+    Private Sub ReOpenDialog()
+
+    End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub OpenGraphBrowser()
-        Dim GraphBrowser As OpenFileDialog = New OpenFileDialog()
-        Dim strFileName As String
-
-        GraphBrowser.Title = "Open Saved Graph Dialog"
-        GraphBrowser.InitialDirectory = "C:\"
-        GraphBrowser.Filter = "All files (*.*)|*.*"
-
-        If GraphBrowser.ShowDialog() = DialogResult.OK Then
-            strFileName = GraphBrowser.FileName
-        End If
-    End Sub
-
-    Private Sub cmdOpenGraph_Click(sender As Object, e As EventArgs) Handles cmdOpenGraph.Click
-        OpenGraphBrowser()
     End Sub
 End Class
