@@ -108,10 +108,12 @@ Public Class ucrGeom
 
 
         clsgeom_abline.strGeomName = "geom_abline"
-        clsgeom_abline.AddGgParameter("alpha", bIsMandatory:=True)
-        clsgeom_abline.AddGgParameter("colour", bIsMandatory:=True)
-        clsgeom_abline.AddGgParameter("linetype", bIsMandatory:=True)
-        clsgeom_abline.AddGgParameter("size", bIsMandatory:=True)
+        clsgeom_abline.AddGgParameter("x", bIsMandatory:=True)
+        clsgeom_abline.AddGgParameter("y", bIsMandatory:=True)
+        clsgeom_abline.AddGgParameter("alpha")
+        clsgeom_abline.AddGgParameter("colour")
+        clsgeom_abline.AddGgParameter("linetype")
+        clsgeom_abline.AddGgParameter("size")
         'aesthetics that control position of line include
         'geom_vline:xintercept
         'geom_hline:yintercept
@@ -133,7 +135,8 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_area)
 
         clsgeom_bar.strGeomName = "geom_bar"
-        clsgeom_bar.AddGgParameter("x")
+        clsgeom_bar.AddGgParameter("x", bIsMandatory:=True)
+        'Optional
         clsgeom_bar.AddGgParameter("alpha")
         clsgeom_bar.AddGgParameter("fill")
         clsgeom_bar.AddGgParameter("colour")
@@ -245,8 +248,9 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_density_2d)
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
-        clsgeom_dotplot.AddGgParameter("x", strIncludedDataTypes:={"factor"})
-        clsgeom_dotplot.AddGgParameter("y", strIncludedDataTypes:={"numeric"})
+        clsgeom_dotplot.AddGgParameter("x", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_dotplot.AddGgParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        'Optional
         clsgeom_dotplot.AddGgParameter("alpha")
         clsgeom_dotplot.AddGgParameter("colour")
         clsgeom_dotplot.AddGgParameter("fill", strIncludedDataTypes:={"factor"})
@@ -304,7 +308,7 @@ Public Class ucrGeom
         clsgeom_histogram.AddGgParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         clsgeom_histogram.AddGgParameter("alpha")
         clsgeom_histogram.AddGgParameter("colour")
-        clsgeom_histogram.AddGgParameter("fill", strIncludedDataTypes:={"factor"})
+        clsgeom_histogram.AddGgParameter("fill", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
         clsgeom_histogram.AddGgParameter("linetype")
         clsgeom_histogram.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_histogram)
@@ -342,7 +346,7 @@ Public Class ucrGeom
         clsgeom_label.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_label.AddGgParameter("alpha")
-        clsgeom_label.AddGgParameter("color")
+        clsgeom_label.AddGgParameter("colour")
         clsgeom_label.AddGgParameter("family")
         clsgeom_label.AddGgParameter("fontface")
         clsgeom_label.AddGgParameter("hjust")
@@ -357,7 +361,7 @@ Public Class ucrGeom
         clsgeom_line.AddGgParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         'optional
         clsgeom_line.AddGgParameter("alpha")
-        clsgeom_line.AddGgParameter("color")
+        clsgeom_line.AddGgParameter("colour")
         clsgeom_line.AddGgParameter("linetype")
         clsgeom_line.AddGgParameter("size")
         lstAllGeoms.Add(clsgeom_line)
@@ -548,7 +552,7 @@ Public Class ucrGeom
         clsgeom_text.AddGgParameter("y", bIsMandatory:=True)
         'optional
         clsgeom_text.AddGgParameter("alpha")
-        clsgeom_text.AddGgParameter("color")
+        clsgeom_text.AddGgParameter("colour")
         clsgeom_text.AddGgParameter("family")
         clsgeom_text.AddGgParameter("fontface")
         clsgeom_text.AddGgParameter("hjust")
