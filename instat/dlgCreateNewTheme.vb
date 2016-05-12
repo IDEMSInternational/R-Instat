@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class dlgCreateNewTheme
     Private bFirstLoad As Boolean = True
-    Private Sub dlgThemes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgCreateNewTheme_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
