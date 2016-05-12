@@ -15,13 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrSelectorByDataFrame
-    Private Sub ucrSelectorByDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadList()
-        'lstAvailableVariable.HeaderStyle = ColumnHeaderStyle.None
-
-    End Sub
-
     Public Event DataFrameChanged()
+
     Private Sub ucrAvailableDataFrames_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrAvailableDataFrames.DataFrameChanged
         strCurrentDataFrame = ucrAvailableDataFrames.cboAvailableDataFrames.Text
         LoadList()

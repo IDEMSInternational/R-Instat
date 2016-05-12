@@ -19,8 +19,19 @@ Public Class ucrReceiver
     Public WithEvents Selector As ucrSelector
     Public lstIncludedDataTypes As List(Of String)
     Public lstExcludedDataTypes As List(Of String)
-    Public bFirstLoad As Boolean = True
-    Public strSelectorHeading As String = "Variables"
+    Public bFirstLoad As Boolean
+    Public strSelectorHeading As String
+
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        lstIncludedDataTypes = New List(Of String)
+        lstExcludedDataTypes = New List(Of String)
+        bFirstLoad = True
+        strSelectorHeading = "Variables"
+    End Sub
 
     Public Overridable Sub AddSelected()
 
@@ -64,11 +75,6 @@ Public Class ucrReceiver
 
     Private Sub ucrReceiver_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         translateEach(Controls)
-        If bFirstLoad Then
-            lstIncludedDataTypes = New List(Of String)
-            lstExcludedDataTypes = New List(Of String)
-            bFirstLoad = False
-        End If
     End Sub
 
     Public Function GetIncludedDataTypes(Optional bWithQuotes As Boolean = True) As String
