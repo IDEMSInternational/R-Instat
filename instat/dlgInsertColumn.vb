@@ -239,8 +239,6 @@ Public Class dlgInsertColumn
                             ucrBase.clsRsyntax.AddParameter("before", "FALSE")
 
                     End Select
-                Else
-                    ucrBase.clsRsyntax.RemoveParameter("before")
                 End If
             End If
         Else
