@@ -426,8 +426,8 @@ instat_object$set("public", "get_model_names", function() {
 }
 )
 
-instat_object$set("public", "replace_value_in_data", function(data_name, col_name, index, new_value) {
-  self$get_data_objects(data_name)$replace_value_in_data(col_name, index, new_value)
+instat_object$set("public", "replace_value_in_data", function(data_name, col_name, row, new_value) {
+  self$get_data_objects(data_name)$replace_value_in_data(col_name, row, new_value)
 } 
 )
 
@@ -447,8 +447,8 @@ instat_object$set("public", "remove_columns_in_data", function(data_name, cols) 
 } 
 )
 
-instat_object$set("public", "remove_rows_in_data", function(data_name, start_pos, num_rows) {
-  self$get_data_objects(data_name)$remove_rows_in_data(start_pos  = start_pos, num_rows = num_rows)
+instat_object$set("public", "remove_rows_in_data", function(data_name, row_names) {
+  self$get_data_objects(data_name)$remove_rows_in_data(row_names = row_names)
 } 
 )
 
@@ -496,8 +496,9 @@ instat_object$set("public", "reorder_columns_in_data", function(data_name, col_o
 }
 )
 
-instat_object$set("public", "insert_row_in_data", function(data_name, start_pos, row_data = c(), number_rows) {
-  self$get_data_objects(data_name)$insert_row_in_data(start_pos  = start_pos, row_data = row_data, number_rows = number_rows)
+#TODO Think how to use row_data argument
+instat_object$set("public", "insert_row_in_data", function(data_name, start_row, row_data = c(), number_rows, before = FALSE) {
+  self$get_data_objects(data_name)$insert_row_in_data(start_row = start_row, row_data = row_data, number_rows = number_rows, before = before)
 }
 )
 
@@ -629,6 +630,10 @@ instat_object$set("public","set_hidden_columns", function(data_name, col_names) 
 instat_object$set("public","unhide_all_columns", function(data_name) {
   if(missing(data_name)) sapply(self$get_data_objects(), function(obj) obj$unhide_all_columns())
   else self$get_data_objects(data_name)$unhide_all_columns()
+} 
+)
 
+instat_object$set("public","set_row_names", function(data_name, row_names) {
+  self$get_data_objects(data_name)$set_row_names(row_names = row_names)
 } 
 )

@@ -20,13 +20,14 @@ Public Class Geoms
 
 
 
-    Public Sub AddGgParameter(strGgParameterName As String, Optional strGgParameterValue As String = Nothing, Optional strIncludedDataTypes As String() = Nothing, Optional strExcludedDataTypes As String() = Nothing)
+    Public Sub AddGgParameter(strGgParameterName As String, Optional strGgParameterValue As String = Nothing, Optional strIncludedDataTypes As String() = Nothing, Optional strExcludedDataTypes As String() = Nothing, Optional bIsMandatory As Boolean = False)
         'will be adding parameters to the geom as well as the value of the parameter.
         Dim NewGgParameter As New GgParameters
         NewGgParameter.strGgParameterName = strGgParameterName
         NewGgParameter.strGgParameterValue = strGgParameterValue
         NewGgParameter.strIncludedDataTypes = strIncludedDataTypes
         NewGgParameter.strExcludedDataTypes = strExcludedDataTypes
+        NewGgParameter.bIsMandatory = bIsMandatory
         clsGgParameters.Add(NewGgParameter)
     End Sub
 End Class
@@ -37,7 +38,7 @@ Public Class GgParameters
     Public strIncludedDataTypes As String()
     Public strExcludedDataTypes As String()
     Public strGgParameterValue As String
-
+    Public bIsMandatory As Boolean
 End Class
 
 
