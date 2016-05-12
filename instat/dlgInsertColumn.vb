@@ -61,14 +61,14 @@ Public Class dlgInsertColumn
     Private Sub ReopenDialog()
         ucrDataFramesList.Reset()
         If rdoInsertColumns.Checked Then
-            If nudPos.Value > ucrDataFramesList.iColumnCount + 1 Then
-                nudPos.Value = ucrDataFramesList.iColumnCount + 1
-                ucrBase.clsRsyntax.AddParameter("num_cols", nudNumCols.Value)
+            If nudInsertColumns.Value > ucrDataFramesList.iColumnCount + 1 Then
+                nudInsertColumns.Value = ucrDataFramesList.iColumnCount + 1
+                ucrBase.clsRsyntax.AddParameter("num_cols", nudInsertColumns.Value)
             End If
         ElseIf rdoInsertRows.Checked Then
             If nudPos.Value > ucrDataFramesList.iDataFrameLength + 1 Then
                 nudPos.Value = ucrDataFramesList.iDataFrameLength + 1
-                ucrBase.clsRsyntax.AddParameter("num_cols", nudNumCols.Value)
+                ucrBase.clsRsyntax.AddParameter("number_rows", nudNumCols.Value)
             End If
         End If
     End Sub
@@ -121,13 +121,10 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub ucrDataFramesList_DataFrameChanged() Handles ucrDataFramesList.DataFrameChanged
-        If rdoInsertRows.Checked Then
-            ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFramesList.cboAvailableDataFrames.SelectedItem & Chr(34))
-        Else
-            ucrSelectorInseertColumns.strCurrentDataFrame = ucrDataFramesList.cboAvailableDataFrames.SelectedItem
-            ucrSelectorInseertColumns.LoadList()
-            ucrBase.clsRsyntax.RemoveParameter("data_name")
-        End If
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFramesList.cboAvailableDataFrames.SelectedItem & Chr(34))
+        ucrSelectorInseertColumns.strCurrentDataFrame = ucrDataFramesList.cboAvailableDataFrames.SelectedItem
+        ucrSelectorInseertColumns.LoadList()
+
     End Sub
 
 
@@ -175,7 +172,7 @@ Public Class dlgInsertColumn
             ucrInputPrefixForInsertedColumns.Visible = True
             ucrInputDefaultValue.Visible = True
 
-        Else
+        ElseIf rdoInsertRows.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
             lblNumberOfRowsToInsert.Visible = True
             ucrBase.clsRsyntax.RemoveParameter("num_cols")
