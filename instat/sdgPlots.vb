@@ -43,8 +43,9 @@ Public Class sdgPlots
         FacetsCheck(False)
 
         'setting current text on the ucrInputThemeList
-        ucrInputThemeLists.SetName("Choose Theme Here")
 
+
+        ucrInputThemeLists.SetName("Choose Theme Here")
         grpThemeArguments.Visible = False
         lblFont.Visible = False
         nudFont.Visible = False
