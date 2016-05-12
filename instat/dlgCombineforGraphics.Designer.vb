@@ -23,6 +23,9 @@ Partial Class dlgCombineforGraphics
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrCombineSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectedGraphsReceiver = New instat.ucrReceiverMultiple()
+        Me.lblSelected = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -32,11 +35,40 @@ Partial Class dlgCombineforGraphics
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
+        'ucrCombineSelector
+        '
+        Me.ucrCombineSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrCombineSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrCombineSelector.Name = "ucrCombineSelector"
+        Me.ucrCombineSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrCombineSelector.TabIndex = 1
+        '
+        'ucrSelectedGraphsReceiver
+        '
+        Me.ucrSelectedGraphsReceiver.Location = New System.Drawing.Point(253, 32)
+        Me.ucrSelectedGraphsReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectedGraphsReceiver.Name = "ucrSelectedGraphsReceiver"
+        Me.ucrSelectedGraphsReceiver.Selector = Nothing
+        Me.ucrSelectedGraphsReceiver.Size = New System.Drawing.Size(120, 158)
+        Me.ucrSelectedGraphsReceiver.TabIndex = 2
+        '
+        'lblSelected
+        '
+        Me.lblSelected.AutoSize = True
+        Me.lblSelected.Location = New System.Drawing.Point(253, 10)
+        Me.lblSelected.Name = "lblSelected"
+        Me.lblSelected.Size = New System.Drawing.Size(86, 13)
+        Me.lblSelected.TabIndex = 3
+        Me.lblSelected.Text = "Selected Graphs"
+        '
         'dlgCombineforGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(422, 306)
+        Me.Controls.Add(Me.lblSelected)
+        Me.Controls.Add(Me.ucrSelectedGraphsReceiver)
+        Me.Controls.Add(Me.ucrCombineSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgCombineforGraphics"
@@ -44,8 +76,12 @@ Partial Class dlgCombineforGraphics
         Me.Tag = "Combine"
         Me.Text = "Combine"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrCombineSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectedGraphsReceiver As ucrReceiverMultiple
+    Friend WithEvents lblSelected As Label
 End Class

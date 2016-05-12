@@ -47,9 +47,7 @@ Public Class dlgRandomSubsets
         ucrSelectorRandomSubsets.Focus()
         ucrReceiverSelected.Selector = ucrSelectorRandomSubsets
         ucrReceiverSelected.SetMeAsReceiver()
-        chkWithReplacement.Checked = False
-        nudNumberOfColumns.Value = 1
-        nudSampleSize.Value = 1
+        rdoWithReplacement.Checked = True
         TestOkEnabled()
 
     End Sub
