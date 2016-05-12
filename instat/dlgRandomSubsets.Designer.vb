@@ -22,45 +22,23 @@ Partial Class dlgRandomSubsets
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
         Me.lblSelected = New System.Windows.Forms.Label()
-        Me.chkSetSeed = New System.Windows.Forms.CheckBox()
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberOfColumns = New System.Windows.Forms.Label()
         Me.nudSampleSize = New System.Windows.Forms.NumericUpDown()
         Me.nudNumberOfColumns = New System.Windows.Forms.NumericUpDown()
         Me.chkWithReplacement = New System.Windows.Forms.CheckBox()
-        Me.ucrNewDataFrameName = New instat.ucrInputTextBox()
         Me.lblNewDataFrameName = New System.Windows.Forms.Label()
+        Me.nudSeed = New System.Windows.Forms.NumericUpDown()
+        Me.chkSeed = New System.Windows.Forms.CheckBox()
+        Me.ucrNewDataFrameName = New instat.ucrInputComboBox()
+        Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
+        Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         CType(Me.nudSampleSize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudNumberOfColumns, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSeed, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 299)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(400, 53)
-        Me.ucrBase.TabIndex = 10
-        '
-        'ucrSelectorRandomSubsets
-        '
-        Me.ucrSelectorRandomSubsets.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorRandomSubsets.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorRandomSubsets.Name = "ucrSelectorRandomSubsets"
-        Me.ucrSelectorRandomSubsets.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorRandomSubsets.TabIndex = 0
-        '
-        'ucrReceiverSelected
-        '
-        Me.ucrReceiverSelected.Location = New System.Drawing.Point(255, 97)
-        Me.ucrReceiverSelected.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSelected.Name = "ucrReceiverSelected"
-        Me.ucrReceiverSelected.Selector = Nothing
-        Me.ucrReceiverSelected.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverSelected.TabIndex = 2
         '
         'lblSelected
         '
@@ -71,17 +49,6 @@ Partial Class dlgRandomSubsets
         Me.lblSelected.TabIndex = 1
         Me.lblSelected.Tag = "Selected"
         Me.lblSelected.Text = "Selected"
-        '
-        'chkSetSeed
-        '
-        Me.chkSetSeed.AutoSize = True
-        Me.chkSetSeed.Location = New System.Drawing.Point(259, 130)
-        Me.chkSetSeed.Name = "chkSetSeed"
-        Me.chkSetSeed.Size = New System.Drawing.Size(70, 17)
-        Me.chkSetSeed.TabIndex = 3
-        Me.chkSetSeed.Tag = "Set_Seed"
-        Me.chkSetSeed.Text = "Set Seed"
-        Me.chkSetSeed.UseVisualStyleBackColor = True
         '
         'lblSampleSize
         '
@@ -128,13 +95,6 @@ Partial Class dlgRandomSubsets
         Me.chkWithReplacement.Text = "With Replacement"
         Me.chkWithReplacement.UseVisualStyleBackColor = True
         '
-        'ucrNewDataFrameName
-        '
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(136, 265)
-        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrNewDataFrameName.TabIndex = 14
-        '
         'lblNewDataFrameName
         '
         Me.lblNewDataFrameName.AutoSize = True
@@ -145,19 +105,69 @@ Partial Class dlgRandomSubsets
         Me.lblNewDataFrameName.Tag = "New_DataFrame_Name"
         Me.lblNewDataFrameName.Text = "New DataFrame Name"
         '
+        'nudSeed
+        '
+        Me.nudSeed.Location = New System.Drawing.Point(321, 129)
+        Me.nudSeed.Name = "nudSeed"
+        Me.nudSeed.Size = New System.Drawing.Size(50, 20)
+        Me.nudSeed.TabIndex = 16
+        '
+        'chkSeed
+        '
+        Me.chkSeed.AutoSize = True
+        Me.chkSeed.Location = New System.Drawing.Point(255, 131)
+        Me.chkSeed.Name = "chkSeed"
+        Me.chkSeed.Size = New System.Drawing.Size(51, 17)
+        Me.chkSeed.TabIndex = 17
+        Me.chkSeed.Tag = "Seed"
+        Me.chkSeed.Text = "Seed"
+        Me.chkSeed.UseVisualStyleBackColor = True
+        '
+        'ucrNewDataFrameName
+        '
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(146, 264)
+        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrNewDataFrameName.TabIndex = 18
+        '
+        'ucrReceiverSelected
+        '
+        Me.ucrReceiverSelected.Location = New System.Drawing.Point(255, 97)
+        Me.ucrReceiverSelected.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSelected.Name = "ucrReceiverSelected"
+        Me.ucrReceiverSelected.Selector = Nothing
+        Me.ucrReceiverSelected.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverSelected.TabIndex = 2
+        '
+        'ucrSelectorRandomSubsets
+        '
+        Me.ucrSelectorRandomSubsets.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorRandomSubsets.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorRandomSubsets.Name = "ucrSelectorRandomSubsets"
+        Me.ucrSelectorRandomSubsets.Size = New System.Drawing.Size(242, 194)
+        Me.ucrSelectorRandomSubsets.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 299)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(400, 53)
+        Me.ucrBase.TabIndex = 10
+        '
         'dlgRandomSubsets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(422, 363)
-        Me.Controls.Add(Me.lblNewDataFrameName)
         Me.Controls.Add(Me.ucrNewDataFrameName)
+        Me.Controls.Add(Me.chkSeed)
+        Me.Controls.Add(Me.nudSeed)
+        Me.Controls.Add(Me.lblNewDataFrameName)
         Me.Controls.Add(Me.chkWithReplacement)
         Me.Controls.Add(Me.nudNumberOfColumns)
         Me.Controls.Add(Me.nudSampleSize)
         Me.Controls.Add(Me.lblNumberOfColumns)
         Me.Controls.Add(Me.lblSampleSize)
-        Me.Controls.Add(Me.chkSetSeed)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrReceiverSelected)
         Me.Controls.Add(Me.ucrSelectorRandomSubsets)
@@ -169,6 +179,7 @@ Partial Class dlgRandomSubsets
         Me.Text = "Random Subsets"
         CType(Me.nudSampleSize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudNumberOfColumns, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSeed, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -178,12 +189,13 @@ Partial Class dlgRandomSubsets
     Friend WithEvents ucrSelectorRandomSubsets As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverSelected As ucrReceiverSingle
     Friend WithEvents lblSelected As Label
-    Friend WithEvents chkSetSeed As CheckBox
     Friend WithEvents lblSampleSize As Label
     Friend WithEvents lblNumberOfColumns As Label
     Friend WithEvents nudSampleSize As NumericUpDown
     Friend WithEvents nudNumberOfColumns As NumericUpDown
     Friend WithEvents chkWithReplacement As CheckBox
-    Friend WithEvents ucrNewDataFrameName As ucrInputTextBox
     Friend WithEvents lblNewDataFrameName As Label
+    Friend WithEvents nudSeed As NumericUpDown
+    Friend WithEvents chkSeed As CheckBox
+    Friend WithEvents ucrNewDataFrameName As ucrInputComboBox
 End Class
