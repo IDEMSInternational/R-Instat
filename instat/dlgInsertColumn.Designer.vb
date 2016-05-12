@@ -31,6 +31,7 @@ Partial Class dlgInsertColumn
         Me.lblColumnsToInsert = New System.Windows.Forms.Label()
         Me.lblDataFrame = New System.Windows.Forms.Label()
         Me.grpInsert = New System.Windows.Forms.GroupBox()
+        Me.ucrInputBeforeAfter = New instat.ucrInputComboBox()
         Me.rdoBeforeAfter = New System.Windows.Forms.RadioButton()
         Me.rdoAtStart = New System.Windows.Forms.RadioButton()
         Me.rdoAtEnd = New System.Windows.Forms.RadioButton()
@@ -38,13 +39,12 @@ Partial Class dlgInsertColumn
         Me.nudInsertColumns = New System.Windows.Forms.NumericUpDown()
         Me.lblDefaultValue = New System.Windows.Forms.Label()
         Me.lblPrefixforInsertedColumns = New System.Windows.Forms.Label()
-        Me.ucrInputPrefixForInsertedColumns = New instat.ucrInputComboBox()
         Me.ucrInputDefaultValue = New instat.ucrInputTextBox()
         Me.ucrReceiverColumnsToInsert = New instat.ucrReceiverSingle()
-        Me.ucrInputBeforeAfter = New instat.ucrInputComboBox()
         Me.ucrSelectorInseertColumns = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFramesList = New instat.ucrDataFrame()
+        Me.ucrInputPrefixForInsertedColumns = New instat.ucrInputTextBox()
         CType(Me.nudPos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudNumCols, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpInsert.SuspendLayout()
@@ -140,6 +140,13 @@ Partial Class dlgInsertColumn
         Me.grpInsert.TabStop = False
         Me.grpInsert.Text = "Insert"
         '
+        'ucrInputBeforeAfter
+        '
+        Me.ucrInputBeforeAfter.Location = New System.Drawing.Point(27, 62)
+        Me.ucrInputBeforeAfter.Name = "ucrInputBeforeAfter"
+        Me.ucrInputBeforeAfter.Size = New System.Drawing.Size(93, 21)
+        Me.ucrInputBeforeAfter.TabIndex = 3
+        '
         'rdoBeforeAfter
         '
         Me.rdoBeforeAfter.AutoSize = True
@@ -206,13 +213,6 @@ Partial Class dlgInsertColumn
         Me.lblPrefixforInsertedColumns.TabIndex = 25
         Me.lblPrefixforInsertedColumns.Text = "Prefix for Inserted Column(s)"
         '
-        'ucrInputPrefixForInsertedColumns
-        '
-        Me.ucrInputPrefixForInsertedColumns.Location = New System.Drawing.Point(272, 205)
-        Me.ucrInputPrefixForInsertedColumns.Name = "ucrInputPrefixForInsertedColumns"
-        Me.ucrInputPrefixForInsertedColumns.Size = New System.Drawing.Size(195, 21)
-        Me.ucrInputPrefixForInsertedColumns.TabIndex = 26
-        '
         'ucrInputDefaultValue
         '
         Me.ucrInputDefaultValue.Location = New System.Drawing.Point(422, 160)
@@ -228,13 +228,6 @@ Partial Class dlgInsertColumn
         Me.ucrReceiverColumnsToInsert.Selector = Nothing
         Me.ucrReceiverColumnsToInsert.Size = New System.Drawing.Size(85, 20)
         Me.ucrReceiverColumnsToInsert.TabIndex = 20
-        '
-        'ucrInputBeforeAfter
-        '
-        Me.ucrInputBeforeAfter.Location = New System.Drawing.Point(27, 62)
-        Me.ucrInputBeforeAfter.Name = "ucrInputBeforeAfter"
-        Me.ucrInputBeforeAfter.Size = New System.Drawing.Size(93, 21)
-        Me.ucrInputBeforeAfter.TabIndex = 3
         '
         'ucrSelectorInseertColumns
         '
@@ -258,6 +251,13 @@ Partial Class dlgInsertColumn
         Me.ucrDataFramesList.Name = "ucrDataFramesList"
         Me.ucrDataFramesList.Size = New System.Drawing.Size(127, 41)
         Me.ucrDataFramesList.TabIndex = 0
+        '
+        'ucrInputPrefixForInsertedColumns
+        '
+        Me.ucrInputPrefixForInsertedColumns.Location = New System.Drawing.Point(272, 205)
+        Me.ucrInputPrefixForInsertedColumns.Name = "ucrInputPrefixForInsertedColumns"
+        Me.ucrInputPrefixForInsertedColumns.Size = New System.Drawing.Size(195, 21)
+        Me.ucrInputPrefixForInsertedColumns.TabIndex = 26
         '
         'dlgInsertColumn
         '
@@ -319,5 +319,5 @@ Partial Class dlgInsertColumn
     Friend WithEvents lblDefaultValue As Label
     Friend WithEvents ucrInputDefaultValue As ucrInputTextBox
     Friend WithEvents lblPrefixforInsertedColumns As Label
-    Friend WithEvents ucrInputPrefixForInsertedColumns As ucrInputComboBox
+    Friend WithEvents ucrInputPrefixForInsertedColumns As ucrInputTextBox
 End Class
