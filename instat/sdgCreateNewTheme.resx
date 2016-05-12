@@ -118,28 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 330</value>
-  </data>
-  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 52</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
-    <value>ucrBase</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
-    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="tbpAxes.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -150,6 +128,7 @@
   <data name="tbpAxes.Size" type="System.Drawing.Size, System.Drawing">
     <value>412, 285</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbpAxes.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -268,6 +247,27 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tbcCreateNewTheme.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrsdgThemesBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>127, 331</value>
+  </data>
+  <data name="ucrsdgThemesBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrsdgThemesBase.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrsdgThemesBase.Name" xml:space="preserve">
+    <value>ucrsdgThemesBase</value>
+  </data>
+  <data name="&gt;&gt;ucrsdgThemesBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrsdgThemesBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrsdgThemesBase.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -286,7 +286,7 @@
     <value>Create New Theme</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgCreateNewTheme</value>
+    <value>sdgCreateNewTheme</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

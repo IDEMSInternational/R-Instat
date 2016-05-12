@@ -23,19 +23,14 @@ Partial Class sdgCreateNewTheme
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgCreateNewTheme))
-        Me.ucrBase = New instat.ucrButtons()
         Me.tbcCreateNewTheme = New System.Windows.Forms.TabControl()
         Me.tbpAxes = New System.Windows.Forms.TabPage()
         Me.tbpPanel = New System.Windows.Forms.TabPage()
         Me.tbpLegend = New System.Windows.Forms.TabPage()
         Me.tbpTitles = New System.Windows.Forms.TabPage()
+        Me.ucrsdgThemesBase = New instat.ucrButtonsSubdialogue()
         Me.tbcCreateNewTheme.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
         '
         'tbcCreateNewTheme
         '
@@ -71,23 +66,27 @@ Partial Class sdgCreateNewTheme
         Me.tbpTitles.Name = "tbpTitles"
         Me.tbpTitles.UseVisualStyleBackColor = True
         '
-        'dlgCreateNewTheme
+        'ucrsdgThemesBase
+        '
+        resources.ApplyResources(Me.ucrsdgThemesBase, "ucrsdgThemesBase")
+        Me.ucrsdgThemesBase.Name = "ucrsdgThemesBase"
+        '
+        'sdgCreateNewTheme
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrsdgThemesBase)
         Me.Controls.Add(Me.tbcCreateNewTheme)
-        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgCreateNewTheme"
+        Me.Name = "sdgCreateNewTheme"
         Me.tbcCreateNewTheme.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents tbcCreateNewTheme As TabControl
     Friend WithEvents tbpAxes As TabPage
     Friend WithEvents tbpPanel As TabPage
     Friend WithEvents tbpLegend As TabPage
     Friend WithEvents tbpTitles As TabPage
+    Friend WithEvents ucrsdgThemesBase As ucrButtonsSubdialogue
 End Class
