@@ -191,6 +191,10 @@ Public Class dlgInsertColumn
             lblDefaultValue.Visible = False
             ucrInputPrefixForInsertedColumns.Visible = False
             ucrInputDefaultValue.Visible = False
+            lblColumnsToInsert.Visible = False
+            lblNumberOfColumnsToInsert.Visible = False
+            nudInsertColumns.Visible = False
+            ucrReceiverColumnsToInsert.Visible = False
         End If
 
     End Sub
@@ -319,6 +323,7 @@ Public Class dlgInsertColumn
             Else
                 ucrBase.clsRsyntax.RemoveParameter("num_cols")
             End If
+        Else
             ucrBase.clsRsyntax.RemoveParameter("num_cols")
         End If
     End Sub
