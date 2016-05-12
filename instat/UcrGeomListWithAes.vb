@@ -125,8 +125,15 @@ Public Class UcrGeomListWithParameters
         If clsCurrGeom IsNot Nothing Then
             lstCurrArguments.Clear()
             For i = 0 To (clsCurrGeom.clsGgParameters.Count - 1)
-                lstGgParameterLabels(i).Text = clsCurrGeom.clsGgParameters(i).strGgParameterName
-                lstCurrArguments.Add(clsCurrGeom.clsGgParameters(i).strGgParameterName)
+                If Not clsCurrGeom.clsGgParameters(i).bIsMandatory Then
+                    lstGgParameterLabels(i).Text = clsCurrGeom.clsGgParameters(i).strGgParameterName
+                    lstCurrArguments.Add(clsCurrGeom.clsGgParameters(i).strGgParameterName)
+                Else
+                    'make them uppercase
+                    lstGgParameterLabels(i).Text = (clsCurrGeom.clsGgParameters(i).strGgParameterName)
+                    lstGgParameterLabels(i).Font = New Font(lstGgParameterLabels(i).Font, FontStyle.Bold)
+                    lstCurrArguments.Add(clsCurrGeom.clsGgParameters(i).strGgParameterName)
+                End If
 
                 If clsCurrGeom.clsGgParameters(i).strIncludedDataTypes IsNot Nothing Then
                     lstGgParameterUcr(i).SetIncludedDataTypes(clsCurrGeom.clsGgParameters(i).strIncludedDataTypes)
@@ -134,6 +141,8 @@ Public Class UcrGeomListWithParameters
                 ElseIf clsCurrGeom.clsGgParameters(i).strExcludedDataTypes IsNot Nothing Then
                     lstGgParameterUcr(i).SetExcludedDataTypes(clsCurrGeom.clsGgParameters(i).strExcludedDataTypes)
                 End If
+
+
             Next
 
         End If

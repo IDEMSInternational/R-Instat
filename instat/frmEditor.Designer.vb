@@ -47,7 +47,7 @@ Partial Class frmEditor
         Me.pasteRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.leadHeaderContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.rowContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.mnuInsertRow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuInsertRowsAfter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.insertSheet = New System.Windows.Forms.ToolStripMenuItem()
@@ -58,6 +58,7 @@ Partial Class frmEditor
         Me.HideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblNoData = New System.Windows.Forms.Label()
+        Me.mnuInsertRowsBefore = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -214,21 +215,21 @@ Partial Class frmEditor
         '
         'rowContextMenuStrip
         '
-        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRow, Me.mnuDeleteRows})
+        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRowsBefore, Me.mnuInsertRowsAfter, Me.mnuDeleteRows})
         Me.rowContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.rowContextMenuStrip.Size = New System.Drawing.Size(153, 70)
+        Me.rowContextMenuStrip.Size = New System.Drawing.Size(180, 92)
         '
-        'mnuInsertRow
+        'mnuInsertRowsAfter
         '
-        Me.mnuInsertRow.Name = "mnuInsertRow"
-        Me.mnuInsertRow.Size = New System.Drawing.Size(152, 22)
-        Me.mnuInsertRow.Text = "Insert &Rows"
+        Me.mnuInsertRowsAfter.Name = "mnuInsertRowsAfter"
+        Me.mnuInsertRowsAfter.Size = New System.Drawing.Size(179, 22)
+        Me.mnuInsertRowsAfter.Text = "Insert Row(s) After"
         '
         'mnuDeleteRows
         '
         Me.mnuDeleteRows.Name = "mnuDeleteRows"
-        Me.mnuDeleteRows.Size = New System.Drawing.Size(152, 22)
-        Me.mnuDeleteRows.Text = "&Delete Rows"
+        Me.mnuDeleteRows.Size = New System.Drawing.Size(179, 22)
+        Me.mnuDeleteRows.Text = "Delete Row(s)"
         '
         'statusColumnMenu
         '
@@ -289,6 +290,12 @@ Partial Class frmEditor
         Me.lblNoData.Tag = "no_data_loaded"
         Me.lblNoData.Text = "No Data Loaded"
         '
+        'mnuInsertRowsBefore
+        '
+        Me.mnuInsertRowsBefore.Name = "mnuInsertRowsBefore"
+        Me.mnuInsertRowsBefore.Size = New System.Drawing.Size(179, 22)
+        Me.mnuInsertRowsBefore.Text = "Insert Row(s) Before"
+        '
         'frmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -327,7 +334,7 @@ Partial Class frmEditor
     Private WithEvents pasteRangeToolStripMenuItem As ToolStripMenuItem
     Private WithEvents leadHeaderContextMenuStrip As ContextMenuStrip
     Private WithEvents rowContextMenuStrip As ContextMenuStrip
-    Private WithEvents mnuInsertRow As ToolStripMenuItem
+    Private WithEvents mnuInsertRowsAfter As ToolStripMenuItem
     Private WithEvents mnuDeleteRows As ToolStripMenuItem
     Friend WithEvents statusColumnMenu As ContextMenuStrip
     Friend WithEvents insertSheet As ToolStripMenuItem
@@ -344,4 +351,5 @@ Partial Class frmEditor
     Friend WithEvents unhideSheet As ToolStripMenuItem
     Friend WithEvents mnuUnhideAllColumns As ToolStripMenuItem
     Friend WithEvents mnuInsertColsAfter As ToolStripMenuItem
+    Friend WithEvents mnuInsertRowsBefore As ToolStripMenuItem
 End Class
