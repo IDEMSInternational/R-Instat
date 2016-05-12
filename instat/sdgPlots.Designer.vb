@@ -91,7 +91,11 @@ Partial Class sdgPlots
         Me.chkYUpperLimit = New System.Windows.Forms.CheckBox()
         Me.chkYLowerLimit = New System.Windows.Forms.CheckBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputThemeLists = New instat.ucrInputComboBox()
+        Me.cmdCreateNewTheme = New System.Windows.Forms.Button()
+        Me.lblTheme = New System.Windows.Forms.Label()
         Me.tabctrlBoxSubdialog.SuspendLayout()
+        Me.tabTheme.SuspendLayout()
         Me.tabLegend.SuspendLayout()
         Me.grpLabels.SuspendLayout()
         Me.grpTitle.SuspendLayout()
@@ -125,6 +129,9 @@ Partial Class sdgPlots
         '
         'tabTheme
         '
+        Me.tabTheme.Controls.Add(Me.ucrInputThemeLists)
+        Me.tabTheme.Controls.Add(Me.cmdCreateNewTheme)
+        Me.tabTheme.Controls.Add(Me.lblTheme)
         Me.tabTheme.Location = New System.Drawing.Point(4, 22)
         Me.tabTheme.Name = "tabTheme"
         Me.tabTheme.Padding = New System.Windows.Forms.Padding(3)
@@ -378,6 +385,7 @@ Partial Class sdgPlots
         'ucr2ndFactorReceiver
         '
         Me.ucr2ndFactorReceiver.Location = New System.Drawing.Point(262, 87)
+        Me.ucr2ndFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucr2ndFactorReceiver.Name = "ucr2ndFactorReceiver"
         Me.ucr2ndFactorReceiver.Selector = Nothing
         Me.ucr2ndFactorReceiver.Size = New System.Drawing.Size(106, 26)
@@ -386,6 +394,7 @@ Partial Class sdgPlots
         'ucr1stFactorReceiver
         '
         Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(262, 34)
+        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
         Me.ucr1stFactorReceiver.Selector = Nothing
         Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(106, 26)
@@ -394,6 +403,7 @@ Partial Class sdgPlots
         'ucrAddRemove
         '
         Me.ucrAddRemove.Location = New System.Drawing.Point(6, 6)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(228, 127)
         Me.ucrAddRemove.TabIndex = 0
@@ -816,6 +826,31 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
+        'ucrInputThemeLists
+        '
+        Me.ucrInputThemeLists.Location = New System.Drawing.Point(10, 47)
+        Me.ucrInputThemeLists.Name = "ucrInputThemeLists"
+        Me.ucrInputThemeLists.Size = New System.Drawing.Size(187, 21)
+        Me.ucrInputThemeLists.TabIndex = 7
+        '
+        'cmdCreateNewTheme
+        '
+        Me.cmdCreateNewTheme.Location = New System.Drawing.Point(10, 91)
+        Me.cmdCreateNewTheme.Name = "cmdCreateNewTheme"
+        Me.cmdCreateNewTheme.Size = New System.Drawing.Size(126, 23)
+        Me.cmdCreateNewTheme.TabIndex = 6
+        Me.cmdCreateNewTheme.Text = "Create New Theme"
+        Me.cmdCreateNewTheme.UseVisualStyleBackColor = True
+        '
+        'lblTheme
+        '
+        Me.lblTheme.AutoSize = True
+        Me.lblTheme.Location = New System.Drawing.Point(7, 14)
+        Me.lblTheme.Name = "lblTheme"
+        Me.lblTheme.Size = New System.Drawing.Size(45, 13)
+        Me.lblTheme.TabIndex = 5
+        Me.lblTheme.Text = "Themes"
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -830,6 +865,8 @@ Partial Class sdgPlots
         Me.Text = "Plot Options"
         Me.TopMost = True
         Me.tabctrlBoxSubdialog.ResumeLayout(False)
+        Me.tabTheme.ResumeLayout(False)
+        Me.tabTheme.PerformLayout()
         Me.tabLegend.ResumeLayout(False)
         Me.tabLegend.PerformLayout()
         Me.grpLabels.ResumeLayout(False)
@@ -931,6 +968,9 @@ Partial Class sdgPlots
     Friend WithEvents txtYLowerLimit As TextBox
     Friend WithEvents chkYUpperLimit As CheckBox
     Friend WithEvents chkYLowerLimit As CheckBox
+    Friend WithEvents ucrInputThemeLists As ucrInputComboBox
+    Friend WithEvents cmdCreateNewTheme As Button
+    Friend WithEvents lblTheme As Label
 End Class
 
 

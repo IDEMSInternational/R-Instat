@@ -19,6 +19,7 @@ Public Class sdgPlots
     Public clsRfacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
     Public clsYLabFunction As New RFunction
+    Public clsRthemeFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -42,14 +43,51 @@ Public Class sdgPlots
         chkIncludeFacets.Checked = False
         FacetsCheck(False)
 
+        'setting current text on the ucrInputThemeList
+        ucrInputThemeLists.cboInput.Text = "Choose Theme Here"
+
     End Sub
 
     Private Sub InitialiseDialog()
         ucr1stFactorReceiver.Selector = ucrAddRemove
-        ucr1stFactorReceiver.SetDataType("factor")
         ucr2ndFactorReceiver.Selector = ucrAddRemove
-        ucr2ndFactorReceiver.SetDataType("factor")
+        'ucr1stFactorReceiver.SetDataType("factor")
+        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ' ucr2ndFactorReceiver.SetDataType("factor")
+        ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
         chkIncludeFacets.Checked = True
+
+        ''ADDING THEMES TO UCRINPUTTHEMLISTS
+        ucrInputThemeLists.cboInput.Items.Add("theme_bw")
+        ucrInputThemeLists.cboInput.Items.Add("theme_linedraw")
+        ucrInputThemeLists.cboInput.Items.Add("theme_light")
+        ucrInputThemeLists.cboInput.Items.Add("theme_minimal")
+        ucrInputThemeLists.cboInput.Items.Add("theme_classic")
+        ucrInputThemeLists.cboInput.Items.Add("theme_dark")
+        ucrInputThemeLists.cboInput.Items.Add("theme_void")
+
+        'from ggthemes
+        ucrInputThemeLists.cboInput.Items.Add("theme_base")
+        ucrInputThemeLists.cboInput.Items.Add("theme_calc")
+        ucrInputThemeLists.cboInput.Items.Add("theme_economist")
+        ucrInputThemeLists.cboInput.Items.Add("theme_economist")
+        ucrInputThemeLists.cboInput.Items.Add("theme_excel")
+        ucrInputThemeLists.cboInput.Items.Add("theme_few")
+        ucrInputThemeLists.cboInput.Items.Add("theme_fivethirtyeight")
+        ucrInputThemeLists.cboInput.Items.Add("theme_foundation")
+        ucrInputThemeLists.cboInput.Items.Add("theme_gdocs")
+        ucrInputThemeLists.cboInput.Items.Add("theme_hc")
+        ucrInputThemeLists.cboInput.Items.Add("theme_igray")
+        ucrInputThemeLists.cboInput.Items.Add("theme_map")
+        ucrInputThemeLists.cboInput.Items.Add("theme_pander")
+        ucrInputThemeLists.cboInput.Items.Add("theme_par")
+        ucrInputThemeLists.cboInput.Items.Add("theme_solarized")
+        ucrInputThemeLists.cboInput.Items.Add("theme_solid")
+        ucrInputThemeLists.cboInput.Items.Add("theme_stata")
+        ucrInputThemeLists.cboInput.Items.Add("theme_tufte")
+        ucrInputThemeLists.cboInput.Items.Add("theme_wsj")
+
+
 
     End Sub
 
@@ -247,5 +285,14 @@ Public Class sdgPlots
 
     Private Sub chkFreeScalesY_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScalesY.CheckedChanged
 
+    End Sub
+
+    Private Sub ucrInputThemeLists_NameChanged() Handles ucrInputThemeLists.NameChanged
+        If ucrInputThemeLists.cboInput.SelectedItem = "theme_bw" Then
+            clsRthemeFunction.SetRCommand(ucrInputThemeLists.cboInput.SelectedItem)
+            clsRsyntax.AddOperatorParameter(ucrInputThemeLists.cboInput.SelectedItem, clsRFunc:=clsRthemeFunction)
+            clsRthemeFunction.AddParameter("base_size", 12)
+            clsRthemeFunction.AddParameter("base_family", Chr(34) & Chr(34))
+        End If
     End Sub
 End Class
