@@ -195,6 +195,7 @@ Public Class dlgInsertColumn
             lblNumberOfColumnsToInsert.Visible = False
             nudInsertColumns.Visible = False
             ucrReceiverColumnsToInsert.Visible = False
+            ucrBase.clsRsyntax.RemoveParameter("before")
         End If
 
     End Sub
@@ -206,12 +207,14 @@ Public Class dlgInsertColumn
     Private Sub InsertParam()
         If rdoAtEnd.Checked Then
             ucrBase.clsRsyntax.AddOperatorParameter("before", "FALSE")
+            ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             ucrReceiverColumnsToInsert.Visible = False
             lblNumberOfColumnsToInsert.Visible = False
             nudInsertColumns.Visible = False
             lblColumnsToInsert.Visible = False
         ElseIf rdoAtStart.Checked Then
             ucrBase.clsRsyntax.AddOperatorParameter("before", "TRUE")
+            ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             ucrReceiverColumnsToInsert.Visible = False
             lblNumberOfColumnsToInsert.Visible = False
             nudInsertColumns.Visible = False
@@ -226,20 +229,18 @@ Public Class dlgInsertColumn
 
     Private Sub ucrInputBeforeAfter_NameChanged() Handles ucrInputBeforeAfter.NameChanged
         BeforeAfterPara()
+
     End Sub
 
     Private Sub BeforeParameter()
         If rdoInsertColumns.Checked Then
-            If rdoBeforeAfter.Checked = True Then
-                If Not ucrInputBeforeAfter.IsEmpty Then
-                    Select Case ucrInputBeforeAfter.GetText
-                        Case "Before"
-                            ucrBase.clsRsyntax.AddParameter("before", "TRUE")
-                        Case "After"
-                            ucrBase.clsRsyntax.AddParameter("before", "FALSE")
-
-                    End Select
-                End If
+            If rdoBeforeAfter.Checked Then
+                Select Case ucrInputBeforeAfter.GetText
+                    Case "Before"
+                        ucrBase.clsRsyntax.AddParameter("before", "TRUE")
+                    Case "After"
+                        ucrBase.clsRsyntax.AddParameter("before", "FALSE")
+                End Select
             End If
         Else
             ucrBase.clsRsyntax.RemoveParameter("before")
@@ -259,6 +260,8 @@ Public Class dlgInsertColumn
                 Else
                     ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
                 End If
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             End If
         Else
             ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
