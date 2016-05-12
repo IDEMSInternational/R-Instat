@@ -33,8 +33,6 @@ Public Class dlgInsertColumn
     Private Sub InitialiseDialog()
         ucrReceiverColumnsToInsert.Selector = ucrSelectorInseertColumns
         ucrReceiverColumnsToInsert.SetMeAsReceiver()
-        ucrInputPrefixForInsertedColumns.SetDefaultTypeAsColumn()
-        ucrInputPrefixForInsertedColumns.SetDataFrameSelector(ucrDataFramesList)
         ucrInputBeforeAfter.cboInput.Items.Add("Before")
         ucrInputBeforeAfter.cboInput.Items.Add("After")
 
@@ -150,6 +148,7 @@ Public Class dlgInsertColumn
             nudInsertColumns.Value = 1
             NumberofColumnsOrRows()
             dataFrameListMaxMinPos()
+            ColName()
             grpInsert.Visible = True
             ucrSelectorInseertColumns.Visible = True
             ucrDataFramesList.Visible = False
@@ -161,6 +160,7 @@ Public Class dlgInsertColumn
             BeforeAfterPara()
             ColsToInsert()
             startpo()
+            BeforeParameter()
             lblPrefixforInsertedColumns.Visible = True
             lblDefaultValue.Visible = True
             ucrInputPrefixForInsertedColumns.Visible = True
@@ -180,6 +180,8 @@ Public Class dlgInsertColumn
             InsertParam()
             BeforeAfterPara()
             ColsToInsert()
+            ColName()
+            BeforeParameter()
             ucrSelectorInseertColumns.Visible = False
             ucrDataFramesList.Visible = True
             nudNumCols.Visible = True
@@ -219,20 +221,27 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub ucrInputBeforeAfter_NameChanged() Handles ucrInputBeforeAfter.NameChanged
-        If rdoBeforeAfter.Checked = True Then
-            If Not ucrInputBeforeAfter.IsEmpty Then
-                Select Case ucrInputBeforeAfter.GetText
-                    Case "Before"
-                        ucrBase.clsRsyntax.AddParameter("before", "TRUE")
-                    Case "After"
-                        ucrBase.clsRsyntax.AddParameter("before", "FALSE")
+        BeforeAfterPara()
+    End Sub
 
-                End Select
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("before")
+    Private Sub BeforeParameter()
+        If rdoInsertColumns.Checked Then
+            If rdoBeforeAfter.Checked = True Then
+                If Not ucrInputBeforeAfter.IsEmpty Then
+                    Select Case ucrInputBeforeAfter.GetText
+                        Case "Before"
+                            ucrBase.clsRsyntax.AddParameter("before", "TRUE")
+                        Case "After"
+                            ucrBase.clsRsyntax.AddParameter("before", "FALSE")
+
+                    End Select
+                Else
+                    ucrBase.clsRsyntax.RemoveParameter("before")
+                End If
             End If
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("before")
         End If
-
     End Sub
 
     Private Sub ucrReceiverColumnsToInsert_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverColumnsToInsert.SelectionChanged
@@ -241,11 +250,13 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub BeforeAfterPara()
-        If rdoBeforeAfter.Checked Then
-            If Not ucrReceiverColumnsToInsert.IsEmpty Then
-                ucrBase.clsRsyntax.AddParameter("adjacent_column", clsRFunctionParameter:=ucrReceiverColumnsToInsert.GetVariables())
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
+        If rdoInsertColumns.Checked Then
+            If rdoBeforeAfter.Checked Then
+                If Not ucrReceiverColumnsToInsert.IsEmpty Then
+                    ucrBase.clsRsyntax.AddParameter("adjacent_column", ucrReceiverColumnsToInsert.GetVariableNames())
+                Else
+                    ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
+                End If
             End If
         Else
             ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
@@ -280,7 +291,20 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub ucrInputPrefixForInsertedColumns_NameChanged() Handles ucrInputPrefixForInsertedColumns.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPrefixForInsertedColumns.GetText, strTempDataframe:=ucrDataFramesList.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPrefixForInsertedColumns.GetText)
+        ColName()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ColName()
+        If rdoInsertColumns.Checked Then
+            If Not ucrInputPrefixForInsertedColumns.IsEmpty Then
+                ucrBase.clsRsyntax.AddParameter("col_name", Chr(34) & ucrInputPrefixForInsertedColumns.GetText & Chr(34))
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("col_name")
+            End If
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_name")
+        End If
     End Sub
 
     Private Sub nudInsertColumns_TextChanged(sender As Object, e As EventArgs) Handles nudInsertColumns.TextChanged
@@ -291,7 +315,7 @@ Public Class dlgInsertColumn
     Private Sub ColsToInsert()
         If rdoInsertColumns.Checked Then
             If Not nudInsertColumns.Text = "" Then
-                ucrBase.clsRsyntax.AddParameter("num_cols", nudNumCols.Value)
+                ucrBase.clsRsyntax.AddParameter("num_cols", nudInsertColumns.Value)
             Else
                 ucrBase.clsRsyntax.RemoveParameter("num_cols")
             End If
