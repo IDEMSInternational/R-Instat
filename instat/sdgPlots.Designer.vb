@@ -265,7 +265,7 @@ Partial Class sdgPlots
         'chkFreeScalesY
         '
         Me.chkFreeScalesY.AutoSize = True
-        Me.chkFreeScalesY.Location = New System.Drawing.Point(14, 225)
+        Me.chkFreeScalesY.Location = New System.Drawing.Point(10, 225)
         Me.chkFreeScalesY.Name = "chkFreeScalesY"
         Me.chkFreeScalesY.Size = New System.Drawing.Size(109, 17)
         Me.chkFreeScalesY.TabIndex = 14
@@ -276,7 +276,7 @@ Partial Class sdgPlots
         'chkMargin
         '
         Me.chkMargin.AutoSize = True
-        Me.chkMargin.Location = New System.Drawing.Point(14, 179)
+        Me.chkMargin.Location = New System.Drawing.Point(10, 179)
         Me.chkMargin.Name = "chkMargin"
         Me.chkMargin.Size = New System.Drawing.Size(63, 17)
         Me.chkMargin.TabIndex = 13
@@ -286,7 +286,7 @@ Partial Class sdgPlots
         'chkFreeScalesX
         '
         Me.chkFreeScalesX.AutoSize = True
-        Me.chkFreeScalesX.Location = New System.Drawing.Point(14, 202)
+        Me.chkFreeScalesX.Location = New System.Drawing.Point(10, 202)
         Me.chkFreeScalesX.Name = "chkFreeScalesX"
         Me.chkFreeScalesX.Size = New System.Drawing.Size(109, 17)
         Me.chkFreeScalesX.TabIndex = 12
@@ -304,7 +304,7 @@ Partial Class sdgPlots
         'lblNoofRows
         '
         Me.lblNoofRows.AutoSize = True
-        Me.lblNoofRows.Location = New System.Drawing.Point(194, 196)
+        Me.lblNoofRows.Location = New System.Drawing.Point(188, 195)
         Me.lblNoofRows.Name = "lblNoofRows"
         Me.lblNoofRows.Size = New System.Drawing.Size(86, 13)
         Me.lblNoofRows.TabIndex = 10
@@ -314,7 +314,7 @@ Partial Class sdgPlots
         'lblNoOfColumns
         '
         Me.lblNoOfColumns.AutoSize = True
-        Me.lblNoOfColumns.Location = New System.Drawing.Point(194, 170)
+        Me.lblNoOfColumns.Location = New System.Drawing.Point(188, 170)
         Me.lblNoOfColumns.Name = "lblNoOfColumns"
         Me.lblNoOfColumns.Size = New System.Drawing.Size(98, 13)
         Me.lblNoOfColumns.TabIndex = 10
@@ -324,7 +324,7 @@ Partial Class sdgPlots
         'chkWrapOptions
         '
         Me.chkWrapOptions.AutoSize = True
-        Me.chkWrapOptions.Location = New System.Drawing.Point(197, 142)
+        Me.chkWrapOptions.Location = New System.Drawing.Point(191, 142)
         Me.chkWrapOptions.Name = "chkWrapOptions"
         Me.chkWrapOptions.Size = New System.Drawing.Size(89, 17)
         Me.chkWrapOptions.TabIndex = 9
@@ -335,7 +335,7 @@ Partial Class sdgPlots
         'rdoHorizontal
         '
         Me.rdoHorizontal.AutoSize = True
-        Me.rdoHorizontal.Location = New System.Drawing.Point(83, 142)
+        Me.rdoHorizontal.Location = New System.Drawing.Point(100, 142)
         Me.rdoHorizontal.Name = "rdoHorizontal"
         Me.rdoHorizontal.Size = New System.Drawing.Size(72, 17)
         Me.rdoHorizontal.TabIndex = 7
@@ -347,7 +347,7 @@ Partial Class sdgPlots
         'rdoVertical
         '
         Me.rdoVertical.AutoSize = True
-        Me.rdoVertical.Location = New System.Drawing.Point(17, 143)
+        Me.rdoVertical.Location = New System.Drawing.Point(10, 142)
         Me.rdoVertical.Name = "rdoVertical"
         Me.rdoVertical.Size = New System.Drawing.Size(60, 17)
         Me.rdoVertical.TabIndex = 6
@@ -359,7 +359,7 @@ Partial Class sdgPlots
         'lblFactor2
         '
         Me.lblFactor2.AutoSize = True
-        Me.lblFactor2.Location = New System.Drawing.Point(265, 67)
+        Me.lblFactor2.Location = New System.Drawing.Point(255, 68)
         Me.lblFactor2.Name = "lblFactor2"
         Me.lblFactor2.Size = New System.Drawing.Size(101, 13)
         Me.lblFactor2.TabIndex = 4
@@ -368,7 +368,7 @@ Partial Class sdgPlots
         'lblFactor1
         '
         Me.lblFactor1.AutoSize = True
-        Me.lblFactor1.Location = New System.Drawing.Point(262, 15)
+        Me.lblFactor1.Location = New System.Drawing.Point(252, 16)
         Me.lblFactor1.Name = "lblFactor1"
         Me.lblFactor1.Size = New System.Drawing.Size(51, 13)
         Me.lblFactor1.TabIndex = 3
@@ -377,7 +377,8 @@ Partial Class sdgPlots
         '
         'ucr2ndFactorReceiver
         '
-        Me.ucr2ndFactorReceiver.Location = New System.Drawing.Point(262, 87)
+        Me.ucr2ndFactorReceiver.Location = New System.Drawing.Point(252, 88)
+        Me.ucr2ndFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucr2ndFactorReceiver.Name = "ucr2ndFactorReceiver"
         Me.ucr2ndFactorReceiver.Selector = Nothing
         Me.ucr2ndFactorReceiver.Size = New System.Drawing.Size(106, 26)
@@ -385,7 +386,8 @@ Partial Class sdgPlots
         '
         'ucr1stFactorReceiver
         '
-        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(262, 34)
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(252, 35)
+        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
         Me.ucr1stFactorReceiver.Selector = Nothing
         Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(106, 26)
@@ -393,7 +395,8 @@ Partial Class sdgPlots
         '
         'ucrAddRemove
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(6, 6)
+        Me.ucrAddRemove.Location = New System.Drawing.Point(10, 10)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(228, 127)
         Me.ucrAddRemove.TabIndex = 0

@@ -366,7 +366,7 @@ data_object$set("public", "remove_columns_in_data", function(cols=c()) {
 }
 )
 
-data_object$set("public", "replace_value_in_data", function(col_name = "", index, new_value = "") {
+data_object$set("public", "replace_value_in_data", function(col_name = "", row, new_value = "") {
   
   # Column name must be character
   if(!is.character(col_name)) {
@@ -378,21 +378,18 @@ data_object$set("public", "replace_value_in_data", function(col_name = "", index
   }
   
   # Column data length must match number of rows of data.
-  else if (missing(index) || !(is.numeric(index))) {
-    stop(paste("Specify the index of the value to be replaced as an integer."))
+  else if (!(row %in% rownames(private$data))) {
+    stop("row not found in data")
   }
-  
-  else if (index != as.integer(index) || index < 1 || index >  nrow(private$data)) {
-    stop( paste("index must be an integer between 1 and", nrow(data), ".") )
+  index <- which(rownames(private$data) == row)
+  old_value <- private$data[[col_name]][[index]]
+  if(self$get_variables_metadata(property = data_type_label, column = col_name) == "factor") {
+    if(!(new_value %in% levels(private$data[[col_name]]))) {
+      stop(new_value, " is not an existing level of the factor")
+    }
   }
-  
-  if (class(private$data[[col_name]][[index]]) != class(new_value)) {
-    warning("Class of new value does not match the class of the replaced value.")
-  }
-  
-  old_value = private$data[[col_name]][[index]]
   private$data[[col_name]][[index]] <- new_value
-  self$append_to_changes(list(Replaced_value, col_name, index, old_value, new_value))
+  self$append_to_changes(list(Replaced_value, col_name, row, old_value, new_value))
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
 }

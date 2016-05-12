@@ -426,8 +426,8 @@ instat_object$set("public", "get_model_names", function() {
 }
 )
 
-instat_object$set("public", "replace_value_in_data", function(data_name, col_name, index, new_value) {
-  self$get_data_objects(data_name)$replace_value_in_data(col_name, index, new_value)
+instat_object$set("public", "replace_value_in_data", function(data_name, col_name, row, new_value) {
+  self$get_data_objects(data_name)$replace_value_in_data(col_name, row, new_value)
 } 
 )
 
