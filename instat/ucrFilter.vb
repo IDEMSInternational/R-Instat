@@ -55,7 +55,7 @@ Public Class ucrFilter
             ucrFactorLevels.Visible = False
             cmdToggleSelectAll.Visible = False
         Else
-            bIsFactor = ucrFilterVariable.strDataType = "factor"
+            bIsFactor = ucrFilterVariable.strCurrDataType = "factor"
             lblSelectLevels.Visible = bIsFactor
             ucrFactorLevels.Visible = bIsFactor
             cmdToggleSelectAll.Visible = bIsFactor
@@ -70,7 +70,7 @@ Public Class ucrFilter
     End Sub
 
     Private Sub SecondValueOptions()
-        If ucrFilterVariable.strDataType <> "factor" Then
+        If ucrFilterVariable.strCurrDataType <> "factor" Then
             If chkAsVariable.Checked Then
                 ucrSecondFilterVariable.Visible = True
                 ucrSecondValue.Visible = False
@@ -95,7 +95,7 @@ Public Class ucrFilter
 
     Private Sub CheckAddEnabled()
         If Not ucrFilterVariable.IsEmpty() Then
-            If ucrFilterVariable.strDataType = "factor" AndAlso ucrFactorLevels.GetSelectedLevels() <> "" Then
+            If ucrFilterVariable.strCurrDataType = "factor" AndAlso ucrFactorLevels.GetSelectedLevels() <> "" Then
                 cmdAddFilter.Enabled = True
             ElseIf Not ucrOperation.IsEmpty AndAlso ((Not chkAsVariable.Checked AndAlso Not ucrSecondValue.IsEmpty) OrElse (chkAsVariable.Checked AndAlso Not ucrSecondFilterVariable.IsEmpty)) Then
                 cmdAddFilter.Enabled = True
@@ -112,7 +112,7 @@ Public Class ucrFilter
         Dim lviCondition As ListViewItem
 
         clsCurrentCondition.SetParameter(True, ucrFilterVariable.GetVariableNames())
-        If ucrFilterVariable.strDataType = "factor" Then
+        If ucrFilterVariable.strCurrDataType = "factor" Then
             clsCurrentCondition.SetOperation("%in%")
             clsCurrentCondition.SetParameter(False, ucrFactorLevels.GetSelectedLevels())
         Else
