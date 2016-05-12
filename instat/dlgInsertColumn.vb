@@ -150,7 +150,6 @@ Public Class dlgInsertColumn
             dataFrameListMaxMinPos()
             ColName()
             grpInsert.Visible = True
-            ucrSelectorInseertColumns.Visible = True
             ucrDataFramesList.Visible = False
             nudInsertColumns.Maximum = 100
             nudNumCols.Visible = False
@@ -165,6 +164,11 @@ Public Class dlgInsertColumn
             lblDefaultValue.Visible = True
             ucrInputPrefixForInsertedColumns.Visible = True
             ucrInputDefaultValue.Visible = True
+            lblNumberOfColumnsToInsert.Visible = True
+            nudInsertColumns.Visible = True
+            lblNumberOfRowsToInsert.Visible = False
+            lblStartPos.Visible = False
+
 
         ElseIf rdoInsertRows.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
@@ -186,6 +190,7 @@ Public Class dlgInsertColumn
             ucrDataFramesList.Visible = True
             nudNumCols.Visible = True
             nudPos.Visible = True
+            lblStartPos.Visible = True
             lblDataFrame.Visible = False
             lblPrefixforInsertedColumns.Visible = False
             lblDefaultValue.Visible = False
@@ -209,21 +214,24 @@ Public Class dlgInsertColumn
             ucrBase.clsRsyntax.AddOperatorParameter("before", "FALSE")
             ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             ucrReceiverColumnsToInsert.Visible = False
-            lblNumberOfColumnsToInsert.Visible = False
-            nudInsertColumns.Visible = False
+            ucrSelectorInseertColumns.Visible = False
+            ucrDataFramesList.Visible = True
+            lblDataFrame.Visible = False
             lblColumnsToInsert.Visible = False
         ElseIf rdoAtStart.Checked Then
             ucrBase.clsRsyntax.AddOperatorParameter("before", "TRUE")
             ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             ucrReceiverColumnsToInsert.Visible = False
-            lblNumberOfColumnsToInsert.Visible = False
-            nudInsertColumns.Visible = False
             lblColumnsToInsert.Visible = False
+            ucrSelectorInseertColumns.Visible = False
+            lblDataFrame.Visible = False
+            ucrDataFramesList.Visible = True
+
         Else
             ucrReceiverColumnsToInsert.Visible = True
-            lblNumberOfColumnsToInsert.Visible = True
-            nudInsertColumns.Visible = True
+            ucrSelectorInseertColumns.Visible = True
             lblColumnsToInsert.Visible = True
+            lblDataFrame.Visible = True
         End If
     End Sub
 
