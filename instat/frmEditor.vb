@@ -294,17 +294,28 @@ Public Class frmEditor
         UpdateRFunctionDataFrameParameters()
     End Sub
 
-    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
-        Dim dblValue As Double
+    'TODO discuss validation for cell editing
+    Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrSheet.BeforeCellEdit
+        'temporary disabled editing
+        e.IsCancelled = True
+    End Sub
 
-        clsReplaceValue.AddParameter("col_name", Chr(34) & lstColumnNames(grdCurrSheet.SelectionRange.Col) & Chr(34))
-        clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.Row).Text & Chr(34))
-        If Double.TryParse(e.NewData, dblValue) OrElse e.NewData = "TRUE" OrElse e.NewData = "FALSE" OrElse e.NewData = "NA" Then
-            clsReplaceValue.AddParameter("row", e.NewData)
-        Else
-            clsReplaceValue.AddParameter("row", Chr(34) & e.NewData & Chr(34))
-        End If
-        frmMain.clsRLink.RunScript(clsReplaceValue.ToScript())
+    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
+        'Dim dblValue As Double
+        'clsReplaceValue.AddParameter("col_name", Chr(34) & lstColumnNames(grdCurrSheet.SelectionRange.Col) & Chr(34))
+        'clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.Row).Text & Chr(34))
+        'If Double.TryParse(e.NewData, dblValue) OrElse e.NewData = "TRUE" OrElse e.NewData = "FALSE" OrElse e.NewData = "NA" Then
+        '    clsReplaceValue.AddParameter("new_value", e.NewData)
+        'Else
+        '    clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
+        'End If
+        'Try
+        '    frmMain.clsRLink.RunScript(clsReplaceValue.ToScript())
+        'Catch
+        '    'frmMain.clsRLink.RunInternalScript(frmMain.clsRLink.strInstatDataObject & "$set_data_frames_changed(" & Chr(34) & grdCurrSheet.Name & Chr(34) & ", TRUE)")
+        '    'frmMain.clsGrids.UpdateGrids()
+        '    e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+        'End Try
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
