@@ -42,7 +42,7 @@ Partial Class dlgHistogram
         Me.cmdOptions.Location = New System.Drawing.Point(180, 217)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(87, 23)
-        Me.cmdOptions.TabIndex = 9
+        Me.cmdOptions.TabIndex = 8
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -99,7 +99,7 @@ Partial Class dlgHistogram
         Me.lblfactor.Location = New System.Drawing.Point(301, 193)
         Me.lblfactor.Name = "lblfactor"
         Me.lblfactor.Size = New System.Drawing.Size(37, 13)
-        Me.lblfactor.TabIndex = 6
+        Me.lblfactor.TabIndex = 5
         Me.lblfactor.Tag = "Factor"
         Me.lblfactor.Text = "Factor"
         '
@@ -118,7 +118,7 @@ Partial Class dlgHistogram
         Me.cmdFrequencyOptions.Location = New System.Drawing.Point(10, 217)
         Me.cmdFrequencyOptions.Name = "cmdFrequencyOptions"
         Me.cmdFrequencyOptions.Size = New System.Drawing.Size(163, 23)
-        Me.cmdFrequencyOptions.TabIndex = 8
+        Me.cmdFrequencyOptions.TabIndex = 7
         Me.cmdFrequencyOptions.Tag = "Frequency_Polygon_Options"
         Me.cmdFrequencyOptions.Text = "Frequency Polygon Options"
         Me.cmdFrequencyOptions.UseVisualStyleBackColor = True
@@ -130,7 +130,7 @@ Partial Class dlgHistogram
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrFactorReceiver.TabIndex = 7
+        Me.ucrFactorReceiver.TabIndex = 6
         '
         'ucrHistogramSelector
         '
@@ -152,14 +152,14 @@ Partial Class dlgHistogram
         Me.ucrSaveHist.Location = New System.Drawing.Point(10, 247)
         Me.ucrSaveHist.Name = "ucrSaveHist"
         Me.ucrSaveHist.Size = New System.Drawing.Size(269, 27)
-        Me.ucrSaveHist.TabIndex = 11
+        Me.ucrSaveHist.TabIndex = 9
         '
         'ucrVariablesAsFactorforHist
         '
         Me.ucrVariablesAsFactorforHist.Location = New System.Drawing.Point(286, 54)
         Me.ucrVariablesAsFactorforHist.Name = "ucrVariablesAsFactorforHist"
         Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(125, 136)
-        Me.ucrVariablesAsFactorforHist.TabIndex = 12
+        Me.ucrVariablesAsFactorforHist.TabIndex = 4
         Me.ucrVariablesAsFactorforHist.ucrVariableSelector = Nothing
         '
         'dlgHistogram
