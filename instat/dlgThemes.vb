@@ -1,4 +1,5 @@
-﻿' Instat-R
+﻿
+' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -30,7 +31,34 @@ Public Class dlgThemes
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrInputThemeLists.cboInput.Items.Add("theme_bw")
+        ucrInputThemeLists.cboInput.Items.Add("theme_linedraw")
+        ucrInputThemeLists.cboInput.Items.Add("theme_light")
+        ucrInputThemeLists.cboInput.Items.Add("theme_minimal")
+        ucrInputThemeLists.cboInput.Items.Add("theme_classic")
+        ucrInputThemeLists.cboInput.Items.Add("theme_dark")
+        ucrInputThemeLists.cboInput.Items.Add("theme_void")
 
+        'from ggthemes
+        ucrInputThemeLists.cboInput.Items.Add("theme_base")
+        ucrInputThemeLists.cboInput.Items.Add("theme_calc")
+        ucrInputThemeLists.cboInput.Items.Add("theme_economist")
+        ucrInputThemeLists.cboInput.Items.Add("theme_economist")
+        ucrInputThemeLists.cboInput.Items.Add("theme_excel")
+        ucrInputThemeLists.cboInput.Items.Add("theme_few")
+        ucrInputThemeLists.cboInput.Items.Add("theme_fivethirtyeight")
+        ucrInputThemeLists.cboInput.Items.Add("theme_foundation")
+        ucrInputThemeLists.cboInput.Items.Add("theme_gdocs")
+        ucrInputThemeLists.cboInput.Items.Add("theme_hc")
+        ucrInputThemeLists.cboInput.Items.Add("theme_igray")
+        ucrInputThemeLists.cboInput.Items.Add("theme_map")
+        ucrInputThemeLists.cboInput.Items.Add("theme_pander")
+        ucrInputThemeLists.cboInput.Items.Add("theme_par")
+        ucrInputThemeLists.cboInput.Items.Add("theme_solarized")
+        ucrInputThemeLists.cboInput.Items.Add("theme_solid")
+        ucrInputThemeLists.cboInput.Items.Add("theme_stata")
+        ucrInputThemeLists.cboInput.Items.Add("theme_tufte")
+        ucrInputThemeLists.cboInput.Items.Add("theme_wsj")
     End Sub
 
     Private Sub SetDefaults()
