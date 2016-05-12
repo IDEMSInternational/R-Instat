@@ -258,10 +258,10 @@
     <Compile Include="dlgCopySheet.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgCreateNewTheme.Designer.vb">
-      <DependentUpon>dlgCreateNewTheme.vb</DependentUpon>
+    <Compile Include="sdgCreateNewTheme.Designer.vb">
+      <DependentUpon>sdgCreateNewTheme.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgCreateNewTheme.vb">
+    <Compile Include="sdgCreateNewTheme.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCumulativeDistribution.Designer.vb">
@@ -1807,14 +1807,14 @@
     <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
       <DependentUpon>dlgCopySheet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCreateNewTheme.fr-FR.resx">
-      <DependentUpon>dlgCreateNewTheme.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCreateNewTheme.fr-FR.resx">
+      <DependentUpon>sdgCreateNewTheme.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCreateNewTheme.resx">
-      <DependentUpon>dlgCreateNewTheme.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCreateNewTheme.resx">
+      <DependentUpon>sdgCreateNewTheme.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCreateNewTheme.sw-KE.resx">
-      <DependentUpon>dlgCreateNewTheme.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCreateNewTheme.sw-KE.resx">
+      <DependentUpon>sdgCreateNewTheme.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCumulativeDistribution.fr-FR.resx">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgCreateNewTheme
+Partial Class sdgCreateNewTheme
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class dlgCreateNewTheme
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCreateNewTheme))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgCreateNewTheme))
         Me.ucrBase = New instat.ucrButtons()
         Me.tbcCreateNewTheme = New System.Windows.Forms.TabControl()
         Me.tbpAxes = New System.Windows.Forms.TabPage()

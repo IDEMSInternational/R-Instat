@@ -16,6 +16,7 @@
 Imports instat.Translations
 Public Class dlgThemes
     Private bFirstLoad As Boolean = True
+    Public clsRThemeFunction As New RFunction
     Private Sub dlgThemes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -61,13 +62,18 @@ Public Class dlgThemes
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrInputThemeLists.cboInput.Text = "Choose Theme Here"
     End Sub
 
     Private Sub ReopenDialog()
 
     End Sub
     Private Sub TestOkEnabled()
+        If ucrInputThemeLists.cboInput.Text = "Choose Theme Here" Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
 
     End Sub
 
@@ -76,6 +82,16 @@ Public Class dlgThemes
     End Sub
 
     Private Sub cmdCreateNewTheme_Click(sender As Object, e As EventArgs) Handles cmdCreateNewTheme.Click
-        dlgCreateNewTheme.ShowDialog()
+        sdgCreateNewTheme.ShowDialog()
+    End Sub
+
+    Private Sub ucrInputThemeLists_NameChanged() Handles ucrInputThemeLists.NameChanged
+        clsRThemeFunction.SetRCommand(ucrInputThemeLists.cboInput.SelectedItem)
+        If ucrInputThemeLists.cboInput.SelectedItem = "theme_bw" Or "theme_linedraw" Or "theme_light" Or "theme_minimal" Or "theme_classic" Or "theme_dark" Or "theme_void" Then
+            clsRThemeFunction.AddParameter("base_size", 12)
+            clsRThemeFunction.AddParameter("base_family", Chr(34) & Chr(34))
+        End If
+        ucrBase.clsRsyntax.AddOperatorParameter(ucrInputThemeLists.cboInput.SelectedItem, clsRFunc:=clsRThemeFunction)
+        TestOkEnabled()
     End Sub
 End Class
