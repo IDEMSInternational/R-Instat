@@ -23,7 +23,7 @@ Partial Class dlgRestrict
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.UcrFilter1 = New instat.ucrFilter()
+        Me.ucrFilterControl = New instat.ucrFilter()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -33,19 +33,19 @@ Partial Class dlgRestrict
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
-        'UcrFilter1
+        'ucrFilterControl
         '
-        Me.UcrFilter1.Location = New System.Drawing.Point(5, 12)
-        Me.UcrFilter1.Name = "UcrFilter1"
-        Me.UcrFilter1.Size = New System.Drawing.Size(770, 395)
-        Me.UcrFilter1.TabIndex = 1
+        Me.ucrFilterControl.Location = New System.Drawing.Point(5, 12)
+        Me.ucrFilterControl.Name = "ucrFilterControl"
+        Me.ucrFilterControl.Size = New System.Drawing.Size(770, 395)
+        Me.ucrFilterControl.TabIndex = 1
         '
         'dlgRestrict
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(782, 466)
-        Me.Controls.Add(Me.UcrFilter1)
+        Me.Controls.Add(Me.ucrFilterControl)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgRestrict"
@@ -57,5 +57,5 @@ Partial Class dlgRestrict
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents UcrFilter1 As ucrFilter
+    Friend WithEvents ucrFilterControl As ucrFilter
 End Class
