@@ -155,6 +155,8 @@ Public Class clsGridLink
         Dim clsGetVarMetaFunc As New RFunction
         Dim iCurrPosition As Integer
         Dim iCount As Integer
+        Dim strRowNames As String()
+        Dim strColumnNames As String()
 
         iCount = 0
         For Each tempWorkSheet In grdCurr.Worksheets
@@ -182,12 +184,15 @@ Public Class clsGridLink
         rngDataRange = New RangePosition(0, 0, dfTemp.RowCount, dfTemp.ColumnCount)
         fillWorkSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
         For i As Integer = 0 To dfTemp.RowCount - 1
-            fillWorkSheet.RowHeaders.Item(i).Text = dfTemp.RowNames(i)
             For j As Integer = 0 To dfTemp.ColumnCount - 1
                 fillWorkSheet(row:=i, col:=j) = dfTemp(i, j)
             Next
         Next
-
+        strRowNames = dfTemp.RowNames
+        For i As Integer = 0 To dfTemp.RowCount - 1
+            fillWorkSheet.RowHeaders.Item(i).Text = strRowNames(i)
+        Next
+        strColumnNames = dfTemp.ColumnNames
         Try
             If bIncludeDataTypes Then
                 If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists Then
@@ -206,18 +211,18 @@ Public Class clsGridLink
                 For k As Integer = 0 To dfTemp.ColumnCount - 1
                     Select Case vecColumnDataTypes(k)
                         Case "factor"
-                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (f)"
+                            fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (f)"
                         Case "character"
-                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (c)"
+                            fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (c)"
                         Case "Date"
-                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k) & " (D)"
+                            fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (D)"
                         Case Else
-                            fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
+                            fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k)
                     End Select
                 Next
             Else
                 For k As Integer = 0 To dfTemp.ColumnCount - 1
-                    fillWorkSheet.ColumnHeaders(k).Text = dfTemp.ColumnNames(k)
+                    fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k)
                 Next
             End If
             grdCurr.CurrentWorksheet = fillWorkSheet
