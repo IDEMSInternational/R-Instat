@@ -73,6 +73,7 @@ Public Class dlgInsertColumn
         RowsOrColumns()
         rdoAtEnd.Checked = True
         ucrDataFramesList.Reset()
+        ucrInputBeforeAfter.SetName("Before")
 
     End Sub
 
@@ -143,6 +144,7 @@ Public Class dlgInsertColumn
     Private Sub RowsOrColumns()
         If rdoInsertColumns.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+            BeforeAfterPara()
             InsertParam()
             ucrBase.clsRsyntax.RemoveParameter("number_rows")
             nudInsertColumns.Value = 1
@@ -156,7 +158,6 @@ Public Class dlgInsertColumn
             nudPos.Visible = False
             lblDataFrame.Visible = True
             addColumData()
-            BeforeAfterPara()
             ColsToInsert()
             startpo()
             BeforeParameter()
@@ -236,8 +237,7 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub ucrInputBeforeAfter_NameChanged() Handles ucrInputBeforeAfter.NameChanged
-        BeforeAfterPara()
-
+        BeforeParameter()
     End Sub
 
     Private Sub BeforeParameter()
@@ -246,7 +246,7 @@ Public Class dlgInsertColumn
                 Select Case ucrInputBeforeAfter.GetText
                     Case "Before"
                         ucrBase.clsRsyntax.AddParameter("before", "TRUE")
-                    Case "After"
+                    Case Else
                         ucrBase.clsRsyntax.AddParameter("before", "FALSE")
                 End Select
             End If
