@@ -27,14 +27,12 @@ Partial Class ucrFilter
         Me.cmdToggleSelectAll = New System.Windows.Forms.Button()
         Me.lstFilters = New System.Windows.Forms.ListView()
         Me.lblFilterPreview = New System.Windows.Forms.Label()
-        Me.chkAsVariable = New System.Windows.Forms.CheckBox()
-        Me.lblVariableToFilter = New System.Windows.Forms.Label()
-        Me.ucrSecondValue = New instat.ucrInputTextBox()
+        Me.lblFilterBy = New System.Windows.Forms.Label()
+        Me.ucrValueForFilter = New instat.ucrInputTextBox()
         Me.ucrFilterPreview = New instat.ucrInputTextBox()
-        Me.ucrSecondFilterVariable = New instat.ucrReceiverSingle()
-        Me.ucrOperation = New instat.ucrInputComboBox()
+        Me.ucrFilterOperation = New instat.ucrInputComboBox()
         Me.ucrFactorLevels = New instat.ucrFactor()
-        Me.ucrFilterVariable = New instat.ucrReceiverSingle()
+        Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
@@ -83,31 +81,21 @@ Partial Class ucrFilter
         Me.lblFilterPreview.TabIndex = 9
         Me.lblFilterPreview.Text = "Fliter Preview"
         '
-        'chkAsVariable
+        'lblFilterBy
         '
-        Me.chkAsVariable.AutoSize = True
-        Me.chkAsVariable.Location = New System.Drawing.Point(491, 18)
-        Me.chkAsVariable.Name = "chkAsVariable"
-        Me.chkAsVariable.Size = New System.Drawing.Size(79, 17)
-        Me.chkAsVariable.TabIndex = 12
-        Me.chkAsVariable.Text = "As Variable"
-        Me.chkAsVariable.UseVisualStyleBackColor = True
+        Me.lblFilterBy.AutoSize = True
+        Me.lblFilterBy.Location = New System.Drawing.Point(271, 22)
+        Me.lblFilterBy.Name = "lblFilterBy"
+        Me.lblFilterBy.Size = New System.Drawing.Size(44, 13)
+        Me.lblFilterBy.TabIndex = 13
+        Me.lblFilterBy.Text = "Filter By"
         '
-        'lblVariableToFilter
+        'ucrValueForFilter
         '
-        Me.lblVariableToFilter.AutoSize = True
-        Me.lblVariableToFilter.Location = New System.Drawing.Point(271, 22)
-        Me.lblVariableToFilter.Name = "lblVariableToFilter"
-        Me.lblVariableToFilter.Size = New System.Drawing.Size(101, 13)
-        Me.lblVariableToFilter.TabIndex = 13
-        Me.lblVariableToFilter.Text = "Variable To Filter By"
-        '
-        'ucrSecondValue
-        '
-        Me.ucrSecondValue.Location = New System.Drawing.Point(491, 41)
-        Me.ucrSecondValue.Name = "ucrSecondValue"
-        Me.ucrSecondValue.Size = New System.Drawing.Size(120, 21)
-        Me.ucrSecondValue.TabIndex = 11
+        Me.ucrValueForFilter.Location = New System.Drawing.Point(490, 40)
+        Me.ucrValueForFilter.Name = "ucrValueForFilter"
+        Me.ucrValueForFilter.Size = New System.Drawing.Size(120, 21)
+        Me.ucrValueForFilter.TabIndex = 11
         '
         'ucrFilterPreview
         '
@@ -116,21 +104,12 @@ Partial Class ucrFilter
         Me.ucrFilterPreview.Size = New System.Drawing.Size(204, 21)
         Me.ucrFilterPreview.TabIndex = 10
         '
-        'ucrSecondFilterVariable
+        'ucrFilterOperation
         '
-        Me.ucrSecondFilterVariable.Location = New System.Drawing.Point(491, 41)
-        Me.ucrSecondFilterVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSecondFilterVariable.Name = "ucrSecondFilterVariable"
-        Me.ucrSecondFilterVariable.Selector = Nothing
-        Me.ucrSecondFilterVariable.Size = New System.Drawing.Size(120, 20)
-        Me.ucrSecondFilterVariable.TabIndex = 6
-        '
-        'ucrOperation
-        '
-        Me.ucrOperation.Location = New System.Drawing.Point(421, 41)
-        Me.ucrOperation.Name = "ucrOperation"
-        Me.ucrOperation.Size = New System.Drawing.Size(44, 21)
-        Me.ucrOperation.TabIndex = 5
+        Me.ucrFilterOperation.Location = New System.Drawing.Point(421, 41)
+        Me.ucrFilterOperation.Name = "ucrFilterOperation"
+        Me.ucrFilterOperation.Size = New System.Drawing.Size(44, 21)
+        Me.ucrFilterOperation.TabIndex = 5
         '
         'ucrFactorLevels
         '
@@ -142,14 +121,14 @@ Partial Class ucrFilter
         Me.ucrFactorLevels.Size = New System.Drawing.Size(354, 216)
         Me.ucrFactorLevels.TabIndex = 2
         '
-        'ucrFilterVariable
+        'ucrFilterByReceiver
         '
-        Me.ucrFilterVariable.Location = New System.Drawing.Point(274, 41)
-        Me.ucrFilterVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrFilterVariable.Name = "ucrFilterVariable"
-        Me.ucrFilterVariable.Selector = Nothing
-        Me.ucrFilterVariable.Size = New System.Drawing.Size(120, 20)
-        Me.ucrFilterVariable.TabIndex = 1
+        Me.ucrFilterByReceiver.Location = New System.Drawing.Point(274, 41)
+        Me.ucrFilterByReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrFilterByReceiver.Name = "ucrFilterByReceiver"
+        Me.ucrFilterByReceiver.Selector = Nothing
+        Me.ucrFilterByReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFilterByReceiver.TabIndex = 1
         '
         'ucrSelectorForFitler
         '
@@ -163,19 +142,17 @@ Partial Class ucrFilter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblVariableToFilter)
-        Me.Controls.Add(Me.chkAsVariable)
-        Me.Controls.Add(Me.ucrSecondValue)
+        Me.Controls.Add(Me.lblFilterBy)
+        Me.Controls.Add(Me.ucrValueForFilter)
         Me.Controls.Add(Me.ucrFilterPreview)
         Me.Controls.Add(Me.lblFilterPreview)
         Me.Controls.Add(Me.lstFilters)
         Me.Controls.Add(Me.cmdToggleSelectAll)
-        Me.Controls.Add(Me.ucrSecondFilterVariable)
-        Me.Controls.Add(Me.ucrOperation)
+        Me.Controls.Add(Me.ucrFilterOperation)
         Me.Controls.Add(Me.cmdAddFilter)
         Me.Controls.Add(Me.lblSelectLevels)
         Me.Controls.Add(Me.ucrFactorLevels)
-        Me.Controls.Add(Me.ucrFilterVariable)
+        Me.Controls.Add(Me.ucrFilterByReceiver)
         Me.Controls.Add(Me.ucrSelectorForFitler)
         Me.Name = "ucrFilter"
         Me.Size = New System.Drawing.Size(770, 395)
@@ -185,17 +162,15 @@ Partial Class ucrFilter
     End Sub
 
     Friend WithEvents ucrSelectorForFitler As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrFilterVariable As ucrReceiverSingle
+    Friend WithEvents ucrFilterByReceiver As ucrReceiverSingle
     Friend WithEvents ucrFactorLevels As ucrFactor
     Friend WithEvents lblSelectLevels As Label
     Friend WithEvents cmdAddFilter As Button
-    Friend WithEvents ucrOperation As ucrInputComboBox
-    Friend WithEvents ucrSecondFilterVariable As ucrReceiverSingle
+    Friend WithEvents ucrFilterOperation As ucrInputComboBox
     Friend WithEvents cmdToggleSelectAll As Button
     Friend WithEvents lstFilters As ListView
     Friend WithEvents lblFilterPreview As Label
     Friend WithEvents ucrFilterPreview As ucrInputTextBox
-    Friend WithEvents ucrSecondValue As ucrInputTextBox
-    Friend WithEvents chkAsVariable As CheckBox
-    Friend WithEvents lblVariableToFilter As Label
+    Friend WithEvents ucrValueForFilter As ucrInputTextBox
+    Friend WithEvents lblFilterBy As Label
 End Class
