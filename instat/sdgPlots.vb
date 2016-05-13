@@ -42,10 +42,11 @@ Public Class sdgPlots
         chkIncludeFacets.Checked = False
         FacetsCheck(False)
 
-        'setting current text on the ucrInputThemeList
 
 
-        ucrInputThemeLists.SetName("Choose Theme Here")
+
+        'Theme controls start here
+
         grpThemeArguments.Visible = False
         lblFont.Visible = False
         nudFont.Visible = False
@@ -63,6 +64,10 @@ Public Class sdgPlots
         chkLight.Visible = False
         'theme_tufte
         chkTicks.Visible = False
+
+        'theme_stata
+        lblScheme.Visible = False
+        cboScheme.Visible = False
 
     End Sub
 
@@ -304,32 +309,38 @@ Public Class sdgPlots
         clsYLabFunction.AddParameter("label", Chr(34) & txtYTitle.Text & Chr(34))
     End Sub
     Private Sub ucrInputThemeLists_NameChanged() Handles ucrInputThemeLists.NameChanged
-        clsRThemeFunction.SetRCommand(ucrInputThemeLists.cboInput.SelectedItem)
-        grpThemeArguments.Visible = True
-        lblFont.Visible = True
-        nudFont.Visible = True
-
-        If ucrInputThemeLists.cboInput.SelectedItem = "theme_bw" Or ucrInputThemeLists.cboInput.SelectedItem = "theme_linedraw" Or ucrInputThemeLists.cboInput.SelectedItem = "theme_void" Or ucrInputThemeLists.cboInput.SelectedItem = "theme_light" Or ucrInputThemeLists.cboInput.SelectedItem = "theme_minimal" Or ucrInputThemeLists.cboInput.SelectedItem = "theme_classic" Or ucrInputThemeLists.cboInput.SelectedItem = "theme_dark" Then
+        If Not ucrInputThemeLists.IsEmpty Then
+            clsRsyntax.RemoveOperatorParameter(ucrInputThemeLists.cboInput.SelectedItem)
+            clsRThemeFunction.SetRCommand(ucrInputThemeLists.cboInput.SelectedItem)
             clsRsyntax.AddOperatorParameter(ucrInputThemeLists.cboInput.SelectedItem, clsRFunc:=clsRThemeFunction)
-            clsRThemeFunction.AddParameter("base_size", 12)
-            clsRThemeFunction.AddParameter("base_family", Chr(34) & Chr(34))
-        ElseIf ucrInputThemeLists.cboInput.SelectedItem = "theme_economist" Then
-            chkhorizontal.Visible = True
-            chkdkPanel.Visible = True
-            chkStata.Visible = True
-            chkGray_bg.Visible = True
+            grpThemeArguments.Visible = True
+            lblFont.Visible = True
+            nudFont.Visible = True
+            If ucrInputThemeLists.cboInput.SelectedItem = "theme_bw" Or ucrInputThemeLists.cboInput.SelectedItem = "theme_linedraw" Or ucrInputThemeLists.cboInput.SelectedItem = "theme_void" Or ucrInputThemeLists.cboInput.SelectedItem = "theme_light" Or ucrInputThemeLists.cboInput.SelectedItem = "theme_minimal" Or ucrInputThemeLists.cboInput.SelectedItem = "theme_classic" Or ucrInputThemeLists.cboInput.SelectedItem = "theme_dark" Then
+                clsRThemeFunction.AddParameter("base_size", 12)
+                clsRThemeFunction.AddParameter("base_family", Chr(34) & Chr(34))
+            ElseIf ucrInputThemeLists.cboInput.SelectedItem = "theme_economist" Then
+                chkhorizontal.Visible = True
+                chkdkPanel.Visible = True
+                chkStata.Visible = True
+                chkGray_bg.Visible = True
 
-        ElseIf ucrInputThemeLists.cboInput.SelectedItem = "theme_excel" Then
-            chkhorizontal.Visible = True
+            ElseIf ucrInputThemeLists.cboInput.SelectedItem = "theme_excel" Then
+                chkhorizontal.Visible = True
 
-        ElseIf ucrInputThemeLists.cboInput.SelectedItem = "theme_hc" Then
-            lblBgColour.Visible = True
-            cboBgColour.Visible = True
+            ElseIf ucrInputThemeLists.cboInput.SelectedItem = "theme_hc" Then
+                lblBgColour.Visible = True
+                cboBgColour.Visible = True
 
-        ElseIf ucrInputThemeLists.cboInput.SelectedItem = "theme_solarized" Then
-            chkLight.Visible = True
-        ElseIf ucrInputThemeLists.cboInput.SelectedItem = "theme_tufte" Then
-            chkTicks.Visible = True
+            ElseIf ucrInputThemeLists.cboInput.SelectedItem = "theme_solarized" Then
+                chkLight.Visible = True
+            ElseIf ucrInputThemeLists.cboInput.SelectedItem = "theme_tufte" Then
+                chkTicks.Visible = True
+
+            ElseIf ucrInputThemeLists.cboInput.SelectedItem = "theme_stata"
+                lblScheme.Visible = True
+                cboScheme.Visible = True
+            End If
         End If
     End Sub
 
@@ -391,6 +402,14 @@ Public Class sdgPlots
             clsRThemeFunction.AddParameter("ticks", "TRUE")
         Else
             clsRThemeFunction.RemoveParameterByName("ticks")
+        End If
+    End Sub
+
+    Private Sub cboScheme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboScheme.SelectedIndexChanged
+        If cboScheme.SelectedItem <> "" Then
+            clsRThemeFunction.AddParameter("scheme", Chr(34) & cboScheme.SelectedItem & Chr(34))
+        Else
+            clsRThemeFunction.RemoveParameterByName("scheme")
         End If
     End Sub
 End Class

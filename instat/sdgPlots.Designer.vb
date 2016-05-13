@@ -24,6 +24,15 @@ Partial Class sdgPlots
     Private Sub InitializeComponent()
         Me.tabctrlBoxSubdialog = New System.Windows.Forms.TabControl()
         Me.tabTheme = New System.Windows.Forms.TabPage()
+        Me.grpThemeArguments = New System.Windows.Forms.GroupBox()
+        Me.chkTicks = New System.Windows.Forms.CheckBox()
+        Me.chkLight = New System.Windows.Forms.CheckBox()
+        Me.cboBgColour = New System.Windows.Forms.ComboBox()
+        Me.lblBgColour = New System.Windows.Forms.Label()
+        Me.chkGray_bg = New System.Windows.Forms.CheckBox()
+        Me.chkStata = New System.Windows.Forms.CheckBox()
+        Me.chkdkPanel = New System.Windows.Forms.CheckBox()
+        Me.chkhorizontal = New System.Windows.Forms.CheckBox()
         Me.nudFont = New System.Windows.Forms.NumericUpDown()
         Me.lblFont = New System.Windows.Forms.Label()
         Me.cmdCreateNewTheme = New System.Windows.Forms.Button()
@@ -91,22 +100,16 @@ Partial Class sdgPlots
         Me.txtYLowerLimit = New System.Windows.Forms.TextBox()
         Me.chkYUpperLimit = New System.Windows.Forms.CheckBox()
         Me.chkYLowerLimit = New System.Windows.Forms.CheckBox()
-        Me.grpThemeArguments = New System.Windows.Forms.GroupBox()
-        Me.chkhorizontal = New System.Windows.Forms.CheckBox()
-        Me.chkdkPanel = New System.Windows.Forms.CheckBox()
-        Me.chkStata = New System.Windows.Forms.CheckBox()
-        Me.chkGray_bg = New System.Windows.Forms.CheckBox()
+        Me.lblScheme = New System.Windows.Forms.Label()
+        Me.cboScheme = New System.Windows.Forms.ComboBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.ucrInputThemeLists = New instat.ucrInputComboBox()
         Me.ucr2ndFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.lblBgColour = New System.Windows.Forms.Label()
-        Me.cboBgColour = New System.Windows.Forms.ComboBox()
-        Me.chkLight = New System.Windows.Forms.CheckBox()
-        Me.chkTicks = New System.Windows.Forms.CheckBox()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabTheme.SuspendLayout()
+        Me.grpThemeArguments.SuspendLayout()
         CType(Me.nudFont, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabLegend.SuspendLayout()
         Me.grpLabels.SuspendLayout()
@@ -123,7 +126,6 @@ Partial Class sdgPlots
         Me.grpYTitle.SuspendLayout()
         Me.grpYTich.SuspendLayout()
         Me.grpYScale.SuspendLayout()
-        Me.grpThemeArguments.SuspendLayout()
         Me.SuspendLayout()
         '
         'tabctrlBoxSubdialog
@@ -154,6 +156,104 @@ Partial Class sdgPlots
         Me.tabTheme.Tag = "Theme"
         Me.tabTheme.Text = "Theme"
         Me.tabTheme.UseVisualStyleBackColor = True
+        '
+        'grpThemeArguments
+        '
+        Me.grpThemeArguments.Controls.Add(Me.cboScheme)
+        Me.grpThemeArguments.Controls.Add(Me.lblScheme)
+        Me.grpThemeArguments.Controls.Add(Me.chkTicks)
+        Me.grpThemeArguments.Controls.Add(Me.chkLight)
+        Me.grpThemeArguments.Controls.Add(Me.cboBgColour)
+        Me.grpThemeArguments.Controls.Add(Me.lblBgColour)
+        Me.grpThemeArguments.Controls.Add(Me.chkGray_bg)
+        Me.grpThemeArguments.Controls.Add(Me.chkStata)
+        Me.grpThemeArguments.Controls.Add(Me.chkdkPanel)
+        Me.grpThemeArguments.Controls.Add(Me.chkhorizontal)
+        Me.grpThemeArguments.Controls.Add(Me.nudFont)
+        Me.grpThemeArguments.Controls.Add(Me.lblFont)
+        Me.grpThemeArguments.Location = New System.Drawing.Point(5, 54)
+        Me.grpThemeArguments.Name = "grpThemeArguments"
+        Me.grpThemeArguments.Size = New System.Drawing.Size(352, 197)
+        Me.grpThemeArguments.TabIndex = 11
+        Me.grpThemeArguments.TabStop = False
+        Me.grpThemeArguments.Text = "Theme Arguments"
+        '
+        'chkTicks
+        '
+        Me.chkTicks.AutoSize = True
+        Me.chkTicks.Location = New System.Drawing.Point(7, 169)
+        Me.chkTicks.Name = "chkTicks"
+        Me.chkTicks.Size = New System.Drawing.Size(52, 17)
+        Me.chkTicks.TabIndex = 17
+        Me.chkTicks.Text = "Ticks"
+        Me.chkTicks.UseVisualStyleBackColor = True
+        '
+        'chkLight
+        '
+        Me.chkLight.AutoSize = True
+        Me.chkLight.Location = New System.Drawing.Point(7, 146)
+        Me.chkLight.Name = "chkLight"
+        Me.chkLight.Size = New System.Drawing.Size(49, 17)
+        Me.chkLight.TabIndex = 16
+        Me.chkLight.Text = "Light"
+        Me.chkLight.UseVisualStyleBackColor = True
+        '
+        'cboBgColour
+        '
+        Me.cboBgColour.FormattingEnabled = True
+        Me.cboBgColour.Location = New System.Drawing.Point(208, 19)
+        Me.cboBgColour.Name = "cboBgColour"
+        Me.cboBgColour.Size = New System.Drawing.Size(74, 21)
+        Me.cboBgColour.TabIndex = 15
+        '
+        'lblBgColour
+        '
+        Me.lblBgColour.AutoSize = True
+        Me.lblBgColour.Location = New System.Drawing.Point(149, 20)
+        Me.lblBgColour.Name = "lblBgColour"
+        Me.lblBgColour.Size = New System.Drawing.Size(53, 13)
+        Me.lblBgColour.TabIndex = 14
+        Me.lblBgColour.Text = "Bg Colour"
+        '
+        'chkGray_bg
+        '
+        Me.chkGray_bg.AutoSize = True
+        Me.chkGray_bg.Location = New System.Drawing.Point(7, 123)
+        Me.chkGray_bg.Name = "chkGray_bg"
+        Me.chkGray_bg.Size = New System.Drawing.Size(109, 17)
+        Me.chkGray_bg.TabIndex = 13
+        Me.chkGray_bg.Text = "Gray Background"
+        Me.chkGray_bg.UseVisualStyleBackColor = True
+        '
+        'chkStata
+        '
+        Me.chkStata.AutoSize = True
+        Me.chkStata.Location = New System.Drawing.Point(5, 99)
+        Me.chkStata.Name = "chkStata"
+        Me.chkStata.Size = New System.Drawing.Size(51, 17)
+        Me.chkStata.TabIndex = 12
+        Me.chkStata.Text = "Stata"
+        Me.chkStata.UseVisualStyleBackColor = True
+        '
+        'chkdkPanel
+        '
+        Me.chkdkPanel.AutoSize = True
+        Me.chkdkPanel.Location = New System.Drawing.Point(5, 75)
+        Me.chkdkPanel.Name = "chkdkPanel"
+        Me.chkdkPanel.Size = New System.Drawing.Size(77, 17)
+        Me.chkdkPanel.TabIndex = 11
+        Me.chkdkPanel.Text = "dark Panel"
+        Me.chkdkPanel.UseVisualStyleBackColor = True
+        '
+        'chkhorizontal
+        '
+        Me.chkhorizontal.AutoSize = True
+        Me.chkhorizontal.Location = New System.Drawing.Point(7, 52)
+        Me.chkhorizontal.Name = "chkhorizontal"
+        Me.chkhorizontal.Size = New System.Drawing.Size(73, 17)
+        Me.chkhorizontal.TabIndex = 11
+        Me.chkhorizontal.Text = "Horizontal"
+        Me.chkhorizontal.UseVisualStyleBackColor = True
         '
         'nudFont
         '
@@ -189,9 +289,9 @@ Partial Class sdgPlots
         Me.lblTheme.AutoSize = True
         Me.lblTheme.Location = New System.Drawing.Point(7, 14)
         Me.lblTheme.Name = "lblTheme"
-        Me.lblTheme.Size = New System.Drawing.Size(45, 13)
+        Me.lblTheme.Size = New System.Drawing.Size(78, 13)
         Me.lblTheme.TabIndex = 5
-        Me.lblTheme.Text = "Themes"
+        Me.lblTheme.Text = "Select Themes"
         '
         'tabLegend
         '
@@ -845,64 +945,23 @@ Partial Class sdgPlots
         Me.chkYLowerLimit.Text = "Lower Limit"
         Me.chkYLowerLimit.UseVisualStyleBackColor = True
         '
-        'grpThemeArguments
+        'lblScheme
         '
-        Me.grpThemeArguments.Controls.Add(Me.chkTicks)
-        Me.grpThemeArguments.Controls.Add(Me.chkLight)
-        Me.grpThemeArguments.Controls.Add(Me.cboBgColour)
-        Me.grpThemeArguments.Controls.Add(Me.lblBgColour)
-        Me.grpThemeArguments.Controls.Add(Me.chkGray_bg)
-        Me.grpThemeArguments.Controls.Add(Me.chkStata)
-        Me.grpThemeArguments.Controls.Add(Me.chkdkPanel)
-        Me.grpThemeArguments.Controls.Add(Me.chkhorizontal)
-        Me.grpThemeArguments.Controls.Add(Me.nudFont)
-        Me.grpThemeArguments.Controls.Add(Me.lblFont)
-        Me.grpThemeArguments.Location = New System.Drawing.Point(5, 54)
-        Me.grpThemeArguments.Name = "grpThemeArguments"
-        Me.grpThemeArguments.Size = New System.Drawing.Size(352, 197)
-        Me.grpThemeArguments.TabIndex = 11
-        Me.grpThemeArguments.TabStop = False
-        Me.grpThemeArguments.Text = "Theme Arguments"
+        Me.lblScheme.AutoSize = True
+        Me.lblScheme.Location = New System.Drawing.Point(152, 52)
+        Me.lblScheme.Name = "lblScheme"
+        Me.lblScheme.Size = New System.Drawing.Size(46, 13)
+        Me.lblScheme.TabIndex = 18
+        Me.lblScheme.Text = "Scheme"
         '
-        'chkhorizontal
+        'cboScheme
         '
-        Me.chkhorizontal.AutoSize = True
-        Me.chkhorizontal.Location = New System.Drawing.Point(7, 52)
-        Me.chkhorizontal.Name = "chkhorizontal"
-        Me.chkhorizontal.Size = New System.Drawing.Size(73, 17)
-        Me.chkhorizontal.TabIndex = 11
-        Me.chkhorizontal.Text = "Horizontal"
-        Me.chkhorizontal.UseVisualStyleBackColor = True
-        '
-        'chkdkPanel
-        '
-        Me.chkdkPanel.AutoSize = True
-        Me.chkdkPanel.Location = New System.Drawing.Point(5, 75)
-        Me.chkdkPanel.Name = "chkdkPanel"
-        Me.chkdkPanel.Size = New System.Drawing.Size(77, 17)
-        Me.chkdkPanel.TabIndex = 11
-        Me.chkdkPanel.Text = "dark Panel"
-        Me.chkdkPanel.UseVisualStyleBackColor = True
-        '
-        'chkStata
-        '
-        Me.chkStata.AutoSize = True
-        Me.chkStata.Location = New System.Drawing.Point(5, 99)
-        Me.chkStata.Name = "chkStata"
-        Me.chkStata.Size = New System.Drawing.Size(51, 17)
-        Me.chkStata.TabIndex = 12
-        Me.chkStata.Text = "Stata"
-        Me.chkStata.UseVisualStyleBackColor = True
-        '
-        'chkGray_bg
-        '
-        Me.chkGray_bg.AutoSize = True
-        Me.chkGray_bg.Location = New System.Drawing.Point(7, 123)
-        Me.chkGray_bg.Name = "chkGray_bg"
-        Me.chkGray_bg.Size = New System.Drawing.Size(109, 17)
-        Me.chkGray_bg.TabIndex = 13
-        Me.chkGray_bg.Text = "Gray Background"
-        Me.chkGray_bg.UseVisualStyleBackColor = True
+        Me.cboScheme.FormattingEnabled = True
+        Me.cboScheme.Items.AddRange(New Object() {"s2color", "s2mono", "s1color", "s1rcolor", "s1mono", "s2manual,", "s1manual", "sj"})
+        Me.cboScheme.Location = New System.Drawing.Point(208, 52)
+        Me.cboScheme.Name = "cboScheme"
+        Me.cboScheme.Size = New System.Drawing.Size(74, 21)
+        Me.cboScheme.TabIndex = 19
         '
         'ucrBaseSubdialog
         '
@@ -944,43 +1003,6 @@ Partial Class sdgPlots
         Me.ucrAddRemove.Size = New System.Drawing.Size(228, 127)
         Me.ucrAddRemove.TabIndex = 0
         '
-        'lblBgColour
-        '
-        Me.lblBgColour.AutoSize = True
-        Me.lblBgColour.Location = New System.Drawing.Point(149, 20)
-        Me.lblBgColour.Name = "lblBgColour"
-        Me.lblBgColour.Size = New System.Drawing.Size(53, 13)
-        Me.lblBgColour.TabIndex = 14
-        Me.lblBgColour.Text = "Bg Colour"
-        '
-        'cboBgColour
-        '
-        Me.cboBgColour.FormattingEnabled = True
-        Me.cboBgColour.Location = New System.Drawing.Point(208, 19)
-        Me.cboBgColour.Name = "cboBgColour"
-        Me.cboBgColour.Size = New System.Drawing.Size(74, 21)
-        Me.cboBgColour.TabIndex = 15
-        '
-        'chkLight
-        '
-        Me.chkLight.AutoSize = True
-        Me.chkLight.Location = New System.Drawing.Point(7, 146)
-        Me.chkLight.Name = "chkLight"
-        Me.chkLight.Size = New System.Drawing.Size(49, 17)
-        Me.chkLight.TabIndex = 16
-        Me.chkLight.Text = "Light"
-        Me.chkLight.UseVisualStyleBackColor = True
-        '
-        'chkTicks
-        '
-        Me.chkTicks.AutoSize = True
-        Me.chkTicks.Location = New System.Drawing.Point(7, 169)
-        Me.chkTicks.Name = "chkTicks"
-        Me.chkTicks.Size = New System.Drawing.Size(52, 17)
-        Me.chkTicks.TabIndex = 17
-        Me.chkTicks.Text = "Ticks"
-        Me.chkTicks.UseVisualStyleBackColor = True
-        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -997,6 +1019,8 @@ Partial Class sdgPlots
         Me.tabctrlBoxSubdialog.ResumeLayout(False)
         Me.tabTheme.ResumeLayout(False)
         Me.tabTheme.PerformLayout()
+        Me.grpThemeArguments.ResumeLayout(False)
+        Me.grpThemeArguments.PerformLayout()
         CType(Me.nudFont, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabLegend.ResumeLayout(False)
         Me.tabLegend.PerformLayout()
@@ -1026,8 +1050,6 @@ Partial Class sdgPlots
         Me.grpYTich.PerformLayout()
         Me.grpYScale.ResumeLayout(False)
         Me.grpYScale.PerformLayout()
-        Me.grpThemeArguments.ResumeLayout(False)
-        Me.grpThemeArguments.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1115,4 +1137,6 @@ Partial Class sdgPlots
     Friend WithEvents lblBgColour As Label
     Friend WithEvents chkLight As CheckBox
     Friend WithEvents chkTicks As CheckBox
+    Friend WithEvents lblScheme As Label
+    Friend WithEvents cboScheme As ComboBox
 End Class
