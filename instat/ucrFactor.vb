@@ -182,6 +182,19 @@ Public Class ucrFactor
         Return strTemp
     End Function
 
+    Public Function IsAllSelected() As Boolean
+        For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
+            If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
+                If Not DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean) Then
+                    Return False
+                End If
+            Else
+                Return False
+            End If
+        Next
+        Return True
+    End Function
+
     Private Sub shtcurrsheet_celldatachanged(sender As Object, e As CellEventArgs) Handles shtCurrSheet.CellDataChanged
         Dim i As Integer
         Dim iSelected As Boolean
