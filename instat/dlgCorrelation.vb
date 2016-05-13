@@ -20,18 +20,6 @@ Public Class dlgCorrelation
     Public bIsTwoColumnFunction As Boolean
 
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Set properties needed on load
-        'ucrBase.clsRsyntax.iCallType = 2
-        'ucrReceiverFirstColumn.Selector = ucrSelectorDataFrameVarAddRemove
-        'ucrReceiverSecondColumn.Selector = ucrSelectorDataFrameVarAddRemove
-        'ucrReceiverMultipleColumns.Selector = ucrSelectorDataFrameVarAddRemove
-        'ucrReceiverFirstColumn.SetDataType("numeric")
-        'ucrReceiverSecondColumn.SetDataType("numeric")
-        'ucrReceiverMultipleColumns.SetDataType("numeric")
-
-
-        'ucrBase.iHelpTopicID = 316
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -43,10 +31,6 @@ Public Class dlgCorrelation
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 0
-        'clsModel.SetOperation("~")
-        'ucrResponse.Selector = ucrSelectorSimpleReg
-        'ucrExplanatory.Selector = ucrSelectorSimpleReg
-
         ucrReceiverFirstColumn.Selector = ucrSelectorDataFrameVarAddRemove
         ucrReceiverSecondColumn.Selector = ucrSelectorDataFrameVarAddRemove
         ucrReceiverMultipleColumns.Selector = ucrSelectorDataFrameVarAddRemove
@@ -56,7 +40,6 @@ Public Class dlgCorrelation
 
         ucrBase.iHelpTopicID = 316
         sdgCorrPlot.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
-        'sdgModelOptions.SetRCIFunction(clsRCIFunction)
     End Sub
 
     Private Sub ReopenDialog()
@@ -213,10 +196,6 @@ Public Class dlgCorrelation
             ucrBase.OKEnabled(False)
         End If
     End Sub
-
-    'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-    '    sdgCorrPlot.RegOptions()
-    'End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         If (rdoMultipleColumns.Checked) Then

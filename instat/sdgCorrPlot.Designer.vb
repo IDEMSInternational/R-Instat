@@ -26,10 +26,11 @@ Partial Class sdgCorrPlot
         Me.tbDisplay = New System.Windows.Forms.TabPage()
         Me.chkCorrelationMatrix = New System.Windows.Forms.CheckBox()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
-        Me.ucrSaveGraph = New instat.ucrSaveGraph()
         Me.tbSaveGraphs = New System.Windows.Forms.TabControl()
         Me.tbPairwisePlot = New System.Windows.Forms.TabPage()
         Me.tbCorrelationPlot = New System.Windows.Forms.TabPage()
+        Me.chkLabel = New System.Windows.Forms.CheckBox()
+        Me.nudLabelAlpha = New System.Windows.Forms.NumericUpDown()
         Me.nudMaximumSize = New System.Windows.Forms.NumericUpDown()
         Me.nudMinimunSize = New System.Windows.Forms.NumericUpDown()
         Me.lblMaximumSize = New System.Windows.Forms.Label()
@@ -45,20 +46,19 @@ Partial Class sdgCorrPlot
         Me.rdoScatterplotMatrix = New System.Windows.Forms.RadioButton()
         Me.rdoCorrelationPlot = New System.Windows.Forms.RadioButton()
         Me.rdoPairwisePlot = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveGraph = New instat.ucrSaveGraph()
         Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
-        Me.chkLabel = New System.Windows.Forms.CheckBox()
-        Me.nudLabelAlpha = New System.Windows.Forms.NumericUpDown()
         Me.tbSdgCorrelation.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
         Me.tbSaveGraphs.SuspendLayout()
         Me.tbCorrelationPlot.SuspendLayout()
+        CType(Me.nudLabelAlpha, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMaximumSize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMinimunSize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbScatterplotMatrix.SuspendLayout()
         CType(Me.nudAlpha, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpGraphOptions.SuspendLayout()
-        CType(Me.nudLabelAlpha, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tbSdgCorrelation
@@ -109,13 +109,6 @@ Partial Class sdgCorrPlot
         Me.tbGraphics.Text = "Graphics"
         Me.tbGraphics.UseVisualStyleBackColor = True
         '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(16, 92)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(225, 22)
-        Me.ucrSaveGraph.TabIndex = 7
-        '
         'tbSaveGraphs
         '
         Me.tbSaveGraphs.Controls.Add(Me.tbPairwisePlot)
@@ -140,8 +133,8 @@ Partial Class sdgCorrPlot
         '
         'tbCorrelationPlot
         '
-        Me.tbCorrelationPlot.Controls.Add(Me.nudLabelAlpha)
         Me.tbCorrelationPlot.Controls.Add(Me.chkLabel)
+        Me.tbCorrelationPlot.Controls.Add(Me.nudLabelAlpha)
         Me.tbCorrelationPlot.Controls.Add(Me.nudMaximumSize)
         Me.tbCorrelationPlot.Controls.Add(Me.nudMinimunSize)
         Me.tbCorrelationPlot.Controls.Add(Me.lblMaximumSize)
@@ -157,6 +150,28 @@ Partial Class sdgCorrPlot
         Me.tbCorrelationPlot.Tag = "Correlation_Plot"
         Me.tbCorrelationPlot.Text = "Correlation Plot"
         Me.tbCorrelationPlot.UseVisualStyleBackColor = True
+        '
+        'chkLabel
+        '
+        Me.chkLabel.AutoSize = True
+        Me.chkLabel.Location = New System.Drawing.Point(24, 56)
+        Me.chkLabel.Name = "chkLabel"
+        Me.chkLabel.Size = New System.Drawing.Size(52, 17)
+        Me.chkLabel.TabIndex = 9
+        Me.chkLabel.Tag = "Label"
+        Me.chkLabel.Text = "Label"
+        Me.chkLabel.UseVisualStyleBackColor = True
+        '
+        'nudLabelAlpha
+        '
+        Me.nudLabelAlpha.DecimalPlaces = 2
+        Me.nudLabelAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
+        Me.nudLabelAlpha.Location = New System.Drawing.Point(177, 54)
+        Me.nudLabelAlpha.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudLabelAlpha.Name = "nudLabelAlpha"
+        Me.nudLabelAlpha.Size = New System.Drawing.Size(51, 20)
+        Me.nudLabelAlpha.TabIndex = 8
+        Me.nudLabelAlpha.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'nudMaximumSize
         '
@@ -200,7 +215,7 @@ Partial Class sdgCorrPlot
         'lblLabelAlpha
         '
         Me.lblLabelAlpha.AutoSize = True
-        Me.lblLabelAlpha.Location = New System.Drawing.Point(114, 54)
+        Me.lblLabelAlpha.Location = New System.Drawing.Point(104, 56)
         Me.lblLabelAlpha.Name = "lblLabelAlpha"
         Me.lblLabelAlpha.Size = New System.Drawing.Size(63, 13)
         Me.lblLabelAlpha.TabIndex = 3
@@ -322,34 +337,19 @@ Partial Class sdgCorrPlot
         Me.rdoPairwisePlot.Text = "Pairwise Plot"
         Me.rdoPairwisePlot.UseVisualStyleBackColor = True
         '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(16, 92)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(225, 22)
+        Me.ucrSaveGraph.TabIndex = 7
+        '
         'ucrBaseSdgCorrPlot
         '
         Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(44, 275)
         Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
         Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(142, 30)
         Me.ucrBaseSdgCorrPlot.TabIndex = 0
-        '
-        'chkLabel
-        '
-        Me.chkLabel.AutoSize = True
-        Me.chkLabel.Location = New System.Drawing.Point(24, 49)
-        Me.chkLabel.Name = "chkLabel"
-        Me.chkLabel.Size = New System.Drawing.Size(52, 17)
-        Me.chkLabel.TabIndex = 8
-        Me.chkLabel.Tag = "Label"
-        Me.chkLabel.Text = "Label"
-        Me.chkLabel.UseVisualStyleBackColor = True
-        '
-        'nudLabelAlpha
-        '
-        Me.nudLabelAlpha.DecimalPlaces = 2
-        Me.nudLabelAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
-        Me.nudLabelAlpha.Location = New System.Drawing.Point(183, 52)
-        Me.nudLabelAlpha.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudLabelAlpha.Name = "nudLabelAlpha"
-        Me.nudLabelAlpha.Size = New System.Drawing.Size(51, 20)
-        Me.nudLabelAlpha.TabIndex = 9
-        Me.nudLabelAlpha.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'sdgCorrPlot
         '
@@ -370,6 +370,7 @@ Partial Class sdgCorrPlot
         Me.tbSaveGraphs.ResumeLayout(False)
         Me.tbCorrelationPlot.ResumeLayout(False)
         Me.tbCorrelationPlot.PerformLayout()
+        CType(Me.nudLabelAlpha, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudMaximumSize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudMinimunSize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbScatterplotMatrix.ResumeLayout(False)
@@ -377,7 +378,6 @@ Partial Class sdgCorrPlot
         CType(Me.nudAlpha, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpGraphOptions.ResumeLayout(False)
         Me.grpGraphOptions.PerformLayout()
-        CType(Me.nudLabelAlpha, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
