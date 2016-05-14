@@ -75,4 +75,12 @@ Public Class dlgLabels
     Private Sub ucrSelectorForLabels_DataFrameChanged() Handles ucrSelectorForLabels.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForLabels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
+
+    Private Sub cmdAddLevel_Click(sender As Object, e As EventArgs) Handles cmdAddLevel.Click
+        ucrFactorLabels.AddLevel()
+    End Sub
+
+    Private Sub ucrFactorLabels_GridVisibleChanged() Handles ucrFactorLabels.GridVisibleChanged
+        cmdAddLevel.Enabled = ucrFactorLabels.grdFactorData.Visible
+    End Sub
 End Class

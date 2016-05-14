@@ -42,17 +42,18 @@ Partial Class dlgUnusedLevels
         'ucrRemoveUnusedFactorLevels
         '
         Me.ucrRemoveUnusedFactorLevels.AutoSize = True
-        Me.ucrRemoveUnusedFactorLevels.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrRemoveUnusedFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrRemoveUnusedFactorLevels.clsReceiver = Nothing
-        Me.ucrRemoveUnusedFactorLevels.Location = New System.Drawing.Point(231, 57)
+        Me.ucrRemoveUnusedFactorLevels.Location = New System.Drawing.Point(230, 54)
         Me.ucrRemoveUnusedFactorLevels.Name = "ucrRemoveUnusedFactorLevels"
         Me.ucrRemoveUnusedFactorLevels.shtCurrSheet = Nothing
-        Me.ucrRemoveUnusedFactorLevels.Size = New System.Drawing.Size(267, 181)
+        Me.ucrRemoveUnusedFactorLevels.Size = New System.Drawing.Size(255, 175)
         Me.ucrRemoveUnusedFactorLevels.TabIndex = 3
         '
         'ucrReceiverFactorColumn
         '
         Me.ucrReceiverFactorColumn.Location = New System.Drawing.Point(230, 25)
+        Me.ucrReceiverFactorColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactorColumn.Name = "ucrReceiverFactorColumn"
         Me.ucrReceiverFactorColumn.Selector = Nothing
         Me.ucrReceiverFactorColumn.Size = New System.Drawing.Size(106, 26)
@@ -61,6 +62,7 @@ Partial Class dlgUnusedLevels
         'ucrSelectorFactorColumn
         '
         Me.ucrSelectorFactorColumn.Location = New System.Drawing.Point(5, 2)
+        Me.ucrSelectorFactorColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFactorColumn.Name = "ucrSelectorFactorColumn"
         Me.ucrSelectorFactorColumn.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorFactorColumn.TabIndex = 0
