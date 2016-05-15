@@ -22,237 +22,102 @@ Partial Class dlgOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("General")
-        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
-        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
-        Dim TreeNode13 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import Data")
-        Dim TreeNode14 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("R Script")
-        Dim TreeNode15 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("R Output")
-        Dim TreeNode16 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
-        Dim TreeNode17 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Formatting Options", New System.Windows.Forms.TreeNode() {TreeNode14, TreeNode15, TreeNode16})
-        Dim TreeNode18 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Load Settings")
-        Me.lblTitle = New System.Windows.Forms.Label()
+        Dim TreeNode13 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
+        Dim TreeNode14 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
+        Dim TreeNode15 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
+        Dim TreeNode16 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
+        Dim TreeNode17 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
+        Dim TreeNode18 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
         Me.cmdApply = New System.Windows.Forms.Button()
-        Me.tbpRScript = New System.Windows.Forms.TabPage()
-        Me.pnRScript = New System.Windows.Forms.Panel()
-        Me.cmdScript = New System.Windows.Forms.Button()
-        Me.lblScript = New System.Windows.Forms.Label()
-        Me.tbpROutput = New System.Windows.Forms.TabPage()
-        Me.pnRoutput = New System.Windows.Forms.Panel()
-        Me.cmdOutput = New System.Windows.Forms.Button()
-        Me.lblROutput = New System.Windows.Forms.Label()
-        Me.cmdScriptChange = New System.Windows.Forms.Button()
-        Me.pnCommentFormat = New System.Windows.Forms.Panel()
-        Me.cmdRComments = New System.Windows.Forms.Button()
-        Me.lblRComments = New System.Windows.Forms.Label()
-        Me.tbpRScriptOptions = New System.Windows.Forms.TabPage()
+        Me.cmdCommandFormat = New System.Windows.Forms.Button()
+        Me.tbpCommands = New System.Windows.Forms.TabPage()
         Me.pnScriptOptions = New System.Windows.Forms.Panel()
         Me.chkIncludeDefaultParams = New System.Windows.Forms.CheckBox()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
-        Me.tbpComment = New System.Windows.Forms.TabPage()
         Me.cmdOk = New System.Windows.Forms.Button()
-        Me.lblComments = New System.Windows.Forms.Label()
-        Me.tbpLanguageSettings = New System.Windows.Forms.TabPage()
+        Me.lblCommentFormat = New System.Windows.Forms.Label()
+        Me.tbpLanguages = New System.Windows.Forms.TabPage()
         Me.pnLanguages = New System.Windows.Forms.Panel()
+        Me.grpLanguage = New System.Windows.Forms.GroupBox()
+        Me.rdoSpanish = New System.Windows.Forms.RadioButton()
         Me.rdoEnglish = New System.Windows.Forms.RadioButton()
-        Me.rdoFrench = New System.Windows.Forms.RadioButton()
         Me.rdoKiswahili = New System.Windows.Forms.RadioButton()
+        Me.rdoFrench = New System.Windows.Forms.RadioButton()
         Me.spltControls = New System.Windows.Forms.SplitContainer()
         Me.trOptions = New System.Windows.Forms.TreeView()
         Me.tbcOptions = New System.Windows.Forms.TabControl()
-        Me.tbpGeneral = New System.Windows.Forms.TabPage()
-        Me.pnGeneral = New System.Windows.Forms.Panel()
-        Me.lblWelcome = New System.Windows.Forms.Label()
         Me.tbpComments = New System.Windows.Forms.TabPage()
         Me.pnComments = New System.Windows.Forms.Panel()
         Me.lblComment = New System.Windows.Forms.Label()
         Me.txtComment = New System.Windows.Forms.TextBox()
         Me.tbpImport = New System.Windows.Forms.TabPage()
         Me.pnImportData = New System.Windows.Forms.Panel()
-        Me.lblShowLines = New System.Windows.Forms.Label()
-        Me.nudNoLines = New System.Windows.Forms.NumericUpDown()
-        Me.tbpFormat = New System.Windows.Forms.TabPage()
+        Me.lblPreviewRows = New System.Windows.Forms.Label()
+        Me.nudPreviewRows = New System.Windows.Forms.NumericUpDown()
+        Me.tbpOutputWindow = New System.Windows.Forms.TabPage()
         Me.pnFormatOptions = New System.Windows.Forms.Panel()
-        Me.cmdOutputChange = New System.Windows.Forms.Button()
-        Me.lblOutput = New System.Windows.Forms.Label()
-        Me.cmdCommentsChange = New System.Windows.Forms.Button()
-        Me.lblRScript = New System.Windows.Forms.Label()
-        Me.tbpRScript.SuspendLayout()
-        Me.pnRScript.SuspendLayout()
-        Me.tbpROutput.SuspendLayout()
-        Me.pnRoutput.SuspendLayout()
-        Me.pnCommentFormat.SuspendLayout()
-        Me.tbpRScriptOptions.SuspendLayout()
+        Me.rtbCommentPreview = New System.Windows.Forms.RichTextBox()
+        Me.rtbOutputPreview = New System.Windows.Forms.RichTextBox()
+        Me.rtbCommandPreview = New System.Windows.Forms.RichTextBox()
+        Me.cmdOutputFormat = New System.Windows.Forms.Button()
+        Me.lblOutputFormat = New System.Windows.Forms.Label()
+        Me.cmdCommentFormat = New System.Windows.Forms.Button()
+        Me.lblCommandFormat = New System.Windows.Forms.Label()
+        Me.tbpDataView = New System.Windows.Forms.TabPage()
+        Me.lblMaxRows = New System.Windows.Forms.Label()
+        Me.nudMaxRows = New System.Windows.Forms.NumericUpDown()
+        Me.tbpCommands.SuspendLayout()
         Me.pnScriptOptions.SuspendLayout()
-        Me.tbpComment.SuspendLayout()
-        Me.tbpLanguageSettings.SuspendLayout()
+        Me.tbpLanguages.SuspendLayout()
         Me.pnLanguages.SuspendLayout()
+        Me.grpLanguage.SuspendLayout()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
         Me.spltControls.SuspendLayout()
         Me.tbcOptions.SuspendLayout()
-        Me.tbpGeneral.SuspendLayout()
-        Me.pnGeneral.SuspendLayout()
         Me.tbpComments.SuspendLayout()
         Me.pnComments.SuspendLayout()
         Me.tbpImport.SuspendLayout()
         Me.pnImportData.SuspendLayout()
-        CType(Me.nudNoLines, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tbpFormat.SuspendLayout()
+        CType(Me.nudPreviewRows, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpOutputWindow.SuspendLayout()
         Me.pnFormatOptions.SuspendLayout()
+        Me.tbpDataView.SuspendLayout()
+        CType(Me.nudMaxRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblTitle.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitle.Location = New System.Drawing.Point(13, 4)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(333, 15)
-        Me.lblTitle.TabIndex = 20
-        Me.lblTitle.Text = "Preview and Set the Font and Color Formats for the following Options"
         '
         'cmdApply
         '
-        Me.cmdApply.Location = New System.Drawing.Point(456, 320)
+        Me.cmdApply.Location = New System.Drawing.Point(316, 320)
         Me.cmdApply.Name = "cmdApply"
         Me.cmdApply.Size = New System.Drawing.Size(75, 23)
         Me.cmdApply.TabIndex = 10
         Me.cmdApply.Tag = "Apply"
-        Me.cmdApply.Text = "&Apply"
+        Me.cmdApply.Text = "Apply"
         Me.cmdApply.UseVisualStyleBackColor = True
         '
-        'tbpRScript
+        'cmdCommandFormat
         '
-        Me.tbpRScript.Controls.Add(Me.pnRScript)
-        Me.tbpRScript.Location = New System.Drawing.Point(4, 22)
-        Me.tbpRScript.Name = "tbpRScript"
-        Me.tbpRScript.Size = New System.Drawing.Size(420, 291)
-        Me.tbpRScript.TabIndex = 7
-        Me.tbpRScript.Text = "R Script"
-        Me.tbpRScript.UseVisualStyleBackColor = True
+        Me.cmdCommandFormat.Location = New System.Drawing.Point(288, 20)
+        Me.cmdCommandFormat.Name = "cmdCommandFormat"
+        Me.cmdCommandFormat.Size = New System.Drawing.Size(100, 23)
+        Me.cmdCommandFormat.TabIndex = 10
+        Me.cmdCommandFormat.Text = "Change..."
+        Me.cmdCommandFormat.UseVisualStyleBackColor = True
         '
-        'pnRScript
+        'tbpCommands
         '
-        Me.pnRScript.AutoSize = True
-        Me.pnRScript.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnRScript.Controls.Add(Me.cmdScript)
-        Me.pnRScript.Controls.Add(Me.lblScript)
-        Me.pnRScript.Location = New System.Drawing.Point(3, 3)
-        Me.pnRScript.Name = "pnRScript"
-        Me.pnRScript.Size = New System.Drawing.Size(186, 26)
-        Me.pnRScript.TabIndex = 0
-        '
-        'cmdScript
-        '
-        Me.cmdScript.Location = New System.Drawing.Point(83, 0)
-        Me.cmdScript.Name = "cmdScript"
-        Me.cmdScript.Size = New System.Drawing.Size(100, 23)
-        Me.cmdScript.TabIndex = 18
-        Me.cmdScript.Text = "Preview Settings"
-        Me.cmdScript.UseVisualStyleBackColor = True
-        '
-        'lblScript
-        '
-        Me.lblScript.AutoSize = True
-        Me.lblScript.Location = New System.Drawing.Point(4, 10)
-        Me.lblScript.Name = "lblScript"
-        Me.lblScript.Size = New System.Drawing.Size(45, 13)
-        Me.lblScript.TabIndex = 19
-        Me.lblScript.Text = "R Script"
-        '
-        'tbpROutput
-        '
-        Me.tbpROutput.Controls.Add(Me.pnRoutput)
-        Me.tbpROutput.Location = New System.Drawing.Point(4, 22)
-        Me.tbpROutput.Name = "tbpROutput"
-        Me.tbpROutput.Size = New System.Drawing.Size(420, 291)
-        Me.tbpROutput.TabIndex = 6
-        Me.tbpROutput.Text = "R Output"
-        Me.tbpROutput.UseVisualStyleBackColor = True
-        '
-        'pnRoutput
-        '
-        Me.pnRoutput.AutoSize = True
-        Me.pnRoutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnRoutput.Controls.Add(Me.cmdOutput)
-        Me.pnRoutput.Controls.Add(Me.lblROutput)
-        Me.pnRoutput.Location = New System.Drawing.Point(3, 3)
-        Me.pnRoutput.Name = "pnRoutput"
-        Me.pnRoutput.Size = New System.Drawing.Size(185, 29)
-        Me.pnRoutput.TabIndex = 21
-        '
-        'cmdOutput
-        '
-        Me.cmdOutput.Location = New System.Drawing.Point(82, 3)
-        Me.cmdOutput.Name = "cmdOutput"
-        Me.cmdOutput.Size = New System.Drawing.Size(100, 23)
-        Me.cmdOutput.TabIndex = 19
-        Me.cmdOutput.Text = "Preview Settings"
-        Me.cmdOutput.UseVisualStyleBackColor = True
-        '
-        'lblROutput
-        '
-        Me.lblROutput.AutoSize = True
-        Me.lblROutput.Location = New System.Drawing.Point(3, 13)
-        Me.lblROutput.Name = "lblROutput"
-        Me.lblROutput.Size = New System.Drawing.Size(50, 13)
-        Me.lblROutput.TabIndex = 20
-        Me.lblROutput.Text = "R Output"
-        '
-        'cmdScriptChange
-        '
-        Me.cmdScriptChange.Location = New System.Drawing.Point(92, 43)
-        Me.cmdScriptChange.Name = "cmdScriptChange"
-        Me.cmdScriptChange.Size = New System.Drawing.Size(100, 23)
-        Me.cmdScriptChange.TabIndex = 10
-        Me.cmdScriptChange.Text = "Preview Settings"
-        Me.cmdScriptChange.UseVisualStyleBackColor = True
-        '
-        'pnCommentFormat
-        '
-        Me.pnCommentFormat.AutoSize = True
-        Me.pnCommentFormat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnCommentFormat.Controls.Add(Me.cmdRComments)
-        Me.pnCommentFormat.Controls.Add(Me.lblRComments)
-        Me.pnCommentFormat.Location = New System.Drawing.Point(3, 3)
-        Me.pnCommentFormat.Name = "pnCommentFormat"
-        Me.pnCommentFormat.Size = New System.Drawing.Size(184, 26)
-        Me.pnCommentFormat.TabIndex = 22
-        '
-        'cmdRComments
-        '
-        Me.cmdRComments.Location = New System.Drawing.Point(81, 0)
-        Me.cmdRComments.Name = "cmdRComments"
-        Me.cmdRComments.Size = New System.Drawing.Size(100, 23)
-        Me.cmdRComments.TabIndex = 20
-        Me.cmdRComments.Text = "Preview Settings"
-        Me.cmdRComments.UseVisualStyleBackColor = True
-        '
-        'lblRComments
-        '
-        Me.lblRComments.AutoSize = True
-        Me.lblRComments.Location = New System.Drawing.Point(2, 10)
-        Me.lblRComments.Name = "lblRComments"
-        Me.lblRComments.Size = New System.Drawing.Size(56, 13)
-        Me.lblRComments.TabIndex = 21
-        Me.lblRComments.Text = "Comments"
-        '
-        'tbpRScriptOptions
-        '
-        Me.tbpRScriptOptions.Controls.Add(Me.pnScriptOptions)
-        Me.tbpRScriptOptions.Location = New System.Drawing.Point(4, 22)
-        Me.tbpRScriptOptions.Name = "tbpRScriptOptions"
-        Me.tbpRScriptOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpRScriptOptions.Size = New System.Drawing.Size(420, 291)
-        Me.tbpRScriptOptions.TabIndex = 4
-        Me.tbpRScriptOptions.Tag = "R_Script_Options"
-        Me.tbpRScriptOptions.Text = "R Script Options"
-        Me.tbpRScriptOptions.UseVisualStyleBackColor = True
+        Me.tbpCommands.Controls.Add(Me.pnScriptOptions)
+        Me.tbpCommands.Location = New System.Drawing.Point(4, 22)
+        Me.tbpCommands.Name = "tbpCommands"
+        Me.tbpCommands.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpCommands.Size = New System.Drawing.Size(420, 291)
+        Me.tbpCommands.TabIndex = 4
+        Me.tbpCommands.Tag = "Commands"
+        Me.tbpCommands.Text = "Commands"
+        Me.tbpCommands.UseVisualStyleBackColor = True
         '
         'pnScriptOptions
         '
@@ -261,7 +126,7 @@ Partial Class dlgOptions
         Me.pnScriptOptions.Controls.Add(Me.chkIncludeDefaultParams)
         Me.pnScriptOptions.Location = New System.Drawing.Point(3, 6)
         Me.pnScriptOptions.Name = "pnScriptOptions"
-        Me.pnScriptOptions.Size = New System.Drawing.Size(242, 23)
+        Me.pnScriptOptions.Size = New System.Drawing.Size(267, 23)
         Me.pnScriptOptions.TabIndex = 1
         '
         'chkIncludeDefaultParams
@@ -269,41 +134,31 @@ Partial Class dlgOptions
         Me.chkIncludeDefaultParams.AutoSize = True
         Me.chkIncludeDefaultParams.Location = New System.Drawing.Point(3, 3)
         Me.chkIncludeDefaultParams.Name = "chkIncludeDefaultParams"
-        Me.chkIncludeDefaultParams.Size = New System.Drawing.Size(236, 17)
+        Me.chkIncludeDefaultParams.Size = New System.Drawing.Size(261, 17)
         Me.chkIncludeDefaultParams.TabIndex = 0
-        Me.chkIncludeDefaultParams.Tag = "Include_Default_Parameter_Values_in_R_Script"
-        Me.chkIncludeDefaultParams.Text = "Include Default Parameter Values in R Script"
+        Me.chkIncludeDefaultParams.Tag = "Include_Default_Parameter_Values_in_R_Commands"
+        Me.chkIncludeDefaultParams.Text = "Include Default Parameter Values in R Commands"
         Me.chkIncludeDefaultParams.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(358, 320)
+        Me.cmdHelp.Location = New System.Drawing.Point(397, 320)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
         Me.cmdHelp.TabIndex = 12
         Me.cmdHelp.Tag = "Help"
-        Me.cmdHelp.Text = "&Help"
+        Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(249, 320)
+        Me.cmdCancel.Location = New System.Drawing.Point(235, 320)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 9
         Me.cmdCancel.Tag = "Cancel"
-        Me.cmdCancel.Text = "&Cancel"
+        Me.cmdCancel.Text = "Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
-        '
-        'tbpComment
-        '
-        Me.tbpComment.Controls.Add(Me.pnCommentFormat)
-        Me.tbpComment.Location = New System.Drawing.Point(4, 22)
-        Me.tbpComment.Name = "tbpComment"
-        Me.tbpComment.Size = New System.Drawing.Size(420, 291)
-        Me.tbpComment.TabIndex = 8
-        Me.tbpComment.Text = "Comments"
-        Me.tbpComment.UseVisualStyleBackColor = True
         '
         'cmdOk
         '
@@ -312,76 +167,95 @@ Partial Class dlgOptions
         Me.cmdOk.Size = New System.Drawing.Size(75, 23)
         Me.cmdOk.TabIndex = 11
         Me.cmdOk.Tag = "Ok"
-        Me.cmdOk.Text = "&Ok"
+        Me.cmdOk.Text = "Ok"
         Me.cmdOk.UseVisualStyleBackColor = True
         '
-        'lblComments
+        'lblCommentFormat
         '
-        Me.lblComments.AutoSize = True
-        Me.lblComments.Location = New System.Drawing.Point(13, 131)
-        Me.lblComments.Name = "lblComments"
-        Me.lblComments.Size = New System.Drawing.Size(56, 13)
-        Me.lblComments.TabIndex = 19
-        Me.lblComments.Text = "Comments"
+        Me.lblCommentFormat.AutoSize = True
+        Me.lblCommentFormat.Location = New System.Drawing.Point(0, 105)
+        Me.lblCommentFormat.Name = "lblCommentFormat"
+        Me.lblCommentFormat.Size = New System.Drawing.Size(86, 13)
+        Me.lblCommentFormat.TabIndex = 19
+        Me.lblCommentFormat.Text = "Comment Format"
         '
-        'tbpLanguageSettings
+        'tbpLanguages
         '
-        Me.tbpLanguageSettings.Controls.Add(Me.pnLanguages)
-        Me.tbpLanguageSettings.Location = New System.Drawing.Point(4, 22)
-        Me.tbpLanguageSettings.Name = "tbpLanguageSettings"
-        Me.tbpLanguageSettings.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLanguageSettings.Size = New System.Drawing.Size(420, 291)
-        Me.tbpLanguageSettings.TabIndex = 0
-        Me.tbpLanguageSettings.Tag = "Language_Settings"
-        Me.tbpLanguageSettings.Text = "Language Settings"
-        Me.tbpLanguageSettings.UseVisualStyleBackColor = True
+        Me.tbpLanguages.Controls.Add(Me.pnLanguages)
+        Me.tbpLanguages.Location = New System.Drawing.Point(4, 22)
+        Me.tbpLanguages.Name = "tbpLanguages"
+        Me.tbpLanguages.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpLanguages.Size = New System.Drawing.Size(420, 291)
+        Me.tbpLanguages.TabIndex = 0
+        Me.tbpLanguages.Tag = "Languages"
+        Me.tbpLanguages.Text = "Languages"
+        Me.tbpLanguages.UseVisualStyleBackColor = True
         '
         'pnLanguages
         '
         Me.pnLanguages.AutoSize = True
-        Me.pnLanguages.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnLanguages.Controls.Add(Me.rdoEnglish)
-        Me.pnLanguages.Controls.Add(Me.rdoFrench)
-        Me.pnLanguages.Controls.Add(Me.rdoKiswahili)
-        Me.pnLanguages.Location = New System.Drawing.Point(6, 6)
+        Me.pnLanguages.Controls.Add(Me.grpLanguage)
+        Me.pnLanguages.Location = New System.Drawing.Point(3, 3)
         Me.pnLanguages.Name = "pnLanguages"
-        Me.pnLanguages.Size = New System.Drawing.Size(71, 77)
+        Me.pnLanguages.Size = New System.Drawing.Size(118, 121)
         Me.pnLanguages.TabIndex = 1
+        '
+        'grpLanguage
+        '
+        Me.grpLanguage.Controls.Add(Me.rdoSpanish)
+        Me.grpLanguage.Controls.Add(Me.rdoEnglish)
+        Me.grpLanguage.Controls.Add(Me.rdoKiswahili)
+        Me.grpLanguage.Controls.Add(Me.rdoFrench)
+        Me.grpLanguage.Location = New System.Drawing.Point(3, 3)
+        Me.grpLanguage.Name = "grpLanguage"
+        Me.grpLanguage.Size = New System.Drawing.Size(109, 113)
+        Me.grpLanguage.TabIndex = 2
+        Me.grpLanguage.TabStop = False
+        Me.grpLanguage.Text = "Language"
+        '
+        'rdoSpanish
+        '
+        Me.rdoSpanish.AutoSize = True
+        Me.rdoSpanish.Enabled = False
+        Me.rdoSpanish.Location = New System.Drawing.Point(7, 88)
+        Me.rdoSpanish.Name = "rdoSpanish"
+        Me.rdoSpanish.Size = New System.Drawing.Size(63, 17)
+        Me.rdoSpanish.TabIndex = 2
+        Me.rdoSpanish.Text = "Spanish"
+        Me.rdoSpanish.UseVisualStyleBackColor = True
         '
         'rdoEnglish
         '
         Me.rdoEnglish.AutoSize = True
-        Me.rdoEnglish.Checked = True
-        Me.rdoEnglish.Location = New System.Drawing.Point(3, 57)
+        Me.rdoEnglish.Location = New System.Drawing.Point(7, 19)
         Me.rdoEnglish.Name = "rdoEnglish"
         Me.rdoEnglish.Size = New System.Drawing.Size(59, 17)
         Me.rdoEnglish.TabIndex = 1
-        Me.rdoEnglish.TabStop = True
         Me.rdoEnglish.Tag = "English"
         Me.rdoEnglish.Text = "English"
         Me.rdoEnglish.UseVisualStyleBackColor = True
         '
-        'rdoFrench
-        '
-        Me.rdoFrench.AutoSize = True
-        Me.rdoFrench.Location = New System.Drawing.Point(3, 34)
-        Me.rdoFrench.Name = "rdoFrench"
-        Me.rdoFrench.Size = New System.Drawing.Size(58, 17)
-        Me.rdoFrench.TabIndex = 2
-        Me.rdoFrench.Tag = "French"
-        Me.rdoFrench.Text = "French"
-        Me.rdoFrench.UseVisualStyleBackColor = True
-        '
         'rdoKiswahili
         '
         Me.rdoKiswahili.AutoSize = True
-        Me.rdoKiswahili.Location = New System.Drawing.Point(3, 11)
+        Me.rdoKiswahili.Location = New System.Drawing.Point(7, 65)
         Me.rdoKiswahili.Name = "rdoKiswahili"
         Me.rdoKiswahili.Size = New System.Drawing.Size(65, 17)
         Me.rdoKiswahili.TabIndex = 3
         Me.rdoKiswahili.Tag = "Kiswahili"
         Me.rdoKiswahili.Text = "Kiswahili"
         Me.rdoKiswahili.UseVisualStyleBackColor = True
+        '
+        'rdoFrench
+        '
+        Me.rdoFrench.AutoSize = True
+        Me.rdoFrench.Location = New System.Drawing.Point(7, 42)
+        Me.rdoFrench.Name = "rdoFrench"
+        Me.rdoFrench.Size = New System.Drawing.Size(58, 17)
+        Me.rdoFrench.TabIndex = 2
+        Me.rdoFrench.Tag = "French"
+        Me.rdoFrench.Text = "French"
+        Me.rdoFrench.UseVisualStyleBackColor = True
         '
         'spltControls
         '
@@ -404,94 +278,46 @@ Partial Class dlgOptions
         Me.trOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.trOptions.Location = New System.Drawing.Point(0, 0)
         Me.trOptions.Name = "trOptions"
-        TreeNode10.Name = "ndGeneral"
-        TreeNode10.Tag = "0"
-        TreeNode10.Text = "General"
-        TreeNode10.ToolTipText = "General Options"
-        TreeNode11.Name = "ndLanguages"
-        TreeNode11.Tag = "1"
-        TreeNode11.Text = "Languages"
-        TreeNode11.ToolTipText = "Choose different languages"
-        TreeNode12.Name = "ndComments"
-        TreeNode12.Tag = "2"
-        TreeNode12.Text = "Comments"
-        TreeNode12.ToolTipText = "Comments for the dialogs"
-        TreeNode13.Name = "ndImportData"
-        TreeNode13.Tag = "3"
-        TreeNode13.Text = "Import Data"
-        TreeNode13.ToolTipText = "Import Data Settings"
-        TreeNode14.Name = "ndRscript"
-        TreeNode14.Tag = "5"
-        TreeNode14.Text = "R Script"
-        TreeNode14.ToolTipText = "R Script options"
-        TreeNode15.Name = "ndRoutPut"
-        TreeNode15.Tag = "6"
-        TreeNode15.Text = "R Output"
-        TreeNode15.ToolTipText = "R Output options"
-        TreeNode16.Name = "ndCommentsFormat"
-        TreeNode16.Tag = "7"
-        TreeNode16.Text = "Comments"
-        TreeNode16.ToolTipText = "Comments formatting options"
-        TreeNode17.Name = "ndFormat"
-        TreeNode17.Tag = "4"
-        TreeNode17.Text = "Formatting Options"
-        TreeNode17.ToolTipText = "Format Options"
-        TreeNode18.Name = "ndLoad Settings"
-        TreeNode18.Tag = "8"
-        TreeNode18.Text = "Load Settings"
-        TreeNode18.ToolTipText = "Load Settings"
-        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode10, TreeNode11, TreeNode12, TreeNode13, TreeNode17, TreeNode18})
+        TreeNode13.Name = "ndLanguages"
+        TreeNode13.Tag = "1"
+        TreeNode13.Text = "Languages"
+        TreeNode13.ToolTipText = "Choose different languages"
+        TreeNode14.Name = "ndComments"
+        TreeNode14.Tag = "2"
+        TreeNode14.Text = "Comments"
+        TreeNode14.ToolTipText = "Comments for the dialogs"
+        TreeNode15.Name = "ndImport"
+        TreeNode15.Tag = "3"
+        TreeNode15.Text = "Import"
+        TreeNode15.ToolTipText = "Import Data Settings"
+        TreeNode16.Name = "ndOutputWindow"
+        TreeNode16.Tag = "4"
+        TreeNode16.Text = "Output Window"
+        TreeNode16.ToolTipText = "Output Window Formatting Options"
+        TreeNode17.Name = "ndCommands"
+        TreeNode17.Tag = "8"
+        TreeNode17.Text = "Commands"
+        TreeNode17.ToolTipText = "Commands Options"
+        TreeNode18.Name = "ndDataView"
+        TreeNode18.Text = "Data View"
+        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode13, TreeNode14, TreeNode15, TreeNode16, TreeNode17, TreeNode18})
         Me.trOptions.Size = New System.Drawing.Size(138, 317)
         Me.trOptions.TabIndex = 0
         '
         'tbcOptions
         '
-        Me.tbcOptions.Controls.Add(Me.tbpGeneral)
-        Me.tbcOptions.Controls.Add(Me.tbpLanguageSettings)
+        Me.tbcOptions.Controls.Add(Me.tbpLanguages)
         Me.tbcOptions.Controls.Add(Me.tbpComments)
         Me.tbcOptions.Controls.Add(Me.tbpImport)
-        Me.tbcOptions.Controls.Add(Me.tbpFormat)
-        Me.tbcOptions.Controls.Add(Me.tbpRScript)
-        Me.tbcOptions.Controls.Add(Me.tbpROutput)
-        Me.tbcOptions.Controls.Add(Me.tbpComment)
-        Me.tbcOptions.Controls.Add(Me.tbpRScriptOptions)
+        Me.tbcOptions.Controls.Add(Me.tbpOutputWindow)
+        Me.tbcOptions.Controls.Add(Me.tbpCommands)
+        Me.tbcOptions.Controls.Add(Me.tbpDataView)
         Me.tbcOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tbcOptions.Location = New System.Drawing.Point(0, 0)
         Me.tbcOptions.Name = "tbcOptions"
         Me.tbcOptions.SelectedIndex = 0
         Me.tbcOptions.Size = New System.Drawing.Size(428, 317)
         Me.tbcOptions.TabIndex = 0
-        '
-        'tbpGeneral
-        '
-        Me.tbpGeneral.Controls.Add(Me.pnGeneral)
-        Me.tbpGeneral.Location = New System.Drawing.Point(4, 22)
-        Me.tbpGeneral.Name = "tbpGeneral"
-        Me.tbpGeneral.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpGeneral.Size = New System.Drawing.Size(420, 291)
-        Me.tbpGeneral.TabIndex = 5
-        Me.tbpGeneral.Tag = "General"
-        Me.tbpGeneral.Text = "General"
-        Me.tbpGeneral.UseVisualStyleBackColor = True
-        '
-        'pnGeneral
-        '
-        Me.pnGeneral.AutoSize = True
-        Me.pnGeneral.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnGeneral.Controls.Add(Me.lblWelcome)
-        Me.pnGeneral.Location = New System.Drawing.Point(6, 6)
-        Me.pnGeneral.Name = "pnGeneral"
-        Me.pnGeneral.Size = New System.Drawing.Size(58, 22)
-        Me.pnGeneral.TabIndex = 0
-        '
-        'lblWelcome
-        '
-        Me.lblWelcome.AutoSize = True
-        Me.lblWelcome.Location = New System.Drawing.Point(3, 9)
-        Me.lblWelcome.Name = "lblWelcome"
-        Me.lblWelcome.Size = New System.Drawing.Size(52, 13)
-        Me.lblWelcome.TabIndex = 0
-        Me.lblWelcome.Text = "Welcome"
         '
         'tbpComments
         '
@@ -540,100 +366,159 @@ Partial Class dlgOptions
         Me.tbpImport.Name = "tbpImport"
         Me.tbpImport.Size = New System.Drawing.Size(420, 291)
         Me.tbpImport.TabIndex = 3
-        Me.tbpImport.Text = "Import Data"
+        Me.tbpImport.Text = "Import"
         Me.tbpImport.UseVisualStyleBackColor = True
         '
         'pnImportData
         '
         Me.pnImportData.AutoSize = True
         Me.pnImportData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnImportData.Controls.Add(Me.lblShowLines)
-        Me.pnImportData.Controls.Add(Me.nudNoLines)
+        Me.pnImportData.Controls.Add(Me.lblPreviewRows)
+        Me.pnImportData.Controls.Add(Me.nudPreviewRows)
         Me.pnImportData.Location = New System.Drawing.Point(3, 3)
         Me.pnImportData.Name = "pnImportData"
-        Me.pnImportData.Size = New System.Drawing.Size(304, 32)
+        Me.pnImportData.Size = New System.Drawing.Size(181, 30)
         Me.pnImportData.TabIndex = 2
         '
-        'lblShowLines
+        'lblPreviewRows
         '
-        Me.lblShowLines.AutoSize = True
-        Me.lblShowLines.Location = New System.Drawing.Point(3, 9)
-        Me.lblShowLines.Name = "lblShowLines"
-        Me.lblShowLines.Size = New System.Drawing.Size(158, 13)
-        Me.lblShowLines.TabIndex = 0
-        Me.lblShowLines.Text = "Number of lines to show on load"
+        Me.lblPreviewRows.AutoSize = True
+        Me.lblPreviewRows.Location = New System.Drawing.Point(3, 9)
+        Me.lblPreviewRows.Name = "lblPreviewRows"
+        Me.lblPreviewRows.Size = New System.Drawing.Size(127, 13)
+        Me.lblPreviewRows.TabIndex = 0
+        Me.lblPreviewRows.Text = "Number of Preview Rows"
         '
-        'nudNoLines
+        'nudPreviewRows
         '
-        Me.nudNoLines.Location = New System.Drawing.Point(226, 9)
-        Me.nudNoLines.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudNoLines.Name = "nudNoLines"
-        Me.nudNoLines.Size = New System.Drawing.Size(75, 20)
-        Me.nudNoLines.TabIndex = 1
-        Me.nudNoLines.Value = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudPreviewRows.Location = New System.Drawing.Point(134, 7)
+        Me.nudPreviewRows.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudPreviewRows.Name = "nudPreviewRows"
+        Me.nudPreviewRows.Size = New System.Drawing.Size(44, 20)
+        Me.nudPreviewRows.TabIndex = 1
+        Me.nudPreviewRows.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
-        'tbpFormat
+        'tbpOutputWindow
         '
-        Me.tbpFormat.Controls.Add(Me.pnFormatOptions)
-        Me.tbpFormat.Location = New System.Drawing.Point(4, 22)
-        Me.tbpFormat.Name = "tbpFormat"
-        Me.tbpFormat.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpFormat.Size = New System.Drawing.Size(420, 291)
-        Me.tbpFormat.TabIndex = 2
-        Me.tbpFormat.Text = "Format Options"
-        Me.tbpFormat.UseVisualStyleBackColor = True
+        Me.tbpOutputWindow.Controls.Add(Me.pnFormatOptions)
+        Me.tbpOutputWindow.Location = New System.Drawing.Point(4, 22)
+        Me.tbpOutputWindow.Name = "tbpOutputWindow"
+        Me.tbpOutputWindow.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpOutputWindow.Size = New System.Drawing.Size(420, 291)
+        Me.tbpOutputWindow.TabIndex = 2
+        Me.tbpOutputWindow.Text = "Output Window"
+        Me.tbpOutputWindow.UseVisualStyleBackColor = True
         '
         'pnFormatOptions
         '
         Me.pnFormatOptions.AutoSize = True
         Me.pnFormatOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnFormatOptions.Controls.Add(Me.lblTitle)
-        Me.pnFormatOptions.Controls.Add(Me.cmdScriptChange)
-        Me.pnFormatOptions.Controls.Add(Me.lblComments)
-        Me.pnFormatOptions.Controls.Add(Me.cmdOutputChange)
-        Me.pnFormatOptions.Controls.Add(Me.lblOutput)
-        Me.pnFormatOptions.Controls.Add(Me.cmdCommentsChange)
-        Me.pnFormatOptions.Controls.Add(Me.lblRScript)
-        Me.pnFormatOptions.Location = New System.Drawing.Point(6, 6)
+        Me.pnFormatOptions.Controls.Add(Me.rtbCommentPreview)
+        Me.pnFormatOptions.Controls.Add(Me.rtbOutputPreview)
+        Me.pnFormatOptions.Controls.Add(Me.rtbCommandPreview)
+        Me.pnFormatOptions.Controls.Add(Me.cmdCommandFormat)
+        Me.pnFormatOptions.Controls.Add(Me.lblCommentFormat)
+        Me.pnFormatOptions.Controls.Add(Me.cmdOutputFormat)
+        Me.pnFormatOptions.Controls.Add(Me.lblOutputFormat)
+        Me.pnFormatOptions.Controls.Add(Me.cmdCommentFormat)
+        Me.pnFormatOptions.Controls.Add(Me.lblCommandFormat)
+        Me.pnFormatOptions.Location = New System.Drawing.Point(0, 0)
         Me.pnFormatOptions.Name = "pnFormatOptions"
-        Me.pnFormatOptions.Size = New System.Drawing.Size(349, 147)
+        Me.pnFormatOptions.Size = New System.Drawing.Size(391, 129)
         Me.pnFormatOptions.TabIndex = 21
         '
-        'cmdOutputChange
+        'rtbCommentPreview
         '
-        Me.cmdOutputChange.Location = New System.Drawing.Point(92, 82)
-        Me.cmdOutputChange.Name = "cmdOutputChange"
-        Me.cmdOutputChange.Size = New System.Drawing.Size(100, 23)
-        Me.cmdOutputChange.TabIndex = 16
-        Me.cmdOutputChange.Text = "Preview Settings"
-        Me.cmdOutputChange.UseVisualStyleBackColor = True
+        Me.rtbCommentPreview.Location = New System.Drawing.Point(100, 100)
+        Me.rtbCommentPreview.Name = "rtbCommentPreview"
+        Me.rtbCommentPreview.ReadOnly = True
+        Me.rtbCommentPreview.Size = New System.Drawing.Size(171, 26)
+        Me.rtbCommentPreview.TabIndex = 22
+        Me.rtbCommentPreview.Text = ""
         '
-        'lblOutput
+        'rtbOutputPreview
         '
-        Me.lblOutput.AutoSize = True
-        Me.lblOutput.Location = New System.Drawing.Point(13, 92)
-        Me.lblOutput.Name = "lblOutput"
-        Me.lblOutput.Size = New System.Drawing.Size(50, 13)
-        Me.lblOutput.TabIndex = 18
-        Me.lblOutput.Text = "R Output"
+        Me.rtbOutputPreview.Location = New System.Drawing.Point(100, 60)
+        Me.rtbOutputPreview.Name = "rtbOutputPreview"
+        Me.rtbOutputPreview.ReadOnly = True
+        Me.rtbOutputPreview.Size = New System.Drawing.Size(171, 26)
+        Me.rtbOutputPreview.TabIndex = 21
+        Me.rtbOutputPreview.Text = ""
         '
-        'cmdCommentsChange
+        'rtbCommandPreview
         '
-        Me.cmdCommentsChange.Location = New System.Drawing.Point(92, 121)
-        Me.cmdCommentsChange.Name = "cmdCommentsChange"
-        Me.cmdCommentsChange.Size = New System.Drawing.Size(100, 23)
-        Me.cmdCommentsChange.TabIndex = 16
-        Me.cmdCommentsChange.Text = "Preview Settings"
-        Me.cmdCommentsChange.UseVisualStyleBackColor = True
+        Me.rtbCommandPreview.Location = New System.Drawing.Point(100, 20)
+        Me.rtbCommandPreview.Name = "rtbCommandPreview"
+        Me.rtbCommandPreview.ReadOnly = True
+        Me.rtbCommandPreview.Size = New System.Drawing.Size(171, 26)
+        Me.rtbCommandPreview.TabIndex = 20
+        Me.rtbCommandPreview.Text = ""
         '
-        'lblRScript
+        'cmdOutputFormat
         '
-        Me.lblRScript.AutoSize = True
-        Me.lblRScript.Location = New System.Drawing.Point(13, 53)
-        Me.lblRScript.Name = "lblRScript"
-        Me.lblRScript.Size = New System.Drawing.Size(45, 13)
-        Me.lblRScript.TabIndex = 17
-        Me.lblRScript.Text = "R Script"
+        Me.cmdOutputFormat.Location = New System.Drawing.Point(288, 60)
+        Me.cmdOutputFormat.Name = "cmdOutputFormat"
+        Me.cmdOutputFormat.Size = New System.Drawing.Size(100, 23)
+        Me.cmdOutputFormat.TabIndex = 16
+        Me.cmdOutputFormat.Text = "Change..."
+        Me.cmdOutputFormat.UseVisualStyleBackColor = True
+        '
+        'lblOutputFormat
+        '
+        Me.lblOutputFormat.AutoSize = True
+        Me.lblOutputFormat.Location = New System.Drawing.Point(0, 65)
+        Me.lblOutputFormat.Name = "lblOutputFormat"
+        Me.lblOutputFormat.Size = New System.Drawing.Size(74, 13)
+        Me.lblOutputFormat.TabIndex = 18
+        Me.lblOutputFormat.Text = "Output Format"
+        '
+        'cmdCommentFormat
+        '
+        Me.cmdCommentFormat.Location = New System.Drawing.Point(288, 100)
+        Me.cmdCommentFormat.Name = "cmdCommentFormat"
+        Me.cmdCommentFormat.Size = New System.Drawing.Size(100, 23)
+        Me.cmdCommentFormat.TabIndex = 16
+        Me.cmdCommentFormat.Text = "Change..."
+        Me.cmdCommentFormat.UseVisualStyleBackColor = True
+        '
+        'lblCommandFormat
+        '
+        Me.lblCommandFormat.AutoSize = True
+        Me.lblCommandFormat.Location = New System.Drawing.Point(0, 25)
+        Me.lblCommandFormat.Name = "lblCommandFormat"
+        Me.lblCommandFormat.Size = New System.Drawing.Size(89, 13)
+        Me.lblCommandFormat.TabIndex = 17
+        Me.lblCommandFormat.Text = "Command Format"
+        '
+        'tbpDataView
+        '
+        Me.tbpDataView.Controls.Add(Me.lblMaxRows)
+        Me.tbpDataView.Controls.Add(Me.nudMaxRows)
+        Me.tbpDataView.Location = New System.Drawing.Point(4, 22)
+        Me.tbpDataView.Name = "tbpDataView"
+        Me.tbpDataView.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpDataView.Size = New System.Drawing.Size(420, 291)
+        Me.tbpDataView.TabIndex = 9
+        Me.tbpDataView.Text = "Data View"
+        Me.tbpDataView.UseVisualStyleBackColor = True
+        '
+        'lblMaxRows
+        '
+        Me.lblMaxRows.AutoSize = True
+        Me.lblMaxRows.Location = New System.Drawing.Point(6, 41)
+        Me.lblMaxRows.Name = "lblMaxRows"
+        Me.lblMaxRows.Size = New System.Drawing.Size(182, 13)
+        Me.lblMaxRows.TabIndex = 1
+        Me.lblMaxRows.Text = "Maximum Number of Rows to Display"
+        '
+        'nudMaxRows
+        '
+        Me.nudMaxRows.Location = New System.Drawing.Point(194, 39)
+        Me.nudMaxRows.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudMaxRows.Name = "nudMaxRows"
+        Me.nudMaxRows.Size = New System.Drawing.Size(62, 20)
+        Me.nudMaxRows.TabIndex = 0
+        Me.nudMaxRows.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'dlgOptions
         '
@@ -650,35 +535,20 @@ Partial Class dlgOptions
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Options"
         Me.Text = "Options"
-        Me.tbpRScript.ResumeLayout(False)
-        Me.tbpRScript.PerformLayout()
-        Me.pnRScript.ResumeLayout(False)
-        Me.pnRScript.PerformLayout()
-        Me.tbpROutput.ResumeLayout(False)
-        Me.tbpROutput.PerformLayout()
-        Me.pnRoutput.ResumeLayout(False)
-        Me.pnRoutput.PerformLayout()
-        Me.pnCommentFormat.ResumeLayout(False)
-        Me.pnCommentFormat.PerformLayout()
-        Me.tbpRScriptOptions.ResumeLayout(False)
-        Me.tbpRScriptOptions.PerformLayout()
+        Me.tbpCommands.ResumeLayout(False)
+        Me.tbpCommands.PerformLayout()
         Me.pnScriptOptions.ResumeLayout(False)
         Me.pnScriptOptions.PerformLayout()
-        Me.tbpComment.ResumeLayout(False)
-        Me.tbpComment.PerformLayout()
-        Me.tbpLanguageSettings.ResumeLayout(False)
-        Me.tbpLanguageSettings.PerformLayout()
+        Me.tbpLanguages.ResumeLayout(False)
+        Me.tbpLanguages.PerformLayout()
         Me.pnLanguages.ResumeLayout(False)
-        Me.pnLanguages.PerformLayout()
+        Me.grpLanguage.ResumeLayout(False)
+        Me.grpLanguage.PerformLayout()
         Me.spltControls.Panel1.ResumeLayout(False)
         Me.spltControls.Panel2.ResumeLayout(False)
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).EndInit()
         Me.spltControls.ResumeLayout(False)
         Me.tbcOptions.ResumeLayout(False)
-        Me.tbpGeneral.ResumeLayout(False)
-        Me.tbpGeneral.PerformLayout()
-        Me.pnGeneral.ResumeLayout(False)
-        Me.pnGeneral.PerformLayout()
         Me.tbpComments.ResumeLayout(False)
         Me.tbpComments.PerformLayout()
         Me.pnComments.ResumeLayout(False)
@@ -687,44 +557,31 @@ Partial Class dlgOptions
         Me.tbpImport.PerformLayout()
         Me.pnImportData.ResumeLayout(False)
         Me.pnImportData.PerformLayout()
-        CType(Me.nudNoLines, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tbpFormat.ResumeLayout(False)
-        Me.tbpFormat.PerformLayout()
+        CType(Me.nudPreviewRows, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpOutputWindow.ResumeLayout(False)
+        Me.tbpOutputWindow.PerformLayout()
         Me.pnFormatOptions.ResumeLayout(False)
         Me.pnFormatOptions.PerformLayout()
+        Me.tbpDataView.ResumeLayout(False)
+        Me.tbpDataView.PerformLayout()
+        CType(Me.nudMaxRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents tbpRScript As TabPage
-    Friend WithEvents pnRScript As Panel
-    Friend WithEvents cmdScript As Button
-    Friend WithEvents lblScript As Label
-    Friend WithEvents tbpROutput As TabPage
-    Friend WithEvents pnRoutput As Panel
-    Friend WithEvents cmdOutput As Button
-    Friend WithEvents lblROutput As Label
-    Friend WithEvents pnCommentFormat As Panel
-    Friend WithEvents cmdRComments As Button
-    Friend WithEvents lblRComments As Label
     Friend WithEvents pnScriptOptions As Panel
-    Friend WithEvents tbpComment As TabPage
     Friend WithEvents pnLanguages As Panel
     Friend WithEvents spltControls As SplitContainer
     Friend WithEvents trOptions As TreeView
-    Friend WithEvents tbpGeneral As TabPage
-    Friend WithEvents pnGeneral As Panel
-    Friend WithEvents lblWelcome As Label
     Friend WithEvents pnComments As Panel
     Friend WithEvents pnImportData As Panel
     Friend WithEvents pnFormatOptions As Panel
-    Friend WithEvents lblRScript As Label
-    Friend WithEvents cmdCommentsChange As Button
-    Friend WithEvents lblOutput As Label
-    Friend WithEvents cmdOutputChange As Button
-    Friend WithEvents tbpFormat As TabPage
-    Friend WithEvents nudNoLines As NumericUpDown
-    Friend WithEvents lblShowLines As Label
+    Friend WithEvents lblCommandFormat As Label
+    Friend WithEvents cmdCommentFormat As Button
+    Friend WithEvents lblOutputFormat As Label
+    Friend WithEvents cmdOutputFormat As Button
+    Friend WithEvents tbpOutputWindow As TabPage
+    Friend WithEvents nudPreviewRows As NumericUpDown
+    Friend WithEvents lblPreviewRows As Label
     Friend WithEvents tbpImport As TabPage
     Friend WithEvents txtComment As TextBox
     Friend WithEvents lblComment As Label
@@ -733,14 +590,21 @@ Partial Class dlgOptions
     Friend WithEvents rdoKiswahili As RadioButton
     Friend WithEvents rdoFrench As RadioButton
     Friend WithEvents rdoEnglish As RadioButton
-    Friend WithEvents tbpLanguageSettings As TabPage
-    Friend WithEvents lblComments As Label
+    Friend WithEvents tbpLanguages As TabPage
+    Friend WithEvents lblCommentFormat As Label
     Friend WithEvents cmdOk As Button
     Friend WithEvents cmdCancel As Button
     Friend WithEvents cmdHelp As Button
     Friend WithEvents chkIncludeDefaultParams As CheckBox
-    Friend WithEvents tbpRScriptOptions As TabPage
-    Friend WithEvents cmdScriptChange As Button
+    Friend WithEvents tbpCommands As TabPage
+    Friend WithEvents cmdCommandFormat As Button
     Friend WithEvents cmdApply As Button
-    Friend WithEvents lblTitle As Label
+    Friend WithEvents tbpDataView As TabPage
+    Friend WithEvents lblMaxRows As Label
+    Friend WithEvents nudMaxRows As NumericUpDown
+    Friend WithEvents grpLanguage As GroupBox
+    Friend WithEvents rdoSpanish As RadioButton
+    Friend WithEvents rtbCommentPreview As RichTextBox
+    Friend WithEvents rtbOutputPreview As RichTextBox
+    Friend WithEvents rtbCommandPreview As RichTextBox
 End Class
