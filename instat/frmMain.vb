@@ -792,7 +792,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuManageFactorRecode.Click
-        'dlgRecode.ShowDialog()
+        dlgRecodeFactor.ShowDialog()
     End Sub
 
     Private Sub mnuManageDataFileCopySheet_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileCopySheet.Click

@@ -576,6 +576,12 @@
     <Compile Include="frmSetupLoading.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRecodeFactor.Designer.vb">
+      <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRecodeFactor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgCanonicalCorrelation.Designer.vb">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </Compile>
@@ -2286,6 +2292,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetupLoading.sw-KE.resx">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeFactor.fr-FR.resx">
+      <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeFactor.resx">
+      <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeFactor.sw-KE.resx">
+      <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
