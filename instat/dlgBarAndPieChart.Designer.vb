@@ -60,6 +60,7 @@ Partial Class dlgBarAndPieChart
         '
         'cmdBarChartOptions
         '
+        Me.cmdBarChartOptions.Enabled = False
         Me.cmdBarChartOptions.Location = New System.Drawing.Point(12, 237)
         Me.cmdBarChartOptions.Name = "cmdBarChartOptions"
         Me.cmdBarChartOptions.Size = New System.Drawing.Size(152, 23)
