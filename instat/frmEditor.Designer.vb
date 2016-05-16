@@ -70,12 +70,13 @@ Partial Class frmEditor
         Me.grdData.ColumnHeaderContextMenuStrip = Me.columnContextMenuStrip
         Me.grdData.ContextMenuStrip = Me.cellContextMenuStrip
         Me.grdData.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grdData.LeadHeaderContextMenuStrip = Nothing
         Me.grdData.Location = New System.Drawing.Point(0, 0)
         Me.grdData.Name = "grdData"
         Me.grdData.RowHeaderContextMenuStrip = Me.rowContextMenuStrip
         Me.grdData.Script = Nothing
         Me.grdData.SheetTabContextMenuStrip = Me.statusColumnMenu
-        Me.grdData.SheetTabNewButtonVisible = True
+        Me.grdData.SheetTabNewButtonVisible = False
         Me.grdData.SheetTabVisible = True
         Me.grdData.SheetTabWidth = 200
         Me.grdData.Size = New System.Drawing.Size(410, 261)
