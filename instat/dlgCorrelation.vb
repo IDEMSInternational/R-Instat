@@ -20,8 +20,17 @@ Public Class dlgCorrelation
     Public bIsTwoColumnFunction As Boolean
 
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Set properties needed on load
-        ucrBase.clsRsyntax.iCallType = 2
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        TestOKEnabled()
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 0
         ucrReceiverFirstColumn.Selector = ucrSelectorDataFrameVarAddRemove
         ucrReceiverSecondColumn.Selector = ucrSelectorDataFrameVarAddRemove
         ucrReceiverMultipleColumns.Selector = ucrSelectorDataFrameVarAddRemove
@@ -29,15 +38,12 @@ Public Class dlgCorrelation
         ucrReceiverSecondColumn.SetDataType("numeric")
         ucrReceiverMultipleColumns.SetDataType("numeric")
 
-        autoTranslate(Me)
-
         ucrBase.iHelpTopicID = 316
+        sdgCorrPlot.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+    End Sub
 
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
-        End If
-        TestOKEnabled()
+    Private Sub ReopenDialog()
+
     End Sub
 
     Private Sub SetDefaults()
@@ -45,7 +51,7 @@ Public Class dlgCorrelation
         ucrSelectorDataFrameVarAddRemove.Focus()
         ' ucrReceiverFirstColumn.Focus()
         rdoPearson.Checked = True
-        rdoTwoColumns.Checked = True
+        rdoMultipleColumns.Checked = True
         sdgCorrPlot.SetDefaults()
         TestOKEnabled()
     End Sub
@@ -100,25 +106,26 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub SetTwoColumnAsFunction()
+        ucrBase.clsRsyntax.iCallType = 2
         'set the receiver
         ucrReceiverFirstColumn.SetMeAsReceiver()
         'Set function name
         ucrBase.clsRsyntax.SetFunction("cor.test")
         'Set what should be visible/invisible
         grpMissing.Visible = False
-        cmdPlot.Visible = False
+        cmdOptions.Visible = False
         lblConfInterval.Visible = True
-        txtConfidenceInterval.Visible = True
+        nudConfidenceInterval.Visible = True
         ucrReceiverFirstColumn.Visible = True
         ucrReceiverSecondColumn.Visible = True
         ucrReceiverMultipleColumns.Visible = False
         'remove parameters from MultipleColumn case
         ucrBase.clsRsyntax.RemoveParameter("use")
         'add in parameters that may have been removed from MultipleColumn case
-        If txtConfidenceInterval.Text = "" Then
-            txtConfidenceInterval.Text = 0.95
+        If nudConfidenceInterval.Value.ToString = "" Then
+            nudConfidenceInterval.Value = 0.95
         End If
-        ucrBase.clsRsyntax.AddParameter("conf.level", txtConfidenceInterval.Text)
+        ucrBase.clsRsyntax.AddParameter("conf.level", nudConfidenceInterval.Value.ToString)
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverFirstColumn.GetVariables())
         ucrBase.clsRsyntax.AddParameter("y", clsRFunctionParameter:=ucrReceiverSecondColumn.GetVariables())
         ucrBase.clsRsyntax.AddParameter("alternative", Chr(34) & "two.sided" & Chr(34))
@@ -127,15 +134,19 @@ Public Class dlgCorrelation
         TestOKEnabled()
     End Sub
 
+    Private Sub nudConfidenceInterval_ValueChanged(sender As Object, e As EventArgs) Handles nudConfidenceInterval.ValueChanged
+        ucrBase.clsRsyntax.AddParameter("conf.level", nudConfidenceInterval.Value.ToString)
+    End Sub
+
     Private Sub SetMultipleColumnAsFunction()
         ucrReceiverMultipleColumns.SetMeAsReceiver()
         'Set function name
         ucrBase.clsRsyntax.SetFunction("cor")
         'Set what should be visible/invisible
         grpMissing.Visible = True
-        cmdPlot.Visible = True
+        cmdOptions.Visible = True
         lblConfInterval.Visible = False
-        txtConfidenceInterval.Visible = False
+        nudConfidenceInterval.Visible = False
         ucrReceiverFirstColumn.Visible = False
         ucrReceiverSecondColumn.Visible = False
         ucrReceiverMultipleColumns.Visible = True
@@ -159,15 +170,12 @@ Public Class dlgCorrelation
         End If
     End Sub
 
-    Private Sub txtConfidenceInterval_Leave(sender As Object, e As EventArgs) Handles txtConfidenceInterval.Leave
-        ucrBase.clsRsyntax.AddParameter("conf.level", txtConfidenceInterval.Text)
-    End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
 
-    Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdPlot.Click
+    Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgCorrPlot.ShowDialog()
     End Sub
 
@@ -194,4 +202,5 @@ Public Class dlgCorrelation
             sdgCorrPlot.RegOptions()
         End If
     End Sub
+
 End Class
