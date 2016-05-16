@@ -22,17 +22,112 @@ Partial Class dlgRecodeFactor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
+        Me.lblFactor = New System.Windows.Forms.Label()
+        Me.ucrFactorGrid = New instat.ucrFactor()
+        Me.ucrInputColumnName = New instat.ucrInputComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'RecodeFactor
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 354)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 0
+        '
+        'ucrSelectorForRecode
+        '
+        Me.ucrSelectorForRecode.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForRecode.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
+        Me.ucrSelectorForRecode.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForRecode.TabIndex = 1
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(255, 50)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactor.TabIndex = 2
+        '
+        'lblFactor
+        '
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.Location = New System.Drawing.Point(255, 31)
+        Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
+        Me.lblFactor.TabIndex = 3
+        Me.lblFactor.Text = "Factor"
+        '
+        'ucrFactorGrid
+        '
+        Me.ucrFactorGrid.AutoSize = True
+        Me.ucrFactorGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrFactorGrid.clsReceiver = Nothing
+        Me.ucrFactorGrid.Location = New System.Drawing.Point(255, 83)
+        Me.ucrFactorGrid.Name = "ucrFactorGrid"
+        Me.ucrFactorGrid.shtCurrSheet = Nothing
+        Me.ucrFactorGrid.Size = New System.Drawing.Size(288, 221)
+        Me.ucrFactorGrid.TabIndex = 4
+        '
+        'ucrInputColumnName
+        '
+        Me.ucrInputColumnName.Location = New System.Drawing.Point(114, 322)
+        Me.ucrInputColumnName.Name = "ucrInputColumnName"
+        Me.ucrInputColumnName.Size = New System.Drawing.Size(178, 21)
+        Me.ucrInputColumnName.TabIndex = 5
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(0, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(39, 13)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "Label1"
+        '
+        'lblNewColumnName
+        '
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 325)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
+        Me.lblNewColumnName.TabIndex = 7
+        Me.lblNewColumnName.Text = "New Column Name"
+        '
+        'dlgRecodeFactor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 262)
+        Me.ClientSize = New System.Drawing.Size(555, 410)
+        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.ucrInputColumnName)
+        Me.Controls.Add(Me.ucrFactorGrid)
+        Me.Controls.Add(Me.lblFactor)
+        Me.Controls.Add(Me.ucrReceiverFactor)
+        Me.Controls.Add(Me.ucrSelectorForRecode)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "RecodeFactor"
-        Me.Text = "RecodeFactor"
+        Me.Name = "dlgRecodeFactor"
+        Me.Text = "Recode Factor"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
+
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSelectorForRecode As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
+    Friend WithEvents lblFactor As Label
+    Friend WithEvents ucrFactorGrid As ucrFactor
+    Friend WithEvents ucrInputColumnName As ucrInputComboBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblNewColumnName As Label
 End Class
