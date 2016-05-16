@@ -53,7 +53,7 @@ Partial Class dlgRandomSubsets
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(10, 215)
+        Me.lblSampleSize.Location = New System.Drawing.Point(10, 217)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(65, 13)
         Me.lblSampleSize.TabIndex = 6
@@ -72,7 +72,7 @@ Partial Class dlgRandomSubsets
         '
         'nudSampleSize
         '
-        Me.nudSampleSize.Location = New System.Drawing.Point(85, 207)
+        Me.nudSampleSize.Location = New System.Drawing.Point(85, 209)
         Me.nudSampleSize.Name = "nudSampleSize"
         Me.nudSampleSize.Size = New System.Drawing.Size(53, 20)
         Me.nudSampleSize.TabIndex = 11

@@ -14,7 +14,7 @@
 Imports instat.Translations
 Public Class dlgRandomSubsets
     Public bFirstLoad As Boolean = True 'checks if dialog loads for first time
-    Private clsSetSeed As New RFunction
+    Private clsSeed As New RFunction
     Private clsSampleFunc As New RFunction
 
 
@@ -31,16 +31,21 @@ Public Class dlgRandomSubsets
     End Sub
     'this contains things that initialise the dialog and run once
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction("replicate")
         ucrReceiverSelected.SetIncludedDataTypes({"numeric"})
         ucrReceiverSelected.Selector = ucrSelectorRandomSubsets
         ucrReceiverSelected.SetMeAsReceiver()
-        clsSetSeed.SetRCommand("set.seed")
+        clsSeed.SetRCommand("set.seed")
+        ucrBase.clsRsyntax.SetFunction("replicate")
+        ucrBase.clsRsyntax.AddParameter("expr", clsRFunctionParameter:=clsSampleFunc)
+        clsSampleFunc.SetRCommand("sample")
+        clsSampleFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverSelected.GetVariables())
+        clsSampleFunc.AddParameter("size", nudNumberOfColumns.Value())
+        clsSampleFunc.AddParameter("replace", "FALSE")
         nudSeed.Minimum = Integer.MinValue
         nudSeed.Maximum = Integer.MaxValue
-        ucrNewDataFrameName.SetItemsTypeAsDataFrames()
-
-        ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorRandomSubsets.ucrAvailableDataFrames)
+        'ucrNewDataFrameName.SetItemsTypeAsDataFrames()
+        'ucrNewDataFrameName.SetDefaultTypeAsDataFrame()
+        'ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorRandomSubsets.ucrAvailableDataFrames)
 
 
 
@@ -58,6 +63,7 @@ Public Class dlgRandomSubsets
     End Sub
     'set defaults for the dialog
     Private Sub SetDefaults()
+        'ucrNewDataFrameName.Reset()
         ucrSelectorRandomSubsets.Reset()
         ucrSelectorRandomSubsets.Focus()
         ucrReceiverSelected.Selector = ucrSelectorRandomSubsets
@@ -67,85 +73,61 @@ Public Class dlgRandomSubsets
         nudSampleSize.Value = 1
         nudSeed.Value = 1
         nudSeed.Visible = False
-        TestOkEnabled()
+        If (ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") Then
+            ucrNewDataFrameName.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_RandomSubset")
+            TestOkEnabled()
+        End If
+
     End Sub
     'set what happens when dialog is reopened
     Private Sub ReOpenDialog()
 
     End Sub
-    Private Sub ucrReceiverSelected_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSelected.SelectionChanged
+    Private Sub ucrucrReceiverSelected_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSelected.SelectionChanged
         If Not ucrReceiverSelected.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("x", ucrReceiverSelected.GetVariableNames)
+            clsSampleFunc.AddParameter("x", clsRFunctionParameter:=ucrReceiverSelected.GetVariables())
         Else
-            ucrBase.clsRsyntax.RemoveParameter("x")
+            clsSampleFunc.RemoveParameterByName("x")
         End If
         TestOkEnabled()
     End Sub
     Private Sub SeedParameters()
         If chkSeed.Checked Then
             nudSeed.Visible = True
-            If nudSeed.Text <> "" Then
-                clsSetSeed.AddParameter("set.seed", nudSeed.Value)
-            Else
-                clsSetSeed.RemoveParameterByName("set.seed")
-            End If
         Else
             nudSeed.Visible = False
-            clsSetSeed.RemoveParameterByName("set.seed")
+
         End If
     End Sub
-
-
     'this is what happens when Reset button is clicked
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-    End Sub
+
 
     Private Sub chkSeed_CheckedChanged(sender As Object, e As EventArgs) Handles chkSeed.CheckedChanged
         SeedParameters()
     End Sub
-
-    Private Sub chkWithReplacement_CheckedChanged(sender As Object, e As EventArgs) Handles chkWithReplacement.CheckedChanged
-        If chkWithReplacement.Checked = False Then
-            'If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-            ucrBase.clsRsyntax.AddParameter("FALSE", chkWithReplacement.CheckedChanged)
-
-
-        Else
-            ucrBase.clsRsyntax.AddParameter("sample", Chr(34) & "TRUE" & Chr(34))
-        End If
-
-
-    End Sub
-    Private Sub WithOrWithoutReplacement()
-
-    End Sub
-
-    Private Sub NumberOfReplications()
-        If nudNumberOfColumns.Text <> "" Then
-
-            ucrBase.clsRsyntax.AddParameter("n", nudNumberOfColumns.Value)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("n")
-        End If
-
-    End Sub
-    Private Sub SampleSize()
-        If nudSampleSize.Text <> "" Then
-            ' clsSampleSize.AddParameter("size", nudNumberOfColumns.Value
-            ucrBase.clsRsyntax.AddParameter("sample", Chr(34) & "size" & Chr(34))
-
-            'Else
-            'clsSampleSize.RemoveParameterByName("size")
-        End If
-    End Sub
-
-
     Private Sub nudNumberOfColumns_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberOfColumns.ValueChanged
-        NumberOfReplications()
+        ucrBase.clsRsyntax.AddParameter("n", nudNumberOfColumns.Value)
     End Sub
 
     Private Sub nudSampleSize_ValueChanged(sender As Object, e As EventArgs) Handles nudSampleSize.ValueChanged
-        SampleSize()
+        clsSampleFunc.AddParameter("size", nudSampleSize.Value)
+    End Sub
+    Private Sub nudSeed_ValueChanged(sender As Object, e As EventArgs) Handles nudSeed.ValueChanged
+        clsSeed.AddParameter("seed", nudSeed.Value)
+    End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+    End Sub
+    'Private Sub ucrNewDataFrameName_nameChanged() Handles ucrNewDataFrameName.NameChanged
+    '    ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewDataFrameName.GetText, strTempDataframe:=ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+    '    TestOkEnabled()
+    'End Sub
+    Private Sub ucrNewDataName_NameChanged() Handles ucrNewDataFrameName.NameChanged
+        If Not ucrNewDataFrameName.IsEmpty Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
+        Else
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        End If
+
     End Sub
 End Class
