@@ -1,4 +1,13 @@
 ﻿Public Class ucrSaveModel
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        ucrInputModelName.SetDefaultTypeAsModel()
+        ucrInputModelName.SetItemsTypeAsModels()
+    End Sub
+
     Public Event CheckedChanged(bChecked As Boolean)
     Private Sub chkSaveModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
         If chkSaveModel.Checked Then
@@ -7,10 +16,5 @@
             ucrInputModelName.Visible = False
         End If
         RaiseEvent CheckedChanged(chkSaveModel.Checked)
-    End Sub
-
-    Private Sub ucrSaveModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrInputModelName.SetDefaultTypeAsModel()
-        ucrInputModelName.SetItemsTypeAsModels()
     End Sub
 End Class

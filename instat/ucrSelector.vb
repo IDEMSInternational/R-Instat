@@ -22,19 +22,24 @@ Public Class ucrSelector
     Public Event ResetReceivers()
     Public Event VariablesInReceiversChanged()
     Public lstVariablesInReceivers As List(Of String)
-    Public bFirstLoad As Boolean = True
-    Public strCurrentDataFrame As String = ""
+    Public bFirstLoad As Boolean
+    Public strCurrentDataFrame As String
+
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        lstVariablesInReceivers = New List(Of String)
+        bFirstLoad = True
+        strCurrentDataFrame = ""
+    End Sub
 
     Private Sub ucrSelection_load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadList()
         If bFirstLoad Then
-            InitialiseDialog()
             bFirstLoad = False
         End If
-    End Sub
-
-    Private Sub InitialiseDialog()
-        lstVariablesInReceivers = New List(Of String)
     End Sub
 
     Protected Sub OnResetAll()
@@ -54,7 +59,6 @@ Public Class ucrSelector
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
         LoadList()
-        InitialiseDialog()
         'lstItemsInReceivers.Clear()
     End Sub
 
