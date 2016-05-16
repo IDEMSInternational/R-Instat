@@ -351,7 +351,6 @@ Partial Class frmMain
         'mnuDescribeOneVariable
         '
         Me.mnuDescribeOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariableSummarise, Me.mnuDescribeOneVariableGraph})
-        Me.mnuDescribeOneVariable.Enabled = False
         Me.mnuDescribeOneVariable.Name = "mnuDescribeOneVariable"
         Me.mnuDescribeOneVariable.Size = New System.Drawing.Size(195, 22)
         Me.mnuDescribeOneVariable.Tag = "One_Variable"
@@ -361,7 +360,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeOneVariableSummarise.Enabled = False
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
@@ -369,14 +368,13 @@ Partial Class frmMain
         '
         Me.mnuDescribeOneVariableGraph.Enabled = False
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
         'mnuDescribeTwoVariables
         '
         Me.mnuDescribeTwoVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesTabulate, Me.mnuDescribeTwoVariablesGraph, Me.mnuDescribeTwoVariablesCorrelate})
-        Me.mnuDescribeTwoVariables.Enabled = False
         Me.mnuDescribeTwoVariables.Name = "mnuDescribeTwoVariables"
         Me.mnuDescribeTwoVariables.Size = New System.Drawing.Size(195, 22)
         Me.mnuDescribeTwoVariables.Tag = "Two_Variables"
@@ -590,7 +588,6 @@ Partial Class frmMain
         'mnuDescribeOtherTableDialogs
         '
         Me.mnuDescribeOtherTableDialogs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOtherTableDialogsFrequency, Me.mnuDescribeOtherTableDialogsSummary, Me.mnuDescribeOtherTableDialogsMultipleResponse})
-        Me.mnuDescribeOtherTableDialogs.Enabled = False
         Me.mnuDescribeOtherTableDialogs.Name = "mnuDescribeOtherTableDialogs"
         Me.mnuDescribeOtherTableDialogs.Size = New System.Drawing.Size(195, 22)
         Me.mnuDescribeOtherTableDialogs.Tag = "Other_Table_Dialogs"
@@ -659,7 +656,6 @@ Partial Class frmMain
         'mnuModelOneVariable
         '
         Me.mnuModelOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelOneVariableFitModel, Me.mnuModelOneVariableChooseModel, Me.mnuModelOneVariableUseModel})
-        Me.mnuModelOneVariable.Enabled = False
         Me.mnuModelOneVariable.Name = "mnuModelOneVariable"
         Me.mnuModelOneVariable.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOneVariable.Tag = "One_Variable"
@@ -723,7 +719,6 @@ Partial Class frmMain
         'mnuModelThreeVariables
         '
         Me.mnuModelThreeVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelThreeVariablesFitModel, Me.mnuModelThreeVariablesChooseModel, Me.mnuModelThreeVariablesUseModel})
-        Me.mnuModelThreeVariables.Enabled = False
         Me.mnuModelThreeVariables.Name = "mnuModelThreeVariables"
         Me.mnuModelThreeVariables.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelThreeVariables.Tag = "Three_Variables"
@@ -756,7 +751,6 @@ Partial Class frmMain
         'mnuModelFourVariables
         '
         Me.mnuModelFourVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelFourVariablesFitModel, Me.mnuModelFourVariablesChooseModel, Me.mnuModelFourVariablesUseModel})
-        Me.mnuModelFourVariables.Enabled = False
         Me.mnuModelFourVariables.Name = "mnuModelFourVariables"
         Me.mnuModelFourVariables.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelFourVariables.Tag = "Four_Variables"
@@ -789,7 +783,6 @@ Partial Class frmMain
         'mnuModelGeneral
         '
         Me.mnuModelGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelGeneralFitModel, Me.mnuModelGeneralChooseModel, Me.mnuModelGeneralUseModel})
-        Me.mnuModelGeneral.Enabled = False
         Me.mnuModelGeneral.Name = "mnuModelGeneral"
         Me.mnuModelGeneral.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelGeneral.Tag = "General"
@@ -1002,7 +995,6 @@ Partial Class frmMain
         'mnuClimaticEvaporation
         '
         Me.mnuClimaticEvaporation.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticEvaporationSite, Me.mnuClimaticEvaporationPenman})
-        Me.mnuClimaticEvaporation.Enabled = False
         Me.mnuClimaticEvaporation.Name = "mnuClimaticEvaporation"
         Me.mnuClimaticEvaporation.Size = New System.Drawing.Size(171, 22)
         Me.mnuClimaticEvaporation.Tag = "Evaporation"
@@ -1012,7 +1004,7 @@ Partial Class frmMain
         '
         Me.mnuClimaticEvaporationSite.Enabled = False
         Me.mnuClimaticEvaporationSite.Name = "mnuClimaticEvaporationSite"
-        Me.mnuClimaticEvaporationSite.Size = New System.Drawing.Size(127, 22)
+        Me.mnuClimaticEvaporationSite.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticEvaporationSite.Tag = "Site"
         Me.mnuClimaticEvaporationSite.Text = "Site..."
         '
@@ -1020,14 +1012,13 @@ Partial Class frmMain
         '
         Me.mnuClimaticEvaporationPenman.Enabled = False
         Me.mnuClimaticEvaporationPenman.Name = "mnuClimaticEvaporationPenman"
-        Me.mnuClimaticEvaporationPenman.Size = New System.Drawing.Size(127, 22)
+        Me.mnuClimaticEvaporationPenman.Size = New System.Drawing.Size(152, 22)
         Me.mnuClimaticEvaporationPenman.Tag = "Penman"
         Me.mnuClimaticEvaporationPenman.Text = "Penman..."
         '
         'mnuClimaticCrop
         '
         Me.mnuClimaticCrop.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CropCoefficientsToolStripMenuItem, Me.WaterSatisfactionIndexToolStripMenuItem})
-        Me.mnuClimaticCrop.Enabled = False
         Me.mnuClimaticCrop.Name = "mnuClimaticCrop"
         Me.mnuClimaticCrop.Size = New System.Drawing.Size(171, 22)
         Me.mnuClimaticCrop.Tag = "Crop"
@@ -1058,7 +1049,6 @@ Partial Class frmMain
         'mnuClimaticMarkovModelling
         '
         Me.mnuClimaticMarkovModelling.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticMarkovModellingCountsTotals, Me.mnuClimaticMarkovModellingPrepare, Me.ToolStripSeparator18, Me.mnuClimaticMarkovModellingModelProbabilities, Me.ModelAmountsToolStripMenuItem, Me.InterpolateDailyToolStripMenuItem, Me.SimulationsToolStripMenuItem, Me.SpellLengthToolStripMenuItem, Me.TotalsToolStripMenuItem})
-        Me.mnuClimaticMarkovModelling.Enabled = False
         Me.mnuClimaticMarkovModelling.Name = "mnuClimaticMarkovModelling"
         Me.mnuClimaticMarkovModelling.Size = New System.Drawing.Size(171, 22)
         Me.mnuClimaticMarkovModelling.Tag = "Markov_Modelling"
@@ -1222,7 +1212,7 @@ Partial Class frmMain
         'mnuHelpHelp
         '
         Me.mnuHelpHelp.Name = "mnuHelpHelp"
-        Me.mnuHelpHelp.Size = New System.Drawing.Size(151, 22)
+        Me.mnuHelpHelp.Size = New System.Drawing.Size(152, 22)
         Me.mnuHelpHelp.Tag = "Help"
         Me.mnuHelpHelp.Text = "Help"
         '
@@ -1230,7 +1220,7 @@ Partial Class frmMain
         '
         Me.mnuHelpLicence.Enabled = False
         Me.mnuHelpLicence.Name = "mnuHelpLicence"
-        Me.mnuHelpLicence.Size = New System.Drawing.Size(151, 22)
+        Me.mnuHelpLicence.Size = New System.Drawing.Size(152, 22)
         Me.mnuHelpLicence.Tag = "Licence..."
         Me.mnuHelpLicence.Text = "Licence..."
         '
@@ -1238,7 +1228,7 @@ Partial Class frmMain
         '
         Me.mnuHelpAboutRInstat.Enabled = False
         Me.mnuHelpAboutRInstat.Name = "mnuHelpAboutRInstat"
-        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(151, 22)
+        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(152, 22)
         Me.mnuHelpAboutRInstat.Tag = "About_R-Instat"
         Me.mnuHelpAboutRInstat.Text = "About R-Instat"
         '
@@ -1258,7 +1248,6 @@ Partial Class frmMain
         'mnuClimatic
         '
         Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticManage, Me.mnuClimaticDisplayDaily, Me.mnuClimaticSummary, Me.mnuClimaticEvents, Me.ToolStripSeparator16, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator17, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticMarkovModelling})
-        Me.mnuClimatic.Enabled = False
         Me.mnuClimatic.Name = "mnuClimatic"
         Me.mnuClimatic.Size = New System.Drawing.Size(63, 20)
         Me.mnuClimatic.Tag = "Climatic"
@@ -1267,7 +1256,6 @@ Partial Class frmMain
         'mnuClimaticManage
         '
         Me.mnuClimaticManage.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticManageNewWorksheet, Me.mnuClimaticManageImportDailyData, Me.mnuClimaticManageMakeFactor, Me.mnuClimaticManageShiftDailyData, Me.mnuClimaticManageUnstackDailyData, Me.mnuClimaticManageStackDailyData, Me.ToolStripSeparator15, Me.mnuClimaticManageInterpolate, Me.mnuClimaticManageOptions})
-        Me.mnuClimaticManage.Enabled = False
         Me.mnuClimaticManage.Name = "mnuClimaticManage"
         Me.mnuClimaticManage.Size = New System.Drawing.Size(171, 22)
         Me.mnuClimaticManage.Tag = "Manage"
@@ -1361,7 +1349,6 @@ Partial Class frmMain
         'mnuClimaticEvents
         '
         Me.mnuClimaticEvents.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticEventsStartOfTheRains, Me.mnuClimaticEventsExtremes, Me.mnuClimaticEventsSpells, Me.mnuClimaticEventsWaterBalance, Me.mnuClimaticEventsEndofRains})
-        Me.mnuClimaticEvents.Enabled = False
         Me.mnuClimaticEvents.Name = "mnuClimaticEvents"
         Me.mnuClimaticEvents.Size = New System.Drawing.Size(171, 22)
         Me.mnuClimaticEvents.Tag = "Events"
@@ -1786,6 +1773,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameFilter
         '
+        Me.mnuOrganiseDataFrameFilter.Enabled = False
         Me.mnuOrganiseDataFrameFilter.Name = "mnuOrganiseDataFrameFilter"
         Me.mnuOrganiseDataFrameFilter.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameFilter.Tag = "Filter..."
@@ -2301,7 +2289,6 @@ Partial Class frmMain
         'mnuClimateMethods
         '
         Me.mnuClimateMethods.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimateMethodsDataManipulation, Me.mnuClimateMethodsGraphics, Me.mnuClimateMethodsModel, Me.mnuClimateMethodsAdditional, Me.mnuClimateMethodsCreateClimateObject})
-        Me.mnuClimateMethods.Enabled = False
         Me.mnuClimateMethods.Name = "mnuClimateMethods"
         Me.mnuClimateMethods.Size = New System.Drawing.Size(110, 20)
         Me.mnuClimateMethods.Tag = "Climatic_Methods"
@@ -2310,7 +2297,6 @@ Partial Class frmMain
         'mnuClimateMethodsDataManipulation
         '
         Me.mnuClimateMethodsDataManipulation.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimateMethodsDataManipulationStartOfRain, Me.mnuClimateMethodsDataManipulationEndOfRain, Me.mnuClimateMethodsDataManipulationChangeFormatDayMonth, Me.mnuClimateMethodsDataManipulationExportCPTToTabular, Me.mnuClimateMethodsDataManipulationDayMonth, Me.mnuClimateMethodsDataManipulationDisplayDaily, Me.mnuClimateMethodsDataManipulationDisplayDOYOfYear, Me.mnuClimateMethodsDataManipulationDisplayRainRunningTotal, Me.mnuClimateMethodsDataManipulationDisplaySpellLength, Me.mnuClimateMethodsDataManipulationExportForPICSA, Me.mnuClimateMethodsDataManipulationExtremeEvents, Me.mnuClimateMethodsDataManipulationMissingData, Me.mnuClimateMethodsDataManipulationMissingDataTable, Me.mnuClimateMethodsDataManipulationMonthlySummaries, Me.mnuClimateMethodsDataManipulationOutputForCD})
-        Me.mnuClimateMethodsDataManipulation.Enabled = False
         Me.mnuClimateMethodsDataManipulation.Name = "mnuClimateMethodsDataManipulation"
         Me.mnuClimateMethodsDataManipulation.Size = New System.Drawing.Size(199, 22)
         Me.mnuClimateMethodsDataManipulation.Tag = "Data_Manipulation"
@@ -2439,7 +2425,6 @@ Partial Class frmMain
         'mnuClimateMethodsGraphics
         '
         Me.mnuClimateMethodsGraphics.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimateMethodsGraphicsClipBoxPlot, Me.mnuClimateMethodsGraphicsCliplot, Me.mnuClimateMethodsGraphicsMissingValues, Me.mnuClimateMethodsGraphicsHistogram, Me.mnuClimateMethodsGraphicsCumExceedance, Me.mnuClimateMethodsGraphicsBoxplot, Me.mnuClimateMethodsGraphicsInventory, Me.mnuClimateMethodsGraphicsAnnualRainfall, Me.mnuClimateMethodsGraphicsRainCount, Me.mnuClimateMethodsGraphicsTimeseries, Me.mnuClimateMethodsGraphicsWindrose, Me.mnuClimateMethodsGraphicsMultipleLines, Me.mnuClmateMethodThreeSummaries})
-        Me.mnuClimateMethodsGraphics.Enabled = False
         Me.mnuClimateMethodsGraphics.Name = "mnuClimateMethodsGraphics"
         Me.mnuClimateMethodsGraphics.Size = New System.Drawing.Size(199, 22)
         Me.mnuClimateMethodsGraphics.Tag = "Graphics"
@@ -2560,7 +2545,6 @@ Partial Class frmMain
         'mnuClimateMethodsAdditional
         '
         Me.mnuClimateMethodsAdditional.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimateMethodsAdditionalOutputForCPT, Me.mnuClimateMethodsAdditionalRainsStatistics, Me.mnuClimateMethodsAdditionalSeasonalSummary, Me.mnuClimateMethodsAdditionalSeasonalSummaryRain, Me.mnuClimateMethodsAdditionalWaterBalance})
-        Me.mnuClimateMethodsAdditional.Enabled = False
         Me.mnuClimateMethodsAdditional.Name = "mnuClimateMethodsAdditional"
         Me.mnuClimateMethodsAdditional.Size = New System.Drawing.Size(199, 22)
         Me.mnuClimateMethodsAdditional.Tag = "Additional"
