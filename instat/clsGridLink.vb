@@ -17,15 +17,29 @@ Imports RDotNet
 Imports unvell.ReoGrid
 
 Public Class clsGridLink
-    Public grdData As New ReoGridControl
-    Public grdMetadata As New ReoGridControl
-    Public grdVariablesMetadata As New ReoGridControl
-    Public bGrdDataExists As Boolean = False
-    Public bGrdMetadataExists As Boolean = False
-    Public bGrdVariablesMetadataExists As Boolean = False
-    Public bGrdDataChanged As Boolean = False
-    Public bGrdMetadataChanged As Boolean = False
-    Public bGrdVariablesMetadataChanged As Boolean = False
+    Public grdData As ReoGridControl
+    Public grdMetadata As ReoGridControl
+    Public grdVariablesMetadata As ReoGridControl
+    Public bGrdDataExists As Boolean
+    Public bGrdMetadataExists As Boolean
+    Public bGrdVariablesMetadataExists As Boolean
+    Public bGrdDataChanged As Boolean
+    Public bGrdMetadataChanged As Boolean
+    Public bGrdVariablesMetadataChanged As Boolean
+    Public iMaxRows As Integer
+
+    Public Sub New()
+        grdData = New ReoGridControl
+        grdMetadata = New ReoGridControl
+        grdVariablesMetadata = New ReoGridControl
+        bGrdDataExists = False
+        bGrdMetadataChanged = False
+        bGrdVariablesMetadataExists = False
+        bGrdDataChanged = False
+        bGrdMetadataChanged = False
+        bGrdVariablesMetadataChanged = False
+        iMaxRows = 1000
+    End Sub
 
     Public Sub UpdateGrids()
         Dim bRDataChanged As Boolean
@@ -179,17 +193,17 @@ Public Class clsGridLink
         If iNewPosition <> -1 AndAlso iNewPosition <> iCurrPosition AndAlso iNewPosition < grdCurr.Worksheets.Count Then
             grdCurr.MoveWorksheet(fillWorkSheet, iNewPosition)
         End If
-        fillWorkSheet.Rows = dfTemp.RowCount
+        fillWorkSheet.Rows = Math.Min(iMaxRows, dfTemp.RowCount)
         fillWorkSheet.Columns = dfTemp.ColumnCount
-        rngDataRange = New RangePosition(0, 0, dfTemp.RowCount, dfTemp.ColumnCount)
+        rngDataRange = New RangePosition(0, 0, fillWorkSheet.Rows, fillWorkSheet.Columns)
         fillWorkSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
-        For i As Integer = 0 To dfTemp.RowCount - 1
-            For j As Integer = 0 To dfTemp.ColumnCount - 1
+        For i As Integer = 0 To fillWorkSheet.Rows - 1
+            For j As Integer = 0 To fillWorkSheet.Columns - 1
                 fillWorkSheet(row:=i, col:=j) = dfTemp(i, j)
             Next
         Next
         strRowNames = dfTemp.RowNames
-        For i As Integer = 0 To dfTemp.RowCount - 1
+        For i As Integer = 0 To fillWorkSheet.Rows - 1
             fillWorkSheet.RowHeaders.Item(i).Text = strRowNames(i)
         Next
         strColumnNames = dfTemp.ColumnNames
@@ -248,5 +262,16 @@ Public Class clsGridLink
         strTemp = strTemp & ")"
         Return strTemp
     End Function
+
+    Public Sub SetMaxRows(iRows As Integer)
+        iMaxRows = iRows
+        bGrdDataChanged = True
+        bGrdMetadataChanged = True
+        bGrdVariablesMetadataChanged = True
+        If frmMain.clsRLink.bInstatObjectExists Then
+            frmMain.clsRLink.RunInternalScript(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed <- TRUE")
+        End If
+        UpdateGrids()
+    End Sub
 
 End Class

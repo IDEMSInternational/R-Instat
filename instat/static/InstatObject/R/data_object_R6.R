@@ -732,7 +732,7 @@ data_object$set("public", "drop_unused_factor_levels", function(col_name) {
 data_object$set("public", "set_factor_levels", function(col_name, new_levels) {
   if(!col_name %in% names(private$data)) stop(paste(col_name,"not found in data."))
   if(!is.factor(private$data[[col_name]])) stop(paste(col_name,"is not a factor."))
-  if(!length(new_levels)==length(levels(private$data[[col_name]]))) stop("Incorrect number of new levels given.")
+  if(length(new_levels) < length(levels(private$data[[col_name]]))) stop("There must be at least as many new levels as current levels.")
   
   levels(private$data[[col_name]]) <- new_levels
   self$data_changed <- TRUE

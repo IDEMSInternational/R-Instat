@@ -21,14 +21,29 @@ Imports unvell.ReoGrid.Events
 Public Class ucrFactor
     Public Event SelectedLevelChanged()
     Public Event GridContentChanged()
+    Public Event GridVisibleChanged()
     Public WithEvents clsReceiver As ucrReceiverSingle
     Public WithEvents shtCurrSheet As unvell.ReoGrid.Worksheet
-    Public bIsSelector As Boolean = False
-    Public bIsMultipleSelector As Boolean = False
-    Public iSelectorColumnIndex As Integer = -1
-    Public strSelectorColumnName As String = "Select Level"
-    Private bIsEditable As Boolean = False
+    Public bIsSelector As Boolean
+    Public bIsMultipleSelector As Boolean
+    Public iSelectorColumnIndex As Integer
+    Public strSelectorColumnName As String
+    Private bIsEditable As Boolean
     Private lstEditableColumns As List(Of String)
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        bIsSelector = False
+        bIsMultipleSelector = False
+        iSelectorColumnIndex = -1
+        strSelectorColumnName = "Select Level"
+        bIsEditable = False
+        lstEditableColumns = New List(Of String)
+    End Sub
 
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
@@ -41,9 +56,6 @@ Public Class ucrFactor
     End Sub
 
     Public Sub AddEditableColumns(strColumns As String())
-        If lstEditableColumns Is Nothing Then
-            lstEditableColumns = New List(Of String)
-        End If
         lstEditableColumns.AddRange(strColumns)
         ApplyColumnSettings()
     End Sub
@@ -150,6 +162,25 @@ Public Class ucrFactor
                     shtCurrSheet(i, iSelectorColumnIndex) = True
                 Else
                     shtCurrSheet(i, iSelectorColumnIndex) = False
+                End If
+            Next
+        End If
+    End Sub
+
+    Public Sub AddLevel()
+        Dim i As Integer
+        Dim iNewRow As Integer
+
+        If grdFactorData.CurrentWorksheet IsNot Nothing AndAlso shtCurrSheet IsNot Nothing Then
+            shtCurrSheet.AppendRows(1)
+            iNewRow = shtCurrSheet.RowCount - 1
+            For i = 0 To shtCurrSheet.ColumnCount - 1
+                If i = 0 Then
+                    shtCurrSheet(iNewRow, i) = ""
+                ElseIf shtCurrSheet.ColumnHeaders(i).Text = "Counts" Then
+                    'TODO Fix this formatting issue with a grid user control
+                    shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
+                    shtCurrSheet(iNewRow, i) = 0
                 End If
             Next
         End If
@@ -272,4 +303,7 @@ Public Class ucrFactor
         End If
     End Sub
 
+    Private Sub grdFactorData_VisibleChanged(sender As Object, e As EventArgs) Handles grdFactorData.VisibleChanged
+        RaiseEvent GridVisibleChanged()
+    End Sub
 End Class
