@@ -13,8 +13,11 @@
 
 Imports instat.Translations
 Public Class dlgRandomSubsets
-    Private bFirstLoad As Boolean = True 'checks if dialog loads for first time
+    Public bFirstLoad As Boolean = True 'checks if dialog loads for first time
     Private clsSetSeed As New RFunction
+    Private clsSampleFunc As New RFunction
+
+
     Private Sub dlgRandomSubsets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -82,13 +85,13 @@ Public Class dlgRandomSubsets
         If chkSeed.Checked Then
             nudSeed.Visible = True
             If nudSeed.Text <> "" Then
-                clsSetSeed.AddParameter("seed", nudSeed.Value)
+                clsSetSeed.AddParameter("set.seed", nudSeed.Value)
             Else
-                clsSetSeed.RemoveParameterByName("seed")
+                clsSetSeed.RemoveParameterByName("set.seed")
             End If
         Else
             nudSeed.Visible = False
-            clsSetSeed.RemoveParameterByName("seed")
+            clsSetSeed.RemoveParameterByName("set.seed")
         End If
     End Sub
 
@@ -104,12 +107,45 @@ Public Class dlgRandomSubsets
 
     Private Sub chkWithReplacement_CheckedChanged(sender As Object, e As EventArgs) Handles chkWithReplacement.CheckedChanged
         If chkWithReplacement.Checked = False Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                ucrBase.clsRsyntax.AddParameter("exp", Chr(34) & "FALSE" & Chr(34))
-            Else
-                ucrBase.clsRsyntax.AddParameter("exp", Chr(34) & "TRUE" & Chr(34))
-            End If
+            'If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+            ucrBase.clsRsyntax.AddParameter("FALSE", chkWithReplacement.CheckedChanged)
 
+
+        Else
+            ucrBase.clsRsyntax.AddParameter("sample", Chr(34) & "TRUE" & Chr(34))
         End If
+
+
+    End Sub
+    Private Sub WithOrWithoutReplacement()
+
+    End Sub
+
+    Private Sub NumberOfReplications()
+        If nudNumberOfColumns.Text <> "" Then
+
+            ucrBase.clsRsyntax.AddParameter("n", nudNumberOfColumns.Value)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("n")
+        End If
+
+    End Sub
+    Private Sub SampleSize()
+        If nudSampleSize.Text <> "" Then
+            ' clsSampleSize.AddParameter("size", nudNumberOfColumns.Value
+            ucrBase.clsRsyntax.AddParameter("sample", Chr(34) & "size" & Chr(34))
+
+            'Else
+            'clsSampleSize.RemoveParameterByName("size")
+        End If
+    End Sub
+
+
+    Private Sub nudNumberOfColumns_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberOfColumns.ValueChanged
+        NumberOfReplications()
+    End Sub
+
+    Private Sub nudSampleSize_ValueChanged(sender As Object, e As EventArgs) Handles nudSampleSize.ValueChanged
+        SampleSize()
     End Sub
 End Class
