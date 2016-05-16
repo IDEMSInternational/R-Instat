@@ -17,9 +17,12 @@
 Public Class ucrReceiverMultiple
 
     Private Sub ucrReceiverMultiple_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If lstSelectedVariables.Columns.Count = 0 Then
-            lstSelectedVariables.Columns.Add("Selected Data")
-            lstSelectedVariables.Columns(0).Width = lstSelectedVariables.Width - 25
+        If bFirstLoad Then
+            If lstSelectedVariables.Columns.Count = 0 Then
+                lstSelectedVariables.Columns.Add("Selected Data")
+                lstSelectedVariables.Columns(0).Width = lstSelectedVariables.Width - 25
+            End If
+            bFirstLoad = False
         End If
     End Sub
 
@@ -28,18 +31,18 @@ Public Class ucrReceiverMultiple
     Public Overrides Sub AddSelected()
         Dim objItem As ListViewItem
         Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
-        Dim grpTemp As ListViewGroup
+        Dim grpCurr As New ListViewGroup
 
         Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
         For Each objItem In tempObjects
             If Not GetCurrItemNames().Contains(objItem.Text) Then
-                If Not GetCurrDataFrameNames().Contains(objItem.Tag) Then
-                    grpTemp = New ListViewGroup(key:=objItem.Tag, headerText:=objItem.Tag)
-                    lstSelectedVariables.Groups.Add(grpTemp)
+                If Not GetCurrGroupNames().Contains(objItem.Tag) Then
+                    grpCurr = New ListViewGroup(key:=objItem.Tag, headerText:=objItem.Tag)
+                    lstSelectedVariables.Groups.Add(grpCurr)
                 Else
-                    grpTemp = lstSelectedVariables.Groups(objItem.Tag)
+                    grpCurr = lstSelectedVariables.Groups(GetCurrGroupNames().IndexOf(objItem.Tag))
                 End If
-                lstSelectedVariables.Items.Add(objItem.Text).Group = grpTemp
+                lstSelectedVariables.Items.Add(objItem.Text).Group = grpCurr
                 lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Tag = objItem.Tag
                 Selector.AddToVariablesList(objItem.Text)
             End If
@@ -58,13 +61,12 @@ Public Class ucrReceiverMultiple
         Return strItemNames
     End Function
 
-    Private Function GetCurrDataFrameNames() As List(Of String)
+    Private Function GetCurrGroupNames() As List(Of String)
         Dim strHeaders As New List(Of String)
+        Dim grpTemp As ListViewGroup
 
-        For i = 0 To lstSelectedVariables.Items.Count - 1
-            If Not strHeaders.Contains(lstSelectedVariables.Items(i).Tag) Then
-                strHeaders.Add(lstSelectedVariables.Items(i).Tag)
-            End If
+        For Each grpTemp In lstSelectedVariables.Groups
+            strHeaders.Add(grpTemp.Name)
         Next
         Return strHeaders
     End Function

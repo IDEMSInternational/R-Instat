@@ -57,6 +57,6 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
-        sdgLayers.ShowDialog()
+        sdgLayerOptions.ShowDialog()
     End Sub
 End Class

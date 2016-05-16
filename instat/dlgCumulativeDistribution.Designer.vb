@@ -106,7 +106,7 @@ Partial Class dlgCumulativeDistribution
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucrFactorReceiver.TabIndex = 13
+        Me.ucrFactorReceiver.TabIndex = 4
         '
         'ucrCumDistSelector
         '
@@ -128,14 +128,14 @@ Partial Class dlgCumulativeDistribution
         Me.ucrSaveCumDist.Location = New System.Drawing.Point(10, 263)
         Me.ucrSaveCumDist.Name = "ucrSaveCumDist"
         Me.ucrSaveCumDist.Size = New System.Drawing.Size(265, 27)
-        Me.ucrSaveCumDist.TabIndex = 14
+        Me.ucrSaveCumDist.TabIndex = 10
         '
         'ucrVariablesAsFactorforCumDist
         '
         Me.ucrVariablesAsFactorforCumDist.Location = New System.Drawing.Point(267, 35)
         Me.ucrVariablesAsFactorforCumDist.Name = "ucrVariablesAsFactorforCumDist"
         Me.ucrVariablesAsFactorforCumDist.Size = New System.Drawing.Size(125, 136)
-        Me.ucrVariablesAsFactorforCumDist.TabIndex = 15
+        Me.ucrVariablesAsFactorforCumDist.TabIndex = 2
         Me.ucrVariablesAsFactorforCumDist.ucrVariableSelector = Nothing
         '
         'lblvariates
