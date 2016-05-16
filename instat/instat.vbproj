@@ -420,6 +420,12 @@
     <Compile Include="dlgRandomSubsets.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRecodeNumeric.Designer.vb">
+      <DependentUpon>dlgRecodeNumeric.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRecodeNumeric.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRenameDescriptive.Designer.vb">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
     </Compile>
@@ -1150,12 +1156,6 @@
       <DependentUpon>dlgRank.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRank.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgRecode.Designer.vb">
-      <DependentUpon>dlgRecode.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgRecode.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReferenceLevel.Designer.vb">
@@ -2043,6 +2043,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubsets.sw-KE.resx">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeNumeric.fr-FR.resx">
+      <DependentUpon>dlgRecodeNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeNumeric.resx">
+      <DependentUpon>dlgRecodeNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeNumeric.sw-KE.resx">
+      <DependentUpon>dlgRecodeNumeric.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDescriptive.fr-FR.resx">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
@@ -3089,15 +3098,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRank.sw-KE.resx">
       <DependentUpon>dlgRank.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRecode.fr-FR.resx">
-      <DependentUpon>dlgRecode.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRecode.resx">
-      <DependentUpon>dlgRecode.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRecode.sw-KE.resx">
-      <DependentUpon>dlgRecode.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReferenceLevel.fr-FR.resx">
       <DependentUpon>dlgReferenceLevel.vb</DependentUpon>
