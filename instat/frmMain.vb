@@ -350,7 +350,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageAddColumnRecode_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnRecode.Click
-        dlgRecode.ShowDialog()
+        dlgRecodeNumeric.ShowDialog()
     End Sub
 
     Private Sub RandomSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataRandomSamples.Click
@@ -792,7 +792,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuManageFactorRecode.Click
-        dlgRecode.ShowDialog()
+        dlgRecodeFactor.ShowDialog()
     End Sub
 
     Private Sub mnuManageDataFileCopySheet_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileCopySheet.Click
