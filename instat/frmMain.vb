@@ -963,4 +963,13 @@ Public Class frmMain
     Private Sub mnuModelOtherGeneralLogLinear_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralLogLinear.Click
         dlglogLinearModels.ShowDialog()
     End Sub
+
+    Private Sub DescribeGeneralCorrelations_Click(sender As Object, e As EventArgs) Handles DescribeGeneralCorrelations.Click
+        dlgCorrelation.ShowDialog()
+    End Sub
+
+    Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
+        frmCommand.Visible = Not frmCommand.Visible
+    End Sub
+
 End Class

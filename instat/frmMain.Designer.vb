@@ -129,7 +129,7 @@ Partial Class frmMain
         Me.TotalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuView = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDataView = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OutputWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewOutputWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewLog = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewScriptWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
@@ -915,6 +915,7 @@ Partial Class frmMain
         '
         'mnuModelOtherThreeVariablesSimpleWithGroups
         '
+        Me.mnuModelOtherThreeVariablesSimpleWithGroups.Enabled = False
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Name = "mnuModelOtherThreeVariablesSimpleWithGroups"
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Size = New System.Drawing.Size(262, 22)
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Tag = "Simple_with_groups"
@@ -1120,7 +1121,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.OutputWindowToolStripMenuItem, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewWindowsLayout})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewWindowsLayout})
         Me.mnuView.Name = "mnuView"
         Me.mnuView.Size = New System.Drawing.Size(44, 20)
         Me.mnuView.Tag = "View"
@@ -1133,11 +1134,11 @@ Partial Class frmMain
         Me.mnuViewDataView.Tag = "Data_View"
         Me.mnuViewDataView.Text = "Data View"
         '
-        'OutputWindowToolStripMenuItem
+        'mnuViewOutputWindow
         '
-        Me.OutputWindowToolStripMenuItem.Name = "OutputWindowToolStripMenuItem"
-        Me.OutputWindowToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
-        Me.OutputWindowToolStripMenuItem.Text = "Output Window"
+        Me.mnuViewOutputWindow.Name = "mnuViewOutputWindow"
+        Me.mnuViewOutputWindow.Size = New System.Drawing.Size(187, 22)
+        Me.mnuViewOutputWindow.Text = "Output Window"
         '
         'mnuViewLog
         '
@@ -1430,7 +1431,7 @@ Partial Class frmMain
         '
         'mnuEditFind
         '
-        Me.mnuEditFind.CheckOnClick = True
+        Me.mnuEditFind.Enabled = False
         Me.mnuEditFind.Name = "mnuEditFind"
         Me.mnuEditFind.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
         Me.mnuEditFind.Size = New System.Drawing.Size(183, 22)
@@ -1439,13 +1440,13 @@ Partial Class frmMain
         '
         'mnuEditFindNext
         '
+        Me.mnuEditFindNext.Enabled = False
         Me.mnuEditFindNext.Name = "mnuEditFindNext"
         Me.mnuEditFindNext.Size = New System.Drawing.Size(183, 22)
         Me.mnuEditFindNext.Text = "Find Next"
         '
         'mnuEditReplace
         '
-        Me.mnuEditReplace.CheckOnClick = True
         Me.mnuEditReplace.Enabled = False
         Me.mnuEditReplace.Name = "mnuEditReplace"
         Me.mnuEditReplace.Size = New System.Drawing.Size(183, 22)
@@ -1454,7 +1455,6 @@ Partial Class frmMain
         '
         'mnuEditCut
         '
-        Me.mnuEditCut.CheckOnClick = True
         Me.mnuEditCut.Enabled = False
         Me.mnuEditCut.Name = "mnuEditCut"
         Me.mnuEditCut.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
@@ -1464,7 +1464,6 @@ Partial Class frmMain
         '
         'mnuEditCopy
         '
-        Me.mnuEditCopy.CheckOnClick = True
         Me.mnuEditCopy.Name = "mnuEditCopy"
         Me.mnuEditCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
         Me.mnuEditCopy.Size = New System.Drawing.Size(183, 22)
@@ -1473,7 +1472,6 @@ Partial Class frmMain
         '
         'mnuEditCopySpecial
         '
-        Me.mnuEditCopySpecial.CheckOnClick = True
         Me.mnuEditCopySpecial.Enabled = False
         Me.mnuEditCopySpecial.Name = "mnuEditCopySpecial"
         Me.mnuEditCopySpecial.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
@@ -1492,7 +1490,6 @@ Partial Class frmMain
         '
         'mnuEditSelectAll
         '
-        Me.mnuEditSelectAll.CheckOnClick = True
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
         Me.mnuEditSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
         Me.mnuEditSelectAll.Size = New System.Drawing.Size(183, 22)
@@ -1878,6 +1875,7 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnCalculateTransform
         '
+        Me.mnuOrganiseColumnCalculateTransform.Enabled = False
         Me.mnuOrganiseColumnCalculateTransform.Name = "mnuOrganiseColumnCalculateTransform"
         Me.mnuOrganiseColumnCalculateTransform.Size = New System.Drawing.Size(160, 22)
         Me.mnuOrganiseColumnCalculateTransform.Tag = "..."
@@ -1899,6 +1897,7 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnCalculateCalculations
         '
+        Me.mnuOrganiseColumnCalculateCalculations.Enabled = False
         Me.mnuOrganiseColumnCalculateCalculations.Name = "mnuOrganiseColumnCalculateCalculations"
         Me.mnuOrganiseColumnCalculateCalculations.Size = New System.Drawing.Size(160, 22)
         Me.mnuOrganiseColumnCalculateCalculations.Tag = "Calculations..."
@@ -2067,6 +2066,7 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnTextSplit
         '
+        Me.mnuOrganiseColumnTextSplit.Enabled = False
         Me.mnuOrganiseColumnTextSplit.Name = "mnuOrganiseColumnTextSplit"
         Me.mnuOrganiseColumnTextSplit.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseColumnTextSplit.Tag = "Split..."
@@ -2187,6 +2187,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObjectRenameDataFrame
         '
+        Me.mnuOrganiseDataObjectRenameDataFrame.Enabled = False
         Me.mnuOrganiseDataObjectRenameDataFrame.Name = "mnuOrganiseDataObjectRenameDataFrame"
         Me.mnuOrganiseDataObjectRenameDataFrame.Size = New System.Drawing.Size(196, 22)
         Me.mnuOrganiseDataObjectRenameDataFrame.Tag = "ReName_Data_Frame..."
@@ -2194,6 +2195,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObjectReorderDataFrames
         '
+        Me.mnuOrganiseDataObjectReorderDataFrames.Enabled = False
         Me.mnuOrganiseDataObjectReorderDataFrames.Name = "mnuOrganiseDataObjectReorderDataFrames"
         Me.mnuOrganiseDataObjectReorderDataFrames.Size = New System.Drawing.Size(196, 22)
         Me.mnuOrganiseDataObjectReorderDataFrames.Tag = "Reorder_Data_Frames..."
@@ -2201,6 +2203,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObjectCopyDataFrame
         '
+        Me.mnuOrganiseDataObjectCopyDataFrame.Enabled = False
         Me.mnuOrganiseDataObjectCopyDataFrame.Name = "mnuOrganiseDataObjectCopyDataFrame"
         Me.mnuOrganiseDataObjectCopyDataFrame.Size = New System.Drawing.Size(196, 22)
         Me.mnuOrganiseDataObjectCopyDataFrame.Tag = "Copy_Data_Frame..."
@@ -2208,6 +2211,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObjectDeleteDataFrame
         '
+        Me.mnuOrganiseDataObjectDeleteDataFrame.Enabled = False
         Me.mnuOrganiseDataObjectDeleteDataFrame.Name = "mnuOrganiseDataObjectDeleteDataFrame"
         Me.mnuOrganiseDataObjectDeleteDataFrame.Size = New System.Drawing.Size(196, 22)
         Me.mnuOrganiseDataObjectDeleteDataFrame.Tag = "Delete_Data_Frame..."
@@ -2260,29 +2264,33 @@ Partial Class frmMain
         '
         'mnuOrganiseRObjectsView
         '
+        Me.mnuOrganiseRObjectsView.Enabled = False
         Me.mnuOrganiseRObjectsView.Name = "mnuOrganiseRObjectsView"
-        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsView.Tag = "View..."
         Me.mnuOrganiseRObjectsView.Text = "View..."
         '
         'mnuOrganiseRObjectsRename
         '
+        Me.mnuOrganiseRObjectsRename.Enabled = False
         Me.mnuOrganiseRObjectsRename.Name = "mnuOrganiseRObjectsRename"
-        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsRename.Tag = "Rename..."
         Me.mnuOrganiseRObjectsRename.Text = "Rename..."
         '
         'mnuOrganiseRObjectsReorder
         '
+        Me.mnuOrganiseRObjectsReorder.Enabled = False
         Me.mnuOrganiseRObjectsReorder.Name = "mnuOrganiseRObjectsReorder"
-        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsReorder.Tag = "Reorder"
         Me.mnuOrganiseRObjectsReorder.Text = "Reorder..."
         '
         'mnuOrganiseRObjectsDelete
         '
+        Me.mnuOrganiseRObjectsDelete.Enabled = False
         Me.mnuOrganiseRObjectsDelete.Name = "mnuOrganiseRObjectsDelete"
-        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsDelete.Tag = "Delete..."
         Me.mnuOrganiseRObjectsDelete.Text = "Delete..."
         '
@@ -2993,7 +3001,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
     Friend WithEvents mnuToolsSaveCurrentOptions As ToolStripMenuItem
     Friend WithEvents mnuToolsLoadOptions As ToolStripMenuItem
-    Friend WithEvents OutputWindowToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuViewOutputWindow As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator22 As ToolStripSeparator
     Friend WithEvents mnuModelOtherOneVariableGoodnessofFit As ToolStripMenuItem
     Friend WithEvents mnuHelpAboutRInstat As ToolStripMenuItem
