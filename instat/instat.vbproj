@@ -420,6 +420,12 @@
     <Compile Include="dlgRandomSubsets.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRecodeNumeric.Designer.vb">
+      <DependentUpon>dlgRecodeNumeric.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRecodeNumeric.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRenameDescriptive.Designer.vb">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
     </Compile>
@@ -570,6 +576,12 @@
     <Compile Include="frmSetupLoading.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRecodeFactor.Designer.vb">
+      <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRecodeFactor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgCanonicalCorrelation.Designer.vb">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </Compile>
@@ -606,10 +618,10 @@
     <Compile Include="sdgFrequencyPolygonOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgLayers.Designer.vb">
-      <DependentUpon>sdgLayers.vb</DependentUpon>
+    <Compile Include="sdgLayerOptions.Designer.vb">
+      <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgLayers.vb">
+    <Compile Include="sdgLayerOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgModelOptions.Designer.vb">
@@ -1150,12 +1162,6 @@
       <DependentUpon>dlgRank.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRank.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgRecode.Designer.vb">
-      <DependentUpon>dlgRecode.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgRecode.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReferenceLevel.Designer.vb">
@@ -2044,6 +2050,15 @@
     <EmbeddedResource Include="dlgRandomSubsets.sw-KE.resx">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeNumeric.fr-FR.resx">
+      <DependentUpon>dlgRecodeNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeNumeric.resx">
+      <DependentUpon>dlgRecodeNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeNumeric.sw-KE.resx">
+      <DependentUpon>dlgRecodeNumeric.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDescriptive.fr-FR.resx">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
     </EmbeddedResource>
@@ -2278,6 +2293,15 @@
     <EmbeddedResource Include="frmSetupLoading.sw-KE.resx">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeFactor.fr-FR.resx">
+      <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeFactor.resx">
+      <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRecodeFactor.sw-KE.resx">
+      <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
     </EmbeddedResource>
@@ -2377,14 +2401,14 @@
     <EmbeddedResource Include="sdgHistogramOptions.sw-KE.resx">
       <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayers.fr-FR.resx">
-      <DependentUpon>sdgLayers.vb</DependentUpon>
+    <EmbeddedResource Include="sdgLayerOptions.fr-FR.resx">
+      <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayers.resx">
-      <DependentUpon>sdgLayers.vb</DependentUpon>
+    <EmbeddedResource Include="sdgLayerOptions.resx">
+      <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayers.sw-KE.resx">
-      <DependentUpon>sdgLayers.vb</DependentUpon>
+    <EmbeddedResource Include="sdgLayerOptions.sw-KE.resx">
+      <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgModelOptions.fr-FR.resx">
       <DependentUpon>sdgModelOptions.vb</DependentUpon>
@@ -3089,15 +3113,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRank.sw-KE.resx">
       <DependentUpon>dlgRank.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRecode.fr-FR.resx">
-      <DependentUpon>dlgRecode.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRecode.resx">
-      <DependentUpon>dlgRecode.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRecode.sw-KE.resx">
-      <DependentUpon>dlgRecode.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReferenceLevel.fr-FR.resx">
       <DependentUpon>dlgReferenceLevel.vb</DependentUpon>
