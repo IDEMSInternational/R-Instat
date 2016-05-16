@@ -144,7 +144,7 @@ Public Class frmMain
         dlgHistogram.ShowDialog()
     End Sub
 
-    Private Sub StemAndLeafToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsStemAndLeaf.Click
+    Private Sub StemAndLeafToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgStemAndLeaf.ShowDialog()
     End Sub
 
@@ -281,7 +281,7 @@ Public Class frmMain
         dlgSeasonalSummaryRain.ShowDialog()
     End Sub
 
-    Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricOneWayAnova.Click
+    Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) 
         dlgNon_ParametricOneWayANOVA.ShowDialog()
     End Sub
 
@@ -295,7 +295,7 @@ Public Class frmMain
 
 
 
-    Private Sub mnuStatsRegressionSimple_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionSimple.Click
+    Private Sub mnuStatsRegressionSimple_Click(sender As Object, e As EventArgs) 
         dlgRegressionSimple.ShowDialog()
     End Sub
 
@@ -387,7 +387,7 @@ Public Class frmMain
         dlgOrthogonal.ShowDialog()
     End Sub
 
-    Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOneWay.Click
+    Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) 
         dlgOneWayANOVA.ShowDialog()
     End Sub
 
@@ -969,7 +969,7 @@ Public Class frmMain
         dlgGoodnessofFit.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsNonParametricTwoSamples_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoSamples.Click
+    Private Sub mnuStatisticsNonParametricTwoSamples_Click(sender As Object, e As EventArgs) 
         dlgTwoSamples.ShowDialog()
     End Sub
 
