@@ -26,6 +26,7 @@ Partial Class sdgCorrPlot
         Me.tbDisplay = New System.Windows.Forms.TabPage()
         Me.chkCorrelationMatrix = New System.Windows.Forms.CheckBox()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
+        Me.ucrSaveGraph = New instat.ucrSaveGraph()
         Me.tbSaveGraphs = New System.Windows.Forms.TabControl()
         Me.tbPairwisePlot = New System.Windows.Forms.TabPage()
         Me.tbCorrelationPlot = New System.Windows.Forms.TabPage()
@@ -46,7 +47,6 @@ Partial Class sdgCorrPlot
         Me.rdoScatterplotMatrix = New System.Windows.Forms.RadioButton()
         Me.rdoCorrelationPlot = New System.Windows.Forms.RadioButton()
         Me.rdoPairwisePlot = New System.Windows.Forms.RadioButton()
-        Me.ucrSaveGraph = New instat.ucrSaveGraph()
         Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
         Me.tbSdgCorrelation.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
@@ -108,6 +108,13 @@ Partial Class sdgCorrPlot
         Me.tbGraphics.Tag = "Graphics"
         Me.tbGraphics.Text = "Graphics"
         Me.tbGraphics.UseVisualStyleBackColor = True
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(16, 92)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(225, 22)
+        Me.ucrSaveGraph.TabIndex = 7
         '
         'tbSaveGraphs
         '
@@ -336,13 +343,6 @@ Partial Class sdgCorrPlot
         Me.rdoPairwisePlot.Tag = "Pairwise_Plot"
         Me.rdoPairwisePlot.Text = "Pairwise Plot"
         Me.rdoPairwisePlot.UseVisualStyleBackColor = True
-        '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(16, 92)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(225, 22)
-        Me.ucrSaveGraph.TabIndex = 7
         '
         'ucrBaseSdgCorrPlot
         '

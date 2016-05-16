@@ -197,4 +197,5 @@ Public Class sdgCorrPlot
         End If
         clsRGGcorrGraphics.AddParameter("geom", Chr(34) & cmbgeom.SelectedItem.ToString & Chr(34))
     End Sub
+
 End Class
