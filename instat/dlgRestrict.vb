@@ -18,5 +18,6 @@ Imports instat.Translations
 Public Class dlgRestrict
     Private Sub dlgRestrict_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        ucrBase.OKEnabled(False)
     End Sub
 End Class

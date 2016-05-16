@@ -1,11 +1,20 @@
 ﻿Public Class ucrVariablesAsFactor
     Public bSingleVariable As Boolean
-    Public bFirstLoad As Boolean = True
+    Public bFirstLoad As Boolean
     Public ucrFactorReceiver As ucrReceiverSingle
     Public WithEvents ucrVariableSelector As ucrSelectorByDataFrame
+
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        bFirstLoad = True
+    End Sub
+
     Public Event SelectionChanged()
 
-    Private Sub ucrVariablesAsFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub ucrVariablesAsFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
