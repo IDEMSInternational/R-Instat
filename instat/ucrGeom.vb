@@ -153,13 +153,15 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_bin2d)
 
         clsgeom_boxplot.strGeomName = "geom_boxplot"
-        clsgeom_boxplot.AddGgParameter("x", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
-        clsgeom_boxplot.AddGgParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
-        clsgeom_boxplot.AddGgParameter("fill", bIsMandatory:=True)
-        clsgeom_boxplot.AddGgParameter("colour")
-        clsgeom_boxplot.AddGgParameter("shape")
-        clsgeom_boxplot.AddGgParameter("lower")
-        clsgeom_boxplot.AddGgParameter("middle")
+        clsgeom_boxplot.AddGgParameter("x", bIsMandatory:=True) 'this could be numeric or factor
+        clsgeom_boxplot.AddGgParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_boxplot.AddGgParameter("fill", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_boxplot.AddGgParameter("colour", strIncludedDataTypes:={"factor"})
+        clsgeom_boxplot.AddGgParameter("size", strIncludedDataTypes:={"factor"})
+        'this doesnt make a difference to the plot
+        'clsgeom_boxplot.AddGgParameter("shape")
+        clsgeom_boxplot.AddGgParameter("weight",, strIncludedDataTypes:=({"numeric"}))
+        clsgeom_boxplot.AddGgParameter("group", strIncludedDataTypes:=({"factor"}))
         lstAllGeoms.Add(clsgeom_boxplot)
 
         clsgeom_contour.strGeomName = "geom_contour"
@@ -306,11 +308,12 @@ Public Class ucrGeom
 
         clsgeom_histogram.strGeomName = "geom_histogram"
         clsgeom_histogram.AddGgParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_histogram.AddGgParameter("alpha")
-        clsgeom_histogram.AddGgParameter("colour")
         clsgeom_histogram.AddGgParameter("fill", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
-        clsgeom_histogram.AddGgParameter("linetype")
-        clsgeom_histogram.AddGgParameter("size")
+        clsgeom_histogram.AddGgParameter("alpha", strIncludedDataTypes:={"factor"})
+        clsgeom_histogram.AddGgParameter("colour", strIncludedDataTypes:={"factor"})
+        'these two seem not to make an changes on the plot.
+        clsgeom_histogram.AddGgParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_histogram.AddGgParameter("size", strIncludedDataTypes:={"factor"})
         lstAllGeoms.Add(clsgeom_histogram)
 
 
