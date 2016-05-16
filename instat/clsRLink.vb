@@ -413,7 +413,9 @@ Public Class RLink
         Dim chrModelNames As CharacterVector
         Dim lstModelNames As New List(Of String)
         chrModelNames = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_model_names()").AsCharacter
-        lstModelNames.AddRange(chrModelNames)
+        If chrModelNames IsNot Nothing Then
+            lstModelNames.AddRange(chrModelNames)
+        End If
         Return lstModelNames
     End Function
 
