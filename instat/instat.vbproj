@@ -654,6 +654,12 @@
     <Compile Include="sdgThemeOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgVariableTransformations.Designer.vb">
+      <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgVariableTransformations.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
     </Compile>
@@ -3544,6 +3550,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgThemeOptions.sw-KE.resx">
       <DependentUpon>sdgThemeOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgVariableTransformations.fr-FR.resx">
+      <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgVariableTransformations.resx">
+      <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgVariableTransformations.sw-KE.resx">
+      <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>

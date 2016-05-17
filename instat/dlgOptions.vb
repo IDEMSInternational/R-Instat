@@ -229,12 +229,16 @@ Public Class dlgOptions
         End If
     End Sub
 
-    Private Sub nudNoLines_ValueChanged(sender As Object, e As EventArgs) Handles nudPreviewRows.ValueChanged
+    Private Sub nudNoLines_ValueChanged(sender As Object, e As EventArgs) Handles nudPreviewRows.TextChanged
         ApplyEnabled(True)
     End Sub
 
     Private Sub chkIncludeDefaultParams_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeDefaultParams.CheckedChanged
         frmMain.clsInstatOptions.bIncludeRDefaultParameters = chkIncludeDefaultParams.Checked
+    End Sub
+
+    Private Sub nudMaxRows_TextChanged(sender As Object, e As EventArgs) Handles nudMaxRows.TextChanged
+        ApplyEnabled(True)
     End Sub
 
     Private Sub ApplyEnabled(bEnable As Boolean)
