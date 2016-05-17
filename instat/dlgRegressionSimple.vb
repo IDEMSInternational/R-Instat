@@ -40,6 +40,7 @@ Public Class dlgRegressionSimple
         ucrBase.iHelpTopicID = 171
         sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
     End Sub
 
     Private Sub ReopenDialog()
@@ -127,8 +128,9 @@ Public Class dlgRegressionSimple
                 chkFunction.Visible = False
             End If
             If chkFunction.Checked Then
-                sdgModelOptions.ModelFunction()
+                sdgVariableTransformations.ModelFunction()
             Else
+                sdgVariableTransformations.rdoIdentity.Checked = True
                 clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
             End If
         End If
@@ -184,13 +186,19 @@ Public Class dlgRegressionSimple
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
-        ' ToDo: Ensure the correct tab is open by default
+    End Sub
+
+    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
     End Sub
 
     Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
         If chkFunction.Checked Then
-            sdgModelOptions.ShowDialog()
-            ' ToDo: Ensure the correct tab is open by default
+            sdgVariableTransformations.ShowDialog()
         End If
         ExplanatoryFunctionSelect()
     End Sub

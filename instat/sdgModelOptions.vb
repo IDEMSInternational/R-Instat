@@ -15,8 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgModelOptions
-    Public clsRToFunction, clsRCIFunction As New RFunction
-    Public clsModel1 As New ROperator
+    Public clsRCIFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub sdgModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -29,10 +28,7 @@ Public Class sdgModelOptions
     End Sub
 
     Public Sub SetDefaults()
-        rdoNaturallog.Checked = False
-        rdoLogBase10.Checked = False
-        rdoSquareroot.Checked = False
-        rdoPower.Checked = False
+
     End Sub
 
     Public Sub SetRCIFunction(clsNewFunction As RFunction)
@@ -66,12 +62,18 @@ Public Class sdgModelOptions
         strFamilyName = dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag
         ResetLinks()
         If strFamilyName = "Normal" Then
+            rdoNormal.Checked = True
             rdoIdentity.Enabled = True
             rdoIdentity.Checked = True
             rdoInverse.Enabled = True
             rdoLog.Enabled = True
         End If
         If strFamilyName = "Binomial" Or strFamilyName = "Quasibinomial" Then
+            If strFamilyName = "Binomial" Then
+                rdoBinomial.Checked = True
+            Else
+                rdoQuasiBinomial.Checked = True
+            End If
             rdoLogit.Enabled = True
             rdoLogit.Checked = True
             rdoCauchit.Enabled = True
@@ -80,18 +82,25 @@ Public Class sdgModelOptions
             rdoProbit.Enabled = True
         End If
         If strFamilyName = "Gamma" Then
+            rdoGamma.Checked = True
             rdoInverse.Enabled = True
             rdoInverse.Checked = True
             rdoIdentity.Enabled = True
             rdoLog.Enabled = True
         End If
         If strFamilyName = "Poisson" Or strFamilyName = "Quasipoisson" Then
+            If strFamilyName = "Poisson" Then
+                rdoPoisson.Checked = True
+            Else
+                rdoQuasiPoisson.Checked = True
+            End If
             rdoLog.Enabled = True
             rdoLog.Checked = True
             rdoIdentity.Enabled = True
             rdoSqrt.Enabled = True
         End If
         If strFamilyName = "Inverse.gaussian" Then
+            rdoInverseGaussian.Checked = True
             rdoMuSquaredInverse.Enabled = True
             rdoMuSquaredInverse.Checked = True
             rdoIdentity.Enabled = True
@@ -99,6 +108,7 @@ Public Class sdgModelOptions
             rdoLog.Enabled = True
         End If
         If strFamilyName = "Quasi" Then
+            rdoQuasi.Checked = True
             rdoIdentity.Enabled = True
             rdoIdentity.Checked = True
             rdocloglog.Enabled = True
@@ -110,39 +120,6 @@ Public Class sdgModelOptions
             rdoSqrt.Enabled = True
         End If
         LinkFunction()
-    End Sub
-
-    Private Function ExplanatoryFunction(strFunctionName As String, strPower As String)
-        If strFunctionName = "power" Then
-            If strPower = "1" Then
-                dlgRegressionSimple.clsModel.SetParameter(False, strValue:=dlgRegressionSimple.ucrExplanatory.GetVariableNames(bWithQuotes:=False))
-            Else
-                clsModel1.SetOperation("^")
-                clsModel1.bBrackets = False
-                clsModel1.SetParameter(True, strValue:=dlgRegressionSimple.ucrExplanatory.GetVariableNames(bWithQuotes:=False))
-                clsModel1.SetParameter(False, strValue:=strPower)
-                dlgRegressionSimple.clsModel.SetParameter(False, clsOp:=clsModel1)
-            End If
-        Else
-            clsRToFunction.SetRCommand(strFunctionName)
-            clsRToFunction.AddParameter("x", dlgRegressionSimple.ucrExplanatory.GetVariableNames(bWithQuotes:=False))
-            dlgRegressionSimple.clsModel.SetParameter(False, clsRFunc:=clsRToFunction)
-        End If
-    End Function
-
-    Public Sub ModelFunction()
-        If rdoLogBase10.Checked Then
-            ExplanatoryFunction("log10", 1)
-        End If
-        If rdoNaturallog.Checked Then
-            ExplanatoryFunction("log", 1)
-        End If
-        If rdoSquareroot.Checked Then
-            ExplanatoryFunction("sqrt", 1)
-        End If
-        If rdoPower.Checked Then
-            ExplanatoryFunction("power", nudPower.Value)
-        End If
     End Sub
 
     Public Sub LinkFunction()
@@ -176,6 +153,54 @@ Public Class sdgModelOptions
         End If
         clsRCIFunction.AddParameter("link", Chr(34) & strLinkFunction & Chr(34))
     End Sub
+
+    'Private Sub rdoNormal_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNormal.CheckedChanged
+    '    If rdoNormal.Checked Then
+    '        dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag = "Normal"
+    '    End If
+    'End Sub
+
+    'Private Sub rdoInverseGaussian_CheckedChanged(sender As Object, e As EventArgs) Handles rdoInverseGaussian.CheckedChanged
+    '    If rdoInverseGaussian.Checked Then
+    '        dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag = "Inverse.gaussian"
+    '    End If
+    'End Sub
+
+    'Private Sub rdoPoisson_CheckedChanged(sender As Object, e As EventArgs) Handles rdoPoisson.CheckedChanged
+    '    If rdoPoisson.Checked Then
+    '        dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag = "Poisson"
+    '    End If
+    'End Sub
+
+    'Private Sub rdoBinomial_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBinomial.CheckedChanged
+    '    If rdoBinomial.Checked Then
+    '        dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag = "Binomial"
+    '    End If
+    'End Sub
+
+    'Private Sub rdoGamma_CheckedChanged(sender As Object, e As EventArgs) Handles rdoGamma.CheckedChanged
+    '    If rdoGamma.Checked Then
+    '        dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag = "Gamma"
+    '    End If
+    'End Sub
+
+    'Private Sub rdoQuasi_CheckedChanged(sender As Object, e As EventArgs) Handles rdoQuasi.CheckedChanged
+    '    If rdoQuasi.Checked Then
+    '        dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag = "Quasi"
+    '    End If
+    'End Sub
+
+    'Private Sub rdoQuasiPoisson_CheckedChanged(sender As Object, e As EventArgs) Handles rdoQuasiPoisson.CheckedChanged
+    '    If rdoQuasiPoisson.Checked Then
+    '        dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag = "Quasipoisson"
+    '    End If
+    'End Sub
+
+    'Private Sub rdoQuasiBinomial_CheckedChanged(sender As Object, e As EventArgs) Handles rdoQuasiBinomial.CheckedChanged
+    '    If rdoQuasiBinomial.Checked Then
+    '        dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag = "Quasibinomial"
+    '    End If
+    'End Sub
 
     Private Sub rdoCauchit_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCauchit.CheckedChanged, rdocloglog.CheckedChanged, rdoIdentity.CheckedChanged, rdoInverse.CheckedChanged, rdoLog.CheckedChanged, rdoLogit.CheckedChanged, rdoMuSquaredInverse.CheckedChanged, rdoProbit.CheckedChanged, rdoSqrt.CheckedChanged
         LinkFunction()

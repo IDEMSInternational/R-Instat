@@ -542,7 +542,7 @@ to variate</value>
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Two Variable Modelling</value>
+    <value>Simple Regression</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgRegressionSimple</value>
