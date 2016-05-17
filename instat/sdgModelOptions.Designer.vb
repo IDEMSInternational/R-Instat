@@ -22,7 +22,6 @@ Partial Class sdgModelOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.tbDistribution = New System.Windows.Forms.TabPage()
         Me.grpLinkFunctions = New System.Windows.Forms.GroupBox()
         Me.rdocloglog = New System.Windows.Forms.RadioButton()
         Me.rdoSqrt = New System.Windows.Forms.RadioButton()
@@ -33,35 +32,19 @@ Partial Class sdgModelOptions
         Me.rdoLogit = New System.Windows.Forms.RadioButton()
         Me.rdoLog = New System.Windows.Forms.RadioButton()
         Me.rdoIdentity = New System.Windows.Forms.RadioButton()
-        Me.tbFunctions = New System.Windows.Forms.TabPage()
-        Me.grpGeneralFunctions = New System.Windows.Forms.GroupBox()
-        Me.rdoNaturallog = New System.Windows.Forms.RadioButton()
-        Me.nudPower = New System.Windows.Forms.NumericUpDown()
-        Me.rdoPower = New System.Windows.Forms.RadioButton()
-        Me.rdoSquareroot = New System.Windows.Forms.RadioButton()
-        Me.rdoLogBase10 = New System.Windows.Forms.RadioButton()
-        Me.tbRegOptions = New System.Windows.Forms.TabControl()
+        Me.grpDistributions = New System.Windows.Forms.GroupBox()
+        Me.rdoNormal = New System.Windows.Forms.RadioButton()
+        Me.rdoPoisson = New System.Windows.Forms.RadioButton()
+        Me.rdoBinomial = New System.Windows.Forms.RadioButton()
+        Me.rdoQuasiBinomial = New System.Windows.Forms.RadioButton()
+        Me.rdoQuasiPoisson = New System.Windows.Forms.RadioButton()
+        Me.rdoQuasi = New System.Windows.Forms.RadioButton()
+        Me.rdoInverseGaussian = New System.Windows.Forms.RadioButton()
+        Me.rdoGamma = New System.Windows.Forms.RadioButton()
         Me.ucrButtonsSDGModelOptions = New instat.ucrButtonsSubdialogue()
-        Me.tbDistribution.SuspendLayout()
         Me.grpLinkFunctions.SuspendLayout()
-        Me.tbFunctions.SuspendLayout()
-        Me.grpGeneralFunctions.SuspendLayout()
-        CType(Me.nudPower, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tbRegOptions.SuspendLayout()
+        Me.grpDistributions.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'tbDistribution
-        '
-        Me.tbDistribution.Controls.Add(Me.grpLinkFunctions)
-        Me.tbDistribution.Location = New System.Drawing.Point(4, 22)
-        Me.tbDistribution.Name = "tbDistribution"
-        Me.tbDistribution.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbDistribution.Size = New System.Drawing.Size(193, 153)
-        Me.tbDistribution.TabIndex = 2
-        Me.tbDistribution.Tag = "Distribution"
-        Me.tbDistribution.Text = "Distribution"
-        Me.tbDistribution.UseVisualStyleBackColor = True
-        Me.tbDistribution.UseWaitCursor = True
         '
         'grpLinkFunctions
         '
@@ -74,24 +57,22 @@ Partial Class sdgModelOptions
         Me.grpLinkFunctions.Controls.Add(Me.rdoLogit)
         Me.grpLinkFunctions.Controls.Add(Me.rdoLog)
         Me.grpLinkFunctions.Controls.Add(Me.rdoIdentity)
-        Me.grpLinkFunctions.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.grpLinkFunctions.Location = New System.Drawing.Point(7, 7)
+        Me.grpLinkFunctions.Location = New System.Drawing.Point(12, 129)
         Me.grpLinkFunctions.Name = "grpLinkFunctions"
-        Me.grpLinkFunctions.Size = New System.Drawing.Size(181, 142)
-        Me.grpLinkFunctions.TabIndex = 0
+        Me.grpLinkFunctions.Size = New System.Drawing.Size(229, 87)
+        Me.grpLinkFunctions.TabIndex = 2
         Me.grpLinkFunctions.TabStop = False
         Me.grpLinkFunctions.Tag = "Link_Functions"
         Me.grpLinkFunctions.Text = "Link Functions"
-        Me.grpLinkFunctions.UseWaitCursor = True
         '
         'rdocloglog
         '
         Me.rdocloglog.AutoSize = True
         Me.rdocloglog.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdocloglog.Location = New System.Drawing.Point(116, 19)
+        Me.rdocloglog.Location = New System.Drawing.Point(77, 22)
         Me.rdocloglog.Name = "rdocloglog"
         Me.rdocloglog.Size = New System.Drawing.Size(59, 17)
-        Me.rdocloglog.TabIndex = 5
+        Me.rdocloglog.TabIndex = 23
         Me.rdocloglog.TabStop = True
         Me.rdocloglog.Tag = "cloglog"
         Me.rdocloglog.Text = "cloglog"
@@ -102,10 +83,10 @@ Partial Class sdgModelOptions
         '
         Me.rdoSqrt.AutoSize = True
         Me.rdoSqrt.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoSqrt.Location = New System.Drawing.Point(116, 42)
+        Me.rdoSqrt.Location = New System.Drawing.Point(77, 45)
         Me.rdoSqrt.Name = "rdoSqrt"
         Me.rdoSqrt.Size = New System.Drawing.Size(44, 17)
-        Me.rdoSqrt.TabIndex = 6
+        Me.rdoSqrt.TabIndex = 24
         Me.rdoSqrt.TabStop = True
         Me.rdoSqrt.Tag = "Sqrt"
         Me.rdoSqrt.Text = "Sqrt"
@@ -116,10 +97,10 @@ Partial Class sdgModelOptions
         '
         Me.rdoMuSquaredInverse.AutoSize = True
         Me.rdoMuSquaredInverse.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoMuSquaredInverse.Location = New System.Drawing.Point(116, 60)
+        Me.rdoMuSquaredInverse.Location = New System.Drawing.Point(77, 64)
         Me.rdoMuSquaredInverse.Name = "rdoMuSquaredInverse"
         Me.rdoMuSquaredInverse.Size = New System.Drawing.Size(62, 17)
-        Me.rdoMuSquaredInverse.TabIndex = 7
+        Me.rdoMuSquaredInverse.TabIndex = 25
         Me.rdoMuSquaredInverse.TabStop = True
         Me.rdoMuSquaredInverse.Tag = "1/mu^2"
         Me.rdoMuSquaredInverse.Text = "1/mu^2"
@@ -130,10 +111,10 @@ Partial Class sdgModelOptions
         '
         Me.rdoInverse.AutoSize = True
         Me.rdoInverse.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoInverse.Location = New System.Drawing.Point(116, 82)
+        Me.rdoInverse.Location = New System.Drawing.Point(150, 64)
         Me.rdoInverse.Name = "rdoInverse"
         Me.rdoInverse.Size = New System.Drawing.Size(60, 17)
-        Me.rdoInverse.TabIndex = 8
+        Me.rdoInverse.TabIndex = 26
         Me.rdoInverse.TabStop = True
         Me.rdoInverse.Tag = "Inverse"
         Me.rdoInverse.Text = "Inverse"
@@ -144,10 +125,10 @@ Partial Class sdgModelOptions
         '
         Me.rdoCauchit.AutoSize = True
         Me.rdoCauchit.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoCauchit.Location = New System.Drawing.Point(9, 117)
+        Me.rdoCauchit.Location = New System.Drawing.Point(149, 22)
         Me.rdoCauchit.Name = "rdoCauchit"
         Me.rdoCauchit.Size = New System.Drawing.Size(61, 17)
-        Me.rdoCauchit.TabIndex = 4
+        Me.rdoCauchit.TabIndex = 22
         Me.rdoCauchit.TabStop = True
         Me.rdoCauchit.Tag = "Cauchit"
         Me.rdoCauchit.Text = "Cauchit"
@@ -158,10 +139,10 @@ Partial Class sdgModelOptions
         '
         Me.rdoProbit.AutoSize = True
         Me.rdoProbit.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoProbit.Location = New System.Drawing.Point(9, 94)
+        Me.rdoProbit.Location = New System.Drawing.Point(150, 45)
         Me.rdoProbit.Name = "rdoProbit"
         Me.rdoProbit.Size = New System.Drawing.Size(52, 17)
-        Me.rdoProbit.TabIndex = 3
+        Me.rdoProbit.TabIndex = 21
         Me.rdoProbit.TabStop = True
         Me.rdoProbit.Tag = "Probit"
         Me.rdoProbit.Text = "Probit"
@@ -172,10 +153,10 @@ Partial Class sdgModelOptions
         '
         Me.rdoLogit.AutoSize = True
         Me.rdoLogit.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoLogit.Location = New System.Drawing.Point(9, 71)
+        Me.rdoLogit.Location = New System.Drawing.Point(9, 66)
         Me.rdoLogit.Name = "rdoLogit"
         Me.rdoLogit.Size = New System.Drawing.Size(48, 17)
-        Me.rdoLogit.TabIndex = 2
+        Me.rdoLogit.TabIndex = 20
         Me.rdoLogit.TabStop = True
         Me.rdoLogit.Tag = "Logit"
         Me.rdoLogit.Text = "Logit"
@@ -186,10 +167,10 @@ Partial Class sdgModelOptions
         '
         Me.rdoLog.AutoSize = True
         Me.rdoLog.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoLog.Location = New System.Drawing.Point(9, 48)
+        Me.rdoLog.Location = New System.Drawing.Point(9, 45)
         Me.rdoLog.Name = "rdoLog"
         Me.rdoLog.Size = New System.Drawing.Size(43, 17)
-        Me.rdoLog.TabIndex = 1
+        Me.rdoLog.TabIndex = 19
         Me.rdoLog.TabStop = True
         Me.rdoLog.Tag = "Log"
         Me.rdoLog.Text = "Log"
@@ -200,113 +181,133 @@ Partial Class sdgModelOptions
         '
         Me.rdoIdentity.AutoSize = True
         Me.rdoIdentity.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.rdoIdentity.Location = New System.Drawing.Point(9, 24)
+        Me.rdoIdentity.Location = New System.Drawing.Point(9, 21)
         Me.rdoIdentity.Name = "rdoIdentity"
         Me.rdoIdentity.Size = New System.Drawing.Size(59, 17)
-        Me.rdoIdentity.TabIndex = 0
+        Me.rdoIdentity.TabIndex = 18
         Me.rdoIdentity.TabStop = True
         Me.rdoIdentity.Tag = "Identity"
         Me.rdoIdentity.Text = "Identity"
         Me.rdoIdentity.UseVisualStyleBackColor = True
         Me.rdoIdentity.UseWaitCursor = True
         '
-        'tbFunctions
+        'grpDistributions
         '
-        Me.tbFunctions.Controls.Add(Me.grpGeneralFunctions)
-        Me.tbFunctions.Location = New System.Drawing.Point(4, 22)
-        Me.tbFunctions.Name = "tbFunctions"
-        Me.tbFunctions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbFunctions.Size = New System.Drawing.Size(193, 153)
-        Me.tbFunctions.TabIndex = 1
-        Me.tbFunctions.Tag = "Functions"
-        Me.tbFunctions.Text = "Functions"
-        Me.tbFunctions.UseVisualStyleBackColor = True
+        Me.grpDistributions.Controls.Add(Me.rdoGamma)
+        Me.grpDistributions.Controls.Add(Me.rdoInverseGaussian)
+        Me.grpDistributions.Controls.Add(Me.rdoQuasi)
+        Me.grpDistributions.Controls.Add(Me.rdoQuasiPoisson)
+        Me.grpDistributions.Controls.Add(Me.rdoQuasiBinomial)
+        Me.grpDistributions.Controls.Add(Me.rdoBinomial)
+        Me.grpDistributions.Controls.Add(Me.rdoPoisson)
+        Me.grpDistributions.Controls.Add(Me.rdoNormal)
+        Me.grpDistributions.Location = New System.Drawing.Point(12, 13)
+        Me.grpDistributions.Name = "grpDistributions"
+        Me.grpDistributions.Size = New System.Drawing.Size(229, 110)
+        Me.grpDistributions.TabIndex = 3
+        Me.grpDistributions.TabStop = False
+        Me.grpDistributions.Tag = "Distributions"
+        Me.grpDistributions.Text = "Distributions"
         '
-        'grpGeneralFunctions
+        'rdoNormal
         '
-        Me.grpGeneralFunctions.Controls.Add(Me.rdoNaturallog)
-        Me.grpGeneralFunctions.Controls.Add(Me.nudPower)
-        Me.grpGeneralFunctions.Controls.Add(Me.rdoPower)
-        Me.grpGeneralFunctions.Controls.Add(Me.rdoSquareroot)
-        Me.grpGeneralFunctions.Controls.Add(Me.rdoLogBase10)
-        Me.grpGeneralFunctions.Location = New System.Drawing.Point(7, 9)
-        Me.grpGeneralFunctions.Name = "grpGeneralFunctions"
-        Me.grpGeneralFunctions.Size = New System.Drawing.Size(181, 134)
-        Me.grpGeneralFunctions.TabIndex = 0
-        Me.grpGeneralFunctions.TabStop = False
-        Me.grpGeneralFunctions.Tag = "General_Functions"
-        Me.grpGeneralFunctions.Text = "General Functions"
+        Me.rdoNormal.AutoSize = True
+        Me.rdoNormal.Location = New System.Drawing.Point(9, 19)
+        Me.rdoNormal.Name = "rdoNormal"
+        Me.rdoNormal.Size = New System.Drawing.Size(58, 17)
+        Me.rdoNormal.TabIndex = 0
+        Me.rdoNormal.TabStop = True
+        Me.rdoNormal.Tag = "Normal"
+        Me.rdoNormal.Text = "Normal"
+        Me.rdoNormal.UseVisualStyleBackColor = True
         '
-        'rdoNaturallog
+        'rdoPoisson
         '
-        Me.rdoNaturallog.AutoSize = True
-        Me.rdoNaturallog.Location = New System.Drawing.Point(9, 24)
-        Me.rdoNaturallog.Name = "rdoNaturallog"
-        Me.rdoNaturallog.Size = New System.Drawing.Size(76, 17)
-        Me.rdoNaturallog.TabIndex = 0
-        Me.rdoNaturallog.TabStop = True
-        Me.rdoNaturallog.Tag = "Natural_log"
-        Me.rdoNaturallog.Text = "Natural log"
-        Me.rdoNaturallog.UseVisualStyleBackColor = True
+        Me.rdoPoisson.AutoSize = True
+        Me.rdoPoisson.Location = New System.Drawing.Point(9, 64)
+        Me.rdoPoisson.Name = "rdoPoisson"
+        Me.rdoPoisson.Size = New System.Drawing.Size(62, 17)
+        Me.rdoPoisson.TabIndex = 1
+        Me.rdoPoisson.TabStop = True
+        Me.rdoPoisson.Tag = "Poisson"
+        Me.rdoPoisson.Text = "Poisson"
+        Me.rdoPoisson.UseVisualStyleBackColor = True
         '
-        'nudPower
+        'rdoBinomial
         '
-        Me.nudPower.Location = New System.Drawing.Point(86, 92)
-        Me.nudPower.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.nudPower.Name = "nudPower"
-        Me.nudPower.Size = New System.Drawing.Size(41, 20)
-        Me.nudPower.TabIndex = 4
-        Me.nudPower.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.rdoBinomial.AutoSize = True
+        Me.rdoBinomial.Location = New System.Drawing.Point(9, 84)
+        Me.rdoBinomial.Name = "rdoBinomial"
+        Me.rdoBinomial.Size = New System.Drawing.Size(64, 17)
+        Me.rdoBinomial.TabIndex = 2
+        Me.rdoBinomial.TabStop = True
+        Me.rdoBinomial.Tag = "Binomial"
+        Me.rdoBinomial.Text = "Binomial"
+        Me.rdoBinomial.UseVisualStyleBackColor = True
         '
-        'rdoPower
+        'rdoQuasiBinomial
         '
-        Me.rdoPower.AutoSize = True
-        Me.rdoPower.Location = New System.Drawing.Point(10, 93)
-        Me.rdoPower.Name = "rdoPower"
-        Me.rdoPower.Size = New System.Drawing.Size(55, 17)
-        Me.rdoPower.TabIndex = 3
-        Me.rdoPower.TabStop = True
-        Me.rdoPower.Tag = "Power"
-        Me.rdoPower.Text = "Power"
-        Me.rdoPower.UseVisualStyleBackColor = True
+        Me.rdoQuasiBinomial.AutoSize = True
+        Me.rdoQuasiBinomial.Location = New System.Drawing.Point(110, 87)
+        Me.rdoQuasiBinomial.Name = "rdoQuasiBinomial"
+        Me.rdoQuasiBinomial.Size = New System.Drawing.Size(94, 17)
+        Me.rdoQuasiBinomial.TabIndex = 3
+        Me.rdoQuasiBinomial.TabStop = True
+        Me.rdoQuasiBinomial.Tag = "Quasi_Binomial"
+        Me.rdoQuasiBinomial.Text = "Quasi Binomial"
+        Me.rdoQuasiBinomial.UseVisualStyleBackColor = True
         '
-        'rdoSquareroot
+        'rdoQuasiPoisson
         '
-        Me.rdoSquareroot.AutoSize = True
-        Me.rdoSquareroot.Location = New System.Drawing.Point(9, 70)
-        Me.rdoSquareroot.Name = "rdoSquareroot"
-        Me.rdoSquareroot.Size = New System.Drawing.Size(80, 17)
-        Me.rdoSquareroot.TabIndex = 2
-        Me.rdoSquareroot.TabStop = True
-        Me.rdoSquareroot.Tag = "Square_root"
-        Me.rdoSquareroot.Text = "Square root"
-        Me.rdoSquareroot.UseVisualStyleBackColor = True
+        Me.rdoQuasiPoisson.AutoSize = True
+        Me.rdoQuasiPoisson.Location = New System.Drawing.Point(110, 65)
+        Me.rdoQuasiPoisson.Name = "rdoQuasiPoisson"
+        Me.rdoQuasiPoisson.Size = New System.Drawing.Size(92, 17)
+        Me.rdoQuasiPoisson.TabIndex = 4
+        Me.rdoQuasiPoisson.TabStop = True
+        Me.rdoQuasiPoisson.Tag = "Quasi_Poisson"
+        Me.rdoQuasiPoisson.Text = "Quasi Poisson"
+        Me.rdoQuasiPoisson.UseVisualStyleBackColor = True
         '
-        'rdoLogBase10
+        'rdoQuasi
         '
-        Me.rdoLogBase10.AutoSize = True
-        Me.rdoLogBase10.Location = New System.Drawing.Point(9, 47)
-        Me.rdoLogBase10.Name = "rdoLogBase10"
-        Me.rdoLogBase10.Size = New System.Drawing.Size(85, 17)
-        Me.rdoLogBase10.TabIndex = 1
-        Me.rdoLogBase10.TabStop = True
-        Me.rdoLogBase10.Tag = "Log_Base_10"
-        Me.rdoLogBase10.Text = "Log Base 10"
-        Me.rdoLogBase10.UseVisualStyleBackColor = True
+        Me.rdoQuasi.AutoSize = True
+        Me.rdoQuasi.Location = New System.Drawing.Point(110, 43)
+        Me.rdoQuasi.Name = "rdoQuasi"
+        Me.rdoQuasi.Size = New System.Drawing.Size(52, 17)
+        Me.rdoQuasi.TabIndex = 5
+        Me.rdoQuasi.TabStop = True
+        Me.rdoQuasi.Tag = "Quasi"
+        Me.rdoQuasi.Text = "Quasi"
+        Me.rdoQuasi.UseVisualStyleBackColor = True
         '
-        'tbRegOptions
+        'rdoInverseGaussian
         '
-        Me.tbRegOptions.Controls.Add(Me.tbFunctions)
-        Me.tbRegOptions.Controls.Add(Me.tbDistribution)
-        Me.tbRegOptions.Location = New System.Drawing.Point(12, 12)
-        Me.tbRegOptions.Name = "tbRegOptions"
-        Me.tbRegOptions.SelectedIndex = 0
-        Me.tbRegOptions.Size = New System.Drawing.Size(201, 179)
-        Me.tbRegOptions.TabIndex = 0
+        Me.rdoInverseGaussian.AutoSize = True
+        Me.rdoInverseGaussian.Location = New System.Drawing.Point(110, 20)
+        Me.rdoInverseGaussian.Name = "rdoInverseGaussian"
+        Me.rdoInverseGaussian.Size = New System.Drawing.Size(107, 17)
+        Me.rdoInverseGaussian.TabIndex = 6
+        Me.rdoInverseGaussian.TabStop = True
+        Me.rdoInverseGaussian.Tag = "Inverse_Gaussian"
+        Me.rdoInverseGaussian.Text = "Inverse Gaussian"
+        Me.rdoInverseGaussian.UseVisualStyleBackColor = True
+        '
+        'rdoGamma
+        '
+        Me.rdoGamma.AutoSize = True
+        Me.rdoGamma.Location = New System.Drawing.Point(9, 42)
+        Me.rdoGamma.Name = "rdoGamma"
+        Me.rdoGamma.Size = New System.Drawing.Size(61, 17)
+        Me.rdoGamma.TabIndex = 7
+        Me.rdoGamma.TabStop = True
+        Me.rdoGamma.Tag = "Gamma"
+        Me.rdoGamma.Text = "Gamma"
+        Me.rdoGamma.UseVisualStyleBackColor = True
         '
         'ucrButtonsSDGModelOptions
         '
-        Me.ucrButtonsSDGModelOptions.Location = New System.Drawing.Point(41, 192)
+        Me.ucrButtonsSDGModelOptions.Location = New System.Drawing.Point(41, 217)
         Me.ucrButtonsSDGModelOptions.Name = "ucrButtonsSDGModelOptions"
         Me.ucrButtonsSDGModelOptions.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsSDGModelOptions.TabIndex = 1
@@ -315,8 +316,9 @@ Partial Class sdgModelOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(219, 227)
-        Me.Controls.Add(Me.tbRegOptions)
+        Me.ClientSize = New System.Drawing.Size(246, 250)
+        Me.Controls.Add(Me.grpDistributions)
+        Me.Controls.Add(Me.grpLinkFunctions)
         Me.Controls.Add(Me.ucrButtonsSDGModelOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -324,28 +326,15 @@ Partial Class sdgModelOptions
         Me.Name = "sdgModelOptions"
         Me.Tag = "Model_Options"
         Me.Text = "Model Options"
-        Me.tbDistribution.ResumeLayout(False)
         Me.grpLinkFunctions.ResumeLayout(False)
         Me.grpLinkFunctions.PerformLayout()
-        Me.tbFunctions.ResumeLayout(False)
-        Me.grpGeneralFunctions.ResumeLayout(False)
-        Me.grpGeneralFunctions.PerformLayout()
-        CType(Me.nudPower, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tbRegOptions.ResumeLayout(False)
+        Me.grpDistributions.ResumeLayout(False)
+        Me.grpDistributions.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents ucrButtonsSDGModelOptions As ucrButtonsSubdialogue
-    Friend WithEvents tbDistribution As TabPage
-    Friend WithEvents tbFunctions As TabPage
-    Friend WithEvents tbRegOptions As TabControl
-    Friend WithEvents nudPower As NumericUpDown
-    Friend WithEvents grpGeneralFunctions As GroupBox
-    Friend WithEvents rdoNaturallog As RadioButton
-    Friend WithEvents rdoPower As RadioButton
-    Friend WithEvents rdoSquareroot As RadioButton
-    Friend WithEvents rdoLogBase10 As RadioButton
     Friend WithEvents grpLinkFunctions As GroupBox
     Friend WithEvents rdocloglog As RadioButton
     Friend WithEvents rdoSqrt As RadioButton
@@ -356,4 +345,13 @@ Partial Class sdgModelOptions
     Friend WithEvents rdoLogit As RadioButton
     Friend WithEvents rdoLog As RadioButton
     Friend WithEvents rdoIdentity As RadioButton
+    Friend WithEvents grpDistributions As GroupBox
+    Friend WithEvents rdoQuasi As RadioButton
+    Friend WithEvents rdoQuasiPoisson As RadioButton
+    Friend WithEvents rdoQuasiBinomial As RadioButton
+    Friend WithEvents rdoBinomial As RadioButton
+    Friend WithEvents rdoPoisson As RadioButton
+    Friend WithEvents rdoNormal As RadioButton
+    Friend WithEvents rdoGamma As RadioButton
+    Friend WithEvents rdoInverseGaussian As RadioButton
 End Class
