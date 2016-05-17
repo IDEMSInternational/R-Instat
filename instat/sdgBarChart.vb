@@ -29,7 +29,7 @@
     End Sub
 
     Private Sub nudWidth_TextChanged(sender As Object, e As EventArgs) Handles nudWidth.TextChanged
-        If nudWidth.Value <> "" Then
+        If nudWidth.Value.ToString() <> "" Then
             clsBarChartFunction.AddParameter("width", nudWidth.Value)
         Else
             clsBarChartFunction.RemoveParameterByName("width")
