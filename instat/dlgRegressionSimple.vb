@@ -19,6 +19,7 @@ Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
     Public clsModel As New ROperator
     Public clsRConvert, clsRCIFunction As New RFunction
+    'Public clsDists As New ucrDistributions
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
@@ -40,6 +41,7 @@ Public Class dlgRegressionSimple
         ucrBase.iHelpTopicID = 171
         sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        'sdgModelOptions.SetDistributions(clsDists)
         sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
     End Sub
 
@@ -110,11 +112,13 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
         ResponseConvert()
+        sdgModelOptions.ResponseConvert2()
         TestOKEnabled()
     End Sub
 
     Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
         ResponseConvert()
+        sdgModelOptions.ResponseConvert2()
     End Sub
 
     Private Sub ExplanatoryFunctionSelect()
@@ -172,8 +176,10 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+        'sdgModelOptions.ucrFamily2.clsCurrDistribution.strNameTag = ucrFamily.clsCurrDistribution.strNameTag
+        sdgModelOptions.ucrFamily2.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily2.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
-        'TODO:   Include multinomial as an option And the appripriate function
+        'TODO:   Include multinomial as an option And the appropriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
             ucrBase.clsRsyntax.SetFunction("lm")
             ucrBase.clsRsyntax.RemoveParameter("family")
@@ -186,14 +192,7 @@ Public Class dlgRegressionSimple
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
-    End Sub
-
-    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
-
+        ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily2.cboDistributions.SelectedIndex
     End Sub
 
     Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
