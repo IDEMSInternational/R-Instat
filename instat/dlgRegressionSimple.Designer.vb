@@ -165,7 +165,7 @@ Partial Class dlgRegressionSimple
         Me.Name = "dlgRegressionSimple"
         Me.ShowIcon = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
-        Me.Tag = "Simple_Regression"
+        Me.Tag = "Two_Variable_Modelling"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
