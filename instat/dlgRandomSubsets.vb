@@ -59,7 +59,7 @@ Public Class dlgRandomSubsets
 
     'set defaults for the dialog
     Private Sub SetDefaults()
-        'ucrNewDataFrameName.SetName("RandomSubset")
+
         ucrSelectorRandomSubsets.Reset()
         ucrSelectorRandomSubsets.Focus()
         ucrReceiverSelected.Selector = ucrSelectorRandomSubsets
@@ -67,13 +67,15 @@ Public Class dlgRandomSubsets
         chkWithReplacement.Checked = False
         chkSetSeed.Checked = False
         nudNumberOfColumns.Value = 1
-        nudSampleSize.Value = 1
-        nudSeed.Value = 1
-        nudSeed.Minimum = Integer.MinValue
-        nudSeed.Maximum = Integer.MaxValue
-        nudSeed.Visible = False
+        nudNumberOfColumns.Minimum = 1
+        nudNumberOfColumns.Maximum = Integer.MaxValue
+        nudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
+        nudSetSeed.Value = 1
+        nudSetSeed.Minimum = Integer.MinValue
+        nudSetSeed.Maximum = Integer.MaxValue
+        nudSetSeed.Visible = False
         If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrNewDataFrameName.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_Random")
+            ucrNewDataFrameName.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
         End If
     End Sub
     'set what happens when dialog is reopened
@@ -81,11 +83,11 @@ Public Class dlgRandomSubsets
 
     End Sub
     Private Sub ucrNewDataFrameName_NameChanged() Handles ucrNewDataFrameName.NameChanged
-        'If Not ucrNewDataFrameName.IsEmpty Then
-        ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
-        'Else
-        'ucrBase.clsRsyntax.RemoveAssignTo()
-        'End If
+        If Not ucrNewDataFrameName.IsEmpty Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
+        Else
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        End If
         TestOkEnabled()
     End Sub
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
@@ -104,14 +106,14 @@ Public Class dlgRandomSubsets
     End Sub
     Private Sub SetSeedParameters()
         If chkSetSeed.Checked Then
-            nudSeed.Visible = True
-            If nudSeed.Text <> "" Then
-                clsSetSeed.AddParameter("seed", nudSeed.Value)
+            nudSetSeed.Visible = True
+            If nudSetSeed.Text <> "" Then
+                clsSetSeed.AddParameter("seed", nudSetSeed.Value)
             Else
                 clsSetSeed.RemoveParameterByName("seed")
             End If
         Else
-            nudSeed.Visible = False
+            nudSetSeed.Visible = False
             clsSetSeed.RemoveParameterByName("seed")
         End If
     End Sub
@@ -129,7 +131,7 @@ Public Class dlgRandomSubsets
     Private Sub chkSeed_CheckedChanged(sender As Object, e As EventArgs) Handles chkSetSeed.CheckedChanged
         SetSeedParameters()
     End Sub
-    Private Sub nudSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSeed.TextChanged
+    Private Sub nudSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSetSeed.TextChanged
         SetSeedParameters()
     End Sub
     Private Sub nudNumberOfColumns_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberOfColumns.ValueChanged
