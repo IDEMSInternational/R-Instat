@@ -28,7 +28,7 @@ Public Class dlgLabels
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverLabels.IsEmpty() = False Then
+        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete(0) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -60,6 +60,7 @@ Public Class dlgLabels
 
     Private Sub ucrFactorLabels_GridContentChanged() Handles ucrFactorLabels.GridContentChanged
         ucrBase.clsRsyntax.AddParameter("new_levels", ucrFactorLabels.GetColumnInFactorSheet(iColumn:=0))
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverLabels_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverLabels.SelectionChanged
@@ -78,9 +79,11 @@ Public Class dlgLabels
 
     Private Sub cmdAddLevel_Click(sender As Object, e As EventArgs) Handles cmdAddLevel.Click
         ucrFactorLabels.AddLevel()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrFactorLabels_GridVisibleChanged() Handles ucrFactorLabels.GridVisibleChanged
         cmdAddLevel.Enabled = ucrFactorLabels.grdFactorData.Visible
+        TestOKEnabled()
     End Sub
 End Class
