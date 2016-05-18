@@ -29,15 +29,15 @@ Partial Class dlgRandomSubsets
         Me.nudNumberOfColumns = New System.Windows.Forms.NumericUpDown()
         Me.chkWithReplacement = New System.Windows.Forms.CheckBox()
         Me.lblNewDataFrameName = New System.Windows.Forms.Label()
-        Me.nudSeed = New System.Windows.Forms.NumericUpDown()
+        Me.nudSetSeed = New System.Windows.Forms.NumericUpDown()
         Me.chkSetSeed = New System.Windows.Forms.CheckBox()
-        Me.ucrNewDataFrameName = New instat.ucrInputComboBox()
+        Me.ucrNewDataFrameName = New instat.ucrInputTextBox()
         Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
         Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         CType(Me.nudSampleSize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudNumberOfColumns, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudSeed, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSetSeed, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -53,7 +53,7 @@ Partial Class dlgRandomSubsets
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(10, 217)
+        Me.lblSampleSize.Location = New System.Drawing.Point(255, 137)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(65, 13)
         Me.lblSampleSize.TabIndex = 6
@@ -63,23 +63,23 @@ Partial Class dlgRandomSubsets
         'lblNumberOfColumns
         '
         Me.lblNumberOfColumns.AutoSize = True
-        Me.lblNumberOfColumns.Location = New System.Drawing.Point(198, 215)
+        Me.lblNumberOfColumns.Location = New System.Drawing.Point(255, 166)
         Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
-        Me.lblNumberOfColumns.Size = New System.Drawing.Size(101, 13)
+        Me.lblNumberOfColumns.Size = New System.Drawing.Size(99, 13)
         Me.lblNumberOfColumns.TabIndex = 8
-        Me.lblNumberOfColumns.Tag = "Number_Of_Columns"
-        Me.lblNumberOfColumns.Text = "Number Of Columns"
+        Me.lblNumberOfColumns.Tag = "Number_of_Columns"
+        Me.lblNumberOfColumns.Text = "Number of Columns"
         '
         'nudSampleSize
         '
-        Me.nudSampleSize.Location = New System.Drawing.Point(85, 209)
+        Me.nudSampleSize.Location = New System.Drawing.Point(336, 130)
         Me.nudSampleSize.Name = "nudSampleSize"
         Me.nudSampleSize.Size = New System.Drawing.Size(53, 20)
         Me.nudSampleSize.TabIndex = 11
         '
         'nudNumberOfColumns
         '
-        Me.nudNumberOfColumns.Location = New System.Drawing.Point(301, 207)
+        Me.nudNumberOfColumns.Location = New System.Drawing.Point(362, 164)
         Me.nudNumberOfColumns.Name = "nudNumberOfColumns"
         Me.nudNumberOfColumns.Size = New System.Drawing.Size(49, 20)
         Me.nudNumberOfColumns.TabIndex = 12
@@ -87,7 +87,7 @@ Partial Class dlgRandomSubsets
         'chkWithReplacement
         '
         Me.chkWithReplacement.AutoSize = True
-        Me.chkWithReplacement.Location = New System.Drawing.Point(10, 242)
+        Me.chkWithReplacement.Location = New System.Drawing.Point(10, 214)
         Me.chkWithReplacement.Name = "chkWithReplacement"
         Me.chkWithReplacement.Size = New System.Drawing.Size(114, 17)
         Me.chkWithReplacement.TabIndex = 13
@@ -98,24 +98,24 @@ Partial Class dlgRandomSubsets
         'lblNewDataFrameName
         '
         Me.lblNewDataFrameName.AutoSize = True
-        Me.lblNewDataFrameName.Location = New System.Drawing.Point(10, 273)
+        Me.lblNewDataFrameName.Location = New System.Drawing.Point(10, 248)
         Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
-        Me.lblNewDataFrameName.Size = New System.Drawing.Size(115, 13)
+        Me.lblNewDataFrameName.Size = New System.Drawing.Size(118, 13)
         Me.lblNewDataFrameName.TabIndex = 15
-        Me.lblNewDataFrameName.Tag = "New_DataFrame_Name"
-        Me.lblNewDataFrameName.Text = "New DataFrame Name"
+        Me.lblNewDataFrameName.Tag = "New_Data_Frame_Name"
+        Me.lblNewDataFrameName.Text = "New Data Frame Name"
         '
-        'nudSeed
+        'nudSetSeed
         '
-        Me.nudSeed.Location = New System.Drawing.Point(321, 129)
-        Me.nudSeed.Name = "nudSeed"
-        Me.nudSeed.Size = New System.Drawing.Size(50, 20)
-        Me.nudSeed.TabIndex = 16
+        Me.nudSetSeed.Location = New System.Drawing.Point(202, 211)
+        Me.nudSetSeed.Name = "nudSetSeed"
+        Me.nudSetSeed.Size = New System.Drawing.Size(50, 20)
+        Me.nudSetSeed.TabIndex = 16
         '
         'chkSetSeed
         '
         Me.chkSetSeed.AutoSize = True
-        Me.chkSetSeed.Location = New System.Drawing.Point(255, 131)
+        Me.chkSetSeed.Location = New System.Drawing.Point(149, 214)
         Me.chkSetSeed.Name = "chkSetSeed"
         Me.chkSetSeed.Size = New System.Drawing.Size(51, 17)
         Me.chkSetSeed.TabIndex = 17
@@ -125,7 +125,7 @@ Partial Class dlgRandomSubsets
         '
         'ucrNewDataFrameName
         '
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(146, 264)
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(131, 243)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
         Me.ucrNewDataFrameName.Size = New System.Drawing.Size(137, 21)
         Me.ucrNewDataFrameName.TabIndex = 18
@@ -149,7 +149,7 @@ Partial Class dlgRandomSubsets
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 299)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 272)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(400, 53)
         Me.ucrBase.TabIndex = 10
@@ -158,10 +158,10 @@ Partial Class dlgRandomSubsets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 363)
+        Me.ClientSize = New System.Drawing.Size(422, 336)
         Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.chkSetSeed)
-        Me.Controls.Add(Me.nudSeed)
+        Me.Controls.Add(Me.nudSetSeed)
         Me.Controls.Add(Me.lblNewDataFrameName)
         Me.Controls.Add(Me.chkWithReplacement)
         Me.Controls.Add(Me.nudNumberOfColumns)
@@ -179,7 +179,7 @@ Partial Class dlgRandomSubsets
         Me.Text = "Random Subsets"
         CType(Me.nudSampleSize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudNumberOfColumns, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudSeed, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSetSeed, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -195,7 +195,7 @@ Partial Class dlgRandomSubsets
     Friend WithEvents nudNumberOfColumns As NumericUpDown
     Friend WithEvents chkWithReplacement As CheckBox
     Friend WithEvents lblNewDataFrameName As Label
-    Friend WithEvents nudSeed As NumericUpDown
+    Friend WithEvents nudSetSeed As NumericUpDown
     Friend WithEvents chkSetSeed As CheckBox
-    Friend WithEvents ucrNewDataFrameName As ucrInputComboBox
+    Friend WithEvents ucrNewDataFrameName As ucrInputTextBox
 End Class
