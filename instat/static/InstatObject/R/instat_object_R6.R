@@ -492,7 +492,7 @@ instat_object$set("public", "insert_column_in_data", function(data_name, col_dat
 # )
 
 instat_object$set("public", "reorder_columns_in_data", function(data_name, col_order){
-  self$get_data_objects(data_name)$order_columns_in_data(col_order = col_order)
+  self$get_data_objects(data_name)$reorder_columns_in_data(col_order = col_order)
 }
 )
 
