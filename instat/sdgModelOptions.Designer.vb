@@ -33,7 +33,7 @@ Partial Class sdgModelOptions
         Me.rdoLog = New System.Windows.Forms.RadioButton()
         Me.rdoIdentity = New System.Windows.Forms.RadioButton()
         Me.ucrButtonsSDGModelOptions = New instat.ucrButtonsSubdialogue()
-        Me.ucrFamily2 = New instat.ucrDistributions()
+        Me.ucrFamily = New instat.ucrDistributions()
         Me.grpLinkFunctions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -189,19 +189,19 @@ Partial Class sdgModelOptions
         Me.ucrButtonsSDGModelOptions.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsSDGModelOptions.TabIndex = 1
         '
-        'ucrFamily2
+        'ucrFamily
         '
-        Me.ucrFamily2.Location = New System.Drawing.Point(12, 12)
-        Me.ucrFamily2.Name = "ucrFamily2"
-        Me.ucrFamily2.Size = New System.Drawing.Size(225, 43)
-        Me.ucrFamily2.TabIndex = 3
+        Me.ucrFamily.Location = New System.Drawing.Point(12, 12)
+        Me.ucrFamily.Name = "ucrFamily"
+        Me.ucrFamily.Size = New System.Drawing.Size(225, 43)
+        Me.ucrFamily.TabIndex = 3
         '
         'sdgModelOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(246, 202)
-        Me.Controls.Add(Me.ucrFamily2)
+        Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.grpLinkFunctions)
         Me.Controls.Add(Me.ucrButtonsSDGModelOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -227,5 +227,5 @@ Partial Class sdgModelOptions
     Friend WithEvents rdoLogit As RadioButton
     Friend WithEvents rdoLog As RadioButton
     Friend WithEvents rdoIdentity As RadioButton
-    Friend WithEvents ucrFamily2 As ucrDistributions
+    Friend WithEvents ucrFamily As ucrDistributions
 End Class
