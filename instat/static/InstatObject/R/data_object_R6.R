@@ -854,3 +854,12 @@ data_object$set("public", "set_row_names", function(row_names) {
   self$data_changed <- TRUE
 }
 )
+
+data_object$set("public", "set_protected_columns", function(col_names) {
+  if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
+  
+  self$append_to_variables_metadata(col_names, is_protected_label, TRUE)
+  other_cols = self$get_column_names()[!self$get_column_names() %in% col_names]
+  self$append_to_variables_metadata(other_cols, is_protected_label, FALSE)
+}
+)
