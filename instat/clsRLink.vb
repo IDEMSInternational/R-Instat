@@ -168,7 +168,7 @@ Public Class RLink
             Try
                 clsEngine.Evaluate(strScript)
             Catch e As Exception
-                MsgBox("Error occured in attempting to run:" & strScript & vbNewLine & e.Message, MsgBoxStyle.Critical, "Error running R code")
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
             End Try
         ElseIf bReturnOutput = 1 Then
             Try
@@ -176,7 +176,7 @@ Public Class RLink
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
             Catch e As Exception
-                MsgBox("Error occured in attempting to run:" & strScript & vbNewLine & e.Message, MsgBoxStyle.Critical, "Error running R code")
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
             End Try
         Else
             If strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) = -1 Then
@@ -187,7 +187,7 @@ Public Class RLink
                     Try
                         clsEngine.Evaluate(strSplitScript)
                     Catch e As Exception
-                        MsgBox("Error occured in attempting to run:" & strSplitScript & vbNewLine & e.Message, MsgBoxStyle.Critical, "Error running R code")
+                        MsgBox("Error occured in attempting to run:" & vbNewLine & strSplitScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
                     End Try
                 End If
                 strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
@@ -198,14 +198,12 @@ Public Class RLink
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
             Catch e As Exception
-                MsgBox("Error occured in attempting to run:" & strCapturedScript & vbNewLine & e.Message, MsgBoxStyle.Critical, "Error running R code")
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strCapturedScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
             End Try
         End If
         If bOutput Then
-                'txtOutput.Text = txtOutput.Text & strOutput
-                'output format here
-                AppendText(txtOutput, clrOutput, fOutput, strOutput)
-            End If
+            AppendText(txtOutput, clrOutput, fOutput, strOutput)
+        End If
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
