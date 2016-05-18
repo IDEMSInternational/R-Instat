@@ -30,7 +30,7 @@ Partial Class dlgRandomSubsets
         Me.chkWithReplacement = New System.Windows.Forms.CheckBox()
         Me.lblNewDataFrameName = New System.Windows.Forms.Label()
         Me.nudSeed = New System.Windows.Forms.NumericUpDown()
-        Me.chkSeed = New System.Windows.Forms.CheckBox()
+        Me.chkSetSeed = New System.Windows.Forms.CheckBox()
         Me.ucrNewDataFrameName = New instat.ucrInputComboBox()
         Me.ucrReceiverSelected = New instat.ucrReceiverSingle()
         Me.ucrSelectorRandomSubsets = New instat.ucrSelectorByDataFrameAddRemove()
@@ -112,16 +112,16 @@ Partial Class dlgRandomSubsets
         Me.nudSeed.Size = New System.Drawing.Size(50, 20)
         Me.nudSeed.TabIndex = 16
         '
-        'chkSeed
+        'chkSetSeed
         '
-        Me.chkSeed.AutoSize = True
-        Me.chkSeed.Location = New System.Drawing.Point(255, 131)
-        Me.chkSeed.Name = "chkSeed"
-        Me.chkSeed.Size = New System.Drawing.Size(51, 17)
-        Me.chkSeed.TabIndex = 17
-        Me.chkSeed.Tag = "Seed"
-        Me.chkSeed.Text = "Seed"
-        Me.chkSeed.UseVisualStyleBackColor = True
+        Me.chkSetSeed.AutoSize = True
+        Me.chkSetSeed.Location = New System.Drawing.Point(255, 131)
+        Me.chkSetSeed.Name = "chkSetSeed"
+        Me.chkSetSeed.Size = New System.Drawing.Size(51, 17)
+        Me.chkSetSeed.TabIndex = 17
+        Me.chkSetSeed.Tag = "Seed"
+        Me.chkSetSeed.Text = "Seed"
+        Me.chkSetSeed.UseVisualStyleBackColor = True
         '
         'ucrNewDataFrameName
         '
@@ -160,7 +160,7 @@ Partial Class dlgRandomSubsets
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(422, 363)
         Me.Controls.Add(Me.ucrNewDataFrameName)
-        Me.Controls.Add(Me.chkSeed)
+        Me.Controls.Add(Me.chkSetSeed)
         Me.Controls.Add(Me.nudSeed)
         Me.Controls.Add(Me.lblNewDataFrameName)
         Me.Controls.Add(Me.chkWithReplacement)
@@ -196,6 +196,6 @@ Partial Class dlgRandomSubsets
     Friend WithEvents chkWithReplacement As CheckBox
     Friend WithEvents lblNewDataFrameName As Label
     Friend WithEvents nudSeed As NumericUpDown
-    Friend WithEvents chkSeed As CheckBox
+    Friend WithEvents chkSetSeed As CheckBox
     Friend WithEvents ucrNewDataFrameName As ucrInputComboBox
 End Class
