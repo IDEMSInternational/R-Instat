@@ -17,7 +17,6 @@ Imports instat.Translations
 Public Class sdgModelOptions
     Public clsRCIFunction As New RFunction
     Public bFirstLoad As Boolean = True
-    'Public clsDists As ucrDistributions
 
     Private Sub sdgModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -29,16 +28,14 @@ Public Class sdgModelOptions
     End Sub
 
     Public Sub SetDefaults()
-
+        'ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+        dlgRegressionSimple.ResponseConvert(ucrFamily:=ucrFamily)
+        RestrictLink()
     End Sub
 
     Public Sub SetRCIFunction(clsNewFunction As RFunction)
         clsRCIFunction = clsNewFunction
     End Sub
-
-    'Public Sub SetDistributions(clsNewDists As ucrDistributions)
-    '    clsDists = clsNewDists
-    'End Sub
 
     Private Sub ResetLinks()
         rdoIdentity.Checked = False
@@ -62,23 +59,21 @@ Public Class sdgModelOptions
         rdoSqrt.Enabled = False
     End Sub
 
+    Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+        'dlgRegressionSimple.ucrFamily.cboDistributions.SelectedIndex = dlgRegressionSimple.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+    End Sub
+
     Public Sub RestrictLink()
         Dim strFamilyName As String
-        strFamilyName = dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag
+        strFamilyName = ucrFamily.clsCurrDistribution.strNameTag
         ResetLinks()
         If strFamilyName = "Normal" Then
-            'rdoNormal.Checked = True
             rdoIdentity.Enabled = True
             rdoIdentity.Checked = True
             rdoInverse.Enabled = True
             rdoLog.Enabled = True
         End If
         If strFamilyName = "Binomial" Or strFamilyName = "Quasibinomial" Then
-            If strFamilyName = "Binomial" Then
-                ' rdoBinomial.Checked = True
-            Else
-                ' rdoQuasiBinomial.Checked = True
-            End If
             rdoLogit.Enabled = True
             rdoLogit.Checked = True
             rdoCauchit.Enabled = True
@@ -87,25 +82,18 @@ Public Class sdgModelOptions
             rdoProbit.Enabled = True
         End If
         If strFamilyName = "Gamma" Then
-            'rdoGamma.Checked = True
             rdoInverse.Enabled = True
             rdoInverse.Checked = True
             rdoIdentity.Enabled = True
             rdoLog.Enabled = True
         End If
         If strFamilyName = "Poisson" Or strFamilyName = "Quasipoisson" Then
-            If strFamilyName = "Poisson" Then
-                '   rdoPoisson.Checked = True
-            Else
-                ' rdoQuasiPoisson.Checked = True
-            End If
             rdoLog.Enabled = True
             rdoLog.Checked = True
             rdoIdentity.Enabled = True
             rdoSqrt.Enabled = True
         End If
         If strFamilyName = "Inverse.gaussian" Then
-            ' rdoInverseGaussian.Checked = True
             rdoMuSquaredInverse.Enabled = True
             rdoMuSquaredInverse.Checked = True
             rdoIdentity.Enabled = True
@@ -113,7 +101,6 @@ Public Class sdgModelOptions
             rdoLog.Enabled = True
         End If
         If strFamilyName = "Quasi" Then
-            'rdoQuasi.Checked = True
             rdoIdentity.Enabled = True
             rdoIdentity.Checked = True
             rdocloglog.Enabled = True
@@ -157,24 +144,6 @@ Public Class sdgModelOptions
             strLinkFunction = "1/mu^2"
         End If
         clsRCIFunction.AddParameter("link", Chr(34) & strLinkFunction & Chr(34))
-    End Sub
-
-    Private Sub ucrFamily2_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily2.cboDistributionsIndexChanged
-        'dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag = ucrFamily2.clsCurrDistribution.strNameTag
-        dlgRegressionSimple.ucrFamily.cboDistributions.SelectedIndex = dlgRegressionSimple.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily2.clsCurrDistribution.strNameTag)
-    End Sub
-
-    Public Sub ResponseConvert2()
-        If Not dlgRegressionSimple.ucrResponse.IsEmpty Then
-            ucrFamily2.RecieverDatatype(dlgRegressionSimple.ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, dlgRegressionSimple.ucrResponse.GetVariableNames(bWithQuotes:=False))
-            If dlgRegressionSimple.chkConvertToVariate.Checked Then
-                ucrFamily2.strDatatype = "numeric"
-                ucrFamily2.SetGLMDistributions()
-            Else
-                ucrFamily2.RecieverDatatype(dlgRegressionSimple.ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, dlgRegressionSimple.ucrResponse.GetVariableNames(bWithQuotes:=False))
-                ucrFamily2.SetGLMDistributions()
-            End If
-        End If
     End Sub
 
     Private Sub rdoCauchit_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCauchit.CheckedChanged, rdocloglog.CheckedChanged, rdoIdentity.CheckedChanged, rdoInverse.CheckedChanged, rdoLog.CheckedChanged, rdoLogit.CheckedChanged, rdoMuSquaredInverse.CheckedChanged, rdoProbit.CheckedChanged, rdoSqrt.CheckedChanged
