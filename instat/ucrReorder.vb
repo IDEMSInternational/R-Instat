@@ -140,12 +140,10 @@ Public Class ucrReorder
                 If i > 0 Then
                     strTemp = strTemp & ","
                 End If
-                If lstAvailableData.Items(i).Text <> "" Then
-                    If bWithQuotes Then
-                        strTemp = strTemp & Chr(34) & lstAvailableData.Items(i).Text & Chr(34)
-                    Else
-                        strTemp = strTemp & lstAvailableData.Items(i).Text
-                    End If
+                If bWithQuotes Then
+                    strTemp = strTemp & Chr(34) & lstAvailableData.Items(i).Text & Chr(34)
+                Else
+                    strTemp = strTemp & lstAvailableData.Items(i).Text
                 End If
             Next
             strTemp = strTemp & ")"
