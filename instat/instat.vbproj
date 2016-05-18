@@ -3870,10 +3870,10 @@
     <Content Include="static\ClimateObject\R\R_front_ends\readme_front.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\data_object.R">
+    <Content Include="static\.old\data_object.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\instat_object.R">
+    <Content Include="static\.old\instat_object.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\README.md">
