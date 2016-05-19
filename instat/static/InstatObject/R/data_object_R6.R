@@ -824,7 +824,7 @@ data_object$set("public", "get_data_type", function(col_name = "") {
   }
   
   if(is.factor(private$data[[col_name]])) {
-    if(length(levels(private$data[[col_name]]))==2) type = "2 level factor"
+    if(length(levels(private$data[[col_name]]))==2) type = "two level factor"
     else if(length(levels(private$data[[col_name]]))>2) type = "multilevel factor"
     else type = "factor"
   }
