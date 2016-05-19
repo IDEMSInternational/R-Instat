@@ -967,4 +967,7 @@ Public Class frmMain
         frmCommand.Visible = Not frmCommand.Visible
     End Sub
 
+    Private Sub mnuOrganiseColumnReshapeRandomSubset_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeRandomSubset.Click
+        dlgRandomSubsets.ShowDialog()
+    End Sub
 End Class
