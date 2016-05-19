@@ -15,8 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgModelOptions
-    Public clsRToFunction, clsRCIFunction As New RFunction
-    Public clsModel1 As New ROperator
+    Public clsRCIFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub sdgModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -29,10 +28,9 @@ Public Class sdgModelOptions
     End Sub
 
     Public Sub SetDefaults()
-        rdoNaturallog.Checked = False
-        rdoLogBase10.Checked = False
-        rdoSquareroot.Checked = False
-        rdoPower.Checked = False
+        'ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+        dlgRegressionSimple.ResponseConvert(ucrFamily:=ucrFamily)
+        RestrictLink()
     End Sub
 
     Public Sub SetRCIFunction(clsNewFunction As RFunction)
@@ -61,9 +59,13 @@ Public Class sdgModelOptions
         rdoSqrt.Enabled = False
     End Sub
 
+    Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+        'dlgRegressionSimple.ucrFamily.cboDistributions.SelectedIndex = dlgRegressionSimple.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+    End Sub
+
     Public Sub RestrictLink()
         Dim strFamilyName As String
-        strFamilyName = dlgRegressionSimple.ucrFamily.clsCurrDistribution.strNameTag
+        strFamilyName = ucrFamily.clsCurrDistribution.strNameTag
         ResetLinks()
         If strFamilyName = "Normal" Then
             rdoIdentity.Enabled = True
@@ -110,39 +112,6 @@ Public Class sdgModelOptions
             rdoSqrt.Enabled = True
         End If
         LinkFunction()
-    End Sub
-
-    Private Function ExplanatoryFunction(strFunctionName As String, strPower As String)
-        If strFunctionName = "power" Then
-            If strPower = "1" Then
-                dlgRegressionSimple.clsModel.SetParameter(False, strValue:=dlgRegressionSimple.ucrExplanatory.GetVariableNames(bWithQuotes:=False))
-            Else
-                clsModel1.SetOperation("^")
-                clsModel1.bBrackets = False
-                clsModel1.SetParameter(True, strValue:=dlgRegressionSimple.ucrExplanatory.GetVariableNames(bWithQuotes:=False))
-                clsModel1.SetParameter(False, strValue:=strPower)
-                dlgRegressionSimple.clsModel.SetParameter(False, clsOp:=clsModel1)
-            End If
-        Else
-            clsRToFunction.SetRCommand(strFunctionName)
-            clsRToFunction.AddParameter("x", dlgRegressionSimple.ucrExplanatory.GetVariableNames(bWithQuotes:=False))
-            dlgRegressionSimple.clsModel.SetParameter(False, clsRFunc:=clsRToFunction)
-        End If
-    End Function
-
-    Public Sub ModelFunction()
-        If rdoLogBase10.Checked Then
-            ExplanatoryFunction("log10", 1)
-        End If
-        If rdoNaturallog.Checked Then
-            ExplanatoryFunction("log", 1)
-        End If
-        If rdoSquareroot.Checked Then
-            ExplanatoryFunction("sqrt", 1)
-        End If
-        If rdoPower.Checked Then
-            ExplanatoryFunction("power", nudPower.Value)
-        End If
     End Sub
 
     Public Sub LinkFunction()

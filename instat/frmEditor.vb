@@ -32,7 +32,7 @@ Public Class frmEditor
     Private clsInsertRows As New RFunction
     Private clsDeleteRows As New RFunction
     Private clsReplaceValue As New RFunction
-    Public lstColumnNames As String()
+    Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsGrids.SetData(grdData)
@@ -199,7 +199,7 @@ Public Class frmEditor
     'End Sub
 
     Private Sub mnuInsertRowsAfter_Click(sender As Object, e As EventArgs) Handles mnuInsertRowsAfter.Click
-        clsInsertRows.AddParameter("start_row", grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.EndRow).Text)
+        clsInsertRows.AddParameter("start_row", grdCurrSheet.RowHeaders(grdCurrSheet.SelectionRange.EndRow).Text)
         clsInsertRows.AddParameter("number_rows", grdData.CurrentWorksheet.SelectionRange.Rows)
         If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
             clsInsertRows.AddParameter("before", "FALSE")
@@ -210,7 +210,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuInsertRowsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertRowsBefore.Click
-        clsInsertRows.AddParameter("start_row", grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.Row).Text)
+        clsInsertRows.AddParameter("start_row", grdCurrSheet.RowHeaders(grdCurrSheet.SelectionRange.Row).Text)
         clsInsertRows.AddParameter("number_rows", grdData.CurrentWorksheet.SelectionRange.Rows)
         clsInsertRows.AddParameter("before", "TRUE")
         frmMain.clsRLink.RunScript(clsInsertRows.ToScript(), strComment:="Right Click menu: Insert row(s) Before")
@@ -246,10 +246,8 @@ Public Class frmEditor
     Public Sub copyRange()
         Try
             grdData.CurrentWorksheet.Copy()
-        Catch generatedExceptionName As unvell.ReoGrid.RangeIntersectionException
-            MessageBox.Show("Cannot cut a range that is a part of another merged cell.")
         Catch
-            MessageBox.Show("We can't to do that for selected range.")
+            MessageBox.Show("Cannot copy the current selection.")
         End Try
     End Sub
 
@@ -347,10 +345,13 @@ Public Class frmEditor
     Private Function SelectedColumns(Optional bWithQuotes As Boolean = True) As String
         Dim lstSelectedColumns As New List(Of String)
         Dim strCols As String = ""
+        Dim lstCurrentDataColumns As String()
 
-        If lstColumnNames IsNot Nothing AndAlso lstColumnNames.Count > 0 Then
+        lstCurrentDataColumns = lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value
+
+        If lstCurrentDataColumns IsNot Nothing AndAlso lstCurrentDataColumns.Count > 0 Then
             For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
-                lstSelectedColumns.Add(lstColumnNames(i))
+                lstSelectedColumns.Add(lstCurrentDataColumns(i))
             Next
 
             strCols = "c("
@@ -393,11 +394,14 @@ Public Class frmEditor
 
     Private Function SelectedColumnsAsArray() As String()
         Dim strSelectedColumns As String()
+        Dim lstCurrentDataColumns As String()
+
+        lstCurrentDataColumns = lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value
 
         If lstColumnNames IsNot Nothing AndAlso lstColumnNames.Count > 0 Then
             strSelectedColumns = New String(grdData.CurrentWorksheet.SelectionRange.Cols - 1) {}
             For i As Integer = 0 To grdData.CurrentWorksheet.SelectionRange.Cols - 1
-                strSelectedColumns(i) = lstColumnNames(i + grdData.CurrentWorksheet.SelectionRange.Col)
+                strSelectedColumns(i) = lstCurrentDataColumns(i + grdData.CurrentWorksheet.SelectionRange.Col)
             Next
             Return strSelectedColumns
         Else
@@ -407,10 +411,13 @@ Public Class frmEditor
     End Function
 
     Private Function SelectedColumnPosition(bFirstNotLast As Boolean)
+        Dim lstCurrentDataColumns As String()
+
+        lstCurrentDataColumns = lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value
         If bFirstNotLast Then
-            Return Chr(34) & lstColumnNames(grdData.CurrentWorksheet.SelectionRange.Col) & Chr(34)
+            Return Chr(34) & lstCurrentDataColumns(grdData.CurrentWorksheet.SelectionRange.Col) & Chr(34)
         Else
-            Return Chr(34) & lstColumnNames(grdData.CurrentWorksheet.SelectionRange.EndCol) & Chr(34)
+            Return Chr(34) & lstCurrentDataColumns(grdData.CurrentWorksheet.SelectionRange.EndCol) & Chr(34)
         End If
     End Function
 
@@ -434,5 +441,14 @@ Public Class frmEditor
             clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsReplaceValue.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
         End If
+    End Sub
+
+    Public Sub SetColumnNames(strDataFrameName As String, strColumnNames As String())
+        Dim iIndex As Integer
+        iIndex = lstColumnNames.FindIndex(Function(x) x.Key = strDataFrameName)
+        If iIndex <> -1 Then
+            lstColumnNames.RemoveAt(iIndex)
+        End If
+        lstColumnNames.Add(New KeyValuePair(Of String, String())(strDataFrameName, strColumnNames))
     End Sub
 End Class
