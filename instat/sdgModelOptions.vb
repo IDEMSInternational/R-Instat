@@ -15,8 +15,19 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgModelOptions
-    Public clsRCIFunction As New RFunction
-    Public bFirstLoad As Boolean = True
+    Public clsRCIFunction As RFunction
+    Public bFirstLoad As Boolean
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        clsRCIFunction = New RFunction
+        ucrFamily.SetGLMDistributions()
+        bFirstLoad = True
+    End Sub
 
     Private Sub sdgModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -25,11 +36,13 @@ Public Class sdgModelOptions
             SetDefaults()
             bFirstLoad = False
         End If
+
+    End Sub
+
+    Private Sub InitialiseDialog()
     End Sub
 
     Public Sub SetDefaults()
-        'ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
-        dlgRegressionSimple.ResponseConvert(ucrFamily:=ucrFamily)
         RestrictLink()
     End Sub
 
@@ -60,6 +73,7 @@ Public Class sdgModelOptions
     End Sub
 
     Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+        RestrictLink()
         'dlgRegressionSimple.ucrFamily.cboDistributions.SelectedIndex = dlgRegressionSimple.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
     End Sub
 
@@ -83,9 +97,9 @@ Public Class sdgModelOptions
         End If
         If strFamilyName = "Gamma" Then
             rdoInverse.Enabled = True
-            rdoInverse.Checked = True
-            rdoIdentity.Enabled = True
             rdoLog.Enabled = True
+            rdoLog.Checked = True
+            rdoIdentity.Enabled = True
         End If
         If strFamilyName = "Poisson" Or strFamilyName = "Quasipoisson" Then
             rdoLog.Enabled = True
@@ -93,7 +107,7 @@ Public Class sdgModelOptions
             rdoIdentity.Enabled = True
             rdoSqrt.Enabled = True
         End If
-        If strFamilyName = "Inverse.gaussian" Then
+        If strFamilyName = "Inverse_Gaussian" Then
             rdoMuSquaredInverse.Enabled = True
             rdoMuSquaredInverse.Checked = True
             rdoIdentity.Enabled = True
