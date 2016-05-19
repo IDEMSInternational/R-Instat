@@ -70,10 +70,11 @@ Public Class dlgInsertColumn
         rdoInsertColumns.Checked = True
         ucrInputPrefixForInsertedColumns.SetName("X")
         ucrInputDefaultValue.SetName("NA")
+        ucrDataFramesList.Reset()
         RowsOrColumns()
         rdoAtEnd.Checked = True
-        ucrDataFramesList.Reset()
         ucrInputBeforeAfter.SetName("After")
+
     End Sub
 
     Private Sub nudPos_TextChanged(sender As Object, e As EventArgs) Handles nudPos.TextChanged
@@ -151,7 +152,6 @@ Public Class dlgInsertColumn
             dataFrameListMaxMinPos()
             ColName()
             grpInsert.Visible = True
-            ucrDataFramesList.Visible = False
             nudInsertColumns.Maximum = 100
             nudNumCols.Visible = False
             nudPos.Visible = False
@@ -186,7 +186,6 @@ Public Class dlgInsertColumn
             ColName()
             BeforeParameter()
             ucrSelectorInseertColumns.Visible = False
-            ucrDataFramesList.Visible = True
             nudNumCols.Visible = True
             nudPos.Visible = True
             lblStartPos.Visible = True
@@ -212,18 +211,15 @@ Public Class dlgInsertColumn
             ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             ucrReceiverColumnsToInsert.Visible = False
             ucrSelectorInseertColumns.Visible = False
-            ucrDataFramesList.Visible = True
+
         ElseIf rdoAtStart.Checked Then
             ucrBase.clsRsyntax.AddOperatorParameter("before", "TRUE")
             ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             ucrReceiverColumnsToInsert.Visible = False
             ucrSelectorInseertColumns.Visible = False
-            ucrDataFramesList.Visible = True
-
         Else
             ucrReceiverColumnsToInsert.Visible = True
             ucrSelectorInseertColumns.Visible = True
-            ucrDataFramesList.Visible = True
         End If
     End Sub
 
