@@ -69,6 +69,7 @@ Public Class dlgRandomSubsets
         nudNumberOfColumns.Value = 1
         nudNumberOfColumns.Minimum = 1
         nudNumberOfColumns.Maximum = Integer.MaxValue
+        ReplaceParameters()
         nudSampleSize.Value = ucrSelectorRandomSubsets.ucrAvailableDataFrames.iDataFrameLength
         nudSetSeed.Value = 1
         nudSetSeed.Minimum = Integer.MinValue
@@ -77,7 +78,7 @@ Public Class dlgRandomSubsets
         If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrNewDataFrameName.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
         End If
-        ReplaceParameters()
+
         TestOkEnabled()
     End Sub
     'set what happens when dialog is reopened
@@ -138,11 +139,11 @@ Public Class dlgRandomSubsets
     Private Sub nudSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSetSeed.TextChanged
         SetSeedParameters()
     End Sub
-    Private Sub nudNumberOfColumns_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberOfColumns.ValueChanged
+    Private Sub nudNumberOfColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberOfColumns.TextChanged
         clsReplicateFunc.AddParameter("n", nudNumberOfColumns.Value)
     End Sub
 
-    Private Sub nudSampleSize_ValueChanged(sender As Object, e As EventArgs) Handles nudSampleSize.ValueChanged
+    Private Sub nudSampleSize_TextChanged(sender As Object, e As EventArgs) Handles nudSampleSize.TextChanged
         clsSampleFunc.AddParameter("size", nudSampleSize.Value)
     End Sub
     Private Sub chkWithReplacement_CheckedChanged(sender As Object, e As EventArgs) Handles chkWithReplacement.CheckedChanged
