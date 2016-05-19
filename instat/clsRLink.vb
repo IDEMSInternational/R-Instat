@@ -149,12 +149,11 @@ Public Class RLink
         Dim strScriptWithComment As String
         Dim strSplitScript As String
         strOutput = ""
-        Try
-            If strComment <> "" Then
-                strComment = "# " & strComment
-                strScriptWithComment = strComment & vbCrLf & strScript
-            Else
-                strScriptWithComment = strScript
+        If strComment <> "" Then
+            strComment = "# " & strComment
+            strScriptWithComment = strComment & vbCrLf & strScript
+        Else
+            strScriptWithComment = strScript
             End If
             If bLog Then
                 txtLog.Text = txtLog.Text & strScriptWithComment & vbCrLf
@@ -165,35 +164,46 @@ Public Class RLink
                 End If
                 AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
             End If
-            If bReturnOutput = 0 Then
+        If bReturnOutput = 0 Then
+            Try
                 clsEngine.Evaluate(strScript)
-            ElseIf bReturnOutput = 1 Then
+            Catch e As Exception
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+            End Try
+        ElseIf bReturnOutput = 1 Then
+            Try
                 temp = clsEngine.Evaluate(strScript)
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
+            Catch e As Exception
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+            End Try
+        Else
+            If strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) = -1 Then
+                strCapturedScript = "capture.output(" & strScript & ")"
             Else
-                If strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) = -1 Then
-                    strCapturedScript = "capture.output(" & strScript & ")"
-                Else
-                    strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
-                    If strSplitScript <> "" Then
+                strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
+                If strSplitScript <> "" Then
+                    Try
                         clsEngine.Evaluate(strSplitScript)
-                    End If
-                    strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
-                    strCapturedScript = "capture.output(" & strSplitScript & ")"
+                    Catch e As Exception
+                        MsgBox("Error occured in attempting to run:" & vbNewLine & strSplitScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                    End Try
                 End If
+                strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
+                strCapturedScript = "capture.output(" & strSplitScript & ")"
+            End If
+            Try
                 temp = clsEngine.Evaluate(strCapturedScript)
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
-            End If
-            If bOutput Then
-                'txtOutput.Text = txtOutput.Text & strOutput
-                'output format here
-                AppendText(txtOutput, clrOutput, fOutput, strOutput)
-            End If
-        Catch
-            MsgBox(strScript)
-        End Try
+            Catch e As Exception
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strCapturedScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+            End Try
+        End If
+        If bOutput Then
+            AppendText(txtOutput, clrOutput, fOutput, strOutput)
+        End If
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
@@ -413,7 +423,9 @@ Public Class RLink
         Dim chrModelNames As CharacterVector
         Dim lstModelNames As New List(Of String)
         chrModelNames = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_model_names()").AsCharacter
-        lstModelNames.AddRange(chrModelNames)
+        If chrModelNames IsNot Nothing Then
+            lstModelNames.AddRange(chrModelNames)
+        End If
         Return lstModelNames
     End Function
 
