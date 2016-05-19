@@ -19,10 +19,20 @@ Public Class ucrReorder
     Public Event OrderChanged()
     Public WithEvents ucrDataFrameList As ucrDataFrame
     Public WithEvents ucrReceiver As ucrReceiverSingle
-    Private strDataType As String = ""
-    Dim selectedListViewItem As New ListViewItem
+    Private strDataType As String
+    Dim selectedListViewItem As ListViewItem
     Dim selectedIndex As Integer
     Dim itemsCount As Integer
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        strDataType = ""
+        selectedListViewItem = New ListViewItem
+    End Sub
 
     Public Sub setDataType(strType As String)
         strDataType = strType
@@ -130,12 +140,10 @@ Public Class ucrReorder
                 If i > 0 Then
                     strTemp = strTemp & ","
                 End If
-                If lstAvailableData.Items(i).Text <> "" Then
-                    If bWithQuotes Then
-                        strTemp = strTemp & Chr(34) & lstAvailableData.Items(i).Text & Chr(34)
-                    Else
-                        strTemp = strTemp & lstAvailableData.Items(i).Text
-                    End If
+                If bWithQuotes Then
+                    strTemp = strTemp & Chr(34) & lstAvailableData.Items(i).Text & Chr(34)
+                Else
+                    strTemp = strTemp & lstAvailableData.Items(i).Text
                 End If
             Next
             strTemp = strTemp & ")"
