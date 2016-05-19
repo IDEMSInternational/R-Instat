@@ -199,7 +199,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblResponse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 27</value>
+    <value>246, 34</value>
   </data>
   <data name="lblResponse.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 13</value>
@@ -229,7 +229,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblExplanatory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 79</value>
+    <value>243, 86</value>
   </data>
   <data name="lblExplanatory.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
@@ -256,7 +256,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDisplayOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>277, 221</value>
+    <value>277, 226</value>
   </data>
   <data name="cmdDisplayOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 23</value>
@@ -283,7 +283,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkSaveModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 223</value>
+    <value>14, 228</value>
   </data>
   <data name="chkSaveModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 24</value>
@@ -310,7 +310,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdModelOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 184</value>
+    <value>275, 192</value>
   </data>
   <data name="cmdModelOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 23</value>
@@ -331,7 +331,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdModelOptions.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="chkConvertToVariate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -340,7 +340,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkConvertToVariate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 39</value>
+    <value>358, 39</value>
   </data>
   <data name="chkConvertToVariate.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 30</value>
@@ -362,7 +362,7 @@ to variate</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkConvertToVariate.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="chkFunction.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -392,31 +392,10 @@ to variate</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkFunction.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrFamily.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 177</value>
-  </data>
-  <data name="ucrFamily.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 43</value>
-  </data>
-  <data name="ucrFamily.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrFamily.Name" xml:space="preserve">
-    <value>ucrFamily</value>
-  </data>
-  <data name="&gt;&gt;ucrFamily.Type" xml:space="preserve">
-    <value>instat.ucrDistributions, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrFamily.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrFamily.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="ucrModelName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 221</value>
+    <value>122, 226</value>
   </data>
   <data name="ucrModelName.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 23</value>
@@ -437,7 +416,10 @@ to variate</value>
     <value>5</value>
   </data>
   <data name="ucrExplanatory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 95</value>
+    <value>241, 102</value>
+  </data>
+  <data name="ucrExplanatory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrExplanatory.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 26</value>
@@ -458,7 +440,10 @@ to variate</value>
     <value>9</value>
   </data>
   <data name="ucrResponse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 43</value>
+    <value>241, 50</value>
+  </data>
+  <data name="ucrResponse.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrResponse.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 26</value>
@@ -479,7 +464,10 @@ to variate</value>
     <value>10</value>
   </data>
   <data name="ucrSelectorSimpleReg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 3</value>
+    <value>12, 0</value>
+  </data>
+  <data name="ucrSelectorSimpleReg.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSelectorSimpleReg.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 179</value>
@@ -520,6 +508,27 @@ to variate</value>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="ucrFamily.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 182</value>
+  </data>
+  <data name="ucrFamily.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 43</value>
+  </data>
+  <data name="ucrFamily.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrFamily.Name" xml:space="preserve">
+    <value>ucrFamily</value>
+  </data>
+  <data name="&gt;&gt;ucrFamily.Type" xml:space="preserve">
+    <value>instat.ucrDistributions, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFamily.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFamily.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -528,6 +537,9 @@ to variate</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>429, 306</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

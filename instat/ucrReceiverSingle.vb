@@ -17,8 +17,17 @@
 Imports RDotNet
 
 Public Class ucrReceiverSingle
-    Dim strDataFrameName As String = ""
-    Public strDataType As String = ""
+    Dim strDataFrameName As String
+    Public strCurrDataType As String
+
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        strDataFrameName = ""
+        strCurrDataType = ""
+    End Sub
 
     Public Overrides Sub AddSelected()
         Dim objItem As ListViewItem
@@ -32,7 +41,7 @@ Public Class ucrReceiverSingle
             For Each objItem In tempObjects
                 clsGetDataType.AddParameter("data_name", Chr(34) & objItem.Tag & Chr(34))
                 clsGetDataType.AddParameter("column", Chr(34) & objItem.Text & Chr(34))
-                strDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
                 SetSelected(objItem.Text, objItem.Tag)
             Next
         End If

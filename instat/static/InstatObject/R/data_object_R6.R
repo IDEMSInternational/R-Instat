@@ -176,7 +176,7 @@ data_object$set("public", "get_variables_metadata", function(include_all = TRUE,
   if(!missing(property)) {
     if(!property %in% names(out)) stop(property, " not found in variables metadata")
     if(!missing(column)) {
-      if(!column %in% names(private$data)) stop(column, " not found in data")
+      if(!all(column %in% names(private$data))) stop(column, " not found in data")
       out = out[column, property]
     }
     else out = out[, property]
@@ -334,6 +334,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
 }
 )
 
+#TODO remove this method
 data_object$set("public", "remove_columns_in_data_from_start_position", function(start_pos, col_numbers = 1) {
   if (start_pos <= 0) stop("You cannot remove a column into the position less or equal to zero.")
   if (start_pos %% 1 != 0) stop("start_pos value should be an integer.")
@@ -365,7 +366,7 @@ data_object$set("public", "remove_columns_in_data", function(cols=c()) {
 }
 )
 
-data_object$set("public", "replace_value_in_data", function(col_name = "", index, new_value = "") {
+data_object$set("public", "replace_value_in_data", function(col_name = "", row, new_value = "") {
   
   # Column name must be character
   if(!is.character(col_name)) {
@@ -377,21 +378,18 @@ data_object$set("public", "replace_value_in_data", function(col_name = "", index
   }
   
   # Column data length must match number of rows of data.
-  else if (missing(index) || !(is.numeric(index))) {
-    stop(paste("Specify the index of the value to be replaced as an integer."))
+  else if (!(row %in% rownames(private$data))) {
+    stop("row not found in data")
   }
-  
-  else if (index != as.integer(index) || index < 1 || index >  nrow(private$data)) {
-    stop( paste("index must be an integer between 1 and", nrow(data), ".") )
+  index <- which(rownames(private$data) == row)
+  old_value <- private$data[[col_name]][[index]]
+  if(self$get_variables_metadata(property = data_type_label, column = col_name) == "factor") {
+    if(!(new_value %in% levels(private$data[[col_name]]))) {
+      stop(new_value, " is not an existing level of the factor")
+    }
   }
-  
-  if (class(private$data[[col_name]][[index]]) != class(new_value)) {
-    warning("Class of new value does not match the class of the replaced value.")
-  }
-  
-  old_value = private$data[[col_name]][[index]]
   private$data[[col_name]][[index]] <- new_value
-  self$append_to_changes(list(Replaced_value, col_name, index, old_value, new_value))
+  self$append_to_changes(list(Replaced_value, col_name, row, old_value, new_value))
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
 }
@@ -477,18 +475,10 @@ data_object$set("public", "add_defaults_variables_metadata", function() {
 }
 )
 
-data_object$set("public", "remove_rows_in_data", function(start_pos, num_rows = 1) {
-  if (start_pos != as.integer(start_pos) || start_pos < 1 || start_pos >  nrow(private$data)) {
-    stop( paste("index must be an integer between 1 and", nrow(data), ".") )
-  }
-  else if (start_pos > nrow(private$data)) {
-    stop(paste0(" Row: '", start_pos, " does not exist in the data."))
-  }
-  else {
-    end_pos <- start_pos + num_rows - 1
-    self$set_data(private$data[-(start_pos:end_pos),])
-    self$append_to_changes(list(Removed_row, start_pos))
-  }
+data_object$set("public", "remove_rows_in_data", function(row_names) {
+  if(!all(row_names %in% rownames(private$data))) stop("Some of the row_names not found in data")
+  self$set_data(private$data[!(rownames(private$data) %in% row_names), ])
+  self$append_to_changes(list(Removed_row, row_names))
   self$data_changed <- TRUE
 }
 )
@@ -586,32 +576,35 @@ data_object$set("public", "reorder_columns_in_data", function(col_order) {
 }
 )
 
-data_object$set("public", "insert_row_in_data", function(start_pos = (nrow(private$data)+1), row_data = c(), number_rows = 1) {
+data_object$set("public", "insert_row_in_data", function(start_row, row_data = c(), number_rows = 1, before = FALSE) {
   
-  if (start_pos != as.integer(start_pos) || start_pos < 1 || start_pos >  nrow(private$data) + 1 ) {
-    stop( paste("index must be an integer between 1 and", nrow(data)+1, ".") )
+  curr_row_names = rownames(private$data)
+  if (!start_row %in% curr_row_names) {
+    stop(paste(start_row, " not found in rows"))
   }
-  if (length(row_data) == 0){
-    row_data <- rep(NA,ncol(private$data))
-    message("You are inserting an empty row to data")
+  row_position = which(curr_row_names == start_row)
+  row_data <- matrix(NA, nrow = number_rows, ncol = ncol(private$data))
+  colnames(row_data) <- colnames(private$data)
+  if(length(curr_row_names[!is.na(as.numeric(curr_row_names))]) > 0) {
+    rownames(row_data) <- max(as.numeric(curr_row_names), na.rm = TRUE) + 1:number_rows
   }
-  if(length(row_data)>0 && length(row_data)!=ncol(private$data)){
-    stop("The dimension of Row data is different from that of the data")
+  else rownames(row_data) <- nrow(private$data) + 1:(number_rows - 1)
+  
+  if(before && row_position == 1) {
+    self$set_data(rbind(row_data, private$data))
   }
-  for(j in 1:number_rows){ 
-    if(start_pos==1){
-      self$set_data(rbind(row_data, private$data))
-    }
-    
-    else if (start_pos == (nrow(private$data)+1)){
-      self$set_data(rbind(private$data,row_data))
+  else if(!before && row_position == nrow(private$data)) {
+    self$set_data(rbind(private$data, row_data))
+  }
+  else {
+    if(before) {
+      self$set_data(rbind(private$data[1:(row_position - 1), ], row_data, private$data[row_position:nrow(private$data), ]))
     }
     else {
-      self$set_data(rbind(private$data[1:(start_pos-1),],row_data, private$data[(start_pos):nrow(private$data), ]))
-      
+      self$set_data(rbind(private$data[1:row_position, ], row_data, private$data[(row_position + 1):nrow(private$data), ]))
     }
   }
-  self$append_to_changes(list(Inserted_row, start_pos))
+  self$append_to_changes(list(Inserted_row, number_rows))
   self$data_changed <- TRUE
 }
 )
@@ -739,7 +732,7 @@ data_object$set("public", "drop_unused_factor_levels", function(col_name) {
 data_object$set("public", "set_factor_levels", function(col_name, new_levels) {
   if(!col_name %in% names(private$data)) stop(paste(col_name,"not found in data."))
   if(!is.factor(private$data[[col_name]])) stop(paste(col_name,"is not a factor."))
-  if(!length(new_levels)==length(levels(private$data[[col_name]]))) stop("Incorrect number of new levels given.")
+  if(length(new_levels) < length(levels(private$data[[col_name]]))) stop("There must be at least as many new levels as current levels.")
   
   levels(private$data[[col_name]]) <- new_levels
   self$data_changed <- TRUE
@@ -836,5 +829,37 @@ data_object$set("public", "get_data_type", function(col_name = "") {
     else type = "factor"
   }
   return(type)
+}
+)
+
+data_object$set("public", "set_hidden_columns", function(col_names) {
+  if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
+  
+  self$append_to_variables_metadata(col_names, is_hidden_label, TRUE)
+  hidden_cols = self$get_column_names()[!self$get_column_names() %in% col_names]
+  self$append_to_variables_metadata(hidden_cols, is_hidden_label, FALSE)
+}
+)
+
+data_object$set("public", "unhide_all_columns", function() {
+  self$append_to_variables_metadata(self$get_column_names(), is_hidden_label, FALSE)
+}
+)
+
+data_object$set("public", "set_row_names", function(row_names) {
+  if(missing(row_names)) row_names = 1:nrow(private$data)
+  if(length(row_names) != nrow(private$data)) stop("row_names must be a vector of same length as the data")
+  if(anyDuplicated(row_names) != 0) stop("row_names must be unique")
+  rownames(private$data) <- row_names
+  self$data_changed <- TRUE
+}
+)
+
+data_object$set("public", "set_protected_columns", function(col_names) {
+  if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
+  
+  self$append_to_variables_metadata(col_names, is_protected_label, TRUE)
+  other_cols = self$get_column_names()[!self$get_column_names() %in% col_names]
+  self$append_to_variables_metadata(other_cols, is_protected_label, FALSE)
 }
 )
