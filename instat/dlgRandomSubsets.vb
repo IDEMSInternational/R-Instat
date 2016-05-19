@@ -77,10 +77,14 @@ Public Class dlgRandomSubsets
         If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrNewDataFrameName.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
         End If
+        ReplaceParameters()
+        TestOkEnabled()
     End Sub
     'set what happens when dialog is reopened
     Private Sub ReOpenDialog()
-
+        If ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrNewDataFrameName.SetName(ucrSelectorRandomSubsets.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_random")
+        End If
     End Sub
     Private Sub ucrNewDataFrameName_NameChanged() Handles ucrNewDataFrameName.NameChanged
         If Not ucrNewDataFrameName.IsEmpty Then
