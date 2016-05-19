@@ -19,6 +19,7 @@ Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
     Public clsModel As New ROperator
     Public clsRConvert, clsRCIFunction As New RFunction
+    Public ucrFamily2 As ucrDistributions
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
@@ -40,6 +41,7 @@ Public Class dlgRegressionSimple
         ucrBase.iHelpTopicID = 171
         sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
     End Sub
 
     Private Sub ReopenDialog()
@@ -82,9 +84,10 @@ Public Class dlgRegressionSimple
         sdgSimpleRegOptions.ShowDialog()
     End Sub
 
-    Private Sub ResponseConvert()
+    Public Sub ResponseConvert(ucrFamily As ucrDistributions)
         If Not ucrResponse.IsEmpty Then
             ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+
             If ucrFamily.strDatatype = "numeric" Then
                 chkConvertToVariate.Checked = False
                 chkConvertToVariate.Visible = False
@@ -108,12 +111,15 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
-        ResponseConvert()
+        ResponseConvert(ucrFamily:=sdgModelOptions.ucrFamily)
+        ResponseConvert(ucrFamily:=ucrFamily)
         TestOKEnabled()
     End Sub
 
     Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
-        ResponseConvert()
+        ResponseConvert(ucrFamily:=sdgModelOptions.ucrFamily)
+        ResponseConvert(ucrFamily:=ucrFamily)
+        sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
     End Sub
 
     Private Sub ExplanatoryFunctionSelect()
@@ -127,12 +133,14 @@ Public Class dlgRegressionSimple
                 chkFunction.Visible = False
             End If
             If chkFunction.Checked Then
-                sdgModelOptions.ModelFunction()
+                sdgVariableTransformations.ModelFunction()
             Else
+                sdgVariableTransformations.rdoIdentity.Checked = True
                 clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
             End If
         End If
     End Sub
+
     Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
         ExplanatoryFunctionSelect()
         TestOKEnabled()
@@ -169,9 +177,10 @@ Public Class dlgRegressionSimple
         End If
     End Sub
 
-    Private Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+    Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+        'sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
-        'TODO:   Include multinomial as an option And the appripriate function
+        'TODO:   Include multinomial as an option And the appropriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
             ucrBase.clsRsyntax.SetFunction("lm")
             ucrBase.clsRsyntax.RemoveParameter("family")
@@ -183,14 +192,14 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        ResponseConvert(ucrFamily:=sdgModelOptions.ucrFamily)
         sdgModelOptions.ShowDialog()
-        ' ToDo: Ensure the correct tab is open by default
+        ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
     End Sub
 
     Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
         If chkFunction.Checked Then
-            sdgModelOptions.ShowDialog()
-            ' ToDo: Ensure the correct tab is open by default
+            sdgVariableTransformations.ShowDialog()
         End If
         ExplanatoryFunctionSelect()
     End Sub
