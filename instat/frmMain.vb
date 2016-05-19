@@ -731,11 +731,6 @@ Public Class frmMain
     Private Sub mnuManageSheetHideShowColumns_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameHideColumns.Click
         dlgHideShowColumns.ShowDialog()
     End Sub
-
-    Private Sub mnuManageReshapeRandomSubst_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeRandomSubset.Click
-        dlgRandomSubset.ShowDialog()
-    End Sub
-
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameSort.Click
         dlgSort.ShowDialog()
     End Sub
@@ -972,4 +967,7 @@ Public Class frmMain
         frmCommand.Visible = Not frmCommand.Visible
     End Sub
 
+    Private Sub mnuOrganiseColumnReshapeRandomSubset_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeRandomSubset.Click
+        dlgRandomSubsets.ShowDialog()
+    End Sub
 End Class
