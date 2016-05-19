@@ -207,13 +207,13 @@ Public Class dlgInsertColumn
 
     Private Sub InsertParam()
         If rdoAtEnd.Checked Then
-            ucrBase.clsRsyntax.AddOperatorParameter("before", "FALSE")
+            ucrBase.clsRsyntax.AddParameter("before", "FALSE")
             ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             ucrReceiverColumnsToInsert.Visible = False
             ucrSelectorInseertColumns.Visible = False
 
         ElseIf rdoAtStart.Checked Then
-            ucrBase.clsRsyntax.AddOperatorParameter("before", "TRUE")
+            ucrBase.clsRsyntax.AddParameter("before", "TRUE")
             ucrBase.clsRsyntax.RemoveParameter("adjacent_column")
             ucrReceiverColumnsToInsert.Visible = False
             ucrSelectorInseertColumns.Visible = False
@@ -221,6 +221,7 @@ Public Class dlgInsertColumn
             ucrReceiverColumnsToInsert.Visible = True
             ucrSelectorInseertColumns.Visible = True
         End If
+
     End Sub
 
     Private Sub ucrInputBeforeAfter_NameChanged() Handles ucrInputBeforeAfter.NameChanged
