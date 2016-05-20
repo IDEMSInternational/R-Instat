@@ -408,12 +408,6 @@
     <Compile Include="dlgProtect.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRandomSubset.Designer.vb">
-      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgRandomSubset.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgRandomSubsets.Designer.vb">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
     </Compile>
@@ -652,6 +646,12 @@
       <DependentUpon>sdgThemeOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgThemeOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgVariableTransformations.Designer.vb">
+      <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgVariableTransformations.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrFilter.Designer.vb">
@@ -2031,15 +2031,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgProtect.sw-KE.resx">
       <DependentUpon>dlgProtect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRandomSubset.fr-FR.resx">
-      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRandomSubset.resx">
-      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRandomSubset.sw-KE.resx">
-      <DependentUpon>dlgRandomSubset.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubsets.fr-FR.resx">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
@@ -3545,6 +3536,15 @@
     <EmbeddedResource Include="sdgThemeOptions.sw-KE.resx">
       <DependentUpon>sdgThemeOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgVariableTransformations.fr-FR.resx">
+      <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgVariableTransformations.resx">
+      <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgVariableTransformations.sw-KE.resx">
+      <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
@@ -3855,10 +3855,10 @@
     <Content Include="static\ClimateObject\R\R_front_ends\readme_front.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\data_object.R">
+    <Content Include="static\.old\data_object.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\instat_object.R">
+    <Content Include="static\.old\instat_object.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\README.md">

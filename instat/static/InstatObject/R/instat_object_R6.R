@@ -492,7 +492,7 @@ instat_object$set("public", "insert_column_in_data", function(data_name, col_dat
 # )
 
 instat_object$set("public", "reorder_columns_in_data", function(data_name, col_order){
-  self$get_data_objects(data_name)$order_columns_in_data(col_order = col_order)
+  self$get_data_objects(data_name)$reorder_columns_in_data(col_order = col_order)
 }
 )
 
@@ -635,5 +635,10 @@ instat_object$set("public","unhide_all_columns", function(data_name) {
 
 instat_object$set("public","set_row_names", function(data_name, row_names) {
   self$get_data_objects(data_name)$set_row_names(row_names = row_names)
+} 
+)
+
+instat_object$set("public","set_protected_columns", function(data_name, col_names) {
+  self$get_data_objects(data_name)$set_protected_columns(col_names = col_names)
 } 
 )
