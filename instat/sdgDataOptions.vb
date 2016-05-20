@@ -15,7 +15,17 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgDataOptions
-    Public bFirstLoad As Boolean = True
+    Public bFirstLoad As Boolean
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        bFirstLoad = True
+        chkShowHiddenColumns.Checked = False
+    End Sub
 
     Private Sub sdgDataOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -31,7 +41,7 @@ Public Class sdgDataOptions
     End Sub
 
     Private Sub SetDefaults()
-        chkShowHiddenColumns.Checked = False
+
     End Sub
 
     Public Function ShowHiddenColumns() As Boolean
