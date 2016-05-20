@@ -78,30 +78,8 @@ Public Class frmMain
         clsInstatOptions.SetLanguageCultureCode(Thread.CurrentThread.CurrentCulture.Name)
     End Sub
 
-    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSummaryDescribe.Click
-        dlgDescriptiveStatistics.ShowDialog()
-    End Sub
-
-    Private Sub KiswahiliToolStripMenuItem1_Click(sender As Object, e As EventArgs)
-        Thread.CurrentThread.CurrentCulture = New CultureInfo("sw-KE")
-        Thread.CurrentThread.CurrentUICulture = New CultureInfo("sw-KE")
-        autoTranslate(Me)
-    End Sub
-
-    Private Sub mnuGraphicsCummulativeDistribution_Click(sender As Object, e As EventArgs) Handles mnuGraphicsCummulativeDistribution.Click
+    Private Sub mnuGraphicsCummulativeDistribution_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsCumulativeDistribution.Click
         dlgCumulativeDistribution.ShowDialog()
-    End Sub
-
-    Private Sub FrenchToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        Thread.CurrentThread.CurrentCulture = New CultureInfo("fr-FR")
-        Thread.CurrentThread.CurrentUICulture = New CultureInfo("fr-FR")
-        autoTranslate(Me)
-    End Sub
-
-    Private Sub EnglishToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        Thread.CurrentThread.CurrentCulture = New CultureInfo("en-US")
-        Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-US")
-        autoTranslate(Me)
     End Sub
 
     Private Sub mnuFileNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuFileNewDataFrame.Click
@@ -112,15 +90,15 @@ Public Class frmMain
         dlgStartofRains.ShowDialog()
     End Sub
 
-    Private Sub RegularSequenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataRegularSequence.Click
+    Private Sub RegularSequenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnGenerateRegularSequence.Click
         dlgRegularSequence.ShowDialog()
     End Sub
 
-    Private Sub mnuCalculations_Click(sender As Object, e As EventArgs) Handles mnuCalculations.Click
+    Private Sub mnuCalculations_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnCalculateCalculations.Click
         dlgCalculator.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBoxPlot.Click
+    Private Sub mnuGraphicsBoxPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsBoxplot.Click
         dlgBoxplot.ShowDialog()
     End Sub
 
@@ -128,27 +106,19 @@ Public Class frmMain
         dlgEndofRains.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsInventory_Click(sender As Object, e As EventArgs) Handles mnuGraphicsInventory.Click
+    Private Sub mnuGraphicsInventory_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsInventoryPlot.Click
         dlgInventoryPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsRegressionMultinomial_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionMultinomial.Click
-        dlgMultipleRegression.ShowDialog()
-    End Sub
-
-    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsLinePlot.Click
+    Private Sub mnuGraphicsPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsLinePlot.Click
         dlgPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsHistogram_Click(sender As Object, e As EventArgs) Handles mnuGraphicsHistogram.Click
+    Private Sub mnuGraphicsHistogram_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsHistogram.Click
         dlgHistogram.ShowDialog()
     End Sub
 
-    Private Sub StemAndLeafToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuGraphicsStemAndLeaf.Click
-        dlgStemAndLeaf.ShowDialog()
-    End Sub
-
-    Private Sub mnuGraphisDotPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsDotPlot.Click
+    Private Sub mnuGraphisDotPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsDotPlot.Click
         dlgDotPlot.ShowDialog()
     End Sub
 
@@ -281,133 +251,75 @@ Public Class frmMain
         dlgSeasonalSummaryRain.ShowDialog()
     End Sub
 
-    Private Sub mnuStatsNonParametricOneWayAnova_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricOneWayAnova.Click
-        dlgNon_ParametricOneWayANOVA.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatsSummaryColumnStat_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSummaryColumnStat.Click
-        dlgColumnStats.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageAddColumnRowSummary_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnRowSummary.Click
+    Private Sub mnuManageAddColumnRowSummary_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnCalculateRowSummary.Click
         dlgRowStats.ShowDialog()
     End Sub
 
-
-
-    Private Sub mnuStatsRegressionSimple_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionSimple.Click
+    Private Sub mnuStatsRegressionSimple_Click(sender As Object, e As EventArgs)
         dlgRegressionSimple.ShowDialog()
     End Sub
 
-
-
-    Private Sub mnuEditFont_Click(sender As Object, e As EventArgs) Handles mnuEditFont.Click
-        'dlgFont.ShowDialog()
-    End Sub
-
-    Private Sub mnuEditReplace_Click(sender As Object, e As EventArgs) Handles mnuEditReplace.Click
-        dlgReplace.ShowDialog()
-    End Sub
-
-    Private Sub OneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsOneSample.Click
+    Private Sub OneSampleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableExactResults.Click
         dlgOneSample.ShowDialog()
     End Sub
 
-    Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesFrequency.Click
+    Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherTableDialogsFrequency.Click
         dlgFreqTables.ShowDialog()
     End Sub
 
-    Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesSummary.Click
+    Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherTableDialogsSummary.Click
         dlgSummaryTables.ShowDialog()
     End Sub
 
-    Private Sub DuplicatecopyColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgDuplicateColumns.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageAddColumnTransform_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnTransform.Click
+    Private Sub mnuManageAddColumnTransform_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnCalculateTransform.Click
         dlgTransform.ShowDialog()
     End Sub
 
-    Private Sub InteractionsToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgDummyVariables.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageAddColumnPolynomials_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnPolynomials.Click
+    Private Sub mnuManageAddColumnPolynomials_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnCalculatePolynomials.Click
         dlgPolynomials.ShowDialog()
     End Sub
 
-    Private Sub mnuManageReshapeStack_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeStack.Click
+    Private Sub mnuManageReshapeStack_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeStack.Click
         dlgStack.ShowDialog()
     End Sub
 
-    Private Sub mnuManageReshapeUnstack_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeUnstack.Click
+    Private Sub mnuManageReshapeUnstack_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeUnstack.Click
         dlgUnstack.ShowDialog()
     End Sub
 
-    Private Sub ChisquareTestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsChisquareTest.Click
+    Private Sub ChisquareTestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesChisquareTest.Click
         dlgChiSquareTest.ShowDialog()
     End Sub
 
-    Private Sub mnuManageAddColumnRecode_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnRecode.Click
+    Private Sub mnuManageAddColumnRecode_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorRecodeNumeric.Click
         dlgRecodeNumeric.ShowDialog()
     End Sub
 
-    Private Sub RandomSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataRandomSamples.Click
+    Private Sub RandomSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnGenerateRandomSamples.Click
         dlgRandomSample.ShowDialog()
     End Sub
 
-    Private Sub ViewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageDataView.Click
+    Private Sub ViewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameViewData.Click
         dlgView.ShowDialog()
     End Sub
 
-    Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeSubset.Click
+    Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeSubset.Click
         dlgSelect.ShowDialog()
     End Sub
 
-    Private Sub SelectSndStackToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgSelectAndStuck.ShowDialog()
-    End Sub
-
-    Private Sub ExpandToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgExpand.ShowDialog()
-    End Sub
-    Private Sub NameToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgName.ShowDialog()
-    End Sub
-
-    Private Sub FormatCtrlDToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgFormat.ShowDialog()
-    End Sub
-
-    Private Sub AlignmentToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgAlignment.ShowDialog()
-    End Sub
-    Private Sub OrthogonalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOrthogonal.Click
-        dlgOrthogonal.ShowDialog()
-    End Sub
-
-    Private Sub OnewayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceOneWay.Click
-        dlgOneWayANOVA.ShowDialog()
-    End Sub
-
-    Private Sub SimpleWithGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionSimpleWithGroups.Click
+    Private Sub SimpleWithGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesSimpleWithGroups.Click
         dlgSimpleWithGroups.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsRegressionLogLinea_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionLogLinear.Click
-        dlgGeneralisedLinearModels.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatisticsRegressionLogLinear_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionLogLinear.Click
+    Private Sub mnuStatisticsRegressionLogLinear_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralLogLinear.Click
         dlglogLinearModels.ShowDialog()
     End Sub
 
-    Private Sub OneAndTwoSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricOneSample.Click
+    Private Sub OneAndTwoSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableNonParametric.Click
         dlgNon_ParametricOneSampleTests.ShowDialog()
     End Sub
 
-    Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoWayAnova.Click
+    Private Sub mnuStatsNonParametricTwoWayAnova_Click_1(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Click
         dlgNon_ParametricTwoWayAnova.ShowDialog()
     End Sub
 
@@ -523,7 +435,7 @@ Public Class frmMain
         dlgTotals.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsSimpleModelsTwoSample_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsTwoSamples.Click
+    Private Sub mnuStatisticsSimpleModelsTwoSample_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesTwoSamples.Click
         dlgTwoSamples.ShowDialog()
     End Sub
 
@@ -543,19 +455,15 @@ Public Class frmMain
         dlgFromLibrary.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataSubset_Click(sender As Object, e As EventArgs)
+    Private Sub mnuManageReshapeSubset_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshape.Click
         dlgSubset.ShowDialog()
     End Sub
 
-    Private Sub mnuManageReshapeSubset_Click(sender As Object, e As EventArgs) Handles mnuManageReshape.Click
-        dlgSubset.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageDataRename_Click(sender As Object, e As EventArgs) Handles mnuManageDataRename.Click
+    Private Sub mnuManageDataRename_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameRenameColumn.Click
         dlgName.ShowDialog()
     End Sub
 
-    Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuWindowVariable.Click
+    Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
         If frmVariables.Visible = True Then
             frmVariables.Visible = False
         Else
@@ -563,7 +471,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuWindowDataFrame_Click(sender As Object, e As EventArgs) Handles mnuWindowDataFrame.Click
+    Private Sub mnuWindowDataFrame_Click(sender As Object, e As EventArgs) Handles mnuViewDataFrameMetadata.Click
         If frmMetaData.Visible = True Then
             frmMetaData.Visible = False
         Else
@@ -571,7 +479,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub LogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogToolStripMenuItem.Click
+    Private Sub LogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewLog.Click
         If frmLog.Visible = True Then
             frmLog.Visible = False
         Else
@@ -579,7 +487,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScriptToolStripMenuItem.Click
+    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewScriptWindow.Click
         If frmScript.Visible = True Then
             frmScript.Visible = False
         Else
@@ -587,44 +495,28 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuManageReshapeMerge_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeMerge.Click
+    Private Sub mnuManageReshapeMerge_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeMerge.Click
         dlgMerge.ShowDialog()
     End Sub
 
-    Private Sub mnuFileOptions_Click(sender As Object, e As EventArgs) Handles mnuFileOptions.Click
-        dlgOptions.ShowDialog()
-    End Sub
-
-    Private Sub mnuWindowsCascading_Click(sender As Object, e As EventArgs) Handles mnuWindowsCascading.Click
+    Private Sub mnuWindowsCascading_Click(sender As Object, e As EventArgs) Handles mnuViewWindowsLayoutCascade.Click
         Me.LayoutMdi(MdiLayout.Cascade)
     End Sub
 
-    Private Sub mnuWindowsStacked_Click(sender As Object, e As EventArgs) Handles mnuWindowsStacked.Click
+    Private Sub mnuWindowsStacked_Click(sender As Object, e As EventArgs) Handles mnuViewWindowsLayoutTileVertically.Click
         Me.LayoutMdi(MdiLayout.TileVertical)
     End Sub
 
-    Private Sub mnuWindowsSideBySide_Click(sender As Object, e As EventArgs) Handles mnuWindowsSideBySide.Click
+    Private Sub mnuWindowsSideBySide_Click(sender As Object, e As EventArgs) Handles mnuViewWindowsLayoutTileHorizontally.Click
         Me.LayoutMdi(MdiLayout.TileHorizontal)
     End Sub
 
-    Private Sub mnuWindowsArrangedIcons_Click(sender As Object, e As EventArgs) Handles mnuWindowsArrangedIcons.Click
-        Me.LayoutMdi(MdiLayout.ArrangeIcons)
-    End Sub
-
-    Private Sub mnuWindowsEditor_Click(sender As Object, e As EventArgs) Handles mnuWindowsEditor.Click
+    Private Sub mnuWindowsEditor_Click(sender As Object, e As EventArgs) Handles mnuViewDataView.Click
         If frmEditor.Visible = True Then
             frmEditor.Visible = False
         Else
             frmEditor.Visible = True
         End If
-    End Sub
-
-    Private Sub mnuEditUndo_Click(sender As Object, e As EventArgs) Handles mnuEditUndo.Click
-        'frmEditor.grdData.Undo()
-    End Sub
-
-    Private Sub mnuEditRedo_Click(sender As Object, e As EventArgs) Handles mnuEditRedo.Click
-        'frmEditor.grdData.Redo()
     End Sub
 
     Private Sub mnuFilePrint_Click(sender As Object, e As EventArgs) Handles mnuFilePrint.Click
@@ -635,9 +527,7 @@ Public Class frmMain
         dlgPrintPreviewOptions.ShowDialog()
     End Sub
 
-
-
-    Private Sub mnuManageAddColumnRank_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnRank.Click
+    Private Sub mnuManageAddColumnRank_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnCalculateRank.Click
         dlgRank.ShowDialog()
     End Sub
 
@@ -649,39 +539,36 @@ Public Class frmMain
         dlgExportDataset.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFileSheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileSheetMetadata.Click
+    Private Sub mnuManageDataFileSheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectDataFrameMetadata.Click
         dlgSheetMetadata.ShowDialog()
     End Sub
 
-    Private Sub mnuManageSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuManageSheetColumnMetadata.Click
+    Private Sub mnuManageSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameColumnMetadata.Click
         frmVariables.Visible = True
         frmVariables.BringToFront()
     End Sub
 
-    Private Sub mnuManageSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuManageSheetInsertColumnsRows.Click
+    Private Sub mnuManageSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameInsertColumnsRows.Click
         dlgInsertColumn.ShowDialog()
     End Sub
-    Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPie.Click
+
+    Private Sub mnuGraphicsBarPie_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsBarChart.Click
         dlgBarAndPieChart.ShowDialog()
     End Sub
 
-    Private Sub mnuManageAddColumnPermuteRows_Click(sender As Object, e As EventArgs) Handles mnuManageAddColumnPermuteColumn.Click
+    Private Sub mnuManageAddColumnPermuteRows_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnGeneratePermuteRows.Click
         dlgPermuteColumn.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsBarPieChartSummaryData_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariateCorrelation.Click
+    Private Sub mnuStatistcsMultivariateCorrelation_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesCorrelate.Click
         dlgCorrelation.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFileDeleteSheets_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileDeleteSheets.Click
+    Private Sub mnuManageDataFileDeleteSheets_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectDeleteDataFrame.Click
         dlgDeleteSheet.ShowDialog()
     End Sub
 
-    Private Sub mnuManageSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuManageSheetDeleteColumnsRows.Click
+    Private Sub mnuManageSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameDeleteColumnsRows.Click
         dlgDeleteRowsOrColums.ShowDialog()
     End Sub
 
@@ -715,18 +602,19 @@ Public Class frmMain
         mnuFilePrint_Click(sender, e)
     End Sub
 
-    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+    Private Sub mnuHelpHelp_Click(sender As Object, e As EventArgs) Handles mnuHelpHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TableOfContents, "")
     End Sub
 
     Private Sub mnuTbHelp_Click(sender As Object, e As EventArgs) Handles mnuTbHelp.Click
-        mnuHelp_Click(sender, e)
+        mnuHelpHelp_Click(sender, e)
     End Sub
-    Private Sub mnuGraphicsBarPieChart_Click(sender As Object, e As EventArgs) Handles mnuGraphicsBarPieChart.Click
+
+    Private Sub mnuGraphicsBarPieChart_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsBarChartFromSummary.Click
         dlgSummaryBarOrPieChart.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuGraphicsScatterPlot.Click
+    Private Sub mnuGraphicsScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsScatterPlot.Click
         dlgScatterPlot.ShowDialog()
     End Sub
 
@@ -783,233 +671,185 @@ Public Class frmMain
         Next
     End Sub
 
-    Private Sub mnuStatistcsMultivariatePrincipalComponents_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariatePrincipalComponents.Click
+    Private Sub mnuStatistcsMultivariatePrincipalComponents_Click(sender As Object, e As EventArgs) Handles DescribeGeneralPrincipalComponents.Click
         dlgPrincipalComponentAnalysis.ShowDialog()
     End Sub
 
-    Private Sub mnuStatistcsMultivariateCanonicalCorrelations_Click(sender As Object, e As EventArgs) Handles mnuStatistcsMultivariateCanonicalCorrelations.Click
+    Private Sub mnuStatistcsMultivariateCanonicalCorrelations_Click(sender As Object, e As EventArgs) Handles DescribeGeneralCanonicalCorrelations.Click
         dlgCanonicalCorrelationAnalysis.ShowDialog()
     End Sub
 
-    Private Sub mnuManageFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuManageFactorRecode.Click
+    Private Sub mnuManageFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorRecodeFactor.Click
         dlgRecodeFactor.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFileCopySheet_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileCopySheet.Click
+    Private Sub mnuManageDataFileCopySheet_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectCopyDataFrame.Click
         dlgCopySheet.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFileReorderSheets_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileReorderSheets.Click
+    Private Sub mnuManageDataFileReorderSheets_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectReorderDataFrames.Click
         dlgReorderSheet.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFileRenameSheet_Click(sender As Object, e As EventArgs) Handles mnuManageDataFileRenameSheet.Click
+    Private Sub mnuManageDataFileRenameSheet_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectRenameDataFrame.Click
         dlgRenameSheet.ShowDialog()
     End Sub
 
-    Private Sub mnuManageRechapeColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuManageRechapeColumnSummaries.Click
+    Private Sub mnuManageRechapeColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeColumnSummaries.Click
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuManageSheetReorder_Click(sender As Object, e As EventArgs) Handles mnuManageSheetReorder.Click
+    Private Sub mnuManageSheetReorder_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameReorderColumns.Click
         dlgReorderColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuManageFactorReferenceLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorReferenceLevels.Click
+    Private Sub mnuManageFactorReferenceLevels_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorReferenceLevel.Click
         dlgReferenceLevel.ShowDialog()
     End Sub
 
-    Private Sub mnuMangeFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuMangeFactorLabels.Click
+    Private Sub mnuMangeFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorLevelsLabels.Click
         dlgLabels.ShowDialog()
     End Sub
 
-    Private Sub mnuManageFactorconvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuManageFactorconvertToFactor.Click
+    Private Sub mnuManageFactorconvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorConvertToFactor.Click
         dlgConvertColumns.bToFactorOnly = True
         dlgConvertColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuManageFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorReorderLevels.Click
+    Private Sub mnuManageFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorReorderLevels.Click
         dlgReorderLevels.ShowDialog()
     End Sub
 
-    Private Sub mnuManageFactorUnusedLevels_Click(sender As Object, e As EventArgs) Handles mnuManageFactorUnusedLevels.Click
+    Private Sub mnuManageFactorUnusedLevels_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorUnusedLevels.Click
         dlgUnusedLevels.ShowDialog()
     End Sub
 
-    Private Sub mnuManageSheetRestrict_Click(sender As Object, e As EventArgs)
-        dlgRestrict.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageSheetProtect_Click(sender As Object, e As EventArgs) Handles mnuManageSheetProtect.Click
+    Private Sub mnuManageSheetProtect_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameProtectColumn.Click
         dlgProtect.ShowDialog()
     End Sub
 
-    Private Sub mnuManageSheetHideShowColumns_Click(sender As Object, e As EventArgs) Handles mnuManageSheetHideShowColumns.Click
+    Private Sub mnuManageSheetHideShowColumns_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameHideColumns.Click
         dlgHideShowColumns.ShowDialog()
     End Sub
-
-    Private Sub mnuManageReshapeRandomSubst_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeRandomSubset.Click
-        dlgRandomSubset.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuManageDataSort.Click
+    Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameSort.Click
         dlgSort.ShowDialog()
     End Sub
 
-    Private Sub mnuManageAddColumnFilter_Click(sender As Object, e As EventArgs)
-        dlgRestrict.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageDescriptivesView_Click(sender As Object, e As EventArgs) Handles mnuManageDescriptivesView.Click
+    Private Sub mnuManageDescriptivesView_Click(sender As Object, e As EventArgs) Handles mnuOrganiseRObjectsView.Click
         dlgViewDescriptives.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDescriptivesReoder_Click(sender As Object, e As EventArgs) Handles mnuManageDescriptivesReoder.Click
+    Private Sub mnuManageDescriptivesReoder_Click(sender As Object, e As EventArgs) Handles mnuOrganiseRObjectsReorder.Click
         dlgReoderDescriptives.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDescriptivesRename_Click(sender As Object, e As EventArgs) Handles mnuManageDescriptivesRename.Click
+    Private Sub mnuManageDescriptivesRename_Click(sender As Object, e As EventArgs) Handles mnuOrganiseRObjectsRename.Click
         dlgRenameDescriptive.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDescriptivesDelete_Click(sender As Object, e As EventArgs) Handles mnuManageDescriptivesDelete.Click
+    Private Sub mnuManageDescriptivesDelete_Click(sender As Object, e As EventArgs) Handles mnuOrganiseRObjectsDelete.Click
         dlgDeleteDescriptive.ShowDialog()
     End Sub
 
-    Private Sub mnuManageModelsView_Click(sender As Object, e As EventArgs) Handles mnuManageModelsView.Click
-        dlgViewModels.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageModelsReoder_Click(sender As Object, e As EventArgs) Handles mnuManageModelsReoder.Click
-        dlgReoderModels.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageModelsRename_Click(sender As Object, e As EventArgs) Handles mnuManageModelsRename.Click
-        dlgRenameModels.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageModelsDelete_Click(sender As Object, e As EventArgs) Handles mnuManageModelsDelete.Click
-        dlgDeleteModels.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageFactorContrasts_Click(sender As Object, e As EventArgs) Handles mnuManageFactorContrasts.Click
+    Private Sub mnuManageFactorContrasts_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorContrasts.Click
         dlgContrasts.ShowDialog()
     End Sub
 
-    Private Sub mnuManageFactorSheet_Click(sender As Object, e As EventArgs) Handles mnuManageFactorSheet.Click
+    Private Sub mnuManageFactorSheet_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorFactorDataFrame.Click
         dlgMakeSheets.ShowDialog()
     End Sub
 
-    Private Sub mnuGraphicsUseGraph_Click(sender As Object, e As EventArgs) Handles mnuGraphicsUseGraph.Click
+    Private Sub mnuGraphicsUseGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseObjectsUseGraph.Click
         dlgUseGraph.ShowDialog()
     End Sub
 
-    Private Sub ManageDataCheck_Click(sender As Object, e As EventArgs) Handles ManageDataCheck.Click
-        dlgCheckData.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageTextSplit_Click(sender As Object, e As EventArgs) Handles mnuManageTextSplit.Click
+    Private Sub mnuManageTextSplit_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnTextSplit.Click
         dlgSplitText.ShowDialog()
     End Sub
 
-    Private Sub mnuManageTextCombine_Click(sender As Object, e As EventArgs) Handles mnuManageTextCombine.Click
+    Private Sub mnuManageTextCombine_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnTextCombine.Click
         dlgCombineText.ShowDialog()
     End Sub
 
-    Private Sub mnuManageTextMatch_Click(sender As Object, e As EventArgs) Handles mnuManageTextMatch.Click
+    Private Sub mnuManageTextMatch_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnTextMatch.Click
         dlgMatchText.ShowDialog()
     End Sub
 
-    Private Sub mnuManageTextDistance_Click(sender As Object, e As EventArgs) Handles mnuManageTextDistance.Click
+    Private Sub mnuManageTextDistance_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnTextDistance.Click
         dlgDistanceText.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataFilter_Click(sender As Object, e As EventArgs) Handles mnuManageDataFilter.Click
+    Private Sub mnuManageDataFilter_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameFilter.Click
         dlgRestrict.ShowDialog()
     End Sub
 
-    Private Sub mnuManageDataConvertTo_Click(sender As Object, e As EventArgs) Handles mnuManageDataConvertTo.Click
+    Private Sub mnuManageDataConvertTo_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameConvertColumns.Click
         dlgConvertColumns.bToFactorOnly = False
         dlgConvertColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuManageReshapeTranspose_Click(sender As Object, e As EventArgs) Handles mnuManageReshapeTranspose.Click
+    Private Sub mnuManageReshapeTranspose_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeTranspose.Click
         dlgTransposeColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuManageFactorCombine_Click(sender As Object, e As EventArgs) Handles mnuManageFactorCombine.Click
+    Private Sub mnuManageFactorCombine_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorCombineFactors.Click
         dlgCombine.ShowDialog()
     End Sub
 
-    Private Sub mnuManageFactorDummyVariable_Click(sender As Object, e As EventArgs) Handles mnuManageFactorDummyVariable.Click
+    Private Sub mnuManageFactorDummyVariable_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorDummyVariables.Click
         dlgDummyVariables.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsAnalysisOfVarianceGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsAnalysisOfVarianceGeneral.Click
+    Private Sub mnuStatisticsAnalysisOfVarianceGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralANOVAGeneral.Click
         dlgGeneralANOVA.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsTablesGroup_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesGroup.Click
-        dlgGroupTables.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatisticsTablesGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesGeneral.Click
-        dlgGeneralTables.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatisticsTablesMultipleResponse_Click(sender As Object, e As EventArgs) Handles mnuStatisticsTablesMultipleResponse.Click
+    Private Sub mnuStatisticsTablesMultipleResponse_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherTableDialogsMultipleResponse.Click
         dlgMultipleResponse.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsSimpleModelsOneSampleSummaryData_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsOneSampleSummaryData.Click
+    Private Sub mnuStatisticsSimpleModelsOneSampleSummaryData_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableSampleSummaryData.Click
         dlgOneSampleSummaryData.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsSimpleModelsTwoSamplesSummaryData_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsTwoSamplesSummaryData.Click
+    Private Sub mnuStatisticsSimpleModelsTwoSamplesSummaryData_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSummaryData.Click
         dlgTwoSampleSummaryData.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsSimpleModelsGoodnessOfFit_Click(sender As Object, e As EventArgs) Handles mnuStatisticsSimpleModelsGoodnessOfFit.Click
+    Private Sub mnuStatisticsSimpleModelsGoodnessOfFit_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableGoodnessofFit.Click
         dlgGoodnessofFit.ShowDialog()
     End Sub
 
-    Private Sub mnuStatisticsNonParametricTwoSamples_Click(sender As Object, e As EventArgs) Handles mnuStatisticsNonParametricTwoSamples.Click
-        dlgTwoSamples.ShowDialog()
-    End Sub
-
-    Private Sub mnuStatisticsRegressionGeneral_Click(sender As Object, e As EventArgs) Handles mnuStatisticsRegressionGeneral.Click
+    Private Sub mnuStatisticsRegressionGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralRegression.Click
         dlgGeneralRegression.ShowDialog()
     End Sub
 
-    Private Sub WindRoseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindRoseToolStripMenuItem.Click
+    Private Sub WindRoseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsWindRose.Click
         dlgWindrose.ShowDialog()
     End Sub
 
-    Private Sub ThemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ThemesToolStripMenuItem.Click
+    Private Sub ThemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseObjectsThemes.Click
         dlgThemes.ShowDialog()
     End Sub
 
-    Private Sub CombineToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineToolStripMenuItem.Click
+    Private Sub CombineToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseObjectsCombineGraphs.Click
         dlgCombineforGraphics.ShowDialog()
     End Sub
 
-    Private Sub PopulationPyramidsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PopulationPyramidsToolStripMenuItem.Click
+    Private Sub PopulationPyramidsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsPopulationPyramid.Click
         dlgPopulationPyramids.ShowDialog()
     End Sub
 
-    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneralToolStripMenuItem.Click
+    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeGeneralGraphics.Click
         dlgGeneralForGraphics.ShowDialog()
     End Sub
 
-    Private Sub mnuManageTextTransform_Click(sender As Object, e As EventArgs) Handles mnuManageTextTransform.Click
+    Private Sub mnuManageTextTransform_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnTextTransform.Click
         dlgTransformText.ShowDialog()
     End Sub
 
     Private Sub mnuTbDelete_Click(sender As Object, e As EventArgs) Handles mnuTbDelete.Click
-        Dim response As DialogResult = MessageBox.Show("Are you sure you want to clear the output window?", "Output window", MessageBoxButtons.YesNo)
-        If response = DialogResult.Yes Then
-            frmCommand.txtCommand.Clear()
-        End If
+        mnuToolsClearOutputWindow_Click(sender, e)
     End Sub
 
     Private Sub mnuEditSelectAll_Click(sender As Object, e As EventArgs) Handles mnuEditSelectAll.Click
@@ -1035,5 +875,103 @@ Public Class frmMain
             frmEditor.copyRange()
         End If
     End Sub
-End Class
 
+    Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs) Handles mnuToolsOptions.Click
+        dlgOptions.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseDataFrameHideColumns_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameHideColumns.Click
+        dlgHideShowColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelProbabilityDistributionsRandomSamplesUseModel_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsRandomSamplesUseModel.Click
+        dlgRandomSample.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelTwoVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelTwoVariablesFitModel.Click
+        dlgRegressionSimple.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherOneVariableExactResults_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableExactResults.Click
+        dlgOneSample.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherOneVariableSampleSummaryData_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableSampleSummaryData.Click
+        dlgOneSampleSummaryData.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherOneVariableNonParametric_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableNonParametric.Click
+        dlgNon_ParametricOneSampleTests.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherOneVariableGoodnessofFit_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableGoodnessofFit.Click
+        dlgGoodnessofFit.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherTwoVariablesTwoSamples_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesTwoSamples.Click
+        dlgTwoSamples.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherTwoVariablesSummaryData_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSummaryData.Click
+        dlgTwoSampleSummaryData.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherTwoVariablesSimpleRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSimpleRegression.Click
+        dlgRegressionSimple.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherTwoVariablesOneWayANOVA_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesOneWayANOVA.Click
+        dlgOneWayANOVA.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherTwoVariablesNonParametricTwoSamples_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesNonParametricTwoSamples.Click
+
+    End Sub
+
+    Private Sub mnuModelOtherTwoVariablesNonParametricOneWayANOVA_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Click
+        dlgNon_ParametricOneWayANOVA.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherThreeVariablesSimpleWithGroups_Click(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesSimpleWithGroups.Click
+        dlgSimpleWithGroups.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherThreeVariablesNonParametricTwoWayANOVA_Click(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Click
+        dlgNon_ParametricTwoWayAnova.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherThreeVariablesChisquareTest_Click(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesChisquareTest.Click
+        dlgChiSquareTest.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherGeneralANOVAGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralANOVAGeneral.Click
+        dlgGeneralANOVA.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherGeneralRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralRegression.Click
+        dlgGeneralRegression.ShowDialog()
+    End Sub
+
+    Private Sub mnuModelOtherGeneralLogLinear_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralLogLinear.Click
+        dlglogLinearModels.ShowDialog()
+    End Sub
+
+    Private Sub DescribeGeneralCorrelations_Click(sender As Object, e As EventArgs) Handles DescribeGeneralCorrelations.Click
+        dlgCorrelation.ShowDialog()
+    End Sub
+
+    Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
+        frmCommand.Visible = Not frmCommand.Visible
+    End Sub
+
+    Private Sub mnuOrganiseColumnReshapeRandomSubset_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeRandomSubset.Click
+        dlgRandomSubsets.ShowDialog()
+    End Sub
+
+    Private Sub mnuToolsClearOutputWindow_Click(sender As Object, e As EventArgs) Handles mnuToolsClearOutputWindow.Click
+        Dim dlgResponse As DialogResult = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
+        If dlgResponse = DialogResult.Yes Then
+            frmCommand.txtCommand.Clear()
+        End If
+    End Sub
+End Class

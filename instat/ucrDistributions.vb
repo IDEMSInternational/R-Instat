@@ -18,18 +18,31 @@ Imports instat.Translations
 Imports instat.RSyntax
 
 Public Class ucrDistributions
-    Public lstAllDistributions As New List(Of Distribution)
-    Public lstCurrentDistributions As New List(Of Distribution)
-    Public strDistributionType As String = ""
-    Public clsCurrDistribution As New Distribution
-    Public bDistributionsSet As Boolean = False
-    Public clsCurrRFunction As New RFunction
-    Public strDatatype As String = ""
+    Public lstAllDistributions As List(Of Distribution)
+    Public lstCurrentDistributions As List(Of Distribution)
+    Public strDistributionType As String
+    Public clsCurrDistribution As Distribution
+    Public bDistributionsSet As Boolean
+    Public clsCurrRFunction As RFunction
+    Public strDataType As String
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        lstAllDistributions = New List(Of Distribution)
+        lstCurrentDistributions = New List(Of Distribution)
+        strDistributionType = ""
+        clsCurrDistribution = New Distribution
+        bDistributionsSet = False
+        clsCurrRFunction = New RFunction
+        strDataType = ""
+        CreateDistributions()
+    End Sub
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If Not bDistributionsSet Then
-            CreateDistributions()
-        End If
     End Sub
 
     Public Sub AddParameter(strArgumentName As String, strArgumentValue As String)
@@ -123,7 +136,7 @@ Public Class ucrDistributions
                     bUse = (Dist.strDFunctionName <> "")
                 Case "GLMFunctions"
                     If (Dist.strGLMFunctionName <> "") Then
-                        Select Case strDatatype
+                        Select Case strDataType
                             Case "numeric"
                                 If Dist.bNumeric Then
                                     bUse = True
@@ -132,7 +145,7 @@ Public Class ucrDistributions
                                 If Dist.bPositiveInt Then
                                     bUse = True
                                 End If
-                            Case "two levels factor"
+                            Case "two level factor"
                                 If Dist.bTwoLevelFactor Then
                                     bUse = True
                                 End If
@@ -360,7 +373,6 @@ Public Class ucrDistributions
     Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
     Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
         clsCurrDistribution = lstCurrentDistributions(cboDistributions.SelectedIndex)
-        'TODO why is this in here it's not relavent to the selection.
         Select Case strDistributionType
             Case "RFunctions"
                 clsCurrRFunction.SetRCommand(clsCurrDistribution.strRFunctionName)
@@ -377,8 +389,12 @@ Public Class ucrDistributions
     End Sub
 
     Public Sub RecieverDatatype(DataFrame As String, Column As String)
-        strDatatype = frmMain.clsRLink.GetDataType(DataFrame, Column)
+        strDataType = frmMain.clsRLink.GetDataType(DataFrame, Column)
         SetDistributions()
     End Sub
 
+    Public Sub RecieverDatatype(strNewType As String)
+        strDataType = strNewType
+        SetDistributions()
+    End Sub
 End Class
