@@ -341,11 +341,6 @@ Public Class RLink
         If bInstatObjectExists Then
             clsGetColumns.SetRCommand(strInstatDataObject & "$get_column_names")
             clsGetColumns.AddParameter("as_list", "TRUE")
-            'If bIncludeHiddenColumns Then
-            '    clsGetColumns.AddParameter("include_hidden", "TRUE")
-            'Else
-            '    clsGetColumns.AddParameter("include_hidden", "FALSE")
-            'End If
             lstView.Clear()
             lstView.Groups.Clear()
             lstView.Columns.Add(strHeading)

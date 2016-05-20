@@ -122,10 +122,13 @@ Public Class ucrReceiver
     End Sub
 
     Public Sub SetIncludedDataTypes(strInclude As String())
+        Dim strTypes(strInclude.Count - 1) As String
+
+        Array.Copy(strInclude, strTypes, strInclude.Length)
         For i = 0 To strInclude.Count - 1
-            strInclude(i) = Chr(34) & strInclude(i) & Chr(34)
+            strTypes(i) = Chr(34) & strInclude(i) & Chr(34)
         Next
-        AddIncludedMetadataProperty("Data_Type", strInclude)
+        AddIncludedMetadataProperty("Data_Type", strTypes)
     End Sub
 
     Public Sub SetExcludedDataTypes(strExclude As String())
@@ -137,7 +140,7 @@ Public Class ucrReceiver
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
         Dim iIncludeIndex As Integer
-        Dim iExcludeIndex As Integer
+        'Dim iExcludeIndex As Integer
         Dim kvpIncludeProperty As KeyValuePair(Of String, String())
 
         kvpIncludeProperty = New KeyValuePair(Of String, String())(strProperty, strInclude)
@@ -148,10 +151,11 @@ Public Class ucrReceiver
             lstIncludedMetadataProperties.Add(kvpIncludeProperty)
         End If
 
-        iExcludeIndex = lstExcludedMetadataProperties.FindIndex(Function(x) x.Key = strProperty)
-        If iExcludeIndex <> -1 Then
-            lstExcludedMetadataProperties.RemoveAt(iExcludeIndex)
-        End If
+        'Removes from other list
+        'iExcludeIndex = lstExcludedMetadataProperties.FindIndex(Function(x) x.Key = strProperty)
+        'If iExcludeIndex <> -1 Then
+        '    lstExcludedMetadataProperties.RemoveAt(iExcludeIndex)
+        'End If
 
         If Selector IsNot Nothing Then
             Selector.LoadList()
@@ -160,7 +164,7 @@ Public Class ucrReceiver
     End Sub
 
     Public Sub AddExcludedMetadataProperty(strProperty As String, strExclude As String())
-        Dim iIncludeIndex As Integer
+        'Dim iIncludeIndex As Integer
         Dim iExcludeIndex As Integer
 
         Dim kvpExcludeProperty As KeyValuePair(Of String, String())
@@ -173,10 +177,11 @@ Public Class ucrReceiver
             lstExcludedMetadataProperties.Add(kvpExcludeProperty)
         End If
 
-        iIncludeIndex = lstIncludedMetadataProperties.FindIndex(Function(x) x.Key = strProperty)
-        If iIncludeIndex <> -1 Then
-            lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
-        End If
+        'Removes from other list
+        'iIncludeIndex = lstIncludedMetadataProperties.FindIndex(Function(x) x.Key = strProperty)
+        'If iIncludeIndex <> -1 Then
+        '    lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
+        'End If
 
         If Selector IsNot Nothing Then
             Selector.LoadList()
