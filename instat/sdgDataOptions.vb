@@ -24,7 +24,6 @@ Public Class sdgDataOptions
 
         ' Add any initialization after the InitializeComponent() call.
         bFirstLoad = True
-        chkShowHiddenColumns.Checked = False
     End Sub
 
     Private Sub sdgDataOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -40,8 +39,8 @@ Public Class sdgDataOptions
 
     End Sub
 
-    Private Sub SetDefaults()
-
+    Public Sub SetDefaults()
+        chkShowHiddenColumns.Checked = False
     End Sub
 
     Public Function ShowHiddenColumns() As Boolean
