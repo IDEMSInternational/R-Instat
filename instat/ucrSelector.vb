@@ -22,18 +22,24 @@ Public Class ucrSelector
     Public Event ResetReceivers()
     Public Event VariablesInReceiversChanged()
     Public lstVariablesInReceivers As List(Of String)
-    Public bFirstLoad As Boolean = True
+    Public bFirstLoad As Boolean
+    Public strCurrentDataFrame As String
+
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        lstVariablesInReceivers = New List(Of String)
+        bFirstLoad = True
+        strCurrentDataFrame = ""
+    End Sub
 
     Private Sub ucrSelection_load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadList()
         If bFirstLoad Then
-            InitialiseDialog()
             bFirstLoad = False
         End If
-    End Sub
-
-    Private Sub InitialiseDialog()
-        lstVariablesInReceivers = New List(Of String)
     End Sub
 
     Protected Sub OnResetAll()
@@ -46,18 +52,13 @@ Public Class ucrSelector
 
     Public Overridable Sub LoadList()
         If CurrentReceiver IsNot Nothing Then
-            If CurrentReceiver.lstIncludedDataTypes.Count > 0 Then
-                frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=CurrentReceiver.lstIncludedDataTypes, strHeading:=CurrentReceiver.strSelectorHeading)
-            ElseIf CurrentReceiver.lstExcludedDataTypes.Count > 0 Then
-                frmMain.clsRLink.FillListView(lstAvailableVariable, lstExcludedDataTypes:=CurrentReceiver.lstExcludedDataTypes, strHeading:=CurrentReceiver.strSelectorHeading)
-            End If
+            frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=CurrentReceiver.lstIncludedDataTypes, strHeading:=CurrentReceiver.strSelectorHeading, lstExcludedDataTypes:=CurrentReceiver.lstExcludedDataTypes, bIncludeHiddenColumns:=sdgDataOptions.ShowHiddenColumns(), strDataFrameName:=strCurrentDataFrame)
         End If
     End Sub
 
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
         LoadList()
-        InitialiseDialog()
         'lstItemsInReceivers.Clear()
     End Sub
 
@@ -101,10 +102,16 @@ Public Class ucrSelector
     '    Next
     '    Add()
     'End Sub
-    Public Sub ShowOptionsDialog()
-        'code for dislaying dialog goes here
-        sdgRestrict.ShowDialog()
+
+    Public Sub ShowDataOptionsDialog()
+        sdgDataOptions.ShowDialog()
+        SetDataOptionsSettings()
     End Sub
+
+    Public Overridable Sub SetDataOptionsSettings()
+        LoadList()
+    End Sub
+
     Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs) Handles lstAvailableVariable.DoubleClick
         Add()
     End Sub

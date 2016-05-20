@@ -38,8 +38,8 @@ Partial Class frmMetaData
         Me.grdMetaData.Script = Nothing
         Me.grdMetaData.SheetTabContextMenuStrip = Nothing
         Me.grdMetaData.SheetTabNewButtonVisible = False
+        Me.grdMetaData.SheetTabVisible = False
         Me.grdMetaData.SheetTabWidth = 100
-        Me.grdMetaData.SheetTabNewButtonVisible = False
         Me.grdMetaData.Size = New System.Drawing.Size(228, 201)
         Me.grdMetaData.TabIndex = 1
         Me.grdMetaData.Text = "Meta Data"
@@ -57,14 +57,11 @@ Partial Class frmMetaData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(228, 201)
         Me.Controls.Add(Me.grdMetaData)
         Me.Controls.Add(Me.txtMetadata)
-        Me.HelpButton = True
         Me.Name = "frmMetaData"
         Me.ShowIcon = False
-        Me.ShowInTaskbar = False
         Me.Text = "Data frame Metadata"
         Me.ResumeLayout(False)
         Me.PerformLayout()

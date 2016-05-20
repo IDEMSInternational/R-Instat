@@ -22,29 +22,16 @@ Partial Class ucrFactor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblNoFactorsLoaded = New System.Windows.Forms.Label()
         Me.grdFactorData = New unvell.ReoGrid.ReoGridControl()
         Me.SuspendLayout()
         '
-        'lblNoFactorsLoaded
-        '
-        Me.lblNoFactorsLoaded.AutoSize = True
-        Me.lblNoFactorsLoaded.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNoFactorsLoaded.Location = New System.Drawing.Point(3, 18)
-        Me.lblNoFactorsLoaded.Name = "lblNoFactorsLoaded"
-        Me.lblNoFactorsLoaded.Size = New System.Drawing.Size(196, 16)
-        Me.lblNoFactorsLoaded.TabIndex = 0
-        Me.lblNoFactorsLoaded.Text = "No factor columns selected"
-        '
         'grdFactorData
         '
-        Me.grdFactorData.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdFactorData.BackColor = System.Drawing.Color.White
         Me.grdFactorData.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdFactorData.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdFactorData.LeadHeaderContextMenuStrip = Nothing
-        Me.grdFactorData.Location = New System.Drawing.Point(4, 4)
+        Me.grdFactorData.Location = New System.Drawing.Point(0, 0)
         Me.grdFactorData.Name = "grdFactorData"
         Me.grdFactorData.RowHeaderContextMenuStrip = Nothing
         Me.grdFactorData.Script = Nothing
@@ -52,7 +39,7 @@ Partial Class ucrFactor
         Me.grdFactorData.SheetTabNewButtonVisible = False
         Me.grdFactorData.SheetTabVisible = True
         Me.grdFactorData.SheetTabWidth = 60
-        Me.grdFactorData.Size = New System.Drawing.Size(260, 174)
+        Me.grdFactorData.Size = New System.Drawing.Size(270, 208)
         Me.grdFactorData.TabIndex = 32
         '
         'ucrFactor
@@ -60,16 +47,12 @@ Partial Class ucrFactor
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Controls.Add(Me.grdFactorData)
-        Me.Controls.Add(Me.lblNoFactorsLoaded)
         Me.Name = "ucrFactor"
-        Me.Size = New System.Drawing.Size(267, 181)
+        Me.Size = New System.Drawing.Size(270, 208)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents lblNoFactorsLoaded As Label
     Friend WithEvents grdFactorData As unvell.ReoGrid.ReoGridControl
 End Class

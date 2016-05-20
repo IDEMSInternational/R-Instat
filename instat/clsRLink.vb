@@ -149,12 +149,11 @@ Public Class RLink
         Dim strScriptWithComment As String
         Dim strSplitScript As String
         strOutput = ""
-        Try
-            If strComment <> "" Then
-                strComment = "# " & strComment
-                strScriptWithComment = strComment & vbCrLf & strScript
-            Else
-                strScriptWithComment = strScript
+        If strComment <> "" Then
+            strComment = "# " & strComment
+            strScriptWithComment = strComment & vbCrLf & strScript
+        Else
+            strScriptWithComment = strScript
             End If
             If bLog Then
                 txtLog.Text = txtLog.Text & strScriptWithComment & vbCrLf
@@ -165,35 +164,46 @@ Public Class RLink
                 End If
                 AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
             End If
-            If bReturnOutput = 0 Then
+        If bReturnOutput = 0 Then
+            Try
                 clsEngine.Evaluate(strScript)
-            ElseIf bReturnOutput = 1 Then
+            Catch e As Exception
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+            End Try
+        ElseIf bReturnOutput = 1 Then
+            Try
                 temp = clsEngine.Evaluate(strScript)
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
+            Catch e As Exception
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+            End Try
+        Else
+            If strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) = -1 Then
+                strCapturedScript = "capture.output(" & strScript & ")"
             Else
-                If strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) = -1 Then
-                    strCapturedScript = "capture.output(" & strScript & ")"
-                Else
-                    strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
-                    If strSplitScript <> "" Then
+                strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
+                If strSplitScript <> "" Then
+                    Try
                         clsEngine.Evaluate(strSplitScript)
-                    End If
-                    strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
-                    strCapturedScript = "capture.output(" & strSplitScript & ")"
+                    Catch e As Exception
+                        MsgBox("Error occured in attempting to run:" & vbNewLine & strSplitScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                    End Try
                 End If
+                strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
+                strCapturedScript = "capture.output(" & strSplitScript & ")"
+            End If
+            Try
                 temp = clsEngine.Evaluate(strCapturedScript)
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
-            End If
-            If bOutput Then
-                'txtOutput.Text = txtOutput.Text & strOutput
-                'output format here
-                AppendText(txtOutput, clrOutput, fOutput, strOutput)
-            End If
-        Catch
-            MsgBox(strScript)
-        End Try
+            Catch e As Exception
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strCapturedScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+            End Try
+        End If
+        If bOutput Then
+            AppendText(txtOutput, clrOutput, fOutput, strOutput)
+        End If
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
@@ -317,33 +327,34 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub FillListView(lstView As ListView, Optional lstIncludedDataTypes As List(Of String) = Nothing, Optional lstExcludedDataTypes As List(Of String) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables")
+    Public Sub FillListView(lstView As ListView, Optional lstIncludedDataTypes As List(Of String) = Nothing, Optional lstExcludedDataTypes As List(Of String) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional bIncludeHiddenColumns As Boolean = False)
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
         Dim grps As New ListViewGroup
+        Dim clsGetColumns As New RFunction
+
         If bInstatObjectExists Then
+            clsGetColumns.SetRCommand(strInstatDataObject & "$get_column_names")
+            clsGetColumns.AddParameter("as_list", "TRUE")
+            If bIncludeHiddenColumns Then
+                clsGetColumns.AddParameter("include_hidden", "TRUE")
+            Else
+                clsGetColumns.AddParameter("include_hidden", "FALSE")
+            End If
             lstView.Clear()
             lstView.Groups.Clear()
             lstView.Columns.Add(strHeading)
-            If strDataFrameName = "" Then
-                If lstIncludedDataTypes IsNot Nothing Then
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(include_type = " & GetListAsRString(lstIncludedDataTypes) & ", as_list = TRUE)").AsList
-                ElseIf lstExcludedDataTypes IsNot Nothing Then
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(exclude_type = " & GetListAsRString(lstExcludedDataTypes) & ", as_list = TRUE)").AsList
-                Else
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(as_list = TRUE)").AsList
-                End If
-            Else
-                If lstIncludedDataTypes IsNot Nothing Then
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", include_type = " & GetListAsRString(lstIncludedDataTypes) & ", as_list = TRUE)").AsList
-                ElseIf lstExcludedDataTypes IsNot Nothing Then
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", exclude_type = " & GetListAsRString(lstExcludedDataTypes) & ", as_list = TRUE)").AsList
-                Else
-                    vecColumns = clsEngine.Evaluate(strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", as_list = TRUE)").AsList
-                End If
 
+            If lstIncludedDataTypes.Count > 0 Then
+                clsGetColumns.AddParameter("include_type", GetListAsRString(lstIncludedDataTypes))
+            ElseIf lstExcludedDataTypes.Count > 0 Then
+                clsGetColumns.AddParameter("exclude_type", GetListAsRString(lstExcludedDataTypes))
             End If
+            If strDataFrameName <> "" Then
+                clsGetColumns.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+            End If
+            vecColumns = RunInternalScriptGetValue(clsGetColumns.ToScript()).AsList
 
             For i = 0 To vecColumns.Count - 1
                 If vecColumns.Count > 1 Then
@@ -395,7 +406,7 @@ Public Class RLink
     Public Function GetDataFrameLength(strDataFrameName As String) As Integer
         Dim intLength As Integer
         If clsEngine IsNot Nothing Then
-            intLength = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_dataframe_length(" & Chr(34) & strDataFrameName & Chr(34) & ")").AsInteger(0)
+            intLength = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_frame_length(" & Chr(34) & strDataFrameName & Chr(34) & ")").AsInteger(0)
         End If
         Return intLength
     End Function
@@ -412,7 +423,9 @@ Public Class RLink
         Dim chrModelNames As CharacterVector
         Dim lstModelNames As New List(Of String)
         chrModelNames = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_model_names()").AsCharacter
-        lstModelNames.AddRange(chrModelNames)
+        If chrModelNames IsNot Nothing Then
+            lstModelNames.AddRange(chrModelNames)
+        End If
         Return lstModelNames
     End Function
 
