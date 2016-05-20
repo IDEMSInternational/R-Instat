@@ -84,12 +84,12 @@ Public Class dlgInsertColumn
     Private Sub startpo()
         If rdoInsertRows.Checked Then
             If Not nudPos.Text = "" Then
-                ucrBase.clsRsyntax.AddParameter("start_pos", nudPos.Value)
+                ucrBase.clsRsyntax.AddParameter("start_row", nudPos.Value)
             Else
-                ucrBase.clsRsyntax.RemoveParameter("start_pos")
+                ucrBase.clsRsyntax.RemoveParameter("start_row")
             End If
         Else
-            ucrBase.clsRsyntax.RemoveParameter("start_pos")
+            ucrBase.clsRsyntax.RemoveParameter("start_row")
         End If
     End Sub
 
@@ -167,6 +167,10 @@ Public Class dlgInsertColumn
             nudInsertColumns.Visible = True
             lblNumberOfRowsToInsert.Visible = False
             lblStartPos.Visible = False
+            rdoAtEnd.Visible = True
+            rdoAtStart.Visible = True
+            rdoBeforeAfter.Visible = True
+            ucrInputBeforeAfter.Visible = True
 
 
         ElseIf rdoInsertRows.Checked Then
@@ -178,7 +182,10 @@ Public Class dlgInsertColumn
             dataFrameListMaxMinPos()
             startpo()
             nudNumCols.Maximum = 1000
-            grpInsert.Visible = False
+            rdoAtEnd.Visible = True
+            rdoAtStart.Visible = True
+            rdoBeforeAfter.Visible = False
+            ucrInputBeforeAfter.Visible = False
             addColumData()
             InsertParam()
             BeforeAfterPara()
@@ -196,7 +203,7 @@ Public Class dlgInsertColumn
             lblNumberOfColumnsToInsert.Visible = False
             nudInsertColumns.Visible = False
             ucrReceiverColumnsToInsert.Visible = False
-            ucrBase.clsRsyntax.RemoveParameter("before")
+
         End If
 
     End Sub
