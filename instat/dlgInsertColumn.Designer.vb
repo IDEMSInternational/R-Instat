@@ -29,6 +29,7 @@ Partial Class dlgInsertColumn
         Me.rdoInsertColumns = New System.Windows.Forms.RadioButton()
         Me.lblNumberOfRowsToInsert = New System.Windows.Forms.Label()
         Me.grpInsert = New System.Windows.Forms.GroupBox()
+        Me.ucrInputBeforeAfter = New instat.ucrInputComboBox()
         Me.rdoBeforeAfter = New System.Windows.Forms.RadioButton()
         Me.rdoAtStart = New System.Windows.Forms.RadioButton()
         Me.rdoAtEnd = New System.Windows.Forms.RadioButton()
@@ -39,7 +40,6 @@ Partial Class dlgInsertColumn
         Me.ucrInputPrefixForInsertedColumns = New instat.ucrInputTextBox()
         Me.ucrInputDefaultValue = New instat.ucrInputTextBox()
         Me.ucrReceiverColumnsToInsert = New instat.ucrReceiverSingle()
-        Me.ucrInputBeforeAfter = New instat.ucrInputComboBox()
         Me.ucrSelectorInseertColumns = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFramesList = New instat.ucrDataFrame()
@@ -119,6 +119,13 @@ Partial Class dlgInsertColumn
         Me.grpInsert.TabIndex = 19
         Me.grpInsert.TabStop = False
         Me.grpInsert.Text = "Insert"
+        '
+        'ucrInputBeforeAfter
+        '
+        Me.ucrInputBeforeAfter.Location = New System.Drawing.Point(26, 65)
+        Me.ucrInputBeforeAfter.Name = "ucrInputBeforeAfter"
+        Me.ucrInputBeforeAfter.Size = New System.Drawing.Size(93, 21)
+        Me.ucrInputBeforeAfter.TabIndex = 3
         '
         'rdoBeforeAfter
         '
@@ -208,13 +215,6 @@ Partial Class dlgInsertColumn
         Me.ucrReceiverColumnsToInsert.Selector = Nothing
         Me.ucrReceiverColumnsToInsert.Size = New System.Drawing.Size(75, 20)
         Me.ucrReceiverColumnsToInsert.TabIndex = 20
-        '
-        'ucrInputBeforeAfter
-        '
-        Me.ucrInputBeforeAfter.Location = New System.Drawing.Point(26, 65)
-        Me.ucrInputBeforeAfter.Name = "ucrInputBeforeAfter"
-        Me.ucrInputBeforeAfter.Size = New System.Drawing.Size(93, 21)
-        Me.ucrInputBeforeAfter.TabIndex = 3
         '
         'ucrSelectorInseertColumns
         '
