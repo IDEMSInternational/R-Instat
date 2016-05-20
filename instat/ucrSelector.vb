@@ -228,8 +228,8 @@ Public Class ucrSelector
         Dim lstCombinedIncluded As List(Of KeyValuePair(Of String, String()))
         Dim lstCombinedExcluded As List(Of KeyValuePair(Of String, String()))
 
-        lstCombinedIncluded = lstMajorInclude
-        lstCombinedExcluded = lstMajorExclude
+        lstCombinedIncluded = New List(Of KeyValuePair(Of String, String()))(lstMajorInclude)
+        lstCombinedExcluded = New List(Of KeyValuePair(Of String, String()))(lstMajorExclude)
         For Each kvpInclude In lstIncludedMetadataProperties
             If lstCombinedIncluded.FindIndex(Function(x) x.Key = kvpInclude.Key) = -1 AndAlso lstCombinedExcluded.FindIndex(Function(x) x.Key = kvpInclude.Key) = -1 Then
                 lstCombinedIncluded.Add(kvpInclude)
