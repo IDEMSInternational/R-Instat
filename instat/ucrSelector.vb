@@ -24,6 +24,8 @@ Public Class ucrSelector
     Public lstVariablesInReceivers As List(Of String)
     Public bFirstLoad As Boolean
     Public strCurrentDataFrame As String
+    Private lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
+    Private lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
 
     Public Sub New()
         ' This call is required by the designer.
@@ -33,6 +35,8 @@ Public Class ucrSelector
         lstVariablesInReceivers = New List(Of String)
         bFirstLoad = True
         strCurrentDataFrame = ""
+        lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
+        lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
     End Sub
 
     Private Sub ucrSelection_load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -51,8 +55,11 @@ Public Class ucrSelector
     End Sub
 
     Public Overridable Sub LoadList()
+        Dim lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String())))
+
         If CurrentReceiver IsNot Nothing Then
-            frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=CurrentReceiver.lstIncludedDataTypes, strHeading:=CurrentReceiver.strSelectorHeading, lstExcludedDataTypes:=CurrentReceiver.lstExcludedDataTypes, bIncludeHiddenColumns:=sdgDataOptions.ShowHiddenColumns(), strDataFrameName:=strCurrentDataFrame)
+            lstCombinedMetadataLists = CombineMetadataLists(CurrentReceiver.lstIncludedMetadataProperties, CurrentReceiver.lstExcludedMetadataProperties)
+            frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame)
         End If
     End Sub
 
@@ -155,4 +162,26 @@ Public Class ucrSelector
         RaiseEvent VariablesInReceiversChanged()
     End Sub
 
+    Private Function CombineMetadataLists(lstMajorInclude As List(Of KeyValuePair(Of String, String())), lstMajorExclude As List(Of KeyValuePair(Of String, String()))) As List(Of List(Of KeyValuePair(Of String, String())))
+        Dim kvpInclude As KeyValuePair(Of String, String())
+        Dim kvpExclude As KeyValuePair(Of String, String())
+        Dim lstCombinedIncluded As List(Of KeyValuePair(Of String, String()))
+        Dim lstCombinedExcluded As List(Of KeyValuePair(Of String, String()))
+
+        lstCombinedIncluded = lstMajorInclude
+        lstCombinedExcluded = lstMajorExclude
+        For Each kvpInclude In lstIncludedMetadataProperties
+            If lstCombinedIncluded.FindIndex(Function(x) x.Key = kvpInclude.Key) = -1 AndAlso lstCombinedExcluded.FindIndex(Function(x) x.Key = kvpInclude.Key) = -1 Then
+                lstCombinedIncluded.Add(kvpInclude)
+            End If
+        Next
+
+        For Each kvpExclude In lstExcludedMetadataProperties
+            If lstCombinedIncluded.FindIndex(Function(x) x.Key = kvpExclude.Key) = -1 AndAlso lstCombinedExcluded.FindIndex(Function(x) x.Key = kvpExclude.Key) = -1 Then
+                lstCombinedExcluded.Add(kvpExclude)
+            End If
+        Next
+
+        Return New List(Of List(Of KeyValuePair(Of String, String())))({lstCombinedIncluded, lstCombinedExcluded})
+    End Function
 End Class
