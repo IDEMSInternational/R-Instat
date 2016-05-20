@@ -43,7 +43,7 @@ Public Class dlgUnusedLevels
         ucrReceiverFactorColumn.Selector = ucrSelectorFactorColumn
         ucrReceiverFactorColumn.SetMeAsReceiver()
         ucrBase.iHelpTopicID = 40
-        ucrReceiverFactorColumn.SetDataType("factor")
+        ucrReceiverFactorColumn.SetIncludedDataTypes({"factor"})
         ucrRemoveUnusedFactorLevels.SetReceiver(ucrReceiverFactorColumn)
     End Sub
 

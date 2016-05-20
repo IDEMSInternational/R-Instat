@@ -18,14 +18,18 @@ Merged_data = "Merged data"
 
 #meta data labels
 data_name_label="data_name"
-is_calculated_label="is_calculated"
-decimal_places_label="decimal_places"
+is_calculated_label="Is_Calculated"
+decimal_places_label="Decimal_Places"
 columns_label="columns"
 summarised_from_label="summarised_from"
 key_label="key"
+row_count_label="Row_Count"
+column_count_label="Column_Count"
 
 #variables_metadata labels
-display_decimal_label="DisplayDecimal"
+display_decimal_label="Display_Decimal"
 name_label="Name"
-is_factor_label="IsFactor"
-data_type_label="DataType"
+is_factor_label="Is_Factor"
+data_type_label="Data_Type"
+is_hidden_label="Is_Hidden"
+is_protected_label="Is_Protected"

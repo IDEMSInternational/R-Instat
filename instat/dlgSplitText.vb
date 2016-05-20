@@ -77,7 +77,7 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub ucrInputColumnIntText_NameChanged() Handles ucrInputColumnsIntoText.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColumnsIntoText.GetText, strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColumnsIntoText.GetText)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColumnsIntoText.GetText, strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColumnsIntoText.GetText, bAssignToIsPrefix:=True)
     End Sub
 
     Private Sub ucrReceiverSplitTextColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSplitTextColumn.SelectionChanged
