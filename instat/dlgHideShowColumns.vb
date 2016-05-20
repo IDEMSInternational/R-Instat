@@ -61,5 +61,6 @@ Public Class dlgHideShowColumns
         Else
             ucrBase.clsRsyntax.RemoveParameter("col_names")
         End If
+        TestOKEnabled()
     End Sub
 End Class
