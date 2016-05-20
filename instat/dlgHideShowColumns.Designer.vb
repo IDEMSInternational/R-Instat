@@ -45,7 +45,7 @@ Partial Class dlgHideShowColumns
         '
         'UcrReceiverHiddenColumns
         '
-        Me.UcrReceiverHiddenColumns.Location = New System.Drawing.Point(249, 51)
+        Me.UcrReceiverHiddenColumns.Location = New System.Drawing.Point(249, 42)
         Me.UcrReceiverHiddenColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrReceiverHiddenColumns.Name = "UcrReceiverHiddenColumns"
         Me.UcrReceiverHiddenColumns.Selector = Nothing
