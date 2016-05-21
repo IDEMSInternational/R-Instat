@@ -731,11 +731,6 @@ Public Class frmMain
     Private Sub mnuManageSheetHideShowColumns_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameHideColumns.Click
         dlgHideShowColumns.ShowDialog()
     End Sub
-
-    Private Sub mnuManageReshapeRandomSubst_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeRandomSubset.Click
-        dlgRandomSubset.ShowDialog()
-    End Sub
-
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameSort.Click
         dlgSort.ShowDialog()
     End Sub
@@ -854,10 +849,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbDelete_Click(sender As Object, e As EventArgs) Handles mnuTbDelete.Click
-        Dim response As DialogResult = MessageBox.Show("Are you sure you want to clear the output window?", "Output window", MessageBoxButtons.YesNo)
-        If response = DialogResult.Yes Then
-            frmCommand.txtCommand.Clear()
-        End If
+        mnuToolsClearOutputWindow_Click(sender, e)
     End Sub
 
     Private Sub mnuEditSelectAll_Click(sender As Object, e As EventArgs) Handles mnuEditSelectAll.Click
@@ -972,4 +964,14 @@ Public Class frmMain
         frmCommand.Visible = Not frmCommand.Visible
     End Sub
 
+    Private Sub mnuOrganiseColumnReshapeRandomSubset_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeRandomSubset.Click
+        dlgRandomSubsets.ShowDialog()
+    End Sub
+
+    Private Sub mnuToolsClearOutputWindow_Click(sender As Object, e As EventArgs) Handles mnuToolsClearOutputWindow.Click
+        Dim dlgResponse As DialogResult = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
+        If dlgResponse = DialogResult.Yes Then
+            frmCommand.txtCommand.Clear()
+        End If
+    End Sub
 End Class

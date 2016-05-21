@@ -34,12 +34,12 @@ Partial Class dlgRegressionSimple
         Me.cmdModelOptions = New System.Windows.Forms.Button()
         Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
         Me.chkFunction = New System.Windows.Forms.CheckBox()
-        Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrModelName = New instat.ucrVariableName()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
         Me.ucrResponse = New instat.ucrReceiverSingle()
         Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrFamily = New instat.ucrDistributions()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -111,11 +111,6 @@ Partial Class dlgRegressionSimple
         Me.chkFunction.Tag = "Function"
         Me.chkFunction.UseVisualStyleBackColor = True
         '
-        'ucrFamily
-        '
-        resources.ApplyResources(Me.ucrFamily, "ucrFamily")
-        Me.ucrFamily.Name = "ucrFamily"
-        '
         'ucrModelName
         '
         resources.ApplyResources(Me.ucrModelName, "ucrModelName")
@@ -143,14 +138,19 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrFamily
+        '
+        resources.ApplyResources(Me.ucrFamily, "ucrFamily")
+        Me.ucrFamily.Name = "ucrFamily"
+        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.chkFunction)
         Me.Controls.Add(Me.chkConvertToVariate)
         Me.Controls.Add(Me.cmdModelOptions)
-        Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.cmdDisplayOptions)
@@ -184,8 +184,8 @@ Partial Class dlgRegressionSimple
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents ucrModelName As ucrVariableName
     Friend WithEvents chkSaveModel As CheckBox
-    Friend WithEvents ucrFamily As ucrDistributions
     Friend WithEvents cmdModelOptions As Button
     Friend WithEvents chkConvertToVariate As CheckBox
     Friend WithEvents chkFunction As CheckBox
+    Friend WithEvents ucrFamily As ucrDistributions
 End Class
