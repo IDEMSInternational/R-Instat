@@ -764,24 +764,22 @@ data_object$set("public", "get_column_count", function(col_name, new_level_names
 }
 )
 
-data_object$set("public", "get_column_names", function(as_list = FALSE, include_type = c(), exclude_type = c(), include_hidden = TRUE) {
-  types = c("factor", "integer", "numeric", "logical", "character")
-  if(!length(include_type) == 0) {
-    if(!all(include_type %in% types)) stop(paste("include_type can only contain", paste(types, collapse = ", ")))
-    if("numeric" %in% include_type) include_type = c(include_type, "integer")
-    if(!length(exclude_type) == 0) warning("exclude_type argument will be ignored. Only one of include_type and exclude_type should be specified.")
-    out = names(private$data)[sapply(private$data, class) %in% include_type]
+data_object$set("public", "get_column_names", function(as_list = FALSE, include = list(), exclude = list()) {
+  if(data_type_label %in% names(include) && "numeric" %in% include[[data_type_label]]) {
+    include[[data_type_label]] = c(include[[data_type_label]], "integer")
   }
-  else if(!length(exclude_type) == 0) {
-    if(!all(exclude_type %in% types)) stop(paste("exclude_type can only contain", paste(types, collapse = ", ")))
-    if("numeric" %in% exclude_type) exclude_type = c(exclude_type, "integer")
-    out = names(private$data)[!(sapply(private$data, class) %in% exclude_type)]
+  if(data_type_label %in% names(exclude) && "numeric" %in% exclude[[data_type_label]]) {
+    exclude[[data_type_label]] = c(exclude[[data_type_label]], "integer")
   }
-  else out = names(private$data)
   
-  if(!include_hidden) {
-    hidden = sapply(out, function(col_name) self$get_variables_metadata(property = is_hidden_label, column = col_name))
-    out = out[!hidden]
+  col_names = names(private$data)
+  curr_var_metadata = self$get_variables_metadata()
+  out = c()
+  for(col in col_names) {
+    if(all(sapply(names(include), function(prop) self$get_variables_metadata(property = prop, column = col) %in% include[[prop]]))
+       && all(sapply(names(exclude), function(prop) !self$get_variables_metadata(property = prop, column = col) %in% exclude[[prop]]))) {
+      out = c(out, col)
+    }
   }
   
   if(as_list) {
@@ -833,11 +831,14 @@ data_object$set("public", "get_data_type", function(col_name = "") {
 )
 
 data_object$set("public", "set_hidden_columns", function(col_names) {
-  if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
-  
-  self$append_to_variables_metadata(col_names, is_hidden_label, TRUE)
-  hidden_cols = self$get_column_names()[!self$get_column_names() %in% col_names]
-  self$append_to_variables_metadata(hidden_cols, is_hidden_label, FALSE)
+  if(col_names == "") self$unhide_all_columns()
+  else {
+    if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
+    
+    self$append_to_variables_metadata(col_names, is_hidden_label, TRUE)
+    hidden_cols = self$get_column_names()[!self$get_column_names() %in% col_names]
+    self$append_to_variables_metadata(hidden_cols, is_hidden_label, FALSE)
+  }
 }
 )
 
