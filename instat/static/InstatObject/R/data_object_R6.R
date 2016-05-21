@@ -824,7 +824,7 @@ data_object$set("public", "get_data_type", function(col_name = "") {
   }
   
   if(is.factor(private$data[[col_name]])) {
-    if(length(levels(private$data[[col_name]]))==2) type = "2 level factor"
+    if(length(levels(private$data[[col_name]]))==2) type = "two level factor"
     else if(length(levels(private$data[[col_name]]))>2) type = "multilevel factor"
     else type = "factor"
   }
@@ -852,5 +852,14 @@ data_object$set("public", "set_row_names", function(row_names) {
   if(anyDuplicated(row_names) != 0) stop("row_names must be unique")
   rownames(private$data) <- row_names
   self$data_changed <- TRUE
+}
+)
+
+data_object$set("public", "set_protected_columns", function(col_names) {
+  if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
+  
+  self$append_to_variables_metadata(col_names, is_protected_label, TRUE)
+  other_cols = self$get_column_names()[!self$get_column_names() %in% col_names]
+  self$append_to_variables_metadata(other_cols, is_protected_label, FALSE)
 }
 )

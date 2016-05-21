@@ -33,7 +33,11 @@ Public Class dlgView
     End Sub
 
     Private Sub SetDefaults()
-        nudNumberRows.Value = 6
+        If nudNumberRows.Maximum >= 6 Then
+            nudNumberRows.Value = 6
+        Else
+            nudNumberRows.Value = nudNumberRows.Maximum
+        End If
         ucrSelctorForView.Reset()
         ucrSelctorForView.Focus()
         rdoTop.Checked = True
