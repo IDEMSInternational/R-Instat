@@ -467,12 +467,12 @@ instat_object$set("public", "get_next_default_column_name", function(data_name, 
 } 
 )
 
-instat_object$set("public", "get_column_names", function(data_name, as_list = FALSE, include_type = list(), exclude_type = list()) {
+instat_object$set("public", "get_column_names", function(data_name, as_list = FALSE, include = list(), exclude = list()) {
   if(missing(data_name)) {
-    return(lapply(self$get_data_objects(), function(x) x$get_column_names(include_type = include_type, exclude_type = exclude_type)))
+    return(lapply(self$get_data_objects(), function(x) x$get_column_names(include = include, exclude = exclude)))
   } 
   else {
-    return(self$get_data_objects(data_name)$get_column_names(as_list, include_type, exclude_type))
+    return(self$get_data_objects(data_name)$get_column_names(as_list, include, exclude))
   }
 }
 )

@@ -350,14 +350,14 @@ Public Class RLink
                 For Each kvpInclude In lstIncludedDataTypes
                     clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
                 Next
-                clsGetColumns.AddParameter("include_type", clsRFunctionParameter:=clsIncludeList)
+                clsGetColumns.AddParameter("include", clsRFunctionParameter:=clsIncludeList)
             End If
             If lstExcludedDataTypes.Count > 0 Then
                 clsExcludeList.SetRCommand("list")
                 For Each kvpExclude In lstExcludedDataTypes
                     clsExcludeList.AddParameter(kvpExclude.Key, GetListAsRString(kvpExclude.Value.ToList(), bWithQuotes:=False))
                 Next
-                clsGetColumns.AddParameter("exclude_type", clsRFunctionParameter:=clsExcludeList)
+                clsGetColumns.AddParameter("exclude", clsRFunctionParameter:=clsExcludeList)
             End If
             If strDataFrameName <> "" Then
                 clsGetColumns.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))

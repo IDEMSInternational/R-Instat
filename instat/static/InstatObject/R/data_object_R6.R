@@ -764,38 +764,20 @@ data_object$set("public", "get_column_count", function(col_name, new_level_names
 }
 )
 
-data_object$set("public", "get_column_names", function(as_list = FALSE, include_type = list(), exclude_type = list()) {
-  # types = c("factor", "integer", "numeric", "logical", "character")
-  # if(!length(include_type) == 0) {
-  #   if(!all(include_type %in% types)) stop(paste("include_type can only contain", paste(types, collapse = ", ")))
-  #   if("numeric" %in% include_type) include_type = c(include_type, "integer")
-  #   if(!length(exclude_type) == 0) warning("exclude_type argument will be ignored. Only one of include_type and exclude_type should be specified.")
-  #   out = names(private$data)[sapply(private$data, class) %in% include_type]
-  # }
-  # else if(!length(exclude_type) == 0) {
-  #   if(!all(exclude_type %in% types)) stop(paste("exclude_type can only contain", paste(types, collapse = ", ")))
-  #   if("numeric" %in% exclude_type) exclude_type = c(exclude_type, "integer")
-  #   out = names(private$data)[!(sapply(private$data, class) %in% exclude_type)]
-  # }
-  # else out = names(private$data)
-  # 
-  # if(!include_hidden) {
-  #   hidden = sapply(out, function(col_name) self$get_variables_metadata(property = is_hidden_label, column = col_name))
-  #   out = out[!hidden]
-  # }
-  if(data_type_label %in% names(include_type) && "numeric" %in% include_type[[data_type_label]]) {
-    include_type[[data_type_label]] = c(include_type[[data_type_label]], "integer")
+data_object$set("public", "get_column_names", function(as_list = FALSE, include = list(), exclude = list()) {
+  if(data_type_label %in% names(include) && "numeric" %in% include[[data_type_label]]) {
+    include[[data_type_label]] = c(include[[data_type_label]], "integer")
   }
-  if(data_type_label %in% names(exclude_type) && "numeric" %in% exclude_type[[data_type_label]]) {
-    exclude_type[[data_type_label]] = c(exclude_type[[data_type_label]], "integer")
+  if(data_type_label %in% names(exclude) && "numeric" %in% exclude[[data_type_label]]) {
+    exclude[[data_type_label]] = c(exclude[[data_type_label]], "integer")
   }
   
   col_names = names(private$data)
   curr_var_metadata = self$get_variables_metadata()
   out = c()
   for(col in col_names) {
-    if(all(sapply(names(include_type), function(prop) self$get_variables_metadata(property = prop, column = col) %in% include_type[[prop]]))
-       && all(sapply(names(exclude_type), function(prop) !self$get_variables_metadata(property = prop, column = col) %in% exclude_type[[prop]]))) {
+    if(all(sapply(names(include), function(prop) self$get_variables_metadata(property = prop, column = col) %in% include[[prop]]))
+       && all(sapply(names(exclude), function(prop) !self$get_variables_metadata(property = prop, column = col) %in% exclude[[prop]]))) {
       out = c(out, col)
     }
   }
