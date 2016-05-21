@@ -17,6 +17,7 @@ Imports instat.Translations
 Public Class sdgCanonicalCorrelation
     Public bFirstLoad As Boolean = True
     Public clsRCanCor, clsRCoef As New RFunction
+    Public clsRGGcorrGraphics, clsRGraphics As New RSyntax
     Private Sub sdgCanonicalCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
@@ -43,6 +44,11 @@ Public Class sdgCanonicalCorrelation
     Public Sub SetDefaults()
         chkCanonicalCorrelations.Checked = True
         chkCoef.Checked = True
+        chkPairwisePlot.Checked = False
+        rdoXVariables.Checked = False
+        rdoYVariables.Checked = False
+        rdoXVariables.Enabled = False
+        rdoYVariables.Enabled = False
     End Sub
 
     Public Sub CCAOptions()
@@ -52,5 +58,43 @@ Public Class sdgCanonicalCorrelation
         If (chkCoef.Checked) Then
             Coef()
         End If
+        If (chkPairwisePlot.Checked = True) Then
+            GGPairs()
+        End If
     End Sub
+
+    Private Sub GGPairs()
+        clsRGraphics.SetFunction("ggpairs")
+        clsRGraphics.AddParameter("data", clsRFunctionParameter:=dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame)
+        frmMain.clsRLink.RunScript(clsRGraphics.GetScript(), 2)
+    End Sub
+
+    Private Sub chkPairwisePlot_CheckedChanged(sender As Object, e As EventArgs) Handles chkPairwisePlot.CheckedChanged
+        If chkPairwisePlot.Checked Then
+            rdoXVariables.Enabled = True
+            rdoYVariables.Enabled = True
+            rdoXVariables.Checked = True
+        Else
+            rdoXVariables.Checked = False
+            rdoXVariables.Enabled = False
+            rdoYVariables.Enabled = False
+        End If
+    End Sub
+
+    Private Sub rdoXVariables_CheckedChanged(sender As Object, e As EventArgs) Handles rdoXVariables.CheckedChanged
+        If rdoXVariables.Checked Then
+            clsRGraphics.AddParameter("columns", dlgCanonicalCorrelationAnalysis.ucrReceiverXvariables.GetVariableNames())
+        Else
+            clsRGraphics.RemoveParameter("columns")
+        End If
+    End Sub
+
+    Private Sub rdoYVariables_CheckedChanged(sender As Object, e As EventArgs) Handles rdoYVariables.CheckedChanged
+        If rdoYVariables.Checked Then
+            clsRGraphics.AddParameter("columns", dlgCanonicalCorrelationAnalysis.ucrReceiverYvariables.GetVariableNames())
+        Else
+            clsRGraphics.RemoveParameter("columns")
+        End If
+    End Sub
+
 End Class
