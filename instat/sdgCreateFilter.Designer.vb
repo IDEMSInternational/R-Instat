@@ -22,17 +22,39 @@ Partial Class sdgCreateFilter
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.ucrCreateFilter = New instat.ucrFilter()
+        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
+        '
+        'ucrCreateFilter
+        '
+        Me.ucrCreateFilter.Location = New System.Drawing.Point(0, 0)
+        Me.ucrCreateFilter.Name = "ucrCreateFilter"
+        Me.ucrCreateFilter.Size = New System.Drawing.Size(770, 395)
+        Me.ucrCreateFilter.TabIndex = 1
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(289, 401)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBase.TabIndex = 0
         '
         'sdgCreateFilter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 262)
+        Me.ClientSize = New System.Drawing.Size(783, 434)
+        Me.Controls.Add(Me.ucrCreateFilter)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgCreateFilter"
         Me.Text = "sdgCreateFilter"
+        Me.TopMost = True
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents ucrBase As ucrButtonsSubdialogue
+    Friend WithEvents ucrCreateFilter As ucrFilter
 End Class

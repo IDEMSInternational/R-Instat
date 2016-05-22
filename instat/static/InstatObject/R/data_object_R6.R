@@ -82,6 +82,7 @@ data_object <- R6Class("data_object",
                               }
                               else {
                                 private$.current_filter <- filter
+                                self$data_changed <- TRUE
                                 self$append_to_changes(list(Set_property, "current_filter"))
                               }
                             }
@@ -170,10 +171,12 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE) {
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = FALSE) {
   if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out = private$data[ , !self$get_variables_metadata(property = is_hidden_label)]
   else out = private$data
-  
+  if(use_current_filter && length(private$.current_filter) > 0) {
+    out = out[self$current_filter, ]
+  }
   if(convert_to_character) {
     decimal_places = private$variables_metadata[[display_decimal_label]]
     return(convert_to_character_matrix(out, TRUE, decimal_places))
@@ -314,15 +317,15 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
 }
 )
 
-data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE) {
+data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = FALSE) {
   if(missing(col_names)) stop("no col_names to return")
   if(!all(col_names %in% names(private$data))) stop("Not all column names were found in data")
   
   if(length(col_names)==1) {
-    if(force_as_data_frame) return(private$data[col_names])
-    else return(private$data[[col_names]])
+    if(force_as_data_frame) return(self$get_data_frame(use_current_filter = use_current_filter)[col_names])
+    else return(self$get_data_frame(use_current_filter = use_current_filter)[[col_names]])
   }
-  else return(private$data[col_names])
+  else return(self$get_data_frame(use_current_filter = use_current_filter)[col_names])
 }
 )
 
@@ -908,12 +911,25 @@ data_object$set("public", "add_filter", function(filter, filter_name = "", repla
     if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
     private$filters[[filter_name]] <- filter
     self$append_to_changes(list(Added_filter, filter_name))
-    if(set_as_current) self$current_filter <- filter
+    if(set_as_current) {
+      self$current_filter <- filter
+      self$data_changed <- TRUE
+    }
   }
 }
 )
 
 data_object$set("public", "get_current_filter", function() {
   return(private$.current_filter)
+}
+)
+
+data_object$set("public", "filter_applied", function() {
+  return(length(private$.current_filter) > 0)
+}
+)
+
+data_object$set("public", "remove_current_filter", function() {
+  self$current_filter <- list()
 }
 )
