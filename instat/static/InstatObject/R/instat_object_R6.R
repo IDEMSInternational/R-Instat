@@ -232,21 +232,21 @@ instat_object$set("public", "get_data_objects", function(data_name) {
 }
 )
 
-instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE,...) {
+instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = FALSE,...) {
   if(!stack_data) {
     if(missing(data_name)) {
       retlist <- list()
       for ( i in (1:length(private$.data_objects)) ) {
-        retlist[[names(private$.data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns)
+        retlist[[names(private$.data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found."))
-    return(melt(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns), ...))
+    return(melt(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter), ...))
   }
 }
 )
@@ -374,11 +374,11 @@ instat_object$set("public", "add_columns_to_data", function(data_name, col_name,
 )
 
 instat_object$set("public", "get_columns_from_data", function(data_name, col_names, from_stacked_data = FALSE,
-                                                    force_as_data_frame = FALSE) {
+                                                    force_as_data_frame = FALSE, use_current_filter = FALSE) {
   if(missing(data_name)) stop("data_name is required")
   if(!from_stacked_data) {
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found"))
-    self$get_data_objects(data_name)$get_columns_from_data(col_names, force_as_data_frame)
+    self$get_data_objects(data_name)$get_columns_from_data(col_names, force_as_data_frame, use_current_filter = use_current_filter)
   }
   else {
     if(!exists(data_name)) stop(paste(data_name, "not found."))
@@ -442,6 +442,16 @@ instat_object$set("public", "current_filter", function(data_name) {
 
 instat_object$set("public", "get_current_filter", function(data_name) {
   self$get_data_objects(data_name)$get_current_filter()
+}
+)
+
+instat_object$set("public", "remove_current_filter", function(data_name) {
+  self$get_data_objects(data_name)$remove_current_filter()
+}
+)
+
+instat_object$set("public", "filter_applied", function(data_name) {
+  self$get_data_objects(data_name)$filter_applied()
 }
 )
 

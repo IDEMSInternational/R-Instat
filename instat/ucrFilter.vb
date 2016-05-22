@@ -16,7 +16,10 @@
 
 Public Class ucrFilter
     Public bFirstLoad As Boolean
-    Private clsFilterFunction As ROperator
+    Public clsFilterView As ROperator
+    Public clsFilterFunction As RFunction
+    Private clsConditionsList As RFunction
+    Public Event FilterChanged()
 
     Public Sub New()
         ' This call is required by the designer.
@@ -24,7 +27,13 @@ Public Class ucrFilter
 
         ' Add any initialization after the InitializeComponent() call.
         bFirstLoad = True
-        clsFilterFunction = New ROperator
+        clsFilterView = New ROperator
+        clsFilterView.strOperation = "&&"
+        clsFilterFunction = New RFunction
+        clsFilterFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_filter")
+        clsConditionsList = New RFunction
+        clsConditionsList.SetRCommand("list")
+        clsFilterFunction.AddParameter("filter", clsRFunctionParameter:=clsConditionsList)
     End Sub
 
     Private Sub ucrFilter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -36,17 +45,18 @@ Public Class ucrFilter
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrFilterPreview.Enabled = False
+        ucrFilterPreview.txtInput.ReadOnly = True
         ucrFilterByReceiver.Selector = ucrSelectorForFitler
-        ucrFilterOperation.AddItems({"=", "<", "<=", ">", ">=", "!="})
+        ucrFilterOperation.AddItems({"==", "<", "<=", ">", ">=", "!="})
         ucrFactorLevels.SetAsMultipleSelector()
         ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
+        clsFilterView.bForceIncludeOperation = False
         lstFilters.Columns.Add("Variable")
         lstFilters.Columns.Add("Condition")
     End Sub
 
     Private Sub SetDefaults()
-        ucrFilterOperation.SetName("=")
+        ucrFilterOperation.SetName("==")
         ucrFilterByReceiver.SetMeAsReceiver()
         VariableTypeProperties()
     End Sub
@@ -90,20 +100,39 @@ Public Class ucrFilter
     End Sub
 
     Private Sub cmdAddFilter_Click(sender As Object, e As EventArgs) Handles cmdAddFilter.Click
-        Dim clsCurrentCondition As New ROperator
+        Dim clsCurrentConditionView As New ROperator
+        Dim clsCurrentConditionList As New RFunction
         Dim lviCondition As ListViewItem
 
-        clsCurrentCondition.SetParameter(True, ucrFilterByReceiver.GetVariableNames())
+        clsCurrentConditionList.SetRCommand("list")
+        clsCurrentConditionView.SetParameter(True, ucrFilterByReceiver.GetVariableNames())
+        clsCurrentConditionList.AddParameter("column", ucrFilterByReceiver.GetVariableNames())
         If ucrFilterByReceiver.strCurrDataType = "factor" Then
-            clsCurrentCondition.SetOperation("%in%")
-            clsCurrentCondition.SetParameter(False, ucrFactorLevels.GetSelectedLevels())
+            clsCurrentConditionView.SetOperation("%in%")
+            clsCurrentConditionList.AddParameter("operation", Chr(34) & "%in%" & Chr(34))
+            clsCurrentConditionView.SetParameter(False, ucrFactorLevels.GetSelectedLevels())
+            clsCurrentConditionList.AddParameter("value", ucrFactorLevels.GetSelectedLevels())
         Else
-            clsCurrentCondition.SetOperation(ucrFilterOperation.GetText())
-            clsCurrentCondition.SetParameter(False, ucrValueForFilter.GetText())
+            clsCurrentConditionView.SetOperation(ucrFilterOperation.GetText())
+            clsCurrentConditionList.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
+            clsCurrentConditionView.SetParameter(False, ucrValueForFilter.GetText())
+            clsCurrentConditionList.AddParameter("value", ucrValueForFilter.GetText())
         End If
-        lviCondition = New ListViewItem({ucrFilterByReceiver.GetVariableNames(), clsCurrentCondition.strOperation & " " & clsCurrentCondition.clsRightParameter.strArgumentValue})
+        clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionList))
+        lviCondition = New ListViewItem({ucrFilterByReceiver.GetVariableNames(), clsCurrentConditionView.strOperation & " " & clsCurrentConditionView.clsRightParameter.strArgumentValue})
         lstFilters.Items.Add(lviCondition)
+        If clsFilterView.clsLeftOperator Is Nothing Then
+            clsFilterView.SetParameter(True, clsOp:=(clsCurrentConditionView))
+        ElseIf clsFilterView.clsRightOperator Is Nothing Then
+            clsFilterView.SetParameter(False, clsOp:=(clsCurrentConditionView))
+        Else
+            clsFilterView.AddAdditionalParameter("Condition" & clsFilterView.clsAdditionalParameters.Count, clsROperatorParameter:=(clsCurrentConditionView))
+        End If
+        lstFilters.Columns(0).Width = -2
+        lstFilters.Columns(1).Width = -2
+        ucrFilterPreview.SetName(clsFilterView.ToScript())
         ucrFilterByReceiver.Clear()
+        RaiseEvent FilterChanged()
         CheckAddEnabled()
     End Sub
 
@@ -113,11 +142,11 @@ Public Class ucrFilter
 
     Private Sub SetToggleButtonSettings()
         If cmdToggleSelectAll.FlatStyle = FlatStyle.Popup Then
-            ucrFactorLevels.SetSelectionAllLevels(True)
+            '            ucrFactorLevels.SetSelectionAllLevels(True)
             cmdToggleSelectAll.Text = "Deselect All"
             cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
         Else
-            ucrFactorLevels.SetSelectionAllLevels(False)
+            '            ucrFactorLevels.SetSelectionAllLevels(False)
             cmdToggleSelectAll.Text = "Select All"
             cmdToggleSelectAll.FlatStyle = FlatStyle.Popup
         End If
@@ -135,5 +164,16 @@ Public Class ucrFilter
     Private Sub ucrFactorLevels_SelectedLevelChanged() Handles ucrFactorLevels.SelectedLevelChanged
         SetToggleButtonSettings()
         CheckAddEnabled()
+    End Sub
+
+    Private Sub ucrSelectorForFitler_DataFrameChanged() Handles ucrSelectorForFitler.DataFrameChanged
+        clsFilterFunction.AddParameter("data_name", Chr(34) & ucrSelectorForFitler.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+    End Sub
+
+    Private Sub cmdClearConditions_Click(sender As Object, e As EventArgs) Handles cmdClearConditions.Click
+        clsFilterView.RemoveAllParameters()
+        clsConditionsList.clsParameters.Clear()
+        lstFilters.Items.Clear()
+        ucrFilterPreview.SetName("")
     End Sub
 End Class
