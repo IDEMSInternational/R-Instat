@@ -4,7 +4,7 @@ data_object <- R6Class("data_object",
                                                  variables_metadata = data.frame(), metadata = list(), 
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
-                                                 start_point=1)
+                                                 start_point=1, filters = list())
 {
                              
   # Set up the data object
@@ -13,6 +13,7 @@ data_object <- R6Class("data_object",
   self$set_variables_metadata(variables_metadata)
   self$update_variables_metadata()
   self$set_meta(metadata)
+  self$set_filters(filters)
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
@@ -34,8 +35,10 @@ data_object <- R6Class("data_object",
                          private = list(
                            data = data.frame(),
                            metadata = list(), 
-                           variables_metadata = data.frame(), 
+                           variables_metadata = data.frame(),
+                           filters = list(),
                            changes = list(), 
+                           .current_filter = list(),
                            .data_changed = FALSE,
                            .metadata_changed = FALSE, 
                            .variables_metadata_changed = FALSE 
@@ -64,9 +67,24 @@ data_object <- R6Class("data_object",
                                 private$.variables_metadata_changed <- new_value
                                 self$append_to_changes(list(Set_property, "variable_data_changed"))
                               }
+                            },
+                            current_filter = function(filter) {
+                              if(missing(filter)) {
+                                filter_string = ""
+                                i = 1
+                                result = matrix(nrow = nrow(private$data), ncol = length(private$.current_filter))
+                                for(condition in private$.current_filter) {
+                                  func = match.fun(condition[["operation"]])
+                                  result[ ,i] = func(self$get_columns_from_data(condition[["column"]]), condition[["value"]])
+                                  i = i + 1
+                                }
+                                return(apply(result, 1, all))
+                              }
+                              else {
+                                private$.current_filter <- filter
+                                self$append_to_changes(list(Set_property, "current_filter"))
+                              }
                             }
-                            
-                            
                           )
 )
 
@@ -109,6 +127,14 @@ data_object$set("public", "set_changes", function(new_changes) {
 
     private$changes <- new_changes
     self$append_to_changes(list(Set_property, "changes"))  
+}
+)
+
+data_object$set("public", "set_filters", function(new_filters) {
+  if(!is.list(new_filters)) stop("Filters must be of type: list")
+  
+  self$append_to_changes(list(Set_property, "filters"))  
+  private$filters <- new_filters
 }
 )
 
@@ -862,5 +888,32 @@ data_object$set("public", "set_protected_columns", function(col_names) {
   self$append_to_variables_metadata(col_names, is_protected_label, TRUE)
   other_cols = self$get_column_names()[!self$get_column_names() %in% col_names]
   self$append_to_variables_metadata(other_cols, is_protected_label, FALSE)
+}
+)
+
+data_object$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE) {
+  if(missing(filter)) stop("filter is required")
+  if(filter_name == "") filter_name = next_default_item("filter", names(private$filters))
+  
+  for(condition in filter) {
+    if(length(condition) != 3 || !all(sort(names(condition)) == c("column", "operation", "value"))) {
+      stop("filter must be a list of conditions containing: column, operation and value")
+    }
+    if(!condition[["column"]] %in% names(private$data)) stop(condition[["column"]], " not found in data.")
+  }
+  if(filter_name %in% names(private$filters) && replace) {
+    warning("A filter named ", filter_name, " already exists. It will not be replaced.")
+  }
+  else {
+    if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
+    private$filters[[filter_name]] <- filter
+    self$append_to_changes(list(Added_filter, filter_name))
+    if(set_as_current) self$current_filter <- filter
+  }
+}
+)
+
+data_object$set("public", "get_current_filter", function() {
+  return(private$.current_filter)
 }
 )
