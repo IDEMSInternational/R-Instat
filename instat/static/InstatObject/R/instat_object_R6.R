@@ -3,6 +3,7 @@ instat_object <- R6Class("instat_object",
                     initialize = function(data_tables = list(), instat_obj_metadata = list(), 
                                           data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
                                           data_tables_metadata = rep(list(list()),length(data_tables)),
+                                          data_tables_filters = rep(list(list()),length(data_tables)),
                                           imported_from = as.list(rep("",length(data_tables))),
                                           messages=TRUE, convert=TRUE, create=TRUE) 
 { 
@@ -16,7 +17,7 @@ instat_object <- R6Class("instat_object",
     else {
     self$import_data(data_tables=data_tables, data_tables_variables_metadata=data_tables_variables_metadata, 
     data_tables_metadata=data_tables_metadata, 
-    imported_from=imported_from, messages=messages, convert=convert, create=create)
+    imported_from=imported_from, messages=messages, convert=convert, create=create, data_tables_filters = data_tables_filters)
     }
                       
     private$.data_objects_changed <- FALSE
@@ -43,6 +44,7 @@ instat_object <- R6Class("instat_object",
 
 instat_object$set("public", "import_data", function(data_tables = list(), data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
                                                     data_tables_metadata = rep(list(list()),length(data_tables)),
+                                                    data_tables_filters = rep(list(list()),length(data_tables)),
                                                     imported_from = as.list(rep("",length(data_tables))), 
                                                     messages=TRUE, convert=TRUE, create=TRUE)
 {
@@ -84,7 +86,8 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
                                  metadata = data_tables_metadata[[i]], 
                                  imported_from = imported_from[[i]], 
                                  start_point = i, 
-                                 messages = messages, convert = convert, create = create)
+                                 messages = messages, convert = convert, create = create, 
+                                 filters = data_tables_filters[[i]])
       # Add this new data object to our list of data objects
       self$append_data_object(new_data$get_metadata(data_name_label), new_data)
     }
@@ -423,6 +426,22 @@ instat_object$set("public", "get_from_model", function(model_name, value1, value
 
 instat_object$set("public", "get_model_names", function() {
   return(names(private$.models))
+}
+)
+
+instat_object$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE) {
+  if(missing(filter)) stop("filter is required")
+  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter)
+}
+) 
+
+instat_object$set("public", "current_filter", function(data_name) {
+  return(self$get_data_objects(data_name)$current_filter)
+}
+)
+
+instat_object$set("public", "get_current_filter", function(data_name) {
+  self$get_data_objects(data_name)$get_current_filter()
 }
 )
 
