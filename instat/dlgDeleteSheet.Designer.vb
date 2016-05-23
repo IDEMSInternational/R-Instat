@@ -38,7 +38,7 @@ Partial Class dlgDeleteSheet
         Me.ucrDataFrameToDelete.Location = New System.Drawing.Point(10, 10)
         Me.ucrDataFrameToDelete.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameToDelete.Name = "ucrDataFrameToDelete"
-        Me.ucrDataFrameToDelete.Size = New System.Drawing.Size(127, 41)
+        Me.ucrDataFrameToDelete.Size = New System.Drawing.Size(120, 40)
         Me.ucrDataFrameToDelete.TabIndex = 0
         '
         'dlgDeleteSheet
