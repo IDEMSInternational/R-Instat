@@ -28,39 +28,33 @@ Public Class dlgHideShowColumns
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not UcrReceiverHiddenColumns.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
 
     End Sub
 
     Private Sub InitialiseDialog()
-        UcrReceiverHiddenColumns.Selector = UcrSelectorForHiddenColumns
-        UcrReceiverHiddenColumns.SetMeAsReceiver()
+        ucrReceiverHiddenColumns.Selector = ucrSelectorForHiddenColumns
+        ucrReceiverHiddenColumns.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrSelectorForHiddenColumns.Reset()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectorForHiddenColumns_DataFrameChanged() Handles UcrSelectorForHiddenColumns.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & UcrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    Private Sub ucrSelectorForHiddenColumns_DataFrameChanged() Handles ucrSelectorForHiddenColumns.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
-    Private Sub UcrReceiverHiddenColumns_SelectionChanged() Handles UcrReceiverHiddenColumns.SelectionChanged
-        If Not UcrReceiverHiddenColumns.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_names", UcrReceiverHiddenColumns.GetVariableNames())
+    Private Sub ucrReceiverHiddenColumns_SelectionChanged() Handles ucrReceiverHiddenColumns.SelectionChanged
+        If Not ucrReceiverHiddenColumns.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverHiddenColumns.GetVariableNames())
         Else
-            ucrBase.clsRsyntax.RemoveParameter("col_names")
+            ucrBase.clsRsyntax.AddParameter("col_names", "c()")
         End If
-        TestOKEnabled()
     End Sub
+
 End Class
