@@ -582,6 +582,12 @@
     <Compile Include="sdgCanonicalCorrelation.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgCreateFilter.Designer.vb">
+      <DependentUpon>sdgCreateFilter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCreateFilter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgCumDistLineOptions.Designer.vb">
       <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>
     </Compile>
@@ -2328,6 +2334,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCorrPlot.sw-KE.resx">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCreateFilter.fr-FR.resx">
+      <DependentUpon>sdgCreateFilter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCreateFilter.resx">
+      <DependentUpon>sdgCreateFilter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCreateFilter.sw-KE.resx">
+      <DependentUpon>sdgCreateFilter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCumDistLineOptions.fr-FR.resx">
       <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>

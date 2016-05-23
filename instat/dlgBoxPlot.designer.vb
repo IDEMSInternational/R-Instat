@@ -159,7 +159,6 @@ Partial Class dlgBoxplot
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Boxplot"
         Me.Text = "Boxplot"
-        Me.TopMost = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

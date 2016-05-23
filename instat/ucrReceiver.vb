@@ -17,8 +17,8 @@
 Imports instat.Translations
 Public Class ucrReceiver
     Public WithEvents Selector As ucrSelector
-    Public lstIncludedDataTypes As List(Of String)
-    Public lstExcludedDataTypes As List(Of String)
+    Public lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
+    Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public bFirstLoad As Boolean
     Public strSelectorHeading As String
 
@@ -27,8 +27,8 @@ Public Class ucrReceiver
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        lstIncludedDataTypes = New List(Of String)
-        lstExcludedDataTypes = New List(Of String)
+        lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
+        lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         bFirstLoad = True
         strSelectorHeading = "Variables"
     End Sub
@@ -77,14 +77,6 @@ Public Class ucrReceiver
         translateEach(Controls)
     End Sub
 
-    Public Function GetIncludedDataTypes(Optional bWithQuotes As Boolean = True) As String
-        Return GetListAsRString(lstIncludedDataTypes, bWithQuotes)
-    End Function
-
-    Public Function GetExcludedDataTypes(Optional bWithQuotes As Boolean = True) As String
-        Return GetListAsRString(lstExcludedDataTypes, bWithQuotes)
-    End Function
-
     'TODO make this function available throughout project
     Public Function GetListAsRString(lstStrings As List(Of String), Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
@@ -126,23 +118,71 @@ Public Class ucrReceiver
 
     'TODO remove this method and replace with SetIncludedDataTypes
     Public Sub SetDataType(strTemp As String)
-        lstIncludedDataTypes.Add(strTemp)
-        If Selector IsNot Nothing Then
-            Selector.LoadList()
-        End If
+        AddIncludedMetadataProperty("Data_Type", {Chr(34) & strTemp & Chr(34)})
     End Sub
 
     Public Sub SetIncludedDataTypes(strInclude As String())
-        lstIncludedDataTypes.AddRange(strInclude)
-        lstExcludedDataTypes.Clear()
-        If Selector IsNot Nothing Then
-            Selector.LoadList()
-        End If
+        Dim strTypes(strInclude.Count - 1) As String
+
+        Array.Copy(strInclude, strTypes, strInclude.Length)
+        For i = 0 To strInclude.Count - 1
+            strTypes(i) = Chr(34) & strInclude(i) & Chr(34)
+        Next
+        AddIncludedMetadataProperty("Data_Type", strTypes)
     End Sub
 
     Public Sub SetExcludedDataTypes(strExclude As String())
-        lstExcludedDataTypes.AddRange(strExclude)
-        lstIncludedDataTypes.Clear()
+        For i = 0 To strExclude.Count - 1
+            strExclude(i) = Chr(34) & strExclude(i) & Chr(34)
+        Next
+        AddExcludedMetadataProperty("Data_Type", strExclude)
+    End Sub
+
+    Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
+        Dim iIncludeIndex As Integer
+        'Dim iExcludeIndex As Integer
+        Dim kvpIncludeProperty As KeyValuePair(Of String, String())
+
+        kvpIncludeProperty = New KeyValuePair(Of String, String())(strProperty, strInclude)
+        iIncludeIndex = lstIncludedMetadataProperties.FindIndex(Function(x) x.Key = strProperty)
+        If iIncludeIndex <> -1 Then
+            lstIncludedMetadataProperties(iIncludeIndex) = kvpIncludeProperty
+        Else
+            lstIncludedMetadataProperties.Add(kvpIncludeProperty)
+        End If
+
+        'Removes from other list
+        'iExcludeIndex = lstExcludedMetadataProperties.FindIndex(Function(x) x.Key = strProperty)
+        'If iExcludeIndex <> -1 Then
+        '    lstExcludedMetadataProperties.RemoveAt(iExcludeIndex)
+        'End If
+
+        If Selector IsNot Nothing Then
+            Selector.LoadList()
+        End If
+
+    End Sub
+
+    Public Sub AddExcludedMetadataProperty(strProperty As String, strExclude As String())
+        'Dim iIncludeIndex As Integer
+        Dim iExcludeIndex As Integer
+
+        Dim kvpExcludeProperty As KeyValuePair(Of String, String())
+
+        kvpExcludeProperty = New KeyValuePair(Of String, String())(strProperty, strExclude)
+        iExcludeIndex = lstExcludedMetadataProperties.FindIndex(Function(x) x.Key = strProperty)
+        If iExcludeIndex <> -1 Then
+            lstExcludedMetadataProperties(iExcludeIndex) = kvpExcludeProperty
+        Else
+            lstExcludedMetadataProperties.Add(kvpExcludeProperty)
+        End If
+
+        'Removes from other list
+        'iIncludeIndex = lstIncludedMetadataProperties.FindIndex(Function(x) x.Key = strProperty)
+        'If iIncludeIndex <> -1 Then
+        '    lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
+        'End If
+
         If Selector IsNot Nothing Then
             Selector.LoadList()
         End If

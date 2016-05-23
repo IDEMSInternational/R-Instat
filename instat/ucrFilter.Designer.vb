@@ -34,6 +34,7 @@ Partial Class ucrFilter
         Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdClearConditions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblSelectLevels
@@ -114,6 +115,7 @@ Partial Class ucrFilter
         'ucrFactorLevels
         '
         Me.ucrFactorLevels.AutoSize = True
+        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrFactorLevels.clsReceiver = Nothing
         Me.ucrFactorLevels.Location = New System.Drawing.Point(413, 61)
         Me.ucrFactorLevels.Name = "ucrFactorLevels"
@@ -138,10 +140,21 @@ Partial Class ucrFilter
         Me.ucrSelectorForFitler.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorForFitler.TabIndex = 0
         '
+        'cmdClearConditions
+        '
+        Me.cmdClearConditions.Location = New System.Drawing.Point(317, 362)
+        Me.cmdClearConditions.Name = "cmdClearConditions"
+        Me.cmdClearConditions.Size = New System.Drawing.Size(94, 23)
+        Me.cmdClearConditions.TabIndex = 14
+        Me.cmdClearConditions.Tag = "Clear_Conditions"
+        Me.cmdClearConditions.Text = "Clear Conditions"
+        Me.cmdClearConditions.UseVisualStyleBackColor = True
+        '
         'ucrFilter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdClearConditions)
         Me.Controls.Add(Me.lblFilterBy)
         Me.Controls.Add(Me.ucrValueForFilter)
         Me.Controls.Add(Me.ucrFilterPreview)
@@ -173,4 +186,5 @@ Partial Class ucrFilter
     Friend WithEvents ucrFilterPreview As ucrInputTextBox
     Friend WithEvents ucrValueForFilter As ucrInputTextBox
     Friend WithEvents lblFilterBy As Label
+    Friend WithEvents cmdClearConditions As Button
 End Class
