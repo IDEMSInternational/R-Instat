@@ -21,6 +21,8 @@ library(circular)
 library(survival)
 library(Evapotranspiration)
 library(clifro)
+library(devtools)
+library(factoextra)
 setwd(dirname(parent.frame(2)$ofile))
 
 source("instat_object_R6.R")
