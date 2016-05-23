@@ -94,6 +94,7 @@ Partial Class sdgDataOptions
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Data_Options"
         Me.Text = "Data Options"
+        Me.TopMost = True
         Me.tbcDataOptions.ResumeLayout(False)
         Me.tbColumns.ResumeLayout(False)
         Me.tbColumns.PerformLayout()
