@@ -327,29 +327,37 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub FillListView(lstView As ListView, Optional lstIncludedDataTypes As List(Of String) = Nothing, Optional lstExcludedDataTypes As List(Of String) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional bIncludeHiddenColumns As Boolean = False)
+    Public Sub FillListView(lstView As ListView, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables")
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
         Dim grps As New ListViewGroup
         Dim clsGetColumns As New RFunction
+        Dim clsIncludeList As New RFunction
+        Dim clsExcludeList As New RFunction
+        Dim kvpInclude As KeyValuePair(Of String, String())
+        Dim kvpExclude As KeyValuePair(Of String, String())
 
         If bInstatObjectExists Then
             clsGetColumns.SetRCommand(strInstatDataObject & "$get_column_names")
             clsGetColumns.AddParameter("as_list", "TRUE")
-            If bIncludeHiddenColumns Then
-                clsGetColumns.AddParameter("include_hidden", "TRUE")
-            Else
-                clsGetColumns.AddParameter("include_hidden", "FALSE")
-            End If
             lstView.Clear()
             lstView.Groups.Clear()
             lstView.Columns.Add(strHeading)
 
             If lstIncludedDataTypes.Count > 0 Then
-                clsGetColumns.AddParameter("include_type", GetListAsRString(lstIncludedDataTypes))
-            ElseIf lstExcludedDataTypes.Count > 0 Then
-                clsGetColumns.AddParameter("exclude_type", GetListAsRString(lstExcludedDataTypes))
+                clsIncludeList.SetRCommand("list")
+                For Each kvpInclude In lstIncludedDataTypes
+                    clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
+                Next
+                clsGetColumns.AddParameter("include", clsRFunctionParameter:=clsIncludeList)
+            End If
+            If lstExcludedDataTypes.Count > 0 Then
+                clsExcludeList.SetRCommand("list")
+                For Each kvpExclude In lstExcludedDataTypes
+                    clsExcludeList.AddParameter(kvpExclude.Key, GetListAsRString(kvpExclude.Value.ToList(), bWithQuotes:=False))
+                Next
+                clsGetColumns.AddParameter("exclude", clsRFunctionParameter:=clsExcludeList)
             End If
             If strDataFrameName <> "" Then
                 clsGetColumns.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
