@@ -17,7 +17,7 @@ Imports instat.Translations
 Public Class sdgCanonicalCorrelation
     Public bFirstLoad As Boolean = True
     Public clsRCanCor, clsRCoef As New RFunction
-    Public clsRGGcorrGraphics, clsRGraphics As New RSyntax
+    Public clsRGraphics As New RSyntax
     Private Sub sdgCanonicalCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
