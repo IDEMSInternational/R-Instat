@@ -28,13 +28,13 @@ Partial Class dlgRandomSample
         Me.nudNumberOfSamples = New System.Windows.Forms.NumericUpDown()
         Me.nudSeed = New System.Windows.Forms.NumericUpDown()
         Me.chkSetSeed = New System.Windows.Forms.CheckBox()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.ucrNewColumnName = New instat.ucrInputComboBox()
         Me.ucrPrefixNewColumns = New instat.ucrInputTextBox()
         Me.ucrSampleSize = New instat.ucrDataFrameLength()
         Me.ucrSelectorRandomSamples = New instat.ucrDataFrame()
         Me.ucrDistWithParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
         CType(Me.nudNumberOfSamples, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSeed, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -42,7 +42,7 @@ Partial Class dlgRandomSample
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(12, 66)
+        Me.lblSampleSize.Location = New System.Drawing.Point(255, 25)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(65, 13)
         Me.lblSampleSize.TabIndex = 10
@@ -52,7 +52,7 @@ Partial Class dlgRandomSample
         'lblNumberofSamples
         '
         Me.lblNumberofSamples.AutoSize = True
-        Me.lblNumberofSamples.Location = New System.Drawing.Point(12, 268)
+        Me.lblNumberofSamples.Location = New System.Drawing.Point(255, 55)
         Me.lblNumberofSamples.Name = "lblNumberofSamples"
         Me.lblNumberofSamples.Size = New System.Drawing.Size(99, 13)
         Me.lblNumberofSamples.TabIndex = 10
@@ -62,7 +62,7 @@ Partial Class dlgRandomSample
         'lblPrefixColumnName
         '
         Me.lblPrefixColumnName.AutoSize = True
-        Me.lblPrefixColumnName.Location = New System.Drawing.Point(9, 297)
+        Me.lblPrefixColumnName.Location = New System.Drawing.Point(9, 226)
         Me.lblPrefixColumnName.Name = "lblPrefixColumnName"
         Me.lblPrefixColumnName.Size = New System.Drawing.Size(119, 13)
         Me.lblPrefixColumnName.TabIndex = 15
@@ -71,7 +71,7 @@ Partial Class dlgRandomSample
         '
         'nudNumberOfSamples
         '
-        Me.nudNumberOfSamples.Location = New System.Drawing.Point(119, 266)
+        Me.nudNumberOfSamples.Location = New System.Drawing.Point(360, 48)
         Me.nudNumberOfSamples.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudNumberOfSamples.Name = "nudNumberOfSamples"
         Me.nudNumberOfSamples.Size = New System.Drawing.Size(35, 20)
@@ -80,7 +80,7 @@ Partial Class dlgRandomSample
         '
         'nudSeed
         '
-        Me.nudSeed.Location = New System.Drawing.Point(278, 266)
+        Me.nudSeed.Location = New System.Drawing.Point(332, 82)
         Me.nudSeed.Name = "nudSeed"
         Me.nudSeed.Size = New System.Drawing.Size(35, 20)
         Me.nudSeed.TabIndex = 18
@@ -88,7 +88,7 @@ Partial Class dlgRandomSample
         'chkSetSeed
         '
         Me.chkSetSeed.AutoSize = True
-        Me.chkSetSeed.Location = New System.Drawing.Point(206, 268)
+        Me.chkSetSeed.Location = New System.Drawing.Point(255, 85)
         Me.chkSetSeed.Name = "chkSetSeed"
         Me.chkSetSeed.Size = New System.Drawing.Size(70, 17)
         Me.chkSetSeed.TabIndex = 19
@@ -96,64 +96,65 @@ Partial Class dlgRandomSample
         Me.chkSetSeed.Text = "Set Seed"
         Me.chkSetSeed.UseVisualStyleBackColor = True
         '
-        'ucrNewColumnName
-        '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(134, 294)
-        Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        Me.ucrNewColumnName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrNewColumnName.TabIndex = 20
-        '
-        'ucrPrefixNewColumns
-        '
-        Me.ucrPrefixNewColumns.Location = New System.Drawing.Point(134, 294)
-        Me.ucrPrefixNewColumns.Name = "ucrPrefixNewColumns"
-        Me.ucrPrefixNewColumns.Size = New System.Drawing.Size(137, 21)
-        Me.ucrPrefixNewColumns.TabIndex = 16
-        '
-        'ucrSampleSize
-        '
-        Me.ucrSampleSize.clsDataFrameSelector = Nothing
-        Me.ucrSampleSize.Location = New System.Drawing.Point(101, 66)
-        Me.ucrSampleSize.Name = "ucrSampleSize"
-        Me.ucrSampleSize.Size = New System.Drawing.Size(53, 23)
-        Me.ucrSampleSize.TabIndex = 13
-        '
-        'ucrSelectorRandomSamples
-        '
-        Me.ucrSelectorRandomSamples.Location = New System.Drawing.Point(12, 12)
-        Me.ucrSelectorRandomSamples.Name = "ucrSelectorRandomSamples"
-        Me.ucrSelectorRandomSamples.Size = New System.Drawing.Size(127, 41)
-        Me.ucrSelectorRandomSamples.TabIndex = 8
-        '
-        'ucrDistWithParameters
-        '
-        Me.ucrDistWithParameters.Location = New System.Drawing.Point(6, 82)
-        Me.ucrDistWithParameters.Name = "ucrDistWithParameters"
-        Me.ucrDistWithParameters.Size = New System.Drawing.Size(221, 156)
-        Me.ucrDistWithParameters.TabIndex = 7
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(6, 319)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 55)
-        Me.ucrBase.TabIndex = 0
-        '
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(9, 297)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 226)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumnName.TabIndex = 21
         Me.lblNewColumnName.Tag = "New_Column_Name"
         Me.lblNewColumnName.Text = "New Column Name"
         '
+        'ucrNewColumnName
+        '
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(134, 221)
+        Me.ucrNewColumnName.Name = "ucrNewColumnName"
+        Me.ucrNewColumnName.Size = New System.Drawing.Size(145, 21)
+        Me.ucrNewColumnName.TabIndex = 20
+        '
+        'ucrPrefixNewColumns
+        '
+        Me.ucrPrefixNewColumns.Location = New System.Drawing.Point(134, 222)
+        Me.ucrPrefixNewColumns.Name = "ucrPrefixNewColumns"
+        Me.ucrPrefixNewColumns.Size = New System.Drawing.Size(145, 21)
+        Me.ucrPrefixNewColumns.TabIndex = 16
+        '
+        'ucrSampleSize
+        '
+        Me.ucrSampleSize.clsDataFrameSelector = Nothing
+        Me.ucrSampleSize.Location = New System.Drawing.Point(333, 15)
+        Me.ucrSampleSize.Name = "ucrSampleSize"
+        Me.ucrSampleSize.Size = New System.Drawing.Size(53, 23)
+        Me.ucrSampleSize.TabIndex = 13
+        '
+        'ucrSelectorRandomSamples
+        '
+        Me.ucrSelectorRandomSamples.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorRandomSamples.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorRandomSamples.Name = "ucrSelectorRandomSamples"
+        Me.ucrSelectorRandomSamples.Size = New System.Drawing.Size(120, 40)
+        Me.ucrSelectorRandomSamples.TabIndex = 8
+        '
+        'ucrDistWithParameters
+        '
+        Me.ucrDistWithParameters.Location = New System.Drawing.Point(10, 55)
+        Me.ucrDistWithParameters.Name = "ucrDistWithParameters"
+        Me.ucrDistWithParameters.Size = New System.Drawing.Size(221, 156)
+        Me.ucrDistWithParameters.TabIndex = 7
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 248)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 0
+        '
         'dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 380)
+        Me.ClientSize = New System.Drawing.Size(419, 300)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrNewColumnName)
         Me.Controls.Add(Me.chkSetSeed)
