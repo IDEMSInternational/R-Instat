@@ -68,6 +68,7 @@ Public Class dlgPolynomials
         clsCentredOptionFunc.AddParameter("scale", "FALSE")
         clsCentredOptionFunc.SetRCommand("scale")
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
+        ucrReceiverPolynomial.bUseFilteredData = False
         ucrReceiverPolynomial.SetMeAsReceiver()
         ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
 

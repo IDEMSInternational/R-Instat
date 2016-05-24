@@ -21,6 +21,7 @@ Public Class ucrDataFrame
     Public clsCurrDataFrame As New RFunction
     Public bFirstLoad As Boolean = True
     Public strCurrDataFrame As String = ""
+    Public bUseFilteredData As Boolean = True
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad)
@@ -53,6 +54,15 @@ Public Class ucrDataFrame
             iDataFrameLength = frmMain.clsRLink.GetDataFrameLength(cboAvailableDataFrames.Text)
             iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(cboAvailableDataFrames.Text)
             clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+            If bUseFilteredData Then
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    clsCurrDataFrame.AddParameter("use_current_filter", "TRUE")
+                Else
+                    clsCurrDataFrame.RemoveParameterByName("use_current_filter")
+                End If
+            Else
+                clsCurrDataFrame.AddParameter("use_current_filter", "FALSE")
+            End If
             clsParam.SetArgumentName("data_name")
             clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
             clsCurrDataFrame.AddParameter(clsParam)
