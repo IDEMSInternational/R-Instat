@@ -30,10 +30,18 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.chkScores = New System.Windows.Forms.CheckBox()
         Me.chkEigenValues = New System.Windows.Forms.CheckBox()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
-        Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.grpGeom = New System.Windows.Forms.GroupBox()
+        Me.chkBar = New System.Windows.Forms.CheckBox()
+        Me.chkLine = New System.Windows.Forms.CheckBox()
+        Me.lblChoice = New System.Windows.Forms.Label()
+        Me.cmbChoice = New System.Windows.Forms.ComboBox()
+        Me.chkScreePlot = New System.Windows.Forms.CheckBox()
         Me.tbSave = New System.Windows.Forms.TabPage()
+        Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
+        Me.tbGraphics.SuspendLayout()
+        Me.grpGeom.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbRegOptions
@@ -108,6 +116,10 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbGraphics
         '
+        Me.tbGraphics.Controls.Add(Me.grpGeom)
+        Me.tbGraphics.Controls.Add(Me.lblChoice)
+        Me.tbGraphics.Controls.Add(Me.cmbChoice)
+        Me.tbGraphics.Controls.Add(Me.chkScreePlot)
         Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tbGraphics.Name = "tbGraphics"
         Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
@@ -117,12 +129,69 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGraphics.Text = "Graphics"
         Me.tbGraphics.UseVisualStyleBackColor = True
         '
-        'ucrSdgButtons
+        'grpGeom
         '
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(41, 201)
-        Me.ucrSdgButtons.Name = "ucrSdgButtons"
-        Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
-        Me.ucrSdgButtons.TabIndex = 0
+        Me.grpGeom.Controls.Add(Me.chkBar)
+        Me.grpGeom.Controls.Add(Me.chkLine)
+        Me.grpGeom.Location = New System.Drawing.Point(35, 31)
+        Me.grpGeom.Name = "grpGeom"
+        Me.grpGeom.Size = New System.Drawing.Size(99, 38)
+        Me.grpGeom.TabIndex = 6
+        Me.grpGeom.TabStop = False
+        Me.grpGeom.Tag = "Geom"
+        Me.grpGeom.Text = "Geom"
+        '
+        'chkBar
+        '
+        Me.chkBar.AutoSize = True
+        Me.chkBar.Location = New System.Drawing.Point(8, 15)
+        Me.chkBar.Name = "chkBar"
+        Me.chkBar.Size = New System.Drawing.Size(42, 17)
+        Me.chkBar.TabIndex = 2
+        Me.chkBar.Tag = "Bar"
+        Me.chkBar.Text = "Bar"
+        Me.chkBar.UseVisualStyleBackColor = True
+        '
+        'chkLine
+        '
+        Me.chkLine.AutoSize = True
+        Me.chkLine.Location = New System.Drawing.Point(52, 15)
+        Me.chkLine.Name = "chkLine"
+        Me.chkLine.Size = New System.Drawing.Size(46, 17)
+        Me.chkLine.TabIndex = 1
+        Me.chkLine.Tag = "Line"
+        Me.chkLine.Text = "Line"
+        Me.chkLine.UseVisualStyleBackColor = True
+        '
+        'lblChoice
+        '
+        Me.lblChoice.AutoSize = True
+        Me.lblChoice.Location = New System.Drawing.Point(145, 44)
+        Me.lblChoice.Name = "lblChoice"
+        Me.lblChoice.Size = New System.Drawing.Size(40, 13)
+        Me.lblChoice.TabIndex = 4
+        Me.lblChoice.Tag = "Choice"
+        Me.lblChoice.Text = "Choice"
+        '
+        'cmbChoice
+        '
+        Me.cmbChoice.FormattingEnabled = True
+        Me.cmbChoice.Items.AddRange(New Object() {"variance", "eigenvalue"})
+        Me.cmbChoice.Location = New System.Drawing.Point(190, 40)
+        Me.cmbChoice.Name = "cmbChoice"
+        Me.cmbChoice.Size = New System.Drawing.Size(50, 21)
+        Me.cmbChoice.TabIndex = 3
+        '
+        'chkScreePlot
+        '
+        Me.chkScreePlot.AutoSize = True
+        Me.chkScreePlot.Location = New System.Drawing.Point(10, 15)
+        Me.chkScreePlot.Name = "chkScreePlot"
+        Me.chkScreePlot.Size = New System.Drawing.Size(75, 17)
+        Me.chkScreePlot.TabIndex = 0
+        Me.chkScreePlot.Tag = "Scree_Plot"
+        Me.chkScreePlot.Text = "Scree Plot"
+        Me.chkScreePlot.UseVisualStyleBackColor = True
         '
         'tbSave
         '
@@ -134,6 +203,13 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbSave.Tag = "Save"
         Me.tbSave.Text = "Save"
         Me.tbSave.UseVisualStyleBackColor = True
+        '
+        'ucrSdgButtons
+        '
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(41, 201)
+        Me.ucrSdgButtons.Name = "ucrSdgButtons"
+        Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
+        Me.ucrSdgButtons.TabIndex = 0
         '
         'sdgPrincipalComponentAnalysis
         '
@@ -149,6 +225,10 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbRegOptions.ResumeLayout(False)
         Me.tbDisplay.ResumeLayout(False)
         Me.tbDisplay.PerformLayout()
+        Me.tbGraphics.ResumeLayout(False)
+        Me.tbGraphics.PerformLayout()
+        Me.grpGeom.ResumeLayout(False)
+        Me.grpGeom.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -162,4 +242,10 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents chkScores As CheckBox
     Friend WithEvents chkResiduals As CheckBox
     Friend WithEvents tbSave As TabPage
+    Friend WithEvents chkScreePlot As CheckBox
+    Friend WithEvents grpGeom As GroupBox
+    Friend WithEvents chkBar As CheckBox
+    Friend WithEvents chkLine As CheckBox
+    Friend WithEvents lblChoice As Label
+    Friend WithEvents cmbChoice As ComboBox
 End Class
