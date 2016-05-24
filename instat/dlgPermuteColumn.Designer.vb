@@ -24,7 +24,7 @@ Partial Class dlgPermuteColumn
     Private Sub InitializeComponent()
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.chkSetSeed = New System.Windows.Forms.CheckBox()
-        Me.lblNumberOfPermColumns = New System.Windows.Forms.Label()
+        Me.lblNumberOfColumns = New System.Windows.Forms.Label()
         Me.nudNumberOfPerColumns = New System.Windows.Forms.NumericUpDown()
         Me.nudSetSeed = New System.Windows.Forms.NumericUpDown()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
@@ -39,7 +39,7 @@ Partial Class dlgPermuteColumn
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(249, 79)
+        Me.lblSelected.Location = New System.Drawing.Point(255, 25)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
         Me.lblSelected.TabIndex = 1
@@ -49,7 +49,7 @@ Partial Class dlgPermuteColumn
         'chkSetSeed
         '
         Me.chkSetSeed.AutoSize = True
-        Me.chkSetSeed.Location = New System.Drawing.Point(252, 126)
+        Me.chkSetSeed.Location = New System.Drawing.Point(255, 73)
         Me.chkSetSeed.Name = "chkSetSeed"
         Me.chkSetSeed.Size = New System.Drawing.Size(70, 17)
         Me.chkSetSeed.TabIndex = 3
@@ -57,36 +57,36 @@ Partial Class dlgPermuteColumn
         Me.chkSetSeed.Text = "Set Seed"
         Me.chkSetSeed.UseVisualStyleBackColor = True
         '
-        'lblNumberOfPermColumns
+        'lblNumberOfColumns
         '
-        Me.lblNumberOfPermColumns.AutoSize = True
-        Me.lblNumberOfPermColumns.Location = New System.Drawing.Point(12, 201)
-        Me.lblNumberOfPermColumns.Name = "lblNumberOfPermColumns"
-        Me.lblNumberOfPermColumns.Size = New System.Drawing.Size(158, 13)
-        Me.lblNumberOfPermColumns.TabIndex = 5
-        Me.lblNumberOfPermColumns.Tag = "Number_of_Permutation_Colums"
-        Me.lblNumberOfPermColumns.Text = "Number of Permutation Columns"
+        Me.lblNumberOfColumns.AutoSize = True
+        Me.lblNumberOfColumns.Location = New System.Drawing.Point(255, 105)
+        Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
+        Me.lblNumberOfColumns.Size = New System.Drawing.Size(99, 13)
+        Me.lblNumberOfColumns.TabIndex = 5
+        Me.lblNumberOfColumns.Tag = "Number_of_Colums"
+        Me.lblNumberOfColumns.Text = "Number of Columns"
         '
         'nudNumberOfPerColumns
         '
-        Me.nudNumberOfPerColumns.Location = New System.Drawing.Point(182, 198)
+        Me.nudNumberOfPerColumns.Location = New System.Drawing.Point(361, 98)
         Me.nudNumberOfPerColumns.Name = "nudNumberOfPerColumns"
-        Me.nudNumberOfPerColumns.Size = New System.Drawing.Size(61, 20)
+        Me.nudNumberOfPerColumns.Size = New System.Drawing.Size(54, 20)
         Me.nudNumberOfPerColumns.TabIndex = 6
         Me.nudNumberOfPerColumns.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'nudSetSeed
         '
-        Me.nudSetSeed.Location = New System.Drawing.Point(252, 149)
+        Me.nudSetSeed.Location = New System.Drawing.Point(331, 70)
         Me.nudSetSeed.Name = "nudSetSeed"
-        Me.nudSetSeed.Size = New System.Drawing.Size(61, 20)
+        Me.nudSetSeed.Size = New System.Drawing.Size(54, 20)
         Me.nudSetSeed.TabIndex = 4
         Me.nudSetSeed.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(12, 226)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 213)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumnName.TabIndex = 7
@@ -95,14 +95,14 @@ Partial Class dlgPermuteColumn
         '
         'ucrInputPermuteRows
         '
-        Me.ucrInputPermuteRows.Location = New System.Drawing.Point(116, 223)
+        Me.ucrInputPermuteRows.Location = New System.Drawing.Point(114, 205)
         Me.ucrInputPermuteRows.Name = "ucrInputPermuteRows"
-        Me.ucrInputPermuteRows.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputPermuteRows.Size = New System.Drawing.Size(145, 21)
         Me.ucrInputPermuteRows.TabIndex = 8
         '
         'ucrReceiverPermuteRows
         '
-        Me.ucrReceiverPermuteRows.Location = New System.Drawing.Point(249, 95)
+        Me.ucrReceiverPermuteRows.Location = New System.Drawing.Point(255, 42)
         Me.ucrReceiverPermuteRows.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPermuteRows.Name = "ucrReceiverPermuteRows"
         Me.ucrReceiverPermuteRows.Selector = Nothing
@@ -114,26 +114,26 @@ Partial Class dlgPermuteColumn
         Me.ucrPermuteRowsSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrPermuteRowsSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrPermuteRowsSelector.Name = "ucrPermuteRowsSelector"
-        Me.ucrPermuteRowsSelector.Size = New System.Drawing.Size(231, 179)
+        Me.ucrPermuteRowsSelector.Size = New System.Drawing.Size(210, 180)
         Me.ucrPermuteRowsSelector.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 252)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 236)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(404, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
         '
         'dlgPermuteColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 317)
+        Me.ClientSize = New System.Drawing.Size(419, 290)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputPermuteRows)
         Me.Controls.Add(Me.nudSetSeed)
         Me.Controls.Add(Me.nudNumberOfPerColumns)
-        Me.Controls.Add(Me.lblNumberOfPermColumns)
+        Me.Controls.Add(Me.lblNumberOfColumns)
         Me.Controls.Add(Me.chkSetSeed)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrReceiverPermuteRows)
@@ -156,7 +156,7 @@ Partial Class dlgPermuteColumn
     Friend WithEvents ucrReceiverPermuteRows As ucrReceiverSingle
     Friend WithEvents lblSelected As Label
     Friend WithEvents chkSetSeed As CheckBox
-    Friend WithEvents lblNumberOfPermColumns As Label
+    Friend WithEvents lblNumberOfColumns As Label
     Friend WithEvents nudNumberOfPerColumns As NumericUpDown
     Friend WithEvents nudSetSeed As NumericUpDown
     Friend WithEvents ucrInputPermuteRows As ucrInputComboBox
