@@ -23,7 +23,7 @@ Partial Class ucrFilter
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblSelectLevels = New System.Windows.Forms.Label()
-        Me.cmdAddFilter = New System.Windows.Forms.Button()
+        Me.cmdAddCondition = New System.Windows.Forms.Button()
         Me.cmdToggleSelectAll = New System.Windows.Forms.Button()
         Me.lstFilters = New System.Windows.Forms.ListView()
         Me.lblFilterPreview = New System.Windows.Forms.Label()
@@ -35,6 +35,8 @@ Partial Class ucrFilter
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdClearConditions = New System.Windows.Forms.Button()
+        Me.mcdEditCondition = New System.Windows.Forms.Button()
+        Me.cmdRemoveCondition = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblSelectLevels
@@ -46,14 +48,15 @@ Partial Class ucrFilter
         Me.lblSelectLevels.TabIndex = 3
         Me.lblSelectLevels.Text = "Select Levels"
         '
-        'cmdAddFilter
+        'cmdAddCondition
         '
-        Me.cmdAddFilter.Location = New System.Drawing.Point(274, 77)
-        Me.cmdAddFilter.Name = "cmdAddFilter"
-        Me.cmdAddFilter.Size = New System.Drawing.Size(93, 23)
-        Me.cmdAddFilter.TabIndex = 4
-        Me.cmdAddFilter.Text = "Add Filter"
-        Me.cmdAddFilter.UseVisualStyleBackColor = True
+        Me.cmdAddCondition.Location = New System.Drawing.Point(274, 77)
+        Me.cmdAddCondition.Name = "cmdAddCondition"
+        Me.cmdAddCondition.Size = New System.Drawing.Size(93, 23)
+        Me.cmdAddCondition.TabIndex = 4
+        Me.cmdAddCondition.Tag = "Add_Condition"
+        Me.cmdAddCondition.Text = "Add Condition"
+        Me.cmdAddCondition.UseVisualStyleBackColor = True
         '
         'cmdToggleSelectAll
         '
@@ -150,10 +153,34 @@ Partial Class ucrFilter
         Me.cmdClearConditions.Text = "Clear Conditions"
         Me.cmdClearConditions.UseVisualStyleBackColor = True
         '
+        'mcdEditCondition
+        '
+        Me.mcdEditCondition.Enabled = False
+        Me.mcdEditCondition.Location = New System.Drawing.Point(278, 241)
+        Me.mcdEditCondition.Name = "mcdEditCondition"
+        Me.mcdEditCondition.Size = New System.Drawing.Size(93, 36)
+        Me.mcdEditCondition.TabIndex = 15
+        Me.mcdEditCondition.Tag = "Edit_Condition"
+        Me.mcdEditCondition.Text = "Edit Condition"
+        Me.mcdEditCondition.UseVisualStyleBackColor = True
+        '
+        'cmdRemoveCondition
+        '
+        Me.cmdRemoveCondition.Enabled = False
+        Me.cmdRemoveCondition.Location = New System.Drawing.Point(278, 283)
+        Me.cmdRemoveCondition.Name = "cmdRemoveCondition"
+        Me.cmdRemoveCondition.Size = New System.Drawing.Size(93, 36)
+        Me.cmdRemoveCondition.TabIndex = 16
+        Me.cmdRemoveCondition.Tag = "Remove_Condition"
+        Me.cmdRemoveCondition.Text = "Remove Condition"
+        Me.cmdRemoveCondition.UseVisualStyleBackColor = True
+        '
         'ucrFilter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdRemoveCondition)
+        Me.Controls.Add(Me.mcdEditCondition)
         Me.Controls.Add(Me.cmdClearConditions)
         Me.Controls.Add(Me.lblFilterBy)
         Me.Controls.Add(Me.ucrValueForFilter)
@@ -162,7 +189,7 @@ Partial Class ucrFilter
         Me.Controls.Add(Me.lstFilters)
         Me.Controls.Add(Me.cmdToggleSelectAll)
         Me.Controls.Add(Me.ucrFilterOperation)
-        Me.Controls.Add(Me.cmdAddFilter)
+        Me.Controls.Add(Me.cmdAddCondition)
         Me.Controls.Add(Me.lblSelectLevels)
         Me.Controls.Add(Me.ucrFactorLevels)
         Me.Controls.Add(Me.ucrFilterByReceiver)
@@ -178,7 +205,7 @@ Partial Class ucrFilter
     Friend WithEvents ucrFilterByReceiver As ucrReceiverSingle
     Friend WithEvents ucrFactorLevels As ucrFactor
     Friend WithEvents lblSelectLevels As Label
-    Friend WithEvents cmdAddFilter As Button
+    Friend WithEvents cmdAddCondition As Button
     Friend WithEvents ucrFilterOperation As ucrInputComboBox
     Friend WithEvents cmdToggleSelectAll As Button
     Friend WithEvents lstFilters As ListView
@@ -187,4 +214,6 @@ Partial Class ucrFilter
     Friend WithEvents ucrValueForFilter As ucrInputTextBox
     Friend WithEvents lblFilterBy As Label
     Friend WithEvents cmdClearConditions As Button
+    Friend WithEvents mcdEditCondition As Button
+    Friend WithEvents cmdRemoveCondition As Button
 End Class

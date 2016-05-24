@@ -75,7 +75,7 @@ data_object <- R6Class("data_object",
                                 result = matrix(nrow = nrow(private$data), ncol = length(private$.current_filter))
                                 for(condition in private$.current_filter) {
                                   func = match.fun(condition[["operation"]])
-                                  result[ ,i] = func(self$get_columns_from_data(condition[["column"]]), condition[["value"]])
+                                  result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
                                   i = i + 1
                                 }
                                 return(apply(result, 1, all))
@@ -171,7 +171,7 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = FALSE) {
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE) {
   if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out = private$data[ , !self$get_variables_metadata(property = is_hidden_label)]
   else out = private$data
   if(use_current_filter && length(private$.current_filter) > 0) {
@@ -317,7 +317,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
 }
 )
 
-data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = FALSE) {
+data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE) {
   if(missing(col_names)) stop("no col_names to return")
   if(!all(col_names %in% names(private$data))) stop("Not all column names were found in data")
   
