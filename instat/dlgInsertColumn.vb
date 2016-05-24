@@ -73,6 +73,7 @@ Public Class dlgInsertColumn
         ucrDataFramesList.Reset()
         RowsOrColumns()
         rdoAtEnd.Checked = True
+        rdoAfter.Checked = True
         ucrInputBeforeAfter.SetName("After")
         nudPos.Value = ucrDataFramesList.iDataFrameLength
 
@@ -141,6 +142,19 @@ Public Class dlgInsertColumn
         RowsOrColumns()
 
     End Sub
+    Private Sub grpOPtions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBefore.CheckedChanged, rdoAfter.CheckedChanged
+        OPtionstoInsert()
+    End Sub
+
+    Private Sub OPtionstoInsert()
+        If rdoInsertRows.Checked Then
+            If rdoAfter.Checked Then
+                ucrBase.clsRsyntax.AddParameter("before", "FALSE")
+            ElseIf rdoBefore.Checked Then
+                ucrBase.clsRsyntax.AddParameter("before", "TRUE")
+            End If
+        End If
+    End Sub
 
     Private Sub RowsOrColumns()
         If rdoInsertColumns.Checked Then
@@ -153,11 +167,13 @@ Public Class dlgInsertColumn
             dataFrameListMaxMinPos()
             ColName()
             grpInsert.Visible = True
+            grpOPtions.Visible = False
             nudInsertColumns.Maximum = 100
             nudNumCols.Visible = False
             nudPos.Visible = False
             addColumData()
             ColsToInsert()
+            OPtionstoInsert()
             startpo()
             BeforeParameter()
             lblPrefixforInsertedColumns.Visible = True
@@ -185,13 +201,14 @@ Public Class dlgInsertColumn
             dataFrameListMaxMinPos()
             startpo()
             nudNumCols.Maximum = 1000
-            rdoAtEnd.Visible = True
-            rdoAtStart.Visible = True
+            rdoAtEnd.Visible = False
+            rdoAtStart.Visible = False
             rdoBeforeAfter.Visible = False
             ucrInputBeforeAfter.Visible = False
             addColumData()
             InsertParam()
             BeforeAfterPara()
+            OPtionstoInsert()
             ColsToInsert()
             ColName()
             BeforeParameter()
@@ -207,6 +224,9 @@ Public Class dlgInsertColumn
             nudInsertColumns.Visible = False
             ucrReceiverColumnsToInsert.Visible = False
             nudInsertColumns.Focus()
+            grpInsert.Visible = False
+            grpOPtions.Visible = True
+
         End If
 
     End Sub

@@ -43,10 +43,14 @@ Partial Class dlgInsertColumn
         Me.ucrSelectorInseertColumns = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFramesList = New instat.ucrDataFrame()
+        Me.grpOPtions = New System.Windows.Forms.GroupBox()
+        Me.rdoBefore = New System.Windows.Forms.RadioButton()
+        Me.rdoAfter = New System.Windows.Forms.RadioButton()
         CType(Me.nudPos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudNumCols, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpInsert.SuspendLayout()
         CType(Me.nudInsertColumns, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpOPtions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblStartPos
@@ -239,11 +243,45 @@ Partial Class dlgInsertColumn
         Me.ucrDataFramesList.Size = New System.Drawing.Size(127, 41)
         Me.ucrDataFramesList.TabIndex = 0
         '
+        'grpOPtions
+        '
+        Me.grpOPtions.Controls.Add(Me.rdoAfter)
+        Me.grpOPtions.Controls.Add(Me.rdoBefore)
+        Me.grpOPtions.Location = New System.Drawing.Point(265, 58)
+        Me.grpOPtions.Name = "grpOPtions"
+        Me.grpOPtions.Size = New System.Drawing.Size(124, 67)
+        Me.grpOPtions.TabIndex = 27
+        Me.grpOPtions.TabStop = False
+        Me.grpOPtions.Text = "OPtions"
+        '
+        'rdoBefore
+        '
+        Me.rdoBefore.AutoSize = True
+        Me.rdoBefore.Location = New System.Drawing.Point(7, 20)
+        Me.rdoBefore.Name = "rdoBefore"
+        Me.rdoBefore.Size = New System.Drawing.Size(56, 17)
+        Me.rdoBefore.TabIndex = 0
+        Me.rdoBefore.TabStop = True
+        Me.rdoBefore.Text = "Before"
+        Me.rdoBefore.UseVisualStyleBackColor = True
+        '
+        'rdoAfter
+        '
+        Me.rdoAfter.AutoSize = True
+        Me.rdoAfter.Location = New System.Drawing.Point(7, 44)
+        Me.rdoAfter.Name = "rdoAfter"
+        Me.rdoAfter.Size = New System.Drawing.Size(47, 17)
+        Me.rdoAfter.TabIndex = 1
+        Me.rdoAfter.TabStop = True
+        Me.rdoAfter.Text = "After"
+        Me.rdoAfter.UseVisualStyleBackColor = True
+        '
         'dlgInsertColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(492, 351)
+        Me.Controls.Add(Me.grpOPtions)
         Me.Controls.Add(Me.ucrInputPrefixForInsertedColumns)
         Me.Controls.Add(Me.lblPrefixforInsertedColumns)
         Me.Controls.Add(Me.ucrInputDefaultValue)
@@ -270,6 +308,8 @@ Partial Class dlgInsertColumn
         Me.grpInsert.ResumeLayout(False)
         Me.grpInsert.PerformLayout()
         CType(Me.nudInsertColumns, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpOPtions.ResumeLayout(False)
+        Me.grpOPtions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -296,4 +336,7 @@ Partial Class dlgInsertColumn
     Friend WithEvents ucrInputDefaultValue As ucrInputTextBox
     Friend WithEvents lblPrefixforInsertedColumns As Label
     Friend WithEvents ucrInputPrefixForInsertedColumns As ucrInputTextBox
+    Friend WithEvents grpOPtions As GroupBox
+    Friend WithEvents rdoAfter As RadioButton
+    Friend WithEvents rdoBefore As RadioButton
 End Class
