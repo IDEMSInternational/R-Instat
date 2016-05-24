@@ -4146,6 +4146,9 @@
     <Content Include="static\Library\Climatic_guide_datasets.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Compile Include="static\InstatObject\R\Backend_Components\calculations.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
