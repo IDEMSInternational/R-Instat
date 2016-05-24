@@ -58,8 +58,8 @@ Public Class dlgInsertColumn
     Private Sub ReopenDialog()
         ucrDataFramesList.Reset()
         If rdoInsertRows.Checked Then
-            If nudPos.Value > ucrDataFramesList.iDataFrameLength + 1 Then
-                nudPos.Value = ucrDataFramesList.iDataFrameLength + 1
+            If nudPos.Value = ucrDataFramesList.iDataFrameLength Then
+                nudPos.Value = ucrDataFramesList.iDataFrameLength
                 ucrBase.clsRsyntax.AddParameter("number_rows", nudNumCols.Value)
             End If
         Else
@@ -74,6 +74,7 @@ Public Class dlgInsertColumn
         RowsOrColumns()
         rdoAtEnd.Checked = True
         ucrInputBeforeAfter.SetName("After")
+        nudPos.Value = ucrDataFramesList.iDataFrameLength
 
     End Sub
 
@@ -130,8 +131,8 @@ Public Class dlgInsertColumn
 
     Private Sub dataFrameListMaxMinPos()
         If rdoInsertRows.Checked Then
-            nudPos.Maximum = ucrDataFramesList.iDataFrameLength + 1
-            nudPos.Value = ucrDataFramesList.iDataFrameLength + 1
+            nudPos.Maximum = ucrDataFramesList.iDataFrameLength
+            nudPos.Value = ucrDataFramesList.iDataFrameLength
         Else
         End If
     End Sub
@@ -171,6 +172,8 @@ Public Class dlgInsertColumn
             rdoAtStart.Visible = True
             rdoBeforeAfter.Visible = True
             ucrInputBeforeAfter.Visible = True
+            nudNumCols.Focus()
+            nudPos.Focus()
 
 
         ElseIf rdoInsertRows.Checked Then
@@ -203,7 +206,7 @@ Public Class dlgInsertColumn
             lblNumberOfColumnsToInsert.Visible = False
             nudInsertColumns.Visible = False
             ucrReceiverColumnsToInsert.Visible = False
-
+            nudInsertColumns.Focus()
         End If
 
     End Sub
