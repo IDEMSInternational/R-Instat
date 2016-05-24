@@ -159,6 +159,7 @@ Public Class dlgInsertColumn
     Private Sub RowsOrColumns()
         If rdoInsertColumns.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+            ucrBase.clsRsyntax.AddParameter("use_col_name_as_prefix", "TRUE")
             BeforeAfterPara()
             InsertParam()
             ucrBase.clsRsyntax.RemoveParameter("number_rows")
@@ -196,6 +197,7 @@ Public Class dlgInsertColumn
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
             lblNumberOfRowsToInsert.Visible = True
             ucrBase.clsRsyntax.RemoveParameter("num_cols")
+            ucrBase.clsRsyntax.RemoveParameter("use_col_name_as_prefix")
             nudNumCols.Value = 1
             NumberofColumnsOrRows()
             dataFrameListMaxMinPos()
