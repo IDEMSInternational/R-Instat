@@ -218,7 +218,7 @@ Partial Class dlgInsertColumn
         '
         'ucrSelectorInseertColumns
         '
-        Me.ucrSelectorInseertColumns.Location = New System.Drawing.Point(12, 75)
+        Me.ucrSelectorInseertColumns.Location = New System.Drawing.Point(9, 75)
         Me.ucrSelectorInseertColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorInseertColumns.Name = "ucrSelectorInseertColumns"
         Me.ucrSelectorInseertColumns.Size = New System.Drawing.Size(250, 187)
