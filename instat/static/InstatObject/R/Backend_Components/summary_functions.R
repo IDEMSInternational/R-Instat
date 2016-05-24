@@ -31,6 +31,8 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 )
 
 instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = TRUE,summary_name,...) {
+  # itermediate methd needed here apply_calculation which calls calculate_summary when calculation type = summary
+  # always use apply_calculation to run calculation e.g. type = filter, stack
   out = self$get_data_objects(data_name)$calculate_summary(columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, ... = ...)
   if(store_results) self$append_summaries_to_data_object(out, data_name, columns_to_summarise, summaries, factors, summary_name)
   if(return_output) return(out)
