@@ -75,7 +75,7 @@ data_object <- R6Class("data_object",
                                 result = matrix(nrow = nrow(private$data), ncol = length(private$.current_filter$filter_list))
                                 for(condition in private$.current_filter$filter_list) {
                                   func = match.fun(condition[["operation"]])
-                                  result[ ,i] = func(self$get_columns_from_data(condition[["column"]]), condition[["value"]])
+                                  result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
                                   i = i + 1
                                 }
                                 return(apply(result, 1, all))
