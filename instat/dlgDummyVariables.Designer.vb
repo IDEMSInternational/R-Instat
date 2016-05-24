@@ -45,7 +45,7 @@ Partial Class dlgDummyVariables
         Me.grpLevelOmitted.Controls.Add(Me.rdoLast)
         Me.grpLevelOmitted.Controls.Add(Me.rdoFirst)
         Me.grpLevelOmitted.Controls.Add(Me.rdoNone)
-        Me.grpLevelOmitted.Location = New System.Drawing.Point(255, 66)
+        Me.grpLevelOmitted.Location = New System.Drawing.Point(255, 72)
         Me.grpLevelOmitted.Name = "grpLevelOmitted"
         Me.grpLevelOmitted.Size = New System.Drawing.Size(106, 112)
         Me.grpLevelOmitted.TabIndex = 3
@@ -168,11 +168,11 @@ Partial Class dlgDummyVariables
         '
         'ucrReceiverFactor
         '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(255, 39)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(255, 42)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFactor.TabIndex = 2
         '
         'ucrBase
