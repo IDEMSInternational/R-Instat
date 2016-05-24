@@ -232,7 +232,7 @@ instat_object$set("public", "get_data_objects", function(data_name) {
 }
 )
 
-instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = FALSE,...) {
+instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE,...) {
   if(!stack_data) {
     if(missing(data_name)) {
       retlist <- list()
@@ -374,7 +374,7 @@ instat_object$set("public", "add_columns_to_data", function(data_name, col_name,
 )
 
 instat_object$set("public", "get_columns_from_data", function(data_name, col_names, from_stacked_data = FALSE,
-                                                    force_as_data_frame = FALSE, use_current_filter = FALSE) {
+                                                    force_as_data_frame = FALSE, use_current_filter = TRUE) {
   if(missing(data_name)) stop("data_name is required")
   if(!from_stacked_data) {
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found"))
