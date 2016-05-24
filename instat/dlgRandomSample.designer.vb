@@ -42,7 +42,7 @@ Partial Class dlgRandomSample
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(255, 25)
+        Me.lblSampleSize.Location = New System.Drawing.Point(255, 85)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(65, 13)
         Me.lblSampleSize.TabIndex = 10
@@ -52,7 +52,7 @@ Partial Class dlgRandomSample
         'lblNumberofSamples
         '
         Me.lblNumberofSamples.AutoSize = True
-        Me.lblNumberofSamples.Location = New System.Drawing.Point(255, 55)
+        Me.lblNumberofSamples.Location = New System.Drawing.Point(255, 57)
         Me.lblNumberofSamples.Name = "lblNumberofSamples"
         Me.lblNumberofSamples.Size = New System.Drawing.Size(99, 13)
         Me.lblNumberofSamples.TabIndex = 10
@@ -71,7 +71,7 @@ Partial Class dlgRandomSample
         '
         'nudNumberOfSamples
         '
-        Me.nudNumberOfSamples.Location = New System.Drawing.Point(360, 48)
+        Me.nudNumberOfSamples.Location = New System.Drawing.Point(361, 50)
         Me.nudNumberOfSamples.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudNumberOfSamples.Name = "nudNumberOfSamples"
         Me.nudNumberOfSamples.Size = New System.Drawing.Size(35, 20)
@@ -80,7 +80,7 @@ Partial Class dlgRandomSample
         '
         'nudSeed
         '
-        Me.nudSeed.Location = New System.Drawing.Point(332, 82)
+        Me.nudSeed.Location = New System.Drawing.Point(332, 22)
         Me.nudSeed.Name = "nudSeed"
         Me.nudSeed.Size = New System.Drawing.Size(35, 20)
         Me.nudSeed.TabIndex = 18
@@ -88,7 +88,7 @@ Partial Class dlgRandomSample
         'chkSetSeed
         '
         Me.chkSetSeed.AutoSize = True
-        Me.chkSetSeed.Location = New System.Drawing.Point(255, 85)
+        Me.chkSetSeed.Location = New System.Drawing.Point(255, 25)
         Me.chkSetSeed.Name = "chkSetSeed"
         Me.chkSetSeed.Size = New System.Drawing.Size(70, 17)
         Me.chkSetSeed.TabIndex = 19
@@ -123,7 +123,7 @@ Partial Class dlgRandomSample
         'ucrSampleSize
         '
         Me.ucrSampleSize.clsDataFrameSelector = Nothing
-        Me.ucrSampleSize.Location = New System.Drawing.Point(333, 15)
+        Me.ucrSampleSize.Location = New System.Drawing.Point(331, 75)
         Me.ucrSampleSize.Name = "ucrSampleSize"
         Me.ucrSampleSize.Size = New System.Drawing.Size(53, 23)
         Me.ucrSampleSize.TabIndex = 13
