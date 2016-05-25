@@ -925,6 +925,29 @@ data_object$set("public", "get_current_filter", function() {
 }
 )
 
+data_object$set("public", "set_current_filter", function(filter_name) {
+  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  self$current_filter <- private$filters[[filter_name]]
+}
+)
+
+data_object$set("public", "get_filter_names", function(as_list = FALSE, include = list(), exclude = list()) {
+  out = names(private$filters)
+  if(as_list) {
+    lst = list()
+    lst[[self$get_metadata(data_name_label)]] <- out
+    return(lst)
+  }
+  else return(out)
+}
+)
+
+data_object$set("public", "get_filter", function(filter_name) {
+  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  return(private$filters[[filter_name]]$filter_list)
+}
+)
+
 data_object$set("public", "filter_applied", function() {
   return(length(private$.current_filter) > 0)
 }

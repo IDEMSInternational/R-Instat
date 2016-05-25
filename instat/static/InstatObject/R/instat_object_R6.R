@@ -440,8 +440,28 @@ instat_object$set("public", "current_filter", function(data_name) {
 }
 )
 
+instat_object$set("public", "set_current_filter", function(data_name, filter_name) {
+  self$get_data_objects(data_name)$set_current_filter(filter_name)
+}
+)
+
+instat_object$set("public", "get_filter", function(data_name, filter_name) {
+  return(self$get_data_objects(data_name)$get_filter(filter_name))
+}
+)
+
 instat_object$set("public", "get_current_filter", function(data_name) {
   self$get_data_objects(data_name)$get_current_filter()
+}
+)
+
+instat_object$set("public", "get_filter_names", function(data_name, as_list = FALSE, include = list(), exclude = list()) {
+  if(missing(data_name)) {
+    return(lapply(self$get_data_objects(), function(x) x$get_filter_names(include = include, exclude = exclude)))
+  } 
+  else {
+    return(self$get_data_objects(data_name)$get_filter_names(as_list = as_list, include = include, exclude = exclude))
+  }
 }
 )
 

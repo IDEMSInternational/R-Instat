@@ -36,11 +36,14 @@ Public Class sdgDataOptions
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrReceiverFilter.Selector = ucrSelectorFilters
+        ucrReceiverFilter.SetItemType("filter")
+        ucrReceiverFilter.SetMeAsReceiver()
     End Sub
 
     Public Sub SetDefaults()
         chkShowHiddenColumns.Checked = False
+        rdoAllDialogs.Checked = True
     End Sub
 
     Public Function ShowHiddenColumns() As Boolean
@@ -49,5 +52,18 @@ Public Class sdgDataOptions
 
     Private Sub cmdNewFilter_Click(sender As Object, e As EventArgs) Handles cmdNewFilter.Click
         sdgCreateFilter.ShowDialog()
+        If sdgCreateFilter.bFilterDefined Then
+            frmMain.clsRLink.RunScript(sdgCreateFilter.clsCurrentFilter.ToScript(), strComment:="Create Filter subdialog: Created new filter")
+        End If
+    End Sub
+
+    Private Sub ucrSubDialogueBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrSubDialogueBase.ClickReturn
+        If Not ucrReceiverFilter.IsEmpty() Then
+            If rdoAllDialogs.Checked Then
+                frmMain.clsRLink.RunScript(ucrReceiverFilter.GetVariables().ToScript(), strComment:="Data Options subdialog: Set the current filter")
+            Else
+                'TODO Set Local Filter
+            End If
+        End If
     End Sub
 End Class

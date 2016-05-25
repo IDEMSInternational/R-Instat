@@ -60,6 +60,7 @@ Partial Class ucrFilter
         '
         'cmdToggleSelectAll
         '
+        Me.cmdToggleSelectAll.Enabled = False
         Me.cmdToggleSelectAll.Location = New System.Drawing.Point(416, 283)
         Me.cmdToggleSelectAll.Name = "cmdToggleSelectAll"
         Me.cmdToggleSelectAll.Size = New System.Drawing.Size(93, 23)

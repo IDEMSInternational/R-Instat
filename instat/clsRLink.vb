@@ -327,7 +327,7 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub FillListView(lstView As ListView, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables")
+    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables")
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -339,7 +339,14 @@ Public Class RLink
         Dim kvpExclude As KeyValuePair(Of String, String())
 
         If bInstatObjectExists Then
-            clsGetColumns.SetRCommand(strInstatDataObject & "$get_column_names")
+            Select Case strType
+                Case "column"
+                    clsGetColumns.SetRCommand(strInstatDataObject & "$get_column_names")
+                Case "variables_metadata"
+                Case "filter"
+                    clsGetColumns.SetRCommand(strInstatDataObject & "$get_filter_names")
+                Case "Robject"
+            End Select
             clsGetColumns.AddParameter("as_list", "TRUE")
             lstView.Clear()
             lstView.Groups.Clear()

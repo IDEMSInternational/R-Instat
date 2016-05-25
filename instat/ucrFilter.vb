@@ -19,6 +19,7 @@ Public Class ucrFilter
     Public clsFilterView As ROperator
     Public clsFilterFunction As RFunction
     Private clsConditionsList As RFunction
+    Public bFilterDefined As Boolean
     Public Event FilterChanged()
 
     Public Sub New()
@@ -27,6 +28,7 @@ Public Class ucrFilter
 
         ' Add any initialization after the InitializeComponent() call.
         bFirstLoad = True
+        bFilterDefined = False
         clsFilterView = New ROperator
         clsFilterView.strOperation = "&&"
         clsFilterFunction = New RFunction
@@ -167,13 +169,23 @@ Public Class ucrFilter
     End Sub
 
     Private Sub ucrSelectorForFitler_DataFrameChanged() Handles ucrSelectorForFitler.DataFrameChanged
+        ClearConditions()
         clsFilterFunction.AddParameter("data_name", Chr(34) & ucrSelectorForFitler.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
 
     Private Sub cmdClearConditions_Click(sender As Object, e As EventArgs) Handles cmdClearConditions.Click
+        ClearConditions()
+    End Sub
+
+    Private Sub ClearConditions()
         clsFilterView.RemoveAllParameters()
         clsConditionsList.clsParameters.Clear()
         lstFilters.Items.Clear()
         ucrFilterPreview.SetName("")
+        RaiseEvent FilterChanged()
+    End Sub
+
+    Private Sub ucrFilter_FilterChanged() Handles Me.FilterChanged
+        bFilterDefined = lstFilters.Items.Count > 0
     End Sub
 End Class
