@@ -153,13 +153,14 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_bin2d)
 
         clsgeom_boxplot.strGeomName = "geom_boxplot"
-        clsgeom_boxplot.AddAesParameter("x", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
-        clsgeom_boxplot.AddAesParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
-        clsgeom_boxplot.AddAesParameter("fill", bIsMandatory:=True)
-        clsgeom_boxplot.AddAesParameter("colour")
-        clsgeom_boxplot.AddAesParameter("shape")
-        clsgeom_boxplot.AddAesParameter("lower")
-        clsgeom_boxplot.AddAesParameter("middle")
+        clsgeom_boxplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_boxplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_boxplot.AddAesParameter("fill", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
+        clsgeom_boxplot.AddAesParameter("colour",, strIncludedDataTypes:={"factor"})
+        clsgeom_boxplot.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_boxplot.AddAesParameter("size", strIncludedDataTypes:={"factor"})
+        clsgeom_boxplot.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
+        clsgeom_boxplot.AddAesParameter("group", strIncludedDataTypes:={"factor"})
         lstAllGeoms.Add(clsgeom_boxplot)
 
         clsgeom_contour.strGeomName = "geom_contour"
