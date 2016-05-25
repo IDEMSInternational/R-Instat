@@ -16,8 +16,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrGeom
-    Public strGgParameterName As String
-    Public strGgParameterValue As String
+    Public strAesParameterName As String
+    Public strAesParameterValue As String
     Public lstAllGeoms As New List(Of Geoms)
     Public lstGgParameters As New List(Of RParameter)
     Public clsGeomFunction As New RFunction
@@ -47,17 +47,17 @@ Public Class ucrGeom
         cboGeomList.SelectedIndex = 0
     End Sub
 
-    Public Sub AddParameter(strGgParameterName As String, strGgParameterValue As String)
+    Public Sub AddParameter(strAesParameterName As String, strAesParameterValue As String)
         'this adds parameters TODO pass appropriate parameters.
         Dim i As Integer
         Dim clsParam As New RParameter
-        i = lstFunctionParameters.FindIndex(Function(x) x.strArgumentName.Equals(Me.strGgParameterName))
+        i = lstFunctionParameters.FindIndex(Function(x) x.strArgumentName.Equals(Me.strAesParameterName))
         If i = -1 Then
-            clsParam.SetArgumentName(Me.strGgParameterName)
-            clsParam.SetArgumentValue(Me.strGgParameterValue)
+            clsParam.SetArgumentName(Me.strAesParameterName)
+            clsParam.SetArgumentValue(Me.strAesParameterValue)
             lstFunctionParameters.Add(clsParam)
         Else
-            lstFunctionParameters(i).strArgumentValue = Me.strGgParameterValue
+            lstFunctionParameters(i).strArgumentValue = Me.strAesParameterValue
         End If
     End Sub
 
