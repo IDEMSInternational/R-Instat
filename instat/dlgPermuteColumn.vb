@@ -86,12 +86,12 @@ Public Class dlgPermuteColumn
             nudSetSeed.Visible = False
         End If
     End Sub
-    Private Sub nudSetSeed_ValueChanged(sender As Object, e As EventArgs) Handles nudSetSeed.ValueChanged
+    Private Sub nudSetSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSetSeed.TextChanged
         clsSetSeedFunc.AddParameter("seed", nudSetSeed.Value)
     End Sub
 
-    Private Sub nudNumberOfPerColumns_ValueChanged(sender As Object, e As EventArgs) Handles nudNumberOfPerColumns.ValueChanged
-        ucrBase.clsRsyntax.AddParameter("n", nudNumberOfPerColumns.Value)
+    Private Sub nudNumberOfColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNumberOfColumns.TextChanged
+        ucrBase.clsRsyntax.AddParameter("n", nudNumberOfColumns.Value)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
