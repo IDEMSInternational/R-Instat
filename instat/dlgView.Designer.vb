@@ -39,9 +39,9 @@ Partial Class dlgView
         '
         Me.grpDisplayFrom.Controls.Add(Me.rdoBottom)
         Me.grpDisplayFrom.Controls.Add(Me.rdoTop)
-        Me.grpDisplayFrom.Location = New System.Drawing.Point(3, 214)
+        Me.grpDisplayFrom.Location = New System.Drawing.Point(255, 176)
         Me.grpDisplayFrom.Name = "grpDisplayFrom"
-        Me.grpDisplayFrom.Size = New System.Drawing.Size(376, 46)
+        Me.grpDisplayFrom.Size = New System.Drawing.Size(142, 43)
         Me.grpDisplayFrom.TabIndex = 4
         Me.grpDisplayFrom.TabStop = False
         Me.grpDisplayFrom.Tag = "Display_from"
@@ -50,7 +50,7 @@ Partial Class dlgView
         'rdoBottom
         '
         Me.rdoBottom.AutoSize = True
-        Me.rdoBottom.Location = New System.Drawing.Point(159, 19)
+        Me.rdoBottom.Location = New System.Drawing.Point(78, 17)
         Me.rdoBottom.Name = "rdoBottom"
         Me.rdoBottom.Size = New System.Drawing.Size(58, 17)
         Me.rdoBottom.TabIndex = 1
@@ -62,7 +62,7 @@ Partial Class dlgView
         'rdoTop
         '
         Me.rdoTop.AutoSize = True
-        Me.rdoTop.Location = New System.Drawing.Point(6, 19)
+        Me.rdoTop.Location = New System.Drawing.Point(9, 17)
         Me.rdoTop.Name = "rdoTop"
         Me.rdoTop.Size = New System.Drawing.Size(44, 17)
         Me.rdoTop.TabIndex = 0
@@ -73,7 +73,7 @@ Partial Class dlgView
         '
         'nudNumberRows
         '
-        Me.nudNumberRows.Location = New System.Drawing.Point(105, 188)
+        Me.nudNumberRows.Location = New System.Drawing.Point(352, 150)
         Me.nudNumberRows.Maximum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.nudNumberRows.Name = "nudNumberRows"
         Me.nudNumberRows.Size = New System.Drawing.Size(45, 20)
@@ -82,7 +82,7 @@ Partial Class dlgView
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(255, 9)
+        Me.lblSelected.Location = New System.Drawing.Point(255, 25)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(101, 13)
         Me.lblSelected.TabIndex = 7
@@ -92,7 +92,7 @@ Partial Class dlgView
         'lblNumberofRows
         '
         Me.lblNumberofRows.AutoSize = True
-        Me.lblNumberofRows.Location = New System.Drawing.Point(2, 193)
+        Me.lblNumberofRows.Location = New System.Drawing.Point(255, 157)
         Me.lblNumberofRows.Name = "lblNumberofRows"
         Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
         Me.lblNumberofRows.TabIndex = 8
@@ -101,31 +101,33 @@ Partial Class dlgView
         '
         'ucrReceiverView
         '
-        Me.ucrReceiverView.Location = New System.Drawing.Point(258, 25)
+        Me.ucrReceiverView.Location = New System.Drawing.Point(255, 43)
+        Me.ucrReceiverView.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverView.Name = "ucrReceiverView"
         Me.ucrReceiverView.Selector = Nothing
-        Me.ucrReceiverView.Size = New System.Drawing.Size(121, 104)
+        Me.ucrReceiverView.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverView.TabIndex = 6
         '
         'ucrSelctorForView
         '
-        Me.ucrSelctorForView.Location = New System.Drawing.Point(3, 2)
+        Me.ucrSelctorForView.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelctorForView.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelctorForView.Name = "ucrSelctorForView"
-        Me.ucrSelctorForView.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelctorForView.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelctorForView.TabIndex = 5
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(3, 272)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 222)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(401, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 1
         '
         'dlgView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(406, 332)
+        Me.ClientSize = New System.Drawing.Size(419, 273)
         Me.Controls.Add(Me.lblNumberofRows)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.nudNumberRows)

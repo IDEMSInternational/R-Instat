@@ -43,35 +43,35 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub SetDefaults()
+        ucrInputPolynomial.SetPrefix("Poly")
         rdoSimple.Checked = True
-        rdoCentered.Checked = False
-        rdoOrthogonal.Checked = False
+        XParameter()
         nudDegree.Value = 2
         ucrSelectorForPolynomial.Reset()
         ucrSelectorForPolynomial.Focus()
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
 
         ucrBase.clsRsyntax.SetFunction("poly")
         ucrBase.iHelpTopicID = 46
-
-
         ucrInputPolynomial.SetItemsTypeAsColumns()
         ucrInputPolynomial.SetDefaultTypeAsColumn()
         ucrInputPolynomial.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
-
         clsCentredOptionFunc.AddParameter("center", "TRUE")
         clsCentredOptionFunc.AddParameter("scale", "FALSE")
         clsCentredOptionFunc.SetRCommand("scale")
-
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
+        ucrReceiverPolynomial.bUseFilteredData = False
         ucrReceiverPolynomial.SetMeAsReceiver()
         ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
+
     End Sub
 
     Private Sub ucrInputPolynomial_NameChanged() Handles ucrInputPolynomial.NameChanged
@@ -91,6 +91,10 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub grpType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSimple.CheckedChanged, rdoCentered.CheckedChanged, rdoOrthogonal.CheckedChanged
+        XParameter()
+    End Sub
+
+    Private Sub XParameter()
         If rdoSimple.Checked Then
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables())
             ucrBase.clsRsyntax.AddParameter("raw", "TRUE")
@@ -105,10 +109,8 @@ Public Class dlgPolynomials
 
         Else
             ucrBase.clsRsyntax.RemoveParameter("raw")
-
         End If
     End Sub
-
     Private Sub nudDegree_TextChanged(sender As Object, e As EventArgs) Handles nudDegree.TextChanged
         ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Value)
         TestOKEnabled()

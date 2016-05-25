@@ -104,6 +104,10 @@ Public Class sdgSimpleRegOptions
         frmMain.clsRLink.RunScript(clsRFittedModelGraphics.GetScript, 0)
     End Sub
 
+    Private Sub rdoCauchit_CheckedChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
     Private Sub AddCols()
         clsRPredFunction.SetRCommand("predict")
         clsRPredFunction.AddParameter("object", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
