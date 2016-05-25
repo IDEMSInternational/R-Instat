@@ -26,6 +26,7 @@ Public Class ucrSelector
     Public strCurrentDataFrame As String
     Private lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
+    Private strType As String
 
     Public Sub New()
         ' This call is required by the designer.
@@ -37,6 +38,7 @@ Public Class ucrSelector
         strCurrentDataFrame = ""
         lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
+        strType = "column"
     End Sub
 
     Private Sub ucrSelection_load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -61,9 +63,9 @@ Public Class ucrSelector
 
         If CurrentReceiver IsNot Nothing Then
             lstCombinedMetadataLists = CombineMetadataLists(CurrentReceiver.lstIncludedMetadataProperties, CurrentReceiver.lstExcludedMetadataProperties)
-            frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame)
+            frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=CurrentReceiver.GetItemType(), lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame)
         Else
-            frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=lstIncludedMetadataProperties, lstExcludedDataTypes:=lstExcludedMetadataProperties, strDataFrameName:=strCurrentDataFrame)
+            frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstIncludedMetadataProperties, lstExcludedDataTypes:=lstExcludedMetadataProperties, strDataFrameName:=strCurrentDataFrame)
         End If
     End Sub
 

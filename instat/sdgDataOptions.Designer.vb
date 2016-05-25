@@ -25,14 +25,18 @@ Partial Class sdgDataOptions
         Me.ucrSubDialogueBase = New instat.ucrButtonsSubdialogue()
         Me.tbcDataOptions = New System.Windows.Forms.TabControl()
         Me.tbRows = New System.Windows.Forms.TabPage()
+        Me.grpFilterOptions = New System.Windows.Forms.GroupBox()
+        Me.rdoForDialog = New System.Windows.Forms.RadioButton()
+        Me.rdoAllDialogs = New System.Windows.Forms.RadioButton()
+        Me.cmdNewFilter = New System.Windows.Forms.Button()
+        Me.lblFilter = New System.Windows.Forms.Label()
+        Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
+        Me.ucrSelectorFilters = New instat.ucrSelectorByDataFrame()
         Me.tbColumns = New System.Windows.Forms.TabPage()
         Me.chkShowHiddenColumns = New System.Windows.Forms.CheckBox()
-        Me.ucrSelectorFilters = New instat.ucrSelectorByDataFrame()
-        Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
-        Me.lblFilter = New System.Windows.Forms.Label()
-        Me.cmdNewFilter = New System.Windows.Forms.Button()
         Me.tbcDataOptions.SuspendLayout()
         Me.tbRows.SuspendLayout()
+        Me.grpFilterOptions.SuspendLayout()
         Me.tbColumns.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -55,6 +59,7 @@ Partial Class sdgDataOptions
         '
         'tbRows
         '
+        Me.tbRows.Controls.Add(Me.grpFilterOptions)
         Me.tbRows.Controls.Add(Me.cmdNewFilter)
         Me.tbRows.Controls.Add(Me.lblFilter)
         Me.tbRows.Controls.Add(Me.ucrReceiverFilter)
@@ -67,6 +72,79 @@ Partial Class sdgDataOptions
         Me.tbRows.Tag = "Rows"
         Me.tbRows.Text = "Rows"
         Me.tbRows.UseVisualStyleBackColor = True
+        '
+        'grpFilterOptions
+        '
+        Me.grpFilterOptions.Controls.Add(Me.rdoForDialog)
+        Me.grpFilterOptions.Controls.Add(Me.rdoAllDialogs)
+        Me.grpFilterOptions.Location = New System.Drawing.Point(8, 195)
+        Me.grpFilterOptions.Name = "grpFilterOptions"
+        Me.grpFilterOptions.Size = New System.Drawing.Size(247, 49)
+        Me.grpFilterOptions.TabIndex = 2
+        Me.grpFilterOptions.TabStop = False
+        Me.grpFilterOptions.Tag = "Filter_Options"
+        Me.grpFilterOptions.Text = "Filter Options"
+        '
+        'rdoForDialog
+        '
+        Me.rdoForDialog.AutoSize = True
+        Me.rdoForDialog.Enabled = False
+        Me.rdoForDialog.Location = New System.Drawing.Point(120, 19)
+        Me.rdoForDialog.Name = "rdoForDialog"
+        Me.rdoForDialog.Size = New System.Drawing.Size(120, 17)
+        Me.rdoForDialog.TabIndex = 6
+        Me.rdoForDialog.TabStop = True
+        Me.rdoForDialog.Text = "For This Dialog Only"
+        Me.rdoForDialog.UseVisualStyleBackColor = True
+        '
+        'rdoAllDialogs
+        '
+        Me.rdoAllDialogs.AutoSize = True
+        Me.rdoAllDialogs.Location = New System.Drawing.Point(10, 19)
+        Me.rdoAllDialogs.Name = "rdoAllDialogs"
+        Me.rdoAllDialogs.Size = New System.Drawing.Size(92, 17)
+        Me.rdoAllDialogs.TabIndex = 5
+        Me.rdoAllDialogs.TabStop = True
+        Me.rdoAllDialogs.Text = "For All Dialogs"
+        Me.rdoAllDialogs.UseVisualStyleBackColor = True
+        '
+        'cmdNewFilter
+        '
+        Me.cmdNewFilter.Enabled = False
+        Me.cmdNewFilter.Location = New System.Drawing.Point(175, 93)
+        Me.cmdNewFilter.Name = "cmdNewFilter"
+        Me.cmdNewFilter.Size = New System.Drawing.Size(75, 23)
+        Me.cmdNewFilter.TabIndex = 4
+        Me.cmdNewFilter.Tag = "New_Filter"
+        Me.cmdNewFilter.Text = "New Filter"
+        Me.cmdNewFilter.UseVisualStyleBackColor = True
+        '
+        'lblFilter
+        '
+        Me.lblFilter.AutoSize = True
+        Me.lblFilter.Location = New System.Drawing.Point(172, 21)
+        Me.lblFilter.Name = "lblFilter"
+        Me.lblFilter.Size = New System.Drawing.Size(29, 13)
+        Me.lblFilter.TabIndex = 3
+        Me.lblFilter.Tag = "Filter"
+        Me.lblFilter.Text = "Filter"
+        '
+        'ucrReceiverFilter
+        '
+        Me.ucrReceiverFilter.Location = New System.Drawing.Point(175, 34)
+        Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
+        Me.ucrReceiverFilter.Selector = Nothing
+        Me.ucrReceiverFilter.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFilter.TabIndex = 2
+        '
+        'ucrSelectorFilters
+        '
+        Me.ucrSelectorFilters.Location = New System.Drawing.Point(8, 8)
+        Me.ucrSelectorFilters.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
+        Me.ucrSelectorFilters.Size = New System.Drawing.Size(120, 180)
+        Me.ucrSelectorFilters.TabIndex = 0
         '
         'tbColumns
         '
@@ -91,44 +169,6 @@ Partial Class sdgDataOptions
         Me.chkShowHiddenColumns.Text = "Show Hidden Columns in Selector"
         Me.chkShowHiddenColumns.UseVisualStyleBackColor = True
         '
-        'ucrSelectorFilters
-        '
-        Me.ucrSelectorFilters.Location = New System.Drawing.Point(8, 8)
-        Me.ucrSelectorFilters.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
-        Me.ucrSelectorFilters.Size = New System.Drawing.Size(120, 180)
-        Me.ucrSelectorFilters.TabIndex = 0
-        '
-        'ucrReceiverFilter
-        '
-        Me.ucrReceiverFilter.Location = New System.Drawing.Point(175, 34)
-        Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
-        Me.ucrReceiverFilter.Selector = Nothing
-        Me.ucrReceiverFilter.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFilter.TabIndex = 2
-        '
-        'lblFilter
-        '
-        Me.lblFilter.AutoSize = True
-        Me.lblFilter.Location = New System.Drawing.Point(172, 21)
-        Me.lblFilter.Name = "lblFilter"
-        Me.lblFilter.Size = New System.Drawing.Size(29, 13)
-        Me.lblFilter.TabIndex = 3
-        Me.lblFilter.Tag = "Filter"
-        Me.lblFilter.Text = "Filter"
-        '
-        'cmdNewFilter
-        '
-        Me.cmdNewFilter.Enabled = False
-        Me.cmdNewFilter.Location = New System.Drawing.Point(175, 93)
-        Me.cmdNewFilter.Name = "cmdNewFilter"
-        Me.cmdNewFilter.Size = New System.Drawing.Size(75, 23)
-        Me.cmdNewFilter.TabIndex = 4
-        Me.cmdNewFilter.Tag = "New_Filter"
-        Me.cmdNewFilter.Text = "New Filter"
-        Me.cmdNewFilter.UseVisualStyleBackColor = True
-        '
         'sdgDataOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -145,6 +185,8 @@ Partial Class sdgDataOptions
         Me.tbcDataOptions.ResumeLayout(False)
         Me.tbRows.ResumeLayout(False)
         Me.tbRows.PerformLayout()
+        Me.grpFilterOptions.ResumeLayout(False)
+        Me.grpFilterOptions.PerformLayout()
         Me.tbColumns.ResumeLayout(False)
         Me.tbColumns.PerformLayout()
         Me.ResumeLayout(False)
@@ -160,4 +202,7 @@ Partial Class sdgDataOptions
     Friend WithEvents cmdNewFilter As Button
     Friend WithEvents lblFilter As Label
     Friend WithEvents ucrReceiverFilter As ucrReceiverSingle
+    Friend WithEvents grpFilterOptions As GroupBox
+    Friend WithEvents rdoForDialog As RadioButton
+    Friend WithEvents rdoAllDialogs As RadioButton
 End Class
