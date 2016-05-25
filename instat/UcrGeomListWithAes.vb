@@ -16,8 +16,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class UcrGeomListWithParameters
-    Public lstGgParameterLabels As New List(Of Label)
-    Public lstGgParameterUcr As New List(Of ucrReceiverSingle)
+    Public lstAesParameterLabels As New List(Of Label)
+    Public lstAesParameterUcr As New List(Of ucrReceiverSingle)
     Public lstCurrArguments As New List(Of String)
     Public bFirstLoad As Boolean = True
     Public Event DataFrameChanged()
@@ -51,13 +51,13 @@ Public Class UcrGeomListWithParameters
     Public Sub SetParameters() 'this will set function or aes parameters
         Dim i As Integer = 0
 
-        If lstGgParameterLabels.Count = 0 Then
-            lstGgParameterLabels.AddRange({lblGgParam1, lblGgParam2, lblGgParam3, lblGgParam4, lblGgParam5, lblGgParam6, lblGgParam7, lblGgParam8, lblGgParam9}) 'Adds range for the parameter labels
+        If lstAesParameterLabels.Count = 0 Then
+            lstAesParameterLabels.AddRange({lblGgParam1, lblGgParam2, lblGgParam3, lblGgParam4, lblGgParam5, lblGgParam6, lblGgParam7, lblGgParam8, lblGgParam9}) 'Adds range for the parameter labels
         End If
 
-        If lstGgParameterUcr.Count = 0 Then
+        If lstAesParameterUcr.Count = 0 Then
             'Adds range for the parameter receivers
-            lstGgParameterUcr.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7, ucrReceiverParam8, ucrReceiverParam9})
+            lstAesParameterUcr.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7, ucrReceiverParam8, ucrReceiverParam9})
         End If
 
         If clsCurrGeom.clsAesParameters.Count < 9 Then
@@ -126,20 +126,20 @@ Public Class UcrGeomListWithParameters
             lstCurrArguments.Clear()
             For i = 0 To (clsCurrGeom.clsAesParameters.Count - 1)
                 If Not clsCurrGeom.clsAesParameters(i).bIsMandatory Then
-                    lstGgParameterLabels(i).Text = clsCurrGeom.clsAesParameters(i).strAesParameterName
+                    lstAesParameterLabels(i).Text = clsCurrGeom.clsAesParameters(i).strAesParameterName
                     lstCurrArguments.Add(clsCurrGeom.clsAesParameters(i).strAesParameterName)
                 Else
                     'make them uppercase
-                    lstGgParameterLabels(i).Text = (clsCurrGeom.clsAesParameters(i).strAesParameterName)
-                    lstGgParameterLabels(i).Font = New Font(lstGgParameterLabels(i).Font, FontStyle.Bold)
+                    lstAesParameterLabels(i).Text = (clsCurrGeom.clsAesParameters(i).strAesParameterName)
+                    lstAesParameterLabels(i).Font = New Font(lstAesParameterLabels(i).Font, FontStyle.Bold)
                     lstCurrArguments.Add(clsCurrGeom.clsAesParameters(i).strAesParameterName)
                 End If
 
                 If clsCurrGeom.clsAesParameters(i).strIncludedDataTypes IsNot Nothing Then
-                    lstGgParameterUcr(i).SetIncludedDataTypes(clsCurrGeom.clsAesParameters(i).strIncludedDataTypes)
+                    lstAesParameterUcr(i).SetIncludedDataTypes(clsCurrGeom.clsAesParameters(i).strIncludedDataTypes)
 
                 ElseIf clsCurrGeom.clsAesParameters(i).strExcludedDataTypes IsNot Nothing Then
-                    lstGgParameterUcr(i).SetExcludedDataTypes(clsCurrGeom.clsAesParameters(i).strExcludedDataTypes)
+                    lstAesParameterUcr(i).SetExcludedDataTypes(clsCurrGeom.clsAesParameters(i).strExcludedDataTypes)
                 End If
             Next
         End If
