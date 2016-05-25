@@ -46,4 +46,8 @@ Public Class sdgDataOptions
     Public Function ShowHiddenColumns() As Boolean
         Return chkShowHiddenColumns.Checked
     End Function
+
+    Private Sub cmdNewFilter_Click(sender As Object, e As EventArgs) Handles cmdNewFilter.Click
+        sdgCreateFilter.ShowDialog()
+    End Sub
 End Class
