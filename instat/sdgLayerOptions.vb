@@ -14,7 +14,9 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class sdgLayers
+Public Class sdgLayerOptions
+    Public clsRsyntax As RSyntax
+    Public clsGeomFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private Sub sdgLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -26,12 +28,18 @@ Public Class sdgLayers
         End If
         autoTranslate(Me)
     End Sub
-    Private Sub InitialiseDialog()
 
+    Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
+        clsRsyntax = clsRSyntaxIn
+    End Sub
+
+    Private Sub InitialiseDialog()
+        clsGeomFunction.SetRCommand(ucrGeomWithAes.cboGeomList.SelectedItem)
+        clsRsyntax.SetOperatorParameter(False, clsRFunc:=ucrGeomWithAes.clsGeomFunction)
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrGeomWithAes.UcrSelector.Reset()
     End Sub
     Private Sub ReopenDialog()
 

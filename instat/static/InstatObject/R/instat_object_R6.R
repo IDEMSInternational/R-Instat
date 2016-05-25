@@ -3,6 +3,7 @@ instat_object <- R6Class("instat_object",
                     initialize = function(data_tables = list(), instat_obj_metadata = list(), 
                                           data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
                                           data_tables_metadata = rep(list(list()),length(data_tables)),
+                                          data_tables_filters = rep(list(list()),length(data_tables)),
                                           imported_from = as.list(rep("",length(data_tables))),
                                           messages=TRUE, convert=TRUE, create=TRUE) 
 { 
@@ -16,7 +17,7 @@ instat_object <- R6Class("instat_object",
     else {
     self$import_data(data_tables=data_tables, data_tables_variables_metadata=data_tables_variables_metadata, 
     data_tables_metadata=data_tables_metadata, 
-    imported_from=imported_from, messages=messages, convert=convert, create=create)
+    imported_from=imported_from, messages=messages, convert=convert, create=create, data_tables_filters = data_tables_filters)
     }
                       
     private$.data_objects_changed <- FALSE
@@ -43,6 +44,7 @@ instat_object <- R6Class("instat_object",
 
 instat_object$set("public", "import_data", function(data_tables = list(), data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
                                                     data_tables_metadata = rep(list(list()),length(data_tables)),
+                                                    data_tables_filters = rep(list(list()),length(data_tables)),
                                                     imported_from = as.list(rep("",length(data_tables))), 
                                                     messages=TRUE, convert=TRUE, create=TRUE)
 {
@@ -84,7 +86,8 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
                                  metadata = data_tables_metadata[[i]], 
                                  imported_from = imported_from[[i]], 
                                  start_point = i, 
-                                 messages = messages, convert = convert, create = create)
+                                 messages = messages, convert = convert, create = create, 
+                                 filters = data_tables_filters[[i]])
       # Add this new data object to our list of data objects
       self$append_data_object(new_data$get_metadata(data_name_label), new_data)
     }
@@ -229,21 +232,21 @@ instat_object$set("public", "get_data_objects", function(data_name) {
 }
 )
 
-instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE,...) {
+instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE,...) {
   if(!stack_data) {
     if(missing(data_name)) {
       retlist <- list()
       for ( i in (1:length(private$.data_objects)) ) {
-        retlist[[names(private$.data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns)
+        retlist[[names(private$.data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found."))
-    return(melt(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns), ...))
+    return(melt(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter), ...))
   }
 }
 )
@@ -364,18 +367,18 @@ instat_object$set("public", "set_metadata_changed", function(data_name = "", new
 } 
 )
 
-instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column) {
-  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden, before = before, adjacent_column = adjacent_column)
-  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column)
+instat_object$set("public", "add_columns_to_data", function(data_name, col_name, col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols) {
+  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols)
+  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols)
 }
 )
 
 instat_object$set("public", "get_columns_from_data", function(data_name, col_names, from_stacked_data = FALSE,
-                                                    force_as_data_frame = FALSE) {
+                                                    force_as_data_frame = FALSE, use_current_filter = TRUE) {
   if(missing(data_name)) stop("data_name is required")
   if(!from_stacked_data) {
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found"))
-    self$get_data_objects(data_name)$get_columns_from_data(col_names, force_as_data_frame)
+    self$get_data_objects(data_name)$get_columns_from_data(col_names, force_as_data_frame, use_current_filter = use_current_filter)
   }
   else {
     if(!exists(data_name)) stop(paste(data_name, "not found."))
@@ -426,8 +429,34 @@ instat_object$set("public", "get_model_names", function() {
 }
 )
 
-instat_object$set("public", "replace_value_in_data", function(data_name, col_name, index, new_value) {
-  self$get_data_objects(data_name)$replace_value_in_data(col_name, index, new_value)
+instat_object$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE) {
+  if(missing(filter)) stop("filter is required")
+  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter)
+}
+) 
+
+instat_object$set("public", "current_filter", function(data_name) {
+  return(self$get_data_objects(data_name)$current_filter)
+}
+)
+
+instat_object$set("public", "get_current_filter", function(data_name) {
+  self$get_data_objects(data_name)$get_current_filter()
+}
+)
+
+instat_object$set("public", "remove_current_filter", function(data_name) {
+  self$get_data_objects(data_name)$remove_current_filter()
+}
+)
+
+instat_object$set("public", "filter_applied", function(data_name) {
+  self$get_data_objects(data_name)$filter_applied()
+}
+)
+
+instat_object$set("public", "replace_value_in_data", function(data_name, col_name, row, new_value) {
+  self$get_data_objects(data_name)$replace_value_in_data(col_name, row, new_value)
 } 
 )
 
@@ -436,6 +465,7 @@ instat_object$set("public", "rename_column_in_data", function(data_name, column_
 } 
 )
 
+#TODO remove this method
 instat_object$set("public", "remove_columns_in_data_from_start_position", function(data_name, start_pos, col_numbers) {
   self$get_data_objects(data_name)$remove_columns_in_data_from_start_position(start_pos = start_pos, col_numbers = col_numbers)
 } 
@@ -446,8 +476,8 @@ instat_object$set("public", "remove_columns_in_data", function(data_name, cols) 
 } 
 )
 
-instat_object$set("public", "remove_rows_in_data", function(data_name, start_pos, num_rows) {
-  self$get_data_objects(data_name)$remove_rows_in_data(start_pos  = start_pos, num_rows = num_rows)
+instat_object$set("public", "remove_rows_in_data", function(data_name, row_names) {
+  self$get_data_objects(data_name)$remove_rows_in_data(row_names = row_names)
 } 
 )
 
@@ -466,16 +496,17 @@ instat_object$set("public", "get_next_default_column_name", function(data_name, 
 } 
 )
 
-instat_object$set("public", "get_column_names", function(data_name, as_list = FALSE, include_type = c(), exclude_type = c(), include_hidden = TRUE) {
+instat_object$set("public", "get_column_names", function(data_name, as_list = FALSE, include = list(), exclude = list()) {
   if(missing(data_name)) {
-    return(lapply(self$get_data_objects(), function(x) x$get_column_names(include_type = include_type, exclude_type = exclude_type, include_hidden = include_hidden)))
+    return(lapply(self$get_data_objects(), function(x) x$get_column_names(include = include, exclude = exclude)))
   } 
   else {
-    return(self$get_data_objects(data_name)$get_column_names(as_list, include_type, exclude_type, include_hidden = include_hidden))
+    return(self$get_data_objects(data_name)$get_column_names(as_list, include, exclude))
   }
 }
 )
 
+#TODO delete and replace with add_columns_to_data
 instat_object$set("public", "insert_column_in_data", function(data_name, col_data =c(), start_pos, number_cols) {
   self$get_data_objects(data_name)$insert_column_in_data(col_data = col_data, start_pos = start_pos, number_cols = number_cols )
 }
@@ -490,17 +521,18 @@ instat_object$set("public", "insert_column_in_data", function(data_name, col_dat
 # )
 
 instat_object$set("public", "reorder_columns_in_data", function(data_name, col_order){
-  self$get_data_objects(data_name)$order_columns_in_data(col_order = col_order)
+  self$get_data_objects(data_name)$reorder_columns_in_data(col_order = col_order)
 }
 )
 
-instat_object$set("public", "insert_row_in_data", function(data_name, start_pos, row_data = c(), number_rows) {
-  self$get_data_objects(data_name)$insert_row_in_data(start_pos  = start_pos, row_data = row_data, number_rows = number_rows)
+#TODO Think how to use row_data argument
+instat_object$set("public", "insert_row_in_data", function(data_name, start_row, row_data = c(), number_rows, before = FALSE) {
+  self$get_data_objects(data_name)$insert_row_in_data(start_row = start_row, row_data = row_data, number_rows = number_rows, before = before)
 }
 )
 
-instat_object$set("public", "get_dataframe_length", function(data_name) {
-  self$get_data_objects(data_name)$get_dataframe_length()
+instat_object$set("public", "get_data_frame_length", function(data_name) {
+  self$get_data_objects(data_name)$get_data_frame_length()
 }
 )
 
@@ -616,5 +648,26 @@ instat_object$set("public","copy_data_frame", function(data_name, new_name) {
   
   if(missing(new_name)) new_name = next_default_item(data_name, self$get_data_names())
   self$append_data_object(new_name, curr_obj)
+} 
+)
+
+instat_object$set("public","set_hidden_columns", function(data_name, col_names) {
+  self$get_data_objects(data_name)$set_hidden_columns(col_names = col_names)
+} 
+)
+
+instat_object$set("public","unhide_all_columns", function(data_name) {
+  if(missing(data_name)) sapply(self$get_data_objects(), function(obj) obj$unhide_all_columns())
+  else self$get_data_objects(data_name)$unhide_all_columns()
+} 
+)
+
+instat_object$set("public","set_row_names", function(data_name, row_names) {
+  self$get_data_objects(data_name)$set_row_names(row_names = row_names)
+} 
+)
+
+instat_object$set("public","set_protected_columns", function(data_name, col_names) {
+  self$get_data_objects(data_name)$set_protected_columns(col_names = col_names)
 } 
 )

@@ -22,6 +22,7 @@ Public Class dlgFromLibrary
     Dim strPackages As String = "dfPackagesList"
     Dim strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
     Dim bFirstLoad As Boolean = True
+    Dim clsDataFunction As New RFunction
 
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -42,6 +43,7 @@ Public Class dlgFromLibrary
 
     Private Sub InitialiseDialog()
         'fills the combo box
+        clsDataFunction.SetRCommand("data")
         FillPackagesCombo()
     End Sub
 
@@ -119,6 +121,7 @@ Public Class dlgFromLibrary
     Private Sub lstCollection_Click(sender As Object, e As EventArgs) Handles lstCollection.Click
         ucrBase.clsRsyntax.SetAssignTo(chkString(lstCollection.SelectedItems(0).SubItems(0).Text), strTempDataframe:=chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         ucrBase.clsRsyntax.AddParameter("x", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
+        clsDataFunction.AddParameter("X", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         TestOkEnabled()
     End Sub
 
@@ -139,4 +142,13 @@ Public Class dlgFromLibrary
         End If
     End Function
 
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        Dim bChecked As Boolean
+        bChecked = ucrBase.chkComment.Checked
+        If bChecked Then
+            frmMain.clsRLink.RunScript(clsDataFunction.ToScript(), strComment:=ucrBase.strComment)
+        Else
+            frmMain.clsRLink.RunScript(clsDataFunction.ToScript(), strComment:=ucrBase.strComment)
+        End If
+    End Sub
 End Class

@@ -45,7 +45,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrBase.Location = New System.Drawing.Point(12, 278)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 10
+        Me.ucrBase.TabIndex = 11
         '
         'rdoBarChart
         '
@@ -73,6 +73,7 @@ Partial Class dlgSummaryBarOrPieChart
         'ucrSummarybarSelector
         '
         Me.ucrSummarybarSelector.Location = New System.Drawing.Point(13, 33)
+        Me.ucrSummarybarSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSummarybarSelector.Name = "ucrSummarybarSelector"
         Me.ucrSummarybarSelector.Size = New System.Drawing.Size(242, 179)
         Me.ucrSummarybarSelector.TabIndex = 1
@@ -80,6 +81,7 @@ Partial Class dlgSummaryBarOrPieChart
         'ucrYReceiver
         '
         Me.ucrYReceiver.Location = New System.Drawing.Point(287, 69)
+        Me.ucrYReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrYReceiver.Name = "ucrYReceiver"
         Me.ucrYReceiver.Selector = Nothing
         Me.ucrYReceiver.Size = New System.Drawing.Size(106, 26)
@@ -88,6 +90,7 @@ Partial Class dlgSummaryBarOrPieChart
         'ucrFactorReceiver
         '
         Me.ucrFactorReceiver.Location = New System.Drawing.Point(287, 123)
+        Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
@@ -136,6 +139,7 @@ Partial Class dlgSummaryBarOrPieChart
         'ucrSecondFactorReceiver
         '
         Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(287, 180)
+        Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
         Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(106, 26)
@@ -176,7 +180,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSaveSummaryBar.Location = New System.Drawing.Point(13, 249)
         Me.ucrSaveSummaryBar.Name = "ucrSaveSummaryBar"
         Me.ucrSaveSummaryBar.Size = New System.Drawing.Size(265, 27)
-        Me.ucrSaveSummaryBar.TabIndex = 11
+        Me.ucrSaveSummaryBar.TabIndex = 10
         '
         'dlgSummaryBarOrPieChart
         '
