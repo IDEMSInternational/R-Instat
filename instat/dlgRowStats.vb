@@ -52,6 +52,7 @@ Public Class dlgRowStats
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("apply")
         ucrReceiverForRowStatistics.Selector = ucrSelectorForRowStats
+        ucrReceiverForRowStatistics.bUseFilteredData = False
         ucrReceiverForRowStatistics.SetMeAsReceiver()
         ucrReceiverForRowStatistics.SetDataType("numeric")
         ucrBase.clsRsyntax.AddParameter("MARGIN", 1)
