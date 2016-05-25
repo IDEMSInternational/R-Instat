@@ -21,6 +21,7 @@ Public Class ucrReceiver
     Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public bFirstLoad As Boolean
     Public strSelectorHeading As String
+    Public bUseFilteredData As Boolean = True
 
     Public Sub New()
         ' This call is required by the designer.

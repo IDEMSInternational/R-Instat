@@ -123,7 +123,15 @@ Public Class ucrReceiverMultiple
                     clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
                 End If
             End If
-
+            If bUseFilteredData Then
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    clsGetVariablesFunc.AddParameter("use_current_filter", "TRUE")
+                Else
+                    clsGetVariablesFunc.RemoveParameterByName("use_current_filter")
+                End If
+            Else
+                clsGetVariablesFunc.AddParameter("use_current_filter", "FALSE")
+            End If
             'TODO make this an option set in Options menu
             'clsRSyntax.SetAssignTo(MakeValidRString(strCurrDataFrame) & "_temp", clsFunction:=clsGetVariablesFunc)
         End If
