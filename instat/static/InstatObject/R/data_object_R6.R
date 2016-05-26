@@ -925,7 +925,7 @@ data_object$set("public", "get_current_filter", function() {
 }
 )
 
-data_object$set("public", "set_current_filter", function(filter_name) {
+data_object$set("public", "set_current_filter", function(filter_name = "") {
   if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
   self$current_filter <- private$filters[[filter_name]]
 }

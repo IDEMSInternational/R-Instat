@@ -440,7 +440,7 @@ instat_object$set("public", "current_filter", function(data_name) {
 }
 )
 
-instat_object$set("public", "set_current_filter", function(data_name, filter_name) {
+instat_object$set("public", "set_current_filter", function(data_name, filter_name = "") {
   self$get_data_objects(data_name)$set_current_filter(filter_name)
 }
 )
