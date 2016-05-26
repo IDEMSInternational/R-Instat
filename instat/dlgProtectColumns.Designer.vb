@@ -70,6 +70,7 @@ Partial Class dlgProtectColumns
         Me.Controls.Add(Me.ucrReceiverMultipleforProtectedColumns)
         Me.Controls.Add(Me.lblProtectedColumns)
         Me.Controls.Add(Me.ucrSelectorforProtectedColumns)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Name = "dlgProtectColumns"
         Me.Text = "Protect Columns"
         Me.ResumeLayout(False)

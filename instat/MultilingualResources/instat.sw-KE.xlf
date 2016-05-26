@@ -3822,14 +3822,6 @@ to variate</target>
       <group id="INSTAT/DLGRANDOMSUBSETS.RESX" datatype="resx" />
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGPROTECT.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
-    </header>
-    <body>
-      <group id="INSTAT/DLGPROTECT.RESX" datatype="resx" />
-    </body>
-  </file>
   <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGPRINTPREVIEWOPTIONS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1466.0" tool-company="Microsoft" />
@@ -4672,12 +4664,12 @@ to variate</target>
       <group id="INSTAT/SDGSCATTERPLOT.RESX" datatype="resx" />
     </body>
   </file>
-  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/PROTECT COLUMNS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="en-US" target-language="sw-KE" original="INSTAT/DLGPROTECTCOLUMNS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="INSTAT/PROTECT COLUMNS.RESX" datatype="resx" />
+      <group id="INSTAT/DLGPROTECTCOLUMNS.RESX" datatype="resx" />
     </body>
   </file>
 </xliff>

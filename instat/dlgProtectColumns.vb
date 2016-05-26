@@ -24,32 +24,11 @@ Public Class dlgProtectColumns
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
-            TestOKEnabled()
             bFirstLoad = False
-        Else
-            '       ReopenDialog()
         End If
         autoTranslate(Me)
     End Sub
 
-    'Private Sub ReopenDialog()
-
-    'End Sub
-
-    Private Sub TestOKEnabled()
-
-        If ucrReceiverMultipleforProtectedColumns.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        End If
-        'If ucrReceiverforProtectedColumns_SelectionChanged() Then
-        ucrBase.OKEnabled(True)
-        'End If
-
-        If ucrBase.cmdReset.Enabled Then
-            ucrBase.OKEnabled(True)
-        End If
-
-    End Sub
 
     Private Sub InitialiseDialog()
 

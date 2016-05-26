@@ -111,17 +111,29 @@
   <data name="lblExplanatory.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="cmdRegressionOptions.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="chkSaveModel.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdRegressionOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
-    <value>322, 182</value>
+  <data name="chkSaveModel.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>14, 183</value>
   </data>
-  <data name="cmdRegressionOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="chkSaveModel.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>104, 24</value>
   </data>
-  <data name="cmdRegressionOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="chkSaveModel.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="chkSaveModel.Text" xml:space="preserve">
+    <value>Hifadhi Modeli</value>
+  </data>
+  <data name="ucrModelName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>122, 181</value>
+  </data>
+  <data name="ucrModelName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>149, 23</value>
+  </data>
+  <data name="ucrModelName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="ucrExplanatory.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>296, 105</value>
@@ -150,22 +162,79 @@
   <data name="ucrSelectorSimpleReg.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="ucrModelName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
-    <value>253, 3</value>
+  <data name="cmdDisplayOptions.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrModelName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
-    <value>149, 23</value>
+  <data name="cmdDisplayOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>277, 226</value>
   </data>
-  <data name="ucrModelName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="cmdDisplayOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 23</value>
   </data>
-  <data name="chkModelName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
-    <value>223, 3</value>
+  <data name="cmdDisplayOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="chkModelName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
+  <data name="cmdModelOptions.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="chkModelName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="cmdModelOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>275, 192</value>
+  </data>
+  <data name="cmdModelOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 23</value>
+  </data>
+  <data name="cmdModelOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="chkConvertToVariate.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkConvertToVariate.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkConvertToVariate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>358, 39</value>
+  </data>
+  <data name="chkConvertToVariate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>70, 30</value>
+  </data>
+  <data name="chkConvertToVariate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="chkFunction.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkFunction.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkFunction.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>357, 98</value>
+  </data>
+  <data name="chkFunction.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>76, 17</value>
+  </data>
+  <data name="chkFunction.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="ucrExplanatory.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrResponse.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorSimpleReg.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrFamily.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>12, 182</value>
+  </data>
+  <data name="ucrFamily.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>225, 43</value>
+  </data>
+  <data name="ucrFamily.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="$this.ImeMode" xml:space="preserve" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
 </root>
