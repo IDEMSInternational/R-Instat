@@ -141,6 +141,20 @@ Public Class RLink
         Return strNextDefault
     End Function
 
+    Public Function GetNextDefault(strPrefix As String, lstItems As List(Of String)) As String
+        Dim strNextDefault As String = ""
+        Dim clsGetDefault As New RFunction
+        Dim strExistingNames As String
+
+        clsGetDefault.SetRCommand("next_default_item")
+        clsGetDefault.AddParameter("prefix", Chr(34) & strPrefix & Chr(34))
+        strExistingNames = GetListAsRString(lstItems)
+        If strExistingNames <> "" Then
+            clsGetDefault.AddParameter("existing_names", GetListAsRString(lstItems))
+        End If
+        Return RunInternalScriptGetValue(clsGetDefault.ToScript()).AsCharacter(0)
+    End Function
+
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "")
         Dim strCapturedScript As String
         Dim temp As RDotNet.SymbolicExpression
@@ -154,16 +168,16 @@ Public Class RLink
             strScriptWithComment = strComment & vbCrLf & strScript
         Else
             strScriptWithComment = strScript
+        End If
+        If bLog Then
+            txtLog.Text = txtLog.Text & strScriptWithComment & vbCrLf
+        End If
+        If bOutput Then
+            If strComment <> "" Then
+                AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
             End If
-            If bLog Then
-                txtLog.Text = txtLog.Text & strScriptWithComment & vbCrLf
-            End If
-            If bOutput Then
-                If strComment <> "" Then
-                    AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
-                End If
-                AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
-            End If
+            AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
+        End If
         If bReturnOutput = 0 Then
             Try
                 clsEngine.Evaluate(strScript)
@@ -442,6 +456,20 @@ Public Class RLink
             lstModelNames.AddRange(chrModelNames)
         End If
         Return lstModelNames
+    End Function
+
+    Public Function GetFilterNames(strDataFrameName As String) As List(Of String)
+        Dim chrFilterNames As CharacterVector
+        Dim lstFilterNames As New List(Of String)
+        Dim clsGetFilterNames As New RFunction
+
+        clsGetFilterNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter_names")
+        clsGetFilterNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        chrFilterNames = RunInternalScriptGetValue(clsGetFilterNames.ToScript()).AsCharacter
+        If chrFilterNames IsNot Nothing Then
+            lstFilterNames.AddRange(chrFilterNames)
+        End If
+        Return lstFilterNames
     End Function
 
     Public Function GetDataType(strDataFrameName As String, strColumnName As String) As String

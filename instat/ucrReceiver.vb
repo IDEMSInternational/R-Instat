@@ -22,6 +22,7 @@ Public Class ucrReceiver
     Public bFirstLoad As Boolean
     Public strSelectorHeading As String
     Public bUseFilteredData As Boolean = True
+    Public bTypeSet As Boolean
     Protected strType As String
 
     Public Sub New()
@@ -32,6 +33,7 @@ Public Class ucrReceiver
         lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         bFirstLoad = True
+        bTypeSet = False
         strSelectorHeading = "Variables"
         strType = "column"
     End Sub
@@ -213,6 +215,7 @@ Public Class ucrReceiver
         If Selector IsNot Nothing Then
             Selector.LoadList()
         End If
+        bTypeSet = True
     End Sub
 
 End Class

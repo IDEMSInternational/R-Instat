@@ -475,6 +475,11 @@ instat_object$set("public", "filter_applied", function(data_name) {
 }
 )
 
+instat_object$set("public", "filter_string", function(data_name, filter_name) {
+  self$get_data_objects(data_name)$filter_string(filter_name)
+}
+)
+
 instat_object$set("public", "replace_value_in_data", function(data_name, col_name, row, new_value) {
   self$get_data_objects(data_name)$replace_value_in_data(col_name, row, new_value)
 } 

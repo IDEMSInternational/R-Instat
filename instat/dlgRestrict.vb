@@ -36,45 +36,38 @@ Public Class dlgRestrict
             InitialiseDialog()
             bFirstLoad = False
         End If
-        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrFilterPreview.txtInput.ReadOnly = True
+        ucrInputFilterPreview.txtInput.ReadOnly = True
+        ucrSelectorFilter.SetItemType("filter")
+        ucrReceiverFilter.Selector = ucrSelectorFilter
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_current_filter")
     End Sub
 
     Private Sub SetDefaults()
-        rdoApplySelected.Checked = True
+        ucrReceiverFilter.SetMeAsReceiver()
     End Sub
 
-    Private Sub TestOKEnabled()
-        If rdoApplySelected.Checked Then
-            ucrBase.OKEnabled(Not ucrFilterPreview.IsEmpty)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
-    End Sub
-
-    Private Sub cmdNewFilter_Click(sender As Object, e As EventArgs) Handles cmdNewFilter.Click
+    Private Sub cmdNewFilter_Click(sender As Object, e As EventArgs) Handles cmdDefineNewFilter.Click
         sdgCreateFilter.ShowDialog()
-        rdoApplySelected.Checked = True
-        ucrBase.clsRsyntax.SetBaseRFunction((sdgCreateFilter.clsCurrentFilter))
-        ucrBase.clsRsyntax.AddParameter("set_as_current_filter", "TRUE")
-        ucrFilterPreview.SetName(sdgCreateFilter.ucrCreateFilter.ucrFilterPreview.GetText())
-        TestOKEnabled()
-    End Sub
-
-    Private Sub grpFilter_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRemoveFilter.CheckedChanged, rdoApplySelected.CheckedChanged
-        If rdoApplySelected.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction((sdgCreateFilter.clsCurrentFilter))
-            ucrBase.clsRsyntax.AddParameter("set_as_current_filter", "TRUE")
-            ucrFilterPreview.SetName(sdgCreateFilter.ucrCreateFilter.ucrFilterPreview.GetText())
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveFilter)
+        If sdgCreateFilter.bFilterDefined Then
+            frmMain.clsRLink.RunScript(sdgCreateFilter.clsCurrentFilter.ToScript(), strComment:="Create Filter subdialog: Created new filter")
         End If
+        ucrSelectorFilter.LoadList()
     End Sub
 
     Private Sub ucrSelectorFilter_DataFrameChanged() Handles ucrSelectorFilter.DataFrameChanged
-        clsRemoveFilter.AddParameter("data_name", Chr(34) & ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        'clsRemoveFilter.AddParameter("data_name", Chr(34) & ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+    End Sub
+
+    Private Sub ucrReceiverFilter_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFilter.SelectionChanged
+        If ucrReceiverFilter.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("filter_name", Chr(34) & Chr(34))
+        Else
+            ucrBase.clsRsyntax.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
+        End If
+        ucrBase.OKEnabled(True)
     End Sub
 End Class
