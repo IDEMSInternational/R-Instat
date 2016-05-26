@@ -85,7 +85,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrBasePCA.clsRsyntax.AddParameter("ncp", nudComponents.Value)
     End Sub
 
-    Private Sub chkScaleData_TextChanged(sender As Object, e As EventArgs) Handles chkScaleData.CheckedChanged
+    Private Sub chkScaleData_CheckedChanged(sender As Object, e As EventArgs) Handles chkScaleData.CheckedChanged
         If chkScaleData.Checked Then
             ucrBasePCA.clsRsyntax.AddParameter("scale.unit", "TRUE")
         Else
