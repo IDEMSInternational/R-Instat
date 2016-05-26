@@ -1550,6 +1550,12 @@
     <Compile Include="ucrInputTextBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrLayerParameters.Designer.vb">
+      <DependentUpon>ucrLayerParameters.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrLayerParameters.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMultipleInput.Designer.vb">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </Compile>
@@ -3694,6 +3700,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInputTextBox.sw-KE.resx">
       <DependentUpon>ucrInputTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParameters.fr-FR.resx">
+      <DependentUpon>ucrLayerParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParameters.resx">
+      <DependentUpon>ucrLayerParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParameters.sw-KE.resx">
+      <DependentUpon>ucrLayerParameters.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
