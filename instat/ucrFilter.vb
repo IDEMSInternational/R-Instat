@@ -88,18 +88,18 @@ Public Class ucrFilter
     Private Sub CheckAddEnabled()
         If Not ucrFilterByReceiver.IsEmpty() Then
             If ucrFilterByReceiver.strCurrDataType = "factor" AndAlso ucrFactorLevels.GetSelectedLevels() <> "" Then
-                cmdAddFilter.Enabled = True
+                cmdAddCondition.Enabled = True
             ElseIf (Not ucrFilterOperation.IsEmpty) AndAlso (Not ucrValueForFilter.IsEmpty) Then
-                cmdAddFilter.Enabled = True
+                cmdAddCondition.Enabled = True
             Else
-                cmdAddFilter.Enabled = False
+                cmdAddCondition.Enabled = False
             End If
         Else
-            cmdAddFilter.Enabled = False
+            cmdAddCondition.Enabled = False
         End If
     End Sub
 
-    Private Sub cmdAddFilter_Click(sender As Object, e As EventArgs) Handles cmdAddFilter.Click
+    Private Sub cmdAddFilter_Click(sender As Object, e As EventArgs) Handles cmdAddCondition.Click
         Dim clsCurrentConditionView As New ROperator
         Dim clsCurrentConditionList As New RFunction
         Dim lviCondition As ListViewItem

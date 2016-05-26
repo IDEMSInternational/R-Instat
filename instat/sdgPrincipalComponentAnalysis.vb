@@ -16,8 +16,9 @@
 Imports instat.Translations
 Public Class sdgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
-    Public clsREigenValues, clsREigenVectors, clsRScores, clsPCAModel As New RFunction
-    Public clsRScreePlot As New RSyntax
+    Public clsREigenValues, clsREigenVectors, clsRScores, clsPCAModel, clsRVariablesPlotFunction, clsRVariablesPlotTheme As New RFunction
+    Public clsRScreePlotFunction, clsRScreePlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme As New RFunction
+    Public clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
 
     Private Sub sdgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -56,44 +57,79 @@ Public Class sdgPrincipalComponentAnalysis
     End Sub
 
     Private Sub ScreePlot()
+        clsRScreePlot.SetOperation("+")
+        clsRScreePlotFunction.SetRCommand("fviz_screeplot")
+        clsRScreePlotFunction.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
+        clsRScreePlotTheme.SetRCommand("theme_minimal")
+        clsRScreePlot.SetOperatorParameter(True, clsRFunc:=clsRScreePlotFunction)
+        clsRScreePlot.SetOperatorParameter(False, clsRFunc:=clsRScreePlotTheme)
+
         clsRScreePlot.SetFunction("fviz_screeplot")
         clsRScreePlot.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
 
         frmMain.clsRLink.RunScript(clsRScreePlot.GetScript(), 0)
     End Sub
+    Private Sub VariablesPlot()
+        clsRVariablesPlot.SetOperation("+")
+        clsRVariablesPlotFunction.SetRCommand("fviz_pca_var")
+        clsRVariablesPlotFunction.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
+        clsRVariablesPlotTheme.SetRCommand("theme_minimal")
+        clsRVariablesPlot.SetOperatorParameter(True, clsRFunc:=clsRVariablesPlotFunction)
+        clsRVariablesPlot.SetOperatorParameter(False, clsRFunc:=clsRVariablesPlotTheme)
+
+        frmMain.clsRLink.RunScript(clsRVariablesPlot.GetScript(), 0)
+    End Sub
+    Private Sub IndividualsPlot()
+        clsRIndividualsPlot.SetOperation("+")
+        clsRIndividualsPlotFunction.SetRCommand("fviz_pca_ind")
+        clsRIndividualsPlotFunction.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
+        clsRIndividualsPlotTheme.SetRCommand("theme_minimal")
+        clsRIndividualsPlot.SetOperatorParameter(True, clsRFunc:=clsRIndividualsPlotFunction)
+        clsRIndividualsPlot.SetOperatorParameter(False, clsRFunc:=clsRIndividualsPlotTheme)
+        frmMain.clsRLink.RunScript(clsRIndividualsPlot.GetScript(), 0)
+    End Sub
+    Private Sub Biplot()
+        clsRBiplot.SetOperation("+")
+        clsRBiplotFunction.SetRCommand("fviz_pca_biplot")
+        clsRBiplotFunction.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
+        clsRBiplotTheme.SetRCommand("theme_minimal")
+        clsRBiplot.SetOperatorParameter(True, clsRFunc:=clsRBiplotFunction)
+        clsRBiplot.SetOperatorParameter(False, clsRFunc:=clsRBiplotTheme)
+        frmMain.clsRLink.RunScript(clsRBiplot.GetScript(), 0)
+    End Sub
 
     Private Sub chkBar_CheckedChanged(sender As Object, e As EventArgs) Handles chkBar.CheckedChanged
         If chkBar.Checked Then
             If chkLine.Checked Then
-                clsRScreePlot.AddParameter("geom", "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
+                clsRScreePlotFunction.AddParameter("geom", "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
             Else
-                clsRScreePlot.AddParameter("geom", Chr(34) & "bar" & Chr(34))
+                clsRScreePlotFunction.AddParameter("geom", Chr(34) & "bar" & Chr(34))
             End If
         Else
             chkLine.Checked = True
-            clsRScreePlot.AddParameter("geom", Chr(34) & "line" & Chr(34))
+            clsRScreePlotFunction.AddParameter("geom", Chr(34) & "line" & Chr(34))
         End If
     End Sub
 
     Private Sub chkLine_CheckedChanged(sender As Object, e As EventArgs) Handles chkLine.CheckedChanged
         If chkLine.Checked Then
             If chkBar.Checked Then
-                clsRScreePlot.AddParameter("geom", "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
+                clsRScreePlotFunction.AddParameter("geom", "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
             Else
-                clsRScreePlot.AddParameter("geom", Chr(34) & "line" & Chr(34))
+                clsRScreePlotFunction.AddParameter("geom", Chr(34) & "line" & Chr(34))
             End If
         Else
             chkBar.Checked = True
-            clsRScreePlot.AddParameter("geom", Chr(34) & "bar" & Chr(34))
+            clsRScreePlotFunction.AddParameter("geom", Chr(34) & "bar" & Chr(34))
         End If
     End Sub
 
     Private Sub cmbChoice_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbChoice.SelectedIndexChanged
-        clsRScreePlot.AddParameter("choice", Chr(34) & cmbChoice.SelectedItem.ToString & Chr(34))
+        clsRScreePlotFunction.AddParameter("choice", Chr(34) & cmbChoice.SelectedItem.ToString & Chr(34))
     End Sub
 
-    Private Sub chkScreePlot_CheckedChanged(sender As Object, e As EventArgs) Handles chkScreePlot.CheckedChanged
-        If chkScreePlot.Checked Then
+    Private Sub rdoScreePlot_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScreePlot.CheckedChanged
+        If rdoScreePlot.Checked Then
             grpGeom.Enabled = True
             chkBar.Enabled = True
             chkLine.Enabled = True
@@ -108,13 +144,12 @@ Public Class sdgPrincipalComponentAnalysis
         End If
     End Sub
 
-
     Public Sub SetDefaults()
         chkEigenValues.Checked = True
         chkEigenVectors.Checked = True
         chkScores.Checked = True
         chkResiduals.Checked = True
-        chkScreePlot.Checked = False
+        rdoScreePlot.Checked = False
         chkBar.Checked = True
         chkLine.Checked = True
         chkBar.Enabled = False
@@ -123,6 +158,9 @@ Public Class sdgPrincipalComponentAnalysis
         lblChoice.Enabled = False
         cmbChoice.SelectedItem = "variance"
         cmbChoice.Enabled = False
+        rdoVariablesPlot.Checked = False
+        rdoIndividualsPlot.Checked = False
+        rdoBiplot.Checked = False
     End Sub
 
     Public Sub PCAOptions()
@@ -138,8 +176,17 @@ Public Class sdgPrincipalComponentAnalysis
         If (chkResiduals.Checked) Then
             Residuals()
         End If
-        If chkScreePlot.Checked Then
+        If rdoScreePlot.Checked Then
             ScreePlot()
+        End If
+        If rdoIndividualsPlot.Checked Then
+            IndividualsPlot()
+        End If
+        If rdoVariablesPlot.Checked Then
+            VariablesPlot()
+        End If
+        If rdoBiplot.Checked Then
+            Biplot()
         End If
     End Sub
 
