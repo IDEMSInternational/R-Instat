@@ -15,9 +15,12 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgRestrict
     Public bFirstLoad As Boolean
     Private clsRemoveFilter As RFunction
+    Private clsAddFilter As RFunction
+    Private clsFilterView As RFunction
 
     Public Sub New()
 
@@ -28,6 +31,10 @@ Public Class dlgRestrict
         bFirstLoad = True
         clsRemoveFilter = New RFunction
         clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
+        clsAddFilter = New RFunction
+        clsAddFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_filter")
+        clsFilterView = New RFunction
+        clsFilterView.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_string")
     End Sub
 
     Private Sub dlgRestrict_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -42,7 +49,7 @@ Public Class dlgRestrict
         ucrInputFilterPreview.txtInput.ReadOnly = True
         ucrSelectorFilter.SetItemType("filter")
         ucrReceiverFilter.Selector = ucrSelectorFilter
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_current_filter")
+        ucrReceiverFilter.SetMeAsReceiver()
     End Sub
 
     Private Sub SetDefaults()
@@ -58,15 +65,21 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub ucrSelectorFilter_DataFrameChanged() Handles ucrSelectorFilter.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-        'clsRemoveFilter.AddParameter("data_name", Chr(34) & ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsAddFilter.AddParameter("data_name", Chr(34) & ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsRemoveFilter.AddParameter("data_name", Chr(34) & ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsFilterView.AddParameter("data_name", Chr(34) & ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
 
     Private Sub ucrReceiverFilter_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFilter.SelectionChanged
         If ucrReceiverFilter.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("filter_name", Chr(34) & Chr(34))
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveFilter)
+            'TODO translate this
+            ucrInputFilterPreview.SetName("Current Filter will be removed.")
         Else
-            ucrBase.clsRsyntax.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
+            clsAddFilter.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
+            clsFilterView.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
+            ucrBase.clsRsyntax.SetBaseRFunction(clsAddFilter)
+            ucrInputFilterPreview.SetName(frmMain.clsRLink.RunInternalScriptGetValue(clsFilterView.ToScript()).AsCharacter(0))
         End If
         ucrBase.OKEnabled(True)
     End Sub
