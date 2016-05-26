@@ -113,25 +113,31 @@ Public Class ucrReceiverMultiple
 
         If lstCurrDataFrames.Count = 1 Then
             strCurrDataFrame = lstCurrDataFrames(0)
-            clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
             clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34))
-            clsGetVariablesFunc.AddParameter("col_names", GetVariableNames())
-            If bForceAsDataFrame Then
-                clsGetVariablesFunc.AddParameter("force_as_data_frame", "TRUE")
-            Else
-                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
-                End If
-            End If
-            If bUseFilteredData Then
-                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    clsGetVariablesFunc.AddParameter("use_current_filter", "TRUE")
-                Else
-                    clsGetVariablesFunc.RemoveParameterByName("use_current_filter")
-                End If
-            Else
-                clsGetVariablesFunc.AddParameter("use_current_filter", "FALSE")
-            End If
+            Select Case strType
+                Case "column"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+                    clsGetVariablesFunc.AddParameter("col_names", GetVariableNames())
+                    If bForceAsDataFrame Then
+                        clsGetVariablesFunc.AddParameter("force_as_data_frame", "TRUE")
+                    Else
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
+                        End If
+                    End If
+                    If bUseFilteredData Then
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsGetVariablesFunc.AddParameter("use_current_filter", "TRUE")
+                        Else
+                            clsGetVariablesFunc.RemoveParameterByName("use_current_filter")
+                        End If
+                    Else
+                        clsGetVariablesFunc.AddParameter("use_current_filter", "FALSE")
+                    End If
+                Case "filter"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
+                    clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
+            End Select
             'TODO make this an option set in Options menu
             'clsRSyntax.SetAssignTo(MakeValidRString(strCurrDataFrame) & "_temp", clsFunction:=clsGetVariablesFunc)
         End If
