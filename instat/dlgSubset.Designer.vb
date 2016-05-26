@@ -39,7 +39,8 @@ Partial Class dlgSubset
         '
         'ucrDataFrameAddRemove
         '
-        Me.ucrDataFrameAddRemove.Location = New System.Drawing.Point(12, 12)
+        Me.ucrDataFrameAddRemove.Location = New System.Drawing.Point(9, 27)
+        Me.ucrDataFrameAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameAddRemove.Name = "ucrDataFrameAddRemove"
         Me.ucrDataFrameAddRemove.Size = New System.Drawing.Size(242, 179)
         Me.ucrDataFrameAddRemove.TabIndex = 1
@@ -47,7 +48,9 @@ Partial Class dlgSubset
         'ucrReceiverSubset
         '
         Me.ucrReceiverSubset.Location = New System.Drawing.Point(260, 43)
+        Me.ucrReceiverSubset.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSubset.Name = "ucrReceiverSubset"
+        Me.ucrReceiverSubset.Selector = Nothing
         Me.ucrReceiverSubset.Size = New System.Drawing.Size(121, 128)
         Me.ucrReceiverSubset.TabIndex = 2
         '

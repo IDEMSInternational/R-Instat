@@ -97,6 +97,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'ucrReceiverMultiplePCA
         '
         Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(268, 58)
+        Me.ucrReceiverMultiplePCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiplePCA.Name = "ucrReceiverMultiplePCA"
         Me.ucrReceiverMultiplePCA.Selector = Nothing
         Me.ucrReceiverMultiplePCA.Size = New System.Drawing.Size(121, 104)
@@ -105,6 +106,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'ucrSelectorPCA
         '
         Me.ucrSelectorPCA.Location = New System.Drawing.Point(11, 5)
+        Me.ucrSelectorPCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPCA.Name = "ucrSelectorPCA"
         Me.ucrSelectorPCA.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorPCA.TabIndex = 0

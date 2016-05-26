@@ -37,7 +37,7 @@ Partial Class dlgHideShowColumns
         '
         'ucrSelectorForHiddenColumns
         '
-        Me.ucrSelectorForHiddenColumns.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorForHiddenColumns.Location = New System.Drawing.Point(13, 9)
         Me.ucrSelectorForHiddenColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForHiddenColumns.Name = "ucrSelectorForHiddenColumns"
         Me.ucrSelectorForHiddenColumns.Size = New System.Drawing.Size(210, 180)

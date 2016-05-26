@@ -724,10 +724,6 @@ Public Class frmMain
         dlgUnusedLevels.ShowDialog()
     End Sub
 
-    Private Sub mnuManageSheetProtect_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameProtectColumn.Click
-        dlgProtect.ShowDialog()
-    End Sub
-
     Private Sub mnuManageSheetHideShowColumns_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameHideColumns.Click
         dlgHideShowColumns.ShowDialog()
     End Sub
@@ -973,5 +969,9 @@ Public Class frmMain
         If dlgResponse = DialogResult.Yes Then
             frmCommand.txtCommand.Clear()
         End If
+    End Sub
+
+    Private Sub mnuOrganiseDataFrameProtectColumn_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameProtectColumn.Click
+        dlgProtectColumns.ShowDialog()
     End Sub
 End Class

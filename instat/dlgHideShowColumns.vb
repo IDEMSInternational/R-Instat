@@ -34,7 +34,7 @@ Public Class dlgHideShowColumns
     Private Sub InitialiseDialog()
         ucrReceiverHiddenColumns.Selector = ucrSelectorForHiddenColumns
         ucrReceiverHiddenColumns.SetMeAsReceiver()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_protected_columns")
     End Sub
 
     Private Sub SetDefaults()
@@ -57,4 +57,7 @@ Public Class dlgHideShowColumns
         End If
     End Sub
 
+    Private Sub ucrSelectorForHiddenColumns_Load(sender As Object, e As EventArgs) Handles ucrSelectorForHiddenColumns.Load
+
+    End Sub
 End Class

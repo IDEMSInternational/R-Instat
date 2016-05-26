@@ -126,5 +126,7 @@ Public Class dlgPrincipalComponentAnalysis
         sdgPrincipalComponentAnalysis.PCAOptions()
     End Sub
 
+    Private Sub ucrSelectorPCA_Load(sender As Object, e As EventArgs) Handles ucrSelectorPCA.Load
 
+    End Sub
 End Class

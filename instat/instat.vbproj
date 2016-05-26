@@ -402,10 +402,10 @@
     <Compile Include="dlgPrintPreviewOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgProtect.Designer.vb">
-      <DependentUpon>dlgProtect.vb</DependentUpon>
+    <Compile Include="dlgProtectColumns.Designer.vb">
+      <DependentUpon>dlgProtectColumns.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgProtect.vb">
+    <Compile Include="dlgProtectColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRandomSubsets.Designer.vb">
@@ -2029,14 +2029,8 @@
     <EmbeddedResource Include="dlgPrintPreviewOptions.sw-KE.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgProtect.fr-FR.resx">
-      <DependentUpon>dlgProtect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgProtect.resx">
-      <DependentUpon>dlgProtect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgProtect.sw-KE.resx">
-      <DependentUpon>dlgProtect.vb</DependentUpon>
+    <EmbeddedResource Include="dlgProtectColumns.resx">
+      <DependentUpon>dlgProtectColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubsets.fr-FR.resx">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
@@ -2163,6 +2157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSplitText.sw-KE.resx">
       <DependentUpon>dlgSplitText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSubset.resx">
+      <DependentUpon>dlgSubset.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummaryBarOrPieChart.fr-FR.resx">
       <DependentUpon>dlgSummaryBarOrPieChart.vb</DependentUpon>
