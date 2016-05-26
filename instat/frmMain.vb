@@ -725,7 +725,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageSheetProtect_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameProtectColumn.Click
-        dlgProtect.ShowDialog()
+        dlgProtectColumns.ShowDialog()
     End Sub
 
     Private Sub mnuManageSheetHideShowColumns_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameHideColumns.Click

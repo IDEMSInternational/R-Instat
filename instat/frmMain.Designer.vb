@@ -1838,7 +1838,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameProtectColumn
         '
-        Me.mnuOrganiseDataFrameProtectColumn.Enabled = False
         Me.mnuOrganiseDataFrameProtectColumn.Name = "mnuOrganiseDataFrameProtectColumn"
         Me.mnuOrganiseDataFrameProtectColumn.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameProtectColumn.Tag = "..."
