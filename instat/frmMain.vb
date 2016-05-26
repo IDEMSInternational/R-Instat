@@ -307,7 +307,7 @@ Public Class frmMain
         dlgSelect.ShowDialog()
     End Sub
 
-    Private Sub SimpleWithGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesSimpleWithGroups.Click
+    Private Sub mnuModelThreeVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelThreeVariablesFitModel.Click
         dlgSimpleWithGroups.ShowDialog()
     End Sub
 

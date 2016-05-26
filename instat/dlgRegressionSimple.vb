@@ -40,8 +40,15 @@ Public Class dlgRegressionSimple
         ucrBase.iHelpTopicID = 171
         ucrFamily.SetGLMDistributions()
         sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+        sdgSimpleRegOptions.SetRDataFrame(ucrSelectorSimpleReg.ucrAvailableDataFrames)
+        sdgSimpleRegOptions.SetRYVariable(ucrResponse)
+        sdgSimpleRegOptions.SetRXVariable(ucrExplanatory)
+        sdgVariableTransformations.SetRYVariable(ucrResponse)
+        sdgVariableTransformations.SetRXVariable(ucrExplanatory)
+        sdgVariableTransformations.SetRModelOperator(clsModel)
         sdgModelOptions.SetRCIFunction(clsRCIFunction)
         sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
+
     End Sub
 
     Private Sub ReopenDialog()
@@ -80,7 +87,7 @@ Public Class dlgRegressionSimple
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-    Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgSimpleRegOptions.ShowDialog()
     End Sub
 
