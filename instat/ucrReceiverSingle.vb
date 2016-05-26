@@ -33,15 +33,25 @@ Public Class ucrReceiverSingle
         Dim objItem As ListViewItem
         Dim clsGetDataType As New RFunction
         Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
+        Dim strCurrentItemType As String
 
+        If bTypeSet Then
+            strCurrentItemType = strType
+        Else
+            strCurrentItemType = Selector.GetItemType()
+        End If
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetDataType.AddParameter("property", "data_type_label")
         If txtReceiverSingle.Enabled Then
             Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
             For Each objItem In tempObjects
-                clsGetDataType.AddParameter("data_name", Chr(34) & objItem.Tag & Chr(34))
-                clsGetDataType.AddParameter("column", Chr(34) & objItem.Text & Chr(34))
-                strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                If strCurrentItemType = "column" Then
+                    clsGetDataType.AddParameter("data_name", Chr(34) & objItem.Tag & Chr(34))
+                    clsGetDataType.AddParameter("column", Chr(34) & objItem.Text & Chr(34))
+                    strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                Else
+                    strCurrDataType = ""
+                End If
                 SetSelected(objItem.Text, objItem.Tag)
             Next
         End If

@@ -40,13 +40,14 @@ Public Class ucrFilter
 
     Private Sub ucrFilter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
-            InitialiseDialog()
+            InitialiseControl()
             SetDefaults()
             bFirstLoad = False
         End If
+        ClearConditions()
     End Sub
 
-    Private Sub InitialiseDialog()
+    Private Sub InitialiseControl()
         ucrFilterPreview.txtInput.ReadOnly = True
         ucrFilterByReceiver.Selector = ucrSelectorForFitler
         ucrFilterOperation.AddItems({"==", "<", "<=", ">", ">=", "!="})
@@ -55,6 +56,10 @@ Public Class ucrFilter
         clsFilterView.bForceIncludeOperation = False
         lstFilters.Columns.Add("Variable")
         lstFilters.Columns.Add("Condition")
+        ucrInputFilterName.SetItemsTypeAsFilters()
+        ucrInputFilterName.SetDataFrameSelector(ucrSelectorForFitler.ucrAvailableDataFrames)
+        ucrInputFilterName.SetPrefix("Filter")
+        ucrInputFilterName.SetDefaultTypeAsFilter()
     End Sub
 
     Private Sub SetDefaults()
@@ -187,5 +192,13 @@ Public Class ucrFilter
 
     Private Sub ucrFilter_FilterChanged() Handles Me.FilterChanged
         bFilterDefined = lstFilters.Items.Count > 0
+    End Sub
+
+    Private Sub ucrInputFilterName_NameChanged() Handles ucrInputFilterName.NameChanged
+        If Not ucrInputFilterName.IsEmpty() Then
+            clsFilterFunction.AddParameter("filter_name", Chr(34) & ucrInputFilterName.GetText() & Chr(34))
+        Else
+            clsFilterFunction.RemoveParameterByName("filter_name")
+        End If
     End Sub
 End Class

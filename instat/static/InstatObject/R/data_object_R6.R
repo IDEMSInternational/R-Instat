@@ -896,7 +896,7 @@ data_object$set("public", "set_protected_columns", function(col_names) {
 
 data_object$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE) {
   if(missing(filter)) stop("filter is required")
-  if(filter_name == "") filter_name = next_default_item("filter", names(private$filters))
+  if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
   
   for(condition in filter) {
     if(length(condition) != 3 || !all(sort(names(condition)) == c("column", "operation", "value"))) {
@@ -949,11 +949,29 @@ data_object$set("public", "get_filter", function(filter_name) {
 )
 
 data_object$set("public", "filter_applied", function() {
-  return(length(private$.current_filter) > 0)
+  return(length(private$.current_filter$filter_list) > 0)
 }
 )
 
 data_object$set("public", "remove_current_filter", function() {
   self$current_filter <- list()
+}
+)
+
+data_object$set("public", "filter_string", function(filter_name) {
+  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  curr_filter = self$get_filter(filter_name)
+  out = "("
+  i = 1
+  for(condition in curr_filter) {
+    if(i != 1) out = paste(out, "&&")
+    out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
+    if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(condition[["value"]], collapse = ","), ")")
+    else out = paste(out, condition[["value"]])
+    out = paste0(out , ")")
+    i = i + 1
+  }
+  out = paste(out, ")")
+  return(out)
 }
 )

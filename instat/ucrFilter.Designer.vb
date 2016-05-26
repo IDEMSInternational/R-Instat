@@ -37,6 +37,8 @@ Partial Class ucrFilter
         Me.cmdClearConditions = New System.Windows.Forms.Button()
         Me.mcdEditCondition = New System.Windows.Forms.Button()
         Me.cmdRemoveCondition = New System.Windows.Forms.Button()
+        Me.lblNewFilterName = New System.Windows.Forms.Label()
+        Me.ucrInputFilterName = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblSelectLevels
@@ -70,7 +72,7 @@ Partial Class ucrFilter
         '
         'lstFilters
         '
-        Me.lstFilters.Location = New System.Drawing.Point(4, 217)
+        Me.lstFilters.Location = New System.Drawing.Point(4, 195)
         Me.lstFilters.Name = "lstFilters"
         Me.lstFilters.Size = New System.Drawing.Size(268, 132)
         Me.lstFilters.TabIndex = 8
@@ -80,7 +82,7 @@ Partial Class ucrFilter
         'lblFilterPreview
         '
         Me.lblFilterPreview.AutoSize = True
-        Me.lblFilterPreview.Location = New System.Drawing.Point(6, 367)
+        Me.lblFilterPreview.Location = New System.Drawing.Point(5, 334)
         Me.lblFilterPreview.Name = "lblFilterPreview"
         Me.lblFilterPreview.Size = New System.Drawing.Size(70, 13)
         Me.lblFilterPreview.TabIndex = 9
@@ -104,9 +106,9 @@ Partial Class ucrFilter
         '
         'ucrFilterPreview
         '
-        Me.ucrFilterPreview.Location = New System.Drawing.Point(94, 364)
+        Me.ucrFilterPreview.Location = New System.Drawing.Point(79, 330)
         Me.ucrFilterPreview.Name = "ucrFilterPreview"
-        Me.ucrFilterPreview.Size = New System.Drawing.Size(204, 21)
+        Me.ucrFilterPreview.Size = New System.Drawing.Size(293, 21)
         Me.ucrFilterPreview.TabIndex = 10
         '
         'ucrFilterOperation
@@ -146,7 +148,7 @@ Partial Class ucrFilter
         '
         'cmdClearConditions
         '
-        Me.cmdClearConditions.Location = New System.Drawing.Point(317, 362)
+        Me.cmdClearConditions.Location = New System.Drawing.Point(278, 299)
         Me.cmdClearConditions.Name = "cmdClearConditions"
         Me.cmdClearConditions.Size = New System.Drawing.Size(94, 23)
         Me.cmdClearConditions.TabIndex = 14
@@ -157,7 +159,7 @@ Partial Class ucrFilter
         'mcdEditCondition
         '
         Me.mcdEditCondition.Enabled = False
-        Me.mcdEditCondition.Location = New System.Drawing.Point(278, 241)
+        Me.mcdEditCondition.Location = New System.Drawing.Point(278, 211)
         Me.mcdEditCondition.Name = "mcdEditCondition"
         Me.mcdEditCondition.Size = New System.Drawing.Size(93, 36)
         Me.mcdEditCondition.TabIndex = 15
@@ -168,7 +170,7 @@ Partial Class ucrFilter
         'cmdRemoveCondition
         '
         Me.cmdRemoveCondition.Enabled = False
-        Me.cmdRemoveCondition.Location = New System.Drawing.Point(278, 283)
+        Me.cmdRemoveCondition.Location = New System.Drawing.Point(278, 254)
         Me.cmdRemoveCondition.Name = "cmdRemoveCondition"
         Me.cmdRemoveCondition.Size = New System.Drawing.Size(93, 36)
         Me.cmdRemoveCondition.TabIndex = 16
@@ -176,10 +178,28 @@ Partial Class ucrFilter
         Me.cmdRemoveCondition.Text = "Remove Condition"
         Me.cmdRemoveCondition.UseVisualStyleBackColor = True
         '
+        'lblNewFilterName
+        '
+        Me.lblNewFilterName.AutoSize = True
+        Me.lblNewFilterName.Location = New System.Drawing.Point(5, 366)
+        Me.lblNewFilterName.Name = "lblNewFilterName"
+        Me.lblNewFilterName.Size = New System.Drawing.Size(85, 13)
+        Me.lblNewFilterName.TabIndex = 17
+        Me.lblNewFilterName.Text = "New Filter Name"
+        '
+        'ucrInputFilterName
+        '
+        Me.ucrInputFilterName.Location = New System.Drawing.Point(96, 361)
+        Me.ucrInputFilterName.Name = "ucrInputFilterName"
+        Me.ucrInputFilterName.Size = New System.Drawing.Size(176, 21)
+        Me.ucrInputFilterName.TabIndex = 18
+        '
         'ucrFilter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputFilterName)
+        Me.Controls.Add(Me.lblNewFilterName)
         Me.Controls.Add(Me.cmdRemoveCondition)
         Me.Controls.Add(Me.mcdEditCondition)
         Me.Controls.Add(Me.cmdClearConditions)
@@ -217,4 +237,6 @@ Partial Class ucrFilter
     Friend WithEvents cmdClearConditions As Button
     Friend WithEvents mcdEditCondition As Button
     Friend WithEvents cmdRemoveCondition As Button
+    Friend WithEvents lblNewFilterName As Label
+    Friend WithEvents ucrInputFilterName As ucrInputComboBox
 End Class
