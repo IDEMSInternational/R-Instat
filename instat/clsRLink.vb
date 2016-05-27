@@ -84,10 +84,13 @@ Public Class RLink
         Return lstCurrColumns
     End Function
 
-    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True)
+    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False)
 
         If bInstatObjectExists Then
             cboDataFrames.Items.Clear()
+            If bIncludeOverall Then
+                cboDataFrames.Items.Add("[Overall]")
+            End If
             cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
         End If
 
@@ -356,7 +359,8 @@ Public Class RLink
             Select Case strType
                 Case "column"
                     clsGetColumns.SetRCommand(strInstatDataObject & "$get_column_names")
-                Case "variables_metadata"
+                Case "metadata"
+                    clsGetColumns.SetRCommand(strInstatDataObject & "$get_metadata_fields")
                 Case "filter"
                     clsGetColumns.SetRCommand(strInstatDataObject & "$get_filter_names")
                 Case "Robject"

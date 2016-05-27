@@ -23,6 +23,7 @@ Public Class ucrSelector
     Public Event VariablesInReceiversChanged()
     Public lstVariablesInReceivers As List(Of String)
     Public bFirstLoad As Boolean
+    Public bIncludeOverall As Boolean
     Public strCurrentDataFrame As String
     Private lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
@@ -35,6 +36,7 @@ Public Class ucrSelector
         ' Add any initialization after the InitializeComponent() call.
         lstVariablesInReceivers = New List(Of String)
         bFirstLoad = True
+        bIncludeOverall = False
         strCurrentDataFrame = ""
         lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
@@ -77,6 +79,11 @@ Public Class ucrSelector
         RaiseEvent ResetReceivers()
         LoadList()
         'lstItemsInReceivers.Clear()
+    End Sub
+
+    Public Overridable Sub SetIncludeOverall(bInclude As Boolean)
+        bIncludeOverall = bInclude
+        LoadList()
     End Sub
 
     Public Sub SetCurrentReceiver(conReceiver As ucrReceiver)

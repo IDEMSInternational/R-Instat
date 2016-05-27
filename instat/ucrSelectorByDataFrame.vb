@@ -34,4 +34,10 @@ Public Class ucrSelectorByDataFrame
     Private Sub ucrSelectorByDataFrame_DataFrameChanged() Handles Me.DataFrameChanged
         LoadList()
     End Sub
+
+    Public Overrides Sub SetIncludeOverall(bInclude As Boolean)
+        MyBase.SetIncludeOverall(bInclude)
+        ucrAvailableDataFrames.SetIncludeOverall(bIncludeOverall)
+        LoadList()
+    End Sub
 End Class
