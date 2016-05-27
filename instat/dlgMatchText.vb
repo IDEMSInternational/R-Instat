@@ -34,7 +34,7 @@ Public Class dlgMatchText
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 346
     End Sub
     Private Sub SetDefaults()
 
