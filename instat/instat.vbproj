@@ -360,6 +360,12 @@
     <Compile Include="dlgMatchText.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMetadata.Designer.vb">
+      <DependentUpon>dlgMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgMultipleResponse.Designer.vb">
       <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
     </Compile>
@@ -1971,6 +1977,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMatchText.sw-KE.resx">
       <DependentUpon>dlgMatchText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMetadata.fr-FR.resx">
+      <DependentUpon>dlgMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMetadata.resx">
+      <DependentUpon>dlgMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMetadata.sw-KE.resx">
+      <DependentUpon>dlgMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMultipleResponse.fr-FR.resx">
       <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
