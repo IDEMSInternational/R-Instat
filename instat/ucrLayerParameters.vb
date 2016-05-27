@@ -16,6 +16,8 @@
 
 Public Class ucrLayerParameters
     Private bFirstLoad As Boolean = True
+    Public WithEvents GeomWithAes As UcrGeomListWithParameters
+
     Private Sub ucrLayerParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseControl()
@@ -30,7 +32,8 @@ Public Class ucrLayerParameters
     End Sub
     Public Sub ucrLayerParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
         'this would only work on sdgLayers only
-        sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
+        'sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
+        GeomWithAes.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
         SetLayerParameters()
     End Sub
     Private Sub SetDefaults()
