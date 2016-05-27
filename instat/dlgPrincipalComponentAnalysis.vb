@@ -81,7 +81,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrBasePCA.clsRsyntax.AddParameter("ncp", nudComponents.Value)
     End Sub
 
-    Private Sub nudComponents_ValueChanged(sender As Object, e As EventArgs) Handles nudComponents.ValueChanged
+    Private Sub nudComponents_TextChanged(sender As Object, e As EventArgs) Handles nudComponents.TextChanged
         ucrBasePCA.clsRsyntax.AddParameter("ncp", nudComponents.Value)
     End Sub
 
