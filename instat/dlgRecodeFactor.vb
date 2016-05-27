@@ -34,7 +34,7 @@ Public Class dlgRecodeFactor
         ucrBase.clsRsyntax.SetFunction("revalue")
         ucrReceiverFactor.Selector = ucrSelectorForRecode
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
-        'ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 37
 
         ucrInputColumnName.SetPrefix("Recode")
         ucrInputColumnName.SetItemsTypeAsColumns()

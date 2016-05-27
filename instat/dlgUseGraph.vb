@@ -31,7 +31,7 @@ Public Class dlgUseGraph
 
     End Sub
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 358
     End Sub
     Private Sub ReOpenDialog()
 
