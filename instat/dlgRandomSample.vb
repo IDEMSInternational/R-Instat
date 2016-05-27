@@ -35,7 +35,7 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 31
+        ucrBase.iHelpTopicID = 376
         ucrDistWithParameters.SetRDistributions()
         clsDistribtionFunction = ucrDistWithParameters.clsCurrRFunction
         ucrSampleSize.SetDataFrameSelector(ucrSelectorRandomSamples)

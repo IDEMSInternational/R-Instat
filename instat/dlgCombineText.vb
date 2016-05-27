@@ -54,6 +54,7 @@ Public Class dlgCombineText
         ucrInputColumnInto.SetPrefix("Combine")
         iColumnsUsed = 0
         ucrInputSeparator.AddItems({"Space", "-", "_", "."})
+        ucrBase.iHelpTopicID = 345
     End Sub
 
     Private Sub SetDefaults()
