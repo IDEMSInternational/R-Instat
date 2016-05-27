@@ -38,7 +38,7 @@ Public Class dlgCorrelation
         ucrReceiverSecondColumn.SetDataType("numeric")
         ucrReceiverMultipleColumns.SetDataType("numeric")
 
-        ucrBase.iHelpTopicID = 316
+        ucrBase.iHelpTopicID = 186
         sdgCorrPlot.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
 
