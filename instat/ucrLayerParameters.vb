@@ -25,6 +25,14 @@ Public Class ucrLayerParameters
     Private Sub InitialiseControl()
 
     End Sub
+    Public Sub SetLayerParameters()
+
+    End Sub
+    Public Sub ucrLayerParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
+        'this would only work on sdgLayers only
+        sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
+        SetLayerParameters()
+    End Sub
     Private Sub SetDefaults()
 
     End Sub
