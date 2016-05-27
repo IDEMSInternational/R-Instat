@@ -36,6 +36,7 @@ Public Class dlgRenameSheet
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
+        ucrBase.iHelpTopicID = 61
     End Sub
 
     Private Sub SetDefaults()

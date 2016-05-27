@@ -29,6 +29,7 @@ Public Class dlgReorderSheet
     Private Sub initialiseDialog()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_dataframes")
         ucrSheetsToReorder.setDataType("data frame")
+        ucrBase.iHelpTopicID = 62
     End Sub
 
     Private Sub TestOkEnabled()
