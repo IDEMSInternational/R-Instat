@@ -975,3 +975,14 @@ data_object$set("public", "filter_string", function(filter_name) {
   return(out)
 }
 )
+
+data_object$set("public", "get_variables_metadata_fields", function(as_list = FALSE, include = c(), exclude = c()) {
+  out = names(self$get_variables_metadata())
+  if(as_list) {
+    lst = list()
+    lst[[self$get_metadata(data_name_label)]] <- out
+    return(lst)
+  }
+  else return(out)
+}
+)

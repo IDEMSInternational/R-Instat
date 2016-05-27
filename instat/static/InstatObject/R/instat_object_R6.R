@@ -696,3 +696,27 @@ instat_object$set("public","set_protected_columns", function(data_name, col_name
   self$get_data_objects(data_name)$set_protected_columns(col_names = col_names)
 } 
 )
+
+instat_object$set("public","get_metadata_fields", function(data_name, include_overall, as_list = FALSE, include, exclude) {
+  if(!missing(data_name)) {
+    if(data_name == "[Overall]") {
+      out = names(self$get_combined_metadata())
+      if(as_list) {
+        lst = list()
+        lst[[data_name]] <- out
+        return(lst)
+      }
+      else return(out)
+    }
+    else return(self$get_data_objects(data_name)$get_variables_metadata_fields(as_list = as_list, include = include, exclude = exclude))
+  }
+  else {
+    out = list()
+    out[["[Overall]"]] <- names(self$get_combined_metadata())
+    for(data_obj_name in self$get_data_names()) {
+      out[[data_obj_name]] <- self$get_data_objects(data_obj_name)$get_variables_metadata_fields(as_list = FALSE, include = include, exclude = exclude)
+    }
+    return(out)
+  }
+} 
+)
