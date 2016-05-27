@@ -360,6 +360,12 @@
     <Compile Include="dlgMatchText.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgMetadata.Designer.vb">
+      <DependentUpon>dlgMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgMultipleResponse.Designer.vb">
       <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
     </Compile>
@@ -1550,6 +1556,12 @@
     <Compile Include="ucrInputTextBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrLayerParameters.Designer.vb">
+      <DependentUpon>ucrLayerParameters.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrLayerParameters.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMultipleInput.Designer.vb">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </Compile>
@@ -1965,6 +1977,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMatchText.sw-KE.resx">
       <DependentUpon>dlgMatchText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMetadata.fr-FR.resx">
+      <DependentUpon>dlgMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMetadata.resx">
+      <DependentUpon>dlgMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMetadata.sw-KE.resx">
+      <DependentUpon>dlgMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMultipleResponse.fr-FR.resx">
       <DependentUpon>dlgMultipleResponse.vb</DependentUpon>
@@ -3694,6 +3715,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInputTextBox.sw-KE.resx">
       <DependentUpon>ucrInputTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParameters.fr-FR.resx">
+      <DependentUpon>ucrLayerParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParameters.resx">
+      <DependentUpon>ucrLayerParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParameters.sw-KE.resx">
+      <DependentUpon>ucrLayerParameters.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
