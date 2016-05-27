@@ -146,6 +146,8 @@ Public Class UcrGeomListWithParameters
     End Sub
 
     Private Sub UcrGeomListWithParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
+        'this would only work on sdgLayers only
+        sdgLayerOptions.ucrLayerParameter.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
         SetParameters()
     End Sub
     Private Sub ucrReceiverParam1_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam1.SelectionChanged
