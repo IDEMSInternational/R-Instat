@@ -34,8 +34,8 @@ Public Class sdgLayerOptions
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrLayerParameter.GeomWithAes = ucrGeomWithAes
-        ucrGeomWithAes.LayersControl = ucrLayerParameter
+        ucrLayerParameter.ucrGeomWithAes = ucrGeomWithAes
+        ucrGeomWithAes.ucrLayersControl = ucrLayerParameter
 
         clsGeomFunction.SetRCommand(ucrGeomWithAes.cboGeomList.SelectedItem)
         clsRsyntax.SetOperatorParameter(False, clsRFunc:=ucrGeomWithAes.clsGeomFunction)
