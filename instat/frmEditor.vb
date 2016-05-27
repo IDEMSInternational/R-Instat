@@ -32,6 +32,7 @@ Public Class frmEditor
     Private clsInsertRows As New RFunction
     Private clsDeleteRows As New RFunction
     Private clsReplaceValue As New RFunction
+    Private clsRemoveFilter As New RFunction
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -65,6 +66,7 @@ Public Class frmEditor
         clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
         clsUnhideAllColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unhide_all_columns")
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
+        clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
         UpdateRFunctionDataFrameParameters()
     End Sub
 
@@ -439,7 +441,7 @@ Public Class frmEditor
             clsInsertRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsDeleteRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsReplaceValue.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsRemoveFilter.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
         End If
     End Sub
 
@@ -450,5 +452,13 @@ Public Class frmEditor
             lstColumnNames.RemoveAt(iIndex)
         End If
         lstColumnNames.Add(New KeyValuePair(Of String, String())(strDataFrameName, strColumnNames))
+    End Sub
+
+    Private Sub mnuFilter_Click(sender As Object, e As EventArgs) Handles mnuFilter.Click
+        dlgRestrict.ShowDialog()
+    End Sub
+
+    Private Sub mnuRemoveCurrentFilter_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentFilter.Click
+        frmMain.clsRLink.RunScript(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
     End Sub
 End Class
