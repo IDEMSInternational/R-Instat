@@ -24,6 +24,7 @@ Public Class dlgProtectColumns
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
+            ucrBase.OKEnabled(False)
             bFirstLoad = False
         End If
         autoTranslate(Me)
@@ -36,6 +37,7 @@ Public Class dlgProtectColumns
         ucrReceiverMultipleforProtectedColumns.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_protected_columns")
 
+
     End Sub
 
     Private Sub SetDefaults()
@@ -47,10 +49,19 @@ Public Class dlgProtectColumns
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
 
         SetDefaults()
+        ucrBase.OKEnabled(False)
 
     End Sub
 
     Private Sub ucrSelectorforProtectedColumns_DataFrameChanged() Handles ucrSelectorforProtectedColumns.DataFrameChanged
+
+        If ucrReceiverMultipleforProtectedColumns.IsEmpty Then
+
+            ucrBase.OKEnabled(False)
+
+        Else
+            ucrBase.OKEnabled(True)
+        End If
 
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorforProtectedColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
 
@@ -58,10 +69,25 @@ Public Class dlgProtectColumns
 
     Private Sub ucrReceiverforProtectedColumns_SelectionChanged() Handles ucrReceiverMultipleforProtectedColumns.SelectionChanged
 
+        ucrBase.OKEnabled(True)
+
         If Not ucrReceiverMultipleforProtectedColumns.IsEmpty Then
+
             ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverMultipleforProtectedColumns.GetVariableNames())
+
         Else
+
             ucrBase.clsRsyntax.AddParameter("col_names", "c()")
+
+        End If
+
+    End Sub
+
+    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
+        If ucrReceiverMultipleforProtectedColumns.IsEmpty Then  ' think i may not need these lines of code.
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
 
     End Sub
