@@ -31,6 +31,8 @@ Public Class dlgTransposeColumns
     Private Sub InitialiseDialog()
         ucrColumsToTranspose.Selector = ucrSelectorTransposeColumns
         ucrColumsToTranspose.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 277
+
     End Sub
     'checks when to enable ok button
     Private Sub TestOkEnabled()
