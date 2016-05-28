@@ -30,14 +30,14 @@ Partial Class dlgReoderMetadata
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 177)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 174)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrDataFrameReoderMetadata
         '
-        Me.ucrDataFrameReoderMetadata.Location = New System.Drawing.Point(13, 13)
+        Me.ucrDataFrameReoderMetadata.Location = New System.Drawing.Point(9, 9)
         Me.ucrDataFrameReoderMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameReoderMetadata.Name = "ucrDataFrameReoderMetadata"
         Me.ucrDataFrameReoderMetadata.Size = New System.Drawing.Size(120, 40)
