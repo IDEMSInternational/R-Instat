@@ -35,6 +35,7 @@ Public Class dlgReorderLevels
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
         ucrReorderFactor.setReceiver(ucrReceiverFactor)
         ucrReorderFactor.setDataType("factor")
+        ucrBase.iHelpTopicID = 36
     End Sub
     Private Sub SetDefaultSettings()
 

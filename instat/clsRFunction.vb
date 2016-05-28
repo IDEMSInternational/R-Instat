@@ -105,6 +105,18 @@ Public Class RFunction
 
                     bIsAssigned = True
                     bToBeAssigned = False
+                ElseIf Not strAssignToModel = "" Then
+                    clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
+                    clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
+                    clsAddModels.AddParameter("model", strAssignTo)
+                    strScript = strScript & clsAddModels.ToScript() & vbCrLf
+
+                    clsGetModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
+                    clsGetModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
+                    strAssignTo = clsGetModels.ToScript()
+
+                    bIsAssigned = True
+                    bToBeAssigned = False
                 Else
                     clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
                     clsDataList.SetRCommand("list")
@@ -119,18 +131,6 @@ Public Class RFunction
                     bIsAssigned = True
                     bToBeAssigned = False
                 End If
-            ElseIf Not strAssignToModel = "" Then
-                clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
-                clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
-                clsAddModels.AddParameter("model", strAssignTo)
-                strScript = strScript & clsAddModels.ToScript() & vbCrLf
-
-                clsGetModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
-                clsGetModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
-                strAssignTo = clsGetModels.ToScript()
-
-                bIsAssigned = True
-                bToBeAssigned = False
             End If
             Return strAssignTo
         Else
