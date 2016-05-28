@@ -30,7 +30,7 @@ Public Class dlgGeneralTables
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 147
     End Sub
 
     Private Sub SetDefaults()
