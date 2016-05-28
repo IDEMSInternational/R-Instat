@@ -22,7 +22,7 @@ Public Class dlgChiSquareTest
         ucrBase.clsRsyntax.SetFunction("chisq.test")
         autoTranslate(Me)
         cboLayoutOfData.Text = "Multiple Data Columns"
-
+        ucrBase.iHelpTopicID = 175
     End Sub
 
 
