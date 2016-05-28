@@ -83,7 +83,7 @@ Public Class dlgScatterPlot
         ucrVariablesAsFactorForScatter.SetSelector(ucrSelectorForScatter)
         ucrVariablesAsFactorForScatter.SetExcludedDataTypes({"numeric"})
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-
+        ucrBase.iHelpTopicID = 16
     End Sub
     Private Sub SetDefaults()
         'setDefaults

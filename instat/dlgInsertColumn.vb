@@ -19,7 +19,7 @@ Public Class dlgInsertColumn
     Dim bFirstLoad As Boolean = True
 
     Private Sub dlgInsertColumn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.iHelpTopicID = 52
+        ucrBase.iHelpTopicID = 164
         If bFirstLoad Then
             setDefaults()
             bFirstLoad = False

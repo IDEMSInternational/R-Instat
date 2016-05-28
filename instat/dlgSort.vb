@@ -72,7 +72,7 @@ Public Class dlgSort
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
         ucrReceiverSort.Selector = ucrSelectForSort
         ucrReceiverSort.SetMeAsReceiver()
-        ucrBase.iHelpTopicID = 44
+        ucrBase.iHelpTopicID = 339
     End Sub
 
     Private Sub ucrReceiverSort_SelectionChanged() Handles ucrReceiverSort.SelectionChanged
