@@ -32,7 +32,7 @@ Public Class dlgSummary
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 146
     End Sub
     Private Sub SetDefaults()
 

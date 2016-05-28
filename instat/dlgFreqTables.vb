@@ -24,6 +24,7 @@ Public Class dlgFreqTables
         autoTranslate(Me)
         ucrReceiverMultiple.Selector = ucrAddRemove
         ucrReceiverMultiple.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 144
     End Sub
 
     Private Sub chkWeights_CheckedChanged(sender As Object, e As EventArgs) Handles chkWeights.CheckedChanged
