@@ -31,7 +31,7 @@ Public Class dlgTwoSampleSummaryData
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 152
     End Sub
 
     Private Sub SetDefaults()
