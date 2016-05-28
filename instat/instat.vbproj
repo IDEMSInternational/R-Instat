@@ -450,6 +450,12 @@
     <Compile Include="dlgReoderDescriptives.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgReoderMetadata.Designer.vb">
+      <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgReoderMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgReoderModels.Designer.vb">
       <DependentUpon>dlgReoderModels.vb</DependentUpon>
     </Compile>
@@ -2112,6 +2118,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReoderDescriptives.sw-KE.resx">
       <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderMetadata.fr-FR.resx">
+      <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderMetadata.resx">
+      <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgReoderMetadata.sw-KE.resx">
+      <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReoderModels.fr-FR.resx">
       <DependentUpon>dlgReoderModels.vb</DependentUpon>
