@@ -1,4 +1,11 @@
-# Necessary libraries for the data object
+# Necessary packages for the Instat Object
+packs <- c("openxlsx", "reshape2", "lubridate","plyr", "rtf", "ggplot2", "extRemes", "GGally", "CCA", "plotrix", "agridat", "DAAG", "FactoMineR", "plotrix", "agridat", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "proto", "tidyr", "gridExtra", "tidyr", "gridExtra", "scales", "proto")
+# Packages including dependencies (generated from miniCRAN package, excluding ggfortify which is not on CRAN)
+packs <- c("abind", "agridat", "assertthat", "BH", "bitops", "boot", "candisc", "car", "CCA", "chron", "circlize", "CircStats", "circular", "clifro", "cluster", "colorspace", "curl", "DAAG", "data.table", "DBI", "dendextend", "devtools", "dichromat", "digest", "distillery", "dplyr", "ellipse", "evaluate", "Evapotranspiration", "extRemes", "factoextra", "FactoMineR", "fda", "fields", "flashClust", "formatR", "GGally", "ggplot2", "ggrepel", "git2r", "GlobalOptions", "gridExtra", "gtable", "heplots", "hexbin", "highr", "httr", "jsonlite", "knitr", "labeling", "lattice", "latticeExtra", "lazyeval", "leaps", "lme4", "Lmoments", "lubridate", "magrittr", "mapdata", "mapproj", "maps", "markdown", "MASS", "Matrix", "MatrixModels", "memoise", "mgcv", "mime", "minqa", "munsell", "nlme", "nloptr", "nnet", "openair", "openssl", "openxlsx", "pbkrtest", "plotrix", "plyr", "png", "proto", "quantreg", "R.methodsS3", "R.oo", "R6", "RColorBrewer", "Rcpp", "RcppEigen", "RCurl", "reshape", "reshape2", "RgoogleMaps", "RJSONIO", "rstudioapi", "rtf", "scales", "scatterplot3d", "selectr", "shape", "spam", "SparseM", "stringi", "stringr", "survival", "tidyr", "whisker", "withr", "XML", "yaml", "zoo")
+success <- suppressWarnings(sapply(packs, require, character.only = TRUE))
+if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/RPackages"), type = "win.binary")
+sapply(names(success)[!success], require, character.only = TRUE)
+if(!suppressWarnings(require(ggfortify))) install.packages(paste0(getwd(), "/RPackages", "/ggfortify_0.1.0.tar.gz"), repos = NULL, type="source")
 library(openxlsx)
 library(reshape2)
 library(lubridate)
@@ -7,8 +14,6 @@ library(rtf)
 library(ggplot2)
 library(extRemes)
 library(DAAG)
-# TODO do we need reshape? It causes conflicts with reshape2 but this can be avoided if reshape is really needed
-#library(reshape)
 library(ggfortify)
 library(GGally)
 library(FactoMineR)
