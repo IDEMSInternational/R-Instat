@@ -30,6 +30,7 @@ Public Class dlgPopulationPyramids
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 407
 
     End Sub
 
