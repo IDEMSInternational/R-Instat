@@ -22,32 +22,24 @@ Partial Class dlgRestrict
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.cmdNewFilter = New System.Windows.Forms.Button()
-        Me.ucrFilterPreview = New instat.ucrInputTextBox()
+        Me.cmdDefineNewFilter = New System.Windows.Forms.Button()
         Me.ucrSelectorFilter = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoApplySelected = New System.Windows.Forms.RadioButton()
-        Me.rdoRemoveFilter = New System.Windows.Forms.RadioButton()
-        Me.grpFilterOptions = New System.Windows.Forms.GroupBox()
-        Me.grpFilterOptions.SuspendLayout()
+        Me.lblFilter = New System.Windows.Forms.Label()
+        Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
+        Me.lblFilterPreview = New System.Windows.Forms.Label()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
-        'cmdNewFilter
+        'cmdDefineNewFilter
         '
-        Me.cmdNewFilter.Location = New System.Drawing.Point(15, 243)
-        Me.cmdNewFilter.Name = "cmdNewFilter"
-        Me.cmdNewFilter.Size = New System.Drawing.Size(75, 23)
-        Me.cmdNewFilter.TabIndex = 1
-        Me.cmdNewFilter.Tag = "New_Filter"
-        Me.cmdNewFilter.Text = "New Filter"
-        Me.cmdNewFilter.UseVisualStyleBackColor = True
-        '
-        'ucrFilterPreview
-        '
-        Me.ucrFilterPreview.Location = New System.Drawing.Point(130, 24)
-        Me.ucrFilterPreview.Name = "ucrFilterPreview"
-        Me.ucrFilterPreview.Size = New System.Drawing.Size(263, 21)
-        Me.ucrFilterPreview.TabIndex = 6
+        Me.cmdDefineNewFilter.Location = New System.Drawing.Point(250, 95)
+        Me.cmdDefineNewFilter.Name = "cmdDefineNewFilter"
+        Me.cmdDefineNewFilter.Size = New System.Drawing.Size(120, 23)
+        Me.cmdDefineNewFilter.TabIndex = 1
+        Me.cmdDefineNewFilter.Tag = "Define_New_Filter"
+        Me.cmdDefineNewFilter.Text = "Define New Filter"
+        Me.cmdDefineNewFilter.UseVisualStyleBackColor = True
         '
         'ucrSelectorFilter
         '
@@ -59,70 +51,72 @@ Partial Class dlgRestrict
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 378)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 227)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
-        'rdoApplySelected
+        'lblFilter
         '
-        Me.rdoApplySelected.AutoSize = True
-        Me.rdoApplySelected.Location = New System.Drawing.Point(6, 24)
-        Me.rdoApplySelected.Name = "rdoApplySelected"
-        Me.rdoApplySelected.Size = New System.Drawing.Size(121, 17)
-        Me.rdoApplySelected.TabIndex = 7
-        Me.rdoApplySelected.TabStop = True
-        Me.rdoApplySelected.Text = "Apply Selected Filter"
-        Me.rdoApplySelected.UseVisualStyleBackColor = True
+        Me.lblFilter.AutoSize = True
+        Me.lblFilter.Location = New System.Drawing.Point(247, 21)
+        Me.lblFilter.Name = "lblFilter"
+        Me.lblFilter.Size = New System.Drawing.Size(29, 13)
+        Me.lblFilter.TabIndex = 10
+        Me.lblFilter.Text = "Filter"
         '
-        'rdoRemoveFilter
+        'ucrReceiverFilter
         '
-        Me.rdoRemoveFilter.AutoSize = True
-        Me.rdoRemoveFilter.Location = New System.Drawing.Point(6, 64)
-        Me.rdoRemoveFilter.Name = "rdoRemoveFilter"
-        Me.rdoRemoveFilter.Size = New System.Drawing.Size(127, 17)
-        Me.rdoRemoveFilter.TabIndex = 8
-        Me.rdoRemoveFilter.TabStop = True
-        Me.rdoRemoveFilter.Text = "Remove Current Filter"
-        Me.rdoRemoveFilter.UseVisualStyleBackColor = True
+        Me.ucrReceiverFilter.Location = New System.Drawing.Point(250, 38)
+        Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
+        Me.ucrReceiverFilter.Selector = Nothing
+        Me.ucrReceiverFilter.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFilter.TabIndex = 11
         '
-        'grpFilterOptions
+        'lblFilterPreview
         '
-        Me.grpFilterOptions.Controls.Add(Me.rdoApplySelected)
-        Me.grpFilterOptions.Controls.Add(Me.rdoRemoveFilter)
-        Me.grpFilterOptions.Controls.Add(Me.ucrFilterPreview)
-        Me.grpFilterOptions.Location = New System.Drawing.Point(10, 272)
-        Me.grpFilterOptions.Name = "grpFilterOptions"
-        Me.grpFilterOptions.Size = New System.Drawing.Size(399, 100)
-        Me.grpFilterOptions.TabIndex = 9
-        Me.grpFilterOptions.TabStop = False
-        Me.grpFilterOptions.Text = "Filter Options"
+        Me.lblFilterPreview.AutoSize = True
+        Me.lblFilterPreview.Location = New System.Drawing.Point(10, 202)
+        Me.lblFilterPreview.Name = "lblFilterPreview"
+        Me.lblFilterPreview.Size = New System.Drawing.Size(115, 13)
+        Me.lblFilterPreview.TabIndex = 12
+        Me.lblFilterPreview.Text = "Selected Filter Preview"
+        '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(131, 199)
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(270, 21)
+        Me.ucrInputFilterPreview.TabIndex = 13
         '
         'dlgRestrict
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 432)
-        Me.Controls.Add(Me.grpFilterOptions)
+        Me.ClientSize = New System.Drawing.Size(417, 282)
+        Me.Controls.Add(Me.ucrInputFilterPreview)
+        Me.Controls.Add(Me.lblFilterPreview)
+        Me.Controls.Add(Me.ucrReceiverFilter)
+        Me.Controls.Add(Me.lblFilter)
         Me.Controls.Add(Me.ucrSelectorFilter)
-        Me.Controls.Add(Me.cmdNewFilter)
+        Me.Controls.Add(Me.cmdDefineNewFilter)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgRestrict"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Filter"
         Me.Text = "Filter"
-        Me.grpFilterOptions.ResumeLayout(False)
-        Me.grpFilterOptions.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents cmdNewFilter As Button
+    Friend WithEvents cmdDefineNewFilter As Button
     Friend WithEvents ucrSelectorFilter As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrFilterPreview As ucrInputTextBox
-    Friend WithEvents rdoApplySelected As RadioButton
-    Friend WithEvents rdoRemoveFilter As RadioButton
-    Friend WithEvents grpFilterOptions As GroupBox
+    Friend WithEvents lblFilter As Label
+    Friend WithEvents ucrReceiverFilter As ucrReceiverSingle
+    Friend WithEvents lblFilterPreview As Label
+    Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
 End Class

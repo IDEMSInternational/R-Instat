@@ -4,7 +4,7 @@ data_object <- R6Class("data_object",
                                                  variables_metadata = data.frame(), metadata = list(), 
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
-                                                 start_point=1, filters = list())
+                                                 start_point=1, filters = list(), objects = list())
 {
                              
   # Set up the data object
@@ -14,6 +14,7 @@ data_object <- R6Class("data_object",
   self$update_variables_metadata()
   self$set_meta(metadata)
   self$set_filters(filters)
+  self$set_objects(objects)
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
@@ -37,6 +38,7 @@ data_object <- R6Class("data_object",
                            metadata = list(), 
                            variables_metadata = data.frame(),
                            filters = list(),
+                           objects = list(),
                            changes = list(), 
                            .current_filter = list(),
                            .data_changed = FALSE,
@@ -72,10 +74,10 @@ data_object <- R6Class("data_object",
                               if(missing(filter)) {
                                 filter_string = ""
                                 i = 1
-                                result = matrix(nrow = nrow(private$data), ncol = length(private$.current_filter))
-                                for(condition in private$.current_filter) {
+                                result = matrix(nrow = nrow(private$data), ncol = length(private$.current_filter$filter_list))
+                                for(condition in private$.current_filter$filter_list) {
                                   func = match.fun(condition[["operation"]])
-                                  result[ ,i] = func(self$get_columns_from_data(condition[["column"]]), condition[["value"]])
+                                  result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
                                   i = i + 1
                                 }
                                 return(apply(result, 1, all))
@@ -139,6 +141,14 @@ data_object$set("public", "set_filters", function(new_filters) {
 }
 )
 
+data_object$set("public", "set_objects", function(new_objects) {
+  if(!is.list(new_objects)) stop("new_objects must be of type: list")
+  
+  self$append_to_changes(list(Set_property, "objects"))  
+  private$objects <- new_objects
+}
+)
+
 data_object$set("public", "update_variables_metadata", function() {
   
   if(ncol(private$data) !=  nrow(private$variables_metadata) || !all(colnames(private$data)==rownames(private$variables_metadata))) {
@@ -171,7 +181,7 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = FALSE) {
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE) {
   if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out = private$data[ , !self$get_variables_metadata(property = is_hidden_label)]
   else out = private$data
   if(use_current_filter && length(private$.current_filter) > 0) {
@@ -317,7 +327,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
 }
 )
 
-data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = FALSE) {
+data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE) {
   if(missing(col_names)) stop("no col_names to return")
   if(!all(col_names %in% names(private$data))) stop("Not all column names were found in data")
   
@@ -896,7 +906,7 @@ data_object$set("public", "set_protected_columns", function(col_names) {
 
 data_object$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE) {
   if(missing(filter)) stop("filter is required")
-  if(filter_name == "") filter_name = next_default_item("filter", names(private$filters))
+  if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
   
   for(condition in filter) {
     if(length(condition) != 3 || !all(sort(names(condition)) == c("column", "operation", "value"))) {
@@ -904,15 +914,16 @@ data_object$set("public", "add_filter", function(filter, filter_name = "", repla
     }
     if(!condition[["column"]] %in% names(private$data)) stop(condition[["column"]], " not found in data.")
   }
-  if(filter_name %in% names(private$filters) && replace) {
+  if(filter_name %in% names(private$filters) && !replace) {
     warning("A filter named ", filter_name, " already exists. It will not be replaced.")
   }
   else {
     if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
-    private$filters[[filter_name]] <- filter
+    filter_calc = calculation$new(type = "filter", filter_list = filter)
+    private$filters[[filter_name]] <- filter_calc
     self$append_to_changes(list(Added_filter, filter_name))
     if(set_as_current) {
-      self$current_filter <- filter
+      self$current_filter <- filter_calc
       self$data_changed <- TRUE
     }
   }
@@ -924,12 +935,90 @@ data_object$set("public", "get_current_filter", function() {
 }
 )
 
+data_object$set("public", "set_current_filter", function(filter_name = "") {
+  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  self$current_filter <- private$filters[[filter_name]]
+}
+)
+
+data_object$set("public", "get_filter_names", function(as_list = FALSE, include = list(), exclude = list()) {
+  out = names(private$filters)
+  if(as_list) {
+    lst = list()
+    lst[[self$get_metadata(data_name_label)]] <- out
+    return(lst)
+  }
+  else return(out)
+}
+)
+
+data_object$set("public", "get_filter", function(filter_name) {
+  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  return(private$filters[[filter_name]]$filter_list)
+}
+)
+
 data_object$set("public", "filter_applied", function() {
-  return(length(private$.current_filter) > 0)
+  return(length(private$.current_filter$filter_list) > 0)
 }
 )
 
 data_object$set("public", "remove_current_filter", function() {
   self$current_filter <- list()
+}
+)
+
+data_object$set("public", "filter_string", function(filter_name) {
+  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  curr_filter = self$get_filter(filter_name)
+  out = "("
+  i = 1
+  for(condition in curr_filter) {
+    if(i != 1) out = paste(out, "&&")
+    out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
+    if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(condition[["value"]], collapse = ","), ")")
+    else out = paste(out, condition[["value"]])
+    out = paste0(out , ")")
+    i = i + 1
+  }
+  out = paste(out, ")")
+  return(out)
+}
+)
+
+data_object$set("public", "get_variables_metadata_fields", function(as_list = FALSE, include = c(), exclude = c()) {
+  out = names(self$get_variables_metadata())
+  if(as_list) {
+    lst = list()
+    lst[[self$get_metadata(data_name_label)]] <- out
+    return(lst)
+  }
+  else return(out)
+}
+)
+
+data_object$set("public", "add_object", function(object, object_name) {
+  if(missing(object_name)) object_name = next_default_item("object", names(private$objects))
+  private$objects[[object_name]] <- object
+  self$append_to_changes(list(Added_object, object_name))
+}
+)
+
+data_object$set("public", "get_objects", function(object_name) {
+  if(missing(object_name)) return(private$objects)
+  if(!is.character(object_name)) stop("object_name must be a character")
+  if(!object_name %in% names(private$objects)) stop(object_name, "not found in models")
+  return(private$objects[[object_name]])
+}
+)
+
+data_object$set("public", "get_object_names", function() {
+  return(names(private$objects))
+}
+)
+
+data_object$set("public", "get_models", function(model_name) {
+  #TODO
+  self$get_objects(object_name = model_name)
 }
 )

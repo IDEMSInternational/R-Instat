@@ -42,7 +42,13 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsFilters()
+        strItemsType = "Filters"
+        FillItemTypes()
+    End Sub
+
     Private Sub FillItemTypes()
+        Dim strItems As String()
         Select Case strItemsType
             Case "Columns"
                 If ucrDataFrameSelector IsNot Nothing Then
@@ -52,6 +58,14 @@ Public Class ucrInputComboBox
             Case "Models"
                 cboInput.Items.Add(frmMain.clsRLink.GetModelNames().ToArray)
             Case "Graphs"
+            Case "Filters"
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    strItems = frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray()
+                    If strItems.Count > 0 Then
+                        cboInput.Items.AddRange(strItems)
+                    End If
+                End If
         End Select
     End Sub
 
