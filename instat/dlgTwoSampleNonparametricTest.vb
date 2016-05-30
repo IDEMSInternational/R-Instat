@@ -33,6 +33,9 @@ Public Class dlgTwoSampleNonparametricTest
     Private Sub TestOkEnabled()
 
     End Sub
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 182
+    End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()

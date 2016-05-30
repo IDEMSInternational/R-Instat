@@ -17,6 +17,7 @@ Imports instat.Translations
 Public Class dlgTransform
     Private Sub dlgTransform_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        ucrBase.iHelpTopicID = 42
         rdoCommonTransformations.Checked = True
         grpOtherTransformations.Visible = False
         rdoNonNegative.Checked = True
