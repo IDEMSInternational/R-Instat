@@ -57,7 +57,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         Me.cmdCCAOptions.Location = New System.Drawing.Point(10, 246)
         Me.cmdCCAOptions.Name = "cmdCCAOptions"
-        Me.cmdCCAOptions.Size = New System.Drawing.Size(94, 23)
+        Me.cmdCCAOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdCCAOptions.TabIndex = 7
         Me.cmdCCAOptions.Tag = "CCA_Options..."
         Me.cmdCCAOptions.Text = "CCA Options..."
@@ -66,7 +66,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         'chkSaveResult
         '
         Me.chkSaveResult.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkSaveResult.Location = New System.Drawing.Point(10, 212)
+        Me.chkSaveResult.Location = New System.Drawing.Point(10, 282)
         Me.chkSaveResult.Name = "chkSaveResult"
         Me.chkSaveResult.Size = New System.Drawing.Size(90, 24)
         Me.chkSaveResult.TabIndex = 8
@@ -102,14 +102,14 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'ucrBaseCCA
         '
-        Me.ucrBaseCCA.Location = New System.Drawing.Point(10, 281)
+        Me.ucrBaseCCA.Location = New System.Drawing.Point(10, 312)
         Me.ucrBaseCCA.Name = "ucrBaseCCA"
         Me.ucrBaseCCA.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseCCA.TabIndex = 0
         '
         'ucrResultName
         '
-        Me.ucrResultName.Location = New System.Drawing.Point(106, 211)
+        Me.ucrResultName.Location = New System.Drawing.Point(106, 281)
         Me.ucrResultName.Name = "ucrResultName"
         Me.ucrResultName.Size = New System.Drawing.Size(145, 21)
         Me.ucrResultName.TabIndex = 10
@@ -118,7 +118,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 334)
+        Me.ClientSize = New System.Drawing.Size(419, 365)
         Me.Controls.Add(Me.ucrResultName)
         Me.Controls.Add(Me.chkSaveResult)
         Me.Controls.Add(Me.cmdCCAOptions)
