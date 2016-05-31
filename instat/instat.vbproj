@@ -432,6 +432,12 @@
     <Compile Include="dlgRenameDescriptive.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRenameMetadata.Designer.vb">
+      <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRenameMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRenameModels.Designer.vb">
       <DependentUpon>dlgRenameModels.vb</DependentUpon>
     </Compile>
@@ -2091,6 +2097,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDescriptive.sw-KE.resx">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameMetadata.fr-FR.resx">
+      <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameMetadata.resx">
+      <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameMetadata.sw-KE.resx">
+      <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameModels.fr-FR.resx">
       <DependentUpon>dlgRenameModels.vb</DependentUpon>
