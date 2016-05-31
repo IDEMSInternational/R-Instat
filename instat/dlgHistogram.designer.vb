@@ -39,7 +39,7 @@ Partial Class dlgHistogram
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(147, 237)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 263)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdOptions.TabIndex = 8
@@ -49,7 +49,7 @@ Partial Class dlgHistogram
         '
         'cmdHistogramOptions
         '
-        Me.cmdHistogramOptions.Location = New System.Drawing.Point(10, 237)
+        Me.cmdHistogramOptions.Location = New System.Drawing.Point(10, 228)
         Me.cmdHistogramOptions.Name = "cmdHistogramOptions"
         Me.cmdHistogramOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdHistogramOptions.TabIndex = 8
@@ -72,7 +72,7 @@ Partial Class dlgHistogram
         'rdoDensity
         '
         Me.rdoDensity.AutoSize = True
-        Me.rdoDensity.Location = New System.Drawing.Point(154, 10)
+        Me.rdoDensity.Location = New System.Drawing.Point(125, 10)
         Me.rdoDensity.Name = "rdoDensity"
         Me.rdoDensity.Size = New System.Drawing.Size(60, 17)
         Me.rdoDensity.TabIndex = 1
@@ -84,7 +84,7 @@ Partial Class dlgHistogram
         'rdoFreequencyPolygon
         '
         Me.rdoFreequencyPolygon.AutoSize = True
-        Me.rdoFreequencyPolygon.Location = New System.Drawing.Point(286, 10)
+        Me.rdoFreequencyPolygon.Location = New System.Drawing.Point(255, 10)
         Me.rdoFreequencyPolygon.Name = "rdoFreequencyPolygon"
         Me.rdoFreequencyPolygon.Size = New System.Drawing.Size(116, 17)
         Me.rdoFreequencyPolygon.TabIndex = 2
@@ -96,7 +96,7 @@ Partial Class dlgHistogram
         'lblfactor
         '
         Me.lblfactor.AutoSize = True
-        Me.lblfactor.Location = New System.Drawing.Point(255, 193)
+        Me.lblfactor.Location = New System.Drawing.Point(255, 196)
         Me.lblfactor.Name = "lblfactor"
         Me.lblfactor.Size = New System.Drawing.Size(37, 13)
         Me.lblfactor.TabIndex = 5
@@ -105,7 +105,7 @@ Partial Class dlgHistogram
         '
         'cmdDensityOptions
         '
-        Me.cmdDensityOptions.Location = New System.Drawing.Point(10, 237)
+        Me.cmdDensityOptions.Location = New System.Drawing.Point(10, 228)
         Me.cmdDensityOptions.Name = "cmdDensityOptions"
         Me.cmdDensityOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdDensityOptions.TabIndex = 8
@@ -115,7 +115,7 @@ Partial Class dlgHistogram
         '
         'cmdFrequencyOptions
         '
-        Me.cmdFrequencyOptions.Location = New System.Drawing.Point(10, 237)
+        Me.cmdFrequencyOptions.Location = New System.Drawing.Point(10, 227)
         Me.cmdFrequencyOptions.Name = "cmdFrequencyOptions"
         Me.cmdFrequencyOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdFrequencyOptions.TabIndex = 7
@@ -125,7 +125,7 @@ Partial Class dlgHistogram
         '
         'ucrFactorReceiver
         '
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(248, 209)
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 212)
         Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
@@ -142,14 +142,14 @@ Partial Class dlgHistogram
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 304)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 330)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
         'ucrSaveHist
         '
-        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 275)
+        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 299)
         Me.ucrSaveHist.Name = "ucrSaveHist"
         Me.ucrSaveHist.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveHist.TabIndex = 9
@@ -166,7 +166,7 @@ Partial Class dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 358)
+        Me.ClientSize = New System.Drawing.Size(419, 384)
         Me.Controls.Add(Me.ucrVariablesAsFactorforHist)
         Me.Controls.Add(Me.ucrSaveHist)
         Me.Controls.Add(Me.ucrFactorReceiver)
