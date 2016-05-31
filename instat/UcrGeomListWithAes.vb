@@ -20,6 +20,7 @@ Public Class UcrGeomListWithParameters
     Public lstAesParameterUcr As New List(Of ucrReceiverSingle)
     Public lstCurrArguments As New List(Of String)
     Public bFirstLoad As Boolean = True
+    Public ucrLayersControl As ucrLayerParameters
     Public Event DataFrameChanged()
 
     Private Sub UcrGeomListWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -145,9 +146,12 @@ Public Class UcrGeomListWithParameters
         End If
     End Sub
 
-    Private Sub UcrGeomListWithParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
+    Public Sub UcrGeomListWithParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
         'this would only work on sdgLayers only
-        sdgLayerOptions.ucrLayerParameter.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
+        'sdgLayerOptions.ucrLayerParameter.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
+        If ucrLayersControl IsNot Nothing Then
+            ucrLayersControl.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
+        End If
         SetParameters()
     End Sub
     Private Sub ucrReceiverParam1_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam1.SelectionChanged
