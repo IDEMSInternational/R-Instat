@@ -30,7 +30,7 @@ Public Class dlgReorderColumns
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_columns_in_data")
         ucrReorderColumns.setDataType("column")
         ucrReorderColumns.setDataframes(ucrDataFrameSelect)
-        'ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 163
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

@@ -14,7 +14,7 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 53
+        ucrBase.iHelpTopicID = 165
         ucrReceiverForColumnsToDelete.Selector = ucrSelectorForDeleteColumns
         ucrReceiverForColumnsToDelete.SetMeAsReceiver()
         ucrDataFrameLengthForDeleteRows.SetDataFrameSelector(ucrSelectorForDeleteRows)

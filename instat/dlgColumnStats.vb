@@ -48,7 +48,7 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 64
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

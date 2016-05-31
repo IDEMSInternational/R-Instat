@@ -43,6 +43,7 @@ Public Class dlgStemAndLeaf
         ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverStemAndLeaf.Selector = ucrStemLeafSelector
         ucrReceiverStemAndLeaf.SetIncludedDataTypes({"numeric"})
+        ucrBase.iHelpTopicID = 326
     End Sub
     Private Sub ucrReceiverStemAndLeaf_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverStemAndLeaf.SelectionChanged
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverStemAndLeaf.GetVariables())
