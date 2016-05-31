@@ -16,10 +16,15 @@
 Imports System.ComponentModel
 
 Public Class ucrInputTextBox
-    Public Overrides Sub SetName(strName As String)
-        If ValidateText(strName) Then
+    Public Overrides Sub SetName(strName As String, Optional bSilent As Boolean = False)
+        If bSilent Then
             txtInput.Text = strName
             OnNameChanged()
+        Else
+            If ValidateText(strName) Then
+                txtInput.Text = strName
+                OnNameChanged()
+            End If
         End If
     End Sub
 
