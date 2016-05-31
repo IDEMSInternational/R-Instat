@@ -35,7 +35,9 @@ Public Class dlgRenameMetadata
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrReceiverSelectedMetadata.Selector = ucrSelectorForDeleTeMetadata
+        ucrReceiverSelectedMetadata.SetMeAsReceiver()
+        ucrSelectorForDeleTeMetadata.SetItemType("metadata")
     End Sub
 
     Private Sub setDefaults()
