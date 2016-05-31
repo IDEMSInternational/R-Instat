@@ -61,6 +61,7 @@ Public Class dlgBarAndPieChart
         sdgPieChartOptions.SetPieChartFunction(clsTempRFunc)
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.iHelpTopicID = 327
 
 
     End Sub
