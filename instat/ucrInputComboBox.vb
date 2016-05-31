@@ -78,10 +78,18 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
-    Public Overrides Sub SetName(strName As String)
-        If ValidateText(strName) Then
+    Public Overrides Sub SetName(strName As String, Optional bSilent As Boolean = False)
+        If bSilent Then
             cboInput.Text = strName
+            If cboInput.FindStringExact(strName) <> -1 Then
+                cboInput.SelectedIndex = cboInput.FindStringExact(strName)
+            End If
             OnNameChanged()
+        Else
+            If ValidateText(strName) Then
+                cboInput.Text = strName
+                OnNameChanged()
+            End If
         End If
     End Sub
 
@@ -107,5 +115,9 @@ Public Class ucrInputComboBox
 
     Private Sub ucrInputComboBox_Load(sender As Object, e As EventArgs) Handles Me.Load
         FillItemTypes()
+    End Sub
+
+    Private Sub cboInput_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboInput.SelectedIndexChanged
+        OnNameChanged()
     End Sub
 End Class

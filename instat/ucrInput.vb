@@ -27,7 +27,7 @@ Public Class ucrInput
     Protected strDefaultPrefix As String = ""
     Protected WithEvents ucrDataFrameSelector As ucrDataFrame
 
-    Public Overridable Sub SetName(strName As String)
+    Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
     End Sub
 
     Public Overridable Function GetText() As String
@@ -42,7 +42,7 @@ Public Class ucrInput
         RaiseEvent NameChanged()
     End Sub
 
-    Public Function UserTyped()
+    Public Function UserTyped() As Boolean
         Return bUserTyped
     End Function
 
@@ -175,7 +175,7 @@ Public Class ucrInput
 
         Select Case iValidationCode
             Case 0
-                RaiseEvent NameChanged()
+
             Case 1
                 Select Case strValidationType
                     Case "RVariable"
