@@ -1838,7 +1838,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameProtectColumn
         '
-        Me.mnuOrganiseDataFrameProtectColumn.Enabled = False
         Me.mnuOrganiseDataFrameProtectColumn.Name = "mnuOrganiseDataFrameProtectColumn"
         Me.mnuOrganiseDataFrameProtectColumn.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameProtectColumn.Tag = "..."
@@ -1853,7 +1852,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameFreezeColumns
         '
-        Me.mnuOrganiseDataFrameFreezeColumns.Enabled = False
         Me.mnuOrganiseDataFrameFreezeColumns.Name = "mnuOrganiseDataFrameFreezeColumns"
         Me.mnuOrganiseDataFrameFreezeColumns.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameFreezeColumns.Tag = "Freeze_Columns..."

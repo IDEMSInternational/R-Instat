@@ -414,12 +414,6 @@
     <Compile Include="dlgPrintPreviewOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgProtect.Designer.vb">
-      <DependentUpon>dlgProtect.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgProtect.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgRandomSubsets.Designer.vb">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
     </Compile>
@@ -598,6 +592,12 @@
       <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRecodeFactor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgProtectColumns.Designer.vb">
+      <DependentUpon>dlgProtectColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgProtectColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgCanonicalCorrelation.Designer.vb">
@@ -2077,15 +2077,6 @@
     <EmbeddedResource Include="dlgPrintPreviewOptions.sw-KE.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgProtect.fr-FR.resx">
-      <DependentUpon>dlgProtect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgProtect.resx">
-      <DependentUpon>dlgProtect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgProtect.sw-KE.resx">
-      <DependentUpon>dlgProtect.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSubsets.fr-FR.resx">
       <DependentUpon>dlgRandomSubsets.vb</DependentUpon>
     </EmbeddedResource>
@@ -2364,6 +2355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRecodeFactor.sw-KE.resx">
       <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgProtectColumns.resx">
+      <DependentUpon>dlgProtectColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
       <DependentUpon>sdgBarChart.vb</DependentUpon>
