@@ -38,7 +38,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'lblExplanatoryVariables
         '
         Me.lblExplanatoryVariables.AutoSize = True
-        Me.lblExplanatoryVariables.Location = New System.Drawing.Point(274, 42)
+        Me.lblExplanatoryVariables.Location = New System.Drawing.Point(255, 25)
         Me.lblExplanatoryVariables.Name = "lblExplanatoryVariables"
         Me.lblExplanatoryVariables.Size = New System.Drawing.Size(108, 13)
         Me.lblExplanatoryVariables.TabIndex = 1
@@ -47,7 +47,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'cmdPCAOptions
         '
-        Me.cmdPCAOptions.Location = New System.Drawing.Point(299, 219)
+        Me.cmdPCAOptions.Location = New System.Drawing.Point(303, 210)
         Me.cmdPCAOptions.Name = "cmdPCAOptions"
         Me.cmdPCAOptions.Size = New System.Drawing.Size(106, 23)
         Me.cmdPCAOptions.TabIndex = 8
@@ -57,7 +57,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'nudComponents
         '
-        Me.nudComponents.Location = New System.Drawing.Point(141, 191)
+        Me.nudComponents.Location = New System.Drawing.Point(366, 151)
         Me.nudComponents.Name = "nudComponents"
         Me.nudComponents.Size = New System.Drawing.Size(42, 20)
         Me.nudComponents.TabIndex = 4
@@ -65,7 +65,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'lblComponents
         '
         Me.lblComponents.AutoSize = True
-        Me.lblComponents.Location = New System.Drawing.Point(15, 193)
+        Me.lblComponents.Location = New System.Drawing.Point(247, 158)
         Me.lblComponents.Name = "lblComponents"
         Me.lblComponents.Size = New System.Drawing.Size(118, 13)
         Me.lblComponents.TabIndex = 3
@@ -75,7 +75,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'chkScaleData
         '
         Me.chkScaleData.AutoSize = True
-        Me.chkScaleData.Location = New System.Drawing.Point(315, 193)
+        Me.chkScaleData.Location = New System.Drawing.Point(247, 183)
         Me.chkScaleData.Name = "chkScaleData"
         Me.chkScaleData.Size = New System.Drawing.Size(79, 17)
         Me.chkScaleData.TabIndex = 5
@@ -86,9 +86,9 @@ Partial Class dlgPrincipalComponentAnalysis
         'chkSaveResult
         '
         Me.chkSaveResult.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkSaveResult.Location = New System.Drawing.Point(14, 219)
+        Me.chkSaveResult.Location = New System.Drawing.Point(10, 209)
         Me.chkSaveResult.Name = "chkSaveResult"
-        Me.chkSaveResult.Size = New System.Drawing.Size(104, 24)
+        Me.chkSaveResult.Size = New System.Drawing.Size(87, 24)
         Me.chkSaveResult.TabIndex = 6
         Me.chkSaveResult.Tag = "Save_Result"
         Me.chkSaveResult.Text = "Save Result"
@@ -96,38 +96,40 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'ucrReceiverMultiplePCA
         '
-        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(268, 58)
+        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(255, 42)
+        Me.ucrReceiverMultiplePCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiplePCA.Name = "ucrReceiverMultiplePCA"
         Me.ucrReceiverMultiplePCA.Selector = Nothing
-        Me.ucrReceiverMultiplePCA.Size = New System.Drawing.Size(121, 104)
+        Me.ucrReceiverMultiplePCA.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverMultiplePCA.TabIndex = 2
         '
         'ucrSelectorPCA
         '
-        Me.ucrSelectorPCA.Location = New System.Drawing.Point(11, 5)
+        Me.ucrSelectorPCA.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorPCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPCA.Name = "ucrSelectorPCA"
-        Me.ucrSelectorPCA.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorPCA.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorPCA.TabIndex = 0
         '
         'ucrBasePCA
         '
-        Me.ucrBasePCA.Location = New System.Drawing.Point(12, 246)
+        Me.ucrBasePCA.Location = New System.Drawing.Point(10, 242)
         Me.ucrBasePCA.Name = "ucrBasePCA"
-        Me.ucrBasePCA.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBasePCA.Size = New System.Drawing.Size(410, 52)
         Me.ucrBasePCA.TabIndex = 9
         '
         'ucrResultName
         '
-        Me.ucrResultName.Location = New System.Drawing.Point(115, 219)
+        Me.ucrResultName.Location = New System.Drawing.Point(100, 212)
         Me.ucrResultName.Name = "ucrResultName"
-        Me.ucrResultName.Size = New System.Drawing.Size(137, 25)
+        Me.ucrResultName.Size = New System.Drawing.Size(145, 21)
         Me.ucrResultName.TabIndex = 10
         '
         'dlgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 298)
+        Me.ClientSize = New System.Drawing.Size(419, 298)
         Me.Controls.Add(Me.ucrResultName)
         Me.Controls.Add(Me.chkSaveResult)
         Me.Controls.Add(Me.chkScaleData)

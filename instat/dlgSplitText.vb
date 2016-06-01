@@ -44,6 +44,8 @@ Public Class dlgSplitText
         ucrInputColumnsIntoText.SetDefaultTypeAsColumn()
         ucrInputColumnsIntoText.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
         ucrInputPattern.AddItems({"Whitespace", ".", "-", "_"})
+        ucrBase.iHelpTopicID = 344
+
     End Sub
 
     Private Sub SetDefaults()

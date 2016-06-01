@@ -45,9 +45,9 @@ Partial Class dlgDummyVariables
         Me.grpLevelOmitted.Controls.Add(Me.rdoLast)
         Me.grpLevelOmitted.Controls.Add(Me.rdoFirst)
         Me.grpLevelOmitted.Controls.Add(Me.rdoNone)
-        Me.grpLevelOmitted.Location = New System.Drawing.Point(256, 75)
+        Me.grpLevelOmitted.Location = New System.Drawing.Point(255, 72)
         Me.grpLevelOmitted.Name = "grpLevelOmitted"
-        Me.grpLevelOmitted.Size = New System.Drawing.Size(123, 112)
+        Me.grpLevelOmitted.Size = New System.Drawing.Size(106, 112)
         Me.grpLevelOmitted.TabIndex = 3
         Me.grpLevelOmitted.TabStop = False
         Me.grpLevelOmitted.Tag = "Level_Omitted"
@@ -104,7 +104,7 @@ Partial Class dlgDummyVariables
         'chkXvariable
         '
         Me.chkXvariable.AutoSize = True
-        Me.chkXvariable.Location = New System.Drawing.Point(5, 206)
+        Me.chkXvariable.Location = New System.Drawing.Point(10, 209)
         Me.chkXvariable.Name = "chkXvariable"
         Me.chkXvariable.Size = New System.Drawing.Size(114, 17)
         Me.chkXvariable.TabIndex = 4
@@ -115,7 +115,7 @@ Partial Class dlgDummyVariables
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(253, 27)
+        Me.lblSelected.Location = New System.Drawing.Point(255, 25)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
         Me.lblSelected.TabIndex = 1
@@ -125,7 +125,7 @@ Partial Class dlgDummyVariables
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(5, 246)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 242)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
         Me.lblNewColumnName.TabIndex = 7
@@ -135,7 +135,7 @@ Partial Class dlgDummyVariables
         'lblVariate
         '
         Me.lblVariate.AutoSize = True
-        Me.lblVariate.Location = New System.Drawing.Point(119, 209)
+        Me.lblVariate.Location = New System.Drawing.Point(133, 210)
         Me.lblVariate.Name = "lblVariate"
         Me.lblVariate.Size = New System.Drawing.Size(40, 13)
         Me.lblVariate.TabIndex = 5
@@ -144,46 +144,49 @@ Partial Class dlgDummyVariables
         '
         'ucrInputColName
         '
-        Me.ucrInputColName.Location = New System.Drawing.Point(141, 246)
+        Me.ucrInputColName.Location = New System.Drawing.Point(115, 234)
         Me.ucrInputColName.Name = "ucrInputColName"
-        Me.ucrInputColName.Size = New System.Drawing.Size(137, 25)
+        Me.ucrInputColName.Size = New System.Drawing.Size(145, 21)
         Me.ucrInputColName.TabIndex = 8
         '
         'ucrSelectorDummyVariable
         '
-        Me.ucrSelectorDummyVariable.Location = New System.Drawing.Point(5, 19)
+        Me.ucrSelectorDummyVariable.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorDummyVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDummyVariable.Name = "ucrSelectorDummyVariable"
-        Me.ucrSelectorDummyVariable.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorDummyVariable.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorDummyVariable.TabIndex = 0
         '
         'ucrVariateReceiver
         '
-        Me.ucrVariateReceiver.Location = New System.Drawing.Point(165, 204)
+        Me.ucrVariateReceiver.Location = New System.Drawing.Point(179, 203)
+        Me.ucrVariateReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrVariateReceiver.Name = "ucrVariateReceiver"
         Me.ucrVariateReceiver.Selector = Nothing
-        Me.ucrVariateReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrVariateReceiver.Size = New System.Drawing.Size(120, 20)
         Me.ucrVariateReceiver.TabIndex = 6
         '
         'ucrReceiverFactor
         '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(256, 43)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(255, 42)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFactor.TabIndex = 2
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(5, 282)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 266)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 56)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
         '
         'dlgDummyVariables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 343)
+        Me.ClientSize = New System.Drawing.Size(419, 319)
         Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.ucrInputColName)
         Me.Controls.Add(Me.ucrSelectorDummyVariable)

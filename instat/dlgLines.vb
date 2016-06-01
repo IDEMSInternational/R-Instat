@@ -34,6 +34,7 @@ Public Class dlgLines
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("climate_obj$plot_multiple_lines")
+        ucrBase.iHelpTopicID = 354
     End Sub
     Private Sub SetDefaults()
 

@@ -27,7 +27,7 @@ Public Class dlgNon_ParametricOneWayANOVA
             DefaultSettings()
         End If
 
-        ucrBase.iHelpTopicID = (183)
+
 
     End Sub
     Private Sub InitializeDialog()
@@ -39,6 +39,7 @@ Public Class dlgNon_ParametricOneWayANOVA
         clsModel.SetOperation("~")
         autoTranslate(Me)
         TestOKEnabled()
+        ucrBase.iHelpTopicID = 183
     End Sub
 
     Private Sub DefaultSettings()

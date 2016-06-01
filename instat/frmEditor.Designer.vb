@@ -58,6 +58,9 @@ Partial Class frmEditor
         Me.HideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblNoData = New System.Windows.Forms.Label()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuFilter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRemoveCurrentFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -211,26 +214,26 @@ Partial Class frmEditor
         '
         'rowContextMenuStrip
         '
-        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRowsBefore, Me.mnuInsertRowsAfter, Me.mnuDeleteRows})
+        Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRowsBefore, Me.mnuInsertRowsAfter, Me.mnuDeleteRows, Me.ToolStripSeparator2, Me.mnuFilter, Me.mnuRemoveCurrentFilter})
         Me.rowContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.rowContextMenuStrip.Size = New System.Drawing.Size(180, 70)
+        Me.rowContextMenuStrip.Size = New System.Drawing.Size(190, 142)
         '
         'mnuInsertRowsBefore
         '
         Me.mnuInsertRowsBefore.Name = "mnuInsertRowsBefore"
-        Me.mnuInsertRowsBefore.Size = New System.Drawing.Size(179, 22)
+        Me.mnuInsertRowsBefore.Size = New System.Drawing.Size(189, 22)
         Me.mnuInsertRowsBefore.Text = "Insert Row(s) Before"
         '
         'mnuInsertRowsAfter
         '
         Me.mnuInsertRowsAfter.Name = "mnuInsertRowsAfter"
-        Me.mnuInsertRowsAfter.Size = New System.Drawing.Size(179, 22)
+        Me.mnuInsertRowsAfter.Size = New System.Drawing.Size(189, 22)
         Me.mnuInsertRowsAfter.Text = "Insert Row(s) After"
         '
         'mnuDeleteRows
         '
         Me.mnuDeleteRows.Name = "mnuDeleteRows"
-        Me.mnuDeleteRows.Size = New System.Drawing.Size(179, 22)
+        Me.mnuDeleteRows.Size = New System.Drawing.Size(189, 22)
         Me.mnuDeleteRows.Text = "Delete Row(s)"
         '
         'statusColumnMenu
@@ -292,6 +295,25 @@ Partial Class frmEditor
         Me.lblNoData.Tag = "no_data_loaded"
         Me.lblNoData.Text = "No Data Loaded"
         '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(186, 6)
+        '
+        'mnuFilter
+        '
+        Me.mnuFilter.Name = "mnuFilter"
+        Me.mnuFilter.Size = New System.Drawing.Size(189, 22)
+        Me.mnuFilter.Tag = "Filter..."
+        Me.mnuFilter.Text = "Filter..."
+        '
+        'mnuRemoveCurrentFilter
+        '
+        Me.mnuRemoveCurrentFilter.Name = "mnuRemoveCurrentFilter"
+        Me.mnuRemoveCurrentFilter.Size = New System.Drawing.Size(189, 22)
+        Me.mnuRemoveCurrentFilter.Tag = "Remove_Current_Filter"
+        Me.mnuRemoveCurrentFilter.Text = "Remove Current Filter"
+        '
         'frmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -347,4 +369,7 @@ Partial Class frmEditor
     Friend WithEvents mnuUnhideAllColumns As ToolStripMenuItem
     Friend WithEvents mnuInsertColsAfter As ToolStripMenuItem
     Friend WithEvents mnuInsertRowsBefore As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents mnuFilter As ToolStripMenuItem
+    Friend WithEvents mnuRemoveCurrentFilter As ToolStripMenuItem
 End Class

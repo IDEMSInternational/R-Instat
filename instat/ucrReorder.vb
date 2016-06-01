@@ -40,14 +40,14 @@ Public Class ucrReorder
         Select Case strDataType
             Case "column"
                 lstAvailableData.Columns.Add("Variables")
-                lstAvailableData.Columns(0).Width = -2
             Case "factor"
                 lstAvailableData.Columns.Add("Levels")
-                lstAvailableData.Columns(0).Width = -2
             Case "data frame"
                 lstAvailableData.Columns.Add("Data Frame")
-                lstAvailableData.Columns(0).Width = -2
+            Case "metadata"
+                lstAvailableData.Columns.Add("Metadata")
         End Select
+        lstAvailableData.Columns(0).Width = -2
         loadList()
     End Sub
 
@@ -175,6 +175,10 @@ Public Class ucrReorder
                 End If
             Case "data frame"
                 vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_data_names()").AsCharacter
+            Case "metadata"
+                If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
+                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_metadata_fields(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter
+                End If
             Case Else
                 vecNames = Nothing
         End Select
