@@ -32,14 +32,14 @@ Partial Class dlgRegressionSimple
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.chkSaveModel = New System.Windows.Forms.CheckBox()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
-        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
         Me.chkFunction = New System.Windows.Forms.CheckBox()
-        Me.ucrModelName = New instat.ucrVariableName()
-        Me.ucrExplanatory = New instat.ucrReceiverSingle()
-        Me.ucrResponse = New instat.ucrReceiverSingle()
-        Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFamily = New instat.ucrDistributions()
+        Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrResponse = New instat.ucrReceiverSingle()
+        Me.ucrExplanatory = New instat.ucrReceiverSingle()
+        Me.ucrModelName = New instat.ucrVariableName()
+        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -97,41 +97,12 @@ Partial Class dlgRegressionSimple
         Me.cmdModelOptions.Tag = "Model_Options..."
         Me.cmdModelOptions.UseVisualStyleBackColor = True
         '
-        'chkConvertToVariate
-        '
-        resources.ApplyResources(Me.chkConvertToVariate, "chkConvertToVariate")
-        Me.chkConvertToVariate.Name = "chkConvertToVariate"
-        Me.chkConvertToVariate.Tag = "Convert_to_variate"
-        Me.chkConvertToVariate.UseVisualStyleBackColor = True
-        '
         'chkFunction
         '
         resources.ApplyResources(Me.chkFunction, "chkFunction")
         Me.chkFunction.Name = "chkFunction"
         Me.chkFunction.Tag = "Function"
         Me.chkFunction.UseVisualStyleBackColor = True
-        '
-        'ucrModelName
-        '
-        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
-        Me.ucrModelName.Name = "ucrModelName"
-        '
-        'ucrExplanatory
-        '
-        resources.ApplyResources(Me.ucrExplanatory, "ucrExplanatory")
-        Me.ucrExplanatory.Name = "ucrExplanatory"
-        Me.ucrExplanatory.Selector = Nothing
-        '
-        'ucrResponse
-        '
-        resources.ApplyResources(Me.ucrResponse, "ucrResponse")
-        Me.ucrResponse.Name = "ucrResponse"
-        Me.ucrResponse.Selector = Nothing
-        '
-        'ucrSelectorSimpleReg
-        '
-        resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
-        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
         '
         'ucrBase
         '
@@ -143,22 +114,51 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.ucrFamily, "ucrFamily")
         Me.ucrFamily.Name = "ucrFamily"
         '
+        'ucrSelectorSimpleReg
+        '
+        resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
+        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
+        '
+        'ucrResponse
+        '
+        resources.ApplyResources(Me.ucrResponse, "ucrResponse")
+        Me.ucrResponse.Name = "ucrResponse"
+        Me.ucrResponse.Selector = Nothing
+        '
+        'ucrExplanatory
+        '
+        resources.ApplyResources(Me.ucrExplanatory, "ucrExplanatory")
+        Me.ucrExplanatory.Name = "ucrExplanatory"
+        Me.ucrExplanatory.Selector = Nothing
+        '
+        'ucrModelName
+        '
+        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
+        Me.ucrModelName.Name = "ucrModelName"
+        '
+        'chkConvertToVariate
+        '
+        resources.ApplyResources(Me.chkConvertToVariate, "chkConvertToVariate")
+        Me.chkConvertToVariate.Name = "chkConvertToVariate"
+        Me.chkConvertToVariate.Tag = "Convert_to_variate"
+        Me.chkConvertToVariate.UseVisualStyleBackColor = True
+        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrFamily)
-        Me.Controls.Add(Me.chkFunction)
         Me.Controls.Add(Me.chkConvertToVariate)
-        Me.Controls.Add(Me.cmdModelOptions)
-        Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrModelName)
-        Me.Controls.Add(Me.cmdDisplayOptions)
-        Me.Controls.Add(Me.lblExplanatory)
-        Me.Controls.Add(Me.lblResponse)
         Me.Controls.Add(Me.ucrExplanatory)
         Me.Controls.Add(Me.ucrResponse)
         Me.Controls.Add(Me.ucrSelectorSimpleReg)
+        Me.Controls.Add(Me.ucrFamily)
+        Me.Controls.Add(Me.chkFunction)
+        Me.Controls.Add(Me.cmdModelOptions)
+        Me.Controls.Add(Me.chkSaveModel)
+        Me.Controls.Add(Me.cmdDisplayOptions)
+        Me.Controls.Add(Me.lblExplanatory)
+        Me.Controls.Add(Me.lblResponse)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpButton = True
@@ -175,17 +175,17 @@ Partial Class dlgRegressionSimple
     Friend WithEvents lblDF As Label
     Friend WithEvents txtResidualMsg As TextBox
     Friend WithEvents txtdf As TextBox
-    Friend WithEvents ucrSelectorSimpleReg As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrResponse As ucrReceiverSingle
-    Friend WithEvents ucrExplanatory As ucrReceiverSingle
 
     Friend WithEvents lblResponse As Label
     Friend WithEvents lblExplanatory As Label
     Friend WithEvents cmdDisplayOptions As Button
-    Friend WithEvents ucrModelName As ucrVariableName
     Friend WithEvents chkSaveModel As CheckBox
     Friend WithEvents cmdModelOptions As Button
-    Friend WithEvents chkConvertToVariate As CheckBox
     Friend WithEvents chkFunction As CheckBox
     Friend WithEvents ucrFamily As ucrDistributions
+    Friend WithEvents ucrSelectorSimpleReg As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrResponse As ucrReceiverSingle
+    Friend WithEvents ucrExplanatory As ucrReceiverSingle
+    Friend WithEvents ucrModelName As ucrVariableName
+    Friend WithEvents chkConvertToVariate As CheckBox
 End Class

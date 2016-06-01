@@ -31,7 +31,7 @@ Public Class dlgMultipleResponse
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 153
     End Sub
 
     Private Sub SetDefaults()

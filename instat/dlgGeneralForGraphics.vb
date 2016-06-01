@@ -40,6 +40,7 @@ Public Class dlgGeneralForGraphics
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
 
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
+        ucrBase.iHelpTopicID = 356
     End Sub
     Private Sub SetDefaults()
         cmdDelete.Enabled = False
