@@ -249,7 +249,7 @@ Public Class RLink
 
     End Function
 
-    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False) As SymbolicExpression
+    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = True) As SymbolicExpression
         Dim expTemp As SymbolicExpression
 
         If clsEngine IsNot Nothing Then
@@ -268,7 +268,7 @@ Public Class RLink
         Return expTemp
     End Function
 
-    Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = False) As CharacterVector
+    Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = True) As CharacterVector
         Dim chrTemp As CharacterVector
         Dim expTemp As SymbolicExpression
 
@@ -284,7 +284,7 @@ Public Class RLink
         Return chrTemp
     End Function
 
-    Public Function RunInternalScript(strScript As String, Optional strVariableName As String = "", Optional bSilent As Boolean = False) As Boolean
+    Public Function RunInternalScript(strScript As String, Optional strVariableName As String = "", Optional bSilent As Boolean = True) As Boolean
         If clsEngine IsNot Nothing Then
             Try
                 If strVariableName <> "" Then
