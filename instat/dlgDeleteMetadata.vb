@@ -35,7 +35,9 @@ Public Class dlgDeleteMetadata
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrReceiverMetadataToDelete.Selector = ucrSelectorForDeleteMetadata
+        ucrReceiverMetadataToDelete.SetMeAsReceiver()
+        ucrSelectorForDeleteMetadata.SetItemType("metadata")
     End Sub
 
     Private Sub setDefaults()
@@ -45,5 +47,9 @@ Public Class dlgDeleteMetadata
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         setDefaults()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorForDeleteMetadata_Load(sender As Object, e As EventArgs) Handles ucrSelectorForDeleteMetadata.Load
+
     End Sub
 End Class

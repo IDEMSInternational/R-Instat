@@ -52,7 +52,7 @@ Partial Class dlgGeneralANOVA
         'rdoReplicates
         '
         Me.rdoReplicates.AutoSize = True
-        Me.rdoReplicates.Location = New System.Drawing.Point(231, 10)
+        Me.rdoReplicates.Location = New System.Drawing.Point(255, 10)
         Me.rdoReplicates.Name = "rdoReplicates"
         Me.rdoReplicates.Size = New System.Drawing.Size(75, 17)
         Me.rdoReplicates.TabIndex = 2
@@ -94,7 +94,7 @@ Partial Class dlgGeneralANOVA
         'chkSaveModel
         '
         Me.chkSaveModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkSaveModel.Location = New System.Drawing.Point(10, 219)
+        Me.chkSaveModel.Location = New System.Drawing.Point(10, 255)
         Me.chkSaveModel.Name = "chkSaveModel"
         Me.chkSaveModel.Size = New System.Drawing.Size(92, 24)
         Me.chkSaveModel.TabIndex = 10
@@ -105,7 +105,7 @@ Partial Class dlgGeneralANOVA
         'cmdGeneralANOVAOptions
         '
         Me.cmdGeneralANOVAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdGeneralANOVAOptions.Location = New System.Drawing.Point(262, 201)
+        Me.cmdGeneralANOVAOptions.Location = New System.Drawing.Point(10, 223)
         Me.cmdGeneralANOVAOptions.Name = "cmdGeneralANOVAOptions"
         Me.cmdGeneralANOVAOptions.Size = New System.Drawing.Size(145, 23)
         Me.cmdGeneralANOVAOptions.TabIndex = 12
@@ -115,7 +115,7 @@ Partial Class dlgGeneralANOVA
         '
         'ucrModelName
         '
-        Me.ucrModelName.Location = New System.Drawing.Point(108, 220)
+        Me.ucrModelName.Location = New System.Drawing.Point(101, 256)
         Me.ucrModelName.Name = "ucrModelName"
         Me.ucrModelName.Size = New System.Drawing.Size(149, 23)
         Me.ucrModelName.TabIndex = 11
@@ -157,7 +157,7 @@ Partial Class dlgGeneralANOVA
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 256)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 286)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -166,7 +166,7 @@ Partial Class dlgGeneralANOVA
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 308)
+        Me.ClientSize = New System.Drawing.Size(419, 340)
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.cmdGeneralANOVAOptions)
