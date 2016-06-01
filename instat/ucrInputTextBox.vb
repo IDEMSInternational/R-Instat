@@ -34,6 +34,7 @@ Public Class ucrInputTextBox
 
     Private Sub txtInput_Validating(sender As Object, e As CancelEventArgs) Handles txtInput.Validating
         e.Cancel = Not ValidateText(txtInput.Text)
+        If Not e.Cancel Then OnNameChanged()
     End Sub
 
     Public Overrides Function GetText() As String
