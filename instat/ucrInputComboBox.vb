@@ -20,6 +20,7 @@ Public Class ucrInputComboBox
 
     Private Sub cboInput_Validating(sender As Object, e As CancelEventArgs) Handles cboInput.Validating
         e.Cancel = Not ValidateText(cboInput.Text)
+        If Not e.Cancel Then OnNameChanged()
     End Sub
 
     Public Sub SetItemsTypeAsColumns()
