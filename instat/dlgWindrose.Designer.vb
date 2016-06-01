@@ -35,9 +35,9 @@ Partial Class dlgWindrose
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 252)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 238)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrWindRoseSelector
@@ -50,7 +50,7 @@ Partial Class dlgWindrose
         '
         'ucrSaveWindRose
         '
-        Me.ucrSaveWindRose.Location = New System.Drawing.Point(10, 211)
+        Me.ucrSaveWindRose.Location = New System.Drawing.Point(10, 209)
         Me.ucrSaveWindRose.Name = "ucrSaveWindRose"
         Me.ucrSaveWindRose.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveWindRose.TabIndex = 2
@@ -58,7 +58,7 @@ Partial Class dlgWindrose
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(236, 10)
+        Me.lblXVariable.Location = New System.Drawing.Point(255, 25)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(55, 13)
         Me.lblXVariable.TabIndex = 3
@@ -66,7 +66,7 @@ Partial Class dlgWindrose
         '
         'ucrXReceiver
         '
-        Me.ucrXReceiver.Location = New System.Drawing.Point(239, 39)
+        Me.ucrXReceiver.Location = New System.Drawing.Point(255, 42)
         Me.ucrXReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrXReceiver.Name = "ucrXReceiver"
         Me.ucrXReceiver.Selector = Nothing
@@ -76,7 +76,7 @@ Partial Class dlgWindrose
         'lblYVariable
         '
         Me.lblYVariable.AutoSize = True
-        Me.lblYVariable.Location = New System.Drawing.Point(236, 70)
+        Me.lblYVariable.Location = New System.Drawing.Point(255, 76)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(55, 13)
         Me.lblYVariable.TabIndex = 3
@@ -84,7 +84,7 @@ Partial Class dlgWindrose
         '
         'ucrYReceiver
         '
-        Me.ucrYReceiver.Location = New System.Drawing.Point(239, 99)
+        Me.ucrYReceiver.Location = New System.Drawing.Point(255, 93)
         Me.ucrYReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrYReceiver.Name = "ucrYReceiver"
         Me.ucrYReceiver.Selector = Nothing
@@ -94,7 +94,7 @@ Partial Class dlgWindrose
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(236, 130)
+        Me.lblFactor.Location = New System.Drawing.Point(255, 128)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(37, 13)
         Me.lblFactor.TabIndex = 3
@@ -102,7 +102,7 @@ Partial Class dlgWindrose
         '
         'ucrFillReceiver
         '
-        Me.ucrFillReceiver.Location = New System.Drawing.Point(239, 159)
+        Me.ucrFillReceiver.Location = New System.Drawing.Point(255, 145)
         Me.ucrFillReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFillReceiver.Name = "ucrFillReceiver"
         Me.ucrFillReceiver.Selector = Nothing
@@ -113,7 +113,7 @@ Partial Class dlgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 321)
+        Me.ClientSize = New System.Drawing.Size(419, 293)
         Me.Controls.Add(Me.ucrFillReceiver)
         Me.Controls.Add(Me.ucrYReceiver)
         Me.Controls.Add(Me.ucrXReceiver)
