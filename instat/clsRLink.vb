@@ -485,6 +485,22 @@ Public Class RLink
         Return lstFilterNames
     End Function
 
+    Public Function GetGraphNames(Optional strDataFrameName As String = "") As List(Of String)
+        Dim chrGraphNames As CharacterVector
+        Dim lstGraphNames As New List(Of String)
+        Dim clsGetGraphNames As New RFunction
+
+        clsGetGraphNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graph_names")
+        If strDataFrameName <> "" Then
+            clsGetGraphNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        chrGraphNames = RunInternalScriptGetValue(clsGetGraphNames.ToScript()).AsCharacter
+        If chrGraphNames IsNot Nothing Then
+            lstGraphNames.AddRange(chrGraphNames)
+        End If
+        Return lstGraphNames
+    End Function
+
     Public Function GetDataType(strDataFrameName As String, strColumnName As String) As String
         Dim strDataType As CharacterVector
         strDataType = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_type(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ",col_name=" & Chr(34) & strColumnName & Chr(34) & ")").AsCharacter
