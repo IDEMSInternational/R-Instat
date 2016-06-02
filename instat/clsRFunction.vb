@@ -21,6 +21,7 @@ Public Class RFunction
     Public strAssignToDataFrame As String
     Public strAssignToColumn As String
     Public strAssignToModel As String
+    Public strAssignToGraph As String
     Public bToBeAssigned As Boolean = False
     Public bIsAssigned As Boolean = False
     Private bAssignToIsPrefix As Boolean = False
@@ -30,7 +31,7 @@ Public Class RFunction
         bIsAssigned = False
     End Sub
 
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional bAssignToIsPrefix As Boolean = False)
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False)
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -40,6 +41,9 @@ Public Class RFunction
         End If
         If Not strTempModel = "" Then
             strAssignToModel = strTempModel
+        End If
+        If Not strTempGraph = "" Then
+            strAssignToGraph = strTempGraph
         End If
         Me.bAssignToIsPrefix = bAssignToIsPrefix
         bToBeAssigned = True
@@ -64,6 +68,8 @@ Public Class RFunction
         Dim clsGetData As New RFunction
         Dim clsAddModels As New RFunction
         Dim clsGetModels As New RFunction
+        Dim clsAddGraphs As New RFunction
+        Dim clsGetGraphs As New RFunction
         Dim clsDataList As New RFunction
 
         If bIsAssigned Then
@@ -110,13 +116,30 @@ Public Class RFunction
                 clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
                 clsAddModels.AddParameter("model", strAssignTo)
                 If Not strAssignToDataFrame = "" Then
-                    clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsAddModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsGetModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 End If
                 strScript = strScript & clsAddModels.ToScript() & vbCrLf
 
                 clsGetModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                 clsGetModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
                 strAssignTo = clsGetModels.ToScript()
+
+                bIsAssigned = True
+                bToBeAssigned = False
+            ElseIf Not strAssignToGraph = "" Then
+                clsAddGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_graph")
+                clsAddGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
+                clsAddGraphs.AddParameter("graph", strAssignTo)
+                If Not strAssignToDataFrame = "" Then
+                    clsAddGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsGetGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                End If
+                strScript = strScript & clsAddGraphs.ToScript() & vbCrLf
+
+                clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+                clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
+                strAssignTo = clsGetGraphs.ToScript()
 
                 bIsAssigned = True
                 bToBeAssigned = False
