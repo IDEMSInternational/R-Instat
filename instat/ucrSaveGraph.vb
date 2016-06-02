@@ -1,6 +1,7 @@
 ﻿Public Class ucrSaveGraph
     Public Event SaveGraphCheckedChanged()
     Public Event GraphNameChanged()
+    Public bFirstLoad As Boolean
 
     Public Sub New()
         ' This call is required by the designer.
@@ -9,6 +10,22 @@
         ' Add any initialization after the InitializeComponent() call.
         ucrInputGraphName.SetDefaultTypeAsGraph()
         ucrInputGraphName.SetItemsTypeAsGraphs()
+        bFirstLoad = True
+    End Sub
+
+    Private Sub ucrSaveGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub SetDefaults()
+        chkSaveGraph.Checked = True
+    End Sub
+
+    Public Sub Reset()
+        SetDefaults()
     End Sub
 
     Public Sub SetDataFrameSelector(ucrNewDataFrameSelector As ucrDataFrame)
@@ -41,4 +58,9 @@
         End Get
     End Property
 
+    Public WriteOnly Property strPrefix() As String
+        Set(strNewPrefix As String)
+            ucrInputGraphName.SetPrefix(strNewPrefix)
+        End Set
+    End Property
 End Class

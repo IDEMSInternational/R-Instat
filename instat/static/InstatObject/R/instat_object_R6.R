@@ -402,7 +402,7 @@ instat_object$set("public", "add_object", function(data_name, object, object_nam
 
 instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type) {
   if(missing(data_name)) {
-    if(!missing(object_name)) warning("data_name is missing so", object_name, "will be ignored. Specify from_overall = TRUE to get from overall models by name")
+    if(!missing(object_name)) warning("data_name is missing so ", object_name, " will be ignored. Specify from_overall = TRUE to get from overall objects by name")
     out = list()
     if(include_overall) out[[overall_label]] <- names(private$.objects)
     for(data_obj_name in self$get_data_names()) {
@@ -485,8 +485,8 @@ instat_object$set("public", "get_from_model", function(data_name, model_name, va
 }
 )
 
-instat_object$set("public", "add_graph", function(data_name, object, graph_name) {
-  self$add_object(data_name = data_name, object = object, object_name = graph_name)
+instat_object$set("public", "add_graph", function(data_name, graph, graph_name) {
+  self$add_object(data_name = data_name, object = graph, object_name = graph_name)
 }
 )
 

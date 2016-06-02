@@ -75,6 +75,19 @@ Public Class ROperator
     Public Function ToScript(Optional ByRef strScript As String = "") As String
         Dim strTemp As String = ""
         Dim bIncludeOperation As Boolean
+        Dim clsAddColumns As New RFunction
+        Dim clsGetColumns As New RFunction
+        Dim clsAddData As New RFunction
+        Dim clsGetData As New RFunction
+        Dim clsAddModels As New RFunction
+        Dim clsGetModels As New RFunction
+        Dim clsAddGraphs As New RFunction
+        Dim clsGetGraphs As New RFunction
+        Dim clsDataList As New RFunction
+
+        If bIsAssigned Then
+            Return (strAssignTo)
+        End If
 
         'may not need this anymore I believe we can get rid of include operator entirely
         bIncludeOperation = bForceIncludeOperation OrElse ((clsLeftParameter IsNot Nothing OrElse clsLeftFunction IsNot Nothing OrElse clsLeftOperator IsNot Nothing) AndAlso (clsAdditionalParameters.Count > 0))
@@ -111,11 +124,82 @@ Public Class ROperator
         Next
 
         If bToBeAssigned Then
+            If Not frmMain.clsRLink.bInstatObjectExists Then
+                frmMain.clsRLink.CreateNewInstatObject()
+            End If
             strScript = strScript & strAssignTo & " <- " & strTemp & vbCrLf
+            If Not strAssignToDataFrame = "" And Not strAssignToColumn = "" Then
+                clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+                clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                clsAddColumns.AddParameter("col_data", strAssignTo)
+                If bAssignToIsPrefix Then
+                    clsAddColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+                Else
+                    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                        clsAddColumns.AddParameter("use_col_name_as_prefix", "FALSE")
+                    End If
+                End If
+                strScript = strScript & clsAddColumns.ToScript() & vbCrLf
+
+                clsGetColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+                clsGetColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                clsGetColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                strAssignTo = clsGetColumns.ToScript()
+
+                bIsAssigned = True
+                bToBeAssigned = False
+            ElseIf Not strAssignToModel = "" Then
+                clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
+                clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
+                clsAddModels.AddParameter("model", strAssignTo)
+                If Not strAssignToDataFrame = "" Then
+                    clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsGetModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                End If
+                strScript = strScript & clsAddModels.ToScript() & vbCrLf
+
+                clsGetModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
+                clsGetModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
+                strAssignTo = clsGetModels.ToScript()
+
+                bIsAssigned = True
+                bToBeAssigned = False
+            ElseIf Not strAssignToGraph = "" Then
+                clsAddGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_graph")
+                clsAddGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
+                clsAddGraphs.AddParameter("graph", strAssignTo)
+                If Not strAssignToDataFrame = "" Then
+                    clsAddGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsGetGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                End If
+                strScript = strScript & clsAddGraphs.ToScript() & vbCrLf
+
+                clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+                clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
+                strAssignTo = clsGetGraphs.ToScript()
+
+                bIsAssigned = True
+                bToBeAssigned = False
+            ElseIf Not strAssignToDataFrame = "" Then
+                clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+                clsDataList.SetRCommand("list")
+                clsDataList.AddParameter(strAssignToDataFrame, strAssignTo)
+                clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList)
+                strScript = strScript & clsAddData.ToScript() & vbCrLf
+
+                clsGetData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+                clsGetData.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                strAssignTo = clsGetData.ToScript()
+
+                bIsAssigned = True
+                bToBeAssigned = False
+            End If
             Return strAssignTo
         Else
             Return strTemp
         End If
+
     End Function
 
     Public Sub SetParameter(bSetFirst As Boolean, Optional strParameterName As String = "Right", Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
