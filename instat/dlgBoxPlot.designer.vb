@@ -33,6 +33,7 @@ Partial Class dlgBoxplot
         Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveBoxplot = New instat.ucrSaveGraph()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -134,11 +135,21 @@ Partial Class dlgBoxplot
         Me.ucrSaveBoxplot.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveBoxplot.TabIndex = 10
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(145, 25)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 344)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ucrSaveBoxplot)
         Me.Controls.Add(Me.ucrVariablesAsFactorForBoxplot)
         Me.Controls.Add(Me.chkHorizontalBoxplot)
@@ -174,4 +185,5 @@ Partial Class dlgBoxplot
     Friend WithEvents chkHorizontalBoxplot As CheckBox
     Friend WithEvents ucrVariablesAsFactorForBoxplot As ucrVariablesAsFactor
     Friend WithEvents ucrSaveBoxplot As ucrSaveGraph
+    Friend WithEvents Button1 As Button
 End Class

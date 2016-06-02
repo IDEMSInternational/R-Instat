@@ -116,7 +116,8 @@ Public Class RFunction
                 clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
                 clsAddModels.AddParameter("model", strAssignTo)
                 If Not strAssignToDataFrame = "" Then
-                    clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsAddModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsGetModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 End If
                 strScript = strScript & clsAddModels.ToScript() & vbCrLf
 
@@ -132,6 +133,7 @@ Public Class RFunction
                 clsAddGraphs.AddParameter("graph", strAssignTo)
                 If Not strAssignToDataFrame = "" Then
                     clsAddGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsGetGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 End If
                 strScript = strScript & clsAddGraphs.ToScript() & vbCrLf
 
