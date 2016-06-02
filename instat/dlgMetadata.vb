@@ -37,7 +37,7 @@ Public Class dlgMetadata
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrDFSelectorForMetadata.SetIncludeOverall(False)
+        ucrDFSelectorForMetadata.SetIncludeOverall(True)
     End Sub
 
     Private Sub setDefaults()
