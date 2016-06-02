@@ -33,6 +33,7 @@ Public Class ROperator
     Public strAssignToDataFrame As String
     Public strAssignToColumn As String
     Public strAssignToModel As String
+    Public strAssignToGraph As String
     Public bToBeAssigned As Boolean = False
     Public bIsAssigned As Boolean = False
     Public bForceIncludeOperation As Boolean = True
@@ -44,15 +45,19 @@ Public Class ROperator
         bIsAssigned = False
     End Sub
 
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional bAssignToIsPrefix As Boolean = False)
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False)
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
             If Not strTempColumn = "" Then
                 strAssignToColumn = strTempColumn
             End If
-        ElseIf Not strTempModel = "" Then
+        End If
+        If Not strTempModel = "" Then
             strAssignToModel = strTempModel
+        End If
+        If Not strTempGraph = "" Then
+            strAssignToGraph = strTempGraph
         End If
         bToBeAssigned = True
         bIsAssigned = False
