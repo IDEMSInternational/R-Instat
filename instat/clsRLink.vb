@@ -249,7 +249,7 @@ Public Class RLink
 
     End Function
 
-    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value") As SymbolicExpression
+    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = True) As SymbolicExpression
         Dim expTemp As SymbolicExpression
 
         If clsEngine IsNot Nothing Then
@@ -257,7 +257,9 @@ Public Class RLink
                 clsEngine.Evaluate(strVariableName & " <- " & strScript)
                 expTemp = clsEngine.GetSymbol(strVariableName)
             Catch ex As Exception
-                'TODO what should be done here?
+                If Not bSilent Then
+                    MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                End If
                 expTemp = Nothing
             End Try
         Else
@@ -266,7 +268,7 @@ Public Class RLink
         Return expTemp
     End Function
 
-    Public Function RunInternalScriptGetOutput(strScript As String) As CharacterVector
+    Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = True) As CharacterVector
         Dim chrTemp As CharacterVector
         Dim expTemp As SymbolicExpression
 
@@ -274,14 +276,15 @@ Public Class RLink
         Try
             chrTemp = expTemp.AsCharacter()
         Catch ex As Exception
-            'TODO what should be done here?
+            If Not bSilent Then
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+            End If
             chrTemp = Nothing
         End Try
         Return chrTemp
     End Function
 
-    Public Sub RunInternalScript(strScript As String, Optional strVariableName As String = "")
-        RunInternalScriptGetValue(strScript)
+    Public Function RunInternalScript(strScript As String, Optional strVariableName As String = "", Optional bSilent As Boolean = True) As Boolean
         If clsEngine IsNot Nothing Then
             Try
                 If strVariableName <> "" Then
@@ -289,11 +292,17 @@ Public Class RLink
                 Else
                     clsEngine.Evaluate(strScript)
                 End If
+                Return True
             Catch ex As Exception
-                'TODO what should be done here?
+                If Not bSilent Then
+                    MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                End If
+                Return False
             End Try
+        Else
+            Return False
         End If
-    End Sub
+    End Function
 
     Public Function GetDefaultDataFrameName(strPrefix As String, Optional iStartIndex As Integer = 1, Optional bIncludeIndex As Boolean = True) As String
         Dim strTemp As String

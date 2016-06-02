@@ -974,4 +974,20 @@ Public Class frmMain
             frmCommand.txtCommand.Clear()
         End If
     End Sub
+
+    Private Sub mnuOrganiseDataObjectDeleteMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectDeleteMetadata.Click
+        dlgDeleteMetadata.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseDataObjectMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectMetadata.Click
+        dlgMetadata.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseDataObjectReorderMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectReorderMetadata.Click
+        dlgReoderMetadata.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseDataObjectRenameMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectRenameMetadata.Click
+        dlgRenameMetadata.ShowDialog()
+    End Sub
 End Class
