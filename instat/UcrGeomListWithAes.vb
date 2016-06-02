@@ -47,8 +47,12 @@ Public Class UcrGeomListWithParameters
     Private Sub SetDefaults()
         'sets control defaults
         UcrSelector.Reset()
-
     End Sub
+
+    Public Sub SetGeomFunction(clsAesGeomFunc As RFunction)
+        clsGeomFunction = clsAesGeomFunc
+    End Sub
+
     Public Sub SetParameters() 'this will set function or aes parameters
         Dim i As Integer = 0
 
