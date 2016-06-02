@@ -136,4 +136,13 @@ Public Class dlgBoxplot
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrSaveBoxplot_CheckedChanged() Handles ucrSaveBoxplot.SaveGraphCheckedChanged, ucrSelectorBoxPlot.DataFrameChanged
+        If ucrSaveBoxplot.bSaveGraph AndAlso ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveBoxplot.strGraphName, str:=ucrModelName.txtValidation.Text)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
+    End Sub
 End Class
