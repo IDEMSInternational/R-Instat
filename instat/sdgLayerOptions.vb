@@ -15,9 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgLayerOptions
-    Public clsRsyntax As RSyntax
     Public clsGeomFunction As New RFunction
     Private bFirstLoad As Boolean = True
+
     Private Sub sdgLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -29,13 +29,12 @@ Public Class sdgLayerOptions
         autoTranslate(Me)
     End Sub
 
-    Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
-        clsRsyntax = clsRSyntaxIn
-    End Sub
-
     Private Sub InitialiseDialog()
-        clsGeomFunction.SetRCommand(ucrGeomWithAes.cboGeomList.SelectedItem)
-        clsRsyntax.SetOperatorParameter(False, clsRFunc:=ucrGeomWithAes.clsGeomFunction)
+        ucrLayerParameter.ucrGeomWithAes = ucrGeomWithAes
+        ucrGeomWithAes.ucrLayersControl = ucrLayerParameter
+
+        ucrGeomWithAes.SetGeomFunction(clsGeomFunction)
+        ucrLayerParameter.SetGeomFunction(clsGeomFunction)
     End Sub
 
     Private Sub SetDefaults()
