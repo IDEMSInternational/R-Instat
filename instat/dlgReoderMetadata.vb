@@ -16,7 +16,6 @@ Public Class dlgReoderMetadata
     Public bFirstLoad As Boolean = True
     Private Sub dlgReoderMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
             setDefaults()
             InitialiseDialog()
@@ -36,7 +35,8 @@ Public Class dlgReoderMetadata
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrReorderMetadata.setDataframes(ucrDataFrameReoderMetadata)
+        ucrReorderMetadata.setDataType("metadata")
     End Sub
 
     Private Sub setDefaults()
@@ -47,4 +47,5 @@ Public Class dlgReoderMetadata
         setDefaults()
         TestOKEnabled()
     End Sub
+
 End Class
