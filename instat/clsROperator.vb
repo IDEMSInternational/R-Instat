@@ -22,9 +22,9 @@ Public Class ROperator
     Public clsLeftOperator As ROperator
     Public clsLeftFunction As RFunction
 
-    Public clsRightParameter As New RParameter
-    Public clsRightOperator As ROperator
-    Public clsRightFunction As RFunction
+    'Public clsRightParameter As New RParameter
+    'Public clsRightOperator As ROperator
+    'Public clsRightFunction As RFunction
 
     Public strOperation As String
     Public bBrackets As Boolean = True
@@ -71,7 +71,8 @@ Public Class ROperator
         Dim strTemp As String = ""
         Dim bIncludeOperation As Boolean
 
-        bIncludeOperation = bForceIncludeOperation OrElse ((clsLeftParameter IsNot Nothing OrElse clsLeftFunction IsNot Nothing OrElse clsLeftOperator IsNot Nothing) AndAlso (clsRightParameter IsNot Nothing OrElse clsRightFunction IsNot Nothing OrElse clsRightOperator IsNot Nothing))
+        'may not need this anymore I believe we can get rid of include operator entirely
+        bIncludeOperation = bForceIncludeOperation OrElse ((clsLeftParameter IsNot Nothing OrElse clsLeftFunction IsNot Nothing OrElse clsLeftOperator IsNot Nothing) AndAlso (clsAdditionalParameters.Count > 0))
 
         If clsLeftParameter IsNot Nothing Then
             strTemp = strTemp & clsLeftParameter.ToScript(strScript, False)
@@ -85,20 +86,22 @@ Public Class ROperator
             End If
         End If
 
-        If bIncludeOperation Then
-            strTemp = strTemp & Chr(32) & strOperation & Chr(32)
-        End If
+        'If bIncludeOperation Then
+        '    strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+        'End If
 
-        If clsRightParameter IsNot Nothing Then
-            strTemp = strTemp & clsRightParameter.ToScript(strScript, False)
-        ElseIf clsrightFunction IsNot Nothing Then
-            strTemp = strTemp & clsRightFunction.ToScript(strScript)
-        ElseIf clsrightOperator IsNot Nothing Then
-            strTemp = strTemp & "(" & clsRightOperator.ToScript(strScript) & ")"
-        End If
+        'If clsRightParameter IsNot Nothing Then
+        '    strTemp = strTemp & clsRightParameter.ToScript(strScript, False)
+        'ElseIf clsrightFunction IsNot Nothing Then
+        '    strTemp = strTemp & clsRightFunction.ToScript(strScript)
+        'ElseIf clsrightOperator IsNot Nothing Then
+        '    strTemp = strTemp & "(" & clsRightOperator.ToScript(strScript) & ")"
+        'End If
 
         For Each clsParam In clsAdditionalParameters
-            strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+            If bIncludeOperation Then
+                strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+            End If
             strTemp = strTemp & clsParam.ToScript(strScript, False)
         Next
 
@@ -110,21 +113,26 @@ Public Class ROperator
         End If
     End Function
 
-    Public Sub SetParameter(bSetLeftNotRight As Boolean, Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
+    Public Sub SetParameter(bSetFirst As Boolean, Optional strParameterName As String = "Right", Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
 
         If strValue <> "" Then
             clsParam = New RParameter
             clsParam.SetArgumentValue(strValue)
         End If
 
-        If bSetLeftNotRight Then
+        If bSetFirst Then
             clsLeftParameter = clsParam
             clsLeftFunction = clsRFunc
             clsLeftOperator = clsOp
         Else
-            clsRightParameter = clsParam
-            clsRightFunction = clsRFunc
-            clsRightOperator = clsOp
+            If Not IsNothing(clsParam) Then
+                AddAdditionalParameter(clsParam)
+            Else
+                AddAdditionalParameter(strParameterName, strValue, clsRFunc, clsOp)
+            End If
+            'clsRightParameter = clsParam
+            'clsRightFunction = clsRFunc
+            'clsRightOperator = clsOp
         End If
         bIsAssigned = False
     End Sub
@@ -186,9 +194,7 @@ Public Class ROperator
             clsLeftFunction = Nothing
             clsLeftOperator = Nothing
         Else
-            clsRightParameter = Nothing
-            clsRightFunction = Nothing
-            clsRightOperator = Nothing
+            RemoveParameterByName("Right")
         End If
         bIsAssigned = False
     End Sub
@@ -199,7 +205,7 @@ Public Class ROperator
 
     Public Sub RemoveAllParameters()
         RemoveParameter(True)
-        RemoveParameter(False)
+        'RemoveParameter(False)
         RemoveAllAdditionalParameters()
     End Sub
 End Class
