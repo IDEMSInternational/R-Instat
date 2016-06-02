@@ -990,4 +990,8 @@ Public Class frmMain
     Private Sub mnuOrganiseDataObjectRenameMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectRenameMetadata.Click
         dlgRenameMetadata.ShowDialog()
     End Sub
+
+    Private Sub mnuOrganiseDataFrameRowNumbersNames_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameRowNumbersNames.Click
+        dlgRowNamesOrNumbers.ShowDialog()
+    End Sub
 End Class
