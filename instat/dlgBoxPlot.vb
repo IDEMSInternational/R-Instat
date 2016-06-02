@@ -74,12 +74,10 @@ Public Class dlgBoxplot
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         sdgBoxPlot.SetBoxPlotFunction(clsRgeom_boxplotFunction)
 
-
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
         ucrVariablesAsFactorForBoxplot.SetIncludedDataType({"numeric"})
 
-        ucrSaveBoxplot.strPrefix = "graph"
     End Sub
 
     Private Sub TestOkEnabled()
@@ -135,19 +133,5 @@ Public Class dlgBoxplot
             clsRaesFunction.RemoveParameterByName("y")
         End If
         TestOkEnabled()
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        frmMain.clsRLink.RunScript("InstatDataObject$get_graphs(data_name = " & Chr(34) & "survey" & Chr(34) & ", graph_name = " & Chr(34) & "graph1" & Chr(34) & ")")
-    End Sub
-
-    Private Sub ucrSaveBoxplot_GraphNameChanged() Handles ucrSaveBoxplot.GraphNameChanged, ucrSelectorBoxPlot.DataFrameChanged, ucrSaveBoxplot.SaveGraphCheckedChanged
-        If ucrSaveBoxplot.bSaveGraph Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveBoxplot.strGraphName, strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveBoxplot.strGraphName)
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
-        Else
-            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        End If
     End Sub
 End Class

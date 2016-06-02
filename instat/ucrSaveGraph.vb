@@ -32,11 +32,7 @@
         ucrInputGraphName.SetDataFrameSelector(ucrNewDataFrameSelector)
     End Sub
     Private Sub chkSaveGraph_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveGraph.CheckedChanged
-        If chkSaveGraph.Checked Then
-            ucrInputGraphName.Enabled = True
-        Else
-            ucrInputGraphName.Enabled = False
-        End If
+        ucrInputGraphName.Enabled = chkSaveGraph.Checked
         RaiseEvent SaveGraphCheckedChanged()
     End Sub
 
