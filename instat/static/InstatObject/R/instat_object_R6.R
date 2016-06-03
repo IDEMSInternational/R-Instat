@@ -400,27 +400,24 @@ instat_object$set("public", "add_object", function(data_name, object, object_nam
 }
 ) 
 
-instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type) {
+instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE) {
   if(missing(data_name)) {
     if(!missing(object_name)) warning("data_name is missing so ", object_name, " will be ignored. Specify from_overall = TRUE to get from overall objects by name")
-    out = list()
-    if(include_overall && length(self$get_object_names(data_name = overall_label, type = type)) > 0) {
-        out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, type = type)]
-    }
-    for(data_obj_name in self$get_data_names()) {
-      out[[data_obj_name]] <- self$get_data_objects(data_obj_name)$get_objects(type = type)
-    }
+    out = sapply(self$get_data_objects(as_list = TRUE), function(x) x$get_objects(type = type))
+    if(include_overall) out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, type = type)]
+    if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
     return(out)
   }
   else {
     if(data_name == overall_label) {
+      curr_objects = private$.objects[self$get_object_names(data_name = data_name, type = type)]
       if(!missing(object_name)) {
-        if(!(object_name %in% names(private$.objects))) stop(object_name, "not found.")
-        else out = private$.objects[[object_name]]
+        if(!(object_name %in% names(curr_objects))) stop(object_name, "not found.")
+        else out = curr_objects[[object_name]]
       }
-      else out = private$.objects
+      else out = curr_objects
     }
-    else out = self$get_data_objects(data_name)$get_objects(object_name, type) 
+    else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type)
     if(as_list) {
       lst = list()
       lst[[data_name]] <- out
@@ -431,8 +428,8 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
 }
 )
 
-instat_object$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type, include_empty = FALSE) {
-  if(missing(type)) overall_object_names = names(private$.objects)
+instat_object$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE) {
+  if(type == "") overall_object_names = names(private$.objects)
   else {
     if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
     else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
