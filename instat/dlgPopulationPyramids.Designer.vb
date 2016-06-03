@@ -34,9 +34,9 @@ Partial Class dlgPopulationPyramids
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 216)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 207)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrPopulationPyramidselector
@@ -50,7 +50,7 @@ Partial Class dlgPopulationPyramids
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(265, 30)
+        Me.lblXVariable.Location = New System.Drawing.Point(255, 25)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(55, 13)
         Me.lblXVariable.TabIndex = 2
@@ -58,7 +58,7 @@ Partial Class dlgPopulationPyramids
         '
         'ucrXVariableReceiver
         '
-        Me.ucrXVariableReceiver.Location = New System.Drawing.Point(268, 47)
+        Me.ucrXVariableReceiver.Location = New System.Drawing.Point(258, 42)
         Me.ucrXVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrXVariableReceiver.Name = "ucrXVariableReceiver"
         Me.ucrXVariableReceiver.Selector = Nothing
@@ -68,7 +68,7 @@ Partial Class dlgPopulationPyramids
         'lblYVariable
         '
         Me.lblYVariable.AutoSize = True
-        Me.lblYVariable.Location = New System.Drawing.Point(265, 77)
+        Me.lblYVariable.Location = New System.Drawing.Point(255, 76)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(55, 13)
         Me.lblYVariable.TabIndex = 2
@@ -76,7 +76,7 @@ Partial Class dlgPopulationPyramids
         '
         'ucrYVariableReceiver
         '
-        Me.ucrYVariableReceiver.Location = New System.Drawing.Point(268, 94)
+        Me.ucrYVariableReceiver.Location = New System.Drawing.Point(258, 92)
         Me.ucrYVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrYVariableReceiver.Name = "ucrYVariableReceiver"
         Me.ucrYVariableReceiver.Selector = Nothing
@@ -86,7 +86,7 @@ Partial Class dlgPopulationPyramids
         'lblSecondFactor
         '
         Me.lblSecondFactor.AutoSize = True
-        Me.lblSecondFactor.Location = New System.Drawing.Point(265, 122)
+        Me.lblSecondFactor.Location = New System.Drawing.Point(255, 125)
         Me.lblSecondFactor.Name = "lblSecondFactor"
         Me.lblSecondFactor.Size = New System.Drawing.Size(77, 13)
         Me.lblSecondFactor.TabIndex = 2
@@ -94,7 +94,7 @@ Partial Class dlgPopulationPyramids
         '
         'ucrSecondFactorReceiver
         '
-        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(268, 139)
+        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(258, 142)
         Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
@@ -105,7 +105,7 @@ Partial Class dlgPopulationPyramids
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 271)
+        Me.ClientSize = New System.Drawing.Size(419, 261)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.Controls.Add(Me.lblSecondFactor)
         Me.Controls.Add(Me.ucrYVariableReceiver)

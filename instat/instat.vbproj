@@ -270,6 +270,12 @@
     <Compile Include="dlgDeleteDescriptive.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDeleteMetadata.Designer.vb">
+      <DependentUpon>dlgDeleteMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDeleteMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDeleteModels.Designer.vb">
       <DependentUpon>dlgDeleteModels.vb</DependentUpon>
     </Compile>
@@ -298,6 +304,12 @@
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgExportDataset.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgFreezeColumns.Designer.vb">
+      <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFreezeColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFromLibrary.Designer.vb">
@@ -430,6 +442,12 @@
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRenameDescriptive.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRenameMetadata.Designer.vb">
+      <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRenameMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRenameModels.Designer.vb">
@@ -1849,6 +1867,15 @@
     <EmbeddedResource Include="dlgDeleteDescriptive.sw-KE.resx">
       <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteMetadata.fr-FR.resx">
+      <DependentUpon>dlgDeleteMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteMetadata.resx">
+      <DependentUpon>dlgDeleteMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteMetadata.sw-KE.resx">
+      <DependentUpon>dlgDeleteMetadata.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteModels.fr-FR.resx">
       <DependentUpon>dlgDeleteModels.vb</DependentUpon>
     </EmbeddedResource>
@@ -1893,6 +1920,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFreezeColumns.resx">
+      <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.fr-FR.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
@@ -2091,6 +2121,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameDescriptive.sw-KE.resx">
       <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameMetadata.fr-FR.resx">
+      <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameMetadata.resx">
+      <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameMetadata.sw-KE.resx">
+      <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameModels.fr-FR.resx">
       <DependentUpon>dlgRenameModels.vb</DependentUpon>
