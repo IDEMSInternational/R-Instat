@@ -36,6 +36,7 @@ Public Class ucrInput
 
     Public Overridable Sub Reset()
         bUserTyped = False
+        SetDefaultName()
     End Sub
 
     Public Sub OnNameChanged()
