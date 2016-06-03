@@ -35,3 +35,8 @@ is_factor_label="Is_Factor"
 data_type_label="Data_Type"
 is_hidden_label="Is_Hidden"
 is_protected_label="Is_Protected"
+
+#object labels
+overall_label="[Overall]"
+model_label="model"
+graph_label="graph"
