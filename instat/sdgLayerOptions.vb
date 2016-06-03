@@ -18,6 +18,19 @@ Public Class sdgLayerOptions
     Public clsGeomFunction As New RFunction
     Private bFirstLoad As Boolean = True
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        ucrGeomWithAes.SetGeomFunction(clsGeomFunction)
+        ucrLayerParameter.SetGeomFunction(clsGeomFunction)
+
+    End Sub
+
+
+
     Private Sub sdgLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
