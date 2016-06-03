@@ -434,49 +434,50 @@ data_object$set("public", "replace_value_in_data", function(col_name = "", row, 
 }
 )
 
-data_object$set("public", "append_to_metadata", function(name, value) {
+data_object$set("public", "append_to_metadata", function(property, new_value = "") {
   
-  if(missing(name) || missing(value)) {
-    stop("name and value arguements must be specified.")
-  } 
+  if(missing(property)) stop("property must be specified.")
   
-  else if (!is.character(name)) {
-    stop("name must be of type: character")
-  }
+  if (!is.character(property)) stop("property must be of type: character")
   
-  # Remember double brackets must be used when dealing with variable names.
-  else {
-    private$metadata[[name]] <- value 
-    self$append_to_changes(list(Added_metadata, name))
-    self$metadata_changed <- TRUE
-  }
+  private$metadata[[property]] <- new_value
+  self$append_to_changes(list(Added_metadata, property, new_value))
+  self$metadata_changed <- TRUE
 }
 )
 
-data_object$set("public", "append_to_variables_metadata", function(col_names, property, new_val) {
+data_object$set("public", "append_to_variables_metadata", function(col_names, property, new_val = "") {
   
-  if(missing(col_names) || missing(property) || missing(new_val)) stop("col_names, property and new_val arguements must be specified.")
-  
-  if(!all(col_names %in% names(private$data))) stop(paste(col_names, "not found in data"))
-  for(curr_col in col_names) {
-    row = integer()
-    if(ncol(private$variables_metadata)>0) row = which(rownames(private$variables_metadata)==curr_col)
-    row_exists = TRUE
-    if(length(row)==0) {
-      row = nrow(private$variables_metadata) + 1
-      row_exists = FALSE
+  if(missing(property)) stop("property must be specified.")
+  if(!missing(col_names)) {
+    if(!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    for(curr_col in col_names) {
+      row = integer()
+      if(ncol(private$variables_metadata)>0) row = which(rownames(private$variables_metadata)==curr_col)
+      row_exists = TRUE
+      if(length(row)==0) {
+        row = nrow(private$variables_metadata) + 1
+        row_exists = FALSE
+      }
+      col = which(colnames(private$variables_metadata)==property)
+      propery_exists = TRUE
+      if(length(col)==0) {
+        col = ncol(private$variables_metadata) + 1
+        propery_exists = FALSE
+      }
+      private$variables_metadata[row, col] <- new_val
+      if(!row_exists) rownames(private$variables_metadata)[row] <- curr_col
+      if(!propery_exists) colnames(private$variables_metadata)[col] <- property
+      
+      self$append_to_changes(list(Added_variables_metadata, curr_col, property))
     }
-    col = which(colnames(private$variables_metadata)==property)
-    propery_exists = TRUE
+  }
+  else {
     if(length(col)==0) {
       col = ncol(private$variables_metadata) + 1
-      propery_exists = FALSE
     }
-    private$variables_metadata[row, col] <- new_val
-    if(!row_exists) rownames(private$variables_metadata)[row] <- curr_col
-    if(!propery_exists) colnames(private$variables_metadata)[col] <- property
-    
-    self$append_to_changes(list(Added_variables_metadata, curr_col, property))
+    private$variables_metadata[ , property] <- new_val
+    self$append_to_changes(list(Added_variables_metadata, property, new_val))
   }
   self$variables_metadata_changed <- TRUE
   self$data_changed <- TRUE
@@ -510,7 +511,7 @@ data_object$set("public", "add_defaults_meta", function() {
 )
 
 data_object$set("public", "add_defaults_variables_metadata", function() {
-  sapply(self$get_column_names(), function(col_name) self$append_to_variables_metadata(col_name, is_hidden_label, FALSE))
+  invisible(sapply(self$get_column_names(), function(col_name) self$append_to_variables_metadata(col_name, is_hidden_label, FALSE)))
 }
 )
 
