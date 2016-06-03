@@ -17,7 +17,7 @@ Imports instat.Translations
 Imports unvell.ReoGrid.Events
 
 Public Class frmVariables
-    Public context As New frmEditor
+    'Public context As New frmEditor
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Public strPreviousCellText As String
 
@@ -39,10 +39,10 @@ Public Class frmVariables
         'gridVariables.SheetTabNewButtonVisible = False
         'gridVariables.SheetTabControlNewButtonVisible = False
         'grdVariables.CurrentWorksheet.Resize(5, 5)
-        grdVariables.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
-        grdVariables.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip
-        grdVariables.ContextMenuStrip = context.grdData.ContextMenuStrip
-        autoTranslate(Me)
+        'grdVariables.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
+        'grdVariables.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip
+        'grdVariables.ContextMenuStrip = context.grdData.ContextMenuStrip
+        'autoTranslate(Me)
     End Sub
 
     Private Sub grdVariables_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdVariables.CurrentWorksheetChanged, Me.Load, grdVariables.WorksheetInserted
@@ -89,5 +89,9 @@ Public Class frmVariables
 
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrSheet.BeforeCellEdit
         strPreviousCellText = e.Cell.Data.ToString()
+    End Sub
+
+    Private Sub frmVariables_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        frmMain.mnuViewColumnMetadata.Checked = Me.Visible
     End Sub
 End Class

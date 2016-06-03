@@ -306,6 +306,12 @@
     <Compile Include="dlgExportDataset.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFreezeColumns.Designer.vb">
+      <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFreezeColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFromLibrary.Designer.vb">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
     </Compile>
@@ -1914,6 +1920,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFreezeColumns.resx">
+      <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.fr-FR.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>

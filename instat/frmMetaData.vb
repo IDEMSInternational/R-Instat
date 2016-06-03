@@ -80,4 +80,8 @@ Public Class frmMetaData
             End Try
         End If
     End Sub
+
+    Private Sub frmMetaData_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        frmMain.mnuViewDataFrameMetadata.Checked = Me.Visible
+    End Sub
 End Class

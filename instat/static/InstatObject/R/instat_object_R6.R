@@ -36,7 +36,7 @@ instat_object <- R6Class("instat_object",
                       if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
                       private$.data_objects_changed <- new_value
                       #TODO is this behaviour we want?
-                      sapply(self$get_data_objects(), function(x) x$data_changed <- new_value)
+                      invisible(sapply(self$get_data_objects(), function(x) x$data_changed <- new_value))
                     }
                   }
                 )
@@ -216,7 +216,7 @@ instat_object$set("public", "append_data_object", function(name, obj) {
 }
 )
 
-instat_object$set("public", "get_data_objects", function(data_name) {
+instat_object$set("public", "get_data_objects", function(data_name, as_list = FALSE) {
   if(missing(data_name)) {
     return(private$.data_objects)
   }
@@ -227,7 +227,7 @@ instat_object$set("public", "get_data_objects", function(data_name) {
     
     if(type=="character" && !all(data_name %in% names(private$.data_objects))) stop(paste(data_name, "not found"))
     if(type=="integer" && (!all(1 <= data_name) || !all(data_name <= length(private$.data_objects)))) stop(paste(data_name, "not found"))
-    if(length(data_name) > 1) return(private$.data_objects[data_name])
+    if(length(data_name) > 1 || as_list) return(private$.data_objects[data_name])
     else return(private$.data_objects[[data_name]])
   }
 }
@@ -400,92 +400,72 @@ instat_object$set("public", "add_object", function(data_name, object, object_nam
 }
 ) 
 
-instat_object$set("public", "get_objects", function(data_name, object_name, from_overall = FALSE, include_overall = TRUE, type) {
+instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE) {
   if(missing(data_name)) {
-    if(from_overall) {
-      if(missing(object_name)) return(private$.objects)
-      else {
-        if(!object_name %in% names(private$.objects)) stop(object_name, "not found.")
-        else return(private$.objects[[object_name]])
-      }
-    }
-    else {
-      if(!missing(object_name)) warning("data_name is missing so", object_name, "will be ignored.")
-      out = list()
-      if(include_overall) out[["[Overall]"]] <- names(private$.objects)
-      for(data_obj_name in self$get_data_names()) {
-        out[[data_obj_name]] <- self$get_data_objects(data_obj_name)$get_objects()
-      }
-      return(out)
-    }
-  }
-  else {
-    if(data_name == "[Overall]") {
-      if(!missing(object_name) && !(object_name %in% names(private$.objects))) stop(object_name, "not found.")
-      if(!missing(object_name) && object_name %in% names(private$.objects)) return(private$.objects[[object_name]])
-      return(private$.objects)
-    }
-    else return(self$get_data_objects(data_name)$get_objects(object_name))
-  }
-}
-)
-
-instat_object$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude) {
-  if(missing(data_name)) {
-    out = list()
-    if(include_overall) out[["[Overall]"]] <- names(private$.objects)
-    for(data_obj_name in self$get_data_names()) {
-      out[[data_obj_name]] <- self$get_data_objects(data_obj_name)$get_object_names()
-    }
+    if(!missing(object_name)) warning("data_name is missing so ", object_name, " will be ignored. Specify from_overall = TRUE to get from overall objects by name")
+    out = sapply(self$get_data_objects(as_list = TRUE), function(x) x$get_objects(type = type))
+    if(include_overall) out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, type = type)]
+    if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
     return(out)
   }
   else {
-    if(data_name == "[Overall]") return(names(private$.objects))
-    else return(self$get_data_objects(data_name)$get_object_names())
+    if(data_name == overall_label) {
+      curr_objects = private$.objects[self$get_object_names(data_name = data_name, type = type)]
+      if(!missing(object_name)) {
+        if(!(object_name %in% names(curr_objects))) stop(object_name, "not found.")
+        else out = curr_objects[[object_name]]
+      }
+      else out = curr_objects
+    }
+    else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type)
+    if(as_list) {
+      lst = list()
+      lst[[data_name]] <- out
+      return(lst)
+    }
+    else return(out)
   }
 }
 )
 
-instat_object$set("public", "add_model", function(data_name, object, object_name) {
-  self$add_object(data_name = data_name, object = object, object_name = object_name)
-}
-)
-
-instat_object$set("public", "get_models", function(data_name, model_name) {
-  #TODO
-  self$get_data_objects(data_name)$get_models(model_name = model_name)
-}
-)
-
-instat_object$set("public", "get_model_names", function(data_name, as_list = FALSE, include_overall = FALSE, include, exclude) {
-  if(!missing(data_name)) {
-    if(data_name == "[Overall]") {
-      out = names(self$get_overall_model_names())
-      if(as_list) {
-        lst = list()
-        lst[[data_name]] <- out
-        return(lst)
-      }
-      else return(out)
-    }
-    else return(self$get_data_objects(data_name)$get_model_names(as_list = as_list, include = include, exclude = exclude))
+instat_object$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE) {
+  if(type == "") overall_object_names = names(private$.objects)
+  else {
+    if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
+    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
+    else stop("type: ", type, " not recognised")
+  }
+  if(missing(data_name)) {
+    if(missing(type)) out = sapply(self$get_data_objects(), function(x) x$get_object_names()) 
+    else out = sapply(self$get_data_objects(), function(x) x$get_object_names(type = type))
+    if(include_overall) out[[overall_label]] <- overall_object_names
+    if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
+    return(as.list(out))
   }
   else {
-    out = list()
-    if(include_overall) out[["[Overall]"]] <- names(self$get_overall_models())
-    for(data_obj_name in self$get_data_names()) {
-      out[[data_obj_name]] <- self$get_data_objects(data_obj_name)$get_model_names(as_list = FALSE, include = include, exclude = exclude)
-    }
-    return(out)
+    if(data_name == overall_label) return(overall_object_names)
+    else return(self$get_data_objects(data_name)$get_object_names(type))
   }
 }
 )
 
-instat_object$set("public", "get_overall_model_names", function(as_list = FALSE, include_overall = FALSE, include, exclude) {
+instat_object$set("public", "add_model", function(data_name, model, model_name) {
+  self$add_object(data_name = data_name, object = model, object_name = model_name)
+}
+)
+
+instat_object$set("public", "get_models", function(data_name, model_name, include_overall = TRUE) {
+  self$get_objects(data_name = data_name, object_name = model_name, include_overall = include_overall, type = model_label)
+}
+)
+
+instat_object$set("public", "get_model_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE) {
+  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = model_label, include_empty = include_empty)
 }
 )
 
 instat_object$set("public", "get_from_model", function(data_name, model_name, value1, value2, value3) {
+  if(missing(data_name) || missing(model_name)) stop("data_name and model_name must both be specified.")
   curr_model = self$get_models(data_name = data_name, model_name = model_name)
   if(missing(value1)) stop("value1 must be specified.")
   if(!value1 %in% names(curr_model)) stop(paste(value1, "not found in", model_name))
@@ -501,6 +481,21 @@ instat_object$set("public", "get_from_model", function(data_name, model_name, va
       return(curr_model[[value1]][[value2]][[value3]])
     }
   }
+}
+)
+
+instat_object$set("public", "add_graph", function(data_name, graph, graph_name) {
+  self$add_object(data_name = data_name, object = graph, object_name = graph_name)
+}
+)
+
+instat_object$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE) {
+  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label)
+}
+)
+
+instat_object$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE) {
+  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty)
 }
 )
 
@@ -675,28 +670,34 @@ instat_object$set("public", "convert_column_to_type", function(data_name, col_na
 } 
 )
 
-instat_object$set("public", "append_to_variables_metadata", function(data_name, col_names, property, new_val) {
+instat_object$set("public", "append_to_variables_metadata", function(data_name, col_names, property, new_val = "") {
   self$get_data_objects(data_name)$append_to_variables_metadata(col_names, property, new_val)
 } 
 )
 
-instat_object$set("public", "append_to_dataframe_metadata", function(data_name, property, new_val) {
+instat_object$set("public", "append_to_dataframe_metadata", function(data_name, property, new_val = "") {
   self$get_data_objects(data_name)$append_to_metadata(property, new_val)
 } 
 )
 
-instat_object$set("public", "append_to_metadata", function(property, new_val) {
-  if(missing(property) || missing(new_val)) {
-    stop("property and new_val arguments must be specified.")
-  } 
+instat_object$set("public", "append_to_metadata", function(property, new_val = "") {
+  if(missing(property)) stop("property and new_val arguments must be specified.")
   
   if(!is.character(property)) stop("property must be of type character")
   
   private$.metadata[[property]] <- new_val
   self$metadata_changed <- TRUE
-  #TODO should there be a changes list?
-  #self$append_to_changes(list(Added_metadata, property))
-} 
+  self$append_to_changes(list(Added_metadata, property))
+}
+)
+
+instat_object$set("public", "add_metadata_field", function(data_name, property, new_val = "") {
+  if(missing(property)) stop("property and new_val arguments must be specified.")
+  if(data_name == overall_label) {
+    invisible(sapply(self$get_data_objects(), function(x) x$append_to_metadata(property, new_val)))
+  }
+  else invisible(sapply(self$get_data_objects(data_name, as_list = TRUE), function(x) x$append_to_variables_metadata(property = property, new_val = new_val)))
+}
 )
 
 instat_object$set("public", "reorder_dataframes", function(data_frames_order) {
@@ -757,7 +758,7 @@ instat_object$set("public","set_hidden_columns", function(data_name, col_names) 
 )
 
 instat_object$set("public","unhide_all_columns", function(data_name) {
-  if(missing(data_name)) sapply(self$get_data_objects(), function(obj) obj$unhide_all_columns())
+  if(missing(data_name)) invisible(sapply(self$get_data_objects(), function(obj) obj$unhide_all_columns()))
   else self$get_data_objects(data_name)$unhide_all_columns()
 } 
 )
@@ -774,7 +775,7 @@ instat_object$set("public","set_protected_columns", function(data_name, col_name
 
 instat_object$set("public","get_metadata_fields", function(data_name, include_overall, as_list = FALSE, include, exclude) {
   if(!missing(data_name)) {
-    if(data_name == "[Overall]") {
+    if(data_name == overall_label) {
       out = names(self$get_combined_metadata())
       if(as_list) {
         lst = list()
@@ -787,7 +788,7 @@ instat_object$set("public","get_metadata_fields", function(data_name, include_ov
   }
   else {
     out = list()
-    if(include_overall) out[["[Overall]"]] <- names(self$get_combined_metadata())
+    if(include_overall) out[[overall_label]] <- names(self$get_combined_metadata())
     for(data_obj_name in self$get_data_names()) {
       out[[data_obj_name]] <- self$get_data_objects(data_obj_name)$get_variables_metadata_fields(as_list = FALSE, include = include, exclude = exclude)
     }
