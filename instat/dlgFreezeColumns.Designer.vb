@@ -47,7 +47,7 @@ Partial Class dlgFreezeColumns
         '
         'ucrBaseforFreezeColumns
         '
-        Me.ucrBaseforFreezeColumns.Location = New System.Drawing.Point(11, 198)
+        Me.ucrBaseforFreezeColumns.Location = New System.Drawing.Point(12, 198)
         Me.ucrBaseforFreezeColumns.Name = "ucrBaseforFreezeColumns"
         Me.ucrBaseforFreezeColumns.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseforFreezeColumns.TabIndex = 2
