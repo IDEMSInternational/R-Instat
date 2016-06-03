@@ -23,6 +23,8 @@ Partial Class dlgRowNamesOrNumbers
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpboxOptionsforRowNamesorNumbercols = New System.Windows.Forms.GroupBox()
+        Me.chkDecreasingforRownamesOrNumbers = New System.Windows.Forms.CheckBox()
+        Me.rdoCopytoColumnsforRownamesOrNumbers = New System.Windows.Forms.RadioButton()
         Me.rdoSortbyRowNamesorNumbers = New System.Windows.Forms.RadioButton()
         Me.rdoResetintoPositiveIntegers = New System.Windows.Forms.RadioButton()
         Me.rdoCopyfromColumn = New System.Windows.Forms.RadioButton()
@@ -31,8 +33,6 @@ Partial Class dlgRowNamesOrNumbers
         Me.ucrBaseRownamesorNumbers = New instat.ucrButtons()
         Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrNewColumnNameforRownamesOrNumbers = New instat.ucrNewColumnName()
-        Me.rdoCopytoColumnsforRownamesOrNumbers = New System.Windows.Forms.RadioButton()
-        Me.chkDecreasingforRownamesOrNumbers = New System.Windows.Forms.CheckBox()
         Me.grpboxOptionsforRowNamesorNumbercols.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -51,6 +51,28 @@ Partial Class dlgRowNamesOrNumbers
         Me.grpboxOptionsforRowNamesorNumbercols.TabIndex = 4
         Me.grpboxOptionsforRowNamesorNumbercols.TabStop = False
         Me.grpboxOptionsforRowNamesorNumbercols.Text = "Options"
+        '
+        'chkDecreasingforRownamesOrNumbers
+        '
+        Me.chkDecreasingforRownamesOrNumbers.AutoSize = True
+        Me.chkDecreasingforRownamesOrNumbers.Location = New System.Drawing.Point(31, 172)
+        Me.chkDecreasingforRownamesOrNumbers.Name = "chkDecreasingforRownamesOrNumbers"
+        Me.chkDecreasingforRownamesOrNumbers.Size = New System.Drawing.Size(80, 17)
+        Me.chkDecreasingforRownamesOrNumbers.TabIndex = 9
+        Me.chkDecreasingforRownamesOrNumbers.Text = "Decreasing"
+        Me.chkDecreasingforRownamesOrNumbers.UseVisualStyleBackColor = True
+        Me.chkDecreasingforRownamesOrNumbers.Visible = False
+        '
+        'rdoCopytoColumnsforRownamesOrNumbers
+        '
+        Me.rdoCopytoColumnsforRownamesOrNumbers.AutoSize = True
+        Me.rdoCopytoColumnsforRownamesOrNumbers.Location = New System.Drawing.Point(6, 41)
+        Me.rdoCopytoColumnsforRownamesOrNumbers.Name = "rdoCopytoColumnsforRownamesOrNumbers"
+        Me.rdoCopytoColumnsforRownamesOrNumbers.Size = New System.Drawing.Size(99, 17)
+        Me.rdoCopytoColumnsforRownamesOrNumbers.TabIndex = 8
+        Me.rdoCopytoColumnsforRownamesOrNumbers.TabStop = True
+        Me.rdoCopytoColumnsforRownamesOrNumbers.Text = "Copy to Column"
+        Me.rdoCopytoColumnsforRownamesOrNumbers.UseVisualStyleBackColor = True
         '
         'rdoSortbyRowNamesorNumbers
         '
@@ -128,28 +150,6 @@ Partial Class dlgRowNamesOrNumbers
         Me.ucrNewColumnNameforRownamesOrNumbers.TabIndex = 9
         Me.ucrNewColumnNameforRownamesOrNumbers.ucrDataFrameSelector = Nothing
         Me.ucrNewColumnNameforRownamesOrNumbers.Visible = False
-        '
-        'rdoCopytoColumnsforRownamesOrNumbers
-        '
-        Me.rdoCopytoColumnsforRownamesOrNumbers.AutoSize = True
-        Me.rdoCopytoColumnsforRownamesOrNumbers.Location = New System.Drawing.Point(6, 41)
-        Me.rdoCopytoColumnsforRownamesOrNumbers.Name = "rdoCopytoColumnsforRownamesOrNumbers"
-        Me.rdoCopytoColumnsforRownamesOrNumbers.Size = New System.Drawing.Size(99, 17)
-        Me.rdoCopytoColumnsforRownamesOrNumbers.TabIndex = 8
-        Me.rdoCopytoColumnsforRownamesOrNumbers.TabStop = True
-        Me.rdoCopytoColumnsforRownamesOrNumbers.Text = "Copy to Column"
-        Me.rdoCopytoColumnsforRownamesOrNumbers.UseVisualStyleBackColor = True
-        '
-        'chkDecreasingforRownamesOrNumbers
-        '
-        Me.chkDecreasingforRownamesOrNumbers.AutoSize = True
-        Me.chkDecreasingforRownamesOrNumbers.Location = New System.Drawing.Point(31, 172)
-        Me.chkDecreasingforRownamesOrNumbers.Name = "chkDecreasingforRownamesOrNumbers"
-        Me.chkDecreasingforRownamesOrNumbers.Size = New System.Drawing.Size(80, 17)
-        Me.chkDecreasingforRownamesOrNumbers.TabIndex = 9
-        Me.chkDecreasingforRownamesOrNumbers.Text = "Decreasing"
-        Me.chkDecreasingforRownamesOrNumbers.UseVisualStyleBackColor = True
-        Me.chkDecreasingforRownamesOrNumbers.Visible = False
         '
         'dlgRowNamesOrNumbers
         '
