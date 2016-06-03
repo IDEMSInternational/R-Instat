@@ -36,7 +36,7 @@ Partial Class dlgImportDataset
         Me.lblNAStrings = New System.Windows.Forms.Label()
         Me.rdoHeadingsYes = New System.Windows.Forms.RadioButton()
         Me.rdoHeadingsNo = New System.Windows.Forms.RadioButton()
-        Me.txtInputFile = New System.Windows.Forms.TextBox()
+        Me.txt = New System.Windows.Forms.TextBox()
         Me.chlStringsAsFactors = New System.Windows.Forms.CheckBox()
         Me.grdDataPreview = New unvell.ReoGrid.ReoGridControl()
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
@@ -44,6 +44,10 @@ Partial Class dlgImportDataset
         Me.nudSkips = New System.Windows.Forms.NumericUpDown()
         Me.cmdOpenDataSet = New System.Windows.Forms.Button()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
+        Me.ucrInputNAStrings = New instat.ucrInputTextBox()
+        Me.ucrInputComment = New instat.ucrInputComboBox()
+        Me.ucrInputQuote = New instat.ucrInputComboBox()
+        Me.ucrInputDecimal = New instat.ucrInputComboBox()
         Me.ucrInputSeparator = New instat.ucrInputComboBox()
         Me.ucrInputRowNames = New instat.ucrInputComboBox()
         Me.ucrInputEncoding = New instat.ucrInputComboBox()
@@ -75,10 +79,6 @@ Partial Class dlgImportDataset
         Me.ucrBase = New instat.ucrButtons()
         Me.lblCannotImport = New System.Windows.Forms.Label()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.ucrInputDecimal = New instat.ucrInputComboBox()
-        Me.ucrInputQuote = New instat.ucrInputComboBox()
-        Me.ucrInputComment = New instat.ucrInputComboBox()
-        Me.ucrInputNAStrings = New instat.ucrInputTextBox()
         CType(Me.nudSkips, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
@@ -219,14 +219,14 @@ Partial Class dlgImportDataset
         Me.rdoHeadingsNo.Text = "No"
         Me.rdoHeadingsNo.UseVisualStyleBackColor = True
         '
-        'txtInputFile
+        'txt
         '
-        Me.txtInputFile.Location = New System.Drawing.Point(241, 25)
-        Me.txtInputFile.Multiline = True
-        Me.txtInputFile.Name = "txtInputFile"
-        Me.txtInputFile.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtInputFile.Size = New System.Drawing.Size(422, 205)
-        Me.txtInputFile.TabIndex = 22
+        Me.txt.Location = New System.Drawing.Point(241, 25)
+        Me.txt.Multiline = True
+        Me.txt.Name = "txt"
+        Me.txt.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txt.Size = New System.Drawing.Size(422, 205)
+        Me.txt.TabIndex = 22
         '
         'chlStringsAsFactors
         '
@@ -322,6 +322,34 @@ Partial Class dlgImportDataset
         Me.grpCSV.TabStop = False
         Me.grpCSV.Text = "Import csv Options"
         Me.grpCSV.Visible = False
+        '
+        'ucrInputNAStrings
+        '
+        Me.ucrInputNAStrings.Location = New System.Drawing.Point(74, 311)
+        Me.ucrInputNAStrings.Name = "ucrInputNAStrings"
+        Me.ucrInputNAStrings.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputNAStrings.TabIndex = 39
+        '
+        'ucrInputComment
+        '
+        Me.ucrInputComment.Location = New System.Drawing.Point(74, 280)
+        Me.ucrInputComment.Name = "ucrInputComment"
+        Me.ucrInputComment.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputComment.TabIndex = 38
+        '
+        'ucrInputQuote
+        '
+        Me.ucrInputQuote.Location = New System.Drawing.Point(74, 229)
+        Me.ucrInputQuote.Name = "ucrInputQuote"
+        Me.ucrInputQuote.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputQuote.TabIndex = 37
+        '
+        'ucrInputDecimal
+        '
+        Me.ucrInputDecimal.Location = New System.Drawing.Point(74, 182)
+        Me.ucrInputDecimal.Name = "ucrInputDecimal"
+        Me.ucrInputDecimal.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDecimal.TabIndex = 36
         '
         'ucrInputSeparator
         '
@@ -611,34 +639,6 @@ Partial Class dlgImportDataset
         Me.ucrInputFilePath.Size = New System.Drawing.Size(119, 21)
         Me.ucrInputFilePath.TabIndex = 37
         '
-        'ucrInputDecimal
-        '
-        Me.ucrInputDecimal.Location = New System.Drawing.Point(74, 182)
-        Me.ucrInputDecimal.Name = "ucrInputDecimal"
-        Me.ucrInputDecimal.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputDecimal.TabIndex = 36
-        '
-        'ucrInputQuote
-        '
-        Me.ucrInputQuote.Location = New System.Drawing.Point(74, 229)
-        Me.ucrInputQuote.Name = "ucrInputQuote"
-        Me.ucrInputQuote.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputQuote.TabIndex = 37
-        '
-        'ucrInputComment
-        '
-        Me.ucrInputComment.Location = New System.Drawing.Point(74, 280)
-        Me.ucrInputComment.Name = "ucrInputComment"
-        Me.ucrInputComment.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputComment.TabIndex = 38
-        '
-        'ucrInputNAStrings
-        '
-        Me.ucrInputNAStrings.Location = New System.Drawing.Point(74, 311)
-        Me.ucrInputNAStrings.Name = "ucrInputNAStrings"
-        Me.ucrInputNAStrings.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputNAStrings.TabIndex = 39
-        '
         'dlgImportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -654,7 +654,7 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.lblFileOpenPath)
         Me.Controls.Add(Me.grdDataPreview)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.txtInputFile)
+        Me.Controls.Add(Me.txt)
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.lblDataFrame)
         Me.Controls.Add(Me.lblInputFile)
@@ -689,7 +689,7 @@ Partial Class dlgImportDataset
     Friend WithEvents lblNAStrings As Label
     Friend WithEvents rdoHeadingsYes As RadioButton
     Friend WithEvents rdoHeadingsNo As RadioButton
-    Friend WithEvents txtInputFile As TextBox
+    Friend WithEvents txt As TextBox
     Friend WithEvents chlStringsAsFactors As CheckBox
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grdDataPreview As unvell.ReoGrid.ReoGridControl

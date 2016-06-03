@@ -142,7 +142,7 @@ Public Class dlgImportDataset
                 strFileExt = Path.GetExtension(strFilePath)
                 ucrInputFilePath.Name = strFilePath
                 grdDataPreview.Show()
-                txtInputFile.Show()
+                txt.Show()
                 Select Case strFileExt
                     Case ".RDS"
                         clsReadRDS.SetRCommand("readRDS")
@@ -151,8 +151,8 @@ Public Class dlgImportDataset
                         grpExcel.Hide()
                         grpCSV.Hide()
                         grpRDS.Show()
-                        txtInputFile.Text = ""
-                        txtInputFile.Enabled = False
+                        txt.Text = ""
+                        txt.Enabled = False
                         grdDataPreview.Enabled = False
                         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
                         clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
@@ -166,7 +166,7 @@ Public Class dlgImportDataset
                         grpRDS.Hide()
                         grpExcel.Hide()
                         grpCSV.Show()
-                        txtInputFile.Enabled = True
+                        txt.Enabled = True
                         grdDataPreview.Enabled = True
                         strFileType = "csv"
                         ucrInputName.SetName(strFileName, bSilent:=True)
@@ -182,8 +182,8 @@ Public Class dlgImportDataset
                         grpCSV.Hide()
                         grpRDS.Hide()
                         grpExcel.Show()
-                        txtInputFile.Text = ""
-                        txtInputFile.Enabled = False
+                        txt.Text = ""
+                        txt.Enabled = False
                         grdDataPreview.Enabled = True
                         strFileType = "xlsx"
                         FillExcelSheetsAndRegions(strFilePath)
@@ -198,7 +198,7 @@ Public Class dlgImportDataset
                 grpExcel.Hide()
                 grpRDS.Hide()
                 grdDataPreview.Hide()
-                txtInputFile.Hide()
+                txt.Hide()
             End If
         End If
         TestOkEnabled()
@@ -212,15 +212,15 @@ Public Class dlgImportDataset
         Dim sReader As StreamReader
         Try
             sReader = New StreamReader(ucrInputFilePath.Name)
-            txtInputFile.Text = ""
+            txt.Text = ""
             For i = 1 To intLines + nudSkips.Value + 1
-                txtInputFile.Text = txtInputFile.Text & sReader.ReadLine() & vbCrLf
+                txt.Text = txt.Text & sReader.ReadLine() & vbCrLf
                 If sReader.Peek() = -1 Then
                     Exit For
                 End If
             Next
         Catch ex As Exception
-            txtInputFile.Text = "Cannot show text preview of file:" & ucrInputFilePath.Name & ". The file may be in use by another program. Close the file and select it again from the dialog to refresh the preview."
+            txt.Text = "Cannot show text preview of file:" & ucrInputFilePath.Name & ". The file may be in use by another program. Close the file and select it again from the dialog to refresh the preview."
         End Try
     End Sub
 
@@ -343,14 +343,15 @@ Public Class dlgImportDataset
 
 #Region "CSV options"
     Private Sub SetCSVDefault()
-        ucrInputEncoding.Name = "Automatic"
+        ucrInputEncoding.SetName("Automatic")
         rdoHeadingsYes.Checked = True
-        ucrInputRowNames.Name = "Automatic"
-        ucrInputSeparator.cboInput.Items.Add("Comma")
-        ucrInputDecimal.cboInput.Items.Add("Period")
-        ucrInputQuote.cboInput.Items.Add("Double quote")
-        ucrInputComment.cboInput.Items.Add("None")
+        ucrInputRowNames.SetName("Automatic")
+        ucrInputSeparator.SetName("Comma")
+        ucrInputDecimal.SetName("Period")
+        ucrInputQuote.SetName("Double quote")
+        ucrInputComment.SetName("None")
         SetNAStringsText("NA")
+        ucrInputNAStrings.SetName("NA")
         nudSkips.Value = 0
     End Sub
 
@@ -366,7 +367,7 @@ Public Class dlgImportDataset
     Private Sub ucrInputEncoding_TextChanged(sender As Object, e As EventArgs) Handles ucrInputEncoding.TextChanged
 
         If ucrInputEncoding.Name <> "Automatic" Then
-            clsReadCSV.AddParameter("encoding", ucrInputEncoding.Name)
+            clsReadCSV.AddParameter("encoding", ucrInputEncoding.GetText)
         Else
             clsReadCSV.RemoveParameterByName("encoding")
         End If
@@ -375,8 +376,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub ucrInputRowNames_TextChanged(sender As Object, e As EventArgs) Handles ucrInputRowNames.TextChanged
-
-        If ucrInputRowNames.Name <> "Automatic" Then
+        If ucrInputRowNames.cboInput.SelectedItem <> "Automatic" Then
             Select Case ucrInputRowNames.GetText
                 Case "Use first column"
                     clsReadCSV.AddParameter("row.names", 1)
@@ -429,16 +429,16 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub CommentParameter()
-        If ucrInputComment.Name = "None" Then
+        If ucrInputComment.cboInput.SelectedItem = "None" Then
             clsReadCSV.AddParameter("comment.char", Chr(34) & Chr(34))
         Else
-            clsReadCSV.AddParameter("comment.char", Chr(34) & ucrInputComment.Name & Chr(34))
+            clsReadCSV.AddParameter("comment.char", Chr(34) & ucrInputComment.GetText & Chr(34))
         End If
         RefreshFrameView()
     End Sub
 
     Private Sub ucrInputNAStrings_TextChanged() Handles ucrInputNAStrings.NameChanged
-        SetNAStringsText(ucrInputNAStrings.Text)
+        SetNAStringsText(ucrInputNAStrings.GetText())
         RefreshFrameView()
     End Sub
 
@@ -530,7 +530,7 @@ Public Class dlgImportDataset
 
     Private Sub startRow()
         If bComponentsInitialised Then
-            If nudStartRow.Text <> "" Then
+            If nudStartRow.Value <> "" Then
                 If nudStartRow.Value = 1 AndAlso Not frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                     clsReadXLSX.RemoveParameterByName("startRow")
                     clsTempExcelPreview.RemoveParameterByName("startRow")
