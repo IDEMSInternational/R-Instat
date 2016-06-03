@@ -32,6 +32,7 @@ Public Class ucrDataFrame
     End Sub
 
     Public Sub Reset()
+        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad)
         If frmMain.strDefaultDataFrame <> "" Then
             cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strDefaultDataFrame)
         ElseIf frmMain.strCurrentDataFrame <> "" Then
