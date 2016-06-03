@@ -12,9 +12,9 @@
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
 Imports instat.Translations
-Public Class dlgReoderMetadata
+Public Class dlgDeleteMetadata
     Public bFirstLoad As Boolean = True
-    Private Sub dlgReoderMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgDeleteMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             setDefaults()
@@ -35,8 +35,9 @@ Public Class dlgReoderMetadata
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrReorderMetadata.setDataframes(ucrDataFrameReoderMetadata)
-        ucrReorderMetadata.setDataType("metadata")
+        ucrReceiverMetadataToDelete.Selector = ucrSelectorForDeleteMetadata
+        ucrReceiverMetadataToDelete.SetMeAsReceiver()
+        ucrSelectorForDeleteMetadata.SetItemType("metadata")
     End Sub
 
     Private Sub setDefaults()
@@ -48,4 +49,7 @@ Public Class dlgReoderMetadata
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrSelectorForDeleteMetadata_Load(sender As Object, e As EventArgs) Handles ucrSelectorForDeleteMetadata.Load
+
+    End Sub
 End Class
