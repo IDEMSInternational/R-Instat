@@ -14,21 +14,35 @@
 Imports instat.Translations
 Public Class dlgCombine
     Private bFirstLoad As Boolean = True
+
     Private Sub dlgCombine_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
+            bFirstLoad = False
         Else
             ReOpenDialog()
         End If
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
+
     Private Sub SetDefaults()
         ucrSelectorCombineFactors.Reset()
         ucrSelectorCombineFactors.Focus()
+        ucrInputColName.Reset()
         chkDropUnusedLevels.Checked = False
+    End Sub
 
+    Private Sub InitialiseDialog()
+        ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
+        ucrFactorsReceiver.SetMeAsReceiver()
+        ucrFactorsReceiver.SetIncludedDataTypes({"factor"})
+        ucrBase.clsRsyntax.SetFunction("interaction")
+        ucrInputColName.SetPrefix("Interact")
+        ucrInputColName.SetItemsTypeAsColumns()
+        ucrInputColName.SetDefaultTypeAsColumn()
+        ucrInputColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
     End Sub
 
     Private Sub ReOpenDialog()
@@ -36,7 +50,7 @@ Public Class dlgCombine
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrFactorsReceiver.IsEmpty = False Then
+        If Not ucrFactorsReceiver.IsEmpty() AndAlso Not ucrInputColName.IsEmpty() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -44,29 +58,38 @@ Public Class dlgCombine
 
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
-        ucrFactorsReceiver.SetMeAsReceiver()
-        ucrFactorsReceiver.SetDataType("factor")
-        chkDropUnusedLevels.Checked = False
-        ucrInputColName.SetPrefix("Interact")
-        ucrInputColName.SetItemsTypeAsColumns()
-        ucrInputColName.SetDefaultTypeAsColumn()
-        ucrInputColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
-
-    End Sub
-
-    Private Sub ucrInputColName_NameChanged() Handles ucrInputColName.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOkEnabled()
     End Sub
 
-    Private Sub lblNewColumnName_Click(sender As Object, e As EventArgs) Handles lblNewColumnName.Click
-
+    Private Sub ucrFactorsReceiver_SelectionChanged() Handles ucrFactorsReceiver.SelectionChanged
+        If Not ucrFactorsReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrFactorsReceiver.GetVariables())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("x")
+        End If
+        TestOkEnabled()
     End Sub
 
+    Private Sub ucrInputColName_NameChanged() Handles ucrInputColName.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub chkDropUnusedLevels_CheckedChanged(sender As Object, e As EventArgs) Handles chkDropUnusedLevels.CheckedChanged
+        If chkDropUnusedLevels.Checked Then
+            ucrBase.clsRsyntax.AddParameter("drop", "TRUE")
+        Else
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("drop", "FALSE")
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("drop")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrSelectorCombineFactors_DataFrameChanged() Handles ucrSelectorCombineFactors.DataFrameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
+    End Sub
 End Class
