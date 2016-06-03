@@ -404,9 +404,11 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
   if(missing(data_name)) {
     if(!missing(object_name)) warning("data_name is missing so ", object_name, " will be ignored. Specify from_overall = TRUE to get from overall objects by name")
     out = list()
-    if(include_overall) out[[overall_label]] <- names(private$.objects)
+    if(include_overall && length(self$get_object_names(data_name = overall_label, type = type)) > 0) {
+        out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, type = type)]
+    }
     for(data_obj_name in self$get_data_names()) {
-      out[[data_obj_name]] <- self$get_data_objects(data_obj_name)$get_objects()
+      out[[data_obj_name]] <- self$get_data_objects(data_obj_name)$get_objects(type = type)
     }
     return(out)
   }

@@ -1007,10 +1007,12 @@ data_object$set("public", "add_object", function(object, object_name) {
 )
 
 data_object$set("public", "get_objects", function(object_name, type) {
-  if(missing(object_name)) return(private$objects)
+  curr_objects = private$objects[self$get_object_names(type = type)]
+  if(length(curr_objects) == 0) return(curr_objects)
+  if(missing(object_name)) return(curr_objects)
   if(!is.character(object_name)) stop("object_name must be a character")
-  if(!object_name %in% names(private$objects)) stop(object_name, "not found in models")
-  return(private$objects[[object_name]])
+  if(!object_name %in% names(curr_objects)) stop(object_name, "not found in objects")
+  return(curr_objects[[object_name]])
 }
 )
 
