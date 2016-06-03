@@ -27,7 +27,7 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 353
     End Sub
     Private Sub SetDefaults()
 

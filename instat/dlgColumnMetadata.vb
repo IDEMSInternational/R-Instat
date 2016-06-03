@@ -31,7 +31,7 @@ Public Class dlgColumnMetadata
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 54
     End Sub
     Private Sub ReopenDialog()
 
