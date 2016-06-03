@@ -58,4 +58,9 @@ Public Class dlgFreezeColumns
         End If
     End Sub
 
+    Private Sub ucrSelectorByDataFrameAddRemoveforFreezeColumns_Load(sender As Object, e As EventArgs) Handles ucrSelectorByDataFrameAddRemoveforFreezeColumns.Load
+
+    End Sub
+
+
 End Class

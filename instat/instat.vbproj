@@ -594,10 +594,6 @@
     <Compile Include="dlgCombineforGraphics.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRownamesOrNumbers.Designer.vb">
-      <DependentUpon>dlgRownamesOrNumbers.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgRownamesOrNumbers.vb" />
     <Compile Include="frmSetupLoading.Designer.vb">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
     </Compile>
@@ -2359,9 +2355,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCombineforGraphics.sw-KE.resx">
       <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRownamesOrNumbers.resx">
-      <DependentUpon>dlgRownamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetupLoading.fr-FR.resx">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
