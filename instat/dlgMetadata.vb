@@ -50,13 +50,14 @@ Public Class dlgMetadata
     End Sub
 
     Private Sub cmdOpenMetdataEditor_Click(sender As Object, e As EventArgs) Handles cmdOpenMetdataEditor.Click
-        Me.Hide()
         If ucrDFSelectorForMetadata.cboAvailableDataFrames.SelectedItem = "[Overall]" Then
             frmMetaData.Show()
+            frmMetaData.BringToFront()
         Else
             frmVariables.Show()
+            frmVariables.BringToFront()
         End If
-
+        Me.Close()
     End Sub
 
 End Class
