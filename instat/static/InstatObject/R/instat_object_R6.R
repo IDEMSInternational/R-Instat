@@ -36,7 +36,7 @@ instat_object <- R6Class("instat_object",
                       if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
                       private$.data_objects_changed <- new_value
                       #TODO is this behaviour we want?
-                      sapply(self$get_data_objects(), function(x) x$data_changed <- new_value)
+                      invisible(sapply(self$get_data_objects(), function(x) x$data_changed <- new_value))
                     }
                   }
                 )
@@ -216,7 +216,7 @@ instat_object$set("public", "append_data_object", function(name, obj) {
 }
 )
 
-instat_object$set("public", "get_data_objects", function(data_name) {
+instat_object$set("public", "get_data_objects", function(data_name, as_list = FALSE) {
   if(missing(data_name)) {
     return(private$.data_objects)
   }
@@ -227,7 +227,7 @@ instat_object$set("public", "get_data_objects", function(data_name) {
     
     if(type=="character" && !all(data_name %in% names(private$.data_objects))) stop(paste(data_name, "not found"))
     if(type=="integer" && (!all(1 <= data_name) || !all(data_name <= length(private$.data_objects)))) stop(paste(data_name, "not found"))
-    if(length(data_name) > 1) return(private$.data_objects[data_name])
+    if(length(data_name) > 1 || as_list) return(private$.data_objects[data_name])
     else return(private$.data_objects[[data_name]])
   }
 }
@@ -671,28 +671,34 @@ instat_object$set("public", "convert_column_to_type", function(data_name, col_na
 } 
 )
 
-instat_object$set("public", "append_to_variables_metadata", function(data_name, col_names, property, new_val) {
+instat_object$set("public", "append_to_variables_metadata", function(data_name, col_names, property, new_val = "") {
   self$get_data_objects(data_name)$append_to_variables_metadata(col_names, property, new_val)
 } 
 )
 
-instat_object$set("public", "append_to_dataframe_metadata", function(data_name, property, new_val) {
+instat_object$set("public", "append_to_dataframe_metadata", function(data_name, property, new_val = "") {
   self$get_data_objects(data_name)$append_to_metadata(property, new_val)
 } 
 )
 
-instat_object$set("public", "append_to_metadata", function(property, new_val) {
-  if(missing(property) || missing(new_val)) {
-    stop("property and new_val arguments must be specified.")
-  } 
+instat_object$set("public", "append_to_metadata", function(property, new_val = "") {
+  if(missing(property)) stop("property and new_val arguments must be specified.")
   
   if(!is.character(property)) stop("property must be of type character")
   
   private$.metadata[[property]] <- new_val
   self$metadata_changed <- TRUE
-  #TODO should there be a changes list?
-  #self$append_to_changes(list(Added_metadata, property))
-} 
+  self$append_to_changes(list(Added_metadata, property))
+}
+)
+
+instat_object$set("public", "add_metadata_field", function(data_name, property, new_val = "") {
+  if(missing(property)) stop("property and new_val arguments must be specified.")
+  if(data_name == overall_label) {
+    invisible(sapply(self$get_data_objects(), function(x) x$append_to_metadata(property, new_val)))
+  }
+  else invisible(sapply(self$get_data_objects(data_name, as_list = TRUE), function(x) x$append_to_variables_metadata(property = property, new_val = new_val)))
+}
 )
 
 instat_object$set("public", "reorder_dataframes", function(data_frames_order) {
@@ -753,7 +759,7 @@ instat_object$set("public","set_hidden_columns", function(data_name, col_names) 
 )
 
 instat_object$set("public","unhide_all_columns", function(data_name) {
-  if(missing(data_name)) sapply(self$get_data_objects(), function(obj) obj$unhide_all_columns())
+  if(missing(data_name)) invisible(sapply(self$get_data_objects(), function(obj) obj$unhide_all_columns()))
   else self$get_data_objects(data_name)$unhide_all_columns()
 } 
 )
