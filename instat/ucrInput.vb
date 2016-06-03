@@ -89,19 +89,22 @@ Public Class ucrInput
     End Sub
 
     Public Sub SetDefaultName()
-
         If strDefaultPrefix <> "" Then
             If strDefaultType = "Column" AndAlso (ucrDataFrameSelector IsNot Nothing) Then
                 SetName(frmMain.clsRLink.GetDefaultColumnNames(strDefaultPrefix, ucrDataFrameSelector.cboAvailableDataFrames.Text))
             ElseIf strDefaultType = "Model" Then
             ElseIf strDefaultType = "Data Frame" Then
             ElseIf strDefaultType = "Graph" Then
+                If ucrDataFrameSelector IsNot Nothing Then
+                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
+                Else
+                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames()))
+                End If
             ElseIf strDefaultType = "Filter" AndAlso (ucrDataFrameSelector IsNot Nothing) Then
                 SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
             End If
         End If
     End Sub
-
 
     Public Sub SetValidationTypeAsNumeric(Optional dcmMin As Decimal = Decimal.MinValue, Optional bIncludeMin As Boolean = True, Optional dcmMax As Decimal = Decimal.MaxValue, Optional bIncludeMax As Boolean = True)
         strValidationType = "Numeric"

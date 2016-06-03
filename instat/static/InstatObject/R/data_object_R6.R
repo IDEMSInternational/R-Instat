@@ -999,12 +999,13 @@ data_object$set("public", "get_variables_metadata_fields", function(as_list = FA
 
 data_object$set("public", "add_object", function(object, object_name) {
   if(missing(object_name)) object_name = next_default_item("object", names(private$objects))
+  if(object_name %in% names(private$objects)) message("An object called ", object_name, " already exists. It will be replaced.")
   private$objects[[object_name]] <- object
   self$append_to_changes(list(Added_object, object_name))
 }
 )
 
-data_object$set("public", "get_objects", function(object_name) {
+data_object$set("public", "get_objects", function(object_name, type) {
   if(missing(object_name)) return(private$objects)
   if(!is.character(object_name)) stop("object_name must be a character")
   if(!object_name %in% names(private$objects)) stop(object_name, "not found in models")
@@ -1012,13 +1013,12 @@ data_object$set("public", "get_objects", function(object_name) {
 }
 )
 
-data_object$set("public", "get_object_names", function() {
-  return(names(private$objects))
-}
-)
-
-data_object$set("public", "get_models", function(model_name) {
-  #TODO
-  self$get_objects(object_name = model_name)
+data_object$set("public", "get_object_names", function(type) {
+  if(missing(type)) return(names(private$objects))
+  else {
+    if(type == model_label) return(names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg") %in% class(x)))])
+    else if(type == graph_label) return(names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg") %in% class(x)))])
+    else stop("type: ", type, " not recognised")
+  }
 }
 )
