@@ -350,7 +350,6 @@ Public Class dlgImportDataset
         ucrInputDecimal.SetName("Period")
         ucrInputQuote.SetName("Double quote")
         ucrInputComment.SetName("None")
-        SetNAStringsText("NA")
         ucrInputNAStrings.SetName("NA")
         nudSkips.Value = 0
     End Sub
