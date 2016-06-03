@@ -86,15 +86,12 @@ Public Class dlgRowNamesOrNumbers
                 ucrBaseRownamesorNumbers.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
                 ucrBaseRownamesorNumbers.clsRsyntax.AddParameter(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
                 chkDecreasingforRownamesOrNumbers.Visible = True
-                If chkDecreasingforRownamesOrNumbers.Checked Then
-                    ucrBaseRownamesorNumbers.clsRsyntax.AddParameter("decreasing", "TRUE")
-                Else
-                    ucrBaseRownamesorNumbers.clsRsyntax.AddParameter("decreasing", "FALSE")
-                End If
+
             End If
-            End If
+        End If
 
     End Sub
+
 
     Private Sub ucrBaseRownamesorNumbers_Load(sender As Object, e As EventArgs) Handles ucrBaseRownamesorNumbers.Load
 
@@ -104,5 +101,13 @@ Public Class dlgRowNamesOrNumbers
 
     End Sub
 
-
+    Private Sub chkDecreasingforRownamesOrNumbers_CheckedChanged(sender As Object, e As EventArgs) Handles chkDecreasingforRownamesOrNumbers.CheckedChanged
+        If chkDecreasingforRownamesOrNumbers.Checked Then
+            ucrBaseRownamesorNumbers.clsRsyntax.AddParameter("decreasing", "TRUE")
+            MsgBox("when decreasing is checked")
+        Else
+            ucrBaseRownamesorNumbers.clsRsyntax.AddParameter("decreasing", "FALSE")
+            MsgBox("when decreasing is unchecked")
+        End If
+    End Sub
 End Class
