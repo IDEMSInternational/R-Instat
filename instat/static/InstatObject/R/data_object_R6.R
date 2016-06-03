@@ -1006,7 +1006,7 @@ data_object$set("public", "add_object", function(object, object_name) {
 }
 )
 
-data_object$set("public", "get_objects", function(object_name, type) {
+data_object$set("public", "get_objects", function(object_name, type = "") {
   curr_objects = private$objects[self$get_object_names(type = type)]
   if(length(curr_objects) == 0) return(curr_objects)
   if(missing(object_name)) return(curr_objects)
@@ -1016,8 +1016,8 @@ data_object$set("public", "get_objects", function(object_name, type) {
 }
 )
 
-data_object$set("public", "get_object_names", function(type) {
-  if(missing(type)) return(names(private$objects))
+data_object$set("public", "get_object_names", function(type = "") {
+  if(type == "") return(names(private$objects))
   else {
     if(type == model_label) return(names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg") %in% class(x)))])
     else if(type == graph_label) return(names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg") %in% class(x)))])
