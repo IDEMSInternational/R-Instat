@@ -63,7 +63,7 @@ Public Class dlgTransformText
         ucrReceiverFirstWord.SetIncludedDataTypes({"numeric"})
         ucrReceiverTransformText.SetIncludedDataTypes({"factor", "character"})
         ucrReceiverLastWord.SetIncludedDataTypes({"numeric"})
-
+        ucrBase.iHelpTopicID = 343
     End Sub
 
     Private Sub SetDefaults()

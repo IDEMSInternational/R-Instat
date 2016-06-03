@@ -38,7 +38,7 @@ Public Class dlgMerge
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 60
     End Sub
     Private Sub SetDefaults()
 

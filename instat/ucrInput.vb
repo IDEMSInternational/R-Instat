@@ -72,6 +72,11 @@ Public Class ucrInput
         SetDefaultName()
     End Sub
 
+    Public Sub SetDefaultTypeAsFilter()
+        strDefaultType = "Filter"
+        SetDefaultName()
+    End Sub
+
     Public Overridable Sub SetDataFrameSelector(ucrNewSelector As ucrDataFrame)
         ucrDataFrameSelector = ucrNewSelector
         If Not bUserTyped Then
@@ -85,12 +90,15 @@ Public Class ucrInput
     End Sub
 
     Public Sub SetDefaultName()
+
         If strDefaultPrefix <> "" Then
             If strDefaultType = "Column" AndAlso (ucrDataFrameSelector IsNot Nothing) Then
                 SetName(frmMain.clsRLink.GetDefaultColumnNames(strDefaultPrefix, ucrDataFrameSelector.cboAvailableDataFrames.Text))
             ElseIf strDefaultType = "Model" Then
             ElseIf strDefaultType = "Data Frame" Then
             ElseIf strDefaultType = "Graph" Then
+            ElseIf strDefaultType = "Filter" AndAlso (ucrDataFrameSelector IsNot Nothing) Then
+                SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
             End If
         End If
     End Sub

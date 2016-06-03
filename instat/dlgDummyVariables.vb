@@ -46,6 +46,7 @@ Public Class dlgDummyVariables
     End Sub
 
     Public Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 41
         ucrBase.clsRsyntax.SetFunction("")
         ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverFactor.Selector = ucrSelectorDummyVariable

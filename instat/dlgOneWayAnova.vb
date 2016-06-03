@@ -39,7 +39,7 @@ Public Class dlgOneWayANOVA
 
         autoTranslate(Me)
 
-        ucrBase.iHelpTopicID = 315
+        ucrBase.iHelpTopicID = 160
     End Sub
 
     Private Sub SetDefaultSettings()

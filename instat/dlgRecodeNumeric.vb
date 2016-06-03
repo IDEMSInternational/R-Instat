@@ -28,7 +28,7 @@ Public Class dlgRecodeNumeric
             ReopenDialog()
         End If
         TestOKEnabled()
-        ucrBase.iHelpTopicID = 37
+        ucrBase.iHelpTopicID = 43
     End Sub
     Private Sub InitialiseDialog()
         ucrReceiverRecode.Selector = ucrSelectorForRecode
