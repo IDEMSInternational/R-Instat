@@ -27,7 +27,7 @@ Public Class ucrInput
     Protected strDefaultPrefix As String = ""
     Protected WithEvents ucrDataFrameSelector As ucrDataFrame
 
-    Public Overridable Sub SetName(strName As String)
+    Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
     End Sub
 
     Public Overridable Function GetText() As String
@@ -36,13 +36,14 @@ Public Class ucrInput
 
     Public Overridable Sub Reset()
         bUserTyped = False
+        SetDefaultName()
     End Sub
 
     Public Sub OnNameChanged()
         RaiseEvent NameChanged()
     End Sub
 
-    Public Function UserTyped()
+    Public Function UserTyped() As Boolean
         Return bUserTyped
     End Function
 
@@ -89,19 +90,22 @@ Public Class ucrInput
     End Sub
 
     Public Sub SetDefaultName()
-
         If strDefaultPrefix <> "" Then
             If strDefaultType = "Column" AndAlso (ucrDataFrameSelector IsNot Nothing) Then
                 SetName(frmMain.clsRLink.GetDefaultColumnNames(strDefaultPrefix, ucrDataFrameSelector.cboAvailableDataFrames.Text))
             ElseIf strDefaultType = "Model" Then
             ElseIf strDefaultType = "Data Frame" Then
             ElseIf strDefaultType = "Graph" Then
+                If ucrDataFrameSelector IsNot Nothing Then
+                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
+                Else
+                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames()))
+                End If
             ElseIf strDefaultType = "Filter" AndAlso (ucrDataFrameSelector IsNot Nothing) Then
                 SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
             End If
         End If
     End Sub
-
 
     Public Sub SetValidationTypeAsNumeric(Optional dcmMin As Decimal = Decimal.MinValue, Optional bIncludeMin As Boolean = True, Optional dcmMax As Decimal = Decimal.MaxValue, Optional bIncludeMax As Boolean = True)
         strValidationType = "Numeric"
@@ -175,7 +179,7 @@ Public Class ucrInput
 
         Select Case iValidationCode
             Case 0
-                RaiseEvent NameChanged()
+
             Case 1
                 Select Case strValidationType
                     Case "RVariable"

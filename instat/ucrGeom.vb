@@ -47,6 +47,10 @@ Public Class ucrGeom
         cboGeomList.SelectedIndex = 0
     End Sub
 
+    Public Sub SetFuncSync(clsGeomFunc As RFunction)
+        clsGeomFunction = clsGeomFunc
+    End Sub
+
     Public Sub AddParameter(strAesParameterName As String, strAesParameterValue As String)
         'this adds parameters TODO pass appropriate parameters.
         Dim i As Integer
@@ -161,6 +165,9 @@ Public Class ucrGeom
         clsgeom_boxplot.AddAesParameter("size", strIncludedDataTypes:={"factor"})
         clsgeom_boxplot.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
         clsgeom_boxplot.AddAesParameter("group", strIncludedDataTypes:={"factor"})
+
+        'adding layerParameters
+        clsgeom_boxplot.AddLayerParameter("notch", "boolean", "TRUE")
         lstAllGeoms.Add(clsgeom_boxplot)
 
         clsgeom_contour.strGeomName = "geom_contour"
@@ -595,7 +602,7 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_vline)
     End Sub
     Public Event GeomChanged(sender As Object, e As EventArgs)
-    Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
+    Private Sub cboGeomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
         clsCurrGeom = lstAllGeoms(cboGeomList.SelectedIndex)
         clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
         RaiseEvent GeomChanged(sender, e)
