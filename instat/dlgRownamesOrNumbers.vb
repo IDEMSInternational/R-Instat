@@ -104,10 +104,10 @@ Public Class dlgRowNamesOrNumbers
     Private Sub chkDecreasingforRownamesOrNumbers_CheckedChanged(sender As Object, e As EventArgs) Handles chkDecreasingforRownamesOrNumbers.CheckedChanged
         If chkDecreasingforRownamesOrNumbers.Checked Then
             ucrBaseRownamesorNumbers.clsRsyntax.AddParameter("decreasing", "TRUE")
-            MsgBox("when decreasing is checked")
+
         Else
             ucrBaseRownamesorNumbers.clsRsyntax.AddParameter("decreasing", "FALSE")
-            MsgBox("when decreasing is unchecked")
+
         End If
     End Sub
 End Class
