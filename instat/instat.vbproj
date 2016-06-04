@@ -306,6 +306,12 @@
     <Compile Include="dlgExportDataset.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFreezeColumns.Designer.vb">
+      <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFreezeColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFromLibrary.Designer.vb">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
     </Compile>
@@ -1914,6 +1920,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFreezeColumns.resx">
+      <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.fr-FR.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
@@ -4332,9 +4341,6 @@
     <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\formatR_1.4.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\GGally_1.0.1.zip">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\ggplot2_2.1.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -4561,6 +4567,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\RPackages\ggfortify_0.1.0.tar.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\ggfortify_0.2.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\GGally_1.1.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
