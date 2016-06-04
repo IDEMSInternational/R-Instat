@@ -462,4 +462,8 @@ Public Class frmEditor
     Private Sub mnuRemoveCurrentFilter_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentFilter.Click
         frmMain.clsRLink.RunScript(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
     End Sub
+
+    Private Sub frmEditor_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        frmMain.mnuViewDataView.Checked = Me.Visible
+    End Sub
 End Class
