@@ -34,8 +34,8 @@ Public Class ucrGeom
         End If
     End Sub
     Private Sub InitialiseControl()
-        clsRaesFunction.SetRCommand("aes")
-        clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        '    clsRaesFunction.SetRCommand("aes")
+        '    clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
     End Sub
 
     Public Sub SetGeoms()
@@ -168,6 +168,10 @@ Public Class ucrGeom
 
         'adding layerParameters
         clsgeom_boxplot.AddLayerParameter("notch", "boolean", "TRUE")
+        clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "1.5")
+        clsgeom_boxplot.AddLayerParameter("varwidth", "boolean", "TRUE")
+        clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5")
+        clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "1.5")
         lstAllGeoms.Add(clsgeom_boxplot)
 
         clsgeom_contour.strGeomName = "geom_contour"

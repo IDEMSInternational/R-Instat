@@ -42,6 +42,10 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam8.Selector = UcrSelector
         ucrReceiverParam9.Selector = UcrSelector
         ucrReceiverParam1.SetMeAsReceiver()
+
+        clsRaesFunction.SetRCommand("aes")
+        clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+
     End Sub
 
     Private Sub SetDefaults()
