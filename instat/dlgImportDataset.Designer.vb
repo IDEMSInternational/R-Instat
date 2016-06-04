@@ -34,24 +34,23 @@ Partial Class dlgImportDataset
         Me.lblQuote = New System.Windows.Forms.Label()
         Me.lblComment = New System.Windows.Forms.Label()
         Me.lblNAStrings = New System.Windows.Forms.Label()
-        Me.cboEncoding = New System.Windows.Forms.ComboBox()
-        Me.cboRowNames = New System.Windows.Forms.ComboBox()
-        Me.cboSeparator = New System.Windows.Forms.ComboBox()
-        Me.cboDecimal = New System.Windows.Forms.ComboBox()
-        Me.cboQuote = New System.Windows.Forms.ComboBox()
-        Me.cboComment = New System.Windows.Forms.ComboBox()
-        Me.txtNAStrings = New System.Windows.Forms.TextBox()
         Me.rdoHeadingsYes = New System.Windows.Forms.RadioButton()
         Me.rdoHeadingsNo = New System.Windows.Forms.RadioButton()
-        Me.txtInputFile = New System.Windows.Forms.TextBox()
+        Me.txt = New System.Windows.Forms.TextBox()
         Me.chlStringsAsFactors = New System.Windows.Forms.CheckBox()
         Me.grdDataPreview = New unvell.ReoGrid.ReoGridControl()
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
         Me.lblLinesToSkip = New System.Windows.Forms.Label()
-        Me.txtFilePath = New System.Windows.Forms.TextBox()
         Me.nudSkips = New System.Windows.Forms.NumericUpDown()
         Me.cmdOpenDataSet = New System.Windows.Forms.Button()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
+        Me.ucrInputNAStrings = New instat.ucrInputTextBox()
+        Me.ucrInputComment = New instat.ucrInputComboBox()
+        Me.ucrInputQuote = New instat.ucrInputComboBox()
+        Me.ucrInputDecimal = New instat.ucrInputComboBox()
+        Me.ucrInputSeparator = New instat.ucrInputComboBox()
+        Me.ucrInputRowNames = New instat.ucrInputComboBox()
+        Me.ucrInputEncoding = New instat.ucrInputComboBox()
         Me.grpExcel = New System.Windows.Forms.GroupBox()
         Me.ucrInputColsToRead = New instat.ucrInputTextBox()
         Me.ucrInputRowsToRead = New instat.ucrInputTextBox()
@@ -79,6 +78,7 @@ Partial Class dlgImportDataset
         Me.ucrInputName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblCannotImport = New System.Windows.Forms.Label()
+        Me.ucrInputFilePath = New instat.ucrInputTextBox()
         CType(Me.nudSkips, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
@@ -109,7 +109,7 @@ Partial Class dlgImportDataset
         'lblName
         '
         Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(12, 61)
+        Me.lblName.Location = New System.Drawing.Point(12, 64)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(35, 13)
         Me.lblName.TabIndex = 2
@@ -195,67 +195,6 @@ Partial Class dlgImportDataset
         Me.lblNAStrings.TabIndex = 10
         Me.lblNAStrings.Text = "na.strings"
         '
-        'cboEncoding
-        '
-        Me.cboEncoding.FormattingEnabled = True
-        Me.cboEncoding.Items.AddRange(New Object() {"Automatic"})
-        Me.cboEncoding.Location = New System.Drawing.Point(75, 24)
-        Me.cboEncoding.Name = "cboEncoding"
-        Me.cboEncoding.Size = New System.Drawing.Size(136, 21)
-        Me.cboEncoding.TabIndex = 12
-        '
-        'cboRowNames
-        '
-        Me.cboRowNames.FormattingEnabled = True
-        Me.cboRowNames.Items.AddRange(New Object() {"Automatic", "Use first column", "Use numbers"})
-        Me.cboRowNames.Location = New System.Drawing.Point(75, 91)
-        Me.cboRowNames.Name = "cboRowNames"
-        Me.cboRowNames.Size = New System.Drawing.Size(136, 21)
-        Me.cboRowNames.TabIndex = 14
-        '
-        'cboSeparator
-        '
-        Me.cboSeparator.FormattingEnabled = True
-        Me.cboSeparator.Items.AddRange(New Object() {"Comma", "Whitespace", "Semicolon"})
-        Me.cboSeparator.Location = New System.Drawing.Point(75, 138)
-        Me.cboSeparator.Name = "cboSeparator"
-        Me.cboSeparator.Size = New System.Drawing.Size(136, 21)
-        Me.cboSeparator.TabIndex = 15
-        '
-        'cboDecimal
-        '
-        Me.cboDecimal.FormattingEnabled = True
-        Me.cboDecimal.Items.AddRange(New Object() {"Period", "Comma"})
-        Me.cboDecimal.Location = New System.Drawing.Point(75, 182)
-        Me.cboDecimal.Name = "cboDecimal"
-        Me.cboDecimal.Size = New System.Drawing.Size(136, 21)
-        Me.cboDecimal.TabIndex = 16
-        '
-        'cboQuote
-        '
-        Me.cboQuote.FormattingEnabled = True
-        Me.cboQuote.Items.AddRange(New Object() {"Double quote ("")", "Single quote (')", "None"})
-        Me.cboQuote.Location = New System.Drawing.Point(75, 231)
-        Me.cboQuote.Name = "cboQuote"
-        Me.cboQuote.Size = New System.Drawing.Size(136, 21)
-        Me.cboQuote.TabIndex = 17
-        '
-        'cboComment
-        '
-        Me.cboComment.FormattingEnabled = True
-        Me.cboComment.Items.AddRange(New Object() {"#", "%", "@", "~", "/", "None"})
-        Me.cboComment.Location = New System.Drawing.Point(75, 279)
-        Me.cboComment.Name = "cboComment"
-        Me.cboComment.Size = New System.Drawing.Size(136, 21)
-        Me.cboComment.TabIndex = 18
-        '
-        'txtNAStrings
-        '
-        Me.txtNAStrings.Location = New System.Drawing.Point(75, 313)
-        Me.txtNAStrings.Name = "txtNAStrings"
-        Me.txtNAStrings.Size = New System.Drawing.Size(100, 20)
-        Me.txtNAStrings.TabIndex = 19
-        '
         'rdoHeadingsYes
         '
         Me.rdoHeadingsYes.AutoSize = True
@@ -280,14 +219,14 @@ Partial Class dlgImportDataset
         Me.rdoHeadingsNo.Text = "No"
         Me.rdoHeadingsNo.UseVisualStyleBackColor = True
         '
-        'txtInputFile
+        'txt
         '
-        Me.txtInputFile.Location = New System.Drawing.Point(241, 25)
-        Me.txtInputFile.Multiline = True
-        Me.txtInputFile.Name = "txtInputFile"
-        Me.txtInputFile.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtInputFile.Size = New System.Drawing.Size(422, 205)
-        Me.txtInputFile.TabIndex = 22
+        Me.txt.Location = New System.Drawing.Point(241, 25)
+        Me.txt.Multiline = True
+        Me.txt.Name = "txt"
+        Me.txt.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txt.Size = New System.Drawing.Size(422, 205)
+        Me.txt.TabIndex = 22
         '
         'chlStringsAsFactors
         '
@@ -335,14 +274,6 @@ Partial Class dlgImportDataset
         Me.lblLinesToSkip.TabIndex = 30
         Me.lblLinesToSkip.Text = "Lines To Skip"
         '
-        'txtFilePath
-        '
-        Me.txtFilePath.Location = New System.Drawing.Point(50, 25)
-        Me.txtFilePath.Name = "txtFilePath"
-        Me.txtFilePath.ReadOnly = True
-        Me.txtFilePath.Size = New System.Drawing.Size(110, 20)
-        Me.txtFilePath.TabIndex = 31
-        '
         'nudSkips
         '
         Me.nudSkips.Location = New System.Drawing.Point(152, 339)
@@ -364,6 +295,13 @@ Partial Class dlgImportDataset
         '
         Me.grpCSV.AutoSize = True
         Me.grpCSV.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.grpCSV.Controls.Add(Me.ucrInputNAStrings)
+        Me.grpCSV.Controls.Add(Me.ucrInputComment)
+        Me.grpCSV.Controls.Add(Me.ucrInputQuote)
+        Me.grpCSV.Controls.Add(Me.ucrInputDecimal)
+        Me.grpCSV.Controls.Add(Me.ucrInputSeparator)
+        Me.grpCSV.Controls.Add(Me.ucrInputRowNames)
+        Me.grpCSV.Controls.Add(Me.ucrInputEncoding)
         Me.grpCSV.Controls.Add(Me.lblEncoding)
         Me.grpCSV.Controls.Add(Me.lblHeading)
         Me.grpCSV.Controls.Add(Me.nudSkips)
@@ -375,15 +313,8 @@ Partial Class dlgImportDataset
         Me.grpCSV.Controls.Add(Me.lblComment)
         Me.grpCSV.Controls.Add(Me.lblNAStrings)
         Me.grpCSV.Controls.Add(Me.chlStringsAsFactors)
-        Me.grpCSV.Controls.Add(Me.cboEncoding)
-        Me.grpCSV.Controls.Add(Me.cboRowNames)
         Me.grpCSV.Controls.Add(Me.rdoHeadingsNo)
-        Me.grpCSV.Controls.Add(Me.cboSeparator)
         Me.grpCSV.Controls.Add(Me.rdoHeadingsYes)
-        Me.grpCSV.Controls.Add(Me.cboDecimal)
-        Me.grpCSV.Controls.Add(Me.txtNAStrings)
-        Me.grpCSV.Controls.Add(Me.cboQuote)
-        Me.grpCSV.Controls.Add(Me.cboComment)
         Me.grpCSV.Location = New System.Drawing.Point(15, 87)
         Me.grpCSV.Name = "grpCSV"
         Me.grpCSV.Size = New System.Drawing.Size(217, 415)
@@ -391,6 +322,55 @@ Partial Class dlgImportDataset
         Me.grpCSV.TabStop = False
         Me.grpCSV.Text = "Import csv Options"
         Me.grpCSV.Visible = False
+        '
+        'ucrInputNAStrings
+        '
+        Me.ucrInputNAStrings.Location = New System.Drawing.Point(74, 311)
+        Me.ucrInputNAStrings.Name = "ucrInputNAStrings"
+        Me.ucrInputNAStrings.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputNAStrings.TabIndex = 39
+        '
+        'ucrInputComment
+        '
+        Me.ucrInputComment.Location = New System.Drawing.Point(74, 280)
+        Me.ucrInputComment.Name = "ucrInputComment"
+        Me.ucrInputComment.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputComment.TabIndex = 38
+        '
+        'ucrInputQuote
+        '
+        Me.ucrInputQuote.Location = New System.Drawing.Point(74, 229)
+        Me.ucrInputQuote.Name = "ucrInputQuote"
+        Me.ucrInputQuote.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputQuote.TabIndex = 37
+        '
+        'ucrInputDecimal
+        '
+        Me.ucrInputDecimal.Location = New System.Drawing.Point(74, 182)
+        Me.ucrInputDecimal.Name = "ucrInputDecimal"
+        Me.ucrInputDecimal.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDecimal.TabIndex = 36
+        '
+        'ucrInputSeparator
+        '
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(74, 140)
+        Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        Me.ucrInputSeparator.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSeparator.TabIndex = 35
+        '
+        'ucrInputRowNames
+        '
+        Me.ucrInputRowNames.Location = New System.Drawing.Point(74, 96)
+        Me.ucrInputRowNames.Name = "ucrInputRowNames"
+        Me.ucrInputRowNames.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowNames.TabIndex = 34
+        '
+        'ucrInputEncoding
+        '
+        Me.ucrInputEncoding.Location = New System.Drawing.Point(62, 25)
+        Me.ucrInputEncoding.Name = "ucrInputEncoding"
+        Me.ucrInputEncoding.Size = New System.Drawing.Size(149, 21)
+        Me.ucrInputEncoding.TabIndex = 33
         '
         'grpExcel
         '
@@ -652,22 +632,29 @@ Partial Class dlgImportDataset
         Me.lblCannotImport.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.lblCannotImport.Visible = False
         '
+        'ucrInputFilePath
+        '
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(39, 25)
+        Me.ucrInputFilePath.Name = "ucrInputFilePath"
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(119, 21)
+        Me.ucrInputFilePath.TabIndex = 37
+        '
         'dlgImportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(668, 499)
+        Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.lblCannotImport)
         Me.Controls.Add(Me.grpCSV)
         Me.Controls.Add(Me.ucrInputName)
         Me.Controls.Add(Me.grpExcel)
         Me.Controls.Add(Me.grpRDS)
         Me.Controls.Add(Me.cmdOpenDataSet)
-        Me.Controls.Add(Me.txtFilePath)
         Me.Controls.Add(Me.lblFileOpenPath)
         Me.Controls.Add(Me.grdDataPreview)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.txtInputFile)
+        Me.Controls.Add(Me.txt)
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.lblDataFrame)
         Me.Controls.Add(Me.lblInputFile)
@@ -700,22 +687,14 @@ Partial Class dlgImportDataset
     Friend WithEvents lblQuote As Label
     Friend WithEvents lblComment As Label
     Friend WithEvents lblNAStrings As Label
-    Friend WithEvents cboEncoding As ComboBox
-    Friend WithEvents cboRowNames As ComboBox
-    Friend WithEvents cboSeparator As ComboBox
-    Friend WithEvents cboDecimal As ComboBox
-    Friend WithEvents cboQuote As ComboBox
-    Friend WithEvents cboComment As ComboBox
-    Friend WithEvents txtNAStrings As TextBox
     Friend WithEvents rdoHeadingsYes As RadioButton
     Friend WithEvents rdoHeadingsNo As RadioButton
-    Friend WithEvents txtInputFile As TextBox
+    Friend WithEvents txt As TextBox
     Friend WithEvents chlStringsAsFactors As CheckBox
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grdDataPreview As unvell.ReoGrid.ReoGridControl
     Friend WithEvents lblFileOpenPath As Label
     Friend WithEvents lblLinesToSkip As Label
-    Friend WithEvents txtFilePath As TextBox
     Friend WithEvents nudSkips As NumericUpDown
     Friend WithEvents cmdOpenDataSet As Button
     Friend WithEvents grpCSV As GroupBox
@@ -745,4 +724,12 @@ Partial Class dlgImportDataset
     Friend WithEvents ucrInputColsToRead As ucrInputTextBox
     Friend WithEvents ucrInputRowsToRead As ucrInputTextBox
     Friend WithEvents lblCannotImport As Label
+    Friend WithEvents ucrInputFilePath As ucrInputTextBox
+    Friend WithEvents ucrInputEncoding As ucrInputComboBox
+    Friend WithEvents ucrInputRowNames As ucrInputComboBox
+    Friend WithEvents ucrInputSeparator As ucrInputComboBox
+    Friend WithEvents ucrInputNAStrings As ucrInputTextBox
+    Friend WithEvents ucrInputComment As ucrInputComboBox
+    Friend WithEvents ucrInputQuote As ucrInputComboBox
+    Friend WithEvents ucrInputDecimal As ucrInputComboBox
 End Class
