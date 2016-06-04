@@ -49,6 +49,7 @@ Public Class dlgFromLibrary
 
     Private Sub cmdLibraryCollection_Click(sender As Object, e As EventArgs) Handles cmdLibraryCollection.Click
         dlgImportDataset.bFromLibrary = True
+        dlgImportDataset.bStartOpenDialog = True
         dlgImportDataset.ShowDialog()
         Me.Hide()
     End Sub

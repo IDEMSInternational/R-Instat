@@ -24,19 +24,19 @@ Partial Class dlgOneWayANOVA
     Private Sub InitializeComponent()
         Me.lblYVariate = New System.Windows.Forms.Label()
         Me.lblFactor = New System.Windows.Forms.Label()
-        Me.lblFittedModel = New System.Windows.Forms.Label()
-        Me.txtFittedModel = New System.Windows.Forms.TextBox()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrAddRemoveDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrYVariate = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFactor = New instat.ucrReceiverSingle()
+        Me.lblFittedModel = New System.Windows.Forms.Label()
+        Me.UcrInputTextBox1 = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblYVariate
         '
         Me.lblYVariate.AutoSize = True
-        Me.lblYVariate.Location = New System.Drawing.Point(271, 98)
+        Me.lblYVariate.Location = New System.Drawing.Point(255, 25)
         Me.lblYVariate.Name = "lblYVariate"
         Me.lblYVariate.Size = New System.Drawing.Size(49, 13)
         Me.lblYVariate.TabIndex = 5
@@ -46,37 +46,18 @@ Partial Class dlgOneWayANOVA
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(272, 148)
+        Me.lblFactor.Location = New System.Drawing.Point(255, 75)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(37, 13)
         Me.lblFactor.TabIndex = 6
         Me.lblFactor.Tag = "Factor"
         Me.lblFactor.Text = "Factor"
         '
-        'lblFittedModel
-        '
-        Me.lblFittedModel.AutoSize = True
-        Me.lblFittedModel.Location = New System.Drawing.Point(1, 221)
-        Me.lblFittedModel.Name = "lblFittedModel"
-        Me.lblFittedModel.Size = New System.Drawing.Size(64, 13)
-        Me.lblFittedModel.TabIndex = 9
-        Me.lblFittedModel.Tag = "Fitted_model"
-        Me.lblFittedModel.Text = "Fitted model"
-        '
-        'txtFittedModel
-        '
-        Me.txtFittedModel.Location = New System.Drawing.Point(84, 221)
-        Me.txtFittedModel.Name = "txtFittedModel"
-        Me.txtFittedModel.Size = New System.Drawing.Size(236, 20)
-        Me.txtFittedModel.TabIndex = 10
-        Me.txtFittedModel.Tag = "Last_ANOVA"
-        Me.txtFittedModel.Text = "Last ANOVA"
-        '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(4, 259)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 205)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdOptions.TabIndex = 11
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Options"
@@ -84,39 +65,61 @@ Partial Class dlgOneWayANOVA
         '
         'ucrAddRemoveDataFrame
         '
-        Me.ucrAddRemoveDataFrame.Location = New System.Drawing.Point(4, 20)
+        Me.ucrAddRemoveDataFrame.Location = New System.Drawing.Point(10, 10)
+        Me.ucrAddRemoveDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemoveDataFrame.Name = "ucrAddRemoveDataFrame"
         Me.ucrAddRemoveDataFrame.Size = New System.Drawing.Size(242, 179)
         Me.ucrAddRemoveDataFrame.TabIndex = 8
         '
         'ucrYVariate
         '
-        Me.ucrYVariate.Location = New System.Drawing.Point(265, 112)
+        Me.ucrYVariate.Location = New System.Drawing.Point(255, 39)
+        Me.ucrYVariate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrYVariate.Name = "ucrYVariate"
-        Me.ucrYVariate.Size = New System.Drawing.Size(106, 26)
+        Me.ucrYVariate.Selector = Nothing
+        Me.ucrYVariate.Size = New System.Drawing.Size(120, 20)
         Me.ucrYVariate.TabIndex = 3
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(4, 295)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 268)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 57)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrFactor
         '
-        Me.ucrFactor.Location = New System.Drawing.Point(265, 160)
+        Me.ucrFactor.Location = New System.Drawing.Point(255, 92)
+        Me.ucrFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactor.Name = "ucrFactor"
-        Me.ucrFactor.Size = New System.Drawing.Size(106, 26)
+        Me.ucrFactor.Selector = Nothing
+        Me.ucrFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrFactor.TabIndex = 4
+        '
+        'lblFittedModel
+        '
+        Me.lblFittedModel.AutoSize = True
+        Me.lblFittedModel.Location = New System.Drawing.Point(10, 245)
+        Me.lblFittedModel.Name = "lblFittedModel"
+        Me.lblFittedModel.Size = New System.Drawing.Size(64, 13)
+        Me.lblFittedModel.TabIndex = 9
+        Me.lblFittedModel.Tag = "Fitted_model"
+        Me.lblFittedModel.Text = "Fitted model"
+        '
+        'UcrInputTextBox1
+        '
+        Me.UcrInputTextBox1.Location = New System.Drawing.Point(80, 239)
+        Me.UcrInputTextBox1.Name = "UcrInputTextBox1"
+        Me.UcrInputTextBox1.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputTextBox1.TabIndex = 12
         '
         'dlgOneWayANOVA
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 346)
+        Me.ClientSize = New System.Drawing.Size(419, 322)
+        Me.Controls.Add(Me.UcrInputTextBox1)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.txtFittedModel)
         Me.Controls.Add(Me.lblFittedModel)
         Me.Controls.Add(Me.ucrAddRemoveDataFrame)
         Me.Controls.Add(Me.lblFactor)
@@ -139,8 +142,8 @@ Partial Class dlgOneWayANOVA
     Friend WithEvents lblYVariate As Label
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrAddRemoveDataFrame As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents lblFittedModel As Label
-    Friend WithEvents txtFittedModel As TextBox
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrFactor As ucrReceiverSingle
+    Friend WithEvents lblFittedModel As Label
+    Friend WithEvents UcrInputTextBox1 As ucrInputTextBox
 End Class

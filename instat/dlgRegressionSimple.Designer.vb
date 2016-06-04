@@ -32,7 +32,6 @@ Partial Class dlgRegressionSimple
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.chkSaveModel = New System.Windows.Forms.CheckBox()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
-        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
         Me.chkFunction = New System.Windows.Forms.CheckBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFamily = New instat.ucrDistributions()
@@ -40,6 +39,7 @@ Partial Class dlgRegressionSimple
         Me.ucrResponse = New instat.ucrReceiverSingle()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
         Me.ucrModelName = New instat.ucrVariableName()
+        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -97,13 +97,6 @@ Partial Class dlgRegressionSimple
         Me.cmdModelOptions.Tag = "Model_Options..."
         Me.cmdModelOptions.UseVisualStyleBackColor = True
         '
-        'chkConvertToVariate
-        '
-        resources.ApplyResources(Me.chkConvertToVariate, "chkConvertToVariate")
-        Me.chkConvertToVariate.Name = "chkConvertToVariate"
-        Me.chkConvertToVariate.Tag = "Convert_to_variate"
-        Me.chkConvertToVariate.UseVisualStyleBackColor = True
-        '
         'chkFunction
         '
         resources.ApplyResources(Me.chkFunction, "chkFunction")
@@ -143,17 +136,24 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.ucrModelName, "ucrModelName")
         Me.ucrModelName.Name = "ucrModelName"
         '
+        'chkConvertToVariate
+        '
+        resources.ApplyResources(Me.chkConvertToVariate, "chkConvertToVariate")
+        Me.chkConvertToVariate.Name = "chkConvertToVariate"
+        Me.chkConvertToVariate.Tag = "Convert_to_variate"
+        Me.chkConvertToVariate.UseVisualStyleBackColor = True
+        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.chkConvertToVariate)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.ucrExplanatory)
         Me.Controls.Add(Me.ucrResponse)
         Me.Controls.Add(Me.ucrSelectorSimpleReg)
         Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.chkFunction)
-        Me.Controls.Add(Me.chkConvertToVariate)
         Me.Controls.Add(Me.cmdModelOptions)
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.cmdDisplayOptions)
@@ -181,11 +181,11 @@ Partial Class dlgRegressionSimple
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents chkSaveModel As CheckBox
     Friend WithEvents cmdModelOptions As Button
-    Friend WithEvents chkConvertToVariate As CheckBox
     Friend WithEvents chkFunction As CheckBox
     Friend WithEvents ucrFamily As ucrDistributions
     Friend WithEvents ucrSelectorSimpleReg As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrResponse As ucrReceiverSingle
     Friend WithEvents ucrExplanatory As ucrReceiverSingle
     Friend WithEvents ucrModelName As ucrVariableName
+    Friend WithEvents chkConvertToVariate As CheckBox
 End Class
