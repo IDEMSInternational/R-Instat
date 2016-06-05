@@ -44,7 +44,7 @@ Public Class dlgImportDataset
         clsReadXL = New RFunction
         'clsTempWorkbookImport = New RFunction
         'clsTempExcelPreview = New RFunction
-        ucrBase.clsRsyntax.SetFunction("import")
+        ucrBase.clsRsyntax.SetFunction("rio::import")
         bFirstLoad = True
         bFromLibrary = False
         strLibraryPath = frmMain.strStaticPath & "\Library"
@@ -175,7 +175,7 @@ Public Class dlgImportDataset
                     strFileType = "RDS"
                     ucrInputName.SetName(strFileName, bSilent:=True)
                 ElseIf strFileExt = ".csv" Then
-                    clsReadCSV.SetRCommand("import")
+                    clsReadCSV.SetRCommand("rio::import")
                     clsReadCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                     ucrBase.clsRsyntax.SetBaseRFunction(clsReadCSV)
                     grpRDS.Hide()
@@ -188,7 +188,7 @@ Public Class dlgImportDataset
                     RefreshFilePreview()
                     RefreshFrameView()
                 ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
-                    clsReadXL.SetRCommand("import")
+                    clsReadXL.SetRCommand("rio::import")
                     clsReadXL.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                     ucrBase.clsRsyntax.SetBaseRFunction(clsReadXL)
                     grpCSV.Hide()
@@ -206,7 +206,7 @@ Public Class dlgImportDataset
                     RefreshFrameView()
                     'ucrInputName.SetName(strFileName, bSilent:=True)
                 Else
-                    ucrBase.clsRsyntax.SetFunction("import")
+                    ucrBase.clsRsyntax.SetFunction("rio::import")
                     ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                     grpCSV.Hide()
                     grpExcel.Hide()
@@ -606,14 +606,21 @@ Public Class dlgImportDataset
         If Not ucrInputSheets.IsEmpty() Then
             If strFileType = "xlsx" Then
                 clsReadXL.AddParameter("which", ucrInputSheets.cboInput.SelectedIndex + 1)
-            Else
+                If Not ucrInputName.UserTyped() Then
+                    ucrInputName.SetName(ucrInputSheets.GetText(), bSilent:=True)
+                    ucrInputName.Focus()
+                End If
+            ElseIf strFileType = "xls" Then
                 clsReadXL.AddParameter("sheet", ucrInputSheets.cboInput.SelectedIndex + 1)
+                If Not ucrInputName.UserTyped() Then
+                    ucrInputName.SetName(ucrInputSheets.GetText(), bSilent:=True)
+                    ucrInputName.Focus()
+                End If
+            Else
+                clsReadXL.RemoveParameterByName("sheet")
+                clsReadXL.RemoveParameterByName("which")
             End If
             'ucrInputNamedRegions.SetName("")
-            If Not ucrInputName.UserTyped() Then
-                ucrInputName.SetName(ucrInputSheets.GetText(), bSilent:=True)
-                ucrInputName.Focus()
-            End If
         Else
             clsReadXL.RemoveParameterByName("sheet")
             clsReadXL.RemoveParameterByName("which")
