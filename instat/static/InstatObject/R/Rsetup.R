@@ -31,6 +31,8 @@ library(devtools)
 library(factoextra)
 library(circlize)
 library(CircStats)
+library(rio)
+library(readxl)
 setwd(dirname(parent.frame(2)$ofile))
 
 
