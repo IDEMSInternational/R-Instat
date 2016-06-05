@@ -2,11 +2,9 @@
 library("miniCRAN")
 
 # Specify list of packages to download
-pkgs <- c("openxlsx", "reshape2", "lubridate","plyr", "rtf", "ggplot2", "extRemes", "GGally", "CCA", "plotrix", "agridat", "DAAG", "FactoMineR", "plotrix", "agridat", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "proto", "tidyr", "gridExtra", "ggfortify")
-#pkgs <- c("tidyr", "gridExtra", "scales", "proto", "ggplot2")
+pkgs <- c("openxlsx", "reshape2", "lubridate","plyr", "rtf", "ggplot2", "extRemes", "GGally", "CCA", "plotrix", "agridat", "DAAG", "FactoMineR", "plotrix", "agridat", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "proto", "tidyr", "gridExtra", "ggfortify", "rio")
 pkgList <- pkgDep(pkgs, type="win.binary", suggests = FALSE, includeBasePkgs = FALSE, Rversion = "3.3")
-#pkgList
-pth = "C:/Users/Danny/Documents/GitHubVisualStudio/Instat/instat/static/InstatObject/R/RPackages"
+pth = "C:/Users/Danny/Documents/RPackages"
 revolution <- c(CRAN="http://cran.microsoft.com")
 makeRepo(pkgList, path = pth, type = "win.binary", Rversion = "3.3")
 
