@@ -99,6 +99,10 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE) {
     if ( length(new_data) == 0 && messages) {
       message("data of object:is empty. Data will be an empty data frame.")
     }
+    if(anyDuplicated(names(new_data))) {
+      warning("Column names are not unique. make.unique() will be used to force uniqueness.")
+      names(new_data) <- make.unique(names(new_data))
+    }
     private$data <- new_data
     self$append_to_changes(list(Set_property, "data"))
     self$data_changed <- TRUE
@@ -182,6 +186,8 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 )
 
 data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE) {
+  print(names(private$data[ , !self$get_variables_metadata(property = is_hidden_label)])[54])
+  print(names(private$data)[54])
   if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out = private$data[ , !self$get_variables_metadata(property = is_hidden_label)]
   else out = private$data
   if(use_current_filter && length(private$.current_filter) > 0) {
