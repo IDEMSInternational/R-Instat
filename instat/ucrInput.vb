@@ -39,6 +39,7 @@ Public Class ucrInput
     End Sub
 
     Public Sub OnNameChanged()
+        Me.Text = Me.GetText()
         RaiseEvent NameChanged()
     End Sub
 
@@ -336,4 +337,9 @@ Public Class ucrInput
         End If
         RaiseEvent NameChanged()
     End Sub
+
+    Private Sub ucrInput_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
+        SetName(me.Text)
+    End Sub
+
 End Class
