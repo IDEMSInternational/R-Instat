@@ -24,6 +24,7 @@ Partial Class ucrLayerParamsControls
     Private Sub InitializeComponent()
         Me.chkParamName = New System.Windows.Forms.CheckBox()
         Me.nudParamValue = New System.Windows.Forms.NumericUpDown()
+        Me.ucrColours = New instat.ucrColors()
         Me.ucrcborParamValue = New instat.ucrInputComboBox()
         CType(Me.nudParamValue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -44,6 +45,13 @@ Partial Class ucrLayerParamsControls
         Me.nudParamValue.Size = New System.Drawing.Size(53, 20)
         Me.nudParamValue.TabIndex = 1
         '
+        'ucrColours
+        '
+        Me.ucrColours.Location = New System.Drawing.Point(136, 3)
+        Me.ucrColours.Name = "ucrColours"
+        Me.ucrColours.Size = New System.Drawing.Size(62, 21)
+        Me.ucrColours.TabIndex = 3
+        '
         'ucrcborParamValue
         '
         Me.ucrcborParamValue.Location = New System.Drawing.Point(145, 3)
@@ -55,6 +63,7 @@ Partial Class ucrLayerParamsControls
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrColours)
         Me.Controls.Add(Me.ucrcborParamValue)
         Me.Controls.Add(Me.nudParamValue)
         Me.Controls.Add(Me.chkParamName)
@@ -69,4 +78,5 @@ Partial Class ucrLayerParamsControls
     Friend WithEvents chkParamName As CheckBox
     Friend WithEvents nudParamValue As NumericUpDown
     Friend WithEvents ucrcborParamValue As ucrInputComboBox
+    Friend WithEvents ucrColours As ucrColors
 End Class

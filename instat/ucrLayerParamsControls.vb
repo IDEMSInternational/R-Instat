@@ -25,6 +25,7 @@ Public Class ucrLayerParamsControls
 
         nudParamValue.Visible = False
         ucrcborParamValue.Visible = False
+        ucrColours.Visible = False
         If Not IsNothing(clsLayerParam) Then
             chkParamName.Visible = True
             chkParamName.Text = clsLayerParam.strLayerParameterName
@@ -36,6 +37,8 @@ Public Class ucrLayerParamsControls
                 ucrcborParamValue.cboInput.Items.Clear()
                 ucrcborParamValue.cboInput.Items.Add("TRUE")
                 ucrcborParamValue.cboInput.Items.Add("FALSE")
+            ElseIf clsLayerParam.strLayerParameterDataType = "colour" Then
+                ctrActive = ucrColours
             Else
                 ctrActive = New Control 'this should never actually be used but is here to ensure the code is stable even if a developper uses an incorrect datatype
             End If
@@ -67,7 +70,8 @@ Public Class ucrLayerParamsControls
                 clsGeomFunction.RemoveParameterByName(clsLayerParam.strLayerParameterName)
             End If
         End If
-
     End Sub
-
+    Private Sub ucrColours_NameChanged() Handles ucrColours.NameChanged
+        RaiseEvent RParameterChanged(Me)
+    End Sub
 End Class

@@ -174,7 +174,7 @@ Public Class ucrGeom
         clsgeom_boxplot.AddLayerParameter("varwidth", "boolean", "TRUE")
         clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5")
         clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "1.5")
-        clsgeom_boxplot.AddLayerParameter("outlier.colour", "numeric", "1.5")
+        clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
         clsgeom_boxplot.AddLayerParameter("outlier.stroke ", "numeric", "0.5")
         lstAllGeoms.Add(clsgeom_boxplot)
 
