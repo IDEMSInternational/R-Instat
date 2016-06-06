@@ -84,10 +84,13 @@ Public Class RLink
         Return lstCurrColumns
     End Function
 
-    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True)
+    Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False)
 
         If bInstatObjectExists Then
             cboDataFrames.Items.Clear()
+            If bIncludeOverall Then
+                cboDataFrames.Items.Add("[Overall]")
+            End If
             cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
         End If
 
@@ -141,6 +144,20 @@ Public Class RLink
         Return strNextDefault
     End Function
 
+    Public Function GetNextDefault(strPrefix As String, lstItems As List(Of String)) As String
+        Dim strNextDefault As String = ""
+        Dim clsGetDefault As New RFunction
+        Dim strExistingNames As String
+
+        clsGetDefault.SetRCommand("next_default_item")
+        clsGetDefault.AddParameter("prefix", Chr(34) & strPrefix & Chr(34))
+        strExistingNames = GetListAsRString(lstItems)
+        If strExistingNames <> "" Then
+            clsGetDefault.AddParameter("existing_names", GetListAsRString(lstItems))
+        End If
+        Return RunInternalScriptGetValue(clsGetDefault.ToScript()).AsCharacter(0)
+    End Function
+
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "")
         Dim strCapturedScript As String
         Dim temp As RDotNet.SymbolicExpression
@@ -149,51 +166,61 @@ Public Class RLink
         Dim strScriptWithComment As String
         Dim strSplitScript As String
         strOutput = ""
-        Try
+        If strComment <> "" Then
+            strComment = "# " & strComment
+            strScriptWithComment = strComment & vbCrLf & strScript
+        Else
+            strScriptWithComment = strScript
+        End If
+        If bLog Then
+            txtLog.Text = txtLog.Text & strScriptWithComment & vbCrLf
+        End If
+        If bOutput Then
             If strComment <> "" Then
-                strComment = "# " & strComment
-                strScriptWithComment = strComment & vbCrLf & strScript
-            Else
-                strScriptWithComment = strScript
+                AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
             End If
-            If bLog Then
-                txtLog.Text = txtLog.Text & strScriptWithComment & vbCrLf
-            End If
-            If bOutput Then
-                If strComment <> "" Then
-                    AppendText(txtOutput, clrComments, fComments, strComment & vbCrLf)
-                End If
-                AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
-            End If
-            If bReturnOutput = 0 Then
+            AppendText(txtOutput, clrScript, fScript, strScript & vbCrLf)
+        End If
+        If bReturnOutput = 0 Then
+            Try
                 clsEngine.Evaluate(strScript)
-            ElseIf bReturnOutput = 1 Then
+            Catch e As Exception
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+            End Try
+        ElseIf bReturnOutput = 1 Then
+            Try
                 temp = clsEngine.Evaluate(strScript)
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
+            Catch e As Exception
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+            End Try
+        Else
+            If strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) = -1 Then
+                strCapturedScript = "capture.output(" & strScript & ")"
             Else
-                If strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) = -1 Then
-                    strCapturedScript = "capture.output(" & strScript & ")"
-                Else
-                    strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
-                    If strSplitScript <> "" Then
+                strSplitScript = Left(strScript, strScript.Trim(vbCrLf).LastIndexOf(vbCrLf))
+                If strSplitScript <> "" Then
+                    Try
                         clsEngine.Evaluate(strSplitScript)
-                    End If
-                    strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
-                    strCapturedScript = "capture.output(" & strSplitScript & ")"
+                    Catch e As Exception
+                        MsgBox("Error occured in attempting to run:" & vbNewLine & strSplitScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                    End Try
                 End If
+                strSplitScript = Right(strScript, strScript.Length - strScript.Trim(vbCrLf).LastIndexOf(vbCrLf) - 2)
+                strCapturedScript = "capture.output(" & strSplitScript & ")"
+            End If
+            Try
                 temp = clsEngine.Evaluate(strCapturedScript)
                 strTemp = String.Join(vbCrLf, temp.AsCharacter())
                 strOutput = strOutput & strTemp & vbCrLf
-            End If
-            If bOutput Then
-                'txtOutput.Text = txtOutput.Text & strOutput
-                'output format here
-                AppendText(txtOutput, clrOutput, fOutput, strOutput)
-            End If
-        Catch
-            MsgBox(strScript)
-        End Try
+            Catch e As Exception
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strCapturedScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & e.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+            End Try
+        End If
+        If bOutput Then
+            AppendText(txtOutput, clrOutput, fOutput, strOutput)
+        End If
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
@@ -222,7 +249,7 @@ Public Class RLink
 
     End Function
 
-    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value") As SymbolicExpression
+    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = True) As SymbolicExpression
         Dim expTemp As SymbolicExpression
 
         If clsEngine IsNot Nothing Then
@@ -230,7 +257,9 @@ Public Class RLink
                 clsEngine.Evaluate(strVariableName & " <- " & strScript)
                 expTemp = clsEngine.GetSymbol(strVariableName)
             Catch ex As Exception
-                'TODO what should be done here?
+                If Not bSilent Then
+                    MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                End If
                 expTemp = Nothing
             End Try
         Else
@@ -239,7 +268,7 @@ Public Class RLink
         Return expTemp
     End Function
 
-    Public Function RunInternalScriptGetOutput(strScript As String) As CharacterVector
+    Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = True) As CharacterVector
         Dim chrTemp As CharacterVector
         Dim expTemp As SymbolicExpression
 
@@ -247,14 +276,15 @@ Public Class RLink
         Try
             chrTemp = expTemp.AsCharacter()
         Catch ex As Exception
-            'TODO what should be done here?
+            If Not bSilent Then
+                MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+            End If
             chrTemp = Nothing
         End Try
         Return chrTemp
     End Function
 
-    Public Sub RunInternalScript(strScript As String, Optional strVariableName As String = "")
-        RunInternalScriptGetValue(strScript)
+    Public Function RunInternalScript(strScript As String, Optional strVariableName As String = "", Optional bSilent As Boolean = True) As Boolean
         If clsEngine IsNot Nothing Then
             Try
                 If strVariableName <> "" Then
@@ -262,11 +292,17 @@ Public Class RLink
                 Else
                     clsEngine.Evaluate(strScript)
                 End If
+                Return True
             Catch ex As Exception
-                'TODO what should be done here?
+                If Not bSilent Then
+                    MsgBox("Error occured in attempting to run:" & vbNewLine & strScript & vbNewLine & vbNewLine & "With error message:" & vbNewLine & ex.Message & vbNewLine & vbNewLine, MsgBoxStyle.Critical, "Error running R code")
+                End If
+                Return False
             End Try
+        Else
+            Return False
         End If
-    End Sub
+    End Function
 
     Public Function GetDefaultDataFrameName(strPrefix As String, Optional iStartIndex As Integer = 1, Optional bIncludeIndex As Boolean = True) As String
         Dim strTemp As String
@@ -317,29 +353,45 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub FillListView(lstView As ListView, Optional lstIncludedDataTypes As List(Of String) = Nothing, Optional lstExcludedDataTypes As List(Of String) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional bIncludeHiddenColumns As Boolean = False)
+    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables")
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
         Dim grps As New ListViewGroup
         Dim clsGetColumns As New RFunction
+        Dim clsIncludeList As New RFunction
+        Dim clsExcludeList As New RFunction
+        Dim kvpInclude As KeyValuePair(Of String, String())
+        Dim kvpExclude As KeyValuePair(Of String, String())
 
         If bInstatObjectExists Then
-            clsGetColumns.SetRCommand(strInstatDataObject & "$get_column_names")
+            Select Case strType
+                Case "column"
+                    clsGetColumns.SetRCommand(strInstatDataObject & "$get_column_names")
+                Case "metadata"
+                    clsGetColumns.SetRCommand(strInstatDataObject & "$get_metadata_fields")
+                Case "filter"
+                    clsGetColumns.SetRCommand(strInstatDataObject & "$get_filter_names")
+                Case "Robject"
+            End Select
             clsGetColumns.AddParameter("as_list", "TRUE")
-            If bIncludeHiddenColumns Then
-                clsGetColumns.AddParameter("include_hidden", "TRUE")
-            Else
-                clsGetColumns.AddParameter("include_hidden", "FALSE")
-            End If
             lstView.Clear()
             lstView.Groups.Clear()
             lstView.Columns.Add(strHeading)
 
             If lstIncludedDataTypes.Count > 0 Then
-                clsGetColumns.AddParameter("include_type", GetListAsRString(lstIncludedDataTypes))
-            ElseIf lstExcludedDataTypes.Count > 0 Then
-                clsGetColumns.AddParameter("exclude_type", GetListAsRString(lstExcludedDataTypes))
+                clsIncludeList.SetRCommand("list")
+                For Each kvpInclude In lstIncludedDataTypes
+                    clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
+                Next
+                clsGetColumns.AddParameter("include", clsRFunctionParameter:=clsIncludeList)
+            End If
+            If lstExcludedDataTypes.Count > 0 Then
+                clsExcludeList.SetRCommand("list")
+                For Each kvpExclude In lstExcludedDataTypes
+                    clsExcludeList.AddParameter(kvpExclude.Key, GetListAsRString(kvpExclude.Value.ToList(), bWithQuotes:=False))
+                Next
+                clsGetColumns.AddParameter("exclude", clsRFunctionParameter:=clsExcludeList)
             End If
             If strDataFrameName <> "" Then
                 clsGetColumns.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
@@ -417,6 +469,36 @@ Public Class RLink
             lstModelNames.AddRange(chrModelNames)
         End If
         Return lstModelNames
+    End Function
+
+    Public Function GetFilterNames(strDataFrameName As String) As List(Of String)
+        Dim chrFilterNames As CharacterVector
+        Dim lstFilterNames As New List(Of String)
+        Dim clsGetFilterNames As New RFunction
+
+        clsGetFilterNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter_names")
+        clsGetFilterNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        chrFilterNames = RunInternalScriptGetValue(clsGetFilterNames.ToScript()).AsCharacter
+        If chrFilterNames IsNot Nothing Then
+            lstFilterNames.AddRange(chrFilterNames)
+        End If
+        Return lstFilterNames
+    End Function
+
+    Public Function GetGraphNames(Optional strDataFrameName As String = "") As List(Of String)
+        Dim chrGraphNames As CharacterVector
+        Dim lstGraphNames As New List(Of String)
+        Dim clsGetGraphNames As New RFunction
+
+        clsGetGraphNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graph_names")
+        If strDataFrameName <> "" Then
+            clsGetGraphNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        chrGraphNames = RunInternalScriptGetValue(clsGetGraphNames.ToScript()).AsCharacter
+        If chrGraphNames IsNot Nothing Then
+            lstGraphNames.AddRange(chrGraphNames)
+        End If
+        Return lstGraphNames
     End Function
 
     Public Function GetDataType(strDataFrameName As String, strColumnName As String) As String

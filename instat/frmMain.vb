@@ -464,34 +464,38 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
-        If frmVariables.Visible = True Then
+        If frmVariables.Visible Then
             frmVariables.Visible = False
         Else
             frmVariables.Visible = True
+            frmVariables.BringToFront()
         End If
     End Sub
 
     Private Sub mnuWindowDataFrame_Click(sender As Object, e As EventArgs) Handles mnuViewDataFrameMetadata.Click
-        If frmMetaData.Visible = True Then
+        If frmMetaData.Visible Then
             frmMetaData.Visible = False
         Else
             frmMetaData.Visible = True
+            frmMetaData.BringToFront()
         End If
     End Sub
 
     Private Sub LogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewLog.Click
-        If frmLog.Visible = True Then
+        If frmLog.Visible Then
             frmLog.Visible = False
         Else
             frmLog.Visible = True
+            frmLog.BringToFront()
         End If
     End Sub
 
     Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewScriptWindow.Click
-        If frmScript.Visible = True Then
+        If frmScript.Visible Then
             frmScript.Visible = False
         Else
             frmScript.Visible = True
+            frmScript.BringToFront()
         End If
     End Sub
 
@@ -512,10 +516,11 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuWindowsEditor_Click(sender As Object, e As EventArgs) Handles mnuViewDataView.Click
-        If frmEditor.Visible = True Then
+        If frmEditor.Visible Then
             frmEditor.Visible = False
         Else
             frmEditor.Visible = True
+            frmEditor.BringToFront()
         End If
     End Sub
 
@@ -731,11 +736,6 @@ Public Class frmMain
     Private Sub mnuManageSheetHideShowColumns_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameHideColumns.Click
         dlgHideShowColumns.ShowDialog()
     End Sub
-
-    Private Sub mnuManageReshapeRandomSubst_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeRandomSubset.Click
-        dlgRandomSubset.ShowDialog()
-    End Sub
-
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameSort.Click
         dlgSort.ShowDialog()
     End Sub
@@ -854,10 +854,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbDelete_Click(sender As Object, e As EventArgs) Handles mnuTbDelete.Click
-        Dim response As DialogResult = MessageBox.Show("Are you sure you want to clear the output window?", "Output window", MessageBoxButtons.YesNo)
-        If response = DialogResult.Yes Then
-            frmCommand.txtCommand.Clear()
-        End If
+        mnuToolsClearOutputWindow_Click(sender, e)
     End Sub
 
     Private Sub mnuEditSelectAll_Click(sender As Object, e As EventArgs) Handles mnuEditSelectAll.Click
@@ -969,7 +966,38 @@ Public Class frmMain
     End Sub
 
     Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
-        frmCommand.Visible = Not frmCommand.Visible
+        If frmCommand.Visible Then
+            frmCommand.Visible = False
+        Else
+            frmCommand.Visible = True
+            frmCommand.BringToFront()
+        End If
     End Sub
 
+    Private Sub mnuOrganiseColumnReshapeRandomSubset_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeRandomSubset.Click
+        dlgRandomSubsets.ShowDialog()
+    End Sub
+
+    Private Sub mnuToolsClearOutputWindow_Click(sender As Object, e As EventArgs) Handles mnuToolsClearOutputWindow.Click
+        Dim dlgResponse As DialogResult = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
+        If dlgResponse = DialogResult.Yes Then
+            frmCommand.txtCommand.Clear()
+        End If
+    End Sub
+
+    Private Sub mnuOrganiseDataObjectDeleteMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectDeleteMetadata.Click
+        dlgDeleteMetadata.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseDataObjectMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectMetadata.Click
+        dlgMetadata.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseDataObjectReorderMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectReorderMetadata.Click
+        dlgReoderMetadata.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseDataObjectRenameMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectRenameMetadata.Click
+        dlgRenameMetadata.ShowDialog()
+    End Sub
 End Class

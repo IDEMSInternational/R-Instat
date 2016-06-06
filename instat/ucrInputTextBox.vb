@@ -16,10 +16,15 @@
 Imports System.ComponentModel
 
 Public Class ucrInputTextBox
-    Public Overrides Sub SetName(strName As String)
-        If ValidateText(strName) Then
+    Public Overrides Sub SetName(strName As String, Optional bSilent As Boolean = False)
+        If bSilent Then
             txtInput.Text = strName
             OnNameChanged()
+        Else
+            If ValidateText(strName) Then
+                txtInput.Text = strName
+                OnNameChanged()
+            End If
         End If
     End Sub
 
@@ -29,6 +34,7 @@ Public Class ucrInputTextBox
 
     Private Sub txtInput_Validating(sender As Object, e As CancelEventArgs) Handles txtInput.Validating
         e.Cancel = Not ValidateText(txtInput.Text)
+        If Not e.Cancel Then OnNameChanged()
     End Sub
 
     Public Overrides Function GetText() As String
@@ -42,4 +48,14 @@ Public Class ucrInputTextBox
             Return False
         End If
     End Function
+
+    Public Overrides Property IsReadOnly As Boolean
+        Get
+            Return MyBase.IsReadOnly
+        End Get
+        Set(bReadOnly As Boolean)
+            MyBase.IsReadOnly = bReadOnly
+            txtInput.ReadOnly = bReadOnly
+        End Set
+    End Property
 End Class

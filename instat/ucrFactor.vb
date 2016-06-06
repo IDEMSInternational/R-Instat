@@ -184,6 +184,7 @@ Public Class ucrFactor
                 End If
             Next
         End If
+        ApplyColumnSettings()
     End Sub
 
     Public Function GetSelectedLevels() As String
@@ -262,7 +263,7 @@ Public Class ucrFactor
                     If i > 0 Then
                         strTemp = strTemp & ","
                     End If
-                    If shtCurrSheet(i, iColumn).ToString <> "" Then
+                    If shtCurrSheet(i, iColumn) IsNot Nothing Then
                         If bWithQuotes Then
                             strTemp = strTemp & Chr(34) & shtCurrSheet(i, iColumn).ToString & Chr(34)
                         Else
@@ -306,4 +307,23 @@ Public Class ucrFactor
     Private Sub grdFactorData_VisibleChanged(sender As Object, e As EventArgs) Handles grdFactorData.VisibleChanged
         RaiseEvent GridVisibleChanged()
     End Sub
+
+    Private Sub grdFactorData_Leave(sender As Object, e As EventArgs) Handles grdFactorData.Leave
+        If shtCurrSheet.IsEditing Then
+            shtCurrSheet.EndEdit(unvell.ReoGrid.EndEditReason.NormalFinish)
+        End If
+    End Sub
+
+    Public Function IsColumnComplete(iColumn As Integer) As Boolean
+        If shtCurrSheet IsNot Nothing AndAlso iColumn < shtCurrSheet.ColumnCount Then
+            For i = 0 To shtCurrSheet.RowCount - 1
+                If shtCurrSheet(i, iColumn) Is Nothing OrElse shtCurrSheet(i, iColumn).ToString() = "" Then
+                    Return False
+                End If
+            Next
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 End Class

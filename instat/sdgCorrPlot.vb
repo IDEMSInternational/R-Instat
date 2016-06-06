@@ -108,12 +108,8 @@ Public Class sdgCorrPlot
         End If
     End Sub
 
-    Private Sub ucrSaveGraph_CheckedChanged(bChecked As Boolean) Handles ucrSaveGraph.CheckedChanged
-        If bChecked = True Then
-            tbSaveGraphs.Visible = True
-        Else
-            tbSaveGraphs.Visible = False
-        End If
+    Private Sub ucrSaveGraph_CheckedChanged() Handles ucrSaveGraph.SaveGraphCheckedChanged
+        tbSaveGraphs.Visible = ucrSaveGraph.bSaveGraph
     End Sub
 
     Private Sub nudAlpha_ValueChanged(sender As Object, e As EventArgs) Handles nudAlpha.ValueChanged

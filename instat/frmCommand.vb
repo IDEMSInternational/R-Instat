@@ -37,4 +37,7 @@ Public Class frmCommand
         txtCommand.SelectAll()
     End Sub
 
+    Private Sub frmCommand_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        frmMain.mnuViewOutputWindow.Checked = Me.Visible
+    End Sub
 End Class

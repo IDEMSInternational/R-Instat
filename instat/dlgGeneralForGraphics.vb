@@ -17,7 +17,7 @@ Imports instat.Translations
 Public Class dlgGeneralForGraphics
     Private clsRggplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
-    Public clsRSyntax As New RSyntax
+
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -37,7 +37,7 @@ Public Class dlgGeneralForGraphics
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-
+        ucrBase.iHelpTopicID = 356
     End Sub
     Private Sub SetDefaults()
         cmdDelete.Enabled = False
@@ -58,5 +58,6 @@ Public Class dlgGeneralForGraphics
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
         sdgLayerOptions.ShowDialog()
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=sdgLayerOptions.clsGeomFunction)
     End Sub
 End Class
