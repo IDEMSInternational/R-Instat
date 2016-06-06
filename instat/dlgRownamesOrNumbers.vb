@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+
 Public Class dlgRowNamesOrNumbers
     Public bFirstLoad As Boolean = True
     Dim sort As RFunction
@@ -34,16 +35,19 @@ Public Class dlgRowNamesOrNumbers
 
         ucrReceiverSingleRownamesOrNumbers.Selector = ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers
         ucrReceiverSingleRownamesOrNumbers.SetMeAsReceiver()
+        ucrNewColumnNameforRownamesOrNumbers.Visible = False
 
     End Sub
 
     Private Sub SetDefaults()
+
         ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Enabled = False
         ucrReceiverSingleRownamesOrNumbers.Enabled = False
         rdoCopytoFirstColumn.Enabled = False
         rdoResetintoPositiveIntegers.Enabled = False
         chkDecreasingforRownamesOrNumbers.Visible = False
         ucrNewColumnNameforRownamesOrNumbers.Visible = False
+
     End Sub
 
     Private Sub ucrBaseRownamesOrNumbers_clickReset(sender As Object, e As EventArgs) Handles ucrBaseRownamesorNumbers.ClickReset
@@ -59,7 +63,7 @@ Public Class dlgRowNamesOrNumbers
         ucrBaseRownamesorNumbers.clsRsyntax.ClearParameters()
 
         If rdoCopyfromColumn.Checked Then
-
+            ucrNewColumnNameforRownamesOrNumbers.Visible = False
             ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Enabled = True
             ucrReceiverSingleRownamesOrNumbers.Enabled = True
             ucrBaseRownamesorNumbers.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
@@ -68,21 +72,31 @@ Public Class dlgRowNamesOrNumbers
 
             ucrReceiverSingleRownamesOrNumbers.Enabled = False
             ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Enabled = False
+
             If rdoCopytoFirstColumn.Checked Then
+                ucrNewColumnNameforRownamesOrNumbers.Visible = False
+
                 ucrBaseRownamesorNumbers.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
                 'ucrBaseRownamesorNumbers.clsRsyntax.SetFunction("rownames")  'David inserted this line for, which is useful when not using the instat object, I wonder what you think Danny.
                 ucrBaseRownamesorNumbers.clsRsyntax.SetAssignTo("rownamesfromtextbox_temp", ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.strCurrentDataFrame, "rownamesfromtextbox")
                 ucrBaseRownamesorNumbers.clsRsyntax.ClearParameters()
                 'set prefix parameter
+
             ElseIf rdoCopytoColumnsforRownamesOrNumbers.Checked Then
+
                 ucrNewColumnNameforRownamesOrNumbers.Visible = True
                 ucrBaseRownamesorNumbers.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
                 ucrBaseRownamesorNumbers.clsRsyntax.SetAssignTo("rownamesfromtextbox_temp", ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.strCurrentDataFrame, "rownamesfromtextbox")
 
             ElseIf rdoResetintoPositiveIntegers.Checked Then
+
+                ucrNewColumnNameforRownamesOrNumbers.Visible = False
                 ucrBaseRownamesorNumbers.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
                 'set parameters 
+
             ElseIf rdoSortbyRowNamesorNumbers.Checked Then
+
+                ucrNewColumnNameforRownamesOrNumbers.Visible = False
                 ucrBaseRownamesorNumbers.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
                 ucrBaseRownamesorNumbers.clsRsyntax.AddParameter(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
                 chkDecreasingforRownamesOrNumbers.Visible = True
@@ -92,22 +106,14 @@ Public Class dlgRowNamesOrNumbers
 
     End Sub
 
-
-    Private Sub ucrBaseRownamesorNumbers_Load(sender As Object, e As EventArgs) Handles ucrBaseRownamesorNumbers.Load
-
-    End Sub
-
-    Private Sub ucrSelectorAddRemoveforRownamesOrNumbers_Load(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub chkDecreasingforRownamesOrNumbers_CheckedChanged(sender As Object, e As EventArgs) Handles chkDecreasingforRownamesOrNumbers.CheckedChanged
+
         If chkDecreasingforRownamesOrNumbers.Checked Then
             ucrBaseRownamesorNumbers.clsRsyntax.AddParameter("decreasing", "TRUE")
-
         Else
             ucrBaseRownamesorNumbers.clsRsyntax.AddParameter("decreasing", "FALSE")
-
         End If
+
     End Sub
+
 End Class

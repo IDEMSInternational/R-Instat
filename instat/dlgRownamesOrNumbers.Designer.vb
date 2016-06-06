@@ -29,10 +29,10 @@ Partial Class dlgRowNamesOrNumbers
         Me.rdoResetintoPositiveIntegers = New System.Windows.Forms.RadioButton()
         Me.rdoCopyfromColumn = New System.Windows.Forms.RadioButton()
         Me.rdoCopytoFirstColumn = New System.Windows.Forms.RadioButton()
+        Me.ucrNewColumnNameforRownamesOrNumbers = New instat.ucrNewColumnName()
+        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverSingleRownamesOrNumbers = New instat.ucrReceiverSingle()
         Me.ucrBaseRownamesorNumbers = New instat.ucrButtons()
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrNewColumnNameforRownamesOrNumbers = New instat.ucrNewColumnName()
         Me.grpboxOptionsforRowNamesorNumbercols.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -118,6 +118,23 @@ Partial Class dlgRowNamesOrNumbers
         Me.rdoCopytoFirstColumn.Text = "Copy into First Column"
         Me.rdoCopytoFirstColumn.UseVisualStyleBackColor = True
         '
+        'ucrNewColumnNameforRownamesOrNumbers
+        '
+        Me.ucrNewColumnNameforRownamesOrNumbers.Location = New System.Drawing.Point(0, 198)
+        Me.ucrNewColumnNameforRownamesOrNumbers.Name = "ucrNewColumnNameforRownamesOrNumbers"
+        Me.ucrNewColumnNameforRownamesOrNumbers.Size = New System.Drawing.Size(367, 35)
+        Me.ucrNewColumnNameforRownamesOrNumbers.TabIndex = 9
+        Me.ucrNewColumnNameforRownamesOrNumbers.ucrDataFrameSelector = Nothing
+        Me.ucrNewColumnNameforRownamesOrNumbers.Visible = False
+        '
+        'ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers
+        '
+        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Name = "ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers"
+        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.TabIndex = 8
+        '
         'ucrReceiverSingleRownamesOrNumbers
         '
         Me.ucrReceiverSingleRownamesOrNumbers.Location = New System.Drawing.Point(31, 91)
@@ -133,23 +150,6 @@ Partial Class dlgRowNamesOrNumbers
         Me.ucrBaseRownamesorNumbers.Name = "ucrBaseRownamesorNumbers"
         Me.ucrBaseRownamesorNumbers.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseRownamesorNumbers.TabIndex = 0
-        '
-        'ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers
-        '
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Name = "ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers"
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.TabIndex = 8
-        '
-        'ucrNewColumnNameforRownamesOrNumbers
-        '
-        Me.ucrNewColumnNameforRownamesOrNumbers.Location = New System.Drawing.Point(0, 198)
-        Me.ucrNewColumnNameforRownamesOrNumbers.Name = "ucrNewColumnNameforRownamesOrNumbers"
-        Me.ucrNewColumnNameforRownamesOrNumbers.Size = New System.Drawing.Size(367, 35)
-        Me.ucrNewColumnNameforRownamesOrNumbers.TabIndex = 9
-        Me.ucrNewColumnNameforRownamesOrNumbers.ucrDataFrameSelector = Nothing
-        Me.ucrNewColumnNameforRownamesOrNumbers.Visible = False
         '
         'dlgRowNamesOrNumbers
         '
