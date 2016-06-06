@@ -92,6 +92,7 @@ Public Class dlgRowNamesOrNumbers
 
                 ucrNewColumnNameforRownamesOrNumbers.Visible = False
                 ucrBaseRownamesorNumbers.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
+                ucrBaseRownamesorNumbers.clsRsyntax.AddParameter("row_names", "")
                 'set parameters 
 
             ElseIf rdoSortbyRowNamesorNumbers.Checked Then
