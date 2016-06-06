@@ -420,6 +420,12 @@
     <Compile Include="dlgPrintPreviewOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgProbabilityModels.Designer.vb">
+      <DependentUpon>dlgProbabilityModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgProbabilityModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgProtect.Designer.vb">
       <DependentUpon>dlgProtect.vb</DependentUpon>
     </Compile>
@@ -2085,6 +2091,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPrintPreviewOptions.sw-KE.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgProbabilityModels.resx">
+      <DependentUpon>dlgProbabilityModels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgProtect.fr-FR.resx">
       <DependentUpon>dlgProtect.vb</DependentUpon>
