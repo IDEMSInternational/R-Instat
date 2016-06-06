@@ -121,4 +121,10 @@ Public Class ucrInputComboBox
     Private Sub cboInput_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboInput.SelectedIndexChanged
         OnNameChanged()
     End Sub
+
+    Private Sub ucrInputComboBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
+        If bIsReadOnly Then
+            e.Handled = True
+        End If
+    End Sub
 End Class
