@@ -28,7 +28,6 @@ Partial Class ucrGeom
         '
         'cboGeomList
         '
-        Me.cboGeomList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cboGeomList.FormattingEnabled = True
         Me.cboGeomList.Location = New System.Drawing.Point(3, 24)
         Me.cboGeomList.Name = "cboGeomList"

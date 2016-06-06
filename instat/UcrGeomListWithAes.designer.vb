@@ -255,7 +255,7 @@ Partial Class UcrGeomListWithParameters
         Me.Controls.Add(Me.lblAesList)
         Me.Controls.Add(Me.UcrSelector)
         Me.Name = "UcrGeomListWithParameters"
-        Me.Size = New System.Drawing.Size(467, 286)
+        Me.Size = New System.Drawing.Size(469, 292)
         Me.Controls.SetChildIndex(Me.UcrSelector, 0)
         Me.Controls.SetChildIndex(Me.lblAesList, 0)
         Me.Controls.SetChildIndex(Me.grpAesList, 0)
