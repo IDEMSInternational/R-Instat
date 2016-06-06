@@ -77,7 +77,7 @@ Public Class dlgRowNamesOrNumbers
                 ucrNewColumnNameforRownamesOrNumbers.Visible = False
 
                 ucrBaseRownamesorNumbers.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
-                'ucrBaseRownamesorNumbers.clsRsyntax.SetFunction("rownames")  'David inserted this line for, which is useful when not using the instat object, I wonder what you think Danny.
+                ucrBaseRownamesorNumbers.clsRsyntax.SetFunction("rownames")
                 ucrBaseRownamesorNumbers.clsRsyntax.SetAssignTo("rownamesfromtextbox_temp", ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.strCurrentDataFrame, "rownamesfromtextbox")
                 ucrBaseRownamesorNumbers.clsRsyntax.ClearParameters()
                 'set prefix parameter
