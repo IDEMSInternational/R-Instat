@@ -40,14 +40,14 @@ Public Class ucrReorder
         Select Case strDataType
             Case "column"
                 lstAvailableData.Columns.Add("Variables")
-                lstAvailableData.Columns(0).Width = -2
             Case "factor"
                 lstAvailableData.Columns.Add("Levels")
-                lstAvailableData.Columns(0).Width = -2
             Case "data frame"
                 lstAvailableData.Columns.Add("Data Frame")
-                lstAvailableData.Columns(0).Width = -2
+            Case "metadata"
+                lstAvailableData.Columns.Add("Metadata")
         End Select
+        lstAvailableData.Columns(0).Width = -2
         loadList()
     End Sub
 
@@ -140,12 +140,10 @@ Public Class ucrReorder
                 If i > 0 Then
                     strTemp = strTemp & ","
                 End If
-                If lstAvailableData.Items(i).Text <> "" Then
-                    If bWithQuotes Then
-                        strTemp = strTemp & Chr(34) & lstAvailableData.Items(i).Text & Chr(34)
-                    Else
-                        strTemp = strTemp & lstAvailableData.Items(i).Text
-                    End If
+                If bWithQuotes Then
+                    strTemp = strTemp & Chr(34) & lstAvailableData.Items(i).Text & Chr(34)
+                Else
+                    strTemp = strTemp & lstAvailableData.Items(i).Text
                 End If
             Next
             strTemp = strTemp & ")"
@@ -172,11 +170,15 @@ Public Class ucrReorder
                     vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.SelectedItem & Chr(34) & ")").AsCharacter
                 End If
             Case "factor"
-                If ucrReceiver IsNot Nothing AndAlso ucrReceiver.lstIncludedDataTypes.Count = 1 AndAlso ucrReceiver.lstIncludedDataTypes.Contains("factor") AndAlso ucrReceiver.GetVariableNames <> "" Then
+                If ucrReceiver IsNot Nothing AndAlso Not ucrReceiver.IsEmpty() AndAlso ucrReceiver.strCurrDataType = "factor" Then
                     vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & ucrReceiver.GetDataName() & Chr(34) & ", col_name = " & ucrReceiver.GetVariableNames() & ")").AsCharacter
                 End If
             Case "data frame"
                 vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_data_names()").AsCharacter
+            Case "metadata"
+                If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
+                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_metadata_fields(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter
+                End If
             Case Else
                 vecNames = Nothing
         End Select

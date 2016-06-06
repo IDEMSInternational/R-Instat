@@ -4,7 +4,7 @@ data_object <- R6Class("data_object",
                                                  variables_metadata = data.frame(), metadata = list(), 
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
-                                                 start_point=1)
+                                                 start_point=1, filters = list(), objects = list())
 {
                              
   # Set up the data object
@@ -13,6 +13,8 @@ data_object <- R6Class("data_object",
   self$set_variables_metadata(variables_metadata)
   self$update_variables_metadata()
   self$set_meta(metadata)
+  self$set_filters(filters)
+  self$set_objects(objects)
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
@@ -34,8 +36,11 @@ data_object <- R6Class("data_object",
                          private = list(
                            data = data.frame(),
                            metadata = list(), 
-                           variables_metadata = data.frame(), 
+                           variables_metadata = data.frame(),
+                           filters = list(),
+                           objects = list(),
                            changes = list(), 
+                           .current_filter = list(),
                            .data_changed = FALSE,
                            .metadata_changed = FALSE, 
                            .variables_metadata_changed = FALSE 
@@ -64,9 +69,25 @@ data_object <- R6Class("data_object",
                                 private$.variables_metadata_changed <- new_value
                                 self$append_to_changes(list(Set_property, "variable_data_changed"))
                               }
+                            },
+                            current_filter = function(filter) {
+                              if(missing(filter)) {
+                                filter_string = ""
+                                i = 1
+                                result = matrix(nrow = nrow(private$data), ncol = length(private$.current_filter$filter_list))
+                                for(condition in private$.current_filter$filter_list) {
+                                  func = match.fun(condition[["operation"]])
+                                  result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
+                                  i = i + 1
+                                }
+                                return(apply(result, 1, all))
+                              }
+                              else {
+                                private$.current_filter <- filter
+                                self$data_changed <- TRUE
+                                self$append_to_changes(list(Set_property, "current_filter"))
+                              }
                             }
-                            
-                            
                           )
 )
 
@@ -77,6 +98,10 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE) {
   else {
     if ( length(new_data) == 0 && messages) {
       message("data of object:is empty. Data will be an empty data frame.")
+    }
+    if(anyDuplicated(names(new_data))) {
+      warning("Column names are not unique. make.unique() will be used to force uniqueness.")
+      names(new_data) <- make.unique(names(new_data))
     }
     private$data <- new_data
     self$append_to_changes(list(Set_property, "data"))
@@ -112,6 +137,22 @@ data_object$set("public", "set_changes", function(new_changes) {
 }
 )
 
+data_object$set("public", "set_filters", function(new_filters) {
+  if(!is.list(new_filters)) stop("Filters must be of type: list")
+  
+  self$append_to_changes(list(Set_property, "filters"))  
+  private$filters <- new_filters
+}
+)
+
+data_object$set("public", "set_objects", function(new_objects) {
+  if(!is.list(new_objects)) stop("new_objects must be of type: list")
+  
+  self$append_to_changes(list(Set_property, "objects"))  
+  private$objects <- new_objects
+}
+)
+
 data_object$set("public", "update_variables_metadata", function() {
   
   if(ncol(private$data) !=  nrow(private$variables_metadata) || !all(colnames(private$data)==rownames(private$variables_metadata))) {
@@ -144,10 +185,12 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE) {
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE) {
   if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out = private$data[ , !self$get_variables_metadata(property = is_hidden_label)]
   else out = private$data
-  
+  if(use_current_filter && length(private$.current_filter) > 0) {
+    out = out[self$current_filter, ]
+  }
   if(convert_to_character) {
     decimal_places = private$variables_metadata[[display_decimal_label]]
     return(convert_to_character_matrix(out, TRUE, decimal_places))
@@ -288,15 +331,15 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
 }
 )
 
-data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE) {
+data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE) {
   if(missing(col_names)) stop("no col_names to return")
   if(!all(col_names %in% names(private$data))) stop("Not all column names were found in data")
   
   if(length(col_names)==1) {
-    if(force_as_data_frame) return(private$data[col_names])
-    else return(private$data[[col_names]])
+    if(force_as_data_frame) return(self$get_data_frame(use_current_filter = use_current_filter)[col_names])
+    else return(self$get_data_frame(use_current_filter = use_current_filter)[[col_names]])
   }
-  else return(private$data[col_names])
+  else return(self$get_data_frame(use_current_filter = use_current_filter)[col_names])
 }
 )
 
@@ -395,49 +438,50 @@ data_object$set("public", "replace_value_in_data", function(col_name = "", row, 
 }
 )
 
-data_object$set("public", "append_to_metadata", function(name, value) {
+data_object$set("public", "append_to_metadata", function(property, new_value = "") {
   
-  if(missing(name) || missing(value)) {
-    stop("name and value arguements must be specified.")
-  } 
+  if(missing(property)) stop("property must be specified.")
   
-  else if (!is.character(name)) {
-    stop("name must be of type: character")
-  }
+  if (!is.character(property)) stop("property must be of type: character")
   
-  # Remember double brackets must be used when dealing with variable names.
-  else {
-    private$metadata[[name]] <- value 
-    self$append_to_changes(list(Added_metadata, name))
-    self$metadata_changed <- TRUE
-  }
+  private$metadata[[property]] <- new_value
+  self$append_to_changes(list(Added_metadata, property, new_value))
+  self$metadata_changed <- TRUE
 }
 )
 
-data_object$set("public", "append_to_variables_metadata", function(col_names, property, new_val) {
+data_object$set("public", "append_to_variables_metadata", function(col_names, property, new_val = "") {
   
-  if(missing(col_names) || missing(property) || missing(new_val)) stop("col_names, property and new_val arguements must be specified.")
-  
-  if(!all(col_names %in% names(private$data))) stop(paste(col_names, "not found in data"))
-  for(curr_col in col_names) {
-    row = integer()
-    if(ncol(private$variables_metadata)>0) row = which(rownames(private$variables_metadata)==curr_col)
-    row_exists = TRUE
-    if(length(row)==0) {
-      row = nrow(private$variables_metadata) + 1
-      row_exists = FALSE
+  if(missing(property)) stop("property must be specified.")
+  if(!missing(col_names)) {
+    if(!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    for(curr_col in col_names) {
+      row = integer()
+      if(ncol(private$variables_metadata)>0) row = which(rownames(private$variables_metadata)==curr_col)
+      row_exists = TRUE
+      if(length(row)==0) {
+        row = nrow(private$variables_metadata) + 1
+        row_exists = FALSE
+      }
+      col = which(colnames(private$variables_metadata)==property)
+      propery_exists = TRUE
+      if(length(col)==0) {
+        col = ncol(private$variables_metadata) + 1
+        propery_exists = FALSE
+      }
+      private$variables_metadata[row, col] <- new_val
+      if(!row_exists) rownames(private$variables_metadata)[row] <- curr_col
+      if(!propery_exists) colnames(private$variables_metadata)[col] <- property
+      
+      self$append_to_changes(list(Added_variables_metadata, curr_col, property))
     }
-    col = which(colnames(private$variables_metadata)==property)
-    propery_exists = TRUE
+  }
+  else {
     if(length(col)==0) {
       col = ncol(private$variables_metadata) + 1
-      propery_exists = FALSE
     }
-    private$variables_metadata[row, col] <- new_val
-    if(!row_exists) rownames(private$variables_metadata)[row] <- curr_col
-    if(!propery_exists) colnames(private$variables_metadata)[col] <- property
-    
-    self$append_to_changes(list(Added_variables_metadata, curr_col, property))
+    private$variables_metadata[ , property] <- new_val
+    self$append_to_changes(list(Added_variables_metadata, property, new_val))
   }
   self$variables_metadata_changed <- TRUE
   self$data_changed <- TRUE
@@ -471,7 +515,7 @@ data_object$set("public", "add_defaults_meta", function() {
 )
 
 data_object$set("public", "add_defaults_variables_metadata", function() {
-  sapply(self$get_column_names(), function(col_name) self$append_to_variables_metadata(col_name, is_hidden_label, FALSE))
+  invisible(sapply(self$get_column_names(), function(col_name) self$append_to_variables_metadata(col_name, is_hidden_label, FALSE)))
 }
 )
 
@@ -764,24 +808,22 @@ data_object$set("public", "get_column_count", function(col_name, new_level_names
 }
 )
 
-data_object$set("public", "get_column_names", function(as_list = FALSE, include_type = c(), exclude_type = c(), include_hidden = TRUE) {
-  types = c("factor", "integer", "numeric", "logical", "character")
-  if(!length(include_type) == 0) {
-    if(!all(include_type %in% types)) stop(paste("include_type can only contain", paste(types, collapse = ", ")))
-    if("numeric" %in% include_type) include_type = c(include_type, "integer")
-    if(!length(exclude_type) == 0) warning("exclude_type argument will be ignored. Only one of include_type and exclude_type should be specified.")
-    out = names(private$data)[sapply(private$data, class) %in% include_type]
+data_object$set("public", "get_column_names", function(as_list = FALSE, include = list(), exclude = list()) {
+  if(data_type_label %in% names(include) && "numeric" %in% include[[data_type_label]]) {
+    include[[data_type_label]] = c(include[[data_type_label]], "integer")
   }
-  else if(!length(exclude_type) == 0) {
-    if(!all(exclude_type %in% types)) stop(paste("exclude_type can only contain", paste(types, collapse = ", ")))
-    if("numeric" %in% exclude_type) exclude_type = c(exclude_type, "integer")
-    out = names(private$data)[!(sapply(private$data, class) %in% exclude_type)]
+  if(data_type_label %in% names(exclude) && "numeric" %in% exclude[[data_type_label]]) {
+    exclude[[data_type_label]] = c(exclude[[data_type_label]], "integer")
   }
-  else out = names(private$data)
   
-  if(!include_hidden) {
-    hidden = sapply(out, function(col_name) self$get_variables_metadata(property = is_hidden_label, column = col_name))
-    out = out[!hidden]
+  col_names = names(private$data)
+  curr_var_metadata = self$get_variables_metadata()
+  out = c()
+  for(col in col_names) {
+    if(all(sapply(names(include), function(prop) self$get_variables_metadata(property = prop, column = col) %in% include[[prop]]))
+       && all(sapply(names(exclude), function(prop) !self$get_variables_metadata(property = prop, column = col) %in% exclude[[prop]]))) {
+      out = c(out, col)
+    }
   }
   
   if(as_list) {
@@ -824,7 +866,7 @@ data_object$set("public", "get_data_type", function(col_name = "") {
   }
   
   if(is.factor(private$data[[col_name]])) {
-    if(length(levels(private$data[[col_name]]))==2) type = "2 level factor"
+    if(length(levels(private$data[[col_name]]))==2) type = "two level factor"
     else if(length(levels(private$data[[col_name]]))>2) type = "multilevel factor"
     else type = "factor"
   }
@@ -833,11 +875,14 @@ data_object$set("public", "get_data_type", function(col_name = "") {
 )
 
 data_object$set("public", "set_hidden_columns", function(col_names) {
-  if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
-  
-  self$append_to_variables_metadata(col_names, is_hidden_label, TRUE)
-  hidden_cols = self$get_column_names()[!self$get_column_names() %in% col_names]
-  self$append_to_variables_metadata(hidden_cols, is_hidden_label, FALSE)
+  if(col_names == "") self$unhide_all_columns()
+  else {
+    if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
+    
+    self$append_to_variables_metadata(col_names, is_hidden_label, TRUE)
+    hidden_cols = self$get_column_names()[!self$get_column_names() %in% col_names]
+    self$append_to_variables_metadata(hidden_cols, is_hidden_label, FALSE)
+  }
 }
 )
 
@@ -852,5 +897,135 @@ data_object$set("public", "set_row_names", function(row_names) {
   if(anyDuplicated(row_names) != 0) stop("row_names must be unique")
   rownames(private$data) <- row_names
   self$data_changed <- TRUE
+}
+)
+
+data_object$set("public", "set_protected_columns", function(col_names) {
+  if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
+  
+  self$append_to_variables_metadata(col_names, is_protected_label, TRUE)
+  other_cols = self$get_column_names()[!self$get_column_names() %in% col_names]
+  self$append_to_variables_metadata(other_cols, is_protected_label, FALSE)
+}
+)
+
+data_object$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE) {
+  if(missing(filter)) stop("filter is required")
+  if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
+  
+  for(condition in filter) {
+    if(length(condition) != 3 || !all(sort(names(condition)) == c("column", "operation", "value"))) {
+      stop("filter must be a list of conditions containing: column, operation and value")
+    }
+    if(!condition[["column"]] %in% names(private$data)) stop(condition[["column"]], " not found in data.")
+  }
+  if(filter_name %in% names(private$filters) && !replace) {
+    warning("A filter named ", filter_name, " already exists. It will not be replaced.")
+  }
+  else {
+    if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
+    filter_calc = calculation$new(type = "filter", filter_list = filter)
+    private$filters[[filter_name]] <- filter_calc
+    self$append_to_changes(list(Added_filter, filter_name))
+    if(set_as_current) {
+      self$current_filter <- filter_calc
+      self$data_changed <- TRUE
+    }
+  }
+}
+)
+
+data_object$set("public", "get_current_filter", function() {
+  return(private$.current_filter)
+}
+)
+
+data_object$set("public", "set_current_filter", function(filter_name = "") {
+  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  self$current_filter <- private$filters[[filter_name]]
+}
+)
+
+data_object$set("public", "get_filter_names", function(as_list = FALSE, include = list(), exclude = list()) {
+  out = names(private$filters)
+  if(as_list) {
+    lst = list()
+    lst[[self$get_metadata(data_name_label)]] <- out
+    return(lst)
+  }
+  else return(out)
+}
+)
+
+data_object$set("public", "get_filter", function(filter_name) {
+  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  return(private$filters[[filter_name]]$filter_list)
+}
+)
+
+data_object$set("public", "filter_applied", function() {
+  return(length(private$.current_filter$filter_list) > 0)
+}
+)
+
+data_object$set("public", "remove_current_filter", function() {
+  self$current_filter <- list()
+}
+)
+
+data_object$set("public", "filter_string", function(filter_name) {
+  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  curr_filter = self$get_filter(filter_name)
+  out = "("
+  i = 1
+  for(condition in curr_filter) {
+    if(i != 1) out = paste(out, "&&")
+    out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
+    if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(condition[["value"]], collapse = ","), ")")
+    else out = paste(out, condition[["value"]])
+    out = paste0(out , ")")
+    i = i + 1
+  }
+  out = paste(out, ")")
+  return(out)
+}
+)
+
+data_object$set("public", "get_variables_metadata_fields", function(as_list = FALSE, include = c(), exclude = c()) {
+  out = names(self$get_variables_metadata())
+  if(as_list) {
+    lst = list()
+    lst[[self$get_metadata(data_name_label)]] <- out
+    return(lst)
+  }
+  else return(out)
+}
+)
+
+data_object$set("public", "add_object", function(object, object_name) {
+  if(missing(object_name)) object_name = next_default_item("object", names(private$objects))
+  if(object_name %in% names(private$objects)) message("An object called ", object_name, " already exists. It will be replaced.")
+  private$objects[[object_name]] <- object
+  self$append_to_changes(list(Added_object, object_name))
+}
+)
+
+data_object$set("public", "get_objects", function(object_name, type = "") {
+  curr_objects = private$objects[self$get_object_names(type = type)]
+  if(length(curr_objects) == 0) return(curr_objects)
+  if(missing(object_name)) return(curr_objects)
+  if(!is.character(object_name)) stop("object_name must be a character")
+  if(!object_name %in% names(curr_objects)) stop(object_name, "not found in objects")
+  return(curr_objects[[object_name]])
+}
+)
+
+data_object$set("public", "get_object_names", function(type = "") {
+  if(type == "") return(names(private$objects))
+  else {
+    if(type == model_label) return(names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg") %in% class(x)))])
+    else if(type == graph_label) return(names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg") %in% class(x)))])
+    else stop("type: ", type, " not recognised")
+  }
 }
 )

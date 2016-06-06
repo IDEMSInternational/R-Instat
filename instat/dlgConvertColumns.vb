@@ -43,7 +43,7 @@ Public Class dlgConvertColumns
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         ucrReceiverColumnsToConvert.Selector = ucrSelectorDataFrameColumns
         ucrReceiverColumnsToConvert.SetMeAsReceiver()
-        ucrBase.iHelpTopicID = 34
+        ucrBase.iHelpTopicID = 67
     End Sub
 
     Private Sub SetDefaults()

@@ -3,11 +3,12 @@ instat_object <- R6Class("instat_object",
                     initialize = function(data_tables = list(), instat_obj_metadata = list(), 
                                           data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
                                           data_tables_metadata = rep(list(list()),length(data_tables)),
+                                          data_tables_filters = rep(list(list()),length(data_tables)),
                                           imported_from = as.list(rep("",length(data_tables))),
                                           messages=TRUE, convert=TRUE, create=TRUE) 
 { 
     self$set_meta(instat_obj_metadata)
-    self$set_models(list())
+    self$set_objects(list())
                       
     if (missing(data_tables) || length(data_tables) == 0) {
     self$set_data_objects(list())
@@ -16,7 +17,7 @@ instat_object <- R6Class("instat_object",
     else {
     self$import_data(data_tables=data_tables, data_tables_variables_metadata=data_tables_variables_metadata, 
     data_tables_metadata=data_tables_metadata, 
-    imported_from=imported_from, messages=messages, convert=convert, create=create)
+    imported_from=imported_from, messages=messages, convert=convert, create=create, data_tables_filters = data_tables_filters)
     }
                       
     private$.data_objects_changed <- FALSE
@@ -25,7 +26,7 @@ instat_object <- R6Class("instat_object",
                 private = list(
                   .data_objects = list(),
                   .metadata = list(),
-                  .models = list(),
+                  .objects = list(),
                   .data_objects_changed = FALSE
                 ),
                 active = list(
@@ -35,7 +36,7 @@ instat_object <- R6Class("instat_object",
                       if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
                       private$.data_objects_changed <- new_value
                       #TODO is this behaviour we want?
-                      sapply(self$get_data_objects(), function(x) x$data_changed <- new_value)
+                      invisible(sapply(self$get_data_objects(), function(x) x$data_changed <- new_value))
                     }
                   }
                 )
@@ -43,6 +44,7 @@ instat_object <- R6Class("instat_object",
 
 instat_object$set("public", "import_data", function(data_tables = list(), data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
                                                     data_tables_metadata = rep(list(list()),length(data_tables)),
+                                                    data_tables_filters = rep(list(list()),length(data_tables)),
                                                     imported_from = as.list(rep("",length(data_tables))), 
                                                     messages=TRUE, convert=TRUE, create=TRUE)
 {
@@ -84,7 +86,8 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
                                  metadata = data_tables_metadata[[i]], 
                                  imported_from = imported_from[[i]], 
                                  start_point = i, 
-                                 messages = messages, convert = convert, create = create)
+                                 messages = messages, convert = convert, create = create, 
+                                 filters = data_tables_filters[[i]])
       # Add this new data object to our list of data objects
       self$append_data_object(new_data$get_metadata(data_name_label), new_data)
     }
@@ -95,7 +98,7 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
 instat_object$set("public", "replace_instat_object", function(new_instatObj) {
   self$set_data_objects(new_instatObj$get_data_objects())
   self$set_meta(new_instatObj$get_metadata())
-  self$set_models(new_instatObj$get_models())
+  self$set_objects(new_instatObj$get_objects())
   self$data_objects_changed <- TRUE
   lapply(new_instatObj$get_data_objects(), function(x) x$set_data_changed(TRUE))
 }
@@ -135,7 +138,7 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing =TRUE
       if(!keep_existing) {
         self$set_data_objects(list())
         self$set_meta(list())
-        self$set_models(list())
+        self$set_objects(list())
       }
       for ( curr_data_obj in data_RDS$get_data_objects() ) {
         if (!(curr_data_obj$get_metadata(data_name_label) %in% self$get_data_names()) || overwrite_existing){
@@ -153,15 +156,16 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing =TRUE
           self$append_data_object(curr_data_name,curr_data_obj)
         }
       }
-      new_models_list = data_RDS$get_models()
-      new_models_count = length(new_models_list)
-      if (include_models && new_models_count > 0) {
-        for ( i in (1:new_models_count) ) {
-          if (!(names(new_models_list)[i] %in% names(private$.models)) || overwrite_existing) { 
-            self$add_model(new_models_list[i],names(new_models_list)[i])
-          }
-        }
-      }
+      #TODO fix importing Robjects
+      # new_models_list = data_RDS$get_models()
+      # new_models_count = length(new_models_list)
+      # if (include_models && new_models_count > 0) {
+      #   for ( i in (1:new_models_count) ) {
+      #     if (!(names(new_models_list)[i] %in% names(private$.models)) || overwrite_existing) { 
+      #       self$add_model(new_models_list[i],names(new_models_list)[i])
+      #     }
+      #   }
+      # }
       new_metadata = data_RDS$get_metadata()
       new_metadata_count = length(new_metadata)
       if (include_metadata & new_metadata_count > 0) {
@@ -192,10 +196,10 @@ instat_object$set("public", "set_meta", function(new_meta) {
 }
 )
 
-instat_object$set("public", "set_models", function(new_models) {
-  if(!is.list(new_models)) stop("new_models must be of type: list")
+instat_object$set("public", "set_objects", function(new_objects) {
+  if(!is.list(new_objects)) stop("new_objects must be of type: list")
   
-  private$.models <- new_models 
+  private$.objects <- new_objects 
 }
 )
 
@@ -212,7 +216,7 @@ instat_object$set("public", "append_data_object", function(name, obj) {
 }
 )
 
-instat_object$set("public", "get_data_objects", function(data_name) {
+instat_object$set("public", "get_data_objects", function(data_name, as_list = FALSE) {
   if(missing(data_name)) {
     return(private$.data_objects)
   }
@@ -223,27 +227,27 @@ instat_object$set("public", "get_data_objects", function(data_name) {
     
     if(type=="character" && !all(data_name %in% names(private$.data_objects))) stop(paste(data_name, "not found"))
     if(type=="integer" && (!all(1 <= data_name) || !all(data_name <= length(private$.data_objects)))) stop(paste(data_name, "not found"))
-    if(length(data_name) > 1) return(private$.data_objects[data_name])
+    if(length(data_name) > 1 || as_list) return(private$.data_objects[data_name])
     else return(private$.data_objects[[data_name]])
   }
 }
 )
 
-instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE,...) {
+instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE,...) {
   if(!stack_data) {
     if(missing(data_name)) {
       retlist <- list()
       for ( i in (1:length(private$.data_objects)) ) {
-        retlist[[names(private$.data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns)
+        retlist[[names(private$.data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter)
       }
       return(retlist)
     }
-    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns))
+    else return(self$get_data_objects(data_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter))
   }
   else {
     if(missing(data_name)) stop("data to be stacked is missing")
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found."))
-    return(melt(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns), ...))
+    return(melt(self$get_data_objects(data_name)$get_data_frame(include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter), ...))
   }
 }
 )
@@ -371,11 +375,11 @@ instat_object$set("public", "add_columns_to_data", function(data_name, col_name,
 )
 
 instat_object$set("public", "get_columns_from_data", function(data_name, col_names, from_stacked_data = FALSE,
-                                                    force_as_data_frame = FALSE) {
+                                                    force_as_data_frame = FALSE, use_current_filter = TRUE) {
   if(missing(data_name)) stop("data_name is required")
   if(!from_stacked_data) {
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found"))
-    self$get_data_objects(data_name)$get_columns_from_data(col_names, force_as_data_frame)
+    self$get_data_objects(data_name)$get_columns_from_data(col_names, force_as_data_frame, use_current_filter = use_current_filter)
   }
   else {
     if(!exists(data_name)) stop(paste(data_name, "not found."))
@@ -386,24 +390,83 @@ instat_object$set("public", "get_columns_from_data", function(data_name, col_nam
 }
 )
 
-instat_object$set("public", "add_model", function(model, model_name = paste("model",length(models)+1)) {
-  if(missing(model)) stop("model is required")
-  if(model_name %in% names(private$.models)) message(paste("A model called", model_name, "already exists. It will be replaced."))
-  
-  private$.models[[model_name]] <- model #self$set_models(private$.models[[model_name]])
+instat_object$set("public", "add_object", function(data_name, object, object_name) {
+  if(missing(data_name)) {
+    if(missing(object_name)) object_name = next_default_item("object", names(private$.objects))
+    if(object_name %in% names(private$.objects)) message(paste("An object called", object_name, "already exists. It will be replaced."))
+    private$.objects[[object_name]] <- object
+  }
+  else self$get_data_objects(data_name)$add_object(object = object, object_name = object_name)
 }
 ) 
 
-instat_object$set("public", "get_models", function(model_name) {
-  if(missing(model_name)) return(private$.models)
-  if(!is.character(model_name)) stop("name must be a character")
-  if(!model_name %in% names(private$.models)) stop(model_name, "not found in models")
-  private$.models[[model_name]]
+instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE) {
+  if(missing(data_name)) {
+    if(!missing(object_name)) warning("data_name is missing so ", object_name, " will be ignored. Specify from_overall = TRUE to get from overall objects by name")
+    out = sapply(self$get_data_objects(as_list = TRUE), function(x) x$get_objects(type = type))
+    if(include_overall) out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, type = type)]
+    if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
+    return(out)
+  }
+  else {
+    if(data_name == overall_label) {
+      curr_objects = private$.objects[self$get_object_names(data_name = data_name, type = type)]
+      if(!missing(object_name)) {
+        if(!(object_name %in% names(curr_objects))) stop(object_name, "not found.")
+        else out = curr_objects[[object_name]]
+      }
+      else out = curr_objects
+    }
+    else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type)
+    if(as_list) {
+      lst = list()
+      lst[[data_name]] <- out
+      return(lst)
+    }
+    else return(out)
+  }
 }
 )
 
-instat_object$set("public", "get_from_model", function(model_name, value1, value2, value3) {
-  curr_model = self$get_models(model_name)
+instat_object$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE) {
+  if(type == "") overall_object_names = names(private$.objects)
+  else {
+    if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
+    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
+    else stop("type: ", type, " not recognised")
+  }
+  if(missing(data_name)) {
+    if(missing(type)) out = sapply(self$get_data_objects(), function(x) x$get_object_names()) 
+    else out = sapply(self$get_data_objects(), function(x) x$get_object_names(type = type))
+    if(include_overall) out[[overall_label]] <- overall_object_names
+    if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
+    return(as.list(out))
+  }
+  else {
+    if(data_name == overall_label) return(overall_object_names)
+    else return(self$get_data_objects(data_name)$get_object_names(type))
+  }
+}
+)
+
+instat_object$set("public", "add_model", function(data_name, model, model_name) {
+  self$add_object(data_name = data_name, object = model, object_name = model_name)
+}
+)
+
+instat_object$set("public", "get_models", function(data_name, model_name, include_overall = TRUE) {
+  self$get_objects(data_name = data_name, object_name = model_name, include_overall = include_overall, type = model_label)
+}
+)
+
+instat_object$set("public", "get_model_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE) {
+  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = model_label, include_empty = include_empty)
+}
+)
+
+instat_object$set("public", "get_from_model", function(data_name, model_name, value1, value2, value3) {
+  if(missing(data_name) || missing(model_name)) stop("data_name and model_name must both be specified.")
+  curr_model = self$get_models(data_name = data_name, model_name = model_name)
   if(missing(value1)) stop("value1 must be specified.")
   if(!value1 %in% names(curr_model)) stop(paste(value1, "not found in", model_name))
   if(missing(value2)) {
@@ -421,8 +484,69 @@ instat_object$set("public", "get_from_model", function(model_name, value1, value
 }
 )
 
-instat_object$set("public", "get_model_names", function() {
-  return(names(private$.models))
+instat_object$set("public", "add_graph", function(data_name, graph, graph_name) {
+  self$add_object(data_name = data_name, object = graph, object_name = graph_name)
+}
+)
+
+instat_object$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE) {
+  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label)
+}
+)
+
+instat_object$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE) {
+  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty)
+}
+)
+
+instat_object$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE) {
+  if(missing(filter)) stop("filter is required")
+  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter)
+}
+) 
+
+instat_object$set("public", "current_filter", function(data_name) {
+  return(self$get_data_objects(data_name)$current_filter)
+}
+)
+
+instat_object$set("public", "set_current_filter", function(data_name, filter_name = "") {
+  self$get_data_objects(data_name)$set_current_filter(filter_name)
+}
+)
+
+instat_object$set("public", "get_filter", function(data_name, filter_name) {
+  return(self$get_data_objects(data_name)$get_filter(filter_name))
+}
+)
+
+instat_object$set("public", "get_current_filter", function(data_name) {
+  self$get_data_objects(data_name)$get_current_filter()
+}
+)
+
+instat_object$set("public", "get_filter_names", function(data_name, as_list = FALSE, include = list(), exclude = list()) {
+  if(missing(data_name)) {
+    return(lapply(self$get_data_objects(), function(x) x$get_filter_names(include = include, exclude = exclude)))
+  } 
+  else {
+    return(self$get_data_objects(data_name)$get_filter_names(as_list = as_list, include = include, exclude = exclude))
+  }
+}
+)
+
+instat_object$set("public", "remove_current_filter", function(data_name) {
+  self$get_data_objects(data_name)$remove_current_filter()
+}
+)
+
+instat_object$set("public", "filter_applied", function(data_name) {
+  self$get_data_objects(data_name)$filter_applied()
+}
+)
+
+instat_object$set("public", "filter_string", function(data_name, filter_name) {
+  self$get_data_objects(data_name)$filter_string(filter_name)
 }
 )
 
@@ -467,12 +591,12 @@ instat_object$set("public", "get_next_default_column_name", function(data_name, 
 } 
 )
 
-instat_object$set("public", "get_column_names", function(data_name, as_list = FALSE, include_type = c(), exclude_type = c(), include_hidden = TRUE) {
+instat_object$set("public", "get_column_names", function(data_name, as_list = FALSE, include = list(), exclude = list()) {
   if(missing(data_name)) {
-    return(lapply(self$get_data_objects(), function(x) x$get_column_names(include_type = include_type, exclude_type = exclude_type, include_hidden = include_hidden)))
+    return(lapply(self$get_data_objects(), function(x) x$get_column_names(include = include, exclude = exclude)))
   } 
   else {
-    return(self$get_data_objects(data_name)$get_column_names(as_list, include_type, exclude_type, include_hidden = include_hidden))
+    return(self$get_data_objects(data_name)$get_column_names(as_list, include, exclude))
   }
 }
 )
@@ -492,7 +616,7 @@ instat_object$set("public", "insert_column_in_data", function(data_name, col_dat
 # )
 
 instat_object$set("public", "reorder_columns_in_data", function(data_name, col_order){
-  self$get_data_objects(data_name)$order_columns_in_data(col_order = col_order)
+  self$get_data_objects(data_name)$reorder_columns_in_data(col_order = col_order)
 }
 )
 
@@ -546,28 +670,34 @@ instat_object$set("public", "convert_column_to_type", function(data_name, col_na
 } 
 )
 
-instat_object$set("public", "append_to_variables_metadata", function(data_name, col_names, property, new_val) {
+instat_object$set("public", "append_to_variables_metadata", function(data_name, col_names, property, new_val = "") {
   self$get_data_objects(data_name)$append_to_variables_metadata(col_names, property, new_val)
 } 
 )
 
-instat_object$set("public", "append_to_dataframe_metadata", function(data_name, property, new_val) {
+instat_object$set("public", "append_to_dataframe_metadata", function(data_name, property, new_val = "") {
   self$get_data_objects(data_name)$append_to_metadata(property, new_val)
 } 
 )
 
-instat_object$set("public", "append_to_metadata", function(property, new_val) {
-  if(missing(property) || missing(new_val)) {
-    stop("property and new_val arguments must be specified.")
-  } 
+instat_object$set("public", "append_to_metadata", function(property, new_val = "") {
+  if(missing(property)) stop("property and new_val arguments must be specified.")
   
   if(!is.character(property)) stop("property must be of type character")
   
   private$.metadata[[property]] <- new_val
   self$metadata_changed <- TRUE
-  #TODO should there be a changes list?
-  #self$append_to_changes(list(Added_metadata, property))
-} 
+  self$append_to_changes(list(Added_metadata, property))
+}
+)
+
+instat_object$set("public", "add_metadata_field", function(data_name, property, new_val = "") {
+  if(missing(property)) stop("property and new_val arguments must be specified.")
+  if(data_name == overall_label) {
+    invisible(sapply(self$get_data_objects(), function(x) x$append_to_metadata(property, new_val)))
+  }
+  else invisible(sapply(self$get_data_objects(data_name, as_list = TRUE), function(x) x$append_to_variables_metadata(property = property, new_val = new_val)))
+}
 )
 
 instat_object$set("public", "reorder_dataframes", function(data_frames_order) {
@@ -628,12 +758,41 @@ instat_object$set("public","set_hidden_columns", function(data_name, col_names) 
 )
 
 instat_object$set("public","unhide_all_columns", function(data_name) {
-  if(missing(data_name)) sapply(self$get_data_objects(), function(obj) obj$unhide_all_columns())
+  if(missing(data_name)) invisible(sapply(self$get_data_objects(), function(obj) obj$unhide_all_columns()))
   else self$get_data_objects(data_name)$unhide_all_columns()
 } 
 )
 
 instat_object$set("public","set_row_names", function(data_name, row_names) {
   self$get_data_objects(data_name)$set_row_names(row_names = row_names)
+} 
+)
+
+instat_object$set("public","set_protected_columns", function(data_name, col_names) {
+  self$get_data_objects(data_name)$set_protected_columns(col_names = col_names)
+} 
+)
+
+instat_object$set("public","get_metadata_fields", function(data_name, include_overall, as_list = FALSE, include, exclude) {
+  if(!missing(data_name)) {
+    if(data_name == overall_label) {
+      out = names(self$get_combined_metadata())
+      if(as_list) {
+        lst = list()
+        lst[[data_name]] <- out
+        return(lst)
+      }
+      else return(out)
+    }
+    else return(self$get_data_objects(data_name)$get_variables_metadata_fields(as_list = as_list, include = include, exclude = exclude))
+  }
+  else {
+    out = list()
+    if(include_overall) out[[overall_label]] <- names(self$get_combined_metadata())
+    for(data_obj_name in self$get_data_names()) {
+      out[[data_obj_name]] <- self$get_data_objects(data_obj_name)$get_variables_metadata_fields(as_list = FALSE, include = include, exclude = exclude)
+    }
+    return(out)
+  }
 } 
 )
