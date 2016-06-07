@@ -291,7 +291,7 @@ Public Class ucrGeom
         clsgeom_dotplot.AddLayerParameter("binwidth", "numeric", "")
         clsgeom_dotplot.AddLayerParameter("binaxis", "list", "x", lstParameterStrings:={"x", "y"})
         clsgeom_dotplot.AddLayerParameter("binpositions", "list", "bypositions", lstParameterStrings:={"bypositions", "all"})
-        clsgeom_dotplot.AddLayerParameter("stackdir", "text", "up")
+        clsgeom_dotplot.AddLayerParameter("stackdir", "list", "up", lstParameterStrings:={"up", "down", "center", "centerwhole"})
         clsgeom_dotplot.AddLayerParameter("stackratio", "numeric", "1")
         clsgeom_dotplot.AddLayerParameter("dotsize", "numeric", "1")
         clsgeom_dotplot.AddLayerParameter("stackgroups", "Boolean", "False")
@@ -339,8 +339,8 @@ Public Class ucrGeom
         clsgeom_freqpoly.AddAesParameter("size", strIncludedDataTypes:={"factor"})
 
         'Add layer parameters
-        clsgeom_freqpoly.AddLayerParameter("stat", "text", "bin")
-        clsgeom_freqpoly.AddLayerParameter("position", "text", "identity")
+        clsgeom_freqpoly.AddLayerParameter("stat", "list", "bin", lstParameterStrings:={"bin", "identity"})
+        clsgeom_freqpoly.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter", "stack", "dodge"})
         lstAllGeoms.Add(clsgeom_freqpoly)
 
         'clsgeom_hex.strGeomName = "geom_hex"
@@ -365,8 +365,8 @@ Public Class ucrGeom
         'adding layer parameters
         clsgeom_histogram.AddLayerParameter("bin", "numeric", "30")
         clsgeom_histogram.AddLayerParameter("binwidth", "numeric", "0")
-        clsgeom_histogram.AddLayerParameter("closed", "Boolean", "")
-        clsgeom_histogram.AddLayerParameter("Position", "text", "stack")
+        clsgeom_histogram.AddLayerParameter("closed", "list", "", lstParameterStrings:={"left", "right"})
+        clsgeom_histogram.AddLayerParameter("Position", "list", "stack", lstParameterStrings:={"stack", "dodge"})
         lstAllGeoms.Add(clsgeom_histogram)
 
 
@@ -422,7 +422,7 @@ Public Class ucrGeom
         clsgeom_line.AddAesParameter("size", strIncludedDataTypes:={"numeric, factor"})
         'adding layer parameters
 
-        clsgeom_line.AddLayerParameter("position", "text", "identity") 'others options are “jitter”, “dodge” And “stack”
+        clsgeom_line.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter", "dodge", "stack"}) 'others options are “jitter”, “dodge” And “stack”
         lstAllGeoms.Add(clsgeom_line)
 
 
