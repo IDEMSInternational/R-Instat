@@ -327,11 +327,17 @@ Public Class ucrGeom
 
         clsgeom_histogram.strGeomName = "geom_histogram"
         clsgeom_histogram.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_histogram.AddAesParameter("alpha")
-        clsgeom_histogram.AddAesParameter("colour")
+        clsgeom_histogram.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
+        clsgeom_histogram.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
         clsgeom_histogram.AddAesParameter("fill", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
-        clsgeom_histogram.AddAesParameter("linetype")
-        clsgeom_histogram.AddAesParameter("size")
+        clsgeom_histogram.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_histogram.AddAesParameter("size", strIncludedDataTypes:={"factor"})
+
+        'adding layer parameters
+        clsgeom_histogram.AddLayerParameter("bin", "numeric", "30")
+        clsgeom_histogram.AddLayerParameter("binwidth", "numeric", "0")
+        clsgeom_histogram.AddLayerParameter("closed", "boolean", "")
+        clsgeom_histogram.AddLayerParameter("Position", "text", "stack")
         lstAllGeoms.Add(clsgeom_histogram)
 
 
