@@ -43,7 +43,9 @@ Public Class ucrReceiver
     End Sub
 
     Public Overridable Sub RemoveSelected()
-
+        If Selector IsNot Nothing Then
+            Selector.LoadList()
+        End If
     End Sub
 
     Public Overridable Sub Clear()
