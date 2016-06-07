@@ -1043,9 +1043,9 @@ data_object$set("public", "rename_object", function(object_name, new_name) {
 }
 )
 
-data_object$set("public", "delete_object", function(object_name) {
-  if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
-  private$objects[names(private$objects) == object_name] <- NULL
+data_object$set("public", "delete_objects", function(object_names) {
+  if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in objects list")
+  private$objects[names(private$objects) == object_names] <- NULL
 }
 )
 
