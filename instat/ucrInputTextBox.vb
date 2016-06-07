@@ -48,4 +48,14 @@ Public Class ucrInputTextBox
             Return False
         End If
     End Function
+
+    Public Overrides Property IsReadOnly As Boolean
+        Get
+            Return MyBase.IsReadOnly
+        End Get
+        Set(bReadOnly As Boolean)
+            MyBase.IsReadOnly = bReadOnly
+            txtInput.ReadOnly = bReadOnly
+        End Set
+    End Property
 End Class
