@@ -144,7 +144,7 @@ Public Class dlgImportDataset
             dlgOpen.Filter = "All Data files (*.xlsx,*.RDS)|*.xlsx;*.RDS|RDS R-file (*.RDS)|*.RDS|Excel files (*.xlsx)|*.xlsx"
             bFromLibrary = False
         Else
-            dlgOpen.Filter = "All Data files (*.csv,*.xls,*.xlsx,*.RDS, *.sav)|*.csv;*.xls;*.xlsx;*.RDS;*.sav|Comma separated file (*.csv)|*.csv|Excel files (*.xls)|*.xls|Excel files (*.xlsx)|*.xlsx|RDS R-file (*.RDS)|*.RDS|SPSS files (*.sav)|*.sav"
+            dlgOpen.Filter = "All Data files (*.csv,*.xls,*.xlsx,*.RDS,*.sav,*.tsv,*.csvy,*.feather,*.psv,*.RData,*.json,*.yml,*.dta,*.dbf,*.arff,*.R,*.sas7bdat,*.xpt,*.mtp,*.rec;*.syd,*.dif,*.ods,*.xml,*html)|*.csv;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html|Comma separated files (*.csv)|*.csv|Excel files (*.xls)|*.xls|Excel files (*.xlsx)|*.xlsx|RDS R-file (*.RDS)|*.RDS|SPSS files (*.sav)|*.sav|Tab separated files (*.tsv)|*.tsv|CSV with a YAML metadata header (*.csvy)|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html"
             dlgOpen.Title = "Open Data from file"
             dlgOpen.InitialDirectory = "c:\\"
         End If
@@ -606,12 +606,14 @@ Public Class dlgImportDataset
         If Not ucrInputSheets.IsEmpty() Then
             If strFileType = "xlsx" Then
                 clsReadXL.AddParameter("which", ucrInputSheets.cboInput.SelectedIndex + 1)
+                clsReadXL.RemoveParameterByName("sheet")
                 If Not ucrInputName.UserTyped() Then
                     ucrInputName.SetName(ucrInputSheets.GetText(), bSilent:=True)
                     ucrInputName.Focus()
                 End If
             ElseIf strFileType = "xls" Then
                 clsReadXL.AddParameter("sheet", ucrInputSheets.cboInput.SelectedIndex + 1)
+                clsReadXL.RemoveParameterByName("which")
                 If Not ucrInputName.UserTyped() Then
                     ucrInputName.SetName(ucrInputSheets.GetText(), bSilent:=True)
                     ucrInputName.Focus()
