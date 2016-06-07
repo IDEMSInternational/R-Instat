@@ -434,7 +434,7 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
 }
 )
 
-instat_object$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE) {
+instat_object$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   if(type == "") overall_object_names = names(private$.objects)
   else {
     if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
@@ -451,6 +451,11 @@ instat_object$set("public", "get_object_names", function(data_name, include_over
   }
   else {
     if(data_name == overall_label) {
+      if(length(excluded_items) > 0) {
+        ex_ind = which(overall_object_names %in% excluded_items)
+        if(length(ex_ind) != length(excluded_items)) warning("Some of the excluded_items were not found in the list of objects")
+        if(length(ex_ind) > 0) overall_object_names = overall_object_names[-ex_ind]
+      }
       if(as_list) {
         lst = list()
         lst[[overall_label]] <- overall_object_names
@@ -458,7 +463,7 @@ instat_object$set("public", "get_object_names", function(data_name, include_over
       }
       else return(overall_object_names)
     }
-    else return(self$get_data_objects(data_name)$get_object_names(type, as_list = as_list))
+    else return(self$get_data_objects(data_name)$get_object_names(type, as_list = as_list, excluded_items = excluded_items))
   }
 }
 )
@@ -524,8 +529,8 @@ instat_object$set("public", "get_models", function(data_name, model_name, includ
 }
 )
 
-instat_object$set("public", "get_model_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE) {
-  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = model_label, include_empty = include_empty, as_list = as_list)
+instat_object$set("public", "get_model_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = model_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
 }
 )
 
@@ -544,8 +549,8 @@ instat_object$set("public", "get_graphs", function(data_name, graph_name, includ
 }
 )
 
-instat_object$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE) {
-  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list)
+instat_object$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
 }
 )
 
@@ -575,12 +580,13 @@ instat_object$set("public", "get_current_filter", function(data_name) {
 }
 )
 
-instat_object$set("public", "get_filter_names", function(data_name, as_list = FALSE, include = list(), exclude = list()) {
+instat_object$set("public", "get_filter_names", function(data_name, as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
   if(missing(data_name)) {
+    #TODO what to do with excluded_items in this case
     return(lapply(self$get_data_objects(), function(x) x$get_filter_names(include = include, exclude = exclude)))
   } 
   else {
-    return(self$get_data_objects(data_name)$get_filter_names(as_list = as_list, include = include, exclude = exclude))
+    return(self$get_data_objects(data_name)$get_filter_names(as_list = as_list, include = include, exclude = exclude, excluded_items = excluded_items))
   }
 }
 )
@@ -641,12 +647,13 @@ instat_object$set("public", "get_next_default_column_name", function(data_name, 
 } 
 )
 
-instat_object$set("public", "get_column_names", function(data_name, as_list = FALSE, include = list(), exclude = list()) {
+instat_object$set("public", "get_column_names", function(data_name, as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
   if(missing(data_name)) {
+    #TODO what to do with excluded items in this case?
     return(lapply(self$get_data_objects(), function(x) x$get_column_names(include = include, exclude = exclude)))
   } 
   else {
-    return(self$get_data_objects(data_name)$get_column_names(as_list, include, exclude))
+    return(self$get_data_objects(data_name)$get_column_names(as_list, include, exclude, excluded_items = excluded_items))
   }
 }
 )
@@ -823,10 +830,15 @@ instat_object$set("public","set_protected_columns", function(data_name, col_name
 } 
 )
 
-instat_object$set("public","get_metadata_fields", function(data_name, include_overall, as_list = FALSE, include, exclude) {
+instat_object$set("public","get_metadata_fields", function(data_name, include_overall, as_list = FALSE, include, exclude, excluded_items = c()) {
   if(!missing(data_name)) {
     if(data_name == overall_label) {
       out = names(self$get_combined_metadata())
+      if(length(excluded_items) > 0){
+        ex_ind = which(out %in% excluded_items)
+        if(length(ex_ind) != length(excluded_items)) warning("Some of the excluded_items were not found in the list of objects")
+        if(length(ex_ind) > 0) out = out[-ex_ind]
+      }
       if(as_list) {
         lst = list()
         lst[[data_name]] <- out
@@ -834,9 +846,10 @@ instat_object$set("public","get_metadata_fields", function(data_name, include_ov
       }
       else return(out)
     }
-    else return(self$get_data_objects(data_name)$get_variables_metadata_fields(as_list = as_list, include = include, exclude = exclude))
+    else return(self$get_data_objects(data_name)$get_variables_metadata_fields(as_list = as_list, include = include, exclude = exclude, excluded_items = excluded_items))
   }
   else {
+    #TODO what to do with excluded_items in this case
     out = list()
     if(include_overall) out[[overall_label]] <- names(self$get_combined_metadata())
     for(data_obj_name in self$get_data_names()) {

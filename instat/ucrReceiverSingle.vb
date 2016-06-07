@@ -69,6 +69,7 @@ Public Class ucrReceiverSingle
             txtReceiverSingle.Text = ""
             strDataFrameName = ""
         End If
+        MyBase.RemoveSelected()
     End Sub
 
     Public Overrides Sub Clear()

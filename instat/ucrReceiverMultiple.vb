@@ -83,6 +83,7 @@ Public Class ucrReceiverMultiple
             Next
         End If
         RaiseEvent SelectionChanged()
+        MyBase.RemoveSelected()
     End Sub
 
     Public Overrides Sub Clear()
