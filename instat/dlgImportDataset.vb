@@ -236,18 +236,22 @@ Public Class dlgImportDataset
 #Region "File Preview options"
     Public Sub RefreshFilePreview()
         Dim sReader As StreamReader
-        Try
-            sReader = New StreamReader(ucrInputFilePath.GetText())
+        If ucrInputFilePath.GetText() <> "" Then
+            Try
+                sReader = New StreamReader(ucrInputFilePath.GetText())
+                txtPreview.Text = ""
+                For i = 1 To intLines + nudSkip.Value + 1
+                    txtPreview.Text = txtPreview.Text & sReader.ReadLine() & vbCrLf
+                    If sReader.Peek() = -1 Then
+                        Exit For
+                    End If
+                Next
+            Catch ex As Exception
+                txtPreview.Text = "Cannot show text preview of file:" & ucrInputFilePath.GetText() & ". The file may be in use by another program. Close the file and select it again from the dialog to refresh the preview."
+            End Try
+        Else
             txtPreview.Text = ""
-            For i = 1 To intLines + nudSkip.Value + 1
-                txtPreview.Text = txtPreview.Text & sReader.ReadLine() & vbCrLf
-                If sReader.Peek() = -1 Then
-                    Exit For
-                End If
-            Next
-        Catch ex As Exception
-            txtPreview.Text = "Cannot show text preview of file:" & ucrInputFilePath.GetText() & ". The file may be in use by another program. Close the file and select it again from the dialog to refresh the preview."
-        End Try
+        End If
     End Sub
 
     Private Sub RefreshFrameView()
@@ -265,7 +269,11 @@ Public Class dlgImportDataset
                 clsReadCSV.AddParameter("nrows", intLines)
             End If
             lblCannotImport.Hide()
-            bValid = frmMain.clsRLink.RunInternalScript(ucrBase.clsRsyntax.GetScript(), strTempDataFrameName, bSilent:=True)
+            If ucrInputFilePath.GetText() = "" Then
+                bValid = False
+            Else
+                bValid = frmMain.clsRLink.RunInternalScript(ucrBase.clsRsyntax.GetScript(), strTempDataFrameName, bSilent:=True)
+            End If
             If bValid Then
                 expTemp = frmMain.clsRLink.RunInternalScriptGetValue("convert_to_character_matrix(" & strTempDataFrameName & ")", bSilent:=True)
                 dfTemp = Nothing
