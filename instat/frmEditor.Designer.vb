@@ -49,6 +49,9 @@ Partial Class frmEditor
         Me.mnuInsertRowsBefore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertRowsAfter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteRows = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuFilter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRemoveCurrentFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.insertSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.deleteSheet = New System.Windows.Forms.ToolStripMenuItem()
@@ -58,9 +61,6 @@ Partial Class frmEditor
         Me.HideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblNoData = New System.Windows.Forms.Label()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuFilter = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuRemoveCurrentFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -216,7 +216,7 @@ Partial Class frmEditor
         '
         Me.rowContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInsertRowsBefore, Me.mnuInsertRowsAfter, Me.mnuDeleteRows, Me.ToolStripSeparator2, Me.mnuFilter, Me.mnuRemoveCurrentFilter})
         Me.rowContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.rowContextMenuStrip.Size = New System.Drawing.Size(190, 142)
+        Me.rowContextMenuStrip.Size = New System.Drawing.Size(190, 120)
         '
         'mnuInsertRowsBefore
         '
@@ -236,65 +236,6 @@ Partial Class frmEditor
         Me.mnuDeleteRows.Size = New System.Drawing.Size(189, 22)
         Me.mnuDeleteRows.Text = "Delete Row(s)"
         '
-        'statusColumnMenu
-        '
-        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteSheet, Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.HideSheet, Me.unhideSheet})
-        Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(127, 158)
-        '
-        'insertSheet
-        '
-        Me.insertSheet.Name = "insertSheet"
-        Me.insertSheet.Size = New System.Drawing.Size(126, 22)
-        Me.insertSheet.Text = "Insert..."
-        '
-        'deleteSheet
-        '
-        Me.deleteSheet.Name = "deleteSheet"
-        Me.deleteSheet.Size = New System.Drawing.Size(126, 22)
-        Me.deleteSheet.Text = "Delete"
-        '
-        'renameSheet
-        '
-        Me.renameSheet.Name = "renameSheet"
-        Me.renameSheet.Size = New System.Drawing.Size(126, 22)
-        Me.renameSheet.Text = "Rename..."
-        '
-        'reorderSheet
-        '
-        Me.reorderSheet.Name = "reorderSheet"
-        Me.reorderSheet.Size = New System.Drawing.Size(126, 22)
-        Me.reorderSheet.Text = "Reorder..."
-        '
-        'CopySheet
-        '
-        Me.CopySheet.Name = "CopySheet"
-        Me.CopySheet.Size = New System.Drawing.Size(126, 22)
-        Me.CopySheet.Text = "Copy..."
-        '
-        'HideSheet
-        '
-        Me.HideSheet.Name = "HideSheet"
-        Me.HideSheet.Size = New System.Drawing.Size(126, 22)
-        Me.HideSheet.Text = "Hide"
-        '
-        'unhideSheet
-        '
-        Me.unhideSheet.Name = "unhideSheet"
-        Me.unhideSheet.Size = New System.Drawing.Size(126, 22)
-        Me.unhideSheet.Text = "Unhide"
-        '
-        'lblNoData
-        '
-        Me.lblNoData.AutoSize = True
-        Me.lblNoData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNoData.Location = New System.Drawing.Point(122, 105)
-        Me.lblNoData.Name = "lblNoData"
-        Me.lblNoData.Size = New System.Drawing.Size(211, 31)
-        Me.lblNoData.TabIndex = 1
-        Me.lblNoData.Tag = "no_data_loaded"
-        Me.lblNoData.Text = "No Data Loaded"
-        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
@@ -313,6 +254,71 @@ Partial Class frmEditor
         Me.mnuRemoveCurrentFilter.Size = New System.Drawing.Size(189, 22)
         Me.mnuRemoveCurrentFilter.Tag = "Remove_Current_Filter"
         Me.mnuRemoveCurrentFilter.Text = "Remove Current Filter"
+        '
+        'statusColumnMenu
+        '
+        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteSheet, Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.HideSheet, Me.unhideSheet})
+        Me.statusColumnMenu.Name = "statusColumnMenu"
+        Me.statusColumnMenu.Size = New System.Drawing.Size(153, 180)
+        '
+        'insertSheet
+        '
+        Me.insertSheet.Name = "insertSheet"
+        Me.insertSheet.Size = New System.Drawing.Size(152, 22)
+        Me.insertSheet.Text = "Insert..."
+        '
+        'deleteSheet
+        '
+        Me.deleteSheet.Enabled = False
+        Me.deleteSheet.Name = "deleteSheet"
+        Me.deleteSheet.Size = New System.Drawing.Size(152, 22)
+        Me.deleteSheet.Text = "Delete"
+        '
+        'renameSheet
+        '
+        Me.renameSheet.Enabled = False
+        Me.renameSheet.Name = "renameSheet"
+        Me.renameSheet.Size = New System.Drawing.Size(152, 22)
+        Me.renameSheet.Text = "Rename..."
+        '
+        'reorderSheet
+        '
+        Me.reorderSheet.Enabled = False
+        Me.reorderSheet.Name = "reorderSheet"
+        Me.reorderSheet.Size = New System.Drawing.Size(152, 22)
+        Me.reorderSheet.Text = "Reorder..."
+        '
+        'CopySheet
+        '
+        Me.CopySheet.Enabled = False
+        Me.CopySheet.Name = "CopySheet"
+        Me.CopySheet.Size = New System.Drawing.Size(152, 22)
+        Me.CopySheet.Text = "Copy..."
+        '
+        'HideSheet
+        '
+        Me.HideSheet.Enabled = False
+        Me.HideSheet.Name = "HideSheet"
+        Me.HideSheet.Size = New System.Drawing.Size(152, 22)
+        Me.HideSheet.Text = "Hide"
+        '
+        'unhideSheet
+        '
+        Me.unhideSheet.Enabled = False
+        Me.unhideSheet.Name = "unhideSheet"
+        Me.unhideSheet.Size = New System.Drawing.Size(152, 22)
+        Me.unhideSheet.Text = "Unhide"
+        '
+        'lblNoData
+        '
+        Me.lblNoData.AutoSize = True
+        Me.lblNoData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNoData.Location = New System.Drawing.Point(122, 105)
+        Me.lblNoData.Name = "lblNoData"
+        Me.lblNoData.Size = New System.Drawing.Size(211, 31)
+        Me.lblNoData.TabIndex = 1
+        Me.lblNoData.Tag = "no_data_loaded"
+        Me.lblNoData.Text = "No Data Loaded"
         '
         'frmEditor
         '
