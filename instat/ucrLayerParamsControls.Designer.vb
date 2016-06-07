@@ -46,7 +46,6 @@ Partial Class ucrLayerParamsControls
         '
         'ucrcborParamValue
         '
-        Me.ucrcborParamValue.IsReadOnly = False
         Me.ucrcborParamValue.Location = New System.Drawing.Point(145, 3)
         Me.ucrcborParamValue.Name = "ucrcborParamValue"
         Me.ucrcborParamValue.Size = New System.Drawing.Size(53, 21)
