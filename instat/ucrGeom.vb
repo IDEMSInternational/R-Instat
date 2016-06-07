@@ -34,8 +34,8 @@ Public Class ucrGeom
         End If
     End Sub
     Private Sub InitialiseControl()
-        clsRaesFunction.SetRCommand("aes")
-        clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        '    clsRaesFunction.SetRCommand("aes")
+        '    clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
     End Sub
 
     Public Sub SetGeoms()
@@ -111,7 +111,7 @@ Public Class ucrGeom
         Dim clsgeom_vline As New Geoms
 
 
-        clsgeom_abline.strGeomName = "geom_abline"
+        clsgeom_abline.SetGeomName("geom_abline")
         clsgeom_abline.AddAesParameter("x", bIsMandatory:=True)
         clsgeom_abline.AddAesParameter("y", bIsMandatory:=True)
         clsgeom_abline.AddAesParameter("alpha")
@@ -125,7 +125,7 @@ Public Class ucrGeom
         'TO DO Discuss how to use these
         lstAllGeoms.Add(clsgeom_abline)
 
-        clsgeom_area.strGeomName = "geom_area"
+        clsgeom_area.SetGeomName("geom_area")
         'mandatory aesthetics 
         clsgeom_area.AddAesParameter("x", bIsMandatory:=True)
         clsgeom_area.AddAesParameter("ymax", bIsMandatory:=True)
@@ -138,7 +138,7 @@ Public Class ucrGeom
         clsgeom_area.AddAesParameter("size")
         lstAllGeoms.Add(clsgeom_area)
 
-        clsgeom_bar.strGeomName = "geom_bar"
+        clsgeom_bar.SetGeomName("geom_bar")
         clsgeom_bar.AddAesParameter("x", bIsMandatory:=True)
         'Optional
         clsgeom_bar.AddAesParameter("alpha")
@@ -148,7 +148,8 @@ Public Class ucrGeom
         clsgeom_bar.AddAesParameter("size")
         lstAllGeoms.Add(clsgeom_bar)
 
-        clsgeom_bin2d.strGeomName = "geom_bin2d"
+
+        clsgeom_bin2d.SetGeomName("geom_bin2d")
         'mandatory
         clsgeom_bin2d.AddAesParameter("x", bIsMandatory:=True)
         clsgeom_bin2d.AddAesParameter("y", bIsMandatory:=True)
@@ -156,7 +157,8 @@ Public Class ucrGeom
         clsgeom_bin2d.AddAesParameter("fill")
         lstAllGeoms.Add(clsgeom_bin2d)
 
-        clsgeom_boxplot.strGeomName = "geom_boxplot"
+
+        clsgeom_boxplot.SetGeomName("geom_boxplot")
         clsgeom_boxplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
         clsgeom_boxplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         clsgeom_boxplot.AddAesParameter("fill", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
@@ -168,9 +170,15 @@ Public Class ucrGeom
 
         'adding layerParameters
         clsgeom_boxplot.AddLayerParameter("notch", "boolean", "TRUE")
+        clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "1.5")
+        clsgeom_boxplot.AddLayerParameter("varwidth", "boolean", "TRUE")
+        clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5")
+        clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "1.5")
+        clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
+        clsgeom_boxplot.AddLayerParameter("outlier.stroke ", "numeric", "0.5")
         lstAllGeoms.Add(clsgeom_boxplot)
 
-        clsgeom_contour.strGeomName = "geom_contour"
+        clsgeom_contour.SetGeomName("geom_contour")
         'Mandatory
         clsgeom_contour.AddAesParameter("x", bIsMandatory:=True)
         clsgeom_contour.AddAesParameter("y", bIsMandatory:=True)
@@ -182,7 +190,7 @@ Public Class ucrGeom
         clsgeom_contour.AddAesParameter("weight")
         lstAllGeoms.Add(clsgeom_contour)
 
-        clsgeom_count.strGeomName = "geom_count"
+        clsgeom_count.SetGeomName("geom_count")
         'mandatory
         clsgeom_count.AddAesParameter("x", bIsMandatory:=True)
         clsgeom_count.AddAesParameter("y", bIsMandatory:=True)
