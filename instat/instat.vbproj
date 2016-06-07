@@ -698,6 +698,12 @@
     <Compile Include="sdgVariableTransformations.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ucrColors.Designer.vb">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrColors.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
     </Compile>
@@ -3669,6 +3675,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtonsSubdialogue.sw-KE.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.fr-FR.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.sw-KE.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.fr-FR.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
