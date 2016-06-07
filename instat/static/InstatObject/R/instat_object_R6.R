@@ -402,10 +402,16 @@ instat_object$set("public", "add_object", function(data_name, object, object_nam
 
 instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE) {
   if(missing(data_name)) {
-    if(!missing(object_name)) warning("data_name is missing so ", object_name, " will be ignored. Specify from_overall = TRUE to get from overall objects by name")
-    out = sapply(self$get_data_objects(as_list = TRUE), function(x) x$get_objects(type = type))
-    if(include_overall) out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, type = type)]
-    if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
+    if(!missing(object_name)) {
+      curr_objects = private$.objects[self$get_object_names(data_name = overall_label, type = type)]
+      if(!(object_name %in% names(curr_objects))) stop(object_name, "not found.")
+      else out = curr_objects[[object_name]]
+    }
+    else {
+      out = sapply(self$get_data_objects(as_list = TRUE), function(x) x$get_objects(type = type))
+      if(include_overall) out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, type = type)]
+      if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
+    }
     return(out)
   }
   else {
@@ -420,7 +426,7 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
     else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type)
     if(as_list) {
       lst = list()
-      lst[[data_name]] <- out
+      lst[[data_name]][[object_name]] <- out
       return(lst)
     }
     else return(out)
@@ -428,7 +434,7 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
 }
 )
 
-instat_object$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE) {
+instat_object$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE) {
   if(type == "") overall_object_names = names(private$.objects)
   else {
     if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
@@ -440,12 +446,48 @@ instat_object$set("public", "get_object_names", function(data_name, include_over
     else out = sapply(self$get_data_objects(), function(x) x$get_object_names(type = type))
     if(include_overall) out[[overall_label]] <- overall_object_names
     if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
-    return(as.list(out))
+    if(as_list) out = as.list(out)
+    return(out)
   }
   else {
-    if(data_name == overall_label) return(overall_object_names)
-    else return(self$get_data_objects(data_name)$get_object_names(type))
+    if(data_name == overall_label) {
+      if(as_list) {
+        lst = list()
+        lst[[overall_label]] <- overall_object_names
+        return(lst)
+      }
+      else return(overall_object_names)
+    }
+    else return(self$get_data_objects(data_name)$get_object_names(type, as_list = as_list))
   }
+}
+)
+
+instat_object$set("public", "rename_object", function(data_name, object_name, new_name) {
+  if(missing(data_name) || data_name == overall_label) {
+    if(!object_name %in% names(private$.objects)) stop(object_name, " not found in overall objects list")
+    if(new_name %in% names(private$.objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
+    names(private$.objects)[names(private$.objects) == object_name] <- new_name
+  }
+  else self$get_data_objects(data_name)$rename_object(object_name = object_name, new_name = new_name)
+}
+)
+
+instat_object$set("public", "delete_object", function(data_name, object_name) {
+  if(missing(data_name) || data_name == overall_label) {
+    if(!object_name %in% names(private$.objects)) stop(object_name, " not found in overall objects list")
+    private$.objects[names(private$.objects) == object_name] <- NULL
+  }
+  else self$get_data_objects(data_name)$delete_object(object_name = object_name)
+}
+)
+
+instat_object$set("public", "reorder_objects", function(data_name, new_order) {
+  if(missing(data_name) || data_name == overall_label) {
+    if(length(new_order) != length(private$.objects) || !setequal(new_order, names(private$.objects))) stop("new_order must be a permutation of the current object names.")
+    self$set_objects(private$.objects[new_order])
+  }
+  else self$get_data_objects(data_name)$reorder_objects(new_order = new_order)
 }
 )
 
@@ -459,8 +501,8 @@ instat_object$set("public", "get_models", function(data_name, model_name, includ
 }
 )
 
-instat_object$set("public", "get_model_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE) {
-  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = model_label, include_empty = include_empty)
+instat_object$set("public", "get_model_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE) {
+  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = model_label, include_empty = include_empty, as_list = as_list)
 }
 )
 
@@ -494,8 +536,8 @@ instat_object$set("public", "get_graphs", function(data_name, graph_name, includ
 }
 )
 
-instat_object$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE) {
-  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty)
+instat_object$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE) {
+  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list)
 }
 )
 
