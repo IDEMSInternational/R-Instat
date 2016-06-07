@@ -473,12 +473,12 @@ instat_object$set("public", "rename_object", function(data_name, object_name, ne
 }
 )
 
-instat_object$set("public", "delete_object", function(data_name, object_name) {
+instat_object$set("public", "delete_objects", function(data_name, object_names) {
   if(missing(data_name) || data_name == overall_label) {
-    if(!object_name %in% names(private$.objects)) stop(object_name, " not found in overall objects list")
-    private$.objects[names(private$.objects) == object_name] <- NULL
+    if(!all(object_names %in% names(private$.objects))) stop("Not all object_names found in overall objects list")
+    private$.objects[names(private$.objects) == object_names] <- NULL
   }
-  else self$get_data_objects(data_name)$delete_object(object_name = object_name)
+  else self$get_data_objects(data_name)$delete_object(object_names = object_names)
 }
 )
 
