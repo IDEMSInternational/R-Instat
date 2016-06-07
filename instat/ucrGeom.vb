@@ -302,11 +302,16 @@ Public Class ucrGeom
 
         clsgeom_freqpoly.strGeomName = "geom_freqpoly"
         clsgeom_freqpoly.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_freqpoly.AddAesParameter("alpha")
-        clsgeom_freqpoly.AddAesParameter("colour")
+        clsgeom_freqpoly.AddAesParameter("y", strIncludedDataTypes:={"factor"})
+        clsgeom_freqpoly.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
+        clsgeom_freqpoly.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
         clsgeom_freqpoly.AddAesParameter("fill", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
-        clsgeom_freqpoly.AddAesParameter("linetype")
-        clsgeom_freqpoly.AddAesParameter("size")
+        clsgeom_freqpoly.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_freqpoly.AddAesParameter("size", strIncludedDataTypes:={"factor"})
+
+        'Add layer parameters
+        clsgeom_freqpoly.AddLayerParameter("stat", "text", "bin")
+        clsgeom_freqpoly.AddLayerParameter("position", "text", "identity")
         lstAllGeoms.Add(clsgeom_freqpoly)
 
         clsgeom_hex.strGeomName = "geom_hex"
