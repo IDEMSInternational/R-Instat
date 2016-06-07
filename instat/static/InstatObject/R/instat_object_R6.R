@@ -491,6 +491,29 @@ instat_object$set("public", "reorder_objects", function(data_name, new_order) {
 }
 )
 
+instat_object$set("public", "get_from_object", function(data_name, object_name, value1, value2, value3) {
+  if(missing(data_name) || missing(object_name)) stop("data_name and object_name must both be specified.")
+  curr_object = self$get_objects(data_name = data_name, object_name = object_name)
+  if(missing(value1)) {
+    if(!missing(value2) || !missing(value3)) warning("value1 is missing so value2 and value3 will be ignored.")
+    return(curr_object[])
+  }
+  if(!value1 %in% names(curr_object)) stop(value1, " not found in ", object_name)
+  if(missing(value2)) {
+    if(!missing(value3)) warning("value2 is missing so value3 will be ignored.")
+    return(curr_object[[value1]])
+  }
+  else {
+    if(!value2 %in% names(curr_object[[value1]])) stop(paste0(value2, " not found in ", object_name,"[[\"",value1,"\"]]"))
+    if(missing(value3)) return(curr_object[[value1]][[value2]])
+    else {
+      if(!value3 %in% names(curr_object[[value1]][[value2]])) stop(paste0(value3, " not found in ", object_name,"[[\"",value1,"\"]]","[[\"",value2,"\"]]"))
+      return(curr_object[[value1]][[value2]][[value3]])
+    }
+  }
+}
+)
+
 instat_object$set("public", "add_model", function(data_name, model, model_name) {
   self$add_object(data_name = data_name, object = model, object_name = model_name)
 }
@@ -507,22 +530,7 @@ instat_object$set("public", "get_model_names", function(data_name, include_overa
 )
 
 instat_object$set("public", "get_from_model", function(data_name, model_name, value1, value2, value3) {
-  if(missing(data_name) || missing(model_name)) stop("data_name and model_name must both be specified.")
-  curr_model = self$get_models(data_name = data_name, model_name = model_name)
-  if(missing(value1)) stop("value1 must be specified.")
-  if(!value1 %in% names(curr_model)) stop(paste(value1, "not found in", model_name))
-  if(missing(value2)) {
-    if(!missing(value3)) warning(paste("value2 is missing so value3 =",value3, "will be ignored."))
-    return(curr_model[[value1]])
-  }
-  else {
-    if(!value2 %in% names(curr_model[[value1]])) stop(paste0(value2, " not found in ", model_name,"[[\"",value1,"\"]]"))
-    if(missing(value3)) return(curr_model[[value1]][[value2]])
-    else {
-      if(!value3 %in% names(curr_model[[value1]][[value2]])) stop(paste0(value3, " not found in ", model_name,"[[\"",value1,"\"]]","[[\"",value2,"\"]]"))
-      return(curr_model[[value1]][[value2]][[value3]])
-    }
-  }
+  self$get_from_object(data_name = data_name, object_name = model_name, value1 = value1, value2 = value2, value3 = value3)
 }
 )
 
