@@ -16,7 +16,7 @@
 
 Public Class ucrColors
     Private Sub ucrColors_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Me.AddItems({"Pick Colour", "black", "white", "blue", "red", "yellow", "purple", "green", "orange", "grey", "brown", "pink", "NULL"})
+        Me.SetItems({"Pick Colour", "black", "white", "blue", "red", "yellow", "purple", "green", "orange", "grey", "brown", "pink", "NULL"})
     End Sub
 
     Private Sub ucrColors_NameChanged() Handles Me.NameChanged

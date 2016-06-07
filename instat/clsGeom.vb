@@ -34,12 +34,13 @@ Public Class Geoms
         clsAesParameters.Add(NewAesParameter)
     End Sub
 
-    Public Sub AddLayerParameter(strLayerParameterName As String, strLayerParameterDataType As String, strLayerParameterDefaultValue As String, Optional bIsDependent As Boolean = False, Optional strDependentParameter As String = "", Optional strDependantpParameterValue As String = "")
+    Public Sub AddLayerParameter(strLayerParameterName As String, strLayerParameterDataType As String, strLayerParameterDefaultValue As String, Optional bIsDependent As Boolean = False, Optional lstParameterStrings As String() = Nothing, Optional strDependentParameter As String = "", Optional strDependantpParameterValue As String = "")
         Dim NewLayerParameter As New LayerParameters
 
         NewLayerParameter.strLayerParameterName = strLayerParameterName
         NewLayerParameter.strLayerParameterDataType = strLayerParameterDataType
         NewLayerParameter.strParameterDefaultValue = strLayerParameterDefaultValue
+        NewLayerParameter.lstParameterStrings = lstParameterStrings
         'NewLayerParameter.strDependentParameter = strDependentParameter
         'NewLayerParameter.strDependantparameterValue = strDependantpParameterValue
         'NewLayerParameter.bIsDependent = bIsDependent
@@ -65,4 +66,5 @@ Public Class LayerParameters
     Public strDependentParameter As String
     Public strDependantparameterValue As String
     Public bIsDependent As Boolean
+    Public lstParameterStrings As String()
 End Class
