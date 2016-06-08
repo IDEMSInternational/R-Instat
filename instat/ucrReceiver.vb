@@ -24,6 +24,7 @@ Public Class ucrReceiver
     Public bUseFilteredData As Boolean = True
     Public bTypeSet As Boolean
     Protected strType As String
+    Public bExcludeFromSelector As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -71,6 +72,11 @@ Public Class ucrReceiver
 
     Public Overridable Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strVarNames As String = ""
+        Return strVarNames
+    End Function
+
+    Public Overridable Function GetVariableNamesList(Optional bWithQuotes As Boolean = True) As String()
+        Dim strVarNames As String() = Nothing
         Return strVarNames
     End Function
 
