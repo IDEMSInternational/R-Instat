@@ -45,11 +45,12 @@ Public Class ucrLayerParamsControls
                 ctrActive = nudParamValue
             ElseIf clsLayerParam.strLayerParameterDataType = "boolean" Then
                 ctrActive = ucrcborParamValue
-                ucrcborParamValue.cboInput.Items.Clear()
-                ucrcborParamValue.cboInput.Items.Add("TRUE")
-                ucrcborParamValue.cboInput.Items.Add("FALSE")
+                ucrcborParamValue.SetItems({"TRUE", "FALSE"})
             ElseIf clsLayerParam.strLayerParameterDataType = "colour" Then
                 ctrActive = ucrColor
+            ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
+                ctrActive = ucrcborParamValue
+                ucrcborParamValue.SetItems(clsLayerParam.lstParameterStrings)
             Else
                 ctrActive = New Control 'this should never actually be used but is here to ensure the code is stable even if a developper uses an incorrect datatype
             End If
