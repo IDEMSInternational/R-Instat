@@ -202,7 +202,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
 )
 
 # TODO
-data_object$set("public", "get_variables_metadata", function(include_all = TRUE, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property=TRUE) {
+data_object$set("public", "get_variables_metadata", function(include_all = TRUE, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE) {
   self$update_variables_metadata()
   if(!include_all) out = private$variables_metadata
   else {
