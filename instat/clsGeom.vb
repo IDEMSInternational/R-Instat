@@ -15,9 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class Geoms
-    Public strGeomName As String
+    Public strGeomName As String = ""
     Public clsAesParameters As New List(Of AesParameters)
     Public clsLayerParameters As New List(Of LayerParameters)
+
+    Public Sub SetGeomName(strTempName As String)
+        strGeomName = strTempName
+    End Sub
 
     Public Sub AddAesParameter(strAesParameterName As String, Optional strAesParameterValue As String = Nothing, Optional strIncludedDataTypes As String() = Nothing, Optional strExcludedDataTypes As String() = Nothing, Optional bIsMandatory As Boolean = False)
         'will be adding parameters to the geom as well as the value of the parameter.
@@ -36,9 +40,9 @@ Public Class Geoms
         NewLayerParameter.strLayerParameterName = strLayerParameterName
         NewLayerParameter.strLayerParameterDataType = strLayerParameterDataType
         NewLayerParameter.strParameterDefaultValue = strLayerParameterDefaultValue
-        NewLayerParameter.strDependentParameter = strDependentParameter
-        NewLayerParameter.strDependantparameterValue = strDependantpParameterValue
-        NewLayerParameter.bIsDependent = bIsDependent
+        'NewLayerParameter.strDependentParameter = strDependentParameter
+        'NewLayerParameter.strDependantparameterValue = strDependantpParameterValue
+        'NewLayerParameter.bIsDependent = bIsDependent
 
         clsLayerParameters.Add(NewLayerParameter)
     End Sub
