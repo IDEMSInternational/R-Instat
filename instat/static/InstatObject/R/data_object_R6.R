@@ -909,6 +909,11 @@ data_object$set("public", "set_row_names", function(row_names) {
 }
 )
 
+data_object$set("public", "get_row_names", function() {
+  return(names(private$data))
+}
+)
+
 data_object$set("public", "set_protected_columns", function(col_names) {
   if(!all(col_names %in% self$get_column_names())) stop("Not all col_names found in data")
   
