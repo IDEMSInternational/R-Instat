@@ -188,7 +188,7 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 )
 
 data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE) {
-  if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out = private$data[ , !self$get_variables_metadata(property = is_hidden_label)]
+  if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out = private$data[!self$get_variables_metadata(property = is_hidden_label)]
   else out = private$data
   if(use_current_filter && length(private$.current_filter) > 0) {
     out = out[self$current_filter, ]
