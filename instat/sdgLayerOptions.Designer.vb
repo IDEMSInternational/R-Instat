@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgLayerOptions
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,12 +20,12 @@ Partial Class sdgLayerOptions
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.tbcLayers = New System.Windows.Forms.TabControl()
         Me.tbpAesthetics = New System.Windows.Forms.TabPage()
-        Me.ucrGeomWithAes = New instat.UcrGeomListWithParameters()
         Me.tbpGeomParameters = New System.Windows.Forms.TabPage()
+        Me.ucrGeomWithAes = New instat.UcrGeomListWithParameters()
         Me.ucrLayerParameter = New instat.ucrLayerParameters()
         Me.ucrSdgLayerBase = New instat.ucrButtonsSubdialogue()
         Me.tbcLayers.SuspendLayout()
@@ -54,13 +54,6 @@ Partial Class sdgLayerOptions
         Me.tbpAesthetics.Text = "Layer Dimensions(Aesthetics)"
         Me.tbpAesthetics.UseVisualStyleBackColor = True
         '
-        'ucrGeomWithAes
-        '
-        Me.ucrGeomWithAes.Location = New System.Drawing.Point(6, 6)
-        Me.ucrGeomWithAes.Name = "ucrGeomWithAes"
-        Me.ucrGeomWithAes.Size = New System.Drawing.Size(467, 286)
-        Me.ucrGeomWithAes.TabIndex = 0
-        '
         'tbpGeomParameters
         '
         Me.tbpGeomParameters.Controls.Add(Me.ucrLayerParameter)
@@ -72,12 +65,20 @@ Partial Class sdgLayerOptions
         Me.tbpGeomParameters.Text = "Layer Parameters(Geom Parameters)"
         Me.tbpGeomParameters.UseVisualStyleBackColor = True
         '
+        'ucrGeomWithAes
+        '
+        Me.ucrGeomWithAes.Location = New System.Drawing.Point(6, 6)
+        Me.ucrGeomWithAes.Name = "ucrGeomWithAes"
+        Me.ucrGeomWithAes.Size = New System.Drawing.Size(467, 286)
+        Me.ucrGeomWithAes.TabIndex = 0
+        '
         'ucrLayerParameter
         '
-        Me.ucrLayerParameter.Location = New System.Drawing.Point(6, 6)
+        Me.ucrLayerParameter.Location = New System.Drawing.Point(3, 3)
         Me.ucrLayerParameter.Name = "ucrLayerParameter"
-        Me.ucrLayerParameter.Size = New System.Drawing.Size(187, 237)
+        Me.ucrLayerParameter.Size = New System.Drawing.Size(211, 297)
         Me.ucrLayerParameter.TabIndex = 0
+        Me.ucrLayerParameter.ucrGeomWithAes = Nothing
         '
         'ucrSdgLayerBase
         '
