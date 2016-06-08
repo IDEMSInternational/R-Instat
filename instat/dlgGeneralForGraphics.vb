@@ -17,6 +17,8 @@ Imports instat.Translations
 Public Class dlgGeneralForGraphics
     Private clsRggplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
+    Public lstLayer As String
+    Public ucrGeomAes As UcrGeomListWithParameters
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -28,8 +30,7 @@ Public Class dlgGeneralForGraphics
 
         End If
         autoTranslate(Me)
-
-        TestOkEnabled()
+        ucrBase.OKEnabled(False)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -42,16 +43,21 @@ Public Class dlgGeneralForGraphics
     Private Sub SetDefaults()
         cmdDelete.Enabled = False
         cmdEdit.Enabled = False
-        TestOkEnabled()
+        lstLayers.Clear()
     End Sub
-
     Private Sub ReopenDialog()
 
     End Sub
     Public Sub TestOkEnabled()
+        'thinking this would be useful to check if all receivers for mandatory are filled
+        'If Not sdgLayerOptions.ucrGeomWithAes.ucrReceiverParam1.IsEmpty Then
+        '    ucrBase.OKEnabled(ucrGeomAes.bEnabled)
+        'Else
+        '    ucrBase.OKEnabled(ucrGeomAes.bEnabled)
+        'End If
 
+        ''create a loop for mandatory receivers 
     End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
@@ -59,5 +65,10 @@ Public Class dlgGeneralForGraphics
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
         sdgLayerOptions.ShowDialog()
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=sdgLayerOptions.clsGeomFunction)
+        FillLayers()
+    End Sub
+    Public Sub FillLayers()
+        lstLayer = sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem
+        lstLayers.Items.Add(lstLayer)
     End Sub
 End Class

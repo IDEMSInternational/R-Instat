@@ -35,8 +35,8 @@ Public Class ucrGeom
         End If
     End Sub
     Private Sub InitialiseControl()
-        '    clsRaesFunction.SetRCommand("aes")
-        '    clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        clsRaesFunction.SetRCommand("aes")
+        clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
     End Sub
 
     Public Sub SetGeoms()
@@ -168,7 +168,7 @@ Public Class ucrGeom
         clsgeom_boxplot.SetGeomName("geom_boxplot")
         clsgeom_boxplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
         clsgeom_boxplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_boxplot.AddAesParameter("fill", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
+        clsgeom_boxplot.AddAesParameter("fill", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
         clsgeom_boxplot.AddAesParameter("colour",, strIncludedDataTypes:={"factor"})
         clsgeom_boxplot.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_boxplot.AddAesParameter("size", strIncludedDataTypes:={"factor"})
@@ -228,7 +228,7 @@ Public Class ucrGeom
         'clsgeom_curve.AddAesParameter("xend", bIsMandatory:=True)
         'clsgeom_curve.AddAesParameter("y", bIsMandatory:=True)
         'clsgeom_curve.AddAesParameter("yend", bIsMandatory:=True)
-        '''Optional
+        'Optional
         'clsgeom_curve.AddAesParameter("alpha")
         'clsgeom_curve.AddAesParameter("colour")
         'clsgeom_curve.AddAesParameter("linetype")

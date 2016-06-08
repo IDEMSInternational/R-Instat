@@ -71,8 +71,9 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
 
 
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        sdgBoxPlot.SetBoxPlotFunction(clsRgeom_boxplotFunction)
+
+        sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
+        sdgLayerOptions.SetGeomFunction(clsRgeom_boxplotFunction)
 
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
@@ -94,7 +95,6 @@ Public Class dlgBoxplot
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorBoxPlot.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-
     Private Sub ucrByFactorsReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.SelectionChanged
         If Not ucrByFactorsReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("x", ucrByFactorsReceiver.GetVariableNames(False))
@@ -115,7 +115,7 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
-        sdgBoxPlot.ShowDialog()
+        sdgLayerOptions.ShowDialog()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
