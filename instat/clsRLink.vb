@@ -425,6 +425,39 @@ Public Class RLink
         End If
     End Sub
 
+    Public Sub SelectColumnsWithMetadataProperty(lstView As ListView, strDataFrameName As String, strProperty As String, strValues As String())
+        Dim vecColumns As GenericVector
+        Dim chrCurrColumns As CharacterVector
+        Dim i, j, iTemp As Integer
+        Dim clsGetItems As New RFunction
+        Dim clsIncludeList As New RFunction
+        Dim kvpInclude As KeyValuePair(Of String, String())
+
+        kvpInclude = New KeyValuePair(Of String, String())(strProperty, strValues)
+
+        If bInstatObjectExists Then
+            clsGetItems.SetRCommand(strInstatDataObject & "$get_column_names")
+            clsGetItems.AddParameter("as_list", "TRUE")
+            If strDataFrameName <> "" Then
+                clsGetItems.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+            End If
+            clsIncludeList.SetRCommand("list")
+            clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
+            clsGetItems.AddParameter("include", clsRFunctionParameter:=clsIncludeList)
+            vecColumns = RunInternalScriptGetValue(clsGetItems.ToScript()).AsList
+
+            For i = 0 To vecColumns.Count - 1
+                chrCurrColumns = vecColumns(i).AsCharacter
+                lstView.BeginUpdate()
+                For j = 0 To chrCurrColumns.Count - 1
+                    iTemp = lstView.Items.IndexOfKey(chrCurrColumns(j))
+                    lstView.Items(iTemp).Selected = True
+                Next
+                lstView.EndUpdate()
+            Next
+        End If
+    End Sub
+
     Public Function GetListAsRString(lstStrings As List(Of String), Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
         Dim i As Integer
