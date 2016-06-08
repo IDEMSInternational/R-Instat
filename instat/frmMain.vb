@@ -58,11 +58,21 @@ Public Class frmMain
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
         clsRLink.SetOutput(frmCommand.txtCommand)
-        REngine.SetEnvironmentVariables()
-        clsRLink.clsEngine = REngine.GetInstance()
+        Try
+            REngine.SetEnvironmentVariables()
+        Catch ex As Exception
+            MsgBox(ex.Message & vbNewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R Link.")
+            Application.Exit()
+        End Try
+        Try
+            clsRLink.clsEngine = REngine.GetInstance()
+        Catch ex As Exception
+            MsgBox(ex.Message & vbNewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R Link.")
+            Application.Exit()
+        End Try
         clsRLink.clsEngine.Initialize()
-        'Sets up R source files
-        clsRLink.RSetup()
+            'Sets up R source files
+            clsRLink.RSetup()
 
     End Sub
 
