@@ -15,8 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgLayerOptions
+    Public clsRsyntax As RSyntax
     Public clsGeomFunction As New RFunction
     Private bFirstLoad As Boolean = True
+
 
     Public Sub New()
 
@@ -28,10 +30,8 @@ Public Class sdgLayerOptions
         ucrLayerParameter.SetGeomFunction(clsGeomFunction)
 
     End Sub
-
-
-
     Private Sub sdgLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -55,5 +55,12 @@ Public Class sdgLayerOptions
     End Sub
     Private Sub ReopenDialog()
 
+    End Sub
+
+    Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
+        clsRsyntax = clsRSyntaxIn
+    End Sub
+    Public Sub SetGeomFunction(clsTempGeomFunc As RFunction)
+        clsGeomFunction = clsTempGeomFunc
     End Sub
 End Class
