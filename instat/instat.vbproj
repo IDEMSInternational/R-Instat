@@ -512,6 +512,12 @@
     <Compile Include="dlgRestrict.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRowNamesOrNumbers.Designer.vb">
+      <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRowNamesOrNumbers.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgScatterPlot.Designer.vb">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
     </Compile>
@@ -2234,6 +2240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRestrict.sw-KE.resx">
       <DependentUpon>dlgRestrict.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRowNamesOrNumbers.resx">
+      <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.fr-FR.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
