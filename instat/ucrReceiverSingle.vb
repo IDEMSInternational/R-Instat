@@ -153,6 +153,12 @@ Public Class ucrReceiverSingle
         Return strTemp
     End Function
 
+    Public Overrides Function GetVariableNameslist(Optional bWithQuotes As Boolean = True) As String()
+        Dim arrTemp As String() = Nothing
+        arrTemp = {GetVariableNames()}
+        Return arrTemp
+    End Function
+
     Public Function GetDataName() As String
         Return strDataFrameName
     End Function
