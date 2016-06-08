@@ -98,7 +98,10 @@ Public Class ucrInputComboBox
         Return cboInput.Text
     End Function
 
-    Public Sub AddItems(strItems As String())
+    Public Sub SetItems(strItems As String(), Optional bClearExisting As Boolean = True)
+        If bClearExisting Then
+            cboInput.Items.Clear()
+        End If
         cboInput.Items.AddRange(strItems)
     End Sub
 
@@ -123,8 +126,8 @@ Public Class ucrInputComboBox
     End Sub
 
     Private Sub ucrInputComboBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
-        If bIsReadOnly Then
-            e.Handled = True
-        End If
+        'If bIsReadOnly Then
+        '    e.Handled = True
+        'End If
     End Sub
 End Class
