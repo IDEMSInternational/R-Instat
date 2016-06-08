@@ -825,6 +825,11 @@ instat_object$set("public","set_row_names", function(data_name, row_names) {
 } 
 )
 
+instat_object$set("public","get_row_names", function(data_name) {
+  self$get_data_objects(data_name)$get_row_names()
+} 
+)
+
 instat_object$set("public","set_protected_columns", function(data_name, col_names) {
   self$get_data_objects(data_name)$set_protected_columns(col_names = col_names)
 } 
