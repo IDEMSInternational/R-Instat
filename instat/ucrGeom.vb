@@ -25,6 +25,7 @@ Public Class ucrGeom
     Public lstFunctionParameters As New List(Of RParameter)
     Private bFirstLoad As Boolean = True
     Public clsRaesFunction As New RFunction
+
     Private Sub UcrGeoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseControl()
@@ -34,8 +35,8 @@ Public Class ucrGeom
         End If
     End Sub
     Private Sub InitialiseControl()
-        clsRaesFunction.SetRCommand("aes")
-        clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        '    clsRaesFunction.SetRCommand("aes")
+        '    clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
     End Sub
 
     Public Sub SetGeoms()
@@ -47,6 +48,9 @@ Public Class ucrGeom
         cboGeomList.SelectedIndex = 0
     End Sub
 
+    Public Sub SetFuncSync(clsGeomFunc As RFunction)
+        clsGeomFunction = clsGeomFunc
+    End Sub
     Public Sub AddParameter(strAesParameterName As String, strAesParameterValue As String)
         'this adds parameters TODO pass appropriate parameters.
         Dim i As Integer
@@ -107,52 +111,61 @@ Public Class ucrGeom
         Dim clsgeom_vline As New Geoms
 
 
-        clsgeom_abline.strGeomName = "geom_abline"
-        clsgeom_abline.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_abline.AddAesParameter("y", bIsMandatory:=True)
-        clsgeom_abline.AddAesParameter("alpha")
-        clsgeom_abline.AddAesParameter("colour")
-        clsgeom_abline.AddAesParameter("linetype")
-        clsgeom_abline.AddAesParameter("size")
-        'aesthetics that control position of line include
-        'geom_vline:xintercept
-        'geom_hline:yintercept
-        'geom_abline: slope and intercept
-        'TO DO Discuss how to use these
-        lstAllGeoms.Add(clsgeom_abline)
+        'clsgeom_abline.SetGeomName("geom_abline")
+        'clsgeom_abline.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_abline.AddAesParameter("y", bIsMandatory:=True)
+        'clsgeom_abline.AddAesParameter("alpha")
+        'clsgeom_abline.AddAesParameter("colour")
+        'clsgeom_abline.AddAesParameter("linetype")
+        'clsgeom_abline.AddAesParameter("size")
+        ''aesthetics that control position of line include
+        ''geom_vline:xintercept
+        ''geom_hline:yintercept
+        ''geom_abline: slope and intercept
+        ''TO DO Discuss how to use these
+        'lstAllGeoms.Add(clsgeom_abline)
 
-        clsgeom_area.strGeomName = "geom_area"
-        'mandatory aesthetics 
-        clsgeom_area.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_area.AddAesParameter("ymax", bIsMandatory:=True)
-        clsgeom_area.AddAesParameter("ymin", bIsMandatory:=True)
-        'Optional 
-        clsgeom_area.AddAesParameter("alpha")
-        clsgeom_area.AddAesParameter("colour")
-        clsgeom_area.AddAesParameter("fill")
-        clsgeom_area.AddAesParameter("linetype")
-        clsgeom_area.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_area)
+        'clsgeom_area.SetGeomName("geom_area")
+        ''mandatory aesthetics 
+        'clsgeom_area.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_area.AddAesParameter("ymax", bIsMandatory:=True)
+        'clsgeom_area.AddAesParameter("ymin", bIsMandatory:=True)
+        ''Optional 
+        'clsgeom_area.AddAesParameter("alpha")
+        'clsgeom_area.AddAesParameter("colour")
+        'clsgeom_area.AddAesParameter("fill")
+        'clsgeom_area.AddAesParameter("linetype")
+        'clsgeom_area.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_area)
 
-        clsgeom_bar.strGeomName = "geom_bar"
-        clsgeom_bar.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_bar.SetGeomName("geom_bar")
+        clsgeom_bar.AddAesParameter("x", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
         'Optional
-        clsgeom_bar.AddAesParameter("alpha")
-        clsgeom_bar.AddAesParameter("fill")
-        clsgeom_bar.AddAesParameter("colour")
-        clsgeom_bar.AddAesParameter("linetype")
-        clsgeom_bar.AddAesParameter("size")
+        'we can map a continuous variable to y but we must include stat = “identity” inside the geom.
+        clsgeom_bar.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}))
+        clsgeom_bar.AddAesParameter("alpha", strIncludedDataTypes:=({"factor"}))
+        clsgeom_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor"}))
+        clsgeom_bar.AddAesParameter("colour", strIncludedDataTypes:=({"factor"}))
+        clsgeom_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) ' won't visibly change anything unless you change the theme
+        clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor"})) ' won't visibly change anything unless you change the theme
+
+        'add layer parameters 
+        clsgeom_bar.AddLayerParameter("stat", "list", "count", lstParameterStrings:={"count", "identity"})
+        clsgeom_bar.AddLayerParameter("position", "list", "stack", lstParameterStrings:={"fill", "dodge"})
+        clsgeom_bar.AddLayerParameter("width", "numeric", "90%")
         lstAllGeoms.Add(clsgeom_bar)
 
-        clsgeom_bin2d.strGeomName = "geom_bin2d"
-        'mandatory
-        clsgeom_bin2d.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_bin2d.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_bin2d.AddAesParameter("fill")
-        lstAllGeoms.Add(clsgeom_bin2d)
 
-        clsgeom_boxplot.strGeomName = "geom_boxplot"
+        'clsgeom_bin2d.SetGeomName("geom_bin2d")
+        ''mandatory
+        'clsgeom_bin2d.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_bin2d.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_bin2d.AddAesParameter("fill")
+        'lstAllGeoms.Add(clsgeom_bin2d)
+
+
+        clsgeom_boxplot.SetGeomName("geom_boxplot")
         clsgeom_boxplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
         clsgeom_boxplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         clsgeom_boxplot.AddAesParameter("fill", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
@@ -161,199 +174,241 @@ Public Class ucrGeom
         clsgeom_boxplot.AddAesParameter("size", strIncludedDataTypes:={"factor"})
         clsgeom_boxplot.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
         clsgeom_boxplot.AddAesParameter("group", strIncludedDataTypes:={"factor"})
+
+        'adding layerParameters
+        clsgeom_boxplot.AddLayerParameter("notch", "boolean", "TRUE")
+        clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "1.5")
+        clsgeom_boxplot.AddLayerParameter("varwidth", "boolean", "TRUE")
+        clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5")
+        clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "1.5")
+        clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
+        clsgeom_boxplot.AddLayerParameter("outlier.stroke ", "numeric", "0.5")
         lstAllGeoms.Add(clsgeom_boxplot)
 
-        clsgeom_contour.strGeomName = "geom_contour"
-        'Mandatory
-        clsgeom_contour.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_contour.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_contour.AddAesParameter("alpha")
-        clsgeom_contour.AddAesParameter("colour")
-        clsgeom_contour.AddAesParameter("linetype")
-        clsgeom_contour.AddAesParameter("size")
-        clsgeom_contour.AddAesParameter("weight")
-        lstAllGeoms.Add(clsgeom_contour)
+        'clsgeom_contour.SetGeomName("geom_contour")
+        ''Mandatory
+        'clsgeom_contour.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_contour.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_contour.AddAesParameter("alpha")
+        'clsgeom_contour.AddAesParameter("colour")
+        'clsgeom_contour.AddAesParameter("linetype")
+        'clsgeom_contour.AddAesParameter("size")
+        'clsgeom_contour.AddAesParameter("weight")
+        'lstAllGeoms.Add(clsgeom_contour)
 
-        clsgeom_count.strGeomName = "geom_count"
-        'mandatory
-        clsgeom_count.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_count.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_count.AddAesParameter("alpha")
-        clsgeom_count.AddAesParameter("colour")
-        clsgeom_count.AddAesParameter("fill")
-        clsgeom_count.AddAesParameter("shape")
-        clsgeom_count.AddAesParameter("size")
-        clsgeom_count.AddAesParameter("stroke")
-        lstAllGeoms.Add(clsgeom_count)
+        'clsgeom_count.SetGeomName("geom_count")
+        ''mandatory
+        'clsgeom_count.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_count.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_count.AddAesParameter("alpha")
+        'clsgeom_count.AddAesParameter("colour")
+        'clsgeom_count.AddAesParameter("fill")
+        'clsgeom_count.AddAesParameter("shape")
+        'clsgeom_count.AddAesParameter("size")
+        'clsgeom_count.AddAesParameter("stroke")
+        'lstAllGeoms.Add(clsgeom_count)
 
-        clsgeom_crossbar.strGeomName = "geom_crossbar"
-        'Mandatory
-        clsgeom_crossbar.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_crossbar.AddAesParameter("ymax", bIsMandatory:=True)
-        clsgeom_crossbar.AddAesParameter("ymin", bIsMandatory:=True)
-        'Optional
-        clsgeom_crossbar.AddAesParameter("alpha")
-        clsgeom_crossbar.AddAesParameter("colour")
-        clsgeom_crossbar.AddAesParameter("linetype")
-        clsgeom_crossbar.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_crossbar)
-
-        clsgeom_curve.strGeomName = "geom_curve"
-        'Mandatory
-        clsgeom_curve.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_curve.AddAesParameter("xend", bIsMandatory:=True)
-        clsgeom_curve.AddAesParameter("y", bIsMandatory:=True)
-        clsgeom_curve.AddAesParameter("yend", bIsMandatory:=True)
+        'clsgeom_crossbar.strGeomName = "geom_crossbar"
+        ''Mandatory
+        'clsgeom_crossbar.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_crossbar.AddAesParameter("ymax", bIsMandatory:=True)
+        'clsgeom_crossbar.AddAesParameter("ymin", bIsMandatory:=True)
         ''Optional
-        clsgeom_curve.AddAesParameter("alpha")
-        clsgeom_curve.AddAesParameter("colour")
-        clsgeom_curve.AddAesParameter("linetype")
-        clsgeom_curve.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_curve)
+        'clsgeom_crossbar.AddAesParameter("alpha")
+        'clsgeom_crossbar.AddAesParameter("colour")
+        'clsgeom_crossbar.AddAesParameter("linetype")
+        'clsgeom_crossbar.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_crossbar)
+
+        'clsgeom_curve.strGeomName = "geom_curve"
+        ''Mandatory
+        'clsgeom_curve.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_curve.AddAesParameter("xend", bIsMandatory:=True)
+        'clsgeom_curve.AddAesParameter("y", bIsMandatory:=True)
+        'clsgeom_curve.AddAesParameter("yend", bIsMandatory:=True)
+        '''Optional
+        'clsgeom_curve.AddAesParameter("alpha")
+        'clsgeom_curve.AddAesParameter("colour")
+        'clsgeom_curve.AddAesParameter("linetype")
+        'clsgeom_curve.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_curve)
 
         clsgeom_density.strGeomName = "geom_density"
         'mandatory
         clsgeom_density.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_density.AddAesParameter("y", bIsMandatory:=True)
+        'we can map a continuous variable to y but we must include stat = “identity” inside the geom
+        clsgeom_density.AddAesParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
         'optional
-        clsgeom_density.AddAesParameter("alpha")
-        clsgeom_density.AddAesParameter("colour")
+        clsgeom_density.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
+        clsgeom_density.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
         clsgeom_density.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
-        clsgeom_density.AddAesParameter("linetype")
-        clsgeom_density.AddAesParameter("size")
-        clsgeom_density.AddAesParameter("weight")
+        clsgeom_density.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_density.AddAesParameter("size", strIncludedDataTypes:={"factor"})
+        clsgeom_density.AddAesParameter("weight", strIncludedDataTypes:={"factor"})
+
+        'adding layer parameters
+        clsgeom_density.AddLayerParameter("stat", "list", "density", lstParameterStrings:={"density", "identity"})
+        clsgeom_density.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter", "stack", "fill", "dodge"}) 'others are “jitter”, “stack”, “fill” And “dodge”
+        clsgeom_density.AddLayerParameter("bw", "text", "nrd0", lstParameterStrings:={"nrd0", "nrd", "ucv", "bcv", "SJ"})
+        clsgeom_density.AddLayerParameter("adjust", "numeric", "1")
+        clsgeom_density.AddLayerParameter("kernel", "text", "gaussian", lstParameterStrings:={"gaussian", "rectangular", "triangular", "epanechnikov", "biweight", "cosine", "optcosin"})
         lstAllGeoms.Add(clsgeom_density)
 
-        clsgeom_density2d.strGeomName = "geom_density2d"
-        'Mandatory
-        clsgeom_density2d.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_density2d.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_density2d.AddAesParameter("alpha")
-        clsgeom_density2d.AddAesParameter("colour")
-        clsgeom_density2d.AddAesParameter("linetype")
-        clsgeom_density2d.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_density2d)
+        'clsgeom_density2d.strGeomName = "geom_density2d"
+        ''Mandatory
+        'clsgeom_density2d.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_density2d.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_density2d.AddAesParameter("alpha")
+        'clsgeom_density2d.AddAesParameter("colour")
+        'clsgeom_density2d.AddAesParameter("linetype")
+        'clsgeom_density2d.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_density2d)
 
-        clsgeom_density_2d.strGeomName = "geom_density_2d"
-        'Mandatory
-        clsgeom_density_2d.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_density_2d.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_density_2d.AddAesParameter("alpha")
-        clsgeom_density_2d.AddAesParameter("colour")
-        clsgeom_density_2d.AddAesParameter("linetype")
-        clsgeom_density_2d.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_density_2d)
+        'clsgeom_density_2d.strGeomName = "geom_density_2d"
+        ''Mandatory
+        'clsgeom_density_2d.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_density_2d.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_density_2d.AddAesParameter("alpha")
+        'clsgeom_density_2d.AddAesParameter("colour")
+        'clsgeom_density_2d.AddAesParameter("linetype")
+        'clsgeom_density_2d.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_density_2d)
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
         clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
         clsgeom_dotplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         'Optional
-        clsgeom_dotplot.AddAesParameter("alpha")
-        clsgeom_dotplot.AddAesParameter("colour")
+        clsgeom_dotplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
+        clsgeom_dotplot.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
         clsgeom_dotplot.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
+
+        'adding layer parameters
+        clsgeom_dotplot.AddLayerParameter("method", "list", "dotdensity", lstParameterStrings:={"dotdensity", "histodot"})
+        clsgeom_dotplot.AddLayerParameter("binwidth", "numeric", "")
+        clsgeom_dotplot.AddLayerParameter("binaxis", "list", "x", lstParameterStrings:={"x", "y"})
+        clsgeom_dotplot.AddLayerParameter("binpositions", "list", "bypositions", lstParameterStrings:={"bypositions", "all"})
+        clsgeom_dotplot.AddLayerParameter("stackdir", "list", "up", lstParameterStrings:={"up", "down", "center", "centerwhole"})
+        clsgeom_dotplot.AddLayerParameter("stackratio", "numeric", "1")
+        clsgeom_dotplot.AddLayerParameter("dotsize", "numeric", "1")
+        clsgeom_dotplot.AddLayerParameter("stackgroups", "Boolean", "False")
+        clsgeom_dotplot.AddLayerParameter("origin", "numeric", "")
+        clsgeom_dotplot.AddLayerParameter("right", "Boolean", "True")
+        clsgeom_dotplot.AddLayerParameter("width", "numeric", "0.9")
+        clsgeom_dotplot.AddLayerParameter("drop", "Boolean", "False")
         lstAllGeoms.Add(clsgeom_dotplot)
 
 
-        clsgeom_errorbar.strGeomName = "geom_errorbar"
-        'Mandatory
-        clsgeom_errorbar.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_errorbar.AddAesParameter("ymax", bIsMandatory:=True)
-        clsgeom_errorbar.AddAesParameter("ymin", bIsMandatory:=True)
-        'Optional
-        clsgeom_errorbar.AddAesParameter("alpha")
-        clsgeom_errorbar.AddAesParameter("volour")
-        clsgeom_errorbar.AddAesParameter("linetype")
-        clsgeom_errorbar.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_errorbar)
+        'clsgeom_errorbar.strGeomName = "geom_errorbar"
+        ''Mandatory
+        'clsgeom_errorbar.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_errorbar.AddAesParameter("ymax", bIsMandatory:=True)
+        'clsgeom_errorbar.AddAesParameter("ymin", bIsMandatory:=True)
+        ''Optional
+        'clsgeom_errorbar.AddAesParameter("alpha")
+        'clsgeom_errorbar.AddAesParameter("volour")
+        'clsgeom_errorbar.AddAesParameter("linetype")
+        'clsgeom_errorbar.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_errorbar)
 
 
-        clsgeom_errorbarh.strGeomName = "geom_errorbarh"
-        'mandatory
-        clsgeom_errorbarh.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_errorbarh.AddAesParameter("xmax", bIsMandatory:=True)
-        clsgeom_errorbarh.AddAesParameter("xmin", bIsMandatory:=True)
-        clsgeom_errorbarh.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_errorbarh.AddAesParameter("alpha")
-        clsgeom_errorbarh.AddAesParameter("colour")
-        clsgeom_errorbarh.AddAesParameter("height")
-        clsgeom_errorbarh.AddAesParameter("linetype")
-        clsgeom_errorbarh.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_errorbarh)
+        'clsgeom_errorbarh.strGeomName = "geom_errorbarh"
+        ''mandatory
+        'clsgeom_errorbarh.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_errorbarh.AddAesParameter("xmax", bIsMandatory:=True)
+        'clsgeom_errorbarh.AddAesParameter("xmin", bIsMandatory:=True)
+        'clsgeom_errorbarh.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_errorbarh.AddAesParameter("alpha")
+        'clsgeom_errorbarh.AddAesParameter("colour")
+        'clsgeom_errorbarh.AddAesParameter("height")
+        'clsgeom_errorbarh.AddAesParameter("linetype")
+        'clsgeom_errorbarh.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_errorbarh)
 
         clsgeom_freqpoly.strGeomName = "geom_freqpoly"
         clsgeom_freqpoly.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_freqpoly.AddAesParameter("alpha")
-        clsgeom_freqpoly.AddAesParameter("colour")
+        clsgeom_freqpoly.AddAesParameter("y", strIncludedDataTypes:={"factor"})
+        clsgeom_freqpoly.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
+        clsgeom_freqpoly.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
         clsgeom_freqpoly.AddAesParameter("fill", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
-        clsgeom_freqpoly.AddAesParameter("linetype")
-        clsgeom_freqpoly.AddAesParameter("size")
+        clsgeom_freqpoly.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_freqpoly.AddAesParameter("size", strIncludedDataTypes:={"factor"})
+
+        'Add layer parameters
+        clsgeom_freqpoly.AddLayerParameter("stat", "list", "bin", lstParameterStrings:={"bin", "identity"})
+        clsgeom_freqpoly.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter", "stack", "dodge"})
         lstAllGeoms.Add(clsgeom_freqpoly)
 
-        clsgeom_hex.strGeomName = "geom_hex"
-        'mandatory
-        clsgeom_hex.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_hex.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_hex.AddAesParameter("alpha")
-        clsgeom_hex.AddAesParameter("colour")
-        clsgeom_hex.AddAesParameter("fill")
-        clsgeom_hex.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_hex)
+        'clsgeom_hex.strGeomName = "geom_hex"
+        ''mandatory
+        'clsgeom_hex.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_hex.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_hex.AddAesParameter("alpha")
+        'clsgeom_hex.AddAesParameter("colour")
+        'clsgeom_hex.AddAesParameter("fill")
+        'clsgeom_hex.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_hex)
 
         clsgeom_histogram.strGeomName = "geom_histogram"
         clsgeom_histogram.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_histogram.AddAesParameter("alpha")
-        clsgeom_histogram.AddAesParameter("colour")
+        clsgeom_histogram.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
+        clsgeom_histogram.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
         clsgeom_histogram.AddAesParameter("fill", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
-        clsgeom_histogram.AddAesParameter("linetype")
-        clsgeom_histogram.AddAesParameter("size")
+        clsgeom_histogram.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_histogram.AddAesParameter("size", strIncludedDataTypes:={"factor"})
+
+        'adding layer parameters
+        clsgeom_histogram.AddLayerParameter("bin", "numeric", "30")
+        clsgeom_histogram.AddLayerParameter("binwidth", "numeric", "0")
+        clsgeom_histogram.AddLayerParameter("closed", "list", "", lstParameterStrings:={"left", "right"})
+        clsgeom_histogram.AddLayerParameter("Position", "list", "stack", lstParameterStrings:={"stack", "dodge"})
         lstAllGeoms.Add(clsgeom_histogram)
 
 
-        clsgeom_hline.strGeomName = "geom_hline"
-        clsgeom_hline.AddAesParameter("alpha")
-        clsgeom_hline.AddAesParameter("colour")
-        clsgeom_hline.AddAesParameter("linetype")
-        clsgeom_hline.AddAesParameter("size")
-        'aesthetics that control position of line include
-        'geom_vline:xintercept
-        'geom_hline:yintercept
-        'geom_abline: slope and intercept
-        'TO DO Discuss how to use these
-        lstAllGeoms.Add(clsgeom_hline)
+        'clsgeom_hline.strGeomName = "geom_hline"
+        'clsgeom_hline.AddAesParameter("alpha")
+        'clsgeom_hline.AddAesParameter("colour")
+        'clsgeom_hline.AddAesParameter("linetype")
+        'clsgeom_hline.AddAesParameter("size")
+        ''aesthetics that control position of line include
+        ''geom_vline:xintercept
+        ''geom_hline:yintercept
+        ''geom_abline: slope and intercept
+        ''TO DO Discuss how to use these
+        'lstAllGeoms.Add(clsgeom_hline)
 
-        clsgeom_jitter.strGeomName = "geom_jitter"
-        'mandatory
-        clsgeom_jitter.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_jitter.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_jitter.AddAesParameter("alpha")
-        clsgeom_jitter.AddAesParameter("colour")
-        clsgeom_jitter.AddAesParameter("fill")
-        clsgeom_jitter.AddAesParameter("shape")
-        clsgeom_jitter.AddAesParameter("size")
-        clsgeom_jitter.AddAesParameter("stroke")
-        lstAllGeoms.Add(clsgeom_jitter)
+        'clsgeom_jitter.strGeomName = "geom_jitter"
+        ''mandatory
+        'clsgeom_jitter.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_jitter.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_jitter.AddAesParameter("alpha")
+        'clsgeom_jitter.AddAesParameter("colour")
+        'clsgeom_jitter.AddAesParameter("fill")
+        'clsgeom_jitter.AddAesParameter("shape")
+        'clsgeom_jitter.AddAesParameter("size")
+        'clsgeom_jitter.AddAesParameter("stroke")
+        'lstAllGeoms.Add(clsgeom_jitter)
 
-        clsgeom_label.strGeomName = "geom_label"
-        'mandatory
-        clsgeom_label.AddAesParameter("label", bIsMandatory:=True)
-        clsgeom_label.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_label.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_label.AddAesParameter("alpha")
-        clsgeom_label.AddAesParameter("colour")
-        clsgeom_label.AddAesParameter("family")
-        clsgeom_label.AddAesParameter("fontface")
-        clsgeom_label.AddAesParameter("hjust")
-        clsgeom_label.AddAesParameter("lineheight")
-        'TO DO add size and vjust this might need additon of labels and receivers  
-        lstAllGeoms.Add(clsgeom_label)
+        'clsgeom_label.strGeomName = "geom_label"
+        ''mandatory
+        'clsgeom_label.AddAesParameter("label", bIsMandatory:=True)
+        'clsgeom_label.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_label.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_label.AddAesParameter("alpha")
+        'clsgeom_label.AddAesParameter("colour")
+        'clsgeom_label.AddAesParameter("family")
+        'clsgeom_label.AddAesParameter("fontface")
+        'clsgeom_label.AddAesParameter("hjust")
+        'clsgeom_label.AddAesParameter("lineheight")
+        ''TO DO add size and vjust this might need additon of labels and receivers  
+        'lstAllGeoms.Add(clsgeom_label)
 
 
         clsgeom_line.strGeomName = "geom_line"
@@ -361,241 +416,246 @@ Public Class ucrGeom
         clsgeom_line.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         clsgeom_line.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         'optional
-        clsgeom_line.AddAesParameter("alpha")
-        clsgeom_line.AddAesParameter("colour")
-        clsgeom_line.AddAesParameter("linetype")
-        clsgeom_line.AddAesParameter("size")
+        clsgeom_line.AddAesParameter("alpha", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_line.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
+        clsgeom_line.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_line.AddAesParameter("size", strIncludedDataTypes:={"numeric, factor"})
+        'adding layer parameters
+
+        clsgeom_line.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter", "dodge", "stack"}) 'others options are “jitter”, “dodge” And “stack”
         lstAllGeoms.Add(clsgeom_line)
 
 
-        clsgeom_linerange.strGeomName = "geom_linerange"
-        'mandatory
-        clsgeom_linerange.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_linerange.AddAesParameter("ymax", bIsMandatory:=True)
-        clsgeom_linerange.AddAesParameter("ymin", bIsMandatory:=True)
-        'optional
-        clsgeom_linerange.AddAesParameter("alpha")
-        clsgeom_linerange.AddAesParameter("colour")
-        clsgeom_linerange.AddAesParameter("linetype")
-        clsgeom_linerange.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_linerange)
+        'clsgeom_linerange.strGeomName = "geom_linerange"
+        ''mandatory
+        'clsgeom_linerange.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_linerange.AddAesParameter("ymax", bIsMandatory:=True)
+        'clsgeom_linerange.AddAesParameter("ymin", bIsMandatory:=True)
+        ''optional
+        'clsgeom_linerange.AddAesParameter("alpha")
+        'clsgeom_linerange.AddAesParameter("colour")
+        'clsgeom_linerange.AddAesParameter("linetype")
+        'clsgeom_linerange.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_linerange)
 
-        clsgeom_map.strGeomName = "geom_map"
-        'mandatory
-        clsgeom_map.AddAesParameter("map_id", bIsMandatory:=True)
-        'optional
-        clsgeom_map.AddAesParameter("alpha")
-        clsgeom_map.AddAesParameter("colour")
-        clsgeom_map.AddAesParameter("fill")
-        clsgeom_map.AddAesParameter("linetype")
-        clsgeom_map.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_map)
+        'clsgeom_map.strGeomName = "geom_map"
+        ''mandatory
+        'clsgeom_map.AddAesParameter("map_id", bIsMandatory:=True)
+        ''optional
+        'clsgeom_map.AddAesParameter("alpha")
+        'clsgeom_map.AddAesParameter("colour")
+        'clsgeom_map.AddAesParameter("fill")
+        'clsgeom_map.AddAesParameter("linetype")
+        'clsgeom_map.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_map)
 
-        clsgeom_path.strGeomName = "geom_path"
-        'mandatory
-        clsgeom_path.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_path.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_path.AddAesParameter("alpha")
-        clsgeom_path.AddAesParameter("colour")
-        clsgeom_path.AddAesParameter("linetype")
-        clsgeom_path.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_path)
+        'clsgeom_path.strGeomName = "geom_path"
+        ''mandatory
+        'clsgeom_path.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_path.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_path.AddAesParameter("alpha")
+        'clsgeom_path.AddAesParameter("colour")
+        'clsgeom_path.AddAesParameter("linetype")
+        'clsgeom_path.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_path)
 
         clsgeom_point.strGeomName = "geom_point"
         'mandatory
         clsgeom_point.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         clsgeom_point.AddAesParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
         'optional
-        clsgeom_point.AddAesParameter("alpha")
-        clsgeom_point.AddAesParameter("colour")
-        clsgeom_point.AddAesParameter("fill")
-        clsgeom_point.AddAesParameter("shape")
-        clsgeom_point.AddAesParameter("size")
+        clsgeom_point.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_point.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_point.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
+        clsgeom_point.AddAesParameter("shape", strIncludedDataTypes:={"factor"})
+        clsgeom_point.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("stroke")
+        'adding layer parameters
+        clsgeom_point.AddLayerParameter("position", "text", "identity") 'other jitter
         lstAllGeoms.Add(clsgeom_point)
 
-        clsgeom_pointrange.strGeomName = "geom_pointrange"
-        clsgeom_pointrange.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_pointrange.AddAesParameter("ymax", bIsMandatory:=True)
-        clsgeom_pointrange.AddAesParameter("ymin", bIsMandatory:=True)
-        'optional
-        clsgeom_pointrange.AddAesParameter("alpha")
-        clsgeom_pointrange.AddAesParameter("colour")
-        clsgeom_pointrange.AddAesParameter("linetype")
-        clsgeom_pointrange.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_pointrange)
+        'clsgeom_pointrange.strGeomName = "geom_pointrange"
+        'clsgeom_pointrange.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_pointrange.AddAesParameter("ymax", bIsMandatory:=True)
+        'clsgeom_pointrange.AddAesParameter("ymin", bIsMandatory:=True)
+        ''optional
+        'clsgeom_pointrange.AddAesParameter("alpha")
+        'clsgeom_pointrange.AddAesParameter("colour")
+        'clsgeom_pointrange.AddAesParameter("linetype")
+        'clsgeom_pointrange.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_pointrange)
 
-        clsgeom_polygon.strGeomName = "geom_polygon"
-        clsgeom_polygon.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_polygon.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_polygon.AddAesParameter("alpha")
-        clsgeom_polygon.AddAesParameter("colour")
-        clsgeom_polygon.AddAesParameter("fill")
-        clsgeom_polygon.AddAesParameter("linetype")
-        clsgeom_polygon.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_polygon)
+        'clsgeom_polygon.strGeomName = "geom_polygon"
+        'clsgeom_polygon.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_polygon.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_polygon.AddAesParameter("alpha")
+        'clsgeom_polygon.AddAesParameter("colour")
+        'clsgeom_polygon.AddAesParameter("fill")
+        'clsgeom_polygon.AddAesParameter("linetype")
+        'clsgeom_polygon.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_polygon)
 
-        clsgeom_qq.strGeomName = "geom_qq"
-        clsgeom_qq.AddAesParameter("sample", bIsMandatory:=True)
-        'optional
-        clsgeom_qq.AddAesParameter("x")
-        clsgeom_qq.AddAesParameter("y")
-        lstAllGeoms.Add(clsgeom_qq)
+        'clsgeom_qq.strGeomName = "geom_qq"
+        'clsgeom_qq.AddAesParameter("sample", bIsMandatory:=True)
+        ''optional
+        'clsgeom_qq.AddAesParameter("x")
+        'clsgeom_qq.AddAesParameter("y")
+        'lstAllGeoms.Add(clsgeom_qq)
 
-        clsgeom_quantile.strGeomName = "geom_quantile"
-        clsgeom_quantile.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_quantile.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_quantile.AddAesParameter("alpha")
-        clsgeom_quantile.AddAesParameter("colour")
-        clsgeom_quantile.AddAesParameter("linetype")
-        clsgeom_quantile.AddAesParameter("size")
-        clsgeom_quantile.AddAesParameter("weight")
-        lstAllGeoms.Add(clsgeom_quantile)
+        'clsgeom_quantile.strGeomName = "geom_quantile"
+        'clsgeom_quantile.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_quantile.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_quantile.AddAesParameter("alpha")
+        'clsgeom_quantile.AddAesParameter("colour")
+        'clsgeom_quantile.AddAesParameter("linetype")
+        'clsgeom_quantile.AddAesParameter("size")
+        'clsgeom_quantile.AddAesParameter("weight")
+        'lstAllGeoms.Add(clsgeom_quantile)
 
-        clsgeom_raster.strGeomName = "geom_raster"
-        'mandatory
-        clsgeom_raster.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_raster.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_raster.AddAesParameter("alpha")
-        clsgeom_raster.AddAesParameter("colour")
-        clsgeom_raster.AddAesParameter("fill")
-        clsgeom_raster.AddAesParameter("linetype")
-        clsgeom_raster.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_raster)
+        'clsgeom_raster.strGeomName = "geom_raster"
+        ''mandatory
+        'clsgeom_raster.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_raster.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_raster.AddAesParameter("alpha")
+        'clsgeom_raster.AddAesParameter("colour")
+        'clsgeom_raster.AddAesParameter("fill")
+        'clsgeom_raster.AddAesParameter("linetype")
+        'clsgeom_raster.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_raster)
 
-        clsgeom_rect.strGeomName = "geom_rect"
-        'mandatory
-        clsgeom_rect.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_rect.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_rect.AddAesParameter("alpha")
-        clsgeom_rect.AddAesParameter("colour")
-        clsgeom_rect.AddAesParameter("fill")
-        clsgeom_rect.AddAesParameter("linetype")
-        clsgeom_rect.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_rect)
+        'clsgeom_rect.strGeomName = "geom_rect"
+        ''mandatory
+        'clsgeom_rect.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_rect.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_rect.AddAesParameter("alpha")
+        'clsgeom_rect.AddAesParameter("colour")
+        'clsgeom_rect.AddAesParameter("fill")
+        'clsgeom_rect.AddAesParameter("linetype")
+        'clsgeom_rect.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_rect)
 
-        clsgeom_ribbon.strGeomName = "geom_ribbon"
-        clsgeom_ribbon.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_ribbon.AddAesParameter("ymax", bIsMandatory:=True)
-        clsgeom_ribbon.AddAesParameter("ymin", bIsMandatory:=True)
-        'optional
-        clsgeom_ribbon.AddAesParameter("alpha")
-        clsgeom_ribbon.AddAesParameter("colour")
-        clsgeom_ribbon.AddAesParameter("linetype")
-        clsgeom_ribbon.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_ribbon)
+        'clsgeom_ribbon.strGeomName = "geom_ribbon"
+        'clsgeom_ribbon.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_ribbon.AddAesParameter("ymax", bIsMandatory:=True)
+        'clsgeom_ribbon.AddAesParameter("ymin", bIsMandatory:=True)
+        ''optional
+        'clsgeom_ribbon.AddAesParameter("alpha")
+        'clsgeom_ribbon.AddAesParameter("colour")
+        'clsgeom_ribbon.AddAesParameter("linetype")
+        'clsgeom_ribbon.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_ribbon)
 
-        clsgeom_rug.strGeomName = "geom_rug"
-        clsgeom_rug.AddAesParameter("alpha")
-        clsgeom_rug.AddAesParameter("colour")
-        clsgeom_rug.AddAesParameter("linetype")
-        clsgeom_rug.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_rug)
+        'clsgeom_rug.strGeomName = "geom_rug"
+        'clsgeom_rug.AddAesParameter("alpha")
+        'clsgeom_rug.AddAesParameter("colour")
+        'clsgeom_rug.AddAesParameter("linetype")
+        'clsgeom_rug.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_rug)
 
-        clsgeom_segment.strGeomName = "geom_segment"
-        'mandatory
-        clsgeom_segment.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_segment.AddAesParameter("xend", bIsMandatory:=True)
-        clsgeom_segment.AddAesParameter("y", bIsMandatory:=True)
-        clsgeom_segment.AddAesParameter("yend", bIsMandatory:=True)
-        'optional
-        clsgeom_segment.AddAesParameter("alpha")
-        clsgeom_segment.AddAesParameter("colour")
-        clsgeom_segment.AddAesParameter("linetype")
-        clsgeom_segment.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_segment)
+        'clsgeom_segment.strGeomName = "geom_segment"
+        ''mandatory
+        'clsgeom_segment.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_segment.AddAesParameter("xend", bIsMandatory:=True)
+        'clsgeom_segment.AddAesParameter("y", bIsMandatory:=True)
+        'clsgeom_segment.AddAesParameter("yend", bIsMandatory:=True)
+        ''optional
+        'clsgeom_segment.AddAesParameter("alpha")
+        'clsgeom_segment.AddAesParameter("colour")
+        'clsgeom_segment.AddAesParameter("linetype")
+        'clsgeom_segment.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_segment)
 
-        clsgeom_smooth.strGeomName = "geom_smooth"
-        'mandatory
-        clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
-        'optional 
-        clsgeom_smooth.AddAesParameter("alpha")
-        clsgeom_smooth.AddAesParameter("colour")
-        clsgeom_smooth.AddAesParameter("fill")
-        clsgeom_smooth.AddAesParameter("linetype")
-        clsgeom_smooth.AddAesParameter("size")
-        clsgeom_smooth.AddAesParameter("weight")
-        lstAllGeoms.Add(clsgeom_smooth)
+        'clsgeom_smooth.strGeomName = "geom_smooth"
+        ''mandatory
+        'clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
+        ''optional 
+        'clsgeom_smooth.AddAesParameter("alpha")
+        'clsgeom_smooth.AddAesParameter("colour")
+        'clsgeom_smooth.AddAesParameter("fill")
+        'clsgeom_smooth.AddAesParameter("linetype")
+        'clsgeom_smooth.AddAesParameter("size")
+        'clsgeom_smooth.AddAesParameter("weight")
+        'lstAllGeoms.Add(clsgeom_smooth)
 
-        clsgeom_spoke.strGeomName = "geom_spoke"
-        'mandatory
-        clsgeom_spoke.AddAesParameter("angle", bIsMandatory:=True)
-        clsgeom_spoke.AddAesParameter("radius", bIsMandatory:=True)
-        clsgeom_spoke.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_spoke.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_spoke.AddAesParameter("alpha")
-        clsgeom_spoke.AddAesParameter("colour")
-        clsgeom_spoke.AddAesParameter("linetype")
-        clsgeom_spoke.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_spoke)
+        'clsgeom_spoke.strGeomName = "geom_spoke"
+        ''mandatory
+        'clsgeom_spoke.AddAesParameter("angle", bIsMandatory:=True)
+        'clsgeom_spoke.AddAesParameter("radius", bIsMandatory:=True)
+        'clsgeom_spoke.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_spoke.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_spoke.AddAesParameter("alpha")
+        'clsgeom_spoke.AddAesParameter("colour")
+        'clsgeom_spoke.AddAesParameter("linetype")
+        'clsgeom_spoke.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_spoke)
 
-        clsgeom_step.strGeomName = "geom_step"
-        clsgeom_step.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_step.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_step.AddAesParameter("alpha")
-        clsgeom_step.AddAesParameter("colour")
-        clsgeom_step.AddAesParameter("linetype")
-        clsgeom_step.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_step)
+        'clsgeom_step.strGeomName = "geom_step"
+        'clsgeom_step.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_step.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_step.AddAesParameter("alpha")
+        'clsgeom_step.AddAesParameter("colour")
+        'clsgeom_step.AddAesParameter("linetype")
+        'clsgeom_step.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_step)
 
-        clsgeom_text.strGeomName = "geom_text"
-        'mandatory
-        clsgeom_text.AddAesParameter("label", bIsMandatory:=True)
-        clsgeom_text.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_text.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_text.AddAesParameter("alpha")
-        clsgeom_text.AddAesParameter("colour")
-        clsgeom_text.AddAesParameter("family")
-        clsgeom_text.AddAesParameter("fontface")
-        clsgeom_text.AddAesParameter("hjust")
-        clsgeom_text.AddAesParameter("lineheight")
-        'TO DO add size and vjust this might need additon of labels and receivers  
-        lstAllGeoms.Add(clsgeom_text)
+        'clsgeom_text.strGeomName = "geom_text"
+        ''mandatory
+        'clsgeom_text.AddAesParameter("label", bIsMandatory:=True)
+        'clsgeom_text.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_text.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_text.AddAesParameter("alpha")
+        'clsgeom_text.AddAesParameter("colour")
+        'clsgeom_text.AddAesParameter("family")
+        'clsgeom_text.AddAesParameter("fontface")
+        'clsgeom_text.AddAesParameter("hjust")
+        'clsgeom_text.AddAesParameter("lineheight")
+        ''TO DO add size and vjust this might need additon of labels and receivers  
+        'lstAllGeoms.Add(clsgeom_text)
 
-        clsgeom_tile.strGeomName = "geom_tile"
-        'mandatory
-        clsgeom_tile.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_tile.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_tile.AddAesParameter("alpha")
-        clsgeom_tile.AddAesParameter("colour")
-        clsgeom_tile.AddAesParameter("fill")
-        clsgeom_tile.AddAesParameter("linetype")
-        clsgeom_tile.AddAesParameter("size")
-        lstAllGeoms.Add(clsgeom_tile)
+        'clsgeom_tile.strGeomName = "geom_tile"
+        ''mandatory
+        'clsgeom_tile.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_tile.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_tile.AddAesParameter("alpha")
+        'clsgeom_tile.AddAesParameter("colour")
+        'clsgeom_tile.AddAesParameter("fill")
+        'clsgeom_tile.AddAesParameter("linetype")
+        'clsgeom_tile.AddAesParameter("size")
+        'lstAllGeoms.Add(clsgeom_tile)
 
-        clsgeom_violin.strGeomName = "geom_violin"
-        'mandatory
-        clsgeom_violin.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_violin.AddAesParameter("y", bIsMandatory:=True)
-        'optional
-        clsgeom_violin.AddAesParameter("alpha")
-        clsgeom_violin.AddAesParameter("colour")
-        clsgeom_violin.AddAesParameter("fill")
-        clsgeom_violin.AddAesParameter("linetype")
-        clsgeom_violin.AddAesParameter("size")
-        clsgeom_violin.AddAesParameter("weight")
-        lstAllGeoms.Add(clsgeom_violin)
+        'clsgeom_violin.strGeomName = "geom_violin"
+        ''mandatory
+        'clsgeom_violin.AddAesParameter("x", bIsMandatory:=True)
+        'clsgeom_violin.AddAesParameter("y", bIsMandatory:=True)
+        ''optional
+        'clsgeom_violin.AddAesParameter("alpha")
+        'clsgeom_violin.AddAesParameter("colour")
+        'clsgeom_violin.AddAesParameter("fill")
+        'clsgeom_violin.AddAesParameter("linetype")
+        'clsgeom_violin.AddAesParameter("size")
+        'clsgeom_violin.AddAesParameter("weight")
+        'lstAllGeoms.Add(clsgeom_violin)
 
-        clsgeom_vline.strGeomName = "geom_vline"
-        clsgeom_vline.AddAesParameter("alpha")
-        clsgeom_vline.AddAesParameter("colour")
-        clsgeom_vline.AddAesParameter("linetype")
-        clsgeom_vline.AddAesParameter("size")
-        'TO DO  include those that control position
-        lstAllGeoms.Add(clsgeom_vline)
+        'clsgeom_vline.strGeomName = "geom_vline"
+        'clsgeom_vline.AddAesParameter("alpha")
+        'clsgeom_vline.AddAesParameter("colour")
+        'clsgeom_vline.AddAesParameter("linetype")
+        'clsgeom_vline.AddAesParameter("size")
+        ''TO DO  include those that control position
+        'lstAllGeoms.Add(clsgeom_vline)
     End Sub
     Public Event GeomChanged(sender As Object, e As EventArgs)
-    Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
+    Private Sub cboGeomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
         clsCurrGeom = lstAllGeoms(cboGeomList.SelectedIndex)
         clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
         RaiseEvent GeomChanged(sender, e)

@@ -37,7 +37,7 @@ Public Class dlgMetadata
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrDFSelectorForMetadata.SetIncludeOverall(True)
     End Sub
 
     Private Sub setDefaults()
@@ -47,6 +47,16 @@ Public Class dlgMetadata
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         setDefaults()
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdOpenMetdataEditor_Click(sender As Object, e As EventArgs) Handles cmdOpenMetdataEditor.Click
+        Me.Hide()
+        If ucrDFSelectorForMetadata.cboAvailableDataFrames.SelectedItem = "[Overall]" Then
+            frmMetaData.Show()
+        Else
+            frmVariables.Show()
+        End If
+
     End Sub
 
 End Class
