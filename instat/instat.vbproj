@@ -698,6 +698,12 @@
     <Compile Include="sdgVariableTransformations.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ucrColors.Designer.vb">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrColors.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
     </Compile>
@@ -1592,6 +1598,12 @@
       <DependentUpon>ucrLayerParameters.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrLayerParameters.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrLayerParamsControls.Designer.vb">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrLayerParamsControls.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrMultipleInput.Designer.vb">
@@ -3664,6 +3676,15 @@
     <EmbeddedResource Include="ucrButtonsSubdialogue.sw-KE.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.fr-FR.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.sw-KE.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.fr-FR.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
     </EmbeddedResource>
@@ -3789,6 +3810,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrLayerParameters.sw-KE.resx">
       <DependentUpon>ucrLayerParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParamsControls.fr-FR.resx">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParamsControls.resx">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParamsControls.sw-KE.resx">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>

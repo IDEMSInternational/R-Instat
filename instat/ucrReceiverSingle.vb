@@ -69,6 +69,7 @@ Public Class ucrReceiverSingle
             txtReceiverSingle.Text = ""
             strDataFrameName = ""
         End If
+        MyBase.RemoveSelected()
     End Sub
 
     Public Overrides Sub Clear()
@@ -90,9 +91,15 @@ Public Class ucrReceiverSingle
         'call GetVariableNames
         Dim clsGetVariablesFunc As New RFunction
         Dim clsParam As New RParameter
-        If txtReceiverSingle.Text <> "" Then
+        Dim strCurrentType As String
+        If Selector IsNot Nothing AndAlso txtReceiverSingle.Text <> "" Then
             clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-            Select Case strType
+            If bTypeSet Then
+                strCurrentType = strType
+            Else
+                strCurrentType = Selector.GetItemType()
+            End If
+            Select Case strCurrentType
                 Case "column"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
                     clsGetVariablesFunc.AddParameter("col_name", GetVariableNames())
@@ -115,6 +122,15 @@ Public Class ucrReceiverSingle
                 Case "filter"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
                     clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
+                Case "object"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+                    clsGetVariablesFunc.AddParameter("object_name", GetVariableNames())
+                Case "graph"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+                    clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
+                Case "model"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
+                    clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
             End Select
 
             'TODO make this an option set in Options menu
