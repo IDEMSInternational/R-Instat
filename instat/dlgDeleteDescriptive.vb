@@ -28,12 +28,34 @@ Public Class dlgDeleteDescriptive
 
     Private Sub InitialiseDialog()
 
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$delete_object")
+        ucrReceiverObjectsToDelete.Selector = ucrSelectorDeleteObject
+        ucrReceiverObjectsToDelete.SetMeAsReceiver()
+        ucrSelectorDeleteObject.SetItemType("object")
+        ucrBase.iHelpTopicID = 352
+    End Sub
+    Private Sub TestOKEnabled()
+        If ucrReceiverObjectsToDelete.IsEmpty = False Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
     Private Sub SetDefaults()
-
+        ucrSelectorDeleteObject.Reset()
+        ucrSelectorDeleteObject.Focus()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+    Private Sub ucrSelectorDeleteObject_DataFrameChanged() Handles ucrSelectorDeleteObject.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorDeleteObject.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub ucrReceiverObjectsToDelete_SelectionChanged() Handles ucrReceiverObjectsToDelete.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("object_name", ucrReceiverObjectsToDelete.GetVariableNames())
+        TestOKEnabled()
     End Sub
 End Class
