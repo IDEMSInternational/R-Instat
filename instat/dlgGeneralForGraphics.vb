@@ -18,7 +18,6 @@ Public Class dlgGeneralForGraphics
     Private clsRggplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Public lstLayer As String
-    Public ucrGeomAes As UcrGeomListWithParameters
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -66,6 +65,7 @@ Public Class dlgGeneralForGraphics
         sdgLayerOptions.ShowDialog()
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=sdgLayerOptions.clsGeomFunction)
         FillLayers()
+        ucrBase.OKEnabled(sdgLayerOptions.ucrGeomWithAes.TestForOkEnabled())
     End Sub
     Public Sub FillLayers()
         lstLayer = sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem
