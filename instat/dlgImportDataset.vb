@@ -93,10 +93,10 @@ Public Class dlgImportDataset
 
         'csv options settings
         clsReadCSV.AddParameter("check.names", "TRUE")
-        ucrInputEncoding.AddItems({"unknown"})
-        ucrInputSeparator.AddItems({"Automatic", ",", "Whitespace", ":", ";", "|", "^"})
-        ucrInputHeaders.AddItems({"Automatic", "Yes", "No"})
-        ucrInputDecimal.AddItems({"Automatic", ".", ","})
+        ucrInputEncoding.SetItems({"unknown"})
+        ucrInputSeparator.SetItems({"Automatic", ",", "Whitespace", ":", ";", "|", "^"})
+        ucrInputHeaders.SetItems({"Automatic", "Yes", "No"})
+        ucrInputDecimal.SetItems({"Automatic", ".", ","})
         nudSkip.Maximum = Integer.MaxValue
     End Sub
 

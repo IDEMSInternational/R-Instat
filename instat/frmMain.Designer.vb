@@ -1749,7 +1749,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameRowNumbersNames
         '
-        Me.mnuOrganiseDataFrameRowNumbersNames.Enabled = False
         Me.mnuOrganiseDataFrameRowNumbersNames.Name = "mnuOrganiseDataFrameRowNumbersNames"
         Me.mnuOrganiseDataFrameRowNumbersNames.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameRowNumbersNames.Tag = "Row_Numbers/Names..."

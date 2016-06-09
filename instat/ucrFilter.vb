@@ -50,7 +50,7 @@ Public Class ucrFilter
     Private Sub InitialiseControl()
         ucrFilterPreview.txtInput.ReadOnly = True
         ucrFilterByReceiver.Selector = ucrSelectorForFitler
-        ucrFilterOperation.AddItems({"==", "<", "<=", ">", ">=", "!="})
+        ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!="})
         ucrFactorLevels.SetAsMultipleSelector()
         ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
         clsFilterView.bForceIncludeOperation = False
