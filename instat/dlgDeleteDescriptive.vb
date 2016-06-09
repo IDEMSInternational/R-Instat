@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgDeleteDescriptive
-    Public bFirstLoad As Boolean
+    Public bFirstLoad As Boolean = True
     Private Sub dlgDeleteDescriptive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
