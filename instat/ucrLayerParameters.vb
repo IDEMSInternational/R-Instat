@@ -27,7 +27,7 @@ Public Class ucrLayerParameters
     End Sub
     Private Sub InitialiseControl()
         If lstLayerParameterControl.Count = 0 Then
-            lstLayerParameterControl.AddRange({UcrLayerParamsControls1, UcrLayerParamsControls2, UcrLayerParamsControls3, UcrLayerParamsControls4, UcrLayerParamsControls5, UcrLayerParamsControls6, UcrLayerParamsControls7, UcrLayerParamsControls8, UcrLayerParamsControls9, UcrLayerParamsControls10})
+            lstLayerParameterControl.AddRange({UcrLayerParamsControls1, UcrLayerParamsControls2, UcrLayerParamsControls3, UcrLayerParamsControls4, UcrLayerParamsControls5, UcrLayerParamsControls6, UcrLayerParamsControls7, UcrLayerParamsControls8, UcrLayerParamsControls9, UcrLayerParamsControls10, UcrLayerParamsControls11, UcrLayerParamsControls12})
             For i = 0 To (lstLayerParameterControl.Count - 1)
                 lstLayerParameterControl(i).SetGeomFunction(clsGeomFunction)
             Next
@@ -64,6 +64,5 @@ Public Class ucrLayerParameters
     Private Sub SetDefaults()
 
     End Sub
-
 End Class
 

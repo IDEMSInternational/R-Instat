@@ -214,6 +214,20 @@ Public Class ucrReceiverMultiple
         Return strTemp
     End Function
 
+    Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True) As String()
+        Dim lstItems As String()
+
+        ReDim lstItems(0 To lstSelectedVariables.Items.Count - 1)
+        For i = 0 To lstSelectedVariables.Items.Count - 1
+            If bWithQuotes Then
+                lstItems(i) = Chr(34) & lstSelectedVariables.Items(i).Text & Chr(34)
+            Else
+                lstItems(i) = lstSelectedVariables.Items(i).Text
+            End If
+        Next
+        Return lstItems
+    End Function
+
     Public Function GetVariableNamesAsList() As List(Of String)
         Dim lstItems As New List(Of String)
 

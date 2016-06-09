@@ -188,7 +188,7 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 )
 
 data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE) {
-  if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out = private$data[ , !self$get_variables_metadata(property = is_hidden_label)]
+  if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out = private$data[!self$get_variables_metadata(property = is_hidden_label)]
   else out = private$data
   if(use_current_filter && length(private$.current_filter) > 0) {
     out = out[self$current_filter, ]
@@ -202,7 +202,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
 )
 
 # TODO
-data_object$set("public", "get_variables_metadata", function(include_all = TRUE, data_type = "all", convert_to_character = FALSE, property, column) {
+data_object$set("public", "get_variables_metadata", function(include_all = TRUE, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE) {
   self$update_variables_metadata()
   if(!include_all) out = private$variables_metadata
   else {
@@ -219,7 +219,10 @@ data_object$set("public", "get_variables_metadata", function(include_all = TRUE,
   }
   
   if(!missing(property)) {
-    if(!property %in% names(out)) stop(property, " not found in variables metadata")
+    if(!property %in% names(out)) {
+	  if(error_if_no_property) stop(property, " not found in variables metadata")
+	  out=data.frame()
+	}
     if(!missing(column)) {
       if(!all(column %in% names(private$data))) stop(column, " not found in data")
       out = out[column, property]
@@ -822,8 +825,8 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
   curr_var_metadata = self$get_variables_metadata()
   out = c()
   for(col in col_names) {
-    if(all(sapply(names(include), function(prop) self$get_variables_metadata(property = prop, column = col) %in% include[[prop]]))
-       && all(sapply(names(exclude), function(prop) !self$get_variables_metadata(property = prop, column = col) %in% exclude[[prop]]))) {
+    if(all(sapply(names(include), function(prop) self$get_variables_metadata(property = prop, column = col,error_if_no_property=FALSE) %in% include[[prop]]))
+       && all(sapply(names(exclude), function(prop) !self$get_variables_metadata(property = prop, column = col,error_if_no_property=FALSE) %in% exclude[[prop]]))) {
       out = c(out, col)
     }
   }
@@ -903,6 +906,11 @@ data_object$set("public", "set_row_names", function(row_names) {
   if(anyDuplicated(row_names) != 0) stop("row_names must be unique")
   rownames(private$data) <- row_names
   self$data_changed <- TRUE
+}
+)
+
+data_object$set("public", "get_row_names", function() {
+  return(names(private$data))
 }
 )
 
