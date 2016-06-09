@@ -165,7 +165,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(0))
         End If
-        TestOkEnabledForgraphics()
+        TestForOkEnabled()
     End Sub
 
     Private Sub ucrReceiverParam2_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam2.SelectionChanged
@@ -174,7 +174,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(1))
         End If
-        TestOkEnabledForgraphics()
+        TestForOkEnabled()
     End Sub
     Private Sub ucrReceiverParam3_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam3.SelectionChanged
         If Not ucrReceiverParam3.IsEmpty Then
@@ -182,7 +182,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(2))
         End If
-        TestOkEnabledForgraphics()
+        TestForOkEnabled()
 
     End Sub
 
@@ -192,7 +192,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(3))
         End If
-        TestOkEnabledForgraphics()
+        TestForOkEnabled()
     End Sub
     Private Sub ucrReceiverParam5_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam5.SelectionChanged
         If Not ucrReceiverParam5.IsEmpty Then
@@ -200,7 +200,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(4))
         End If
-        TestOkEnabledForgraphics()
+        TestForOkEnabled()
     End Sub
 
     Private Sub ucrReceiverParam6_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam6.SelectionChanged
@@ -209,7 +209,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(5))
         End If
-        TestOkEnabledForgraphics()
+        TestForOkEnabled()
     End Sub
 
     Private Sub ucrReceiverParam7_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam7.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
@@ -218,7 +218,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(6))
         End If
-        TestOkEnabledForgraphics()
+        TestForOkEnabled()
     End Sub
     Private Sub ucrReceiverParam8_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam8.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
         If Not ucrReceiverParam8.IsEmpty Then
@@ -226,7 +226,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(7))
         End If
-        TestOkEnabledForgraphics()
+        TestForOkEnabled()
     End Sub
 
     Private Sub ucrReceiverParam9_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam9.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
@@ -235,16 +235,18 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(8))
         End If
-        TestOkEnabledForgraphics
+        TestForOkEnabled()
     End Sub
 
     Private Sub UcrSelector_DataFrameChanged() Handles UcrSelector.DataFrameChanged
         clsGeomFunction.AddParameter("data", clsRFunctionParameter:=UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame)
         ' RaiseEvent DataFrameChanged() do we need this?
     End Sub
+
     Public Sub TestOkEnabledForgraphics()
         Dim i As Integer = 0
 
+        bCheckEnabled = True
         For i = 0 To (clsCurrGeom.clsAesParameters.Count - 1)
             If (clsCurrGeom.clsAesParameters(i).bIsMandatory = True) AndAlso (lstAesParameterUcr(i).IsEmpty()) Then
                 'this should have okay disabled 
@@ -252,4 +254,17 @@ Public Class UcrGeomListWithParameters
             End If
         Next
     End Sub
+
+    Public Function TestForOkEnabled() As Boolean
+        Dim i As Integer = 0
+
+        For i = 0 To (clsCurrGeom.clsAesParameters.Count - 1)
+            If (clsCurrGeom.clsAesParameters(i).bIsMandatory = True) AndAlso (lstAesParameterUcr(i).IsEmpty()) Then
+                'this should have okay disabled 
+                Return False
+            End If
+        Next
+        Return True
+    End Function
+
 End Class
