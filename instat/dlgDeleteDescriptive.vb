@@ -27,15 +27,15 @@ Public Class dlgDeleteDescriptive
     End Sub
 
     Private Sub InitialiseDialog()
-
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$delete_object")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$delete_objects")
         ucrReceiverObjectsToDelete.Selector = ucrSelectorDeleteObject
         ucrReceiverObjectsToDelete.SetMeAsReceiver()
         ucrSelectorDeleteObject.SetItemType("object")
         ucrBase.iHelpTopicID = 352
+        TestOKEnabled()
     End Sub
     Private Sub TestOKEnabled()
-        If ucrReceiverObjectsToDelete.IsEmpty = False Then
+        If Not ucrReceiverObjectsToDelete.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -55,7 +55,7 @@ Public Class dlgDeleteDescriptive
     End Sub
 
     Private Sub ucrReceiverObjectsToDelete_SelectionChanged() Handles ucrReceiverObjectsToDelete.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("object_name", ucrReceiverObjectsToDelete.GetVariableNames())
+        ucrBase.clsRsyntax.AddParameter("object_names", ucrReceiverObjectsToDelete.GetVariableNames())
         TestOKEnabled()
     End Sub
 End Class
