@@ -38,6 +38,8 @@ Public Class dlgGeneralForGraphics
         clsRggplotFunction.SetRCommand("ggplot")
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrBase.iHelpTopicID = 356
+
+
     End Sub
     Private Sub SetDefaults()
         cmdDelete.Enabled = False
@@ -62,6 +64,10 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
+        Dim clsNewGeomFunction As New RFunction
+        Dim clsNewAesFunction As New RFunction
+
+        sdgLayerOptions.SetupLayer(clsNewGeomFunction, clsNewAesFunction, False, False)
         sdgLayerOptions.ShowDialog()
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=sdgLayerOptions.clsGeomFunction)
         FillLayers()

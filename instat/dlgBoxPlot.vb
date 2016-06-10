@@ -29,9 +29,7 @@ Public Class dlgBoxplot
         Else
             ReopenDialog()
         End If
-
     End Sub
-
     Public Sub SetOperator()
         Dim clsTempRFunc As New RFunction
         If chkHorizontalBoxplot.Checked Then
@@ -70,14 +68,16 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
 
-
-
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
-        sdgLayerOptions.SetGeomFunction(clsRgeom_boxplotFunction)
+        'sdgLayerOptions.SetGeomFunction(clsRgeom_boxplotFunction)
+        'sdgLayerOptions.SetAesFunction(clsRaesFunction
+        sdgLayerOptions.SetupLayer(clsRgeom_boxplotFunction, clsRaesFunction, True, True, strDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
         ucrVariablesAsFactorForBoxplot.SetIncludedDataType({"numeric"})
+
+        ucrSaveBoxplot.strPrefix = "graph"
 
     End Sub
 
@@ -88,9 +88,11 @@ Public Class dlgBoxplot
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
+
     Private Sub ucrSelectorBoxPlot_DataFrameChanged() Handles ucrSelectorBoxPlot.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorBoxPlot.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
@@ -111,6 +113,7 @@ Public Class dlgBoxplot
             clsRaesFunction.RemoveParameterByName("fill")
         End If
     End Sub
+
     Private Sub ReopenDialog()
     End Sub
 
@@ -134,4 +137,10 @@ Public Class dlgBoxplot
         End If
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrSaveBoxplot_GraphNameChanged() Handles ucrSaveBoxplot.GraphNameChanged
+        ucrBase.clsRsyntax.SetAssignTo(ucrSaveBoxplot.strGraphName, strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveBoxplot.strGraphName)
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+    End Sub
+
 End Class
