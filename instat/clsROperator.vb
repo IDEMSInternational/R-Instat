@@ -316,6 +316,7 @@ Public Class ROperator
         clsTempROperator.bIsAssigned = bIsAssigned
         clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
         clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
+
         clsTempROperator.clsLeftFunction = clsLeftFunction.Clone
         clsTempROperator.clsLeftOperator = clsLeftOperator.Clone
         clsTempROperator.clsLeftParameter = clsLeftParameter.Clone
