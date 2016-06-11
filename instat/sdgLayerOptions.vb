@@ -69,4 +69,8 @@ Public Class sdgLayerOptions
             ucrGeomWithAes.SetDataframe(strDataframe, Not bFixAes)
         End If
     End Sub
+
+    Public Function TestForOKEnabled() As Boolean
+        Return ucrGeomWithAes.TestForOkEnabled()
+    End Function
 End Class
