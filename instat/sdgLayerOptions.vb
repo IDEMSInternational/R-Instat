@@ -18,7 +18,7 @@ Public Class sdgLayerOptions
     Public clsRsyntax As RSyntax
     Public clsGeomFunction As New RFunction
     Public clsAesFunction As New RFunction
-    Private bFirstLoad As Boolean = True
+    Public bFirstLoad As Boolean = True
     Public bAesInGeom As Boolean
 
     Public Sub New()
@@ -32,22 +32,19 @@ Public Class sdgLayerOptions
     End Sub
 
     Private Sub sdgLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
-            bFirstLoad = False
+            'bFirstLoad = False
         Else
             ReopenDialog()
         End If
         autoTranslate(Me)
     End Sub
-
     Private Sub InitialiseDialog()
         ucrLayerParameter.ucrGeomWithAes = ucrGeomWithAes
         ucrGeomWithAes.ucrLayersControl = ucrLayerParameter
     End Sub
-
     Private Sub SetDefaults()
         ucrGeomWithAes.UcrSelector.Reset()
     End Sub

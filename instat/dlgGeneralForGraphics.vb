@@ -69,12 +69,14 @@ Public Class dlgGeneralForGraphics
 
         sdgLayerOptions.SetupLayer(clsNewGeomFunction, clsNewAesFunction, False, False)
         sdgLayerOptions.ShowDialog()
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=sdgLayerOptions.clsGeomFunction)
-        FillLayers()
         ucrBase.OKEnabled(sdgLayerOptions.ucrGeomWithAes.TestForOkEnabled())
+        FillLayers()
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=sdgLayerOptions.clsGeomFunction.Clone)
     End Sub
+
     Public Sub FillLayers()
         lstLayer = sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem
         lstLayers.Items.Add(lstLayer)
+
     End Sub
 End Class
