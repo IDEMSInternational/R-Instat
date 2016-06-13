@@ -1213,7 +1213,7 @@ Partial Class frmMain
         'mnuHelpHelp
         '
         Me.mnuHelpHelp.Name = "mnuHelpHelp"
-        Me.mnuHelpHelp.Size = New System.Drawing.Size(151, 22)
+        Me.mnuHelpHelp.Size = New System.Drawing.Size(152, 22)
         Me.mnuHelpHelp.Tag = "Help"
         Me.mnuHelpHelp.Text = "Help"
         '
@@ -1221,7 +1221,7 @@ Partial Class frmMain
         '
         Me.mnuHelpLicence.Enabled = False
         Me.mnuHelpLicence.Name = "mnuHelpLicence"
-        Me.mnuHelpLicence.Size = New System.Drawing.Size(151, 22)
+        Me.mnuHelpLicence.Size = New System.Drawing.Size(152, 22)
         Me.mnuHelpLicence.Tag = "Licence..."
         Me.mnuHelpLicence.Text = "Licence..."
         '
@@ -1229,7 +1229,7 @@ Partial Class frmMain
         '
         Me.mnuHelpAboutRInstat.Enabled = False
         Me.mnuHelpAboutRInstat.Name = "mnuHelpAboutRInstat"
-        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(151, 22)
+        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(152, 22)
         Me.mnuHelpAboutRInstat.Tag = "About_R-Instat"
         Me.mnuHelpAboutRInstat.Text = "About R-Instat"
         '
@@ -1669,7 +1669,6 @@ Partial Class frmMain
         Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuOrganise, Me.mnuDescribe, Me.mnuModel, Me.mnuClimatic, Me.mnuClimateMethods, Me.mnuTools, Me.mnuView, Me.mnuHelp})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
-        Me.mnuBar.MdiWindowListItem = Me.mnuView
         Me.mnuBar.Name = "mnuBar"
         Me.mnuBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.mnuBar.Size = New System.Drawing.Size(769, 24)
@@ -1750,7 +1749,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameRowNumbersNames
         '
-        Me.mnuOrganiseDataFrameRowNumbersNames.Enabled = False
         Me.mnuOrganiseDataFrameRowNumbersNames.Name = "mnuOrganiseDataFrameRowNumbersNames"
         Me.mnuOrganiseDataFrameRowNumbersNames.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameRowNumbersNames.Tag = "Row_Numbers/Names..."
@@ -2681,6 +2679,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.mnuBar)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
+        Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
         Me.Text = "R-Instat"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

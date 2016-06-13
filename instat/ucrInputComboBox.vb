@@ -20,6 +20,7 @@ Public Class ucrInputComboBox
 
     Private Sub cboInput_Validating(sender As Object, e As CancelEventArgs) Handles cboInput.Validating
         e.Cancel = Not ValidateText(cboInput.Text)
+        If Not e.Cancel Then OnNameChanged()
     End Sub
 
     Public Sub SetItemsTypeAsColumns()
@@ -42,7 +43,13 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsFilters()
+        strItemsType = "Filters"
+        FillItemTypes()
+    End Sub
+
     Private Sub FillItemTypes()
+        Dim strItems As String()
         Select Case strItemsType
             Case "Columns"
                 If ucrDataFrameSelector IsNot Nothing Then
@@ -52,6 +59,14 @@ Public Class ucrInputComboBox
             Case "Models"
                 cboInput.Items.Add(frmMain.clsRLink.GetModelNames().ToArray)
             Case "Graphs"
+            Case "Filters"
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    strItems = frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray()
+                    If strItems.Count > 0 Then
+                        cboInput.Items.AddRange(strItems)
+                    End If
+                End If
         End Select
     End Sub
 
@@ -64,10 +79,18 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
-    Public Overrides Sub SetName(strName As String)
-        If ValidateText(strName) Then
+    Public Overrides Sub SetName(strName As String, Optional bSilent As Boolean = False)
+        If bSilent Then
             cboInput.Text = strName
+            If cboInput.FindStringExact(strName) <> -1 Then
+                cboInput.SelectedIndex = cboInput.FindStringExact(strName)
+            End If
             OnNameChanged()
+        Else
+            If ValidateText(strName) Then
+                cboInput.Text = strName
+                OnNameChanged()
+            End If
         End If
     End Sub
 
@@ -75,7 +98,10 @@ Public Class ucrInputComboBox
         Return cboInput.Text
     End Function
 
-    Public Sub AddItems(strItems As String())
+    Public Sub SetItems(strItems As String(), Optional bClearExisting As Boolean = True)
+        If bClearExisting Then
+            cboInput.Items.Clear()
+        End If
         cboInput.Items.AddRange(strItems)
     End Sub
 
@@ -93,5 +119,15 @@ Public Class ucrInputComboBox
 
     Private Sub ucrInputComboBox_Load(sender As Object, e As EventArgs) Handles Me.Load
         FillItemTypes()
+    End Sub
+
+    Private Sub cboInput_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboInput.SelectedIndexChanged
+        OnNameChanged()
+    End Sub
+
+    Private Sub ucrInputComboBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
+        'If bIsReadOnly Then
+        '    e.Handled = True
+        'End If
     End Sub
 End Class

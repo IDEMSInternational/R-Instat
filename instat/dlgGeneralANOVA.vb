@@ -16,7 +16,33 @@
 
 Imports instat.Translations
 Public Class dlgGeneralANOVA
+    Public bFirstLoad As Boolean = True
     Private Sub dlgGeneral_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        If bFirstLoad Then
+            SetDefaults()
+            InitialiseDialog()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+        TestOKEnabled()
     End Sub
+
+    Private Sub TestOKEnabled()
+
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 161
+    End Sub
+
 End Class

@@ -29,6 +29,7 @@ Public Class dlgDeleteSheet
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
+        ucrBase.iHelpTopicID = 63
     End Sub
 
     Private Sub SetDefaults()

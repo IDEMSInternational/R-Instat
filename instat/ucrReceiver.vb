@@ -22,6 +22,9 @@ Public Class ucrReceiver
     Public bFirstLoad As Boolean
     Public strSelectorHeading As String
     Public bUseFilteredData As Boolean = True
+    Public bTypeSet As Boolean
+    Protected strType As String
+    Public bExcludeFromSelector As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -31,7 +34,9 @@ Public Class ucrReceiver
         lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         bFirstLoad = True
+        bTypeSet = False
         strSelectorHeading = "Variables"
+        strType = "column"
     End Sub
 
     Public Overridable Sub AddSelected()
@@ -39,7 +44,9 @@ Public Class ucrReceiver
     End Sub
 
     Public Overridable Sub RemoveSelected()
-
+        If Selector IsNot Nothing Then
+            Selector.LoadList()
+        End If
     End Sub
 
     Public Overridable Sub Clear()
@@ -65,6 +72,11 @@ Public Class ucrReceiver
 
     Public Overridable Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strVarNames As String = ""
+        Return strVarNames
+    End Function
+
+    Public Overridable Function GetVariableNamesList(Optional bWithQuotes As Boolean = True) As String()
+        Dim strVarNames As String() = Nothing
         Return strVarNames
     End Function
 
@@ -201,5 +213,17 @@ Public Class ucrReceiver
             Return MyBase.ProcessCmdKey(msg, keyData)
         End If
     End Function
+
+    Public Function GetItemType() As String
+        Return strType
+    End Function
+
+    Public Sub SetItemType(strNewType As String)
+        strType = strNewType
+        If Selector IsNot Nothing Then
+            Selector.LoadList()
+        End If
+        bTypeSet = True
+    End Sub
 
 End Class

@@ -23,9 +23,11 @@ Public Class ucrSelector
     Public Event VariablesInReceiversChanged()
     Public lstVariablesInReceivers As List(Of String)
     Public bFirstLoad As Boolean
+    Public bIncludeOverall As Boolean
     Public strCurrentDataFrame As String
     Private lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
+    Private strType As String
 
     Public Sub New()
         ' This call is required by the designer.
@@ -34,9 +36,11 @@ Public Class ucrSelector
         ' Add any initialization after the InitializeComponent() call.
         lstVariablesInReceivers = New List(Of String)
         bFirstLoad = True
+        bIncludeOverall = False
         strCurrentDataFrame = ""
         lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
+        strType = "column"
     End Sub
 
     Private Sub ucrSelection_load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -58,12 +62,20 @@ Public Class ucrSelector
 
     Public Overridable Sub LoadList()
         Dim lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String())))
+        Dim strExclud As String() = Nothing
 
         If CurrentReceiver IsNot Nothing Then
             lstCombinedMetadataLists = CombineMetadataLists(CurrentReceiver.lstIncludedMetadataProperties, CurrentReceiver.lstExcludedMetadataProperties)
-            frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame)
+            If CurrentReceiver.bExcludeFromSelector Then
+                strExclud = lstVariablesInReceivers.ToArray
+            End If
+            If CurrentReceiver.bTypeSet Then
+                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=CurrentReceiver.GetItemType(), lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud)
+            Else
+                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud)
+            End If
         Else
-            frmMain.clsRLink.FillListView(lstAvailableVariable, lstIncludedDataTypes:=lstIncludedMetadataProperties, lstExcludedDataTypes:=lstExcludedMetadataProperties, strDataFrameName:=strCurrentDataFrame)
+            frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstIncludedMetadataProperties, lstExcludedDataTypes:=lstExcludedMetadataProperties, strDataFrameName:=strCurrentDataFrame)
         End If
     End Sub
 
@@ -71,6 +83,11 @@ Public Class ucrSelector
         RaiseEvent ResetReceivers()
         LoadList()
         'lstItemsInReceivers.Clear()
+    End Sub
+
+    Public Overridable Sub SetIncludeOverall(bInclude As Boolean)
+        bIncludeOverall = bInclude
+        LoadList()
     End Sub
 
     Public Sub SetCurrentReceiver(conReceiver As ucrReceiver)
@@ -176,6 +193,14 @@ Public Class ucrSelector
         RaiseEvent VariablesInReceiversChanged()
     End Sub
 
+    Public Sub AddItemsWithMetadataProperty(strProperty As String, strValues As String())
+
+        frmMain.clsRLink.SelectColumnsWithMetadataProperty(lstAvailableVariable, strCurrentDataFrame, strProperty, strValues)
+        Add()
+        LoadList()
+
+    End Sub
+
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
         Dim iIncludeIndex As Integer
         'Dim iExcludeIndex As Integer
@@ -243,5 +268,14 @@ Public Class ucrSelector
         Next
 
         Return New List(Of List(Of KeyValuePair(Of String, String())))({lstCombinedIncluded, lstCombinedExcluded})
+    End Function
+
+    Public Sub SetItemType(strNewType As String)
+        strType = strNewType
+        LoadList()
+    End Sub
+
+    Public Function GetItemType() As String
+        Return strType
     End Function
 End Class

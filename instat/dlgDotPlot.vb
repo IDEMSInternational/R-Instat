@@ -52,6 +52,7 @@ Public Class dlgDotPlot
         ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorDotPlot.SetSelector(ucrDotPlotSelector)
         ucrVariablesAsFactorDotPlot.SetIncludedDataType({"numeric"})
+        ucrBase.iHelpTopicID = 134
     End Sub
 
     Private Sub TestOkEnabled()
