@@ -74,7 +74,6 @@ Public Class dlgBoxplot
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         sdgBoxPlot.SetBoxPlotFunction(clsRgeom_boxplotFunction)
 
-
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
         ucrVariablesAsFactorForBoxplot.SetIncludedDataType({"numeric"})
@@ -135,5 +134,4 @@ Public Class dlgBoxplot
         End If
         TestOkEnabled()
     End Sub
-
 End Class

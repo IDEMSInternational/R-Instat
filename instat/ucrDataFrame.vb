@@ -20,11 +20,12 @@ Public Class ucrDataFrame
     Public iColumnCount As Integer
     Public clsCurrDataFrame As New RFunction
     Public bFirstLoad As Boolean = True
+    Private bIncludeOverall As Boolean = False
     Public strCurrDataFrame As String = ""
     Public bUseFilteredData As Boolean = True
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad)
+        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad, bIncludeOverall)
         If bFirstLoad Then
             bFirstLoad = False
         End If
@@ -32,6 +33,7 @@ Public Class ucrDataFrame
     End Sub
 
     Public Sub Reset()
+        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad)
         If frmMain.strDefaultDataFrame <> "" Then
             cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strDefaultDataFrame)
         ElseIf frmMain.strCurrentDataFrame <> "" Then
@@ -50,7 +52,7 @@ Public Class ucrDataFrame
 
     Public Sub SetDataFrameProperties()
         Dim clsParam As New RParameter
-        If cboAvailableDataFrames.Text <> "" Then
+        If cboAvailableDataFrames.Text <> "" AndAlso Not bIncludeOverall Then
             iDataFrameLength = frmMain.clsRLink.GetDataFrameLength(cboAvailableDataFrames.Text)
             iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(cboAvailableDataFrames.Text)
             clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
@@ -70,4 +72,12 @@ Public Class ucrDataFrame
         End If
     End Sub
 
+    Public Sub SetIncludeOverall(bInclude As Boolean)
+        bIncludeOverall = bInclude
+        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad, bIncludeOverall)
+    End Sub
+
+    Public Function GetIncludeOverall() As Boolean
+        Return bIncludeOverall
+    End Function
 End Class

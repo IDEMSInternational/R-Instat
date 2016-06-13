@@ -26,7 +26,7 @@ Public Class dlgDistanceText
         End If
     End Sub
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 347
     End Sub
     Private Sub SetDefaults()
 

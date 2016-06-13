@@ -38,6 +38,7 @@ Public Class dlgCopySheet
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
+        ucrBase.iHelpTopicID = 263
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
