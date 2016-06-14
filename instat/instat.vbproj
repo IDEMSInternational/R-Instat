@@ -512,6 +512,12 @@
     <Compile Include="dlgRestrict.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRowNamesOrNumbers.Designer.vb">
+      <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRowNamesOrNumbers.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgScatterPlot.Designer.vb">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
     </Compile>
@@ -697,6 +703,12 @@
     </Compile>
     <Compile Include="sdgVariableTransformations.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ucrColors.Designer.vb">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrColors.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
@@ -1594,6 +1606,12 @@
     <Compile Include="ucrLayerParameters.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrLayerParamsControls.Designer.vb">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrLayerParamsControls.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMultipleInput.Designer.vb">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </Compile>
@@ -2222,6 +2240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRestrict.sw-KE.resx">
       <DependentUpon>dlgRestrict.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRowNamesOrNumbers.resx">
+      <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.fr-FR.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
@@ -3664,6 +3685,15 @@
     <EmbeddedResource Include="ucrButtonsSubdialogue.sw-KE.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.fr-FR.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.sw-KE.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.fr-FR.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
     </EmbeddedResource>
@@ -3789,6 +3819,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrLayerParameters.sw-KE.resx">
       <DependentUpon>ucrLayerParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParamsControls.fr-FR.resx">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParamsControls.resx">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParamsControls.sw-KE.resx">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>

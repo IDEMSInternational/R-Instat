@@ -58,11 +58,21 @@ Public Class frmMain
         'Setting the properties of R Interface
         clsRLink.SetLog(frmLog.txtLog)
         clsRLink.SetOutput(frmCommand.txtCommand)
-        REngine.SetEnvironmentVariables()
-        clsRLink.clsEngine = REngine.GetInstance()
+        Try
+            REngine.SetEnvironmentVariables()
+        Catch ex As Exception
+            MsgBox(ex.Message & vbNewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R Link.")
+            Application.Exit()
+        End Try
+        Try
+            clsRLink.clsEngine = REngine.GetInstance()
+        Catch ex As Exception
+            MsgBox(ex.Message & vbNewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R Link.")
+            Application.Exit()
+        End Try
         clsRLink.clsEngine.Initialize()
-        'Sets up R source files
-        clsRLink.RSetup()
+            'Sets up R source files
+            clsRLink.RSetup()
 
     End Sub
 
@@ -733,9 +743,6 @@ Public Class frmMain
         dlgProtect.ShowDialog()
     End Sub
 
-    Private Sub mnuManageSheetHideShowColumns_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameHideColumns.Click
-        dlgHideShowColumns.ShowDialog()
-    End Sub
     Private Sub mnuManageDataSort_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameSort.Click
         dlgSort.ShowDialog()
     End Sub
@@ -999,5 +1006,9 @@ Public Class frmMain
 
     Private Sub mnuOrganiseDataObjectRenameMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectRenameMetadata.Click
         dlgRenameMetadata.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseDataFrameRowNumbersNames_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameRowNumbersNames.Click
+        dlgRowNamesOrNumbers.ShowDialog()
     End Sub
 End Class
