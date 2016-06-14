@@ -151,15 +151,15 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub cmdHistogramOptions_Click(sender As Object, e As EventArgs) Handles cmdHistogramOptions.Click
-        sdgHistogramOptions.ShowDialog()
+        sdgLayerOptions.ShowDialog()
     End Sub
 
     Private Sub cmdFrequencyOptions_Click(sender As Object, e As EventArgs) Handles cmdFrequencyOptions.Click
-        sdgFrequencyPolygonOptions.ShowDialog()
+        sdgLayerOptions.ShowDialog()
     End Sub
 
     Private Sub cmdDensityOptions_Click(sender As Object, e As EventArgs) Handles cmdDensityOptions.Click
-        sdgDensityOptions.ShowDialog()
+        sdgLayerOptions.ShowDialog()
     End Sub
 
     Private Sub ucrVariablesAsFactorforHist_SelectionChanged() Handles ucrVariablesAsFactorforHist.SelectionChanged
@@ -172,4 +172,7 @@ Public Class dlgHistogram
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrSaveHist_GraphNameChanged() Handles ucrSaveHist.GraphNameChanged
+
+    End Sub
 End Class
