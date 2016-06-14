@@ -106,4 +106,14 @@ Public Class dlgDotPlot
         End If
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrSaveDotPlot_GraphNameChanged() Handles ucrSaveDotPlot.GraphNameChanged, ucrSaveDotPlot.SaveGraphCheckedChanged
+        If ucrSaveDotPlot.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveDotPlot.strGraphName, strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveDotPlot.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
+    End Sub
 End Class
