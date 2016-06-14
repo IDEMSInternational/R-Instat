@@ -16,7 +16,26 @@
 
 Imports instat.Translations
 Public Class dlgTwoSamples
+    Public bFirstLoad As Boolean = True
     Private Sub dlgTwoSamples_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        End If
+        TestOKEnabled()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 367
+    End Sub
+
+    Private Sub SetDefaults()
+
     End Sub
 End Class

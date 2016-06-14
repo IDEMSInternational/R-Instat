@@ -40,7 +40,7 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.Focus()
         ucrFactorReceiver.SetMeAsReceiver()
         'set subdialog defaults
-        sdgBarChart.SetDefaults()
+        'sdgBarChart.SetDefaults()
         sdgPieChartOptions.SetDefaults()
     End Sub
     Private Sub InitialiseDialog()
@@ -57,10 +57,11 @@ Public Class dlgBarAndPieChart
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.SetIncludedDataTypes({"factor"})
 
-        sdgBarChart.SetBarChartFunction(clsRgeom_barchart)
+        'sdgBarChart.SetBarChartFunction(clsRgeom_barchart)
         sdgPieChartOptions.SetPieChartFunction(clsTempRFunc)
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.iHelpTopicID = 327
 
 
     End Sub

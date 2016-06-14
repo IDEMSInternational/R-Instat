@@ -17,7 +17,7 @@ Imports instat.Translations
 Imports unvell.ReoGrid.Events
 
 Public Class frmVariables
-    Public context As New frmEditor
+    'Public context As New frmEditor
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Public strPreviousCellText As String
 
@@ -39,10 +39,10 @@ Public Class frmVariables
         'gridVariables.SheetTabNewButtonVisible = False
         'gridVariables.SheetTabControlNewButtonVisible = False
         'grdVariables.CurrentWorksheet.Resize(5, 5)
-        grdVariables.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
-        grdVariables.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip
-        grdVariables.ContextMenuStrip = context.grdData.ContextMenuStrip
-        autoTranslate(Me)
+        'grdVariables.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
+        'grdVariables.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip
+        'grdVariables.ContextMenuStrip = context.grdData.ContextMenuStrip
+        'autoTranslate(Me)
     End Sub
 
     Private Sub grdVariables_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdVariables.CurrentWorksheetChanged, Me.Load, grdVariables.WorksheetInserted
@@ -73,7 +73,7 @@ Public Class frmVariables
             End If
         ElseIf grdCurrSheet.ColumnHeaders(e.Cell.Column).Text = strDecimalLabel Then
             If Integer.TryParse(e.NewData, 0) AndAlso e.NewData >= 0 Then
-                strScript = frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata(data_name =" & Chr(34) & grdCurrSheet.Name & Chr(34) & ",col_name = " & Chr(34) & strColumn & Chr(34) & ",property=" & Chr(34) & strDecimalLabel & Chr(34) & ",new_val=" & e.NewData & ")"
+                strScript = frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata(data_name =" & Chr(34) & grdCurrSheet.Name & Chr(34) & ",col_names = " & Chr(34) & strColumn & Chr(34) & ",property=" & Chr(34) & strDecimalLabel & Chr(34) & ",new_val=" & e.NewData & ")"
                 strComment = "Edited variables metadata value"
                 bRunScript = True
             Else
@@ -89,5 +89,9 @@ Public Class frmVariables
 
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrSheet.BeforeCellEdit
         strPreviousCellText = e.Cell.Data.ToString()
+    End Sub
+
+    Private Sub frmVariables_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        frmMain.mnuViewColumnMetadata.Checked = Me.Visible
     End Sub
 End Class

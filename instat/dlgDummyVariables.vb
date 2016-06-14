@@ -46,13 +46,14 @@ Public Class dlgDummyVariables
     End Sub
 
     Public Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 41
         ucrBase.clsRsyntax.SetFunction("")
         ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverFactor.Selector = ucrSelectorDummyVariable
         ucrVariateReceiver.Selector = ucrSelectorDummyVariable
         ucrReceiverFactor.SetMeAsReceiver()
 
-        ucrReceiverFactor.SetDataType("factor")
+        ucrReceiverFactor.SetIncludedDataTypes({"factor"})
 
         chkXvariable.Checked = False
         ucrVariateReceiver.Visible = False

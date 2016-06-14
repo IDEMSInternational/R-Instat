@@ -17,9 +17,12 @@
 Public Class ucrReceiverMultiple
 
     Private Sub ucrReceiverMultiple_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If lstSelectedVariables.Columns.Count = 0 Then
-            lstSelectedVariables.Columns.Add("Selected Data")
-            lstSelectedVariables.Columns(0).Width = -2
+        If bFirstLoad Then
+            If lstSelectedVariables.Columns.Count = 0 Then
+                lstSelectedVariables.Columns.Add("Selected Data")
+                lstSelectedVariables.Columns(0).Width = lstSelectedVariables.Width - 25
+            End If
+            bFirstLoad = False
         End If
     End Sub
 
@@ -28,18 +31,19 @@ Public Class ucrReceiverMultiple
     Public Overrides Sub AddSelected()
         Dim objItem As ListViewItem
         Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
-        Dim grpTemp As ListViewGroup
+        Dim grpCurr As New ListViewGroup
 
         Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
         For Each objItem In tempObjects
             If Not GetCurrItemNames().Contains(objItem.Text) Then
-                If Not GetCurrGroupNames().Contains(objItem.Group.Name) Then
-                    grpTemp = New ListViewGroup(key:=objItem.Group.Name, headerText:=objItem.Group.Name)
-                    lstSelectedVariables.Groups.Add(grpTemp)
+                If Not GetCurrGroupNames().Contains(objItem.Tag) Then
+                    grpCurr = New ListViewGroup(key:=objItem.Tag, headerText:=objItem.Tag)
+                    lstSelectedVariables.Groups.Add(grpCurr)
                 Else
-                    grpTemp = lstSelectedVariables.Groups(objItem.Group.Name)
+                    grpCurr = lstSelectedVariables.Groups(GetCurrGroupNames().IndexOf(objItem.Tag))
                 End If
-                lstSelectedVariables.Items.Add(objItem.Text).Group = grpTemp
+                lstSelectedVariables.Items.Add(objItem.Text).Group = grpCurr
+                lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Tag = objItem.Tag
                 Selector.AddToVariablesList(objItem.Text)
             End If
         Next
@@ -62,9 +66,7 @@ Public Class ucrReceiverMultiple
         Dim grpTemp As ListViewGroup
 
         For Each grpTemp In lstSelectedVariables.Groups
-            If Not strHeaders.Contains(grpTemp.Name) Then
-                strHeaders.Add(grpTemp.Name)
-            End If
+            strHeaders.Add(grpTemp.Name)
         Next
         Return strHeaders
     End Function
@@ -81,6 +83,7 @@ Public Class ucrReceiverMultiple
             Next
         End If
         RaiseEvent SelectionChanged()
+        MyBase.RemoveSelected()
     End Sub
 
     Public Overrides Sub Clear()
@@ -107,21 +110,50 @@ Public Class ucrReceiverMultiple
         Dim clsGetVariablesFunc As New RFunction
         Dim lstCurrDataFrames As List(Of String)
         Dim strCurrDataFrame As String
+        Dim strCurrentType As String
         lstCurrDataFrames = GetDataFrameNames()
 
         If lstCurrDataFrames.Count = 1 Then
             strCurrDataFrame = lstCurrDataFrames(0)
-            clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
             clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34))
-            clsGetVariablesFunc.AddParameter("col_names", GetVariableNames())
-            If bForceAsDataFrame Then
-                clsGetVariablesFunc.AddParameter("force_as_data_frame", "TRUE")
+            If bTypeSet Then
+                strCurrentType = strType
             Else
-                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
-                End If
+                strCurrentType = Selector.GetItemType()
             End If
-
+            Select Case strCurrentType
+                Case "column"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+                    clsGetVariablesFunc.AddParameter("col_names", GetVariableNames())
+                    If bForceAsDataFrame Then
+                        clsGetVariablesFunc.AddParameter("force_as_data_frame", "TRUE")
+                    Else
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
+                        End If
+                    End If
+                    If bUseFilteredData Then
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsGetVariablesFunc.AddParameter("use_current_filter", "TRUE")
+                        Else
+                            clsGetVariablesFunc.RemoveParameterByName("use_current_filter")
+                        End If
+                    Else
+                        clsGetVariablesFunc.AddParameter("use_current_filter", "FALSE")
+                    End If
+                Case "filter"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
+                    clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
+                Case "object"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+                    clsGetVariablesFunc.AddParameter("object_name", GetVariableNames())
+                Case "graph"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+                    clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
+                Case "model"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
+                    clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
+            End Select
             'TODO make this an option set in Options menu
             'clsRSyntax.SetAssignTo(MakeValidRString(strCurrDataFrame) & "_temp", clsFunction:=clsGetVariablesFunc)
         End If
@@ -180,6 +212,20 @@ Public Class ucrReceiverMultiple
         End If
 
         Return strTemp
+    End Function
+
+    Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True) As String()
+        Dim lstItems As String()
+
+        ReDim lstItems(0 To lstSelectedVariables.Items.Count - 1)
+        For i = 0 To lstSelectedVariables.Items.Count - 1
+            If bWithQuotes Then
+                lstItems(i) = Chr(34) & lstSelectedVariables.Items(i).Text & Chr(34)
+            Else
+                lstItems(i) = lstSelectedVariables.Items(i).Text
+            End If
+        Next
+        Return lstItems
     End Function
 
     Public Function GetVariableNamesAsList() As List(Of String)

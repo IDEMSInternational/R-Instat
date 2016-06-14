@@ -23,20 +23,96 @@ Partial Class dlgPopulationPyramids
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPopulationPyramidselector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblXVariable = New System.Windows.Forms.Label()
+        Me.ucrXVariableReceiver = New instat.ucrReceiverSingle()
+        Me.lblYVariable = New System.Windows.Forms.Label()
+        Me.ucrYVariableReceiver = New instat.ucrReceiverSingle()
+        Me.lblSecondFactor = New System.Windows.Forms.Label()
+        Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(2, 216)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 207)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrPopulationPyramidselector
+        '
+        Me.ucrPopulationPyramidselector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrPopulationPyramidselector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrPopulationPyramidselector.Name = "ucrPopulationPyramidselector"
+        Me.ucrPopulationPyramidselector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrPopulationPyramidselector.TabIndex = 1
+        '
+        'lblXVariable
+        '
+        Me.lblXVariable.AutoSize = True
+        Me.lblXVariable.Location = New System.Drawing.Point(255, 25)
+        Me.lblXVariable.Name = "lblXVariable"
+        Me.lblXVariable.Size = New System.Drawing.Size(55, 13)
+        Me.lblXVariable.TabIndex = 2
+        Me.lblXVariable.Text = "X Variable"
+        '
+        'ucrXVariableReceiver
+        '
+        Me.ucrXVariableReceiver.Location = New System.Drawing.Point(258, 42)
+        Me.ucrXVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrXVariableReceiver.Name = "ucrXVariableReceiver"
+        Me.ucrXVariableReceiver.Selector = Nothing
+        Me.ucrXVariableReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrXVariableReceiver.TabIndex = 3
+        '
+        'lblYVariable
+        '
+        Me.lblYVariable.AutoSize = True
+        Me.lblYVariable.Location = New System.Drawing.Point(255, 76)
+        Me.lblYVariable.Name = "lblYVariable"
+        Me.lblYVariable.Size = New System.Drawing.Size(55, 13)
+        Me.lblYVariable.TabIndex = 2
+        Me.lblYVariable.Text = "Y Variable"
+        '
+        'ucrYVariableReceiver
+        '
+        Me.ucrYVariableReceiver.Location = New System.Drawing.Point(258, 92)
+        Me.ucrYVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrYVariableReceiver.Name = "ucrYVariableReceiver"
+        Me.ucrYVariableReceiver.Selector = Nothing
+        Me.ucrYVariableReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrYVariableReceiver.TabIndex = 3
+        '
+        'lblSecondFactor
+        '
+        Me.lblSecondFactor.AutoSize = True
+        Me.lblSecondFactor.Location = New System.Drawing.Point(255, 125)
+        Me.lblSecondFactor.Name = "lblSecondFactor"
+        Me.lblSecondFactor.Size = New System.Drawing.Size(77, 13)
+        Me.lblSecondFactor.TabIndex = 2
+        Me.lblSecondFactor.Text = "Second Factor"
+        '
+        'ucrSecondFactorReceiver
+        '
+        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(258, 142)
+        Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
+        Me.ucrSecondFactorReceiver.Selector = Nothing
+        Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrSecondFactorReceiver.TabIndex = 3
         '
         'dlgPopulationPyramids
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(406, 271)
+        Me.ClientSize = New System.Drawing.Size(419, 261)
+        Me.Controls.Add(Me.ucrSecondFactorReceiver)
+        Me.Controls.Add(Me.lblSecondFactor)
+        Me.Controls.Add(Me.ucrYVariableReceiver)
+        Me.Controls.Add(Me.lblYVariable)
+        Me.Controls.Add(Me.ucrXVariableReceiver)
+        Me.Controls.Add(Me.lblXVariable)
+        Me.Controls.Add(Me.ucrPopulationPyramidselector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgPopulationPyramids"
@@ -44,8 +120,16 @@ Partial Class dlgPopulationPyramids
         Me.Tag = "Population Pyramids"
         Me.Text = "Population Pyramids"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrPopulationPyramidselector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents lblXVariable As Label
+    Friend WithEvents ucrXVariableReceiver As ucrReceiverSingle
+    Friend WithEvents lblYVariable As Label
+    Friend WithEvents ucrYVariableReceiver As ucrReceiverSingle
+    Friend WithEvents lblSecondFactor As Label
+    Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
 End Class

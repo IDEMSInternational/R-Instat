@@ -14,17 +14,45 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports RDotNet
+
 Public Class ucrReceiverSingle
-    Dim strDataFrameName As String = ""
+    Dim strDataFrameName As String
+    Public strCurrDataType As String
+
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        strDataFrameName = ""
+        strCurrDataType = ""
+    End Sub
 
     Public Overrides Sub AddSelected()
         Dim objItem As ListViewItem
+        Dim clsGetDataType As New RFunction
         Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
+        Dim strCurrentItemType As String
 
+        If bTypeSet Then
+            strCurrentItemType = strType
+        Else
+            strCurrentItemType = Selector.GetItemType()
+        End If
+        clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+        clsGetDataType.AddParameter("property", "data_type_label")
         If txtReceiverSingle.Enabled Then
             Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
             For Each objItem In tempObjects
-                SetSelected(objItem.Text, objItem.Group.Name)
+                If strCurrentItemType = "column" Then
+                    clsGetDataType.AddParameter("data_name", Chr(34) & objItem.Tag & Chr(34))
+                    clsGetDataType.AddParameter("column", Chr(34) & objItem.Text & Chr(34))
+                    strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                Else
+                    strCurrDataType = ""
+                End If
+                SetSelected(objItem.Text, objItem.Tag)
             Next
         End If
     End Sub
@@ -41,6 +69,7 @@ Public Class ucrReceiverSingle
             txtReceiverSingle.Text = ""
             strDataFrameName = ""
         End If
+        MyBase.RemoveSelected()
     End Sub
 
     Public Overrides Sub Clear()
@@ -62,19 +91,50 @@ Public Class ucrReceiverSingle
         'call GetVariableNames
         Dim clsGetVariablesFunc As New RFunction
         Dim clsParam As New RParameter
-        If txtReceiverSingle.Text <> "" Then
-            clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        Dim strCurrentType As String
+        If Selector IsNot Nothing AndAlso txtReceiverSingle.Text <> "" Then
             clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-            clsGetVariablesFunc.AddParameter("col_name", GetVariableNames())
-            If bForceAsDataFrame Then
-                clsGetVariablesFunc.AddParameter("force_as_data_frame", "TRUE")
+            If bTypeSet Then
+                strCurrentType = strType
             Else
-                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
-                End If
+                strCurrentType = Selector.GetItemType()
             End If
-                'TODO make this an option set in Options menu
-                clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+            Select Case strCurrentType
+                Case "column"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+                    clsGetVariablesFunc.AddParameter("col_name", GetVariableNames())
+                    If bForceAsDataFrame Then
+                        clsGetVariablesFunc.AddParameter("force_as_data_frame", "TRUE")
+                    Else
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
+                        End If
+                    End If
+                    If bUseFilteredData Then
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsGetVariablesFunc.AddParameter("use_current_filter", "TRUE")
+                        Else
+                            clsGetVariablesFunc.RemoveParameterByName("use_current_filter")
+                        End If
+                    Else
+                        clsGetVariablesFunc.AddParameter("use_current_filter", "FALSE")
+                    End If
+                Case "filter"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
+                    clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
+                Case "object"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+                    clsGetVariablesFunc.AddParameter("object_name", GetVariableNames())
+                Case "graph"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+                    clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
+                Case "model"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
+                    clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
+            End Select
+
+            'TODO make this an option set in Options menu
+            clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
             Return clsGetVariablesFunc
         Else
             Return clsGetVariablesFunc
@@ -91,6 +151,12 @@ Public Class ucrReceiverSingle
             End If
         End If
         Return strTemp
+    End Function
+
+    Public Overrides Function GetVariableNameslist(Optional bWithQuotes As Boolean = True) As String()
+        Dim arrTemp As String() = Nothing
+        arrTemp = {GetVariableNames()}
+        Return arrTemp
     End Function
 
     Public Function GetDataName() As String

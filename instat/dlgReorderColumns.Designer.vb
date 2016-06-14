@@ -31,7 +31,7 @@ Partial Class dlgReorderColumns
         'lblColumns
         '
         Me.lblColumns.AutoSize = True
-        Me.lblColumns.Location = New System.Drawing.Point(186, 22)
+        Me.lblColumns.Location = New System.Drawing.Point(200, 28)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(95, 13)
         Me.lblColumns.TabIndex = 11
@@ -39,7 +39,7 @@ Partial Class dlgReorderColumns
         '
         'ucrReorderColumns
         '
-        Me.ucrReorderColumns.Location = New System.Drawing.Point(189, 38)
+        Me.ucrReorderColumns.Location = New System.Drawing.Point(201, 45)
         Me.ucrReorderColumns.Name = "ucrReorderColumns"
         Me.ucrReorderColumns.Size = New System.Drawing.Size(154, 139)
         Me.ucrReorderColumns.TabIndex = 13
@@ -50,23 +50,24 @@ Partial Class dlgReorderColumns
         '
         Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucrBase.Location = New System.Drawing.Point(3, 183)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 184)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(403, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
         'ucrDataFrameSelect
         '
-        Me.ucrDataFrameSelect.Location = New System.Drawing.Point(12, 22)
+        Me.ucrDataFrameSelect.Location = New System.Drawing.Point(10, 10)
+        Me.ucrDataFrameSelect.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameSelect.Name = "ucrDataFrameSelect"
-        Me.ucrDataFrameSelect.Size = New System.Drawing.Size(127, 41)
+        Me.ucrDataFrameSelect.Size = New System.Drawing.Size(120, 40)
         Me.ucrDataFrameSelect.TabIndex = 14
         '
         'dlgReorderColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 235)
+        Me.ClientSize = New System.Drawing.Size(419, 237)
         Me.Controls.Add(Me.ucrDataFrameSelect)
         Me.Controls.Add(Me.ucrReorderColumns)
         Me.Controls.Add(Me.lblColumns)
