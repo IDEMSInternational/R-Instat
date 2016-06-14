@@ -171,8 +171,7 @@ Public Class dlgHistogram
         End If
         TestOkEnabled()
     End Sub
-
-    Private Sub ucrSaveHist_GraphNameChanged() Handles ucrSaveHist.GraphNameChanged, ucrHistogramSelector.DataFrameChanged, ucrSaveHist.SaveGraphCheckedChanged
+    Private Sub ucrSaveHist_GraphNameChanged() Handles ucrSaveHist.GraphNameChanged, ucrSaveHist.SaveGraphCheckedChanged
         If ucrSaveHist.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveHist.strGraphName, strTempDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveHist.strGraphName)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
