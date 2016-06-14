@@ -30,10 +30,11 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
     i = i + 1
   }
   colnames(out) <- colnames(data)
+  rownames(out) <- rownames(data)
   return(out)
 }
 
-next_default_item = function(prefix, existing_names, include_index = TRUE, start_index = 1) {
+next_default_item = function(prefix, existing_names = c(), include_index = TRUE, start_index = 1) {
   if(!is.character(prefix)) stop("prefix must be of type character")
   
   if(!include_index) {

@@ -27,10 +27,10 @@ Public Class dlgReorderColumns
 
     Private Sub initialiseDialog()
         'sets the function
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$order_columns_in_data")
-        ucrReorderColumns.strDataType = "column"
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_columns_in_data")
+        ucrReorderColumns.setDataType("column")
         ucrReorderColumns.setDataframes(ucrDataFrameSelect)
-        'ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 163
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -38,8 +38,12 @@ Public Class dlgReorderColumns
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReorderColumns_Leave(sender As Object, e As EventArgs) Handles ucrReorderColumns.Leave
-        ucrBase.clsRsyntax.AddParameter("col_order", ucrReorderColumns.GetVariableNames)
+    Private Sub ucrReorderColumns_OrderChanged() Handles ucrReorderColumns.OrderChanged
+        If Not ucrReorderColumns.isEmpty Then
+            ucrBase.clsRsyntax.AddParameter("col_order", ucrReorderColumns.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("col_order")
+        End If
     End Sub
 
     Private Sub TestOkEnabled()

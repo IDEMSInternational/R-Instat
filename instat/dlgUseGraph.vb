@@ -18,14 +18,22 @@ Public Class dlgUseGraph
     Private bFirstLoad As Boolean = True
     Private Sub dlgUseGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReOpenDialog()
         End If
     End Sub
 
     Private Sub SetDefaults()
+
+    End Sub
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 358
+    End Sub
+    Private Sub ReOpenDialog()
 
     End Sub
 

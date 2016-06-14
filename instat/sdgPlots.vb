@@ -43,16 +43,13 @@ Public Class sdgPlots
         FacetsCheck(False)
 
     End Sub
-
     Private Sub InitialiseDialog()
         ucr1stFactorReceiver.Selector = ucrAddRemove
-        ucr1stFactorReceiver.SetDataType("factor")
+        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr2ndFactorReceiver.Selector = ucrAddRemove
-        ucr2ndFactorReceiver.SetDataType("factor")
+        ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
         chkIncludeFacets.Checked = True
-
     End Sub
-
     Private Sub chkWrapOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkWrapOptions.CheckedChanged
         If chkWrapOptions.Checked = True Then
             lblNoOfColumns.Visible = True
@@ -68,7 +65,6 @@ Public Class sdgPlots
     End Sub
 
     Public Sub SetFacetParameter()
-
         Dim clsTempOp As New ROperator
         Dim strFactor1 As String
         Dim strFactor2 As String
@@ -93,7 +89,6 @@ Public Class sdgPlots
             End If
             clsRfacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
         End If
-
     End Sub
 
     Public Sub SetFacetFunction()

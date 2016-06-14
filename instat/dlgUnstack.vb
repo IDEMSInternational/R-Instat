@@ -147,5 +147,6 @@ Public Class dlgUnstack
         Next
         TestOKEnabled()
     End Sub
+
 End Class
 

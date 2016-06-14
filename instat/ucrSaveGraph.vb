@@ -1,16 +1,62 @@
 ﻿Public Class ucrSaveGraph
-    Public Event CheckedChanged(bChecked As Boolean)
-    Private Sub ucrSaveGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Event SaveGraphCheckedChanged()
+    Public Event GraphNameChanged()
+    Public bFirstLoad As Boolean
+
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
         ucrInputGraphName.SetDefaultTypeAsGraph()
         ucrInputGraphName.SetItemsTypeAsGraphs()
+        bFirstLoad = True
     End Sub
 
-    Private Sub chkSaveGraph_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveGraph.CheckedChanged
-        If chkSaveGraph.Checked Then
-            ucrInputGraphName.Visible = True
-        Else
-            ucrInputGraphName.Visible = False
+    Private Sub ucrSaveGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            SetDefaults()
+            bFirstLoad = False
         End If
-        RaiseEvent CheckedChanged(chkSaveGraph.Checked)
     End Sub
+
+    Private Sub SetDefaults()
+        chkSaveGraph.Checked = True
+    End Sub
+
+    Public Sub Reset()
+        SetDefaults()
+    End Sub
+
+    Public Sub SetDataFrameSelector(ucrNewDataFrameSelector As ucrDataFrame)
+        ucrInputGraphName.SetDataFrameSelector(ucrNewDataFrameSelector)
+    End Sub
+    Private Sub chkSaveGraph_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveGraph.CheckedChanged
+        ucrInputGraphName.Enabled = chkSaveGraph.Checked
+        RaiseEvent SaveGraphCheckedChanged()
+    End Sub
+
+    Private Sub ucrInputGraphName_NameChanged() Handles ucrInputGraphName.NameChanged
+        If chkSaveGraph.Checked Then
+            RaiseEvent GraphNameChanged()
+        End If
+    End Sub
+
+    Public ReadOnly Property bSaveGraph() As Boolean
+        Get
+            Return chkSaveGraph.Checked
+        End Get
+    End Property
+
+    Public ReadOnly Property strGraphName() As String
+        Get
+            Return ucrInputGraphName.GetText()
+        End Get
+    End Property
+
+    Public WriteOnly Property strPrefix() As String
+        Set(strNewPrefix As String)
+            ucrInputGraphName.SetPrefix(strNewPrefix)
+        End Set
+    End Property
 End Class

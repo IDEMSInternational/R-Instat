@@ -22,9 +22,11 @@ Public Class frmMetaData
     Public strPreviousCellText As String
 
     Private Sub frmMetaData_Load(sender As Object, e As EventArgs) Handles Me.Load
+        grdMetaData.Worksheets(0).Name = "metadata"
         frmMain.clsGrids.SetMetadata(grdMetaData)
         Me.SizeGripStyle = SizeGripStyle.Auto
         loadForm()
+        autoTranslate(Me)
     End Sub
 
     ' TODO this needs tidying up
@@ -34,11 +36,9 @@ Public Class frmMetaData
         grdMetaData.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         grdMetaData.SheetTabNewButtonVisible = False
         grdMetaData.SheetTabNewButtonVisible = False
-        grdMetaData.CurrentWorksheet.Resize(2, 2)
         grdMetaData.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
         grdMetaData.ContextMenuStrip = context.grdData.ContextMenuStrip
         grdMetaData.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip
-        autoTranslate(Me)
     End Sub
 
     'TODO interesting code here - should be discussed and possibly used elsewhere
@@ -79,5 +79,9 @@ Public Class frmMetaData
                 e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
             End Try
         End If
+    End Sub
+
+    Private Sub frmMetaData_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        frmMain.mnuViewDataFrameMetadata.Checked = Me.Visible
     End Sub
 End Class

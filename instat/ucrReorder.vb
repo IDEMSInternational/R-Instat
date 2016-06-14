@@ -16,15 +16,40 @@
 
 Imports RDotNet
 Public Class ucrReorder
+    Public Event OrderChanged()
     Public WithEvents ucrDataFrameList As ucrDataFrame
     Public WithEvents ucrReceiver As ucrReceiverSingle
-    Public strDataType As String = ""
-    Dim selectedListViewItem As New ListViewItem
+    Private strDataType As String
+    Dim selectedListViewItem As ListViewItem
     Dim selectedIndex As Integer
     Dim itemsCount As Integer
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        strDataType = ""
+        selectedListViewItem = New ListViewItem
+    End Sub
+
     Public Sub setDataType(strType As String)
         strDataType = strType
+        lstAvailableData.Clear()
+        Select Case strDataType
+            Case "column"
+                lstAvailableData.Columns.Add("Variables")
+            Case "factor"
+                lstAvailableData.Columns.Add("Levels")
+            Case "data frame"
+                lstAvailableData.Columns.Add("Data Frame")
+            Case "metadata"
+                lstAvailableData.Columns.Add("Metadata")
+            Case "object"
+                lstAvailableData.Columns.Add("Objects")
+        End Select
+        lstAvailableData.Columns(0).Width = -2
         loadList()
     End Sub
 
@@ -44,7 +69,9 @@ Public Class ucrReorder
             selectedListViewItem.Selected = True
             lstAvailableData.Select()
             selectedListViewItem.EnsureVisible()
+            RaiseEvent OrderChanged()
         End If
+
     End Sub
 
     Private Sub cmdDown_click(sender As Object, e As EventArgs) Handles cmdDown.Click
@@ -62,6 +89,7 @@ Public Class ucrReorder
             selectedListViewItem.Selected = True
             lstAvailableData.Select()
             selectedListViewItem.EnsureVisible()
+            RaiseEvent OrderChanged()
         End If
     End Sub
 
@@ -78,6 +106,7 @@ Public Class ucrReorder
             selectedListViewItem.Selected = True
             lstAvailableData.Select()
             selectedListViewItem.EnsureVisible()
+            RaiseEvent OrderChanged()
         End If
     End Sub
 
@@ -94,6 +123,7 @@ Public Class ucrReorder
             selectedListViewItem.Selected = True
             lstAvailableData.Select()
             selectedListViewItem.EnsureVisible()
+            RaiseEvent OrderChanged()
         End If
     End Sub
 
@@ -112,12 +142,10 @@ Public Class ucrReorder
                 If i > 0 Then
                     strTemp = strTemp & ","
                 End If
-                If lstAvailableData.Items(i).Text <> "" Then
-                    If bWithQuotes Then
-                        strTemp = strTemp & Chr(34) & lstAvailableData.Items(i).Text & Chr(34)
-                    Else
-                        strTemp = strTemp & lstAvailableData.Items(i).Text
-                    End If
+                If bWithQuotes Then
+                    strTemp = strTemp & Chr(34) & lstAvailableData.Items(i).Text & Chr(34)
+                Else
+                    strTemp = strTemp & lstAvailableData.Items(i).Text
                 End If
             Next
             strTemp = strTemp & ")"
@@ -128,17 +156,11 @@ Public Class ucrReorder
 
     Public Sub setDataframes(dfDataframes As ucrDataFrame)
         ucrDataFrameList = dfDataframes
-        lstAvailableData.Clear()
-        lstAvailableData.Columns.Add("Available Variables")
-        lstAvailableData.Columns(0).Width = -2
         loadList()
     End Sub
 
     Public Sub setReceiver(dfSingle As ucrReceiverSingle)
         ucrReceiver = dfSingle
-        lstAvailableData.Clear()
-        lstAvailableData.Columns.Add("Available Levels")
-        lstAvailableData.Columns(0).Width = -2
         loadList()
     End Sub
 
@@ -150,11 +172,19 @@ Public Class ucrReorder
                     vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.SelectedItem & Chr(34) & ")").AsCharacter
                 End If
             Case "factor"
-                If ucrReceiver IsNot Nothing AndAlso ucrReceiver.lstIncludedDataTypes.Count = 1 AndAlso ucrReceiver.lstIncludedDataTypes.Contains("factor") AndAlso ucrReceiver.GetVariableNames <> "" Then
+                If ucrReceiver IsNot Nothing AndAlso Not ucrReceiver.IsEmpty() AndAlso ucrReceiver.strCurrDataType = "factor" Then
                     vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & ucrReceiver.GetDataName() & Chr(34) & ", col_name = " & ucrReceiver.GetVariableNames() & ")").AsCharacter
                 End If
             Case "data frame"
                 vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_data_names()").AsCharacter
+            Case "metadata"
+                If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
+                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_metadata_fields(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter
+                End If
+            Case "object"
+                If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
+                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_object_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter
+                End If
             Case Else
                 vecNames = Nothing
         End Select
@@ -167,6 +197,7 @@ Public Class ucrReorder
             For i = 0 To vecNames.Count - 1
                 lstAvailableData.Items.Add(vecNames(i))
             Next
+            RaiseEvent OrderChanged()
         End If
     End Sub
 

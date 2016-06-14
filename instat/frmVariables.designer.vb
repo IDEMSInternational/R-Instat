@@ -37,8 +37,8 @@ Partial Class frmVariables
         Me.grdVariables.Script = Nothing
         Me.grdVariables.SheetTabContextMenuStrip = Nothing
         Me.grdVariables.SheetTabNewButtonVisible = True
+        Me.grdVariables.SheetTabVisible = True
         Me.grdVariables.SheetTabWidth = 300
-        Me.grdVariables.SheetTabNewButtonVisible = True
         Me.grdVariables.Size = New System.Drawing.Size(344, 138)
         Me.grdVariables.TabIndex = 2
         Me.grdVariables.Text = "Variables"
@@ -51,7 +51,7 @@ Partial Class frmVariables
         Me.Controls.Add(Me.grdVariables)
         Me.Name = "frmVariables"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Variable (column) Metadata"
+        Me.Text = "Column Metadata"
         Me.ResumeLayout(False)
 
     End Sub
