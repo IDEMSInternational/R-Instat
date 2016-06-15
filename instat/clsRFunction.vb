@@ -24,7 +24,7 @@ Public Class RFunction
     Public strAssignToGraph As String
     Public bToBeAssigned As Boolean = False
     Public bIsAssigned As Boolean = False
-    Private bAssignToIsPrefix As Boolean = False
+    Public bAssignToIsPrefix As Boolean = False
 
     Public Sub SetRCommand(strTemp As String)
         strRCommand = strTemp
@@ -217,5 +217,27 @@ Public Class RFunction
         clsParameters.Clear()
         bIsAssigned = False
     End Sub
+
+    Public Function Clone() As RFunction
+
+        Dim clsRFunction As New RFunction
+        Dim clsRParam As New RParameter
+        clsRFunction.strRCommand = strRCommand
+        clsRFunction.strAssignTo = strAssignTo
+        clsRFunction.strAssignToDataFrame = strAssignToDataFrame
+        clsRFunction.strAssignToColumn = strAssignToColumn
+        clsRFunction.strAssignToModel = strAssignToModel
+        clsRFunction.strAssignToGraph = strAssignToGraph
+        clsRFunction.bToBeAssigned = bToBeAssigned
+        clsRFunction.bIsAssigned = bIsAssigned
+        clsRFunction.bAssignToIsPrefix = bAssignToIsPrefix
+
+        For Each clsRParam In clsParameters
+            clsRFunction.AddParameter(clsRParam.Clone)
+        Next
+
+        Return clsRFunction
+
+    End Function
 
 End Class
