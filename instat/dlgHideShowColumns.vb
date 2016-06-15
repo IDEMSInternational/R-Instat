@@ -35,12 +35,14 @@ Public Class dlgHideShowColumns
         ucrBase.iHelpTopicID = 167
         ucrReceiverHiddenColumns.Selector = ucrSelectorForHiddenColumns
         ucrReceiverHiddenColumns.SetMeAsReceiver()
+        ucrReceiverHiddenColumns.bExcludeFromSelector = True
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
 
     End Sub
 
     Private Sub SetDefaults()
         ucrSelectorForHiddenColumns.Reset()
+        ucrSelectorForHiddenColumns.AddItemsWithMetadataProperty("Is_Hidden", {"TRUE"})
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -48,6 +50,7 @@ Public Class dlgHideShowColumns
     End Sub
 
     Private Sub ucrSelectorForHiddenColumns_DataFrameChanged() Handles ucrSelectorForHiddenColumns.DataFrameChanged
+
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 

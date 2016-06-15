@@ -37,10 +37,10 @@ Public Class ucrInput
 
     Public Overridable Sub Reset()
         bUserTyped = False
-        SetDefaultName()
     End Sub
 
     Public Sub OnNameChanged()
+        Me.Text = Me.GetText()
         RaiseEvent NameChanged()
     End Sub
 
@@ -339,9 +339,13 @@ Public Class ucrInput
         RaiseEvent NameChanged()
     End Sub
 
+    Private Sub ucrInput_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
+        SetName(Me.Text)
+    End Sub
+
     Public Overridable Property IsReadOnly() As Boolean
         Get
-            Return False
+            Return bIsReadOnly
         End Get
         Set(bReadOnly As Boolean)
             bIsReadOnly = bReadOnly
