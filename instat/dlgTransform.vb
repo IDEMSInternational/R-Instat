@@ -15,9 +15,22 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgTransform
+    Public bFirstLoad As Boolean = True
     Private Sub dlgTransform_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
         autoTranslate(Me)
+    End Sub
+    Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 42
+    End Sub
+    Private Sub SetDefaults()
+        'CommonTransformation()
         rdoCommonTransformations.Checked = True
         grpOtherTransformations.Visible = False
         rdoNonNegative.Checked = True
@@ -31,13 +44,33 @@ Public Class dlgTransform
         grpPercentageTransformations.Visible = False
         grpCircularTransformations.Visible = False
     End Sub
+    Private Sub CommonTransformation()
+        rdoCommonTransformations.Checked = True
+        grpCalculatedTransformations.Visible = True
+        grpOtherTransformations.Visible = False
+        rdoNonNegative.Checked = True
+        rdoSquareRoot.Checked = True
+        lblPowerValue.Visible = False
+        txtPowerValue.Visible = False
+        lblZeroAdjustment.Visible = False
+        lblAdjustment.Visible = False
+        lbl01Adjustment.Visible = False
+        txtAdjustment.Visible = False
+        grpPercentageTransformations.Visible = False
+        grpCircularTransformations.Visible = False
+    End Sub
+    Private Sub OtherTransformation()
 
+    End Sub
+    Private Sub ReopenDialog()
+
+    End Sub
     Private Sub rdoCommonTransformations_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCommonTransformations.CheckedChanged
-        If rdoCommonTransformations.Checked = True Then
-            grpCalculatedTransformations.Visible = True
-        Else
-            grpCalculatedTransformations.Visible = False
-        End If
+        'If rdoCommonTransformations.Checked = True Then
+        '    grpCalculatedTransformations.Visible = True
+        'Else
+        '    grpCalculatedTransformations.Visible = False
+        'End If
     End Sub
 
     Private Sub rdoOtherTransformations_CheckedChanged(sender As Object, e As EventArgs) Handles rdoOtherTransformations.CheckedChanged
