@@ -48,11 +48,14 @@ Public Class dlgDotPlot
         ucrBase.clsRsyntax.iCallType = 0
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-
         ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorDotPlot.SetSelector(ucrDotPlotSelector)
         ucrVariablesAsFactorDotPlot.SetIncludedDataType({"numeric"})
         ucrBase.iHelpTopicID = 134
+
+        ucrSaveDotPlot.SetDataFrameSelector(ucrDotPlotSelector.ucrAvailableDataFrames)
+        ucrSaveDotPlot.ucrInputGraphName.SetPrefix("Graph")
+
     End Sub
 
     Private Sub TestOkEnabled()
