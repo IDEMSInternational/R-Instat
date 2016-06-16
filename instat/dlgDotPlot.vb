@@ -55,6 +55,8 @@ Public Class dlgDotPlot
 
         ucrSaveDotPlot.SetDataFrameSelector(ucrDotPlotSelector.ucrAvailableDataFrames)
         ucrSaveDotPlot.strPrefix = "Graph"
+        ucrSaveDotPlot.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveDotPlot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
 
     Private Sub TestOkEnabled()
