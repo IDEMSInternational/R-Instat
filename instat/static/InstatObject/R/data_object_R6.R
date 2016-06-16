@@ -909,9 +909,31 @@ data_object$set("public", "set_row_names", function(row_names) {
 }
 )
 
+data_object$set("public", "set_col_names", function(row_names) {
+  if(missing(col_names)) col_names = 1:ncol(private$data)
+  if(length(col_names) != ncol(private$data)) stop("col_names must be a vector of same length as the data")
+  if(anyDuplicated(col_names) != 0) stop("col_names must be unique")
+  rownames(private$data) <- col_names
+  self$data_changed <- TRUE
+}
+
+)
+
 data_object$set("public", "get_row_names", function() {
+  return(rownames(private$data))
+}
+
+)
+
+data_object$set("public", "get_col_names", function() {
   return(names(private$data))
 }
+
+)
+data_object$set("public", "get_dim_dataframe", function() {
+  return(dim(private$data))
+}
+
 )
 
 data_object$set("public", "set_protected_columns", function(col_names) {
