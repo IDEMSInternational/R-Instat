@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgColumnStats
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,179 +20,128 @@ Partial Class dlgColumnStats
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.tabColumnStatistics = New System.Windows.Forms.TabControl()
-        Me.tabGeneral = New System.Windows.Forms.TabPage()
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
-        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.grpStatistcsRequired = New System.Windows.Forms.GroupBox()
-        Me.chkMedian = New System.Windows.Forms.CheckBox()
-        Me.chkMissing = New System.Windows.Forms.CheckBox()
+        Me.lblByFactors = New System.Windows.Forms.Label()
+        Me.grpSummaries = New System.Windows.Forms.GroupBox()
         Me.chkSum = New System.Windows.Forms.CheckBox()
         Me.chkStDev = New System.Windows.Forms.CheckBox()
+        Me.chkMedian = New System.Windows.Forms.CheckBox()
+        Me.chkMissingValues = New System.Windows.Forms.CheckBox()
         Me.chkMaximum = New System.Windows.Forms.CheckBox()
         Me.chkMinimum = New System.Windows.Forms.CheckBox()
         Me.chkMean = New System.Windows.Forms.CheckBox()
         Me.chkCount = New System.Windows.Forms.CheckBox()
-        Me.grpForByFactors = New System.Windows.Forms.GroupBox()
-        Me.chkByFactor = New System.Windows.Forms.CheckBox()
-        Me.chkForFactor = New System.Windows.Forms.CheckBox()
-        Me.tabSave = New System.Windows.Forms.TabPage()
-        Me.chkSaveFittedValuesAndDeviations = New System.Windows.Forms.CheckBox()
-        Me.chkSaveStatistics = New System.Windows.Forms.CheckBox()
-        Me.tabOptions = New System.Windows.Forms.TabPage()
-        Me.chkRestrictDataValues = New System.Windows.Forms.CheckBox()
-        Me.grpMissingValues = New System.Windows.Forms.GroupBox()
-        Me.chkFeb29th = New System.Windows.Forms.CheckBox()
-        Me.chkTrace = New System.Windows.Forms.CheckBox()
-        Me.chkMissingData = New System.Windows.Forms.CheckBox()
-        Me.chkSetSummaryToMissingIfOver = New System.Windows.Forms.CheckBox()
-        Me.chkIgnoreMissingValues = New System.Windows.Forms.CheckBox()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.chkdropUnusedLevels = New System.Windows.Forms.CheckBox()
+        Me.chkReturnOutput = New System.Windows.Forms.CheckBox()
+        Me.chkStoreResults = New System.Windows.Forms.CheckBox()
+        Me.ucrInputStoreResults = New instat.ucrInputComboBox()
+        Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.tabColumnStatistics.SuspendLayout()
-        Me.tabGeneral.SuspendLayout()
-        Me.grpStatistcsRequired.SuspendLayout()
-        Me.grpForByFactors.SuspendLayout()
-        Me.tabSave.SuspendLayout()
-        Me.tabOptions.SuspendLayout()
-        Me.grpMissingValues.SuspendLayout()
+        Me.chkRange = New System.Windows.Forms.CheckBox()
+        Me.chkMode = New System.Windows.Forms.CheckBox()
+        Me.grpSummaries.SuspendLayout()
+        Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'tabColumnStatistics
-        '
-        Me.tabColumnStatistics.Controls.Add(Me.tabGeneral)
-        Me.tabColumnStatistics.Controls.Add(Me.tabSave)
-        Me.tabColumnStatistics.Controls.Add(Me.tabOptions)
-        Me.tabColumnStatistics.Location = New System.Drawing.Point(1, 3)
-        Me.tabColumnStatistics.Name = "tabColumnStatistics"
-        Me.tabColumnStatistics.SelectedIndex = 0
-        Me.tabColumnStatistics.Size = New System.Drawing.Size(554, 269)
-        Me.tabColumnStatistics.TabIndex = 8
-        Me.tabColumnStatistics.Tag = "Column_Statistics"
-        '
-        'tabGeneral
-        '
-        Me.tabGeneral.Controls.Add(Me.lblSelectedVariables)
-        Me.tabGeneral.Controls.Add(Me.ucrReceiverMultiple)
-        Me.tabGeneral.Controls.Add(Me.ucrAddRemove)
-        Me.tabGeneral.Controls.Add(Me.grpStatistcsRequired)
-        Me.tabGeneral.Controls.Add(Me.grpForByFactors)
-        Me.tabGeneral.Location = New System.Drawing.Point(4, 22)
-        Me.tabGeneral.Name = "tabGeneral"
-        Me.tabGeneral.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabGeneral.Size = New System.Drawing.Size(546, 243)
-        Me.tabGeneral.TabIndex = 0
-        Me.tabGeneral.Tag = "General"
-        Me.tabGeneral.Text = "General"
-        Me.tabGeneral.UseVisualStyleBackColor = True
         '
         'lblSelectedVariables
         '
         Me.lblSelectedVariables.AutoSize = True
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(236, 6)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(243, 13)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Size = New System.Drawing.Size(95, 13)
-        Me.lblSelectedVariables.TabIndex = 12
-        Me.lblSelectedVariables.Tag = "Selected_Variables"
-        Me.lblSelectedVariables.Text = "Selected Variables"
+        Me.lblSelectedVariables.Size = New System.Drawing.Size(99, 13)
+        Me.lblSelectedVariables.TabIndex = 4
+        Me.lblSelectedVariables.Text = "Selected Varable(s)"
         '
-        'ucrReceiverMultiple
+        'lblByFactors
         '
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(225, 22)
-        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
-        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(134, 135)
-        Me.ucrReceiverMultiple.TabIndex = 11
+        Me.lblByFactors.AutoSize = True
+        Me.lblByFactors.Location = New System.Drawing.Point(243, 141)
+        Me.lblByFactors.Name = "lblByFactors"
+        Me.lblByFactors.Size = New System.Drawing.Size(63, 13)
+        Me.lblByFactors.TabIndex = 5
+        Me.lblByFactors.Text = "By Factor(s)"
         '
-        'ucrAddRemove
+        'grpSummaries
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(0, 19)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(208, 140)
-        Me.ucrAddRemove.TabIndex = 10
-        '
-        'grpStatistcsRequired
-        '
-        Me.grpStatistcsRequired.Controls.Add(Me.chkMedian)
-        Me.grpStatistcsRequired.Controls.Add(Me.chkMissing)
-        Me.grpStatistcsRequired.Controls.Add(Me.chkSum)
-        Me.grpStatistcsRequired.Controls.Add(Me.chkStDev)
-        Me.grpStatistcsRequired.Controls.Add(Me.chkMaximum)
-        Me.grpStatistcsRequired.Controls.Add(Me.chkMinimum)
-        Me.grpStatistcsRequired.Controls.Add(Me.chkMean)
-        Me.grpStatistcsRequired.Controls.Add(Me.chkCount)
-        Me.grpStatistcsRequired.Location = New System.Drawing.Point(381, 19)
-        Me.grpStatistcsRequired.Name = "grpStatistcsRequired"
-        Me.grpStatistcsRequired.Size = New System.Drawing.Size(159, 117)
-        Me.grpStatistcsRequired.TabIndex = 9
-        Me.grpStatistcsRequired.TabStop = False
-        Me.grpStatistcsRequired.Tag = "Statistcs_Required"
-        Me.grpStatistcsRequired.Text = "StatistcsRequired"
-        '
-        'chkMedian
-        '
-        Me.chkMedian.AutoSize = True
-        Me.chkMedian.Location = New System.Drawing.Point(87, 43)
-        Me.chkMedian.Name = "chkMedian"
-        Me.chkMedian.Size = New System.Drawing.Size(61, 17)
-        Me.chkMedian.TabIndex = 0
-        Me.chkMedian.Tag = "Median"
-        Me.chkMedian.Text = "Median"
-        Me.chkMedian.UseVisualStyleBackColor = True
-        '
-        'chkMissing
-        '
-        Me.chkMissing.AutoSize = True
-        Me.chkMissing.Location = New System.Drawing.Point(87, 20)
-        Me.chkMissing.Name = "chkMissing"
-        Me.chkMissing.Size = New System.Drawing.Size(64, 17)
-        Me.chkMissing.TabIndex = 0
-        Me.chkMissing.Tag = "Missing"
-        Me.chkMissing.Text = "Missing "
-        Me.chkMissing.UseVisualStyleBackColor = True
+        Me.grpSummaries.Controls.Add(Me.chkMode)
+        Me.grpSummaries.Controls.Add(Me.chkRange)
+        Me.grpSummaries.Controls.Add(Me.chkSum)
+        Me.grpSummaries.Controls.Add(Me.chkStDev)
+        Me.grpSummaries.Controls.Add(Me.chkMedian)
+        Me.grpSummaries.Controls.Add(Me.chkMissingValues)
+        Me.grpSummaries.Controls.Add(Me.chkMaximum)
+        Me.grpSummaries.Controls.Add(Me.chkMinimum)
+        Me.grpSummaries.Controls.Add(Me.chkMean)
+        Me.grpSummaries.Controls.Add(Me.chkCount)
+        Me.grpSummaries.Location = New System.Drawing.Point(13, 197)
+        Me.grpSummaries.Name = "grpSummaries"
+        Me.grpSummaries.Size = New System.Drawing.Size(200, 148)
+        Me.grpSummaries.TabIndex = 8
+        Me.grpSummaries.TabStop = False
+        Me.grpSummaries.Text = "Summaries"
         '
         'chkSum
         '
         Me.chkSum.AutoSize = True
-        Me.chkSum.Location = New System.Drawing.Point(87, 89)
+        Me.chkSum.Location = New System.Drawing.Point(96, 91)
         Me.chkSum.Name = "chkSum"
         Me.chkSum.Size = New System.Drawing.Size(47, 17)
-        Me.chkSum.TabIndex = 0
-        Me.chkSum.Tag = "Sum"
+        Me.chkSum.TabIndex = 7
         Me.chkSum.Text = "Sum"
         Me.chkSum.UseVisualStyleBackColor = True
         '
         'chkStDev
         '
         Me.chkStDev.AutoSize = True
-        Me.chkStDev.Location = New System.Drawing.Point(87, 66)
+        Me.chkStDev.Location = New System.Drawing.Point(96, 67)
         Me.chkStDev.Name = "chkStDev"
-        Me.chkStDev.Size = New System.Drawing.Size(62, 17)
-        Me.chkStDev.TabIndex = 0
-        Me.chkStDev.Tag = "St_Dev"
-        Me.chkStDev.Text = "St. Dev"
+        Me.chkStDev.Size = New System.Drawing.Size(59, 17)
+        Me.chkStDev.TabIndex = 6
+        Me.chkStDev.Text = "St.Dev"
         Me.chkStDev.UseVisualStyleBackColor = True
+        '
+        'chkMedian
+        '
+        Me.chkMedian.AutoSize = True
+        Me.chkMedian.Location = New System.Drawing.Point(96, 43)
+        Me.chkMedian.Name = "chkMedian"
+        Me.chkMedian.Size = New System.Drawing.Size(61, 17)
+        Me.chkMedian.TabIndex = 5
+        Me.chkMedian.Text = "Median"
+        Me.chkMedian.UseVisualStyleBackColor = True
+        '
+        'chkMissingValues
+        '
+        Me.chkMissingValues.AutoSize = True
+        Me.chkMissingValues.Location = New System.Drawing.Point(96, 20)
+        Me.chkMissingValues.Name = "chkMissingValues"
+        Me.chkMissingValues.Size = New System.Drawing.Size(97, 17)
+        Me.chkMissingValues.TabIndex = 4
+        Me.chkMissingValues.Text = "MIssing Values"
+        Me.chkMissingValues.UseVisualStyleBackColor = True
         '
         'chkMaximum
         '
         Me.chkMaximum.AutoSize = True
-        Me.chkMaximum.Location = New System.Drawing.Point(6, 89)
+        Me.chkMaximum.Location = New System.Drawing.Point(7, 91)
         Me.chkMaximum.Name = "chkMaximum"
-        Me.chkMaximum.Size = New System.Drawing.Size(73, 17)
-        Me.chkMaximum.TabIndex = 0
-        Me.chkMaximum.Tag = "Maximum"
-        Me.chkMaximum.Text = "Maximum "
+        Me.chkMaximum.Size = New System.Drawing.Size(70, 17)
+        Me.chkMaximum.TabIndex = 3
+        Me.chkMaximum.Text = "Maximum"
         Me.chkMaximum.UseVisualStyleBackColor = True
         '
         'chkMinimum
         '
         Me.chkMinimum.AutoSize = True
-        Me.chkMinimum.Location = New System.Drawing.Point(7, 66)
+        Me.chkMinimum.Location = New System.Drawing.Point(7, 67)
         Me.chkMinimum.Name = "chkMinimum"
         Me.chkMinimum.Size = New System.Drawing.Size(67, 17)
-        Me.chkMinimum.TabIndex = 0
-        Me.chkMinimum.Tag = "Minimum"
+        Me.chkMinimum.TabIndex = 2
         Me.chkMinimum.Text = "Minimum"
         Me.chkMinimum.UseVisualStyleBackColor = True
         '
@@ -202,8 +151,7 @@ Partial Class dlgColumnStats
         Me.chkMean.Location = New System.Drawing.Point(7, 43)
         Me.chkMean.Name = "chkMean"
         Me.chkMean.Size = New System.Drawing.Size(53, 17)
-        Me.chkMean.TabIndex = 0
-        Me.chkMean.Tag = "Mean"
+        Me.chkMean.TabIndex = 1
         Me.chkMean.Text = "Mean"
         Me.chkMean.UseVisualStyleBackColor = True
         '
@@ -212,230 +160,162 @@ Partial Class dlgColumnStats
         Me.chkCount.AutoSize = True
         Me.chkCount.Location = New System.Drawing.Point(7, 20)
         Me.chkCount.Name = "chkCount"
-        Me.chkCount.Size = New System.Drawing.Size(57, 17)
+        Me.chkCount.Size = New System.Drawing.Size(54, 17)
         Me.chkCount.TabIndex = 0
-        Me.chkCount.Tag = "Count"
-        Me.chkCount.Text = "Count "
+        Me.chkCount.Text = "Count"
         Me.chkCount.UseVisualStyleBackColor = True
         '
-        'grpForByFactors
+        'grpOptions
         '
-        Me.grpForByFactors.Controls.Add(Me.chkByFactor)
-        Me.grpForByFactors.Controls.Add(Me.chkForFactor)
-        Me.grpForByFactors.Location = New System.Drawing.Point(6, 161)
-        Me.grpForByFactors.Name = "grpForByFactors"
-        Me.grpForByFactors.Size = New System.Drawing.Size(262, 66)
-        Me.grpForByFactors.TabIndex = 8
-        Me.grpForByFactors.TabStop = False
+        Me.grpOptions.Controls.Add(Me.chkdropUnusedLevels)
+        Me.grpOptions.Controls.Add(Me.chkReturnOutput)
+        Me.grpOptions.Location = New System.Drawing.Point(246, 264)
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.Size = New System.Drawing.Size(164, 81)
+        Me.grpOptions.TabIndex = 9
+        Me.grpOptions.TabStop = False
+        Me.grpOptions.Text = "Options"
         '
-        'chkByFactor
+        'chkdropUnusedLevels
         '
-        Me.chkByFactor.AutoSize = True
-        Me.chkByFactor.Location = New System.Drawing.Point(7, 43)
-        Me.chkByFactor.Name = "chkByFactor"
-        Me.chkByFactor.Size = New System.Drawing.Size(74, 17)
-        Me.chkByFactor.TabIndex = 1
-        Me.chkByFactor.Tag = "By_Factor"
-        Me.chkByFactor.Text = "By Factor "
-        Me.chkByFactor.UseVisualStyleBackColor = True
+        Me.chkdropUnusedLevels.AutoSize = True
+        Me.chkdropUnusedLevels.Location = New System.Drawing.Point(7, 40)
+        Me.chkdropUnusedLevels.Name = "chkdropUnusedLevels"
+        Me.chkdropUnusedLevels.Size = New System.Drawing.Size(89, 30)
+        Me.chkdropUnusedLevels.TabIndex = 1
+        Me.chkdropUnusedLevels.Text = "Drop Unused" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Levels"
+        Me.chkdropUnusedLevels.UseVisualStyleBackColor = True
         '
-        'chkForFactor
+        'chkReturnOutput
         '
-        Me.chkForFactor.AutoSize = True
-        Me.chkForFactor.Location = New System.Drawing.Point(7, 12)
-        Me.chkForFactor.Name = "chkForFactor"
-        Me.chkForFactor.Size = New System.Drawing.Size(74, 17)
-        Me.chkForFactor.TabIndex = 0
-        Me.chkForFactor.Tag = "For_Factor"
-        Me.chkForFactor.Text = "For Factor"
-        Me.chkForFactor.UseVisualStyleBackColor = True
+        Me.chkReturnOutput.AutoSize = True
+        Me.chkReturnOutput.Location = New System.Drawing.Point(7, 20)
+        Me.chkReturnOutput.Name = "chkReturnOutput"
+        Me.chkReturnOutput.Size = New System.Drawing.Size(93, 17)
+        Me.chkReturnOutput.TabIndex = 0
+        Me.chkReturnOutput.Text = "Return Output"
+        Me.chkReturnOutput.UseVisualStyleBackColor = True
         '
-        'tabSave
+        'chkStoreResults
         '
-        Me.tabSave.Controls.Add(Me.chkSaveFittedValuesAndDeviations)
-        Me.tabSave.Controls.Add(Me.chkSaveStatistics)
-        Me.tabSave.Location = New System.Drawing.Point(4, 22)
-        Me.tabSave.Name = "tabSave"
-        Me.tabSave.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabSave.Size = New System.Drawing.Size(546, 243)
-        Me.tabSave.TabIndex = 1
-        Me.tabSave.Tag = "Save"
-        Me.tabSave.Text = "Save"
-        Me.tabSave.UseVisualStyleBackColor = True
+        Me.chkStoreResults.AutoSize = True
+        Me.chkStoreResults.Location = New System.Drawing.Point(11, 356)
+        Me.chkStoreResults.Name = "chkStoreResults"
+        Me.chkStoreResults.Size = New System.Drawing.Size(89, 17)
+        Me.chkStoreResults.TabIndex = 10
+        Me.chkStoreResults.Text = "Store Results"
+        Me.chkStoreResults.UseVisualStyleBackColor = True
         '
-        'chkSaveFittedValuesAndDeviations
+        'ucrInputStoreResults
         '
-        Me.chkSaveFittedValuesAndDeviations.AutoSize = True
-        Me.chkSaveFittedValuesAndDeviations.Location = New System.Drawing.Point(9, 57)
-        Me.chkSaveFittedValuesAndDeviations.Name = "chkSaveFittedValuesAndDeviations"
-        Me.chkSaveFittedValuesAndDeviations.Size = New System.Drawing.Size(183, 17)
-        Me.chkSaveFittedValuesAndDeviations.TabIndex = 1
-        Me.chkSaveFittedValuesAndDeviations.Tag = "Save_fitted_values_and_deviations"
-        Me.chkSaveFittedValuesAndDeviations.Text = "Save fitted values and deviations"
-        Me.chkSaveFittedValuesAndDeviations.UseVisualStyleBackColor = True
+        Me.ucrInputStoreResults.IsReadOnly = False
+        Me.ucrInputStoreResults.Location = New System.Drawing.Point(109, 352)
+        Me.ucrInputStoreResults.Name = "ucrInputStoreResults"
+        Me.ucrInputStoreResults.Size = New System.Drawing.Size(104, 21)
+        Me.ucrInputStoreResults.TabIndex = 11
         '
-        'chkSaveStatistics
+        'ucrReceiverByFactor
         '
-        Me.chkSaveStatistics.AutoSize = True
-        Me.chkSaveStatistics.Location = New System.Drawing.Point(9, 18)
-        Me.chkSaveStatistics.Name = "chkSaveStatistics"
-        Me.chkSaveStatistics.Size = New System.Drawing.Size(99, 17)
-        Me.chkSaveStatistics.TabIndex = 2
-        Me.chkSaveStatistics.Tag = "Save_Statistics"
-        Me.chkSaveStatistics.Text = "Save Statistics "
-        Me.chkSaveStatistics.UseVisualStyleBackColor = True
+        Me.ucrReceiverByFactor.Location = New System.Drawing.Point(246, 158)
+        Me.ucrReceiverByFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
+        Me.ucrReceiverByFactor.Selector = Nothing
+        Me.ucrReceiverByFactor.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverByFactor.TabIndex = 7
         '
-        'tabOptions
+        'ucrReceiverSelectedVariables
         '
-        Me.tabOptions.Controls.Add(Me.chkRestrictDataValues)
-        Me.tabOptions.Controls.Add(Me.grpMissingValues)
-        Me.tabOptions.Location = New System.Drawing.Point(4, 22)
-        Me.tabOptions.Name = "tabOptions"
-        Me.tabOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabOptions.Size = New System.Drawing.Size(546, 243)
-        Me.tabOptions.TabIndex = 2
-        Me.tabOptions.Tag = "Options"
-        Me.tabOptions.Text = "Options"
-        Me.tabOptions.UseVisualStyleBackColor = True
+        Me.ucrReceiverSelectedVariables.Location = New System.Drawing.Point(246, 32)
+        Me.ucrReceiverSelectedVariables.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSelectedVariables.Name = "ucrReceiverSelectedVariables"
+        Me.ucrReceiverSelectedVariables.Selector = Nothing
+        Me.ucrReceiverSelectedVariables.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverSelectedVariables.TabIndex = 6
         '
-        'chkRestrictDataValues
+        'ucrSelectorForColumnStatistics
         '
-        Me.chkRestrictDataValues.AutoSize = True
-        Me.chkRestrictDataValues.Location = New System.Drawing.Point(7, 6)
-        Me.chkRestrictDataValues.Name = "chkRestrictDataValues"
-        Me.chkRestrictDataValues.Size = New System.Drawing.Size(123, 17)
-        Me.chkRestrictDataValues.TabIndex = 2
-        Me.chkRestrictDataValues.Tag = "Restrict_data_values"
-        Me.chkRestrictDataValues.Text = "Restrict data values "
-        Me.chkRestrictDataValues.UseVisualStyleBackColor = True
-        '
-        'grpMissingValues
-        '
-        Me.grpMissingValues.Controls.Add(Me.chkFeb29th)
-        Me.grpMissingValues.Controls.Add(Me.chkTrace)
-        Me.grpMissingValues.Controls.Add(Me.chkMissingData)
-        Me.grpMissingValues.Controls.Add(Me.chkSetSummaryToMissingIfOver)
-        Me.grpMissingValues.Controls.Add(Me.chkIgnoreMissingValues)
-        Me.grpMissingValues.Location = New System.Drawing.Point(7, 46)
-        Me.grpMissingValues.Name = "grpMissingValues"
-        Me.grpMissingValues.Size = New System.Drawing.Size(303, 100)
-        Me.grpMissingValues.TabIndex = 3
-        Me.grpMissingValues.TabStop = False
-        '
-        'chkFeb29th
-        '
-        Me.chkFeb29th.AutoSize = True
-        Me.chkFeb29th.Location = New System.Drawing.Point(232, 14)
-        Me.chkFeb29th.Name = "chkFeb29th"
-        Me.chkFeb29th.Size = New System.Drawing.Size(44, 17)
-        Me.chkFeb29th.TabIndex = 0
-        Me.chkFeb29th.Text = "* * *"
-        Me.chkFeb29th.UseVisualStyleBackColor = True
-        '
-        'chkTrace
-        '
-        Me.chkTrace.AutoSize = True
-        Me.chkTrace.Location = New System.Drawing.Point(191, 14)
-        Me.chkTrace.Name = "chkTrace"
-        Me.chkTrace.Size = New System.Drawing.Size(37, 17)
-        Me.chkTrace.TabIndex = 0
-        Me.chkTrace.Text = "* *"
-        Me.chkTrace.UseVisualStyleBackColor = True
-        '
-        'chkMissingData
-        '
-        Me.chkMissingData.AutoSize = True
-        Me.chkMissingData.Location = New System.Drawing.Point(142, 14)
-        Me.chkMissingData.Name = "chkMissingData"
-        Me.chkMissingData.Size = New System.Drawing.Size(30, 17)
-        Me.chkMissingData.TabIndex = 0
-        Me.chkMissingData.Text = "*"
-        Me.chkMissingData.UseVisualStyleBackColor = True
-        '
-        'chkSetSummaryToMissingIfOver
-        '
-        Me.chkSetSummaryToMissingIfOver.AutoSize = True
-        Me.chkSetSummaryToMissingIfOver.Location = New System.Drawing.Point(6, 57)
-        Me.chkSetSummaryToMissingIfOver.Name = "chkSetSummaryToMissingIfOver"
-        Me.chkSetSummaryToMissingIfOver.Size = New System.Drawing.Size(211, 17)
-        Me.chkSetSummaryToMissingIfOver.TabIndex = 0
-        Me.chkSetSummaryToMissingIfOver.Tag = "Set_summary_if_they_are_over"
-        Me.chkSetSummaryToMissingIfOver.Text = "Set summary to missing  if they are over"
-        Me.chkSetSummaryToMissingIfOver.UseVisualStyleBackColor = True
-        '
-        'chkIgnoreMissingValues
-        '
-        Me.chkIgnoreMissingValues.AutoSize = True
-        Me.chkIgnoreMissingValues.Location = New System.Drawing.Point(5, 14)
-        Me.chkIgnoreMissingValues.Name = "chkIgnoreMissingValues"
-        Me.chkIgnoreMissingValues.Size = New System.Drawing.Size(131, 17)
-        Me.chkIgnoreMissingValues.TabIndex = 0
-        Me.chkIgnoreMissingValues.Tag = "Ignore_missing_values"
-        Me.chkIgnoreMissingValues.Text = "Ignore missing Values "
-        Me.chkIgnoreMissingValues.UseVisualStyleBackColor = True
+        Me.ucrSelectorForColumnStatistics.Location = New System.Drawing.Point(13, 13)
+        Me.ucrSelectorForColumnStatistics.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForColumnStatistics.Name = "ucrSelectorForColumnStatistics"
+        Me.ucrSelectorForColumnStatistics.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForColumnStatistics.TabIndex = 3
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(72, 279)
+        Me.ucrBase.Location = New System.Drawing.Point(11, 379)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 2
+        '
+        'chkRange
+        '
+        Me.chkRange.AutoSize = True
+        Me.chkRange.Location = New System.Drawing.Point(7, 115)
+        Me.chkRange.Name = "chkRange"
+        Me.chkRange.Size = New System.Drawing.Size(58, 17)
+        Me.chkRange.TabIndex = 8
+        Me.chkRange.Text = "Range"
+        Me.chkRange.UseVisualStyleBackColor = True
+        '
+        'chkMode
+        '
+        Me.chkMode.AutoSize = True
+        Me.chkMode.Location = New System.Drawing.Point(96, 115)
+        Me.chkMode.Name = "chkMode"
+        Me.chkMode.Size = New System.Drawing.Size(53, 17)
+        Me.chkMode.TabIndex = 9
+        Me.chkMode.Text = "Mode"
+        Me.chkMode.UseVisualStyleBackColor = True
         '
         'dlgColumnStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(557, 332)
-        Me.Controls.Add(Me.tabColumnStatistics)
+        Me.ClientSize = New System.Drawing.Size(433, 444)
+        Me.Controls.Add(Me.ucrInputStoreResults)
+        Me.Controls.Add(Me.chkStoreResults)
+        Me.Controls.Add(Me.grpOptions)
+        Me.Controls.Add(Me.grpSummaries)
+        Me.Controls.Add(Me.ucrReceiverByFactor)
+        Me.Controls.Add(Me.ucrReceiverSelectedVariables)
+        Me.Controls.Add(Me.lblByFactors)
+        Me.Controls.Add(Me.lblSelectedVariables)
+        Me.Controls.Add(Me.ucrSelectorForColumnStatistics)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgColumnStats"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Column_Statistics"
         Me.Text = "Column Statistics"
-        Me.tabColumnStatistics.ResumeLayout(False)
-        Me.tabGeneral.ResumeLayout(False)
-        Me.tabGeneral.PerformLayout()
-        Me.grpStatistcsRequired.ResumeLayout(False)
-        Me.grpStatistcsRequired.PerformLayout()
-        Me.grpForByFactors.ResumeLayout(False)
-        Me.grpForByFactors.PerformLayout()
-        Me.tabSave.ResumeLayout(False)
-        Me.tabSave.PerformLayout()
-        Me.tabOptions.ResumeLayout(False)
-        Me.tabOptions.PerformLayout()
-        Me.grpMissingValues.ResumeLayout(False)
-        Me.grpMissingValues.PerformLayout()
+        Me.grpSummaries.ResumeLayout(False)
+        Me.grpSummaries.PerformLayout()
+        Me.grpOptions.ResumeLayout(False)
+        Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents tabColumnStatistics As TabControl
-    Friend WithEvents tabGeneral As TabPage
-    Friend WithEvents grpStatistcsRequired As GroupBox
+    Friend WithEvents ucrSelectorForColumnStatistics As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents lblSelectedVariables As Label
+    Friend WithEvents lblByFactors As Label
+    Friend WithEvents ucrReceiverSelectedVariables As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverByFactor As ucrReceiverMultiple
+    Friend WithEvents grpSummaries As GroupBox
     Friend WithEvents chkMedian As CheckBox
-    Friend WithEvents chkMissing As CheckBox
-    Friend WithEvents chkSum As CheckBox
-    Friend WithEvents chkStDev As CheckBox
+    Friend WithEvents chkMissingValues As CheckBox
     Friend WithEvents chkMaximum As CheckBox
     Friend WithEvents chkMinimum As CheckBox
     Friend WithEvents chkMean As CheckBox
     Friend WithEvents chkCount As CheckBox
-    Friend WithEvents grpForByFactors As GroupBox
-    Friend WithEvents chkByFactor As CheckBox
-    Friend WithEvents chkForFactor As CheckBox
-    Friend WithEvents tabSave As TabPage
-    Friend WithEvents lblSelectedVariables As Label
-    Friend WithEvents ucrReceiverMultiple As ucrReceiverMultiple
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents chkSaveFittedValuesAndDeviations As CheckBox
-    Friend WithEvents chkSaveStatistics As CheckBox
-    Friend WithEvents tabOptions As TabPage
-    Friend WithEvents chkRestrictDataValues As CheckBox
-    Friend WithEvents grpMissingValues As GroupBox
-    Friend WithEvents chkFeb29th As CheckBox
-    Friend WithEvents chkTrace As CheckBox
-    Friend WithEvents chkMissingData As CheckBox
-    Friend WithEvents chkSetSummaryToMissingIfOver As CheckBox
-    Friend WithEvents chkIgnoreMissingValues As CheckBox
+    Friend WithEvents chkSum As CheckBox
+    Friend WithEvents chkStDev As CheckBox
+    Friend WithEvents grpOptions As GroupBox
+    Friend WithEvents chkdropUnusedLevels As CheckBox
+    Friend WithEvents chkReturnOutput As CheckBox
+    Friend WithEvents chkStoreResults As CheckBox
+    Friend WithEvents ucrInputStoreResults As ucrInputComboBox
+    Friend WithEvents chkMode As CheckBox
+    Friend WithEvents chkRange As CheckBox
 End Class

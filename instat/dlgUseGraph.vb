@@ -25,13 +25,17 @@ Public Class dlgUseGraph
         Else
             ReOpenDialog()
         End If
+        TestOkEnabled()
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrGraphsSelector.Reset()
+        TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 358
+        ucrGraphsSelector.SetItemType("graph")
+        ucrGraphReceiver.Selector = ucrGraphsSelector
     End Sub
     Private Sub ReOpenDialog()
 
@@ -39,5 +43,15 @@ Public Class dlgUseGraph
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+    Private Sub TestOkEnabled()
+        If Not ucrGraphReceiver.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+    Private Sub ucrGraphReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrGraphReceiver.SelectionChanged
+        TestOkEnabled()
     End Sub
 End Class
