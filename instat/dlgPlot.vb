@@ -69,6 +69,8 @@ Public Class dlgPlot
         ucrVariablesAsFactorForLinePlot.SetSelector(ucrLinePlotSelector)
         ucrVariablesAsFactorForLinePlot.SetIncludedDataType({"numeric"})
 
+        ucrSaveLinePlot.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
+        ucrSaveLinePlot.strPrefix = "Graph"
     End Sub
     Private Sub TeskOkEnabled()
         If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactorForLinePlot.IsEmpty() Then

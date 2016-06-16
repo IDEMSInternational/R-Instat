@@ -54,8 +54,7 @@ Public Class dlgDotPlot
         ucrBase.iHelpTopicID = 134
 
         ucrSaveDotPlot.SetDataFrameSelector(ucrDotPlotSelector.ucrAvailableDataFrames)
-        ucrSaveDotPlot.ucrInputGraphName.SetPrefix("Graph")
-
+        ucrSaveDotPlot.strPrefix = "Graph"
     End Sub
 
     Private Sub TestOkEnabled()

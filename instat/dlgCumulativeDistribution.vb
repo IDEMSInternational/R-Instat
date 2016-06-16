@@ -51,6 +51,10 @@ Public Class dlgCumulativeDistribution
         ucrVariablesAsFactorforCumDist.SetSelector(ucrCumDistSelector)
         ucrVariablesAsFactorforCumDist.SetIncludedDataType({"numeric"})
 
+
+        ucrSaveCumDist.SetDataFrameSelector(ucrCumDistSelector.ucrAvailableDataFrames)
+        ucrSaveCumDist.strPrefix = "Graph"
+
     End Sub
 
     Private Sub SetDefaults()

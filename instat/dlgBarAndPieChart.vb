@@ -57,12 +57,14 @@ Public Class dlgBarAndPieChart
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.SetIncludedDataTypes({"factor"})
 
-        'sdgBarChart.SetBarChartFunction(clsRgeom_barchart)
-        sdgPieChartOptions.SetPieChartFunction(clsTempRFunc)
+
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 327
 
+
+        ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
+        ucrSaveBar.strPrefix = "Graph"
 
     End Sub
 

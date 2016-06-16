@@ -84,6 +84,10 @@ Public Class dlgScatterPlot
         ucrVariablesAsFactorForScatter.SetExcludedDataTypes({"numeric"})
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.iHelpTopicID = 16
+
+
+        ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
+        ucrSaveScatterPlot.strPrefix = "Graph"
     End Sub
     Private Sub SetDefaults()
         'setDefaults
