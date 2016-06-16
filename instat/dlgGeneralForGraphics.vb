@@ -17,6 +17,7 @@ Imports instat.Translations
 Public Class dlgGeneralForGraphics
     Private clsRggplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
+    Private lstLayerComplete As New List(Of Boolean)
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -28,8 +29,7 @@ Public Class dlgGeneralForGraphics
 
         End If
         autoTranslate(Me)
-
-        TestOkEnabled()
+        ucrBase.OKEnabled(False)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -38,17 +38,16 @@ Public Class dlgGeneralForGraphics
         clsRggplotFunction.SetRCommand("ggplot")
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrBase.iHelpTopicID = 356
+
     End Sub
+
     Private Sub SetDefaults()
         cmdDelete.Enabled = False
         cmdEdit.Enabled = False
-        TestOkEnabled()
+        lstLayers.Clear()
     End Sub
 
     Private Sub ReopenDialog()
-
-    End Sub
-    Public Sub TestOkEnabled()
 
     End Sub
 
@@ -57,7 +56,43 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
+        Dim clsNewGeomFunction As New RFunction
+        Dim clsNewAesFunction As New RFunction
+
+        sdgLayerOptions.SetupLayer(clsNewGeomFunction, clsNewAesFunction, False, False)
         sdgLayerOptions.ShowDialog()
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=sdgLayerOptions.clsGeomFunction)
+        '        ucrBase.OKEnabled(sdgLayerOptions.ucrGeomWithAes.TestForOkEnabled())
+        FillLayers()
+    End Sub
+
+    Public Sub FillLayers()
+        Dim strLayer As String
+
+        strLayer = sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem
+        If lstLayers.Items.ContainsKey(strLayer) Then
+            lstLayerComplete(lstLayers.Items.IndexOfKey(strLayer)) = sdgLayerOptions.TestForOKEnabled()
+        Else
+            lstLayers.Items.Add(strLayer)
+            lstLayerComplete.Add(sdgLayerOptions.TestForOKEnabled())
+        End If
+
+        If sdgLayerOptions.TestForOKEnabled() Then
+            lstLayers.Items(lstLayers.Items.IndexOfKey(strLayer)).ForeColor = Color.Green
+
+        Else
+            lstLayers.Items(lstLayers.Items.IndexOfKey(strLayer)).ForeColor = Color.Red
+        End If
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=sdgLayerOptions.clsGeomFunction.Clone)
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+        Dim bTemp As Boolean
+        For Each bTemp In lstLayerComplete
+            If Not bTemp Then
+                Exit For
+            End If
+        Next
+        ucrBase.OKEnabled(bTemp)
     End Sub
 End Class

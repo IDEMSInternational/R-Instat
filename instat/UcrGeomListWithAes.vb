@@ -21,7 +21,9 @@ Public Class UcrGeomListWithParameters
     Public lstCurrArguments As New List(Of String)
     Public bFirstLoad As Boolean = True
     Public ucrLayersControl As ucrLayerParameters
+    Public bCheckEnabled As Boolean = True
     Public Event DataFrameChanged()
+    Public clsAesFunction As RFunction
 
     Private Sub UcrGeomListWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -31,6 +33,7 @@ Public Class UcrGeomListWithParameters
             bFirstLoad = False
         End If
     End Sub
+
     Private Sub InitialiseControl()
         ucrReceiverParam1.Selector = UcrSelector
         ucrReceiverParam2.Selector = UcrSelector
@@ -49,8 +52,12 @@ Public Class UcrGeomListWithParameters
         UcrSelector.Reset()
     End Sub
 
-    Public Sub SetGeomFunction(clsAesGeomFunc As RFunction)
-        clsGeomFunction = clsAesGeomFunc
+    Public Sub SetGeomFunction(clsGeomFunc As RFunction)
+        clsGeomFunction = clsGeomFunc
+    End Sub
+
+    Public Sub SetAesFunction(clsAesFunc As RFunction)
+        clsAesFunction = clsAesFunc
     End Sub
 
     Public Sub SetParameters() 'this will set function or aes parameters
@@ -158,13 +165,14 @@ Public Class UcrGeomListWithParameters
         End If
         SetParameters()
     End Sub
+
     Private Sub ucrReceiverParam1_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam1.SelectionChanged
         If Not ucrReceiverParam1.IsEmpty Then
             clsRaesFunction.AddParameter(lstCurrArguments(0), ucrReceiverParam1.GetVariableNames(False))
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(0))
         End If
-        dlgGeneralForGraphics.TestOkEnabled()
+        TestForOkEnabled()
     End Sub
 
     Private Sub ucrReceiverParam2_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam2.SelectionChanged
@@ -173,6 +181,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(1))
         End If
+        TestForOkEnabled()
     End Sub
     Private Sub ucrReceiverParam3_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam3.SelectionChanged
         If Not ucrReceiverParam3.IsEmpty Then
@@ -180,6 +189,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(2))
         End If
+        TestForOkEnabled()
 
     End Sub
 
@@ -189,7 +199,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(3))
         End If
-
+        TestForOkEnabled()
     End Sub
     Private Sub ucrReceiverParam5_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam5.SelectionChanged
         If Not ucrReceiverParam5.IsEmpty Then
@@ -197,6 +207,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(4))
         End If
+        TestForOkEnabled()
     End Sub
 
     Private Sub ucrReceiverParam6_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam6.SelectionChanged
@@ -205,6 +216,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(5))
         End If
+        TestForOkEnabled()
     End Sub
 
     Private Sub ucrReceiverParam7_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam7.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
@@ -213,6 +225,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(6))
         End If
+        TestForOkEnabled()
     End Sub
     Private Sub ucrReceiverParam8_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam8.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
         If Not ucrReceiverParam8.IsEmpty Then
@@ -220,6 +233,7 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(7))
         End If
+        TestForOkEnabled()
     End Sub
 
     Private Sub ucrReceiverParam9_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam9.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
@@ -228,10 +242,31 @@ Public Class UcrGeomListWithParameters
         Else
             clsRaesFunction.RemoveParameterByName(lstCurrArguments(8))
         End If
+        TestForOkEnabled()
+    End Sub
+
+    Public Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True)
+        UcrSelector.SetDataframe(strDataframe, bEnableDataframe)
     End Sub
 
     Private Sub UcrSelector_DataFrameChanged() Handles UcrSelector.DataFrameChanged
         clsGeomFunction.AddParameter("data", clsRFunctionParameter:=UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame)
         ' RaiseEvent DataFrameChanged() do we need this?
+    End Sub
+
+    Public Function TestForOkEnabled() As Boolean
+        Dim i As Integer = 0
+
+        For i = 0 To (clsCurrGeom.clsAesParameters.Count - 1)
+            If (clsCurrGeom.clsAesParameters(i).bIsMandatory = True) AndAlso (lstAesParameterUcr(i).IsEmpty()) Then
+                'this should have okay disabled 
+                Return False
+            End If
+        Next
+        Return True
+    End Function
+
+    Private Sub chkChangeAes_CheckedChanged(sender As Object, e As EventArgs) Handles chkChangeAes.CheckedChanged
+
     End Sub
 End Class

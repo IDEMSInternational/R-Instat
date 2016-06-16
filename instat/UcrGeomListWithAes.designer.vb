@@ -40,12 +40,13 @@ Partial Class UcrGeomListWithParameters
         Me.ucrReceiverParam8 = New instat.ucrReceiverSingle()
         Me.ucrReceiverParam7 = New instat.ucrReceiverSingle()
         Me.ucrReceiverParam6 = New instat.ucrReceiverSingle()
+        Me.chkChangeAes = New System.Windows.Forms.CheckBox()
         Me.grpAesList.SuspendLayout()
         Me.SuspendLayout()
         '
         'UcrSelector
         '
-        Me.UcrSelector.Location = New System.Drawing.Point(7, 69)
+        Me.UcrSelector.Location = New System.Drawing.Point(3, 56)
         Me.UcrSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrSelector.Name = "UcrSelector"
         Me.UcrSelector.Size = New System.Drawing.Size(232, 192)
@@ -248,9 +249,20 @@ Partial Class UcrGeomListWithParameters
         Me.ucrReceiverParam6.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam6.TabIndex = 8
         '
+        'chkChangeAes
+        '
+        Me.chkChangeAes.AutoSize = True
+        Me.chkChangeAes.Location = New System.Drawing.Point(3, 252)
+        Me.chkChangeAes.Name = "chkChangeAes"
+        Me.chkChangeAes.Size = New System.Drawing.Size(121, 17)
+        Me.chkChangeAes.TabIndex = 10
+        Me.chkChangeAes.Text = "Aesthetics on Geom"
+        Me.chkChangeAes.UseVisualStyleBackColor = True
+        '
         'UcrGeomListWithParameters
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.Controls.Add(Me.chkChangeAes)
         Me.Controls.Add(Me.grpAesList)
         Me.Controls.Add(Me.lblAesList)
         Me.Controls.Add(Me.UcrSelector)
@@ -259,6 +271,7 @@ Partial Class UcrGeomListWithParameters
         Me.Controls.SetChildIndex(Me.UcrSelector, 0)
         Me.Controls.SetChildIndex(Me.lblAesList, 0)
         Me.Controls.SetChildIndex(Me.grpAesList, 0)
+        Me.Controls.SetChildIndex(Me.chkChangeAes, 0)
         Me.grpAesList.ResumeLayout(False)
         Me.grpAesList.PerformLayout()
         Me.ResumeLayout(False)
@@ -286,4 +299,5 @@ Partial Class UcrGeomListWithParameters
     Friend WithEvents lblGgParam8 As Label
     Friend WithEvents ucrReceiverParam9 As ucrReceiverSingle
     Friend WithEvents ucrReceiverParam8 As ucrReceiverSingle
+    Friend WithEvents chkChangeAes As CheckBox
 End Class
