@@ -61,16 +61,17 @@ Public Class RParameter
 
     Public Function Clone() As RParameter
         Dim clsTempRParam As New RParameter
-        Dim clsArgumentOperator As New ROperator
 
         clsTempRParam.strArgumentName = strArgumentName
         clsTempRParam.strArgumentValue = strArgumentValue
         clsTempRParam.bIsFunction = bIsFunction
         clsTempRParam.bIsOperator = bIsOperator
-        clsTempRParam.clsArgumentFunction = clsArgumentFunction.Clone
-        clsTempRParam.clsArgumentOperator = clsArgumentOperator.Clone
-
-
+        If clsArgumentFunction IsNot Nothing Then
+            clsTempRParam.clsArgumentFunction = clsArgumentFunction.Clone
+        End If
+        If clsArgumentOperator IsNot Nothing Then
+            clsTempRParam.clsArgumentOperator = clsArgumentOperator.Clone
+        End If
         Return clsTempRParam
     End Function
 End Class

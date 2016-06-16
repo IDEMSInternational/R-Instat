@@ -300,10 +300,7 @@ Public Class ROperator
 
     Public Function Clone() As ROperator
         Dim clsTempROperator As New ROperator
-        Dim clsLeftFunction As New RFunction
-        Dim clsLeftOperator As New ROperator
-        Dim clsLeftParameter As New RParameter
-        Dim clsAdditionalParams As New RParameter
+        Dim clsAdditionalParams As RParameter
 
         clsTempROperator.strOperation = strOperation
         clsTempROperator.bBrackets = bBrackets
