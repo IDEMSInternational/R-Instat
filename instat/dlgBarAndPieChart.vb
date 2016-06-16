@@ -57,12 +57,14 @@ Public Class dlgBarAndPieChart
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.SetIncludedDataTypes({"factor"})
 
-        'sdgBarChart.SetBarChartFunction(clsRgeom_barchart)
-        sdgPieChartOptions.SetPieChartFunction(clsTempRFunc)
+
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 327
 
+
+        ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
+        ucrSaveBar.strPrefix = "Graph"
 
     End Sub
 
@@ -138,5 +140,15 @@ Public Class dlgBarAndPieChart
 
     Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
         sdgPieChartOptions.ShowDialog()
+    End Sub
+
+    Private Sub ucrSaveBar_GraphNameChanged() Handles ucrSaveBar.GraphNameChanged, ucrSaveBar.SaveGraphCheckedChanged
+        If ucrSaveBar.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveBar.strGraphName, strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveBar.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
     End Sub
 End Class
