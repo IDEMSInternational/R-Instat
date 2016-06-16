@@ -23,9 +23,9 @@ Partial Class dlgReoderDescriptives
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDataFrameReoder = New instat.ucrDataFrame()
         Me.lblObjectsToReoder = New System.Windows.Forms.Label()
         Me.ucrReorderObjects = New instat.ucrReorder()
+        Me.ucrDataFrameReoder = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -34,14 +34,6 @@ Partial Class dlgReoderDescriptives
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
-        '
-        'ucrDataFrameReoder
-        '
-        Me.ucrDataFrameReoder.Location = New System.Drawing.Point(13, 13)
-        Me.ucrDataFrameReoder.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrameReoder.Name = "ucrDataFrameReoder"
-        Me.ucrDataFrameReoder.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDataFrameReoder.TabIndex = 1
         '
         'lblObjectsToReoder
         '
@@ -61,6 +53,14 @@ Partial Class dlgReoderDescriptives
         Me.ucrReorderObjects.TabIndex = 3
         Me.ucrReorderObjects.ucrDataFrameList = Nothing
         Me.ucrReorderObjects.ucrReceiver = Nothing
+        '
+        'ucrDataFrameReoder
+        '
+        Me.ucrDataFrameReoder.Location = New System.Drawing.Point(13, 13)
+        Me.ucrDataFrameReoder.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrameReoder.Name = "ucrDataFrameReoder"
+        Me.ucrDataFrameReoder.Size = New System.Drawing.Size(120, 40)
+        Me.ucrDataFrameReoder.TabIndex = 1
         '
         'dlgReoderDescriptives
         '
@@ -82,7 +82,7 @@ Partial Class dlgReoderDescriptives
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrDataFrameReoder As ucrDataFrame
     Friend WithEvents lblObjectsToReoder As Label
     Friend WithEvents ucrReorderObjects As ucrReorder
+    Friend WithEvents ucrDataFrameReoder As ucrDataFrame
 End Class
