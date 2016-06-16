@@ -24,23 +24,34 @@ Public Class ucrGeom
     Public clsCurrGeom As New Geoms
     Public lstFunctionParameters As New List(Of RParameter)
     Private bFirstLoad As Boolean = True
-    Public clsRaesFunction As New RFunction
+    Public clsGgplotAesFunction As New RFunction
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        CreateGeomList()
+    End Sub
 
     Private Sub UcrGeoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseControl()
-            CreateGeomList()
-            SetGeoms()
             bFirstLoad = False
         End If
     End Sub
+
     Private Sub InitialiseControl()
-        clsRaesFunction.SetRCommand("aes")
-        clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
+        clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
     End Sub
 
-    Public Sub SetGeoms()
+    Public Overridable Sub Setup(clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional bFixDataFrame As Boolean = True)
         Dim GeomCount As New Geoms
+
+        clsGeomFunction = clsTempGeomFunc
+        clsGgplotAesFunction = clsTempAesFunc
+        clsGgplotAesFunction.SetRCommand("aes")
         cboGeomList.Items.Clear()
         For Each GeomCount In lstAllGeoms
             cboGeomList.Items.Add(GeomCount.strGeomName)
@@ -48,9 +59,6 @@ Public Class ucrGeom
         cboGeomList.SelectedIndex = 0
     End Sub
 
-    Public Sub SetFuncSync(clsGeomFunc As RFunction)
-        clsGeomFunction = clsGeomFunc
-    End Sub
     Public Sub AddParameter(strAesParameterName As String, strAesParameterValue As String)
         'this adds parameters TODO pass appropriate parameters.
         Dim i As Integer
@@ -166,10 +174,10 @@ Public Class ucrGeom
 
 
         clsgeom_boxplot.SetGeomName("geom_boxplot")
-        clsgeom_boxplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_boxplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_boxplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_boxplot.AddAesParameter("fill", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
-        clsgeom_boxplot.AddAesParameter("colour",, strIncludedDataTypes:={"factor"})
+        clsgeom_boxplot.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
+        clsgeom_boxplot.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
         clsgeom_boxplot.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_boxplot.AddAesParameter("size", strIncludedDataTypes:={"factor"})
         clsgeom_boxplot.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
@@ -177,12 +185,12 @@ Public Class ucrGeom
 
         'adding layerParameters
         clsgeom_boxplot.AddLayerParameter("notch", "boolean", "TRUE")
-        clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "1.5")
+        clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "1.5", lstParameterStrings:={1})
         clsgeom_boxplot.AddLayerParameter("varwidth", "boolean", "TRUE")
-        clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5")
-        clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "1.5")
+        clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1})
+        clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "1.5", lstParameterStrings:={1})
         clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
-        clsgeom_boxplot.AddLayerParameter("outlier.stroke ", "numeric", "0.5")
+        clsgeom_boxplot.AddLayerParameter("outlier.stroke ", "numeric", "0.5", lstParameterStrings:={1})
         lstAllGeoms.Add(clsgeom_boxplot)
 
         'clsgeom_contour.SetGeomName("geom_contour")
@@ -250,7 +258,7 @@ Public Class ucrGeom
 
         'adding layer parameters
         clsgeom_density.AddLayerParameter("stat", "list", "density", lstParameterStrings:={"density", "identity"})
-        clsgeom_density.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter", "stack", "fill", "dodge"}) 'others are “jitter”, “stack”, “fill” And “dodge”
+        clsgeom_density.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter", "stack", "fill", "dodge"})
         clsgeom_density.AddLayerParameter("bw", "text", "nrd0", lstParameterStrings:={"nrd0", "nrd", "ucv", "bcv", "SJ"})
         clsgeom_density.AddLayerParameter("adjust", "numeric", "1")
         clsgeom_density.AddLayerParameter("kernel", "text", "gaussian", lstParameterStrings:={"gaussian", "rectangular", "triangular", "epanechnikov", "biweight", "cosine", "optcosin"})

@@ -34,10 +34,6 @@ Public Class ucrLayerParameters
         End If
     End Sub
 
-    Public Sub SetGeomFunction(clsLayerGeomFunc As RFunction)
-        clsGeomFunction = clsLayerGeomFunc
-    End Sub
-
     Public Sub SetLayerParameters()
         Dim i As Integer = 0
         'fill the labels and checkboxes

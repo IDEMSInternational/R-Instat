@@ -40,7 +40,9 @@ Partial Class UcrGeomListWithParameters
         Me.ucrReceiverParam8 = New instat.ucrReceiverSingle()
         Me.ucrReceiverParam7 = New instat.ucrReceiverSingle()
         Me.ucrReceiverParam6 = New instat.ucrReceiverSingle()
-        Me.chkChangeAes = New System.Windows.Forms.CheckBox()
+        Me.chkApplyOnAllLayers = New System.Windows.Forms.CheckBox()
+        Me.chkIgnoreGlobalAes = New System.Windows.Forms.CheckBox()
+        Me.chkAllowDataFrameChange = New System.Windows.Forms.CheckBox()
         Me.grpAesList.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -249,20 +251,41 @@ Partial Class UcrGeomListWithParameters
         Me.ucrReceiverParam6.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam6.TabIndex = 8
         '
-        'chkChangeAes
+        'chkApplyOnAllLayers
         '
-        Me.chkChangeAes.AutoSize = True
-        Me.chkChangeAes.Location = New System.Drawing.Point(3, 252)
-        Me.chkChangeAes.Name = "chkChangeAes"
-        Me.chkChangeAes.Size = New System.Drawing.Size(121, 17)
-        Me.chkChangeAes.TabIndex = 10
-        Me.chkChangeAes.Text = "Aesthetics on Geom"
-        Me.chkChangeAes.UseVisualStyleBackColor = True
+        Me.chkApplyOnAllLayers.AutoSize = True
+        Me.chkApplyOnAllLayers.Location = New System.Drawing.Point(3, 245)
+        Me.chkApplyOnAllLayers.Name = "chkApplyOnAllLayers"
+        Me.chkApplyOnAllLayers.Size = New System.Drawing.Size(117, 17)
+        Me.chkApplyOnAllLayers.TabIndex = 10
+        Me.chkApplyOnAllLayers.Text = "Apply On All Layers"
+        Me.chkApplyOnAllLayers.UseVisualStyleBackColor = True
+        '
+        'chkIgnoreGlobalAes
+        '
+        Me.chkIgnoreGlobalAes.AutoSize = True
+        Me.chkIgnoreGlobalAes.Location = New System.Drawing.Point(3, 266)
+        Me.chkIgnoreGlobalAes.Name = "chkIgnoreGlobalAes"
+        Me.chkIgnoreGlobalAes.Size = New System.Drawing.Size(141, 17)
+        Me.chkIgnoreGlobalAes.TabIndex = 11
+        Me.chkIgnoreGlobalAes.Text = "Ignore Global Aesthetics"
+        Me.chkIgnoreGlobalAes.UseVisualStyleBackColor = True
+        '
+        'chkAllowDataFrameChange
+        '
+        Me.chkAllowDataFrameChange.Location = New System.Drawing.Point(129, 71)
+        Me.chkAllowDataFrameChange.Name = "chkAllowDataFrameChange"
+        Me.chkAllowDataFrameChange.Size = New System.Drawing.Size(112, 40)
+        Me.chkAllowDataFrameChange.TabIndex = 12
+        Me.chkAllowDataFrameChange.Text = "Allow Data Frame Change"
+        Me.chkAllowDataFrameChange.UseVisualStyleBackColor = True
         '
         'UcrGeomListWithParameters
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.Controls.Add(Me.chkChangeAes)
+        Me.Controls.Add(Me.chkAllowDataFrameChange)
+        Me.Controls.Add(Me.chkIgnoreGlobalAes)
+        Me.Controls.Add(Me.chkApplyOnAllLayers)
         Me.Controls.Add(Me.grpAesList)
         Me.Controls.Add(Me.lblAesList)
         Me.Controls.Add(Me.UcrSelector)
@@ -271,7 +294,9 @@ Partial Class UcrGeomListWithParameters
         Me.Controls.SetChildIndex(Me.UcrSelector, 0)
         Me.Controls.SetChildIndex(Me.lblAesList, 0)
         Me.Controls.SetChildIndex(Me.grpAesList, 0)
-        Me.Controls.SetChildIndex(Me.chkChangeAes, 0)
+        Me.Controls.SetChildIndex(Me.chkApplyOnAllLayers, 0)
+        Me.Controls.SetChildIndex(Me.chkIgnoreGlobalAes, 0)
+        Me.Controls.SetChildIndex(Me.chkAllowDataFrameChange, 0)
         Me.grpAesList.ResumeLayout(False)
         Me.grpAesList.PerformLayout()
         Me.ResumeLayout(False)
@@ -299,5 +324,7 @@ Partial Class UcrGeomListWithParameters
     Friend WithEvents lblGgParam8 As Label
     Friend WithEvents ucrReceiverParam9 As ucrReceiverSingle
     Friend WithEvents ucrReceiverParam8 As ucrReceiverSingle
-    Friend WithEvents chkChangeAes As CheckBox
+    Friend WithEvents chkApplyOnAllLayers As CheckBox
+    Friend WithEvents chkIgnoreGlobalAes As CheckBox
+    Friend WithEvents chkAllowDataFrameChange As CheckBox
 End Class
