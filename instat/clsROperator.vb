@@ -297,4 +297,35 @@ Public Class ROperator
         'RemoveParameter(False)
         RemoveAllAdditionalParameters()
     End Sub
+
+    Public Function Clone() As ROperator
+        Dim clsTempROperator As New ROperator
+        Dim clsLeftFunction As New RFunction
+        Dim clsLeftOperator As New ROperator
+        Dim clsLeftParameter As New RParameter
+        Dim clsAdditionalParams As New RParameter
+
+        clsTempROperator.strOperation = strOperation
+        clsTempROperator.bBrackets = bBrackets
+        clsTempROperator.strAssignTo = strAssignTo
+        clsTempROperator.strAssignToDataFrame = strAssignToDataFrame
+        clsTempROperator.strAssignToColumn = strAssignToColumn
+        clsTempROperator.strAssignToModel = strAssignToModel
+        clsTempROperator.strAssignToGraph = strAssignToGraph
+        clsTempROperator.bToBeAssigned = bToBeAssigned
+        clsTempROperator.bIsAssigned = bIsAssigned
+        clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
+        clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
+
+        clsTempROperator.clsLeftFunction = clsLeftFunction.Clone
+        clsTempROperator.clsLeftOperator = clsLeftOperator.Clone
+        clsTempROperator.clsLeftParameter = clsLeftParameter.Clone
+
+        For Each clsAdditionalParams In clsAdditionalParameters
+            clsTempROperator.AddAdditionalParameter(clsAdditionalParams.Clone)
+        Next
+
+        Return clsTempROperator
+
+    End Function
 End Class

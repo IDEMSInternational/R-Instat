@@ -16,6 +16,9 @@
 Imports instat.Translations
 Public Class dlgRenameDescriptive
     Public bFirstLoad As Boolean = True
+    Dim bUseSelectedObject As Boolean = False
+    Dim strSelectedOject As String = ""
+    Dim strSelectedDataFrame As String = ""
     Private Sub dlgRenameDescriptive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
@@ -24,16 +27,62 @@ Public Class dlgRenameDescriptive
             SetDefaults()
             bFirstLoad = False
         End If
+        TestOKEnabled()
     End Sub
 
+    Private Sub TestOKEnabled()
+        If ((Not ucrReceiverCurrentName.IsEmpty) And (Not ucrInputNewName.IsEmpty)) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
     Private Sub InitialiseDialog()
-
+        ucrReceiverCurrentName.Selector = ucrSelectorForRenameObject
+        ucrReceiverCurrentName.SetMeAsReceiver()
+        ucrSelectorForRenameObject.SetItemType("object")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_object")
     End Sub
     Private Sub SetDefaults()
+        ucrReceiverCurrentName.ResetText()
+        ucrInputNewName.Reset()
 
     End Sub
+    Public Sub SetCurrentObject(strColumn As String, strDataFrame As String)
+        strSelectedOject = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedObject = True
+    End Sub
 
+    Private Sub SetDefaultOject()
+        ucrSelectorForRenameObject.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrReceiverCurrentName.SetSelected(strSelectedOject, strSelectedDataFrame)
+        bUseSelectedObject = False
+    End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorForRenameObject_DataFrameChanged() Handles ucrSelectorForRenameObject.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForRenameObject.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub ucrReceiverCurrentName_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverCurrentName.SelectionChanged
+        If Not ucrReceiverCurrentName.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("object_name", ucrReceiverCurrentName.GetVariableNames)
+            ucrInputNewName.SetName(ucrReceiverCurrentName.GetVariableNames(bWithQuotes:=False))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("object_name")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrInputNewName_NameChanged() Handles ucrInputNewName.NameChanged
+        If Not ucrInputNewName.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("new_name", Chr(34) & ucrInputNewName.GetText & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("new_name")
+        End If
     End Sub
 End Class
