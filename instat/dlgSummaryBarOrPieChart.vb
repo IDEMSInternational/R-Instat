@@ -56,6 +56,9 @@ Public Class dlgSummaryBarOrPieChart
         ucrYReceiver.SetMeAsReceiver()
         ucrBase.clsRsyntax.iCallType = 0
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+
+        ucrSaveSummaryBar.SetDataFrameSelector(ucrSummarybarSelector.ucrAvailableDataFrames)
+        ucrSaveSummaryBar.strPrefix = "Graph"
     End Sub
     Private Sub SetDefaults()
         ucrSummarybarSelector.Reset()
