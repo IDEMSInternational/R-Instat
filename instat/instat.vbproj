@@ -1842,6 +1842,15 @@
     <EmbeddedResource Include="dlgColumnMetadata.sw-KE.resx">
       <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStats.fr-FR.resx">
+      <DependentUpon>dlgColumnStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStats.resx">
+      <DependentUpon>dlgColumnStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStats.sw-KE.resx">
+      <DependentUpon>dlgColumnStats.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCombineText.fr-FR.resx">
       <DependentUpon>dlgCombineText.vb</DependentUpon>
     </EmbeddedResource>
