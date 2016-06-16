@@ -31,7 +31,7 @@ Public Class dlgRenameDescriptive
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverCurrentName.IsEmpty Then
+        If ((Not ucrReceiverCurrentName.IsEmpty) And (Not ucrInputNewName.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -79,6 +79,10 @@ Public Class dlgRenameDescriptive
     End Sub
 
     Private Sub ucrInputNewName_NameChanged() Handles ucrInputNewName.NameChanged
-        ucrBase.clsRsyntax.AddParameter("new_name", Chr(34) & ucrInputNewName.GetText & Chr(34))
+        If Not ucrInputNewName.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("new_name", Chr(34) & ucrInputNewName.GetText & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("new_name")
+        End If
     End Sub
 End Class
