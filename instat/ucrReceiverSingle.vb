@@ -65,7 +65,9 @@ Public Class ucrReceiverSingle
 
     Public Overrides Sub RemoveSelected()
         If txtReceiverSingle.Enabled Then
-            Selector.RemoveFromVariablesList(txtReceiverSingle.Text)
+            If Selector IsNot Nothing Then
+                Selector.RemoveFromVariablesList(txtReceiverSingle.Text)
+            End If
             txtReceiverSingle.Text = ""
             strDataFrameName = ""
         End If
