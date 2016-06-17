@@ -165,8 +165,8 @@ Public Class ucrGeom
         clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor"})) ' won't visibly change anything unless you change the theme
 
         'add layer parameters 
-        clsgeom_bar.AddLayerParameter("stat", "list", "count", lstParameterStrings:={"count", "identity"})
-        clsgeom_bar.AddLayerParameter("position", "list", "stack", lstParameterStrings:={"fill", "dodge"})
+        clsgeom_bar.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34)})
         clsgeom_bar.AddLayerParameter("width", "numeric", "90%")
         lstAllGeoms.Add(clsgeom_bar)
 
