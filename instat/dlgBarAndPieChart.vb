@@ -65,7 +65,8 @@ Public Class dlgBarAndPieChart
 
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
         ucrSaveBar.strPrefix = "Graph"
-
+        ucrSaveBar.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveBar.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
 
     Private Sub ReopenDialog()
