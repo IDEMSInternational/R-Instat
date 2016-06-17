@@ -62,13 +62,17 @@ Public Class ucrSelector
 
     Public Overridable Sub LoadList()
         Dim lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String())))
+        Dim strExclud As String() = Nothing
 
         If CurrentReceiver IsNot Nothing Then
             lstCombinedMetadataLists = CombineMetadataLists(CurrentReceiver.lstIncludedMetadataProperties, CurrentReceiver.lstExcludedMetadataProperties)
+            If CurrentReceiver.bExcludeFromSelector Then
+                strExclud = lstVariablesInReceivers.ToArray
+            End If
             If CurrentReceiver.bTypeSet Then
-                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=CurrentReceiver.GetItemType(), lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame)
+                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=CurrentReceiver.GetItemType(), lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud)
             Else
-                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame)
+                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud)
             End If
         Else
             frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstIncludedMetadataProperties, lstExcludedDataTypes:=lstExcludedMetadataProperties, strDataFrameName:=strCurrentDataFrame)
@@ -187,6 +191,14 @@ Public Class ucrSelector
     Public Sub RemoveFromVariablesList(strVariable As String)
         lstVariablesInReceivers.Remove(strVariable)
         RaiseEvent VariablesInReceiversChanged()
+    End Sub
+
+    Public Sub AddItemsWithMetadataProperty(strProperty As String, strValues As String())
+
+        frmMain.clsRLink.SelectColumnsWithMetadataProperty(lstAvailableVariable, strCurrentDataFrame, strProperty, strValues)
+        Add()
+        LoadList()
+
     End Sub
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())

@@ -11,7 +11,7 @@
     <AssemblyName>instat</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>C:\Users\deaspo\Desktop\applications\</PublishUrl>
@@ -33,6 +33,8 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -420,6 +422,12 @@
     <Compile Include="dlgPrintPreviewOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgProbabilityModels.Designer.vb">
+      <DependentUpon>dlgProbabilityModels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgProbabilityModels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgProtect.Designer.vb">
       <DependentUpon>dlgProtect.vb</DependentUpon>
     </Compile>
@@ -502,6 +510,12 @@
       <DependentUpon>dlgRestrict.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRestrict.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRowNamesOrNumbers.Designer.vb">
+      <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRowNamesOrNumbers.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgScatterPlot.Designer.vb">
@@ -689,6 +703,12 @@
     </Compile>
     <Compile Include="sdgVariableTransformations.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ucrColors.Designer.vb">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrColors.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
@@ -1586,6 +1606,12 @@
     <Compile Include="ucrLayerParameters.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrLayerParamsControls.Designer.vb">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrLayerParamsControls.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMultipleInput.Designer.vb">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </Compile>
@@ -1821,6 +1847,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnMetadata.sw-KE.resx">
       <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStats.fr-FR.resx">
+      <DependentUpon>dlgColumnStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStats.resx">
+      <DependentUpon>dlgColumnStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStats.sw-KE.resx">
+      <DependentUpon>dlgColumnStats.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCombineText.fr-FR.resx">
       <DependentUpon>dlgCombineText.vb</DependentUpon>
@@ -2086,6 +2121,9 @@
     <EmbeddedResource Include="dlgPrintPreviewOptions.sw-KE.resx">
       <DependentUpon>dlgPrintPreviewOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgProbabilityModels.resx">
+      <DependentUpon>dlgProbabilityModels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgProtect.fr-FR.resx">
       <DependentUpon>dlgProtect.vb</DependentUpon>
     </EmbeddedResource>
@@ -2211,6 +2249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRestrict.sw-KE.resx">
       <DependentUpon>dlgRestrict.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRowNamesOrNumbers.resx">
+      <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.fr-FR.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
@@ -3653,6 +3694,15 @@
     <EmbeddedResource Include="ucrButtonsSubdialogue.sw-KE.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.fr-FR.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.sw-KE.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.fr-FR.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
     </EmbeddedResource>
@@ -3778,6 +3828,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrLayerParameters.sw-KE.resx">
       <DependentUpon>ucrLayerParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParamsControls.fr-FR.resx">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParamsControls.resx">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParamsControls.sw-KE.resx">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
@@ -3908,7 +3967,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="lib\ANTLR 3 License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -4573,6 +4634,39 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\GGally_1.1.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\cellranger_1.0.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\feather_0.0.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\foreign_0.8-66.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\haven_0.2.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\readODS_1.6.2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\readr_0.2.2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\readxl_0.1.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\rio_0.4.6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\tibble_1.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\urltools_1.4.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\xml2_0.1.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
