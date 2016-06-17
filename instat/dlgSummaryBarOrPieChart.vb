@@ -56,6 +56,9 @@ Public Class dlgSummaryBarOrPieChart
         ucrYReceiver.SetMeAsReceiver()
         ucrBase.clsRsyntax.iCallType = 0
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+
+        ucrSaveSummaryBar.SetDataFrameSelector(ucrSummarybarSelector.ucrAvailableDataFrames)
+        ucrSaveSummaryBar.strPrefix = "Graph"
     End Sub
     Private Sub SetDefaults()
         ucrSummarybarSelector.Reset()
@@ -159,5 +162,15 @@ Public Class dlgSummaryBarOrPieChart
 
     Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
         sdgPieChartOptions.ShowDialog()
+    End Sub
+
+    Private Sub ucrSaveSummaryBar_GraphNameChanged() Handles ucrSaveSummaryBar.GraphNameChanged, ucrSaveSummaryBar.SaveGraphCheckedChanged
+        If ucrSaveSummaryBar.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveSummaryBar.strGraphName, strTempDataframe:=ucrSummarybarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveSummaryBar.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSummarybarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
     End Sub
 End Class
