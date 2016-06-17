@@ -76,6 +76,7 @@ Partial Class dlgRenameDescriptive
         '
         'ucrInputNewName
         '
+        Me.ucrInputNewName.IsReadOnly = False
         Me.ucrInputNewName.Location = New System.Drawing.Point(279, 164)
         Me.ucrInputNewName.Name = "ucrInputNewName"
         Me.ucrInputNewName.Size = New System.Drawing.Size(137, 21)
