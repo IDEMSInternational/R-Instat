@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrLayerParameters
     Public lstLayerParameterControl As New List(Of ucrLayerParamsControls)
     Private bFirstLoad As Boolean = True
@@ -25,6 +27,7 @@ Public Class ucrLayerParameters
             bFirstLoad = False
         End If
     End Sub
+
     Private Sub InitialiseControl()
         If lstLayerParameterControl.Count = 0 Then
             lstLayerParameterControl.AddRange({UcrLayerParamsControls1, UcrLayerParamsControls2, UcrLayerParamsControls3, UcrLayerParamsControls4, UcrLayerParamsControls5, UcrLayerParamsControls6, UcrLayerParamsControls7, UcrLayerParamsControls8, UcrLayerParamsControls9, UcrLayerParamsControls10, UcrLayerParamsControls11, UcrLayerParamsControls12})
@@ -32,6 +35,10 @@ Public Class ucrLayerParameters
                 lstLayerParameterControl(i).SetGeomFunction(clsGeomFunction)
             Next
         End If
+    End Sub
+
+    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1)
+        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms)
     End Sub
 
     Public Sub SetLayerParameters()
@@ -58,6 +65,10 @@ Public Class ucrLayerParameters
     End Sub
 
     Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub UcrLayerParamsControls_RParameterChanged(ucrControl As ucrLayerParamsControls) Handles UcrLayerParamsControls1.RParameterChanged, UcrLayerParamsControls2.RParameterChanged, UcrLayerParamsControls3.RParameterChanged, UcrLayerParamsControls4.RParameterChanged, UcrLayerParamsControls5.RParameterChanged, UcrLayerParamsControls6.RParameterChanged, UcrLayerParamsControls7.RParameterChanged, UcrLayerParamsControls8.RParameterChanged, UcrLayerParamsControls9.RParameterChanged, UcrLayerParamsControls10.RParameterChanged, UcrLayerParamsControls11.RParameterChanged, UcrLayerParamsControls12.RParameterChanged
 
     End Sub
 End Class

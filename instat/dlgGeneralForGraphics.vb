@@ -20,7 +20,7 @@ Public Class dlgGeneralForGraphics
     Private lstLayerComplete As New List(Of Boolean)
     Private iLayerIndex As Integer
     Private WithEvents clsGgplotAesFunction As New RFunction
-    Private strGgplotDataFrame As String = ""
+    Private strGlobalDataFrame As String = ""
     Public bDataFrameSet As Boolean = False
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -49,6 +49,12 @@ Public Class dlgGeneralForGraphics
         lstLayers.Clear()
         lstLayerComplete.Clear()
         SetEditDeleteEnabled()
+        strGlobalDataFrame = ""
+        clsRggplotFunction.ClearParameters()
+        clsGgplotAesFunction.ClearParameters()
+        If ucrBase.clsRsyntax.clsBaseOperator IsNot Nothing Then
+            ucrBase.clsRsyntax.clsBaseOperator.RemoveAllAdditionalParameters()
+        End If
     End Sub
 
     Private Sub ReopenDialog()
@@ -60,10 +66,9 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
-        Dim clsNewGeomFunction As New RFunction
-
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsNewGeomFunction, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGgplotDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0)
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0)
         sdgLayerOptions.ShowDialog()
+        strGlobalDataFrame = sdgLayerOptions.strGlobalDataFrame
         AddLayers()
     End Sub
 
@@ -86,7 +91,7 @@ Public Class dlgGeneralForGraphics
         Else
             lstLayers.Items(lstLayers.Items.IndexOf(lviLayer)).ForeColor = Color.Red
         End If
-        ucrBase.clsRsyntax.SetOperatorParameter(False, strParameterName:=strLayerName, clsRFunc:=sdgLayerOptions.clsGeomFunction.Clone)
+        ucrBase.clsRsyntax.SetOperatorParameter(False, strParameterName:=strLayerName, clsRFunc:=sdgLayerOptions.clsGeomFunction.Clone())
         TestOKEnabled()
     End Sub
 
@@ -116,12 +121,21 @@ Public Class dlgGeneralForGraphics
     Private Sub SetEditDeleteEnabled()
         If lstLayers.SelectedItems.Count = 1 Then
             cmdDelete.Enabled = True
-            'Edit disabled for now
-            'cmdEdit.Enabled = True
+            cmdEdit.Enabled = True
         Else
             cmdDelete.Enabled = False
             cmdEdit.Enabled = False
         End If
+    End Sub
+
+    Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
+        Dim clsSelectedGeom As RFunction
+
+        clsSelectedGeom = ucrBase.clsRsyntax.GetParameter(lstLayers.SelectedItems(0).Text).clsArgumentFunction
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0)
+        sdgLayerOptions.ShowDialog()
+        AddLayers()
+
     End Sub
 
     'Private Sub clsGgplotAesFunction_ParametersChanged() Handles clsGgplotAesFunction.ParametersChanged
