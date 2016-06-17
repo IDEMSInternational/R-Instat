@@ -83,6 +83,7 @@ Public Class ucrReceiverMultiple
             Next
         End If
         RaiseEvent SelectionChanged()
+        MyBase.RemoveSelected()
     End Sub
 
     Public Overrides Sub Clear()
@@ -109,12 +110,18 @@ Public Class ucrReceiverMultiple
         Dim clsGetVariablesFunc As New RFunction
         Dim lstCurrDataFrames As List(Of String)
         Dim strCurrDataFrame As String
+        Dim strCurrentType As String
         lstCurrDataFrames = GetDataFrameNames()
 
         If lstCurrDataFrames.Count = 1 Then
             strCurrDataFrame = lstCurrDataFrames(0)
             clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strCurrDataFrame & Chr(34))
-            Select Case strType
+            If bTypeSet Then
+                strCurrentType = strType
+            Else
+                strCurrentType = Selector.GetItemType()
+            End If
+            Select Case strCurrentType
                 Case "column"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
                     clsGetVariablesFunc.AddParameter("col_names", GetVariableNames())
@@ -137,6 +144,15 @@ Public Class ucrReceiverMultiple
                 Case "filter"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
                     clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
+                Case "object"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+                    clsGetVariablesFunc.AddParameter("object_name", GetVariableNames())
+                Case "graph"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+                    clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
+                Case "model"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
+                    clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
             End Select
             'TODO make this an option set in Options menu
             'clsRSyntax.SetAssignTo(MakeValidRString(strCurrDataFrame) & "_temp", clsFunction:=clsGetVariablesFunc)
@@ -196,6 +212,20 @@ Public Class ucrReceiverMultiple
         End If
 
         Return strTemp
+    End Function
+
+    Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True) As String()
+        Dim lstItems As String()
+
+        ReDim lstItems(0 To lstSelectedVariables.Items.Count - 1)
+        For i = 0 To lstSelectedVariables.Items.Count - 1
+            If bWithQuotes Then
+                lstItems(i) = Chr(34) & lstSelectedVariables.Items(i).Text & Chr(34)
+            Else
+                lstItems(i) = lstSelectedVariables.Items(i).Text
+            End If
+        Next
+        Return lstItems
     End Function
 
     Public Function GetVariableNamesAsList() As List(Of String)

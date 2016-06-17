@@ -50,6 +50,7 @@ Public Class ucrInputComboBox
 
     Private Sub FillItemTypes()
         Dim strItems As String()
+
         Select Case strItemsType
             Case "Columns"
                 If ucrDataFrameSelector IsNot Nothing Then
@@ -58,7 +59,13 @@ Public Class ucrInputComboBox
             Case "Data Frames"
             Case "Models"
                 cboInput.Items.Add(frmMain.clsRLink.GetModelNames().ToArray)
+
             Case "Graphs"
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
+                End If
+
             Case "Filters"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
@@ -98,7 +105,10 @@ Public Class ucrInputComboBox
         Return cboInput.Text
     End Function
 
-    Public Sub AddItems(strItems As String())
+    Public Sub SetItems(strItems As String(), Optional bClearExisting As Boolean = True)
+        If bClearExisting Then
+            cboInput.Items.Clear()
+        End If
         cboInput.Items.AddRange(strItems)
     End Sub
 
@@ -120,5 +130,11 @@ Public Class ucrInputComboBox
 
     Private Sub cboInput_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboInput.SelectedIndexChanged
         OnNameChanged()
+    End Sub
+
+    Private Sub ucrInputComboBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
+        'If bIsReadOnly Then
+        '    e.Handled = True
+        'End If
     End Sub
 End Class

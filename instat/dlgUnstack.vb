@@ -83,7 +83,7 @@ Public Class dlgUnstack
 
     Private Sub ucrFactorToUnstackReceiver_SelectionChanged() Handles ucrFactorToUnstackReceiver.SelectionChanged
         If Not ucrFactorToUnstackReceiver.IsEmpty Then
-            clsFormula.SetParameter(False, ucrFactorToUnstackReceiver.GetVariableNames(False))
+            clsFormula.SetParameter(False, strValue:=ucrFactorToUnstackReceiver.GetVariableNames(False))
         Else
             clsFormula.RemoveParameter(False)
         End If
@@ -138,9 +138,9 @@ Public Class dlgUnstack
         lstColumns = ucrIDColumns.GetVariableNamesAsList()
         For i = 0 To lstColumns.Count - 1
             If i = 0 Then
-                clsIDColumns.SetParameter(True, lstColumns(i))
+                clsIDColumns.SetParameter(True, strValue:=lstColumns(i))
             ElseIf i = 1 Then
-                clsIDColumns.SetParameter(False, lstColumns(i))
+                clsIDColumns.SetParameter(False, strValue:=lstColumns(i))
             Else
                 clsIDColumns.AddAdditionalParameter("X" & i, lstColumns(i))
             End If
