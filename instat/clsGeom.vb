@@ -47,6 +47,18 @@ Public Class Geoms
 
         clsLayerParameters.Add(NewLayerParameter)
     End Sub
+
+    Public ReadOnly Property iNumMandatoryAes As Integer
+        Get
+            Dim iCount As Integer = 0
+            For Each clsParam In clsAesParameters
+                If clsParam.bIsMandatory Then
+                    iCount = iCount + 1
+                End If
+            Next
+            Return iCount
+        End Get
+    End Property
 End Class
 
 Public Class AesParameters
