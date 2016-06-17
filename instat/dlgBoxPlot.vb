@@ -77,8 +77,11 @@ Public Class dlgBoxplot
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
         ucrVariablesAsFactorForBoxplot.SetIncludedDataType({"numeric"})
 
-        ucrSaveBoxplot.strPrefix = "graph"
 
+        ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
+        ucrSaveBoxplot.strPrefix = "Graph"
+        ucrSaveBoxplot.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveBoxplot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -138,9 +141,13 @@ Public Class dlgBoxplot
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSaveBoxplot_GraphNameChanged() Handles ucrSaveBoxplot.GraphNameChanged
-        ucrBase.clsRsyntax.SetAssignTo(ucrSaveBoxplot.strGraphName, strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveBoxplot.strGraphName)
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+    Private Sub ucrSaveBoxplot_GraphNameChanged() Handles ucrSaveBoxplot.GraphNameChanged, ucrSaveBoxplot.SaveGraphCheckedChanged
+        If ucrSaveBoxplot.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveBoxplot.strGraphName, strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveBoxplot.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
     End Sub
-
 End Class
