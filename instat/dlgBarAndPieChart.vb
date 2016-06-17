@@ -39,9 +39,10 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.Focus()
         ucrFactorReceiver.SetMeAsReceiver()
+        'TODO These will be replaced by sdgLayerOptions
         'set subdialog defaults
         'sdgBarChart.SetDefaults()
-        sdgPieChartOptions.SetDefaults()
+        'sdgPieChartOptions.SetDefaults()
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetOperation("+")
@@ -136,11 +137,11 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
-        sdgBarChart.ShowDialog()
+        sdgLayerOptions.ShowDialog()
     End Sub
 
     Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
-        sdgPieChartOptions.ShowDialog()
+        sdgLayerOptions.ShowDialog()
     End Sub
 
     Private Sub ucrSaveBar_GraphNameChanged() Handles ucrSaveBar.GraphNameChanged, ucrSaveBar.SaveGraphCheckedChanged
