@@ -71,7 +71,6 @@ Public Class dlgBoxplot
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
         'sdgLayerOptions.SetGeomFunction(clsRgeom_boxplotFunction)
         'sdgLayerOptions.SetAesFunction(clsRaesFunction
-        sdgLayerOptions.SetupLayer(clsRgeom_boxplotFunction, clsRaesFunction, True, True, strDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
