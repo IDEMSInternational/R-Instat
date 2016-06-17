@@ -62,7 +62,7 @@ Public Class dlgGeneralForGraphics
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
         Dim clsNewGeomFunction As New RFunction
 
-        sdgLayerOptions.SetupLayer(clsTempGeomFunc:=clsNewGeomFunction, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGgplotDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0, bFixDataFrame:=lstLayers.Items.Count > 0)
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsNewGeomFunction, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGgplotDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0)
         sdgLayerOptions.ShowDialog()
         AddLayers()
     End Sub
@@ -70,14 +70,6 @@ Public Class dlgGeneralForGraphics
     Public Sub AddLayers()
         Dim lviLayer As ListViewItem
         Dim strLayerName As String
-
-        If Not bDataFrameSet AndAlso sdgLayerOptions.ucrGeomWithAes.chkApplyOnAllLayers.Checked Then
-            strGgplotDataFrame = sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-            sdgLayerOptions.strGgplotDataFrame = strGgplotDataFrame
-            clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
-            bDataFrameSet = True
-            sdgLayerOptions.bDataFrameSet = True
-        End If
 
         iLayerIndex = iLayerIndex + 1
         strLayerName = iLayerIndex & "." & sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem
@@ -132,11 +124,11 @@ Public Class dlgGeneralForGraphics
         End If
     End Sub
 
-    Private Sub clsGgplotAesFunction_ParametersChanged() Handles clsGgplotAesFunction.ParametersChanged
-        If clsGgplotAesFunction.iParameterCount > 0 Then
-            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
-        Else
-            clsRggplotFunction.RemoveParameterByName("mapping")
-        End If
-    End Sub
+    'Private Sub clsGgplotAesFunction_ParametersChanged() Handles clsGgplotAesFunction.ParametersChanged
+    '    If clsGgplotAesFunction.iParameterCount > 0 Then
+    '        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
+    '    Else
+    '        clsRggplotFunction.RemoveParameterByName("mapping")
+    '    End If
+    'End Sub
 End Class

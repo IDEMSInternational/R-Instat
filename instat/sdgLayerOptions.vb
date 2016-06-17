@@ -15,13 +15,12 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgLayerOptions
-    Public clsRsyntax As RSyntax
     Public clsGeomFunction As New RFunction
     Public clsAesFunction As New RFunction
+    Public clsGgplotFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public bAesInGeom As Boolean
-    Public strGgplotDataFrame As String = ""
-    Public bDataFrameSet As Boolean = False
+    Public strGlobalDataFrame As String = ""
 
     Public Sub New()
         ' This call is required by the designer.
@@ -54,18 +53,16 @@ Public Class sdgLayerOptions
 
     End Sub
 
-    Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
-        clsRsyntax = clsRSyntaxIn
+    Public Sub SetRSyntax(clsRSyntax As RSyntax)
+
     End Sub
 
-    Public Sub SetupLayer(clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional bFixDataFrame As Boolean = True)
+    Public Sub SetupLayer(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True)
         clsGeomFunction = clsTempGeomFunc
         clsAesFunction = clsTempAesFunc
-        ucrGeomWithAes.Setup(clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, bFixDataFrame)
-        If bFixAes Then
-            bAesInGeom = False
-            'disable check boxs
-        End If
+        clsGgplotFunction = clsTempGgPlot
+        ucrGeomWithAes.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes)
+        ucrLayerParameter.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes)
     End Sub
 
     Public Function TestForOKEnabled() As Boolean
@@ -78,12 +75,13 @@ Public Class sdgLayerOptions
                 clsAesFunction.AddParameter(clsParam)
             Next
             clsGeomFunction.RemoveParameterByName("mapping")
-            If bDataFrameSet AndAlso ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> strGgplotDataFrame Then
-                clsGeomFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
-            End If
-            strGgplotDataFrame = ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+            clsGeomFunction.RemoveParameterByName("data")
+            clsGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction)
+            clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
+            strGlobalDataFrame = ucrGeomWithAes.strGlobalDataFrame
         Else
-            clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=ucrGeomWithAes.clsGeomAesFunction)
+            clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=ucrGeomWithAes.clsGeomAesFunction.Clone())
+            clsGeomFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
         End If
     End Sub
 End Class
