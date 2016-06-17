@@ -59,6 +59,8 @@ Public Class dlgSummaryBarOrPieChart
 
         ucrSaveSummaryBar.SetDataFrameSelector(ucrSummarybarSelector.ucrAvailableDataFrames)
         ucrSaveSummaryBar.strPrefix = "Graph"
+        ucrSaveSummaryBar.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveSummaryBar.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
     Private Sub SetDefaults()
         ucrSummarybarSelector.Reset()
