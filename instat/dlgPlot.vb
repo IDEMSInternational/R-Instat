@@ -69,6 +69,8 @@ Public Class dlgPlot
         ucrVariablesAsFactorForLinePlot.SetSelector(ucrLinePlotSelector)
         ucrVariablesAsFactorForLinePlot.SetIncludedDataType({"numeric"})
 
+        ucrSaveLinePlot.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
+        ucrSaveLinePlot.strPrefix = "Graph"
     End Sub
     Private Sub TeskOkEnabled()
         If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactorForLinePlot.IsEmpty() Then
@@ -125,5 +127,15 @@ Public Class dlgPlot
             clsRaesFunction.RemoveParameterByName("y")
         End If
         TeskOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveLinePlot_GraphNameChanged() Handles ucrSaveLinePlot.GraphNameChanged, ucrSaveLinePlot.SaveGraphCheckedChanged
+        If ucrSaveLinePlot.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveLinePlot.strGraphName, strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveLinePlot.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
     End Sub
 End Class

@@ -94,9 +94,9 @@ Partial Class dlgTransform
         Me.grpCalculatedTransformations.Controls.Add(Me.grpCircularTransformations)
         Me.grpCalculatedTransformations.Controls.Add(Me.grpNonNegativeTransformations)
         Me.grpCalculatedTransformations.Controls.Add(Me.grpTypeofdata)
-        Me.grpCalculatedTransformations.Location = New System.Drawing.Point(18, 149)
+        Me.grpCalculatedTransformations.Location = New System.Drawing.Point(10, 183)
         Me.grpCalculatedTransformations.Name = "grpCalculatedTransformations"
-        Me.grpCalculatedTransformations.Size = New System.Drawing.Size(292, 187)
+        Me.grpCalculatedTransformations.Size = New System.Drawing.Size(292, 198)
         Me.grpCalculatedTransformations.TabIndex = 3
         Me.grpCalculatedTransformations.TabStop = False
         Me.grpCalculatedTransformations.Tag = "Calculated_Transformations"
@@ -110,9 +110,9 @@ Partial Class dlgTransform
         Me.grpPercentageTransformations.Controls.Add(Me.txtAdjustment)
         Me.grpPercentageTransformations.Controls.Add(Me.rdoLogit)
         Me.grpPercentageTransformations.Controls.Add(Me.rdoAngular)
-        Me.grpPercentageTransformations.Location = New System.Drawing.Point(3, 75)
+        Me.grpPercentageTransformations.Location = New System.Drawing.Point(5, 98)
         Me.grpPercentageTransformations.Name = "grpPercentageTransformations"
-        Me.grpPercentageTransformations.Size = New System.Drawing.Size(259, 74)
+        Me.grpPercentageTransformations.Size = New System.Drawing.Size(257, 81)
         Me.grpPercentageTransformations.TabIndex = 12
         Me.grpPercentageTransformations.TabStop = False
         '
@@ -129,7 +129,7 @@ Partial Class dlgTransform
         'rdoProbit
         '
         Me.rdoProbit.AutoSize = True
-        Me.rdoProbit.Location = New System.Drawing.Point(6, 51)
+        Me.rdoProbit.Location = New System.Drawing.Point(6, 59)
         Me.rdoProbit.Name = "rdoProbit"
         Me.rdoProbit.Size = New System.Drawing.Size(52, 17)
         Me.rdoProbit.TabIndex = 9
@@ -159,7 +159,7 @@ Partial Class dlgTransform
         'rdoLogit
         '
         Me.rdoLogit.AutoSize = True
-        Me.rdoLogit.Location = New System.Drawing.Point(6, 30)
+        Me.rdoLogit.Location = New System.Drawing.Point(6, 35)
         Me.rdoLogit.Name = "rdoLogit"
         Me.rdoLogit.Size = New System.Drawing.Size(48, 17)
         Me.rdoLogit.TabIndex = 2
@@ -171,7 +171,7 @@ Partial Class dlgTransform
         'rdoAngular
         '
         Me.rdoAngular.AutoSize = True
-        Me.rdoAngular.Location = New System.Drawing.Point(6, 9)
+        Me.rdoAngular.Location = New System.Drawing.Point(6, 11)
         Me.rdoAngular.Name = "rdoAngular"
         Me.rdoAngular.Size = New System.Drawing.Size(61, 17)
         Me.rdoAngular.TabIndex = 1
@@ -183,7 +183,7 @@ Partial Class dlgTransform
         'chkInverse
         '
         Me.chkInverse.AutoSize = True
-        Me.chkInverse.Location = New System.Drawing.Point(6, 166)
+        Me.chkInverse.Location = New System.Drawing.Point(6, 175)
         Me.chkInverse.Name = "chkInverse"
         Me.chkInverse.Size = New System.Drawing.Size(61, 17)
         Me.chkInverse.TabIndex = 2
@@ -199,9 +199,9 @@ Partial Class dlgTransform
         Me.grpCircularTransformations.Controls.Add(Me.lblCycleLength)
         Me.grpCircularTransformations.Controls.Add(Me.rdoCosine)
         Me.grpCircularTransformations.Controls.Add(Me.rdoSine)
-        Me.grpCircularTransformations.Location = New System.Drawing.Point(3, 81)
+        Me.grpCircularTransformations.Location = New System.Drawing.Point(5, 92)
         Me.grpCircularTransformations.Name = "grpCircularTransformations"
-        Me.grpCircularTransformations.Size = New System.Drawing.Size(253, 85)
+        Me.grpCircularTransformations.Size = New System.Drawing.Size(257, 81)
         Me.grpCircularTransformations.TabIndex = 11
         Me.grpCircularTransformations.TabStop = False
         '
@@ -277,16 +277,16 @@ Partial Class dlgTransform
         Me.grpNonNegativeTransformations.Controls.Add(Me.rdoLogBase10)
         Me.grpNonNegativeTransformations.Controls.Add(Me.rdoNaturalLog)
         Me.grpNonNegativeTransformations.Controls.Add(Me.rdoSquareRoot)
-        Me.grpNonNegativeTransformations.Location = New System.Drawing.Point(6, 74)
+        Me.grpNonNegativeTransformations.Location = New System.Drawing.Point(6, 90)
         Me.grpNonNegativeTransformations.Name = "grpNonNegativeTransformations"
-        Me.grpNonNegativeTransformations.Size = New System.Drawing.Size(257, 86)
+        Me.grpNonNegativeTransformations.Size = New System.Drawing.Size(257, 81)
         Me.grpNonNegativeTransformations.TabIndex = 1
         Me.grpNonNegativeTransformations.TabStop = False
         '
         'lblConstant
         '
         Me.lblConstant.AutoSize = True
-        Me.lblConstant.Location = New System.Drawing.Point(170, 30)
+        Me.lblConstant.Location = New System.Drawing.Point(170, 37)
         Me.lblConstant.Name = "lblConstant"
         Me.lblConstant.Size = New System.Drawing.Size(49, 13)
         Me.lblConstant.TabIndex = 8
@@ -296,7 +296,7 @@ Partial Class dlgTransform
         'lblPowerValue
         '
         Me.lblPowerValue.AutoSize = True
-        Me.lblPowerValue.Location = New System.Drawing.Point(152, 55)
+        Me.lblPowerValue.Location = New System.Drawing.Point(152, 60)
         Me.lblPowerValue.Name = "lblPowerValue"
         Me.lblPowerValue.Size = New System.Drawing.Size(67, 13)
         Me.lblPowerValue.TabIndex = 7
@@ -305,7 +305,7 @@ Partial Class dlgTransform
         '
         'txtPowerValue
         '
-        Me.txtPowerValue.Location = New System.Drawing.Point(225, 52)
+        Me.txtPowerValue.Location = New System.Drawing.Point(225, 56)
         Me.txtPowerValue.Name = "txtPowerValue"
         Me.txtPowerValue.Size = New System.Drawing.Size(25, 20)
         Me.txtPowerValue.TabIndex = 6
@@ -314,7 +314,7 @@ Partial Class dlgTransform
         'lblZeroAdjustment
         '
         Me.lblZeroAdjustment.AutoSize = True
-        Me.lblZeroAdjustment.Location = New System.Drawing.Point(134, 30)
+        Me.lblZeroAdjustment.Location = New System.Drawing.Point(134, 37)
         Me.lblZeroAdjustment.Name = "lblZeroAdjustment"
         Me.lblZeroAdjustment.Size = New System.Drawing.Size(84, 13)
         Me.lblZeroAdjustment.TabIndex = 5
@@ -323,7 +323,7 @@ Partial Class dlgTransform
         '
         'txtValue
         '
-        Me.txtValue.Location = New System.Drawing.Point(225, 26)
+        Me.txtValue.Location = New System.Drawing.Point(225, 33)
         Me.txtValue.Name = "txtValue"
         Me.txtValue.Size = New System.Drawing.Size(25, 20)
         Me.txtValue.TabIndex = 4
@@ -332,7 +332,7 @@ Partial Class dlgTransform
         'rdoPower
         '
         Me.rdoPower.AutoSize = True
-        Me.rdoPower.Location = New System.Drawing.Point(6, 65)
+        Me.rdoPower.Location = New System.Drawing.Point(195, 12)
         Me.rdoPower.Name = "rdoPower"
         Me.rdoPower.Size = New System.Drawing.Size(55, 17)
         Me.rdoPower.TabIndex = 3
@@ -344,7 +344,7 @@ Partial Class dlgTransform
         'rdoLogBase10
         '
         Me.rdoLogBase10.AutoSize = True
-        Me.rdoLogBase10.Location = New System.Drawing.Point(6, 47)
+        Me.rdoLogBase10.Location = New System.Drawing.Point(6, 58)
         Me.rdoLogBase10.Name = "rdoLogBase10"
         Me.rdoLogBase10.Size = New System.Drawing.Size(85, 17)
         Me.rdoLogBase10.TabIndex = 2
@@ -356,7 +356,7 @@ Partial Class dlgTransform
         'rdoNaturalLog
         '
         Me.rdoNaturalLog.AutoSize = True
-        Me.rdoNaturalLog.Location = New System.Drawing.Point(6, 29)
+        Me.rdoNaturalLog.Location = New System.Drawing.Point(6, 36)
         Me.rdoNaturalLog.Name = "rdoNaturalLog"
         Me.rdoNaturalLog.Size = New System.Drawing.Size(80, 17)
         Me.rdoNaturalLog.TabIndex = 1
@@ -368,7 +368,7 @@ Partial Class dlgTransform
         'rdoSquareRoot
         '
         Me.rdoSquareRoot.AutoSize = True
-        Me.rdoSquareRoot.Location = New System.Drawing.Point(6, 10)
+        Me.rdoSquareRoot.Location = New System.Drawing.Point(6, 12)
         Me.rdoSquareRoot.Name = "rdoSquareRoot"
         Me.rdoSquareRoot.Size = New System.Drawing.Size(80, 17)
         Me.rdoSquareRoot.TabIndex = 0
@@ -383,9 +383,9 @@ Partial Class dlgTransform
         Me.grpTypeofdata.Controls.Add(Me.rdoPercentage)
         Me.grpTypeofdata.Controls.Add(Me.rdoCircular)
         Me.grpTypeofdata.Controls.Add(Me.rdoNonNegative)
-        Me.grpTypeofdata.Location = New System.Drawing.Point(5, 16)
+        Me.grpTypeofdata.Location = New System.Drawing.Point(5, 20)
         Me.grpTypeofdata.Name = "grpTypeofdata"
-        Me.grpTypeofdata.Size = New System.Drawing.Size(260, 59)
+        Me.grpTypeofdata.Size = New System.Drawing.Size(260, 70)
         Me.grpTypeofdata.TabIndex = 0
         Me.grpTypeofdata.TabStop = False
         Me.grpTypeofdata.Tag = "Type_of_data"
@@ -394,7 +394,7 @@ Partial Class dlgTransform
         'rdoProportion
         '
         Me.rdoProportion.AutoSize = True
-        Me.rdoProportion.Location = New System.Drawing.Point(128, 35)
+        Me.rdoProportion.Location = New System.Drawing.Point(128, 41)
         Me.rdoProportion.Name = "rdoProportion"
         Me.rdoProportion.Size = New System.Drawing.Size(73, 17)
         Me.rdoProportion.TabIndex = 3
@@ -406,7 +406,7 @@ Partial Class dlgTransform
         'rdoPercentage
         '
         Me.rdoPercentage.AutoSize = True
-        Me.rdoPercentage.Location = New System.Drawing.Point(128, 19)
+        Me.rdoPercentage.Location = New System.Drawing.Point(128, 17)
         Me.rdoPercentage.Name = "rdoPercentage"
         Me.rdoPercentage.Size = New System.Drawing.Size(80, 17)
         Me.rdoPercentage.TabIndex = 2
@@ -418,7 +418,7 @@ Partial Class dlgTransform
         'rdoCircular
         '
         Me.rdoCircular.AutoSize = True
-        Me.rdoCircular.Location = New System.Drawing.Point(7, 35)
+        Me.rdoCircular.Location = New System.Drawing.Point(7, 41)
         Me.rdoCircular.Name = "rdoCircular"
         Me.rdoCircular.Size = New System.Drawing.Size(60, 17)
         Me.rdoCircular.TabIndex = 1
@@ -430,7 +430,7 @@ Partial Class dlgTransform
         'rdoNonNegative
         '
         Me.rdoNonNegative.AutoSize = True
-        Me.rdoNonNegative.Location = New System.Drawing.Point(7, 19)
+        Me.rdoNonNegative.Location = New System.Drawing.Point(7, 17)
         Me.rdoNonNegative.Name = "rdoNonNegative"
         Me.rdoNonNegative.Size = New System.Drawing.Size(91, 17)
         Me.rdoNonNegative.TabIndex = 0
@@ -443,9 +443,9 @@ Partial Class dlgTransform
         '
         Me.grpTransformationType.Controls.Add(Me.rdoOtherTransformations)
         Me.grpTransformationType.Controls.Add(Me.rdoCommonTransformations)
-        Me.grpTransformationType.Location = New System.Drawing.Point(12, -9)
+        Me.grpTransformationType.Location = New System.Drawing.Point(10, 0)
         Me.grpTransformationType.Name = "grpTransformationType"
-        Me.grpTransformationType.Size = New System.Drawing.Size(389, 32)
+        Me.grpTransformationType.Size = New System.Drawing.Size(389, 42)
         Me.grpTransformationType.TabIndex = 4
         Me.grpTransformationType.TabStop = False
         '
@@ -476,7 +476,7 @@ Partial Class dlgTransform
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(251, 29)
+        Me.lblFrom.Location = New System.Drawing.Point(255, 65)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(30, 13)
         Me.lblFrom.TabIndex = 5
@@ -486,7 +486,7 @@ Partial Class dlgTransform
         'lblInto
         '
         Me.lblInto.AutoSize = True
-        Me.lblInto.Location = New System.Drawing.Point(251, 77)
+        Me.lblInto.Location = New System.Drawing.Point(255, 102)
         Me.lblInto.Name = "lblInto"
         Me.lblInto.Size = New System.Drawing.Size(25, 13)
         Me.lblInto.TabIndex = 6
@@ -495,14 +495,14 @@ Partial Class dlgTransform
         '
         'txtInto
         '
-        Me.txtInto.Location = New System.Drawing.Point(287, 74)
+        Me.txtInto.Location = New System.Drawing.Point(292, 99)
         Me.txtInto.Name = "txtInto"
         Me.txtInto.Size = New System.Drawing.Size(105, 20)
         Me.txtInto.TabIndex = 7
         '
         'cmdPreview
         '
-        Me.cmdPreview.Location = New System.Drawing.Point(15, 342)
+        Me.cmdPreview.Location = New System.Drawing.Point(10, 392)
         Me.cmdPreview.Name = "cmdPreview"
         Me.cmdPreview.Size = New System.Drawing.Size(75, 23)
         Me.cmdPreview.TabIndex = 8
@@ -513,7 +513,7 @@ Partial Class dlgTransform
         'cboPreview
         '
         Me.cboPreview.FormattingEnabled = True
-        Me.cboPreview.Location = New System.Drawing.Point(108, 342)
+        Me.cboPreview.Location = New System.Drawing.Point(95, 394)
         Me.cboPreview.Name = "cboPreview"
         Me.cboPreview.Size = New System.Drawing.Size(280, 21)
         Me.cboPreview.TabIndex = 9
@@ -522,9 +522,9 @@ Partial Class dlgTransform
         '
         Me.grpOtherTransformations.Controls.Add(Me.grpLag)
         Me.grpOtherTransformations.Controls.Add(Me.grpTransformationsOther)
-        Me.grpOtherTransformations.Location = New System.Drawing.Point(15, 152)
+        Me.grpOtherTransformations.Location = New System.Drawing.Point(10, 183)
         Me.grpOtherTransformations.Name = "grpOtherTransformations"
-        Me.grpOtherTransformations.Size = New System.Drawing.Size(271, 187)
+        Me.grpOtherTransformations.Size = New System.Drawing.Size(292, 179)
         Me.grpOtherTransformations.TabIndex = 10
         Me.grpOtherTransformations.TabStop = False
         Me.grpOtherTransformations.Tag = "Other_Transformations"
@@ -569,16 +569,16 @@ Partial Class dlgTransform
         Me.grpTransformationsOther.Controls.Add(Me.rdoNormalScore)
         Me.grpTransformationsOther.Controls.Add(Me.rdoSort)
         Me.grpTransformationsOther.Controls.Add(Me.rdoRank)
-        Me.grpTransformationsOther.Location = New System.Drawing.Point(6, 19)
+        Me.grpTransformationsOther.Location = New System.Drawing.Point(6, 14)
         Me.grpTransformationsOther.Name = "grpTransformationsOther"
-        Me.grpTransformationsOther.Size = New System.Drawing.Size(114, 141)
+        Me.grpTransformationsOther.Size = New System.Drawing.Size(114, 157)
         Me.grpTransformationsOther.TabIndex = 1
         Me.grpTransformationsOther.TabStop = False
         '
         'rdoDifference
         '
         Me.rdoDifference.AutoSize = True
-        Me.rdoDifference.Location = New System.Drawing.Point(6, 120)
+        Me.rdoDifference.Location = New System.Drawing.Point(6, 135)
         Me.rdoDifference.Name = "rdoDifference"
         Me.rdoDifference.Size = New System.Drawing.Size(74, 17)
         Me.rdoDifference.TabIndex = 5
@@ -590,7 +590,7 @@ Partial Class dlgTransform
         'rdoLag
         '
         Me.rdoLag.AutoSize = True
-        Me.rdoLag.Location = New System.Drawing.Point(6, 98)
+        Me.rdoLag.Location = New System.Drawing.Point(6, 110)
         Me.rdoLag.Name = "rdoLag"
         Me.rdoLag.Size = New System.Drawing.Size(43, 17)
         Me.rdoLag.TabIndex = 4
@@ -602,7 +602,7 @@ Partial Class dlgTransform
         'rdoStandardise
         '
         Me.rdoStandardise.AutoSize = True
-        Me.rdoStandardise.Location = New System.Drawing.Point(6, 76)
+        Me.rdoStandardise.Location = New System.Drawing.Point(6, 85)
         Me.rdoStandardise.Name = "rdoStandardise"
         Me.rdoStandardise.Size = New System.Drawing.Size(81, 17)
         Me.rdoStandardise.TabIndex = 3
@@ -614,7 +614,7 @@ Partial Class dlgTransform
         'rdoNormalScore
         '
         Me.rdoNormalScore.AutoSize = True
-        Me.rdoNormalScore.Location = New System.Drawing.Point(6, 54)
+        Me.rdoNormalScore.Location = New System.Drawing.Point(6, 60)
         Me.rdoNormalScore.Name = "rdoNormalScore"
         Me.rdoNormalScore.Size = New System.Drawing.Size(89, 17)
         Me.rdoNormalScore.TabIndex = 2
@@ -626,7 +626,7 @@ Partial Class dlgTransform
         'rdoSort
         '
         Me.rdoSort.AutoSize = True
-        Me.rdoSort.Location = New System.Drawing.Point(6, 32)
+        Me.rdoSort.Location = New System.Drawing.Point(6, 35)
         Me.rdoSort.Name = "rdoSort"
         Me.rdoSort.Size = New System.Drawing.Size(44, 17)
         Me.rdoSort.TabIndex = 1
@@ -649,30 +649,33 @@ Partial Class dlgTransform
         '
         'ucrAddRemove
         '
-        Me.ucrAddRemove.Location = New System.Drawing.Point(12, 19)
+        Me.ucrAddRemove.Location = New System.Drawing.Point(10, 48)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
         Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
         Me.ucrAddRemove.TabIndex = 2
         '
         'ucrReceiverFrom
         '
-        Me.ucrReceiverFrom.Location = New System.Drawing.Point(287, 29)
+        Me.ucrReceiverFrom.Location = New System.Drawing.Point(292, 65)
+        Me.ucrReceiverFrom.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFrom.Name = "ucrReceiverFrom"
+        Me.ucrReceiverFrom.Selector = Nothing
         Me.ucrReceiverFrom.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverFrom.TabIndex = 1
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 371)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 420)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 60)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgTransform
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(430, 428)
+        Me.ClientSize = New System.Drawing.Size(419, 474)
         Me.Controls.Add(Me.grpOtherTransformations)
         Me.Controls.Add(Me.cboPreview)
         Me.Controls.Add(Me.cmdPreview)

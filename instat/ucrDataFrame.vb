@@ -72,6 +72,17 @@ Public Class ucrDataFrame
         End If
     End Sub
 
+    Public Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True)
+        Dim Index As Integer
+
+        Index = cboAvailableDataFrames.Items.IndexOf(strDataframe)
+        If Index >= 0 Then
+            cboAvailableDataFrames.SelectedIndex = Index
+            cboAvailableDataFrames.Enabled = bEnableDataframe
+        End If
+
+    End Sub
+
     Public Sub SetIncludeOverall(bInclude As Boolean)
         bIncludeOverall = bInclude
         frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad, bIncludeOverall)
