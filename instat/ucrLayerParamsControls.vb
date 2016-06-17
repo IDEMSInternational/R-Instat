@@ -28,6 +28,7 @@ Public Class ucrLayerParamsControls
 
     Public Sub SetGeomFunction(clsTempFunction As RFunction)
         clsGeomFunction = clsTempFunction
+        RaiseEvent RParameterChanged(Me)
     End Sub
 
     Public Sub SetLayerParameter(clsTempLayerParam As LayerParameters)
@@ -42,7 +43,6 @@ Public Class ucrLayerParamsControls
             chkParamName.Text = clsLayerParam.strLayerParameterName
             chkParamName.Checked = False
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
-                nudParamValue.Value = clsLayerParam.strParameterDefaultValue
                 If clsLayerParam.lstParameterStrings.Count >= 1 Then
                     nudParamValue.DecimalPlaces = clsLayerParam.lstParameterStrings(0)
                 Else
@@ -56,17 +56,20 @@ Public Class ucrLayerParamsControls
                     nudParamValue.Minimum = Decimal.MinValue
                     nudParamValue.Maximum = Decimal.MaxValue
                 End If
+                If clsLayerParam.strParameterDefaultValue <> "" Then
+                    nudParamValue.Value = clsLayerParam.strParameterDefaultValue
+                End If
                 ctrActive = nudParamValue
             ElseIf clsLayerParam.strLayerParameterDataType = "boolean" Then
-                    ctrActive = ucrcborParamValue
-                    ucrcborParamValue.SetItems({"TRUE", "FALSE"})
-                ElseIf clsLayerParam.strLayerParameterDataType = "colour" Then
-                    ctrActive = ucrColor
-                ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
-                    ctrActive = ucrcborParamValue
-                    ucrcborParamValue.SetItems(clsLayerParam.lstParameterStrings)
-                Else
-                    ctrActive = New Control 'this should never actually be used but is here to ensure the code is stable even if a developper uses an incorrect datatype
+                ctrActive = ucrcborParamValue
+                ucrcborParamValue.SetItems({"TRUE", "FALSE"})
+            ElseIf clsLayerParam.strLayerParameterDataType = "colour" Then
+                ctrActive = ucrColor
+            ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
+                ctrActive = ucrcborParamValue
+                ucrcborParamValue.SetItems(clsLayerParam.lstParameterStrings)
+            Else
+                ctrActive = New Control 'this should never actually be used but is here to ensure the code is stable even if a developper uses an incorrect datatype
             End If
             ctrActive.Text = clsLayerParam.strParameterDefaultValue
         Else
@@ -88,8 +91,8 @@ Public Class ucrLayerParamsControls
     End Sub
 
     Private Sub ucrLayerParamsControls_RParameterChanged(ucrControl As ucrLayerParamsControls) Handles Me.RParameterChanged
-        If Not IsNothing(clsLayerParam) And Not IsNothing(clsGeomFunction) Then
-            If chkParamName.Checked Then
+        If Not IsNothing(clsLayerParam) AndAlso Not IsNothing(clsGeomFunction) Then
+            If chkParamName.Checked AndAlso ctrActive.Text <> "" Then
                 clsGeomFunction.AddParameter(clsLayerParam.strLayerParameterName, ctrActive.Text)
             Else
                 clsGeomFunction.RemoveParameterByName(clsLayerParam.strLayerParameterName)

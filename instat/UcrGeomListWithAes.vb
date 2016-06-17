@@ -27,6 +27,7 @@ Public Class UcrGeomListWithParameters
     Public Event DataFrameChanged()
     Public clsGeomAesFunction As RFunction
     Public bAddToLocalAes As Boolean = True
+    Public bCurrentFixAes As Boolean = True
 
     Public Sub New()
 
@@ -45,6 +46,7 @@ Public Class UcrGeomListWithParameters
             SetParameters()
             bFirstLoad = False
         End If
+        SetGlobalAes(bCurrentFixAes)
     End Sub
 
     Private Sub InitialiseControl()
@@ -64,7 +66,8 @@ Public Class UcrGeomListWithParameters
         MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms)
         strGlobalDataFrame = strDataframe
         UcrSelector.SetDataframe(strGlobalDataFrame, (Not bUseGlobalAes) OrElse strGlobalDataFrame = "")
-        SetGlobalAes(bFixAes)
+        bCurrentFixAes = bFixAes
+        SetGlobalAes(bCurrentFixAes)
         chkApplyOnAllLayers.Checked = bUseGlobalAes
     End Sub
 
@@ -187,7 +190,7 @@ Public Class UcrGeomListWithParameters
                 End If
             Next
         End If
-        SetGlobalAes()
+        SetGlobalAes(bCurrentFixAes)
     End Sub
 
     Public Sub UcrGeomListWithParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
