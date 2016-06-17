@@ -47,7 +47,7 @@ Public Class ucrGeom
         clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
     End Sub
 
-    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional bFixDataFrame As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1)
+    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1)
         Dim GeomCount As New Geoms
 
         cboGeomList.Items.Clear()
@@ -57,7 +57,7 @@ Public Class ucrGeom
             End If
         Next
         clsGeomFunction = clsTempGeomFunc
-        If cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand) = -1 Then
+        If clsGeomFunction.strRCommand = Nothing OrElse cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand) = -1 Then
             cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf("geom_boxplot")
         Else
             cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand)
