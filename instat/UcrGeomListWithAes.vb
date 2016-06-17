@@ -57,14 +57,27 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam1.SetMeAsReceiver()
     End Sub
 
-    Public Overrides Sub Setup(clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional bFixDataFrame As Boolean = True)
-        MyBase.Setup(clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, bFixDataFrame)
-        If strDataframe <> "" Then
-            UcrSelector.SetDataframe(strDataframe, Not bFixDataFrame)
-        End If
+    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional bFixDataFrame As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1)
+        Dim bFirstEnabled As Boolean = True
+
+        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, bFixDataFrame, iNumVariablesForGeoms)
+        strGlobalDataFrame = strDataframe
+        UcrSelector.SetDataframe(strGlobalDataFrame, (Not bUseGlobalAes) OrElse strGlobalDataFrame = "")
+        For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
+            lstAesParameterUcr(i).Enabled = True
+            For Each clsParam In clsGgplotAesFunction.clsParameters
+                If clsParam.strArgumentName = lstCurrArguments(i) Then
+                    lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
+                    lstAesParameterUcr(i).Enabled = Not bFixAes
+                    Exit For
+                End If
+            Next
+            If lstAesParameterUcr(i).Enabled AndAlso bFirstEnabled Then
+                lstAesParameterUcr(i).SetMeAsReceiver()
+                bFirstEnabled = False
+            End If
+        Next
         chkApplyOnAllLayers.Checked = bUseGlobalAes
-        chkAllowDataFrameChange.Visible = bFixDataFrame
-        chkAllowDataFrameChange.Checked = False
     End Sub
 
     Private Sub SetDefaults()
@@ -279,6 +292,7 @@ Public Class UcrGeomListWithParameters
         Else
             chkIgnoreGlobalAes.Show()
         End If
+        UcrSelector.SetDataframe(strGlobalDataFrame, (Not chkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
     End Sub
 
     Private Sub chkIgnoreGlobalAes_CheckedChanged(sender As Object, e As EventArgs) Handles chkIgnoreGlobalAes.CheckedChanged
@@ -290,7 +304,4 @@ Public Class UcrGeomListWithParameters
         End If
     End Sub
 
-    Private Sub chkAllowDataFrameChange_CheckedChanged(sender As Object, e As EventArgs) Handles chkAllowDataFrameChange.CheckedChanged
-        UcrSelector.SetDataframe(UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, chkAllowDataFrameChange.Checked)
-    End Sub
 End Class

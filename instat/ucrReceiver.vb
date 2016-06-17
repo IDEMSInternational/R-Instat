@@ -226,4 +226,17 @@ Public Class ucrReceiver
         bTypeSet = True
     End Sub
 
+    Public Sub Add(strItem As String)
+        Dim lviTemp As ListViewItem
+
+        For Each lviTemp In Selector.lstAvailableVariable.Items
+            If lviTemp.Text = strItem Then
+                Selector.lstAvailableVariable.SelectedItems.Clear()
+                lviTemp.Selected = True
+                AddSelected()
+                Selector.lstAvailableVariable.SelectedItems.Clear()
+                Exit For
+            End If
+        Next
+    End Sub
 End Class

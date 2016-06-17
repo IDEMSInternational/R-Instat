@@ -25,6 +25,7 @@ Public Class ucrGeom
     Public lstFunctionParameters As New List(Of RParameter)
     Private bFirstLoad As Boolean = True
     Public clsGgplotAesFunction As New RFunction
+    Public strGlobalDataFrame As String = ""
 
     Public Sub New()
 
@@ -46,17 +47,23 @@ Public Class ucrGeom
         clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
     End Sub
 
-    Public Overridable Sub Setup(clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional bFixDataFrame As Boolean = True)
+    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional bFixDataFrame As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1)
         Dim GeomCount As New Geoms
 
-        clsGeomFunction = clsTempGeomFunc
-        clsGgplotAesFunction = clsTempAesFunc
-        clsGgplotAesFunction.SetRCommand("aes")
         cboGeomList.Items.Clear()
         For Each GeomCount In lstAllGeoms
-            cboGeomList.Items.Add(GeomCount.strGeomName)
+            If iNumVariablesForGeoms <= GeomCount.iNumMandatoryAes Then
+                cboGeomList.Items.Add(GeomCount.strGeomName)
+            End If
         Next
-        cboGeomList.SelectedIndex = 0
+        clsGeomFunction = clsTempGeomFunc
+        If cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand) = -1 Then
+            cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf("geom_boxplot")
+        Else
+            cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand)
+        End If
+        clsGgplotAesFunction = clsTempAesFunc
+        clsGgplotAesFunction.SetRCommand("aes")
     End Sub
 
     Public Sub AddParameter(strAesParameterName As String, strAesParameterValue As String)

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class UcrGeomListWithParameters
     Inherits instat.ucrGeom
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class UcrGeomListWithParameters
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.UcrSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblAesList = New System.Windows.Forms.Label()
@@ -42,7 +42,6 @@ Partial Class UcrGeomListWithParameters
         Me.ucrReceiverParam6 = New instat.ucrReceiverSingle()
         Me.chkApplyOnAllLayers = New System.Windows.Forms.CheckBox()
         Me.chkIgnoreGlobalAes = New System.Windows.Forms.CheckBox()
-        Me.chkAllowDataFrameChange = New System.Windows.Forms.CheckBox()
         Me.grpAesList.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -271,19 +270,9 @@ Partial Class UcrGeomListWithParameters
         Me.chkIgnoreGlobalAes.Text = "Ignore Global Aesthetics"
         Me.chkIgnoreGlobalAes.UseVisualStyleBackColor = True
         '
-        'chkAllowDataFrameChange
-        '
-        Me.chkAllowDataFrameChange.Location = New System.Drawing.Point(129, 71)
-        Me.chkAllowDataFrameChange.Name = "chkAllowDataFrameChange"
-        Me.chkAllowDataFrameChange.Size = New System.Drawing.Size(112, 40)
-        Me.chkAllowDataFrameChange.TabIndex = 12
-        Me.chkAllowDataFrameChange.Text = "Allow Data Frame Change"
-        Me.chkAllowDataFrameChange.UseVisualStyleBackColor = True
-        '
         'UcrGeomListWithParameters
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.Controls.Add(Me.chkAllowDataFrameChange)
         Me.Controls.Add(Me.chkIgnoreGlobalAes)
         Me.Controls.Add(Me.chkApplyOnAllLayers)
         Me.Controls.Add(Me.grpAesList)
@@ -296,7 +285,6 @@ Partial Class UcrGeomListWithParameters
         Me.Controls.SetChildIndex(Me.grpAesList, 0)
         Me.Controls.SetChildIndex(Me.chkApplyOnAllLayers, 0)
         Me.Controls.SetChildIndex(Me.chkIgnoreGlobalAes, 0)
-        Me.Controls.SetChildIndex(Me.chkAllowDataFrameChange, 0)
         Me.grpAesList.ResumeLayout(False)
         Me.grpAesList.PerformLayout()
         Me.ResumeLayout(False)
@@ -326,5 +314,4 @@ Partial Class UcrGeomListWithParameters
     Friend WithEvents ucrReceiverParam8 As ucrReceiverSingle
     Friend WithEvents chkApplyOnAllLayers As CheckBox
     Friend WithEvents chkIgnoreGlobalAes As CheckBox
-    Friend WithEvents chkAllowDataFrameChange As CheckBox
 End Class
