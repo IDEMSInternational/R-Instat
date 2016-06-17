@@ -47,7 +47,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_summarybar)
 
         ucrYReceiver.Selector = ucrSummarybarSelector
-        ucrYReceiver.SetIncludedDataTypes({"nnumeric"})
+        ucrYReceiver.SetIncludedDataTypes({"numeric"})
         ucrFactorReceiver.Selector = ucrSummarybarSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
 
@@ -159,11 +159,11 @@ Public Class dlgSummaryBarOrPieChart
     End Sub
 
     Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
-        sdgBarChart.ShowDialog()
+        sdgLayerOptions.ShowDialog()
     End Sub
 
     Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
-        sdgPieChartOptions.ShowDialog()
+        sdgLayerOptions.ShowDialog()
     End Sub
 
     Private Sub ucrSaveSummaryBar_GraphNameChanged() Handles ucrSaveSummaryBar.GraphNameChanged, ucrSaveSummaryBar.SaveGraphCheckedChanged
