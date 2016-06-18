@@ -72,18 +72,20 @@ Public Class dlgGeneralForGraphics
         AddLayers()
     End Sub
 
-    Public Sub AddLayers()
+    Public Sub AddLayers(Optional lviCurrentItem As ListViewItem = Nothing)
         Dim lviLayer As ListViewItem
         Dim strLayerName As String
 
-        iLayerIndex = iLayerIndex + 1
-        strLayerName = iLayerIndex & "." & sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem
-        lviLayer = New ListViewItem(text:=strLayerName)
-        If lstLayers.Items.Contains(lviLayer) Then
-            lstLayerComplete(lstLayers.Items.IndexOf(lviLayer)) = sdgLayerOptions.TestForOKEnabled()
-        Else
+        If lviCurrentItem Is Nothing Then
+            iLayerIndex = iLayerIndex + 1
+            strLayerName = iLayerIndex & "." & sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem
+            lviLayer = New ListViewItem(text:=strLayerName)
             lstLayers.Items.Add(lviLayer)
             lstLayerComplete.Add(sdgLayerOptions.TestForOKEnabled())
+        Else
+            lviLayer = lviCurrentItem
+            lstLayerComplete(lstLayers.Items.IndexOf(lviLayer)) = sdgLayerOptions.TestForOKEnabled()
+            strLayerName = lviCurrentItem.Text
         End If
 
         If sdgLayerOptions.TestForOKEnabled() Then
@@ -130,11 +132,17 @@ Public Class dlgGeneralForGraphics
 
     Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
         Dim clsSelectedGeom As RFunction
+        Dim clsLocalAes As RFunction
 
         clsSelectedGeom = ucrBase.clsRsyntax.GetParameter(lstLayers.SelectedItems(0).Text).clsArgumentFunction
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0)
+        If clsSelectedGeom.GetParameter("mapping") IsNot Nothing Then
+            clsLocalAes = clsSelectedGeom.GetParameter("mapping").clsArgumentFunction
+        Else
+            clsLocalAes = Nothing
+        End If
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=False, clsTempLocalAes:=clsLocalAes)
         sdgLayerOptions.ShowDialog()
-        AddLayers()
+        AddLayers(lstLayers.SelectedItems(0))
 
     End Sub
 

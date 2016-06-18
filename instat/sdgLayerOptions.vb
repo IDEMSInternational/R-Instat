@@ -57,15 +57,15 @@ Public Class sdgLayerOptions
 
     End Sub
 
-    Public Sub SetupLayer(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1)
+    Public Sub SetupLayer(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
         If clsTempGeomFunc Is Nothing Then
             clsTempGeomFunc = New RFunction
         End If
         clsGeomFunction = clsTempGeomFunc
         clsAesFunction = clsTempAesFunc
         clsGgplotFunction = clsTempGgPlot
-        ucrGeomWithAes.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms)
-        ucrLayerParameter.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms)
+        ucrGeomWithAes.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
+        ucrLayerParameter.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
     End Sub
 
     Public Function TestForOKEnabled() As Boolean
