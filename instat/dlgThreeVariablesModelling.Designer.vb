@@ -62,7 +62,7 @@ Partial Class dlgThreeVariableModelling
         '
         Me.lblFirstExplanatoryVariable.AutoSize = True
         Me.lblFirstExplanatoryVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFirstExplanatoryVariable.Location = New System.Drawing.Point(242, 57)
+        Me.lblFirstExplanatoryVariable.Location = New System.Drawing.Point(233, 57)
         Me.lblFirstExplanatoryVariable.Name = "lblFirstExplanatoryVariable"
         Me.lblFirstExplanatoryVariable.Size = New System.Drawing.Size(125, 13)
         Me.lblFirstExplanatoryVariable.TabIndex = 4
@@ -73,7 +73,7 @@ Partial Class dlgThreeVariableModelling
         '
         Me.lblResponse.AutoSize = True
         Me.lblResponse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblResponse.Location = New System.Drawing.Point(245, 10)
+        Me.lblResponse.Location = New System.Drawing.Point(242, 9)
         Me.lblResponse.Name = "lblResponse"
         Me.lblResponse.Size = New System.Drawing.Size(96, 13)
         Me.lblResponse.TabIndex = 1
@@ -84,7 +84,7 @@ Partial Class dlgThreeVariableModelling
         '
         Me.lblSecondExplanatoryVariable.AutoSize = True
         Me.lblSecondExplanatoryVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecondExplanatoryVariable.Location = New System.Drawing.Point(247, 154)
+        Me.lblSecondExplanatoryVariable.Location = New System.Drawing.Point(235, 154)
         Me.lblSecondExplanatoryVariable.Name = "lblSecondExplanatoryVariable"
         Me.lblSecondExplanatoryVariable.Size = New System.Drawing.Size(143, 13)
         Me.lblSecondExplanatoryVariable.TabIndex = 8
@@ -213,7 +213,7 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrGroupingFactor
         '
-        Me.ucrGroupingFactor.Location = New System.Drawing.Point(245, 168)
+        Me.ucrGroupingFactor.Location = New System.Drawing.Point(239, 168)
         Me.ucrGroupingFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrGroupingFactor.Name = "ucrGroupingFactor"
         Me.ucrGroupingFactor.Selector = Nothing
