@@ -17,8 +17,9 @@ Imports instat.Translations
 Public Class sdgVariableTransformations
     Public clsRToFunction, clsRCIFunction As RFunction
     Public clsRYVariable, clsRXVariable As ucrReceiverSingle
-    Public clsRModel As ROperator
-    Public clsModel1 As New ROperator
+    Public clsRForm
+    Public clsRModel, clsRModel1 As ROperator
+    Public clsModel0 As New ROperator
     Public bFirstLoad As Boolean = True
     Private Sub sdgVariableTransformations_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -47,8 +48,13 @@ Public Class sdgVariableTransformations
     Public Sub SetRYVariable(clsRYVariableNew As ucrReceiverSingle)
         clsRYVariable = clsRYVariableNew
     End Sub
+
     Public Sub SetRXVariable(clsRXVariableNew As ucrReceiverSingle)
         clsRXVariable = clsRXVariableNew
+    End Sub
+
+    Public Sub SetRForm(clsRFormNew)
+        clsRForm = clsRFormNew
     End Sub
 
     Private Sub ExplanatoryFunction(strFunctionName As String, strPower As String)
@@ -56,16 +62,34 @@ Public Class sdgVariableTransformations
             If strPower = "1" Then
                 clsRModel.SetParameter(False, strValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
             Else
-                clsModel1.SetOperation("^")
-                clsModel1.bBrackets = False
-                clsModel1.SetParameter(True, strValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
-                clsModel1.SetParameter(False, strValue:=strPower)
-                dlgRegressionSimple.clsModel.SetParameter(False, clsOp:=clsModel1)
+                clsModel0.SetOperation("^")
+                clsModel0.bBrackets = False
+                clsModel0.SetParameter(True, strValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
+                clsModel0.SetParameter(False, strValue:=strPower)
+                clsRForm.clsModel.SetParameter(False, clsOp:=clsModel0)
             End If
         Else
             clsRToFunction.SetRCommand(strFunctionName)
             clsRToFunction.AddParameter("x", clsRXVariable.GetVariableNames(bWithQuotes:=False))
             clsRModel.SetParameter(False, clsRFunc:=clsRToFunction)
+        End If
+    End Sub
+
+    Private Sub ExplanatoryFunction2(strFunctionName As String, strPower As String)
+        If strFunctionName = "power" Then
+            If strPower = "1" Then
+                clsRModel.SetParameter(False, strValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
+            Else
+                clsModel0.SetOperation("^")
+                clsModel0.bBrackets = False
+                clsModel0.SetParameter(True, strValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
+                clsModel0.SetParameter(False, strValue:=strPower)
+                clsRForm.clsModel1.SetParameter(False, clsOp:=clsModel0)
+            End If
+        Else
+            clsRToFunction.SetRCommand(strFunctionName)
+            clsRToFunction.AddParameter("x", clsRXVariable.GetVariableNames(bWithQuotes:=False))
+            clsRModel1.SetParameter(False, clsRFunc:=clsRToFunction)
         End If
     End Sub
 
@@ -81,6 +105,21 @@ Public Class sdgVariableTransformations
         End If
         If rdoPower.Checked Then
             ExplanatoryFunction("power", nudPower.Value)
+        End If
+    End Sub
+
+    Public Sub ModelFunction2()
+        If rdoLogBase10.Checked Then
+            ExplanatoryFunction2("log10", 1)
+        End If
+        If rdoNaturallog.Checked Then
+            ExplanatoryFunction2("log", 1)
+        End If
+        If rdoSquareroot.Checked Then
+            ExplanatoryFunction2("sqrt", 1)
+        End If
+        If rdoPower.Checked Then
+            ExplanatoryFunction2("power", nudPower.Value)
         End If
     End Sub
 End Class
