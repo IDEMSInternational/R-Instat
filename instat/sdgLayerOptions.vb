@@ -84,7 +84,11 @@ Public Class sdgLayerOptions
             strGlobalDataFrame = ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
             ucrGeomWithAes.strGlobalDataFrame = strGlobalDataFrame
         Else
-            clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=ucrGeomWithAes.clsGeomAesFunction.Clone())
+            If ucrGeomWithAes.clsGeomAesFunction.iParameterCount > 0 Then
+                clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=ucrGeomWithAes.clsGeomAesFunction.Clone())
+            Else
+                clsGeomFunction.RemoveParameterByName("mapping")
+            End If
             If ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> strGlobalDataFrame Then
                 clsGeomFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
             Else

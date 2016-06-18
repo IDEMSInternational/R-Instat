@@ -41,7 +41,6 @@ Public Class ucrLayerParamsControls
         If Not IsNothing(clsLayerParam) Then
             chkParamName.Visible = True
             chkParamName.Text = clsLayerParam.strLayerParameterName
-            chkParamName.Checked = False
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
                 If clsLayerParam.lstParameterStrings.Count >= 1 Then
                     nudParamValue.DecimalPlaces = clsLayerParam.lstParameterStrings(0)
@@ -56,9 +55,6 @@ Public Class ucrLayerParamsControls
                     nudParamValue.Minimum = Decimal.MinValue
                     nudParamValue.Maximum = Decimal.MaxValue
                 End If
-                If clsLayerParam.strParameterDefaultValue <> "" Then
-                    nudParamValue.Value = clsLayerParam.strParameterDefaultValue
-                End If
                 ctrActive = nudParamValue
             ElseIf clsLayerParam.strLayerParameterDataType = "boolean" Then
                 ctrActive = ucrcborParamValue
@@ -71,7 +67,12 @@ Public Class ucrLayerParamsControls
             Else
                 ctrActive = New Control 'this should never actually be used but is here to ensure the code is stable even if a developper uses an incorrect datatype
             End If
-            ctrActive.Text = clsLayerParam.strParameterDefaultValue
+            If clsGeomFunction.GetParameter(clsLayerParam.strLayerParameterName) Is Nothing Then
+                SetValue(clsLayerParam.strParameterDefaultValue)
+            Else
+                SetValue(clsGeomFunction.GetParameter(clsLayerParam.strLayerParameterName).strArgumentValue, True)
+            End If
+            ctrActive.Visible = chkParamName.Checked
         Else
             chkParamName.Visible = False
         End If
@@ -102,5 +103,14 @@ Public Class ucrLayerParamsControls
 
     Private Sub ucrColor_NameChanged() Handles ucrColor.NameChanged
         RaiseEvent RParameterChanged(Me)
+    End Sub
+
+    Public Sub SetValue(strValue As String, Optional bInclude As Boolean = False)
+        If TypeOf (ctrActive) Is NumericUpDown Then
+            nudParamValue.Value = strValue
+        Else
+            ctrActive.Text = strValue
+        End If
+        chkParamName.Checked = bInclude
     End Sub
 End Class
