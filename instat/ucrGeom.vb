@@ -56,7 +56,7 @@ Public Class ucrGeom
                 cboGeomList.Items.Add(GeomCount.strGeomName)
             End If
         Next
-        clsGeomFunction = clsTempGeomFunc
+        SetGeomFunction(clsTempGeomFunc)
         If clsGeomFunction.strRCommand = Nothing OrElse cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand) = -1 Then
             cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf("geom_boxplot")
         Else
@@ -65,6 +65,10 @@ Public Class ucrGeom
         cboGeomList.Enabled = Not bFixGeom
         clsGgplotAesFunction = clsTempAesFunc
         clsGgplotAesFunction.SetRCommand("aes")
+    End Sub
+
+    Public Overridable Sub SetGeomFunction(clsTempGeomFunc As RFunction)
+        clsGeomFunction = clsTempGeomFunc
     End Sub
 
     Public Sub AddParameter(strAesParameterName As String, strAesParameterValue As String)

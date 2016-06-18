@@ -42,34 +42,14 @@ Public Class ucrLayerParameters
 
     Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
         MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms)
+        SetLayerParameters()
+    End Sub
+
+    Public Overrides Sub SetGeomFunction(clsTempGeomFunc As RFunction)
+        MyBase.SetGeomFunction(clsTempGeomFunc)
         For i = 0 To (lstLayerParameterControl.Count - 1)
             lstLayerParameterControl(i).SetGeomFunction(clsGeomFunction)
         Next
-    End Sub
-
-    Private Sub SetGeomParameters()
-        For i = 0 To clsCurrGeom.clsLayerParameters.Count - 1
-            For Each clsParam In clsGeomFunction.clsParameters
-                If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
-                    lstAesParameterUcr(i).Enabled = Not bFixAes
-                    Exit For
-                End If
-            Next
-            For Each clsParam In clsGeomAesFunction.clsParameters
-                If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
-                    lstAesParameterUcr(i).Enabled = True
-                    Exit For
-                End If
-            Next
-            If bFirstEnabled AndAlso lstAesParameterUcr(i).Enabled Then
-                iFirstEnabled = i
-                bFirstEnabled = False
-            End If
-        Next
-        lstAesParameterUcr(iFirstEnabled).SetMeAsReceiver()
-        bAddToLocalAes = True
     End Sub
 
     Public Sub SetLayerParameters()
@@ -87,8 +67,6 @@ Public Class ucrLayerParameters
     End Sub
 
     Public Sub ucrLayerParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
-        'this would only work on sdgLayers only
-        'sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
         If ucrGeomWithAes IsNot Nothing Then
             ucrGeomWithAes.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
         End If
