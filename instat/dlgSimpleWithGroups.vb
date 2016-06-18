@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgSimpleWithGroups
+Public Class dlgThreeVariableModelling
     Public bFirstLoad As Boolean = True
     Public clsRCIFunction, clsRConvert As New RFunction
     Public clsRSingleModelFunction As RFunction
@@ -37,18 +37,18 @@ Public Class dlgSimpleWithGroups
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBaseRegWithGroups.clsRsyntax.iCallType = 2
+        ucrBaseThreeVariableModelling.clsRsyntax.iCallType = 2
         clsModel.SetOperation("~")
-        ucrResponse.Selector = ucrSelectorSimpleRegGroups
-        ucrExplanatory.Selector = ucrSelectorSimpleRegGroups
-        ucrGroupingFactor.Selector = ucrSelectorSimpleRegGroups
+        ucrResponse.Selector = ucrSelectorThreeVariableModelling
+        ucrExplanatory.Selector = ucrSelectorThreeVariableModelling
+        ucrGroupingFactor.Selector = ucrSelectorThreeVariableModelling
         lblModelPreview.Enabled = False
         ucrModelPreview.Enabled = False
-        ucrBaseRegWithGroups.iHelpTopicID = 176
+        ucrBaseThreeVariableModelling.iHelpTopicID = 176
         ''''
         ucrFamily.SetGLMDistributions()
-        sdgSimpleRegOptions.SetRModelFunction(ucrBaseRegWithGroups.clsRsyntax.clsBaseFunction)
-        sdgSimpleRegOptions.SetRDataFrame(ucrSelectorSimpleRegGroups.ucrAvailableDataFrames)
+        sdgSimpleRegOptions.SetRModelFunction(ucrBaseThreeVariableModelling.clsRsyntax.clsBaseFunction)
+        sdgSimpleRegOptions.SetRDataFrame(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames)
         sdgSimpleRegOptions.SetRYVariable(ucrResponse)
         sdgSimpleRegOptions.SetRXVariable(ucrExplanatory)
         sdgVariableTransformations.SetRYVariable(ucrResponse)
@@ -56,7 +56,7 @@ Public Class dlgSimpleWithGroups
         sdgVariableTransformations.SetRModelOperator(clsModel)
         sdgModelOptions.SetRCIFunction(clsRCIFunction)
         sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
-
+        sdgVariableTransformations.SetRForm(Me)
     End Sub
 
     Private Sub ReopenDialog()
@@ -64,9 +64,9 @@ Public Class dlgSimpleWithGroups
     End Sub
 
     Private Sub SetDefaults()
-        ucrSelectorSimpleRegGroups.Reset()
+        ucrSelectorThreeVariableModelling.Reset()
         ucrResponse.SetMeAsReceiver()
-        ucrSelectorSimpleRegGroups.Focus()
+        ucrSelectorThreeVariableModelling.Focus()
         operation = ""
         chkSaveModel.Checked = True
         ucrModelName.Visible = True
@@ -91,16 +91,16 @@ Public Class dlgSimpleWithGroups
             clsModel1.bBrackets = False
             clsModel1.SetParameter(True, clsOp:=clsModel)
             clsModel1.SetParameter(False, strValue:=ucrGroupingFactor.GetVariableNames(bWithQuotes:=False))
-            ucrBaseRegWithGroups.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel1)
+            ucrBaseThreeVariableModelling.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel1)
             ucrModelPreview.SetName(clsModel1.ToScript)
-            ucrBaseRegWithGroups.OKEnabled(True)
+            ucrBaseThreeVariableModelling.OKEnabled(True)
         Else
-            ucrBaseRegWithGroups.OKEnabled(False)
+            ucrBaseThreeVariableModelling.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorSimpleRegGroups.DataFrameChanged
-        ucrBaseRegWithGroups.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleRegGroups.ucrAvailableDataFrames.clsCurrDataFrame)
+    Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorThreeVariableModelling.DataFrameChanged
+        ucrBaseThreeVariableModelling.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
     Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
@@ -109,7 +109,7 @@ Public Class dlgSimpleWithGroups
 
     Public Sub ResponseConvert()
         If Not ucrResponse.IsEmpty Then
-            ucrFamily.RecieverDatatype(ucrSelectorSimpleRegGroups.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+            ucrFamily.RecieverDatatype(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
 
             If ucrFamily.strDataType = "numeric" Then
                 chkConvertToVariate.Checked = False
@@ -124,7 +124,7 @@ Public Class dlgSimpleWithGroups
                 ucrFamily.RecieverDatatype("numeric")
             Else
                 clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
-                ucrFamily.RecieverDatatype(ucrSelectorSimpleRegGroups.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+                ucrFamily.RecieverDatatype(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             End If
             sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         End If
@@ -165,7 +165,7 @@ Public Class dlgSimpleWithGroups
     Private Sub ExplanatoryFunctionSelect()
         Dim strExplanatoryType As String
         If Not ucrExplanatory.IsEmpty Then
-            strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorSimpleRegGroups.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+            strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrExplanatory.GetVariableNames(bWithQuotes:=False))
             If strExplanatoryType = "numeric" Or strExplanatoryType = "positive integer" Or strExplanatoryType = "integer" Then
                 chkFunction.Visible = True
             Else
@@ -186,7 +186,7 @@ Public Class dlgSimpleWithGroups
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrBaseRegWithGroups_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseRegWithGroups.ClickReset
+    Private Sub ucrBaseRegWithGroups_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseThreeVariableModelling.ClickReset
         SetDefaults()
     End Sub
 
@@ -194,7 +194,7 @@ Public Class dlgSimpleWithGroups
         AssignModelName()
     End Sub
 
-    Private Sub ucrBaseRegWithGroups_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseRegWithGroups.ClickOk
+    Private Sub ucrBaseRegWithGroups_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseThreeVariableModelling.ClickOk
         sdgSimpleRegOptions.RegOptions()
     End Sub
 
@@ -262,11 +262,11 @@ Public Class dlgSimpleWithGroups
 
     Private Sub AssignModelName()
         If chkSaveModel.Checked AndAlso ucrModelName.txtValidation.Text <> "" Then
-            ucrBaseRegWithGroups.clsRsyntax.SetAssignTo(ucrModelName.txtValidation.Text, strTempModel:=ucrModelName.txtValidation.Text)
-            ucrBaseRegWithGroups.clsRsyntax.bExcludeAssignedFunctionOutput = True
+            ucrBaseThreeVariableModelling.clsRsyntax.SetAssignTo(ucrModelName.txtValidation.Text, strTempModel:=ucrModelName.txtValidation.Text)
+            ucrBaseThreeVariableModelling.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
-            ucrBaseRegWithGroups.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model")
-            ucrBaseRegWithGroups.clsRsyntax.bExcludeAssignedFunctionOutput = False
+            ucrBaseThreeVariableModelling.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model")
+            ucrBaseThreeVariableModelling.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
 
@@ -276,13 +276,25 @@ Public Class dlgSimpleWithGroups
         sdgModelOptions.RestrictLink()
         'TODO:   Include multinomial as an option And the appropriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
-            ucrBaseRegWithGroups.clsRsyntax.SetFunction("lm")
-            ucrBaseRegWithGroups.clsRsyntax.RemoveParameter("family")
+            ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("lm")
+            ucrBaseThreeVariableModelling.clsRsyntax.RemoveParameter("family")
         Else
             clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
-            ucrBaseRegWithGroups.clsRsyntax.SetFunction("glm")
-            ucrBaseRegWithGroups.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
+            ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("glm")
+            ucrBaseThreeVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
         End If
+    End Sub
+
+    Private Sub ucrGroupingFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrGroupingFactor.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click

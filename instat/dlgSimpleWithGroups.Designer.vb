@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgSimpleWithGroups
+Partial Class dlgThreeVariableModelling
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,28 +23,28 @@ Partial Class dlgSimpleWithGroups
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.chkSaveModel = New System.Windows.Forms.CheckBox()
-        Me.lblExplanatory = New System.Windows.Forms.Label()
+        Me.lblFirstExplanatoryVariable = New System.Windows.Forms.Label()
         Me.lblResponse = New System.Windows.Forms.Label()
-        Me.lblGroupingFactor = New System.Windows.Forms.Label()
-        Me.grpModelsOperators = New System.Windows.Forms.GroupBox()
+        Me.lblSecondExplanatoryVariable = New System.Windows.Forms.Label()
+        Me.grpModelOperators = New System.Windows.Forms.GroupBox()
         Me.cmdJointLines = New System.Windows.Forms.Button()
         Me.cmdConditional = New System.Windows.Forms.Button()
         Me.cmdCommonIntercept = New System.Windows.Forms.Button()
         Me.cmdParallelLines = New System.Windows.Forms.Button()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.lblModelPreview = New System.Windows.Forms.Label()
+        Me.cmdModelOptions = New System.Windows.Forms.Button()
+        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
+        Me.chkFunction = New System.Windows.Forms.CheckBox()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrGroupingFactor = New instat.ucrReceiverSingle()
         Me.ucrModelName = New instat.ucrVariableName()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
         Me.ucrResponse = New instat.ucrReceiverSingle()
-        Me.ucrSelectorSimpleRegGroups = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBaseRegWithGroups = New instat.ucrButtons()
-        Me.cmdModelOptions = New System.Windows.Forms.Button()
-        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
-        Me.chkFunction = New System.Windows.Forms.CheckBox()
-        Me.grpModelsOperators.SuspendLayout()
+        Me.ucrSelectorThreeVariableModelling = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBaseThreeVariableModelling = New instat.ucrButtons()
+        Me.grpModelOperators.SuspendLayout()
         Me.SuspendLayout()
         '
         'chkSaveModel
@@ -58,16 +58,16 @@ Partial Class dlgSimpleWithGroups
         Me.chkSaveModel.Text = "Save Model"
         Me.chkSaveModel.UseVisualStyleBackColor = True
         '
-        'lblExplanatory
+        'lblFirstExplanatoryVariable
         '
-        Me.lblExplanatory.AutoSize = True
-        Me.lblExplanatory.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblExplanatory.Location = New System.Drawing.Point(242, 57)
-        Me.lblExplanatory.Name = "lblExplanatory"
-        Me.lblExplanatory.Size = New System.Drawing.Size(103, 13)
-        Me.lblExplanatory.TabIndex = 4
-        Me.lblExplanatory.Tag = "Explanatory_Variable"
-        Me.lblExplanatory.Text = "Explanatory Variable"
+        Me.lblFirstExplanatoryVariable.AutoSize = True
+        Me.lblFirstExplanatoryVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFirstExplanatoryVariable.Location = New System.Drawing.Point(242, 57)
+        Me.lblFirstExplanatoryVariable.Name = "lblFirstExplanatoryVariable"
+        Me.lblFirstExplanatoryVariable.Size = New System.Drawing.Size(125, 13)
+        Me.lblFirstExplanatoryVariable.TabIndex = 4
+        Me.lblFirstExplanatoryVariable.Tag = "First_Explanatory_Variable"
+        Me.lblFirstExplanatoryVariable.Text = "First Explanatory Variable"
         '
         'lblResponse
         '
@@ -80,30 +80,30 @@ Partial Class dlgSimpleWithGroups
         Me.lblResponse.Tag = "Response_Variable"
         Me.lblResponse.Text = "Response Variable"
         '
-        'lblGroupingFactor
+        'lblSecondExplanatoryVariable
         '
-        Me.lblGroupingFactor.AutoSize = True
-        Me.lblGroupingFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGroupingFactor.Location = New System.Drawing.Point(247, 154)
-        Me.lblGroupingFactor.Name = "lblGroupingFactor"
-        Me.lblGroupingFactor.Size = New System.Drawing.Size(83, 13)
-        Me.lblGroupingFactor.TabIndex = 8
-        Me.lblGroupingFactor.Tag = "Grouping_Factor"
-        Me.lblGroupingFactor.Text = "Grouping Factor"
+        Me.lblSecondExplanatoryVariable.AutoSize = True
+        Me.lblSecondExplanatoryVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSecondExplanatoryVariable.Location = New System.Drawing.Point(247, 154)
+        Me.lblSecondExplanatoryVariable.Name = "lblSecondExplanatoryVariable"
+        Me.lblSecondExplanatoryVariable.Size = New System.Drawing.Size(143, 13)
+        Me.lblSecondExplanatoryVariable.TabIndex = 8
+        Me.lblSecondExplanatoryVariable.Tag = "Second_Explanatory_Variable"
+        Me.lblSecondExplanatoryVariable.Text = "Second Explanatory Variable"
         '
-        'grpModelsOperators
+        'grpModelOperators
         '
-        Me.grpModelsOperators.Controls.Add(Me.cmdJointLines)
-        Me.grpModelsOperators.Controls.Add(Me.cmdConditional)
-        Me.grpModelsOperators.Controls.Add(Me.cmdCommonIntercept)
-        Me.grpModelsOperators.Controls.Add(Me.cmdParallelLines)
-        Me.grpModelsOperators.Location = New System.Drawing.Point(243, 103)
-        Me.grpModelsOperators.Name = "grpModelsOperators"
-        Me.grpModelsOperators.Size = New System.Drawing.Size(149, 46)
-        Me.grpModelsOperators.TabIndex = 7
-        Me.grpModelsOperators.TabStop = False
-        Me.grpModelsOperators.Tag = "Models_Operators"
-        Me.grpModelsOperators.Text = "Models Operators"
+        Me.grpModelOperators.Controls.Add(Me.cmdJointLines)
+        Me.grpModelOperators.Controls.Add(Me.cmdConditional)
+        Me.grpModelOperators.Controls.Add(Me.cmdCommonIntercept)
+        Me.grpModelOperators.Controls.Add(Me.cmdParallelLines)
+        Me.grpModelOperators.Location = New System.Drawing.Point(243, 103)
+        Me.grpModelOperators.Name = "grpModelOperators"
+        Me.grpModelOperators.Size = New System.Drawing.Size(149, 46)
+        Me.grpModelOperators.TabIndex = 7
+        Me.grpModelOperators.TabStop = False
+        Me.grpModelOperators.Tag = "Model_Operators"
+        Me.grpModelOperators.Text = "Model Operators"
         '
         'cmdJointLines
         '
@@ -164,65 +164,6 @@ Partial Class dlgSimpleWithGroups
         Me.lblModelPreview.Tag = "Model_Preview"
         Me.lblModelPreview.Text = "Model Preview"
         '
-        'ucrModelPreview
-        '
-        Me.ucrModelPreview.Location = New System.Drawing.Point(93, 187)
-        Me.ucrModelPreview.Name = "ucrModelPreview"
-        Me.ucrModelPreview.Size = New System.Drawing.Size(142, 21)
-        Me.ucrModelPreview.TabIndex = 11
-        '
-        'ucrFamily
-        '
-        Me.ucrFamily.Location = New System.Drawing.Point(8, 204)
-        Me.ucrFamily.Name = "ucrFamily"
-        Me.ucrFamily.Size = New System.Drawing.Size(225, 43)
-        Me.ucrFamily.TabIndex = 12
-        '
-        'ucrGroupingFactor
-        '
-        Me.ucrGroupingFactor.Location = New System.Drawing.Point(245, 168)
-        Me.ucrGroupingFactor.Name = "ucrGroupingFactor"
-        Me.ucrGroupingFactor.Selector = Nothing
-        Me.ucrGroupingFactor.Size = New System.Drawing.Size(106, 26)
-        Me.ucrGroupingFactor.TabIndex = 9
-        '
-        'ucrModelName
-        '
-        Me.ucrModelName.Location = New System.Drawing.Point(116, 247)
-        Me.ucrModelName.Name = "ucrModelName"
-        Me.ucrModelName.Size = New System.Drawing.Size(149, 23)
-        Me.ucrModelName.TabIndex = 15
-        '
-        'ucrExplanatory
-        '
-        Me.ucrExplanatory.Location = New System.Drawing.Point(240, 73)
-        Me.ucrExplanatory.Name = "ucrExplanatory"
-        Me.ucrExplanatory.Selector = Nothing
-        Me.ucrExplanatory.Size = New System.Drawing.Size(106, 26)
-        Me.ucrExplanatory.TabIndex = 5
-        '
-        'ucrResponse
-        '
-        Me.ucrResponse.Location = New System.Drawing.Point(240, 26)
-        Me.ucrResponse.Name = "ucrResponse"
-        Me.ucrResponse.Selector = Nothing
-        Me.ucrResponse.Size = New System.Drawing.Size(106, 26)
-        Me.ucrResponse.TabIndex = 2
-        '
-        'ucrSelectorSimpleRegGroups
-        '
-        Me.ucrSelectorSimpleRegGroups.Location = New System.Drawing.Point(3, 5)
-        Me.ucrSelectorSimpleRegGroups.Name = "ucrSelectorSimpleRegGroups"
-        Me.ucrSelectorSimpleRegGroups.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorSimpleRegGroups.TabIndex = 0
-        '
-        'ucrBaseRegWithGroups
-        '
-        Me.ucrBaseRegWithGroups.Location = New System.Drawing.Point(3, 277)
-        Me.ucrBaseRegWithGroups.Name = "ucrBaseRegWithGroups"
-        Me.ucrBaseRegWithGroups.Size = New System.Drawing.Size(410, 55)
-        Me.ucrBaseRegWithGroups.TabIndex = 17
-        '
         'cmdModelOptions
         '
         Me.cmdModelOptions.Location = New System.Drawing.Point(282, 213)
@@ -255,7 +196,71 @@ Partial Class dlgSimpleWithGroups
         Me.chkFunction.Text = "Function"
         Me.chkFunction.UseVisualStyleBackColor = True
         '
-        'dlgSimpleWithGroups
+        'ucrModelPreview
+        '
+        Me.ucrModelPreview.IsReadOnly = False
+        Me.ucrModelPreview.Location = New System.Drawing.Point(93, 187)
+        Me.ucrModelPreview.Name = "ucrModelPreview"
+        Me.ucrModelPreview.Size = New System.Drawing.Size(142, 21)
+        Me.ucrModelPreview.TabIndex = 11
+        '
+        'ucrFamily
+        '
+        Me.ucrFamily.Location = New System.Drawing.Point(8, 204)
+        Me.ucrFamily.Name = "ucrFamily"
+        Me.ucrFamily.Size = New System.Drawing.Size(225, 43)
+        Me.ucrFamily.TabIndex = 12
+        '
+        'ucrGroupingFactor
+        '
+        Me.ucrGroupingFactor.Location = New System.Drawing.Point(245, 168)
+        Me.ucrGroupingFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrGroupingFactor.Name = "ucrGroupingFactor"
+        Me.ucrGroupingFactor.Selector = Nothing
+        Me.ucrGroupingFactor.Size = New System.Drawing.Size(106, 26)
+        Me.ucrGroupingFactor.TabIndex = 9
+        '
+        'ucrModelName
+        '
+        Me.ucrModelName.Location = New System.Drawing.Point(116, 247)
+        Me.ucrModelName.Name = "ucrModelName"
+        Me.ucrModelName.Size = New System.Drawing.Size(149, 23)
+        Me.ucrModelName.TabIndex = 15
+        '
+        'ucrExplanatory
+        '
+        Me.ucrExplanatory.Location = New System.Drawing.Point(240, 73)
+        Me.ucrExplanatory.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrExplanatory.Name = "ucrExplanatory"
+        Me.ucrExplanatory.Selector = Nothing
+        Me.ucrExplanatory.Size = New System.Drawing.Size(106, 26)
+        Me.ucrExplanatory.TabIndex = 5
+        '
+        'ucrResponse
+        '
+        Me.ucrResponse.Location = New System.Drawing.Point(240, 26)
+        Me.ucrResponse.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrResponse.Name = "ucrResponse"
+        Me.ucrResponse.Selector = Nothing
+        Me.ucrResponse.Size = New System.Drawing.Size(106, 26)
+        Me.ucrResponse.TabIndex = 2
+        '
+        'ucrSelectorThreeVariableModelling
+        '
+        Me.ucrSelectorThreeVariableModelling.Location = New System.Drawing.Point(3, 5)
+        Me.ucrSelectorThreeVariableModelling.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorThreeVariableModelling.Name = "ucrSelectorThreeVariableModelling"
+        Me.ucrSelectorThreeVariableModelling.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorThreeVariableModelling.TabIndex = 0
+        '
+        'ucrBaseThreeVariableModelling
+        '
+        Me.ucrBaseThreeVariableModelling.Location = New System.Drawing.Point(3, 277)
+        Me.ucrBaseThreeVariableModelling.Name = "ucrBaseThreeVariableModelling"
+        Me.ucrBaseThreeVariableModelling.Size = New System.Drawing.Size(410, 55)
+        Me.ucrBaseThreeVariableModelling.TabIndex = 17
+        '
+        'dlgThreeVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -267,38 +272,39 @@ Partial Class dlgSimpleWithGroups
         Me.Controls.Add(Me.ucrModelPreview)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.ucrFamily)
-        Me.Controls.Add(Me.grpModelsOperators)
-        Me.Controls.Add(Me.lblGroupingFactor)
+        Me.Controls.Add(Me.grpModelOperators)
+        Me.Controls.Add(Me.lblSecondExplanatoryVariable)
         Me.Controls.Add(Me.ucrGroupingFactor)
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrModelName)
-        Me.Controls.Add(Me.lblExplanatory)
+        Me.Controls.Add(Me.lblFirstExplanatoryVariable)
         Me.Controls.Add(Me.lblResponse)
         Me.Controls.Add(Me.ucrExplanatory)
         Me.Controls.Add(Me.ucrResponse)
-        Me.Controls.Add(Me.ucrSelectorSimpleRegGroups)
-        Me.Controls.Add(Me.ucrBaseRegWithGroups)
+        Me.Controls.Add(Me.ucrSelectorThreeVariableModelling)
+        Me.Controls.Add(Me.ucrBaseThreeVariableModelling)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgSimpleWithGroups"
+        Me.Name = "dlgThreeVariableModelling"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Simple with groups"
-        Me.grpModelsOperators.ResumeLayout(False)
+        Me.Tag = "Three_Variable_Modelling"
+        Me.Text = "Three Variable Modelling"
+        Me.grpModelOperators.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents ucrBaseRegWithGroups As ucrButtons
+    Friend WithEvents ucrBaseThreeVariableModelling As ucrButtons
     Friend WithEvents chkSaveModel As CheckBox
     Friend WithEvents ucrModelName As ucrVariableName
-    Friend WithEvents lblExplanatory As Label
+    Friend WithEvents lblFirstExplanatoryVariable As Label
     Friend WithEvents lblResponse As Label
     Friend WithEvents ucrExplanatory As ucrReceiverSingle
     Friend WithEvents ucrResponse As ucrReceiverSingle
-    Friend WithEvents ucrSelectorSimpleRegGroups As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents lblGroupingFactor As Label
+    Friend WithEvents ucrSelectorThreeVariableModelling As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents lblSecondExplanatoryVariable As Label
     Friend WithEvents ucrGroupingFactor As ucrReceiverSingle
-    Friend WithEvents grpModelsOperators As GroupBox
+    Friend WithEvents grpModelOperators As GroupBox
     Friend WithEvents ucrFamily As ucrDistributions
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents cmdJointLines As Button
