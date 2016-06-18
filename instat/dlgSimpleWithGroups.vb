@@ -22,7 +22,7 @@ Public Class dlgThreeVariableModelling
     Dim clsModel, clsModel1 As New ROperator
     Dim operation As String
 
-    Private Sub dlgSimpleWithGroups_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgThreeVariableModelling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'UcrInputComboBox1.SetItemsTypeAsModels()
 
         If bFirstLoad Then
@@ -67,7 +67,7 @@ Public Class dlgThreeVariableModelling
         ucrSelectorThreeVariableModelling.Reset()
         ucrResponse.SetMeAsReceiver()
         ucrSelectorThreeVariableModelling.Focus()
-        operation = ""
+        operation = "+"
         chkSaveModel.Checked = True
         ucrModelName.Visible = True
         chkConvertToVariate.Checked = False
@@ -99,7 +99,7 @@ Public Class dlgThreeVariableModelling
         End If
     End Sub
 
-    Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorThreeVariableModelling.DataFrameChanged
+    Private Sub ucrSelectorThreeVariableModelling_DataFrameChanged() Handles ucrSelectorThreeVariableModelling.DataFrameChanged
         ucrBaseThreeVariableModelling.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
@@ -141,13 +141,6 @@ Public Class dlgThreeVariableModelling
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
         ResponseConvert()
         TestOKEnabled()
-        'If Not ucrResponse.IsEmpty Then
-        '    clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
-        '    ucrFamily.RecieverDatatype(ucrSelectorSimpleRegGroups.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
-        '    ucrFamily.Enabled = True
-        '    ucrFamily.SetGLMDistributions()
-        'End If
-        'TestOKEnabled()
     End Sub
 
     Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
@@ -186,7 +179,7 @@ Public Class dlgThreeVariableModelling
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrBaseRegWithGroups_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseThreeVariableModelling.ClickReset
+    Private Sub ucrBaseThreeVariableModelling_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseThreeVariableModelling.ClickReset
         SetDefaults()
     End Sub
 
@@ -194,7 +187,7 @@ Public Class dlgThreeVariableModelling
         AssignModelName()
     End Sub
 
-    Private Sub ucrBaseRegWithGroups_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseThreeVariableModelling.ClickOk
+    Private Sub ucrBaseThreeVariableModelling_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseThreeVariableModelling.ClickOk
         sdgSimpleRegOptions.RegOptions()
     End Sub
 
@@ -227,30 +220,6 @@ Public Class dlgThreeVariableModelling
         TestOKEnabled()
     End Sub
 
-    'Private Sub AssignModelName()
-    '    If chkSaveModel.Checked AndAlso ucrModelName.txtValidation.Text <> "" Then
-    '        ucrBaseRegWithGroups.clsRsyntax.SetAssignTo(ucrModelName.txtValidation.Text, strTempModel:=ucrModelName.txtValidation.Text)
-    '        ucrBaseRegWithGroups.clsRsyntax.bExcludeAssignedFunctionOutput = True
-    '    Else
-    '        ucrBaseRegWithGroups.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model")
-    '        ucrBaseRegWithGroups.clsRsyntax.bExcludeAssignedFunctionOutput = False
-    '    End If
-    'End Sub
-
-    'Private Sub ucrModelPreview_Load(sender As Object, e As EventArgs) Handles ucrModelPreview.Load
-
-    'End Sub
-
-    'Private Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
-    '    'TODO: Include multinomial as an option and the appropriate function
-    '    If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
-    '        ucrBaseRegWithGroups.clsRsyntax.SetFunction("lm")
-    '        ucrBaseRegWithGroups.clsRsyntax.RemoveParameter("family")
-    '    Else
-    '        ucrBaseRegWithGroups.clsRsyntax.SetFunction("glm")
-    '        ucrBaseRegWithGroups.clsRsyntax.AddParameter("family", ucrFamily.clsCurrDistribution.strGLMFunctionName)
-    '    End If
-    'End Sub
     Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
         If chkSaveModel.Checked Then
             ucrModelName.Visible = True
@@ -283,18 +252,6 @@ Public Class dlgThreeVariableModelling
             ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("glm")
             ucrBaseThreeVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
         End If
-    End Sub
-
-    Private Sub ucrGroupingFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrGroupingFactor.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
-
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
