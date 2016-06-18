@@ -107,7 +107,9 @@ Public Class ucrLayerParamsControls
 
     Public Sub SetValue(strValue As String, Optional bInclude As Boolean = False)
         If TypeOf (ctrActive) Is NumericUpDown Then
-            nudParamValue.Value = strValue
+            If strValue <> "" Then
+                nudParamValue.Value = strValue
+            End If
         Else
             ctrActive.Text = strValue
         End If
