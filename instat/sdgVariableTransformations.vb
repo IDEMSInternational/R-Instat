@@ -75,24 +75,6 @@ Public Class sdgVariableTransformations
         End If
     End Sub
 
-    Private Sub ExplanatoryFunction2(strFunctionName As String, strPower As String)
-        If strFunctionName = "power" Then
-            If strPower = "1" Then
-                clsRModel.SetParameter(False, strValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
-            Else
-                clsModel0.SetOperation("^")
-                clsModel0.bBrackets = False
-                clsModel0.SetParameter(True, strValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
-                clsModel0.SetParameter(False, strValue:=strPower)
-                clsRForm.clsModel1.SetParameter(False, clsOp:=clsModel0)
-            End If
-        Else
-            clsRToFunction.SetRCommand(strFunctionName)
-            clsRToFunction.AddParameter("x", clsRXVariable.GetVariableNames(bWithQuotes:=False))
-            clsRModel1.SetParameter(False, clsRFunc:=clsRToFunction)
-        End If
-    End Sub
-
     Public Sub ModelFunction()
         If rdoLogBase10.Checked Then
             ExplanatoryFunction("log10", 1)
@@ -105,21 +87,6 @@ Public Class sdgVariableTransformations
         End If
         If rdoPower.Checked Then
             ExplanatoryFunction("power", nudPower.Value)
-        End If
-    End Sub
-
-    Public Sub ModelFunction2()
-        If rdoLogBase10.Checked Then
-            ExplanatoryFunction2("log10", 1)
-        End If
-        If rdoNaturallog.Checked Then
-            ExplanatoryFunction2("log", 1)
-        End If
-        If rdoSquareroot.Checked Then
-            ExplanatoryFunction2("sqrt", 1)
-        End If
-        If rdoPower.Checked Then
-            ExplanatoryFunction2("power", nudPower.Value)
         End If
     End Sub
 End Class

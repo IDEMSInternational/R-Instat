@@ -254,6 +254,30 @@ Public Class dlgThreeVariableModelling
         End If
     End Sub
 
+    Private Sub ucrGroupingFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrGroupingFactor.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrSelectorSimpleReg_DataFrameChanged()
+
+    End Sub
+
+    Private Sub ucrBaseRegWithGroups_ClickOk(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub ucrBaseRegWithGroups_ClickReset(sender As Object, e As EventArgs)
+
+    End Sub
+
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
         ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
