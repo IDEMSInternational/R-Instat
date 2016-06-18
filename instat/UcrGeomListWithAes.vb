@@ -46,7 +46,7 @@ Public Class UcrGeomListWithParameters
             SetParameters()
             bFirstLoad = False
         End If
-        SetGlobalAes(bCurrentFixAes)
+        SetAes(bCurrentFixAes)
     End Sub
 
     Private Sub InitialiseControl()
@@ -62,19 +62,25 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam1.SetMeAsReceiver()
     End Sub
 
-    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1)
-        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms)
+    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempGlobalAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
         strGlobalDataFrame = strDataframe
+        If clsTempLocalAes IsNot Nothing Then
+            clsGeomAesFunction = clsTempLocalAes
+        Else
+            clsGeomAesFunction = New RFunction
+            clsGeomAesFunction.SetRCommand("aes")
+        End If
         UcrSelector.SetDataframe(strGlobalDataFrame, (Not bUseGlobalAes) OrElse strGlobalDataFrame = "")
         bCurrentFixAes = bFixAes
-        SetGlobalAes(bCurrentFixAes)
+        SetAes(bCurrentFixAes)
         chkApplyOnAllLayers.Checked = bUseGlobalAes
     End Sub
 
-    Private Sub SetGlobalAes(Optional bFixAes As Boolean = False)
+    Private Sub SetAes(Optional bFixAes As Boolean = False)
         Dim bFirstEnabled As Boolean = True
+        Dim iFirstEnabled As Integer = 0
         bAddToLocalAes = False
-        clsGeomAesFunction.ClearParameters()
         For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
             lstAesParameterUcr(i).Enabled = True
             For Each clsParam In clsGgplotAesFunction.clsParameters
@@ -84,11 +90,19 @@ Public Class UcrGeomListWithParameters
                     Exit For
                 End If
             Next
-            If lstAesParameterUcr(i).Enabled AndAlso bFirstEnabled Then
-                lstAesParameterUcr(i).SetMeAsReceiver()
+            For Each clsParam In clsGeomAesFunction.clsParameters
+                If clsParam.strArgumentName = lstCurrArguments(i) Then
+                    lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
+                    lstAesParameterUcr(i).Enabled = True
+                    Exit For
+                End If
+            Next
+            If bFirstEnabled AndAlso lstAesParameterUcr(i).Enabled Then
+                iFirstEnabled = i
                 bFirstEnabled = False
             End If
         Next
+        lstAesParameterUcr(iFirstEnabled).SetMeAsReceiver()
         bAddToLocalAes = True
     End Sub
 
@@ -190,7 +204,7 @@ Public Class UcrGeomListWithParameters
                 End If
             Next
         End If
-        SetGlobalAes(bCurrentFixAes)
+        SetAes(bCurrentFixAes)
     End Sub
 
     Public Sub UcrGeomListWithParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
