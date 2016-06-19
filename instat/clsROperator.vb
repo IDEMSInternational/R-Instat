@@ -268,6 +268,13 @@ Public Class ROperator
         bIsAssigned = False
     End Sub
 
+    Public Function GetParameter(strName As String) As RParameter
+        If Not clsAdditionalParameters Is Nothing Then
+            Return clsAdditionalParameters.Find(Function(x) x.strArgumentName = strName)
+        End If
+        Return Nothing
+    End Function
+
     Public Sub RemoveParameterByName(strArgName)
         Dim clsParam
         If Not clsAdditionalParameters Is Nothing Then

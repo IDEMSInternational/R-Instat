@@ -47,7 +47,7 @@ Public Class ucrGeom
         clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
     End Sub
 
-    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional bFixDataFrame As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1)
+    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
         Dim GeomCount As New Geoms
 
         cboGeomList.Items.Clear()
@@ -56,14 +56,19 @@ Public Class ucrGeom
                 cboGeomList.Items.Add(GeomCount.strGeomName)
             End If
         Next
-        clsGeomFunction = clsTempGeomFunc
-        If cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand) = -1 Then
+        SetGeomFunction(clsTempGeomFunc)
+        If clsGeomFunction.strRCommand = Nothing OrElse cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand) = -1 Then
             cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf("geom_boxplot")
         Else
             cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand)
         End If
+        cboGeomList.Enabled = Not bFixGeom
         clsGgplotAesFunction = clsTempAesFunc
         clsGgplotAesFunction.SetRCommand("aes")
+    End Sub
+
+    Public Overridable Sub SetGeomFunction(clsTempGeomFunc As RFunction)
+        clsGeomFunction = clsTempGeomFunc
     End Sub
 
     Public Sub AddParameter(strAesParameterName As String, strAesParameterValue As String)
@@ -165,8 +170,8 @@ Public Class ucrGeom
         clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor"})) ' won't visibly change anything unless you change the theme
 
         'add layer parameters 
-        clsgeom_bar.AddLayerParameter("stat", "list", "count", lstParameterStrings:={"count", "identity"})
-        clsgeom_bar.AddLayerParameter("position", "list", "stack", lstParameterStrings:={"fill", "dodge"})
+        clsgeom_bar.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34)})
         clsgeom_bar.AddLayerParameter("width", "numeric", "90%")
         lstAllGeoms.Add(clsgeom_bar)
 
