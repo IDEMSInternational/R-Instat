@@ -15,9 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgVariableTransformations
-    Public clsRToFunction, clsRCIFunction As RFunction
+    Public clsRCIFunction As RFunction
+    Public clsRToFunction As New RFunction
     Public clsRYVariable, clsRXVariable As ucrReceiverSingle
-    Public clsRForm
     Public clsRModel, clsRModel1 As ROperator
     Public clsModel0 As New ROperator
     Public bFirstLoad As Boolean = True
@@ -53,10 +53,6 @@ Public Class sdgVariableTransformations
         clsRXVariable = clsRXVariableNew
     End Sub
 
-    Public Sub SetRForm(clsRFormNew)
-        clsRForm = clsRFormNew
-    End Sub
-
     Private Sub ExplanatoryFunction(strFunctionName As String, strPower As String)
         If strFunctionName = "power" Then
             If strPower = "1" Then
@@ -66,12 +62,12 @@ Public Class sdgVariableTransformations
                 clsModel0.bBrackets = False
                 clsModel0.SetParameter(True, strValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.SetParameter(False, strValue:=strPower)
-                clsRForm.clsModel.SetParameter(False, clsOp:=clsModel0)
+                clsRModel.SetParameter(True, clsOp:=clsModel0)
             End If
         Else
             clsRToFunction.SetRCommand(strFunctionName)
             clsRToFunction.AddParameter("x", clsRXVariable.GetVariableNames(bWithQuotes:=False))
-            clsRModel.SetParameter(False, clsRFunc:=clsRToFunction)
+            clsRModel.SetParameter(True, clsRFunc:=clsRToFunction)
         End If
     End Sub
 

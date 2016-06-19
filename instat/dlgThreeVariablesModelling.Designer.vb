@@ -38,9 +38,9 @@ Partial Class dlgThreeVariableModelling
         Me.chkFunction = New System.Windows.Forms.CheckBox()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrFamily = New instat.ucrDistributions()
-        Me.ucrGroupingFactor = New instat.ucrReceiverSingle()
+        Me.ucrSecondExplanatory = New instat.ucrReceiverSingle()
         Me.ucrModelName = New instat.ucrVariableName()
-        Me.ucrExplanatory = New instat.ucrReceiverSingle()
+        Me.ucrFirstExplanatory = New instat.ucrReceiverSingle()
         Me.ucrResponse = New instat.ucrReceiverSingle()
         Me.ucrSelectorThreeVariableModelling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseThreeVariableModelling = New instat.ucrButtons()
@@ -211,14 +211,14 @@ Partial Class dlgThreeVariableModelling
         Me.ucrFamily.Size = New System.Drawing.Size(225, 43)
         Me.ucrFamily.TabIndex = 12
         '
-        'ucrGroupingFactor
+        'ucrSecondExplanatory
         '
-        Me.ucrGroupingFactor.Location = New System.Drawing.Point(239, 168)
-        Me.ucrGroupingFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrGroupingFactor.Name = "ucrGroupingFactor"
-        Me.ucrGroupingFactor.Selector = Nothing
-        Me.ucrGroupingFactor.Size = New System.Drawing.Size(106, 26)
-        Me.ucrGroupingFactor.TabIndex = 9
+        Me.ucrSecondExplanatory.Location = New System.Drawing.Point(239, 168)
+        Me.ucrSecondExplanatory.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSecondExplanatory.Name = "ucrSecondExplanatory"
+        Me.ucrSecondExplanatory.Selector = Nothing
+        Me.ucrSecondExplanatory.Size = New System.Drawing.Size(106, 26)
+        Me.ucrSecondExplanatory.TabIndex = 9
         '
         'ucrModelName
         '
@@ -227,14 +227,14 @@ Partial Class dlgThreeVariableModelling
         Me.ucrModelName.Size = New System.Drawing.Size(149, 23)
         Me.ucrModelName.TabIndex = 15
         '
-        'ucrExplanatory
+        'ucrFirstExplanatory
         '
-        Me.ucrExplanatory.Location = New System.Drawing.Point(240, 73)
-        Me.ucrExplanatory.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrExplanatory.Name = "ucrExplanatory"
-        Me.ucrExplanatory.Selector = Nothing
-        Me.ucrExplanatory.Size = New System.Drawing.Size(106, 26)
-        Me.ucrExplanatory.TabIndex = 5
+        Me.ucrFirstExplanatory.Location = New System.Drawing.Point(240, 73)
+        Me.ucrFirstExplanatory.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrFirstExplanatory.Name = "ucrFirstExplanatory"
+        Me.ucrFirstExplanatory.Selector = Nothing
+        Me.ucrFirstExplanatory.Size = New System.Drawing.Size(106, 26)
+        Me.ucrFirstExplanatory.TabIndex = 5
         '
         'ucrResponse
         '
@@ -274,12 +274,12 @@ Partial Class dlgThreeVariableModelling
         Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.grpModelOperators)
         Me.Controls.Add(Me.lblSecondExplanatoryVariable)
-        Me.Controls.Add(Me.ucrGroupingFactor)
+        Me.Controls.Add(Me.ucrSecondExplanatory)
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.lblFirstExplanatoryVariable)
         Me.Controls.Add(Me.lblResponse)
-        Me.Controls.Add(Me.ucrExplanatory)
+        Me.Controls.Add(Me.ucrFirstExplanatory)
         Me.Controls.Add(Me.ucrResponse)
         Me.Controls.Add(Me.ucrSelectorThreeVariableModelling)
         Me.Controls.Add(Me.ucrBaseThreeVariableModelling)
@@ -299,11 +299,11 @@ Partial Class dlgThreeVariableModelling
     Friend WithEvents ucrModelName As ucrVariableName
     Friend WithEvents lblFirstExplanatoryVariable As Label
     Friend WithEvents lblResponse As Label
-    Friend WithEvents ucrExplanatory As ucrReceiverSingle
+    Friend WithEvents ucrFirstExplanatory As ucrReceiverSingle
     Friend WithEvents ucrResponse As ucrReceiverSingle
     Friend WithEvents ucrSelectorThreeVariableModelling As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblSecondExplanatoryVariable As Label
-    Friend WithEvents ucrGroupingFactor As ucrReceiverSingle
+    Friend WithEvents ucrSecondExplanatory As ucrReceiverSingle
     Friend WithEvents grpModelOperators As GroupBox
     Friend WithEvents ucrFamily As ucrDistributions
     Friend WithEvents cmdDisplayOptions As Button
