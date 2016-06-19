@@ -15,6 +15,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class UcrGeomListWithParameters
     Public lstAesParameterLabels As New List(Of Label)
     Public lstAesParameterUcr As New List(Of ucrReceiverSingle)
@@ -24,6 +26,8 @@ Public Class UcrGeomListWithParameters
     Public bCheckEnabled As Boolean = True
     Public Event DataFrameChanged()
     Public clsGeomAesFunction As RFunction
+    Public bAddToLocalAes As Boolean = True
+    Public bCurrentFixAes As Boolean = True
 
     Public Sub New()
 
@@ -42,6 +46,7 @@ Public Class UcrGeomListWithParameters
             SetParameters()
             bFirstLoad = False
         End If
+        SetAes(bCurrentFixAes)
     End Sub
 
     Private Sub InitialiseControl()
@@ -57,12 +62,25 @@ Public Class UcrGeomListWithParameters
         ucrReceiverParam1.SetMeAsReceiver()
     End Sub
 
-    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional bFixDataFrame As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1)
-        Dim bFirstEnabled As Boolean = True
-
-        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, bFixDataFrame, iNumVariablesForGeoms)
+    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempGlobalAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
         strGlobalDataFrame = strDataframe
+        If clsTempLocalAes IsNot Nothing Then
+            clsGeomAesFunction = clsTempLocalAes
+        Else
+            clsGeomAesFunction = New RFunction
+            clsGeomAesFunction.SetRCommand("aes")
+        End If
         UcrSelector.SetDataframe(strGlobalDataFrame, (Not bUseGlobalAes) OrElse strGlobalDataFrame = "")
+        bCurrentFixAes = bFixAes
+        SetAes(bCurrentFixAes)
+        chkApplyOnAllLayers.Checked = bUseGlobalAes
+    End Sub
+
+    Private Sub SetAes(Optional bFixAes As Boolean = False)
+        Dim bFirstEnabled As Boolean = True
+        Dim iFirstEnabled As Integer = 0
+        bAddToLocalAes = False
         For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
             lstAesParameterUcr(i).Enabled = True
             For Each clsParam In clsGgplotAesFunction.clsParameters
@@ -72,12 +90,20 @@ Public Class UcrGeomListWithParameters
                     Exit For
                 End If
             Next
-            If lstAesParameterUcr(i).Enabled AndAlso bFirstEnabled Then
-                lstAesParameterUcr(i).SetMeAsReceiver()
+            For Each clsParam In clsGeomAesFunction.clsParameters
+                If clsParam.strArgumentName = lstCurrArguments(i) Then
+                    lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
+                    lstAesParameterUcr(i).Enabled = True
+                    Exit For
+                End If
+            Next
+            If bFirstEnabled AndAlso lstAesParameterUcr(i).Enabled Then
+                iFirstEnabled = i
                 bFirstEnabled = False
             End If
         Next
-        chkApplyOnAllLayers.Checked = bUseGlobalAes
+        lstAesParameterUcr(iFirstEnabled).SetMeAsReceiver()
+        bAddToLocalAes = True
     End Sub
 
     Private Sub SetDefaults()
@@ -178,6 +204,7 @@ Public Class UcrGeomListWithParameters
                 End If
             Next
         End If
+        SetAes(bCurrentFixAes)
     End Sub
 
     Public Sub UcrGeomListWithParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
@@ -189,88 +216,18 @@ Public Class UcrGeomListWithParameters
         SetParameters()
     End Sub
 
-    Private Sub ucrReceiverParam1_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam1.SelectionChanged
-        If Not ucrReceiverParam1.IsEmpty Then
-            clsGeomAesFunction.AddParameter(lstCurrArguments(0), ucrReceiverParam1.GetVariableNames(False))
-        Else
-            clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(0))
-        End If
-        TestForOkEnabled()
-    End Sub
+    Private Sub ucrReceiverParam_WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle) Handles ucrReceiverParam1.WithMeSelectionChanged, ucrReceiverParam2.WithMeSelectionChanged, ucrReceiverParam3.WithMeSelectionChanged, ucrReceiverParam4.WithMeSelectionChanged, ucrReceiverParam5.WithMeSelectionChanged, ucrReceiverParam6.WithMeSelectionChanged, ucrReceiverParam7.WithMeSelectionChanged, ucrReceiverParam8.WithMeSelectionChanged, ucrReceiverParam9.WithMeSelectionChanged
+        Dim iIndex As Integer
 
-    Private Sub ucrReceiverParam2_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam2.SelectionChanged
-        If Not ucrReceiverParam2.IsEmpty Then
-            clsGeomAesFunction.AddParameter(lstCurrArguments(1), ucrReceiverParam2.GetVariableNames(False))
-        Else
-            clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(1))
+        If bAddToLocalAes Then
+            iIndex = lstAesParameterUcr.IndexOf(ucrChangedReceiver)
+            If Not ucrChangedReceiver.IsEmpty Then
+                clsGeomAesFunction.AddParameter(lstCurrArguments(iIndex), ucrChangedReceiver.GetVariableNames(False))
+            Else
+                clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(iIndex))
+            End If
+            TestForOkEnabled()
         End If
-        TestForOkEnabled()
-    End Sub
-    Private Sub ucrReceiverParam3_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam3.SelectionChanged
-        If Not ucrReceiverParam3.IsEmpty Then
-            clsGeomAesFunction.AddParameter(lstCurrArguments(2), ucrReceiverParam3.GetVariableNames(False))
-        Else
-            clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(2))
-        End If
-        TestForOkEnabled()
-
-    End Sub
-
-    Private Sub ucrReceiverParam4_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam4.SelectionChanged
-        If Not ucrReceiverParam4.IsEmpty Then
-            clsGeomAesFunction.AddParameter(lstCurrArguments(3), ucrReceiverParam4.GetVariableNames(False))
-        Else
-            clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(3))
-        End If
-        TestForOkEnabled()
-    End Sub
-    Private Sub ucrReceiverParam5_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam5.SelectionChanged
-        If Not ucrReceiverParam5.IsEmpty Then
-            clsGeomAesFunction.AddParameter(lstCurrArguments(4), ucrReceiverParam5.GetVariableNames(False))
-        Else
-            clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(4))
-        End If
-        TestForOkEnabled()
-    End Sub
-
-    Private Sub ucrReceiverParam6_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam6.SelectionChanged
-        If Not ucrReceiverParam6.IsEmpty Then
-            clsGeomAesFunction.AddParameter(lstCurrArguments(5), ucrReceiverParam6.GetVariableNames(False))
-        Else
-            clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(5))
-        End If
-        TestForOkEnabled()
-    End Sub
-
-    Private Sub ucrReceiverParam7_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam7.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
-        If Not ucrReceiverParam7.IsEmpty Then
-            clsGeomAesFunction.AddParameter(lstCurrArguments(6), ucrReceiverParam7.GetVariableNames(False))
-        Else
-            clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(6))
-        End If
-        TestForOkEnabled()
-    End Sub
-    Private Sub ucrReceiverParam8_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam8.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
-        If Not ucrReceiverParam8.IsEmpty Then
-            clsGeomAesFunction.AddParameter(lstCurrArguments(7), ucrReceiverParam8.GetVariableNames(False))
-        Else
-            clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(7))
-        End If
-        TestForOkEnabled()
-    End Sub
-
-    Private Sub ucrReceiverParam9_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverParam9.SelectionChanged, ucrReceiverParam9.SelectionChanged, ucrReceiverParam8.SelectionChanged
-        If Not ucrReceiverParam9.IsEmpty Then
-            clsGeomAesFunction.AddParameter(lstCurrArguments(8), ucrReceiverParam9.GetVariableNames(False))
-        Else
-            clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(8))
-        End If
-        TestForOkEnabled()
-    End Sub
-
-    Private Sub UcrSelector_DataFrameChanged() Handles UcrSelector.DataFrameChanged
-        'clsGeomFunction.AddParameter("data", clsRFunctionParameter:=UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame)
-        ' RaiseEvent DataFrameChanged() do we need this?
     End Sub
 
     Public Function TestForOkEnabled() As Boolean
@@ -278,7 +235,6 @@ Public Class UcrGeomListWithParameters
 
         For i = 0 To (clsCurrGeom.clsAesParameters.Count - 1)
             If (clsCurrGeom.clsAesParameters(i).bIsMandatory = True) AndAlso (lstAesParameterUcr(i).IsEmpty()) Then
-                'this should have okay disabled 
                 Return False
             End If
         Next
@@ -297,11 +253,9 @@ Public Class UcrGeomListWithParameters
 
     Private Sub chkIgnoreGlobalAes_CheckedChanged(sender As Object, e As EventArgs) Handles chkIgnoreGlobalAes.CheckedChanged
         If chkIgnoreGlobalAes.Checked Then
-            'TODO what is this parameter?
-            'clsGeomAesFunction.AddParameter("ignore", "TRUE")
+            clsGeomFunction.AddParameter("inherit.aes", "FALSE")
         Else
-            'clsGeomAesFunction.RemoveParameterByName("")
+            clsGeomFunction.RemoveParameterByName("inherit.aes")
         End If
     End Sub
-
 End Class

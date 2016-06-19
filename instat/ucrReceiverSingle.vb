@@ -19,6 +19,7 @@ Imports RDotNet
 Public Class ucrReceiverSingle
     Dim strDataFrameName As String
     Public strCurrDataType As String
+    Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
 
     Public Sub New()
         ' This call is required by the designer.
@@ -167,6 +168,8 @@ Public Class ucrReceiverSingle
 
     Public Event SelectionChanged(sender As Object, e As EventArgs)
 
+
+
     Private Sub txtReceiverSingle_TextChanged(sender As Object, e As EventArgs) Handles txtReceiverSingle.TextChanged
         OnValueChanged(sender, e)
         RaiseEvent SelectionChanged(sender, e)
@@ -201,4 +204,7 @@ Public Class ucrReceiverSingle
         End If
     End Sub
 
+    Private Sub ucrReceiverSingle_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
+        RaiseEvent WithMeSelectionChanged(Me)
+    End Sub
 End Class
