@@ -188,11 +188,6 @@ Public Class dlgThreeVariableModelling
         sdgSimpleRegOptions.RegOptions()
     End Sub
 
-    Private Sub ucrModelPreview_TextChanged(sender As Object, e As EventArgs) Handles ucrModelPreview.TextChanged
-        'TODO: we need to preview the model here
-
-    End Sub
-
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgSimpleRegOptions.ShowDialog()
     End Sub
@@ -249,30 +244,6 @@ Public Class dlgThreeVariableModelling
             ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("glm")
             ucrBaseThreeVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
         End If
-    End Sub
-
-    Private Sub ucrGroupingFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondExplanatory.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFirstExplanatory.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrSelectorSimpleReg_DataFrameChanged()
-
-    End Sub
-
-    Private Sub ucrBaseRegWithGroups_ClickOk(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub ucrBaseRegWithGroups_ClickReset(sender As Object, e As EventArgs)
-
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
