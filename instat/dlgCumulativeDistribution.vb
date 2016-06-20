@@ -54,6 +54,8 @@ Public Class dlgCumulativeDistribution
 
         ucrSaveCumDist.SetDataFrameSelector(ucrCumDistSelector.ucrAvailableDataFrames)
         ucrSaveCumDist.strPrefix = "Graph"
+        ucrSaveCumDist.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveCumDist.ucrInputGraphName.SetDefaultTypeAsGraph()
 
     End Sub
 
