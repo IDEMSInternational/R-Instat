@@ -362,6 +362,12 @@
     <Compile Include="dlgInsertColumn.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgJitter.Designer.vb">
+      <DependentUpon>dlgJitter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgJitter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgMakeSheets.Designer.vb">
       <DependentUpon>dlgMakeSheets.vb</DependentUpon>
     </Compile>
@@ -2030,6 +2036,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInsertColumn.sw-KE.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgJitter.fr-FR.resx">
+      <DependentUpon>dlgJitter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgJitter.resx">
+      <DependentUpon>dlgJitter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgJitter.sw-KE.resx">
+      <DependentUpon>dlgJitter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMakeSheets.fr-FR.resx">
       <DependentUpon>dlgMakeSheets.vb</DependentUpon>

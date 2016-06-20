@@ -268,6 +268,13 @@ Public Class ROperator
         bIsAssigned = False
     End Sub
 
+    Public Function GetParameter(strName As String) As RParameter
+        If Not clsAdditionalParameters Is Nothing Then
+            Return clsAdditionalParameters.Find(Function(x) x.strArgumentName = strName)
+        End If
+        Return Nothing
+    End Function
+
     Public Sub RemoveParameterByName(strArgName)
         Dim clsParam
         If Not clsAdditionalParameters Is Nothing Then
@@ -300,10 +307,7 @@ Public Class ROperator
 
     Public Function Clone() As ROperator
         Dim clsTempROperator As New ROperator
-        Dim clsLeftFunction As New RFunction
-        Dim clsLeftOperator As New ROperator
-        Dim clsLeftParameter As New RParameter
-        Dim clsAdditionalParams As New RParameter
+        Dim clsAdditionalParams As RParameter
 
         clsTempROperator.strOperation = strOperation
         clsTempROperator.bBrackets = bBrackets
