@@ -1011,4 +1011,8 @@ Public Class frmMain
     Private Sub mnuOrganiseDataFrameRowNumbersNames_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameRowNumbersNames.Click
         dlgRowNamesOrNumbers.ShowDialog()
     End Sub
+
+    Private Sub mnuModelFourVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelFourVariablesFitModel.Click
+        dlgFourVariableModelling.ShowDialog()
+    End Sub
 End Class
