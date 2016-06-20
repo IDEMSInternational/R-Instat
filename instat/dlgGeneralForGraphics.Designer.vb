@@ -42,9 +42,10 @@ Partial Class dlgGeneralForGraphics
         '
         Me.lstLayers.Location = New System.Drawing.Point(12, 39)
         Me.lstLayers.Name = "lstLayers"
-        Me.lstLayers.Size = New System.Drawing.Size(98, 149)
+        Me.lstLayers.Size = New System.Drawing.Size(125, 149)
         Me.lstLayers.TabIndex = 1
         Me.lstLayers.UseCompatibleStateImageBehavior = False
+        Me.lstLayers.View = System.Windows.Forms.View.List
         '
         'lblLayers
         '

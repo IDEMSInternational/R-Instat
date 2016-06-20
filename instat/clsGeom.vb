@@ -37,6 +37,9 @@ Public Class Geoms
     Public Sub AddLayerParameter(strLayerParameterName As String, strLayerParameterDataType As String, strLayerParameterDefaultValue As String, Optional bIsDependent As Boolean = False, Optional lstParameterStrings As String() = Nothing, Optional strDependentParameter As String = "", Optional strDependantpParameterValue As String = "")
         Dim NewLayerParameter As New LayerParameters
 
+        If lstParameterStrings Is Nothing Then
+            lstParameterStrings = New String() {}
+        End If
         NewLayerParameter.strLayerParameterName = strLayerParameterName
         NewLayerParameter.strLayerParameterDataType = strLayerParameterDataType
         NewLayerParameter.strParameterDefaultValue = strLayerParameterDefaultValue
@@ -47,6 +50,18 @@ Public Class Geoms
 
         clsLayerParameters.Add(NewLayerParameter)
     End Sub
+
+    Public ReadOnly Property iNumMandatoryAes As Integer
+        Get
+            Dim iCount As Integer = 0
+            For Each clsParam In clsAesParameters
+                If clsParam.bIsMandatory Then
+                    iCount = iCount + 1
+                End If
+            Next
+            Return iCount
+        End Get
+    End Property
 End Class
 
 Public Class AesParameters

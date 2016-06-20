@@ -207,6 +207,7 @@ Public Class ROperator
         If strValue <> "" Then
             clsParam = New RParameter
             clsParam.SetArgumentValue(strValue)
+            clsParam.SetArgumentName(strParameterName)
         End If
 
         If bSetFirst Then
@@ -268,6 +269,13 @@ Public Class ROperator
         bIsAssigned = False
     End Sub
 
+    Public Function GetParameter(strName As String) As RParameter
+        If Not clsAdditionalParameters Is Nothing Then
+            Return clsAdditionalParameters.Find(Function(x) x.strArgumentName = strName)
+        End If
+        Return Nothing
+    End Function
+
     Public Sub RemoveParameterByName(strArgName)
         Dim clsParam
         If Not clsAdditionalParameters Is Nothing Then
@@ -297,4 +305,32 @@ Public Class ROperator
         'RemoveParameter(False)
         RemoveAllAdditionalParameters()
     End Sub
+
+    Public Function Clone() As ROperator
+        Dim clsTempROperator As New ROperator
+        Dim clsAdditionalParams As RParameter
+
+        clsTempROperator.strOperation = strOperation
+        clsTempROperator.bBrackets = bBrackets
+        clsTempROperator.strAssignTo = strAssignTo
+        clsTempROperator.strAssignToDataFrame = strAssignToDataFrame
+        clsTempROperator.strAssignToColumn = strAssignToColumn
+        clsTempROperator.strAssignToModel = strAssignToModel
+        clsTempROperator.strAssignToGraph = strAssignToGraph
+        clsTempROperator.bToBeAssigned = bToBeAssigned
+        clsTempROperator.bIsAssigned = bIsAssigned
+        clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
+        clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
+
+        clsTempROperator.clsLeftFunction = clsLeftFunction.Clone
+        clsTempROperator.clsLeftOperator = clsLeftOperator.Clone
+        clsTempROperator.clsLeftParameter = clsLeftParameter.Clone
+
+        For Each clsAdditionalParams In clsAdditionalParameters
+            clsTempROperator.AddAdditionalParameter(clsAdditionalParams.Clone)
+        Next
+
+        Return clsTempROperator
+
+    End Function
 End Class

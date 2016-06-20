@@ -40,23 +40,25 @@ Partial Class ucrLayerParamsControls
         '
         'nudParamValue
         '
-        Me.nudParamValue.Location = New System.Drawing.Point(145, 3)
+        Me.nudParamValue.Location = New System.Drawing.Point(133, 3)
         Me.nudParamValue.Name = "nudParamValue"
         Me.nudParamValue.Size = New System.Drawing.Size(53, 20)
         Me.nudParamValue.TabIndex = 1
         '
         'ucrcborParamValue
         '
-        Me.ucrcborParamValue.Location = New System.Drawing.Point(145, 3)
+        Me.ucrcborParamValue.IsReadOnly = False
+        Me.ucrcborParamValue.Location = New System.Drawing.Point(133, 3)
         Me.ucrcborParamValue.Name = "ucrcborParamValue"
-        Me.ucrcborParamValue.Size = New System.Drawing.Size(53, 21)
+        Me.ucrcborParamValue.Size = New System.Drawing.Size(154, 21)
         Me.ucrcborParamValue.TabIndex = 2
         '
         'ucrColor
         '
+        Me.ucrColor.IsReadOnly = False
         Me.ucrColor.Location = New System.Drawing.Point(133, 3)
         Me.ucrColor.Name = "ucrColor"
-        Me.ucrColor.Size = New System.Drawing.Size(65, 21)
+        Me.ucrColor.Size = New System.Drawing.Size(154, 21)
         Me.ucrColor.TabIndex = 3
         '
         'ucrLayerParamsControls
@@ -68,7 +70,7 @@ Partial Class ucrLayerParamsControls
         Me.Controls.Add(Me.nudParamValue)
         Me.Controls.Add(Me.chkParamName)
         Me.Name = "ucrLayerParamsControls"
-        Me.Size = New System.Drawing.Size(203, 27)
+        Me.Size = New System.Drawing.Size(290, 25)
         CType(Me.nudParamValue, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

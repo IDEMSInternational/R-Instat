@@ -72,6 +72,15 @@ Public Class RSyntax
         clsBaseFunction.AddParameter(clsRParam)
     End Sub
 
+    Public Function GetParameter(strName As String) As RParameter
+        If bUseBaseFunction Then
+            Return clsBaseFunction.GetParameter(strName)
+        ElseIf bUseBaseOperator Then
+            Return clsBaseOperator.GetParameter(strName)
+        End If
+        Return Nothing
+    End Function
+
     Public Sub SetOperatorParameter(bSetFirst As Boolean, Optional strParameterName As String = "", Optional strValue As String = "", Optional clsParam As RParameter = Nothing, Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing)
         clsBaseOperator.SetParameter(bSetFirst, strParameterName, strValue, clsParam, clsRFunc, clsOp)
     End Sub

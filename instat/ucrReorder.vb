@@ -218,4 +218,7 @@ Public Class ucrReorder
         End If
     End Function
 
+    Public Sub Reset()
+        lstAvailableData.Items.Clear()
+    End Sub
 End Class
