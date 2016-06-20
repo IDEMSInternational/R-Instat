@@ -16,6 +16,8 @@
 Imports instat.Translations
 Public Class sdgSimpleRegOptions
     Public clsRModelFunction As RFunction
+    Public clsRDataFrame As ucrDataFrame
+    Public clsRYVariable, clsRXVariable As ucrReceiverSingle
     Public clsRGraphics, clsRFittedModelGraphics, clsRFittedModelGraphics2 As New RSyntax
     Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsRFourPlotsFunction, clsRgeom_point, clsRPredFunction, clsRDFFunction As New RFunction
     Public clsRggplotFunction, clsRaesFunction, clsRStat_smooth, clsRModelsFunction, clsRCIFunction, clsR_ribbon, clsRaes_ribbon As New RFunction
@@ -34,40 +36,53 @@ Public Class sdgSimpleRegOptions
         clsRModelFunction = clsRModelFunc
     End Sub
 
-    Private Sub AnovaTable()
+    Public Sub SetRDataFrame(clsRDataFr As ucrDataFrame)
+        clsRDataFrame = clsRDataFr
+    End Sub
+
+    Public Sub SetRYVariable(clsRYVar As ucrReceiverSingle)
+        clsRYVariable = clsRYVar
+    End Sub
+    Public Sub SetRXVariable(clsRXVar As ucrReceiverSingle)
+        clsRXVariable = clsRXVar
+    End Sub
+
+    Public Sub AnovaTable()
         'p-values should be false here
         clsRaovFunction.SetRCommand("anova")
-        clsRaovFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+        clsRaovFunction.AddParameter("", clsRFunctionParameter:=clsRModelFunction)
         frmMain.clsRLink.RunScript(clsRaovFunction.ToScript(), 2)
     End Sub
 
     Private Sub AnovaTablePvalues()
         clsRaovpvalFunction.SetRCommand("anova")
-        clsRaovpvalFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+        clsRaovpvalFunction.AddParameter("", clsRFunctionParameter:=clsRModelFunction)
+        clsRaovpvalFunction.AddParameter("", clsRFunctionParameter:=clsRModelFunction)
+
         frmMain.clsRLink.RunScript(clsRaovpvalFunction.ToScript(), 2)
     End Sub
 
     Private Sub Estimates()
         'p-values should be false here
-        frmMain.clsRLink.RunScript(dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction.ToScript(), 2)
+        frmMain.clsRLink.RunScript(clsRModelFunction.ToScript(), 2)
     End Sub
 
     Private Sub EstimatesPvalues()
         clsRestpvalFunction.SetRCommand("summary")
-        clsRestpvalFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+        clsRestpvalFunction.AddParameter("", clsRFunctionParameter:=clsRModelFunction)
         frmMain.clsRLink.RunScript(clsRestpvalFunction.ToScript(), 2)
     End Sub
 
     Private Sub Model()
         clsRModelsFunction.SetRCommand("formula")
-        clsRModelsFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+        clsRModelsFunction.AddParameter("", clsRFunctionParameter:=clsRModelFunction)
         frmMain.clsRLink.RunScript(clsRModelsFunction.ToScript(), 2)
     End Sub
 
     Private Sub FourPlots()
         clsRGraphics.SetOperation("+")
         clsRFourPlotsFunction.SetRCommand("autoplot")
-        clsRFourPlotsFunction.AddParameter("object", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+        clsRFourPlotsFunction.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
         clsRFourPlotsFunction.AddParameter("ncol", 2) 'these should be an option by the user as either 2 by 2, 4 by 1 or 1 by 4
         clsRgeom_point.SetRCommand("geom_point")
         clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRFourPlotsFunction)
@@ -80,15 +95,16 @@ Public Class sdgSimpleRegOptions
         clsRFittedModelGraphics.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
         If (chkGraphicsCLimits.Checked = True) Then
-            clsRggplotFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+            clsRggplotFunction.AddParameter("", clsRFunctionParameter:=clsRModelFunction)
         End If
         If (chkPredictionInterval.Checked = True) Then
-            clsRggplotFunction.AddParameter("", clsRFunctionParameter:=dlgRegressionSimple.ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
+            clsRggplotFunction.AddParameter("", clsRFunctionParameter:=clsRDataFrame.clsCurrDataFrame)
         End If
         clsRaesFunction.SetRCommand("aes")
         'this is not the right way of adding the aesthetics x and y since we are using the lm object
-        clsRaesFunction.AddParameter("y", dlgRegressionSimple.ucrResponse.GetVariableNames(bWithQuotes:=False))
-        clsRaesFunction.AddParameter("x", dlgRegressionSimple.ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+        'The next two lines shoulb be made more robust....
+        clsRaesFunction.AddParameter("y", clsRYVariable.GetVariableNames(bWithQuotes:=False))
+        clsRaesFunction.AddParameter("x", clsRXVariable.GetVariableNames(bWithQuotes:=False))
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         clsRgeom_point.SetRCommand("geom_point")
         clsRFittedModelGraphics.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
@@ -110,10 +126,10 @@ Public Class sdgSimpleRegOptions
 
     Private Sub AddCols()
         clsRPredFunction.SetRCommand("predict")
-        clsRPredFunction.AddParameter("object", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+        clsRPredFunction.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
         clsRPredFunction.AddParameter("interval", Chr(34) & "prediction" & Chr(34))
         clsRDFFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        clsRDFFunction.AddParameter("data_name", Chr(34) & dlgRegressionSimple.ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsRDFFunction.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
         clsRDFFunction.AddParameter("col_name", "c(" & Chr(34) & "fit" & Chr(34) & "," & Chr(34) & "lwr" & Chr(34) & "," & Chr(34) & "upr" & Chr(34) & ")")
         clsRDFFunction.AddParameter("col_data", clsRFunctionParameter:=clsRPredFunction)
         clsRDFFunction.AddParameter("use_col_name_as_prefix", "FALSE")
@@ -137,7 +153,7 @@ Public Class sdgSimpleRegOptions
 
     Private Sub ConfidenceInterval()
         clsRCIFunction.SetRCommand("confint")
-        clsRCIFunction.AddParameter("object", clsRFunctionParameter:=dlgRegressionSimple.ucrBase.clsRsyntax.clsBaseFunction)
+        clsRCIFunction.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
         DisplayConfidence()
         frmMain.clsRLink.RunScript(clsRCIFunction.ToScript(), 2)
     End Sub
