@@ -1015,4 +1015,8 @@ Public Class frmMain
     Private Sub JitterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOrganisePrepareToShareJitter.Click
         dlgJitter.ShowDialog()
     End Sub
+
+    Private Sub mnuModelFourVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelFourVariablesFitModel.Click
+        dlgFourVariableModelling.ShowDialog()
+    End Sub
 End Class
