@@ -432,6 +432,7 @@ Public Class RLink
         Dim clsGetItems As New RFunction
         Dim clsIncludeList As New RFunction
         Dim kvpInclude As KeyValuePair(Of String, String())
+        Dim lviTemp As ListViewItem
 
         kvpInclude = New KeyValuePair(Of String, String())(strProperty, strValues)
 
@@ -450,8 +451,12 @@ Public Class RLink
                 chrCurrColumns = vecColumns(i).AsCharacter
                 lstView.BeginUpdate()
                 For j = 0 To chrCurrColumns.Count - 1
-                    iTemp = lstView.Items.IndexOfKey(chrCurrColumns(j))
-                    lstView.Items(iTemp).Selected = True
+                    For Each lviTemp In lstView.Items
+                        If lviTemp.Text = chrCurrColumns(j) Then
+                            lviTemp.Selected = True
+                            Exit For
+                        End If
+                    Next
                 Next
                 lstView.EndUpdate()
             Next

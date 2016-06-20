@@ -50,7 +50,7 @@ Public Class dlgCombine
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrFactorsReceiver.IsEmpty() AndAlso Not ucrInputColName.IsEmpty() Then
+        If (ucrFactorsReceiver.lstSelectedVariables.Items.Count > 1) AndAlso (Not ucrInputColName.IsEmpty()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -64,7 +64,7 @@ Public Class dlgCombine
     End Sub
 
     Private Sub ucrFactorsReceiver_SelectionChanged() Handles ucrFactorsReceiver.SelectionChanged
-        If Not ucrFactorsReceiver.IsEmpty Then
+        If ucrFactorsReceiver.lstSelectedVariables.Items.Count > 1 Then
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrFactorsReceiver.GetVariables())
         Else
             ucrBase.clsRsyntax.RemoveParameter("x")

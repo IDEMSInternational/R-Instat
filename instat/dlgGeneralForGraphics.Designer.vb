@@ -45,6 +45,7 @@ Partial Class dlgGeneralForGraphics
         Me.lstLayers.Size = New System.Drawing.Size(125, 149)
         Me.lstLayers.TabIndex = 1
         Me.lstLayers.UseCompatibleStateImageBehavior = False
+        Me.lstLayers.View = System.Windows.Forms.View.List
         '
         'lblLayers
         '
