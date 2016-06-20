@@ -207,6 +207,7 @@ Public Class ROperator
         If strValue <> "" Then
             clsParam = New RParameter
             clsParam.SetArgumentValue(strValue)
+            clsParam.SetArgumentName(strParameterName)
         End If
 
         If bSetFirst Then

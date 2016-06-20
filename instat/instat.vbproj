@@ -1304,10 +1304,10 @@
     <Compile Include="dlgShiftDailyData.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgSimpleWithGroups.Designer.vb">
-      <DependentUpon>dlgSimpleWithGroups.vb</DependentUpon>
+    <Compile Include="dlgThreeVariablesModelling.Designer.vb">
+      <DependentUpon>dlgThreeVariablesModelling.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgSimpleWithGroups.vb">
+    <Compile Include="dlgThreeVariablesModelling.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSite.Designer.vb">
@@ -3370,14 +3370,14 @@
     <EmbeddedResource Include="dlgShiftDailyData.sw-KE.resx">
       <DependentUpon>dlgShiftDailyData.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSimpleWithGroups.fr-FR.resx">
-      <DependentUpon>dlgSimpleWithGroups.vb</DependentUpon>
+    <EmbeddedResource Include="dlgThreeVariablesModelling.fr-FR.resx">
+      <DependentUpon>dlgThreeVariablesModelling.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSimpleWithGroups.resx">
-      <DependentUpon>dlgSimpleWithGroups.vb</DependentUpon>
+    <EmbeddedResource Include="dlgThreeVariablesModelling.resx">
+      <DependentUpon>dlgThreeVariablesModelling.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSimpleWithGroups.sw-KE.resx">
-      <DependentUpon>dlgSimpleWithGroups.vb</DependentUpon>
+    <EmbeddedResource Include="dlgThreeVariablesModelling.sw-KE.resx">
+      <DependentUpon>dlgThreeVariablesModelling.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSite.fr-FR.resx">
       <DependentUpon>dlgSite.vb</DependentUpon>

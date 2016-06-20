@@ -719,6 +719,7 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
   data_obj = self$get_data_objects(data_name)
   names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
   data_obj$append_to_metadata(data_name_label, new_value)
+  data_obj$set_data_changed(TRUE)
 } 
 )
 
