@@ -26,6 +26,12 @@ Public Class RFunction
     Public bIsAssigned As Boolean = False
     Public bAssignToIsPrefix As Boolean = False
 
+    Public Sub New()
+        RaiseEvent ParametersChanged()
+    End Sub
+
+    Public Event ParametersChanged()
+
     Public Sub SetRCommand(strTemp As String)
         strRCommand = strTemp
         bIsAssigned = False
@@ -177,7 +183,6 @@ Public Class RFunction
             clsParam.SetArgumentOperator(clsROperatorParameter)
         End If
         Me.AddParameter(clsParam)
-
     End Sub
 
     Public Sub AddParameter(clsParam As RParameter)
@@ -202,7 +207,15 @@ Public Class RFunction
             End If
         End If
         bIsAssigned = False
+        RaiseEvent ParametersChanged()
     End Sub
+
+    Public Function GetParameter(strName As String) As RParameter
+        If Not clsParameters Is Nothing Then
+            Return clsParameters.Find(Function(x) x.strArgumentName = strName)
+        End If
+        Return Nothing
+    End Function
 
     Public Sub RemoveParameterByName(strArgName)
         Dim clsParam
@@ -211,17 +224,19 @@ Public Class RFunction
             clsParameters.Remove(clsParam)
         End If
         bIsAssigned = False
+        RaiseEvent ParametersChanged()
     End Sub
 
     Public Sub ClearParameters()
         clsParameters.Clear()
         bIsAssigned = False
+        RaiseEvent ParametersChanged()
     End Sub
 
     Public Function Clone() As RFunction
 
         Dim clsRFunction As New RFunction
-        Dim clsRParam As New RParameter
+        Dim clsRParam As RParameter
         clsRFunction.strRCommand = strRCommand
         clsRFunction.strAssignTo = strAssignTo
         clsRFunction.strAssignToDataFrame = strAssignToDataFrame
@@ -240,4 +255,9 @@ Public Class RFunction
 
     End Function
 
+    Public ReadOnly Property iParameterCount() As Integer
+        Get
+            Return clsParameters.Count
+        End Get
+    End Property
 End Class

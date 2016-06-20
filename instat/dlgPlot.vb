@@ -71,6 +71,8 @@ Public Class dlgPlot
 
         ucrSaveLinePlot.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
         ucrSaveLinePlot.strPrefix = "Graph"
+        ucrSaveLinePlot.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveLinePlot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
     Private Sub TeskOkEnabled()
         If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactorForLinePlot.IsEmpty() Then

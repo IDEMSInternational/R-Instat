@@ -19,13 +19,14 @@ Public Class dlgReorderLevels
     Public bFirstLoad As Boolean = True
     Private Sub dlgReorderLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
-
         If bFirstLoad Then
+
             InitialiseDialog()
+            'SetDefaultSettings()
             SetDefaultSettings()
             bFirstLoad = False
         End If
+
         TestOKEnabled()
     End Sub
     Private Sub InitialiseDialog()
@@ -38,10 +39,9 @@ Public Class dlgReorderLevels
         ucrBase.iHelpTopicID = 36
     End Sub
     Private Sub SetDefaultSettings()
-
         ucrSelectorFactorLevelsToReorder.Reset()
         ucrSelectorFactorLevelsToReorder.Focus()
-        ucrReorderFactor.lstAvailableData.ResetText()
+        ucrReorderFactor.Reset()
         TestOKEnabled()
     End Sub
 

@@ -283,4 +283,10 @@ Public Class ucrReceiverMultiple
             Return 0
         End If
     End Function
+
+    Public Sub Add(strItems As String())
+        For Each strItem In strItems
+            MyBase.Add(strItem)
+        Next
+    End Sub
 End Class
