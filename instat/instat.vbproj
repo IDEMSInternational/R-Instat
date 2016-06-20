@@ -614,6 +614,12 @@
     <Compile Include="dlgCombineforGraphics.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Four Variable Modelling.Designer.vb">
+      <DependentUpon>Four Variable Modelling.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Four Variable Modelling.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSetupLoading.Designer.vb">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
     </Compile>
@@ -2411,6 +2417,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCombineforGraphics.sw-KE.resx">
       <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Four Variable Modelling.fr-FR.resx">
+      <DependentUpon>Four Variable Modelling.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Four Variable Modelling.resx">
+      <DependentUpon>Four Variable Modelling.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Four Variable Modelling.sw-KE.resx">
+      <DependentUpon>Four Variable Modelling.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetupLoading.fr-FR.resx">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
