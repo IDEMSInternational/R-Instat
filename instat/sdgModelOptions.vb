@@ -74,7 +74,6 @@ Public Class sdgModelOptions
 
     Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
         RestrictLink()
-        'dlgRegressionSimple.ucrFamily.cboDistributions.SelectedIndex = dlgRegressionSimple.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
     End Sub
 
     Public Sub RestrictLink()

@@ -317,8 +317,8 @@ Public Class frmMain
         dlgSelect.ShowDialog()
     End Sub
 
-    Private Sub SimpleWithGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesSimpleWithGroups.Click
-        dlgSimpleWithGroups.ShowDialog()
+    Private Sub mnuModelThreeVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelThreeVariablesFitModel.Click
+        dlgThreeVariableModelling.ShowDialog()
     End Sub
 
     Private Sub mnuStatisticsRegressionLogLinear_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralLogLinear.Click
@@ -945,7 +945,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuModelOtherThreeVariablesSimpleWithGroups_Click(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesSimpleWithGroups.Click
-        dlgSimpleWithGroups.ShowDialog()
+        dlgThreeVariableModelling.ShowDialog()
     End Sub
 
     Private Sub mnuModelOtherThreeVariablesNonParametricTwoWayANOVA_Click(sender As Object, e As EventArgs) Handles mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Click
