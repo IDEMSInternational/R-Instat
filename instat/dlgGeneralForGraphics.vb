@@ -143,7 +143,6 @@ Public Class dlgGeneralForGraphics
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=False, clsTempLocalAes:=clsLocalAes)
         sdgLayerOptions.ShowDialog()
         AddLayers(lstLayers.SelectedItems(0))
-
     End Sub
 
     'Private Sub clsGgplotAesFunction_ParametersChanged() Handles clsGgplotAesFunction.ParametersChanged
