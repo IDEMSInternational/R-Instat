@@ -466,4 +466,12 @@ Public Class frmEditor
     Private Sub frmEditor_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         frmMain.mnuViewDataView.Checked = Me.Visible
     End Sub
+
+    Private Sub clearColumnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles clearColumnFilterToolStripMenuItem.Click
+        frmMain.clsRLink.RunScript(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
+    End Sub
+
+    Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
+        dlgSort.ShowDialog()
+    End Sub
 End Class

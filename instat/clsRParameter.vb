@@ -58,4 +58,20 @@ Public Class RParameter
         End If
         Return strRet
     End Function
+
+    Public Function Clone() As RParameter
+        Dim clsTempRParam As New RParameter
+
+        clsTempRParam.strArgumentName = strArgumentName
+        clsTempRParam.strArgumentValue = strArgumentValue
+        clsTempRParam.bIsFunction = bIsFunction
+        clsTempRParam.bIsOperator = bIsOperator
+        If clsArgumentFunction IsNot Nothing Then
+            clsTempRParam.clsArgumentFunction = clsArgumentFunction.Clone
+        End If
+        If clsArgumentOperator IsNot Nothing Then
+            clsTempRParam.clsArgumentOperator = clsArgumentOperator.Clone
+        End If
+        Return clsTempRParam
+    End Function
 End Class

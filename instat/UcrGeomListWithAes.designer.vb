@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class UcrGeomListWithParameters
     Inherits instat.ucrGeom
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class UcrGeomListWithParameters
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.UcrSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblAesList = New System.Windows.Forms.Label()
@@ -40,12 +40,14 @@ Partial Class UcrGeomListWithParameters
         Me.ucrReceiverParam8 = New instat.ucrReceiverSingle()
         Me.ucrReceiverParam7 = New instat.ucrReceiverSingle()
         Me.ucrReceiverParam6 = New instat.ucrReceiverSingle()
+        Me.chkApplyOnAllLayers = New System.Windows.Forms.CheckBox()
+        Me.chkIgnoreGlobalAes = New System.Windows.Forms.CheckBox()
         Me.grpAesList.SuspendLayout()
         Me.SuspendLayout()
         '
         'UcrSelector
         '
-        Me.UcrSelector.Location = New System.Drawing.Point(7, 69)
+        Me.UcrSelector.Location = New System.Drawing.Point(3, 56)
         Me.UcrSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrSelector.Name = "UcrSelector"
         Me.UcrSelector.Size = New System.Drawing.Size(232, 192)
@@ -248,9 +250,31 @@ Partial Class UcrGeomListWithParameters
         Me.ucrReceiverParam6.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverParam6.TabIndex = 8
         '
+        'chkApplyOnAllLayers
+        '
+        Me.chkApplyOnAllLayers.AutoSize = True
+        Me.chkApplyOnAllLayers.Location = New System.Drawing.Point(3, 245)
+        Me.chkApplyOnAllLayers.Name = "chkApplyOnAllLayers"
+        Me.chkApplyOnAllLayers.Size = New System.Drawing.Size(117, 17)
+        Me.chkApplyOnAllLayers.TabIndex = 10
+        Me.chkApplyOnAllLayers.Text = "Apply On All Layers"
+        Me.chkApplyOnAllLayers.UseVisualStyleBackColor = True
+        '
+        'chkIgnoreGlobalAes
+        '
+        Me.chkIgnoreGlobalAes.AutoSize = True
+        Me.chkIgnoreGlobalAes.Location = New System.Drawing.Point(3, 266)
+        Me.chkIgnoreGlobalAes.Name = "chkIgnoreGlobalAes"
+        Me.chkIgnoreGlobalAes.Size = New System.Drawing.Size(141, 17)
+        Me.chkIgnoreGlobalAes.TabIndex = 11
+        Me.chkIgnoreGlobalAes.Text = "Ignore Global Aesthetics"
+        Me.chkIgnoreGlobalAes.UseVisualStyleBackColor = True
+        '
         'UcrGeomListWithParameters
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.Controls.Add(Me.chkIgnoreGlobalAes)
+        Me.Controls.Add(Me.chkApplyOnAllLayers)
         Me.Controls.Add(Me.grpAesList)
         Me.Controls.Add(Me.lblAesList)
         Me.Controls.Add(Me.UcrSelector)
@@ -259,6 +283,8 @@ Partial Class UcrGeomListWithParameters
         Me.Controls.SetChildIndex(Me.UcrSelector, 0)
         Me.Controls.SetChildIndex(Me.lblAesList, 0)
         Me.Controls.SetChildIndex(Me.grpAesList, 0)
+        Me.Controls.SetChildIndex(Me.chkApplyOnAllLayers, 0)
+        Me.Controls.SetChildIndex(Me.chkIgnoreGlobalAes, 0)
         Me.grpAesList.ResumeLayout(False)
         Me.grpAesList.PerformLayout()
         Me.ResumeLayout(False)
@@ -286,4 +312,6 @@ Partial Class UcrGeomListWithParameters
     Friend WithEvents lblGgParam8 As Label
     Friend WithEvents ucrReceiverParam9 As ucrReceiverSingle
     Friend WithEvents ucrReceiverParam8 As ucrReceiverSingle
+    Friend WithEvents chkApplyOnAllLayers As CheckBox
+    Friend WithEvents chkIgnoreGlobalAes As CheckBox
 End Class
