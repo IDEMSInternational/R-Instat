@@ -28,6 +28,7 @@ Public Class ucrLayerParamsControls
 
     Public Sub SetGeomFunction(clsTempFunction As RFunction)
         clsGeomFunction = clsTempFunction
+        RaiseEvent RParameterChanged(Me)
     End Sub
 
     Public Sub SetLayerParameter(clsTempLayerParam As LayerParameters)
@@ -40,8 +41,20 @@ Public Class ucrLayerParamsControls
         If Not IsNothing(clsLayerParam) Then
             chkParamName.Visible = True
             chkParamName.Text = clsLayerParam.strLayerParameterName
-            chkParamName.Checked = False
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
+                If clsLayerParam.lstParameterStrings.Count >= 1 Then
+                    nudParamValue.DecimalPlaces = clsLayerParam.lstParameterStrings(0)
+                Else
+                    nudParamValue.DecimalPlaces = 0
+                End If
+                nudParamValue.Increment = Math.Pow(10, -nudParamValue.DecimalPlaces)
+                If clsLayerParam.lstParameterStrings.Count >= 3 Then
+                    nudParamValue.Minimum = clsLayerParam.lstParameterStrings(1)
+                    nudParamValue.Maximum = clsLayerParam.lstParameterStrings(2)
+                Else
+                    nudParamValue.Minimum = Decimal.MinValue
+                    nudParamValue.Maximum = Decimal.MaxValue
+                End If
                 ctrActive = nudParamValue
             ElseIf clsLayerParam.strLayerParameterDataType = "boolean" Then
                 ctrActive = ucrcborParamValue
@@ -54,7 +67,12 @@ Public Class ucrLayerParamsControls
             Else
                 ctrActive = New Control 'this should never actually be used but is here to ensure the code is stable even if a developper uses an incorrect datatype
             End If
-            ctrActive.Text = clsLayerParam.strParameterDefaultValue
+            If clsGeomFunction.GetParameter(clsLayerParam.strLayerParameterName) Is Nothing Then
+                SetValue(clsLayerParam.strParameterDefaultValue)
+            Else
+                SetValue(clsGeomFunction.GetParameter(clsLayerParam.strLayerParameterName).strArgumentValue, True)
+            End If
+            ctrActive.Visible = chkParamName.Checked
         Else
             chkParamName.Visible = False
         End If
@@ -74,9 +92,8 @@ Public Class ucrLayerParamsControls
     End Sub
 
     Private Sub ucrLayerParamsControls_RParameterChanged(ucrControl As ucrLayerParamsControls) Handles Me.RParameterChanged
-
-        If Not IsNothing(clsLayerParam) And Not IsNothing(clsGeomFunction) Then
-            If chkParamName.Checked Then
+        If Not IsNothing(clsLayerParam) AndAlso Not IsNothing(clsGeomFunction) Then
+            If chkParamName.Checked AndAlso ctrActive.Text <> "" Then
                 clsGeomFunction.AddParameter(clsLayerParam.strLayerParameterName, ctrActive.Text)
             Else
                 clsGeomFunction.RemoveParameterByName(clsLayerParam.strLayerParameterName)
@@ -86,5 +103,16 @@ Public Class ucrLayerParamsControls
 
     Private Sub ucrColor_NameChanged() Handles ucrColor.NameChanged
         RaiseEvent RParameterChanged(Me)
+    End Sub
+
+    Public Sub SetValue(strValue As String, Optional bInclude As Boolean = False)
+        If TypeOf (ctrActive) Is NumericUpDown Then
+            If strValue <> "" Then
+                nudParamValue.Value = strValue
+            End If
+        Else
+            ctrActive.Text = strValue
+        End If
+        chkParamName.Checked = bInclude
     End Sub
 End Class

@@ -239,8 +239,4 @@ Public Class sdgPlots
     Private Sub txtYTitle_Leave(sender As Object, e As EventArgs) Handles txtYTitle.Leave
         clsYLabFunction.AddParameter("label", Chr(34) & txtYTitle.Text & Chr(34))
     End Sub
-
-    Private Sub chkFreeScalesY_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScalesY.CheckedChanged
-
-    End Sub
 End Class

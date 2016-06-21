@@ -672,7 +672,7 @@ data_object$set("public", "get_factor_data_frame", function(col_name = "") {
   }
   
   counts <- as.data.frame(table(private$data[,c(col_name)]))
-  counts <- rename(counts, replace = c("Var1" = "Levels", "Freq" = "Counts"))
+  counts <- plyr::rename(counts, replace = c("Var1" = "Levels", "Freq" = "Counts"))
   return(counts)
 }
 )

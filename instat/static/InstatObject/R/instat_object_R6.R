@@ -483,7 +483,7 @@ instat_object$set("public", "delete_objects", function(data_name, object_names) 
     if(!all(object_names %in% names(private$.objects))) stop("Not all object_names found in overall objects list")
     private$.objects[names(private$.objects) == object_names] <- NULL
   }
-  else self$get_data_objects(data_name)$delete_object(object_names = object_names)
+  else self$get_data_objects(data_name)$delete_objects(object_names = object_names)
 }
 )
 
@@ -719,6 +719,7 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
   data_obj = self$get_data_objects(data_name)
   names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
   data_obj$append_to_metadata(data_name_label, new_value)
+  data_obj$set_data_changed(TRUE)
 } 
 )
 
