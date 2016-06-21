@@ -51,6 +51,12 @@ Public Class dlgCumulativeDistribution
         ucrVariablesAsFactorforCumDist.SetSelector(ucrCumDistSelector)
         ucrVariablesAsFactorforCumDist.SetIncludedDataType({"numeric"})
 
+
+        ucrSaveCumDist.SetDataFrameSelector(ucrCumDistSelector.ucrAvailableDataFrames)
+        ucrSaveCumDist.strPrefix = "Graph"
+        ucrSaveCumDist.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveCumDist.ucrInputGraphName.SetDefaultTypeAsGraph()
+
     End Sub
 
     Private Sub SetDefaults()
@@ -116,6 +122,16 @@ Public Class dlgCumulativeDistribution
             ucrBase.clsRsyntax.AddOperatorParameter("scale_y_reverse", clsRFunc:=clsTempRFunc)
         Else
             ucrBase.clsRsyntax.RemoveOperatorParameter("scale_y_reverse")
+        End If
+    End Sub
+
+    Private Sub ucrSaveCumDist_GraphNameChanged() Handles ucrSaveCumDist.GraphNameChanged, ucrSaveCumDist.SaveGraphCheckedChanged
+        If ucrSaveCumDist.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveCumDist.strGraphName, strTempDataframe:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveCumDist.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
 End Class

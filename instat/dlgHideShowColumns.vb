@@ -21,10 +21,10 @@ Public Class dlgHideShowColumns
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
-            TestOKEnabled
+            TestOKEnabled()
             bFirstLoad = False
         End If
+        SetDefaults()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -37,7 +37,6 @@ Public Class dlgHideShowColumns
         ucrReceiverHiddenColumns.SetMeAsReceiver()
         ucrReceiverHiddenColumns.bExcludeFromSelector = True
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
-
     End Sub
 
     Private Sub SetDefaults()

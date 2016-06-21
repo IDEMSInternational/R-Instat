@@ -29,9 +29,7 @@ Public Class dlgBoxplot
         Else
             ReopenDialog()
         End If
-
     End Sub
-
     Public Sub SetOperator()
         Dim clsTempRFunc As New RFunction
         If chkHorizontalBoxplot.Checked Then
@@ -43,13 +41,15 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub SetDefaults()
+        clsRaesFunction.ClearParameters()
+        clsRgeom_boxplotFunction.ClearParameters()
         ucrSelectorBoxPlot.Reset()
         ucrSelectorBoxPlot.Focus()
         ucrVariablesAsFactorForBoxplot.ResetControl()
         chkHorizontalBoxplot.Checked = False
         sdgBoxPlot.SetDefaults()
         TestOkEnabled()
-        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34)) ' Empty string is default x value in case no factor is chosen
+        SetXParameter()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -70,14 +70,19 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
 
-
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        sdgBoxPlot.SetBoxPlotFunction(clsRgeom_boxplotFunction)
+        sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
+        'sdgLayerOptions.SetGeomFunction(clsRgeom_boxplotFunction)
+        'sdgLayerOptions.SetAesFunction(clsRaesFunction
 
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
         ucrVariablesAsFactorForBoxplot.SetIncludedDataType({"numeric"})
 
+
+        ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
+        ucrSaveBoxplot.strPrefix = "Graph"
+        ucrSaveBoxplot.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveBoxplot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -87,15 +92,20 @@ Public Class dlgBoxplot
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
+
     Private Sub ucrSelectorBoxPlot_DataFrameChanged() Handles ucrSelectorBoxPlot.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorBoxPlot.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-
     Private Sub ucrByFactorsReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.SelectionChanged
+        SetXParameter()
+    End Sub
+
+    Private Sub SetXParameter()
         If Not ucrByFactorsReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("x", ucrByFactorsReceiver.GetVariableNames(False))
         Else
@@ -111,11 +121,26 @@ Public Class dlgBoxplot
             clsRaesFunction.RemoveParameterByName("fill")
         End If
     End Sub
+
     Private Sub ReopenDialog()
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
-        sdgBoxPlot.ShowDialog()
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_boxplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = "" Then
+                    ucrByFactorsReceiver.Clear()
+                Else
+                    ucrByFactorsReceiver.Add(clsParam.strArgumentValue)
+                End If
+            ElseIf clsParam.strArgumentName = "y" Then
+                ucrVariablesAsFactorForBoxplot.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -133,5 +158,15 @@ Public Class dlgBoxplot
             clsRaesFunction.RemoveParameterByName("y")
         End If
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveBoxplot_GraphNameChanged() Handles ucrSaveBoxplot.GraphNameChanged, ucrSaveBoxplot.SaveGraphCheckedChanged
+        If ucrSaveBoxplot.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveBoxplot.strGraphName, strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveBoxplot.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
     End Sub
 End Class

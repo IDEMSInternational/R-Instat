@@ -23,13 +23,32 @@ Public Class dlgViewDescriptives
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog
+        End If
+        TestOKEnabled
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverSelectedObject.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
 
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrReceiverSelectedObject.Selector = ucrSelectorForViewObject
+        ucrReceiverSelectedObject.SetMeAsReceiver()
+        ucrSelectorForViewObject.SetItemType("object")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_from_object")
     End Sub
+
     Private Sub SetDefaults()
         rdoStructure.Checked = True
         rdoAllContents.Enabled = False
@@ -38,6 +57,7 @@ Public Class dlgViewDescriptives
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub StructureComponentsAndAllContents_CheckedChanged(sender As Object, e As EventArgs) Handles rdoStructure.CheckedChanged, rdoAllContents.CheckedChanged, rdoComponent.CheckedChanged
@@ -50,7 +70,20 @@ Public Class dlgViewDescriptives
         ElseIf rdoAllContents.Checked Then
 
         Else
-            ucrComponent.Enabled = True
+
         End If
+    End Sub
+
+    Private Sub ucrSelectorForViewObject_DataFrameChaned() Handles ucrSelectorForViewObject.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForViewObject.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub ucrReceiverSelectedObject_SelectionChnged(sender As Object, e As EventArgs) Handles ucrReceiverSelectedObject.SelectionChanged
+        If Not ucrReceiverSelectedObject.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("object_name", ucrReceiverSelectedObject.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("object_name")
+        End If
+        TestOKEnabled()
     End Sub
 End Class

@@ -23,9 +23,12 @@ Public Class ucrDataFrame
     Private bIncludeOverall As Boolean = False
     Public strCurrDataFrame As String = ""
     Public bUseFilteredData As Boolean = True
+    Public bDataFrameFixed As Boolean = False
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad, bIncludeOverall)
+        If Not bDataFrameFixed Then
+            frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad, bIncludeOverall)
+        End If
         If bFirstLoad Then
             bFirstLoad = False
         End If
@@ -70,6 +73,17 @@ Public Class ucrDataFrame
             clsCurrDataFrame.AddParameter(clsParam)
             clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.Text & "_temp")
         End If
+    End Sub
+
+    Public Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True)
+        Dim Index As Integer
+
+        Index = cboAvailableDataFrames.Items.IndexOf(strDataframe)
+        If Index >= 0 Then
+            cboAvailableDataFrames.SelectedIndex = Index
+        End If
+        cboAvailableDataFrames.Enabled = bEnableDataframe
+        bDataFrameFixed = Not bEnableDataframe
     End Sub
 
     Public Sub SetIncludeOverall(bInclude As Boolean)

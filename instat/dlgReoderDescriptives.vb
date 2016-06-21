@@ -30,19 +30,39 @@ Public Class dlgReoderDescriptives
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_objects")
+        ucrReorderObjects.setDataType("object")
+        ucrReorderObjects.setDataframes(ucrDataFrameReoder)
     End Sub
     Private Sub ReopenDialog()
 
     End Sub
     Private Sub TestOKEnabled()
-
+        If Not ucrReorderObjects.isEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
     Private Sub SetDefaults()
-
+        ucrDataFrameReoder.Reset()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReorderObjects_OrderChanged() Handles ucrReorderObjects.OrderChanged
+        If Not ucrReorderObjects.isEmpty Then
+            ucrBase.clsRsyntax.AddParameter("new_order", ucrReorderObjects.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("new_order")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrDataFrameReoder_DataFrameChanged() Handles ucrDataFrameReoder.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameReoder.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 End Class
