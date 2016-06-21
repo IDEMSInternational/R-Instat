@@ -35,21 +35,20 @@ Public Class UcrGeomListWithParameters
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+        SetSelector()
         clsGeomAesFunction = New RFunction
         clsGeomAesFunction.SetRCommand("aes")
     End Sub
 
     Private Sub UcrGeomListWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
-            InitialiseControl()
-            SetDefaults()
             SetParameters()
             bFirstLoad = False
         End If
         SetAes(bCurrentFixAes)
     End Sub
 
-    Private Sub InitialiseControl()
+    Private Sub SetSelector()
         ucrReceiverParam1.Selector = UcrSelector
         ucrReceiverParam2.Selector = UcrSelector
         ucrReceiverParam3.Selector = UcrSelector
@@ -72,6 +71,7 @@ Public Class UcrGeomListWithParameters
             clsGeomAesFunction.SetRCommand("aes")
         End If
         UcrSelector.SetDataframe(strGlobalDataFrame, (Not bUseGlobalAes) OrElse strGlobalDataFrame = "")
+        UcrSelector.Reset()
         bCurrentFixAes = bFixAes
         SetAes(bCurrentFixAes)
         chkApplyOnAllLayers.Checked = bUseGlobalAes
@@ -85,16 +85,26 @@ Public Class UcrGeomListWithParameters
             lstAesParameterUcr(i).Enabled = True
             For Each clsParam In clsGgplotAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
-                    lstAesParameterUcr(i).Enabled = Not bFixAes
-                    Exit For
+                    If clsCurrGeom.strGeomName = "geom_boxplot" AndAlso clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                        lstAesParameterUcr(i).Clear()
+                        lstAesParameterUcr(i).Enabled = True
+                    Else
+                        lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
+                        lstAesParameterUcr(i).Enabled = Not bFixAes
+                        Exit For
+                    End If
                 End If
             Next
             For Each clsParam In clsGeomAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
-                    lstAesParameterUcr(i).Enabled = True
-                    Exit For
+                    If clsCurrGeom.strGeomName = "geom_boxplot" AndAlso clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                        lstAesParameterUcr(i).Clear()
+                        lstAesParameterUcr(i).Enabled = True
+                    Else
+                        lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
+                        lstAesParameterUcr(i).Enabled = True
+                        Exit For
+                    End If
                 End If
             Next
             If bFirstEnabled AndAlso lstAesParameterUcr(i).Enabled Then
@@ -104,11 +114,6 @@ Public Class UcrGeomListWithParameters
         Next
         lstAesParameterUcr(iFirstEnabled).SetMeAsReceiver()
         bAddToLocalAes = True
-    End Sub
-
-    Private Sub SetDefaults()
-        'sets control defaults
-        UcrSelector.Reset()
     End Sub
 
     Public Sub SetParameters() 'this will set function or aes parameters
