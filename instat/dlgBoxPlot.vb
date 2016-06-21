@@ -41,13 +41,15 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub SetDefaults()
+        clsRaesFunction.ClearParameters()
+        clsRgeom_boxplotFunction.ClearParameters()
         ucrSelectorBoxPlot.Reset()
         ucrSelectorBoxPlot.Focus()
         ucrVariablesAsFactorForBoxplot.ResetControl()
         chkHorizontalBoxplot.Checked = False
         sdgBoxPlot.SetDefaults()
         TestOkEnabled()
-        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34)) ' Empty string is default x value in case no factor is chosen
+        SetXParameter()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -100,6 +102,10 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub ucrByFactorsReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.SelectionChanged
+        SetXParameter()
+    End Sub
+
+    Private Sub SetXParameter()
         If Not ucrByFactorsReceiver.IsEmpty Then
             clsRaesFunction.AddParameter("x", ucrByFactorsReceiver.GetVariableNames(False))
         Else
@@ -120,7 +126,21 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_boxplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
         sdgLayerOptions.ShowDialog()
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = "" Then
+                    ucrByFactorsReceiver.Clear()
+                Else
+                    ucrByFactorsReceiver.Add(clsParam.strArgumentValue)
+                End If
+            ElseIf clsParam.strArgumentName = "y" Then
+                ucrVariablesAsFactorForBoxplot.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
