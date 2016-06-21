@@ -38,6 +38,10 @@ Partial Class frmEditor
         Me.mnuUnhideColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuUnhideAllColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem21 = New System.Windows.Forms.ToolStripSeparator()
+        Me.FreezeToHereToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UnfreezeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SortToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.clearColumnFilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -60,7 +64,6 @@ Partial Class frmEditor
         Me.HideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblNoData = New System.Windows.Forms.Label()
-        Me.SortToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -87,9 +90,9 @@ Partial Class frmEditor
         '
         'columnContextMenuStrip
         '
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuConvertText, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.mnuHideColumns, Me.mnuUnhideColumns, Me.mnuUnhideAllColumns, Me.toolStripMenuItem21, Me.SortToolStripMenuItem, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuConvertText, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.mnuHideColumns, Me.mnuUnhideColumns, Me.mnuUnhideAllColumns, Me.toolStripMenuItem21, Me.FreezeToHereToolStripMenuItem, Me.UnfreezeToolStripMenuItem, Me.ToolStripSeparator3, Me.SortToolStripMenuItem, Me.columnFilterToolStripMenuItem, Me.clearColumnFilterToolStripMenuItem})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(200, 330)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(200, 358)
         '
         'mnuColumnRename
         '
@@ -166,6 +169,31 @@ Partial Class frmEditor
         '
         Me.toolStripMenuItem21.Name = "toolStripMenuItem21"
         Me.toolStripMenuItem21.Size = New System.Drawing.Size(196, 6)
+        '
+        'FreezeToHereToolStripMenuItem
+        '
+        Me.FreezeToHereToolStripMenuItem.Enabled = False
+        Me.FreezeToHereToolStripMenuItem.Name = "FreezeToHereToolStripMenuItem"
+        Me.FreezeToHereToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
+        Me.FreezeToHereToolStripMenuItem.Text = "Freeze to Here"
+        '
+        'UnfreezeToolStripMenuItem
+        '
+        Me.UnfreezeToolStripMenuItem.Enabled = False
+        Me.UnfreezeToolStripMenuItem.Name = "UnfreezeToolStripMenuItem"
+        Me.UnfreezeToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
+        Me.UnfreezeToolStripMenuItem.Text = "Unfreeze"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(196, 6)
+        '
+        'SortToolStripMenuItem
+        '
+        Me.SortToolStripMenuItem.Name = "SortToolStripMenuItem"
+        Me.SortToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
+        Me.SortToolStripMenuItem.Text = "Sort..."
         '
         'columnFilterToolStripMenuItem
         '
@@ -252,54 +280,52 @@ Partial Class frmEditor
         '
         Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.insertSheet, Me.deleteSheet, Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.HideSheet, Me.unhideSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(127, 158)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(153, 180)
         '
         'insertSheet
         '
         Me.insertSheet.Name = "insertSheet"
-        Me.insertSheet.Size = New System.Drawing.Size(126, 22)
+        Me.insertSheet.Size = New System.Drawing.Size(152, 22)
         Me.insertSheet.Text = "Insert..."
         '
         'deleteSheet
         '
-        Me.deleteSheet.Enabled = False
         Me.deleteSheet.Name = "deleteSheet"
-        Me.deleteSheet.Size = New System.Drawing.Size(126, 22)
+        Me.deleteSheet.Size = New System.Drawing.Size(152, 22)
         Me.deleteSheet.Text = "Delete"
         '
         'renameSheet
         '
-        Me.renameSheet.Enabled = False
         Me.renameSheet.Name = "renameSheet"
-        Me.renameSheet.Size = New System.Drawing.Size(126, 22)
+        Me.renameSheet.Size = New System.Drawing.Size(152, 22)
         Me.renameSheet.Text = "Rename..."
         '
         'reorderSheet
         '
         Me.reorderSheet.Enabled = False
         Me.reorderSheet.Name = "reorderSheet"
-        Me.reorderSheet.Size = New System.Drawing.Size(126, 22)
+        Me.reorderSheet.Size = New System.Drawing.Size(152, 22)
         Me.reorderSheet.Text = "Reorder..."
         '
         'CopySheet
         '
         Me.CopySheet.Enabled = False
         Me.CopySheet.Name = "CopySheet"
-        Me.CopySheet.Size = New System.Drawing.Size(126, 22)
+        Me.CopySheet.Size = New System.Drawing.Size(152, 22)
         Me.CopySheet.Text = "Copy..."
         '
         'HideSheet
         '
         Me.HideSheet.Enabled = False
         Me.HideSheet.Name = "HideSheet"
-        Me.HideSheet.Size = New System.Drawing.Size(126, 22)
+        Me.HideSheet.Size = New System.Drawing.Size(152, 22)
         Me.HideSheet.Text = "Hide"
         '
         'unhideSheet
         '
         Me.unhideSheet.Enabled = False
         Me.unhideSheet.Name = "unhideSheet"
-        Me.unhideSheet.Size = New System.Drawing.Size(126, 22)
+        Me.unhideSheet.Size = New System.Drawing.Size(152, 22)
         Me.unhideSheet.Text = "Unhide"
         '
         'lblNoData
@@ -312,12 +338,6 @@ Partial Class frmEditor
         Me.lblNoData.TabIndex = 1
         Me.lblNoData.Tag = "no_data_loaded"
         Me.lblNoData.Text = "No Data Loaded"
-        '
-        'SortToolStripMenuItem
-        '
-        Me.SortToolStripMenuItem.Name = "SortToolStripMenuItem"
-        Me.SortToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
-        Me.SortToolStripMenuItem.Text = "Sort..."
         '
         'frmEditor
         '
@@ -377,4 +397,7 @@ Partial Class frmEditor
     Friend WithEvents mnuFilter As ToolStripMenuItem
     Friend WithEvents mnuRemoveCurrentFilter As ToolStripMenuItem
     Friend WithEvents SortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FreezeToHereToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UnfreezeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
 End Class

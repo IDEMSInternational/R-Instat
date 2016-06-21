@@ -28,14 +28,15 @@ Public Class dlgDummyVariables
         End If
         autoTranslate(Me)
     End Sub
+
     Private Sub TestOkEnabled()
         If Not ucrReceiverFactor.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
-            ucrBase.OKEnabled(True)
+            ucrBase.OKEnabled(False)
         End If
-
     End Sub
+
     Private Sub SetDefaults()
         ucrSelectorDummyVariable.Focus()
         ucrSelectorDummyVariable.Reset()
@@ -46,9 +47,13 @@ Public Class dlgDummyVariables
     End Sub
 
     Public Sub InitialiseDialog()
+
+        ucrInputColumns.SetItemsTypeAsColumns()
+        ucrInputColumns.SetDefaultTypeAsColumn()
+        ucrInputColumns.SetPrefix("dummy")
+        ucrInputColumns.SetDataFrameSelector(ucrSelectorDummyVariable.ucrAvailableDataFrames)
+
         ucrBase.iHelpTopicID = 41
-        ucrBase.clsRsyntax.SetFunction("")
-        ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverFactor.Selector = ucrSelectorDummyVariable
         ucrVariateReceiver.Selector = ucrSelectorDummyVariable
         ucrReceiverFactor.SetMeAsReceiver()
@@ -58,11 +63,11 @@ Public Class dlgDummyVariables
         chkXvariable.Checked = False
         ucrVariateReceiver.Visible = False
         lblVariate.Visible = False
+        grpLevelOmitted.Enabled = False
+        ucrInputColumns.Visible = False
 
-        ucrInputColName.SetPrefix("Dummy")
-        ucrInputColName.SetItemsTypeAsColumns()
-        ucrInputColName.SetDefaultTypeAsColumn()
-        ucrInputColName.SetDataFrameSelector(ucrSelectorDummyVariable.ucrAvailableDataFrames)
+        ucrBase.clsRsyntax.SetFunction("dummy")
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToIsPrefix:=False)
     End Sub
 
     Private Sub ReopenDialog()
@@ -84,8 +89,11 @@ Public Class dlgDummyVariables
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
     End Sub
-
-    Private Sub ucrInputColName_NameChanged() Handles ucrInputColName.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColName.GetText, strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColName.GetText)
+    Private Sub ucrReceiverFactor_Selectionchanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverFactor.GetVariables)
+        TestOkEnabled()
+    End Sub
+    Private Sub ucrInputColumns_NameChanged() Handles ucrInputColumns.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputColumns.GetText, strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColumns.GetText, bAssignToIsPrefix:=True)
     End Sub
 End Class
