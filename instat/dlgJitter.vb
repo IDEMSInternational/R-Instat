@@ -40,7 +40,6 @@ Public Class dlgJitter
         ucrInputNewColumnName.SetDefaultTypeAsColumn()
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForJitter.ucrAvailableDataFrames)
         ucrReceiverJitter.SetIncludedDataTypes({"numeric"})
-        clsRunif.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
         ucrInputMaximum.SetValidationTypeAsNumeric()
         ucrInputMinimum.SetValidationTypeAsNumeric()
         ucrInputMaximumDistanceFromZero.SetValidationTypeAsNumeric()
@@ -118,7 +117,7 @@ Public Class dlgJitter
     Private Sub MaximumDistanceFromZero()
         If rdoMaximumDistanceFromZero.Checked Then
             If Not ucrInputMaximumDistanceFromZero.IsEmpty Then
-                clsRunif.AddParameter("min", 0)
+                clsRunif.AddParameter("min", -(ucrInputMaximumDistanceFromZero.GetText))
                 clsRunif.AddParameter("max", ucrInputMaximumDistanceFromZero.GetText)
             Else
                 clsRunif.RemoveParameterByName("max")
@@ -165,4 +164,10 @@ Public Class dlgJitter
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=ucrReceiverJitter.GetVariables)
         TestOKEnabled()
     End Sub
+
+    Private Sub ucrSelectorForJitter_DataFrameChanged() Handles ucrSelectorForJitter.DataFrameChanged
+        clsRunif.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
+    End Sub
+
+
 End Class
