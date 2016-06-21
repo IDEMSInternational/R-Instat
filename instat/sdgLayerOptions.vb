@@ -95,5 +95,21 @@ Public Class sdgLayerOptions
                 clsGeomFunction.RemoveParameterByName("data")
             End If
         End If
+        If clsGeomFunction.strRCommand = "geom_bar" Then
+            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1 OrElse ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y")) AndAlso clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "identity") = -1 Then
+                clsGeomFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
+            End If
+            If clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") <> -1 Then
+                If ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") Then
+                    ucrGeomWithAes.clsGeomAesFunction.RemoveParameterByName("stat")
+                ElseIf clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 Then
+                    clsAesFunction.RemoveParameterByName("stat")
+                End If
+            End If
+        ElseIf clsGeomFunction.strRCommand = "geom_boxplot" Then
+            If clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
+                clsAesFunction.AddParameter("x", Chr(34) & Chr(34))
+            End If
+        End If
     End Sub
 End Class
