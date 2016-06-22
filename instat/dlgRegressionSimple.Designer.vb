@@ -33,13 +33,13 @@ Partial Class dlgRegressionSimple
         Me.chkSaveModel = New System.Windows.Forms.CheckBox()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
         Me.chkFunction = New System.Windows.Forms.CheckBox()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrFamily = New instat.ucrDistributions()
-        Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrResponse = New instat.ucrReceiverSingle()
-        Me.ucrExplanatory = New instat.ucrReceiverSingle()
-        Me.ucrModelName = New instat.ucrVariableName()
         Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
+        Me.ucrModelName = New instat.ucrInputComboBox()
+        Me.ucrExplanatory = New instat.ucrReceiverSingle()
+        Me.ucrResponse = New instat.ucrReceiverSingle()
+        Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrFamily = New instat.ucrDistributions()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -104,26 +104,17 @@ Partial Class dlgRegressionSimple
         Me.chkFunction.Tag = "Function"
         Me.chkFunction.UseVisualStyleBackColor = True
         '
-        'ucrBase
+        'chkConvertToVariate
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
+        resources.ApplyResources(Me.chkConvertToVariate, "chkConvertToVariate")
+        Me.chkConvertToVariate.Name = "chkConvertToVariate"
+        Me.chkConvertToVariate.UseVisualStyleBackColor = True
         '
-        'ucrFamily
+        'ucrModelName
         '
-        resources.ApplyResources(Me.ucrFamily, "ucrFamily")
-        Me.ucrFamily.Name = "ucrFamily"
-        '
-        'ucrSelectorSimpleReg
-        '
-        resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
-        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
-        '
-        'ucrResponse
-        '
-        resources.ApplyResources(Me.ucrResponse, "ucrResponse")
-        Me.ucrResponse.Name = "ucrResponse"
-        Me.ucrResponse.Selector = Nothing
+        Me.ucrModelName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
+        Me.ucrModelName.Name = "ucrModelName"
         '
         'ucrExplanatory
         '
@@ -131,17 +122,26 @@ Partial Class dlgRegressionSimple
         Me.ucrExplanatory.Name = "ucrExplanatory"
         Me.ucrExplanatory.Selector = Nothing
         '
-        'ucrModelName
+        'ucrResponse
         '
-        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
-        Me.ucrModelName.Name = "ucrModelName"
+        resources.ApplyResources(Me.ucrResponse, "ucrResponse")
+        Me.ucrResponse.Name = "ucrResponse"
+        Me.ucrResponse.Selector = Nothing
         '
-        'chkConvertToVariate
+        'ucrSelectorSimpleReg
         '
-        resources.ApplyResources(Me.chkConvertToVariate, "chkConvertToVariate")
-        Me.chkConvertToVariate.Name = "chkConvertToVariate"
-        Me.chkConvertToVariate.Tag = "Convert_to_variate"
-        Me.chkConvertToVariate.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
+        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
+        '
+        'ucrFamily
+        '
+        resources.ApplyResources(Me.ucrFamily, "ucrFamily")
+        Me.ucrFamily.Name = "ucrFamily"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgRegressionSimple
         '
@@ -186,6 +186,6 @@ Partial Class dlgRegressionSimple
     Friend WithEvents ucrSelectorSimpleReg As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrResponse As ucrReceiverSingle
     Friend WithEvents ucrExplanatory As ucrReceiverSingle
-    Friend WithEvents ucrModelName As ucrVariableName
+    Friend WithEvents ucrModelName As ucrInputComboBox
     Friend WithEvents chkConvertToVariate As CheckBox
 End Class
