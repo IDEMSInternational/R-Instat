@@ -2,8 +2,8 @@
 Imports System.Globalization
 Public Class InstatOptions
     Public bIncludeRDefaultParameters As Boolean
-    Public fntOutput, fntScript, fntComment As Font
-    Public clrOutput, clrScript, clrComment As Color
+    Public fntOutput, fntScript, fntComment, fntEditor As Font
+    Public clrOutput, clrScript, clrComment, clrEditor As Color
     Public strComment, strLanguageCultureCode As String
     Public iPreviewRows As Integer
     Public iMaxRows As Integer
@@ -29,6 +29,15 @@ Public Class InstatOptions
         fntComment = fntNew
         clrComment = clrNew
         frmMain.clsRLink.setFormatComment(fntComment, clrComment)
+    End Sub
+
+    Public Sub SetEditorFormat(fntNew As Font, clrNew As Color)
+        fntEditor = fntNew
+        clrEditor = clrNew
+        '
+        Dim sheet = frmEditor.grdData.CurrentWorksheet
+        sheet.SetRangeStyles(unvell.ReoGrid.RangePosition.EntireRange, New unvell.ReoGrid.WorksheetRangeStyle() With {
+                             .Flag = unvell.ReoGrid.PlainStyleFlag.TextColor Or unvell.ReoGrid.PlainStyleFlag.FontSize Or unvell.ReoGrid.PlainStyleFlag.FontName, .TextColor = clrNew, .FontSize = fntNew.Size, .FontName = fntNew.Name})
     End Sub
 
     Public Sub SetPreviewRows(intlines As Integer)
