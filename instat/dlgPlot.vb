@@ -70,7 +70,7 @@ Public Class dlgPlot
         ucrVariablesAsFactorForLinePlot.SetIncludedDataType({"numeric"})
 
         ucrSaveLinePlot.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
-        ucrSaveLinePlot.strPrefix = "Graph"
+        ucrSaveLinePlot.strPrefix = "Line"
         ucrSaveLinePlot.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveLinePlot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
