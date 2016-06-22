@@ -1225,7 +1225,7 @@ Partial Class frmMain
         'mnuHelpHelp
         '
         Me.mnuHelpHelp.Name = "mnuHelpHelp"
-        Me.mnuHelpHelp.Size = New System.Drawing.Size(151, 22)
+        Me.mnuHelpHelp.Size = New System.Drawing.Size(152, 22)
         Me.mnuHelpHelp.Tag = "Help"
         Me.mnuHelpHelp.Text = "Help"
         '
@@ -1233,7 +1233,7 @@ Partial Class frmMain
         '
         Me.mnuHelpLicence.Enabled = False
         Me.mnuHelpLicence.Name = "mnuHelpLicence"
-        Me.mnuHelpLicence.Size = New System.Drawing.Size(151, 22)
+        Me.mnuHelpLicence.Size = New System.Drawing.Size(152, 22)
         Me.mnuHelpLicence.Tag = "Licence..."
         Me.mnuHelpLicence.Text = "Licence..."
         '
@@ -1241,7 +1241,7 @@ Partial Class frmMain
         '
         Me.mnuHelpAboutRInstat.Enabled = False
         Me.mnuHelpAboutRInstat.Name = "mnuHelpAboutRInstat"
-        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(151, 22)
+        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(152, 22)
         Me.mnuHelpAboutRInstat.Tag = "About_R-Instat"
         Me.mnuHelpAboutRInstat.Text = "About R-Instat"
         '
@@ -2642,7 +2642,7 @@ Partial Class frmMain
         '
         Me.mnuToolsRunRCode.Enabled = False
         Me.mnuToolsRunRCode.Name = "mnuToolsRunRCode"
-        Me.mnuToolsRunRCode.Size = New System.Drawing.Size(198, 22)
+        Me.mnuToolsRunRCode.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsRunRCode.Tag = "Run_R_Code..."
         Me.mnuToolsRunRCode.Text = "Run R Code..."
         '
@@ -2650,7 +2650,7 @@ Partial Class frmMain
         '
         Me.mnuToolsRestartR.Enabled = False
         Me.mnuToolsRestartR.Name = "mnuToolsRestartR"
-        Me.mnuToolsRestartR.Size = New System.Drawing.Size(198, 22)
+        Me.mnuToolsRestartR.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsRestartR.Tag = "Restart_R"
         Me.mnuToolsRestartR.Text = "Restart R"
         '
@@ -2658,27 +2658,27 @@ Partial Class frmMain
         '
         Me.mnuToolsCheckForUpdates.Enabled = False
         Me.mnuToolsCheckForUpdates.Name = "mnuToolsCheckForUpdates"
-        Me.mnuToolsCheckForUpdates.Size = New System.Drawing.Size(198, 22)
+        Me.mnuToolsCheckForUpdates.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsCheckForUpdates.Tag = "Check_for_Updates..."
         Me.mnuToolsCheckForUpdates.Text = "Check for Updates..."
         '
         'mnuToolsClearOutputWindow
         '
         Me.mnuToolsClearOutputWindow.Name = "mnuToolsClearOutputWindow"
-        Me.mnuToolsClearOutputWindow.Size = New System.Drawing.Size(198, 22)
+        Me.mnuToolsClearOutputWindow.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsClearOutputWindow.Tag = "Clear_Output_Window..."
-        Me.mnuToolsClearOutputWindow.Text = "Clear Output Window..."
+        Me.mnuToolsClearOutputWindow.Text = "Clear_Output_Window..."
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(195, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(199, 6)
         '
         'mnuToolsSaveCurrentOptions
         '
         Me.mnuToolsSaveCurrentOptions.Enabled = False
         Me.mnuToolsSaveCurrentOptions.Name = "mnuToolsSaveCurrentOptions"
-        Me.mnuToolsSaveCurrentOptions.Size = New System.Drawing.Size(198, 22)
+        Me.mnuToolsSaveCurrentOptions.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsSaveCurrentOptions.Tag = "Save_Current_Options..."
         Me.mnuToolsSaveCurrentOptions.Text = "Save Current Options..."
         '
@@ -2686,14 +2686,14 @@ Partial Class frmMain
         '
         Me.mnuToolsLoadOptions.Enabled = False
         Me.mnuToolsLoadOptions.Name = "mnuToolsLoadOptions"
-        Me.mnuToolsLoadOptions.Size = New System.Drawing.Size(198, 22)
+        Me.mnuToolsLoadOptions.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsLoadOptions.Tag = "Load_Options..."
         Me.mnuToolsLoadOptions.Text = "Load Options..."
         '
         'mnuToolsOptions
         '
         Me.mnuToolsOptions.Name = "mnuToolsOptions"
-        Me.mnuToolsOptions.Size = New System.Drawing.Size(198, 22)
+        Me.mnuToolsOptions.Size = New System.Drawing.Size(202, 22)
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
