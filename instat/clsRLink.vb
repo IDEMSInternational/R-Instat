@@ -425,10 +425,10 @@ Public Class RLink
         End If
     End Sub
 
-    Public Sub SelectColumnsWithMetadataProperty(lstView As ListView, strDataFrameName As String, strProperty As String, strValues As String())
+    Public Sub SelectColumnsWithMetadataProperty(ucrCurrentReceiver As ucrReceiverMultiple, strDataFrameName As String, strProperty As String, strValues As String())
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
-        Dim i, j, iTemp As Integer
+        Dim i As Integer
         Dim clsGetItems As New RFunction
         Dim clsIncludeList As New RFunction
         Dim kvpInclude As KeyValuePair(Of String, String())
@@ -445,15 +445,10 @@ Public Class RLink
             clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
             clsGetItems.AddParameter("include", clsRFunctionParameter:=clsIncludeList)
             vecColumns = RunInternalScriptGetValue(clsGetItems.ToScript()).AsList
-
+            ucrCurrentReceiver.Clear()
             For i = 0 To vecColumns.Count - 1
                 chrCurrColumns = vecColumns(i).AsCharacter
-                lstView.BeginUpdate()
-                For j = 0 To chrCurrColumns.Count - 1
-                    iTemp = lstView.Items.IndexOfKey(chrCurrColumns(j))
-                    lstView.Items(iTemp).Selected = True
-                Next
-                lstView.EndUpdate()
+                ucrCurrentReceiver.Add(chrCurrColumns.ToArray())
             Next
         End If
     End Sub

@@ -24,8 +24,8 @@ Public Class dlgScatterPlot
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             'setdefauts
-            InitialiseDialog()
             SetDefaults()
+            InitialiseDialog()
             bFirstLoad = False
         End If
         autoTranslate(Me)
@@ -74,16 +74,26 @@ Public Class dlgScatterPlot
         clsRgeom_scatterplotFunction.SetRCommand("geom_point")
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
 
+
+        ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
+        ucrVariablesAsFactorForScatter.SetSelector(ucrSelectorForScatter)
+        ucrVariablesAsFactorForScatter.SetIncludedDataType({"numeric"})
+
+
         ucrReceiverX.Selector = ucrSelectorForScatter
         ucrReceiverX.SetIncludedDataTypes({"numeric"})
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
 
-        ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
-        ucrVariablesAsFactorForScatter.SetSelector(ucrSelectorForScatter)
-        ucrVariablesAsFactorForScatter.SetExcludedDataTypes({"numeric"})
+
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.iHelpTopicID = 16
+
+
+        ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
+        ucrSaveScatterPlot.strPrefix = "Graph"
+        ucrSaveScatterPlot.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveScatterPlot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
     Private Sub SetDefaults()
         'setDefaults
@@ -110,6 +120,16 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub cmdScatterPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdScatterPlotOptions.Click
-        sdgScatterPlot.ShowDialog()
+        sdgLayerOptions.ShowDialog()
+    End Sub
+
+    Private Sub ucrSaveScatterPlot_GraphNameChanged() Handles ucrSaveScatterPlot.GraphNameChanged, ucrSaveScatterPlot.SaveGraphCheckedChanged
+        If ucrSaveScatterPlot.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveScatterPlot.strGraphName, strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveScatterPlot.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
     End Sub
 End Class
