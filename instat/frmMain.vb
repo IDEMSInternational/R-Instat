@@ -986,10 +986,9 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuToolsClearOutputWindow_Click(sender As Object, e As EventArgs) Handles mnuToolsClearOutputWindow.Click
-        Dim currentForm = ActiveMdiChild
         Dim dlgResponse As DialogResult
-        If currentForm Is frmCommand And frmCommand.txtCommand.Text <> "" Then
-            dlgResponse = MessageBox.Show("Are you sure you want to clear the " & currentForm.Text, "Clear " & currentForm.Text, MessageBoxButtons.YesNo)
+        If frmCommand.txtCommand.Text <> "" Then
+            dlgResponse = MessageBox.Show("Are you sure you want to clear the " & frmCommand.Text, "Clear " & frmCommand.Text, MessageBoxButtons.YesNo)
             If dlgResponse = DialogResult.Yes Then
                 frmCommand.txtCommand.Clear()
             End If
