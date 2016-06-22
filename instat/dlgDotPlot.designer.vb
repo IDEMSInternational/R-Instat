@@ -59,20 +59,20 @@ Partial Class dlgDotPlot
         Me.lblFactor.AutoSize = True
         Me.lblFactor.Location = New System.Drawing.Point(255, 165)
         Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(82, 13)
+        Me.lblFactor.Size = New System.Drawing.Size(88, 13)
         Me.lblFactor.TabIndex = 3
         Me.lblFactor.Tag = "Factor_Optional"
-        Me.lblFactor.Text = "Factor(Optional)"
+        Me.lblFactor.Text = "Factor  (Optional)"
         '
         'lblSecondFactor
         '
         Me.lblSecondFactor.AutoSize = True
         Me.lblSecondFactor.Location = New System.Drawing.Point(255, 212)
         Me.lblSecondFactor.Name = "lblSecondFactor"
-        Me.lblSecondFactor.Size = New System.Drawing.Size(122, 13)
+        Me.lblSecondFactor.Size = New System.Drawing.Size(128, 13)
         Me.lblSecondFactor.TabIndex = 5
         Me.lblSecondFactor.Tag = "Second_Factor_Optional"
-        Me.lblSecondFactor.Text = "Second Factor(Optional)"
+        Me.lblSecondFactor.Text = "Second Factor  (Optional)"
         '
         'ucrVariablesAsFactorDotPlot
         '
