@@ -986,9 +986,12 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuToolsClearOutputWindow_Click(sender As Object, e As EventArgs) Handles mnuToolsClearOutputWindow.Click
-        Dim dlgResponse As DialogResult = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
-        If dlgResponse = DialogResult.Yes Then
-            frmCommand.txtCommand.Clear()
+        Dim dlgResponse As DialogResult
+        If frmCommand.txtCommand.Text <> "" Then
+            dlgResponse = MessageBox.Show("Are you sure you want to clear the " & frmCommand.Text, "Clear " & frmCommand.Text, MessageBoxButtons.YesNo)
+            If dlgResponse = DialogResult.Yes Then
+                frmCommand.txtCommand.Clear()
+            End If
         End If
     End Sub
 

@@ -322,10 +322,15 @@ Public Class ROperator
         clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
         clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
 
-        clsTempROperator.clsLeftFunction = clsLeftFunction.Clone
-        clsTempROperator.clsLeftOperator = clsLeftOperator.Clone
-        clsTempROperator.clsLeftParameter = clsLeftParameter.Clone
-
+        If clsLeftFunction IsNot Nothing Then
+            clsTempROperator.clsLeftFunction = clsLeftFunction.Clone
+        End If
+        If clsLeftOperator IsNot Nothing Then
+            clsTempROperator.clsLeftOperator = clsLeftOperator.Clone
+        End If
+        If clsLeftParameter IsNot Nothing Then
+            clsTempROperator.clsLeftParameter = clsLeftParameter.Clone
+        End If
         For Each clsAdditionalParams In clsAdditionalParameters
             clsTempROperator.AddAdditionalParameter(clsAdditionalParams.Clone)
         Next
