@@ -269,11 +269,11 @@ Public Class ucrGeom
         clsgeom_density.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
 
         'adding layer parameters
-        clsgeom_density.AddLayerParameter("stat", "list", "density", lstParameterStrings:={"density", "identity"})
-        clsgeom_density.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter", "stack", "fill", "dodge"})
+        clsgeom_density.AddLayerParameter("stat", "list", Chr(34) & "density" & Chr(34), lstParameterStrings:={Chr(34) & "density" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_density.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34)})
         clsgeom_density.AddLayerParameter("bw", "list", "nrd0", lstParameterStrings:={"nrd0", "nrd", "ucv", "bcv", "SJ"})
         clsgeom_density.AddLayerParameter("adjust", "numeric", "1", lstParameterStrings:={1, 1})
-        clsgeom_density.AddLayerParameter("kernel", "list", "gaussian", lstParameterStrings:={"gaussian", "rectangular", "triangular", "epanechnikov", "biweight", "cosine", "optcosin"})
+        clsgeom_density.AddLayerParameter("kernel", "list", Chr(34) & "gaussian" & Chr(34), lstParameterStrings:={Chr(34) & "gaussian" & Chr(34), Chr(34) & "rectangular" & Chr(34), Chr(34) & "triangular" & Chr(34), Chr(34) & "epanechnikov" & Chr(34), Chr(34) & "biweight" & Chr(34), Chr(34) & "cosine" & Chr(34), Chr(34) & "optcosin" & Chr(34)})
         lstAllGeoms.Add(clsgeom_density)
 
         'clsgeom_density2d.strGeomName = "geom_density2d"
@@ -307,11 +307,11 @@ Public Class ucrGeom
         clsgeom_dotplot.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
 
         'adding layer parameters
-        clsgeom_dotplot.AddLayerParameter("method", "list", "dotdensity", lstParameterStrings:={"dotdensity", "histodot"})
+        clsgeom_dotplot.AddLayerParameter("method", "list", Chr(34) & "dotdensity" & Chr(34), lstParameterStrings:={Chr(34) & "dotdensity" & Chr(34), Chr(34) & "histodot" & Chr(34)})
         clsgeom_dotplot.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={1, 1})
-        clsgeom_dotplot.AddLayerParameter("binaxis", "list", "x", lstParameterStrings:={"x", "y"})
-        clsgeom_dotplot.AddLayerParameter("binpositions", "list", "bygroup", lstParameterStrings:={"bygroup", "all"})
-        clsgeom_dotplot.AddLayerParameter("stackdir", "list", "up", lstParameterStrings:={"up", "down", "center", "centerwhole"})
+        clsgeom_dotplot.AddLayerParameter("binaxis", "list", Chr(34) & "x" & Chr(34), lstParameterStrings:={Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34)})
+        clsgeom_dotplot.AddLayerParameter("binpositions", "list", Chr(34) & "bygroup" & Chr(34), lstParameterStrings:={Chr(34) & "bygroup" & Chr(34), Chr(34) & "all" & Chr(34)})
+        clsgeom_dotplot.AddLayerParameter("stackdir", "list", Chr(34) & "up" & Chr(34), lstParameterStrings:={Chr(34) & "up" & Chr(34), Chr(34) & "down" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "centerwhole" & Chr(34)})
         clsgeom_dotplot.AddLayerParameter("stackratio", "numeric", "1", lstParameterStrings:={1})
         clsgeom_dotplot.AddLayerParameter("dotsize", "numeric", "1", lstParameterStrings:={1})
         clsgeom_dotplot.AddLayerParameter("stackgroups", "Boolean", "FALSE")
@@ -359,8 +359,8 @@ Public Class ucrGeom
         clsgeom_freqpoly.AddAesParameter("size", strIncludedDataTypes:={"factor"})
 
         'Add layer parameters
-        clsgeom_freqpoly.AddLayerParameter("stat", "list", "bin", lstParameterStrings:={"bin", "identity"})
-        clsgeom_freqpoly.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter", "stack", "dodge"})
+        clsgeom_freqpoly.AddLayerParameter("stat", "list", Chr(34) & "bin" & Chr(34), lstParameterStrings:={Chr(34) & "bin" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_freqpoly.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34)})
         lstAllGeoms.Add(clsgeom_freqpoly)
 
         'clsgeom_hex.strGeomName = "geom_hex"
@@ -386,8 +386,8 @@ Public Class ucrGeom
         'adding layer parameters
         clsgeom_histogram.AddLayerParameter("bins", "numeric", "30", lstParameterStrings:={0, 1})
         clsgeom_histogram.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={1, 1})
-        clsgeom_histogram.AddLayerParameter("closed", "list", "left", lstParameterStrings:={"left", "right"})
-        clsgeom_histogram.AddLayerParameter("position", "list", "stack", lstParameterStrings:={"stack", "dodge"})
+        clsgeom_histogram.AddLayerParameter("closed", "list", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "right" & Chr(34)})
+        clsgeom_histogram.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "dodge" & Chr(34)})
         lstAllGeoms.Add(clsgeom_histogram)
 
 
@@ -443,7 +443,7 @@ Public Class ucrGeom
         clsgeom_line.AddAesParameter("size", strIncludedDataTypes:={"numeric, factor"})
         'adding layer parameters
 
-        clsgeom_line.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter", "dodge", "stack"}) 'others options are “jitter”, “dodge” And “stack”
+        clsgeom_line.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "dodge" & Chr(34), Chr(34) & "stack" & Chr(34)}) 'others options are “jitter”, “dodge” And “stack”
         lstAllGeoms.Add(clsgeom_line)
 
 
@@ -493,7 +493,7 @@ Public Class ucrGeom
         clsgeom_point.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("stroke")
         'adding layer parameters
-        clsgeom_point.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter"})
+        clsgeom_point.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34)})
         lstAllGeoms.Add(clsgeom_point)
 
         'clsgeom_pointrange.strGeomName = "geom_pointrange"
