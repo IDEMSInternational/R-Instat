@@ -40,6 +40,9 @@ Public Class RLink
     Public fComments As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
     Public clrComments As Color = Color.Green
 
+    Public fEditor As Font = New Font("Microsoft Sans Serif", 10, FontStyle.Regular)
+    Public clrEditor As Color = Color.Black
+
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
     End Sub
 
