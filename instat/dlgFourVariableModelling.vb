@@ -89,7 +89,7 @@ Public Class dlgFourVariableModelling
     Public Sub TestOKEnabled()
         If (Not ucrResponse.IsEmpty()) And (Not ucrFirstExplanatory.IsEmpty()) And (Not ucrFirstRandomEffect.IsEmpty()) And (Not ucrSecondRandomEffect.IsEmpty()) And (operation <> "") Then
             clsModel2.bBrackets = False
-            clsModel1.SetParameter(False, clsOp:=clsModel2)
+            clsModel1.SetParameter(False, strValue:="(" & clsModel2.ToScript.ToString & ")")
 
             clsModel1.SetOperation(operation)
             clsModel1.bBrackets = False
@@ -240,29 +240,29 @@ Public Class dlgFourVariableModelling
         End If
     End Sub
 
-    'Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
-    '    sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
-    '    sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
-    '    sdgModelOptions.RestrictLink()
-    '    'TODO:   Include multinomial as an option And the appropriate function
-    '    If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
-    '    ucrBaseFourVariableModelling.clsRsyntax.SetFunction("lm")
-    '    ucrBaseFourVariableModelling.clsRsyntax.RemoveParameter("family")
-    'Else
-    '        clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
-    '    ucrBaseFourVariableModelling.clsRsyntax.SetFunction("glm")
-    '    ucrBaseFourVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
-    'End If
-    'End Sub
-
     Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
         sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
         'TODO:   Include multinomial as an option And the appropriate function
-        ucrBaseFourVariableModelling.clsRsyntax.SetFunction("lmer")
-        ucrBaseFourVariableModelling.clsRsyntax.RemoveParameter("family")
+        If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
+            ucrBaseFourVariableModelling.clsRsyntax.SetFunction("lmer")
+            ucrBaseFourVariableModelling.clsRsyntax.RemoveParameter("family")
+        Else
+            clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
+            ucrBaseFourVariableModelling.clsRsyntax.SetFunction("glmer")
+            ucrBaseFourVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
+        End If
     End Sub
+
+    'Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+    '    sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+    '    sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+    '    sdgModelOptions.RestrictLink()
+    '    'TODO:   Include multinomial as an option And the appropriate function
+    '    ucrBaseFourVariableModelling.clsRsyntax.SetFunction("lmer")
+    '    ucrBaseFourVariableModelling.clsRsyntax.RemoveParameter("family")
+    'End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
