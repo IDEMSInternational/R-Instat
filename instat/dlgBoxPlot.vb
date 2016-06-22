@@ -71,8 +71,6 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
 
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
-        'sdgLayerOptions.SetGeomFunction(clsRgeom_boxplotFunction)
-        'sdgLayerOptions.SetAesFunction(clsRaesFunction
 
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
@@ -80,7 +78,7 @@ Public Class dlgBoxplot
 
 
         ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
-        ucrSaveBoxplot.strPrefix = "Graph"
+        ucrSaveBoxplot.strPrefix = "Boxplot"
         ucrSaveBoxplot.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveBoxplot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
