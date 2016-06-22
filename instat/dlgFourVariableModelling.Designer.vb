@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgFourVariableModelling
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,10 +20,10 @@ Partial Class dlgFourVariableModelling
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBaseFourVariableModelling = New instat.ucrButtons()
-        Me.chkFunction = New System.Windows.Forms.CheckBox()
+        Me.chkFirstFunction = New System.Windows.Forms.CheckBox()
         Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
         Me.lblModelPreview = New System.Windows.Forms.Label()
@@ -56,16 +56,16 @@ Partial Class dlgFourVariableModelling
         Me.ucrBaseFourVariableModelling.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseFourVariableModelling.TabIndex = 0
         '
-        'chkFunction
+        'chkFirstFunction
         '
-        Me.chkFunction.AutoSize = True
-        Me.chkFunction.Location = New System.Drawing.Point(353, 58)
-        Me.chkFunction.Name = "chkFunction"
-        Me.chkFunction.Size = New System.Drawing.Size(67, 17)
-        Me.chkFunction.TabIndex = 23
-        Me.chkFunction.Tag = "Function"
-        Me.chkFunction.Text = "Function"
-        Me.chkFunction.UseVisualStyleBackColor = True
+        Me.chkFirstFunction.AutoSize = True
+        Me.chkFirstFunction.Location = New System.Drawing.Point(353, 58)
+        Me.chkFirstFunction.Name = "chkFirstFunction"
+        Me.chkFirstFunction.Size = New System.Drawing.Size(67, 17)
+        Me.chkFirstFunction.TabIndex = 23
+        Me.chkFirstFunction.Tag = "Function"
+        Me.chkFirstFunction.Text = "Function"
+        Me.chkFirstFunction.UseVisualStyleBackColor = True
         '
         'chkConvertToVariate
         '
@@ -189,7 +189,7 @@ Partial Class dlgFourVariableModelling
         '
         'ucrFirstRandomEffect
         '
-        Me.ucrFirstRandomEffect.Location = New System.Drawing.Point(258, 152)
+        Me.ucrFirstRandomEffect.Location = New System.Drawing.Point(249, 152)
         Me.ucrFirstRandomEffect.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFirstRandomEffect.Name = "ucrFirstRandomEffect"
         Me.ucrFirstRandomEffect.Selector = Nothing
@@ -256,6 +256,7 @@ Partial Class dlgFourVariableModelling
         '
         'ucrSelectorFourVariableModelling
         '
+        Me.ucrSelectorFourVariableModelling.bShowHiddenColumns = False
         Me.ucrSelectorFourVariableModelling.Location = New System.Drawing.Point(7, -4)
         Me.ucrSelectorFourVariableModelling.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFourVariableModelling.Name = "ucrSelectorFourVariableModelling"
@@ -266,7 +267,7 @@ Partial Class dlgFourVariableModelling
         '
         Me.lblSecondRandomEffect.AutoSize = True
         Me.lblSecondRandomEffect.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecondRandomEffect.Location = New System.Drawing.Point(257, 181)
+        Me.lblSecondRandomEffect.Location = New System.Drawing.Point(254, 181)
         Me.lblSecondRandomEffect.Name = "lblSecondRandomEffect"
         Me.lblSecondRandomEffect.Size = New System.Drawing.Size(118, 13)
         Me.lblSecondRandomEffect.TabIndex = 34
@@ -275,7 +276,7 @@ Partial Class dlgFourVariableModelling
         '
         'ucrSecondRandomEffect
         '
-        Me.ucrSecondRandomEffect.Location = New System.Drawing.Point(259, 197)
+        Me.ucrSecondRandomEffect.Location = New System.Drawing.Point(253, 197)
         Me.ucrSecondRandomEffect.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondRandomEffect.Name = "ucrSecondRandomEffect"
         Me.ucrSecondRandomEffect.Selector = Nothing
@@ -289,7 +290,7 @@ Partial Class dlgFourVariableModelling
         Me.ClientSize = New System.Drawing.Size(419, 337)
         Me.Controls.Add(Me.lblSecondRandomEffect)
         Me.Controls.Add(Me.ucrSecondRandomEffect)
-        Me.Controls.Add(Me.chkFunction)
+        Me.Controls.Add(Me.chkFirstFunction)
         Me.Controls.Add(Me.chkConvertToVariate)
         Me.Controls.Add(Me.cmdModelOptions)
         Me.Controls.Add(Me.lblModelPreview)
@@ -321,7 +322,7 @@ Partial Class dlgFourVariableModelling
     End Sub
 
     Friend WithEvents ucrBaseFourVariableModelling As ucrButtons
-    Friend WithEvents chkFunction As CheckBox
+    Friend WithEvents chkFirstFunction As CheckBox
     Friend WithEvents chkConvertToVariate As CheckBox
     Friend WithEvents cmdModelOptions As Button
     Friend WithEvents lblModelPreview As Label
