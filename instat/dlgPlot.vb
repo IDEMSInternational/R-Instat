@@ -75,7 +75,7 @@ Public Class dlgPlot
         ucrSaveLinePlot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
     Private Sub TeskOkEnabled()
-        If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactorForLinePlot.IsEmpty() Then
+        If (ucrReceiverX.IsEmpty() Or ucrVariablesAsFactorForLinePlot.IsEmpty()) Or (ucrSaveLinePlot.chkSaveGraph.Checked And ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -139,5 +139,6 @@ Public Class dlgPlot
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+        TeskOkEnabled()
     End Sub
 End Class
