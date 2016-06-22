@@ -22,7 +22,6 @@ Public Class dlgDotPlot
     Private bFirstLoad As Boolean = True
 
     Private Sub dlgDotPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         ucrBase.OKEnabled(False)
         autoTranslate(Me)
 
@@ -54,7 +53,7 @@ Public Class dlgDotPlot
         ucrBase.iHelpTopicID = 134
 
         ucrSaveDotPlot.SetDataFrameSelector(ucrDotPlotSelector.ucrAvailableDataFrames)
-        ucrSaveDotPlot.strPrefix = "Graph"
+        ucrSaveDotPlot.strPrefix = "Dotplot"
         ucrSaveDotPlot.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveDotPlot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
@@ -70,16 +69,20 @@ Public Class dlgDotPlot
     Private Sub SetDefaults()
         ucrDotPlotSelector.Reset()
         ucrVariablesAsFactorDotPlot.ResetControl()
+        SetXParameter()
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
+    Private Sub SetXParameter()
         If ucrFactorReceiver.IsEmpty() = False Then
             clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
         Else
             clsRaesFunction.AddParameter("x", Chr(34) & "" & Chr(34))
         End If
+    End Sub
 
+    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
+        SetXParameter()
     End Sub
 
     Private Sub ucrSecondFactorReceiver_SelectonChanged(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.SelectionChanged

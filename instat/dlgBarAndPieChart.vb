@@ -39,10 +39,6 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.Focus()
         ucrFactorReceiver.SetMeAsReceiver()
-        'TODO These will be replaced by sdgLayerOptions
-        'set subdialog defaults
-        'sdgBarChart.SetDefaults()
-        'sdgPieChartOptions.SetDefaults()
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetOperation("+")
@@ -65,7 +61,7 @@ Public Class dlgBarAndPieChart
 
 
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
-        ucrSaveBar.strPrefix = "Graph"
+        'ucrSaveBar.strPrefix = "Graph"
         ucrSaveBar.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveBar.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
@@ -113,6 +109,7 @@ Public Class dlgBarAndPieChart
     Private Sub grpSelection_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
 
         If rdoBarChart.Checked = True Then
+            ucrSaveBar.strPrefix = "Bar"
             clsRgeom_barchart.RemoveParameterByName("width")
             ucrBase.clsRsyntax.RemoveOperatorParameter("polar")
             cmdBarChartOptions.Visible = True
@@ -120,6 +117,7 @@ Public Class dlgBarAndPieChart
             ucrSecondReceiver.Visible = True
             lblSecondFactor.Visible = True
         ElseIf rdoPieChart.Checked = True Then
+            ucrSaveBar.strPrefix = "Pie"
             clsRgeom_barchart.AddParameter("width", "1")
             clsTempRFunc.SetRCommand("coord_polar")
             clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))

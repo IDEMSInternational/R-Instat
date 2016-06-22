@@ -79,10 +79,10 @@ Partial Class dlgPlot
         Me.lblFactorOptional.AutoSize = True
         Me.lblFactorOptional.Location = New System.Drawing.Point(267, 191)
         Me.lblFactorOptional.Name = "lblFactorOptional"
-        Me.lblFactorOptional.Size = New System.Drawing.Size(85, 13)
+        Me.lblFactorOptional.Size = New System.Drawing.Size(88, 13)
         Me.lblFactorOptional.TabIndex = 4
         Me.lblFactorOptional.Tag = "Factor_Optional"
-        Me.lblFactorOptional.Text = "Factor (Optional)"
+        Me.lblFactorOptional.Text = "Factor  (Optional)"
         '
         'chkPoints
         '
