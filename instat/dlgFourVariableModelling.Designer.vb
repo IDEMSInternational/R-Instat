@@ -43,7 +43,7 @@ Partial Class dlgFourVariableModelling
         Me.lblResponse = New System.Windows.Forms.Label()
         Me.ucrFirstExplanatory = New instat.ucrReceiverSingle()
         Me.ucrResponse = New instat.ucrReceiverSingle()
-        Me.ucrSelectorThreeVariableModelling = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorFourVariableModelling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblSecondRandomEffect = New System.Windows.Forms.Label()
         Me.ucrSecondRandomEffect = New instat.ucrReceiverSingle()
         Me.grpModelOperators.SuspendLayout()
@@ -254,13 +254,13 @@ Partial Class dlgFourVariableModelling
         Me.ucrResponse.Size = New System.Drawing.Size(106, 26)
         Me.ucrResponse.TabIndex = 19
         '
-        'ucrSelectorThreeVariableModelling
+        'ucrSelectorFourVariableModelling
         '
-        Me.ucrSelectorThreeVariableModelling.Location = New System.Drawing.Point(7, -4)
-        Me.ucrSelectorThreeVariableModelling.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorThreeVariableModelling.Name = "ucrSelectorThreeVariableModelling"
-        Me.ucrSelectorThreeVariableModelling.Size = New System.Drawing.Size(242, 179)
-        Me.ucrSelectorThreeVariableModelling.TabIndex = 17
+        Me.ucrSelectorFourVariableModelling.Location = New System.Drawing.Point(7, -4)
+        Me.ucrSelectorFourVariableModelling.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFourVariableModelling.Name = "ucrSelectorFourVariableModelling"
+        Me.ucrSelectorFourVariableModelling.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorFourVariableModelling.TabIndex = 17
         '
         'lblSecondRandomEffect
         '
@@ -305,7 +305,7 @@ Partial Class dlgFourVariableModelling
         Me.Controls.Add(Me.lblResponse)
         Me.Controls.Add(Me.ucrFirstExplanatory)
         Me.Controls.Add(Me.ucrResponse)
-        Me.Controls.Add(Me.ucrSelectorThreeVariableModelling)
+        Me.Controls.Add(Me.ucrSelectorFourVariableModelling)
         Me.Controls.Add(Me.ucrBaseFourVariableModelling)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -341,7 +341,7 @@ Partial Class dlgFourVariableModelling
     Friend WithEvents lblResponse As Label
     Friend WithEvents ucrFirstExplanatory As ucrReceiverSingle
     Friend WithEvents ucrResponse As ucrReceiverSingle
-    Friend WithEvents ucrSelectorThreeVariableModelling As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorFourVariableModelling As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblSecondRandomEffect As Label
     Friend WithEvents ucrSecondRandomEffect As ucrReceiverSingle
 End Class

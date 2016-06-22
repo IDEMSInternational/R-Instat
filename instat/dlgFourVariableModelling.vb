@@ -19,8 +19,8 @@ Public Class dlgFourVariableModelling
         Public bFirstLoad As Boolean = True
         Public clsRCIFunction, clsRConvert As New RFunction
         Public clsRSingleModelFunction As RFunction
-        Dim clsModel, clsModel1 As New ROperator
-        Dim operation As String
+    Dim clsModel, clsModel1, clsModel2 As New ROperator
+    Dim operation As String
 
         Private Sub dlgFourVariableModelling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             'UcrInputComboBox1.SetItemsTypeAsModels()
@@ -39,17 +39,18 @@ Public Class dlgFourVariableModelling
     Private Sub InitialiseDialog()
         ucrBaseFourVariableModelling.clsRsyntax.iCallType = 2
         clsModel.SetOperation("~")
-        ucrResponse.Selector = ucrSelectorThreeVariableModelling
-        ucrFirstExplanatory.Selector = ucrSelectorThreeVariableModelling
-        ucrFirstRandomEffect.Selector = ucrSelectorThreeVariableModelling
-        ucrSecondRandomEffect.Selector = ucrSelectorThreeVariableModelling
+        clsModel2.SetOperation("|")
+        ucrResponse.Selector = ucrSelectorFourVariableModelling
+        ucrFirstExplanatory.Selector = ucrSelectorFourVariableModelling
+        ucrFirstRandomEffect.Selector = ucrSelectorFourVariableModelling
+        ucrSecondRandomEffect.Selector = ucrSelectorFourVariableModelling
         lblModelPreview.Enabled = False
         ucrModelPreview.Enabled = False
         ucrBaseFourVariableModelling.iHelpTopicID = 176
         ''''
         ucrFamily.SetGLMDistributions()
         sdgSimpleRegOptions.SetRModelFunction(ucrBaseFourVariableModelling.clsRsyntax.clsBaseFunction)
-        sdgSimpleRegOptions.SetRDataFrame(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames)
+        sdgSimpleRegOptions.SetRDataFrame(ucrSelectorFourVariableModelling.ucrAvailableDataFrames)
         sdgSimpleRegOptions.SetRYVariable(ucrResponse)
         sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
         sdgVariableTransformations.SetRYVariable(ucrResponse)
@@ -61,32 +62,35 @@ Public Class dlgFourVariableModelling
 
     Private Sub ReopenDialog()
 
-        End Sub
+    End Sub
 
-        Private Sub SetDefaults()
-            ucrSelectorThreeVariableModelling.Reset()
-            ucrResponse.SetMeAsReceiver()
-            ucrSelectorThreeVariableModelling.Focus()
-            operation = "+"
-            chkSaveModel.Checked = True
-            ucrModelName.Visible = True
-            chkConvertToVariate.Checked = False
-            chkConvertToVariate.Visible = False
-            chkFunction.Checked = False
-            chkFunction.Visible = False
+    Private Sub SetDefaults()
+        ucrSelectorFourVariableModelling.Reset()
+        ucrResponse.SetMeAsReceiver()
+        ucrSelectorFourVariableModelling.Focus()
+        operation = "+"
+        chkSaveModel.Checked = True
+        ucrModelName.Visible = True
+        chkConvertToVariate.Checked = False
+        chkConvertToVariate.Visible = False
+        chkFunction.Checked = False
+        chkFunction.Visible = False
 
-            'ucrFamily.Enabled = False
-            'TODO get this to be getting a default name e.g. reg1, reg2, etc.
-            '     will be possible with new textbox user control
-            ucrModelName.SetName("reg")
-            sdgSimpleRegOptions.SetDefaults()
-            sdgModelOptions.SetDefaults()
-            ResponseConvert()
-            TestOKEnabled()
-        End Sub
+        'ucrFamily.Enabled = False
+        'TODO get this to be getting a default name e.g. reg1, reg2, etc.
+        '     will be possible with new textbox user control
+        ucrModelName.SetName("reg")
+        sdgSimpleRegOptions.SetDefaults()
+        sdgModelOptions.SetDefaults()
+        ResponseConvert()
+        TestOKEnabled()
+    End Sub
 
-        Public Sub TestOKEnabled()
-        If (Not ucrResponse.IsEmpty()) And (Not ucrFirstExplanatory.IsEmpty()) And (Not ucrFirstRandomEffect.IsEmpty()) And (operation <> "") Then
+    Public Sub TestOKEnabled()
+        If (Not ucrResponse.IsEmpty()) And (Not ucrFirstExplanatory.IsEmpty()) And (Not ucrFirstRandomEffect.IsEmpty()) And (Not ucrSecondRandomEffect.IsEmpty()) And (operation <> "") Then
+            clsModel2.bBrackets = False
+            clsModel1.SetParameter(False, clsOp:=clsModel2)
+
             clsModel1.SetOperation(operation)
             clsModel1.bBrackets = False
             clsModel.SetParameter(False, clsOp:=clsModel1)
@@ -97,66 +101,66 @@ Public Class dlgFourVariableModelling
         Else
             ucrBaseFourVariableModelling.OKEnabled(False)
         End If
-        End Sub
-
-        Private Sub ucrSelectorThreeVariableModelling_DataFrameChanged() Handles ucrSelectorThreeVariableModelling.DataFrameChanged
-        ucrBaseFourVariableModelling.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
-        Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-            sdgSimpleRegOptions.ShowDialog()
-        End Sub
+    Private Sub ucrSelectorThreeVariableModelling_DataFrameChanged() Handles ucrSelectorFourVariableModelling.DataFrameChanged
+        ucrBaseFourVariableModelling.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorFourVariableModelling.ucrAvailableDataFrames.clsCurrDataFrame)
+    End Sub
 
-        Public Sub ResponseConvert()
-            If Not ucrResponse.IsEmpty Then
-                ucrFamily.RecieverDatatype(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+    Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        sdgSimpleRegOptions.ShowDialog()
+    End Sub
 
-                If ucrFamily.strDataType = "numeric" Then
-                    chkConvertToVariate.Checked = False
-                    chkConvertToVariate.Visible = False
-                Else
-                    chkConvertToVariate.Visible = True
-                End If
-                If chkConvertToVariate.Checked Then
-                    clsRConvert.SetRCommand("as.numeric")
-                    clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
-                    clsModel.SetParameter(True, clsRFunc:=clsRConvert)
-                    ucrFamily.RecieverDatatype("numeric")
-                Else
-                    clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
-                    ucrFamily.RecieverDatatype(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
-                End If
-                sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
-            End If
-            If ucrFamily.lstCurrentDistributions.Count = 0 Then
-                ucrFamily.Enabled = False
-                ucrFamily.cboDistributions.Text = ""
-                cmdModelOptions.Enabled = False
+    Public Sub ResponseConvert()
+        If Not ucrResponse.IsEmpty Then
+            ucrFamily.RecieverDatatype(ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+
+            If ucrFamily.strDataType = "numeric" Then
+                chkConvertToVariate.Checked = False
+                chkConvertToVariate.Visible = False
             Else
-                ucrFamily.Enabled = True
-                cmdModelOptions.Enabled = True
+                chkConvertToVariate.Visible = True
             End If
-        End Sub
+            If chkConvertToVariate.Checked Then
+                clsRConvert.SetRCommand("as.numeric")
+                clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
+                clsModel.SetParameter(True, clsRFunc:=clsRConvert)
+                ucrFamily.RecieverDatatype("numeric")
+            Else
+                clsModel.SetParameter(True, strValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+                ucrFamily.RecieverDatatype(ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+            End If
+            sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+        End If
+        If ucrFamily.lstCurrentDistributions.Count = 0 Then
+            ucrFamily.Enabled = False
+            ucrFamily.cboDistributions.Text = ""
+            cmdModelOptions.Enabled = False
+        Else
+            ucrFamily.Enabled = True
+            cmdModelOptions.Enabled = True
+        End If
+    End Sub
 
-        Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
-            ResponseConvert()
-            TestOKEnabled()
-        End Sub
+    Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
+        ResponseConvert()
+        TestOKEnabled()
+    End Sub
 
-        Private Sub ucrExplanatory_SelectionChanged() Handles ucrFirstExplanatory.SelectionChanged
-            ExplanatoryFunctionSelect()
-            TestOKEnabled()
-        End Sub
+    Private Sub ucrExplanatory_SelectionChanged() Handles ucrFirstExplanatory.SelectionChanged
+        ExplanatoryFunctionSelect()
+        TestOKEnabled()
+    End Sub
 
-        Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
-            ResponseConvert()
-        End Sub
+    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
+        ResponseConvert()
+    End Sub
 
-        Private Sub ExplanatoryFunctionSelect()
-            Dim strExplanatoryType As String
-            If Not ucrFirstExplanatory.IsEmpty Then
-                strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrFirstExplanatory.GetVariableNames(bWithQuotes:=False))
-                If strExplanatoryType = "numeric" Or strExplanatoryType = "positive integer" Or strExplanatoryType = "integer" Then
+    Private Sub ExplanatoryFunctionSelect()
+        Dim strExplanatoryType As String
+        If Not ucrFirstExplanatory.IsEmpty Then
+            strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrFirstExplanatory.GetVariableNames(bWithQuotes:=False))
+            If strExplanatoryType = "numeric" Or strExplanatoryType = "positive integer" Or strExplanatoryType = "integer" Then
                     chkFunction.Visible = True
                 Else
                     chkFunction.Checked = False
@@ -173,7 +177,11 @@ Public Class dlgFourVariableModelling
         End Sub
 
     Private Sub ucrFirstRandomEffect_SelectionChanged() Handles ucrFirstRandomEffect.SelectionChanged
-        clsModel1.SetParameter(False, strValue:=ucrFirstRandomEffect.GetVariableNames(bWithQuotes:=False))
+        clsModel2.SetParameter(True, strValue:=ucrFirstRandomEffect.GetVariableNames(bWithQuotes:=False))
+        TestOKEnabled()
+    End Sub
+    Private Sub ucrSecondRandomEffect_SelectionChanged() Handles ucrSecondRandomEffect.SelectionChanged
+        clsModel2.SetParameter(False, strValue:=ucrSecondRandomEffect.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
@@ -190,47 +198,47 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-            sdgSimpleRegOptions.ShowDialog()
-        End Sub
+        sdgSimpleRegOptions.ShowDialog()
+    End Sub
 
-        Private Sub cmdParallelLines_Click(sender As Object, e As EventArgs) Handles cmdParallelLines.Click
-            operation = "+"
-            TestOKEnabled()
-        End Sub
+    Private Sub cmdParallelLines_Click(sender As Object, e As EventArgs) Handles cmdParallelLines.Click
+        operation = "+"
+        TestOKEnabled()
+    End Sub
 
-        Private Sub cmdConditional_Click(sender As Object, e As EventArgs) Handles cmdConditional.Click
-            operation = ":"
-            TestOKEnabled()
-        End Sub
+    Private Sub cmdConditional_Click(sender As Object, e As EventArgs) Handles cmdConditional.Click
+        operation = ":"
+        TestOKEnabled()
+    End Sub
 
-        Private Sub cmdJointLines_Click(sender As Object, e As EventArgs) Handles cmdJointLines.Click
-            operation = "*"
-            TestOKEnabled()
-        End Sub
+    Private Sub cmdJointLines_Click(sender As Object, e As EventArgs) Handles cmdJointLines.Click
+        operation = "*"
+        TestOKEnabled()
+    End Sub
 
-        Private Sub cmdCommonIntercept_Click(sender As Object, e As EventArgs) Handles cmdCommonIntercept.Click
-            operation = "/"
-            TestOKEnabled()
-        End Sub
+    Private Sub cmdCommonIntercept_Click(sender As Object, e As EventArgs) Handles cmdCommonIntercept.Click
+        operation = "/"
+        TestOKEnabled()
+    End Sub
 
-        Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
+    Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
             If chkSaveModel.Checked Then
                 ucrModelName.Visible = True
             Else
                 ucrModelName.Visible = False
             End If
             AssignModelName()
-        End Sub
+    End Sub
 
-        Private Sub AssignModelName()
-            If chkSaveModel.Checked AndAlso ucrModelName.txtValidation.Text <> "" Then
+    Private Sub AssignModelName()
+        If chkSaveModel.Checked AndAlso ucrModelName.txtValidation.Text <> "" Then
             ucrBaseFourVariableModelling.clsRsyntax.SetAssignTo(ucrModelName.txtValidation.Text, strTempModel:=ucrModelName.txtValidation.Text)
             ucrBaseFourVariableModelling.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
             ucrBaseFourVariableModelling.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model")
             ucrBaseFourVariableModelling.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
-        End Sub
+    End Sub
 
     'Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
     '    sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
@@ -257,14 +265,14 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
-            sdgModelOptions.ShowDialog()
-            ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
-        End Sub
+        sdgModelOptions.ShowDialog()
+        ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
+    End Sub
 
-        Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
-            If chkFunction.Checked Then
-                sdgVariableTransformations.ShowDialog()
-            End If
-            ExplanatoryFunctionSelect()
-        End Sub
-    End Class
+    Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
+        If chkFunction.Checked Then
+            sdgVariableTransformations.ShowDialog()
+        End If
+        ExplanatoryFunctionSelect()
+    End Sub
+End Class
