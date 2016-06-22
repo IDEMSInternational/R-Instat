@@ -53,36 +53,35 @@ Public Class sdgVariableTransformations
         clsRXVariable = clsRXVariableNew
     End Sub
 
-    Private Sub ExplanatoryFunction(strFunctionName As String, strPower As String)
+    Private Sub ExplanatoryFunction(strFunctionName As String, strPower As String, Optional choice As Boolean = False)
         If strFunctionName = "power" Then
-            If strPower = "1" Then
-                clsRModel.SetParameter(False, strValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
-            Else
+            If strPower <> "1" Then
+                'clsRModel.SetParameter(False, strValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.SetOperation("^")
                 clsModel0.bBrackets = False
                 clsModel0.SetParameter(True, strValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.SetParameter(False, strValue:=strPower)
-                clsRModel.SetParameter(True, clsOp:=clsModel0)
+                clsRModel.SetParameter(choice, clsOp:=clsModel0.Clone())
             End If
         Else
             clsRToFunction.SetRCommand(strFunctionName)
             clsRToFunction.AddParameter("x", clsRXVariable.GetVariableNames(bWithQuotes:=False))
-            clsRModel.SetParameter(True, clsRFunc:=clsRToFunction)
+            clsRModel.SetParameter(choice, clsRFunc:=clsRToFunction.Clone())
         End If
     End Sub
 
-    Public Sub ModelFunction()
+    Public Sub ModelFunction(Optional choice As Boolean = False)
         If rdoLogBase10.Checked Then
-            ExplanatoryFunction("log10", 1)
+            ExplanatoryFunction("log10", 1, choice)
         End If
         If rdoNaturallog.Checked Then
-            ExplanatoryFunction("log", 1)
+            ExplanatoryFunction("log", 1, choice)
         End If
         If rdoSquareroot.Checked Then
-            ExplanatoryFunction("sqrt", 1)
+            ExplanatoryFunction("sqrt", 1, choice)
         End If
         If rdoPower.Checked Then
-            ExplanatoryFunction("power", nudPower.Value)
+            ExplanatoryFunction("power", nudPower.Value, choice)
         End If
     End Sub
 End Class

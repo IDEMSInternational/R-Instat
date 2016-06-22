@@ -70,7 +70,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Public Sub TestOKEnabled()
-        If ucrFactorReceiver.IsEmpty Then
+        If ucrFactorReceiver.IsEmpty Or (ucrSaveBar.chkSaveGraph.Checked And ucrSaveBar.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             If rdoBarChart.Checked = True Then
@@ -150,5 +150,6 @@ Public Class dlgBarAndPieChart
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+        TestOKEnabled()
     End Sub
 End Class

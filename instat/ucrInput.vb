@@ -95,6 +95,11 @@ Public Class ucrInput
             If strDefaultType = "Column" AndAlso (ucrDataFrameSelector IsNot Nothing) Then
                 SetName(frmMain.clsRLink.GetDefaultColumnNames(strDefaultPrefix, ucrDataFrameSelector.cboAvailableDataFrames.Text))
             ElseIf strDefaultType = "Model" Then
+                If ucrDataFrameSelector IsNot Nothing Then
+                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
+                Else
+                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames()))
+                End If
             ElseIf strDefaultType = "Data Frame" Then
             ElseIf strDefaultType = "Graph" Then
                 If ucrDataFrameSelector IsNot Nothing Then
