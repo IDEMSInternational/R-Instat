@@ -53,16 +53,16 @@ Public Class ucrDistributions
         clsTempOp.SetOperation("/")
 
         If clsCurrDistribution.strNameTag = "Exponential" AndAlso strArgumentName = "mean" Then
-            clsTempOp.SetParameter(True, 1)
-            clsTempOp.SetParameter(False, strArgumentValue)
+            clsTempOp.SetParameter(True, strValue:=1)
+            clsTempOp.SetParameter(False, strValue:=strArgumentValue)
             clsCurrRFunction.AddParameter("rate", clsROperatorParameter:=clsTempOp)
         ElseIf clsCurrDistribution.strNameTag = "Gamma_With_Shape_and_Mean" AndAlso (strArgumentName = "shape" OrElse strArgumentName = "mean") Then
             If strArgumentName = "shape" Then
                 clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
                 i = clsCurrRFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "mean")
                 If i <> -1 Then
-                    clsTempOp.SetParameter(True, clsCurrRFunction.clsParameters(i).strArgumentValue)
-                    clsTempOp.SetParameter(False, strArgumentValue)
+                    clsTempOp.SetParameter(True, strValue:=clsCurrRFunction.clsParameters(i).strArgumentValue)
+                    clsTempOp.SetParameter(False, strValue:=strArgumentValue)
                     clsCurrRFunction.AddParameter("scale", clsROperatorParameter:=clsTempOp)
                     clsCurrRFunction.RemoveParameterByName("mean")
                 End If
@@ -71,8 +71,8 @@ Public Class ucrDistributions
                 If i = -1 Then
                     clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
                 Else
-                    clsTempOp.SetParameter(True, strArgumentValue)
-                    clsTempOp.SetParameter(False, clsCurrRFunction.clsParameters(i).strArgumentValue)
+                    clsTempOp.SetParameter(True, strValue:=strArgumentValue)
+                    clsTempOp.SetParameter(False, strValue:=clsCurrRFunction.clsParameters(i).strArgumentValue)
                     clsCurrRFunction.AddParameter("scale", clsROperatorParameter:=clsTempOp)
                 End If
             End If
