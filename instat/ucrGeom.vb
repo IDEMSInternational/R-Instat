@@ -170,9 +170,9 @@ Public Class ucrGeom
         clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor"})) ' won't visibly change anything unless you change the theme
 
         'add layer parameters 
-        clsgeom_bar.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
-        clsgeom_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34)})
-        clsgeom_bar.AddLayerParameter("width", "numeric", "90%")
+        clsgeom_bar.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "dodge" & Chr(34)})
+        clsgeom_bar.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1})
         lstAllGeoms.Add(clsgeom_bar)
 
 
@@ -197,12 +197,12 @@ Public Class ucrGeom
 
         'adding layerParameters
         clsgeom_boxplot.AddLayerParameter("notch", "boolean", "TRUE")
-        clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "1.5", lstParameterStrings:={1})
+        clsgeom_boxplot.AddLayerParameter("notchwidth", "numeric", "0.5", lstParameterStrings:={1})
         clsgeom_boxplot.AddLayerParameter("varwidth", "boolean", "TRUE")
         clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1})
-        clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "1.5", lstParameterStrings:={1})
+        clsgeom_boxplot.AddLayerParameter("outlier.shape", "numeric", "19", lstParameterStrings:={1, 0, 25}) 'there are other symbols that we can add here 
         clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
-        clsgeom_boxplot.AddLayerParameter("outlier.stroke ", "numeric", "0.5", lstParameterStrings:={1})
+        clsgeom_boxplot.AddLayerParameter("outlier.stroke ", "numeric", "0.5", lstParameterStrings:={1, 0})
         lstAllGeoms.Add(clsgeom_boxplot)
 
         'clsgeom_contour.SetGeomName("geom_contour")
@@ -259,21 +259,21 @@ Public Class ucrGeom
         'mandatory
         clsgeom_density.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         'we can map a continuous variable to y but we must include stat = “identity” inside the geom
-        clsgeom_density.AddAesParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_density.AddAesParameter("y", strIncludedDataTypes:={"numeric"})
         'optional
         clsgeom_density.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
         clsgeom_density.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
         clsgeom_density.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
         clsgeom_density.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_density.AddAesParameter("size", strIncludedDataTypes:={"factor"})
-        clsgeom_density.AddAesParameter("weight", strIncludedDataTypes:={"factor"})
+        clsgeom_density.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
 
         'adding layer parameters
         clsgeom_density.AddLayerParameter("stat", "list", "density", lstParameterStrings:={"density", "identity"})
         clsgeom_density.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter", "stack", "fill", "dodge"})
-        clsgeom_density.AddLayerParameter("bw", "text", "nrd0", lstParameterStrings:={"nrd0", "nrd", "ucv", "bcv", "SJ"})
-        clsgeom_density.AddLayerParameter("adjust", "numeric", "1")
-        clsgeom_density.AddLayerParameter("kernel", "text", "gaussian", lstParameterStrings:={"gaussian", "rectangular", "triangular", "epanechnikov", "biweight", "cosine", "optcosin"})
+        clsgeom_density.AddLayerParameter("bw", "list", "nrd0", lstParameterStrings:={"nrd0", "nrd", "ucv", "bcv", "SJ"})
+        clsgeom_density.AddLayerParameter("adjust", "numeric", "1", lstParameterStrings:={1, 1})
+        clsgeom_density.AddLayerParameter("kernel", "list", "gaussian", lstParameterStrings:={"gaussian", "rectangular", "triangular", "epanechnikov", "biweight", "cosine", "optcosin"})
         lstAllGeoms.Add(clsgeom_density)
 
         'clsgeom_density2d.strGeomName = "geom_density2d"
@@ -299,7 +299,7 @@ Public Class ucrGeom
         'lstAllGeoms.Add(clsgeom_density_2d)
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
-        clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_dotplot.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
         clsgeom_dotplot.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         'Optional
         clsgeom_dotplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
@@ -308,17 +308,17 @@ Public Class ucrGeom
 
         'adding layer parameters
         clsgeom_dotplot.AddLayerParameter("method", "list", "dotdensity", lstParameterStrings:={"dotdensity", "histodot"})
-        clsgeom_dotplot.AddLayerParameter("binwidth", "numeric", "")
+        clsgeom_dotplot.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={1, 1})
         clsgeom_dotplot.AddLayerParameter("binaxis", "list", "x", lstParameterStrings:={"x", "y"})
-        clsgeom_dotplot.AddLayerParameter("binpositions", "list", "bypositions", lstParameterStrings:={"bypositions", "all"})
+        clsgeom_dotplot.AddLayerParameter("binpositions", "list", "bygroup", lstParameterStrings:={"bygroup", "all"})
         clsgeom_dotplot.AddLayerParameter("stackdir", "list", "up", lstParameterStrings:={"up", "down", "center", "centerwhole"})
-        clsgeom_dotplot.AddLayerParameter("stackratio", "numeric", "1")
-        clsgeom_dotplot.AddLayerParameter("dotsize", "numeric", "1")
-        clsgeom_dotplot.AddLayerParameter("stackgroups", "Boolean", "False")
-        clsgeom_dotplot.AddLayerParameter("origin", "numeric", "")
-        clsgeom_dotplot.AddLayerParameter("right", "Boolean", "True")
-        clsgeom_dotplot.AddLayerParameter("width", "numeric", "0.9")
-        clsgeom_dotplot.AddLayerParameter("drop", "Boolean", "False")
+        clsgeom_dotplot.AddLayerParameter("stackratio", "numeric", "1", lstParameterStrings:={1})
+        clsgeom_dotplot.AddLayerParameter("dotsize", "numeric", "1", lstParameterStrings:={1})
+        clsgeom_dotplot.AddLayerParameter("stackgroups", "Boolean", "FALSE")
+        clsgeom_dotplot.AddLayerParameter("origin", "numeric", "0", lstParameterStrings:={1})
+        clsgeom_dotplot.AddLayerParameter("right", "Boolean", "TRUE")
+        clsgeom_dotplot.AddLayerParameter("width", "numeric", "0.9", lstParameterStrings:={1})
+        clsgeom_dotplot.AddLayerParameter("drop", "Boolean", "FALSE")
         lstAllGeoms.Add(clsgeom_dotplot)
 
 
@@ -351,10 +351,10 @@ Public Class ucrGeom
 
         clsgeom_freqpoly.strGeomName = "geom_freqpoly"
         clsgeom_freqpoly.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_freqpoly.AddAesParameter("y", strIncludedDataTypes:={"factor"})
+        'we can map a continuous variable to y but stat= "identity" must be included within the geom
+        clsgeom_freqpoly.AddAesParameter("y", strIncludedDataTypes:={"numeric"})
         clsgeom_freqpoly.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
         clsgeom_freqpoly.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
-        clsgeom_freqpoly.AddAesParameter("fill", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
         clsgeom_freqpoly.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
         clsgeom_freqpoly.AddAesParameter("size", strIncludedDataTypes:={"factor"})
 
@@ -378,15 +378,16 @@ Public Class ucrGeom
         clsgeom_histogram.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         clsgeom_histogram.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
         clsgeom_histogram.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
-        clsgeom_histogram.AddAesParameter("fill", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_histogram.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
         clsgeom_histogram.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        clsgeom_histogram.AddAesParameter("size", strIncludedDataTypes:={"factor"})
+        clsgeom_histogram.AddAesParameter("size", strIncludedDataTypes:={"factor"}) 'nothing will visibly change unless the theme is changed 
+        clsgeom_histogram.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
 
         'adding layer parameters
-        clsgeom_histogram.AddLayerParameter("bin", "numeric", "30")
-        clsgeom_histogram.AddLayerParameter("binwidth", "numeric", "0")
-        clsgeom_histogram.AddLayerParameter("closed", "list", "", lstParameterStrings:={"left", "right"})
-        clsgeom_histogram.AddLayerParameter("Position", "list", "stack", lstParameterStrings:={"stack", "dodge"})
+        clsgeom_histogram.AddLayerParameter("bins", "numeric", "30", lstParameterStrings:={0, 1})
+        clsgeom_histogram.AddLayerParameter("binwidth", "numeric", "1", lstParameterStrings:={1, 1})
+        clsgeom_histogram.AddLayerParameter("closed", "list", "left", lstParameterStrings:={"left", "right"})
+        clsgeom_histogram.AddLayerParameter("position", "list", "stack", lstParameterStrings:={"stack", "dodge"})
         lstAllGeoms.Add(clsgeom_histogram)
 
 
@@ -487,12 +488,12 @@ Public Class ucrGeom
         'optional
         clsgeom_point.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
-        clsgeom_point.AddAesParameter("fill", strIncludedDataTypes:={"factor"})
+        clsgeom_point.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("shape", strIncludedDataTypes:={"factor"})
         clsgeom_point.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("stroke")
         'adding layer parameters
-        clsgeom_point.AddLayerParameter("position", "text", "identity") 'other jitter
+        clsgeom_point.AddLayerParameter("position", "list", "identity", lstParameterStrings:={"identity", "jitter"})
         lstAllGeoms.Add(clsgeom_point)
 
         'clsgeom_pointrange.strGeomName = "geom_pointrange"
