@@ -515,7 +515,13 @@ data_object$set("public", "is_variables_metadata", function(str) {
 )
 
 data_object$set("public", "add_defaults_meta", function() {
-  self$append_to_metadata(is_calculated_label,FALSE)
+  if(self$is_variables_metadata(is_hidden_label)) {
+    for(col in colnames(private$data)[is.na(self$get_variables_metadata(property = is_hidden_label))]) {
+      self$append_to_variables_metadata(col, is_hidden_label, FALSE)
+    }
+  }
+  else self$append_to_metadata(is_hidden_label, FALSE)
+  self$append_to_metadata(is_calculated_label, FALSE)
 }
 )
 
