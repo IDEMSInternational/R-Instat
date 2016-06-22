@@ -16,9 +16,9 @@
 
 Imports instat.Translations
 Public Class dlgFourVariableModelling
-        Public bFirstLoad As Boolean = True
-        Public clsRCIFunction, clsRConvert As New RFunction
-        Public clsRSingleModelFunction As RFunction
+    Public bFirstLoad As Boolean = True
+    Public clsRCIFunction, clsRConvert As New RFunction
+    Public clsRSingleModelFunction As RFunction
     Dim clsModel, clsModel1, clsModel2 As New ROperator
     Dim operation As String
 
