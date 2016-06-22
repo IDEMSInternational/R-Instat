@@ -84,13 +84,13 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrVariablesAsFactorForBoxplot.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
+
+        If ucrVariablesAsFactorForBoxplot.IsEmpty Or (ucrSaveBoxplot.chkSaveGraph.Checked And ucrSaveBoxplot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
-
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
@@ -166,5 +166,6 @@ Public Class dlgBoxplot
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+        TestOkEnabled()
     End Sub
 End Class
