@@ -220,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblResponse.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="lblExplanatory.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -250,16 +250,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblExplanatory.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="cmdDisplayOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdDisplayOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 244</value>
+    <value>250, 229</value>
   </data>
   <data name="cmdDisplayOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>110, 23</value>
   </data>
   <data name="cmdDisplayOptions.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -277,13 +277,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdDisplayOptions.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="chkSaveModel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="chkSaveModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 244</value>
+    <value>11, 259</value>
   </data>
   <data name="chkSaveModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 24</value>
@@ -292,7 +292,7 @@
     <value>5</value>
   </data>
   <data name="chkSaveModel.Text" xml:space="preserve">
-    <value>Save Model</value>
+    <value>Save Model:</value>
   </data>
   <data name="&gt;&gt;chkSaveModel.Name" xml:space="preserve">
     <value>chkSaveModel</value>
@@ -304,16 +304,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkSaveModel.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="cmdModelOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdModelOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 214</value>
+    <value>250, 200</value>
   </data>
   <data name="cmdModelOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>110, 23</value>
   </data>
   <data name="cmdModelOptions.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -331,7 +331,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdModelOptions.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="chkFunction.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -361,7 +361,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkFunction.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="chkConvertToVariate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -391,13 +391,64 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkConvertToVariate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblModelPreview.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblModelPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblModelPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 207</value>
+  </data>
+  <data name="lblModelPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="lblModelPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblModelPreview.Text" xml:space="preserve">
+    <value>Model Preview:</value>
+  </data>
+  <data name="&gt;&gt;lblModelPreview.Name" xml:space="preserve">
+    <value>lblModelPreview</value>
+  </data>
+  <data name="&gt;&gt;lblModelPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblModelPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblModelPreview.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrModelPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 202</value>
+  </data>
+  <data name="ucrModelPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 21</value>
+  </data>
+  <data name="ucrModelPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrModelPreview.Name" xml:space="preserve">
+    <value>ucrModelPreview</value>
+  </data>
+  <data name="&gt;&gt;ucrModelPreview.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrModelPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrModelPreview.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrModelName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 244</value>
+    <value>100, 259</value>
   </data>
   <data name="ucrModelName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 21</value>
+    <value>122, 21</value>
   </data>
   <data name="ucrModelName.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -412,7 +463,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelName.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrExplanatory.Location" type="System.Drawing.Point, System.Drawing">
     <value>250, 141</value>
@@ -436,7 +487,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrExplanatory.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ucrResponse.Location" type="System.Drawing.Point, System.Drawing">
     <value>250, 68</value>
@@ -445,7 +496,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrResponse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 26</value>
+    <value>110, 26</value>
   </data>
   <data name="ucrResponse.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -460,7 +511,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrResponse.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrSelectorSimpleReg.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 4</value>
@@ -484,10 +535,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorSimpleReg.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrFamily.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 202</value>
+    <value>5, 217</value>
   </data>
   <data name="ucrFamily.Size" type="System.Drawing.Size, System.Drawing">
     <value>233, 43</value>
@@ -505,10 +556,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFamily.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 274</value>
+    <value>11, 289</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 54</value>
@@ -526,7 +577,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -535,7 +586,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>418, 332</value>
+    <value>418, 344</value>
   </data>
   <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
