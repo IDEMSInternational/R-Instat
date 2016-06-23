@@ -54,7 +54,6 @@ Public Class dlgFourVariableModelling
         sdgSimpleRegOptions.SetRYVariable(ucrResponse)
         sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
         sdgVariableTransformations.SetRYVariable(ucrResponse)
-        'sdgVariableTransformations.SetRXVariable(ucrFirstExplanatory)
         sdgVariableTransformations.SetRModelOperator(clsModel1)
         sdgModelOptions.SetRCIFunction(clsRCIFunction)
         sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
@@ -94,7 +93,6 @@ Public Class dlgFourVariableModelling
             clsModel1.SetOperation(operation)
             clsModel1.bBrackets = False
             clsModel.SetParameter(False, clsOp:=clsModel1)
-            'clsModel.SetParameter(False, strValue:=ucrGroupingFactor.GetVariableNames(bWithQuotes:=False))
             ucrBaseFourVariableModelling.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
             ucrBaseFourVariableModelling.OKEnabled(True)
             ucrModelPreview.SetName(clsModel.ToScript)
@@ -156,26 +154,6 @@ Public Class dlgFourVariableModelling
         ResponseConvert()
     End Sub
 
-    'Private Sub ExplanatoryFunctionSelect()
-    '    Dim strExplanatoryType As String
-    '    If Not ucrFirstExplanatory.IsEmpty Then
-    '        strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrFirstExplanatory.GetVariableNames(bWithQuotes:=False))
-    '        If strExplanatoryType = "numeric" Or strExplanatoryType = "positive integer" Or strExplanatoryType = "integer" Then
-    '            chkFunction.Visible = True
-    '        Else
-    '            chkFunction.Checked = False
-    '            chkFunction.Visible = False
-    '        End If
-    '        If chkFunction.Checked Then
-    '            sdgVariableTransformations.ModelFunction()
-    '        Else
-    '            sdgVariableTransformations.rdoIdentity.Checked = True
-    '            clsModel1.SetParameter(True, strValue:=ucrFirstExplanatory.GetVariableNames(bWithQuotes:=False))
-    '        End If
-    '    End If
-    '    ucrModelPreview.SetName(clsModel.ToScript)
-    'End Sub
-
     Private Sub ExplanatoryFunctionSelect(currentReceiver As ucrReceiverSingle)
         Dim strExplanatoryType As String
         If Not ucrFirstExplanatory.IsEmpty Then
@@ -198,7 +176,6 @@ Public Class dlgFourVariableModelling
         End If
         ucrModelPreview.SetName(clsModel.ToScript)
     End Sub
-
 
     Private Sub ucrFirstRandomEffect_SelectionChanged() Handles ucrFirstRandomEffect.SelectionChanged
         clsModel2.SetParameter(True, strValue:=ucrFirstRandomEffect.GetVariableNames(bWithQuotes:=False))
@@ -278,31 +255,6 @@ Public Class dlgFourVariableModelling
             ucrBaseFourVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
         End If
     End Sub
-
-    Private Sub ucrSecondRandomEffect_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondRandomEffect.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrFirstRandomEffect_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFirstRandomEffect.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
-
-    End Sub
-
-    'Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
-    '    sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
-    '    sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
-    '    sdgModelOptions.RestrictLink()
-    '    'TODO:   Include multinomial as an option And the appropriate function
-    '    ucrBaseFourVariableModelling.clsRsyntax.SetFunction("lmer")
-    '    ucrBaseFourVariableModelling.clsRsyntax.RemoveParameter("family")
-    'End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
