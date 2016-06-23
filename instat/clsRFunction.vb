@@ -25,6 +25,7 @@ Public Class RFunction
     Public bToBeAssigned As Boolean = False
     Public bIsAssigned As Boolean = False
     Public bAssignToIsPrefix As Boolean = False
+    Public bAssignToColumnWithoutNames As Boolean = False
 
     Public Sub New()
         RaiseEvent ParametersChanged()
@@ -37,7 +38,7 @@ Public Class RFunction
         bIsAssigned = False
     End Sub
 
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False)
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False)
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -52,6 +53,7 @@ Public Class RFunction
             strAssignToGraph = strTempGraph
         End If
         Me.bAssignToIsPrefix = bAssignToIsPrefix
+        Me.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
         bToBeAssigned = True
         bIsAssigned = False
     End Sub
@@ -96,10 +98,12 @@ Public Class RFunction
                 frmMain.clsRLink.CreateNewInstatObject()
             End If
             strScript = strScript & strAssignTo & " <- " & strTemp & vbCrLf
-            If Not strAssignToDataFrame = "" And Not strAssignToColumn = "" Then
+            If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                 clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                If Not bAssignToColumnWithoutNames Then
+                    clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                End If
                 clsAddColumns.AddParameter("col_data", strAssignTo)
                 If bAssignToIsPrefix Then
                     clsAddColumns.AddParameter("use_col_name_as_prefix", "TRUE")

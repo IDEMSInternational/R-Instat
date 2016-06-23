@@ -285,8 +285,15 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
       col_data = replicate(num_cols, rep(col_data, self$get_data_frame_length()))
     }
   }
-  if( (length(col_name) != 1) && (length(col_name) != num_cols) ) stop("col_name must be a character or character vector with the same length as the number of new columns")
-  
+  if( col_name != "" && (length(col_name) != 1) && (length(col_name) != num_cols) ) stop("col_name must be a character or character vector with the same length as the number of new columns")
+  if(col_name == "") {
+    if(!is.null(colnames(col_data)) && length(colnames(col_data)) == num_cols) {
+      col_name = colnames(col_data)
+    }
+    else {
+      stop("col_name missing and cannot detect colnames from col_data")
+    }
+  }
   if(use_col_name_as_prefix && length(col_name) > 1) {
     stop("Cannot use col_name as prefix when col_name is a vector.")
   }
