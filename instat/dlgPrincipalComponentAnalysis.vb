@@ -37,7 +37,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
         ucrReceiverMultiplePCA.SetDataType("numeric")
         ucrResultName.SetDefaultTypeAsModel()
-        ucrResultName.SetPrefix("PCA")
+
         ucrBasePCA.iHelpTopicID = 187
     End Sub
 
@@ -53,6 +53,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrResultName.Visible = True
         chkScaleData.Checked = True
         ucrBasePCA.clsRsyntax.AddParameter("graph", "FALSE")
+        ucrResultName.SetName("PCA")
         sdgPrincipalComponentAnalysis.SetDefaults()
         TestOKEnabled()
     End Sub
@@ -97,7 +98,7 @@ Public Class dlgPrincipalComponentAnalysis
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
 
-    Private Sub ucrResultName_NameChanged() Handles ucrResultName.NameChanged
+    Private Sub ucrResultName_NameChanged()
         AssignName()
     End Sub
 
@@ -125,6 +126,4 @@ Public Class dlgPrincipalComponentAnalysis
     Private Sub ucrBasePCA_clickok(sender As Object, e As EventArgs) Handles ucrBasePCA.ClickOk
         sdgPrincipalComponentAnalysis.PCAOptions()
     End Sub
-
-
 End Class
