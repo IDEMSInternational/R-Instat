@@ -807,6 +807,7 @@ instat_object$set("public","copy_data_frame", function(data_name, new_name) {
   
   if(missing(new_name)) new_name = next_default_item(data_name, self$get_data_names())
   self$append_data_object(new_name, curr_obj)
+  curr_obj$data_changed <- TRUE
 } 
 )
 

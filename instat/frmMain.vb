@@ -986,9 +986,12 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuToolsClearOutputWindow_Click(sender As Object, e As EventArgs) Handles mnuToolsClearOutputWindow.Click
-        Dim dlgResponse As DialogResult = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
-        If dlgResponse = DialogResult.Yes Then
-            frmCommand.txtCommand.Clear()
+        Dim dlgResponse As DialogResult
+        If frmCommand.txtCommand.Text <> "" Then
+            dlgResponse = MessageBox.Show("Are you sure you want to clear the " & frmCommand.Text, "Clear " & frmCommand.Text, MessageBoxButtons.YesNo)
+            If dlgResponse = DialogResult.Yes Then
+                frmCommand.txtCommand.Clear()
+            End If
         End If
     End Sub
 
@@ -1019,4 +1022,15 @@ Public Class frmMain
     Private Sub mnuModelFourVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelFourVariablesFitModel.Click
         dlgFourVariableModelling.ShowDialog()
     End Sub
+
+    Private Sub mnuEditFind_Click(sender As Object, e As EventArgs) Handles mnuEditFind.Click
+        dlgFind.currWindow = ActiveMdiChild
+        dlgFind.Owner = Me
+        dlgFind.Show()
+    End Sub
+
+    Private Sub mnuEditFindNext_Click(sender As Object, e As EventArgs) Handles mnuEditFindNext.Click
+        mnuEditFind_Click(sender, e)
+    End Sub
+
 End Class
