@@ -149,6 +149,7 @@ Public Class clsRecentFiles
             'dlgImportDataset.SetFilePath(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4))
             'dlgImportDataset.SetDataName(Path.GetFileNameWithoutExtension(sender.ToString))
             dlgImportDataset.ShowDialog()
+
         Else
             MessageBox.Show(frmMain, "The file has either been moved or deleted", "Error trying to open file")
             'removes the path to the non existent file
