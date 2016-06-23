@@ -19,11 +19,4 @@
         frmMain.mnuViewScriptWindow.Checked = Me.Visible
     End Sub
 
-    Private Sub txtScript_LostFocus(sender As Object, e As EventArgs) Handles txtScript.LostFocus
-        frmMain.mnuEditFind.Enabled = False
-    End Sub
-
-    Private Sub txtScript_GotFocus(sender As Object, e As EventArgs) Handles txtScript.GotFocus
-        frmMain.mnuEditFind.Enabled = True
-    End Sub
 End Class
