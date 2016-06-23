@@ -1443,7 +1443,6 @@ Partial Class frmMain
         '
         'mnuEditFind
         '
-        Me.mnuEditFind.Enabled = False
         Me.mnuEditFind.Name = "mnuEditFind"
         Me.mnuEditFind.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
         Me.mnuEditFind.Size = New System.Drawing.Size(183, 22)
@@ -1452,7 +1451,6 @@ Partial Class frmMain
         '
         'mnuEditFindNext
         '
-        Me.mnuEditFindNext.Enabled = False
         Me.mnuEditFindNext.Name = "mnuEditFindNext"
         Me.mnuEditFindNext.Size = New System.Drawing.Size(183, 22)
         Me.mnuEditFindNext.Text = "Find Next"

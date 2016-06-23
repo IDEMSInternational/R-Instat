@@ -41,13 +41,4 @@ Public Class frmCommand
         frmMain.mnuViewOutputWindow.Checked = Me.Visible
     End Sub
 
-    Private Sub txtCommand_GotFocus(sender As Object, e As EventArgs) Handles txtCommand.GotFocus
-        txtCommand.Select(0, txtCommand.TextLength)
-        txtCommand.SelectionColor = Color.Black
-        frmMain.mnuEditFind.Enabled = True
-    End Sub
-
-    Private Sub txtCommand_LostFocus(sender As Object, e As EventArgs) Handles txtCommand.LostFocus
-        frmMain.mnuEditFind.Enabled = False
-    End Sub
 End Class
