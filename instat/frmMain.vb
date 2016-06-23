@@ -1022,15 +1022,4 @@ Public Class frmMain
     Private Sub mnuModelFourVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelFourVariablesFitModel.Click
         dlgFourVariableModelling.ShowDialog()
     End Sub
-
-    Private Sub mnuEditFind_Click(sender As Object, e As EventArgs) Handles mnuEditFind.Click
-
-        dlgFind.currWindow = ActiveMdiChild
-        dlgFind.Owner = Me
-        dlgFind.Show()
-    End Sub
-
-    Private Sub mnuEditFindNext_Click(sender As Object, e As EventArgs) Handles mnuEditFindNext.Click
-        mnuEditFind_Click(sender, e)
-    End Sub
 End Class

@@ -42,6 +42,11 @@ Public Class dlgGeneralForGraphics
         clsGgplotAesFunction.SetRCommand("aes")
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrBase.iHelpTopicID = 356
+
+        ucrSaveGraph.SetDataFrameSelector(sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames)
+        ucrSaveGraph.strPrefix = "Graph"
+        ucrSaveGraph.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveGraph.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
 
     Private Sub SetDefaults()
@@ -145,11 +150,13 @@ Public Class dlgGeneralForGraphics
         AddLayers(lstLayers.SelectedItems(0))
     End Sub
 
-    'Private Sub clsGgplotAesFunction_ParametersChanged() Handles clsGgplotAesFunction.ParametersChanged
-    '    If clsGgplotAesFunction.iParameterCount > 0 Then
-    '        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
-    '    Else
-    '        clsRggplotFunction.RemoveParameterByName("mapping")
-    '    End If
-    'End Sub
+    Private Sub ucrSaveGraph_GraphNameChanged() Handles ucrSaveGraph.GraphNameChanged, ucrSaveGraph.SaveGraphCheckedChanged
+        If ucrSaveGraph.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveGraph.strGraphName, strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraph.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
+    End Sub
 End Class

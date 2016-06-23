@@ -48,11 +48,14 @@ Public Class ucrLayerParamsControls
                     nudParamValue.DecimalPlaces = 0
                 End If
                 nudParamValue.Increment = Math.Pow(10, -nudParamValue.DecimalPlaces)
-                If clsLayerParam.lstParameterStrings.Count >= 3 Then
+                If clsLayerParam.lstParameterStrings.Count >= 2 Then
                     nudParamValue.Minimum = clsLayerParam.lstParameterStrings(1)
-                    nudParamValue.Maximum = clsLayerParam.lstParameterStrings(2)
                 Else
                     nudParamValue.Minimum = Decimal.MinValue
+                End If
+                If clsLayerParam.lstParameterStrings.Count >= 3 Then
+                    nudParamValue.Maximum = clsLayerParam.lstParameterStrings(2)
+                Else
                     nudParamValue.Maximum = Decimal.MaxValue
                 End If
                 ctrActive = nudParamValue

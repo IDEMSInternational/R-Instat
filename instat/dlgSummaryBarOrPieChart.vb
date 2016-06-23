@@ -30,11 +30,11 @@ Public Class dlgSummaryBarOrPieChart
         TestOkEnabled()
     End Sub
     Private Sub TestOkEnabled()
-        If Not ucrYReceiver.IsEmpty And Not ucrFactorReceiver.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
 
+        If (ucrYReceiver.IsEmpty And ucrFactorReceiver.IsEmpty) Or (ucrSaveSummaryBar.chkSaveGraph.Checked And ucrSaveSummaryBar.ucrInputGraphName.IsEmpty) Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
     Private Sub InitialiseDialog()
@@ -174,5 +174,8 @@ Public Class dlgSummaryBarOrPieChart
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSummarybarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+
+        TestOkEnabled()
+
     End Sub
 End Class

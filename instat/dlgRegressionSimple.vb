@@ -28,17 +28,22 @@ Public Class dlgRegressionSimple
         Else
             ReopenDialog()
         End If
-
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.SetFunction("")
         clsModel.SetOperation("~")
         ucrResponse.Selector = ucrSelectorSimpleReg
         ucrExplanatory.Selector = ucrSelectorSimpleReg
         ucrBase.iHelpTopicID = 171
         ucrFamily.SetGLMDistributions()
+        ucrModelName.SetPrefix("reg")
+        ucrModelName.SetItemsTypeAsModels()
+        ucrModelName.SetDefaultTypeAsModel()
+        ucrModelName.SetDataFrameSelector(ucrSelectorSimpleReg.ucrAvailableDataFrames)
+        ucrModelPreview.IsReadOnly = True
         sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorSimpleReg.ucrAvailableDataFrames)
         sdgSimpleRegOptions.SetRYVariable(ucrResponse)
@@ -48,7 +53,7 @@ Public Class dlgRegressionSimple
         sdgVariableTransformations.SetRModelOperator(clsModel)
         sdgModelOptions.SetRCIFunction(clsRCIFunction)
         sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
-
+        AssignModelName()
     End Sub
 
     Private Sub ReopenDialog()
@@ -65,17 +70,16 @@ Public Class dlgRegressionSimple
         chkConvertToVariate.Visible = False
         chkFunction.Checked = False
         chkFunction.Visible = False
-        'TODO get this to be getting a default name e.g. reg1, reg2, etc.
-        '     will be possible with new textbox user control
-        ucrModelName.SetName("reg")
         sdgSimpleRegOptions.SetDefaults()
         sdgModelOptions.SetDefaults()
+        ucrModelName.Reset()
+        ucrModelPreview.Reset()
         ResponseConvert()
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrResponse.IsEmpty()) And (Not ucrExplanatory.IsEmpty()) And ucrFamily.Enabled Then
+        If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso (chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty() OrElse Not chkSaveModel.Checked) Then
             ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
             ucrBase.OKEnabled(True)
         Else
@@ -85,6 +89,7 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorSimpleReg.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
+        AssignModelName()
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
@@ -101,6 +106,7 @@ Public Class dlgRegressionSimple
             Else
                 chkConvertToVariate.Visible = True
             End If
+
             If chkConvertToVariate.Checked Then
                 clsRConvert.SetRCommand("as.numeric")
                 clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
@@ -112,7 +118,8 @@ Public Class dlgRegressionSimple
             End If
             sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         End If
-        If ucrFamily.lstCurrentDistributions.Count = 0 Then
+
+        If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
             ucrFamily.Enabled = False
             ucrFamily.cboDistributions.Text = ""
             cmdModelOptions.Enabled = False
@@ -123,11 +130,12 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
+        ucrModelPreview.SetName(clsModel.ToScript)
         ResponseConvert()
         TestOKEnabled()
     End Sub
 
-    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
+    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs)
         ResponseConvert()
     End Sub
 
@@ -142,16 +150,18 @@ Public Class dlgRegressionSimple
                 chkFunction.Visible = False
             End If
             If chkFunction.Checked Then
-                sdgVariableTransformations.ModelFunction()
+                sdgVariableTransformations.ModelFunction(False)
             Else
                 sdgVariableTransformations.rdoIdentity.Checked = True
                 clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
             End If
         End If
+        ucrModelPreview.SetName(clsModel.ToScript)
     End Sub
 
     Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
         ExplanatoryFunctionSelect()
+        ucrModelPreview.SetName(clsModel.ToScript)
         TestOKEnabled()
     End Sub
 
@@ -161,6 +171,7 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrModelName_NameChanged() Handles ucrModelName.NameChanged
         AssignModelName()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
@@ -169,16 +180,17 @@ Public Class dlgRegressionSimple
 
     Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
         If chkSaveModel.Checked Then
-            ucrModelName.Visible = True
+            ucrModelName.Enabled = True
         Else
-            ucrModelName.Visible = False
+            ucrModelName.Enabled = False
         End If
         AssignModelName()
+        TestOKEnabled()
     End Sub
 
     Private Sub AssignModelName()
-        If chkSaveModel.Checked AndAlso ucrModelName.txtValidation.Text <> "" Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrModelName.txtValidation.Text, strTempModel:=ucrModelName.txtValidation.Text, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        If chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrModelName.GetText, strTempModel:=ucrModelName.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
             ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
@@ -206,10 +218,24 @@ Public Class dlgRegressionSimple
         ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
     End Sub
 
+    Private Sub chkConvertToVariate_CheckedChanged_1(sender As Object, e As EventArgs)
+        ResponseConvert()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
+    End Sub
+
     Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
         If chkFunction.Checked Then
             sdgVariableTransformations.ShowDialog()
         End If
         ExplanatoryFunctionSelect()
     End Sub
+
 End Class

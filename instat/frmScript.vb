@@ -18,5 +18,4 @@
     Private Sub frmScript_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         frmMain.mnuViewScriptWindow.Checked = Me.Visible
     End Sub
-
 End Class
