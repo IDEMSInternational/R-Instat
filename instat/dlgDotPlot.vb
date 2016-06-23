@@ -59,10 +59,10 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrVariablesAsFactorDotPlot.IsEmpty() = False Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrVariablesAsFactorDotPlot.IsEmpty Or (ucrSaveDotPlot.chkSaveGraph.Checked And ucrSaveDotPlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -122,5 +122,6 @@ Public Class dlgDotPlot
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+        TestOkEnabled()
     End Sub
 End Class

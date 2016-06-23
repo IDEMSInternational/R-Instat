@@ -497,11 +497,16 @@ Public Class RLink
         Return intColumnCount
     End Function
 
-    Public Function GetModelNames() As List(Of String)
+    Public Function GetModelNames(Optional strDataFrameName As String = "") As List(Of String)
         Dim chrModelNames As CharacterVector
         Dim lstModelNames As New List(Of String)
-        chrModelNames = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_model_names()").AsCharacter
-        If chrModelNames IsNot Nothing Then
+        Dim clsGetModelNames As New RFunction
+        clsGetModelNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_model_names")
+        If strDataFrameName <> "" Then
+            clsGetModelNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        chrModelNames = RunInternalScriptGetValue(clsGetModelNames.ToScript()).AsCharacter
+        If chrModelNames IsNot Nothing AndAlso chrModelNames.Length > 0 Then
             lstModelNames.AddRange(chrModelNames)
         End If
         Return lstModelNames
