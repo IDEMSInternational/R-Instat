@@ -19,11 +19,4 @@
         frmMain.mnuViewLog.Checked = Me.Visible
     End Sub
 
-    Private Sub txtLog_GotFocus(sender As Object, e As EventArgs) Handles txtLog.GotFocus
-        frmMain.mnuEditFind.Enabled = True
-    End Sub
-
-    Private Sub txtLog_LostFocus(sender As Object, e As EventArgs) Handles txtLog.LostFocus
-        frmMain.mnuEditFind.Enabled = False
-    End Sub
 End Class
