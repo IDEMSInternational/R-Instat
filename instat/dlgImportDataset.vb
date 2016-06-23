@@ -638,6 +638,11 @@ Public Class dlgImportDataset
         RefreshFrameView()
     End Sub
 
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        ' add the item to the MRU (Most Recently Used) list...
+        frmMain.clsRecentItems.addToMenu(ucrInputFilePath.Text)
+    End Sub
+
 
     'Private Sub ucrInputNamedRegions_NameChanged() Handles ucrInputNamedRegions.NameChanged
     '    If Not ucrInputNamedRegions.IsEmpty() Then
