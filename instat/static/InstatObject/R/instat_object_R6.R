@@ -423,9 +423,8 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
       }
       else out = curr_objects
     }
-    #else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type)
-	else out = self$get_objects(object_name = object_name, type = type)
-    if(as_list) {
+    else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type)
+	if(as_list) {
       lst = list()
       lst[[data_name]][[object_name]] <- out
       return(lst)

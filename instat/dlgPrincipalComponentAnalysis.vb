@@ -67,6 +67,10 @@ Public Class dlgPrincipalComponentAnalysis
         End If
     End Sub
 
+    Private Sub ucrSelectorPCA_DataFrameChanged() Handles ucrSelectorPCA.DataFrameChanged
+        AssignName()
+    End Sub
+
     Private Sub ucrBasePCA_ClickReset(sender As Object, e As EventArgs) Handles ucrBasePCA.ClickReset
         SetDefaults()
     End Sub
@@ -113,11 +117,12 @@ Public Class dlgPrincipalComponentAnalysis
 
     Private Sub AssignName()
         If chkSaveResult.Checked AndAlso ucrResultName.GetText() <> "" Then
-            ucrBasePCA.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText())
+            ucrBasePCA.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText(), strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
             ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
             strModelName = ucrResultName.GetText()
         Else
-            ucrBasePCA.clsRsyntax.SetAssignTo("last_PCA", strTempModel:="last_PCA")
+            ucrBasePCA.clsRsyntax.SetAssignTo("last_PCA", strTempModel:="last_PCA", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+            ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
             ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
             strModelName = "last_PCA"
         End If
