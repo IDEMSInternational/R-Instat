@@ -37,6 +37,8 @@ Public Class dlgDeleteRowsOrColums
             Else
                 ucrBase.OKEnabled(False)
             End If
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -45,6 +47,7 @@ Public Class dlgDeleteRowsOrColums
         nudStart.Value = 1
         ColumnsRows()
         rdoRows.Checked = True
+        ucrSelectorForDeleteColumns.Reset()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -70,7 +73,7 @@ Public Class dlgDeleteRowsOrColums
     Private Sub ReceiverCols()
         If rdoColumns.Checked = True Then
             If Not ucrReceiverForColumnsToDelete.IsEmpty Then
-                ucrBase.clsRsyntax.AddParameter("cols", ucrReceiverForColumnsToDelete.GetVariableNames)
+                ucrBase.clsRsyntax.AddParameter("cols", clsRFunctionParameter:=ucrReceiverForColumnsToDelete.GetVariables())
             Else
                 ucrBase.clsRsyntax.RemoveParameter("cols")
             End If
@@ -81,6 +84,7 @@ Public Class dlgDeleteRowsOrColums
 
     Private Sub rdoColumnsRows_CheckedChanged(sender As Object, e As EventArgs) Handles rdoColumns.CheckedChanged, rdoRows.CheckedChanged
         ColumnsRows()
+        TestOKEnabled()
     End Sub
 
     Private Sub ColumnsRows()
