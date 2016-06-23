@@ -49,6 +49,7 @@ Public Class dlgDeleteRowsOrColums
         rdoRows.Checked = True
         ucrSelectorForDeleteColumns.Reset()
         rdoRows.Enabled = False
+        grpRowsToDelete.Enabled = False
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
