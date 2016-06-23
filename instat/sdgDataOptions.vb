@@ -51,7 +51,7 @@ Public Class sdgDataOptions
 
     Public Sub SetDefaults()
         ucrSelectorFilters.Reset()
-        chkShowHiddenColumns.Checked = False
+        'chkShowHiddenColumns.Checked = False
         rdoAllDialogs.Checked = True
     End Sub
 
@@ -59,9 +59,14 @@ Public Class sdgDataOptions
         ucrSelectorFilters.Reset()
     End Sub
 
-    Public Function ShowHiddenColumns() As Boolean
-        Return chkShowHiddenColumns.Checked
-    End Function
+    Public Property ShowHiddenColumns As Boolean
+        Get
+            Return chkShowHiddenColumns.Checked
+        End Get
+        Set(bShowHidden As Boolean)
+            chkShowHiddenColumns.Checked = bShowHidden
+        End Set
+    End Property
 
     Private Sub cmdNewFilter_Click(sender As Object, e As EventArgs) Handles cmdDefineNewFilter.Click
         sdgCreateFilter.ShowDialog()

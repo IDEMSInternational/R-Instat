@@ -377,6 +377,7 @@ Public Class dlgImportDataset
         ucrInputDecimal.SetName("Automatic")
         ucrInputNAStrings.SetName("NA")
         nudSkip.Value = 0
+        chkStringsAsFactors.Checked = True
     End Sub
 
     Private Sub ucrInputEncoding_NameChanged() Handles ucrInputEncoding.NameChanged

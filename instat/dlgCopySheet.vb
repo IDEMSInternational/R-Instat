@@ -29,7 +29,9 @@ Public Class dlgCopySheet
     End Sub
 
     Private Sub SetDefaults()
-        ucrNewSheetName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & "_copy")
+        If ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "" Then
+            ucrNewDataFrameName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & "_copy")
+        End If
     End Sub
 
     Private Sub ReopenDialog()
@@ -39,6 +41,7 @@ Public Class dlgCopySheet
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
         ucrBase.iHelpTopicID = 263
+        ucrNewDataFrameName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -46,11 +49,11 @@ Public Class dlgCopySheet
     End Sub
 
     Private Sub ucrDataFrameCopySheets_DataFrameChanged() Handles ucrDataFrameCopySheets.DataFrameChanged
-        ucrNewSheetName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & "_copy")
+        ucrNewDataFrameName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & "_copy")
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
-    Private Sub ucrNewSheetName_NameChanged() Handles ucrNewSheetName.NameChanged
-        ucrBase.clsRsyntax.AddParameter("new_name", Chr(34) & ucrNewSheetName.GetText & Chr(34))
+    Private Sub ucrNewSheetName_NameChanged() Handles ucrNewDataFrameName.NameChanged
+        ucrBase.clsRsyntax.AddParameter("new_name", Chr(34) & ucrNewDataFrameName.GetText & Chr(34))
     End Sub
 End Class
