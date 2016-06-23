@@ -51,7 +51,7 @@ Partial Class dlgFourVariableModelling
         '
         'ucrBaseFourVariableModelling
         '
-        Me.ucrBaseFourVariableModelling.Location = New System.Drawing.Point(3, 281)
+        Me.ucrBaseFourVariableModelling.Location = New System.Drawing.Point(13, 281)
         Me.ucrBaseFourVariableModelling.Name = "ucrBaseFourVariableModelling"
         Me.ucrBaseFourVariableModelling.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseFourVariableModelling.TabIndex = 0
@@ -91,7 +91,7 @@ Partial Class dlgFourVariableModelling
         'lblModelPreview
         '
         Me.lblModelPreview.AutoSize = True
-        Me.lblModelPreview.Location = New System.Drawing.Point(17, 188)
+        Me.lblModelPreview.Location = New System.Drawing.Point(16, 195)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(77, 13)
         Me.lblModelPreview.TabIndex = 27
@@ -101,7 +101,7 @@ Partial Class dlgFourVariableModelling
         'ucrModelPreview
         '
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(97, 183)
+        Me.ucrModelPreview.Location = New System.Drawing.Point(96, 190)
         Me.ucrModelPreview.Name = "ucrModelPreview"
         Me.ucrModelPreview.Size = New System.Drawing.Size(142, 21)
         Me.ucrModelPreview.TabIndex = 28
@@ -180,7 +180,7 @@ Partial Class dlgFourVariableModelling
         '
         Me.lblFirstRandomEffect.AutoSize = True
         Me.lblFirstRandomEffect.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFirstRandomEffect.Location = New System.Drawing.Point(257, 135)
+        Me.lblFirstRandomEffect.Location = New System.Drawing.Point(257, 133)
         Me.lblFirstRandomEffect.Name = "lblFirstRandomEffect"
         Me.lblFirstRandomEffect.Size = New System.Drawing.Size(100, 13)
         Me.lblFirstRandomEffect.TabIndex = 25
@@ -189,7 +189,7 @@ Partial Class dlgFourVariableModelling
         '
         'ucrFirstRandomEffect
         '
-        Me.ucrFirstRandomEffect.Location = New System.Drawing.Point(249, 152)
+        Me.ucrFirstRandomEffect.Location = New System.Drawing.Point(249, 149)
         Me.ucrFirstRandomEffect.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFirstRandomEffect.Name = "ucrFirstRandomEffect"
         Me.ucrFirstRandomEffect.Selector = Nothing
@@ -267,7 +267,7 @@ Partial Class dlgFourVariableModelling
         '
         Me.lblSecondRandomEffect.AutoSize = True
         Me.lblSecondRandomEffect.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecondRandomEffect.Location = New System.Drawing.Point(254, 181)
+        Me.lblSecondRandomEffect.Location = New System.Drawing.Point(254, 178)
         Me.lblSecondRandomEffect.Name = "lblSecondRandomEffect"
         Me.lblSecondRandomEffect.Size = New System.Drawing.Size(118, 13)
         Me.lblSecondRandomEffect.TabIndex = 34
@@ -276,7 +276,7 @@ Partial Class dlgFourVariableModelling
         '
         'ucrSecondRandomEffect
         '
-        Me.ucrSecondRandomEffect.Location = New System.Drawing.Point(253, 197)
+        Me.ucrSecondRandomEffect.Location = New System.Drawing.Point(253, 193)
         Me.ucrSecondRandomEffect.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondRandomEffect.Name = "ucrSecondRandomEffect"
         Me.ucrSecondRandomEffect.Selector = Nothing
