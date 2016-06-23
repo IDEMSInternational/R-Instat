@@ -25,7 +25,7 @@ Partial Class dlgCopySheet
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFrameCopySheets = New instat.ucrDataFrame()
         Me.lblNewSheetName = New System.Windows.Forms.Label()
-        Me.ucrNewSheetName = New instat.ucrInputTextBox()
+        Me.ucrNewDataFrameName = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -46,26 +46,27 @@ Partial Class dlgCopySheet
         'lblNewSheetName
         '
         Me.lblNewSheetName.AutoSize = True
-        Me.lblNewSheetName.Location = New System.Drawing.Point(150, 37)
+        Me.lblNewSheetName.Location = New System.Drawing.Point(150, 31)
         Me.lblNewSheetName.Name = "lblNewSheetName"
-        Me.lblNewSheetName.Size = New System.Drawing.Size(91, 13)
+        Me.lblNewSheetName.Size = New System.Drawing.Size(118, 13)
         Me.lblNewSheetName.TabIndex = 2
         Me.lblNewSheetName.Tag = "New_Sheet_Name"
-        Me.lblNewSheetName.Text = "New Sheet Name"
+        Me.lblNewSheetName.Text = "New Data Frame Name"
         '
-        'ucrNewSheetName
+        'ucrNewDataFrameName
         '
-        Me.ucrNewSheetName.Location = New System.Drawing.Point(245, 29)
-        Me.ucrNewSheetName.Name = "ucrNewSheetName"
-        Me.ucrNewSheetName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrNewSheetName.TabIndex = 3
+        Me.ucrNewDataFrameName.IsReadOnly = False
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(270, 27)
+        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrNewDataFrameName.TabIndex = 3
         '
         'dlgCopySheet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 123)
-        Me.Controls.Add(Me.ucrNewSheetName)
+        Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.lblNewSheetName)
         Me.Controls.Add(Me.ucrDataFrameCopySheets)
         Me.Controls.Add(Me.ucrBase)
@@ -81,5 +82,5 @@ Partial Class dlgCopySheet
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrDataFrameCopySheets As ucrDataFrame
     Friend WithEvents lblNewSheetName As Label
-    Friend WithEvents ucrNewSheetName As ucrInputTextBox
+    Friend WithEvents ucrNewDataFrameName As ucrInputTextBox
 End Class

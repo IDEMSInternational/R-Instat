@@ -43,10 +43,9 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub SetDefaults()
-        ucrInputStoreResults.SetName("Summary_name")
         chkStoreResults.Checked = True
-        chkReturnOutput.Checked = True
-        chkdropUnusedLevels.Checked = True
+        chkPrintOutput.Checked = False
+        chkdropUnusedLevels.Checked = False
         ucrSelectorForColumnStatistics.Reset()
     End Sub
 
@@ -59,6 +58,15 @@ Public Class dlgColumnStats
         ucrReceiverByFactor.SetIncludedDataTypes({"factor"})
         ucrBase.iHelpTopicID = 64
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
+        chkCount.Tag = "summary_count"
+        chkMean.Tag = "summary_mean"
+        chkMinimum.Tag = "summary_min"
+        chkMaximum.Tag = "summary_max"
+        chkMedian.Tag = "summary_median"
+        chkSum.Tag = "summary_sum"
+        chkStDev.Tag = "summary_sd"
+        chkMode.Tag = "summmary_mode"
+        chkRange.Tag = "summmary_range"
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -73,55 +81,53 @@ Public Class dlgColumnStats
 
     Private Sub SummariesParameters()
         Dim lstCheckboxes As New List(Of CheckBox)
+        Dim chkSummary As CheckBox
+        Dim strSummariesParameter As String = ""
         Dim i As Integer = 0
         If lstCheckboxes.Count = 0 Then
             lstCheckboxes.AddRange({chkMean, chkMedian, chkCount, chkMinimum, chkMaximum, chkStDev, chkMode, chkSum, chkRange})
         End If
 
-        If chkCount.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summaries", Chr(34) & "summary_count" & Chr(34))
-
-        ElseIf chkMean.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summaries", Chr(34) & "summary_mean" & Chr(34))
-
-        ElseIf chkMinimum.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summaries", Chr(34) & "summary_min" & Chr(34))
-
-        ElseIf chkMaximum.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summaries", Chr(34) & "summary_max" & Chr(34))
-
-        ElseIf chkMedian.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summaries", Chr(34) & "summary_median" & Chr(34))
-
-        ElseIf chkSum.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summaries", Chr(34) & "summary_sum" & Chr(34))
-
-        ElseIf chkStDev.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summaries", Chr(34) & "summary_sd" & Chr(34))
-
-        ElseIf chkMode.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summaries", Chr(34) & "summmary_mode" & Chr(34))
-
-        ElseIf chkRange.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summaries", Chr(34) & "summmary_range" & Chr(34))
+        strSummariesParameter = "c("
+        For Each chkSummary In lstCheckboxes
+            If chkSummary.Checked Then
+                If i > 0 Then
+                    strSummariesParameter = strSummariesParameter & ","
+                End If
+                strSummariesParameter = strSummariesParameter & Chr(34) & chkSummary.Tag & Chr(34)
+                i = i + 1
+            End If
+        Next
+        strSummariesParameter = strSummariesParameter & ")"
+        If i > 0 Then
+            ucrBase.clsRsyntax.AddParameter("summaries", strSummariesParameter)
         Else
+            ucrBase.clsRsyntax.RemoveParameter("summaries")
         End If
     End Sub
 
-    Private Sub grpOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkdropUnusedLevels.CheckedChanged, chkReturnOutput.CheckedChanged
+    Private Sub grpOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkdropUnusedLevels.CheckedChanged, chkPrintOutput.CheckedChanged
         OptionParameters()
     End Sub
 
     Private Sub OptionParameters()
-        If chkReturnOutput.Checked Then
+        If chkPrintOutput.Checked Then
             ucrBase.clsRsyntax.AddParameter("return_output", "TRUE")
         Else
-            ucrBase.clsRsyntax.AddParameter("return_output", "FALSE")
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("return_output", "FALSE")
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("return_output")
+            End If
         End If
         If chkdropUnusedLevels.Checked Then
             ucrBase.clsRsyntax.AddParameter("drop", "TRUE")
         Else
-            ucrBase.clsRsyntax.AddParameter("drop", "FALSE")
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("drop", "FALSE")
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("drop")
+            End If
         End If
     End Sub
 
@@ -143,20 +149,13 @@ Public Class dlgColumnStats
 
     Private Sub StoreResultsParamenter()
         If chkStoreResults.Checked Then
-            ucrBase.clsRsyntax.AddParameter("store_results", "TRUE")
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBase.clsRsyntax.AddParameter("store_results", "TRUE")
+            Else
+                ucrBase.clsRsyntax.RemoveParameter("store_results")
+            End If
         Else
             ucrBase.clsRsyntax.AddParameter("store_results", "FALSE")
-        End If
-    End Sub
-    Private Sub ucrInputStoreResults_Namechanged() Handles ucrInputStoreResults.NameChanged
-        SummarynameParameter()
-    End Sub
-
-    Private Sub SummarynameParameter()
-        If chkStoreResults.Checked Then
-            ucrBase.clsRsyntax.AddParameter("summary_name", Chr(34) & ucrInputStoreResults.GetText & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("summary_name")
         End If
     End Sub
 
