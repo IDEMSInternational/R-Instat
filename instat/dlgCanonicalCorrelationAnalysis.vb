@@ -64,6 +64,10 @@ Public Class dlgCanonicalCorrelationAnalysis
         End If
     End Sub
 
+    Private Sub ucrSelectorCCA_DataFrameChanged() Handles ucrSelectorCCA.DataFrameChanged
+        AssignName()
+    End Sub
+
     Private Sub ucrBaseCCA_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseCCA.ClickReset
         SetDefaults()
     End Sub
@@ -97,11 +101,11 @@ Public Class dlgCanonicalCorrelationAnalysis
 
     Public Sub AssignName()
         If chkSaveResult.Checked AndAlso ucrResultName.GetText() <> "" Then
-            ucrBaseCCA.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText())
+            ucrBaseCCA.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText(), strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
             ucrBaseCCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
             strModelName = ucrResultName.GetText()
         Else
-            ucrBaseCCA.clsRsyntax.SetAssignTo("last_CCA", strTempModel:="last_CCA")
+            ucrBaseCCA.clsRsyntax.SetAssignTo("last_CCA", strTempModel:="last_CCA", strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
             ucrBaseCCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
             strModelName = "last_CCA"
         End If
