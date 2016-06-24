@@ -96,11 +96,13 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
 )
 
 instat_object$set("public", "replace_instat_object", function(new_instatObj) {
-  self$set_data_objects(new_instatObj$get_data_objects())
+  for(curr_obj in new_instatObj$get_data_objects()) {
+    self$append_data_object(curr_obj$get_metadata(data_name_label), curr_obj$data_clone())
+  }
   self$set_meta(new_instatObj$get_metadata())
-  self$set_objects(new_instatObj$get_objects())
+  self$set_objects(new_instatObj$get_objects(data_name = overall_label, as_list = FALSE))
   self$data_objects_changed <- TRUE
-  lapply(new_instatObj$get_data_objects(), function(x) x$set_data_changed(TRUE))
+  invisible(lapply(new_instatObj$get_data_objects(), function(x) x$set_data_changed(TRUE)))
 }
 )
 
@@ -127,12 +129,13 @@ instat_object$set("public", "set_data_objects", function(new_data_objects) {
 #' @export
 #'
 #' @examples
-instat_object$set("public", "import_RDS", function(data_RDS, keep_existing =TRUE, overwrite_existing=FALSE, include_models=TRUE,
-                                         include_graphics=TRUE, include_metadata=TRUE, include_logs=TRUE,messages=TRUE)
+instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, overwrite_existing = FALSE, include_objects = TRUE,
+                                         include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, messages = TRUE)
+# TODO add include_calcuations options
 { 
   if("instat_object" %in% class(data_RDS)) {
-    if(!keep_existing && include_models && include_graphics && include_metadata && include_logs) {
-      self$replace_instat_object(new_instatObj = data_RDS) 
+    if(!keep_existing && include_objects && include_metadata && include_logs && include_filters) {
+      self$replace_instat_object(new_instatObj = data_RDS)
     } 
     else {
       if(!keep_existing) {
@@ -140,35 +143,37 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing =TRUE
         self$set_meta(list())
         self$set_objects(list())
       }
-      for ( curr_data_obj in data_RDS$get_data_objects() ) {
+      for (curr_data_obj in data_RDS$get_data_objects()) {
         if (!(curr_data_obj$get_metadata(data_name_label) %in% self$get_data_names()) || overwrite_existing){
-          #TODO in data_object if (!include_models) data_RDS$data_objects[i]$clear_models
-          #TODO in data_object if (!include_graphics) data_RDS$data_objects[i]$clear_graphics
+          if (!include_objects) curr_data_obj$set_objects(list())
           curr_data_name = curr_data_obj$get_metadata(data_name_label)
           if (!include_metadata) {
             curr_data_obj$set_meta(list()) 
             curr_data_obj$add_defaults_meta()
             curr_data_obj$set_variables_metadata(data.frame())
-            curr_data_obj$update_variables_metadata() 
+            curr_data_obj$update_variables_metadata()
           }
           if (!include_logs) curr_data_obj$set_changes(list())
-          # Add this new data object to our list of data objects
-          self$append_data_object(curr_data_name,curr_data_obj)
+
+          if(!include_filters) {
+            curr_data_obj$set_filters(list())
+            curr_data_obj$remove_current_filter()
+          }
+          self$append_data_object(curr_data_name, curr_data_obj)
         }
       }
-      #TODO fix importing Robjects
-      # new_models_list = data_RDS$get_models()
-      # new_models_count = length(new_models_list)
-      # if (include_models && new_models_count > 0) {
-      #   for ( i in (1:new_models_count) ) {
-      #     if (!(names(new_models_list)[i] %in% names(private$.models)) || overwrite_existing) { 
-      #       self$add_model(new_models_list[i],names(new_models_list)[i])
-      #     }
-      #   }
-      # }
+      new_objects_list = data_RDS$get_objects(data_name = overall_label)
+      new_objects_count = length(new_objects_list)
+      if (include_objects && new_objects_count > 0) {
+        for ( i in (1:new_objects_count) ) {
+          if (!(names(new_objects_list)[i] %in% names(private$.objects)) || overwrite_existing) {
+            self$add_object(object = new_objects_list[i], object_name = names(new_objects_list)[i])
+          }
+        }
+      }
       new_metadata = data_RDS$get_metadata()
       new_metadata_count = length(new_metadata)
-      if (include_metadata & new_metadata_count > 0) {
+      if (include_metadata && new_metadata_count > 0) {
         for ( i in (1:new_metadata_count) ) {
           if (!(names(new_metadata)[i] %in% names(metadata)) || overwrite_existing) {
             self$append_to_metadata(names(new_metadata)[i], new_metadata[[i]])
@@ -181,9 +186,11 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing =TRUE
   else if (is.data.frame(data_RDS)) {
     self$import_data(data_tables = list(data_RDS = data_RDS))
   }
-  else{
-    if (messages){
-      stop(paste("Cannot import an object of type", class(data_RDS))) #TODO work on messages and error handling
+  else {
+    if(messages){
+      #TODO work on messages and error handling
+      #     use build in R defaults for messages
+      stop(paste("Cannot import an objects of clss", class(data_RDS)))
     }
   }
 }
@@ -211,7 +218,7 @@ instat_object$set("public", "append_data_object", function(name, obj) {
   if ( !"data_object" %in% class(obj)) {
     stop("obj must be a data object")
   }
-  
+  obj$append_to_metadata(data_name_label, name)
   private$.data_objects[[name]] <- obj 
 }
 )
