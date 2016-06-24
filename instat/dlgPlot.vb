@@ -37,6 +37,8 @@ Public Class dlgPlot
     End Sub
 
     Private Sub SetDefaults()
+        clsRaesFunction.ClearParameters()
+        clsRgeom_lineplotFunction.ClearParameters()
         chkPoints.Checked = False
         ucrLinePlotSelector.Focus()
         ucrLinePlotSelector.Reset()
@@ -99,9 +101,9 @@ Public Class dlgPlot
 
     Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
         If ucrFactorOptionalReceiver.IsEmpty() = False Then
-            clsRaesFunction.AddParameter("color", ucrFactorOptionalReceiver.GetVariableNames(False))
+            clsRaesFunction.AddParameter("colour", ucrFactorOptionalReceiver.GetVariableNames(False))
         Else
-            clsRaesFunction.RemoveParameterByName("color")
+            clsRaesFunction.RemoveParameterByName("colour")
         End If
     End Sub
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -140,5 +142,20 @@ Public Class dlgPlot
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
         TeskOkEnabled()
+    End Sub
+
+    Private Sub cmdPointOptions_Click(sender As Object, e As EventArgs) Handles cmdPointOptions.Click
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_lineplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "y" Then
+                ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "x" Then
+                ucrReceiverX.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
     End Sub
 End Class
