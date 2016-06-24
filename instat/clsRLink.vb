@@ -426,13 +426,15 @@ Public Class RLink
                     lstView.Groups.Add(grps)
                 End If
                 chrCurrColumns = vecColumns(i).AsCharacter
-                For j = 0 To chrCurrColumns.Count - 1
-                    lstView.Items.Add(chrCurrColumns(j))
-                    lstView.Items(j).Tag = vecColumns.Names(i)
-                    If vecColumns.Count > 1 Then
-                        lstView.Items(j).Group = lstView.Groups(i)
-                    End If
-                Next
+                If chrCurrColumns IsNot Nothing Then
+                    For j = 0 To chrCurrColumns.Count - 1
+                        lstView.Items.Add(chrCurrColumns(j))
+                        lstView.Items(j).Tag = vecColumns.Names(i)
+                        If vecColumns.Count > 1 Then
+                            lstView.Items(j).Group = lstView.Groups(i)
+                        End If
+                    Next
+                End If
             Next
             'TODO Find out how to get this to set automatically ( Width = -2 almost works)
             lstView.Columns(0).Width = lstView.Width - 25
