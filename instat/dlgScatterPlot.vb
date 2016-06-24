@@ -85,6 +85,8 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
 
+        sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
+
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.iHelpTopicID = 16
@@ -120,6 +122,7 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub cmdScatterPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdScatterPlotOptions.Click
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_scatterplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
         sdgLayerOptions.ShowDialog()
     End Sub
 
