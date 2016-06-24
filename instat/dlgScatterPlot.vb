@@ -99,6 +99,8 @@ Public Class dlgScatterPlot
     End Sub
     Private Sub SetDefaults()
         'setDefaults
+        clsRaesFunction.ClearParameters()
+        clsRgeom_scatterplotFunction.ClearParameters()
         ucrSelectorForScatter.Reset()
         ucrSelectorForScatter.Focus()
         ucrVariablesAsFactorForScatter.ResetControl()
