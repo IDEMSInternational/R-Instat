@@ -211,4 +211,8 @@
         End If
     End Sub
 
+    Public Sub SetSingleReceiverStatus(bSingle As Boolean)
+        bSingleVariable = bSingle
+        SetReceiverStatus()
+    End Sub
 End Class
