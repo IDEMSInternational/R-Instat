@@ -74,21 +74,17 @@ Public Class dlgScatterPlot
         clsRgeom_scatterplotFunction.SetRCommand("geom_point")
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
 
-
         ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForScatter.SetSelector(ucrSelectorForScatter)
-        ucrVariablesAsFactorForScatter.SetIncludedDataType({"numeric"})
-
+        ucrVariablesAsFactorForScatter.SetIncludedDataType({"factor", "numeric"})
 
         ucrReceiverX.Selector = ucrSelectorForScatter
-        ucrReceiverX.SetIncludedDataTypes({"numeric"})
+        ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
-        ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
-
+        ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.iHelpTopicID = 16
-
 
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
         ucrSaveScatterPlot.strPrefix = "Scatter"
@@ -127,6 +123,8 @@ Public Class dlgScatterPlot
 
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "y" Then
+                'TODO Fix this generally
+                'ucrVariablesAsFactorForScatter.SetSingleReceiverStatus(True)
                 ucrVariablesAsFactorForScatter.Add(clsParam.strArgumentValue)
             ElseIf clsParam.strArgumentName = "x" Then
                 ucrReceiverX.Add(clsParam.strArgumentValue)
