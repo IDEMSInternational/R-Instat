@@ -58,8 +58,10 @@ Public Class ucrInputComboBox
                 End If
             Case "Data Frames"
             Case "Models"
-                cboInput.Items.Add(frmMain.clsRLink.GetModelNames().ToArray)
-
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetModelNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
+                End If
             Case "Graphs"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()

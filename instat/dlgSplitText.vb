@@ -33,12 +33,10 @@ Public Class dlgSplitText
 
     End Sub
     Private Sub TestOKEnabled()
-        If ucrReceiverSplitTextColumn.IsEmpty() = False Then
-            If nudN.Text <> "" Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+        If Not ucrReceiverSplitTextColumn.IsEmpty() AndAlso nudN.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
 
     End Sub
@@ -61,8 +59,7 @@ Public Class dlgSplitText
         ucrSelectorSplitTextColumn.Focus()
         ucrInputColumnsIntoText.Reset()
         ucrInputColumnsIntoText.SetName("SplitText")
-
-
+        nudN.Value = 2
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -95,17 +92,19 @@ Public Class dlgSplitText
 
     Private Sub ucrReceiverSplitTextColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSplitTextColumn.SelectionChanged
         If Not ucrReceiverSplitTextColumn.IsEmpty Then
-
             ucrBase.clsRsyntax.AddParameter("string", clsRFunctionParameter:=ucrReceiverSplitTextColumn.GetVariables())
         Else
             ucrBase.clsRsyntax.RemoveParameter("string")
         End If
         TestOKEnabled()
-
     End Sub
 
     Private Sub nudN_TextChanged(sender As Object, e As EventArgs) Handles nudN.TextChanged
-        ucrBase.clsRsyntax.AddParameter("n", nudN.Value)
+        If nudN.Text <> "" Then
+            ucrBase.clsRsyntax.AddParameter("n", nudN.Value)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("n")
+        End If
         TestOKEnabled()
     End Sub
 End Class
