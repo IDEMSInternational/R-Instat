@@ -267,6 +267,7 @@ Public Class dlgImportDataset
         bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
         ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = False
         If strFileType <> "RDS" Then
+            grdDataPreview.Show()
             If strFileType = "csv" Then
                 clsReadCSV.AddParameter("nrows", intLines)
             End If
