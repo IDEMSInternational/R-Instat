@@ -24,7 +24,6 @@ Public Class dlgFourVariableModelling
 
     Private Sub dlgFourVariableModelling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'UcrInputComboBox1.SetItemsTypeAsModels()
-
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -244,16 +243,6 @@ Public Class dlgFourVariableModelling
             ucrBaseFourVariableModelling.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
-
-    'Private Sub AssignModelName()
-    '    If chkSaveModel.Checked AndAlso ucrModelName.txtValidation.Text <> "" Then
-    '        ucrBaseFourVariableModelling.clsRsyntax.SetAssignTo(ucrModelName.txtValidation.Text, strTempModel:=ucrModelName.txtValidation.Text)
-    '        ucrBaseFourVariableModelling.clsRsyntax.bExcludeAssignedFunctionOutput = True
-    '    Else
-    '        ucrBaseFourVariableModelling.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model")
-    '        ucrBaseFourVariableModelling.clsRsyntax.bExcludeAssignedFunctionOutput = False
-    '    End If
-    'End Sub
 
     Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
         sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
