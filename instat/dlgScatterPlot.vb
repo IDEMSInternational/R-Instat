@@ -49,9 +49,9 @@ Public Class dlgScatterPlot
 
     Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
         If Not ucrFactorOptionalReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("color", ucrFactorOptionalReceiver.GetVariableNames(False))
+            clsRaesFunction.AddParameter("colour", ucrFactorOptionalReceiver.GetVariableNames(False))
         Else
-            clsRaesFunction.RemoveParameterByName("color")
+            clsRaesFunction.RemoveParameterByName("colour")
         End If
     End Sub
 
@@ -86,7 +86,6 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
 
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
-
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.iHelpTopicID = 16
@@ -126,6 +125,16 @@ Public Class dlgScatterPlot
     Private Sub cmdScatterPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdScatterPlotOptions.Click
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_scatterplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
         sdgLayerOptions.ShowDialog()
+
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "y" Then
+                ucrVariablesAsFactorForScatter.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "x" Then
+                ucrReceiverX.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
     End Sub
 
     Private Sub ucrSaveScatterPlot_GraphNameChanged() Handles ucrSaveScatterPlot.GraphNameChanged, ucrSaveScatterPlot.SaveGraphCheckedChanged
