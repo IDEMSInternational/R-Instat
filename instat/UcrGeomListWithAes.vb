@@ -85,7 +85,8 @@ Public Class UcrGeomListWithParameters
             lstAesParameterUcr(i).Enabled = True
             For Each clsParam In clsGgplotAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    If clsCurrGeom.strGeomName = "geom_boxplot" AndAlso clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    'Should do this for any geom where x = "" ?
+                    If (clsCurrGeom.strGeomName = "geom_boxplot" OrElse clsCurrGeom.strGeomName = "geom_dotplot" OrElse clsCurrGeom.strGeomName = "geom_bar") AndAlso clsParam.strArgumentName = "x" AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34) Then
                         lstAesParameterUcr(i).Clear()
                         lstAesParameterUcr(i).Enabled = True
                     Else
