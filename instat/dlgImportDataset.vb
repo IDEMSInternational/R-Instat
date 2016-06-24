@@ -188,7 +188,6 @@ Public Class dlgImportDataset
                     strFileType = "csv"
                     ucrInputName.SetName(strFileName, bSilent:=True)
                     RefreshFilePreview()
-                    RefreshFrameView()
                 ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
                     clsReadXL.SetRCommand("rio::import")
                     clsReadXL.AddParameter("file", Chr(34) & strFilePath & Chr(34))
@@ -205,7 +204,6 @@ Public Class dlgImportDataset
                         strFileType = "xls"
                     End If
                     FillExcelSheetsAndRegions(strFilePath)
-                    RefreshFrameView()
                     'ucrInputName.SetName(strFileName, bSilent:=True)
                 Else
                     ucrBase.clsRsyntax.SetFunction("rio::import")
@@ -216,8 +214,9 @@ Public Class dlgImportDataset
                     grdDataPreview.Show()
                     txtPreview.Hide()
                     ucrInputName.SetName(strFileName, bSilent:=True)
-                    RefreshFrameView()
                 End If
+                RefreshFilePreview()
+                RefreshFrameView()
                 ucrInputName.Focus()
             End If
         Else
@@ -238,7 +237,7 @@ Public Class dlgImportDataset
 #Region "File Preview options"
     Public Sub RefreshFilePreview()
         Dim sReader As StreamReader
-        If ucrInputFilePath.GetText() <> "" Then
+        If strFileType = "csv" AndAlso ucrInputFilePath.GetText() <> "" Then
             Try
                 sReader = New StreamReader(ucrInputFilePath.GetText())
                 txtPreview.Text = ""
@@ -250,6 +249,7 @@ Public Class dlgImportDataset
                 Next
             Catch ex As Exception
                 txtPreview.Text = "Cannot show text preview of file:" & ucrInputFilePath.GetText() & ". The file may be in use by another program. Close the file and select it again from the dialog to refresh the preview."
+                bCanImport = False
             End Try
         Else
             txtPreview.Text = ""
@@ -303,7 +303,8 @@ Public Class dlgImportDataset
         Else
             bCanImport = True
             lblCannotImport.Hide()
-            grdDataPreview.Enabled = False
+            grdDataPreview.CurrentWorksheet.Reset()
+            grdDataPreview.Hide()
         End If
         TestOkEnabled()
     End Sub
