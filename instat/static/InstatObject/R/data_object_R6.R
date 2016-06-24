@@ -994,6 +994,7 @@ data_object$set("public", "get_filter_names", function(as_list = FALSE, include 
 )
 
 data_object$set("public", "get_filter", function(filter_name) {
+  if(missing(filter_name)) return(private$filters)
   if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
   return(private$filters[[filter_name]]$filter_list)
 }
@@ -1111,5 +1112,14 @@ data_object$set("public", "delete_objects", function(object_names) {
 data_object$set("public", "reorder_objects", function(new_order) {
   if(length(new_order) != length(private$objects) || !setequal(new_order, names(private$objects))) stop("new_order must be a permutation of the current object names.")
   self$set_objects(private$objects[new_order])
+}
+)
+
+data_object$set("public", "data_clone", function() {
+  #TODO somethings are not being copied over yet:
+  #     current_filter, changes list,
+  filters_clone = lapply(private$filters, function(x) x$data_clone())
+  ret = data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), variables_metadata = private$variables_metadata, filters = filters_clone, objects = private$objects)
+  return(ret)
 }
 )
