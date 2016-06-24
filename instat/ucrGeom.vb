@@ -483,8 +483,8 @@ Public Class ucrGeom
 
         clsgeom_point.strGeomName = "geom_point"
         'mandatory
-        clsgeom_point.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_point.AddAesParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_point.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_point.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
         'optional
         clsgeom_point.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
