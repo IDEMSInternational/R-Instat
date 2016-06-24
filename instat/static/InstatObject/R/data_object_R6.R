@@ -73,6 +73,7 @@ data_object <- R6Class("data_object",
                             current_filter = function(filter) {
                               if(missing(filter)) {
                                 filter_string = ""
+                                #TODO Change this to call get_filter_as_logical
                                 i = 1
                                 result = matrix(nrow = nrow(private$data), ncol = length(private$.current_filter$filter_list))
                                 for(condition in private$.current_filter$filter_list) {
@@ -187,11 +188,14 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE) {
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "") {
   if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out = private$data[!self$get_variables_metadata(property = is_hidden_label)]
   else out = private$data
   if(use_current_filter && length(private$.current_filter) > 0) {
     out = out[self$current_filter, ]
+  }
+  else if(filter_name != "") {
+    out = out[self$get_filter_as_logical(filter_name = filter_name), ]
   }
   if(convert_to_character) {
     decimal_places = private$variables_metadata[[display_decimal_label]]
@@ -281,8 +285,15 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
       col_data = replicate(num_cols, rep(col_data, self$get_data_frame_length()))
     }
   }
-  if( (length(col_name) != 1) && (length(col_name) != num_cols) ) stop("col_name must be a character or character vector with the same length as the number of new columns")
-  
+  if( col_name != "" && (length(col_name) != 1) && (length(col_name) != num_cols) ) stop("col_name must be a character or character vector with the same length as the number of new columns")
+  if(col_name == "") {
+    if(!is.null(colnames(col_data)) && length(colnames(col_data)) == num_cols) {
+      col_name = colnames(col_data)
+    }
+    else {
+      stop("col_name missing and cannot detect colnames from col_data")
+    }
+  }
   if(use_col_name_as_prefix && length(col_name) > 1) {
     stop("Cannot use col_name as prefix when col_name is a vector.")
   }
@@ -515,7 +526,13 @@ data_object$set("public", "is_variables_metadata", function(str) {
 )
 
 data_object$set("public", "add_defaults_meta", function() {
-  self$append_to_metadata(is_calculated_label,FALSE)
+  if(self$is_variables_metadata(is_hidden_label)) {
+    for(col in colnames(private$data)[is.na(self$get_variables_metadata(property = is_hidden_label))]) {
+      self$append_to_variables_metadata(col, is_hidden_label, FALSE)
+    }
+  }
+  else self$append_to_metadata(is_hidden_label, FALSE)
+  self$append_to_metadata(is_calculated_label, FALSE)
 }
 )
 
@@ -979,6 +996,19 @@ data_object$set("public", "get_filter_names", function(as_list = FALSE, include 
 data_object$set("public", "get_filter", function(filter_name) {
   if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
   return(private$filters[[filter_name]]$filter_list)
+}
+)
+
+data_object$set("public", "get_filter_as_logical", function(filter_name) {
+  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  i = 1
+  result = matrix(nrow = nrow(private$data), ncol = length(private$filters[[filter_name]]$filter_list))
+  for(condition in private$filters[[filter_name]]$filter_list) {
+    func = match.fun(condition[["operation"]])
+    result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
+    i = i + 1
+  }
+  return(apply(result, 1, all))
 }
 )
 
