@@ -60,7 +60,6 @@ Partial Class dlgBarAndPieChart
         '
         'cmdBarChartOptions
         '
-        Me.cmdBarChartOptions.Enabled = False
         Me.cmdBarChartOptions.Location = New System.Drawing.Point(11, 230)
         Me.cmdBarChartOptions.Name = "cmdBarChartOptions"
         Me.cmdBarChartOptions.Size = New System.Drawing.Size(120, 25)
@@ -109,6 +108,7 @@ Partial Class dlgBarAndPieChart
         '
         'ucrBarChartSelector
         '
+        Me.ucrBarChartSelector.bShowHiddenColumns = False
         Me.ucrBarChartSelector.Location = New System.Drawing.Point(10, 41)
         Me.ucrBarChartSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrBarChartSelector.Name = "ucrBarChartSelector"
