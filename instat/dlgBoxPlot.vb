@@ -71,8 +71,6 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
 
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
-        'sdgLayerOptions.SetGeomFunction(clsRgeom_boxplotFunction)
-        'sdgLayerOptions.SetAesFunction(clsRaesFunction
 
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
@@ -80,19 +78,19 @@ Public Class dlgBoxplot
 
 
         ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
-        ucrSaveBoxplot.strPrefix = "Graph"
+        ucrSaveBoxplot.strPrefix = "Boxplot"
         ucrSaveBoxplot.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveBoxplot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrVariablesAsFactorForBoxplot.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
+
+        If ucrVariablesAsFactorForBoxplot.IsEmpty Or (ucrSaveBoxplot.chkSaveGraph.Checked And ucrSaveBoxplot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
-
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
@@ -168,5 +166,6 @@ Public Class dlgBoxplot
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+        TestOkEnabled()
     End Sub
 End Class
