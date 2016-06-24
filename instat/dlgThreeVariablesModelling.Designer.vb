@@ -35,7 +35,7 @@ Partial Class dlgThreeVariableModelling
         Me.lblModelPreview = New System.Windows.Forms.Label()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
         Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
-        Me.chkFunction = New System.Windows.Forms.CheckBox()
+        Me.chkFirstFunction = New System.Windows.Forms.CheckBox()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrSecondExplanatory = New instat.ucrReceiverSingle()
@@ -44,6 +44,7 @@ Partial Class dlgThreeVariableModelling
         Me.ucrResponse = New instat.ucrReceiverSingle()
         Me.ucrSelectorThreeVariableModelling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseThreeVariableModelling = New instat.ucrButtons()
+        Me.chkSecondFunction = New System.Windows.Forms.CheckBox()
         Me.grpModelOperators.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -185,16 +186,16 @@ Partial Class dlgThreeVariableModelling
         Me.chkConvertToVariate.Text = "Convert " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "to Variate"
         Me.chkConvertToVariate.UseVisualStyleBackColor = True
         '
-        'chkFunction
+        'chkFirstFunction
         '
-        Me.chkFunction.AutoSize = True
-        Me.chkFunction.Location = New System.Drawing.Point(349, 69)
-        Me.chkFunction.Name = "chkFunction"
-        Me.chkFunction.Size = New System.Drawing.Size(67, 17)
-        Me.chkFunction.TabIndex = 6
-        Me.chkFunction.Tag = "Function"
-        Me.chkFunction.Text = "Function"
-        Me.chkFunction.UseVisualStyleBackColor = True
+        Me.chkFirstFunction.AutoSize = True
+        Me.chkFirstFunction.Location = New System.Drawing.Point(349, 69)
+        Me.chkFirstFunction.Name = "chkFirstFunction"
+        Me.chkFirstFunction.Size = New System.Drawing.Size(67, 17)
+        Me.chkFirstFunction.TabIndex = 6
+        Me.chkFirstFunction.Tag = "Function"
+        Me.chkFirstFunction.Text = "Function"
+        Me.chkFirstFunction.UseVisualStyleBackColor = True
         '
         'ucrModelPreview
         '
@@ -260,12 +261,24 @@ Partial Class dlgThreeVariableModelling
         Me.ucrBaseThreeVariableModelling.Size = New System.Drawing.Size(410, 55)
         Me.ucrBaseThreeVariableModelling.TabIndex = 17
         '
+        'chkSecondFunction
+        '
+        Me.chkSecondFunction.AutoSize = True
+        Me.chkSecondFunction.Location = New System.Drawing.Point(349, 170)
+        Me.chkSecondFunction.Name = "chkSecondFunction"
+        Me.chkSecondFunction.Size = New System.Drawing.Size(67, 17)
+        Me.chkSecondFunction.TabIndex = 18
+        Me.chkSecondFunction.Tag = "Function"
+        Me.chkSecondFunction.Text = "Function"
+        Me.chkSecondFunction.UseVisualStyleBackColor = True
+        '
         'dlgThreeVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 329)
-        Me.Controls.Add(Me.chkFunction)
+        Me.Controls.Add(Me.chkSecondFunction)
+        Me.Controls.Add(Me.chkFirstFunction)
         Me.Controls.Add(Me.chkConvertToVariate)
         Me.Controls.Add(Me.cmdModelOptions)
         Me.Controls.Add(Me.lblModelPreview)
@@ -315,5 +328,6 @@ Partial Class dlgThreeVariableModelling
     Friend WithEvents lblModelPreview As Label
     Friend WithEvents cmdModelOptions As Button
     Friend WithEvents chkConvertToVariate As CheckBox
-    Friend WithEvents chkFunction As CheckBox
+    Friend WithEvents chkFirstFunction As CheckBox
+    Friend WithEvents chkSecondFunction As CheckBox
 End Class
