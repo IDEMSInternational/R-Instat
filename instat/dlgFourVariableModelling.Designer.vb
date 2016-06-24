@@ -38,7 +38,6 @@ Partial Class dlgFourVariableModelling
         Me.lblFirstRandomEffect = New System.Windows.Forms.Label()
         Me.ucrFirstRandomEffect = New instat.ucrReceiverSingle()
         Me.chkSaveModel = New System.Windows.Forms.CheckBox()
-        Me.ucrModelName = New instat.ucrVariableName()
         Me.lblFirstExplanatoryVariable = New System.Windows.Forms.Label()
         Me.lblResponse = New System.Windows.Forms.Label()
         Me.ucrFirstExplanatory = New instat.ucrReceiverSingle()
@@ -46,20 +45,21 @@ Partial Class dlgFourVariableModelling
         Me.ucrSelectorFourVariableModelling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblSecondRandomEffect = New System.Windows.Forms.Label()
         Me.ucrSecondRandomEffect = New instat.ucrReceiverSingle()
+        Me.ucrModelName = New instat.ucrInputComboBox()
         Me.grpModelOperators.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBaseFourVariableModelling
         '
-        Me.ucrBaseFourVariableModelling.Location = New System.Drawing.Point(13, 281)
+        Me.ucrBaseFourVariableModelling.Location = New System.Drawing.Point(9, 313)
         Me.ucrBaseFourVariableModelling.Name = "ucrBaseFourVariableModelling"
-        Me.ucrBaseFourVariableModelling.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBaseFourVariableModelling.Size = New System.Drawing.Size(405, 52)
         Me.ucrBaseFourVariableModelling.TabIndex = 0
         '
         'chkFirstFunction
         '
         Me.chkFirstFunction.AutoSize = True
-        Me.chkFirstFunction.Location = New System.Drawing.Point(353, 58)
+        Me.chkFirstFunction.Location = New System.Drawing.Point(273, 100)
         Me.chkFirstFunction.Name = "chkFirstFunction"
         Me.chkFirstFunction.Size = New System.Drawing.Size(67, 17)
         Me.chkFirstFunction.TabIndex = 23
@@ -70,19 +70,19 @@ Partial Class dlgFourVariableModelling
         'chkConvertToVariate
         '
         Me.chkConvertToVariate.AutoSize = True
-        Me.chkConvertToVariate.Location = New System.Drawing.Point(353, 11)
+        Me.chkConvertToVariate.Location = New System.Drawing.Point(273, 39)
         Me.chkConvertToVariate.Name = "chkConvertToVariate"
-        Me.chkConvertToVariate.Size = New System.Drawing.Size(71, 30)
+        Me.chkConvertToVariate.Size = New System.Drawing.Size(111, 17)
         Me.chkConvertToVariate.TabIndex = 20
         Me.chkConvertToVariate.Tag = "Convert_to_Variate"
-        Me.chkConvertToVariate.Text = "Convert " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "to Variate"
+        Me.chkConvertToVariate.Text = "Convert to Variate"
         Me.chkConvertToVariate.UseVisualStyleBackColor = True
         '
         'cmdModelOptions
         '
-        Me.cmdModelOptions.Location = New System.Drawing.Point(286, 223)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(273, 254)
         Me.cmdModelOptions.Name = "cmdModelOptions"
-        Me.cmdModelOptions.Size = New System.Drawing.Size(122, 23)
+        Me.cmdModelOptions.Size = New System.Drawing.Size(106, 23)
         Me.cmdModelOptions.TabIndex = 30
         Me.cmdModelOptions.Tag = "Model_Options"
         Me.cmdModelOptions.Text = "Model Options..."
@@ -91,7 +91,7 @@ Partial Class dlgFourVariableModelling
         'lblModelPreview
         '
         Me.lblModelPreview.AutoSize = True
-        Me.lblModelPreview.Location = New System.Drawing.Point(16, 195)
+        Me.lblModelPreview.Location = New System.Drawing.Point(7, 229)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(77, 13)
         Me.lblModelPreview.TabIndex = 27
@@ -101,16 +101,16 @@ Partial Class dlgFourVariableModelling
         'ucrModelPreview
         '
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(96, 190)
+        Me.ucrModelPreview.Location = New System.Drawing.Point(94, 226)
         Me.ucrModelPreview.Name = "ucrModelPreview"
         Me.ucrModelPreview.Size = New System.Drawing.Size(142, 21)
         Me.ucrModelPreview.TabIndex = 28
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(289, 252)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(273, 285)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.Size = New System.Drawing.Size(122, 23)
+        Me.cmdDisplayOptions.Size = New System.Drawing.Size(106, 23)
         Me.cmdDisplayOptions.TabIndex = 33
         Me.cmdDisplayOptions.Tag = "Display_Options"
         Me.cmdDisplayOptions.Text = "Display Options..."
@@ -118,9 +118,9 @@ Partial Class dlgFourVariableModelling
         '
         'ucrFamily
         '
-        Me.ucrFamily.Location = New System.Drawing.Point(12, 206)
+        Me.ucrFamily.Location = New System.Drawing.Point(5, 245)
         Me.ucrFamily.Name = "ucrFamily"
-        Me.ucrFamily.Size = New System.Drawing.Size(225, 43)
+        Me.ucrFamily.Size = New System.Drawing.Size(225, 35)
         Me.ucrFamily.TabIndex = 29
         '
         'grpModelOperators
@@ -129,9 +129,9 @@ Partial Class dlgFourVariableModelling
         Me.grpModelOperators.Controls.Add(Me.cmdConditional)
         Me.grpModelOperators.Controls.Add(Me.cmdCommonIntercept)
         Me.grpModelOperators.Controls.Add(Me.cmdParallelLines)
-        Me.grpModelOperators.Location = New System.Drawing.Point(242, 82)
+        Me.grpModelOperators.Location = New System.Drawing.Point(273, 120)
         Me.grpModelOperators.Name = "grpModelOperators"
-        Me.grpModelOperators.Size = New System.Drawing.Size(149, 46)
+        Me.grpModelOperators.Size = New System.Drawing.Size(142, 44)
         Me.grpModelOperators.TabIndex = 24
         Me.grpModelOperators.TabStop = False
         Me.grpModelOperators.Tag = "Model_Operators"
@@ -180,7 +180,7 @@ Partial Class dlgFourVariableModelling
         '
         Me.lblFirstRandomEffect.AutoSize = True
         Me.lblFirstRandomEffect.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFirstRandomEffect.Location = New System.Drawing.Point(257, 133)
+        Me.lblFirstRandomEffect.Location = New System.Drawing.Point(273, 169)
         Me.lblFirstRandomEffect.Name = "lblFirstRandomEffect"
         Me.lblFirstRandomEffect.Size = New System.Drawing.Size(100, 13)
         Me.lblFirstRandomEffect.TabIndex = 25
@@ -189,7 +189,7 @@ Partial Class dlgFourVariableModelling
         '
         'ucrFirstRandomEffect
         '
-        Me.ucrFirstRandomEffect.Location = New System.Drawing.Point(249, 149)
+        Me.ucrFirstRandomEffect.Location = New System.Drawing.Point(273, 187)
         Me.ucrFirstRandomEffect.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFirstRandomEffect.Name = "ucrFirstRandomEffect"
         Me.ucrFirstRandomEffect.Selector = Nothing
@@ -199,7 +199,7 @@ Partial Class dlgFourVariableModelling
         'chkSaveModel
         '
         Me.chkSaveModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkSaveModel.Location = New System.Drawing.Point(12, 251)
+        Me.chkSaveModel.Location = New System.Drawing.Point(10, 286)
         Me.chkSaveModel.Name = "chkSaveModel"
         Me.chkSaveModel.Size = New System.Drawing.Size(104, 24)
         Me.chkSaveModel.TabIndex = 31
@@ -207,18 +207,11 @@ Partial Class dlgFourVariableModelling
         Me.chkSaveModel.Text = "Save Model"
         Me.chkSaveModel.UseVisualStyleBackColor = True
         '
-        'ucrModelName
-        '
-        Me.ucrModelName.Location = New System.Drawing.Point(120, 249)
-        Me.ucrModelName.Name = "ucrModelName"
-        Me.ucrModelName.Size = New System.Drawing.Size(149, 23)
-        Me.ucrModelName.TabIndex = 32
-        '
         'lblFirstExplanatoryVariable
         '
         Me.lblFirstExplanatoryVariable.AutoSize = True
         Me.lblFirstExplanatoryVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFirstExplanatoryVariable.Location = New System.Drawing.Point(237, 41)
+        Me.lblFirstExplanatoryVariable.Location = New System.Drawing.Point(273, 60)
         Me.lblFirstExplanatoryVariable.Name = "lblFirstExplanatoryVariable"
         Me.lblFirstExplanatoryVariable.Size = New System.Drawing.Size(125, 13)
         Me.lblFirstExplanatoryVariable.TabIndex = 21
@@ -229,7 +222,7 @@ Partial Class dlgFourVariableModelling
         '
         Me.lblResponse.AutoSize = True
         Me.lblResponse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblResponse.Location = New System.Drawing.Point(246, 0)
+        Me.lblResponse.Location = New System.Drawing.Point(273, 0)
         Me.lblResponse.Name = "lblResponse"
         Me.lblResponse.Size = New System.Drawing.Size(96, 13)
         Me.lblResponse.TabIndex = 18
@@ -238,7 +231,7 @@ Partial Class dlgFourVariableModelling
         '
         'ucrFirstExplanatory
         '
-        Me.ucrFirstExplanatory.Location = New System.Drawing.Point(244, 57)
+        Me.ucrFirstExplanatory.Location = New System.Drawing.Point(273, 76)
         Me.ucrFirstExplanatory.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFirstExplanatory.Name = "ucrFirstExplanatory"
         Me.ucrFirstExplanatory.Selector = Nothing
@@ -247,7 +240,7 @@ Partial Class dlgFourVariableModelling
         '
         'ucrResponse
         '
-        Me.ucrResponse.Location = New System.Drawing.Point(244, 14)
+        Me.ucrResponse.Location = New System.Drawing.Point(273, 14)
         Me.ucrResponse.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrResponse.Name = "ucrResponse"
         Me.ucrResponse.Selector = Nothing
@@ -257,17 +250,17 @@ Partial Class dlgFourVariableModelling
         'ucrSelectorFourVariableModelling
         '
         Me.ucrSelectorFourVariableModelling.bShowHiddenColumns = False
-        Me.ucrSelectorFourVariableModelling.Location = New System.Drawing.Point(7, -4)
+        Me.ucrSelectorFourVariableModelling.Location = New System.Drawing.Point(11, 9)
         Me.ucrSelectorFourVariableModelling.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFourVariableModelling.Name = "ucrSelectorFourVariableModelling"
-        Me.ucrSelectorFourVariableModelling.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorFourVariableModelling.Size = New System.Drawing.Size(225, 208)
         Me.ucrSelectorFourVariableModelling.TabIndex = 17
         '
         'lblSecondRandomEffect
         '
         Me.lblSecondRandomEffect.AutoSize = True
         Me.lblSecondRandomEffect.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecondRandomEffect.Location = New System.Drawing.Point(254, 178)
+        Me.lblSecondRandomEffect.Location = New System.Drawing.Point(273, 212)
         Me.lblSecondRandomEffect.Name = "lblSecondRandomEffect"
         Me.lblSecondRandomEffect.Size = New System.Drawing.Size(118, 13)
         Me.lblSecondRandomEffect.TabIndex = 34
@@ -276,18 +269,27 @@ Partial Class dlgFourVariableModelling
         '
         'ucrSecondRandomEffect
         '
-        Me.ucrSecondRandomEffect.Location = New System.Drawing.Point(253, 193)
+        Me.ucrSecondRandomEffect.Location = New System.Drawing.Point(273, 229)
         Me.ucrSecondRandomEffect.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondRandomEffect.Name = "ucrSecondRandomEffect"
         Me.ucrSecondRandomEffect.Selector = Nothing
         Me.ucrSecondRandomEffect.Size = New System.Drawing.Size(106, 26)
         Me.ucrSecondRandomEffect.TabIndex = 35
         '
+        'ucrModelName
+        '
+        Me.ucrModelName.IsReadOnly = False
+        Me.ucrModelName.Location = New System.Drawing.Point(126, 286)
+        Me.ucrModelName.Name = "ucrModelName"
+        Me.ucrModelName.Size = New System.Drawing.Size(122, 21)
+        Me.ucrModelName.TabIndex = 36
+        '
         'dlgFourVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 337)
+        Me.ClientSize = New System.Drawing.Size(419, 368)
+        Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.lblSecondRandomEffect)
         Me.Controls.Add(Me.ucrSecondRandomEffect)
         Me.Controls.Add(Me.chkFirstFunction)
@@ -301,7 +303,6 @@ Partial Class dlgFourVariableModelling
         Me.Controls.Add(Me.lblFirstRandomEffect)
         Me.Controls.Add(Me.ucrFirstRandomEffect)
         Me.Controls.Add(Me.chkSaveModel)
-        Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.lblFirstExplanatoryVariable)
         Me.Controls.Add(Me.lblResponse)
         Me.Controls.Add(Me.ucrFirstExplanatory)
@@ -337,7 +338,6 @@ Partial Class dlgFourVariableModelling
     Friend WithEvents lblFirstRandomEffect As Label
     Friend WithEvents ucrFirstRandomEffect As ucrReceiverSingle
     Friend WithEvents chkSaveModel As CheckBox
-    Friend WithEvents ucrModelName As ucrVariableName
     Friend WithEvents lblFirstExplanatoryVariable As Label
     Friend WithEvents lblResponse As Label
     Friend WithEvents ucrFirstExplanatory As ucrReceiverSingle
@@ -345,4 +345,5 @@ Partial Class dlgFourVariableModelling
     Friend WithEvents ucrSelectorFourVariableModelling As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblSecondRandomEffect As Label
     Friend WithEvents ucrSecondRandomEffect As ucrReceiverSingle
+    Friend WithEvents ucrModelName As ucrInputComboBox
 End Class
