@@ -66,6 +66,11 @@ Public Class RLink
         bOutput = True
     End Sub
 
+    Public Sub SetFormatDataView(tempFont As Font, tempColor As Color)
+        fEditor = tempFont
+        clrEditor = tempColor
+    End Sub
+
     Public Sub SetLog(tempLog As TextBox)
         txtLog = tempLog
         bLog = True
@@ -230,6 +235,7 @@ Public Class RLink
             AppendText(txtOutput, clrOutput, fOutput, strOutput)
         End If
         frmMain.clsGrids.UpdateGrids()
+        frmMain.clsGrids.FormatDataVIew(fEditor, clrEditor)
     End Sub
 
     Private Sub AppendText(box As RichTextBox, color As Color, font As Font, text As String)
