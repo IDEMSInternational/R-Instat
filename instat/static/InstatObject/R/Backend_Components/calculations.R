@@ -33,3 +33,9 @@ calculation$set("public", "add_sub_calculation", function(sub_calculation, name)
   sub_calculations[[name]] <- sub_calculation
 }
 )
+
+calculation$set("public", "data_clone", function() {
+  ret = calculation$new(function_name = private$function_name, parameters = private$parameters, calculated_from = private$calculated_from, is_recalculable = private$is_recalculable, sub_calculations = private$sub_calculations, type = private$type, filter_list = private$.filter_list)
+  sub_calculations[[name]] <- sub_calculation
+}
+)

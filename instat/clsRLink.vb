@@ -40,6 +40,9 @@ Public Class RLink
     Public fComments As Font = New Font("Microsoft Sans Serif", 8, FontStyle.Regular)
     Public clrComments As Color = Color.Green
 
+    Public fEditor As Font = New Font("Microsoft Sans Serif", 10, FontStyle.Regular)
+    Public clrEditor As Color = Color.Black
+
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
     End Sub
 
@@ -61,6 +64,11 @@ Public Class RLink
     Public Sub SetOutput(tempOutput As RichTextBox)
         txtOutput = tempOutput
         bOutput = True
+    End Sub
+
+    Public Sub SetFormatDataView(tempFont As Font, tempColor As Color)
+        fEditor = tempFont
+        clrEditor = tempColor
     End Sub
 
     Public Sub SetLog(tempLog As TextBox)
@@ -227,6 +235,7 @@ Public Class RLink
             AppendText(txtOutput, clrOutput, fOutput, strOutput)
         End If
         frmMain.clsGrids.UpdateGrids()
+        frmMain.clsGrids.FormatDataVIew(fEditor, clrEditor)
     End Sub
 
     Private Sub AppendText(box As RichTextBox, color As Color, font As Font, text As String)
