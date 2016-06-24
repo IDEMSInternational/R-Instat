@@ -45,6 +45,7 @@ Public Class dlgThreeVariableModelling
         ucrBaseThreeVariableModelling.iHelpTopicID = 176
         ''''
         ucrFamily.SetGLMDistributions()
+        ucrModelName.SetDataFrameSelector(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("reg")
         ucrModelName.SetItemsTypeAsModels()
         ucrModelName.SetDefaultTypeAsModel()
