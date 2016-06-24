@@ -22,12 +22,12 @@ Partial Class dlgOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
-        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
-        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
-        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
-        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
-        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
+        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
+        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdCommandFormat = New System.Windows.Forms.Button()
         Me.tbpCommands = New System.Windows.Forms.TabPage()
@@ -64,6 +64,10 @@ Partial Class dlgOptions
         Me.lblOutputFormat = New System.Windows.Forms.Label()
         Me.cmdCommentFormat = New System.Windows.Forms.Button()
         Me.lblCommandFormat = New System.Windows.Forms.Label()
+        Me.tbpEditor = New System.Windows.Forms.TabPage()
+        Me.pnFormatEditor = New System.Windows.Forms.Panel()
+        Me.cmdEditorFont = New System.Windows.Forms.Button()
+        Me.lblFont = New System.Windows.Forms.Label()
         Me.tbpDataView = New System.Windows.Forms.TabPage()
         Me.lblMaxRows = New System.Windows.Forms.Label()
         Me.nudMaxRows = New System.Windows.Forms.NumericUpDown()
@@ -84,6 +88,8 @@ Partial Class dlgOptions
         CType(Me.nudPreviewRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpOutputWindow.SuspendLayout()
         Me.pnFormatOptions.SuspendLayout()
+        Me.tbpEditor.SuspendLayout()
+        Me.pnFormatEditor.SuspendLayout()
         Me.tbpDataView.SuspendLayout()
         CType(Me.nudMaxRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -278,29 +284,29 @@ Partial Class dlgOptions
         Me.trOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.trOptions.Location = New System.Drawing.Point(0, 0)
         Me.trOptions.Name = "trOptions"
-        TreeNode1.Name = "ndLanguages"
-        TreeNode1.Tag = "1"
-        TreeNode1.Text = "Languages"
-        TreeNode1.ToolTipText = "Choose different languages"
-        TreeNode2.Name = "ndComments"
-        TreeNode2.Tag = "2"
-        TreeNode2.Text = "Comments"
-        TreeNode2.ToolTipText = "Comments for the dialogs"
-        TreeNode3.Name = "ndImport"
-        TreeNode3.Tag = "3"
-        TreeNode3.Text = "Import"
-        TreeNode3.ToolTipText = "Import Data Settings"
-        TreeNode4.Name = "ndOutputWindow"
-        TreeNode4.Tag = "4"
-        TreeNode4.Text = "Output Window"
-        TreeNode4.ToolTipText = "Output Window Formatting Options"
-        TreeNode5.Name = "ndCommands"
-        TreeNode5.Tag = "8"
-        TreeNode5.Text = "Commands"
-        TreeNode5.ToolTipText = "Commands Options"
-        TreeNode6.Name = "ndDataView"
-        TreeNode6.Text = "Data View"
-        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
+        TreeNode7.Name = "ndLanguages"
+        TreeNode7.Tag = "1"
+        TreeNode7.Text = "Languages"
+        TreeNode7.ToolTipText = "Choose different languages"
+        TreeNode8.Name = "ndComments"
+        TreeNode8.Tag = "2"
+        TreeNode8.Text = "Comments"
+        TreeNode8.ToolTipText = "Comments for the dialogs"
+        TreeNode9.Name = "ndImport"
+        TreeNode9.Tag = "3"
+        TreeNode9.Text = "Import"
+        TreeNode9.ToolTipText = "Import Data Settings"
+        TreeNode10.Name = "ndOutputWindow"
+        TreeNode10.Tag = "4"
+        TreeNode10.Text = "Output Window"
+        TreeNode10.ToolTipText = "Output Window Formatting Options"
+        TreeNode11.Name = "ndCommands"
+        TreeNode11.Tag = "8"
+        TreeNode11.Text = "Commands"
+        TreeNode11.ToolTipText = "Commands Options"
+        TreeNode12.Name = "ndDataView"
+        TreeNode12.Text = "Data View"
+        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12})
         Me.trOptions.Size = New System.Drawing.Size(138, 317)
         Me.trOptions.TabIndex = 0
         '
@@ -310,6 +316,7 @@ Partial Class dlgOptions
         Me.tbcOptions.Controls.Add(Me.tbpComments)
         Me.tbcOptions.Controls.Add(Me.tbpImport)
         Me.tbcOptions.Controls.Add(Me.tbpOutputWindow)
+        Me.tbcOptions.Controls.Add(Me.tbpEditor)
         Me.tbcOptions.Controls.Add(Me.tbpCommands)
         Me.tbcOptions.Controls.Add(Me.tbpDataView)
         Me.tbcOptions.Dock = System.Windows.Forms.DockStyle.Fill
@@ -490,6 +497,47 @@ Partial Class dlgOptions
         Me.lblCommandFormat.TabIndex = 17
         Me.lblCommandFormat.Text = "Command Format"
         '
+        'tbpEditor
+        '
+        Me.tbpEditor.Controls.Add(Me.pnFormatEditor)
+        Me.tbpEditor.Location = New System.Drawing.Point(4, 22)
+        Me.tbpEditor.Name = "tbpEditor"
+        Me.tbpEditor.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpEditor.Size = New System.Drawing.Size(420, 291)
+        Me.tbpEditor.TabIndex = 10
+        Me.tbpEditor.Text = "Editor Window"
+        Me.tbpEditor.ToolTipText = "Data View"
+        Me.tbpEditor.UseVisualStyleBackColor = True
+        '
+        'pnFormatEditor
+        '
+        Me.pnFormatEditor.AutoSize = True
+        Me.pnFormatEditor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.pnFormatEditor.Controls.Add(Me.cmdEditorFont)
+        Me.pnFormatEditor.Controls.Add(Me.lblFont)
+        Me.pnFormatEditor.Location = New System.Drawing.Point(6, 6)
+        Me.pnFormatEditor.Name = "pnFormatEditor"
+        Me.pnFormatEditor.Size = New System.Drawing.Size(391, 46)
+        Me.pnFormatEditor.TabIndex = 22
+        '
+        'cmdEditorFont
+        '
+        Me.cmdEditorFont.Location = New System.Drawing.Point(288, 20)
+        Me.cmdEditorFont.Name = "cmdEditorFont"
+        Me.cmdEditorFont.Size = New System.Drawing.Size(100, 23)
+        Me.cmdEditorFont.TabIndex = 10
+        Me.cmdEditorFont.Text = "Change..."
+        Me.cmdEditorFont.UseVisualStyleBackColor = True
+        '
+        'lblFont
+        '
+        Me.lblFont.AutoSize = True
+        Me.lblFont.Location = New System.Drawing.Point(0, 25)
+        Me.lblFont.Name = "lblFont"
+        Me.lblFont.Size = New System.Drawing.Size(63, 13)
+        Me.lblFont.TabIndex = 17
+        Me.lblFont.Text = "Format Font"
+        '
         'tbpDataView
         '
         Me.tbpDataView.Controls.Add(Me.lblMaxRows)
@@ -562,6 +610,10 @@ Partial Class dlgOptions
         Me.tbpOutputWindow.PerformLayout()
         Me.pnFormatOptions.ResumeLayout(False)
         Me.pnFormatOptions.PerformLayout()
+        Me.tbpEditor.ResumeLayout(False)
+        Me.tbpEditor.PerformLayout()
+        Me.pnFormatEditor.ResumeLayout(False)
+        Me.pnFormatEditor.PerformLayout()
         Me.tbpDataView.ResumeLayout(False)
         Me.tbpDataView.PerformLayout()
         CType(Me.nudMaxRows, System.ComponentModel.ISupportInitialize).EndInit()
@@ -607,4 +659,8 @@ Partial Class dlgOptions
     Friend WithEvents rtbCommentPreview As RichTextBox
     Friend WithEvents rtbOutputPreview As RichTextBox
     Friend WithEvents rtbCommandPreview As RichTextBox
+    Friend WithEvents tbpEditor As TabPage
+    Friend WithEvents pnFormatEditor As Panel
+    Friend WithEvents cmdEditorFont As Button
+    Friend WithEvents lblFont As Label
 End Class

@@ -18,4 +18,5 @@
     Private Sub frmLog_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         frmMain.mnuViewLog.Checked = Me.Visible
     End Sub
+
 End Class
