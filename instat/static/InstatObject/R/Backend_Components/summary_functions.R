@@ -2,6 +2,7 @@
 data_object$set("public", "merge_data", function(new_data, by = NULL, type = "left", match = "all") {
   self$set_data(join(private$data, new_data, by, type, match))
   self$append_to_changes(Merged_data)
+  self$add_defaults_meta()
 }
 )
 
@@ -21,6 +22,7 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
   else {
     summary_data = list()
     if(missing(summary_name)) summary_name = paste(data_name, "by", paste(factors, collapse = "-"), sep="_")
+    summary_name = make.names(summary_name)
     summary_data[[summary_name]] = out
     self$import_data(summary_data)
     summary_obj = self$get_data_objects(summary_name)
@@ -30,7 +32,7 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = TRUE,summary_name,...) {
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = FALSE, summary_name,...) {
   # itermediate methd needed here apply_calculation which calls calculate_summary when calculation type = summary
   # always use apply_calculation to run calculation e.g. type = filter, stack
   out = self$get_data_objects(data_name)$calculate_summary(columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, ... = ...)

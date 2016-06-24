@@ -44,6 +44,7 @@ Public Class dlgDummyVariables
         ucrReceiverFactor.SetMeAsReceiver()
         chkXvariable.Checked = False
         TestOkEnabled()
+        chkXvariable.Enabled = False
     End Sub
 
     Public Sub InitialiseDialog()

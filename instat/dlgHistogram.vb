@@ -108,7 +108,7 @@ Public Class dlgHistogram
 
     Private Sub TestOkEnabled()
         'tests when ok can be enabled
-        If ucrVariablesAsFactorforHist.IsEmpty Then
+        If ucrVariablesAsFactorforHist.IsEmpty Or (ucrSaveHist.chkSaveGraph.Checked And ucrSaveHist.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -184,5 +184,6 @@ Public Class dlgHistogram
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+        TestOkEnabled()
     End Sub
 End Class
