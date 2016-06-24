@@ -340,6 +340,7 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.sepEndMRU = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1650,13 +1651,13 @@ Partial Class frmMain
         'sepStart
         '
         Me.sepStart.Name = "sepStart"
-        Me.sepStart.Size = New System.Drawing.Size(57, 6)
+        Me.sepStart.Size = New System.Drawing.Size(149, 6)
         Me.sepStart.Visible = False
         '
         'sepEnd
         '
         Me.sepEnd.Name = "sepEnd"
-        Me.sepEnd.Size = New System.Drawing.Size(57, 6)
+        Me.sepEnd.Size = New System.Drawing.Size(149, 6)
         Me.sepEnd.Visible = False
         '
         'separator2
@@ -1687,7 +1688,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.sepEndMRU, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(37, 20)
         Me.mnuFile.Tag = "File"
@@ -2695,6 +2696,12 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
+        'sepEndMRU
+        '
+        Me.sepEndMRU.Name = "sepEndMRU"
+        Me.sepEndMRU.Size = New System.Drawing.Size(201, 6)
+        Me.sepEndMRU.Visible = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3036,4 +3043,5 @@ Partial Class frmMain
     Friend WithEvents mnuOrganisePrepareToShare As ToolStripMenuItem
     Friend WithEvents mnuOrganisePrepareToShareJitter As ToolStripMenuItem
     Friend WithEvents OtherScdMicroDialogsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents sepEndMRU As ToolStripSeparator
 End Class
