@@ -39,19 +39,19 @@ Partial Class dlgThreeVariableModelling
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrSecondExplanatory = New instat.ucrReceiverSingle()
-        Me.ucrModelName = New instat.ucrVariableName()
         Me.ucrFirstExplanatory = New instat.ucrReceiverSingle()
         Me.ucrResponse = New instat.ucrReceiverSingle()
         Me.ucrSelectorThreeVariableModelling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseThreeVariableModelling = New instat.ucrButtons()
         Me.chkSecondFunction = New System.Windows.Forms.CheckBox()
+        Me.ucrModelName = New instat.ucrInputComboBox()
         Me.grpModelOperators.SuspendLayout()
         Me.SuspendLayout()
         '
         'chkSaveModel
         '
         Me.chkSaveModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkSaveModel.Location = New System.Drawing.Point(8, 249)
+        Me.chkSaveModel.Location = New System.Drawing.Point(9, 269)
         Me.chkSaveModel.Name = "chkSaveModel"
         Me.chkSaveModel.Size = New System.Drawing.Size(104, 24)
         Me.chkSaveModel.TabIndex = 14
@@ -63,7 +63,7 @@ Partial Class dlgThreeVariableModelling
         '
         Me.lblFirstExplanatoryVariable.AutoSize = True
         Me.lblFirstExplanatoryVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFirstExplanatoryVariable.Location = New System.Drawing.Point(233, 57)
+        Me.lblFirstExplanatoryVariable.Location = New System.Drawing.Point(257, 72)
         Me.lblFirstExplanatoryVariable.Name = "lblFirstExplanatoryVariable"
         Me.lblFirstExplanatoryVariable.Size = New System.Drawing.Size(125, 13)
         Me.lblFirstExplanatoryVariable.TabIndex = 4
@@ -74,7 +74,7 @@ Partial Class dlgThreeVariableModelling
         '
         Me.lblResponse.AutoSize = True
         Me.lblResponse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblResponse.Location = New System.Drawing.Point(242, 9)
+        Me.lblResponse.Location = New System.Drawing.Point(257, 9)
         Me.lblResponse.Name = "lblResponse"
         Me.lblResponse.Size = New System.Drawing.Size(96, 13)
         Me.lblResponse.TabIndex = 1
@@ -85,7 +85,7 @@ Partial Class dlgThreeVariableModelling
         '
         Me.lblSecondExplanatoryVariable.AutoSize = True
         Me.lblSecondExplanatoryVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecondExplanatoryVariable.Location = New System.Drawing.Point(235, 154)
+        Me.lblSecondExplanatoryVariable.Location = New System.Drawing.Point(257, 177)
         Me.lblSecondExplanatoryVariable.Name = "lblSecondExplanatoryVariable"
         Me.lblSecondExplanatoryVariable.Size = New System.Drawing.Size(143, 13)
         Me.lblSecondExplanatoryVariable.TabIndex = 8
@@ -98,7 +98,7 @@ Partial Class dlgThreeVariableModelling
         Me.grpModelOperators.Controls.Add(Me.cmdConditional)
         Me.grpModelOperators.Controls.Add(Me.cmdCommonIntercept)
         Me.grpModelOperators.Controls.Add(Me.cmdParallelLines)
-        Me.grpModelOperators.Location = New System.Drawing.Point(243, 103)
+        Me.grpModelOperators.Location = New System.Drawing.Point(257, 128)
         Me.grpModelOperators.Name = "grpModelOperators"
         Me.grpModelOperators.Size = New System.Drawing.Size(149, 46)
         Me.grpModelOperators.TabIndex = 7
@@ -147,7 +147,7 @@ Partial Class dlgThreeVariableModelling
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(285, 248)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(257, 265)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(122, 23)
         Me.cmdDisplayOptions.TabIndex = 16
@@ -158,7 +158,7 @@ Partial Class dlgThreeVariableModelling
         'lblModelPreview
         '
         Me.lblModelPreview.AutoSize = True
-        Me.lblModelPreview.Location = New System.Drawing.Point(13, 192)
+        Me.lblModelPreview.Location = New System.Drawing.Point(7, 210)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(77, 13)
         Me.lblModelPreview.TabIndex = 10
@@ -167,7 +167,7 @@ Partial Class dlgThreeVariableModelling
         '
         'cmdModelOptions
         '
-        Me.cmdModelOptions.Location = New System.Drawing.Point(282, 213)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(257, 236)
         Me.cmdModelOptions.Name = "cmdModelOptions"
         Me.cmdModelOptions.Size = New System.Drawing.Size(122, 23)
         Me.cmdModelOptions.TabIndex = 13
@@ -178,18 +178,18 @@ Partial Class dlgThreeVariableModelling
         'chkConvertToVariate
         '
         Me.chkConvertToVariate.AutoSize = True
-        Me.chkConvertToVariate.Location = New System.Drawing.Point(349, 26)
+        Me.chkConvertToVariate.Location = New System.Drawing.Point(257, 52)
         Me.chkConvertToVariate.Name = "chkConvertToVariate"
-        Me.chkConvertToVariate.Size = New System.Drawing.Size(71, 30)
+        Me.chkConvertToVariate.Size = New System.Drawing.Size(111, 17)
         Me.chkConvertToVariate.TabIndex = 3
         Me.chkConvertToVariate.Tag = "Convert_to_Variate"
-        Me.chkConvertToVariate.Text = "Convert " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "to Variate"
+        Me.chkConvertToVariate.Text = "Convert to Variate"
         Me.chkConvertToVariate.UseVisualStyleBackColor = True
         '
         'chkFirstFunction
         '
         Me.chkFirstFunction.AutoSize = True
-        Me.chkFirstFunction.Location = New System.Drawing.Point(349, 69)
+        Me.chkFirstFunction.Location = New System.Drawing.Point(257, 109)
         Me.chkFirstFunction.Name = "chkFirstFunction"
         Me.chkFirstFunction.Size = New System.Drawing.Size(67, 17)
         Me.chkFirstFunction.TabIndex = 6
@@ -200,37 +200,30 @@ Partial Class dlgThreeVariableModelling
         'ucrModelPreview
         '
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(93, 187)
+        Me.ucrModelPreview.Location = New System.Drawing.Point(93, 207)
         Me.ucrModelPreview.Name = "ucrModelPreview"
         Me.ucrModelPreview.Size = New System.Drawing.Size(142, 21)
         Me.ucrModelPreview.TabIndex = 11
         '
         'ucrFamily
         '
-        Me.ucrFamily.Location = New System.Drawing.Point(8, 204)
+        Me.ucrFamily.Location = New System.Drawing.Point(4, 224)
         Me.ucrFamily.Name = "ucrFamily"
         Me.ucrFamily.Size = New System.Drawing.Size(225, 43)
         Me.ucrFamily.TabIndex = 12
         '
         'ucrSecondExplanatory
         '
-        Me.ucrSecondExplanatory.Location = New System.Drawing.Point(239, 168)
+        Me.ucrSecondExplanatory.Location = New System.Drawing.Point(257, 191)
         Me.ucrSecondExplanatory.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondExplanatory.Name = "ucrSecondExplanatory"
         Me.ucrSecondExplanatory.Selector = Nothing
         Me.ucrSecondExplanatory.Size = New System.Drawing.Size(106, 26)
         Me.ucrSecondExplanatory.TabIndex = 9
         '
-        'ucrModelName
-        '
-        Me.ucrModelName.Location = New System.Drawing.Point(116, 247)
-        Me.ucrModelName.Name = "ucrModelName"
-        Me.ucrModelName.Size = New System.Drawing.Size(149, 23)
-        Me.ucrModelName.TabIndex = 15
-        '
         'ucrFirstExplanatory
         '
-        Me.ucrFirstExplanatory.Location = New System.Drawing.Point(240, 73)
+        Me.ucrFirstExplanatory.Location = New System.Drawing.Point(257, 87)
         Me.ucrFirstExplanatory.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFirstExplanatory.Name = "ucrFirstExplanatory"
         Me.ucrFirstExplanatory.Selector = Nothing
@@ -239,7 +232,7 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrResponse
         '
-        Me.ucrResponse.Location = New System.Drawing.Point(240, 26)
+        Me.ucrResponse.Location = New System.Drawing.Point(257, 26)
         Me.ucrResponse.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrResponse.Name = "ucrResponse"
         Me.ucrResponse.Selector = Nothing
@@ -248,23 +241,24 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrSelectorThreeVariableModelling
         '
-        Me.ucrSelectorThreeVariableModelling.Location = New System.Drawing.Point(3, 5)
+        Me.ucrSelectorThreeVariableModelling.bShowHiddenColumns = False
+        Me.ucrSelectorThreeVariableModelling.Location = New System.Drawing.Point(9, 9)
         Me.ucrSelectorThreeVariableModelling.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorThreeVariableModelling.Name = "ucrSelectorThreeVariableModelling"
-        Me.ucrSelectorThreeVariableModelling.Size = New System.Drawing.Size(242, 179)
+        Me.ucrSelectorThreeVariableModelling.Size = New System.Drawing.Size(214, 185)
         Me.ucrSelectorThreeVariableModelling.TabIndex = 0
         '
         'ucrBaseThreeVariableModelling
         '
-        Me.ucrBaseThreeVariableModelling.Location = New System.Drawing.Point(3, 277)
+        Me.ucrBaseThreeVariableModelling.Location = New System.Drawing.Point(9, 297)
         Me.ucrBaseThreeVariableModelling.Name = "ucrBaseThreeVariableModelling"
-        Me.ucrBaseThreeVariableModelling.Size = New System.Drawing.Size(410, 55)
+        Me.ucrBaseThreeVariableModelling.Size = New System.Drawing.Size(404, 54)
         Me.ucrBaseThreeVariableModelling.TabIndex = 17
         '
         'chkSecondFunction
         '
         Me.chkSecondFunction.AutoSize = True
-        Me.chkSecondFunction.Location = New System.Drawing.Point(349, 170)
+        Me.chkSecondFunction.Location = New System.Drawing.Point(257, 215)
         Me.chkSecondFunction.Name = "chkSecondFunction"
         Me.chkSecondFunction.Size = New System.Drawing.Size(67, 17)
         Me.chkSecondFunction.TabIndex = 18
@@ -272,11 +266,20 @@ Partial Class dlgThreeVariableModelling
         Me.chkSecondFunction.Text = "Function"
         Me.chkSecondFunction.UseVisualStyleBackColor = True
         '
+        'ucrModelName
+        '
+        Me.ucrModelName.IsReadOnly = False
+        Me.ucrModelName.Location = New System.Drawing.Point(109, 270)
+        Me.ucrModelName.Name = "ucrModelName"
+        Me.ucrModelName.Size = New System.Drawing.Size(122, 21)
+        Me.ucrModelName.TabIndex = 19
+        '
         'dlgThreeVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 329)
+        Me.ClientSize = New System.Drawing.Size(425, 353)
+        Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.chkSecondFunction)
         Me.Controls.Add(Me.chkFirstFunction)
         Me.Controls.Add(Me.chkConvertToVariate)
@@ -289,7 +292,6 @@ Partial Class dlgThreeVariableModelling
         Me.Controls.Add(Me.lblSecondExplanatoryVariable)
         Me.Controls.Add(Me.ucrSecondExplanatory)
         Me.Controls.Add(Me.chkSaveModel)
-        Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.lblFirstExplanatoryVariable)
         Me.Controls.Add(Me.lblResponse)
         Me.Controls.Add(Me.ucrFirstExplanatory)
@@ -309,7 +311,6 @@ Partial Class dlgThreeVariableModelling
 
     Friend WithEvents ucrBaseThreeVariableModelling As ucrButtons
     Friend WithEvents chkSaveModel As CheckBox
-    Friend WithEvents ucrModelName As ucrVariableName
     Friend WithEvents lblFirstExplanatoryVariable As Label
     Friend WithEvents lblResponse As Label
     Friend WithEvents ucrFirstExplanatory As ucrReceiverSingle
@@ -330,4 +331,5 @@ Partial Class dlgThreeVariableModelling
     Friend WithEvents chkConvertToVariate As CheckBox
     Friend WithEvents chkFirstFunction As CheckBox
     Friend WithEvents chkSecondFunction As CheckBox
+    Friend WithEvents ucrModelName As ucrInputComboBox
 End Class
