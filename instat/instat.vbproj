@@ -4038,6 +4038,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="lib\unvell.ReoScript.dll" />
+    <None Include="static\Recent_Files\recent.mru">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\arrows_bottom.png" />
     <Content Include="Resources\arrows_down.png" />
     <Content Include="Resources\arrows_top.png" />
@@ -4735,9 +4738,7 @@
     <XliffResource Include="MultilingualResources\instat.fr-FR.xlf" />
     <XliffResource Include="MultilingualResources\instat.sw-KE.xlf" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="static\Recent_Files\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />
   <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">
