@@ -148,6 +148,7 @@ Public Class RLink
         Dim strNextDefault As String = ""
         Dim clsGetDefault As New RFunction
         Dim strExistingNames As String
+        Dim expPrefix As SymbolicExpression
 
         clsGetDefault.SetRCommand("next_default_item")
         clsGetDefault.AddParameter("prefix", Chr(34) & strPrefix & Chr(34))
@@ -155,7 +156,11 @@ Public Class RLink
         If strExistingNames <> "" Then
             clsGetDefault.AddParameter("existing_names", GetListAsRString(lstItems))
         End If
-        Return RunInternalScriptGetValue(clsGetDefault.ToScript()).AsCharacter(0)
+        expPrefix = RunInternalScriptGetValue(clsGetDefault.ToScript())
+        If Not expPrefix.Type = Internals.SymbolicExpressionType.Null Then
+            strNextDefault = expPrefix.AsCharacter(0)
+        End If
+        Return strNextDefault
     End Function
 
     Public Sub RunScript(strScript As String, Optional bReturnOutput As Integer = 0, Optional strComment As String = "")
@@ -425,14 +430,13 @@ Public Class RLink
         End If
     End Sub
 
-    Public Sub SelectColumnsWithMetadataProperty(lstView As ListView, strDataFrameName As String, strProperty As String, strValues As String())
+    Public Sub SelectColumnsWithMetadataProperty(ucrCurrentReceiver As ucrReceiverMultiple, strDataFrameName As String, strProperty As String, strValues As String())
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
-        Dim i, j, iTemp As Integer
+        Dim i As Integer
         Dim clsGetItems As New RFunction
         Dim clsIncludeList As New RFunction
         Dim kvpInclude As KeyValuePair(Of String, String())
-        Dim lviTemp As ListViewItem
 
         kvpInclude = New KeyValuePair(Of String, String())(strProperty, strValues)
 
@@ -446,19 +450,10 @@ Public Class RLink
             clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
             clsGetItems.AddParameter("include", clsRFunctionParameter:=clsIncludeList)
             vecColumns = RunInternalScriptGetValue(clsGetItems.ToScript()).AsList
-
+            ucrCurrentReceiver.Clear()
             For i = 0 To vecColumns.Count - 1
                 chrCurrColumns = vecColumns(i).AsCharacter
-                lstView.BeginUpdate()
-                For j = 0 To chrCurrColumns.Count - 1
-                    For Each lviTemp In lstView.Items
-                        If lviTemp.Text = chrCurrColumns(j) Then
-                            lviTemp.Selected = True
-                            Exit For
-                        End If
-                    Next
-                Next
-                lstView.EndUpdate()
+                ucrCurrentReceiver.Add(chrCurrColumns.ToArray())
             Next
         End If
     End Sub
@@ -507,26 +502,40 @@ Public Class RLink
         Return intColumnCount
     End Function
 
-    Public Function GetModelNames() As List(Of String)
+    Public Function GetModelNames(Optional strDataFrameName As String = "") As List(Of String)
         Dim chrModelNames As CharacterVector
         Dim lstModelNames As New List(Of String)
-        chrModelNames = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_model_names()").AsCharacter
-        If chrModelNames IsNot Nothing Then
-            lstModelNames.AddRange(chrModelNames)
+        Dim clsGetModelNames As New RFunction
+        Dim expModelNames As SymbolicExpression
+
+        clsGetModelNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_model_names")
+        If strDataFrameName <> "" Then
+            clsGetModelNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        expModelNames = RunInternalScriptGetValue(clsGetModelNames.ToScript())
+        If Not expModelNames.Type = Internals.SymbolicExpressionType.Null Then
+            chrModelNames = expModelNames.AsCharacter()
+            If chrModelNames.Length > 0 Then
+                lstModelNames.AddRange(chrModelNames)
+            End If
         End If
         Return lstModelNames
     End Function
 
     Public Function GetFilterNames(strDataFrameName As String) As List(Of String)
+        Dim expFilterNames As SymbolicExpression
         Dim chrFilterNames As CharacterVector
         Dim lstFilterNames As New List(Of String)
         Dim clsGetFilterNames As New RFunction
 
         clsGetFilterNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter_names")
         clsGetFilterNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        chrFilterNames = RunInternalScriptGetValue(clsGetFilterNames.ToScript()).AsCharacter
-        If chrFilterNames IsNot Nothing Then
-            lstFilterNames.AddRange(chrFilterNames)
+        expFilterNames = RunInternalScriptGetValue(clsGetFilterNames.ToScript())
+        If Not expFilterNames.Type = Internals.SymbolicExpressionType.Null Then
+            chrFilterNames = expFilterNames.AsCharacter()
+            If chrFilterNames.Length > 0 Then
+                lstFilterNames.AddRange(chrFilterNames)
+            End If
         End If
         Return lstFilterNames
     End Function
@@ -535,21 +544,25 @@ Public Class RLink
         Dim chrGraphNames As CharacterVector
         Dim lstGraphNames As New List(Of String)
         Dim clsGetGraphNames As New RFunction
+        Dim expGraphNames As SymbolicExpression
 
         clsGetGraphNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graph_names")
         If strDataFrameName <> "" Then
             clsGetGraphNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
         End If
-        chrGraphNames = RunInternalScriptGetValue(clsGetGraphNames.ToScript()).AsCharacter
-        If chrGraphNames IsNot Nothing Then
-            lstGraphNames.AddRange(chrGraphNames)
+        expGraphNames = RunInternalScriptGetValue(clsGetGraphNames.ToScript())
+        If Not expGraphNames.Type = Internals.SymbolicExpressionType.Null Then
+            chrGraphNames = expGraphNames.AsCharacter()
+            If chrGraphNames.Length > 0 Then
+                lstGraphNames.AddRange(chrGraphNames)
+            End If
         End If
         Return lstGraphNames
     End Function
 
     Public Function GetDataType(strDataFrameName As String, strColumnName As String) As String
         Dim strDataType As CharacterVector
-        strDataType = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_type(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ",col_name=" & Chr(34) & strColumnName & Chr(34) & ")").AsCharacter
+        strDataType = RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_data_type(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ",col_name=" & Chr(34) & strColumnName & Chr(34) & ")").AsCharacter
         Return strDataType(0)
     End Function
 
