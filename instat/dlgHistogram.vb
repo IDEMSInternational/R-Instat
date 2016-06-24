@@ -112,6 +112,7 @@ Public Class dlgHistogram
                 clsRaesFunction.RemoveParameterByName("colour")
             End If
         End If
+        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -126,6 +127,10 @@ Public Class dlgHistogram
 
     Private Sub SetDefaults()
         'seting Defaults for the dialog
+        clsRaesFunction.ClearParameters()
+        clsRgeom_densityFunction.ClearParameters()
+        clsRgeom_FPolygon.ClearParameters()
+        clsRgeom_histogramFunction.ClearParameters()
         ucrHistogramSelector.Reset()
         ucrVariablesAsFactorforHist.ResetControl()
         rdoHistogram.Checked = True
@@ -161,22 +166,49 @@ Public Class dlgHistogram
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdHistogramOptions_Click(sender As Object, e As EventArgs) Handles cmdHistogramOptions.Click
-        sdgHistogramOptions.ShowDialog()
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_histogramFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                ucrVariablesAsFactorforHist.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdFrequencyOptions_Click(sender As Object, e As EventArgs) Handles cmdFrequencyOptions.Click
-        sdgFrequencyPolygonOptions.ShowDialog()
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_FPolygon, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                ucrVariablesAsFactorforHist.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdDensityOptions_Click(sender As Object, e As EventArgs) Handles cmdDensityOptions.Click
-        sdgDensityOptions.ShowDialog()
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_densityFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                ucrVariablesAsFactorforHist.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrVariablesAsFactorforHist_SelectionChanged() Handles ucrVariablesAsFactorforHist.SelectionChanged
-
         If Not ucrVariablesAsFactorforHist.IsEmpty Then
             clsRaesFunction.AddParameter("x", ucrVariablesAsFactorforHist.GetVariableNames(False))
         Else

@@ -67,6 +67,8 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub SetDefaults()
+        clsRaesFunction.ClearParameters()
+        clsRgeom_dotplot.ClearParameters()
         ucrDotPlotSelector.Reset()
         ucrVariablesAsFactorDotPlot.ResetControl()
         SetXParameter()
@@ -118,6 +120,7 @@ Public Class dlgDotPlot
                 ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrVariablesAsFactorDotPlot_SelectionChanged() Handles ucrVariablesAsFactorDotPlot.SelectionChanged
