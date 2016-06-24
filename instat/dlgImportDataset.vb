@@ -147,7 +147,7 @@ Public Class dlgImportDataset
         Else
             dlgOpen.Filter = "All Data files (*.csv,*.xls,*.xlsx,*.RDS,*.sav,*.tsv,*.csvy,*.feather,*.psv,*.RData,*.json,*.yml,*.dta,*.dbf,*.arff,*.R,*.sas7bdat,*.xpt,*.mtp,*.rec;*.syd,*.dif,*.ods,*.xml,*html)|*.csv;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html|Comma separated files (*.csv)|*.csv|Excel files (*.xls)|*.xls|Excel files (*.xlsx)|*.xlsx|RDS R-file (*.RDS)|*.RDS|SPSS files (*.sav)|*.sav|Tab separated files (*.tsv)|*.tsv|CSV with a YAML metadata header (*.csvy)|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html"
             dlgOpen.Title = "Open Data from file"
-            dlgOpen.InitialDirectory = "c:\\"
+            'dlgOpen.InitialDirectory = "c:\\"
         End If
 
         If dlgOpen.ShowDialog() = DialogResult.OK Then
@@ -665,6 +665,11 @@ Public Class dlgImportDataset
             clsReadXL.RemoveParameterByName("which")
         End If
         RefreshFrameView()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        ' add the item to the MRU (Most Recently Used) list...
+        frmMain.clsRecentItems.addToMenu(ucrInputFilePath.Text)
     End Sub
 
 
