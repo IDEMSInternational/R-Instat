@@ -1,5 +1,6 @@
 ﻿Imports System.Threading
 Imports System.Globalization
+Imports unvell.ReoGrid
 Public Class InstatOptions
     Public bIncludeRDefaultParameters As Boolean
     Public fntOutput, fntScript, fntComment, fntEditor As Font
@@ -35,9 +36,13 @@ Public Class InstatOptions
         fntEditor = fntNew
         clrEditor = clrNew
         '
-        Dim sheet = frmEditor.grdData.CurrentWorksheet
-        sheet.SetRangeStyles(unvell.ReoGrid.RangePosition.EntireRange, New unvell.ReoGrid.WorksheetRangeStyle() With {
-                             .Flag = unvell.ReoGrid.PlainStyleFlag.TextColor Or unvell.ReoGrid.PlainStyleFlag.FontSize Or unvell.ReoGrid.PlainStyleFlag.FontName, .TextColor = clrNew, .FontSize = fntNew.Size, .FontName = fntNew.Name})
+        frmMain.clsRLink.SetFormatDataView(fntEditor, clrEditor)
+        Dim tmpSheets As Worksheet
+        For Each tmpSheets In frmEditor.grdData.Worksheets
+            tmpSheets.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
+                             .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName, .TextColor = clrNew, .FontSize = fntNew.Size, .FontName = fntNew.Name})
+
+        Next
     End Sub
 
     Public Sub SetPreviewRows(intlines As Integer)

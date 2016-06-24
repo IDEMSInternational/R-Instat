@@ -288,4 +288,12 @@ Public Class clsGridLink
         UpdateGrids()
     End Sub
 
+    Public Sub FormatDataVIew(fntNew As Font, clrNew As Color)
+        Dim tmpSheets As Worksheet
+        For Each tmpSheets In frmMain.clsGrids.grdData.Worksheets
+            tmpSheets.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
+                             .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName, .TextColor = clrNew, .FontSize = fntNew.Size, .FontName = fntNew.Name})
+
+        Next
+    End Sub
 End Class
