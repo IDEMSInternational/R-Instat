@@ -149,6 +149,7 @@ Public Class clsRecentFiles
         If File.Exists(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)) Then
             'dlgImportDataset.SetFilePath(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4))
             'dlgImportDataset.SetDataName(Path.GetFileNameWithoutExtension(sender.ToString))
+            'Not working as I would like because of the changes made to the Import Dataset
             dlgImportDataset.ShowDialog()
 
         Else
