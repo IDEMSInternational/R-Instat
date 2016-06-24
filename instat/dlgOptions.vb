@@ -26,8 +26,8 @@ Public Class dlgOptions
     'Define the Fonts dialog (only one)
     Dim dlgFont As New FontDialog
     Dim bFirstLoad As Boolean = True
-    Dim fntOutput, fntCommand, fntComment As Font
-    Dim clrOutput, clrCommand, clrComment As Color
+    Dim fntOutput, fntCommand, fntComment, fntEditor As Font
+    Dim clrOutput, clrCommand, clrComment, clrEditor As Color
 
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -54,6 +54,7 @@ Public Class dlgOptions
         SetOutputFont(frmMain.clsInstatOptions.fntOutput, frmMain.clsInstatOptions.clrOutput)
         SetCommandFont(frmMain.clsInstatOptions.fntScript, frmMain.clsInstatOptions.clrScript)
         SetCommentFont(frmMain.clsInstatOptions.fntComment, frmMain.clsInstatOptions.clrComment)
+        SetEditorFont(frmMain.clsInstatOptions.fntEditor, frmMain.clsInstatOptions.clrEditor)
         nudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
         nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         txtComment.Text = frmMain.clsInstatOptions.strComment
@@ -74,6 +75,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetFormatOutput(fntOutput, clrOutput)
         frmMain.clsInstatOptions.SetFormatComment(fntComment, clrComment)
         frmMain.clsInstatOptions.SetFormatCommand(fntCommand, clrCommand)
+        frmMain.clsInstatOptions.SetEditorFormat(fntEditor, clrEditor)
         frmMain.clsInstatOptions.SetComment(txtComment.Text)
         frmMain.clsInstatOptions.SetPreviewRows(nudPreviewRows.Value)
         frmMain.clsInstatOptions.SetMaxRows(nudMaxRows.Value)
@@ -229,6 +231,21 @@ Public Class dlgOptions
         End If
     End Sub
 
+    Private Sub cmdEditorFont_Click(sender As Object, e As EventArgs) Handles cmdEditorFont.Click
+        dlgFont.ShowColor = True
+        'dlgFont.ShowEffects = False
+        dlgFont.MaxSize = 50
+        dlgFont.MinSize = 8
+        dlgFont.Font = frmMain.clsRLink.fEditor
+        dlgFont.Color = frmMain.clsRLink.clrEditor
+        If dlgFont.ShowDialog = DialogResult.OK Then
+            SetEditorFont(dlgFont.Font, dlgFont.Color)
+            ApplyEnabled(True)
+            dlgFont.Reset()
+        End If
+
+    End Sub
+
     Private Sub nudNoLines_ValueChanged(sender As Object, e As EventArgs) Handles nudPreviewRows.TextChanged
         ApplyEnabled(True)
     End Sub
@@ -272,4 +289,10 @@ Public Class dlgOptions
         rtbCommentPreview.SelectionColor = clrComment
         rtbCommandPreview.SelectionLength = 0
     End Sub
+
+    Private Sub SetEditorFont(fntNew As Font, clrNew As Color)
+        fntEditor = fntNew
+        clrEditor = clrNew
+    End Sub
+
 End Class
