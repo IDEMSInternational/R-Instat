@@ -49,10 +49,10 @@ Partial Class dlgScatterPlot
         Me.lblFactorOptional.AutoSize = True
         Me.lblFactorOptional.Location = New System.Drawing.Point(256, 203)
         Me.lblFactorOptional.Name = "lblFactorOptional"
-        Me.lblFactorOptional.Size = New System.Drawing.Size(88, 13)
+        Me.lblFactorOptional.Size = New System.Drawing.Size(108, 13)
         Me.lblFactorOptional.TabIndex = 4
-        Me.lblFactorOptional.Tag = "Factor_Optional"
-        Me.lblFactorOptional.Text = "Factor  (Optional)"
+        Me.lblFactorOptional.Tag = "By_Variable_Optional"
+        Me.lblFactorOptional.Text = "By Variable (Optional)"
         '
         'lblXVariable
         '
@@ -109,6 +109,7 @@ Partial Class dlgScatterPlot
         '
         'ucrSelectorForScatter
         '
+        Me.ucrSelectorForScatter.bShowHiddenColumns = False
         Me.ucrSelectorForScatter.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForScatter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForScatter.Name = "ucrSelectorForScatter"
