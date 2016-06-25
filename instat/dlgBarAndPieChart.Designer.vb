@@ -53,14 +53,13 @@ Partial Class dlgBarAndPieChart
         Me.lblSecondFactor.AutoSize = True
         Me.lblSecondFactor.Location = New System.Drawing.Point(255, 139)
         Me.lblSecondFactor.Name = "lblSecondFactor"
-        Me.lblSecondFactor.Size = New System.Drawing.Size(77, 13)
+        Me.lblSecondFactor.Size = New System.Drawing.Size(128, 13)
         Me.lblSecondFactor.TabIndex = 4
         Me.lblSecondFactor.Tag = "Second_Factor"
-        Me.lblSecondFactor.Text = "Second Factor"
+        Me.lblSecondFactor.Text = "Second Factor  (Optional)"
         '
         'cmdBarChartOptions
         '
-        Me.cmdBarChartOptions.Enabled = False
         Me.cmdBarChartOptions.Location = New System.Drawing.Point(11, 230)
         Me.cmdBarChartOptions.Name = "cmdBarChartOptions"
         Me.cmdBarChartOptions.Size = New System.Drawing.Size(120, 25)
@@ -109,6 +108,7 @@ Partial Class dlgBarAndPieChart
         '
         'ucrBarChartSelector
         '
+        Me.ucrBarChartSelector.bShowHiddenColumns = False
         Me.ucrBarChartSelector.Location = New System.Drawing.Point(10, 41)
         Me.ucrBarChartSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrBarChartSelector.Name = "ucrBarChartSelector"

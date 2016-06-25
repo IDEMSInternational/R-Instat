@@ -25,6 +25,8 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.grpSummaries = New System.Windows.Forms.GroupBox()
+        Me.chkMode = New System.Windows.Forms.CheckBox()
+        Me.chkRange = New System.Windows.Forms.CheckBox()
         Me.chkSum = New System.Windows.Forms.CheckBox()
         Me.chkStDev = New System.Windows.Forms.CheckBox()
         Me.chkMedian = New System.Windows.Forms.CheckBox()
@@ -35,15 +37,12 @@ Partial Class dlgColumnStats
         Me.chkCount = New System.Windows.Forms.CheckBox()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.chkdropUnusedLevels = New System.Windows.Forms.CheckBox()
-        Me.chkReturnOutput = New System.Windows.Forms.CheckBox()
+        Me.chkPrintOutput = New System.Windows.Forms.CheckBox()
         Me.chkStoreResults = New System.Windows.Forms.CheckBox()
-        Me.ucrInputStoreResults = New instat.ucrInputComboBox()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.chkRange = New System.Windows.Forms.CheckBox()
-        Me.chkMode = New System.Windows.Forms.CheckBox()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -53,9 +52,9 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables.AutoSize = True
         Me.lblSelectedVariables.Location = New System.Drawing.Point(243, 13)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Size = New System.Drawing.Size(99, 13)
+        Me.lblSelectedVariables.Size = New System.Drawing.Size(120, 13)
         Me.lblSelectedVariables.TabIndex = 4
-        Me.lblSelectedVariables.Text = "Selected Varable(s)"
+        Me.lblSelectedVariables.Text = "Variables To Summarise"
         '
         'lblByFactors
         '
@@ -78,12 +77,32 @@ Partial Class dlgColumnStats
         Me.grpSummaries.Controls.Add(Me.chkMinimum)
         Me.grpSummaries.Controls.Add(Me.chkMean)
         Me.grpSummaries.Controls.Add(Me.chkCount)
-        Me.grpSummaries.Location = New System.Drawing.Point(13, 197)
+        Me.grpSummaries.Location = New System.Drawing.Point(213, 270)
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.Size = New System.Drawing.Size(200, 148)
         Me.grpSummaries.TabIndex = 8
         Me.grpSummaries.TabStop = False
         Me.grpSummaries.Text = "Summaries"
+        '
+        'chkMode
+        '
+        Me.chkMode.AutoSize = True
+        Me.chkMode.Location = New System.Drawing.Point(96, 115)
+        Me.chkMode.Name = "chkMode"
+        Me.chkMode.Size = New System.Drawing.Size(53, 17)
+        Me.chkMode.TabIndex = 9
+        Me.chkMode.Text = "Mode"
+        Me.chkMode.UseVisualStyleBackColor = True
+        '
+        'chkRange
+        '
+        Me.chkRange.AutoSize = True
+        Me.chkRange.Location = New System.Drawing.Point(7, 115)
+        Me.chkRange.Name = "chkRange"
+        Me.chkRange.Size = New System.Drawing.Size(58, 17)
+        Me.chkRange.TabIndex = 8
+        Me.chkRange.Text = "Range"
+        Me.chkRange.UseVisualStyleBackColor = True
         '
         'chkSum
         '
@@ -168,51 +187,43 @@ Partial Class dlgColumnStats
         'grpOptions
         '
         Me.grpOptions.Controls.Add(Me.chkdropUnusedLevels)
-        Me.grpOptions.Controls.Add(Me.chkReturnOutput)
-        Me.grpOptions.Location = New System.Drawing.Point(246, 264)
+        Me.grpOptions.Controls.Add(Me.chkStoreResults)
+        Me.grpOptions.Controls.Add(Me.chkPrintOutput)
+        Me.grpOptions.Location = New System.Drawing.Point(13, 270)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(164, 81)
+        Me.grpOptions.Size = New System.Drawing.Size(141, 93)
         Me.grpOptions.TabIndex = 9
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
         'chkdropUnusedLevels
         '
-        Me.chkdropUnusedLevels.AutoSize = True
-        Me.chkdropUnusedLevels.Location = New System.Drawing.Point(7, 40)
+        Me.chkdropUnusedLevels.Location = New System.Drawing.Point(7, 61)
         Me.chkdropUnusedLevels.Name = "chkdropUnusedLevels"
-        Me.chkdropUnusedLevels.Size = New System.Drawing.Size(89, 30)
+        Me.chkdropUnusedLevels.Size = New System.Drawing.Size(126, 25)
         Me.chkdropUnusedLevels.TabIndex = 1
-        Me.chkdropUnusedLevels.Text = "Drop Unused" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Levels"
+        Me.chkdropUnusedLevels.Text = "Drop Unused Levels"
         Me.chkdropUnusedLevels.UseVisualStyleBackColor = True
         '
-        'chkReturnOutput
+        'chkPrintOutput
         '
-        Me.chkReturnOutput.AutoSize = True
-        Me.chkReturnOutput.Location = New System.Drawing.Point(7, 20)
-        Me.chkReturnOutput.Name = "chkReturnOutput"
-        Me.chkReturnOutput.Size = New System.Drawing.Size(93, 17)
-        Me.chkReturnOutput.TabIndex = 0
-        Me.chkReturnOutput.Text = "Return Output"
-        Me.chkReturnOutput.UseVisualStyleBackColor = True
+        Me.chkPrintOutput.AutoSize = True
+        Me.chkPrintOutput.Location = New System.Drawing.Point(7, 41)
+        Me.chkPrintOutput.Name = "chkPrintOutput"
+        Me.chkPrintOutput.Size = New System.Drawing.Size(82, 17)
+        Me.chkPrintOutput.TabIndex = 0
+        Me.chkPrintOutput.Text = "Print Output"
+        Me.chkPrintOutput.UseVisualStyleBackColor = True
         '
         'chkStoreResults
         '
         Me.chkStoreResults.AutoSize = True
-        Me.chkStoreResults.Location = New System.Drawing.Point(11, 356)
+        Me.chkStoreResults.Location = New System.Drawing.Point(7, 18)
         Me.chkStoreResults.Name = "chkStoreResults"
         Me.chkStoreResults.Size = New System.Drawing.Size(89, 17)
         Me.chkStoreResults.TabIndex = 10
         Me.chkStoreResults.Text = "Store Results"
         Me.chkStoreResults.UseVisualStyleBackColor = True
-        '
-        'ucrInputStoreResults
-        '
-        Me.ucrInputStoreResults.IsReadOnly = False
-        Me.ucrInputStoreResults.Location = New System.Drawing.Point(109, 352)
-        Me.ucrInputStoreResults.Name = "ucrInputStoreResults"
-        Me.ucrInputStoreResults.Size = New System.Drawing.Size(104, 21)
-        Me.ucrInputStoreResults.TabIndex = 11
         '
         'ucrReceiverByFactor
         '
@@ -234,6 +245,7 @@ Partial Class dlgColumnStats
         '
         'ucrSelectorForColumnStatistics
         '
+        Me.ucrSelectorForColumnStatistics.bShowHiddenColumns = False
         Me.ucrSelectorForColumnStatistics.Location = New System.Drawing.Point(13, 13)
         Me.ucrSelectorForColumnStatistics.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForColumnStatistics.Name = "ucrSelectorForColumnStatistics"
@@ -242,38 +254,16 @@ Partial Class dlgColumnStats
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(11, 379)
+        Me.ucrBase.Location = New System.Drawing.Point(11, 422)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 2
-        '
-        'chkRange
-        '
-        Me.chkRange.AutoSize = True
-        Me.chkRange.Location = New System.Drawing.Point(7, 115)
-        Me.chkRange.Name = "chkRange"
-        Me.chkRange.Size = New System.Drawing.Size(58, 17)
-        Me.chkRange.TabIndex = 8
-        Me.chkRange.Text = "Range"
-        Me.chkRange.UseVisualStyleBackColor = True
-        '
-        'chkMode
-        '
-        Me.chkMode.AutoSize = True
-        Me.chkMode.Location = New System.Drawing.Point(96, 115)
-        Me.chkMode.Name = "chkMode"
-        Me.chkMode.Size = New System.Drawing.Size(53, 17)
-        Me.chkMode.TabIndex = 9
-        Me.chkMode.Text = "Mode"
-        Me.chkMode.UseVisualStyleBackColor = True
         '
         'dlgColumnStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(433, 444)
-        Me.Controls.Add(Me.ucrInputStoreResults)
-        Me.Controls.Add(Me.chkStoreResults)
+        Me.ClientSize = New System.Drawing.Size(420, 478)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.grpSummaries)
         Me.Controls.Add(Me.ucrReceiverByFactor)
@@ -313,9 +303,8 @@ Partial Class dlgColumnStats
     Friend WithEvents chkStDev As CheckBox
     Friend WithEvents grpOptions As GroupBox
     Friend WithEvents chkdropUnusedLevels As CheckBox
-    Friend WithEvents chkReturnOutput As CheckBox
+    Friend WithEvents chkPrintOutput As CheckBox
     Friend WithEvents chkStoreResults As CheckBox
-    Friend WithEvents ucrInputStoreResults As ucrInputComboBox
     Friend WithEvents chkMode As CheckBox
     Friend WithEvents chkRange As CheckBox
 End Class

@@ -22,7 +22,6 @@ Partial Class dlgSplitText
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSplitText))
         Me.lblSelectedFactor = New System.Windows.Forms.Label()
         Me.lblSplitBy = New System.Windows.Forms.Label()
         Me.lblNewColumnNames = New System.Windows.Forms.Label()
@@ -83,10 +82,11 @@ Partial Class dlgSplitText
         Me.nudN.Name = "nudN"
         Me.nudN.Size = New System.Drawing.Size(46, 20)
         Me.nudN.TabIndex = 10
-        Me.nudN.Value = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.nudN.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'ucrInputPattern
         '
+        Me.ucrInputPattern.IsReadOnly = False
         Me.ucrInputPattern.Location = New System.Drawing.Point(263, 75)
         Me.ucrInputPattern.Name = "ucrInputPattern"
         Me.ucrInputPattern.Size = New System.Drawing.Size(106, 25)
@@ -95,6 +95,7 @@ Partial Class dlgSplitText
         'ucrReceiverSplitTextColumn
         '
         Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(260, 30)
+        Me.ucrReceiverSplitTextColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSplitTextColumn.Name = "ucrReceiverSplitTextColumn"
         Me.ucrReceiverSplitTextColumn.Selector = Nothing
         Me.ucrReceiverSplitTextColumn.Size = New System.Drawing.Size(106, 26)
@@ -102,6 +103,7 @@ Partial Class dlgSplitText
         '
         'ucrInputColumnsIntoText
         '
+        Me.ucrInputColumnsIntoText.IsReadOnly = False
         Me.ucrInputColumnsIntoText.Location = New System.Drawing.Point(134, 196)
         Me.ucrInputColumnsIntoText.Name = "ucrInputColumnsIntoText"
         Me.ucrInputColumnsIntoText.Size = New System.Drawing.Size(137, 25)
@@ -109,8 +111,9 @@ Partial Class dlgSplitText
         '
         'ucrSelectorSplitTextColumn
         '
+        Me.ucrSelectorSplitTextColumn.bShowHiddenColumns = False
         Me.ucrSelectorSplitTextColumn.Location = New System.Drawing.Point(12, 12)
-        Me.ucrSelectorSplitTextColumn.lstVariablesInReceivers = CType(resources.GetObject("ucrSelectorSplitTextColumn.lstVariablesInReceivers"), System.Collections.Generic.List(Of String))
+        Me.ucrSelectorSplitTextColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorSplitTextColumn.Name = "ucrSelectorSplitTextColumn"
         Me.ucrSelectorSplitTextColumn.Size = New System.Drawing.Size(242, 179)
         Me.ucrSelectorSplitTextColumn.TabIndex = 1

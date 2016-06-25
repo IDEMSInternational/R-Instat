@@ -266,4 +266,13 @@ Public Class dlgRegularSequence
             txtMessage.Text = "No preview avaiable"
         End Try
     End Sub
+
+    Private Sub nudNumberofDecimalPlaces_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofDecimalPlaces.TextChanged
+        nudFrom.DecimalPlaces = nudNumberofDecimalPlaces.Value
+        nudTo.DecimalPlaces = nudNumberofDecimalPlaces.Value
+        nudInStepsOf.DecimalPlaces = nudNumberofDecimalPlaces.Value
+        nudFrom.Increment = 10 ^ -(nudNumberofDecimalPlaces.Value)
+        nudTo.Increment = 10 ^ -(nudNumberofDecimalPlaces.Value)
+        nudInStepsOf.Increment = 10 ^ -(nudNumberofDecimalPlaces.Value)
+    End Sub
 End Class

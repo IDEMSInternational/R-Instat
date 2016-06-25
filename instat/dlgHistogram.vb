@@ -68,47 +68,56 @@ Public Class dlgHistogram
         sdgPlots.ShowDialog()
     End Sub
 
-    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
-        If Not ucrFactorReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName("fill")
-        End If
-    End Sub
-
-    Private Sub rdoHistogram_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHistogram.CheckedChanged
+    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged, rdoHistogram.CheckedChanged, rdoDensity.CheckedChanged, rdoFreequencyPolygon.CheckedChanged
         If rdoHistogram.Checked = True Then
             clsRgeom_histogramFunction.SetRCommand("geom_histogram")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_histogramFunction)
+            ucrSaveHist.strPrefix = "Histogram"
+            clsRaesFunction.RemoveParameterByName("colour")
             cmdHistogramOptions.Visible = True
-        Else
-            cmdHistogramOptions.Visible = False
-        End If
-    End Sub
+            cmdDensityOptions.Visible = False
+            cmdFrequencyOptions.Visible = False
+            If Not ucrFactorReceiver.IsEmpty Then
+                clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
+            Else
+                clsRaesFunction.RemoveParameterByName("fill")
+            End If
 
-    Private Sub rdoDensity_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDensity.CheckedChanged
-        If rdoDensity.Checked = True Then
+        ElseIf rdoDensity.Checked = True Then
             clsRgeom_densityFunction.SetRCommand("geom_density")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_densityFunction)
+            ucrSaveHist.strPrefix = "Density"
+            clsRaesFunction.RemoveParameterByName("fill")
+            cmdHistogramOptions.Visible = False
             cmdDensityOptions.Visible = True
-        Else
-            cmdDensityOptions.Visible = False
-        End If
-    End Sub
+            cmdFrequencyOptions.Visible = False
 
-    Private Sub rdoFreequencyPolygon_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFreequencyPolygon.CheckedChanged
-        If rdoFreequencyPolygon.Checked = True Then
+            If Not ucrFactorReceiver.IsEmpty Then
+                clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False))
+            Else
+                clsRaesFunction.RemoveParameterByName("colour")
+            End If
+        ElseIf rdoFreequencyPolygon.Checked = True Then
             clsRgeom_FPolygon.SetRCommand("geom_freqpoly")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_FPolygon)
+            ucrSaveHist.strPrefix = "FrequencyPolygon"
+            clsRaesFunction.RemoveParameterByName("fill")
+            cmdHistogramOptions.Visible = False
+            cmdDensityOptions.Visible = False
             cmdFrequencyOptions.Visible = True
-        Else
-            cmdFrequencyOptions.Visible = False
+
+            If Not ucrFactorReceiver.IsEmpty Then
+                clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False))
+            Else
+                clsRaesFunction.RemoveParameterByName("colour")
+            End If
         End If
+        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
         'tests when ok can be enabled
-        If ucrVariablesAsFactorforHist.IsEmpty Then
+        If ucrVariablesAsFactorforHist.IsEmpty Or (ucrSaveHist.chkSaveGraph.Checked And ucrSaveHist.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -118,12 +127,17 @@ Public Class dlgHistogram
 
     Private Sub SetDefaults()
         'seting Defaults for the dialog
+        clsRaesFunction.ClearParameters()
+        clsRgeom_densityFunction.ClearParameters()
+        clsRgeom_FPolygon.ClearParameters()
+        clsRgeom_histogramFunction.ClearParameters()
         ucrHistogramSelector.Reset()
         ucrVariablesAsFactorforHist.ResetControl()
         rdoHistogram.Checked = True
         cmdHistogramOptions.Visible = True
         cmdDensityOptions.Visible = False
         cmdFrequencyOptions.Visible = False
+        ucrSaveHist.strPrefix = "Histogram"
         TestOkEnabled()
     End Sub
 
@@ -152,22 +166,49 @@ Public Class dlgHistogram
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdHistogramOptions_Click(sender As Object, e As EventArgs) Handles cmdHistogramOptions.Click
-        sdgHistogramOptions.ShowDialog()
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_histogramFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                ucrVariablesAsFactorforHist.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdFrequencyOptions_Click(sender As Object, e As EventArgs) Handles cmdFrequencyOptions.Click
-        sdgFrequencyPolygonOptions.ShowDialog()
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_FPolygon, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                ucrVariablesAsFactorforHist.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdDensityOptions_Click(sender As Object, e As EventArgs) Handles cmdDensityOptions.Click
-        sdgDensityOptions.ShowDialog()
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_densityFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                ucrVariablesAsFactorforHist.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrVariablesAsFactorforHist_SelectionChanged() Handles ucrVariablesAsFactorforHist.SelectionChanged
-
         If Not ucrVariablesAsFactorforHist.IsEmpty Then
             clsRaesFunction.AddParameter("x", ucrVariablesAsFactorforHist.GetVariableNames(False))
         Else
@@ -184,5 +225,6 @@ Public Class dlgHistogram
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+        TestOkEnabled()
     End Sub
 End Class
