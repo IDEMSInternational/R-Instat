@@ -2250,7 +2250,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObjectMetadata
         '
-        Me.mnuOrganiseDataObjectMetadata.Enabled = False
         Me.mnuOrganiseDataObjectMetadata.Name = "mnuOrganiseDataObjectMetadata"
         Me.mnuOrganiseDataObjectMetadata.Size = New System.Drawing.Size(196, 22)
         Me.mnuOrganiseDataObjectMetadata.Tag = "Metadata..."
