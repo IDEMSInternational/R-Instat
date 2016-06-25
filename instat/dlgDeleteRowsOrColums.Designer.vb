@@ -78,7 +78,7 @@ Partial Class dlgDeleteRowsOrColums
         'lblColumnsToDelete
         '
         Me.lblColumnsToDelete.AutoSize = True
-        Me.lblColumnsToDelete.Location = New System.Drawing.Point(51, 2)
+        Me.lblColumnsToDelete.Location = New System.Drawing.Point(249, 45)
         Me.lblColumnsToDelete.Name = "lblColumnsToDelete"
         Me.lblColumnsToDelete.Size = New System.Drawing.Size(93, 13)
         Me.lblColumnsToDelete.TabIndex = 14
@@ -88,11 +88,10 @@ Partial Class dlgDeleteRowsOrColums
         'grpRowsToDelete
         '
         Me.grpRowsToDelete.Controls.Add(Me.nudNumberofRows)
-        Me.grpRowsToDelete.Controls.Add(Me.lblColumnsToDelete)
         Me.grpRowsToDelete.Controls.Add(Me.lblNumOfRows)
         Me.grpRowsToDelete.Controls.Add(Me.nudStart)
         Me.grpRowsToDelete.Controls.Add(Me.lblStartPosition)
-        Me.grpRowsToDelete.Location = New System.Drawing.Point(255, 40)
+        Me.grpRowsToDelete.Location = New System.Drawing.Point(247, 45)
         Me.grpRowsToDelete.Name = "grpRowsToDelete"
         Me.grpRowsToDelete.Size = New System.Drawing.Size(160, 70)
         Me.grpRowsToDelete.TabIndex = 15
@@ -138,7 +137,7 @@ Partial Class dlgDeleteRowsOrColums
         '
         'ucrReceiverForColumnsToDelete
         '
-        Me.ucrReceiverForColumnsToDelete.Location = New System.Drawing.Point(255, 117)
+        Me.ucrReceiverForColumnsToDelete.Location = New System.Drawing.Point(247, 72)
         Me.ucrReceiverForColumnsToDelete.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverForColumnsToDelete.Name = "ucrReceiverForColumnsToDelete"
         Me.ucrReceiverForColumnsToDelete.Selector = Nothing
@@ -147,6 +146,7 @@ Partial Class dlgDeleteRowsOrColums
         '
         'ucrSelectorForDeleteColumns
         '
+        Me.ucrSelectorForDeleteColumns.bShowHiddenColumns = False
         Me.ucrSelectorForDeleteColumns.Location = New System.Drawing.Point(10, 38)
         Me.ucrSelectorForDeleteColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDeleteColumns.Name = "ucrSelectorForDeleteColumns"
@@ -180,7 +180,8 @@ Partial Class dlgDeleteRowsOrColums
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 295)
+        Me.ClientSize = New System.Drawing.Size(541, 295)
+        Me.Controls.Add(Me.lblColumnsToDelete)
         Me.Controls.Add(Me.grpRowsToDelete)
         Me.Controls.Add(Me.ucrReceiverForColumnsToDelete)
         Me.Controls.Add(Me.ucrSelectorForDeleteColumns)
