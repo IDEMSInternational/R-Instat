@@ -320,9 +320,14 @@ Public Class frmEditor
                                                                                             If tmpWorkSheet(row, 3) = "numeric" Or tmpWorkSheet(row, 3) = "integer" Or e.NewData = "NA" Then
                                                                                                 If Double.TryParse(e.NewData, dblValue) Then
                                                                                                     clsReplaceValue.AddParameter("new_value", e.NewData)
+                                                                                                    clsReplaceValue.AddParameter("col_name", Chr(34) & tmpString & Chr(34))
+                                                                                                    clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.Row).Text & Chr(34))
+                                                                                                    clsReplaceValue.AddParameter("new_value", e.NewData)
                                                                                                     Return False
                                                                                                 ElseIf e.NewData = "NA" Then
                                                                                                     clsReplaceValue.AddParameter("new_value", e.NewData)
+                                                                                                    clsReplaceValue.AddParameter("col_name", Chr(34) & tmpString & Chr(34))
+                                                                                                    clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.Row).Text & Chr(34))
                                                                                                     Return False
                                                                                                 Else
                                                                                                     MsgBox("Non numeric data type entered!")
@@ -335,6 +340,8 @@ Public Class frmEditor
                                                                                                 For i As Integer = 0 To dfTemp.RowCount - 1
                                                                                                     If dfTemp(i, 0) = e.NewData Then
                                                                                                         clsReplaceValue.AddParameter("new_value", e.NewData)
+                                                                                                        clsReplaceValue.AddParameter("col_name", Chr(34) & tmpString & Chr(34))
+                                                                                                        clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.Row).Text & Chr(34))
                                                                                                         bTemp = True
                                                                                                         Exit For
                                                                                                     End If
