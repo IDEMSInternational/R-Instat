@@ -954,6 +954,8 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseDataObjectMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectMetadata.Click
+        'TODO Change this dialog
+        '     currently dlgMetadata is colouring grid dialog
         dlgMetadata.ShowDialog()
     End Sub
 
@@ -990,4 +992,9 @@ Public Class frmMain
         clsRecentItems.saveOnClose(e)
     End Sub
 
+    Private Sub ColourByPropertyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColourByPropertyToolStripMenuItem.Click
+        'TODO change this dialog
+        '     dlgMetadata should be separate
+        dlgMetadata.ShowDialog()
+    End Sub
 End Class
