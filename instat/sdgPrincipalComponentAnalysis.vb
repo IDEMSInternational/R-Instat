@@ -31,6 +31,7 @@ Public Class sdgPrincipalComponentAnalysis
 
     Private Sub EigenValues()
         clsREigenValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsREigenValues.AddParameter("data_name", Chr(34) & dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsREigenValues.AddParameter("model_name", Chr(34) & dlgPrincipalComponentAnalysis.strModelName & Chr(34))
         clsREigenValues.AddParameter("value1", Chr(34) & "eig" & Chr(34))
         frmMain.clsRLink.RunScript(clsREigenValues.ToScript(), 2)
@@ -38,6 +39,7 @@ Public Class sdgPrincipalComponentAnalysis
 
     Private Sub EigenVectors()
         clsREigenVectors.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsREigenVectors.AddParameter("data_name", Chr(34) & dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsREigenVectors.AddParameter("model_name", Chr(34) & dlgPrincipalComponentAnalysis.strModelName & Chr(34))
         clsREigenVectors.AddParameter("value1", Chr(34) & "ind" & Chr(34))
         clsREigenVectors.AddParameter("value2", Chr(34) & "contrib" & Chr(34))
@@ -46,6 +48,7 @@ Public Class sdgPrincipalComponentAnalysis
 
     Private Sub Scores()
         clsRScores.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRScores.AddParameter("data_name", Chr(34) & dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsRScores.AddParameter("model_name", Chr(34) & dlgPrincipalComponentAnalysis.strModelName & Chr(34))
         clsRScores.AddParameter("value1", Chr(34) & "ind" & Chr(34))
         clsRScores.AddParameter("value2", Chr(34) & "coord" & Chr(34))

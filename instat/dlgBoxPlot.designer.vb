@@ -50,20 +50,20 @@ Partial Class dlgBoxplot
         Me.lblByFactors.AutoSize = True
         Me.lblByFactors.Location = New System.Drawing.Point(275, 164)
         Me.lblByFactors.Name = "lblByFactors"
-        Me.lblByFactors.Size = New System.Drawing.Size(100, 13)
+        Me.lblByFactors.Size = New System.Drawing.Size(88, 13)
         Me.lblByFactors.TabIndex = 2
         Me.lblByFactors.Tag = "By_factor_s_"
-        Me.lblByFactors.Text = "By Factor (Optional)"
+        Me.lblByFactors.Text = "Factor  (Optional)"
         '
         'lblBySecondFactor
         '
         Me.lblBySecondFactor.AutoSize = True
         Me.lblBySecondFactor.Location = New System.Drawing.Point(275, 209)
         Me.lblBySecondFactor.Name = "lblBySecondFactor"
-        Me.lblBySecondFactor.Size = New System.Drawing.Size(140, 13)
+        Me.lblBySecondFactor.Size = New System.Drawing.Size(128, 13)
         Me.lblBySecondFactor.TabIndex = 4
         Me.lblBySecondFactor.Tag = "By_Second_Factor"
-        Me.lblBySecondFactor.Text = "By Second Factor (Optional)"
+        Me.lblBySecondFactor.Text = "Second Factor  (Optional)"
         '
         'cmdBoxPlotOptions
         '
@@ -72,7 +72,7 @@ Partial Class dlgBoxplot
         Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdBoxPlotOptions.TabIndex = 7
         Me.cmdBoxPlotOptions.Tag = "BoxPlot_Options"
-        Me.cmdBoxPlotOptions.Text = "BoxPlot Options"
+        Me.cmdBoxPlotOptions.Text = "Boxplot Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
         '
         'chkHorizontalBoxplot
