@@ -49,15 +49,15 @@ Public Class dlgScatterPlot
 
     Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
         If Not ucrFactorOptionalReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("color", ucrFactorOptionalReceiver.GetVariableNames(False))
+            clsRaesFunction.AddParameter("colour", ucrFactorOptionalReceiver.GetVariableNames(False))
         Else
-            clsRaesFunction.RemoveParameterByName("color")
+            clsRaesFunction.RemoveParameterByName("colour")
         End If
     End Sub
 
     Private Sub TestOkEnabled()
         'tests when okay Is enable
-        If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactorForScatter.IsEmpty Then
+        If ucrReceiverX.IsEmpty() Or ucrVariablesAsFactorForScatter.IsEmpty Or (ucrSaveScatterPlot.chkSaveGraph.Checked And ucrSaveScatterPlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -74,29 +74,27 @@ Public Class dlgScatterPlot
         clsRgeom_scatterplotFunction.SetRCommand("geom_point")
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
 
-
         ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForScatter.SetSelector(ucrSelectorForScatter)
-        ucrVariablesAsFactorForScatter.SetIncludedDataType({"numeric"})
-
+        ucrVariablesAsFactorForScatter.SetIncludedDataType({"factor", "numeric"})
 
         ucrReceiverX.Selector = ucrSelectorForScatter
-        ucrReceiverX.SetIncludedDataTypes({"numeric"})
+        ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
-        ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
-
+        ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.iHelpTopicID = 16
 
-
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
-        ucrSaveScatterPlot.strPrefix = "Graph"
+        ucrSaveScatterPlot.strPrefix = "Scatter"
         ucrSaveScatterPlot.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveScatterPlot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
     Private Sub SetDefaults()
         'setDefaults
+        clsRaesFunction.ClearParameters()
+        clsRgeom_scatterplotFunction.ClearParameters()
         ucrSelectorForScatter.Reset()
         ucrSelectorForScatter.Focus()
         ucrVariablesAsFactorForScatter.ResetControl()
@@ -120,7 +118,20 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub cmdScatterPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdScatterPlotOptions.Click
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_scatterplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
         sdgLayerOptions.ShowDialog()
+
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "y" Then
+                'TODO Fix this generally
+                'ucrVariablesAsFactorForScatter.SetSingleReceiverStatus(True)
+                ucrVariablesAsFactorForScatter.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "x" Then
+                ucrReceiverX.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
     End Sub
 
     Private Sub ucrSaveScatterPlot_GraphNameChanged() Handles ucrSaveScatterPlot.GraphNameChanged, ucrSaveScatterPlot.SaveGraphCheckedChanged
@@ -131,5 +142,6 @@ Public Class dlgScatterPlot
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+        TestOkEnabled()
     End Sub
 End Class

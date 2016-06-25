@@ -138,6 +138,7 @@
     <Compile Include="clsDistribution.vb" />
     <Compile Include="clsGeom.vb" />
     <Compile Include="clsInstatOptions.vb" />
+    <Compile Include="clsRecentFiles.vb" />
     <Compile Include="clsRFunction.vb" />
     <Compile Include="clsROperator.vb" />
     <Compile Include="dlgAddStartRain.designer.vb">
@@ -4037,6 +4038,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="lib\unvell.ReoScript.dll" />
+    <None Include="static\Recent_Files\recent.mru">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\arrows_bottom.png" />
     <Content Include="Resources\arrows_down.png" />
     <Content Include="Resources\arrows_top.png" />

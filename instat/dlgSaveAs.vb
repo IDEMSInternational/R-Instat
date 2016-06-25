@@ -71,6 +71,10 @@ Public Class dlgSaveAs
             Catch ex As Exception
             End Try
         End If
+
+        'adds the saved file to the recent paths
+        frmMain.clsRecentItems.addToMenu(txtEditorSave.Text)
+
     End Sub
 
     Private Sub cmdEditorSave_Click(sender As Object, e As EventArgs) Handles cmdEditorSave.Click

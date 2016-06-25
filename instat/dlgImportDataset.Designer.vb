@@ -60,14 +60,14 @@ Partial Class dlgImportDataset
         Me.grpRDS = New System.Windows.Forms.GroupBox()
         Me.chkLogs = New System.Windows.Forms.CheckBox()
         Me.chkOverWrite = New System.Windows.Forms.CheckBox()
-        Me.chkGraphics = New System.Windows.Forms.CheckBox()
         Me.chkMetadata = New System.Windows.Forms.CheckBox()
-        Me.chkModel = New System.Windows.Forms.CheckBox()
+        Me.chkKeepObjects = New System.Windows.Forms.CheckBox()
         Me.chkExisting = New System.Windows.Forms.CheckBox()
         Me.lblCannotImport = New System.Windows.Forms.Label()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.chkKeepFilters = New System.Windows.Forms.CheckBox()
         CType(Me.nudSkip, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCSV.SuspendLayout()
         Me.pnlRowNames.SuspendLayout()
@@ -436,11 +436,11 @@ Partial Class dlgImportDataset
         '
         'grpRDS
         '
+        Me.grpRDS.Controls.Add(Me.chkKeepFilters)
         Me.grpRDS.Controls.Add(Me.chkLogs)
         Me.grpRDS.Controls.Add(Me.chkOverWrite)
-        Me.grpRDS.Controls.Add(Me.chkGraphics)
         Me.grpRDS.Controls.Add(Me.chkMetadata)
-        Me.grpRDS.Controls.Add(Me.chkModel)
+        Me.grpRDS.Controls.Add(Me.chkKeepObjects)
         Me.grpRDS.Controls.Add(Me.chkExisting)
         Me.grpRDS.Location = New System.Drawing.Point(15, 87)
         Me.grpRDS.Name = "grpRDS"
@@ -470,16 +470,6 @@ Partial Class dlgImportDataset
         Me.chkOverWrite.Text = "Overwrite existing"
         Me.chkOverWrite.UseVisualStyleBackColor = True
         '
-        'chkGraphics
-        '
-        Me.chkGraphics.AutoSize = True
-        Me.chkGraphics.Location = New System.Drawing.Point(3, 73)
-        Me.chkGraphics.Name = "chkGraphics"
-        Me.chkGraphics.Size = New System.Drawing.Size(132, 17)
-        Me.chkGraphics.TabIndex = 3
-        Me.chkGraphics.Text = "Keep existing graphics"
-        Me.chkGraphics.UseVisualStyleBackColor = True
-        '
         'chkMetadata
         '
         Me.chkMetadata.AutoSize = True
@@ -490,15 +480,15 @@ Partial Class dlgImportDataset
         Me.chkMetadata.Text = "Keep existing metadata"
         Me.chkMetadata.UseVisualStyleBackColor = True
         '
-        'chkModel
+        'chkKeepObjects
         '
-        Me.chkModel.AutoSize = True
-        Me.chkModel.Location = New System.Drawing.Point(3, 55)
-        Me.chkModel.Name = "chkModel"
-        Me.chkModel.Size = New System.Drawing.Size(120, 17)
-        Me.chkModel.TabIndex = 1
-        Me.chkModel.Text = "Keep existing model"
-        Me.chkModel.UseVisualStyleBackColor = True
+        Me.chkKeepObjects.AutoSize = True
+        Me.chkKeepObjects.Location = New System.Drawing.Point(3, 55)
+        Me.chkKeepObjects.Name = "chkKeepObjects"
+        Me.chkKeepObjects.Size = New System.Drawing.Size(126, 17)
+        Me.chkKeepObjects.TabIndex = 1
+        Me.chkKeepObjects.Text = "Keep existing objects"
+        Me.chkKeepObjects.UseVisualStyleBackColor = True
         '
         'chkExisting
         '
@@ -546,17 +536,27 @@ Partial Class dlgImportDataset
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 27
         '
+        'chkKeepFilters
+        '
+        Me.chkKeepFilters.AutoSize = True
+        Me.chkKeepFilters.Location = New System.Drawing.Point(3, 72)
+        Me.chkKeepFilters.Name = "chkKeepFilters"
+        Me.chkKeepFilters.Size = New System.Drawing.Size(116, 17)
+        Me.chkKeepFilters.TabIndex = 6
+        Me.chkKeepFilters.Text = "Keep existing filters"
+        Me.chkKeepFilters.UseVisualStyleBackColor = True
+        '
         'dlgImportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(668, 499)
+        Me.Controls.Add(Me.grpRDS)
         Me.Controls.Add(Me.grpExcel)
         Me.Controls.Add(Me.grpCSV)
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.lblCannotImport)
         Me.Controls.Add(Me.ucrInputName)
-        Me.Controls.Add(Me.grpRDS)
         Me.Controls.Add(Me.cmdOpenDataSet)
         Me.Controls.Add(Me.lblFileOpenPath)
         Me.Controls.Add(Me.grdDataPreview)
@@ -610,10 +610,9 @@ Partial Class dlgImportDataset
     Friend WithEvents lblSheets As Label
     Friend WithEvents grpRDS As GroupBox
     Friend WithEvents chkMetadata As CheckBox
-    Friend WithEvents chkModel As CheckBox
+    Friend WithEvents chkKeepObjects As CheckBox
     Friend WithEvents chkExisting As CheckBox
     Friend WithEvents chkOverWrite As CheckBox
-    Friend WithEvents chkGraphics As CheckBox
     Friend WithEvents chkLogs As CheckBox
     Friend WithEvents ucrInputName As ucrInputTextBox
     Friend WithEvents ucrInputSheets As ucrInputComboBox
@@ -631,4 +630,5 @@ Partial Class dlgImportDataset
     Friend WithEvents ucrInputHeaders As ucrInputComboBox
     Friend WithEvents lblMissingValueString As Label
     Friend WithEvents ucrInputXlMissingValueString As ucrInputTextBox
+    Friend WithEvents chkKeepFilters As CheckBox
 End Class
