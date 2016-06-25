@@ -214,7 +214,7 @@ Public Class clsGridLink
                                 grdVariablesMetadata.CurrentWorksheet.SelectColumns(i, 1)
                                 selRange = grdVariablesMetadata.CurrentWorksheet.SelectionRange
                                 grdVariablesMetadata.CurrentWorksheet.IterateCells(selRange, Function(row, col, cell)
-                                                                                                 SetDataViewColumnColor(row, 10)
+                                                                                                 SetDataViewColumnColor(row, 10, True)
                                                                                                  Return True
                                                                                              End Function)
                         End Select
@@ -224,11 +224,16 @@ Public Class clsGridLink
         Next
     End Sub
 
-    Private Sub SetDataViewColumnColor(selCol As Integer, selColor As Integer)
+    Private Sub SetDataViewColumnColor(selCol As Integer, selColor As Integer, Optional bRevert As Boolean = False)
         Dim selRangeDataView As New RangePosition
         grdData.CurrentWorksheet.SelectColumns(selCol, 1)
         selRangeDataView = grdData.CurrentWorksheet.SelectionRange
-        grdData.CurrentWorksheet.SetRangeStyles(selRangeDataView, New WorksheetRangeStyle() With {.Flag = PlainStyleFlag.BackColor, .BackColor = lstColors.Item(selColor)})
+        If bRevert Then
+            grdData.CurrentWorksheet.RemoveRangeStyles(selRangeDataView, PlainStyleFlag.All)
+        Else
+            grdData.CurrentWorksheet.SetRangeStyles(selRangeDataView, New WorksheetRangeStyle() With {.Flag = PlainStyleFlag.BackColor, .BackColor = lstColors.Item(selColor)})
+        End If
+
     End Sub
     Public Sub SetData(grdTemp As ReoGridControl)
         grdData = grdTemp
