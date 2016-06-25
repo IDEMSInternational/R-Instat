@@ -67,6 +67,7 @@ Public Class dlgDummyVariables
         grpLevelOmitted.Enabled = False
 
         ucrBase.clsRsyntax.SetFunction("dummy")
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
     End Sub
 
     Private Sub ReopenDialog()
