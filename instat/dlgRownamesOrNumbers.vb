@@ -59,10 +59,6 @@ Public Class dlgRowNamesOrNumbers
 
     Private Sub rdoCopytoFirstColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCopytoFirstColumn.CheckedChanged, rdoCopyfromColumn.CheckedChanged, rdoResetintoPositiveIntegers.CheckedChanged, rdoSortbyRowNamesorNumbers.CheckedChanged
 
-
-        ucrBaseRownamesorNumbers.clsRsyntax.SetAssignTo("")
-        ucrBaseRownamesorNumbers.clsRsyntax.ClearParameters()
-
         If rdoCopyfromColumn.Checked Then ' done
 
             txtNewColumnforRowNameOrNumber.Visible = False
@@ -110,21 +106,9 @@ Public Class dlgRowNamesOrNumbers
     End Sub
 
     Private Sub chkDecreasingforRownamesOrNumbers_CheckedChanged(sender As Object, e As EventArgs) Handles chkDecreasingforRownamesOrNumbers.CheckedChanged
-
         If chkDecreasingforRownamesOrNumbers.Checked Then
             ucrBaseRownamesorNumbers.clsRsyntax.AddParameter("decreasing", "TRUE")
-        Else
-            ucrBaseRownamesorNumbers.clsRsyntax.AddParameter("decreasing", "FALSE")
         End If
-
-    End Sub
-
-    Private Sub ucrReceiverSingleRownamesOrNumbers_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSingleRownamesOrNumbers.SelectionChanged
-        ucrBaseRownamesorNumbers.clsRsyntax.AddParameter("row_names", clsRFunctionParameter:=ucrReceiverSingleRownamesOrNumbers.GetVariables())
-    End Sub
-
-    Private Sub txtNewColumnforRowNameOrNumber_TextChanged(sender As Object, e As EventArgs) Handles txtNewColumnforRowNameOrNumber.TextChanged
-        ucrBaseRownamesorNumbers.clsRsyntax.SetAssignTo(strAssignToName:=txtNewColumnforRowNameOrNumber.Text(), strTempDataframe:=ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers.strCurrentDataFrame, strTempColumn:=txtNewColumnforRowNameOrNumber.Text())
     End Sub
 
 End Class
