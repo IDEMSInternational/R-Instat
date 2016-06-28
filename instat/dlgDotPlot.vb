@@ -67,6 +67,8 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub SetDefaults()
+        clsRaesFunction.ClearParameters()
+        clsRgeom_dotplot.ClearParameters()
         ucrDotPlotSelector.Reset()
         ucrVariablesAsFactorDotPlot.ResetControl()
         SetXParameter()
@@ -102,7 +104,23 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub cmdDotPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdDotPlotOptions.Click
-        sdgDotPlot.ShowDialog()
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_dotplot, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = "" Then
+                    ucrFactorReceiver.Clear()
+                Else
+                    ucrFactorReceiver.Add(clsParam.strArgumentValue)
+                End If
+            ElseIf clsParam.strArgumentName = "y" Then
+                ucrVariablesAsFactorDotPlot.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrVariablesAsFactorDotPlot_SelectionChanged() Handles ucrVariablesAsFactorDotPlot.SelectionChanged

@@ -37,7 +37,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
         ucrReceiverMultiplePCA.SetDataType("numeric")
         ucrResultName.SetDefaultTypeAsModel()
-        ucrResultName.SetPrefix("PCA")
+
         ucrBasePCA.iHelpTopicID = 187
     End Sub
 
@@ -53,6 +53,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrResultName.Visible = True
         chkScaleData.Checked = True
         ucrBasePCA.clsRsyntax.AddParameter("graph", "FALSE")
+        ucrResultName.SetName("PCA")
         sdgPrincipalComponentAnalysis.SetDefaults()
         TestOKEnabled()
     End Sub
@@ -64,6 +65,10 @@ Public Class dlgPrincipalComponentAnalysis
         Else
             ucrBasePCA.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub ucrSelectorPCA_DataFrameChanged() Handles ucrSelectorPCA.DataFrameChanged
+        AssignName()
     End Sub
 
     Private Sub ucrBasePCA_ClickReset(sender As Object, e As EventArgs) Handles ucrBasePCA.ClickReset
@@ -97,7 +102,7 @@ Public Class dlgPrincipalComponentAnalysis
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
 
-    Private Sub ucrResultName_NameChanged() Handles ucrResultName.NameChanged
+    Private Sub ucrResultName_NameChanged()
         AssignName()
     End Sub
 
@@ -112,11 +117,12 @@ Public Class dlgPrincipalComponentAnalysis
 
     Private Sub AssignName()
         If chkSaveResult.Checked AndAlso ucrResultName.GetText() <> "" Then
-            ucrBasePCA.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText())
+            ucrBasePCA.clsRsyntax.SetAssignTo(ucrResultName.GetText(), strTempModel:=ucrResultName.GetText(), strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
             ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
             strModelName = ucrResultName.GetText()
         Else
-            ucrBasePCA.clsRsyntax.SetAssignTo("last_PCA", strTempModel:="last_PCA")
+            ucrBasePCA.clsRsyntax.SetAssignTo("last_PCA", strTempModel:="last_PCA", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+            ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
             ucrBasePCA.clsRsyntax.bExcludeAssignedFunctionOutput = False
             strModelName = "last_PCA"
         End If
@@ -125,6 +131,4 @@ Public Class dlgPrincipalComponentAnalysis
     Private Sub ucrBasePCA_clickok(sender As Object, e As EventArgs) Handles ucrBasePCA.ClickOk
         sdgPrincipalComponentAnalysis.PCAOptions()
     End Sub
-
-
 End Class

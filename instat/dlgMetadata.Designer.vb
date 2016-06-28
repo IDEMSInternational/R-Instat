@@ -22,104 +22,80 @@ Partial Class dlgMetadata
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblNewField = New System.Windows.Forms.Label()
-        Me.chkOpenMetadataEditorAferAdding = New System.Windows.Forms.CheckBox()
-        Me.cmdOpenMetdataEditor = New System.Windows.Forms.Button()
-        Me.grdOpenMetadataEditor = New System.Windows.Forms.DataGridView()
-        Me.ucrInputNewField = New instat.ucrInputTextBox()
-        Me.ucrDFSelectorForMetadata = New instat.ucrDataFrame()
+        Me.lblVIewDataBy = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
-        CType(Me.grdOpenMetadataEditor, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrSelectByMetadata = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputViewDataBy = New instat.ucrReceiverSingle()
+        Me.chkRevertBack = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
-        'lblNewField
+        'lblVIewDataBy
         '
-        Me.lblNewField.AutoSize = True
-        Me.lblNewField.Location = New System.Drawing.Point(237, 13)
-        Me.lblNewField.Name = "lblNewField"
-        Me.lblNewField.Size = New System.Drawing.Size(54, 13)
-        Me.lblNewField.TabIndex = 2
-        Me.lblNewField.Tag = "New_Field"
-        Me.lblNewField.Text = "New Field"
-        '
-        'chkOpenMetadataEditorAferAdding
-        '
-        Me.chkOpenMetadataEditorAferAdding.AutoSize = True
-        Me.chkOpenMetadataEditorAferAdding.Location = New System.Drawing.Point(240, 60)
-        Me.chkOpenMetadataEditorAferAdding.Name = "chkOpenMetadataEditorAferAdding"
-        Me.chkOpenMetadataEditorAferAdding.Size = New System.Drawing.Size(190, 17)
-        Me.chkOpenMetadataEditorAferAdding.TabIndex = 4
-        Me.chkOpenMetadataEditorAferAdding.Tag = "Open_Metadata_Editor_after_adding"
-        Me.chkOpenMetadataEditorAferAdding.Text = "Open Metadata Editor after Adding"
-        Me.chkOpenMetadataEditorAferAdding.UseVisualStyleBackColor = True
-        '
-        'cmdOpenMetdataEditor
-        '
-        Me.cmdOpenMetdataEditor.Location = New System.Drawing.Point(13, 143)
-        Me.cmdOpenMetdataEditor.Name = "cmdOpenMetdataEditor"
-        Me.cmdOpenMetdataEditor.Size = New System.Drawing.Size(120, 23)
-        Me.cmdOpenMetdataEditor.TabIndex = 5
-        Me.cmdOpenMetdataEditor.Text = "Open Metadata Editor"
-        Me.cmdOpenMetdataEditor.UseVisualStyleBackColor = True
-        '
-        'grdOpenMetadataEditor
-        '
-        Me.grdOpenMetadataEditor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdOpenMetadataEditor.Location = New System.Drawing.Point(13, 56)
-        Me.grdOpenMetadataEditor.Name = "grdOpenMetadataEditor"
-        Me.grdOpenMetadataEditor.Size = New System.Drawing.Size(221, 81)
-        Me.grdOpenMetadataEditor.TabIndex = 6
-        '
-        'ucrInputNewField
-        '
-        Me.ucrInputNewField.Location = New System.Drawing.Point(240, 32)
-        Me.ucrInputNewField.Name = "ucrInputNewField"
-        Me.ucrInputNewField.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputNewField.TabIndex = 3
-        '
-        'ucrDFSelectorForMetadata
-        '
-        Me.ucrDFSelectorForMetadata.Location = New System.Drawing.Point(13, 13)
-        Me.ucrDFSelectorForMetadata.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDFSelectorForMetadata.Name = "ucrDFSelectorForMetadata"
-        Me.ucrDFSelectorForMetadata.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDFSelectorForMetadata.TabIndex = 1
+        Me.lblVIewDataBy.AutoSize = True
+        Me.lblVIewDataBy.Location = New System.Drawing.Point(244, 32)
+        Me.lblVIewDataBy.Name = "lblVIewDataBy"
+        Me.lblVIewDataBy.Size = New System.Drawing.Size(79, 13)
+        Me.lblVIewDataBy.TabIndex = 2
+        Me.lblVIewDataBy.Tag = "View_Data_by"
+        Me.lblVIewDataBy.Text = "View Data by..."
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 197)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 207)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(402, 52)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrSelectByMetadata
+        '
+        Me.ucrSelectByMetadata.Location = New System.Drawing.Point(12, 13)
+        Me.ucrSelectByMetadata.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectByMetadata.Name = "ucrSelectByMetadata"
+        Me.ucrSelectByMetadata.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectByMetadata.TabIndex = 8
+        '
+        'ucrInputViewDataBy
+        '
+        Me.ucrInputViewDataBy.Location = New System.Drawing.Point(247, 62)
+        Me.ucrInputViewDataBy.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrInputViewDataBy.Name = "ucrInputViewDataBy"
+        Me.ucrInputViewDataBy.Selector = Nothing
+        Me.ucrInputViewDataBy.Size = New System.Drawing.Size(120, 20)
+        Me.ucrInputViewDataBy.TabIndex = 9
+        '
+        'chkRevertBack
+        '
+        Me.chkRevertBack.AutoSize = True
+        Me.chkRevertBack.Location = New System.Drawing.Point(247, 101)
+        Me.chkRevertBack.Name = "chkRevertBack"
+        Me.chkRevertBack.Size = New System.Drawing.Size(138, 17)
+        Me.chkRevertBack.TabIndex = 10
+        Me.chkRevertBack.Text = "Revert To Original View"
+        Me.chkRevertBack.UseVisualStyleBackColor = True
         '
         'dlgMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 261)
-        Me.Controls.Add(Me.grdOpenMetadataEditor)
-        Me.Controls.Add(Me.cmdOpenMetdataEditor)
-        Me.Controls.Add(Me.chkOpenMetadataEditorAferAdding)
-        Me.Controls.Add(Me.ucrInputNewField)
-        Me.Controls.Add(Me.lblNewField)
-        Me.Controls.Add(Me.ucrDFSelectorForMetadata)
+        Me.ClientSize = New System.Drawing.Size(414, 265)
+        Me.Controls.Add(Me.chkRevertBack)
+        Me.Controls.Add(Me.ucrInputViewDataBy)
+        Me.Controls.Add(Me.ucrSelectByMetadata)
+        Me.Controls.Add(Me.lblVIewDataBy)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgMetadata"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Metadata"
         Me.Text = "Metadata"
-        CType(Me.grdOpenMetadataEditor, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrDFSelectorForMetadata As ucrDataFrame
-    Friend WithEvents lblNewField As Label
-    Friend WithEvents ucrInputNewField As ucrInputTextBox
-    Friend WithEvents chkOpenMetadataEditorAferAdding As CheckBox
-    Friend WithEvents cmdOpenMetdataEditor As Button
-    Friend WithEvents grdOpenMetadataEditor As DataGridView
+    Friend WithEvents lblVIewDataBy As Label
+    Friend WithEvents ucrSelectByMetadata As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrInputViewDataBy As ucrReceiverSingle
+    Friend WithEvents chkRevertBack As CheckBox
 End Class
