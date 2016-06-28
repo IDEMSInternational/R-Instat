@@ -34,6 +34,8 @@ Partial Class dlgRegressionSimple
         Me.cmdModelOptions = New System.Windows.Forms.Button()
         Me.chkFunction = New System.Windows.Forms.CheckBox()
         Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
+        Me.lblModelPreview = New System.Windows.Forms.Label()
+        Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrModelName = New instat.ucrInputComboBox()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
         Me.ucrResponse = New instat.ucrReceiverSingle()
@@ -110,6 +112,17 @@ Partial Class dlgRegressionSimple
         Me.chkConvertToVariate.Name = "chkConvertToVariate"
         Me.chkConvertToVariate.UseVisualStyleBackColor = True
         '
+        'lblModelPreview
+        '
+        resources.ApplyResources(Me.lblModelPreview, "lblModelPreview")
+        Me.lblModelPreview.Name = "lblModelPreview"
+        '
+        'ucrModelPreview
+        '
+        Me.ucrModelPreview.IsReadOnly = False
+        resources.ApplyResources(Me.ucrModelPreview, "ucrModelPreview")
+        Me.ucrModelPreview.Name = "ucrModelPreview"
+        '
         'ucrModelName
         '
         Me.ucrModelName.IsReadOnly = False
@@ -130,6 +143,7 @@ Partial Class dlgRegressionSimple
         '
         'ucrSelectorSimpleReg
         '
+        Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
         resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
         Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
         '
@@ -147,6 +161,8 @@ Partial Class dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblModelPreview)
+        Me.Controls.Add(Me.ucrModelPreview)
         Me.Controls.Add(Me.chkConvertToVariate)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.ucrExplanatory)
@@ -188,4 +204,6 @@ Partial Class dlgRegressionSimple
     Friend WithEvents ucrExplanatory As ucrReceiverSingle
     Friend WithEvents ucrModelName As ucrInputComboBox
     Friend WithEvents chkConvertToVariate As CheckBox
+    Friend WithEvents ucrModelPreview As ucrInputTextBox
+    Friend WithEvents lblModelPreview As Label
 End Class
