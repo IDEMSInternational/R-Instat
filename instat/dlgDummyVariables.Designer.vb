@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgDummyVariables
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgDummyVariables
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpLevelOmitted = New System.Windows.Forms.GroupBox()
         Me.rdoLevelNumber = New System.Windows.Forms.RadioButton()
@@ -30,7 +30,6 @@ Partial Class dlgDummyVariables
         Me.chkXvariable = New System.Windows.Forms.CheckBox()
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.lblVariate = New System.Windows.Forms.Label()
-        Me.ucrInputColumns = New instat.ucrInputComboBox()
         Me.ucrSelectorDummyVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrVariateReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
@@ -131,16 +130,9 @@ Partial Class dlgDummyVariables
         Me.lblVariate.Tag = "Variate"
         Me.lblVariate.Text = "Variate"
         '
-        'ucrInputColumns
-        '
-        Me.ucrInputColumns.IsReadOnly = False
-        Me.ucrInputColumns.Location = New System.Drawing.Point(12, 241)
-        Me.ucrInputColumns.Name = "ucrInputColumns"
-        Me.ucrInputColumns.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColumns.TabIndex = 10
-        '
         'ucrSelectorDummyVariable
         '
+        Me.ucrSelectorDummyVariable.bShowHiddenColumns = False
         Me.ucrSelectorDummyVariable.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorDummyVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDummyVariable.Name = "ucrSelectorDummyVariable"
@@ -177,7 +169,6 @@ Partial Class dlgDummyVariables
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 332)
-        Me.Controls.Add(Me.ucrInputColumns)
         Me.Controls.Add(Me.ucrSelectorDummyVariable)
         Me.Controls.Add(Me.ucrVariateReceiver)
         Me.Controls.Add(Me.lblVariate)
@@ -211,5 +202,4 @@ Partial Class dlgDummyVariables
     Friend WithEvents ucrSelectorDummyVariable As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblVariate As Label
     Friend WithEvents ucrVariateReceiver As ucrReceiverSingle
-    Friend WithEvents ucrInputColumns As ucrInputComboBox
 End Class

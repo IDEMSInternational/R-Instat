@@ -209,6 +209,7 @@ Partial Class frmMain
         Me.mnuFileOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.sepEndMRU = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOrganise = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrameViewData = New System.Windows.Forms.ToolStripMenuItem()
@@ -340,7 +341,7 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.sepEndMRU = New System.Windows.Forms.ToolStripSeparator()
+        Me.ColourByPropertyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1226,7 +1227,7 @@ Partial Class frmMain
         'mnuHelpHelp
         '
         Me.mnuHelpHelp.Name = "mnuHelpHelp"
-        Me.mnuHelpHelp.Size = New System.Drawing.Size(152, 22)
+        Me.mnuHelpHelp.Size = New System.Drawing.Size(151, 22)
         Me.mnuHelpHelp.Tag = "Help"
         Me.mnuHelpHelp.Text = "Help"
         '
@@ -1234,7 +1235,7 @@ Partial Class frmMain
         '
         Me.mnuHelpLicence.Enabled = False
         Me.mnuHelpLicence.Name = "mnuHelpLicence"
-        Me.mnuHelpLicence.Size = New System.Drawing.Size(152, 22)
+        Me.mnuHelpLicence.Size = New System.Drawing.Size(151, 22)
         Me.mnuHelpLicence.Tag = "Licence..."
         Me.mnuHelpLicence.Text = "Licence..."
         '
@@ -1242,7 +1243,7 @@ Partial Class frmMain
         '
         Me.mnuHelpAboutRInstat.Enabled = False
         Me.mnuHelpAboutRInstat.Name = "mnuHelpAboutRInstat"
-        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(152, 22)
+        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(151, 22)
         Me.mnuHelpAboutRInstat.Tag = "About_R-Instat"
         Me.mnuHelpAboutRInstat.Text = "About R-Instat"
         '
@@ -1651,13 +1652,13 @@ Partial Class frmMain
         'sepStart
         '
         Me.sepStart.Name = "sepStart"
-        Me.sepStart.Size = New System.Drawing.Size(149, 6)
+        Me.sepStart.Size = New System.Drawing.Size(57, 6)
         Me.sepStart.Visible = False
         '
         'sepEnd
         '
         Me.sepEnd.Name = "sepEnd"
-        Me.sepEnd.Size = New System.Drawing.Size(149, 6)
+        Me.sepEnd.Size = New System.Drawing.Size(57, 6)
         Me.sepEnd.Visible = False
         '
         'separator2
@@ -1728,6 +1729,12 @@ Partial Class frmMain
         Me.mnuExport.Size = New System.Drawing.Size(204, 22)
         Me.mnuExport.Text = "Export Data"
         '
+        'sepEndMRU
+        '
+        Me.sepEndMRU.Name = "sepEndMRU"
+        Me.sepEndMRU.Size = New System.Drawing.Size(201, 6)
+        Me.sepEndMRU.Visible = False
+        '
         'mnuOrganise
         '
         Me.mnuOrganise.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataFrame, Me.mnuOrganisePrepareToShare, Me.ToolStripSeparator6, Me.mnuOrganiseColumnCalculate, Me.mnuOrganiseColumnGenerate, Me.mnuOrganiseColumnFactor, Me.mnuOrganiseColumnText, Me.mnuOrganiseColumnReshape, Me.ToolStripSeparator7, Me.mnuOrganiseDataObject, Me.mnuOrganiseRObjects})
@@ -1738,7 +1745,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrame
         '
-        Me.mnuOrganiseDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataFrameViewData, Me.mnuOrganiseDataFrameRenameColumn, Me.mnuOrganiseDataFrameRowNumbersNames, Me.ToolStripSeparator1, Me.mnuOrganiseDataFrameSort, Me.mnuOrganiseDataFrameFilter, Me.mnuOrganiseDataFrameReplaceValues, Me.ToolStripSeparator2, Me.mnuOrganiseDataFrameConvertColumns, Me.mnuOrganiseDataFrameColumnMetadata, Me.mnuOrganiseDataFrameColumnStructure, Me.ToolStripSeparator20, Me.mnuOrganiseDataFrameReorderColumns, Me.mnuOrganiseDataFrameInsertColumnsRows, Me.mnuOrganiseDataFrameDeleteColumnsRows, Me.mnuOrganiseDataFrameProtectColumn, Me.mnuOrganiseDataFrameHideColumns, Me.mnuOrganiseDataFrameFreezeColumns})
+        Me.mnuOrganiseDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataFrameViewData, Me.mnuOrganiseDataFrameRenameColumn, Me.mnuOrganiseDataFrameRowNumbersNames, Me.ToolStripSeparator1, Me.mnuOrganiseDataFrameSort, Me.mnuOrganiseDataFrameFilter, Me.mnuOrganiseDataFrameReplaceValues, Me.ToolStripSeparator2, Me.mnuOrganiseDataFrameConvertColumns, Me.mnuOrganiseDataFrameColumnMetadata, Me.mnuOrganiseDataFrameColumnStructure, Me.ToolStripSeparator20, Me.mnuOrganiseDataFrameReorderColumns, Me.mnuOrganiseDataFrameInsertColumnsRows, Me.mnuOrganiseDataFrameDeleteColumnsRows, Me.mnuOrganiseDataFrameProtectColumn, Me.mnuOrganiseDataFrameHideColumns, Me.mnuOrganiseDataFrameFreezeColumns, Me.ColourByPropertyToolStripMenuItem})
         Me.mnuOrganiseDataFrame.Name = "mnuOrganiseDataFrame"
         Me.mnuOrganiseDataFrame.Size = New System.Drawing.Size(172, 22)
         Me.mnuOrganiseDataFrame.Tag = "Data_Frame"
@@ -1760,6 +1767,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameRowNumbersNames
         '
+        Me.mnuOrganiseDataFrameRowNumbersNames.Enabled = False
         Me.mnuOrganiseDataFrameRowNumbersNames.Name = "mnuOrganiseDataFrameRowNumbersNames"
         Me.mnuOrganiseDataFrameRowNumbersNames.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameRowNumbersNames.Tag = "Row_Numbers/Names..."
@@ -2171,7 +2179,6 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnReshapeSubset
         '
-        Me.mnuOrganiseColumnReshapeSubset.Enabled = False
         Me.mnuOrganiseColumnReshapeSubset.Name = "mnuOrganiseColumnReshapeSubset"
         Me.mnuOrganiseColumnReshapeSubset.Size = New System.Drawing.Size(188, 22)
         Me.mnuOrganiseColumnReshapeSubset.Tag = "Subset..."
@@ -2228,7 +2235,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObjectCopyDataFrame
         '
-        Me.mnuOrganiseDataObjectCopyDataFrame.Enabled = False
         Me.mnuOrganiseDataObjectCopyDataFrame.Name = "mnuOrganiseDataObjectCopyDataFrame"
         Me.mnuOrganiseDataObjectCopyDataFrame.Size = New System.Drawing.Size(196, 22)
         Me.mnuOrganiseDataObjectCopyDataFrame.Tag = "Copy_Data_Frame..."
@@ -2288,9 +2294,8 @@ Partial Class frmMain
         '
         'mnuOrganiseRObjectsView
         '
-        Me.mnuOrganiseRObjectsView.Enabled = False
         Me.mnuOrganiseRObjectsView.Name = "mnuOrganiseRObjectsView"
-        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(126, 22)
+        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseRObjectsView.Tag = "View..."
         Me.mnuOrganiseRObjectsView.Text = "View..."
         '
@@ -2696,11 +2701,11 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
-        'sepEndMRU
+        'ColourByPropertyToolStripMenuItem
         '
-        Me.sepEndMRU.Name = "sepEndMRU"
-        Me.sepEndMRU.Size = New System.Drawing.Size(201, 6)
-        Me.sepEndMRU.Visible = False
+        Me.ColourByPropertyToolStripMenuItem.Name = "ColourByPropertyToolStripMenuItem"
+        Me.ColourByPropertyToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.ColourByPropertyToolStripMenuItem.Text = "Colour by Property..."
         '
         'frmMain
         '
@@ -3044,4 +3049,5 @@ Partial Class frmMain
     Friend WithEvents mnuOrganisePrepareToShareJitter As ToolStripMenuItem
     Friend WithEvents OtherScdMicroDialogsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents sepEndMRU As ToolStripSeparator
+    Friend WithEvents ColourByPropertyToolStripMenuItem As ToolStripMenuItem
 End Class

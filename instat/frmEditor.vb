@@ -297,10 +297,72 @@ Public Class frmEditor
     'TODO discuss validation for cell editing
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrSheet.BeforeCellEdit
         'temporary disabled editing
-        e.IsCancelled = True
+        'e.IsCancelled = True
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
+        Dim dblValue As Double
+        Dim dfTemp As CharacterMatrix
+        Dim tmpString As String
+        frmMain.clsGrids.SetVariablesMetadata(frmVariables.grdVariables)
+        Dim tmpWorkSheet As unvell.ReoGrid.Worksheet
+        For Each tmpWorkSheet In frmMain.clsGrids.grdVariablesMetadata.Worksheets
+            If tmpWorkSheet.Name = grdCurrSheet.Name Then
+                tmpWorkSheet.IterateCells(unvell.ReoGrid.RangePosition.EntireRange, Function(row, col, cell)
+                                                                                        Dim bTemp As Boolean
+                                                                                        If grdCurrSheet.ColumnHeaders.Item(e.Cell.Column).Text.IndexOf(" ") < 0 Then
+                                                                                            tmpString = grdCurrSheet.ColumnHeaders.Item(e.Cell.Column).Text
+                                                                                        Else
+                                                                                            tmpString = grdCurrSheet.ColumnHeaders.Item(e.Cell.Column).Text.Remove(grdCurrSheet.ColumnHeaders.Item(e.Cell.Column).Text.IndexOf(" "))
+                                                                                        End If
+                                                                                        If cell.DisplayText.Contains(tmpString) Then
+
+                                                                                            If tmpWorkSheet(row, 3) = "numeric" Or tmpWorkSheet(row, 3) = "integer" Or e.NewData = "NA" Then
+                                                                                                If Double.TryParse(e.NewData, dblValue) Then
+                                                                                                    clsReplaceValue.AddParameter("new_value", e.NewData)
+                                                                                                    clsReplaceValue.AddParameter("col_name", Chr(34) & tmpString & Chr(34))
+                                                                                                    clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.Row).Text & Chr(34))
+                                                                                                    clsReplaceValue.AddParameter("new_value", e.NewData)
+                                                                                                    Return False
+                                                                                                ElseIf e.NewData = "NA" Then
+                                                                                                    clsReplaceValue.AddParameter("new_value", e.NewData)
+                                                                                                    clsReplaceValue.AddParameter("col_name", Chr(34) & tmpString & Chr(34))
+                                                                                                    clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.Row).Text & Chr(34))
+                                                                                                    Return False
+                                                                                                Else
+                                                                                                    MsgBox("Non numeric data type entered!")
+                                                                                                    e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                                                                                                    Return False
+                                                                                                End If
+                                                                                            ElseIf tmpWorkSheet(row, 3) = "factor" Then
+                                                                                                dfTemp = frmMain.clsRLink.GetData(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame(data_name = " & Chr(34) & tmpWorkSheet.Name & Chr(34) & ", col_name = " & Chr(34) & cell.DisplayText & Chr(34) & ")")
+                                                                                                bTemp = False
+                                                                                                For i As Integer = 0 To dfTemp.RowCount - 1
+                                                                                                    If dfTemp(i, 0) = e.NewData Then
+                                                                                                        clsReplaceValue.AddParameter("new_value", e.NewData)
+                                                                                                        clsReplaceValue.AddParameter("col_name", Chr(34) & tmpString & Chr(34))
+                                                                                                        clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.Row).Text & Chr(34))
+                                                                                                        bTemp = True
+                                                                                                        Exit For
+                                                                                                    End If
+                                                                                                Next
+                                                                                                If Not bTemp Then
+                                                                                                    MsgBox("Wrong Factor level entered!")
+                                                                                                    e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                                                                                                    Return False
+                                                                                                End If
+                                                                                            End If
+
+                                                                                        End If
+                                                                                        Return True
+                                                                                    End Function)
+                Try
+                    frmMain.clsRLink.RunScript(clsReplaceValue.ToScript())
+                Catch ex As Exception
+                    MessageBox.Show(ex.Message)
+                End Try
+            End If
+        Next
         'Dim dblValue As Double
         'clsReplaceValue.AddParameter("col_name", Chr(34) & lstColumnNames(grdCurrSheet.SelectionRange.Col) & Chr(34))
         'clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(grdCurrSheet.SelectionRange.Row).Text & Chr(34))
@@ -310,11 +372,11 @@ Public Class frmEditor
         '    clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
         'End If
         'Try
-        '    frmMain.clsRLink.RunScript(clsReplaceValue.ToScript())
-        'Catch
-        '    'frmMain.clsRLink.RunInternalScript(frmMain.clsRLink.strInstatDataObject & "$set_data_frames_changed(" & Chr(34) & grdCurrSheet.Name & Chr(34) & ", TRUE)")
-        '    'frmMain.clsGrids.UpdateGrids()
-        '    e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+        'frmMain.clsRLink.RunScript(clsReplaceValue.ToScript())
+        'Catch ex As Exception
+        'frmMain.clsRLink.RunInternalScript(frmMain.clsRLink.strInstatDataObject & "$set_data_frames_changed(" & Chr(34) & grdCurrSheet.Name & Chr(34) & ", true)")
+        'frmMain.clsGrids.UpdateGrids()
+        'e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
         'End Try
     End Sub
 
