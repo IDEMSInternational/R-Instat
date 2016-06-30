@@ -71,6 +71,7 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
 
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
@@ -91,6 +92,7 @@ Public Class dlgBoxplot
             ucrBase.OKEnabled(True)
         End If
     End Sub
+
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.ShowDialog()
     End Sub
