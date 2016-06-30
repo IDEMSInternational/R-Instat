@@ -30,6 +30,11 @@ Public Class dlgHideShowColumns
     End Sub
 
     Private Sub TestOKEnabled()
+        If ucrReceiverHiddenColumns.IsEmpty = False Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
     End Sub
 
@@ -55,6 +60,7 @@ Public Class dlgHideShowColumns
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetHiddenColumnsInReceiver()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorForHiddenColumns_DataFrameChanged() Handles ucrSelectorForHiddenColumns.DataFrameChanged
@@ -68,6 +74,7 @@ Public Class dlgHideShowColumns
         Else
             ucrBase.clsRsyntax.AddParameter("col_names", "c()")
         End If
+        TestOKEnabled()
     End Sub
 
 End Class

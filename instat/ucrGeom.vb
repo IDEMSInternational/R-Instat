@@ -322,18 +322,18 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_dotplot)
 
 
-        'clsgeom_errorbar.strGeomName = "geom_errorbar"
+        clsgeom_errorbar.strGeomName = "geom_errorbar"
         ''Mandatory
-        'clsgeom_errorbar.AddAesParameter("x", bIsMandatory:=True)
-        'clsgeom_errorbar.AddAesParameter("ymax", bIsMandatory:=True)
-        'clsgeom_errorbar.AddAesParameter("ymin", bIsMandatory:=True)
+        clsgeom_errorbar.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_errorbar.AddAesParameter("ymax", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_errorbar.AddAesParameter("ymin", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
         ''Optional
-        'clsgeom_errorbar.AddAesParameter("alpha")
-        'clsgeom_errorbar.AddAesParameter("volour")
-        'clsgeom_errorbar.AddAesParameter("linetype")
-        'clsgeom_errorbar.AddAesParameter("size")
-        'lstAllGeoms.Add(clsgeom_errorbar)
-
+        clsgeom_errorbar.AddAesParameter("alpha", strIncludedDataTypes:={"factor"})
+        clsgeom_errorbar.AddAesParameter("colour", strIncludedDataTypes:={"factor"})
+        clsgeom_errorbar.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_errorbar.AddAesParameter("size", strIncludedDataTypes:={"factor"})
+        clsgeom_errorbar.AddAesParameter("width", strIncludedDataTypes:={"numeric"})
+        lstAllGeoms.Add(clsgeom_errorbar)
 
         'clsgeom_errorbarh.strGeomName = "geom_errorbarh"
         ''mandatory
@@ -434,8 +434,8 @@ Public Class ucrGeom
 
         clsgeom_line.strGeomName = "geom_line"
         'mandatory
-        clsgeom_line.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_line.AddAesParameter("y", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_line.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_line.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
         'optional
         clsgeom_line.AddAesParameter("alpha", strIncludedDataTypes:={"numeric", "factor"})
         clsgeom_line.AddAesParameter("colour", strIncludedDataTypes:={"numeric", "factor"})
@@ -483,8 +483,8 @@ Public Class ucrGeom
 
         clsgeom_point.strGeomName = "geom_point"
         'mandatory
-        clsgeom_point.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_point.AddAesParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_point.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_point.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
         'optional
         clsgeom_point.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_point.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
