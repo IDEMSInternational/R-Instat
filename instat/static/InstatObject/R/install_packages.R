@@ -2,7 +2,7 @@
 library("miniCRAN")
 
 # Specify list of packages to download
-pkgs <- c("openxlsx", "reshape2", "lubridate","plyr", "rtf", "ggplot2", "extRemes", "GGally", "CCA", "plotrix", "agridat", "DAAG", "FactoMineR", "plotrix", "agridat", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "proto", "tidyr", "gridExtra", "ggfortify", "rio")
+pkgs <- c("openxlsx", "reshape2", "lubridate","plyr", "rtf", "ggplot2", "extRemes", "GGally", "CCA", "plotrix", "agridat", "DAAG", "FactoMineR", "plotrix", "agridat", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "proto", "tidyr", "gridExtra", "tidyr", "ggfortify", "rio", "readxl", "lme4", "dummies")
 pkgList <- pkgDep(pkgs, type="win.binary", suggests = FALSE, includeBasePkgs = FALSE, Rversion = "3.3")
 pth = "C:/Users/Danny/Documents/RPackages"
 revolution <- c(CRAN="http://cran.microsoft.com")
