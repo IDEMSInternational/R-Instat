@@ -442,10 +442,18 @@ data_object$set("public", "replace_value_in_data", function(col_name = "", row, 
   }
   index <- which(rownames(private$data) == row)
   old_value <- private$data[[col_name]][[index]]
-  if(self$get_variables_metadata(property = data_type_label, column = col_name) == "factor") {
+  str_data_type <-self$get_variables_metadata(property = data_type_label, column = col_name)
+  if(str_data_type == "factor") {
     if(!(new_value %in% levels(private$data[[col_name]]))) {
       stop(new_value, " is not an existing level of the factor")
     }
+  }
+  if(str_data_type == "integer") {
+  #TODO Check that what checks are needed here
+    new_value <- as.integer(new_value)
+  }
+  if(str_data_type == "numeric") {
+    new_value <- as.numeric(new_value)
   }
   private$data[[col_name]][[index]] <- new_value
   self$append_to_changes(list(Replaced_value, col_name, row, old_value, new_value))
