@@ -30,9 +30,10 @@ Partial Class dlgRowNamesOrNumbers
         Me.rdoCopyfromColumn = New System.Windows.Forms.RadioButton()
         Me.rdoCopytoFirstColumn = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverSingleRownamesOrNumbers = New instat.ucrReceiverSingle()
-        Me.ucrNewColumnNameforRownamesOrNumbers = New instat.ucrNewColumnName()
         Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseRownamesorNumbers = New instat.ucrButtons()
+        Me.lblColumnNameforRowNamesorNumbers = New System.Windows.Forms.Label()
+        Me.txtNewColumnforRowNameOrNumber = New System.Windows.Forms.TextBox()
         Me.grpboxOptionsforRowNamesorNumbercols.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -77,7 +78,7 @@ Partial Class dlgRowNamesOrNumbers
         'rdoSortbyRowNamesorNumbers
         '
         Me.rdoSortbyRowNamesorNumbers.AutoSize = True
-        Me.rdoSortbyRowNamesorNumbers.Location = New System.Drawing.Point(6, 149)
+        Me.rdoSortbyRowNamesorNumbers.Location = New System.Drawing.Point(5, 148)
         Me.rdoSortbyRowNamesorNumbers.Name = "rdoSortbyRowNamesorNumbers"
         Me.rdoSortbyRowNamesorNumbers.Size = New System.Drawing.Size(176, 17)
         Me.rdoSortbyRowNamesorNumbers.TabIndex = 7
@@ -88,7 +89,7 @@ Partial Class dlgRowNamesOrNumbers
         'rdoResetintoPositiveIntegers
         '
         Me.rdoResetintoPositiveIntegers.AutoSize = True
-        Me.rdoResetintoPositiveIntegers.Location = New System.Drawing.Point(6, 125)
+        Me.rdoResetintoPositiveIntegers.Location = New System.Drawing.Point(5, 122)
         Me.rdoResetintoPositiveIntegers.Name = "rdoResetintoPositiveIntegers"
         Me.rdoResetintoPositiveIntegers.Size = New System.Drawing.Size(154, 17)
         Me.rdoResetintoPositiveIntegers.TabIndex = 6
@@ -110,7 +111,7 @@ Partial Class dlgRowNamesOrNumbers
         'rdoCopytoFirstColumn
         '
         Me.rdoCopytoFirstColumn.AutoSize = True
-        Me.rdoCopytoFirstColumn.Location = New System.Drawing.Point(6, 19)
+        Me.rdoCopytoFirstColumn.Location = New System.Drawing.Point(5, 19)
         Me.rdoCopytoFirstColumn.Name = "rdoCopytoFirstColumn"
         Me.rdoCopytoFirstColumn.Size = New System.Drawing.Size(129, 17)
         Me.rdoCopytoFirstColumn.TabIndex = 4
@@ -120,21 +121,12 @@ Partial Class dlgRowNamesOrNumbers
         '
         'ucrReceiverSingleRownamesOrNumbers
         '
-        Me.ucrReceiverSingleRownamesOrNumbers.Location = New System.Drawing.Point(31, 91)
+        Me.ucrReceiverSingleRownamesOrNumbers.Location = New System.Drawing.Point(30, 91)
         Me.ucrReceiverSingleRownamesOrNumbers.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSingleRownamesOrNumbers.Name = "ucrReceiverSingleRownamesOrNumbers"
         Me.ucrReceiverSingleRownamesOrNumbers.Selector = Nothing
         Me.ucrReceiverSingleRownamesOrNumbers.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverSingleRownamesOrNumbers.TabIndex = 3
-        '
-        'ucrNewColumnNameforRownamesOrNumbers
-        '
-        Me.ucrNewColumnNameforRownamesOrNumbers.Location = New System.Drawing.Point(10, 198)
-        Me.ucrNewColumnNameforRownamesOrNumbers.Name = "ucrNewColumnNameforRownamesOrNumbers"
-        Me.ucrNewColumnNameforRownamesOrNumbers.Size = New System.Drawing.Size(292, 35)
-        Me.ucrNewColumnNameforRownamesOrNumbers.TabIndex = 9
-        Me.ucrNewColumnNameforRownamesOrNumbers.ucrDataFrameSelector = Nothing
-        Me.ucrNewColumnNameforRownamesOrNumbers.Visible = False
         '
         'ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers
         '
@@ -151,12 +143,29 @@ Partial Class dlgRowNamesOrNumbers
         Me.ucrBaseRownamesorNumbers.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseRownamesorNumbers.TabIndex = 0
         '
+        'lblColumnNameforRowNamesorNumbers
+        '
+        Me.lblColumnNameforRowNamesorNumbers.AutoSize = True
+        Me.lblColumnNameforRowNamesorNumbers.Location = New System.Drawing.Point(7, 209)
+        Me.lblColumnNameforRowNamesorNumbers.Name = "lblColumnNameforRowNamesorNumbers"
+        Me.lblColumnNameforRowNamesorNumbers.Size = New System.Drawing.Size(73, 13)
+        Me.lblColumnNameforRowNamesorNumbers.TabIndex = 10
+        Me.lblColumnNameforRowNamesorNumbers.Text = "Column Name"
+        '
+        'txtNewColumnforRowNameOrNumber
+        '
+        Me.txtNewColumnforRowNameOrNumber.Location = New System.Drawing.Point(85, 206)
+        Me.txtNewColumnforRowNameOrNumber.Name = "txtNewColumnforRowNameOrNumber"
+        Me.txtNewColumnforRowNameOrNumber.Size = New System.Drawing.Size(100, 20)
+        Me.txtNewColumnforRowNameOrNumber.TabIndex = 11
+        '
         'dlgRowNamesOrNumbers
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(449, 285)
-        Me.Controls.Add(Me.ucrNewColumnNameforRownamesOrNumbers)
+        Me.Controls.Add(Me.txtNewColumnforRowNameOrNumber)
+        Me.Controls.Add(Me.lblColumnNameforRowNamesorNumbers)
         Me.Controls.Add(Me.ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers)
         Me.Controls.Add(Me.grpboxOptionsforRowNamesorNumbercols)
         Me.Controls.Add(Me.ucrBaseRownamesorNumbers)
@@ -166,6 +175,7 @@ Partial Class dlgRowNamesOrNumbers
         Me.grpboxOptionsforRowNamesorNumbercols.ResumeLayout(False)
         Me.grpboxOptionsforRowNamesorNumbercols.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -179,5 +189,6 @@ Partial Class dlgRowNamesOrNumbers
     Friend WithEvents chkDecreasingforRownamesOrNumbers As CheckBox
     Friend WithEvents rdoCopytoColumnsforRownamesOrNumbers As RadioButton
     Friend WithEvents ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrNewColumnNameforRownamesOrNumbers As ucrNewColumnName
+    Friend WithEvents lblColumnNameforRowNamesorNumbers As Label
+    Friend WithEvents txtNewColumnforRowNameOrNumber As TextBox
 End Class
