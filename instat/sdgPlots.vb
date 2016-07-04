@@ -35,6 +35,11 @@ Public Class sdgPlots
         chkIncludeFacets.Checked = False
         IncludeFacets()
         ucr1stFactorReceiver.SetMeAsReceiver()
+
+        cmdCreateTheme.Enabled = False
+        chkOverideTheme.Enabled = False
+        lblTheme.Visible = False
+        nudFont.Visible = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -275,6 +280,16 @@ Public Class sdgPlots
             clsRThemeFunction.AddParameter("base_family", Chr(34) & Chr(34))
         Else
             clsRsyntax.RemoveOperatorParameter("theme")
+        End If
+    End Sub
+
+    Private Sub chkOverideTheme_CheckedChanged(sender As Object, e As EventArgs) Handles chkOverideTheme.CheckedChanged
+        If chkOverideTheme.Checked Then
+            lblTheme.Visible = True
+            nudFont.Visible = True
+        Else
+            lblTheme.Visible = False
+            nudFont.Visible = False
         End If
     End Sub
 End Class

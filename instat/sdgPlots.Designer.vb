@@ -24,6 +24,8 @@ Partial Class sdgPlots
     Private Sub InitializeComponent()
         Me.tabctrlBoxSubdialog = New System.Windows.Forms.TabControl()
         Me.tabTheme = New System.Windows.Forms.TabPage()
+        Me.ucrInputThemes = New instat.ucrInputComboBox()
+        Me.lblTheme = New System.Windows.Forms.Label()
         Me.tabLegend = New System.Windows.Forms.TabPage()
         Me.grpLabels = New System.Windows.Forms.GroupBox()
         Me.chkReorderLabels = New System.Windows.Forms.CheckBox()
@@ -43,6 +45,9 @@ Partial Class sdgPlots
         Me.rdoVertical = New System.Windows.Forms.RadioButton()
         Me.lblFactor2 = New System.Windows.Forms.Label()
         Me.lblFactor1 = New System.Windows.Forms.Label()
+        Me.ucr2ndFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
         Me.tabLayers = New System.Windows.Forms.TabPage()
         Me.chkConnect = New System.Windows.Forms.CheckBox()
         Me.chkDotPlot = New System.Windows.Forms.CheckBox()
@@ -84,12 +89,11 @@ Partial Class sdgPlots
         Me.txtYLowerLimit = New System.Windows.Forms.TextBox()
         Me.chkYUpperLimit = New System.Windows.Forms.CheckBox()
         Me.chkYLowerLimit = New System.Windows.Forms.CheckBox()
-        Me.lblTheme = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputThemes = New instat.ucrInputComboBox()
-        Me.ucr2ndFactorReceiver = New instat.ucrReceiverSingle()
-        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.cmdCreateTheme = New System.Windows.Forms.Button()
+        Me.chkOverideTheme = New System.Windows.Forms.CheckBox()
+        Me.lbFont = New System.Windows.Forms.Label()
+        Me.nudFont = New System.Windows.Forms.NumericUpDown()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabTheme.SuspendLayout()
         Me.tabLegend.SuspendLayout()
@@ -108,6 +112,7 @@ Partial Class sdgPlots
         Me.grpYTitle.SuspendLayout()
         Me.grpYTich.SuspendLayout()
         Me.grpYScale.SuspendLayout()
+        CType(Me.nudFont, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabctrlBoxSubdialog
@@ -126,6 +131,10 @@ Partial Class sdgPlots
         '
         'tabTheme
         '
+        Me.tabTheme.Controls.Add(Me.nudFont)
+        Me.tabTheme.Controls.Add(Me.lbFont)
+        Me.tabTheme.Controls.Add(Me.chkOverideTheme)
+        Me.tabTheme.Controls.Add(Me.cmdCreateTheme)
         Me.tabTheme.Controls.Add(Me.ucrInputThemes)
         Me.tabTheme.Controls.Add(Me.lblTheme)
         Me.tabTheme.Location = New System.Drawing.Point(4, 22)
@@ -136,6 +145,23 @@ Partial Class sdgPlots
         Me.tabTheme.Tag = "Theme"
         Me.tabTheme.Text = "Theme"
         Me.tabTheme.UseVisualStyleBackColor = True
+        '
+        'ucrInputThemes
+        '
+        Me.ucrInputThemes.IsReadOnly = False
+        Me.ucrInputThemes.Location = New System.Drawing.Point(75, 17)
+        Me.ucrInputThemes.Name = "ucrInputThemes"
+        Me.ucrInputThemes.Size = New System.Drawing.Size(171, 21)
+        Me.ucrInputThemes.TabIndex = 1
+        '
+        'lblTheme
+        '
+        Me.lblTheme.AutoSize = True
+        Me.lblTheme.Location = New System.Drawing.Point(-1, 17)
+        Me.lblTheme.Name = "lblTheme"
+        Me.lblTheme.Size = New System.Drawing.Size(73, 13)
+        Me.lblTheme.TabIndex = 0
+        Me.lblTheme.Text = "Select Theme"
         '
         'tabLegend
         '
@@ -346,6 +372,33 @@ Partial Class sdgPlots
         Me.lblFactor1.TabIndex = 3
         Me.lblFactor1.Tag = ""
         Me.lblFactor1.Text = "1st Factor"
+        '
+        'ucr2ndFactorReceiver
+        '
+        Me.ucr2ndFactorReceiver.Location = New System.Drawing.Point(252, 114)
+        Me.ucr2ndFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucr2ndFactorReceiver.Name = "ucr2ndFactorReceiver"
+        Me.ucr2ndFactorReceiver.Selector = Nothing
+        Me.ucr2ndFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucr2ndFactorReceiver.TabIndex = 2
+        '
+        'ucr1stFactorReceiver
+        '
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(252, 40)
+        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
+        Me.ucr1stFactorReceiver.Selector = Nothing
+        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucr1stFactorReceiver.TabIndex = 1
+        '
+        'ucrAddRemove
+        '
+        Me.ucrAddRemove.bShowHiddenColumns = False
+        Me.ucrAddRemove.Location = New System.Drawing.Point(10, 24)
+        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrAddRemove.Name = "ucrAddRemove"
+        Me.ucrAddRemove.Size = New System.Drawing.Size(228, 127)
+        Me.ucrAddRemove.TabIndex = 0
         '
         'tabLayers
         '
@@ -758,15 +811,6 @@ Partial Class sdgPlots
         Me.chkYLowerLimit.Text = "Lower Limit"
         Me.chkYLowerLimit.UseVisualStyleBackColor = True
         '
-        'lblTheme
-        '
-        Me.lblTheme.AutoSize = True
-        Me.lblTheme.Location = New System.Drawing.Point(4, 17)
-        Me.lblTheme.Name = "lblTheme"
-        Me.lblTheme.Size = New System.Drawing.Size(73, 13)
-        Me.lblTheme.TabIndex = 0
-        Me.lblTheme.Text = "Select Theme"
-        '
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.Location = New System.Drawing.Point(113, 284)
@@ -774,40 +818,43 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
-        'ucrInputThemes
+        'cmdCreateTheme
         '
-        Me.ucrInputThemes.IsReadOnly = False
-        Me.ucrInputThemes.Location = New System.Drawing.Point(108, 17)
-        Me.ucrInputThemes.Name = "ucrInputThemes"
-        Me.ucrInputThemes.Size = New System.Drawing.Size(171, 21)
-        Me.ucrInputThemes.TabIndex = 1
+        Me.cmdCreateTheme.Location = New System.Drawing.Point(251, 16)
+        Me.cmdCreateTheme.Name = "cmdCreateTheme"
+        Me.cmdCreateTheme.Size = New System.Drawing.Size(110, 23)
+        Me.cmdCreateTheme.TabIndex = 2
+        Me.cmdCreateTheme.Text = "Create New Theme"
+        Me.cmdCreateTheme.UseVisualStyleBackColor = True
         '
-        'ucr2ndFactorReceiver
+        'chkOverideTheme
         '
-        Me.ucr2ndFactorReceiver.Location = New System.Drawing.Point(252, 114)
-        Me.ucr2ndFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucr2ndFactorReceiver.Name = "ucr2ndFactorReceiver"
-        Me.ucr2ndFactorReceiver.Selector = Nothing
-        Me.ucr2ndFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucr2ndFactorReceiver.TabIndex = 2
+        Me.chkOverideTheme.AutoSize = True
+        Me.chkOverideTheme.Location = New System.Drawing.Point(7, 48)
+        Me.chkOverideTheme.Name = "chkOverideTheme"
+        Me.chkOverideTheme.Size = New System.Drawing.Size(136, 17)
+        Me.chkOverideTheme.TabIndex = 3
+        Me.chkOverideTheme.Text = "Overide Theme Default"
+        Me.chkOverideTheme.UseVisualStyleBackColor = True
         '
-        'ucr1stFactorReceiver
+        'lbFont
         '
-        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(252, 40)
-        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
-        Me.ucr1stFactorReceiver.Selector = Nothing
-        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucr1stFactorReceiver.TabIndex = 1
+        Me.lbFont.AutoSize = True
+        Me.lbFont.Location = New System.Drawing.Point(8, 76)
+        Me.lbFont.Name = "lbFont"
+        Me.lbFont.Size = New System.Drawing.Size(51, 13)
+        Me.lbFont.TabIndex = 4
+        Me.lbFont.Text = "Font Size"
         '
-        'ucrAddRemove
+        'nudFont
         '
-        Me.ucrAddRemove.bShowHiddenColumns = False
-        Me.ucrAddRemove.Location = New System.Drawing.Point(10, 24)
-        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(228, 127)
-        Me.ucrAddRemove.TabIndex = 0
+        Me.nudFont.Location = New System.Drawing.Point(75, 72)
+        Me.nudFont.Maximum = New Decimal(New Integer() {45, 0, 0, 0})
+        Me.nudFont.Minimum = New Decimal(New Integer() {12, 0, 0, 0})
+        Me.nudFont.Name = "nudFont"
+        Me.nudFont.Size = New System.Drawing.Size(85, 20)
+        Me.nudFont.TabIndex = 5
+        Me.nudFont.Value = New Decimal(New Integer() {12, 0, 0, 0})
         '
         'sdgPlots
         '
@@ -854,6 +901,7 @@ Partial Class sdgPlots
         Me.grpYTich.PerformLayout()
         Me.grpYScale.ResumeLayout(False)
         Me.grpYScale.PerformLayout()
+        CType(Me.nudFont, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -926,6 +974,10 @@ Partial Class sdgPlots
     Friend WithEvents chkNoOfRowsOrColumns As CheckBox
     Friend WithEvents ucrInputThemes As ucrInputComboBox
     Friend WithEvents lblTheme As Label
+    Friend WithEvents cmdCreateTheme As Button
+    Friend WithEvents chkOverideTheme As CheckBox
+    Friend WithEvents nudFont As NumericUpDown
+    Friend WithEvents lbFont As Label
 End Class
 
 
