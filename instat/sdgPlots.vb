@@ -19,6 +19,7 @@ Public Class sdgPlots
     Public clsRFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
     Public clsYLabFunction As New RFunction
+    Public clsRThemeFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -42,6 +43,8 @@ Public Class sdgPlots
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr2ndFactorReceiver.Selector = ucrAddRemove
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
+
+        ucrInputThemes.cboInput.Items.AddRange({"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void"})
     End Sub
 
     Private Sub IncludeFacets()
@@ -264,5 +267,14 @@ Public Class sdgPlots
         clsYLabFunction.AddParameter("label", Chr(34) & txtYTitle.Text & Chr(34))
     End Sub
 
-
+    Private Sub ucrInputThemes_NameChanged() Handles ucrInputThemes.TextChanged
+        If Not ucrInputThemes.IsEmpty Then
+            clsRThemeFunction.SetRCommand(ucrInputThemes.cboInput.SelectedItem)
+            clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
+            clsRThemeFunction.AddParameter("base_size", 12)
+            clsRThemeFunction.AddParameter("base_family", Chr(34) & Chr(34))
+        Else
+            clsRsyntax.RemoveOperatorParameter("theme")
+        End If
+    End Sub
 End Class
