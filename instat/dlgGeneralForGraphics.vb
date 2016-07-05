@@ -15,11 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgGeneralForGraphics
-    Private clsRggplotFunction As New RFunction
+    Public clsRggplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private lstLayerComplete As New List(Of Boolean)
     Private iLayerIndex As Integer
-    Private WithEvents clsGgplotAesFunction As New RFunction
+    Public WithEvents clsGgplotAesFunction As New RFunction
     Private strGlobalDataFrame As String = ""
     Public bDataFrameSet As Boolean = False
 
@@ -47,6 +47,9 @@ Public Class dlgGeneralForGraphics
         ucrSaveGraph.strPrefix = "Graph"
         ucrSaveGraph.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveGraph.ucrInputGraphName.SetDefaultTypeAsGraph()
+
+        UcrAdditionalLayers1.SetRSyntax(ucrBase.clsRsyntax)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -102,9 +105,9 @@ Public Class dlgGeneralForGraphics
         TestOKEnabled()
     End Sub
 
-    Private Sub TestOKEnabled()
+    Public Sub TestOKEnabled()
         Dim bTemp As Boolean = False
-        For Each bTemp In lstLayerComplete
+        For Each bTemp In UcrAdditionalLayers1.lstLayerComplete
             If Not bTemp Then
                 Exit For
             End If
