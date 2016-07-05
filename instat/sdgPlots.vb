@@ -35,11 +35,7 @@ Public Class sdgPlots
         chkIncludeFacets.Checked = False
         IncludeFacets()
         ucr1stFactorReceiver.SetMeAsReceiver()
-
-        cmdCreateTheme.Enabled = False
-        chkOverideTheme.Enabled = False
-        lblTheme.Visible = False
-        nudFont.Visible = False
+        ThemesControls()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -49,7 +45,7 @@ Public Class sdgPlots
         ucr2ndFactorReceiver.Selector = ucrAddRemove
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
 
-        ucrInputThemes.cboInput.Items.AddRange({"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void"})
+        ucrInputThemes.cboInput.Items.AddRange({"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized"})
     End Sub
 
     Private Sub IncludeFacets()
@@ -291,5 +287,11 @@ Public Class sdgPlots
             lblTheme.Visible = False
             nudFont.Visible = False
         End If
+    End Sub
+    Private Sub ThemesControls()
+        cmdCreateTheme.Enabled = False
+        chkOverideTheme.Enabled = False
+        nudFont.Visible = False
+        lblFont.Visible = False
     End Sub
 End Class
