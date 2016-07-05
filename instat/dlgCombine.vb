@@ -43,6 +43,7 @@ Public Class dlgCombine
         ucrInputColName.SetItemsTypeAsColumns()
         ucrInputColName.SetDefaultTypeAsColumn()
         ucrInputColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
+        ucrBase.iHelpTopicID = 39
     End Sub
 
     Private Sub ReOpenDialog()

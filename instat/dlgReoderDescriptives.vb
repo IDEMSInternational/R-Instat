@@ -33,6 +33,7 @@ Public Class dlgReoderDescriptives
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_objects")
         ucrReorderObjects.setDataType("object")
         ucrReorderObjects.setDataframes(ucrDataFrameReoder)
+        ucrBase.iHelpTopicID = 351
     End Sub
     Private Sub ReopenDialog()
 
