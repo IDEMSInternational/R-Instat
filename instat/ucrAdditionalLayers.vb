@@ -16,7 +16,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrAdditionalLayers
+    Public clsRSyntax As RSyntax
     Public bFirstLoad As Boolean = True
+    Public lstLayerComplete As New List(Of Boolean)
+    Public iLayerIndex As Integer
+    Private strGlobalDataFrame As String = ""
 
     Public Sub New()
 
@@ -27,6 +31,10 @@ Public Class ucrAdditionalLayers
 
     End Sub
 
+    Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
+        clsRSyntax = clsRSyntaxIn
+    End Sub
+
     Private Sub ucrAdditionalLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetDefaults()
@@ -34,13 +42,80 @@ Public Class ucrAdditionalLayers
         End If
     End Sub
     Private Sub SetDefaults()
-
+        iLayerIndex = 0
+        lstLayers.Clear()
+        lstLayerComplete.Clear()
+        SetEditDeleteEnabled()
     End Sub
     Private Sub InitialiseControl()
 
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=dlgGeneralForGraphics.clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=dlgGeneralForGraphics.clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0)
         sdgLayerOptions.ShowDialog()
+        strGlobalDataFrame = sdgLayerOptions.strGlobalDataFrame
+        AddLayers()
+    End Sub
+    Private Sub SetEditDeleteEnabled()
+        If lstLayers.SelectedItems.Count = 1 Then
+            cmdDelete.Enabled = True
+            cmdEdit.Enabled = True
+        Else
+            cmdDelete.Enabled = False
+            cmdEdit.Enabled = False
+        End If
+    End Sub
+    Private Sub lstLayers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstLayers.SelectedIndexChanged
+        SetEditDeleteEnabled()
+    End Sub
+    Public Sub AddLayers(Optional lviCurrentItem As ListViewItem = Nothing)
+        Dim lviLayer As ListViewItem
+        Dim strLayerName As String
+
+        If lviCurrentItem Is Nothing Then
+            iLayerIndex = iLayerIndex + 1
+            strLayerName = iLayerIndex & "." & sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem
+            lviLayer = New ListViewItem(text:=strLayerName)
+            lstLayers.Items.Add(lviLayer)
+            lstLayerComplete.Add(sdgLayerOptions.TestForOKEnabled())
+        Else
+            lviLayer = lviCurrentItem
+            lstLayerComplete(lstLayers.Items.IndexOf(lviLayer)) = sdgLayerOptions.TestForOKEnabled()
+            strLayerName = lviCurrentItem.Text
+        End If
+
+        If sdgLayerOptions.TestForOKEnabled() Then
+            lstLayers.Items(lstLayers.Items.IndexOf(lviLayer)).ForeColor = Color.Green
+        Else
+            lstLayers.Items(lstLayers.Items.IndexOf(lviLayer)).ForeColor = Color.Red
+        End If
+
+        clsRSyntax.SetOperatorParameter(False, strParameterName:=strLayerName, clsRFunc:=sdgLayerOptions.clsGeomFunction.Clone())
+
+        dlgGeneralForGraphics.TestOKEnabled()
+    End Sub
+
+    Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
+        If lstLayers.SelectedItems.Count = 1 Then
+            clsRSyntax.RemoveOperatorParameter(lstLayers.SelectedItems(0).Text)
+            lstLayerComplete.RemoveAt(lstLayers.SelectedIndices(0))
+            lstLayers.Items.Remove(lstLayers.SelectedItems(0))
+        End If
+    End Sub
+
+    Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
+        Dim clsSelectedGeom As RFunction
+        Dim clsLocalAes As RFunction
+
+        clsSelectedGeom = clsRSyntax.GetParameter(lstLayers.SelectedItems(0).Text).clsArgumentFunction
+        If clsSelectedGeom.GetParameter("mapping") IsNot Nothing Then
+            clsLocalAes = clsSelectedGeom.GetParameter("mapping").clsArgumentFunction
+        Else
+            clsLocalAes = Nothing
+        End If
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=dlgGeneralForGraphics.clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=dlgGeneralForGraphics.clsGgplotAesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=False, clsTempLocalAes:=clsLocalAes)
+        sdgLayerOptions.ShowDialog()
+        AddLayers(lstLayers.SelectedItems(0))
     End Sub
 End Class

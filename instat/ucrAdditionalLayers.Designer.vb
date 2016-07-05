@@ -61,9 +61,9 @@ Partial Class ucrAdditionalLayers
         Me.lblLayers.AutoSize = True
         Me.lblLayers.Location = New System.Drawing.Point(9, 7)
         Me.lblLayers.Name = "lblLayers"
-        Me.lblLayers.Size = New System.Drawing.Size(38, 13)
+        Me.lblLayers.Size = New System.Drawing.Size(87, 13)
         Me.lblLayers.TabIndex = 5
-        Me.lblLayers.Text = "Layers"
+        Me.lblLayers.Text = "Additional Layers"
         '
         'lstLayers
         '
@@ -84,7 +84,7 @@ Partial Class ucrAdditionalLayers
         Me.Controls.Add(Me.lblLayers)
         Me.Controls.Add(Me.lstLayers)
         Me.Name = "ucrAdditionalLayers"
-        Me.Size = New System.Drawing.Size(218, 194)
+        Me.Size = New System.Drawing.Size(218, 191)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

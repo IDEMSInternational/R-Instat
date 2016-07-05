@@ -22,21 +22,15 @@ Partial Class dlgGeneralForGraphics
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
         Me.lstLayers = New System.Windows.Forms.ListView()
         Me.lblLayers = New System.Windows.Forms.Label()
         Me.cmdAdd = New System.Windows.Forms.Button()
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdDelete = New System.Windows.Forms.Button()
+        Me.UcrAdditionalLayers1 = New instat.ucrAdditionalLayers()
         Me.ucrSaveGraph = New instat.ucrSaveGraph()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 248)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
         '
         'lstLayers
         '
@@ -83,6 +77,13 @@ Partial Class dlgGeneralForGraphics
         Me.cmdDelete.Text = "Delete"
         Me.cmdDelete.UseVisualStyleBackColor = True
         '
+        'UcrAdditionalLayers1
+        '
+        Me.UcrAdditionalLayers1.Location = New System.Drawing.Point(212, 12)
+        Me.UcrAdditionalLayers1.Name = "UcrAdditionalLayers1"
+        Me.UcrAdditionalLayers1.Size = New System.Drawing.Size(198, 175)
+        Me.UcrAdditionalLayers1.TabIndex = 5
+        '
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(12, 212)
@@ -90,11 +91,19 @@ Partial Class dlgGeneralForGraphics
         Me.ucrSaveGraph.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveGraph.TabIndex = 4
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 248)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.TabIndex = 0
+        '
         'dlgGeneralForGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(422, 303)
+        Me.Controls.Add(Me.UcrAdditionalLayers1)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.cmdDelete)
         Me.Controls.Add(Me.cmdEdit)
@@ -119,4 +128,5 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents cmdEdit As Button
     Friend WithEvents cmdDelete As Button
     Friend WithEvents ucrSaveGraph As ucrSaveGraph
+    Friend WithEvents UcrAdditionalLayers1 As ucrAdditionalLayers
 End Class
