@@ -442,10 +442,18 @@ data_object$set("public", "replace_value_in_data", function(col_name = "", row, 
   }
   index <- which(rownames(private$data) == row)
   old_value <- private$data[[col_name]][[index]]
-  if(self$get_variables_metadata(property = data_type_label, column = col_name) == "factor") {
+  str_data_type <-self$get_variables_metadata(property = data_type_label, column = col_name)
+  if(str_data_type == "factor") {
     if(!(new_value %in% levels(private$data[[col_name]]))) {
       stop(new_value, " is not an existing level of the factor")
     }
+  }
+  if(str_data_type == "integer") {
+  #TODO Check that what checks are needed here
+    new_value <- as.integer(new_value)
+  }
+  if(str_data_type == "numeric") {
+    new_value <- as.numeric(new_value)
   }
   private$data[[col_name]][[index]] <- new_value
   self$append_to_changes(list(Replaced_value, col_name, row, old_value, new_value))
@@ -926,9 +934,31 @@ data_object$set("public", "set_row_names", function(row_names) {
 }
 )
 
+data_object$set("public", "set_col_names", function(row_names) {
+  if(missing(col_names)) col_names = 1:ncol(private$data)
+  if(length(col_names) != ncol(private$data)) stop("col_names must be a vector of same length as the data")
+  if(anyDuplicated(col_names) != 0) stop("col_names must be unique")
+  rownames(private$data) <- col_names
+  self$data_changed <- TRUE
+}
+
+)
+
 data_object$set("public", "get_row_names", function() {
+  return(rownames(private$data))
+}
+
+)
+
+data_object$set("public", "get_col_names", function() {
   return(names(private$data))
 }
+
+)
+data_object$set("public", "get_dim_dataframe", function() {
+  return(dim(private$data))
+}
+
 )
 
 data_object$set("public", "set_protected_columns", function(col_names) {

@@ -15,180 +15,208 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgPlots
-    Public clsRsyntax As RSyntax
-    Public clsRfacetFunction As New RFunction
+    Public clsRsyntax As New RSyntax
+    Public clsRFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
     Public clsYLabFunction As New RFunction
+    Public clsRThemeFunction As New RFunction
     Public bFirstLoad As Boolean = True
+
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-
         End If
         autoTranslate(Me)
     End Sub
 
     Private Sub SetDefaults()
-        ucr1stFactorReceiver.SetMeAsReceiver()
-        chkWrapOptions.Checked = False
-        chkFreeScalesX.Checked = False
-        chkFreeScalesY.Checked = False
-        rdoHorizontal.Checked = True
-        chkDisplayYTitle.Checked = False
-        chkDisplayYTitle.Checked = False
-        chkMargin.Checked = False
         chkIncludeFacets.Checked = False
-        FacetsCheck(False)
-
+        IncludeFacets()
+        ucr1stFactorReceiver.SetMeAsReceiver()
+        ThemesControls()
     End Sub
+
     Private Sub InitialiseDialog()
+        IncludeFacets()
         ucr1stFactorReceiver.Selector = ucrAddRemove
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr2ndFactorReceiver.Selector = ucrAddRemove
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
-        chkIncludeFacets.Checked = True
+
+        ucrInputThemes.cboInput.Items.AddRange({"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"})
     End Sub
-    Private Sub chkWrapOptions_CheckedChanged(sender As Object, e As EventArgs) Handles chkWrapOptions.CheckedChanged
-        If chkWrapOptions.Checked = True Then
-            lblNoOfColumns.Visible = True
-            txtNoOfColumns.Visible = True
-            txtNoOfRows.Visible = True
-            lblNoofRows.Visible = True
+
+    Private Sub IncludeFacets()
+        If chkIncludeFacets.Checked Then
+            ucrAddRemove.Visible = True
+            ucr1stFactorReceiver.Visible = True
+            ucr2ndFactorReceiver.Visible = True
+            lblFactor1.Visible = True
+            lblFactor2.Visible = True
+            rdoHorizontal.Visible = True
+            rdoHorizontal.Checked = True
+            rdoVertical.Visible = True
+            chkNoOfRowsOrColumns.Visible = True
+            chkNoOfRowsOrColumns.Checked = True
+            nudNoOfRowsOrColumns.Visible = True
+            chkMargin.Visible = True
+            chkFreeScalesX.Visible = True
+            chkFreeScalesY.Visible = True
+            SetFacets()
+            IncludeFacetsOperator()
         Else
-            lblNoOfColumns.Visible = False
-            txtNoOfColumns.Visible = False
-            txtNoOfRows.Visible = False
-            lblNoofRows.Visible = False
+            ucrAddRemove.Visible = False
+            ucr1stFactorReceiver.Visible = False
+            ucr2ndFactorReceiver.Visible = False
+            lblFactor1.Visible = False
+            lblFactor2.Visible = False
+            rdoHorizontal.Visible = False
+            rdoVertical.Visible = False
+            chkMargin.Visible = False
+            chkFreeScalesX.Visible = False
+            chkFreeScalesY.Visible = False
+            chkNoOfRowsOrColumns.Visible = False
+            nudNoOfRowsOrColumns.Visible = False
         End If
     End Sub
 
-    Public Sub SetFacetParameter()
+    Private Sub SetFacets()
         Dim clsTempOp As New ROperator
-        Dim strFactor1 As String
-        Dim strFactor2 As String
-
         clsTempOp.SetOperation("~")
-        strFactor1 = ucr1stFactorReceiver.GetVariableNames(False)
-        strFactor2 = ucr2ndFactorReceiver.GetVariableNames(False)
+        clsRFacetFunction.RemoveParameterByName("nrow")
+        clsRFacetFunction.RemoveParameterByName("ncol")
 
-        If strFactor1 = "" Then
-            clsRfacetFunction.RemoveParameterByName("facets")
-        Else
-            If chkMargin.Checked And strFactor2 = "" Then
-                strFactor2 = "."
-            End If
+        If Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty() Then
+            If rdoHorizontal.Checked AndAlso (chkMargin.Checked OrElse Not chkNoOfRowsOrColumns.Checked) Then
+                clsRFacetFunction.SetRCommand("facet_grid")
+                clsTempOp.SetParameter(True, strValue:=".")
+                clsTempOp.SetParameter(False, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
 
-            If rdoHorizontal.Checked Then
-                clsTempOp.SetParameter(False, strFactor1)
-                clsTempOp.SetParameter(True, strFactor2)
+            ElseIf rdoVertical.Checked AndAlso (chkMargin.Checked OrElse Not chkNoOfRowsOrColumns.Checked) Then
+                clsRFacetFunction.SetRCommand("facet_grid")
+                clsTempOp.SetParameter(False, strValue:=".")
+                clsTempOp.SetParameter(True, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
+
             Else
-                clsTempOp.SetParameter(True, strFactor1)
-                clsTempOp.SetParameter(False, strFactor2)
+                clsRFacetFunction.SetRCommand("facet_wrap")
+                clsTempOp.SetParameter(True, strValue:="")
+                clsTempOp.SetParameter(False, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
+                If rdoHorizontal.Checked AndAlso chkNoOfRowsOrColumns.Checked AndAlso nudNoOfRowsOrColumns.Value > 0 Then
+                    clsRFacetFunction.AddParameter("nrow", nudNoOfRowsOrColumns.Value)
+                ElseIf rdoVertical.Checked AndAlso chkNoOfRowsOrColumns.Checked AndAlso nudNoOfRowsOrColumns.Value > 0 Then
+                    clsRFacetFunction.AddParameter("ncol", nudNoOfRowsOrColumns.Value)
+                End If
             End If
-            clsRfacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
+
+        ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
+            clsRFacetFunction.SetRCommand("facet_grid")
+            If rdoHorizontal.Checked Then
+                clsTempOp.SetParameter(False, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                clsTempOp.SetParameter(True, strValue:=ucr2ndFactorReceiver.GetVariableNames(False))
+                clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
+            ElseIf rdoVertical.Checked Then
+                clsTempOp.SetParameter(True, strValue:=ucr1stFactorReceiver.GetVariableNames(False))
+                clsTempOp.SetParameter(False, strValue:=ucr2ndFactorReceiver.GetVariableNames(False))
+                clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
+            End If
+        Else
+            clsRFacetFunction.RemoveParameterByName("facets")
+        End If
+
+    End Sub
+
+    Private Sub IncludeFacetsOperator()
+        If chkIncludeFacets.Checked AndAlso Not ucr1stFactorReceiver.IsEmpty() Then
+            clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRFacetFunction)
+        Else
+            clsRsyntax.RemoveOperatorParameter("facet")
         End If
     End Sub
 
-    Public Sub SetFacetFunction()
-        If ucr2ndFactorReceiver.IsEmpty() = True Then
-            If chkMargin.Checked Then
-                clsRfacetFunction.SetRCommand("facet_grid")
-            Else
-                clsRfacetFunction.SetRCommand("facet_wrap")
-            End If
-        Else
-            clsRfacetFunction.SetRCommand("facet_grid")
-        End If
-
+    Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
+        IncludeFacets()
     End Sub
 
     Private Sub ucr1stFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.SelectionChanged
-        SetFacetFunction()
-        SetFacetParameter()
+        SetFacets()
+        IncludeFacetsOperator()
     End Sub
 
     Private Sub ucr2ndFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr2ndFactorReceiver.SelectionChanged
-        SetFacetFunction()
-        SetFacetParameter()
+        VisibileNumberOfRowsOrColumns()
+        SetFacets()
+        IncludeFacetsOperator()
     End Sub
 
-    Private Sub rdoHorizontal_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHorizontal.CheckedChanged
-        SetFacetParameter()
+    Private Sub rdoHorVer_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHorizontal.CheckedChanged, rdoVertical.CheckedChanged
+        If rdoHorizontal.Checked Then
+            chkNoOfRowsOrColumns.Text = "Fixed Number of Rows"
+        ElseIf rdoVertical.Checked Then
+            chkNoOfRowsOrColumns.Text = "Fixed Number of Columns"
+        End If
+        SetFacets()
+        IncludeFacetsOperator()
     End Sub
 
-    Private Sub rdoVertical_CheckedChanged(sender As Object, e As EventArgs) Handles rdoVertical.CheckedChanged
-        SetFacetParameter()
+    Private Sub VisibileNumberOfRowsOrColumns()
+        If chkMargin.Checked OrElse Not ucr2ndFactorReceiver.IsEmpty Then
+            chkNoOfRowsOrColumns.Visible = False
+            nudNoOfRowsOrColumns.Visible = False
+        Else
+            chkNoOfRowsOrColumns.Visible = True
+            nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
+        End If
     End Sub
+
+    Private Sub chkNoOfRowsOrColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoOfRowsOrColumns.CheckedChanged
+        nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
+        SetFacets()
+        IncludeFacetsOperator()
+    End Sub
+
+    Private Sub nudNoOfRowsOrColumns_TextChanged(sender As Object, e As EventArgs) Handles nudNoOfRowsOrColumns.TextChanged
+        SetFacets()
+        IncludeFacetsOperator()
+    End Sub
+
 
     Private Sub chkMargin_CheckedChanged(sender As Object, e As EventArgs) Handles chkMargin.CheckedChanged
-        SetFacetFunction()
-        SetFacetParameter()
         If chkMargin.Checked Then
-            clsRfacetFunction.AddParameter("margins", "TRUE")
+            clsRFacetFunction.AddParameter("margins", "TRUE")
         Else
-            clsRfacetFunction.RemoveParameterByName("margins")
+            clsRFacetFunction.RemoveParameterByName("margins")
+
         End If
+        VisibileNumberOfRowsOrColumns()
+        SetFacets()
+        IncludeFacetsOperator()
     End Sub
 
     Private Sub SetScaleOption()
-        If chkFreeScalesX.Checked Then
-            If chkFreeScalesY.Checked Then
-                clsRfacetFunction.AddParameter("scales", "free")
-            Else
-                clsRfacetFunction.AddParameter("scales", "free_x")
-            End If
+        If chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
+            clsRFacetFunction.AddParameter("scales", "free")
+        ElseIf chkFreeScalesX.Checked AndAlso Not chkFreeScalesY.Checked Then
+            clsRFacetFunction.AddParameter("scales", "free_x")
+        ElseIf Not chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
+            clsRFacetFunction.AddParameter("scales", "free_y")
         Else
-            If chkFreeScalesY.Checked Then
-                clsRfacetFunction.AddParameter("scales", "free_y")
-            Else
-                clsRfacetFunction.AddParameter("scales", "fixed")
-            End If
+            clsRFacetFunction.RemoveParameterByName("scales")
         End If
+    End Sub
+
+    Private Sub chkScales_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScalesX.CheckedChanged, chkFreeScalesY.CheckedChanged
+        SetScaleOption()
+        IncludeFacetsOperator()
+        SetFacets()
     End Sub
 
     Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
         clsRsyntax = clsRSyntaxIn
-    End Sub
-
-    Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
-        FacetsCheck(chkIncludeFacets.Checked)
-    End Sub
-
-    Private Sub FacetsCheck(bChecked As Boolean)
-        If bChecked Then
-            IncludeFacets()
-            clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRfacetFunction)
-        Else
-            clsRsyntax.RemoveOperatorParameter("facet")
-            RemoveFacets()
-        End If
-    End Sub
-
-    Private Sub IncludeFacets()
-        rdoHorizontal.Visible = True
-        rdoVertical.Visible = True
-        chkWrapOptions.Visible = True
-        chkMargin.Visible = True
-        chkFreeScalesX.Visible = True
-        chkFreeScalesY.Visible = True
-    End Sub
-
-    Private Sub RemoveFacets()
-        rdoHorizontal.Visible = False
-        rdoVertical.Visible = False
-        chkWrapOptions.Visible = False
-        chkMargin.Visible = False
-        chkFreeScalesX.Visible = False
-        chkFreeScalesY.Visible = False
-        lblNoofRows.Visible = False
-        lblNoOfColumns.Visible = False
-        txtNoOfRows.Visible = False
-        txtNoOfColumns.Visible = False
-        txtXTitle.Visible = False
-        txtYTitle.Visible = False
-        chkWrapOptions.Checked = False
     End Sub
 
     Private Sub chkChangeTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkChangeTitle.CheckedChanged
@@ -238,5 +266,32 @@ Public Class sdgPlots
 
     Private Sub txtYTitle_Leave(sender As Object, e As EventArgs) Handles txtYTitle.Leave
         clsYLabFunction.AddParameter("label", Chr(34) & txtYTitle.Text & Chr(34))
+    End Sub
+
+    Private Sub ucrInputThemes_NameChanged() Handles ucrInputThemes.TextChanged
+        If Not ucrInputThemes.IsEmpty Then
+            clsRThemeFunction.SetRCommand(ucrInputThemes.cboInput.SelectedItem)
+            clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
+            clsRThemeFunction.AddParameter("base_size", 12)
+            clsRThemeFunction.AddParameter("base_family", Chr(34) & Chr(34))
+        Else
+            clsRsyntax.RemoveOperatorParameter("theme")
+        End If
+    End Sub
+
+    Private Sub chkOverideTheme_CheckedChanged(sender As Object, e As EventArgs) Handles chkOverideTheme.CheckedChanged
+        If chkOverideTheme.Checked Then
+            lblTheme.Visible = True
+            nudFont.Visible = True
+        Else
+            lblTheme.Visible = False
+            nudFont.Visible = False
+        End If
+    End Sub
+    Private Sub ThemesControls()
+        cmdCreateTheme.Enabled = False
+        chkOverideTheme.Enabled = False
+        nudFont.Visible = False
+        lblFont.Visible = False
     End Sub
 End Class
