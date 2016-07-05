@@ -33,6 +33,7 @@ Partial Class dlgReplace
         Me.chkFindWholeWordOnly = New System.Windows.Forms.CheckBox()
         Me.chkMatchCase = New System.Windows.Forms.CheckBox()
         Me.chkSearchToEndOnly = New System.Windows.Forms.CheckBox()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'lblFindWhat
@@ -143,11 +144,19 @@ Partial Class dlgReplace
         Me.chkSearchToEndOnly.Text = "Search to end only"
         Me.chkSearchToEndOnly.UseVisualStyleBackColor = True
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(4, 222)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 8
+        '
         'dlgReplace
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(345, 194)
+        Me.ClientSize = New System.Drawing.Size(407, 275)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.chkSearchToEndOnly)
         Me.Controls.Add(Me.chkMatchCase)
         Me.Controls.Add(Me.chkFindWholeWordOnly)
@@ -180,4 +189,5 @@ Partial Class dlgReplace
     Friend WithEvents chkFindWholeWordOnly As CheckBox
     Friend WithEvents chkMatchCase As CheckBox
     Friend WithEvents chkSearchToEndOnly As CheckBox
+    Friend WithEvents ucrBase As ucrButtons
 End Class
