@@ -17,6 +17,8 @@
 
 Public Class ucrAdditionalLayers
     Public clsRSyntax As RSyntax
+    Public clsRggplotFunction As New RFunction
+    Public clsGgplotAesFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public lstLayerComplete As New List(Of Boolean)
     Public iLayerIndex As Integer
@@ -35,6 +37,14 @@ Public Class ucrAdditionalLayers
         clsRSyntax = clsRSyntaxIn
     End Sub
 
+    Public Sub SetGGplotFunction(clsRggplotFunc As RFunction)
+        clsRggplotFunction = clsRggplotFunc
+    End Sub
+
+    Public Sub SetAesFunction(clsAesFunc As RFunction)
+        clsGgplotAesFunction = clsAesFunc
+    End Sub
+
     Private Sub ucrAdditionalLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetDefaults()
@@ -51,8 +61,9 @@ Public Class ucrAdditionalLayers
 
     End Sub
 
+
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=dlgGeneralForGraphics.clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=dlgGeneralForGraphics.clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0)
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0)
         sdgLayerOptions.ShowDialog()
         strGlobalDataFrame = sdgLayerOptions.strGlobalDataFrame
         AddLayers()

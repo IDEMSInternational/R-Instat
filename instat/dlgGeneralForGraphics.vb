@@ -49,6 +49,8 @@ Public Class dlgGeneralForGraphics
         ucrSaveGraph.ucrInputGraphName.SetDefaultTypeAsGraph()
 
         ucrAdditionalLayers.SetRSyntax(ucrBase.clsRsyntax)
+        ucrAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
+        ucrAdditionalLayers.SetAesFunction(clsGgplotAesFunction)
 
     End Sub
 
