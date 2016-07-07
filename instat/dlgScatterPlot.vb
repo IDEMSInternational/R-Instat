@@ -84,7 +84,7 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        ucrBase.iHelpTopicID = 16
+        ucrBase.iHelpTopicID = 433
 
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
         ucrSaveScatterPlot.strPrefix = "Scatter"

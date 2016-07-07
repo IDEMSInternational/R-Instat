@@ -57,6 +57,7 @@ Public Class dlgPlot
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_lineplotFunction)
 
         ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.iHelpTopicID = 434
 
 
         ucrReceiverX.Selector = ucrLinePlotSelector
