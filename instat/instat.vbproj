@@ -717,6 +717,12 @@
     <Compile Include="sdgVariableTransformations.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ucrAdditionalLayers.Designer.vb">
+      <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrAdditionalLayers.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrColors.Designer.vb">
       <DependentUpon>ucrColors.vb</DependentUpon>
     </Compile>
@@ -3706,6 +3712,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVariableTransformations.sw-KE.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrAdditionalLayers.fr-FR.resx">
+      <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrAdditionalLayers.resx">
+      <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrAdditionalLayers.sw-KE.resx">
+      <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
