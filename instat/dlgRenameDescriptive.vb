@@ -37,17 +37,19 @@ Public Class dlgRenameDescriptive
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
     Private Sub InitialiseDialog()
         ucrReceiverCurrentName.Selector = ucrSelectorForRenameObject
         ucrReceiverCurrentName.SetMeAsReceiver()
         ucrSelectorForRenameObject.SetItemType("object")
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_object")
     End Sub
-    Private Sub SetDefaults()
-        ucrReceiverCurrentName.ResetText()
-        ucrInputNewName.Reset()
 
+    Private Sub SetDefaults()
+        ucrSelectorForRenameObject.Reset()
+        ucrInputNewName.ResetText()
     End Sub
+
     Public Sub SetCurrentObject(strColumn As String, strDataFrame As String)
         strSelectedOject = strColumn
         strSelectedDataFrame = strDataFrame

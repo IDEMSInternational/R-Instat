@@ -51,6 +51,7 @@ Public Class dlgViewDescriptives
     End Sub
 
     Private Sub SetDefaults()
+        ucrSelectorForViewObject.Reset()
         rdoStructure.Checked = True
         rdoAllContents.Enabled = False
         ObjectParameters()
