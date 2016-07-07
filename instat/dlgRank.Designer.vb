@@ -188,6 +188,7 @@ Partial Class dlgRank
         '
         'ucrInputColName
         '
+        Me.ucrInputColName.IsReadOnly = False
         Me.ucrInputColName.Location = New System.Drawing.Point(117, 268)
         Me.ucrInputColName.Name = "ucrInputColName"
         Me.ucrInputColName.Size = New System.Drawing.Size(145, 21)
@@ -195,6 +196,7 @@ Partial Class dlgRank
         '
         'ucrSelectorForRank
         '
+        Me.ucrSelectorForRank.bShowHiddenColumns = False
         Me.ucrSelectorForRank.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorForRank.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRank.Name = "ucrSelectorForRank"
@@ -232,6 +234,7 @@ Partial Class dlgRank
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgRank"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Rank"
         Me.Text = "Rank"
         Me.grpTies.ResumeLayout(False)

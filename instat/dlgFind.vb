@@ -17,6 +17,10 @@ Imports instat.Translations
 Public Class dlgFind
     Public currWindow As Form
     Dim targetPos As Integer = 0
+
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 406
+    End Sub
     Private Sub cmdFindNext_Click(sender As Object, e As EventArgs) Handles cmdFindNext.Click
 
         Select Case currWindow.Name
