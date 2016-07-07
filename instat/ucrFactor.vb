@@ -49,6 +49,7 @@ Public Class ucrFactor
 
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
+
         RefreshFactorData()
     End Sub
 
@@ -354,4 +355,8 @@ Public Class ucrFactor
             Return False
         End If
     End Function
+
+    Private Sub grdFactorData_KeyPress(sender As Object, e As KeyPressEventArgs) Handles grdFactorData.KeyPress
+        shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+    End Sub
 End Class
