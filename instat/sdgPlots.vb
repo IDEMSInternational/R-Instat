@@ -19,6 +19,7 @@ Public Class sdgPlots
     Public clsRFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
     Public clsYLabFunction As New RFunction
+    Public clsRThemeFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -34,6 +35,7 @@ Public Class sdgPlots
         chkIncludeFacets.Checked = False
         IncludeFacets()
         ucr1stFactorReceiver.SetMeAsReceiver()
+        ThemesControls()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -42,6 +44,8 @@ Public Class sdgPlots
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr2ndFactorReceiver.Selector = ucrAddRemove
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
+
+        ucrInputThemes.cboInput.Items.AddRange({"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"})
     End Sub
 
     Private Sub IncludeFacets()
@@ -264,5 +268,30 @@ Public Class sdgPlots
         clsYLabFunction.AddParameter("label", Chr(34) & txtYTitle.Text & Chr(34))
     End Sub
 
+    Private Sub ucrInputThemes_NameChanged() Handles ucrInputThemes.TextChanged
+        If Not ucrInputThemes.IsEmpty Then
+            clsRThemeFunction.SetRCommand(ucrInputThemes.cboInput.SelectedItem)
+            clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
+            clsRThemeFunction.AddParameter("base_size", 12)
+            clsRThemeFunction.AddParameter("base_family", Chr(34) & Chr(34))
+        Else
+            clsRsyntax.RemoveOperatorParameter("theme")
+        End If
+    End Sub
 
+    Private Sub chkOverideTheme_CheckedChanged(sender As Object, e As EventArgs) Handles chkOverideTheme.CheckedChanged
+        If chkOverideTheme.Checked Then
+            lblTheme.Visible = True
+            nudFont.Visible = True
+        Else
+            lblTheme.Visible = False
+            nudFont.Visible = False
+        End If
+    End Sub
+    Private Sub ThemesControls()
+        cmdCreateTheme.Enabled = False
+        chkOverideTheme.Enabled = False
+        nudFont.Visible = False
+        lblFont.Visible = False
+    End Sub
 End Class
