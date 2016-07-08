@@ -49,7 +49,6 @@ Public Class ucrFactor
 
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
-
         RefreshFactorData()
     End Sub
 
@@ -106,6 +105,7 @@ Public Class ucrFactor
             frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
             shtCurrSheet = grdFactorData.CurrentWorksheet
             bShowGrid = True
+            shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             If bIncludeCopyOfLevels Then
                 shtCurrSheet.AppendCols(1)
                 shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = "New Levels"
@@ -355,8 +355,4 @@ Public Class ucrFactor
             Return False
         End If
     End Function
-
-    Private Sub grdFactorData_KeyPress(sender As Object, e As KeyPressEventArgs) Handles grdFactorData.KeyPress
-        shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
-    End Sub
 End Class
