@@ -740,6 +740,12 @@ instat_object$set("public", "append_to_variables_metadata", function(data_name, 
 } 
 )
 
+instat_object$set("public", "assign_colour_to_metadata", function(data_name, property) {
+  self$get_data_objects(data_name)$append_to_variables_metadata(col_names, "colour", new_val)
+} 
+)
+
+
 instat_object$set("public", "append_to_dataframe_metadata", function(data_name, property, new_val = "") {
   self$get_data_objects(data_name)$append_to_metadata(property, new_val)
 } 

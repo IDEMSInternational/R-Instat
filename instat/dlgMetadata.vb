@@ -33,7 +33,7 @@ Public Class dlgMetadata
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrInputViewDataBy.IsEmpty Or chkRevertBack.Checked Then
+        If Not ucrInputViewDataBy.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -56,27 +56,13 @@ Public Class dlgMetadata
         TestOKEnabled()
     End Sub
 
-    Private Sub chkRevertBack_CheckStateChanged(sender As Object, e As EventArgs) Handles chkRevertBack.CheckStateChanged
-        'this doesn't look right to me DAS
-        If chkRevertBack.Checked Then
-            ucrInputViewDataBy.txtReceiverSingle.Text = "Name"
-            ucrInputViewDataBy.Enabled = False
-            ucrSelectByMetadata.Enabled = False
-        Else
-            ucrInputViewDataBy.Enabled = True
-            ucrSelectByMetadata.Enabled = True
-            ucrSelectByMetadata.Focus()
-        End If
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrInputViewDataBy_SelectionChanged(sender As Object, e As EventArgs) Handles ucrInputViewDataBy.SelectionChanged
         TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.clsGrids.bGrdViewDataByMetadata = True
         frmMain.clsGrids.SetMetadata(ucrInputViewDataBy.txtReceiverSingle.Text)
         frmMain.clsGrids.SetVariablesMetadata(frmVariables.grdVariables)
     End Sub
+
 End Class

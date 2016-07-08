@@ -26,12 +26,9 @@ Public Class clsGridLink
     Public bGrdDataChanged As Boolean
     Public bGrdMetadataChanged As Boolean
     Public bGrdVariablesMetadataChanged As Boolean
-    Public bGrdViewDataByMetadata As Boolean
     Public iMaxRows As Integer
     Private strMetadata As String
     Dim lstColors As New List(Of Color)
-    Dim colColors As IEnumerable(Of Color) = {Color.Aqua, Color.Gray, Color.LightGreen, Color.AliceBlue, Color.Maroon, Color.Green, Color.LightPink, Color.LightSkyBlue, Color.Brown, Color.MediumPurple, Color.White}
-
 
     Public Sub New()
         grdData = New ReoGridControl
@@ -43,9 +40,9 @@ Public Class clsGridLink
         bGrdDataChanged = False
         bGrdMetadataChanged = False
         bGrdVariablesMetadataChanged = False
-        bGrdViewDataByMetadata = False
         iMaxRows = 1000
-        lstColors.AddRange(colColors)
+        'TODO this should be defined in options not here and defaults should be changed
+        lstColors.AddRange({Color.Aqua, Color.Gray, Color.LightGreen, Color.AliceBlue, Color.Maroon, Color.Green, Color.LightPink, Color.LightSkyBlue, Color.Brown, Color.MediumPurple, Color.White})
     End Sub
 
     Public Sub UpdateGrids()
@@ -149,89 +146,22 @@ Public Class clsGridLink
             grdMetadata.Visible = True
         End If
 
-        If bGrdViewDataByMetadata Then
-            SetViewColumnsByMetadata()
-            bGrdViewDataByMetadata = False
-        End If
     End Sub
 
     Public Sub SetMetadata(tmpStrMetadata As String)
         strMetadata = tmpStrMetadata
     End Sub
-    Private Sub SetViewColumnsByMetadata()
-        Dim currSheet As Worksheet
-        Dim selRange As New RangePosition
-        For Each currSheet In grdData.Worksheets
-            If grdData.CurrentWorksheet.Name = currSheet.Name And grdVariablesMetadata.CurrentWorksheet.Name = currSheet.Name Then
-                For i As Integer = 0 To grdVariablesMetadata.CurrentWorksheet.ColumnCount - 1
-                    If grdVariablesMetadata.CurrentWorksheet.ColumnHeaders.Item(i).Text = strMetadata Then
-                        Select Case strMetadata
-                            Case "Display_Decimal"
-                                grdVariablesMetadata.CurrentWorksheet.SelectColumns(i, 1)
-                                selRange = grdVariablesMetadata.CurrentWorksheet.SelectionRange
-                                grdVariablesMetadata.CurrentWorksheet.IterateCells(selRange, Function(row, col, cell)
-                                                                                                 If cell.Data = "NA" Then
-                                                                                                     SetDataViewColumnColor(row, 0)
-                                                                                                 Else
-                                                                                                     SetDataViewColumnColor(row, 1)
-                                                                                                 End If
 
-                                                                                                 Return True
-                                                                                             End Function)
-                            Case "Is_Hidden"
-                                grdVariablesMetadata.CurrentWorksheet.SelectColumns(i, 1)
-                                selRange = grdVariablesMetadata.CurrentWorksheet.SelectionRange
-                                grdVariablesMetadata.CurrentWorksheet.IterateCells(selRange, Function(row, col, cell)
-                                                                                                 Select Case cell.Data
-
-                                                                                                     Case "TRUE"
-                                                                                                         SetDataViewColumnColor(row, 0)
-                                                                                                     Case "FALSE"
-                                                                                                         SetDataViewColumnColor(row, 1)
-                                                                                                 End Select
-                                                                                                 Return True
-                                                                                             End Function)
-                            Case "Data_Type"
-                                grdVariablesMetadata.CurrentWorksheet.SelectColumns(i, 1)
-                                selRange = grdVariablesMetadata.CurrentWorksheet.SelectionRange
-                                grdVariablesMetadata.CurrentWorksheet.IterateCells(selRange, Function(row, col, cell)
-                                                                                                 Select Case cell.Data
-
-                                                                                                     Case "integer"
-                                                                                                         SetDataViewColumnColor(row, 0)
-                                                                                                     Case "character"
-                                                                                                         SetDataViewColumnColor(row, 1)
-                                                                                                     Case "numeric"
-                                                                                                         SetDataViewColumnColor(row, 2)
-                                                                                                     Case "Date"
-                                                                                                         SetDataViewColumnColor(row, 3)
-                                                                                                     Case "factor"
-                                                                                                         SetDataViewColumnColor(row, 4)
-                                                                                                 End Select
-                                                                                                 Return True
-                                                                                             End Function)
-                            Case "Name"
-                                grdVariablesMetadata.CurrentWorksheet.SelectColumns(i, 1)
-                                selRange = grdVariablesMetadata.CurrentWorksheet.SelectionRange
-                                grdVariablesMetadata.CurrentWorksheet.IterateCells(selRange, Function(row, col, cell)
-                                                                                                 SetDataViewColumnColor(row, 10, True)
-                                                                                                 Return True
-                                                                                             End Function)
-                        End Select
-                    End If
-                Next
-            End If
-        Next
-    End Sub
-
-    Private Sub SetDataViewColumnColor(selCol As Integer, selColor As Integer, Optional bRevert As Boolean = False)
+    Private Sub SetDataViewColumnColor(selCol As Integer, bApplyColour As Boolean, Optional iColour As Integer = -1)
+        'Question is it ok to only do this on the current worksheet
+        'TODO The range should be defined without selecting it
         Dim selRangeDataView As New RangePosition
         grdData.CurrentWorksheet.SelectColumns(selCol, 1)
         selRangeDataView = grdData.CurrentWorksheet.SelectionRange
-        If bRevert Then
-            grdData.CurrentWorksheet.RemoveRangeStyles(selRangeDataView, PlainStyleFlag.All)
+        If bApplyColour AndAlso iColour >= 0 AndAlso iColour < lstColors.Count Then
+            grdData.CurrentWorksheet.SetRangeStyles(selRangeDataView, New WorksheetRangeStyle() With {.Flag = PlainStyleFlag.BackColor, .BackColor = lstColors.Item(iColour)})
         Else
-            grdData.CurrentWorksheet.SetRangeStyles(selRangeDataView, New WorksheetRangeStyle() With {.Flag = PlainStyleFlag.BackColor, .BackColor = lstColors.Item(selColor)})
+            grdData.CurrentWorksheet.RemoveRangeStyles(selRangeDataView, PlainStyleFlag.All)
         End If
 
     End Sub
@@ -262,11 +192,14 @@ Public Class clsGridLink
         Dim fillWorkSheet As Worksheet
         Dim rngDataRange As RangePosition
         Dim vecColumnDataTypes As CharacterVector
+        Dim vecColumnColours As CharacterVector
+        Dim bApplyColumnColours As Boolean
         Dim clsGetVarMetaFunc As New RFunction
         Dim iCurrPosition As Integer
         Dim iCount As Integer
         Dim strRowNames As String()
         Dim strColumnNames As String()
+        Dim i As Integer, j As Integer, k As Integer
 
         iCount = 0
         For Each tempWorkSheet In grdCurr.Worksheets
@@ -293,22 +226,22 @@ Public Class clsGridLink
         fillWorkSheet.Columns = dfTemp.ColumnCount
         rngDataRange = New RangePosition(0, 0, fillWorkSheet.Rows, fillWorkSheet.Columns)
         fillWorkSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
-        For i As Integer = 0 To fillWorkSheet.Rows - 1
-            For j As Integer = 0 To fillWorkSheet.Columns - 1
+        For i = 0 To fillWorkSheet.Rows - 1
+            For j = 0 To fillWorkSheet.Columns - 1
                 fillWorkSheet(row:=i, col:=j) = dfTemp(i, j)
             Next
         Next
         strRowNames = dfTemp.RowNames
-        For i As Integer = 0 To fillWorkSheet.Rows - 1
+        For i = 0 To fillWorkSheet.Rows - 1
             fillWorkSheet.RowHeaders.Item(i).Text = strRowNames(i)
         Next
 
         If bFilterApplied Then
-            For i As Integer = 0 To fillWorkSheet.Rows - 1
+            For i = 0 To fillWorkSheet.Rows - 1
                 fillWorkSheet.RowHeaders(i).TextColor = Color.Red
             Next
         Else
-            For i As Integer = 0 To fillWorkSheet.Rows - 1
+            For i = 0 To fillWorkSheet.Rows - 1
                 fillWorkSheet.RowHeaders(i).TextColor = Color.DarkBlue
             Next
         End If
@@ -328,7 +261,7 @@ Public Class clsGridLink
 
                 vecColumnDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVarMetaFunc.ToScript()).AsCharacter
 
-                For k As Integer = 0 To dfTemp.ColumnCount - 1
+                For k = 0 To dfTemp.ColumnCount - 1
                     Select Case vecColumnDataTypes(k)
                         Case "factor"
                             fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (f)"
@@ -341,11 +274,31 @@ Public Class clsGridLink
                     End Select
                 Next
             Else
-                For k As Integer = 0 To dfTemp.ColumnCount - 1
+                For k = 0 To dfTemp.ColumnCount - 1
                     fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k)
                 Next
             End If
             grdCurr.CurrentWorksheet = fillWorkSheet
+            bApplyColumnColours = False
+            If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists Then
+                clsGetVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+                clsGetVarMetaFunc.AddParameter("data_name", Chr(34) & strName & Chr(34))
+                clsGetVarMetaFunc.AddParameter("property", "colour")
+                clsGetVarMetaFunc.AddParameter("column", ListAsRString(dfTemp.ColumnNames()))
+                vecColumnColours = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVarMetaFunc.ToScript()).AsCharacter
+                If vecColumnColours.Length = dfTemp.ColumnCount Then
+                    bApplyColumnColours = True
+                End If
+            End If
+
+
+            For k = 0 To dfTemp.ColumnCount - 1
+                If bApplyColumnColours Then
+                    SetDataViewColumnColor(k, bApplyColumnColours, vecColumnColours(k).ToString())
+                Else
+                    SetDataViewColumnColor(k, bApplyColumnColours)
+                End If
+            Next
         Catch ex As Exception
             'TODO what to do in this case?
         End Try
