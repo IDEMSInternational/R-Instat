@@ -1631,6 +1631,12 @@
     <Compile Include="ucrLayerParamsControls.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrModelOperators.Designer.vb">
+      <DependentUpon>ucrModelOperators.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrModelOperators.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMultipleInput.Designer.vb">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </Compile>
@@ -3886,6 +3892,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrLayerParamsControls.sw-KE.resx">
       <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrModelOperators.fr-FR.resx">
+      <DependentUpon>ucrModelOperators.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrModelOperators.resx">
+      <DependentUpon>ucrModelOperators.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrModelOperators.sw-KE.resx">
+      <DependentUpon>ucrModelOperators.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
