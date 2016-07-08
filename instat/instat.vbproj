@@ -375,10 +375,10 @@
     <Compile Include="dlgJitter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgMakeSheets.Designer.vb">
-      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    <Compile Include="dlgFactorDataFrame.Designer.vb">
+      <DependentUpon>dlgFactorDataFrame.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgMakeSheets.vb">
+    <Compile Include="dlgFactorDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgMatchText.Designer.vb">
@@ -537,10 +537,10 @@
     <Compile Include="dlgScatterPlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgSheetMetadata.Designer.vb">
-      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
+    <Compile Include="dlgDataFrameMetadata.Designer.vb">
+      <DependentUpon>dlgDataFrameMetadata.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgSheetMetadata.vb">
+    <Compile Include="dlgDataFrameMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSplitText.Designer.vb">
@@ -716,6 +716,12 @@
     </Compile>
     <Compile Include="sdgVariableTransformations.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ucrAdditionalLayers.Designer.vb">
+      <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrAdditionalLayers.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrColors.Designer.vb">
       <DependentUpon>ucrColors.vb</DependentUpon>
@@ -2062,14 +2068,14 @@
     <EmbeddedResource Include="dlgJitter.sw-KE.resx">
       <DependentUpon>dlgJitter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgMakeSheets.fr-FR.resx">
-      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    <EmbeddedResource Include="dlgFactorDataFrame.fr-FR.resx">
+      <DependentUpon>dlgFactorDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgMakeSheets.resx">
-      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    <EmbeddedResource Include="dlgFactorDataFrame.resx">
+      <DependentUpon>dlgFactorDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgMakeSheets.sw-KE.resx">
-      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    <EmbeddedResource Include="dlgFactorDataFrame.sw-KE.resx">
+      <DependentUpon>dlgFactorDataFrame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMatchText.fr-FR.resx">
       <DependentUpon>dlgMatchText.vb</DependentUpon>
@@ -2079,6 +2085,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMatchText.sw-KE.resx">
       <DependentUpon>dlgMatchText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMerge.resx">
+      <DependentUpon>dlgMerge.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMetadata.fr-FR.resx">
       <DependentUpon>dlgMetadata.vb</DependentUpon>
@@ -2293,14 +2302,14 @@
     <EmbeddedResource Include="dlgScatterPlot.sw-KE.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSheetMetadata.fr-FR.resx">
-      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDataFrameMetadata.fr-FR.resx">
+      <DependentUpon>dlgDataFrameMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSheetMetadata.resx">
-      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDataFrameMetadata.resx">
+      <DependentUpon>dlgDataFrameMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSheetMetadata.sw-KE.resx">
-      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDataFrameMetadata.sw-KE.resx">
+      <DependentUpon>dlgDataFrameMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSplitText.fr-FR.resx">
       <DependentUpon>dlgSplitText.vb</DependentUpon>
@@ -3707,6 +3716,15 @@
     <EmbeddedResource Include="sdgVariableTransformations.sw-KE.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrAdditionalLayers.fr-FR.resx">
+      <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrAdditionalLayers.resx">
+      <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrAdditionalLayers.sw-KE.resx">
+      <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
@@ -3989,6 +4007,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
