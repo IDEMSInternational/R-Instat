@@ -16,6 +16,9 @@ Public Class dlgInventoryPlot
         Me.Hide()
     End Sub
 
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 454
+    End Sub
 
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles Me.Load
         'UpdateVisible()

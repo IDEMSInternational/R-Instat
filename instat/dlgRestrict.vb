@@ -59,6 +59,7 @@ Public Class dlgRestrict
         ucrReceiverFilter.Selector = ucrSelectorFilter
         ucrReceiverFilter.SetMeAsReceiver()
         ucrNewDataFrameName.SetValidationTypeAsRVariable()
+        ucrBase.iHelpTopicID = 340
     End Sub
 
     Private Sub SetDefaults()
