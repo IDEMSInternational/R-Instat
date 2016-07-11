@@ -26,10 +26,16 @@ Public Class dlgRenameDescriptive
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         TestOKEnabled()
     End Sub
 
+    Private Sub ReopenDialog()
+        ucrReceiverCurrentName.txtReceiverSingle.Clear()
+        ucrInputNewName.txtInput.Clear()
+    End Sub
     Private Sub TestOKEnabled()
         If ((Not ucrReceiverCurrentName.IsEmpty) And (Not ucrInputNewName.IsEmpty)) Then
             ucrBase.OKEnabled(True)
