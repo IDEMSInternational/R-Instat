@@ -550,7 +550,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataFileSheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectDataFrameMetadata.Click
-        dlgSheetMetadata.ShowDialog()
+        dlgDataFrameMetaData.ShowDialog()
     End Sub
 
     Private Sub mnuManageSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameColumnMetadata.Click
@@ -710,7 +710,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageFactorSheet_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorFactorDataFrame.Click
-        dlgMakeSheets.ShowDialog()
+        dlgFactorDataFrame.ShowDialog()
     End Sub
 
     Private Sub mnuGraphicsUseGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseObjectsUseGraph.Click

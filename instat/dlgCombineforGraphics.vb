@@ -30,7 +30,7 @@ Public Class dlgCombineforGraphics
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 357
+        ucrBase.iHelpTopicID = 430
     End Sub
 
     Private Sub SetDefaults()

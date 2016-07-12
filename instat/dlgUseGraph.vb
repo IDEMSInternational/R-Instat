@@ -33,7 +33,7 @@ Public Class dlgUseGraph
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 358
+        ucrBase.iHelpTopicID = 430
         ucrGraphsSelector.SetItemType("graph")
         ucrGraphReceiver.Selector = ucrGraphsSelector
     End Sub

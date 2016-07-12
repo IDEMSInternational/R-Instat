@@ -36,6 +36,7 @@ Public Class dlgRowNamesOrNumbers
         ucrReceiverSingleRownamesOrNumbers.Selector = ucrSelectorByDataFrameAddRemoveforRownamesOrNumbers
         ucrReceiverSingleRownamesOrNumbers.SetMeAsReceiver()
         txtNewColumnforRowNameOrNumber.Visible = False
+        ucrBaseRownamesorNumbers.iHelpTopicID = 178
 
     End Sub
 
