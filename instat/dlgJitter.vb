@@ -43,6 +43,7 @@ Public Class dlgJitter
         ucrInputMaximum.SetValidationTypeAsNumeric()
         ucrInputMinimum.SetValidationTypeAsNumeric()
         ucrInputMaximumDistanceFromZero.SetValidationTypeAsNumeric()
+        ucrBase.iHelpTopicID = 396
 
     End Sub
 

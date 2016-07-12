@@ -18,4 +18,8 @@ Public Class dlgReplace
     Private Sub dlgReplace_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
+
+    Private Sub InitilaiseDialogue()
+        ucrBase.iHelpTopicID = 47
+    End Sub
 End Class
