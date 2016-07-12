@@ -45,7 +45,7 @@ Public Class dlgHistogram
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrBase.clsRsyntax.iCallType = 0
-        ucrBase.iHelpTopicID = 118
+        ucrBase.iHelpTopicID = 435
         ucrFactorReceiver.Selector = ucrHistogramSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
 

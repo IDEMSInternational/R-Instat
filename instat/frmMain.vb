@@ -520,18 +520,6 @@ Public Class frmMain
         dlgMerge.ShowDialog()
     End Sub
 
-    Private Sub mnuWindowsCascading_Click(sender As Object, e As EventArgs) Handles mnuViewWindowsLayoutCascade.Click
-        Me.LayoutMdi(MdiLayout.Cascade)
-    End Sub
-
-    Private Sub mnuWindowsStacked_Click(sender As Object, e As EventArgs) Handles mnuViewWindowsLayoutTileVertically.Click
-        Me.LayoutMdi(MdiLayout.TileVertical)
-    End Sub
-
-    Private Sub mnuWindowsSideBySide_Click(sender As Object, e As EventArgs) Handles mnuViewWindowsLayoutTileHorizontally.Click
-        Me.LayoutMdi(MdiLayout.TileHorizontal)
-    End Sub
-
     Private Sub mnuWindowsEditor_Click(sender As Object, e As EventArgs) Handles mnuViewDataView.Click
         If frmEditor.Visible Then
             frmEditor.Visible = False
@@ -562,7 +550,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataFileSheetMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectDataFrameMetadata.Click
-        dlgSheetMetadata.ShowDialog()
+        dlgDataFrameMetaData.ShowDialog()
     End Sub
 
     Private Sub mnuManageSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameColumnMetadata.Click
@@ -722,7 +710,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageFactorSheet_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnFactorFactorDataFrame.Click
-        dlgMakeSheets.ShowDialog()
+        dlgFactorDataFrame.ShowDialog()
     End Sub
 
     Private Sub mnuGraphicsUseGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseObjectsUseGraph.Click
@@ -996,5 +984,17 @@ Public Class frmMain
         'TODO change this dialog
         '     dlgMetadata should be separate
         dlgMetadata.ShowDialog()
+    End Sub
+
+    Private Sub mnuViewCascade_Click(sender As Object, e As EventArgs) Handles mnuViewCascade.Click
+        Me.LayoutMdi(MdiLayout.Cascade)
+    End Sub
+
+    Private Sub mnuViewTileVertically_Click(sender As Object, e As EventArgs) Handles mnuViewTileVertically.Click
+        Me.LayoutMdi(MdiLayout.TileVertical)
+    End Sub
+
+    Private Sub mnuViewTileHorizontally_Click(sender As Object, e As EventArgs) Handles mnuViewTileHorizontally.Click
+        Me.LayoutMdi(MdiLayout.TileHorizontal)
     End Sub
 End Class
