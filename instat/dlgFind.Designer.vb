@@ -31,6 +31,7 @@ Partial Class dlgFind
         Me.lblFindWhat = New System.Windows.Forms.Label()
         Me.txtFindWhat = New System.Windows.Forms.TextBox()
         Me.cmdFindAll = New System.Windows.Forms.Button()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'cmdFindNext
@@ -129,11 +130,19 @@ Partial Class dlgFind
         Me.cmdFindAll.Text = "Find all"
         Me.cmdFindAll.UseVisualStyleBackColor = True
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(12, 234)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 9
+        '
         'dlgFind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(355, 190)
+        Me.ClientSize = New System.Drawing.Size(420, 287)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdFindAll)
         Me.Controls.Add(Me.txtFindWhat)
         Me.Controls.Add(Me.lblFindWhat)
@@ -162,4 +171,5 @@ Partial Class dlgFind
     Friend WithEvents lblFindWhat As Label
     Friend WithEvents txtFindWhat As TextBox
     Friend WithEvents cmdFindAll As Button
+    Friend WithEvents ucrBase As ucrButtons
 End Class

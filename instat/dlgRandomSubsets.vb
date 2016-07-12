@@ -44,7 +44,7 @@ Public Class dlgRandomSubsets
         clsSetSeed.SetRCommand("set.seed")
         clsReplicateFunc.AddParameter("expr", clsRFunctionParameter:=clsSampleFunc)
         clsSampleFunc.SetRCommand("sample")
-        ucrBase.iHelpTopicID = 65
+        ucrBase.iHelpTopicID = 59
 
     End Sub
 
