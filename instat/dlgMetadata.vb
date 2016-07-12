@@ -43,6 +43,7 @@ Public Class dlgMetadata
     Private Sub InitialiseDialog()
         ucrSelectByMetadata.SetItemType("metadata")
         ucrInputViewDataBy.Selector = ucrSelectByMetadata
+        ucrBase.iHelpTopicID = 391
     End Sub
 
     Private Sub setDefaults()

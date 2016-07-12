@@ -31,7 +31,7 @@ Public Class dlgWindrose
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 135
+        ucrBase.iHelpTopicID = 452
     End Sub
 
     Private Sub SetDefaults()

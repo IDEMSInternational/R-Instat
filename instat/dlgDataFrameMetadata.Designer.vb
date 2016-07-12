@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgSheetMetadata
+Partial Class dlgDataFrameMetaData
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -32,17 +32,17 @@ Partial Class dlgSheetMetadata
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
-        'dlgSheetMetadata
+        'dlgDataFrameMetaData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(433, 261)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgSheetMetadata"
+        Me.Name = "dlgDataFrameMetaData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Sheet_Metadata"
-        Me.Text = "Sheet Metadata"
+        Me.Text = "Data Frame Metadata"
         Me.ResumeLayout(False)
 
     End Sub
