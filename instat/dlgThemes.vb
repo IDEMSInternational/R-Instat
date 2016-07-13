@@ -30,7 +30,7 @@ Public Class dlgThemes
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 359
+        ucrBase.iHelpTopicID = 440
     End Sub
 
     Private Sub SetDefaults()

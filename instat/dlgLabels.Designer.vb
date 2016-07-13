@@ -62,6 +62,7 @@ Partial Class dlgLabels
         '
         'ucrSelectorForLabels
         '
+        Me.ucrSelectorForLabels.bShowHiddenColumns = False
         Me.ucrSelectorForLabels.Location = New System.Drawing.Point(12, 12)
         Me.ucrSelectorForLabels.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForLabels.Name = "ucrSelectorForLabels"
@@ -97,8 +98,9 @@ Partial Class dlgLabels
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgLabels"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Labels"
-        Me.Text = "Labels"
+        Me.Text = "Labels/Levels"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
