@@ -26,7 +26,6 @@ Public Class dlgViewDescriptives
         Else
             ReopenDialog
         End If
-        TestOKEnabled
     End Sub
 
     Private Sub ReopenDialog()
@@ -48,17 +47,19 @@ Public Class dlgViewDescriptives
         ucrSelectorForViewObject.SetItemType("object")
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_from_object")
         ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.iHelpTopicID = 349
     End Sub
 
     Private Sub SetDefaults()
+        ucrSelectorForViewObject.Reset()
         rdoStructure.Checked = True
         rdoAllContents.Enabled = False
         ObjectParameters()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
     End Sub
 
     Private Sub StructureComponentsAndAllContents_CheckedChanged(sender As Object, e As EventArgs) Handles rdoStructure.CheckedChanged, rdoAllContents.CheckedChanged, rdoComponent.CheckedChanged

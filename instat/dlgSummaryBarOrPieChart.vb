@@ -56,6 +56,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
         ucrYReceiver.SetMeAsReceiver()
         ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.iHelpTopicID = 439
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
         ucrSaveSummaryBar.SetDataFrameSelector(ucrSummarybarSelector.ucrAvailableDataFrames)

@@ -50,7 +50,7 @@ Public Class dlgDotPlot
         ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorDotPlot.SetSelector(ucrDotPlotSelector)
         ucrVariablesAsFactorDotPlot.SetIncludedDataType({"numeric"})
-        ucrBase.iHelpTopicID = 134
+        ucrBase.iHelpTopicID = 437
 
         ucrSaveDotPlot.SetDataFrameSelector(ucrDotPlotSelector.ucrAvailableDataFrames)
         ucrSaveDotPlot.strPrefix = "Dotplot"

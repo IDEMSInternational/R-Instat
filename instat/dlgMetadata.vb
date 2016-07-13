@@ -43,6 +43,7 @@ Public Class dlgMetadata
     Private Sub InitialiseDialog()
         ucrSelectByMetadata.SetItemType("metadata")
         ucrInputViewDataBy.Selector = ucrSelectByMetadata
+        ucrBase.iHelpTopicID = 391
     End Sub
 
     Private Sub setDefaults()
@@ -57,6 +58,7 @@ Public Class dlgMetadata
     End Sub
 
     Private Sub chkRevertBack_CheckStateChanged(sender As Object, e As EventArgs) Handles chkRevertBack.CheckStateChanged
+        'this doesn't look right to me DAS
         If chkRevertBack.Checked Then
             ucrInputViewDataBy.txtReceiverSingle.Text = "Name"
             ucrInputViewDataBy.Enabled = False
