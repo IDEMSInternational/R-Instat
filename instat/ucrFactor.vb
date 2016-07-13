@@ -105,6 +105,7 @@ Public Class ucrFactor
             frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
             shtCurrSheet = grdFactorData.CurrentWorksheet
             bShowGrid = True
+            shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             If bIncludeCopyOfLevels Then
                 shtCurrSheet.AppendCols(1)
                 shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = "New Levels"
