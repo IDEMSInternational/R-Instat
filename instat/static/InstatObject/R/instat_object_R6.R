@@ -873,3 +873,18 @@ instat_object$set("public","get_metadata_fields", function(data_name, include_ov
   }
 } 
 )
+
+instat_object$set("public","freeze_columns", function(data_name, column) {
+  self$get_data_objects(data_name)$freeze_columns(column = column)
+} 
+)
+
+instat_object$set("public","unfreeze_columns", function(data_name) {
+  self$get_data_objects(data_name)$unfreeze_columns()
+} 
+)
+
+instat_object$set("public","is_variables_metadata", function(data_name, property) {
+  self$get_data_objects(data_name)$is_variables_metadata(property)
+} 
+)
