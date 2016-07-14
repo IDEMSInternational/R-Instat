@@ -444,7 +444,7 @@ data_object$set("public", "replace_value_in_data", function(col_name = "", row, 
   old_value <- private$data[[col_name]][[index]]
   str_data_type <-self$get_variables_metadata(property = data_type_label, column = col_name)
   if(str_data_type == "factor") {
-    if(!(new_value %in% levels(private$data[[col_name]]))) {
+    if(!is.na(new_value) && !(new_value %in% levels(private$data[[col_name]]))) {
       stop(new_value, " is not an existing level of the factor")
     }
   }
