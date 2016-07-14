@@ -1153,3 +1153,14 @@ data_object$set("public", "data_clone", function() {
   return(ret)
 }
 )
+
+data_object$set("public", "freeze_columns", function(column) {
+  self$unfreeze_columns()
+  self$append_to_variables_metadata(column, is_frozen_label, TRUE)
+}
+)
+
+data_object$set("public", "unfreeze_columns", function() {
+  self$append_to_variables_metadata(self$get_column_names(), is_frozen_label, FALSE)
+}
+)
