@@ -72,6 +72,7 @@ Public Class dlgBoxplot
 
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        sdgPlots.SetGgplotFunction(clsRggplotFunction)
 
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
