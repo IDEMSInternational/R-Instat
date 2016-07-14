@@ -42,7 +42,7 @@ Public Class dlgCumulativeDistribution
         ucrFactorReceiver.Selector = ucrCumDistSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
         ucrBase.clsRsyntax.iCallType = 0
-        ucrBase.iHelpTopicID = 133
+        ucrBase.iHelpTopicID = 453
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 

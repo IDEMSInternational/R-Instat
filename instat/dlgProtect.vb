@@ -19,4 +19,9 @@ Public Class dlgProtect
     Private Sub dlgProtect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 166
+    End Sub
+
 End Class

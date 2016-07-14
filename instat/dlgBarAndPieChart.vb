@@ -60,7 +60,7 @@ Public Class dlgBarAndPieChart
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.iCallType = 0
-        ucrBase.iHelpTopicID = 327
+        ucrBase.iHelpTopicID = 438
 
 
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
