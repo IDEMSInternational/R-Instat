@@ -49,8 +49,6 @@ Partial Class sdgPlots
         Me.lblFactor2 = New System.Windows.Forms.Label()
         Me.lblFactor1 = New System.Windows.Forms.Label()
         Me.tabLayers = New System.Windows.Forms.TabPage()
-        Me.chkConnect = New System.Windows.Forms.CheckBox()
-        Me.chkDotPlot = New System.Windows.Forms.CheckBox()
         Me.tbpXAxis = New System.Windows.Forms.TabPage()
         Me.grpTich = New System.Windows.Forms.GroupBox()
         Me.chkSpecificPoints = New System.Windows.Forms.CheckBox()
@@ -94,6 +92,7 @@ Partial Class sdgPlots
         Me.ucr2ndFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
+        Me.ucrPlotsAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabTheme.SuspendLayout()
         CType(Me.nudFont, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -405,8 +404,7 @@ Partial Class sdgPlots
         '
         'tabLayers
         '
-        Me.tabLayers.Controls.Add(Me.chkConnect)
-        Me.tabLayers.Controls.Add(Me.chkDotPlot)
+        Me.tabLayers.Controls.Add(Me.ucrPlotsAdditionalLayers)
         Me.tabLayers.Location = New System.Drawing.Point(4, 22)
         Me.tabLayers.Name = "tabLayers"
         Me.tabLayers.Padding = New System.Windows.Forms.Padding(3)
@@ -415,28 +413,6 @@ Partial Class sdgPlots
         Me.tabLayers.Tag = "Layers"
         Me.tabLayers.Text = "Layers"
         Me.tabLayers.UseVisualStyleBackColor = True
-        '
-        'chkConnect
-        '
-        Me.chkConnect.AutoSize = True
-        Me.chkConnect.Location = New System.Drawing.Point(22, 84)
-        Me.chkConnect.Name = "chkConnect"
-        Me.chkConnect.Size = New System.Drawing.Size(66, 17)
-        Me.chkConnect.TabIndex = 1
-        Me.chkConnect.Tag = "Connect"
-        Me.chkConnect.Text = "Connect"
-        Me.chkConnect.UseVisualStyleBackColor = True
-        '
-        'chkDotPlot
-        '
-        Me.chkDotPlot.AutoSize = True
-        Me.chkDotPlot.Location = New System.Drawing.Point(22, 35)
-        Me.chkDotPlot.Name = "chkDotPlot"
-        Me.chkDotPlot.Size = New System.Drawing.Size(63, 17)
-        Me.chkDotPlot.TabIndex = 0
-        Me.chkDotPlot.Tag = "Dot_plot"
-        Me.chkDotPlot.Text = "Dot plot"
-        Me.chkDotPlot.UseVisualStyleBackColor = True
         '
         'tbpXAxis
         '
@@ -856,6 +832,13 @@ Partial Class sdgPlots
         Me.ucrAddRemove.Size = New System.Drawing.Size(228, 127)
         Me.ucrAddRemove.TabIndex = 0
         '
+        'ucrPlotsAdditionalLayers
+        '
+        Me.ucrPlotsAdditionalLayers.Location = New System.Drawing.Point(6, 6)
+        Me.ucrPlotsAdditionalLayers.Name = "ucrPlotsAdditionalLayers"
+        Me.ucrPlotsAdditionalLayers.Size = New System.Drawing.Size(218, 191)
+        Me.ucrPlotsAdditionalLayers.TabIndex = 0
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -883,7 +866,6 @@ Partial Class sdgPlots
         Me.tabFacet.PerformLayout()
         CType(Me.nudNoOfRowsOrColumns, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabLayers.ResumeLayout(False)
-        Me.tabLayers.PerformLayout()
         Me.tbpXAxis.ResumeLayout(False)
         Me.grpTich.ResumeLayout(False)
         Me.grpTich.PerformLayout()
@@ -920,8 +902,6 @@ Partial Class sdgPlots
     Friend WithEvents ucr2ndFactorReceiver As ucrReceiverSingle
     Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
     Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents chkConnect As CheckBox
-    Friend WithEvents chkDotPlot As CheckBox
     Friend WithEvents chkMargin As CheckBox
     Friend WithEvents chkFreeScalesY As CheckBox
     Friend WithEvents chkIncludeFacets As CheckBox
@@ -978,6 +958,7 @@ Partial Class sdgPlots
     Friend WithEvents chkOverideTheme As CheckBox
     Friend WithEvents nudFont As NumericUpDown
     Friend WithEvents lblFont As Label
+    Friend WithEvents ucrPlotsAdditionalLayers As ucrAdditionalLayers
 End Class
 
 
