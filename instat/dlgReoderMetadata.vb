@@ -37,6 +37,7 @@ Public Class dlgReoderMetadata
     Private Sub InitialiseDialog()
         ucrReorderMetadata.setDataframes(ucrDataFrameReoderMetadata)
         ucrReorderMetadata.setDataType("metadata")
+        ucrBase.iHelpTopicID = 56
     End Sub
 
     Private Sub setDefaults()

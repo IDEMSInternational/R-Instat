@@ -49,6 +49,7 @@ Public Class dlgRenameDescriptive
         ucrReceiverCurrentName.SetMeAsReceiver()
         ucrSelectorForRenameObject.SetItemType("object")
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_object")
+        ucrBase.iHelpTopicID = 350
     End Sub
 
     Private Sub SetDefaults()

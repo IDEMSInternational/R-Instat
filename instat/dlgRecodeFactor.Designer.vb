@@ -107,6 +107,7 @@ Partial Class dlgRecodeFactor
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgRecodeFactor"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Recode Factor"
         Me.ResumeLayout(False)
         Me.PerformLayout()

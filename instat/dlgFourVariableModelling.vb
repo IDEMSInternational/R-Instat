@@ -38,14 +38,14 @@ Public Class dlgFourVariableModelling
     Private Sub InitialiseDialog()
         ucrBaseFourVariableModelling.clsRsyntax.iCallType = 2
         clsModel.SetOperation("~")
-        clsModel2.SetOperation("|")
         ucrBaseFourVariableModelling.clsRsyntax.SetFunction("")
         ucrResponse.Selector = ucrSelectorFourVariableModelling
         ucrFirstExplanatory.Selector = ucrSelectorFourVariableModelling
-        ucrFirstRandomEffect.Selector = ucrSelectorFourVariableModelling
-        ucrSecondRandomEffect.Selector = ucrSelectorFourVariableModelling
+        ucrSecondExplanatoryVariable.Selector = ucrSelectorFourVariableModelling
+        ucrThirdExplanatoryVariable.Selector = ucrSelectorFourVariableModelling
         ucrBaseFourVariableModelling.iHelpTopicID = 176 'this is not the correct ID
         ucrFamily.SetGLMDistributions()
+        ucrModelName.SetDataFrameSelector(ucrSelectorFourVariableModelling.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("reg")
         ucrModelName.SetItemsTypeAsModels()
         ucrModelName.SetDefaultTypeAsModel()
@@ -69,7 +69,9 @@ Public Class dlgFourVariableModelling
         ucrSelectorFourVariableModelling.Reset()
         ucrResponse.SetMeAsReceiver()
         ucrSelectorFourVariableModelling.Focus()
-        operation = "+"
+        cboModelOperators1.SelectedItem = "+"
+        cboModelOperators2.SelectedItem = "|"
+        'operation = "+"
         chkSaveModel.Checked = True
         ucrModelName.Visible = True
         chkConvertToVariate.Checked = False
@@ -84,7 +86,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Public Sub TestOKEnabled()
-        If (Not ucrResponse.IsEmpty()) And (Not ucrFirstExplanatory.IsEmpty()) And (Not ucrFirstRandomEffect.IsEmpty()) And (Not ucrSecondRandomEffect.IsEmpty()) And (operation <> "") Then
+        If (Not ucrResponse.IsEmpty()) And (Not ucrFirstExplanatory.IsEmpty()) And (Not ucrSecondExplanatoryVariable.IsEmpty()) And (Not ucrThirdExplanatoryVariable.IsEmpty()) And (operation <> "") Then
             clsModel2.bBrackets = False
             clsModel1.SetParameter(False, strValue:="(" & clsModel2.ToScript.ToString & ")")
             clsModel1.SetOperation(operation)
@@ -101,10 +103,6 @@ Public Class dlgFourVariableModelling
     Private Sub ucrSelectorThreeVariableModelling_DataFrameChanged() Handles ucrSelectorFourVariableModelling.DataFrameChanged
         ucrBaseFourVariableModelling.clsRsyntax.AddParameter("data", clsRFunctionParameter:=ucrSelectorFourVariableModelling.ucrAvailableDataFrames.clsCurrDataFrame)
         AssignModelName()
-    End Sub
-
-    Private Sub cmdRegressionOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.ShowDialog()
     End Sub
 
     Public Sub ResponseConvert()
@@ -178,12 +176,12 @@ Public Class dlgFourVariableModelling
         'ucrModelPreview.SetName(clsModel.ToScript)
     End Sub
 
-    Private Sub ucrFirstRandomEffect_SelectionChanged() Handles ucrFirstRandomEffect.SelectionChanged
-        clsModel2.SetParameter(True, strValue:=ucrFirstRandomEffect.GetVariableNames(bWithQuotes:=False))
+    Private Sub ucrFirstRandomEffect_SelectionChanged() Handles ucrSecondExplanatoryVariable.SelectionChanged
+        clsModel2.SetParameter(True, strValue:=ucrSecondExplanatoryVariable.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
-    Private Sub ucrSecondRandomEffect_SelectionChanged() Handles ucrSecondRandomEffect.SelectionChanged
-        clsModel2.SetParameter(False, strValue:=ucrSecondRandomEffect.GetVariableNames(bWithQuotes:=False))
+    Private Sub ucrSecondRandomEffect_SelectionChanged() Handles ucrThirdExplanatoryVariable.SelectionChanged
+        clsModel2.SetParameter(False, strValue:=ucrThirdExplanatoryVariable.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
@@ -204,25 +202,25 @@ Public Class dlgFourVariableModelling
         sdgSimpleRegOptions.ShowDialog()
     End Sub
 
-    Private Sub cmdParallelLines_Click(sender As Object, e As EventArgs) Handles cmdParallelLines.Click
-        operation = "+"
-        TestOKEnabled()
-    End Sub
+    'Private Sub cmdParallelLines_Click(sender As Object, e As EventArgs) Handles cmdParallelLines.Click
+    '    operation = "+"
+    '    TestOKEnabled()
+    'End Sub
 
-    Private Sub cmdConditional_Click(sender As Object, e As EventArgs) Handles cmdConditional.Click
-        operation = ":"
-        TestOKEnabled()
-    End Sub
+    'Private Sub cmdConditional_Click(sender As Object, e As EventArgs) Handles cmdConditional.Click
+    '    operation = ":"
+    '    TestOKEnabled()
+    'End Sub
 
-    Private Sub cmdJointLines_Click(sender As Object, e As EventArgs) Handles cmdJointLines.Click
-        operation = "*"
-        TestOKEnabled()
-    End Sub
+    'Private Sub cmdJointLines_Click(sender As Object, e As EventArgs) Handles cmdJointLines.Click
+    '    operation = "*"
+    '    TestOKEnabled()
+    'End Sub
 
-    Private Sub cmdCommonIntercept_Click(sender As Object, e As EventArgs) Handles cmdCommonIntercept.Click
-        operation = "/"
-        TestOKEnabled()
-    End Sub
+    'Private Sub cmdCommonIntercept_Click(sender As Object, e As EventArgs) Handles cmdCommonIntercept.Click
+    '    operation = "/"
+    '    TestOKEnabled()
+    'End Sub
 
     Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
         If chkSaveModel.Checked Then
@@ -244,19 +242,57 @@ Public Class dlgFourVariableModelling
         End If
     End Sub
 
-    Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+    Private Sub cboModelOperators1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboModelOperators1.SelectedIndexChanged
+        operation = cboModelOperators1.SelectedItem.ToString
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cboModelOperators2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboModelOperators2.SelectedIndexChanged
+        ChooseRFunction()
+        clsModel2.SetOperation(cboModelOperators2.SelectedItem.ToString)
+        TestOKEnabled()
+    End Sub
+
+    Public Sub ChooseRFunction()
         sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
         'TODO:   Include multinomial as an option And the appropriate function
-        If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
+        If (ucrFamily.clsCurrDistribution.strNameTag = "Normal" And cboModelOperators2.SelectedItem.ToString <> "|") Then
+            ucrBaseFourVariableModelling.clsRsyntax.SetFunction("lm")
+            ucrBaseFourVariableModelling.clsRsyntax.RemoveParameter("family")
+        ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Normal" And cboModelOperators2.SelectedItem.ToString = "|") Then
             ucrBaseFourVariableModelling.clsRsyntax.SetFunction("lmer")
             ucrBaseFourVariableModelling.clsRsyntax.RemoveParameter("family")
-        Else
+        ElseIf (ucrFamily.clsCurrDistribution.strNameTag <> "Normal" And cboModelOperators2.SelectedItem.ToString = "|") Then
             clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
             ucrBaseFourVariableModelling.clsRsyntax.SetFunction("glmer")
             ucrBaseFourVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
+        Else
+            clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
+            ucrBaseFourVariableModelling.clsRsyntax.SetFunction("glm")
+            ucrBaseFourVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
         End If
+    End Sub
+
+    Private Sub ucrSecondRandomEffect_SelectionChanged(sender As Object, e As EventArgs) Handles ucrThirdExplanatoryVariable.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrFirstRandomEffect_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondExplanatoryVariable.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrFirstExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFirstExplanatory.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
+    End Sub
+
+    Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+        ChooseRFunction()
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click

@@ -35,7 +35,7 @@ Public Class dlgFreezeColumns
     End Sub
 
     Private Sub InitialiseDialog()
-        'ucrBaseforFreezeColumns.iHelpTopicID = 165
+        ucrBaseforFreezeColumns.iHelpTopicID = 444
         ucrReceiverMultipleforFreezeColumns.Selector = ucrSelectorByDataFrameAddRemoveforFreezeColumns
         ucrReceiverMultipleforFreezeColumns.SetMeAsReceiver()
         ucrBaseforFreezeColumns.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_freeze_columns")
