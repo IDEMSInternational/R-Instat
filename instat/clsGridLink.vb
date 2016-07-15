@@ -75,9 +75,9 @@ Public Class clsGridLink
                     frmMain.clsRLink.clsEngine.Evaluate(strDataName & "<-" & frmMain.clsRLink.strInstatDataObject & "$get_data_frame(" & Chr(34) & strDataName & Chr(34) & ", convert_to_character = TRUE, include_hidden_columns = FALSE, use_current_filter = TRUE)")
                     dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(strDataName).AsCharacterMatrix()
                     If frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$filter_applied(data_name = " & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0) Then
-                        FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=True)
+                        FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=True, bCheckFreezeColumns:=True)
                     Else
-                        FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i)
+                        FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bCheckFreezeColumns:=True)
                     End If
                     frmEditor.SetColumnNames(strDataName, dfTemp.ColumnNames())
                     frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_data_frames_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
@@ -256,17 +256,19 @@ Public Class clsGridLink
         UpdateGrids()
     End Sub
 
-    Public Sub FillSheet(dfTemp As CharacterMatrix, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1, Optional bFilterApplied As Boolean = False)
+    Public Sub FillSheet(dfTemp As CharacterMatrix, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1, Optional bFilterApplied As Boolean = False, Optional bCheckFreezeColumns As Boolean = False)
         Dim bFoundWorksheet As Boolean = False
         Dim tempWorkSheet As Worksheet
         Dim fillWorkSheet As Worksheet
         Dim rngDataRange As RangePosition
         Dim vecColumnDataTypes As CharacterVector
         Dim clsGetVarMetaFunc As New RFunction
+        Dim clsIsVarMetaFunc As New RFunction
         Dim iCurrPosition As Integer
         Dim iCount As Integer
         Dim strRowNames As String()
         Dim strColumnNames As String()
+        Dim bIsFrozen As Boolean
 
         iCount = 0
         For Each tempWorkSheet In grdCurr.Worksheets
@@ -349,6 +351,35 @@ Public Class clsGridLink
         Catch ex As Exception
             'TODO what to do in this case?
         End Try
+        If grdCurr.CurrentWorksheet.IsFrozen() Then
+            grdCurr.CurrentWorksheet.FreezeToCell(row:=0, col:=0)
+        End If
+        If bCheckFreezeColumns AndAlso frmMain.clsRLink.bInstatObjectExists Then
+            clsGetVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+            clsGetVarMetaFunc.ClearParameters()
+            clsGetVarMetaFunc.AddParameter("data_name", Chr(34) & strName & Chr(34))
+            clsGetVarMetaFunc.AddParameter("property", "is_frozen_label")
+
+            clsIsVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$is_variables_metadata")
+            clsIsVarMetaFunc.AddParameter("data_name", Chr(34) & strName & Chr(34))
+            clsIsVarMetaFunc.AddParameter("property", "is_frozen_label")
+
+            bIsFrozen = frmMain.clsRLink.RunInternalScriptGetValue(clsIsVarMetaFunc.ToScript()).AsLogical(0)
+            If bIsFrozen Then
+                For k As Integer = 0 To dfTemp.ColumnCount - 1
+                    clsGetVarMetaFunc.AddParameter("column", Chr(34) & strColumnNames(k) & Chr(34))
+                    bIsFrozen = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVarMetaFunc.ToScript()).AsLogical(0)
+                    If bIsFrozen Then
+                        If k = dfTemp.ColumnCount - 1 Then
+                            MsgBox("Cannot freeze all columns.", Title:="Cannot freeze")
+                        Else
+                            grdCurr.CurrentWorksheet.FreezeToCell(row:=0, col:=k + 1)
+                        End If
+                        Exit For
+                    End If
+                Next
+            End If
+        End If
 
     End Sub
 
