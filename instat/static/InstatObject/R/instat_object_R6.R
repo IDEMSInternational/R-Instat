@@ -888,3 +888,8 @@ instat_object$set("public","is_variables_metadata", function(data_name, property
   self$get_data_objects(data_name)$is_variables_metadata(property)
 } 
 )
+
+instat_object$set("public","data_frame_exists", function(data_name) {
+  return(data_name %in% names(private$.data_objects))
+} 
+)
