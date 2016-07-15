@@ -33,6 +33,8 @@ Public Class frmEditor
     Private clsDeleteRows As New RFunction
     Private clsReplaceValue As New RFunction
     Private clsRemoveFilter As New RFunction
+    Private clsFreezeColumns As New RFunction
+    Private clsUnfreezeColumns As New RFunction
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -67,6 +69,8 @@ Public Class frmEditor
         clsUnhideAllColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unhide_all_columns")
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
+        clsFreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$freeze_columns")
+        clsUnfreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unfreeze_columns")
         UpdateRFunctionDataFrameParameters()
     End Sub
 
@@ -510,6 +514,8 @@ Public Class frmEditor
             clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsReplaceValue.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsRemoveFilter.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsFreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsUnfreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
         End If
     End Sub
 
@@ -542,4 +548,19 @@ Public Class frmEditor
         dlgSort.ShowDialog()
     End Sub
 
+    Private Sub FreezeToHereToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FreezeToHereToolStripMenuItem.Click
+        Dim strLastSelectedColumn As String
+        Dim strSelectedColumns As String()
+
+        strSelectedColumns = SelectedColumnsAsArray()
+        If strSelectedColumns.Length <> 0 Then
+            strLastSelectedColumn = strSelectedColumns(strSelectedColumns.Length - 1)
+            clsFreezeColumns.AddParameter("column", Chr(34) & strLastSelectedColumn & Chr(34))
+            frmMain.clsRLink.RunScript(clsFreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
+        End If
+    End Sub
+
+    Private Sub UnfreezeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnfreezeToolStripMenuItem.Click
+        frmMain.clsRLink.RunScript(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
+    End Sub
 End Class
