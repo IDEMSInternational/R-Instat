@@ -23,10 +23,7 @@ Partial Class ucrLayerParamsControls
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.chkParamName = New System.Windows.Forms.CheckBox()
-        Me.nudParamValue = New System.Windows.Forms.NumericUpDown()
-        Me.ucrcborParamValue = New instat.ucrInputComboBox()
-        Me.ucrColor = New instat.ucrColors()
-        CType(Me.nudParamValue, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrReceiverMetadataProperty = New instat.ucrReceiverMetadataProperty()
         Me.SuspendLayout()
         '
         'chkParamName
@@ -38,47 +35,26 @@ Partial Class ucrLayerParamsControls
         Me.chkParamName.TabIndex = 0
         Me.chkParamName.UseVisualStyleBackColor = True
         '
-        'nudParamValue
+        'ucrReceiverMetadataProperty
         '
-        Me.nudParamValue.Location = New System.Drawing.Point(133, 3)
-        Me.nudParamValue.Name = "nudParamValue"
-        Me.nudParamValue.Size = New System.Drawing.Size(53, 20)
-        Me.nudParamValue.TabIndex = 1
-        '
-        'ucrcborParamValue
-        '
-        Me.ucrcborParamValue.IsReadOnly = False
-        Me.ucrcborParamValue.Location = New System.Drawing.Point(133, 3)
-        Me.ucrcborParamValue.Name = "ucrcborParamValue"
-        Me.ucrcborParamValue.Size = New System.Drawing.Size(154, 21)
-        Me.ucrcborParamValue.TabIndex = 2
-        '
-        'ucrColor
-        '
-        Me.ucrColor.IsReadOnly = False
-        Me.ucrColor.Location = New System.Drawing.Point(133, 3)
-        Me.ucrColor.Name = "ucrColor"
-        Me.ucrColor.Size = New System.Drawing.Size(154, 21)
-        Me.ucrColor.TabIndex = 3
+        Me.ucrReceiverMetadataProperty.Location = New System.Drawing.Point(101, 1)
+        Me.ucrReceiverMetadataProperty.Name = "ucrReceiverMetadataProperty"
+        Me.ucrReceiverMetadataProperty.Size = New System.Drawing.Size(137, 23)
+        Me.ucrReceiverMetadataProperty.TabIndex = 1
         '
         'ucrLayerParamsControls
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrColor)
-        Me.Controls.Add(Me.ucrcborParamValue)
-        Me.Controls.Add(Me.nudParamValue)
+        Me.Controls.Add(Me.ucrReceiverMetadataProperty)
         Me.Controls.Add(Me.chkParamName)
         Me.Name = "ucrLayerParamsControls"
-        Me.Size = New System.Drawing.Size(290, 25)
-        CType(Me.nudParamValue, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Size = New System.Drawing.Size(240, 25)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents chkParamName As CheckBox
-    Friend WithEvents nudParamValue As NumericUpDown
-    Friend WithEvents ucrcborParamValue As ucrInputComboBox
-    Friend WithEvents ucrColor As ucrColors
+    Friend WithEvents ucrReceiverMetadataProperty As ucrReceiverMetadataProperty
 End Class
