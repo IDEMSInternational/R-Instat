@@ -444,7 +444,7 @@ data_object$set("public", "replace_value_in_data", function(col_name = "", row, 
   old_value <- private$data[[col_name]][[index]]
   str_data_type <-self$get_variables_metadata(property = data_type_label, column = col_name)
   if(str_data_type == "factor") {
-    if(!(new_value %in% levels(private$data[[col_name]]))) {
+    if(!is.na(new_value) && !(new_value %in% levels(private$data[[col_name]]))) {
       stop(new_value, " is not an existing level of the factor")
     }
   }
@@ -1151,5 +1151,16 @@ data_object$set("public", "data_clone", function() {
   filters_clone = lapply(private$filters, function(x) x$data_clone())
   ret = data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), variables_metadata = private$variables_metadata, filters = filters_clone, objects = private$objects)
   return(ret)
+}
+)
+
+data_object$set("public", "freeze_columns", function(column) {
+  self$unfreeze_columns()
+  self$append_to_variables_metadata(column, is_frozen_label, TRUE)
+}
+)
+
+data_object$set("public", "unfreeze_columns", function() {
+  self$append_to_variables_metadata(self$get_column_names(), is_frozen_label, FALSE)
 }
 )
