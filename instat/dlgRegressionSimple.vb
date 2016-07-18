@@ -73,6 +73,7 @@ Public Class dlgRegressionSimple
         sdgSimpleRegOptions.SetDefaults()
         sdgModelOptions.SetDefaults()
         ucrModelName.Reset()
+        ucrModelPreview.IsEmpty()
         ucrModelPreview.Reset()
         ResponseConvert()
         TestOKEnabled()
@@ -82,6 +83,7 @@ Public Class dlgRegressionSimple
         If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso (chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty() OrElse Not chkSaveModel.Checked) Then
             ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
             ucrBase.OKEnabled(True)
+            ucrModelPreview.SetName(clsModel.ToScript)
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -98,8 +100,8 @@ Public Class dlgRegressionSimple
 
     Public Sub ResponseConvert()
         If Not ucrResponse.IsEmpty Then
-            ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
 
+            ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             If ucrFamily.strDataType = "numeric" Then
                 chkConvertToVariate.Checked = False
                 chkConvertToVariate.Visible = False
@@ -130,13 +132,13 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrResponse.SelectionChanged
-        ucrModelPreview.SetName(clsModel.ToScript)
         ResponseConvert()
         TestOKEnabled()
     End Sub
 
-    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
         ResponseConvert()
+        TestOKEnabled()
     End Sub
 
     Private Sub ExplanatoryFunctionSelect()
@@ -156,12 +158,10 @@ Public Class dlgRegressionSimple
                 clsModel.SetParameter(False, strValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
             End If
         End If
-        ucrModelPreview.SetName(clsModel.ToScript)
     End Sub
 
     Private Sub ucrExplanatory_SelectionChanged() Handles ucrExplanatory.SelectionChanged
         ExplanatoryFunctionSelect()
-        ucrModelPreview.SetName(clsModel.ToScript)
         TestOKEnabled()
     End Sub
 
@@ -218,24 +218,11 @@ Public Class dlgRegressionSimple
         ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
     End Sub
 
-    Private Sub chkConvertToVariate_CheckedChanged_1(sender As Object, e As EventArgs)
-        ResponseConvert()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
-
-    End Sub
-
     Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
         If chkFunction.Checked Then
             sdgVariableTransformations.ShowDialog()
         End If
         ExplanatoryFunctionSelect()
+        TestOKEnabled()
     End Sub
-
 End Class
