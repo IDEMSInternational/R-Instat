@@ -20,6 +20,6 @@ Public Class dlgReplace
     End Sub
 
     Private Sub InitilaiseDialogue()
-        ucrBase.iHelpTopicID = 47
+        ucrBaseReplace.iHelpTopicID = 47
     End Sub
 End Class

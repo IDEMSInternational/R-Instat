@@ -22,172 +22,233 @@ Partial Class dlgReplace
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblFindWhat = New System.Windows.Forms.Label()
-        Me.lblReplaceWith = New System.Windows.Forms.Label()
-        Me.txtFindwhat = New System.Windows.Forms.TextBox()
-        Me.txtReplaceWith = New System.Windows.Forms.TextBox()
-        Me.btnFindNext = New System.Windows.Forms.Button()
-        Me.btnReplace = New System.Windows.Forms.Button()
-        Me.btnReplaceAll = New System.Windows.Forms.Button()
-        Me.btnClose = New System.Windows.Forms.Button()
-        Me.chkFindWholeWordOnly = New System.Windows.Forms.CheckBox()
-        Me.chkMatchCase = New System.Windows.Forms.CheckBox()
-        Me.chkSearchToEndOnly = New System.Windows.Forms.CheckBox()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrBaseReplace = New instat.ucrButtons()
+        Me.ucrSelectorReplace = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverReplace = New instat.ucrReceiverMultiple()
+        Me.grpOld = New System.Windows.Forms.GroupBox()
+        Me.grpNew = New System.Windows.Forms.GroupBox()
+        Me.rdoOldValue = New System.Windows.Forms.RadioButton()
+        Me.rdoOldMissing = New System.Windows.Forms.RadioButton()
+        Me.rdoRange = New System.Windows.Forms.RadioButton()
+        Me.rdoFromAbove = New System.Windows.Forms.RadioButton()
+        Me.rdoNewMissing = New System.Windows.Forms.RadioButton()
+        Me.rdoNewValue = New System.Windows.Forms.RadioButton()
+        Me.ucrInputOldValue = New instat.ucrInputTextBox()
+        Me.ucrInputRangeFro = New instat.ucrInputTextBox()
+        Me.ucrInputRangeTo = New instat.ucrInputTextBox()
+        Me.ucrInputNewValue = New instat.ucrInputTextBox()
+        Me.lblSelectedColumns = New System.Windows.Forms.Label()
+        Me.grpOld.SuspendLayout()
+        Me.grpNew.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblFindWhat
+        'ucrBaseReplace
         '
-        Me.lblFindWhat.AutoSize = True
-        Me.lblFindWhat.Location = New System.Drawing.Point(13, 13)
-        Me.lblFindWhat.Name = "lblFindWhat"
-        Me.lblFindWhat.Size = New System.Drawing.Size(53, 13)
-        Me.lblFindWhat.TabIndex = 0
-        Me.lblFindWhat.Tag = "Find_what"
-        Me.lblFindWhat.Text = "Find what"
+        Me.ucrBaseReplace.Location = New System.Drawing.Point(4, 318)
+        Me.ucrBaseReplace.Name = "ucrBaseReplace"
+        Me.ucrBaseReplace.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBaseReplace.TabIndex = 8
         '
-        'lblReplaceWith
+        'ucrSelectorReplace
         '
-        Me.lblReplaceWith.AutoSize = True
-        Me.lblReplaceWith.Location = New System.Drawing.Point(13, 47)
-        Me.lblReplaceWith.Name = "lblReplaceWith"
-        Me.lblReplaceWith.Size = New System.Drawing.Size(69, 13)
-        Me.lblReplaceWith.TabIndex = 0
-        Me.lblReplaceWith.Tag = "Replace_with"
-        Me.lblReplaceWith.Text = "Replace with"
+        Me.ucrSelectorReplace.bShowHiddenColumns = False
+        Me.ucrSelectorReplace.Location = New System.Drawing.Point(12, 6)
+        Me.ucrSelectorReplace.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorReplace.Name = "ucrSelectorReplace"
+        Me.ucrSelectorReplace.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorReplace.TabIndex = 9
         '
-        'txtFindwhat
+        'ucrReceiverReplace
         '
-        Me.txtFindwhat.Location = New System.Drawing.Point(109, 13)
-        Me.txtFindwhat.Name = "txtFindwhat"
-        Me.txtFindwhat.Size = New System.Drawing.Size(100, 20)
-        Me.txtFindwhat.TabIndex = 1
-        Me.txtFindwhat.Tag = "Find_What"
+        Me.ucrReceiverReplace.Location = New System.Drawing.Point(275, 61)
+        Me.ucrReceiverReplace.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverReplace.Name = "ucrReceiverReplace"
+        Me.ucrReceiverReplace.Selector = Nothing
+        Me.ucrReceiverReplace.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverReplace.TabIndex = 10
         '
-        'txtReplaceWith
+        'grpOld
         '
-        Me.txtReplaceWith.Location = New System.Drawing.Point(109, 56)
-        Me.txtReplaceWith.Name = "txtReplaceWith"
-        Me.txtReplaceWith.Size = New System.Drawing.Size(100, 20)
-        Me.txtReplaceWith.TabIndex = 1
+        Me.grpOld.Controls.Add(Me.ucrInputRangeTo)
+        Me.grpOld.Controls.Add(Me.ucrInputRangeFro)
+        Me.grpOld.Controls.Add(Me.ucrInputOldValue)
+        Me.grpOld.Controls.Add(Me.rdoRange)
+        Me.grpOld.Controls.Add(Me.rdoOldMissing)
+        Me.grpOld.Controls.Add(Me.rdoOldValue)
+        Me.grpOld.Location = New System.Drawing.Point(12, 189)
+        Me.grpOld.Name = "grpOld"
+        Me.grpOld.Size = New System.Drawing.Size(179, 123)
+        Me.grpOld.TabIndex = 11
+        Me.grpOld.TabStop = False
+        Me.grpOld.Tag = "Old"
+        Me.grpOld.Text = "Old"
         '
-        'btnFindNext
+        'grpNew
         '
-        Me.btnFindNext.Location = New System.Drawing.Point(267, 66)
-        Me.btnFindNext.Name = "btnFindNext"
-        Me.btnFindNext.Size = New System.Drawing.Size(75, 23)
-        Me.btnFindNext.TabIndex = 3
-        Me.btnFindNext.Tag = "Find_next"
-        Me.btnFindNext.Text = "Find next"
-        Me.btnFindNext.UseVisualStyleBackColor = True
+        Me.grpNew.Controls.Add(Me.ucrInputNewValue)
+        Me.grpNew.Controls.Add(Me.rdoNewMissing)
+        Me.grpNew.Controls.Add(Me.rdoNewValue)
+        Me.grpNew.Controls.Add(Me.rdoFromAbove)
+        Me.grpNew.Location = New System.Drawing.Point(221, 201)
+        Me.grpNew.Name = "grpNew"
+        Me.grpNew.Size = New System.Drawing.Size(174, 94)
+        Me.grpNew.TabIndex = 12
+        Me.grpNew.TabStop = False
+        Me.grpNew.Tag = "New"
+        Me.grpNew.Text = "New"
         '
-        'btnReplace
+        'rdoOldValue
         '
-        Me.btnReplace.Location = New System.Drawing.Point(267, 95)
-        Me.btnReplace.Name = "btnReplace"
-        Me.btnReplace.Size = New System.Drawing.Size(75, 23)
-        Me.btnReplace.TabIndex = 4
-        Me.btnReplace.Tag = "Replace"
-        Me.btnReplace.Text = "Replace"
-        Me.btnReplace.UseVisualStyleBackColor = True
+        Me.rdoOldValue.AutoSize = True
+        Me.rdoOldValue.Location = New System.Drawing.Point(7, 17)
+        Me.rdoOldValue.Name = "rdoOldValue"
+        Me.rdoOldValue.Size = New System.Drawing.Size(52, 17)
+        Me.rdoOldValue.TabIndex = 0
+        Me.rdoOldValue.TabStop = True
+        Me.rdoOldValue.Tag = "Value"
+        Me.rdoOldValue.Text = "Value"
+        Me.rdoOldValue.UseVisualStyleBackColor = True
         '
-        'btnReplaceAll
+        'rdoOldMissing
         '
-        Me.btnReplaceAll.Location = New System.Drawing.Point(267, 124)
-        Me.btnReplaceAll.Name = "btnReplaceAll"
-        Me.btnReplaceAll.Size = New System.Drawing.Size(75, 23)
-        Me.btnReplaceAll.TabIndex = 5
-        Me.btnReplaceAll.Tag = "Replace_all"
-        Me.btnReplaceAll.Text = "Replace all"
-        Me.btnReplaceAll.UseVisualStyleBackColor = True
+        Me.rdoOldMissing.AutoSize = True
+        Me.rdoOldMissing.Location = New System.Drawing.Point(7, 37)
+        Me.rdoOldMissing.Name = "rdoOldMissing"
+        Me.rdoOldMissing.Size = New System.Drawing.Size(60, 17)
+        Me.rdoOldMissing.TabIndex = 1
+        Me.rdoOldMissing.TabStop = True
+        Me.rdoOldMissing.Tag = "Missing"
+        Me.rdoOldMissing.Text = "Missing"
+        Me.rdoOldMissing.UseVisualStyleBackColor = True
         '
-        'btnClose
+        'rdoRange
         '
-        Me.btnClose.Location = New System.Drawing.Point(267, 153)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnClose.TabIndex = 6
-        Me.btnClose.Tag = "Close"
-        Me.btnClose.Text = "Close"
-        Me.btnClose.UseVisualStyleBackColor = True
+        Me.rdoRange.AutoSize = True
+        Me.rdoRange.Location = New System.Drawing.Point(6, 56)
+        Me.rdoRange.Name = "rdoRange"
+        Me.rdoRange.Size = New System.Drawing.Size(57, 17)
+        Me.rdoRange.TabIndex = 2
+        Me.rdoRange.TabStop = True
+        Me.rdoRange.Tag = "Range"
+        Me.rdoRange.Text = "Range"
+        Me.rdoRange.UseVisualStyleBackColor = True
         '
-        'chkFindWholeWordOnly
+        'rdoFromAbove
         '
-        Me.chkFindWholeWordOnly.AutoSize = True
-        Me.chkFindWholeWordOnly.Location = New System.Drawing.Point(0, 99)
-        Me.chkFindWholeWordOnly.Name = "chkFindWholeWordOnly"
-        Me.chkFindWholeWordOnly.Size = New System.Drawing.Size(128, 17)
-        Me.chkFindWholeWordOnly.TabIndex = 7
-        Me.chkFindWholeWordOnly.Tag = "Find_whole_word_only"
-        Me.chkFindWholeWordOnly.Text = "Find Whole word only"
-        Me.chkFindWholeWordOnly.UseVisualStyleBackColor = True
+        Me.rdoFromAbove.AutoSize = True
+        Me.rdoFromAbove.Location = New System.Drawing.Point(16, 70)
+        Me.rdoFromAbove.Name = "rdoFromAbove"
+        Me.rdoFromAbove.Size = New System.Drawing.Size(81, 17)
+        Me.rdoFromAbove.TabIndex = 3
+        Me.rdoFromAbove.TabStop = True
+        Me.rdoFromAbove.Tag = "From_above"
+        Me.rdoFromAbove.Text = "From above"
+        Me.rdoFromAbove.UseVisualStyleBackColor = True
         '
-        'chkMatchCase
+        'rdoNewMissing
         '
-        Me.chkMatchCase.AutoSize = True
-        Me.chkMatchCase.Location = New System.Drawing.Point(0, 124)
-        Me.chkMatchCase.Name = "chkMatchCase"
-        Me.chkMatchCase.Size = New System.Drawing.Size(82, 17)
-        Me.chkMatchCase.TabIndex = 7
-        Me.chkMatchCase.Tag = "Match_case"
-        Me.chkMatchCase.Text = "Match case"
-        Me.chkMatchCase.UseVisualStyleBackColor = True
+        Me.rdoNewMissing.AutoSize = True
+        Me.rdoNewMissing.Location = New System.Drawing.Point(13, 43)
+        Me.rdoNewMissing.Name = "rdoNewMissing"
+        Me.rdoNewMissing.Size = New System.Drawing.Size(60, 17)
+        Me.rdoNewMissing.TabIndex = 5
+        Me.rdoNewMissing.TabStop = True
+        Me.rdoNewMissing.Tag = "Missing"
+        Me.rdoNewMissing.Text = "Missing"
+        Me.rdoNewMissing.UseVisualStyleBackColor = True
         '
-        'chkSearchToEndOnly
+        'rdoNewValue
         '
-        Me.chkSearchToEndOnly.AutoSize = True
-        Me.chkSearchToEndOnly.Location = New System.Drawing.Point(0, 153)
-        Me.chkSearchToEndOnly.Name = "chkSearchToEndOnly"
-        Me.chkSearchToEndOnly.Size = New System.Drawing.Size(115, 17)
-        Me.chkSearchToEndOnly.TabIndex = 7
-        Me.chkSearchToEndOnly.Tag = "Search_to_end_only"
-        Me.chkSearchToEndOnly.Text = "Search to end only"
-        Me.chkSearchToEndOnly.UseVisualStyleBackColor = True
+        Me.rdoNewValue.AutoSize = True
+        Me.rdoNewValue.Location = New System.Drawing.Point(13, 20)
+        Me.rdoNewValue.Name = "rdoNewValue"
+        Me.rdoNewValue.Size = New System.Drawing.Size(52, 17)
+        Me.rdoNewValue.TabIndex = 4
+        Me.rdoNewValue.TabStop = True
+        Me.rdoNewValue.Tag = "Value"
+        Me.rdoNewValue.Text = "Value"
+        Me.rdoNewValue.UseVisualStyleBackColor = True
         '
-        'ucrBase
+        'ucrInputOldValue
         '
-        Me.ucrBase.Location = New System.Drawing.Point(4, 222)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 8
+        Me.ucrInputOldValue.IsReadOnly = False
+        Me.ucrInputOldValue.Location = New System.Drawing.Point(84, 14)
+        Me.ucrInputOldValue.Name = "ucrInputOldValue"
+        Me.ucrInputOldValue.Size = New System.Drawing.Size(51, 21)
+        Me.ucrInputOldValue.TabIndex = 3
+        '
+        'ucrInputRangeFro
+        '
+        Me.ucrInputRangeFro.IsReadOnly = False
+        Me.ucrInputRangeFro.Location = New System.Drawing.Point(51, 72)
+        Me.ucrInputRangeFro.Name = "ucrInputRangeFro"
+        Me.ucrInputRangeFro.Size = New System.Drawing.Size(69, 21)
+        Me.ucrInputRangeFro.TabIndex = 4
+        '
+        'ucrInputRangeTo
+        '
+        Me.ucrInputRangeTo.IsReadOnly = False
+        Me.ucrInputRangeTo.Location = New System.Drawing.Point(53, 98)
+        Me.ucrInputRangeTo.Name = "ucrInputRangeTo"
+        Me.ucrInputRangeTo.Size = New System.Drawing.Size(69, 21)
+        Me.ucrInputRangeTo.TabIndex = 5
+        '
+        'ucrInputNewValue
+        '
+        Me.ucrInputNewValue.IsReadOnly = False
+        Me.ucrInputNewValue.Location = New System.Drawing.Point(90, 16)
+        Me.ucrInputNewValue.Name = "ucrInputNewValue"
+        Me.ucrInputNewValue.Size = New System.Drawing.Size(69, 21)
+        Me.ucrInputNewValue.TabIndex = 6
+        '
+        'lblSelectedColumns
+        '
+        Me.lblSelectedColumns.AutoSize = True
+        Me.lblSelectedColumns.Location = New System.Drawing.Point(283, 41)
+        Me.lblSelectedColumns.Name = "lblSelectedColumns"
+        Me.lblSelectedColumns.Size = New System.Drawing.Size(98, 13)
+        Me.lblSelectedColumns.TabIndex = 13
+        Me.lblSelectedColumns.Tag = "Selected_Column(s)"
+        Me.lblSelectedColumns.Text = "Selected Column(s)"
         '
         'dlgReplace
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(407, 275)
-        Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.chkSearchToEndOnly)
-        Me.Controls.Add(Me.chkMatchCase)
-        Me.Controls.Add(Me.chkFindWholeWordOnly)
-        Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.btnReplaceAll)
-        Me.Controls.Add(Me.btnReplace)
-        Me.Controls.Add(Me.btnFindNext)
-        Me.Controls.Add(Me.txtReplaceWith)
-        Me.Controls.Add(Me.txtFindwhat)
-        Me.Controls.Add(Me.lblReplaceWith)
-        Me.Controls.Add(Me.lblFindWhat)
+        Me.ClientSize = New System.Drawing.Size(419, 376)
+        Me.Controls.Add(Me.lblSelectedColumns)
+        Me.Controls.Add(Me.grpNew)
+        Me.Controls.Add(Me.grpOld)
+        Me.Controls.Add(Me.ucrReceiverReplace)
+        Me.Controls.Add(Me.ucrSelectorReplace)
+        Me.Controls.Add(Me.ucrBaseReplace)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgReplace"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Replace"
         Me.Text = "Replace"
+        Me.grpOld.ResumeLayout(False)
+        Me.grpOld.PerformLayout()
+        Me.grpNew.ResumeLayout(False)
+        Me.grpNew.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents lblFindWhat As Label
-    Friend WithEvents lblReplaceWith As Label
-    Friend WithEvents txtFindwhat As TextBox
-    Friend WithEvents txtReplaceWith As TextBox
-    Friend WithEvents btnFindNext As Button
-    Friend WithEvents btnReplace As Button
-    Friend WithEvents btnReplaceAll As Button
-    Friend WithEvents btnClose As Button
-    Friend WithEvents chkFindWholeWordOnly As CheckBox
-    Friend WithEvents chkMatchCase As CheckBox
-    Friend WithEvents chkSearchToEndOnly As CheckBox
-    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrBaseReplace As ucrButtons
+    Friend WithEvents ucrSelectorReplace As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverReplace As ucrReceiverMultiple
+    Friend WithEvents grpOld As GroupBox
+    Friend WithEvents grpNew As GroupBox
+    Friend WithEvents ucrInputRangeTo As ucrInputTextBox
+    Friend WithEvents ucrInputRangeFro As ucrInputTextBox
+    Friend WithEvents ucrInputOldValue As ucrInputTextBox
+    Friend WithEvents rdoRange As RadioButton
+    Friend WithEvents rdoOldMissing As RadioButton
+    Friend WithEvents rdoOldValue As RadioButton
+    Friend WithEvents ucrInputNewValue As ucrInputTextBox
+    Friend WithEvents rdoNewMissing As RadioButton
+    Friend WithEvents rdoNewValue As RadioButton
+    Friend WithEvents rdoFromAbove As RadioButton
+    Friend WithEvents lblSelectedColumns As Label
 End Class
