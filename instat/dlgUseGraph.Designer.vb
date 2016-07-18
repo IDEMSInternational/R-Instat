@@ -39,6 +39,7 @@ Partial Class dlgUseGraph
         '
         'ucrGraphsSelector
         '
+        Me.ucrGraphsSelector.bShowHiddenColumns = False
         Me.ucrGraphsSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrGraphsSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrGraphsSelector.Name = "ucrGraphsSelector"

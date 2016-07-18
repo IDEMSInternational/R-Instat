@@ -56,6 +56,10 @@ Public Class ucrDataFrame
     Public Sub SetDataFrameProperties()
         Dim clsParam As New RParameter
         If cboAvailableDataFrames.Text <> "" AndAlso Not bIncludeOverall Then
+            If Not frmMain.clsRLink.DataFrameExists(cboAvailableDataFrames.Text) Then
+                Reset()
+                Exit Sub
+            End If
             iDataFrameLength = frmMain.clsRLink.GetDataFrameLength(cboAvailableDataFrames.Text)
             iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(cboAvailableDataFrames.Text)
             clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
@@ -72,7 +76,7 @@ Public Class ucrDataFrame
             clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
             clsCurrDataFrame.AddParameter(clsParam)
             clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.Text & "_temp")
-        End If
+            End If
     End Sub
 
     Public Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True)
