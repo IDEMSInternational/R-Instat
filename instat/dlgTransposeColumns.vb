@@ -31,6 +31,8 @@ Public Class dlgTransposeColumns
 
     Private Sub InitialiseDialog()
         ucrBaseTransposeColumns.clsRsyntax.SetFunction("")
+        clsTranspose.SetRCommand("t")
+        clsRToDataFrame.SetRCommand("as.data.frame") 'transposed data is in matrix form. We need to convert to dataframe inorder to write back
         ucrReceiverColumsToTranspose.Selector = ucrSelectorTransposeColumns
         ucrReceiverColumsToTranspose.SetMeAsReceiver()
         ucrBaseTransposeColumns.iHelpTopicID = 277
@@ -40,19 +42,14 @@ Public Class dlgTransposeColumns
     Private Sub SetDefaults()
         ucrSelectorTransposeColumns.Reset()
         ucrNewDataFrameName.Reset()
-        ucrReceiverColumsToTranspose.Selector = ucrSelectorTransposeColumns
-        ucrReceiverColumsToTranspose.SetMeAsReceiver()
         If (ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") Then
             ucrNewDataFrameName.SetName(ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_transposed")
         End If
         TestOkEnabled()
-
     End Sub
 
     Private Sub ReOpenDialog()
-        If ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrNewDataFrameName.SetName(ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_transposed")
-        End If
+
     End Sub
 
     Private Sub TestOkEnabled()
@@ -64,13 +61,10 @@ Public Class dlgTransposeColumns
     End Sub
 
     Public Sub ucrReceiverColumsToTranspose_SelectionChanged() Handles ucrReceiverColumsToTranspose.SelectionChanged
-        TestOkEnabled()
-        clsTranspose.SetRCommand("t")
         clsTranspose.AddParameter("x", clsRFunctionParameter:=ucrReceiverColumsToTranspose.GetVariables())
-        clsRToDataFrame.SetRCommand("as.data.frame")
         clsRToDataFrame.AddParameter("x", clsRFunctionParameter:=clsTranspose)
         ucrBaseTransposeColumns.clsRsyntax.AddParameter("", clsRFunctionParameter:=clsRToDataFrame)
-
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrSelectorTransposeColumns_DataFrameChanged() Handles ucrSelectorTransposeColumns.DataFrameChanged
@@ -87,6 +81,10 @@ Public Class dlgTransposeColumns
             ucrBaseTransposeColumns.clsRsyntax.RemoveAssignTo()
         End If
         TestOkEnabled()
+    End Sub
+
+    Private Sub chkNameNewColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkNameNewColumns.CheckedChanged
+        'this is not yet implemented.
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseTransposeColumns.ClickReset
