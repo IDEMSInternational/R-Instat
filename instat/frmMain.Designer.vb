@@ -2081,7 +2081,6 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnTextFindReplace
         '
-        Me.mnuOrganiseColumnTextFindReplace.Enabled = False
         Me.mnuOrganiseColumnTextFindReplace.Name = "mnuOrganiseColumnTextFindReplace"
         Me.mnuOrganiseColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseColumnTextFindReplace.Tag = "Find/Replace..."
