@@ -73,8 +73,7 @@ Public Class dlgRegressionSimple
         sdgSimpleRegOptions.SetDefaults()
         sdgModelOptions.SetDefaults()
         ucrModelName.Reset()
-        ucrModelPreview.IsEmpty()
-        ucrModelPreview.Reset()
+        ucrModelPreview.SetName("")
         ResponseConvert()
         TestOKEnabled()
     End Sub
