@@ -273,6 +273,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
+    if(missing(col_data)) stop("One of num_cols or col_data must be specified.")
     if(!missing(col_data) && (is.matrix(col_data) || is.data.frame(col_data))) {
       num_cols = ncol(col_data)
     }
@@ -291,7 +292,8 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
       col_name = colnames(col_data)
     }
     else {
-      stop("col_name missing and cannot detect colnames from col_data")
+      col_name = "X"
+      use_col_name_as_prefix = TRUE
     }
   }
   if(use_col_name_as_prefix && length(col_name) > 1) {
@@ -316,14 +318,10 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
   }
 
   for(i in 1:num_cols) {
-    if(!missing(col_data)) {
-      if(num_cols == 1) curr_col = col_data
-      else curr_col = unlist(col_data[,i])
-    }
-
+    if(num_cols == 1) curr_col = as.vector(col_data)
+    else curr_col = as.vector(col_data[,i])
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
-    
     if(curr_col_name %in% names(private$data)) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
       self$append_to_changes(list(Replaced_col, curr_col_name))
