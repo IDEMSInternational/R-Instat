@@ -93,8 +93,10 @@ Public Class frmEditor
             clsInsertColumns.RemoveParameterByName("before")
         End If
         'TODO This should be an option in dialog
-        clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
-        clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+        'This is now the default in the R method so not needed
+        'but should be added if user wants to change from default
+        'clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+        'clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
         frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
     End Sub
 
@@ -365,21 +367,25 @@ Public Class frmEditor
                         MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
                         e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
                     End If
-                Case "logical"
-                    'Should we accept 'true'/'false'/'True' etc. as logical values?
-                    If e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
-                        clsReplaceValue.AddParameter("new_value", e.NewData)
-                        bValid = True
-                    Else
-                        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: logical. Values must be logical (either TRUE or FALSE).", MsgBoxStyle.Exclamation, "Invalid Value")
-                        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
-                    End If
-                Case "character"
+                    'Currently removed as this is the class for a blank column
+                    'Case "logical"
+                    '    'Should we accept 'true'/'false'/'True' etc. as logical values?
+                    '    If e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
+                    '        clsReplaceValue.AddParameter("new_value", e.NewData)
+                    '        bValid = True
+                    '    Else
+                    '        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: logical. Values must be logical (either TRUE or FALSE).", MsgBoxStyle.Exclamation, "Invalid Value")
+                    '        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                    '    End If
+                    'Case "character"
                     clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
                     bValid = True
                 Case Else
-                    'Not sure this is sensible. Should probably consider all cases so Else never happens.
-                    clsReplaceValue.AddParameter("new_value", e.NewData)
+                    If Double.TryParse(e.NewData, dblValue) OrElse e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
+                        clsReplaceValue.AddParameter("new_value", e.NewData)
+                    Else
+                        clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
+                    End If
                     bValid = True
             End Select
         End If
