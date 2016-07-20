@@ -318,8 +318,11 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
   }
 
   for(i in 1:num_cols) {
-    if(num_cols == 1) curr_col = as.vector(col_data)
-    else curr_col = as.vector(col_data[,i])
+    if(num_cols == 1) {
+      curr_col = col_data
+    }
+    else curr_col = col_data[,i]
+    if(is.matrix(curr_col) || is.data.frame(curr_col)) curr_col = curr_col[,1]
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
     if(curr_col_name %in% names(private$data)) {
