@@ -644,17 +644,31 @@ data_object$set("public", "get_column_factor_levels", function(col_name = "") {
 }
 )
 
-data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing = TRUE, na.last = TRUE) {
+data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing = FALSE, na.last = TRUE, by_row_names = FALSE, row_names_as_numeric = TRUE) {
   string = list()
-  for(col_name in col_names){
-    if(!(col_name %in% names(private$data))){
-      stop(col_name, " is not a column in ", get_metadata(data_name_label))
+  if(missing(col_names) || length(col_names) == 0) {
+    if(by_row_names) {
+      if(row_names_as_numeric) {
+        self$set_data(private$data[order(as.numeric(row.names(private$data)), decreasing = decreasing),])
+      }
+      else {
+        self$set_data(private$data[order(row.names(private$data), decreasing = decreasing),])
+      }
     }
+    else message("No sorting to be done.")
   }
-  if(length(col_names)==1){
-    self$set_data(private$data[with(private$data, order(eval(parse(text = col_names)), decreasing = decreasing, na.last = na.last)), ])
-  }else{
-    self$set_data(private$data[ do.call(order, c(as.list(private$data[,col_names]), decreasing = decreasing, na.last = na.last)), ])
+  else {
+    for(col_name in col_names){
+      if(!(col_name %in% names(private$data))){
+        stop(col_name, " is not a column in ", get_metadata(data_name_label))
+      }
+    }
+    if(by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
+    if(length(col_names)==1){
+      self$set_data(private$data[with(private$data, order(eval(parse(text = col_names)), decreasing = decreasing, na.last = na.last)), ])
+    }else{
+      self$set_data(private$data[ do.call(order, c(as.list(private$data[,col_names]), decreasing = decreasing, na.last = na.last)), ])
+    }
   }
   self$data_changed <- TRUE
 }
