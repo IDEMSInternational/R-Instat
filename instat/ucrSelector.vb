@@ -292,4 +292,14 @@ Public Class ucrSelector
             sdgDataOptions.ShowHiddenColumns = bShowHiddenCols
         End Set
     End Property
+
+    Public Function ContainsVariable(strVar As String) As Boolean
+        Dim lviItem As ListViewItem
+        For Each lviItem In lstAvailableVariable.Items
+            If lviItem.Text = strVar Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
 End Class
