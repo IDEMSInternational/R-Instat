@@ -18,7 +18,7 @@ Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
 Imports instat.Translations
-
+Imports System.IO
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
     Private Panels As New List(Of Panel)()
@@ -28,6 +28,7 @@ Public Class dlgOptions
     Dim bFirstLoad As Boolean = True
     Dim fntOutput, fntCommand, fntComment, fntEditor As Font
     Dim clrOutput, clrCommand, clrComment, clrEditor As Color
+    Dim strWorkingDirectory As String
 
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -58,6 +59,9 @@ Public Class dlgOptions
         nudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
         nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         txtComment.Text = frmMain.clsInstatOptions.strComment
+
+        ucrWorkingDirectory.SetName(frmMain.strStaticPath)
+
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
@@ -141,7 +145,7 @@ Public Class dlgOptions
     Private Sub cmdApply_Click(sender As Object, e As EventArgs) Handles cmdApply.Click
 
         SetInstatOptions()
-
+        SetWorkingDirectory()
         autoTranslate(Me)
 
         If frmMain.Visible Then
@@ -294,5 +298,22 @@ Public Class dlgOptions
         fntEditor = fntNew
         clrEditor = clrNew
     End Sub
+
+    Public Sub GetWorkingDirectory()
+        Dim dlgWorkingDirectory As New FolderBrowserDialog
+        dlgWorkingDirectory.ShowDialog()
+        strWorkingDirectory = (dlgWorkingDirectory.SelectedPath).Replace("\", "/")
+        ucrWorkingDirectory.SetName(strWorkingDirectory)
+    End Sub
+
+    Private Sub cmdWorkingDirectory_Click(sender As Object, e As EventArgs) Handles cmdWorkingDirectory.Click
+        GetWorkingDirectory()
+        ApplyEnabled(True)
+    End Sub
+    Private Sub SetWorkingDirectory()
+        frmMain.clsRLink.RunScript("setwd(" & Chr(34) & strWorkingDirectory & Chr(34) & ")")
+    End Sub
+
+
 
 End Class
