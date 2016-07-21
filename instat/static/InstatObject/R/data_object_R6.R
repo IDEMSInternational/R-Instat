@@ -273,6 +273,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
+    if(missing(col_data)) stop("One of num_cols or col_data must be specified.")
     if(!missing(col_data) && (is.matrix(col_data) || is.data.frame(col_data))) {
       num_cols = ncol(col_data)
     }
@@ -291,7 +292,8 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
       col_name = colnames(col_data)
     }
     else {
-      stop("col_name missing and cannot detect colnames from col_data")
+      col_name = "X"
+      use_col_name_as_prefix = TRUE
     }
   }
   if(use_col_name_as_prefix && length(col_name) > 1) {
@@ -316,14 +318,13 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
   }
 
   for(i in 1:num_cols) {
-    if(!missing(col_data)) {
-      if(num_cols == 1) curr_col = col_data
-      else curr_col = unlist(col_data[,i])
+    if(num_cols == 1) {
+      curr_col = col_data
     }
-
+    else curr_col = col_data[,i]
+    if(is.matrix(curr_col) || is.data.frame(curr_col)) curr_col = curr_col[,1]
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
-    
     if(curr_col_name %in% names(private$data)) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
       self$append_to_changes(list(Replaced_col, curr_col_name))
@@ -644,17 +645,31 @@ data_object$set("public", "get_column_factor_levels", function(col_name = "") {
 }
 )
 
-data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing = TRUE, na.last = TRUE) {
+data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing = FALSE, na.last = TRUE, by_row_names = FALSE, row_names_as_numeric = TRUE) {
   string = list()
-  for(col_name in col_names){
-    if(!(col_name %in% names(private$data))){
-      stop(col_name, " is not a column in ", get_metadata(data_name_label))
+  if(missing(col_names) || length(col_names) == 0) {
+    if(by_row_names) {
+      if(row_names_as_numeric) {
+        self$set_data(private$data[order(as.numeric(row.names(private$data)), decreasing = decreasing),])
+      }
+      else {
+        self$set_data(private$data[order(row.names(private$data), decreasing = decreasing),])
+      }
     }
+    else message("No sorting to be done.")
   }
-  if(length(col_names)==1){
-    self$set_data(private$data[with(private$data, order(eval(parse(text = col_names)), decreasing = decreasing, na.last = na.last)), ])
-  }else{
-    self$set_data(private$data[ do.call(order, c(as.list(private$data[,col_names]), decreasing = decreasing, na.last = na.last)), ])
+  else {
+    for(col_name in col_names){
+      if(!(col_name %in% names(private$data))){
+        stop(col_name, " is not a column in ", get_metadata(data_name_label))
+      }
+    }
+    if(by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
+    if(length(col_names)==1){
+      self$set_data(private$data[with(private$data, order(eval(parse(text = col_names)), decreasing = decreasing, na.last = na.last)), ])
+    }else{
+      self$set_data(private$data[ do.call(order, c(as.list(private$data[,col_names]), decreasing = decreasing, na.last = na.last)), ])
+    }
   }
   self$data_changed <- TRUE
 }
