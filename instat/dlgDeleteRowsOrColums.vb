@@ -21,7 +21,7 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub ReopenDialog()
-
+        ucrReceiverForColumnsToDelete.lstSelectedVariables.Clear()
     End Sub
 
     Private Sub TestOKEnabled()

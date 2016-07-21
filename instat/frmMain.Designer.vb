@@ -137,10 +137,9 @@ Partial Class frmMain
         Me.mnuViewColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator22 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuViewWindowsLayout = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuViewWindowsLayoutCascade = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuViewWindowsLayoutTileVertically = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuViewWindowsLayoutTileHorizontally = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewCascade = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewTileVertically = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewTileHorizontally = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpLicence = New System.Windows.Forms.ToolStripMenuItem()
@@ -230,6 +229,7 @@ Partial Class frmMain
         Me.mnuOrganiseDataFrameProtectColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrameHideColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataFrameFreezeColumns = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColourByPropertyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganisePrepareToShare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganisePrepareToShareJitter = New System.Windows.Forms.ToolStripMenuItem()
         Me.OtherScdMicroDialogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -341,7 +341,6 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ColourByPropertyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1135,7 +1134,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewWindowsLayout})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewCascade, Me.mnuViewTileVertically, Me.mnuViewTileHorizontally})
         Me.mnuView.Name = "mnuView"
         Me.mnuView.Size = New System.Drawing.Size(44, 20)
         Me.mnuView.Tag = "View"
@@ -1159,7 +1158,7 @@ Partial Class frmMain
         Me.mnuViewLog.Name = "mnuViewLog"
         Me.mnuViewLog.Size = New System.Drawing.Size(187, 22)
         Me.mnuViewLog.Tag = "Log"
-        Me.mnuViewLog.Text = "Log"
+        Me.mnuViewLog.Text = "Log Window"
         '
         'mnuViewScriptWindow
         '
@@ -1187,34 +1186,23 @@ Partial Class frmMain
         Me.ToolStripSeparator22.Name = "ToolStripSeparator22"
         Me.ToolStripSeparator22.Size = New System.Drawing.Size(184, 6)
         '
-        'mnuViewWindowsLayout
+        'mnuViewCascade
         '
-        Me.mnuViewWindowsLayout.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewWindowsLayoutCascade, Me.mnuViewWindowsLayoutTileVertically, Me.mnuViewWindowsLayoutTileHorizontally})
-        Me.mnuViewWindowsLayout.Name = "mnuViewWindowsLayout"
-        Me.mnuViewWindowsLayout.Size = New System.Drawing.Size(187, 22)
-        Me.mnuViewWindowsLayout.Tag = "Windows_Layout"
-        Me.mnuViewWindowsLayout.Text = "Windows Layout"
+        Me.mnuViewCascade.Name = "mnuViewCascade"
+        Me.mnuViewCascade.Size = New System.Drawing.Size(187, 22)
+        Me.mnuViewCascade.Text = "Cascade"
         '
-        'mnuViewWindowsLayoutCascade
+        'mnuViewTileVertically
         '
-        Me.mnuViewWindowsLayoutCascade.Name = "mnuViewWindowsLayoutCascade"
-        Me.mnuViewWindowsLayoutCascade.Size = New System.Drawing.Size(160, 22)
-        Me.mnuViewWindowsLayoutCascade.Tag = "Cascade"
-        Me.mnuViewWindowsLayoutCascade.Text = "Cascade"
+        Me.mnuViewTileVertically.Name = "mnuViewTileVertically"
+        Me.mnuViewTileVertically.Size = New System.Drawing.Size(187, 22)
+        Me.mnuViewTileVertically.Text = "Tile Vertically"
         '
-        'mnuViewWindowsLayoutTileVertically
+        'mnuViewTileHorizontally
         '
-        Me.mnuViewWindowsLayoutTileVertically.Name = "mnuViewWindowsLayoutTileVertically"
-        Me.mnuViewWindowsLayoutTileVertically.Size = New System.Drawing.Size(160, 22)
-        Me.mnuViewWindowsLayoutTileVertically.Tag = "Tile_Vertically"
-        Me.mnuViewWindowsLayoutTileVertically.Text = "Tile Vertically"
-        '
-        'mnuViewWindowsLayoutTileHorizontally
-        '
-        Me.mnuViewWindowsLayoutTileHorizontally.Name = "mnuViewWindowsLayoutTileHorizontally"
-        Me.mnuViewWindowsLayoutTileHorizontally.Size = New System.Drawing.Size(160, 22)
-        Me.mnuViewWindowsLayoutTileHorizontally.Tag = "Tile_Horizontally"
-        Me.mnuViewWindowsLayoutTileHorizontally.Text = "Tile Horizontally"
+        Me.mnuViewTileHorizontally.Name = "mnuViewTileHorizontally"
+        Me.mnuViewTileHorizontally.Size = New System.Drawing.Size(187, 22)
+        Me.mnuViewTileHorizontally.Text = "Tile Horizontally"
         '
         'mnuHelp
         '
@@ -1767,7 +1755,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameRowNumbersNames
         '
-        Me.mnuOrganiseDataFrameRowNumbersNames.Enabled = False
         Me.mnuOrganiseDataFrameRowNumbersNames.Name = "mnuOrganiseDataFrameRowNumbersNames"
         Me.mnuOrganiseDataFrameRowNumbersNames.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameRowNumbersNames.Tag = "Row_Numbers/Names..."
@@ -1875,6 +1862,12 @@ Partial Class frmMain
         Me.mnuOrganiseDataFrameFreezeColumns.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameFreezeColumns.Tag = "Freeze_Columns..."
         Me.mnuOrganiseDataFrameFreezeColumns.Text = "Freeze Columns..."
+        '
+        'ColourByPropertyToolStripMenuItem
+        '
+        Me.ColourByPropertyToolStripMenuItem.Name = "ColourByPropertyToolStripMenuItem"
+        Me.ColourByPropertyToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.ColourByPropertyToolStripMenuItem.Text = "Colour by Property..."
         '
         'mnuOrganisePrepareToShare
         '
@@ -2295,13 +2288,12 @@ Partial Class frmMain
         'mnuOrganiseRObjectsView
         '
         Me.mnuOrganiseRObjectsView.Name = "mnuOrganiseRObjectsView"
-        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOrganiseRObjectsView.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsView.Tag = "View..."
         Me.mnuOrganiseRObjectsView.Text = "View..."
         '
         'mnuOrganiseRObjectsRename
         '
-        Me.mnuOrganiseRObjectsRename.Enabled = False
         Me.mnuOrganiseRObjectsRename.Name = "mnuOrganiseRObjectsRename"
         Me.mnuOrganiseRObjectsRename.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsRename.Tag = "Rename..."
@@ -2309,7 +2301,6 @@ Partial Class frmMain
         '
         'mnuOrganiseRObjectsReorder
         '
-        Me.mnuOrganiseRObjectsReorder.Enabled = False
         Me.mnuOrganiseRObjectsReorder.Name = "mnuOrganiseRObjectsReorder"
         Me.mnuOrganiseRObjectsReorder.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsReorder.Tag = "Reorder"
@@ -2317,7 +2308,6 @@ Partial Class frmMain
         '
         'mnuOrganiseRObjectsDelete
         '
-        Me.mnuOrganiseRObjectsDelete.Enabled = False
         Me.mnuOrganiseRObjectsDelete.Name = "mnuOrganiseRObjectsDelete"
         Me.mnuOrganiseRObjectsDelete.Size = New System.Drawing.Size(126, 22)
         Me.mnuOrganiseRObjectsDelete.Tag = "Delete..."
@@ -2701,12 +2691,6 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
-        'ColourByPropertyToolStripMenuItem
-        '
-        Me.ColourByPropertyToolStripMenuItem.Name = "ColourByPropertyToolStripMenuItem"
-        Me.ColourByPropertyToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
-        Me.ColourByPropertyToolStripMenuItem.Text = "Colour by Property..."
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2871,10 +2855,6 @@ Partial Class frmMain
     Friend WithEvents mnuOrganiseDataObjectDeleteDataFrame As ToolStripMenuItem
     Friend WithEvents mnuOrganiseDataObjectRenameDataFrame As ToolStripMenuItem
     Friend WithEvents mnuOrganiseDataObjectReorderDataFrames As ToolStripMenuItem
-    Friend WithEvents mnuViewWindowsLayout As ToolStripMenuItem
-    Friend WithEvents mnuViewWindowsLayoutCascade As ToolStripMenuItem
-    Friend WithEvents mnuViewWindowsLayoutTileVertically As ToolStripMenuItem
-    Friend WithEvents mnuViewWindowsLayoutTileHorizontally As ToolStripMenuItem
     Friend WithEvents mnuViewDataView As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnFactorConvertToFactor As ToolStripMenuItem
     Friend WithEvents mnuOrganiseColumnFactorLevelsLabels As ToolStripMenuItem
@@ -3050,4 +3030,7 @@ Partial Class frmMain
     Friend WithEvents OtherScdMicroDialogsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents sepEndMRU As ToolStripSeparator
     Friend WithEvents ColourByPropertyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuViewCascade As ToolStripMenuItem
+    Friend WithEvents mnuViewTileVertically As ToolStripMenuItem
+    Friend WithEvents mnuViewTileHorizontally As ToolStripMenuItem
 End Class

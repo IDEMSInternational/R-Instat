@@ -29,13 +29,15 @@ Public Class dlgUseGraph
     End Sub
 
     Private Sub SetDefaults()
+        ucrGraphReceiver.SetMeAsReceiver()
         ucrGraphsSelector.Reset()
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 358
+        ucrBase.iHelpTopicID = 430
         ucrGraphsSelector.SetItemType("graph")
         ucrGraphReceiver.Selector = ucrGraphsSelector
+        sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
     Private Sub ReOpenDialog()
 
@@ -51,7 +53,7 @@ Public Class dlgUseGraph
             ucrBase.OKEnabled(False)
         End If
     End Sub
-    Private Sub ucrGraphReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrGraphReceiver.SelectionChanged
-        TestOkEnabled()
+    Private Sub cmdAddLayer_Click(sender As Object, e As EventArgs) Handles cmdAddLayer.Click
+        sdgLayerOptions.ShowDialog()
     End Sub
 End Class
