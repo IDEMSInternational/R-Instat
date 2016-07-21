@@ -33,6 +33,8 @@ Public Class frmEditor
     Private clsDeleteRows As New RFunction
     Private clsReplaceValue As New RFunction
     Private clsRemoveFilter As New RFunction
+    Private clsFreezeColumns As New RFunction
+    Private clsUnfreezeColumns As New RFunction
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -67,6 +69,8 @@ Public Class frmEditor
         clsUnhideAllColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unhide_all_columns")
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
+        clsFreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$freeze_columns")
+        clsUnfreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unfreeze_columns")
         UpdateRFunctionDataFrameParameters()
     End Sub
 
@@ -89,8 +93,10 @@ Public Class frmEditor
             clsInsertColumns.RemoveParameterByName("before")
         End If
         'TODO This should be an option in dialog
-        clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
-        clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+        'This is now the default in the R method so not needed
+        'but should be added if user wants to change from default
+        'clsInsertColumns.AddParameter("col_name", Chr(34) & "X" & Chr(34))
+        'clsInsertColumns.AddParameter("use_col_name_as_prefix", "TRUE")
         frmMain.clsRLink.RunScript(clsInsertColumns.ToScript(), strComment:="Right click menu: Insert Column(s) After")
     End Sub
 
@@ -303,58 +309,90 @@ Public Class frmEditor
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
         Dim dblValue As Double
-        Dim dfTemp As CharacterMatrix
-        Dim strColName As String
-        Dim tmpWorkSheet As unvell.ReoGrid.Worksheet
-        Dim bRunScript As Boolean = False
-        Dim bTemp As Boolean
+        Dim iValue As Integer
+        Dim lstCurrentDataColumns As String()
+        Dim strCurrentColumn As String
+        Dim clsGetVariablesMetadata As New RFunction
+        Dim clsGetFactorLevels As New RFunction
+        Dim strCellDataType As String
+        Dim chrCurrentFactorLevels As CharacterVector
+        Dim bValid As Boolean = False
 
-        frmMain.clsGrids.SetVariablesMetadata(frmVariables.grdVariables)
+        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
 
-        For Each tmpWorkSheet In frmMain.clsGrids.grdVariablesMetadata.Worksheets
-            If tmpWorkSheet.Name = grdCurrSheet.Name Then
-                'Danny where is the col name stored without the (f)...
-                If grdCurrSheet.ColumnHeaders.Item(e.Cell.Column).Text.IndexOf(" ") < 0 Then
-                    strColName = grdCurrSheet.ColumnHeaders.Item(e.Cell.Column).Text
-                Else
-                    strColName = grdCurrSheet.ColumnHeaders.Item(e.Cell.Column).Text.Remove(grdCurrSheet.ColumnHeaders.Item(e.Cell.Column).Text.IndexOf(" "))
-                End If
-                clsReplaceValue.AddParameter("col_name", Chr(34) & strColName & Chr(34))
-                clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(e.Cell.Row).Text & Chr(34))
-                'TODO 3 is not always going to be the data type information
-                If tmpWorkSheet(e.Cell.Column, 3) = "numeric" Or tmpWorkSheet(e.Cell.Column, 3) = "integer" Or e.NewData = "NA" Then
-                    If Double.TryParse(e.NewData, dblValue) OrElse e.NewData = "NA" Then
-                        clsReplaceValue.AddParameter("new_value", e.NewData)
-                        bRunScript = True
+        clsGetFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
+        clsGetFactorLevels.AddParameter("data_name", Chr(34) & grdData.CurrentWorksheet.Name & Chr(34))
+
+        clsGetVariablesMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+        clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & grdData.CurrentWorksheet.Name & Chr(34))
+        clsGetVariablesMetadata.AddParameter("property", "data_type_label")
+
+        lstCurrentDataColumns = lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value
+        strCurrentColumn = lstCurrentDataColumns(e.Cell.Column)
+
+        clsGetVariablesMetadata.AddParameter("column", Chr(34) & strCurrentColumn & Chr(34))
+        clsGetFactorLevels.AddParameter("col_name", Chr(34) & strCurrentColumn & Chr(34))
+        strCellDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript()).AsCharacter(0)
+
+        clsReplaceValue.AddParameter("col_name", Chr(34) & strCurrentColumn & Chr(34))
+        clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(e.Cell.Row).Text & Chr(34))
+
+        If e.NewData = "NA" Then
+            clsReplaceValue.AddParameter("new_value", e.NewData)
+            bValid = True
+        Else
+            Select Case strCellDataType
+                Case "factor"
+                    chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevels.ToScript()).AsCharacter
+                    If Not chrCurrentFactorLevels.Contains(e.NewData.ToString()) Then
+                        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
                     Else
-                        MsgBox("Non numeric data type entered!")
+                        clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
+                        bValid = True
+                    End If
+                Case "numeric"
+                    If Double.TryParse(e.NewData, dblValue) Then
+                        clsReplaceValue.AddParameter("new_value", e.NewData)
+                        bValid = True
+                    Else
+                        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
                         e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
                     End If
-                ElseIf tmpWorkSheet(e.Cell.Column, 3) = "factor" Then
-                    dfTemp = frmMain.clsRLink.GetData(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame(data_name = " & Chr(34) & tmpWorkSheet.Name & Chr(34) & ", col_name = " & Chr(34) & strColName & Chr(34) & ")")
-                    bTemp = False
-                    For i As Integer = 0 To dfTemp.RowCount - 1
-                        If dfTemp(i, 0).StartsWith(e.NewData, StringComparison.OrdinalIgnoreCase) Then
-                            e.NewData = dfTemp(i, 0)
-                            clsReplaceValue.AddParameter("new_value", Chr(34) & dfTemp(i, 0) & Chr(34))
-                            bRunScript = True
-                            bTemp = True
-                            Exit For
-                        End If
-                    Next
-                    If Not bTemp Then
-                        MsgBox(e.NewData & " is not a level for this Factor!")
+                Case "integer"
+                    If Integer.TryParse(e.NewData, iValue) Then
+                        clsReplaceValue.AddParameter("new_value", e.NewData)
+                        bValid = True
+                    Else
+                        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
                         e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
                     End If
-                Else
+                    'Currently removed as this is the class for a blank column
+                    'Case "logical"
+                    '    'Should we accept 'true'/'false'/'True' etc. as logical values?
+                    '    If e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
+                    '        clsReplaceValue.AddParameter("new_value", e.NewData)
+                    '        bValid = True
+                    '    Else
+                    '        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: logical. Values must be logical (either TRUE or FALSE).", MsgBoxStyle.Exclamation, "Invalid Value")
+                    '        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                    '    End If
+                    'Case "character"
                     clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
-                    bRunScript = True
-                End If
-                If bRunScript Then
-                    frmMain.clsRLink.RunScript(clsReplaceValue.ToScript())
-                End If
-            End If
-        Next
+                    bValid = True
+                Case Else
+                    If Double.TryParse(e.NewData, dblValue) OrElse e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
+                        clsReplaceValue.AddParameter("new_value", e.NewData)
+                    Else
+                        clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
+                    End If
+                    bValid = True
+            End Select
+        End If
+
+        If bValid Then
+            frmMain.clsRLink.RunScript(clsReplaceValue.ToScript())
+        End If
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
@@ -482,6 +520,8 @@ Public Class frmEditor
             clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsReplaceValue.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
             clsRemoveFilter.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsFreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsUnfreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
         End If
     End Sub
 
@@ -514,4 +554,19 @@ Public Class frmEditor
         dlgSort.ShowDialog()
     End Sub
 
+    Private Sub FreezeToHereToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FreezeToHereToolStripMenuItem.Click
+        Dim strLastSelectedColumn As String
+        Dim strSelectedColumns As String()
+
+        strSelectedColumns = SelectedColumnsAsArray()
+        If strSelectedColumns.Length <> 0 Then
+            strLastSelectedColumn = strSelectedColumns(strSelectedColumns.Length - 1)
+            clsFreezeColumns.AddParameter("column", Chr(34) & strLastSelectedColumn & Chr(34))
+            frmMain.clsRLink.RunScript(clsFreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
+        End If
+    End Sub
+
+    Private Sub UnfreezeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnfreezeToolStripMenuItem.Click
+        frmMain.clsRLink.RunScript(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
+    End Sub
 End Class

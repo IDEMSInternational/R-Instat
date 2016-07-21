@@ -61,7 +61,7 @@ Public Class dlgBoxplot
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_boxplotFunction)
 
-        ucrBase.iHelpTopicID = 102
+        ucrBase.iHelpTopicID = 436
         ucrBase.clsRsyntax.iCallType = 0
 
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
@@ -72,6 +72,7 @@ Public Class dlgBoxplot
 
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        sdgPlots.SetGgplotFunction(clsRggplotFunction)
 
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
