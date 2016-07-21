@@ -45,8 +45,8 @@ Public Class dlgViewDescriptives
         ucrReceiverSelectedObject.Selector = ucrSelectorForViewObject
         ucrReceiverSelectedObject.SetMeAsReceiver()
         ucrSelectorForViewObject.SetItemType("object")
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_from_object")
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+        ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 349
     End Sub
 

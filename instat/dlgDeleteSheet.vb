@@ -24,20 +24,37 @@ Public Class dlgDeleteSheet
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ((ucrDataFrameToDelete.cboAvailableDataFrames.Items.Count > 0) And (ucrDataFrameToDelete.cboAvailableDataFrames.Text <> "")) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
+    Private Sub ReopenDialog()
+
+    End Sub
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$delete_dataframe")
         ucrBase.iHelpTopicID = 63
     End Sub
 
     Private Sub SetDefaults()
-        ucrDataFrameToDelete.Focus()
+        ucrDataFrameToDelete.Reset()
+        TestOKEnabled()
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrDataFrameToDelete_DataFrameChanged() Handles ucrDataFrameToDelete.DataFrameChanged

@@ -16,8 +16,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrLayerParamsControls
-    Public clsLayerParam As LayerParameters
-    Public ctrActive As Control
     Public clsGeomFunction As RFunction
 
     Public Event RParameterChanged(ucrControl As ucrLayerParamsControls)
@@ -33,89 +31,56 @@ Public Class ucrLayerParamsControls
 
     Public Sub SetLayerParameter(clsTempLayerParam As LayerParameters)
 
-        clsLayerParam = clsTempLayerParam
+        ucrReceiverMetadataProperty.clsLayerParam = clsTempLayerParam
 
-        nudParamValue.Visible = False
-        ucrcborParamValue.Visible = False
-        ucrColor.Visible = False
-        If Not IsNothing(clsLayerParam) Then
+        ucrReceiverMetadataProperty.SetControls()
+        If Not IsNothing(ucrReceiverMetadataProperty.clsLayerParam) Then
             chkParamName.Visible = True
-            chkParamName.Text = clsLayerParam.strLayerParameterName
-            If clsLayerParam.strLayerParameterDataType = "numeric" Then
-                If clsLayerParam.lstParameterStrings.Count >= 1 Then
-                    nudParamValue.DecimalPlaces = clsLayerParam.lstParameterStrings(0)
-                Else
-                    nudParamValue.DecimalPlaces = 0
-                End If
-                nudParamValue.Increment = Math.Pow(10, -nudParamValue.DecimalPlaces)
-                If clsLayerParam.lstParameterStrings.Count >= 2 Then
-                    nudParamValue.Minimum = clsLayerParam.lstParameterStrings(1)
-                Else
-                    nudParamValue.Minimum = Decimal.MinValue
-                End If
-                If clsLayerParam.lstParameterStrings.Count >= 3 Then
-                    nudParamValue.Maximum = clsLayerParam.lstParameterStrings(2)
-                Else
-                    nudParamValue.Maximum = Decimal.MaxValue
-                End If
-                ctrActive = nudParamValue
-            ElseIf clsLayerParam.strLayerParameterDataType = "boolean" Then
-                ctrActive = ucrcborParamValue
-                ucrcborParamValue.SetItems({"TRUE", "FALSE"})
-            ElseIf clsLayerParam.strLayerParameterDataType = "colour" Then
-                ctrActive = ucrColor
-            ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
-                ctrActive = ucrcborParamValue
-                ucrcborParamValue.SetItems(clsLayerParam.lstParameterStrings)
+            chkParamName.Text = ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName
+
+            If clsGeomFunction.GetParameter(ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName) Is Nothing Then
+                SetValue(ucrReceiverMetadataProperty.clsLayerParam.strParameterDefaultValue)
             Else
-                ctrActive = New Control 'this should never actually be used but is here to ensure the code is stable even if a developper uses an incorrect datatype
+                SetValue(clsGeomFunction.GetParameter(ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName).strArgumentValue, True)
             End If
-            If clsGeomFunction.GetParameter(clsLayerParam.strLayerParameterName) Is Nothing Then
-                SetValue(clsLayerParam.strParameterDefaultValue)
-            Else
-                SetValue(clsGeomFunction.GetParameter(clsLayerParam.strLayerParameterName).strArgumentValue, True)
-            End If
-            ctrActive.Visible = chkParamName.Checked
+            ucrReceiverMetadataProperty.Visible = chkParamName.Checked
         Else
             chkParamName.Visible = False
         End If
+
     End Sub
 
     Private Sub chkParamName_CheckedChanged(sender As Object, e As EventArgs) Handles chkParamName.CheckedChanged
-        ctrActive.Visible = chkParamName.Checked
-        RaiseEvent RParameterChanged(Me)
-    End Sub
+        ucrReceiverMetadataProperty.Visible = chkParamName.Checked
+        ucrReceiverMetadataProperty.ucrcborParamValue.Visible = True
+        ucrReceiverMetadataProperty.UcrColor.Visible = True
+        ucrReceiverMetadataProperty.nudParamValue.Visible = True
 
-    Private Sub nudParamValue_ValueChanged(sender As Object, e As EventArgs) Handles nudParamValue.TextChanged
-        RaiseEvent RParameterChanged(Me)
-    End Sub
-
-    Private Sub ucrcborParamValue_NameChanged() Handles ucrcborParamValue.NameChanged
         RaiseEvent RParameterChanged(Me)
     End Sub
 
     Private Sub ucrLayerParamsControls_RParameterChanged(ucrControl As ucrLayerParamsControls) Handles Me.RParameterChanged
-        If Not IsNothing(clsLayerParam) AndAlso Not IsNothing(clsGeomFunction) Then
-            If chkParamName.Checked AndAlso ctrActive.Text <> "" Then
-                clsGeomFunction.AddParameter(clsLayerParam.strLayerParameterName, ctrActive.Text)
+        If Not IsNothing(ucrReceiverMetadataProperty.clsLayerParam) AndAlso Not IsNothing(clsGeomFunction) Then
+            If chkParamName.Checked AndAlso ucrReceiverMetadataProperty.Text <> "" Then
+                clsGeomFunction.AddParameter(ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName, ucrReceiverMetadataProperty.Text)
             Else
-                clsGeomFunction.RemoveParameterByName(clsLayerParam.strLayerParameterName)
+                clsGeomFunction.RemoveParameterByName(ucrReceiverMetadataProperty.clsLayerParam.strLayerParameterName)
             End If
         End If
-    End Sub
-
-    Private Sub ucrColor_NameChanged() Handles ucrColor.NameChanged
-        RaiseEvent RParameterChanged(Me)
     End Sub
 
     Public Sub SetValue(strValue As String, Optional bInclude As Boolean = False)
-        If TypeOf (ctrActive) Is NumericUpDown Then
+        If ucrReceiverMetadataProperty.nudParamValue.Visible = True Then
             If strValue <> "" Then
-                nudParamValue.Value = strValue
+                ucrReceiverMetadataProperty.nudParamValue.Value = strValue
             End If
         Else
-            ctrActive.Text = strValue
+            ucrReceiverMetadataProperty.Text = strValue
         End If
         chkParamName.Checked = bInclude
+    End Sub
+
+    Private Sub ucrReceiverMetadataProperty_TExtChanged(sender As Object, e As EventArgs) Handles ucrReceiverMetadataProperty.TextChanged
+        RaiseEvent RParameterChanged(Me)
     End Sub
 End Class
