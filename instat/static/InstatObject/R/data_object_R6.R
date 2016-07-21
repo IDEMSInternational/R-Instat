@@ -425,7 +425,7 @@ data_object$set("public", "remove_columns_in_data", function(cols=c()) {
 }
 )
 
-data_object$set("public", "replace_value_in_data", function(col_names = c(""), old_value = "", start_value = NA, end_value = NA, new_value = "") {
+data_object$set("public", "replace_value_in_data", function(col_names = c(""), old_value = "", start_value = NA, end_value = NA, new_value = "", closed_start_value = TRUE, closed_end_value = TRUE) {
   for (col_name in col_names){
     # Column name must be character
     if(!is.character(col_name)) {
@@ -449,14 +449,26 @@ data_object$set("public", "replace_value_in_data", function(col_names = c(""), o
   for(col_name in col_names){
     str_data_type <-self$get_variables_metadata(property = data_type_label, column = col_name)
     if(str_data_type == "factor") {
-      if(!is.na(new_value) && !(new_value %in% levels(private$data[[col_name]]))) {
+      #if(!is.na(new_value) && !(new_value %in% levels(private$data[[col_name]]))) {
+      if(!is.na(new_value)) {
         new_index <- which(levels(private$data[[col_name]]) == old_value)
         levels(private$data[[col_name]])[new_index] <- new_value
       }
     }
     else{
       if(!is.na(start_value) && !is.na(end_value)){
-        index <- which(private$data[[col_name]]>=start_value & private$data[[col_name]]<=end_value)
+        if(closed_start_value & closed_end_value){
+          index <- which(private$data[[col_name]]>=start_value & private$data[[col_name]]<=end_value)
+        }
+        if(!closed_start_value & closed_end_value){
+          index <- which(private$data[[col_name]]>start_value & private$data[[col_name]]<=end_value)
+        }
+        if(closed_start_value & !closed_end_value){
+          index <- which(private$data[[col_name]]>=start_value & private$data[[col_name]]<end_value)
+        }
+        if(!closed_start_value & !closed_end_value){
+          index <- which(private$data[[col_name]]>start_value & private$data[[col_name]]<end_value)
+        }
       }
       else{
         index <- which(private$data[[col_name]] == old_value)
@@ -468,12 +480,16 @@ data_object$set("public", "replace_value_in_data", function(col_names = c(""), o
       if(str_data_type == "numeric") {
         new_value <- as.numeric(new_value)
       }
+      if(str_data_type == "character") {
+        new_value <- as.character(new_value)
+      }
+      
       for (new_index in index){
         private$data[[col_name]][[new_index]] <- new_value
       }
     }
   }
-  self$append_to_changes(list(Replaced_value, col_name, old_value, start_value, end_value, new_value))
+  self$append_to_changes(list(Replaced_value, col_name, old_value, start_value, end_value, new_value, closed_start_value, closed_end_value))
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
 }
