@@ -28,11 +28,18 @@ Public Class dlgName
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
         TestOKEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+        ucrReceiverName.txtReceiverSingle.Clear()
+        ucrInputNewName.txtInput.Clear()
     End Sub
 
     Private Sub TestOKEnabled()

@@ -16,6 +16,7 @@
 Imports instat.Translations
 Public Class dlgTransposeColumns
     Private bFirstLoad As Boolean = True
+    Public clsRToDataFrame, clsTranspose As New RFunction
     Private Sub dlgTransposeColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -25,40 +26,68 @@ Public Class dlgTransposeColumns
             ReOpenDialog()
         End If
         autoTranslate(Me)
-
-    End Sub
-    'this contains things that initialise the dialog and run once
-    Private Sub InitialiseDialog()
-        ucrColumsToTranspose.Selector = ucrSelectorTransposeColumns
-        ucrColumsToTranspose.SetMeAsReceiver()
-        ucrBase.iHelpTopicID = 277
-
-    End Sub
-    'checks when to enable ok button
-    Private Sub TestOkEnabled()
-        If ucrColumsToTranspose.IsEmpty Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
-
-
-    End Sub
-    'set defaults for the dialog
-    Private Sub SetDefaults()
-        ucrColumsToTranspose.Selector = ucrSelectorTransposeColumns
-        ucrColumsToTranspose.SetMeAsReceiver()
         TestOkEnabled()
-
     End Sub
-    'set what happens when dialog is reopened
+
+    Private Sub InitialiseDialog()
+        ucrBaseTransposeColumns.clsRsyntax.SetFunction("")
+        clsTranspose.SetRCommand("t")
+        clsRToDataFrame.SetRCommand("as.data.frame") 'transposed data is in matrix form. We need to convert to dataframe inorder to write back
+        ucrReceiverColumsToTranspose.Selector = ucrSelectorTransposeColumns
+        ucrReceiverColumsToTranspose.SetMeAsReceiver()
+        ucrBaseTransposeColumns.iHelpTopicID = 277
+        ucrNewDataFrameName.SetValidationTypeAsRVariable()
+    End Sub
+
+    Private Sub SetDefaults()
+        ucrSelectorTransposeColumns.Reset()
+        ucrNewDataFrameName.Reset()
+        If (ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "") Then
+            ucrNewDataFrameName.SetName(ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_transposed")
+        End If
+        TestOkEnabled()
+    End Sub
+
     Private Sub ReOpenDialog()
 
-
     End Sub
 
-    'this is what happens when Reset button is clicked
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+    Private Sub TestOkEnabled()
+        If ucrReceiverColumsToTranspose.IsEmpty Then
+            ucrBaseTransposeColumns.OKEnabled(False)
+        Else
+            ucrBaseTransposeColumns.OKEnabled(True)
+        End If
+    End Sub
+
+    Public Sub ucrReceiverColumsToTranspose_SelectionChanged() Handles ucrReceiverColumsToTranspose.SelectionChanged
+        clsTranspose.AddParameter("x", clsRFunctionParameter:=ucrReceiverColumsToTranspose.GetVariables())
+        clsRToDataFrame.AddParameter("x", clsRFunctionParameter:=clsTranspose)
+        ucrBaseTransposeColumns.clsRsyntax.AddParameter("", clsRFunctionParameter:=clsRToDataFrame)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSelectorTransposeColumns_DataFrameChanged() Handles ucrSelectorTransposeColumns.DataFrameChanged
+        If (Not ucrNewDataFrameName.UserTyped()) AndAlso ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrNewDataFrameName.SetName(ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_transposed")
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Public Sub ucrNewDataFrameName_NameChanged() Handles ucrNewDataFrameName.NameChanged
+        If Not ucrNewDataFrameName.IsEmpty Then
+            ucrBaseTransposeColumns.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
+        Else
+            ucrBaseTransposeColumns.clsRsyntax.RemoveAssignTo()
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub chkNameNewColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkNameNewColumns.CheckedChanged
+        'this is not yet implemented.
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseTransposeColumns.ClickReset
         SetDefaults()
     End Sub
 End Class
