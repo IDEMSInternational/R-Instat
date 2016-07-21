@@ -29,7 +29,7 @@ Partial Class ucrDistributions
         'lblDistributionType
         '
         Me.lblDistributionType.AutoSize = True
-        Me.lblDistributionType.Location = New System.Drawing.Point(3, 16)
+        Me.lblDistributionType.Location = New System.Drawing.Point(-1, 16)
         Me.lblDistributionType.Name = "lblDistributionType"
         Me.lblDistributionType.Size = New System.Drawing.Size(62, 13)
         Me.lblDistributionType.TabIndex = 0
@@ -39,7 +39,7 @@ Partial Class ucrDistributions
         'cboDistributions
         '
         Me.cboDistributions.FormattingEnabled = True
-        Me.cboDistributions.Location = New System.Drawing.Point(95, 13)
+        Me.cboDistributions.Location = New System.Drawing.Point(62, 13)
         Me.cboDistributions.Name = "cboDistributions"
         Me.cboDistributions.Size = New System.Drawing.Size(121, 21)
         Me.cboDistributions.TabIndex = 1

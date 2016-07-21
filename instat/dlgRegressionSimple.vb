@@ -223,14 +223,6 @@ Public Class dlgRegressionSimple
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
-
-    End Sub
-
     Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
         If chkFunction.Checked Then
             sdgVariableTransformations.ShowDialog()
