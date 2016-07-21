@@ -38,7 +38,7 @@ Public Class dlgUseGraph
         ucrGraphsSelector.SetItemType("graph")
         ucrGraphReceiver.Selector = ucrGraphsSelector
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
     End Sub
     Private Sub ReOpenDialog()
 
@@ -60,9 +60,9 @@ Public Class dlgUseGraph
 
     Private Sub ucrGraphReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrGraphReceiver.SelectionChanged
         If Not ucrGraphReceiver.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("object_name", ucrGraphReceiver.GetVariableNames())
+            ucrBase.clsRsyntax.AddParameter("graph_name", ucrGraphReceiver.GetVariableNames())
         Else
-            ucrBase.clsRsyntax.RemoveParameter("object_name")
+            ucrBase.clsRsyntax.RemoveParameter("graph_name")
         End If
         TestOkEnabled()
     End Sub
