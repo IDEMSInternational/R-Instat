@@ -38,6 +38,7 @@ Public Class dlgUseGraph
         ucrGraphsSelector.SetItemType("graph")
         ucrGraphReceiver.Selector = ucrGraphsSelector
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_objects")
     End Sub
     Private Sub ReOpenDialog()
 
@@ -55,5 +56,19 @@ Public Class dlgUseGraph
     End Sub
     Private Sub cmdAddLayer_Click(sender As Object, e As EventArgs) Handles cmdAddLayer.Click
         sdgLayerOptions.ShowDialog()
+    End Sub
+
+    Private Sub ucrGraphReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrGraphReceiver.SelectionChanged
+        If Not ucrGraphReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("object_name", ucrGraphReceiver.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("object_name")
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrGraphsSelector_DataFrameChanged() Handles ucrGraphsSelector.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+
     End Sub
 End Class
