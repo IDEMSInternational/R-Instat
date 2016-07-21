@@ -497,6 +497,14 @@ Public Class RLink
         Return strTemp
     End Function
 
+    Public Function DataFrameExists(strDataFrameName As String) As Boolean
+        Dim bExists As Boolean
+        If clsEngine IsNot Nothing Then
+            bExists = clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$data_frame_exists(" & Chr(34) & strDataFrameName & Chr(34) & ")").AsLogical(0)
+        End If
+        Return bExists
+    End Function
+
     Public Function GetDataFrameLength(strDataFrameName As String) As Integer
         Dim intLength As Integer
         If clsEngine IsNot Nothing Then

@@ -665,20 +665,6 @@ instat_object$set("public", "get_column_names", function(data_name, as_list = FA
 }
 )
 
-#TODO delete and replace with add_columns_to_data
-instat_object$set("public", "insert_column_in_data", function(data_name, col_data =c(), start_pos, number_cols) {
-  self$get_data_objects(data_name)$insert_column_in_data(col_data = col_data, start_pos = start_pos, number_cols = number_cols )
-}
-)
-
-# instat_object$set("public", "move_columns_in_data", function(data_name, col_names = "", col_number){
-#   if(!is.character(data_name)) stop("data_name must be of type character")
-#   if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-#   
-#   self$get_data_objects(data_name)$move_columns_in_data(col_names = col_names, col_number = col_number)
-# }
-# )
-
 instat_object$set("public", "reorder_columns_in_data", function(data_name, col_order){
   self$get_data_objects(data_name)$reorder_columns_in_data(col_order = col_order)
 }
@@ -717,8 +703,8 @@ instat_object$set("public", "get_factor_data_frame", function(data_name,col_name
 } 
 )
 
-instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(), decreasing = FALSE, na.last = TRUE) {
-  self$get_data_objects(data_name)$sort_dataframe(col_names = col_names, decreasing = decreasing, na.last = na.last)
+instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(), decreasing = FALSE, na.last = TRUE, by_row_names = FALSE, row_names_as_numeric = TRUE) {
+  self$get_data_objects(data_name)$sort_dataframe(col_names = col_names, decreasing = decreasing, na.last = na.last, by_row_names = by_row_names, row_names_as_numeric = row_names_as_numeric)
 } 
 )
 
@@ -871,5 +857,25 @@ instat_object$set("public","get_metadata_fields", function(data_name, include_ov
     }
     return(out)
   }
+} 
+)
+
+instat_object$set("public","freeze_columns", function(data_name, column) {
+  self$get_data_objects(data_name)$freeze_columns(column = column)
+} 
+)
+
+instat_object$set("public","unfreeze_columns", function(data_name) {
+  self$get_data_objects(data_name)$unfreeze_columns()
+} 
+)
+
+instat_object$set("public","is_variables_metadata", function(data_name, property) {
+  self$get_data_objects(data_name)$is_variables_metadata(property)
+} 
+)
+
+instat_object$set("public","data_frame_exists", function(data_name) {
+  return(data_name %in% names(private$.data_objects))
 } 
 )

@@ -39,6 +39,7 @@ Public Class ROperator
     Public bForceIncludeOperation As Boolean = True
     Public bAssignToIsPrefix As Boolean = False
     Public bAssignToColumnWithoutNames As Boolean = False
+    Public bInsertColumnBefore As Boolean = False
 
     Public Sub SetOperation(strTemp As String, Optional bBracketsTemp As Boolean = True)
         strOperation = strTemp
@@ -46,7 +47,7 @@ Public Class ROperator
         bIsAssigned = False
     End Sub
 
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False)
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False)
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -64,6 +65,7 @@ Public Class ROperator
         bIsAssigned = False
         Me.bAssignToIsPrefix = bAssignToIsPrefix
         Me.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+        Me.bInsertColumnBefore = bInsertColumnBefore
     End Sub
 
     Public Sub RemoveAssignTo()
@@ -143,6 +145,13 @@ Public Class ROperator
                 Else
                     If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                         clsAddColumns.AddParameter("use_col_name_as_prefix", "FALSE")
+                    End If
+                End If
+                If bInsertColumnBefore Then
+                    clsAddColumns.AddParameter("before", "TRUE")
+                Else
+                    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                        clsAddColumns.AddParameter("before", "FALSE")
                     End If
                 End If
                 strScript = strScript & clsAddColumns.ToScript() & vbCrLf
