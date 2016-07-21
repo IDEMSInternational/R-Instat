@@ -13,4 +13,8 @@
         lstAvailableVariable.Visible = bShow
     End Sub
 
+    Public Overrides Sub SetVariablesEnabled(bEnable As Boolean)
+        MyBase.SetVariablesEnabled(bEnable)
+        btnAdd.Enabled = bEnable
+    End Sub
 End Class
