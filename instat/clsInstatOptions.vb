@@ -5,7 +5,7 @@ Public Class InstatOptions
     Public bIncludeRDefaultParameters As Boolean
     Public fntOutput, fntScript, fntComment, fntEditor As Font
     Public clrOutput, clrScript, clrComment, clrEditor As Color
-    Public strComment, strLanguageCultureCode As String
+    Public strComment, strLanguageCultureCode, strWorkingDirectory As String
     Public iPreviewRows As Integer
     Public iMaxRows As Integer
 
@@ -75,4 +75,7 @@ Public Class InstatOptions
         End Select
     End Sub
 
+    Public Sub SetWorkingDirectory(strWD As String)
+        strWorkingDirectory = strWD
+    End Sub
 End Class
