@@ -59,6 +59,7 @@ Public Class dlgPermuteColumn
         ucrInputPermuteRows.SetItemsTypeAsColumns()
         ucrInputPermuteRows.SetDefaultTypeAsColumn()
         ucrInputPermuteRows.SetDataFrameSelector(ucrPermuteRowsSelector.ucrAvailableDataFrames)
+        ucrInputPermuteRows.SetValidationTypeAsRVariable()
 
 
     End Sub
