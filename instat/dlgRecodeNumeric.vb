@@ -41,6 +41,7 @@ Public Class dlgRecodeNumeric
         ucrInputRecode.SetItemsTypeAsColumns()
         ucrInputRecode.SetDefaultTypeAsColumn()
         ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
+        ucrInputRecode.SetValidationTypeAsRVariable()
 
 
     End Sub

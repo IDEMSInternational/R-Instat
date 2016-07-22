@@ -44,6 +44,7 @@ Public Class dlgCombine
         ucrInputColName.SetDefaultTypeAsColumn()
         ucrInputColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
         ucrBase.iHelpTopicID = 39
+        ucrInputColName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub ReOpenDialog()
