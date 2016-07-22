@@ -613,7 +613,7 @@ instat_object$set("public", "filter_string", function(data_name, filter_name) {
 }
 )
 
-instat_object$set("public", "replace_value_in_data", function(data_name, col_names, row, old_value = "", start_value = NA, end_value = NA, new_value, closed_start_value = TRUE, closed_end_value = TRUE) {
+instat_object$set("public", "replace_value_in_data", function(data_name, col_names, row, old_value = "", start_value = NA, end_value = NA, new_value = "", closed_start_value = TRUE, closed_end_value = TRUE) {
   self$get_data_objects(data_name)$replace_value_in_data(col_names, old_value, start_value, end_value, new_value, closed_start_value, closed_end_value)
 } 
 )
