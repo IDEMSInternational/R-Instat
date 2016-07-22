@@ -36,6 +36,7 @@ data_type_label="Data_Type"
 is_hidden_label="Is_Hidden"
 is_protected_label="Is_Protected"
 is_frozen_label="Is_Frozen"
+class_labe="class"
 
 #object labels
 overall_label="[Overall]"
