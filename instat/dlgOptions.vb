@@ -300,17 +300,10 @@ Public Class dlgOptions
     End Sub
 
     Private Sub cmdWorkingDirectory_Click(sender As Object, e As EventArgs) Handles cmdWorkingDirectory.Click
-        SetWorkingDirectory(strWorkingDirectory)
-    End Sub
-    Private Sub SetWorkingDirectory(strNewWD As String)
         Dim dlgWorkingDirectory As New FolderBrowserDialog
-
-        strWorkingDirectory = strNewWD
-
         If dlgWorkingDirectory.ShowDialog = DialogResult.OK Then
             strWorkingDirectory = (dlgWorkingDirectory.SelectedPath).Replace("\", "/")
             ucrWorkingDirectory.SetName(strWorkingDirectory)
-            frmMain.clsRLink.RunScript("setwd(" & Chr(34) & strWorkingDirectory & Chr(34) & ")")
             ApplyEnabled(True)
         End If
     End Sub

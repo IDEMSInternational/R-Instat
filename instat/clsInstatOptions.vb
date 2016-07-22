@@ -5,7 +5,8 @@ Public Class InstatOptions
     Public bIncludeRDefaultParameters As Boolean
     Public fntOutput, fntScript, fntComment, fntEditor As Font
     Public clrOutput, clrScript, clrComment, clrEditor As Color
-    Public strComment, strLanguageCultureCode, strWorkingDirectory As String
+    Public strComment, strLanguageCultureCode As String
+    Public strWorkingDirectory As String
     Public iPreviewRows As Integer
     Public iMaxRows As Integer
 
@@ -76,6 +77,10 @@ Public Class InstatOptions
     End Sub
 
     Public Sub SetWorkingDirectory(strWD As String)
-        strWorkingDirectory = strWD
+        If strWorkingDirectory IsNot Nothing Then
+
+            strWorkingDirectory = strWD
+            frmMain.clsRLink.RunScript("setwd(" & Chr(34) & strWorkingDirectory & Chr(34) & ")")
+        End If
     End Sub
 End Class
