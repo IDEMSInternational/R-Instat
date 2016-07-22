@@ -64,6 +64,7 @@ Public Class dlgTransformText
         ucrReceiverTransformText.SetIncludedDataTypes({"factor", "character"})
         ucrReceiverLastWord.SetIncludedDataTypes({"numeric"})
         ucrBase.iHelpTopicID = 343
+        ucrInputPrefixForNewColumn.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub SetDefaults()

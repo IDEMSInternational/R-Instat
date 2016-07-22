@@ -50,6 +50,7 @@ Public Class dlgRegularSequence
         ucrNewColumnName.SetItemsTypeAsColumns()
         ucrNewColumnName.SetDefaultTypeAsColumn()
         ucrNewColumnName.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
+        ucrNewColumnName.SetValidationTypeAsRVariable()
         'TODO complete dates option
         rdoDates.Enabled = False
     End Sub
