@@ -23,7 +23,7 @@ Partial Class ucrReceiverMetadataProperty
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.nudParamValue = New System.Windows.Forms.NumericUpDown()
-        Me.ucrcborParamValue = New instat.ucrInputComboBox()
+        Me.ucrCboParamValue = New instat.ucrInputComboBox()
         Me.UcrColor = New instat.ucrColors()
         CType(Me.nudParamValue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -35,13 +35,13 @@ Partial Class ucrReceiverMetadataProperty
         Me.nudParamValue.Size = New System.Drawing.Size(45, 20)
         Me.nudParamValue.TabIndex = 8
         '
-        'ucrcborParamValue
+        'ucrCboParamValue
         '
-        Me.ucrcborParamValue.IsReadOnly = False
-        Me.ucrcborParamValue.Location = New System.Drawing.Point(0, 1)
-        Me.ucrcborParamValue.Name = "ucrcborParamValue"
-        Me.ucrcborParamValue.Size = New System.Drawing.Size(139, 21)
-        Me.ucrcborParamValue.TabIndex = 10
+        Me.ucrCboParamValue.IsReadOnly = False
+        Me.ucrCboParamValue.Location = New System.Drawing.Point(0, 1)
+        Me.ucrCboParamValue.Name = "ucrCboParamValue"
+        Me.ucrCboParamValue.Size = New System.Drawing.Size(139, 21)
+        Me.ucrCboParamValue.TabIndex = 10
         '
         'UcrColor
         '
@@ -55,7 +55,7 @@ Partial Class ucrReceiverMetadataProperty
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrcborParamValue)
+        Me.Controls.Add(Me.ucrCboParamValue)
         Me.Controls.Add(Me.UcrColor)
         Me.Controls.Add(Me.nudParamValue)
         Me.Name = "ucrReceiverMetadataProperty"
@@ -66,5 +66,5 @@ Partial Class ucrReceiverMetadataProperty
     End Sub
     Friend WithEvents nudParamValue As NumericUpDown
     Friend WithEvents UcrColor As ucrColors
-    Friend WithEvents ucrcborParamValue As ucrInputComboBox
+    Friend WithEvents ucrCboParamValue As ucrInputComboBox
 End Class
