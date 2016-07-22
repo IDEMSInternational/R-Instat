@@ -217,6 +217,9 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     ind = which(names(attributes(col)) == "levels")
     if(length(ind) > 0) col_attributes = attributes(col)[-ind]
     else col_attributes = attributes(col)
+    for(att_name in names(col_attributes)) {
+      if(length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(as.character(col_attributes[[att_name]]), collapse = ",")
+    }
     if(i == 1) out <- col_attributes
     else out <- as.data.frame(bind_rows(out, col_attributes))
     i = i + 1
