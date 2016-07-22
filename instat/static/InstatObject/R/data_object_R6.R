@@ -426,42 +426,119 @@ data_object$set("public", "remove_columns_in_data", function(cols=c()) {
 }
 )
 
-data_object$set("public", "replace_value_in_data", function(col_name = "", row, new_value = "") {
-  
-  # Column name must be character
-  if(!is.character(col_name)) {
-    stop("Column name must be of type: character")
-  }
-  
-  else if (!(col_name %in% names(private$data))) {
-    stop(paste("Cannot find column:",col_name,"in the data."))
-  }
-  
-  # Column data length must match number of rows of data.
-  else if (!(row %in% rownames(private$data))) {
-    stop("row not found in data")
-  }
-  index <- which(rownames(private$data) == row)
-  old_value <- private$data[[col_name]][[index]]
-  str_data_type <-self$get_variables_metadata(property = data_type_label, column = col_name)
-  if(str_data_type == "factor") {
-    if(!is.na(new_value) && !(new_value %in% levels(private$data[[col_name]]))) {
-      stop(new_value, " is not an existing level of the factor")
+data_object$set("public", "replace_value_in_data", function(col_names = c(""), old_value = "", start_value = NA, end_value = NA, new_value = "", closed_start_value = TRUE, closed_end_value = TRUE) {
+  for (col_name in col_names){
+    # Column name must be character
+    if(!is.character(col_name)) {
+      stop("Column name must be of type: character")
+    }
+    else if (!(col_name %in% names(private$data))) {
+      stop(paste("Cannot find column:", col_name, " in the data."))
     }
   }
-  if(str_data_type == "integer") {
-  #TODO Check that what checks are needed here
-    new_value <- as.integer(new_value)
+  if(!is.na(start_value) && !is.na(end_value)) {
+    if(!is.numeric(start_value) || !is.numeric(end_value)){
+      stop("start_value and end_value should both be numeric")
+    }
+    if(start_value > end_value){
+      stop("start_value should be smaller than end_value")
+    }
   }
-  if(str_data_type == "numeric") {
-    new_value <- as.numeric(new_value)
+  if((is.na(start_value) && !is.na(end_value)) || (!is.na(start_value) && is.na(end_value)) ) {
+    stop("Both start_value and end_value should(should not) be defined")
   }
-  private$data[[col_name]][[index]] <- new_value
-  self$append_to_changes(list(Replaced_value, col_name, row, old_value, new_value))
+  for(col_name in col_names){
+    str_data_type <-self$get_variables_metadata(property = data_type_label, column = col_name)
+    if(str_data_type == "factor") {
+      #if(!is.na(new_value) && !(new_value %in% levels(private$data[[col_name]]))) {
+      if(!is.na(new_value)) {
+        new_index <- which(levels(private$data[[col_name]]) == old_value)
+        levels(private$data[[col_name]])[new_index] <- new_value
+      }
+    }
+    else{
+      if(!is.na(start_value) && !is.na(end_value)){
+        if(closed_start_value & closed_end_value){
+          index <- which(private$data[[col_name]]>=start_value & private$data[[col_name]]<=end_value)
+        }
+        if(!closed_start_value & closed_end_value){
+          index <- which(private$data[[col_name]]>start_value & private$data[[col_name]]<=end_value)
+        }
+        if(closed_start_value & !closed_end_value){
+          index <- which(private$data[[col_name]]>=start_value & private$data[[col_name]]<end_value)
+        }
+        if(!closed_start_value & !closed_end_value){
+          index <- which(private$data[[col_name]]>start_value & private$data[[col_name]]<end_value)
+        }
+      }
+      else{
+        if(is.na(as.numeric(old_value))){
+          index <- which(is.na(private$data[[col_name]]))
+        }
+        else{
+          index <- which(private$data[[col_name]] == old_value)
+        }
+        
+      }
+      if(str_data_type == "integer") {
+        #TODO Check that what checks are needed here
+        new_value <- as.integer(new_value)
+      }
+      if(str_data_type == "numeric") {
+        new_value <- as.numeric(new_value)
+      }
+      if(str_data_type == "character") {
+        new_value <- as.character(new_value)
+      }
+      
+      for (new_index in index){
+        private$data[[col_name]][[new_index]] <- new_value
+      }
+    }
+  }
+  self$append_to_changes(list(Replaced_value, col_name, old_value, start_value, end_value, new_value, closed_start_value, closed_end_value))
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
 }
 )
+
+# 
+# data_object$set("public", "replace_value_in_data", function(col_name = "", row, new_value = "") {
+#   
+#   # Column name must be character
+#   if(!is.character(col_name)) {
+#     stop("Column name must be of type: character")
+#   }
+#   
+#   else if (!(col_name %in% names(private$data))) {
+#     stop(paste("Cannot find column:",col_name,"in the data."))
+#   }
+#   
+#   # Column data length must match number of rows of data.
+#   else if (!(row %in% rownames(private$data))) {
+#     stop("row not found in data")
+#   }
+#   index <- which(rownames(private$data) == row)
+#   old_value <- private$data[[col_name]][[index]]
+#   str_data_type <-self$get_variables_metadata(property = data_type_label, column = col_name)
+#   if(str_data_type == "factor") {
+#     if(!is.na(new_value) && !(new_value %in% levels(private$data[[col_name]]))) {
+#       stop(new_value, " is not an existing level of the factor")
+#     }
+#   }
+#   if(str_data_type == "integer") {
+#     #TODO Check that what checks are needed here
+#     new_value <- as.integer(new_value)
+#   }
+#   if(str_data_type == "numeric") {
+#     new_value <- as.numeric(new_value)
+#   }
+#   private$data[[col_name]][[index]] <- new_value
+#   self$append_to_changes(list(Replaced_value, col_name, row, old_value, new_value))
+#   self$data_changed <- TRUE
+#   self$variables_metadata_changed <- TRUE
+# }
+# )
 
 data_object$set("public", "append_to_metadata", function(property, new_value = "") {
   
