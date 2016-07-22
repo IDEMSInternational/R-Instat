@@ -217,6 +217,19 @@ Public Class dlgRegressionSimple
         ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
     End Sub
 
+    Private Sub chkConvertToVariate_CheckedChanged_1(sender As Object, e As EventArgs)
+        ResponseConvert()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
+
+    End Sub
+
+    Private Sub ucrResponse_SelectionChanged(sender As Object, e As EventArgs) Handles ucrResponse.SelectionChanged
+
+    End Sub
+
     Private Sub chkFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFunction.CheckedChanged
         If chkFunction.Checked Then
             sdgVariableTransformations.ShowDialog()

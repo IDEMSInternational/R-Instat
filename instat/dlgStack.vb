@@ -38,6 +38,7 @@ Public Class dlgStack
         'TODO Should this be enforced for column names?
         'ucrStackDataInto.SetValidationTypeAsRVariable()
         'ucrFactorInto.SetValidationTypeAsRVariable()
+        ucrStackDataInto.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub ReopenDialog()

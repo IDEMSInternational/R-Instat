@@ -997,4 +997,8 @@ Public Class frmMain
     Private Sub mnuViewTileHorizontally_Click(sender As Object, e As EventArgs) Handles mnuViewTileHorizontally.Click
         Me.LayoutMdi(MdiLayout.TileHorizontal)
     End Sub
+
+    Private Sub mnuOrganiseColumnTextFindReplace_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnTextFindReplace.Click
+        dlgReplace.ShowDialog()
+    End Sub
 End Class
