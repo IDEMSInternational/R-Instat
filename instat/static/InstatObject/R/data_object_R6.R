@@ -471,7 +471,13 @@ data_object$set("public", "replace_value_in_data", function(col_names = c(""), o
         }
       }
       else{
-        index <- which(private$data[[col_name]] == old_value)
+        if(is.na(as.numeric(old_value))){
+          index <- which(is.na(private$data[[col_name]]))
+        }
+        else{
+          index <- which(private$data[[col_name]] == old_value)
+        }
+        
       }
       if(str_data_type == "integer") {
         #TODO Check that what checks are needed here
