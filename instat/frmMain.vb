@@ -31,6 +31,7 @@ Public Class frmMain
     Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
 
+
     Dim mnuItems As New List(Of Form)
 
     'This is the default data frame to appear in the data frame selector
@@ -48,6 +49,8 @@ Public Class frmMain
         frmMetaData.MdiParent = Me
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
+        clsInstatOptions.strWorkingDirectory = strStaticPath
+
 
         LoadInstatOptions()
 
