@@ -92,6 +92,8 @@ Public Class dlgViewDescriptives
     Private Sub rdoViewGraph_CheckedChanged(sender As Object, e As EventArgs) Handles rdoViewGraph.CheckedChanged
         If rdoViewGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 0
+        Else
+            ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
 End Class
