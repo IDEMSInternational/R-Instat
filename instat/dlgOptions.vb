@@ -21,6 +21,7 @@ Imports instat.Translations
 Imports System.IO
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
+    Public strWorkingDirectory As String
     Private Panels As New List(Of Panel)()
     Private VisiblePanel As Panel = Nothing
     'Define the Fonts dialog (only one)
@@ -28,7 +29,7 @@ Public Class dlgOptions
     Dim bFirstLoad As Boolean = True
     Dim fntOutput, fntCommand, fntComment, fntEditor As Font
     Dim clrOutput, clrCommand, clrComment, clrEditor As Color
-    Dim strWorkingDirectory As String
+
 
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -59,8 +60,7 @@ Public Class dlgOptions
         nudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
         nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         txtComment.Text = frmMain.clsInstatOptions.strComment
-
-        ucrWorkingDirectory.SetName(frmMain.strStaticPath)
+        ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
@@ -84,6 +84,8 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetPreviewRows(nudPreviewRows.Value)
         frmMain.clsInstatOptions.SetMaxRows(nudMaxRows.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
+        frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
+
     End Sub
 
     Private Sub SetView()
@@ -143,9 +145,7 @@ Public Class dlgOptions
     End Sub
 
     Private Sub cmdApply_Click(sender As Object, e As EventArgs) Handles cmdApply.Click
-
         SetInstatOptions()
-        SetWorkingDirectory()
         autoTranslate(Me)
 
         If frmMain.Visible Then
@@ -299,21 +299,19 @@ Public Class dlgOptions
         clrEditor = clrNew
     End Sub
 
-    Public Sub GetWorkingDirectory()
-        Dim dlgWorkingDirectory As New FolderBrowserDialog
-        dlgWorkingDirectory.ShowDialog()
-        strWorkingDirectory = (dlgWorkingDirectory.SelectedPath).Replace("\", "/")
-        ucrWorkingDirectory.SetName(strWorkingDirectory)
-    End Sub
-
     Private Sub cmdWorkingDirectory_Click(sender As Object, e As EventArgs) Handles cmdWorkingDirectory.Click
-        GetWorkingDirectory()
-        ApplyEnabled(True)
+        SetWorkingDirectory(strWorkingDirectory)
     End Sub
-    Private Sub SetWorkingDirectory()
-        frmMain.clsRLink.RunScript("setwd(" & Chr(34) & strWorkingDirectory & Chr(34) & ")")
+    Private Sub SetWorkingDirectory(strNewWD As String)
+        Dim dlgWorkingDirectory As New FolderBrowserDialog
+
+        strWorkingDirectory = strNewWD
+
+        If dlgWorkingDirectory.ShowDialog = DialogResult.OK Then
+            strWorkingDirectory = (dlgWorkingDirectory.SelectedPath).Replace("\", "/")
+            ucrWorkingDirectory.SetName(strWorkingDirectory)
+            frmMain.clsRLink.RunScript("setwd(" & Chr(34) & strWorkingDirectory & Chr(34) & ")")
+            ApplyEnabled(True)
+        End If
     End Sub
-
-
-
 End Class
