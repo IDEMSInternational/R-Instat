@@ -681,6 +681,12 @@
     <Compile Include="sdgLayerOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgLayout.Designer.vb">
+      <DependentUpon>sdgLayout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgLayout.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgModelOptions.Designer.vb">
       <DependentUpon>sdgModelOptions.vb</DependentUpon>
     </Compile>
@@ -2577,6 +2583,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLayerOptions.sw-KE.resx">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLayout.fr-FR.resx">
+      <DependentUpon>sdgLayout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLayout.resx">
+      <DependentUpon>sdgLayout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLayout.sw-KE.resx">
+      <DependentUpon>sdgLayout.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgModelOptions.fr-FR.resx">
       <DependentUpon>sdgModelOptions.vb</DependentUpon>
