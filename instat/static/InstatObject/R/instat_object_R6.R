@@ -261,7 +261,7 @@ instat_object$set("public", "get_data_frame", function(data_name, convert_to_cha
 }
 )
 
-instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = TRUE) { 
+instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = FALSE) { 
   if(missing(data_name)) {
     retlist <- list()
     for (curr_obj in private$.data_objects) {
@@ -877,8 +877,8 @@ instat_object$set("public","unfreeze_columns", function(data_name) {
 } 
 )
 
-instat_object$set("public","is_variables_metadata", function(data_name, property) {
-  self$get_data_objects(data_name)$is_variables_metadata(property)
+instat_object$set("public","is_variables_metadata", function(data_name, property, column, update = TRUE) {
+  self$get_data_objects(data_name)$is_variables_metadata(property, column, update)
 } 
 )
 
