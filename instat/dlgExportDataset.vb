@@ -7,6 +7,7 @@ Public Class dlgExportDataset
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
         Dim dlgSave As New SaveFileDialog
         dlgSave.Title = "Export file dialog"
+        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
         dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Excel files (*xlsx)|*.xlsx"
         If dlgSave.ShowDialog = DialogResult.OK Then
             If dlgSave.FileName <> "" Then
