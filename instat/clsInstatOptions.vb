@@ -77,10 +77,8 @@ Public Class InstatOptions
     End Sub
 
     Public Sub SetWorkingDirectory(strWD As String)
-        If strWorkingDirectory IsNot Nothing Then
+        strWorkingDirectory = strWD
+        'frmMain.clsRLink.RunScript("setwd(" & Chr(34) & strWorkingDirectory & Chr(34) & ")")
 
-            strWorkingDirectory = strWD
-            frmMain.clsRLink.RunScript("setwd(" & Chr(34) & strWorkingDirectory & Chr(34) & ")")
-        End If
     End Sub
 End Class
