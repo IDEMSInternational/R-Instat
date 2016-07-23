@@ -171,8 +171,8 @@ data_object$set("public", "update_variables_metadata", function() {
    # }
   #}
   for(col in colnames(private$data)) {
-    if(!self$is_variables_metadata(display_decimal_label, col, update = FALSE)) self$append_to_variables_metadata(col, display_decimal_label, get_default_decimal_places(private$data[[col]]))
-    if(!self$is_variables_metadata(data_type_label, col, update = FALSE)) self$append_to_variables_metadata(col, data_type_label, class(private$data[[col]]))
+    if(!self$is_variables_metadata(display_decimal_label, col)) self$append_to_variables_metadata(col, display_decimal_label, get_default_decimal_places(private$data[[col]]))
+    if(!self$is_variables_metadata(data_type_label, col)) self$append_to_variables_metadata(col, data_type_label, class(private$data[[col]]))
   }
   self$append_to_changes(list(Set_property, "variables_metadata"))
 }
@@ -210,9 +210,10 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
 }
 )
 
-data_object$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = TRUE) {
+data_object$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = FALSE) {
   if(update) self$update_variables_metadata()
   i = 1
+  out = list()
   for(col in private$data) {
     ind = which(names(attributes(col)) == "levels")
     if(length(ind) > 0) col_attributes = attributes(col)[-ind]
@@ -220,10 +221,10 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     for(att_name in names(col_attributes)) {
       if(length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(as.character(col_attributes[[att_name]]), collapse = ",")
     }
-    if(i == 1) out <- col_attributes
-    else out <- as.data.frame(bind_rows(out, col_attributes))
+    out[[i]] <- col_attributes
     i = i + 1
   }
+  out <- as.data.frame(bind_rows(out))
   row.names(out) <- names(private$data)
   if(data_type != "all") {
     if(data_type == "numeric") {
@@ -604,10 +605,10 @@ data_object$set("public", "is_metadata", function(str) {
 }
 )
 
-data_object$set("public", "is_variables_metadata", function(str, col, update = TRUE) {
+data_object$set("public", "is_variables_metadata", function(str, col, update = FALSE) {
   if(!str %in% names(self$get_variables_metadata(update = update))) return(FALSE)
   if(missing(col)) return(TRUE)
-  else return(!is.na(self$get_variables_metadata(property = str, column = col, update = update)))
+  else return(str %in% names(attributes(private$data[[col]])))
 }
 )
 
@@ -864,11 +865,12 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
   }
   
   col_names = names(private$data)
-  curr_var_metadata = self$get_variables_metadata()
+  var_metadata = self$get_variables_metadata()
   out = c()
   for(col in col_names) {
-    if(all(sapply(names(include), function(prop) self$get_variables_metadata(property = prop, column = col,error_if_no_property=FALSE) %in% include[[prop]]))
-       && all(sapply(names(exclude), function(prop) !self$get_variables_metadata(property = prop, column = col,error_if_no_property=FALSE) %in% exclude[[prop]]))) {
+    curr_var_metadata = var_metadata[col, ]
+    if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
+       && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% include[[prop]]))) {
       out = c(out, col)
     }
   }
