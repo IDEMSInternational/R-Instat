@@ -448,7 +448,10 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFIleExit_Click(sender As Object, e As EventArgs) Handles mnuFIleExit.Click
-        Me.Close()
+        Dim close = MsgBox("Do you wish to exit Instat-R", MessageBoxButtons.YesNo)
+        If close = DialogResult.Yes Then
+            Me.Close()
+        End If
     End Sub
 
     Private Sub mnuFileOpenFromFile_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromFile.Click
