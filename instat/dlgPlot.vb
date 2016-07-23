@@ -33,15 +33,17 @@ Public Class dlgPlot
             'reopendialog
         End If
 
-        TeskOkEnabled()
+        TestOkEnabled()
     End Sub
 
     Private Sub SetDefaults()
+        clsRaesFunction.ClearParameters()
+        clsRgeom_lineplotFunction.ClearParameters()
         chkPoints.Checked = False
         ucrLinePlotSelector.Focus()
         ucrLinePlotSelector.Reset()
         ucrVariablesAsFactorForLinePlot.ResetControl()
-        TeskOkEnabled()
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -55,10 +57,11 @@ Public Class dlgPlot
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_lineplotFunction)
 
         ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.iHelpTopicID = 434
 
 
         ucrReceiverX.Selector = ucrLinePlotSelector
-        ucrReceiverX.SetIncludedDataTypes({"numeric"})
+        ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
         ucrFactorOptionalReceiver.Selector = ucrLinePlotSelector
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
@@ -67,11 +70,16 @@ Public Class dlgPlot
 
         ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForLinePlot.SetSelector(ucrLinePlotSelector)
-        ucrVariablesAsFactorForLinePlot.SetIncludedDataType({"numeric"})
+        ucrVariablesAsFactorForLinePlot.SetIncludedDataType({"numeric", "factor"})
 
+        ucrSaveLinePlot.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
+        ucrSaveLinePlot.strPrefix = "Line"
+        ucrSaveLinePlot.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveLinePlot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
-    Private Sub TeskOkEnabled()
-        If ucrReceiverX.IsEmpty() = True Or ucrVariablesAsFactorForLinePlot.IsEmpty() Then
+
+    Private Sub TestOkEnabled()
+        If (ucrReceiverX.IsEmpty() Or ucrVariablesAsFactorForLinePlot.IsEmpty()) Or (ucrSaveLinePlot.chkSaveGraph.Checked And ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -90,14 +98,14 @@ Public Class dlgPlot
         Else
             clsRaesFunction.RemoveParameterByName("x")
         End If
-        TeskOkEnabled()
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
         If ucrFactorOptionalReceiver.IsEmpty() = False Then
-            clsRaesFunction.AddParameter("color", ucrFactorOptionalReceiver.GetVariableNames(False))
+            clsRaesFunction.AddParameter("colour", ucrFactorOptionalReceiver.GetVariableNames(False))
         Else
-            clsRaesFunction.RemoveParameterByName("color")
+            clsRaesFunction.RemoveParameterByName("colour")
         End If
     End Sub
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -124,6 +132,33 @@ Public Class dlgPlot
         Else
             clsRaesFunction.RemoveParameterByName("y")
         End If
-        TeskOkEnabled()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveLinePlot_GraphNameChanged() Handles ucrSaveLinePlot.GraphNameChanged, ucrSaveLinePlot.SaveGraphCheckedChanged
+        If ucrSaveLinePlot.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveLinePlot.strGraphName, strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveLinePlot.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdPointOptions_Click(sender As Object, e As EventArgs) Handles cmdPointOptions.Click
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_lineplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "y" Then
+                ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "x" Then
+                ucrReceiverX.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
     End Sub
 End Class

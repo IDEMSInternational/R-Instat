@@ -29,6 +29,7 @@ Public Class sdgCanonicalCorrelation
 
     Private Sub Cancor()
         clsRCanCor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRCanCor.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsRCanCor.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
         clsRCanCor.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
         frmMain.clsRLink.RunScript(clsRCanCor.ToScript(), 2)
@@ -36,6 +37,7 @@ Public Class sdgCanonicalCorrelation
 
     Private Sub Coef()
         clsRCoef.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRCoef.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsRCoef.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
         clsRCoef.AddParameter("value1", Chr(34) & "coef" & Chr(34))
         frmMain.clsRLink.RunScript(clsRCoef.ToScript(), 2)
@@ -96,5 +98,4 @@ Public Class sdgCanonicalCorrelation
             clsRGraphics.RemoveParameter("columns")
         End If
     End Sub
-
 End Class

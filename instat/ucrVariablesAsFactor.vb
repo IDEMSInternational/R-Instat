@@ -195,7 +195,24 @@
         SetDefaults()
     End Sub
 
-    Private Sub ucrMultipleVariables_Load(sender As Object, e As EventArgs) Handles ucrMultipleVariables.Load
+    Public Sub Add(strVar As String)
+        If bSingleVariable Then
+            ucrSingleVariable.Add(strVar)
+        Else
+            ucrMultipleVariables.Add({strVar})
+        End If
+    End Sub
 
+    Public Sub Clear()
+        If bSingleVariable Then
+            ucrSingleVariable.Clear()
+        Else
+            ucrMultipleVariables.Clear()
+        End If
+    End Sub
+
+    Public Sub SetSingleReceiverStatus(bSingle As Boolean)
+        bSingleVariable = bSingle
+        SetReceiverStatus()
     End Sub
 End Class

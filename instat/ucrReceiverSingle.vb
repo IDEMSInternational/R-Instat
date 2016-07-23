@@ -19,6 +19,7 @@ Imports RDotNet
 Public Class ucrReceiverSingle
     Dim strDataFrameName As String
     Public strCurrDataType As String
+    Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
 
     Public Sub New()
         ' This call is required by the designer.
@@ -65,10 +66,13 @@ Public Class ucrReceiverSingle
 
     Public Overrides Sub RemoveSelected()
         If txtReceiverSingle.Enabled Then
-            Selector.RemoveFromVariablesList(txtReceiverSingle.Text)
+            If Selector IsNot Nothing Then
+                Selector.RemoveFromVariablesList(txtReceiverSingle.Text)
+            End If
             txtReceiverSingle.Text = ""
             strDataFrameName = ""
         End If
+        MyBase.RemoveSelected()
     End Sub
 
     Public Overrides Sub Clear()
@@ -90,9 +94,15 @@ Public Class ucrReceiverSingle
         'call GetVariableNames
         Dim clsGetVariablesFunc As New RFunction
         Dim clsParam As New RParameter
-        If txtReceiverSingle.Text <> "" Then
+        Dim strCurrentType As String
+        If Selector IsNot Nothing AndAlso txtReceiverSingle.Text <> "" Then
             clsGetVariablesFunc.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-            Select Case strType
+            If bTypeSet Then
+                strCurrentType = strType
+            Else
+                strCurrentType = Selector.GetItemType()
+            End If
+            Select Case strCurrentType
                 Case "column"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
                     clsGetVariablesFunc.AddParameter("col_name", GetVariableNames())
@@ -115,6 +125,15 @@ Public Class ucrReceiverSingle
                 Case "filter"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
                     clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
+                Case "object"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+                    clsGetVariablesFunc.AddParameter("object_name", GetVariableNames())
+                Case "graph"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+                    clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
+                Case "model"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
+                    clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
             End Select
 
             'TODO make this an option set in Options menu
@@ -137,11 +156,19 @@ Public Class ucrReceiverSingle
         Return strTemp
     End Function
 
+    Public Overrides Function GetVariableNameslist(Optional bWithQuotes As Boolean = True) As String()
+        Dim arrTemp As String() = Nothing
+        arrTemp = {GetVariableNames()}
+        Return arrTemp
+    End Function
+
     Public Function GetDataName() As String
         Return strDataFrameName
     End Function
 
     Public Event SelectionChanged(sender As Object, e As EventArgs)
+
+
 
     Private Sub txtReceiverSingle_TextChanged(sender As Object, e As EventArgs) Handles txtReceiverSingle.TextChanged
         OnValueChanged(sender, e)
@@ -177,4 +204,7 @@ Public Class ucrReceiverSingle
         End If
     End Sub
 
+    Private Sub ucrReceiverSingle_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
+        RaiseEvent WithMeSelectionChanged(Me)
+    End Sub
 End Class

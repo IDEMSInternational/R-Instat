@@ -138,6 +138,7 @@
     <Compile Include="clsDistribution.vb" />
     <Compile Include="clsGeom.vb" />
     <Compile Include="clsInstatOptions.vb" />
+    <Compile Include="clsRecentFiles.vb" />
     <Compile Include="clsRFunction.vb" />
     <Compile Include="clsROperator.vb" />
     <Compile Include="dlgAddStartRain.designer.vb">
@@ -308,6 +309,12 @@
     <Compile Include="dlgExportDataset.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFourVariableModelling.Designer.vb">
+      <DependentUpon>dlgFourVariableModelling.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFourVariableModelling.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFreezeColumns.Designer.vb">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </Compile>
@@ -362,10 +369,16 @@
     <Compile Include="dlgInsertColumn.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgMakeSheets.Designer.vb">
-      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    <Compile Include="dlgJitter.Designer.vb">
+      <DependentUpon>dlgJitter.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgMakeSheets.vb">
+    <Compile Include="dlgJitter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgFactorDataFrame.Designer.vb">
+      <DependentUpon>dlgFactorDataFrame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFactorDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgMatchText.Designer.vb">
@@ -512,16 +525,22 @@
     <Compile Include="dlgRestrict.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRowNamesOrNumbers.Designer.vb">
+      <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRowNamesOrNumbers.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgScatterPlot.Designer.vb">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgScatterPlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgSheetMetadata.Designer.vb">
-      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
+    <Compile Include="dlgDataFrameMetadata.Designer.vb">
+      <DependentUpon>dlgDataFrameMetadata.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgSheetMetadata.vb">
+    <Compile Include="dlgDataFrameMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSplitText.Designer.vb">
@@ -662,6 +681,12 @@
     <Compile Include="sdgLayerOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgLayout.Designer.vb">
+      <DependentUpon>sdgLayout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgLayout.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgModelOptions.Designer.vb">
       <DependentUpon>sdgModelOptions.vb</DependentUpon>
     </Compile>
@@ -697,6 +722,18 @@
     </Compile>
     <Compile Include="sdgVariableTransformations.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ucrAdditionalLayers.Designer.vb">
+      <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrAdditionalLayers.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrColors.Designer.vb">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrColors.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
@@ -1286,10 +1323,10 @@
     <Compile Include="dlgShiftDailyData.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgSimpleWithGroups.Designer.vb">
-      <DependentUpon>dlgSimpleWithGroups.vb</DependentUpon>
+    <Compile Include="dlgThreeVariablesModelling.Designer.vb">
+      <DependentUpon>dlgThreeVariablesModelling.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgSimpleWithGroups.vb">
+    <Compile Include="dlgThreeVariablesModelling.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSite.Designer.vb">
@@ -1594,6 +1631,12 @@
     <Compile Include="ucrLayerParameters.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrLayerParamsControls.Designer.vb">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrLayerParamsControls.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMultipleInput.Designer.vb">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </Compile>
@@ -1610,6 +1653,12 @@
       <DependentUpon>ucrReceiver.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrReceiver.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrReceiverMetadataProperty.Designer.vb">
+      <DependentUpon>ucrReceiverMetadataProperty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReceiverMetadataProperty.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrReceiverMultiple.designer.vb">
@@ -1830,6 +1879,15 @@
     <EmbeddedResource Include="dlgColumnMetadata.sw-KE.resx">
       <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStats.fr-FR.resx">
+      <DependentUpon>dlgColumnStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStats.resx">
+      <DependentUpon>dlgColumnStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStats.sw-KE.resx">
+      <DependentUpon>dlgColumnStats.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCombineText.fr-FR.resx">
       <DependentUpon>dlgCombineText.vb</DependentUpon>
     </EmbeddedResource>
@@ -1929,6 +1987,15 @@
     <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgFourVariableModelling.fr-FR.resx">
+      <DependentUpon>dlgFourVariableModelling.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFourVariableModelling.resx">
+      <DependentUpon>dlgFourVariableModelling.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFourVariableModelling.sw-KE.resx">
+      <DependentUpon>dlgFourVariableModelling.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgFreezeColumns.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </EmbeddedResource>
@@ -2004,14 +2071,23 @@
     <EmbeddedResource Include="dlgInsertColumn.sw-KE.resx">
       <DependentUpon>dlgInsertColumn.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgMakeSheets.fr-FR.resx">
-      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    <EmbeddedResource Include="dlgJitter.fr-FR.resx">
+      <DependentUpon>dlgJitter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgMakeSheets.resx">
-      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    <EmbeddedResource Include="dlgJitter.resx">
+      <DependentUpon>dlgJitter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgMakeSheets.sw-KE.resx">
-      <DependentUpon>dlgMakeSheets.vb</DependentUpon>
+    <EmbeddedResource Include="dlgJitter.sw-KE.resx">
+      <DependentUpon>dlgJitter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFactorDataFrame.fr-FR.resx">
+      <DependentUpon>dlgFactorDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFactorDataFrame.resx">
+      <DependentUpon>dlgFactorDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFactorDataFrame.sw-KE.resx">
+      <DependentUpon>dlgFactorDataFrame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMatchText.fr-FR.resx">
       <DependentUpon>dlgMatchText.vb</DependentUpon>
@@ -2021,6 +2097,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMatchText.sw-KE.resx">
       <DependentUpon>dlgMatchText.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMerge.resx">
+      <DependentUpon>dlgMerge.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgMetadata.fr-FR.resx">
       <DependentUpon>dlgMetadata.vb</DependentUpon>
@@ -2223,6 +2302,9 @@
     <EmbeddedResource Include="dlgRestrict.sw-KE.resx">
       <DependentUpon>dlgRestrict.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRowNamesOrNumbers.resx">
+      <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.fr-FR.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -2232,14 +2314,14 @@
     <EmbeddedResource Include="dlgScatterPlot.sw-KE.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSheetMetadata.fr-FR.resx">
-      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDataFrameMetadata.fr-FR.resx">
+      <DependentUpon>dlgDataFrameMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSheetMetadata.resx">
-      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDataFrameMetadata.resx">
+      <DependentUpon>dlgDataFrameMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSheetMetadata.sw-KE.resx">
-      <DependentUpon>dlgSheetMetadata.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDataFrameMetadata.sw-KE.resx">
+      <DependentUpon>dlgDataFrameMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSplitText.fr-FR.resx">
       <DependentUpon>dlgSplitText.vb</DependentUpon>
@@ -2501,6 +2583,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLayerOptions.sw-KE.resx">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLayout.fr-FR.resx">
+      <DependentUpon>sdgLayout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLayout.resx">
+      <DependentUpon>sdgLayout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLayout.sw-KE.resx">
+      <DependentUpon>sdgLayout.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgModelOptions.fr-FR.resx">
       <DependentUpon>sdgModelOptions.vb</DependentUpon>
@@ -3325,14 +3416,14 @@
     <EmbeddedResource Include="dlgShiftDailyData.sw-KE.resx">
       <DependentUpon>dlgShiftDailyData.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSimpleWithGroups.fr-FR.resx">
-      <DependentUpon>dlgSimpleWithGroups.vb</DependentUpon>
+    <EmbeddedResource Include="dlgThreeVariablesModelling.fr-FR.resx">
+      <DependentUpon>dlgThreeVariablesModelling.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSimpleWithGroups.resx">
-      <DependentUpon>dlgSimpleWithGroups.vb</DependentUpon>
+    <EmbeddedResource Include="dlgThreeVariablesModelling.resx">
+      <DependentUpon>dlgThreeVariablesModelling.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSimpleWithGroups.sw-KE.resx">
-      <DependentUpon>dlgSimpleWithGroups.vb</DependentUpon>
+    <EmbeddedResource Include="dlgThreeVariablesModelling.sw-KE.resx">
+      <DependentUpon>dlgThreeVariablesModelling.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSite.fr-FR.resx">
       <DependentUpon>dlgSite.vb</DependentUpon>
@@ -3646,6 +3737,15 @@
     <EmbeddedResource Include="sdgVariableTransformations.sw-KE.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrAdditionalLayers.fr-FR.resx">
+      <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrAdditionalLayers.resx">
+      <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrAdditionalLayers.sw-KE.resx">
+      <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
@@ -3663,6 +3763,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtonsSubdialogue.sw-KE.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.fr-FR.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrColors.sw-KE.resx">
+      <DependentUpon>ucrColors.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.fr-FR.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
@@ -3790,6 +3899,15 @@
     <EmbeddedResource Include="ucrLayerParameters.sw-KE.resx">
       <DependentUpon>ucrLayerParameters.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParamsControls.fr-FR.resx">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParamsControls.resx">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrLayerParamsControls.sw-KE.resx">
+      <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </EmbeddedResource>
@@ -3807,6 +3925,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNewColumnName.sw-KE.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverMetadataProperty.fr-FR.resx">
+      <DependentUpon>ucrReceiverMetadataProperty.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverMetadataProperty.resx">
+      <DependentUpon>ucrReceiverMetadataProperty.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverMetadataProperty.sw-KE.resx">
+      <DependentUpon>ucrReceiverMetadataProperty.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverMultiple.fr-FR.resx">
       <DependentUpon>ucrReceiverMultiple.vb</DependentUpon>
@@ -3910,6 +4037,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -3959,6 +4088,132 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="lib\unvell.ReoScript.dll" />
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\abind_1.4-5.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\class_7.3-14.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\dendextend_1.2.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\DEoptimR_1.0-4.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\DEoptimR_1.0-6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\devtools_1.12.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\diptest_0.75-7.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\dplyr_0.5.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\dummies_1.5.6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\flexmix_2.3-13.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\fpc_2.1-10.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\GGally_1.2.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\ggthemes_3.2.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\haven_0.2.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\heplots_1.3-1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\httr_1.2.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\httr_1.2.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\jsonlite_0.9.22.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\jsonlite_1.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\kernlab_0.9-24.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\lazyeval_0.2.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\mclust_5.2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\mgcv_1.8-13.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\mime_0.5.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\modeltools_0.2-21.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\mvtnorm_1.0-5.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\openair_1.8-6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\plotrix_3.6-3.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\plyr_1.8.4.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\prabclus_2.2-6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\quantreg_5.26.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\Rcpp_0.12.6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\rio_0.4.8.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\robustbase_0.92-6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\rstudioapi_0.6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\survival_2.39-5.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\tibble_1.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\tidyr_0.5.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\trimcluster_0.1-2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\withr_1.0.2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\xml2_1.0.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="static\Recent_Files\recent.mru">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\arrows_bottom.png" />
     <Content Include="Resources\arrows_down.png" />
     <Content Include="Resources\arrows_top.png" />

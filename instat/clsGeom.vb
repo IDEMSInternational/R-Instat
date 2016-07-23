@@ -15,9 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class Geoms
-    Public strGeomName As String
+    Public strGeomName As String = ""
     Public clsAesParameters As New List(Of AesParameters)
     Public clsLayerParameters As New List(Of LayerParameters)
+
+    Public Sub SetGeomName(strTempName As String)
+        strGeomName = strTempName
+    End Sub
 
     Public Sub AddAesParameter(strAesParameterName As String, Optional strAesParameterValue As String = Nothing, Optional strIncludedDataTypes As String() = Nothing, Optional strExcludedDataTypes As String() = Nothing, Optional bIsMandatory As Boolean = False)
         'will be adding parameters to the geom as well as the value of the parameter.
@@ -30,18 +34,34 @@ Public Class Geoms
         clsAesParameters.Add(NewAesParameter)
     End Sub
 
-    Public Sub AddLayerParameter(strLayerParameterName As String, strLayerParameterDataType As String, strLayerParameterDefaultValue As String, Optional bIsDependent As Boolean = False, Optional strDependentParameter As String = "", Optional strDependantpParameterValue As String = "")
+    Public Sub AddLayerParameter(strLayerParameterName As String, strLayerParameterDataType As String, strLayerParameterDefaultValue As String, Optional bIsDependent As Boolean = False, Optional lstParameterStrings As String() = Nothing, Optional strDependentParameter As String = "", Optional strDependantpParameterValue As String = "")
         Dim NewLayerParameter As New LayerParameters
 
+        If lstParameterStrings Is Nothing Then
+            lstParameterStrings = New String() {}
+        End If
         NewLayerParameter.strLayerParameterName = strLayerParameterName
         NewLayerParameter.strLayerParameterDataType = strLayerParameterDataType
         NewLayerParameter.strParameterDefaultValue = strLayerParameterDefaultValue
-        NewLayerParameter.strDependentParameter = strDependentParameter
-        NewLayerParameter.strDependantparameterValue = strDependantpParameterValue
-        NewLayerParameter.bIsDependent = bIsDependent
+        NewLayerParameter.lstParameterStrings = lstParameterStrings
+        'NewLayerParameter.strDependentParameter = strDependentParameter
+        'NewLayerParameter.strDependantparameterValue = strDependantpParameterValue
+        'NewLayerParameter.bIsDependent = bIsDependent
 
         clsLayerParameters.Add(NewLayerParameter)
     End Sub
+
+    Public ReadOnly Property iNumMandatoryAes As Integer
+        Get
+            Dim iCount As Integer = 0
+            For Each clsParam In clsAesParameters
+                If clsParam.bIsMandatory Then
+                    iCount = iCount + 1
+                End If
+            Next
+            Return iCount
+        End Get
+    End Property
 End Class
 
 Public Class AesParameters
@@ -61,4 +81,5 @@ Public Class LayerParameters
     Public strDependentParameter As String
     Public strDependantparameterValue As String
     Public bIsDependent As Boolean
+    Public lstParameterStrings As String()
 End Class

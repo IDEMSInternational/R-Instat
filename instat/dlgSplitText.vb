@@ -23,11 +23,17 @@ Public Class dlgSplitText
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog
         End If
+        TestOKEnabled()
     End Sub
 
+    Private Sub ReopenDialog()
+
+    End Sub
     Private Sub TestOKEnabled()
-        If ucrReceiverSplitTextColumn.IsEmpty() = False And nudN.Text <> "" Then
+        If Not ucrReceiverSplitTextColumn.IsEmpty() AndAlso nudN.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -43,8 +49,9 @@ Public Class dlgSplitText
         ucrInputColumnsIntoText.SetItemsTypeAsColumns()
         ucrInputColumnsIntoText.SetDefaultTypeAsColumn()
         ucrInputColumnsIntoText.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
-        ucrInputPattern.AddItems({"Whitespace", ".", "-", "_"})
+        ucrInputPattern.SetItems({"Whitespace", ".", "-", "_"})
         ucrBase.iHelpTopicID = 344
+        ucrInputColumnsIntoText.SetValidationTypeAsRVariable()
 
     End Sub
 
@@ -53,16 +60,19 @@ Public Class dlgSplitText
         ucrSelectorSplitTextColumn.Focus()
         ucrInputColumnsIntoText.Reset()
         ucrInputColumnsIntoText.SetName("SplitText")
-
-
+        nudN.Value = 2
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        TestOKEnabled()
         SetDefaults()
+        TestOKEnabled()
     End Sub
 
     Private Sub cboInputPattern_Namechanged() Handles ucrInputPattern.NameChanged
+        PatternParameter()
+    End Sub
+
+    Private Sub PatternParameter()
         Select Case ucrInputPattern.GetText
             Case "Whitespace"
                 ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & " " & Chr(34))
@@ -75,7 +85,6 @@ Public Class dlgSplitText
             Case Else
                 ucrBase.clsRsyntax.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText() & Chr(34))
         End Select
-
     End Sub
 
     Private Sub ucrInputColumnIntText_NameChanged() Handles ucrInputColumnsIntoText.NameChanged
@@ -84,18 +93,19 @@ Public Class dlgSplitText
 
     Private Sub ucrReceiverSplitTextColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSplitTextColumn.SelectionChanged
         If Not ucrReceiverSplitTextColumn.IsEmpty Then
-
             ucrBase.clsRsyntax.AddParameter("string", clsRFunctionParameter:=ucrReceiverSplitTextColumn.GetVariables())
         Else
             ucrBase.clsRsyntax.RemoveParameter("string")
         End If
         TestOKEnabled()
-
     End Sub
 
     Private Sub nudN_TextChanged(sender As Object, e As EventArgs) Handles nudN.TextChanged
-        ucrBase.clsRsyntax.AddParameter("n", nudN.Value)
+        If nudN.Text <> "" Then
+            ucrBase.clsRsyntax.AddParameter("n", nudN.Value)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("n")
+        End If
         TestOKEnabled()
     End Sub
-
 End Class

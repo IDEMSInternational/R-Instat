@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgDummyVariables
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgDummyVariables
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpLevelOmitted = New System.Windows.Forms.GroupBox()
         Me.rdoLevelNumber = New System.Windows.Forms.RadioButton()
@@ -29,9 +29,7 @@ Partial Class dlgDummyVariables
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.chkXvariable = New System.Windows.Forms.CheckBox()
         Me.lblSelected = New System.Windows.Forms.Label()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.lblVariate = New System.Windows.Forms.Label()
-        Me.ucrInputColName = New instat.ucrInputComboBox()
         Me.ucrSelectorDummyVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrVariateReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
@@ -122,16 +120,6 @@ Partial Class dlgDummyVariables
         Me.lblSelected.Tag = "Selected"
         Me.lblSelected.Text = "Selected"
         '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 242)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(98, 13)
-        Me.lblNewColumnName.TabIndex = 7
-        Me.lblNewColumnName.Tag = "New_Column_Name"
-        Me.lblNewColumnName.Text = "New Column Name"
-        '
         'lblVariate
         '
         Me.lblVariate.AutoSize = True
@@ -142,15 +130,9 @@ Partial Class dlgDummyVariables
         Me.lblVariate.Tag = "Variate"
         Me.lblVariate.Text = "Variate"
         '
-        'ucrInputColName
-        '
-        Me.ucrInputColName.Location = New System.Drawing.Point(115, 234)
-        Me.ucrInputColName.Name = "ucrInputColName"
-        Me.ucrInputColName.Size = New System.Drawing.Size(145, 21)
-        Me.ucrInputColName.TabIndex = 8
-        '
         'ucrSelectorDummyVariable
         '
+        Me.ucrSelectorDummyVariable.bShowHiddenColumns = False
         Me.ucrSelectorDummyVariable.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorDummyVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDummyVariable.Name = "ucrSelectorDummyVariable"
@@ -177,7 +159,7 @@ Partial Class dlgDummyVariables
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 266)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 268)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
@@ -186,9 +168,7 @@ Partial Class dlgDummyVariables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 319)
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrInputColName)
+        Me.ClientSize = New System.Drawing.Size(419, 332)
         Me.Controls.Add(Me.ucrSelectorDummyVariable)
         Me.Controls.Add(Me.ucrVariateReceiver)
         Me.Controls.Add(Me.lblVariate)
@@ -220,8 +200,6 @@ Partial Class dlgDummyVariables
     Friend WithEvents lblSelected As Label
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents ucrSelectorDummyVariable As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrInputColName As ucrInputComboBox
-    Friend WithEvents lblNewColumnName As Label
     Friend WithEvents lblVariate As Label
     Friend WithEvents ucrVariateReceiver As ucrReceiverSingle
 End Class

@@ -25,13 +25,20 @@ Public Class dlgUseGraph
         Else
             ReOpenDialog()
         End If
+        TestOkEnabled()
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrGraphReceiver.SetMeAsReceiver()
+        ucrGraphsSelector.Reset()
+        TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 358
+        ucrBase.iHelpTopicID = 430
+        ucrGraphsSelector.SetItemType("graph")
+        ucrGraphReceiver.Selector = ucrGraphsSelector
+        sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
     End Sub
     Private Sub ReOpenDialog()
 
@@ -39,5 +46,29 @@ Public Class dlgUseGraph
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+    Private Sub TestOkEnabled()
+        If Not ucrGraphReceiver.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+    Private Sub cmdAddLayer_Click(sender As Object, e As EventArgs) Handles cmdAddLayer.Click
+        sdgLayerOptions.ShowDialog()
+    End Sub
+
+    Private Sub ucrGraphReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrGraphReceiver.SelectionChanged
+        If Not ucrGraphReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("graph_name", ucrGraphReceiver.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("graph_name")
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrGraphsSelector_DataFrameChanged() Handles ucrGraphsSelector.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+
     End Sub
 End Class

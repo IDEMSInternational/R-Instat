@@ -40,4 +40,13 @@ Public Class ucrSelectorByDataFrame
         ucrAvailableDataFrames.SetIncludeOverall(bIncludeOverall)
         LoadList()
     End Sub
+
+    Public Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True)
+        ucrAvailableDataFrames.SetDataframe(strDataframe, bEnableDataframe)
+    End Sub
+
+    Public Overridable Sub SetVariablesEnabled(bEnable As Boolean)
+        lstAvailableVariable.Enabled = bEnable
+    End Sub
+
 End Class

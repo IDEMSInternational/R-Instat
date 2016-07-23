@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgLayerOptions
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class sdgLayerOptions
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.tbcLayers = New System.Windows.Forms.TabControl()
         Me.tbpAesthetics = New System.Windows.Forms.TabPage()
@@ -40,7 +40,7 @@ Partial Class sdgLayerOptions
         Me.tbcLayers.Location = New System.Drawing.Point(13, 13)
         Me.tbcLayers.Name = "tbcLayers"
         Me.tbcLayers.SelectedIndex = 0
-        Me.tbcLayers.Size = New System.Drawing.Size(482, 335)
+        Me.tbcLayers.Size = New System.Drawing.Size(482, 383)
         Me.tbcLayers.TabIndex = 1
         '
         'tbpAesthetics
@@ -49,7 +49,7 @@ Partial Class sdgLayerOptions
         Me.tbpAesthetics.Location = New System.Drawing.Point(4, 22)
         Me.tbpAesthetics.Name = "tbpAesthetics"
         Me.tbpAesthetics.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpAesthetics.Size = New System.Drawing.Size(474, 309)
+        Me.tbpAesthetics.Size = New System.Drawing.Size(474, 357)
         Me.tbpAesthetics.TabIndex = 0
         Me.tbpAesthetics.Text = "Layer Dimensions(Aesthetics)"
         Me.tbpAesthetics.UseVisualStyleBackColor = True
@@ -67,21 +67,22 @@ Partial Class sdgLayerOptions
         Me.tbpGeomParameters.Location = New System.Drawing.Point(4, 22)
         Me.tbpGeomParameters.Name = "tbpGeomParameters"
         Me.tbpGeomParameters.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpGeomParameters.Size = New System.Drawing.Size(474, 309)
+        Me.tbpGeomParameters.Size = New System.Drawing.Size(474, 357)
         Me.tbpGeomParameters.TabIndex = 1
         Me.tbpGeomParameters.Text = "Layer Parameters(Geom Parameters)"
         Me.tbpGeomParameters.UseVisualStyleBackColor = True
         '
         'ucrLayerParameter
         '
-        Me.ucrLayerParameter.Location = New System.Drawing.Point(6, 6)
+        Me.ucrLayerParameter.Location = New System.Drawing.Point(3, 3)
         Me.ucrLayerParameter.Name = "ucrLayerParameter"
-        Me.ucrLayerParameter.Size = New System.Drawing.Size(187, 237)
+        Me.ucrLayerParameter.Size = New System.Drawing.Size(300, 355)
         Me.ucrLayerParameter.TabIndex = 0
+        Me.ucrLayerParameter.ucrGeomWithAes = Nothing
         '
         'ucrSdgLayerBase
         '
-        Me.ucrSdgLayerBase.Location = New System.Drawing.Point(148, 354)
+        Me.ucrSdgLayerBase.Location = New System.Drawing.Point(186, 395)
         Me.ucrSdgLayerBase.Name = "ucrSdgLayerBase"
         Me.ucrSdgLayerBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgLayerBase.TabIndex = 0
@@ -90,7 +91,7 @@ Partial Class sdgLayerOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(507, 385)
+        Me.ClientSize = New System.Drawing.Size(507, 425)
         Me.Controls.Add(Me.tbcLayers)
         Me.Controls.Add(Me.ucrSdgLayerBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow

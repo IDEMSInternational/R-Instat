@@ -35,14 +35,14 @@ Public Class dlgBarAndPieChart
 
     Private Sub SetDefaults()
         'Set main dialog defaults...
+        clsRgeom_barchart.ClearParameters()
+        clsRaesFunction.ClearParameters()
         rdoBarChart.Checked = True
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.Focus()
         ucrFactorReceiver.SetMeAsReceiver()
-        'set subdialog defaults
-        'sdgBarChart.SetDefaults()
-        sdgPieChartOptions.SetDefaults()
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -57,36 +57,27 @@ Public Class dlgBarAndPieChart
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.SetIncludedDataTypes({"factor"})
 
-        'sdgBarChart.SetBarChartFunction(clsRgeom_barchart)
-        sdgPieChartOptions.SetPieChartFunction(clsTempRFunc)
+
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.iCallType = 0
-        ucrBase.iHelpTopicID = 327
+        ucrBase.iHelpTopicID = 438
 
 
+        ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
+        'ucrSaveBar.strPrefix = "Graph"
+        ucrSaveBar.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveBar.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
 
     Private Sub ReopenDialog()
     End Sub
 
     Public Sub TestOKEnabled()
-        If ucrFactorReceiver.IsEmpty Then
+        If ucrFactorReceiver.IsEmpty OrElse (ucrSaveBar.chkSaveGraph.Checked AndAlso ucrSaveBar.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
-            If rdoBarChart.Checked = True Then
-                clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
-                If Not ucrSecondReceiver.IsEmpty Then
-                    clsRaesFunction.AddParameter("fill", ucrSecondReceiver.GetVariableNames(False))
-                Else
-                    clsRaesFunction.RemoveParameterByName("fill")
-                End If
-            ElseIf rdoPieChart.Checked = True Then
-                clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-                clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
-            End If
             ucrBase.OKEnabled(True)
         End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -99,16 +90,43 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrFactorReceiver_SelectionChanged() Handles ucrFactorReceiver.SelectionChanged
+        SetFactorReceiverParameter()
+    End Sub
+
+    Private Sub SetFactorReceiverParameter()
+        If rdoBarChart.Checked = True Then
+            If Not ucrFactorReceiver.IsEmpty Then
+                clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+            Else
+                clsRaesFunction.RemoveParameterByName("x")
+            End If
+        Else
+            If Not ucrFactorReceiver.IsEmpty Then
+                clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
+            Else
+                clsRaesFunction.RemoveParameterByName("fill")
+            End If
+        End If
         TestOKEnabled()
     End Sub
 
+
     Private Sub ucrSecondReceiver_SelectionChanged() Handles ucrSecondReceiver.SelectionChanged
+        SetSecondFactorReceiverParameter()
+    End Sub
+
+    Private Sub SetSecondFactorReceiverParameter()
+        If rdoBarChart.Checked AndAlso Not ucrSecondReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("fill", ucrSecondReceiver.GetVariableNames(False))
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+        End If
         TestOKEnabled()
     End Sub
 
     Private Sub grpSelection_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
-
         If rdoBarChart.Checked = True Then
+            ucrSaveBar.strPrefix = "Bar"
             clsRgeom_barchart.RemoveParameterByName("width")
             ucrBase.clsRsyntax.RemoveOperatorParameter("polar")
             cmdBarChartOptions.Visible = True
@@ -116,6 +134,8 @@ Public Class dlgBarAndPieChart
             ucrSecondReceiver.Visible = True
             lblSecondFactor.Visible = True
         ElseIf rdoPieChart.Checked = True Then
+            ucrSaveBar.strPrefix = "Pie"
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
             clsRgeom_barchart.AddParameter("width", "1")
             clsTempRFunc.SetRCommand("coord_polar")
             clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
@@ -125,6 +145,8 @@ Public Class dlgBarAndPieChart
             ucrSecondReceiver.Visible = False
             lblSecondFactor.Visible = False
         End If
+        SetFactorReceiverParameter()
+        SetSecondFactorReceiverParameter()
         TestOKEnabled()
     End Sub
 
@@ -133,10 +155,43 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
-        sdgBarChart.ShowDialog()
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_barchart, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                ucrFactorReceiver.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrSecondReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOKEnabled()
     End Sub
 
     Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
-        sdgPieChartOptions.ShowDialog()
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_barchart, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = "" Then
+                    ucrFactorReceiver.Clear()
+                Else
+                    ucrFactorReceiver.Add(clsParam.strArgumentValue)
+                End If
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrSecondReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSaveBar_GraphNameChanged() Handles ucrSaveBar.GraphNameChanged, ucrSaveBar.SaveGraphCheckedChanged
+        If ucrSaveBar.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveBar.strGraphName, strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveBar.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
+        TestOKEnabled()
     End Sub
 End Class

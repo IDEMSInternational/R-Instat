@@ -59,7 +59,11 @@ Public Class dlgLabels
     End Sub
 
     Private Sub ucrFactorLabels_GridContentChanged() Handles ucrFactorLabels.GridContentChanged
-        ucrBase.clsRsyntax.AddParameter("new_levels", ucrFactorLabels.GetColumnInFactorSheet(iColumn:=0))
+        If ucrFactorLabels.IsColumnComplete(0) Then
+            ucrBase.clsRsyntax.AddParameter("new_levels", ucrFactorLabels.GetColumnInFactorSheet(iColumn:=0))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("new_levels")
+        End If
         TestOKEnabled()
     End Sub
 

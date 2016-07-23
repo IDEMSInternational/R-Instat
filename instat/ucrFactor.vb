@@ -30,6 +30,7 @@ Public Class ucrFactor
     Public strSelectorColumnName As String
     Private bIsEditable As Boolean
     Private lstEditableColumns As List(Of String)
+    Public bIncludeCopyOfLevels As Boolean
 
     Public Sub New()
 
@@ -43,6 +44,7 @@ Public Class ucrFactor
         strSelectorColumnName = "Select Level"
         bIsEditable = False
         lstEditableColumns = New List(Of String)
+        bIncludeCopyOfLevels = False
     End Sub
 
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -103,6 +105,14 @@ Public Class ucrFactor
             frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
             shtCurrSheet = grdFactorData.CurrentWorksheet
             bShowGrid = True
+            shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+            If bIncludeCopyOfLevels Then
+                shtCurrSheet.AppendCols(1)
+                shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = "New Levels"
+                For i = 0 To shtCurrSheet.RowCount - 1
+                    shtCurrSheet(i, shtCurrSheet.ColumnCount - 1) = shtCurrSheet(i, 0)
+                Next
+            End If
             If bIsSelector Then
                 iSelectorColumnIndex = shtCurrSheet.ColumnCount
                 shtCurrSheet.AppendCols(1)
@@ -247,7 +257,7 @@ Public Class ucrFactor
         End If
     End Sub
 
-    Public Function GetColumnInFactorSheet(iColumn As Integer, Optional bWithQuotes As Boolean = True)
+    Public Function GetColumnInFactorSheet(iColumn As Integer, Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
 
         If shtCurrSheet IsNot Nothing Then
@@ -278,7 +288,7 @@ Public Class ucrFactor
         Return strTemp
     End Function
 
-    Public Function GetColumnInFactorSheet(strColumn As String, Optional bWithQuotes As Boolean = True)
+    Public Function GetColumnInFactorSheet(strColumn As String, Optional bWithQuotes As Boolean = True) As String
         Dim i As Integer
         Dim iCol As Integer = -1
         Dim strTemp As String = ""
@@ -291,6 +301,25 @@ Public Class ucrFactor
                 End If
             Next
             If iCol <> -1 Then strTemp = GetColumnInFactorSheet(iCol, bWithQuotes)
+        End If
+        Return strTemp
+    End Function
+
+    Public Function GetColumnAsList(iColumn As Integer, Optional bWithQuotes As Boolean = True) As List(Of String)
+        Dim strTemp As New List(Of String)
+
+        If shtCurrSheet IsNot Nothing Then
+            For i = 0 To shtCurrSheet.RowCount - 1
+                If shtCurrSheet(i, iColumn) IsNot Nothing Then
+                    If bWithQuotes Then
+                        strTemp.Add(Chr(34) & shtCurrSheet(i, iColumn).ToString & Chr(34))
+                    Else
+                        strTemp.Add(shtCurrSheet(i, iColumn).ToString)
+                    End If
+                Else
+                    strTemp.Add(Nothing)
+                End If
+            Next
         End If
         Return strTemp
     End Function

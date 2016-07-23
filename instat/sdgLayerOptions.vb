@@ -16,26 +16,24 @@
 Imports instat.Translations
 Public Class sdgLayerOptions
     Public clsGeomFunction As New RFunction
-    Private bFirstLoad As Boolean = True
+    Public clsAesFunction As New RFunction
+    Public clsGgplotFunction As New RFunction
+    Public bFirstLoad As Boolean = True
+    Public bAesInGeom As Boolean
+    Public strGlobalDataFrame As String = ""
 
     Public Sub New()
-
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        ucrGeomWithAes.SetGeomFunction(clsGeomFunction)
-        ucrLayerParameter.SetGeomFunction(clsGeomFunction)
-
     End Sub
-
-
 
     Private Sub sdgLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
-            bFirstLoad = False
+            'bFirstLoad = False
         Else
             ReopenDialog()
         End If
@@ -45,15 +43,73 @@ Public Class sdgLayerOptions
     Private Sub InitialiseDialog()
         ucrLayerParameter.ucrGeomWithAes = ucrGeomWithAes
         ucrGeomWithAes.ucrLayersControl = ucrLayerParameter
-
-        ucrGeomWithAes.SetGeomFunction(clsGeomFunction)
-        ucrLayerParameter.SetGeomFunction(clsGeomFunction)
     End Sub
 
     Private Sub SetDefaults()
         ucrGeomWithAes.UcrSelector.Reset()
     End Sub
+
     Private Sub ReopenDialog()
 
+    End Sub
+
+    Public Sub SetRSyntax(clsRSyntax As RSyntax)
+
+    End Sub
+
+    Public Sub SetupLayer(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bUseGlobalAes As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+        If clsTempGeomFunc Is Nothing Then
+            clsTempGeomFunc = New RFunction
+        End If
+        clsGeomFunction = clsTempGeomFunc
+        clsAesFunction = clsTempAesFunc
+        clsGgplotFunction = clsTempGgPlot
+        ucrGeomWithAes.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
+        ucrLayerParameter.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bUseGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
+    End Sub
+
+    Public Function TestForOKEnabled() As Boolean
+        Return ucrGeomWithAes.TestForOkEnabled()
+    End Function
+
+    Private Sub ucrSdgLayerBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgLayerBase.ClickReturn
+        If ucrGeomWithAes.chkApplyOnAllLayers.Checked Then
+            For Each clsParam In ucrGeomWithAes.clsGeomAesFunction.clsParameters
+                clsAesFunction.AddParameter(clsParam)
+            Next
+            clsGeomFunction.RemoveParameterByName("mapping")
+            clsGeomFunction.RemoveParameterByName("data")
+            clsGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction)
+            clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
+            strGlobalDataFrame = ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+            ucrGeomWithAes.strGlobalDataFrame = strGlobalDataFrame
+        Else
+            If ucrGeomWithAes.clsGeomAesFunction.iParameterCount > 0 Then
+                clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=ucrGeomWithAes.clsGeomAesFunction.Clone())
+            Else
+                clsGeomFunction.RemoveParameterByName("mapping")
+            End If
+            If ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> strGlobalDataFrame Then
+                clsGeomFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
+            Else
+                clsGeomFunction.RemoveParameterByName("data")
+            End If
+        End If
+        If clsGeomFunction.strRCommand = "geom_bar" OrElse clsGeomFunction.strRCommand = "geom_density" OrElse clsGeomFunction.strRCommand = "geom_freqpoly" Then
+            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1 OrElse ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y")) AndAlso clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "identity") = -1 Then
+                clsGeomFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
+            End If
+            If clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") <> -1 Then
+                If ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") Then
+                    ucrGeomWithAes.clsGeomAesFunction.RemoveParameterByName("stat")
+                ElseIf clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 Then
+                    clsAesFunction.RemoveParameterByName("stat")
+                End If
+            End If
+        ElseIf clsGeomFunction.strRCommand = "geom_boxplot" OrElse clsGeomFunction.strRCommand = "geom_dotplot" Then
+            If clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
+                clsAesFunction.AddParameter("x", Chr(34) & Chr(34))
+            End If
+        End If
     End Sub
 End Class

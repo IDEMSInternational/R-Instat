@@ -28,6 +28,8 @@ Public Class ucrSelector
     Private lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private strType As String
+    Private bShowHiddenCols As Boolean = False
+    Public strAddOnLoad As New KeyValuePair(Of String, String())
 
     Public Sub New()
         ' This call is required by the designer.
@@ -45,9 +47,10 @@ Public Class ucrSelector
 
     Private Sub ucrSelection_load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
-            sdgDataOptions.SetDefaults()
-            SetDataOptionsSettings()
             bFirstLoad = False
+        End If
+        If strAddOnLoad.Key IsNot Nothing AndAlso strAddOnLoad.Value IsNot Nothing Then
+            AddItemsWithMetadataProperty(strAddOnLoad.Key, strAddOnLoad.Value)
         End If
         LoadList()
     End Sub
@@ -62,13 +65,17 @@ Public Class ucrSelector
 
     Public Overridable Sub LoadList()
         Dim lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String())))
+        Dim strExclud As String() = Nothing
 
         If CurrentReceiver IsNot Nothing Then
             lstCombinedMetadataLists = CombineMetadataLists(CurrentReceiver.lstIncludedMetadataProperties, CurrentReceiver.lstExcludedMetadataProperties)
+            If CurrentReceiver.bExcludeFromSelector Then
+                strExclud = lstVariablesInReceivers.ToArray
+            End If
             If CurrentReceiver.bTypeSet Then
-                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=CurrentReceiver.GetItemType(), lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame)
+                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=CurrentReceiver.GetItemType(), lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud)
             Else
-                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame)
+                frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud)
             End If
         Else
             frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstIncludedMetadataProperties, lstExcludedDataTypes:=lstExcludedMetadataProperties, strDataFrameName:=strCurrentDataFrame)
@@ -77,6 +84,8 @@ Public Class ucrSelector
 
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
+        lstVariablesInReceivers.Clear()
+        strAddOnLoad = New KeyValuePair(Of String, String())
         LoadList()
         'lstItemsInReceivers.Clear()
     End Sub
@@ -133,16 +142,7 @@ Public Class ucrSelector
     End Sub
 
     Public Overridable Sub SetDataOptionsSettings()
-        Dim iHiddenIndex As Integer
-
-        If Not sdgDataOptions.ShowHiddenColumns() Then
-            AddExcludedMetadataProperty("Is_Hidden", {"TRUE"})
-        Else
-            iHiddenIndex = lstExcludedMetadataProperties.FindIndex(Function(x) x.Key = "Is_Hidden")
-            If iHiddenIndex <> -1 Then
-                lstExcludedMetadataProperties.RemoveAt(iHiddenIndex)
-            End If
-        End If
+        bShowHiddenColumns = sdgDataOptions.ShowHiddenColumns()
         LoadList()
     End Sub
 
@@ -187,6 +187,13 @@ Public Class ucrSelector
     Public Sub RemoveFromVariablesList(strVariable As String)
         lstVariablesInReceivers.Remove(strVariable)
         RaiseEvent VariablesInReceiversChanged()
+    End Sub
+
+    Public Sub AddItemsWithMetadataProperty(strProperty As String, strValues As String())
+        If CurrentReceiver IsNot Nothing Then
+            frmMain.clsRLink.SelectColumnsWithMetadataProperty(CurrentReceiver, strCurrentDataFrame, strProperty, strValues)
+        End If
+        LoadList()
     End Sub
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
@@ -265,5 +272,34 @@ Public Class ucrSelector
 
     Public Function GetItemType() As String
         Return strType
+    End Function
+
+    Public Property bShowHiddenColumns As Boolean
+        Get
+            Return bShowHiddenCols
+        End Get
+        Set(bShowHidden As Boolean)
+            Dim iHiddenIndex As Integer
+            bShowHiddenCols = bShowHidden
+            If Not bShowHiddenCols Then
+                AddExcludedMetadataProperty("Is_Hidden", {"TRUE"})
+            Else
+                iHiddenIndex = lstExcludedMetadataProperties.FindIndex(Function(x) x.Key = "Is_Hidden")
+                If iHiddenIndex <> -1 Then
+                    lstExcludedMetadataProperties.RemoveAt(iHiddenIndex)
+                End If
+            End If
+            sdgDataOptions.ShowHiddenColumns = bShowHiddenCols
+        End Set
+    End Property
+
+    Public Function ContainsVariable(strVar As String) As Boolean
+        Dim lviItem As ListViewItem
+        For Each lviItem In lstAvailableVariable.Items
+            If lviItem.Text = strVar Then
+                Return True
+            End If
+        Next
+        Return False
     End Function
 End Class

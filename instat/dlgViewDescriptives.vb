@@ -23,17 +23,39 @@ Public Class dlgViewDescriptives
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog
+        End If
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverSelectedObject.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
 
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrReceiverSelectedObject.Selector = ucrSelectorForViewObject
+        ucrReceiverSelectedObject.SetMeAsReceiver()
+        ucrSelectorForViewObject.SetItemType("object")
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.iHelpTopicID = 349
     End Sub
+
     Private Sub SetDefaults()
+        ucrSelectorForViewObject.Reset()
         rdoStructure.Checked = True
         rdoAllContents.Enabled = False
         ObjectParameters()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -50,7 +72,28 @@ Public Class dlgViewDescriptives
         ElseIf rdoAllContents.Checked Then
 
         Else
-            ucrComponent.Enabled = True
+
+        End If
+    End Sub
+
+    Private Sub ucrSelectorForViewObject_DataFrameChaned() Handles ucrSelectorForViewObject.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForViewObject.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub ucrReceiverSelectedObject_SelectionChnged(sender As Object, e As EventArgs) Handles ucrReceiverSelectedObject.SelectionChanged
+        If Not ucrReceiverSelectedObject.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("object_name", ucrReceiverSelectedObject.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("object_name")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub rdoViewGraph_CheckedChanged(sender As Object, e As EventArgs) Handles rdoViewGraph.CheckedChanged
+        If rdoViewGraph.Checked Then
+            ucrBase.clsRsyntax.iCallType = 0
+        Else
+            ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
 End Class

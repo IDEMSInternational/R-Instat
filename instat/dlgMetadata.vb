@@ -18,8 +18,8 @@ Public Class dlgMetadata
         autoTranslate(Me)
 
         If bFirstLoad Then
-            SetDefaults()
             InitialiseDialog()
+            setDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -33,15 +33,23 @@ Public Class dlgMetadata
     End Sub
 
     Private Sub TestOKEnabled()
-
+        If Not ucrInputViewDataBy.IsEmpty Or chkRevertBack.Checked Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrDFSelectorForMetadata.SetIncludeOverall(True)
+        ucrSelectByMetadata.SetItemType("metadata")
+        ucrInputViewDataBy.Selector = ucrSelectByMetadata
+        ucrBase.iHelpTopicID = 391
     End Sub
 
     Private Sub setDefaults()
-
+        ucrSelectByMetadata.Reset()
+        ucrInputViewDataBy.SetMeAsReceiver()
+        ucrSelectByMetadata.Focus()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -49,14 +57,27 @@ Public Class dlgMetadata
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdOpenMetdataEditor_Click(sender As Object, e As EventArgs) Handles cmdOpenMetdataEditor.Click
-        Me.Hide()
-        If ucrDFSelectorForMetadata.cboAvailableDataFrames.SelectedItem = "[Overall]" Then
-            frmMetaData.Show()
+    Private Sub chkRevertBack_CheckStateChanged(sender As Object, e As EventArgs) Handles chkRevertBack.CheckStateChanged
+        'this doesn't look right to me DAS
+        If chkRevertBack.Checked Then
+            ucrInputViewDataBy.txtReceiverSingle.Text = "Name"
+            ucrInputViewDataBy.Enabled = False
+            ucrSelectByMetadata.Enabled = False
         Else
-            frmVariables.Show()
+            ucrInputViewDataBy.Enabled = True
+            ucrSelectByMetadata.Enabled = True
+            ucrSelectByMetadata.Focus()
         End If
-
+        TestOKEnabled()
     End Sub
 
+    Private Sub ucrInputViewDataBy_SelectionChanged(sender As Object, e As EventArgs) Handles ucrInputViewDataBy.SelectionChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        frmMain.clsGrids.bGrdViewDataByMetadata = True
+        frmMain.clsGrids.SetMetadata(ucrInputViewDataBy.txtReceiverSingle.Text)
+        frmMain.clsGrids.SetVariablesMetadata(frmVariables.grdVariables)
+    End Sub
 End Class

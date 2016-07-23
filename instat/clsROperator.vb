@@ -38,6 +38,8 @@ Public Class ROperator
     Public bIsAssigned As Boolean = False
     Public bForceIncludeOperation As Boolean = True
     Public bAssignToIsPrefix As Boolean = False
+    Public bAssignToColumnWithoutNames As Boolean = False
+    Public bInsertColumnBefore As Boolean = False
 
     Public Sub SetOperation(strTemp As String, Optional bBracketsTemp As Boolean = True)
         strOperation = strTemp
@@ -45,7 +47,7 @@ Public Class ROperator
         bIsAssigned = False
     End Sub
 
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False)
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False)
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -61,6 +63,9 @@ Public Class ROperator
         End If
         bToBeAssigned = True
         bIsAssigned = False
+        Me.bAssignToIsPrefix = bAssignToIsPrefix
+        Me.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+        Me.bInsertColumnBefore = bInsertColumnBefore
     End Sub
 
     Public Sub RemoveAssignTo()
@@ -128,16 +133,25 @@ Public Class ROperator
                 frmMain.clsRLink.CreateNewInstatObject()
             End If
             strScript = strScript & strAssignTo & " <- " & strTemp & vbCrLf
-            If Not strAssignToDataFrame = "" And Not strAssignToColumn = "" Then
+            If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                 clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                If bAssignToColumnWithoutNames Then
+                    clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                End If
                 clsAddColumns.AddParameter("col_data", strAssignTo)
                 If bAssignToIsPrefix Then
                     clsAddColumns.AddParameter("use_col_name_as_prefix", "TRUE")
                 Else
                     If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                         clsAddColumns.AddParameter("use_col_name_as_prefix", "FALSE")
+                    End If
+                End If
+                If bInsertColumnBefore Then
+                    clsAddColumns.AddParameter("before", "TRUE")
+                Else
+                    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                        clsAddColumns.AddParameter("before", "FALSE")
                     End If
                 End If
                 strScript = strScript & clsAddColumns.ToScript() & vbCrLf
@@ -207,6 +221,7 @@ Public Class ROperator
         If strValue <> "" Then
             clsParam = New RParameter
             clsParam.SetArgumentValue(strValue)
+            clsParam.SetArgumentName(strParameterName)
         End If
 
         If bSetFirst Then
@@ -268,6 +283,13 @@ Public Class ROperator
         bIsAssigned = False
     End Sub
 
+    Public Function GetParameter(strName As String) As RParameter
+        If Not clsAdditionalParameters Is Nothing Then
+            Return clsAdditionalParameters.Find(Function(x) x.strArgumentName = strName)
+        End If
+        Return Nothing
+    End Function
+
     Public Sub RemoveParameterByName(strArgName)
         Dim clsParam
         If Not clsAdditionalParameters Is Nothing Then
@@ -297,4 +319,37 @@ Public Class ROperator
         'RemoveParameter(False)
         RemoveAllAdditionalParameters()
     End Sub
+
+    Public Function Clone() As ROperator
+        Dim clsTempROperator As New ROperator
+        Dim clsAdditionalParams As RParameter
+
+        clsTempROperator.strOperation = strOperation
+        clsTempROperator.bBrackets = bBrackets
+        clsTempROperator.strAssignTo = strAssignTo
+        clsTempROperator.strAssignToDataFrame = strAssignToDataFrame
+        clsTempROperator.strAssignToColumn = strAssignToColumn
+        clsTempROperator.strAssignToModel = strAssignToModel
+        clsTempROperator.strAssignToGraph = strAssignToGraph
+        clsTempROperator.bToBeAssigned = bToBeAssigned
+        clsTempROperator.bIsAssigned = bIsAssigned
+        clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
+        clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
+
+        If clsLeftFunction IsNot Nothing Then
+            clsTempROperator.clsLeftFunction = clsLeftFunction.Clone
+        End If
+        If clsLeftOperator IsNot Nothing Then
+            clsTempROperator.clsLeftOperator = clsLeftOperator.Clone
+        End If
+        If clsLeftParameter IsNot Nothing Then
+            clsTempROperator.clsLeftParameter = clsLeftParameter.Clone
+        End If
+        For Each clsAdditionalParams In clsAdditionalParameters
+            clsTempROperator.AddAdditionalParameter(clsAdditionalParams.Clone)
+        Next
+
+        Return clsTempROperator
+
+    End Function
 End Class

@@ -22,7 +22,6 @@ Public Class dlgDotPlot
     Private bFirstLoad As Boolean = True
 
     Private Sub dlgDotPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         ucrBase.OKEnabled(False)
         autoTranslate(Me)
 
@@ -48,34 +47,44 @@ Public Class dlgDotPlot
         ucrBase.clsRsyntax.iCallType = 0
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-
         ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorDotPlot.SetSelector(ucrDotPlotSelector)
         ucrVariablesAsFactorDotPlot.SetIncludedDataType({"numeric"})
-        ucrBase.iHelpTopicID = 134
+        ucrBase.iHelpTopicID = 437
+
+        ucrSaveDotPlot.SetDataFrameSelector(ucrDotPlotSelector.ucrAvailableDataFrames)
+        ucrSaveDotPlot.strPrefix = "Dotplot"
+        ucrSaveDotPlot.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveDotPlot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrVariablesAsFactorDotPlot.IsEmpty() = False Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrVariablesAsFactorDotPlot.IsEmpty Or (ucrSaveDotPlot.chkSaveGraph.Checked And ucrSaveDotPlot.ucrInputGraphName.IsEmpty) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
     Private Sub SetDefaults()
+        clsRaesFunction.ClearParameters()
+        clsRgeom_dotplot.ClearParameters()
         ucrDotPlotSelector.Reset()
         ucrVariablesAsFactorDotPlot.ResetControl()
+        SetXParameter()
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
+    Private Sub SetXParameter()
         If ucrFactorReceiver.IsEmpty() = False Then
             clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
         Else
             clsRaesFunction.AddParameter("x", Chr(34) & "" & Chr(34))
         End If
+    End Sub
 
+    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
+        SetXParameter()
     End Sub
 
     Private Sub ucrSecondFactorReceiver_SelectonChanged(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.SelectionChanged
@@ -95,7 +104,23 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub cmdDotPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdDotPlotOptions.Click
-        sdgDotPlot.ShowDialog()
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_dotplot, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bUseGlobalAes:=True)
+        sdgLayerOptions.ShowDialog()
+
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = "" Then
+                    ucrFactorReceiver.Clear()
+                Else
+                    ucrFactorReceiver.Add(clsParam.strArgumentValue)
+                End If
+            ElseIf clsParam.strArgumentName = "y" Then
+                ucrVariablesAsFactorDotPlot.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrVariablesAsFactorDotPlot_SelectionChanged() Handles ucrVariablesAsFactorDotPlot.SelectionChanged
@@ -103,6 +128,17 @@ Public Class dlgDotPlot
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_dotplot)
             clsRaesFunction.AddParameter("y", ucrVariablesAsFactorDotPlot.GetVariableNames(False))
             clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveDotPlot_GraphNameChanged() Handles ucrSaveDotPlot.GraphNameChanged, ucrSaveDotPlot.SaveGraphCheckedChanged
+        If ucrSaveDotPlot.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveDotPlot.strGraphName, strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveDotPlot.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
         TestOkEnabled()
     End Sub

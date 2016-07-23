@@ -24,14 +24,22 @@ Public Class RFunction
     Public strAssignToGraph As String
     Public bToBeAssigned As Boolean = False
     Public bIsAssigned As Boolean = False
-    Private bAssignToIsPrefix As Boolean = False
+    Public bAssignToIsPrefix As Boolean = False
+    Public bAssignToColumnWithoutNames As Boolean = False
+    Public bInsertColumnBefore As Boolean = False
+
+    Public Sub New()
+        RaiseEvent ParametersChanged()
+    End Sub
+
+    Public Event ParametersChanged()
 
     Public Sub SetRCommand(strTemp As String)
         strRCommand = strTemp
         bIsAssigned = False
     End Sub
 
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False)
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False)
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -46,6 +54,8 @@ Public Class RFunction
             strAssignToGraph = strTempGraph
         End If
         Me.bAssignToIsPrefix = bAssignToIsPrefix
+        Me.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+        Me.bInsertColumnBefore = bInsertColumnBefore
         bToBeAssigned = True
         bIsAssigned = False
     End Sub
@@ -90,16 +100,25 @@ Public Class RFunction
                 frmMain.clsRLink.CreateNewInstatObject()
             End If
             strScript = strScript & strAssignTo & " <- " & strTemp & vbCrLf
-            If Not strAssignToDataFrame = "" And Not strAssignToColumn = "" Then
+            If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                 clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                If Not bAssignToColumnWithoutNames Then
+                    clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                End If
                 clsAddColumns.AddParameter("col_data", strAssignTo)
                 If bAssignToIsPrefix Then
                     clsAddColumns.AddParameter("use_col_name_as_prefix", "TRUE")
                 Else
                     If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                         clsAddColumns.AddParameter("use_col_name_as_prefix", "FALSE")
+                    End If
+                End If
+                If bInsertColumnBefore Then
+                    clsAddColumns.AddParameter("before", "TRUE")
+                Else
+                    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                        clsAddColumns.AddParameter("before", "FALSE")
                     End If
                 End If
                 strScript = strScript & clsAddColumns.ToScript() & vbCrLf
@@ -177,7 +196,6 @@ Public Class RFunction
             clsParam.SetArgumentOperator(clsROperatorParameter)
         End If
         Me.AddParameter(clsParam)
-
     End Sub
 
     Public Sub AddParameter(clsParam As RParameter)
@@ -202,7 +220,15 @@ Public Class RFunction
             End If
         End If
         bIsAssigned = False
+        RaiseEvent ParametersChanged()
     End Sub
+
+    Public Function GetParameter(strName As String) As RParameter
+        If Not clsParameters Is Nothing Then
+            Return clsParameters.Find(Function(x) x.strArgumentName = strName)
+        End If
+        Return Nothing
+    End Function
 
     Public Sub RemoveParameterByName(strArgName)
         Dim clsParam
@@ -211,11 +237,40 @@ Public Class RFunction
             clsParameters.Remove(clsParam)
         End If
         bIsAssigned = False
+        RaiseEvent ParametersChanged()
     End Sub
 
     Public Sub ClearParameters()
         clsParameters.Clear()
         bIsAssigned = False
+        RaiseEvent ParametersChanged()
     End Sub
 
+    Public Function Clone() As RFunction
+
+        Dim clsRFunction As New RFunction
+        Dim clsRParam As RParameter
+        clsRFunction.strRCommand = strRCommand
+        clsRFunction.strAssignTo = strAssignTo
+        clsRFunction.strAssignToDataFrame = strAssignToDataFrame
+        clsRFunction.strAssignToColumn = strAssignToColumn
+        clsRFunction.strAssignToModel = strAssignToModel
+        clsRFunction.strAssignToGraph = strAssignToGraph
+        clsRFunction.bToBeAssigned = bToBeAssigned
+        clsRFunction.bIsAssigned = bIsAssigned
+        clsRFunction.bAssignToIsPrefix = bAssignToIsPrefix
+
+        For Each clsRParam In clsParameters
+            clsRFunction.AddParameter(clsRParam.Clone)
+        Next
+
+        Return clsRFunction
+
+    End Function
+
+    Public ReadOnly Property iParameterCount() As Integer
+        Get
+            Return clsParameters.Count
+        End Get
+    End Property
 End Class

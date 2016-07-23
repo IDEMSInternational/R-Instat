@@ -22,12 +22,19 @@ Public Class dlgHideShowColumns
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
-            TestOKEnabled
+            TestOKEnabled()
             bFirstLoad = False
         End If
+        ucrSelectorForHiddenColumns.strAddOnLoad = New KeyValuePair(Of String, String())("Is_Hidden", {"TRUE"})
+        SetHiddenColumnsInReceiver()
     End Sub
 
     Private Sub TestOKEnabled()
+        If ucrReceiverHiddenColumns.IsEmpty = False Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
     End Sub
 
@@ -35,19 +42,29 @@ Public Class dlgHideShowColumns
         ucrBase.iHelpTopicID = 167
         ucrReceiverHiddenColumns.Selector = ucrSelectorForHiddenColumns
         ucrReceiverHiddenColumns.SetMeAsReceiver()
+        ucrReceiverHiddenColumns.bExcludeFromSelector = True
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
+        ucrSelectorForHiddenColumns.bShowHiddenColumns = True
+    End Sub
 
+    Private Sub SetHiddenColumnsInReceiver()
+        ucrSelectorForHiddenColumns.Reset()
+        ucrSelectorForHiddenColumns.strAddOnLoad = New KeyValuePair(Of String, String())("Is_Hidden", {"TRUE"})
+        ucrSelectorForHiddenColumns.AddItemsWithMetadataProperty("Is_Hidden", {"TRUE"})
     End Sub
 
     Private Sub SetDefaults()
-        ucrSelectorForHiddenColumns.Reset()
+        'SetHiddenColumnsInReceiver()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetHiddenColumnsInReceiver()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorForHiddenColumns_DataFrameChanged() Handles ucrSelectorForHiddenColumns.DataFrameChanged
+
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
@@ -57,6 +74,7 @@ Public Class dlgHideShowColumns
         Else
             ucrBase.clsRsyntax.AddParameter("col_names", "c()")
         End If
+        TestOKEnabled()
     End Sub
 
 End Class

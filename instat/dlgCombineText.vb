@@ -53,8 +53,9 @@ Public Class dlgCombineText
         ucrInputColumnInto.SetDataFrameSelector(ucrSelectorForCombineText.ucrAvailableDataFrames)
         ucrInputColumnInto.SetPrefix("Combine")
         iColumnsUsed = 0
-        ucrInputSeparator.AddItems({"Space", "-", "_", "."})
+        ucrInputSeparator.SetItems({"Space", "-", "_", "."})
         ucrBase.iHelpTopicID = 345
+        ucrInputColumnInto.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub SetDefaults()

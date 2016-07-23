@@ -15,8 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgGeneralForGraphics
-    Private clsRggplotFunction As New RFunction
+    Public clsRggplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
+    Private lstLayerComplete As New List(Of Boolean)
+    Private iLayerIndex As Integer
+    Public WithEvents clsGgplotAesFunction As New RFunction
+    Private strGlobalDataFrame As String = ""
+    Public bDataFrameSet As Boolean = False
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -25,30 +30,44 @@ Public Class dlgGeneralForGraphics
             bFirstLoad = False
         Else
             ReopenDialog()
-
         End If
         autoTranslate(Me)
-
-        TestOkEnabled()
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         'setting the base ggplot functions
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
+        clsGgplotAesFunction.SetRCommand("aes")
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
         ucrBase.iHelpTopicID = 356
+
+        ucrSaveGraph.SetDataFrameSelector(sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames)
+        ucrSaveGraph.strPrefix = "Graph"
+        ucrSaveGraph.ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrSaveGraph.ucrInputGraphName.SetDefaultTypeAsGraph()
+
+        ucrAdditionalLayers.SetRSyntax(ucrBase.clsRsyntax)
+        ucrAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
+        ucrAdditionalLayers.SetAesFunction(clsGgplotAesFunction)
+
     End Sub
+
     Private Sub SetDefaults()
-        cmdDelete.Enabled = False
-        cmdEdit.Enabled = False
-        TestOkEnabled()
+        iLayerIndex = 0
+        'lstLayers.Clear()
+        lstLayerComplete.Clear()
+        'SetEditDeleteEnabled()
+        strGlobalDataFrame = ""
+        clsRggplotFunction.ClearParameters()
+        clsGgplotAesFunction.ClearParameters()
+        If ucrBase.clsRsyntax.clsBaseOperator IsNot Nothing Then
+            ucrBase.clsRsyntax.clsBaseOperator.RemoveAllAdditionalParameters()
+        End If
     End Sub
 
     Private Sub ReopenDialog()
-
-    End Sub
-    Public Sub TestOkEnabled()
 
     End Sub
 
@@ -56,8 +75,93 @@ Public Class dlgGeneralForGraphics
         SetDefaults()
     End Sub
 
-    Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
-        sdgLayerOptions.ShowDialog()
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=sdgLayerOptions.clsGeomFunction)
+    'Private Sub cmdAdd_Click(sender As Object, e As EventArgs)
+    '    sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=lstLayers.Items.Count = 0)
+    '    sdgLayerOptions.ShowDialog()
+    '    strGlobalDataFrame = sdgLayerOptions.strGlobalDataFrame
+    '    AddLayers()
+    'End Sub
+
+    'Public Sub AddLayers(Optional lviCurrentItem As ListViewItem = Nothing)
+    '    Dim lviLayer As ListViewItem
+    '    Dim strLayerName As String
+
+    '    If lviCurrentItem Is Nothing Then
+    '        iLayerIndex = iLayerIndex + 1
+    '        strLayerName = iLayerIndex & "." & sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem
+    '        lviLayer = New ListViewItem(text:=strLayerName)
+    '        lstLayers.Items.Add(lviLayer)
+    '        lstLayerComplete.Add(sdgLayerOptions.TestForOKEnabled())
+    '    Else
+    '        lviLayer = lviCurrentItem
+    '        lstLayerComplete(lstLayers.Items.IndexOf(lviLayer)) = sdgLayerOptions.TestForOKEnabled()
+    '        strLayerName = lviCurrentItem.Text
+    '    End If
+
+    '    If sdgLayerOptions.TestForOKEnabled() Then
+    '        lstLayers.Items(lstLayers.Items.IndexOf(lviLayer)).ForeColor = Color.Green
+    '    Else
+    '        lstLayers.Items(lstLayers.Items.IndexOf(lviLayer)).ForeColor = Color.Red
+    '    End If
+    '    ucrBase.clsRsyntax.SetOperatorParameter(False, strParameterName:=strLayerName, clsRFunc:=sdgLayerOptions.clsGeomFunction.Clone())
+    '    TestOKEnabled()
+    'End Sub
+
+    Public Sub TestOKEnabled()
+        Dim bTemp As Boolean = False
+        For Each bTemp In ucrAdditionalLayers.lstLayerComplete
+            If Not bTemp Then
+                Exit For
+            End If
+        Next
+        ucrBase.OKEnabled(bTemp)
+    End Sub
+
+    'Private Sub cmdDelete_Click(sender As Object, e As EventArgs)
+    '    If lstLayers.SelectedItems.Count = 1 Then
+    '        ucrBase.clsRsyntax.RemoveOperatorParameter(lstLayers.SelectedItems(0).Text)
+    '        lstLayerComplete.RemoveAt(lstLayers.SelectedIndices(0))
+    '        lstLayers.Items.Remove(lstLayers.SelectedItems(0))
+    '    End If
+    '    TestOKEnabled()
+    'End Sub
+
+    'Private Sub lstLayers_SelectedIndexChanged(sender As Object, e As EventArgs)
+    '    SetEditDeleteEnabled()
+    'End Sub
+
+    'Private Sub SetEditDeleteEnabled()
+    '    If lstLayers.SelectedItems.Count = 1 Then
+    '        cmdDelete.Enabled = True
+    '        cmdEdit.Enabled = True
+    '    Else
+    '        cmdDelete.Enabled = False
+    '        cmdEdit.Enabled = False
+    '    End If
+    'End Sub
+
+    'Private Sub cmdEdit_Click(sender As Object, e As EventArgs)
+    '    Dim clsSelectedGeom As RFunction
+    '    Dim clsLocalAes As RFunction
+
+    '    clsSelectedGeom = ucrBase.clsRsyntax.GetParameter(lstLayers.SelectedItems(0).Text).clsArgumentFunction
+    '    If clsSelectedGeom.GetParameter("mapping") IsNot Nothing Then
+    '        clsLocalAes = clsSelectedGeom.GetParameter("mapping").clsArgumentFunction
+    '    Else
+    '        clsLocalAes = Nothing
+    '    End If
+    '    sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bUseGlobalAes:=False, clsTempLocalAes:=clsLocalAes)
+    '    sdgLayerOptions.ShowDialog()
+    '    AddLayers(lstLayers.SelectedItems(0))
+    'End Sub
+
+    Private Sub ucrSaveGraph_GraphNameChanged() Handles ucrSaveGraph.GraphNameChanged, ucrSaveGraph.SaveGraphCheckedChanged
+        If ucrSaveGraph.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveGraph.strGraphName, strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraph.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
     End Sub
 End Class

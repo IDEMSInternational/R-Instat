@@ -33,13 +33,15 @@ Partial Class dlgRegressionSimple
         Me.chkSaveModel = New System.Windows.Forms.CheckBox()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
         Me.chkFunction = New System.Windows.Forms.CheckBox()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrFamily = New instat.ucrDistributions()
+        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
+        Me.lblModelPreview = New System.Windows.Forms.Label()
+        Me.ucrModelName = New instat.ucrInputComboBox()
         Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrFamily = New instat.ucrDistributions()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrResponse = New instat.ucrReceiverSingle()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
-        Me.ucrModelName = New instat.ucrVariableName()
-        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
+        Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -104,20 +106,38 @@ Partial Class dlgRegressionSimple
         Me.chkFunction.Tag = "Function"
         Me.chkFunction.UseVisualStyleBackColor = True
         '
-        'ucrBase
+        'chkConvertToVariate
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
+        resources.ApplyResources(Me.chkConvertToVariate, "chkConvertToVariate")
+        Me.chkConvertToVariate.Name = "chkConvertToVariate"
+        Me.chkConvertToVariate.UseVisualStyleBackColor = True
+        '
+        'lblModelPreview
+        '
+        resources.ApplyResources(Me.lblModelPreview, "lblModelPreview")
+        Me.lblModelPreview.Name = "lblModelPreview"
+        '
+        'ucrModelName
+        '
+        Me.ucrModelName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
+        Me.ucrModelName.Name = "ucrModelName"
+        '
+        'ucrSelectorSimpleReg
+        '
+        Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
+        resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
+        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
         '
         'ucrFamily
         '
         resources.ApplyResources(Me.ucrFamily, "ucrFamily")
         Me.ucrFamily.Name = "ucrFamily"
         '
-        'ucrSelectorSimpleReg
+        'ucrBase
         '
-        resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
-        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'ucrResponse
         '
@@ -131,26 +151,22 @@ Partial Class dlgRegressionSimple
         Me.ucrExplanatory.Name = "ucrExplanatory"
         Me.ucrExplanatory.Selector = Nothing
         '
-        'ucrModelName
+        'ucrModelPreview
         '
-        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
-        Me.ucrModelName.Name = "ucrModelName"
-        '
-        'chkConvertToVariate
-        '
-        resources.ApplyResources(Me.chkConvertToVariate, "chkConvertToVariate")
-        Me.chkConvertToVariate.Name = "chkConvertToVariate"
-        Me.chkConvertToVariate.Tag = "Convert_to_variate"
-        Me.chkConvertToVariate.UseVisualStyleBackColor = True
+        Me.ucrModelPreview.IsReadOnly = False
+        resources.ApplyResources(Me.ucrModelPreview, "ucrModelPreview")
+        Me.ucrModelPreview.Name = "ucrModelPreview"
         '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.chkConvertToVariate)
-        Me.Controls.Add(Me.ucrModelName)
+        Me.Controls.Add(Me.ucrModelPreview)
         Me.Controls.Add(Me.ucrExplanatory)
         Me.Controls.Add(Me.ucrResponse)
+        Me.Controls.Add(Me.lblModelPreview)
+        Me.Controls.Add(Me.chkConvertToVariate)
+        Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.ucrSelectorSimpleReg)
         Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.chkFunction)
@@ -184,8 +200,10 @@ Partial Class dlgRegressionSimple
     Friend WithEvents chkFunction As CheckBox
     Friend WithEvents ucrFamily As ucrDistributions
     Friend WithEvents ucrSelectorSimpleReg As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrModelName As ucrInputComboBox
+    Friend WithEvents chkConvertToVariate As CheckBox
+    Friend WithEvents lblModelPreview As Label
     Friend WithEvents ucrResponse As ucrReceiverSingle
     Friend WithEvents ucrExplanatory As ucrReceiverSingle
-    Friend WithEvents ucrModelName As ucrVariableName
-    Friend WithEvents chkConvertToVariate As CheckBox
+    Friend WithEvents ucrModelPreview As ucrInputTextBox
 End Class

@@ -30,21 +30,36 @@ Public Class dlgCombineforGraphics
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 357
+        ucrBase.iHelpTopicID = 430
+        ucrCombineGraphSelector.SetItemType("graph")
+        ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrCombineGraphReceiver.SetMeAsReceiver()
+        ucrCombineGraphSelector.Reset()
     End Sub
 
     Private Sub ReopenDialog()
 
     End Sub
     Private Sub TestOkEnabled()
-
+        If ucrCombineGraphReceiver.lstSelectedVariables.Items.Count > 1 Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+    End Sub
+
+    Private Sub ucrCombineGraphReceiver_SelectionChanged() Handles ucrCombineGraphReceiver.SelectionChanged
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdLayout_Click(sender As Object, e As EventArgs) Handles cmdLayout.Click
+        sdgLayout.ShowDialog()
     End Sub
 End Class

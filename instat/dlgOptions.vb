@@ -18,16 +18,18 @@ Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
 Imports instat.Translations
-
+Imports System.IO
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
+    Public strWorkingDirectory As String
     Private Panels As New List(Of Panel)()
     Private VisiblePanel As Panel = Nothing
     'Define the Fonts dialog (only one)
     Dim dlgFont As New FontDialog
     Dim bFirstLoad As Boolean = True
-    Dim fntOutput, fntCommand, fntComment As Font
-    Dim clrOutput, clrCommand, clrComment As Color
+    Dim fntOutput, fntCommand, fntComment, fntEditor As Font
+    Dim clrOutput, clrCommand, clrComment, clrEditor As Color
+
 
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -54,9 +56,12 @@ Public Class dlgOptions
         SetOutputFont(frmMain.clsInstatOptions.fntOutput, frmMain.clsInstatOptions.clrOutput)
         SetCommandFont(frmMain.clsInstatOptions.fntScript, frmMain.clsInstatOptions.clrScript)
         SetCommentFont(frmMain.clsInstatOptions.fntComment, frmMain.clsInstatOptions.clrComment)
+        SetEditorFont(frmMain.clsInstatOptions.fntEditor, frmMain.clsInstatOptions.clrEditor)
         nudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
         nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         txtComment.Text = frmMain.clsInstatOptions.strComment
+        ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
+
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
@@ -74,10 +79,13 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetFormatOutput(fntOutput, clrOutput)
         frmMain.clsInstatOptions.SetFormatComment(fntComment, clrComment)
         frmMain.clsInstatOptions.SetFormatCommand(fntCommand, clrCommand)
+        frmMain.clsInstatOptions.SetEditorFormat(fntEditor, clrEditor)
         frmMain.clsInstatOptions.SetComment(txtComment.Text)
         frmMain.clsInstatOptions.SetPreviewRows(nudPreviewRows.Value)
         frmMain.clsInstatOptions.SetMaxRows(nudMaxRows.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
+        frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
+
     End Sub
 
     Private Sub SetView()
@@ -137,9 +145,7 @@ Public Class dlgOptions
     End Sub
 
     Private Sub cmdApply_Click(sender As Object, e As EventArgs) Handles cmdApply.Click
-
         SetInstatOptions()
-
         autoTranslate(Me)
 
         If frmMain.Visible Then
@@ -229,6 +235,21 @@ Public Class dlgOptions
         End If
     End Sub
 
+    Private Sub cmdEditorFont_Click(sender As Object, e As EventArgs) Handles cmdEditorFont.Click
+        dlgFont.ShowColor = True
+        'dlgFont.ShowEffects = False
+        dlgFont.MaxSize = 50
+        dlgFont.MinSize = 8
+        dlgFont.Font = frmMain.clsRLink.fEditor
+        dlgFont.Color = frmMain.clsRLink.clrEditor
+        If dlgFont.ShowDialog = DialogResult.OK Then
+            SetEditorFont(dlgFont.Font, dlgFont.Color)
+            ApplyEnabled(True)
+            dlgFont.Reset()
+        End If
+
+    End Sub
+
     Private Sub nudNoLines_ValueChanged(sender As Object, e As EventArgs) Handles nudPreviewRows.TextChanged
         ApplyEnabled(True)
     End Sub
@@ -271,5 +292,19 @@ Public Class dlgOptions
         rtbCommentPreview.Font = fntComment
         rtbCommentPreview.SelectionColor = clrComment
         rtbCommandPreview.SelectionLength = 0
+    End Sub
+
+    Private Sub SetEditorFont(fntNew As Font, clrNew As Color)
+        fntEditor = fntNew
+        clrEditor = clrNew
+    End Sub
+
+    Private Sub cmdWorkingDirectory_Click(sender As Object, e As EventArgs) Handles cmdWorkingDirectory.Click
+        Dim dlgWorkingDirectory As New FolderBrowserDialog
+        If dlgWorkingDirectory.ShowDialog = DialogResult.OK Then
+            strWorkingDirectory = (dlgWorkingDirectory.SelectedPath).Replace("\", "/")
+            ucrWorkingDirectory.SetName(strWorkingDirectory)
+            ApplyEnabled(True)
+        End If
     End Sub
 End Class

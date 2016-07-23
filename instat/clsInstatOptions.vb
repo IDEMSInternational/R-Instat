@@ -1,10 +1,12 @@
 ﻿Imports System.Threading
 Imports System.Globalization
+Imports unvell.ReoGrid
 Public Class InstatOptions
     Public bIncludeRDefaultParameters As Boolean
-    Public fntOutput, fntScript, fntComment As Font
-    Public clrOutput, clrScript, clrComment As Color
+    Public fntOutput, fntScript, fntComment, fntEditor As Font
+    Public clrOutput, clrScript, clrComment, clrEditor As Color
     Public strComment, strLanguageCultureCode As String
+    Public strWorkingDirectory As String
     Public iPreviewRows As Integer
     Public iMaxRows As Integer
 
@@ -29,6 +31,19 @@ Public Class InstatOptions
         fntComment = fntNew
         clrComment = clrNew
         frmMain.clsRLink.setFormatComment(fntComment, clrComment)
+    End Sub
+
+    Public Sub SetEditorFormat(fntNew As Font, clrNew As Color)
+        fntEditor = fntNew
+        clrEditor = clrNew
+        '
+        frmMain.clsRLink.SetFormatDataView(fntEditor, clrEditor)
+        Dim tmpSheets As Worksheet
+        For Each tmpSheets In frmEditor.grdData.Worksheets
+            tmpSheets.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
+                             .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName, .TextColor = clrNew, .FontSize = fntNew.Size, .FontName = fntNew.Name})
+
+        Next
     End Sub
 
     Public Sub SetPreviewRows(intlines As Integer)
@@ -61,4 +76,9 @@ Public Class InstatOptions
         End Select
     End Sub
 
+    Public Sub SetWorkingDirectory(strWD As String)
+        strWorkingDirectory = strWD
+        'frmMain.clsRLink.RunScript("setwd(" & Chr(34) & strWorkingDirectory & Chr(34) & ")")
+
+    End Sub
 End Class

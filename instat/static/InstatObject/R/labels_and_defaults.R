@@ -32,9 +32,11 @@ column_count_label="Column_Count"
 display_decimal_label="Display_Decimal"
 name_label="Name"
 is_factor_label="Is_Factor"
-data_type_label="Data_Type"
+#changes because attributes default is class
+data_type_label="class"
 is_hidden_label="Is_Hidden"
 is_protected_label="Is_Protected"
+is_frozen_label="Is_Frozen"
 
 #object labels
 overall_label="[Overall]"

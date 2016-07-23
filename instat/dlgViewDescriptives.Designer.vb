@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgViewDescriptives
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgViewDescriptives
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorForViewObject = New instat.ucrSelectorByDataFrameAddRemove()
@@ -29,8 +29,7 @@ Partial Class dlgViewDescriptives
         Me.rdoStructure = New System.Windows.Forms.RadioButton()
         Me.rdoAllContents = New System.Windows.Forms.RadioButton()
         Me.rdoComponent = New System.Windows.Forms.RadioButton()
-        Me.ucrComponent = New instat.ucrReorder()
-        Me.lblComponent = New System.Windows.Forms.Label()
+        Me.rdoViewGraph = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -42,6 +41,7 @@ Partial Class dlgViewDescriptives
         '
         'ucrSelectorForViewObject
         '
+        Me.ucrSelectorForViewObject.bShowHiddenColumns = False
         Me.ucrSelectorForViewObject.Location = New System.Drawing.Point(9, 9)
         Me.ucrSelectorForViewObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForViewObject.Name = "ucrSelectorForViewObject"
@@ -69,6 +69,7 @@ Partial Class dlgViewDescriptives
         'rdoStructure
         '
         Me.rdoStructure.AutoSize = True
+        Me.rdoStructure.Enabled = False
         Me.rdoStructure.Location = New System.Drawing.Point(12, 228)
         Me.rdoStructure.Name = "rdoStructure"
         Me.rdoStructure.Size = New System.Drawing.Size(68, 17)
@@ -81,6 +82,7 @@ Partial Class dlgViewDescriptives
         'rdoAllContents
         '
         Me.rdoAllContents.AutoSize = True
+        Me.rdoAllContents.Enabled = False
         Me.rdoAllContents.Location = New System.Drawing.Point(86, 228)
         Me.rdoAllContents.Name = "rdoAllContents"
         Me.rdoAllContents.Size = New System.Drawing.Size(81, 17)
@@ -93,6 +95,7 @@ Partial Class dlgViewDescriptives
         'rdoComponent
         '
         Me.rdoComponent.AutoSize = True
+        Me.rdoComponent.Enabled = False
         Me.rdoComponent.Location = New System.Drawing.Point(173, 228)
         Me.rdoComponent.Name = "rdoComponent"
         Me.rdoComponent.Size = New System.Drawing.Size(79, 17)
@@ -102,32 +105,23 @@ Partial Class dlgViewDescriptives
         Me.rdoComponent.Text = "Component"
         Me.rdoComponent.UseVisualStyleBackColor = True
         '
-        'ucrComponent
+        'rdoViewGraph
         '
-        Me.ucrComponent.Location = New System.Drawing.Point(225, 83)
-        Me.ucrComponent.Name = "ucrComponent"
-        Me.ucrComponent.Size = New System.Drawing.Size(154, 139)
-        Me.ucrComponent.TabIndex = 7
-        Me.ucrComponent.ucrDataFrameList = Nothing
-        Me.ucrComponent.ucrReceiver = Nothing
-        '
-        'lblComponent
-        '
-        Me.lblComponent.AutoSize = True
-        Me.lblComponent.Location = New System.Drawing.Point(225, 66)
-        Me.lblComponent.Name = "lblComponent"
-        Me.lblComponent.Size = New System.Drawing.Size(61, 13)
-        Me.lblComponent.TabIndex = 8
-        Me.lblComponent.Tag = "Component"
-        Me.lblComponent.Text = "Component"
+        Me.rdoViewGraph.AutoSize = True
+        Me.rdoViewGraph.Location = New System.Drawing.Point(259, 228)
+        Me.rdoViewGraph.Name = "rdoViewGraph"
+        Me.rdoViewGraph.Size = New System.Drawing.Size(80, 17)
+        Me.rdoViewGraph.TabIndex = 7
+        Me.rdoViewGraph.TabStop = True
+        Me.rdoViewGraph.Text = "View Graph"
+        Me.rdoViewGraph.UseVisualStyleBackColor = True
         '
         'dlgViewDescriptives
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(427, 326)
-        Me.Controls.Add(Me.lblComponent)
-        Me.Controls.Add(Me.ucrComponent)
+        Me.Controls.Add(Me.rdoViewGraph)
         Me.Controls.Add(Me.rdoComponent)
         Me.Controls.Add(Me.rdoAllContents)
         Me.Controls.Add(Me.rdoStructure)
@@ -152,6 +146,5 @@ Partial Class dlgViewDescriptives
     Friend WithEvents rdoStructure As RadioButton
     Friend WithEvents rdoAllContents As RadioButton
     Friend WithEvents rdoComponent As RadioButton
-    Friend WithEvents ucrComponent As ucrReorder
-    Friend WithEvents lblComponent As Label
+    Friend WithEvents rdoViewGraph As RadioButton
 End Class

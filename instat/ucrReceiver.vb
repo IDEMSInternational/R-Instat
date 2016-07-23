@@ -24,6 +24,7 @@ Public Class ucrReceiver
     Public bUseFilteredData As Boolean = True
     Public bTypeSet As Boolean
     Protected strType As String
+    Public bExcludeFromSelector As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -43,7 +44,9 @@ Public Class ucrReceiver
     End Sub
 
     Public Overridable Sub RemoveSelected()
-
+        If Selector IsNot Nothing Then
+            Selector.LoadList()
+        End If
     End Sub
 
     Public Overridable Sub Clear()
@@ -69,6 +72,11 @@ Public Class ucrReceiver
 
     Public Overridable Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strVarNames As String = ""
+        Return strVarNames
+    End Function
+
+    Public Overridable Function GetVariableNamesList(Optional bWithQuotes As Boolean = True) As String()
+        Dim strVarNames As String() = Nothing
         Return strVarNames
     End Function
 
@@ -123,7 +131,7 @@ Public Class ucrReceiver
 
     'TODO remove this method and replace with SetIncludedDataTypes
     Public Sub SetDataType(strTemp As String)
-        AddIncludedMetadataProperty("Data_Type", {Chr(34) & strTemp & Chr(34)})
+        AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
     End Sub
 
     Public Sub SetIncludedDataTypes(strInclude As String())
@@ -133,14 +141,14 @@ Public Class ucrReceiver
         For i = 0 To strInclude.Count - 1
             strTypes(i) = Chr(34) & strInclude(i) & Chr(34)
         Next
-        AddIncludedMetadataProperty("Data_Type", strTypes)
+        AddIncludedMetadataProperty("class", strTypes)
     End Sub
 
     Public Sub SetExcludedDataTypes(strExclude As String())
         For i = 0 To strExclude.Count - 1
             strExclude(i) = Chr(34) & strExclude(i) & Chr(34)
         Next
-        AddExcludedMetadataProperty("Data_Type", strExclude)
+        AddExcludedMetadataProperty("class", strExclude)
     End Sub
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
@@ -218,4 +226,16 @@ Public Class ucrReceiver
         bTypeSet = True
     End Sub
 
+    Public Sub Add(strItem As String)
+        SetMeAsReceiver()
+        For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
+            If Selector.lstAvailableVariable.Items(i).Text = strItem Then
+                Selector.lstAvailableVariable.SelectedItems.Clear()
+                Selector.lstAvailableVariable.Items(i).Selected = True
+                AddSelected()
+                Selector.lstAvailableVariable.SelectedItems.Clear()
+                Exit For
+            End If
+        Next
+    End Sub
 End Class

@@ -64,9 +64,17 @@ Partial Class dlgOptions
         Me.lblOutputFormat = New System.Windows.Forms.Label()
         Me.cmdCommentFormat = New System.Windows.Forms.Button()
         Me.lblCommandFormat = New System.Windows.Forms.Label()
+        Me.tbpEditor = New System.Windows.Forms.TabPage()
+        Me.pnFormatEditor = New System.Windows.Forms.Panel()
+        Me.cmdEditorFont = New System.Windows.Forms.Button()
+        Me.lblFont = New System.Windows.Forms.Label()
         Me.tbpDataView = New System.Windows.Forms.TabPage()
         Me.lblMaxRows = New System.Windows.Forms.Label()
         Me.nudMaxRows = New System.Windows.Forms.NumericUpDown()
+        Me.tbpWorkingDirectory = New System.Windows.Forms.TabPage()
+        Me.cmdWorkingDirectory = New System.Windows.Forms.Button()
+        Me.ucrWorkingDirectory = New instat.ucrInputTextBox()
+        Me.lblWorkingDirectory = New System.Windows.Forms.Label()
         Me.tbpCommands.SuspendLayout()
         Me.pnScriptOptions.SuspendLayout()
         Me.tbpLanguages.SuspendLayout()
@@ -84,8 +92,11 @@ Partial Class dlgOptions
         CType(Me.nudPreviewRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpOutputWindow.SuspendLayout()
         Me.pnFormatOptions.SuspendLayout()
+        Me.tbpEditor.SuspendLayout()
+        Me.pnFormatEditor.SuspendLayout()
         Me.tbpDataView.SuspendLayout()
         CType(Me.nudMaxRows, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpWorkingDirectory.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdApply
@@ -310,8 +321,10 @@ Partial Class dlgOptions
         Me.tbcOptions.Controls.Add(Me.tbpComments)
         Me.tbcOptions.Controls.Add(Me.tbpImport)
         Me.tbcOptions.Controls.Add(Me.tbpOutputWindow)
+        Me.tbcOptions.Controls.Add(Me.tbpEditor)
         Me.tbcOptions.Controls.Add(Me.tbpCommands)
         Me.tbcOptions.Controls.Add(Me.tbpDataView)
+        Me.tbcOptions.Controls.Add(Me.tbpWorkingDirectory)
         Me.tbcOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tbcOptions.Location = New System.Drawing.Point(0, 0)
         Me.tbcOptions.Name = "tbcOptions"
@@ -490,6 +503,47 @@ Partial Class dlgOptions
         Me.lblCommandFormat.TabIndex = 17
         Me.lblCommandFormat.Text = "Command Format"
         '
+        'tbpEditor
+        '
+        Me.tbpEditor.Controls.Add(Me.pnFormatEditor)
+        Me.tbpEditor.Location = New System.Drawing.Point(4, 22)
+        Me.tbpEditor.Name = "tbpEditor"
+        Me.tbpEditor.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpEditor.Size = New System.Drawing.Size(420, 291)
+        Me.tbpEditor.TabIndex = 10
+        Me.tbpEditor.Text = "Editor Window"
+        Me.tbpEditor.ToolTipText = "Data View"
+        Me.tbpEditor.UseVisualStyleBackColor = True
+        '
+        'pnFormatEditor
+        '
+        Me.pnFormatEditor.AutoSize = True
+        Me.pnFormatEditor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.pnFormatEditor.Controls.Add(Me.cmdEditorFont)
+        Me.pnFormatEditor.Controls.Add(Me.lblFont)
+        Me.pnFormatEditor.Location = New System.Drawing.Point(6, 6)
+        Me.pnFormatEditor.Name = "pnFormatEditor"
+        Me.pnFormatEditor.Size = New System.Drawing.Size(391, 46)
+        Me.pnFormatEditor.TabIndex = 22
+        '
+        'cmdEditorFont
+        '
+        Me.cmdEditorFont.Location = New System.Drawing.Point(288, 20)
+        Me.cmdEditorFont.Name = "cmdEditorFont"
+        Me.cmdEditorFont.Size = New System.Drawing.Size(100, 23)
+        Me.cmdEditorFont.TabIndex = 10
+        Me.cmdEditorFont.Text = "Change..."
+        Me.cmdEditorFont.UseVisualStyleBackColor = True
+        '
+        'lblFont
+        '
+        Me.lblFont.AutoSize = True
+        Me.lblFont.Location = New System.Drawing.Point(0, 25)
+        Me.lblFont.Name = "lblFont"
+        Me.lblFont.Size = New System.Drawing.Size(63, 13)
+        Me.lblFont.TabIndex = 17
+        Me.lblFont.Text = "Format Font"
+        '
         'tbpDataView
         '
         Me.tbpDataView.Controls.Add(Me.lblMaxRows)
@@ -519,6 +573,45 @@ Partial Class dlgOptions
         Me.nudMaxRows.Size = New System.Drawing.Size(62, 20)
         Me.nudMaxRows.TabIndex = 0
         Me.nudMaxRows.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'tbpWorkingDirectory
+        '
+        Me.tbpWorkingDirectory.Controls.Add(Me.cmdWorkingDirectory)
+        Me.tbpWorkingDirectory.Controls.Add(Me.ucrWorkingDirectory)
+        Me.tbpWorkingDirectory.Controls.Add(Me.lblWorkingDirectory)
+        Me.tbpWorkingDirectory.Location = New System.Drawing.Point(4, 22)
+        Me.tbpWorkingDirectory.Name = "tbpWorkingDirectory"
+        Me.tbpWorkingDirectory.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpWorkingDirectory.Size = New System.Drawing.Size(420, 291)
+        Me.tbpWorkingDirectory.TabIndex = 11
+        Me.tbpWorkingDirectory.Text = "Working Directory"
+        Me.tbpWorkingDirectory.UseVisualStyleBackColor = True
+        '
+        'cmdWorkingDirectory
+        '
+        Me.cmdWorkingDirectory.Location = New System.Drawing.Point(383, 17)
+        Me.cmdWorkingDirectory.Name = "cmdWorkingDirectory"
+        Me.cmdWorkingDirectory.Size = New System.Drawing.Size(24, 21)
+        Me.cmdWorkingDirectory.TabIndex = 2
+        Me.cmdWorkingDirectory.Text = "..."
+        Me.cmdWorkingDirectory.UseVisualStyleBackColor = True
+        '
+        'ucrWorkingDirectory
+        '
+        Me.ucrWorkingDirectory.IsReadOnly = False
+        Me.ucrWorkingDirectory.Location = New System.Drawing.Point(101, 17)
+        Me.ucrWorkingDirectory.Name = "ucrWorkingDirectory"
+        Me.ucrWorkingDirectory.Size = New System.Drawing.Size(282, 21)
+        Me.ucrWorkingDirectory.TabIndex = 1
+        '
+        'lblWorkingDirectory
+        '
+        Me.lblWorkingDirectory.AutoSize = True
+        Me.lblWorkingDirectory.Location = New System.Drawing.Point(3, 17)
+        Me.lblWorkingDirectory.Name = "lblWorkingDirectory"
+        Me.lblWorkingDirectory.Size = New System.Drawing.Size(92, 13)
+        Me.lblWorkingDirectory.TabIndex = 0
+        Me.lblWorkingDirectory.Text = "Working Directory"
         '
         'dlgOptions
         '
@@ -562,9 +655,15 @@ Partial Class dlgOptions
         Me.tbpOutputWindow.PerformLayout()
         Me.pnFormatOptions.ResumeLayout(False)
         Me.pnFormatOptions.PerformLayout()
+        Me.tbpEditor.ResumeLayout(False)
+        Me.tbpEditor.PerformLayout()
+        Me.pnFormatEditor.ResumeLayout(False)
+        Me.pnFormatEditor.PerformLayout()
         Me.tbpDataView.ResumeLayout(False)
         Me.tbpDataView.PerformLayout()
         CType(Me.nudMaxRows, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpWorkingDirectory.ResumeLayout(False)
+        Me.tbpWorkingDirectory.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -607,4 +706,12 @@ Partial Class dlgOptions
     Friend WithEvents rtbCommentPreview As RichTextBox
     Friend WithEvents rtbOutputPreview As RichTextBox
     Friend WithEvents rtbCommandPreview As RichTextBox
+    Friend WithEvents tbpEditor As TabPage
+    Friend WithEvents pnFormatEditor As Panel
+    Friend WithEvents cmdEditorFont As Button
+    Friend WithEvents lblFont As Label
+    Friend WithEvents tbpWorkingDirectory As TabPage
+    Friend WithEvents cmdWorkingDirectory As Button
+    Friend WithEvents ucrWorkingDirectory As ucrInputTextBox
+    Friend WithEvents lblWorkingDirectory As Label
 End Class
