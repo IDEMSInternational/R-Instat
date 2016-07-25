@@ -4133,6 +4133,9 @@
     <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\heplots_1.3-1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\link.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\httr_1.2.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
