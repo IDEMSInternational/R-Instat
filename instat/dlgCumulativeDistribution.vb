@@ -56,6 +56,7 @@ Public Class dlgCumulativeDistribution
         ucrSaveCumDist.strPrefix = "Graph"
         ucrSaveCumDist.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveCumDist.ucrInputGraphName.SetDefaultTypeAsGraph()
+        ucrSaveCumDist.ucrInputGraphName.SetValidationTypeAsRVariable()
 
     End Sub
 

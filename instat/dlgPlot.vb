@@ -76,6 +76,7 @@ Public Class dlgPlot
         ucrSaveLinePlot.strPrefix = "Line"
         ucrSaveLinePlot.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveLinePlot.ucrInputGraphName.SetDefaultTypeAsGraph()
+        ucrSaveLinePlot.ucrInputGraphName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub TestOkEnabled()
