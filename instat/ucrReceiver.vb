@@ -131,7 +131,7 @@ Public Class ucrReceiver
 
     'TODO remove this method and replace with SetIncludedDataTypes
     Public Sub SetDataType(strTemp As String)
-        AddIncludedMetadataProperty("Data_Type", {Chr(34) & strTemp & Chr(34)})
+        AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
     End Sub
 
     Public Sub SetIncludedDataTypes(strInclude As String())
@@ -141,14 +141,14 @@ Public Class ucrReceiver
         For i = 0 To strInclude.Count - 1
             strTypes(i) = Chr(34) & strInclude(i) & Chr(34)
         Next
-        AddIncludedMetadataProperty("Data_Type", strTypes)
+        AddIncludedMetadataProperty("class", strTypes)
     End Sub
 
     Public Sub SetExcludedDataTypes(strExclude As String())
         For i = 0 To strExclude.Count - 1
             strExclude(i) = Chr(34) & strExclude(i) & Chr(34)
         Next
-        AddExcludedMetadataProperty("Data_Type", strExclude)
+        AddExcludedMetadataProperty("class", strExclude)
     End Sub
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
