@@ -5,7 +5,7 @@ instat_object <- R6Class("instat_object",
                                           data_tables_metadata = rep(list(list()),length(data_tables)),
                                           data_tables_filters = rep(list(list()),length(data_tables)),
                                           imported_from = as.list(rep("",length(data_tables))),
-                                          messages=TRUE, convert=TRUE, create=TRUE) 
+                                          messages=TRUE, convert=TRUE, create=TRUE)
 { 
     self$set_meta(instat_obj_metadata)
     self$set_objects(list())
@@ -27,6 +27,7 @@ instat_object <- R6Class("instat_object",
                   .data_objects = list(),
                   .metadata = list(),
                   .objects = list(),
+                  .links = list(),
                   .data_objects_changed = FALSE
                 ),
                 active = list(
@@ -261,15 +262,15 @@ instat_object$set("public", "get_data_frame", function(data_name, convert_to_cha
 }
 )
 
-instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE) { 
+instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = FALSE) { 
   if(missing(data_name)) {
     retlist <- list()
     for (curr_obj in private$.data_objects) {
-      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property)
+      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, update = update)
     }
     return(retlist)
   }
-  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property))
+  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, update = update))
 } 
 )
 
@@ -616,8 +617,8 @@ instat_object$set("public", "filter_string", function(data_name, filter_name) {
 }
 )
 
-instat_object$set("public", "replace_value_in_data", function(data_name, col_names, row, old_value = "", start_value = NA, end_value = NA, new_value = "", closed_start_value = TRUE, closed_end_value = TRUE) {
-  self$get_data_objects(data_name)$replace_value_in_data(col_names, old_value, start_value, end_value, new_value, closed_start_value, closed_end_value)
+instat_object$set("public", "replace_value_in_data", function(data_name, col_names, rows, old_value, start_value = NA, end_value = NA, new_value, closed_start_value = TRUE, closed_end_value = TRUE) {
+  self$get_data_objects(data_name)$replace_value_in_data(col_names, rows, old_value, start_value, end_value, new_value, closed_start_value, closed_end_value)
 } 
 )
 # instat_object$set("public", "replace_value_in_data", function(data_name, col_name, row, new_value) {
@@ -877,8 +878,8 @@ instat_object$set("public","unfreeze_columns", function(data_name) {
 } 
 )
 
-instat_object$set("public","is_variables_metadata", function(data_name, property) {
-  self$get_data_objects(data_name)$is_variables_metadata(property)
+instat_object$set("public","is_variables_metadata", function(data_name, property, column, update = TRUE) {
+  self$get_data_objects(data_name)$is_variables_metadata(property, column, update)
 } 
 )
 

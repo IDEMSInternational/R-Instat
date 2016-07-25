@@ -1,11 +1,11 @@
 # Necessary packages for the Instat Object
 packs <- c("openxlsx", "reshape2", "lubridate","plyr", "rtf", "ggplot2", "extRemes", "GGally", "CCA", "plotrix", "agridat", "DAAG", "FactoMineR", "plotrix", "agridat", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "proto", "tidyr", "gridExtra", "tidyr", "ggfortify", "rio", "readxl", "lme4", "dummies")
-# Packages including dependencies (generated from miniCRAN package, excluding ggfortify which is not on CRAN)
+# Packages including dependencies (generated from miniCRAN package)
 packs <- c("openxlsx", "reshape2", "lubridate", "plyr", "rtf", "ggplot2", "extRemes", "GGally", "CCA", "plotrix", "agridat", "DAAG", "FactoMineR", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "proto", "tidyr", "gridExtra", "ggfortify", "rio", "readxl", "lme4", "dummies", "ggthemes", "Rcpp", "stringr", "stringi", "magrittr", "R.oo", "R.methodsS3", "digest", "gtable", "MASS", "scales", "RColorBrewer", "dichromat", "munsell", "labeling", "colorspace", "Lmoments", "distillery", "car", "mgcv", "nnet", "pbkrtest", "quantreg", "nlme", "Matrix", "SparseM", "MatrixModels", "lattice", "minqa", "nloptr", "RcppEigen", "reshape", "fda", "fields", "spam", "maps", "latticeExtra", "cluster", "ellipse", "flashClust", "leaps", "scatterplot3d", "data.table", "dplyr", "knitr", "chron", "assertthat", "tibble", "lazyeval", "DBI", "BH", "evaluate", "formatR", "highr", "markdown", "yaml", "mime", "heplots", "mapproj", "hexbin", "mapdata", "RgoogleMaps", "png", "RJSONIO", "boot", "zoo", "XML", "selectr", "RCurl", "bitops", "httr", "memoise", "whisker", "rstudioapi", "jsonlite", "git2r", "withr", "curl", "openssl", "dendextend", "ggrepel", "abind", "fpc", "mclust", "flexmix", "prabclus", "class", "diptest", "mvtnorm", "robustbase", "kernlab", "trimcluster", "modeltools", "DEoptimR", "GlobalOptions", "shape", "urltools", "foreign", "haven", "readODS", "xml2", "readr", "feather", "cellranger")
 success <- invisible(sapply(packs, function(x) length(find.package(x, quiet = TRUE))>0))
 if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/RPackages"), type = "win.binary")
-success <- suppressWarnings(sapply(packs, require, character.only = TRUE))
-if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/RPackages"), type = "win.binary")
+#success <- suppressWarnings(sapply(packs, require, character.only = TRUE))
+#if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/RPackages"), type = "win.binary")
 #require will ensure packages load correctly, but not sensible to load all
 #sapply(names(success)[!success], require, character.only = TRUE)
 #Needed when ggfortify was not on CRAN
@@ -39,6 +39,7 @@ library(readxl)
 library(lme4)
 library(dummies)
 library(ggthemes)
+library(dplyr)
 setwd(dirname(parent.frame(2)$ofile))
 
 
