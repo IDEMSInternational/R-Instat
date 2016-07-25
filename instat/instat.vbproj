@@ -4088,63 +4088,129 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="lib\unvell.ReoScript.dll" />
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\class_7.3-14.zip">
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\abind_1.4-5.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\dendextend_1.2.0.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\class_7.3-14.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\DEoptimR_1.0-4.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\dendextend_1.2.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\diptest_0.75-7.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\DEoptimR_1.0-4.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\dummies_1.5.6.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\DEoptimR_1.0-6.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\flexmix_2.3-13.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\devtools_1.12.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\fpc_2.1-10.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\diptest_0.75-7.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\heplots_1.3-1.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\dplyr_0.5.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\dummies_1.5.6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\flexmix_2.3-13.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\fpc_2.1-10.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\GGally_1.2.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\ggthemes_3.2.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\haven_0.2.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\heplots_1.3-1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\httr_1.2.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\jsonlite_0.9.22.zip">
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\httr_1.2.1.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\kernlab_0.9-24.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\jsonlite_0.9.22.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\lazyeval_0.2.0.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\jsonlite_1.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\mclust_5.2.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\kernlab_0.9-24.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\modeltools_0.2-21.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\lazyeval_0.2.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\mvtnorm_1.0-5.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\mclust_5.2.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\openair_1.8-6.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\mgcv_1.8-13.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\plyr_1.8.4.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\mime_0.5.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\prabclus_2.2-6.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\modeltools_0.2-21.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\quantreg_5.26.zip">
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\mvtnorm_1.0-5.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\openair_1.8-6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\plotrix_3.6-3.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\plyr_1.8.4.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\prabclus_2.2-6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\quantreg_5.26.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\Rcpp_0.12.6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\rio_0.4.8.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\robustbase_0.92-6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\rstudioapi_0.6.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\survival_2.39-5.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\tibble_1.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\tidyr_0.5.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\trimcluster_0.1-2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\withr_1.0.2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\xml2_1.0.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="static\Recent_Files\recent.mru">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

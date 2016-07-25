@@ -71,6 +71,7 @@ Public Class dlgPolynomials
         ucrReceiverPolynomial.bUseFilteredData = False
         ucrReceiverPolynomial.SetMeAsReceiver()
         ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
+        ucrInputPolynomial.SetValidationTypeAsRVariable()
 
     End Sub
 
