@@ -83,6 +83,7 @@ Public Class dlgBoxplot
         ucrSaveBoxplot.strPrefix = "Boxplot"
         ucrSaveBoxplot.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveBoxplot.ucrInputGraphName.SetDefaultTypeAsGraph()
+        ucrSaveBoxplot.ucrInputGraphName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub TestOkEnabled()
