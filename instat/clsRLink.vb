@@ -44,8 +44,24 @@ Public Class RLink
     Public clrEditor As Color = Color.Black
 
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
+
     End Sub
 
+    Public Sub SetEngine()
+        Try
+            REngine.SetEnvironmentVariables()
+        Catch ex As Exception
+            MsgBox(ex.Message & vbNewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R Link.")
+            Application.Exit()
+        End Try
+        Try
+            clsEngine = REngine.GetInstance()
+        Catch ex As Exception
+            MsgBox(ex.Message & vbNewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R Link.")
+            Application.Exit()
+        End Try
+        clsEngine.Initialize()
+    End Sub
     Public Sub setFormatOutput(tempFont As Font, tempColor As Color)
         fOutput = tempFont
         clrOutput = tempColor

@@ -29,6 +29,7 @@ Partial Class dlgViewDescriptives
         Me.rdoStructure = New System.Windows.Forms.RadioButton()
         Me.rdoAllContents = New System.Windows.Forms.RadioButton()
         Me.rdoComponent = New System.Windows.Forms.RadioButton()
+        Me.rdoViewGraph = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -40,6 +41,7 @@ Partial Class dlgViewDescriptives
         '
         'ucrSelectorForViewObject
         '
+        Me.ucrSelectorForViewObject.bShowHiddenColumns = False
         Me.ucrSelectorForViewObject.Location = New System.Drawing.Point(9, 9)
         Me.ucrSelectorForViewObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForViewObject.Name = "ucrSelectorForViewObject"
@@ -103,11 +105,23 @@ Partial Class dlgViewDescriptives
         Me.rdoComponent.Text = "Component"
         Me.rdoComponent.UseVisualStyleBackColor = True
         '
+        'rdoViewGraph
+        '
+        Me.rdoViewGraph.AutoSize = True
+        Me.rdoViewGraph.Location = New System.Drawing.Point(259, 228)
+        Me.rdoViewGraph.Name = "rdoViewGraph"
+        Me.rdoViewGraph.Size = New System.Drawing.Size(80, 17)
+        Me.rdoViewGraph.TabIndex = 7
+        Me.rdoViewGraph.TabStop = True
+        Me.rdoViewGraph.Text = "View Graph"
+        Me.rdoViewGraph.UseVisualStyleBackColor = True
+        '
         'dlgViewDescriptives
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(427, 326)
+        Me.Controls.Add(Me.rdoViewGraph)
         Me.Controls.Add(Me.rdoComponent)
         Me.Controls.Add(Me.rdoAllContents)
         Me.Controls.Add(Me.rdoStructure)
@@ -132,4 +146,5 @@ Partial Class dlgViewDescriptives
     Friend WithEvents rdoStructure As RadioButton
     Friend WithEvents rdoAllContents As RadioButton
     Friend WithEvents rdoComponent As RadioButton
+    Friend WithEvents rdoViewGraph As RadioButton
 End Class
