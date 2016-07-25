@@ -335,7 +335,7 @@ Public Class frmEditor
         strCellDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript()).AsCharacter(0)
 
         clsReplaceValue.AddParameter("col_name", Chr(34) & strCurrentColumn & Chr(34))
-        clsReplaceValue.AddParameter("row", Chr(34) & grdCurrSheet.RowHeaders.Item(e.Cell.Row).Text & Chr(34))
+        clsReplaceValue.AddParameter("rows", Chr(34) & grdCurrSheet.RowHeaders.Item(e.Cell.Row).Text & Chr(34))
 
         If e.NewData = "NA" Then
             clsReplaceValue.AddParameter("new_value", e.NewData)
@@ -378,8 +378,8 @@ Public Class frmEditor
                     '        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
                     '    End If
                     'Case "character"
-                    clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
-                    bValid = True
+                    'clsReplaceValue.AddParameter("new_value", Chr(34) & e.NewData & Chr(34))
+                    'bValid = True
                 Case Else
                     If Double.TryParse(e.NewData, dblValue) OrElse e.NewData = "TRUE" OrElse e.NewData = "FALSE" Then
                         clsReplaceValue.AddParameter("new_value", e.NewData)
