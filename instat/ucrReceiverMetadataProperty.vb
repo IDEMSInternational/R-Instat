@@ -18,11 +18,11 @@
 Public Class ucrReceiverMetadataProperty
     Public clsLayerParam As LayerParameters
     Public ctrActive As Control
+    Public Event ControlContentsChanged()
 
     Public Sub SetControls()
-
         nudParamValue.Visible = False
-        ucrcborParamValue.Visible = False
+        ucrCboParamValue.Visible = False
         UcrColor.Visible = False
         If Not IsNothing(clsLayerParam) Then
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
@@ -44,21 +44,40 @@ Public Class ucrReceiverMetadataProperty
                 End If
                 ctrActive = nudParamValue
             ElseIf clsLayerParam.strLayerParameterDataType = "boolean" Then
-                ctrActive = ucrcborParamValue
-                ucrcborParamValue.SetItems({"TRUE", "FALSE"})
+                ctrActive = ucrCboParamValue
+                ucrCboParamValue.SetItems({"TRUE", "FALSE"})
             ElseIf clsLayerParam.strLayerParameterDataType = "colour" Then
                 ctrActive = UcrColor
             ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
-                ctrActive = ucrcborParamValue
+                ctrActive = ucrCboParamValue
 
-                ucrcborParamValue.SetItems(clsLayerParam.lstParameterStrings)
-                ucrcborParamValue.Visible = True
+                ucrCboParamValue.SetItems(clsLayerParam.lstParameterStrings)
+                ucrCboParamValue.Visible = True
             Else
                 ctrActive = New Control 'this should never actually be used but is here to ensure the code is stable even if a developper uses an incorrect datatype
             End If
-
         End If
+    End Sub
 
+    Private Sub nudParamValue_TextChanged(sender As Object, e As EventArgs) Handles nudParamValue.TextChanged
+        RaiseEvent ControlContentsChanged()
+    End Sub
 
+    Private Sub ucrCboParamValue_NameChanged() Handles ucrCboParamValue.NameChanged
+        RaiseEvent ControlContentsChanged()
+    End Sub
+
+    Private Sub ucrColor_NameChanged() Handles UcrColor.NameChanged
+        RaiseEvent ControlContentsChanged()
+    End Sub
+
+    Public Sub SetValue(strValue As String)
+        If TypeOf (ctrActive) Is NumericUpDown Then
+            If strValue <> "" Then
+                nudParamValue.Value = strValue
+            End If
+        Else
+            ctrActive.Text = strValue
+        End If
     End Sub
 End Class

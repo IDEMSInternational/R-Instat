@@ -58,4 +58,8 @@ Public Class dlgCombineforGraphics
     Private Sub ucrCombineGraphReceiver_SelectionChanged() Handles ucrCombineGraphReceiver.SelectionChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub cmdLayout_Click(sender As Object, e As EventArgs) Handles cmdLayout.Click
+        sdgLayout.ShowDialog()
+    End Sub
 End Class

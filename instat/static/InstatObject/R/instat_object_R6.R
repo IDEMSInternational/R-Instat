@@ -196,10 +196,12 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
 }
 )
 
+# Now appending/merging not setting so maybe should be renamed
 instat_object$set("public", "set_meta", function(new_meta) {
   if(!is.list(new_meta)) stop("new_meta must be of type: list")
-  
-  private$.metadata <- new_meta
+  for(name in names(new_meta)) {
+    self$append_to_metadata(name, new_meta[[name]])
+  }
 }
 )
 
@@ -259,15 +261,15 @@ instat_object$set("public", "get_data_frame", function(data_name, convert_to_cha
 }
 )
 
-instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE) { 
+instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = FALSE) { 
   if(missing(data_name)) {
     retlist <- list()
     for (curr_obj in private$.data_objects) {
-      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property)
+      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, update = update)
     }
     return(retlist)
   }
-  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property))
+  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, update = update))
 } 
 )
 
@@ -276,7 +278,8 @@ instat_object$set("public", "get_combined_metadata", function(convert_to_charact
   for (curr_obj in private$.data_objects) {
     templist = curr_obj$get_metadata()
     for ( j in (1:length(templist)) ) {
-      retlist[curr_obj$get_metadata(data_name_label), names(templist[j])] = templist[[j]]         
+      if(length(templist[[j]]) > 1) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
+      retlist[curr_obj$get_metadata(data_name_label), names(templist[j])] = templist[[j]]
     }
   }
   if(convert_to_character) return(convert_to_character_matrix(retlist, FALSE))
@@ -613,10 +616,14 @@ instat_object$set("public", "filter_string", function(data_name, filter_name) {
 }
 )
 
-instat_object$set("public", "replace_value_in_data", function(data_name, col_name, row, new_value) {
-  self$get_data_objects(data_name)$replace_value_in_data(col_name, row, new_value)
+instat_object$set("public", "replace_value_in_data", function(data_name, col_names, row, old_value = "", start_value = NA, end_value = NA, new_value = "", closed_start_value = TRUE, closed_end_value = TRUE) {
+  self$get_data_objects(data_name)$replace_value_in_data(col_names, old_value, start_value, end_value, new_value, closed_start_value, closed_end_value)
 } 
 )
+# instat_object$set("public", "replace_value_in_data", function(data_name, col_name, row, new_value) {
+#   self$get_data_objects(data_name)$replace_value_in_data(col_name, row, new_value)
+# } 
+# )
 
 instat_object$set("public", "rename_column_in_data", function(data_name, column_name, new_val) {
   self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val)
@@ -736,7 +743,7 @@ instat_object$set("public", "append_to_metadata", function(property, new_val = "
   
   if(!is.character(property)) stop("property must be of type character")
   
-  private$.metadata[[property]] <- new_val
+  attr(self, property) <- new_val
   self$metadata_changed <- TRUE
   self$append_to_changes(list(Added_metadata, property))
 }
@@ -870,8 +877,8 @@ instat_object$set("public","unfreeze_columns", function(data_name) {
 } 
 )
 
-instat_object$set("public","is_variables_metadata", function(data_name, property) {
-  self$get_data_objects(data_name)$is_variables_metadata(property)
+instat_object$set("public","is_variables_metadata", function(data_name, property, column, update = TRUE) {
+  self$get_data_objects(data_name)$is_variables_metadata(property, column, update)
 } 
 )
 
