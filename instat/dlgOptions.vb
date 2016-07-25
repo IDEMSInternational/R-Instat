@@ -18,9 +18,10 @@ Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
 Imports instat.Translations
-
+Imports System.IO
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
+    Public strWorkingDirectory As String
     Private Panels As New List(Of Panel)()
     Private VisiblePanel As Panel = Nothing
     'Define the Fonts dialog (only one)
@@ -28,6 +29,7 @@ Public Class dlgOptions
     Dim bFirstLoad As Boolean = True
     Dim fntOutput, fntCommand, fntComment, fntEditor As Font
     Dim clrOutput, clrCommand, clrComment, clrEditor As Color
+
 
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -58,6 +60,8 @@ Public Class dlgOptions
         nudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
         nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         txtComment.Text = frmMain.clsInstatOptions.strComment
+        ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
+
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
@@ -80,6 +84,8 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetPreviewRows(nudPreviewRows.Value)
         frmMain.clsInstatOptions.SetMaxRows(nudMaxRows.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
+        frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
+
     End Sub
 
     Private Sub SetView()
@@ -139,9 +145,7 @@ Public Class dlgOptions
     End Sub
 
     Private Sub cmdApply_Click(sender As Object, e As EventArgs) Handles cmdApply.Click
-
         SetInstatOptions()
-
         autoTranslate(Me)
 
         If frmMain.Visible Then
@@ -295,4 +299,12 @@ Public Class dlgOptions
         clrEditor = clrNew
     End Sub
 
+    Private Sub cmdWorkingDirectory_Click(sender As Object, e As EventArgs) Handles cmdWorkingDirectory.Click
+        Dim dlgWorkingDirectory As New FolderBrowserDialog
+        If dlgWorkingDirectory.ShowDialog = DialogResult.OK Then
+            strWorkingDirectory = (dlgWorkingDirectory.SelectedPath).Replace("\", "/")
+            ucrWorkingDirectory.SetName(strWorkingDirectory)
+            ApplyEnabled(True)
+        End If
+    End Sub
 End Class

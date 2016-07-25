@@ -6,6 +6,7 @@ Public Class InstatOptions
     Public fntOutput, fntScript, fntComment, fntEditor As Font
     Public clrOutput, clrScript, clrComment, clrEditor As Color
     Public strComment, strLanguageCultureCode As String
+    Public strWorkingDirectory As String
     Public iPreviewRows As Integer
     Public iMaxRows As Integer
 
@@ -75,4 +76,9 @@ Public Class InstatOptions
         End Select
     End Sub
 
+    Public Sub SetWorkingDirectory(strWD As String)
+        strWorkingDirectory = strWD
+        'frmMain.clsRLink.RunScript("setwd(" & Chr(34) & strWorkingDirectory & Chr(34) & ")")
+
+    End Sub
 End Class
