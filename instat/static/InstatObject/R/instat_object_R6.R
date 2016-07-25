@@ -5,7 +5,7 @@ instat_object <- R6Class("instat_object",
                                           data_tables_metadata = rep(list(list()),length(data_tables)),
                                           data_tables_filters = rep(list(list()),length(data_tables)),
                                           imported_from = as.list(rep("",length(data_tables))),
-                                          messages=TRUE, convert=TRUE, create=TRUE) 
+                                          messages=TRUE, convert=TRUE, create=TRUE)
 { 
     self$set_meta(instat_obj_metadata)
     self$set_objects(list())
@@ -27,6 +27,7 @@ instat_object <- R6Class("instat_object",
                   .data_objects = list(),
                   .metadata = list(),
                   .objects = list(),
+                  .links = list(),
                   .data_objects_changed = FALSE
                 ),
                 active = list(
