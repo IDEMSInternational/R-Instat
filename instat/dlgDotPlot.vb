@@ -56,6 +56,7 @@ Public Class dlgDotPlot
         ucrSaveDotPlot.strPrefix = "Dotplot"
         ucrSaveDotPlot.ucrInputGraphName.SetItemsTypeAsGraphs()
         ucrSaveDotPlot.ucrInputGraphName.SetDefaultTypeAsGraph()
+        ucrSaveDotPlot.ucrInputGraphName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub TestOkEnabled()

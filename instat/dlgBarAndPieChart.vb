@@ -57,7 +57,7 @@ Public Class dlgBarAndPieChart
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.SetIncludedDataTypes({"factor"})
 
-
+        ucrSaveBar.ucrInputGraphName.SetValidationTypeAsRVariable()
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 438
