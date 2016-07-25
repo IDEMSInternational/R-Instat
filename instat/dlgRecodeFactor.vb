@@ -51,6 +51,7 @@ Public Class dlgRecodeFactor
         ucrFactorGrid.SetAsViewerOnly()
         ucrFactorGrid.bIncludeCopyOfLevels = True
         ucrFactorGrid.AddEditableColumns({"New Levels"})
+        ucrInputColumnName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub SetDefaults()

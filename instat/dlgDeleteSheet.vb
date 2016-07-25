@@ -24,7 +24,22 @@ Public Class dlgDeleteSheet
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ((ucrDataFrameToDelete.cboAvailableDataFrames.Items.Count > 0) And (ucrDataFrameToDelete.cboAvailableDataFrames.Text <> "")) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ReopenDialog()
+
     End Sub
 
     Private Sub InitialiseDialog()
@@ -34,6 +49,7 @@ Public Class dlgDeleteSheet
 
     Private Sub SetDefaults()
         ucrDataFrameToDelete.Focus()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -41,6 +57,11 @@ Public Class dlgDeleteSheet
     End Sub
 
     Private Sub ucrDataFrameToDelete_DataFrameChanged() Handles ucrDataFrameToDelete.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameToDelete.cboAvailableDataFrames.SelectedItem & Chr(34))
+        If ((ucrDataFrameToDelete.cboAvailableDataFrames.Items.Count > 0) And (ucrDataFrameToDelete.cboAvailableDataFrames.Text <> "")) Then
+            ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameToDelete.cboAvailableDataFrames.SelectedItem & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("data_name")
+        End If
+        TestOKEnabled()
     End Sub
 End Class
