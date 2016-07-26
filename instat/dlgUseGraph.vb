@@ -31,6 +31,7 @@ Public Class dlgUseGraph
     Private Sub SetDefaults()
         ucrGraphReceiver.SetMeAsReceiver()
         ucrGraphsSelector.Reset()
+        ucrSaveGraphForUseGraph.chkSaveGraph.Checked = False
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
@@ -38,6 +39,10 @@ Public Class dlgUseGraph
         ucrGraphsSelector.SetItemType("graph")
         ucrGraphReceiver.Selector = ucrGraphsSelector
         sdgLayerOptions.SetRSyntax(ucrBase.clsRsyntax)
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+        ucrSaveGraphForUseGraph.SetDataFrameSelector(ucrGraphsSelector.ucrAvailableDataFrames)
+        ucrSaveGraphForUseGraph.strPrefix = "Usedgraph"
+
     End Sub
     Private Sub ReOpenDialog()
 
@@ -53,7 +58,33 @@ Public Class dlgUseGraph
             ucrBase.OKEnabled(False)
         End If
     End Sub
-    Private Sub cmdAddLayer_Click(sender As Object, e As EventArgs) Handles cmdAddLayer.Click
-        sdgLayerOptions.ShowDialog()
+    Private Sub ucrGraphReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrGraphReceiver.SelectionChanged
+        If Not ucrGraphReceiver.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("graph_name", ucrGraphReceiver.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("graph_name")
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrGraphsSelector_DataFrameChanged() Handles ucrGraphsSelector.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+
+    End Sub
+
+    Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
+        sdgPlots.ShowDialog()
+    End Sub
+
+    Private Sub ucrSaveGraphForUseGraph_GraphNameChanged() Handles ucrSaveGraphForUseGraph.GraphNameChanged, ucrSaveGraphForUseGraph.SaveGraphCheckedChanged
+        If ucrSaveGraphForUseGraph.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveGraphForUseGraph.strGraphName, strTempDataframe:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraphForUseGraph.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
+
+        TestOkEnabled()
     End Sub
 End Class

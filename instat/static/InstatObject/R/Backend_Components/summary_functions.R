@@ -33,11 +33,15 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 )
 
 instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = FALSE, summary_name,...) {
-  # itermediate methd needed here apply_calculation which calls calculate_summary when calculation type = summary
-  # always use apply_calculation to run calculation e.g. type = filter, stack
-  out = self$get_data_objects(data_name)$calculate_summary(columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, ... = ...)
-  if(store_results) self$append_summaries_to_data_object(out, data_name, columns_to_summarise, summaries, factors, summary_name)
-  if(return_output) return(out)
+  calculated_from = list()
+  calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
+  #TODO Change this to store sub_calculations for each column
+  calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, ... = ...), calculated_from = calculated_from)
+  self$apply_calculation(calc)
+  # create calculation for link
+  link_calc <- calculation$new(from_data_frame = data_name, to_data_frame = , calculation = )
+  # add link
+  self$add_link(link_calc)
 }
 )
 

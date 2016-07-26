@@ -1,10 +1,10 @@
 get_default_decimal_places <- function(data) {
   if(is.numeric(data)) {
-    if(class(data) == "integer" || min(data, na.rm = TRUE)>100) {
+    if(class(data) %in% "integer" || min(data, na.rm = TRUE)>100) {
       return(0)
     }
     else {
-      if(min(data, na.rm = T)>10) {
+      if(min(data, na.rm = TRUE)>10) {
         return(1)
       }
       else {  
