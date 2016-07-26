@@ -4,7 +4,8 @@ data_object <- R6Class("data_object",
                                                  variables_metadata = data.frame(), metadata = list(), 
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
-                                                 start_point=1, filters = list(), objects = list())
+                                                 start_point=1, filters = list(), objects = list(),
+                                                 keys = list())
 {
                              
   # Set up the data object
@@ -19,6 +20,7 @@ data_object <- R6Class("data_object",
   self$update_variables_metadata()
   self$set_filters(filters)
   self$set_objects(objects)
+  self$set_keys(keys)
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
@@ -39,6 +41,7 @@ data_object <- R6Class("data_object",
                            data = data.frame(),
                            filters = list(),
                            objects = list(),
+                           keys = list(),
                            changes = list(), 
                            .current_filter = list(),
                            .data_changed = FALSE,
@@ -158,6 +161,14 @@ data_object$set("public", "set_objects", function(new_objects) {
   
   self$append_to_changes(list(Set_property, "objects"))  
   private$objects <- new_objects
+}
+)
+
+data_object$set("public", "set_keys", function(new_keys) {
+  if(!is.list(new_keys)) stop("new_objects must be of type: list")
+  
+  self$append_to_changes(list(Set_property, "keys"))  
+  private$keys <- new_keys
 }
 )
 
@@ -1194,5 +1205,22 @@ data_object$set("public", "freeze_columns", function(column) {
 
 data_object$set("public", "unfreeze_columns", function() {
   self$append_to_variables_metadata(self$get_column_names(), is_frozen_label, FALSE)
+}
+)
+
+data_object$set("public", "add_key", function(col_names) {
+  if(anyDuplicated(private$data[col_names]) > 0) {
+    stop("key columns must have unique combinations")
+  }
+  if(any(sapply(private$keys, function(x) setequal(col_names,x)))) {
+    message("A key with these columns already exists. No action will be taken.")
+  }
+  else {
+    private$keys[[length(private$keys) + 1]] <- col_names
+    self$append_to_variables_metadata(col_names, is_key_label, TRUE)
+    if(length(private$keys) == 1) self$append_to_variables_metadata(setdiff(self$get_column_names(), col_names), is_key_label, FALSE)
+    self$append_to_metadata(is_linkable, TRUE)
+    self$append_to_metadata(next_default_item(key_label, names(self$get_metadata())), paste(col_names, collapse = ","))
+  }
 }
 )
