@@ -37,6 +37,11 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
   #TODO Change this to store sub_calculations for each column
   calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, ... = ...), calculated_from = calculated_from)
+  self$apply_calculation(calc)
+  # create calculation for link
+  link_calc <- calculation$new(from_data_frame = data_name, to_data_frame = , calculation = )
+  # add link
+  self$add_link(link_calc)
 }
 )
 
