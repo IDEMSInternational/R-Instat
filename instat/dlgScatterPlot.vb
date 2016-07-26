@@ -88,8 +88,6 @@ Public Class dlgScatterPlot
 
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
         ucrSaveScatterPlot.strPrefix = "Scatter"
-        ucrSaveScatterPlot.ucrInputGraphName.SetItemsTypeAsGraphs()
-        ucrSaveScatterPlot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
     Private Sub SetDefaults()
         'setDefaults
