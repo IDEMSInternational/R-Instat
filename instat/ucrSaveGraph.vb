@@ -10,6 +10,7 @@
         ' Add any initialization after the InitializeComponent() call.
         ucrInputGraphName.SetDefaultTypeAsGraph()
         ucrInputGraphName.SetItemsTypeAsGraphs()
+        ucrInputGraphName.SetValidationTypeAsRVariable()
         bFirstLoad = True
     End Sub
 
