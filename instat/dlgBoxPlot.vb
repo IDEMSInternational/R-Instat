@@ -81,8 +81,7 @@ Public Class dlgBoxplot
 
         ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
         ucrSaveBoxplot.strPrefix = "Boxplot"
-        ucrSaveBoxplot.ucrInputGraphName.SetItemsTypeAsGraphs()
-        ucrSaveBoxplot.ucrInputGraphName.SetDefaultTypeAsGraph()
+
     End Sub
 
     Private Sub TestOkEnabled()
