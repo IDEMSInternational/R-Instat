@@ -31,13 +31,17 @@ Public Class dlgCombineforGraphics
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 430
-        ucrCombineGraphSelector.SetItemType("graph")
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
+        ucrCombineGraphSelector.SetItemType("graph")
+        ucrSaveCombinedGraph.strPrefix = "Combinedgraph"
+        ucrSaveCombinedGraph.SetDataFrameSelector(ucrCombineGraphSelector.ucrAvailableDataFrames)
     End Sub
 
     Private Sub SetDefaults()
         ucrCombineGraphReceiver.SetMeAsReceiver()
         ucrCombineGraphSelector.Reset()
+        ucrSaveCombinedGraph.chkSaveGraph.Checked = False
+        TestOkEnabled()
     End Sub
 
     Private Sub ReopenDialog()
@@ -61,5 +65,17 @@ Public Class dlgCombineforGraphics
 
     Private Sub cmdLayout_Click(sender As Object, e As EventArgs) Handles cmdLayout.Click
         sdgLayout.ShowDialog()
+    End Sub
+
+    Private Sub ucrSaveCombinedGraph_Load() Handles ucrSaveCombinedGraph.GraphNameChanged, ucrSaveCombinedGraph.SaveGraphCheckedChanged
+        If ucrSaveCombinedGraph.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveCombinedGraph.strGraphName, strTempDataframe:=ucrCombineGraphSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveCombinedGraph.strGraphName)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrCombineGraphSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        End If
+
+        TestOkEnabled()
     End Sub
 End Class
