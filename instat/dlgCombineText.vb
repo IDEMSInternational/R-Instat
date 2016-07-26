@@ -55,6 +55,7 @@ Public Class dlgCombineText
         iColumnsUsed = 0
         ucrInputSeparator.SetItems({"Space", "-", "_", "."})
         ucrBase.iHelpTopicID = 345
+        ucrInputColumnInto.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub SetDefaults()

@@ -34,6 +34,7 @@ Public Class dlgSaveAs
         dlgSave.Reset()
         dlgSave.Title = "Save Log File"
         dlgSave.Filter = "Text file (*.txt)|*.txt"
+        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
         If dlgSave.ShowDialog() = DialogResult.OK Then
             txtLogSave.Text = dlgSave.FileName.Replace("\", "/")
         End If
@@ -43,6 +44,7 @@ Public Class dlgSaveAs
         dlgSave.Reset()
         dlgSave.Title = "Save Output File"
         dlgSave.Filter = "Rich Text file (*.rtf)|*.rtf"
+        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
         If dlgSave.ShowDialog() = DialogResult.OK Then
             txtOutputSave.Text = dlgSave.FileName.Replace("\", "/")
         End If
@@ -78,8 +80,10 @@ Public Class dlgSaveAs
     End Sub
 
     Private Sub cmdEditorSave_Click(sender As Object, e As EventArgs) Handles cmdEditorSave.Click
+        dlgSave.Reset()
         dlgSave.Title = "Save Data File"
         dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
+        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
         If dlgSave.ShowDialog() = DialogResult.OK Then
             'Save path
             txtEditorSave.Text = dlgSave.FileName.Replace("\", "/")
@@ -115,6 +119,7 @@ Public Class dlgSaveAs
         dlgSave.Reset()
         dlgSave.Title = "Save Script File"
         dlgSave.Filter = "Text file (*.txt)|*.txt"
+        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
         If dlgSave.ShowDialog() = DialogResult.OK Then
             txtScriptSave.Text = dlgSave.FileName.Replace("\", "/")
         End If

@@ -42,6 +42,7 @@ Public Class dlgRank
         ucrInputColName.SetItemsTypeAsColumns()
         ucrInputColName.SetDefaultTypeAsColumn()
         ucrInputColName.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
+        ucrInputColName.SetValidationTypeAsRVariable()
     End Sub
 
     'This runs on load and after anything is changed on the dialog.

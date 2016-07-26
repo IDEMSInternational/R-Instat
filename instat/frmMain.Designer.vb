@@ -2080,7 +2080,6 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnTextFindReplace
         '
-        Me.mnuOrganiseColumnTextFindReplace.Enabled = False
         Me.mnuOrganiseColumnTextFindReplace.Name = "mnuOrganiseColumnTextFindReplace"
         Me.mnuOrganiseColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseColumnTextFindReplace.Tag = "Find/Replace..."
@@ -2159,7 +2158,6 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnReshapeMerge
         '
-        Me.mnuOrganiseColumnReshapeMerge.Enabled = False
         Me.mnuOrganiseColumnReshapeMerge.Name = "mnuOrganiseColumnReshapeMerge"
         Me.mnuOrganiseColumnReshapeMerge.Size = New System.Drawing.Size(188, 22)
         Me.mnuOrganiseColumnReshapeMerge.Tag = "Merge..."

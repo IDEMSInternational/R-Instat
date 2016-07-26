@@ -27,15 +27,18 @@ summarised_from_label="summarised_from"
 key_label="key"
 row_count_label="Row_Count"
 column_count_label="Column_Count"
+is_linkable="Is_Linkable"
 
 #variables_metadata labels
 display_decimal_label="Display_Decimal"
 name_label="Name"
 is_factor_label="Is_Factor"
-data_type_label="Data_Type"
+#changes because attributes default is class
+data_type_label="class"
 is_hidden_label="Is_Hidden"
 is_protected_label="Is_Protected"
 is_frozen_label="Is_Frozen"
+is_key_label="Is_Key"
 
 #object labels
 overall_label="[Overall]"
