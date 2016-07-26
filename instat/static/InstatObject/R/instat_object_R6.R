@@ -5,7 +5,7 @@ instat_object <- R6Class("instat_object",
                                           data_tables_metadata = rep(list(list()),length(data_tables)),
                                           data_tables_filters = rep(list(list()),length(data_tables)),
                                           imported_from = as.list(rep("",length(data_tables))),
-                                          messages=TRUE, convert=TRUE, create=TRUE) 
+                                          messages=TRUE, convert=TRUE, create=TRUE)
 { 
     self$set_meta(instat_obj_metadata)
     self$set_objects(list())
@@ -27,6 +27,7 @@ instat_object <- R6Class("instat_object",
                   .data_objects = list(),
                   .metadata = list(),
                   .objects = list(),
+                  .links = list(),
                   .data_objects_changed = FALSE
                 ),
                 active = list(
@@ -616,8 +617,8 @@ instat_object$set("public", "filter_string", function(data_name, filter_name) {
 }
 )
 
-instat_object$set("public", "replace_value_in_data", function(data_name, col_names, row, old_value = "", start_value = NA, end_value = NA, new_value = "", closed_start_value = TRUE, closed_end_value = TRUE) {
-  self$get_data_objects(data_name)$replace_value_in_data(col_names, old_value, start_value, end_value, new_value, closed_start_value, closed_end_value)
+instat_object$set("public", "replace_value_in_data", function(data_name, col_names, rows, old_value, start_value = NA, end_value = NA, new_value, closed_start_value = TRUE, closed_end_value = TRUE) {
+  self$get_data_objects(data_name)$replace_value_in_data(col_names, rows, old_value, start_value, end_value, new_value, closed_start_value, closed_end_value)
 } 
 )
 # instat_object$set("public", "replace_value_in_data", function(data_name, col_name, row, new_value) {
