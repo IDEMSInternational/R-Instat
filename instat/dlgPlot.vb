@@ -74,9 +74,7 @@ Public Class dlgPlot
 
         ucrSaveLinePlot.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
         ucrSaveLinePlot.strPrefix = "Line"
-        ucrSaveLinePlot.ucrInputGraphName.SetItemsTypeAsGraphs()
-        ucrSaveLinePlot.ucrInputGraphName.SetDefaultTypeAsGraph()
-        ucrSaveLinePlot.ucrInputGraphName.SetValidationTypeAsRVariable()
+
     End Sub
 
     Private Sub TestOkEnabled()

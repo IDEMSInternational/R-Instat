@@ -57,7 +57,6 @@ Public Class dlgBarAndPieChart
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.SetIncludedDataTypes({"factor"})
 
-        ucrSaveBar.ucrInputGraphName.SetValidationTypeAsRVariable()
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 438
@@ -65,8 +64,6 @@ Public Class dlgBarAndPieChart
 
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
         'ucrSaveBar.strPrefix = "Graph"
-        ucrSaveBar.ucrInputGraphName.SetItemsTypeAsGraphs()
-        ucrSaveBar.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
 
     Private Sub ReopenDialog()

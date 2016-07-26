@@ -45,10 +45,6 @@ Public Class dlgGeneralForGraphics
 
         ucrSaveGraph.SetDataFrameSelector(sdgLayerOptions.ucrGeomWithAes.UcrSelector.ucrAvailableDataFrames)
         ucrSaveGraph.strPrefix = "Graph"
-        ucrSaveGraph.ucrInputGraphName.SetItemsTypeAsGraphs()
-        ucrSaveGraph.ucrInputGraphName.SetDefaultTypeAsGraph()
-        ucrSaveGraph.ucrInputGraphName.SetValidationTypeAsRVariable()
-
         ucrAdditionalLayers.SetRSyntax(ucrBase.clsRsyntax)
         ucrAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrAdditionalLayers.SetAesFunction(clsGgplotAesFunction)
