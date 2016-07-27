@@ -40,6 +40,10 @@ is_protected_label="Is_Protected"
 is_frozen_label="Is_Frozen"
 is_key_label="Is_Key"
 structure_label="Structure"
+has_dependants_label="Has_Dependants"
+dependent_columns_label="Dependent_Columns"
+calculated_by_label="Calculated_By"
+dependencies_label="Dependencies"
 
 #Variables_metadata value labels
 structure_type_1_label="Layout"
