@@ -43,6 +43,7 @@ Public Class dlgRegressionSimple
         ucrModelName.SetPrefix("reg")
         ucrModelName.SetItemsTypeAsModels()
         ucrModelName.SetDefaultTypeAsModel()
+        ucrModelName.SetValidationTypeAsRVariable()
         ucrModelPreview.IsReadOnly = True
         sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorSimpleReg.ucrAvailableDataFrames)

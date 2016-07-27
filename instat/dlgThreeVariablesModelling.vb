@@ -65,6 +65,7 @@ Public Class dlgThreeVariableModelling
         AssignModelName()
         ModelOperator()
         TestOKEnabled()
+        ucrModelName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub ReopenDialog()
