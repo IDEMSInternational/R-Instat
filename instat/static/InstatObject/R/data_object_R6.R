@@ -1224,3 +1224,17 @@ data_object$set("public", "add_key", function(col_names) {
   }
 }
 )
+
+data_object$set("public", "set_structure_columns", function(struc_type_1, struc_type_2, struc_type_3) {
+  if(!all(c(struc_type_1,struc_type_2,struc_type_3) %in% names(private$data))) stop("Some column names not recognised.")
+  if(length(intersect(struc_type_1,struc_type_2)) > 0 || length(intersect(struc_type_1,struc_type_3)) > 0 || length(intersect(struc_type_2,struc_type_3)) > 0) {
+    stop("Each column can only be assign one structure type.")
+  }
+  if(length(struc_type_1) > 0) self$append_to_variables_metadata(struc_type_1, structure_label, structure_type_1_label)
+  if(length(struc_type_2) > 0) self$append_to_variables_metadata(struc_type_2, structure_label, structure_type_2_label)
+  if(length(struc_type_3) > 0) self$append_to_variables_metadata(struc_type_3, structure_label, structure_type_3_label)
+  all <- union(union(struc_type_1, struc_type_2), struc_type_3)
+  other <- setdiff(names(private$data), all)
+  self$append_to_variables_metadata(other, structure_label, NA)
+}
+)
