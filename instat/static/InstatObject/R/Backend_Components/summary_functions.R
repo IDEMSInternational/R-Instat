@@ -9,39 +9,40 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
 instat_object$set("public", "append_summaries_to_data_object", function(out, data_name, columns_to_summarise, summaries, factors = c(), summary_name) {
   if(!is.character(data_name)) stop("data_name must be of type character")
   exists = FALSE
+  link_calc <- calculation$new(type = "summary", parameters = list(factors = factors))
   for(data_obj in self$get_data_objects()) {
-    if(data_obj$is_metadata(summarised_from_label) 
-       && data_obj$get_metadata(summarised_from_label)[[1]] == data_name 
-       && setequal(data_obj$get_metadata(summarised_from_label)[[2]],factors)) {
+    if(self$link_exists(from_data_frame = data_name, to_data_frame = data_obj$get_metadata(data_name_label), link_calc = link_calc)) {
       exists = TRUE
-      summary_obj = data_obj
+      summary_obj <- data_obj
+      summary_name <- summary_obj$get_metadata(data_name_label)
       break
     }
   }
   if(exists) summary_obj$merge_data(out, by = factors, type = "inner", match = "first")
   else {
-    summary_data = list()
-    if(missing(summary_name)) summary_name = paste(data_name, "by", paste(factors, collapse = "-"), sep="_")
-    summary_name = make.names(summary_name)
-    summary_data[[summary_name]] = out
+    summary_data <- list()
+    if(missing(summary_name) || is.na(summary_name)) summary_name <- paste(data_name, "by", paste(factors, collapse = "_"), sep="_")
+    summary_name <- make.names(summary_name)
+    summary_name <- next_default_item(summary_name, self$get_data_names(), include_index = FALSE)
+    summary_data[[summary_name]] <- out
     self$import_data(summary_data)
-    summary_obj = self$get_data_objects(summary_name)
+    summary_obj <- self$get_data_objects(summary_name)
     summary_obj$append_to_metadata(summarised_from_label, list(from = data_name, by = factors))
     summary_obj$append_to_metadata(key_label, factors)
+    # add link
+    link_obj <- link$new(from_data_frame = data_name, to_data_frame = summary_name, calculation = link_calc)
+    self$add_link(link_obj)
   }
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = FALSE, summary_name,...) {
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = FALSE, summary_name = NA,...) {
   calculated_from = list()
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
   #TODO Change this to store sub_calculations for each column
   calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, ... = ...), calculated_from = calculated_from)
-  self$apply_calculation(calc)
-  # create calculation for link
-  link_calc <- calculation$new(from_data_frame = data_name, to_data_frame = , calculation = )
-  # add link
-  self$add_link(link_calc)
+  results <- self$apply_calculation(calc)
+  if(return_output) results
 }
 )
 
