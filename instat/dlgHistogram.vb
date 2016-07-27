@@ -57,8 +57,6 @@ Public Class dlgHistogram
         ucrVariablesAsFactorforHist.SetIncludedDataType({"numeric"})
 
         ucrSaveHist.SetDataFrameSelector(ucrHistogramSelector.ucrAvailableDataFrames)
-        ucrSaveHist.ucrInputGraphName.SetItemsTypeAsGraphs()
-        ucrSaveHist.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
     Private Sub ucrHistogramSelector_DataFrameChanged() Handles ucrHistogramSelector.DataFrameChanged
         clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrHistogramSelector.ucrAvailableDataFrames.clsCurrDataFrame)
