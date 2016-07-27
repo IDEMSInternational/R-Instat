@@ -24,22 +24,24 @@ Partial Class sdgLayout
     Private Sub InitializeComponent()
         Me.tbcLayout = New System.Windows.Forms.TabControl()
         Me.tbpSimple = New System.Windows.Forms.TabPage()
-        Me.tbpGeneral = New System.Windows.Forms.TabPage()
-        Me.nudRows = New System.Windows.Forms.NumericUpDown()
-        Me.nudColumns = New System.Windows.Forms.NumericUpDown()
-        Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.lblNumberofColumns = New System.Windows.Forms.Label()
+        Me.lblNumberofRows = New System.Windows.Forms.Label()
+        Me.nudColumns = New System.Windows.Forms.NumericUpDown()
+        Me.nudRows = New System.Windows.Forms.NumericUpDown()
+        Me.tbpGeneral = New System.Windows.Forms.TabPage()
         Me.ucrsdgLayoutBase = New instat.ucrButtonsSubdialogue()
+        Me.tbpLabels = New System.Windows.Forms.TabPage()
         Me.tbcLayout.SuspendLayout()
         Me.tbpSimple.SuspendLayout()
-        CType(Me.nudRows, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudColumns, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tbcLayout
         '
         Me.tbcLayout.Controls.Add(Me.tbpSimple)
         Me.tbcLayout.Controls.Add(Me.tbpGeneral)
+        Me.tbcLayout.Controls.Add(Me.tbpLabels)
         Me.tbcLayout.Location = New System.Drawing.Point(13, 13)
         Me.tbcLayout.Name = "tbcLayout"
         Me.tbcLayout.SelectedIndex = 0
@@ -60,31 +62,14 @@ Partial Class sdgLayout
         Me.tbpSimple.Text = "Simple"
         Me.tbpSimple.UseVisualStyleBackColor = True
         '
-        'tbpGeneral
+        'lblNumberofColumns
         '
-        Me.tbpGeneral.Location = New System.Drawing.Point(4, 22)
-        Me.tbpGeneral.Name = "tbpGeneral"
-        Me.tbpGeneral.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpGeneral.Size = New System.Drawing.Size(251, 157)
-        Me.tbpGeneral.TabIndex = 1
-        Me.tbpGeneral.Text = "General"
-        Me.tbpGeneral.UseVisualStyleBackColor = True
-        '
-        'nudRows
-        '
-        Me.nudRows.Location = New System.Drawing.Point(117, 20)
-        Me.nudRows.Name = "nudRows"
-        Me.nudRows.Size = New System.Drawing.Size(95, 20)
-        Me.nudRows.TabIndex = 0
-        Me.nudRows.Value = New Decimal(New Integer() {2, 0, 0, 0})
-        '
-        'nudColumns
-        '
-        Me.nudColumns.Location = New System.Drawing.Point(117, 59)
-        Me.nudColumns.Name = "nudColumns"
-        Me.nudColumns.Size = New System.Drawing.Size(95, 20)
-        Me.nudColumns.TabIndex = 0
-        Me.nudColumns.Value = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.lblNumberofColumns.AutoSize = True
+        Me.lblNumberofColumns.Location = New System.Drawing.Point(8, 61)
+        Me.lblNumberofColumns.Name = "lblNumberofColumns"
+        Me.lblNumberofColumns.Size = New System.Drawing.Size(99, 13)
+        Me.lblNumberofColumns.TabIndex = 1
+        Me.lblNumberofColumns.Text = "Number of Columns"
         '
         'lblNumberofRows
         '
@@ -95,14 +80,31 @@ Partial Class sdgLayout
         Me.lblNumberofRows.TabIndex = 1
         Me.lblNumberofRows.Text = "Number of Rows"
         '
-        'lblNumberofColumns
+        'nudColumns
         '
-        Me.lblNumberofColumns.AutoSize = True
-        Me.lblNumberofColumns.Location = New System.Drawing.Point(8, 61)
-        Me.lblNumberofColumns.Name = "lblNumberofColumns"
-        Me.lblNumberofColumns.Size = New System.Drawing.Size(99, 13)
-        Me.lblNumberofColumns.TabIndex = 1
-        Me.lblNumberofColumns.Text = "Number of Columns"
+        Me.nudColumns.Location = New System.Drawing.Point(117, 59)
+        Me.nudColumns.Name = "nudColumns"
+        Me.nudColumns.Size = New System.Drawing.Size(95, 20)
+        Me.nudColumns.TabIndex = 0
+        Me.nudColumns.Value = New Decimal(New Integer() {2, 0, 0, 0})
+        '
+        'nudRows
+        '
+        Me.nudRows.Location = New System.Drawing.Point(117, 20)
+        Me.nudRows.Name = "nudRows"
+        Me.nudRows.Size = New System.Drawing.Size(95, 20)
+        Me.nudRows.TabIndex = 0
+        Me.nudRows.Value = New Decimal(New Integer() {2, 0, 0, 0})
+        '
+        'tbpGeneral
+        '
+        Me.tbpGeneral.Location = New System.Drawing.Point(4, 22)
+        Me.tbpGeneral.Name = "tbpGeneral"
+        Me.tbpGeneral.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpGeneral.Size = New System.Drawing.Size(251, 157)
+        Me.tbpGeneral.TabIndex = 1
+        Me.tbpGeneral.Text = "General"
+        Me.tbpGeneral.UseVisualStyleBackColor = True
         '
         'ucrsdgLayoutBase
         '
@@ -110,6 +112,16 @@ Partial Class sdgLayout
         Me.ucrsdgLayoutBase.Name = "ucrsdgLayoutBase"
         Me.ucrsdgLayoutBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrsdgLayoutBase.TabIndex = 1
+        '
+        'tbpLabels
+        '
+        Me.tbpLabels.Location = New System.Drawing.Point(4, 22)
+        Me.tbpLabels.Name = "tbpLabels"
+        Me.tbpLabels.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpLabels.Size = New System.Drawing.Size(251, 157)
+        Me.tbpLabels.TabIndex = 3
+        Me.tbpLabels.Text = "Labels"
+        Me.tbpLabels.UseVisualStyleBackColor = True
         '
         'sdgLayout
         '
@@ -125,8 +137,8 @@ Partial Class sdgLayout
         Me.tbcLayout.ResumeLayout(False)
         Me.tbpSimple.ResumeLayout(False)
         Me.tbpSimple.PerformLayout()
-        CType(Me.nudRows, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudColumns, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -139,4 +151,5 @@ Partial Class sdgLayout
     Friend WithEvents nudRows As NumericUpDown
     Friend WithEvents tbpGeneral As TabPage
     Friend WithEvents ucrsdgLayoutBase As ucrButtonsSubdialogue
+    Friend WithEvents tbpLabels As TabPage
 End Class
