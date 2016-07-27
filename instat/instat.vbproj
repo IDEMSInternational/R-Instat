@@ -621,6 +621,12 @@
     <Compile Include="dlgCombineforGraphics.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgColumnStructures.Designer.vb">
+      <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgColumnStructures.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSetupLoading.Designer.vb">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
     </Compile>
@@ -2448,6 +2454,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCombineforGraphics.sw-KE.resx">
       <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStructures.fr-FR.resx">
+      <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStructures.resx">
+      <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
+      <DependentUpon>dlgColumnStructures.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetupLoading.fr-FR.resx">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
