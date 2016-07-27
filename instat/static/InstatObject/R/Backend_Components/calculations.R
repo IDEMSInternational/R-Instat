@@ -3,22 +3,22 @@ calculation <- R6Class("calculation",
                            initialize = function(function_name = "", parameters = list(), 
                                                  calculated_from = c(), is_recalculable = TRUE,
                                                  sub_calculations = list(), type = "", filter_list = list()) {
-                             private$function_name = function_name
-                             private$parameters = parameters
-                             private$calculated_from = c()
-                             private$is_recalculable = is_recalculable
-                             private$sub_calculations = sub_calculations
-                             private$type = type
+                             self$function_name = function_name
+                             self$parameters = parameters
+                             self$calculated_from = c()
+                             self$is_recalculable = is_recalculable
+                             self$sub_calculations = sub_calculations
+                             self$type = type
                              private$.filter_list = filter_list
-                           }
+                           },
+                           function_name = "",
+                           parameters = list(), 
+                           calculated_from = c(),
+                           is_recalculable = TRUE,
+                           sub_calculations = list(),
+                           type = ""
                          ),
                        private = list(
-                         function_name = "",
-                         parameters = list(), 
-                         calculated_from = c(),
-                         is_recalculable = TRUE,
-                         sub_calculations = list(),
-                         type = "",
                          .filter_list = list()
                        ),
                        active = list(
@@ -42,9 +42,9 @@ calculation$set("public", "add_sub_calculation", function(sub_calculation, name)
 
 instat_object$set("public", "apply_calculation", function(calc) {
   if(calc$type == "summary") {
-    out <- self$get_data_objects(data_name)$calculate_summary(columns_to_summarise = calc[["parameters"]][["columns_to_summarise"]], summaries = calc[["parameters"]][["summaries"]], factors = calc[["parameters"]][["factors"]], store_results = calc[["parameters"]][["store_results"]], drop = calc[["parameters"]][["drop"]], ... = calc[["parameters"]][["..."]])
-    if(store_results) self$append_summaries_to_data_object(out, calc[["parameters"]][["data_name"]], calc[["parameters"]][["columns_to_summarise"]], calc[["parameters"]][["summaries"]], calc[["parameters"]][["factors"]], calc[["parameters"]][["summary_name"]])
-    if(return_output) return(out)
+    out <- self$get_data_objects(calc[["parameters"]][["data_name"]])$calculate_summary(columns_to_summarise = calc[["parameters"]][["columns_to_summarise"]], summaries = calc[["parameters"]][["summaries"]], factors = calc[["parameters"]][["factors"]], store_results = calc[["parameters"]][["store_results"]], drop = calc[["parameters"]][["drop"]], ... = calc[["parameters"]][["..."]])
+    if(calc[["parameters"]][["store_results"]]) self$append_summaries_to_data_object(out, calc[["parameters"]][["data_name"]], calc[["parameters"]][["columns_to_summarise"]], calc[["parameters"]][["summaries"]], calc[["parameters"]][["factors"]], calc[["parameters"]][["summary_name"]])
+    return(out)
   }
 }
 )
