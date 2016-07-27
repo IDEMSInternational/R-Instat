@@ -898,3 +898,8 @@ instat_object$set("public","get_links", function() {
   return(private$.links)
 }
 )
+
+instat_object$set("public","set_structure_columns", function(data_name, struc_type_1 = c(), struc_type_2 = c(), struc_type_3 = c()) {
+  self$get_data_objects(data_name)$set_structure_columns(struc_type_1, struc_type_2, struc_type_3)
+}
+)
