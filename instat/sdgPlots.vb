@@ -16,15 +16,15 @@
 Imports instat.Translations
 Public Class sdgPlots
     Public clsRsyntax As New RSyntax
-
     Public clsRggplotFunction As New RFunction
     Public clsAesFunction As New RFunction
-
     Public clsRFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
     Public clsYLabFunction As New RFunction
     Public clsRThemeFunction As New RFunction
+    Public clsRLegendFunction As New RFunction
     Public bFirstLoad As Boolean = True
+    Public strDataFrame As String
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -35,22 +35,26 @@ Public Class sdgPlots
         autoTranslate(Me)
     End Sub
 
+    Private Sub InitialiseTabs()
+        For i = 0 To tabctrlBoxSubdialog.TabCount - 1
+            tabctrlBoxSubdialog.SelectedIndex = i
+        Next
+        tabctrlBoxSubdialog.SelectedIndex = 0
+    End Sub
+
     Private Sub SetDefaults()
-        chkIncludeFacets.Checked = False
+        LegendDefaults()
         IncludeFacets()
+        chkIncludeFacets.Checked = False
         ucr1stFactorReceiver.SetMeAsReceiver()
-        ThemesControls()
+        Themes()
     End Sub
 
     Private Sub InitialiseDialog()
+        InitialiseTabs()
+        Themes()
+        Facets()
         IncludeFacets()
-        ucr1stFactorReceiver.Selector = ucrAddRemove
-        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucr2ndFactorReceiver.Selector = ucrAddRemove
-        ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
-
-        ucrInputThemes.cboInput.Items.AddRange({"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"})
-
         ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrPlotsAdditionalLayers.SetAesFunction(sdgLayerOptions.ucrGeomWithAes.clsGgplotAesFunction)
         ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
@@ -60,9 +64,59 @@ Public Class sdgPlots
         clsRggplotFunction = clsGgplotFunc
     End Sub
 
+    Private Sub Themes()
+        ucrInputThemes.cboInput.Items.AddRange({"default", "theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"})
+        cmdAllOptions.Enabled = False
+    End Sub
+
+    Private Sub ucrInputThemes_NameChanged() Handles ucrInputThemes.TextChanged
+        If Not ucrInputThemes.IsEmpty Then
+            clsRThemeFunction.SetRCommand(ucrInputThemes.cboInput.SelectedItem)
+            clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
+        Else
+            clsRsyntax.RemoveOperatorParameter("theme")
+        End If
+    End Sub
+
+    Private Sub LegendDefaults()
+        chkDisplayLegend.Checked = True
+        chkDisplayLegendTitle.Checked = True
+        chkChangeLegendTitle.Checked = False
+        txtChangeLegendTitle.Visible = False
+        chkChangeLegendLabels.Checked = False
+        txtChangeLegendLabels.Visible = False
+    End Sub
+
+    Private Sub chkDisplayLegend_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegend.CheckedChanged
+
+    End Sub
+
+    Private Sub chkChangeLegendTitle_CheckedChanged(sender As Object, e As EventArgs)
+        If chkChangeLegendTitle.Checked Then
+            txtChangeLegendTitle.Visible = True
+        Else
+            txtChangeLegendTitle.Visible = False
+        End If
+    End Sub
+
+    Private Sub chkChangeLegendLabels_CheckedChanged(sender As Object, e As EventArgs) Handles chkChangeLegendLabels.CheckedChanged
+        If chkChangeLegendLabels.Checked Then
+            txtChangeLegendLabels.Visible = True
+        Else
+            txtChangeLegendLabels.Visible = False
+        End If
+    End Sub
+
+    Private Sub Facets()
+        ucr1stFactorReceiver.Selector = ucrFacetSelector
+        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr2ndFactorReceiver.Selector = ucrFacetSelector
+        ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
+    End Sub
+
     Private Sub IncludeFacets()
         If chkIncludeFacets.Checked Then
-            ucrAddRemove.Visible = True
+            ucrFacetSelector.Visible = True
             ucr1stFactorReceiver.Visible = True
             ucr2ndFactorReceiver.Visible = True
             lblFactor1.Visible = True
@@ -79,7 +133,7 @@ Public Class sdgPlots
             SetFacets()
             IncludeFacetsOperator()
         Else
-            ucrAddRemove.Visible = False
+            ucrFacetSelector.Visible = False
             ucr1stFactorReceiver.Visible = False
             ucr2ndFactorReceiver.Visible = False
             lblFactor1.Visible = False
@@ -92,6 +146,11 @@ Public Class sdgPlots
             chkNoOfRowsOrColumns.Visible = False
             nudNoOfRowsOrColumns.Visible = False
         End If
+    End Sub
+
+    Public Sub SetDataFrame(strNewDataFrame As String)
+        strDataFrame = strNewDataFrame
+        ucrFacetSelector.SetDataframe(strDataFrame, False)
     End Sub
 
     Private Sub SetFacets()
@@ -150,6 +209,16 @@ Public Class sdgPlots
         End If
     End Sub
 
+    Private Sub VisibileNumberOfRowsOrColumns()
+        If chkMargin.Checked OrElse Not ucr2ndFactorReceiver.IsEmpty Then
+            chkNoOfRowsOrColumns.Visible = False
+            nudNoOfRowsOrColumns.Visible = False
+        Else
+            chkNoOfRowsOrColumns.Visible = True
+            nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
+        End If
+    End Sub
+
     Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
         IncludeFacets()
     End Sub
@@ -175,16 +244,6 @@ Public Class sdgPlots
         IncludeFacetsOperator()
     End Sub
 
-    Private Sub VisibileNumberOfRowsOrColumns()
-        If chkMargin.Checked OrElse Not ucr2ndFactorReceiver.IsEmpty Then
-            chkNoOfRowsOrColumns.Visible = False
-            nudNoOfRowsOrColumns.Visible = False
-        Else
-            chkNoOfRowsOrColumns.Visible = True
-            nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
-        End If
-    End Sub
-
     Private Sub chkNoOfRowsOrColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoOfRowsOrColumns.CheckedChanged
         nudNoOfRowsOrColumns.Visible = chkNoOfRowsOrColumns.Checked
         SetFacets()
@@ -195,7 +254,6 @@ Public Class sdgPlots
         SetFacets()
         IncludeFacetsOperator()
     End Sub
-
 
     Private Sub chkMargin_CheckedChanged(sender As Object, e As EventArgs) Handles chkMargin.CheckedChanged
         If chkMargin.Checked Then
@@ -231,24 +289,6 @@ Public Class sdgPlots
         clsRsyntax = clsRSyntaxIn
     End Sub
 
-    Private Sub chkChangeTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkChangeTitle.CheckedChanged
-        If chkChangeTitle.Checked Then
-            txtChangeTitle.Visible = True
-        Else
-            txtChangeTitle.Visible = False
-        End If
-    End Sub
-
-    Private Sub chkDisplayLegend_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegend.CheckedChanged
-        If chkDisplayLegend.Checked Then
-            grpLabels.Visible = True
-            grpTitle.Visible = True
-        Else
-            grpLabels.Visible = False
-            grpTitle.Visible = False
-        End If
-    End Sub
-
     Private Sub txtXTitle_Leave(sender As Object, e As EventArgs) Handles txtXTitle.Leave
         clsXLabFunction.AddParameter("label", Chr(34) & txtXTitle.Text & Chr(34))
     End Sub
@@ -280,30 +320,4 @@ Public Class sdgPlots
         clsYLabFunction.AddParameter("label", Chr(34) & txtYTitle.Text & Chr(34))
     End Sub
 
-    Private Sub ucrInputThemes_NameChanged() Handles ucrInputThemes.TextChanged
-        If Not ucrInputThemes.IsEmpty Then
-            clsRThemeFunction.SetRCommand(ucrInputThemes.cboInput.SelectedItem)
-            clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
-            clsRThemeFunction.AddParameter("base_size", 12)
-            clsRThemeFunction.AddParameter("base_family", Chr(34) & Chr(34))
-        Else
-            clsRsyntax.RemoveOperatorParameter("theme")
-        End If
-    End Sub
-
-    Private Sub chkOverideTheme_CheckedChanged(sender As Object, e As EventArgs) Handles chkOverideTheme.CheckedChanged
-        If chkOverideTheme.Checked Then
-            lblTheme.Visible = True
-            nudFont.Visible = True
-        Else
-            lblTheme.Visible = False
-            nudFont.Visible = False
-        End If
-    End Sub
-    Private Sub ThemesControls()
-        cmdCreateTheme.Enabled = False
-        chkOverideTheme.Enabled = False
-        nudFont.Visible = False
-        lblFont.Visible = False
-    End Sub
 End Class

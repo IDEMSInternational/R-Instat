@@ -64,6 +64,7 @@ Public Class dlgRowStats
 
         ucrBase.iHelpTopicID = 45
         cmdUserDefined.Enabled = False
+        ucrInputcboRowSummary.SetValidationTypeAsRVariable()
     End Sub
 
 
