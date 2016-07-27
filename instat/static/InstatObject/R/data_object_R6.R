@@ -466,8 +466,8 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
     }
     else if(str_data_type == "integer" || str_data_type == "numeric") {
       if(!is.na(new_value)) {
-        if(str_data_type == "integer" && !(new_value %% 1 == 0)) stop(col_name, "is an integer column. new_value must be an integer")
-        if(str_data_type == "numeric" && !is.numeric(new_value)) stop(col_name, "is a numeric column. new_value must be numeric")
+        if(str_data_type == "integer" && !(as.integer(new_value) %% 1 == 0)) stop(col_name, " is an integer column. new_value must be an integer")
+        if(str_data_type == "numeric" && !is.numeric(as.numeric(new_value))) stop(col_name, " is a numeric column. new_value must be numeric")
       }
       if(!missing(rows)) {
         replace_rows <- (row.names(private$data) %in% rows)
@@ -492,6 +492,14 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
           }
         }
         else {
+          if(str_data_type == "integer"){
+            old_value = as.integer(old_value)
+            new_value = as.integer(new_value)
+          }
+          if(str_data_type == "numeric"){
+            old_value = as.numeric(old_value)
+            new_value = as.numeric(new_value)
+          }
           replace_rows <- (private$data[[col_name]] == old_value)
         }
       }
@@ -506,7 +514,7 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
       new_value <- as.character(new_value)
     }
     else if(str_data_type == "logical") {
-      if(!is.logical(new_value)) stop(col_name, "is a logical column. new_value must be a logical value")
+      if(!is.logical(new_value)) stop(col_name, " is a logical column. new_value must be a logical value")
       if(!missing(rows)) {
         replace_rows <- (row.names(private$data) %in% rows)
         if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
