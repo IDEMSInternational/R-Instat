@@ -15,6 +15,7 @@
 
 Public Class sdgLayout
     Private bFirstLoad As Boolean = True
+    Public clsRSyntax As New RSyntax
     Private Sub sdgLayout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             bFirstLoad = False
@@ -27,5 +28,8 @@ Public Class sdgLayout
     End Sub
     Private Sub InitialiseDialog()
 
+    End Sub
+    Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
+        clsRSyntax = clsRSyntaxIn
     End Sub
 End Class

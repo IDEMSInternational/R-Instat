@@ -16,6 +16,8 @@
 Imports instat.Translations
 Public Class dlgCombineforGraphics
     Private bFirstLoad As Boolean = True
+
+
     Private Sub dlgCombineforGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -33,8 +35,9 @@ Public Class dlgCombineforGraphics
         ucrBase.iHelpTopicID = 430
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
         ucrCombineGraphSelector.SetItemType("graph")
-        ucrSaveCombinedGraph.strPrefix = "Combinedgraph"
         ucrSaveCombinedGraph.SetDataFrameSelector(ucrCombineGraphSelector.ucrAvailableDataFrames)
+        ucrBase.clsRsyntax.SetFunction("gridExtra::grid.arrange")
+        ucrBase.clsRsyntax.iCallType = 0
     End Sub
 
     Private Sub SetDefaults()
@@ -60,6 +63,9 @@ Public Class dlgCombineforGraphics
     End Sub
 
     Private Sub ucrCombineGraphReceiver_SelectionChanged() Handles ucrCombineGraphReceiver.SelectionChanged
+        ucrBase.clsRsyntax.AddParameter("grobs", "list(" & ucrCombineGraphReceiver.GetVariableNames(False) & ")")
+        ucrBase.clsRsyntax.AddParameter("nrow", ucrCombineGraphSelector.ucrAvailableDataFrames.iDataFrameLength)
+        ucrBase.clsRsyntax.AddParameter("ncol", ucrCombineGraphSelector.ucrAvailableDataFrames.iColumnCount)
         TestOkEnabled()
     End Sub
 
@@ -75,7 +81,6 @@ Public Class dlgCombineforGraphics
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrCombineGraphSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
-
         TestOkEnabled()
     End Sub
 End Class
