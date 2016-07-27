@@ -31,7 +31,7 @@ Partial Class ucrAdditionalLayers
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(139, 91)
+        Me.cmdDelete.Location = New System.Drawing.Point(139, 126)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
         Me.cmdDelete.TabIndex = 6
@@ -40,7 +40,7 @@ Partial Class ucrAdditionalLayers
         '
         'cmdEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(139, 62)
+        Me.cmdEdit.Location = New System.Drawing.Point(139, 97)
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(75, 23)
         Me.cmdEdit.TabIndex = 7
@@ -49,7 +49,7 @@ Partial Class ucrAdditionalLayers
         '
         'cmdAdd
         '
-        Me.cmdAdd.Location = New System.Drawing.Point(139, 33)
+        Me.cmdAdd.Location = New System.Drawing.Point(139, 68)
         Me.cmdAdd.Name = "cmdAdd"
         Me.cmdAdd.Size = New System.Drawing.Size(75, 23)
         Me.cmdAdd.TabIndex = 8
@@ -59,7 +59,7 @@ Partial Class ucrAdditionalLayers
         'lblLayers
         '
         Me.lblLayers.AutoSize = True
-        Me.lblLayers.Location = New System.Drawing.Point(9, 7)
+        Me.lblLayers.Location = New System.Drawing.Point(5, 17)
         Me.lblLayers.Name = "lblLayers"
         Me.lblLayers.Size = New System.Drawing.Size(87, 13)
         Me.lblLayers.TabIndex = 5
