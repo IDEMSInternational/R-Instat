@@ -194,6 +194,7 @@ data_object$set("public", "update_variables_metadata", function() {
   for(col in colnames(private$data)) {
     if(!self$is_variables_metadata(display_decimal_label, col)) self$append_to_variables_metadata(col, display_decimal_label, get_default_decimal_places(private$data[[col]]))
     if(!self$is_variables_metadata(data_type_label, col)) self$append_to_variables_metadata(col, data_type_label, class(private$data[[col]]))
+    self$append_to_variables_metadata(col, name_label, col)
   }
   self$append_to_changes(list(Set_property, "variables_metadata"))
 }
@@ -1233,7 +1234,7 @@ data_object$set("public", "add_key", function(col_names) {
   if(anyDuplicated(private$data[col_names]) > 0) {
     stop("key columns must have unique combinations")
   }
-  if(any(sapply(private$keys, function(x) setequal(col_names,x)))) {
+  if(self$key_exists(col_names)) {
     message("A key with these columns already exists. No action will be taken.")
   }
   else {
@@ -1243,6 +1244,11 @@ data_object$set("public", "add_key", function(col_names) {
     self$append_to_metadata(is_linkable, TRUE)
     self$append_to_metadata(next_default_item(key_label, names(self$get_metadata())), paste(col_names, collapse = ","))
   }
+}
+)
+
+data_object$set("public", "key_exists", function(col_names) {
+  return(any(sapply(private$keys, function(x) setequal(col_names,x))))
 }
 )
 
