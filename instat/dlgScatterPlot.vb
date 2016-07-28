@@ -88,8 +88,6 @@ Public Class dlgScatterPlot
 
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
         ucrSaveScatterPlot.strPrefix = "Scatter"
-        ucrSaveScatterPlot.ucrInputGraphName.SetItemsTypeAsGraphs()
-        ucrSaveScatterPlot.ucrInputGraphName.SetDefaultTypeAsGraph()
     End Sub
     Private Sub SetDefaults()
         'setDefaults
@@ -106,8 +104,10 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetDataFrame(strNewDataFrame:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
     End Sub
+
     Private Sub ucrVariablesAsFactor_SelectionChanged() Handles ucrVariablesAsFactorForScatter.SelectionChanged
         If Not ucrVariablesAsFactorForScatter.IsEmpty Then
             clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForScatter.GetVariableNames(False))

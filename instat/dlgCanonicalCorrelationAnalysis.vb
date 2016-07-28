@@ -39,6 +39,8 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrReceiverXvariables.SetDataType("numeric")
         ucrResultName.SetDefaultTypeAsModel()
         ucrResultName.SetPrefix("CCA")
+        ucrResultName.SetValidationTypeAsRVariable()
+
     End Sub
 
     Private Sub ReopenDialog()
