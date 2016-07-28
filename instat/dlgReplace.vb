@@ -54,6 +54,11 @@ Public Class dlgReplace
         chkClosedUpperRange.Enabled = False
         ucrInputRangeFro.txtInput.Text = ""
         ucrInputRangeTo.txtInput.Text = ""
+        rdoRange.Enabled = False
+        lblFrom.Enabled = False
+        lblTo.Enabled = False
+        ucrInputRangeFro.Enabled = False
+        ucrInputRangeTo.Enabled = False
         TestOKEnabled()
     End Sub
 
@@ -101,6 +106,7 @@ Public Class dlgReplace
 
     Private Sub ucrReceiverReplace_SelectionChanged() Handles ucrReceiverReplace.SelectionChanged
         CheckType()
+        RangeEnable()
         ucrBaseReplace.clsRsyntax.AddParameter("col_names", ucrReceiverReplace.GetVariableNames())
         TestOKEnabled()
     End Sub
@@ -266,6 +272,21 @@ Public Class dlgReplace
             'End If
         Else
             ucrBaseReplace.clsRsyntax.RemoveParameter("new_value")
+        End If
+    End Sub
+    Private Sub RangeEnable()
+        If ((Not ucrReceiverReplace.IsEmpty()) And (strVarType = "numeric" Or strVarType = "integer" Or strVarType = "positive integer")) Then
+            rdoRange.Enabled = True
+            lblFrom.Enabled = True
+            lblTo.Enabled = True
+            ucrInputRangeFro.Enabled = True
+            ucrInputRangeTo.Enabled = True
+        Else
+            rdoRange.Enabled = False
+            lblFrom.Enabled = False
+            lblTo.Enabled = False
+            ucrInputRangeFro.Enabled = False
+            ucrInputRangeTo.Enabled = False
         End If
     End Sub
 End Class
