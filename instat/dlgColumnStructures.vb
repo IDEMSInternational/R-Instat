@@ -26,8 +26,8 @@ Public Class dlgColumnStructure
         Else
             ReopenDialog()
         End If
-        TestOKEnabled()
         SetColumnStructureInReceiver()
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -50,7 +50,8 @@ Public Class dlgColumnStructure
     End Sub
 
     Private Sub SetColumnStructureInReceiver()
-        ucrSelectorColumnStructure.Reset()
+        'ucrSelectorColumnStructure.Reset()
+        ucrSelectorColumnStructure.AddItemsWithMetadataProperty("Structure", {Chr(34) & "Treatment" & Chr(34), Chr(34) & "Measurement" & Chr(34), Chr(34) & "Layout" & Chr(34)})
     End Sub
 
     Private Sub TestOKEnabled()
