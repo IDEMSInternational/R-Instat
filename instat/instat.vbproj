@@ -621,6 +621,12 @@
     <Compile Include="dlgCombineforGraphics.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgColumnStructures.Designer.vb">
+      <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgColumnStructures.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSetupLoading.Designer.vb">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
     </Compile>
@@ -2449,6 +2455,15 @@
     <EmbeddedResource Include="dlgCombineforGraphics.sw-KE.resx">
       <DependentUpon>dlgCombineforGraphics.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStructures.fr-FR.resx">
+      <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStructures.resx">
+      <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
+      <DependentUpon>dlgColumnStructures.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSetupLoading.fr-FR.resx">
       <DependentUpon>frmSetupLoading.vb</DependentUpon>
     </EmbeddedResource>
@@ -4131,6 +4146,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\heplots_1.3-1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\link.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\httr_1.2.0.zip">
