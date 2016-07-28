@@ -1,15 +1,29 @@
 #Methods temporarily here to avoid conflicts
 data_object$set("public", "merge_data", function(new_data, by = NULL, type = "left", match = "all") {
-  self$set_data(join(private$data, new_data, by, type, match))
+  #TODO how to use match argument with dplyr join functions
+  if(type == "left") {
+    new_data <- left_join(private$data, new_data, by)
+  }
+  else if(type == "right") {
+    new_data <- right_join(private$data, new_data, by)
+  }
+  else if(type == "full") {
+    new_data <- full_join(private$data, new_data, by)
+  }
+  else if(type == "inner") {
+    new_data <- inner_join(private$data, new_data, by)
+  }
+  else stop("type must be one of left, right, inner or full")
+  self$set_data(new_data)
   self$append_to_changes(Merged_data)
   self$add_defaults_meta()
 }
 )
 
-instat_object$set("public", "append_summaries_to_data_object", function(out, data_name, columns_to_summarise, summaries, factors = c(), summary_name) {
+instat_object$set("public", "append_summaries_to_data_object", function(out, data_name, columns_to_summarise, summaries, factors = c(), summary_name, calc, calc_name = "") {
   if(!is.character(data_name)) stop("data_name must be of type character")
-  exists = FALSE
   link_calc <- calculation$new(type = "summary", parameters = list(factors = factors))
+  exists = FALSE
   for(data_obj in self$get_data_objects()) {
     if(self$link_exists(from_data_frame = data_name, to_data_frame = data_obj$get_metadata(data_name_label), link_calc = link_calc)) {
       exists = TRUE
@@ -33,16 +47,28 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
     link_obj <- link$new(from_data_frame = data_name, to_data_frame = summary_name, calculation = link_calc)
     self$add_link(link_obj)
   }
+  calc_out_columns <- names(out)[-(1:length(factors))]
+  dependent_cols <- list(calc_out_columns)
+  names(dependent_cols) <- summary_name
+  dependencies_cols <- list(columns_to_summarise)
+  names(dependencies_cols) <- data_name
+  
+  calc_name <- self$save_calculation(summary_name, calc)
+  self$append_to_variables_metadata(data_name, columns_to_summarise, has_dependants_label, TRUE)
+  self$add_dependent_columns(data_name, columns_to_summarise, dependent_cols)
+  self$append_to_variables_metadata(summary_name, calc_out_columns, is_calculated_label, TRUE)
+  self$append_to_variables_metadata(summary_name, calc_out_columns, calculated_by_label, calc_name)
+  self$append_to_variables_metadata(summary_name, calc_out_columns, dependencies_label, dependencies_cols)
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = FALSE, summary_name = NA,...) {
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = FALSE, summary_name = NA, ...) {
   calculated_from = list()
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
   #TODO Change this to store sub_calculations for each column
   calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, ... = ...), calculated_from = calculated_from)
   results <- self$apply_calculation(calc)
-  if(return_output) results
+  if(!is.null(results)) return(results)
 }
 )
 

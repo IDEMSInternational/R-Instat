@@ -262,15 +262,15 @@ instat_object$set("public", "get_data_frame", function(data_name, convert_to_cha
 }
 )
 
-instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = FALSE) { 
+instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = FALSE, direct_from_attributes = FALSE) { 
   if(missing(data_name)) {
     retlist <- list()
     for (curr_obj in private$.data_objects) {
-      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, update = update)
+      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, update = update, direct_from_attributes = direct_from_attributes)
     }
     return(retlist)
   }
-  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, update = update))
+  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, update = update, direct_from_attributes = direct_from_attributes))
 } 
 )
 
@@ -896,5 +896,15 @@ instat_object$set("public","add_key", function(data_name, col_names) {
 
 instat_object$set("public","get_links", function() {
   return(private$.links)
+}
+)
+
+instat_object$set("public","set_structure_columns", function(data_name, struc_type_1 = c(), struc_type_2 = c(), struc_type_3 = c()) {
+  self$get_data_objects(data_name)$set_structure_columns(struc_type_1, struc_type_2, struc_type_3)
+}
+)
+
+instat_object$set("public","add_dependent_columns", function(data_name, columns, dependent_cols) {
+  self$get_data_objects(data_name)$add_dependent_columns(columns, dependent_cols)
 }
 )
