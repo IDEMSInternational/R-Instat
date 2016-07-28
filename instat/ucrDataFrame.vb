@@ -24,11 +24,10 @@ Public Class ucrDataFrame
     Public strCurrDataFrame As String = ""
     Public bUseFilteredData As Boolean = True
     Public bDataFrameFixed As Boolean = False
+    Private strFixedDataFrame As String
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If Not bDataFrameFixed Then
-            frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad, bIncludeOverall)
-        End If
+        FillComboBox()
         If bFirstLoad Then
             bFirstLoad = False
         End If
@@ -36,13 +35,20 @@ Public Class ucrDataFrame
     End Sub
 
     Public Sub Reset()
-        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad)
+        FillComboBox()
         If frmMain.strDefaultDataFrame <> "" Then
             cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strDefaultDataFrame)
         ElseIf frmMain.strCurrentDataFrame <> "" Then
             cboAvailableDataFrames.SelectedIndex = cboAvailableDataFrames.Items.IndexOf(frmMain.strCurrentDataFrame)
         End If
         SetDataFrameProperties()
+    End Sub
+
+    Private Sub FillComboBox()
+        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad)
+        If bDataFrameFixed AndAlso strFixedDataFrame <> "" Then
+            SetDataframe(strFixedDataFrame, False)
+        End If
     End Sub
 
     Public Event DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String)
@@ -76,7 +82,7 @@ Public Class ucrDataFrame
             clsParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
             clsCurrDataFrame.AddParameter(clsParam)
             clsCurrDataFrame.SetAssignTo(cboAvailableDataFrames.Text & "_temp")
-            End If
+        End If
     End Sub
 
     Public Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True)
@@ -86,13 +92,18 @@ Public Class ucrDataFrame
         If Index >= 0 Then
             cboAvailableDataFrames.SelectedIndex = Index
         End If
+        If Not bEnableDataframe Then
+            strFixedDataFrame = strDataframe
+        Else
+            strFixedDataFrame = ""
+        End If
         cboAvailableDataFrames.Enabled = bEnableDataframe
         bDataFrameFixed = Not bEnableDataframe
     End Sub
 
     Public Sub SetIncludeOverall(bInclude As Boolean)
         bIncludeOverall = bInclude
-        frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad, bIncludeOverall)
+        FillComboBox()
     End Sub
 
     Public Function GetIncludeOverall() As Boolean
