@@ -26,32 +26,73 @@ Public Class dlgColumnStructure
         Else
             ReopenDialog()
         End If
-        'Checks if Ok can be enabled.
+        SetColumnStructureInReceiver()
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverTreatment.Selector = ucrSelectorColumnStructure
         ucrReceiverForLayout.Selector = ucrSelectorColumnStructure
         ucrReceiverMeasurement.Selector = ucrSelectorColumnStructure
         ucrReceiverForLayout.SetMeAsReceiver()
+        ucrReceiverForLayout.bExcludeFromSelector = True
+        ucrReceiverMeasurement.bExcludeFromSelector = True
+        ucrReceiverTreatment.bExcludeFromSelector = True
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
     End Sub
 
     Private Sub SetDefaults()
-
+        ' ucrSelectorColumnStructure.Reset()
     End Sub
 
     Private Sub ReopenDialog()
 
     End Sub
 
-    Private Sub TestOKEnabled()
-
+    Private Sub SetColumnStructureInReceiver()
+        'ucrSelectorColumnStructure.Reset()
+        ucrSelectorColumnStructure.AddItemsWithMetadataProperty("Structure", {Chr(34) & "Treatment" & Chr(34), Chr(34) & "Measurement" & Chr(34), Chr(34) & "Layout" & Chr(34)})
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs)
+    Private Sub TestOKEnabled()
+        If ucrReceiverForLayout.IsEmpty() = False Or ucrReceiverMeasurement.IsEmpty() = False Or ucrReceiverTreatment.IsEmpty() = False Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetColumnStructureInReceiver()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverForColumnStructure_SelectionChanged() Handles ucrReceiverForLayout.SelectionChanged, ucrReceiverMeasurement.SelectionChanged, ucrReceiverTreatment.SelectionChanged
+        StructureParameters()
+    End Sub
+
+    Private Sub StructureParameters()
+        If ucrReceiverForLayout.IsEmpty = False Then
+            ucrBase.clsRsyntax.AddParameter("struc_type_2", ucrReceiverTreatment.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("struc_type_2")
+        End If
+        If ucrReceiverMeasurement.IsEmpty = False Then
+            ucrBase.clsRsyntax.AddParameter("struc_type_3", ucrReceiverMeasurement.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("struc_type_3")
+        End If
+
+        If ucrReceiverTreatment.IsEmpty = False Then
+            ucrBase.clsRsyntax.AddParameter("struc_type_1", ucrReceiverForLayout.GetVariableNames)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("struc_type_1")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorColumnStructure_DataFrameChanged() Handles ucrSelectorColumnStructure.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 End Class
