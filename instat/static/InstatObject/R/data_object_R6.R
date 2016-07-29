@@ -25,7 +25,7 @@ data_object <- R6Class("data_object",
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
-  if (!self$is_metadata(data_name_label)) {    
+  if (!self$is_metadata(data_name_label)) {
     if ( ( is.null(data_name) || data_name == "" || missing(data_name))) {
       self$append_to_metadata(data_name_label,paste0("data_set_",sprintf("%03d", start_point)))
       if (messages) {
@@ -659,7 +659,7 @@ data_object$set("public", "is_variables_metadata", function(str, col, update = F
 )
 
 data_object$set("public", "add_defaults_meta", function() {
-  self$append_to_metadata(is_calculated_label, FALSE)
+  if(!self$is_metadata(is_calculated_label)) self$append_to_metadata(is_calculated_label, FALSE)
 }
 )
 
