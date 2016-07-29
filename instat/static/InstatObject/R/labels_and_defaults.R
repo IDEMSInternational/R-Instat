@@ -27,6 +27,7 @@ summarised_from_label="summarised_from"
 key_label="key"
 row_count_label="Row_Count"
 column_count_label="Column_Count"
+is_linkable="Is_Linkable"
 
 #variables_metadata labels
 display_decimal_label="Display_Decimal"
@@ -37,8 +38,22 @@ data_type_label="class"
 is_hidden_label="Is_Hidden"
 is_protected_label="Is_Protected"
 is_frozen_label="Is_Frozen"
+is_key_label="Is_Key"
+structure_label="Structure"
+has_dependants_label="Has_Dependants"
+dependent_columns_label="Dependent_Columns"
+calculated_by_label="Calculated_By"
+dependencies_label="Dependencies"
+
+#Variables_metadata value labels
+structure_type_1_label="Layout"
+structure_type_2_label="Treatment"
+structure_type_3_label="Measurement"
 
 #object labels
 overall_label="[Overall]"
 model_label="model"
 graph_label="graph"
+
+#link labels
+keyed_link_label="keyed_link"

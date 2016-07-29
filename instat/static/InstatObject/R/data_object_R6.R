@@ -4,7 +4,8 @@ data_object <- R6Class("data_object",
                                                  variables_metadata = data.frame(), metadata = list(), 
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
-                                                 start_point=1, filters = list(), objects = list())
+                                                 start_point=1, filters = list(), objects = list(),
+                                                 calculations = list(), keys = list())
 {
                              
   # Set up the data object
@@ -19,10 +20,12 @@ data_object <- R6Class("data_object",
   self$update_variables_metadata()
   self$set_filters(filters)
   self$set_objects(objects)
+  self$set_calculations(calculations)
+  self$set_keys(keys)
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
-  if (!self$is_metadata(data_name_label)) {    
+  if (!self$is_metadata(data_name_label)) {
     if ( ( is.null(data_name) || data_name == "" || missing(data_name))) {
       self$append_to_metadata(data_name_label,paste0("data_set_",sprintf("%03d", start_point)))
       if (messages) {
@@ -39,6 +42,8 @@ data_object <- R6Class("data_object",
                            data = data.frame(),
                            filters = list(),
                            objects = list(),
+                           keys = list(),
+                           calculations = list(),
                            changes = list(), 
                            .current_filter = list(),
                            .data_changed = FALSE,
@@ -161,6 +166,22 @@ data_object$set("public", "set_objects", function(new_objects) {
 }
 )
 
+data_object$set("public", "set_calculations", function(new_calculations) {
+  if(!is.list(new_calculations)) stop("new_calculations must be of type: list")
+  
+  self$append_to_changes(list(Set_property, "calculations"))  
+  private$calculations <- new_calculations
+}
+)
+
+data_object$set("public", "set_keys", function(new_keys) {
+  if(!is.list(new_keys)) stop("new_objects must be of type: list")
+  
+  self$append_to_changes(list(Set_property, "keys"))  
+  private$keys <- new_keys
+}
+)
+
 data_object$set("public", "update_variables_metadata", function() {
   #Not needed now using attributes
   #if(ncol(private$data) !=  nrow(private$variables_metadata) || !all(colnames(private$data)==rownames(private$variables_metadata))) {
@@ -173,6 +194,7 @@ data_object$set("public", "update_variables_metadata", function() {
   for(col in colnames(private$data)) {
     if(!self$is_variables_metadata(display_decimal_label, col)) self$append_to_variables_metadata(col, display_decimal_label, get_default_decimal_places(private$data[[col]]))
     if(!self$is_variables_metadata(data_type_label, col)) self$append_to_variables_metadata(col, data_type_label, class(private$data[[col]]))
+    self$append_to_variables_metadata(col, name_label, col)
   }
   self$append_to_changes(list(Set_property, "variables_metadata"))
 }
@@ -210,46 +232,57 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
 }
 )
 
-data_object$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = FALSE) {
+data_object$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = FALSE, direct_from_attributes = FALSE) {
   if(update) self$update_variables_metadata()
-  i = 1
-  out = list()
-  for(col in private$data) {
-    ind = which(names(attributes(col)) == "levels")
-    if(length(ind) > 0) col_attributes = attributes(col)[-ind]
-    else col_attributes = attributes(col)
-    for(att_name in names(col_attributes)) {
-      if(length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(as.character(col_attributes[[att_name]]), collapse = ",")
-    }
-    out[[i]] <- col_attributes
-    i = i + 1
+  if(direct_from_attributes) {
+    if(missing(property)) return(attributes(private$data[[column]]))
+    else return(attr(private$data[[column]], property))
   }
-  out <- as.data.frame(bind_rows(out))
-  row.names(out) <- names(private$data)
-  if(data_type != "all") {
-    if(data_type == "numeric") {
-      out = out[out[[data_type_label]] %in% c("numeric", "integer"), ]
+  else {
+    i = 1
+    out = list()
+    for(col in private$data) {
+      ind = which(names(attributes(col)) == "levels")
+      if(length(ind) > 0) col_attributes = attributes(col)[-ind]
+      else col_attributes = attributes(col)
+      for(att_name in names(col_attributes)) {
+        if(length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(as.character(col_attributes[[att_name]]), collapse = ",")
+      }
+      if(is.null(col_attributes)) {
+        print(names(private$data[[i]]))
+        col_attributes <- data.frame(class = NA)
+      }
+      #if(names(private$data)[i] == "summary_max_Field") print(col_attributes)
+      out[[i]] <- col_attributes
+      i = i + 1
     }
-    else {
-      out = out[out[[data_type_label]] == data_type, ]        
+    out <- as.data.frame(bind_rows(out))
+    row.names(out) <- names(private$data)
+    if(data_type != "all") {
+      if(data_type == "numeric") {
+        out = out[out[[data_type_label]] %in% c("numeric", "integer"), ]
+      }
+      else {
+        out = out[out[[data_type_label]] == data_type, ]        
+      }
     }
+    
+    if(!missing(property)) {
+      if(!property %in% names(out)) {
+        if(error_if_no_property) stop(property, " not found in variables metadata")
+        out=data.frame()
+      }
+      if(!missing(column)) {
+        if(!all(column %in% names(private$data))) stop(column, " not found in data")
+        out = out[column, property]
+      }
+      else out = out[, property]
+    }
+    
+    #TODO get convert_to_character_matrix to work on vectors
+    if(convert_to_character && missing(property)) return(convert_to_character_matrix(out, FALSE))
+    else return(out)
   }
-  
-  if(!missing(property)) {
-    if(!property %in% names(out)) {
-	    if(error_if_no_property) stop(property, " not found in variables metadata")
-	    out=data.frame()
-	  }
-    if(!missing(column)) {
-      if(!all(column %in% names(private$data))) stop(column, " not found in data")
-      out = out[column, property]
-    }
-    else out = out[, property]
-  }
-  
-  #TODO get convert_to_character_matrix to work on vectors
-  if(convert_to_character && missing(property)) return(convert_to_character_matrix(out, FALSE))
-  else return(out)
 }
 )
 
@@ -441,77 +474,90 @@ data_object$set("public", "remove_columns_in_data", function(cols=c()) {
 }
 )
 
-data_object$set("public", "replace_value_in_data", function(col_names = c(""), old_value = "", start_value = NA, end_value = NA, new_value = "", closed_start_value = TRUE, closed_end_value = TRUE) {
-  for (col_name in col_names){
-    # Column name must be character
-    if(!is.character(col_name)) {
-      stop("Column name must be of type: character")
-    }
-    else if (!(col_name %in% names(private$data))) {
-      stop(paste("Cannot find column:", col_name, " in the data."))
-    }
+data_object$set("public", "replace_value_in_data", function(col_names, rows, old_value, start_value = NA, end_value = NA, new_value, closed_start_value = TRUE, closed_end_value = TRUE) {
+  
+  # Column name must be character
+  if(!all(is.character(col_names))) stop("Column name must be of type: character")
+  if (!all(col_names %in% names(private$data))) stop("Cannot find all columns in the data.")
+  if(!missing(rows) && !all(rows %in% row.names(private$data))) stop("Not all rows found in the data.")
+  if(!is.na(start_value) && !is.numeric(start_value)) stop("start_value must be numeric")
+  if(!is.na(end_value) && !is.numeric(end_value)) stop("start_value must be numeric")
+  if(!is.na(start_value) && !is.na(end_value) && start_value > end_value) {
+    stop("start_value must be less than or equal to end_value")
   }
-  if(!is.na(start_value) && !is.na(end_value)) {
-    if(!is.numeric(start_value) || !is.numeric(end_value)){
-      stop("start_value and end_value should both be numeric")
-    }
-    if(start_value > end_value){
-      stop("start_value should be smaller than end_value")
-    }
-  }
-  if((is.na(start_value) && !is.na(end_value)) || (!is.na(start_value) && is.na(end_value)) ) {
-    stop("Both start_value and end_value should(should not) be defined")
-  }
-  for(col_name in col_names){
-    str_data_type <-self$get_variables_metadata(property = data_type_label, column = col_name)
+  for(col_name in col_names) {
+    str_data_type <- self$get_variables_metadata(property = data_type_label, column = col_name)
     if(str_data_type == "factor") {
-      #if(!is.na(new_value) && !(new_value %in% levels(private$data[[col_name]]))) {
+      if(!is.na(new_value) && !(new_value %in% levels(private$data[[col_name]]))) {
+        stop("new_value must be an existing level of the factor column: ", col_name, ".")
+      }
+      if(!missing(rows)) {
+        replace_rows <- (row.names(private$data) %in% rows)
+        if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
+      }
+      else replace_rows <- (private$data[[col_name]] == old_value)
+    }
+    else if(str_data_type == "integer" || str_data_type == "numeric") {
       if(!is.na(new_value)) {
-        new_index <- which(levels(private$data[[col_name]]) == old_value)
-        levels(private$data[[col_name]])[new_index] <- new_value
+        if(str_data_type == "integer" && !(new_value %% 1 == 0)) stop(col_name, "is an integer column. new_value must be an integer")
+        if(str_data_type == "numeric" && !is.numeric(new_value)) stop(col_name, "is a numeric column. new_value must be numeric")
+      }
+      if(!missing(rows)) {
+        replace_rows <- (row.names(private$data) %in% rows)
+        if(!missing(old_value) || !is.na(start_value) || !is.na(end_value)) warning("old_value, start_value and end_value will be ignored because rows has been specified.")
+      }
+      else {
+        if(!is.na(start_value) || !is.na(end_value)) {
+          if(!missing(old_value)) warning("old_value will be ignored because start_value or end_value has been specified.")
+          if(closed_start_value) start_value_ineq = match.fun(">=")
+          else start_value_ineq = match.fun(">")
+          if(closed_end_value) end_value_ineq = match.fun("<=")
+          else end_value_ineq = match.fun("<")
+          
+          if(!is.na(start_value) && is.na(end_value)) {
+            replace_rows <- start_value_ineq(private$data[[col_name]], start_value)
+          }
+          else if(is.na(start_value) && !is.na(end_value)) {
+            replace_rows <- end_value_ineq(private$data[[col_name]], end_value)
+          }
+          else if(!is.na(start_value) && !is.na(end_value)) {
+            replace_rows <- (start_value_ineq(private$data[[col_name]],start_value) & end_value_ineq(private$data[[col_name]], end_value))
+          }
+        }
+        else {
+          replace_rows <- (private$data[[col_name]] == old_value)
+        }
       }
     }
-    else{
-      if(!is.na(start_value) && !is.na(end_value)){
-        if(closed_start_value & closed_end_value){
-          index <- which(private$data[[col_name]]>=start_value & private$data[[col_name]]<=end_value)
-        }
-        if(!closed_start_value & closed_end_value){
-          index <- which(private$data[[col_name]]>start_value & private$data[[col_name]]<=end_value)
-        }
-        if(closed_start_value & !closed_end_value){
-          index <- which(private$data[[col_name]]>=start_value & private$data[[col_name]]<end_value)
-        }
-        if(!closed_start_value & !closed_end_value){
-          index <- which(private$data[[col_name]]>start_value & private$data[[col_name]]<end_value)
-        }
+    else if(str_data_type == "character") {
+      if(!missing(rows)) {
+        replace_rows <- (row.names(private$data) %in% rows)
+        if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
       }
-      else{
-        if(is.na(as.numeric(old_value))){
-          index <- which(is.na(private$data[[col_name]]))
-        }
-        else{
-          index <- which(private$data[[col_name]] == old_value)
-        }
-        
-      }
-      if(str_data_type == "integer") {
-        #TODO Check that what checks are needed here
-        new_value <- as.integer(new_value)
-      }
-      if(str_data_type == "numeric") {
-        new_value <- as.numeric(new_value)
-      }
-      if(str_data_type == "character") {
-        new_value <- as.character(new_value)
-      }
-      
-      for (new_index in index){
-        private$data[[col_name]][[new_index]] <- new_value
-      }
+      else replace_rows <- (private$data[[col_name]] == old_value)
+      #Is this needed?
+      new_value <- as.character(new_value)
     }
+    else if(str_data_type == "logical") {
+      if(!is.logical(new_value)) stop(col_name, "is a logical column. new_value must be a logical value")
+      if(!missing(rows)) {
+        replace_rows <- (row.names(private$data) %in% rows)
+        if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
+      }
+      else replace_rows <- (private$data[[col_name]] == old_value)
+    }
+    #TODO add other data type cases
+    else {
+      if(!missing(rows)) {
+        replace_rows <- (row.names(private$data) %in% rows)
+        if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
+      }
+      else replace_rows <- (private$data[[col_name]] == old_value)
+    }
+    private$data[[col_name]][replace_rows] <- new_value
   }
-  self$append_to_changes(list(Replaced_value, col_name, old_value, start_value, end_value, new_value, closed_start_value, closed_end_value))
+  #TODO need to think what to add to changes
+  self$append_to_changes(list(Replaced_value, col_names))
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
 }
@@ -613,7 +659,7 @@ data_object$set("public", "is_variables_metadata", function(str, col, update = F
 )
 
 data_object$set("public", "add_defaults_meta", function() {
-  self$append_to_metadata(is_calculated_label, FALSE)
+  if(!self$is_metadata(is_calculated_label)) self$append_to_metadata(is_calculated_label, FALSE)
 }
 )
 
@@ -1181,5 +1227,61 @@ data_object$set("public", "freeze_columns", function(column) {
 
 data_object$set("public", "unfreeze_columns", function() {
   self$append_to_variables_metadata(self$get_column_names(), is_frozen_label, FALSE)
+}
+)
+
+data_object$set("public", "add_key", function(col_names) {
+  if(anyDuplicated(private$data[col_names]) > 0) {
+    stop("key columns must have unique combinations")
+  }
+  if(self$key_exists(col_names)) {
+    message("A key with these columns already exists. No action will be taken.")
+  }
+  else {
+    private$keys[[length(private$keys) + 1]] <- col_names
+    self$append_to_variables_metadata(col_names, is_key_label, TRUE)
+    if(length(private$keys) == 1) self$append_to_variables_metadata(setdiff(self$get_column_names(), col_names), is_key_label, FALSE)
+    self$append_to_metadata(is_linkable, TRUE)
+    self$append_to_metadata(next_default_item(key_label, names(self$get_metadata())), paste(col_names, collapse = ","))
+  }
+}
+)
+
+data_object$set("public", "key_exists", function(col_names) {
+  return(any(sapply(private$keys, function(x) setequal(col_names,x))))
+}
+)
+
+data_object$set("public", "set_structure_columns", function(struc_type_1, struc_type_2, struc_type_3) {
+  if(!all(c(struc_type_1,struc_type_2,struc_type_3) %in% names(private$data))) stop("Some column names not recognised.")
+  if(length(intersect(struc_type_1,struc_type_2)) > 0 || length(intersect(struc_type_1,struc_type_3)) > 0 || length(intersect(struc_type_2,struc_type_3)) > 0) {
+    stop("Each column can only be assign one structure type.")
+  }
+  if(length(struc_type_1) > 0) self$append_to_variables_metadata(struc_type_1, structure_label, structure_type_1_label)
+  if(length(struc_type_2) > 0) self$append_to_variables_metadata(struc_type_2, structure_label, structure_type_2_label)
+  if(length(struc_type_3) > 0) self$append_to_variables_metadata(struc_type_3, structure_label, structure_type_3_label)
+  all <- union(union(struc_type_1, struc_type_2), struc_type_3)
+  other <- setdiff(names(private$data), all)
+  self$append_to_variables_metadata(other, structure_label, NA)
+}
+)
+
+data_object$set("public", "add_dependent_columns", function(columns, dependent_cols) {
+  for(col in columns) {
+    if(self$is_variables_metadata(dependent_columns_label, col)) {
+      curr_dependents <- self$get_variables_metadata(property = dependent_columns_label, column = col, direct_from_attributes = TRUE)
+      for(data_frame in names(dependent_cols)) {
+        if(data_frame %in% names(curr_dependents)) {
+          curr_dependents[[data_frame]] <- union(curr_dependents[[data_frame]], dependent_cols[[data_frame]])
+        }
+        else {
+          print("no")
+          curr_dependents[[data_frame]] <- dependent_cols[[data_frame]]
+        }
+      }
+    }
+    else curr_dependents <- dependent_cols
+    self$append_to_variables_metadata(col, dependent_columns_label, curr_dependents)
+  }
 }
 )
