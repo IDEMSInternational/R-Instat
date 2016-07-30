@@ -1,6 +1,7 @@
 #Methods temporarily here to avoid conflicts
 data_object$set("public", "merge_data", function(new_data, by = NULL, type = "left", match = "all") {
   #TODO how to use match argument with dplyr join functions
+  old_metadata <- self$get_metadata(include_calculated = FALSE)
   if(type == "left") {
     new_data <- left_join(private$data, new_data, by)
   }
@@ -16,16 +17,24 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   else stop("type must be one of left, right, inner or full")
   self$set_data(new_data)
   self$append_to_changes(Merged_data)
+  for(name in names(old_metadata)) {
+    self$append_to_metadata(name, old_metadata[[name]])
+  }
+  self$append_to_metadata(is_calculated_label, TRUE)
   self$add_defaults_meta()
 }
 )
 
 instat_object$set("public", "append_summaries_to_data_object", function(out, data_name, columns_to_summarise, summaries, factors = c(), summary_name, calc, calc_name = "") {
   if(!is.character(data_name)) stop("data_name must be of type character")
-  link_calc <- calculation$new(type = "summary", parameters = list(factors = factors))
+  factors_list <- factors
+  names(factors_list) <- factors
+  link_calc <- calculation$new(type = "summary", parameters = factors_list)
+  link_obj <- link$new(from_data_frame = data_name, type = keyed_link_label, calculation = link_calc)
   exists = FALSE
   for(data_obj in self$get_data_objects()) {
-    if(self$link_exists(from_data_frame = data_name, to_data_frame = data_obj$get_metadata(data_name_label), link_calc = link_calc)) {
+    link_obj$to_data_frame <- data_obj$get_metadata(data_name_label)
+    if(self$link_exists(link_obj)) {
       exists = TRUE
       summary_obj <- data_obj
       summary_name <- summary_obj$get_metadata(data_name_label)
@@ -41,12 +50,12 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
     summary_data[[summary_name]] <- out
     self$import_data(summary_data)
     summary_obj <- self$get_data_objects(summary_name)
-    summary_obj$append_to_metadata(summarised_from_label, list(from = data_name, by = factors))
-    summary_obj$append_to_metadata(key_label, factors)
+    summary_obj$add_key(factors)
     # add link
-    link_obj <- link$new(from_data_frame = data_name, to_data_frame = summary_name, calculation = link_calc)
+    link_obj$to_data_frame <- summary_name
     self$add_link(link_obj)
   }
+  
   calc_out_columns <- names(out)[-(1:length(factors))]
   dependent_cols <- list(calc_out_columns)
   names(dependent_cols) <- summary_name
@@ -58,6 +67,10 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
   self$add_dependent_columns(data_name, columns_to_summarise, dependent_cols)
   self$append_to_variables_metadata(summary_name, calc_out_columns, is_calculated_label, TRUE)
   self$append_to_variables_metadata(summary_name, calc_out_columns, calculated_by_label, calc_name)
+  if(!exists) {
+    self$append_to_variables_metadata(summary_name, names(out)[1:length(factors)], is_calculated_label, TRUE)
+    self$append_to_variables_metadata(summary_name, names(out)[1:length(factors)], calculated_by_label, calc_name)
+  }
   self$append_to_variables_metadata(summary_name, calc_out_columns, dependencies_label, dependencies_cols)
 } 
 )
