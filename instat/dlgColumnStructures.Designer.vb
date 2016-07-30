@@ -36,7 +36,7 @@ Partial Class dlgColumnStructure
         'chkColourColumnsByStr
         '
         Me.chkColourColumnsByStr.AutoSize = True
-        Me.chkColourColumnsByStr.Location = New System.Drawing.Point(247, 16)
+        Me.chkColourColumnsByStr.Location = New System.Drawing.Point(12, 224)
         Me.chkColourColumnsByStr.Name = "chkColourColumnsByStr"
         Me.chkColourColumnsByStr.Size = New System.Drawing.Size(159, 17)
         Me.chkColourColumnsByStr.TabIndex = 17
@@ -46,7 +46,7 @@ Partial Class dlgColumnStructure
         'lblMeasurement
         '
         Me.lblMeasurement.AutoSize = True
-        Me.lblMeasurement.Location = New System.Drawing.Point(244, 151)
+        Me.lblMeasurement.Location = New System.Drawing.Point(247, 210)
         Me.lblMeasurement.Name = "lblMeasurement"
         Me.lblMeasurement.Size = New System.Drawing.Size(71, 13)
         Me.lblMeasurement.TabIndex = 16
@@ -55,7 +55,7 @@ Partial Class dlgColumnStructure
         'lblTreatment
         '
         Me.lblTreatment.AutoSize = True
-        Me.lblTreatment.Location = New System.Drawing.Point(244, 91)
+        Me.lblTreatment.Location = New System.Drawing.Point(244, 117)
         Me.lblTreatment.Name = "lblTreatment"
         Me.lblTreatment.Size = New System.Drawing.Size(55, 13)
         Me.lblTreatment.TabIndex = 15
@@ -64,7 +64,7 @@ Partial Class dlgColumnStructure
         'lblLayout
         '
         Me.lblLayout.AutoSize = True
-        Me.lblLayout.Location = New System.Drawing.Point(247, 35)
+        Me.lblLayout.Location = New System.Drawing.Point(247, 18)
         Me.lblLayout.Name = "lblLayout"
         Me.lblLayout.Size = New System.Drawing.Size(39, 13)
         Me.lblLayout.TabIndex = 14
@@ -72,29 +72,29 @@ Partial Class dlgColumnStructure
         '
         'ucrReceiverMeasurement
         '
-        Me.ucrReceiverMeasurement.Location = New System.Drawing.Point(247, 170)
+        Me.ucrReceiverMeasurement.Location = New System.Drawing.Point(247, 225)
         Me.ucrReceiverMeasurement.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeasurement.Name = "ucrReceiverMeasurement"
         Me.ucrReceiverMeasurement.Selector = Nothing
-        Me.ucrReceiverMeasurement.Size = New System.Drawing.Size(120, 39)
+        Me.ucrReceiverMeasurement.Size = New System.Drawing.Size(120, 76)
         Me.ucrReceiverMeasurement.TabIndex = 13
         '
         'ucrReceiverTreatment
         '
-        Me.ucrReceiverTreatment.Location = New System.Drawing.Point(247, 108)
+        Me.ucrReceiverTreatment.Location = New System.Drawing.Point(247, 135)
         Me.ucrReceiverTreatment.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTreatment.Name = "ucrReceiverTreatment"
         Me.ucrReceiverTreatment.Selector = Nothing
-        Me.ucrReceiverTreatment.Size = New System.Drawing.Size(120, 38)
+        Me.ucrReceiverTreatment.Size = New System.Drawing.Size(120, 73)
         Me.ucrReceiverTreatment.TabIndex = 12
         '
         'ucrReceiverForLayout
         '
-        Me.ucrReceiverForLayout.Location = New System.Drawing.Point(247, 50)
+        Me.ucrReceiverForLayout.Location = New System.Drawing.Point(247, 39)
         Me.ucrReceiverForLayout.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverForLayout.Name = "ucrReceiverForLayout"
         Me.ucrReceiverForLayout.Selector = Nothing
-        Me.ucrReceiverForLayout.Size = New System.Drawing.Size(120, 36)
+        Me.ucrReceiverForLayout.Size = New System.Drawing.Size(120, 74)
         Me.ucrReceiverForLayout.TabIndex = 11
         '
         'ucrSelectorColumnStructure
@@ -108,7 +108,7 @@ Partial Class dlgColumnStructure
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 212)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 304)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
@@ -117,7 +117,7 @@ Partial Class dlgColumnStructure
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 269)
+        Me.ClientSize = New System.Drawing.Size(427, 368)
         Me.Controls.Add(Me.chkColourColumnsByStr)
         Me.Controls.Add(Me.lblMeasurement)
         Me.Controls.Add(Me.lblTreatment)

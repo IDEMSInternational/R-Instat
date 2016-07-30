@@ -25,7 +25,7 @@ data_object <- R6Class("data_object",
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
-  if (!self$is_metadata(data_name_label)) {    
+  if (!self$is_metadata(data_name_label)) {
     if ( ( is.null(data_name) || data_name == "" || missing(data_name))) {
       self$append_to_metadata(data_name_label,paste0("data_set_",sprintf("%03d", start_point)))
       if (messages) {
@@ -194,6 +194,7 @@ data_object$set("public", "update_variables_metadata", function() {
   for(col in colnames(private$data)) {
     if(!self$is_variables_metadata(display_decimal_label, col)) self$append_to_variables_metadata(col, display_decimal_label, get_default_decimal_places(private$data[[col]]))
     if(!self$is_variables_metadata(data_type_label, col)) self$append_to_variables_metadata(col, data_type_label, class(private$data[[col]]))
+    self$append_to_variables_metadata(col, name_label, col)
   }
   self$append_to_changes(list(Set_property, "variables_metadata"))
 }
@@ -658,7 +659,7 @@ data_object$set("public", "is_variables_metadata", function(str, col, update = F
 )
 
 data_object$set("public", "add_defaults_meta", function() {
-  self$append_to_metadata(is_calculated_label, FALSE)
+  if(!self$is_metadata(is_calculated_label)) self$append_to_metadata(is_calculated_label, FALSE)
 }
 )
 
@@ -1233,7 +1234,7 @@ data_object$set("public", "add_key", function(col_names) {
   if(anyDuplicated(private$data[col_names]) > 0) {
     stop("key columns must have unique combinations")
   }
-  if(any(sapply(private$keys, function(x) setequal(col_names,x)))) {
+  if(self$key_exists(col_names)) {
     message("A key with these columns already exists. No action will be taken.")
   }
   else {
@@ -1243,6 +1244,11 @@ data_object$set("public", "add_key", function(col_names) {
     self$append_to_metadata(is_linkable, TRUE)
     self$append_to_metadata(next_default_item(key_label, names(self$get_metadata())), paste(col_names, collapse = ","))
   }
+}
+)
+
+data_object$set("public", "key_exists", function(col_names) {
+  return(any(sapply(private$keys, function(x) setequal(col_names,x))))
 }
 )
 
