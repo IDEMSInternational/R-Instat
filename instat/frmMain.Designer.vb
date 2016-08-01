@@ -618,7 +618,6 @@ Partial Class frmMain
         '
         'mnuDescribeUseObjectsCombineGraphs
         '
-        Me.mnuDescribeUseObjectsCombineGraphs.Enabled = False
         Me.mnuDescribeUseObjectsCombineGraphs.Name = "mnuDescribeUseObjectsCombineGraphs"
         Me.mnuDescribeUseObjectsCombineGraphs.Size = New System.Drawing.Size(172, 22)
         Me.mnuDescribeUseObjectsCombineGraphs.Tag = "Combine_Graphs..."

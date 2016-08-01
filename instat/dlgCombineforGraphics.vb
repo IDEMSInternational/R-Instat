@@ -16,6 +16,9 @@
 Imports instat.Translations
 Public Class dlgCombineforGraphics
     Private bFirstLoad As Boolean = True
+    Public clsGridFunction As New RFunction
+    Public clsListFunction As New RFunction
+
     Private Sub dlgCombineforGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -33,14 +36,19 @@ Public Class dlgCombineforGraphics
         ucrBase.iHelpTopicID = 430
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
         ucrCombineGraphSelector.SetItemType("graph")
-        ucrSaveCombinedGraph.strPrefix = "Combinedgraph"
         ucrSaveCombinedGraph.SetDataFrameSelector(ucrCombineGraphSelector.ucrAvailableDataFrames)
+        sdgLayout.SetRSyntax(ucrBase.clsRsyntax)
+
+        ucrBase.clsRsyntax.SetFunction("gridExtra::grid.arrange")
+        clsListFunction.SetRCommand("list")
+
     End Sub
 
     Private Sub SetDefaults()
         ucrCombineGraphReceiver.SetMeAsReceiver()
         ucrCombineGraphSelector.Reset()
         ucrSaveCombinedGraph.chkSaveGraph.Checked = False
+        sdgLayout.SetDefaults()
         TestOkEnabled()
     End Sub
 
@@ -60,6 +68,11 @@ Public Class dlgCombineforGraphics
     End Sub
 
     Private Sub ucrCombineGraphReceiver_SelectionChanged() Handles ucrCombineGraphReceiver.SelectionChanged
+        If ucrCombineGraphReceiver.lstSelectedVariables.Items.Count > 1 Then
+            clsListFunction.AddParameter("")
+            ' ucrBase.clsRsyntax.AddParameter("grobs", "list(" & ucrCombineGraphReceiver.GetVariableNamesAsList().ToString & ")")
+            ucrBase.clsRsyntax.AddParameter("grobs", clsRFunctionParameter:=clsListFunction)
+        End If
         TestOkEnabled()
     End Sub
 
@@ -75,7 +88,6 @@ Public Class dlgCombineforGraphics
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrCombineGraphSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
-
         TestOkEnabled()
     End Sub
 End Class

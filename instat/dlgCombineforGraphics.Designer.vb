@@ -66,16 +66,16 @@ Partial Class dlgCombineforGraphics
         '
         'cmdLayout
         '
-        Me.cmdLayout.Location = New System.Drawing.Point(13, 199)
+        Me.cmdLayout.Location = New System.Drawing.Point(9, 206)
         Me.cmdLayout.Name = "cmdLayout"
         Me.cmdLayout.Size = New System.Drawing.Size(75, 23)
         Me.cmdLayout.TabIndex = 4
-        Me.cmdLayout.Text = "Layout"
+        Me.cmdLayout.Text = "Options"
         Me.cmdLayout.UseVisualStyleBackColor = True
         '
         'ucrSaveCombinedGraph
         '
-        Me.ucrSaveCombinedGraph.Location = New System.Drawing.Point(13, 235)
+        Me.ucrSaveCombinedGraph.Location = New System.Drawing.Point(9, 235)
         Me.ucrSaveCombinedGraph.Name = "ucrSaveCombinedGraph"
         Me.ucrSaveCombinedGraph.Size = New System.Drawing.Size(265, 20)
         Me.ucrSaveCombinedGraph.TabIndex = 5
