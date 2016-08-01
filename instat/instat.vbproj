@@ -693,10 +693,10 @@
     <Compile Include="sdgLayerOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgLayout.Designer.vb">
-      <DependentUpon>sdgLayout.vb</DependentUpon>
+    <Compile Include="sdgCombineGraphOptions.Designer.vb">
+      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgLayout.vb">
+    <Compile Include="sdgCombineGraphOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgModelOptions.Designer.vb">
@@ -2614,14 +2614,14 @@
     <EmbeddedResource Include="sdgLayerOptions.sw-KE.resx">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayout.fr-FR.resx">
-      <DependentUpon>sdgLayout.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCombineGraphOptions.fr-FR.resx">
+      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayout.resx">
-      <DependentUpon>sdgLayout.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCombineGraphOptions.resx">
+      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayout.sw-KE.resx">
-      <DependentUpon>sdgLayout.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCombineGraphOptions.sw-KE.resx">
+      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgModelOptions.fr-FR.resx">
       <DependentUpon>sdgModelOptions.vb</DependentUpon>
