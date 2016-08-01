@@ -1808,7 +1808,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameColumnStructure
         '
-        Me.mnuOrganiseDataFrameColumnStructure.Enabled = False
         Me.mnuOrganiseDataFrameColumnStructure.Name = "mnuOrganiseDataFrameColumnStructure"
         Me.mnuOrganiseDataFrameColumnStructure.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameColumnStructure.Tag = "Column_Structure..."

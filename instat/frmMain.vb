@@ -995,4 +995,8 @@ Public Class frmMain
     Private Sub mnuOrganiseColumnTextFindReplace_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnTextFindReplace.Click
         dlgReplace.ShowDialog()
     End Sub
+
+    Private Sub mnuOrganiseDataFrameColumnStructure_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameColumnStructure.Click
+        dlgColumnStructure.ShowDialog()
+    End Sub
 End Class
