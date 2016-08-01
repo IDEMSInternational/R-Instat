@@ -49,6 +49,10 @@ Public Class ucrReceiver
         End If
     End Sub
 
+    Public Overridable Sub Remove(strItems As String())
+
+    End Sub
+
     Public Overridable Sub Clear()
 
     End Sub
@@ -226,16 +230,16 @@ Public Class ucrReceiver
         bTypeSet = True
     End Sub
 
-    Public Sub Add(strItem As String)
-        SetMeAsReceiver()
-        For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
-            If Selector.lstAvailableVariable.Items(i).Text = strItem Then
-                Selector.lstAvailableVariable.SelectedItems.Clear()
-                Selector.lstAvailableVariable.Items(i).Selected = True
-                AddSelected()
-                Selector.lstAvailableVariable.SelectedItems.Clear()
-                Exit For
-            End If
-        Next
+    Public Overridable Sub Add(strItem As String, Optional strDataFrame As String = "")
+        'SetMeAsReceiver()
+        'For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
+        '    If Selector.lstAvailableVariable.Items(i).Text = strItem Then
+        '        Selector.lstAvailableVariable.SelectedItems.Clear()
+        '        Selector.lstAvailableVariable.Items(i).Selected = True
+        '        AddSelected()
+        '        Selector.lstAvailableVariable.SelectedItems.Clear()
+        '        Exit For
+        '    End If
+        'Next
     End Sub
 End Class
