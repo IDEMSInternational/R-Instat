@@ -675,6 +675,12 @@
     <Compile Include="sdgDensityOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDescribe.Designer.vb">
+      <DependentUpon>sdgDescribe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDescribe.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgFrequencyPolygonOptions.Designer.vb">
       <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
     </Compile>
@@ -2562,6 +2568,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDensityOptions.sw-KE.resx">
       <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribe.fr-FR.resx">
+      <DependentUpon>sdgDescribe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribe.resx">
+      <DependentUpon>sdgDescribe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribe.sw-KE.resx">
+      <DependentUpon>sdgDescribe.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDotPlot.fr-FR.resx">
       <DependentUpon>sdgDotPlot.vb</DependentUpon>
