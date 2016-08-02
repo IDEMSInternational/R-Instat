@@ -4244,9 +4244,9 @@
     <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\xml2_1.0.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="static\Recent_Files\recent.mru">
+    <Content Include="static\Recent_Files\recent.mru">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="Resources\arrows_bottom.png" />
     <Content Include="Resources\arrows_down.png" />
     <Content Include="Resources\arrows_top.png" />
