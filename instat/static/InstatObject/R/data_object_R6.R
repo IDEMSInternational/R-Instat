@@ -665,7 +665,9 @@ data_object$set("public", "add_defaults_meta", function() {
 
 data_object$set("public", "add_defaults_variables_metadata", function() {
   invisible(sapply(colnames(private$data), function(x) self$append_to_variables_metadata(x, name_label, x)))
-  self$append_to_variables_metadata(property = is_hidden_label, new_val = FALSE)
+  for(column in colnames(private$data)) {
+    if(!self$is_variables_metadata(is_hidden_label, column)) self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
+  }
 }
 )
 
@@ -1275,7 +1277,6 @@ data_object$set("public", "add_dependent_columns", function(columns, dependent_c
           curr_dependents[[data_frame]] <- union(curr_dependents[[data_frame]], dependent_cols[[data_frame]])
         }
         else {
-          print("no")
           curr_dependents[[data_frame]] <- dependent_cols[[data_frame]]
         }
       }
