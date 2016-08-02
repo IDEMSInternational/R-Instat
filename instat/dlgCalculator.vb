@@ -61,7 +61,7 @@ Public Class dlgCalculator
         AddText("8")
     End Sub
 
-    Private Sub cmd9_Click(sender As Object, e As EventArgs) Handles btn9.Click
+    Private Sub cmd9_Click(sender As Object, e As EventArgs) Handles cmd9.Click
         AddText("9")
     End Sub
 

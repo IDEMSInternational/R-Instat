@@ -31,7 +31,7 @@ Partial Class dlgCalculator
         Me.cmd6 = New System.Windows.Forms.Button()
         Me.cmd7 = New System.Windows.Forms.Button()
         Me.cmd8 = New System.Windows.Forms.Button()
-        Me.btn9 = New System.Windows.Forms.Button()
+        Me.cmd9 = New System.Windows.Forms.Button()
         Me.cmdDot = New System.Windows.Forms.Button()
         Me.cmdDivide = New System.Windows.Forms.Button()
         Me.cmdPlus = New System.Windows.Forms.Button()
@@ -44,18 +44,17 @@ Partial Class dlgCalculator
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblExpression = New System.Windows.Forms.Label()
         Me.ucrInputExpression = New instat.ucrInputComboBox()
-        Me.ucrInputStandard = New instat.ucrInputComboBox()
-        Me.cmdSpaceToManageCalculatio = New System.Windows.Forms.Button()
+        Me.cmdTry = New System.Windows.Forms.Button()
         Me.ucrSpaceToMangeResult = New instat.ucrInputTextBox()
         Me.chkSaveResultInto = New System.Windows.Forms.CheckBox()
-        Me.ucrSaveResult = New instat.ucrInputTextBox()
         Me.chkDefaultCalculationName = New System.Windows.Forms.CheckBox()
         Me.cmdGreaterThan = New System.Windows.Forms.Button()
+        Me.ucrSaveResultInto = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'cmd1
         '
-        Me.cmd1.Location = New System.Drawing.Point(226, 138)
+        Me.cmd1.Location = New System.Drawing.Point(226, 123)
         Me.cmd1.Name = "cmd1"
         Me.cmd1.Size = New System.Drawing.Size(29, 31)
         Me.cmd1.TabIndex = 80
@@ -64,7 +63,7 @@ Partial Class dlgCalculator
         '
         'cmd0
         '
-        Me.cmd0.Location = New System.Drawing.Point(226, 170)
+        Me.cmd0.Location = New System.Drawing.Point(226, 155)
         Me.cmd0.Name = "cmd0"
         Me.cmd0.Size = New System.Drawing.Size(60, 30)
         Me.cmd0.TabIndex = 81
@@ -73,7 +72,7 @@ Partial Class dlgCalculator
         '
         'cmd2
         '
-        Me.cmd2.Location = New System.Drawing.Point(258, 138)
+        Me.cmd2.Location = New System.Drawing.Point(258, 123)
         Me.cmd2.Name = "cmd2"
         Me.cmd2.Size = New System.Drawing.Size(28, 31)
         Me.cmd2.TabIndex = 82
@@ -82,7 +81,7 @@ Partial Class dlgCalculator
         '
         'cmd3
         '
-        Me.cmd3.Location = New System.Drawing.Point(288, 138)
+        Me.cmd3.Location = New System.Drawing.Point(288, 123)
         Me.cmd3.Name = "cmd3"
         Me.cmd3.Size = New System.Drawing.Size(30, 31)
         Me.cmd3.TabIndex = 83
@@ -91,7 +90,7 @@ Partial Class dlgCalculator
         '
         'cmd4
         '
-        Me.cmd4.Location = New System.Drawing.Point(226, 105)
+        Me.cmd4.Location = New System.Drawing.Point(226, 90)
         Me.cmd4.Name = "cmd4"
         Me.cmd4.Size = New System.Drawing.Size(29, 32)
         Me.cmd4.TabIndex = 84
@@ -100,7 +99,7 @@ Partial Class dlgCalculator
         '
         'cmd5
         '
-        Me.cmd5.Location = New System.Drawing.Point(258, 105)
+        Me.cmd5.Location = New System.Drawing.Point(258, 90)
         Me.cmd5.Name = "cmd5"
         Me.cmd5.Size = New System.Drawing.Size(28, 32)
         Me.cmd5.TabIndex = 85
@@ -109,7 +108,7 @@ Partial Class dlgCalculator
         '
         'cmd6
         '
-        Me.cmd6.Location = New System.Drawing.Point(288, 105)
+        Me.cmd6.Location = New System.Drawing.Point(288, 90)
         Me.cmd6.Name = "cmd6"
         Me.cmd6.Size = New System.Drawing.Size(30, 32)
         Me.cmd6.TabIndex = 86
@@ -118,7 +117,7 @@ Partial Class dlgCalculator
         '
         'cmd7
         '
-        Me.cmd7.Location = New System.Drawing.Point(226, 73)
+        Me.cmd7.Location = New System.Drawing.Point(226, 58)
         Me.cmd7.Name = "cmd7"
         Me.cmd7.Size = New System.Drawing.Size(29, 30)
         Me.cmd7.TabIndex = 87
@@ -127,25 +126,25 @@ Partial Class dlgCalculator
         '
         'cmd8
         '
-        Me.cmd8.Location = New System.Drawing.Point(258, 73)
+        Me.cmd8.Location = New System.Drawing.Point(258, 58)
         Me.cmd8.Name = "cmd8"
         Me.cmd8.Size = New System.Drawing.Size(28, 30)
         Me.cmd8.TabIndex = 88
         Me.cmd8.Text = "8"
         Me.cmd8.UseVisualStyleBackColor = True
         '
-        'btn9
+        'cmd9
         '
-        Me.btn9.Location = New System.Drawing.Point(288, 73)
-        Me.btn9.Name = "btn9"
-        Me.btn9.Size = New System.Drawing.Size(30, 30)
-        Me.btn9.TabIndex = 89
-        Me.btn9.Text = "9"
-        Me.btn9.UseVisualStyleBackColor = True
+        Me.cmd9.Location = New System.Drawing.Point(288, 58)
+        Me.cmd9.Name = "cmd9"
+        Me.cmd9.Size = New System.Drawing.Size(30, 30)
+        Me.cmd9.TabIndex = 89
+        Me.cmd9.Text = "9"
+        Me.cmd9.UseVisualStyleBackColor = True
         '
         'cmdDot
         '
-        Me.cmdDot.Location = New System.Drawing.Point(349, 73)
+        Me.cmdDot.Location = New System.Drawing.Point(349, 58)
         Me.cmdDot.Name = "cmdDot"
         Me.cmdDot.Size = New System.Drawing.Size(26, 30)
         Me.cmdDot.TabIndex = 90
@@ -154,7 +153,7 @@ Partial Class dlgCalculator
         '
         'cmdDivide
         '
-        Me.cmdDivide.Location = New System.Drawing.Point(320, 73)
+        Me.cmdDivide.Location = New System.Drawing.Point(320, 58)
         Me.cmdDivide.Name = "cmdDivide"
         Me.cmdDivide.Size = New System.Drawing.Size(27, 30)
         Me.cmdDivide.TabIndex = 95
@@ -163,7 +162,7 @@ Partial Class dlgCalculator
         '
         'cmdPlus
         '
-        Me.cmdPlus.Location = New System.Drawing.Point(320, 170)
+        Me.cmdPlus.Location = New System.Drawing.Point(320, 155)
         Me.cmdPlus.Name = "cmdPlus"
         Me.cmdPlus.Size = New System.Drawing.Size(27, 30)
         Me.cmdPlus.TabIndex = 94
@@ -172,7 +171,7 @@ Partial Class dlgCalculator
         '
         'cmdMinus
         '
-        Me.cmdMinus.Location = New System.Drawing.Point(320, 138)
+        Me.cmdMinus.Location = New System.Drawing.Point(320, 123)
         Me.cmdMinus.Name = "cmdMinus"
         Me.cmdMinus.Size = New System.Drawing.Size(27, 31)
         Me.cmdMinus.TabIndex = 93
@@ -181,7 +180,7 @@ Partial Class dlgCalculator
         '
         'cmdMultiply
         '
-        Me.cmdMultiply.Location = New System.Drawing.Point(320, 105)
+        Me.cmdMultiply.Location = New System.Drawing.Point(320, 90)
         Me.cmdMultiply.Name = "cmdMultiply"
         Me.cmdMultiply.Size = New System.Drawing.Size(27, 32)
         Me.cmdMultiply.TabIndex = 92
@@ -190,7 +189,7 @@ Partial Class dlgCalculator
         '
         'cmdPower
         '
-        Me.cmdPower.Location = New System.Drawing.Point(349, 170)
+        Me.cmdPower.Location = New System.Drawing.Point(349, 155)
         Me.cmdPower.Name = "cmdPower"
         Me.cmdPower.Size = New System.Drawing.Size(26, 30)
         Me.cmdPower.TabIndex = 98
@@ -199,16 +198,17 @@ Partial Class dlgCalculator
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(288, 170)
+        Me.cmdDelete.Location = New System.Drawing.Point(288, 155)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(30, 30)
         Me.cmdDelete.TabIndex = 97
+        Me.cmdDelete.Tag = "Del"
         Me.cmdDelete.Text = "Del"
         Me.cmdDelete.UseVisualStyleBackColor = True
         '
         'cmdBackSpace
         '
-        Me.cmdBackSpace.Location = New System.Drawing.Point(349, 105)
+        Me.cmdBackSpace.Location = New System.Drawing.Point(349, 90)
         Me.cmdBackSpace.Name = "cmdBackSpace"
         Me.cmdBackSpace.Size = New System.Drawing.Size(26, 32)
         Me.cmdBackSpace.TabIndex = 102
@@ -249,21 +249,14 @@ Partial Class dlgCalculator
         Me.ucrInputExpression.Size = New System.Drawing.Size(399, 21)
         Me.ucrInputExpression.TabIndex = 108
         '
-        'ucrInputStandard
+        'cmdTry
         '
-        Me.ucrInputStandard.IsReadOnly = False
-        Me.ucrInputStandard.Location = New System.Drawing.Point(226, 41)
-        Me.ucrInputStandard.Name = "ucrInputStandard"
-        Me.ucrInputStandard.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputStandard.TabIndex = 109
-        '
-        'cmdSpaceToManageCalculatio
-        '
-        Me.cmdSpaceToManageCalculatio.Location = New System.Drawing.Point(9, 228)
-        Me.cmdSpaceToManageCalculatio.Name = "cmdSpaceToManageCalculatio"
-        Me.cmdSpaceToManageCalculatio.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSpaceToManageCalculatio.TabIndex = 110
-        Me.cmdSpaceToManageCalculatio.UseVisualStyleBackColor = True
+        Me.cmdTry.Location = New System.Drawing.Point(9, 228)
+        Me.cmdTry.Name = "cmdTry"
+        Me.cmdTry.Size = New System.Drawing.Size(75, 23)
+        Me.cmdTry.TabIndex = 110
+        Me.cmdTry.Text = "Try"
+        Me.cmdTry.UseVisualStyleBackColor = True
         '
         'ucrSpaceToMangeResult
         '
@@ -283,14 +276,6 @@ Partial Class dlgCalculator
         Me.chkSaveResultInto.Text = "Save Result into"
         Me.chkSaveResultInto.UseVisualStyleBackColor = True
         '
-        'ucrSaveResult
-        '
-        Me.ucrSaveResult.IsReadOnly = False
-        Me.ucrSaveResult.Location = New System.Drawing.Point(119, 256)
-        Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(256, 21)
-        Me.ucrSaveResult.TabIndex = 114
-        '
         'chkDefaultCalculationName
         '
         Me.chkDefaultCalculationName.AutoSize = True
@@ -303,25 +288,32 @@ Partial Class dlgCalculator
         '
         'cmdGreaterThan
         '
-        Me.cmdGreaterThan.Location = New System.Drawing.Point(349, 138)
+        Me.cmdGreaterThan.Location = New System.Drawing.Point(349, 123)
         Me.cmdGreaterThan.Name = "cmdGreaterThan"
         Me.cmdGreaterThan.Size = New System.Drawing.Size(26, 31)
         Me.cmdGreaterThan.TabIndex = 116
         Me.cmdGreaterThan.Text = ">"
         Me.cmdGreaterThan.UseVisualStyleBackColor = True
         '
+        'ucrSaveResultInto
+        '
+        Me.ucrSaveResultInto.IsReadOnly = False
+        Me.ucrSaveResultInto.Location = New System.Drawing.Point(119, 257)
+        Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
+        Me.ucrSaveResultInto.Size = New System.Drawing.Size(256, 21)
+        Me.ucrSaveResultInto.TabIndex = 117
+        '
         'dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(679, 363)
+        Me.ClientSize = New System.Drawing.Size(505, 363)
+        Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.cmdGreaterThan)
         Me.Controls.Add(Me.chkDefaultCalculationName)
-        Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.chkSaveResultInto)
         Me.Controls.Add(Me.ucrSpaceToMangeResult)
-        Me.Controls.Add(Me.cmdSpaceToManageCalculatio)
-        Me.Controls.Add(Me.ucrInputStandard)
+        Me.Controls.Add(Me.cmdTry)
         Me.Controls.Add(Me.ucrInputExpression)
         Me.Controls.Add(Me.lblExpression)
         Me.Controls.Add(Me.ucrSelectorForCalculations)
@@ -333,7 +325,7 @@ Partial Class dlgCalculator
         Me.Controls.Add(Me.cmdMinus)
         Me.Controls.Add(Me.cmdMultiply)
         Me.Controls.Add(Me.cmdDot)
-        Me.Controls.Add(Me.btn9)
+        Me.Controls.Add(Me.cmd9)
         Me.Controls.Add(Me.cmd8)
         Me.Controls.Add(Me.cmd7)
         Me.Controls.Add(Me.cmd6)
@@ -365,7 +357,7 @@ Partial Class dlgCalculator
     Friend WithEvents cmd6 As Button
     Friend WithEvents cmd7 As Button
     Friend WithEvents cmd8 As Button
-    Friend WithEvents btn9 As Button
+    Friend WithEvents cmd9 As Button
     Friend WithEvents cmdDot As Button
     Friend WithEvents cmdDivide As Button
     Friend WithEvents cmdPlus As Button
@@ -377,11 +369,10 @@ Partial Class dlgCalculator
     Friend WithEvents ucrSelectorForCalculations As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblExpression As Label
     Friend WithEvents ucrInputExpression As ucrInputComboBox
-    Friend WithEvents ucrInputStandard As ucrInputComboBox
-    Friend WithEvents cmdSpaceToManageCalculatio As Button
+    Friend WithEvents cmdTry As Button
     Friend WithEvents ucrSpaceToMangeResult As ucrInputTextBox
     Friend WithEvents chkSaveResultInto As CheckBox
-    Friend WithEvents ucrSaveResult As ucrInputTextBox
     Friend WithEvents chkDefaultCalculationName As CheckBox
     Friend WithEvents cmdGreaterThan As Button
+    Friend WithEvents ucrSaveResultInto As ucrInputComboBox
 End Class
