@@ -136,7 +136,7 @@ Public Class dlgReplace
         If (strVarType = "character") Then
             ucrBaseReplace.clsRsyntax.AddParameter("new_value", Chr(34) & ucrInputNewValue.GetText & Chr(34))
         End If
-        If (strVarType = "factor" Or strVarType = "two level factor" Or strVarType = "multilevel factor") Then
+        If (strVarType = "character" or strVarType = "factor" Or strVarType = "two level factor" Or strVarType = "multilevel factor") Then
             ucrBaseReplace.clsRsyntax.AddParameter("new_value", Chr(34) & ucrInputNewValue.GetText & Chr(34))
         End If
         'If (strVarType = "logical") Then
@@ -161,12 +161,9 @@ Public Class dlgReplace
             If (strVarType = "numeric" Or strVarType = "integer" Or strVarType = "positive integer") Then
                 ucrBaseReplace.clsRsyntax.AddParameter("old_value", "NA")
             End If
-            If (strVarType = "character") Then
+            If (strVarType = "character" Or strVarType = "factor" Or strVarType = "two level factor" Or strVarType = "multilevel factor") Then
                 ucrBaseReplace.clsRsyntax.AddParameter("old_value", Chr(34) & "" & Chr(34))
             End If
-            'If (strVarType = "factor" Or strVarType = "two level factor" Or strVarType = "multilevel factor") Then
-
-            'End If
             'If (strVarType = "logical") Then
 
             'End If
@@ -258,12 +255,9 @@ Public Class dlgReplace
             If (strVarType = "numeric" Or strVarType = "integer" Or strVarType = "positive integer") Then
                 ucrBaseReplace.clsRsyntax.AddParameter("new_value", "NA")
             End If
-            If (strVarType = "character") Then
+            If (strVarType = "character" Or strVarType = "factor" Or strVarType = "two level factor" Or strVarType = "multilevel factor") Then
                 ucrBaseReplace.clsRsyntax.AddParameter("new_value", Chr(34) & "" & Chr(34))
             End If
-            'If (strVarType = "factor" Or strVarType = "two level factor" Or strVarType = "multilevel factor") Then
-
-            'End If
             'If (strVarType = "logical") Then
 
             'End If
@@ -271,7 +265,7 @@ Public Class dlgReplace
 
             'End If
         Else
-            ucrBaseReplace.clsRsyntax.RemoveParameter("new_value")
+                ucrBaseReplace.clsRsyntax.RemoveParameter("new_value")
         End If
     End Sub
     Private Sub RangeEnable()

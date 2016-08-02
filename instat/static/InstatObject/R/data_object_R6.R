@@ -455,14 +455,17 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
   for(col_name in col_names) {
     str_data_type <- self$get_variables_metadata(property = data_type_label, column = col_name)
     if(str_data_type == "factor") {
-      if(!is.na(new_value) && !(new_value %in% levels(private$data[[col_name]]))) {
+      if(is.na(new_value)) {
         stop("new_value must be an existing level of the factor column: ", col_name, ".")
       }
+      #if(!is.na(new_value) && !(new_value %in% levels(private$data[[col_name]]))) {
+      #  stop("new_value must be an existing level of the factor column: ", col_name, ".")
+      #}
       if(!missing(rows)) {
         replace_rows <- (row.names(private$data) %in% rows)
         if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
       }
-      else replace_rows <- (private$data[[col_name]] == old_value)
+      else replace_rows <- (private$data[[col_name]] == as.character(old_value))
     }
     else if(str_data_type == "integer" || str_data_type == "numeric") {
       if(!is.na(new_value)) {
