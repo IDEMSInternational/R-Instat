@@ -2,7 +2,7 @@
 Imports instat.Translations
 Public Class dlgExportDataset
     Dim bFirstLoad As Boolean = True
-    Private clsWriteCSV, clsWriteXLSX, clsWriteTSV, clsWritePSV, clsWriteFEATHER, clsWriteFWF, clsWriteRDS, clsWriteRDATA, clsWriteJSON, clsWriteYML, clsWriteDTA, clsWriteSAV, clsWriteDBF, clsWriteARFF, clsWriteR, clsWriteXML, clsWriteHTML As New RFunction
+    Private clsWriteCSV, clsWriteXLSX, clsWriteOthers As New RFunction
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
         Dim dlgSave As New SaveFileDialog
@@ -69,111 +69,13 @@ Public Class dlgExportDataset
                 clsWriteXLSX.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsWriteXLSX)
             'TAB-separated data (.tsv), using write.table with row.names = FALSE.
-            Case ".tsv"
-                clsWriteTSV.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteTSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteTSV.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteTSV)
-            'Pipe-separated data (.psv), using write.table with sep = '|' and row.names = FALSE.
-            Case ".psv"
-                clsWritePSV.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWritePSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWritePSV.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWritePSV)
-            'Feather r / Python interchange format (.feather), using write_feather
-            Case ".feather"
-                clsWriteFEATHER.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteFEATHER.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteFEATHER.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteFEATHER)
-            'Fixed-Width format data (.fwf), using write.table with row.names = FALSE, quote = FALSE, And col.names = FALSE
-            Case ".fwf"
-                clsWriteFWF.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteFWF.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteFWF.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteFWF)
-            ' Serialized r objects (.rds), using saveRDS
-            Case ".rds"
-                clsWriteRDS.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteRDS.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteRDS.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteRDS)
-            'Saved r objects (.RData), using save
-            Case ".RData"
-                clsWriteRDATA.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteRDATA.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteRDATA.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteRDATA)
-            'JSON(.json), Using toJSON
-            Case ".json"
-                clsWriteJSON.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteJSON.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteJSON.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteJSON)
-            'YAML(.yml), Using As.yaml
-            Case ".yml"
-                clsWriteYML.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteYML.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteYML.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteYML)
-            ' Stata(.dta), Using write_dta
-            Case ".dta"
-                clsWriteDTA.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteDTA.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteDTA.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteDTA)
-            'SPSS(.sav), Using write_sav
-            Case ".sav"
-                clsWriteSAV.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteSAV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteSAV.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteSAV)
 
-            '"XBASE" database files (.dbf), using write.dbf
-            Case ".dbf"
-                clsWriteDBF.SetRCommand("rio::export")
+            Case ".tsv", ".psv", ".feather", ".fwf", ".rds", ".RData", ".json", ".yml", ".dta", ".sav", ".dbf", ".arff", ".R", ".xml", ".html"
+                clsWriteOthers.SetRCommand("rio::export")
                 chkOptions.Enabled = True
-                clsWriteDBF.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteDBF.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteDBF)
-            ' Weka Attribute - Relation File Format (.arff), using write.arff
-            Case ".arff"
-                clsWriteARFF.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteARFF.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteARFF.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteARFF)
-            'r syntax object (.R), using dput (by default) Or dump (if format = 'dump'
-            Case ".R"
-                clsWriteR.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteR.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteR.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteR)
-            'Xml(.xml), Using a custom method To create a simple XML tree
-            Case ".xml"
-                clsWriteXML.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteXML.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteXML.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteXML)
-            ' HTML(.html), Using a custom method To create a Single-table HTML file
-            Case ".html"
-                clsWriteHTML.SetRCommand("rio::export")
-                chkOptions.Enabled = True
-                clsWriteHTML.AddParameter("file", Chr(34) & strFilePath & Chr(34))
-                clsWriteHTML.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteHTML)
+                clsWriteOthers.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                clsWriteOthers.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteOthers)
         End Select
     End Sub
 
