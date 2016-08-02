@@ -29,7 +29,6 @@ Public Class ucrSelector
     Private lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private strType As String
     Private bShowHiddenCols As Boolean = False
-    Public strAddOnLoad As New KeyValuePair(Of String, String())
 
     Public Sub New()
         ' This call is required by the designer.
@@ -48,9 +47,6 @@ Public Class ucrSelector
     Private Sub ucrSelection_load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             bFirstLoad = False
-        End If
-        If strAddOnLoad.Key IsNot Nothing AndAlso strAddOnLoad.Value IsNot Nothing Then
-            AddItemsWithMetadataProperty(strAddOnLoad.Key, strAddOnLoad.Value)
         End If
         LoadList()
     End Sub
@@ -85,7 +81,6 @@ Public Class ucrSelector
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
         lstVariablesInReceivers.Clear()
-        strAddOnLoad = New KeyValuePair(Of String, String())
         LoadList()
         'lstItemsInReceivers.Clear()
     End Sub
@@ -187,13 +182,6 @@ Public Class ucrSelector
     Public Sub RemoveFromVariablesList(strVariable As String)
         lstVariablesInReceivers.Remove(strVariable)
         RaiseEvent VariablesInReceiversChanged()
-    End Sub
-
-    Public Sub AddItemsWithMetadataProperty(strProperty As String, strValues As String())
-        If CurrentReceiver IsNot Nothing Then
-            frmMain.clsRLink.SelectColumnsWithMetadataProperty(CurrentReceiver, strCurrentDataFrame, strProperty, strValues)
-        End If
-        LoadList()
     End Sub
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
