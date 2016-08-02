@@ -37,8 +37,8 @@ Partial Class dlgColumnStats
         Me.chkCount = New System.Windows.Forms.CheckBox()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.chkdropUnusedLevels = New System.Windows.Forms.CheckBox()
-        Me.chkPrintOutput = New System.Windows.Forms.CheckBox()
         Me.chkStoreResults = New System.Windows.Forms.CheckBox()
+        Me.chkPrintOutput = New System.Windows.Forms.CheckBox()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
@@ -77,7 +77,7 @@ Partial Class dlgColumnStats
         Me.grpSummaries.Controls.Add(Me.chkMinimum)
         Me.grpSummaries.Controls.Add(Me.chkMean)
         Me.grpSummaries.Controls.Add(Me.chkCount)
-        Me.grpSummaries.Location = New System.Drawing.Point(213, 270)
+        Me.grpSummaries.Location = New System.Drawing.Point(13, 212)
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.Size = New System.Drawing.Size(200, 148)
         Me.grpSummaries.TabIndex = 8
@@ -189,9 +189,9 @@ Partial Class dlgColumnStats
         Me.grpOptions.Controls.Add(Me.chkdropUnusedLevels)
         Me.grpOptions.Controls.Add(Me.chkStoreResults)
         Me.grpOptions.Controls.Add(Me.chkPrintOutput)
-        Me.grpOptions.Location = New System.Drawing.Point(13, 270)
+        Me.grpOptions.Location = New System.Drawing.Point(224, 267)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(141, 93)
+        Me.grpOptions.Size = New System.Drawing.Size(184, 93)
         Me.grpOptions.TabIndex = 9
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
@@ -205,25 +205,25 @@ Partial Class dlgColumnStats
         Me.chkdropUnusedLevels.Text = "Drop Unused Levels"
         Me.chkdropUnusedLevels.UseVisualStyleBackColor = True
         '
-        'chkPrintOutput
-        '
-        Me.chkPrintOutput.AutoSize = True
-        Me.chkPrintOutput.Location = New System.Drawing.Point(7, 41)
-        Me.chkPrintOutput.Name = "chkPrintOutput"
-        Me.chkPrintOutput.Size = New System.Drawing.Size(82, 17)
-        Me.chkPrintOutput.TabIndex = 0
-        Me.chkPrintOutput.Text = "Print Output"
-        Me.chkPrintOutput.UseVisualStyleBackColor = True
-        '
         'chkStoreResults
         '
         Me.chkStoreResults.AutoSize = True
         Me.chkStoreResults.Location = New System.Drawing.Point(7, 18)
         Me.chkStoreResults.Name = "chkStoreResults"
-        Me.chkStoreResults.Size = New System.Drawing.Size(89, 17)
+        Me.chkStoreResults.Size = New System.Drawing.Size(158, 17)
         Me.chkStoreResults.TabIndex = 10
-        Me.chkStoreResults.Text = "Store Results"
+        Me.chkStoreResults.Text = "Store Results in Data Frame"
         Me.chkStoreResults.UseVisualStyleBackColor = True
+        '
+        'chkPrintOutput
+        '
+        Me.chkPrintOutput.AutoSize = True
+        Me.chkPrintOutput.Location = New System.Drawing.Point(7, 41)
+        Me.chkPrintOutput.Name = "chkPrintOutput"
+        Me.chkPrintOutput.Size = New System.Drawing.Size(174, 17)
+        Me.chkPrintOutput.TabIndex = 0
+        Me.chkPrintOutput.Text = "Print Results to Output Window"
+        Me.chkPrintOutput.UseVisualStyleBackColor = True
         '
         'ucrReceiverByFactor
         '
@@ -254,7 +254,7 @@ Partial Class dlgColumnStats
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(11, 422)
+        Me.ucrBase.Location = New System.Drawing.Point(4, 364)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 2
@@ -263,7 +263,7 @@ Partial Class dlgColumnStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 478)
+        Me.ClientSize = New System.Drawing.Size(420, 418)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.grpSummaries)
         Me.Controls.Add(Me.ucrReceiverByFactor)
