@@ -2,13 +2,13 @@
 Imports instat.Translations
 Public Class dlgExportDataset
     Dim bFirstLoad As Boolean = True
-    Private clsWriteCSV, clsWriteXLSX As New RFunction
+    Private clsWriteCSV, clsWriteXLSX, clsWriteOthers As New RFunction
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
         Dim dlgSave As New SaveFileDialog
         dlgSave.Title = "Export file dialog"
         dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Excel files (*xlsx)|*.xlsx"
+        dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html"
         If dlgSave.ShowDialog = DialogResult.OK Then
             If dlgSave.FileName <> "" Then
                 txtExportFile.Text = Path.GetFileName(dlgSave.FileName)
@@ -56,18 +56,26 @@ Public Class dlgExportDataset
     Private Sub SaveFileType(strFilePath As String)
         Select Case Path.GetExtension(strFilePath)
             Case ".csv"
-                clsWriteCSV.SetRCommand("write.csv")
+                clsWriteCSV.SetRCommand("rio::export")
                 chkOptions.Enabled = False
                 grpOptions.Enabled = False
                 clsWriteCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                 clsWriteCSV.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsWriteCSV)
             Case ".xlsx"
-                clsWriteXLSX.SetRCommand("write.xlsx")
+                clsWriteXLSX.SetRCommand("rio::export")
                 chkOptions.Enabled = True
                 clsWriteXLSX.AddParameter("file", Chr(34) & strFilePath & Chr(34))
                 clsWriteXLSX.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsWriteXLSX)
+            'TAB-separated data (.tsv), using write.table with row.names = FALSE.
+
+            Case ".tsv", ".psv", ".feather", ".fwf", ".rds", ".RData", ".json", ".yml", ".dta", ".sav", ".dbf", ".arff", ".R", ".xml", ".html"
+                clsWriteOthers.SetRCommand("rio::export")
+                chkOptions.Enabled = True
+                clsWriteOthers.AddParameter("file", Chr(34) & strFilePath & Chr(34))
+                clsWriteOthers.AddParameter("x", clsRFunctionParameter:=ucrAvailableSheets.clsCurrDataFrame)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsWriteOthers)
         End Select
     End Sub
 
