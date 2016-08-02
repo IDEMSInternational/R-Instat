@@ -995,4 +995,8 @@ Public Class frmMain
     Private Sub mnuOrganiseColumnTextFindReplace_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnTextFindReplace.Click
         dlgReplace.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
+        dlgDescriptiveStatistics.ShowDialog()
+    End Sub
 End Class
