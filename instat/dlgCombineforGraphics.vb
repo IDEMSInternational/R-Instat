@@ -16,6 +16,7 @@
 Imports instat.Translations
 Public Class dlgCombineforGraphics
     Private bFirstLoad As Boolean = True
+    Public clsListFunction As New RFunction
     Private Sub dlgCombineforGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -33,14 +34,17 @@ Public Class dlgCombineforGraphics
         ucrBase.iHelpTopicID = 430
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
         ucrCombineGraphSelector.SetItemType("graph")
-        ucrSaveCombinedGraph.strPrefix = "Combinedgraph"
         ucrSaveCombinedGraph.SetDataFrameSelector(ucrCombineGraphSelector.ucrAvailableDataFrames)
+        sdgCombineGraphOptions.SetRSyntax(ucrBase.clsRsyntax)
+        ucrBase.clsRsyntax.SetFunction("gridExtra::grid.arrange")
+        clsListFunction.SetRCommand("list")
     End Sub
 
     Private Sub SetDefaults()
         ucrCombineGraphReceiver.SetMeAsReceiver()
         ucrCombineGraphSelector.Reset()
         ucrSaveCombinedGraph.chkSaveGraph.Checked = False
+        sdgCombineGraphOptions.SetDefaults()
         TestOkEnabled()
     End Sub
 
@@ -60,11 +64,14 @@ Public Class dlgCombineforGraphics
     End Sub
 
     Private Sub ucrCombineGraphReceiver_SelectionChanged() Handles ucrCombineGraphReceiver.SelectionChanged
+        If Not ucrCombineGraphReceiver.IsEmpty Then
+            clsListFunction.AddParameter(ucrCombineGraphReceiver.GetVariableNamesList.ToString)
+            ucrBase.clsRsyntax.AddParameter("grobs", clsRFunctionParameter:=clsListFunction)
+        End If
         TestOkEnabled()
     End Sub
-
-    Private Sub cmdLayout_Click(sender As Object, e As EventArgs) Handles cmdLayout.Click
-        sdgLayout.ShowDialog()
+    Private Sub cmdLayout_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgCombineGraphOptions.ShowDialog()
     End Sub
 
     Private Sub ucrSaveCombinedGraph_Load() Handles ucrSaveCombinedGraph.GraphNameChanged, ucrSaveCombinedGraph.SaveGraphCheckedChanged
@@ -75,7 +82,6 @@ Public Class dlgCombineforGraphics
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrCombineGraphSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
-
         TestOkEnabled()
     End Sub
 End Class
