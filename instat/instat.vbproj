@@ -135,6 +135,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ucrAxes.Designer.vb">
+      <DependentUpon>ucrAxes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrAxes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="clsDistribution.vb" />
     <Compile Include="clsGeom.vb" />
     <Compile Include="clsInstatOptions.vb" />
@@ -3790,6 +3796,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.sw-KE.resx">
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrAxes.resx">
+      <DependentUpon>ucrAxes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
