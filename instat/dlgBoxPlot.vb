@@ -47,7 +47,6 @@ Public Class dlgBoxplot
         ucrSelectorBoxPlot.Focus()
         ucrVariablesAsFactorForBoxplot.ResetControl()
         chkHorizontalBoxplot.Checked = False
-        sdgBoxPlot.SetDefaults()
         TestOkEnabled()
         SetXParameter()
     End Sub

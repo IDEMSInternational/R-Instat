@@ -717,22 +717,10 @@
     <Compile Include="sdgModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgPieChartOptions.Designer.vb">
-      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgPieChartOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgPrincipalComponentAnalysis.Designer.vb">
       <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgPrincipalComponentAnalysis.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgScatterPlot.Designer.vb">
-      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgScatterPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgThemeOptions.Designer.vb">
@@ -783,34 +771,10 @@
     <Compile Include="ucrInputComboBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="sdgBarChart.Designer.vb">
-      <DependentUpon>sdgBarChart.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgBarChart.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgBoxPlot.Designer.vb">
-      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgBoxPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgCorrPlot.Designer.vb">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCorrPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgDotPlot.Designer.vb">
-      <DependentUpon>sdgDotPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgDotPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgHistogramOptions.Designer.vb">
-      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgHistogramOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgANOVAOptions.Designer.vb">
@@ -2509,24 +2473,6 @@
     <EmbeddedResource Include="dlgRecodeFactor.sw-KE.resx">
       <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
-      <DependentUpon>sdgBarChart.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgBarChart.resx">
-      <DependentUpon>sdgBarChart.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgBarChart.sw-KE.resx">
-      <DependentUpon>sdgBarChart.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgBoxPlot.fr-FR.resx">
-      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgBoxPlot.resx">
-      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgBoxPlot.sw-KE.resx">
-      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgCanonicalCorrelation.fr-FR.resx">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </EmbeddedResource>
@@ -2599,15 +2545,6 @@
     <EmbeddedResource Include="sdgDescribe.sw-KE.resx">
       <DependentUpon>sdgDescribe.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgDotPlot.fr-FR.resx">
-      <DependentUpon>sdgDotPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgDotPlot.resx">
-      <DependentUpon>sdgDotPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgDotPlot.sw-KE.resx">
-      <DependentUpon>sdgDotPlot.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgFrequencyPolygonOptions.fr-FR.resx">
       <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -2616,15 +2553,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFrequencyPolygonOptions.sw-KE.resx">
       <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgHistogramOptions.fr-FR.resx">
-      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgHistogramOptions.resx">
-      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgHistogramOptions.sw-KE.resx">
-      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLayerOptions.fr-FR.resx">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
@@ -2662,15 +2590,6 @@
     <EmbeddedResource Include="sdgANOVAOptions.sw-KE.resx">
       <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPieChartOptions.fr-FR.resx">
-      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPieChartOptions.resx">
-      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPieChartOptions.sw-KE.resx">
-      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPrincipalComponentAnalysis.fr-FR.resx">
       <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
@@ -3751,15 +3670,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPlots.sw-KE.resx">
       <DependentUpon>sdgPlots.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgScatterPlot.fr-FR.resx">
-      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgScatterPlot.resx">
-      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgScatterPlot.sw-KE.resx">
-      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.fr-FR.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
