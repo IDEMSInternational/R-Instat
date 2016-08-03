@@ -276,4 +276,5 @@ Public Class dlgRegularSequence
         nudTo.Increment = 10 ^ -(nudNumberofDecimalPlaces.Value)
         nudInStepsOf.Increment = 10 ^ -(nudNumberofDecimalPlaces.Value)
     End Sub
+
 End Class
