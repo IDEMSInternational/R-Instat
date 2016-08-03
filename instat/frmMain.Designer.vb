@@ -284,6 +284,7 @@ Partial Class frmMain
         Me.mnuOrganiseDataObjectCopyDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObjectDeleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator21 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuOrganiseDataObjectHideDataframes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObjectMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObjectRenameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObjectReorderMetadata = New System.Windows.Forms.ToolStripMenuItem()
@@ -365,7 +366,7 @@ Partial Class frmMain
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
@@ -373,7 +374,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeOneVariableGraph.Enabled = False
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
@@ -1806,7 +1807,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameColumnStructure
         '
-        Me.mnuOrganiseDataFrameColumnStructure.Enabled = False
         Me.mnuOrganiseDataFrameColumnStructure.Name = "mnuOrganiseDataFrameColumnStructure"
         Me.mnuOrganiseDataFrameColumnStructure.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameColumnStructure.Tag = "Column_Structure..."
@@ -1863,6 +1863,7 @@ Partial Class frmMain
         '
         'ColourByPropertyToolStripMenuItem
         '
+        Me.ColourByPropertyToolStripMenuItem.Enabled = False
         Me.ColourByPropertyToolStripMenuItem.Name = "ColourByPropertyToolStripMenuItem"
         Me.ColourByPropertyToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
         Me.ColourByPropertyToolStripMenuItem.Text = "Colour by Property..."
@@ -2194,7 +2195,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObject
         '
-        Me.mnuOrganiseDataObject.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataObjectDataFrameMetadata, Me.mnuOrganiseDataObjectRenameDataFrame, Me.mnuOrganiseDataObjectReorderDataFrames, Me.mnuOrganiseDataObjectCopyDataFrame, Me.mnuOrganiseDataObjectDeleteDataFrame, Me.ToolStripSeparator21, Me.mnuOrganiseDataObjectMetadata, Me.mnuOrganiseDataObjectRenameMetadata, Me.mnuOrganiseDataObjectReorderMetadata, Me.mnuOrganiseDataObjectDeleteMetadata})
+        Me.mnuOrganiseDataObject.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataObjectDataFrameMetadata, Me.mnuOrganiseDataObjectRenameDataFrame, Me.mnuOrganiseDataObjectReorderDataFrames, Me.mnuOrganiseDataObjectCopyDataFrame, Me.mnuOrganiseDataObjectDeleteDataFrame, Me.ToolStripSeparator21, Me.mnuOrganiseDataObjectHideDataframes, Me.mnuOrganiseDataObjectMetadata, Me.mnuOrganiseDataObjectRenameMetadata, Me.mnuOrganiseDataObjectReorderMetadata, Me.mnuOrganiseDataObjectDeleteMetadata})
         Me.mnuOrganiseDataObject.Name = "mnuOrganiseDataObject"
         Me.mnuOrganiseDataObject.Size = New System.Drawing.Size(172, 22)
         Me.mnuOrganiseDataObject.Tag = "Data_Object"
@@ -2240,6 +2241,12 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator21.Name = "ToolStripSeparator21"
         Me.ToolStripSeparator21.Size = New System.Drawing.Size(193, 6)
+        '
+        'mnuOrganiseDataObjectHideDataframes
+        '
+        Me.mnuOrganiseDataObjectHideDataframes.Name = "mnuOrganiseDataObjectHideDataframes"
+        Me.mnuOrganiseDataObjectHideDataframes.Size = New System.Drawing.Size(196, 22)
+        Me.mnuOrganiseDataObjectHideDataframes.Text = "Hide Dataframes..."
         '
         'mnuOrganiseDataObjectMetadata
         '
@@ -3029,4 +3036,5 @@ Partial Class frmMain
     Friend WithEvents mnuViewCascade As ToolStripMenuItem
     Friend WithEvents mnuViewTileVertically As ToolStripMenuItem
     Friend WithEvents mnuViewTileHorizontally As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseDataObjectHideDataframes As ToolStripMenuItem
 End Class
