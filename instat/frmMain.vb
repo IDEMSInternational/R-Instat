@@ -1002,4 +1002,8 @@ Public Class frmMain
             e.Cancel = True
         End If
     End Sub
+
+    Private Sub mnuOrganiseDataObjectHideDataframes_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectHideDataframes.Click
+        dlgHideDataframes.ShowDialog()
+    End Sub
 End Class
