@@ -101,8 +101,11 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
-        clsDeleteColumns.AddParameter("cols", SelectedColumns())
-        frmMain.clsRLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
+        Dim deleteCol = MsgBox("Are you sure you want to delete this column?", MessageBoxButtons.YesNo, "Delete Column")
+        If deleteCol = DialogResult.Yes Then
+            clsDeleteColumns.AddParameter("cols", SelectedColumns())
+            frmMain.clsRLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
+        End If
     End Sub
 
     'Private Sub resetToDefaultWidthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles resetToDefaultWidthToolStripMenuItem.Click
@@ -276,9 +279,12 @@ Public Class frmEditor
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
         Dim strSctipt As String
+        Dim Delete = MsgBox("Are you sure you want to delete this dataframe?", MessageBoxButtons.YesNo, "Delete Sheet")
         If grdData.Worksheets.Count > 0 Then
-            strSctipt = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
-            frmMain.clsRLink.RunScript(strSctipt)
+            If Delete = DialogResult.Yes Then
+                strSctipt = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
+                frmMain.clsRLink.RunScript(strSctipt)
+            End If
         End If
     End Sub
 
