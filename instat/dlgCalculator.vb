@@ -5,24 +5,24 @@ Public Class dlgCalculator
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.OKEnabled(False)
         cmdBackSpace.Enabled = True
-        txtCalcLine.Select()
+        'txtCalcLine.Select()
         ucrBase.iHelpTopicID = 14
     End Sub
 
     Private Sub AddText(strVar As String, Optional intStepsBack As Integer = 0, Optional bolInsertSelected As Boolean = False)
         Dim intCurrCursorPosition As Integer
-        Dim strSelectedText As String = txtCalcLine.SelectedText
+        'Dim strSelectedText As String = txtCalcLine.SelectedText
 
-        txtCalcLine.SelectedText = ""
-        intCurrCursorPosition = txtCalcLine.SelectionStart
-        txtCalcLine.Text = txtCalcLine.Text.Insert(txtCalcLine.SelectionStart, strVar)
-        intCurrCursorPosition = intCurrCursorPosition + strVar.Length - intStepsBack
-        If bolInsertSelected Then
-            txtCalcLine.Text = txtCalcLine.Text.Insert(intCurrCursorPosition, strSelectedText)
-            intCurrCursorPosition = intCurrCursorPosition + strSelectedText.Length + 1
-        End If
-        txtCalcLine.SelectionStart = intCurrCursorPosition
-        txtCalcLine.Select()
+        'txtCalcLine.SelectedText = ""
+        'intCurrCursorPosition = txtCalcLine.SelectionStart
+        'txtCalcLine.Text = txtCalcLine.Text.Insert(txtCalcLine.SelectionStart, strVar)
+        'intCurrCursorPosition = intCurrCursorPosition + strVar.Length - intStepsBack
+        'If bolInsertSelected Then
+        '    txtCalcLine.Text = txtCalcLine.Text.Insert(intCurrCursorPosition, strSelectedText)
+        '    intCurrCursorPosition = intCurrCursorPosition + strSelectedText.Length + 1
+        'End If
+        'txtCalcLine.SelectionStart = intCurrCursorPosition
+        'txtCalcLine.Select()
     End Sub
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
@@ -61,7 +61,7 @@ Public Class dlgCalculator
         AddText("8")
     End Sub
 
-    Private Sub cmd9_Click(sender As Object, e As EventArgs) Handles btn9.Click
+    Private Sub cmd9_Click(sender As Object, e As EventArgs) Handles cmd9.Click
         AddText("9")
     End Sub
 
@@ -69,7 +69,7 @@ Public Class dlgCalculator
         AddText(".")
     End Sub
 
-    Private Sub cmdPi_Click(sender As Object, e As EventArgs) Handles cmdPi.Click
+    Private Sub cmdPi_Click(sender As Object, e As EventArgs)
         AddText("pi")
     End Sub
 
@@ -99,58 +99,56 @@ Public Class dlgCalculator
         AddText("^")
     End Sub
 
-    Private Sub cmdOpenBracket_Click(sender As Object, e As EventArgs) Handles cmdOpenBracket.Click
-        AddText("(")
-    End Sub
+    'Private Sub cmdOpenBracket_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
+    '    AddText("(")
+    'End Sub
 
-    Private Sub cmdCloseBracket_Click(sender As Object, e As EventArgs) Handles cmdCloseBracket.Click
-        Dim intCursorPosition As Integer
+    'Private Sub cmdCloseBracket_Click(sender As Object, e As EventArgs)
+    '    Dim intCursorPosition As Integer
 
-        intCursorPosition = txtCalcLine.SelectionStart
-        txtCalcLine.Text = txtCalcLine.Text.Insert(txtCalcLine.SelectionStart, ")")
-        txtCalcLine.SelectionStart = intCursorPosition + 1
-        txtCalcLine.Focus()
-    End Sub
+    '    intCursorPosition = txtCalcLine.SelectionStart
+    '    txtCalcLine.Text = txtCalcLine.Text.Insert(txtCalcLine.SelectionStart, ")")
+    '    txtCalcLine.SelectionStart = intCursorPosition + 1
+    '    txtCalcLine.Focus()
+    'End Sub
 
-    Private Sub cmdRowNumbers_Click(sender As Object, e As EventArgs) Handles cmdRowNumbers.Click
+    Private Sub cmdRowNumbers_Click(sender As Object, e As EventArgs)
         AddText("(1:nrow(data))")
     End Sub
 
-    Private Sub ucrBase_clickOK(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        Dim strScript As String
-        strScript = ("data[[" & Chr(34) & txtNewColumnName.Text & Chr(34) & "]]" & " <- " & txtCalcLine.Text).ToString
-        frmMain.clsRLink.RunScript(strScript)
-        'dataset = frmMain.clsRLink.GetData("data")
-        'frmEditor.UpdateSheet(dataset)
-    End Sub
+    'Private Sub ucrBase_clickOK(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+    '    Dim strScript As String
+    '    strScript = ("data[[" & Chr(34) & txtNewColumnName.Text & Chr(34) & "]]" & " <- " & txtCalcLine.Text).ToString
+    '    frmMain.clsRLink.RunScript(strScript)
+    '    'dataset = frmMain.clsRLink.GetData("data")
+    '    'frmEditor.UpdateSheet(dataset)
+    'End Sub
 
-    Private Sub cmdBackSpace_Click(sender As Object, e As EventArgs) Handles cmdBackSpace.Click
-        If txtCalcLine.Text.Length > 0 Then
-            txtCalcLine.Text = txtCalcLine.Text.Remove(txtCalcLine.Text.Length - 1)
-        End If
-    End Sub
+    'Private Sub cmdBackSpace_Click(sender As Object, e As EventArgs) Handles cmdBackSpace.Click
+    '    If txtCalcLine.Text.Length > 0 Then
+    '        txtCalcLine.Text = txtCalcLine.Text.Remove(txtCalcLine.Text.Length - 1)
+    '    End If
+    'End Sub
 
-    Private Sub txtCalcLine_TextChanged(sender As Object, e As EventArgs) Handles txtCalcLine.TextChanged
-        If txtCalcLine.Text.Length = 0 Then
-            cmdBackSpace.Enabled = False
-        Else
-            cmdBackSpace.Enabled = True
-        End If
-    End Sub
+    'Private Sub txtCalcLine_TextChanged(sender As Object, e As EventArgs)
+    '    If txtCalcLine.Text.Length = 0 Then
+    '        cmdBackSpace.Enabled = False
+    '    Else
+    '        cmdBackSpace.Enabled = True
+    '    End If
+    'End Sub
 
-    Private Sub cmdSqrt_Click(sender As Object, e As EventArgs) Handles cmdSqrt.Click
+    Private Sub cmdSqrt_Click(sender As Object, e As EventArgs)
         AddText("sqrt()", 1, True)
     End Sub
 
-    Private Sub cmdLog10_Click(sender As Object, e As EventArgs) Handles cmdLog10.Click
+    Private Sub cmdLog10_Click(sender As Object, e As EventArgs)
         AddText("log10()", 1, True)
     End Sub
 
-    Private Sub cmdExp_Click(sender As Object, e As EventArgs) Handles cmdExp.Click
+    Private Sub cmdExp_Click(sender As Object, e As EventArgs)
         AddText("exp()", 1, True)
     End Sub
 
-    Private Sub txtNewColumnName_TextChanged(sender As Object, e As EventArgs) Handles txtNewColumnName.TextChanged
 
-    End Sub
 End Class

@@ -13,9 +13,35 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
-Public Class dlgStartSpoolingOutputToFile
-    Private Sub dlgStartSpoolingOutputToFile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class dlgHideDataframes
+    Public bFirstLoad As Boolean = True
+    Private Sub dlgHideDataframes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            TestOKEnabled()
+            bFirstLoad = False
+        End If
     End Sub
+
+    Private Sub InitialiseDialog()
+
+    End Sub
+
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+    End Sub
+
 End Class

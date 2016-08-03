@@ -70,14 +70,14 @@ Partial Class dlgRegularSequence
         Me.grpSequenceType.TabIndex = 3
         Me.grpSequenceType.TabStop = False
         Me.grpSequenceType.Tag = "Sequence_type"
-        Me.grpSequenceType.Text = "Sequence type"
+        Me.grpSequenceType.Text = "Sequence Type"
         '
         'rdoDates
         '
         Me.rdoDates.AutoSize = True
         Me.rdoDates.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.rdoDates.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoDates.Location = New System.Drawing.Point(103, 13)
+        Me.rdoDates.Location = New System.Drawing.Point(103, 15)
         Me.rdoDates.Name = "rdoDates"
         Me.rdoDates.Size = New System.Drawing.Size(59, 18)
         Me.rdoDates.TabIndex = 1
@@ -90,7 +90,7 @@ Partial Class dlgRegularSequence
         Me.rdoNumeric.AutoSize = True
         Me.rdoNumeric.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.rdoNumeric.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoNumeric.Location = New System.Drawing.Point(6, 13)
+        Me.rdoNumeric.Location = New System.Drawing.Point(6, 15)
         Me.rdoNumeric.Name = "rdoNumeric"
         Me.rdoNumeric.Size = New System.Drawing.Size(70, 18)
         Me.rdoNumeric.TabIndex = 0
@@ -123,13 +123,13 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.TabIndex = 4
         Me.grpSequenceDefinition.TabStop = False
         Me.grpSequenceDefinition.Tag = "Sequence_definition"
-        Me.grpSequenceDefinition.Text = "Sequence definition"
+        Me.grpSequenceDefinition.Text = "Sequence Definition"
         Me.grpSequenceDefinition.UseCompatibleTextRendering = True
         '
         'lblNumberDecimalPlaces
         '
         Me.lblNumberDecimalPlaces.AutoSize = True
-        Me.lblNumberDecimalPlaces.Location = New System.Drawing.Point(12, 184)
+        Me.lblNumberDecimalPlaces.Location = New System.Drawing.Point(12, 183)
         Me.lblNumberDecimalPlaces.Name = "lblNumberDecimalPlaces"
         Me.lblNumberDecimalPlaces.Size = New System.Drawing.Size(132, 13)
         Me.lblNumberDecimalPlaces.TabIndex = 16
@@ -137,7 +137,7 @@ Partial Class dlgRegularSequence
         '
         'nudNumberofDecimalPlaces
         '
-        Me.nudNumberofDecimalPlaces.Location = New System.Drawing.Point(150, 181)
+        Me.nudNumberofDecimalPlaces.Location = New System.Drawing.Point(150, 180)
         Me.nudNumberofDecimalPlaces.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
         Me.nudNumberofDecimalPlaces.Name = "nudNumberofDecimalPlaces"
         Me.nudNumberofDecimalPlaces.Size = New System.Drawing.Size(45, 20)
@@ -145,7 +145,7 @@ Partial Class dlgRegularSequence
         '
         'nudTo
         '
-        Me.nudTo.Location = New System.Drawing.Point(98, 48)
+        Me.nudTo.Location = New System.Drawing.Point(98, 51)
         Me.nudTo.Maximum = New Decimal(New Integer() {2147483647, 0, 0, 0})
         Me.nudTo.Minimum = New Decimal(New Integer() {2147483647, 0, 0, -2147483648})
         Me.nudTo.Name = "nudTo"
@@ -154,7 +154,7 @@ Partial Class dlgRegularSequence
         '
         'nudFrom
         '
-        Me.nudFrom.Location = New System.Drawing.Point(98, 20)
+        Me.nudFrom.Location = New System.Drawing.Point(98, 24)
         Me.nudFrom.Maximum = New Decimal(New Integer() {2147483647, 0, 0, 0})
         Me.nudFrom.Minimum = New Decimal(New Integer() {2147483647, 0, 0, -2147483648})
         Me.nudFrom.Name = "nudFrom"
@@ -163,11 +163,11 @@ Partial Class dlgRegularSequence
         '
         'nudRepeatValues
         '
-        Me.nudRepeatValues.Location = New System.Drawing.Point(98, 103)
+        Me.nudRepeatValues.Location = New System.Drawing.Point(98, 104)
         Me.nudRepeatValues.Maximum = New Decimal(New Integer() {2147483647, 0, 0, 0})
         Me.nudRepeatValues.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudRepeatValues.Name = "nudRepeatValues"
-        Me.nudRepeatValues.Size = New System.Drawing.Size(44, 20)
+        Me.nudRepeatValues.Size = New System.Drawing.Size(51, 20)
         Me.nudRepeatValues.TabIndex = 12
         Me.nudRepeatValues.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
@@ -181,24 +181,24 @@ Partial Class dlgRegularSequence
         '
         'dtpSelectorB
         '
-        Me.dtpSelectorB.Location = New System.Drawing.Point(98, 48)
+        Me.dtpSelectorB.Location = New System.Drawing.Point(98, 51)
         Me.dtpSelectorB.Name = "dtpSelectorB"
         Me.dtpSelectorB.Size = New System.Drawing.Size(87, 20)
         Me.dtpSelectorB.TabIndex = 5
         '
         'nudInStepsOf
         '
-        Me.nudInStepsOf.Location = New System.Drawing.Point(98, 74)
+        Me.nudInStepsOf.Location = New System.Drawing.Point(98, 78)
         Me.nudInStepsOf.Maximum = New Decimal(New Integer() {2147483647, 0, 0, 0})
         Me.nudInStepsOf.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudInStepsOf.Name = "nudInStepsOf"
-        Me.nudInStepsOf.Size = New System.Drawing.Size(47, 20)
+        Me.nudInStepsOf.Size = New System.Drawing.Size(51, 20)
         Me.nudInStepsOf.TabIndex = 10
         Me.nudInStepsOf.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'dtpSelectorA
         '
-        Me.dtpSelectorA.Location = New System.Drawing.Point(98, 20)
+        Me.dtpSelectorA.Location = New System.Drawing.Point(98, 24)
         Me.dtpSelectorA.Name = "dtpSelectorA"
         Me.dtpSelectorA.Size = New System.Drawing.Size(91, 20)
         Me.dtpSelectorA.TabIndex = 2
@@ -218,18 +218,18 @@ Partial Class dlgRegularSequence
         Me.chkDefineAsFactor.AutoSize = True
         Me.chkDefineAsFactor.Checked = True
         Me.chkDefineAsFactor.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkDefineAsFactor.Location = New System.Drawing.Point(12, 159)
+        Me.chkDefineAsFactor.Location = New System.Drawing.Point(15, 159)
         Me.chkDefineAsFactor.Name = "chkDefineAsFactor"
-        Me.chkDefineAsFactor.Size = New System.Drawing.Size(101, 17)
+        Me.chkDefineAsFactor.Size = New System.Drawing.Size(104, 17)
         Me.chkDefineAsFactor.TabIndex = 11
         Me.chkDefineAsFactor.Tag = "Define_as_factor"
-        Me.chkDefineAsFactor.Text = "Define as factor"
+        Me.chkDefineAsFactor.Text = "Define as Factor"
         Me.chkDefineAsFactor.UseVisualStyleBackColor = True
         '
         'lblTimes1
         '
         Me.lblTimes1.AutoSize = True
-        Me.lblTimes1.Location = New System.Drawing.Point(144, 108)
+        Me.lblTimes1.Location = New System.Drawing.Point(148, 108)
         Me.lblTimes1.Name = "lblTimes1"
         Me.lblTimes1.Size = New System.Drawing.Size(41, 13)
         Me.lblTimes1.TabIndex = 10
@@ -241,10 +241,10 @@ Partial Class dlgRegularSequence
         Me.lblRepeatValues.AutoSize = True
         Me.lblRepeatValues.Location = New System.Drawing.Point(12, 108)
         Me.lblRepeatValues.Name = "lblRepeatValues"
-        Me.lblRepeatValues.Size = New System.Drawing.Size(76, 13)
+        Me.lblRepeatValues.Size = New System.Drawing.Size(77, 13)
         Me.lblRepeatValues.TabIndex = 8
         Me.lblRepeatValues.Tag = "Repeat_values"
-        Me.lblRepeatValues.Text = "Repeat values"
+        Me.lblRepeatValues.Text = "Repeat Values"
         '
         'lblSteps
         '
@@ -252,10 +252,10 @@ Partial Class dlgRegularSequence
         Me.lblSteps.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSteps.Location = New System.Drawing.Point(12, 82)
         Me.lblSteps.Name = "lblSteps"
-        Me.lblSteps.Size = New System.Drawing.Size(56, 13)
+        Me.lblSteps.Size = New System.Drawing.Size(58, 13)
         Me.lblSteps.TabIndex = 6
         Me.lblSteps.Tag = "In_steps_of"
-        Me.lblSteps.Text = "In steps of"
+        Me.lblSteps.Text = "In Steps of"
         '
         'lblTo
         '
