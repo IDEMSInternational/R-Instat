@@ -65,8 +65,10 @@ Public Class dlgColumnStats
         chkMedian.Tag = "summary_median"
         chkSum.Tag = "summary_sum"
         chkStDev.Tag = "summary_sd"
-        chkMode.Tag = "summmary_mode"
-        chkRange.Tag = "summmary_range"
+        chkMode.Tag = "summary_mode"
+        chkRange.Tag = "summary_range"
+        'temp disabled
+        chkMissingValues.Enabled = False
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

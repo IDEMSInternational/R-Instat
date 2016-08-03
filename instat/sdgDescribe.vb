@@ -1,4 +1,5 @@
-﻿' Copyright (C) 2015
+﻿' Instat-R
+' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -12,20 +13,9 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-Public Class sdgLayout
-    Private bFirstLoad As Boolean = True
-    Private Sub sdgLayout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            bFirstLoad = False
-        End If
-        Me.BringToFront()
-    End Sub
-
-    Private Sub SetDefaults()
-
-    End Sub
-    Private Sub InitialiseDialog()
-
+Imports instat.Translations
+Public Class sdgDescribe
+    Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
     End Sub
 End Class

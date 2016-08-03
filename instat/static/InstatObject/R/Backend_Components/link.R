@@ -22,13 +22,15 @@ link$set("public", "equals", function(compare_link) {
          && self$to_data_frame == compare_link$to_data_frame
          && self$type == compare_link$type) {
     if(self$type == keyed_link_label) {
-      if(setequal(self$parameters, compare_link$parameters) && setequal(names(self$parameters), names(compare_link$parameters))) {
-        for(name in names(compare_link$parameters)) {
-          if(!compare_link$parameters[[name]] != self$parameters[[name]]) return(FALSE)
+      #print(self$calculation$parameters)
+      #print(compare_link$calculation$parameters)
+      if(setequal(self$calculation$parameters, compare_link$calculation$parameters) && setequal(names(self$calculation$parameters), names(compare_link$calculation$parameters))) {
+        for(name in names(compare_link$calculation$parameters)) {
+          if(compare_link$calculation$parameters[[name]] != self$calculation$parameters[[name]]) return(FALSE)
         }
       return(TRUE)
       }
-      else return(TRUE)
+      else return(FALSE)
     }
     else return(FALSE)
   }

@@ -675,6 +675,12 @@
     <Compile Include="sdgDensityOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDescribe.Designer.vb">
+      <DependentUpon>sdgDescribe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDescribe.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgFrequencyPolygonOptions.Designer.vb">
       <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
     </Compile>
@@ -687,10 +693,10 @@
     <Compile Include="sdgLayerOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgLayout.Designer.vb">
-      <DependentUpon>sdgLayout.vb</DependentUpon>
+    <Compile Include="sdgCombineGraphOptions.Designer.vb">
+      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgLayout.vb">
+    <Compile Include="sdgCombineGraphOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgModelOptions.Designer.vb">
@@ -2563,6 +2569,15 @@
     <EmbeddedResource Include="sdgDensityOptions.sw-KE.resx">
       <DependentUpon>sdgDensityOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribe.fr-FR.resx">
+      <DependentUpon>sdgDescribe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribe.resx">
+      <DependentUpon>sdgDescribe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDescribe.sw-KE.resx">
+      <DependentUpon>sdgDescribe.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgDotPlot.fr-FR.resx">
       <DependentUpon>sdgDotPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -2599,14 +2614,14 @@
     <EmbeddedResource Include="sdgLayerOptions.sw-KE.resx">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayout.fr-FR.resx">
-      <DependentUpon>sdgLayout.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCombineGraphOptions.fr-FR.resx">
+      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayout.resx">
-      <DependentUpon>sdgLayout.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCombineGraphOptions.resx">
+      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayout.sw-KE.resx">
-      <DependentUpon>sdgLayout.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCombineGraphOptions.sw-KE.resx">
+      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgModelOptions.fr-FR.resx">
       <DependentUpon>sdgModelOptions.vb</DependentUpon>
@@ -4229,9 +4244,9 @@
     <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\xml2_1.0.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="static\Recent_Files\recent.mru">
+    <Content Include="static\Recent_Files\recent.mru">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="Resources\arrows_bottom.png" />
     <Content Include="Resources\arrows_down.png" />
     <Content Include="Resources\arrows_top.png" />
