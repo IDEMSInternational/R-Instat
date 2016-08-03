@@ -971,7 +971,7 @@ Public Class frmMain
     Private Sub ColourByPropertyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColourByPropertyToolStripMenuItem.Click
         'TODO change this dialog
         '     dlgMetadata should be separate
-        dlgMetadata.ShowDialog()
+        dlgColourbyProperty.ShowDialog()
     End Sub
 
     Private Sub mnuViewCascade_Click(sender As Object, e As EventArgs) Handles mnuViewCascade.Click
