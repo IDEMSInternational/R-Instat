@@ -357,6 +357,12 @@
     <Compile Include="dlgGroupTables.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgHideDataframes.Designer.vb">
+      <DependentUpon>dlgHideDataframes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgHideDataframes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgHideShowColumns.Designer.vb">
       <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
     </Compile>
@@ -2064,6 +2070,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGroupTables.sw-KE.resx">
       <DependentUpon>dlgGroupTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideDataframes.fr-FR.resx">
+      <DependentUpon>dlgHideDataframes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideDataframes.resx">
+      <DependentUpon>dlgHideDataframes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideDataframes.sw-KE.resx">
+      <DependentUpon>dlgHideDataframes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHideShowColumns.fr-FR.resx">
       <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
