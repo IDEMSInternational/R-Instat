@@ -1643,6 +1643,12 @@
     <Compile Include="ucrReceiver.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrReceiverExpression.Designer.vb">
+      <DependentUpon>ucrReceiverExpression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReceiverExpression.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrReceiverMetadataProperty.Designer.vb">
       <DependentUpon>ucrReceiverMetadataProperty.vb</DependentUpon>
     </Compile>
@@ -3889,6 +3895,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNewColumnName.sw-KE.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverExpression.fr-FR.resx">
+      <DependentUpon>ucrReceiverExpression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverExpression.resx">
+      <DependentUpon>ucrReceiverExpression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverExpression.sw-KE.resx">
+      <DependentUpon>ucrReceiverExpression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverMetadataProperty.fr-FR.resx">
       <DependentUpon>ucrReceiverMetadataProperty.vb</DependentUpon>

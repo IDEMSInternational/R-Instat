@@ -179,13 +179,9 @@ Public Class ucrReceiverSingle
         Return strDataFrameName
     End Function
 
-    Public Event SelectionChanged(sender As Object, e As EventArgs)
-
-
-
     Private Sub txtReceiverSingle_TextChanged(sender As Object, e As EventArgs) Handles txtReceiverSingle.TextChanged
         OnValueChanged(sender, e)
-        RaiseEvent SelectionChanged(sender, e)
+        OnSelectionChanged()
     End Sub
 
     Public Overrides Sub SetColor()

@@ -40,16 +40,16 @@ Partial Class dlgCalculator
         Me.cmdPower = New System.Windows.Forms.Button()
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdBackSpace = New System.Windows.Forms.Button()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblExpression = New System.Windows.Forms.Label()
-        Me.ucrInputExpression = New instat.ucrInputComboBox()
         Me.cmdTry = New System.Windows.Forms.Button()
-        Me.ucrSpaceToMangeResult = New instat.ucrInputTextBox()
         Me.chkSaveResultInto = New System.Windows.Forms.CheckBox()
         Me.chkDefaultCalculationName = New System.Windows.Forms.CheckBox()
         Me.cmdGreaterThan = New System.Windows.Forms.Button()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
+        Me.ucrSpaceToMangeResult = New instat.ucrInputTextBox()
+        Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.SuspendLayout()
         '
         'cmd1
@@ -215,22 +215,6 @@ Partial Class dlgCalculator
         Me.cmdBackSpace.Text = "<"
         Me.cmdBackSpace.UseVisualStyleBackColor = True
         '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 306)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(404, 50)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrSelectorForCalculations
-        '
-        Me.ucrSelectorForCalculations.bShowHiddenColumns = False
-        Me.ucrSelectorForCalculations.Location = New System.Drawing.Point(9, 36)
-        Me.ucrSelectorForCalculations.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForCalculations.Name = "ucrSelectorForCalculations"
-        Me.ucrSelectorForCalculations.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForCalculations.TabIndex = 106
-        '
         'lblExpression
         '
         Me.lblExpression.AutoSize = True
@@ -241,14 +225,6 @@ Partial Class dlgCalculator
         Me.lblExpression.Tag = "Expression"
         Me.lblExpression.Text = "Expression"
         '
-        'ucrInputExpression
-        '
-        Me.ucrInputExpression.IsReadOnly = False
-        Me.ucrInputExpression.Location = New System.Drawing.Point(98, 12)
-        Me.ucrInputExpression.Name = "ucrInputExpression"
-        Me.ucrInputExpression.Size = New System.Drawing.Size(399, 21)
-        Me.ucrInputExpression.TabIndex = 108
-        '
         'cmdTry
         '
         Me.cmdTry.Location = New System.Drawing.Point(9, 228)
@@ -257,14 +233,6 @@ Partial Class dlgCalculator
         Me.cmdTry.TabIndex = 110
         Me.cmdTry.Text = "Try"
         Me.cmdTry.UseVisualStyleBackColor = True
-        '
-        'ucrSpaceToMangeResult
-        '
-        Me.ucrSpaceToMangeResult.IsReadOnly = False
-        Me.ucrSpaceToMangeResult.Location = New System.Drawing.Point(91, 229)
-        Me.ucrSpaceToMangeResult.Name = "ucrSpaceToMangeResult"
-        Me.ucrSpaceToMangeResult.Size = New System.Drawing.Size(284, 21)
-        Me.ucrSpaceToMangeResult.TabIndex = 111
         '
         'chkSaveResultInto
         '
@@ -303,18 +271,50 @@ Partial Class dlgCalculator
         Me.ucrSaveResultInto.Size = New System.Drawing.Size(256, 21)
         Me.ucrSaveResultInto.TabIndex = 117
         '
+        'ucrSpaceToMangeResult
+        '
+        Me.ucrSpaceToMangeResult.IsReadOnly = False
+        Me.ucrSpaceToMangeResult.Location = New System.Drawing.Point(91, 229)
+        Me.ucrSpaceToMangeResult.Name = "ucrSpaceToMangeResult"
+        Me.ucrSpaceToMangeResult.Size = New System.Drawing.Size(284, 21)
+        Me.ucrSpaceToMangeResult.TabIndex = 111
+        '
+        'ucrSelectorForCalculations
+        '
+        Me.ucrSelectorForCalculations.bShowHiddenColumns = False
+        Me.ucrSelectorForCalculations.Location = New System.Drawing.Point(9, 36)
+        Me.ucrSelectorForCalculations.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForCalculations.Name = "ucrSelectorForCalculations"
+        Me.ucrSelectorForCalculations.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForCalculations.TabIndex = 106
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 306)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(404, 50)
+        Me.ucrBase.TabIndex = 0
+        '
+        'ucrReceiverForCalculation
+        '
+        Me.ucrReceiverForCalculation.Location = New System.Drawing.Point(90, 16)
+        Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
+        Me.ucrReceiverForCalculation.Selector = Nothing
+        Me.ucrReceiverForCalculation.Size = New System.Drawing.Size(284, 20)
+        Me.ucrReceiverForCalculation.TabIndex = 118
+        '
         'dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(505, 363)
+        Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.cmdGreaterThan)
         Me.Controls.Add(Me.chkDefaultCalculationName)
         Me.Controls.Add(Me.chkSaveResultInto)
         Me.Controls.Add(Me.ucrSpaceToMangeResult)
         Me.Controls.Add(Me.cmdTry)
-        Me.Controls.Add(Me.ucrInputExpression)
         Me.Controls.Add(Me.lblExpression)
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.cmdBackSpace)
@@ -368,11 +368,11 @@ Partial Class dlgCalculator
     Friend WithEvents cmdBackSpace As Button
     Friend WithEvents ucrSelectorForCalculations As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblExpression As Label
-    Friend WithEvents ucrInputExpression As ucrInputComboBox
     Friend WithEvents cmdTry As Button
     Friend WithEvents ucrSpaceToMangeResult As ucrInputTextBox
     Friend WithEvents chkSaveResultInto As CheckBox
     Friend WithEvents chkDefaultCalculationName As CheckBox
     Friend WithEvents cmdGreaterThan As Button
     Friend WithEvents ucrSaveResultInto As ucrInputComboBox
+    Friend WithEvents ucrReceiverForCalculation As ucrReceiverExpression
 End Class
