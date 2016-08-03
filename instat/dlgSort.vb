@@ -33,7 +33,7 @@ Public Class dlgSort
         Else
             ReopenDialog()
         End If
-
+        grpMissingValues.Enabled = False
         'Checks if Ok can be enabled.
         'Define this method for each dialog 
         'depending on what parameters are neccessary for the function to run.

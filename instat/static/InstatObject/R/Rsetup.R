@@ -10,10 +10,11 @@ if(!all(success)) install.packages(names(success)[!success], repos = paste0("fil
 #sapply(names(success)[!success], require, character.only = TRUE)
 #Needed when ggfortify was not on CRAN
 #if(!suppressWarnings(require(ggfortify))) install.packages(paste0(getwd(), "/RPackages", "/ggfortify_0.1.0.tar.gz"), repos = NULL, type="source")
+library(plyr)
+library(dplyr)
 library(openxlsx)
 library(reshape2)
 library(lubridate)
-library(plyr)
 library(rtf)
 library(ggplot2)
 library(extRemes)
@@ -39,7 +40,7 @@ library(readxl)
 library(lme4)
 library(dummies)
 library(ggthemes)
-library(dplyr)
+library(lazyeval)
 setwd(dirname(parent.frame(2)$ofile))
 
 
