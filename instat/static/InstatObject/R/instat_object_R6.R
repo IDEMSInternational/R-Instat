@@ -783,6 +783,11 @@ instat_object$set("public", "set_factor_levels", function(data_name, col_name, n
 } 
 )
 
+instat_object$set("public", "edit_factor_level", function(data_name, col_name,old_level, new_level) {
+  self$get_data_objects(data_name)$edit_factor_level(col_name = col_name, old_level = old_level, new_level = new_level)
+} 
+)
+
 instat_object$set("public", "set_factor_reference_level", function(data_name, col_name, new_ref_level) {
   self$get_data_objects(data_name)$set_factor_reference_level(col_name = col_name, new_ref_level = new_ref_level)
 } 

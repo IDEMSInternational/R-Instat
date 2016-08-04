@@ -180,6 +180,19 @@ Public Class ucrReceiver
 
     End Sub
 
+    Public Sub RemoveIncludedMetadataProperty(strProperty As String)
+        Dim iIncludeIndex As Integer
+
+        iIncludeIndex = lstIncludedMetadataProperties.FindIndex(Function(x) x.Key = strProperty)
+        If iIncludeIndex <> -1 Then
+            lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
+        End If
+        If Selector IsNot Nothing Then
+            Selector.LoadList()
+        End If
+
+    End Sub
+
     Public Sub AddExcludedMetadataProperty(strProperty As String, strExclude As String())
         'Dim iIncludeIndex As Integer
         Dim iExcludeIndex As Integer
