@@ -1,12 +1,24 @@
 ﻿Imports RDotNet
 Public Class dlgCalculator
     Dim dataset As DataFrame
+    Dim clsAttach As New RFunction
+    Dim clsDetach As New RFunction
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.OKEnabled(False)
         cmdBackSpace.Enabled = True
         'txtCalcLine.Select()
         ucrBase.iHelpTopicID = 14
+        InitialiseDialog()
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
+        ucrReceiverForCalculation.SetMeAsReceiver()
+        clsAttach.SetRCommand("attach")
+        clsDetach.SetRCommand("detach")
+        clsDetach.AddParameter("unload", "TRUE")
+        ucrBase.clsRsyntax.SetCommandString("")
     End Sub
 
     Private Sub AddText(strVar As String, Optional intStepsBack As Integer = 0, Optional bolInsertSelected As Boolean = False)
@@ -31,6 +43,7 @@ Public Class dlgCalculator
 
     Private Sub cmd1_Click(sender As Object, e As EventArgs) Handles cmd1.Click
         AddText("1")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("1")
     End Sub
 
     Private Sub cmd2_Click(sender As Object, e As EventArgs) Handles cmd2.Click
@@ -150,5 +163,28 @@ Public Class dlgCalculator
         AddText("exp()", 1, True)
     End Sub
 
+    Private Sub ucrSaveResultInto_NameChanged() Handles ucrSaveResultInto.NameChanged
+        ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(), strTempDataframe:=ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+    End Sub
 
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        Dim strScript As String = ""
+        Dim strFunc As String
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
+        strFunc = clsAttach.ToScript(strScript)
+        frmMain.clsRLink.RunScript(strScript & strFunc)
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        Dim strScript As String = ""
+        Dim strFunc As String
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
+        strFunc = clsDetach.ToScript(strScript)
+        frmMain.clsRLink.RunScript(strScript & strFunc)
+    End Sub
+
+    Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
+        ucrBase.clsRsyntax.SetCommandString(ucrReceiverForCalculation.GetVariableNames(False))
+        ucrBase.OKEnabled(True)
+    End Sub
 End Class

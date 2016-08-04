@@ -25,6 +25,7 @@ Public Class ucrReceiver
     Public bTypeSet As Boolean
     Protected strType As String
     Public bExcludeFromSelector As Boolean = False
+    Public Event SelectionChanged(sender As Object, e As EventArgs)
 
     Public Sub New()
         ' This call is required by the designer.
@@ -180,6 +181,19 @@ Public Class ucrReceiver
 
     End Sub
 
+    Public Sub RemoveIncludedMetadataProperty(strProperty As String)
+        Dim iIncludeIndex As Integer
+
+        iIncludeIndex = lstIncludedMetadataProperties.FindIndex(Function(x) x.Key = strProperty)
+        If iIncludeIndex <> -1 Then
+            lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
+        End If
+        If Selector IsNot Nothing Then
+            Selector.LoadList()
+        End If
+
+    End Sub
+
     Public Sub AddExcludedMetadataProperty(strProperty As String, strExclude As String())
         'Dim iIncludeIndex As Integer
         Dim iExcludeIndex As Integer
@@ -241,5 +255,11 @@ Public Class ucrReceiver
         '        Exit For
         '    End If
         'Next
+    End Sub
+
+    Public Sub OnSelectionChanged()
+        Dim sender As New Object
+        Dim e As New EventArgs
+        RaiseEvent SelectionChanged(sender, e)
     End Sub
 End Class
