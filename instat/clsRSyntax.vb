@@ -34,7 +34,7 @@ Public Class RSyntax
     Public bToBeAssigned As Boolean = False
     Public bIsAssigned As Boolean = False
     Private bAssignToIsPrefix As Boolean
-    Private bAssignToColumnWithoutNames As String
+    Private bAssignToColumnWithoutNames As Boolean
     Private bInsertColumnBefore As String
 
     Public Sub SetFunction(strFunctionName As String, Optional ByRef clsFunction As RFunction = Nothing)
@@ -182,7 +182,7 @@ Public Class RSyntax
                     If Not strAssignToDataframe = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                         clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                         clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataframe & Chr(34))
-                        If bAssignToColumnWithoutNames Then
+                        If Not bAssignToColumnWithoutNames Then
                             clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
                         End If
                         clsAddColumns.AddParameter("col_data", strAssignTo)
