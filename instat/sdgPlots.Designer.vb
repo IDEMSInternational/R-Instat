@@ -41,7 +41,7 @@ Partial Class sdgPlots
         Me.ucrPlotsAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.tabTitles = New System.Windows.Forms.TabPage()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.UcrInputTextBox1 = New instat.ucrInputTextBox()
+        Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
         Me.grpLegendTitle = New System.Windows.Forms.GroupBox()
         Me.rdoLegendTitleCustom = New System.Windows.Forms.RadioButton()
         Me.chkDisplayLegendTitle = New System.Windows.Forms.CheckBox()
@@ -51,6 +51,7 @@ Partial Class sdgPlots
         Me.tbpXAxis = New System.Windows.Forms.TabPage()
         Me.ucrXAxis = New instat.ucrAxes()
         Me.tbpYAxis = New System.Windows.Forms.TabPage()
+        Me.ucrYAxis = New instat.ucrAxes()
         Me.tabTheme = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblFont = New System.Windows.Forms.Label()
@@ -58,7 +59,6 @@ Partial Class sdgPlots
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.lblTheme = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrYAxis = New instat.ucrAxes()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabFacet.SuspendLayout()
         CType(Me.nudNoOfRowsOrColumns, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -260,7 +260,7 @@ Partial Class sdgPlots
         'tabTitles
         '
         Me.tabTitles.Controls.Add(Me.Label1)
-        Me.tabTitles.Controls.Add(Me.UcrInputTextBox1)
+        Me.tabTitles.Controls.Add(Me.ucrInputGraphTitle)
         Me.tabTitles.Controls.Add(Me.grpLegendTitle)
         Me.tabTitles.Location = New System.Drawing.Point(4, 22)
         Me.tabTitles.Name = "tabTitles"
@@ -280,13 +280,13 @@ Partial Class sdgPlots
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "Graph Title"
         '
-        'UcrInputTextBox1
+        'ucrInputGraphTitle
         '
-        Me.UcrInputTextBox1.IsReadOnly = False
-        Me.UcrInputTextBox1.Location = New System.Drawing.Point(72, 29)
-        Me.UcrInputTextBox1.Name = "UcrInputTextBox1"
-        Me.UcrInputTextBox1.Size = New System.Drawing.Size(170, 21)
-        Me.UcrInputTextBox1.TabIndex = 9
+        Me.ucrInputGraphTitle.IsReadOnly = False
+        Me.ucrInputGraphTitle.Location = New System.Drawing.Point(72, 29)
+        Me.ucrInputGraphTitle.Name = "ucrInputGraphTitle"
+        Me.ucrInputGraphTitle.Size = New System.Drawing.Size(170, 21)
+        Me.ucrInputGraphTitle.TabIndex = 9
         '
         'grpLegendTitle
         '
@@ -381,6 +381,13 @@ Partial Class sdgPlots
         Me.tbpYAxis.Text = "Y-Axis"
         Me.tbpYAxis.UseVisualStyleBackColor = True
         '
+        'ucrYAxis
+        '
+        Me.ucrYAxis.Location = New System.Drawing.Point(0, 1)
+        Me.ucrYAxis.Name = "ucrYAxis"
+        Me.ucrYAxis.Size = New System.Drawing.Size(470, 300)
+        Me.ucrYAxis.TabIndex = 0
+        '
         'tabTheme
         '
         Me.tabTheme.Controls.Add(Me.GroupBox1)
@@ -447,13 +454,6 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
-        'ucrYAxis
-        '
-        Me.ucrYAxis.Location = New System.Drawing.Point(0, 1)
-        Me.ucrYAxis.Name = "ucrYAxis"
-        Me.ucrYAxis.Size = New System.Drawing.Size(470, 300)
-        Me.ucrYAxis.TabIndex = 0
-        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -518,7 +518,7 @@ Partial Class sdgPlots
     Friend WithEvents rdoLegendTitleCustom As RadioButton
     Friend WithEvents rdoLegendTitleAuto As RadioButton
     Friend WithEvents Label1 As Label
-    Friend WithEvents UcrInputTextBox1 As ucrInputTextBox
+    Friend WithEvents ucrInputGraphTitle As ucrInputTextBox
     Friend WithEvents ucrXAxis As ucrAxes
     Friend WithEvents ucrYAxis As ucrAxes
 End Class
