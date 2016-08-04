@@ -1,8 +1,8 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class sdgCumDistPlotOptions
-    Inherits System.Windows.Forms.Form
+Partial Class ucrReceiverExpression
+    Inherits instat.ucrReceiver
 
-    'Form overrides dispose to clean up the component list.
+    'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -22,29 +22,28 @@ Partial Class sdgCumDistPlotOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBaseSdgPlotoptions = New instat.ucrButtonsSubdialogue()
+        Me.cboExpression = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
-        'ucrBaseSdgPlotoptions
+        'cboExpression
         '
-        Me.ucrBaseSdgPlotoptions.Location = New System.Drawing.Point(53, 219)
-        Me.ucrBaseSdgPlotoptions.Name = "ucrBaseSdgPlotoptions"
-        Me.ucrBaseSdgPlotoptions.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseSdgPlotoptions.TabIndex = 0
+        Me.cboExpression.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cboExpression.FormattingEnabled = True
+        Me.cboExpression.Location = New System.Drawing.Point(0, 0)
+        Me.cboExpression.Name = "cboExpression"
+        Me.cboExpression.Size = New System.Drawing.Size(250, 21)
+        Me.cboExpression.TabIndex = 0
         '
-        'sdgCumDistPlotOptions
+        'ucrReceiverExpression
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
-        Me.Controls.Add(Me.ucrBaseSdgPlotoptions)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "sdgCumDistPlotOptions"
-        Me.Tag = "Plot_Options"
-        Me.Text = "Plot Options"
+        Me.Controls.Add(Me.cboExpression)
+        Me.Name = "ucrReceiverExpression"
+        Me.Size = New System.Drawing.Size(250, 20)
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents ucrBaseSdgPlotoptions As ucrButtonsSubdialogue
+    Friend WithEvents cboExpression As ComboBox
 End Class

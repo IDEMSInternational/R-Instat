@@ -123,6 +123,7 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrInputLeft
         '
+        Me.ucrInputLeft.IsReadOnly = False
         Me.ucrInputLeft.Location = New System.Drawing.Point(79, 99)
         Me.ucrInputLeft.Name = "ucrInputLeft"
         Me.ucrInputLeft.Size = New System.Drawing.Size(137, 21)
@@ -130,6 +131,7 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrInputRight
         '
+        Me.ucrInputRight.IsReadOnly = False
         Me.ucrInputRight.Location = New System.Drawing.Point(79, 69)
         Me.ucrInputRight.Name = "ucrInputRight"
         Me.ucrInputRight.Size = New System.Drawing.Size(137, 21)
@@ -137,6 +139,7 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrInputBottom
         '
+        Me.ucrInputBottom.IsReadOnly = False
         Me.ucrInputBottom.Location = New System.Drawing.Point(79, 37)
         Me.ucrInputBottom.Name = "ucrInputBottom"
         Me.ucrInputBottom.Size = New System.Drawing.Size(137, 21)
@@ -144,6 +147,7 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrInputTop
         '
+        Me.ucrInputTop.IsReadOnly = False
         Me.ucrInputTop.Location = New System.Drawing.Point(79, 6)
         Me.ucrInputTop.Name = "ucrInputTop"
         Me.ucrInputTop.Size = New System.Drawing.Size(137, 21)
@@ -192,7 +196,7 @@ Partial Class sdgCombineGraphOptions
         Me.ucrsdgLayoutBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrsdgLayoutBase.TabIndex = 1
         '
-        'sdgLayout
+        'sdgCombineGraphOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -200,9 +204,9 @@ Partial Class sdgCombineGraphOptions
         Me.Controls.Add(Me.ucrsdgLayoutBase)
         Me.Controls.Add(Me.tbcLayout)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "sdgLayout"
+        Me.Name = "sdgCombineGraphOptions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Layout"
+        Me.Text = "Options"
         Me.tbcLayout.ResumeLayout(False)
         Me.tbpLayout.ResumeLayout(False)
         Me.tbpLayout.PerformLayout()
