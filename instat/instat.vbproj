@@ -663,28 +663,10 @@
     <Compile Include="sdgCreateFilter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgCumDistLineOptions.Designer.vb">
-      <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCumDistLineOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgCumDistPlotOptions.Designer.vb">
-      <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCumDistPlotOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgDataOptions.Designer.vb">
       <DependentUpon>sdgDataOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDataOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgDensityOptions.Designer.vb">
-      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgDensityOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgDescribe.Designer.vb">
@@ -2500,24 +2482,6 @@
     <EmbeddedResource Include="sdgCreateFilter.sw-KE.resx">
       <DependentUpon>sdgCreateFilter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgCumDistLineOptions.fr-FR.resx">
-      <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCumDistLineOptions.resx">
-      <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCumDistLineOptions.sw-KE.resx">
-      <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCumDistPlotOptions.fr-FR.resx">
-      <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCumDistPlotOptions.resx">
-      <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCumDistPlotOptions.sw-KE.resx">
-      <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgDataOptions.fr-FR.resx">
       <DependentUpon>sdgDataOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -2526,15 +2490,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDataOptions.sw-KE.resx">
       <DependentUpon>sdgDataOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgDensityOptions.fr-FR.resx">
-      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgDensityOptions.resx">
-      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgDensityOptions.sw-KE.resx">
-      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDescribe.fr-FR.resx">
       <DependentUpon>sdgDescribe.vb</DependentUpon>
