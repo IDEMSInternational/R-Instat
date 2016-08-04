@@ -25,6 +25,7 @@ Public Class ucrReceiver
     Public bTypeSet As Boolean
     Protected strType As String
     Public bExcludeFromSelector As Boolean = False
+    Public Event SelectionChanged(sender As Object, e As EventArgs)
 
     Public Sub New()
         ' This call is required by the designer.
@@ -254,5 +255,11 @@ Public Class ucrReceiver
         '        Exit For
         '    End If
         'Next
+    End Sub
+
+    Public Sub OnSelectionChanged()
+        Dim sender As New Object
+        Dim e As New EventArgs
+        RaiseEvent SelectionChanged(sender, e)
     End Sub
 End Class
