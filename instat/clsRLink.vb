@@ -464,9 +464,10 @@ Public Class RLink
         Dim clsGetItems As New RFunction
         Dim clsIncludeList As New RFunction
         Dim kvpInclude As KeyValuePair(Of String, String())
+        Dim lstItems As New List(Of KeyValuePair(Of String, String))
 
         kvpInclude = New KeyValuePair(Of String, String())(strProperty, strValues)
-
+        ucrCurrentReceiver.Selector.LoadList()
         If bInstatObjectExists Then
             clsGetItems.SetRCommand(strInstatDataObject & "$get_column_names")
             clsGetItems.AddParameter("as_list", "TRUE")
@@ -480,9 +481,13 @@ Public Class RLink
             ucrCurrentReceiver.Clear()
             For i = 0 To vecColumns.Count - 1
                 chrCurrColumns = vecColumns(i).AsCharacter
-                ucrCurrentReceiver.Add(chrCurrColumns.ToArray())
+                For Each strColumn As String In chrCurrColumns
+                    lstItems.Add(New KeyValuePair(Of String, String)(strDataFrameName, strColumn))
+                Next
+                ucrCurrentReceiver.AddMultiple(lstItems.ToArray())
             Next
         End If
+        ucrCurrentReceiver.Selector.LoadList()
     End Sub
 
     Public Function GetListAsRString(lstStrings As List(Of String), Optional bWithQuotes As Boolean = True) As String

@@ -199,7 +199,7 @@
         If bSingleVariable Then
             ucrSingleVariable.Add(strVar)
         Else
-            ucrMultipleVariables.Add({strVar})
+            ucrMultipleVariables.Add(strVar)
         End If
     End Sub
 

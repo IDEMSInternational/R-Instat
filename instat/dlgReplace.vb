@@ -16,6 +16,7 @@
 Imports instat.Translations
 Public Class dlgReplace
     Public bFirstLoad As Boolean = True
+    Dim strVarType As String
     Private Sub dlgReplace_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -53,6 +54,11 @@ Public Class dlgReplace
         chkClosedUpperRange.Enabled = False
         ucrInputRangeFro.txtInput.Text = ""
         ucrInputRangeTo.txtInput.Text = ""
+        rdoRange.Enabled = False
+        lblFrom.Enabled = False
+        lblTo.Enabled = False
+        ucrInputRangeFro.Enabled = False
+        ucrInputRangeTo.Enabled = False
         TestOKEnabled()
     End Sub
 
@@ -64,24 +70,86 @@ Public Class dlgReplace
         End If
     End Sub
 
+    Private Sub CheckType()
+        If (Not ucrReceiverReplace.IsEmpty() And ucrReceiverReplace.lstSelectedVariables.Items.Count = 1) Then
+            strVarType = frmMain.clsRLink.GetDataType(ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverReplace.GetVariableNames(bWithQuotes:=False))
+            If (strVarType = "numeric" Or strVarType = "integer" Or strVarType = "positive integer") Then
+                ucrReceiverReplace.SetDataType("numeric")
+            End If
+            If (strVarType = "character") Then
+                ucrReceiverReplace.SetDataType("character")
+            End If
+            If (strVarType = "factor" Or strVarType = "two level factor" Or strVarType = "multilevel factor") Then
+                ucrReceiverReplace.SetDataType("factor")
+            End If
+            If (strVarType = "logical") Then
+                ucrReceiverReplace.SetDataType("logical")
+            End If
+            If (strVarType = "Date") Then
+                ucrReceiverReplace.SetDataType("Date")
+            End If
+        Else
+            ucrReceiverReplace.RemoveIncludedMetadataProperty(strProperty:="class")
+        End If
+    End Sub
+
     Private Sub ucrBaseReplace_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseReplace.ClickReset
         SetDefaults()
         TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorReplace_DataFrameChanged() Handles ucrSelectorReplace.DataFrameChanged
+        CheckType()
         ucrBaseReplace.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverReplace_SelectionChanged() Handles ucrReceiverReplace.SelectionChanged
+        CheckType()
+        RangeEnable()
         ucrBaseReplace.clsRsyntax.AddParameter("col_names", ucrReceiverReplace.GetVariableNames())
         TestOKEnabled()
     End Sub
 
+    Private Sub InputOldValue()
+        If (strVarType = "numeric" Or strVarType = "integer" Or strVarType = "positive integer") Then
+            ucrBaseReplace.clsRsyntax.AddParameter("old_value", ucrInputOldValue.GetText)
+        End If
+        If (strVarType = "character") Then
+            ucrBaseReplace.clsRsyntax.AddParameter("old_value", Chr(34) & ucrInputOldValue.GetText & Chr(34))
+        End If
+        If (strVarType = "factor" Or strVarType = "two level factor" Or strVarType = "multilevel factor") Then
+            ucrBaseReplace.clsRsyntax.AddParameter("old_value", Chr(34) & ucrInputOldValue.GetText & Chr(34))
+        End If
+        'If (strVarType = "logical") Then
+
+        'End If
+        'If (strVarType = "Date") Then
+
+        'End If
+    End Sub
+
+    Private Sub InputNewValue()
+        If (strVarType = "numeric" Or strVarType = "integer" Or strVarType = "positive integer") Then
+            ucrBaseReplace.clsRsyntax.AddParameter("new_value", ucrInputNewValue.GetText)
+        End If
+        If (strVarType = "character") Then
+            ucrBaseReplace.clsRsyntax.AddParameter("new_value", Chr(34) & ucrInputNewValue.GetText & Chr(34))
+        End If
+        If (strVarType = "character" or strVarType = "factor" Or strVarType = "two level factor" Or strVarType = "multilevel factor") Then
+            ucrBaseReplace.clsRsyntax.AddParameter("new_value", Chr(34) & ucrInputNewValue.GetText & Chr(34))
+        End If
+        'If (strVarType = "logical") Then
+
+        'End If
+        'If (strVarType = "Date") Then
+
+        'End If
+    End Sub
+
     Private Sub rdoOldValue_CheckedChanged(sender As Object, e As EventArgs) Handles rdoOldValue.CheckedChanged
         If rdoOldValue.Checked Then
-            ucrBaseReplace.clsRsyntax.AddParameter("old_value", Chr(34) & ucrInputOldValue.GetText & Chr(34))
+            InputOldValue()
         Else
             ucrBaseReplace.clsRsyntax.RemoveParameter("old_value")
             ucrInputOldValue.txtInput.Text = ""
@@ -90,13 +158,26 @@ Public Class dlgReplace
 
     Private Sub rdoOldMissing_CheckedChanged(sender As Object, e As EventArgs) Handles rdoOldMissing.CheckedChanged
         If rdoOldMissing.Checked Then
+            If (strVarType = "numeric" Or strVarType = "integer" Or strVarType = "positive integer") Then
+                ucrBaseReplace.clsRsyntax.AddParameter("old_value", "NA")
+            End If
+            If (strVarType = "character" Or strVarType = "factor" Or strVarType = "two level factor" Or strVarType = "multilevel factor") Then
+                ucrBaseReplace.clsRsyntax.AddParameter("old_value", Chr(34) & "" & Chr(34))
+            End If
+            'If (strVarType = "logical") Then
+
+            'End If
+            'If (strVarType = "Date") Then
+
+            'End If
+        Else
             ucrBaseReplace.clsRsyntax.RemoveParameter("old_value")
         End If
     End Sub
 
     Private Sub rdoNewValue_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNewValue.CheckedChanged
         If rdoNewValue.Checked Then
-            ucrBaseReplace.clsRsyntax.AddParameter("new_value", Chr(34) & ucrInputNewValue.GetText & Chr(34))
+            InputNewValue()
         Else
             ucrBaseReplace.clsRsyntax.RemoveParameter("new_value")
             ucrInputNewValue.txtInput.Text = ""
@@ -123,7 +204,9 @@ Public Class dlgReplace
 
     Private Sub ucrInputOldValue_NameChanged() Handles ucrInputOldValue.NameChanged
         If rdoOldValue.Checked Then
-            ucrBaseReplace.clsRsyntax.AddParameter("old_value", Chr(34) & ucrInputOldValue.GetText & Chr(34))
+            InputOldValue()
+        Else
+            ucrBaseReplace.clsRsyntax.RemoveParameter("old_value")
         End If
         'TestOKEnabled()
     End Sub
@@ -144,7 +227,9 @@ Public Class dlgReplace
 
     Private Sub ucrInputNewValue_NameChanged() Handles ucrInputNewValue.NameChanged
         If rdoNewValue.Checked Then
-            ucrBaseReplace.clsRsyntax.AddParameter("new_value", Chr(34) & ucrInputNewValue.GetText & Chr(34))
+            InputNewValue()
+        Else
+            ucrBaseReplace.clsRsyntax.RemoveParameter("new_value")
         End If
         'TestOKEnabled()
     End Sub
@@ -167,7 +252,35 @@ Public Class dlgReplace
 
     Private Sub rdoNewMissing_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNewMissing.CheckedChanged
         If rdoNewMissing.Checked Then
-            ucrBaseReplace.clsRsyntax.RemoveParameter("new_value")
+            If (strVarType = "numeric" Or strVarType = "integer" Or strVarType = "positive integer") Then
+                ucrBaseReplace.clsRsyntax.AddParameter("new_value", "NA")
+            End If
+            If (strVarType = "character" Or strVarType = "factor" Or strVarType = "two level factor" Or strVarType = "multilevel factor") Then
+                ucrBaseReplace.clsRsyntax.AddParameter("new_value", Chr(34) & "" & Chr(34))
+            End If
+            'If (strVarType = "logical") Then
+
+            'End If
+            'If (strVarType = "Date") Then
+
+            'End If
+        Else
+                ucrBaseReplace.clsRsyntax.RemoveParameter("new_value")
+        End If
+    End Sub
+    Private Sub RangeEnable()
+        If ((Not ucrReceiverReplace.IsEmpty()) And (strVarType = "numeric" Or strVarType = "integer" Or strVarType = "positive integer")) Then
+            rdoRange.Enabled = True
+            lblFrom.Enabled = True
+            lblTo.Enabled = True
+            ucrInputRangeFro.Enabled = True
+            ucrInputRangeTo.Enabled = True
+        Else
+            rdoRange.Enabled = False
+            lblFrom.Enabled = False
+            lblTo.Enabled = False
+            ucrInputRangeFro.Enabled = False
+            ucrInputRangeTo.Enabled = False
         End If
     End Sub
 End Class
