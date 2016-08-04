@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgControlOptions
+Partial Class sdgDescribe
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,28 +22,29 @@ Partial Class dlgControlOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'UcrButtonsSubdialogue1
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 207)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(42, 222)
+        Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
+        Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
+        Me.UcrButtonsSubdialogue1.TabIndex = 0
         '
-        'dlgControlOptions
+        'sdgDescribe
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(409, 261)
-        Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgControlOptions"
-        Me.Text = "Control Options"
+        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.UcrButtonsSubdialogue1)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "sdgDescribe"
+        Me.Text = "sdgDescribe"
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
 End Class

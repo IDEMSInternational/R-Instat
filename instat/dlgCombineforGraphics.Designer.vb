@@ -26,7 +26,7 @@ Partial Class dlgCombineforGraphics
         Me.ucrCombineGraphSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrCombineGraphReceiver = New instat.ucrReceiverMultiple()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cmdLayout = New System.Windows.Forms.Button()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrSaveCombinedGraph = New instat.ucrSaveGraph()
         Me.SuspendLayout()
         '
@@ -39,7 +39,6 @@ Partial Class dlgCombineforGraphics
         '
         'ucrCombineGraphSelector
         '
-        Me.ucrCombineGraphSelector.bShowHiddenColumns = False
         Me.ucrCombineGraphSelector.Location = New System.Drawing.Point(9, 9)
         Me.ucrCombineGraphSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCombineGraphSelector.Name = "ucrCombineGraphSelector"
@@ -64,14 +63,14 @@ Partial Class dlgCombineforGraphics
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Graphs To Combine"
         '
-        'cmdLayout
+        'cmdOptions
         '
-        Me.cmdLayout.Location = New System.Drawing.Point(13, 199)
-        Me.cmdLayout.Name = "cmdLayout"
-        Me.cmdLayout.Size = New System.Drawing.Size(75, 23)
-        Me.cmdLayout.TabIndex = 4
-        Me.cmdLayout.Text = "Layout"
-        Me.cmdLayout.UseVisualStyleBackColor = True
+        Me.cmdOptions.Location = New System.Drawing.Point(13, 199)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.TabIndex = 4
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrSaveCombinedGraph
         '
@@ -86,7 +85,7 @@ Partial Class dlgCombineforGraphics
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 321)
         Me.Controls.Add(Me.ucrSaveCombinedGraph)
-        Me.Controls.Add(Me.cmdLayout)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrCombineGraphReceiver)
         Me.Controls.Add(Me.ucrCombineGraphSelector)
@@ -105,6 +104,6 @@ Partial Class dlgCombineforGraphics
     Friend WithEvents ucrCombineGraphSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrCombineGraphReceiver As ucrReceiverMultiple
     Friend WithEvents Label1 As Label
-    Friend WithEvents cmdLayout As Button
+    Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrSaveCombinedGraph As ucrSaveGraph
 End Class

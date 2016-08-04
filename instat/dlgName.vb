@@ -69,7 +69,7 @@ Public Class dlgName
 
     Private Sub SetDefaultColumn()
         ucrSelectVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
-        ucrReceiverName.SetSelected(strSelectedColumn, strSelectedDataFrame)
+        ucrReceiverName.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
     End Sub
 

@@ -1,4 +1,5 @@
-﻿' Copyright (C) 2015
+﻿' Instat-R
+' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -13,19 +14,34 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Class sdgLayout
-    Private bFirstLoad As Boolean = True
-    Private Sub sdgLayout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Imports instat.Translations
+Public Class dlgHideDataframes
+    Public bFirstLoad As Boolean = True
+    Private Sub dlgHideDataframes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            TestOKEnabled()
             bFirstLoad = False
         End If
-        Me.BringToFront()
+    End Sub
+
+    Private Sub InitialiseDialog()
+
     End Sub
 
     Private Sub SetDefaults()
 
     End Sub
-    Private Sub InitialiseDialog()
+
+    Private Sub TestOKEnabled()
 
     End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
+    End Sub
+
 End Class
