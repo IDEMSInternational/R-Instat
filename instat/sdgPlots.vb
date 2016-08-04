@@ -23,6 +23,7 @@ Public Class sdgPlots
     Public clsYLabFunction As New RFunction
     Public clsRThemeFunction As New RFunction
     Public clsRLegendFunction As New RFunction
+    Public clsGraphTitleFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public strDataFrame As String
 
@@ -285,4 +286,13 @@ Public Class sdgPlots
         clsRsyntax = clsRsyntaxAxis
     End Sub
 
+    Private Sub ucrInputGraphTitle_NameChanged() Handles ucrInputGraphTitle.NameChanged
+        If Not ucrInputGraphTitle.IsEmpty Then
+            clsGraphTitleFunction.SetRCommand("ggtitle")
+            clsGraphTitleFunction.AddParameter("label", Chr(34) & ucrInputGraphTitle.GetText() & Chr(34))
+            clsRsyntax.AddOperatorParameter("ggtitle", clsRFunc:=clsGraphTitleFunction)
+        Else
+            clsRsyntax.RemoveOperatorParameter("ggtitle")
+        End If
+    End Sub
 End Class
