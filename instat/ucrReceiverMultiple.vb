@@ -26,8 +26,6 @@ Public Class ucrReceiverMultiple
         End If
     End Sub
 
-    Public Event SelectionChanged()
-
     Public Overrides Sub AddSelected()
         Dim lstItems(Selector.lstAvailableVariable.SelectedItems.Count - 1) As KeyValuePair(Of String, String)
         Dim lviTemp As ListViewItem
@@ -71,7 +69,7 @@ Public Class ucrReceiverMultiple
                 Selector.RemoveFromVariablesList(objItem.Text)
             Next
         End If
-        RaiseEvent SelectionChanged()
+        OnSelectionChanged()
         MyBase.RemoveSelected()
     End Sub
 
@@ -304,7 +302,7 @@ Public Class ucrReceiverMultiple
                 Selector.AddToVariablesList(kvpTempItem.Value)
             End If
         Next
-        RaiseEvent SelectionChanged()
+        OnSelectionChanged()
     End Sub
 
     Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
