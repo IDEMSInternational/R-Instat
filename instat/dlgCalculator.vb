@@ -17,6 +17,7 @@ Public Class dlgCalculator
         ucrReceiverForCalculation.SetMeAsReceiver()
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
+        clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.SetCommandString("")
     End Sub
 
@@ -167,13 +168,19 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        Dim strScript As String = ""
+        Dim strFunc As String
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
-        frmMain.clsRLink.RunScript(clsAttach.ToScript())
+        strFunc = clsAttach.ToScript(strScript)
+        frmMain.clsRLink.RunScript(strScript & strFunc)
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        clsDetach.AddParameter("what", clsRFunctionParameter:=ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
-        frmMain.clsRLink.RunScript(clsDetach.ToScript())
+        Dim strScript As String = ""
+        Dim strFunc As String
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
+        strFunc = clsDetach.ToScript(strScript)
+        frmMain.clsRLink.RunScript(strScript & strFunc)
     End Sub
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
