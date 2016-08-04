@@ -29,8 +29,6 @@ Public Class sdgCombineGraphOptions
         ucrInputRight.ResetText()
         ucrInputTop.ResetText()
         ucrInputBottom.ResetText()
-        nudColumns.Value = 2
-        nudRows.Value = 2
     End Sub
 
     Private Sub InitialiseDialog()
@@ -75,7 +73,7 @@ Public Class sdgCombineGraphOptions
 
     End Sub
 
-    Private Sub nudRows_ValueChanged(sender As Object, e As EventArgs) Handles nudRows.ValueChanged
+    Private Sub nudRows_TextChanged(sender As Object, e As EventArgs) Handles nudRows.TextChanged
         If nudRows.Text <> "" Then
             clsRsyntax.AddParameter("nrow", nudRows.Value)
         Else
@@ -83,7 +81,7 @@ Public Class sdgCombineGraphOptions
         End If
     End Sub
 
-    Private Sub nudColumns_ValueChanged(sender As Object, e As EventArgs) Handles nudColumns.ValueChanged
+    Private Sub nudColumns_TextChanged(sender As Object, e As EventArgs) Handles nudColumns.TextChanged
         If nudColumns.Text <> "" Then
             clsRsyntax.AddParameter("ncol", nudColumns.Value)
         Else
