@@ -15,15 +15,22 @@
 
 Public Class sdgCombineGraphOptions
     Private bFirstLoad As Boolean = True
+    Public clsRsyntax As New RSyntax
     Private Sub sdgLayout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            SetDefaults()
             bFirstLoad = False
         End If
         Me.BringToFront()
     End Sub
 
     Public Sub SetDefaults()
-
+        ucrInputLeft.ResetText()
+        ucrInputRight.ResetText()
+        ucrInputTop.ResetText()
+        ucrInputBottom.ResetText()
+        nudColumns.Value = 2
+        nudRows.Value = 2
     End Sub
 
     Private Sub InitialiseDialog()
@@ -31,6 +38,56 @@ Public Class sdgCombineGraphOptions
     End Sub
 
     Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
+        clsRsyntax = clsNewRSyntax
+    End Sub
 
+    Private Sub ucrInputTop_NameChanged() Handles ucrInputTop.NameChanged
+        If Not ucrInputTop.IsEmpty Then
+            clsRsyntax.AddParameter("top", ucrInputTop.GetText)
+        Else
+            clsRsyntax.RemoveParameter("top")
+        End If
+
+    End Sub
+
+    Private Sub ucrInputBottom_NameChanged() Handles ucrInputBottom.NameChanged
+        If Not ucrInputBottom.IsEmpty Then
+            clsRsyntax.AddParameter("bottom", ucrInputBottom.GetText)
+        Else
+            clsRsyntax.RemoveParameter("bottom")
+        End If
+    End Sub
+
+    Private Sub ucrInputRight_NameChanged() Handles ucrInputRight.NameChanged
+        If Not ucrInputRight.IsEmpty Then
+            clsRsyntax.AddParameter("right", ucrInputRight.GetText)
+        Else
+            clsRsyntax.RemoveParameter("right")
+        End If
+    End Sub
+
+    Private Sub ucrInputLeft_NameChanged() Handles ucrInputLeft.NameChanged
+        If Not ucrInputLeft.IsEmpty Then
+            clsRsyntax.AddParameter("left", ucrInputLeft.GetText)
+        Else
+            clsRsyntax.RemoveParameter("left")
+        End If
+
+    End Sub
+
+    Private Sub nudRows_ValueChanged(sender As Object, e As EventArgs) Handles nudRows.ValueChanged
+        If nudRows.Text <> "" Then
+            clsRsyntax.AddParameter("nrow", nudRows.Value)
+        Else
+            clsRsyntax.RemoveParameter("nrow")
+        End If
+    End Sub
+
+    Private Sub nudColumns_ValueChanged(sender As Object, e As EventArgs) Handles nudColumns.ValueChanged
+        If nudColumns.Text <> "" Then
+            clsRsyntax.AddParameter("ncol", nudColumns.Value)
+        Else
+            clsRsyntax.RemoveParameter("ncol")
+        End If
     End Sub
 End Class
