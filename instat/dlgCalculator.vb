@@ -1,15 +1,55 @@
-﻿Imports RDotNet
+﻿
+' Instat-R
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License k
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat.Translations
+Imports RDotNet
 Public Class dlgCalculator
     Dim dataset As DataFrame
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
-
+    Public bFirstLoad As Boolean = True
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.OKEnabled(False)
-        cmdBackSpace.Enabled = True
-        'txtCalcLine.Select()
+        autoTranslate(Me)
         ucrBase.iHelpTopicID = 14
-        InitialiseDialog()
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
+        TestOKEnabled
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverForCalculation.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub SetDefaults()
+        ucrSaveResultInto.SetPrefix("Cal")
+        ucrSaveResultInto.Reset()
+        ucrSelectorForCalculations.Reset()
+    End Sub
+
+    Private Sub ReopenDialog()
+
     End Sub
 
     Private Sub InitialiseDialog()
@@ -19,7 +59,14 @@ Public Class dlgCalculator
         clsDetach.SetRCommand("detach")
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.SetCommandString("")
+        ucrSaveResultInto.SetItemsTypeAsColumns()
+        ucrSaveResultInto.SetDefaultTypeAsColumn()
+        ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
     End Sub
+
+    'Private Sub ucrSaveResultIntoInto_NameChanged() Handles ucrSaveResultInto.NameChanged
+    '    ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveResultInto.GetText, strTempDataframe:=ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveResultInto.GetText, bAssignToIsPrefix:=True)
+    'End Sub
 
     Private Sub AddText(strVar As String, Optional intStepsBack As Integer = 0, Optional bolInsertSelected As Boolean = False)
         Dim intCurrCursorPosition As Integer
@@ -39,6 +86,7 @@ Public Class dlgCalculator
 
     Private Sub cmd0_Click(sender As Object, e As EventArgs) Handles cmd0.Click
         AddText("0")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("0")
     End Sub
 
     Private Sub cmd1_Click(sender As Object, e As EventArgs) Handles cmd1.Click
@@ -48,58 +96,67 @@ Public Class dlgCalculator
 
     Private Sub cmd2_Click(sender As Object, e As EventArgs) Handles cmd2.Click
         AddText("2")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("2")
     End Sub
 
     Private Sub cmd3_Click(sender As Object, e As EventArgs) Handles cmd3.Click
         AddText("3")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("3")
     End Sub
 
     Private Sub cmd4_Click(sender As Object, e As EventArgs) Handles cmd4.Click
         AddText("4")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("4")
     End Sub
 
     Private Sub cmd5_Click(sender As Object, e As EventArgs) Handles cmd5.Click
         AddText("5")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("5")
     End Sub
 
     Private Sub cmd6_Click(sender As Object, e As EventArgs) Handles cmd6.Click
         AddText("6")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("6")
     End Sub
 
     Private Sub cmd7_Click(sender As Object, e As EventArgs) Handles cmd7.Click
         AddText("7")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("7")
     End Sub
 
     Private Sub cmd8_Click(sender As Object, e As EventArgs) Handles cmd8.Click
         AddText("8")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("8")
     End Sub
 
     Private Sub cmd9_Click(sender As Object, e As EventArgs) Handles cmd9.Click
         AddText("9")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("9")
     End Sub
 
     Private Sub cmdDot_Click(sender As Object, e As EventArgs) Handles cmdDot.Click
         AddText(".")
-    End Sub
-
-    Private Sub cmdPi_Click(sender As Object, e As EventArgs)
-        AddText("pi")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(".")
     End Sub
 
     Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
         AddText("+")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+")
     End Sub
 
     Private Sub cmdMinus_Click(sender As Object, e As EventArgs) Handles cmdMinus.Click
         AddText("-")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("-")
     End Sub
 
     Private Sub cmdMultiply_Click(sender As Object, e As EventArgs) Handles cmdMultiply.Click
         AddText("*")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("*")
     End Sub
 
     Private Sub cmdDivide_Click(sender As Object, e As EventArgs) Handles cmdDivide.Click
         AddText("/")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("/")
     End Sub
 
     Private Sub lstAvailableVariable_DoubleClick(sender As Object, e As EventArgs)
@@ -110,6 +167,7 @@ Public Class dlgCalculator
 
     Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
         AddText("^")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("^")
     End Sub
 
     'Private Sub cmdOpenBracket_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
@@ -125,9 +183,9 @@ Public Class dlgCalculator
     '    txtCalcLine.Focus()
     'End Sub
 
-    Private Sub cmdRowNumbers_Click(sender As Object, e As EventArgs)
-        AddText("(1:nrow(data))")
-    End Sub
+    'Private Sub cmdRowNumbers_Click(sender As Object, e As EventArgs)
+    '    AddText("(1:nrow(data))")
+    'End Sub
 
     'Private Sub ucrBase_clickOK(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
     '    Dim strScript As String
@@ -186,5 +244,25 @@ Public Class dlgCalculator
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForCalculation.GetVariableNames(False))
         ucrBase.OKEnabled(True)
+    End Sub
+
+    Private Sub cmdGreaterThan_Click(sender As Object, e As EventArgs) Handles cmdGreaterThan.Click
+        AddText(">")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(">")
+    End Sub
+
+    Private Sub cmdBackSpace_Click(sender As Object, e As EventArgs) Handles cmdBackSpace.Click
+        AddText("<")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("<")
+    End Sub
+
+    Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
+
+    End Sub
+
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
     End Sub
 End Class
