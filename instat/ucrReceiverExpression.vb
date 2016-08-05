@@ -104,6 +104,7 @@ Public Class ucrReceiverExpression
 
     Public Overrides Sub Clear()
         RemoveSelected()
+        iCurrentPosition = 0
     End Sub
 
     Public Overrides Function IsEmpty() As Boolean
