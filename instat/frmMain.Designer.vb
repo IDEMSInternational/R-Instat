@@ -1780,7 +1780,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameReplaceValues
         '
-        Me.mnuOrganiseDataFrameReplaceValues.Enabled = False
         Me.mnuOrganiseDataFrameReplaceValues.Name = "mnuOrganiseDataFrameReplaceValues"
         Me.mnuOrganiseDataFrameReplaceValues.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameReplaceValues.Tag = "Replace_Values..."
@@ -2078,6 +2077,7 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnTextFindReplace
         '
+        Me.mnuOrganiseColumnTextFindReplace.Enabled = False
         Me.mnuOrganiseColumnTextFindReplace.Name = "mnuOrganiseColumnTextFindReplace"
         Me.mnuOrganiseColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseColumnTextFindReplace.Tag = "Find/Replace..."
