@@ -16,29 +16,94 @@
 
 Imports instat.Translations
 Public Class dlgDescriptiveStatistics
+    Public bFirstLoad As Boolean = True
     Private Sub dlgDescriptiveStatistics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrObjectReceiver.Selector = ucrDataSelector
-        ucrObjectReceiver.SetMeAsReceiver()
-        ucrBase.clsRsyntax.SetFunction("summary")
-        ucrBase.clsRsyntax.iCallType = 2
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
+        End If
         autoTranslate(Me)
-        grpgraphics.Visible = False
+
+
+
     End Sub
 
-    Private Sub chkGraphics_CheckedChanged(sender As Object, e As EventArgs) Handles chkGraphics.CheckedChanged
-        If chkGraphics.Checked = True Then
-            grpgraphics.Visible = True
-        End If
-        If chkGraphics.Checked = False Then
-            grpgraphics.Visible = False
+    Private Sub InitialiseDialog()
+        ucrReceiverDescribeOneVar.Selector = ucrSelectorDescribeOneVar
+        ' ucrBaseDescribeOneVar.clsRsyntax.SetFunction("")
+        ' ucrBaseDescribeOneVar.clsRsyntax.iCallType = 0
+
+        'ucrBase.clsRsyntax.iCallType = 2
+        'ucrBase.clsRsyntax.SetFunction("")
+        'clsModel.SetOperation("~")
+        'ucrResponse.Selector = ucrSelectorSimpleReg
+        'ucrExplanatory.Selector = ucrSelectorSimpleReg
+        'ucrBase.iHelpTopicID = 171
+        'ucrFamily.SetGLMDistributions()
+        'ucrModelName.SetDataFrameSelector(ucrSelectorSimpleReg.ucrAvailableDataFrames)
+        'ucrModelName.SetPrefix("reg")
+        'ucrModelName.SetItemsTypeAsModels()
+        'ucrModelName.SetDefaultTypeAsModel()
+        'ucrModelName.SetValidationTypeAsRVariable()
+        'ucrModelPreview.IsReadOnly = True
+        'sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+        'sdgSimpleRegOptions.SetRDataFrame(ucrSelectorSimpleReg.ucrAvailableDataFrames)
+        'sdgSimpleRegOptions.SetRYVariable(ucrResponse)
+        'sdgSimpleRegOptions.SetRXVariable(ucrExplanatory)
+        'sdgVariableTransformations.SetRYVariable(ucrResponse)
+        'sdgVariableTransformations.SetRXVariable(ucrExplanatory)
+        'sdgVariableTransformations.SetRModelOperator(clsModel)
+        'sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        'sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
+        'AssignModelName()
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub SetDefaults()
+        ucrReceiverDescribeOneVar.SetMeAsReceiver()
+        sdgDescribe.SetDefaults()
+        'ucrSelectorSimpleReg.Reset()
+        'ucrResponse.SetMeAsReceiver()
+        'ucrSelectorSimpleReg.Focus()
+        'chkSaveModel.Checked = True
+        'ucrModelName.Visible = True
+        'chkConvertToVariate.Checked = False
+        'chkConvertToVariate.Visible = False
+        'chkFunction.Checked = False
+        'chkFunction.Visible = False
+        'sdgSimpleRegOptions.SetDefaults()
+        'sdgModelOptions.SetDefaults()
+        'ucrModelName.Reset()
+        'ucrModelPreview.SetName("")
+        'ResponseConvert()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverDescribeOneVar.IsEmpty() Then
+            'ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
+            ucrBaseDescribeOneVar.OKEnabled(True)
+        Else
+            ucrBaseDescribeOneVar.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrObjectReceiver_Leave(sender As Object, e As EventArgs) Handles ucrObjectReceiver.Leave
-        ucrBase.clsRsyntax.AddParameter("object", clsRFunctionParameter:=ucrObjectReceiver.GetVariables())
+    Public Sub ucrReceiverDescribeOneVar_selectionchanged() Handles ucrReceiverDescribeOneVar.SelectionChanged
+        TestOKEnabled()
+        'ucrBaseDescribeOneVar.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverDescribeOneVar.GetVariables())
+    End Sub
+
+    Private Sub cmdStatistics_Click(sender As Object, e As EventArgs) Handles cmdStatistics.Click
+        sdgDescribe.ShowDialog()
+    End Sub
+
+    Private Sub ucrBaseDescribeOneVar_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseDescribeOneVar.ClickOk
+        sdgDescribe.StatsOptions()
     End Sub
 End Class
-
-
-
-
