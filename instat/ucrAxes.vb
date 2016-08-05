@@ -19,6 +19,8 @@ Public Class ucrAxes
     Public clsRsyntax As New RSyntax
     Public clsRggplotFunction As New RFunction
     Public clsTitleFunction As New RFunction
+    Public clsScale_x_continuousFunction As New RFunction
+    Public clsScale_y_continuousFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
     Private Sub ucrAxes_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -106,6 +108,8 @@ Public Class ucrAxes
     Public Sub SetXorY(bIsX)
         If bIsX = True Then
             clsTitleFunction.SetRCommand("xlab")
+            clsTitleFunction.AddParameter("scale_x_continuous", clsRFunctionParameter:=clsScale_x_continuousFunction)
+
             ' put scale_x_continuous function here
         ElseIf bIsX = False Then
             clsTitleFunction.SetRCommand("ylab")
@@ -183,5 +187,32 @@ Public Class ucrAxes
 
     Private Sub rdoTickMarkersCustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoTickMarkersCustom.CheckedChanged
         TickMarkersDefaults()
+    End Sub
+
+    Private Sub nudLowerLimit_TextChanged(sender As Object, e As EventArgs) Handles nudLowerLimit.TextChanged
+        'If nudLowerLimit.Text <> "" Then
+        '    clsScale_x_continuousFunction.AddParameter("limits", nudLowerLimit.Value)
+        'Else
+        '    clsScale_x_continuousFunction.RemoveParameterByName("limits")
+        'End If
+    End Sub
+
+    Private Sub nudUpperLimit_TextChanged(sender As Object, e As EventArgs) Handles nudUpperLimit.TextChanged
+        'If nudUpperLimit.Text <> "" Then
+        '    clsScale_x_continuousFunction.AddParameter("limits", nudUpperLimit.Value)
+        'Else
+        '    clsScale_x_continuousFunction.RemoveParameterByName("limits")
+        'End If
+    End Sub
+
+    Private Sub nudScalesNoOfDecimalPlaces_TextChanged(sender As Object, e As EventArgs) Handles nudScalesNoOfDecimalPlaces.TextChanged
+        nudUpperLimit.DecimalPlaces = nudScalesNoOfDecimalPlaces.Value
+        nudLowerLimit.DecimalPlaces = nudScalesNoOfDecimalPlaces.Value
+    End Sub
+
+    Private Sub nudTickMarkersNoOfDecimalPlaces_TextChanged(sender As Object, e As EventArgs) Handles nudTickMarkersNoOfDecimalPlaces.TextChanged
+        nudFrom.DecimalPlaces = nudTickMarkersNoOfDecimalPlaces.Value
+        nudTo.DecimalPlaces = nudTickMarkersNoOfDecimalPlaces.Value
+        nudInStepsOf.DecimalPlaces = nudTickMarkersNoOfDecimalPlaces.Value
     End Sub
 End Class
