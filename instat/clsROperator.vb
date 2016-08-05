@@ -136,7 +136,7 @@ Public Class ROperator
             If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                 clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                If bAssignToColumnWithoutNames Then
+                If Not bAssignToColumnWithoutNames Then
                     clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
                 End If
                 clsAddColumns.AddParameter("col_data", strAssignTo)
