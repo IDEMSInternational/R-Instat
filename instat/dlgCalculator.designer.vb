@@ -22,7 +22,6 @@ Partial Class dlgCalculator
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.txtCalcLine = New System.Windows.Forms.TextBox()
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd2 = New System.Windows.Forms.Button()
@@ -32,295 +31,301 @@ Partial Class dlgCalculator
         Me.cmd6 = New System.Windows.Forms.Button()
         Me.cmd7 = New System.Windows.Forms.Button()
         Me.cmd8 = New System.Windows.Forms.Button()
-        Me.btn9 = New System.Windows.Forms.Button()
+        Me.cmd9 = New System.Windows.Forms.Button()
         Me.cmdDot = New System.Windows.Forms.Button()
-        Me.cmdPi = New System.Windows.Forms.Button()
         Me.cmdDivide = New System.Windows.Forms.Button()
         Me.cmdPlus = New System.Windows.Forms.Button()
         Me.cmdMinus = New System.Windows.Forms.Button()
         Me.cmdMultiply = New System.Windows.Forms.Button()
-        Me.cmdRowNumbers = New System.Windows.Forms.Button()
         Me.cmdPower = New System.Windows.Forms.Button()
-        Me.cmdOpenBracket = New System.Windows.Forms.Button()
-        Me.cmdCloseBracket = New System.Windows.Forms.Button()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
-        Me.txtNewColumnName = New System.Windows.Forms.TextBox()
+        Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdBackSpace = New System.Windows.Forms.Button()
-        Me.cmdLog10 = New System.Windows.Forms.Button()
-        Me.cmdSqrt = New System.Windows.Forms.Button()
-        Me.cmdExp = New System.Windows.Forms.Button()
+        Me.lblExpression = New System.Windows.Forms.Label()
+        Me.cmdTry = New System.Windows.Forms.Button()
+        Me.chkSaveResultInto = New System.Windows.Forms.CheckBox()
+        Me.chkDefaultCalculationName = New System.Windows.Forms.CheckBox()
+        Me.cmdGreaterThan = New System.Windows.Forms.Button()
+        Me.ucrSaveResultInto = New instat.ucrInputComboBox()
+        Me.ucrSpaceToMangeResult = New instat.ucrInputTextBox()
+        Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.SuspendLayout()
-        '
-        'txtCalcLine
-        '
-        Me.txtCalcLine.Location = New System.Drawing.Point(16, 23)
-        Me.txtCalcLine.Name = "txtCalcLine"
-        Me.txtCalcLine.Size = New System.Drawing.Size(404, 20)
-        Me.txtCalcLine.TabIndex = 79
         '
         'cmd1
         '
-        Me.cmd1.Location = New System.Drawing.Point(29, 150)
+        Me.cmd1.Location = New System.Drawing.Point(226, 123)
         Me.cmd1.Name = "cmd1"
-        Me.cmd1.Size = New System.Drawing.Size(40, 40)
+        Me.cmd1.Size = New System.Drawing.Size(29, 31)
         Me.cmd1.TabIndex = 80
         Me.cmd1.Text = "1"
         Me.cmd1.UseVisualStyleBackColor = True
         '
         'cmd0
         '
-        Me.cmd0.Location = New System.Drawing.Point(29, 196)
+        Me.cmd0.Location = New System.Drawing.Point(226, 155)
         Me.cmd0.Name = "cmd0"
-        Me.cmd0.Size = New System.Drawing.Size(40, 40)
+        Me.cmd0.Size = New System.Drawing.Size(60, 30)
         Me.cmd0.TabIndex = 81
         Me.cmd0.Text = "0"
         Me.cmd0.UseVisualStyleBackColor = True
         '
         'cmd2
         '
-        Me.cmd2.Location = New System.Drawing.Point(75, 150)
+        Me.cmd2.Location = New System.Drawing.Point(258, 123)
         Me.cmd2.Name = "cmd2"
-        Me.cmd2.Size = New System.Drawing.Size(40, 40)
+        Me.cmd2.Size = New System.Drawing.Size(28, 31)
         Me.cmd2.TabIndex = 82
         Me.cmd2.Text = "2"
         Me.cmd2.UseVisualStyleBackColor = True
         '
         'cmd3
         '
-        Me.cmd3.Location = New System.Drawing.Point(121, 150)
+        Me.cmd3.Location = New System.Drawing.Point(288, 123)
         Me.cmd3.Name = "cmd3"
-        Me.cmd3.Size = New System.Drawing.Size(40, 40)
+        Me.cmd3.Size = New System.Drawing.Size(30, 31)
         Me.cmd3.TabIndex = 83
         Me.cmd3.Text = "3"
         Me.cmd3.UseVisualStyleBackColor = True
         '
         'cmd4
         '
-        Me.cmd4.Location = New System.Drawing.Point(29, 104)
+        Me.cmd4.Location = New System.Drawing.Point(226, 90)
         Me.cmd4.Name = "cmd4"
-        Me.cmd4.Size = New System.Drawing.Size(40, 40)
+        Me.cmd4.Size = New System.Drawing.Size(29, 32)
         Me.cmd4.TabIndex = 84
         Me.cmd4.Text = "4"
         Me.cmd4.UseVisualStyleBackColor = True
         '
         'cmd5
         '
-        Me.cmd5.Location = New System.Drawing.Point(75, 104)
+        Me.cmd5.Location = New System.Drawing.Point(258, 90)
         Me.cmd5.Name = "cmd5"
-        Me.cmd5.Size = New System.Drawing.Size(40, 40)
+        Me.cmd5.Size = New System.Drawing.Size(28, 32)
         Me.cmd5.TabIndex = 85
         Me.cmd5.Text = "5"
         Me.cmd5.UseVisualStyleBackColor = True
         '
         'cmd6
         '
-        Me.cmd6.Location = New System.Drawing.Point(121, 104)
+        Me.cmd6.Location = New System.Drawing.Point(288, 90)
         Me.cmd6.Name = "cmd6"
-        Me.cmd6.Size = New System.Drawing.Size(40, 40)
+        Me.cmd6.Size = New System.Drawing.Size(30, 32)
         Me.cmd6.TabIndex = 86
         Me.cmd6.Text = "6"
         Me.cmd6.UseVisualStyleBackColor = True
         '
         'cmd7
         '
-        Me.cmd7.Location = New System.Drawing.Point(29, 58)
+        Me.cmd7.Location = New System.Drawing.Point(226, 58)
         Me.cmd7.Name = "cmd7"
-        Me.cmd7.Size = New System.Drawing.Size(40, 40)
+        Me.cmd7.Size = New System.Drawing.Size(29, 30)
         Me.cmd7.TabIndex = 87
         Me.cmd7.Text = "7"
         Me.cmd7.UseVisualStyleBackColor = True
         '
         'cmd8
         '
-        Me.cmd8.Location = New System.Drawing.Point(75, 58)
+        Me.cmd8.Location = New System.Drawing.Point(258, 58)
         Me.cmd8.Name = "cmd8"
-        Me.cmd8.Size = New System.Drawing.Size(40, 40)
+        Me.cmd8.Size = New System.Drawing.Size(28, 30)
         Me.cmd8.TabIndex = 88
         Me.cmd8.Text = "8"
         Me.cmd8.UseVisualStyleBackColor = True
         '
-        'btn9
+        'cmd9
         '
-        Me.btn9.Location = New System.Drawing.Point(121, 58)
-        Me.btn9.Name = "btn9"
-        Me.btn9.Size = New System.Drawing.Size(40, 40)
-        Me.btn9.TabIndex = 89
-        Me.btn9.Text = "9"
-        Me.btn9.UseVisualStyleBackColor = True
+        Me.cmd9.Location = New System.Drawing.Point(288, 58)
+        Me.cmd9.Name = "cmd9"
+        Me.cmd9.Size = New System.Drawing.Size(30, 30)
+        Me.cmd9.TabIndex = 89
+        Me.cmd9.Text = "9"
+        Me.cmd9.UseVisualStyleBackColor = True
         '
         'cmdDot
         '
-        Me.cmdDot.Location = New System.Drawing.Point(75, 196)
+        Me.cmdDot.Location = New System.Drawing.Point(349, 58)
         Me.cmdDot.Name = "cmdDot"
-        Me.cmdDot.Size = New System.Drawing.Size(40, 40)
+        Me.cmdDot.Size = New System.Drawing.Size(26, 30)
         Me.cmdDot.TabIndex = 90
         Me.cmdDot.Text = "."
         Me.cmdDot.UseVisualStyleBackColor = True
         '
-        'cmdPi
-        '
-        Me.cmdPi.Location = New System.Drawing.Point(121, 196)
-        Me.cmdPi.Name = "cmdPi"
-        Me.cmdPi.Size = New System.Drawing.Size(40, 40)
-        Me.cmdPi.TabIndex = 91
-        Me.cmdPi.Text = "Pi"
-        Me.cmdPi.UseVisualStyleBackColor = True
-        '
         'cmdDivide
         '
-        Me.cmdDivide.Location = New System.Drawing.Point(167, 196)
+        Me.cmdDivide.Location = New System.Drawing.Point(320, 58)
         Me.cmdDivide.Name = "cmdDivide"
-        Me.cmdDivide.Size = New System.Drawing.Size(40, 40)
+        Me.cmdDivide.Size = New System.Drawing.Size(27, 30)
         Me.cmdDivide.TabIndex = 95
         Me.cmdDivide.Text = "/"
         Me.cmdDivide.UseVisualStyleBackColor = True
         '
         'cmdPlus
         '
-        Me.cmdPlus.Location = New System.Drawing.Point(167, 58)
+        Me.cmdPlus.Location = New System.Drawing.Point(320, 155)
         Me.cmdPlus.Name = "cmdPlus"
-        Me.cmdPlus.Size = New System.Drawing.Size(40, 40)
+        Me.cmdPlus.Size = New System.Drawing.Size(27, 30)
         Me.cmdPlus.TabIndex = 94
         Me.cmdPlus.Text = "+"
         Me.cmdPlus.UseVisualStyleBackColor = True
         '
         'cmdMinus
         '
-        Me.cmdMinus.Location = New System.Drawing.Point(167, 104)
+        Me.cmdMinus.Location = New System.Drawing.Point(320, 123)
         Me.cmdMinus.Name = "cmdMinus"
-        Me.cmdMinus.Size = New System.Drawing.Size(40, 40)
+        Me.cmdMinus.Size = New System.Drawing.Size(27, 31)
         Me.cmdMinus.TabIndex = 93
         Me.cmdMinus.Text = "-"
         Me.cmdMinus.UseVisualStyleBackColor = True
         '
         'cmdMultiply
         '
-        Me.cmdMultiply.Location = New System.Drawing.Point(167, 150)
+        Me.cmdMultiply.Location = New System.Drawing.Point(320, 90)
         Me.cmdMultiply.Name = "cmdMultiply"
-        Me.cmdMultiply.Size = New System.Drawing.Size(40, 40)
+        Me.cmdMultiply.Size = New System.Drawing.Size(27, 32)
         Me.cmdMultiply.TabIndex = 92
         Me.cmdMultiply.Text = "*"
         Me.cmdMultiply.UseVisualStyleBackColor = True
         '
-        'cmdRowNumbers
-        '
-        Me.cmdRowNumbers.Location = New System.Drawing.Point(213, 196)
-        Me.cmdRowNumbers.Name = "cmdRowNumbers"
-        Me.cmdRowNumbers.Size = New System.Drawing.Size(40, 40)
-        Me.cmdRowNumbers.TabIndex = 99
-        Me.cmdRowNumbers.Text = "Row Num"
-        Me.cmdRowNumbers.UseVisualStyleBackColor = True
-        '
         'cmdPower
         '
-        Me.cmdPower.Location = New System.Drawing.Point(213, 58)
+        Me.cmdPower.Location = New System.Drawing.Point(349, 155)
         Me.cmdPower.Name = "cmdPower"
-        Me.cmdPower.Size = New System.Drawing.Size(40, 40)
+        Me.cmdPower.Size = New System.Drawing.Size(26, 30)
         Me.cmdPower.TabIndex = 98
         Me.cmdPower.Text = "^"
         Me.cmdPower.UseVisualStyleBackColor = True
         '
-        'cmdOpenBracket
+        'cmdDelete
         '
-        Me.cmdOpenBracket.Location = New System.Drawing.Point(213, 104)
-        Me.cmdOpenBracket.Name = "cmdOpenBracket"
-        Me.cmdOpenBracket.Size = New System.Drawing.Size(40, 40)
-        Me.cmdOpenBracket.TabIndex = 97
-        Me.cmdOpenBracket.Text = "("
-        Me.cmdOpenBracket.UseVisualStyleBackColor = True
-        '
-        'cmdCloseBracket
-        '
-        Me.cmdCloseBracket.Location = New System.Drawing.Point(213, 150)
-        Me.cmdCloseBracket.Name = "cmdCloseBracket"
-        Me.cmdCloseBracket.Size = New System.Drawing.Size(40, 40)
-        Me.cmdCloseBracket.TabIndex = 96
-        Me.cmdCloseBracket.Text = ")"
-        Me.cmdCloseBracket.UseVisualStyleBackColor = True
-        '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(26, 256)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 100
-        Me.lblNewColumnName.Tag = "New_Column_Name"
-        Me.lblNewColumnName.Text = "New Column Name:"
-        '
-        'txtNewColumnName
-        '
-        Me.txtNewColumnName.Location = New System.Drawing.Point(133, 253)
-        Me.txtNewColumnName.Name = "txtNewColumnName"
-        Me.txtNewColumnName.Size = New System.Drawing.Size(120, 20)
-        Me.txtNewColumnName.TabIndex = 101
+        Me.cmdDelete.Location = New System.Drawing.Point(288, 155)
+        Me.cmdDelete.Name = "cmdDelete"
+        Me.cmdDelete.Size = New System.Drawing.Size(30, 30)
+        Me.cmdDelete.TabIndex = 97
+        Me.cmdDelete.Tag = "Del"
+        Me.cmdDelete.Text = "Del"
+        Me.cmdDelete.UseVisualStyleBackColor = True
         '
         'cmdBackSpace
         '
-        Me.cmdBackSpace.Location = New System.Drawing.Point(259, 58)
+        Me.cmdBackSpace.Location = New System.Drawing.Point(349, 90)
         Me.cmdBackSpace.Name = "cmdBackSpace"
-        Me.cmdBackSpace.Size = New System.Drawing.Size(61, 40)
+        Me.cmdBackSpace.Size = New System.Drawing.Size(26, 32)
         Me.cmdBackSpace.TabIndex = 102
         Me.cmdBackSpace.Text = "<"
         Me.cmdBackSpace.UseVisualStyleBackColor = True
         '
-        'cmdLog10
+        'lblExpression
         '
-        Me.cmdLog10.Location = New System.Drawing.Point(259, 196)
-        Me.cmdLog10.Name = "cmdLog10"
-        Me.cmdLog10.Size = New System.Drawing.Size(61, 40)
-        Me.cmdLog10.TabIndex = 105
-        Me.cmdLog10.Text = "log10"
-        Me.cmdLog10.UseVisualStyleBackColor = True
+        Me.lblExpression.AutoSize = True
+        Me.lblExpression.Location = New System.Drawing.Point(12, 17)
+        Me.lblExpression.Name = "lblExpression"
+        Me.lblExpression.Size = New System.Drawing.Size(58, 13)
+        Me.lblExpression.TabIndex = 107
+        Me.lblExpression.Tag = "Expression"
+        Me.lblExpression.Text = "Expression"
         '
-        'cmdSqrt
+        'cmdTry
         '
-        Me.cmdSqrt.Location = New System.Drawing.Point(259, 104)
-        Me.cmdSqrt.Name = "cmdSqrt"
-        Me.cmdSqrt.Size = New System.Drawing.Size(61, 40)
-        Me.cmdSqrt.TabIndex = 104
-        Me.cmdSqrt.Text = "sqrt"
-        Me.cmdSqrt.UseVisualStyleBackColor = True
+        Me.cmdTry.Location = New System.Drawing.Point(9, 228)
+        Me.cmdTry.Name = "cmdTry"
+        Me.cmdTry.Size = New System.Drawing.Size(75, 23)
+        Me.cmdTry.TabIndex = 110
+        Me.cmdTry.Text = "Try"
+        Me.cmdTry.UseVisualStyleBackColor = True
         '
-        'cmdExp
+        'chkSaveResultInto
         '
-        Me.cmdExp.Location = New System.Drawing.Point(259, 150)
-        Me.cmdExp.Name = "cmdExp"
-        Me.cmdExp.Size = New System.Drawing.Size(61, 40)
-        Me.cmdExp.TabIndex = 103
-        Me.cmdExp.Text = "exp"
-        Me.cmdExp.UseVisualStyleBackColor = True
+        Me.chkSaveResultInto.AutoSize = True
+        Me.chkSaveResultInto.Location = New System.Drawing.Point(9, 260)
+        Me.chkSaveResultInto.Name = "chkSaveResultInto"
+        Me.chkSaveResultInto.Size = New System.Drawing.Size(104, 17)
+        Me.chkSaveResultInto.TabIndex = 113
+        Me.chkSaveResultInto.Text = "Save Result into"
+        Me.chkSaveResultInto.UseVisualStyleBackColor = True
+        '
+        'chkDefaultCalculationName
+        '
+        Me.chkDefaultCalculationName.AutoSize = True
+        Me.chkDefaultCalculationName.Location = New System.Drawing.Point(9, 283)
+        Me.chkDefaultCalculationName.Name = "chkDefaultCalculationName"
+        Me.chkDefaultCalculationName.Size = New System.Drawing.Size(144, 17)
+        Me.chkDefaultCalculationName.TabIndex = 115
+        Me.chkDefaultCalculationName.Text = "Default Calculation name"
+        Me.chkDefaultCalculationName.UseVisualStyleBackColor = True
+        '
+        'cmdGreaterThan
+        '
+        Me.cmdGreaterThan.Location = New System.Drawing.Point(349, 123)
+        Me.cmdGreaterThan.Name = "cmdGreaterThan"
+        Me.cmdGreaterThan.Size = New System.Drawing.Size(26, 31)
+        Me.cmdGreaterThan.TabIndex = 116
+        Me.cmdGreaterThan.Text = ">"
+        Me.cmdGreaterThan.UseVisualStyleBackColor = True
+        '
+        'ucrSaveResultInto
+        '
+        Me.ucrSaveResultInto.IsReadOnly = False
+        Me.ucrSaveResultInto.Location = New System.Drawing.Point(119, 257)
+        Me.ucrSaveResultInto.Name = "ucrSaveResultInto"
+        Me.ucrSaveResultInto.Size = New System.Drawing.Size(256, 21)
+        Me.ucrSaveResultInto.TabIndex = 117
+        '
+        'ucrSpaceToMangeResult
+        '
+        Me.ucrSpaceToMangeResult.IsReadOnly = False
+        Me.ucrSpaceToMangeResult.Location = New System.Drawing.Point(91, 229)
+        Me.ucrSpaceToMangeResult.Name = "ucrSpaceToMangeResult"
+        Me.ucrSpaceToMangeResult.Size = New System.Drawing.Size(284, 21)
+        Me.ucrSpaceToMangeResult.TabIndex = 111
+        '
+        'ucrSelectorForCalculations
+        '
+        Me.ucrSelectorForCalculations.bShowHiddenColumns = False
+        Me.ucrSelectorForCalculations.Location = New System.Drawing.Point(9, 36)
+        Me.ucrSelectorForCalculations.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForCalculations.Name = "ucrSelectorForCalculations"
+        Me.ucrSelectorForCalculations.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForCalculations.TabIndex = 106
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(16, 281)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 306)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(404, 50)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrReceiverForCalculation
+        '
+        Me.ucrReceiverForCalculation.Location = New System.Drawing.Point(90, 16)
+        Me.ucrReceiverForCalculation.Name = "ucrReceiverForCalculation"
+        Me.ucrReceiverForCalculation.Selector = Nothing
+        Me.ucrReceiverForCalculation.Size = New System.Drawing.Size(284, 20)
+        Me.ucrReceiverForCalculation.TabIndex = 118
         '
         'dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(438, 337)
-        Me.Controls.Add(Me.cmdLog10)
-        Me.Controls.Add(Me.cmdSqrt)
-        Me.Controls.Add(Me.cmdExp)
+        Me.ClientSize = New System.Drawing.Size(505, 363)
+        Me.Controls.Add(Me.ucrReceiverForCalculation)
+        Me.Controls.Add(Me.ucrSaveResultInto)
+        Me.Controls.Add(Me.cmdGreaterThan)
+        Me.Controls.Add(Me.chkDefaultCalculationName)
+        Me.Controls.Add(Me.chkSaveResultInto)
+        Me.Controls.Add(Me.ucrSpaceToMangeResult)
+        Me.Controls.Add(Me.cmdTry)
+        Me.Controls.Add(Me.lblExpression)
+        Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.cmdBackSpace)
-        Me.Controls.Add(Me.txtNewColumnName)
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.cmdRowNumbers)
         Me.Controls.Add(Me.cmdPower)
-        Me.Controls.Add(Me.cmdOpenBracket)
-        Me.Controls.Add(Me.cmdCloseBracket)
+        Me.Controls.Add(Me.cmdDelete)
         Me.Controls.Add(Me.cmdDivide)
         Me.Controls.Add(Me.cmdPlus)
         Me.Controls.Add(Me.cmdMinus)
         Me.Controls.Add(Me.cmdMultiply)
-        Me.Controls.Add(Me.cmdPi)
         Me.Controls.Add(Me.cmdDot)
-        Me.Controls.Add(Me.btn9)
+        Me.Controls.Add(Me.cmd9)
         Me.Controls.Add(Me.cmd8)
         Me.Controls.Add(Me.cmd7)
         Me.Controls.Add(Me.cmd6)
@@ -330,21 +335,19 @@ Partial Class dlgCalculator
         Me.Controls.Add(Me.cmd2)
         Me.Controls.Add(Me.cmd0)
         Me.Controls.Add(Me.cmd1)
-        Me.Controls.Add(Me.txtCalcLine)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgCalculator"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Calculator"
-        Me.Text = "Calculator"
+        Me.Tag = "Calculations"
+        Me.Text = "Calculations"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents txtCalcLine As TextBox
     Friend WithEvents cmd1 As Button
     Friend WithEvents cmd0 As Button
     Friend WithEvents cmd2 As Button
@@ -354,21 +357,22 @@ Partial Class dlgCalculator
     Friend WithEvents cmd6 As Button
     Friend WithEvents cmd7 As Button
     Friend WithEvents cmd8 As Button
-    Friend WithEvents btn9 As Button
+    Friend WithEvents cmd9 As Button
     Friend WithEvents cmdDot As Button
-    Friend WithEvents cmdPi As Button
     Friend WithEvents cmdDivide As Button
     Friend WithEvents cmdPlus As Button
     Friend WithEvents cmdMinus As Button
     Friend WithEvents cmdMultiply As Button
-    Friend WithEvents cmdRowNumbers As Button
     Friend WithEvents cmdPower As Button
-    Friend WithEvents cmdOpenBracket As Button
-    Friend WithEvents cmdCloseBracket As Button
-    Friend WithEvents lblNewColumnName As Label
-    Friend WithEvents txtNewColumnName As TextBox
+    Friend WithEvents cmdDelete As Button
     Friend WithEvents cmdBackSpace As Button
-    Friend WithEvents cmdLog10 As Button
-    Friend WithEvents cmdSqrt As Button
-    Friend WithEvents cmdExp As Button
+    Friend WithEvents ucrSelectorForCalculations As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents lblExpression As Label
+    Friend WithEvents cmdTry As Button
+    Friend WithEvents ucrSpaceToMangeResult As ucrInputTextBox
+    Friend WithEvents chkSaveResultInto As CheckBox
+    Friend WithEvents chkDefaultCalculationName As CheckBox
+    Friend WithEvents cmdGreaterThan As Button
+    Friend WithEvents ucrSaveResultInto As ucrInputComboBox
+    Friend WithEvents ucrReceiverForCalculation As ucrReceiverExpression
 End Class
