@@ -109,6 +109,7 @@ Partial Class dlgCumulativeDistribution
         '
         'ucrCumDistSelector
         '
+        Me.ucrCumDistSelector.bShowHiddenColumns = False
         Me.ucrCumDistSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrCumDistSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCumDistSelector.Name = "ucrCumDistSelector"

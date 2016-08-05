@@ -39,8 +39,7 @@ Public Class ucrAxes
     End Sub
 
     Private Sub InitialiseControl()
-        ucrTickMarkers.cboInput.Items.Add("Interval")
-        ucrTickMarkers.cboInput.Items.Add("Specific Values")
+        ucrTickMarkers.cboInput.Items.Add({"Interval", "Specific Values"})
         ucrTickMarkers.SetName("Interval")
         TitleDefaults()
         ScalesDefaults()
@@ -162,5 +161,27 @@ Public Class ucrAxes
         TitleFunction()
     End Sub
 
+    Private Sub rdoTitleCustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoTitleCustom.CheckedChanged
+        TitleDefaults()
+    End Sub
 
+    Private Sub rdoTitleAuto_CheckedChanged(sender As Object, e As EventArgs) Handles rdoTitleAuto.CheckedChanged
+        TitleDefaults()
+    End Sub
+
+    Private Sub rdoScalesCustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScalesCustom.CheckedChanged
+        ScalesDefaults()
+    End Sub
+
+    Private Sub rdoScalesAuto_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScalesAuto.CheckedChanged
+        ScalesDefaults()
+    End Sub
+
+    Private Sub rdoTickMarkersAuto_CheckedChanged(sender As Object, e As EventArgs) Handles rdoTickMarkersAuto.CheckedChanged
+        TickMarkersDefaults()
+    End Sub
+
+    Private Sub rdoTickMarkersCustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoTickMarkersCustom.CheckedChanged
+        TickMarkersDefaults()
+    End Sub
 End Class
