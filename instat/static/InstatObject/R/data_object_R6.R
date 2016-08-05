@@ -249,7 +249,6 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
         if(length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(as.character(col_attributes[[att_name]]), collapse = ",")
       }
       if(is.null(col_attributes)) {
-        print(names(private$data[[i]]))
         col_attributes <- data.frame(class = NA)
       }
       #if(names(private$data)[i] == "summary_max_Field") print(col_attributes)
@@ -488,19 +487,12 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
   for(col_name in col_names) {
     str_data_type <- self$get_variables_metadata(property = data_type_label, column = col_name)
     if(str_data_type == "factor") {
-      if(!is.na(new_value) && !(new_value %in% levels(private$data[[col_name]]))) {
-        stop("new_value must be an existing level of the factor column: ", col_name, ".")
-      }
-      if(!missing(rows)) {
-        replace_rows <- (row.names(private$data) %in% rows)
-        if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
-      }
-      else replace_rows <- (private$data[[col_name]] == old_value)
+      self$edit_factor_level(col_name = col_name, old_level = old_value, new_level = new_value)
     }
     else if(str_data_type == "integer" || str_data_type == "numeric") {
       if(!is.na(new_value)) {
-        if(str_data_type == "integer" && !(new_value %% 1 == 0)) stop(col_name, "is an integer column. new_value must be an integer")
-        if(str_data_type == "numeric" && !is.numeric(new_value)) stop(col_name, "is a numeric column. new_value must be numeric")
+        if(str_data_type == "integer" && !(as.integer(new_value) %% 1 == 0)) stop(col_name, " is an integer column. new_value must be an integer")
+        if(str_data_type == "numeric" && !is.numeric(as.numeric(new_value))) stop(col_name, " is a numeric column. new_value must be numeric")
       }
       if(!missing(rows)) {
         replace_rows <- (row.names(private$data) %in% rows)
@@ -525,6 +517,14 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
           }
         }
         else {
+          if(str_data_type == "integer"){
+            old_value = as.integer(old_value)
+            new_value = as.integer(new_value)
+          }
+          if(str_data_type == "numeric"){
+            old_value = as.numeric(old_value)
+            new_value = as.numeric(new_value)
+          }
           replace_rows <- (private$data[[col_name]] == old_value)
         }
       }
@@ -539,7 +539,7 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
       new_value <- as.character(new_value)
     }
     else if(str_data_type == "logical") {
-      if(!is.logical(new_value)) stop(col_name, "is a logical column. new_value must be a logical value")
+      if(!is.logical(new_value)) stop(col_name, " is a logical column. new_value must be a logical value")
       if(!missing(rows)) {
         replace_rows <- (row.names(private$data) %in% rows)
         if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
@@ -554,7 +554,7 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
       }
       else replace_rows <- (private$data[[col_name]] == old_value)
     }
-    private$data[[col_name]][replace_rows] <- new_value
+    if(str_data_type != "factor")(private$data[[col_name]][replace_rows] <- new_value)
   }
   #TODO need to think what to add to changes
   self$append_to_changes(list(Replaced_value, col_names))
@@ -665,7 +665,9 @@ data_object$set("public", "add_defaults_meta", function() {
 
 data_object$set("public", "add_defaults_variables_metadata", function() {
   invisible(sapply(colnames(private$data), function(x) self$append_to_variables_metadata(x, name_label, x)))
-  self$append_to_variables_metadata(property = is_hidden_label, new_val = FALSE)
+  for(column in colnames(private$data)) {
+    if(!self$is_variables_metadata(is_hidden_label, column)) self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
+  }
 }
 )
 
@@ -768,27 +770,26 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
   string = list()
   if(missing(col_names) || length(col_names) == 0) {
     if(by_row_names) {
-      if(row_names_as_numeric) {
-        self$set_data(private$data[order(as.numeric(row.names(private$data)), decreasing = decreasing),])
-      }
-      else {
-        self$set_data(private$data[order(row.names(private$data), decreasing = decreasing),])
-      }
+      if(row_names_as_numeric) row_names_sort <- as.numeric(row.names(private$data))
+      else row_names_sort <- row.names(private$data)
+      if(decreasing) self$set_data(arrange(private$data, desc(row_names_sort)))
+      else self$set_data(arrange(private$data, row_names_sort))
     }
     else message("No sorting to be done.")
   }
   else {
+    col_names_exp = c()
+    i = 1
     for(col_name in col_names){
       if(!(col_name %in% names(private$data))){
         stop(col_name, " is not a column in ", get_metadata(data_name_label))
       }
+      if(decreasing) col_names_exp[[i]] <- interp(~ desc(var), var = as.name(col_name))
+      else col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
+      i = i + 1
     }
     if(by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
-    if(length(col_names)==1){
-      self$set_data(private$data[with(private$data, order(eval(parse(text = col_names)), decreasing = decreasing, na.last = na.last)), ])
-    }else{
-      self$set_data(private$data[ do.call(order, c(as.list(private$data[,col_names]), decreasing = decreasing, na.last = na.last)), ])
-    }
+    self$set_data(arrange_(private$data, .dots = col_names_exp))
   }
   self$data_changed <- TRUE
 }
@@ -877,6 +878,16 @@ data_object$set("public", "set_factor_levels", function(col_name, new_levels) {
   self$variables_metadata_changed <- TRUE
 } 
 )
+
+data_object$set("public", "edit_factor_level", function(col_name, old_level, new_level) {
+  if(!col_name %in% names(private$data)) stop(paste(col_name,"not found in data."))
+  if(!is.factor(private$data[[col_name]])) stop(paste(col_name,"is not a factor."))
+  private$data[[col_name]] <- plyr::mapvalues(x = private$data[[col_name]], from = old_level, to = new_level)
+  self$data_changed <- TRUE
+  self$variables_metadata_changed <- TRUE
+} 
+)
+
 
 data_object$set("public", "set_factor_reference_level", function(col_name, new_ref_level) {
   if(!col_name %in% names(private$data)) stop(paste(col_name,"not found in data."))
@@ -1275,7 +1286,6 @@ data_object$set("public", "add_dependent_columns", function(columns, dependent_c
           curr_dependents[[data_frame]] <- union(curr_dependents[[data_frame]], dependent_cols[[data_frame]])
         }
         else {
-          print("no")
           curr_dependents[[data_frame]] <- dependent_cols[[data_frame]]
         }
       }

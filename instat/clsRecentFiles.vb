@@ -48,7 +48,7 @@ Public Class clsRecentFiles
         If strListMRU.Count > 0 Then UpdateItemsMenu()
     End Sub
 
-    Public Sub saveOnClose(ByVal e As FormClosingEventArgs)
+    Public Sub saveOnClose()
         'saves the list of opened files on form close
         ' save MRU - delete existing files first
         If File.Exists(MRUPath) Then File.Delete(MRUPath)

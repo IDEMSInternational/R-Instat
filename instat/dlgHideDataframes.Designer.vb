@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgFont
+Partial Class dlgHideDataframes
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,19 +22,41 @@ Partial Class dlgFont
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrDataframeHide = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
-        'dlgFont
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 70)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(403, 52)
+        Me.ucrBase.TabIndex = 0
+        '
+        'ucrDataframeHide
+        '
+        Me.ucrDataframeHide.Location = New System.Drawing.Point(9, 9)
+        Me.ucrDataframeHide.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataframeHide.Name = "ucrDataframeHide"
+        Me.ucrDataframeHide.Size = New System.Drawing.Size(120, 40)
+        Me.ucrDataframeHide.TabIndex = 1
+        '
+        'dlgHideDataframes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.ClientSize = New System.Drawing.Size(414, 137)
+        Me.Controls.Add(Me.ucrDataframeHide)
+        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "dlgFont"
+        Me.Name = "dlgHideDataframes"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Font"
-        Me.Text = "Font"
+        Me.Tag = "Hide_Dataframes"
+        Me.Text = "Hide Dataframes"
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrDataframeHide As ucrDataFrame
 End Class

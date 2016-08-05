@@ -22,6 +22,7 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   }
   self$append_to_metadata(is_calculated_label, TRUE)
   self$add_defaults_meta()
+  self$add_defaults_variables_metadata()
 }
 )
 
@@ -89,7 +90,7 @@ data_object$set("public", "calculate_summary", function(columns_to_summarise, su
   if(missing(columns_to_summarise)) stop("columns_to_summarise must be specified")
   if(missing(summaries)) stop("summaries must be specified")
   if(!all(columns_to_summarise %in% names(private$data))) stop(paste("Some of the columns from:",paste(columns_to_summarise, collapse = ","),"were not found in the data."))
-  if(!all(summaries %in% all_summaries)) stop(paste("Some of the summaries from:",paste(summarise, collapse = ","),"were not recognised."))
+  if(!all(summaries %in% all_summaries)) stop(paste("Some of the summaries from:",paste(summaries, collapse = ","),"were not recognised."))
   if(!all(factors %in% names(private$data))) stop(paste("Some of the factors:","c(",paste(factors, collapse = ","),") were not found in the data."))
   
   combinations = expand.grid(summaries,columns_to_summarise)
@@ -101,7 +102,7 @@ data_object$set("public", "calculate_summary", function(columns_to_summarise, su
     if(length(columns_to_summarise) == 1) out = ddply(private$data, factors, function(x) sapply(summaries, function(y) match.fun(y)(x[[columns_to_summarise]],...)), .drop = drop)
     else out = ddply(private$data, factors, function(x) apply(combinations, 1, FUN = function(y) match.fun(y[[1]])(x[[y[[2]]]],...)), .drop = drop)
   }
-  names(out)[-(1:length(factors))] <- apply(combinations, 1, paste, collapse="_")
+  names(out)[-(1:length(factors))] <- apply(expand.grid(substring(summaries, 9), columns_to_summarise), 1, paste, collapse="_")
   return(out)
 }
 )
@@ -120,7 +121,6 @@ mean_label="summary_mean"
 
 # list of all summary function names
 all_summaries=c(sum_label, mode_label, count_label, sd_label, median_label, range_label, min_label, max_label, mean_label)
-
 summary_mode <- function(x,...) {
   ux <- unique(x)
   ux[which.max(tabulate(match(x, ux)))]
