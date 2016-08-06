@@ -31,7 +31,7 @@ Public Class dlgCalculator
         Else
             ReopenDialog()
         End If
-        TestOKEnabled
+        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -45,7 +45,9 @@ Public Class dlgCalculator
     Private Sub SetDefaults()
         ucrSaveResultInto.SetPrefix("Cal")
         ucrSaveResultInto.Reset()
-        ucrSelectorForCalculations.Reset()
+        ucrInputCalOptions.Reset()
+        Me.Size = New System.Drawing.Size(436, 402)
+        ucrInputCalOptions.cboInput.Text = "Basic"
     End Sub
 
     Private Sub ReopenDialog()
@@ -62,6 +64,10 @@ Public Class dlgCalculator
         ucrSaveResultInto.SetItemsTypeAsColumns()
         ucrSaveResultInto.SetDefaultTypeAsColumn()
         ucrSaveResultInto.SetDataFrameSelector(ucrSelectorForCalculations.ucrAvailableDataFrames)
+        ucrSelectorForCalculations.Reset()
+        ucrInputCalOptions.cboInput.Items.Add("Basic")
+        ucrInputCalOptions.cboInput.Items.Add("Maths")
+        ucrInputCalOptions.cboInput.Items.Add("Logical")
     End Sub
 
     'Private Sub ucrSaveResultIntoInto_NameChanged() Handles ucrSaveResultInto.NameChanged
@@ -251,7 +257,7 @@ Public Class dlgCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(">")
     End Sub
 
-    Private Sub cmdBackSpace_Click(sender As Object, e As EventArgs) Handles cmdBackSpace.Click
+    Private Sub cmdLessThan_Click(sender As Object, e As EventArgs) Handles cmdLessThan.Click
         AddText("<")
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("<")
     End Sub
@@ -265,4 +271,26 @@ Public Class dlgCalculator
         SetDefaults()
         TestOKEnabled()
     End Sub
+
+    Private Sub ucrInputCalOptions_NameChanged() Handles ucrInputCalOptions.NameChanged
+        Select Case ucrInputCalOptions.GetText
+            Case "Maths"
+                grpMaths.Visible = True
+                grpLogical.Visible = False
+                grpBasic.Visible = True
+                Me.Size = New System.Drawing.Size(601, 402)
+            Case "Logical"
+                grpLogical.Visible = True
+                grpMaths.Visible = False
+                grpBasic.Visible = True
+                Me.Size = New System.Drawing.Size(500, 402)
+            Case Else
+                Me.Size = New System.Drawing.Size(436, 402)
+                grpBasic.Visible = True
+                grpLogical.Visible = False
+                grpMaths.Visible = False
+        End Select
+    End Sub
+
+
 End Class
