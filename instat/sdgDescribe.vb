@@ -18,4 +18,14 @@ Public Class sdgDescribe
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
+
+    Public Sub SetDefaults()
+        chkMean.Checked = True
+        chkStdDev.Checked = True
+        chkMinimum.Checked = True
+        chkMaximum.Checked = True
+        chkNMissing.Checked = True
+        chkN.Checked = True
+        chkNTotal.Checked = True
+    End Sub
 End Class
