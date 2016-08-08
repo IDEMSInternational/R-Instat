@@ -91,6 +91,7 @@ Partial Class dlgDotPlot
         '
         'ucrDotPlotSelector
         '
+        Me.ucrDotPlotSelector.bShowHiddenColumns = False
         Me.ucrDotPlotSelector.Location = New System.Drawing.Point(10, 10)
         Me.ucrDotPlotSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDotPlotSelector.Name = "ucrDotPlotSelector"
