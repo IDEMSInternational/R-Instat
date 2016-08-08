@@ -497,8 +497,14 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
       }
       else {
         if(filter_applied) stop("Cannot replace values in a factor column when a filter is applied. Remove the filter to do this replacement.")
-        self$edit_factor_level(col_name = col_name, old_level = old_value, new_level = new_value)
-        done = TRUE
+        if(is.na(old_value)) {
+          if(!new_value %in% levels(private$data[[col_name]])) stop(new_value, " is not a level of this factor. Add this as a level of the factor before using replace.")
+          replace_rows <- (is.na(curr_column))
+        }
+        else {
+          self$edit_factor_level(col_name = col_name, old_level = old_value, new_level = new_value)
+          done = TRUE
+        }
       }
     }
     else if(str_data_type == "integer" || str_data_type == "numeric") {
@@ -529,7 +535,8 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
           }
         }
         else {
-          replace_rows <- (curr_column == old_value)
+          if(is.na(old_value)) replace_rows <- (is.na(curr_column))
+          else replace_rows <- (curr_column == old_value)
         }
       }
     }
@@ -538,7 +545,10 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
         replace_rows <- (data_row_names %in% rows)
         if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
       }
-      else replace_rows <- (curr_column == old_value)
+      else {
+        if(is.na(old_value)) replace_rows <- (is.na(curr_column))
+        else replace_rows <- (curr_column == old_value)
+      }
       new_value <- as.character(new_value)
     }
     else if(str_data_type == "logical") {
@@ -548,7 +558,10 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
         replace_rows <- (data_row_names %in% rows)
         if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
       }
-      else replace_rows <- (curr_column == old_value)
+      else {
+        if(is.na(old_value)) replace_rows <- (is.na(curr_column))
+        else replace_rows <- (curr_column == old_value)
+      }
     }
     #TODO add other data type cases
     else {
@@ -556,9 +569,13 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
         replace_rows <- (data_row_names %in% rows)
         if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
       }
-      replace_rows <- (curr_column == old_value)
+      else {
+        if(is.na(old_value)) replace_rows <- (is.na(curr_column))
+        else replace_rows <- (curr_column == old_value)
+      }
     }
     if(!done) {
+      replace_rows[is.na(replace_rows)] <- FALSE
       if(sum(replace_rows) > 0) {
         if(filter_applied) {
           replace_rows <- replace_rows & curr_filter
