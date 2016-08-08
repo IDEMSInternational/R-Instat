@@ -703,7 +703,8 @@ data_object$set("public", "add_defaults_variables_metadata", function() {
 
 data_object$set("public", "remove_rows_in_data", function(row_names) {
   if(!all(row_names %in% rownames(private$data))) stop("Some of the row_names not found in data")
-  self$set_data(private$data[!(rownames(private$data) %in% row_names), ])
+  rows_to_remove <- which(rownames(private$data) %in% row_names)
+  self$set_data(slice(private$data, -rows_to_remove))
   self$append_to_changes(list(Removed_row, row_names))
   self$data_changed <- TRUE
 }
