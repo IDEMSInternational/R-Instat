@@ -69,6 +69,14 @@ Public Class sdgPlots
         clsRggplotFunction = clsGgplotFunc
     End Sub
 
+    Public Sub me_me() Handles tabctrlBoxSubdialog.TabIndexChanged
+        If tabctrlBoxSubdialog.SelectedTab Is tbpXAxis Then
+            ucrXAxis.bIsX = True
+        ElseIf tabctrlBoxSubdialog.SelectedTab Is tbpYAxis Then
+            ucrYAxis.bIsX = False
+        End If
+    End Sub
+
     Private Sub Themes()
         ucrInputThemes.cboInput.Items.AddRange({"default", "theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"})
         cmdAllOptions.Enabled = False
@@ -285,7 +293,6 @@ Public Class sdgPlots
     Public Sub SetRsyntaxAxis(clsRsyntaxAxis As RSyntax)
         clsRsyntax = clsRsyntaxAxis
     End Sub
-
     Private Sub ucrInputGraphTitle_NameChanged() Handles ucrInputGraphTitle.NameChanged
         If Not ucrInputGraphTitle.IsEmpty Then
             clsGraphTitleFunction.SetRCommand("ggtitle")
