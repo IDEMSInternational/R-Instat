@@ -13,19 +13,34 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
-Public Class sdgDescribe
-    Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class dlgColourbyProperty
+    Public bFirstLoad As Boolean = True
+    Private Sub dlgColourbyProperty_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            TestOKEnabled()
+            bFirstLoad = False
+        End If
     End Sub
 
-    Public Sub SetDefaults()
-        chkMean.Checked = True
-        chkStdDev.Checked = True
-        chkMinimum.Checked = True
-        chkMaximum.Checked = True
-        chkNMissing.Checked = True
-        chkN.Checked = True
-        chkNTotal.Checked = True
+    Private Sub InitialiseDialog()
+
+    End Sub
+
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        TestOKEnabled()
     End Sub
 End Class

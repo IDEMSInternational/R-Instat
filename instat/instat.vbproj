@@ -135,6 +135,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dlgDescribeTwoVariable.Designer.vb">
+      <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescribeTwoVariable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -235,6 +241,12 @@
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCliPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgColourbyProperty.Designer.vb">
+      <DependentUpon>dlgColourbyProperty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgColourbyProperty.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgColumnMetadata.Designer.vb">
@@ -1846,6 +1858,15 @@
     <EmbeddedResource Include="dlgCliPlot.sw-KE.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgColourbyProperty.fr-FR.resx">
+      <DependentUpon>dlgColourbyProperty.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColourbyProperty.resx">
+      <DependentUpon>dlgColourbyProperty.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColourbyProperty.sw-KE.resx">
+      <DependentUpon>dlgColourbyProperty.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnMetadata.fr-FR.resx">
       <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
     </EmbeddedResource>
@@ -1944,6 +1965,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteSheet.sw-KE.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeTwoVariable.fr-FR.resx">
+      <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeTwoVariable.resx">
+      <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeTwoVariable.sw-KE.resx">
+      <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDistanceText.fr-FR.resx">
       <DependentUpon>dlgDistanceText.vb</DependentUpon>
