@@ -92,11 +92,10 @@ data_object$set("public", "calculate_summary", function(columns_to_summarise, su
   if(!all(columns_to_summarise %in% names(private$data))) stop(paste("Some of the columns from:",paste(columns_to_summarise, collapse = ","),"were not found in the data."))
   if(!all(summaries %in% all_summaries)) stop(paste("Some of the summaries from:",paste(summaries, collapse = ","),"were not recognised."))
   if(!all(factors %in% names(private$data))) stop(paste("Some of the factors:","c(",paste(factors, collapse = ","),") were not found in the data."))
-  
   combinations = expand.grid(summaries,columns_to_summarise)
   if(length(summaries)==1) {
     if(length(columns_to_summarise) == 1) out = ddply(private$data, factors, function(x) match.fun(summaries)(x[[columns_to_summarise]],...), .drop = drop)
-    else out = ddply(private$data, factors, function(x) sapply(columns_to_summarise, function(y) match.fun(summaries)(x[[y]]),...), .drop = drop)
+    else out = ddply(private$data, factors, function(x) sapply(columns_to_summarise, function(y) match.fun(summaries)(x[[y]],...)), .drop = drop)
   }
   else {
     if(length(columns_to_summarise) == 1) out = ddply(private$data, factors, function(x) sapply(summaries, function(y) match.fun(y)(x[[columns_to_summarise]],...)), .drop = drop)
