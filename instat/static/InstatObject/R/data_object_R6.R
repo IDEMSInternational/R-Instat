@@ -77,16 +77,8 @@ data_object <- R6Class("data_object",
                             },
                             current_filter = function(filter) {
                               if(missing(filter)) {
-                                filter_string = ""
                                 #TODO Change this to call get_filter_as_logical
-                                i = 1
-                                result = matrix(nrow = nrow(private$data), ncol = length(private$.current_filter$filter_list))
-                                for(condition in private$.current_filter$filter_list) {
-                                  func = match.fun(condition[["operation"]])
-                                  result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
-                                  i = i + 1
-                                }
-                                return(apply(result, 1, all))
+                                return(self$get_filter_as_logical(private$.current_filter$name))
                               }
                               else {
                                 private$.current_filter <- filter
@@ -1077,7 +1069,7 @@ data_object$set("public", "set_protected_columns", function(col_names) {
 }
 )
 
-data_object$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE) {
+data_object$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE) {
   if(missing(filter)) stop("filter is required")
   if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
   
@@ -1092,7 +1084,7 @@ data_object$set("public", "add_filter", function(filter, filter_name = "", repla
   }
   else {
     if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
-    filter_calc = calculation$new(type = "filter", filter_list = filter)
+    filter_calc = calculation$new(type = "filter", filter_list = filter, name = filter_name, parameters = list(na.rm = na.rm))
     private$filters[[filter_name]] <- filter_calc
     self$append_to_changes(list(Added_filter, filter_name))
     if(set_as_current) {
@@ -1146,7 +1138,9 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
     result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
     i = i + 1
   }
-  return(apply(result, 1, all))
+  out <- apply(result, 1, all)
+  out[is.na(out)] <- !private$filters[[filter_name]]$parameters[["na.rm"]]
+  return(out)
 }
 )
 
