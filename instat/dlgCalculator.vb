@@ -75,7 +75,7 @@ Public Class dlgCalculator
     'End Sub
 
     Private Sub AddText(strVar As String, Optional intStepsBack As Integer = 0, Optional bolInsertSelected As Boolean = False)
-        Dim intCurrCursorPosition As Integer
+        'Dim intCurrCursorPosition As Integer
         'Dim strSelectedText As String = txtCalcLine.SelectedText
 
         'txtCalcLine.SelectedText = ""
