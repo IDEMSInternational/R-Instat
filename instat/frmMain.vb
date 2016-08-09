@@ -971,7 +971,7 @@ Public Class frmMain
     Private Sub ColourByPropertyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColourByPropertyToolStripMenuItem.Click
         'TODO change this dialog
         '     dlgMetadata should be separate
-        dlgMetadata.ShowDialog()
+        dlgColourbyProperty.ShowDialog()
     End Sub
 
     Private Sub mnuViewCascade_Click(sender As Object, e As EventArgs) Handles mnuViewCascade.Click
@@ -987,7 +987,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseColumnTextFindReplace_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnTextFindReplace.Click
-        dlgReplace.ShowDialog()
+        'dlgReplace.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
@@ -1009,5 +1009,9 @@ Public Class frmMain
 
     Private Sub mnuOrganiseDataFrameReplaceValues_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameReplaceValues.Click
         dlgReplace.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoVariablesSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesSummarise.Click
+        dlgDescribeTwoVariable.ShowDialog()
     End Sub
 End Class
