@@ -60,32 +60,66 @@ Public Class clsGridLink
         Dim dfTemp As CharacterMatrix
         Dim strDataName As String
         Dim shtTemp As Worksheet
+        Dim clsDataChanged As New RFunction
+        Dim clsMetadataChanged As New RFunction
+        Dim clsVariablesMetadataChanged As New RFunction
+        Dim clsGetDataNames As New RFunction
+        Dim clsGetDataFrame As New RFunction
+        Dim clsFilterApplied As New RFunction
+        Dim clsSetDataFramesChanged As New RFunction
+        Dim clsGetVariablesMetadata As New RFunction
+        Dim clsSetVariablesMetadataChanged As New RFunction
+        Dim clsGetCombinedMetadata As New RFunction
+        Dim clsSetMetadataChanged As New RFunction
+
+        clsDataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_changed")
+        clsMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_metadata_changed")
+        clsVariablesMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata_changed")
+        clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
+        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsGetDataFrame.AddParameter("convert_to_character", "TRUE")
+        clsGetDataFrame.AddParameter("include_hidden_columns", "FALSE")
+        clsGetDataFrame.AddParameter("use_current_filter", "TRUE")
+        clsFilterApplied.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_applied")
+        clsSetDataFramesChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_data_frames_changed")
+        clsGetVariablesMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+        clsGetVariablesMetadata.AddParameter("convert_to_character", "TRUE")
+        clsSetVariablesMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_variables_metadata_changed")
+        clsGetCombinedMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_combined_metadata")
+        clsSetMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_metadata_changed")
 
         If Not frmMain.clsRLink.bInstatObjectExists Then Exit Sub
 
-        bRDataChanged = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_changed()").AsLogical(0)
-        bRMetadataChanged = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_metadata_changed()").AsLogical(0)
-        bRVariablesMetadataChanged = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata_changed()").AsLogical(0)
+        bRDataChanged = frmMain.clsRLink.RunInternalScriptGetValue(clsDataChanged.ToScript()).AsLogical(0)
+        bRMetadataChanged = frmMain.clsRLink.RunInternalScriptGetValue(clsMetadataChanged.ToScript()).AsLogical(0)
+        bRVariablesMetadataChanged = frmMain.clsRLink.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript()).AsLogical(0)
 
         If (bGrdDataExists And (bGrdDataChanged Or bRDataChanged)) Or (bGrdVariablesMetadataExists And (bGrdVariablesMetadataChanged Or bRVariablesMetadataChanged)) Then
-            lstDataNames = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_names()").AsList
+            lstDataNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsList
             For i = 0 To lstDataNames.Length - 1
                 strDataName = lstDataNames.AsCharacter(i)
-                If (bGrdDataExists AndAlso frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_data_changed(data_name = " & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
-                    frmMain.clsRLink.clsEngine.Evaluate(strDataName & "<-" & frmMain.clsRLink.strInstatDataObject & "$get_data_frame(" & Chr(34) & strDataName & Chr(34) & ", convert_to_character = TRUE, include_hidden_columns = FALSE, use_current_filter = TRUE)")
-                    dfTemp = frmMain.clsRLink.clsEngine.GetSymbol(strDataName).AsCharacterMatrix()
-                    If frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$filter_applied(data_name = " & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0) Then
+                clsDataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+                If (bGrdDataExists AndAlso frmMain.clsRLink.RunInternalScriptGetValue(clsDataChanged.ToScript()).AsLogical(0)) Then
+                    clsGetDataFrame.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+                    dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript()).AsCharacterMatrix
+                    clsFilterApplied.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+                    If frmMain.clsRLink.RunInternalScriptGetValue(clsFilterApplied.ToScript()).AsLogical(0) Then
                         FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=True, bCheckFreezeColumns:=True)
                     Else
-                        FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bCheckFreezeColumns:=True)
+                        FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=False, bCheckFreezeColumns:=True)
                     End If
                     frmEditor.SetColumnNames(strDataName, dfTemp.ColumnNames())
-                    frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_data_frames_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
+                    clsSetDataFramesChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+                    clsSetDataFramesChanged.AddParameter("new_val", "FALSE")
+                    frmMain.clsRLink.RunInternalScript(clsSetDataFramesChanged.ToScript())
                 End If
-                If (bGrdVariablesMetadataExists And frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ")").AsLogical(0)) Then
-                    dfTemp = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata(" & Chr(34) & strDataName & Chr(34) & ", convert_to_character = TRUE)").AsCharacterMatrix()
+                clsVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+                If (bGrdVariablesMetadataExists AndAlso frmMain.clsRLink.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript()).AsLogical(0)) Then
+                    dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript()).AsCharacterMatrix()
                     FillSheet(dfTemp, strDataName, grdVariablesMetadata)
-                    frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_variables_metadata_changed(" & Chr(34) & strDataName & Chr(34) & ", FALSE)")
+                    clsSetVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+                    clsSetVariablesMetadataChanged.AddParameter("new_val", "True")
+                    frmMain.clsRLink.RunInternalScript(clsSetVariablesMetadataChanged.ToScript())
                 End If
             Next
             'delete old sheets
@@ -132,12 +166,14 @@ Public Class clsGridLink
         End If
 
         If bGrdMetadataExists And (bGrdMetadataChanged Or bRMetadataChanged) Then
-            dfTemp = frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$get_combined_metadata(convert_to_character = TRUE)").AsCharacterMatrix()
+            clsGetCombinedMetadata.AddParameter("convert_to_character", "True")
+            dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCombinedMetadata.ToScript()).AsCharacterMatrix()
             FillSheet(dfTemp, "metadata", grdMetadata)
-            frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$set_metadata_changed(new_val = FALSE)")
+            clsSetMetadataChanged.AddParameter("new_val", "TRUE")
+            frmMain.clsRLink.RunInternalScript(clsSetMetadataChanged.ToScript())
         End If
 
-        frmMain.clsRLink.clsEngine.Evaluate(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed <- FALSE")
+        frmMain.clsRLink.RunInternalScript(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed <- FALSE")
 
         If grdData.Worksheets.Count = 0 Then
             grdData.Visible = False
@@ -184,9 +220,9 @@ Public Class clsGridLink
                                 grdVariablesMetadata.CurrentWorksheet.IterateCells(selRange, Function(row, col, cell)
                                                                                                  Select Case cell.Data
 
-                                                                                                     Case "TRUE"
+                                                                                                     Case "True"
                                                                                                          SetDataViewColumnColor(row, 0)
-                                                                                                     Case "FALSE"
+                                                                                                     Case "False"
                                                                                                          SetDataViewColumnColor(row, 1)
                                                                                                  End Select
                                                                                                  Return True
@@ -197,7 +233,7 @@ Public Class clsGridLink
                                 grdVariablesMetadata.CurrentWorksheet.IterateCells(selRange, Function(row, col, cell)
                                                                                                  Select Case cell.Data
 
-                                                                                                     Case "integer"
+                                                                                                     Case "Integer"
                                                                                                          SetDataViewColumnColor(row, 0)
                                                                                                      Case "character"
                                                                                                          SetDataViewColumnColor(row, 1)
