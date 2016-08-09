@@ -2,13 +2,15 @@ calculation <- R6Class("calculation",
                          public = list(
                            initialize = function(function_name = "", parameters = list(), 
                                                  calculated_from = c(), is_recalculable = TRUE,
-                                                 sub_calculations = list(), type = "", filter_list = list()) {
+                                                 sub_calculations = list(), type = "", filter_list = list(),
+                                                 name = "") {
                              self$function_name = function_name
                              self$parameters = parameters
                              self$calculated_from = c()
                              self$is_recalculable = is_recalculable
                              self$sub_calculations = sub_calculations
                              self$type = type
+                             self$name = name
                              private$.filter_list = filter_list
                            },
                            function_name = "",
