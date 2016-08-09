@@ -31,10 +31,22 @@ Public Class ucrReceiverSingle
     End Sub
 
     Public Overrides Sub AddSelected()
-        Dim objItem As ListViewItem
+        'Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
+
+        If Selector.lstAvailableVariable.SelectedItems.Count = 1 Then
+            'Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
+            Add(Selector.lstAvailableVariable.SelectedItems.Item(0).Text, Selector.lstAvailableVariable.SelectedItems.Item(0).Tag)
+        Else
+            'Error?
+        End If
+
+    End Sub
+
+    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
         Dim clsGetDataType As New RFunction
-        Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
         Dim strCurrentItemType As String
+
+        MyBase.Add(strItem, strDataFrame)
 
         If bTypeSet Then
             strCurrentItemType = strType
@@ -44,24 +56,27 @@ Public Class ucrReceiverSingle
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetDataType.AddParameter("property", "data_type_label")
         If txtReceiverSingle.Enabled Then
-            Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
-            For Each objItem In tempObjects
-                If strCurrentItemType = "column" Then
-                    clsGetDataType.AddParameter("data_name", Chr(34) & objItem.Tag & Chr(34))
-                    clsGetDataType.AddParameter("column", Chr(34) & objItem.Text & Chr(34))
-                    strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
-                Else
-                    strCurrDataType = ""
+            If strCurrentItemType = "column" Then
+                If strDataFrame = "" Then
+                    SetMeAsReceiver()
+                    For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
+                        If Selector.lstAvailableVariable.Items(i).Text = strItem Then
+                            strDataFrame = Selector.lstAvailableVariable.Items(i).Tag
+                        End If
+                    Next
                 End If
-                SetSelected(objItem.Text, objItem.Tag)
-            Next
+                If strDataFrame <> "" Then
+                    clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+                    clsGetDataType.AddParameter("column", Chr(34) & strItem & Chr(34))
+                    strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                End If
+            Else
+                strCurrDataType = ""
+            End If
+            strDataFrameName = strDataFrame
+            txtReceiverSingle.Text = strItem
+            Selector.AddToVariablesList(strItem)
         End If
-    End Sub
-
-    Public Sub SetSelected(strColumn As String, strDataFrame As String)
-        strDataFrameName = strDataFrame
-        txtReceiverSingle.Text = strColumn
-        Selector.AddToVariablesList(strColumn)
     End Sub
 
     Public Overrides Sub RemoveSelected()
@@ -166,13 +181,9 @@ Public Class ucrReceiverSingle
         Return strDataFrameName
     End Function
 
-    Public Event SelectionChanged(sender As Object, e As EventArgs)
-
-
-
     Private Sub txtReceiverSingle_TextChanged(sender As Object, e As EventArgs) Handles txtReceiverSingle.TextChanged
         OnValueChanged(sender, e)
-        RaiseEvent SelectionChanged(sender, e)
+        OnSelectionChanged()
     End Sub
 
     Public Overrides Sub SetColor()
@@ -195,7 +206,7 @@ Public Class ucrReceiverSingle
 
     Public Sub SetStackedFactorMode(bDisableReceiver As Boolean)
         If bDisableReceiver Then
-            SetSelected("variable", "")
+            Add("variable", "")
             Me.Enabled = False
             Selector.RemoveFromVariablesList("variable")
         Else

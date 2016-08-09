@@ -135,6 +135,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dlgDescribeTwoVariable.Designer.vb">
+      <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescribeTwoVariable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ucrAxes.Designer.vb">
+      <DependentUpon>ucrAxes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrAxes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="clsDistribution.vb" />
     <Compile Include="clsGeom.vb" />
     <Compile Include="clsInstatOptions.vb" />
@@ -229,6 +241,12 @@
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCliPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgColourbyProperty.Designer.vb">
+      <DependentUpon>dlgColourbyProperty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgColourbyProperty.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgColumnMetadata.Designer.vb">
@@ -355,6 +373,12 @@
       <DependentUpon>dlgGroupTables.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgGroupTables.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgHideDataframes.Designer.vb">
+      <DependentUpon>dlgHideDataframes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgHideDataframes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgHideShowColumns.Designer.vb">
@@ -651,28 +675,16 @@
     <Compile Include="sdgCreateFilter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgCumDistLineOptions.Designer.vb">
-      <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCumDistLineOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgCumDistPlotOptions.Designer.vb">
-      <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCumDistPlotOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgDataOptions.Designer.vb">
       <DependentUpon>sdgDataOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDataOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgDensityOptions.Designer.vb">
-      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    <Compile Include="sdgDescribe.Designer.vb">
+      <DependentUpon>sdgDescribe.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgDensityOptions.vb">
+    <Compile Include="sdgDescribe.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgFrequencyPolygonOptions.Designer.vb">
@@ -687,10 +699,10 @@
     <Compile Include="sdgLayerOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgLayout.Designer.vb">
-      <DependentUpon>sdgLayout.vb</DependentUpon>
+    <Compile Include="sdgCombineGraphOptions.Designer.vb">
+      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgLayout.vb">
+    <Compile Include="sdgCombineGraphOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgModelOptions.Designer.vb">
@@ -699,22 +711,10 @@
     <Compile Include="sdgModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgPieChartOptions.Designer.vb">
-      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgPieChartOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgPrincipalComponentAnalysis.Designer.vb">
       <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgPrincipalComponentAnalysis.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgScatterPlot.Designer.vb">
-      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgScatterPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgThemeOptions.Designer.vb">
@@ -765,34 +765,10 @@
     <Compile Include="ucrInputComboBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="sdgBarChart.Designer.vb">
-      <DependentUpon>sdgBarChart.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgBarChart.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgBoxPlot.Designer.vb">
-      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgBoxPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgCorrPlot.Designer.vb">
       <DependentUpon>sdgCorrPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCorrPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgDotPlot.Designer.vb">
-      <DependentUpon>sdgDotPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgDotPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgHistogramOptions.Designer.vb">
-      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgHistogramOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgANOVAOptions.Designer.vb">
@@ -1661,6 +1637,12 @@
     <Compile Include="ucrReceiver.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrReceiverExpression.Designer.vb">
+      <DependentUpon>ucrReceiverExpression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrReceiverExpression.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrReceiverMetadataProperty.Designer.vb">
       <DependentUpon>ucrReceiverMetadataProperty.vb</DependentUpon>
     </Compile>
@@ -1876,6 +1858,15 @@
     <EmbeddedResource Include="dlgCliPlot.sw-KE.resx">
       <DependentUpon>dlgCliPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgColourbyProperty.fr-FR.resx">
+      <DependentUpon>dlgColourbyProperty.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColourbyProperty.resx">
+      <DependentUpon>dlgColourbyProperty.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgColourbyProperty.sw-KE.resx">
+      <DependentUpon>dlgColourbyProperty.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnMetadata.fr-FR.resx">
       <DependentUpon>dlgColumnMetadata.vb</DependentUpon>
     </EmbeddedResource>
@@ -1975,6 +1966,15 @@
     <EmbeddedResource Include="dlgDeleteSheet.sw-KE.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeTwoVariable.fr-FR.resx">
+      <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeTwoVariable.resx">
+      <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeTwoVariable.sw-KE.resx">
+      <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDistanceText.fr-FR.resx">
       <DependentUpon>dlgDistanceText.vb</DependentUpon>
     </EmbeddedResource>
@@ -2058,6 +2058,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgGroupTables.sw-KE.resx">
       <DependentUpon>dlgGroupTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideDataframes.fr-FR.resx">
+      <DependentUpon>dlgHideDataframes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideDataframes.resx">
+      <DependentUpon>dlgHideDataframes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgHideDataframes.sw-KE.resx">
+      <DependentUpon>dlgHideDataframes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHideShowColumns.fr-FR.resx">
       <DependentUpon>dlgHideShowColumns.vb</DependentUpon>
@@ -2482,24 +2491,6 @@
     <EmbeddedResource Include="dlgRecodeFactor.sw-KE.resx">
       <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgBarChart.fr-FR.resx">
-      <DependentUpon>sdgBarChart.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgBarChart.resx">
-      <DependentUpon>sdgBarChart.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgBarChart.sw-KE.resx">
-      <DependentUpon>sdgBarChart.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgBoxPlot.fr-FR.resx">
-      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgBoxPlot.resx">
-      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgBoxPlot.sw-KE.resx">
-      <DependentUpon>sdgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgCanonicalCorrelation.fr-FR.resx">
       <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </EmbeddedResource>
@@ -2527,24 +2518,6 @@
     <EmbeddedResource Include="sdgCreateFilter.sw-KE.resx">
       <DependentUpon>sdgCreateFilter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgCumDistLineOptions.fr-FR.resx">
-      <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCumDistLineOptions.resx">
-      <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCumDistLineOptions.sw-KE.resx">
-      <DependentUpon>sdgCumDistLineOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCumDistPlotOptions.fr-FR.resx">
-      <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCumDistPlotOptions.resx">
-      <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCumDistPlotOptions.sw-KE.resx">
-      <DependentUpon>sdgCumDistPlotOptions.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgDataOptions.fr-FR.resx">
       <DependentUpon>sdgDataOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -2554,23 +2527,14 @@
     <EmbeddedResource Include="sdgDataOptions.sw-KE.resx">
       <DependentUpon>sdgDataOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgDensityOptions.fr-FR.resx">
-      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    <EmbeddedResource Include="sdgDescribe.fr-FR.resx">
+      <DependentUpon>sdgDescribe.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgDensityOptions.resx">
-      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
+    <EmbeddedResource Include="sdgDescribe.resx">
+      <DependentUpon>sdgDescribe.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgDensityOptions.sw-KE.resx">
-      <DependentUpon>sdgDensityOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgDotPlot.fr-FR.resx">
-      <DependentUpon>sdgDotPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgDotPlot.resx">
-      <DependentUpon>sdgDotPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgDotPlot.sw-KE.resx">
-      <DependentUpon>sdgDotPlot.vb</DependentUpon>
+    <EmbeddedResource Include="sdgDescribe.sw-KE.resx">
+      <DependentUpon>sdgDescribe.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFrequencyPolygonOptions.fr-FR.resx">
       <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
@@ -2581,15 +2545,6 @@
     <EmbeddedResource Include="sdgFrequencyPolygonOptions.sw-KE.resx">
       <DependentUpon>sdgFrequencyPolygonOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgHistogramOptions.fr-FR.resx">
-      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgHistogramOptions.resx">
-      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgHistogramOptions.sw-KE.resx">
-      <DependentUpon>sdgHistogramOptions.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgLayerOptions.fr-FR.resx">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -2599,14 +2554,14 @@
     <EmbeddedResource Include="sdgLayerOptions.sw-KE.resx">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayout.fr-FR.resx">
-      <DependentUpon>sdgLayout.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCombineGraphOptions.fr-FR.resx">
+      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayout.resx">
-      <DependentUpon>sdgLayout.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCombineGraphOptions.resx">
+      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgLayout.sw-KE.resx">
-      <DependentUpon>sdgLayout.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCombineGraphOptions.sw-KE.resx">
+      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgModelOptions.fr-FR.resx">
       <DependentUpon>sdgModelOptions.vb</DependentUpon>
@@ -2626,15 +2581,6 @@
     <EmbeddedResource Include="sdgANOVAOptions.sw-KE.resx">
       <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPieChartOptions.fr-FR.resx">
-      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPieChartOptions.resx">
-      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPieChartOptions.sw-KE.resx">
-      <DependentUpon>sdgPieChartOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPrincipalComponentAnalysis.fr-FR.resx">
       <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
@@ -3716,15 +3662,6 @@
     <EmbeddedResource Include="sdgPlots.sw-KE.resx">
       <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgScatterPlot.fr-FR.resx">
-      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgScatterPlot.resx">
-      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgScatterPlot.sw-KE.resx">
-      <DependentUpon>sdgScatterPlot.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.fr-FR.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -3760,6 +3697,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.sw-KE.resx">
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrAxes.resx">
+      <DependentUpon>ucrAxes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
@@ -3940,6 +3880,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNewColumnName.sw-KE.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverExpression.fr-FR.resx">
+      <DependentUpon>ucrReceiverExpression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverExpression.resx">
+      <DependentUpon>ucrReceiverExpression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverExpression.sw-KE.resx">
+      <DependentUpon>ucrReceiverExpression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverMetadataProperty.fr-FR.resx">
       <DependentUpon>ucrReceiverMetadataProperty.vb</DependentUpon>
@@ -4229,9 +4178,9 @@
     <Content Include="static\InstatObject\R\RPackages\bin\windows\contrib\3.3\xml2_1.0.0.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="static\Recent_Files\recent.mru">
+    <Content Include="static\Recent_Files\recent.mru">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="Resources\arrows_bottom.png" />
     <Content Include="Resources\arrows_down.png" />
     <Content Include="Resources\arrows_top.png" />

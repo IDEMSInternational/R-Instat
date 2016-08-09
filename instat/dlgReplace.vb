@@ -14,8 +14,13 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+Imports RDotNet
+
 Public Class dlgReplace
     Public bFirstLoad As Boolean = True
+    Dim strVarType As String
+    Dim clsGetDataType As New RFunction
+
     Private Sub dlgReplace_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -30,9 +35,12 @@ Public Class dlgReplace
 
     Private Sub InitialiseDialog()
         ucrBaseReplace.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        'ucrBasePCA.clsRsyntax.iCallType = 0
         ucrReceiverReplace.Selector = ucrSelectorReplace
+        ucrReceiverReplace.SetMeAsReceiver()
         ucrBaseReplace.iHelpTopicID = 47
+        clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+        clsGetDataType.AddParameter("property", "data_type_label")
+        rdoFromAbove.Enabled = False
     End Sub
 
     Private Sub ReopenDialog()
@@ -41,26 +49,54 @@ Public Class dlgReplace
 
     Private Sub SetDefaults()
         ucrSelectorReplace.Reset()
-        ucrReceiverReplace.SetMeAsReceiver()
         ucrSelectorReplace.Focus()
         rdoOldValue.Checked = True
         rdoNewValue.Checked = True
-        ucrInputOldValue.txtInput.Text = ""
-        ucrInputNewValue.txtInput.Text = ""
-        chkClosedLowerRange.Checked = True
-        chkClosedUpperRange.Checked = True
-        chkClosedLowerRange.Enabled = False
-        chkClosedUpperRange.Enabled = False
-        ucrInputRangeFro.txtInput.Text = ""
-        ucrInputRangeTo.txtInput.Text = ""
+        ucrInputOldValue.SetName("")
+        ucrInputNewValue.SetName("")
+        chkIncludeMinimum.Checked = True
+        chkIncludingMaximum.Checked = True
+        ucrInputRangeFrom.SetName("")
+        ucrInputRangeTo.SetName("")
+        RangeOption()
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
         If (Not ucrReceiverReplace.IsEmpty()) Then
-            ucrBaseReplace.OKEnabled(True)
+            If (rdoOldValue.Checked AndAlso ucrInputOldValue.IsEmpty()) OrElse (rdoRange.Checked AndAlso ucrInputRangeFrom.IsEmpty() AndAlso ucrInputRangeTo.IsEmpty()) OrElse (rdoNewValue.Checked AndAlso ucrInputNewValue.IsEmpty()) Then
+                ucrBaseReplace.OKEnabled(False)
+            Else
+                ucrBaseReplace.OKEnabled(True)
+            End If
         Else
             ucrBaseReplace.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub CheckType()
+        If (Not ucrReceiverReplace.IsEmpty() And ucrReceiverReplace.lstSelectedVariables.Items.Count = 1) Then
+            clsGetDataType.AddParameter("data_name", Chr(34) & ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+            clsGetDataType.AddParameter("column", ucrReceiverReplace.GetVariableNames())
+            strVarType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+            If (strVarType = "numeric" OrElse strVarType = "integer") Then
+                ucrReceiverReplace.SetDataType("numeric")
+            End If
+            If (strVarType = "character") Then
+                ucrReceiverReplace.SetDataType("character")
+            End If
+            If (strVarType = "factor") Then
+                ucrReceiverReplace.SetDataType("factor")
+            End If
+            If (strVarType = "logical") Then
+                ucrReceiverReplace.SetDataType("logical")
+            End If
+            If (strVarType = "Date") Then
+                ucrReceiverReplace.SetDataType("Date")
+            End If
+        ElseIf ucrReceiverReplace.IsEmpty() Then
+            strVarType = ""
+            ucrReceiverReplace.RemoveIncludedMetadataProperty(strProperty:="class")
         End If
     End Sub
 
@@ -70,104 +106,217 @@ Public Class dlgReplace
     End Sub
 
     Private Sub ucrSelectorReplace_DataFrameChanged() Handles ucrSelectorReplace.DataFrameChanged
+        CheckType()
         ucrBaseReplace.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverReplace_SelectionChanged() Handles ucrReceiverReplace.SelectionChanged
+        CheckType()
+        RangeEnable()
         ucrBaseReplace.clsRsyntax.AddParameter("col_names", ucrReceiverReplace.GetVariableNames())
         TestOKEnabled()
     End Sub
 
+    Private Sub InputOldValue()
+        If ucrInputOldValue.IsEmpty() Then
+            ucrBaseReplace.clsRsyntax.RemoveParameter("old_value")
+        Else
+            If (strVarType = "numeric" OrElse strVarType = "integer") Then
+                ucrBaseReplace.clsRsyntax.AddParameter("old_value", ucrInputOldValue.GetText)
+            Else
+                ucrBaseReplace.clsRsyntax.AddParameter("old_value", Chr(34) & ucrInputOldValue.GetText() & Chr(34))
+            End If
+        End If
+    End Sub
+
+    Private Sub InputNewValue()
+        If ucrInputNewValue.IsEmpty() Then
+            ucrBaseReplace.clsRsyntax.RemoveParameter("new_value")
+        Else
+            If (strVarType = "numeric" OrElse strVarType = "integer") Then
+                ucrBaseReplace.clsRsyntax.AddParameter("new_value", ucrInputNewValue.GetText)
+            Else
+                ucrBaseReplace.clsRsyntax.AddParameter("new_value", Chr(34) & ucrInputNewValue.GetText & Chr(34))
+            End If
+        End If
+    End Sub
+
     Private Sub rdoOldValue_CheckedChanged(sender As Object, e As EventArgs) Handles rdoOldValue.CheckedChanged
         If rdoOldValue.Checked Then
-            ucrBaseReplace.clsRsyntax.AddParameter("old_value", Chr(34) & ucrInputOldValue.GetText & Chr(34))
+            ucrInputOldValue.Visible = True
+            InputOldValue()
         Else
             ucrBaseReplace.clsRsyntax.RemoveParameter("old_value")
-            ucrInputOldValue.txtInput.Text = ""
+            ucrInputOldValue.Visible = False
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub rdoOldMissing_CheckedChanged(sender As Object, e As EventArgs) Handles rdoOldMissing.CheckedChanged
         If rdoOldMissing.Checked Then
+            ucrBaseReplace.clsRsyntax.AddParameter("old_value", "NA")
+        Else
             ucrBaseReplace.clsRsyntax.RemoveParameter("old_value")
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub rdoNewValue_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNewValue.CheckedChanged
         If rdoNewValue.Checked Then
-            ucrBaseReplace.clsRsyntax.AddParameter("new_value", Chr(34) & ucrInputNewValue.GetText & Chr(34))
+            ucrInputNewValue.Visible = True
+            InputNewValue()
         Else
+            ucrInputNewValue.Visible = False
             ucrBaseReplace.clsRsyntax.RemoveParameter("new_value")
-            ucrInputNewValue.txtInput.Text = ""
         End If
+        TestOKEnabled()
     End Sub
+
     Private Sub rdoRange_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRange.CheckedChanged
+        RangeOption()
+    End Sub
+
+    Private Sub RangeOption()
         If rdoRange.Checked Then
-            ucrBaseReplace.clsRsyntax.AddParameter("start_value", ucrInputRangeFro.GetText)
-            ucrBaseReplace.clsRsyntax.AddParameter("end_value", ucrInputRangeTo.GetText)
-            chkClosedLowerRange.Enabled = True
-            chkClosedUpperRange.Enabled = True
+            chkIncludeMinimum.Visible = True
+            chkIncludingMaximum.Visible = True
+            ucrInputRangeFrom.Visible = True
+            ucrInputRangeTo.Visible = True
+            lblMaximum.Visible = True
+            lblRangeMin.Visible = True
+            If ucrInputRangeFrom.IsEmpty() Then
+                ucrBaseReplace.clsRsyntax.RemoveParameter("start_value")
+            Else
+                ucrBaseReplace.clsRsyntax.AddParameter("start_value", ucrInputRangeFrom.GetText)
+            End If
+            If ucrInputRangeTo.IsEmpty() Then
+                ucrBaseReplace.clsRsyntax.RemoveParameter("end_value")
+            Else
+                ucrBaseReplace.clsRsyntax.AddParameter("end_value", ucrInputRangeTo.GetText)
+            End If
         Else
             ucrBaseReplace.clsRsyntax.RemoveParameter("start_value")
             ucrBaseReplace.clsRsyntax.RemoveParameter("end_value")
-            ucrInputRangeFro.txtInput.Text = ""
-            ucrInputRangeTo.txtInput.Text = ""
-            chkClosedLowerRange.Checked = True
-            chkClosedUpperRange.Checked = True
-            chkClosedLowerRange.Enabled = False
-            chkClosedUpperRange.Enabled = False
+            chkIncludeMinimum.Visible = False
+            chkIncludingMaximum.Visible = False
+            ucrInputRangeFrom.Visible = False
+            ucrInputRangeTo.Visible = False
+            lblMaximum.Visible = False
+            lblRangeMin.Visible = False
         End If
+        ClosedRangeParameters()
+        RangeToParameter()
+        RangeFromParameter()
+        TestOKEnabled()
     End Sub
-
 
     Private Sub ucrInputOldValue_NameChanged() Handles ucrInputOldValue.NameChanged
         If rdoOldValue.Checked Then
-            ucrBaseReplace.clsRsyntax.AddParameter("old_value", Chr(34) & ucrInputOldValue.GetText & Chr(34))
+            InputOldValue()
+        Else
+            ucrBaseReplace.clsRsyntax.RemoveParameter("old_value")
         End If
-        'TestOKEnabled()
+        TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputRangeFro_NameChanged() Handles ucrInputRangeFro.NameChanged
+    Private Sub ucrInputRangeFrom_NameChanged() Handles ucrInputRangeFrom.NameChanged
+        RangeFromParameter()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub RangeFromParameter()
         If rdoRange.Checked Then
-            ucrBaseReplace.clsRsyntax.AddParameter("start_value", ucrInputRangeFro.GetText)
+            If ucrInputRangeFrom.IsEmpty() Then
+                ucrBaseReplace.clsRsyntax.RemoveParameter("start_value")
+            Else
+                ucrBaseReplace.clsRsyntax.AddParameter("start_value", ucrInputRangeFrom.GetText)
+            End If
+        Else
+            ucrBaseReplace.clsRsyntax.RemoveParameter("start_value")
         End If
-        'TestOKEnabled()
     End Sub
 
     Private Sub ucrInputRangeTo_NameChanged() Handles ucrInputRangeTo.NameChanged
+        RangeToParameter()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub RangeToParameter()
         If rdoRange.Checked Then
-            ucrBaseReplace.clsRsyntax.AddParameter("end_value", ucrInputRangeTo.GetText)
+            If ucrInputRangeTo.IsEmpty() Then
+                ucrBaseReplace.clsRsyntax.RemoveParameter("end_value")
+            Else
+                ucrBaseReplace.clsRsyntax.AddParameter("end_value", ucrInputRangeTo.GetText)
+            End If
+        Else
+            ucrBaseReplace.clsRsyntax.RemoveParameter("end_value")
         End If
-        'TestOKEnabled()
     End Sub
 
     Private Sub ucrInputNewValue_NameChanged() Handles ucrInputNewValue.NameChanged
         If rdoNewValue.Checked Then
-            ucrBaseReplace.clsRsyntax.AddParameter("new_value", Chr(34) & ucrInputNewValue.GetText & Chr(34))
+            InputNewValue()
+        Else
+            ucrBaseReplace.clsRsyntax.RemoveParameter("new_value")
         End If
-        'TestOKEnabled()
+        TestOKEnabled()
     End Sub
 
-    Private Sub chkClosedLowerRange_CheckedChanged(sender As Object, e As EventArgs) Handles chkClosedLowerRange.CheckedChanged
-        If chkClosedLowerRange.Checked Then
+    Private Sub chkClosedLowerRange_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeMinimum.CheckedChanged
+        ClosedRangeParameters()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub chkClosedUpperRange_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludingMaximum.CheckedChanged
+        ClosedRangeParameters()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ClosedRangeParameters()
+        If rdoRange.Checked Then
+            If chkIncludingMaximum.Checked Then
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    ucrBaseReplace.clsRsyntax.AddParameter("closed_end_value", "TRUE")
+                Else
+                    ucrBaseReplace.clsRsyntax.RemoveParameter("closed_end_value")
+                End If
+            Else
+                ucrBaseReplace.clsRsyntax.AddParameter("closed_end_value", "FALSE")
+            End If
+
+            If chkIncludeMinimum.Checked Then
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    ucrBaseReplace.clsRsyntax.AddParameter("closed_start_value", "TRUE")
+                Else
+                    ucrBaseReplace.clsRsyntax.RemoveParameter("closed_start_value")
+                End If
+            Else
+                ucrBaseReplace.clsRsyntax.AddParameter("closed_start_value", "FALSE")
+            End If
+        Else
             ucrBaseReplace.clsRsyntax.RemoveParameter("closed_start_value")
-        Else
-            ucrBaseReplace.clsRsyntax.AddParameter("closed_start_value", "FALSE")
-        End If
-    End Sub
-
-    Private Sub chkClosedUpperRange_CheckedChanged(sender As Object, e As EventArgs) Handles chkClosedUpperRange.CheckedChanged
-        If chkClosedUpperRange.Checked Then
             ucrBaseReplace.clsRsyntax.RemoveParameter("closed_end_value")
-        Else
-            ucrBaseReplace.clsRsyntax.AddParameter("closed_end_value", "FALSE")
         End If
     End Sub
 
     Private Sub rdoNewMissing_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNewMissing.CheckedChanged
         If rdoNewMissing.Checked Then
+            ucrBaseReplace.clsRsyntax.AddParameter("new_value", "NA")
+        Else
             ucrBaseReplace.clsRsyntax.RemoveParameter("new_value")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub RangeEnable()
+        If strVarType = "" OrElse strVarType = "numeric" OrElse strVarType = "integer" Then
+            rdoRange.Enabled = True
+        Else
+            rdoRange.Enabled = False
+            If rdoRange.Checked Then
+                rdoOldValue.Checked = True
+            End If
         End If
     End Sub
 End Class

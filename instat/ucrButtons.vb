@@ -48,12 +48,18 @@ Public Class ucrButtons
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
         Dim strComments As String = ""
+        Dim bIsAssigned As Boolean
+        Dim bToBeAssigned As Boolean
+        Dim strAssignTo As String
 
         RaiseEvent BeforeClickOk(sender, e)
 
         If chkComment.Checked Then
             strComments = txtComment.Text
         End If
+        bIsAssigned = clsRsyntax.GetbIsAssigned()
+        bToBeAssigned = clsRsyntax.GetbToBeAssigned()
+        strAssignTo = clsRsyntax.GetstrAssignTo()
         frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComments)
 
         'This clears the script after it has been run, but leave the function and parameters in the base function
@@ -61,7 +67,9 @@ Public Class ucrButtons
         clsRsyntax.strScript = ""
 
         RaiseEvent ClickOk(sender, e)
-
+        clsRsyntax.SetbIsAssigned(bIsAssigned)
+        clsRsyntax.SetbToBeAssigned(bToBeAssigned)
+        clsRsyntax.SetstrAssignTo(strAssignTo)
         Me.ParentForm.Hide()
 
     End Sub

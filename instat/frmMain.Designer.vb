@@ -284,6 +284,7 @@ Partial Class frmMain
         Me.mnuOrganiseDataObjectCopyDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObjectDeleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator21 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuOrganiseDataObjectHideDataframes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObjectMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObjectRenameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOrganiseDataObjectReorderMetadata = New System.Windows.Forms.ToolStripMenuItem()
@@ -364,7 +365,6 @@ Partial Class frmMain
         '
         'mnuDescribeOneVariableSummarise
         '
-        Me.mnuDescribeOneVariableSummarise.Enabled = False
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
         Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
@@ -388,9 +388,8 @@ Partial Class frmMain
         '
         'mnuDescribeTwoVariablesSummarise
         '
-        Me.mnuDescribeTwoVariablesSummarise.Enabled = False
         Me.mnuDescribeTwoVariablesSummarise.Name = "mnuDescribeTwoVariablesSummarise"
-        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeTwoVariablesSummarise.Tag = "Summarise..."
         Me.mnuDescribeTwoVariablesSummarise.Text = "Summarise..."
         '
@@ -398,7 +397,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesTabulate.Enabled = False
         Me.mnuDescribeTwoVariablesTabulate.Name = "mnuDescribeTwoVariablesTabulate"
-        Me.mnuDescribeTwoVariablesTabulate.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeTwoVariablesTabulate.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeTwoVariablesTabulate.Tag = "Tabulate..."
         Me.mnuDescribeTwoVariablesTabulate.Text = "Tabulate..."
         '
@@ -406,7 +405,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesGraph.Enabled = False
         Me.mnuDescribeTwoVariablesGraph.Name = "mnuDescribeTwoVariablesGraph"
-        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeTwoVariablesGraph.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeTwoVariablesGraph.Tag = "Graph..."
         Me.mnuDescribeTwoVariablesGraph.Text = "Graph..."
         '
@@ -414,7 +413,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariablesCorrelate.Enabled = False
         Me.mnuDescribeTwoVariablesCorrelate.Name = "mnuDescribeTwoVariablesCorrelate"
-        Me.mnuDescribeTwoVariablesCorrelate.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeTwoVariablesCorrelate.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeTwoVariablesCorrelate.Tag = "Correlate..."
         Me.mnuDescribeTwoVariablesCorrelate.Text = "Correlate..."
         '
@@ -619,7 +618,6 @@ Partial Class frmMain
         '
         'mnuDescribeUseObjectsCombineGraphs
         '
-        Me.mnuDescribeUseObjectsCombineGraphs.Enabled = False
         Me.mnuDescribeUseObjectsCombineGraphs.Name = "mnuDescribeUseObjectsCombineGraphs"
         Me.mnuDescribeUseObjectsCombineGraphs.Size = New System.Drawing.Size(172, 22)
         Me.mnuDescribeUseObjectsCombineGraphs.Tag = "Combine_Graphs..."
@@ -878,28 +876,28 @@ Partial Class frmMain
         'mnuModelOtherTwoVariablesTwoSamples
         '
         Me.mnuModelOtherTwoVariablesTwoSamples.Name = "mnuModelOtherTwoVariablesTwoSamples"
-        Me.mnuModelOtherTwoVariablesTwoSamples.Size = New System.Drawing.Size(267, 22)
+        Me.mnuModelOtherTwoVariablesTwoSamples.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesTwoSamples.Tag = "Two_Samples..."
         Me.mnuModelOtherTwoVariablesTwoSamples.Text = "Two Samples..."
         '
         'mnuModelOtherTwoVariablesSummaryData
         '
         Me.mnuModelOtherTwoVariablesSummaryData.Name = "mnuModelOtherTwoVariablesSummaryData"
-        Me.mnuModelOtherTwoVariablesSummaryData.Size = New System.Drawing.Size(267, 22)
+        Me.mnuModelOtherTwoVariablesSummaryData.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesSummaryData.Tag = "Summary_Data"
         Me.mnuModelOtherTwoVariablesSummaryData.Text = "Summary Data..."
         '
         'mnuModelOtherTwoVariablesSimpleRegression
         '
         Me.mnuModelOtherTwoVariablesSimpleRegression.Name = "mnuModelOtherTwoVariablesSimpleRegression"
-        Me.mnuModelOtherTwoVariablesSimpleRegression.Size = New System.Drawing.Size(267, 22)
+        Me.mnuModelOtherTwoVariablesSimpleRegression.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesSimpleRegression.Tag = "Simple_Regression"
         Me.mnuModelOtherTwoVariablesSimpleRegression.Text = "Simple Regression..."
         '
         'mnuModelOtherTwoVariablesOneWayANOVA
         '
         Me.mnuModelOtherTwoVariablesOneWayANOVA.Name = "mnuModelOtherTwoVariablesOneWayANOVA"
-        Me.mnuModelOtherTwoVariablesOneWayANOVA.Size = New System.Drawing.Size(267, 22)
+        Me.mnuModelOtherTwoVariablesOneWayANOVA.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesOneWayANOVA.Tag = "One_Way_ANOVA"
         Me.mnuModelOtherTwoVariablesOneWayANOVA.Text = "One Way ANOVA..."
         '
@@ -907,14 +905,14 @@ Partial Class frmMain
         '
         Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Enabled = False
         Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Name = "mnuModelOtherTwoVariablesNonParametricTwoSamples"
-        Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Size = New System.Drawing.Size(267, 22)
+        Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Tag = "Non_Parameteric_Two_Samples"
         Me.mnuModelOtherTwoVariablesNonParametricTwoSamples.Text = "Non Parametric Two Samples..."
         '
         'mnuModelOtherTwoVariablesNonParametricOneWayANOVA
         '
         Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Name = "mnuModelOtherTwoVariablesNonParametricOneWayANOVA"
-        Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Size = New System.Drawing.Size(267, 22)
+        Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Size = New System.Drawing.Size(266, 22)
         Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Tag = "Non_Parameteric_One_Way_ANOVA..."
         Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA.Text = "Non Parameteric One Way ANOVA..."
         '
@@ -930,21 +928,21 @@ Partial Class frmMain
         '
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Enabled = False
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Name = "mnuModelOtherThreeVariablesSimpleWithGroups"
-        Me.mnuModelOtherThreeVariablesSimpleWithGroups.Size = New System.Drawing.Size(262, 22)
+        Me.mnuModelOtherThreeVariablesSimpleWithGroups.Size = New System.Drawing.Size(260, 22)
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Tag = "Simple_with_groups"
         Me.mnuModelOtherThreeVariablesSimpleWithGroups.Text = "Simple With Groups..."
         '
         'mnuModelOtherThreeVariablesNonParametricTwoWayANOVA
         '
         Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Name = "mnuModelOtherThreeVariablesNonParametricTwoWayANOVA"
-        Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Size = New System.Drawing.Size(262, 22)
+        Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Size = New System.Drawing.Size(260, 22)
         Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Tag = "Non_Parametric_Two_Way_ANOVA..."
         Me.mnuModelOtherThreeVariablesNonParametricTwoWayANOVA.Text = "Non Parametric Two Way ANOVA..."
         '
         'mnuModelOtherThreeVariablesChisquareTest
         '
         Me.mnuModelOtherThreeVariablesChisquareTest.Name = "mnuModelOtherThreeVariablesChisquareTest"
-        Me.mnuModelOtherThreeVariablesChisquareTest.Size = New System.Drawing.Size(262, 22)
+        Me.mnuModelOtherThreeVariablesChisquareTest.Size = New System.Drawing.Size(260, 22)
         Me.mnuModelOtherThreeVariablesChisquareTest.Tag = "Chi-square_Test"
         Me.mnuModelOtherThreeVariablesChisquareTest.Text = "Chi-square Test..."
         '
@@ -959,21 +957,21 @@ Partial Class frmMain
         'mnuModelOtherGeneralANOVAGeneral
         '
         Me.mnuModelOtherGeneralANOVAGeneral.Name = "mnuModelOtherGeneralANOVAGeneral"
-        Me.mnuModelOtherGeneralANOVAGeneral.Size = New System.Drawing.Size(167, 22)
+        Me.mnuModelOtherGeneralANOVAGeneral.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherGeneralANOVAGeneral.Tag = "ANOVA_General..."
         Me.mnuModelOtherGeneralANOVAGeneral.Text = "ANOVA General..."
         '
         'mnuModelOtherGeneralRegression
         '
         Me.mnuModelOtherGeneralRegression.Name = "mnuModelOtherGeneralRegression"
-        Me.mnuModelOtherGeneralRegression.Size = New System.Drawing.Size(167, 22)
+        Me.mnuModelOtherGeneralRegression.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherGeneralRegression.Tag = "Regression"
         Me.mnuModelOtherGeneralRegression.Text = "Regression..."
         '
         'mnuModelOtherGeneralLogLinear
         '
         Me.mnuModelOtherGeneralLogLinear.Name = "mnuModelOtherGeneralLogLinear"
-        Me.mnuModelOtherGeneralLogLinear.Size = New System.Drawing.Size(167, 22)
+        Me.mnuModelOtherGeneralLogLinear.Size = New System.Drawing.Size(166, 22)
         Me.mnuModelOtherGeneralLogLinear.Tag = "Log_Linear"
         Me.mnuModelOtherGeneralLogLinear.Text = "Log Linear..."
         '
@@ -1781,7 +1779,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameReplaceValues
         '
-        Me.mnuOrganiseDataFrameReplaceValues.Enabled = False
         Me.mnuOrganiseDataFrameReplaceValues.Name = "mnuOrganiseDataFrameReplaceValues"
         Me.mnuOrganiseDataFrameReplaceValues.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameReplaceValues.Tag = "Replace_Values..."
@@ -1808,7 +1805,6 @@ Partial Class frmMain
         '
         'mnuOrganiseDataFrameColumnStructure
         '
-        Me.mnuOrganiseDataFrameColumnStructure.Enabled = False
         Me.mnuOrganiseDataFrameColumnStructure.Name = "mnuOrganiseDataFrameColumnStructure"
         Me.mnuOrganiseDataFrameColumnStructure.Size = New System.Drawing.Size(200, 22)
         Me.mnuOrganiseDataFrameColumnStructure.Tag = "Column_Structure..."
@@ -1865,6 +1861,7 @@ Partial Class frmMain
         '
         'ColourByPropertyToolStripMenuItem
         '
+        Me.ColourByPropertyToolStripMenuItem.Enabled = False
         Me.ColourByPropertyToolStripMenuItem.Name = "ColourByPropertyToolStripMenuItem"
         Me.ColourByPropertyToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
         Me.ColourByPropertyToolStripMenuItem.Text = "Colour by Property..."
@@ -1926,7 +1923,6 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnCalculateCalculations
         '
-        Me.mnuOrganiseColumnCalculateCalculations.Enabled = False
         Me.mnuOrganiseColumnCalculateCalculations.Name = "mnuOrganiseColumnCalculateCalculations"
         Me.mnuOrganiseColumnCalculateCalculations.Size = New System.Drawing.Size(160, 22)
         Me.mnuOrganiseColumnCalculateCalculations.Tag = "Calculations..."
@@ -2080,6 +2076,7 @@ Partial Class frmMain
         '
         'mnuOrganiseColumnTextFindReplace
         '
+        Me.mnuOrganiseColumnTextFindReplace.Enabled = False
         Me.mnuOrganiseColumnTextFindReplace.Name = "mnuOrganiseColumnTextFindReplace"
         Me.mnuOrganiseColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
         Me.mnuOrganiseColumnTextFindReplace.Tag = "Find/Replace..."
@@ -2196,7 +2193,7 @@ Partial Class frmMain
         '
         'mnuOrganiseDataObject
         '
-        Me.mnuOrganiseDataObject.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataObjectDataFrameMetadata, Me.mnuOrganiseDataObjectRenameDataFrame, Me.mnuOrganiseDataObjectReorderDataFrames, Me.mnuOrganiseDataObjectCopyDataFrame, Me.mnuOrganiseDataObjectDeleteDataFrame, Me.ToolStripSeparator21, Me.mnuOrganiseDataObjectMetadata, Me.mnuOrganiseDataObjectRenameMetadata, Me.mnuOrganiseDataObjectReorderMetadata, Me.mnuOrganiseDataObjectDeleteMetadata})
+        Me.mnuOrganiseDataObject.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOrganiseDataObjectDataFrameMetadata, Me.mnuOrganiseDataObjectRenameDataFrame, Me.mnuOrganiseDataObjectReorderDataFrames, Me.mnuOrganiseDataObjectCopyDataFrame, Me.mnuOrganiseDataObjectDeleteDataFrame, Me.ToolStripSeparator21, Me.mnuOrganiseDataObjectHideDataframes, Me.mnuOrganiseDataObjectMetadata, Me.mnuOrganiseDataObjectRenameMetadata, Me.mnuOrganiseDataObjectReorderMetadata, Me.mnuOrganiseDataObjectDeleteMetadata})
         Me.mnuOrganiseDataObject.Name = "mnuOrganiseDataObject"
         Me.mnuOrganiseDataObject.Size = New System.Drawing.Size(172, 22)
         Me.mnuOrganiseDataObject.Tag = "Data_Object"
@@ -2242,6 +2239,12 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator21.Name = "ToolStripSeparator21"
         Me.ToolStripSeparator21.Size = New System.Drawing.Size(193, 6)
+        '
+        'mnuOrganiseDataObjectHideDataframes
+        '
+        Me.mnuOrganiseDataObjectHideDataframes.Name = "mnuOrganiseDataObjectHideDataframes"
+        Me.mnuOrganiseDataObjectHideDataframes.Size = New System.Drawing.Size(196, 22)
+        Me.mnuOrganiseDataObjectHideDataframes.Text = "Hide Dataframes..."
         '
         'mnuOrganiseDataObjectMetadata
         '
@@ -2627,7 +2630,7 @@ Partial Class frmMain
         '
         Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsRunRCode, Me.mnuToolsRestartR, Me.mnuToolsCheckForUpdates, Me.mnuToolsClearOutputWindow, Me.ToolStripSeparator5, Me.mnuToolsSaveCurrentOptions, Me.mnuToolsLoadOptions, Me.mnuToolsOptions})
         Me.mnuTools.Name = "mnuTools"
-        Me.mnuTools.Size = New System.Drawing.Size(48, 20)
+        Me.mnuTools.Size = New System.Drawing.Size(47, 20)
         Me.mnuTools.Text = "Tools"
         '
         'mnuToolsRunRCode
@@ -3031,4 +3034,5 @@ Partial Class frmMain
     Friend WithEvents mnuViewCascade As ToolStripMenuItem
     Friend WithEvents mnuViewTileVertically As ToolStripMenuItem
     Friend WithEvents mnuViewTileHorizontally As ToolStripMenuItem
+    Friend WithEvents mnuOrganiseDataObjectHideDataframes As ToolStripMenuItem
 End Class

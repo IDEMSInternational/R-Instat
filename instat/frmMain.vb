@@ -448,10 +448,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFIleExit_Click(sender As Object, e As EventArgs) Handles mnuFIleExit.Click
-        Dim close = MsgBox("Do you wish to exit Instat-R", MessageBoxButtons.YesNo)
-        If close = DialogResult.Yes Then
-            Me.Close()
-        End If
+        Me.Close()
     End Sub
 
     Private Sub mnuFileOpenFromFile_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromFile.Click
@@ -970,14 +967,11 @@ Public Class frmMain
     Private Sub mnuEditFindNext_Click(sender As Object, e As EventArgs) Handles mnuEditFindNext.Click
         mnuEditFind_Click(sender, e)
     End Sub
-    Private Sub frmMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        clsRecentItems.saveOnClose(e)
-    End Sub
 
     Private Sub ColourByPropertyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ColourByPropertyToolStripMenuItem.Click
         'TODO change this dialog
         '     dlgMetadata should be separate
-        dlgMetadata.ShowDialog()
+        dlgColourbyProperty.ShowDialog()
     End Sub
 
     Private Sub mnuViewCascade_Click(sender As Object, e As EventArgs) Handles mnuViewCascade.Click
@@ -993,6 +987,31 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseColumnTextFindReplace_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnTextFindReplace.Click
+        'dlgReplace.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
+        dlgDescriptiveStatistics.ShowDialog()
+    End Sub
+
+    Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        Dim close = MsgBox("Are you sure you want to exit R-Instat?", MessageBoxButtons.YesNo, "Exit")
+        If close = DialogResult.Yes Then
+            clsRecentItems.saveOnClose()
+        Else
+            e.Cancel = True
+        End If
+    End Sub
+
+    Private Sub mnuOrganiseDataObjectHideDataframes_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataObjectHideDataframes.Click
+        dlgHideDataframes.ShowDialog()
+    End Sub
+
+    Private Sub mnuOrganiseDataFrameReplaceValues_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameReplaceValues.Click
         dlgReplace.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeTwoVariablesSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesSummarise.Click
+        dlgDescribeTwoVariable.ShowDialog()
     End Sub
 End Class

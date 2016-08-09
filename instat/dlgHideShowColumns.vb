@@ -25,7 +25,6 @@ Public Class dlgHideShowColumns
             TestOKEnabled()
             bFirstLoad = False
         End If
-        ucrSelectorForHiddenColumns.strAddOnLoad = New KeyValuePair(Of String, String())("Is_Hidden", {"TRUE"})
         SetHiddenColumnsInReceiver()
     End Sub
 
@@ -48,13 +47,11 @@ Public Class dlgHideShowColumns
     End Sub
 
     Private Sub SetHiddenColumnsInReceiver()
-        ucrSelectorForHiddenColumns.Reset()
-        ucrSelectorForHiddenColumns.strAddOnLoad = New KeyValuePair(Of String, String())("Is_Hidden", {"TRUE"})
-        ucrSelectorForHiddenColumns.AddItemsWithMetadataProperty("Is_Hidden", {"TRUE"})
+        ucrReceiverHiddenColumns.AddItemsWithMetadataProperty(ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Is_Hidden", {"TRUE"})
     End Sub
 
     Private Sub SetDefaults()
-        'SetHiddenColumnsInReceiver()
+        SetHiddenColumnsInReceiver()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -64,8 +61,8 @@ Public Class dlgHideShowColumns
     End Sub
 
     Private Sub ucrSelectorForHiddenColumns_DataFrameChanged() Handles ucrSelectorForHiddenColumns.DataFrameChanged
-
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        SetHiddenColumnsInReceiver()
     End Sub
 
     Private Sub ucrReceiverHiddenColumns_SelectionChanged() Handles ucrReceiverHiddenColumns.SelectionChanged

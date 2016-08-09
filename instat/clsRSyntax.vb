@@ -18,12 +18,24 @@
 Public Class RSyntax
     Public clsBaseFunction As New RFunction
     Public clsBaseOperator As New ROperator
+    Public strCommandString As String = ""
     Public bUseBaseFunction As Boolean = False
     Public bUseBaseOperator As Boolean = False
+    Public bUseCommandString As Boolean = False
     Public iCallType As Integer = 0
     Public strScript As String
     Public i As Integer
     Public bExcludeAssignedFunctionOutput As Boolean = True
+    Private strAssignTo As String
+    Private strAssignToDataframe As String
+    Private strAssignToColumn As String
+    Private strAssignToModel As String
+    Private strAssignToGraph As String
+    Public bToBeAssigned As Boolean = False
+    Public bIsAssigned As Boolean = False
+    Private bAssignToIsPrefix As Boolean
+    Private bAssignToColumnWithoutNames As Boolean
+    Private bInsertColumnBefore As String
 
     Public Sub SetFunction(strFunctionName As String, Optional ByRef clsFunction As RFunction = Nothing)
         If clsFunction Is Nothing Then
@@ -32,18 +44,28 @@ Public Class RSyntax
         clsFunction.SetRCommand(strFunctionName)
         bUseBaseFunction = True
         bUseBaseOperator = False
+        bUseCommandString = False
     End Sub
 
     Public Sub SetBaseRFunction(clsFunction As RFunction)
         clsBaseFunction = clsFunction
         bUseBaseFunction = True
         bUseBaseOperator = False
+        bUseCommandString = False
+    End Sub
+
+    Public Sub SetCommandString(strCommand As String)
+        strCommandString = strCommand
+        bUseBaseFunction = False
+        bUseBaseOperator = False
+        bUseCommandString = True
     End Sub
 
     Public Sub SetOperation(strOp As String, Optional bBracketTemp As Boolean = True)
         clsBaseOperator.SetOperation(strOp, bBracketTemp)
         bUseBaseFunction = False
         bUseBaseOperator = True
+        bUseCommandString = False
     End Sub
 
     Public Sub SetAssignTo(strAssignToName As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False)
@@ -52,6 +74,26 @@ Public Class RSyntax
         End If
         If bUseBaseFunction Then
             clsBaseFunction.SetAssignTo(strAssignToName, strTempDataframe:=strTempDataframe, strTempColumn:=strTempColumn, strTempModel:=strTempModel, strTempGraph:=strTempGraph, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
+        End If
+        If bUseCommandString Then
+            strAssignTo = strAssignToName
+            If Not strTempDataframe = "" Then
+                strAssignToDataframe = strTempDataframe
+                If Not strTempColumn = "" Then
+                    strAssignToColumn = strTempColumn
+                End If
+            End If
+            If Not strTempModel = "" Then
+                strAssignToModel = strTempModel
+            End If
+            If Not strTempGraph = "" Then
+                strAssignToGraph = strTempGraph
+            End If
+            Me.bAssignToIsPrefix = bAssignToIsPrefix
+            Me.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+            Me.bInsertColumnBefore = bInsertColumnBefore
+            bToBeAssigned = True
+            bIsAssigned = False
         End If
     End Sub
 
@@ -120,6 +162,104 @@ Public Class RSyntax
             If bUseBaseOperator Then
                 strTemp = clsBaseOperator.ToScript(strScript)
             End If
+            If bUseCommandString Then
+                Dim clsAddColumns As New RFunction
+                Dim clsGetColumns As New RFunction
+                Dim clsAddData As New RFunction
+                Dim clsGetData As New RFunction
+                Dim clsAddModels As New RFunction
+                Dim clsGetModels As New RFunction
+                Dim clsAddGraphs As New RFunction
+                Dim clsGetGraphs As New RFunction
+                Dim clsDataList As New RFunction
+
+                strTemp = strCommandString
+                If bToBeAssigned Then
+                    If Not frmMain.clsRLink.bInstatObjectExists Then
+                        frmMain.clsRLink.CreateNewInstatObject()
+                    End If
+                    strScript = strScript & strAssignTo & " <- " & strTemp & vbCrLf
+                    If Not strAssignToDataframe = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
+                        clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+                        clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataframe & Chr(34))
+                        If Not bAssignToColumnWithoutNames Then
+                            clsAddColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                        End If
+                        clsAddColumns.AddParameter("col_data", strAssignTo)
+                        If bAssignToIsPrefix Then
+                            clsAddColumns.AddParameter("use_col_name_as_prefix", "TRUE")
+                        Else
+                            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                                clsAddColumns.AddParameter("use_col_name_as_prefix", "FALSE")
+                            End If
+                        End If
+                        If bInsertColumnBefore Then
+                            clsAddColumns.AddParameter("before", "TRUE")
+                        Else
+                            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                                clsAddColumns.AddParameter("before", "FALSE")
+                            End If
+                        End If
+                        strScript = strScript & clsAddColumns.ToScript() & vbCrLf
+
+                        clsGetColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+                        clsGetColumns.AddParameter("data_name", Chr(34) & strAssignToDataframe & Chr(34))
+                        clsGetColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                        strAssignTo = clsGetColumns.ToScript()
+
+                        bIsAssigned = True
+                        bToBeAssigned = False
+                    ElseIf Not strAssignToModel = "" Then
+                        clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
+                        clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
+                        clsAddModels.AddParameter("model", strAssignTo)
+                        If Not strAssignToDataframe = "" Then
+                            clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataframe & Chr(34))
+                            clsGetModels.AddParameter("data_name", Chr(34) & strAssignToDataframe & Chr(34))
+                        End If
+                        strScript = strScript & clsAddModels.ToScript() & vbCrLf
+
+                        clsGetModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
+                        clsGetModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
+                        strAssignTo = clsGetModels.ToScript()
+
+                        bIsAssigned = True
+                        bToBeAssigned = False
+                    ElseIf Not strAssignToGraph = "" Then
+                        clsAddGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_graph")
+                        clsAddGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
+                        clsAddGraphs.AddParameter("graph", strAssignTo)
+                        If Not strAssignToDataframe = "" Then
+                            clsAddGraphs.AddParameter("data_name", Chr(34) & strAssignToDataframe & Chr(34))
+                            clsGetGraphs.AddParameter("data_name", Chr(34) & strAssignToDataframe & Chr(34))
+                        End If
+                        strScript = strScript & clsAddGraphs.ToScript() & vbCrLf
+
+                        clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+                        clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
+                        strAssignTo = clsGetGraphs.ToScript()
+
+                        bIsAssigned = True
+                        bToBeAssigned = False
+                    ElseIf Not strAssignToDataframe = "" Then
+                        clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+                        clsDataList.SetRCommand("list")
+                        clsDataList.AddParameter(strAssignToDataframe, strAssignTo)
+                        clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList)
+                        strScript = strScript & clsAddData.ToScript() & vbCrLf
+
+                        clsGetData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+                        clsGetData.AddParameter("data_name", Chr(34) & strAssignToDataframe & Chr(34))
+                        strAssignTo = clsGetData.ToScript()
+
+                        bIsAssigned = True
+                        bToBeAssigned = False
+                    End If
+                    strTemp = strAssignTo
+                Else
+                    'Return strTemp
+                End If
+            End If
         Else
             strTemp = clsFunction.ToScript(strScript)
         End If
@@ -133,4 +273,71 @@ Public Class RSyntax
 
     End Function
 
+    Public Function GetbIsAssigned() As Boolean
+        If bUseBaseFunction Then
+            Return clsBaseFunction.bIsAssigned
+        ElseIf bUseBaseOperator Then
+            Return clsBaseOperator.bIsAssigned
+        ElseIf bUseCommandString Then
+            Return bIsAssigned
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Function GetbToBeAssigned() As Boolean
+        If bUseBaseFunction Then
+            Return clsBaseFunction.bToBeAssigned
+        ElseIf bUseBaseOperator Then
+            Return clsBaseOperator.bToBeAssigned
+        ElseIf bUseCommandString Then
+            Return bToBeAssigned
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Function GetstrAssignTo() As String
+        If bUseBaseFunction Then
+            Return clsBaseFunction.strAssignTo
+        ElseIf bUseBaseOperator Then
+            Return clsBaseOperator.strAssignTo
+        ElseIf bUseCommandString Then
+            Return strAssignTo
+        Else
+            Return ""
+        End If
+    End Function
+
+    ' WARNING These should only be called to reset previous values.
+    ' They should generally not be set directly.
+    Public Sub SetbIsAssigned(bNew As Boolean)
+        If bUseBaseFunction Then
+            clsBaseFunction.bIsAssigned = bNew
+        ElseIf bUseBaseOperator Then
+            clsBaseOperator.bIsAssigned = bNew
+        ElseIf bUseCommandString Then
+            bIsAssigned = bNew
+        End If
+    End Sub
+
+    Public Sub SetbToBeAssigned(bNew As Boolean)
+        If bUseBaseFunction Then
+            clsBaseFunction.bToBeAssigned = bNew
+        ElseIf bUseBaseOperator Then
+            clsBaseOperator.bToBeAssigned = bNew
+        ElseIf bUseCommandString Then
+            bToBeAssigned = bNew
+        End If
+    End Sub
+
+    Public Sub SetstrAssignTo(strNew As String)
+        If bUseBaseFunction Then
+            clsBaseFunction.strAssignTo = strNew
+        ElseIf bUseBaseOperator Then
+            clsBaseOperator.strAssignTo = strNew
+        ElseIf bUseCommandString Then
+            strAssignTo = strNew
+        End If
+    End Sub
 End Class

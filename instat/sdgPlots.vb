@@ -23,6 +23,7 @@ Public Class sdgPlots
     Public clsYLabFunction As New RFunction
     Public clsRThemeFunction As New RFunction
     Public clsRLegendFunction As New RFunction
+    Public clsGraphTitleFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public strDataFrame As String
 
@@ -43,7 +44,7 @@ Public Class sdgPlots
     End Sub
 
     Private Sub SetDefaults()
-        LegendDefaults()
+        TitleDefaults()
         IncludeFacets()
         chkIncludeFacets.Checked = False
         ucr1stFactorReceiver.SetMeAsReceiver()
@@ -58,10 +59,22 @@ Public Class sdgPlots
         ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrPlotsAdditionalLayers.SetAesFunction(sdgLayerOptions.ucrGeomWithAes.clsGgplotAesFunction)
         ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
+        ucrXAxis.SetXorY(True)
+        ucrXAxis.SetRsyntaxAxis(clsRsyntax)
+        ucrYAxis.SetXorY(False)
+        ucrYAxis.SetRsyntaxAxis(clsRsyntax)
     End Sub
 
     Public Sub SetGgplotFunction(clsGgplotFunc As RFunction)
         clsRggplotFunction = clsGgplotFunc
+    End Sub
+
+    Public Sub me_me() Handles tabctrlBoxSubdialog.TabIndexChanged
+        If tabctrlBoxSubdialog.SelectedTab Is tbpXAxis Then
+            ucrXAxis.bIsX = True
+        ElseIf tabctrlBoxSubdialog.SelectedTab Is tbpYAxis Then
+            ucrYAxis.bIsX = False
+        End If
     End Sub
 
     Private Sub Themes()
@@ -78,32 +91,17 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub LegendDefaults()
-        chkDisplayLegend.Checked = True
+    Private Sub TitleDefaults()
         chkDisplayLegendTitle.Checked = True
-        chkChangeLegendTitle.Checked = False
-        txtChangeLegendTitle.Visible = False
-        chkChangeLegendLabels.Checked = False
-        txtChangeLegendLabels.Visible = False
-    End Sub
-
-    Private Sub chkDisplayLegend_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegend.CheckedChanged
-
+        chkOverwriteLegendTitle.Checked = False
+        txtOverwriteLegendTitle.Visible = False
     End Sub
 
     Private Sub chkChangeLegendTitle_CheckedChanged(sender As Object, e As EventArgs)
-        If chkChangeLegendTitle.Checked Then
-            txtChangeLegendTitle.Visible = True
+        If chkOverwriteLegendTitle.Checked Then
+            txtOverwriteLegendTitle.Visible = True
         Else
-            txtChangeLegendTitle.Visible = False
-        End If
-    End Sub
-
-    Private Sub chkChangeLegendLabels_CheckedChanged(sender As Object, e As EventArgs) Handles chkChangeLegendLabels.CheckedChanged
-        If chkChangeLegendLabels.Checked Then
-            txtChangeLegendLabels.Visible = True
-        Else
-            txtChangeLegendLabels.Visible = False
+            txtOverwriteLegendTitle.Visible = False
         End If
     End Sub
 
@@ -221,6 +219,9 @@ Public Class sdgPlots
 
     Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
         IncludeFacets()
+        If Not chkIncludeFacets.Checked Then
+            clsRsyntax.RemoveOperatorParameter("facet")
+        End If
     End Sub
 
     Private Sub ucr1stFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.SelectionChanged
@@ -289,35 +290,16 @@ Public Class sdgPlots
         clsRsyntax = clsRSyntaxIn
     End Sub
 
-    Private Sub txtXTitle_Leave(sender As Object, e As EventArgs) Handles txtXTitle.Leave
-        clsXLabFunction.AddParameter("label", Chr(34) & txtXTitle.Text & Chr(34))
+    Public Sub SetRsyntaxAxis(clsRsyntaxAxis As RSyntax)
+        clsRsyntax = clsRsyntaxAxis
     End Sub
-
-    Private Sub chkXDisplayTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkXDisplayTitle.CheckedChanged
-        If chkXDisplayTitle.Checked Then
-            txtXTitle.Visible = True
-            clsXLabFunction.SetRCommand("xlab")
-            clsRsyntax.AddOperatorParameter("xlab", clsRFunc:=clsXLabFunction)
+    Private Sub ucrInputGraphTitle_NameChanged() Handles ucrInputGraphTitle.NameChanged
+        If Not ucrInputGraphTitle.IsEmpty Then
+            clsGraphTitleFunction.SetRCommand("ggtitle")
+            clsGraphTitleFunction.AddParameter("label", Chr(34) & ucrInputGraphTitle.GetText() & Chr(34))
+            clsRsyntax.AddOperatorParameter("ggtitle", clsRFunc:=clsGraphTitleFunction)
         Else
-            clsRsyntax.RemoveOperatorParameter("xlab")
-            txtXTitle.Visible = False
-        End If
-
-    End Sub
-
-    Private Sub chkDisplayYTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayYTitle.CheckedChanged
-        If chkDisplayYTitle.Checked Then
-            txtYTitle.Visible = True
-            clsYLabFunction.SetRCommand("ylab")
-            clsRsyntax.AddOperatorParameter("ylab", clsRFunc:=clsYLabFunction)
-        Else
-            clsRsyntax.RemoveOperatorParameter("ylab")
-            txtYTitle.Visible = False
+            clsRsyntax.RemoveOperatorParameter("ggtitle")
         End If
     End Sub
-
-    Private Sub txtYTitle_Leave(sender As Object, e As EventArgs) Handles txtYTitle.Leave
-        clsYLabFunction.AddParameter("label", Chr(34) & txtYTitle.Text & Chr(34))
-    End Sub
-
 End Class

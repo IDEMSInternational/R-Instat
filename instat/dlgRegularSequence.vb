@@ -239,7 +239,7 @@ Public Class dlgRegularSequence
             ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = False
             ucrBase.clsRsyntax.RemoveParameter("length.out")
             strRCommand = ucrBase.clsRsyntax.clsBaseFunction.ToScript()
-            vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strRCommand).AsNumeric
+            vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strRCommand, bSilent:=True).AsNumeric
             iLength = vecSequence.Length
             If iLength <> ucrSelectDataFrameRegularSequence.iDataFrameLength Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
@@ -247,7 +247,7 @@ Public Class dlgRegularSequence
                 clsRepFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength)
                 strRCommand = ucrBase.clsRsyntax.clsBaseFunction.ToScript()
                 bIsAssigned = False
-                vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strRCommand).AsNumeric
+                vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strRCommand, bSilent:=True).AsNumeric
                 SetAssignTo()
                 If iLength < ucrSelectDataFrameRegularSequence.iDataFrameLength Then
                     txtMessage.Text = "Sequence has been extended by repeating to match the length of the dataframe."
@@ -276,4 +276,5 @@ Public Class dlgRegularSequence
         nudTo.Increment = 10 ^ -(nudNumberofDecimalPlaces.Value)
         nudInStepsOf.Increment = 10 ^ -(nudNumberofDecimalPlaces.Value)
     End Sub
+
 End Class

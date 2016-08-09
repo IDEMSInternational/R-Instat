@@ -65,9 +65,10 @@ Public Class dlgRenameDescriptive
 
     Private Sub SetDefaultOject()
         ucrSelectorForRenameObject.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
-        ucrReceiverCurrentName.SetSelected(strSelectedOject, strSelectedDataFrame)
+        ucrReceiverCurrentName.Add(strSelectedOject, strSelectedDataFrame)
         bUseSelectedObject = False
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()

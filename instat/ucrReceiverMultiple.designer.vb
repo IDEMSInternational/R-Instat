@@ -32,6 +32,7 @@ Partial Class ucrReceiverMultiple
         Me.lstSelectedVariables.Activation = System.Windows.Forms.ItemActivation.TwoClick
         Me.lstSelectedVariables.ContextMenuStrip = Me.MenuStripDelete
         Me.lstSelectedVariables.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lstSelectedVariables.FullRowSelect = True
         Me.lstSelectedVariables.GridLines = True
         Me.lstSelectedVariables.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lstSelectedVariables.Location = New System.Drawing.Point(0, 0)

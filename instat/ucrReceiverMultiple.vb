@@ -26,29 +26,16 @@ Public Class ucrReceiverMultiple
         End If
     End Sub
 
-    Public Event SelectionChanged()
-
     Public Overrides Sub AddSelected()
-        Dim objItem As ListViewItem
-        Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
-        Dim grpCurr As New ListViewGroup
+        Dim lstItems(Selector.lstAvailableVariable.SelectedItems.Count - 1) As KeyValuePair(Of String, String)
+        Dim lviTemp As ListViewItem
+        Dim i As Integer = 0
 
-        Selector.lstAvailableVariable.SelectedItems.CopyTo(tempObjects, 0)
-        For Each objItem In tempObjects
-            If Not GetCurrItemNames().Contains(objItem.Text) Then
-                If Not GetCurrGroupNames().Contains(objItem.Tag) Then
-                    grpCurr = New ListViewGroup(key:=objItem.Tag, headerText:=objItem.Tag)
-                    lstSelectedVariables.Groups.Add(grpCurr)
-                Else
-                    grpCurr = lstSelectedVariables.Groups(GetCurrGroupNames().IndexOf(objItem.Tag))
-                End If
-                lstSelectedVariables.Items.Add(objItem.Text).Group = grpCurr
-                lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Tag = objItem.Tag
-                Selector.AddToVariablesList(objItem.Text)
-            End If
+        For Each lviTemp In Selector.lstAvailableVariable.SelectedItems
+            lstItems(i) = New KeyValuePair(Of String, String)(lviTemp.Tag, lviTemp.Text)
+            i = i + 1
         Next
-        RaiseEvent SelectionChanged()
-
+        AddMultiple(lstItems)
     End Sub
 
     Private Function GetCurrItemNames() As List(Of String)
@@ -82,17 +69,29 @@ Public Class ucrReceiverMultiple
                 Selector.RemoveFromVariablesList(objItem.Text)
             Next
         End If
-        RaiseEvent SelectionChanged()
+        OnSelectionChanged()
         MyBase.RemoveSelected()
+    End Sub
+
+    Public Overrides Sub Remove(strItems() As String)
+        MyBase.Remove(strItems)
+        Dim strTempItem As String
+
+        For Each strTempItem In strItems
+            lstSelectedVariables.Items.RemoveByKey(strTempItem)
+            Selector.RemoveFromVariablesList(strTempItem)
+        Next
     End Sub
 
     Public Overrides Sub Clear()
         Dim lviVar As ListViewItem
-        For Each lviVar In lstSelectedVariables.Items
-            lviVar.Selected = True
-        Next
-        RemoveSelected()
+        Dim strItems As New List(Of String)
 
+        For Each lviVar In lstSelectedVariables.Items
+            strItems.Add(lviVar.Text)
+        Next
+        Remove(strItems.ToArray())
+        'RemoveSelected()
     End Sub
 
     Public Overrides Function IsEmpty() As Boolean
@@ -284,9 +283,45 @@ Public Class ucrReceiverMultiple
         End If
     End Function
 
-    Public Sub Add(strItems As String())
-        For Each strItem In strItems
-            MyBase.Add(strItem)
+    Public Sub AddMultiple(lstItems As KeyValuePair(Of String, String)())
+        Dim kvpTempItem As KeyValuePair(Of String, String)
+        Dim grpCurr As New ListViewGroup
+
+        For Each kvpTempItem In lstItems
+
+            If Not GetCurrItemNames().Contains(kvpTempItem.Value) Then
+                If Not GetCurrGroupNames().Contains(kvpTempItem.Key) Then
+                    grpCurr = New ListViewGroup(key:=kvpTempItem.Key, headerText:=kvpTempItem.Key)
+                    lstSelectedVariables.Groups.Add(grpCurr)
+                Else
+                    grpCurr = lstSelectedVariables.Groups(GetCurrGroupNames().IndexOf(kvpTempItem.Key))
+                End If
+                lstSelectedVariables.Items.Add(kvpTempItem.Value).Group = grpCurr
+                lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Tag = kvpTempItem.Key
+                lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Name = kvpTempItem.Value
+                Selector.AddToVariablesList(kvpTempItem.Value)
+            End If
         Next
+        OnSelectionChanged()
+    End Sub
+
+    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
+        Dim kvpItems(0) As KeyValuePair(Of String, String)
+        If strDataFrame = "" Then
+            For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
+                If Selector.lstAvailableVariable.Items(i).Text = strItem Then
+                    strDataFrame = Selector.lstAvailableVariable.Items(i).Tag
+                End If
+            Next
+        End If
+        kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
+        AddMultiple(kvpItems)
+    End Sub
+
+    Public Sub AddItemsWithMetadataProperty(strCurrentDataFrame As String, strProperty As String, strValues As String())
+        If Selector IsNot Nothing Then
+            SetMeAsReceiver()
+            frmMain.clsRLink.SelectColumnsWithMetadataProperty(Me, strCurrentDataFrame, strProperty, strValues)
+        End If
     End Sub
 End Class

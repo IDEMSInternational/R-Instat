@@ -36,6 +36,7 @@ Partial Class ucrSelector
         Me.lstAvailableVariable.Activation = System.Windows.Forms.ItemActivation.TwoClick
         Me.lstAvailableVariable.ContextMenuStrip = Me.SelectionMenuStrip
         Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lstAvailableVariable.FullRowSelect = True
         Me.lstAvailableVariable.GridLines = True
         Me.lstAvailableVariable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.lstAvailableVariable.HideSelection = False

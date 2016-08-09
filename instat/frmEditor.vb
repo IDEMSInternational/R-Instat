@@ -101,8 +101,11 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
-        clsDeleteColumns.AddParameter("cols", SelectedColumns())
-        frmMain.clsRLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
+        Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & vbNewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
+        If deleteCol = DialogResult.Yes Then
+            clsDeleteColumns.AddParameter("cols", SelectedColumns())
+            frmMain.clsRLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
+        End If
     End Sub
 
     'Private Sub resetToDefaultWidthToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles resetToDefaultWidthToolStripMenuItem.Click
@@ -225,8 +228,11 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuDeleteRows_Click(sender As Object, e As EventArgs) Handles mnuDeleteRows.Click
-        clsDeleteRows.AddParameter("row_names", SelectedRows())
-        frmMain.clsRLink.RunScript(clsDeleteRows.ToScript(), strComment:="Right Click menu: Delete row(s)")
+        Dim Delete = MsgBox("Are you sure you want to delete these row(s)?" & vbNewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Row(s)")
+        If Delete = DialogResult.Yes Then
+            clsDeleteRows.AddParameter("row_names", SelectedRows())
+            frmMain.clsRLink.RunScript(clsDeleteRows.ToScript(), strComment:="Right Click menu: Delete row(s)")
+        End If
     End Sub
 
     'Private Sub resetToDefaultHeightToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles resetToDefaultHeightToolStripMenuItem.Click
@@ -275,10 +281,13 @@ Public Class frmEditor
     End Sub
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
-        Dim strSctipt As String
+        Dim strScript As String
+        Dim Delete = MsgBox("Are you sure you want to delete this dataframe?" & vbNewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
         If grdData.Worksheets.Count > 0 Then
-            strSctipt = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
-            frmMain.clsRLink.RunScript(strSctipt)
+            If Delete = DialogResult.Yes Then
+                strScript = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
+                frmMain.clsRLink.RunScript(strScript)
+            End If
         End If
     End Sub
 
@@ -568,5 +577,19 @@ Public Class frmEditor
 
     Private Sub UnfreezeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnfreezeToolStripMenuItem.Click
         frmMain.clsRLink.RunScript(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
+    End Sub
+
+    Private Sub grdCurrSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforeCut
+        e.IsCancelled = True
+    End Sub
+
+    Private Sub grdCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforePaste
+        e.IsCancelled = True
+    End Sub
+
+    ' Not currently working. Bug with reogrid reported here:
+    ' https://reogrid.net/forum/viewtopic.php?id=350
+    Private Sub grdCurrSheet_BeforeRangeMove(sender As Object, e As BeforeCopyOrMoveRangeEventArgs) Handles grdCurrSheet.BeforeRangeMove
+        e.IsCancelled = True
     End Sub
 End Class

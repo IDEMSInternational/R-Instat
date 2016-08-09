@@ -47,7 +47,6 @@ Public Class dlgBoxplot
         ucrSelectorBoxPlot.Focus()
         ucrVariablesAsFactorForBoxplot.ResetControl()
         chkHorizontalBoxplot.Checked = False
-        sdgBoxPlot.SetDefaults()
         TestOkEnabled()
         SetXParameter()
     End Sub
@@ -94,6 +93,7 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetDataFrame(strNewDataFrame:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
     End Sub
 

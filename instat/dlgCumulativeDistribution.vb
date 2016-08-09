@@ -90,18 +90,6 @@ Public Class dlgCumulativeDistribution
         SetDefaults()
     End Sub
 
-    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
-        sdgCumDistLineOptions.ShowDialog()
-    End Sub
-
-    Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
-        sdgCumDistPlotOptions.ShowDialog()
-    End Sub
-
-    Private Sub ucrVariateReceiver_Load(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub ucrVariablesAsFactorforCumDist_SelectionChanged() Handles ucrVariablesAsFactorforCumDist.SelectionChanged
         If Not ucrVariablesAsFactorforCumDist.IsEmpty Then
             clsRaesFunction.AddParameter("x", ucrVariablesAsFactorforCumDist.GetVariableNames(False))
@@ -130,5 +118,10 @@ Public Class dlgCumulativeDistribution
             ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+    End Sub
+
+    Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
+        sdgPlots.SetDataFrame(strNewDataFrame:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        sdgPlots.ShowDialog()
     End Sub
 End Class

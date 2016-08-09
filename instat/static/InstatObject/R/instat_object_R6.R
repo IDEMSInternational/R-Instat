@@ -262,7 +262,7 @@ instat_object$set("public", "get_data_frame", function(data_name, convert_to_cha
 }
 )
 
-instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = FALSE, direct_from_attributes = FALSE) { 
+instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = TRUE, direct_from_attributes = FALSE) { 
   if(missing(data_name)) {
     retlist <- list()
     for (curr_obj in private$.data_objects) {
@@ -315,27 +315,27 @@ instat_object$set("public", "get_data_changed", function(data_name) {
 } 
 )
 
-instat_object$set("public", "get_variables_metadata_changed", function(data_obj) { 
-  if(missing(data_obj)) {
+instat_object$set("public", "get_variables_metadata_changed", function(data_name) { 
+  if(missing(data_name)) {
     if(private$.data_objects_changed) return(TRUE)
     return(any(sapply(private$.data_objects, function(x) x$variables_metadata_changed)))
   }
   else {
-    return(self$get_data_objects(data_obj)$variables_metadata_changed)
+    return(self$get_data_objects(data_name)$variables_metadata_changed)
   }
 } 
 )
 
-instat_object$set("public", "get_metadata_changed", function(data_obj) { 
-  if(missing(data_obj)) {
-    if(private$.data_objects_changed) return (TRUE)
+instat_object$set("public", "get_metadata_changed", function(data_name) { 
+  if(missing(data_name)) {
+    if(private$.data_objects_changed) return(TRUE)
     for(curr_obj in private$.data_objects) {
       if(curr_obj$metadata_changed) return(TRUE)
     }
     return(FALSE)
   }
   else {
-    return(self$get_data_objects(data_obj)$metadata_changed)
+    return(self$get_data_objects(data_name)$metadata_changed)
   }
 } 
 )
@@ -565,9 +565,9 @@ instat_object$set("public", "get_graph_names", function(data_name, include_overa
 }
 )
 
-instat_object$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE) {
+instat_object$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE, na.rm = TRUE) {
   if(missing(filter)) stop("filter is required")
-  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter)
+  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter, na.rm = na.rm)
 }
 ) 
 
@@ -780,6 +780,11 @@ instat_object$set("public", "drop_unused_factor_levels", function(data_name, col
 
 instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_levels) {
   self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_levels = new_levels)
+} 
+)
+
+instat_object$set("public", "edit_factor_level", function(data_name, col_name,old_level, new_level) {
+  self$get_data_objects(data_name)$edit_factor_level(col_name = col_name, old_level = old_level, new_level = new_level)
 } 
 )
 
