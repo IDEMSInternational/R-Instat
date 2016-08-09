@@ -65,9 +65,11 @@ Public Class ucrReceiverSingle
                         End If
                     Next
                 End If
-                clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                clsGetDataType.AddParameter("column", Chr(34) & strItem & Chr(34))
-                strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                If strDataFrame <> "" Then
+                    clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+                    clsGetDataType.AddParameter("column", Chr(34) & strItem & Chr(34))
+                    strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                End If
             Else
                 strCurrDataType = ""
             End If

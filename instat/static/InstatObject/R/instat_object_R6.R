@@ -565,9 +565,9 @@ instat_object$set("public", "get_graph_names", function(data_name, include_overa
 }
 )
 
-instat_object$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE) {
+instat_object$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE, na.rm = TRUE) {
   if(missing(filter)) stop("filter is required")
-  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter)
+  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter, na.rm = na.rm)
 }
 ) 
 
