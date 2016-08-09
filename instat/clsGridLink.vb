@@ -118,7 +118,7 @@ Public Class clsGridLink
                     dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript()).AsCharacterMatrix()
                     FillSheet(dfTemp, strDataName, grdVariablesMetadata)
                     clsSetVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-                    clsSetVariablesMetadataChanged.AddParameter("new_val", "True")
+                    clsSetVariablesMetadataChanged.AddParameter("new_val", "TRUE")
                     frmMain.clsRLink.RunInternalScript(clsSetVariablesMetadataChanged.ToScript())
                 End If
             Next
@@ -220,9 +220,9 @@ Public Class clsGridLink
                                 grdVariablesMetadata.CurrentWorksheet.IterateCells(selRange, Function(row, col, cell)
                                                                                                  Select Case cell.Data
 
-                                                                                                     Case "True"
+                                                                                                     Case "TRUE"
                                                                                                          SetDataViewColumnColor(row, 0)
-                                                                                                     Case "False"
+                                                                                                     Case "FALSE"
                                                                                                          SetDataViewColumnColor(row, 1)
                                                                                                  End Select
                                                                                                  Return True
@@ -233,7 +233,7 @@ Public Class clsGridLink
                                 grdVariablesMetadata.CurrentWorksheet.IterateCells(selRange, Function(row, col, cell)
                                                                                                  Select Case cell.Data
 
-                                                                                                     Case "Integer"
+                                                                                                     Case "integer"
                                                                                                          SetDataViewColumnColor(row, 0)
                                                                                                      Case "character"
                                                                                                          SetDataViewColumnColor(row, 1)
