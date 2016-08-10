@@ -77,16 +77,8 @@ data_object <- R6Class("data_object",
                             },
                             current_filter = function(filter) {
                               if(missing(filter)) {
-                                filter_string = ""
                                 #TODO Change this to call get_filter_as_logical
-                                i = 1
-                                result = matrix(nrow = nrow(private$data), ncol = length(private$.current_filter$filter_list))
-                                for(condition in private$.current_filter$filter_list) {
-                                  func = match.fun(condition[["operation"]])
-                                  result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
-                                  i = i + 1
-                                }
-                                return(apply(result, 1, all))
+                                return(self$get_filter_as_logical(private$.current_filter$name))
                               }
                               else {
                                 private$.current_filter <- filter
@@ -497,8 +489,14 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
       }
       else {
         if(filter_applied) stop("Cannot replace values in a factor column when a filter is applied. Remove the filter to do this replacement.")
-        self$edit_factor_level(col_name = col_name, old_level = old_value, new_level = new_value)
-        done = TRUE
+        if(is.na(old_value)) {
+          if(!new_value %in% levels(private$data[[col_name]])) stop(new_value, " is not a level of this factor. Add this as a level of the factor before using replace.")
+          replace_rows <- (is.na(curr_column))
+        }
+        else {
+          self$edit_factor_level(col_name = col_name, old_level = old_value, new_level = new_value)
+          done = TRUE
+        }
       }
     }
     else if(str_data_type == "integer" || str_data_type == "numeric") {
@@ -529,7 +527,8 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
           }
         }
         else {
-          replace_rows <- (curr_column == old_value)
+          if(is.na(old_value)) replace_rows <- (is.na(curr_column))
+          else replace_rows <- (curr_column == old_value)
         }
       }
     }
@@ -538,7 +537,10 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
         replace_rows <- (data_row_names %in% rows)
         if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
       }
-      else replace_rows <- (curr_column == old_value)
+      else {
+        if(is.na(old_value)) replace_rows <- (is.na(curr_column))
+        else replace_rows <- (curr_column == old_value)
+      }
       new_value <- as.character(new_value)
     }
     else if(str_data_type == "logical") {
@@ -548,7 +550,10 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
         replace_rows <- (data_row_names %in% rows)
         if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
       }
-      else replace_rows <- (curr_column == old_value)
+      else {
+        if(is.na(old_value)) replace_rows <- (is.na(curr_column))
+        else replace_rows <- (curr_column == old_value)
+      }
     }
     #TODO add other data type cases
     else {
@@ -556,9 +561,13 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
         replace_rows <- (data_row_names %in% rows)
         if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
       }
-      replace_rows <- (curr_column == old_value)
+      else {
+        if(is.na(old_value)) replace_rows <- (is.na(curr_column))
+        else replace_rows <- (curr_column == old_value)
+      }
     }
     if(!done) {
+      replace_rows[is.na(replace_rows)] <- FALSE
       if(sum(replace_rows) > 0) {
         if(filter_applied) {
           replace_rows <- replace_rows & curr_filter
@@ -686,7 +695,8 @@ data_object$set("public", "add_defaults_variables_metadata", function() {
 
 data_object$set("public", "remove_rows_in_data", function(row_names) {
   if(!all(row_names %in% rownames(private$data))) stop("Some of the row_names not found in data")
-  self$set_data(private$data[!(rownames(private$data) %in% row_names), ])
+  rows_to_remove <- which(rownames(private$data) %in% row_names)
+  self$set_data(slice(private$data, -rows_to_remove))
   self$append_to_changes(list(Removed_row, row_names))
   self$data_changed <- TRUE
 }
@@ -1059,7 +1069,7 @@ data_object$set("public", "set_protected_columns", function(col_names) {
 }
 )
 
-data_object$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE) {
+data_object$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE) {
   if(missing(filter)) stop("filter is required")
   if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
   
@@ -1074,7 +1084,7 @@ data_object$set("public", "add_filter", function(filter, filter_name = "", repla
   }
   else {
     if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
-    filter_calc = calculation$new(type = "filter", filter_list = filter)
+    filter_calc = calculation$new(type = "filter", filter_list = filter, name = filter_name, parameters = list(na.rm = na.rm))
     private$filters[[filter_name]] <- filter_calc
     self$append_to_changes(list(Added_filter, filter_name))
     if(set_as_current) {
@@ -1128,7 +1138,9 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
     result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
     i = i + 1
   }
-  return(apply(result, 1, all))
+  out <- apply(result, 1, all)
+  out[is.na(out)] <- !private$filters[[filter_name]]$parameters[["na.rm"]]
+  return(out)
 }
 )
 
