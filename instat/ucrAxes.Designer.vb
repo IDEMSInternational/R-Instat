@@ -29,6 +29,7 @@ Partial Class ucrAxes
         Me.chkOverwriteTitle = New System.Windows.Forms.CheckBox()
         Me.chkDisplayTitle = New System.Windows.Forms.CheckBox()
         Me.grpTickMarkers = New System.Windows.Forms.GroupBox()
+        Me.ucrTickMarkers = New instat.ucrInputComboBox()
         Me.lblTickMarkersNoOfDecimalPlaces = New System.Windows.Forms.Label()
         Me.nudTickMarkersNoOfDecimalPlaces = New System.Windows.Forms.NumericUpDown()
         Me.rdoTickMarkersAuto = New System.Windows.Forms.RadioButton()
@@ -49,7 +50,6 @@ Partial Class ucrAxes
         Me.lblLowerLimit = New System.Windows.Forms.Label()
         Me.rdoScalesCustom = New System.Windows.Forms.RadioButton()
         Me.rdoScalesAuto = New System.Windows.Forms.RadioButton()
-        Me.ucrTickMarkers = New instat.ucrInputComboBox()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpTickMarkers.SuspendLayout()
         CType(Me.nudTickMarkersNoOfDecimalPlaces, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -147,6 +147,14 @@ Partial Class ucrAxes
         Me.grpTickMarkers.TabStop = False
         Me.grpTickMarkers.Text = "Tick Markers"
         '
+        'ucrTickMarkers
+        '
+        Me.ucrTickMarkers.IsReadOnly = False
+        Me.ucrTickMarkers.Location = New System.Drawing.Point(6, 51)
+        Me.ucrTickMarkers.Name = "ucrTickMarkers"
+        Me.ucrTickMarkers.Size = New System.Drawing.Size(137, 21)
+        Me.ucrTickMarkers.TabIndex = 16
+        '
         'lblTickMarkersNoOfDecimalPlaces
         '
         Me.lblTickMarkersNoOfDecimalPlaces.AutoSize = True
@@ -177,7 +185,7 @@ Partial Class ucrAxes
         'ucrSpecificValues
         '
         Me.ucrSpecificValues.IsReadOnly = False
-        Me.ucrSpecificValues.Location = New System.Drawing.Point(6, 88)
+        Me.ucrSpecificValues.Location = New System.Drawing.Point(6, 78)
         Me.ucrSpecificValues.Name = "ucrSpecificValues"
         Me.ucrSpecificValues.Size = New System.Drawing.Size(173, 21)
         Me.ucrSpecificValues.TabIndex = 15
@@ -327,14 +335,6 @@ Partial Class ucrAxes
         Me.rdoScalesAuto.TabStop = True
         Me.rdoScalesAuto.Text = "Auto"
         Me.rdoScalesAuto.UseVisualStyleBackColor = True
-        '
-        'ucrTickMarkers
-        '
-        Me.ucrTickMarkers.IsReadOnly = False
-        Me.ucrTickMarkers.Location = New System.Drawing.Point(6, 51)
-        Me.ucrTickMarkers.Name = "ucrTickMarkers"
-        Me.ucrTickMarkers.Size = New System.Drawing.Size(137, 21)
-        Me.ucrTickMarkers.TabIndex = 16
         '
         'ucrAxes
         '

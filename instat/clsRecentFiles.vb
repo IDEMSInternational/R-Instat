@@ -49,15 +49,18 @@ Public Class clsRecentFiles
     End Sub
 
     Public Sub saveOnClose()
+        ' temp disabled to prevent error accessing file
+        ' TODO look up app config and Setting file as alternatives
+
         'saves the list of opened files on form close
         ' save MRU - delete existing files first
-        If File.Exists(MRUPath) Then
-            File.WriteAllText(MRUPath, "")
-        End If
+        'If File.Exists(MRUPath) Then
+        'File.WriteAllText(MRUPath, "")
+        'End If
         ' write each item to the file...
-        For Each sPath As String In strListMRU
-            File.AppendAllText(MRUPath, sPath & vbCrLf)
-        Next
+        'For Each sPath As String In strListMRU
+        'File.AppendAllText(MRUPath, sPath & vbCrLf)
+        'Next
     End Sub
 
     Public Sub addToMenu(ByVal tempObj As Object)

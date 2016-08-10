@@ -23,149 +23,119 @@ Partial Class dlgDescriptiveStatistics
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.cmdStatistics = New System.Windows.Forms.Button()
-        Me.grpgraphics = New System.Windows.Forms.GroupBox()
-        Me.chkCumulativeFrequency = New System.Windows.Forms.CheckBox()
-        Me.chkBoxPlot = New System.Windows.Forms.CheckBox()
-        Me.chkStemAndLeaf = New System.Windows.Forms.CheckBox()
-        Me.chkGraphics = New System.Windows.Forms.CheckBox()
-        Me.ucrDataSelector = New instat.ucrSelectorAddRemove()
-        Me.ucrObjectReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSelectorDescribeOneVar = New instat.ucrSelectorAddRemove()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.grpgraphics.SuspendLayout()
+        Me.ucrBaseDescribeOneVar = New instat.ucrButtons()
+        Me.chkSaveResult = New System.Windows.Forms.CheckBox()
+        Me.lblNewDataFrame = New System.Windows.Forms.Label()
+        Me.UcrInputTextBox1 = New instat.ucrInputTextBox()
+        Me.ucrReceiverDescribeOneVar = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
         '
         'cmdStatistics
         '
-        Me.cmdStatistics.Location = New System.Drawing.Point(10, 165)
+        Me.cmdStatistics.Location = New System.Drawing.Point(325, 179)
         Me.cmdStatistics.Name = "cmdStatistics"
-        Me.cmdStatistics.Size = New System.Drawing.Size(104, 23)
+        Me.cmdStatistics.Size = New System.Drawing.Size(71, 23)
         Me.cmdStatistics.TabIndex = 90
-        Me.cmdStatistics.Tag = "Choose_Statistics"
-        Me.cmdStatistics.Text = "Choose Statistics "
+        Me.cmdStatistics.Tag = "Statistics"
+        Me.cmdStatistics.Text = "Statistics "
         Me.cmdStatistics.UseVisualStyleBackColor = True
         '
-        'grpgraphics
+        'ucrSelectorDescribeOneVar
         '
-        Me.grpgraphics.Controls.Add(Me.chkCumulativeFrequency)
-        Me.grpgraphics.Controls.Add(Me.chkBoxPlot)
-        Me.grpgraphics.Controls.Add(Me.chkStemAndLeaf)
-        Me.grpgraphics.Location = New System.Drawing.Point(93, 192)
-        Me.grpgraphics.Name = "grpgraphics"
-        Me.grpgraphics.Size = New System.Drawing.Size(314, 28)
-        Me.grpgraphics.TabIndex = 89
-        Me.grpgraphics.TabStop = False
-        '
-        'chkCumulativeFrequency
-        '
-        Me.chkCumulativeFrequency.AutoSize = True
-        Me.chkCumulativeFrequency.Location = New System.Drawing.Point(189, 5)
-        Me.chkCumulativeFrequency.Name = "chkCumulativeFrequency"
-        Me.chkCumulativeFrequency.Size = New System.Drawing.Size(128, 17)
-        Me.chkCumulativeFrequency.TabIndex = 61
-        Me.chkCumulativeFrequency.Tag = "Cumulative_frequency"
-        Me.chkCumulativeFrequency.Text = "Cumulative frequency"
-        Me.chkCumulativeFrequency.UseVisualStyleBackColor = True
-        '
-        'chkBoxPlot
-        '
-        Me.chkBoxPlot.AutoSize = True
-        Me.chkBoxPlot.Location = New System.Drawing.Point(112, 6)
-        Me.chkBoxPlot.Name = "chkBoxPlot"
-        Me.chkBoxPlot.Size = New System.Drawing.Size(65, 17)
-        Me.chkBoxPlot.TabIndex = 60
-        Me.chkBoxPlot.Tag = "Box_Plot"
-        Me.chkBoxPlot.Text = "Box Plot"
-        Me.chkBoxPlot.UseVisualStyleBackColor = True
-        '
-        'chkStemAndLeaf
-        '
-        Me.chkStemAndLeaf.AutoSize = True
-        Me.chkStemAndLeaf.Location = New System.Drawing.Point(7, 5)
-        Me.chkStemAndLeaf.Name = "chkStemAndLeaf"
-        Me.chkStemAndLeaf.Size = New System.Drawing.Size(91, 17)
-        Me.chkStemAndLeaf.TabIndex = 1
-        Me.chkStemAndLeaf.Tag = "Stem_and_Leaf"
-        Me.chkStemAndLeaf.Text = "Stem and leaf"
-        Me.chkStemAndLeaf.UseVisualStyleBackColor = True
-        '
-        'chkGraphics
-        '
-        Me.chkGraphics.AutoSize = True
-        Me.chkGraphics.Location = New System.Drawing.Point(10, 200)
-        Me.chkGraphics.Name = "chkGraphics"
-        Me.chkGraphics.Size = New System.Drawing.Size(71, 17)
-        Me.chkGraphics.TabIndex = 88
-        Me.chkGraphics.Tag = "Graphics"
-        Me.chkGraphics.Text = "Graphics "
-        Me.chkGraphics.UseVisualStyleBackColor = True
-        '
-        'ucrDataSelector
-        '
-        Me.ucrDataSelector.Location = New System.Drawing.Point(10, 10)
-        Me.ucrDataSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataSelector.Name = "ucrDataSelector"
-        Me.ucrDataSelector.Size = New System.Drawing.Size(213, 147)
-        Me.ucrDataSelector.TabIndex = 92
-        '
-        'ucrObjectReceiver
-        '
-        Me.ucrObjectReceiver.Location = New System.Drawing.Point(235, 60)
-        Me.ucrObjectReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrObjectReceiver.Name = "ucrObjectReceiver"
-        Me.ucrObjectReceiver.Selector = Nothing
-        Me.ucrObjectReceiver.Size = New System.Drawing.Size(120, 26)
-        Me.ucrObjectReceiver.TabIndex = 93
+        Me.ucrSelectorDescribeOneVar.bShowHiddenColumns = False
+        Me.ucrSelectorDescribeOneVar.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorDescribeOneVar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorDescribeOneVar.Name = "ucrSelectorDescribeOneVar"
+        Me.ucrSelectorDescribeOneVar.Size = New System.Drawing.Size(213, 147)
+        Me.ucrSelectorDescribeOneVar.TabIndex = 92
         '
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(236, 41)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(272, 10)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(90, 13)
         Me.lblSelectedVariable.TabIndex = 94
         Me.lblSelectedVariable.Tag = "Selected_Variable"
         Me.lblSelectedVariable.Text = "Selected Variable"
         '
-        'ucrBase
+        'ucrBaseDescribeOneVar
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 228)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(399, 53)
-        Me.ucrBase.TabIndex = 95
+        Me.ucrBaseDescribeOneVar.Location = New System.Drawing.Point(10, 228)
+        Me.ucrBaseDescribeOneVar.Name = "ucrBaseDescribeOneVar"
+        Me.ucrBaseDescribeOneVar.Size = New System.Drawing.Size(399, 53)
+        Me.ucrBaseDescribeOneVar.TabIndex = 95
+        '
+        'chkSaveResult
+        '
+        Me.chkSaveResult.AutoSize = True
+        Me.chkSaveResult.Location = New System.Drawing.Point(10, 169)
+        Me.chkSaveResult.Name = "chkSaveResult"
+        Me.chkSaveResult.Size = New System.Drawing.Size(87, 17)
+        Me.chkSaveResult.TabIndex = 96
+        Me.chkSaveResult.Tag = "Save_Result"
+        Me.chkSaveResult.Text = "Save Result "
+        Me.chkSaveResult.UseVisualStyleBackColor = True
+        '
+        'lblNewDataFrame
+        '
+        Me.lblNewDataFrame.AutoSize = True
+        Me.lblNewDataFrame.Location = New System.Drawing.Point(28, 189)
+        Me.lblNewDataFrame.Name = "lblNewDataFrame"
+        Me.lblNewDataFrame.Size = New System.Drawing.Size(108, 13)
+        Me.lblNewDataFrame.TabIndex = 97
+        Me.lblNewDataFrame.Tag = "Into_New_Data_Frame"
+        Me.lblNewDataFrame.Text = "Into New Data Frame"
+        '
+        'UcrInputTextBox1
+        '
+        Me.UcrInputTextBox1.IsReadOnly = False
+        Me.UcrInputTextBox1.Location = New System.Drawing.Point(143, 184)
+        Me.UcrInputTextBox1.Name = "UcrInputTextBox1"
+        Me.UcrInputTextBox1.Size = New System.Drawing.Size(95, 21)
+        Me.UcrInputTextBox1.TabIndex = 98
+        '
+        'ucrReceiverDescribeOneVar
+        '
+        Me.ucrReceiverDescribeOneVar.Location = New System.Drawing.Point(260, 23)
+        Me.ucrReceiverDescribeOneVar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDescribeOneVar.Name = "ucrReceiverDescribeOneVar"
+        Me.ucrReceiverDescribeOneVar.Selector = Nothing
+        Me.ucrReceiverDescribeOneVar.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverDescribeOneVar.TabIndex = 99
         '
         'dlgDescriptiveStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 297)
-        Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrReceiverDescribeOneVar)
+        Me.Controls.Add(Me.UcrInputTextBox1)
+        Me.Controls.Add(Me.lblNewDataFrame)
+        Me.Controls.Add(Me.chkSaveResult)
+        Me.Controls.Add(Me.ucrBaseDescribeOneVar)
         Me.Controls.Add(Me.lblSelectedVariable)
-        Me.Controls.Add(Me.ucrObjectReceiver)
-        Me.Controls.Add(Me.ucrDataSelector)
+        Me.Controls.Add(Me.ucrSelectorDescribeOneVar)
         Me.Controls.Add(Me.cmdStatistics)
-        Me.Controls.Add(Me.grpgraphics)
-        Me.Controls.Add(Me.chkGraphics)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDescriptiveStatistics"
         Me.ShowIcon = False
-        Me.Tag = "Descriptive_Statistics"
-        Me.Text = "Descriptive Statistics"
-        Me.grpgraphics.ResumeLayout(False)
-        Me.grpgraphics.PerformLayout()
+        Me.Tag = "Describe_One_Variable"
+        Me.Text = "Describe One Variable"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents cmdStatistics As Button
-    Friend WithEvents grpgraphics As GroupBox
-    Friend WithEvents chkCumulativeFrequency As CheckBox
-    Friend WithEvents chkBoxPlot As CheckBox
-    Friend WithEvents chkStemAndLeaf As CheckBox
-    Friend WithEvents chkGraphics As CheckBox
-    Friend WithEvents ucrDataSelector As ucrSelectorAddRemove
-    Friend WithEvents ucrObjectReceiver As ucrReceiverSingle
+    Friend WithEvents ucrSelectorDescribeOneVar As ucrSelectorAddRemove
     Friend WithEvents lblSelectedVariable As Label
-    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrBaseDescribeOneVar As ucrButtons
+    Friend WithEvents chkSaveResult As CheckBox
+    Friend WithEvents lblNewDataFrame As Label
+    Friend WithEvents UcrInputTextBox1 As ucrInputTextBox
+    Friend WithEvents ucrReceiverDescribeOneVar As ucrReceiverMultiple
 End Class
+
