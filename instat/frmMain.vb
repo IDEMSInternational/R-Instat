@@ -1010,4 +1010,8 @@ Public Class frmMain
     Private Sub mnuOrganiseDataFrameReplaceValues_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameReplaceValues.Click
         dlgReplace.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeTwoVariablesSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesSummarise.Click
+        dlgDescribeTwoVariable.ShowDialog()
+    End Sub
 End Class

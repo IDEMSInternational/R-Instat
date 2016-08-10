@@ -14,18 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Public Class sdgDescribe
-    Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class dlgDescribeTwoVariable
+    Private Sub dlgDescribeTwoVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-    End Sub
-
-    Public Sub SetDefaults()
-        chkMean.Checked = True
-        chkStdDev.Checked = True
-        chkMinimum.Checked = True
-        chkMaximum.Checked = True
-        chkNMissing.Checked = True
-        chkN.Checked = True
-        chkNTotal.Checked = True
     End Sub
 End Class

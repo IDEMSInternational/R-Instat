@@ -315,27 +315,27 @@ instat_object$set("public", "get_data_changed", function(data_name) {
 } 
 )
 
-instat_object$set("public", "get_variables_metadata_changed", function(data_obj) { 
-  if(missing(data_obj)) {
+instat_object$set("public", "get_variables_metadata_changed", function(data_name) { 
+  if(missing(data_name)) {
     if(private$.data_objects_changed) return(TRUE)
     return(any(sapply(private$.data_objects, function(x) x$variables_metadata_changed)))
   }
   else {
-    return(self$get_data_objects(data_obj)$variables_metadata_changed)
+    return(self$get_data_objects(data_name)$variables_metadata_changed)
   }
 } 
 )
 
-instat_object$set("public", "get_metadata_changed", function(data_obj) { 
-  if(missing(data_obj)) {
-    if(private$.data_objects_changed) return (TRUE)
+instat_object$set("public", "get_metadata_changed", function(data_name) { 
+  if(missing(data_name)) {
+    if(private$.data_objects_changed) return(TRUE)
     for(curr_obj in private$.data_objects) {
       if(curr_obj$metadata_changed) return(TRUE)
     }
     return(FALSE)
   }
   else {
-    return(self$get_data_objects(data_obj)$metadata_changed)
+    return(self$get_data_objects(data_name)$metadata_changed)
   }
 } 
 )
@@ -565,9 +565,9 @@ instat_object$set("public", "get_graph_names", function(data_name, include_overa
 }
 )
 
-instat_object$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE) {
+instat_object$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE, na.rm = TRUE) {
   if(missing(filter)) stop("filter is required")
-  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter)
+  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter, na.rm = na.rm)
 }
 ) 
 
