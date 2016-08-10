@@ -77,10 +77,10 @@ Public Class dlgFromLibrary
         Dim i As Integer
         Dim lstAvailablePackages As CharacterVector
         cboPackages.Items.Clear()
-        lstAvailablePackages = frmMain.clsRLink.clsEngine.Evaluate(strPackages & "<-(.packages())").AsCharacter
+        lstAvailablePackages = frmMain.clsRLink.RunInternalScriptGetValue(strPackages & "<-(.packages())").AsCharacter
         For i = 0 To lstAvailablePackages.Length - 1
             Try
-                If frmMain.clsRLink.clsEngine.Evaluate("nrow(data(package = " & Chr(34) & lstAvailablePackages.AsCharacter(i) & Chr(34) & ")$results)").AsInteger(0) > 0 Then
+                If frmMain.clsRLink.RunInternalScriptGetValue("nrow(data(package = " & Chr(34) & lstAvailablePackages.AsCharacter(i) & Chr(34) & ")$results)").AsInteger(0) > 0 Then
                     cboPackages.Items.Add(lstAvailablePackages.AsCharacter(i))
                 End If
             Catch ex As Exception
@@ -103,8 +103,7 @@ Public Class dlgFromLibrary
     Private Sub loadDatasets(strPackage As String)
         Try
             Dim dfPackage As DataFrame
-            frmMain.clsRLink.clsEngine.Evaluate(strLibraryTemp & "<-data.frame(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results[1:nrow(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results),3:4])")
-            dfPackage = frmMain.clsRLink.clsEngine.GetSymbol(strLibraryTemp).AsDataFrame
+            dfPackage = frmMain.clsRLink.RunInternalScriptGetValue("data.frame(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results[1:nrow(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results),3:4])").AsDataFrame
             If dfPackage.RowCount > 1 Then
                 FillListView(dfDataframe:=dfPackage)
             End If
