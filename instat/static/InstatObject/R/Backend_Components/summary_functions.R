@@ -2,17 +2,18 @@
 data_object$set("public", "merge_data", function(new_data, by = NULL, type = "left", match = "all") {
   #TODO how to use match argument with dplyr join functions
   old_metadata <- self$get_metadata(include_calculated = FALSE)
+  curr_data <- self$get_data_frame(use_current_filter = FALSE)
   if(type == "left") {
-    new_data <- left_join(private$data, new_data, by)
+    new_data <- left_join(curr_data, new_data, by)
   }
   else if(type == "right") {
-    new_data <- right_join(private$data, new_data, by)
+    new_data <- right_join(curr_data, new_data, by)
   }
   else if(type == "full") {
-    new_data <- full_join(private$data, new_data, by)
+    new_data <- full_join(curr_data, new_data, by)
   }
   else if(type == "inner") {
-    new_data <- inner_join(private$data, new_data, by)
+    new_data <- inner_join(curr_data, new_data, by)
   }
   else stop("type must be one of left, right, inner or full")
   self$set_data(new_data)
@@ -62,7 +63,7 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
   names(dependent_cols) <- summary_name
   dependencies_cols <- list(columns_to_summarise)
   names(dependencies_cols) <- data_name
-  
+  print(summary_obj$get_data_frame())
   calc_name <- self$save_calculation(summary_name, calc)
   self$append_to_variables_metadata(data_name, columns_to_summarise, has_dependants_label, TRUE)
   self$add_dependent_columns(data_name, columns_to_summarise, dependent_cols)
@@ -89,18 +90,19 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
 data_object$set("public", "calculate_summary", function(columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE,...) {
   if(missing(columns_to_summarise)) stop("columns_to_summarise must be specified")
   if(missing(summaries)) stop("summaries must be specified")
-  if(!all(columns_to_summarise %in% names(private$data))) stop(paste("Some of the columns from:",paste(columns_to_summarise, collapse = ","),"were not found in the data."))
+  curr_data_full <- self$get_data_frame(use_current_filter = FALSE)
+  curr_data_filter <- self$get_data_frame()
+  if(!all(columns_to_summarise %in% names(curr_data_full))) stop(paste("Some of the columns from:",paste(columns_to_summarise, collapse = ","),"were not found in the data."))
   if(!all(summaries %in% all_summaries)) stop(paste("Some of the summaries from:",paste(summaries, collapse = ","),"were not recognised."))
-  if(!all(factors %in% names(private$data))) stop(paste("Some of the factors:","c(",paste(factors, collapse = ","),") were not found in the data."))
-  
+  if(!all(factors %in% names(curr_data_full))) stop(paste("Some of the factors:","c(",paste(factors, collapse = ","),") were not found in the data."))
   combinations = expand.grid(summaries,columns_to_summarise)
   if(length(summaries)==1) {
-    if(length(columns_to_summarise) == 1) out = ddply(private$data, factors, function(x) match.fun(summaries)(x[[columns_to_summarise]],...), .drop = drop)
-    else out = ddply(private$data, factors, function(x) sapply(columns_to_summarise, function(y) match.fun(summaries)(x[[y]]),...), .drop = drop)
+    if(length(columns_to_summarise) == 1) out = ddply(curr_data_filter, factors, function(x) match.fun(summaries)(x[[columns_to_summarise]],...), .drop = drop)
+    else out = ddply(curr_data_filter, factors, function(x) sapply(columns_to_summarise, function(y) match.fun(summaries)(x[[y]],...)), .drop = drop)
   }
   else {
-    if(length(columns_to_summarise) == 1) out = ddply(private$data, factors, function(x) sapply(summaries, function(y) match.fun(y)(x[[columns_to_summarise]],...)), .drop = drop)
-    else out = ddply(private$data, factors, function(x) apply(combinations, 1, FUN = function(y) match.fun(y[[1]])(x[[y[[2]]]],...)), .drop = drop)
+    if(length(columns_to_summarise) == 1) out = ddply(curr_data_filter, factors, function(x) sapply(summaries, function(y) match.fun(y)(x[[columns_to_summarise]],...)), .drop = drop)
+    else out = ddply(curr_data_filter, factors, function(x) apply(combinations, 1, FUN = function(y) match.fun(y[[1]])(x[[y[[2]]]],...)), .drop = drop)
   }
   names(out)[-(1:length(factors))] <- apply(expand.grid(substring(summaries, 9), columns_to_summarise), 1, paste, collapse="_")
   return(out)
