@@ -27,5 +27,11 @@ Public Class sdgDescribe
         chkNMissing.Checked = True
         chkN.Checked = True
         chkNTotal.Checked = True
+        chkMedian.Checked = True
+        chkRange.Checked = True
+    End Sub
+
+    Private Sub grpSummaries_CheckedChanged(sender As Object, e As EventArgs) Handles chkMean.CheckedChanged, chkMinimum.CheckedChanged, chkMaximum.CheckedChanged, chkMedian.CheckedChanged, chkRange.CheckedChanged, chkNTotal.CheckedChanged, chkStdDev.CheckedChanged, chkN.CheckedChanged, chkNMissing.CheckedChanged
+        dlgDescriptiveStatistics.SummariesParameters()
     End Sub
 End Class
