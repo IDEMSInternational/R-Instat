@@ -52,8 +52,10 @@ Partial Class sdgDescribe
         Me.lblPrecision = New System.Windows.Forms.Label()
         Me.rdoSignificantFigures = New System.Windows.Forms.RadioButton()
         Me.rdoDecimals = New System.Windows.Forms.RadioButton()
+        Me.grpSummaries = New System.Windows.Forms.GroupBox()
         Me.grpPecents.SuspendLayout()
         Me.grpPrecision.SuspendLayout()
+        Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
         '
         'UcrButtonsSubdialogue1
@@ -66,7 +68,7 @@ Partial Class sdgDescribe
         'chkN
         '
         Me.chkN.AutoSize = True
-        Me.chkN.Location = New System.Drawing.Point(12, 9)
+        Me.chkN.Location = New System.Drawing.Point(21, 19)
         Me.chkN.Name = "chkN"
         Me.chkN.Size = New System.Drawing.Size(34, 17)
         Me.chkN.TabIndex = 1
@@ -77,7 +79,7 @@ Partial Class sdgDescribe
         'chkNMissing
         '
         Me.chkNMissing.AutoSize = True
-        Me.chkNMissing.Location = New System.Drawing.Point(12, 31)
+        Me.chkNMissing.Location = New System.Drawing.Point(21, 41)
         Me.chkNMissing.Name = "chkNMissing"
         Me.chkNMissing.Size = New System.Drawing.Size(72, 17)
         Me.chkNMissing.TabIndex = 2
@@ -88,7 +90,7 @@ Partial Class sdgDescribe
         'chkNTotal
         '
         Me.chkNTotal.AutoSize = True
-        Me.chkNTotal.Location = New System.Drawing.Point(12, 53)
+        Me.chkNTotal.Location = New System.Drawing.Point(21, 63)
         Me.chkNTotal.Name = "chkNTotal"
         Me.chkNTotal.Size = New System.Drawing.Size(61, 17)
         Me.chkNTotal.TabIndex = 3
@@ -99,7 +101,7 @@ Partial Class sdgDescribe
         'chkMinimum
         '
         Me.chkMinimum.AutoSize = True
-        Me.chkMinimum.Location = New System.Drawing.Point(12, 75)
+        Me.chkMinimum.Location = New System.Drawing.Point(21, 80)
         Me.chkMinimum.Name = "chkMinimum"
         Me.chkMinimum.Size = New System.Drawing.Size(67, 17)
         Me.chkMinimum.TabIndex = 4
@@ -110,7 +112,7 @@ Partial Class sdgDescribe
         'chkMaximum
         '
         Me.chkMaximum.AutoSize = True
-        Me.chkMaximum.Location = New System.Drawing.Point(12, 97)
+        Me.chkMaximum.Location = New System.Drawing.Point(21, 102)
         Me.chkMaximum.Name = "chkMaximum"
         Me.chkMaximum.Size = New System.Drawing.Size(70, 17)
         Me.chkMaximum.TabIndex = 5
@@ -121,7 +123,7 @@ Partial Class sdgDescribe
         'chkRange
         '
         Me.chkRange.AutoSize = True
-        Me.chkRange.Location = New System.Drawing.Point(12, 119)
+        Me.chkRange.Location = New System.Drawing.Point(21, 139)
         Me.chkRange.Name = "chkRange"
         Me.chkRange.Size = New System.Drawing.Size(58, 17)
         Me.chkRange.TabIndex = 6
@@ -132,7 +134,7 @@ Partial Class sdgDescribe
         'chkMean
         '
         Me.chkMean.AutoSize = True
-        Me.chkMean.Location = New System.Drawing.Point(12, 141)
+        Me.chkMean.Location = New System.Drawing.Point(21, 122)
         Me.chkMean.Name = "chkMean"
         Me.chkMean.Size = New System.Drawing.Size(53, 17)
         Me.chkMean.TabIndex = 7
@@ -143,7 +145,7 @@ Partial Class sdgDescribe
         'chkMedian
         '
         Me.chkMedian.AutoSize = True
-        Me.chkMedian.Location = New System.Drawing.Point(172, 7)
+        Me.chkMedian.Location = New System.Drawing.Point(174, 17)
         Me.chkMedian.Name = "chkMedian"
         Me.chkMedian.Size = New System.Drawing.Size(61, 17)
         Me.chkMedian.TabIndex = 8
@@ -154,7 +156,7 @@ Partial Class sdgDescribe
         'chkQuartiles
         '
         Me.chkQuartiles.AutoSize = True
-        Me.chkQuartiles.Location = New System.Drawing.Point(172, 31)
+        Me.chkQuartiles.Location = New System.Drawing.Point(174, 41)
         Me.chkQuartiles.Name = "chkQuartiles"
         Me.chkQuartiles.Size = New System.Drawing.Size(67, 17)
         Me.chkQuartiles.TabIndex = 9
@@ -165,7 +167,7 @@ Partial Class sdgDescribe
         'chkHigherMoments
         '
         Me.chkHigherMoments.AutoSize = True
-        Me.chkHigherMoments.Location = New System.Drawing.Point(172, 55)
+        Me.chkHigherMoments.Location = New System.Drawing.Point(174, 65)
         Me.chkHigherMoments.Name = "chkHigherMoments"
         Me.chkHigherMoments.Size = New System.Drawing.Size(103, 17)
         Me.chkHigherMoments.TabIndex = 10
@@ -176,7 +178,7 @@ Partial Class sdgDescribe
         'chkSumSquares
         '
         Me.chkSumSquares.AutoSize = True
-        Me.chkSumSquares.Location = New System.Drawing.Point(172, 79)
+        Me.chkSumSquares.Location = New System.Drawing.Point(174, 89)
         Me.chkSumSquares.Name = "chkSumSquares"
         Me.chkSumSquares.Size = New System.Drawing.Size(99, 17)
         Me.chkSumSquares.TabIndex = 11
@@ -187,7 +189,7 @@ Partial Class sdgDescribe
         'chkMeanDeviation
         '
         Me.chkMeanDeviation.AutoSize = True
-        Me.chkMeanDeviation.Location = New System.Drawing.Point(172, 103)
+        Me.chkMeanDeviation.Location = New System.Drawing.Point(174, 113)
         Me.chkMeanDeviation.Name = "chkMeanDeviation"
         Me.chkMeanDeviation.Size = New System.Drawing.Size(101, 17)
         Me.chkMeanDeviation.TabIndex = 12
@@ -198,7 +200,7 @@ Partial Class sdgDescribe
         'chkStdDev
         '
         Me.chkStdDev.AutoSize = True
-        Me.chkStdDev.Location = New System.Drawing.Point(12, 163)
+        Me.chkStdDev.Location = New System.Drawing.Point(21, 162)
         Me.chkStdDev.Name = "chkStdDev"
         Me.chkStdDev.Size = New System.Drawing.Size(117, 17)
         Me.chkStdDev.TabIndex = 13
@@ -209,7 +211,7 @@ Partial Class sdgDescribe
         'chkGeometricMean
         '
         Me.chkGeometricMean.AutoSize = True
-        Me.chkGeometricMean.Location = New System.Drawing.Point(172, 127)
+        Me.chkGeometricMean.Location = New System.Drawing.Point(174, 137)
         Me.chkGeometricMean.Name = "chkGeometricMean"
         Me.chkGeometricMean.Size = New System.Drawing.Size(104, 17)
         Me.chkGeometricMean.TabIndex = 14
@@ -220,7 +222,7 @@ Partial Class sdgDescribe
         'ChkCoeffVariations
         '
         Me.ChkCoeffVariations.AutoSize = True
-        Me.ChkCoeffVariations.Location = New System.Drawing.Point(172, 151)
+        Me.ChkCoeffVariations.Location = New System.Drawing.Point(174, 161)
         Me.ChkCoeffVariations.Name = "ChkCoeffVariations"
         Me.ChkCoeffVariations.Size = New System.Drawing.Size(137, 17)
         Me.ChkCoeffVariations.TabIndex = 15
@@ -375,28 +377,37 @@ Partial Class sdgDescribe
         Me.rdoDecimals.Text = "Decimals"
         Me.rdoDecimals.UseVisualStyleBackColor = True
         '
+        'grpSummaries
+        '
+        Me.grpSummaries.Controls.Add(Me.chkMinimum)
+        Me.grpSummaries.Controls.Add(Me.chkMaximum)
+        Me.grpSummaries.Controls.Add(Me.chkMean)
+        Me.grpSummaries.Controls.Add(Me.ChkCoeffVariations)
+        Me.grpSummaries.Controls.Add(Me.chkN)
+        Me.grpSummaries.Controls.Add(Me.chkGeometricMean)
+        Me.grpSummaries.Controls.Add(Me.chkNMissing)
+        Me.grpSummaries.Controls.Add(Me.chkMeanDeviation)
+        Me.grpSummaries.Controls.Add(Me.chkNTotal)
+        Me.grpSummaries.Controls.Add(Me.chkSumSquares)
+        Me.grpSummaries.Controls.Add(Me.chkRange)
+        Me.grpSummaries.Controls.Add(Me.chkHigherMoments)
+        Me.grpSummaries.Controls.Add(Me.chkStdDev)
+        Me.grpSummaries.Controls.Add(Me.chkQuartiles)
+        Me.grpSummaries.Controls.Add(Me.chkMedian)
+        Me.grpSummaries.Location = New System.Drawing.Point(13, -2)
+        Me.grpSummaries.Name = "grpSummaries"
+        Me.grpSummaries.Size = New System.Drawing.Size(346, 181)
+        Me.grpSummaries.TabIndex = 18
+        Me.grpSummaries.TabStop = False
+        '
         'sdgDescribe
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(364, 332)
+        Me.ClientSize = New System.Drawing.Size(370, 332)
+        Me.Controls.Add(Me.grpSummaries)
         Me.Controls.Add(Me.grpPrecision)
         Me.Controls.Add(Me.grpPecents)
-        Me.Controls.Add(Me.ChkCoeffVariations)
-        Me.Controls.Add(Me.chkGeometricMean)
-        Me.Controls.Add(Me.chkMeanDeviation)
-        Me.Controls.Add(Me.chkSumSquares)
-        Me.Controls.Add(Me.chkHigherMoments)
-        Me.Controls.Add(Me.chkQuartiles)
-        Me.Controls.Add(Me.chkMedian)
-        Me.Controls.Add(Me.chkStdDev)
-        Me.Controls.Add(Me.chkMean)
-        Me.Controls.Add(Me.chkRange)
-        Me.Controls.Add(Me.chkMaximum)
-        Me.Controls.Add(Me.chkMinimum)
-        Me.Controls.Add(Me.chkNTotal)
-        Me.Controls.Add(Me.chkNMissing)
-        Me.Controls.Add(Me.chkN)
         Me.Controls.Add(Me.UcrButtonsSubdialogue1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -406,8 +417,9 @@ Partial Class sdgDescribe
         Me.grpPecents.PerformLayout()
         Me.grpPrecision.ResumeLayout(False)
         Me.grpPrecision.PerformLayout()
+        Me.grpSummaries.ResumeLayout(False)
+        Me.grpSummaries.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -441,5 +453,6 @@ Partial Class sdgDescribe
     Friend WithEvents lblPrecision As Label
     Friend WithEvents rdoSignificantFigures As RadioButton
     Friend WithEvents rdoDecimals As RadioButton
+    Friend WithEvents grpSummaries As GroupBox
 End Class
 
