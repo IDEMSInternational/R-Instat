@@ -115,6 +115,7 @@ Public Class clsGridLink
                 End If
                 clsVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                 If (bGrdVariablesMetadataExists AndAlso frmMain.clsRLink.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript()).AsLogical(0)) Then
+                    clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                     dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript()).AsCharacterMatrix()
                     FillSheet(dfTemp, strDataName, grdVariablesMetadata)
                     clsSetVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
@@ -166,7 +167,7 @@ Public Class clsGridLink
         End If
 
         If bGrdMetadataExists And (bGrdMetadataChanged Or bRMetadataChanged) Then
-            clsGetCombinedMetadata.AddParameter("convert_to_character", "True")
+            clsGetCombinedMetadata.AddParameter("convert_to_character", "TRUE")
             dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCombinedMetadata.ToScript()).AsCharacterMatrix()
             FillSheet(dfTemp, "metadata", grdMetadata)
             clsSetMetadataChanged.AddParameter("new_val", "TRUE")

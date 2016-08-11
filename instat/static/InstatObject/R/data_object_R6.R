@@ -282,8 +282,8 @@ data_object$set("public", "get_metadata", function(label, include_calculated = T
   if(missing(label)) {
     if(include_calculated) {
       #Must be private$data because assigning attribute to data field
-      attr(private$data, row_count_label) <- nrow(curr_data)
-      attr(private$data, column_count_label) <- ncol(curr_data)
+      attr(curr_data, row_count_label) <- nrow(curr_data)
+      attr(curr_data, column_count_label) <- ncol(curr_data)
     }
     if(excluded_not_for_display) {
       ind <- which(names(attributes(curr_data)) %in% c("names", "row.names"))
@@ -377,8 +377,8 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     self$variables_metadata_changed <- TRUE
   }
   if(!replaced) {
-    if(before && ind == 1) self$set_data(self$get_data_frame(use_current_filter = FALSE)[ , c((previous_length + 1):(previous_length + num_cols), 1:previous_length)])
-    else if(before || ind != previous_length + 1) self$set_data(self$get_data_frame(use_current_filter = FALSE)[ , c(1:(ind - 1), (previous_length + 1):(previous_length + num_cols), ind:previous_length)])
+    if(before && ind == 1) self$set_data(dplyr::select(self$get_data_frame(use_current_filter = FALSE) , c((previous_length + 1):(previous_length + num_cols), 1:previous_length)))
+    else if(before || ind != previous_length + 1) self$set_data(dplyr::select(self$get_data_frame(use_current_filter = FALSE) , c(1:(ind - 1), (previous_length + 1):(previous_length + num_cols), ind:previous_length)))
   }
   else {
     if(!missing(before) || !missing(adjacent_column)) warning("Cannot reposition when one or move new columns replaces an old column.")
@@ -713,30 +713,36 @@ data_object$set("public", "reorder_columns_in_data", function(col_order) {
 
 data_object$set("public", "insert_row_in_data", function(start_row, row_data = c(), number_rows = 1, before = FALSE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  curr_row_names = rownames(curr_data)
+  curr_row_names <- rownames(curr_data)
   if (!start_row %in% curr_row_names) {
     stop(paste(start_row, " not found in rows"))
   }
   row_position = which(curr_row_names == start_row)
-  row_data <- matrix(NA, nrow = number_rows, ncol = ncol(curr_data))
+  row_data <- data.frame(matrix(NA, nrow = number_rows, ncol = ncol(curr_data)))
   colnames(row_data) <- colnames(curr_data)
   if(length(curr_row_names[!is.na(as.numeric(curr_row_names))]) > 0) {
     rownames(row_data) <- max(as.numeric(curr_row_names), na.rm = TRUE) + 1:number_rows
   }
   else rownames(row_data) <- nrow(curr_data) + 1:(number_rows - 1)
-  
+  old_attr <- attributes(private$data)
+  # Need to use rbind.fill (not bind.rows) because it preserves column attributes
   if(before && row_position == 1) {
-    self$set_data(rbind(row_data, curr_data))
+    self$set_data(rbind.fill(row_data, curr_data))
   }
   else if(!before && row_position == nrow(curr_data)) {
-    self$set_data(rbind(curr_data, row_data))
+    self$set_data(rbind.fill(curr_data, row_data))
   }
   else {
     if(before) {
-      self$set_data(rbind(curr_data[1:(row_position - 1), ], row_data, curr_data[row_position:nrow(curr_data), ]))
+      self$set_data(rbind.fill(slice(curr_data,(1:(row_position - 1))), row_data, slice(curr_data,row_position:nrow(curr_data))))
     }
     else {
-      self$set_data(rbind(curr_data[1:row_position, ], row_data, curr_data[(row_position + 1):nrow(curr_data), ]))
+      self$set_data(rbind.fill(slice(curr_data, (1:row_position)), row_data, slice(curr_data,(row_position + 1):nrow(curr_data))))
+    }
+  }
+  for(attr_name in names(old_attr)) {
+    if(!attr_name %in% c("names", "class", "row.names")) {
+      self$append_to_metadata(attr_name, old_attr[[attr_name]])
     }
   }
   self$append_to_changes(list(Inserted_row, number_rows))
