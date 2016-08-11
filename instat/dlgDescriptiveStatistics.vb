@@ -50,8 +50,9 @@ Public Class dlgDescriptiveStatistics
         sdgDescribe.SetDefaults()
         ucrSelectorDescribeOneVar.Reset()
         chkSaveResult.Checked = False
+        chkDisplayResults.Checked = True
         StoreResultsParamenter()
-        OptionParameters()
+        OutputOption()
         TestOKEnabled()
     End Sub
 
@@ -104,8 +105,8 @@ Public Class dlgDescriptiveStatistics
         End If
     End Sub
 
-    Private Sub OptionParameters()
-        If chkSaveResult.Checked = False Then
+    Private Sub OutputOption()
+        If chkDisplayResults.Checked Then
             ucrBaseDescribeOneVar.clsRsyntax.AddParameter("return_output", "TRUE")
         Else
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
@@ -114,7 +115,6 @@ Public Class dlgDescriptiveStatistics
                 ucrBaseDescribeOneVar.clsRsyntax.RemoveParameter("return_output")
             End If
         End If
-        ucrBaseDescribeOneVar.clsRsyntax.AddParameter("drop", "TRUE")
     End Sub
 
     Private Sub ucrSelectorForColumnStatistics_DataFrameChanged() Handles ucrSelectorDescribeOneVar.DataFrameChanged
@@ -132,7 +132,12 @@ Public Class dlgDescriptiveStatistics
 
     Private Sub chkSaveResult_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResult.CheckedChanged
         StoreResultsParamenter()
-        OptionParameters()
+        OutputOption()
+    End Sub
+
+    Private Sub chkDisplayResults_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayResults.CheckedChanged
+        StoreResultsParamenter()
+        OutputOption()
     End Sub
 
     Private Sub ucrReceiverDescribeOneVar_Load(sender As Object, e As EventArgs) Handles ucrReceiverDescribeOneVar.Load
@@ -143,11 +148,13 @@ Public Class dlgDescriptiveStatistics
         If chkSaveResult.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 ucrBaseDescribeOneVar.clsRsyntax.AddParameter("store_results", "TRUE")
+
             Else
                 ucrBaseDescribeOneVar.clsRsyntax.RemoveParameter("store_results")
             End If
         Else
             ucrBaseDescribeOneVar.clsRsyntax.AddParameter("store_results", "FALSE")
         End If
+        ucrBaseDescribeOneVar.clsRsyntax.AddParameter("drop", "TRUE")
     End Sub
 End Class

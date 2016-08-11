@@ -29,6 +29,9 @@ Partial Class dlgDescriptiveStatistics
         Me.lblNewDataFrame = New System.Windows.Forms.Label()
         Me.ucrReceiverDescribeOneVar = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeOneVar = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.chkDisplayResults = New System.Windows.Forms.CheckBox()
+        Me.grpOutPut = New System.Windows.Forms.GroupBox()
+        Me.grpOutPut.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdStatistics
@@ -53,7 +56,7 @@ Partial Class dlgDescriptiveStatistics
         '
         'ucrBaseDescribeOneVar
         '
-        Me.ucrBaseDescribeOneVar.Location = New System.Drawing.Point(10, 216)
+        Me.ucrBaseDescribeOneVar.Location = New System.Drawing.Point(10, 224)
         Me.ucrBaseDescribeOneVar.Name = "ucrBaseDescribeOneVar"
         Me.ucrBaseDescribeOneVar.Size = New System.Drawing.Size(399, 53)
         Me.ucrBaseDescribeOneVar.TabIndex = 95
@@ -61,7 +64,7 @@ Partial Class dlgDescriptiveStatistics
         'chkSaveResult
         '
         Me.chkSaveResult.AutoSize = True
-        Me.chkSaveResult.Location = New System.Drawing.Point(10, 192)
+        Me.chkSaveResult.Location = New System.Drawing.Point(9, 13)
         Me.chkSaveResult.Name = "chkSaveResult"
         Me.chkSaveResult.Size = New System.Drawing.Size(87, 17)
         Me.chkSaveResult.TabIndex = 96
@@ -96,15 +99,36 @@ Partial Class dlgDescriptiveStatistics
         Me.ucrSelectorDescribeOneVar.Size = New System.Drawing.Size(210, 189)
         Me.ucrSelectorDescribeOneVar.TabIndex = 100
         '
+        'chkDisplayResults
+        '
+        Me.chkDisplayResults.AutoSize = True
+        Me.chkDisplayResults.Location = New System.Drawing.Point(101, 12)
+        Me.chkDisplayResults.Name = "chkDisplayResults"
+        Me.chkDisplayResults.Size = New System.Drawing.Size(96, 17)
+        Me.chkDisplayResults.TabIndex = 101
+        Me.chkDisplayResults.Tag = "Display_Result"
+        Me.chkDisplayResults.Text = "Display Result "
+        Me.chkDisplayResults.UseVisualStyleBackColor = True
+        '
+        'grpOutPut
+        '
+        Me.grpOutPut.Controls.Add(Me.chkSaveResult)
+        Me.grpOutPut.Controls.Add(Me.chkDisplayResults)
+        Me.grpOutPut.Location = New System.Drawing.Point(10, 185)
+        Me.grpOutPut.Name = "grpOutPut"
+        Me.grpOutPut.Size = New System.Drawing.Size(209, 37)
+        Me.grpOutPut.TabIndex = 102
+        Me.grpOutPut.TabStop = False
+        '
         'dlgDescriptiveStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 273)
+        Me.ClientSize = New System.Drawing.Size(419, 284)
+        Me.Controls.Add(Me.grpOutPut)
         Me.Controls.Add(Me.ucrSelectorDescribeOneVar)
         Me.Controls.Add(Me.ucrReceiverDescribeOneVar)
         Me.Controls.Add(Me.lblNewDataFrame)
-        Me.Controls.Add(Me.chkSaveResult)
         Me.Controls.Add(Me.ucrBaseDescribeOneVar)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.cmdStatistics)
@@ -114,6 +138,8 @@ Partial Class dlgDescriptiveStatistics
         Me.ShowIcon = False
         Me.Tag = "Describe_One_Variable"
         Me.Text = "Describe One Variable"
+        Me.grpOutPut.ResumeLayout(False)
+        Me.grpOutPut.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -125,5 +151,7 @@ Partial Class dlgDescriptiveStatistics
     Friend WithEvents lblNewDataFrame As Label
     Friend WithEvents ucrReceiverDescribeOneVar As ucrReceiverMultiple
     Friend WithEvents ucrSelectorDescribeOneVar As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents chkDisplayResults As CheckBox
+    Friend WithEvents grpOutPut As GroupBox
 End Class
 
