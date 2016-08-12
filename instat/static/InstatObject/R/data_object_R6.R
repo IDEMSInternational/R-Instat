@@ -25,8 +25,11 @@ data_object <- R6Class("data_object",
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
-  if (!self$is_metadata(data_name_label)) {
-    if ( ( is.null(data_name) || data_name == "" || missing(data_name))) {
+  if ( !(is.null(data_name) || data_name == "" || missing(data_name))) {
+    self$append_to_metadata(data_name_label, data_name)
+  }
+  else if (!self$is_metadata(data_name_label)) {
+    if (( is.null(data_name) || data_name == "" || missing(data_name))) {
       self$append_to_metadata(data_name_label,paste0("data_set_",sprintf("%03d", start_point)))
       if (messages) {
         message(paste0("No name specified in data_tables list for data frame ", start_point, ". 
