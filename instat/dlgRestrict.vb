@@ -88,7 +88,7 @@ Public Class dlgRestrict
             'TODO translate
             Me.Text = "Subset"
         Else
-            rdoApplyAsSubset.Enabled = True
+            rdoApplyAsFilter.Enabled = True
             rdoApplyAsFilter.Checked = True
             'TODO translate
             Me.Text = "Filter"
