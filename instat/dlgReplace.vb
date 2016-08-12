@@ -76,6 +76,8 @@ Public Class dlgReplace
 
     Private Sub CheckType()
         Dim strVariableTypes As List(Of String)
+        Dim strOldType As String
+        strOldType = strVarType
         If (Not ucrReceiverReplace.IsEmpty()) Then
             clsGetDataType.AddParameter("data_name", Chr(34) & ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
             clsGetDataType.AddParameter("column", ucrReceiverReplace.GetVariableNames())
@@ -104,8 +106,14 @@ Public Class dlgReplace
             strVarType = ""
             ucrReceiverReplace.RemoveIncludedMetadataProperty(strProperty:="class")
         End If
-        InputOldValue()
-        InputNewValue()
+        If rdoOldValue.Checked Then
+            rdoOldValue.Checked = False
+            rdoOldValue.Checked = True
+        End If
+        If rdoNewValue.Checked Then
+            rdoNewValue.Checked = False
+            rdoNewValue.Checked = True
+        End If
     End Sub
 
     Private Sub ucrBaseReplace_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseReplace.ClickReset
