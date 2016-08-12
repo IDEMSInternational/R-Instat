@@ -510,6 +510,7 @@ Public Class frmEditor
     End Function
 
     Private Sub columnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles columnFilterToolStripMenuItem.Click
+        dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.ShowDialog()
     End Sub
 
@@ -544,6 +545,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuFilter_Click(sender As Object, e As EventArgs) Handles mnuFilter.Click
+        dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.ShowDialog()
     End Sub
 
