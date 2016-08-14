@@ -81,6 +81,7 @@ Public Class ucrReceiverMultiple
             lstSelectedVariables.Items.RemoveByKey(strTempItem)
             Selector.RemoveFromVariablesList(strTempItem)
         Next
+        OnSelectionChanged()
     End Sub
 
     Public Overrides Sub Clear()

@@ -1,8 +1,9 @@
 #Methods temporarily here to avoid conflicts
 data_object$set("public", "merge_data", function(new_data, by = NULL, type = "left", match = "all") {
   #TODO how to use match argument with dplyr join functions
-  old_metadata <- self$get_metadata(include_calculated = FALSE)
+  old_metadata <- attributes(private$data)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
+
   if(type == "left") {
     new_data <- left_join(curr_data, new_data, by)
   }
@@ -19,7 +20,9 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   self$set_data(new_data)
   self$append_to_changes(Merged_data)
   for(name in names(old_metadata)) {
-    self$append_to_metadata(name, old_metadata[[name]])
+    if(!name %in% c("names", "class", "row.names")) {
+      self$append_to_metadata(name, old_metadata[[name]])
+    }
   }
   self$append_to_metadata(is_calculated_label, TRUE)
   self$add_defaults_meta()
@@ -43,7 +46,17 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
       break
     }
   }
-  if(exists) summary_obj$merge_data(out, by = factors, type = "inner", match = "first")
+  if(exists) {
+    #temp fix to avoid error merging data with overlapping names
+    curr_data <- summary_obj$get_data_frame(use_current_filter = FALSE)
+    for(i in 1:length(names(out))) {
+      curr_col_name <- names(out)[[i]]
+      if((!curr_col_name %in% factors) && curr_col_name %in% names(curr_data)) {
+        names(out)[[i]] <- next_default_item(curr_col_name, names(curr_data))
+      }
+    }
+    summary_obj$merge_data(out, by = factors, type = "inner", match = "first")
+  }
   else {
     summary_data <- list()
     if(missing(summary_name) || is.na(summary_name)) summary_name <- paste(data_name, "by", paste(factors, collapse = "_"), sep="_")
