@@ -57,7 +57,7 @@ Public Class sdgPlots
         Facets()
         IncludeFacets()
         ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
-        ucrPlotsAdditionalLayers.SetAesFunction(sdgLayerOptions.ucrGeomWithAes.clsGgplotAesFunction)
+        ucrPlotsAdditionalLayers.SetAesFunction(clsAesFunction)
         ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
         ucrXAxis.SetXorY(True)
         ucrXAxis.SetRsyntaxAxis(clsRsyntax)
@@ -128,8 +128,6 @@ Public Class sdgPlots
             chkMargin.Visible = True
             chkFreeScalesX.Visible = True
             chkFreeScalesY.Visible = True
-            SetFacets()
-            IncludeFacetsOperator()
         Else
             ucrFacetSelector.Visible = False
             ucr1stFactorReceiver.Visible = False
@@ -144,6 +142,8 @@ Public Class sdgPlots
             chkNoOfRowsOrColumns.Visible = False
             nudNoOfRowsOrColumns.Visible = False
         End If
+        SetFacets()
+        IncludeFacetsOperator()
     End Sub
 
     Public Sub SetDataFrame(strNewDataFrame As String)
