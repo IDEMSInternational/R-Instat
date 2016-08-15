@@ -723,6 +723,7 @@ Public Class frmMain
 
     Private Sub mnuManageDataFilter_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameFilter.Click
         dlgRestrict.bIsSubsetDialog = False
+        dlgRestrict.strDefaultDataframe = ""
         dlgRestrict.ShowDialog()
     End Sub
 
