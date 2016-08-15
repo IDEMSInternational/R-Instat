@@ -45,6 +45,7 @@ Public Class frmEditor
         'This needs to be added at the part when we are writing data to the grid, not here
         'Needs discussion, with this the grid can show NA's
         grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
+        'grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         SetRFunctions()
     End Sub
     ''' <summary>
@@ -307,6 +308,7 @@ Public Class frmEditor
         frmMain.strCurrentDataFrame = grdCurrSheet.Name
         frmMain.tstatus.Text = grdCurrSheet.Name
         grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         UpdateRFunctionDataFrameParameters()
     End Sub
 
@@ -511,6 +513,7 @@ Public Class frmEditor
 
     Private Sub columnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles columnFilterToolStripMenuItem.Click
         dlgRestrict.bIsSubsetDialog = False
+        dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
         dlgRestrict.ShowDialog()
     End Sub
 
@@ -546,6 +549,7 @@ Public Class frmEditor
 
     Private Sub mnuFilter_Click(sender As Object, e As EventArgs) Handles mnuFilter.Click
         dlgRestrict.bIsSubsetDialog = False
+        dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
         dlgRestrict.ShowDialog()
     End Sub
 
