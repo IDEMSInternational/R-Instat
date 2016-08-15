@@ -27,31 +27,13 @@ Public Class dlgDescriptiveStatistics
             ReopenDialog()
         End If
         autoTranslate(Me)
-
-
-
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrReceiverDescribeOneVar.Selector = ucrSelectorDescribeOneVar
-        ucrReceiverDescribeOneVar.SetDataType("numeric")
-        ' ucrBaseDescribeOneVar.clsRsyntax.SetFunction("")
-        ' ucrBaseDescribeOneVar.clsRsyntax.iCallType = 0
+    Private Sub cmdstatistics_click(sender As Object, e As EventArgs) Handles cmdStatistics.Click
+        sdgDescribe.ShowDialog()
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
-
-    Private Sub SetDefaults()
-        ucrReceiverDescribeOneVar.SetMeAsReceiver()
-        sdgDescribe.SetDefaults()
-        ucrSelectorDescribeOneVar.Reset()
-        ucrSelectorDescribeOneVar.Focus()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub TestOKEnabled()
+    Public Sub TestOKEnabled()
         If Not ucrReceiverDescribeOneVar.IsEmpty() Then
             ucrBaseDescribeOneVar.OKEnabled(True)
         Else
@@ -59,79 +41,120 @@ Public Class dlgDescriptiveStatistics
         End If
     End Sub
 
-    Public Sub ucrReceiverDescribeOneVar_selectionchanged() Handles ucrReceiverDescribeOneVar.SelectionChanged
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub SetDefaults()
+        chkSaveResult.Checked = False
+        sdgDescribe.SetDefaults()
+        ucrSelectorDescribeOneVar.Reset()
+        chkSaveResult.Checked = False
+        chkDisplayResults.Checked = True
+        StoreResultsParamenter()
+        OutputOption()
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdStatistics_Click(sender As Object, e As EventArgs) Handles cmdStatistics.Click
-        sdgDescribe.ShowDialog()
-    End Sub
+    Private Sub InitialiseDialog()
+        ucrBaseDescribeOneVar.clsRsyntax.iCallType = 2
+        ucrReceiverDescribeOneVar.Selector = ucrSelectorDescribeOneVar
+        ucrReceiverDescribeOneVar.SetMeAsReceiver()
+        ucrReceiverDescribeOneVar.SetIncludedDataTypes({"numeric"})
+        'ucrBaseDescribeOneVar.iHelpTopicID = 
+        ucrBaseDescribeOneVar.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
+        sdgDescribe.chkNTotal.Tag = "summary_count"
+        sdgDescribe.chkMean.Tag = "summary_mean"
+        sdgDescribe.chkMinimum.Tag = "summary_min"
+        sdgDescribe.chkMaximum.Tag = "summary_max"
+        sdgDescribe.chkMedian.Tag = "summary_median"
+        sdgDescribe.chkStdDev.Tag = "summary_sd"
+        sdgDescribe.chkRange.Tag = "summary_range"
 
-    Private Sub ucrBaseDescribeOneVar_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseDescribeOneVar.ClickOk
-        StatsOptions()
     End Sub
 
     Private Sub ucrBaseDescribeOneVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseDescribeOneVar.ClickReset
         SetDefaults()
-    End Sub
-    Public Sub StatsOptions()
-        If sdgDescribe.chkMean.Checked Then
-            RBaseStats("mean")
-        End If
-        If sdgDescribe.chkStdDev.Checked Then
-            RBaseStats("sd")
-        End If
-        If sdgDescribe.chkMaximum.Checked Then
-            RBaseStats("max")
-        End If
-        If sdgDescribe.chkMinimum.Checked Then
-            RBaseStats("min")
-        End If
-        If sdgDescribe.chkNMissing.Checked Then
-            RNMissing("is.na")
-        End If
-        If sdgDescribe.chkN.Checked Then
-            RNMissing("!is.na")
-        End If
-        If sdgDescribe.chkNTotal.Checked Then
-            RBaseStats("length")
-        End If
+        TestOKEnabled()
     End Sub
 
-    Public Sub RBaseStats(strStat As String)
-        If ucrReceiverDescribeOneVar.lstSelectedVariables.Items.Count > 1 Then
-            clsRBaseStatsFunction.SetRCommand("apply")
-            clsRBaseStatsFunction.AddParameter("X", clsRFunctionParameter:=ucrReceiverDescribeOneVar.GetVariables())
-            clsRBaseStatsFunction.AddParameter("MARGIN", "2")
-            clsRBaseStatsFunction.AddParameter("FUN", strStat)
-            clsRBaseStatsFunction.RemoveParameterByName("x")
+    Public Sub SummariesParameters()
+        Dim lstCheckboxes As New List(Of CheckBox)
+        Dim chkSummary As CheckBox
+        Dim strSummariesParameter As String = ""
+        Dim i As Integer = 0
+        If lstCheckboxes.Count = 0 Then
+            lstCheckboxes.AddRange({sdgDescribe.chkMean, sdgDescribe.chkMinimum, sdgDescribe.chkMaximum, sdgDescribe.chkRange, sdgDescribe.chkStdDev, sdgDescribe.chkNTotal, sdgDescribe.chkMedian})
+        End If
+
+        strSummariesParameter = "c("
+        For Each chkSummary In lstCheckboxes
+            If chkSummary.Checked Then
+                If i > 0 Then
+                    strSummariesParameter = strSummariesParameter & ","
+                End If
+                strSummariesParameter = strSummariesParameter & Chr(34) & chkSummary.Tag & Chr(34)
+                i = i + 1
+            End If
+        Next
+        strSummariesParameter = strSummariesParameter & ")"
+        If i > 0 Then
+            ucrBaseDescribeOneVar.clsRsyntax.AddParameter("summaries", strSummariesParameter)
         Else
-            clsRBaseStatsFunction.SetRCommand(strStat)
-            clsRBaseStatsFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverDescribeOneVar.GetVariables())
-            clsRBaseStatsFunction.RemoveParameterByName("X")
-            clsRBaseStatsFunction.RemoveParameterByName("MARGIN")
-            clsRBaseStatsFunction.RemoveParameterByName("FUN")
+            ucrBaseDescribeOneVar.clsRsyntax.RemoveParameter("summaries")
         End If
-        frmMain.clsRLink.RunScript(clsRBaseStatsFunction.ToScript(), 2)
     End Sub
 
-    Public Sub RNMissing(strMissing As String)
-        clsRMissingSubFunction.SetRCommand(strMissing)
-        clsRMissingSubFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverDescribeOneVar.GetVariables())
-        If ucrReceiverDescribeOneVar.lstSelectedVariables.Items.Count > 1 Then
-            clsRMissingFunction.SetRCommand("apply")
-            clsRMissingFunction.AddParameter("X", clsRFunctionParameter:=clsRMissingSubFunction)
-            clsRMissingFunction.AddParameter("MARGIN", "2")
-            clsRMissingFunction.AddParameter("FUN", "sum")
-            clsRMissingFunction.RemoveParameterByName("x")
+    Private Sub OutputOption()
+        If chkDisplayResults.Checked Then
+            ucrBaseDescribeOneVar.clsRsyntax.AddParameter("return_output", "TRUE")
         Else
-            clsRMissingFunction.SetRCommand("sum")
-            clsRMissingFunction.AddParameter("x", clsRFunctionParameter:=clsRMissingSubFunction)
-            clsRMissingFunction.RemoveParameterByName("X")
-            clsRMissingFunction.RemoveParameterByName("MARGIN")
-            clsRMissingFunction.RemoveParameterByName("FUN")
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBaseDescribeOneVar.clsRsyntax.AddParameter("return_output", "FALSE")
+            Else
+                ucrBaseDescribeOneVar.clsRsyntax.RemoveParameter("return_output")
+            End If
         End If
-        frmMain.clsRLink.RunScript(clsRMissingFunction.ToScript(), 2)
     End Sub
 
+    Private Sub ucrSelectorForColumnStatistics_DataFrameChanged() Handles ucrSelectorDescribeOneVar.DataFrameChanged
+        ucrBaseDescribeOneVar.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorDescribeOneVar.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub ucrReceiverSelectedVariables_SelectionChanged() Handles ucrReceiverDescribeOneVar.SelectionChanged
+        If Not ucrReceiverDescribeOneVar.IsEmpty Then
+            ucrBaseDescribeOneVar.clsRsyntax.AddParameter("columns_to_summarise", ucrReceiverDescribeOneVar.GetVariableNames())
+        Else
+            ucrBaseDescribeOneVar.clsRsyntax.RemoveParameter("columns_to_summarise")
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub chkSaveResult_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveResult.CheckedChanged
+        StoreResultsParamenter()
+        OutputOption()
+    End Sub
+
+    Private Sub chkDisplayResults_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayResults.CheckedChanged
+        StoreResultsParamenter()
+        OutputOption()
+    End Sub
+
+    Private Sub ucrReceiverDescribeOneVar_Load(sender As Object, e As EventArgs) Handles ucrReceiverDescribeOneVar.Load
+
+    End Sub
+
+    Private Sub StoreResultsParamenter()
+        If chkSaveResult.Checked Then
+            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                ucrBaseDescribeOneVar.clsRsyntax.AddParameter("store_results", "TRUE")
+
+            Else
+                ucrBaseDescribeOneVar.clsRsyntax.RemoveParameter("store_results")
+            End If
+        Else
+            ucrBaseDescribeOneVar.clsRsyntax.AddParameter("store_results", "FALSE")
+        End If
+        ucrBaseDescribeOneVar.clsRsyntax.AddParameter("drop", "TRUE")
+    End Sub
 End Class
