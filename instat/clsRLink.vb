@@ -272,6 +272,8 @@ Public Class RLink
         'TClears selection
         box.SelectionLength = 0
         ' clear
+        box.SelectionStart = box.Text.Length
+        box.ScrollToCaret()
     End Sub
 
     Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False) As SymbolicExpression
