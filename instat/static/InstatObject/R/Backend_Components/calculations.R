@@ -54,7 +54,7 @@ instat_object$set("public", "apply_calculation", function(calc) {
     out <- self$get_data_objects(calc[["parameters"]][["data_name"]])$calculate_summary(calc = calc, ... = calc[["parameters"]][["..."]])
     if(calc[["parameters"]][["store_results"]]) self$append_summaries_to_data_object(out, calc[["parameters"]][["data_name"]], calc[["parameters"]][["columns_to_summarise"]], calc[["parameters"]][["summaries"]], calc[["parameters"]][["factors"]], calc[["parameters"]][["summary_name"]], calc)
     if(calc[["parameters"]][["return_output"]]) return(out)
-    else NULL
+    else return(NULL)
   }
 }
 )

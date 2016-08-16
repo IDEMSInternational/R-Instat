@@ -14,11 +14,12 @@ data_object <- R6Class("data_object",
   #removed until this can be fixed.
   #self$set_variables_metadata(variables_metadata)
   
+  # Set first so that "no_filter" is added
+  self$set_filters(filters)
   self$set_meta(metadata)
   self$add_defaults_meta()
   self$add_defaults_variables_metadata()
   self$update_variables_metadata()
-  self$set_filters(filters)
   self$set_objects(objects)
   self$set_calculations(calculations)
   self$set_keys(keys)
@@ -150,6 +151,9 @@ data_object$set("public", "set_filters", function(new_filters) {
   
   self$append_to_changes(list(Set_property, "filters"))  
   private$filters <- new_filters
+  if(!"no_filter" %in% names(private$filters)) {
+    self$add_filter(filter = list(), filter_name = "no_filter", replace = TRUE, set_as_current = TRUE, na.rm = FALSE, is_no_filter = TRUE)
+  }
 }
 )
 
@@ -213,7 +217,7 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "") {
   if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out <- private$data[!self$get_variables_metadata(property = is_hidden_label)]
   else out <- private$data
-  if(use_current_filter && length(private$.current_filter) > 0) {
+  if(use_current_filter && self$filter_applied()) {
     if(filter_name != "") {
       out <- out[self$current_filter & self$get_filter_as_logical(filter_name = filter_name), ]
     }
@@ -1070,7 +1074,7 @@ data_object$set("public", "set_protected_columns", function(col_names) {
 }
 )
 
-data_object$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE) {
+data_object$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE) {
   if(missing(filter)) stop("filter is required")
   if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
   
@@ -1085,7 +1089,7 @@ data_object$set("public", "add_filter", function(filter, filter_name = "", repla
   }
   else {
     if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
-    filter_calc = calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm))
+    filter_calc = calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm, is_no_filter = is_no_filter))
     private$filters[[filter_name]] <- filter_calc
     self$append_to_changes(list(Added_filter, filter_name))
     if(set_as_current) {
@@ -1126,41 +1130,44 @@ data_object$set("public", "get_filter_names", function(as_list = FALSE, include 
 data_object$set("public", "get_filter", function(filter_name) {
   if(missing(filter_name)) return(private$filters)
   if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
-  return(private$filters[[filter_name]]$filter_conditions)
+  return(private$filters[[filter_name]])
 }
 )
 
 data_object$set("public", "get_filter_as_logical", function(filter_name) {
-  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  curr_filter <- self$get_filter(filter_name)
   i = 1
-  result = matrix(nrow = nrow(self$get_data_frame(use_current_filter = FALSE)), ncol = length(private$filters[[filter_name]]$filter_conditions))
-  for(condition in private$filters[[filter_name]]$filter_conditions) {
+  if(length(curr_filter$filter_conditions) ==  0) out <- rep(TRUE, nrow(self$get_data_frame(use_current_filter = FALSE)))
+  else {
+    result = matrix(nrow = nrow(self$get_data_frame(use_current_filter = FALSE)), ncol = length(curr_filter$filter_conditions))
+    for(condition in curr_filter$filter_conditions) {
     func = match.fun(condition[["operation"]])
     result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
     i = i + 1
+    }
+    out <- apply(result, 1, all)
+    out[is.na(out)] <- !curr_filter$parameters[["na.rm"]]
   }
-  out <- apply(result, 1, all)
-  out[is.na(out)] <- !private$filters[[filter_name]]$parameters[["na.rm"]]
   return(out)
 }
 )
 
 data_object$set("public", "filter_applied", function() {
-  return(length(private$.current_filter$filter_conditions) > 0)
+  return(!private$.current_filter$parameters[["is_no_filter"]])
 }
 )
 
 data_object$set("public", "remove_current_filter", function() {
-  self$current_filter <- list()
+  self$set_current_filter("no_filter")
 }
 )
 
 data_object$set("public", "filter_string", function(filter_name) {
   if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
-  curr_filter = self$get_filter(filter_name)
+  curr_filter <- self$get_filter(filter_name)
   out = "("
   i = 1
-  for(condition in curr_filter) {
+  for(condition in curr_filter$filter_conditions) {
     if(i != 1) out = paste(out, "&&")
     out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
     if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(condition[["value"]], collapse = ","), ")")
