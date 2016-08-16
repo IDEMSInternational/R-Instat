@@ -76,7 +76,6 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
   names(dependent_cols) <- summary_name
   dependencies_cols <- list(columns_to_summarise)
   names(dependencies_cols) <- data_name
-  print(summary_obj$get_data_frame())
   calc_name <- self$save_calculation(summary_name, calc)
   self$append_to_variables_metadata(data_name, columns_to_summarise, has_dependants_label, TRUE)
   self$add_dependent_columns(data_name, columns_to_summarise, dependent_cols)
@@ -90,11 +89,11 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filters = list(), ...) {
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filter_names = c(), ...) {
   calculated_from = list()
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
   #TODO Change this to store sub_calculations for each column
-  calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, filters = filters, ... = ...), calculated_from = calculated_from)
+  calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
   results <- self$apply_calculation(calc)
   if(!is.null(results)) return(results)
 }
@@ -106,8 +105,7 @@ data_object$set("public", "calculate_summary", function(calc, ...) {
   factors = calc[["parameters"]][["factors"]]
   drop = calc[["parameters"]][["drop"]]
   add_cols = calc[["parameters"]][["add_cols"]]
-  filters = calc[["filters"]]
-  
+  filter_names = calc[["filters"]]
   if(missing(columns_to_summarise)) stop("columns_to_summarise must be specified")
   if(missing(summaries)) stop("summaries must be specified")
   # Removed since curr_data_filter has same columns
@@ -125,37 +123,56 @@ data_object$set("public", "calculate_summary", function(calc, ...) {
   #   if(length(columns_to_summarise) == 1) out = ddply(curr_data_filter, factors, function(x) sapply(summaries, function(y) match.fun(y)(x[[columns_to_summarise]],...)), .drop = drop)
   #   else out = ddply(curr_data_filter, factors, function(x) apply(combinations, 1, FUN = function(y) match.fun(y[[1]])(x[[y[[2]]]],...)), .drop = drop)
   # }
-  i = 1
-  out = list()
-  if(length(filters) > 0) {
-    
+  if(length(filter_names) == 0) {
+    filter_names <- "no_filter"
   }
-  for(temp_filter in filters) {
-    curr_data_filter <- self$get_data_frame(use_current_filter = TRUE, filter_name = temp_filter$name)
+  i = 1
+  for(filter_name in filter_names) {
+    curr_data_filter <- self$get_data_frame(use_current_filter = TRUE, filter_name = filter_name)
+    curr_filter <- self$get_filter(filter_name)
+    if(self$filter_applied()) {
+      calc_filters <- list(self$get_current_filter(), curr_filter)
+    }
+    else calc_filters <- list(curr_filter)
     if(!all(columns_to_summarise %in% names(curr_data_filter))) stop(paste("Some of the columns from:",paste(columns_to_summarise, collapse = ","),"were not found in the data."))
     if(!all(summaries %in% all_summaries)) stop(paste("Some of the summaries from:",paste(summaries, collapse = ","),"were not recognised."))
     if(!all(factors %in% names(curr_data_filter))) stop(paste("Some of the factors:","c(",paste(factors, collapse = ","),") were not found in the data."))
     
-    out[[i]] <- ddply(curr_data_filter, factors, function(x) apply(combinations, 1, FUN = function(y) {
+    out <- ddply(curr_data_filter, factors, function(x) apply(combinations, 1, FUN = function(y) {
       na.rm <- missing_values_check(x[[y[[2]]]])
       if("na.rm" %in% names(list(...))) stop("na.rm should not be specified. Use xxx to specify missing values handling.")
-      match.fun(y[[1]])(temp_data, add_cols = x[add_cols], na.rm = na.rm, ...)
+      match.fun(y[[1]])(x[[y[[2]]]], add_cols = x[add_cols], na.rm = na.rm, ...)
     }
     ), .drop = drop)
-    names(out[[i]])[-(1:length(factors))] <- get_summary_calculation_names(calc, summaries, columns_to_summarise, temp_filter)
-    if(i > 1) {
-      out[[i]][1:length(factors)] <- NULL
-      out[[i]] <- out[[i]][-(1:length(factors))]
+    names(out)[-(1:length(factors))] <- get_summary_calculation_names(calc, summaries, columns_to_summarise, calc_filters)
+    if(i == 1) {
+      calc_columns <- out
+    }
+    else {
+      calc_columns <- full_join(calc_columns, out)
     }
     i = i + 1
   }
-  out <- bind_cols(out)
-  return(out)
+  return(calc_columns)
 }
 )
 
-get_summary_calculation_names <- function(calc, summaries, columns_to_summarise, filter) {
-  return(apply(expand.grid(substring(summaries, 9), columns_to_summarise, filter$name), 1, paste, collapse="_"))
+get_summary_calculation_names <- function(calc, summaries, columns_to_summarise, calc_filters) {
+  filter_description <- ""
+  i = 1
+  for(filt in calc_filters) {
+    if(!filt$parameters[["is_no_filter"]]) {
+      if(i == 1) filter_description <- filt$name
+      else filter_description <- paste(filter_description, filt$name, sep = ".")
+    }
+    i = i + 1
+  }
+  if(filter_description == "") {
+    out <- apply(expand.grid(paste0(substring(summaries, 9),"."), columns_to_summarise), 1, paste, collapse="")
+  }
+  else out <- apply(expand.grid(paste0(substring(summaries, 9),"."), paste0(columns_to_summarise, "_"), filter_description), 1, paste, collapse="")
+  out <- make.names(out)
+  return(out)
 }
 
 missing_values_check <- function(x) {
@@ -166,6 +183,8 @@ missing_values_check <- function(x) {
 sum_label="summary_sum"
 mode_label="summary_mode"
 count_label="summary_count"
+count_missing_label="summary_count_missing"
+count_non_missing_label="summary_count_non_missing"
 sd_label = "summary_sd"
 median_label = "summary_median"
 range_label = "summary_range"
@@ -175,10 +194,12 @@ mean_label="summary_mean"
 
 
 # list of all summary function names
-all_summaries=c(sum_label, mode_label, count_label, sd_label, median_label, range_label, min_label, max_label, mean_label)
+all_summaries=c(sum_label, mode_label, count_label, count_missing_label, count_non_missing_label, sd_label, median_label, range_label, min_label, max_label, mean_label)
 summary_mode <- function(x,...) {
   ux <- unique(x)
-  ux[which.max(tabulate(match(x, ux)))]
+  out <- ux[which.max(tabulate(match(x, ux)))]
+  if(is.null(out)) return(NA)
+  else return(out)
 }
 
 summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0,...) {
@@ -187,11 +208,19 @@ summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0,...) 
 }
 
 summary_sum <- function (x, na.rm = FALSE,...) {
-  sum(x, na.rm = na.rm)
-} 
+  return(sum(x, na.rm = na.rm))
+}
 
 summary_count <- function(x,...) {
-  length(x)
+  return(length(x))
+}
+
+summary_count_missing <- function(x,...) {
+  return(sum(is.na(x)))
+}
+
+summary_count_non_missing <- function(x,...) {
+  return(sum(!is.na(x)))
 }
 
 summary_sd <- function(x, na.rm = FALSE,...) {
@@ -201,21 +230,21 @@ summary_sd <- function(x, na.rm = FALSE,...) {
 summary_max <- function (x, na.rm = FALSE,...) {
   #TODO This prevents warning and -Inf being retured. Is this desirable?
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
-  else max(x, na.rm = na.rm)
+  else return(max(x, na.rm = na.rm))
 } 
 
 summary_min <- function (x, na.rm = FALSE,...) {
   #TODO This prevents warning and Inf being retured. Is this desirable?
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
-  else min(x, na.rm = na.rm)
+  else return(min(x, na.rm = na.rm))
 } 
 
 #get the range of the data
 summary_range <- function(x, na.rm = FALSE, ...){
-  max(x, na.rm = na.rm) - min(x, na.rm = na.rm)  
+  return(max(x, na.rm = na.rm) - min(x, na.rm = na.rm))
 }
 
 # median function
 summary_median <- function(x, na.rm = FALSE,...) {
-  median(x, na.rm = na.rm)
+  return(median(x, na.rm = na.rm))
 }
