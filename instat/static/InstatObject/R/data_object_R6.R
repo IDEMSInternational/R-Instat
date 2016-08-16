@@ -211,13 +211,18 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 )
 
 data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "") {
-  if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out = private$data[!self$get_variables_metadata(property = is_hidden_label)]
-  else out = private$data
+  if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out <- private$data[!self$get_variables_metadata(property = is_hidden_label)]
+  else out <- private$data
   if(use_current_filter && length(private$.current_filter) > 0) {
-    out = out[self$current_filter, ]
+    if(filter_name != "") {
+      out <- out[self$current_filter & self$get_filter_as_logical(filter_name = filter_name), ]
+    }
+    else out <- out[self$current_filter, ]
   }
-  else if(filter_name != "") {
-    out = out[self$get_filter_as_logical(filter_name = filter_name), ]
+  else { 
+    if(filter_name != "") {
+      out <- out[self$get_filter_as_logical(filter_name = filter_name), ]
+    }
   }
   if(convert_to_character) {
     decimal_places = self$get_variables_metadata(property = display_decimal_label, column = names(out))
@@ -1080,7 +1085,7 @@ data_object$set("public", "add_filter", function(filter, filter_name = "", repla
   }
   else {
     if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
-    filter_calc = calculation$new(type = "filter", filter_list = filter, name = filter_name, parameters = list(na.rm = na.rm))
+    filter_calc = calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm))
     private$filters[[filter_name]] <- filter_calc
     self$append_to_changes(list(Added_filter, filter_name))
     if(set_as_current) {
@@ -1121,15 +1126,15 @@ data_object$set("public", "get_filter_names", function(as_list = FALSE, include 
 data_object$set("public", "get_filter", function(filter_name) {
   if(missing(filter_name)) return(private$filters)
   if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
-  return(private$filters[[filter_name]]$filter_list)
+  return(private$filters[[filter_name]]$filter_conditions)
 }
 )
 
 data_object$set("public", "get_filter_as_logical", function(filter_name) {
   if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
   i = 1
-  result = matrix(nrow = nrow(self$get_data_frame(use_current_filter = FALSE)), ncol = length(private$filters[[filter_name]]$filter_list))
-  for(condition in private$filters[[filter_name]]$filter_list) {
+  result = matrix(nrow = nrow(self$get_data_frame(use_current_filter = FALSE)), ncol = length(private$filters[[filter_name]]$filter_conditions))
+  for(condition in private$filters[[filter_name]]$filter_conditions) {
     func = match.fun(condition[["operation"]])
     result[ ,i] = func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
     i = i + 1
@@ -1141,7 +1146,7 @@ data_object$set("public", "get_filter_as_logical", function(filter_name) {
 )
 
 data_object$set("public", "filter_applied", function() {
-  return(length(private$.current_filter$filter_list) > 0)
+  return(length(private$.current_filter$filter_conditions) > 0)
 }
 )
 
