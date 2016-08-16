@@ -90,37 +90,77 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = FALSE, summary_name = NA, ...) {
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filters = list(), ...) {
   calculated_from = list()
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
   #TODO Change this to store sub_calculations for each column
-  calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, ... = ...), calculated_from = calculated_from)
+  calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, filters = filters, ... = ...), calculated_from = calculated_from)
   results <- self$apply_calculation(calc)
   if(!is.null(results)) return(results)
 }
 )
 
-data_object$set("public", "calculate_summary", function(columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE,...) {
+data_object$set("public", "calculate_summary", function(calc, ...) {
+  columns_to_summarise = calc[["parameters"]][["columns_to_summarise"]]
+  summaries = calc[["parameters"]][["summaries"]]
+  factors = calc[["parameters"]][["factors"]]
+  drop = calc[["parameters"]][["drop"]]
+  add_cols = calc[["parameters"]][["add_cols"]]
+  filters = calc[["filters"]]
+  
   if(missing(columns_to_summarise)) stop("columns_to_summarise must be specified")
   if(missing(summaries)) stop("summaries must be specified")
-  curr_data_full <- self$get_data_frame(use_current_filter = FALSE)
-  curr_data_filter <- self$get_data_frame()
-  if(!all(columns_to_summarise %in% names(curr_data_full))) stop(paste("Some of the columns from:",paste(columns_to_summarise, collapse = ","),"were not found in the data."))
-  if(!all(summaries %in% all_summaries)) stop(paste("Some of the summaries from:",paste(summaries, collapse = ","),"were not recognised."))
-  if(!all(factors %in% names(curr_data_full))) stop(paste("Some of the factors:","c(",paste(factors, collapse = ","),") were not found in the data."))
+  # Removed since curr_data_filter has same columns
+  # curr_data_full <- self$get_data_frame(use_current_filter = FALSE)
+  # if(!all(columns_to_summarise %in% names(curr_data_full))) stop(paste("Some of the columns from:",paste(columns_to_summarise, collapse = ","),"were not found in the data."))
+  # if(!all(summaries %in% all_summaries)) stop(paste("Some of the summaries from:",paste(summaries, collapse = ","),"were not recognised."))
+  # if(!all(factors %in% names(curr_data_full))) stop(paste("Some of the factors:","c(",paste(factors, collapse = ","),") were not found in the data."))
   combinations = expand.grid(summaries,columns_to_summarise)
-  if(length(summaries)==1) {
-    if(length(columns_to_summarise) == 1) out = ddply(curr_data_filter, factors, function(x) match.fun(summaries)(x[[columns_to_summarise]],...), .drop = drop)
-    else out = ddply(curr_data_filter, factors, function(x) sapply(columns_to_summarise, function(y) match.fun(summaries)(x[[y]],...)), .drop = drop)
+  # Removed to only keep general case
+  # if(length(summaries)==1) {
+  #   if(length(columns_to_summarise) == 1) out = ddply(curr_data_filter, factors, function(x) match.fun(summaries)(x[[columns_to_summarise]],...), .drop = drop)
+  #   else out = ddply(curr_data_filter, factors, function(x) sapply(columns_to_summarise, function(y) match.fun(summaries)(x[[y]],...)), .drop = drop)
+  # }
+  # else {
+  #   if(length(columns_to_summarise) == 1) out = ddply(curr_data_filter, factors, function(x) sapply(summaries, function(y) match.fun(y)(x[[columns_to_summarise]],...)), .drop = drop)
+  #   else out = ddply(curr_data_filter, factors, function(x) apply(combinations, 1, FUN = function(y) match.fun(y[[1]])(x[[y[[2]]]],...)), .drop = drop)
+  # }
+  i = 1
+  out = list()
+  if(length(filters) > 0) {
+    
   }
-  else {
-    if(length(columns_to_summarise) == 1) out = ddply(curr_data_filter, factors, function(x) sapply(summaries, function(y) match.fun(y)(x[[columns_to_summarise]],...)), .drop = drop)
-    else out = ddply(curr_data_filter, factors, function(x) apply(combinations, 1, FUN = function(y) match.fun(y[[1]])(x[[y[[2]]]],...)), .drop = drop)
+  for(temp_filter in filters) {
+    curr_data_filter <- self$get_data_frame(use_current_filter = TRUE, filter_name = temp_filter$name)
+    if(!all(columns_to_summarise %in% names(curr_data_filter))) stop(paste("Some of the columns from:",paste(columns_to_summarise, collapse = ","),"were not found in the data."))
+    if(!all(summaries %in% all_summaries)) stop(paste("Some of the summaries from:",paste(summaries, collapse = ","),"were not recognised."))
+    if(!all(factors %in% names(curr_data_filter))) stop(paste("Some of the factors:","c(",paste(factors, collapse = ","),") were not found in the data."))
+    
+    out[[i]] <- ddply(curr_data_filter, factors, function(x) apply(combinations, 1, FUN = function(y) {
+      na.rm <- missing_values_check(x[[y[[2]]]])
+      if("na.rm" %in% names(list(...))) stop("na.rm should not be specified. Use xxx to specify missing values handling.")
+      match.fun(y[[1]])(temp_data, add_cols = x[add_cols], na.rm = na.rm, ...)
+    }
+    ), .drop = drop)
+    names(out[[i]])[-(1:length(factors))] <- get_summary_calculation_names(calc, summaries, columns_to_summarise, temp_filter)
+    if(i > 1) {
+      out[[i]][1:length(factors)] <- NULL
+      out[[i]] <- out[[i]][-(1:length(factors))]
+    }
+    i = i + 1
   }
-  names(out)[-(1:length(factors))] <- apply(expand.grid(substring(summaries, 9), columns_to_summarise), 1, paste, collapse="_")
+  out <- bind_cols(out)
   return(out)
 }
 )
+
+get_summary_calculation_names <- function(calc, summaries, columns_to_summarise, filter) {
+  return(apply(expand.grid(substring(summaries, 9), columns_to_summarise, filter$name), 1, paste, collapse="_"))
+}
+
+missing_values_check <- function(x) {
+  return(FALSE)
+}
 
 # summary function labels
 sum_label="summary_sum"
@@ -141,7 +181,7 @@ summary_mode <- function(x,...) {
   ux[which.max(tabulate(match(x, ux)))]
 }
 
-summary_mean <- function (x, na.rm = FALSE, trim = 0,...) {
+summary_mean <- function (x, add_cols, weights="", na.rm = FALSE, trim = 0,...) {
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
   else return(mean(x, na.rm=na.rm, trim = trim))
 }
