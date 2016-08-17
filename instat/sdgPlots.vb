@@ -48,12 +48,12 @@ Public Class sdgPlots
         IncludeFacets()
         chkIncludeFacets.Checked = False
         ucr1stFactorReceiver.SetMeAsReceiver()
-        Themes()
+        ucrInputThemes.SetName("theme_grey")
     End Sub
 
     Private Sub InitialiseDialog()
         InitialiseTabs()
-        Themes()
+        CreateThemes()
         Facets()
         IncludeFacets()
         ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
@@ -77,15 +77,26 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub Themes()
-        ucrInputThemes.cboInput.Items.AddRange({"default", "theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"})
+    Private Sub CreateThemes()
+        Dim strThemes() As String
+        strThemes = {"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_grey", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"}
+        Array.Sort(strThemes)
+        ucrInputThemes.SetItems({"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_grey", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"})
         cmdAllOptions.Enabled = False
     End Sub
 
-    Private Sub ucrInputThemes_NameChanged() Handles ucrInputThemes.TextChanged
+    Private Sub ucrInputThemes_NameChanged() Handles ucrInputThemes.NameChanged
         If Not ucrInputThemes.IsEmpty Then
-            clsRThemeFunction.SetRCommand(ucrInputThemes.cboInput.SelectedItem)
-            clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
+            clsRThemeFunction.SetRCommand(ucrInputThemes.GetText())
+            If ucrInputThemes.GetText() = "theme_grey" Then
+                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
+                Else
+                    clsRsyntax.RemoveOperatorParameter("theme")
+                End If
+            Else
+                clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
+            End If
         Else
             clsRsyntax.RemoveOperatorParameter("theme")
         End If
