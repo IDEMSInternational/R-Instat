@@ -307,6 +307,10 @@ Public Class dlgImportDataset
             grdDataPreview.CurrentWorksheet.Reset()
             grdDataPreview.Hide()
         End If
+        If grdDataPreview.CurrentWorksheet IsNot Nothing Then
+            grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+            grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
+        End If
         TestOkEnabled()
     End Sub
 #End Region
