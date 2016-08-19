@@ -47,8 +47,13 @@ Public Class sdgPlots
         TitleDefaults()
         IncludeFacets()
         chkIncludeFacets.Checked = False
+        ucrFacetSelector.Reset()
         ucr1stFactorReceiver.SetMeAsReceiver()
         ucrInputThemes.SetName("theme_grey")
+    End Sub
+
+    Public Sub Reset()
+        SetDefaults()
     End Sub
 
     Private Sub InitialiseDialog()
