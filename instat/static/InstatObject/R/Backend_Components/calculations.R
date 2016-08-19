@@ -95,18 +95,20 @@ instat_calculation <- R6Class("instat_calculation",
 )
 
 instat_object$set("public", "apply_instat_calculation", function(calc, current_manipulations = list()) {
-  if(calc$type == "simple") {
-    
-  }
-  else if(calc$type == "summary") {
-    for(sub_calc in calc$subcalculations){
-      self$apply_instat_calculation(sub_calc, current_manipulations)
+  if(calc$type == "calculation") {
+    for(manipulation in calc$manipulations){
+      current_manipulations <- self$apply_instat_calculation(manipulation, current_manipulations)
+    }
+    sub_calc_results <- list()
+    for(sub_calc in calc$subcalculations) {
+      sub_calc_results[[i]] <- self$apply_instat_calculation(sub_calc, current_manipulations)
     }
    curr_data <- self$get_data_for_calculation(calc, current_manipulations)
-   
+   calc$apply_calc()
+   self$save_caculation_results()
   }
   else if(calc$type == "manipulation") {
-
+    return(c(current_manipulations, calc))
   }
 }
 )
