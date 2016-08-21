@@ -16,13 +16,13 @@ Imports instat.Translations
 Public Class dlgPolynomials
     Public bFirstLoad As Boolean = True
     Public clsCentredOptionFunc As New RFunction
-    Dim dataf
+
     Private Sub dlgPolynomials_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
 
         If bFirstLoad Then
-            SetDefaults()
             InitialiseDialog()
+            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -43,13 +43,12 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub SetDefaults()
-        ucrInputPolynomial.SetPrefix("Poly")
+        ucrInputPolynomial.SetName("Poly")
         rdoSimple.Checked = True
         XParameter()
         nudDegree.Value = 2
         ucrSelectorForPolynomial.Reset()
         ucrSelectorForPolynomial.Focus()
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -58,7 +57,6 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub InitialiseDialog()
-
         ucrBase.clsRsyntax.SetFunction("poly")
         ucrBase.iHelpTopicID = 46
         ucrInputPolynomial.SetItemsTypeAsColumns()
@@ -72,13 +70,11 @@ Public Class dlgPolynomials
         ucrReceiverPolynomial.SetMeAsReceiver()
         ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
         ucrInputPolynomial.SetValidationTypeAsRVariable()
-
     End Sub
 
     Private Sub ucrInputPolynomial_NameChanged() Handles ucrInputPolynomial.NameChanged
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputPolynomial.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputPolynomial.GetText, bAssignToIsPrefix:=True)
     End Sub
-
 
     Private Sub ucrReceiverPolynomial_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverPolynomial.SelectionChanged
         If Not ucrReceiverPolynomial.IsEmpty Then
@@ -88,7 +84,6 @@ Public Class dlgPolynomials
             ucrBase.clsRsyntax.RemoveParameter("x")
         End If
         TestOKEnabled()
-
     End Sub
 
     Private Sub grpType_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSimple.CheckedChanged, rdoCentered.CheckedChanged, rdoOrthogonal.CheckedChanged
@@ -112,6 +107,7 @@ Public Class dlgPolynomials
             ucrBase.clsRsyntax.RemoveParameter("raw")
         End If
     End Sub
+
     Private Sub nudDegree_TextChanged(sender As Object, e As EventArgs) Handles nudDegree.TextChanged
         ucrBase.clsRsyntax.AddParameter("degree", nudDegree.Value)
         TestOKEnabled()

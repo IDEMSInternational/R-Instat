@@ -47,6 +47,8 @@ Public Class frmVariables
 
     Private Sub grdVariables_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdVariables.CurrentWorksheetChanged, Me.Load, grdVariables.WorksheetInserted
         grdCurrSheet = grdVariables.CurrentWorksheet
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         frmMain.strCurrentDataFrame = grdCurrSheet.Name
     End Sub
 

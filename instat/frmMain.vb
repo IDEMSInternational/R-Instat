@@ -312,7 +312,8 @@ Public Class frmMain
     End Sub
 
     Private Sub SelectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshapeSubset.Click
-        dlgSelect.ShowDialog()
+        dlgRestrict.bIsSubsetDialog = True
+        dlgRestrict.ShowDialog()
     End Sub
 
     Private Sub mnuModelThreeVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelThreeVariablesFitModel.Click
@@ -461,10 +462,6 @@ Public Class frmMain
 
     Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
         dlgFromLibrary.ShowDialog()
-    End Sub
-
-    Private Sub mnuManageReshapeSubset_Click(sender As Object, e As EventArgs) Handles mnuOrganiseColumnReshape.Click
-        dlgSubset.ShowDialog()
     End Sub
 
     Private Sub mnuManageDataRename_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameRenameColumn.Click
@@ -725,6 +722,8 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataFilter_Click(sender As Object, e As EventArgs) Handles mnuOrganiseDataFrameFilter.Click
+        dlgRestrict.bIsSubsetDialog = False
+        dlgRestrict.strDefaultDataframe = ""
         dlgRestrict.ShowDialog()
     End Sub
 
