@@ -565,9 +565,9 @@ instat_object$set("public", "get_graph_names", function(data_name, include_overa
 }
 )
 
-instat_object$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE, na.rm = TRUE) {
+instat_object$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE, na.rm = TRUE, is_no_filter = FALSE) {
   if(missing(filter)) stop("filter is required")
-  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter, na.rm = na.rm)
+  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter, na.rm = na.rm, is_no_filter = is_no_filter)
 }
 ) 
 
@@ -583,6 +583,11 @@ instat_object$set("public", "set_current_filter", function(data_name, filter_nam
 
 instat_object$set("public", "get_filter", function(data_name, filter_name) {
   return(self$get_data_objects(data_name)$get_filter(filter_name))
+}
+)
+
+instat_object$set("public", "get_filter_as_logical", function(data_name, filter_name) {
+  return(self$get_data_objects(data_name)$get_filter_as_logical(filter_name))
 }
 )
 
