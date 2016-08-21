@@ -47,6 +47,7 @@ Public Class dlgDescriptiveStatistics
 
     Private Sub SetDefaults()
         chkSaveResult.Checked = False
+        sdgDescribe.SetUcrBase(ucrBaseDescribeOneVar)
         sdgDescribe.SetDefaults()
         ucrSelectorDescribeOneVar.Reset()
         chkSaveResult.Checked = False
@@ -63,46 +64,11 @@ Public Class dlgDescriptiveStatistics
         ucrReceiverDescribeOneVar.SetIncludedDataTypes({"numeric"})
         'ucrBaseDescribeOneVar.iHelpTopicID = 
         ucrBaseDescribeOneVar.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
-        sdgDescribe.chkNTotal.Tag = "summary_count"
-        sdgDescribe.chkMean.Tag = "summary_mean"
-        sdgDescribe.chkMinimum.Tag = "summary_min"
-        sdgDescribe.chkMaximum.Tag = "summary_max"
-        sdgDescribe.chkMedian.Tag = "summary_median"
-        sdgDescribe.chkStdDev.Tag = "summary_sd"
-        sdgDescribe.chkRange.Tag = "summary_range"
-
     End Sub
 
     Private Sub ucrBaseDescribeOneVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseDescribeOneVar.ClickReset
         SetDefaults()
         TestOKEnabled()
-    End Sub
-
-    Public Sub SummariesParameters()
-        Dim lstCheckboxes As New List(Of CheckBox)
-        Dim chkSummary As CheckBox
-        Dim strSummariesParameter As String = ""
-        Dim i As Integer = 0
-        If lstCheckboxes.Count = 0 Then
-            lstCheckboxes.AddRange({sdgDescribe.chkMean, sdgDescribe.chkMinimum, sdgDescribe.chkMaximum, sdgDescribe.chkRange, sdgDescribe.chkStdDev, sdgDescribe.chkNTotal, sdgDescribe.chkMedian})
-        End If
-
-        strSummariesParameter = "c("
-        For Each chkSummary In lstCheckboxes
-            If chkSummary.Checked Then
-                If i > 0 Then
-                    strSummariesParameter = strSummariesParameter & ","
-                End If
-                strSummariesParameter = strSummariesParameter & Chr(34) & chkSummary.Tag & Chr(34)
-                i = i + 1
-            End If
-        Next
-        strSummariesParameter = strSummariesParameter & ")"
-        If i > 0 Then
-            ucrBaseDescribeOneVar.clsRsyntax.AddParameter("summaries", strSummariesParameter)
-        Else
-            ucrBaseDescribeOneVar.clsRsyntax.RemoveParameter("summaries")
-        End If
     End Sub
 
     Private Sub OutputOption()
@@ -148,7 +114,6 @@ Public Class dlgDescriptiveStatistics
         If chkSaveResult.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 ucrBaseDescribeOneVar.clsRsyntax.AddParameter("store_results", "TRUE")
-
             Else
                 ucrBaseDescribeOneVar.clsRsyntax.RemoveParameter("store_results")
             End If
