@@ -262,9 +262,10 @@ Public Class RLink
         Dim iStart As Integer
         Dim iEnd As Integer
 
+        iStart = box.TextLength
         box.AppendText(text)
         iEnd = box.TextLength
-        iStart = box.TextLength
+
 
         ' Textbox may transform chars, so (end-start) != text.Length
         box.[Select](iStart, iEnd - iStart)
