@@ -19,7 +19,7 @@ data_object <- R6Class("data_object",
   self$set_meta(metadata)
   self$add_defaults_meta()
   self$add_defaults_variables_metadata()
-  self$update_variables_metadata()
+  #self$update_variables_metadata()
   self$set_objects(objects)
   self$set_calculations(calculations)
   self$set_keys(keys)
@@ -181,23 +181,22 @@ data_object$set("public", "set_keys", function(new_keys) {
 }
 )
 
-data_object$set("public", "update_variables_metadata", function() {
-  #Not needed now using attributes
-  #if(ncol(private$data) !=  nrow(private$variables_metadata) || !all(colnames(private$data)==rownames(private$variables_metadata))) {
-  #  if(all(colnames(private$data) %in% rownames(private$variables_metadata))) {
-      #self$set_variables_metadata(private$variables_metadata[colnames(private$data),])
-   # }
-   # else {
-   # }
-  #}
-  for(col in colnames(self$get_data_frame())) {
-    if(!self$is_variables_metadata(display_decimal_label, col)) self$append_to_variables_metadata(col, display_decimal_label, get_default_decimal_places(self$get_columns_from_data(col, use_current_filter = FALSE)))
-    #self$append_to_variables_metadata(col, data_type_label, class(private$data[[col]]))
-    self$append_to_variables_metadata(col, name_label, col)
-  }
-  self$append_to_changes(list(Set_property, "variables_metadata"))
-}
-)
+# data_object$set("public", "update_variables_metadata", function() {
+#   #Not needed now using attributes
+#   #if(ncol(private$data) !=  nrow(private$variables_metadata) || !all(colnames(private$data)==rownames(private$variables_metadata))) {
+#   #  if(all(colnames(private$data) %in% rownames(private$variables_metadata))) {
+#       #self$set_variables_metadata(private$variables_metadata[colnames(private$data),])
+#    # }
+#    # else {
+#    # }
+#   #}
+#   for(col in colnames(self$get_data_frame())) {
+#     if(!self$is_variables_metadata(display_decimal_label, col)) self$append_to_variables_metadata(col, display_decimal_label, get_default_decimal_places(self$get_columns_from_data(col, use_current_filter = FALSE)))
+#     #self$append_to_variables_metadata(col, data_type_label, class(private$data[[col]]))
+#     self$append_to_variables_metadata(col, name_label, col)
+#   }
+# }
+# )
 
 data_object$set("public", "set_data_changed", function(new_val) {
   self$data_changed <- new_val
@@ -215,7 +214,11 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 )
 
 data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "") {
-  if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) out <- private$data[!self$get_variables_metadata(property = is_hidden_label)]
+  if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
+    hidden <- self$get_variables_metadata(property = is_hidden_label)
+    hidden[is.na(hidden)] <- FALSE
+    out <- private$data[!self$get_variables_metadata(property = is_hidden_label)]
+  }
   else out <- private$data
   if(use_current_filter && self$filter_applied()) {
     if(filter_name != "") {
@@ -230,14 +233,15 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
   }
   if(convert_to_character) {
     decimal_places = self$get_variables_metadata(property = display_decimal_label, column = names(out))
+    decimal_places[is.na(decimal_places)] <- 0
     return(convert_to_character_matrix(out, TRUE, decimal_places))
   }
   else return(out)
 }
 )
 
-data_object$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = TRUE, direct_from_attributes = FALSE) {
-  if(update) self$update_variables_metadata()
+data_object$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE) {
+  #if(update) self$update_variables_metadata()
   if(direct_from_attributes) {
     if(missing(property)) return(attributes(self$get_columns_from_data(column, use_current_filter = FALSE)))
     else return(attr(self$get_columns_from_data(column, use_current_filter = FALSE), property))
@@ -387,6 +391,8 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     private$data[[curr_col_name]] <- curr_col
     self$data_changed <- TRUE
     self$append_to_variables_metadata(curr_col_name, is_hidden_label, hidden)
+    self$append_to_variables_metadata(curr_col_name, name_label, curr_col_name)
+    self$append_to_variables_metadata(curr_col_name, display_decimal_label, get_default_decimal_places(self$get_columns_from_data(curr_col_name, use_current_filter = FALSE)))
     self$variables_metadata_changed <- TRUE
   }
   if(!replaced) {
@@ -672,8 +678,8 @@ data_object$set("public", "is_metadata", function(str) {
 }
 )
 
-data_object$set("public", "is_variables_metadata", function(str, col, update = FALSE) {
-  if(!str %in% names(self$get_variables_metadata(update = update))) return(FALSE)
+data_object$set("public", "is_variables_metadata", function(str, col) {
+  if(!str %in% names(self$get_variables_metadata())) return(FALSE)
   if(missing(col)) return(TRUE)
   else return(str %in% names(attributes(self$get_columns_from_data(col, use_current_filter = FALSE))))
 }
@@ -686,8 +692,19 @@ data_object$set("public", "add_defaults_meta", function() {
 
 data_object$set("public", "add_defaults_variables_metadata", function() {
   invisible(sapply(colnames(self$get_data_frame(use_current_filter = FALSE)), function(x) self$append_to_variables_metadata(x, name_label, x)))
+  has_hidden <- self$is_variables_metadata(is_hidden_label) && self$iget_variables_metadata(property = is_hidden_label)
+  if(has_hidden) {
+    for(column in colnames(self$get_data_frame(use_current_filter = FALSE))) {
+      if(!self$is_variables_metadata(is_hidden_label, column)) self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
+    }
+  }
+  else self$append_to_variables_metadata(property = is_hidden_label, new_val = FALSE)
   for(column in colnames(self$get_data_frame(use_current_filter = FALSE))) {
-    if(!self$is_variables_metadata(is_hidden_label, column)) self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
+    if(has_hidden) {
+      if(!self$is_variables_metadata(is_hidden_label, column)) self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
+    }
+    self$append_to_variables_metadata(column, name_label, column)
+    self$append_to_variables_metadata(column, display_decimal_label, get_default_decimal_places(self$get_columns_from_data(column, use_current_filter = FALSE)))
   }
 }
 )
