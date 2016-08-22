@@ -44,7 +44,6 @@ Public Class ucrAxes
     Private Sub InitialiseControl()
         ucrTickMarkers.cboInput.Items.Add("Interval")
         ucrTickMarkers.cboInput.Items.Add("Specific Values")
-        ucrTickMarkers.SetName("Interval")
         TitleDefaults()
         ScalesDefaults()
         TickMarkersDefaults()
@@ -224,6 +223,16 @@ Public Class ucrAxes
         If ucrTickMarkers.cboInput.SelectedItem = "Interval" Then
             clsSeqFunction.SetRCommand("seq")
             clsScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSeqFunction)
+
+            ucrSpecificValues.Visible = False
+            lblFrom.Visible = True
+            nudFrom.Visible = True
+            lblTo.Visible = True
+            nudTo.Visible = True
+            lblInStepsOf.Visible = True
+            nudInStepsOf.Visible = True
+            lblTickMarkersNoOfDecimalPlaces.Visible = True
+            nudTickMarkersNoOfDecimalPlaces.Visible = True
 
         ElseIf ucrTickMarkers.cboInput.SelectedItem = "Specific Values" Then
             clsScalecontinuousFunction.RemoveParameterByName("breaks")
