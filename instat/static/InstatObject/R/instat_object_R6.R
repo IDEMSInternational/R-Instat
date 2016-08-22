@@ -411,7 +411,8 @@ instat_object$set("public", "add_object", function(data_name, object, object_nam
 }
 ) 
 
-instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE) {
+instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE) {
+  #TODO implement force_as_list in all cases
   if(missing(data_name)) {
     if(!missing(object_name)) {
       curr_objects = private$.objects[self$get_object_names(data_name = overall_label, type = type)]
@@ -434,7 +435,7 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
       }
       else out = curr_objects
     }
-    else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type)
+    else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type, force_as_list = force_as_list)
 	if(as_list) {
       lst = list()
       lst[[data_name]][[object_name]] <- out
@@ -535,8 +536,8 @@ instat_object$set("public", "add_model", function(data_name, model, model_name) 
 }
 )
 
-instat_object$set("public", "get_models", function(data_name, model_name, include_overall = TRUE) {
-  self$get_objects(data_name = data_name, object_name = model_name, include_overall = include_overall, type = model_label)
+instat_object$set("public", "get_models", function(data_name, model_name, include_overall = TRUE, force_as_list = FALSE) {
+  self$get_objects(data_name = data_name, object_name = model_name, include_overall = include_overall, type = model_label, force_as_list = force_as_list)
 }
 )
 
@@ -555,8 +556,8 @@ instat_object$set("public", "add_graph", function(data_name, graph, graph_name) 
 }
 )
 
-instat_object$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE) {
-  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label)
+instat_object$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE, force_as_list = FALSE) {
+  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label, force_as_list = force_as_list)
 }
 )
 
