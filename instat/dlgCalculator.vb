@@ -368,7 +368,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub cmdTrue_Click(sender As Object, e As EventArgs) Handles cmdTrue.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("isTRUE()")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("isTRUE")
     End Sub
 
     Private Sub cmdAnd_Click(sender As Object, e As EventArgs) Handles cmdAnd.Click
