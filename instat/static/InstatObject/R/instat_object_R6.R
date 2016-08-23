@@ -151,8 +151,9 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
           if (!include_metadata) {
             curr_data_obj$set_meta(list()) 
             curr_data_obj$add_defaults_meta()
+            curr_data_obj$add_defaults_variables_metadata()
             curr_data_obj$set_variables_metadata(data.frame())
-            curr_data_obj$update_variables_metadata()
+            #curr_data_obj$update_variables_metadata()
           }
           if (!include_logs) curr_data_obj$set_changes(list())
 
@@ -262,15 +263,15 @@ instat_object$set("public", "get_data_frame", function(data_name, convert_to_cha
 }
 )
 
-instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = TRUE, direct_from_attributes = FALSE) { 
+instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE) { 
   if(missing(data_name)) {
     retlist <- list()
     for (curr_obj in private$.data_objects) {
-      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, update = update, direct_from_attributes = direct_from_attributes)
+      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes)
     }
     return(retlist)
   }
-  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, update = update, direct_from_attributes = direct_from_attributes))
+  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes))
 } 
 )
 
@@ -411,7 +412,8 @@ instat_object$set("public", "add_object", function(data_name, object, object_nam
 }
 ) 
 
-instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE) {
+instat_object$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE) {
+  #TODO implement force_as_list in all cases
   if(missing(data_name)) {
     if(!missing(object_name)) {
       curr_objects = private$.objects[self$get_object_names(data_name = overall_label, type = type)]
@@ -434,7 +436,7 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
       }
       else out = curr_objects
     }
-    else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type)
+    else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type, force_as_list = force_as_list)
 	if(as_list) {
       lst = list()
       lst[[data_name]][[object_name]] <- out
@@ -535,8 +537,8 @@ instat_object$set("public", "add_model", function(data_name, model, model_name) 
 }
 )
 
-instat_object$set("public", "get_models", function(data_name, model_name, include_overall = TRUE) {
-  self$get_objects(data_name = data_name, object_name = model_name, include_overall = include_overall, type = model_label)
+instat_object$set("public", "get_models", function(data_name, model_name, include_overall = TRUE, force_as_list = FALSE) {
+  self$get_objects(data_name = data_name, object_name = model_name, include_overall = include_overall, type = model_label, force_as_list = force_as_list)
 }
 )
 
@@ -555,8 +557,8 @@ instat_object$set("public", "add_graph", function(data_name, graph, graph_name) 
 }
 )
 
-instat_object$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE) {
-  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label)
+instat_object$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE, force_as_list = FALSE) {
+  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label, force_as_list = force_as_list)
 }
 )
 
@@ -888,8 +890,8 @@ instat_object$set("public","unfreeze_columns", function(data_name) {
 } 
 )
 
-instat_object$set("public","is_variables_metadata", function(data_name, property, column, update = TRUE) {
-  self$get_data_objects(data_name)$is_variables_metadata(property, column, update)
+instat_object$set("public","is_variables_metadata", function(data_name, property, column) {
+  self$get_data_objects(data_name)$is_variables_metadata(property, column)
 } 
 )
 
