@@ -259,11 +259,13 @@ Public Class RLink
     End Sub
 
     Private Sub AppendText(box As RichTextBox, color As Color, font As Font, text As String)
-        Dim iStart As Integer = box.TextLength
+        Dim iStart As Integer
         Dim iEnd As Integer
 
+        iStart = box.TextLength
         box.AppendText(text)
         iEnd = box.TextLength
+
 
         ' Textbox may transform chars, so (end-start) != text.Length
         box.[Select](iStart, iEnd - iStart)
