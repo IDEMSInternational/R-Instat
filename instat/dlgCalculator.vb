@@ -367,10 +367,6 @@ Public Class dlgCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%/%")
     End Sub
 
-    Private Sub cmdTrue_Click(sender As Object, e As EventArgs) Handles cmdTrue.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("isTRUE")
-    End Sub
-
     Private Sub cmdAnd_Click(sender As Object, e As EventArgs) Handles cmdAnd.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("&")
     End Sub
