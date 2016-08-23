@@ -246,10 +246,11 @@ instat_object$set("public", "get_data_objects", function(data_name, as_list = FA
 
 instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", ...) {
   if(!stack_data) {
-    if(missing(data_name)) {
+    if(missing(data_name)) data_name <- self$get_data_names()
+    if(length(data_name) > 1) {
       retlist <- list()
-      for ( i in (1:length(private$.data_objects)) ) {
-        retlist[[names(private$.data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name)
+      for (curr_name in data_name) {
+        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name)
       }
       return(retlist)
     }
@@ -297,8 +298,9 @@ instat_object$set("public", "get_metadata", function(name) {
 } 
 )
 
-instat_object$set("public", "get_data_names", function() { 
-  return(names(private$.data_objects))
+instat_object$set("public", "get_data_names", function(as_list = FALSE) { 
+  if(as_list) return(list(data_names = names(private$.data_objects)))
+  else return(names(private$.data_objects))
 } 
 )
 
