@@ -1204,13 +1204,17 @@ data_object$set("public", "add_object", function(object, object_name) {
 }
 )
 
-data_object$set("public", "get_objects", function(object_name, type = "") {
+data_object$set("public", "get_objects", function(object_name, type = "", force_as_list = FALSE) {
   curr_objects = private$objects[self$get_object_names(type = type)]
   if(length(curr_objects) == 0) return(curr_objects)
   if(missing(object_name)) return(curr_objects)
   if(!is.character(object_name)) stop("object_name must be a character")
-  if(!object_name %in% names(curr_objects)) stop(object_name, "not found in objects")
-  return(curr_objects[[object_name]])
+  if(!all(object_name %in% names(curr_objects))) stop(object_name, "not found in objects")
+  if(length(object_name) == 1) {
+    if(force_as_list) return(curr_objects[object_name])
+    else return(curr_objects[[object_name]])
+  }
+  else return(curr_objects[object_name])
 }
 )
 
