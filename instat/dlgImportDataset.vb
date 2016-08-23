@@ -145,7 +145,7 @@ Public Class dlgImportDataset
             dlgOpen.Filter = "All Data files (*.xlsx,*.RDS)|*.xlsx;*.RDS|RDS R-file (*.RDS)|*.RDS|Excel files (*.xlsx)|*.xlsx"
             bFromLibrary = False
         Else
-            dlgOpen.Filter = "All Data files (*.csv,*.xls,*.xlsx,*.RDS,*.sav,*.tsv,*.csvy,*.feather,*.psv,*.RData,*.json,*.yml,*.dta,*.dbf,*.arff,*.R,*.sas7bdat,*.xpt,*.mtp,*.rec;*.syd,*.dif,*.ods,*.xml,*html)|*.csv;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html|Comma separated files (*.csv)|*.csv|Excel files (*.xls)|*.xls|Excel files (*.xlsx)|*.xlsx|RDS R-file (*.RDS)|*.RDS|SPSS files (*.sav)|*.sav|Tab separated files (*.tsv)|*.tsv|CSV with a YAML metadata header (*.csvy)|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html"
+            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html;|All files|*.*;"
             dlgOpen.Title = "Open Data from file"
             dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
         End If
@@ -306,6 +306,10 @@ Public Class dlgImportDataset
             lblCannotImport.Hide()
             grdDataPreview.CurrentWorksheet.Reset()
             grdDataPreview.Hide()
+        End If
+        If grdDataPreview.CurrentWorksheet IsNot Nothing Then
+            grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+            grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         End If
         TestOkEnabled()
     End Sub

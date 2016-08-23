@@ -45,6 +45,7 @@ Public Class frmEditor
         'This needs to be added at the part when we are writing data to the grid, not here
         'Needs discussion, with this the grid can show NA's
         grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
+        'grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         SetRFunctions()
     End Sub
     ''' <summary>
@@ -101,7 +102,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
-        Dim deleteCol = MsgBox("Are you sure you want to delete this column?", MessageBoxButtons.YesNo, "Delete Column")
+        Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & vbNewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
         If deleteCol = DialogResult.Yes Then
             clsDeleteColumns.AddParameter("cols", SelectedColumns())
             frmMain.clsRLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
@@ -228,8 +229,11 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuDeleteRows_Click(sender As Object, e As EventArgs) Handles mnuDeleteRows.Click
-        clsDeleteRows.AddParameter("row_names", SelectedRows())
-        frmMain.clsRLink.RunScript(clsDeleteRows.ToScript(), strComment:="Right Click menu: Delete row(s)")
+        Dim Delete = MsgBox("Are you sure you want to delete these row(s)?" & vbNewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Row(s)")
+        If Delete = DialogResult.Yes Then
+            clsDeleteRows.AddParameter("row_names", SelectedRows())
+            frmMain.clsRLink.RunScript(clsDeleteRows.ToScript(), strComment:="Right Click menu: Delete row(s)")
+        End If
     End Sub
 
     'Private Sub resetToDefaultHeightToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles resetToDefaultHeightToolStripMenuItem.Click
@@ -278,12 +282,12 @@ Public Class frmEditor
     End Sub
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
-        Dim strSctipt As String
-        Dim Delete = MsgBox("Are you sure you want to delete this dataframe?", MessageBoxButtons.YesNo, "Delete Sheet")
+        Dim strScript As String
+        Dim Delete = MsgBox("Are you sure you want to delete this dataframe?" & vbNewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
         If grdData.Worksheets.Count > 0 Then
             If Delete = DialogResult.Yes Then
-                strSctipt = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
-                frmMain.clsRLink.RunScript(strSctipt)
+                strScript = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
+                frmMain.clsRLink.RunScript(strScript)
             End If
         End If
     End Sub
@@ -304,6 +308,7 @@ Public Class frmEditor
         frmMain.strCurrentDataFrame = grdCurrSheet.Name
         frmMain.tstatus.Text = grdCurrSheet.Name
         grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         UpdateRFunctionDataFrameParameters()
     End Sub
 
@@ -507,6 +512,8 @@ Public Class frmEditor
     End Function
 
     Private Sub columnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles columnFilterToolStripMenuItem.Click
+        dlgRestrict.bIsSubsetDialog = False
+        dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
         dlgRestrict.ShowDialog()
     End Sub
 
@@ -541,6 +548,8 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuFilter_Click(sender As Object, e As EventArgs) Handles mnuFilter.Click
+        dlgRestrict.bIsSubsetDialog = False
+        dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
         dlgRestrict.ShowDialog()
     End Sub
 
@@ -574,5 +583,19 @@ Public Class frmEditor
 
     Private Sub UnfreezeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnfreezeToolStripMenuItem.Click
         frmMain.clsRLink.RunScript(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Freeze columns")
+    End Sub
+
+    Private Sub grdCurrSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforeCut
+        e.IsCancelled = True
+    End Sub
+
+    Private Sub grdCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforePaste
+        e.IsCancelled = True
+    End Sub
+
+    ' Not currently working. Bug with reogrid reported here:
+    ' https://reogrid.net/forum/viewtopic.php?id=350
+    Private Sub grdCurrSheet_BeforeRangeMove(sender As Object, e As BeforeCopyOrMoveRangeEventArgs) Handles grdCurrSheet.BeforeRangeMove
+        e.IsCancelled = True
     End Sub
 End Class

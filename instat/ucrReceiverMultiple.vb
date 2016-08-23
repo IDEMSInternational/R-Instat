@@ -81,6 +81,7 @@ Public Class ucrReceiverMultiple
             lstSelectedVariables.Items.RemoveByKey(strTempItem)
             Selector.RemoveFromVariablesList(strTempItem)
         Next
+        OnSelectionChanged()
     End Sub
 
     Public Overrides Sub Clear()
@@ -152,6 +153,9 @@ Public Class ucrReceiverMultiple
                 Case "model"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                     clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
+                Case "dataframe"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+                    clsGetVariablesFunc.AddParameter("data_name", GetVariableNames())
             End Select
             'TODO make this an option set in Options menu
             'clsRSyntax.SetAssignTo(MakeValidRString(strCurrDataFrame) & "_temp", clsFunction:=clsGetVariablesFunc)

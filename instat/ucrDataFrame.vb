@@ -44,9 +44,9 @@ Public Class ucrDataFrame
         SetDataFrameProperties()
     End Sub
 
-    Private Sub FillComboBox()
+    Private Sub FillComboBox(Optional bSetFixed As Boolean = True)
         frmMain.clsRLink.FillComboDataFrames(cboAvailableDataFrames, bFirstLoad)
-        If bDataFrameFixed AndAlso strFixedDataFrame <> "" Then
+        If bSetFixed AndAlso bDataFrameFixed AndAlso strFixedDataFrame <> "" Then
             SetDataframe(strFixedDataFrame, False)
         End If
     End Sub
@@ -87,7 +87,7 @@ Public Class ucrDataFrame
 
     Public Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True)
         Dim Index As Integer
-
+        FillComboBox(False)
         Index = cboAvailableDataFrames.Items.IndexOf(strDataframe)
         If Index >= 0 Then
             cboAvailableDataFrames.SelectedIndex = Index

@@ -52,6 +52,7 @@ Public Class frmMetaData
 
     Private Sub grdMetaData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdMetaData.CurrentWorksheetChanged, Me.Load, grdMetaData.WorksheetInserted
         grdCurrSheet = grdMetaData.CurrentWorksheet
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
     End Sub
 
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrSheet.BeforeCellEdit

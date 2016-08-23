@@ -99,11 +99,20 @@ Public Class ucrFactor
     Private Sub RefreshFactorData()
         Dim dfTemp As CharacterMatrix
         Dim bShowGrid As Boolean = False
+        Dim clsGetFactorData As New RFunction
+        Dim clsConvertToCharacter As New RFunction
+
         grdFactorData.Worksheets.Clear()
         If clsReceiver IsNot Nothing AndAlso Not clsReceiver.IsEmpty() AndAlso clsReceiver.strCurrDataType = "factor" Then
-            dfTemp = frmMain.clsRLink.GetData(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame(data_name = " & Chr(34) & clsReceiver.GetDataName() & Chr(34) & ", col_name = " & clsReceiver.GetVariableNames() & ")")
+            clsGetFactorData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame")
+            clsGetFactorData.AddParameter("data_name", Chr(34) & clsReceiver.GetDataName() & Chr(34))
+            clsGetFactorData.AddParameter("col_name", clsReceiver.GetVariableNames())
+            clsConvertToCharacter.SetRCommand("convert_to_character_matrix")
+            clsConvertToCharacter.AddParameter("data", clsRFunctionParameter:=clsGetFactorData)
+            dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharacter.ToScript()).AsCharacterMatrix
             frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
             shtCurrSheet = grdFactorData.CurrentWorksheet
+            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
             bShowGrid = True
             shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             If bIncludeCopyOfLevels Then
