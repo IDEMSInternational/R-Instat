@@ -23,6 +23,7 @@ Public Class dlgRestrict
     Private clsSubset As RFunction
     Private clsFilterView As RFunction
     Public bIsSubsetDialog As Boolean
+    Public strDefaultDataframe As String = ""
 
     Public Sub New()
 
@@ -50,6 +51,7 @@ Public Class dlgRestrict
             bFirstLoad = False
         End If
         SetFilterSubsetStatus()
+        SetDefaultDataFrame()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -67,6 +69,7 @@ Public Class dlgRestrict
         ucrSelectorFilter.Reset()
         SetDefaultNewDataFrameName()
         SetFilterSubsetStatus()
+        SetDefaultDataFrame()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -88,17 +91,25 @@ Public Class dlgRestrict
             'TODO translate
             Me.Text = "Subset"
         Else
-            rdoApplyAsSubset.Enabled = True
+            rdoApplyAsFilter.Enabled = True
             rdoApplyAsFilter.Checked = True
             'TODO translate
             Me.Text = "Filter"
         End If
     End Sub
 
+    Private Sub SetDefaultDataFrame()
+        If strDefaultDataframe <> "" Then
+            ucrSelectorFilter.SetDataframe(strDefaultDataframe)
+        End If
+    End Sub
+
     Private Sub cmdNewFilter_Click(sender As Object, e As EventArgs) Handles cmdDefineNewFilter.Click
+        sdgCreateFilter.ucrCreateFilter.ucrSelectorForFitler.SetDataframe(ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgCreateFilter.ShowDialog()
         If sdgCreateFilter.bFilterDefined Then
             frmMain.clsRLink.RunScript(sdgCreateFilter.clsCurrentFilter.ToScript(), strComment:="Create Filter subdialog: Created new filter")
+            ucrSelectorFilter.SetDataframe(sdgCreateFilter.ucrCreateFilter.ucrSelectorForFitler.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             ucrReceiverFilter.Add(sdgCreateFilter.ucrCreateFilter.ucrInputFilterName.GetText())
         End If
         ucrSelectorFilter.LoadList()
@@ -120,6 +131,7 @@ Public Class dlgRestrict
 
     Private Sub ucrReceiverFilter_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFilter.SelectionChanged
         SetFilterOptions()
+        SetBaseFunction()
     End Sub
 
     Private Sub SetFilterOptions()
@@ -134,21 +146,6 @@ Public Class dlgRestrict
             clsSubset.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
             clsSetCurrentFilter.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
             ucrInputFilterPreview.SetName(frmMain.clsRLink.RunInternalScriptGetValue(clsFilterView.ToScript()).AsCharacter(0))
-        End If
-        If rdoApplyAsFilter.Checked Then
-            If ucrReceiverFilter.IsEmpty Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveFilter)
-            Else
-                ucrBase.clsRsyntax.SetBaseRFunction(clsSetCurrentFilter)
-            End If
-            ucrBase.clsRsyntax.RemoveAssignTo()
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSubset)
-            If Not ucrNewDataFrameName.IsEmpty() Then
-                ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
-            Else
-                ucrBase.clsRsyntax.RemoveAssignTo()
-            End If
         End If
         TestOkEnabled()
     End Sub
@@ -165,7 +162,25 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub ucrNewDataFrameName_NameChanged() Handles ucrNewDataFrameName.NameChanged
-        SetFilterOptions()
+        SetBaseFunction()
+    End Sub
+
+    Private Sub SetBaseFunction()
+        If rdoApplyAsFilter.Checked Then
+            If ucrReceiverFilter.IsEmpty Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveFilter)
+            Else
+                ucrBase.clsRsyntax.SetBaseRFunction(clsSetCurrentFilter)
+            End If
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSubset)
+            If Not ucrNewDataFrameName.IsEmpty() Then
+                ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText(), strTempDataframe:=ucrNewDataFrameName.GetText())
+            Else
+                ucrBase.clsRsyntax.RemoveAssignTo()
+            End If
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

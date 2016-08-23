@@ -388,7 +388,6 @@ Partial Class frmMain
         '
         'mnuDescribeTwoVariablesSummarise
         '
-        Me.mnuDescribeTwoVariablesSummarise.Enabled = False
         Me.mnuDescribeTwoVariablesSummarise.Name = "mnuDescribeTwoVariablesSummarise"
         Me.mnuDescribeTwoVariablesSummarise.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeTwoVariablesSummarise.Tag = "Summarise..."

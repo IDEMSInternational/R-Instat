@@ -65,9 +65,11 @@ Public Class ucrReceiverSingle
                         End If
                     Next
                 End If
-                clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-                clsGetDataType.AddParameter("column", Chr(34) & strItem & Chr(34))
-                strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                If strDataFrame <> "" Then
+                    clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+                    clsGetDataType.AddParameter("column", Chr(34) & strItem & Chr(34))
+                    strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                End If
             Else
                 strCurrDataType = ""
             End If
@@ -147,6 +149,9 @@ Public Class ucrReceiverSingle
                 Case "model"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                     clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
+                Case "dataframe"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+                    clsGetVariablesFunc.AddParameter("data_name", GetVariableNames())
             End Select
 
             'TODO make this an option set in Options menu

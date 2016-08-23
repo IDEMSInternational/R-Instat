@@ -65,8 +65,9 @@ Public Class dlgCombineforGraphics
 
     Private Sub ucrCombineGraphReceiver_SelectionChanged() Handles ucrCombineGraphReceiver.SelectionChanged
         If Not ucrCombineGraphReceiver.IsEmpty Then
-            clsListFunction.AddParameter(ucrCombineGraphReceiver.GetVariableNamesList.ToString)
-            ucrBase.clsRsyntax.AddParameter("grobs", clsRFunctionParameter:=clsListFunction)
+            ucrBase.clsRsyntax.AddParameter("grobs", clsRFunctionParameter:=ucrCombineGraphReceiver.GetVariables())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("grobs")
         End If
         TestOkEnabled()
     End Sub

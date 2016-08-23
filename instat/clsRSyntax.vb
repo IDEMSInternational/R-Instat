@@ -273,4 +273,71 @@ Public Class RSyntax
 
     End Function
 
+    Public Function GetbIsAssigned() As Boolean
+        If bUseBaseFunction Then
+            Return clsBaseFunction.bIsAssigned
+        ElseIf bUseBaseOperator Then
+            Return clsBaseOperator.bIsAssigned
+        ElseIf bUseCommandString Then
+            Return bIsAssigned
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Function GetbToBeAssigned() As Boolean
+        If bUseBaseFunction Then
+            Return clsBaseFunction.bToBeAssigned
+        ElseIf bUseBaseOperator Then
+            Return clsBaseOperator.bToBeAssigned
+        ElseIf bUseCommandString Then
+            Return bToBeAssigned
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Function GetstrAssignTo() As String
+        If bUseBaseFunction Then
+            Return clsBaseFunction.strAssignTo
+        ElseIf bUseBaseOperator Then
+            Return clsBaseOperator.strAssignTo
+        ElseIf bUseCommandString Then
+            Return strAssignTo
+        Else
+            Return ""
+        End If
+    End Function
+
+    ' WARNING These should only be called to reset previous values.
+    ' They should generally not be set directly.
+    Public Sub SetbIsAssigned(bNew As Boolean)
+        If bUseBaseFunction Then
+            clsBaseFunction.bIsAssigned = bNew
+        ElseIf bUseBaseOperator Then
+            clsBaseOperator.bIsAssigned = bNew
+        ElseIf bUseCommandString Then
+            bIsAssigned = bNew
+        End If
+    End Sub
+
+    Public Sub SetbToBeAssigned(bNew As Boolean)
+        If bUseBaseFunction Then
+            clsBaseFunction.bToBeAssigned = bNew
+        ElseIf bUseBaseOperator Then
+            clsBaseOperator.bToBeAssigned = bNew
+        ElseIf bUseCommandString Then
+            bToBeAssigned = bNew
+        End If
+    End Sub
+
+    Public Sub SetstrAssignTo(strNew As String)
+        If bUseBaseFunction Then
+            clsBaseFunction.strAssignTo = strNew
+        ElseIf bUseBaseOperator Then
+            clsBaseOperator.strAssignTo = strNew
+        ElseIf bUseCommandString Then
+            strAssignTo = strNew
+        End If
+    End Sub
 End Class

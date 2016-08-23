@@ -135,6 +135,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dlgAppend.Designer.vb">
+      <DependentUpon>dlgAppend.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAppend.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgDescribeTwoVariable.Designer.vb">
+      <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDescribeTwoVariable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -1747,6 +1759,15 @@
     <EmbeddedResource Include="dlgAnnualRaintotal.sw-KE.resx">
       <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgAppend.fr-FR.resx">
+      <DependentUpon>dlgAppend.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAppend.resx">
+      <DependentUpon>dlgAppend.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAppend.sw-KE.resx">
+      <DependentUpon>dlgAppend.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgBarAndPieChart.fr-FR.resx">
       <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
     </EmbeddedResource>
@@ -1959,6 +1980,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteSheet.sw-KE.resx">
       <DependentUpon>dlgDeleteSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeTwoVariable.fr-FR.resx">
+      <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeTwoVariable.resx">
+      <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDescribeTwoVariable.sw-KE.resx">
+      <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDistanceText.fr-FR.resx">
       <DependentUpon>dlgDistanceText.vb</DependentUpon>

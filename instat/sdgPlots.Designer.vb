@@ -119,7 +119,7 @@ Partial Class sdgPlots
         '
         'nudNoOfRowsOrColumns
         '
-        Me.nudNoOfRowsOrColumns.Location = New System.Drawing.Point(142, 263)
+        Me.nudNoOfRowsOrColumns.Location = New System.Drawing.Point(172, 262)
         Me.nudNoOfRowsOrColumns.Name = "nudNoOfRowsOrColumns"
         Me.nudNoOfRowsOrColumns.Size = New System.Drawing.Size(39, 20)
         Me.nudNoOfRowsOrColumns.TabIndex = 19
