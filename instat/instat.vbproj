@@ -135,6 +135,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dlgAppend.Designer.vb">
+      <DependentUpon>dlgAppend.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAppend.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDescribeTwoVariable.Designer.vb">
       <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
     </Compile>
@@ -1752,6 +1758,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAnnualRaintotal.sw-KE.resx">
       <DependentUpon>dlgAnnualRaintotal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAppend.fr-FR.resx">
+      <DependentUpon>dlgAppend.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAppend.resx">
+      <DependentUpon>dlgAppend.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAppend.sw-KE.resx">
+      <DependentUpon>dlgAppend.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBarAndPieChart.fr-FR.resx">
       <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
