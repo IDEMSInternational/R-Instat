@@ -16,7 +16,7 @@
 Imports instat.Translations
 Public Class dlgDescribeTwoVariable
     Public bFirstLoad As Boolean = True
-    Public clsRBaseStatsFunction, clsRMissingFunction, clsRMissingSubFunction As New RFunction
+    Public clsRBaseFunction, clsRCustomFunction As New RFunction
     Private Sub dlgDescribeTwoVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -46,7 +46,7 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub SetDefaults()
         chkSaveResult.Checked = False
-        sdgDescribe.SetUcrBase(ucrBaseDescribeTwoVar)
+        sdgDescribe.SetUcrBase(clsRCustomFunction)
         sdgDescribe.SetDefaults()
         ucrSelectorDescribeTwoVar.Reset()
         chkSaveResult.Checked = False
@@ -64,7 +64,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVar.SetIncludedDataTypes({"numeric"})
         ucrReceiverSecondVar.SetIncludedDataTypes({"factor"})
         'ucrBaseDescribeOneVar.iHelpTopicID = 
-        ucrBaseDescribeTwoVar.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
+        clsRCustomFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
     End Sub
 
     Private Sub ucrBaseDescribeOneVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseDescribeTwoVar.ClickReset
@@ -74,25 +74,25 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub OutputOption()
         If chkDisplayResults.Checked Then
-            ucrBaseDescribeTwoVar.clsRsyntax.AddParameter("return_output", "TRUE")
+            clsRCustomFunction.AddParameter("return_output", "TRUE")
         Else
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                ucrBaseDescribeTwoVar.clsRsyntax.AddParameter("return_output", "FALSE")
+                clsRCustomFunction.AddParameter("return_output", "FALSE")
             Else
-                ucrBaseDescribeTwoVar.clsRsyntax.RemoveParameter("return_output")
+                clsRCustomFunction.RemoveParameterByName("return_output")
             End If
         End If
     End Sub
 
     Private Sub ucrSelectorForColumnStatistics_DataFrameChanged() Handles ucrSelectorDescribeTwoVar.DataFrameChanged
-        ucrBaseDescribeTwoVar.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsRCustomFunction.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
     Private Sub ucrReceiverSelectedVariables_SelectionChanged() Handles ucrReceiverFirstVar.SelectionChanged
         If Not ucrReceiverFirstVar.IsEmpty Then
-            ucrBaseDescribeTwoVar.clsRsyntax.AddParameter("columns_to_summarise", ucrReceiverFirstVar.GetVariableNames())
+            clsRCustomFunction.AddParameter("columns_to_summarise", ucrReceiverFirstVar.GetVariableNames())
         Else
-            ucrBaseDescribeTwoVar.clsRsyntax.RemoveParameter("columns_to_summarise")
+            clsRCustomFunction.RemoveParameterByName("columns_to_summarise")
         End If
         TestOKEnabled()
     End Sub
@@ -107,28 +107,37 @@ Public Class dlgDescribeTwoVariable
         OutputOption()
     End Sub
 
-    Private Sub ucrReceiverDescribeOneVar_Load(sender As Object, e As EventArgs) Handles ucrReceiverFirstVar.Load
-
+    Private Sub ucrBaseDescribeTwoVar_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseDescribeTwoVar.ClickOk
+        'If chkCustomise.Checked Then
+        frmMain.clsRLink.RunScript(clsRCustomFunction.ToScript(), 2)
+        'Else
+        'frmMain.clsRLink.RunScript(clsRBaseFunction.ToScript(), 2)
+        'ucrBaseDescribeOneVar.clsRsyntax.SetFunction("summary")
+        'ucrBaseDescribeOneVar.clsRsyntax.RemoveParameter("columns_to_summarise")
+        'ucrBaseDescribeOneVar.clsRsyntax.RemoveParameter("return_output")
+        'ucrBaseDescribeOneVar.clsRsyntax.RemoveParameter("store_results")
+        'ucrBaseDescribeOneVar.clsRsyntax.AddParameter("drop", "TRUE")
+        'End If
     End Sub
 
     Private Sub StoreResultsParamenter()
         If chkSaveResult.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                ucrBaseDescribeTwoVar.clsRsyntax.AddParameter("store_results", "TRUE")
+                clsRCustomFunction.AddParameter("store_results", "TRUE")
             Else
-                ucrBaseDescribeTwoVar.clsRsyntax.RemoveParameter("store_results")
+                clsRCustomFunction.RemoveParameterByName("store_results")
             End If
         Else
-            ucrBaseDescribeTwoVar.clsRsyntax.AddParameter("store_results", "FALSE")
+            clsRCustomFunction.AddParameter("store_results", "FALSE")
         End If
-        ucrBaseDescribeTwoVar.clsRsyntax.AddParameter("drop", "TRUE")
+        clsRCustomFunction.AddParameter("drop", "TRUE")
     End Sub
 
     Private Sub ucrReceiverSecondVar_SelectionChanged() Handles ucrReceiverSecondVar.SelectionChanged
         If Not ucrReceiverSecondVar.IsEmpty Then
-            ucrBaseDescribeTwoVar.clsRsyntax.AddParameter("factors", ucrReceiverSecondVar.GetVariableNames)
+            clsRCustomFunction.AddParameter("factors", ucrReceiverSecondVar.GetVariableNames)
         Else
-            ucrBaseDescribeTwoVar.clsRsyntax.RemoveParameter("factors")
+            clsRCustomFunction.RemoveParameterByName("factors")
         End If
     End Sub
 End Class
