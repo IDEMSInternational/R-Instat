@@ -12,12 +12,17 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports unvell.ReoGrid
+Imports unvell.ReoGrid.Events
 
 Public Class sdgCombineGraphOptions
     Private bFirstLoad As Boolean = True
     Public clsRsyntax As New RSyntax
+    Private WithEvents grdCurrSheet As Worksheet
+
     Private Sub sdgLayout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
@@ -33,7 +38,11 @@ Public Class sdgCombineGraphOptions
     End Sub
 
     Private Sub InitialiseDialog()
-
+        grdLayout.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
+        grdLayout.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, False)
+        grdLayout.SheetTabNewButtonVisible = False
+        grdCurrSheet = grdLayout.CurrentWorksheet
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
     End Sub
 
     Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
@@ -97,6 +106,9 @@ Public Class sdgCombineGraphOptions
             nudColumns.Value = Math.Ceiling(Math.Sqrt(NoOfgraphs))
             nudRows.Value = Math.Ceiling((NoOfgraphs / Math.Sqrt(NoOfgraphs)))
         End If
+    End Sub
+
+    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
 
     End Sub
 End Class
