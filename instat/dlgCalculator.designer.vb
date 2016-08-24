@@ -47,6 +47,17 @@ Partial Class dlgCalculator
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.grpLogical = New System.Windows.Forms.GroupBox()
+        Me.cmdGreaterOrEqualsTo = New System.Windows.Forms.Button()
+        Me.cmdAnd = New System.Windows.Forms.Button()
+        Me.cmdIntegerDivision = New System.Windows.Forms.Button()
+        Me.cmdModulas = New System.Windows.Forms.Button()
+        Me.cmdGreater = New System.Windows.Forms.Button()
+        Me.cmdLesserOrEqualsTo = New System.Windows.Forms.Button()
+        Me.cmdLesser = New System.Windows.Forms.Button()
+        Me.cmdOr = New System.Windows.Forms.Button()
+        Me.cmdNot = New System.Windows.Forms.Button()
+        Me.cmdNotEqualsTo = New System.Windows.Forms.Button()
+        Me.cmdEquivalent = New System.Windows.Forms.Button()
         Me.grpMaths = New System.Windows.Forms.GroupBox()
         Me.cmdSign = New System.Windows.Forms.Button()
         Me.cmdRound = New System.Windows.Forms.Button()
@@ -68,18 +79,6 @@ Partial Class dlgCalculator
         Me.cmdAcos = New System.Windows.Forms.Button()
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
-        Me.cmdGreaterOrEqualsTo = New System.Windows.Forms.Button()
-        Me.cmdAnd = New System.Windows.Forms.Button()
-        Me.cmdTrue = New System.Windows.Forms.Button()
-        Me.cmdIntegerDivision = New System.Windows.Forms.Button()
-        Me.cmdModulas = New System.Windows.Forms.Button()
-        Me.cmdGreater = New System.Windows.Forms.Button()
-        Me.cmdLesserOrEqualsTo = New System.Windows.Forms.Button()
-        Me.cmdLesser = New System.Windows.Forms.Button()
-        Me.cmdOr = New System.Windows.Forms.Button()
-        Me.cmdNot = New System.Windows.Forms.Button()
-        Me.cmdNotEqualsTo = New System.Windows.Forms.Button()
-        Me.cmdEquivalent = New System.Windows.Forms.Button()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.ucrSaveResultInto = New instat.ucrInputComboBox()
@@ -334,7 +333,6 @@ Partial Class dlgCalculator
         '
         Me.grpLogical.Controls.Add(Me.cmdGreaterOrEqualsTo)
         Me.grpLogical.Controls.Add(Me.cmdAnd)
-        Me.grpLogical.Controls.Add(Me.cmdTrue)
         Me.grpLogical.Controls.Add(Me.cmdIntegerDivision)
         Me.grpLogical.Controls.Add(Me.cmdModulas)
         Me.grpLogical.Controls.Add(Me.cmdGreater)
@@ -344,17 +342,116 @@ Partial Class dlgCalculator
         Me.grpLogical.Controls.Add(Me.cmdNot)
         Me.grpLogical.Controls.Add(Me.cmdNotEqualsTo)
         Me.grpLogical.Controls.Add(Me.cmdEquivalent)
-        Me.grpLogical.Location = New System.Drawing.Point(3, 0)
+        Me.grpLogical.Location = New System.Drawing.Point(381, 69)
         Me.grpLogical.Name = "grpLogical"
-        Me.grpLogical.Size = New System.Drawing.Size(116, 158)
+        Me.grpLogical.Size = New System.Drawing.Size(104, 144)
         Me.grpLogical.TabIndex = 121
         Me.grpLogical.TabStop = False
         Me.grpLogical.Text = "Logical"
         '
+        'cmdGreaterOrEqualsTo
+        '
+        Me.cmdGreaterOrEqualsTo.Location = New System.Drawing.Point(34, 110)
+        Me.cmdGreaterOrEqualsTo.Name = "cmdGreaterOrEqualsTo"
+        Me.cmdGreaterOrEqualsTo.Size = New System.Drawing.Size(30, 30)
+        Me.cmdGreaterOrEqualsTo.TabIndex = 138
+        Me.cmdGreaterOrEqualsTo.Text = ">="
+        Me.cmdGreaterOrEqualsTo.UseVisualStyleBackColor = True
+        '
+        'cmdAnd
+        '
+        Me.cmdAnd.Location = New System.Drawing.Point(66, 110)
+        Me.cmdAnd.Name = "cmdAnd"
+        Me.cmdAnd.Size = New System.Drawing.Size(38, 30)
+        Me.cmdAnd.TabIndex = 137
+        Me.cmdAnd.Tag = "And"
+        Me.cmdAnd.Text = "And"
+        Me.cmdAnd.UseVisualStyleBackColor = True
+        '
+        'cmdIntegerDivision
+        '
+        Me.cmdIntegerDivision.Location = New System.Drawing.Point(66, 45)
+        Me.cmdIntegerDivision.Name = "cmdIntegerDivision"
+        Me.cmdIntegerDivision.Size = New System.Drawing.Size(38, 32)
+        Me.cmdIntegerDivision.TabIndex = 135
+        Me.cmdIntegerDivision.Text = "%/%"
+        Me.cmdIntegerDivision.UseVisualStyleBackColor = True
+        '
+        'cmdModulas
+        '
+        Me.cmdModulas.Location = New System.Drawing.Point(66, 13)
+        Me.cmdModulas.Name = "cmdModulas"
+        Me.cmdModulas.Size = New System.Drawing.Size(38, 30)
+        Me.cmdModulas.TabIndex = 134
+        Me.cmdModulas.Text = "%%"
+        Me.cmdModulas.UseVisualStyleBackColor = True
+        '
+        'cmdGreater
+        '
+        Me.cmdGreater.Location = New System.Drawing.Point(34, 78)
+        Me.cmdGreater.Name = "cmdGreater"
+        Me.cmdGreater.Size = New System.Drawing.Size(70, 31)
+        Me.cmdGreater.TabIndex = 133
+        Me.cmdGreater.Text = ">"
+        Me.cmdGreater.UseVisualStyleBackColor = True
+        '
+        'cmdLesserOrEqualsTo
+        '
+        Me.cmdLesserOrEqualsTo.Location = New System.Drawing.Point(34, 45)
+        Me.cmdLesserOrEqualsTo.Name = "cmdLesserOrEqualsTo"
+        Me.cmdLesserOrEqualsTo.Size = New System.Drawing.Size(30, 32)
+        Me.cmdLesserOrEqualsTo.TabIndex = 132
+        Me.cmdLesserOrEqualsTo.Text = "<="
+        Me.cmdLesserOrEqualsTo.UseVisualStyleBackColor = True
+        '
+        'cmdLesser
+        '
+        Me.cmdLesser.Location = New System.Drawing.Point(34, 13)
+        Me.cmdLesser.Name = "cmdLesser"
+        Me.cmdLesser.Size = New System.Drawing.Size(30, 30)
+        Me.cmdLesser.TabIndex = 131
+        Me.cmdLesser.Text = "<"
+        Me.cmdLesser.UseVisualStyleBackColor = True
+        '
+        'cmdOr
+        '
+        Me.cmdOr.Location = New System.Drawing.Point(2, 110)
+        Me.cmdOr.Name = "cmdOr"
+        Me.cmdOr.Size = New System.Drawing.Size(30, 30)
+        Me.cmdOr.TabIndex = 130
+        Me.cmdOr.Text = "|"
+        Me.cmdOr.UseVisualStyleBackColor = True
+        '
+        'cmdNot
+        '
+        Me.cmdNot.Location = New System.Drawing.Point(2, 78)
+        Me.cmdNot.Name = "cmdNot"
+        Me.cmdNot.Size = New System.Drawing.Size(30, 31)
+        Me.cmdNot.TabIndex = 129
+        Me.cmdNot.Text = "!"
+        Me.cmdNot.UseVisualStyleBackColor = True
+        '
+        'cmdNotEqualsTo
+        '
+        Me.cmdNotEqualsTo.Location = New System.Drawing.Point(2, 45)
+        Me.cmdNotEqualsTo.Name = "cmdNotEqualsTo"
+        Me.cmdNotEqualsTo.Size = New System.Drawing.Size(30, 32)
+        Me.cmdNotEqualsTo.TabIndex = 128
+        Me.cmdNotEqualsTo.Text = "!="
+        Me.cmdNotEqualsTo.UseVisualStyleBackColor = True
+        '
+        'cmdEquivalent
+        '
+        Me.cmdEquivalent.Location = New System.Drawing.Point(2, 13)
+        Me.cmdEquivalent.Name = "cmdEquivalent"
+        Me.cmdEquivalent.Size = New System.Drawing.Size(30, 30)
+        Me.cmdEquivalent.TabIndex = 127
+        Me.cmdEquivalent.Text = "=="
+        Me.cmdEquivalent.UseVisualStyleBackColor = True
+        '
         'grpMaths
         '
         Me.grpMaths.Controls.Add(Me.cmdSign)
-        Me.grpMaths.Controls.Add(Me.grpLogical)
         Me.grpMaths.Controls.Add(Me.cmdRound)
         Me.grpMaths.Controls.Add(Me.cmdSiginf)
         Me.grpMaths.Controls.Add(Me.cmdAbs)
@@ -374,7 +471,7 @@ Partial Class dlgCalculator
         Me.grpMaths.Controls.Add(Me.cmdAcos)
         Me.grpMaths.Controls.Add(Me.cmdCos)
         Me.grpMaths.Controls.Add(Me.cmdSqrt)
-        Me.grpMaths.Location = New System.Drawing.Point(375, 69)
+        Me.grpMaths.Location = New System.Drawing.Point(381, 68)
         Me.grpMaths.Name = "grpMaths"
         Me.grpMaths.Size = New System.Drawing.Size(208, 148)
         Me.grpMaths.TabIndex = 148
@@ -567,116 +664,6 @@ Partial Class dlgCalculator
         Me.cmdSqrt.Text = "sqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
         '
-        'cmdGreaterOrEqualsTo
-        '
-        Me.cmdGreaterOrEqualsTo.Location = New System.Drawing.Point(34, 110)
-        Me.cmdGreaterOrEqualsTo.Name = "cmdGreaterOrEqualsTo"
-        Me.cmdGreaterOrEqualsTo.Size = New System.Drawing.Size(30, 30)
-        Me.cmdGreaterOrEqualsTo.TabIndex = 138
-        Me.cmdGreaterOrEqualsTo.Text = ">="
-        Me.cmdGreaterOrEqualsTo.UseVisualStyleBackColor = True
-        '
-        'cmdAnd
-        '
-        Me.cmdAnd.Location = New System.Drawing.Point(66, 110)
-        Me.cmdAnd.Name = "cmdAnd"
-        Me.cmdAnd.Size = New System.Drawing.Size(38, 30)
-        Me.cmdAnd.TabIndex = 137
-        Me.cmdAnd.Tag = "And"
-        Me.cmdAnd.Text = "And"
-        Me.cmdAnd.UseVisualStyleBackColor = True
-        '
-        'cmdTrue
-        '
-        Me.cmdTrue.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdTrue.Location = New System.Drawing.Point(66, 78)
-        Me.cmdTrue.Name = "cmdTrue"
-        Me.cmdTrue.Size = New System.Drawing.Size(38, 31)
-        Me.cmdTrue.TabIndex = 136
-        Me.cmdTrue.Text = "isTRUE()"
-        Me.cmdTrue.UseVisualStyleBackColor = True
-        '
-        'cmdIntegerDivision
-        '
-        Me.cmdIntegerDivision.Location = New System.Drawing.Point(66, 45)
-        Me.cmdIntegerDivision.Name = "cmdIntegerDivision"
-        Me.cmdIntegerDivision.Size = New System.Drawing.Size(38, 32)
-        Me.cmdIntegerDivision.TabIndex = 135
-        Me.cmdIntegerDivision.Text = "%/%"
-        Me.cmdIntegerDivision.UseVisualStyleBackColor = True
-        '
-        'cmdModulas
-        '
-        Me.cmdModulas.Location = New System.Drawing.Point(66, 13)
-        Me.cmdModulas.Name = "cmdModulas"
-        Me.cmdModulas.Size = New System.Drawing.Size(38, 30)
-        Me.cmdModulas.TabIndex = 134
-        Me.cmdModulas.Text = "%%"
-        Me.cmdModulas.UseVisualStyleBackColor = True
-        '
-        'cmdGreater
-        '
-        Me.cmdGreater.Location = New System.Drawing.Point(34, 78)
-        Me.cmdGreater.Name = "cmdGreater"
-        Me.cmdGreater.Size = New System.Drawing.Size(30, 31)
-        Me.cmdGreater.TabIndex = 133
-        Me.cmdGreater.Text = ">"
-        Me.cmdGreater.UseVisualStyleBackColor = True
-        '
-        'cmdLesserOrEqualsTo
-        '
-        Me.cmdLesserOrEqualsTo.Location = New System.Drawing.Point(34, 45)
-        Me.cmdLesserOrEqualsTo.Name = "cmdLesserOrEqualsTo"
-        Me.cmdLesserOrEqualsTo.Size = New System.Drawing.Size(30, 32)
-        Me.cmdLesserOrEqualsTo.TabIndex = 132
-        Me.cmdLesserOrEqualsTo.Text = "<="
-        Me.cmdLesserOrEqualsTo.UseVisualStyleBackColor = True
-        '
-        'cmdLesser
-        '
-        Me.cmdLesser.Location = New System.Drawing.Point(34, 13)
-        Me.cmdLesser.Name = "cmdLesser"
-        Me.cmdLesser.Size = New System.Drawing.Size(30, 30)
-        Me.cmdLesser.TabIndex = 131
-        Me.cmdLesser.Text = "<"
-        Me.cmdLesser.UseVisualStyleBackColor = True
-        '
-        'cmdOr
-        '
-        Me.cmdOr.Location = New System.Drawing.Point(2, 110)
-        Me.cmdOr.Name = "cmdOr"
-        Me.cmdOr.Size = New System.Drawing.Size(30, 30)
-        Me.cmdOr.TabIndex = 130
-        Me.cmdOr.Text = "|"
-        Me.cmdOr.UseVisualStyleBackColor = True
-        '
-        'cmdNot
-        '
-        Me.cmdNot.Location = New System.Drawing.Point(2, 78)
-        Me.cmdNot.Name = "cmdNot"
-        Me.cmdNot.Size = New System.Drawing.Size(30, 31)
-        Me.cmdNot.TabIndex = 129
-        Me.cmdNot.Text = "!"
-        Me.cmdNot.UseVisualStyleBackColor = True
-        '
-        'cmdNotEqualsTo
-        '
-        Me.cmdNotEqualsTo.Location = New System.Drawing.Point(2, 45)
-        Me.cmdNotEqualsTo.Name = "cmdNotEqualsTo"
-        Me.cmdNotEqualsTo.Size = New System.Drawing.Size(30, 32)
-        Me.cmdNotEqualsTo.TabIndex = 128
-        Me.cmdNotEqualsTo.Text = "!="
-        Me.cmdNotEqualsTo.UseVisualStyleBackColor = True
-        '
-        'cmdEquivalent
-        '
-        Me.cmdEquivalent.Location = New System.Drawing.Point(2, 13)
-        Me.cmdEquivalent.Name = "cmdEquivalent"
-        Me.cmdEquivalent.Size = New System.Drawing.Size(30, 30)
-        Me.cmdEquivalent.TabIndex = 127
-        Me.cmdEquivalent.Text = "=="
-        Me.cmdEquivalent.UseVisualStyleBackColor = True
-        '
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.IsReadOnly = False
@@ -720,7 +707,7 @@ Partial Class dlgCalculator
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 306)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 307)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(404, 50)
         Me.ucrBase.TabIndex = 0
@@ -729,8 +716,9 @@ Partial Class dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(585, 363)
+        Me.ClientSize = New System.Drawing.Size(421, 358)
         Me.Controls.Add(Me.grpMaths)
+        Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.ucrInputCalOptions)
         Me.Controls.Add(Me.grpBasic)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
@@ -789,7 +777,6 @@ Partial Class dlgCalculator
     Friend WithEvents grpLogical As GroupBox
     Friend WithEvents cmdGreaterOrEqualsTo As Button
     Friend WithEvents cmdAnd As Button
-    Friend WithEvents cmdTrue As Button
     Friend WithEvents cmdIntegerDivision As Button
     Friend WithEvents cmdModulas As Button
     Friend WithEvents cmdGreater As Button
