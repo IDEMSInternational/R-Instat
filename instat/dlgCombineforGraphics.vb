@@ -33,7 +33,7 @@ Public Class dlgCombineforGraphics
         ucrBase.iHelpTopicID = 430
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
         ucrCombineGraphSelector.SetItemType("graph")
-        ucrSaveCombinedGraph.strPrefix = "CombinedGraph"
+        ucrSaveCombinedGraph.strPrefix = "CombineGraph"
         ucrSaveCombinedGraph.SetDataFrameSelector(ucrCombineGraphSelector.ucrAvailableDataFrames)
         sdgCombineGraphOptions.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.SetFunction("gridExtra::grid.arrange")

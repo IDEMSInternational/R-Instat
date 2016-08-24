@@ -591,7 +591,7 @@ Public Class RLink
             clsGetGraphNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
         End If
         expGraphNames = RunInternalScriptGetValue(clsGetGraphNames.ToScript(), bSilent:=True)
-        If Not expGraphNames.Type = Internals.SymbolicExpressionType.Null Then
+        If expGraphNames IsNot Nothing AndAlso Not expGraphNames.Type = Internals.SymbolicExpressionType.Null Then
             chrGraphNames = expGraphNames.AsCharacter()
             If chrGraphNames.Length > 0 Then
                 lstGraphNames.AddRange(chrGraphNames)
