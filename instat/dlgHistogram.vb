@@ -165,6 +165,7 @@ Public Class dlgHistogram
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        sdgPlots.Reset()
         TestOkEnabled()
     End Sub
 

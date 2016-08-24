@@ -79,6 +79,7 @@ Public Class dlgBarAndPieChart
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        sdgPlots.Reset()
         TestOKEnabled()
     End Sub
 
