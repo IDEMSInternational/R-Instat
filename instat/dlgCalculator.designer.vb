@@ -49,7 +49,6 @@ Partial Class dlgCalculator
         Me.grpLogical = New System.Windows.Forms.GroupBox()
         Me.cmdGreaterOrEqualsTo = New System.Windows.Forms.Button()
         Me.cmdAnd = New System.Windows.Forms.Button()
-        Me.cmdTrue = New System.Windows.Forms.Button()
         Me.cmdIntegerDivision = New System.Windows.Forms.Button()
         Me.cmdModulas = New System.Windows.Forms.Button()
         Me.cmdGreater = New System.Windows.Forms.Button()
@@ -334,7 +333,6 @@ Partial Class dlgCalculator
         '
         Me.grpLogical.Controls.Add(Me.cmdGreaterOrEqualsTo)
         Me.grpLogical.Controls.Add(Me.cmdAnd)
-        Me.grpLogical.Controls.Add(Me.cmdTrue)
         Me.grpLogical.Controls.Add(Me.cmdIntegerDivision)
         Me.grpLogical.Controls.Add(Me.cmdModulas)
         Me.grpLogical.Controls.Add(Me.cmdGreater)
@@ -370,16 +368,6 @@ Partial Class dlgCalculator
         Me.cmdAnd.Text = "And"
         Me.cmdAnd.UseVisualStyleBackColor = True
         '
-        'cmdTrue
-        '
-        Me.cmdTrue.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdTrue.Location = New System.Drawing.Point(66, 78)
-        Me.cmdTrue.Name = "cmdTrue"
-        Me.cmdTrue.Size = New System.Drawing.Size(38, 31)
-        Me.cmdTrue.TabIndex = 136
-        Me.cmdTrue.Text = "isTRUE()"
-        Me.cmdTrue.UseVisualStyleBackColor = True
-        '
         'cmdIntegerDivision
         '
         Me.cmdIntegerDivision.Location = New System.Drawing.Point(66, 45)
@@ -402,7 +390,7 @@ Partial Class dlgCalculator
         '
         Me.cmdGreater.Location = New System.Drawing.Point(34, 78)
         Me.cmdGreater.Name = "cmdGreater"
-        Me.cmdGreater.Size = New System.Drawing.Size(30, 31)
+        Me.cmdGreater.Size = New System.Drawing.Size(70, 31)
         Me.cmdGreater.TabIndex = 133
         Me.cmdGreater.Text = ">"
         Me.cmdGreater.UseVisualStyleBackColor = True
@@ -483,7 +471,7 @@ Partial Class dlgCalculator
         Me.grpMaths.Controls.Add(Me.cmdAcos)
         Me.grpMaths.Controls.Add(Me.cmdCos)
         Me.grpMaths.Controls.Add(Me.cmdSqrt)
-        Me.grpMaths.Location = New System.Drawing.Point(380, 69)
+        Me.grpMaths.Location = New System.Drawing.Point(381, 68)
         Me.grpMaths.Name = "grpMaths"
         Me.grpMaths.Size = New System.Drawing.Size(208, 148)
         Me.grpMaths.TabIndex = 148
@@ -728,7 +716,7 @@ Partial Class dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(598, 358)
+        Me.ClientSize = New System.Drawing.Size(421, 358)
         Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.ucrInputCalOptions)
@@ -789,7 +777,6 @@ Partial Class dlgCalculator
     Friend WithEvents grpLogical As GroupBox
     Friend WithEvents cmdGreaterOrEqualsTo As Button
     Friend WithEvents cmdAnd As Button
-    Friend WithEvents cmdTrue As Button
     Friend WithEvents cmdIntegerDivision As Button
     Friend WithEvents cmdModulas As Button
     Friend WithEvents cmdGreater As Button

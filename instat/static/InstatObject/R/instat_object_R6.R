@@ -151,8 +151,9 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
           if (!include_metadata) {
             curr_data_obj$set_meta(list()) 
             curr_data_obj$add_defaults_meta()
+            curr_data_obj$add_defaults_variables_metadata()
             curr_data_obj$set_variables_metadata(data.frame())
-            curr_data_obj$update_variables_metadata()
+            #curr_data_obj$update_variables_metadata()
           }
           if (!include_logs) curr_data_obj$set_changes(list())
 
@@ -245,10 +246,11 @@ instat_object$set("public", "get_data_objects", function(data_name, as_list = FA
 
 instat_object$set("public", "get_data_frame", function(data_name, convert_to_character = FALSE, stack_data = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", ...) {
   if(!stack_data) {
-    if(missing(data_name)) {
+    if(missing(data_name)) data_name <- self$get_data_names()
+    if(length(data_name) > 1) {
       retlist <- list()
-      for ( i in (1:length(private$.data_objects)) ) {
-        retlist[[names(private$.data_objects)[[i]]]] = data_objects[[i]]$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name)
+      for (curr_name in data_name) {
+        retlist[[curr_name]] = self$get_data_objects(curr_name)$get_data_frame(convert_to_character = convert_to_character, include_hidden_columns = include_hidden_columns, use_current_filter = use_current_filter, filter_name = filter_name)
       }
       return(retlist)
     }
@@ -262,15 +264,15 @@ instat_object$set("public", "get_data_frame", function(data_name, convert_to_cha
 }
 )
 
-instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, update = TRUE, direct_from_attributes = FALSE) { 
+instat_object$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE) { 
   if(missing(data_name)) {
     retlist <- list()
     for (curr_obj in private$.data_objects) {
-      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, update = update, direct_from_attributes = direct_from_attributes)
+      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes)
     }
     return(retlist)
   }
-  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, update = update, direct_from_attributes = direct_from_attributes))
+  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes))
 } 
 )
 
@@ -296,8 +298,9 @@ instat_object$set("public", "get_metadata", function(name) {
 } 
 )
 
-instat_object$set("public", "get_data_names", function() { 
-  return(names(private$.data_objects))
+instat_object$set("public", "get_data_names", function(as_list = FALSE) { 
+  if(as_list) return(list(data_names = names(private$.data_objects)))
+  else return(names(private$.data_objects))
 } 
 )
 
@@ -889,8 +892,8 @@ instat_object$set("public","unfreeze_columns", function(data_name) {
 } 
 )
 
-instat_object$set("public","is_variables_metadata", function(data_name, property, column, update = TRUE) {
-  self$get_data_objects(data_name)$is_variables_metadata(property, column, update)
+instat_object$set("public","is_variables_metadata", function(data_name, property, column) {
+  self$get_data_objects(data_name)$is_variables_metadata(property, column)
 } 
 )
 
