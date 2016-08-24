@@ -33,6 +33,7 @@ Public Class dlgCombineforGraphics
         ucrBase.iHelpTopicID = 430
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
         ucrCombineGraphSelector.SetItemType("graph")
+        ucrSaveCombinedGraph.strPrefix = "CombinedGraph"
         ucrSaveCombinedGraph.SetDataFrameSelector(ucrCombineGraphSelector.ucrAvailableDataFrames)
         sdgCombineGraphOptions.SetRSyntax(ucrBase.clsRsyntax)
         ucrBase.clsRsyntax.SetFunction("gridExtra::grid.arrange")
@@ -64,7 +65,7 @@ Public Class dlgCombineforGraphics
     Private Sub ucrCombineGraphReceiver_SelectionChanged() Handles ucrCombineGraphReceiver.SelectionChanged
         If Not ucrCombineGraphReceiver.IsEmpty Then
             ucrBase.clsRsyntax.AddParameter("grobs", clsRFunctionParameter:=ucrCombineGraphReceiver.GetVariables())
-            SetDefaultRowAndColumns()
+            sdgCombineGraphOptions.SetDefaultRowAndColumns()
         Else
             ucrBase.clsRsyntax.RemoveParameter("grobs")
         End If
@@ -83,12 +84,5 @@ Public Class dlgCombineforGraphics
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
         TestOkEnabled()
-    End Sub
-
-    Public Sub SetDefaultRowAndColumns()
-        Dim NoOfgraphs As Integer
-        NoOfgraphs = ucrCombineGraphReceiver.lstSelectedVariables.Items.Count
-        sdgCombineGraphOptions.nudColumns.Value = Math.Ceiling(Math.Sqrt(NoOfgraphs))
-        sdgCombineGraphOptions.nudRows.Value = Math.Ceiling((NoOfgraphs / Math.Sqrt(NoOfgraphs)))
     End Sub
 End Class
