@@ -111,6 +111,7 @@ Partial Class dlgCalculator
         Me.ucrSpaceToMangeResult = New instat.ucrInputTextBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.chkShowArguments = New System.Windows.Forms.CheckBox()
         Me.grpBasic.SuspendLayout()
         Me.grpMaths.SuspendLayout()
         Me.grpStrings.SuspendLayout()
@@ -193,7 +194,7 @@ Partial Class dlgCalculator
         'cmdClear
         '
         Me.cmdClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdClear.Location = New System.Drawing.Point(126, 79)
+        Me.cmdClear.Location = New System.Drawing.Point(127, 78)
         Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(34, 61)
@@ -203,7 +204,7 @@ Partial Class dlgCalculator
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(2, 110)
+        Me.cmdDelete.Location = New System.Drawing.Point(3, 109)
         Me.cmdDelete.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(60, 30)
@@ -217,54 +218,54 @@ Partial Class dlgCalculator
         Me.cmdPower.Location = New System.Drawing.Point(127, 45)
         Me.cmdPower.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPower.Name = "cmdPower"
-        Me.cmdPower.Size = New System.Drawing.Size(33, 30)
+        Me.cmdPower.Size = New System.Drawing.Size(34, 32)
         Me.cmdPower.TabIndex = 133
         Me.cmdPower.Text = "^"
         Me.cmdPower.UseVisualStyleBackColor = True
         '
         'cmdDivide
         '
-        Me.cmdDivide.Location = New System.Drawing.Point(97, 13)
+        Me.cmdDivide.Location = New System.Drawing.Point(96, 14)
         Me.cmdDivide.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDivide.Name = "cmdDivide"
-        Me.cmdDivide.Size = New System.Drawing.Size(26, 30)
+        Me.cmdDivide.Size = New System.Drawing.Size(29, 30)
         Me.cmdDivide.TabIndex = 131
         Me.cmdDivide.Text = "/"
         Me.cmdDivide.UseVisualStyleBackColor = True
         '
         'cmdPlus
         '
-        Me.cmdPlus.Location = New System.Drawing.Point(97, 110)
+        Me.cmdPlus.Location = New System.Drawing.Point(96, 109)
         Me.cmdPlus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPlus.Name = "cmdPlus"
-        Me.cmdPlus.Size = New System.Drawing.Size(26, 30)
+        Me.cmdPlus.Size = New System.Drawing.Size(29, 30)
         Me.cmdPlus.TabIndex = 130
         Me.cmdPlus.Text = "+"
         Me.cmdPlus.UseVisualStyleBackColor = True
         '
         'cmdMinus
         '
-        Me.cmdMinus.Location = New System.Drawing.Point(97, 78)
+        Me.cmdMinus.Location = New System.Drawing.Point(96, 78)
         Me.cmdMinus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMinus.Name = "cmdMinus"
-        Me.cmdMinus.Size = New System.Drawing.Size(26, 30)
+        Me.cmdMinus.Size = New System.Drawing.Size(29, 30)
         Me.cmdMinus.TabIndex = 129
         Me.cmdMinus.Text = "-"
         Me.cmdMinus.UseVisualStyleBackColor = True
         '
         'cmdMultiply
         '
-        Me.cmdMultiply.Location = New System.Drawing.Point(97, 45)
+        Me.cmdMultiply.Location = New System.Drawing.Point(96, 45)
         Me.cmdMultiply.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMultiply.Name = "cmdMultiply"
-        Me.cmdMultiply.Size = New System.Drawing.Size(26, 32)
+        Me.cmdMultiply.Size = New System.Drawing.Size(29, 32)
         Me.cmdMultiply.TabIndex = 128
         Me.cmdMultiply.Text = "*"
         Me.cmdMultiply.UseVisualStyleBackColor = True
         '
         'cmdDot
         '
-        Me.cmdDot.Location = New System.Drawing.Point(126, 13)
+        Me.cmdDot.Location = New System.Drawing.Point(127, 14)
         Me.cmdDot.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDot.Name = "cmdDot"
         Me.cmdDot.Size = New System.Drawing.Size(34, 30)
@@ -274,27 +275,27 @@ Partial Class dlgCalculator
         '
         'cmd9
         '
-        Me.cmd9.Location = New System.Drawing.Point(65, 13)
+        Me.cmd9.Location = New System.Drawing.Point(65, 14)
         Me.cmd9.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd9.Name = "cmd9"
-        Me.cmd9.Size = New System.Drawing.Size(30, 30)
+        Me.cmd9.Size = New System.Drawing.Size(29, 30)
         Me.cmd9.TabIndex = 126
         Me.cmd9.Text = "9"
         Me.cmd9.UseVisualStyleBackColor = True
         '
         'cmd8
         '
-        Me.cmd8.Location = New System.Drawing.Point(35, 13)
+        Me.cmd8.Location = New System.Drawing.Point(34, 14)
         Me.cmd8.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd8.Name = "cmd8"
-        Me.cmd8.Size = New System.Drawing.Size(28, 30)
+        Me.cmd8.Size = New System.Drawing.Size(29, 30)
         Me.cmd8.TabIndex = 125
         Me.cmd8.Text = "8"
         Me.cmd8.UseVisualStyleBackColor = True
         '
         'cmd7
         '
-        Me.cmd7.Location = New System.Drawing.Point(2, 13)
+        Me.cmd7.Location = New System.Drawing.Point(3, 14)
         Me.cmd7.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd7.Name = "cmd7"
         Me.cmd7.Size = New System.Drawing.Size(29, 30)
@@ -307,24 +308,24 @@ Partial Class dlgCalculator
         Me.cmd6.Location = New System.Drawing.Point(65, 45)
         Me.cmd6.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd6.Name = "cmd6"
-        Me.cmd6.Size = New System.Drawing.Size(30, 32)
+        Me.cmd6.Size = New System.Drawing.Size(29, 32)
         Me.cmd6.TabIndex = 123
         Me.cmd6.Text = "6"
         Me.cmd6.UseVisualStyleBackColor = True
         '
         'cmd5
         '
-        Me.cmd5.Location = New System.Drawing.Point(35, 45)
+        Me.cmd5.Location = New System.Drawing.Point(34, 45)
         Me.cmd5.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd5.Name = "cmd5"
-        Me.cmd5.Size = New System.Drawing.Size(28, 32)
+        Me.cmd5.Size = New System.Drawing.Size(29, 32)
         Me.cmd5.TabIndex = 122
         Me.cmd5.Text = "5"
         Me.cmd5.UseVisualStyleBackColor = True
         '
         'cmd4
         '
-        Me.cmd4.Location = New System.Drawing.Point(2, 45)
+        Me.cmd4.Location = New System.Drawing.Point(3, 45)
         Me.cmd4.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd4.Name = "cmd4"
         Me.cmd4.Size = New System.Drawing.Size(29, 32)
@@ -337,34 +338,34 @@ Partial Class dlgCalculator
         Me.cmd3.Location = New System.Drawing.Point(65, 78)
         Me.cmd3.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd3.Name = "cmd3"
-        Me.cmd3.Size = New System.Drawing.Size(30, 30)
+        Me.cmd3.Size = New System.Drawing.Size(29, 30)
         Me.cmd3.TabIndex = 120
         Me.cmd3.Text = "3"
         Me.cmd3.UseVisualStyleBackColor = True
         '
         'cmd2
         '
-        Me.cmd2.Location = New System.Drawing.Point(35, 78)
+        Me.cmd2.Location = New System.Drawing.Point(34, 78)
         Me.cmd2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd2.Name = "cmd2"
-        Me.cmd2.Size = New System.Drawing.Size(28, 30)
+        Me.cmd2.Size = New System.Drawing.Size(29, 30)
         Me.cmd2.TabIndex = 119
         Me.cmd2.Text = "2"
         Me.cmd2.UseVisualStyleBackColor = True
         '
         'cmd0
         '
-        Me.cmd0.Location = New System.Drawing.Point(65, 110)
+        Me.cmd0.Location = New System.Drawing.Point(65, 109)
         Me.cmd0.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd0.Name = "cmd0"
-        Me.cmd0.Size = New System.Drawing.Size(30, 30)
+        Me.cmd0.Size = New System.Drawing.Size(29, 30)
         Me.cmd0.TabIndex = 118
         Me.cmd0.Text = "0"
         Me.cmd0.UseVisualStyleBackColor = True
         '
         'cmd1
         '
-        Me.cmd1.Location = New System.Drawing.Point(2, 78)
+        Me.cmd1.Location = New System.Drawing.Point(3, 78)
         Me.cmd1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmd1.Name = "cmd1"
         Me.cmd1.Size = New System.Drawing.Size(29, 30)
@@ -398,14 +399,14 @@ Partial Class dlgCalculator
         Me.grpMaths.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpMaths.Name = "grpMaths"
         Me.grpMaths.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpMaths.Size = New System.Drawing.Size(208, 153)
+        Me.grpMaths.Size = New System.Drawing.Size(208, 148)
         Me.grpMaths.TabIndex = 148
         Me.grpMaths.TabStop = False
         Me.grpMaths.Text = "Maths"
         '
         'cmdSign
         '
-        Me.cmdSign.Location = New System.Drawing.Point(166, 113)
+        Me.cmdSign.Location = New System.Drawing.Point(166, 110)
         Me.cmdSign.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSign.Name = "cmdSign"
         Me.cmdSign.Size = New System.Drawing.Size(38, 30)
@@ -416,7 +417,7 @@ Partial Class dlgCalculator
         'cmdRound
         '
         Me.cmdRound.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRound.Location = New System.Drawing.Point(125, 113)
+        Me.cmdRound.Location = New System.Drawing.Point(125, 110)
         Me.cmdRound.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdRound.Name = "cmdRound"
         Me.cmdRound.Size = New System.Drawing.Size(38, 30)
@@ -427,7 +428,7 @@ Partial Class dlgCalculator
         'cmdSiginf
         '
         Me.cmdSiginf.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSiginf.Location = New System.Drawing.Point(84, 113)
+        Me.cmdSiginf.Location = New System.Drawing.Point(84, 110)
         Me.cmdSiginf.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSiginf.Name = "cmdSiginf"
         Me.cmdSiginf.Size = New System.Drawing.Size(38, 30)
@@ -437,7 +438,7 @@ Partial Class dlgCalculator
         '
         'cmdAbs
         '
-        Me.cmdAbs.Location = New System.Drawing.Point(43, 113)
+        Me.cmdAbs.Location = New System.Drawing.Point(43, 110)
         Me.cmdAbs.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdAbs.Name = "cmdAbs"
         Me.cmdAbs.Size = New System.Drawing.Size(38, 30)
@@ -447,7 +448,7 @@ Partial Class dlgCalculator
         '
         'cmdExp
         '
-        Me.cmdExp.Location = New System.Drawing.Point(2, 113)
+        Me.cmdExp.Location = New System.Drawing.Point(2, 110)
         Me.cmdExp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdExp.Name = "cmdExp"
         Me.cmdExp.Size = New System.Drawing.Size(38, 30)
@@ -457,7 +458,7 @@ Partial Class dlgCalculator
         '
         'cmdDeg
         '
-        Me.cmdDeg.Location = New System.Drawing.Point(166, 79)
+        Me.cmdDeg.Location = New System.Drawing.Point(166, 78)
         Me.cmdDeg.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDeg.Name = "cmdDeg"
         Me.cmdDeg.Size = New System.Drawing.Size(38, 30)
@@ -468,7 +469,7 @@ Partial Class dlgCalculator
         'cmdTrunc
         '
         Me.cmdTrunc.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdTrunc.Location = New System.Drawing.Point(125, 79)
+        Me.cmdTrunc.Location = New System.Drawing.Point(125, 78)
         Me.cmdTrunc.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdTrunc.Name = "cmdTrunc"
         Me.cmdTrunc.Size = New System.Drawing.Size(38, 30)
@@ -478,7 +479,7 @@ Partial Class dlgCalculator
         '
         'cmdAtan
         '
-        Me.cmdAtan.Location = New System.Drawing.Point(84, 79)
+        Me.cmdAtan.Location = New System.Drawing.Point(84, 78)
         Me.cmdAtan.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdAtan.Name = "cmdAtan"
         Me.cmdAtan.Size = New System.Drawing.Size(38, 30)
@@ -488,7 +489,7 @@ Partial Class dlgCalculator
         '
         'cmdTan
         '
-        Me.cmdTan.Location = New System.Drawing.Point(43, 79)
+        Me.cmdTan.Location = New System.Drawing.Point(43, 78)
         Me.cmdTan.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdTan.Name = "cmdTan"
         Me.cmdTan.Size = New System.Drawing.Size(38, 30)
@@ -499,7 +500,7 @@ Partial Class dlgCalculator
         'cmdLogTen
         '
         Me.cmdLogTen.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLogTen.Location = New System.Drawing.Point(2, 79)
+        Me.cmdLogTen.Location = New System.Drawing.Point(2, 78)
         Me.cmdLogTen.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLogTen.Name = "cmdLogTen"
         Me.cmdLogTen.Size = New System.Drawing.Size(38, 30)
@@ -509,7 +510,7 @@ Partial Class dlgCalculator
         '
         'cmdRad
         '
-        Me.cmdRad.Location = New System.Drawing.Point(166, 48)
+        Me.cmdRad.Location = New System.Drawing.Point(166, 46)
         Me.cmdRad.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdRad.Name = "cmdRad"
         Me.cmdRad.Size = New System.Drawing.Size(38, 30)
@@ -520,7 +521,7 @@ Partial Class dlgCalculator
         'cmdFloor
         '
         Me.cmdFloor.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdFloor.Location = New System.Drawing.Point(125, 48)
+        Me.cmdFloor.Location = New System.Drawing.Point(125, 46)
         Me.cmdFloor.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdFloor.Name = "cmdFloor"
         Me.cmdFloor.Size = New System.Drawing.Size(38, 30)
@@ -530,7 +531,7 @@ Partial Class dlgCalculator
         '
         'cmdAsin
         '
-        Me.cmdAsin.Location = New System.Drawing.Point(84, 48)
+        Me.cmdAsin.Location = New System.Drawing.Point(84, 46)
         Me.cmdAsin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdAsin.Name = "cmdAsin"
         Me.cmdAsin.Size = New System.Drawing.Size(38, 30)
@@ -540,7 +541,7 @@ Partial Class dlgCalculator
         '
         'cmdSin
         '
-        Me.cmdSin.Location = New System.Drawing.Point(43, 48)
+        Me.cmdSin.Location = New System.Drawing.Point(43, 46)
         Me.cmdSin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSin.Name = "cmdSin"
         Me.cmdSin.Size = New System.Drawing.Size(38, 30)
@@ -550,7 +551,7 @@ Partial Class dlgCalculator
         '
         'cmdLog
         '
-        Me.cmdLog.Location = New System.Drawing.Point(2, 48)
+        Me.cmdLog.Location = New System.Drawing.Point(2, 46)
         Me.cmdLog.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLog.Name = "cmdLog"
         Me.cmdLog.Size = New System.Drawing.Size(38, 30)
@@ -625,15 +626,16 @@ Partial Class dlgCalculator
         Me.grpStrings.Controls.Add(Me.cmdCountstrings)
         Me.grpStrings.Controls.Add(Me.cmdLocate)
         Me.grpStrings.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpStrings.Location = New System.Drawing.Point(387, 68)
+        Me.grpStrings.Location = New System.Drawing.Point(388, 63)
         Me.grpStrings.Name = "grpStrings"
-        Me.grpStrings.Size = New System.Drawing.Size(141, 145)
+        Me.grpStrings.Size = New System.Drawing.Size(174, 145)
         Me.grpStrings.TabIndex = 150
         Me.grpStrings.TabStop = False
         Me.grpStrings.Text = "Strings"
         '
         'cmdDetect
         '
+        Me.cmdDetect.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdDetect.Location = New System.Drawing.Point(6, 111)
         Me.cmdDetect.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDetect.Name = "cmdDetect"
@@ -645,28 +647,29 @@ Partial Class dlgCalculator
         '
         'cmdTrim
         '
+        Me.cmdTrim.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdTrim.Location = New System.Drawing.Point(101, 14)
         Me.cmdTrim.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdTrim.Name = "cmdTrim"
-        Me.cmdTrim.Size = New System.Drawing.Size(35, 30)
+        Me.cmdTrim.Size = New System.Drawing.Size(57, 30)
         Me.cmdTrim.TabIndex = 146
         Me.cmdTrim.Text = "trim"
         Me.cmdTrim.UseVisualStyleBackColor = True
         '
         'cmdReplace
         '
-        Me.cmdReplace.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdReplace.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdReplace.Location = New System.Drawing.Point(101, 44)
         Me.cmdReplace.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdReplace.Name = "cmdReplace"
-        Me.cmdReplace.Size = New System.Drawing.Size(35, 32)
+        Me.cmdReplace.Size = New System.Drawing.Size(57, 32)
         Me.cmdReplace.TabIndex = 143
         Me.cmdReplace.Text = "replace"
         Me.cmdReplace.UseVisualStyleBackColor = True
         '
         'cmdTitle
         '
-        Me.cmdTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdTitle.Location = New System.Drawing.Point(69, 14)
         Me.cmdTitle.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdTitle.Name = "cmdTitle"
@@ -677,7 +680,7 @@ Partial Class dlgCalculator
         '
         'cmdLower
         '
-        Me.cmdLower.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdLower.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdLower.Location = New System.Drawing.Point(39, 14)
         Me.cmdLower.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLower.Name = "cmdLower"
@@ -688,7 +691,7 @@ Partial Class dlgCalculator
         '
         'cmdUpper
         '
-        Me.cmdUpper.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdUpper.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdUpper.Location = New System.Drawing.Point(6, 14)
         Me.cmdUpper.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdUpper.Name = "cmdUpper"
@@ -699,7 +702,7 @@ Partial Class dlgCalculator
         '
         'cmdSort
         '
-        Me.cmdSort.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSort.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdSort.Location = New System.Drawing.Point(69, 46)
         Me.cmdSort.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSort.Name = "cmdSort"
@@ -710,7 +713,7 @@ Partial Class dlgCalculator
         '
         'cmdOrder
         '
-        Me.cmdOrder.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdOrder.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdOrder.Location = New System.Drawing.Point(39, 46)
         Me.cmdOrder.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdOrder.Name = "cmdOrder"
@@ -721,7 +724,7 @@ Partial Class dlgCalculator
         '
         'cmdPad
         '
-        Me.cmdPad.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdPad.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPad.Location = New System.Drawing.Point(6, 46)
         Me.cmdPad.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPad.Name = "cmdPad"
@@ -732,18 +735,18 @@ Partial Class dlgCalculator
         '
         'cmdExtract
         '
-        Me.cmdExtract.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdExtract.Location = New System.Drawing.Point(91, 79)
+        Me.cmdExtract.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdExtract.Location = New System.Drawing.Point(101, 79)
         Me.cmdExtract.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdExtract.Name = "cmdExtract"
-        Me.cmdExtract.Size = New System.Drawing.Size(45, 30)
+        Me.cmdExtract.Size = New System.Drawing.Size(57, 30)
         Me.cmdExtract.TabIndex = 136
         Me.cmdExtract.Text = "extract"
         Me.cmdExtract.UseVisualStyleBackColor = True
         '
         'cmdLength
         '
-        Me.cmdLength.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdLength.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdLength.Location = New System.Drawing.Point(48, 79)
         Me.cmdLength.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLength.Name = "cmdLength"
@@ -754,17 +757,18 @@ Partial Class dlgCalculator
         '
         'cmdCountstrings
         '
-        Me.cmdCountstrings.Location = New System.Drawing.Point(69, 111)
+        Me.cmdCountstrings.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdCountstrings.Location = New System.Drawing.Point(101, 109)
         Me.cmdCountstrings.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdCountstrings.Name = "cmdCountstrings"
-        Me.cmdCountstrings.Size = New System.Drawing.Size(67, 30)
+        Me.cmdCountstrings.Size = New System.Drawing.Size(57, 30)
         Me.cmdCountstrings.TabIndex = 134
         Me.cmdCountstrings.Text = "count"
         Me.cmdCountstrings.UseVisualStyleBackColor = True
         '
         'cmdLocate
         '
-        Me.cmdLocate.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdLocate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdLocate.Location = New System.Drawing.Point(6, 79)
         Me.cmdLocate.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLocate.Name = "cmdLocate"
@@ -1108,11 +1112,22 @@ Partial Class dlgCalculator
         Me.ucrBase.Size = New System.Drawing.Size(404, 51)
         Me.ucrBase.TabIndex = 0
         '
+        'chkShowArguments
+        '
+        Me.chkShowArguments.AutoSize = True
+        Me.chkShowArguments.Location = New System.Drawing.Point(394, 42)
+        Me.chkShowArguments.Name = "chkShowArguments"
+        Me.chkShowArguments.Size = New System.Drawing.Size(106, 17)
+        Me.chkShowArguments.TabIndex = 151
+        Me.chkShowArguments.Text = "Show Arguments"
+        Me.chkShowArguments.UseVisualStyleBackColor = True
+        '
         'dlgCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(837, 514)
+        Me.ClientSize = New System.Drawing.Size(691, 514)
+        Me.Controls.Add(Me.chkShowArguments)
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpLogical)
@@ -1234,4 +1249,5 @@ Partial Class dlgCalculator
     Friend WithEvents cmdAnd As Button
     Friend WithEvents cmdGreaterOrEqualsTo As Button
     Friend WithEvents grpLogical As GroupBox
+    Friend WithEvents chkShowArguments As CheckBox
 End Class
