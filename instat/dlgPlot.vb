@@ -43,6 +43,7 @@ Public Class dlgPlot
         ucrLinePlotSelector.Focus()
         ucrLinePlotSelector.Reset()
         ucrVariablesAsFactorForLinePlot.ResetControl()
+        sdgPlots.Reset()
         TestOkEnabled()
     End Sub
 

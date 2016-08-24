@@ -29,6 +29,7 @@ Public Class sdgCombineGraphOptions
         ucrInputRight.ResetText()
         ucrInputTop.ResetText()
         ucrInputBottom.ResetText()
+        SetDefaultRowAndColumns()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -87,5 +88,15 @@ Public Class sdgCombineGraphOptions
         Else
             clsRsyntax.RemoveParameter("ncol")
         End If
+    End Sub
+
+    Public Sub SetDefaultRowAndColumns()
+        Dim NoOfgraphs As Integer
+        If dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count > 0 Then
+            NoOfgraphs = dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count
+            nudColumns.Value = Math.Ceiling(Math.Sqrt(NoOfgraphs))
+            nudRows.Value = Math.Ceiling((NoOfgraphs / Math.Sqrt(NoOfgraphs)))
+        End If
+
     End Sub
 End Class
