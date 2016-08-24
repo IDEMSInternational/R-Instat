@@ -324,19 +324,23 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub cmdAtan_Click(sender As Object, e As EventArgs) Handles cmdAtan.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan()")
+        If chkShowArguments.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan(x = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan()", 1)
+        End If
     End Sub
 
     Private Sub cmdSiginf_Click(sender As Object, e As EventArgs) Handles cmdSiginf.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif()")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif()", 1)
     End Sub
 
     Private Sub cmdCos_Click(sender As Object, e As EventArgs) Handles cmdCos.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cos()")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cos()", 1)
     End Sub
 
     Private Sub cmdSin_Click(sender As Object, e As EventArgs) Handles cmdSin.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sin()")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sin()", 1)
     End Sub
 
     Private Sub cmdTan_Click(sender As Object, e As EventArgs) Handles cmdTan.Click
