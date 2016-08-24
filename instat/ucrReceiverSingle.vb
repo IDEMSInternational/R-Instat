@@ -149,6 +149,9 @@ Public Class ucrReceiverSingle
                 Case "model"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                     clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
+                Case "dataframe"
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+                    clsGetVariablesFunc.AddParameter("data_name", GetVariableNames())
             End Select
 
             'TODO make this an option set in Options menu
