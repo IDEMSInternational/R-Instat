@@ -70,6 +70,7 @@ Public Class dlgCalculator
         ucrInputCalOptions.cboInput.Items.Add("Maths")
         ucrInputCalOptions.cboInput.Items.Add("Logical")
         ucrInputCalOptions.cboInput.Items.Add("Statistics")
+        ucrInputCalOptions.cboInput.Items.Add("Strings")
     End Sub
 
     'Private Sub ucrSaveResultIntoInto_NameChanged() Handles ucrSaveResultInto.NameChanged
@@ -227,10 +228,15 @@ Public Class dlgCalculator
         ucrBase.OKEnabled(True)
     End Sub
 
-    Private Sub cmdGreaterThan_Click(sender As Object, e As EventArgs) Handles cmdGreaterThan.Click, cmdGreater.Click
+    Private Sub cmdGreater_Click(sender As Object, e As EventArgs) Handles cmdGreater.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(">")
     End Sub
-    Private Sub cmdLessThan_Click(sender As Object, e As EventArgs) Handles cmdLessThan.Click, cmdLesser.Click
+
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        ucrReceiverForCalculation.Clear()
+    End Sub
+
+    Private Sub cmdLesser_Click(sender As Object, e As EventArgs) Handles cmdLesser.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("<")
     End Sub
 
@@ -251,19 +257,29 @@ Public Class dlgCalculator
                 grpMaths.Visible = True
                 grpLogical.Visible = False
                 grpBasic.Visible = True
+                grpStrings.Visible = False
                 Me.Size = New System.Drawing.Size(614, 402)
             Case "Logical"
                 grpStatistics.Visible = False
                 grpLogical.Visible = True
                 grpMaths.Visible = False
                 grpBasic.Visible = True
-                Me.Size = New System.Drawing.Size(510, 402)
+                grpStrings.Visible = False
+                Me.Size = New System.Drawing.Size(520, 402)
             Case "Statistics"
                 grpStatistics.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
-                Me.Size = New System.Drawing.Size(529, 402)
+                Me.Size = New System.Drawing.Size(535, 402)
+                grpStrings.Visible = False
+            Case "Strings"
+                grpStrings.Visible = True
+                grpStatistics.Visible = False
+                grpLogical.Visible = False
+                grpMaths.Visible = False
+                grpBasic.Visible = True
+                Me.Size = New System.Drawing.Size(550, 402)
 
             Case Else
                 Me.Size = New System.Drawing.Size(436, 402)
@@ -271,6 +287,7 @@ Public Class dlgCalculator
                 grpBasic.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
+                grpStrings.Visible = False
         End Select
     End Sub
 
@@ -430,4 +447,55 @@ Public Class dlgCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("IQR()")
     End Sub
 
+    Private Sub cmdUpper_Click(sender As Object, e As EventArgs) Handles cmdUpper.Click
+
+    End Sub
+
+    Private Sub cmdLower_Click(sender As Object, e As EventArgs) Handles cmdLower.Click
+
+    End Sub
+
+    Private Sub cmdTitle_Click(sender As Object, e As EventArgs) Handles cmdTitle.Click
+
+    End Sub
+
+    Private Sub cmdTrim_Click(sender As Object, e As EventArgs) Handles cmdTrim.Click
+
+    End Sub
+
+    Private Sub cmdPad_Click(sender As Object, e As EventArgs) Handles cmdPad.Click
+
+    End Sub
+
+    Private Sub cmdOrder_Click(sender As Object, e As EventArgs) Handles cmdOrder.Click
+
+    End Sub
+
+    Private Sub cmdSort_Click(sender As Object, e As EventArgs) Handles cmdSort.Click
+
+    End Sub
+
+    Private Sub cmdReplace_Click(sender As Object, e As EventArgs) Handles cmdReplace.Click
+
+    End Sub
+
+    Private Sub cmdLocate_Click(sender As Object, e As EventArgs) Handles cmdLocate.Click
+
+    End Sub
+
+    Private Sub cmdLength_Click(sender As Object, e As EventArgs) Handles cmdLength.Click
+
+    End Sub
+
+    Private Sub cmdExtract_Click(sender As Object, e As EventArgs) Handles cmdExtract.Click
+
+    End Sub
+
+    Private Sub cmdCountstrings_Click(sender As Object, e As EventArgs) Handles cmdCountstrings.Click
+
+    End Sub
+
+    Private Sub cmdDetect_Click(sender As Object, e As EventArgs) Handles cmdDetect.Click
+
+    End Sub
 End Class
